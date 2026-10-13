@@ -1,6 +1,6 @@
 {
   "reviewMode": false,
-  "generatedAt": "2026-10-13T23:05:04.729Z",
+  "generatedAt": "2026-10-13T23:09:31.221Z",
   "scope": "Local bounded file snapshot while production authoring continues; not a final remote-head claim",
   "status": "PASS_AT_CAPTURE",
   "commands": [
@@ -78,18 +78,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "5a3854faa5010d92f2caa0fd7b9df0da6589df740d24892229a531866cf37d98",
-      "bytes": 6948
+      "sha256": "6261c80d8cbbe008b54a7246888945b02d5fd33e6034417db299c358cc8af91d",
+      "bytes": 6950
     },
     {
       "path": "review-assets.mjs",
-      "sha256": "f78d48afb439239989b33376226bd0aeaf8696c1c508e95c5bc9921239d4827e",
+      "sha256": "92e2cf04dee301bd6f8425004ef177ac0dece52588ad99623c93c8384422f882",
       "bytes": 2639
     },
     {
       "path": "review-manifest.json",
-      "sha256": "6b7ecd99d1964d4dbf39699044a4f72e8c985493b0c733914e33333d5190eb0f",
-      "bytes": 1998
+      "sha256": "a194ddd4323d1bae864082820e21efe9b362dd04857363f871a7b57e12726d37",
+      "bytes": 2008
     },
     {
       "path": "runtime-assets.mjs",
@@ -118,8 +118,8 @@
     },
     {
       "path": "tests/http-smoke.mjs",
-      "sha256": "39399a2454cccd085ccfc928e19db9e7ff1a6d2aaa1e1e1f704a35371d72b5ae",
-      "bytes": 4523
+      "sha256": "dadce360cde38cf667f19e622f95d423eded60c1aedcd159608ece887026e7e0",
+      "bytes": 4524
     },
     {
       "path": "tests/lifecycle.test.mjs",
@@ -200,18 +200,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "5a3854faa5010d92f2caa0fd7b9df0da6589df740d24892229a531866cf37d98",
-      "bytes": 6948
+      "sha256": "6261c80d8cbbe008b54a7246888945b02d5fd33e6034417db299c358cc8af91d",
+      "bytes": 6950
     },
     {
       "path": "review-assets.mjs",
-      "sha256": "f78d48afb439239989b33376226bd0aeaf8696c1c508e95c5bc9921239d4827e",
+      "sha256": "92e2cf04dee301bd6f8425004ef177ac0dece52588ad99623c93c8384422f882",
       "bytes": 2639
     },
     {
       "path": "review-manifest.json",
-      "sha256": "6b7ecd99d1964d4dbf39699044a4f72e8c985493b0c733914e33333d5190eb0f",
-      "bytes": 1998
+      "sha256": "a194ddd4323d1bae864082820e21efe9b362dd04857363f871a7b57e12726d37",
+      "bytes": 2008
     },
     {
       "path": "runtime-assets.mjs",
@@ -240,8 +240,8 @@
     },
     {
       "path": "tests/http-smoke.mjs",
-      "sha256": "39399a2454cccd085ccfc928e19db9e7ff1a6d2aaa1e1e1f704a35371d72b5ae",
-      "bytes": 4523
+      "sha256": "dadce360cde38cf667f19e622f95d423eded60c1aedcd159608ece887026e7e0",
+      "bytes": 4524
     },
     {
       "path": "tests/lifecycle.test.mjs",
@@ -1623,7 +1623,7 @@
       "unchangedAfterChecks": true
     }
   ],
-  "cpuReportSha256": "a2f670c2cebf5876708d9476513416605d02cb197097d5a7b167706831e7f64d",
+  "cpuReportSha256": "dd081965fa44af22761c721e00c459edf3bd4186224a8a6cb7f73ebb3305a493",
   "results": {
     "CPU": {
       "files": 158,
@@ -1652,10 +1652,10 @@
     }
   },
   "logs": {
-    "unit-tests.log": "19a2c02912de6713a1404d4d56b13acd97fd040d1a28e70b97cdebb3e5e61dfa",
+    "unit-tests.log": "422b5a1531b6bfaf8fe1bb84e377ed6cff648af249293322fde95982d3e3e484",
     "asset-import.log": "c475d69976ebd4fa5cd4488b4c5fcba550db50b6cf79dd6bbd6e5706488b04a4",
-    "build.log": "c8a96be9ba08737b9651b5bc6d7a8bfec735b270b554cf30592dfa77a118c704",
-    "http-development.log": "985ea47ebbe2598a7c7ca9eb3e9c636e084b7e9572fd153c27ffcf987f03c55a",
+    "build.log": "f8c03a02e0efc63c668d150e7c262b401e94c1742dc091995e48b77b0b1f28de",
+    "http-development.log": "ebfc0c3bc59d9e1f5fb9d4a879b0b139b3337e6b0be4108c669caa7b7f98cf9f",
     "http-built.log": "c60ad1fb9b22c8b11098b83ad56ad0f95e24242d6c87d27889d08c3873078e84"
   }
 }
