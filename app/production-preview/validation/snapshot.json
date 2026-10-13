@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-13T20:10:09.105Z",
+  "generatedAt": "2026-10-13T20:50:32.762Z",
   "scope": "Local bounded file snapshot while production authoring continues; not a final remote-head claim",
   "status": "PASS_AT_CAPTURE",
   "commands": [
@@ -31,14 +31,19 @@
       "bytes": 20
     },
     {
+      "path": "browser-lifecycle.mjs",
+      "sha256": "9655480207577ac4beb747f62878c59b225c3fe6f560930610e0f7d378210859",
+      "bytes": 2920
+    },
+    {
       "path": "catalog.mjs",
       "sha256": "c1c840f23ba2f8938db9aefd90464b1ce4262f0a510aebec98abad9bc022dad0",
       "bytes": 2257
     },
     {
       "path": "index.html",
-      "sha256": "b0172f5296b8c6b8d9babd2556e78bcdb09cead9ec2133e947233282eaf4cd5a",
-      "bytes": 2041
+      "sha256": "02faef888d12eea3898fc7e275aca68b84731cba52443ab0f3bf5e87e27e2068",
+      "bytes": 2915
     },
     {
       "path": "lifecycle.mjs",
@@ -47,8 +52,8 @@
     },
     {
       "path": "main.mjs",
-      "sha256": "6e4bdb5877847a6cf82f6a1e75cc28f3caea026c81b4b402c625202b9778043c",
-      "bytes": 9728
+      "sha256": "63c08aa01ac58b12e82637ffaa938117500aa7d82e8a7e226fe0af87856f02ce",
+      "bytes": 13281
     },
     {
       "path": "package-lock.json",
@@ -61,14 +66,24 @@
       "bytes": 619
     },
     {
+      "path": "PLAYTEST.md",
+      "sha256": "dce192906c08bd5f3803263657a5b2cbb30b84469c19d4f6aaba0d1777fdc9cb",
+      "bytes": 7574
+    },
+    {
       "path": "README.md",
-      "sha256": "ca061113fe4a74cf1e659fa8107b89ab92d549fb54b173df6d81bfcdb8ae227b",
-      "bytes": 3453
+      "sha256": "8ad82349277d70af0557938766e69f6f1306cc85beb4d9d2d79a375a9efdc4e7",
+      "bytes": 4451
+    },
+    {
+      "path": "runtime-assets.mjs",
+      "sha256": "a8e94dabe8d50da98598e4afae3e9df62efcbb9c96cfe7c3dd54a7923b7715b5",
+      "bytes": 2570
     },
     {
       "path": "style.css",
-      "sha256": "0eb8cc1f5e30feb6eb28c11503ea02c601b370934e3d9bea2f81ef3e2970824f",
-      "bytes": 2052
+      "sha256": "bd5495928a86b35a471655e707f9d0f08ed140939a5dcbfcd2460efc44692e39",
+      "bytes": 3503
     },
     {
       "path": "tests/asset-import.mjs",
@@ -76,9 +91,14 @@
       "bytes": 4836
     },
     {
+      "path": "tests/browser-lifecycle.test.mjs",
+      "sha256": "71b458b88c41e6da48d58091403e4d2fe3b1b0c30f357afb820be216b385564d",
+      "bytes": 4031
+    },
+    {
       "path": "tests/http-smoke.mjs",
-      "sha256": "d9d8b2640e687ce9a1355354653cc68c2c9a8c6e059d5e7efc3ee0d8c7f344e4",
-      "bytes": 2417
+      "sha256": "837d628db910ca19fab064c7a4fdb40f55acdf97a029b6706987cfb876469caf",
+      "bytes": 3361
     },
     {
       "path": "tests/lifecycle.test.mjs",
@@ -91,9 +111,14 @@
       "bytes": 6147
     },
     {
+      "path": "tests/runtime-assets.test.mjs",
+      "sha256": "6417de756d37b19d722b565c9794a4669bda807230bdad4774fa3cfa0266b2c0",
+      "bytes": 2769
+    },
+    {
       "path": "vite.config.mjs",
-      "sha256": "7c0128abee764d13ccecb312a78d3eab14a100b6b9faec6eef24031b888ee70e",
-      "bytes": 2923
+      "sha256": "f1bbfdd08c9b8b5e54c308664c419021aa1d8ca00cf4fa3c79acaf689157d9db",
+      "bytes": 3120
     }
   ],
   "testedAssetInputs": [
@@ -1316,7 +1341,7 @@
       "unchangedAfterChecks": true
     }
   ],
-  "cpuReportSha256": "3207f09b28adcab78786449a0df55cd81ca144d0f82e7fd8bb0b9a5694c5a5fc",
+  "cpuReportSha256": "755c9d1f0dc2242c6d28cf1eda06401eacafffe4c4946a2be8afd911d9f8b336",
   "results": {
     "CPU": {
       "files": 158,
@@ -1341,10 +1366,10 @@
     }
   },
   "logs": {
-    "unit-tests.log": "b934c9e5ef488cf2ab41152d4203298d4960e43dbad8ccfb0810cc807a26c7cf",
+    "unit-tests.log": "1fcf2c7aaf2e54e423a3927b640d5e3febbb98defade91c46743475854cb1afb",
     "asset-import.log": "c475d69976ebd4fa5cd4488b4c5fcba550db50b6cf79dd6bbd6e5706488b04a4",
-    "build.log": "06fef4adc818a9bf3828901bbeeb29b935fd62cba2758a0de4f25cc5d70e9db2",
-    "http-development.log": "faa8002c25cd6cf0beb7ddfc5e13634981bfd10f6535876f5c2b4a4f9659881a",
+    "build.log": "4020e9bc1ce2dc74b645ffb4bff46578f7838048e6b1df7549909ae7959740c3",
+    "http-development.log": "6010e307189ef652962e42f73843ca72ba0fbef6e0f0a7bc51327766bc76ec0b",
     "http-built.log": "fa9b0f2e67389ed47df6811a49f33a7fcd7800d56d489f65594ef7b335a639a9"
   }
 }
