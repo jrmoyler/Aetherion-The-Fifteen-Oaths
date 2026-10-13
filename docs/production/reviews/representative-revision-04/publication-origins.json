@@ -1,0 +1,29 @@
+{
+  "status": "UNAPPROVED_REVIEW_ONLY",
+  "sources": [
+    {
+      "originalLocalRoot": "/tmp/aetherion-fault-review-v10",
+      "bundledRoot": "fault-v10",
+      "frozenManifest": "fault-v10/REVIEW_EVIDENCE.json",
+      "frozenManifestSha256": "912f781df17f1ea280c3fac3ce0f502595b22de5ab0909bf9451db495cb29835",
+      "listedFiles": 47,
+      "allListedFilesIncludedAndHashesMatched": true
+    },
+    {
+      "originalLocalRoot": "/tmp/ninja-v6",
+      "bundledRoot": "kiln-ninja-v6",
+      "frozenManifest": "kiln-ninja-v6/SHA256SUMS.json",
+      "frozenManifestSha256": "02af6950d2fd0d291e48b187d100d4139dc37bbfcbeaca15b976f573769bcb7e",
+      "listedFiles": 28,
+      "allListedFilesIncludedAndHashesMatched": true
+    },
+    {
+      "originalLocalRoot": "/tmp/aetherion-impulse-shield-lateral-review08b",
+      "bundledRoot": "impulse-shield-v8b",
+      "frozenManifest": "impulse-shield-v8b/review-evidence.json",
+      "frozenManifestSha256": "2eb4a60a600937d1ae0573d93e9c2ab346d23262db171a6085a78047f86a38af",
+      "listedFiles": 65,
+      "allListedFilesIncludedAndHashesMatched": true
+    }
+  ]
+}

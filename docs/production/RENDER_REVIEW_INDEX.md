@@ -32,3 +32,5 @@ The family notes retain further observed gaps, missing states, dimensional diffe
 ## Revised source and render comparisons
 
 [Representative revision 03](reviews/representative-revision-03/README.md) publishes Kiln ninja V5, Fault blade V9 and Impulse shield V7 repairs, alongside preserved Chronal V6 and Graft pass06 revisions. It includes editable sources, comparison views, independent reviews and scoped import evidence. All remain unapproved and excluded from production/runtime acceptance counts.
+
+[Representative revision 04](reviews/representative-revision-04/README.md) adds focused Kiln ninja V6 face diagnostics, Fault blade V10 and Impulse shield V8b. These comprise three editable sources, six final GLBs and 16 final CPU views. Independent review confirms the shield rear-coverage repair and records the remaining visual failures in all three candidates. The optional Three.js review catalog can load their five visual GLBs; default production assets and acceptance counts remain unchanged.

@@ -53,3 +53,11 @@ All 510 Phase I families remain open for full acceptance. Sixteen have partial c
 Blender 4.3.2 CPU authoring/rendering and Godot 4.6.3 headless testing are available. Unreal Editor was absent from PATH and audited installation locations; supported Unreal installation/license access is needed for real import/runtime certification. This executor has no `/dev/dri`. Chromium's normal launch fails its SUID sandbox configuration; no security settings were bypassed. Supported browser/GPU access is needed for rendered gameplay, texture/material parity, grip/contact checks and representative performance measurements. Performance budgets remain proposed.
 
 Three original source GLB identities retain known structural defects (dragon, magical gyroscope and phoenix); their bytes are deliberately unchanged. Future fixes must be separately identified derivatives. This checkpoint remains a draft for exact-artifact review. Do not merge, deploy or describe full Phase I/II production as complete.
+
+## Latest additive review checkpoint
+
+[Revision 04 comparisons](reviews/representative-revision-04/README.md) retain actual Kiln ninja V6, Fault blade V10 and Impulse shield V8b sources, exported maps/GLBs, renders and independent reviews. Ninja is a two-view diagnostic with unresolved facial likeness; Fault still lacks the source mineral layering; the shield reverse-coverage regression is repaired but rear hardware and wearer fit remain unfinished. No new family is accepted.
+
+The [Three.js preview](../../app/production-preview/README.md) supports explicit `AETHERION_INCLUDE_REVIEWS=1` mode with five hash-pinned visual review GLBs. Source files, collision meshes, diagnostics and documents remain outside its runtime delivery allowlist. Default mode is unchanged. CPU/HTTP checks do not establish texture decoding, browser GPU appearance or gameplay acceptance.
+
+The separate [27-image proposed reference expansion](../../assets/references/proposed-expansion-2026-10-13/README.md) was reconciled additively from its upload commit. All 70 listed payload hashes matched and all 27 PNGs decoded locally. These images remain proposed; original references were preserved.

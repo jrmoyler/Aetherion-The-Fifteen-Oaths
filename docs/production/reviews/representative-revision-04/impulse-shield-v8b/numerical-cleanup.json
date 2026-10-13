@@ -1,0 +1,2349 @@
+{
+  "weldToleranceMeters": 1e-07,
+  "purpose": "Remove nanometer-thick bevel remnants and coincident vertices; no contact exclusions",
+  "changes": [
+    {
+      "object": "Continuous machined central spine",
+      "beforeVerticesFaces": [
+        246,
+        144
+      ],
+      "afterVerticesFaces": [
+        242,
+        142
+      ]
+    },
+    {
+      "object": "Recessed center armor",
+      "beforeVerticesFaces": [
+        62,
+        35
+      ],
+      "afterVerticesFaces": [
+        60,
+        34
+      ]
+    },
+    {
+      "object": "Longitudinal housing gasket",
+      "beforeVerticesFaces": [
+        74,
+        50
+      ],
+      "afterVerticesFaces": [
+        54,
+        27
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt.001",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt.002",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket.002",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt.003",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket.003",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt.004",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket.004",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt.005",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket.005",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt.006",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket.006",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt.007",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Spine armor countersunk bolt socket.007",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine mechanical latch casting",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Orange inset safety latch",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Latch retaining fastener",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Latch retaining fastener socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Spine mechanical latch casting.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Orange inset safety latch.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Latch retaining fastener.001",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Latch retaining fastener socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Central recessed sliding guide",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Central recessed sliding guide.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink.001",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw.001",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink.002",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw.002",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket.002",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink.003",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw.003",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket.003",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink.004",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw.004",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket.004",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink.005",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw.005",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket.005",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink.006",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw.006",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket.006",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover dark countersink.007",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Pressure cover captive screw.007",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Pressure cover hex socket.007",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Orange segmented hub guard inset",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Pressure guard captive screw",
+      "beforeVerticesFaces": [
+        60,
+        62
+      ],
+      "afterVerticesFaces": [
+        40,
+        52
+      ]
+    },
+    {
+      "object": "Orange segmented hub guard inset.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Pressure guard captive screw.001",
+      "beforeVerticesFaces": [
+        60,
+        62
+      ],
+      "afterVerticesFaces": [
+        40,
+        52
+      ]
+    },
+    {
+      "object": "Pressure spindle recessed seat",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Orange segmented hub spindle index",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat.001",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head.001",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.002",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse hinge service housing",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse inset locking channel",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse orange safety slider",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw.001",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.001",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.001",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.002",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.002",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.002",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.003",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.003",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.003",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reference diagonal recessed junction",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat.002",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head.002",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket.002",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat.003",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head.003",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket.003",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.003",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.004",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.005",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse hinge service housing.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse inset locking channel.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse orange safety slider.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw.002",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket.002",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw.003",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket.003",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.004",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.004",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.004",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.005",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.005",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.005",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.006",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.006",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.006",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.007",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.007",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.007",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reference diagonal recessed junction.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Waist link bolt",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Waist link bolt socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Waist link bolt.001",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Waist link bolt socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw.001",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket.001",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover.002",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw.002",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket.002",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover.003",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw.003",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket.003",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat.004",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head.004",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket.004",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat.005",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head.005",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket.005",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.006",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.007",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.008",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse hinge service housing.002",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse inset locking channel.002",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse orange safety slider.002",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw.004",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket.004",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw.005",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket.005",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.008",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.008",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.008",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.009",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.009",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.009",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.010",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.010",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.010",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.011",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.011",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.011",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reference diagonal recessed junction.002",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat.006",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head.006",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket.006",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Casing fastener recessed seat.007",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Casing captive fastener head.007",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Casing captive hex socket.007",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.009",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.010",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Narrow polished casing edge.011",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse hinge service housing.003",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse inset locking channel.003",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse orange safety slider.003",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw.006",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket.006",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reverse captive locking screw.007",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Reverse captive screw socket.007",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.012",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.012",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.012",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.013",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.013",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.013",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.014",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.014",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.014",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel recessed fastener seat.015",
+      "beforeVerticesFaces": [
+        64,
+        50
+      ],
+      "afterVerticesFaces": [
+        48,
+        34
+      ]
+    },
+    {
+      "object": "Outer panel low captive screw.015",
+      "beforeVerticesFaces": [
+        48,
+        38
+      ],
+      "afterVerticesFaces": [
+        36,
+        26
+      ]
+    },
+    {
+      "object": "Outer panel hex socket.015",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Reference diagonal recessed junction.003",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Waist link bolt.002",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Waist link bolt socket.002",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Waist link bolt.003",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Waist link bolt socket.003",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover.004",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw.004",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket.004",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover.005",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw.005",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket.005",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover.006",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw.006",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket.006",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Hinge leaf recessed cover.007",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw.007",
+      "beforeVerticesFaces": [
+        48,
+        50
+      ],
+      "afterVerticesFaces": [
+        32,
+        42
+      ]
+    },
+    {
+      "object": "Hinge leaf cover screw socket.007",
+      "beforeVerticesFaces": [
+        36,
+        38
+      ],
+      "afterVerticesFaces": [
+        24,
+        26
+      ]
+    },
+    {
+      "object": "Moving hinge carriage bridge",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Moving hinge carriage drop",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Moving hinge carriage bridge.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Moving hinge carriage drop.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Longitudinal moving fork support",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    },
+    {
+      "object": "Longitudinal moving fork support.001",
+      "beforeVerticesFaces": [
+        24,
+        26
+      ],
+      "afterVerticesFaces": [
+        16,
+        18
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "status": "UNAPPROVED_REVIEW_ONLY",
+  "productionPromotion": false,
+  "previousReview": "representative-revision-03",
+  "entries": [
+    {
+      "id": "kiln-ninja-v6",
+      "title": "Kiln ninja V6 \u2014 focused face diagnostic",
+      "references": [
+        90,
+        60
+      ],
+      "changes": "Connected nasal/lip/cheek/chin volume, heavier eyelids and compact lateral hair clumps. Actual vertex-color export corrected. Two final unmasked views only; no full 19-view render run. Body, cape, bracer, stance, rig, animations and sockets preserved from V5.",
+      "remaining": "NOT EXACT: narrow slot-like eyes, exposed profile whites, blunt nose, projecting lips, broad jaw/chin and thick plate-like hair. Further face geometry repair required before full rendering.",
+      "views": [
+        {
+          "label": "Focused front diagnostic",
+          "path": "kiln-ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png"
+        },
+        {
+          "label": "Focused profile diagnostic",
+          "path": "kiln-ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png"
+        },
+        {
+          "label": "Original / V5 / V6 front comparison",
+          "path": "kiln-ninja-v6/front-comparison.png"
+        },
+        {
+          "label": "Original / V5 / V6 profile comparison",
+          "path": "kiln-ninja-v6/profile-comparison.png"
+        }
+      ],
+      "sources": [
+        "kiln-ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "kiln-ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-090/original.png",
+          "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+        },
+        {
+          "path": "assets/references/reference-060/original.png",
+          "sha256": "654a8acda2f430f72f92d0c0a45cdc50e64c0dd00fbb37f12b270fbb8815d788"
+        }
+      ]
+    },
+    {
+      "id": "fault-v10",
+      "title": "Fault blade V10 \u2014 mineral and crystal repair",
+      "references": [
+        53
+      ],
+      "changes": "Jagged outline, staggered cleavage and uneven mineral overlaps; transmissive closed amethyst with two internal cleavage solids; layered guard flanges. Final topology triangulation and UV repair retain all tangents.",
+      "remaining": "NOT EXACT: cracked-cell shell, continuous crystal slit, simplified guard/pommel and mechanically regular gray grip. Illustrated camera matching is approximate; optical comparison limited by render noise.",
+      "views": [
+        {
+          "label": "Approximate reference-facing view",
+          "path": "fault-v10/amethyst-short-blade/matched-front-review.png"
+        },
+        {
+          "label": "Approximate reference profile",
+          "path": "fault-v10/amethyst-short-blade/matched-profile-review.png"
+        },
+        {
+          "label": "Front",
+          "path": "fault-v10/amethyst-short-blade/front-review.png"
+        },
+        {
+          "label": "Profile",
+          "path": "fault-v10/amethyst-short-blade/profile-review.png"
+        },
+        {
+          "label": "Three-quarter",
+          "path": "fault-v10/amethyst-short-blade/hero-review.png"
+        },
+        {
+          "label": "Material detail",
+          "path": "fault-v10/amethyst-short-blade/material-closeup.png"
+        }
+      ],
+      "sources": [
+        "fault-v10/amethyst-short-blade/source.blend",
+        "fault-v10/amethyst-short-blade/review.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-053/original.png",
+          "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+        }
+      ]
+    },
+    {
+      "id": "impulse-shield-v8b",
+      "title": "Impulse shield V8b \u2014 restored reverse armor",
+      "references": [
+        32
+      ],
+      "changes": "Separate broad reverse armor restores coverage lost in V8; front paired casings, stepped infill, segmented hub and localized wear retained. Constant 95 cm height; 53 cm deployed width and 25 cm stowed width.",
+      "remaining": "NOT EXACT: simpler rear frame/straps, plain stowed casing, uniform finish and incomplete small hardware. Hidden mechanism and substantial depth are proposed; wearer fit and continuous swept clearance are unverified.",
+      "views": [
+        {
+          "label": "Deployed front",
+          "path": "impulse-shield-v8b/deployed-front.png"
+        },
+        {
+          "label": "Deployed three-quarter",
+          "path": "impulse-shield-v8b/deployed-hero.png"
+        },
+        {
+          "label": "Deployed reverse",
+          "path": "impulse-shield-v8b/deployed-back.png"
+        },
+        {
+          "label": "Intermediate fold",
+          "path": "impulse-shield-v8b/intermediate.png"
+        },
+        {
+          "label": "Stowed front",
+          "path": "impulse-shield-v8b/stowed-front.png"
+        },
+        {
+          "label": "Stowed three-quarter",
+          "path": "impulse-shield-v8b/stowed-hero.png"
+        },
+        {
+          "label": "Casing detail",
+          "path": "impulse-shield-v8b/casing-closeup.png"
+        },
+        {
+          "label": "Hub detail",
+          "path": "impulse-shield-v8b/hub-closeup.png"
+        },
+        {
+          "label": "Reference / V8 regression / V8b repair",
+          "path": "impulse-shield-v8b/reverse-coverage-comparison.png"
+        }
+      ],
+      "sources": [
+        "impulse-shield-v8b/impulse-shield-lateral-review08b.blend",
+        "impulse-shield-v8b/impulse-shield-lateral-review08b.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-032/original.png",
+          "sha256": "77e948588fbd7a17687c3caa4fd206833ed039896118974b472928155f87f197"
+        }
+      ]
+    }
+  ]
+}

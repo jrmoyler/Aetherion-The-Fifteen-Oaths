@@ -1,0 +1,71 @@
+{
+  "reviewedAtUtc": "2026-10-13T22:46:04.685841+00:00",
+  "status": "FOCUSED_FACE_REVIEW_NOT_EXACT_REFERENCE_MATCH",
+  "scope": "Final frozen focused diagnostic: two unmasked renders compared with actual090/060 and V5. Full19render not performed. Artifact remains unapproved.",
+  "improvements": [
+    "Connected nose and lip surfaces produce clearer actual facial volumes thanV5 line details.",
+    "Broader varied hair clumps reduce V5 comb-like repetition."
+  ],
+  "remainingDefects": [
+    {
+      "priority": "P1",
+      "area": "eyes",
+      "finding": "Narrow nearly horizontal almond openings lack source brow/upper-lid/socket anatomy; whites appear exposed at the side silhouette.",
+      "repair": "Seat eyeballs behind continuous shaped eyelids and rebuild upper-lid arc, inner canthus and brow/socket depth from090 face panel."
+    },
+    {
+      "priority": "P1",
+      "area": "nose and mouth profile",
+      "finding": "Nose tip is broad/blunt with soft bridge/nostril transitions; lip mass projects into a pout and chin/jaw remain broad smooth planes. Source profile is more sharply articulated and subtle.",
+      "repair": "Match bridge-to-tip-to-columella silhouette and lip projection using source profile landmarks, then define philtrum, mouth corners, chin break and jaw angle."
+    },
+    {
+      "priority": "P1",
+      "area": "hair silhouette",
+      "finding": "Thick swept plates and exposed cap remain unlike source irregular short clumps and wispy overlaps; posterior head appears shaved/smooth.",
+      "repair": "Build irregular overlapping clusters around crown/temples/occiput, vary widths and directions, and maintain low-poly silhouette rather than repeated thick strips."
+    },
+    {
+      "priority": "P2",
+      "area": "skin/ears",
+      "finding": "Uniform smooth skin and simple polygon-ring ears reinforce stylized rather than source likeness.",
+      "repair": "Refine ear attachment/cartilage and controlled skin value/roughness after major anatomy is corrected."
+    }
+  ],
+  "recommendation": "Continue focused front/profile anatomy and hair repair before full19render. Preserve these two renders as review evidence, not an accepted face.",
+  "fileIdentity": [
+    {
+      "path": "/tmp/ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+      "sha256": "65852286efa83669f3556527d72a64065fde9b72a2924b7331c269eb8eca5912",
+      "bytes": 780091
+    },
+    {
+      "path": "/tmp/ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png",
+      "sha256": "b7dd8b81157e21701cb8b6140937f98621f44c3db99c5d2a4291f25745098796",
+      "bytes": 758992
+    },
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa",
+      "bytes": 2129998
+    },
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-060/original.png",
+      "sha256": "654a8acda2f430f72f92d0c0a45cdc50e64c0dd00fbb37f12b270fbb8815d788",
+      "bytes": 2717071
+    }
+  ],
+  "limits": [
+    "Qualitative pixel review; no calibrated landmark registration or exact similarity score.",
+    "Two renders only; no fullbody/pose or animation acceptance.",
+    "No repository edits."
+  ],
+  "frozenCheckpoint": {
+    "receipt": "/tmp/ninja-v6/freeze-receipt.json",
+    "manifestSha256": "02af6950d2fd0d291e48b187d100d4139dc37bbfcbeaca15b976f573769bcb7e",
+    "files": 28,
+    "mismatches": 0,
+    "receiptGeometryFreezeMatches": true
+  },
+  "technicalEvidence": "Separate independent importer reports corrected COLOR_0 on three visual LODs, zero errors/warnings; not rerun by this pixel reviewer."
+}
