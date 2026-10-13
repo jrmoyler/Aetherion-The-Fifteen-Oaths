@@ -1,12 +1,13 @@
 # Preview validation snapshot
 
-Captured **2026-10-13T20:50:32.762Z**. Status: **PASS_AT_CAPTURE**. This is bounded local evidence; later exports and final remote head require another run.
+Captured **2026-10-13T21:21:53.551Z**. Status: **PASS_AT_CAPTURE**. This is bounded local evidence; later exports and final remote head require another run.
 
-[File hashes](validation/snapshot.json), snapshot SHA-256: `e3bfb3beca8758ca8e5a9c7a8af9298aa0d9822053efd9fd081103ab7d715316`.
+[File hashes](validation/snapshot.json), snapshot SHA-256: `683238b5da7b34a293eadbb6280a988454fe9e892dcd9f9226ae34aafac2aefd`.
 
-- Unit tests: **21 passed**.
+- Unit tests: **28 passed**.
 - Actual Three.js GLTFLoader CPU checks: **158/158 GLB state/LOD records passed**, from **16 manifests**.
 - Development HTTP byte checks: **158 GLBs**. Built preview HTTP byte checks: **158 GLBs**.
+- Original reference byte checks: **19 development / 19 built**.
 - Production build passed; bundle size warnings are retained in the build log.
 - Tested inputs changed after capture: **0**. All tested GLBs and manifests still matched captured SHA-256 hashes at the end of these checks.
 

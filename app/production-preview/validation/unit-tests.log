@@ -2,35 +2,42 @@
 > aetherion-production-preview@0.1.0 test
 > node --test tests/*.test.mjs
 
-✔ context loss pauses rendering, requests recovery and restores exactly once (1.716228ms)
-✔ visibility and BFCache suspend without restarting a lost context (0.732845ms)
-✔ DOM inspection focus gates camera without stopping scene rendering (0.231419ms)
-✔ failed or disposed renderer never restarts after a restore event (0.275555ms)
-✔ resize rejects hidden/invalid dimensions and caps device pixel ratio (1.000729ms)
-✔ keyboard camera shortcuts never hijack form fields, Tab or browser chords (0.209726ms)
-✔ reduced motion pauses clips and damping but permits explicit play opt-in (0.269376ms)
-✔ resource disposal deduplicates shared geometry, materials, uniforms, images and skeletons (2.375362ms)
-✔ late parsed result after replacement is disposed and never becomes active (1.603038ms)
-✔ shutdown aborts fetch, discards late parse and is idempotent (0.802971ms)
-✔ failed current load surfaces error but a stale rejected load cannot overwrite it (0.359932ms)
-✔ replacement stops actions, uncaches root and restores material ownership before dispose (0.483108ms)
-✔ mixer construction failure disposes the decoded GLTF (0.312311ms)
-✔ artist manifest maps repository-relative exports and authored LODs (1.052998ms)
-✔ manifest refuses non-GLB URLs, external protocols and traversal outside asset root (0.339192ms)
-✔ separate state files never inherit ready LODs (0.528317ms)
-✔ separately manifested variant retains its ID and authored state LODs (0.374876ms)
-✔ shipping boundary excludes DCC, notes, collision and unused images (5.88303ms)
-✔ only actually referenced external GLB images/buffers join the allowlist (2.867313ms)
-✔ GLB cannot smuggle authoring files or remote dependencies into runtime (1.779493ms)
-✔ bad GLB length fails closed instead of silently bundling source folder (3.59781ms)
-ℹ tests 21
+✔ context loss pauses rendering, requests recovery and restores exactly once (1.545148ms)
+✔ visibility and BFCache suspend without restarting a lost context (0.481475ms)
+✔ DOM inspection focus gates camera without stopping scene rendering (0.271269ms)
+✔ failed or disposed renderer never restarts after a restore event (0.270307ms)
+✔ resize rejects hidden/invalid dimensions and caps device pixel ratio (1.064213ms)
+✔ keyboard camera shortcuts never hijack form fields, Tab or browser chords (0.238299ms)
+✔ reduced motion pauses clips and damping but permits explicit play opt-in (0.293753ms)
+✔ orthographic framing preserves meter scale and world-axis direction (2.415899ms)
+✔ view-group rotation changes world bounds without changing source mesh coordinates (1.561533ms)
+✔ asset and family reference correspondence is explicit and deduplicated (0.811232ms)
+✔ reference replacement clears old source and ignores stale load event (0.434394ms)
+✔ dirty parent rotation is measured before a renderer updates matrices (0.693996ms)
+✔ first framing uses the resized viewport aspect (0.237497ms)
+✔ resource disposal deduplicates shared geometry, materials, uniforms, images and skeletons (3.123186ms)
+✔ late parsed result after replacement is disposed and never becomes active (1.749205ms)
+✔ shutdown aborts fetch, discards late parse and is idempotent (0.867177ms)
+✔ failed current load surfaces error but a stale rejected load cannot overwrite it (0.339882ms)
+✔ replacement stops actions, uncaches root and restores material ownership before dispose (0.462046ms)
+✔ mixer construction failure disposes the decoded GLTF (0.218849ms)
+✔ artist manifest maps repository-relative exports and authored LODs (0.740476ms)
+✔ manifest refuses non-GLB URLs, external protocols and traversal outside asset root (0.412011ms)
+✔ separate state files never inherit ready LODs (0.432371ms)
+✔ separately manifested variant retains its ID and authored state LODs (0.291409ms)
+✔ shipping boundary excludes DCC, notes, collision and unused images (4.268151ms)
+✔ only actually referenced external GLB images/buffers join the allowlist (1.26122ms)
+✔ GLB cannot smuggle authoring files or remote dependencies into runtime (1.681143ms)
+✔ bad GLB length fails closed instead of silently bundling source folder (0.253903ms)
+✔ reference boundary serves only explicitly indexed originals and rejects unresolved IDs (2.011661ms)
+ℹ tests 28
 ℹ suites 0
-ℹ pass 21
+ℹ pass 28
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 91.290766
+ℹ duration_ms 145.301706
 npm notice
 npm notice New major version of npm available! 11.9.0 -> 12.2.0
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
