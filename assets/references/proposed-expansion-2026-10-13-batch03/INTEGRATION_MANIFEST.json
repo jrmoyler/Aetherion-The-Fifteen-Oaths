@@ -1,0 +1,785 @@
+{
+  "schema_version": "1.0",
+  "batch_id": "batch03",
+  "status": "FROZEN_PROPOSED_CONCEPT_BATCH",
+  "distinct_concepts": 12,
+  "image_versions": 13,
+  "revision_note": "Kiln refractory artisan has original and selected v02; both preserved. Selected means preferred proposal, not approved art.",
+  "excluded": "Separate corrections folder and earlier batches are not included.",
+  "preservation": {
+    "original114_unchanged": true,
+    "batch01_unchanged": true,
+    "batch02_unchanged": true
+  },
+  "coverage_warning": "Six environment functions, three civilian outfits and three natural-creature concepts. No complete-family or modeling-approval claim.",
+  "records": [
+    {
+      "concept_id": "batch03_01_graft_vegetation_canopy",
+      "canonical_id": "p2-env-09-shared-vegetation",
+      "baseline_asset_id": "asset-o07-q-vegetation-geology-family",
+      "oath_id": "oath-07",
+      "file": "generated/batch03_01_graft_vegetation_canopy.png",
+      "sha256": "f771b61e23d50978d5b52b498e75d2c6b9c64b9d2be6e5182ff672183a2da3ae",
+      "bytes": 2905989,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/2"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-107/original.png",
+          "mount": "baseline",
+          "sha256": "ca195ec1b5898a1130b042add577ffee846be7980518ab5d1f1d20c981a142c8",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_01_graft_vegetation_canopy.actual-prompt.txt",
+      "actual_prompt_sha256": "f31f09ef90c611e5cf00fc13ecd7ce007ea1b35419691880a795560182bf1a1a",
+      "planning_prompt_file": "planning-prompts/batch03_01_graft_vegetation_canopy.prompt.txt",
+      "planning_prompt_sha256": "6be48677ca0bc27e70699e562f42aaf4931d4c0de0138c3c05a777bb0c4fed35",
+      "qa": {
+        "pixel_review": "Viewed generated pixels at bounded 1400x933 preview; image is 1536x1024 RGB PNG. Header/footer legible. Young silhouette, mature front/back/left/right/top, detached trunk, branch-junction, leaf clusters, root plan, soil section, fruit-understory and fern panels all present. Twisted trunk and broad uneven canopy retain bark/moss/amber motif.",
+        "passed_observations": [
+          "Front and rear differ; left/right show opposing trunk lean.",
+          "Mature silhouette, separated canopy/understory/groundcover, and bark/moss/leaf/sap material panels are visible.",
+          "Proposed status and design-review footer visible."
+        ],
+        "unresolved_design_inconsistencies": [
+          "Root-exclusion plan labels PUBLIC CLEARANCE (NO ROOTS) within a circle containing the tree: intended root boundary versus clear-route boundary is ambiguous and requires correction before modeling.",
+          "Three primary forks are named in detail, but exact branch count/attachment correspondence across all mature projections cannot be verified; some branches are foliage-occluded.",
+          "Leaf masses are finer/painterlier than strict low-poly leaf-card authoring reference; alpha-card topology, overdraw budget and LODs remain unspecified.",
+          "Sap/fruit merged material labeling does not establish exact fruit versus sap anatomy.",
+          "Human silhouette suggests relative scale without approval; species, exact scale, age and seasonal states remain unresolved."
+        ],
+        "gate": "PROPOSED_CONCEPT_REVIEW_REQUIRED_NOT_EXACT_MODELING_APPROVED"
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Proposed concept only. Reconcile recorded construction/anatomy inconsistencies and obtain exact-image review before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_02_fault_retaining_wall",
+      "canonical_id": "p2-env-09-shared-walls",
+      "baseline_asset_id": "asset-o05-n-architecture-family",
+      "oath_id": "oath-05",
+      "file": "generated/batch03_02_fault_retaining_wall.png",
+      "sha256": "8be77696de694a0fa03009cabec26c146c86351825704eb54a8d53798065e22a",
+      "bytes": 2836777,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/5"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-109/original.png",
+          "mount": "baseline",
+          "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_02_fault_retaining_wall.actual-prompt.txt",
+      "actual_prompt_sha256": "9286c7df69079bb5b3d201d11cbd69af88c5c5c5945f60ff00c984c7c7fab819",
+      "planning_prompt_file": "planning-prompts/batch03_02_fault_retaining_wall.prompt.txt",
+      "planning_prompt_sha256": "a2af5ac4dc4e6f4468f35b09030d94b8ebccea156466dbf5912f372093448da6",
+      "qa": {
+        "pixel_review": "Viewed generated pixels at bounded 1400x933 preview; image is 1536x1024 RGB PNG. Front, earth-facing rear, top, soil/footing section, exploded movement joint, intact/inspection-closed states and material blocks are present. Shale/sandstone large block masses and small violet pockets retain original Oath hierarchy.",
+        "passed_observations": [
+          "Front/rear visually distinct and public versus retained-soil sides explicitly labeled.",
+          "Footing and stepped backing shown; crystals explicitly labeled non-load-bearing.",
+          "Intact/inspection-closed public pavement appears same width with a face-mounted cover.",
+          "Proposed title and review footer visible; no invented measurements."
+        ],
+        "unresolved_design_inconsistencies": [
+          "Drain appears on public front and earth-facing rear; section calls out recessed exit on soil side. Exact drainage path/direction is contradictory and must be redrawn.",
+          "Return corner shown as two diverging wings in top plan while elevations do not fully reconcile; corner geometry needs a single verified plan.",
+          "Inspection-closed state obscures or removes the public drain visible in intact state, so constant drainage state is not established.",
+          "Exploded inspection cover is drawn like a cap while closed-state cover is a front hatch; connection identity and tie kinematics are unresolved.",
+          "No verified engineering load path, footing dimensions, movement allowance, corridor clearance or physically safe detail is established."
+        ],
+        "gate": "PROPOSED_CONCEPT_REVIEW_REQUIRED_NOT_EXACT_MODELING_APPROVED"
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Proposed concept only. Reconcile recorded construction/anatomy inconsistencies and obtain exact-image review before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_03_tidal_fish_rope_shop",
+      "canonical_id": "p2-env-09-shared-shops",
+      "baseline_asset_id": "asset-o04-o-buildings-interiors-family",
+      "oath_id": "oath-04",
+      "file": "generated/batch03_03_tidal_fish_rope_shop.png",
+      "sha256": "1bae788335b9024652e94447b623515a0fcc70e4d54a710b5d3a916d407ca467",
+      "bytes": 3161635,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/7"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-110/original.png",
+          "mount": "baseline",
+          "sha256": "14fc371fac51bae06f397226412a563eb644baf69a1ef0756e1a01e3003af833",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_03_tidal_fish_rope_shop.actual-prompt.txt",
+      "actual_prompt_sha256": "56db66170cb3db7697792e01e19c9139f9d56589dcda6a7d9fdda0f32dcdc4f4",
+      "planning_prompt_file": "planning-prompts/batch03_03_tidal_fish_rope_shop.prompt.txt",
+      "planning_prompt_sha256": "f0d74a40ad3c8dd883b65547f3edc1767beed8ad74f3b614d3ec3be2155b901a",
+      "qa": {
+        "method": "Opened actual generated PNG pixels through bounded 1400px inspection image; also verified PNG decoding and measured dimensions/hash. No engineering validation.",
+        "verified_visual": [
+          "Distinct public front, service rear, roofless plan, dry threshold, stock, counter and shutter-state panels are present.",
+          "Pearl limestone shell arch, deep-blue fabric, sea-green ceramic and brass retain Tidal hierarchy.",
+          "Fish trays, rope coils, nets and catch baskets remain civilian trade stock.",
+          "Dry customer route and recessed wet service-side drain are shown."
+        ],
+        "unresolved": [
+          "Roofless plan and rear entry arrangement do not reconcile exactly with hero; three-dimensional route continuity needs review.",
+          "Washable counter panel is an illustrative assembly rather than a true cut section.",
+          "Shutter open/closed preserve general arch but hinge count and escape clearance are not fully demonstrable.",
+          "Stock labels invent Reef Fish, Tide Snapper, Current Eel and Harbour Rope; these are proposed display examples, not canon species."
+        ]
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Image generation is not exact-art approval. Resolve all listed construction/anatomy checks before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_04_rime_folio_food_storage",
+      "canonical_id": "p2-env-09-shared-clutter",
+      "baseline_asset_id": "asset-o02-p-environment-props-family",
+      "oath_id": "oath-02",
+      "file": "generated/batch03_04_rime_folio_food_storage.png",
+      "sha256": "dd90c83acd5fa7b93aa261c59782f766cb729990630dc153e8ce7295c544ff5a",
+      "bytes": 2709437,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-112/original.png",
+          "mount": "baseline",
+          "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_04_rime_folio_food_storage.actual-prompt.txt",
+      "actual_prompt_sha256": "05c589ea19a445d9073a988573bd751846b5c315b6c315bfbf76de290d671103",
+      "planning_prompt_file": "planning-prompts/batch03_04_rime_folio_food_storage.prompt.txt",
+      "planning_prompt_sha256": "9c0e95474f6bdc77b1b3cbcd29d109ada992efc9a787da796aa3a13349a8b650",
+      "qa": {
+        "method": "Opened actual generated PNG pixels through bounded 1400px inspection image; also verified PNG decoding and measured dimensions/hash. No engineering validation.",
+        "verified_visual": [
+          "Two distinct silhouettes: rectangular folio box and octagonal food cask.",
+          "Front, rear, left, right, top, closed/open, liner cutaway, handle, latch, owner tag and two-unit stack panels appear for both.",
+          "Visible dark felt liners and proposed timber/composite shell keep food out of a purely ice-supported vessel.",
+          "Stack contact is drawn on dark perimeter framing; pale rime facing is labeled nonstructural.",
+          "Blank owner tags do not invent ownership."
+        ],
+        "unresolved": [
+          "Left and right profile images are nearly repeated instead of demonstrably opposite views.",
+          "Food cask top silhouette is more strongly octagonal than some front views.",
+          "Two rear hinge count and one front latch need reconciliation between small views and open states; no exact part-count approval.",
+          "Two-unit stacks show intended rim contact but load path, structural shell thickness, fit and real handling remain unverified."
+        ]
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Image generation is not exact-art approval. Resolve all listed construction/anatomy checks before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_05_storm_domestic_task_lamp",
+      "canonical_id": "p2-env-09-shared-lighting",
+      "baseline_asset_id": "asset-o03-ah-decals-materials-shaders-family",
+      "oath_id": "oath-03",
+      "file": "generated/batch03_05_storm_domestic_task_lamp.png",
+      "sha256": "de4d5d3dc89a7910e3432cdb5170c3459ff5c6a2986e74bc092d3f3b3f0bd550",
+      "bytes": 2322839,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/22"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-111/original.png",
+          "mount": "baseline",
+          "sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_05_storm_domestic_task_lamp.actual-prompt.txt",
+      "actual_prompt_sha256": "ace4516f3be5d6e38ead067ae224e363f7cb34e0ebe485d0a35d411038b5c217",
+      "planning_prompt_file": "planning-prompts/batch03_05_storm_domestic_task_lamp.prompt.txt",
+      "planning_prompt_sha256": "5fb65904ff86fdb3dcd730828b54c535a5a0c174cb0afebdc43031d4bb2948e2",
+      "qa": {
+        "method": "Opened actual generated PNG pixels through bounded 1400px inspection image; also verified PNG decoding and measured dimensions/hash. No engineering validation.",
+        "verified_visual": [
+          "Front/rear/both profiles/top, matching OFF and STEADY ON, component explosion, service-open and bench-mounting panels present.",
+          "Copper support, white ceramic breaks, navy broad foot and frosted glass are visually separate.",
+          "Off/on retain near-identical geometry with restrained steady warm glow; no lightning, sparks or hazard effects.",
+          "Rear has visible access hatch absent on front.",
+          "Service-open retains intact diffuser and opens metal cover instead of breaking glass."
+        ],
+        "unresolved": [
+          "Left and right small views are visually similar; precise opposite-side fastener mapping unverified.",
+          "Explosion includes paired ceramic nodes but grounding path, electrical isolation and electrical safety are not established.",
+          "Optional wall variant was generated beyond chosen bench detail and is an additional unresolved proposal, not a validated mount conversion.",
+          "Service-hinge/retention hardware and diffuser-removal trajectory need modeling review."
+        ]
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Image generation is not exact-art approval. Resolve all listed construction/anatomy checks before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_06_tidal_sluice_override",
+      "canonical_id": "p2-env-09-shared-mechanisms",
+      "baseline_asset_id": "asset-o04-ae-puzzles-family",
+      "oath_id": "oath-04",
+      "file": "generated/batch03_06_tidal_sluice_override.png",
+      "sha256": "6854424a089df888b2598af2d5f977c5e3afb0608e287edda42e5274404235e0",
+      "bytes": 2859293,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/19"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-110/original.png",
+          "mount": "baseline",
+          "sha256": "14fc371fac51bae06f397226412a563eb644baf69a1ef0756e1a01e3003af833",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_06_tidal_sluice_override.actual-prompt.txt",
+      "actual_prompt_sha256": "86afcdcb6b21cfc700b4f7a8870918913ae7aeebcdcf9367739c55a403418358",
+      "planning_prompt_file": "planning-prompts/batch03_06_tidal_sluice_override.prompt.txt",
+      "planning_prompt_sha256": "f482725e90de082cc16790cf2a659f76a7ecea2f9d210a5eb75553590f21c834",
+      "qa": {
+        "method": "Opened actual generated PNG pixels through bounded 1400px inspection image; also verified PNG decoding and measured dimensions/hash. No engineering validation.",
+        "verified_visual": [
+          "Front, reversed-handed rear, side, top, mechanism explosion, lock-pin/manual release, section and dry bypass context panels present.",
+          "Single side counterweight cage appears on right in front and left in rear.",
+          "Closed, half-raised and open aperture states are visibly differentiated.",
+          "Fixed dry refuge bridge and separate right-side crank landing are shown.",
+          "Pale limestone, shell-edged arch, sea-green gate, deep-blue banners and brass retain Tidal style."
+        ],
+        "unresolved": [
+          "MAJOR: gate top remains near arch while lower edge rises; panel visibly shortens rather than preserving full geometry with vertical translation into adequate overhead space.",
+          "MAJOR: counterweight position does not visibly reconcile with opposite gate travel across states.",
+          "Hoist rope routing, guide count, swept travel clearance and bridge interference require explicit mechanism study before modeling.",
+          "Cage is visually open-barred despite enclosed label; physical guarding and pedestrian clearance not established.",
+          "Locked-safe is a requested conceptual state label, not a safety certification.",
+          "Hydraulics, water volumes, levels, forces, dimensions and actual manual-release behavior remain unresolved."
+        ]
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Image generation is not exact-art approval. Resolve all listed construction/anatomy checks before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_10_kiln_slag_backed_burrower",
+      "canonical_id": "creature-o01-natural",
+      "baseline_asset_id": "asset-o01-r-creatures-enemies-family",
+      "oath_id": "oath-01",
+      "file": "generated/batch03_10_kiln_slag_backed_burrower.png",
+      "sha256": "869bb6175866e9fa38a2a56f534c4b2d5f16957f0ea16915ee25eb801b9a510e",
+      "bytes": 2894047,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "baseline",
+        "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "json_pointer": "/records/0"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-113/original.png",
+          "mount": "baseline",
+          "sha256": "f5743145d9abe76101af9a7f3b382ca3a71bee6fa08641fa918418bbb019975d",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_10_kiln_slag_backed_burrower.actual-prompt.txt",
+      "actual_prompt_sha256": "536ba33210f78a5a0f186956dbb9ca64f9ff782d11c26931c2942e033989de73",
+      "planning_prompt_file": "planning-prompts/batch03_10_kiln_slag_backed_burrower.prompt.txt",
+      "planning_prompt_sha256": "30a450e425893ada794a49d06b93af860648de7b143684b1388a84cfe00e25eb",
+      "qa": {
+        "method": "Opened original source resized previews before generation; visually inspected generated image preview (1100 px long edge) and native-resolution lower-right crops for burrower and kite; PNG decode and hash verification.",
+        "png_decode_pass": true,
+        "observed_passes": [
+          "Six-limbed body plan reads clearly in opposing profiles, dorsal view, and skeleton intent; three bilateral limb pairs rather than quadruped.",
+          "Natural charcoal hide and irregular mineral accretion; no rivets, mechanical limbs or equipment.",
+          "Front/rear, opposite profiles, dorsal and two three-quarter views present.",
+          "Muzzle/nostril detail, digging/mid/hind foot detail, six-limb named contact diagram and cool-ash feeding context present.",
+          "Human comparison is explicitly SCALE UNRESOLVED; proposal and review footer present."
+        ],
+        "unresolved_anatomical_issues": [
+          "Main forefeet appear to show more claws than the prompt-specified three and the three-claw detail label; digit count must be reconciled across all views.",
+          "Front/rear and foreshortened poses occlude some limbs, so exactly six cannot be independently confirmed in every whole-body pose.",
+          "Mineral scute arrangement and proportions are design intent rather than exact matched turnarounds.",
+          "Skeleton is illustrative; six-limb girdle/rib attachment, joint ranges and alternating support pattern require biological/rig review.",
+          "Feeding/shelter poses do not prove consistent belly clearance; no final scale, UVs or injury-state design.",
+          "Ecology annotation adds mineral-rich roots/nodules beyond source tubers and lichen; treat this as unapproved generated detail."
+        ]
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Do not treat generated sheet as validated anatomy, approved final art, production rig or complete fauna-family coverage. Resolve all issues before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_11_storm_copper_wing_kite",
+      "canonical_id": "creature-o03-natural",
+      "baseline_asset_id": "asset-o03-r-creatures-enemies-family",
+      "oath_id": "oath-03",
+      "file": "generated/batch03_11_storm_copper_wing_kite.png",
+      "sha256": "8ce6d401864360be041d96f358ea07c66c04630baae5df0c282bc25299822e79",
+      "bytes": 2688938,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "baseline",
+        "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "json_pointer": "/records/12"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-111/original.png",
+          "mount": "baseline",
+          "sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_11_storm_copper_wing_kite.actual-prompt.txt",
+      "actual_prompt_sha256": "4ef01247273b2a872df0cba2abd41f13494e8ff60992f8fd82e53768f5c034dc",
+      "planning_prompt_file": "planning-prompts/batch03_11_storm_copper_wing_kite.prompt.txt",
+      "planning_prompt_sha256": "4702d18bba44d46db1da2db7f8057ca57e68c4853d8e0a9642d5f95aca652863",
+      "qa": {
+        "method": "Opened original source resized previews before generation; visually inspected generated image preview (1100 px long edge) and native-resolution lower-right crops for burrower and kite; PNG decode and hash verification.",
+        "png_decode_pass": true,
+        "observed_passes": [
+          "Exactly two-wing/two-leg avian silhouette across primary views; no armor or electrical apparatus.",
+          "Copper/navy feather coloration and pale throat clearly read as organic plumage.",
+          "Opposing profiles, front/rear, dorsal spread-wing and perched three-quarter present.",
+          "Skeleton intent, open/folded wing, mouth/talon details, hop/soar and leeward feeding vignettes present.",
+          "Scale unresolved and proposed concept disclaimers present."
+        ],
+        "unresolved_anatomical_issues": [
+          "Talon closeups suggest possible extra forward digit/ambiguous hallux; labeled three-forward/one-rear count is not consistently verifiable on perch and primary views.",
+          "Wing primary counts and copper feather-group boundaries vary; open/folded topology is not production-reconciled.",
+          "Folded wings and far legs are occluded in some views; full articulation and side identity need review.",
+          "Locomotion caption names left/right talons together but does not separately map every contact.",
+          "Mouth-detail label is misspelled as Moud Detail.",
+          "Human relative scale, skeletal proportions, UVs and damage states remain unapproved."
+        ]
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Do not treat generated sheet as validated anatomy, approved final art, production rig or complete fauna-family coverage. Resolve all issues before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_12_tidal_reedback_estuary_grazer",
+      "canonical_id": "creature-o04-natural",
+      "baseline_asset_id": "asset-o04-r-creatures-enemies-family",
+      "oath_id": "oath-04",
+      "file": "generated/batch03_12_tidal_reedback_estuary_grazer.png",
+      "sha256": "07975b688d68d122821bcab0d219604e8d701c8907cc8ba291b28cefe1582a66",
+      "bytes": 2807940,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "baseline",
+        "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "json_pointer": "/records/18"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-110/original.png",
+          "mount": "baseline",
+          "sha256": "14fc371fac51bae06f397226412a563eb644baf69a1ef0756e1a01e3003af833",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_12_tidal_reedback_estuary_grazer.actual-prompt.txt",
+      "actual_prompt_sha256": "0addf2e6eb48c4bd6777bb49031913269e3b268c3ba6fa998509b51286ab7a25",
+      "planning_prompt_file": "planning-prompts/batch03_12_tidal_reedback_estuary_grazer.prompt.txt",
+      "planning_prompt_sha256": "9f8705a193d03816cf6447cc8591b26377705b806b6db2e6f5e1e5466eeaa103",
+      "qa": {
+        "method": "Opened original source resized previews before generation; visually inspected generated image preview (1100 px long edge) and native-resolution lower-right crops for burrower and kite; PNG decode and hash verification.",
+        "png_decode_pass": true,
+        "observed_passes": [
+          "Distinct natural broad-bodied four-legged marsh browser with paired cloven hooves, slate/pearl coat and dorsal bristles.",
+          "Opposing profiles and front/rear/top/three-quarter views present; no armor, reservoir or brass anatomy.",
+          "Skeleton intent, muzzle, hoof and footprint details present.",
+          "Wading, swimming, named-limb contact study and salt-marsh feeding context present.",
+          "Proposal, no-final-rig and scale-unresolved text present."
+        ],
+        "unresolved_anatomical_issues": [
+          "Primary side views retain four legs, but front/rear/top and water poses occlude some limbs; no full six-view count validation.",
+          "Slow-swim panel does not include requested ghosted submerged limbs, so swimming articulation and limb count cannot be checked.",
+          "Main hooves are shorter and less splayed than closeup; footprint-to-hoof geometry needs reconciliation.",
+          "Skeleton/body silhouettes are illustrative; joint placement and body length across wade/swim require review.",
+          "Contact miniatures name LF/RF/LH/RH but are near-duplicate stances rather than a validated side-step sequence.",
+          "Dorsal hair is tall in some views versus the proposed short hair; length consistency and non-bundle growth should be reviewed.",
+          "Final scale, rig, UVs and injury states unresolved."
+        ]
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Do not treat generated sheet as validated anatomy, approved final art, production rig or complete fauna-family coverage. Resolve all issues before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_07_kiln_refractory_artisan",
+      "canonical_id": "asset-o01-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o01-i-civilian-clothing-family",
+      "oath_id": "oath-01",
+      "file": "generated/batch03_07_kiln_refractory_artisan.png",
+      "sha256": "ba0f09bc6309da66e23d011c7982a91177567553e4834b87bc0a4a07eec37473",
+      "bytes": 2569707,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": false,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "baseline",
+        "path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "json_pointer": "/records/122"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-113/original.png",
+          "mount": "baseline",
+          "sha256": "f5743145d9abe76101af9a7f3b382ca3a71bee6fa08641fa918418bbb019975d",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_07_kiln_refractory_artisan.actual-prompt.txt",
+      "actual_prompt_sha256": "4250ef03ef31340a86a55ad14671d9af666d0f28da282c6adb1d5791347f48a3",
+      "planning_prompt_file": "planning-prompts/batch03_07_kiln_refractory_artisan.prompt.txt",
+      "planning_prompt_sha256": "a3f900865c2969a366897fddfa393ba0430fdf00d5baa24776bdbf6b65b1dbea",
+      "qa": {
+        "concept_observed_passes": [
+          "Six distinct turnaround directions including opposite profiles",
+          "Soft civilian cloth silhouette after v02 correction; no back kiln or weapon",
+          "Front/back flats, seam/fastener/pouch details, reach/crouch shown",
+          "Small ceramic tiles restricted to front thigh apron in selected revision"
+        ],
+        "concept_unresolved_issues": [
+          "Anatomical right-hip pouch is clear in front and work poses but partly or wholly missing in right-profile/rear turnaround; reconcile before modeling.",
+          "First pass retained too much armor; v02 removes torso, forearm and boot plates. First pass preserved but superseded.",
+          "Material swatch label aged brass/iron broadens the intended oxidized-iron hardware; use source hierarchy until reviewed.",
+          "Flat lays retain small cuff tabs not clearly reconciled with worn boot line."
+        ],
+        "version_pixel_qa": {
+          "decode": "PASS",
+          "nonblank_extrema": [
+            [
+              0,
+              255
+            ],
+            [
+              0,
+              255
+            ],
+            [
+              0,
+              255
+            ]
+          ],
+          "visual_review": "Inspected resized 1200x800 max full board; anatomy, silhouette, labels, views and garment consistency checked. Not exhaustive native-resolution tailoring validation."
+        },
+        "scope_note": "Concept observations describe selected version; older preserved version retains its documented armor issue where applicable."
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Proposed concept only. Reconcile recorded construction/anatomy inconsistencies and obtain exact-image review before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_07_kiln_refractory_artisan",
+      "canonical_id": "asset-o01-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o01-i-civilian-clothing-family",
+      "oath_id": "oath-01",
+      "file": "generated/batch03_07_kiln_refractory_artisan_v02.png",
+      "sha256": "e0942905b498e425fe331b4056a93f0bf3ab7790a6f36795240c01bfe3df98b4",
+      "bytes": 2491466,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "baseline",
+        "path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "json_pointer": "/records/122"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-113/original.png",
+          "mount": "baseline",
+          "sha256": "f5743145d9abe76101af9a7f3b382ca3a71bee6fa08641fa918418bbb019975d",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_07_kiln_refractory_artisan_v02.actual-prompt.txt",
+      "actual_prompt_sha256": "26657bd74e6f4d4e6ad45b9359faa6e54339f59d515fca2a0f759c99fe66aa83",
+      "planning_prompt_file": "planning-prompts/batch03_07_kiln_refractory_artisan.prompt.txt",
+      "planning_prompt_sha256": "a3f900865c2969a366897fddfa393ba0430fdf00d5baa24776bdbf6b65b1dbea",
+      "qa": {
+        "concept_observed_passes": [
+          "Six distinct turnaround directions including opposite profiles",
+          "Soft civilian cloth silhouette after v02 correction; no back kiln or weapon",
+          "Front/back flats, seam/fastener/pouch details, reach/crouch shown",
+          "Small ceramic tiles restricted to front thigh apron in selected revision"
+        ],
+        "concept_unresolved_issues": [
+          "Anatomical right-hip pouch is clear in front and work poses but partly or wholly missing in right-profile/rear turnaround; reconcile before modeling.",
+          "First pass retained too much armor; v02 removes torso, forearm and boot plates. First pass preserved but superseded.",
+          "Material swatch label aged brass/iron broadens the intended oxidized-iron hardware; use source hierarchy until reviewed.",
+          "Flat lays retain small cuff tabs not clearly reconciled with worn boot line."
+        ],
+        "version_pixel_qa": {
+          "decode": "PASS",
+          "nonblank_extrema": [
+            [
+              0,
+              255
+            ],
+            [
+              0,
+              255
+            ],
+            [
+              0,
+              255
+            ]
+          ],
+          "visual_review": "Inspected resized 1200x800 max full board; anatomy, silhouette, labels, views and garment consistency checked. Not exhaustive native-resolution tailoring validation."
+        },
+        "scope_note": "Concept observations describe selected version; older preserved version retains its documented armor issue where applicable."
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Proposed concept only. Reconcile recorded construction/anatomy inconsistencies and obtain exact-image review before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_08_tidal_rope_merchant",
+      "canonical_id": "asset-o04-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o04-i-civilian-clothing-family",
+      "oath_id": "oath-04",
+      "file": "generated/batch03_08_tidal_rope_merchant.png",
+      "sha256": "22685b7282e23c36b5640dbe8a474d665a7e0dec484e81a4c7fe8012cd054afb",
+      "bytes": 2468295,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "baseline",
+        "path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "json_pointer": "/records/224"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-110/original.png",
+          "mount": "baseline",
+          "sha256": "14fc371fac51bae06f397226412a563eb644baf69a1ef0756e1a01e3003af833",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_08_tidal_rope_merchant.actual-prompt.txt",
+      "actual_prompt_sha256": "22709f4bddc175887766f024fd200d49c4608b745218ab7b9bb0f04d41be868b",
+      "planning_prompt_file": "planning-prompts/batch03_08_tidal_rope_merchant.prompt.txt",
+      "planning_prompt_sha256": "7bd411bfa08c64d45425290201c211e9729ed94afe27ed5ddd3d3a0020238d39",
+      "qa": {
+        "concept_observed_passes": [
+          "Six turnaround views, opposite profiles",
+          "Unarmored woven tunic, split apron, cloth weather cover, gaiters",
+          "Detached outer layer and base tunic",
+          "Pocket/rope details and noncombat reach/crouch"
+        ],
+        "concept_unresolved_issues": [
+          "Views provide consistent right pocket and left rope loop; small clasp/hem counts require detailed pattern review.",
+          "Weather cape and base tunic shown separately; cloth finish and waterproof performance remain undefined."
+        ],
+        "version_pixel_qa": {
+          "decode": "PASS",
+          "nonblank_extrema": [
+            [
+              0,
+              255
+            ],
+            [
+              0,
+              254
+            ],
+            [
+              0,
+              251
+            ]
+          ],
+          "visual_review": "Inspected resized 1200x800 max full board; anatomy, silhouette, labels, views and garment consistency checked. Not exhaustive native-resolution tailoring validation."
+        },
+        "scope_note": "Concept observations describe selected version; older preserved version retains its documented armor issue where applicable."
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Proposed concept only. Reconcile recorded construction/anatomy inconsistencies and obtain exact-image review before detailed modeling.",
+      "full_family_coverage": false
+    },
+    {
+      "concept_id": "batch03_09_graft_orchard_worker",
+      "canonical_id": "asset-o07-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o07-i-civilian-clothing-family",
+      "oath_id": "oath-07",
+      "file": "generated/batch03_09_graft_orchard_worker.png",
+      "sha256": "d1b856a9c56e176f53a728fb624feee14905f66909ca50467868f0c52e549704",
+      "bytes": 2490251,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "selected_concept_revision": true,
+      "selection_is_approval": false,
+      "source_registry": {
+        "mount": "baseline",
+        "path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "json_pointer": "/records/326"
+      },
+      "source_references": [
+        {
+          "path": "assets/references/reference-107/original.png",
+          "mount": "baseline",
+          "sha256": "ca195ec1b5898a1130b042add577ffee846be7980518ab5d1f1d20c981a142c8",
+          "role": "Oath style/context only. Source original unchanged; some generation calls used a bounded read-only preview."
+        }
+      ],
+      "source_canon_status": "PROPOSED",
+      "actual_prompt_file": "prompts/batch03_09_graft_orchard_worker.actual-prompt.txt",
+      "actual_prompt_sha256": "7c68ff3e29f8f423fa83ce05fd0d6923bf8c2d3fc64e386363f80b513adffd43",
+      "planning_prompt_file": "planning-prompts/batch03_09_graft_orchard_worker.prompt.txt",
+      "planning_prompt_sha256": "440041cb22135f4146d106a5422c24a6d6684719130f08aaf495829626c3ffae",
+      "qa": {
+        "concept_observed_passes": [
+          "Tall cloth-based civilian differentiated from other two civilians",
+          "Opposite profiles and front/rear/three-quarter views",
+          "No living growth from body or bark armor",
+          "Apron flats, seam/pocket details, detached carrier and base garment",
+          "Noncombat orchard reach and crouch"
+        ],
+        "concept_unresolved_issues": [
+          "Carrier strap routing shown, but detachable latch geometry and actual load distribution remain unresolved.",
+          "Apron shoulder straps and produce-carrier straps overlap; independent routing requires pattern review.",
+          "Some three-quarter sheath/pouch visibility varies; anatomical side and exact pocket counts need reconciliation.",
+          "Upper garment flat back resembles a complete garment front with straps; true apron back pattern still requires clarification."
+        ],
+        "version_pixel_qa": {
+          "decode": "PASS",
+          "nonblank_extrema": [
+            [
+              0,
+              255
+            ],
+            [
+              0,
+              255
+            ],
+            [
+              0,
+              255
+            ]
+          ],
+          "visual_review": "Inspected resized 1200x800 max full board; anatomy, silhouette, labels, views and garment consistency checked. Not exhaustive native-resolution tailoring validation."
+        },
+        "scope_note": "Concept observations describe selected version; older preserved version retains its documented armor issue where applicable."
+      },
+      "review_status": "ACTUAL_PIXELS_REVIEWED_WITH_OPEN_GAPS",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Proposed concept only. Reconcile recorded construction/anatomy inconsistencies and obtain exact-image review before detailed modeling.",
+      "full_family_coverage": false
+    }
+  ]
+}
