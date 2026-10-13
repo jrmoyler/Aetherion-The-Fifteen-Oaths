@@ -1,0 +1,1374 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "world-event-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-01",
+      "region_id": "region-01",
+      "poi_id": "poi-01-event",
+      "name": "contain or redirect an eruption",
+      "trigger": "Pressure rises in authored vents",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-01-civic",
+          "role": "civilian",
+          "goal": "Cool and brace three marked vents"
+        },
+        {
+          "id": "world-event-01-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-01-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A cooled mineral pocket opens",
+      "setback_result": "A road closes temporarily; signed detour and relief service remain",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-02",
+      "region_id": "region-02",
+      "poi_id": "poi-02-event",
+      "name": "recover a failing preservation chamber",
+      "trigger": "A cold-storage regulator drifts",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-02-civic",
+          "role": "civilian",
+          "goal": "Move records and repair its coolant loop"
+        },
+        {
+          "id": "world-event-02-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-02-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A public collection becomes available",
+      "setback_result": "A collection moves to a temporary reading room",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-03",
+      "region_id": "region-03",
+      "poi_id": "poi-03-event",
+      "name": "restore a contested relay link",
+      "trigger": "A storm interrupts a tower corridor",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-03-civic",
+          "role": "civilian",
+          "goal": "Ground conductors and escort a repair crew"
+        },
+        {
+          "id": "world-event-03-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-03-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A scheduled travel link returns",
+      "setback_result": "A slower physical courier route operates",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-04",
+      "region_id": "region-04",
+      "poi_id": "poi-04-event",
+      "name": "restore an overloaded aqueduct",
+      "trigger": "An incoming tide exposes a failed sluice",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-04-civic",
+          "role": "civilian",
+          "goal": "Clear screens and operate verified gates"
+        },
+        {
+          "id": "world-event-04-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-04-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A trade lock opens",
+      "setback_result": "Ferry service and ration-free essential water persist",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-05",
+      "region_id": "region-05",
+      "poi_id": "poi-05-event",
+      "name": "stabilize a resonant fault crossing",
+      "trigger": "Survey markers signal movement",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-05-civic",
+          "role": "civilian",
+          "goal": "Tune supports and divert foot traffic"
+        },
+        {
+          "id": "world-event-05-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-05-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A safe quarry section becomes available",
+      "setback_result": "A bypass crossing opens during repair",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-06",
+      "region_id": "region-06",
+      "poi_id": "poi-06-event",
+      "name": "restore a disrupted public performance",
+      "trigger": "Wind turns the normal acoustic pattern",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-06-civic",
+          "role": "civilian",
+          "goal": "Tune three stations using sound or visual rhythm"
+        },
+        {
+          "id": "world-event-06-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-06-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A safe glide window and festival return",
+      "setback_result": "A ground route and captioned civic notices remain",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-07",
+      "region_id": "region-07",
+      "poi_id": "poi-07-event",
+      "name": "contain an expanding overgrowth",
+      "trigger": "Root growth blocks planned civic paths",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-07-civic",
+          "role": "civilian",
+          "goal": "Prune approved growth and transplant habitat"
+        },
+        {
+          "id": "world-event-07-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-07-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "Farms gain a temporary soil bonus",
+      "setback_result": "Raised paths and staple food deliveries remain",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-08",
+      "region_id": "region-08",
+      "poi_id": "poi-08-event",
+      "name": "contain a chemical-wetland spill",
+      "trigger": "Containment gauges show a leak",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-08-civic",
+          "role": "civilian",
+          "goal": "Isolate vessels and install matched filters"
+        },
+        {
+          "id": "world-event-08-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-08-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A safe reagent garden reopens",
+      "setback_result": "A protected crossing and clinic remain",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-09",
+      "region_id": "region-09",
+      "poi_id": "poi-09-event",
+      "name": "maintain a shelter during ward failure",
+      "trigger": "A public ward bank runs low",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-09-civic",
+          "role": "civilian",
+          "goal": "Triage requests and recharge visible sockets"
+        },
+        {
+          "id": "world-event-09-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-09-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A sanctuary resumes full service",
+      "setback_result": "A staffed low-power refuge remains",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-10",
+      "region_id": "region-10",
+      "poi_id": "poi-10-event",
+      "name": "recover a bounded meteor fall",
+      "trigger": "A forecast marks an empty impact basin",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-10-civic",
+          "role": "civilian",
+          "goal": "Evacuate marked areas and stabilize loose fragments"
+        },
+        {
+          "id": "world-event-10-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-10-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "Scientific samples become available",
+      "setback_result": "Fallback observatories and roads remain open",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-11",
+      "region_id": "region-11",
+      "poi_id": "poi-11-event",
+      "name": "stabilize a phasing civic passage",
+      "trigger": "An approved doorway loses alignment",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-11-civic",
+          "role": "civilian",
+          "goal": "Place anchors and route residents to fixed exits"
+        },
+        {
+          "id": "world-event-11-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-11-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A recovered wing can be explored",
+      "setback_result": "A staffed permanent registry remains",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-12",
+      "region_id": "region-12",
+      "poi_id": "poi-12-event",
+      "name": "support an exhausted voluntary rite",
+      "trigger": "A civic ritual outlasts its planned support",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-12-civic",
+          "role": "civilian",
+          "goal": "Offer goods, rest or personally consented participation"
+        },
+        {
+          "id": "world-event-12-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-12-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A community service resumes",
+      "setback_result": "Ordinary relief services continue without sacrifice",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-13",
+      "region_id": "region-13",
+      "poi_id": "poi-13-event",
+      "name": "resolve a rearranged public stage",
+      "trigger": "A civic performance misaligns its approved rooms",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-13-civic",
+          "role": "civilian",
+          "goal": "Inspect clues and restore collision-truthful modules"
+        },
+        {
+          "id": "world-event-13-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-13-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A new optional puzzle scene opens",
+      "setback_result": "Fixed exits and a conventional route persist",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-14",
+      "region_id": "region-14",
+      "poi_id": "poi-14-event",
+      "name": "resynchronize a temporal transport corridor",
+      "trigger": "A local schedule slips out of safe phase",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-14-civic",
+          "role": "civilian",
+          "goal": "Brake vehicles and align clocks using accessible cues"
+        },
+        {
+          "id": "world-event-14-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-14-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A transport service resumes",
+      "setback_result": "A ground service and safe waiting space remain",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    },
+    {
+      "id": "world-event-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-15",
+      "region_id": "region-15",
+      "poi_id": "poi-15-event",
+      "name": "rebuild a disabled infrastructure engine",
+      "trigger": "A civic actuator enters safety shutdown",
+      "server_authority": "Regional event aggregate, deterministic seed and monotonic phase revision",
+      "scope": "region",
+      "eligible_participants": "Local PvE participation; no forced PvP flag or pact acceptance",
+      "objectives": [
+        {
+          "id": "world-event-15-civic",
+          "role": "civilian",
+          "goal": "Deliver components and reset approved modules"
+        },
+        {
+          "id": "world-event-15-combat",
+          "role": "combat",
+          "goal": "Protect consenting workers from authored encounter threats; noncombat route remains viable"
+        },
+        {
+          "id": "world-event-15-survey",
+          "role": "exploration",
+          "goal": "Mark safe paths and inspect three authored diagnostic points"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "transition": "Server scheduled threshold; public text/icon notice"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "transition": "Protected volumes and evacuation routes confirmed"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "transition": "Objective threshold met or fixed deadline"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "transition": "Exactly one success or setback receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "transition": "Baseline essential services guaranteed; contributions can shorten cosmetic repair"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "transition": "Reset event budget; ecological baseline restored"
+        }
+      ],
+      "duration_status": "PROPOSED_UNVALIDATED_FIXTURE",
+      "success_result": "A public industrial service resumes",
+      "setback_result": "Manual service and protected pedestrian paths remain",
+      "reward_rule": "Contribution across combat, craft and survey categories; idempotent per-event reward, no last-hit monopoly",
+      "resource_effect": "Temporary bounded production modifier; no permanent node exhaustion",
+      "ecology_effect": "Authored population/habitat presentation changes recover to baseline",
+      "infrastructure_effect": "Only whitelisted segments; alternate route and essential service floor remain",
+      "npc_effect": "Named NPCs relocate to signed refuge positions, never disappear irrecoverably",
+      "housing_effect": "Cosmetic exterior overlays only; access and storage retained",
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Lower objective burden to tested minimum, then guaranteed reconstruction at deadline",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1781 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "recipe-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Temper civic components",
+      "region_id": "region-01",
+      "oath_id": "oath-01",
+      "profession_id": "profession-01-a",
+      "station": {
+        "capability_id": "station-capability-01",
+        "name": "furnace and rated quench basin",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-01",
+        "name": "ore and recoverable metal stock",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-05",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-05",
+          "flow_id": "flow-05-01",
+          "route": [
+            "region-05",
+            "region-01"
+          ],
+          "fallback_route": [
+            "region-05",
+            "region-02",
+            "region-01"
+          ],
+          "consumption_role": "Stone molds and preserved quench reagents"
+        },
+        {
+          "resource_id": "resource-02",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-02",
+          "flow_id": "flow-02-01",
+          "route": [
+            "region-02",
+            "region-01"
+          ],
+          "fallback_route": [
+            "region-02",
+            "region-05",
+            "region-01"
+          ],
+          "consumption_role": "Stone molds and preserved quench reagents"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-01",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "tempered components",
+        "use": "Replacement tools, structural fasteners and safe heating hardware",
+        "quality": "standard",
+        "consumers": [
+          "recipe-02",
+          "recipe-05"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-01",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-01",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-01",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Preserve reference reagents",
+      "region_id": "region-02",
+      "oath_id": "oath-02",
+      "profession_id": "profession-02-a",
+      "station": {
+        "capability_id": "station-capability-02",
+        "name": "insulated preservation cabinet",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-02",
+        "name": "renewable cold salts and collected specimen medium",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-01",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-01",
+          "flow_id": "flow-01-02",
+          "route": [
+            "region-01",
+            "region-02"
+          ],
+          "fallback_route": [
+            "region-01",
+            "region-05",
+            "region-02"
+          ],
+          "consumption_role": "Metal storage fittings and monitored cooling conductors"
+        },
+        {
+          "resource_id": "resource-03",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-03",
+          "flow_id": "flow-03-02",
+          "route": [
+            "region-03",
+            "region-02"
+          ],
+          "fallback_route": [
+            "region-03",
+            "region-05",
+            "region-02"
+          ],
+          "consumption_role": "Metal storage fittings and monitored cooling conductors"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-02",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "preserved reagents",
+        "use": "Cold-chain research and archive conservation",
+        "quality": "standard",
+        "consumers": [
+          "recipe-01"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-02",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-02",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-02",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Assemble relay conductors",
+      "region_id": "region-03",
+      "oath_id": "oath-03",
+      "profession_id": "profession-03-a",
+      "station": {
+        "capability_id": "station-capability-03",
+        "name": "grounded relay bench",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-03",
+        "name": "conductive mineral stock",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-05",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-05",
+          "flow_id": "flow-05-03",
+          "route": [
+            "region-05",
+            "region-03"
+          ],
+          "fallback_route": [
+            "region-05",
+            "region-02",
+            "region-03"
+          ],
+          "consumption_role": "Tuned-crystal contacts and woven weather shielding"
+        },
+        {
+          "resource_id": "resource-06",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-06",
+          "flow_id": "flow-06-03",
+          "route": [
+            "region-06",
+            "region-03"
+          ],
+          "fallback_route": [
+            "region-06",
+            "region-09",
+            "region-03"
+          ],
+          "consumption_role": "Tuned-crystal contacts and woven weather shielding"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-03",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "relay conductors",
+        "use": "Communications links and rated electrical repairs",
+        "quality": "standard",
+        "consumers": [
+          "recipe-02",
+          "recipe-06"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-03",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-03",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-03",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Treat aqueduct supply",
+      "region_id": "region-04",
+      "oath_id": "oath-04",
+      "profession_id": "profession-04-a",
+      "station": {
+        "capability_id": "station-capability-04",
+        "name": "screened basin and treatment station",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-04",
+        "name": "collected raw water and marine fiber",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-07",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-07",
+          "flow_id": "flow-07-04",
+          "route": [
+            "region-07",
+            "region-04"
+          ],
+          "fallback_route": [
+            "region-07",
+            "region-08",
+            "region-04"
+          ],
+          "consumption_role": "Cultivated filter fiber and tested filter media"
+        },
+        {
+          "resource_id": "resource-08",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-08",
+          "flow_id": "flow-08-04",
+          "route": [
+            "region-08",
+            "region-04"
+          ],
+          "fallback_route": [
+            "region-08",
+            "region-07",
+            "region-04"
+          ],
+          "consumption_role": "Cultivated filter fiber and tested filter media"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-04",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "treated water and marine fiber",
+        "use": "Sanitation, irrigation and hydraulic maintenance",
+        "quality": "standard",
+        "consumers": [
+          "recipe-07",
+          "recipe-08"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-04",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-04",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-04",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Cut structural mineral kits",
+      "region_id": "region-05",
+      "oath_id": "oath-05",
+      "profession_id": "profession-05-a",
+      "station": {
+        "capability_id": "station-capability-05",
+        "name": "braced stonecutting and tuning bench",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-05",
+        "name": "quarried renewable-allotment stone and crystal",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-01",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-01",
+          "flow_id": "flow-01-05",
+          "route": [
+            "region-01",
+            "region-05"
+          ],
+          "fallback_route": [
+            "region-01",
+            "region-02",
+            "region-05"
+          ],
+          "consumption_role": "Tempered cutting edges and captured-dust filter media"
+        },
+        {
+          "resource_id": "resource-08",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-08",
+          "flow_id": "flow-08-05",
+          "route": [
+            "region-08",
+            "region-05"
+          ],
+          "fallback_route": [
+            "region-08",
+            "region-07",
+            "region-05"
+          ],
+          "consumption_role": "Tempered cutting edges and captured-dust filter media"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-05",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "structural stone and tuned crystal",
+        "use": "Bridge supports, lenses and stable foundations",
+        "quality": "standard",
+        "consumers": [
+          "recipe-01",
+          "recipe-03",
+          "recipe-08",
+          "recipe-09"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-05",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-05",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-05",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Weave acoustic and sail kits",
+      "region_id": "region-06",
+      "oath_id": "oath-06",
+      "profession_id": "profession-06-a",
+      "station": {
+        "capability_id": "station-capability-06",
+        "name": "loom and acoustic tuning frame",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-06",
+        "name": "harvested reed and sail fiber",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-03",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-03",
+          "flow_id": "flow-03-06",
+          "route": [
+            "region-03",
+            "region-06"
+          ],
+          "fallback_route": [
+            "region-03",
+            "region-09",
+            "region-06"
+          ],
+          "consumption_role": "Conductive instrument fittings and ward-safe indicator lenses"
+        },
+        {
+          "resource_id": "resource-09",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-09",
+          "flow_id": "flow-09-06",
+          "route": [
+            "region-09",
+            "region-06"
+          ],
+          "fallback_route": [
+            "region-09",
+            "region-03",
+            "region-06"
+          ],
+          "consumption_role": "Conductive instrument fittings and ward-safe indicator lenses"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-06",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "acoustic reeds and sailcloth",
+        "use": "Public warning instruments and glider sail repair",
+        "quality": "standard",
+        "consumers": [
+          "recipe-03",
+          "recipe-10"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-06",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-06",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-06",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Cultivate food and fiber lots",
+      "region_id": "region-07",
+      "oath_id": "oath-07",
+      "profession_id": "profession-07-a",
+      "station": {
+        "capability_id": "station-capability-07",
+        "name": "cultivation bed with drainage",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-07",
+        "name": "seed stock and regenerated soil nutrients",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-04",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-04",
+          "flow_id": "flow-04-07",
+          "route": [
+            "region-04",
+            "region-07"
+          ],
+          "fallback_route": [
+            "region-04",
+            "region-08",
+            "region-07"
+          ],
+          "consumption_role": "Treated irrigation water and crop-safe tested media"
+        },
+        {
+          "resource_id": "resource-08",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-08",
+          "flow_id": "flow-08-07",
+          "route": [
+            "region-08",
+            "region-07"
+          ],
+          "fallback_route": [
+            "region-08",
+            "region-04",
+            "region-07"
+          ],
+          "consumption_role": "Treated irrigation water and crop-safe tested media"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-07",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "cultivated fiber and food",
+        "use": "Staple provisioning and renewable craft fiber",
+        "quality": "standard",
+        "consumers": [
+          "recipe-04"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-07",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-07",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-07",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Formulate filters and antidotes",
+      "region_id": "region-08",
+      "oath_id": "oath-08",
+      "profession_id": "profession-08-a",
+      "station": {
+        "capability_id": "station-capability-08",
+        "name": "sealed laboratory and recovery sink",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-08",
+        "name": "cultivated reagent precursors",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-04",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-04",
+          "flow_id": "flow-04-08",
+          "route": [
+            "region-04",
+            "region-08"
+          ],
+          "fallback_route": [
+            "region-04",
+            "region-07",
+            "region-08"
+          ],
+          "consumption_role": "Clean process water and mineral adsorbent substrate"
+        },
+        {
+          "resource_id": "resource-05",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-05",
+          "flow_id": "flow-05-08",
+          "route": [
+            "region-05",
+            "region-08"
+          ],
+          "fallback_route": [
+            "region-05",
+            "region-07",
+            "region-08"
+          ],
+          "consumption_role": "Clean process water and mineral adsorbent substrate"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-08",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "antidotes and filter media",
+        "use": "Labeled treatment supplies and environmental cleanup",
+        "quality": "standard",
+        "consumers": [
+          "recipe-04",
+          "recipe-05",
+          "recipe-07",
+          "recipe-12"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-08",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-08",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-08",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Assemble ward and relief kits",
+      "region_id": "region-09",
+      "oath_id": "oath-09",
+      "profession_id": "profession-09-a",
+      "station": {
+        "capability_id": "station-capability-09",
+        "name": "shielded optical and relief bench",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-09",
+        "name": "sun-worked metal blanks and clean packaging",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-05",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-05",
+          "flow_id": "flow-05-09",
+          "route": [
+            "region-05",
+            "region-09"
+          ],
+          "fallback_route": [
+            "region-05",
+            "region-03",
+            "region-09"
+          ],
+          "consumption_role": "Tuned crystal lenses and voluntary recovery implements"
+        },
+        {
+          "resource_id": "resource-12",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-12",
+          "flow_id": "flow-12-09",
+          "route": [
+            "region-12",
+            "region-09"
+          ],
+          "fallback_route": [
+            "region-12",
+            "region-08",
+            "region-09"
+          ],
+          "consumption_role": "Tuned crystal lenses and voluntary recovery implements"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-09",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "ward lenses and recovery supplies",
+        "use": "Public shelter protection and recovery stations",
+        "quality": "standard",
+        "consumers": [
+          "recipe-06",
+          "recipe-12"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-09",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-09",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-09",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Calibrate navigation instruments",
+      "region_id": "region-10",
+      "oath_id": "oath-10",
+      "profession_id": "profession-10-a",
+      "station": {
+        "capability_id": "station-capability-10",
+        "name": "anchored observatory calibration frame",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-10",
+        "name": "survey records and local precision blanks",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-06",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-06",
+          "flow_id": "flow-06-10",
+          "route": [
+            "region-06",
+            "region-10"
+          ],
+          "fallback_route": [
+            "region-06",
+            "region-13",
+            "region-10"
+          ],
+          "consumption_role": "Stable suspension rigging and mirror fittings"
+        },
+        {
+          "resource_id": "resource-13",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-13",
+          "flow_id": "flow-13-10",
+          "route": [
+            "region-13",
+            "region-10"
+          ],
+          "fallback_route": [
+            "region-13",
+            "region-06",
+            "region-10"
+          ],
+          "consumption_role": "Stable suspension rigging and mirror fittings"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-10",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "navigation tables and balanced instruments",
+        "use": "Celestial route tables and balanced survey instruments",
+        "quality": "standard",
+        "consumers": [
+          "recipe-13"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-10",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-10",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-10",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Assemble secure record housings",
+      "region_id": "region-11",
+      "oath_id": "oath-11",
+      "profession_id": "profession-11-a",
+      "station": {
+        "capability_id": "station-capability-11",
+        "name": "phase-stable custody workbench",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-11",
+        "name": "locally made archival sheets and case blanks",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-13",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-13",
+          "flow_id": "flow-13-11",
+          "route": [
+            "region-13",
+            "region-11"
+          ],
+          "fallback_route": [
+            "region-13",
+            "region-10",
+            "region-11"
+          ],
+          "consumption_role": "Inspectable privacy panels and mechanical sealing actuators"
+        },
+        {
+          "resource_id": "resource-15",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-15",
+          "flow_id": "flow-15-11",
+          "route": [
+            "region-15",
+            "region-11"
+          ],
+          "fallback_route": [
+            "region-15",
+            "region-14",
+            "region-11"
+          ],
+          "consumption_role": "Inspectable privacy panels and mechanical sealing actuators"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-11",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "sealed records and privacy screens",
+        "use": "Private record custody and accountable transport seals",
+        "quality": "standard",
+        "consumers": [
+          "recipe-15"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-11",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-11",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-11",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Make voluntary ritual implements",
+      "region_id": "region-12",
+      "oath_id": "oath-12",
+      "profession_id": "profession-12-a",
+      "station": {
+        "capability_id": "station-capability-12",
+        "name": "consent-labeled ritual craft station",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-12",
+        "name": "ceramic blanks, pigments and clean textile stock",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-08",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-08",
+          "flow_id": "flow-08-12",
+          "route": [
+            "region-08",
+            "region-12"
+          ],
+          "fallback_route": [
+            "region-08",
+            "region-09",
+            "region-12"
+          ],
+          "consumption_role": "Verified treatment supplies and recovery-kit components"
+        },
+        {
+          "resource_id": "resource-09",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-09",
+          "flow_id": "flow-09-12",
+          "route": [
+            "region-09",
+            "region-12"
+          ],
+          "fallback_route": [
+            "region-09",
+            "region-08",
+            "region-12"
+          ],
+          "consumption_role": "Verified treatment supplies and recovery-kit components"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-12",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "consensual ritual implements",
+        "use": "Voluntary ceremonies and safe personal recovery",
+        "quality": "standard",
+        "consumers": [
+          "recipe-09"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-12",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-12",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-12",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Build projection stage panels",
+      "region_id": "region-13",
+      "oath_id": "oath-13",
+      "profession_id": "profession-13-a",
+      "station": {
+        "capability_id": "station-capability-13",
+        "name": "optical stage assembly bench",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-13",
+        "name": "glass blanks and authored stage patterns",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-10",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-10",
+          "flow_id": "flow-10-13",
+          "route": [
+            "region-10",
+            "region-13"
+          ],
+          "fallback_route": [
+            "region-10",
+            "region-06",
+            "region-13"
+          ],
+          "consumption_role": "Calibrated optics and timing regulators"
+        },
+        {
+          "resource_id": "resource-14",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-14",
+          "flow_id": "flow-14-13",
+          "route": [
+            "region-14",
+            "region-13"
+          ],
+          "fallback_route": [
+            "region-14",
+            "region-11",
+            "region-13"
+          ],
+          "consumption_role": "Calibrated optics and timing regulators"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-13",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "projection panels and mirror fittings",
+        "use": "Readable civic performances and puzzle teaching scenes",
+        "quality": "standard",
+        "consumers": [
+          "recipe-10",
+          "recipe-11",
+          "recipe-14"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-13",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-13",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-13",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Assemble timing and transport fittings",
+      "region_id": "region-14",
+      "oath_id": "oath-14",
+      "profession_id": "profession-14-a",
+      "station": {
+        "capability_id": "station-capability-14",
+        "name": "braked precision motion bench",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-14",
+        "name": "gear blanks and renewable-allotment lubricants",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-13",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-13",
+          "flow_id": "flow-13-14",
+          "route": [
+            "region-13",
+            "region-14"
+          ],
+          "fallback_route": [
+            "region-13",
+            "region-11",
+            "region-14"
+          ],
+          "consumption_role": "Optical timing marks and rated actuators"
+        },
+        {
+          "resource_id": "resource-15",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-15",
+          "flow_id": "flow-15-14",
+          "route": [
+            "region-15",
+            "region-14"
+          ],
+          "fallback_route": [
+            "region-15",
+            "region-11",
+            "region-14"
+          ],
+          "consumption_role": "Optical timing marks and rated actuators"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-14",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "timing regulators and transport fittings",
+        "use": "Safe vehicles, clocks and scheduled industrial gates",
+        "quality": "standard",
+        "consumers": [
+          "recipe-13",
+          "recipe-15"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-14",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-14",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-14",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    },
+    {
+      "id": "recipe-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Build modular civic actuators",
+      "region_id": "region-15",
+      "oath_id": "oath-15",
+      "profession_id": "profession-15-a",
+      "station": {
+        "capability_id": "station-capability-15",
+        "name": "locked-out mechanical assembly cell",
+        "asset_status": "REQUIRED_NOT_IMPLEMENTED"
+      },
+      "local_raw_input": {
+        "id": "raw-resource-15",
+        "name": "recovered metal blanks and force-rated bearings",
+        "quantity": 2,
+        "unit": "authored_raw_bundle",
+        "source": "Renewable authored gathering allotment, salvage or locally produced base stock; not created by another refined recipe",
+        "renewal_policy": "Region quota and ecology service floor; never permanent exhaustion"
+      },
+      "imported_inputs": [
+        {
+          "resource_id": "resource-11",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-11",
+          "flow_id": "flow-11-15",
+          "route": [
+            "region-11",
+            "region-15"
+          ],
+          "fallback_route": [
+            "region-11",
+            "region-14",
+            "region-15"
+          ],
+          "consumption_role": "Accountable control housings and timing regulators"
+        },
+        {
+          "resource_id": "resource-14",
+          "quantity": 1,
+          "unit": "authored_trade_bundle",
+          "supplier_region_id": "region-14",
+          "flow_id": "flow-14-15",
+          "route": [
+            "region-14",
+            "region-15"
+          ],
+          "fallback_route": [
+            "region-14",
+            "region-11",
+            "region-15"
+          ],
+          "consumption_role": "Accountable control housings and timing regulators"
+        }
+      ],
+      "labor": {
+        "objectives": 3,
+        "description": "Inspect inputs, perform the domain craft choice, verify labeled output",
+        "mastery_rule": "Meaningful quality checks; repeated idle execution does not grant full mastery"
+      },
+      "output": {
+        "resource_id": "resource-15",
+        "quantity": 4,
+        "unit": "authored_trade_bundle",
+        "name": "actuators and modular fasteners",
+        "use": "Pumps, accessible lifts and reconstruction equipment",
+        "quality": "standard",
+        "consumers": [
+          "recipe-11",
+          "recipe-14"
+        ]
+      },
+      "byproduct": {
+        "type": "recoverable_scrap",
+        "quantity": 1,
+        "rule": "Non-trade-grade salvage; cannot replace imported inputs at full yield"
+      },
+      "failure_floor": {
+        "salvage_raw_bundles": 1,
+        "refined_output": 0,
+        "explanation": "One local bundle salvage on precommit failed quality check; imported reservations release until process commitment"
+      },
+      "fallback": {
+        "id": "fallback-recipe-15",
+        "trigger": "Startup seed stock, essential-service shortage or a route outage",
+        "inputs": [
+          {
+            "resource_id": "raw-resource-15",
+            "quantity": 3
+          }
+        ],
+        "labor_objectives": 5,
+        "output_resource_id": "resource-15",
+        "output_quantity": 1,
+        "quality": "essential_service_grade",
+        "restriction": "Bound to its essential civic use; non-tradable and ineligible as another standard recipe input",
+        "purpose": "Guarantees baseline service while normal higher-yield trade remains worthwhile"
+      },
+      "bootstrap": {
+        "mechanism": "Authored finite NPC opening stock of standard bundles permits the first trade cycle",
+        "quantity_per_active_region_fixture": 12,
+        "replenishment": "Only budgeted civic commissions consuming local raw stock; never a zero-input repeatable reward",
+        "status": "PROPOSED_UNVALIDATED"
+      },
+      "fixture_status": "All quantities are unbalanced prototype fixtures, not production economy tuning",
+      "transaction_contract_id": "contract-trade-crafting",
+      "acceptance_tests": [
+        "Declared foreign suppliers are neighboring reachable regions",
+        "Every imported resource resolves to another recipe output",
+        "Fallback can restore essential service without imported stock",
+        "Fallback output cannot feed a zero-input or sale-profit loop",
+        "Standard output requires local raw stock and labor on every cycle"
+      ]
+    }
+  ],
+  "cycle_policy": "Refined trade dependencies intentionally interlock; bootstrap stock and local-raw fallback prevent deadlock. Every production cycle consumes exogenous renewable raw inputs and labor. This is not a zero-input recipe DAG.",
+  "quantity_policy": "Trade bundles are recipe-specific units, not equivalent masses or currency. Quantities require simulation and playtesting."
+}

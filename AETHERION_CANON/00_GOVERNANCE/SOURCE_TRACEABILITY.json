@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "RECOVERED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE"
+  ],
+  "records": [
+    {
+      "id": "SRC-USER-DIRECTIVE",
+      "title": "Aetherion master world canon and repository initialization directive",
+      "source_type": "authenticated_user_message",
+      "location": "private identifier withheld",
+      "accessibility": "Owner conversation; faithful extraction included",
+      "verification_status": "READ_IN_CURRENT_CONVERSATION",
+      "canon_status": "LOCKED",
+      "scope": "Foundational names, premise, production requirements and repository boundaries; not approval of later proposals"
+    },
+    {
+      "id": "SRC-USER-REFERENCE-LOCATION",
+      "title": "Owner identifies Aetherion project references",
+      "source_type": "authenticated_user_message",
+      "location": "private identifier withheld",
+      "accessibility": "Owner conversation",
+      "verification_status": "READ_IN_CURRENT_CONVERSATION",
+      "canon_status": "LOCKED",
+      "scope": "Project reference provenance; not topology, rig or runtime validation"
+    },
+    {
+      "id": "SRC-RECOVERED-LORE",
+      "title": "Aetherion Asset Strategy — user-authored world overview",
+      "source_type": "prior_user_message",
+      "location": "Private-source locator withheld; owner-side evidence retained.",
+      "accessibility": "Owner-private conversation; project excerpt recovered",
+      "verification_status": "TEXT_INSPECTED",
+      "canon_status": "RECOVERED",
+      "scope": "Conceptual direction; no implementation claim"
+    },
+    {
+      "id": "SRC-ABILITY-MATRIX-4c4a1eb",
+      "title": "Ability-Matrix pinned source snapshot",
+      "source_type": "git_commit",
+      "location": "https://github.com/jrmoyler/Ability-Matrix/tree/4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451",
+      "accessibility": "Repository access required if visibility changes",
+      "verification_status": "SOURCE_INSPECTED",
+      "canon_status": "RECOVERED",
+      "scope": "Existing source implementation, schemas and assets; applicable execution evidence is separate"
+    },
+    {
+      "id": "SRC-AETHERION-EMPTY",
+      "title": "Aetherion initial repository inspection",
+      "source_type": "repository_inspection",
+      "location": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths",
+      "accessibility": "Repository",
+      "verification_status": "EMPTY_REPOSITORY_CONFIRMED",
+      "canon_status": "RECOVERED",
+      "scope": "No existing castables, canon or base commit before this authorized initialization"
+    },
+    {
+      "id": "SRC-WORLD-PROPOSAL",
+      "title": "World foundation design proposal 0.1.0",
+      "source_type": "new_authored_proposal",
+      "location": "AETHERION_CANON/world discipline documents",
+      "accessibility": "Included in this package",
+      "verification_status": "AUTHORED_NOT_FOUNDER_APPROVED",
+      "canon_status": "PROPOSED",
+      "scope": "Design origin only; does not establish owner approval or implementation"
+    },
+    {
+      "id": "SRC-SYSTEMS-PROPOSAL",
+      "title": "Systems foundation design proposal 0.1.0",
+      "source_type": "new_authored_proposal",
+      "location": "AETHERION_CANON/systems discipline documents",
+      "accessibility": "Included in this package",
+      "verification_status": "AUTHORED_NOT_FOUNDER_APPROVED",
+      "canon_status": "PROPOSED",
+      "scope": "Design origin only; does not establish owner approval or implementation"
+    },
+    {
+      "id": "SRC-ASSET-PROPOSAL",
+      "title": "Asset foundation design proposal 0.1.0",
+      "source_type": "new_authored_proposal",
+      "location": "AETHERION_CANON/asset discipline documents",
+      "accessibility": "Included in this package",
+      "verification_status": "AUTHORED_NOT_FOUNDER_APPROVED",
+      "canon_status": "PROPOSED",
+      "scope": "Design origin only; does not establish owner approval or implementation"
+    },
+    {
+      "id": "SRC-GOVERNANCE-PROPOSAL",
+      "title": "Governance foundation design proposal 0.1.0",
+      "source_type": "new_authored_proposal",
+      "location": "AETHERION_CANON/governance discipline documents",
+      "accessibility": "Included in this package",
+      "verification_status": "AUTHORED_NOT_FOUNDER_APPROVED",
+      "canon_status": "PROPOSED",
+      "scope": "Design origin only; does not establish owner approval or implementation"
+    },
+    {
+      "id": "SRC-PUBLIC-REFERENCE-APPROVAL",
+      "title": "Owner approves publication of 114 project reference images to public Aetherion PR",
+      "source_type": "authenticated_user_message",
+      "location": "private identifier withheld",
+      "accessibility": "Owner conversation; approval scope recorded here",
+      "verification_status": "READ_IN_CURRENT_CONVERSATION",
+      "canon_status": "LOCKED",
+      "scope": "Permission to publish all 114 references publicly only; does not approve final-production art or merging"
+    }
+  ]
+}

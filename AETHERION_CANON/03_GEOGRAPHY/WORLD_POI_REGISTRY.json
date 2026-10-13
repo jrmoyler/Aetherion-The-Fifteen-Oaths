@@ -1,0 +1,1211 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "poi-01-capital",
+      "name": "Cindervault",
+      "kind": "capital",
+      "region_id": "region-01",
+      "oath_id": "oath-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Cindervault occupies terraces on an old caldera rim, never an active lava lake. Civic cisterns and outward evacuation roads make its volcanic grandeur physically legible and expose unequal access to safe elevation.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-01-settlement",
+      "name": "Ashbridge",
+      "kind": "settlement",
+      "region_id": "region-01",
+      "oath_id": "oath-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Ashbridge sits on a cooled causeway between cropland and foundries. Its night market repairs imported tools, while farms beyond the bridge negotiate smoke days instead of existing as an industrial backdrop.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-01-dungeon",
+      "name": "The Quench Below",
+      "kind": "dungeon",
+      "region_id": "region-01",
+      "oath_id": "oath-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Quench Below is a maintenance complex beneath the rim, with flooded galleries, inactive kilns and contested evidence of diverted safety funds. Its exit remains reachable without equipping a water or fire Oath.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-01-event",
+      "name": "Cindervault service catchment",
+      "kind": "event",
+      "region_id": "region-01",
+      "oath_id": "oath-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A caldera-pressure event asks players to clear vents, move residents and choose a temporary spillway. Combat, engineering and civilian transport contribute separately; failure triggers recoverable road damage and relief work, not erased homes.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-02-capital",
+      "name": "Stillfolio",
+      "kind": "capital",
+      "region_id": "region-02",
+      "oath_id": "oath-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Stillfolio terraces into a sheltered glacial valley on rock foundations. Libraries bridge around ice movement instead of assuming glaciers are permanent bedrock; evacuation stacks can be moved before a shelf becomes unsafe.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-02-settlement",
+      "name": "Meltgate",
+      "kind": "settlement",
+      "region_id": "region-02",
+      "oath_id": "oath-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Meltgate is a seasonal exchange town where cold storage meets the warmer valley. It translates catalogues into common trade speech and gives non-archivists a place to challenge access decisions.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-02-dungeon",
+      "name": "The Uncatalogued Vault",
+      "kind": "dungeon",
+      "region_id": "region-02",
+      "oath_id": "oath-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Uncatalogued Vault stores material excluded from the public index, including conflicting Fracture testimony. It is an investigative dungeon with transport and containment encounters, not a room containing a single unquestionable exposition tablet.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-02-event",
+      "name": "Stillfolio service catchment",
+      "kind": "event",
+      "region_id": "region-02",
+      "oath_id": "oath-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A thaw-front event rescues residents and moves collections before an ice shelf breaks. Choosing which copies travel first changes available research services temporarily; originals have recovery quests rather than undocumented permanent deletion.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-03-capital",
+      "name": "Crownspan",
+      "kind": "capital",
+      "region_id": "region-03",
+      "oath_id": "oath-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Crownspan straddles several mountain saddles connected by protected cableways. Public squares sit away from discharge paths; dramatic suspended relay galleries are serviced from stable anchor towers and sheltered evacuation stairs.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-03-settlement",
+      "name": "Grounding Reach",
+      "kind": "settlement",
+      "region_id": "region-03",
+      "oath_id": "oath-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Grounding Reach is a pass town with low-tech message houses beside high-energy stations. Its paper couriers remain useful during storms, making fallback infrastructure a lived economy rather than an unexplained game menu.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-03-dungeon",
+      "name": "The Silent Junction",
+      "kind": "dungeon",
+      "region_id": "region-03",
+      "oath_id": "oath-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Silent Junction contains abandoned routing decks and an occupied repair refuge. Evidence shows a deliberate blackout disguised as storm damage, but identifying its sponsor requires corroboration outside the dungeon.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-03-event",
+      "name": "Crownspan service catchment",
+      "kind": "event",
+      "region_id": "region-03",
+      "oath_id": "oath-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A storm-front event divides work among grounding, evacuation and message relay. Players can restore a high-throughput trunk or resilient local meshes; both recover essential warnings but leave different commercial and political outcomes.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-04-capital",
+      "name": "Confluence Quay",
+      "kind": "capital",
+      "region_id": "region-04",
+      "oath_id": "oath-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Confluence Quay is a mainland estuary city with shore-attached reef districts and navigable canals. Reef-city imagery never creates disconnected realm islands; occupied reefs connect by maintained causeways and accessible ferries.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-04-settlement",
+      "name": "Brackensluice",
+      "kind": "settlement",
+      "region_id": "region-04",
+      "oath_id": "oath-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Brackensluice sits where fresh and salt water mix, protected by staged gates rather than a single miraculous wall. Its residents know how upstream choices alter fishing, crops and foundation stability.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-04-dungeon",
+      "name": "The Undertide Ledger",
+      "kind": "dungeon",
+      "region_id": "region-04",
+      "oath_id": "oath-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Undertide Ledger combines submerged service halls with archives of relief contracts. Air refuges and non-swimming alternatives preserve access; recovered water VFX do not establish underwater locomotion as implemented.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-04-event",
+      "name": "Confluence Quay service catchment",
+      "kind": "event",
+      "region_id": "region-04",
+      "oath_id": "oath-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A salt-front event threatens freshwater intakes. Players relocate nurseries, repair gates and negotiate temporary use reductions; successful defenses can differ without permanently draining another realm or removing its core services.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-05-capital",
+      "name": "Keystone Hall",
+      "kind": "capital",
+      "region_id": "region-05",
+      "oath_id": "oath-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Keystone Hall occupies a broad canyon shoulder anchored to surveyed bedrock. Deep chambers are civic workspaces, not an excuse to remove ventilation, drainage, emergency exits or accessible vertical transport.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-05-settlement",
+      "name": "Talus Steps",
+      "kind": "settlement",
+      "region_id": "region-05",
+      "oath_id": "oath-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Talus Steps is a movable terrace settlement outside old canyon walls. Its modular houses embarrass traditional elites but offer a practical model for living with unstable geology instead of pretending all movement is failure.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-05-dungeon",
+      "name": "The Counterweight Halls",
+      "kind": "dungeon",
+      "region_id": "region-05",
+      "oath_id": "oath-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Counterweight Halls combine old civic machinery, worker shelters and evidence of manipulated surveys. Several traversal solutions support different first Oaths and a tool-only route, so Earth allegiance is never the entrance key.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-05-event",
+      "name": "Keystone Hall service catchment",
+      "kind": "event",
+      "region_id": "region-05",
+      "oath_id": "oath-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A terrace-settlement event stabilizes foundations, moves goods and opens relief paths. Choices prioritize different services, but protected core access returns through reconstruction even if the most prestigious hall cannot be saved.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-06-capital",
+      "name": "Cantilever",
+      "kind": "capital",
+      "region_id": "region-06",
+      "oath_id": "oath-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Cantilever occupies a broad escarpment with windbreak courts and grounded accessible routes. Suspended stages and bridges dramatize exposure, but essential services always have sheltered paths for people unable or unwilling to glide.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-06-settlement",
+      "name": "Hush Vale",
+      "kind": "settlement",
+      "region_id": "region-06",
+      "oath_id": "oath-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Hush Vale lies in a sheltered notch where residents cultivate quiet crafts and rest. It supplies counterweights and textiles to the cliffs, while refusing the capital's expectation that every civic gathering be musical.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-06-dungeon",
+      "name": "The Muted Amphitheatre",
+      "kind": "dungeon",
+      "region_id": "region-06",
+      "oath_id": "oath-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Muted Amphitheatre contains blocked testimony channels, maintenance galleries and occupied refuge stages. Players reconstruct several viewpoints and restore accessible communication before confronting the authority that ordered the silence.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-06-event",
+      "name": "Cantilever service catchment",
+      "kind": "event",
+      "region_id": "region-06",
+      "oath_id": "oath-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A crosswind gathering event replaces a canceled festival with a rescue and rebuilding effort. Players direct traffic, secure bridges and preserve displaced performers' livelihoods; music is an optional contribution rather than a rhythm-game gate.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-07-capital",
+      "name": "Rootmeet",
+      "kind": "capital",
+      "region_id": "region-07",
+      "oath_id": "oath-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Rootmeet grows around several connected mature trees with inspectable structural supports and ground-level services. Living bridges have dormant-season backups; sap flow and canopy light place real limits on expansion.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-07-settlement",
+      "name": "Gleaning Margin",
+      "kind": "settlement",
+      "region_id": "region-07",
+      "oath_id": "oath-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Gleaning Margin is a mixed farm town at the forest edge with open commons and private plots. It tests whether an independent household can receive emergency care without surrendering long-term control over its land.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-07-dungeon",
+      "name": "The Common Root",
+      "kind": "dungeon",
+      "region_id": "region-07",
+      "oath_id": "oath-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Common Root is an occupied maintenance network beneath the capital, combining care wards, seed vaults and disputed control junctions. The central question is who may disconnect, not whether all shared infrastructure should die.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-07-event",
+      "name": "Rootmeet service catchment",
+      "kind": "event",
+      "region_id": "region-07",
+      "oath_id": "oath-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "An overgrowth event asks players to prune escape routes, relocate animals and preserve food-bearing sections. Success creates several viable recovery landscapes; burning everything may be fast but requires costly soil and habitat repair.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-08-capital",
+      "name": "Vitrial",
+      "kind": "capital",
+      "region_id": "region-08",
+      "oath_id": "oath-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Vitrial combines sealed greenhouse districts with open civic air corridors. Vent stacks, wash stations and independent sampling kiosks are visible civic infrastructure, preventing the poison realm from becoming an implausibly uninhabitable toxic city.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-08-settlement",
+      "name": "Clearfen",
+      "kind": "settlement",
+      "region_id": "region-08",
+      "oath_id": "oath-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Clearfen is a treatment town where clean channels and contaminated channels are physically separated and labeled. Its workers want economic security without concealing the fact that their health and land bear regional costs.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-08-dungeon",
+      "name": "The Sealed Distillatory",
+      "kind": "dungeon",
+      "region_id": "region-08",
+      "oath_id": "oath-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Sealed Distillatory is a compartmentalized plant with protected worker refuges and hidden dependency contracts. Its evidence reveals who benefited from a preventable shortage, while combat remains spatially readable through haze.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-08-event",
+      "name": "Vitrial service catchment",
+      "kind": "event",
+      "region_id": "region-08",
+      "oath_id": "oath-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A containment-breach event separates source control, evacuation, sampling and cleanup. The public receives plain-language uncertainty updates, and recovery is staged so a region cannot remain permanently toxic after a failed server event.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-09-capital",
+      "name": "Aureate Steps",
+      "kind": "capital",
+      "region_id": "region-09",
+      "oath_id": "oath-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Aureate Steps is the PROPOSED name for Daybreak's capital, not a recovered name. Its great plaza and the Archivist's death there are LOCKED; the exact stair geometry, districts and urban name await approval.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-09-settlement",
+      "name": "Lantern Ward",
+      "kind": "settlement",
+      "region_id": "region-09",
+      "oath_id": "oath-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Lantern Ward is a mixed refuge district outside the monumental center. Residents benefit from sanctuary but challenge identity checks and curfews that make temporary protection feel like permanent supervision.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-09-dungeon",
+      "name": "The Chamber of Appeals",
+      "kind": "dungeon",
+      "region_id": "region-09",
+      "oath_id": "oath-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Chamber of Appeals contains contested judgments and a malfunctioning protective network. Players can investigate through records, witness access and spatial encounters regardless of their first Oath, then publish or protect evidence selectively.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-09-event",
+      "name": "Aureate Steps service catchment",
+      "kind": "event",
+      "region_id": "region-09",
+      "oath_id": "oath-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A sanctuary-overload event follows a regional disaster and tests shelter, food and triage logistics. Players decide how to distribute limited services transparently, with no ranking of lives by faction standing or moral score.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-10-capital",
+      "name": "Parallax Crown",
+      "kind": "capital",
+      "region_id": "region-10",
+      "oath_id": "oath-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Parallax Crown occupies an eastern headland with anchored observatories and limited suspended platforms. The platforms do not form a separate island realm; redundant mainland stairs and lifts preserve the continent's connected geography.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-10-settlement",
+      "name": "Ballast Haven",
+      "kind": "settlement",
+      "region_id": "region-10",
+      "oath_id": "oath-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Ballast Haven sits on stable mainland rock beneath the research platforms. It houses maintenance families and visitors who cannot tolerate altered gravity, keeping accessibility and ordinary life central to the cosmic realm.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-10-dungeon",
+      "name": "The Falling Meridian",
+      "kind": "dungeon",
+      "region_id": "region-10",
+      "oath_id": "oath-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Falling Meridian crosses instrument halls and evacuated platform segments around a failing calibration system. Multiple routes use conventional lifts or Oath-assisted shortcuts, preserving first-Oath independence and accessibility.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-10-event",
+      "name": "Parallax Crown service catchment",
+      "kind": "event",
+      "region_id": "region-10",
+      "oath_id": "oath-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A meteor-watch event requires forecasts, shelter preparation and safe recovery of fragments. Players distinguish predicted impact corridors from uncertain ones, and success is measured in protected lives and infrastructure rather than spectacular destruction.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-11-capital",
+      "name": "Absent Seat",
+      "kind": "capital",
+      "region_id": "region-11",
+      "oath_id": "oath-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Absent Seat occupies a mainland valley with a persistent public footprint and intermittently concealed civic wings. The city does not vanish wholesale from shared navigation; safe roads and accessible service anchors remain consistently available.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-11-settlement",
+      "name": "Witness Ford",
+      "kind": "settlement",
+      "region_id": "region-11",
+      "oath_id": "oath-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Witness Ford is a stable settlement outside the most severe phasing zones. It provides public services without demanding full disclosure of residents' histories, while maintaining bounded records needed for safety and mutual accountability.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-11-dungeon",
+      "name": "The Unfiled Palace",
+      "kind": "dungeon",
+      "region_id": "region-11",
+      "oath_id": "oath-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Unfiled Palace contains protected testimony, erased obligations and stable service tunnels beneath shifting ceremonial rooms. Players separate evidence needed for justice from identities unnecessary to publish, rather than solving everything through total revelation.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-11-event",
+      "name": "Absent Seat service catchment",
+      "kind": "event",
+      "region_id": "region-11",
+      "oath_id": "oath-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A phasing-failure event exposes refuge routes while destabilizing public buildings. Players escort residents, restore stable thresholds and choose what emergency information to share, with no random deletion of NPCs or player services.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-12-capital",
+      "name": "Kinhold",
+      "kind": "capital",
+      "region_id": "region-12",
+      "oath_id": "oath-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Kinhold rises on red-stone terraces above an inland river crossing. Ritual halls sit beside kitchens and recovery wards, making the material work of sustaining sacrifice visible instead of presenting blood symbolism without civilian life.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-12-settlement",
+      "name": "Open Hearth",
+      "kind": "settlement",
+      "region_id": "region-12",
+      "oath_id": "oath-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Open Hearth is a mixed household settlement that admits people without ancestral credentials. Its success challenges fortress elites while creating practical questions about how newcomers contribute to shared care and defense.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-12-dungeon",
+      "name": "The Inheritance Engine",
+      "kind": "dungeon",
+      "region_id": "region-12",
+      "oath_id": "oath-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Inheritance Engine combines ritual chambers with public care infrastructure and disputed records. Its challenge is dismantling coercive collection without abandoning people whose survival has become dependent on the same system.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-12-event",
+      "name": "Kinhold service catchment",
+      "kind": "event",
+      "region_id": "region-12",
+      "oath_id": "oath-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A relief-muster event responds to flood or siege displacement. Players organize food, rest and voluntary service rotations; success rewards sustainable care, while exhaustion creates recoverable staffing gaps instead of glorified endless sacrifice.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-13-capital",
+      "name": "Manydoor",
+      "kind": "capital",
+      "region_id": "region-13",
+      "oath_id": "oath-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Manydoor grows through rearrangeable facades around a persistent structural street plan. Interior performance spaces can change within authored bounds, while hospitals, exits and public services retain recognizable anchors.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-13-settlement",
+      "name": "Plainmarket",
+      "kind": "settlement",
+      "region_id": "region-13",
+      "oath_id": "oath-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Plainmarket is a stable trading district where appearance-altering effects are disclosed and optional. It gives visitors a baseline for contracts and navigation without treating artistic participation as foolish or inherently dishonest.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-13-dungeon",
+      "name": "The Unfinished House",
+      "kind": "dungeon",
+      "region_id": "region-13",
+      "oath_id": "oath-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Unfinished House contains abandoned civic futures commissioned by rival patrons. Each wing reveals who would benefit and who would disappear from the imagined city, turning spatial puzzles into concrete political choices.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-13-event",
+      "name": "Manydoor service catchment",
+      "kind": "event",
+      "region_id": "region-13",
+      "oath_id": "oath-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A citywide rehearsal event accidentally locks public services inside competing visual versions. Players restore stable anchors, guide residents and negotiate what shared appearance returns, with personal opt-outs and no permanent loss of navigation.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-14-capital",
+      "name": "Wayclock",
+      "kind": "capital",
+      "region_id": "region-14",
+      "oath_id": "oath-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Wayclock occupies a broad junction of roads, workshops and public timekeeping halls. Fast lanes remain physically separated from homes and markets, with conventional walkable routes that never require a mount or temporal ability.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-14-settlement",
+      "name": "Restmile",
+      "kind": "settlement",
+      "region_id": "region-14",
+      "oath_id": "oath-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Restmile is a service town with sheltered stops, repair yards and accessible boarding. It argues that pauses are infrastructure rather than inefficiency, particularly for families, animals and crews who cannot live at express tempo.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-14-dungeon",
+      "name": "The Returned Mile",
+      "kind": "dungeon",
+      "region_id": "region-14",
+      "oath_id": "oath-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Returned Mile is an abandoned transport segment where unfinished maintenance repeats. Players distinguish echoes from present residents, repair actual infrastructure and choose which recorded account of the accident enters public history.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-14-event",
+      "name": "Wayclock service catchment",
+      "kind": "event",
+      "region_id": "region-14",
+      "oath_id": "oath-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A corridor-loop event traps travelers in a repeated route segment. Players establish stable exits, deliver supplies and repair timing anchors; failure prolongs a bounded event state but never traps a player indefinitely or rolls back their inventory.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-15-capital",
+      "name": "Counterpoise",
+      "kind": "capital",
+      "region_id": "region-15",
+      "oath_id": "oath-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Counterpoise occupies the southeast coastal plain around freight yards and kinetic foundries. Heavy industry is separated from homes by service buffers and public transit, with coastal evacuation routes independent of factory command systems.",
+      "narrative_scope": "region civic anchor",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-15-settlement",
+      "name": "Handshift",
+      "kind": "settlement",
+      "region_id": "region-15",
+      "oath_id": "oath-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "Handshift is a mixed workshop town that preserves repairable tools and shared technical education. It seeks access to modern equipment without surrendering control of production schedules or becoming a disposable subcontractor district.",
+      "narrative_scope": "region civilian settlement",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-15-dungeon",
+      "name": "The Idle Assembly",
+      "kind": "dungeon",
+      "region_id": "region-15",
+      "oath_id": "oath-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "The Idle Assembly is an occupied factory where workers have halted unsafe production and automated enforcement continues. The dungeon combines negotiation, rescue and mechanical encounters, with evidence determining responsibility rather than faction uniforms alone.",
+      "narrative_scope": "party instance",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-15-event",
+      "name": "Counterpoise service catchment",
+      "kind": "event",
+      "region_id": "region-15",
+      "oath_id": "oath-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "An infrastructure surge event threatens freight, housing power and river pumps. Players isolate failing sectors, move supplies and keep essential services running; repair outcomes alter temporary production bonuses rather than permanently erasing a city.",
+      "narrative_scope": "recoverable regional event",
+      "access_requirement": "No mandatory Oath binding; public tool and grounded traversal alternatives.",
+      "persistence": "Personal/party story flags; shared physical changes limited to authored recoverable states.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Stable public road or instance exit; recovery services remain available during events."
+    },
+    {
+      "id": "poi-neutral-crossroads",
+      "name": "Common Waystation",
+      "kind": "neutral_service",
+      "region_id": "region-09",
+      "oath_id": null,
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A treaty-protected road and relief exchange on the central basin margin. Neutral is a legal service status inside region-09, not a sixteenth realm or Oath.",
+      "narrative_scope": "shared recoverable hub",
+      "access_requirement": "Open public access independent of faction standing.",
+      "persistence": "Protected essential services; commercial event states recover.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Daybreak public service anchor and regional road alternatives."
+    },
+    {
+      "id": "poi-contested-pass",
+      "name": "The Shared Saddle",
+      "kind": "contested_border",
+      "region_id": "region-03",
+      "adjacent_region_ids": [
+        "region-06"
+      ],
+      "oath_id": null,
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A Storm–Reed border pass with disputed commercial routing rights and a protected relief path. Control changes toll policy and limited bonuses, never all continent access.",
+      "narrative_scope": "bounded territory event",
+      "access_requirement": "Neutral bypass remains open.",
+      "persistence": "Reconstructible control states; no permanent settlement deletion.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Routes through regions05 and09."
+    },
+    {
+      "id": "poi-endgame-weave-seam",
+      "name": "The Confluence Chamber",
+      "kind": "endgame_assembly",
+      "region_id": "region-09",
+      "oath_id": null,
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "description": "A proposed old covenant-interface chamber beneath a stable central terrace, reached through an openly declared final story instance. It is an assembly site, not a new elemental realm.",
+      "narrative_scope": "personal or consented party finale",
+      "access_requirement": "Evidence and service-plan prerequisites in ENDING_PREREQUISITES.json.",
+      "persistence": "Ending flags personal/party; shared hub stays available.",
+      "coordinate_status": "UNRESOLVED production placement",
+      "essential_access_fallback": "Pre-commit return path and post-ending hub access."
+    }
+  ]
+}

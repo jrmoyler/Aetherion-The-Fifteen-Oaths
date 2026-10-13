@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aetherion.invalid/schemas/common.schema.json",
+  "title": "Aetherion evidence and status primitives",
+  "description": "The .invalid namespace is an identifier, not an implemented endpoint.",
+  "type": "object",
+  "$defs": {
+    "canon_status": {
+      "type": "string",
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "record": {
+      "type": "object",
+      "required": [
+        "canon_status",
+        "source_ids"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 3
+        },
+        "canon_status": {
+          "type": "string",
+          "enum": [
+            "LOCKED",
+            "RECOVERED",
+            "PROPOSED",
+            "UNRESOLVED",
+            "DEPRECATED"
+          ]
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "production_status": {
+      "type": "string",
+      "enum": [
+        "Proposed",
+        "Referenced",
+        "Approved Concept",
+        "In Production",
+        "Implemented",
+        "Validated",
+        "Deprecated"
+      ]
+    },
+    "migration_status": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "IMPORTED",
+        "BLOCKED",
+        "MISSING"
+      ]
+    }
+  }
+}

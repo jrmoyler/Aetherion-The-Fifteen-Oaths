@@ -1,0 +1,380 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-GOVERNANCE-PROPOSAL"
+  ],
+  "policy": "Presence is a delivery integrity check only. Semantic review, source/runtime tests and founder approval are separate. Relative paths start at AETHERION_CANON.",
+  "records": [
+    {
+      "id": "deliverable-01",
+      "title": "Executive Canon Overview",
+      "paths": [
+        "00_GOVERNANCE/EXECUTIVE_CANON_OVERVIEW.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-02",
+      "title": "World Bible",
+      "paths": [
+        "01_WORLD_BIBLE/AETHERION_WORLD_BIBLE.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-03",
+      "title": "Fifteen Oath Dossiers",
+      "paths": [
+        "04_OATH_DOSSIERS/OATH_DOSSIER_INDEX.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-04",
+      "title": "Continental Geography",
+      "paths": [
+        "03_GEOGRAPHY/WORLD_GEOGRAPHY.md",
+        "03_GEOGRAPHY/WORLD_GRAPH.json",
+        "03_GEOGRAPHY/WORLD_POI_REGISTRY.json",
+        "03_GEOGRAPHY/WORLD_MAP_ART_DIRECTION.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-05",
+      "title": "Historical Timeline",
+      "paths": [
+        "02_HISTORY_AND_COSMOLOGY/HISTORY_AND_CHRONOLOGY.md",
+        "02_HISTORY_AND_COSMOLOGY/TIMELINE.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-06",
+      "title": "Branching Story Bible",
+      "paths": [
+        "06_NARRATIVE/BRANCHING_STORY.md",
+        "06_NARRATIVE/QUEST_REGISTRY.json",
+        "06_NARRATIVE/ENDING_PREREQUISITES.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-07",
+      "title": "Character and Faction Registry",
+      "paths": [
+        "05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json",
+        "05_FACTIONS_AND_CHARACTERS/FACTION_REGISTRY.json",
+        "05_FACTIONS_AND_CHARACTERS/RELATIONSHIP_GRAPH.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-08",
+      "title": "Ability Matrix Architecture Audit",
+      "paths": [
+        "08_ABILITY_MATRIX/ABILITY_MATRIX_AUDIT.md",
+        "08_ABILITY_MATRIX/ABILITY_IMPLEMENTATION_GAP_ANALYSIS.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-09",
+      "title": "Castable Registry",
+      "paths": [
+        "../CASTABLE_REGISTRY.json",
+        "../CASTABLE_SOURCE_MANIFEST.json",
+        "../CASTABLE_MIGRATION_REPORT.md",
+        "../CASTABLE_VALIDATION_REPORT.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-10",
+      "title": "Elemental Interaction Rules",
+      "paths": [
+        "07_GAMEPLAY_SYSTEMS/ELEMENTAL_INTERACTION_MATRIX.md",
+        "07_GAMEPLAY_SYSTEMS/INTERACTION_RULES.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-11",
+      "title": "Multi-Oath Progression",
+      "paths": [
+        "07_GAMEPLAY_SYSTEMS/MULTI_OATH_PROGRESSION.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-12",
+      "title": "Combat Systems",
+      "paths": [
+        "07_GAMEPLAY_SYSTEMS/HYBRID_COMBAT.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-13",
+      "title": "Oath Consequences",
+      "paths": [
+        "07_GAMEPLAY_SYSTEMS/CONSEQUENCE_FRAMEWORK.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-14",
+      "title": "Master Asset Registry",
+      "paths": [
+        "10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "10_ASSET_REGISTRY/ASSET_DEPENDENCIES.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-15",
+      "title": "Fifteen-Faction Art Direction",
+      "paths": [
+        "09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "09_ART_DIRECTION/CROSS_OATH_COLLISION_AUDIT.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-16",
+      "title": "Reference Sheet Handbook",
+      "paths": [
+        "11_REFERENCE_SHEETS/REFERENCE_PRODUCTION_HANDBOOK.md",
+        "11_REFERENCE_SHEETS/REFERENCE_INDEX.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-17",
+      "title": "Creatures Mounts Morphs",
+      "paths": [
+        "12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-18",
+      "title": "World Events and Ecology",
+      "paths": [
+        "13_WORLD_EVENTS/LIVING_WORLD.md",
+        "13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-19",
+      "title": "Life Skills Housing Economy",
+      "paths": [
+        "14_LIFE_SKILLS_AND_ECONOMY/LIFE_SKILLS_AND_ECONOMY.md",
+        "14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json",
+        "15_HOUSING/HOUSING.md",
+        "15_HOUSING/HOUSING_PROFILES.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-20",
+      "title": "PvP and Territory",
+      "paths": [
+        "16_PVP_AND_TERRITORY/PVP_AND_TERRITORY.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-21",
+      "title": "Machine-Readable Schemas",
+      "paths": [
+        "00_GOVERNANCE/schemas/asset-registry.schema.json",
+        "00_GOVERNANCE/schemas/interaction-rules.schema.json",
+        "18_IMPLEMENTATION_CONTRACTS/schemas/implementation-contracts.schema.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-22",
+      "title": "Coding-Agent Contracts",
+      "paths": [
+        "18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json",
+        "18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-23",
+      "title": "Governance and Decision Log",
+      "paths": [
+        "00_GOVERNANCE/CANON_GOVERNANCE.md",
+        "00_GOVERNANCE/CANON_DECISION_LOG.md",
+        "00_GOVERNANCE/OPEN_CANON_DECISIONS.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-24",
+      "title": "Missing Asset Design Gaps",
+      "paths": [
+        "10_ASSET_REGISTRY/ASSET_COVERAGE_REPORT.md",
+        "19_VALIDATION/INDEPENDENT_REVIEW.md"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-25",
+      "title": "Production Roadmap",
+      "paths": [
+        "20_PRODUCTION_ROADMAP/PRODUCTION_ROADMAP.md",
+        "20_PRODUCTION_ROADMAP/IMPLEMENTATION_BACKLOG.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-26",
+      "title": "Source Traceability",
+      "paths": [
+        "00_GOVERNANCE/SOURCE_TRACEABILITY.md",
+        "00_GOVERNANCE/SOURCE_TRACEABILITY.json",
+        "00_GOVERNANCE/SOURCE_INVENTORY.json"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-27",
+      "title": "Validation Consistency",
+      "paths": [
+        "19_VALIDATION/CANON_VALIDATION_REPORT.json",
+        "19_VALIDATION/VALIDATION_AND_CONSISTENCY_REPORT.md",
+        "19_VALIDATION/validate_canon.py"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    },
+    {
+      "id": "deliverable-28",
+      "title": "Coverage Dashboard",
+      "paths": [
+        "19_VALIDATION/CANON_COVERAGE_DASHBOARD.json",
+        "19_VALIDATION/CANON_COVERAGE_DASHBOARD.md",
+        "19_VALIDATION/CANON_COVERAGE_DASHBOARD.html"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "acceptance": "Accessible artifact, coherent cross references, honest evidence/approval boundaries; semantic findings recorded in independent review."
+    }
+  ]
+}

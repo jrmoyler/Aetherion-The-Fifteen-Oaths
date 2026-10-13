@@ -1,0 +1,27 @@
+{
+  "format": "collective-ability-preset@1",
+  "uid": "atlas/kinetic-parry",
+  "pack": "atlas",
+  "id": "kinetic-parry",
+  "slot": 7,
+  "kind": "ability",
+  "label": "Aegis Reversal",
+  "hint": "A segmented shield intercepts an incoming bolt, stores its impact in rotating plates, then reflects a widening counter-wave.",
+  "key": "",
+  "accent": "#92d5ff",
+  "cast": "point",
+  "castAnim": null,
+  "cooldown": null,
+  "range": 16,
+  "minRange": 0,
+  "zoneRadius": 3,
+  "controls": 5,
+  "status": "live",
+  "settings": {
+    "radius": 3,
+    "power": 1,
+    "duration": 3.6,
+    "seed": 97,
+    "color": "#92d5ff"
+  }
+}

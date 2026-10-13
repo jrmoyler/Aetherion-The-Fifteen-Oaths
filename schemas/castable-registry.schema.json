@@ -1,0 +1,24 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:aetherion:schema:castable-registry:1",
+  "title":"Aetherion source-preserving castable registry",
+  "type":"object",
+  "required":["format","sourceId","sourceCommit","castableCount","elements","castables"],
+  "properties":{
+    "format":{"const":"aetherion-castable-registry@1"},
+    "sourceCommit":{"type":"string","pattern":"^[a-f0-9]{40}$"},
+    "sourceId":{"const":"SRC-ABILITY-MATRIX-4c4a1eb"},
+    "castableCount":{"const":100},
+    "elements":{"type":"array","minItems":15,"maxItems":15,"items":{"type":"object","required":["sourceElementId","sourceElementLabel","sourceCount","oathId","oathName"],"properties":{"sourceElementId":{"$ref":"#/$defs/element"},"oathId":{"type":"string","pattern":"^oath-(0[1-9]|1[0-5])$"},"sourceCount":{"type":"integer","minimum":1}}}},
+    "castables":{"type":"array","minItems":100,"maxItems":100,"items":{"type":"object","required":["uid","sourceCatalog","sourcePreset","provenance","implementation","proposedAetherion","validation"],"properties":{
+      "uid":{"type":"string","pattern":"^[a-z][a-z-]*/[A-Za-z][A-Za-z0-9]*$"},
+      "sourceCatalog":{"type":"object","required":["uid","pack","id","kind","element","label","status"],"properties":{"uid":{"type":"string"},"kind":{"enum":["ability","buff","summon"]},"element":{"$ref":"#/$defs/element"},"status":{"const":"live"},"label":{"type":"string","minLength":1}},"additionalProperties":true},
+      "sourcePreset":{"type":"object","required":["format","uid","pack","id","settings"],"properties":{"format":{"const":"collective-ability-preset@1"},"settings":{"type":"object"}},"additionalProperties":true},
+      "provenance":{"type":"object","required":["sourceId","repository","commit","implementationPath","implementationURL"]},
+      "implementation":{"type":"object","required":["destinationPath","sourceModuleDependencies","sharedHostAndLazyPackAssets","animation","audio"],"properties":{"sourceModuleDependencies":{"type":"array","minItems":1,"items":{"type":"string"}},"sharedHostAndLazyPackAssets":{"type":"array","items":{"type":"string"}}}},
+      "proposedAetherion":{"type":"object","required":["status","oathId","oathName","combat","environment","crafting","progression","network"],"properties":{"status":{"const":"PROPOSED"},"oathId":{"type":"string","pattern":"^oath-(0[1-9]|1[0-5])$"}}},
+      "validation":{"type":"object","required":["status","reason","evidence","sourceIdentity","sourceBytes","gpuVisual"],"properties":{"status":{"enum":["VERIFIED","IMPORTED","BLOCKED","MISSING"]},"evidence":{"type":"array","items":{"type":"string"}},"gpuVisual":{"enum":["NOT_RUN","PASS","FAIL","BLOCKED"]}}}
+    }}}
+  },
+  "$defs":{"element":{"enum":["fire","frost","storm","water","earth","wind","nature","poison","light","cosmic","shadow","blood","arcane","time","tech"]}}
+}

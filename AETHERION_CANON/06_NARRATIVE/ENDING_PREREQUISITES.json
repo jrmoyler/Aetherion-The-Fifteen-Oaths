@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "evaluation_note": "Attestations are semantic evidence tokens earned by regional settlement OR independent civic review of that interface. They are not affinity points, a demand to bind15Oaths or a mandatory boss-kill checklist.",
+  "records": [
+    {
+      "id": "ending-restoration",
+      "name": "Restoration",
+      "working_name": true,
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "direction_source_status": "LOCKED working direction",
+      "required_flags": [
+        "corroboration_complete",
+        "custody_resolved",
+        "service_plan_ready",
+        "final_plan_reviewed"
+      ],
+      "required_interface_attestations": [
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15"
+      ],
+      "required_choices": [
+        "restoration_charter_scope",
+        "independent_review_method",
+        "transition_cost_allocation"
+      ],
+      "binding_requirement": "None; all15 service interfaces must be represented, not all15 personally bound or equipped.",
+      "commitment": "Revise the covenants into a coordinated plural charter with challenge, exit and maintenance provisions.",
+      "advantage": "Preserves shared stability, cross-realm coordination and useful institutions while reducing exclusive claims.",
+      "cost": "Requires recurring negotiation, funded oversight and compromises that leave some communities dissatisfied.",
+      "irreversible_personal_changes": [
+        "The old exclusive charter is replaced in the player narrative.",
+        "Delegates and companions remember concessions and rejected demands."
+      ],
+      "shared_world_changes": "Only approved recoverable event and service-state variants; no global ending overwrite.",
+      "failure_condition": "Missing representation, unfunded essential service transition or contradictory unacknowledged promises.",
+      "fallback": "Return to planning and obtain civic attestations without being forced into any Oath."
+    },
+    {
+      "id": "ending-dominion",
+      "name": "Dominion",
+      "working_name": true,
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "direction_source_status": "LOCKED working direction",
+      "required_flags": [
+        "corroboration_complete",
+        "custody_resolved",
+        "service_plan_ready",
+        "final_plan_reviewed"
+      ],
+      "required_interface_attestations": [
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15"
+      ],
+      "required_choices": [
+        "dominant_oath_id",
+        "minority_service_guarantees",
+        "scope_of_emergency_power",
+        "succession_and_review_terms",
+        "dominant_oath_reviewed",
+        "dominant_oath_accepted"
+      ],
+      "binding_requirement": "Selected dominant oath-01..15 must be reviewed and accepted as a narrative commitment; no requirement to equip its full castable set.",
+      "commitment": "Give one selected Oath dominant authority over the revised covenant order while specifying protected minority services.",
+      "advantage": "Creates clear responsibility and rapid coordinated action during a credible threat.",
+      "cost": "Concentrates power, restricts plural authority and makes future correction depend on enforceable limits rather than benevolent leadership.",
+      "irreversible_personal_changes": [
+        "One Oath becomes politically dominant in the player narrative.",
+        "Opponents may withdraw alliance; minority cultures and essential practices continue to exist."
+      ],
+      "shared_world_changes": "Authored personal/party presentation and recoverable territory events; no deletion of otherOath content.",
+      "failure_condition": "No selected dominant Oath, ignored minority continuity or undisclosed authority expansion.",
+      "fallback": "Choose another reviewed dominant Oath or return to a different ending plan."
+    },
+    {
+      "id": "ending-liberation",
+      "name": "Liberation",
+      "working_name": true,
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "direction_source_status": "LOCKED working direction",
+      "required_flags": [
+        "corroboration_complete",
+        "custody_resolved",
+        "service_plan_ready",
+        "final_plan_reviewed"
+      ],
+      "required_interface_attestations": [
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15"
+      ],
+      "required_choices": [
+        "replacement_service_ownership",
+        "staged_release_sequence",
+        "mutual_aid_contingency",
+        "consent_and_exit_guarantees"
+      ],
+      "binding_requirement": "None; breaking compulsory claims does not require deleting learned powers or denying voluntary future covenants.",
+      "commitment": "Dismantle the current compulsory covenant system through staged release and distributed replacement services.",
+      "advantage": "Expands local and personal freedom and prevents inherited exclusive claims from governing every life.",
+      "cost": "Creates transition uncertainty, coordination burdens and uneven local capacity; mutual aid must support communities without resources.",
+      "irreversible_personal_changes": [
+        "Compulsory old claims cease in the player narrative.",
+        "Former institutions lose exclusive authority but their people, knowledge and voluntary practices remain."
+      ],
+      "shared_world_changes": "Recoverable service-transition events and personal aftermath; no permanent world collapse or erased settlements.",
+      "failure_condition": "No credible replacement for an essential interface or a plan that coerces supposedly liberated communities.",
+      "fallback": "Develop missing service plans or adopt a different covenant settlement."
+    }
+  ]
+}

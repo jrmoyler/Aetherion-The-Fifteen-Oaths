@@ -1,0 +1,424 @@
+<title>Ability Matrix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a casting range on the left (live pack in a frame), the spellbook matrix on the right; stacks on phones. Single committed dark look, like the packs themselves. */
+:root {
+  --ink: #0b0d14;
+  --panel: #12151f;
+  --panel-2: #191d2a;
+  --line: #262b3b;
+  --fg: #e7e9f1;
+  --muted: #8c93a8;
+  --accent: #7fd6ff;
+  --ok: #6ff0a8;
+  --warn: #ffc46b;
+  --display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
+  --body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body { margin: 0; background: var(--ink); color: var(--fg); font: 14px/1.45 var(--body); }
+* { box-sizing: border-box; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.app { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(340px, 1fr); gap: 14px; padding: 14px 16px; height: 100%; }
+@media (max-width: 900px) { .app { grid-template-columns: minmax(0, 1fr); height: auto; } }
+
+/* ---------- stage ---------- */
+.stage { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; }
+.brand { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.brand h1 { margin: 0; font: 800 30px/1 var(--display); letter-spacing: 0.04em; text-transform: uppercase; }
+.brand .tally { font: 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.screen { position: relative; flex: 1; min-height: 300px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #05060a; }
+@media (max-width: 900px) { .screen { flex: none; aspect-ratio: 4 / 3; max-width: 100%; min-height: 0; } }
+.screen iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.screen .loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font: 13px var(--mono); pointer-events: none; }
+.now { display: flex; gap: 12px; align-items: center; min-width: 0; }
+.now .sigil { width: 46px; height: 46px; flex: none; color: var(--a, var(--accent)); border: 1px solid var(--line); border-radius: 10px; display: grid; place-items: center; background: var(--panel); }
+.now .sigil svg { width: 30px; height: 30px; }
+.now h2 { margin: 0; font: 800 22px/1.05 var(--display); letter-spacing: 0.03em; text-transform: uppercase; text-wrap: balance; }
+.now p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px; font: 11px var(--mono); }
+.facts span { border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 600; }
+.controls { display: flex; flex-wrap: wrap; gap: 6px; }
+.btn { border: 1px solid var(--line); background: var(--panel-2); border-radius: 8px; padding: 7px 12px; font-weight: 600; font-size: 13px; }
+.btn:hover { border-color: var(--a, var(--accent)); }
+.btn.primary { background: var(--a, var(--accent)); color: #06070b; border-color: transparent; }
+.btn.on { box-shadow: inset 0 0 0 2px var(--a, var(--accent)); }
+.btn[disabled] { opacity: 0.4; cursor: default; }
+.row-label { font: 600 10px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); align-self: center; margin-right: 4px; }
+
+/* ---------- spellbook ---------- */
+.book { display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
+.filters { display: flex; flex-direction: column; gap: 8px; }
+.search { width: 100%; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 3px 10px; font-size: 12px; color: var(--muted); }
+.chip[aria-pressed="true"] { color: var(--ink); background: var(--fg); border-color: var(--fg); }
+.viewbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.count { font: 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.list { overflow: auto; min-height: 0; flex: 1; }
+@media (max-width: 900px) { .list { max-height: none; } }
+.pack-head { position: sticky; top: 0; background: var(--panel); padding: 8px 2px 6px; display: flex; justify-content: space-between; gap: 8px; font: 800 15px var(--display); letter-spacing: 0.05em; text-transform: uppercase; z-index: 1; }
+.pack-head a { font: 11px var(--mono); color: var(--muted); text-transform: none; letter-spacing: 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin-bottom: 8px; }
+.card { text-align: left; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 2px 8px; align-items: center; border: 1px solid var(--line); background: var(--panel-2); border-radius: 8px; padding: 7px 8px; color: var(--fg); }
+.card .g { grid-row: span 2; width: 30px; height: 30px; color: var(--a); display: grid; place-items: center; }
+.card .g svg { width: 26px; height: 26px; }
+.card .n { font-weight: 600; font-size: 13px; line-height: 1.15; overflow-wrap: anywhere; }
+.card .m { font: 10px var(--mono); color: var(--muted); display: flex; gap: 6px; align-items: center; }
+.card.sel { border-color: var(--a); box-shadow: 0 0 0 1px var(--a) inset; }
+.card.archived { opacity: 0.55; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line); flex: none; }
+.dot.done { background: var(--ok); }
+.kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+.tag-new { color: var(--warn); }
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 12px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { font: 600 10px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); position: sticky; top: 0; background: var(--panel); }
+tbody tr { cursor: pointer; }
+tbody tr:hover, tbody tr.sel { background: var(--panel-2); }
+td .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+.preset { display: none; flex-direction: column; gap: 6px; }
+.preset.open { display: flex; }
+.preset textarea { width: 100%; height: 180px; resize: vertical; background: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px; font: 11px/1.4 var(--mono); color: var(--fg); }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--ink); padding: 7px 14px; border-radius: 8px; font-weight: 600; font-size: 13px; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+.toast.show { opacity: 1; }
+.note { color: var(--muted); font-size: 12px; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+
+<div class="app">
+  <section class="stage" aria-label="Casting range">
+    <div class="brand">
+      <h1>Ability Matrix</h1>
+      <span class="tally" id="tally">loading spellbook&hellip;</span>
+    </div>
+    <div class="screen">
+      <div class="loading" id="loading">Booting pack &mdash; compiling shaders&hellip;</div>
+      <iframe id="stage" title="Live ability pack" allow="autoplay; fullscreen"></iframe>
+    </div>
+    <div class="now" id="now">
+      <div class="sigil" id="nowSigil"></div>
+      <div style="min-width:0">
+        <h2 id="nowName">&mdash;</h2>
+        <p id="nowHint"></p>
+      </div>
+    </div>
+    <div class="facts" id="facts"></div>
+    <div class="controls">
+      <button class="btn primary" id="castBtn">Cast</button>
+      <button class="btn" id="armBtn">Arm (aim it yourself)</button>
+      <button class="btn" id="autoBtn">Auto-cast</button>
+      <button class="btn" id="gauntletBtn">Run gauntlet</button>
+      <button class="btn" id="clearBtn">Clear</button>
+      <button class="btn" id="dummyBtn">Reset targets</button>
+      <button class="btn" id="pauseBtn">Pause</button>
+      <button class="btn" id="editorBtn">VFX editor</button>
+      <button class="btn" id="presetBtn">Preset JSON</button>
+    </div>
+    <div class="controls" id="moves"></div>
+    <p class="note">Click inside the stage, then <b>W A S D</b> to walk, <b>Shift</b> to run and <b>Space</b> to dash. Casting works on the move.</p>
+    <div class="preset" id="preset">
+      <p class="note" id="presetHelp">The live settings block for this ability, including anything you changed in the VFX editor. Apply it in a game with the pack's <code>applySettings({ &lt;id&gt;: preset.settings })</code>.</p>
+      <textarea id="presetText" readonly></textarea>
+      <div class="controls">
+        <button class="btn" id="copyPreset">Copy preset</button>
+        <button class="btn" id="applyPreset">Apply edited JSON</button>
+        <button class="btn" id="resetPreset">Reset to shipped defaults</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="book" aria-label="Spellbook">
+    <div class="filters">
+      <input class="search" id="q" type="search" placeholder="Search &mdash; fire, frost, summon, chain, cast3&hellip;" aria-label="Search abilities">
+      <div class="chips" id="elementChips" aria-label="Elements"></div>
+      <div class="chips" id="kindChips"></div>
+      <div class="chips" id="castChips"></div>
+      <div class="chips" id="packChips"></div>
+    </div>
+    <div class="viewbar">
+      <span class="count" id="count"></span>
+      <div class="chips">
+        <button class="chip" id="groupElement" aria-pressed="true">By element</button>
+        <button class="chip" id="groupPack" aria-pressed="false">By pack</button>
+        <button class="chip" id="viewCards" aria-pressed="true">Cards</button>
+        <button class="chip" id="viewTable" aria-pressed="false">Matrix</button>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const PACK_ORDER = ['linear', 'linear-ext', 'linear-extended', 'handcast', 'casting', 'collective', 'matrix-new', 'atlas', 'codex', 'moves'];
+const NEW_PACKS = ['collective', 'matrix-new', 'atlas', 'codex'];
+const KINDS = { ability: 'Abilities', summon: 'Summons', buff: 'Buffs', move: 'Moves', archived: 'Archived' };
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('matrix.' + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('matrix.' + k, JSON.stringify(v)); } catch {} }
+};
+
+let catalog = null, packs = {}, current = null, livePack = null, ready = false, pending = [];
+let autoOn = false, gauntlet = null, paused = false;
+const tried = new Set(store.get('tried', []));
+const filters = { q: '', kind: new Set(['ability', 'summon', 'buff']), cast: new Set(), pack: new Set(), element: new Set(), view: store.get('view', 'cards'), group: store.get('group', 'element') };
+let ELEMENTS = [], elements = {};
+const groupOf = (a) => filters.group === 'element' ? (a.element || (a.pack === 'moves' ? 'moves' : 'other')) : a.pack;
+
+function toast(text) { const t = $('toast'); t.textContent = text; t.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 1800); }
+const svg = (a) => a.glyph ? a.glyph.replace(/class="glyph-svg"/, '') : '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5"><circle cx="50" cy="50" r="26"/></svg>';
+const castable = (a) => a.status === 'live' && (a.kind === 'ability' || a.kind === 'summon' || a.kind === 'buff');
+
+/* ---------- stage messaging ---------- */
+const frame = $('stage');
+function send(msg) {
+  if (!ready) { pending.push(msg); return; }
+  frame.contentWindow.postMessage(msg, '*');
+}
+/** One sandbox hosts every ability; it boots once and is never reloaded. */
+function boot(query = '') {
+  if (livePack) return;
+  livePack = 'sandbox'; ready = false;
+  $('loading').hidden = false;
+  frame.src = `packs/sandbox/index.html?hud=0&bin=wasm${query}`;
+}
+window.addEventListener('message', (e) => {
+  const d = e.data; if (!d || typeof d.matrix !== 'string') return;
+  if (d.matrix === 'ready') {
+    ready = true; $('loading').hidden = true;
+    const queue = pending; pending = []; queue.forEach(send);
+  } else if (d.matrix === 'cast' && current) {
+    markTried(current);
+  } else if (d.matrix === 'preset') {
+    $('presetText').value = JSON.stringify(d.preset, null, 2);
+  } else if (d.matrix === 'applied') {
+    toast(d.ok ? 'Preset applied \u2014 cast to see it' : 'That JSON has no settings for this ability');
+    if (d.ok) send({ matrix: 'getPreset', uid: current.uid });
+  } else if (d.matrix === 'error') {
+    toast(d.message);
+  }
+});
+
+function markTried(a) { tried.add(a.uid); store.set('tried', [...tried]); document.querySelectorAll(`[data-uid="${CSS.escape(a.uid)}"] .dot`).forEach((n) => n.classList.add('done')); updateTally(); }
+
+/* ---------- selection ---------- */
+function select(a, { cast = false } = {}) {
+  current = a;
+  $('presetHelp').innerHTML = "The live settings block for this ability, including anything you changed in the VFX editor. Apply it in a game with its engine's <code>applySettings({ &lt;id&gt;: preset.settings })</code>.";
+  document.documentElement.style.setProperty('--a', a.accent || 'var(--accent)');
+  $('nowSigil').innerHTML = svg(a);
+  $('nowName').textContent = a.label;
+  $('nowHint').textContent = a.hint || '';
+  const pk = packs[a.pack];
+  const f = [];
+  if (a.element && elements[a.element]) f.push(`<span>element <b>${elements[a.element].label}</b></span>`);
+  f.push(`<span>pack <b>${pk.title}</b></span>`);
+  if (a.key) f.push(`<span>key <b>${a.key}</b></span>`);
+  if (a.cast) f.push(`<span>aim <b>${a.cast}</b></span>`);
+  if (a.castAnim) f.push(`<span>gesture <b>${a.castAnim}</b></span>`);
+  if (a.range != null) f.push(`<span>range <b>${a.minRange ?? 0}\u2013${a.range} m</b></span>`);
+  if (a.zoneRadius != null) f.push(`<span>circle <b>${a.zoneRadius} m</b></span>`);
+  if (a.cooldown != null) f.push(`<span>cooldown <b>${a.cooldown} s</b></span>`);
+  if (a.controls) f.push(`<span>live controls <b>${a.controls}</b></span>`);
+  if (a.status === 'archived') f.push(`<span>source <b>${a.file}</b></span>`);
+  $('facts').innerHTML = f.join('');
+  document.querySelectorAll('.sel').forEach((n) => n.classList.remove('sel'));
+  document.querySelectorAll(`[data-uid="${CSS.escape(a.uid)}"]`).forEach((n) => n.classList.add('sel'));
+
+  const live = a.status === 'live';
+  ['castBtn', 'autoBtn', 'presetBtn'].forEach((id) => ($(id).disabled = !live));
+  $('armBtn').disabled = !(live && a.kind === 'ability');
+  $('castBtn').textContent = a.kind === 'summon' ? 'Deploy / recall' : a.kind === 'buff' ? 'Toggle buff' : a.kind === 'move' ? 'Play move' : 'Cast';
+  renderMoves(a.pack);
+  if (a.status === 'archived') { toast('Archived in the source repo \u2014 not wired into its live app'); return; }
+  if (a.status === 'pack-only') { toast(a.hint); return; }
+
+  const first = !livePack;
+  boot(first && (a.kind === 'ability' || a.kind === 'summon') ? `&ability=${encodeURIComponent(a.uid)}${cast ? '&cast=1' : ''}` : '');
+  if (!first || (a.kind !== 'ability' && a.kind !== 'summon')) {
+    if (a.kind === 'ability' || a.kind === 'summon') send(cast ? { matrix: 'cast', uid: a.uid } : { matrix: 'select', uid: a.uid });
+    else if (cast) castCurrent();
+  }
+  if (autoOn && a.kind === 'ability') send({ matrix: 'auto', uid: a.uid, seconds: 5 });
+  if ($('preset').classList.contains('open') && a.kind !== 'move') send({ matrix: 'getPreset', uid: a.uid });
+  try { history.replaceState(null, '', '#' + a.uid.replace(/[^A-Za-z0-9._~-]/g, '_')); } catch {}
+}
+
+function castCurrent() {
+  const a = current; if (!a) return;
+  if (a.kind === 'buff') { send({ matrix: 'runAction', packId: a.pack, action: a.action || a.id }); markTried(a); }
+  else if (a.kind === 'move') {
+    if (a.move) send({ matrix: 'move', name: a.move });
+    else if (a.action) send({ matrix: 'action', action: a.action });
+    else toast(a.hint);
+    markTried(a);
+  } else send({ matrix: 'cast', uid: a.uid });
+}
+
+/** The shared caster's moves, plus the buffs when a Linear Ext ability is up. */
+function renderMoves(pack) {
+  const moves = catalog.abilities.filter((x) => (x.pack === 'moves' && x.move) || (x.kind === 'buff' && x.pack === pack));
+  $('moves').innerHTML = `<span class="row-label">Moves</span>` + moves.map((m) => `<button class="btn" data-move="${m.uid}">${m.label}</button>`).join('');
+  $('moves').querySelectorAll('[data-move]').forEach((b) => b.addEventListener('click', () => {
+    const m = catalog.abilities.find((x) => x.uid === b.dataset.move);
+    boot();
+    if (m.kind === 'buff') send({ matrix: 'runAction', packId: m.pack, action: m.action || m.id });
+    else send({ matrix: 'move', name: m.move });
+    markTried(m);
+  }));
+}
+
+/* ---------- controls ---------- */
+$('castBtn').onclick = () => castCurrent();
+$('armBtn').onclick = () => { send({ matrix: 'arm', uid: current.uid }); toast('Armed \u2014 aim inside the frame and click'); };
+$('autoBtn').onclick = () => {
+  autoOn = !autoOn; $('autoBtn').classList.toggle('on', autoOn);
+  if (autoOn && current?.kind === 'ability') send({ matrix: 'auto', uid: current.uid, seconds: 5 });
+  else send({ matrix: 'stop' });
+};
+$('clearBtn').onclick = () => send({ matrix: 'clear' });
+$('dummyBtn').onclick = () => send({ matrix: 'action', action: 'resetDummies' });
+$('pauseBtn').onclick = () => { paused = !paused; $('pauseBtn').classList.toggle('on', paused); send({ matrix: 'action', action: 'togglePause' }); };
+$('editorBtn').onclick = () => send({ matrix: 'action', action: 'toggleEditor' });
+$('presetBtn').onclick = () => {
+  const open = $('preset').classList.toggle('open');
+  $('presetBtn').classList.toggle('on', open);
+  if (open) { $('presetText').readOnly = false; send({ matrix: 'getPreset', uid: current.uid }); }
+};
+$('copyPreset').onclick = async () => {
+  const text = $('presetText').value;
+  try { await navigator.clipboard.writeText(text); toast('Preset copied'); }
+  catch { $('presetText').select(); toast('Selected \u2014 copy with your keyboard'); }
+};
+$('applyPreset').onclick = () => {
+  try { send({ matrix: 'applyPreset', uid: current.uid, preset: JSON.parse($('presetText').value) }); }
+  catch { toast('That is not valid JSON \u2014 check the last edit'); }
+};
+$('resetPreset').onclick = () => send({ matrix: 'resetPreset', uid: current.uid });
+
+$('gauntletBtn').onclick = () => {
+  if (gauntlet) { clearTimeout(gauntlet.t); gauntlet = null; $('gauntletBtn').classList.remove('on'); $('gauntletBtn').textContent = 'Run gauntlet'; return; }
+  const queue = visible().filter((a) => castable(a) && a.kind === 'ability');
+  if (!queue.length) return toast('No castable abilities in this filter');
+  gauntlet = { queue, i: 0, seen: new Set() };
+  $('gauntletBtn').classList.add('on');
+  const step = () => {
+    if (!gauntlet) return;
+    if (gauntlet.i >= gauntlet.queue.length) { $('gauntletBtn').click(); toast('Gauntlet complete'); return; }
+    const a = gauntlet.queue[gauntlet.i++];
+    $('gauntletBtn').textContent = `Stop gauntlet ${gauntlet.i}/${gauntlet.queue.length}`;
+    // The first ability of an engine loads that engine, so give it longer.
+    const fresh = !gauntlet.seen.has(a.pack);
+    gauntlet.seen.add(a.pack);
+    select(a, { cast: true });
+    gauntlet.t = setTimeout(step, fresh ? 12000 : 7000);
+  };
+  step();
+};
+
+/* ---------- spellbook ---------- */
+function visible() {
+  const q = filters.q.trim().toLowerCase();
+  return catalog.abilities.filter((a) =>
+    filters.kind.has(a.kind) &&
+    (!filters.cast.size || filters.cast.has(a.cast)) &&
+    (!filters.pack.size || filters.pack.has(a.pack)) &&
+    (!filters.element.size || filters.element.has(a.element)) &&
+    (!q || [a.label, a.hint, a.id, a.pack, a.cast, a.castAnim, a.key, a.element, elements[a.element]?.label].join(' ').toLowerCase().includes(q))
+  );
+}
+function chips(el, entries, set, single = false) {
+  el.innerHTML = entries.map(([v, label]) => `<button class="chip" data-v="${v}" aria-pressed="${set.has(v)}">${label}</button>`).join('');
+  el.querySelectorAll('.chip').forEach((c) => c.addEventListener('click', () => {
+    const v = c.dataset.v;
+    if (set.has(v)) set.delete(v); else set.add(v);
+    c.setAttribute('aria-pressed', set.has(v));
+    render();
+  }));
+}
+function render() {
+  const items = visible();
+  $('count').textContent = `${items.length} shown`;
+  const list = $('list');
+  if (filters.view === 'table') {
+    list.innerHTML = `<div class="table-wrap"><table><thead><tr><th>Ability</th><th>Element</th><th>Pack</th><th>Key</th><th>Aim</th><th>Gesture</th><th>Range m</th><th>Circle m</th><th>CD s</th><th>Controls</th><th>Tried</th></tr></thead><tbody>${
+      items.map((a) => `<tr data-uid="${a.uid}" style="--a:${a.accent || 'var(--accent)'}"><td><span class="sw" style="background:${a.accent || '#555'}"></span>${a.label}${a.pack === 'codex' ? ' <span class="tag-new">new</span>' : ''}</td><td>${elements[a.element]?.label ?? ''}</td><td>${a.pack}</td><td>${a.key || ''}</td><td>${a.cast || ''}</td><td>${a.castAnim || ''}</td><td>${a.range != null ? (a.minRange ?? 0) + '\u2013' + a.range : ''}</td><td>${a.zoneRadius ?? ''}</td><td>${a.cooldown ?? ''}</td><td>${a.controls ?? ''}</td><td><span class="dot ${tried.has(a.uid) ? 'done' : ''}"></span></td></tr>`).join('')
+    }</tbody></table></div>`;
+  } else {
+    // Grouped by element (what it is) or by pack (where it came from).
+    const order = filters.group === 'element' ? [...ELEMENTS.map((e) => e.id), 'other', 'moves'] : PACK_ORDER;
+    list.innerHTML = order.filter((g) => items.some((a) => groupOf(a) === g)).map((g) => {
+      const members = items.filter((a) => groupOf(a) === g);
+      let title, link;
+      if (filters.group === 'element') {
+        const el = elements[g];
+        title = el ? `<span style="color:${el.accent}">${el.label}</span>` : (g === 'moves' ? 'Character &amp; moves' : 'Other');
+        link = `<a>${members.length} ${g === 'moves' ? 'moves' : members.length === 1 ? 'ability' : 'abilities'}</a>`;
+      } else {
+        const pk = packs[g];
+        title = pk.title;
+        link = pk.repo.includes('/') && !pk.repo.includes('new') ? `<a href="https://github.com/${pk.repo}" target="_blank" rel="noopener">${pk.repo.split('/')[1]}</a>` : (g === 'moves' ? `<a>one shared caster</a>` : `<a>${pk.count} new \u00b7 Collective AI</a>`);
+      }
+      return `<div class="pack-head"><span>${title}</span>${link}</div><div class="cards">${
+        members.map((a) => `<button class="card ${a.status === 'archived' ? 'archived' : ''}" data-uid="${a.uid}" style="--a:${a.accent || 'var(--muted)'}"><span class="g">${svg(a)}</span><span class="n">${a.label}${a.pack === 'codex' ? ' <span class="tag-new">new</span>' : ''}</span><span class="m"><span class="dot ${tried.has(a.uid) ? 'done' : ''}"></span>${a.key ? `<span class="kbd">${a.key}</span>` : ''}${a.kind === 'ability' ? a.cast : a.kind}${filters.group === 'element' ? ` \u00b7 ${a.pack}` : ''}</span></button>`).join('')
+      }</div>`;
+    }).join('') || '<p class="note">Nothing matches \u2014 clear a filter.</p>';
+  }
+  list.querySelectorAll('[data-uid]').forEach((n) => n.addEventListener('click', () => {
+    const a = catalog.abilities.find((x) => x.uid === n.dataset.uid);
+    select(a, { cast: castable(a) || a.kind === 'move' });
+  }));
+  if (current) document.querySelectorAll(`[data-uid="${CSS.escape(current.uid)}"]`).forEach((n) => n.classList.add('sel'));
+}
+function updateTally() {
+  const cast = catalog.abilities.filter(castable);
+  const done = cast.filter((a) => tried.has(a.uid)).length;
+  const moves = catalog.abilities.filter((a) => a.kind === 'move').length;
+  const arch = catalog.abilities.filter((a) => a.kind === 'archived').length;
+  $('tally').textContent = `${cast.length} castable \u00b7 ${ELEMENTS.length} elements \u00b7 ${moves} moves \u00b7 ${arch} archived \u00b7 you've tried ${done}/${cast.length}`;
+}
+$('q').addEventListener('input', (e) => { filters.q = e.target.value; render(); });
+$('viewCards').onclick = () => { filters.view = 'cards'; store.set('view', 'cards'); $('viewCards').setAttribute('aria-pressed', true); $('viewTable').setAttribute('aria-pressed', false); render(); };
+$('viewTable').onclick = () => { filters.view = 'table'; store.set('view', 'table'); $('viewCards').setAttribute('aria-pressed', false); $('viewTable').setAttribute('aria-pressed', true); render(); };
+function setGroup(g) { filters.group = g; store.set('group', g); $('groupElement').setAttribute('aria-pressed', g === 'element'); $('groupPack').setAttribute('aria-pressed', g === 'pack'); sortCatalog(); render(); }
+$('groupElement').onclick = () => setGroup('element');
+$('groupPack').onclick = () => setGroup('pack');
+/** Element order (then pack order) for the element view; pack order for the pack view. */
+function sortCatalog() {
+  const rank = (a) => { const i = ELEMENTS.findIndex((e) => e.id === a.element); return i < 0 ? ELEMENTS.length + (a.pack === 'moves' ? 2 : 1) : i; };
+  catalog.abilities.sort((a, b) => filters.group === 'element'
+    ? rank(a) - rank(b) || PACK_ORDER.indexOf(a.pack) - PACK_ORDER.indexOf(b.pack)
+    : PACK_ORDER.indexOf(a.pack) - PACK_ORDER.indexOf(b.pack));
+}
+
+fetch('presets/catalog.json').then((r) => r.json()).then((c) => {
+  catalog = c;
+  for (const p of c.packs) packs[p.pack] = p;
+  ELEMENTS = c.elements || [];
+  for (const e of ELEMENTS) elements[e.id] = e;
+  sortCatalog();
+  chips($('kindChips'), Object.entries(KINDS), filters.kind);
+  chips($('elementChips'), ELEMENTS.map((e) => [e.id, e.label]), filters.element);
+  const casts = [...new Set(c.abilities.filter((a) => a.kind === 'ability').map((a) => a.cast))];
+  chips($('castChips'), casts.map((x) => [x, `${x} aim`]), filters.cast);
+  chips($('packChips'), PACK_ORDER.filter((p) => packs[p] && p !== 'moves').map((p) => [p, NEW_PACKS.includes(p) ? `${p} (new)` : p]), filters.pack);
+  $('groupElement').setAttribute('aria-pressed', filters.group === 'element'); $('groupPack').setAttribute('aria-pressed', filters.group === 'pack');
+  if (filters.view === 'table') $('viewTable').click(); else render();
+  updateTally();
+  const hash = location.hash.slice(1);
+  const start = c.abilities.find((a) => a.uid.replace(/[^A-Za-z0-9._~-]/g, '_') === hash) || c.abilities.find((a) => a.uid === 'collective/tempest');
+  select(start, { cast: true });
+}).catch(() => { $('tally').textContent = 'Could not load presets/catalog.json \u2014 serve this folder over http.'; });
+</script>

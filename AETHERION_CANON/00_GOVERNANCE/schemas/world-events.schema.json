@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aetherion.invalid/schemas/world-events.schema.json",
+  "title": "world-events",
+  "description": "Field-level documentation contract. Passing schema does not establish design approval or runtime behavior.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "oath_id",
+          "region_id",
+          "poi_id",
+          "name",
+          "trigger",
+          "server_authority",
+          "scope",
+          "eligible_participants",
+          "objectives",
+          "phases",
+          "success_result",
+          "setback_result",
+          "recovery",
+          "grief_limits",
+          "accessible_feedback"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "oath_id": {
+            "type": "string",
+            "pattern": "^oath-(0[1-9]|1[0-5])$"
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "phases": {
+            "type": "array",
+            "minItems": 3
+          },
+          "recovery": {},
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

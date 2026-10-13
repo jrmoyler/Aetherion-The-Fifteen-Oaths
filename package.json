@@ -1,0 +1,21 @@
+{
+  "name": "aetherion-foundation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Aetherion canon and source-preserving Ability Matrix integration",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "test:source": "npm --prefix runtime/ability-matrix test",
+    "test:all": "npm test && npm run test:source",
+    "validate:migration": "node tools/validate-migration.mjs",
+    "dev:abilities": "node tools/run-abilities.mjs dev",
+    "build:abilities": "node tools/run-abilities.mjs build",
+    "preview:abilities": "node tools/run-abilities.mjs preview",
+    "test:canon": "python3 AETHERION_CANON/19_VALIDATION/validate_canon.py --repo .",
+    "test:canon-fixtures": "python3 -m unittest discover -s AETHERION_CANON/19_VALIDATION -p test_validator.py"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

@@ -1,0 +1,951 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "region-01",
+      "oath_id": "oath-01",
+      "faction_id": "faction-01",
+      "name": "KILN OATH major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "western volcanic upland",
+      "elevation_band": "upland caldera rims above the western river valleys",
+      "climate": "wet windward slopes with rain shadows inside calderas",
+      "drainage_basin_ids": [
+        "basin-west"
+      ],
+      "transition": "basalt passes, managed ash beds and lower temperate forest",
+      "exports": [
+        "tools",
+        "refractory ceramics",
+        "specialist heat work"
+      ],
+      "imports": [
+        "food",
+        "ore",
+        "cooling expertise"
+      ],
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-07"
+      ],
+      "capital_id": "poi-01-capital",
+      "settlement_ids": [
+        "poi-01-capital",
+        "poi-01-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-01-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-01-event"
+      ],
+      "leader_id": "character-01-leader",
+      "civilian_character_ids": [
+        "character-01-civilian"
+      ],
+      "regional_quest_id": "quest-region-01",
+      "dossier_path": "../04_OATH_DOSSIERS/01_KILN_OATH.md",
+      "civilian_culture": "Shared ovens reduce household fuel costs; shift meals and apprentice adoption networks organize neighborhoods. The covenant asks for maintenance service proportional to furnace access, with civic alternatives for people unable to work heat shifts.",
+      "obligation": "Creation is a duty to leave something usable after the flame. Kiln citizens admire repairers as much as inventors and dispute whether destroying an obsolete institution counts as honest craft.",
+      "political_structure": "Workshop assemblies allocate furnace time; a basin council sets evacuation and river-temperature limits. Owners may appeal quotas, but no property title overrides a posted volcanic exclusion zone.",
+      "economy": "Kiln exports durable tools and refractory components, importing Fault ore, Tidal cooling expertise and Graft food. Wartime demand can raise workshop income while worsening civilian tool access, so prosperity and public welfare diverge visibly.",
+      "housing": "Housing clusters around shared cool courts outside hazard corridors. Players can customize kilns and ceramics, but a protected workshop lease cannot block evacuation; relocation after an event preserves ownership and stored belongings.",
+      "ecology": "Heat-tolerant scrub occupies cooled terraces; burrowers disperse mineral salts and nest beyond active vents. Slag-backed burrowers become hostile when dumping blocks nesting channels, creating a sanitation conflict rather than an evil species.",
+      "hazards": "Wet western winds meet volcanic heat, producing steam fog and ash rain. Eruption warnings combine ground vibration, flag patterns and audible bells; fire immunity never substitutes for oxygen or clear evacuation routes.",
+      "architecture": "Heavy buttressed shells enclose ventilated work courts, with replaceable ceramic roofs and external cooling galleries. Public buildings display repair seams as civic records rather than hiding all wear behind black spikes.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-02",
+      "oath_id": "oath-02",
+      "faction_id": "faction-02",
+      "name": "RIME ARCHIVE major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "northwestern high headwaters",
+      "elevation_band": "highest glacial catchments and sheltered rock-founded valleys",
+      "climate": "cold alpine with seasonal melt and whiteouts",
+      "drainage_basin_ids": [
+        "basin-west"
+      ],
+      "transition": "snow line descends into mixed stone and conifer margins",
+      "exports": [
+        "preservation",
+        "records",
+        "cold-chain services"
+      ],
+      "imports": [
+        "food",
+        "insulation",
+        "heating tools"
+      ],
+      "neighbor_ids": [
+        "region-01",
+        "region-03",
+        "region-05"
+      ],
+      "capital_id": "poi-02-capital",
+      "settlement_ids": [
+        "poi-02-capital",
+        "poi-02-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-02-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-02-event"
+      ],
+      "leader_id": "character-02-leader",
+      "civilian_character_ids": [
+        "character-02-civilian"
+      ],
+      "regional_quest_id": "quest-region-02",
+      "dossier_path": "../04_OATH_DOSSIERS/02_RIME_ARCHIVE.md",
+      "civilian_culture": "Households share warm reading rooms, preserved food and copying work. Civic duty is care for an entrusted record or vulnerable person; people may serve through translation or cooking without possessing elite magical literacy.",
+      "obligation": "Preservation protects the right of future people to decide, but freezing the present can steal that same right. Archivists disagree over whether releasing dangerous knowledge is a breach or the purpose of keeping it.",
+      "political_structure": "Collection councils separate custody, interpretation and public access decisions. Emergency seals expire unless independently renewed; the conflict is who can realistically challenge custodians when challengers lack the sealed evidence.",
+      "economy": "Rime exports preservation and reliable historical copies while importing food, insulation and heating tools. Paid premium access funds conservation but risks making public memory a luxury, which civic contracts can address.",
+      "housing": "Homes have warm inhabited cores and optional cold storage annexes. Housing progression expands workshops and shared reading access; players are not asked to maintain a fictional medical cryostasis system through punitive daily login fees.",
+      "ecology": "Lichen and sheltered fungi feed rime-antler grazers that browse thaw margins. Seasonal migration signals changing snowpack; predators approach towns when sealed roads interrupt that movement, not because frost creatures are inherently cruel.",
+      "hazards": "Persistent cold gives way to brief melt pulses, whiteouts and crevasse shifts. Slowing zones are covenant anomalies with marked boundaries, separate from ordinary hypothermia or the Time Oath's causality questions.",
+      "architecture": "Insulated stone shells surround blue-white ice vaults, with narrow vestibules and warm public rooms. Outer ice is replaceable environmental architecture; manuscript rooms and occupied structures need credible humidity and thermal separation.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement.",
+      "supporting_character_ids": [
+        "character-02-wayfarer"
+      ]
+    },
+    {
+      "id": "region-03",
+      "oath_id": "oath-03",
+      "faction_id": "faction-03",
+      "name": "STORM RELAY major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "north-central mountain saddles",
+      "elevation_band": "high ridge passes below the permanent snow line",
+      "climate": "orographic storms and icing",
+      "drainage_basin_ids": [
+        "basin-choir"
+      ],
+      "transition": "storm towers descend through rocky pasture to basin roads",
+      "exports": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "imports": [
+        "insulators",
+        "structural parts",
+        "food"
+      ],
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-06",
+        "region-09"
+      ],
+      "capital_id": "poi-03-capital",
+      "settlement_ids": [
+        "poi-03-capital",
+        "poi-03-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-03-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-03-event"
+      ],
+      "leader_id": "character-03-leader",
+      "civilian_character_ids": [
+        "character-03-civilian"
+      ],
+      "regional_quest_id": "quest-region-03",
+      "dossier_path": "../04_OATH_DOSSIERS/03_STORM_RELAY.md",
+      "civilian_culture": "Neighbors share public listening hours and teach verification of relayed information. Civic duty means keeping an addressable response point or staffing a fallback route, with privacy-protecting options for people fleeing persecution.",
+      "obligation": "A message has value only if someone can answer. Relay culture celebrates connection while arguing over whether a reliable network may ever silence destabilizing speech or charge essential communities out of participation.",
+      "political_structure": "Tower cooperatives elect delegates to a routing council; public emergency traffic has protected priority. Commercial operators seek exceptions, and local towers can resist central orders at the risk of breaking shared guarantees.",
+      "economy": "Storm sells transmission capacity and weather services, importing insulation and structural repairs. Emergency service is ring-fenced from commercial pricing; factions contest how to fund universal access without embedding covert political control.",
+      "housing": "Homes use shielded rooftop receivers and shared maintenance stairs. Players customize message rooms and workshops, but no private build can place lethal charge across public paths or harvest other players' communications.",
+      "ecology": "Copper-wing kites exploit rising air and roost outside discharge zones. Protective nesting sleeves reduce outages; indiscriminate pest removal harms a species that also warns crews of unstable air currents.",
+      "hazards": "Orographic storms, icing and sudden crosswinds constrain travel. Lightning is channeled along marked corridors, with accessible countdown warnings and grounded shelters; routine outdoor life remains possible between events.",
+      "architecture": "Tall open-frame towers lean into cable tension, with ceramic breaks and broad grounding feet. Habitable spaces are low and shielded; dangerous transmission hardware remains visibly distinct from ordinary domestic lighting.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-04",
+      "oath_id": "oath-04",
+      "faction_id": "faction-04",
+      "name": "TIDAL COVENANT major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "southwestern mainland estuary",
+      "elevation_band": "low coastal floodplain, causeway-linked reef districts and raised refuge terraces",
+      "climate": "warm maritime, seasonal rain and storm surge",
+      "drainage_basin_ids": [
+        "basin-west",
+        "basin-choir"
+      ],
+      "transition": "fresh river channels become brackish marsh then coastal water",
+      "exports": [
+        "shipping",
+        "fisheries",
+        "hydraulics"
+      ],
+      "imports": [
+        "grain",
+        "timber",
+        "durable tools"
+      ],
+      "neighbor_ids": [
+        "region-07",
+        "region-08"
+      ],
+      "capital_id": "poi-04-capital",
+      "settlement_ids": [
+        "poi-04-capital",
+        "poi-04-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-04-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-04-event"
+      ],
+      "leader_id": "character-04-leader",
+      "civilian_character_ids": [
+        "character-04-civilian"
+      ],
+      "regional_quest_id": "quest-region-04",
+      "dossier_path": "../04_OATH_DOSSIERS/04_TIDAL_COVENANT.md",
+      "civilian_culture": "Public washing courts, shared cooking water and boat repair shape everyday encounters. Obligation is a measurable maintenance share with hardship relief; hereditary debt is a contested institution, never a natural law of the element.",
+      "obligation": "Water is received, used and passed onward. Covenant culture values adaptable agreements, but inherited obligations can become ownership disguised as gratitude when a community cannot survive without another's channels.",
+      "political_structure": "Watershed assemblies give upstream and downstream settlements a voice; harbor houses manage navigation separately. Drought arbitration requires public flow records so maritime wealth cannot silently overrule drinking-water needs.",
+      "economy": "Tidal exports transport and water-management expertise while importing grain, timber and tools. Water allocation is not a simple auction; drought policy weighs household need, ecological flow and economically vital irrigation.",
+      "housing": "Homes have floodable ground utility floors and protected living levels. Canal plots include maintenance easements, and event damage changes repair tasks rather than permanently deleting stored furniture or blocking residents from their property.",
+      "ecology": "Reedback grazers keep channels open and shelter fish nurseries. Overgrazing or exclusion damages habitat differently, giving husbandry and fishing meaningful seasonal responsibilities beyond harvesting a decorative coastal biome.",
+      "hazards": "Warm marine air brings seasonal rain, storm surge and brackish intrusion. Tide calendars are forecasts with uncertainty, and evacuation routes remain overland when magical water control fails.",
+      "architecture": "Porous limestone arcades, glazed channel walls and removable flood floors embrace changing water levels. Public quays include accessible ramps and dry refuge levels; living aqueduct growth needs pruning and inspection.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-05",
+      "oath_id": "oath-05",
+      "faction_id": "faction-05",
+      "name": "FAULT CHOIR major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "central-west watershed divide",
+      "elevation_band": "crystal-veined ridges, canyon shoulders and stepped valley floors",
+      "climate": "wet western faces, dry eastern lee and flash-flooding canyon bottoms",
+      "drainage_basin_ids": [
+        "basin-choir"
+      ],
+      "transition": "exposed stone gives way to cultivated terrace soils and basin woodland",
+      "exports": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "imports": [
+        "tool steels",
+        "food diversity",
+        "message hardware"
+      ],
+      "neighbor_ids": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-07",
+        "region-08",
+        "region-09"
+      ],
+      "capital_id": "poi-05-capital",
+      "settlement_ids": [
+        "poi-05-capital",
+        "poi-05-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-05-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-05-event"
+      ],
+      "leader_id": "character-05-leader",
+      "civilian_character_ids": [
+        "character-05-civilian"
+      ],
+      "regional_quest_id": "quest-region-05",
+      "dossier_path": "../04_OATH_DOSSIERS/05_FAULT_CHOIR.md",
+      "civilian_culture": "Public maintenance days repair paths and exchange grievances around common load maps. Civic obligation is contributing to shared structural safety; caste-like inherited assignments are a contested abuse of that principle.",
+      "obligation": "A promise should bear weight, but a structure survives by admitting movement. Choir citizens debate whether fidelity means preserving exact forms or keeping people safe when conditions make the old form fail.",
+      "political_structure": "Terrace councils govern locally, while a load assembly certifies changes affecting shared foundations. Appeals require independent surveys, creating conflict when the institution that defines safe evidence also controls survey training.",
+      "economy": "Fault exports minerals and structural expertise, importing food diversity, tool steels and communication parts. Royalties can fund common foundations or entrench claim holders; the regional quest determines oversight rather than creating free resources.",
+      "housing": "Housing uses adaptable terrace modules with inspectable load budgets. Players decorate within safe envelopes; structural failures route through repairable instance states and never allow another player to undermine a neighbor's stored home.",
+      "ecology": "Resonance moles aerate thin soils and react to machinery vibrations. Cave fungi support food production but depend on ventilation and waste management, preventing the underground realm from becoming a consequence-free pantry.",
+      "hazards": "Rain-shadow slopes are dry, canyon bottoms flash-flood, and fault movements disrupt foundations. Seismic warnings combine sound, gauge movement and visual notices so deaf players can participate in rescue and puzzles.",
+      "architecture": "Compression arches, buttressed galleries and deliberately separated movement joints make endurance visible. Crystal appears in surveyed seams and replaceable resonators, not as unsupported sharp geometry holding every roof.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-06",
+      "oath_id": "oath-06",
+      "faction_id": "faction-06",
+      "name": "REED RESONANCE major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "northeastern inland escarpment",
+      "elevation_band": "windward ridge shoulders and leeward cliff terraces",
+      "climate": "gusty upland with sheltered garden microclimates",
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "transition": "cliff scrub grades into central grassland and eastern dry valleys",
+      "exports": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "imports": [
+        "grain",
+        "fasteners",
+        "repair materials"
+      ],
+      "neighbor_ids": [
+        "region-03",
+        "region-09",
+        "region-10",
+        "region-13"
+      ],
+      "capital_id": "poi-06-capital",
+      "settlement_ids": [
+        "poi-06-capital",
+        "poi-06-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-06-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-06-event"
+      ],
+      "leader_id": "character-06-leader",
+      "civilian_character_ids": [
+        "character-06-civilian"
+      ],
+      "regional_quest_id": "quest-region-06",
+      "dossier_path": "../04_OATH_DOSSIERS/06_REED_RESONANCE.md",
+      "civilian_culture": "Communal kitchens use wind-driven machinery while storytellers, signers and scribes share cultural authority. Civic obligation is to help carry essential warnings in an accessible form, never to sing or accept one approved voice.",
+      "obligation": "Expression is a shared act, yet no chorus owns its singers. Reed culture values attentive listening and improvisation while confronting institutions that mistake a pleasing public harmony for genuine consent.",
+      "political_structure": "Amphitheater assemblies pair open speaking sessions with quiet written submissions. Conductors coordinate emergencies but must surrender that authority afterward; prolonged emergencies are the central route by which temporary discipline becomes permanent control.",
+      "economy": "Reed exports textiles, forecasting and sound engineering while importing structural fasteners and grain. Cultural commissions can fund shared stages or reward only favored voices; procurement reforms affect who can afford to speak.",
+      "housing": "Cliff homes cluster behind windbreaks, with optional performance balconies and quiet interior rooms. Housing customization includes sound control; no player can impose disruptive audio on neighboring households or block sheltered public circulation.",
+      "ecology": "Sail-feather climbers nest in sheltered cracks and spread cliff plants on their plumage. Glider traffic disturbs breeding paths; seasonal route closures can support husbandry and gathering without making wildlife mere hazards.",
+      "hazards": "Crosswinds, downdrafts and low cloud complicate travel; leeward gardens provide ordinary calm habitat. Wind warnings use moving flags, captions and vibration-compatible cues rather than sound alone.",
+      "architecture": "Carved timber ribs, tension cables and adjustable acoustic baffles create open structures that respond to weather. Large occupied buildings anchor to rock, and flexible bridges have visible load limits and calm-weather alternatives.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-07",
+      "oath_id": "oath-07",
+      "faction_id": "faction-07",
+      "name": "GRAFT SANCTUARY major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "western lowland forest belt",
+      "elevation_band": "river-fed foothills and broad cultivated forest floors",
+      "climate": "wet temperate to warm southern forest",
+      "drainage_basin_ids": [
+        "basin-west"
+      ],
+      "transition": "ash-rich upper farms grade into riparian woods and managed wetlands",
+      "exports": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "imports": [
+        "tools",
+        "salt",
+        "mineral supplements"
+      ],
+      "neighbor_ids": [
+        "region-01",
+        "region-04",
+        "region-05",
+        "region-08"
+      ],
+      "capital_id": "poi-07-capital",
+      "settlement_ids": [
+        "poi-07-capital",
+        "poi-07-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-07-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-07-event"
+      ],
+      "leader_id": "character-07-leader",
+      "civilian_character_ids": [
+        "character-07-civilian"
+      ],
+      "regional_quest_id": "quest-region-07",
+      "dossier_path": "../04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md",
+      "civilian_culture": "Shared nurseries, food preservation and animal care organize daily work. Covenant duty is stewardship proportionate to benefit, with nonphysical contributions accepted and the right to refuse personal biological alteration explicitly protected.",
+      "obligation": "Growth succeeds when different lives can flourish together. Sanctuary culture values mutual care, yet its institutions can confuse interdependence with a right to absorb dissenting people, species or settlements into one managed organism.",
+      "political_structure": "Garden commons elect seasonal stewards, while sanctuary councils regulate grafts affecting shared roots and waterways. Consent records must be renewed when a graft changes function, preventing old permission from becoming unlimited biological ownership.",
+      "economy": "Graft exports food, fibers and ecological restoration while importing tools, salt and mineral supplements. Crop diversity protects trade resilience; pushing every farm toward the highest-yield template risks a continent-wide shared vulnerability.",
+      "housing": "Homes grow through authored modular stages with inspectable supports and optional garden plots. Players choose living or conventional interiors, and inactivity never lets unchecked growth destroy furniture or revoke ownership.",
+      "ecology": "Seed-carrier browsers distribute fruit and maintain glades; predators prevent destructive overbrowsing. Rootpath harts are trained animals with welfare and forage needs, not summonable equipment that disappears when inconvenient.",
+      "hazards": "Rain, fungal blooms and seasonal canopy shifts define weather. Drought and invasive overgrowth are different events requiring different responses, so healing the land never means maximizing biomass everywhere.",
+      "architecture": "Living timber frames combine trained roots with replaceable woven walls and stone hearth islands. Occupied structures include rot inspections, firebreaks and accessible ground routes rather than assuming every resident climbs a giant tree.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement.",
+      "supporting_character_ids": [
+        "character-07-handler"
+      ]
+    },
+    {
+      "id": "region-08",
+      "oath_id": "oath-08",
+      "faction_id": "faction-08",
+      "name": "BITTERGLASS GUILD major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "southwestern treatment wetlands",
+      "elevation_band": "low-gradient inland channels above tidal influence",
+      "climate": "humid seasonal floodplain with stagnant-air episodes",
+      "drainage_basin_ids": [
+        "basin-choir"
+      ],
+      "transition": "terraced drainage becomes managed marsh, then brackish estuary",
+      "exports": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "imports": [
+        "fuel",
+        "food",
+        "precision vessels"
+      ],
+      "neighbor_ids": [
+        "region-04",
+        "region-05",
+        "region-07",
+        "region-09",
+        "region-12"
+      ],
+      "capital_id": "poi-08-capital",
+      "settlement_ids": [
+        "poi-08-capital",
+        "poi-08-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-08-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-08-event"
+      ],
+      "leader_id": "character-08-leader",
+      "civilian_character_ids": [
+        "character-08-civilian"
+      ],
+      "regional_quest_id": "quest-region-08",
+      "dossier_path": "../04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md",
+      "civilian_culture": "Public assay days, shared washhouses and transparent labeling are civic rituals. Covenant duty is disclosure of known risks and participation in remediation, with protection for whistleblowers rather than compulsory self-experimentation.",
+      "obligation": "Knowledge becomes ethical through how it is tested, shared and used. Guild culture rejects the idea that a substance is inherently good or evil, while facing the temptation to monetize the very vulnerability its expertise can relieve.",
+      "political_structure": "Laboratory houses hold a guild charter, but resident councils and independent testers can challenge permits. The dramatic conflict is whether affected communities can fund evidence when the accused laboratories own most instruments.",
+      "economy": "Bitterglass exports medicines, reagents and testing services while importing fuel and food. Open formulas reduce monopoly rents but require replacement funding for quality assurance, creating a concrete cost for an apparently easy reform.",
+      "housing": "Homes use clean courtyards, separate workshop drains and optional certified laboratory modules. Player crafting cannot leak persistent hazards into neighboring plots or turn public sanitation into a griefing mechanic.",
+      "ecology": "Filter-shelled crawlers concentrate minerals and require careful habitat management. Harvesting them for reagents can improve short-term treatment while reducing long-term filtration, giving gatherers ecological choices beyond rarity tiers.",
+      "hazards": "Humid fog, stagnant air and seasonal floods alter exposure routes. Hazard cues name inhalation, contact or ingestion pathways without pretending the fiction is real medical guidance; safe detours remain obvious.",
+      "architecture": "Brass-framed glasshouses, washable masonry and compartmentalized work courts support isolation and observation. Housing and markets remain separated from hazardous process areas, with emergency exits independent of sealed research corridors.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-09",
+      "oath_id": "oath-09",
+      "faction_id": "faction-09",
+      "name": "OATH OF DAYBREAK major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "central temperate basin",
+      "elevation_band": "broad river terraces between highland approaches",
+      "climate": "moderate continental basin with seasonal fog and summer heat",
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "transition": "meadows and farms connect upland roads to southern river terraces",
+      "exports": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "imports": [
+        "food",
+        "stone",
+        "medical materials"
+      ],
+      "neighbor_ids": [
+        "region-03",
+        "region-05",
+        "region-06",
+        "region-08",
+        "region-12",
+        "region-13"
+      ],
+      "capital_id": "poi-09-capital",
+      "settlement_ids": [
+        "poi-09-capital",
+        "poi-09-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-09-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-09-event"
+      ],
+      "leader_id": "character-09-leader",
+      "civilian_character_ids": [
+        "character-09-civilian"
+      ],
+      "regional_quest_id": "quest-region-09",
+      "dossier_path": "../04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md",
+      "civilian_culture": "Public meals, open petitions and care shifts define civic participation. Covenant duty is to offer protection without demanding confession, with institutional disputes over whether that ideal can survive security threats.",
+      "obligation": "Protection is legitimate when the protected can question it. Daybreak culture values public truth and mutual care, but radiant certainty can turn disagreement into presumed guilt and make compassion conditional on obedience.",
+      "political_structure": "Sanctuary councils administer care while civic benches adjudicate disputes with documented appeals. Wardens answer to both, making delay possible but also preventing a single charismatic protector from legally owning every decision.",
+      "economy": "Daybreak exports sanctuary services, arbitration and precision light work while importing food and construction materials. Donor dependence can distort protection priorities, so transparent budgets matter as much as luminous ideals.",
+      "housing": "Housing includes mixed-income courtyard blocks and refuge rooms, with ward sockets and shared kitchens. Sanctuary status protects access during conflict; players cannot place judgment effects that police other players' identities or movement.",
+      "ecology": "Prism-backed coursers graze public meadow belts and pull clinic carts. Urban birds and pollinator gardens support ordinary life, while excessive ward brightness can disrupt nocturnal wildlife and neighboring residents.",
+      "hazards": "A moderate basin climate brings seasonal fog, summer heat and flood risk. Magical radiance does not abolish night or weather; ward failures reveal dependence on maintenance rather than proving that residents were morally unworthy.",
+      "architecture": "Marble arcades, sun-shading colonnades and visible public thresholds frame civic authority. Shelters and clinics share the same durable materials as courts, preventing the architecture from implying that only judgment deserves grandeur.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-10",
+      "oath_id": "oath-10",
+      "faction_id": "faction-10",
+      "name": "TIDAL OBSERVATORY major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "northeastern sea headland",
+      "elevation_band": "high coastal cliffs, stable terraces and anchored research platforms",
+      "climate": "clear dry intervals, sea wind and coastal fog",
+      "drainage_basin_ids": [
+        "basin-east"
+      ],
+      "transition": "headland scrub descends through dry gullies toward eastern valleys",
+      "exports": [
+        "navigation",
+        "measurement",
+        "gravity engineering"
+      ],
+      "imports": [
+        "food",
+        "metals",
+        "maintenance labor"
+      ],
+      "neighbor_ids": [
+        "region-06",
+        "region-13",
+        "region-11"
+      ],
+      "capital_id": "poi-10-capital",
+      "settlement_ids": [
+        "poi-10-capital",
+        "poi-10-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-10-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-10-event"
+      ],
+      "leader_id": "character-10-leader",
+      "civilian_character_ids": [
+        "character-10-civilian"
+      ],
+      "regional_quest_id": "quest-region-10",
+      "dossier_path": "../04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md",
+      "civilian_culture": "Public sky evenings share discoveries in accessible language, while ballast crews host practical repair schools. Civic duty is to disclose uncertainty and compensate affected communities, not to accept every experiment for the sake of progress.",
+      "obligation": "Understanding the whole is valuable only when local lives still count. Observatory culture celebrates disciplined curiosity, yet its models can treat people as negligible errors when elegant predictions conflict with lived consequences.",
+      "political_structure": "Research circles publish models to a common review forum, while inhabited platform councils approve experiments affecting their homes. The institutional flaw is unequal authority between prestigious theorists and the people carrying practical risk.",
+      "economy": "The Observatory exports navigation and measurement services while importing food, metals and maintenance labor. Funding tied to spectacular results can distort research priorities, giving replication and local safety visible political value.",
+      "housing": "Homes sit mostly on stable terraces, with optional anchored observation decks. Gravity customization is bounded inside housing instances and cannot alter public paths, guests' controls or neighboring plots without clear consent.",
+      "ecology": "Ballast-wing roostlings nest around stable thermal updrafts and avoid shifting gravity fields. Their movements warn workers of local anomalies, giving ecology an observational role without claiming animals understand celestial mathematics.",
+      "hazards": "Coastal fog, strong sea wind and local gravity distortions define hazards. Anomalies have bounded volumes and safe transition zones, with motion-sickness options and a conventional-ground route through essential services.",
+      "architecture": "Balanced cantilevers, broad instrument bearings and visible ballast masses frame controlled imbalance. Floating structures require legible anchoring, safe shutdown and occupied-space clearance, not decorative impossibility everywhere.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-11",
+      "oath_id": "oath-11",
+      "faction_id": "faction-11",
+      "name": "THE MISSING COURT major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "eastern karst valleys",
+      "elevation_band": "broken limestone valleys and cave systems above the coastal plain",
+      "climate": "cool fog pockets amid drier sheltered slopes",
+      "drainage_basin_ids": [
+        "basin-east"
+      ],
+      "transition": "dry valley surfaces meet damp cave-fed channels and lower coastal scrub",
+      "exports": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "imports": [
+        "food",
+        "tools",
+        "reliable public records"
+      ],
+      "neighbor_ids": [
+        "region-10",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "capital_id": "poi-11-capital",
+      "settlement_ids": [
+        "poi-11-capital",
+        "poi-11-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-11-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-11-event"
+      ],
+      "leader_id": "character-11-leader",
+      "civilian_character_ids": [
+        "character-11-civilian"
+      ],
+      "regional_quest_id": "quest-region-11",
+      "dossier_path": "../04_OATH_DOSSIERS/11_THE_MISSING_COURT.md",
+      "civilian_culture": "Residents exchange practical favors through trusted intermediaries and may use chosen public identities. Covenant duty is to protect entrusted information within agreed limits, never to grant officials unrestricted permission to alter memory.",
+      "obligation": "Some truths need shelter before they can be spoken. Court culture protects privacy and refuge while confronting the danger that secrecy lets powerful people erase obligations, victims and even the evidence that anyone has been harmed.",
+      "political_structure": "Veiled benches separate protective custody from adjudication, with independent witnesses holding partial records. No single office should control identity, testimony and enforcement, but fragmentation also makes accountability slow and incomplete.",
+      "economy": "The Court exports protected escrow, confidential mediation and refuge logistics while importing ordinary food and tools. Confidentiality fees risk pricing poor residents out of safety, making public funding and narrow eligibility rules consequential.",
+      "housing": "Homes use layered thresholds, private courtyards and consent-based guest visibility settings. Concealment is cosmetic or instance-scoped for housing and cannot hide hazardous structures, evade moderation or expose other players' private information.",
+      "ecology": "Dusk-window stalkers hunt along patchy light boundaries and avoid crowded refuges. Habitat corridors remain physical even when an Oath conceals them, allowing ecological study without claiming every shadow is another dimension.",
+      "hazards": "Sea fog, cave damp and intermittent void pockets reduce visibility. Hazard boundaries use contour cues and spatial audio alternatives; concealment cannot remove subtitles, exits or critical combat warnings.",
+      "architecture": "Partially screened courtyards, offset doorways and visibly repaired ruined halls control sightlines. Phasing chambers have stable thresholds and fallback exits, preventing impossible architecture from becoming arbitrary player entrapment.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-12",
+      "oath_id": "oath-12",
+      "faction_id": "faction-12",
+      "name": "SANGUINE COVENANT major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "southern interior redlands",
+      "elevation_band": "low iron-rich hills and river-crossing terraces",
+      "climate": "seasonal dry heat, cool uplands and flood pulses",
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "transition": "central farms grade into scrub pasture and southeastern steppe",
+      "exports": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "imports": [
+        "medicines",
+        "tools",
+        "grain reserves"
+      ],
+      "neighbor_ids": [
+        "region-08",
+        "region-09",
+        "region-13",
+        "region-14"
+      ],
+      "capital_id": "poi-12-capital",
+      "settlement_ids": [
+        "poi-12-capital",
+        "poi-12-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-12-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-12-event"
+      ],
+      "leader_id": "character-12-leader",
+      "civilian_character_ids": [
+        "character-12-civilian"
+      ],
+      "regional_quest_id": "quest-region-12",
+      "dossier_path": "../04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md",
+      "civilian_culture": "Communal meals, chosen-kin ceremonies and recorded care commitments organize daily life. Covenant duty must specify scope, duration and withdrawal terms; coercive inheritance is an institution to interrogate, not an unavoidable biological destiny.",
+      "obligation": "A gift matters because it can be refused. Sanguine culture honors mutual sacrifice and remembered care, yet inherited pacts can transform gratitude into ownership when descendants are made responsible for promises they never chose.",
+      "political_structure": "Kin assemblies oversee communal care while consent tribunals review new and inherited pacts. Leaders disagree whether a descendant may end an obligation whose benefits still support others, making transition funding central to reform.",
+      "economy": "Sanguine exports trained relief crews, textiles and caravan support while importing medicines and tools. Mutual-aid pools provide real security but can become coercive debt; reform must replace their useful functions rather than simply erase records.",
+      "housing": "Housing includes multi-household courts, private withdrawal rooms and guest rights for chosen kin. Players can join communal homes without granting others control of their character, inventory or ability to leave.",
+      "ecology": "Ironbrush herdbeasts graze scrub and support transport, fiber and food economies. Redland packhorns require careful load management and communal pasture agreements, creating husbandry beyond the covenant's combat identity.",
+      "hazards": "Hot dry spells alternate with seasonal floods and cool upland nights. Lifeforce magic does not replace water, nutrition or rest; recovery logistics remain an ordinary civic concern across both prosperity and conflict.",
+      "architecture": "Thick communal halls, shaded recovery courts and interlinked household thresholds express mutual dependence. Private rooms and withdrawal spaces are equally important, giving architectural form to the right to refuse participation.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-13",
+      "oath_id": "oath-13",
+      "faction_id": "faction-13",
+      "name": "FOLDED THEATRE major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "east-central sheltered valleys",
+      "elevation_band": "dry basins and low passes between escarpment and karst",
+      "climate": "dry summers, cool nights and episodic valley fog",
+      "drainage_basin_ids": [
+        "basin-east"
+      ],
+      "transition": "cliff gardens become dry orchards and stable valley towns",
+      "exports": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "imports": [
+        "food",
+        "precision materials",
+        "timber"
+      ],
+      "neighbor_ids": [
+        "region-06",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-14"
+      ],
+      "capital_id": "poi-13-capital",
+      "settlement_ids": [
+        "poi-13-capital",
+        "poi-13-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-13-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-13-event"
+      ],
+      "leader_id": "character-13-leader",
+      "civilian_character_ids": [
+        "character-13-civilian"
+      ],
+      "regional_quest_id": "quest-region-13",
+      "dossier_path": "../04_OATH_DOSSIERS/13_FOLDED_THEATRE.md",
+      "civilian_culture": "Residents celebrate rehearsal, costume exchange and public disclosure of staged experiences. Covenant duty is to mark consequential illusions and preserve informed exit, while political patrons seek exceptions for supposedly beneficial civic myths.",
+      "obligation": "Imagination lets people rehearse a different life, but an audience deserves to know when it is being asked to believe. Theatre culture prizes invention while disputing whether a beautiful deception can ever substitute for informed choice.",
+      "political_structure": "District troupes share a civic stage charter, while plain-surface inspectors certify essential routes and contracts. The central conflict is whether those inspectors protect consent or merely enforce the tastes of established patrons.",
+      "economy": "The Theatre exports entertainment, training simulations and architectural illusion while importing food and precision materials. Patronage can fund civic imagination or monopolize the public story; transparent commissioning changes whose futures get rehearsed.",
+      "housing": "Homes offer reversible visual themes over a stable collision layout. Guests can choose a plain-surface mode, and decorative illusions cannot conceal exits, hazardous furniture or the actual permissions governing a shared room.",
+      "ecology": "Mirror-mantled foxes use patterned fur and behavior to evade predators without literally becoming magical holograms. Altered variants require separate concepts, preserving a meaningful distinction between natural camouflage and Oath-driven illusion.",
+      "hazards": "Dry summers, cool nights and episodic valley fog shape the region. Illusions may change perceived weather only in bounded authored scenes; actual hazards retain accessible cues and cannot be hidden by decorative spectacle.",
+      "architecture": "Reversible panels, mirrored courtyards and stage-like thresholds make transformation mechanically legible. Backstage corridors and structural columns remain readable, giving artists tools instead of making every building arbitrarily impossible.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-14",
+      "oath_id": "oath-14",
+      "faction_id": "faction-14",
+      "name": "ESCAPEMENT ROAD major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "southeastern inland transport terraces",
+      "elevation_band": "low rolling steppe and graded river corridors",
+      "climate": "seasonal drought with intense rain and flash floods",
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "transition": "pasture and roadside settlements approach humid coastal industry",
+      "exports": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "imports": [
+        "fuel",
+        "food",
+        "structural materials"
+      ],
+      "neighbor_ids": [
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-15"
+      ],
+      "capital_id": "poi-14-capital",
+      "settlement_ids": [
+        "poi-14-capital",
+        "poi-14-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-14-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-14-event"
+      ],
+      "leader_id": "character-14-leader",
+      "civilian_character_ids": [
+        "character-14-civilian"
+      ],
+      "regional_quest_id": "quest-region-14",
+      "dossier_path": "../04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md",
+      "civilian_culture": "Communal meals follow arrivals rather than one universal clock, and public rest is a respected contribution to safety. Covenant duty includes returning borrowed motion through maintenance, not submitting every hour of life to a timetable.",
+      "obligation": "Movement matters because consequences arrive somewhere. Road culture honors progress and second chances while confronting the temptation to treat people as schedule errors and to borrow indefinitely from a future expected to repair the present.",
+      "political_structure": "Route communes manage local roads, while a timetable assembly coordinates long-distance service. Rest guarantees and public detours limit central scheduling authority; emergency accelerations require a stated end condition and review.",
+      "economy": "Escapement exports transport and precision motion components while importing fuel, food and structural materials. Express profits can starve local stops, so route subsidies and maintenance debt shape the regional economy visibly.",
+      "housing": "Homes sit behind traffic buffers and offer workshops, stables and quiet courtyards. Time-themed decoration cannot accelerate another player's upkeep, alter real schedules or punish offline residents through fictional aging.",
+      "ecology": "Steppe longrunners migrate along seasonal forage routes that highways can sever. Road crews maintain wildlife crossings, making faster transport answerable to ecological continuity rather than automatically superior to older paths.",
+      "hazards": "Seasonal drought, flash flooding and local time stutters constrain travel. Temporal anomalies have marked boundaries and consistent entry/exit behavior; ordinary weather and fatigue continue to matter outside them.",
+      "architecture": "Long low canopies, modular viaducts and exposed service galleries communicate continuous movement. Moving architecture has locked safe states, guarded pinch points and alternate passages for people unable to use kinetic shortcuts.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    },
+    {
+      "id": "region-15",
+      "oath_id": "oath-15",
+      "faction_id": "faction-15",
+      "name": "IMPULSE FOUNDRY major realm",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "relative_position": "southeastern coastal plain",
+      "elevation_band": "low river outlets, raised freight yards and inland service terraces",
+      "climate": "humid maritime with storm surge and industrial heat islands",
+      "drainage_basin_ids": [
+        "basin-dawn",
+        "basin-east"
+      ],
+      "transition": "river terraces widen into silt plains, ports and managed marsh buffers",
+      "exports": [
+        "machinery",
+        "standardized parts",
+        "repair systems"
+      ],
+      "imports": [
+        "ore",
+        "food",
+        "water",
+        "specialist craft"
+      ],
+      "neighbor_ids": [
+        "region-11",
+        "region-14"
+      ],
+      "capital_id": "poi-15-capital",
+      "settlement_ids": [
+        "poi-15-capital",
+        "poi-15-settlement"
+      ],
+      "dungeon_ids": [
+        "poi-15-dungeon"
+      ],
+      "event_location_ids": [
+        "poi-15-event"
+      ],
+      "leader_id": "character-15-leader",
+      "civilian_character_ids": [
+        "character-15-civilian"
+      ],
+      "regional_quest_id": "quest-region-15",
+      "dossier_path": "../04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md",
+      "civilian_culture": "Repair schools, communal workshops and shift kitchens support civic life. Covenant duty is to maintain and share the benefits of tools, with a protected right to challenge unsafe production orders and propose alternatives.",
+      "obligation": "A tool should expand the choices of the people using it. Foundry culture values practical invention, yet its institutions can reduce workers and citizens to interchangeable components when efficiency becomes the only measure of a good life.",
+      "political_structure": "Production councils coordinate shared machinery while worker assemblies and settlement boards negotiate service priorities. Emergency command can accelerate repairs, but permanent emergency status is the central threat to civic self-government.",
+      "economy": "Impulse exports machinery and standardized components while importing ore, food, water and specialized craft. Automation can lower prices and eliminate livelihoods simultaneously, so retraining and shared ownership matter to the regional resolution.",
+      "housing": "Housing combines durable modular units with personal workshops and communal repair bays. Players customize cosmetic machinery without exporting noise, collision hazards or resource drains to neighbors, and event reconstruction preserves ownership and belongings.",
+      "ecology": "Scrap-nesting scavengers exploit warm service cavities and transport seeds between disturbed sites. Habitat design and waste management can reduce conflict, while indiscriminate extermination removes useful scavenging without fixing the underlying problem.",
+      "hazards": "Humid coastal summers, storm surges and industrial heat islands define weather. Waste heat and exhaust have bounded environmental consequences, and safety warnings remain legible through rain, steam and dense machinery.",
+      "architecture": "Large bolted frames, crane spans and modular service decks expose how forces travel. Human-scale entrances, repair access and sheltered civic courts prevent the entire city from reading as machinery with incidental people attached.",
+      "first_oath_independence": "Common roads, tool solutions and public services never require binding this Oath.",
+      "terrain_authority": "Conceptual relative footprint; no approved coordinates, dimensions, terrain mesh or travel-time measurement."
+    }
+  ]
+}

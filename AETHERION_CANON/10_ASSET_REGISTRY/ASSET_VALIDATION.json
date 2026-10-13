@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-ASSET-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "asset-record-ids",
+      "status": "PASS",
+      "detail": "748 unique record IDs"
+    },
+    {
+      "id": "asset-required-fields",
+      "status": "PASS",
+      "detail": "All requested master asset field groups present."
+    },
+    {
+      "id": "asset-dependency-resolves",
+      "status": "PASS",
+      "detail": "2235 internal asset edges checked."
+    },
+    {
+      "id": "asset-dependency-dag",
+      "status": "PASS",
+      "detail": "No prerequisite cycles"
+    },
+    {
+      "id": "asset-taxonomy-coverage",
+      "status": "PASS",
+      "detail": "15 Oaths x34 scoped family requirements; not production completion."
+    },
+    {
+      "id": "reference-files",
+      "status": "PASS",
+      "detail": "114 actual PNGs decode; hashes recorded; visual reviews at montage level."
+    },
+    {
+      "id": "reference-castable-links",
+      "status": "PASS",
+      "detail": "31 exact source UIDs exist; painted parameter equality NOT VERIFIED."
+    },
+    {
+      "id": "creature-contract",
+      "status": "PASS",
+      "detail": "90 proposed records align named natural/boss/mount fields with world entity contract;4 recovered manifestation references."
+    },
+    {
+      "id": "production-art-approval",
+      "status": "HUMAN_REVIEW",
+      "detail": "No individual final-art approvals recovered."
+    },
+    {
+      "id": "model-topology-rig-collision",
+      "status": "NOT_RUN",
+      "detail": "Dedicated Oath production models not constructed; imported source binaries require inspection."
+    },
+    {
+      "id": "gpu-vfx-readability",
+      "status": "NOT_RUN",
+      "detail": "Follow castable runtime audit; no GPU/overlap acceptance claimed by art review."
+    },
+    {
+      "id": "licenses",
+      "status": "HUMAN_REVIEW",
+      "detail": "DEC-016: source models/textures and recovered/generated imagery need distribution/commercial-use provenance review."
+    },
+    {
+      "id": "cross-oath-perception",
+      "status": "NOT_RUN",
+      "detail": "105 design pairs documented; gameplay-camera identification tests not performed."
+    },
+    {
+      "id": "asset-parent-domain-schemas",
+      "status": "PASS",
+      "detail": "Master registry, asset dependencies, reference index and creature registry pass parent Draft202012 field-level schemas after final design revisions."
+    },
+    {
+      "id": "source-full-asset-index",
+      "status": "PASS",
+      "detail": "197 source paths grouped by SHA256 into112 unique identities;24 primary sandbox identities and88 additional unique identities indexed."
+    },
+    {
+      "id": "creature-final-design-depth",
+      "status": "PASS_DOCUMENTATION_ONLY",
+      "detail": "15 distinct natural diet/niche/route designs;15 body/movement/three-phase encounter/resolution designs;5 human/ensemble and3 revised living ecological encounters aligned with world ontology. All90 proposed concepts remain PARTIAL_PRODUCTION_SPEC."
+    },
+    {
+      "id": "source-screenshot-status",
+      "status": "PASS",
+      "detail": "All73 screenshot/reference-documentation hashes are Referenced; runtime Implemented entries have explicit static source evidence, and no runtime/production validation is inferred."
+    }
+  ]
+}

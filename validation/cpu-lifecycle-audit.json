@@ -1,0 +1,3399 @@
+{
+  "sourceCommit": "4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451",
+  "generatedAt": "2026-10-13T16:45:15.823Z",
+  "node": "v24.19.0",
+  "mode": "CPU source lifecycle with real Three.js objects; no WebGL renderer",
+  "dependencies": {
+    "method": "Reused pre-existing local installed files; clean npm ci blocked by network approval",
+    "three": "0.185.1",
+    "vite": "8.1.5",
+    "lil-gui": "0.21.0"
+  },
+  "limitations": [
+    "No GPU shader compilation or visual validation.",
+    "No authored FBX character or target rigs loaded: target collision/damage, ragdolls, clone appearances, bone-attached buffs, and character-animation presentation are not verified.",
+    "GLB mesh/animation parsing is real; embedded texture decode is unavailable in Node and may use upstream loader fallback.",
+    "Only default settings, a fixed valid cast, lifecycle and pooling/cancellation are exercised; arbitrary settings and gameplay balance are not certified.",
+    "The production browser bootstrap and URL asset-loading paths are not executed."
+  ],
+  "results": [
+    {
+      "uid": "linear/ice",
+      "kind": "ability",
+      "element": "frost",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 37,
+      "simulatedSeconds": 5.733
+    },
+    {
+      "uid": "linear/thunder",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 35,
+      "simulatedSeconds": 1.133
+    },
+    {
+      "uid": "linear/meteor",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "failed-source-or-contract",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed."
+      ],
+      "observedPhases": [
+        "travel"
+      ],
+      "sceneNodesAfterSpawn": 34,
+      "error": "TypeError: Cannot read properties of undefined (reading 'spawn')\n    at MeteorAbility.onImpact (runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/MeteorAbility.js:972:23)\n    at MeteorAbility.update (runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/Ability.js:219:16)\n    at AbilityManager.update (runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/AbilityManager.js:125:15)\n    at tick (tests/runtime-audit/cpu-lifecycle.mjs:114:184)\n    at tests/runtime-audit/cpu-lifecycle.mjs:119:4"
+    },
+    {
+      "uid": "linear/beam",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 50,
+      "simulatedSeconds": 2.1
+    },
+    {
+      "uid": "linear/snare",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 39,
+      "simulatedSeconds": 3.6
+    },
+    {
+      "uid": "linear/glacier",
+      "kind": "ability",
+      "element": "frost",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 47,
+      "simulatedSeconds": 6.633
+    },
+    {
+      "uid": "linear-ext/pyre",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 6.8
+    },
+    {
+      "uid": "linear-ext/kraken",
+      "kind": "ability",
+      "element": "water",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 7.433
+    },
+    {
+      "uid": "linear-ext/electrical",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 28,
+      "simulatedSeconds": 5.233
+    },
+    {
+      "uid": "linear-ext/earth",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 25,
+      "simulatedSeconds": 4.4
+    },
+    {
+      "uid": "linear-ext/portal",
+      "kind": "ability",
+      "element": "nature",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "persistent-hold",
+        "source-dismiss-invoked",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "dismissal-retirement",
+        "persistent-replacement-dismissal",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 7.3
+    },
+    {
+      "uid": "linear-ext/aether",
+      "kind": "ability",
+      "element": "water",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "persistent-hold",
+        "source-dismiss-invoked",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "dismissal-retirement",
+        "persistent-replacement-dismissal",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 7.4
+    },
+    {
+      "uid": "linear-ext/firePortal",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "persistent-hold",
+        "source-dismiss-invoked",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "dismissal-retirement",
+        "persistent-replacement-dismissal",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 22,
+      "simulatedSeconds": 7.033
+    },
+    {
+      "uid": "linear-ext/boost",
+      "kind": "buff",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "active",
+        "inactive"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 13.733
+    },
+    {
+      "uid": "linear-ext/magic",
+      "kind": "buff",
+      "element": "arcane",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "active",
+        "inactive"
+      ],
+      "sceneNodesAfterSpawn": 26,
+      "simulatedSeconds": 14.033
+    },
+    {
+      "uid": "linear-ext/fire",
+      "kind": "buff",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "active",
+        "inactive"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 13.533
+    },
+    {
+      "uid": "linear-extended/ward",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 33,
+      "simulatedSeconds": 6.733
+    },
+    {
+      "uid": "linear-extended/acid",
+      "kind": "ability",
+      "element": "poison",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 7.333
+    },
+    {
+      "uid": "linear-extended/growth",
+      "kind": "ability",
+      "element": "nature",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 31,
+      "simulatedSeconds": 9.867
+    },
+    {
+      "uid": "linear-extended/cyber",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/snake.glb",
+          "bytes": 1128224,
+          "meshes": 1,
+          "bones": 0,
+          "animations": 0,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 32,
+      "simulatedSeconds": 2.2
+    },
+    {
+      "uid": "linear-extended/venom",
+      "kind": "ability",
+      "element": "poison",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 6.067
+    },
+    {
+      "uid": "linear-extended/quake",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "blocked-browser-API",
+      "checks": [],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "error": "ReferenceError: document is not defined\n    at createElementNS (runtime/ability-matrix/node_modules/three/build/three.core.js:1851:2)\n    at ImageLoader.load (runtime/ability-matrix/node_modules/three/build/three.core.js:45175:17)\n    at TextureLoader.load (runtime/ability-matrix/node_modules/three/build/three.core.js:45576:10)\n    at getStoneTextures (runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/loaders/StoneTextures.js:60:28)\n    at stoneUniforms (runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/materials/MonolithStoneMaterial.js:192:20)\n    at createMonolithMaterial (runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/materials/MonolithStoneMaterial.js:268:8)\n    at MonolithRiftAbility.createShaders (runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/MonolithRiftAbility.js:136:21)\n    at new Ability (runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/Ability.js:80:10)\n    at new MonolithRiftAbility (runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/MonolithRiftAbility.js:125:5)\n    at ObjectPool.factory (runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AbilityManager.js:55:27)"
+    },
+    {
+      "uid": "linear-extended/ink",
+      "kind": "ability",
+      "element": "water",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 28,
+      "simulatedSeconds": 7.633
+    },
+    {
+      "uid": "linear-extended/astral",
+      "kind": "ability",
+      "element": "cosmic",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 6.833
+    },
+    {
+      "uid": "linear-extended/cascade",
+      "kind": "ability",
+      "element": "arcane",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 9.233
+    },
+    {
+      "uid": "linear-extended/rend",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 33,
+      "simulatedSeconds": 8.833
+    },
+    {
+      "uid": "handcast/flux",
+      "kind": "ability",
+      "element": "blood",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 26,
+      "simulatedSeconds": 2.467
+    },
+    {
+      "uid": "handcast/voidslash",
+      "kind": "ability",
+      "element": "shadow",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 26,
+      "simulatedSeconds": 3.4
+    },
+    {
+      "uid": "handcast/glacial",
+      "kind": "ability",
+      "element": "frost",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 3.7
+    },
+    {
+      "uid": "handcast/shard",
+      "kind": "ability",
+      "element": "shadow",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 32,
+      "simulatedSeconds": 8.933
+    },
+    {
+      "uid": "handcast/frost",
+      "kind": "ability",
+      "element": "frost",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 31,
+      "simulatedSeconds": 6.567
+    },
+    {
+      "uid": "handcast/toxic",
+      "kind": "ability",
+      "element": "poison",
+      "import": "passed",
+      "status": "blocked-browser-API",
+      "checks": [],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "error": "ReferenceError: document is not defined\n    at createElementNS (runtime/ability-matrix/node_modules/three/build/three.core.js:1851:2)\n    at ImageLoader.load (runtime/ability-matrix/node_modules/three/build/three.core.js:45175:17)\n    at TextureLoader.load (runtime/ability-matrix/node_modules/three/build/three.core.js:45576:10)\n    at getStoneTextures (runtime/ability-matrix/packs/sandbox/src/vendor/handcast/loaders/StoneTextures.js:60:28)\n    at stoneUniforms (runtime/ability-matrix/packs/sandbox/src/vendor/handcast/materials/MonolithStoneMaterial.js:193:20)\n    at createToxicCrustMaterial (runtime/ability-matrix/packs/sandbox/src/vendor/handcast/materials/ToxicShieldMaterials.js:523:8)\n    at ToxicShieldAbility.createShaders (runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/ToxicShieldAbility.js:149:26)\n    at new Ability (runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/Ability.js:80:10)\n    at new ToxicShieldAbility (runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/ToxicShieldAbility.js:95:5)\n    at ObjectPool.factory (runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/AbilityManager.js:53:27)"
+    },
+    {
+      "uid": "handcast/phoenix",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/phoenix_bird.glb",
+          "bytes": 1630364,
+          "meshes": 2,
+          "bones": 89,
+          "animations": 1,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "observedPhases": [
+        "rise",
+        "hunt",
+        "burnout"
+      ],
+      "sceneNodesAfterSpawn": 136,
+      "simulatedSeconds": 13.167
+    },
+    {
+      "uid": "handcast/monowheel",
+      "kind": "summon",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "summon-steer-fire-invoked",
+        "summon-recall-invoked",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/monowheelArmyBot.glb",
+          "bytes": 1712952,
+          "meshes": 4,
+          "bones": 0,
+          "animations": 0,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "observedPhases": [
+        "deploy",
+        "station",
+        "recall"
+      ],
+      "sceneNodesAfterSpawn": 38,
+      "simulatedSeconds": 6.933
+    },
+    {
+      "uid": "handcast/drone",
+      "kind": "summon",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "summon-steer-fire-invoked",
+        "summon-recall-invoked",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/drone.glb",
+          "bytes": 4291820,
+          "meshes": 8,
+          "bones": 0,
+          "animations": 0,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "observedPhases": [
+        "deploy",
+        "station",
+        "recall"
+      ],
+      "sceneNodesAfterSpawn": 49,
+      "simulatedSeconds": 7.033
+    },
+    {
+      "uid": "casting/shark",
+      "kind": "ability",
+      "element": "water",
+      "import": "passed",
+      "status": "blocked-browser-API",
+      "checks": [
+        "authored-GLB-source-rig-built"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/shark.glb",
+          "bytes": 3068872,
+          "meshes": 5,
+          "bones": 31,
+          "animations": 2,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "error": "ReferenceError: document is not defined\n    at createElementNS (runtime/ability-matrix/node_modules/three/build/three.core.js:1851:2)\n    at ImageLoader.load (runtime/ability-matrix/node_modules/three/build/three.core.js:45175:17)\n    at TextureLoader.load (runtime/ability-matrix/node_modules/three/build/three.core.js:45576:10)\n    at getStoneTextures (runtime/ability-matrix/packs/sandbox/src/vendor/casting/loaders/StoneTextures.js:60:28)\n    at stoneUniforms (runtime/ability-matrix/packs/sandbox/src/vendor/casting/materials/MonolithStoneMaterial.js:193:20)\n    at createSharkRockMaterial (runtime/ability-matrix/packs/sandbox/src/vendor/casting/materials/SharkMaterials.js:846:8)\n    at SharkAbility.createShaders (runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/SharkAbility.js:371:25)\n    at new Ability (runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/Ability.js:80:10)\n    at new SharkAbility (runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/SharkAbility.js:298:5)\n    at ObjectPool.factory (runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/AbilityManager.js:53:27)"
+    },
+    {
+      "uid": "casting/chains",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 42,
+      "simulatedSeconds": 6.867
+    },
+    {
+      "uid": "casting/dragon",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/dragon.glb",
+          "bytes": 13680600,
+          "meshes": 4,
+          "bones": 232,
+          "animations": 1,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.PropertyBinding: No target node found for track: Hemi.position.",
+        "THREE.PropertyBinding: No target node found for track: Hemi.scale.",
+        "THREE.PropertyBinding: No target node found for track: Hemi.quaternion.",
+        "THREE.PropertyBinding: No target node found for track: Plane.position.",
+        "THREE.PropertyBinding: No target node found for track: Plane.scale.",
+        "THREE.PropertyBinding: No target node found for track: Plane.quaternion."
+      ],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 279,
+      "simulatedSeconds": 17.333
+    },
+    {
+      "uid": "casting/gyro",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/magical_gyroscope.glb",
+          "bytes": 1528100,
+          "meshes": 1,
+          "bones": 5,
+          "animations": 2,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 73,
+      "simulatedSeconds": 10.2
+    },
+    {
+      "uid": "casting/amethyst",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/amethyst_stones.glb",
+          "bytes": 35080,
+          "meshes": 5,
+          "bones": 0,
+          "animations": 0,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 34,
+      "simulatedSeconds": 6.633
+    },
+    {
+      "uid": "casting/tome",
+      "kind": "ability",
+      "element": "cosmic",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/arcane_tome.glb",
+          "bytes": 980716,
+          "meshes": 39,
+          "bones": 0,
+          "animations": 0,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "observedPhases": [
+        "impact",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 81,
+      "simulatedSeconds": 8.133
+    },
+    {
+      "uid": "casting/reliquary",
+      "kind": "ability",
+      "element": "nature",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/wildroot_reliquary.glb",
+          "bytes": 1632156,
+          "meshes": 6,
+          "bones": 0,
+          "animations": 0,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 50,
+      "simulatedSeconds": 11.1
+    },
+    {
+      "uid": "casting/lance",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 38,
+      "simulatedSeconds": 2.8
+    },
+    {
+      "uid": "casting/wolf",
+      "kind": "ability",
+      "element": "cosmic",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "authored-GLB-source-rig-built",
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/wolf.glb",
+          "bytes": 3243056,
+          "meshes": 5,
+          "bones": 49,
+          "animations": 7,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:private identifier withheld"
+      ],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 356,
+      "simulatedSeconds": 4.833
+    },
+    {
+      "uid": "collective/tempest",
+      "kind": "ability",
+      "element": "wind",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 26,
+      "simulatedSeconds": 5.233
+    },
+    {
+      "uid": "collective/dune",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 24,
+      "simulatedSeconds": 4.733
+    },
+    {
+      "uid": "collective/prism",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 35,
+      "simulatedSeconds": 4.833
+    },
+    {
+      "uid": "collective/chain",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 2.033
+    },
+    {
+      "uid": "collective/graviton",
+      "kind": "ability",
+      "element": "cosmic",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 3.733
+    },
+    {
+      "uid": "collective/blink",
+      "kind": "ability",
+      "element": "time",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 1.7
+    },
+    {
+      "uid": "collective/sonic",
+      "kind": "ability",
+      "element": "wind",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 47,
+      "simulatedSeconds": 3.067
+    },
+    {
+      "uid": "collective/crimson",
+      "kind": "ability",
+      "element": "blood",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 28,
+      "simulatedSeconds": 4.233
+    },
+    {
+      "uid": "collective/swarm",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed.",
+        "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed."
+      ],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 5.333
+    },
+    {
+      "uid": "collective/aegis",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 22,
+      "simulatedSeconds": 6.167
+    },
+    {
+      "uid": "collective/spore",
+      "kind": "ability",
+      "element": "nature",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 24,
+      "simulatedSeconds": 7.533
+    },
+    {
+      "uid": "collective/chrono",
+      "kind": "ability",
+      "element": "time",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 34,
+      "simulatedSeconds": 4.033
+    },
+    {
+      "uid": "matrix-new/gale",
+      "kind": "ability",
+      "element": "wind",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 25,
+      "simulatedSeconds": 2.733
+    },
+    {
+      "uid": "matrix-new/emberveil",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 7.167
+    },
+    {
+      "uid": "matrix-new/umbra",
+      "kind": "ability",
+      "element": "shadow",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 26,
+      "simulatedSeconds": 4.367
+    },
+    {
+      "uid": "matrix-new/geode",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 44,
+      "simulatedSeconds": 6.567
+    },
+    {
+      "uid": "matrix-new/aetherblade",
+      "kind": "ability",
+      "element": "arcane",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 24,
+      "simulatedSeconds": 4.133
+    },
+    {
+      "uid": "matrix-new/mirage",
+      "kind": "ability",
+      "element": "arcane",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 6.333
+    },
+    {
+      "uid": "matrix-new/bloodroot",
+      "kind": "ability",
+      "element": "blood",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 5.567
+    },
+    {
+      "uid": "matrix-new/ionstorm",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 5.967
+    },
+    {
+      "uid": "matrix-new/obsidianwall",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 5.667
+    },
+    {
+      "uid": "matrix-new/starfall",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 8.233
+    },
+    {
+      "uid": "matrix-new/voidstep",
+      "kind": "ability",
+      "element": "shadow",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 1.767
+    },
+    {
+      "uid": "matrix-new/crystallineheart",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 6.733
+    },
+    {
+      "uid": "atlas/relay",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 53,
+      "simulatedSeconds": 1.633
+    },
+    {
+      "uid": "atlas/recall",
+      "kind": "ability",
+      "element": "time",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 43,
+      "simulatedSeconds": 2.8
+    },
+    {
+      "uid": "atlas/parallax",
+      "kind": "ability",
+      "element": "time",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 32,
+      "simulatedSeconds": 2.8
+    },
+    {
+      "uid": "atlas/sanctuary",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 33,
+      "simulatedSeconds": 7.967
+    },
+    {
+      "uid": "atlas/polarity",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 26,
+      "simulatedSeconds": 6.967
+    },
+    {
+      "uid": "atlas/echoes",
+      "kind": "ability",
+      "element": "arcane",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 34,
+      "simulatedSeconds": 5.733
+    },
+    {
+      "uid": "atlas/chakram",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 32,
+      "simulatedSeconds": 3.433
+    },
+    {
+      "uid": "atlas/reversal",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 28,
+      "simulatedSeconds": 5.267
+    },
+    {
+      "uid": "atlas/stillpoint",
+      "kind": "ability",
+      "element": "time",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 33,
+      "simulatedSeconds": 6.267
+    },
+    {
+      "uid": "atlas/refractor",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 32,
+      "simulatedSeconds": 3.567
+    },
+    {
+      "uid": "codex/solarlash",
+      "kind": "ability",
+      "element": "fire",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 3.567
+    },
+    {
+      "uid": "codex/permafrost",
+      "kind": "ability",
+      "element": "frost",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 5.233
+    },
+    {
+      "uid": "codex/avalanche",
+      "kind": "ability",
+      "element": "frost",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 5.6
+    },
+    {
+      "uid": "codex/maelstrom",
+      "kind": "ability",
+      "element": "water",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 7.333
+    },
+    {
+      "uid": "codex/riptide",
+      "kind": "ability",
+      "element": "water",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 28,
+      "simulatedSeconds": 3.8
+    },
+    {
+      "uid": "codex/zephyr",
+      "kind": "ability",
+      "element": "wind",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 3.567
+    },
+    {
+      "uid": "codex/downburst",
+      "kind": "ability",
+      "element": "wind",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 4.933
+    },
+    {
+      "uid": "codex/pollen",
+      "kind": "ability",
+      "element": "nature",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 8.167
+    },
+    {
+      "uid": "codex/seedstorm",
+      "kind": "ability",
+      "element": "nature",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 6.2
+    },
+    {
+      "uid": "codex/plague",
+      "kind": "ability",
+      "element": "poison",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 30,
+      "simulatedSeconds": 9.667
+    },
+    {
+      "uid": "codex/miasma",
+      "kind": "ability",
+      "element": "poison",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 5.8
+    },
+    {
+      "uid": "codex/nebula",
+      "kind": "ability",
+      "element": "cosmic",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 31,
+      "simulatedSeconds": 6.3
+    },
+    {
+      "uid": "codex/nightfall",
+      "kind": "ability",
+      "element": "shadow",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 28,
+      "simulatedSeconds": 4.1
+    },
+    {
+      "uid": "codex/wraiths",
+      "kind": "ability",
+      "element": "shadow",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 25,
+      "simulatedSeconds": 7
+    },
+    {
+      "uid": "codex/sanguine",
+      "kind": "ability",
+      "element": "blood",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 5.9
+    },
+    {
+      "uid": "codex/glyphs",
+      "kind": "ability",
+      "element": "arcane",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 61,
+      "simulatedSeconds": 4.667
+    },
+    {
+      "uid": "codex/hourglass",
+      "kind": "ability",
+      "element": "time",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 36,
+      "simulatedSeconds": 6.733
+    },
+    {
+      "uid": "codex/basalt",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 26,
+      "simulatedSeconds": 5.233
+    },
+    {
+      "uid": "codex/seraph",
+      "kind": "ability",
+      "element": "light",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 29,
+      "simulatedSeconds": 7.2
+    },
+    {
+      "uid": "codex/balllightning",
+      "kind": "ability",
+      "element": "storm",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 27,
+      "simulatedSeconds": 5.8
+    },
+    {
+      "uid": "codex/railgun",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 35,
+      "simulatedSeconds": 3.133
+    },
+    {
+      "uid": "codex/orbital",
+      "kind": "ability",
+      "element": "tech",
+      "import": "passed",
+      "status": "passed-cpu-lifecycle-only",
+      "checks": [
+        "source-prewarm",
+        "constructed",
+        "spawned",
+        "default-lifecycle-completed",
+        "finite-CPU-transforms-and-buffers",
+        "natural-retirement",
+        "recast",
+        "cancel",
+        "light-pool-released",
+        "dispose-without-exception"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "observedPhases": [
+        "travel",
+        "impact",
+        "fade",
+        "idle"
+      ],
+      "sceneNodesAfterSpawn": 31,
+      "simulatedSeconds": 6.667
+    }
+  ],
+  "summary": {
+    "total": 100,
+    "statusCounts": {
+      "passed-cpu-lifecycle-only": 96,
+      "failed-source-or-contract": 1,
+      "blocked-browser-API": 3
+    },
+    "importPassed": 100,
+    "rawSourceCpuLifecyclePassed": 96,
+    "knownSourceFailures": [
+      "linear/meteor"
+    ],
+    "browserApiBlocked": [
+      "linear-extended/quake",
+      "handcast/toxic",
+      "casting/shark"
+    ],
+    "aetherionRepairedCpuLifecyclePassed": [
+      "linear/meteor"
+    ],
+    "distinctCastablesWithCpuLifecycleEvidence": 97,
+    "byPack": {
+      "linear": {
+        "total": 6,
+        "passed": 5,
+        "blocked": 0,
+        "failed": 1
+      },
+      "linear-ext": {
+        "total": 10,
+        "passed": 10,
+        "blocked": 0,
+        "failed": 0
+      },
+      "linear-extended": {
+        "total": 10,
+        "passed": 9,
+        "blocked": 1,
+        "failed": 0
+      },
+      "handcast": {
+        "total": 9,
+        "passed": 8,
+        "blocked": 1,
+        "failed": 0
+      },
+      "casting": {
+        "total": 9,
+        "passed": 8,
+        "blocked": 1,
+        "failed": 0
+      },
+      "collective": {
+        "total": 12,
+        "passed": 12,
+        "blocked": 0,
+        "failed": 0
+      },
+      "matrix-new": {
+        "total": 12,
+        "passed": 12,
+        "blocked": 0,
+        "failed": 0
+      },
+      "atlas": {
+        "total": 10,
+        "passed": 10,
+        "blocked": 0,
+        "failed": 0
+      },
+      "codex": {
+        "total": 22,
+        "passed": 22,
+        "blocked": 0,
+        "failed": 0
+      }
+    }
+  },
+  "completedAt": "2026-10-13T17:00:24.268Z",
+  "harnessNotes": [
+    "Exploratory harness-only failures were rerun after accommodating source prewarm array/optional contracts and persistent-structure dismissal. Final results contain no unexplained process failures."
+  ]
+}

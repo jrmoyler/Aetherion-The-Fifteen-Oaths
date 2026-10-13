@@ -1,0 +1,149 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calendar_note",
+    "canon_status",
+    "records",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "calendar_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canon_status": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "canon_status",
+          "date_canon_status",
+          "editorial_year_relative_to_opening",
+          "event_canon_status",
+          "id",
+          "name",
+          "qualification",
+          "source_ids",
+          "summary"
+        ],
+        "properties": {
+          "canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "date_canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "editorial_year_relative_to_opening": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "event_canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "history-archive-seals",
+              "history-before-fracture",
+              "history-ending",
+              "history-first-fracture",
+              "history-fragment-study",
+              "history-local-compacts",
+              "history-major-realms",
+              "history-mutual-relief",
+              "history-opening",
+              "history-pass-charters",
+              "history-player-settlements",
+              "history-service-expansion",
+              "history-tidal-exchange"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "qualification": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+            },
+            "uniqueItems": true
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aetherion:timeline:1.0.0",
+  "title": "Aetherion Timeline",
+  "description": "Strict field-level schema for the authored preproduction registry. Stable record IDs and all object fields are explicit. Schema validity does not confer canon approval, implementation or semantic truth."
+}

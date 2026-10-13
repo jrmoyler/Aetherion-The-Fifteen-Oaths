@@ -1,0 +1,27 @@
+{
+  "format": "collective-ability-preset@1",
+  "uid": "atlas/ricochet-chakram",
+  "pack": "atlas",
+  "id": "ricochet-chakram",
+  "slot": 6,
+  "kind": "ability",
+  "label": "Vector Chakram",
+  "hint": "A toothed kinetic disc ricochets along a three-bank trajectory, marks each hit, and returns along a separate recovery arc.",
+  "key": "",
+  "accent": "#ffdf79",
+  "cast": "point",
+  "castAnim": null,
+  "cooldown": null,
+  "range": 16,
+  "minRange": 0,
+  "zoneRadius": 3,
+  "controls": 5,
+  "status": "live",
+  "settings": {
+    "radius": 3,
+    "power": 1,
+    "duration": 4.5,
+    "seed": 89,
+    "color": "#ffdf79"
+  }
+}

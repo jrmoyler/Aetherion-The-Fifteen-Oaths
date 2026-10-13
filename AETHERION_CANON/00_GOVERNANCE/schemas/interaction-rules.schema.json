@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aetherion.invalid/schemas/interaction-rules.schema.json",
+  "title": "interaction-rules",
+  "description": "Field-level documentation contract. Passing schema does not establish design approval or runtime behavior.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "oath_ids",
+          "elements",
+          "pair_type",
+          "required_context",
+          "directed_effects",
+          "max_chain_depth",
+          "max_children",
+          "source_castable_uids",
+          "implementation_status",
+          "acceptance_tests"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "oath_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^oath-(0[1-9]|1[0-5])$"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "elements": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "pair_type": {
+            "enum": [
+              "self",
+              "cross"
+            ]
+          },
+          "required_context": {
+            "type": "object"
+          },
+          "directed_effects": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "source_element",
+                "receiver_element",
+                "target_selector",
+                "operation",
+                "transition_key",
+                "result_description",
+                "cost",
+                "required_context",
+                "state_transition",
+                "neutral_if_missing"
+              ],
+              "properties": {
+                "required_context": {
+                  "type": "object",
+                  "required": [
+                    "target_material_tags_all",
+                    "source_phenomenon_tags_all",
+                    "target_state",
+                    "capability_key",
+                    "finite_reservation_required"
+                  ],
+                  "properties": {
+                    "target_material_tags_all": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "source_phenomenon_tags_all": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "finite_reservation_required": {
+                      "const": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "max_chain_depth": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+          },
+          "max_children": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "source_castable_uids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "implementation_status": {
+            "const": "DESIGN_ONLY"
+          },
+          "acceptance_tests": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": true
+      },
+      "minItems": 120,
+      "maxItems": 120
+    }
+  },
+  "additionalProperties": true
+}

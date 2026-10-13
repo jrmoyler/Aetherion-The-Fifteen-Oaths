@@ -1,0 +1,461 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "faction-01",
+      "name": "KILN OATH",
+      "oath_id": "oath-01",
+      "region_id": "region-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Creation is a duty to leave something usable after the flame. Kiln citizens admire repairers as much as inventors and dispute whether destroying an obsolete institution counts as honest craft.",
+      "political_structure": "Workshop assemblies allocate furnace time; a basin council sets evacuation and river-temperature limits. Owners may appeal quotas, but no property title overrides a posted volcanic exclusion zone.",
+      "leadership_id": "character-01-leader",
+      "civic_counterpoint_id": "character-01-civilian",
+      "public_benefit": "Keep shared furnaces safe without bankrupting the crews who operate them.",
+      "central_contradiction": "Creation is a duty to leave something usable after the flame. Kiln citizens admire repairers as much as inventors and dispute whether destroying an obsolete institution counts as honest craft.",
+      "civilian_obligation": "Shared ovens reduce household fuel costs; shift meals and apprentice adoption networks organize neighborhoods. The covenant asks for maintenance service proportional to furnace access, with civic alternatives for people unable to work heat shifts.",
+      "economic_role": "Kiln exports durable tools and refractory components, importing Fault ore, Tidal cooling expertise and Graft food. Wartime demand can raise workshop income while worsening civilian tool access, so prosperity and public welfare diverge visibly.",
+      "military_doctrine": "Crews defend roads and quench lines before fortifications. Siege units require screened fuel stores, engineers and retreat lanes, making scorched-earth tactics a failure of logistics and legitimacy even when militarily effective.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Fault provides surveyed ore bodies; Tidal engineers keep cooling loops safe; Graft rehabilitates ash beds. These partners can demand better contracts without being disloyal, and none is reducible to an ingredient supplier.",
+      "rivalries": "Impulse wants reproducible furnace standards that small makers fear will eliminate autonomy. Rime disputes controlled thaw for emergency reservoirs, while downstream Graft villages challenge ash dumping through open testimony.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-01",
+      "branch_outcomes": "The regional quest asks whether surplus furnaces fund weapons, civilian reconstruction or a transparent mixed charter. Each branch changes local contracts and companion trust while leaving independent safety inspections and story travel available."
+    },
+    {
+      "id": "faction-02",
+      "name": "RIME ARCHIVE",
+      "oath_id": "oath-02",
+      "region_id": "region-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Preservation protects the right of future people to decide, but freezing the present can steal that same right. Archivists disagree over whether releasing dangerous knowledge is a breach or the purpose of keeping it.",
+      "political_structure": "Collection councils separate custody, interpretation and public access decisions. Emergency seals expire unless independently renewed; the conflict is who can realistically challenge custodians when challengers lack the sealed evidence.",
+      "leadership_id": "character-02-leader",
+      "civic_counterpoint_id": "character-02-civilian",
+      "public_benefit": "Preserve future choice while respecting present consent.",
+      "central_contradiction": "Preservation protects the right of future people to decide, but freezing the present can steal that same right. Archivists disagree over whether releasing dangerous knowledge is a breach or the purpose of keeping it.",
+      "civilian_obligation": "Households share warm reading rooms, preserved food and copying work. Civic duty is care for an entrusted record or vulnerable person; people may serve through translation or cooking without possessing elite magical literacy.",
+      "economic_role": "Rime exports preservation and reliable historical copies while importing food, insulation and heating tools. Paid premium access funds conservation but risks making public memory a luxury, which civic contracts can address.",
+      "military_doctrine": "Defense delays attackers and protects evacuation of people and irreplaceable records. Guards prioritize containment with reviewable release conditions; indefinite imprisonment remains a disputed abuse rather than the default reward for institutional loyalty.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Storm carries catalogue requests; Fault stabilizes vault foundations; Daybreak verifies public testimony. Cooperation is strongest when each institution can audit the others instead of treating a common archive as ownership of history.",
+      "rivalries": "Kiln seeks emergency thaw water, Escapement questions preserved moments, and the Missing Court asks to protect vulnerable identities. These conflicts distinguish necessary privacy from suppression and preservation from perpetual control.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-02",
+      "branch_outcomes": "The regional quest chooses between controlled release, a publicly audited seal or distributed copies of dangerous records. All routes preserve a dissenting witness and carry a different exposure, trust or custody cost into the finale."
+    },
+    {
+      "id": "faction-03",
+      "name": "STORM RELAY",
+      "oath_id": "oath-03",
+      "region_id": "region-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "A message has value only if someone can answer. Relay culture celebrates connection while arguing over whether a reliable network may ever silence destabilizing speech or charge essential communities out of participation.",
+      "political_structure": "Tower cooperatives elect delegates to a routing council; public emergency traffic has protected priority. Commercial operators seek exceptions, and local towers can resist central orders at the risk of breaking shared guarantees.",
+      "leadership_id": "character-03-leader",
+      "civic_counterpoint_id": "character-03-civilian",
+      "public_benefit": "Keep every settlement able to send and receive essential warnings.",
+      "central_contradiction": "A message has value only if someone can answer. Relay culture celebrates connection while arguing over whether a reliable network may ever silence destabilizing speech or charge essential communities out of participation.",
+      "civilian_obligation": "Neighbors share public listening hours and teach verification of relayed information. Civic duty means keeping an addressable response point or staffing a fallback route, with privacy-protecting options for people fleeing persecution.",
+      "economic_role": "Storm sells transmission capacity and weather services, importing insulation and structural repairs. Emergency service is ring-fenced from commercial pricing; factions contest how to fund universal access without embedding covert political control.",
+      "military_doctrine": "Relay forces secure continuity, repair teams and message integrity. Their military strength is coordination and rapid repositioning; deliberate civilian blackout is a contested escalation with immediate humanitarian and reputational costs.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Reed maintains wind forecasts, Impulse manufactures replaceable components, and Rime preserves authenticated messages. Shared standards benefit each without granting any partner ownership of all traffic or the right to inspect private correspondence.",
+      "rivalries": "The Missing Court contests permanent message retention; Daybreak wants compulsory reporting of dangerous speech. Kiln and Impulse compete over repair contracts, creating economic disputes distinct from elemental opposition.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-03",
+      "branch_outcomes": "The regional quest settles who controls emergency routing: a central accountable council, federated towers or licensed operators with enforceable public duties. Each has reliability and capture risks that remain legible later."
+    },
+    {
+      "id": "faction-04",
+      "name": "TIDAL COVENANT",
+      "oath_id": "oath-04",
+      "region_id": "region-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Water is received, used and passed onward. Covenant culture values adaptable agreements, but inherited obligations can become ownership disguised as gratitude when a community cannot survive without another's channels.",
+      "political_structure": "Watershed assemblies give upstream and downstream settlements a voice; harbor houses manage navigation separately. Drought arbitration requires public flow records so maritime wealth cannot silently overrule drinking-water needs.",
+      "leadership_id": "character-04-leader",
+      "civic_counterpoint_id": "character-04-civilian",
+      "public_benefit": "Preserve food imports and storm protection through reliable shared agreements.",
+      "central_contradiction": "Water is received, used and passed onward. Covenant culture values adaptable agreements, but inherited obligations can become ownership disguised as gratitude when a community cannot survive without another's channels.",
+      "civilian_obligation": "Public washing courts, shared cooking water and boat repair shape everyday encounters. Obligation is a measurable maintenance share with hardship relief; hereditary debt is a contested institution, never a natural law of the element.",
+      "economic_role": "Tidal exports transport and water-management expertise while importing grain, timber and tools. Water allocation is not a simple auction; drought policy weighs household need, ecological flow and economically vital irrigation.",
+      "military_doctrine": "Defenders control channels, rescue routes and harbor approaches. Naval power can protect trade or enforce abusive tolls, while freshwater sabotage is a severe political violation with emergency mitigation built into event design.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Graft maintains upstream soils, Bitterglass tests contaminants, and Kiln supplies pumps and ceramics. Shared gauges make disputes auditable; cooperation does not mean accepting either partner's claim to unrestricted extraction.",
+      "rivalries": "Impulse demand strains industrial water; Sanguine's hereditary obligations echo contested harbor debt. Observatory navigation aids are welcome, but coastal workers reject celestial models that ignore local currents and lived uncertainty.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-04",
+      "branch_outcomes": "The regional quest renegotiates relief debts through cancellation with replacement funding, capped repayment or community service chosen by debtors. Every branch must maintain water access and acknowledge who bears the transition cost."
+    },
+    {
+      "id": "faction-05",
+      "name": "FAULT CHOIR",
+      "oath_id": "oath-05",
+      "region_id": "region-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "A promise should bear weight, but a structure survives by admitting movement. Choir citizens debate whether fidelity means preserving exact forms or keeping people safe when conditions make the old form fail.",
+      "political_structure": "Terrace councils govern locally, while a load assembly certifies changes affecting shared foundations. Appeals require independent surveys, creating conflict when the institution that defines safe evidence also controls survey training.",
+      "leadership_id": "character-05-leader",
+      "civic_counterpoint_id": "character-05-civilian",
+      "public_benefit": "Keep shared foundations reliable across generations.",
+      "central_contradiction": "A promise should bear weight, but a structure survives by admitting movement. Choir citizens debate whether fidelity means preserving exact forms or keeping people safe when conditions make the old form fail.",
+      "civilian_obligation": "Public maintenance days repair paths and exchange grievances around common load maps. Civic obligation is contributing to shared structural safety; caste-like inherited assignments are a contested abuse of that principle.",
+      "economic_role": "Fault exports minerals and structural expertise, importing food diversity, tool steels and communication parts. Royalties can fund common foundations or entrench claim holders; the regional quest determines oversight rather than creating free resources.",
+      "military_doctrine": "Military crews fortify supply corridors and create fallback terraces rather than walling every border. Defenders must leave relief access and keep geological interventions within surveyed zones, preserving civilian escape during siege.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Kiln makes tools, Rime preserves old surveys and Daybreak arbitrates compensation. Each ally must accept updated measurements; precedent cannot overrule observable danger merely because the founding treaty called the canyon stable.",
+      "rivalries": "Escapement cuts high-speed routes through slow review processes, while Impulse demands mass excavation. Reed challenges the Choir's preference for a single authoritative resonance, turning harmony into a debate over whose measurements count.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-05",
+      "branch_outcomes": "The regional quest chooses whether to reinforce the old capital district, relocate it or distribute services across terraces. Each option affects memory, expense and safety while compensating displaced residents through the story."
+    },
+    {
+      "id": "faction-06",
+      "name": "REED RESONANCE",
+      "oath_id": "oath-06",
+      "region_id": "region-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Expression is a shared act, yet no chorus owns its singers. Reed culture values attentive listening and improvisation while confronting institutions that mistake a pleasing public harmony for genuine consent.",
+      "political_structure": "Amphitheater assemblies pair open speaking sessions with quiet written submissions. Conductors coordinate emergencies but must surrender that authority afterward; prolonged emergencies are the central route by which temporary discipline becomes permanent control.",
+      "leadership_id": "character-06-leader",
+      "civic_counterpoint_id": "character-06-civilian",
+      "public_benefit": "Protect both free expression and effective emergency coordination.",
+      "central_contradiction": "Expression is a shared act, yet no chorus owns its singers. Reed culture values attentive listening and improvisation while confronting institutions that mistake a pleasing public harmony for genuine consent.",
+      "civilian_obligation": "Communal kitchens use wind-driven machinery while storytellers, signers and scribes share cultural authority. Civic obligation is to help carry essential warnings in an accessible form, never to sing or accept one approved voice.",
+      "economic_role": "Reed exports textiles, forecasting and sound engineering while importing structural fasteners and grain. Cultural commissions can fund shared stages or reward only favored voices; procurement reforms affect who can afford to speak.",
+      "military_doctrine": "Scouts secure ridge approaches and maintain evacuation corridors before dueling on exposed stages. Acoustic suppression can protect a rescue but becomes abusive when used against peaceful assembly, a distinction reflected in regional law.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Storm carries warnings, Graft cultivates reed materials and Daybreak hosts public appeals. Partners disagree constructively about signal accuracy, audience access and when a performance has been turned into political propaganda.",
+      "rivalries": "Fault prefers a stable shared resonance; the Theatre profits from persuasive illusion. Reed contests both when they erase minority testimony, while acknowledging that improvisation without safety coordination can endanger crowds.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-06",
+      "branch_outcomes": "The regional quest reforms public speech through rotating conductors, independent stages or a charter limiting emergency powers. Each branch retains warning coordination but distributes cultural influence and accountability differently."
+    },
+    {
+      "id": "faction-07",
+      "name": "GRAFT SANCTUARY",
+      "oath_id": "oath-07",
+      "region_id": "region-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Growth succeeds when different lives can flourish together. Sanctuary culture values mutual care, yet its institutions can confuse interdependence with a right to absorb dissenting people, species or settlements into one managed organism.",
+      "political_structure": "Garden commons elect seasonal stewards, while sanctuary councils regulate grafts affecting shared roots and waterways. Consent records must be renewed when a graft changes function, preventing old permission from becoming unlimited biological ownership.",
+      "leadership_id": "character-07-leader",
+      "civic_counterpoint_id": "character-07-civilian",
+      "public_benefit": "Ensure no household is abandoned by ecological recovery.",
+      "central_contradiction": "Growth succeeds when different lives can flourish together. Sanctuary culture values mutual care, yet its institutions can confuse interdependence with a right to absorb dissenting people, species or settlements into one managed organism.",
+      "civilian_obligation": "Shared nurseries, food preservation and animal care organize daily work. Covenant duty is stewardship proportionate to benefit, with nonphysical contributions accepted and the right to refuse personal biological alteration explicitly protected.",
+      "economic_role": "Graft exports food, fibers and ecological restoration while importing tools, salt and mineral supplements. Crop diversity protects trade resilience; pushing every farm toward the highest-yield template risks a continent-wide shared vulnerability.",
+      "military_doctrine": "Defenders protect food stores, seed diversity and evacuation trails. Living barriers delay invaders but must leave wildlife and civilian corridors; weaponizing disease or forced assimilation is a faction controversy, not routine heroic practice.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Tidal manages downstream flow, Bitterglass tests plant medicines and Kiln supplies controlled-burn expertise. These partnerships work only when chemical, fire and water interventions have purpose-specific ecological limits.",
+      "rivalries": "Impulse favors standardized crops and mechanized harvest; Sanguine contests inheritance of living estates. The Sanctuary also debates its own expansion, so ecological conflict cannot be reduced to virtuous Nature versus evil industry.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-07",
+      "branch_outcomes": "The regional quest establishes voluntary commons, a tightly audited central network or independently managed groves with shared emergency duties. Every branch must budget care for people who cannot maintain private infrastructure."
+    },
+    {
+      "id": "faction-08",
+      "name": "BITTERGLASS GUILD",
+      "oath_id": "oath-08",
+      "region_id": "region-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Knowledge becomes ethical through how it is tested, shared and used. Guild culture rejects the idea that a substance is inherently good or evil, while facing the temptation to monetize the very vulnerability its expertise can relieve.",
+      "political_structure": "Laboratory houses hold a guild charter, but resident councils and independent testers can challenge permits. The dramatic conflict is whether affected communities can fund evidence when the accused laboratories own most instruments.",
+      "leadership_id": "character-08-leader",
+      "civic_counterpoint_id": "character-08-civilian",
+      "public_benefit": "Fund trustworthy research and keep remedies available.",
+      "central_contradiction": "Knowledge becomes ethical through how it is tested, shared and used. Guild culture rejects the idea that a substance is inherently good or evil, while facing the temptation to monetize the very vulnerability its expertise can relieve.",
+      "civilian_obligation": "Public assay days, shared washhouses and transparent labeling are civic rituals. Covenant duty is disclosure of known risks and participation in remediation, with protection for whistleblowers rather than compulsory self-experimentation.",
+      "economic_role": "Bitterglass exports medicines, reagents and testing services while importing fuel and food. Open formulas reduce monopoly rents but require replacement funding for quality assurance, creating a concrete cost for an apparently easy reform.",
+      "military_doctrine": "Guild forces isolate contaminated areas and disrupt supply lines with controlled tools. Chemical warfare creates lasting political consequences and relief obligations; civilian poisoning is not normalized as a clever low-cost tactic.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Tidal provides flow data, Graft offers biological research partnerships and Rime preserves trial records. Cooperation requires consent and transparent custody, especially when valuable results emerge from community knowledge.",
+      "rivalries": "Daybreak officials sometimes treat uncertainty as guilt; Kiln owners resist costly emissions controls. Guild leaders also clash with their own independent testers, keeping the primary conflict institutional rather than elemental prejudice.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-08",
+      "branch_outcomes": "The regional quest chooses public licensing, cooperative ownership or regulated private research with independent testing. Each has funding and capture risks, and all require safe access to essential remedies during transition."
+    },
+    {
+      "id": "faction-09",
+      "name": "OATH OF DAYBREAK",
+      "oath_id": "oath-09",
+      "region_id": "region-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Protection is legitimate when the protected can question it. Daybreak culture values public truth and mutual care, but radiant certainty can turn disagreement into presumed guilt and make compassion conditional on obedience.",
+      "political_structure": "Sanctuary councils administer care while civic benches adjudicate disputes with documented appeals. Wardens answer to both, making delay possible but also preventing a single charismatic protector from legally owning every decision.",
+      "leadership_id": "character-09-leader",
+      "civic_counterpoint_id": "character-09-civilian",
+      "public_benefit": "Protect the public from another Fracture without surrendering the city to fear.",
+      "central_contradiction": "Protection is legitimate when the protected can question it. Daybreak culture values public truth and mutual care, but radiant certainty can turn disagreement into presumed guilt and make compassion conditional on obedience.",
+      "civilian_obligation": "Public meals, open petitions and care shifts define civic participation. Covenant duty is to offer protection without demanding confession, with institutional disputes over whether that ideal can survive security threats.",
+      "economic_role": "Daybreak exports sanctuary services, arbitration and precision light work while importing food and construction materials. Donor dependence can distort protection priorities, so transparent budgets matter as much as luminous ideals.",
+      "military_doctrine": "Wardens defend evacuation corridors and civilian gathering points, using proportional force and documented custody. Military leaders may demand emergency exceptions, but the narrative preserves consequences for turning sanctuary into coercive occupation.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Rime supplies records, Tidal supports healing infrastructure and Fault maintains safe public buildings. Partners may refuse intrusive inspection without forfeiting friendship, preserving privacy as a legitimate value inside a protection-focused alliance.",
+      "rivalries": "The Missing Court shelters people who fear public exposure; Bitterglass demands room for uncertainty; Sanguine contests compelled testimony about family obligations. These disputes create genuine safety tradeoffs rather than obvious heresy targets.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-09",
+      "branch_outcomes": "The regional quest limits emergency custody through independent appeal, shared sanctuary governance or a narrowly empowered civic bench. Helia's alliance depends on the player's safeguards, not unconditional surrender of the fragment."
+    },
+    {
+      "id": "faction-10",
+      "name": "TIDAL OBSERVATORY",
+      "oath_id": "oath-10",
+      "region_id": "region-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Understanding the whole is valuable only when local lives still count. Observatory culture celebrates disciplined curiosity, yet its models can treat people as negligible errors when elegant predictions conflict with lived consequences.",
+      "political_structure": "Research circles publish models to a common review forum, while inhabited platform councils approve experiments affecting their homes. The institutional flaw is unequal authority between prestigious theorists and the people carrying practical risk.",
+      "leadership_id": "character-10-leader",
+      "civic_counterpoint_id": "character-10-civilian",
+      "public_benefit": "Produce knowledge reliable enough to justify consequential action.",
+      "central_contradiction": "Understanding the whole is valuable only when local lives still count. Observatory culture celebrates disciplined curiosity, yet its models can treat people as negligible errors when elegant predictions conflict with lived consequences.",
+      "civilian_obligation": "Public sky evenings share discoveries in accessible language, while ballast crews host practical repair schools. Civic duty is to disclose uncertainty and compensate affected communities, not to accept every experiment for the sake of progress.",
+      "economic_role": "The Observatory exports navigation and measurement services while importing food, metals and maintenance labor. Funding tied to spectacular results can distort research priorities, giving replication and local safety visible political value.",
+      "military_doctrine": "Defenders control approach vectors and stabilize critical platforms before using force. Strategic forecasts aid logistics, but celestial perspective cannot justify indiscriminate bombardment or treat civilian districts as expendable experimental terrain.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Tidal navigators test celestial models at sea; Storm shares distributed observations; Fault certifies loads. Each partner supplies knowledge the Observatory lacks, preventing a cosmic faction from simply knowing everything better.",
+      "rivalries": "Escapement disputes causality assumptions, Daybreak challenges acceptable risk and Reed defends experiential testimony. These conflicts are not science versus superstition; they concern scope, uncertainty, authority and who bears errors.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-10",
+      "branch_outcomes": "The regional quest chooses independent safety review, distributed research or emergency centralized prediction under a sunset charter. Every branch trades speed, coordination and capture risk while preserving public access to essential navigation."
+    },
+    {
+      "id": "faction-11",
+      "name": "THE MISSING COURT",
+      "oath_id": "oath-11",
+      "region_id": "region-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Some truths need shelter before they can be spoken. Court culture protects privacy and refuge while confronting the danger that secrecy lets powerful people erase obligations, victims and even the evidence that anyone has been harmed.",
+      "political_structure": "Veiled benches separate protective custody from adjudication, with independent witnesses holding partial records. No single office should control identity, testimony and enforcement, but fragmentation also makes accountability slow and incomplete.",
+      "leadership_id": "character-11-leader",
+      "civic_counterpoint_id": "character-11-civilian",
+      "public_benefit": "Keep refuge possible without making secrecy a shelter for impunity.",
+      "central_contradiction": "Some truths need shelter before they can be spoken. Court culture protects privacy and refuge while confronting the danger that secrecy lets powerful people erase obligations, victims and even the evidence that anyone has been harmed.",
+      "civilian_obligation": "Residents exchange practical favors through trusted intermediaries and may use chosen public identities. Covenant duty is to protect entrusted information within agreed limits, never to grant officials unrestricted permission to alter memory.",
+      "economic_role": "The Court exports protected escrow, confidential mediation and refuge logistics while importing ordinary food and tools. Confidentiality fees risk pricing poor residents out of safety, making public funding and narrow eligibility rules consequential.",
+      "military_doctrine": "Defenders escort witnesses, deny hostile observation and preserve escape routes. Sabotage targets coercive infrastructure, while erasing civilian records or attacking unknowing intermediaries carries serious internal and external consequences.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Reed supports anonymous testimony, Tidal offers discreet transport and Rime preserves sealed evidence. Partners demand different safeguards, and the story lets them negotiate limited disclosure without demanding total trust or total exposure.",
+      "rivalries": "Daybreak presses for public accountability, Storm retains message traces and Sanguine claims ancestral records. Each can protect real interests while overreaching; the Court's own secrecy remains equally open to critique.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-11",
+      "branch_outcomes": "The regional quest chooses independent sealed oversight, distributed witness custody or public judgments with protected identities. All branches preserve refuge and pursue wrongdoing, but differ in speed, leakage risk and institutional trust."
+    },
+    {
+      "id": "faction-12",
+      "name": "SANGUINE COVENANT",
+      "oath_id": "oath-12",
+      "region_id": "region-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "A gift matters because it can be refused. Sanguine culture honors mutual sacrifice and remembered care, yet inherited pacts can transform gratitude into ownership when descendants are made responsible for promises they never chose.",
+      "political_structure": "Kin assemblies oversee communal care while consent tribunals review new and inherited pacts. Leaders disagree whether a descendant may end an obligation whose benefits still support others, making transition funding central to reform.",
+      "leadership_id": "character-12-leader",
+      "civic_counterpoint_id": "character-12-civilian",
+      "public_benefit": "Keep freely undertaken care promises meaningful.",
+      "central_contradiction": "A gift matters because it can be refused. Sanguine culture honors mutual sacrifice and remembered care, yet inherited pacts can transform gratitude into ownership when descendants are made responsible for promises they never chose.",
+      "civilian_obligation": "Communal meals, chosen-kin ceremonies and recorded care commitments organize daily life. Covenant duty must specify scope, duration and withdrawal terms; coercive inheritance is an institution to interrogate, not an unavoidable biological destiny.",
+      "economic_role": "Sanguine exports trained relief crews, textiles and caravan support while importing medicines and tools. Mutual-aid pools provide real security but can become coercive debt; reform must replace their useful functions rather than simply erase records.",
+      "military_doctrine": "Forces organize around mutual rescue and disciplined rotation, refusing to treat endurance as an infinite resource. Commanders who demand repeated sacrifice without recovery lose trust even if they win battles.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Daybreak supports recovery halls, Graft supplies food and Bitterglass tests remedies. Cooperation includes disagreement over consent and evidence, with each institution able to challenge the others' paternalism.",
+      "rivalries": "The Court protects those escaping inherited claims, Tidal faces parallel relief debts and Impulse seeks labor predictability. These disputes expose the covenant's political choices without depicting shared sacrifice itself as inherently corrupt.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-12",
+      "branch_outcomes": "The regional quest adopts renewable voluntary pacts, publicly funded care or a mixed kin charter with enforceable exit rights. Each branch changes who contributes and who administers care, but no route abandons dependents as a moral shortcut."
+    },
+    {
+      "id": "faction-13",
+      "name": "FOLDED THEATRE",
+      "oath_id": "oath-13",
+      "region_id": "region-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Imagination lets people rehearse a different life, but an audience deserves to know when it is being asked to believe. Theatre culture prizes invention while disputing whether a beautiful deception can ever substitute for informed choice.",
+      "political_structure": "District troupes share a civic stage charter, while plain-surface inspectors certify essential routes and contracts. The central conflict is whether those inspectors protect consent or merely enforce the tastes of established patrons.",
+      "leadership_id": "character-13-leader",
+      "civic_counterpoint_id": "character-13-civilian",
+      "public_benefit": "Use shared imagination to hold a divided city together.",
+      "central_contradiction": "Imagination lets people rehearse a different life, but an audience deserves to know when it is being asked to believe. Theatre culture prizes invention while disputing whether a beautiful deception can ever substitute for informed choice.",
+      "civilian_obligation": "Residents celebrate rehearsal, costume exchange and public disclosure of staged experiences. Covenant duty is to mark consequential illusions and preserve informed exit, while political patrons seek exceptions for supposedly beneficial civic myths.",
+      "economic_role": "The Theatre exports entertainment, training simulations and architectural illusion while importing food and precision materials. Patronage can fund civic imagination or monopolize the public story; transparent commissioning changes whose futures get rehearsed.",
+      "military_doctrine": "Forces use decoys, misdirection and rehearsed repositioning to reduce casualties. False surrender, hidden civilian hazards and impersonation of protected services create consequences, keeping deception from becoming an unlimited military excuse.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Reed collaborates on accessible performance, Escapement supplies stage motion and the Court protects vulnerable performers. Their partnerships distinguish creative concealment, privacy and manipulation rather than treating them as interchangeable magic.",
+      "rivalries": "Daybreak demands reliable testimony; Impulse wants standardized simulations; Rime disputes edited reconstructions of history. The Theatre's reply can be persuasive without implying that every factual claim is merely a matter of taste.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-13",
+      "branch_outcomes": "The regional quest institutes audience councils, independent disclosure inspectors or public-interest commissions with opt-outs. Each branch trades creative freedom, administrative burden and patron capture while keeping genuine artistic disagreement alive."
+    },
+    {
+      "id": "faction-14",
+      "name": "ESCAPEMENT ROAD",
+      "oath_id": "oath-14",
+      "region_id": "region-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "Movement matters because consequences arrive somewhere. Road culture honors progress and second chances while confronting the temptation to treat people as schedule errors and to borrow indefinitely from a future expected to repair the present.",
+      "political_structure": "Route communes manage local roads, while a timetable assembly coordinates long-distance service. Rest guarantees and public detours limit central scheduling authority; emergency accelerations require a stated end condition and review.",
+      "leadership_id": "character-14-leader",
+      "civic_counterpoint_id": "character-14-civilian",
+      "public_benefit": "Keep relief and transport moving when every route has a cost.",
+      "central_contradiction": "Movement matters because consequences arrive somewhere. Road culture honors progress and second chances while confronting the temptation to treat people as schedule errors and to borrow indefinitely from a future expected to repair the present.",
+      "civilian_obligation": "Communal meals follow arrivals rather than one universal clock, and public rest is a respected contribution to safety. Covenant duty includes returning borrowed motion through maintenance, not submitting every hour of life to a timetable.",
+      "economic_role": "Escapement exports transport and precision motion components while importing fuel, food and structural materials. Express profits can starve local stops, so route subsidies and maintenance debt shape the regional economy visibly.",
+      "military_doctrine": "Forces defend route continuity, repair capacity and safe retreat. Rapid redeployment has supply and recovery needs; temporal tactics cannot retroactively erase civilian harm or make an unannounced attack impossible to anticipate.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Impulse builds drive components, Theatre designs training simulations and Tidal links road freight to ports. Shared schedules must respect each partner's physical constraints rather than treating all delay as irrational resistance.",
+      "rivalries": "Rime disputes what should remain unchanged, Fault demands careful structural review and Graft protects migration corridors. Road leaders also confront communities harmed by bypasses, so progress has local as well as continental stakeholders.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-14",
+      "branch_outcomes": "The regional quest chooses a public rest charter, decentralized route communes or regulated express concessions. Each branch changes speed, access and funding, but all preserve safe alternatives and repayment of maintenance debt."
+    },
+    {
+      "id": "faction-15",
+      "name": "IMPULSE FOUNDRY",
+      "oath_id": "oath-15",
+      "region_id": "region-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_identity_fields": [
+        "name"
+      ],
+      "worldview": "A tool should expand the choices of the people using it. Foundry culture values practical invention, yet its institutions can reduce workers and citizens to interchangeable components when efficiency becomes the only measure of a good life.",
+      "political_structure": "Production councils coordinate shared machinery while worker assemblies and settlement boards negotiate service priorities. Emergency command can accelerate repairs, but permanent emergency status is the central threat to civic self-government.",
+      "leadership_id": "character-15-leader",
+      "civic_counterpoint_id": "character-15-civilian",
+      "public_benefit": "Make reliable tools and services available beyond privileged districts.",
+      "central_contradiction": "A tool should expand the choices of the people using it. Foundry culture values practical invention, yet its institutions can reduce workers and citizens to interchangeable components when efficiency becomes the only measure of a good life.",
+      "civilian_obligation": "Repair schools, communal workshops and shift kitchens support civic life. Covenant duty is to maintain and share the benefits of tools, with a protected right to challenge unsafe production orders and propose alternatives.",
+      "economic_role": "Impulse exports machinery and standardized components while importing ore, food, water and specialized craft. Automation can lower prices and eliminate livelihoods simultaneously, so retraining and shared ownership matter to the regional resolution.",
+      "military_doctrine": "Military forces emphasize logistics, repair, combined engineering and recoverable fortifications. Siege engines require supply and crews; industrial power cannot justify permanent destruction of player housing or denial of neutral civilian routes.",
+      "internal_variation": "Institutional leaders, professional workers, independent households and reformers disagree; no membership implies a uniform morality.",
+      "alliances": "Storm provides control signals, Escapement supplies transport coordination and Kiln makes specialized components. The Foundry needs each partner's expertise and cannot simply manufacture replacements for all cultural or ecological dependencies.",
+      "rivalries": "Graft challenges monoculture and habitat loss, Tidal contests industrial water demand and Kiln defends independent craft. Internal worker assemblies also challenge command, preventing an easy Nature-good/Technology-evil binary.",
+      "relationship_policy": "Bilateral issue-specific relations; no fixed all-purpose friendly/hostile elemental matrix.",
+      "regional_quest_id": "quest-region-15",
+      "branch_outcomes": "The regional quest chooses worker-governed automation, regulated civic utilities or decentralized repair cooperatives. Each branch changes coordination, investment and accountability while preserving essential services during transition."
+    }
+  ]
+}

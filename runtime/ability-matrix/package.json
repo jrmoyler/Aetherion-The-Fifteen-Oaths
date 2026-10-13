@@ -1,0 +1,18 @@
+{
+  "name": "ability-matrix",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "dev:atlas": "vite packs/atlas --host 127.0.0.1",
+    "build:atlas": "vite build packs/atlas --base ./",
+    "build": "sh tools/build-all.sh"
+  },
+  "dependencies": {
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "vite": "8.1.5"
+  }
+}

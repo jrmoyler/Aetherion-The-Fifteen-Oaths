@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "mappings": [
+    {
+      "schema": "entity-contract.schema.json",
+      "registry": "01_WORLD_BIBLE/ENTITY_CONTRACT.json"
+    },
+    {
+      "schema": "timeline.schema.json",
+      "registry": "02_HISTORY_AND_COSMOLOGY/TIMELINE.json"
+    },
+    {
+      "schema": "world-graph.schema.json",
+      "registry": "03_GEOGRAPHY/WORLD_GRAPH.json"
+    },
+    {
+      "schema": "realm-registry.schema.json",
+      "registry": "03_GEOGRAPHY/REALM_REGISTRY.json"
+    },
+    {
+      "schema": "world-poi-registry.schema.json",
+      "registry": "03_GEOGRAPHY/WORLD_POI_REGISTRY.json"
+    },
+    {
+      "schema": "trade-routes.schema.json",
+      "registry": "03_GEOGRAPHY/TRADE_ROUTES.json"
+    },
+    {
+      "schema": "faction-registry.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/FACTION_REGISTRY.json"
+    },
+    {
+      "schema": "character-registry.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json"
+    },
+    {
+      "schema": "character-role-coverage.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/CHARACTER_ROLE_COVERAGE.json"
+    },
+    {
+      "schema": "character-service-registry.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/CHARACTER_SERVICE_REGISTRY.json"
+    },
+    {
+      "schema": "relationship-graph.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/RELATIONSHIP_GRAPH.json"
+    },
+    {
+      "schema": "quest-registry.schema.json",
+      "registry": "06_NARRATIVE/QUEST_REGISTRY.json"
+    },
+    {
+      "schema": "ending-prerequisites.schema.json",
+      "registry": "06_NARRATIVE/ENDING_PREREQUISITES.json"
+    }
+  ]
+}

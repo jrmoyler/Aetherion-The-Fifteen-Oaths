@@ -1,0 +1,333 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aetherion:source-asset-index:1.0.0",
+  "title": "Pinned source asset identity and honest maturity index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "scope",
+    "counts",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "RECOVERED"
+    },
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "const": "SRC-ABILITY-MATRIX-4c4a1eb"
+      }
+    },
+    "scope": {
+      "type": "string"
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_asset_paths",
+        "unique_byte_identities",
+        "primary_sandbox_paths",
+        "primary_sandbox_unique_hashes",
+        "additional_unique_hashes_outside_primary",
+        "status_by_unique_hash",
+        "source_screenshot_unique_hashes",
+        "status_by_unique_hash",
+        "source_screenshot_unique_hashes"
+      ],
+      "properties": {
+        "source_asset_paths": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unique_byte_identities": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "primary_sandbox_paths": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "primary_sandbox_unique_hashes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "additional_unique_hashes_outside_primary": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status_by_unique_hash": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "Referenced",
+            "Implemented"
+          ],
+          "properties": {
+            "Referenced": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "Implemented": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        "source_screenshot_unique_hashes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "sha256",
+          "size_bytes",
+          "path_count",
+          "source_paths",
+          "repository_paths",
+          "primary_sandbox_asset_id",
+          "asset_kinds",
+          "production_status",
+          "delivery_tier",
+          "scope",
+          "approval",
+          "license_gate",
+          "validation"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^asset-sourcehash-[a-f0-9]{20}$"
+          },
+          "canon_status": {
+            "const": "RECOVERED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "const": "SRC-ABILITY-MATRIX-4c4a1eb"
+            },
+            "minItems": 1,
+            "maxItems": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "path_count": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source_paths": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "repository_paths": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "primary_sandbox_asset_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "asset_kinds": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "source_screenshot",
+                "source_image_or_texture",
+                "model_or_embedded_material_glb",
+                "model_or_animation_fbx",
+                "runtime_model_or_wasm_support",
+                "environment_lighting_hdr"
+              ]
+            }
+          },
+          "production_status": {
+            "enum": [
+              "Referenced",
+              "Implemented"
+            ]
+          },
+          "delivery_tier": {
+            "enum": [
+              "concept",
+              "prototype"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "approval": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "status",
+              "individual_final_art_approved"
+            ],
+            "properties": {
+              "status": {
+                "const": "UNRESOLVED"
+              },
+              "individual_final_art_approved": {
+                "const": false
+              }
+            }
+          },
+          "license_gate": {
+            "const": "DEC-016"
+          },
+          "validation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "manifest_present",
+              "hash_grouping",
+              "visual_review",
+              "production_validation",
+              "status_basis",
+              "implementation_evidence"
+            ],
+            "properties": {
+              "manifest_present": {
+                "type": "boolean"
+              },
+              "hash_grouping": {
+                "type": "boolean"
+              },
+              "visual_review": {
+                "type": "boolean"
+              },
+              "production_validation": {
+                "const": false
+              },
+              "status_basis": {
+                "type": "string",
+                "minLength": 1
+              },
+              "implementation_evidence": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "source_path",
+                    "repository_path",
+                    "line",
+                    "matched_literals",
+                    "code_excerpt"
+                  ],
+                  "properties": {
+                    "source_path": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "repository_path": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "line": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "matched_literals": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "code_excerpt": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "asset_kinds": {
+                  "contains": {
+                    "const": "source_screenshot"
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "production_status": {
+                  "const": "Referenced"
+                },
+                "delivery_tier": {
+                  "const": "concept"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "production_status": {
+                  "const": "Implemented"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "validation": {
+                  "properties": {
+                    "implementation_evidence": {
+                      "minItems": 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

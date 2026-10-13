@@ -1,0 +1,226 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "canon_status",
+    "records",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "canon_status": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "basis",
+          "canon_status",
+          "change_trigger",
+          "direction",
+          "from_id",
+          "id",
+          "kind",
+          "source_ids",
+          "to_id"
+        ],
+        "properties": {
+          "basis": {
+            "type": "string",
+            "minLength": 1
+          },
+          "betrayal_consequence_flags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "breach_trigger_flags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "change_trigger": {
+            "type": "string",
+            "minLength": 1
+          },
+          "direction": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "bidirectional cooperation with conflicting immediate priorities",
+              "bidirectional issue-specific; no automatic elemental hatred",
+              "bidirectional obligations with asymmetric civic power",
+              "bidirectional relationship with distinct roles and the right to disagree",
+              "bidirectional with asymmetric institutional power",
+              "one-time transfer"
+            ]
+          },
+          "from_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "relationship-civic-01",
+              "relationship-civic-02",
+              "relationship-civic-03",
+              "relationship-civic-04",
+              "relationship-civic-05",
+              "relationship-civic-06",
+              "relationship-civic-07",
+              "relationship-civic-08",
+              "relationship-civic-09",
+              "relationship-civic-10",
+              "relationship-civic-11",
+              "relationship-civic-12",
+              "relationship-civic-13",
+              "relationship-civic-14",
+              "relationship-civic-15",
+              "relationship-daybreak-sponsorship",
+              "relationship-dessa-tovin",
+              "relationship-faction-01-05",
+              "relationship-faction-01-07",
+              "relationship-faction-02-11",
+              "relationship-faction-03-06",
+              "relationship-faction-03-11",
+              "relationship-faction-04-08",
+              "relationship-faction-04-10",
+              "relationship-faction-05-14",
+              "relationship-faction-06-13",
+              "relationship-faction-07-08",
+              "relationship-faction-07-15",
+              "relationship-faction-08-09",
+              "relationship-faction-09-11",
+              "relationship-faction-09-12",
+              "relationship-faction-10-14",
+              "relationship-faction-11-12",
+              "relationship-faction-12-13",
+              "relationship-faction-13-14",
+              "relationship-faction-14-15",
+              "relationship-faction-15-01",
+              "relationship-oda-player-rival",
+              "relationship-sorin-rell-mediation",
+              "relationship-succession",
+              "relationship-tarin-nemi",
+              "relationship-tarin-rell",
+              "relationship-una-player-mentor"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "accountability and refuge",
+              "care and consent",
+              "care and delivery obligation",
+              "care and protected-route mediation",
+              "civic accountability",
+              "custody and privacy",
+              "exit and inherited claims",
+              "history and protected routes",
+              "history and provenance",
+              "measurement and causality",
+              "medicine and ecology",
+              "memory and representation",
+              "navigation and model dispute",
+              "optional reciprocal sponsorship",
+              "performance and consent",
+              "practical mentorship with independent graduation",
+              "productive land dispute",
+              "recurring professional rivalry",
+              "retention dispute",
+              "shared watershed dispute",
+              "simulation and training",
+              "standardization and craft",
+              "succession",
+              "supply and standards",
+              "transport and machinery",
+              "transport and structural review",
+              "uncertainty and public safety",
+              "warning partnership",
+              "water quality partnership"
+            ]
+          },
+          "promise_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "quest_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^quest-[a-z0-9-]+$"
+            },
+            "uniqueItems": true
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+            },
+            "uniqueItems": true
+          },
+          "to_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aetherion:relationship-graph:1.0.0",
+  "title": "Aetherion Relationship Graph",
+  "description": "Strict field-level schema for the authored preproduction registry. Stable record IDs and all object fields are explicit. Schema validity does not confer canon approval, implementation or semantic truth."
+}

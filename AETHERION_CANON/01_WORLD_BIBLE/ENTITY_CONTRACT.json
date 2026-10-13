@@ -1,0 +1,792 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "scope_note": "Oath names and elements alone are LOCKED by SRC-USER-DIRECTIVE. Technical IDs and all new names are PROPOSED. Recovered artwork may supersede visual proposals only through explicit conflict review. A creature or mount descriptor is a concept request, not an existing asset.",
+  "records": [
+    {
+      "oath_id": "oath-01",
+      "region_id": "region-01",
+      "faction_id": "faction-01",
+      "oath_name": "KILN OATH",
+      "element": "Fire",
+      "capital": "Cindervault",
+      "settlement": "Ashbridge",
+      "leader": "Mara Venn",
+      "civilian": "Ivo Serr",
+      "dungeon": "The Quench Below",
+      "boss": "The Furnace Witness",
+      "creature": "slag-backed burrower",
+      "mount": "kiln-strider chassis",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-01-leader",
+      "civilian_id": "character-01-civilian",
+      "capital_id": "poi-01-capital",
+      "settlement_id": "poi-01-settlement",
+      "dungeon_id": "poi-01-dungeon",
+      "event_id": "poi-01-event",
+      "regional_quest_id": "quest-region-01",
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-07"
+      ],
+      "id": "oath-01"
+    },
+    {
+      "oath_id": "oath-02",
+      "region_id": "region-02",
+      "faction_id": "faction-02",
+      "oath_name": "RIME ARCHIVE",
+      "element": "Frost",
+      "capital": "Stillfolio",
+      "settlement": "Meltgate",
+      "leader": "Sera Pell",
+      "civilian": "Nemi Or",
+      "dungeon": "The Uncatalogued Vault",
+      "boss": "The Unthawing Custodian",
+      "creature": "rime-antler grazer",
+      "mount": "insulated archive sled",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-02-leader",
+      "civilian_id": "character-02-civilian",
+      "capital_id": "poi-02-capital",
+      "settlement_id": "poi-02-settlement",
+      "dungeon_id": "poi-02-dungeon",
+      "event_id": "poi-02-event",
+      "regional_quest_id": "quest-region-02",
+      "neighbor_ids": [
+        "region-01",
+        "region-03",
+        "region-05"
+      ],
+      "id": "oath-02"
+    },
+    {
+      "oath_id": "oath-03",
+      "region_id": "region-03",
+      "faction_id": "faction-03",
+      "oath_name": "STORM RELAY",
+      "element": "Lightning",
+      "capital": "Crownspan",
+      "settlement": "Grounding Reach",
+      "leader": "Tal Ren",
+      "civilian": "Oda Kesh",
+      "dungeon": "The Silent Junction",
+      "boss": "The Unanswered Circuit",
+      "creature": "copper-wing kite",
+      "mount": "grounded cable runner",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-03-leader",
+      "civilian_id": "character-03-civilian",
+      "capital_id": "poi-03-capital",
+      "settlement_id": "poi-03-settlement",
+      "dungeon_id": "poi-03-dungeon",
+      "event_id": "poi-03-event",
+      "regional_quest_id": "quest-region-03",
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-06",
+        "region-09"
+      ],
+      "id": "oath-03"
+    },
+    {
+      "oath_id": "oath-04",
+      "region_id": "region-04",
+      "faction_id": "faction-04",
+      "oath_name": "TIDAL COVENANT",
+      "element": "Water",
+      "capital": "Confluence Quay",
+      "settlement": "Brackensluice",
+      "leader": "Elen Voss",
+      "civilian": "Kavi Sen",
+      "dungeon": "The Undertide Ledger",
+      "boss": "The Debt Leviathan",
+      "creature": "reedback estuary grazer",
+      "mount": "tidal skimmer",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-04-leader",
+      "civilian_id": "character-04-civilian",
+      "capital_id": "poi-04-capital",
+      "settlement_id": "poi-04-settlement",
+      "dungeon_id": "poi-04-dungeon",
+      "event_id": "poi-04-event",
+      "regional_quest_id": "quest-region-04",
+      "neighbor_ids": [
+        "region-07",
+        "region-08"
+      ],
+      "id": "oath-04"
+    },
+    {
+      "oath_id": "oath-05",
+      "region_id": "region-05",
+      "faction_id": "faction-05",
+      "oath_name": "FAULT CHOIR",
+      "element": "Earth & Crystal",
+      "capital": "Keystone Hall",
+      "settlement": "Talus Steps",
+      "leader": "Deren Korr",
+      "civilian": "Pella Ust",
+      "dungeon": "The Counterweight Halls",
+      "boss": "The Buried Adjudicator",
+      "creature": "resonance mole",
+      "mount": "terrace ram",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-05-leader",
+      "civilian_id": "character-05-civilian",
+      "capital_id": "poi-05-capital",
+      "settlement_id": "poi-05-settlement",
+      "dungeon_id": "poi-05-dungeon",
+      "event_id": "poi-05-event",
+      "regional_quest_id": "quest-region-05",
+      "neighbor_ids": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-07",
+        "region-08",
+        "region-09"
+      ],
+      "id": "oath-05"
+    },
+    {
+      "oath_id": "oath-06",
+      "region_id": "region-06",
+      "faction_id": "faction-06",
+      "oath_name": "REED RESONANCE",
+      "element": "Wind & Sound",
+      "capital": "Cantilever",
+      "settlement": "Hush Vale",
+      "leader": "Lio Senn",
+      "civilian": "Amri Fell",
+      "dungeon": "The Muted Amphitheatre",
+      "boss": "The Perfect Chorus",
+      "creature": "sail-feather climber",
+      "mount": "reedwing glider",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-06-leader",
+      "civilian_id": "character-06-civilian",
+      "capital_id": "poi-06-capital",
+      "settlement_id": "poi-06-settlement",
+      "dungeon_id": "poi-06-dungeon",
+      "event_id": "poi-06-event",
+      "regional_quest_id": "quest-region-06",
+      "neighbor_ids": [
+        "region-03",
+        "region-09",
+        "region-10",
+        "region-13"
+      ],
+      "id": "oath-06"
+    },
+    {
+      "oath_id": "oath-07",
+      "region_id": "region-07",
+      "faction_id": "faction-07",
+      "oath_name": "GRAFT SANCTUARY",
+      "element": "Nature",
+      "capital": "Rootmeet",
+      "settlement": "Gleaning Margin",
+      "leader": "Yara Moss",
+      "civilian": "Tovin Hale",
+      "dungeon": "The Common Root",
+      "boss": "The Unending Orchard",
+      "creature": "seed-carrier browser",
+      "mount": "rootpath hart",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-07-leader",
+      "civilian_id": "character-07-civilian",
+      "capital_id": "poi-07-capital",
+      "settlement_id": "poi-07-settlement",
+      "dungeon_id": "poi-07-dungeon",
+      "event_id": "poi-07-event",
+      "regional_quest_id": "quest-region-07",
+      "neighbor_ids": [
+        "region-01",
+        "region-04",
+        "region-05",
+        "region-08"
+      ],
+      "id": "oath-07"
+    },
+    {
+      "oath_id": "oath-08",
+      "region_id": "region-08",
+      "faction_id": "faction-08",
+      "oath_name": "BITTERGLASS GUILD",
+      "element": "Poison",
+      "capital": "Vitrial",
+      "settlement": "Clearfen",
+      "leader": "Neris Vale",
+      "civilian": "Bram Ilex",
+      "dungeon": "The Sealed Distillatory",
+      "boss": "The Patient Still",
+      "creature": "filter-shelled crawler",
+      "mount": "sealed marsh walker",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-08-leader",
+      "civilian_id": "character-08-civilian",
+      "capital_id": "poi-08-capital",
+      "settlement_id": "poi-08-settlement",
+      "dungeon_id": "poi-08-dungeon",
+      "event_id": "poi-08-event",
+      "regional_quest_id": "quest-region-08",
+      "neighbor_ids": [
+        "region-04",
+        "region-05",
+        "region-07",
+        "region-09",
+        "region-12"
+      ],
+      "id": "oath-08"
+    },
+    {
+      "oath_id": "oath-09",
+      "region_id": "region-09",
+      "faction_id": "faction-09",
+      "oath_name": "OATH OF DAYBREAK",
+      "element": "Light & Holy",
+      "capital": "Aureate Steps",
+      "settlement": "Lantern Ward",
+      "leader": "Helia Mar",
+      "civilian": "Sorin Kes",
+      "dungeon": "The Chamber of Appeals",
+      "boss": "The Unblinking Witness",
+      "creature": "prism-backed courser",
+      "mount": "warded road courser",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-09-leader",
+      "civilian_id": "character-09-civilian",
+      "capital_id": "poi-09-capital",
+      "settlement_id": "poi-09-settlement",
+      "dungeon_id": "poi-09-dungeon",
+      "event_id": "poi-09-event",
+      "regional_quest_id": "quest-region-09",
+      "neighbor_ids": [
+        "region-03",
+        "region-05",
+        "region-06",
+        "region-08",
+        "region-12",
+        "region-13"
+      ],
+      "id": "oath-09"
+    },
+    {
+      "oath_id": "oath-10",
+      "region_id": "region-10",
+      "faction_id": "faction-10",
+      "oath_name": "TIDAL OBSERVATORY",
+      "element": "Cosmic & Gravity",
+      "capital": "Parallax Crown",
+      "settlement": "Ballast Haven",
+      "leader": "Iria Deyn",
+      "civilian": "Cal Ro",
+      "dungeon": "The Falling Meridian",
+      "boss": "The Unmoored Atlas",
+      "creature": "ballast-wing roostling",
+      "mount": "ballast platform",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-10-leader",
+      "civilian_id": "character-10-civilian",
+      "capital_id": "poi-10-capital",
+      "settlement_id": "poi-10-settlement",
+      "dungeon_id": "poi-10-dungeon",
+      "event_id": "poi-10-event",
+      "regional_quest_id": "quest-region-10",
+      "neighbor_ids": [
+        "region-06",
+        "region-13",
+        "region-11"
+      ],
+      "id": "oath-10"
+    },
+    {
+      "oath_id": "oath-11",
+      "region_id": "region-11",
+      "faction_id": "faction-11",
+      "oath_name": "THE MISSING COURT",
+      "element": "Shadow & Void",
+      "capital": "Absent Seat",
+      "settlement": "Witness Ford",
+      "leader": "Veya Noll",
+      "civilian": "Rell An",
+      "dungeon": "The Unfiled Palace",
+      "boss": "The Nameless Bailiff",
+      "creature": "dusk-window stalker",
+      "mount": "shadow-trace courser",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-11-leader",
+      "civilian_id": "character-11-civilian",
+      "capital_id": "poi-11-capital",
+      "settlement_id": "poi-11-settlement",
+      "dungeon_id": "poi-11-dungeon",
+      "event_id": "poi-11-event",
+      "regional_quest_id": "quest-region-11",
+      "neighbor_ids": [
+        "region-10",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "id": "oath-11"
+    },
+    {
+      "oath_id": "oath-12",
+      "region_id": "region-12",
+      "faction_id": "faction-12",
+      "oath_name": "SANGUINE COVENANT",
+      "element": "Blood",
+      "capital": "Kinhold",
+      "settlement": "Open Hearth",
+      "leader": "Adra Kest",
+      "civilian": "Oren Sol",
+      "dungeon": "The Inheritance Engine",
+      "boss": "The First Creditor",
+      "creature": "ironbrush herdbeast",
+      "mount": "redland packhorn",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-12-leader",
+      "civilian_id": "character-12-civilian",
+      "capital_id": "poi-12-capital",
+      "settlement_id": "poi-12-settlement",
+      "dungeon_id": "poi-12-dungeon",
+      "event_id": "poi-12-event",
+      "regional_quest_id": "quest-region-12",
+      "neighbor_ids": [
+        "region-08",
+        "region-09",
+        "region-13",
+        "region-14"
+      ],
+      "id": "oath-12"
+    },
+    {
+      "oath_id": "oath-13",
+      "region_id": "region-13",
+      "faction_id": "faction-13",
+      "oath_name": "FOLDED THEATRE",
+      "element": "Arcane & Illusion",
+      "capital": "Manydoor",
+      "settlement": "Plainmarket",
+      "leader": "Mirren Fane",
+      "civilian": "Seli Dorn",
+      "dungeon": "The Unfinished House",
+      "boss": "The Audience of One",
+      "creature": "mirror-mantled fox",
+      "mount": "foldscreen litter",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-13-leader",
+      "civilian_id": "character-13-civilian",
+      "capital_id": "poi-13-capital",
+      "settlement_id": "poi-13-settlement",
+      "dungeon_id": "poi-13-dungeon",
+      "event_id": "poi-13-event",
+      "regional_quest_id": "quest-region-13",
+      "neighbor_ids": [
+        "region-06",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-14"
+      ],
+      "id": "oath-13"
+    },
+    {
+      "oath_id": "oath-14",
+      "region_id": "region-14",
+      "faction_id": "faction-14",
+      "oath_name": "ESCAPEMENT ROAD",
+      "element": "Time & Motion",
+      "capital": "Wayclock",
+      "settlement": "Restmile",
+      "leader": "Jalen Rusk",
+      "civilian": "Tessa Wren",
+      "dungeon": "The Returned Mile",
+      "boss": "The Final Schedule",
+      "creature": "steppe longrunner",
+      "mount": "flywheel road mount",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-14-leader",
+      "civilian_id": "character-14-civilian",
+      "capital_id": "poi-14-capital",
+      "settlement_id": "poi-14-settlement",
+      "dungeon_id": "poi-14-dungeon",
+      "event_id": "poi-14-event",
+      "regional_quest_id": "quest-region-14",
+      "neighbor_ids": [
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-15"
+      ],
+      "id": "oath-14"
+    },
+    {
+      "oath_id": "oath-15",
+      "region_id": "region-15",
+      "faction_id": "faction-15",
+      "oath_name": "IMPULSE FOUNDRY",
+      "element": "Tech & Force",
+      "capital": "Counterpoise",
+      "settlement": "Handshift",
+      "leader": "Tarek Voss",
+      "civilian": "Una Brin",
+      "dungeon": "The Idle Assembly",
+      "boss": "The Perfect Executor",
+      "creature": "scrap-nesting scavenger",
+      "mount": "kinetic cargo crawler",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "locked_fields": [
+        "oath_name",
+        "element"
+      ],
+      "proposed_fields": [
+        "oath_id",
+        "region_id",
+        "faction_id",
+        "capital",
+        "settlement",
+        "leader",
+        "civilian",
+        "dungeon",
+        "boss",
+        "creature",
+        "mount"
+      ],
+      "leader_id": "character-15-leader",
+      "civilian_id": "character-15-civilian",
+      "capital_id": "poi-15-capital",
+      "settlement_id": "poi-15-settlement",
+      "dungeon_id": "poi-15-dungeon",
+      "event_id": "poi-15-event",
+      "regional_quest_id": "quest-region-15",
+      "neighbor_ids": [
+        "region-11",
+        "region-14"
+      ],
+      "id": "oath-15"
+    }
+  ]
+}

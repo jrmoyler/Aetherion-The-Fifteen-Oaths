@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Aetherion's source-preserving Ability Matrix runtime, with all 100 live castables." />
+    <title>Aetherion · Ability Runtime</title>
+    <link rel="preload" as="fetch" href="./models/Idle.fbx" crossorigin />
+    <link rel="preload" as="fetch" href="./models/dummy.fbx" crossorigin />
+    <link rel="preload" as="image" href="./models/diffuse.png" crossorigin />
+  </head>
+  <body>
+    <canvas id="viewport" aria-label="Ability Matrix 3D sandbox"></canvas>
+    <div id="loader" class="loader">
+      <div class="loader__inner">
+        <div class="loader__sigil">
+          <span class="sigil sigil--a"></span><span class="sigil sigil--b"></span>
+          <span class="sigil sigil--c"></span><span class="sigil sigil--d"></span>
+        </div>
+        <h1 class="loader__title">Aetherion · Ability Runtime</h1>
+        <div class="loader__bar"><i id="loader-fill"></i></div>
+        <p class="loader__status" id="loader-status">Loading the original runtime…</p>
+      </div>
+    </div>
+    <div id="hud" class="hud" aria-live="polite"></div>
+    <details id="aetherion-controls" class="aetherion-controls" open>
+      <summary>Aetherion · 100 castables · 15 elements</summary>
+      <div class="aetherion-controls__row">
+        <label>Element<select id="element-filter" disabled><option value="">All elements</option></select></label>
+        <label class="aetherion-controls__ability">Castable<select id="castable-select" disabled aria-describedby="ability-status"></select></label>
+        <button id="cast-button" type="button" disabled>Cast</button>
+        <button id="clear-button" type="button" disabled>Clear</button>
+      </div>
+      <p id="ability-status" role="status">Starting the original Ability Matrix sandbox…</p>
+    </details>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

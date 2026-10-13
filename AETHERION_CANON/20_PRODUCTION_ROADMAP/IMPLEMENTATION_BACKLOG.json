@@ -1,0 +1,472 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-GOVERNANCE-PROPOSAL"
+  ],
+  "scoring_order": [
+    "dependency_importance",
+    "gameplay_significance",
+    "narrative_significance",
+    "reuse",
+    "complexity",
+    "visual_differentiation",
+    "technical_risk"
+  ],
+  "records": [
+    {
+      "id": "work-001",
+      "title": "Resolve individual reference approval and revision conflicts",
+      "priority": "P0",
+      "depends_on": [],
+      "scores": [
+        5,
+        4,
+        4,
+        5,
+        3,
+        5,
+        3
+      ],
+      "acceptance": [
+        "Each selected reference has explicit approval evidence or remains unresolved",
+        "Original bytes and supersession history retained"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ]
+    },
+    {
+      "id": "work-002",
+      "title": "Complete per-castable execution and GPU parity gates",
+      "priority": "P0",
+      "depends_on": [],
+      "scores": [
+        5,
+        5,
+        3,
+        5,
+        5,
+        5,
+        5
+      ],
+      "acceptance": [
+        "Every source identifier maps exactly once",
+        "Applicable behavior evidence per castable",
+        "GPU and device gates tested separately, no metadata-only VERIFIED status"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ]
+    },
+    {
+      "id": "work-003",
+      "title": "Approve cosmology distinctions and ending costs",
+      "priority": "P0",
+      "depends_on": [],
+      "scores": [
+        5,
+        4,
+        5,
+        5,
+        3,
+        3,
+        3
+      ],
+      "acceptance": [
+        "DEC-001 and DEC-002 explicitly resolved",
+        "Three ending directions preserve agency and meaningful costs"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ]
+    },
+    {
+      "id": "work-004",
+      "title": "Approve continental topology and vertical-slice corridor",
+      "priority": "P0",
+      "depends_on": [
+        "work-003"
+      ],
+      "scores": [
+        5,
+        5,
+        5,
+        5,
+        4,
+        5,
+        4
+      ],
+      "acceptance": [
+        "Fifteen connected regions",
+        "Watersheds and climate transitions reviewed",
+        "Relative map not mistaken for final scale"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-005",
+      "title": "Choose target platforms and measure art/runtime budgets",
+      "priority": "P0",
+      "depends_on": [
+        "work-001",
+        "work-002"
+      ],
+      "scores": [
+        5,
+        5,
+        2,
+        5,
+        5,
+        4,
+        5
+      ],
+      "acceptance": [
+        "Named target devices and versions",
+        "Measured frame-time/memory/load evidence",
+        "Prototype versus validated budgets distinguished"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-006",
+      "title": "Prototype deterministic bounded elemental authority",
+      "priority": "P0",
+      "depends_on": [
+        "work-002",
+        "work-005"
+      ],
+      "scores": [
+        5,
+        5,
+        4,
+        5,
+        5,
+        4,
+        5
+      ],
+      "acceptance": [
+        "Interaction caps and directed state rules executed",
+        "Replay gives same authoritative result",
+        "Counterplay/recovery and accessible feedback tested"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-007",
+      "title": "Approve and produce representative character equipment rigs",
+      "priority": "P1",
+      "depends_on": [
+        "work-001",
+        "work-005"
+      ],
+      "scores": [
+        5,
+        5,
+        4,
+        5,
+        5,
+        5,
+        4
+      ],
+      "acceptance": [
+        "Two distinct Oath silhouettes retain reference identity",
+        "Sockets/articulation/collision validated",
+        "No recolor substitution"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-008",
+      "title": "Build opening civic and combat/noncombat covenant loop",
+      "priority": "P1",
+      "depends_on": [
+        "work-003",
+        "work-004",
+        "work-006",
+        "work-007"
+      ],
+      "scores": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "acceptance": [
+        "Refusal and alternate first-Oath routes work",
+        "Save/disconnect recovery tested",
+        "Player understands obligations before accepting"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL",
+        "SRC-SYSTEMS-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-009",
+      "title": "Prototype regional resource flows and protected housing",
+      "priority": "P1",
+      "depends_on": [
+        "work-006",
+        "work-008"
+      ],
+      "scores": [
+        4,
+        5,
+        4,
+        5,
+        4,
+        4,
+        5
+      ],
+      "acceptance": [
+        "No realm supplies all strategic inputs",
+        "Ownership survives reputation/territory changes",
+        "No required repetitive punitive upkeep"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-010",
+      "title": "Validate creature ecology, mount and morph traversal",
+      "priority": "P1",
+      "depends_on": [
+        "work-004",
+        "work-005",
+        "work-007"
+      ],
+      "scores": [
+        4,
+        5,
+        3,
+        4,
+        5,
+        5,
+        4
+      ],
+      "acceptance": [
+        "Nonhostile ecological roles included",
+        "Mount/morph access and counterplay bounded",
+        "Navigation/animation/scale checks executed"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-011",
+      "title": "Build consent-scoped siege and reconstruction test",
+      "priority": "P2",
+      "depends_on": [
+        "work-008",
+        "work-009",
+        "work-010"
+      ],
+      "scores": [
+        4,
+        5,
+        4,
+        4,
+        5,
+        4,
+        5
+      ],
+      "acceptance": [
+        "No permanent essential-content removal",
+        "Supply/CC/respawn and anti-grief limits tested",
+        "World reconstruction reaches a safe baseline"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-012",
+      "title": "Approve commercial rights and release-ready asset evidence",
+      "priority": "P0",
+      "depends_on": [],
+      "scores": [
+        5,
+        3,
+        2,
+        5,
+        4,
+        3,
+        5
+      ],
+      "acceptance": [
+        "Third-party restrictions resolved before commercial release",
+        "Unknown rights retained as blocked",
+        "Attributions shipped with affected assets"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ABILITY-MATRIX-4c4a1eb",
+        "SRC-USER-DIRECTIVE"
+      ]
+    },
+    {
+      "id": "work-013",
+      "title": "Reconcile 31 VFX reference mappings and commission missing per-castable sheets",
+      "priority": "P1",
+      "depends_on": [
+        "work-001",
+        "work-002"
+      ],
+      "scores": [
+        4,
+        5,
+        2,
+        4,
+        4,
+        5,
+        4
+      ],
+      "acceptance": [
+        "Compare every printed UID, parameter, phase and footprint against the pinned source; record mismatches without altering the original image.",
+        "Index the 69 source castables without a dedicated sheet in the recovered set; search again before commissioning replacements.",
+        "Approve source-faithful layered phase references and accessible cues before treating them as atlases or runtime textures."
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-GOVERNANCE-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-014",
+      "title": "Produce Oath-distinct audio and accessible interface families",
+      "priority": "P1",
+      "depends_on": [
+        "work-001",
+        "work-005"
+      ],
+      "scores": [
+        3,
+        4,
+        4,
+        5,
+        4,
+        5,
+        3
+      ],
+      "acceptance": [
+        "Fifteen cue grammars distinguish realm, effect priority and team identity without requiring color or hearing.",
+        "Document rights, attenuation, concurrency, captions and reduced-motion behavior; no source audio service was recovered.",
+        "Test UI symbols at small size, grayscale, mono audio and mobile viewing distances."
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-GOVERNANCE-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-015",
+      "title": "Reproduce clean installs and harden the runnable integration boundary",
+      "priority": "P0",
+      "depends_on": [],
+      "scores": [
+        5,
+        5,
+        2,
+        5,
+        3,
+        2,
+        5
+      ],
+      "acceptance": [
+        "Install the preserved lockfiles from a clean supported environment and record exact package versions without secrets.",
+        "Run source tests, migration/adapter tests, wrapper build, canon schemas and negative fixtures on the exact branch commit.",
+        "Test origin checks, serialized async selection/casting, stale requests and teardown before allowing untrusted embedding."
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-GOVERNANCE-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-016",
+      "title": "Review proposed chronology and principal-character branch continuity",
+      "priority": "P1",
+      "depends_on": [
+        "work-003",
+        "work-004"
+      ],
+      "scores": [
+        4,
+        3,
+        5,
+        3,
+        3,
+        4,
+        3
+      ],
+      "acceptance": [
+        "Founder resolves calendar, founders, leaders, relationships and major conflicts without changing locked Oath names.",
+        "Exercise all first-Oath routes against ending prerequisites; no deadlock from declining an initiation.",
+        "Review consequences for civilians and antagonists rather than assigning whole realms moral alignment."
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-GOVERNANCE-PROPOSAL"
+      ]
+    },
+    {
+      "id": "work-017",
+      "title": "Exercise save migrations and cross-registry change control",
+      "priority": "P1",
+      "depends_on": [
+        "work-006",
+        "work-015"
+      ],
+      "scores": [
+        5,
+        4,
+        3,
+        5,
+        3,
+        2,
+        5
+      ],
+      "acceptance": [
+        "Rename display names without changing IDs; reject dangling references and duplicate identities.",
+        "Test interrupted saves, incompatible schema versions, rollback and explicit narrative irreversible-choice warnings.",
+        "Archive superseded proposals and affected asset/quest IDs with founder approval evidence."
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-GOVERNANCE-PROPOSAL"
+      ]
+    }
+  ]
+}

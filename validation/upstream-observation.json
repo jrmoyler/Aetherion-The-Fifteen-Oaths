@@ -1,0 +1,71 @@
+{
+  "observedAt": "2026-10-13T17:20:35Z",
+  "pinnedImportedCommit": "4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451",
+  "upstreamMainObserved": "4f2d06278c07eb07ea42bb4e60d6606c068924c2",
+  "sourceCheckoutStatus": "clean at pinnedImportedCommit",
+  "method": "git ls-remote origin refs/heads/main (read-only)",
+  "relatedPullRequest": "https://github.com/jrmoyler/Ability-Matrix/pull/4",
+  "decision": "Do not silently repin or import later upstream changes during this migration. This agent made no mutation to Ability-Matrix; later upstream history exists independently.",
+  "boundedComparison": {
+    "comparedAt": "2026-10-13T18:03:49Z",
+    "method": "Read-only GitHub compare API; complete four-file comparison",
+    "url": "https://github.com/jrmoyler/Ability-Matrix/compare/4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451...4f2d06278c07eb07ea42bb4e60d6606c068924c2",
+    "status": "ahead",
+    "aheadBy": 2,
+    "behindBy": 0,
+    "totalCommits": 2,
+    "commits": [
+      {
+        "sha": "13ba8847d3257bfdcff46bbb00ca98c241b98654",
+        "message": "Make the matrix deployable on Vercel\n\nThe production build compiled, then failed because Vercel looked for a\nroot dist/ and the publishable site is only assembled by stage-site.sh.\n\nnpm run build now stages the site. vercel.json publishes site/, and the\nsame tree is mirrored to dist/ so the linked Vite preset still finds it."
+      },
+      {
+        "sha": "4f2d06278c07eb07ea42bb4e60d6606c068924c2",
+        "message": "Merge pull request #4 from jrmoyler/vercel-deploy\n\nMake Ability Matrix deployable on Vercel"
+      }
+    ],
+    "files": [
+      {
+        "path": "README.md",
+        "status": "modified",
+        "gitBlobSHA": "356886c24d790dc92364f6e6932bdd57cf16f7f1",
+        "additions": 2,
+        "deletions": 0,
+        "patch": "@@ -66,6 +66,8 @@ sh tools/stage-site.sh\n npx serve site\n ```\n \n+`npm run build` does both steps. Vercel runs that command and publishes `site` (`vercel.json`). The same tree is copied to `dist` so a Vite preset that still expects `dist` succeeds. The hosted matrix loads the sandbox with `?bin=wasm`; staging renames models and HDRIs to `.wasm` and the sandbox bridge rewrites those requests.\n+\n To work on the sandbox alone: `cd packs/sandbox && npm i && npm run dev`.\n \n Sandbox keys:"
+      },
+      {
+        "path": "package.json",
+        "status": "modified",
+        "gitBlobSHA": "2efe93ea50045e6af332508c293a0aa230e24f80",
+        "additions": 1,
+        "deletions": 1,
+        "patch": "@@ -7,7 +7,7 @@\n     \"test\": \"node --test tests/*.test.mjs\",\n     \"dev:atlas\": \"vite packs/atlas --host 127.0.0.1\",\n     \"build:atlas\": \"vite build packs/atlas --base ./\",\n-    \"build\": \"sh tools/build-all.sh\"\n+    \"build\": \"sh tools/build-all.sh && sh tools/stage-site.sh\"\n   },\n   \"dependencies\": {\n     \"three\": \"0.185.1\""
+      },
+      {
+        "path": "tools/stage-site.sh",
+        "status": "modified",
+        "gitBlobSHA": "8df177559c97198e8a4f8b6b2078e53b051d58a7",
+        "additions": 5,
+        "deletions": 0,
+        "patch": "@@ -18,3 +18,8 @@ done\n find \"$OUT/packs\" -type f \\( -name \"*.fbx\" -o -name \"*.glb\" -o -name \"*.hdr\" \\) -exec sh -c 'mv \"$1\" \"$1.wasm\"' _ {} \\;\n for f in \"$OUT\"/packs/*/index.html; do sed -i -E 's/\\.(fbx|glb|hdr)\"/.\\1.wasm\"/g' \"$f\"; done\n du -sh \"$OUT\"; find \"$OUT\" -type f | wc -l\n+# Vercel’s Vite preset publishes ./dist unless vercel.json is honored.\n+# Mirror the staged site so either output directory succeeds.\n+rm -rf \"$ROOT/dist\"\n+mkdir -p \"$ROOT/dist\"\n+tar -C \"$OUT\" -cf - . | tar -C \"$ROOT/dist\" -xf -"
+      },
+      {
+        "path": "vercel.json",
+        "status": "added",
+        "gitBlobSHA": "fbd3cebcaf8815887d8748473562fc27bca72904",
+        "additions": 6,
+        "deletions": 0,
+        "patch": "@@ -0,0 +1,6 @@\n+{\n+  \"$schema\": \"https://openapi.vercel.sh/vercel.json\",\n+  \"framework\": null,\n+  \"buildCommand\": \"npm run build\",\n+  \"outputDirectory\": \"site\"\n+}"
+      }
+    ],
+    "reconciliation": {
+      "castableImplementationChanged": false,
+      "catalogChanged": false,
+      "presetsChanged": false,
+      "originalAssetsChanged": false,
+      "dependencyVersionsChanged": false,
+      "actualDelta": "README explanation; npm build adds site staging; stage-site mirrors already-staged output into dist; added Vercel build/output configuration. Existing model/HDR .wasm staging renames predate this comparison.",
+      "importedPinUnchanged": true
+    }
+  }
+}

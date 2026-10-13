@@ -1,0 +1,804 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "economy-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-01",
+      "region_id": "region-01",
+      "professions": [
+        {
+          "id": "profession-01-a",
+          "name": "Metallurgy",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-01-b",
+          "name": "Eruption engineering",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-01",
+        "name": "tempered components",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "fuel and coolant",
+      "production_inputs": [
+        "raw-resource-01",
+        "resource-05",
+        "resource-02"
+      ],
+      "production_output": "resource-01",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Build and repair a thermal conduit",
+      "disruption_hazard": "ventilation and lava exclusion",
+      "failure_fallback": "A road closes temporarily; signed detour and relief service remain",
+      "neighbor_region_ids": [
+        "region-02",
+        "region-05",
+        "region-07"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-01"
+      ],
+      "essential_fallback_id": "fallback-recipe-01"
+    },
+    {
+      "id": "economy-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-02",
+      "region_id": "region-02",
+      "professions": [
+        {
+          "id": "profession-02-a",
+          "name": "Archival conservation",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-02-b",
+          "name": "Cold-chain logistics",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-02",
+        "name": "preserved reagents",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "insulation and fresh supplies",
+      "production_inputs": [
+        "raw-resource-02",
+        "resource-01",
+        "resource-03"
+      ],
+      "production_output": "resource-02",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Stabilize a failing archive chamber",
+      "disruption_hazard": "freeze-thaw and safe visibility",
+      "failure_fallback": "A collection moves to a temporary reading room",
+      "neighbor_region_ids": [
+        "region-01",
+        "region-03",
+        "region-05"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-02"
+      ],
+      "essential_fallback_id": "fallback-recipe-02"
+    },
+    {
+      "id": "economy-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-03",
+      "region_id": "region-03",
+      "professions": [
+        {
+          "id": "profession-03-a",
+          "name": "Relay maintenance",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-03-b",
+          "name": "Electrical instrument making",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-03",
+        "name": "relay conductors",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "ceramics and cable fiber",
+      "production_inputs": [
+        "raw-resource-03",
+        "resource-05",
+        "resource-06"
+      ],
+      "production_output": "resource-03",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Restore a relay without losing its message queue",
+      "disruption_hazard": "lightning grounding and alternate travel",
+      "failure_fallback": "A slower physical courier route operates",
+      "neighbor_region_ids": [
+        "region-02",
+        "region-05",
+        "region-06",
+        "region-09"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-03"
+      ],
+      "essential_fallback_id": "fallback-recipe-03"
+    },
+    {
+      "id": "economy-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-04",
+      "region_id": "region-04",
+      "professions": [
+        {
+          "id": "profession-04-a",
+          "name": "Hydraulic craft",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-04-b",
+          "name": "Seafaring and aquaculture",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-04",
+        "name": "treated water and marine fiber",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "replacement valves and filters",
+      "production_inputs": [
+        "raw-resource-04",
+        "resource-07",
+        "resource-08"
+      ],
+      "production_output": "resource-04",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Balance flood relief and water delivery",
+      "disruption_hazard": "flood elevations and drainage",
+      "failure_fallback": "Ferry service and ration-free essential water persist",
+      "neighbor_region_ids": [
+        "region-07",
+        "region-08"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-04"
+      ],
+      "essential_fallback_id": "fallback-recipe-04"
+    },
+    {
+      "id": "economy-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-05",
+      "region_id": "region-05",
+      "professions": [
+        {
+          "id": "profession-05-a",
+          "name": "Stonecutting",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-05-b",
+          "name": "Crystal surveying",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-05",
+        "name": "structural stone and tuned crystal",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "food and cutting tools",
+      "production_inputs": [
+        "raw-resource-05",
+        "resource-01",
+        "resource-08"
+      ],
+      "production_output": "resource-05",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Brace a public crossing without blocking it",
+      "disruption_hazard": "rockfall and intact evacuation lanes",
+      "failure_fallback": "A bypass crossing opens during repair",
+      "neighbor_region_ids": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-07",
+        "region-08",
+        "region-09"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-05"
+      ],
+      "essential_fallback_id": "fallback-recipe-05"
+    },
+    {
+      "id": "economy-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-06",
+      "region_id": "region-06",
+      "professions": [
+        {
+          "id": "profession-06-a",
+          "name": "Instrument making",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-06-b",
+          "name": "Sail and glider craft",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-06",
+        "name": "acoustic reeds and sailcloth",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "fasteners and preserved resins",
+      "production_inputs": [
+        "raw-resource-06",
+        "resource-03",
+        "resource-09"
+      ],
+      "production_output": "resource-06",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Tune a public warning and glider corridor",
+      "disruption_hazard": "wind shelter and hearing-safe cues",
+      "failure_fallback": "A ground route and captioned civic notices remain",
+      "neighbor_region_ids": [
+        "region-03",
+        "region-09",
+        "region-10",
+        "region-13"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-06"
+      ],
+      "essential_fallback_id": "fallback-recipe-06"
+    },
+    {
+      "id": "economy-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-07",
+      "region_id": "region-07",
+      "professions": [
+        {
+          "id": "profession-07-a",
+          "name": "Farming and horticulture",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-07-b",
+          "name": "Animal husbandry",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-07",
+        "name": "cultivated fiber and food",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "tools and treatment salts",
+      "production_inputs": [
+        "raw-resource-07",
+        "resource-04",
+        "resource-08"
+      ],
+      "production_output": "resource-07",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Restore habitat while preserving room for people",
+      "disruption_hazard": "growth limits and humane animal care",
+      "failure_fallback": "Raised paths and staple food deliveries remain",
+      "neighbor_region_ids": [
+        "region-01",
+        "region-04",
+        "region-05",
+        "region-08"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-07"
+      ],
+      "essential_fallback_id": "fallback-recipe-07"
+    },
+    {
+      "id": "economy-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-08",
+      "region_id": "region-08",
+      "professions": [
+        {
+          "id": "profession-08-a",
+          "name": "Alchemy",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-08-b",
+          "name": "Environmental remediation",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-08",
+        "name": "antidotes and filter media",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "clean water and sealed vessels",
+      "production_inputs": [
+        "raw-resource-08",
+        "resource-04",
+        "resource-05"
+      ],
+      "production_output": "resource-08",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Treat contamination without creating a new hazard",
+      "disruption_hazard": "hazard labeling and closed drainage",
+      "failure_fallback": "A protected crossing and clinic remain",
+      "neighbor_region_ids": [
+        "region-04",
+        "region-05",
+        "region-07",
+        "region-09",
+        "region-12"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-08"
+      ],
+      "essential_fallback_id": "fallback-recipe-08"
+    },
+    {
+      "id": "economy-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-09",
+      "region_id": "region-09",
+      "professions": [
+        {
+          "id": "profession-09-a",
+          "name": "Ward maintenance",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-09-b",
+          "name": "Relief and restorative craft",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-09",
+        "name": "ward lenses and recovery supplies",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "food and tuned crystal",
+      "production_inputs": [
+        "raw-resource-09",
+        "resource-05",
+        "resource-12"
+      ],
+      "production_output": "resource-09",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Protect a civic space without indiscriminate judgment",
+      "disruption_hazard": "glare control and inclusive access",
+      "failure_fallback": "A staffed low-power refuge remains",
+      "neighbor_region_ids": [
+        "region-03",
+        "region-05",
+        "region-06",
+        "region-08",
+        "region-12",
+        "region-13"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-09"
+      ],
+      "essential_fallback_id": "fallback-recipe-09"
+    },
+    {
+      "id": "economy-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-10",
+      "region_id": "region-10",
+      "professions": [
+        {
+          "id": "profession-10-a",
+          "name": "Celestial surveying",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-10-b",
+          "name": "Precision load handling",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-10",
+        "name": "navigation tables and balanced instruments",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "optical crystal and rigging",
+      "production_inputs": [
+        "raw-resource-10",
+        "resource-06",
+        "resource-13"
+      ],
+      "production_output": "resource-10",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Move a heavy instrument safely through a civic path",
+      "disruption_hazard": "gravity boundaries and safe descent",
+      "failure_fallback": "Fallback observatories and roads remain open",
+      "neighbor_region_ids": [
+        "region-06",
+        "region-13",
+        "region-11"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-10"
+      ],
+      "essential_fallback_id": "fallback-recipe-10"
+    },
+    {
+      "id": "economy-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-11",
+      "region_id": "region-11",
+      "professions": [
+        {
+          "id": "profession-11-a",
+          "name": "Secure archival custody",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-11-b",
+          "name": "Discreet logistics",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-11",
+        "name": "sealed records and privacy screens",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "repair stone and signal parts",
+      "production_inputs": [
+        "raw-resource-11",
+        "resource-13",
+        "resource-15"
+      ],
+      "production_output": "resource-11",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Recover missing records without exposing private witnesses",
+      "disruption_hazard": "phase-safe exits and truthful collision",
+      "failure_fallback": "A staffed permanent registry remains",
+      "neighbor_region_ids": [
+        "region-10",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-11"
+      ],
+      "essential_fallback_id": "fallback-recipe-11"
+    },
+    {
+      "id": "economy-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-12",
+      "region_id": "region-12",
+      "professions": [
+        {
+          "id": "profession-12-a",
+          "name": "Ritual craft",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-12-b",
+          "name": "Recovery provisioning",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-12",
+        "name": "consensual ritual implements",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "recovery food and neutral linens",
+      "production_inputs": [
+        "raw-resource-12",
+        "resource-08",
+        "resource-09"
+      ],
+      "production_output": "resource-12",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Support a communal rite without transferring others costs",
+      "disruption_hazard": "non-coercive access and safe stopping",
+      "failure_fallback": "Ordinary relief services continue without sacrifice",
+      "neighbor_region_ids": [
+        "region-08",
+        "region-09",
+        "region-13",
+        "region-14"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-12"
+      ],
+      "essential_fallback_id": "fallback-recipe-12"
+    },
+    {
+      "id": "economy-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-13",
+      "region_id": "region-13",
+      "professions": [
+        {
+          "id": "profession-13-a",
+          "name": "Stagecraft",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-13-b",
+          "name": "Optical fabrication",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-13",
+        "name": "projection panels and mirror fittings",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "rigging and pigment",
+      "production_inputs": [
+        "raw-resource-13",
+        "resource-10",
+        "resource-14"
+      ],
+      "production_output": "resource-13",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Reveal safe routes through a rearranged stage",
+      "disruption_hazard": "truthful exits and sensory alternatives",
+      "failure_fallback": "Fixed exits and a conventional route persist",
+      "neighbor_region_ids": [
+        "region-06",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-14"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-13"
+      ],
+      "essential_fallback_id": "fallback-recipe-13"
+    },
+    {
+      "id": "economy-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-14",
+      "region_id": "region-14",
+      "professions": [
+        {
+          "id": "profession-14-a",
+          "name": "Vehicle and mount craft",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-14-b",
+          "name": "Clockwork maintenance",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-14",
+        "name": "timing regulators and transport fittings",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "lubricants and precision parts",
+      "production_inputs": [
+        "raw-resource-14",
+        "resource-13",
+        "resource-15"
+      ],
+      "production_output": "resource-14",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Resynchronize a stalled kinetic crossing",
+      "disruption_hazard": "safe timing windows and no forced waiting puzzle",
+      "failure_fallback": "A ground service and safe waiting space remain",
+      "neighbor_region_ids": [
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-15"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-14"
+      ],
+      "essential_fallback_id": "fallback-recipe-14"
+    },
+    {
+      "id": "economy-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "oath_id": "oath-15",
+      "region_id": "region-15",
+      "professions": [
+        {
+          "id": "profession-15-a",
+          "name": "Mechanical engineering",
+          "noncombat_mastery": true
+        },
+        {
+          "id": "profession-15-b",
+          "name": "Civic reconstruction",
+          "noncombat_mastery": true
+        }
+      ],
+      "export_resource": {
+        "id": "resource-15",
+        "name": "actuators and modular fasteners",
+        "provenance": "Authored renewable/repairable production; no actor body harvesting requirement"
+      },
+      "import_needs": "conductors and structural stock",
+      "production_inputs": [
+        "raw-resource-15",
+        "resource-11",
+        "resource-14"
+      ],
+      "production_output": "resource-15",
+      "quality_rule": "Quality trades durability, weight, efficiency or style; no mandatory perfect-roll loop",
+      "sinks": [
+        "Consumed repair components",
+        "Optional appearance crafts",
+        "Workshop service fees within transparent bounds"
+      ],
+      "social_services": "Repair an efficient system while preserving worker agency",
+      "disruption_hazard": "mechanical lockout and pedestrian protection",
+      "failure_fallback": "Manual service and protected pedestrian paths remain",
+      "neighbor_region_ids": [
+        "region-11",
+        "region-14"
+      ],
+      "anti_monopoly": "Essential NPC supplies and alternative recipes prevent a single faction or player from withholding core access",
+      "production_recipe_ids": [
+        "recipe-15"
+      ],
+      "essential_fallback_id": "fallback-recipe-15"
+    }
+  ]
+}

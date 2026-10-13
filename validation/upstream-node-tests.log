@@ -1,0 +1,69 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> ability-matrix@1.0.0 test
+> node --test tests/*.test.mjs
+
+✔ Atlas lists exactly ten abilities and exposes detached, round-trippable presets (6.842191ms)
+✔ settings validation is strict, bounded, atomic, and rejects wrong IDs/unknown keys (8.372559ms)
+✔ actual generated Atlas preset files import and round-trip without metadata drift (103.24009ms)
+✔ manual casts reset preview state and reuse saved seeds instead of incrementing them (0.941463ms)
+✔ arming clears stale effects and restores the caster before manual ground aiming (0.565712ms)
+✔ auto-cast respects effect duration, pause, stop, explicit manual cast, and replacement (2.944162ms)
+✔ starting auto while paused does not cast, and clear/dispose leave no scheduled work (0.618881ms)
+✔ bridge accepts only exact parent source and same origin, with an explicit outbound target (3.030834ms)
+✔ matrix commands support list/arm/auto/stop/clear/pause/editor/get/apply/reset/all (0.968674ms)
+✔ failed renderer reports unavailable readiness and errors instead of accepting casts (1.256951ms)
+✔ URL ability/cast/auto parameters initialize once and errors still announce readiness (0.78032ms)
+✔ every Atlas preset repeats identical geometry and hook data through the preview controller (850.924581ms)
+✔ ten distinct new mechanic presets have complete metadata (6.265776ms)
+✔ chain-relay: phases, finite geometry, events, and complete disposal (3853.23714ms)
+✔ temporal-rewind: phases, finite geometry, events, and complete disposal (1299.098868ms)
+✔ blink-corridor: phases, finite geometry, events, and complete disposal (1639.294136ms)
+✔ restorative-sanctuary: phases, finite geometry, events, and complete disposal (1683.538591ms)
+✔ magnetic-minefield: phases, finite geometry, events, and complete disposal (1569.685455ms)
+✔ mirror-decoys: phases, finite geometry, events, and complete disposal (1370.068007ms)
+✔ ricochet-chakram: phases, finite geometry, events, and complete disposal (576.805233ms)
+✔ kinetic-parry: phases, finite geometry, events, and complete disposal (689.018467ms)
+✔ stasis-bubble: phases, finite geometry, events, and complete disposal (1087.561639ms)
+✔ prismatic-splitshot: phases, finite geometry, events, and complete disposal (855.054209ms)
+✔ same seed and time produce identical geometry and event sequences for every preset (1143.590673ms)
+✔ large update cannot skip gameplay events and custom durations finish (197.105953ms)
+✔ capacity, cancellation, error isolation, invalid input, and reusable clear (63.289365ms)
+✔ targets are copied and extreme supported tuning remains finite (322.126301ms)
+✔ event payloads and order match between normal playback and one skipped frame (811.269866ms)
+✔ linear: vendored into the sandbox byte-for-byte (22.912564ms)
+✔ linear: catalog and presets match the pack's own settings (20.477899ms)
+✔ linear-ext: vendored into the sandbox byte-for-byte (49.914246ms)
+✔ linear-ext: catalog and presets match the pack's own settings (22.011548ms)
+✔ linear-extended: vendored into the sandbox byte-for-byte (42.94316ms)
+✔ linear-extended: catalog and presets match the pack's own settings (26.534951ms)
+✔ handcast: vendored into the sandbox byte-for-byte (31.878144ms)
+✔ handcast: catalog and presets match the pack's own settings (18.222474ms)
+✔ casting: vendored into the sandbox byte-for-byte (45.450003ms)
+✔ casting: catalog and presets match the pack's own settings (28.855157ms)
+✔ every native sandbox ability is catalogued with a preset (106.217342ms)
+✔ the sandbox hosts 100 castable abilities with unique uids (1.044344ms)
+✔ every castable belongs to exactly one known element (4.666209ms)
+✔ codex abilities carry their element in their own meta, matching the map (1.939855ms)
+✔ movement settings ship in the shared preset block (0.850912ms)
+✔ the five portable Atlas prototype modules are unchanged (1.58953ms)
+✔ linear: pack files match the recorded snapshot (167.973807ms)
+✔ linear-ext: pack files match the recorded snapshot (136.491714ms)
+✔ linear-extended: pack files match the recorded snapshot (226.311603ms)
+✔ handcast: pack files match the recorded snapshot (289.997766ms)
+✔ casting: pack files match the recorded snapshot (565.165808ms)
+✔ collective: pack files match the recorded snapshot (181.688758ms)
+✔ sandbox: pack files match the recorded snapshot (404.18382ms)
+ℹ tests 51
+ℹ suites 0
+ℹ pass 51
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17926.31301
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
