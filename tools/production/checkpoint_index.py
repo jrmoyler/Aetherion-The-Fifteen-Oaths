@@ -4,13 +4,25 @@ from pathlib import Path
 import collections
 import hashlib
 import json
+from delivery_inventory import artifact_path, collision_policy
 
 ROOT = Path(__file__).resolve().parents[2]
 groups = collections.defaultdict(list)
 refs = {}
 for path in sorted((ROOT / 'assets/production').rglob('manifest.json')):
     manifest = json.loads(path.read_text())
+    path_base = manifest.get('filePathBase', 'REPOSITORY_ROOT')
+    if path_base not in ('REPOSITORY_ROOT', 'MANIFEST_DIRECTORY'):
+        raise ValueError(f'Invalid filePathBase: {path}')
+    base = path.parent if path_base == 'MANIFEST_DIRECTORY' else ROOT
     for asset in manifest['assets']:
+        policy = collision_policy(asset)
+        asset = {**asset, 'files': {role: ([artifact_path(ROOT, p, base).relative_to(ROOT).as_posix() for p in value]
+                  if isinstance(value, list) else artifact_path(ROOT, value, base).relative_to(ROOT).as_posix())
+                  for role, value in asset['files'].items()}}
+        asset['collisionPolicy'] = policy
+        asset['remainingGates'] = list(dict.fromkeys(asset.get('remainingGates', []) +
+            ([policy['remainingGate']] if policy['mode'] == 'PENDING' else [])))
         key = asset.get('archetypeId', asset['id'])
         groups[key].append({**asset, 'familyId': manifest['familyId'], 'manifest': str(path.relative_to(ROOT))})
         refs[key] = manifest.get('referenceIds', [])
@@ -23,10 +35,12 @@ for design_id, assets in groups.items():
     bones = max((a['rig'].get('boneCount', a['rig'].get('bones', 0)) if isinstance(a.get('rig'), dict) else 0) for a in assets)
     clips = sorted({c if isinstance(c, str) else c['name'] for a in assets for c in a.get('animations', [])})
     records.append({'design_id': design_id, 'family_id': assets[0]['familyId'], 'asset_ids': [a['id'] for a in assets],
+        'collision_policies': [{'asset_id': a['id'], **a['collisionPolicy']} for a in assets],
         'references': refs[design_id], 'bone_count_per_design': bones, 'clip_names': clips,
         'files': {k: [{'path': p, 'sha256': hashlib.sha256((ROOT / p).read_bytes()).hexdigest()} for p in sorted(v)] for k,v in files.items()},
         'acceptance': 'UNAPPROVED', 'remaining_gates': sorted({g for a in assets for g in a.get('remainingGates', [])})})
 summary = {'designs': len(records), 'manifest_entries': sum(len(r['asset_ids']) for r in records),
+    'designs_missing_required_collision': sum(any(p['mode'] == 'PENDING' for p in r['collision_policies']) for r in records),
     'rigged_designs': sum(r['bone_count_per_design'] > 0 for r in records),
     'bones_across_distinct_designs': sum(r['bone_count_per_design'] for r in records),
     'design_clip_pairs': sum(len(r['clip_names']) for r in records), 'production_approved': 0}

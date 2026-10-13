@@ -1,0 +1,93 @@
+{
+  "original_name": "ramp-run",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/9",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    1.8,
+    4.8,
+    0.4
+  ],
+  "actual_bounds_blender_m": [
+    [
+      -0.18000000715255737,
+      -0.07999999821186066,
+      -0.019999999552965164
+    ],
+    [
+      1.9800000190734863,
+      4.880000114440918,
+      1.5399999618530273
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 532,
+    "lod1": 532,
+    "lod2": 92
+  },
+  "visual_meshes": 18,
+  "collider_meshes": 3,
+  "sockets": [
+    {
+      "name": "bottom",
+      "semantic_type": "landing_start",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        -1,
+        0
+      ],
+      "compatible_partner_types": [
+        "landing_end"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 1.8,
+        "headroom_m": 2.4
+      }
+    },
+    {
+      "name": "top",
+      "semantic_type": "landing_end",
+      "position_blender_xyz_m": [
+        0,
+        4.8,
+        0.4
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0.4,
+        -4.8
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        1,
+        0
+      ],
+      "compatible_partner_types": [
+        "landing_start"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 1.8,
+        "headroom_m": 2.4
+      }
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ]
+}

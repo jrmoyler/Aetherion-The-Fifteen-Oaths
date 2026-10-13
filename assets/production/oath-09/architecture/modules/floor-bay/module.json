@@ -1,0 +1,159 @@
+{
+  "original_name": "floor-bay",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/1",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    4,
+    4,
+    0.4
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      0.0,
+      -0.4000000059604645
+    ],
+    [
+      4.0,
+      4.0,
+      0.0
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 228,
+    "lod1": 180,
+    "lod2": 180
+  },
+  "visual_meshes": 15,
+  "collider_meshes": 1,
+  "sockets": [
+    {
+      "name": "west",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        0,
+        2.0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        -2.0
+      ],
+      "outward_normal_blender_xyz": [
+        -1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "east",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        4,
+        2.0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        4,
+        0,
+        -2.0
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "south",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        2.0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        2.0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        -1,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "north",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        2.0,
+        4,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        2.0,
+        0,
+        -4
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        1,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "finished-floor",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ]
+}

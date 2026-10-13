@@ -1,0 +1,116 @@
+{
+  "original_name": "door-frame",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/6",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    1.6,
+    0.4,
+    2.8
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      -4.656612873077393e-10,
+      0.0
+    ],
+    [
+      1.600000023841858,
+      0.4000000059604645,
+      2.799999952316284
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 296,
+    "lod1": 296,
+    "lod2": 108
+  },
+  "visual_meshes": 14,
+  "collider_meshes": 3,
+  "sockets": [
+    {
+      "name": "door-aperture",
+      "semantic_type": "door_clear",
+      "position_blender_xyz_m": [
+        0.8,
+        0.2,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0.8,
+        0,
+        -0.2
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "door_clear"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 1.2,
+        "height_m": 2.4
+      }
+    },
+    {
+      "name": "threshold",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "hinge-provision",
+      "semantic_type": "mechanism_axis",
+      "position_blender_xyz_m": [
+        0.2,
+        0.2,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0.2,
+        0,
+        -0.2
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "mechanism_axis"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "leaf": "NOT_AUTHORED_FRAME_ONLY"
+      }
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ]
+}

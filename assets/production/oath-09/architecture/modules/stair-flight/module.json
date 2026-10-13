@@ -1,0 +1,123 @@
+{
+  "original_name": "stair-flight",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/8",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    1.8,
+    2.7,
+    1.6
+  ],
+  "actual_bounds_blender_m": [
+    [
+      -0.18000000715255737,
+      -0.07999999821186066,
+      0.0
+    ],
+    [
+      1.9800000190734863,
+      2.7799999713897705,
+      2.740000009536743
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 836,
+    "lod1": 836,
+    "lod2": 288
+  },
+  "visual_meshes": 43,
+  "collider_meshes": 3,
+  "sockets": [
+    {
+      "name": "receiving-landing-front-fascia",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        0,
+        2.7,
+        1.44
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        1.44,
+        -2.7
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        1,
+        0
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "riser_owner": "receiving_landing",
+        "riser_height_m": 0.16,
+        "required_landing_front_plane_y_m": 2.7,
+        "required_landing_floor_z_m": 1.6,
+        "no_overlap_behind_plane": true
+      }
+    },
+    {
+      "name": "bottom",
+      "semantic_type": "landing_start",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        -1,
+        0
+      ],
+      "compatible_partner_types": [
+        "landing_end"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 1.8,
+        "headroom_m": 2.4
+      }
+    },
+    {
+      "name": "top",
+      "semantic_type": "landing_end",
+      "position_blender_xyz_m": [
+        0,
+        2.7,
+        1.6
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        1.6,
+        -2.7
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        1,
+        0
+      ],
+      "compatible_partner_types": [
+        "landing_start"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 1.8,
+        "headroom_m": 2.4
+      }
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ]
+}

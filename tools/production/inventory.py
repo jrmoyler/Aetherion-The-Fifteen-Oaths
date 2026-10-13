@@ -220,6 +220,8 @@ def build():
         'runtime_implementation_contracts': len(systems),
         'new_production_asset_deliverables': len(deliveries),
         'distinct_candidate_archetypes': len({d['archetype_id'] for d in deliveries}),
+        'candidates_missing_required_collision': sum(d['collision_policy']['mode'] == 'PENDING' for d in deliveries),
+        'candidates_declared_nonblocking': sum(d['collision_policy']['mode'] == 'NONE' for d in deliveries),
         'candidate_glb_file_paths': len({a['path'] for d in deliveries for a in d['artifacts'] if a['path'].endswith('.glb')}),
         'families_with_candidate_deliveries': len({d['family_id'] for d in deliveries}),
         'families_without_candidate_deliveries': sum(not w['delivered_production_artifacts'] for w in work),

@@ -1,0 +1,3462 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o09-n-architecture-family",
+  "oath_id": "oath-09",
+  "specification_ids": [
+    "p2-arch-09-daybreak-arcades"
+  ],
+  "revision": "candidate-r02",
+  "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+  "referenceIds": [
+    "reference-105"
+  ],
+  "axes": "Blender Z-up meters; glTF exporter converts to Y-up exactly once",
+  "assets": [
+    {
+      "id": "asset-o09-n-architecture-family__foundation-plinth__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__foundation-plinth",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak foundation-plinth",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "foundation-plinth",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/0",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/foundation-plinth/source.blend",
+        "glb": "modules/foundation-plinth/lod0.glb",
+        "lod1": "modules/foundation-plinth/lod1.glb",
+        "lod2": "modules/foundation-plinth/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/foundation-plinth/hero.png"
+        ],
+        "collision": "modules/foundation-plinth/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        4.0,
+        4.0,
+        0.5999999642372131
+      ],
+      "proposedTargetExtentMeters": [
+        4,
+        4,
+        0.6
+      ],
+      "triangles": {
+        "glb": 344,
+        "lod1": 344,
+        "lod2": 296
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "west",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            2,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -2
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "east",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            4,
+            2,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            4,
+            0,
+            -2
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "south",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            2,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "north",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            2,
+            4,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2,
+            0,
+            -4
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "top-bearing-datum",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "foundation-plinth"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__floor-bay__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__floor-bay",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak floor-bay",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "floor-bay",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/1",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/floor-bay/source.blend",
+        "glb": "modules/floor-bay/lod0.glb",
+        "lod1": "modules/floor-bay/lod1.glb",
+        "lod2": "modules/floor-bay/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/floor-bay/hero.png"
+        ],
+        "collision": "modules/floor-bay/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        4.0,
+        4.0,
+        0.4000000059604645
+      ],
+      "proposedTargetExtentMeters": [
+        4,
+        4,
+        0.4
+      ],
+      "triangles": {
+        "glb": 228,
+        "lod1": 180,
+        "lod2": 180
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "west",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            2.0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -2.0
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "east",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            4,
+            2.0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            4,
+            0,
+            -2.0
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "south",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            2.0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2.0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "north",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            2.0,
+            4,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2.0,
+            0,
+            -4
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "finished-floor",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "floor-bay"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__solid-wall__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__solid-wall",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak solid-wall",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "solid-wall",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/2",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/solid-wall/source.blend",
+        "glb": "modules/solid-wall/lod0.glb",
+        "lod1": "modules/solid-wall/lod1.glb",
+        "lod2": "modules/solid-wall/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/solid-wall/hero.png"
+        ],
+        "collision": "modules/solid-wall/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        4.0,
+        0.36150002386420965,
+        3.200000047683716
+      ],
+      "proposedTargetExtentMeters": [
+        4,
+        0.35,
+        3.2
+      ],
+      "triangles": {
+        "glb": 456,
+        "lod1": 368,
+        "lod2": 124
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "left",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            0.175,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -0.175
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "right",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            4,
+            0.175,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            4,
+            0,
+            -0.175
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "roof",
+          "semantic_type": "roof_seat",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            3.2
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            3.2,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "roof_seat"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "solid-wall"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__window-wall__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__window-wall",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak window-wall",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "window-wall",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/3",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/window-wall/source.blend",
+        "glb": "modules/window-wall/lod0.glb",
+        "lod1": "modules/window-wall/lod1.glb",
+        "lod2": "modules/window-wall/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/window-wall/hero.png"
+        ],
+        "collision": "modules/window-wall/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        4.0,
+        0.35299999453127384,
+        3.200000047683716
+      ],
+      "proposedTargetExtentMeters": [
+        4,
+        0.35,
+        3.2
+      ],
+      "triangles": {
+        "glb": 584,
+        "lod1": 584,
+        "lod2": 424
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "window-center",
+          "semantic_type": "window_clear",
+          "position_blender_xyz_m": [
+            2,
+            0.175,
+            1.6
+          ],
+          "position_gltf_xyz_m": [
+            2,
+            1.6,
+            -0.175
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "window_clear"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 1.2,
+            "height_m": 1.2,
+            "sill_m": 1
+          }
+        },
+        {
+          "name": "left",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            0.175,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -0.175
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "right",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            4,
+            0.175,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            4,
+            0,
+            -0.175
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "roof",
+          "semantic_type": "roof_seat",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            3.2
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            3.2,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "roof_seat"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "window-wall"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__inside-corner__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__inside-corner",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak inside-corner",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "inside-corner",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/4",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/inside-corner/source.blend",
+        "glb": "modules/inside-corner/lod0.glb",
+        "lod1": "modules/inside-corner/lod1.glb",
+        "lod2": "modules/inside-corner/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/inside-corner/hero.png"
+        ],
+        "collision": "modules/inside-corner/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.3499999940395355,
+        0.3499999940395355,
+        3.200000047683716
+      ],
+      "proposedTargetExtentMeters": [
+        0.35,
+        0.35,
+        3.2
+      ],
+      "triangles": {
+        "glb": 192,
+        "lod1": 192,
+        "lod2": 36
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "west",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            0.175,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -0.175
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "south",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0.175,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.175,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "inside-corner"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__outside-corner__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__outside-corner",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak outside-corner",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "outside-corner",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/5",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/outside-corner/source.blend",
+        "glb": "modules/outside-corner/lod0.glb",
+        "lod1": "modules/outside-corner/lod1.glb",
+        "lod2": "modules/outside-corner/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/outside-corner/hero.png"
+        ],
+        "collision": "modules/outside-corner/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.3499999940395355,
+        0.35800000466406345,
+        3.200000047683716
+      ],
+      "proposedTargetExtentMeters": [
+        0.35,
+        0.35,
+        3.2
+      ],
+      "triangles": {
+        "glb": 544,
+        "lod1": 192,
+        "lod2": 36
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "east",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0.35,
+            0.175,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.35,
+            0,
+            -0.175
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "north",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0.175,
+            0.35,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.175,
+            0,
+            -0.35
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "outside-corner"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__door-frame__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__door-frame",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak door-frame",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "door-frame",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/6",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/door-frame/source.blend",
+        "glb": "modules/door-frame/lod0.glb",
+        "lod1": "modules/door-frame/lod1.glb",
+        "lod2": "modules/door-frame/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/door-frame/hero.png"
+        ],
+        "collision": "modules/door-frame/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        1.600000023841858,
+        0.40000000642612576,
+        2.799999952316284
+      ],
+      "proposedTargetExtentMeters": [
+        1.6,
+        0.4,
+        2.8
+      ],
+      "triangles": {
+        "glb": 296,
+        "lod1": 296,
+        "lod2": 108
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "door-aperture",
+          "semantic_type": "door_clear",
+          "position_blender_xyz_m": [
+            0.8,
+            0.2,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.8,
+            0,
+            -0.2
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "door_clear"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 1.2,
+            "height_m": 2.4
+          }
+        },
+        {
+          "name": "threshold",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "hinge-provision",
+          "semantic_type": "mechanism_axis",
+          "position_blender_xyz_m": [
+            0.2,
+            0.2,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.2,
+            0,
+            -0.2
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "mechanism_axis"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "leaf": "NOT_AUTHORED_FRAME_ONLY"
+          }
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "door-frame"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__roof-bay__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__roof-bay",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak roof-bay",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "roof-bay",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/7",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/roof-bay/source.blend",
+        "glb": "modules/roof-bay/lod0.glb",
+        "lod1": "modules/roof-bay/lod1.glb",
+        "lod2": "modules/roof-bay/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/roof-bay/hero.png"
+        ],
+        "collision": "modules/roof-bay/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        4.0,
+        4.0,
+        0.3499999940395355
+      ],
+      "proposedTargetExtentMeters": [
+        4,
+        4,
+        0.35
+      ],
+      "triangles": {
+        "glb": 72,
+        "lod1": 72,
+        "lod2": 24
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "roof-base",
+          "semantic_type": "roof_seat",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            -1
+          ],
+          "compatible_partner_types": [
+            "roof_seat"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "drain-low-edge",
+          "semantic_type": "utility_pass",
+          "position_blender_xyz_m": [
+            2,
+            0,
+            0.32
+          ],
+          "position_gltf_xyz_m": [
+            2,
+            0.32,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "utility_pass"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "roof-bay"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__stair-flight__candidate-r02",
+      "archetypeId": "asset-o09-n-architecture-family__stair-flight",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak stair-flight",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "stair-flight",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/8",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/stair-flight/source.blend",
+        "glb": "modules/stair-flight/lod0.glb",
+        "lod1": "modules/stair-flight/lod1.glb",
+        "lod2": "modules/stair-flight/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/stair-flight/hero.png"
+        ],
+        "collision": "modules/stair-flight/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        2.1600000262260437,
+        2.859999969601631,
+        2.740000009536743
+      ],
+      "proposedTargetExtentMeters": [
+        1.8,
+        2.7,
+        1.6
+      ],
+      "triangles": {
+        "glb": 836,
+        "lod1": 836,
+        "lod2": 288
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "receiving-landing-front-fascia",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0,
+            2.7,
+            1.44
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            1.44,
+            -2.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "riser_owner": "receiving_landing",
+            "riser_height_m": 0.16,
+            "required_landing_front_plane_y_m": 2.7,
+            "required_landing_floor_z_m": 1.6,
+            "no_overlap_behind_plane": true
+          }
+        },
+        {
+          "name": "bottom",
+          "semantic_type": "landing_start",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "landing_end"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 1.8,
+            "headroom_m": 2.4
+          }
+        },
+        {
+          "name": "top",
+          "semantic_type": "landing_end",
+          "position_blender_xyz_m": [
+            0,
+            2.7,
+            1.6
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            1.6,
+            -2.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "landing_start"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 1.8,
+            "headroom_m": 2.4
+          }
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "stair-flight"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__ramp-run__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__ramp-run",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak ramp-run",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "ramp-run",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/9",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/ramp-run/source.blend",
+        "glb": "modules/ramp-run/lod0.glb",
+        "lod1": "modules/ramp-run/lod1.glb",
+        "lod2": "modules/ramp-run/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/ramp-run/hero.png"
+        ],
+        "collision": "modules/ramp-run/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        2.1600000262260437,
+        4.960000112652779,
+        1.5599999614059925
+      ],
+      "proposedTargetExtentMeters": [
+        1.8,
+        4.8,
+        0.4
+      ],
+      "triangles": {
+        "glb": 532,
+        "lod1": 532,
+        "lod2": 92
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "bottom",
+          "semantic_type": "landing_start",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "landing_end"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 1.8,
+            "headroom_m": 2.4
+          }
+        },
+        {
+          "name": "top",
+          "semantic_type": "landing_end",
+          "position_blender_xyz_m": [
+            0,
+            4.8,
+            0.4
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0.4,
+            -4.8
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "landing_start"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 1.8,
+            "headroom_m": 2.4
+          }
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "ramp-run"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__parapet__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__parapet",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak parapet",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "parapet",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/10",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/parapet/source.blend",
+        "glb": "modules/parapet/lod0.glb",
+        "lod1": "modules/parapet/lod1.glb",
+        "lod2": "modules/parapet/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/parapet/hero.png"
+        ],
+        "collision": "modules/parapet/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        4.0,
+        0.20700004836544394,
+        1.2000000476837158
+      ],
+      "proposedTargetExtentMeters": [
+        4,
+        0.2,
+        1.2
+      ],
+      "triangles": {
+        "glb": 752,
+        "lod1": 48,
+        "lod2": 36
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "start",
+          "semantic_type": "guardrail",
+          "position_blender_xyz_m": [
+            0,
+            0.1,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -0.1
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "guardrail"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "end",
+          "semantic_type": "guardrail",
+          "position_blender_xyz_m": [
+            4,
+            0.1,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            4,
+            0,
+            -0.1
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "guardrail"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "parapet"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__service-chase__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__service-chase",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak service-chase",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "service-chase",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/11",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/service-chase/source.blend",
+        "glb": "modules/service-chase/lod0.glb",
+        "lod1": "modules/service-chase/lod1.glb",
+        "lod2": "modules/service-chase/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/service-chase/hero.png"
+        ],
+        "collision": "modules/service-chase/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.6000000238418579,
+        0.6130000241100788,
+        3.200000047683716
+      ],
+      "proposedTargetExtentMeters": [
+        0.6,
+        0.6,
+        3.2
+      ],
+      "triangles": {
+        "glb": 160,
+        "lod1": 136,
+        "lod2": 48
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "bottom",
+          "semantic_type": "utility_pass",
+          "position_blender_xyz_m": [
+            0.3,
+            0.3,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            0,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            -1
+          ],
+          "compatible_partner_types": [
+            "utility_pass"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "top",
+          "semantic_type": "utility_pass",
+          "position_blender_xyz_m": [
+            0.3,
+            0.3,
+            3.2
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            3.2,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "utility_pass"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "manual-access",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.3,
+            0,
+            1.1
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            1.1,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "service-chase"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__public-colonnade__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__public-colonnade",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak public colonnade",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "public colonnade",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/12",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/public-colonnade/source.blend",
+        "glb": "modules/public-colonnade/lod0.glb",
+        "lod1": "modules/public-colonnade/lod1.glb",
+        "lod2": "modules/public-colonnade/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/public-colonnade/hero.png"
+        ],
+        "collision": "modules/public-colonnade/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        3.9358501359820366,
+        3.9358501359820366,
+        4.0
+      ],
+      "proposedTargetExtentMeters": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "triangles": {
+        "glb": 6768,
+        "lod1": 3952,
+        "lod2": 800
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "pier-seat-0.3-0.3",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.3,
+            0.3,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            3.78,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "pier-seat-0.3-3.7",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.3,
+            3.7,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            3.78,
+            -3.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "pier-seat-3.7-0.3",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.7,
+            0.3,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            3.7,
+            3.78,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "pier-seat-3.7-3.7",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.7,
+            3.7,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            3.7,
+            3.78,
+            -3.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "clear-route",
+          "semantic_type": "door_clear",
+          "position_blender_xyz_m": [
+            2,
+            2,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2,
+            0,
+            -2
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "door_clear"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 2.98,
+            "headroom_m": 3.15
+          }
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "public-colonnade"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__shade-canopy__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__shade-canopy",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak shade canopy",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "shade canopy",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/13",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/shade-canopy/source.blend",
+        "glb": "modules/shade-canopy/lod0.glb",
+        "lod1": "modules/shade-canopy/lod1.glb",
+        "lod2": "modules/shade-canopy/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/shade-canopy/hero.png"
+        ]
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        3.9300001487135887,
+        3.9300001487135887,
+        0.29300031438469887
+      ],
+      "proposedTargetExtentMeters": [
+        4.0,
+        4.0,
+        0.3
+      ],
+      "triangles": {
+        "glb": 1024,
+        "lod1": 1024,
+        "lod2": 672
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "canopy-seat-0.1-0.1",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.1,
+            0.1,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            0.1,
+            0.3,
+            -0.1
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "canopy-seat-0.1-3.9",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.1,
+            3.9,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            0.1,
+            0.3,
+            -3.9
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "canopy-seat-3.9-0.1",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.9,
+            0.1,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            3.9,
+            0.3,
+            -0.1
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "canopy-seat-3.9-3.9",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.9,
+            3.9,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            3.9,
+            0.3,
+            -3.9
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "shade-canopy"
+      },
+      "collisionPolicy": {
+        "mode": "NONE",
+        "reason": "Non-solid overhead woven shade; the separate supporting colonnade supplies movement collision. Fabric does not provide a walkable or blocking gameplay surface."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__clinic-threshold__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__clinic-threshold",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak clinic threshold",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "clinic threshold",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/14",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/clinic-threshold/source.blend",
+        "glb": "modules/clinic-threshold/lod0.glb",
+        "lod1": "modules/clinic-threshold/lod1.glb",
+        "lod2": "modules/clinic-threshold/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/clinic-threshold/hero.png"
+        ],
+        "collision": "modules/clinic-threshold/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        2.4000000953674316,
+        2.0,
+        2.9199999570846558
+      ],
+      "proposedTargetExtentMeters": [
+        2.4,
+        2.0,
+        2.8
+      ],
+      "triangles": {
+        "glb": 524,
+        "lod1": 500,
+        "lod2": 300
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "west",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            1.0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -1.0
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "east",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            2.4,
+            1.0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2.4,
+            0,
+            -1.0
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "south",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            1.2,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            1.2,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "north",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            1.2,
+            2,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            1.2,
+            0,
+            -2
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "finished-floor",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "door-aperture",
+          "semantic_type": "door_clear",
+          "position_blender_xyz_m": [
+            1.2000000000000002,
+            1.8,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            1.2000000000000002,
+            0,
+            -1.8
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "door_clear"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 1.2,
+            "height_m": 2.4
+          }
+        },
+        {
+          "name": "threshold",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0.4,
+            1.6,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.4,
+            0,
+            -1.6
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "hinge-provision",
+          "semantic_type": "mechanism_axis",
+          "position_blender_xyz_m": [
+            0.6000000000000001,
+            1.8,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0.6000000000000001,
+            0,
+            -1.8
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "mechanism_axis"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "leaf": "NOT_AUTHORED_FRAME_ONLY"
+          }
+        },
+        {
+          "name": "protected-queue",
+          "semantic_type": "door_clear",
+          "position_blender_xyz_m": [
+            1.2,
+            0.8,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            1.2,
+            0,
+            -0.8
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "door_clear"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 2.4,
+            "depth_m": 1.6,
+            "NOTE": "2m nominal footprint includes .4m door assembly. Requested full 2m clear queue requires external reservation beyond module."
+          }
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "clinic-threshold"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__quiet-portico__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__quiet-portico",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak quiet portico",
+      "type": "architecture",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "quiet portico",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/15",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/quiet-portico/source.blend",
+        "glb": "modules/quiet-portico/lod0.glb",
+        "lod1": "modules/quiet-portico/lod1.glb",
+        "lod2": "modules/quiet-portico/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/quiet-portico/hero.png"
+        ],
+        "collision": "modules/quiet-portico/collision.glb"
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        4.0,
+        3.0,
+        3.3500000536441803
+      ],
+      "proposedTargetExtentMeters": [
+        4.0,
+        3.0,
+        3.2
+      ],
+      "triangles": {
+        "glb": 3092,
+        "lod1": 1548,
+        "lod2": 784
+      },
+      "rig": {
+        "type": "Static architectural shell; no rig",
+        "bones": 0
+      },
+      "animations": [],
+      "sockets": [
+        {
+          "name": "west",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            1.5,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -1.5
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "east",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            4,
+            1.5,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            4,
+            0,
+            -1.5
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "south",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            2.0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2.0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            -1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "north",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            2.0,
+            3,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2.0,
+            0,
+            -3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "finished-floor",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "left",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            0,
+            2.8249999999999997,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -2.8249999999999997
+          ],
+          "outward_normal_blender_xyz": [
+            -1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "right",
+          "semantic_type": "structural_edge",
+          "position_blender_xyz_m": [
+            4,
+            2.8249999999999997,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            4,
+            0,
+            -2.8249999999999997
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "structural_edge"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            2.65,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            -2.65
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "roof",
+          "semantic_type": "roof_seat",
+          "position_blender_xyz_m": [
+            0,
+            2.65,
+            3.2
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            3.2,
+            -2.65
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "roof_seat"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "front-protected-route",
+          "semantic_type": "door_clear",
+          "position_blender_xyz_m": [
+            2,
+            0.9,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2,
+            0,
+            -0.9
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "door_clear"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 2.98,
+            "headroom_m": 3.0
+          }
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "quiet-portico"
+      },
+      "collisionPolicy": {
+        "mode": "REQUIRED",
+        "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+      }
+    },
+    {
+      "id": "asset-o09-n-architecture-family__daylight-baffle__candidate-r01",
+      "archetypeId": "asset-o09-n-architecture-family__daylight-baffle",
+      "idScope": "Derived production-artifact identity, not a new canon family/module ID",
+      "name": "Daybreak daylight baffle",
+      "type": "architecture",
+      "status": "CANDIDATE_INCOMPLETE_MISSING_REQUIRED_COLLISION",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "specification_ids": [
+        "p2-arch-09-daybreak-arcades"
+      ],
+      "originalModuleName": "daylight baffle",
+      "sourcePointer": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/16",
+      "referenceIds": [
+        "reference-105"
+      ],
+      "files": {
+        "blend": "modules/daylight-baffle/source.blend",
+        "glb": "modules/daylight-baffle/lod0.glb",
+        "lod1": "modules/daylight-baffle/lod1.glb",
+        "lod2": "modules/daylight-baffle/lod2.glb",
+        "textures": [
+          "textures/bronze_basecolor.png",
+          "textures/bronze_metallic.png",
+          "textures/bronze_normal.png",
+          "textures/bronze_roughness.png",
+          "textures/gripstone_basecolor.png",
+          "textures/gripstone_metallic.png",
+          "textures/gripstone_normal.png",
+          "textures/gripstone_roughness.png",
+          "textures/marble_basecolor.png",
+          "textures/marble_metallic.png",
+          "textures/marble_normal.png",
+          "textures/marble_roughness.png",
+          "textures/masonry_basecolor.png",
+          "textures/masonry_metallic.png",
+          "textures/masonry_normal.png",
+          "textures/masonry_roughness.png",
+          "textures/weave_basecolor.png",
+          "textures/weave_metallic.png",
+          "textures/weave_normal.png",
+          "textures/weave_roughness.png"
+        ],
+        "renders": [
+          "modules/daylight-baffle/hero.png",
+          "modules/daylight-baffle/open.png"
+        ]
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        2.0,
+        0.30000001192092896,
+        1.2000000476837158
+      ],
+      "proposedTargetExtentMeters": [
+        2.0,
+        0.3,
+        1.2
+      ],
+      "triangles": {
+        "glb": 264,
+        "lod1": 264,
+        "lod2": 96
+      },
+      "rig": {
+        "type": "Three rigid louver pivot nodes; no artificial skeletal rig",
+        "bones": 0
+      },
+      "animations": [
+        "daylight_baffle_open_close"
+      ],
+      "sockets": [
+        {
+          "name": "louver-axis-0",
+          "semantic_type": "mechanism_axis",
+          "position_blender_xyz_m": [
+            1.0,
+            0.15000000596046448,
+            0.4399999976158142
+          ],
+          "position_gltf_xyz_m": [
+            1.0,
+            0.4399999976158142,
+            -0.15000000596046448
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "mechanism_axis"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "limits_degrees": [
+              0,
+              70
+            ],
+            "required_state_authority": "NOT_IMPLEMENTED"
+          }
+        },
+        {
+          "name": "louver-axis-1",
+          "semantic_type": "mechanism_axis",
+          "position_blender_xyz_m": [
+            1.0,
+            0.15000000596046448,
+            0.7599999904632568
+          ],
+          "position_gltf_xyz_m": [
+            1.0,
+            0.7599999904632568,
+            -0.15000000596046448
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "mechanism_axis"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "limits_degrees": [
+              0,
+              70
+            ],
+            "required_state_authority": "NOT_IMPLEMENTED"
+          }
+        },
+        {
+          "name": "louver-axis-2",
+          "semantic_type": "mechanism_axis",
+          "position_blender_xyz_m": [
+            1.0,
+            0.15000000596046448,
+            1.0800000429153442
+          ],
+          "position_gltf_xyz_m": [
+            1.0,
+            1.0800000429153442,
+            -0.15000000596046448
+          ],
+          "outward_normal_blender_xyz": [
+            1,
+            0,
+            0
+          ],
+          "compatible_partner_types": [
+            "mechanism_axis"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "limits_degrees": [
+              0,
+              70
+            ],
+            "required_state_authority": "NOT_IMPLEMENTED"
+          }
+        },
+        {
+          "name": "window-attachment",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            1,
+            0.3,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            1,
+            0,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            1,
+            0
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "manual-release-extension",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            1.91,
+            0.3,
+            0.08
+          ],
+          "position_gltf_xyz_m": [
+            1.91,
+            0.08,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "floor_reachable_extension": "NOT_YET_AUTHORED"
+          }
+        }
+      ],
+      "remainingGates": [
+        "Exact visual reference fidelity and review",
+        "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+        "All event/repair/damage/restoration variants",
+        "Runtime collision/nav/controller traversal",
+        "Unreal real import; browser GPU parity; hardware performance",
+        "Physical mip/texel-density target and source texture refinement",
+        "Mechanism occupancy/reservation/state authority, hard-stop swept-contact tests and floor-reachable manual release",
+        "State-specific interaction/collision and runtime authority validation"
+      ],
+      "sourceValidation": {
+        "report": "assets/production/oath-09/architecture/source-validation.json",
+        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "recordId": "daylight-baffle"
+      },
+      "collisionPolicy": {
+        "mode": "PENDING",
+        "reason": "State-specific moving-body and interaction collision are not authored; the decorative animation is not a collision-ready gameplay mechanism.",
+        "remainingGate": "State-specific interaction/collision and runtime authority validation"
+      }
+    }
+  ],
+  "fixtureCountingPolicy": "5 derivative assembly fixtures are not additional module designs. 17 original module requirements are mapped; zero full family/visual approvals.",
+  "referenceEvidence": [
+    {
+      "source_repository_path": "assets/references/reference-105/original.png",
+      "local_review_copy": "references/reference-105-original.png",
+      "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+      "status": "ORIGINAL_BINDING_VISUAL_REFERENCE",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "local_review_copy": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "sha256": "7c5f5acf2871dfdfb2ec0716d91cf8bb1efeb6b8e69b47f2661363e0a74c5106",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-foundation-floor-proposed-v01.png",
+      "local_review_copy": "references/daybreak-foundation-floor-proposed-v01.png",
+      "sha256": "f9eee481eebb9ec5601b9201881841bf485181931e1e7f8ea2577f8a60688c14",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-wall-window-corner-proposed-v01.png",
+      "local_review_copy": "references/daybreak-wall-window-corner-proposed-v01.png",
+      "sha256": "ca025d7e0e284d0c9d63acf6c3ebbc7d15306787643390259b433b53d428dc51",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-surface-trim-proposed-v01.png",
+      "local_review_copy": "references/daybreak-surface-trim-proposed-v01.png",
+      "sha256": "722bf8474b1b28e9b8935ee1de83bb5a0326994f25aadefec43dcba48aaf9804",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-clinic-threshold-door-proposed-v01.png",
+      "local_review_copy": "references/daybreak-clinic-threshold-door-proposed-v01.png",
+      "sha256": "1fb1243734ff4be442edeb9215d3aaeb387f1458fdefcdc617dab3c574768c5c",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-roof-canopy-proposed-v01.png",
+      "local_review_copy": "references/daybreak-roof-canopy-proposed-v01.png",
+      "sha256": "dcbc6531860604b21fcad96bc422b5efc24aa80320242322d7fd98d1abd2a0ca",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-stair-ramp-proposed-v01.png",
+      "local_review_copy": "references/daybreak-stair-ramp-proposed-v01.png",
+      "sha256": "85db6edfbdb1b34724f3dccbdf905e8bcf75997813f47baa405c55abb932dd37",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    },
+    {
+      "source_repository_path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-daylight-baffle-proposed-v02.png",
+      "local_review_copy": "references/daybreak-daylight-baffle-proposed-v02.png",
+      "sha256": "751e6b4444ec563491842b810af83ffc42048e418c7783fbcb8fe8720488f1de",
+      "status": "PROPOSED_NOT_APPROVED",
+      "pixels_inspected": true
+    }
+  ],
+  "filePathBase": "MANIFEST_DIRECTORY"
+}

@@ -1,0 +1,299 @@
+{
+  "scope": "Actual Blender source opens, mesh/UV/texture/scale checks; not acceptance",
+  "schemaVersion": 1,
+  "tool": {
+    "name": "Blender",
+    "version": "4.3.2"
+  },
+  "reports": [
+    {
+      "module": "clinic-threshold",
+      "source_sha256": "1bb5b1834c0e79d357c262eeb25a0bca968d6d78d9e81d1e7d84878e3976810a",
+      "opened": true,
+      "visual_meshes": 29,
+      "collider_meshes": 4,
+      "triangles": 524,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 118.07337766919679,
+        "median": 193.7605656774776,
+        "maximum": 2934.6995788690933
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "daylight-baffle",
+      "source_sha256": "7d2d1c9fbd641a2bc2316aa40c2bcd1b16106b60fa64a326bb4941832261cf6a",
+      "opened": true,
+      "visual_meshes": 22,
+      "collider_meshes": 0,
+      "triangles": 264,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 310.8081296173675,
+        "median": 423.37157923359325,
+        "maximum": 1755.9440728078853
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "door-frame",
+      "source_sha256": "a87f13b9a81a44df0eaf374e5cae0324c79e9bd0c440613b6281af1856344273",
+      "opened": true,
+      "visual_meshes": 14,
+      "collider_meshes": 3,
+      "triangles": 296,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 147.23386657679174,
+        "median": 181.96352612417107,
+        "maximum": 425.58926180479705
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "floor-bay",
+      "source_sha256": "1bbe66ad73e0164edffa83a268fa25b78ce776eb5169c4cd99cd23e4af141bcf",
+      "opened": true,
+      "visual_meshes": 15,
+      "collider_meshes": 1,
+      "triangles": 228,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 63.272576239600596,
+        "median": 133.9070879870315,
+        "maximum": 2934.720036399483
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "foundation-plinth",
+      "source_sha256": "a8e80a347bf980cfe664193fab603e4cd48608052364a54261dfe41fc2308def",
+      "opened": true,
+      "visual_meshes": 18,
+      "collider_meshes": 1,
+      "triangles": 344,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 63.36697968033028,
+        "median": 323.7884953616866,
+        "maximum": 506.7199853326382
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "inside-corner",
+      "source_sha256": "b95c61db8a3c463e37407cc4d24b4669c75d45769955d8e20b25f34081dcaa65",
+      "opened": true,
+      "visual_meshes": 8,
+      "collider_meshes": 1,
+      "triangles": 192,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 127.8353538530386,
+        "median": 152.02391861966828,
+        "maximum": 722.296755998776
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "outside-corner",
+      "source_sha256": "540948ab4c5b7d5f3557367ef467476f7a329eb6628c12e83f1d501992a6624d",
+      "opened": true,
+      "visual_meshes": 16,
+      "collider_meshes": 1,
+      "triangles": 544,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 127.8353538530386,
+        "median": 1818.6119400449666,
+        "maximum": 2162.7097372286694
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "parapet",
+      "source_sha256": "45dce6f60440648edde09586ba1f77b8f91e9df9b93d14f807232ba34fb63e40",
+      "opened": true,
+      "visual_meshes": 20,
+      "collider_meshes": 1,
+      "triangles": 752,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 127.21478867317491,
+        "median": 864.6378845837461,
+        "maximum": 1028.2594503282724
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "public-colonnade",
+      "source_sha256": "29d0e69109c3ead65dbc6cd5a992d2b8877f27b8773ba8bfce51810b947f4e76",
+      "opened": true,
+      "visual_meshes": 148,
+      "collider_meshes": 4,
+      "triangles": 6768,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 111.03188500087137,
+        "median": 1546.4268245502303,
+        "maximum": 2367.552011826295
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "quiet-portico",
+      "source_sha256": "4eec2397ef58361fad253d47330b0f65ff6390c68925ca383f504cc93eced07f",
+      "opened": true,
+      "visual_meshes": 83,
+      "collider_meshes": 5,
+      "triangles": 3092,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 65.46190269950472,
+        "median": 685.3169559693761,
+        "maximum": 2934.720036399483
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "ramp-run",
+      "source_sha256": "48f1a2d7feb2487ec8744d4e2be4e74e7868bd8d591b487fe6a4e82afc8702a8",
+      "opened": true,
+      "visual_meshes": 18,
+      "collider_meshes": 3,
+      "triangles": 532,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 53.08643247305948,
+        "median": 462.88978999988035,
+        "maximum": 1634.4376985066588
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "roof-bay",
+      "source_sha256": "c69c37b15292f33e3a2a982d5f877963e418a22b81bc0d9df4cda615d9b2d58b",
+      "opened": true,
+      "visual_meshes": 6,
+      "collider_meshes": 1,
+      "triangles": 72,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 62.890312589774055,
+        "median": 127.8276762151867,
+        "maximum": 127.82794234404888
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "service-chase",
+      "source_sha256": "4ad742b191fa112eb2934ead2ec2b4d5d3991c885719f27036d05e29640bde93",
+      "opened": true,
+      "visual_meshes": 8,
+      "collider_meshes": 1,
+      "triangles": 160,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 148.60796513167855,
+        "median": 159.68948518024808,
+        "maximum": 2468.3283656989297
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "shade-canopy",
+      "source_sha256": "6a95d1d9b797040af38590bac051aa83ad8c2fe3cfa070e8c0f40ff1b836ba37",
+      "opened": true,
+      "visual_meshes": 9,
+      "collider_meshes": 0,
+      "triangles": 1024,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 65.9918353499694,
+        "median": 66.70689022507973,
+        "maximum": 2008.6309426863725
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "solid-wall",
+      "source_sha256": "3c6f287c9d44933f3fa9bbeb428d2f9bf65c90c15496734712ee774bbdf65d8f",
+      "opened": true,
+      "visual_meshes": 14,
+      "collider_meshes": 1,
+      "triangles": 456,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 65.46266420299919,
+        "median": 151.4659227617155,
+        "maximum": 784.7010402883476
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "stair-flight",
+      "source_sha256": "1171845fafd719d86a8270e0dfce5f4406794002372bf7b4fd301b0648703f1c",
+      "opened": true,
+      "visual_meshes": 43,
+      "collider_meshes": 3,
+      "triangles": 836,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 123.75280060837264,
+        "median": 304.23911200593244,
+        "maximum": 1634.4376985066588
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    },
+    {
+      "module": "window-wall",
+      "source_sha256": "11e086a8af9a1c70e30bea8e29457460eb030541d774ef131dc692468fcf0cf9",
+      "opened": true,
+      "visual_meshes": 22,
+      "collider_meshes": 8,
+      "triangles": 584,
+      "zero_area_uv_triangles": 0,
+      "measured_triangle_texel_density_px_per_m": {
+        "minimum": 127.8589699332684,
+        "median": 159.58539668573218,
+        "maximum": 423.9671505303021
+      },
+      "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
+      "all_used_images_packed": true,
+      "errors": []
+    }
+  ]
+}

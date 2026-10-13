@@ -1,0 +1,792 @@
+{
+  "id": "p2-arch-09-daybreak-arcades",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "P2-SRC-FOUNDATION",
+    "P2-SRC-DIRECTIVE",
+    "P2-SRC-PROPOSAL",
+    "REF-105"
+  ],
+  "source_refs": [
+    "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/records/8",
+    "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json#/records/8",
+    "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json"
+  ],
+  "region_id": "region-09",
+  "oath_id": "oath-09",
+  "name": "OATH OF DAYBREAK inhabited architecture kit",
+  "baseline_asset_id": "asset-o09-n-architecture-family",
+  "delta": "Decomposes existing broad architecture requirement into regional load-path assemblies, common connection contract, civic/residential/work uses and reviewable acceptance; no new realm, capital or duplicated production asset.",
+  "purpose": "Marble arcades, sun-shading colonnades and visible public thresholds frame civic authority. Shelters and clinics share the same durable materials as courts, preventing the architecture from implying that only judgment deserves grandeur.",
+  "reference_evidence": {
+    "status": "VERIFIED_OVERVIEW_REFERENCE_ONLY",
+    "reference_ids": [
+      "REF-105"
+    ],
+    "repository_paths": [
+      "assets/references/reference-105/original.png"
+    ],
+    "sha256": [
+      "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893"
+    ],
+    "observed": "Pale colonnades, pointed fabric canopies and gold-colored trim frame stepped courts, pools and narrow trees.",
+    "missing": [
+      "Orthographic module faces and sections",
+      "Dimensioned hidden faces and foundations",
+      "Production geometry, UVs, collision, rig/animation where relevant and engine tests"
+    ],
+    "individual_final_art_approved": false
+  },
+  "construction": "Stone piers and thin removable facing carry distinct structural and decorative roles; canopy ties avoid public head clearance.",
+  "proposed_physical_scale": {
+    "units": "meters",
+    "status": "PROPOSED_UNCALIBRATED",
+    "grid_m": 0.25,
+    "structural_bay_m": 4,
+    "floor_to_floor_m": 3.2,
+    "door_clear_width_m": 1.2,
+    "door_clear_height_m": 2.4,
+    "note": "Clear widths measured after trim; regional chambers/landmarks can vary but must preserve approved traversal capsule and bypass.",
+    "fine_socket_adapter_m": 0.05
+  },
+  "materials": [
+    "pale masonry",
+    "marble facing",
+    "bronze trim",
+    "woven shade"
+  ],
+  "signature_modules": [
+    "public colonnade",
+    "shade canopy",
+    "clinic threshold",
+    "quiet portico",
+    "daylight baffle"
+  ],
+  "modules": [
+    {
+      "name": "foundation-plinth",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4,
+        4,
+        0.6
+      ],
+      "extent_note": "Footprint bearing pad; below-grade depth requires terrain/geotechnical fiction review.",
+      "connections": [
+        "floor_datum:top",
+        "structural_edge:N/E/S/W"
+      ],
+      "construction": "Seat region-specific structural pier; keep service sleeve outside bearing zone.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "floor-bay",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4,
+        4,
+        0.4
+      ],
+      "extent_note": "4 m occupied bay including structural thickness.",
+      "connections": [
+        "structural_edge:N/E/S/W",
+        "floor_datum:top"
+      ],
+      "construction": "Connect opposing edge normals; terrain infill never covers floor datum.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "solid-wall",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4,
+        0.35,
+        3.2
+      ],
+      "extent_note": "Width, wall thickness, floor-to-floor height; thickness can increase outward only.",
+      "connections": [
+        "structural_edge:left/right",
+        "floor_datum:base",
+        "roof_seat:top"
+      ],
+      "construction": "Visible load path and facing are regional; no moving interior clear plane.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "window-wall",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4,
+        0.35,
+        3.2
+      ],
+      "extent_note": "Window aperture target 1.2 m wide x 1.2 m high, sill 1 m.",
+      "connections": [
+        "structural_edge:left/right",
+        "floor_datum:base",
+        "window_clear:center"
+      ],
+      "construction": "Frame independent pane/shutter, drain sill outward; no collider across open traversal window if authorized.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "inside-corner",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        0.35,
+        0.35,
+        3.2
+      ],
+      "extent_note": "Corner return thickness; adjacent wall bays terminate on its two perpendicular planes.",
+      "connections": [
+        "structural_edge:west",
+        "structural_edge:south",
+        "floor_datum:base"
+      ],
+      "construction": "Miter or interlock regional wall structure; do not overlay two full thicknesses into circulation.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "outside-corner",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        0.35,
+        0.35,
+        3.2
+      ],
+      "extent_note": "Exterior return thickness, outward decoration separately bounded.",
+      "connections": [
+        "structural_edge:east",
+        "structural_edge:north",
+        "floor_datum:base"
+      ],
+      "construction": "Cap exposed material ends and route rain clear of structural seam.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "door-frame",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        1.6,
+        0.4,
+        2.8
+      ],
+      "extent_note": "Outer frame; clear aperture 1.2 m width x 2.4 m height after trim.",
+      "connections": [
+        "door_clear:center",
+        "floor_datum:threshold",
+        "hinge:left-or-right"
+      ],
+      "construction": "Leave 0.2 m jamb/head zones; leaf sweep outside protected route or use pocket leaf.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": 1.2,
+        "door_height_m": 2.4,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "roof-bay",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4,
+        4,
+        0.35
+      ],
+      "extent_note": "Structural roof panel thickness; regional slope/ridge may exceed envelope and must be declared.",
+      "connections": [
+        "roof_seat:N/E/S/W",
+        "drain_outlet:low-edge"
+      ],
+      "construction": "Support on wall/pier seats, author slope and rain/snow outlet; no occupied roof without traversal declaration.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "stair-flight",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        1.8,
+        2.7,
+        1.6
+      ],
+      "extent_note": "10 risers at 0.16 m, nine visible treads at 0.30 m; two flights plus landing connect 3.2 m floors.",
+      "connections": [
+        "landing_start:bottom",
+        "landing_end:top",
+        "guardrail:left/right"
+      ],
+      "construction": "Smooth navigation wedge plus detailed foot surface; at least 2.4 m headroom; 1.8 m deep landings supplied separately.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": 1.8,
+        "headroom_m": 2.4
+      },
+      "slope": {
+        "rise_m": 1.6,
+        "run_m": 2.7,
+        "riser_m": 0.16,
+        "tread_m": 0.3,
+        "riser_count": 10,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "ramp-run",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        1.8,
+        4.8,
+        0.4
+      ],
+      "extent_note": "Rise/run 0.4/4.8 = 1:12; eight runs yield 3.2 m rise with landings and turning space.",
+      "connections": [
+        "landing_start:bottom",
+        "landing_end:top",
+        "guardrail:left/right"
+      ],
+      "construction": "4.8 m run is an explicit off-grid length adapter; integrate on 0.05 m fine socket subgrid with endpoint manifest, not silent scaling.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": 1.8,
+        "headroom_m": 2.4
+      },
+      "slope": {
+        "rise_m": 0.4,
+        "run_m": 4.8,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": 0.08333333333333333
+      }
+    },
+    {
+      "name": "parapet",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4,
+        0.2,
+        1.2
+      ],
+      "extent_note": "Continuous guard height from finished floor; opening limits to be reviewed against actors.",
+      "connections": [
+        "guardrail:start/end",
+        "floor_datum:base"
+      ],
+      "construction": "Separate thin silhouette from simplified movement barrier; no climb exploit via LOD.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "service-chase",
+      "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        0.6,
+        0.6,
+        3.2
+      ],
+      "extent_note": "Vertical utility space outside protected circulation.",
+      "connections": [
+        "utility_pass:top/bottom",
+        "inspection_panel:front"
+      ],
+      "construction": "Keep utilities and access panel distinct from structural bearer; manual service access reachable.",
+      "acceptance": [
+        "Proposed extent and connection interface pass blockout review.",
+        "No seam, blocked protected route or mismatched collider."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "public colonnade",
+      "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "construction": "Stone column bases support lintel/arch seats; decorative facing has independent attachment points.",
+      "acceptance": [
+        "Keep visible construction and silhouette distinct from all other regional kits.",
+        "Stone column bases support lintel/arch seats; decorative facing has independent attachment points.",
+        "Prove clearances and typed joint placement in blockout section and exploded assembly."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "shade canopy",
+      "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4.0,
+        4.0,
+        0.3
+      ],
+      "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "construction": "Fabric corners latch to column-head sockets with safe release; shade edge above public headroom.",
+      "acceptance": [
+        "Keep visible construction and silhouette distinct from all other regional kits.",
+        "Fabric corners latch to column-head sockets with safe release; shade edge above public headroom.",
+        "Prove clearances and typed joint placement in blockout section and exploded assembly."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "clinic threshold",
+      "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        2.4,
+        2.0,
+        2.8
+      ],
+      "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "construction": "Wide door-clear socket and flush floor align to protected queue/turn space; signage mounts out of sweep.",
+      "acceptance": [
+        "Keep visible construction and silhouette distinct from all other regional kits.",
+        "Wide door-clear socket and flush floor align to protected queue/turn space; signage mounts out of sweep.",
+        "Prove clearances and typed joint placement in blockout section and exploded assembly."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "quiet portico",
+      "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        4.0,
+        3.0,
+        3.2
+      ],
+      "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "construction": "Solid back wall and open front bay isolate calm seating from public through-route.",
+      "acceptance": [
+        "Keep visible construction and silhouette distinct from all other regional kits.",
+        "Solid back wall and open front bay isolate calm seating from public through-route.",
+        "Prove clearances and typed joint placement in blockout section and exploded assembly."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    },
+    {
+      "name": "daylight baffle",
+      "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+      "dimension_axes": [
+        "width_x",
+        "depth_or_run_z",
+        "height_or_rise_y"
+      ],
+      "target_extent_m": [
+        2.0,
+        0.3,
+        1.2
+      ],
+      "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "construction": "Rotating louver frame sits above window socket; hard stop prevents specular glare into route.",
+      "acceptance": [
+        "Keep visible construction and silhouette distinct from all other regional kits.",
+        "Rotating louver frame sits above window socket; hard stop prevents specular glare into route.",
+        "Prove clearances and typed joint placement in blockout section and exploded assembly."
+      ],
+      "clearance": {
+        "door_width_m": null,
+        "door_height_m": null,
+        "circulation_width_m": null,
+        "headroom_m": null
+      },
+      "slope": {
+        "rise_m": null,
+        "run_m": null,
+        "riser_m": null,
+        "tread_m": null,
+        "riser_count": null,
+        "maximum_ramp_grade": null
+      }
+    }
+  ],
+  "variants": [
+    {
+      "use": "residential",
+      "assembly": "Housing includes mixed-income courtyard blocks and refuge rooms, with ward sockets and shared kitchens. Sanctuary status protects access during conflict; players cannot place judgment effects that police other players' identities or movement."
+    },
+    {
+      "use": "institution",
+      "assembly": "courthouse, clinic and shelter have equally readable access"
+    },
+    {
+      "use": "workshop",
+      "assembly": "Ward engraving desk, public aid station, lamp maintenance cart"
+    },
+    {
+      "use": "repair/event",
+      "assembly": "Reversible facade and service closure overlays; stable public corridor remains; no player-content loss."
+    }
+  ],
+  "collision": [
+    "Static simplified occupied shell; stairs use smooth traversal proxy plus foot-placement surface.",
+    "Door sweeps, interaction volumes and damageable segments separate.",
+    "All variants preserve exits; collision readiness precedes appearance."
+  ],
+  "animation": [
+    "Structural shell static.",
+    "Only authored shutters, sails, screens, mechanisms and ambient attachments animate; pivots/limits/swept bounds mandatory.",
+    "Freeze moving decor safely at distant LOD without changing authoritative mechanism state."
+  ],
+  "lod": [
+    "LOD0 interaction-facing detail; LOD1 simplified joints; LOD2 skyline mass; HLOD group only after visual/occlusion tests.",
+    "Door/landing/socket transforms and hazard tells unchanged at all LODs.",
+    "Thresholds selected from screen-space error with hysteresis after hardware choice; no fixed-distance universal promise."
+  ],
+  "interactions": [
+    "louvered daylight baffle and shielded ward shutter",
+    "courthouse, clinic and shelter have equally readable access",
+    "Public routes and services remain usable without binding this Oath."
+  ],
+  "dependencies": [
+    "asset-o09-ah-decals-materials-shaders-family"
+  ],
+  "priority": "P0",
+  "status": "PROPOSED_NOT_BUILT",
+  "performance": {
+    "status": "UNPROFILED_PROPOSAL",
+    "cost_class": "high: bespoke modular silhouette and state integration",
+    "cost_drivers": [
+      "authoring/hidden-face resolution",
+      "unique material and shader permutations",
+      "collision/nav state count",
+      "transparency and shadow overlap",
+      "streamed memory and dependency residency"
+    ],
+    "acceptance": "Record CPU/GPU frame-time distribution, resident bytes, draw/material counts and transition stalls on selected target hardware at fixed camera/build/revision. No benchmark or budget compliance is asserted.",
+    "fallback": "Reduce decoration, distant animation and shadow/transparency quality before critical geometry, exit signs or hazard cues."
+  },
+  "acceptance": [
+    "Match directly observed overview silhouette/material hierarchy in neutral-light comparison; obtain exact-art review.",
+    "Pass ASSET_CONSTRUCTION_HANDBOOK.md connection, door, stair, socket, UV, collision, LOD and state gates.",
+    "One residential, one civic and one work assembly proves kit flexibility; these are test fixtures, not arbitrary building quotas.",
+    "Keep grounded ordinary entry and protected service corridor through authored event states."
+  ]
+}

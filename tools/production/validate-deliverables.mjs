@@ -63,18 +63,58 @@ async function localFile(repo,p) {
   if(!full.startsWith(repo+path.sep))throw new Error('File path escapes repository');
   const bytes=await readFile(full);if(!bytes.length)throw new Error('Empty file');return bytes;
 }
+export async function productionPath(repo,value,base=repo) {
+  if(typeof value!=='string'||!value||value.includes('\\')||path.isAbsolute(value)||value.split('/').includes('..'))throw new Error('Expected confined production repository-relative file path');
+  const full=await realpath(path.resolve(base,value)),production=path.resolve(repo,'assets/production');
+  if(!full.startsWith(production+path.sep))throw new Error('Production artifact escapes its root');
+  return path.relative(repo,full).split(path.sep).join('/');
+}
+export async function resolveManifestAsset(asset,manifestPath,filePathBase='REPOSITORY_ROOT',repo=root) {
+  if(!['REPOSITORY_ROOT','MANIFEST_DIRECTORY'].includes(filePathBase))throw new Error('Invalid filePathBase');
+  const base=filePathBase==='MANIFEST_DIRECTORY'?path.dirname(manifestPath):repo,files={};
+  for(const [key,value] of Object.entries(asset.files??{}))files[key]=Array.isArray(value)?await Promise.all(value.map(p=>productionPath(repo,p,base))):await productionPath(repo,value,base);
+  return {...asset,files};
+}
+export function collisionPolicy(asset) {
+  const policy=asset.collisionPolicy===undefined?{mode:'REQUIRED'}:asset.collisionPolicy,files=asset.files??{};
+  if(!policy||Array.isArray(policy)||!['REQUIRED','NONE','PENDING'].includes(policy.mode))throw new Error('Invalid collision policy');
+  if(policy.mode==='REQUIRED'&&typeof files.collision!=='string')throw new Error('Missing collision deliverable');
+  if(policy.mode!=='REQUIRED') {
+    if(typeof policy.reason!=='string'||!policy.reason.trim())throw new Error('Collision exemption/gap requires reason');
+    if(Object.hasOwn(files,'collision'))throw new Error('Contradictory collision policy');
+    if(policy.mode==='PENDING'&&(typeof policy.remainingGate!=='string'||!policy.remainingGate.trim()))throw new Error('Pending collision requires remaining gate');
+  }
+  return policy;
+}
+export async function validateCompressedSource(asset,bytes,repo=root) {
+  if(!(bytes[0]===0x1f&&bytes[1]===0x8b)&&!(bytes.length>=4&&bytes.readUInt32LE(0)===0xfd2fb528))throw new Error('Not a compressed Blender source');
+  const metadata=asset.sourceValidation;
+  if(!metadata||typeof metadata!=='object'||Array.isArray(metadata))throw new Error('Compressed Blender source requires import evidence');
+  const reportPath=await productionPath(repo,metadata.report),reportBytes=await localFile(repo,reportPath),sha256=digest(reportBytes);
+  if(metadata.reportSha256!==sha256)throw new Error('Blender import report hash mismatch');
+  const report=JSON.parse(reportBytes);
+  if(report.schemaVersion!==1||report.tool?.name!=='Blender'||typeof report.tool?.version!=='string'||!report.tool.version.trim())throw new Error('Invalid Blender import report tool/schema');
+  if(!Array.isArray(report.reports)||report.reports.some(r=>!r||typeof r!=='object'||Array.isArray(r)))throw new Error('Invalid Blender import report records');
+  const matches=report.reports.filter(r=>r.module===metadata.recordId);
+  if(typeof metadata.recordId!=='string'||!metadata.recordId||matches.length!==1||matches[0].opened!==true||!Array.isArray(matches[0].errors)||matches[0].errors.length||matches[0].source_sha256!==digest(bytes))throw new Error('Blender source import evidence mismatch/failure');
+  return {path:reportPath,bytes:reportBytes.length,sha256};
+}
 export async function validateAsset(asset,repo=root) {
   const errors=[],gates=[...new Set(asset.remainingGates??[])],files={},exports={};
   const error=(code,message)=>errors.push({code,message});
+  let policy={mode:'REQUIRED'};
+  try {policy=collisionPolicy(asset);if(policy.mode==='PENDING')gates.push(policy.remainingGate);}catch(e){error('COLLISION_POLICY',e.message);}
   for(const key of ['id','name','type','status'])if(typeof asset[key]!=='string'||!asset[key])error('MANIFEST_FIELD',`Missing ${key}`);
   if(!Array.isArray(asset.remainingGates))error('MANIFEST_FIELD','remainingGates must be an array');
   const additionalFiles=Object.entries(asset.files??{}).filter(([k,v])=>!['blend','glb','lod1','lod2','collision'].includes(k)&&typeof v==='string');
-  const requested=[...['blend','glb','lod1','lod2','collision'].map(k=>[k,asset.files?.[k]]),...additionalFiles,...['textures','renders'].flatMap(k=>(asset.files?.[k]??[]).map((p,i)=>[`${k}/${i}`,p]))];
+  const requested=[...['blend','glb','lod1','lod2',...(policy.mode==='REQUIRED'?['collision']:[])].map(k=>[k,asset.files?.[k]]),...additionalFiles,...['textures','renders'].flatMap(k=>(asset.files?.[k]??[]).map((p,i)=>[`${k}/${i}`,p]))];
   for(const key of ['textures','renders'])if(!Array.isArray(asset.files?.[key])||!asset.files[key].length)error('MISSING_DELIVERABLE',`No ${key} files`);
   for(const [key,p] of requested) {
     try {
-      const bytes=await localFile(repo,p);files[key]={path:p,bytes:bytes.length,sha256:digest(bytes)};
-      if(key==='blend'&&!bytes.subarray(0,7).equals(Buffer.from('BLENDER'))&&!(bytes[0]===0x1f&&bytes[1]===0x8b)&&!(bytes.readUInt32LE(0)===0xfd2fb528))error('BLEND_SIGNATURE','Unrecognized .blend compression/header');
+      const resolved=await productionPath(repo,p),bytes=await localFile(repo,resolved);files[key]={path:resolved,bytes:bytes.length,sha256:digest(bytes)};
+      if(key==='blend'&&!bytes.subarray(0,7).equals(Buffer.from('BLENDER'))) {
+        try {files.source_validation=await validateCompressedSource(asset,bytes,repo);}catch(e){error('BLEND_SOURCE_EVIDENCE',e.message);}
+      }
       if(key.startsWith('textures/')||key.startsWith('renders/')||/\.(png|jpe?g)$/i.test(p)) {
         if(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))files[key].image={format:'PNG',width:bytes.readUInt32BE(16),height:bytes.readUInt32BE(20)};
         else if(bytes[0]===255&&bytes[1]===216)files[key].image={format:'JPEG',dimensions:'NOT_MEASURED'};
@@ -146,7 +186,7 @@ export async function validateAsset(asset,repo=root) {
     }
   }
   gates.push('VISUAL_REFERENCE_APPROVAL','BLENDER_SOURCE_OPEN_AND_REEXPORT','UNREAL_IMPORT_AND_RUNTIME','GODOT_IMPORT_AND_RUNTIME','THREEJS_RENDER_AND_DISPOSE','MEASURED_PERFORMANCE','COLLISION_GAMEPLAY_FIT');
-  return {id:asset.id,name:asset.name,type:asset.type,declaredStatus:asset.status,status:errors.length?'HARD_ERRORS':'STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN',errors,remainingGates:[...new Set(gates)],files,exports};
+  return {id:asset.id,name:asset.name,type:asset.type,declaredStatus:asset.status,status:errors.length?'HARD_ERRORS':policy.mode==='PENDING'?'CANDIDATE_INCOMPLETE_MISSING_REQUIRED_COLLISION':'STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN',collisionPolicy:policy,errors,remainingGates:[...new Set(gates)],files,exports};
 }
 export async function auditDeliverables() {
   let paths=[];try{paths=await manifests(path.join(root,'assets/production'));}catch(e){if(e.code!=='ENOENT')throw e;}
@@ -160,7 +200,7 @@ export async function auditDeliverables() {
       if(!familyIds.has(m.familyId))manifestErrors.push({path:rel,message:`Unknown family ID ${m.familyId}`});
       const references=[];
       for(const id of m.referenceIds) {const ref=referenceIndex.find(r=>r.id===id);if(!ref)manifestErrors.push({path:rel,message:`Unknown reference ID ${id}`});else references.push({id,path:ref.repository_path,sha256:digest(await localFile(root,ref.repository_path))});}
-      for(const a of m.assets) {if(ids.has(a.id))manifestErrors.push({path:rel,message:`Duplicate asset ID ${a.id}`});ids.add(a.id);records.push({manifest:rel,manifestSha256:digest(bytes),familyId:m.familyId,referenceIds:m.referenceIds,references,...await validateAsset(a)});}
+      for(const a of m.assets) {if(ids.has(a.id))manifestErrors.push({path:rel,message:`Duplicate asset ID ${a.id}`});ids.add(a.id);records.push({manifest:rel,manifestSha256:digest(bytes),familyId:m.familyId,referenceIds:m.referenceIds,references,...await validateAsset(await resolveManifestAsset(a,p,m.filePathBase))});}
     }catch(e){manifestErrors.push({path:path.relative(root,p),message:e.message});}
   }
   for(const record of records) {
@@ -170,7 +210,7 @@ export async function auditDeliverables() {
   }
   const result={schemaVersion:1,generatedAt:new Date().toISOString(),sourceRevision:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),validatorVersion:validator.version(),
     limitations:['Input file hashes identify this working-tree snapshot; sourceRevision records HEAD without asserting a clean checkout','Static structure and manifest integrity only; no visual approval or engine parity','Open gates are unevaluated by this audit; independent engine evidence must be reviewed separately','Dimensions compared with axis permutation and 0.5%/2mm tolerance; no unit metadata claim substitutes for vertices','Blend signature and image headers checked; actual Blender opening and texture decoding require separate engine evidence','Collision geometry existence/complexity checked, not hull convexity or gameplay fitness'],
-    summary:{manifests:paths.length,assets:records.length,hardErrorAssets:records.filter(r=>r.errors.length).length,hardErrors:records.reduce((n,r)=>n+r.errors.length,0)+manifestErrors.length,structurallyPassed:records.filter(r=>!r.errors.length).length,glbPaths:[...new Set(records.flatMap(r=>Object.values(r.files).filter(f=>f.path.endsWith('.glb')).map(f=>f.path)))].length,khronosErrors:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numErrors,0),khronosWarnings:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numWarnings,0),productionApproved:0},manifestErrors,records};
+    summary:{manifests:paths.length,assets:records.length,hardErrorAssets:records.filter(r=>r.errors.length).length,hardErrors:records.reduce((n,r)=>n+r.errors.length,0)+manifestErrors.length,structurallyPassed:records.filter(r=>r.status==='STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN').length,incompleteAssets:records.filter(r=>r.status==='CANDIDATE_INCOMPLETE_MISSING_REQUIRED_COLLISION').length,glbPaths:[...new Set(records.flatMap(r=>Object.values(r.files).filter(f=>f.path.endsWith('.glb')).map(f=>f.path)))].length,khronosErrors:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numErrors,0),khronosWarnings:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numWarnings,0),productionApproved:0},manifestErrors,records};
   const dir=path.join(root,'validation/production');await mkdir(dir,{recursive:true});
   const fullIssues=[];
   for(const r of records)for(const [key,ex] of Object.entries(r.exports)) {
