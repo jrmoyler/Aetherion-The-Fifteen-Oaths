@@ -1,0 +1,121 @@
+{
+  "batch_id": "batch02-corrections-v02",
+  "concept_count": 2,
+  "new_concept_count": 0,
+  "image_version_count": 2,
+  "status": "REVIEWED_PROPOSED_PARTIALLY_RESOLVED",
+  "original114_unchanged": true,
+  "modeling_approval": false,
+  "engineering_validated": false,
+  "records": [
+    {
+      "id": "p2-env-09-shared-residential-o09-proposed-v02",
+      "path": "images/p2-env-09-shared-residential-o09-proposed-v02.png",
+      "sha256": "ec0d50665aac1e1a1ed1fbbd232130429e42dde102936c7fcd4395d9a8fae55a",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "bytes": 2983201,
+      "tool": "built-in image_gen__imagegen",
+      "prompt_path": "prompts/p2-env-09-shared-residential-o09-proposed-v02.prompt.txt",
+      "prompt_sha256": "f574379b4203686b3c56a32f2d66d3802d7382671e31bced94cf682d50814d9a",
+      "prompt": "EDIT INPUT IMAGE 1 into V02: PROPOSED AETHERION DAYBREAK COURTYARD DWELLING, a low-poly PBR modeling-reference sheet. INPUT IMAGE 2 is original Oath STYLE ONLY. Preserve courtyard dwelling/shared-kitchen function and pale masonry, marble facing, bronze trim, woven shade identity; reduce the lavish palace ornament to modest ordinary civilian housing. No glowing gold, no monumental columns, no fountains, no grand public staircase. Use simple pale block walls with small replaceable bronze fittings, plain timber shutters, worn woven domestic shade and restrained shallow geometric trim. CONSISTENCY: one small single-storey dwelling; front faces courtyard; entrance centrally located opens into living core; private sleeping room left off public route; storage and sanitary service chase right; shared kitchen/refuge connection continues right on public courtyard route. Show exactly this same layout and door positions in plan, front elevation, service-rear elevation and roof-off cutaway. STEP-FREE CORRECTION: street, courtyard, dwelling doorway threshold and living-room floor are all at one continuous flush level. Remove ALL entrance stairs and raised door sills. Show an uninterrupted highlighted route from STREET across courtyard through central door to living core; public route continues outside to kitchen without crossing sleeping room. Include enlarged matching threshold SECTION and PLAN with door leaf opening inward and same zero-step slab joint. No pretend accessibility claim based on arrows over steps. A continuous floor line must be visually visible in side section. Board panels: large restrained roof-off cutaway; true top-down circulation plan; front/rear elevations; large threshold section/plan pair; sanitary-chase inspection; material swatches. Avoid duplicated lavish courtyard scenic views. Use coherent large faceted stylized geometry and readable construction callouts, not photoreal architectural glamour. Include private storage, warm/dry living core and plain shared-kitchen worktop; equal material quality for refuge and modest home. Optional ward socket may be a small blank fitting only, never identity or movement barrier. No invented data/power systems, dimensions, dwelling counts or performance values. Title includes PROPOSED V02. Footer exactly: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. Preserve source and v01 files unchanged; output separate new correction board.\n",
+      "v01_path": "assets/references/proposed-expansion-2026-10-13-batch02/generated/p2-env-09-shared-residential-o09-proposed-v01.png",
+      "v01_sha256": "9422c58393f587d05f1efab2ab911a29dc4ddb38538101864a4869e86d4b4483",
+      "v01_hash_matches_previous_manifest": true,
+      "original_oath_reference": "assets/references/reference-105/original.png",
+      "original_oath_reference_sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+      "original_hash_matches_prior_record": true,
+      "inputs": "Bounded PNG copies of visually inspected v01 target and original Oath style reference",
+      "pixel_qa": {
+        "actual_pixels_inspected": true,
+        "observed_improvements": [
+          "Lavish courtyard columns, large stairs and extensive gold motifs replaced by modest single-storey block dwelling and small bronze trim.",
+          "Street/courtyard/central doorway/living-core route visibly flush, no entrance stair or sill shown.",
+          "Main plan and cutaway agree on private sleeping room left, central living core/entry, storage/chase right, kitchen interface farther right.",
+          "Threshold enlarged views show continuous surface and inward door swing; public path bypasses private sleeping room."
+        ],
+        "remaining_gates": [
+          "Threshold SECTION is perspective surface detail rather than an actual cut through floor construction, so substrate, waterproofing and joint geometry are not established.",
+          "Front elevation doorway appears to sightline kitchen furniture rather than unequivocal living core, and service-rear door relationship remains unverified.",
+          "Key layout axon carries extra complexity and does not completely reconcile with simpler main plan.",
+          "Finer decorative greenery and material detailing require simplification for low-poly production; no authored topology, UVs or PBR textures exist.",
+          "No validated dimensions, accessibility compliance, construction or engineering claims."
+        ]
+      },
+      "status": "V02_CORRECTION_GENERATED_PARTIALLY_RESOLVED",
+      "modeling_approval": false,
+      "engineering_validated": false,
+      "canonical_id": "p2-env-09-shared-residential",
+      "v01_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/proposed-expansion-2026-10-13-batch02/generated/p2-env-09-shared-residential-o09-proposed-v01.png",
+      "original_oath_reference_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-105/original.png",
+      "source_repository": "jrmoyler/Aetherion-The-Fifteen-Oaths",
+      "source_commit": "04c33f6c4ff51f843eca490a3e3260e8311ed2b8",
+      "dependency_path_basis": "Repository root, not archive-relative. Standalone consumers use pinned URLs.",
+      "dependency_verification": {
+        "method": "GitHub connector fetched each path at pinned commit; returned Git blob SHA1 matches local source bytes, whose SHA256 matches manifest.",
+        "v01_git_blob_sha1": "a7d527c5dfcd819ef79a2b85ed11f25a69634249",
+        "original_reference_git_blob_sha1": "512603a17cb4add1d88035cc4a284ce7f1020d1a"
+      }
+    },
+    {
+      "id": "env_10_transit_o03-proposed-v02",
+      "path": "images/env_10_transit_o03-proposed-v02.png",
+      "sha256": "6cda01e98adf6f0ea7e01ab03adc098c34363e1c4dab3a377ada33533f62247f",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "bytes": 2873365,
+      "tool": "built-in image_gen__imagegen",
+      "prompt_path": "prompts/env_10_transit_o03-proposed-v02.prompt.txt",
+      "prompt_sha256": "69be34c971748f384296ac905426713ada11d83328a1e8f21bea2da794af1911",
+      "prompt": "EDIT INPUT IMAGE 1 into V02 of the SAME PROPOSED AETHERION STORM RELAY WAITING STOP. INPUT IMAGE 2 is original Oath STYLE REFERENCE ONLY. Preserve dark blue-black shielded timber canopy, stone plinth, copper fasteners and pale ceramic breaks, bench and separate baggage shelf; simplify excessive dangling tassels/ornaments and marker into a plain frame. Correct the faulty access and missing foundation detail. Asset is ordinary civilian roadside waiting shelter, not live electric machinery. COHERENT LAYOUT: one rectangular canopy with FOUR support posts at the four corners, rear bench on left half and luggage shelf on right half. Public road runs along FRONT long side. Waiting-floor surface and approaching public-road pedestrian surface meet FLUSH along whole front, no raised curb, no threshold lip, no stairs and no tiny ramp strips. A broad clear central approach from road continues into waiting area and turns left/right to waiting/boarding zone; all posts and furniture stay outside the continuous clear route. If ground slopes behind shelter, retain it at REAR only. Show matching front, rear, side elevation, actual roof-removed TOP PLAN and actual section with a visibly continuous ground/floor line. Keep four post positions, bench, luggage and plain marker position consistent across all views. Plan blue route stripe MUST run through empty floor, never underneath furniture or through a post. Main detail must be a LARGE FULL-HEIGHT continuous FOOTING-TO-CANOPY section/partly exploded assembly, from below-ground broad stone foundation through stone pedestal, seated post/base plate, continuous timber post, copper straps and isolated ceramic fitting to canopy beam and roof; show actual foundation underground not just a label on top joint. Separate small upper joint and buried footing close-ups can supplement it. Any conductor strip is outside human clear route and isolated from live transmission. Show OPEN NORMAL and TRANSMISSION SHUT DOWN state mini-plans, same unobstructed ordinary-road route independent of remote power. One SMALL context inset: transmission hardware entirely separate on the FAR side of a dashed boundary, waiting stop on near side; boundary label HAZARD EXTENT UNRESOLVED, not safety-certified. No lightning connecting shelter or people, no invented electrical clearance, numerical dimension, slope grade, load rating, transport route or rail system. Landscape pale-neutral modeling-reference board with clean large faceted low-poly PBR-style masses, restrained readable labels and material swatches, avoid photoreal glamour. Title PROPOSED V02 \u2014 STORM RELAY WAITING STOP. Footer exactly REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. Output separate correction, preserve v01 and original unchanged.\n",
+      "v01_path": "assets/references/proposed-expansion-2026-10-13-batch02/generated/env_10_transit_o03-proposed-v01.png",
+      "v01_sha256": "e16468b25c8f1bab3d91d837141a4080e9d1bc61cea6022a4c516f2b46a232c9",
+      "v01_hash_matches_previous_manifest": true,
+      "original_oath_reference": "assets/references/reference-111/original.png",
+      "original_oath_reference_sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+      "original_hash_matches_prior_record": null,
+      "inputs": "Bounded PNG copies of visually inspected v01 target and original Oath style reference",
+      "pixel_qa": {
+        "actual_pixels_inspected": true,
+        "observed_improvements": [
+          "Narrow ramp strips removed; broad central flush approach shown from road into waiting space.",
+          "Actual section shows below-ground stone foundations and continuous floor line.",
+          "Full-height post assembly plus base, upper joint and buried-foundation details now present.",
+          "Normal and transmission-shutdown mini-plans retain same ordinary-road route.",
+          "Remote transmission stays in context inset and hazard extent marked unresolved."
+        ],
+        "remaining_gates": [
+          "Front/rear elevation include a central rear support absent from four-corner-post top plan; support count and roof structure still need reconciliation.",
+          "Lateral blue route stripes in plan intersect front-corner post footprints; central route is clearer, but complete circulation must be redrawn around supports.",
+          "Shutdown inset unexpectedly overlays a partial canopy while normal inset is roof-off; state geometry is not cleanly identical.",
+          "Full-height post panel ends at visible pedestal; below-ground footing is a separate close-up, not one uninterrupted physical section.",
+          "Context wording still says transmission hardware outside hazard extent; required safe-side versus hazardous-side distinction remains ambiguous despite unresolved disclaimer.",
+          "Copper/ceramic break placement is visual concept only; no electrical grounding, clearance, structural or accessibility validation."
+        ]
+      },
+      "status": "V02_CORRECTION_GENERATED_PARTIALLY_RESOLVED",
+      "modeling_approval": false,
+      "engineering_validated": false,
+      "canonical_id": "p2-env-09-shared-transit",
+      "v01_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/proposed-expansion-2026-10-13-batch02/generated/env_10_transit_o03-proposed-v01.png",
+      "original_oath_reference_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-111/original.png",
+      "source_repository": "jrmoyler/Aetherion-The-Fifteen-Oaths",
+      "source_commit": "04c33f6c4ff51f843eca490a3e3260e8311ed2b8",
+      "dependency_path_basis": "Repository root, not archive-relative. Standalone consumers use pinned URLs.",
+      "dependency_verification": {
+        "method": "GitHub connector fetched each path at pinned commit; returned Git blob SHA1 matches local source bytes, whose SHA256 matches manifest.",
+        "v01_git_blob_sha1": "ddcd85f645aa68dfc9a8a313cc0a9cd634a72f61",
+        "original_reference_git_blob_sha1": "1da6d5e533a29b4e5304c40799b621a9ec14d588"
+      }
+    }
+  ],
+  "source_repository": "jrmoyler/Aetherion-The-Fifteen-Oaths",
+  "source_commit": "04c33f6c4ff51f843eca490a3e3260e8311ed2b8",
+  "dependency_paths_relative_to": "repository root",
+  "import_destination": "assets/references/proposed-expansion-2026-10-13-batch02-corrections-v02/",
+  "package_revision_note": "Replaced package-sibling dependencies with pinned GitHub blob URLs and repository-root paths for both v01 images and original Oath references. Image pixels, prompts and QA unchanged."
+}

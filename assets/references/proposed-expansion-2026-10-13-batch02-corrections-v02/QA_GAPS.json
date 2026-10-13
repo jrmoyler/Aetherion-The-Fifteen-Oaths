@@ -1,0 +1,42 @@
+[
+  {
+    "id": "p2-env-09-shared-residential-o09-proposed-v02",
+    "pixel_qa": {
+      "actual_pixels_inspected": true,
+      "observed_improvements": [
+        "Lavish courtyard columns, large stairs and extensive gold motifs replaced by modest single-storey block dwelling and small bronze trim.",
+        "Street/courtyard/central doorway/living-core route visibly flush, no entrance stair or sill shown.",
+        "Main plan and cutaway agree on private sleeping room left, central living core/entry, storage/chase right, kitchen interface farther right.",
+        "Threshold enlarged views show continuous surface and inward door swing; public path bypasses private sleeping room."
+      ],
+      "remaining_gates": [
+        "Threshold SECTION is perspective surface detail rather than an actual cut through floor construction, so substrate, waterproofing and joint geometry are not established.",
+        "Front elevation doorway appears to sightline kitchen furniture rather than unequivocal living core, and service-rear door relationship remains unverified.",
+        "Key layout axon carries extra complexity and does not completely reconcile with simpler main plan.",
+        "Finer decorative greenery and material detailing require simplification for low-poly production; no authored topology, UVs or PBR textures exist.",
+        "No validated dimensions, accessibility compliance, construction or engineering claims."
+      ]
+    }
+  },
+  {
+    "id": "env_10_transit_o03-proposed-v02",
+    "pixel_qa": {
+      "actual_pixels_inspected": true,
+      "observed_improvements": [
+        "Narrow ramp strips removed; broad central flush approach shown from road into waiting space.",
+        "Actual section shows below-ground stone foundations and continuous floor line.",
+        "Full-height post assembly plus base, upper joint and buried-foundation details now present.",
+        "Normal and transmission-shutdown mini-plans retain same ordinary-road route.",
+        "Remote transmission stays in context inset and hazard extent marked unresolved."
+      ],
+      "remaining_gates": [
+        "Front/rear elevation include a central rear support absent from four-corner-post top plan; support count and roof structure still need reconciliation.",
+        "Lateral blue route stripes in plan intersect front-corner post footprints; central route is clearer, but complete circulation must be redrawn around supports.",
+        "Shutdown inset unexpectedly overlays a partial canopy while normal inset is roof-off; state geometry is not cleanly identical.",
+        "Full-height post panel ends at visible pedestal; below-ground footing is a separate close-up, not one uninterrupted physical section.",
+        "Context wording still says transmission hardware outside hazard extent; required safe-side versus hazardous-side distinction remains ambiguous despite unresolved disclaimer.",
+        "Copper/ceramic break placement is visual concept only; no electrical grounding, clearance, structural or accessibility validation."
+      ]
+    }
+  }
+]
