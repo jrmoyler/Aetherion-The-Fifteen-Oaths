@@ -1,0 +1,360 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aetherion-phase2/schemas/capital-layout.schema.json",
+  "$comment": "Planning-package schema identifier, not a hosted service.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capital_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline_description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "plan_form": {
+            "type": "string",
+            "minLength": 1
+          },
+          "orientation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_envelope_m": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "target_relief_m": {
+            "type": "integer"
+          },
+          "dimension_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "architecture_kit_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference_source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "districts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "canon_status": {
+                  "const": "PROPOSED"
+                },
+                "source_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "function": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target_width_range_m": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "target_depth_range_m": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "target_relative_elevation_m": {
+                  "type": "integer"
+                },
+                "target_elevation_band_m": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "schematic_position": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "dimension_status": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "architecture_kit_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "public_entries": {
+                  "type": "integer"
+                },
+                "adjacent_district_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              },
+              "required": [
+                "id",
+                "canon_status",
+                "source_ids",
+                "name",
+                "function",
+                "target_width_range_m",
+                "target_depth_range_m",
+                "target_relative_elevation_m",
+                "target_elevation_band_m",
+                "schematic_position",
+                "dimension_status",
+                "architecture_kit_id",
+                "public_entries",
+                "adjacent_district_ids"
+              ]
+            },
+            "minItems": 3
+          },
+          "adjacency_edges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "from_district_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "to_district_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "route_class": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target_clear_width_m": {
+                  "type": "integer"
+                },
+                "access": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "from_district_id",
+                "to_district_id",
+                "route_class",
+                "target_clear_width_m",
+                "access"
+              ]
+            }
+          },
+          "interiors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "poi_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "parent_district_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target_clear_extent_m": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "program": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "ingress": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "day_night": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "poi_id",
+                "parent_district_id",
+                "target_clear_extent_m",
+                "program",
+                "ingress",
+                "day_night"
+              ]
+            }
+          },
+          "housing_poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "service_route_district_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "public_refuge_district_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ingress": {
+            "type": "string",
+            "minLength": 1
+          },
+          "logistics": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evacuation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "vertical_section": {
+            "type": "string",
+            "minLength": 1
+          },
+          "day_night": {
+            "type": "string",
+            "minLength": 1
+          },
+          "weather_response": {
+            "type": "string",
+            "minLength": 1
+          },
+          "construction_phases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "acceptance_tests": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "region_id",
+          "capital_id",
+          "name",
+          "baseline_description",
+          "plan_form",
+          "orientation",
+          "target_envelope_m",
+          "target_relief_m",
+          "dimension_status",
+          "architecture_kit_id",
+          "reference_source_ids",
+          "source_refs",
+          "districts",
+          "adjacency_edges",
+          "interiors",
+          "housing_poi_id",
+          "service_route_district_ids",
+          "public_refuge_district_id",
+          "ingress",
+          "logistics",
+          "evacuation",
+          "vertical_section",
+          "day_night",
+          "weather_response",
+          "construction_phases",
+          "acceptance_tests"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "canon_status",
+    "records"
+  ]
+}

@@ -1,0 +1,409 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "baseline_commit",
+    "baseline_url",
+    "canon_status",
+    "counting_policy",
+    "records",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "baseline_commit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "counting_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "acceptance",
+          "animation",
+          "baseline_asset_id",
+          "baseline_refinements",
+          "canon_status",
+          "collision",
+          "construction",
+          "delta",
+          "dependencies",
+          "family_category",
+          "id",
+          "interactions",
+          "lod",
+          "materials",
+          "name",
+          "namespace_note",
+          "oath_ids",
+          "performance",
+          "priority",
+          "proposed_physical_scale",
+          "purpose",
+          "reference_evidence",
+          "region_ids",
+          "regional_variants",
+          "source_ids",
+          "source_refs",
+          "status",
+          "variant_policy",
+          "variants"
+        ],
+        "properties": {
+          "acceptance": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "animation": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "baseline_asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline_refinements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "baseline_asset_id",
+                "delta",
+                "region_id"
+              ],
+              "properties": {
+                "baseline_asset_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "delta": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "region_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "collision": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "construction": {
+            "type": "string",
+            "minLength": 1
+          },
+          "delta": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "family_category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^p2-(arch|env)-(0[1-9]|1[0-5])-[a-z0-9-]+$"
+          },
+          "interactions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "lod": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "namespace_note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "performance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "acceptance",
+              "cost_class",
+              "cost_drivers",
+              "fallback",
+              "status"
+            ],
+            "properties": {
+              "acceptance": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cost_class": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cost_drivers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "fallback": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "priority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proposed_physical_scale": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "authority",
+              "status",
+              "target",
+              "units"
+            ],
+            "properties": {
+              "authority": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "target": {
+                "type": "string",
+                "minLength": 1
+              },
+              "units": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference_evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "evidence_inventory",
+              "missing",
+              "reference_ids",
+              "status"
+            ],
+            "properties": {
+              "evidence_inventory": {
+                "type": "string",
+                "minLength": 1
+              },
+              "missing": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "reference_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "region_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "regional_variants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "baseline_asset_id",
+                "construction_delta",
+                "entity_ids",
+                "justification",
+                "kit_id",
+                "materials",
+                "oath_id",
+                "reference_id",
+                "reference_limit",
+                "reference_status",
+                "region_id"
+              ],
+              "properties": {
+                "baseline_asset_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "construction_delta": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "entity_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "justification": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "kit_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "materials": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "oath_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reference_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reference_limit": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reference_status": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "region_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "status": {
+            "const": "PROPOSED_NOT_BUILT"
+          },
+          "variant_policy": {
+            "type": "string",
+            "minLength": 1
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "environment-asset-registry.schema.json",
+  "title": "ENVIRONMENT_ASSET_REGISTRY strict proposal schema"
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild the evidence-based Phase I work inventory; never infer art acceptance.
+"""Rebuild the evidence-based combined Phase I and II work inventory; never infer art acceptance.
 
 Run from any directory. --check verifies committed outputs without modifying them.
 No network, third-party modules, source mutations, or Phase II extrapolation.
@@ -11,6 +11,8 @@ import hashlib
 import json
 from pathlib import Path
 import sys
+from delivery_inventory import collect_deliveries
+from phase_ii_inventory import build_phase_ii
 
 ROOT = Path(__file__).resolve().parents[2]
 CANON = 'AETHERION_CANON/'
@@ -157,6 +159,11 @@ def build():
                                   else 'CONDITIONAL_NOT_TESTED' if g == 'rig_and_animation' and cat not in RIG_REQUIRED
                                   else 'NOT_TESTED') for g in GATES},
                      'status': 'REQUIREMENTS_DOCUMENTED_PRODUCTION_MISSING', 'approved': False})
+    deliveries = collect_deliveries(ROOT, {w['id'] for w in work})
+    for requirement in work:
+        requirement['delivered_production_artifacts'] = [d for d in deliveries if d['family_id'] == requirement['id']]
+        if requirement['delivered_production_artifacts']:
+            requirement['status'] = 'PARTIAL_CANDIDATE_DELIVERIES_ACCEPTANCE_OPEN'
     preserved = []
     for r in source:
         artifacts = [file_evidence(p, r['sha256']) for p in r['repository_paths']]
@@ -189,6 +196,17 @@ def build():
         for dep in c['dependencies']:
             if dep not in {s['id'] for s in systems}:
                 raise ValueError(f'Unknown contract dependency {dep}')
+    phase_ii = build_phase_ii(ROOT, work, detail, systems, GATES)
+    for requirement in work:
+        requirement['phase_ii_refinement_ids'] = phase_ii['baseline_family_refinements'].get(requirement['id'], [])
+    combined_details = json.loads(json.dumps(detail_by_id))
+    for row in phase_ii['registered_identity_ledger']:
+        item = combined_details.setdefault(row['id'], {'id': row['id'], 'source_records': [], 'scope_only_not_additive_asset_count': True})
+        for source in row['source_records']:
+            if source not in item['source_records']:
+                item['source_records'].append(source)
+    for system in systems:
+        system['phase_ii_refinement_ids'] = [r['id'] for r in phase_ii['world_system_obligations'] if system['id'] in r['baseline_contract_ids']]
     inputs = sorted({MASTER, SOURCE, TAXONOMY, CONTRACTS, 'CASTABLE_REGISTRY.json'} | {CANON + x for x in DETAIL})
     counts = {
         'phase_i_master_records': len(master), 'production_family_requirements': len(work),
@@ -200,65 +218,69 @@ def build():
         'source_kind_unique_identities': dict(sorted(Counter(k for r in preserved for k in r['asset_kinds']).items())),
         'linked_detail_registry_records': len(detail), 'linked_detail_unique_ids': len(detail_ids),
         'runtime_implementation_contracts': len(systems),
-        'new_production_asset_deliverables': 0, 'accepted_production_families': 0,
+        'new_production_asset_deliverables': len(deliveries),
+        'distinct_candidate_archetypes': len({d['archetype_id'] for d in deliveries}),
+        'candidate_glb_file_paths': len({a['path'] for d in deliveries for a in d['artifacts'] if a['path'].endswith('.glb')}),
+        'families_with_candidate_deliveries': len({d['family_id'] for d in deliveries}),
+        'families_without_candidate_deliveries': sum(not w['delivered_production_artifacts'] for w in work),
+        'unaccepted_production_families': len(work),
+        'accepted_production_families': 0,
         'fully_rendered_gameplay_certified_castables': 0,
-        'exact_mesh_and_clip_requirement_count': None, 'phase_ii_item_level_requirements': None,
+        'exact_mesh_and_clip_requirement_count': None,
+        'phase_ii_architecture_module_entries': phase_ii['counts']['architecture_module_entries'],
+        'phase_ii_regional_environment_variants': phase_ii['counts']['regional_environment_variants'],
+        'phase_i_families_refined_by_phase_ii': phase_ii['counts']['existing_phase_i_family_ids_refined'],
+        'combined_detail_unique_ids': len(combined_details),
+        'phase_ii_payload_documents': phase_ii['counts']['payload_files'],
+        'candidate_texture_file_paths': len({a['path'] for d in deliveries for a in d['artifacts'] if a['role'] == 'textures'}),
+        'production_candidate_manifest_paths': len({d['manifest_path'] for d in deliveries}),
     }
     realm_ids = [r['id'] for r in read(CANON + '03_GEOGRAPHY/REALM_REGISTRY.json')['records']]
     oaths = sorted({r['oath_id'] for r in work})
     oath_ledger = [{'oath_id': oath, 'family_requirements': sum(w['oath_id'] == oath for w in work),
                     'categories': {cat: {'requirement_id': next(w['id'] for w in work if w['oath_id'] == oath and w['category_id'] == cat),
-                                       'production_accepted': False, 'delivered_production_artifacts': 0} for cat in taxonomy},
+                                       'production_accepted': False, 'delivered_production_artifacts': sum(len(w['delivered_production_artifacts']) for w in work if w['oath_id'] == oath and w['category_id'] == cat)} for cat in taxonomy},
                     'source_castables': sum(r['oath_id'] == oath for r in runtime),
                     'linked_detail_records': sum(d['oath_id'] == oath for d in detail),
-                    'approved_production_assets': 0} for oath in oaths]
-    documents = sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / 'AETHERION_CANON').rglob('*') if p.is_file() and p.suffix in {'.md', '.json', '.csv', '.svg'} and '__pycache__' not in p.parts)
+                    'approved_production_assets': 0,
+                    'candidate_asset_entries': sum(d['family_id'] in {w['id'] for w in work if w['oath_id'] == oath} for d in deliveries),
+                    'families_without_candidate_deliveries': sum(not w['delivered_production_artifacts'] for w in work if w['oath_id'] == oath),
+                    'phase_ii': next(r for r in phase_ii['region_acceptance_ledger'] if r['oath_id'] == oath)} for oath in oaths]
+    documents = sorted(p.relative_to(ROOT).as_posix() for p in (ROOT / 'AETHERION_CANON').rglob('*') if p.is_file() and p.suffix in {'.md', '.json', '.csv', '.svg'} and '__pycache__' not in p.parts and '21_WORLD_CONSTRUCTION_PHASE_II' not in p.parts)
     counts['phase_i_canon_document_paths'] = len(documents)
     counts['named_character_ids'] = len(read(CANON + '05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json')['records'])
     creature_rows = read(CANON + '12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json')['records']
     counts['creature_and_manifestation_roles'] = dict(sorted(Counter(r['role'] for r in creature_rows).items()))
     counts['baseline_poi_ids'] = len(read(CANON + '03_GEOGRAPHY/WORLD_POI_REGISTRY.json')['records'])
     manifest = {
-        'format': 'aetherion-production-inventory@1',
-        'scope': 'Complete existing Phase I registered family scope with linked detailed identities; Phase II item inventory blocked pending exact archive. Not a decomposed production mesh estimate.',
+        'format': 'aetherion-production-inventory@2',
+        'scope': 'Combined Phase I registered family scope and exact imported Phase II refinements, with preserved IDs and deduplicated detailed identity views. Exact final mesh/clip decomposition remains unresolved; proposals and candidates are not accepted production.',
         'counting_policy': ['Identity deduplication by preserved family ID and source-file SHA256.',
                             'The 24 primary source-file records alias the full source index; never add them to 112.',
                             'Detailed character, creature, POI and system records refine families; never add these counts to a mesh total.',
                             'Family component descriptions are scope labels, not approved item IDs, finished meshes, clip counts or independently priced work.',
                             'Only byte integrity is tested here. Historical source CPU evidence is scoped; no render/import/approval evidence is inferred.',
                             'A future asset must explicitly map artifact paths and hashes to these requirement IDs; file counts never automatically close gates.'],
-        'phase_ii': {'status': 'BLOCKED_EXACT_ARCHIVE_NOT_MATERIALIZED',
-                     'filename': 'Aetherion_Phase_II_Continental_Architecture_2026-10-13.zip',
-                     'expected_size_bytes': 1011575,
-                     'expected_sha256': '02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc',
-                     'item_level_inventory': None,
-                     'owner_reported_scope_not_locally_verified': {
-                         'payload_files': 115, 'deliverable_families': 20, 'regions': 15, 'capitals': 15,
-                         'architecture_kits': 15, 'architecture_module_entries': 255,
-                         'shared_environment_families': 24, 'regional_environment_variants': 272,
-                         'existing_phase_i_family_ids_refined': 210, 'city_districts': 90,
-                         'enterable_service_interiors': 45, 'pois': 318, 'baseline_pois': 63,
-                         'new_pois': 255, 'settlements': 60, 'event_contracts': 15,
-                         'counting_policy': 'Reported overlapping scope descriptions only; no local files or IDs verified, not additive to Phase I counts.'},
-                     'resolution': 'Materialize exact archive through supported Library route, verify bytes, read README and INTEGRATION_PLAN, reconcile existing IDs before extending this inventory.'},
+        'phase_ii': phase_ii,
         'inputs': [{'path': p, 'sha256': digest(ROOT / p)} for p in inputs],
         'phase_i_canon_document_catalog': [{'path': p, 'sha256': digest(ROOT / p)} for p in documents],
         'counts': counts, 'category_definitions': list(taxonomy.values()),
         'work_group_family_counts': {g: sum(w['group'] == g for w in work) for g in GROUPS},
         'acceptance_gate_definitions': GATES, 'oath_ledger': oath_ledger,
         'registered_realm_ids': realm_ids, 'production_requirements': work,
-        'detail_scope_links': list(detail_by_id.values()), 'runtime_system_obligations': systems,
+        'detail_scope_links': list(detail_by_id.values()),
+        'combined_detail_scope_links': list(combined_details.values()), 'runtime_system_obligations': systems,
         'source_castable_ledger': runtime, 'preserved_source_asset_ledger': preserved,
-        'reference_image_ledger': references,
-        'remaining_unknowns': ['Phase II archive bytes, README, integration plan, schemas and item IDs unavailable locally.',
+        'reference_image_ledger': references, 'production_candidate_deliveries': deliveries,
+        'remaining_unknowns': ['All Phase II source requirements are now locally indexed, but implementation/placement/art approval is open.',
                                'Exact final mesh/texture/clip decomposition and cross-family reuse require authoring decisions; family counts do not settle this.',
                                'Source binary production suitability, scale/UV/rig/LOD/collision and provenance acceptance are not established by hashes.',
                                'Target hardware, measured performance budgets, finished art approval and complete engine/gameplay parity remain unverified.'],
     }
     lines = ['# Production inventory and acceptance ledger', '',
              'Generated with `python3 tools/production/inventory.py`; verify without writing using `--check`.', '',
-             '**Status: blocked, incomplete production. Zero new production assets and zero accepted families.**', '',
-             'The known Phase I scope is fully indexed at family/registry granularity with a complete canon document catalog. Phase II item scope is unknown because the exact archive is not available locally. This is not a complete Phase I + II production inventory or a completed world.', '',
+             f'**Status: incomplete production. {len(deliveries)} exported candidate asset entries; zero accepted families. States and LODs do not close a family.**', '',
+             'The combined registered scope is now indexed from actual Phase I registries and the exact imported Phase II package. The ledger includes all fifteen Oaths and every Phase I category, plus concrete Phase II module/variant entries and world-system obligations. This is a work/acceptance inventory, not a completed world or an exact final mesh estimate.', '',
              '| Measure | Count |', '|---|---:|']
     for k, v in counts.items():
         if not isinstance(v, dict):
@@ -273,9 +295,19 @@ def build():
               'The 20 runtime contracts preserve their original acceptance-test specifications. Their existence is not implementation. Castable validation snapshots retain scoped source CPU claims and incomplete GPU/audio/world integration gates without upgrading them.', '',
               'This generator verifies local hashes for all 197 preserved source paths and 114 reference images, unique IDs, taxonomy classification, family dependencies and contract dependencies. It does not inspect image pixels or certify renders, import compatibility, runtime gameplay, licenses or performance.', '',
               'The ledger intentionally does not auto-close gates based on file existence. Future accepted deliveries must attach their exact paths/hashes and test/review evidence to requirement IDs; rerunning an inventory must not silently promote art.', '',
-              '## Blocked Phase II input', '',
+              '## Verified Phase II requirements and overlap', '',
               f'Required archive: `{manifest["phase_ii"]["filename"]}` ({manifest["phase_ii"]["expected_size_bytes"]:,} bytes). SHA256: `{manifest["phase_ii"]["expected_sha256"]}`.', '',
-              'Phase II summary figures retained in the JSON are owner/parent-reported, explicitly not locally verified; they describe overlaps such as 255 architecture module entries and 272 regional variants refining 210 existing Phase I family IDs. No Phase II item IDs, diagrams or item requirements have been invented from those figures. Import the unchanged ZIP and unpacked documents through the supported intake, then reconcile IDs and regenerate an extended inventory.', '']
+              'All 115 imported payload files match their exact archive bytes; the two administrative files remain inside the unchanged ZIP. Counts below are derived from those local files. New designs remain PROPOSED. Static specification checks are not implemented-world evidence.', '']
+    lines += ['| Phase II registered scope | Count |', '|---|---:|']
+    lines.extend(f'| {k.replace("_", " ")} | {v} |' for k,v in phase_ii['counts'].items() if not isinstance(v,dict))
+    lines += ['', 'The 15 architecture kits and 24 shared environment families refine **210 existing Phase I family IDs**, rather than adding 39 independent families. Their 255 module entries and 272 regional variants preserve exact source specifications and JSON-pointer locators. These are not 527 guaranteed unique meshes: reuse, terrain decomposition, state meshes and clip counts remain authoring work.', '',
+              'The 318 POIs already include the 90 districts, 45 interiors and settlement locations. All 63 baseline POI records are retained exactly; 255 POI IDs are new. Region and event IDs retain baseline identity. Repeated views of these subjects are merged into combined_detail_scope_links, with every source pointer preserved.', '',
+              'Ten streaming contracts refine named baseline contracts. Fifteen event refinements, fifteen ecology profiles, fifteen capital-layout runtime obligations and complete ecology/weather/civilization/streaming/transport/exploration documents remain implementation work. Their declarations and static tests never close runtime gates.', '',
+              '| Oath | Candidate entries | Families without candidates | Phase II refined families | Module entries | Regional variants |', '|---|---:|---:|---:|---:|---:|']
+    for row in oath_ledger:
+        phase = row['phase_ii']
+        lines.append(f'| {row["oath_id"]} | {row["candidate_asset_entries"]} | {row["families_without_candidate_deliveries"]} | {len(phase["refined_phase_i_family_ids"])} | {len(phase["architecture_module_keys"])} | {len(phase["environment_variant_keys"])} |')
+    lines += ['', 'All 510 families remain unaccepted. A family with candidate files can still lack most of its components. Exact missing mesh/clip totals therefore remain unknown, while every known category, refined requirement, source entry and acceptance gate is visible.', '']
     return {'inventory.json': json.dumps(manifest, indent=2, ensure_ascii=False) + '\n', 'INVENTORY.md': '\n'.join(lines)}
 
 
@@ -297,7 +329,8 @@ def main():
     if stale:
         print('Stale inventory outputs: ' + ', '.join(stale), file=sys.stderr)
         return 1
-    print('Inventory ' + ('verified' if args.check else 'written') + ': 510 families; 114 references; 100 source castables; 197 source paths / 112 hashes. Phase II blocked; 0 new production assets.')
+    count = json.loads(outputs['inventory.json'])['counts']['new_production_asset_deliverables']
+    print('Inventory ' + ('verified' if args.check else 'written') + f': 510 families; 114 references; 100 source castables; 197 source paths / 112 hashes. {count} candidate asset entries; 0 accepted families.')
     return 0
 
 if __name__ == '__main__':

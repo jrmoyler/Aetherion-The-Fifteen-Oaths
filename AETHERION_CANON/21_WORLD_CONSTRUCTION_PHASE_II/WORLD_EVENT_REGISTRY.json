@@ -1,0 +1,3251 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "P2-SRC-FOUNDATION",
+    "P2-SRC-DIRECTIVE",
+    "P2-SRC-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "world-event-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-01",
+      "region_id": "region-01",
+      "oath_id": "oath-01",
+      "poi_id": "poi-01-event",
+      "name": "contain or redirect an eruption",
+      "narrative": "Mara must publish the spillway choice while Ivo protects a threatened workshop; this repeatable event does not settle the permanent regional quest.",
+      "trigger": {
+        "foundation_trigger": "Pressure rises in authored vents",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Wet western winds meet volcanic heat, producing steam fog and ash rain. Eruption warnings combine ground vibration, flag patterns and audible bells; fire immunity never substitutes for oxygen or clear evacuation routes.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-01-event",
+        "refuge_poi_id": "poi-01-capital",
+        "habitat_poi_id": "p2-poi-01-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-01-leader",
+          "name": "Mara Venn",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-01-capital"
+        },
+        {
+          "character_id": "character-01-civilian",
+          "name": "Ivo Serr",
+          "task": "Inspect and brace three numbered vents; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-01-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Inspect and brace three numbered vents",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Move six resident groups to the cool court",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Vote on one pre-certified spillway after inspecting both models",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "vent_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "refuge_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "spillway_certified",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "Pressure gauges rise at three existing service vents.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Inspect and brace three numbered vents; Move six resident groups to the cool court; Vote on one pre-certified spillway after inspecting both models",
+          "transition": "vent_count == 3 AND refuge_count == 6 AND spillway_certified == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "vent_count == 3 AND refuge_count == 6 AND spillway_certified == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A cooled mineral pocket opens",
+      "setback_result": "A road closes temporarily; signed detour and relief service remain; Only the approved service-road overlay is damaged; Ivo and all quest records relocate.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-meteor",
+          "source_uid": "linear/meteor",
+          "source_name": "Cinder Fall",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/MeteorAbility.js",
+          "source_line": 62,
+          "source_observation": "Source describes a burning rock along the aimed path; geometry and visual effects are not pressure simulation.",
+          "proposed_event_use": "A separately approved impact-receipt adapter could test a sacrificial slag target in an isolated enclosure; Cinder Fall does not gain cooling, pressure relief or terrain editing.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Inspect and brace three numbered vents with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A cooled mineral pocket opens is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-01",
+        "recipe_id": "recipe-01",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Clear drainage and cap dumping before reseeding; no instant forest growth; population bands bounded, no permanent extinction",
+        "infrastructure": "Only the approved service-road overlay is damaged; Ivo and all quest records relocate.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-01",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-01-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/MeteorAbility.js#L62"
+      ]
+    },
+    {
+      "id": "world-event-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-02",
+      "region_id": "region-02",
+      "oath_id": "oath-02",
+      "poi_id": "poi-02-event",
+      "name": "recover a failing preservation chamber",
+      "narrative": "Custody staff prioritize accessible copies while conservators disagree about moving fragile originals.",
+      "trigger": {
+        "foundation_trigger": "A cold-storage regulator drifts",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Persistent cold gives way to brief melt pulses, whiteouts and crevasse shifts. Slowing zones are covenant anomalies with marked boundaries, separate from ordinary hypothermia or the Time Oath's causality questions.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-02-event",
+        "refuge_poi_id": "poi-02-capital",
+        "habitat_poi_id": "p2-poi-02-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-02-leader",
+          "name": "Sera Pell",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-02-capital"
+        },
+        {
+          "character_id": "character-02-civilian",
+          "name": "Nemi Or",
+          "task": "Seal three coolant joints with tool kits; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-02-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Seal three coolant joints with tool kits",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Transfer four catalogued crate receipts to dry storage",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Match four crate labels to the public index",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "joint_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "crate_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "index_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "A regulator drifts while meltwater increases exterior damp.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Seal three coolant joints with tool kits; Transfer four catalogued crate receipts to dry storage; Match four crate labels to the public index",
+          "transition": "joint_count == 3 AND crate_count == 4 AND index_count == 4 -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "joint_count == 3 AND crate_count == 4 AND index_count == 4",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A public collection becomes available",
+      "setback_result": "A collection moves to a temporary reading room; Public copies remain available in the warm reading room while the optional vault is closed.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-ice",
+          "source_uid": "linear/ice",
+          "source_name": "Frost Lance",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/IceAbility.js",
+          "source_line": 43,
+          "source_observation": "Source describes a glacial eruption along an aimed line and procedural crystal field; no civic refrigeration claim.",
+          "proposed_event_use": "A future descriptor could expose a training footprint for Frost Lance; no source proof of refrigeration, archival preservation or coolant repair.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Seal three coolant joints with tool kits with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A public collection becomes available is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-02",
+        "recipe_id": "recipe-02",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Reopen a marked corridor and wait a season step; frost casting cannot mint preserved food; population bands bounded, no permanent extinction",
+        "infrastructure": "Public copies remain available in the warm reading room while the optional vault is closed.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-02",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-02-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/IceAbility.js#L43"
+      ]
+    },
+    {
+      "id": "world-event-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-03",
+      "region_id": "region-03",
+      "oath_id": "oath-03",
+      "poi_id": "poi-03-event",
+      "name": "restore a contested relay link",
+      "narrative": "Emergency traffic must bypass commercial priority without deleting the queued messages.",
+      "trigger": {
+        "foundation_trigger": "A storm interrupts a tower corridor",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Orographic storms, icing and sudden crosswinds constrain travel. Lightning is channeled along marked corridors, with accessible countdown warnings and grounded shelters; routine outdoor life remains possible between events.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-03-event",
+        "refuge_poi_id": "poi-03-capital",
+        "habitat_poi_id": "p2-poi-03-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-03-leader",
+          "name": "Tal Ren",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-03-capital"
+        },
+        {
+          "character_id": "character-03-civilian",
+          "name": "Oda Kesh",
+          "task": "Ground three isolated conductors with manual switches; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-03-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Ground three isolated conductors with manual switches",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Escort two repair teams between safe lightning windows",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Deliver one checksummed queue copy to the fallback desk",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "ground_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "team_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "queue_verified",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "Storm shutters trip at the relay corridor.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Ground three isolated conductors with manual switches; Escort two repair teams between safe lightning windows; Deliver one checksummed queue copy to the fallback desk",
+          "transition": "ground_count == 3 AND team_count == 2 AND queue_verified == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "ground_count == 3 AND team_count == 2 AND queue_verified == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A scheduled travel link returns",
+      "setback_result": "A slower physical courier route operates; Courier desk carries the queue with longer fictional delivery estimates.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-thunder",
+          "source_uid": "linear/thunder",
+          "source_name": "Storm Lance",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/ThunderAbility.js",
+          "source_line": 36,
+          "source_observation": "Source describes a hand-origin aimed bolt with travel, hold and fade; no live-grid authority claim.",
+          "proposed_event_use": "A separately approved directional-contact adapter could calibrate a disconnected test conductor; Storm Lance is not authorized to recharge a live civic grid.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Ground three isolated conductors with manual switches with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A scheduled travel link returns is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-03",
+        "recipe_id": "recipe-03",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Restore sleeves and lower work disturbance during breeding windows; population bands bounded, no permanent extinction",
+        "infrastructure": "Courier desk carries the queue with longer fictional delivery estimates.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-03",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-03-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/ThunderAbility.js#L36"
+      ]
+    },
+    {
+      "id": "world-event-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-04",
+      "region_id": "region-04",
+      "oath_id": "oath-04",
+      "poi_id": "poi-04-event",
+      "name": "restore an overloaded aqueduct",
+      "narrative": "Upstream farms and harbor workers agree a measured release rather than competing to open every gate.",
+      "trigger": {
+        "foundation_trigger": "An incoming tide exposes a failed sluice",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Warm marine air brings seasonal rain, storm surge and brackish intrusion. Tide calendars are forecasts with uncertainty, and evacuation routes remain overland when magical water control fails.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-04-event",
+        "refuge_poi_id": "poi-04-capital",
+        "habitat_poi_id": "p2-poi-04-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-04-leader",
+          "name": "Elen Voss",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-04-capital"
+        },
+        {
+          "character_id": "character-04-civilian",
+          "name": "Kavi Sen",
+          "task": "Clear three matched intake screens; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-04-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Clear three matched intake screens",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Select the certified two-gate sequence from flow gauges",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Move four nursery baskets to protected freshwater pens",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "screen_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "sequence_verified",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "nursery_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "An incoming tide reveals failed screens and a stuck sluice.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Clear three matched intake screens; Select the certified two-gate sequence from flow gauges; Move four nursery baskets to protected freshwater pens",
+          "transition": "screen_count == 3 AND sequence_verified == true AND nursery_count == 4 -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "screen_count == 3 AND sequence_verified == true AND nursery_count == 4",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A trade lock opens",
+      "setback_result": "Ferry service and ration-free essential water persist; A trade lock closes temporarily while essential water and a staffed ferry remain.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-ext-kraken",
+          "source_uid": "linear-ext/kraken",
+          "source_name": "Kraken Crown",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/KrakenAbility.js",
+          "source_line": 62,
+          "source_observation": "Source describes a ground slick and ring of cephalopod arms; no water-network or gate-control claim.",
+          "proposed_event_use": "Kraken Crown may be studied for circular footprint readability only; lifting gates or commanding animals would be new mechanics, not observed source effects.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Clear three matched intake screens with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A trade lock opens is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-04",
+        "recipe_id": "recipe-04",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Alternating grazing lanes and sediment removal restore nursery band; population bands bounded, no permanent extinction",
+        "infrastructure": "A trade lock closes temporarily while essential water and a staffed ferry remain.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-04",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-04-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/KrakenAbility.js#L62"
+      ]
+    },
+    {
+      "id": "world-event-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-05",
+      "region_id": "region-05",
+      "oath_id": "oath-05",
+      "poi_id": "poi-05-event",
+      "name": "stabilize a resonant fault crossing",
+      "narrative": "Independent surveyors and quarry crews must distinguish tolerable movement from a dangerous load path.",
+      "trigger": {
+        "foundation_trigger": "Survey markers signal movement",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Rain-shadow slopes are dry, canyon bottoms flash-flood, and fault movements disrupt foundations. Seismic warnings combine sound, gauge movement and visual notices so deaf players can participate in rescue and puzzles.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-05-event",
+        "refuge_poi_id": "poi-05-capital",
+        "habitat_poi_id": "p2-poi-05-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-05-leader",
+          "name": "Deren Korr",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-05-capital"
+        },
+        {
+          "character_id": "character-05-civilian",
+          "name": "Pella Ust",
+          "task": "Read three separate foundation gauges; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-05-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Read three separate foundation gauges",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Fit two bracing modules at approved sockets",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Reroute four pedestrian groups before signing the load sheet",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "gauge_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "brace_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "reroute_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "Three gauge needles cross the surveyed caution band.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Read three separate foundation gauges; Fit two bracing modules at approved sockets; Reroute four pedestrian groups before signing the load sheet",
+          "transition": "gauge_count == 3 AND brace_count == 2 AND reroute_count == 4 -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "gauge_count == 3 AND brace_count == 2 AND reroute_count == 4",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A safe quarry section becomes available",
+      "setback_result": "A bypass crossing opens during repair; The quarry takes a temporary capacity cut and a checked bypass opens.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-ext-earth",
+          "source_uid": "linear-ext/earth",
+          "source_name": "Earthen Spire",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/EarthAbility.js",
+          "source_line": 53,
+          "source_observation": "Source describes line plates, delayed fracture and end tower; no structural load-bearing claim.",
+          "proposed_event_use": "Earthen Spire footprint comparison could train clearance inspection; its visual stone plates cannot become load-bearing bridges without a separately approved collision adapter.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Read three separate foundation gauges with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A safe quarry section becomes available is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-05",
+        "recipe_id": "recipe-05",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Pause noisy extraction windows, repair ventilation, stabilize terrace drains; population bands bounded, no permanent extinction",
+        "infrastructure": "The quarry takes a temporary capacity cut and a checked bypass opens.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-05",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-05-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/EarthAbility.js#L53"
+      ]
+    },
+    {
+      "id": "world-event-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-06",
+      "region_id": "region-06",
+      "oath_id": "oath-06",
+      "poi_id": "poi-06-event",
+      "name": "restore a disrupted public performance",
+      "narrative": "A public performance becomes a civic signal test; deaf residents demand equal access to emergency notices.",
+      "trigger": {
+        "foundation_trigger": "Wind turns the normal acoustic pattern",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Crosswinds, downdrafts and low cloud complicate travel; leeward gardens provide ordinary calm habitat. Wind warnings use moving flags, captions and vibration-compatible cues rather than sound alone.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-06-event",
+        "refuge_poi_id": "poi-06-capital",
+        "habitat_poi_id": "p2-poi-06-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-06-leader",
+          "name": "Lio Senn",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-06-capital"
+        },
+        {
+          "character_id": "character-06-civilian",
+          "name": "Amri Fell",
+          "task": "Tune three stations using equivalent visual or captioned rhythm; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-06-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Tune three stations using equivalent visual or captioned rhythm",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Move two fabric baffles without blocking nesting fissures",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Publish one verified ground-route notice",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "station_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "baffle_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "notice_verified",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "Crosswind flips banners and disrupts the acoustic pattern.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Tune three stations using equivalent visual or captioned rhythm; Move two fabric baffles without blocking nesting fissures; Publish one verified ground-route notice",
+          "transition": "station_count == 3 AND baffle_count == 2 AND notice_verified == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "station_count == 3 AND baffle_count == 2 AND notice_verified == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A safe glide window and festival return",
+      "setback_result": "A ground route and captioned civic notices remain; The performance moves to a captioned ground venue; gliding remains optional.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-collective-tempest",
+          "source_uid": "collective/tempest",
+          "source_name": "Tempest Spiral",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/abilities/collective/TempestSpiralAbility.js",
+          "source_line": 32,
+          "source_observation": "Source contains a zone tornado with a fixed MAX_GRIPS pool and sandbox body lifting; production authority unverified.",
+          "proposed_event_use": "Tempest Spiral has sandbox body lifting; an optional test on approved training dummies must exclude crowds, wildlife and transport. It does not calm regional winds.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Tune three stations using equivalent visual or captioned rhythm with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A safe glide window and festival return is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-06",
+        "recipe_id": "recipe-06",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Seasonal flight detour and untouched seed strips restore occupancy; population bands bounded, no permanent extinction",
+        "infrastructure": "The performance moves to a captioned ground venue; gliding remains optional.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-06",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-06-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/abilities/collective/TempestSpiralAbility.js#L32"
+      ]
+    },
+    {
+      "id": "world-event-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-07",
+      "region_id": "region-07",
+      "oath_id": "oath-07",
+      "poi_id": "poi-07-event",
+      "name": "contain an expanding overgrowth",
+      "narrative": "Garden crews protect access without turning restoration into indiscriminate clearing.",
+      "trigger": {
+        "foundation_trigger": "Root growth blocks planned civic paths",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Rain, fungal blooms and seasonal canopy shifts define weather. Drought and invasive overgrowth are different events requiring different responses, so healing the land never means maximizing biomass everywhere.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-07-event",
+        "refuge_poi_id": "poi-07-capital",
+        "habitat_poi_id": "p2-poi-07-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-07-leader",
+          "name": "Yara Moss",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-07-capital"
+        },
+        {
+          "character_id": "character-07-civilian",
+          "name": "Tovin Hale",
+          "task": "Prune three tagged invasive growth patches; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-07-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Prune three tagged invasive growth patches",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Transplant four habitat plugs into approved moist beds",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Leave two marked seed refuges undisturbed through inspection",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "prune_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "transplant_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "refuge_audit",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "Root growth reaches three marked civic path sockets.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Prune three tagged invasive growth patches; Transplant four habitat plugs into approved moist beds; Leave two marked seed refuges undisturbed through inspection",
+          "transition": "prune_count == 3 AND transplant_count == 4 AND refuge_audit == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "prune_count == 3 AND transplant_count == 4 AND refuge_audit == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "Farms gain a temporary soil bonus",
+      "setback_result": "Raised paths and staple food deliveries remain; Raised paths and imported staple deliveries cover a short farm-output dip.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-ext-portal",
+          "source_uid": "linear-ext/portal",
+          "source_name": "Verdant Gate",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/PortalAbility.js",
+          "source_line": 60,
+          "source_observation": "Source constructs an arch-distance portal surface on a quad; appearance alone does not prove navigable world travel.",
+          "proposed_event_use": "Verdant Gate is a source portal presentation reference; creating travel routes or instantly growing crops is not authorized by its name or element.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Prune three tagged invasive growth patches with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "Farms gain a temporary soil bonus is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-07",
+        "recipe_id": "recipe-07",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Thin invasive growth, retain deadwood pockets and replant diverse age bands; population bands bounded, no permanent extinction",
+        "infrastructure": "Raised paths and imported staple deliveries cover a short farm-output dip.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-07",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-07-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/PortalAbility.js#L60"
+      ]
+    },
+    {
+      "id": "world-event-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-08",
+      "region_id": "region-08",
+      "oath_id": "oath-08",
+      "poi_id": "poi-08-event",
+      "name": "contain a chemical-wetland spill",
+      "narrative": "Residents require independent test results before laboratory owners reopen a reagent garden.",
+      "trigger": {
+        "foundation_trigger": "Containment gauges show a leak",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Humid fog, stagnant air and seasonal floods alter exposure routes. Hazard cues name inhalation, contact or ingestion pathways without pretending the fiction is real medical guidance; safe detours remain obvious.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-08-event",
+        "refuge_poi_id": "poi-08-capital",
+        "habitat_poi_id": "p2-poi-08-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-08-leader",
+          "name": "Neris Vale",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-08-capital"
+        },
+        {
+          "character_id": "character-08-civilian",
+          "name": "Bram Ilex",
+          "task": "Isolate the two marked valves; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-08-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Isolate the two marked valves",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Match three filter cartridges to the fictional vessel labels",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Log two clean downstream samples after circulation stops",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "valve_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "filter_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "sample_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "Containment gauges identify one fictional vessel-lot leak.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Isolate the two marked valves; Match three filter cartridges to the fictional vessel labels; Log two clean downstream samples after circulation stops",
+          "transition": "valve_count == 2 AND filter_count == 3 AND sample_count == 2 -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "valve_count == 2 AND filter_count == 3 AND sample_count == 2",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A safe reagent garden reopens",
+      "setback_result": "A protected crossing and clinic remain; Protected crossing and clinic stay open; garden output pauses pending remediation.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-extended-acid",
+          "source_uid": "linear-extended/acid",
+          "source_name": "Caustic Bloom",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AcidAbility.js",
+          "source_line": 36,
+          "source_observation": "Source has bounded MAX_MELTS records and acid-pool/mist rendering; no environmental remediation claim.",
+          "proposed_event_use": "Caustic Bloom is a hazardous-effect reference, not a neutralizer or antidote. Future sandbox comparison must use isolated disposable targets, never public water.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Isolate the two marked valves with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A safe reagent garden reopens is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-08",
+        "recipe_id": "recipe-08",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Isolate fictional contaminant ledger first, then rebuild filtration habitat; population bands bounded, no permanent extinction",
+        "infrastructure": "Protected crossing and clinic stay open; garden output pauses pending remediation.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-08",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-08-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AcidAbility.js#L36"
+      ]
+    },
+    {
+      "id": "world-event-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-09",
+      "region_id": "region-09",
+      "oath_id": "oath-09",
+      "poi_id": "poi-09-event",
+      "name": "maintain a shelter during ward failure",
+      "narrative": "A tired shelter must allocate power visibly while protecting people regardless of affiliation.",
+      "trigger": {
+        "foundation_trigger": "A public ward bank runs low",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "A moderate basin climate brings seasonal fog, summer heat and flood risk. Magical radiance does not abolish night or weather; ward failures reveal dependence on maintenance rather than proving that residents were morally unworthy.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-09-event",
+        "refuge_poi_id": "poi-09-capital",
+        "habitat_poi_id": "p2-poi-09-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-09-leader",
+          "name": "Helia Mar",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-09-capital"
+        },
+        {
+          "character_id": "character-09-civilian",
+          "name": "Sorin Kes",
+          "task": "Deliver three inspected replacement power modules; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-09-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Deliver three inspected replacement power modules",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Route four requests by stated need using accessible triage cards",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Verify two shaded low-power refuge stations",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "module_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "request_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "refuge_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "Ward-bank gauge declines while heat raises demand.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Deliver three inspected replacement power modules; Route four requests by stated need using accessible triage cards; Verify two shaded low-power refuge stations",
+          "transition": "module_count == 3 AND request_count == 4 AND refuge_count == 2 -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "module_count == 3 AND request_count == 4 AND refuge_count == 2",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A sanctuary resumes full service",
+      "setback_result": "A staffed low-power refuge remains; Staffed low-power refuge and mundane relief continue; nobody is expelled for Oath standing.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-beam",
+          "source_uid": "linear/beam",
+          "source_name": "Nova Beam",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/BeamAbility.js",
+          "source_line": 46,
+          "source_observation": "Source describes sustained aimed light with charge, travel, hold and collapse; no ward charging claim.",
+          "proposed_event_use": "Nova Beam can demonstrate sustained-line visibility in a disconnected trainer. Charging wards or healing residents requires a new authority descriptor and is currently disabled.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Deliver three inspected replacement power modules with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A sanctuary resumes full service is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-09",
+        "recipe_id": "recipe-09",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Dim nonessential wards at night and restore meadow rotation; population bands bounded, no permanent extinction",
+        "infrastructure": "Staffed low-power refuge and mundane relief continue; nobody is expelled for Oath standing.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-09",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-09-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/BeamAbility.js#L46"
+      ]
+    },
+    {
+      "id": "world-event-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-10",
+      "region_id": "region-10",
+      "oath_id": "oath-10",
+      "poi_id": "poi-10-event",
+      "name": "recover a bounded meteor fall",
+      "narrative": "Forecasters must admit uncertainty while workers protect a roost and salvage recoverable scientific evidence.",
+      "trigger": {
+        "foundation_trigger": "A forecast marks an empty impact basin",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Coastal fog, strong sea wind and local gravity distortions define hazards. Anomalies have bounded volumes and safe transition zones, with motion-sickness options and a conventional-ground route through essential services.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-10-event",
+        "refuge_poi_id": "poi-10-capital",
+        "habitat_poi_id": "p2-poi-10-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-10-leader",
+          "name": "Iria Deyn",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-10-capital"
+        },
+        {
+          "character_id": "character-10-civilian",
+          "name": "Cal Ro",
+          "task": "Confirm three no-entry boundary posts; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-10-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Confirm three no-entry boundary posts",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Move two roost-monitoring teams to conventional ground",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Catalogue four cooled fragments using tethered tools",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "boundary_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "team_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "fragment_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "An announced empty-basin impact window opens after evacuation.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Confirm three no-entry boundary posts; Move two roost-monitoring teams to conventional ground; Catalogue four cooled fragments using tethered tools",
+          "transition": "boundary_count == 3 AND team_count == 2 AND fragment_count == 4 -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "boundary_count == 3 AND team_count == 2 AND fragment_count == 4",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "Scientific samples become available",
+      "setback_result": "Fallback observatories and roads remain open; Fragments are quarantined; fixed-ground observatories and roads continue.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-extended-astral",
+          "source_uid": "linear-extended/astral",
+          "source_name": "Astral Void Blast",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AstralVoidAbility.js",
+          "source_line": 47,
+          "source_observation": "Source declares MAX_GRIPS for bodies held by its sandbox effect; no continent gravity/weather authority.",
+          "proposed_event_use": "Astral Void Blast has source sandbox gripping behavior; fragment handling would require mass, ownership and release tests in an isolated adapter. It cannot summon this meteor event.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Confirm three no-entry boundary posts with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "Scientific samples become available is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-10",
+        "recipe_id": "recipe-10",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Keep anomalous volumes off roost corridors; restore conventional access; population bands bounded, no permanent extinction",
+        "infrastructure": "Fragments are quarantined; fixed-ground observatories and roads continue.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-10",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-10-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AstralVoidAbility.js#L47"
+      ]
+    },
+    {
+      "id": "world-event-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-11",
+      "region_id": "region-11",
+      "oath_id": "oath-11",
+      "poi_id": "poi-11-event",
+      "name": "stabilize a phasing civic passage",
+      "narrative": "The registry offers a stable address even while concealed offices lose alignment.",
+      "trigger": {
+        "foundation_trigger": "An approved doorway loses alignment",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Sea fog, cave damp and intermittent void pockets reduce visibility. Hazard boundaries use contour cues and spatial audio alternatives; concealment cannot remove subtitles, exits or critical combat warnings.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-11-event",
+        "refuge_poi_id": "poi-11-capital",
+        "habitat_poi_id": "p2-poi-11-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-11-leader",
+          "name": "Veya Noll",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-11-capital"
+        },
+        {
+          "character_id": "character-11-civilian",
+          "name": "Rell An",
+          "task": "Compare three doorway labels with fixed registry records; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-11-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Compare three doorway labels with fixed registry records",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Place two mundane anchor fixtures at approved sockets",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Escort four groups through the verified permanent exit",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "label_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "anchor_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "exit_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "One approved civic doorway fails its alignment check.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Compare three doorway labels with fixed registry records; Place two mundane anchor fixtures at approved sockets; Escort four groups through the verified permanent exit",
+          "transition": "label_count == 3 AND anchor_count == 2 AND exit_count == 4 -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "label_count == 3 AND anchor_count == 2 AND exit_count == 4",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A recovered wing can be explored",
+      "setback_result": "A staffed permanent registry remains; The recovered wing stays inaccessible; testimony and services remain at the permanent registry.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-handcast-voidslash",
+          "source_uid": "handcast/voidslash",
+          "source_name": "Void Slash",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/VoidSlashAbility.js",
+          "source_line": 39,
+          "source_observation": "Source explicitly describes a line cast and omits distortion layer, floor decal and white flash; no civic phasing claim.",
+          "proposed_event_use": "Void Slash is a line-effect reference. Cutting dimensions, opening civic doors or revealing private records is not established source behavior.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Compare three doorway labels with fixed registry records with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A recovered wing can be explored is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-11",
+        "recipe_id": "recipe-11",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Restore unbroken habitat strips without concealing public exits; population bands bounded, no permanent extinction",
+        "infrastructure": "The recovered wing stays inaccessible; testimony and services remain at the permanent registry.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-11",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-11-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/VoidSlashAbility.js#L39"
+      ]
+    },
+    {
+      "id": "world-event-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-12",
+      "region_id": "region-12",
+      "oath_id": "oath-12",
+      "poi_id": "poi-12-event",
+      "name": "support an exhausted voluntary rite",
+      "narrative": "A prolonged voluntary rite must stop when support runs short; reform is shown through relief, not coerced sacrifice.",
+      "trigger": {
+        "foundation_trigger": "A civic ritual outlasts its planned support",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Hot dry spells alternate with seasonal floods and cool upland nights. Lifeforce magic does not replace water, nutrition or rest; recovery logistics remain an ordinary civic concern across both prosperity and conflict.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-12-event",
+        "refuge_poi_id": "poi-12-capital",
+        "habitat_poi_id": "p2-poi-12-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-12-leader",
+          "name": "Adra Kest",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-12-capital"
+        },
+        {
+          "character_id": "character-12-civilian",
+          "name": "Oren Sol",
+          "task": "Deliver four food-and-water bundles; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-12-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Deliver four food-and-water bundles",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Staff three rest rotations",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Record one witnessed stop decision with withdrawal always available",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "bundle_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "rotation_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "stop_witnessed",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "The support ledger reaches its posted rest threshold.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Deliver four food-and-water bundles; Staff three rest rotations; Record one witnessed stop decision with withdrawal always available",
+          "transition": "bundle_count == 4 AND rotation_count == 3 AND stop_witnessed == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "bundle_count == 4 AND rotation_count == 3 AND stop_witnessed == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A community service resumes",
+      "setback_result": "Ordinary relief services continue without sacrifice; The rite stops safely; normal relief runs and no participant loses standing for refusal.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-handcast-flux",
+          "source_uid": "handcast/flux",
+          "source_name": "Shimmering Flux",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/ShimmeringFluxAbility.js",
+          "source_line": 47,
+          "source_observation": "Source describes a six-layer linear cast; no authoritative lifeforce economy or healing inference.",
+          "proposed_event_use": "Shimmering Flux is a linear visual source. Lifeforce donation, healing, health costs or coercion are not enabled; future visual demonstrations need a content-safe training option.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Deliver four food-and-water bundles with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A community service resumes is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-12",
+        "recipe_id": "recipe-12",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Rest stock and repair water stops; lifeforce effects do not replace nutrition; population bands bounded, no permanent extinction",
+        "infrastructure": "The rite stops safely; normal relief runs and no participant loses standing for refusal.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-12",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-12-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/ShimmeringFluxAbility.js#L47"
+      ]
+    },
+    {
+      "id": "world-event-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-13",
+      "region_id": "region-13",
+      "oath_id": "oath-13",
+      "poi_id": "poi-13-event",
+      "name": "resolve a rearranged public stage",
+      "narrative": "Stage workers separate a compelling illusion from a truthful public building.",
+      "trigger": {
+        "foundation_trigger": "A civic performance misaligns its approved rooms",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Dry summers, cool nights and episodic valley fog shape the region. Illusions may change perceived weather only in bounded authored scenes; actual hazards retain accessible cues and cannot be hidden by decorative spectacle.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-13-event",
+        "refuge_poi_id": "poi-13-capital",
+        "habitat_poi_id": "p2-poi-13-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-13-leader",
+          "name": "Mirren Fane",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-13-capital"
+        },
+        {
+          "character_id": "character-13-civilian",
+          "name": "Seli Dorn",
+          "task": "Compare three plain-surface plans against physical doors; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-13-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Compare three plain-surface plans against physical doors",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Lock two room modules after occupants clear",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Publish one verified route map before reopening",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "plan_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "lock_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "map_verified",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "A civic performance misaligns three approved room modules.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Compare three plain-surface plans against physical doors; Lock two room modules after occupants clear; Publish one verified route map before reopening",
+          "transition": "plan_count == 3 AND lock_count == 2 AND map_verified == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "plan_count == 3 AND lock_count == 2 AND map_verified == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A new optional puzzle scene opens",
+      "setback_result": "Fixed exits and a conventional route persist; Performance uses a conventional stage with fixed exits and plain signage.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-ext-magic",
+          "source_uid": "linear-ext/magic",
+          "source_name": "Magic Boost",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/effects/MagicBoost.js",
+          "source_line": 31,
+          "source_observation": "Source explicitly describes an untargeted self effect, not an Ability, with ramp/hold/ramp envelope.",
+          "proposed_event_use": "Magic Boost is a self-centered visual effect with no target or travelling front. It cannot move rooms, alter collision or serve as proof of puzzle truth.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Compare three plain-surface plans against physical doors with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A new optional puzzle scene opens is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-13",
+        "recipe_id": "recipe-13",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Rotate festival grounds and restore hedgerow cover with visible true exits; population bands bounded, no permanent extinction",
+        "infrastructure": "Performance uses a conventional stage with fixed exits and plain signage.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-13",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-13-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/effects/MagicBoost.js#L31"
+      ]
+    },
+    {
+      "id": "world-event-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-14",
+      "region_id": "region-14",
+      "oath_id": "oath-14",
+      "poi_id": "poi-14-event",
+      "name": "resynchronize a temporal transport corridor",
+      "narrative": "Timetable officials must accept delay so tired travelers and migrating animals can cross safely.",
+      "trigger": {
+        "foundation_trigger": "A local schedule slips out of safe phase",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Seasonal drought, flash flooding and local time stutters constrain travel. Temporal anomalies have marked boundaries and consistent entry/exit behavior; ordinary weather and fatigue continue to matter outside them.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-14-event",
+        "refuge_poi_id": "poi-14-capital",
+        "habitat_poi_id": "p2-poi-14-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-14-leader",
+          "name": "Jalen Rusk",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-14-capital"
+        },
+        {
+          "character_id": "character-14-civilian",
+          "name": "Tessa Wren",
+          "task": "Set three physical vehicle brakes; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-14-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Set three physical vehicle brakes",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Match two independent clock faces with visual timing aids",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Open one wildlife crossing before departure authorization",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "brake_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "clock_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "crossing_verified",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "One bounded corridor schedule misses its safe phase.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Set three physical vehicle brakes; Match two independent clock faces with visual timing aids; Open one wildlife crossing before departure authorization",
+          "transition": "brake_count == 3 AND clock_count == 2 AND crossing_verified == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "brake_count == 3 AND clock_count == 2 AND crossing_verified == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A transport service resumes",
+      "setback_result": "A ground service and safe waiting space remain; Ground transport and a safe waiting room replace the optional temporal service.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-collective-blink",
+          "source_uid": "collective/blink",
+          "source_name": "Blink Step",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/abilities/collective/BlinkStepAbility.js",
+          "source_line": 60,
+          "source_observation": "Source explicitly moves CharacterController position; production collision and network travel remain unverified.",
+          "proposed_event_use": "Blink Step moves the sandbox caster; optional validated travel needs destination ownership, collision and no-cargo-duplication tests. It never rewinds event or market ledgers.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Set three physical vehicle brakes with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A transport service resumes is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-14",
+        "recipe_id": "recipe-14",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Open crossings, reseed verges, retire event detours after flood recession; population bands bounded, no permanent extinction",
+        "infrastructure": "Ground transport and a safe waiting room replace the optional temporal service.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-14",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-14-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/abilities/collective/BlinkStepAbility.js#L60"
+      ]
+    },
+    {
+      "id": "world-event-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "refinement_of": "world-event-15",
+      "region_id": "region-15",
+      "oath_id": "oath-15",
+      "poi_id": "poi-15-event",
+      "name": "rebuild a disabled infrastructure engine",
+      "narrative": "Workers insist that restarting public machinery requires inspection rather than a production quota.",
+      "trigger": {
+        "foundation_trigger": "A civic actuator enters safety shutdown",
+        "eligibility": "Scheduled deterministic regional threshold; no player can force activation by damaging public assets",
+        "required_state": "Cooldown elapsed; catchment lease granted; fallback NPC and route checks pass",
+        "weather_link": "Humid coastal summers, storm surges and industrial heat islands define weather. Waste heat and exhaust have bounded environmental consequences, and safety warnings remain legible through rain, steam and dense machinery.",
+        "trigger_scope": "Weather may qualify a schedule, never directly spawn an unannounced disaster"
+      },
+      "location": {
+        "hazard_poi_id": "poi-15-event",
+        "refuge_poi_id": "poi-15-capital",
+        "habitat_poi_id": "p2-poi-15-habitat",
+        "placement": "Authored local subvolumes only; final coordinates/navmesh unresolved; never expands across public service routes"
+      },
+      "npc_roles": [
+        {
+          "character_id": "character-15-leader",
+          "name": "Tarek Voss",
+          "task": "Publish the response plan and its limits; cannot unilaterally change personal story outcomes",
+          "refuge_poi_id": "poi-15-capital"
+        },
+        {
+          "character_id": "character-15-civilian",
+          "name": "Una Brin",
+          "task": "Inspect three isolated modules; offers tools and audits completion without conscripting residents",
+          "refuge_poi_id": "poi-15-capital"
+        }
+      ],
+      "player_roles": [
+        {
+          "role": "civic_craft",
+          "goal": "Inspect three isolated modules",
+          "binding_required": false
+        },
+        {
+          "role": "logistics_or_rescue",
+          "goal": "Deliver two serialized components from the project ledger",
+          "binding_required": false
+        },
+        {
+          "role": "survey_or_negotiation",
+          "goal": "Complete one dry-run test with pedestrian barriers verified",
+          "binding_required": false
+        },
+        {
+          "role": "optional_combat",
+          "goal": "Protect an explicitly consenting crew in a separate authored PvE encounter; this never replaces mandatory civilian progress",
+          "binding_required": false
+        }
+      ],
+      "state_variables": [
+        {
+          "name": "module_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "component_count",
+          "type": "integer",
+          "initial": 0,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        },
+        {
+          "name": "dryrun_verified",
+          "type": "boolean",
+          "initial": false,
+          "authority": "Server validates one receipt per distinct authored objective socket; duplicate actions do not increment"
+        }
+      ],
+      "phases": [
+        {
+          "name": "forecast",
+          "duration_ms": 120000,
+          "entry_action": "A civic actuator enters a posted safety shutdown.",
+          "transition": "Elapsed duration AND arbiter owns catchment -> activation",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "activation",
+          "duration_ms": 30000,
+          "entry_action": "Validate protected routes, prepare civilian tools, retain fixed objective thresholds; cancel to recovery if any essential route fails.",
+          "transition": "Protected-route failure -> reconstruction; otherwise elapsed duration -> response",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "response",
+          "duration_ms": 600000,
+          "entry_action": "Inspect three isolated modules; Deliver two serialized components from the project ledger; Complete one dry-run test with pedestrian barriers verified",
+          "transition": "module_count == 3 AND component_count == 2 AND dryrun_verified == true -> resolution(success); elapsed duration -> resolution(setback)",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "resolution",
+          "duration_ms": 30000,
+          "entry_action": "Atomically evaluate the named objective predicate once; issue success or setback receipt.",
+          "transition": "Committed outcome -> reconstruction",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "reconstruction",
+          "duration_ms": 600000,
+          "entry_action": "Restore the public service floor first; offer regional repair and habitat work.",
+          "transition": "Service deadline reached -> cooldown even with zero contributions",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        },
+        {
+          "name": "cooldown",
+          "duration_ms": 900000,
+          "entry_action": "Retire presentation overlays, reconcile budgets and reset only transient objectives.",
+          "transition": "Elapsed duration AND ledger reconciled AND arbiter grants new slot -> forecast; otherwise remain nonhazardous cooldown",
+          "reentry": "Apply once per event_instance_id + phase_revision; repeated entry returns prior receipt"
+        }
+      ],
+      "success_predicate": "module_count == 3 AND component_count == 2 AND dryrun_verified == true",
+      "failure_predicate": "Response deadline expires before success predicate, or safety validation fails; safety abort is an unpenalized setback, not player fault",
+      "success_result": "A public industrial service resumes",
+      "setback_result": "Manual service and protected pedestrian paths remain; Manual civic service continues while the actuator remains locked out.",
+      "castable_interactions": [
+        {
+          "castable_world_id": "castable-world-linear-extended-cyber",
+          "source_uid": "linear-extended/cyber",
+          "source_name": "Cyber Serpent",
+          "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/CyberSerpentAbility.js",
+          "source_line": 40,
+          "source_observation": "Source describes a holographic construct on an aimed line using the snake model; not an autonomous worker.",
+          "proposed_event_use": "Cyber Serpent is a holographic line construct; autonomous repairs, machine control or power generation would be new mechanics and stay disabled.",
+          "status": "PROPOSED_ADAPTER_DISABLED",
+          "enabled": false,
+          "activation_gates": [
+            "Per-UID source phenomenon inspection",
+            "Approved separate event-extension descriptor",
+            "Server target/material/ownership/expiry adapter",
+            "Protected-service, accessibility, exploit and rollback tests"
+          ],
+          "ordinary_alternative": "Inspect three isolated modules with public tools; equal completion credit"
+        }
+      ],
+      "rewards": {
+        "budget_units": 100,
+        "budget_unit_definition": "Non-item prototype civic-credit accounting units, not currency balance or an item grant",
+        "allocation": "Allocate finite event pool by verified distinct contribution units, cap each account at 10 units; remainder is unissued, never rolled into another event",
+        "receipt_key": "event_instance_id + account_id + reward_version",
+        "missed_event": "Equivalent core progression and essential resources available through ordinary regional commissions",
+        "success_only_optional": "A public industrial service resumes is an optional opportunity, not exclusive permanent power"
+      },
+      "consequences": {
+        "economy_id": "economy-15",
+        "recipe_id": "recipe-15",
+        "production_multiplier_bounds": [
+          0.8,
+          1.2
+        ],
+        "modifier_duration_ms": 900000,
+        "ecology": "Sort waste, cool safe nesting boxes and restore drainage before planting; population bands bounded, no permanent extinction",
+        "infrastructure": "Manual civic service continues while the actuator remains locked out.",
+        "housing": "Only reversible exterior overlays; entitlement, inventory, garden caretaker state and safe entry untouched",
+        "story": "Personal story flags remain separate; repeatable event outcome cannot undo a regional quest decision"
+      },
+      "recovery": {
+        "disconnect": "Resume at safe checkpoint and retain verified contribution",
+        "server_restart": "Replay last committed phase; skip stale danger into recovery",
+        "low_participation": "Reduce interaction effort or add NPC assistance per unfinished socket; fixed named success counts never change during an instance. NPC assistance grants no player contribution receipt. Deadline still guarantees reconstruction.",
+        "missed_event": "Core story and essential resources remain obtainable elsewhere"
+      },
+      "reset": {
+        "preserved": [
+          "Verified reward receipts",
+          "Player inventory and housing",
+          "Personal quest decisions",
+          "Conservation and cargo ledgers"
+        ],
+        "cleared": [
+          "Transient objective counters",
+          "Hazard and cosmetic overlays",
+          "Temporary capped production modifier"
+        ],
+        "offline": "No new rewards or completed objectives from offline time; expire stale hazard to reconstruction and restore essential services on first safe load",
+        "duration_status": "PROPOSED_UNVALIDATED_FIXTURE"
+      },
+      "grief_limits": [
+        "No participant can extend danger indefinitely",
+        "Cross-scope hostile effects denied",
+        "Contribution caps and repeated-action diminishing returns",
+        "No blockade of protected exits",
+        "Only whitelisted sockets accept receipts; no player writes pressure, weather, phase time or NPC health",
+        "Late arrivals never raise objectives; no punitive difficulty from spectators",
+        "Player-built collision, allied damage and casts cannot close refuge corridors"
+      ],
+      "accessible_feedback": [
+        "Captioned forecast",
+        "Map route overlay",
+        "Shape-coded objective markers",
+        "Persistent phase and recovery timer",
+        "No mandatory rapid tapping, hearing, pitch, color discrimination or camera shake",
+        "Hazard countdowns and current route remain available in reduced effects mode"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json#/world-event-15",
+        "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json#/character-15-civilian",
+        "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/CyberSerpentAbility.js#L40"
+      ]
+    }
+  ]
+}

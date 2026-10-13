@@ -1,0 +1,243 @@
+{
+  "scope": "Blender 4.3.2 CPU source open and actual GLB import / evaluated animation checks; not Unreal/Godot/Three.js validation",
+  "files": [
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+      "sha256": "3dbe1f827dac22e9fe2d92cf228eec3d6e5c47fd2a63faef3f455486e1232346",
+      "meshObjects": 1,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release",
+        "idle_breath",
+        "walk_in_place"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 2577,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 2577,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 2577,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.42399999499320984,
+          -0.01800001971423626,
+          0.9449999332427979
+        ],
+        "cast_origin": [
+          -0.42800000309944153,
+          -0.08800002187490463,
+          0.9439998865127563
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      }
+    },
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "sha256": "0f0e975e906600b00291bc8957e94ed0d904b69a5756039036dd4c965e4e570f",
+      "meshObjects": 2,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release_Kiln_Ninja_Rig",
+        "idle_breath_Kiln_Ninja_Rig",
+        "walk_in_place_Kiln_Ninja_Rig"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 11239,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 11239,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 11239,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.4240000247955322,
+          -0.018000127747654915,
+          0.9449994564056396
+        ],
+        "cast_origin": [
+          -0.4280000925064087,
+          -0.08800013363361359,
+          0.9439994096755981
+        ],
+        "hit_reference": [
+          4.107426399002634e-09,
+          -0.1199999451637268,
+          1.3299999237060547
+        ],
+        "stow": [
+          -5.134283664887107e-09,
+          0.15000005066394806,
+          1.369999885559082
+        ]
+      }
+    },
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "sha256": "6ac3c6b40af4d3d347a93c23af75cc3fa76925309ba847ac0dd24e274672e89e",
+      "meshObjects": 2,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release_Kiln_Ninja_Rig",
+        "idle_breath_Kiln_Ninja_Rig",
+        "walk_in_place_Kiln_Ninja_Rig"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 7666,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 7666,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 7666,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.4240000247955322,
+          -0.018000127747654915,
+          0.9449994564056396
+        ],
+        "cast_origin": [
+          -0.4280000925064087,
+          -0.08800013363361359,
+          0.9439994096755981
+        ],
+        "hit_reference": [
+          4.107426399002634e-09,
+          -0.1199999451637268,
+          1.3299999237060547
+        ],
+        "stow": [
+          -5.134283664887107e-09,
+          0.15000005066394806,
+          1.369999885559082
+        ]
+      }
+    },
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "sha256": "2b72507211f21ef590485145a58d01f95f8050ce644c3ca3c5c22582389ab383",
+      "meshObjects": 2,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release_Kiln_Ninja_Rig",
+        "idle_breath_Kiln_Ninja_Rig",
+        "walk_in_place_Kiln_Ninja_Rig"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 4497,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 4497,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 4497,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.4240000247955322,
+          -0.018000127747654915,
+          0.9449994564056396
+        ],
+        "cast_origin": [
+          -0.4280000925064087,
+          -0.08800013363361359,
+          0.9439994096755981
+        ],
+        "hit_reference": [
+          4.107426399002634e-09,
+          -0.1199999451637268,
+          1.3299999237060547
+        ],
+        "stow": [
+          -5.134283664887107e-09,
+          0.15000005066394806,
+          1.369999885559082
+        ]
+      }
+    },
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+      "sha256": "793312eba824a1f018bff35a9b0c71fb62fc04e626a5d81c7b57da0d1c2b64ee",
+      "meshObjects": 1,
+      "armatures": 0,
+      "boneCounts": [],
+      "actionNames": [],
+      "images": 0,
+      "finitePoses": []
+    }
+  ]
+}

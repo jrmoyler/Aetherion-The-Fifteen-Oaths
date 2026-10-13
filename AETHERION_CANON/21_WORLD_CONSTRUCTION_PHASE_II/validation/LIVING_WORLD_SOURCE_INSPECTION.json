@@ -1,0 +1,141 @@
+{
+  "status": "STATIC_INSPECTION_ONLY",
+  "baseline_commit": "5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+  "records": [
+    {
+      "region_id": "region-01",
+      "source_uid": "linear/meteor",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/MeteorAbility.js",
+      "line": 62,
+      "sha256": "e653b4f207041c8e6752c679751f06eaeadb6daf438b26b05655a3f519468f54",
+      "observation": "Source describes a burning rock along the aimed path; geometry and visual effects are not pressure simulation.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-02",
+      "source_uid": "linear/ice",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/IceAbility.js",
+      "line": 43,
+      "sha256": "05e6be8eb83cf1757fcda9d883f0ca1ab785c9ade441090389fe6a1a0b980d10",
+      "observation": "Source describes a glacial eruption along an aimed line and procedural crystal field; no civic refrigeration claim.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-03",
+      "source_uid": "linear/thunder",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/ThunderAbility.js",
+      "line": 36,
+      "sha256": "11628f925ec9f07424b5a1f67b13e11d883ea64a507c55408dca7dc4d2a90276",
+      "observation": "Source describes a hand-origin aimed bolt with travel, hold and fade; no live-grid authority claim.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-04",
+      "source_uid": "linear-ext/kraken",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/KrakenAbility.js",
+      "line": 62,
+      "sha256": "53caf497eac5b4c5cec0ae6deec40b0c8c7ad893a37c85829af9af03a2ba67c7",
+      "observation": "Source describes a ground slick and ring of cephalopod arms; no water-network or gate-control claim.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-05",
+      "source_uid": "linear-ext/earth",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/EarthAbility.js",
+      "line": 53,
+      "sha256": "e7b6853b7ca865699078288e4207f66c6062fa254b6eeeb07184dc57fded09c5",
+      "observation": "Source describes line plates, delayed fracture and end tower; no structural load-bearing claim.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-06",
+      "source_uid": "collective/tempest",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/abilities/collective/TempestSpiralAbility.js",
+      "line": 32,
+      "sha256": "9d979a538bef3a97d752f57ce221ef4aa9a7299c578e98fa5b107fdbc97c06da",
+      "observation": "Source contains a zone tornado with a fixed MAX_GRIPS pool and sandbox body lifting; production authority unverified.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-07",
+      "source_uid": "linear-ext/portal",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/PortalAbility.js",
+      "line": 60,
+      "sha256": "dd2f41f1a927ae6952e120bbaf0d8d6f4f9b18bee4fc1de47c1e4dac69f8527b",
+      "observation": "Source constructs an arch-distance portal surface on a quad; appearance alone does not prove navigable world travel.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-08",
+      "source_uid": "linear-extended/acid",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AcidAbility.js",
+      "line": 36,
+      "sha256": "01c9c21e46fa6c5e5db24be68873c36db8e4d0a93165874af26ecbece06956a2",
+      "observation": "Source has bounded MAX_MELTS records and acid-pool/mist rendering; no environmental remediation claim.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-09",
+      "source_uid": "linear/beam",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/BeamAbility.js",
+      "line": 46,
+      "sha256": "dda96c1301ec15e178dcf27d673a416e4a2e2c678fe3df6f6b47cd01a4a628b3",
+      "observation": "Source describes sustained aimed light with charge, travel, hold and collapse; no ward charging claim.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-10",
+      "source_uid": "linear-extended/astral",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AstralVoidAbility.js",
+      "line": 47,
+      "sha256": "7482a1ed91a512d604b5cb06303eb654ee648d91ea2ac12bbcba6e8ebd63cdfe",
+      "observation": "Source declares MAX_GRIPS for bodies held by its sandbox effect; no continent gravity/weather authority.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-11",
+      "source_uid": "handcast/voidslash",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/VoidSlashAbility.js",
+      "line": 39,
+      "sha256": "5cbb8222139ce0255a0ccd98afaeb447ac34955a66d72e1aba649d2f63d99a7d",
+      "observation": "Source explicitly describes a line cast and omits distortion layer, floor decal and white flash; no civic phasing claim.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-12",
+      "source_uid": "handcast/flux",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/ShimmeringFluxAbility.js",
+      "line": 47,
+      "sha256": "a4a76bc5b19fc044e76a3f3aeb52558bfd3ab1920ffbb133fb87a47137fd61e3",
+      "observation": "Source describes a six-layer linear cast; no authoritative lifeforce economy or healing inference.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-13",
+      "source_uid": "linear-ext/magic",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/effects/MagicBoost.js",
+      "line": 31,
+      "sha256": "eef1c2e08ea3ffa9932a63184a8314c8a5ebf15542f4d8082a877f0037a09f72",
+      "observation": "Source explicitly describes an untargeted self effect, not an Ability, with ramp/hold/ramp envelope.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-14",
+      "source_uid": "collective/blink",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/abilities/collective/BlinkStepAbility.js",
+      "line": 60,
+      "sha256": "81d15483d322848276c5baf40026df9701ae823a05918217cdfd610b281debac",
+      "observation": "Source explicitly moves CharacterController position; production collision and network travel remain unverified.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    },
+    {
+      "region_id": "region-15",
+      "source_uid": "linear-extended/cyber",
+      "source_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/CyberSerpentAbility.js",
+      "line": 40,
+      "sha256": "de5394cc93c278be6dde9d1458048fd6a0160254d797995d12a03ad918505553",
+      "observation": "Source describes a holographic construct on an aimed line using the snake model; not an autonomous worker.",
+      "verification": "STATIC_INSPECTION_ONLY_NOT_GPU_OR_GAMEPLAY_CERTIFICATION"
+    }
+  ]
+}

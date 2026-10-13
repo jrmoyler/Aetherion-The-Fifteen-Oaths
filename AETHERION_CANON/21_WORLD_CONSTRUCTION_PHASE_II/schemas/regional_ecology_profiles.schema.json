@@ -1,0 +1,142 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "region_id",
+          "oath_id",
+          "basin_ids",
+          "habitat_poi_id",
+          "resource_poi_id",
+          "climate",
+          "substrate",
+          "habitat_sequence",
+          "seasonal_cycle",
+          "land_use_loop",
+          "pressure",
+          "migration",
+          "recovery",
+          "foundation_ecology",
+          "source_refs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "basin_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "habitat_poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resource_poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "climate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "substrate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "habitat_sequence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "seasonal_cycle": {
+            "type": "string",
+            "minLength": 1
+          },
+          "land_use_loop": {
+            "type": "string",
+            "minLength": 1
+          },
+          "pressure": {
+            "type": "string",
+            "minLength": 1
+          },
+          "migration": {
+            "type": "string",
+            "minLength": 1
+          },
+          "recovery": {
+            "type": "string",
+            "minLength": 1
+          },
+          "foundation_ecology": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "minItems": 15,
+      "maxItems": 15
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PROPOSED Phase II regional_ecology_profiles"
+}

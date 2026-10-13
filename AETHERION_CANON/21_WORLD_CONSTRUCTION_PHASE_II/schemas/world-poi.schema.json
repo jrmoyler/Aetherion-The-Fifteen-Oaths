@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aetherion-phase2/schemas/world-poi.schema.json",
+  "$comment": "Planning-package schema identifier, not a hosted service.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "capital",
+              "contested_border",
+              "district",
+              "dungeon",
+              "endgame_assembly",
+              "event",
+              "housing",
+              "interior",
+              "neutral_service",
+              "outpost",
+              "pvp",
+              "resource_site",
+              "secret",
+              "settlement",
+              "village",
+              "wildlife_habitat",
+              "worldboss"
+            ]
+          },
+          "region_id": {
+            "type": "string",
+            "pattern": "^region-(0[1-9]|1[0-5])$"
+          },
+          "oath_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^oath-(0[1-9]|1[0-5])$"
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "narrative_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "access_requirement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "persistence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "coordinate_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "essential_access_fallback": {
+            "type": "string",
+            "minLength": 1
+          },
+          "adjacent_region_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "baseline_refinement": {
+            "type": "boolean"
+          },
+          "parent_poi_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "region_id",
+          "oath_id",
+          "canon_status",
+          "source_ids",
+          "description",
+          "narrative_scope",
+          "access_requirement",
+          "persistence",
+          "coordinate_status",
+          "essential_access_fallback"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "canon_status",
+    "records"
+  ]
+}

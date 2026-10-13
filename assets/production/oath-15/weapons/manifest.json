@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o15-e-weapons-family",
+  "referenceIds": [
+    "reference-032"
+  ],
+  "status": "PARTIAL_PRODUCTION_CANDIDATES_UNREVIEWED",
+  "coordinateContract": "Blender meters +Y forward +Z up; GLB Y-up; grip origin proposed",
+  "assets": [
+    {
+      "id": "impulse-hammer-long-grip",
+      "archetypeId": "impulse-hammer",
+      "name": "Impulse Hammer Long Grip",
+      "type": "equipment",
+      "variant": "long-grip",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip.blend",
+        "glb": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip.glb",
+        "lod1": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-lod1.glb",
+        "lod2": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-lod2.glb",
+        "collision": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-collision.glb",
+        "textures": [
+          "assets/production/oath-15/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-15/weapons/textures/steel_orm.png",
+          "assets/production/oath-15/weapons/textures/steel_normal.png",
+          "assets/production/oath-15/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-15/weapons/textures/iron_orm.png",
+          "assets/production/oath-15/weapons/textures/iron_normal.png",
+          "assets/production/oath-15/weapons/textures/orange_basecolor.png",
+          "assets/production/oath-15/weapons/textures/orange_orm.png",
+          "assets/production/oath-15/weapons/textures/orange_normal.png",
+          "assets/production/oath-15/weapons/textures/rubber_basecolor.png",
+          "assets/production/oath-15/weapons/textures/rubber_orm.png",
+          "assets/production/oath-15/weapons/textures/rubber_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-hero.png",
+          "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-side.png",
+          "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 6708,
+        "lod1": 3454,
+        "lod2": 1772,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.482,
+        1.486,
+        0.292
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval; finer manufacturing seams and scuffed edge fidelity",
+        "Character grip/forearm and belt-fit calibration",
+        "Damaged states absent",
+        "Actual engine imports, LOD transitions and performance",
+        "Impulse VFX/audio and gameplay integration",
+        "Current overall lengths 1.486m long / 0.836m short versus reference 1.40m / 0.75m; nominal scale adjustment remains open"
+      ],
+      "referenceIds": [
+        "reference-032"
+      ]
+    },
+    {
+      "id": "impulse-hammer-short-grip",
+      "archetypeId": "impulse-hammer",
+      "name": "Impulse Hammer Short Grip",
+      "type": "equipment",
+      "variant": "short-grip",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip.blend",
+        "glb": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip.glb",
+        "lod1": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-lod1.glb",
+        "lod2": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-lod2.glb",
+        "collision": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-collision.glb",
+        "textures": [
+          "assets/production/oath-15/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-15/weapons/textures/steel_orm.png",
+          "assets/production/oath-15/weapons/textures/steel_normal.png",
+          "assets/production/oath-15/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-15/weapons/textures/iron_orm.png",
+          "assets/production/oath-15/weapons/textures/iron_normal.png",
+          "assets/production/oath-15/weapons/textures/orange_basecolor.png",
+          "assets/production/oath-15/weapons/textures/orange_orm.png",
+          "assets/production/oath-15/weapons/textures/orange_normal.png",
+          "assets/production/oath-15/weapons/textures/rubber_basecolor.png",
+          "assets/production/oath-15/weapons/textures/rubber_orm.png",
+          "assets/production/oath-15/weapons/textures/rubber_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-hero.png",
+          "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-side.png",
+          "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 5436,
+        "lod1": 2798,
+        "lod2": 1452,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.482,
+        0.836,
+        0.292
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval; finer manufacturing seams and scuffed edge fidelity",
+        "Character grip/forearm and belt-fit calibration",
+        "Damaged states absent",
+        "Actual engine imports, LOD transitions and performance",
+        "Impulse VFX/audio and gameplay integration",
+        "Current overall lengths 1.486m long / 0.836m short versus reference 1.40m / 0.75m; nominal scale adjustment remains open"
+      ],
+      "referenceIds": [
+        "reference-032"
+      ]
+    },
+    {
+      "id": "impulse-folding-shield-unfolded",
+      "archetypeId": "impulse-folding-shield",
+      "name": "Impulse Folding Shield Unfolded",
+      "type": "equipment",
+      "variant": "unfolded",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded.blend",
+        "glb": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded.glb",
+        "lod1": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-lod1.glb",
+        "lod2": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-lod2.glb",
+        "collision": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-collision.glb",
+        "textures": [
+          "assets/production/oath-15/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-15/weapons/textures/steel_orm.png",
+          "assets/production/oath-15/weapons/textures/steel_normal.png",
+          "assets/production/oath-15/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-15/weapons/textures/iron_orm.png",
+          "assets/production/oath-15/weapons/textures/iron_normal.png",
+          "assets/production/oath-15/weapons/textures/orange_basecolor.png",
+          "assets/production/oath-15/weapons/textures/orange_orm.png",
+          "assets/production/oath-15/weapons/textures/orange_normal.png",
+          "assets/production/oath-15/weapons/textures/rubber_basecolor.png",
+          "assets/production/oath-15/weapons/textures/rubber_orm.png",
+          "assets/production/oath-15/weapons/textures/rubber_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-hero.png",
+          "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-side.png",
+          "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-front.png",
+          "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-animated-pose-frame18.png"
+        ]
+      },
+      "triangles": {
+        "glb": 5004,
+        "lod1": 2646,
+        "lod2": 1394,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.5,
+        0.93,
+        0.2225
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "ARTICULATED_MECHANICAL_SHIELD",
+        "status": "AUTHORED_UNVERIFIED",
+        "boneCount": 2
+      },
+      "animations": [
+        {
+          "name": "shield_fold_unfold",
+          "durationSeconds": 1.9583333333333333
+        }
+      ],
+      "remainingGates": [
+        "Art approval; finer manufacturing seams and scuffed edge fidelity",
+        "Character grip/forearm and belt-fit calibration",
+        "Damaged states absent",
+        "Actual engine imports, LOD transitions and performance",
+        "Impulse VFX/audio and gameplay integration",
+        "Reference25cm folded length needs longitudinal telescoping mechanism; current clip folds width only",
+        "Animation clearance/collision checks on representative arm",
+        "Current unfolded Y length 0.93m versus reference 0.95m; nominal scale adjustment remains open"
+      ],
+      "referenceIds": [
+        "reference-032"
+      ]
+    },
+    {
+      "id": "impulse-belt-module-ready",
+      "archetypeId": "impulse-belt-module",
+      "name": "Impulse Belt Module Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready.blend",
+        "glb": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready.glb",
+        "lod1": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-lod1.glb",
+        "lod2": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-lod2.glb",
+        "collision": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-15/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-15/weapons/textures/steel_orm.png",
+          "assets/production/oath-15/weapons/textures/steel_normal.png",
+          "assets/production/oath-15/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-15/weapons/textures/iron_orm.png",
+          "assets/production/oath-15/weapons/textures/iron_normal.png",
+          "assets/production/oath-15/weapons/textures/orange_basecolor.png",
+          "assets/production/oath-15/weapons/textures/orange_orm.png",
+          "assets/production/oath-15/weapons/textures/orange_normal.png",
+          "assets/production/oath-15/weapons/textures/rubber_basecolor.png",
+          "assets/production/oath-15/weapons/textures/rubber_orm.png",
+          "assets/production/oath-15/weapons/textures/rubber_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-hero.png",
+          "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-side.png",
+          "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 980,
+        "lod1": 544,
+        "lod2": 312,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.094,
+        0.28,
+        0.0875
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval; finer manufacturing seams and scuffed edge fidelity",
+        "Character grip/forearm and belt-fit calibration",
+        "Damaged states absent",
+        "Actual engine imports, LOD transitions and performance",
+        "Impulse VFX/audio and gameplay integration"
+      ],
+      "referenceIds": [
+        "reference-032"
+      ]
+    }
+  ]
+}

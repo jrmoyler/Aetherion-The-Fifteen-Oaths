@@ -5,9 +5,12 @@ First run ``python tools/production/import_phase_ii.py ARCHIVE --inspect``.
 Read the emitted README and INTEGRATION_PLAN, reconcile their instructions, then
 run with ``--reviewed-documents TOKEN`` using the printed review token. This token
 acknowledges the exact documents and mapping; it does not grant design approval.
-The default mapping accepts documents at archive root or under one common folder.
-For another layout, explicitly specify ``--prefix FOLDER/`` on both invocations;
-every payload must be under that prefix. Ambiguous layouts are rejected.
+The pinned public package maps its 115 ``AETHERION_PHASE_II/`` payloads to the
+canon destination. Its two root administrative files remain inside the unchanged
+ZIP at ``docs/archives/``. SHA256SUMS must enumerate exactly every payload with a
+matching hash; DELIVERABLE_MANIFEST must cover its 20 proposed deliverable families.
+The optional ``--prefix`` must agree with this known layout. Generic test fixtures
+support unambiguous folder discovery; ambiguous mappings are always rejected.
 
 No private provenance archive or download identifiers belong in this workflow.
 The CLI accepts only the pinned public archive. Inspection never writes files.
@@ -18,10 +21,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import io
+import json
 import os
 from pathlib import Path, PurePosixPath
 import stat
 import tempfile
+import unicodedata
 import zipfile
 from dataclasses import dataclass
 
@@ -41,7 +46,8 @@ PHASE_II = ArchiveSpec(
     115,
 )
 DOCUMENT_ROOT = Path("AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II")
-ARCHIVE_ROOT = Path("docs/archives/phase-ii")
+ARCHIVE_ROOT = Path("docs/archives")
+PACKAGED_PREFIX = "AETHERION_PHASE_II/"
 
 
 class ImportRejected(ValueError):
@@ -59,7 +65,7 @@ class Inspection:
 
 
 def safe_name(name: str) -> str:
-    if not name or "\\" in name or "\x00" in name or ":" in name:
+    if not name or "\\" in name or ":" in name or any(unicodedata.category(c).startswith("C") for c in name):
         raise ImportRejected(f"Unsafe archive path: {name!r}")
     trimmed = name[:-1] if name.endswith("/") else name
     if not trimmed or any(p in ("", ".", "..") for p in trimmed.split("/")):
@@ -68,6 +74,54 @@ def safe_name(name: str) -> str:
     if path.is_absolute() or any(p.endswith((" ", ".")) for p in path.parts):
         raise ImportRejected(f"Unsafe archive path: {name!r}")
     return trimmed
+
+
+def normalized_name(name: str) -> str:
+    return unicodedata.normalize("NFC", name).casefold()
+
+
+def verify_packaged_layout(payloads: dict[str, bytes]) -> dict[str, bytes]:
+    """Validate the known public package's complete SHA256SUMS allowlist.
+
+    DELIVERABLE_MANIFEST is a 20-family navigation index, not a file hash list.
+    SHA256SUMS enumerates all 115 payload files, excluding the two root admin
+    files. Their bytes are covered by the pinned whole-archive SHA256.
+    """
+    admin = {"PACKAGE_SCOPE.txt", "SHA256SUMS.txt"}
+    if {name for name in payloads if not name.startswith(PACKAGED_PREFIX)} != admin:
+        raise ImportRejected("Pinned layout requires exactly two root administrative files")
+    try:
+        hashes = {}
+        for line in payloads["SHA256SUMS.txt"].decode("utf-8").splitlines():
+            digest, separator, name = line.partition("  ")
+            if not separator or len(digest) != 64 or any(c not in "0123456789abcdef" for c in digest):
+                raise ImportRejected("Malformed SHA256SUMS entry")
+            safe_name(name)
+            if name in hashes or not name.startswith(PACKAGED_PREFIX):
+                raise ImportRejected("Duplicate or out-of-payload SHA256SUMS entry")
+            hashes[name] = digest
+        expected = set(payloads) - admin
+        if set(hashes) != expected:
+            raise ImportRejected("SHA256SUMS allowlist does not exactly match payload files")
+        for name in sorted(expected):
+            if hashlib.sha256(payloads[name]).hexdigest() != hashes[name]:
+                raise ImportRejected(f"Payload checksum mismatch: {name}")
+        records = json.loads(payloads[PACKAGED_PREFIX + "DELIVERABLE_MANIFEST.json"])["records"]
+        if len(records) != 20 or len({record["id"] for record in records}) != 20:
+            raise ImportRejected("Deliverable manifest must contain 20 distinct families")
+        for record in records:
+            name = record["path"]
+            safe_name(name)
+            target = PACKAGED_PREFIX + name
+            if record.get("canon_status") != "PROPOSED" or not (
+                any(n.startswith(target) for n in expected) if name.endswith("/") else target in expected
+            ):
+                raise ImportRejected(f"Missing or non-proposed deliverable family: {name}")
+    except (UnicodeDecodeError, ValueError, KeyError, TypeError) as exc:
+        if isinstance(exc, ImportRejected):
+            raise
+        raise ImportRejected(f"Invalid package integrity metadata: {exc}") from exc
+    return {name: data for name, data in payloads.items() if name not in admin}
 
 
 def document_names(payloads: dict[str, bytes]) -> dict[str, str]:
@@ -97,7 +151,7 @@ def inspect_archive(path: Path, prefix: str | None = None,
         with zipfile.ZipFile(io.BytesIO(raw)) as archive:
             for info in archive.infolist():
                 name = safe_name(info.orig_filename)
-                key = name.casefold()
+                key = normalized_name(name)
                 if key in seen:
                     raise ImportRejected(f"Duplicate or case-colliding archive entry: {name}")
                 seen.add(key)
@@ -115,12 +169,17 @@ def inspect_archive(path: Path, prefix: str | None = None,
                 payloads[name] = archive.read(info)
     except (zipfile.BadZipFile, NotImplementedError, RuntimeError) as exc:
         raise ImportRejected(f"Cannot safely read ZIP: {exc}") from exc
+    if spec == PHASE_II:
+        payloads = verify_packaged_layout(payloads)
+        if prefix not in (None, PACKAGED_PREFIX, PACKAGED_PREFIX.rstrip("/")):
+            raise ImportRejected("Pinned package mapping must use AETHERION_PHASE_II/")
+        prefix = PACKAGED_PREFIX
     if len(payloads) != spec.payload_count:
         raise ImportRejected(f"Expected {spec.payload_count} payload files; found {len(payloads)}")
     # A file cannot also be a parent directory, even with different letter case.
-    folded = {name.casefold() for name in payloads}
+    folded = {normalized_name(name) for name in payloads}
     for name in payloads:
-        if any(str(p).casefold() in folded for p in PurePosixPath(name).parents if str(p) != "."):
+        if any(normalized_name(str(p)) in folded for p in PurePosixPath(name).parents if str(p) != "."):
             raise ImportRejected(f"File/directory collision: {name}")
     if prefix is None:
         candidates = [""]
@@ -173,7 +232,7 @@ def import_archive(inspection: Inspection, repository: Path, reviewed_documents:
                 raise ImportRejected(f"Repository parent is not a directory: {component}")
             if component.parent.is_dir():
                 collisions = [entry.name for entry in component.parent.iterdir()
-                              if entry.name.casefold() == component.name.casefold()
+                              if normalized_name(entry.name) == normalized_name(component.name)
                               and entry.name != component.name]
                 if collisions:
                     raise ImportRejected(f"Repository case collision: {component} with {collisions}")
@@ -230,6 +289,10 @@ def main() -> None:
             print(f"Mapping: {inspection.prefix or '[archive root]'} -> {DOCUMENT_ROOT}")
             for name, content in inspection.documents.items():
                 print(f"\n--- {name} ---\n{content}")
+            print("\nDry-run payload mapping (bytes; SHA256; source -> destination):")
+            for name, data in sorted(inspection.payloads.items()):
+                print(f"{len(data)}; {hashlib.sha256(data).hexdigest()}; "
+                      f"{inspection.prefix}{name} -> {DOCUMENT_ROOT / name}")
             print(f"\nAfter reading and reconciling both documents: --reviewed-documents {inspection.review_token}")
         else:
             print(import_archive(inspection, args.repository, args.reviewed_documents))

@@ -1,0 +1,148 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o06-e-weapons-family",
+  "referenceIds": [
+    "reference-050"
+  ],
+  "assets": [
+    {
+      "id": "oath-06-folding-battle-fan",
+      "archetypeId": "oath-06-folding-battle-fan",
+      "name": "Folding Battle Fan",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-06/weapons/folding-battle-fan/folding-battle-fan.blend",
+        "glb": "assets/production/oath-06/weapons/folding-battle-fan/lod0.glb",
+        "lod1": "assets/production/oath-06/weapons/folding-battle-fan/lod1.glb",
+        "lod2": "assets/production/oath-06/weapons/folding-battle-fan/lod2.glb",
+        "collision": "assets/production/oath-06/weapons/folding-battle-fan/collision.glb",
+        "damaged": "assets/production/oath-06/weapons/folding-battle-fan/damaged.glb",
+        "stowed": "assets/production/oath-06/weapons/folding-battle-fan/stowed.glb",
+        "textures": [
+          "assets/production/oath-06/weapons/textures/Wood_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Wood_roughness.png",
+          "assets/production/oath-06/weapons/textures/Wood_metallic.png",
+          "assets/production/oath-06/weapons/textures/Wood_normal.png",
+          "assets/production/oath-06/weapons/textures/Red_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Red_roughness.png",
+          "assets/production/oath-06/weapons/textures/Red_metallic.png",
+          "assets/production/oath-06/weapons/textures/Red_normal.png",
+          "assets/production/oath-06/weapons/textures/Cloth_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Cloth_roughness.png",
+          "assets/production/oath-06/weapons/textures/Cloth_metallic.png",
+          "assets/production/oath-06/weapons/textures/Cloth_normal.png",
+          "assets/production/oath-06/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-06/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-06/weapons/textures/Gold_normal.png",
+          "assets/production/oath-06/weapons/textures/Silver_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Silver_roughness.png",
+          "assets/production/oath-06/weapons/textures/Silver_metallic.png",
+          "assets/production/oath-06/weapons/textures/Silver_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-06/weapons/folding-battle-fan/front.png",
+          "assets/production/oath-06/weapons/folding-battle-fan/side.png",
+          "assets/production/oath-06/weapons/folding-battle-fan/hero.png",
+          "assets/production/oath-06/weapons/folding-battle-fan/motion.png"
+        ]
+      },
+      "triangles": {
+        "glb": 3594,
+        "lod1": 2132,
+        "lod2": 1062,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        1.0868650674819946,
+        0.058000002056360245,
+        0.7608646154403687
+      ],
+      "rig": {
+        "type": "nine-bone articulated folding ribs and weighted membrane",
+        "bones": 9
+      },
+      "animations": [
+        "Fan_fold_open"
+      ],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Fan fold cloth self-intersection and held animation acceptance"
+      ]
+    },
+    {
+      "id": "oath-06-reed-tuning-fork",
+      "archetypeId": "oath-06-reed-tuning-fork",
+      "name": "Reed Tuning Fork",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-06/weapons/reed-tuning-fork/reed-tuning-fork.blend",
+        "glb": "assets/production/oath-06/weapons/reed-tuning-fork/lod0.glb",
+        "lod1": "assets/production/oath-06/weapons/reed-tuning-fork/lod1.glb",
+        "lod2": "assets/production/oath-06/weapons/reed-tuning-fork/lod2.glb",
+        "collision": "assets/production/oath-06/weapons/reed-tuning-fork/collision.glb",
+        "damaged": "assets/production/oath-06/weapons/reed-tuning-fork/damaged.glb",
+        "stowed": "assets/production/oath-06/weapons/reed-tuning-fork/stowed.glb",
+        "textures": [
+          "assets/production/oath-06/weapons/textures/Wood_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Wood_roughness.png",
+          "assets/production/oath-06/weapons/textures/Wood_metallic.png",
+          "assets/production/oath-06/weapons/textures/Wood_normal.png",
+          "assets/production/oath-06/weapons/textures/Red_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Red_roughness.png",
+          "assets/production/oath-06/weapons/textures/Red_metallic.png",
+          "assets/production/oath-06/weapons/textures/Red_normal.png",
+          "assets/production/oath-06/weapons/textures/Cloth_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Cloth_roughness.png",
+          "assets/production/oath-06/weapons/textures/Cloth_metallic.png",
+          "assets/production/oath-06/weapons/textures/Cloth_normal.png",
+          "assets/production/oath-06/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-06/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-06/weapons/textures/Gold_normal.png",
+          "assets/production/oath-06/weapons/textures/Silver_basecolor.png",
+          "assets/production/oath-06/weapons/textures/Silver_roughness.png",
+          "assets/production/oath-06/weapons/textures/Silver_metallic.png",
+          "assets/production/oath-06/weapons/textures/Silver_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-06/weapons/reed-tuning-fork/front.png",
+          "assets/production/oath-06/weapons/reed-tuning-fork/side.png",
+          "assets/production/oath-06/weapons/reed-tuning-fork/hero.png"
+        ]
+      },
+      "triangles": {
+        "glb": 2928,
+        "lod1": 1720,
+        "lod2": 856,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.30000001192092896,
+        0.06599999964237213,
+        0.960054337978363
+      ],
+      "rig": {
+        "type": "static, intentionally unrigged",
+        "bones": 0
+      },
+      "animations": [],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Fork tassel is static; secondary motion open"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,673 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "records": [
+    {
+      "id": "p2-streaming-09-coordinate-rebase",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Logical positions and origin epochs",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-streaming-assets",
+        "contract-event-replication"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Versioned cell width/axis convention",
+        "Logical cell and normalized local offsets",
+        "Current origin epoch and proposed render-origin delta"
+      ],
+      "outputs": [
+        "Unchanged logical position",
+        "Atomic new render/physics origin epoch",
+        "Rebased or invalidated transient queries"
+      ],
+      "authority": "World authority for position; client for render origin",
+      "invariants": [
+        "Editorial map coordinates never become meters by inference",
+        "Stable entity IDs never contain transient origin or instance slot",
+        "Source ability semantics remain unchanged"
+      ],
+      "acceptance_tests": [
+        "Round-trip negative and positive boundary positions exactly within chosen numeric precision",
+        "Rebase during moving mount, trail, projectile, water and portal transition; no divergent collision or dangling old-epoch query",
+        "Run source-adapter comparison before/after rebase with tolerances reviewed for selected engine"
+      ],
+      "failure_cases": [
+        "Late old-epoch collision query",
+        "Physics/camera/VFX apply different delta",
+        "Source effect retains stale world-space coordinate"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-terrain-seams",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Terrain and watershed construction",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-content-registry",
+        "contract-streaming-assets"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Generator version and seed",
+        "Approved measured masks and overrides",
+        "Shared sample grid and neighbor edge data"
+      ],
+      "outputs": [
+        "Versioned terrain/collision bundle",
+        "Terrain-derived drainage and seam report",
+        "Rejected constraints report"
+      ],
+      "authority": "Content release authority",
+      "invariants": [
+        "Physical geography precedes Oath-specific dressing",
+        "Four baseline basins and 30 land adjacencies preserved",
+        "Generation does not approve canon"
+      ],
+      "acceptance_tests": [
+        "Generate neighbors in reverse order and compare common edge samples/normals",
+        "Check downhill channel sequence and mapped karst reemergence",
+        "Walk baseline sample route and refuge through all LOD/collision states"
+      ],
+      "failure_cases": [
+        "Height seam or collision gap",
+        "Unmapped uphill river/catchment crossing",
+        "Generator upgrade changes saved ground without migration"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-cell-readiness",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Streaming readiness and resource leases",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-streaming-assets",
+        "contract-content-registry"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Cell key, bundle revision and request generation",
+        "Travel envelope and destination intent",
+        "Available memory/IO budget"
+      ],
+      "outputs": [
+        "Ready stage and permitted entry anchor",
+        "Lease set and cancellation generation",
+        "IO/decode/upload/nav/frame timing metrics"
+      ],
+      "authority": "Client residency manager; authority entry eligibility",
+      "invariants": [
+        "Gameplay-ready requires collision/nav/state/mandatory cues",
+        "Late completion cannot resurrect retired generation",
+        "Shared resources disposed only after final lease"
+      ],
+      "acceptance_tests": [
+        "Inject slow load beyond predicted mount arrival; legal stop with safe collision",
+        "Oscillate across border; no uncontrolled request churn or duplicate entity",
+        "Unload one of two resource-sharing cells; other remains intact",
+        "Fail fine art while coarse gameplay remains safe"
+      ],
+      "failure_cases": [
+        "Missing mandatory cue or collision",
+        "Out-of-memory during revision swap",
+        "Double release, stale promise completion or mixed content revisions"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-render-visibility",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Visibility, LOD and environmental quality",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-streaming-assets",
+        "contract-accessibility-localization"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Quality tier, camera and conservative bounds",
+        "Semantic hazard/service cues",
+        "Seeded weather category and environmental material state"
+      ],
+      "outputs": [
+        "LOD/instance/occlusion selections",
+        "Preserved minimum cue layer",
+        "Measured CPU/GPU/overdraw statistics"
+      ],
+      "authority": "Client presentation only",
+      "invariants": [
+        "Occlusion/LOD never changes authoritative collision or damage",
+        "Instanced slot is not gameplay identity",
+        "Same hazard semantics across quality tiers"
+      ],
+      "acceptance_tests": [
+        "Turn camera quickly and open doors under fog/night; critical cues remain",
+        "Reuse instance slots after harvesting; same stable entity IDs resolve",
+        "Measure vegetation, shadows, transparency and water on nominated devices",
+        "Inspect fifteen regional silhouettes without palette-only recognition"
+      ],
+      "failure_cases": [
+        "False occlusion of hostile cue",
+        "LOD seam or high-frequency popping",
+        "Water art disagrees with swim volume",
+        "Shader compile hitch/thermal throttling"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-interior-handover",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Interior portals and protected exits",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-streaming-assets",
+        "contract-housing",
+        "contract-save-migration"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Stable portal/space ID and permissions",
+        "Exterior/interior bundle revision",
+        "Pinned fallback public anchor"
+      ],
+      "outputs": [
+        "Committed space transition",
+        "Authority position receipt",
+        "Safe reentry or denied reason"
+      ],
+      "authority": "World/housing authority",
+      "invariants": [
+        "Private permissions are checked by authority",
+        "Exterior eviction cannot remove legal exit",
+        "One actor owner throughout transition"
+      ],
+      "acceptance_tests": [
+        "Disconnect in interior then reconnect after exterior revision changes",
+        "Revoke entry permission during preload without trapping actor",
+        "Rapid doorway reversals release abandoned loads without duplicate actor"
+      ],
+      "failure_cases": [
+        "No legal exit collision",
+        "Stale permission or portal revision",
+        "Interior art ready before safe entry state"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-population-nav",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Population leases and actor clearance",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-climate-ecology",
+        "contract-mount-morph",
+        "contract-world-event"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Stable actor/spawn IDs and aggregate habitat state",
+        "Nav revision, clearance profile and schedule",
+        "Current authority tick and region event state"
+      ],
+      "outputs": [
+        "Materialized actor leases",
+        "Legal route or held/replanned state",
+        "Aggregate retirement receipt"
+      ],
+      "authority": "Regional simulation authority",
+      "invariants": [
+        "Named/service NPCs retain identity and fallback location",
+        "No reward-bearing actor duplicated on unload/reload",
+        "Ordinary foot/pack access never depends on special Oath traversal"
+      ],
+      "acceptance_tests": [
+        "Unload/reload same caravan from two clients; one owner and no duplicate yield",
+        "Large mount rejects too-small door and provides legal dismount",
+        "Event reroute preserves service NPC reachability with no nav deadlock",
+        "Bounded aggregate catch-up cannot mint offline rewards"
+      ],
+      "failure_cases": [
+        "Overlapping spawn leases",
+        "Stale boundary nav link",
+        "Mount clipping/unsafe morph expansion",
+        "Schedule places service NPC beyond accessible route"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-destruction-commit",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Authored destruction and reconstruction",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-consequence-journal",
+        "contract-world-event",
+        "contract-resource-ledger"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Whitelisted state transition and expected revision",
+        "Prepared collision/nav/mesh bundle",
+        "Verified service detour and contribution receipt"
+      ],
+      "outputs": [
+        "Single committed state revision or refusal",
+        "Accessible warning and recovery state",
+        "Exactly-once contribution/reward receipts"
+      ],
+      "authority": "Regional world/persistence authority",
+      "invariants": [
+        "No arbitrary terrain deformation promised",
+        "Protected housing/service access survives every state",
+        "Visual debris cannot create new reward ownership"
+      ],
+      "acceptance_tests": [
+        "Fail nav build before commit; old safe state retained",
+        "Crash before/after reward and stage commit; no duplicated goods",
+        "No-player event reaches safe reconstruction without permanent route loss"
+      ],
+      "failure_cases": [
+        "Mesh/collision/nav revision disagreement",
+        "Detour invalid during concurrent event",
+        "Reward replay or unrecoverable service closure"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-replication-interest",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Authority interest and cross-cell replication",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-event-replication",
+        "contract-cast-intent",
+        "contract-consequence-journal"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Accepted event sequence and authority epoch",
+        "Client acknowledgements and interest set",
+        "Content version and semantic position error budget"
+      ],
+      "outputs": [
+        "Ordered snapshot/delta with resync indication",
+        "Filtered public/private state",
+        "Presentation seeds"
+      ],
+      "authority": "Single simulation authority until tested handover",
+      "invariants": [
+        "Clients send intents rather than declare damage",
+        "Cell visibility does not determine entity persistence",
+        "Private housing/quest data restricted to authorized interest"
+      ],
+      "acceptance_tests": [
+        "Inject loss/reorder/duplication/delay and verify same accepted end state",
+        "Two clients on opposite cell edges agree on encounter ownership",
+        "Reject stale authority epoch during handover/crash",
+        "Disconnect and resync without duplicate effect consequences"
+      ],
+      "failure_cases": [
+        "Split-brain authority",
+        "Private state leakage",
+        "Unsupported mixed content versions",
+        "Coordinate quantization exceeds hit/clearance tolerance"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-save-recovery",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Save journaling and content migrations",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-save-migration",
+        "contract-content-registry",
+        "contract-consequence-journal"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Versioned snapshot and ordered journal tail",
+        "Approved migration chain and identifier aliases",
+        "Target content dependencies and legal fallback anchors"
+      ],
+      "outputs": [
+        "Recovered validated snapshot",
+        "Reconciliation/migration report",
+        "Preserved source save and blocked dependency reason"
+      ],
+      "authority": "Persistence recovery authority",
+      "invariants": [
+        "No renderer pointers or transient GPU state in saves",
+        "Migration retains item/entity identities or explicit reviewed aliases",
+        "Unsupported newer saves are preserved and refused clearly"
+      ],
+      "acceptance_tests": [
+        "Crash at every transaction boundary; one outcome or no commit",
+        "Replay old save after approved terrain edit; safe anchor and recorded relocation",
+        "Missing asset uses value/identity-preserving placeholder",
+        "Replay migration twice; second run no-op"
+      ],
+      "failure_cases": [
+        "Truncated journal",
+        "Unknown schema or missing alias",
+        "Silent last-write-wins inventory conflict",
+        "Partial migration overwrites only valid backup"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-platform-gate",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md#streaming-and-world-transitions",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md#contract-summary",
+        "WORLD_STREAMING_ARCHITECTURE.md"
+      ],
+      "title": "Cross-platform prototype evidence",
+      "pilot_region_id": "region-09",
+      "scope_regions": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-04",
+        "region-05",
+        "region-06",
+        "region-07",
+        "region-08",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "baseline_contract_ids": [
+        "contract-streaming-assets",
+        "contract-accessibility-localization",
+        "contract-source-adapter"
+      ],
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "acceptance_status": "SPECIFIED_NOT_EXECUTED",
+      "inputs": [
+        "Nominated device/OS/GPU/input matrix",
+        "Pinned engine/build/content revisions",
+        "Reviewed workload and provisional budgets"
+      ],
+      "outputs": [
+        "Cold/warm/sustained profile captures",
+        "Pass/fail/blocked results by device and feature",
+        "Supported/unsupported decision proposal"
+      ],
+      "authority": "Engineering and human accessibility/art review",
+      "invariants": [
+        "No platform support claim from a bundle build or CPU test",
+        "Low quality preserves gameplay cues and legal access",
+        "Source fidelity and world performance are separate gates"
+      ],
+      "acceptance_tests": [
+        "Measure p50/p95/p99 CPU/GPU frame and streaming times with peak/resident memory",
+        "Test suspend/resume, storage-full, bandwidth restriction and thermal soak",
+        "Check selected input/accessibility modes and localized critical cues",
+        "Run unchanged source wrapper regressions and designated GPU parity matrix"
+      ],
+      "failure_cases": [
+        "Unsupported API/shader/model decode",
+        "Cold shader or IO stall exceeds reviewed budget",
+        "Low tier drops required cue",
+        "Reference asset rights unresolved"
+      ]
+    }
+  ]
+}

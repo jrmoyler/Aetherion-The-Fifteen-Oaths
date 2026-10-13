@@ -1,0 +1,1686 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "records": [
+    {
+      "id": "poi-01-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Cindervault",
+      "region_id": "region-01",
+      "kind": "capital",
+      "poi_id": "poi-01-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Cindervault occupies terraces on an old caldera rim, never an active lava lake. Civic cisterns and outward evacuation roads make its volcanic grandeur physically legible and expose unequal access to safe elevation.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-01"
+      ]
+    },
+    {
+      "id": "poi-01-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Ashbridge",
+      "region_id": "region-01",
+      "kind": "exchange_town",
+      "poi_id": "poi-01-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Ashbridge sits on a cooled causeway between cropland and foundries. Its night market repairs imported tools, while farms beyond the bridge negotiate smoke days instead of existing as an industrial backdrop.",
+      "service_dependencies": [
+        "poi-01-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-01"
+      ]
+    },
+    {
+      "id": "p2-settlement-01-pumice-fold",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Pumice Fold",
+      "region_id": "region-01",
+      "kind": "village",
+      "poi_id": "p2-settlement-01-pumice-fold",
+      "parent_settlement_id": null,
+      "function": "ash-bed horticulture and seed washing on a cooled slope",
+      "siting": "On the ordinary public approach between Ashbridge and Cindervault, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-01-settlement",
+        "poi-01-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Cindervault; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-01"
+      ]
+    },
+    {
+      "id": "p2-settlement-01-ventward-lodge",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Ventward Lodge",
+      "region_id": "region-01",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-01-ventward-lodge",
+      "parent_settlement_id": null,
+      "function": "pressure observation and marked pass closure at the outer rim",
+      "siting": "On the ordinary public approach between Ashbridge and Cindervault, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-01-settlement",
+        "poi-01-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Cindervault; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-01"
+      ]
+    },
+    {
+      "id": "poi-02-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Stillfolio",
+      "region_id": "region-02",
+      "kind": "capital",
+      "poi_id": "poi-02-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Stillfolio terraces into a sheltered glacial valley on rock foundations. Libraries bridge around ice movement instead of assuming glaciers are permanent bedrock; evacuation stacks can be moved before a shelf becomes unsafe.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-02"
+      ]
+    },
+    {
+      "id": "poi-02-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Meltgate",
+      "region_id": "region-02",
+      "kind": "exchange_town",
+      "poi_id": "poi-02-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Meltgate is a seasonal exchange town where cold storage meets the warmer valley. It translates catalogues into common trade speech and gives non-archivists a place to challenge access decisions.",
+      "service_dependencies": [
+        "poi-02-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-02"
+      ]
+    },
+    {
+      "id": "p2-settlement-02-thawfield",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Thawfield",
+      "region_id": "region-02",
+      "kind": "village",
+      "poi_id": "p2-settlement-02-thawfield",
+      "parent_settlement_id": null,
+      "function": "short-season roots, fodder storage and runoff measurement below the snow line",
+      "siting": "On the ordinary public approach between Meltgate and Stillfolio, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-02-settlement",
+        "poi-02-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Stillfolio; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-02"
+      ]
+    },
+    {
+      "id": "p2-settlement-02-blueflag-refuge",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Blueflag Refuge",
+      "region_id": "region-02",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-02-blueflag-refuge",
+      "parent_settlement_id": null,
+      "function": "whiteout shelter and ice-dam observation on exposed approach",
+      "siting": "On the ordinary public approach between Meltgate and Stillfolio, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-02-settlement",
+        "poi-02-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Stillfolio; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-02"
+      ]
+    },
+    {
+      "id": "poi-03-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Crownspan",
+      "region_id": "region-03",
+      "kind": "capital",
+      "poi_id": "poi-03-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Crownspan straddles several mountain saddles connected by protected cableways. Public squares sit away from discharge paths; dramatic suspended relay galleries are serviced from stable anchor towers and sheltered evacuation stairs.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-03"
+      ]
+    },
+    {
+      "id": "poi-03-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Grounding Reach",
+      "region_id": "region-03",
+      "kind": "exchange_town",
+      "poi_id": "poi-03-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Grounding Reach is a pass town with low-tech message houses beside high-energy stations. Its paper couriers remain useful during storms, making fallback infrastructure a lived economy rather than an unexplained game menu.",
+      "service_dependencies": [
+        "poi-03-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-03"
+      ]
+    },
+    {
+      "id": "p2-settlement-03-copperwool",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Copperwool",
+      "region_id": "region-03",
+      "kind": "village",
+      "poi_id": "p2-settlement-03-copperwool",
+      "parent_settlement_id": null,
+      "function": "windbreak farming, rope fiber and pack-animal rest in the lee valley",
+      "siting": "On the ordinary public approach between Grounding Reach and Crownspan, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-03-settlement",
+        "poi-03-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Crownspan; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-03"
+      ]
+    },
+    {
+      "id": "p2-settlement-03-last-bell",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Last Bell",
+      "region_id": "region-03",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-03-last-bell",
+      "parent_settlement_id": null,
+      "function": "manual semaphore and sheltered pass watch beyond powered relay reach",
+      "siting": "On the ordinary public approach between Grounding Reach and Crownspan, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-03-settlement",
+        "poi-03-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Crownspan; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-03"
+      ]
+    },
+    {
+      "id": "poi-04-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Confluence Quay",
+      "region_id": "region-04",
+      "kind": "capital",
+      "poi_id": "poi-04-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Confluence Quay is a mainland estuary city with shore-attached reef districts and navigable canals. Reef-city imagery never creates disconnected realm islands; occupied reefs connect by maintained causeways and accessible ferries.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-04"
+      ]
+    },
+    {
+      "id": "poi-04-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Brackensluice",
+      "region_id": "region-04",
+      "kind": "exchange_town",
+      "poi_id": "poi-04-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Brackensluice sits where fresh and salt water mix, protected by staged gates rather than a single miraculous wall. Its residents know how upstream choices alter fishing, crops and foundation stability.",
+      "service_dependencies": [
+        "poi-04-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-04"
+      ]
+    },
+    {
+      "id": "p2-settlement-04-reedbasket",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Reedbasket",
+      "region_id": "region-04",
+      "kind": "village",
+      "poi_id": "p2-settlement-04-reedbasket",
+      "parent_settlement_id": null,
+      "function": "brackish reed craft and freshwater garden plots divided by labeled channels",
+      "siting": "On the ordinary public approach between Brackensluice and Confluence Quay, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-04-settlement",
+        "poi-04-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Confluence Quay; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-04"
+      ]
+    },
+    {
+      "id": "p2-settlement-04-outer-gauge",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Outer Gauge",
+      "region_id": "region-04",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-04-outer-gauge",
+      "parent_settlement_id": null,
+      "function": "surge observation at a mainland causeway mouth",
+      "siting": "On the ordinary public approach between Brackensluice and Confluence Quay, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-04-settlement",
+        "poi-04-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Confluence Quay; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-04"
+      ]
+    },
+    {
+      "id": "poi-05-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Keystone Hall",
+      "region_id": "region-05",
+      "kind": "capital",
+      "poi_id": "poi-05-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Keystone Hall occupies a broad canyon shoulder anchored to surveyed bedrock. Deep chambers are civic workspaces, not an excuse to remove ventilation, drainage, emergency exits or accessible vertical transport.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-05"
+      ]
+    },
+    {
+      "id": "poi-05-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Talus Steps",
+      "region_id": "region-05",
+      "kind": "exchange_town",
+      "poi_id": "poi-05-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Talus Steps is a movable terrace settlement outside old canyon walls. Its modular houses embarrass traditional elites but offer a practical model for living with unstable geology instead of pretending all movement is failure.",
+      "service_dependencies": [
+        "poi-05-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-05"
+      ]
+    },
+    {
+      "id": "p2-settlement-05-gravelgarden",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Gravelgarden",
+      "region_id": "region-05",
+      "kind": "village",
+      "poi_id": "p2-settlement-05-gravelgarden",
+      "parent_settlement_id": null,
+      "function": "terraced food plots and spoil reclamation on stable fans",
+      "siting": "On the ordinary public approach between Talus Steps and Keystone Hall, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-05-settlement",
+        "poi-05-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Keystone Hall; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-05"
+      ]
+    },
+    {
+      "id": "p2-settlement-05-splitmark-watch",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Splitmark Watch",
+      "region_id": "region-05",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-05-splitmark-watch",
+      "parent_settlement_id": null,
+      "function": "slope monitoring and freight diversion at a watershed pass",
+      "siting": "On the ordinary public approach between Talus Steps and Keystone Hall, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-05-settlement",
+        "poi-05-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Keystone Hall; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-05"
+      ]
+    },
+    {
+      "id": "poi-06-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Cantilever",
+      "region_id": "region-06",
+      "kind": "capital",
+      "poi_id": "poi-06-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Cantilever occupies a broad escarpment with windbreak courts and grounded accessible routes. Suspended stages and bridges dramatize exposure, but essential services always have sheltered paths for people unable or unwilling to glide.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-06"
+      ]
+    },
+    {
+      "id": "poi-06-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Hush Vale",
+      "region_id": "region-06",
+      "kind": "exchange_town",
+      "poi_id": "poi-06-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Hush Vale lies in a sheltered notch where residents cultivate quiet crafts and rest. It supplies counterweights and textiles to the cliffs, while refusing the capital's expectation that every civic gathering be musical.",
+      "service_dependencies": [
+        "poi-06-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-06"
+      ]
+    },
+    {
+      "id": "p2-settlement-06-flax-hollow",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Flax Hollow",
+      "region_id": "region-06",
+      "kind": "village",
+      "poi_id": "p2-settlement-06-flax-hollow",
+      "parent_settlement_id": null,
+      "function": "rope-fiber plots, weaving and pack fodder in a protected hollow",
+      "siting": "On the ordinary public approach between Hush Vale and Cantilever, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-06-settlement",
+        "poi-06-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Cantilever; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-06"
+      ]
+    },
+    {
+      "id": "p2-settlement-06-crosswind-hut",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Crosswind Hut",
+      "region_id": "region-06",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-06-crosswind-hut",
+      "parent_settlement_id": null,
+      "function": "ground-route guidance and ledge rescue above a pass",
+      "siting": "On the ordinary public approach between Hush Vale and Cantilever, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-06-settlement",
+        "poi-06-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Cantilever; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-06"
+      ]
+    },
+    {
+      "id": "poi-07-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Rootmeet",
+      "region_id": "region-07",
+      "kind": "capital",
+      "poi_id": "poi-07-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Rootmeet grows around several connected mature trees with inspectable structural supports and ground-level services. Living bridges have dormant-season backups; sap flow and canopy light place real limits on expansion.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-07"
+      ]
+    },
+    {
+      "id": "poi-07-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Gleaning Margin",
+      "region_id": "region-07",
+      "kind": "exchange_town",
+      "poi_id": "poi-07-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Gleaning Margin is a mixed farm town at the forest edge with open commons and private plots. It tests whether an independent household can receive emergency care without surrendering long-term control over its land.",
+      "service_dependencies": [
+        "poi-07-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-07"
+      ]
+    },
+    {
+      "id": "p2-settlement-07-cutting-patch",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Cutting Patch",
+      "region_id": "region-07",
+      "kind": "village",
+      "poi_id": "p2-settlement-07-cutting-patch",
+      "parent_settlement_id": null,
+      "function": "nursery cuttings and independent food plots outside the capital root network",
+      "siting": "On the ordinary public approach between Gleaning Margin and Rootmeet, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-07-settlement",
+        "poi-07-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Rootmeet; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-07"
+      ]
+    },
+    {
+      "id": "p2-settlement-07-floodroot-lodge",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Floodroot Lodge",
+      "region_id": "region-07",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-07-floodroot-lodge",
+      "parent_settlement_id": null,
+      "function": "river gauge, footbridge repair and wildlife crossing watch",
+      "siting": "On the ordinary public approach between Gleaning Margin and Rootmeet, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-07-settlement",
+        "poi-07-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Rootmeet; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-07"
+      ]
+    },
+    {
+      "id": "poi-08-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Vitrial",
+      "region_id": "region-08",
+      "kind": "capital",
+      "poi_id": "poi-08-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Vitrial combines sealed greenhouse districts with open civic air corridors. Vent stacks, wash stations and independent sampling kiosks are visible civic infrastructure, preventing the poison realm from becoming an implausibly uninhabitable toxic city.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-08"
+      ]
+    },
+    {
+      "id": "poi-08-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Clearfen",
+      "region_id": "region-08",
+      "kind": "exchange_town",
+      "poi_id": "poi-08-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Clearfen is a treatment town where clean channels and contaminated channels are physically separated and labeled. Its workers want economic security without concealing the fact that their health and land bear regional costs.",
+      "service_dependencies": [
+        "poi-08-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-08"
+      ]
+    },
+    {
+      "id": "p2-settlement-08-sedgehold",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Sedgehold",
+      "region_id": "region-08",
+      "kind": "village",
+      "poi_id": "p2-settlement-08-sedgehold",
+      "parent_settlement_id": null,
+      "function": "basketry, clean-water gardens and monitored reed filtration work",
+      "siting": "On the ordinary public approach between Clearfen and Vitrial, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-08-settlement",
+        "poi-08-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Vitrial; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-08"
+      ]
+    },
+    {
+      "id": "p2-settlement-08-whitepost-station",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Whitepost Station",
+      "region_id": "region-08",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-08-whitepost-station",
+      "parent_settlement_id": null,
+      "function": "upstream sample watch and emergency clean-water transfer",
+      "siting": "On the ordinary public approach between Clearfen and Vitrial, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-08-settlement",
+        "poi-08-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Vitrial; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-08"
+      ]
+    },
+    {
+      "id": "poi-09-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Aureate Steps",
+      "region_id": "region-09",
+      "kind": "capital",
+      "poi_id": "poi-09-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Aureate Steps is the PROPOSED name for Daybreak's capital, not a recovered name. Its great plaza and the Archivist's death there are LOCKED; the exact stair geometry, districts and urban name await approval.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-09"
+      ]
+    },
+    {
+      "id": "poi-09-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Lantern Ward",
+      "region_id": "region-09",
+      "kind": "exchange_town",
+      "poi_id": "poi-09-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Lantern Ward is a mixed refuge district outside the monumental center. Residents benefit from sanctuary but challenge identity checks and curfews that make temporary protection feel like permanent supervision.",
+      "service_dependencies": [
+        "poi-09-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-09"
+      ]
+    },
+    {
+      "id": "p2-settlement-09-wheatwatch",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Wheatwatch",
+      "region_id": "region-09",
+      "kind": "village",
+      "poi_id": "p2-settlement-09-wheatwatch",
+      "parent_settlement_id": null,
+      "function": "basin grain and riverbank repair shared by independent farms",
+      "siting": "On the ordinary public approach between Lantern Ward and Aureate Steps, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-09-settlement",
+        "poi-09-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Aureate Steps; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-09"
+      ]
+    },
+    {
+      "id": "p2-settlement-09-open-lantern",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Open Lantern",
+      "region_id": "region-09",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-09-open-lantern",
+      "parent_settlement_id": null,
+      "function": "road sanctuary and bridge inspection without mandatory identity disclosure",
+      "siting": "On the ordinary public approach between Lantern Ward and Aureate Steps, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-09-settlement",
+        "poi-09-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Aureate Steps; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-09"
+      ]
+    },
+    {
+      "id": "poi-10-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Parallax Crown",
+      "region_id": "region-10",
+      "kind": "capital",
+      "poi_id": "poi-10-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Parallax Crown occupies an eastern headland with anchored observatories and limited suspended platforms. The platforms do not form a separate island realm; redundant mainland stairs and lifts preserve the continent's connected geography.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-10"
+      ]
+    },
+    {
+      "id": "poi-10-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Ballast Haven",
+      "region_id": "region-10",
+      "kind": "exchange_town",
+      "poi_id": "poi-10-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Ballast Haven sits on stable mainland rock beneath the research platforms. It houses maintenance families and visitors who cannot tolerate altered gravity, keeping accessibility and ordinary life central to the cosmic realm.",
+      "service_dependencies": [
+        "poi-10-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-10"
+      ]
+    },
+    {
+      "id": "p2-settlement-10-clearweather",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Clearweather",
+      "region_id": "region-10",
+      "kind": "village",
+      "poi_id": "p2-settlement-10-clearweather",
+      "parent_settlement_id": null,
+      "function": "headland vegetable plots, lens cloth and weather record keeping",
+      "siting": "On the ordinary public approach between Ballast Haven and Parallax Crown, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-10-settlement",
+        "poi-10-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Parallax Crown; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-10"
+      ]
+    },
+    {
+      "id": "p2-settlement-10-fogmark-refuge",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Fogmark Refuge",
+      "region_id": "region-10",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-10-fogmark-refuge",
+      "parent_settlement_id": null,
+      "function": "mainland visibility watch and platform evacuation receiving point",
+      "siting": "On the ordinary public approach between Ballast Haven and Parallax Crown, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-10-settlement",
+        "poi-10-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Parallax Crown; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-10"
+      ]
+    },
+    {
+      "id": "poi-11-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Absent Seat",
+      "region_id": "region-11",
+      "kind": "capital",
+      "poi_id": "poi-11-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Absent Seat occupies a mainland valley with a persistent public footprint and intermittently concealed civic wings. The city does not vanish wholesale from shared navigation; safe roads and accessible service anchors remain consistently available.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-11"
+      ]
+    },
+    {
+      "id": "poi-11-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Witness Ford",
+      "region_id": "region-11",
+      "kind": "exchange_town",
+      "poi_id": "poi-11-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Witness Ford is a stable settlement outside the most severe phasing zones. It provides public services without demanding full disclosure of residents' histories, while maintaining bounded records needed for safety and mutual accountability.",
+      "service_dependencies": [
+        "poi-11-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-11"
+      ]
+    },
+    {
+      "id": "p2-settlement-11-limestone-rest",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Limestone Rest",
+      "region_id": "region-11",
+      "kind": "village",
+      "poi_id": "p2-settlement-11-limestone-rest",
+      "parent_settlement_id": null,
+      "function": "orchards and ordinary lodging away from phasing rooms",
+      "siting": "On the ordinary public approach between Witness Ford and Absent Seat, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-11-settlement",
+        "poi-11-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Absent Seat; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-11"
+      ]
+    },
+    {
+      "id": "p2-settlement-11-fixed-cairn",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Fixed Cairn",
+      "region_id": "region-11",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-11-fixed-cairn",
+      "parent_settlement_id": null,
+      "function": "karst crossing guidance and an always-visible refuge",
+      "siting": "On the ordinary public approach between Witness Ford and Absent Seat, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-11-settlement",
+        "poi-11-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Absent Seat; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-11"
+      ]
+    },
+    {
+      "id": "poi-12-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Kinhold",
+      "region_id": "region-12",
+      "kind": "capital",
+      "poi_id": "poi-12-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Kinhold rises on red-stone terraces above an inland river crossing. Ritual halls sit beside kitchens and recovery wards, making the material work of sustaining sacrifice visible instead of presenting blood symbolism without civilian life.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-12"
+      ]
+    },
+    {
+      "id": "poi-12-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Open Hearth",
+      "region_id": "region-12",
+      "kind": "exchange_town",
+      "poi_id": "poi-12-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Open Hearth is a mixed household settlement that admits people without ancestral credentials. Its success challenges fortress elites while creating practical questions about how newcomers contribute to shared care and defense.",
+      "service_dependencies": [
+        "poi-12-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-12"
+      ]
+    },
+    {
+      "id": "p2-settlement-12-ironloam",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Ironloam",
+      "region_id": "region-12",
+      "kind": "village",
+      "poi_id": "p2-settlement-12-ironloam",
+      "parent_settlement_id": null,
+      "function": "grazing, pulses and soil management on mineral-red slopes",
+      "siting": "On the ordinary public approach between Open Hearth and Kinhold, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-12-settlement",
+        "poi-12-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Kinhold; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-12"
+      ]
+    },
+    {
+      "id": "p2-settlement-12-restshield-lodge",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Restshield Lodge",
+      "region_id": "region-12",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-12-restshield-lodge",
+      "parent_settlement_id": null,
+      "function": "bridge relief and rotating guard rest above flood level",
+      "siting": "On the ordinary public approach between Open Hearth and Kinhold, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-12-settlement",
+        "poi-12-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Kinhold; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-12"
+      ]
+    },
+    {
+      "id": "poi-13-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Manydoor",
+      "region_id": "region-13",
+      "kind": "capital",
+      "poi_id": "poi-13-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Manydoor grows through rearrangeable facades around a persistent structural street plan. Interior performance spaces can change within authored bounds, while hospitals, exits and public services retain recognizable anchors.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-13"
+      ]
+    },
+    {
+      "id": "poi-13-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Plainmarket",
+      "region_id": "region-13",
+      "kind": "exchange_town",
+      "poi_id": "poi-13-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Plainmarket is a stable trading district where appearance-altering effects are disclosed and optional. It gives visitors a baseline for contracts and navigation without treating artistic participation as foolish or inherently dishonest.",
+      "service_dependencies": [
+        "poi-13-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-13"
+      ]
+    },
+    {
+      "id": "p2-settlement-13-canvasfield",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Canvasfield",
+      "region_id": "region-13",
+      "kind": "village",
+      "poi_id": "p2-settlement-13-canvasfield",
+      "parent_settlement_id": null,
+      "function": "flax, stage timber recovery and ordinary market gardens",
+      "siting": "On the ordinary public approach between Plainmarket and Manydoor, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-13-settlement",
+        "poi-13-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Manydoor; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-13"
+      ]
+    },
+    {
+      "id": "p2-settlement-13-chalkpost",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Chalkpost",
+      "region_id": "region-13",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-13-chalkpost",
+      "parent_settlement_id": null,
+      "function": "fixed valley route marks and traveling-company rest",
+      "siting": "On the ordinary public approach between Plainmarket and Manydoor, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-13-settlement",
+        "poi-13-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Manydoor; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-13"
+      ]
+    },
+    {
+      "id": "poi-14-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Wayclock",
+      "region_id": "region-14",
+      "kind": "capital",
+      "poi_id": "poi-14-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Wayclock occupies a broad junction of roads, workshops and public timekeeping halls. Fast lanes remain physically separated from homes and markets, with conventional walkable routes that never require a mount or temporal ability.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-14"
+      ]
+    },
+    {
+      "id": "poi-14-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Restmile",
+      "region_id": "region-14",
+      "kind": "exchange_town",
+      "poi_id": "poi-14-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Restmile is a service town with sheltered stops, repair yards and accessible boarding. It argues that pauses are infrastructure rather than inefficiency, particularly for families, animals and crews who cannot live at express tempo.",
+      "service_dependencies": [
+        "poi-14-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-14"
+      ]
+    },
+    {
+      "id": "p2-settlement-14-brakefield",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Brakefield",
+      "region_id": "region-14",
+      "kind": "village",
+      "poi_id": "p2-settlement-14-brakefield",
+      "parent_settlement_id": null,
+      "function": "fodder, wheel wood and rest pasture between long road stages",
+      "siting": "On the ordinary public approach between Restmile and Wayclock, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-14-settlement",
+        "poi-14-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Wayclock; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-14"
+      ]
+    },
+    {
+      "id": "p2-settlement-14-long-pause",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Long Pause",
+      "region_id": "region-14",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-14-long-pause",
+      "parent_settlement_id": null,
+      "function": "bridge watch and conventional-route refuge beside a temporal corridor",
+      "siting": "On the ordinary public approach between Restmile and Wayclock, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-14-settlement",
+        "poi-14-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Wayclock; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-14"
+      ]
+    },
+    {
+      "id": "poi-15-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Counterpoise",
+      "region_id": "region-15",
+      "kind": "capital",
+      "poi_id": "poi-15-capital",
+      "parent_settlement_id": null,
+      "function": "civic, specialist and relief anchor",
+      "siting": "Counterpoise occupies the southeast coastal plain around freight yards and kinetic foundries. Heavy industry is separated from homes by service buffers and public transit, with coastal evacuation routes independent of factory command systems.",
+      "service_dependencies": [],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-15"
+      ]
+    },
+    {
+      "id": "poi-15-settlement",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Handshift",
+      "region_id": "region-15",
+      "kind": "exchange_town",
+      "poi_id": "poi-15-settlement",
+      "parent_settlement_id": null,
+      "function": "baseline regional exchange and everyday livelihood",
+      "siting": "Handshift is a mixed workshop town that preserves repairable tools and shared technical education. It seeks access to modern equipment without surrendering control of production schedules or becoming a disposable subcontractor district.",
+      "service_dependencies": [
+        "poi-15-capital"
+      ],
+      "public_access": "Ordinary surface or sheltered route independent of Oath and faction standing.",
+      "failure_response": "Relocate staffed services to the stable capital anchor; retain resident and housing state.",
+      "population_status": "UNRESOLVED; no census or demographic target claimed.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-15"
+      ]
+    },
+    {
+      "id": "p2-settlement-15-siltgarden",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Siltgarden",
+      "region_id": "region-15",
+      "kind": "village",
+      "poi_id": "p2-settlement-15-siltgarden",
+      "parent_settlement_id": null,
+      "function": "food plots and sediment stewardship upstream of port works",
+      "siting": "On the ordinary public approach between Handshift and Counterpoise, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-15-settlement",
+        "poi-15-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Counterpoise; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-15"
+      ]
+    },
+    {
+      "id": "p2-settlement-15-breakwater-watch",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "name": "Breakwater Watch",
+      "region_id": "region-15",
+      "kind": "outpost",
+      "poi_id": "p2-settlement-15-breakwater-watch",
+      "parent_settlement_id": null,
+      "function": "surge observation and independent mechanical evacuation controls",
+      "siting": "On the ordinary public approach between Handshift and Counterpoise, outside the event/boss exclusion footprint; final placement requires terrain survey.",
+      "service_dependencies": [
+        "poi-15-settlement",
+        "poi-15-capital"
+      ],
+      "public_access": "Protected spur off public pack road; observation or production duty is not required to visit.",
+      "failure_response": "Warning → suspend local work → escort to Counterpoise; unattended state triggers automatic relief return.",
+      "population_status": "UNRESOLVED; household count follows playtest demand rather than a settlement quota.",
+      "source_refs": [
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#07-capital",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#08-geography",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md#39-palette-and-materials",
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-15"
+      ]
+    }
+  ]
+}

@@ -45,13 +45,27 @@ for file,d in data.items():
    ids=[x['id'] for x in v];dup=[x for x,n in collections.Counter(ids).items() if n>1];check('unique:'+file+':'+'.'.join(path),not dup,dup or f'{len(ids)} unique IDs')
 trace=data.get('00_GOVERNANCE/SOURCE_TRACEABILITY.json',{}).get('records',[]);inv=data.get('00_GOVERNANCE/SOURCE_INVENTORY.json',{}).get('sources',[])
 sourceids={x['id'] for x in trace}|{x['source_id'] for x in inv}
+# The additive Phase II package owns a separate provenance namespace. Resolve it
+# from its actual inventory only for descendants of that exact package root;
+# never promote those IDs into the foundation's global source set.
+phase2_prefix='21_WORLD_CONSTRUCTION_PHASE_II/'
+phase2_sourceids=set()
+if any(file.startswith(phase2_prefix) for file in data):
+ local_inventory=data.get(phase2_prefix+'SOURCE_INVENTORY.json')
+ local_schema=read(phase2_prefix+'schemas/source-inventory.schema.json')
+ local_errors=list(jsonschema.Draft202012Validator(local_schema).iter_errors(local_inventory))
+ check('schema:phase-ii-source-inventory',not local_errors,[e.message for e in local_errors[:20]] or 'Package-local provenance inventory schema passed')
+ if isinstance(local_inventory,dict):
+  phase2_sourceids={record['id'] for record in local_inventory.get('records',[]) if isinstance(record,dict) and isinstance(record.get('id'),str)}
+ check('phase-ii-source-namespace',all(s.startswith('P2-SRC-') for s in phase2_sourceids) and not (phase2_sourceids & sourceids),'Phase II source IDs must remain in their separate P2-SRC-* namespace')
 unknown=[]
 for file,d in data.items():
+ allowed_sources=sourceids|phase2_sourceids if file.startswith(phase2_prefix) else sourceids
  for path,v in walk(d):
   if isinstance(v,dict) and isinstance(v.get('source_ids'),list):
    for s in v['source_ids']:
-    if s not in sourceids:unknown.append(file+':'+'.'.join(path)+':'+str(s))
-check('source-traceability',not unknown,unknown[:40] or f'{len(sourceids)} declared sources; all source_ids resolve')
+    if s not in allowed_sources:unknown.append(file+':'+'.'.join(path)+':'+str(s))
+check('source-traceability',not unknown,unknown[:40] or f'{len(sourceids)} global sources; {len(phase2_sourceids)} Phase II sources scoped to {phase2_prefix}; all source_ids resolve')
 entities=data.get('01_WORLD_BIBLE/ENTITY_CONTRACT.json',{}).get('records',[])
 locked=['KILN OATH','RIME ARCHIVE','STORM RELAY','TIDAL COVENANT','FAULT CHOIR','REED RESONANCE','GRAFT SANCTUARY','BITTERGLASS GUILD','OATH OF DAYBREAK','TIDAL OBSERVATORY','THE MISSING COURT','SANGUINE COVENANT','FOLDED THEATRE','ESCAPEMENT ROAD','IMPULSE FOUNDRY']
 check('exact-fifteen-oaths',len(entities)==15 and [x.get('oath_name','').upper() for x in entities]==locked,'Founder order and names must match exactly')

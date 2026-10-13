@@ -1,0 +1,444 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "coordinate_system",
+    "records",
+    "edges",
+    "drainage_networks",
+    "baseline_poi_manifest",
+    "invariants",
+    "coastline_polygon",
+    "territory_geometry_method",
+    "embedding_faces"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "coordinate_system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "width",
+        "height",
+        "north",
+        "units",
+        "survey_status"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "north": {
+          "type": "string",
+          "minLength": 1
+        },
+        "units": {
+          "type": "string",
+          "minLength": 1
+        },
+        "survey_status": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "oath_id",
+          "capital_id",
+          "neighbor_ids",
+          "drainage_basin_ids",
+          "relative_position",
+          "climate",
+          "canon_status",
+          "source_ids",
+          "relative_anchor",
+          "relative_anchor_role",
+          "elevation_target_m",
+          "main_channel_station_target_m",
+          "geological_continuity",
+          "baseline_poi_ids",
+          "source_refs",
+          "conceptual_territory_polygon"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capital_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "neighbor_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "drainage_basin_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "relative_position": {
+            "type": "string",
+            "minLength": 1
+          },
+          "climate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "relative_anchor": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "x",
+              "y"
+            ],
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              }
+            }
+          },
+          "relative_anchor_role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "elevation_target_m": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "minimum",
+              "maximum"
+            ],
+            "properties": {
+              "minimum": {
+                "type": "number"
+              },
+              "maximum": {
+                "type": "number"
+              }
+            }
+          },
+          "main_channel_station_target_m": {
+            "type": "number"
+          },
+          "geological_continuity": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline_poi_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "conceptual_territory_polygon": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "minItems": 15,
+      "maxItems": 15
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from_region_id",
+          "to_region_id",
+          "route_id",
+          "kind",
+          "canon_status",
+          "source_ids"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from_region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to_region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "route_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "drainage_networks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "headwaters",
+          "river_region_sequence",
+          "outlet",
+          "flow",
+          "hazards",
+          "canon_status",
+          "source_ids",
+          "channel_stations",
+          "terminal_ocean_target_m",
+          "validation_limit"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "headwaters": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "river_region_sequence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "outlet": {
+            "type": "string",
+            "minLength": 1
+          },
+          "flow": {
+            "type": "string",
+            "minLength": 1
+          },
+          "hazards": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "channel_stations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "region_id",
+                "target_elevation_m"
+              ],
+              "properties": {
+                "region_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "target_elevation_m": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "terminal_ocean_target_m": {
+            "type": "number"
+          },
+          "validation_limit": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "baseline_poi_manifest": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "region_id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "major_realm_count",
+        "land_adjacency_count",
+        "basin_count",
+        "baseline_poi_count",
+        "all_capitals_require_ordinary_access",
+        "no_new_sovereign_neutral_realm"
+      ],
+      "properties": {
+        "major_realm_count": {
+          "type": "number"
+        },
+        "land_adjacency_count": {
+          "type": "number"
+        },
+        "basin_count": {
+          "type": "number"
+        },
+        "baseline_poi_count": {
+          "type": "number"
+        },
+        "all_capitals_require_ordinary_access": {
+          "type": "boolean"
+        },
+        "no_new_sovereign_neutral_realm": {
+          "type": "boolean"
+        }
+      }
+    },
+    "coastline_polygon": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "territory_geometry_method": {
+      "type": "string",
+      "minLength": 1
+    },
+    "embedding_faces": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aetherion.example/proposed/world-region-graph.schema.json",
+  "title": "WORLD_REGION_GRAPH.json closed structural schema"
+}

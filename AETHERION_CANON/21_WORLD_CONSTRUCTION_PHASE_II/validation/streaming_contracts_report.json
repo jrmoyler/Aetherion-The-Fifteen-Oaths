@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "report_kind": "STATIC_PLANNING_VALIDATION",
+  "baseline_commit": "5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+  "record_count": 10,
+  "checks": [
+    {
+      "check": "strict_schema",
+      "status": "PASS",
+      "detail": "Draft 2020-12; 0 errors"
+    },
+    {
+      "check": "unique_record_ids",
+      "status": "PASS",
+      "detail": "Ten distinct pilot-anchored planning contract IDs"
+    },
+    {
+      "check": "baseline_contract_reference_closure",
+      "status": "PASS",
+      "detail": "Unresolved: []"
+    },
+    {
+      "check": "all_region_scope",
+      "status": "PASS",
+      "detail": "Region-09 ID prefix denotes pilot, not exclusive territorial scope"
+    },
+    {
+      "check": "honest_acceptance_status",
+      "status": "PASS",
+      "detail": "No runtime, engine, terrain, network or save implementation claim"
+    },
+    {
+      "check": "negative_fixture_unknown_field",
+      "status": "PASS",
+      "detail": "Mutated copy rejected; delivered records unchanged"
+    },
+    {
+      "check": "negative_fixture_false_runtime_pass",
+      "status": "PASS",
+      "detail": "Mutated copy rejected; delivered records unchanged"
+    },
+    {
+      "check": "negative_fixture_sixteenth_region",
+      "status": "PASS",
+      "detail": "Mutated copy rejected; delivered records unchanged"
+    },
+    {
+      "check": "negative_fixture_missing_failure_cases",
+      "status": "PASS",
+      "detail": "Mutated copy rejected; delivered records unchanged"
+    }
+  ],
+  "result": "PASS",
+  "unexecuted": [
+    "Engine selection and implementation",
+    "GPU/browser/source visual parity",
+    "Terrain generation and measured route traversal",
+    "Streaming/rebase/nav failure injection",
+    "Multiplayer/save/crash-recovery execution",
+    "Cross-platform profiling and human art/accessibility acceptance"
+  ],
+  "gaps": [
+    "Target engine, devices and world scale unapproved",
+    "Production assets and commercial clearance incomplete",
+    "Numerical hypotheses require prototype measurements"
+  ]
+}

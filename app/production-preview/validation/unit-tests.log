@@ -1,0 +1,27 @@
+
+> aetherion-production-preview@0.1.0 test
+> node --test tests/*.test.mjs
+
+✔ resource disposal deduplicates shared geometry, materials, uniforms, images and skeletons (1.507152ms)
+✔ late parsed result after replacement is disposed and never becomes active (1.222883ms)
+✔ shutdown aborts fetch, discards late parse and is idempotent (0.502228ms)
+✔ failed current load surfaces error but a stale rejected load cannot overwrite it (0.256387ms)
+✔ replacement stops actions, uncaches root and restores material ownership before dispose (0.388936ms)
+✔ mixer construction failure disposes the decoded GLTF (0.214213ms)
+✔ artist manifest maps repository-relative exports and authored LODs (0.740106ms)
+✔ manifest refuses non-GLB URLs, external protocols and traversal outside asset root (0.283077ms)
+✔ separate state files never inherit ready LODs (0.474686ms)
+✔ separately manifested variant retains its ID and authored state LODs (0.348075ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 72.882049
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

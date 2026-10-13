@@ -1,0 +1,17 @@
+# Production asset workshop
+
+An isolated Three.js GLB inspection app. Existing ability code is unchanged. The link opens the existing sandbox separately; this viewer does not integrate weapons into gameplay or certify matching appearance.
+
+From this directory, run `npm ci`, `npm test`, `npm run dev`. Open the Vite URL (default port 5174). Run the ability app separately from the repository root with `npm run dev:abilities` for the port-5173 link. `npm run build` produces the standalone `dist/` directory; `npm run preview` serves that build. `npm run test:http` exercises the development server and verifies every currently discoverable GLB/LOD against its source bytes. Missing manifests produce an explicit empty state, not substitute models.
+
+The server recursively discovers `assets/production/**/manifest.json` without a fixed Oath/family list. Each manifest contains `assets[]` with `id`, `name`, `status` and `files.glb`, optional `files.lod1` and `files.lod2`. Artist file paths are repository-relative under `assets/production/`. Build copies discovered authored asset folders and a discovery catalog, so the resulting app has no dependency on executor filesystem URLs. Rebuild after exports change.
+
+Controls inspect authored LODs, animation/rest pose, textured PBR, untextured PBR, surface normals and wireframe. The camera fits world-space bounds; geometry is not recentered or rescaled. Neutral hemisphere/directional illumination and ground are inspection lighting, not an approved scene environment. PBR means glTF materials are rendered by Three's standard glTF pipeline; the UI does not certify texture packing or visual quality.
+
+Optional `files.damaged` and `files.stowed` appear in the state selector as separate exports with LOD 0 only. They never inherit ready-state LODs; choosing a state resets detail level and disables the LOD selector when only one export exists. Separately manifested entries with `variant` retain their original IDs, variant labels and their own authored LODs. These remain distinct records; the UI does not invent archetype grouping. Optional `archetypeId` is displayed if provided.
+
+Ownership tests exercise cancelled/late loads, replacement, mixer cleanup, shared resource deduplication and rejected loads. Fetch uses cancellation; a late GLTF parse is discarded and disposed. Active mixers stop and uncache their scene, textures/materials/geometries/skeletons and decoded ImageBitmaps are released, and temporary material views restore originals before disposal. The viewer caps pixel ratio at 2; this is a proposed operational choice, not a measured performance budget.
+
+Browser rendering and appearance require a real browser run. Node tests, HTTP checks and a successful build do not establish WebGL rendering, shader acceptance, visual parity, animation correctness, gameplay, Unreal/Godot compatibility or art approval. No browser sandbox flags are changed by this app.
+
+`npm run test:assets -- /tmp/asset-import-report.json` loads every current manifested LOD through the actual Three.js GLTFLoader, checks finite geometry/material values, samples animation transforms and verifies geometry/material disposal events. Node lacks browser image decoding: loader image warnings are retained and texture decode is explicitly unverified. `npm run test:http:build` checks the built preview and byte-compares all copied GLBs to their current source files; rebuild before running it if assets changed.

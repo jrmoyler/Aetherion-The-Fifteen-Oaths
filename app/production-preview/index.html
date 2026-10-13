@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Aetherion · Asset workshop</title><link rel="stylesheet" href="./style.css"></head>
+<body>
+<header><div><span class="eyebrow">AETHERION · THE FIFTEEN OATHS</span><h1>Asset workshop</h1></div><span class="badge">Proposed · review required</span></header>
+<main>
+<section class="stage" aria-label="Three-dimensional asset preview"><canvas id="viewport" aria-label="Asset viewer: drag to orbit, scroll to zoom"></canvas><div class="stage-note">Drag to orbit · Scroll to zoom · Right drag to pan</div></section>
+<aside>
+<h2>Inspect an export</h2><p class="muted">Review individual production candidates under neutral lighting.</p>
+<label>Asset<select id="asset"><option>Loading manifest…</option></select></label>
+<p id="identity" class="muted"></p>
+<label>Authored state<select id="state"></select></label>
+<label>Detail level<select id="lod"></select></label>
+<label>Animation<select id="animation"><option value="">Rest pose</option></select></label>
+<label class="check"><input id="playing" type="checkbox" checked> Play animation</label>
+<label>Material view<select id="material"><option value="pbr">PBR · textured</option><option value="untextured">PBR · without textures</option><option value="normals">Surface normals</option></select></label>
+<label class="check"><input id="wireframe" type="checkbox"> Wireframe</label>
+<button id="fit" type="button">Fit asset to view</button>
+<p id="status" role="status" aria-live="polite">Discovering available exports…</p><dl id="metrics"></dl>
+<p class="muted" id="acceptance">Preview only. Import, appearance and performance need separate acceptance. This is not gameplay integration.</p>
+<a id="abilities-link" href="http://127.0.0.1:5173" target="_blank" rel="noopener">Open ability sandbox ↗</a><small>Run the existing ability app separately on port 5173.</small>
+</aside></main>
+<script type="module" src="./main.mjs"></script></body></html>

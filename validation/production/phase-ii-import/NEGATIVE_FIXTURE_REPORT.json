@@ -1,0 +1,249 @@
+{
+  "scope": "Negative fixtures in disposable copy; PASS means the intended corruption was detected.",
+  "counts": {
+    "PASS": 40,
+    "FAIL": 0
+  },
+  "fixtures": [
+    {
+      "fixture": "sixteenth_oath",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "exact_fifteen_oaths"
+    },
+    {
+      "fixture": "dropped_baseline_poi",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "baseline_63_pois_preserved"
+    },
+    {
+      "fixture": "changed_baseline_capital",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "baseline_capitals_preserved"
+    },
+    {
+      "fixture": "uphill_drainage",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "conceptual_downhill:basin-west"
+    },
+    {
+      "fixture": "broken_detour",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "detour:p2-route-01-01-02"
+    },
+    {
+      "fixture": "mandatory_oath",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "ordinary_access:p2-route-01-01-02"
+    },
+    {
+      "fixture": "unresolved_reference",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "cross_references_resolve"
+    },
+    {
+      "fixture": "false_approval",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "record_metadata:WORLD_REGION_GRAPH.json"
+    },
+    {
+      "fixture": "dependency_cycle",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "dependency_graph_acyclic"
+    },
+    {
+      "fixture": "broken_capital_service_path",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "capital_service_path:p2-capital-01-layout"
+    },
+    {
+      "fixture": "invalid_ramp_grade",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "kit_ramp_arithmetic:p2-arch-01-kiln-courts"
+    },
+    {
+      "fixture": "false_built_asset",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "assets_not_implemented"
+    },
+    {
+      "fixture": "schema_unknown_property:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:SOURCE_INVENTORY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:SOURCE_INVENTORY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_unknown_property:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    },
+    {
+      "fixture": "schema_required_version:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "expected": "Invalid content is rejected",
+      "observed": "Rejected"
+    }
+  ]
+}

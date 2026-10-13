@@ -1,0 +1,3547 @@
+{
+  "status": "NOT_EXECUTED_UNREAL_UNAVAILABLE",
+  "preflight_status": "PASS",
+  "scope": "Python manifest and source GLB header inspection only; no Unreal API execution or import",
+  "utc": "2026-10-13T20:10:21.798442+00:00",
+  "source_commit": "4794c8ed0292878cd8d5cefe199824bb6e4db56a",
+  "script_sha256": "ca9b99e64337a1be02451f99e0c77835db3d7b7b6b95855be6bad00ed5849275",
+  "manifest_count": 16,
+  "unique_glb_path_count": 204,
+  "manifest_entry_count": 46,
+  "manifests": [
+    {
+      "path": "assets/production/oath-01/characters/manifest.json",
+      "sha256": "8a70784f8e83e238f1afd80a4e859e6ea4b79a8aa6787e9a4de7faf746c7fdb5"
+    },
+    {
+      "path": "assets/production/oath-01/weapons/manifest.json",
+      "sha256": "3d5498c758787fa96c8efcacd7dae1c3466f5b4f6d03a6ba989eae4237d44a6c"
+    },
+    {
+      "path": "assets/production/oath-02/weapons/manifest.json",
+      "sha256": "bda347b2c5052522bc9115e554653d63f75ca1e344441aeccb91f74992d8cc13"
+    },
+    {
+      "path": "assets/production/oath-03/weapons/manifest.json",
+      "sha256": "fa9de8084a4fdcb87571dd853adcea258cc10e80aa457d278cba3f1e5d487042"
+    },
+    {
+      "path": "assets/production/oath-04/weapons/manifest.json",
+      "sha256": "e9575a5ddb29e17da65b2b6cba0aa20dbe7ba56057dc2db5da17af6f703a3ce7"
+    },
+    {
+      "path": "assets/production/oath-05/weapons/manifest.json",
+      "sha256": "225533d50b11f0996a0915add5931d23549513987252b6917860c5ba6a5be21b"
+    },
+    {
+      "path": "assets/production/oath-06/weapons/manifest.json",
+      "sha256": "3c097fe5345c17cf85517c5f804393c8de4fd5e4cb1e8e92775fe2c8bcf96c66"
+    },
+    {
+      "path": "assets/production/oath-07/weapons/manifest.json",
+      "sha256": "c5843ed92e0335772f7fc53f1011ed62082083f6b192e5cf3fb5a9c01b0c6461"
+    },
+    {
+      "path": "assets/production/oath-08/weapons/manifest.json",
+      "sha256": "c748cb3220e85d2f2902b7a5abaa31c08f3c86c0bce06a3d4b176e16537742e9"
+    },
+    {
+      "path": "assets/production/oath-09/weapons/manifest.json",
+      "sha256": "36a80487206ef060fcbf26ae75fda736bdb9ed89cab17456b6ec54719bd7fb31"
+    },
+    {
+      "path": "assets/production/oath-10/weapons/manifest.json",
+      "sha256": "1c447978cb2d7e321ee4ac3b1cf7c1370bc052b85c70802b5e3e30dd4c9e09e3"
+    },
+    {
+      "path": "assets/production/oath-11/weapons/manifest.json",
+      "sha256": "b7e9846e7d28d7e91a9d99b6f303ed0e433596e67f5fed8750b359a317066381"
+    },
+    {
+      "path": "assets/production/oath-12/weapons/manifest.json",
+      "sha256": "e7cde5454e283419f758d195fa99ea53b6ee8ea6e48f515a3473a24e9e2c3612"
+    },
+    {
+      "path": "assets/production/oath-13/weapons/manifest.json",
+      "sha256": "f662de3729d2c12802da818f59b8b03f68d4bed2d88298cacef7de10c7cf4eb5"
+    },
+    {
+      "path": "assets/production/oath-14/weapons/manifest.json",
+      "sha256": "b7ed0ffa7731d5851ca51e1da049d01fc26dadad363c25ef0245b31246a1af1c"
+    },
+    {
+      "path": "assets/production/oath-15/weapons/manifest.json",
+      "sha256": "44559f1352c251f86b45c9eaa440e2cb7afe517b443b50c0f0873411cd065770"
+    }
+  ],
+  "source_plan": [
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "sha256": "0f0e975e906600b00291bc8957e94ed0d904b69a5756039036dd4c965e4e570f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 1,
+        "skins": 1,
+        "animations": 3
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/characters/manifest.json",
+          "asset_id": "kiln-ninja-ensemble-candidate",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "sha256": "6ac3c6b40af4d3d347a93c23af75cc3fa76925309ba847ac0dd24e274672e89e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 1,
+        "skins": 1,
+        "animations": 3
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/characters/manifest.json",
+          "asset_id": "kiln-ninja-ensemble-candidate",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "sha256": "2b72507211f21ef590485145a58d01f95f8050ce644c3ca3c5c22582389ab383",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 1,
+        "skins": 1,
+        "animations": 3
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/characters/manifest.json",
+          "asset_id": "kiln-ninja-ensemble-candidate",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+      "sha256": "793312eba824a1f018bff35a9b0c71fb62fc04e626a5d81c7b57da0d1c2b64ee",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/characters/manifest.json",
+          "asset_id": "kiln-ninja-ensemble-candidate",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready.glb",
+      "sha256": "c15abd302e28ce1727f5dec71744ef4496962bfb0e8581ec19556efdea8e0e9b",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 40,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-lod1.glb",
+      "sha256": "744a765e5c5fcacaaa7c98437e3d18466766f767fc87ac2a54663f5a7546d3c6",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 40,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-lod2.glb",
+      "sha256": "d670e1bb22231f15bfc4da9d25ba60441b04e60f2d72988b49def811bd24b509",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 40,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-collision.glb",
+      "sha256": "a3b1199c3e160698bc25b05f489a094cc1b49bb7b75479d6de03253bf1b3c45a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed.glb",
+      "sha256": "ad43334c1c0047fe9aede381ba4c383eeed54f24170d4b3773d3890ee70c6a47",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 59,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-stowed",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-lod1.glb",
+      "sha256": "cafe2483a03e312433eee5e5c7d4500ee0743cb1e830e2bbfaa373856c4fa4c6",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 59,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-stowed",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-lod2.glb",
+      "sha256": "0f76742b92907e97d5de4cd57d2a2a9f7f91fd2b55481f38d00b956d4d378f1c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 59,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-stowed",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-collision.glb",
+      "sha256": "b666711d7f0e5d3322f5cb3e2d40207f6a0ca7bc884e2451daf3ec98925907d4",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-stowed",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged.glb",
+      "sha256": "5f6b40549a0af104cefc384d9692e542fafa79a6052cbbba775bfbd2033f990b",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 40,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-damaged",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-lod1.glb",
+      "sha256": "72092910754985869dae59d148856b5ac53eb6fb2fdf0d9a69260ec4e81e8336",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 40,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-damaged",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-lod2.glb",
+      "sha256": "029ccee3f66d1949e93c854e54fda4cd4cff89a4397fb60f5667f5159149008c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 40,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-damaged",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-collision.glb",
+      "sha256": "880613caae48765e1ec5da10f8096c453dc03c6444a3378ea05117d4ddd29fa4",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-sword-damaged",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready.glb",
+      "sha256": "4e9d70df08285dd17b66d1a47fd8a98ee871cc579e3ed61b8946e15b8f3e0408",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 137,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-lod1.glb",
+      "sha256": "bc082c231e0026de98e4204c9221e1ef68f30d66d010e6d9f9f1daa35e7ba9e5",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 137,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-lod2.glb",
+      "sha256": "f99511b4aa26da69331a1080d2fb04cdbb09fd643e65e038960f69a016d8d7ab",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 137,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-collision.glb",
+      "sha256": "387178b85e00f6025fa5ddb5f3ef49a8dd39fd5d15c73edc30e44becb2e76f7c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed.glb",
+      "sha256": "fa1c1ee7c809c9ee8b2bf958dd423ba6601202e03aa793cd0d709023a4b5e9e6",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 141,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-stowed",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-lod1.glb",
+      "sha256": "d290ead9b3730bdce47e3f7f7f07bd6dd3a50e6f4ab25dc0fd5733dc09845164",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 141,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-stowed",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-lod2.glb",
+      "sha256": "85f1ae8ca5f8bec242b397b18f93b922fbfac6d9d6045df84a22c013f48e4e60",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 141,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-stowed",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-collision.glb",
+      "sha256": "5ef574ee7b0d6527e83731bfa5b5d036dc8c7528394f3dffc64944432ed22832",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-stowed",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged.glb",
+      "sha256": "d59fd7e8ccf0aa94c69fb6966969dd1eb9c872845c640f22e4b2ddc048efb293",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 134,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-damaged",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-lod1.glb",
+      "sha256": "d00f5fb8d6631f417e353866ad13cd57c2e4b019368e2bf8553a7938ea818fea",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 134,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-damaged",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-lod2.glb",
+      "sha256": "b73c2b70953c465050609bc948fa844ccaef10eb86c350c19f7e09730e1bd58e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 134,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-damaged",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-collision.glb",
+      "sha256": "11dae0afdc7f276e3b47b53ac14b6812da281db53247653aa1943b5fb9fb4abb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-01/weapons/manifest.json",
+          "asset_id": "kiln-focus-damaged",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready.glb",
+      "sha256": "202fd0848ef57c48fb260e436c4d7405a28a1033a9961f50e4041dc828f49658",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 24,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-lod1.glb",
+      "sha256": "fec7aec15aa9bb13ae432fee601b3645bab6773abc22ddaedde1a454a5d68e03",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 24,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-lod2.glb",
+      "sha256": "1304228a8a2cbc187a41da6e3822c905ff73deb98bf73cf285c17e8446af9a65",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 24,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-collision.glb",
+      "sha256": "5db88e2b329aeedfc4330bbdf1e641d7153b147f924d45e62ec952ade8652f35",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed.glb",
+      "sha256": "4acbb237e21f9d37d1eca95178c62ba53b637ce7c29fec3df2c923addc7ecbea",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-stowed",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-lod1.glb",
+      "sha256": "29fe1e99a405b78bf220768eabcd2cba625b9c01c972c11a3b69644429fd2a54",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-stowed",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-lod2.glb",
+      "sha256": "17cd617414b6581a8ba94d51161728991cb3352df8e01e95bfc186cae37909f0",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-stowed",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-collision.glb",
+      "sha256": "2689f965cee6f338e279779546d4c68f3f17963d5ee88b091b49ef3e46cf07b5",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-stowed",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged.glb",
+      "sha256": "551cb593d3b67ff28103104964143b47d97af0f666404fe5c3fde258f9dd5fcb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 24,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-damaged",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-lod1.glb",
+      "sha256": "deff2cb2044bcad3850886ee85d17263c7c5dcf34a2a7cdc57866d1379ff07ca",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 24,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-damaged",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-lod2.glb",
+      "sha256": "76a98e7b527f25e3ff5ea56cd7e82f13ee3b704d2e767fbba26a141b8d192ff3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 24,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-damaged",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-collision.glb",
+      "sha256": "982905fb5017b1ec5294085bcbe5b5146f47a0397bdd317c81d3e2dce695d5a4",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-sword-damaged",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready.glb",
+      "sha256": "8b8c77f540897d239674628bb691403f81b5b59b1b564001c6d513d9f86e8779",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 30,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-lod1.glb",
+      "sha256": "6efd8098f336c2e4e9e53aae14385a60f62868049a17de6f2acd8b8c38c65cef",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 30,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-lod2.glb",
+      "sha256": "98153ba21ccb8494fbf199dec417dd1d2e44b84b4e172b095ac6c48c7b8b4308",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 30,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-collision.glb",
+      "sha256": "276098ebee1ad45ff990ce9d3d4ddabad3a84bb873a959838ed3062ffabf14b3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed.glb",
+      "sha256": "ab934d03ea257c4cac07d223ecd43abae3e0d6419b4065ad3b52eec5bc9bb5f1",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 32,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-stowed",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-lod1.glb",
+      "sha256": "4919c60e5a22f7ab4a5d072f2dfcd61faaf9e8bd352680a18ecb9b4241a3b4ca",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 32,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-stowed",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-lod2.glb",
+      "sha256": "ac6c0baa9ed75c3dac7ec1f1f3a571de1b1d6936c242eaf886ba8c89ae438cf2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 32,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-stowed",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-collision.glb",
+      "sha256": "a4ccc2532f9ee46517595fe1f39a6a4eadba12ce80ec1f477b28e68a0a31d94a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-stowed",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged.glb",
+      "sha256": "f7faef93b637e3165cff10b0ce1423e311a68c0cd76df10b46564549bdc55e11",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 30,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-damaged",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-lod1.glb",
+      "sha256": "65f024a38a83c6dcb1736f12b8b3360b8bf904cc735fc0c5dbd353983266e5f2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 30,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-damaged",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-lod2.glb",
+      "sha256": "81ce17ae307d9d8b6b458b9baf4e22e5b306e578a3bf3d4184886553c06ce046",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 30,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-damaged",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-collision.glb",
+      "sha256": "4c0c870ffabd89591b71164cd03a1e384c682a484d46de575e3c051efc843151",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-02/weapons/manifest.json",
+          "asset_id": "rime-focus-damaged",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready.glb",
+      "sha256": "ff53157b2ad29bf13afd44a537beaa9962e7d35d23e8e14445c95eb14ef4e49e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 62,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-lod1.glb",
+      "sha256": "fce4eb4bb46c57b12bd0e6e1f7a1a514364c3c992ee4577c7a597630830d949f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 62,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-lod2.glb",
+      "sha256": "5c76bd543d04fc9a055c011cb878f292caf00cbeb8d8a2a8747ee246e9cdc5b3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 62,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-collision.glb",
+      "sha256": "99c4527adb1a0339ed957fcd1435fa6546f2dfed74da3a90fff8157979c7592f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed.glb",
+      "sha256": "9e31bba356a235f151a4edbf2b6c3e94caa51357bce4b0a2166d6e1ac51c5ccc",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 62,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-stowed",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-lod1.glb",
+      "sha256": "5327bc7be54be0649bfa339e63f42a5b38ddf172ce84c8c54a6420bb5ae092e0",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 62,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-stowed",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-lod2.glb",
+      "sha256": "bba608d844a49d7eea789d288c23e0bfb8b97cf9a1752e5e2e89685f9d50a118",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 62,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-stowed",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-collision.glb",
+      "sha256": "cf1a2dbe14532fe2d7294253aed0347d70bfed023cfae46d28e9fdbb182e62fa",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-relay-whip-stowed",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready.glb",
+      "sha256": "baa8c6aae16a6f185dee57db7d40d58f609e6a88ac556f5cfa5aea4b6fbbcc93",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 63,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-lod1.glb",
+      "sha256": "28647ac43d1c8a0f3bf88b1f13f1cfdf9a3d881b70131fffdda2eb9938e29111",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 63,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-lod2.glb",
+      "sha256": "31f7764c98a07ed9a1b1e55c18466ae76bea3ded9a2d492d7188884ad4abad1e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 63,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-collision.glb",
+      "sha256": "e30d11b4fe020ae2d3be2f1a6f0477900d10ccbba7f5ea2631101776c6f94b03",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed.glb",
+      "sha256": "ada0c8e8388075932f02510d89f4e31929f55ffeb01e0801369e387b766bc087",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-stowed",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-lod1.glb",
+      "sha256": "f838bc7da15073283e5c9aa7f9bf69a5a8a1dc59dbf0faac395de0f5e4073bbe",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-stowed",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-lod2.glb",
+      "sha256": "69bec3ef4f13e4cdc15a427fc52e1430716cae563587d8787ec880ea7e0f5d4d",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-stowed",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-collision.glb",
+      "sha256": "a1523ede032e2feaf1396bfe9034fca545a2d734bffb7069e993b499ee1fab2c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-03/weapons/manifest.json",
+          "asset_id": "storm-conductor-staff-stowed",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/crescent-blade/lod0.glb",
+      "sha256": "bafad47b22d65ca5c37bbf87ccb1c6f692b15a7b1aa34b9dce4f313bc35d153a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-crescent-blade",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/crescent-blade/lod1.glb",
+      "sha256": "e5a19b878c56a2aa890bf6ace97a540e74a25f30830a38d6edca2c1ef3620a22",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-crescent-blade",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/crescent-blade/lod2.glb",
+      "sha256": "a7e44151b83dcf576e4e9d595e8aef5f168877e4b0d8057ccf6cc166411dc0bc",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-crescent-blade",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/crescent-blade/collision.glb",
+      "sha256": "70752ddcb4d42f9b4f280ca9f0a97d419f2445a2e5d4adef86faae54d2486835",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-crescent-blade",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/crescent-blade/damaged.glb",
+      "sha256": "de1fbfe0db363a41ab0221e08d3d5f232aeb32d795996b06c242bb2cf7f9f9a8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 27,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-crescent-blade",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/crescent-blade/stowed.glb",
+      "sha256": "c170b309f48d8d3e6938c119eb7875c6f0cb1b88d677c68d29ae71bda76e1f63",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 29,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-crescent-blade",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/tide-orb-staff/lod0.glb",
+      "sha256": "a0eb059caf6e83a0231a2e5b3ddcb954ebf17986867fb0fb3f2053796aaf7f56",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 76,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-tide-orb-staff",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/tide-orb-staff/lod1.glb",
+      "sha256": "6cdd357215cbb22def833ad8fb1ac344448953858273612db64714e01cedcb38",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 76,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-tide-orb-staff",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/tide-orb-staff/lod2.glb",
+      "sha256": "5c4b5bf1da0889d475f658d7e47b2a58c9ac65dbd70bfdd533fc0846a94590fb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 76,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-tide-orb-staff",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/tide-orb-staff/collision.glb",
+      "sha256": "a992ed3ec8accc3b9360d8d19184f564523ed64fbda3d5cc59f7b90119dc92eb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-tide-orb-staff",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/tide-orb-staff/damaged.glb",
+      "sha256": "91a7dca6db4b5d2330dd3dca927b0a50a370500178a064cee7f7271d7f180e60",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 75,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-tide-orb-staff",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-04/weapons/tide-orb-staff/stowed.glb",
+      "sha256": "86a2954ea17f9a6571f1e86357f6108a8e3b8ad52a2dd52bf66edaa8f14878f7",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 77,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-04/weapons/manifest.json",
+          "asset_id": "tidal-tide-orb-staff",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade.glb",
+      "sha256": "212a2e4af1d1901f93191b5090f42a1a8c7b6b3fd4aaec394713e08c5125cb13",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 43,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-short-blade",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade_lod1.glb",
+      "sha256": "8d294b56da4769c9d1b3a65043aae6383ed77a964a905b6968ca03bc191a7190",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 43,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-short-blade",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade_lod2.glb",
+      "sha256": "142952947ab7a033a591e4b996d81f4b8f6d5cc2d33d85e1562875b11a56e98f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 43,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-short-blade",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade_collision.glb",
+      "sha256": "8b47ece2e8b4f6ac2813253c7adc8e2ca6460002a1f17ad1f0238b627584de3f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-short-blade",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace.glb",
+      "sha256": "4eadd4c5471cf38bfa90818ddc2eda9dcdf595d0156acd0e4c166b6a6c1961c6",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-seer-mace",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace_lod1.glb",
+      "sha256": "fb24280e8af0a426eee846d6c7c40a15e49c8391a72de8601f9756997002a82c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-seer-mace",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace_lod2.glb",
+      "sha256": "363ca1b807d39123ac5946103b1ea6bf777ce335ad7abdec57ec65ed1fc6bef2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-seer-mace",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace_collision.glb",
+      "sha256": "a5544d8537804b8ce983b4075c448bf0ee0e98aa7405ff5b20668b4c66f89f04",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-05/weapons/manifest.json",
+          "asset_id": "prod-o05-amethyst-seer-mace",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/folding-battle-fan/lod0.glb",
+      "sha256": "e81e23c836e17fe20f4cfabead3440702e2d3b22f00c5849414a30186ecc66f2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 47,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-folding-battle-fan",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/folding-battle-fan/lod1.glb",
+      "sha256": "dc362926412525827c0e79cea6c37cc1b99b69f9c64e42dbb3f05bb95487254a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 47,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-folding-battle-fan",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/folding-battle-fan/lod2.glb",
+      "sha256": "65724959e2379e02b085dabd7c248986e0a23a03ee4bf4077b0470cb9cc2e925",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 47,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-folding-battle-fan",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/folding-battle-fan/collision.glb",
+      "sha256": "6f817a34aebc6a55364bb4c85978777a4787654ef295139199d0def5fc9f38f3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-folding-battle-fan",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/folding-battle-fan/damaged.glb",
+      "sha256": "d59e4457f5d61c527d783d2058019571b55fae2df90aa94a160f7d4159a44c70",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 46,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-folding-battle-fan",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/folding-battle-fan/stowed.glb",
+      "sha256": "5ccbcc0510654640ba427b55e4e8c52fe6ccb2512a48ba900d7141c519350bab",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 47,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-folding-battle-fan",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/reed-tuning-fork/lod0.glb",
+      "sha256": "dd8ef977844dda5b0757b2db4c4ca6f4628c38871b9ba09fa11834a5c262264f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 25,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-reed-tuning-fork",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/reed-tuning-fork/lod1.glb",
+      "sha256": "0712ef6815c180d80ee2e29ee58607aa36fae54d6e2bfd5d330a1508195ac89c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 25,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-reed-tuning-fork",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/reed-tuning-fork/lod2.glb",
+      "sha256": "1aacf86f283d0b484107a1f1a0f041163ceb5bc2b85f43a15dd10226a0d95a7e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 25,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-reed-tuning-fork",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/reed-tuning-fork/collision.glb",
+      "sha256": "2a9e5000a8459df1055dc40049323d93a277721e49ce0dd761b38ce733dff777",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-reed-tuning-fork",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/reed-tuning-fork/damaged.glb",
+      "sha256": "c21d2f51403b14bb46863e0179f72265a71f7773f3346d71c86b247b6ebd1da3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 24,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-reed-tuning-fork",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-06/weapons/reed-tuning-fork/stowed.glb",
+      "sha256": "ce9dd0401e5d923b3669578cfd3ebf00d68a8a7692fb01dbd58321aa25868a43",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 25,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-06/weapons/manifest.json",
+          "asset_id": "oath-06-reed-tuning-fork",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/living-twig-bow/lod0.glb",
+      "sha256": "72ab24afd59d053a5948335d7ce2b404ee541a49602fba3f4ae84c5132523152",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 6,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-living-twig-bow",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/living-twig-bow/lod1.glb",
+      "sha256": "2f70f3a9053709f5726a71176c516484cabea8e8ff21971f761f4f4dab0734aa",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 6,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-living-twig-bow",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/living-twig-bow/lod2.glb",
+      "sha256": "43e831f8c1ce6895a3785804d6571e6ab34a7558bcc936f769f6a33d3e66ea46",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 6,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-living-twig-bow",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/living-twig-bow/collision.glb",
+      "sha256": "299c285abf1df6bf5aff51fb311bf33c3792e0a579828d7a90568727fc7c40dc",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-living-twig-bow",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/living-twig-bow/damaged.glb",
+      "sha256": "596f0508767c986d5b8a36e7d2cc08cde3dd24b650e53eb67758730e8bbb0eef",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 55,
+        "materials": 6,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-living-twig-bow",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/living-twig-bow/stowed.glb",
+      "sha256": "7fdc4a5084248983c281813ae338939683138c2285dcd70661c31d8f49234898",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 6,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-living-twig-bow",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/sapseed-staff/lod0.glb",
+      "sha256": "f6d871e384b574785d6c10f2d5fbbbd64c0240ff0462aea19295394574dd38d2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 92,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-sapseed-staff",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/sapseed-staff/lod1.glb",
+      "sha256": "3fc7c6553bb6e1a90c94ea32cadf2984a3e22510730f5e51a857af952b5e2d66",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 92,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-sapseed-staff",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/sapseed-staff/lod2.glb",
+      "sha256": "4354f001a8a5d43fac419452c223ab074b4afe14f59d7113eb04af6de2d28e6e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 92,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-sapseed-staff",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/sapseed-staff/collision.glb",
+      "sha256": "e870396128adffccb6cce1b7e67543c64aefec1717a67d55cad626ab8515597a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-sapseed-staff",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/sapseed-staff/damaged.glb",
+      "sha256": "fe8e40e533359038a8231a05ecc27d364fed0e37b020c238e24d3f4394ce0c76",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 91,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-sapseed-staff",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-07/weapons/sapseed-staff/stowed.glb",
+      "sha256": "1e2c80663e9f5aa532c96d584456fa4c78f09f190056235d8675cff67be765e0",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 92,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-07/weapons/manifest.json",
+          "asset_id": "oath-07-sapseed-staff",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/poison-saber/poison-saber.glb",
+      "sha256": "548b00a472c225b7fcb3bed5d6661495b523401c18dc5def5ce5da47880aaaee",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 37,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-poison-saber",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/poison-saber/poison-saber_lod1.glb",
+      "sha256": "e4b14787b217ff2c9336dae9f9bffe8147ee8a1cdc06730a24bbf8b54c295079",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 37,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-poison-saber",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/poison-saber/poison-saber_lod2.glb",
+      "sha256": "35f9a143410af82b307e4a7914418d9ba60b5613c3a90cb10a0607d10335adc3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 37,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-poison-saber",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/poison-saber/poison-saber_collision.glb",
+      "sha256": "f20bfee4a7b13860b859bc4eb310ac0cacfd2c3fc9ac57f11d66926189565ef7",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-poison-saber",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow.glb",
+      "sha256": "8152b42c210b2b877217a7369f0d0f4d0f1217f2655c8ccf341296e40d6c32cb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 71,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-alchemical-crossbow",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow_lod1.glb",
+      "sha256": "f75ecbb0f883a7ada5e2a1abccf12d36b517d46ddcd0a23f0dfdb91f53fc6a57",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 71,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-alchemical-crossbow",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow_lod2.glb",
+      "sha256": "247267e7ea2b903e5aa0e04a8c990a61a395e5abd396d5eddd656e386ace0f7c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 71,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-alchemical-crossbow",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow_collision.glb",
+      "sha256": "3e3cd06f7c02d015e71593599381a7a529a775d86babec219569792fb45d35ae",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-08/weapons/manifest.json",
+          "asset_id": "prod-o08-alchemical-crossbow",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/lotus-short-sword/lod0.glb",
+      "sha256": "1fa368389f1cda9ccb96d648880ceaf80cf5d32cfb0fb7ab5f63d1e4cd4da7d8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-lotus-short-sword",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/lotus-short-sword/lod1.glb",
+      "sha256": "d5e68240ddf670accf4a7aeaa0b24b8f0bcde4768ba798b93fad2b5a1b47136e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-lotus-short-sword",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/lotus-short-sword/lod2.glb",
+      "sha256": "946c963c270f81daed94510f651c8733cc782d40f23a3623142f5f25fd927ca3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-lotus-short-sword",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/lotus-short-sword/collision.glb",
+      "sha256": "cf99e0b5b9ac4844b22942df781bccd3d9a3a7ada92ca176d62c4603ac3fe71b",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-lotus-short-sword",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/lotus-short-sword/damaged.glb",
+      "sha256": "7f921945f0876c14063ecaf6d823f62c357098b90261b140084b7d53652d8aa2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 55,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-lotus-short-sword",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/lotus-short-sword/stowed.glb",
+      "sha256": "600418d1d8ccd7b1f604f8a7ffe0a1af4469090bafca0018bcc652e2ab6b08bc",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 56,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-lotus-short-sword",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/radiant-lotus-staff/lod0.glb",
+      "sha256": "1809fa29d4cf7003e05fc3bdb944c606ee041a9f3dccbe381776f3038c5daa84",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 60,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-radiant-lotus-staff",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/radiant-lotus-staff/lod1.glb",
+      "sha256": "417512e79d9fdcecb5a82f3be26de9a8162c08b1479c64840c80a651bfca0e24",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 60,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-radiant-lotus-staff",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/radiant-lotus-staff/lod2.glb",
+      "sha256": "c552ff46fa2176d9681146a70c1ce6558659807a79cb38e56a82e9084d23cbee",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 60,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-radiant-lotus-staff",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/radiant-lotus-staff/collision.glb",
+      "sha256": "2b597fc978f45de81918c087f6b9c150a36fa87a8334eca6dfb4cfbc562eeede",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-radiant-lotus-staff",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/radiant-lotus-staff/damaged.glb",
+      "sha256": "7dd2a436a482489d5eba1a3ee2d297c4c445656fd7920bbd65927f81883a25d1",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 59,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-radiant-lotus-staff",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-09/weapons/radiant-lotus-staff/stowed.glb",
+      "sha256": "3f2b0f443e425ae46e5c313d3fdeb18d36ea93e88d301c662a84da9715d14781",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 60,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-09/weapons/manifest.json",
+          "asset_id": "oath-09-radiant-lotus-staff",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/paired-gravity-flail/lod0.glb",
+      "sha256": "9d0ea7e5bf691769db6235bb7061206ceba9d0373118c63fe8b47ebc388428e2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 49,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-paired-gravity-flail",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/paired-gravity-flail/lod1.glb",
+      "sha256": "1f26b192ddf65afd1b4214bc6337499c314bd5beb1837ac5311fcd041f82912d",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 49,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-paired-gravity-flail",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/paired-gravity-flail/lod2.glb",
+      "sha256": "c6f2b28ae1f4ede45e991a1833c9d1fd38d65141eafe465d81acb466ae79ff36",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 49,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-paired-gravity-flail",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/paired-gravity-flail/collision.glb",
+      "sha256": "b79617ae84e74971820ee430ca1595d1f5cd75680f0ccc6dc674f06caa76dfb1",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-paired-gravity-flail",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/paired-gravity-flail/damaged.glb",
+      "sha256": "84fcfa7c6ced949b2e5b6c4e03a35c327ea5016257758d509037a9b1619e545b",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 48,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-paired-gravity-flail",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/paired-gravity-flail/stowed.glb",
+      "sha256": "2ad8b15708af83b75fe8b39d23825727ac53c1d20c33d6cd6f7443821ed4a816",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 49,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-paired-gravity-flail",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/orbital-astrolabe-staff/lod0.glb",
+      "sha256": "bb3fbfdb5653b43fb5f4ab9ec7426465b3d603cceab51893d460e535e8dc479d",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-orbital-astrolabe-staff",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/orbital-astrolabe-staff/lod1.glb",
+      "sha256": "c036b9bf447582fb03da55c3c60284b2d6a91a58fb24475d58a74ed223ab4e92",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-orbital-astrolabe-staff",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/orbital-astrolabe-staff/lod2.glb",
+      "sha256": "96c7eb988827aaff47b0de22a5650cecc4e4a30dc2d45bf0eb169fbdd8b52e23",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-orbital-astrolabe-staff",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/orbital-astrolabe-staff/collision.glb",
+      "sha256": "72401edfd1a54bdefb3528f0e53e4659ea7ad9fbd735c23ddd771d628f17164c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-orbital-astrolabe-staff",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/orbital-astrolabe-staff/damaged.glb",
+      "sha256": "376e24fe52d76375c05badb4fe87ccc1bdb029aead737c38bcf1b9bab512de23",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 64,
+        "materials": 5,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-orbital-astrolabe-staff",
+          "role": "files.damaged"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-10/weapons/orbital-astrolabe-staff/stowed.glb",
+      "sha256": "265f18e5518e50ccd09909fec25cf38d7ffb2205dc8b6572e229e68bd30c30fd",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 65,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-10/weapons/manifest.json",
+          "asset_id": "oath-10-orbital-astrolabe-staff",
+          "role": "files.stowed"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/void-cleaver/void-cleaver.glb",
+      "sha256": "cb649eef80bde735e3e88f9f612356b411ad064631ec16fb0cfd378c747d8a76",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-void-cleaver",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/void-cleaver/void-cleaver_lod1.glb",
+      "sha256": "b545420556337a5580adfac515890d230667cad40e8789dbae756e1a181d97da",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-void-cleaver",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/void-cleaver/void-cleaver_lod2.glb",
+      "sha256": "2015b539b6b3dba8f19b1d6cb572d0576ac2eaa90a913d29492557716384798a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 28,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-void-cleaver",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/void-cleaver/void-cleaver_collision.glb",
+      "sha256": "77d82f23210a6f8908d27e591731414f698dff9cdcbd70e99f0dfa262ca96773",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-void-cleaver",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus.glb",
+      "sha256": "8240da14c7ae02ceda0098cebc3ffedc62e9c041de79384c933fe63db1aaff8e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 46,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-missing-court-lotus-focus",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus_lod1.glb",
+      "sha256": "9c30baa5f275a9f0e02d6779de34935633285f7e430f36f123e65ce258db94c8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 46,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-missing-court-lotus-focus",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus_lod2.glb",
+      "sha256": "0be2a008ee6b90cb009619f65e90c5f2186707bbf5237fa6824d9daecc917f14",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 46,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-missing-court-lotus-focus",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus_collision.glb",
+      "sha256": "bdd48d441762dd056120a89f84d17d61cb93f2fee4a1eca949655350aeacb397",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-11/weapons/manifest.json",
+          "asset_id": "prod-o11-missing-court-lotus-focus",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-lash/blood-lash.glb",
+      "sha256": "e584ae52c125734f1901276d89ee34418cb5849aaf82305cc20eb900fcdbce8c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 45,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-lash",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-lash/blood-lash_lod1.glb",
+      "sha256": "cefaee058738cd2e77529f41cc47386e8973eb298ec99cf64400898b63ff00c3",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 45,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-lash",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-lash/blood-lash_lod2.glb",
+      "sha256": "c7134093fa51c624bb3e118d79faa312cf7fcd50cfc36ba9e430d599f0ab923d",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 45,
+        "materials": 3,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-lash",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-lash/blood-lash_collision.glb",
+      "sha256": "b6d99c75775054a31503cd319df3a678296abf379573868496fc5f5852c54720",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-lash",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet.glb",
+      "sha256": "b5b5875a093435d804a1ec5dd42cdf5411abb670f0f78e9f3be20313faebaabb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 41,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-gauntlet",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet_lod1.glb",
+      "sha256": "2acb4d588bba20d2d1d20e9e1ac58b140cf3b8a053906446eb1c578cf7dfd8bd",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 41,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-gauntlet",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet_lod2.glb",
+      "sha256": "e0f99646933de6558f284ce668ed33c4083617509d755a5f5e3ce7bb470374f4",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 41,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-gauntlet",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet_collision.glb",
+      "sha256": "d277b68f25396ebea9a2013f285783f85c1c4ad5af536528139f7d0a1334cf57",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-12/weapons/manifest.json",
+          "asset_id": "prod-o12-blood-gauntlet",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier.glb",
+      "sha256": "0eba9f83aeae3236e62493337430a6ddffafddf750d77db22110048bdf62685c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 23,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-ceremonial-rapier",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier_lod1.glb",
+      "sha256": "250658e878304a51e82e3c80d9c7a5cede37a09c021c87b690a8a99f884ec216",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 23,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-ceremonial-rapier",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier_lod2.glb",
+      "sha256": "f9ce0acc918bec0ba0547fc162cef442c74c48c79492a3dcbc4eed3ef1acccb8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 23,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-ceremonial-rapier",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier_collision.glb",
+      "sha256": "a8c708d2b8096c69a5e97a0f41e22e79a9b3d10364ecd6371eef5758e9e44509",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-ceremonial-rapier",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton.glb",
+      "sha256": "b81aa127fcc779e8c859dd4c71e64865200eb5f3280bf8e9b28371f529da7887",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 25,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirrored-baton",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton_lod1.glb",
+      "sha256": "33f1968b18cca46a06a3906224d561f2dd7e6a3c86d813e3a51c0925348cb411",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 25,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirrored-baton",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton_lod2.glb",
+      "sha256": "98a7207c9805e8d87bf4c1f35b38a2282d8b2be3edcfb36964acc32b998e4a9f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 25,
+        "materials": 5,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirrored-baton",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton_collision.glb",
+      "sha256": "d80639302ce7c15f8b4563519347c3798c2b285582f91f4acf6b9527c1edd2f8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirrored-baton",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirror-codex/mirror-codex.glb",
+      "sha256": "4bc24f5b5cf14c0bf6f197754e44ff090b53b971caef7f6974dbb166df8d3a0f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 34,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirror-codex",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirror-codex/mirror-codex_lod1.glb",
+      "sha256": "240a83edfe6a8c8b728474d9cb5ef088c0265697dc874e7b320edcf33a41430f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 34,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirror-codex",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirror-codex/mirror-codex_lod2.glb",
+      "sha256": "b5ea4aded574590a02e9b1f13171dee553405d078acadd1602e2db5877a71c5a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 34,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirror-codex",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-13/weapons/mirror-codex/mirror-codex_collision.glb",
+      "sha256": "026ff957ecc86bef9ef3ba7c86b4eee47b0b03b2a438144cfb6070e4b2296fdc",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-13/weapons/manifest.json",
+          "asset_id": "prod-o13-mirror-codex",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready.glb",
+      "sha256": "d1bde58fd9a21f10606e5791294267ec0e0e442f3dad4298a3e38535deccf087",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 66,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-scythe-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-lod1.glb",
+      "sha256": "15f8cd743440f9a4c50ab405c6dd8ae9eafebc70b72e19d21291319dbbacab39",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 66,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-scythe-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-lod2.glb",
+      "sha256": "763b039e61be40d548616e41de66ab71dcc190967bc48e0d87ebec6d7506dafd",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 66,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-scythe-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-collision.glb",
+      "sha256": "755dd6f0579bb0bd8b091df8aca0e73accfe8ec77e06de785476798f959b71f8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-scythe-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready.glb",
+      "sha256": "a964757e441fc9ad0474460fb8ad295d2c253b7d596c65406fbb30ea6d016fc0",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 22,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-ring-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-lod1.glb",
+      "sha256": "388fad301cfbcb55ed3519860a9b8d2b5abd9ef430d6e613d4a49357a3d053c7",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 22,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-ring-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-lod2.glb",
+      "sha256": "cbea433702921bd2750a5f87533013fe1c7af22b49a95afda9ab43e3558d6f5a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 22,
+        "materials": 3,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-ring-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-collision.glb",
+      "sha256": "e23b7185d75981beffc495bd256427584eff1682940927c6f365e30dd3c25a22",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-ring-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready.glb",
+      "sha256": "6a176bf55f1c2e932881b5938810af6bf5d45d099f460ca30fb52291d156a42a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 8,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-wrist-tool-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-lod1.glb",
+      "sha256": "ee850d95f74734e82ec4c23907517c13f6a639dd480f6bf88752191ccbdbcad2",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 8,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-wrist-tool-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-lod2.glb",
+      "sha256": "db991a7abf3c5df098ef068b303d0a033f97166826baefa522b5e35a30339a35",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 8,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-wrist-tool-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-collision.glb",
+      "sha256": "48b6fa58262c7d85a4010b3452b55719cb20d99f40aa3323e5b18c434461661d",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-wrist-tool-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready.glb",
+      "sha256": "2a9402c3bd41d8688cb36fdca81045d02b2665db4c054b05a1d52cb72b3c910a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 6,
+        "materials": 2,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-compact-dart-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-lod1.glb",
+      "sha256": "7b1bd8f05890fcf749e6ef57fe60290129859d8bdc03fb338b1b452c43069b3d",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 6,
+        "materials": 2,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-compact-dart-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-lod2.glb",
+      "sha256": "be9a90b380adc57101a6dd32b44891624394a5f1511e57ce5bb9ab36d79cab2a",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 6,
+        "materials": 2,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-compact-dart-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-collision.glb",
+      "sha256": "3f5cc76ff4970759f058cff3761cca0f46a87d465c05605f6614718dd8396190",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-14/weapons/manifest.json",
+          "asset_id": "chronal-compact-dart-ready",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip.glb",
+      "sha256": "9e4499f074493f69c9b848c60d9db582a03f622931ad05e07b4a29b2e9390376",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 78,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-long-grip",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-lod1.glb",
+      "sha256": "102744fd1449549e1b591467b6d4a53b846d02c98abc5a9d9e16f8beea9d6acb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 78,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-long-grip",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-lod2.glb",
+      "sha256": "0d94cbdeb6b26e151779e2e03b82d52749732dd9d0ab8e9a6a7e35da1d99695c",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 78,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-long-grip",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip-collision.glb",
+      "sha256": "a10299ba7f854bdb5d7b4018efd3bcd551e48006999fea8fe7abf5618f8877b8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-long-grip",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip.glb",
+      "sha256": "cdaa06426ddad6c7550d640229dab3fb9b986ad55e957f3bac3c1c051036cc63",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 68,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-short-grip",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-lod1.glb",
+      "sha256": "a06cbe140483981d93bc30907628de978d8814ecc4cce06e8d822ce8a0175b53",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 68,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-short-grip",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-lod2.glb",
+      "sha256": "75c0640a2ba701ee22504a46fbd0f0c896c371e4f3a0c34cb760d4a4dea7885f",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 68,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-short-grip",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip-collision.glb",
+      "sha256": "d7e3e33f773be83c0705dd789097f3602b3bd36a42e9320f4394ed606befe82e",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-hammer-short-grip",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded.glb",
+      "sha256": "16f7d7df38edcbd4c5194e292f8626730921b95871b3ec08053d098541532d56",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 89,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-folding-shield-unfolded",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-lod1.glb",
+      "sha256": "b45145176f06d09cae941de639560962302ca5d40c0a32ba2bce8a69c31f2953",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 89,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-folding-shield-unfolded",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-lod2.glb",
+      "sha256": "57eba62f65eac0a3aff20e0788f156646d22e3aba8171f4c95b5ef6606295a16",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 89,
+        "materials": 4,
+        "skins": 1,
+        "animations": 1
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-folding-shield-unfolded",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded-collision.glb",
+      "sha256": "0697af272ba4093856e57dcca0967b449b249429be77c21a80c0c1d6fbf756cb",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-folding-shield-unfolded",
+          "role": "files.collision"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready.glb",
+      "sha256": "1dfcf00ddf6019d487bbd50a7d6a45f0de9b1d881a941fa954b5f5e3f1c4c6cd",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 19,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-belt-module-ready",
+          "role": "files.glb"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-lod1.glb",
+      "sha256": "a8514e612d0528df77b220b617acf9334db8150a68024deccc9e4cc2b75201e8",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 19,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-belt-module-ready",
+          "role": "files.lod1"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-lod2.glb",
+      "sha256": "5a8b5c0123e06eb6402426e55cfbe68e384df82a8726517b75aaa721a3a3b177",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 19,
+        "materials": 4,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-belt-module-ready",
+          "role": "files.lod2"
+        }
+      ]
+    },
+    {
+      "path": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready-collision.glb",
+      "sha256": "48bb8a064ad5b2141b028837b604ac7e72c367ecd40d11e73e333f98e9e21946",
+      "source_expectations_not_engine_evidence": {
+        "meshes": 1,
+        "materials": 0,
+        "skins": 0,
+        "animations": 0
+      },
+      "references": [
+        {
+          "manifest": "assets/production/oath-15/weapons/manifest.json",
+          "asset_id": "impulse-belt-module-ready",
+          "role": "files.collision"
+        }
+      ]
+    }
+  ]
+}

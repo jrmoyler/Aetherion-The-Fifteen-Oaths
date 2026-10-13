@@ -1,0 +1,76 @@
+{
+  "vertices": 2577,
+  "multiInfluenceVertices": 486,
+  "unweightedVertices": 0,
+  "maximumWeightSumError": 3.5762786865234375e-07,
+  "boneCount": 38,
+  "boneNames": [
+    "finger1.L",
+    "finger1_tip.L",
+    "finger2.L",
+    "finger2_tip.L",
+    "finger3.L",
+    "finger3_tip.L",
+    "finger4.L",
+    "finger4_tip.L",
+    "thumb.L",
+    "finger1.R",
+    "finger1_tip.R",
+    "finger2.R",
+    "finger2_tip.R",
+    "finger3.R",
+    "finger3_tip.R",
+    "finger4.R",
+    "finger4_tip.R",
+    "thumb.R",
+    "root",
+    "pelvis",
+    "spine",
+    "chest",
+    "neck",
+    "head",
+    "clavicle.L",
+    "upper_arm.L",
+    "forearm.L",
+    "hand.L",
+    "thigh.L",
+    "shin.L",
+    "foot.L",
+    "clavicle.R",
+    "upper_arm.R",
+    "forearm.R",
+    "hand.R",
+    "thigh.R",
+    "shin.R",
+    "foot.R"
+  ],
+  "socketNames": [
+    "grip_primary",
+    "cast_origin",
+    "hit_reference",
+    "stow"
+  ],
+  "evaluatedPoseChecks": [
+    {
+      "clip": "idle_breath",
+      "frame": 24,
+      "finiteVertices": true,
+      "movedVertexCount": 1694,
+      "maximumDisplacementMeters": 0.0006170234192704665
+    },
+    {
+      "clip": "walk_in_place",
+      "frame": 16,
+      "finiteVertices": true,
+      "movedVertexCount": 2577,
+      "maximumDisplacementMeters": 0.06832067361186124
+    },
+    {
+      "clip": "cast_release",
+      "frame": 24,
+      "finiteVertices": true,
+      "movedVertexCount": 1705,
+      "maximumDisplacementMeters": 0.7439691930470625
+    }
+  ]
+}

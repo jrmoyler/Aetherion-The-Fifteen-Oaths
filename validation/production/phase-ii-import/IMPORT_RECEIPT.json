@@ -1,0 +1,875 @@
+{
+  "generated_at_utc": "2026-10-13T20:12:51.401518+00:00",
+  "scope": "Exact additive planning-package import and fresh static validation only; no design approval, runtime, production-art or gameplay certification.",
+  "working_head_at_validation": "4794c8ed0292878cd8d5cefe199824bb6e4db56a",
+  "archive": {
+    "path": "docs/archives/Aetherion_Phase_II_Continental_Architecture_2026-10-13.zip",
+    "bytes": 1011575,
+    "sha256": "02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc",
+    "regular_entries": 117,
+    "payload_files": 115,
+    "administrative_files_preserved_inside_zip": [
+      "PACKAGE_SCOPE.txt",
+      "SHA256SUMS.txt"
+    ],
+    "payload_allowlist": "SHA256SUMS.txt inside pinned ZIP",
+    "deliverable_family_count": 20
+  },
+  "documents_reviewed": [
+    "README.md",
+    "INTEGRATION_PLAN.md",
+    "DELIVERABLE_MANIFEST.json",
+    "PACKAGE_SCOPE.txt",
+    "SHA256SUMS.txt"
+  ],
+  "review_token": "931e79013ca6efdba4fbc10451ac310beb4671651e34968393f96204b377f55e",
+  "payload_digest_algorithm": "SHA256 over UTF-8 JSON sorted-key compact array of source/destination/bytes/sha256/verified_identical rows",
+  "payload_digest": "2b12be257ab761352c8d82c70695d1c01f3a6c30afc221861881b61c31cd65fe",
+  "validation": {
+    "isolation": "Archived validators ran in a disposable copied package and newly created venv; fresh reports copied here, not written over imported evidence.",
+    "jsonschema_version": "4.26.0",
+    "python_version": "3.12.14",
+    "commands": [
+      "python validation/validate_phase2.py",
+      "python validation/run_negative_fixtures.py",
+      "python validation/validate_phase2.py --foundation <clean-pinned-foundation> --source-repo <clean-pinned-source>",
+      "python -m unittest discover -s tests/production -p test_import_phase_ii.py -v"
+    ],
+    "pinned_foundation": "5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+    "pinned_source": "4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451",
+    "results": {
+      "PINNED_BASELINE_VALIDATION_REPORT.json": {
+        "PASS": 450,
+        "FAIL": 0,
+        "SKIPPED": 0,
+        "HUMAN_REVIEW": 5
+      },
+      "STANDALONE_VALIDATION_REPORT.json": {
+        "PASS": 445,
+        "FAIL": 0,
+        "SKIPPED": 5,
+        "HUMAN_REVIEW": 5
+      },
+      "NEGATIVE_FIXTURE_REPORT.json": {
+        "PASS": 40,
+        "FAIL": 0
+      }
+    },
+    "importer_tests": {
+      "pass": 22,
+      "fail": 0
+    }
+  },
+  "post_validation_byte_verification": {
+    "matching_payload_files": 115,
+    "unexpected_payload_files": 0,
+    "exact_archive_preserved": true
+  },
+  "payload_mapping": [
+    {
+      "source": "AETHERION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json",
+      "bytes": 442946,
+      "sha256": "145f41ec58c34483362465fcc61f90455d471ed13f4cf39ea91f81c00386433e",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/ASSET_CONSTRUCTION_HANDBOOK.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ASSET_CONSTRUCTION_HANDBOOK.md",
+      "bytes": 18643,
+      "sha256": "99ac06ba229460641b6f270d577f4f814ff74b1e8091c4bfa680cf1e85515ed0",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CANON_ALIGNMENT_AND_GAP_REPORT.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CANON_ALIGNMENT_AND_GAP_REPORT.md",
+      "bytes": 5928,
+      "sha256": "82a1296de9c1c964f6c83a59c6d8dfb774cb305bb9b694554ba5c84784f78034",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/01_CINDERVAULT.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/01_CINDERVAULT.md",
+      "bytes": 15930,
+      "sha256": "9fc7d5757b5ac520a0b962a6e9d8c33e0f9d6321d556da087273b821e0b8ab12",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/01_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/01_PLAN_AND_SECTION.svg",
+      "bytes": 8122,
+      "sha256": "d195c7fd8a9acbf5bebd08374932a207c9c92c01af21d35ec34bddfed892e0e3",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/02_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/02_PLAN_AND_SECTION.svg",
+      "bytes": 7257,
+      "sha256": "bb8453798ce31452e362b5d6fbd24eb1b87d00ccd4641736e015967f484d9cc1",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/02_STILLFOLIO.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/02_STILLFOLIO.md",
+      "bytes": 15199,
+      "sha256": "a8781e704a16666731bd4d852ea87fbe4af9950a100bf115edbc1ee5563c1321",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/03_CROWNSPAN.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/03_CROWNSPAN.md",
+      "bytes": 15804,
+      "sha256": "3ca7dc08ffd09793cc4f0505bfccb9c636f63946eb7e092ecc8009d546998fa9",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/03_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/03_PLAN_AND_SECTION.svg",
+      "bytes": 8104,
+      "sha256": "73769600760560291b2a5ddd73812f618dfa3e7665e7f9fb05986be3e3ffd9c0",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/04_CONFLUENCE_QUAY.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/04_CONFLUENCE_QUAY.md",
+      "bytes": 16590,
+      "sha256": "058d8123c59e5e1f47c08b08885a30446c4b71e82cf5034fd7a69b7035447614",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/04_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/04_PLAN_AND_SECTION.svg",
+      "bytes": 8940,
+      "sha256": "b52ea0cfa6ad831899921af4f1672f6f5bd13828318e938c1b5435deb496c5bf",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/05_KEYSTONE_HALL.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/05_KEYSTONE_HALL.md",
+      "bytes": 15968,
+      "sha256": "268b022ec82b833e8c2e665a873f05dab602059c8266a9b808d33d8dc6207ea1",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/05_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/05_PLAN_AND_SECTION.svg",
+      "bytes": 8093,
+      "sha256": "f10f1212d324f6a024640fe6e119ae34f4303aaeceeca51b0f68259f415e0151",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/06_CANTILEVER.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/06_CANTILEVER.md",
+      "bytes": 15231,
+      "sha256": "fdffc9741e6b91b50bacdac2fa4a84378d5db7b26b39766d06fea8924a5e9c7e",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/06_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/06_PLAN_AND_SECTION.svg",
+      "bytes": 7279,
+      "sha256": "8870184a22d082fdd4a56f4c82b0fef1a1a5bf8d7227a97050be298dd2607c3c",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/07_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/07_PLAN_AND_SECTION.svg",
+      "bytes": 8182,
+      "sha256": "d9f12124fdb7e2a2c5ccac2b04ff73f14bff770a967eb420d00a69841244b210",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/07_ROOTMEET.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/07_ROOTMEET.md",
+      "bytes": 16025,
+      "sha256": "2ffacb06977ec8a379fc1c2b5283ab874b68e9894ddebe9d7ff350c231e5dc64",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/08_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/08_PLAN_AND_SECTION.svg",
+      "bytes": 8094,
+      "sha256": "f7e2bebed8385e5faafddb0d7a3aa3aec8e40375891606eba2738d03cd2439f7",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/08_VITRIAL.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/08_VITRIAL.md",
+      "bytes": 16043,
+      "sha256": "59604d0ffda914ef96eadcfff09b114b2e703f1613482637d67c3f5fa8398862",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/09_AUREATE_STEPS.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/09_AUREATE_STEPS.md",
+      "bytes": 16721,
+      "sha256": "6e23f31239de1cd962d9ed757789a64da22538cd340992019a570bf270678cab",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/09_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/09_PLAN_AND_SECTION.svg",
+      "bytes": 9030,
+      "sha256": "d509936103e93a92063798a7bb30907fc0021c499e8a863439c9b353296f9fda",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/10_PARALLAX_CROWN.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/10_PARALLAX_CROWN.md",
+      "bytes": 16209,
+      "sha256": "d47a89bc6906ee9ed3822af1464f477ecd38fbf4e87856f40ed2bbda5aea9d86",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/10_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/10_PLAN_AND_SECTION.svg",
+      "bytes": 8144,
+      "sha256": "1d15524cce8faee3c313684c700c11200183b6f31c6d52cda68e16cdc535da6f",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/11_ABSENT_SEAT.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/11_ABSENT_SEAT.md",
+      "bytes": 15474,
+      "sha256": "baed38a9725e1b0662f0cc49874242e84e8f7deaf17e1ab49005f54c8b3a5668",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/11_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/11_PLAN_AND_SECTION.svg",
+      "bytes": 7395,
+      "sha256": "6e3bc8cde740cc53747ad3d801030bf1a1c991ad4c97c2b4e5eacd240d368a82",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/12_KINHOLD.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/12_KINHOLD.md",
+      "bytes": 15972,
+      "sha256": "eb67be43dbb96adb47a1ecdeb1c19bcc0b7a6277843fea2bb5cd142cf2c1236a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/12_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/12_PLAN_AND_SECTION.svg",
+      "bytes": 8096,
+      "sha256": "1f7068b0995cf4ba9e836862785b981f37772c5d3a7bc625bc462c3ca7f26645",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/13_MANYDOOR.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/13_MANYDOOR.md",
+      "bytes": 16060,
+      "sha256": "83f1503b0bcc8cc5b969f9f174758c0aadb53efd28c2c8e01ba4eca07035a5ae",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/13_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/13_PLAN_AND_SECTION.svg",
+      "bytes": 8029,
+      "sha256": "fdfbd32a0087b7bf2bee1bd567fff74ed7dbb6350c5bb68148218e76c35186b0",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/14_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/14_PLAN_AND_SECTION.svg",
+      "bytes": 8956,
+      "sha256": "16e57d5e3c7846684de24027a8eb8a843f4dcba8fee32927cb12b4d3da05a5f2",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/14_WAYCLOCK.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/14_WAYCLOCK.md",
+      "bytes": 16664,
+      "sha256": "63e04f24469080310f1c6b8243d0687c11a174d31d3f916da6796bf8939495c4",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/15_COUNTERPOISE.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/15_COUNTERPOISE.md",
+      "bytes": 16210,
+      "sha256": "5f256b024b97ae0d5ecf0b1148f6fe1c21c8575864c8f148ac4ef880ce4bfa4a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/15_PLAN_AND_SECTION.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/15_PLAN_AND_SECTION.svg",
+      "bytes": 8243,
+      "sha256": "0d3ee7e48738c3e1bf04c65432917fabcb7548f2ffc9b5d620c71f7054b5b48a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json",
+      "bytes": 234092,
+      "sha256": "3e78d1ff99d4ffecada096e027aeb22e219ec97dba4e3339f0935301fef9356c",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CONTINENT_GEOGRAPHY.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CONTINENT_GEOGRAPHY.md",
+      "bytes": 10775,
+      "sha256": "0e67e423327b8f5ba40d7a46e0d532876d8c0a30e0200eab46fff66846e19b01",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CONTINENT_MAP_SPECIFICATION.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CONTINENT_MAP_SPECIFICATION.md",
+      "bytes": 5619,
+      "sha256": "5df54427bec0271d1945912dfef78cec275c0b51d0f250f1b7ebbcd61bd3f6f1",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/CONTINENT_MASTER_PLAN.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CONTINENT_MASTER_PLAN.md",
+      "bytes": 6457,
+      "sha256": "6a963f220521f12396eacdbd5384415cbb4cc2478990307cbce4713f3e451770",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/DELIVERABLE_MANIFEST.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/DELIVERABLE_MANIFEST.json",
+      "bytes": 4591,
+      "sha256": "07920f0a93a0a0b5ffc98c9dba038ad62d8df90e14a1897c82088012d1c0e928",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/DUNGEON_AND_EXPLORATION_PLAN.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/DUNGEON_AND_EXPLORATION_PLAN.md",
+      "bytes": 61452,
+      "sha256": "c18a56c47b492985596b6b2de05b1bf227fd4b6388efb142675ffc7e2ce57239",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/DYNAMIC_WEATHER_SYSTEM.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/DYNAMIC_WEATHER_SYSTEM.md",
+      "bytes": 11838,
+      "sha256": "002e6998f53ff4c6fe88cd738bdd951fa808fd21bcaf9cff0a9ca2d4109b223b",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/ENVIRONMENT_ASSET_REGISTRY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ENVIRONMENT_ASSET_REGISTRY.json",
+      "bytes": 547358,
+      "sha256": "5cca3c25b0943aca297e8857d34fda8fdf9c5dc21396ced9f1e1178806f1ea8a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "bytes": 161044,
+      "sha256": "69bd3edd696cafcd04dd24091fcb9d4958a3162b580e5a371e54f977fb3fdb93",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/01_KILN_OATH.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/01_KILN_OATH.md",
+      "bytes": 17215,
+      "sha256": "3ae4f50505ee2278bf388b69d4e38c30c2e4ef22973e8de03182a9e8a6124ef3",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/02_RIME_ARCHIVE.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/02_RIME_ARCHIVE.md",
+      "bytes": 17405,
+      "sha256": "ec7934b18308951938154aff9a997c36e5172d9a21f1f79375874cef44eea9a4",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/03_STORM_RELAY.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/03_STORM_RELAY.md",
+      "bytes": 17086,
+      "sha256": "d483641bd30a26e51b1bca85db450168c2119b766b6cf74128b8c2037fd3cb8d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/04_TIDAL_COVENANT.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/04_TIDAL_COVENANT.md",
+      "bytes": 17216,
+      "sha256": "2e0da53dc99144fc1d4942428cf4eac7577b549f732342c5eedf2d5a37ceaa2f",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/05_FAULT_CHOIR.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/05_FAULT_CHOIR.md",
+      "bytes": 17404,
+      "sha256": "44d767a718bb5d6b8bf16a6d17b5354b94965685c565512c6d2c95b472eb4499",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/06_REED_RESONANCE.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/06_REED_RESONANCE.md",
+      "bytes": 17480,
+      "sha256": "aaa6734c24925beaf65872cf379f6fe3ce9593a843c087a89121d92fe38e86d6",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/07_GRAFT_SANCTUARY.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/07_GRAFT_SANCTUARY.md",
+      "bytes": 17522,
+      "sha256": "df3e0ab108f80d145ebcaa4cfda3a33d3c6f6720556a95b83a502b4ed36e4b5b",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/08_BITTERGLASS_GUILD.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/08_BITTERGLASS_GUILD.md",
+      "bytes": 17393,
+      "sha256": "f44c1a31c8df09b96040dc9a639a175b78d209ed0de9f10a8d51b24f0120e349",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/09_OATH_OF_DAYBREAK.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/09_OATH_OF_DAYBREAK.md",
+      "bytes": 17474,
+      "sha256": "d4c4e8c77543feb164cbef570de0183776f5aeaaba3798c9288b95ad16710b6a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/10_TIDAL_OBSERVATORY.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/10_TIDAL_OBSERVATORY.md",
+      "bytes": 17666,
+      "sha256": "6fc8ccd18fd3d9ea5fbfafff16912c973ede3629664476bbfd88e7a45eef4f4d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/11_THE_MISSING_COURT.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/11_THE_MISSING_COURT.md",
+      "bytes": 17487,
+      "sha256": "420fff0cdcb9adffff42de3e215ca0725c05c64d59dfa8178878685eedb9804c",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/12_SANGUINE_COVENANT.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/12_SANGUINE_COVENANT.md",
+      "bytes": 17541,
+      "sha256": "a79b0487d860cd256925f37dd1c0ea3ff2df72138ac14aad7fedfd91786dd1fd",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/13_FOLDED_THEATRE.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/13_FOLDED_THEATRE.md",
+      "bytes": 17731,
+      "sha256": "dc785be56b529565bfbeff599ddb8730e4a055132ec4e36c90c0979e852347bf",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/14_ESCAPEMENT_ROAD.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/14_ESCAPEMENT_ROAD.md",
+      "bytes": 17654,
+      "sha256": "fed512dc7aef27f6ce741fc0a127a3b08ec89ded18026e8bfa5bc01b77062fbf",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/15_IMPULSE_FOUNDRY.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/15_IMPULSE_FOUNDRY.md",
+      "bytes": 17614,
+      "sha256": "f3f92bad5f951c3b0e8be9286eb6134dbcf1798ebfa570035aa5e5ebda181841",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/INTEGRATION_PLAN.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/INTEGRATION_PLAN.md",
+      "bytes": 16483,
+      "sha256": "1f7874f5aa946d40448e11f40dd272171f94882c3d71526dea2ff5da992c62b7",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/NPC_CIVILIZATION_SYSTEM.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/NPC_CIVILIZATION_SYSTEM.md",
+      "bytes": 16609,
+      "sha256": "259b08c69c3f2b8b48c8fc383dd15ec96ae3146b51b7a1429ce5cfd3ff6c04e9",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/README.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/README.md",
+      "bytes": 7725,
+      "sha256": "fd3faa1a4313ce9bfbe678f3178c8bd68b58b8fcef0891e05e46f368725c26bb",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/REGIONAL_BIOME_SPECIFICATIONS.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/REGIONAL_BIOME_SPECIFICATIONS.md",
+      "bytes": 33858,
+      "sha256": "1c1427f52ce08a84fcb3bdbea4a113f90f76e16c37d2de029f7bc14f3bfe6b03",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/REGIONAL_ECOLOGY_PROFILES.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/REGIONAL_ECOLOGY_PROFILES.json",
+      "bytes": 24271,
+      "sha256": "a6874b23296b41d4acf970e77c76f7fbe7a052cfc83549ea9c77f5a31c2c3204",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/REGION_BLUEPRINT_INDEX.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/REGION_BLUEPRINT_INDEX.json",
+      "bytes": 36118,
+      "sha256": "c53e5400d63e17823d75c8944f02d8d39ab76eea3274f267295ddc0a90b02999",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/SETTLEMENT_REGISTRY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/SETTLEMENT_REGISTRY.json",
+      "bytes": 84315,
+      "sha256": "7f92b8b3fbae272d40204e18bfdeddeb5cc3a3ded15f16f5587353aeca374466",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/SOURCE_INVENTORY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/SOURCE_INVENTORY.json",
+      "bytes": 84826,
+      "sha256": "dbd06b2da3ba45ca90c7788951b44d4a7b38cc35b9fd9d778c82d99a0026ac26",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/SOURCE_INVENTORY.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/SOURCE_INVENTORY.md",
+      "bytes": 2337,
+      "sha256": "cec914db42fd7c057da5435321097a2fa97544a6effa8a70377e8940b8ae360d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/STREAMING_PROTOTYPE_CONTRACTS.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/STREAMING_PROTOTYPE_CONTRACTS.json",
+      "bytes": 23418,
+      "sha256": "93848bc1e3d4b42fea6a8e3c647f59e8cf4a84473d452fb0ab48f70804bf498c",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/TRANSPORTATION_NETWORK.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/TRANSPORTATION_NETWORK.md",
+      "bytes": 10064,
+      "sha256": "b6b7b8fed905103a10d7b774908c815e5fc2212c246982d868751ebaff3e11d4",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/TRANSPORT_ROUTE_REGISTRY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/TRANSPORT_ROUTE_REGISTRY.json",
+      "bytes": 84296,
+      "sha256": "86aff3bb0008dde11d343fadc8a465be9e52c521e473e408d3a20259a179a91a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/WORLD_CONSTRUCTION_ROADMAP.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_CONSTRUCTION_ROADMAP.md",
+      "bytes": 13725,
+      "sha256": "a0a9c64514d25cbdd1635f1a01384216543eb7a342d0ad310ff239e32e70967c",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/WORLD_ECOLOGY_SYSTEM.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_ECOLOGY_SYSTEM.md",
+      "bytes": 10784,
+      "sha256": "d39e21d09892f7c2f0ba2b4d8bef844661a1d679d60f11f6a39afc40d7f10b97",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/WORLD_EVENT_REGISTRY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_EVENT_REGISTRY.json",
+      "bytes": 175037,
+      "sha256": "f9daf537d4945b47a506033f63d7a94b79dc0138bc71551d84d995810df4502f",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/WORLD_POI_REGISTRY.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_POI_REGISTRY.json",
+      "bytes": 417383,
+      "sha256": "920134133e69ee9aa56522981c989cc553969f9228581fb01c2e025db1267a48",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/WORLD_REGION_GRAPH.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_REGION_GRAPH.json",
+      "bytes": 55102,
+      "sha256": "25b086c36506a3dba47ce629684aedb3476e8d24567ee43a7b2f3ff94c53c96b",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/WORLD_STREAMING_ARCHITECTURE.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_STREAMING_ARCHITECTURE.md",
+      "bytes": 22673,
+      "sha256": "240370b2e96645b78c36e7cfe7f3d1fe68dd1c46f30cf23d58781984d4392ad8",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/maps/CONTINENT_CONCEPT.png",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/maps/CONTINENT_CONCEPT.png",
+      "bytes": 343287,
+      "sha256": "5feafccce18ea10612642fa731426492dba36d04c07e3e006f316651a4747bc5",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/maps/CONTINENT_CONCEPT.svg",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/maps/CONTINENT_CONCEPT.svg",
+      "bytes": 16520,
+      "sha256": "67980fa14b752dbd011f4ece80308bc59502fe28b59e621c34b3a985bc81fbfe",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/architectural-kit-registry.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/architectural-kit-registry.schema.json",
+      "bytes": 14485,
+      "sha256": "2400455abab3e12d0adff925e2bb9ee676d2ac0c62f5db59b7ac2ee8c50ebf81",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/capital-layout.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/capital-layout.schema.json",
+      "bytes": 9787,
+      "sha256": "10fcfab573625745280bc256192aea44ddcec7149ce59d0a4d7e889f9becb7f1",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/deliverable-manifest.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/deliverable-manifest.schema.json",
+      "bytes": 1502,
+      "sha256": "41faad3830d304e605744614f30f590f8507e383f30739c507bb182966994d1d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/environment-asset-registry.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/environment-asset-registry.schema.json",
+      "bytes": 10452,
+      "sha256": "c5e0eacdf60616d20cc777a7879d9725f6c8c87f3bdbdf4a6dbf27b744534d8d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/environment-reference-evidence.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/environment-reference-evidence.schema.json",
+      "bytes": 3851,
+      "sha256": "19b79b82bbc957a2a3b2a1911beee0b888ff7bfbf0dea944e0d1c82d2c16093f",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/region-blueprint-index.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/region-blueprint-index.schema.json",
+      "bytes": 4820,
+      "sha256": "000e42612f1a4e4e8199cb0474855a95ebdd5bb72ac256a57273fbc5a529b202",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/regional_ecology_profiles.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/regional_ecology_profiles.schema.json",
+      "bytes": 3240,
+      "sha256": "152db5e3974f51aded3bbe5cc0f977d0a2a4ee2747771ce219fa1e6f37a7c049",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/settlement.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/settlement.schema.json",
+      "bytes": 2732,
+      "sha256": "ab29c22a5cbae80a25a6c6a17584ba8ad717ba53b0757ef2c4128ee1343c5772",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/source-inventory.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/source-inventory.schema.json",
+      "bytes": 3910,
+      "sha256": "224a284fc10a76532b3e51422f84df433dae2e323ff00ee59a5b33686180fc42",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/streaming-prototype-contracts.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/streaming-prototype-contracts.schema.json",
+      "bytes": 4304,
+      "sha256": "affae4368accc236543eb1d470980ff8722702a90f5d44e54e279aac5cd277ef",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/transport-route-registry.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/transport-route-registry.schema.json",
+      "bytes": 8159,
+      "sha256": "b730aeebe41b835592be28abc9ab0c15107950dc076d6ed5bbd7faf26191900a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/world-poi.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/world-poi.schema.json",
+      "bytes": 3484,
+      "sha256": "d92fe6b2653a27aab8088713d2878b1985a33986739b2781dc1b10d925e8b15b",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/world-region-graph.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/world-region-graph.schema.json",
+      "bytes": 10351,
+      "sha256": "9b151668b1519330a8f515562a956430087a5af19ec476cbe1dc7cd6e4bfa530",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/schemas/world_event_registry.schema.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/world_event_registry.schema.json",
+      "bytes": 15797,
+      "sha256": "751d850a12aa593071008922c39ac1d540deae91070177e695d634a4396708b6",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/GEOGRAPHY_ACCEPTANCE.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/GEOGRAPHY_ACCEPTANCE.md",
+      "bytes": 3943,
+      "sha256": "87a328e6863ab14daba893f06e19f7137b8cf5fa07d669dd4cd29f52ec7df71a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/GEOGRAPHY_BASELINE_COMPARISON.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/GEOGRAPHY_BASELINE_COMPARISON.json",
+      "bytes": 472,
+      "sha256": "e772c16d5edb22b4be88b6c43a6abb161b5fbfe9a0fa58276b593ee6d4682419",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/GEOGRAPHY_VALIDATION.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/GEOGRAPHY_VALIDATION.json",
+      "bytes": 8509,
+      "sha256": "f0cc05c31a4ab7310ca16ed2ffbc26cbb160bc2cd25bd7a9ca0120d5ff050d0a",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/LIVING_WORLD_ACCEPTANCE_AND_GAPS.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/LIVING_WORLD_ACCEPTANCE_AND_GAPS.md",
+      "bytes": 4694,
+      "sha256": "52ac1086f0527fc7be431663ac8d565fe2d67cc20fd5a67a998db44ecf596452",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/LIVING_WORLD_SOURCE_INSPECTION.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/LIVING_WORLD_SOURCE_INSPECTION.json",
+      "bytes": 7768,
+      "sha256": "ef872a5bbc468397e608d657bdca7c1a3671683e59dcaef34159a26c69e8feaa",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/LIVING_WORLD_STATIC_CHECKS.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/LIVING_WORLD_STATIC_CHECKS.json",
+      "bytes": 3884,
+      "sha256": "968a48e7c839f3143db87628aa2b918b10a37d6163d14dacbfc5638f3c3329bb",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/NEGATIVE_FIXTURE_REPORT.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/NEGATIVE_FIXTURE_REPORT.json",
+      "bytes": 7524,
+      "sha256": "83d13a6c1c915437ba33adfc1f5392ceeedecf25fe182b3ac6425bcd23667f61",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/PORTABILITY_REPORT.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/PORTABILITY_REPORT.json",
+      "bytes": 678,
+      "sha256": "924aa8fd4bb7a3daf70dec9d01da322e16835562c8d6568e384a7d270e29e616",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/REGION_CAPITAL_ACCEPTANCE.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REGION_CAPITAL_ACCEPTANCE.json",
+      "bytes": 1918,
+      "sha256": "4f2191c3fbce5a89838e32f8fb7fabf17d2e7e8c6747766ea17250d49a0e039c",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/REGION_CAPITAL_EVIDENCE_AND_GAPS.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REGION_CAPITAL_EVIDENCE_AND_GAPS.md",
+      "bytes": 1272,
+      "sha256": "336ef738f85eb2953f27940dcde04c6d52e998fe3483140475a70f9d57f7986d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/REQUIREMENTS_COVERAGE.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REQUIREMENTS_COVERAGE.json",
+      "bytes": 91102,
+      "sha256": "f9b3ad93ad48f910e0a524a89a22b6f48e1c88f7c5e41f7cc5e4189a6e974ad0",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/REQUIREMENTS_COVERAGE.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REQUIREMENTS_COVERAGE.md",
+      "bytes": 58565,
+      "sha256": "db59f8bb61e024e089e939adf92c74cd94fadb6b3952255de7a579ef4b6d2b7d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/VALIDATION_REPORT.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/VALIDATION_REPORT.json",
+      "bytes": 57751,
+      "sha256": "3b7872ccf4fbf4171cb11709db2672ed08e5658329c8327c424a59960247eb4d",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/VALIDATION_REPORT.md",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/VALIDATION_REPORT.md",
+      "bytes": 10065,
+      "sha256": "6d4e610561fb1d9e79a2e008acce80c30b557f532db21e6e8bd7413e61600866",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/baseline_contract.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/baseline_contract.json",
+      "bytes": 524888,
+      "sha256": "47993bff3675a4b372c640fd98ac660d606534ec11f644e7eed226a367c912d3",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/build_coverage.py",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/build_coverage.py",
+      "bytes": 6124,
+      "sha256": "2eea18079a3886ccb4c4d78a9517ec30d292e8792afed53ca092d22c95aed624",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/environment_assets_report.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/environment_assets_report.json",
+      "bytes": 7063,
+      "sha256": "17653e6bef8a512387a57f017d7d35f2aac62181dcaaccbf1b29212b7238b4e8",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/requirements-validation.txt",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/requirements-validation.txt",
+      "bytes": 19,
+      "sha256": "756cc9e506ae4ee1a6f6c0507088b5cfc0dc8ba350fb2d2d46f1ffa72033adb6",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/run_negative_fixtures.py",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/run_negative_fixtures.py",
+      "bytes": 4362,
+      "sha256": "6f473211d94c925706afdd0cdd8640e39dbddba9fba56287e8e80a0c95660680",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/streaming_contracts_report.json",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/streaming_contracts_report.json",
+      "bytes": 2056,
+      "sha256": "d25cf4e8eb73bc5955a0cfc791011219b5bdf3d76ad7cbadceeb7c465863525e",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/validate_geography.py",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_geography.py",
+      "bytes": 5962,
+      "sha256": "558542169aecc122c11c2a1a463a8cc203ba7832b82106c2e8b18883cdcccea0",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/validate_living_world.py",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_living_world.py",
+      "bytes": 2775,
+      "sha256": "98e2d1235144652a9b03e8f721ca8a902e93a80cd98c6255fa79fcdd7bd66894",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/validate_phase2.py",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_phase2.py",
+      "bytes": 23020,
+      "sha256": "3b8153d320bfae48940835b39bc60cd346464269fe8021a3acf62978e9a01010",
+      "verified_identical": true
+    },
+    {
+      "source": "AETHERION_PHASE_II/validation/validate_streaming_contracts.py",
+      "destination": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_streaming_contracts.py",
+      "bytes": 3500,
+      "sha256": "72f01bf119635507840f80e6a25f2b6dbbd906e623ad7a863f5877425ed37d38",
+      "verified_identical": true
+    }
+  ]
+}

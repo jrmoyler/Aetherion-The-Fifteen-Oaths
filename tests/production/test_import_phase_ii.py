@@ -3,6 +3,7 @@
 import hashlib
 import importlib.util
 import io
+import json
 from pathlib import Path
 import stat
 import sys
@@ -99,6 +100,55 @@ class PhaseIIImportTests(unittest.TestCase):
         for name in ("README.md", "readme.MD"):
             with self.subTest(name=name), self.assertRaisesRegex(importer.ImportRejected, "Duplicate"):
                 self.inspect(extras=[(name, b"other")])
+
+    def test_unicode_normalization_collisions_rejected(self):
+        with self.assertRaisesRegex(importer.ImportRejected, "Duplicate"):
+            self.inspect(extras=[("caf\u00e9.txt", b"one"), ("cafe\u0301.txt", b"two")])
+
+    def test_control_characters_rejected(self):
+        for name in ("a\nb", "a\tb", "a\x7fb", "a\u202eb"):
+            with self.subTest(name=name), self.assertRaises(importer.ImportRejected):
+                self.inspect(extras=[(name, b"bad")])
+
+    def packaged_fixture(self):
+        payloads = {f"AETHERION_PHASE_II/family-{i}.md": b"fixture" for i in range(20)}
+        manifest = {"records": [{"id": str(i), "path": f"family-{i}.md", "canon_status": "PROPOSED"}
+                                for i in range(20)]}
+        payloads["AETHERION_PHASE_II/DELIVERABLE_MANIFEST.json"] = json.dumps(manifest).encode()
+        payloads["SHA256SUMS.txt"] = "".join(
+            f"{hashlib.sha256(data).hexdigest()}  {name}\n" for name, data in payloads.items()
+        ).encode()
+        payloads["PACKAGE_SCOPE.txt"] = b"synthetic fixture"
+        return payloads
+
+    def test_administrative_files_excluded_after_exact_allowlist_verification(self):
+        mapped = importer.verify_packaged_layout(self.packaged_fixture())
+        self.assertEqual(len(mapped), 21)
+        self.assertTrue(all(name.startswith("AETHERION_PHASE_II/") for name in mapped))
+
+    def test_checksum_manifest_rejects_unlisted_missing_duplicate_and_corrupt_files(self):
+        for change in (
+            lambda p: p.update({"AETHERION_PHASE_II/unlisted.md": b"extra"}),
+            lambda p: p.pop("AETHERION_PHASE_II/family-0.md"),
+            lambda p: p.update({"SHA256SUMS.txt": p["SHA256SUMS.txt"] * 2}),
+            lambda p: p.update({"AETHERION_PHASE_II/family-0.md": b"changed"}),
+            lambda p: p.update({"unexpected-root.txt": b"extra"}),
+        ):
+            payloads = self.packaged_fixture()
+            change(payloads)
+            with self.assertRaises(importer.ImportRejected):
+                importer.verify_packaged_layout(payloads)
+
+    def test_actual_pinned_public_archive(self):
+        path = MODULE_PATH.parents[2] / importer.ARCHIVE_ROOT / importer.PHASE_II.filename
+        if not path.is_file():
+            self.skipTest("Exact public archive not available in checkout")
+        inspected = importer.inspect_archive(path)
+        self.assertEqual(inspected.prefix, "AETHERION_PHASE_II/")
+        self.assertEqual(len(inspected.payloads), 115)
+        self.assertIn("INTEGRATION_PLAN.md", inspected.documents)
+        with self.assertRaises(importer.ImportRejected):
+            importer.inspect_archive(path, prefix="different/")
 
     def test_file_directory_collision_rejected(self):
         with self.assertRaisesRegex(importer.ImportRejected, "File/directory"):

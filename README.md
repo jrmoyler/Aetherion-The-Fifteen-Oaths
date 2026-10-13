@@ -6,7 +6,7 @@ A source-preserving ability foundation and a coherent, proposed game-production 
 
 This repository is a reviewable foundation. It does not claim that the continent-scale game, multiplayer authority, finished realm assets or production economy are implemented.
 
-The new [Phase I/II production status](docs/production/PHASE_I_II_STATUS.md) tracks the requested production work, acceptance inventory, toolchain evidence and exact Phase II archive blocker. Production is incomplete; the requested archive has not yet been materialized or included.
+The [Phase I/II production status](docs/production/PHASE_I_II_STATUS.md) tracks the full work ledger, 35 distinct Blender-authored candidate designs, Three.js/Godot evidence, and the exact Phase II ZIP with its unpacked documents. [Inspect candidate renders and references](docs/production/RENDER_REVIEW_INDEX.md). Full production and art approval remain incomplete.
 
 ## Start here
 

@@ -19,3 +19,6 @@ validation/build/
 # Generated Python validation caches
 __pycache__/
 *.py[cod]
+
+# Blender working backups; current editable sources are committed separately.
+assets/production/**/*.blend[0-9]

@@ -1,52 +1,55 @@
-# Phase I and II production: blocked, incomplete
+# Phase I and II production: in progress, incomplete
 
-This branch implements production inventory, acceptance tracking, archive ingestion safeguards and capability checks. It does **not** deliver the requested complete production game or a completed asset pack. No new art is approved by this implementation request. All proposed designs retain their existing approval state.
+Draft PR #2 on `production/phase-i-ii-assets` contains an actual Blender-authored asset checkpoint, the exact Phase II archive and unpacked documents, a combined work ledger, Three.js previews and optional equipment mounting, and Godot import/animation evidence. It does **not** deliver the complete production game or finished asset library. Implementation permission does not approve new art or designs.
 
-## Baseline and scope
+## Preserved baseline and scope
 
-The branch `production/phase-i-ii-assets` starts from freshly fetched main at `8c4b5d0bfc75a98388ea29231b9cf1d304dff550`, the merged foundation. No repository `AGENTS.md` or local `.agents` skill instructions were found. The original Ability-Matrix workspace is not a working destination. Imported source, source IDs and references remain unchanged.
+The branch starts from freshly fetched main at `8c4b5d0bfc75a98388ea29231b9cf1d304dff550`. No repository AGENTS.md or local agent skill instructions were found. The original Ability-Matrix workspace is not a working destination. All 1,896 imported source files (331,989,108 bytes), source IDs and 114 original references remain preserved. The fifteen Oaths, single continent, Unbound, Archivist and Weave premise remain intact.
 
-Phase I has 748 master registry records: 510 proposed production families, 114 reference images, 100 castables, and 24 primary source file records. These are heterogeneous records, not 748 meshes. The broader source inventory has 197 asset paths and 112 distinct byte identities, including 13 GLB and 6 FBX identities. Existing model bytes do not establish authoring-source availability, commercial clearance, visual parity or engine compatibility.
+Phase I has 748 heterogeneous master records: 510 proposed production families, 114 reference records, 100 castables and 24 primary source records. Its families contain 2,865 component labels, not completed meshes. The wider source asset index covers 197 paths and 112 distinct byte identities, including 13 GLB and 6 FBX identities. Named scope includes 34 characters and 90 proposed creature designs plus four recovered manifestations.
 
-The supervising audit identifies 2,865 component labels within the 510 Phase I families. Its Phase II breakdown reports 255 architecture module entries and 272 regional variants refining 210 existing Phase I family IDs, plus 90 districts and 45 enterable service interiors. These counts overlap with the family, region and POI inventories and must never be summed as independent completed assets. The named-entity scope also includes 34 characters and 90 proposed creature designs plus 4 recovered manifestations. The generated ledger preserves locally verifiable component labels; Phase II figures remain attributed to that external audit until its package is available here.
+Phase II contains 15 regions/capitals, 318 POIs preserving all 63 baseline POIs, 60 settlements, 90 districts, 45 service interiors, 15 architecture kits with 255 module entries, and 24 environment families with 272 regional variants. The module/variant requirements refine 210 existing Phase I families; district, interior and settlement records overlap POI identities and must not be naively summed as new meshes. The [generated ledger](../../validation/production/INVENTORY.md) records locally measured counts and the complete remaining work; planning tests do not establish an implemented world.
 
-The requested Phase II package is reported to contain 115 payload files and 20 deliverable families, including 15 regions, 15 capitals, 318 POIs, 60 settlements, 90 districts, 15 architecture kits, 24 environment families with regional variants and 15 event contracts. **These are owner-supplied package descriptions, not locally verified inventory counts.** They cannot be added to Phase I family counts: overlap and decomposition require the actual package.
+## Exact archive and additive integration
 
-## Exact input blocker
+[Original ZIP](../archives/Aetherion_Phase_II_Continental_Architecture_2026-10-13.zip), [checksum](../archives/Aetherion_Phase_II_Continental_Architecture_2026-10-13.zip.sha256): **1,011,575 bytes**, SHA-256 `02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc`.
 
-Expected public package:
+The consumer-local Library helper failed its initial transfer and one supported retry. The parent subsequently committed the exact verified public archive to this branch; fetching that commit made the bytes available locally. Local size/hash verification succeeded. No guessed download URL or private provenance archive was used.
 
-- Filename: `Aetherion_Phase_II_Continental_Architecture_2026-10-13.zip`
-- Bytes: `1011575`
-- SHA-256: `02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc`
+The archive has 115 payload files under `AETHERION_PHASE_II/` and two root packaging files. Its README and INTEGRATION_PLAN were read, the exact checksum allowlist was verified, and the payload was copied additively to [21_WORLD_CONSTRUCTION_PHASE_II](../../AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/README.md). The unchanged ZIP retains both packaging files. Existing identical ZIP/checksum paths were retained without a second archive copy. Guarded import rejects unsafe paths and differing existing content. Fresh package validation is performed in an isolated copy, preserving archived historical evidence and payload bytes. New designs remain PROPOSED. [Fresh isolated validation](../../validation/production/phase-ii-import/README.md) passed 450 static checks, 40 negative fixtures and 22 importer safety tests; five human/runtime gates remain.
 
-On 2026-10-13, the authorized Library reference resolved successfully, but the current bundled transfer helper failed with `library file transfer failed: download failed`. One bounded supported retry with a fresh consumer-local destination produced the same error. No exact ZIP was materialized, no checksum could be measured, and no payload document could be read. No inferred URL, private provenance archive or substitute package was used.
+## Actual asset checkpoint
 
-**The requested ZIP and unpacked Phase II documents are not in this branch.** Unblock by supplying the exact archive as a file in the selected executor or repairing its supported Library transfer. Private Library identifiers and signed transfer URLs are intentionally omitted from this public report.
+| Delivered candidate artifact | Count |
+| --- | ---: |
+| Distinct designs | 35 (34 weapon/focus designs and one character) |
+| Manifest entries including authored states/configurations | 46 |
+| Family manifests | 16 (15 weapon families and one character family) |
+| Editable Blender sources | 46 |
+| GLB files including LODs, collision and optional states | 204 |
+| External PBR maps | 240 |
+| Rigged distinct designs / distinct design-clip pairs | 14 / 16 |
+| Manifest-listed base/motion render paths | 165 |
+| Production-approved assets or completed families | 0 |
 
-After receipt, verify the exact bytes, read the package README and INTEGRATION_PLAN, reconcile its actual layout and collisions, then use the guarded importer. The intended archive location is `docs/archives/phase-ii/`; the additive payload location is `AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/`. The importer is infrastructure, not evidence that the absent package was integrated.
+[Exact design/asset IDs and Blender source paths](../../validation/production/DELIVERED_DESIGNS.md) distinguish designs from repeated state exports. [Render review index](RENDER_REVIEW_INDEX.md) links original references, actual candidate contact sheets and family review notes. Sources and exported artifacts are under `assets/production/`; reproducible authoring scripts accompany their actual outputs. Static objects are not artificially rigged. Articulated equipment and the character have functional rigs and authored clips. The character has 38 bones and three clips; its likeness, clothing detail, deformation and grounded animation remain unfinished.
 
-## Production acceptance
+The [deliverable audit](../../validation/production/DELIVERABLE_AUDIT.md) checks all 204 GLBs with zero hard errors and zero Khronos errors. It retains **9,516 Khronos warnings**, primarily tangent generation and skinned-mesh hierarchy. Structural success is neither visual approval nor engine parity. Missing states, dimensions needing refinement, opaque crystal/glass differences, simplified ornament, uncalibrated grips and other art gaps remain explicit in the manifests/review notes.
 
-The generated production inventory and acceptance ledger live under `validation/production/`. They distinguish requirements, reference images, source runtime, source binaries and implementation contracts. Family records still require concrete mesh/module/clip decomposition; therefore no exact combined Phase I/II mesh count is claimed.
+## Runtime integration and tested limits
 
-New deliverables in this branch: **0 production meshes, 0 authored `.blend` assets, 0 new rigs, 0 animation clips, 0 PBR texture sets, 0 newly implemented world systems, 0 production-approved assets.** Existing source castables are preserved. An audit or engine probe is not a production deliverable, visual approval or rendered gameplay certification.
+The [Three.js workshop](../../app/production-preview/README.md) supports state/LOD selection, material modes, animation inspection, loading cancellation and disposal. Its frozen snapshot passed 158 renderable GLB state/LOD CPU imports, 64 clip instances, ten lifecycle tests, build and development/built HTTP byte checks. Node texture decoding is unverified; no WebGL render is claimed.
 
-Full production remains open across all fifteen Oaths and the single continent. The Unbound, Archivist and Weave premise remains intact. Static assets need appropriate UVs, PBR maps, scale, pivots, collisions and LODs; articulated assets additionally need meaningful rigs, deformation and animation. Each export needs real source files and runtime evidence. No repeated primitive pack, recolor substitute or unexported generator is counted as completed work.
+The [optional ability-sandbox equipment integration](../../src/production/README.md) defaults Off and mounts selected equipment to verified source FBX bones with parent-scale compensation. It preserves source update/dispose behavior, supports hand/back placement and candidate animation, and passes scoped lifecycle tests. Shared starting offsets remain proposed; individual grip, two-handed contact and cast fit need rendered calibration. This is appearance-only integration, not completed weapon gameplay.
 
-## Engine and validation limits
+The [Godot checkpoint](../../validation/production/GODOT_PRODUCTION.checkpoint.json) passed actual headless imports of all 204 GLBs, material/texture checks, 64 animation clip instances with pose changes, and scene cleanup. The [Unreal adapter](../../engines/unreal/production-import/README.md) has a passing manifest/header preflight, but **no Unreal import/runtime test executed**. Its separate imported collision and LOD objects are not assigned automatically to engine assets.
 
-See `validation/production/TOOLCHAIN_AUDIT.md` for exact executed tool versions and probes, and the neighboring reports for source, schema and GLB validation. Blender background and Godot headless availability do not prove matching final rendered art. Unreal Editor was not found in the audited installation locations; a supported Unreal installation is required for Unreal import/runtime certification. This environment exposes no `/dev/dri`. Chromium's normal sandbox launch fails because its SUID helper is misconfigured; no security settings were bypassed.
+[Working-tree regressions](../../validation/production/production-regressions-summary.md) passed 223 root tests, 51 source tests, canon/fixture/systems/narrative automated gates, and the ability build/artifact checks. All original source bytes matched. Reports state their tested input hashes and revision scope; final remote checks are reported separately on the PR.
 
-The official Khronos validator found structural errors in 3 of the 13 unique source GLBs: dragon, magical gyroscope and phoenix. All 13 instantiated in the Blender/Godot CPU import probes, demonstrating why import completion alone is insufficient. The source files remain byte-preserved; any future repairs must be additive derivatives with separate evidence.
+## Remaining production work and blockers
 
-Full browser gameplay and visual comparison need a working supported rendering environment. Performance budgets remain proposed until measured on representative scenes and devices. Existing static planning passes and CPU lifecycle tests retain their narrow scope.
+All 510 Phase I families remain open for full acceptance. Sixteen have partial candidate deliveries; the other 494 have no newly authored delivery in this checkpoint. Architecture, terrain, environment families, props, the remaining character/costume roster, creatures/mounts/morphs, complete animation libraries, VFX/audio/UI and continental runtime systems remain unfinished. Existing 100 castables retain scoped CPU evidence; none gains rendered-gameplay certification from this work. Phase II registries and diagrams are specifications, not completed regions or capitals.
 
-## Resume sequence
+Blender 4.3.2 CPU authoring/rendering and Godot 4.6.3 headless testing are available. Unreal Editor was absent from PATH and audited installation locations; supported Unreal installation/license access is needed for real import/runtime certification. This executor has no `/dev/dri`. Chromium's normal launch fails its SUID sandbox configuration; no security settings were bypassed. Supported browser/GPU access is needed for rendered gameplay, texture/material parity, grip/contact checks and representative performance measurements. Performance budgets remain proposed.
 
-1. Materialize and verify the exact public Phase II ZIP; read README and INTEGRATION_PLAN before importing it.
-2. Reconcile both phases into the complete deduplicated manifest, including actual module/rig/clip/texture/system decomposition and dependencies.
-3. Inspect original reference pixels and resolve missing views; author distinct low-poly assets in Blender and export real source, texture, collision and LOD deliverables.
-4. Integrate preserved Three.js castables and the world systems, with asset previews, disposal, animation, material and gameplay tests.
-5. Import and run each required engine target, inspect renders/contact sheets against references, and record per-artifact acceptance evidence.
-6. Verify the final remote revision in a clean environment and obtain exact-artifact review before claiming production completeness. Do not merge or deploy this draft.
+Three original source GLB identities retain known structural defects (dragon, magical gyroscope and phoenix); their bytes are deliberately unchanged. Future fixes must be separately identified derivatives. This checkpoint remains a draft for exact-artifact review. Do not merge, deploy or describe full Phase I/II production as complete.

@@ -1,0 +1,1494 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "scope": "Structural and logical preproduction data validation only; no runtime or founder-approval claim.",
+  "records": [
+    {
+      "id": "exact-fifteen-oaths",
+      "status": "PASS",
+      "detail": "Exact locked membership count and stable mapping; names checked by source review separately.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "exact-fifteen-realms",
+      "status": "PASS",
+      "detail": "No neutral or endgame POI creates a sixteenth realm.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "continent-connected",
+      "status": "PASS",
+      "detail": "All15 regions reachable through proposed land adjacency.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "symmetric-adjacency",
+      "status": "PASS",
+      "detail": "Every declared land neighbor has a reciprocal edge.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "no-disconnected-watershed-steps",
+      "status": "PASS",
+      "detail": "Each conceptual river step crosses a declared land adjacency; does not validate real gradients.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "river-paths-acyclic",
+      "status": "PASS",
+      "detail": "No conceptual river route loops uphill into its own earlier region.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-alternatives",
+      "status": "PASS",
+      "detail": "Each land edge has a valid alternate route without using that same edge.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "character-faction-references",
+      "status": "PASS",
+      "detail": "All character faction and region references resolve.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "relationship-endpoints",
+      "status": "PASS",
+      "detail": "All relationship endpoints resolve to defined people or factions.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "poi-region-references",
+      "status": "PASS",
+      "detail": "All63 POIs belong to one of15 realms; special statuses are not extra realms.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "quest-references",
+      "status": "PASS",
+      "detail": "All quest prerequisites resolve.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "quest-prerequisites-acyclic",
+      "status": "PASS",
+      "detail": "No prerequisite cycle can deadlock a narrative path.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "all-first-oaths-open",
+      "status": "PASS",
+      "detail": "Every initiation is available after orientation without another Oath.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "regional-order-independent",
+      "status": "PASS",
+      "detail": "Regional arcs have no cross-region or binding prerequisites; settlement updates are separately keyed.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "regional-branches-have-costs",
+      "status": "PASS",
+      "detail": "Every authored settlement branch has a concrete advantage, cost and service continuity statement.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "first-oath-order-scenarios",
+      "status": "PASS",
+      "detail": "30 order scenarios executed, covering all15 first initiations and reverse regional traversals. This is data-contract testing, not playtesting.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "ending-predicate-scenarios",
+      "status": "PASS",
+      "detail": "45 eligible and 1050 missing-prerequisite scenarios executed; only one bound Oath supplied, proving no all-fifteen binding requirement in this contract.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-ENTITY_CONTRACT",
+      "status": "PASS",
+      "detail": "01_WORLD_BIBLE/ENTITY_CONTRACT.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-CANON_CLAIMS",
+      "status": "PASS",
+      "detail": "01_WORLD_BIBLE/CANON_CLAIMS.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-TIMELINE",
+      "status": "PASS",
+      "detail": "02_HISTORY_AND_COSMOLOGY/TIMELINE.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-WORLD_POI_REGISTRY",
+      "status": "PASS",
+      "detail": "03_GEOGRAPHY/WORLD_POI_REGISTRY.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-WORLD_GRAPH",
+      "status": "PASS",
+      "detail": "03_GEOGRAPHY/WORLD_GRAPH.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-TRADE_ROUTES",
+      "status": "PASS",
+      "detail": "03_GEOGRAPHY/TRADE_ROUTES.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-REALM_REGISTRY",
+      "status": "PASS",
+      "detail": "03_GEOGRAPHY/REALM_REGISTRY.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-OATH_DOSSIER_INDEX",
+      "status": "PASS",
+      "detail": "04_OATH_DOSSIERS/OATH_DOSSIER_INDEX.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-RELATIONSHIP_GRAPH",
+      "status": "PASS",
+      "detail": "05_FACTIONS_AND_CHARACTERS/RELATIONSHIP_GRAPH.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-FACTION_REGISTRY",
+      "status": "PASS",
+      "detail": "05_FACTIONS_AND_CHARACTERS/FACTION_REGISTRY.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-CHARACTER_SERVICE_REGISTRY",
+      "status": "PASS",
+      "detail": "05_FACTIONS_AND_CHARACTERS/CHARACTER_SERVICE_REGISTRY.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-CHARACTER_ROLE_COVERAGE",
+      "status": "PASS",
+      "detail": "05_FACTIONS_AND_CHARACTERS/CHARACTER_ROLE_COVERAGE.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-CHARACTER_REGISTRY",
+      "status": "PASS",
+      "detail": "05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-WORLD_SCHEMA_VALIDATION",
+      "status": "PASS",
+      "detail": "06_NARRATIVE/WORLD_SCHEMA_VALIDATION.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-QUEST_REGISTRY",
+      "status": "PASS",
+      "detail": "06_NARRATIVE/QUEST_REGISTRY.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "envelope-ENDING_PREREQUISITES",
+      "status": "PASS",
+      "detail": "06_NARRATIVE/ENDING_PREREQUISITES.json",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "fifteen-complete-dossiers",
+      "status": "PASS",
+      "detail": "Checks actual40topic sections per dossier, not merely the index claim. Semantic depth still requires human review.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "world-bible-canonical-name",
+      "status": "PASS",
+      "detail": "Exact requested canonical filename exists; WORLD_BIBLE.md is a compatibility pointer.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "schematic-svg-valid",
+      "status": "PASS",
+      "detail": "SVG parsed; rendered with PyMuPDF and visually inspected separately for legibility and connected-mainland depiction.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "terrain-heightfield-hydrology",
+      "status": "SKIPPED",
+      "detail": "Requires approved production implementation or human review; not established by documentation validation.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "quest-runtime-playtest",
+      "status": "SKIPPED",
+      "detail": "Requires approved production implementation or human review; not established by documentation validation.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "human-canon-approval",
+      "status": "SKIPPED",
+      "detail": "Requires approved production implementation or human review; not established by documentation validation.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "dialogue-performance-review",
+      "status": "SKIPPED",
+      "detail": "Requires approved production implementation or human review; not established by documentation validation.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "multiplayer-save-migration",
+      "status": "SKIPPED",
+      "detail": "Requires approved production implementation or human review; not established by documentation validation.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "empty-state-ending-reachability",
+      "status": "PASS",
+      "detail": "135 graph-state traversals begin with no flags: all15 first initiations \u00d73 endings \u00d73 routes (regional, all civic reviews, mixed skipping first climax). Flags come only from declared completed quest producers.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "missing-producer-blocks-traversal",
+      "status": "PASS",
+      "detail": "48 negative graph traversals verify that a missing service review blocks final planning and missing independent evidence blocks investigation; no seeded flags bypass the producers.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "named-alliance-and-betrayal-traversal",
+      "status": "PASS",
+      "detail": "93 complete graph traversals exercise honored sponsorship, warned reciprocal breach and optional end-of-sponsorship recovery. Named quest choices produce all warning, promise and consequence flags; no-alliance ending paths remain valid.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "betrayal-requires-actual-promise-and-warning",
+      "status": "PASS",
+      "detail": "Six negative traversals reject a betrayal path that skips the actual alliance offer or warning quest.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "character-branch-choice-links",
+      "status": "PASS",
+      "detail": "All30 named leaders/civic characters have individual outcomes linked to actual regional settlement choice IDs.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "civic-character-distinct-fields",
+      "status": "PASS",
+      "detail": "All15 civic visual identities, equipment, voices, contradictions, arcs and outcomes differ as concrete authored data; semantic quality remains a human review.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "character-id-uniqueness",
+      "status": "PASS",
+      "detail": "Supporting additions do not duplicate or replace existing people.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "supporting-choice-links",
+      "status": "PASS",
+      "detail": "Four concrete supporting roles link personal outcomes to actual quest branches.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "character-service-links",
+      "status": "PASS",
+      "detail": "All four optional service records resolve to actual characters, quests and POIs.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "supporting-source-castable-uids",
+      "status": "PASS",
+      "detail": "All eight character ability references resolve to exact source UIDs/labels/elements; assignments remain PROPOSED and do not alter mechanics.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "wayfarer-preserves-unbound-premise",
+      "status": "PASS",
+      "detail": "Tarin is explicitly Rime-bound, not another true Unbound, and his public itinerary follows connected land edges.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "optional-supporting-arc-traversal",
+      "status": "PASS",
+      "detail": "90 complete graph traversals cover both explicit choice sets across nine supporting quests, all15 first Oaths and three endings. Existing no-supporting-arc ending tests remain unchanged and passing.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "supporting-arcs-never-gate-main",
+      "status": "PASS",
+      "detail": "No main quest requires a supporting role arc or its service unlock.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ]
+    }
+  ],
+  "reachability_proof_paths": [
+    {
+      "ending_id": "ending-restoration",
+      "completed_quest_ids": [
+        "quest-main-01",
+        "quest-main-02",
+        "quest-initiation-01",
+        "quest-main-03",
+        "quest-civic-review-01",
+        "quest-civic-review-02",
+        "quest-civic-review-03",
+        "quest-civic-review-04",
+        "quest-civic-review-05",
+        "quest-civic-review-06",
+        "quest-civic-review-07",
+        "quest-civic-review-08",
+        "quest-civic-review-09",
+        "quest-civic-review-10",
+        "quest-civic-review-11",
+        "quest-civic-review-12",
+        "quest-civic-review-13",
+        "quest-civic-review-14",
+        "quest-civic-review-15",
+        "quest-evidence-independent-record",
+        "quest-main-04",
+        "quest-main-05",
+        "quest-main-06",
+        "quest-main-07",
+        "quest-main-08",
+        "quest-main-09"
+      ],
+      "skipped_regional_climax_ids": [
+        "quest-region-01",
+        "quest-region-02",
+        "quest-region-03",
+        "quest-region-04",
+        "quest-region-05",
+        "quest-region-06",
+        "quest-region-07",
+        "quest-region-08",
+        "quest-region-09",
+        "quest-region-10",
+        "quest-region-11",
+        "quest-region-12",
+        "quest-region-13",
+        "quest-region-14",
+        "quest-region-15"
+      ],
+      "attestation_producers": {
+        "service-attestation-01": [
+          "quest-civic-review-01"
+        ],
+        "service-attestation-02": [
+          "quest-civic-review-02"
+        ],
+        "service-attestation-03": [
+          "quest-civic-review-03"
+        ],
+        "service-attestation-04": [
+          "quest-civic-review-04"
+        ],
+        "service-attestation-05": [
+          "quest-civic-review-05"
+        ],
+        "service-attestation-06": [
+          "quest-civic-review-06"
+        ],
+        "service-attestation-07": [
+          "quest-civic-review-07"
+        ],
+        "service-attestation-08": [
+          "quest-civic-review-08"
+        ],
+        "service-attestation-09": [
+          "quest-civic-review-09"
+        ],
+        "service-attestation-10": [
+          "quest-civic-review-10"
+        ],
+        "service-attestation-11": [
+          "quest-civic-review-11"
+        ],
+        "service-attestation-12": [
+          "quest-civic-review-12"
+        ],
+        "service-attestation-13": [
+          "quest-civic-review-13"
+        ],
+        "service-attestation-14": [
+          "quest-civic-review-14"
+        ],
+        "service-attestation-15": [
+          "quest-civic-review-15"
+        ]
+      },
+      "final_flags": [
+        "aftermath_complete",
+        "civilian_cost_evidence",
+        "corroboration_complete",
+        "custody-independent-hearing",
+        "custody_resolved",
+        "ending_committed",
+        "final_plan_reviewed",
+        "first_commitment_resolved",
+        "independent_record_evidence",
+        "initiation-reviewed-01",
+        "interface_evidence",
+        "opening_complete",
+        "orientation_complete",
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15",
+        "service_plan_ready"
+      ]
+    },
+    {
+      "ending_id": "ending-dominion",
+      "completed_quest_ids": [
+        "quest-main-01",
+        "quest-main-02",
+        "quest-initiation-01",
+        "quest-main-03",
+        "quest-civic-review-01",
+        "quest-civic-review-02",
+        "quest-civic-review-03",
+        "quest-civic-review-04",
+        "quest-civic-review-05",
+        "quest-civic-review-06",
+        "quest-civic-review-07",
+        "quest-civic-review-08",
+        "quest-civic-review-09",
+        "quest-civic-review-10",
+        "quest-civic-review-11",
+        "quest-civic-review-12",
+        "quest-civic-review-13",
+        "quest-civic-review-14",
+        "quest-civic-review-15",
+        "quest-evidence-independent-record",
+        "quest-main-04",
+        "quest-main-05",
+        "quest-main-06",
+        "quest-main-07",
+        "quest-main-08",
+        "quest-main-09"
+      ],
+      "skipped_regional_climax_ids": [
+        "quest-region-01",
+        "quest-region-02",
+        "quest-region-03",
+        "quest-region-04",
+        "quest-region-05",
+        "quest-region-06",
+        "quest-region-07",
+        "quest-region-08",
+        "quest-region-09",
+        "quest-region-10",
+        "quest-region-11",
+        "quest-region-12",
+        "quest-region-13",
+        "quest-region-14",
+        "quest-region-15"
+      ],
+      "attestation_producers": {
+        "service-attestation-01": [
+          "quest-civic-review-01"
+        ],
+        "service-attestation-02": [
+          "quest-civic-review-02"
+        ],
+        "service-attestation-03": [
+          "quest-civic-review-03"
+        ],
+        "service-attestation-04": [
+          "quest-civic-review-04"
+        ],
+        "service-attestation-05": [
+          "quest-civic-review-05"
+        ],
+        "service-attestation-06": [
+          "quest-civic-review-06"
+        ],
+        "service-attestation-07": [
+          "quest-civic-review-07"
+        ],
+        "service-attestation-08": [
+          "quest-civic-review-08"
+        ],
+        "service-attestation-09": [
+          "quest-civic-review-09"
+        ],
+        "service-attestation-10": [
+          "quest-civic-review-10"
+        ],
+        "service-attestation-11": [
+          "quest-civic-review-11"
+        ],
+        "service-attestation-12": [
+          "quest-civic-review-12"
+        ],
+        "service-attestation-13": [
+          "quest-civic-review-13"
+        ],
+        "service-attestation-14": [
+          "quest-civic-review-14"
+        ],
+        "service-attestation-15": [
+          "quest-civic-review-15"
+        ]
+      },
+      "final_flags": [
+        "aftermath_complete",
+        "civilian_cost_evidence",
+        "corroboration_complete",
+        "custody-independent-hearing",
+        "custody_resolved",
+        "ending_committed",
+        "final_plan_reviewed",
+        "first_commitment_resolved",
+        "independent_record_evidence",
+        "initiation-reviewed-01",
+        "interface_evidence",
+        "opening_complete",
+        "orientation_complete",
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15",
+        "service_plan_ready"
+      ]
+    },
+    {
+      "ending_id": "ending-liberation",
+      "completed_quest_ids": [
+        "quest-main-01",
+        "quest-main-02",
+        "quest-initiation-01",
+        "quest-main-03",
+        "quest-civic-review-01",
+        "quest-civic-review-02",
+        "quest-civic-review-03",
+        "quest-civic-review-04",
+        "quest-civic-review-05",
+        "quest-civic-review-06",
+        "quest-civic-review-07",
+        "quest-civic-review-08",
+        "quest-civic-review-09",
+        "quest-civic-review-10",
+        "quest-civic-review-11",
+        "quest-civic-review-12",
+        "quest-civic-review-13",
+        "quest-civic-review-14",
+        "quest-civic-review-15",
+        "quest-evidence-independent-record",
+        "quest-main-04",
+        "quest-main-05",
+        "quest-main-06",
+        "quest-main-07",
+        "quest-main-08",
+        "quest-main-09"
+      ],
+      "skipped_regional_climax_ids": [
+        "quest-region-01",
+        "quest-region-02",
+        "quest-region-03",
+        "quest-region-04",
+        "quest-region-05",
+        "quest-region-06",
+        "quest-region-07",
+        "quest-region-08",
+        "quest-region-09",
+        "quest-region-10",
+        "quest-region-11",
+        "quest-region-12",
+        "quest-region-13",
+        "quest-region-14",
+        "quest-region-15"
+      ],
+      "attestation_producers": {
+        "service-attestation-01": [
+          "quest-civic-review-01"
+        ],
+        "service-attestation-02": [
+          "quest-civic-review-02"
+        ],
+        "service-attestation-03": [
+          "quest-civic-review-03"
+        ],
+        "service-attestation-04": [
+          "quest-civic-review-04"
+        ],
+        "service-attestation-05": [
+          "quest-civic-review-05"
+        ],
+        "service-attestation-06": [
+          "quest-civic-review-06"
+        ],
+        "service-attestation-07": [
+          "quest-civic-review-07"
+        ],
+        "service-attestation-08": [
+          "quest-civic-review-08"
+        ],
+        "service-attestation-09": [
+          "quest-civic-review-09"
+        ],
+        "service-attestation-10": [
+          "quest-civic-review-10"
+        ],
+        "service-attestation-11": [
+          "quest-civic-review-11"
+        ],
+        "service-attestation-12": [
+          "quest-civic-review-12"
+        ],
+        "service-attestation-13": [
+          "quest-civic-review-13"
+        ],
+        "service-attestation-14": [
+          "quest-civic-review-14"
+        ],
+        "service-attestation-15": [
+          "quest-civic-review-15"
+        ]
+      },
+      "final_flags": [
+        "aftermath_complete",
+        "civilian_cost_evidence",
+        "corroboration_complete",
+        "custody-independent-hearing",
+        "custody_resolved",
+        "ending_committed",
+        "final_plan_reviewed",
+        "first_commitment_resolved",
+        "independent_record_evidence",
+        "initiation-reviewed-01",
+        "interface_evidence",
+        "opening_complete",
+        "orientation_complete",
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15",
+        "service_plan_ready"
+      ]
+    }
+  ],
+  "alliance_proof_paths": [
+    {
+      "ending_id": "ending-restoration",
+      "completed_quest_ids": [
+        "quest-main-01",
+        "quest-main-02",
+        "quest-initiation-01",
+        "quest-main-03",
+        "quest-alliance-daybreak-offer",
+        "quest-civic-review-01",
+        "quest-civic-review-02",
+        "quest-civic-review-03",
+        "quest-civic-review-04",
+        "quest-civic-review-05",
+        "quest-civic-review-06",
+        "quest-civic-review-07",
+        "quest-civic-review-08",
+        "quest-civic-review-09",
+        "quest-civic-review-10",
+        "quest-civic-review-11",
+        "quest-civic-review-12",
+        "quest-civic-review-13",
+        "quest-civic-review-14",
+        "quest-civic-review-15",
+        "quest-evidence-independent-record",
+        "quest-main-04",
+        "quest-main-05",
+        "quest-alliance-daybreak-warning",
+        "quest-alliance-daybreak-crossing",
+        "quest-main-06",
+        "quest-main-07",
+        "quest-main-08",
+        "quest-main-09"
+      ],
+      "consequence_producers": {
+        "alliance-daybreak-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "promise-daybreak-notice-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "promise-daybreak-no-seizure-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "alliance-daybreak-warning-received": [
+          "quest-alliance-daybreak-warning"
+        ],
+        "alliance-daybreak-competing-stakes-known": [
+          "quest-alliance-daybreak-warning"
+        ],
+        "promise-daybreak-notice-breached": [
+          "quest-alliance-daybreak-crossing:alliance-daybreak-secret-crossing"
+        ],
+        "alliance-daybreak-crossing-resolved": [
+          "quest-alliance-daybreak-crossing:alliance-daybreak-secret-crossing"
+        ],
+        "alliance-daybreak-betrayed": [
+          "quest-main-06:custody-betrayal"
+        ],
+        "promise-daybreak-no-seizure-breached": [
+          "quest-main-06:custody-betrayal"
+        ],
+        "daybreak-escort-suspended": [
+          "quest-main-06:custody-betrayal"
+        ]
+      },
+      "final_flags": [
+        "aftermath_complete",
+        "alliance-daybreak-betrayed",
+        "alliance-daybreak-competing-stakes-known",
+        "alliance-daybreak-crossing-resolved",
+        "alliance-daybreak-warning-received",
+        "civilian_cost_evidence",
+        "corroboration_complete",
+        "custody_resolved",
+        "daybreak-escort-suspended",
+        "ending_committed",
+        "final_plan_reviewed",
+        "first_commitment_resolved",
+        "independent_record_evidence",
+        "initiation-reviewed-01",
+        "interface_evidence",
+        "opening_complete",
+        "orientation_complete",
+        "promise-daybreak-no-seizure-active",
+        "promise-daybreak-no-seizure-breached",
+        "promise-daybreak-notice-active",
+        "promise-daybreak-notice-breached",
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15",
+        "service_plan_ready"
+      ]
+    },
+    {
+      "ending_id": "ending-dominion",
+      "completed_quest_ids": [
+        "quest-main-01",
+        "quest-main-02",
+        "quest-initiation-01",
+        "quest-main-03",
+        "quest-alliance-daybreak-offer",
+        "quest-civic-review-01",
+        "quest-civic-review-02",
+        "quest-civic-review-03",
+        "quest-civic-review-04",
+        "quest-civic-review-05",
+        "quest-civic-review-06",
+        "quest-civic-review-07",
+        "quest-civic-review-08",
+        "quest-civic-review-09",
+        "quest-civic-review-10",
+        "quest-civic-review-11",
+        "quest-civic-review-12",
+        "quest-civic-review-13",
+        "quest-civic-review-14",
+        "quest-civic-review-15",
+        "quest-evidence-independent-record",
+        "quest-main-04",
+        "quest-main-05",
+        "quest-alliance-daybreak-warning",
+        "quest-alliance-daybreak-crossing",
+        "quest-main-06",
+        "quest-main-07",
+        "quest-main-08",
+        "quest-main-09"
+      ],
+      "consequence_producers": {
+        "alliance-daybreak-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "promise-daybreak-notice-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "promise-daybreak-no-seizure-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "alliance-daybreak-warning-received": [
+          "quest-alliance-daybreak-warning"
+        ],
+        "alliance-daybreak-competing-stakes-known": [
+          "quest-alliance-daybreak-warning"
+        ],
+        "promise-daybreak-notice-breached": [
+          "quest-alliance-daybreak-crossing:alliance-daybreak-secret-crossing"
+        ],
+        "alliance-daybreak-crossing-resolved": [
+          "quest-alliance-daybreak-crossing:alliance-daybreak-secret-crossing"
+        ],
+        "alliance-daybreak-betrayed": [
+          "quest-main-06:custody-betrayal"
+        ],
+        "promise-daybreak-no-seizure-breached": [
+          "quest-main-06:custody-betrayal"
+        ],
+        "daybreak-escort-suspended": [
+          "quest-main-06:custody-betrayal"
+        ]
+      },
+      "final_flags": [
+        "aftermath_complete",
+        "alliance-daybreak-betrayed",
+        "alliance-daybreak-competing-stakes-known",
+        "alliance-daybreak-crossing-resolved",
+        "alliance-daybreak-warning-received",
+        "civilian_cost_evidence",
+        "corroboration_complete",
+        "custody_resolved",
+        "daybreak-escort-suspended",
+        "ending_committed",
+        "final_plan_reviewed",
+        "first_commitment_resolved",
+        "independent_record_evidence",
+        "initiation-reviewed-01",
+        "interface_evidence",
+        "opening_complete",
+        "orientation_complete",
+        "promise-daybreak-no-seizure-active",
+        "promise-daybreak-no-seizure-breached",
+        "promise-daybreak-notice-active",
+        "promise-daybreak-notice-breached",
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15",
+        "service_plan_ready"
+      ]
+    },
+    {
+      "ending_id": "ending-liberation",
+      "completed_quest_ids": [
+        "quest-main-01",
+        "quest-main-02",
+        "quest-initiation-01",
+        "quest-main-03",
+        "quest-alliance-daybreak-offer",
+        "quest-civic-review-01",
+        "quest-civic-review-02",
+        "quest-civic-review-03",
+        "quest-civic-review-04",
+        "quest-civic-review-05",
+        "quest-civic-review-06",
+        "quest-civic-review-07",
+        "quest-civic-review-08",
+        "quest-civic-review-09",
+        "quest-civic-review-10",
+        "quest-civic-review-11",
+        "quest-civic-review-12",
+        "quest-civic-review-13",
+        "quest-civic-review-14",
+        "quest-civic-review-15",
+        "quest-evidence-independent-record",
+        "quest-main-04",
+        "quest-main-05",
+        "quest-alliance-daybreak-warning",
+        "quest-alliance-daybreak-crossing",
+        "quest-main-06",
+        "quest-main-07",
+        "quest-main-08",
+        "quest-main-09"
+      ],
+      "consequence_producers": {
+        "alliance-daybreak-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "promise-daybreak-notice-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "promise-daybreak-no-seizure-active": [
+          "quest-alliance-daybreak-offer:alliance-daybreak-accept"
+        ],
+        "alliance-daybreak-warning-received": [
+          "quest-alliance-daybreak-warning"
+        ],
+        "alliance-daybreak-competing-stakes-known": [
+          "quest-alliance-daybreak-warning"
+        ],
+        "promise-daybreak-notice-breached": [
+          "quest-alliance-daybreak-crossing:alliance-daybreak-secret-crossing"
+        ],
+        "alliance-daybreak-crossing-resolved": [
+          "quest-alliance-daybreak-crossing:alliance-daybreak-secret-crossing"
+        ],
+        "alliance-daybreak-betrayed": [
+          "quest-main-06:custody-betrayal"
+        ],
+        "promise-daybreak-no-seizure-breached": [
+          "quest-main-06:custody-betrayal"
+        ],
+        "daybreak-escort-suspended": [
+          "quest-main-06:custody-betrayal"
+        ]
+      },
+      "final_flags": [
+        "aftermath_complete",
+        "alliance-daybreak-betrayed",
+        "alliance-daybreak-competing-stakes-known",
+        "alliance-daybreak-crossing-resolved",
+        "alliance-daybreak-warning-received",
+        "civilian_cost_evidence",
+        "corroboration_complete",
+        "custody_resolved",
+        "daybreak-escort-suspended",
+        "ending_committed",
+        "final_plan_reviewed",
+        "first_commitment_resolved",
+        "independent_record_evidence",
+        "initiation-reviewed-01",
+        "interface_evidence",
+        "opening_complete",
+        "orientation_complete",
+        "promise-daybreak-no-seizure-active",
+        "promise-daybreak-no-seizure-breached",
+        "promise-daybreak-notice-active",
+        "promise-daybreak-notice-breached",
+        "service-attestation-01",
+        "service-attestation-02",
+        "service-attestation-03",
+        "service-attestation-04",
+        "service-attestation-05",
+        "service-attestation-06",
+        "service-attestation-07",
+        "service-attestation-08",
+        "service-attestation-09",
+        "service-attestation-10",
+        "service-attestation-11",
+        "service-attestation-12",
+        "service-attestation-13",
+        "service-attestation-14",
+        "service-attestation-15",
+        "service_plan_ready"
+      ]
+    }
+  ],
+  "supporting_proof_paths": [
+    {
+      "ending_id": "ending-restoration",
+      "branch_index": 0,
+      "completed_supporting_quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter",
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road",
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final",
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "service_producers": {
+        "service-hart-care-available": [
+          "quest-handler-dessa-charter"
+        ],
+        "service-road-records-available": [
+          "quest-wayfarer-tarin-road"
+        ],
+        "service-independent-routing-available": [
+          "quest-rival-oda-final"
+        ],
+        "service-manual-override-training-available": [
+          "quest-mentor-una-handback"
+        ]
+      },
+      "choice_flags": [
+        "handler-assessment-complete",
+        "handler-charter-reviewed",
+        "handler-common-reserve",
+        "handler-refusal-respected",
+        "mentor-una-arc-complete",
+        "mentor-una-foundation-complete",
+        "mentor-una-local-succession",
+        "mentor-una-repair-method",
+        "rival-oda-arc-complete",
+        "rival-oda-colleague",
+        "rival-oda-joint-start",
+        "rival-oda-record-reviewed",
+        "rival-oda-trial-complete",
+        "rival-oda-warning-first",
+        "wayfarer-dispatch-reviewed",
+        "wayfarer-distributed-history",
+        "wayfarer-public-correction",
+        "wayfarer-route-reviewed"
+      ]
+    },
+    {
+      "ending_id": "ending-restoration",
+      "branch_index": 1,
+      "completed_supporting_quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter",
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road",
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final",
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "service_producers": {
+        "service-hart-care-available": [
+          "quest-handler-dessa-charter"
+        ],
+        "service-road-records-available": [
+          "quest-wayfarer-tarin-road"
+        ],
+        "service-independent-routing-available": [
+          "quest-rival-oda-final"
+        ],
+        "service-manual-override-training-available": [
+          "quest-mentor-una-handback"
+        ]
+      },
+      "choice_flags": [
+        "handler-assessment-complete",
+        "handler-charter-reviewed",
+        "handler-independent-route",
+        "handler-route-retested",
+        "mentor-una-arc-complete",
+        "mentor-una-foundation-complete",
+        "mentor-una-modular-method",
+        "mentor-una-open-practice",
+        "rival-oda-arc-complete",
+        "rival-oda-competitive-start",
+        "rival-oda-precaution-first",
+        "rival-oda-record-reviewed",
+        "rival-oda-respected-rival",
+        "rival-oda-trial-complete",
+        "wayfarer-audited-account",
+        "wayfarer-dispatch-reviewed",
+        "wayfarer-route-reviewed",
+        "wayfarer-sealed-history"
+      ]
+    },
+    {
+      "ending_id": "ending-dominion",
+      "branch_index": 0,
+      "completed_supporting_quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter",
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road",
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final",
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "service_producers": {
+        "service-hart-care-available": [
+          "quest-handler-dessa-charter"
+        ],
+        "service-road-records-available": [
+          "quest-wayfarer-tarin-road"
+        ],
+        "service-independent-routing-available": [
+          "quest-rival-oda-final"
+        ],
+        "service-manual-override-training-available": [
+          "quest-mentor-una-handback"
+        ]
+      },
+      "choice_flags": [
+        "handler-assessment-complete",
+        "handler-charter-reviewed",
+        "handler-common-reserve",
+        "handler-refusal-respected",
+        "mentor-una-arc-complete",
+        "mentor-una-foundation-complete",
+        "mentor-una-local-succession",
+        "mentor-una-repair-method",
+        "rival-oda-arc-complete",
+        "rival-oda-colleague",
+        "rival-oda-joint-start",
+        "rival-oda-record-reviewed",
+        "rival-oda-trial-complete",
+        "rival-oda-warning-first",
+        "wayfarer-dispatch-reviewed",
+        "wayfarer-distributed-history",
+        "wayfarer-public-correction",
+        "wayfarer-route-reviewed"
+      ]
+    },
+    {
+      "ending_id": "ending-dominion",
+      "branch_index": 1,
+      "completed_supporting_quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter",
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road",
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final",
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "service_producers": {
+        "service-hart-care-available": [
+          "quest-handler-dessa-charter"
+        ],
+        "service-road-records-available": [
+          "quest-wayfarer-tarin-road"
+        ],
+        "service-independent-routing-available": [
+          "quest-rival-oda-final"
+        ],
+        "service-manual-override-training-available": [
+          "quest-mentor-una-handback"
+        ]
+      },
+      "choice_flags": [
+        "handler-assessment-complete",
+        "handler-charter-reviewed",
+        "handler-independent-route",
+        "handler-route-retested",
+        "mentor-una-arc-complete",
+        "mentor-una-foundation-complete",
+        "mentor-una-modular-method",
+        "mentor-una-open-practice",
+        "rival-oda-arc-complete",
+        "rival-oda-competitive-start",
+        "rival-oda-precaution-first",
+        "rival-oda-record-reviewed",
+        "rival-oda-respected-rival",
+        "rival-oda-trial-complete",
+        "wayfarer-audited-account",
+        "wayfarer-dispatch-reviewed",
+        "wayfarer-route-reviewed",
+        "wayfarer-sealed-history"
+      ]
+    },
+    {
+      "ending_id": "ending-liberation",
+      "branch_index": 0,
+      "completed_supporting_quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter",
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road",
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final",
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "service_producers": {
+        "service-hart-care-available": [
+          "quest-handler-dessa-charter"
+        ],
+        "service-road-records-available": [
+          "quest-wayfarer-tarin-road"
+        ],
+        "service-independent-routing-available": [
+          "quest-rival-oda-final"
+        ],
+        "service-manual-override-training-available": [
+          "quest-mentor-una-handback"
+        ]
+      },
+      "choice_flags": [
+        "handler-assessment-complete",
+        "handler-charter-reviewed",
+        "handler-common-reserve",
+        "handler-refusal-respected",
+        "mentor-una-arc-complete",
+        "mentor-una-foundation-complete",
+        "mentor-una-local-succession",
+        "mentor-una-repair-method",
+        "rival-oda-arc-complete",
+        "rival-oda-colleague",
+        "rival-oda-joint-start",
+        "rival-oda-record-reviewed",
+        "rival-oda-trial-complete",
+        "rival-oda-warning-first",
+        "wayfarer-dispatch-reviewed",
+        "wayfarer-distributed-history",
+        "wayfarer-public-correction",
+        "wayfarer-route-reviewed"
+      ]
+    },
+    {
+      "ending_id": "ending-liberation",
+      "branch_index": 1,
+      "completed_supporting_quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter",
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road",
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final",
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "service_producers": {
+        "service-hart-care-available": [
+          "quest-handler-dessa-charter"
+        ],
+        "service-road-records-available": [
+          "quest-wayfarer-tarin-road"
+        ],
+        "service-independent-routing-available": [
+          "quest-rival-oda-final"
+        ],
+        "service-manual-override-training-available": [
+          "quest-mentor-una-handback"
+        ]
+      },
+      "choice_flags": [
+        "handler-assessment-complete",
+        "handler-charter-reviewed",
+        "handler-independent-route",
+        "handler-route-retested",
+        "mentor-una-arc-complete",
+        "mentor-una-foundation-complete",
+        "mentor-una-modular-method",
+        "mentor-una-open-practice",
+        "rival-oda-arc-complete",
+        "rival-oda-competitive-start",
+        "rival-oda-precaution-first",
+        "rival-oda-record-reviewed",
+        "rival-oda-respected-rival",
+        "rival-oda-trial-complete",
+        "wayfarer-audited-account",
+        "wayfarer-dispatch-reviewed",
+        "wayfarer-route-reviewed",
+        "wayfarer-sealed-history"
+      ]
+    }
+  ],
+  "summary": {
+    "passed": 49,
+    "failed": 0,
+    "skipped": 5
+  }
+}

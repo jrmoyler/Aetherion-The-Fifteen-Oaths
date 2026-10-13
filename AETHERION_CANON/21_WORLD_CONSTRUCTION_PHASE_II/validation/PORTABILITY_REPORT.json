@@ -1,0 +1,20 @@
+{
+  "generated_at_utc": "2026-10-13T19:20:14.022814+00:00",
+  "scope": "Fresh standalone copy in an unrelated temporary directory, no repository arguments, no network requirement.",
+  "result": "PASS",
+  "counts": {
+    "PASS": 445,
+    "FAIL": 0,
+    "SKIPPED": 5,
+    "HUMAN_REVIEW": 5
+  },
+  "skipped_checks": [
+    "source_reference_paths",
+    "reference_hashes_independently_verified",
+    "source_inventory_hashes_verified",
+    "repository_unchanged:destination",
+    "repository_unchanged:source"
+  ],
+  "path_privacy": "Temporary machine-specific path intentionally omitted.",
+  "reproduction": "Copy or unzip package anywhere; python validation/validate_phase2.py"
+}

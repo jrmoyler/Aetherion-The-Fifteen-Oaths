@@ -1,0 +1,1207 @@
+{
+  "schema_version": "1.0.0",
+  "records": [
+    {
+      "id": "P2-SRC-DIRECTIVE",
+      "title": "Phase II \u2014 Continental World Architecture",
+      "source_type": "authenticated_user_directive",
+      "location": "Current owner conversation; private locator withheld",
+      "accessibility": "READ",
+      "canon_status": "LOCKED",
+      "verification": "Owner scope and requirements read directly",
+      "facts": [
+        "Planning-only separate package",
+        "Exactly fifteen Oaths on one connected continent",
+        "Repository modifications forbidden during this assignment"
+      ],
+      "limitations": [
+        "Does not approve newly proposed geographical or architectural details"
+      ]
+    },
+    {
+      "id": "P2-SRC-FOUNDATION",
+      "title": "Aetherion foundation PR #1 \u2014 merged after reviewed handoff",
+      "source_type": "verified_git_commit",
+      "location": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/tree/5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+      "accessibility": "READ",
+      "canon_status": "RECOVERED",
+      "verification": "Exact commit and full 2225-file tree independently verified during foundation handoff; checkout remains readable",
+      "facts": [
+        "100 original castables preserved",
+        "114 recovered original reference images",
+        "15 proposed realm dossiers, 63 POIs,30 land adjacencies,4 basins",
+        "Three.js runtime prototype, not selected entire-world engine"
+      ],
+      "limitations": [
+        "Foundation proposals remain PROPOSED; publication is not founder approval",
+        "Zero castables fully GPU/gameplay certified"
+      ]
+    },
+    {
+      "id": "P2-SRC-PROPOSAL",
+      "title": "Phase II design refinements",
+      "source_type": "new_design",
+      "location": "This package",
+      "accessibility": "READ",
+      "canon_status": "PROPOSED",
+      "verification": "Subject to schema, graph and consistency checks; human approval outstanding",
+      "facts": [],
+      "limitations": [
+        "No final terrain coordinates",
+        "No generated production models or live world implementation",
+        "No measured target-device performance"
+      ]
+    }
+  ],
+  "baseline_commit": "5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+  "source_ability_matrix_commit": "4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451",
+  "files": [
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/CANON_DECISION_LOG.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/CANON_DECISION_LOG.md",
+      "sha256": "1d70290d5372ff855417415085d4e8c1cc00426a2fb28c9b803b3d586b8ae30f",
+      "bytes": 2031,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/CANON_GOVERNANCE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/CANON_GOVERNANCE.md",
+      "sha256": "e9e1eb9e63496594bcf8ac82cea99eceda6d358829f571624d63f45bbcef949c",
+      "bytes": 6016,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/CHANGELOG.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/CHANGELOG.md",
+      "sha256": "b3ad4949ed1b9cf5c008c206daf56d9c93fa0e920eecfe4d83e78a4448f641e2",
+      "bytes": 682,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/CONVERSATION_EVIDENCE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/CONVERSATION_EVIDENCE.md",
+      "sha256": "bf9f6d22b5425f4f4513c583bd0b5d0f1828da5da1fa59c0de983203d28d48e9",
+      "bytes": 1524,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/DELIVERABLE_MANIFEST.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/DELIVERABLE_MANIFEST.json",
+      "sha256": "8982f1770d511d037fe7d50f2d8b6c5923ec154abf6e9ec59cf024409df208a1",
+      "bytes": 13684,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/EXECUTIVE_CANON_OVERVIEW.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/EXECUTIVE_CANON_OVERVIEW.md",
+      "sha256": "91c1625de80ae51aad7562da21d4722adbf963ac0c762545faf3e81a83c2b7d9",
+      "bytes": 6790,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/OPEN_CANON_DECISIONS.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/OPEN_CANON_DECISIONS.md",
+      "sha256": "d33886aacb0803bdefcf2e74dc63db5094d0b68b168192e2d41bb19401b09334",
+      "bytes": 4629,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/PUBLIC_PROVENANCE_POLICY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/PUBLIC_PROVENANCE_POLICY.md",
+      "sha256": "e2d8cd1708b7fd1c6d16e7b8a859e7b13f86b7d09b5f0addc92285596017f0bd",
+      "bytes": 840,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/RECOVERED_USER_LORE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/RECOVERED_USER_LORE.md",
+      "sha256": "39761edf0486fcb4ac0ab762398d70b3dc8e3a8f0e758510af0d2d4dbd8e5419",
+      "bytes": 6082,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/REFERENCE_IMPORT_VERIFICATION.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/REFERENCE_IMPORT_VERIFICATION.json",
+      "sha256": "0a7c05107889803fc98de9db8179e71e0db43a18738f5f7430c9ce3744e4254e",
+      "bytes": 48262,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/REFERENCE_SHARING_APPROVAL.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/REFERENCE_SHARING_APPROVAL.json",
+      "sha256": "2e0554eb2aec06460eee0addf50b331b91668d5f6cb624bef3be2e0d9e7a7d85",
+      "bytes": 647,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/SOURCE_COVERAGE.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/SOURCE_COVERAGE.json",
+      "sha256": "07ce8afafea211854847fc83ebb5024d2a414692740c6d2c70691b18eaaea7b1",
+      "bytes": 20787,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/SOURCE_INVENTORY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/SOURCE_INVENTORY.json",
+      "sha256": "0c1faba7a0c9a27e3fbe4135ae1fa72a09443c061da369e5398ce14ff25a8fe2",
+      "bytes": 333232,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/SOURCE_RECOVERY_REPORT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/SOURCE_RECOVERY_REPORT.md",
+      "sha256": "7fec6c3d41f090ba61950219d13d2770b8819aa03afc7a1c0e40229e622ba106",
+      "bytes": 9348,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/SOURCE_TRACEABILITY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/SOURCE_TRACEABILITY.json",
+      "sha256": "168c39d9cc8edbe94301cfcb50d169d7829f27cefd34ccbe78aa6f4b4ddecf65",
+      "bytes": 4935,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/SOURCE_TRACEABILITY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/SOURCE_TRACEABILITY.md",
+      "sha256": "e293cfbdce6aba91d3898512682baf08d13178192fbc528f4a6c471c3d2bad16",
+      "bytes": 3980,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/asset-dependencies.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/asset-dependencies.schema.json",
+      "sha256": "bcc8a6caa173027b5cf0be406312463ec0f5d2174166f6dff0d72ab5a772593e",
+      "bytes": 1913,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/asset-registry.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/asset-registry.schema.json",
+      "sha256": "fd51e738afec5c5a842045bf4f49ff5483b6a20b26a79f6490bb5a5053d0b1fb",
+      "bytes": 4183,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/backlog.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/backlog.schema.json",
+      "sha256": "0abf40d2a7ee0574a5765e4dba1f36988bc8f0964ef60ff132d88fc165f8672f",
+      "bytes": 2513,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/castable-source.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/castable-source.schema.json",
+      "sha256": "5b9aa9771e61be820539ce0ddafe33296f86114aca4ec7d1e5cfd5562d049355",
+      "bytes": 1131,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/character-registry.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/character-registry.schema.json",
+      "sha256": "4fbf241923e29592a92250ccbe3346cee52ab27da4c273a4fb5c0397fb0fef86",
+      "bytes": 23039,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/character-role-coverage.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/character-role-coverage.schema.json",
+      "sha256": "5a83984778650fb3b3a964536dc4b4a1130301e395b9e9975b39d26806a253df",
+      "bytes": 3609,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/character-service-registry.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/character-service-registry.schema.json",
+      "sha256": "b6ec18c5e118da54e6ba457551e9b25b4e7e5d54f2df6f525ec94297933d99eb",
+      "bytes": 4372,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/common.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/common.schema.json",
+      "sha256": "3f14681ec2048b045f1b1f2cf3a37ac39d808ffaf2895b5a197969d4c68c2f91",
+      "bytes": 1719,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/creatures.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/creatures.schema.json",
+      "sha256": "ad260fa9f292ffc8b998c07a2d36ab310ab357f74d65861cb73d93074c8b2ada",
+      "bytes": 3095,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/ending-prerequisites.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/ending-prerequisites.schema.json",
+      "sha256": "fb543630f7a1f10fd17bfa09304254523696f19459a7fc873240c4123afd1432",
+      "bytes": 4594,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/entity-contract.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/entity-contract.schema.json",
+      "sha256": "bf30417bd8c6488b36968538ffcc5ba4e028a779499338802d7f452f1e45d649",
+      "bytes": 7733,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/faction-registry.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/faction-registry.schema.json",
+      "sha256": "36b68b6910f46e1866beffa158de16cb5658b75bd2687095c75647ade03e182a",
+      "bytes": 6101,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/interaction-rules.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/interaction-rules.schema.json",
+      "sha256": "636a4d28e22a22c9fa61b0610646aa2ee5b86334313df253c30f7745a49ffc4a",
+      "bytes": 4919,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/quest-registry.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/quest-registry.schema.json",
+      "sha256": "0a3bb74f1c083de43ce4b7af57ad8fc71efc615490c09f01e5c837bd843f8a91",
+      "bytes": 23438,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/realm-registry.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/realm-registry.schema.json",
+      "sha256": "a3f290d7fa21f6b36a8e3dcc9b9381381d0e175e73c13e1792039398613daff7",
+      "bytes": 9069,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/reference-index.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/reference-index.schema.json",
+      "sha256": "07bc83a5ce4aafc615592a64c2a9e518da60d2a654f20ddfa2cfa1bef7b20fe4",
+      "bytes": 2513,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/registry-envelope.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/registry-envelope.schema.json",
+      "sha256": "e978186e6c7e4337232395ce8fc691f506b21143e8c793548f8ca4673cb41a26",
+      "bytes": 867,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/relationship-graph.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/relationship-graph.schema.json",
+      "sha256": "3a48004ec6780ee8fb1de595d9a70facde645ff0c4964d59006690159603491d",
+      "bytes": 7096,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/source-asset-index.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/source-asset-index.schema.json",
+      "sha256": "343ea44bc3189d6a4b8972a6c39ffa5917c2523d652df671efafd3457522e4cc",
+      "bytes": 8690,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/source-inventory.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/source-inventory.schema.json",
+      "sha256": "e6c4908a1d262f04782a223dae83b2d473a4dcda8e0e687f217470bbef0735b9",
+      "bytes": 1998,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/timeline.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/timeline.schema.json",
+      "sha256": "6a0184323a075be5a999c198a51969dc14906cd31136ae8ac2a5b2c59422abd3",
+      "bytes": 3799,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/trade-routes.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/trade-routes.schema.json",
+      "sha256": "e18374e00d7d948472e3993e0dd492b482da8b31d75ca75a31830fbe31d8d56b",
+      "bytes": 6544,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/world-events.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/world-events.schema.json",
+      "sha256": "c4528177314c309d18e5e84ba53b52b59747421784d206fb74f1e906504201da",
+      "bytes": 2535,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/world-graph.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/world-graph.schema.json",
+      "sha256": "874aafc634099a12140361d309a92f791d12891cd9a050a6c0104a67be3fecb0",
+      "bytes": 10542,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/world-poi-registry.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/world-poi-registry.schema.json",
+      "sha256": "cb118f32e59787d19bca03efb0bb5bab93d0d55037e522d63c51f9c1b7a54f86",
+      "bytes": 7256,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/00_GOVERNANCE/schemas/world-schema-map.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/00_GOVERNANCE/schemas/world-schema-map.json",
+      "sha256": "27e0b01f67d3526a22e1df0137b8c821ef4a9c952641cc7e17743254a24141eb",
+      "bytes": 1654,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/01_WORLD_BIBLE/AETHERION_WORLD_BIBLE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/01_WORLD_BIBLE/AETHERION_WORLD_BIBLE.md",
+      "sha256": "3606967fbeac874783a2f982ee7c58bd80f49e312a3b6c5d255757be506af037",
+      "bytes": 12091,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/01_WORLD_BIBLE/CANON_CLAIMS.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/01_WORLD_BIBLE/CANON_CLAIMS.json",
+      "sha256": "9eb488b9c96d94ffbc04c927f4beb9d0db508cbc32d0dccecb2cdbf05ba6dfcc",
+      "bytes": 20858,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/01_WORLD_BIBLE/ENTITY_CONTRACT.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/01_WORLD_BIBLE/ENTITY_CONTRACT.json",
+      "sha256": "ce38d071873f98082774faa67c409561da0dc0a37239fdc60a09e1bc1d3c3983",
+      "bytes": 20849,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/01_WORLD_BIBLE/WORLD_BIBLE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/01_WORLD_BIBLE/WORLD_BIBLE.md",
+      "sha256": "0a04cb4f377605c997ee20c3135907f7d7b4fa381c9b3306f6f634244948d917",
+      "bytes": 218,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/02_HISTORY_AND_COSMOLOGY/COSMOLOGY_AND_PACTS.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/02_HISTORY_AND_COSMOLOGY/COSMOLOGY_AND_PACTS.md",
+      "sha256": "a6113cef56254e0133988155556c294879a6abc9b94592567c1f1be6e4690ecc",
+      "bytes": 7849,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/02_HISTORY_AND_COSMOLOGY/HISTORY_AND_CHRONOLOGY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/02_HISTORY_AND_COSMOLOGY/HISTORY_AND_CHRONOLOGY.md",
+      "sha256": "762f2f276a4bced0929d1a86517bec9b4700b458abe84d4fee5f21e23b351906",
+      "bytes": 4741,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/02_HISTORY_AND_COSMOLOGY/TIMELINE.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/02_HISTORY_AND_COSMOLOGY/TIMELINE.json",
+      "sha256": "1583d5790df6512c57650a5c221ab5ec5fd80daca22206de3db3004aff2dc9b2",
+      "bytes": 8055,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json",
+      "sha256": "ae7ce6b3d4ac3c06ed4b188e6e118aabe5e8a2575fc316fa288af2f7b3747336",
+      "bytes": 56612,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/TRADE_ROUTES.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/TRADE_ROUTES.json",
+      "sha256": "17c1d4023ff74a31aa8d81a0abe992d11c19b9aa0bf1b7721f36bf40d5952643",
+      "bytes": 42035,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/WATERSHEDS.mmd",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/WATERSHEDS.mmd",
+      "sha256": "8bf803c3f2823a956595e314617bed3ccd45c36395d5678852dafd36d95c4bc5",
+      "bytes": 835,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/WORLD_GEOGRAPHY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/WORLD_GEOGRAPHY.md",
+      "sha256": "78555b3363323085f51c39cf30f0a480420711f06116f07bdc28d50c8d8167e2",
+      "bytes": 6572,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/WORLD_GRAPH.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/WORLD_GRAPH.json",
+      "sha256": "cc4f6490066199a0e62aeede0a4262d9f38b872b99d02d118dccc360d1425c4d",
+      "bytes": 20406,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/WORLD_GRAPH.mmd",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/WORLD_GRAPH.mmd",
+      "sha256": "fe8aa149ae6194b57f7cdf2bd6f7f9e7a6cdc6f2bf7b81dc916228c99c931b2c",
+      "bytes": 971,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/WORLD_MAP_ART_DIRECTION.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/WORLD_MAP_ART_DIRECTION.md",
+      "sha256": "44c14d6abd6f00f4abe37078771614750166b1dbdf05c4cf4a38ad8336760cc4",
+      "bytes": 2932,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/WORLD_POI_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/WORLD_POI_REGISTRY.json",
+      "sha256": "cc8892a0f52a7a2987812bea6679f626631a1b7cdd6f58fac65bda737bfa3ca2",
+      "bytes": 64992,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/03_GEOGRAPHY/WORLD_SCHEMATIC.svg",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/03_GEOGRAPHY/WORLD_SCHEMATIC.svg",
+      "sha256": "d31286269d3f680ca5272bcda2a9cbdc8b912ce512d9e8e97ced7f259f24d772",
+      "bytes": 8346,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md",
+      "sha256": "b03306a1c7fbd50978464ac1c615408ec2388408d5c43c79587a8d1dca712e51",
+      "bytes": 13342,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md",
+      "sha256": "5906670eb55ebc19b1c427f633ec4818bb5dd7297b6e9563973385cdd96d5d49",
+      "bytes": 14133,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md",
+      "sha256": "4e333ebec7daf568b098e0a5b915f3339c692bd7e9bb01f34d1ac33737f9ac6f",
+      "bytes": 13760,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md",
+      "sha256": "9cc65374dc3001495d2321480431a7b4e0fb043229c7997d0db16dc97c81486a",
+      "bytes": 13407,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md",
+      "sha256": "cecc084b1b4d5920c00d22e2fd42c77e9a0404c2806ad8c56474726d005ffddf",
+      "bytes": 13501,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md",
+      "sha256": "71479719385c321260d9e48247c1c406d9410ef826d628a037ac26802004e14a",
+      "bytes": 13915,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md",
+      "sha256": "ee6ec6c2021873e0b46290f8d224ff954bdfb16b82664c78245ebeac1a26220e",
+      "bytes": 13873,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md",
+      "sha256": "f3982c59280dd75262722c67632a0d40b8ad55fef89982dc0f719c3de950778a",
+      "bytes": 13582,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md",
+      "sha256": "57459aead62aeb563451ca0610e954ad6f86803f836431cfd6ffce755e0aea7b",
+      "bytes": 13510,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md",
+      "sha256": "a2b17e87e00fa68d0dacb5b6b57cc97a3ee36605f01e6e0706ee370e020b2624",
+      "bytes": 13954,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md",
+      "sha256": "b3577b1b27b8b3630a626889422362d3a7c45e8b0d1d77c47a045b9479776042",
+      "bytes": 13727,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md",
+      "sha256": "67ea1b1f7dc36849ee005955442a8328c7187e7dece80f9d3f24c18be04a974b",
+      "bytes": 13871,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md",
+      "sha256": "51b4a8d28dd2986fbf0201af2fa3f54b3cec38a19f31d406c2078eb95a04c677",
+      "bytes": 14056,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md",
+      "sha256": "df02d5dd31cf5c3f0d2a76e29fad4ebc5fe43ff7153af1c5322c9f3e4576fb01",
+      "bytes": 13807,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md",
+      "sha256": "b9f885e681b08e1adb326d46bcb6a44e8526c9c995ddf8975123e73871859de5",
+      "bytes": 14176,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/04_OATH_DOSSIERS/OATH_DOSSIER_INDEX.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/04_OATH_DOSSIERS/OATH_DOSSIER_INDEX.json",
+      "sha256": "161fe335100828b743f4aa4d395fa899c102a420e6281dcdb93c3b4c695ca5a3",
+      "bytes": 21740,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json",
+      "sha256": "fa6bb84c6d09f5a591808ee2644adf55d51f2b7d0eacf6ea37e789f489ba9dcd",
+      "bytes": 153349,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_ROLE_COVERAGE.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_ROLE_COVERAGE.json",
+      "sha256": "3c5e3acb4a6e7b231935ae7bec4f5eddaaf0bda9e1f3e2a4793fa58668dea6b7",
+      "bytes": 8794,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_SERVICE_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/CHARACTER_SERVICE_REGISTRY.json",
+      "sha256": "ca30830a514b91c927f8cd63ba4583e2ce347fac0f51c8a99d68b7310dd6e975",
+      "bytes": 4617,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/FACTIONS_AND_CHARACTER_ARCS.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/FACTIONS_AND_CHARACTER_ARCS.md",
+      "sha256": "d9f2737cb5bd64eab73ba07086f65754556ca99a5231f9a728068a079ce2ccd5",
+      "bytes": 6552,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/FACTION_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/FACTION_REGISTRY.json",
+      "sha256": "3dfbc8e86463f5a32eff015c29afa08acfb0afd0784328111e3c6fe6921170bb",
+      "bytes": 48721,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/RELATIONSHIP_GRAPH.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/05_FACTIONS_AND_CHARACTERS/RELATIONSHIP_GRAPH.json",
+      "sha256": "fd95929c801861e1d49fc70764d48ce122dcd14745efd24dfad2123fcb5a677c",
+      "bytes": 29090,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/06_NARRATIVE/BRANCHING_STORY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/06_NARRATIVE/BRANCHING_STORY.md",
+      "sha256": "895a712014cd25a30b6743ce74e2856933e0121b6552082f9360feac652e6b34",
+      "bytes": 8811,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/06_NARRATIVE/ENDING_PREREQUISITES.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/06_NARRATIVE/ENDING_PREREQUISITES.json",
+      "sha256": "6ddad9ddde824042d1a881789a66ad9fc94df5f6516a286fc0cc775a4cdbacc2",
+      "bytes": 7478,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/06_NARRATIVE/NARRATIVE_STATE_CONTRACT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/06_NARRATIVE/NARRATIVE_STATE_CONTRACT.md",
+      "sha256": "558ba7cc76131ffd1c31110923f424c781c50104a6962a1143d5fc2830dc51ed",
+      "bytes": 5379,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/06_NARRATIVE/QUEST_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/06_NARRATIVE/QUEST_REGISTRY.json",
+      "sha256": "98727be1b3850eec95608b22b20953f8dc126ac7b43b4def7260c1d90bce3bb1",
+      "bytes": 220932,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/06_NARRATIVE/STORY_BRANCHES.mmd",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/06_NARRATIVE/STORY_BRANCHES.mmd",
+      "sha256": "8ba5255e003e0766d082fbbb5f44d2592dcc99d235d6c7419cebb1446891aeb3",
+      "bytes": 877,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/06_NARRATIVE/WORLD_NARRATIVE_VALIDATION.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/06_NARRATIVE/WORLD_NARRATIVE_VALIDATION.json",
+      "sha256": "56014278e86aae894747cfee13739e97ca96d14571e40ccac7f845b8f5095167",
+      "bytes": 46203,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/06_NARRATIVE/WORLD_SCHEMA_VALIDATION.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/06_NARRATIVE/WORLD_SCHEMA_VALIDATION.json",
+      "sha256": "7fa0b51f03a7e562f00a496db88c4d3dbbba75bff0ade31ba67ea11161c9bb10",
+      "bytes": 8850,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/CASTABLE_WORLD_LINKS.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/CASTABLE_WORLD_LINKS.json",
+      "sha256": "a5201c9e22e5483cd08966cdcfcfdf98e694141e396ff66b90c881ba3c7796ff",
+      "bytes": 572358,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/CONSEQUENCE_FRAMEWORK.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/CONSEQUENCE_FRAMEWORK.md",
+      "sha256": "223d35ea374a40503320d48a5fe97bc12d575add1ad76e4123446d4fc311255c",
+      "bytes": 6463,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/ELEMENTAL_INTERACTION_MATRIX.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/ELEMENTAL_INTERACTION_MATRIX.md",
+      "sha256": "a910d68a29367c31597cf5f1309bc9dd876ab0e352e09ea4d4f341c9378fd7ed",
+      "bytes": 35215,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/HYBRID_COMBAT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/HYBRID_COMBAT.md",
+      "sha256": "9ad795d241062b2994472fdb314b744ee1e01d553db198b2cf637529f772dac9",
+      "bytes": 6943,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/INTERACTION_RULES.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/INTERACTION_RULES.json",
+      "sha256": "a8e0f4fdf7b31e253c5fdcdc4f1680a66b6a03f6383a3c599c695449209050b7",
+      "bytes": 593487,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/MULTI_OATH_PROGRESSION.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/MULTI_OATH_PROGRESSION.md",
+      "sha256": "a37836cf99cb0f1901ffbc33d1a96705601b0d08c9845a647466ba186f1ea822",
+      "bytes": 8214,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/OATH_SYSTEM_PROFILES.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/OATH_SYSTEM_PROFILES.json",
+      "sha256": "2ccce03a16ffb75d3cbbfc32083e084bdac03ceb4c08fd212247ca5cea45cef7",
+      "bytes": 18507,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/07_GAMEPLAY_SYSTEMS/SYSTEMS_OVERVIEW.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/07_GAMEPLAY_SYSTEMS/SYSTEMS_OVERVIEW.md",
+      "sha256": "bebda5e00e51972dfa5a1a2ddd3f2c68ca61e1bd9f52731e700f265f4e085514",
+      "bytes": 6190,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/08_ABILITY_MATRIX/ABILITY_IMPLEMENTATION_GAP_ANALYSIS.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/08_ABILITY_MATRIX/ABILITY_IMPLEMENTATION_GAP_ANALYSIS.md",
+      "sha256": "8ca529e9092dda6c2926a0be3bfb38ed35f237c568a0dece75a852ecddb83eac",
+      "bytes": 3300,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/08_ABILITY_MATRIX/ABILITY_MATRIX_AUDIT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/08_ABILITY_MATRIX/ABILITY_MATRIX_AUDIT.md",
+      "sha256": "05db4f834f908d21a4c190c35773fe6c7d86ced1b32487834453d5c986305f2b",
+      "bytes": 3073,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/09_ART_DIRECTION/ART_CONFLICT_LOG.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/09_ART_DIRECTION/ART_CONFLICT_LOG.md",
+      "sha256": "3885576c58dcf1d7f481a7acdde699235dcabb71811a8ff7a58393e369f7eef9",
+      "bytes": 4018,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/09_ART_DIRECTION/CROSS_OATH_COLLISION_AUDIT.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/09_ART_DIRECTION/CROSS_OATH_COLLISION_AUDIT.json",
+      "sha256": "0166cc9938305fa432bf7c752d289f44e6f077b8c7f6b8621eaac11c8cf34d53",
+      "bytes": 102778,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+      "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+      "bytes": 45875,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.md",
+      "sha256": "d160e79f4eff48f22782903678f18c61c36f66442c7e70961fd387bcf971ef24",
+      "bytes": 28534,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/ASSET_COVERAGE.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/ASSET_COVERAGE.json",
+      "sha256": "353957d5cf990ed2a769363386c239efbe6f306675c491dbdf55fb1b2a406ef1",
+      "bytes": 170899,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/ASSET_COVERAGE_REPORT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/ASSET_COVERAGE_REPORT.md",
+      "sha256": "50ea8a5ef3a1a9879dff8cac130ae97e956f2646bf574127cb96132810766c0d",
+      "bytes": 6615,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/ASSET_DEPENDENCIES.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/ASSET_DEPENDENCIES.json",
+      "sha256": "fa2c79bf8abed5b685ddf4257f3a636c70393caee75237b3b81f99b1584e649a",
+      "bytes": 685645,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/ASSET_NAMING_STANDARD.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/ASSET_NAMING_STANDARD.md",
+      "sha256": "449e91f372b4da977120b4decbc535fa6867d86b131726b59776b5bbe309a2f0",
+      "bytes": 3551,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/ASSET_TAXONOMY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/ASSET_TAXONOMY.md",
+      "sha256": "d089542d39d8f4948bf5cb93c1cf5b89dc25494fd50577ca58df40ce0e7fadb2",
+      "bytes": 9068,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/ASSET_VALIDATION.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/ASSET_VALIDATION.json",
+      "sha256": "3cc3f6329ae24921c87d0f5169b295a025c2e2bf8954c592a440a00ea1bbf4cb",
+      "bytes": 3332,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+      "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+      "bytes": 4475443,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/10_ASSET_REGISTRY/SOURCE_ASSET_INDEX.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/10_ASSET_REGISTRY/SOURCE_ASSET_INDEX.json",
+      "sha256": "43fcb5c1aab405b6b1e6f2f62e140977bea3264c23701920dd4f16774ca995a3",
+      "bytes": 198785,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/11_REFERENCE_SHEETS/REFERENCE_CASTABLE_LINKS.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/11_REFERENCE_SHEETS/REFERENCE_CASTABLE_LINKS.json",
+      "sha256": "5666a58b94aaf9e4b6cb3c770f9b1956a13e2b2ef8dacb2a8e3c43e59a3ddf3a",
+      "bytes": 26748,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/11_REFERENCE_SHEETS/REFERENCE_INDEX.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/11_REFERENCE_SHEETS/REFERENCE_INDEX.json",
+      "sha256": "fa50881ea4815c1658ccda55738c98907c2967a9b3124fef0b0062fe4c48e991",
+      "bytes": 132920,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/11_REFERENCE_SHEETS/REFERENCE_PRODUCTION_HANDBOOK.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/11_REFERENCE_SHEETS/REFERENCE_PRODUCTION_HANDBOOK.md",
+      "sha256": "4802a6fdc0276608aafd521d60c563e933053ed6cca7ccfde879f54a03ca2fca",
+      "bytes": 13343,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/11_REFERENCE_SHEETS/VFX_AND_CHARACTER_PIXEL_REVIEW.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/11_REFERENCE_SHEETS/VFX_AND_CHARACTER_PIXEL_REVIEW.json",
+      "sha256": "ea8709503306d968327525c3b927fc43d947467e0ad0f5663013ae2e8b3101db",
+      "bytes": 53281,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+      "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+      "bytes": 557482,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_PRODUCTION_GUIDE.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_PRODUCTION_GUIDE.md",
+      "sha256": "f3810fbb1129286b67b11416f257a4df76c3b5cf7a58fb666ab572fe938466b1",
+      "bytes": 6317,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/DISTINCT_CREATURE_DESIGNS.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/12_CREATURES_AND_MOUNTS/DISTINCT_CREATURE_DESIGNS.md",
+      "sha256": "166ecea5dfda022d016b0827b80abac7486b86ea122660d61e25c01ed5d39f3e",
+      "bytes": 33449,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/13_WORLD_EVENTS/LIVING_WORLD.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/13_WORLD_EVENTS/LIVING_WORLD.md",
+      "sha256": "32eaa2e599d4c79cb2605cb2dcdb3ca40102792bd90e44b8f25dfd1f51effd24",
+      "bytes": 5925,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json",
+      "sha256": "6d28ade50c18db411008ba3101c84ffbce43df9bcdcd5fc3b3dcacedc637d968",
+      "bytes": 57009,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json",
+      "sha256": "a0ae085bf1544be7e30db027f0ca780b390c528e037b76d4c0be26f297c3b8cc",
+      "bytes": 26805,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/LIFE_SKILLS_AND_ECONOMY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/LIFE_SKILLS_AND_ECONOMY.md",
+      "sha256": "86c09cf7b6b3586bbb458194ec65f3a6718c1dd7f8df899be66fb936003a2fa7",
+      "bytes": 7063,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/PRODUCTION_RECIPES.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/PRODUCTION_RECIPES.json",
+      "sha256": "5559f33e0f6fa9915a71716056038cad0cc3ef4400e0a1b1263dfb5a41429bdc",
+      "bytes": 68051,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/WORLD_RESOURCE_FLOWS.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/14_LIFE_SKILLS_AND_ECONOMY/WORLD_RESOURCE_FLOWS.json",
+      "sha256": "070f2638873f06968f6761090964e185a8a23185243fe3affddb64181dddb699",
+      "bytes": 71990,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/15_HOUSING/HOUSING.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/15_HOUSING/HOUSING.md",
+      "sha256": "219583e9dab0cc2c19fbc847e4e613aa667ddbcb0b31caebe4ee8b3317775bc0",
+      "bytes": 5493,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/15_HOUSING/HOUSING_PROFILES.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/15_HOUSING/HOUSING_PROFILES.json",
+      "sha256": "a89477c5f372d09d54b2ba295ef5fe0453133502edda55ab0795b150f65c8c46",
+      "bytes": 22428,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/16_PVP_AND_TERRITORY/PVP_AND_TERRITORY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/16_PVP_AND_TERRITORY/PVP_AND_TERRITORY.md",
+      "sha256": "1b45c68cb006644a387c8a5c913616f25eb67c0ac76529ee0baf3c17df36c6e4",
+      "bytes": 6546,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/16_PVP_AND_TERRITORY/PVP_MODE_CONTRACTS.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/16_PVP_AND_TERRITORY/PVP_MODE_CONTRACTS.json",
+      "sha256": "f14f149b37168c584fc9594ae74267327112de09ecc42a0f7179a86ea025c12e",
+      "bytes": 7061,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/17_TECHNICAL_ART/PERFORMANCE_AND_ACCESSIBILITY.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/17_TECHNICAL_ART/PERFORMANCE_AND_ACCESSIBILITY.md",
+      "sha256": "6a7c5a839d3c5b5b4b0b2d459d0507c28f9c702371f49997816e37c6de332eff",
+      "bytes": 5016,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/17_TECHNICAL_ART/PROPOSED_BUDGETS.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/17_TECHNICAL_ART/PROPOSED_BUDGETS.json",
+      "sha256": "53f10f4e2ea4390242e6c976c340efca8f266a786661b94810a14375b208a78f",
+      "bytes": 5585,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/17_TECHNICAL_ART/TECHNICAL_ART_STANDARD.md",
+      "sha256": "d99a4951fdbfafb2a577fe8b6cf5c358082aac1598ce13dc9c254020f52ad2d2",
+      "bytes": 7631,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json",
+      "sha256": "e6eafc00d455864fb485cf02a6e8fad55ced10c14b7b1a2a146d7fdab1ce0dc6",
+      "bytes": 101289,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.md",
+      "sha256": "2067ba195a4e9574c98f89d5c1b3abd2e6e752500f4320d159416f7aeeb1d6c0",
+      "bytes": 10719,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/SYSTEMS_STATIC_VALIDATION.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/SYSTEMS_STATIC_VALIDATION.json",
+      "sha256": "31d7756ee3d4bf1c5b48f4b92c01c8499e6de5bd7b4c686ae7f720cbf001fc56",
+      "bytes": 3700,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/schemas/implementation-contracts.schema.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/schemas/implementation-contracts.schema.json",
+      "sha256": "a48e877bfb7fbc26d678494166b9a517c95276973cc005d1a2d9e622513ed83a",
+      "bytes": 8186,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/19_VALIDATION/CANON_COVERAGE_DASHBOARD.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/19_VALIDATION/CANON_COVERAGE_DASHBOARD.json",
+      "sha256": "cde7947fcede1b5a4fa8a65b9fb32936be9443131a5e9caede8b9a5c9bdac0c0",
+      "bytes": 420187,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/19_VALIDATION/CANON_COVERAGE_DASHBOARD.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/19_VALIDATION/CANON_COVERAGE_DASHBOARD.md",
+      "sha256": "fe84790cc7948fcf706dcbddf651dde925c7e532c1a0ab68c89a70fd46b1bb75",
+      "bytes": 2470,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/19_VALIDATION/CANON_VALIDATION_REPORT.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/19_VALIDATION/CANON_VALIDATION_REPORT.json",
+      "sha256": "f86f35f72ae2d7e73e88ebdfc8a97b7278e1807166d974ac00dc7b707d8591f3",
+      "bytes": 30545,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/19_VALIDATION/INDEPENDENT_REVIEW.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/19_VALIDATION/INDEPENDENT_REVIEW.md",
+      "sha256": "2994af03e3aa5c27175193b134dd20143474d61fd1890eb400ad0a429533429a",
+      "bytes": 19521,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/19_VALIDATION/NEGATIVE_FIXTURE_VALIDATION.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/19_VALIDATION/NEGATIVE_FIXTURE_VALIDATION.json",
+      "sha256": "121783835384c5578139e53fbd80722cd738310d331134df25c2197f2fa3823c",
+      "bytes": 971,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/19_VALIDATION/VALIDATION_AND_CONSISTENCY_REPORT.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/19_VALIDATION/VALIDATION_AND_CONSISTENCY_REPORT.md",
+      "sha256": "7f965b1c35920cb3e5faedc987c35ca62b46826b32b461b53023439f6c937f29",
+      "bytes": 9996,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/20_PRODUCTION_ROADMAP/IMPLEMENTATION_BACKLOG.json",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/20_PRODUCTION_ROADMAP/IMPLEMENTATION_BACKLOG.json",
+      "sha256": "ddb2e40ca580f27ce40b99a10a074999c09baf7c52f9241eda94d2b87a98d085",
+      "bytes": 11601,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/20_PRODUCTION_ROADMAP/PRODUCTION_ROADMAP.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/20_PRODUCTION_ROADMAP/PRODUCTION_ROADMAP.md",
+      "sha256": "b3f14a414d8cc81dcfabe48bc16154652b6ad37aa5d80bb4745f531767e87f03",
+      "bytes": 6152,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    },
+    {
+      "path": "AETHERION_CANON/README.md",
+      "url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/5dce9edae0bb3587eb7c72433395e7d5a19857ea/AETHERION_CANON/README.md",
+      "sha256": "cb0d330b0b5ba1767337353171673f353b14ffd17651cb142d40c31572232ee8",
+      "bytes": 6170,
+      "verification": "HASHED_ACCESSIBLE_BASELINE_FILE",
+      "semantic_review": "See domain reports and cited sections; inventory inclusion alone does not claim exhaustive semantic or pixel inspection"
+    }
+  ],
+  "reference_evidence": "See environment-reference evidence supplied by asset review; approved final concept status is not inferred",
+  "repository_status": {
+    "observed_at": "2026-10-13T19:09:24Z",
+    "pr_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/pull/1",
+    "merged": true,
+    "merged_at": "2026-10-13T18:54:56Z",
+    "merge_commit": "8c4b5d0bfc75a98388ea29231b9cf1d304dff550",
+    "reviewed_head": "5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+    "merger_identity": "Not established by returned metadata",
+    "scope": "Read-only observation; no Phase II repository mutation"
+  }
+}

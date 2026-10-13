@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o13-e-weapons-family",
+  "referenceIds": [
+    "reference-036",
+    "reference-037"
+  ],
+  "assets": [
+    {
+      "id": "prod-o13-ceremonial-rapier",
+      "archetypeId": "prod-o13-ceremonial-rapier",
+      "name": "Ceremonial Rapier",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier.blend",
+        "glb": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier.glb",
+        "lod1": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier_lod1.glb",
+        "lod2": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier_lod2.glb",
+        "collision": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier_collision.glb",
+        "textures": [
+          "assets/production/oath-13/weapons/mirror_silver_basecolor.png",
+          "assets/production/oath-13/weapons/mirror_silver_roughness.png",
+          "assets/production/oath-13/weapons/mirror_silver_metallic.png",
+          "assets/production/oath-13/weapons/mirror_silver_normal.png",
+          "assets/production/oath-13/weapons/ivory_enamel_basecolor.png",
+          "assets/production/oath-13/weapons/ivory_enamel_roughness.png",
+          "assets/production/oath-13/weapons/ivory_enamel_metallic.png",
+          "assets/production/oath-13/weapons/ivory_enamel_normal.png",
+          "assets/production/oath-13/weapons/aged_gold_basecolor.png",
+          "assets/production/oath-13/weapons/aged_gold_roughness.png",
+          "assets/production/oath-13/weapons/aged_gold_metallic.png",
+          "assets/production/oath-13/weapons/aged_gold_normal.png",
+          "assets/production/oath-13/weapons/navy_cloth_basecolor.png",
+          "assets/production/oath-13/weapons/navy_cloth_roughness.png",
+          "assets/production/oath-13/weapons/navy_cloth_metallic.png",
+          "assets/production/oath-13/weapons/navy_cloth_normal.png",
+          "assets/production/oath-13/weapons/red_silk_basecolor.png",
+          "assets/production/oath-13/weapons/red_silk_roughness.png",
+          "assets/production/oath-13/weapons/red_silk_metallic.png",
+          "assets/production/oath-13/weapons/red_silk_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-13/weapons/ceremonial-rapier/front.png",
+          "assets/production/oath-13/weapons/ceremonial-rapier/side.png",
+          "assets/production/oath-13/weapons/ceremonial-rapier/hero.png"
+        ]
+      },
+      "dimensionsMeters": [
+        0.184,
+        0.184,
+        1.221
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner reference-037 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "Polished mirror renderer/environment reflection parity",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Codex hinge closure clearances, secondary tassel motion and sound/VFX"
+      ],
+      "triangles": {
+        "glb": 2716,
+        "lod1": 1470,
+        "lod2": 739,
+        "collision": 138
+      }
+    },
+    {
+      "id": "prod-o13-mirrored-baton",
+      "archetypeId": "prod-o13-mirrored-baton",
+      "name": "Mirrored Baton",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton.blend",
+        "glb": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton.glb",
+        "lod1": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton_lod1.glb",
+        "lod2": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton_lod2.glb",
+        "collision": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton_collision.glb",
+        "textures": [
+          "assets/production/oath-13/weapons/mirror_silver_basecolor.png",
+          "assets/production/oath-13/weapons/mirror_silver_roughness.png",
+          "assets/production/oath-13/weapons/mirror_silver_metallic.png",
+          "assets/production/oath-13/weapons/mirror_silver_normal.png",
+          "assets/production/oath-13/weapons/ivory_enamel_basecolor.png",
+          "assets/production/oath-13/weapons/ivory_enamel_roughness.png",
+          "assets/production/oath-13/weapons/ivory_enamel_metallic.png",
+          "assets/production/oath-13/weapons/ivory_enamel_normal.png",
+          "assets/production/oath-13/weapons/aged_gold_basecolor.png",
+          "assets/production/oath-13/weapons/aged_gold_roughness.png",
+          "assets/production/oath-13/weapons/aged_gold_metallic.png",
+          "assets/production/oath-13/weapons/aged_gold_normal.png",
+          "assets/production/oath-13/weapons/navy_cloth_basecolor.png",
+          "assets/production/oath-13/weapons/navy_cloth_roughness.png",
+          "assets/production/oath-13/weapons/navy_cloth_metallic.png",
+          "assets/production/oath-13/weapons/navy_cloth_normal.png",
+          "assets/production/oath-13/weapons/red_silk_basecolor.png",
+          "assets/production/oath-13/weapons/red_silk_roughness.png",
+          "assets/production/oath-13/weapons/red_silk_metallic.png",
+          "assets/production/oath-13/weapons/red_silk_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-13/weapons/mirrored-baton/front.png",
+          "assets/production/oath-13/weapons/mirrored-baton/side.png",
+          "assets/production/oath-13/weapons/mirrored-baton/hero.png"
+        ]
+      },
+      "dimensionsMeters": [
+        0.0575,
+        0.05,
+        0.49
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner reference-037 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "Polished mirror renderer/environment reflection parity",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Codex hinge closure clearances, secondary tassel motion and sound/VFX"
+      ],
+      "triangles": {
+        "glb": 1316,
+        "lod1": 706,
+        "lod2": 341,
+        "collision": 100
+      }
+    },
+    {
+      "id": "prod-o13-mirror-codex",
+      "archetypeId": "prod-o13-mirror-codex",
+      "name": "Mirror Codex",
+      "type": "articulated_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-13/weapons/mirror-codex/mirror-codex.blend",
+        "glb": "assets/production/oath-13/weapons/mirror-codex/mirror-codex.glb",
+        "lod1": "assets/production/oath-13/weapons/mirror-codex/mirror-codex_lod1.glb",
+        "lod2": "assets/production/oath-13/weapons/mirror-codex/mirror-codex_lod2.glb",
+        "collision": "assets/production/oath-13/weapons/mirror-codex/mirror-codex_collision.glb",
+        "textures": [
+          "assets/production/oath-13/weapons/mirror_silver_basecolor.png",
+          "assets/production/oath-13/weapons/mirror_silver_roughness.png",
+          "assets/production/oath-13/weapons/mirror_silver_metallic.png",
+          "assets/production/oath-13/weapons/mirror_silver_normal.png",
+          "assets/production/oath-13/weapons/ivory_enamel_basecolor.png",
+          "assets/production/oath-13/weapons/ivory_enamel_roughness.png",
+          "assets/production/oath-13/weapons/ivory_enamel_metallic.png",
+          "assets/production/oath-13/weapons/ivory_enamel_normal.png",
+          "assets/production/oath-13/weapons/aged_gold_basecolor.png",
+          "assets/production/oath-13/weapons/aged_gold_roughness.png",
+          "assets/production/oath-13/weapons/aged_gold_metallic.png",
+          "assets/production/oath-13/weapons/aged_gold_normal.png",
+          "assets/production/oath-13/weapons/navy_cloth_basecolor.png",
+          "assets/production/oath-13/weapons/navy_cloth_roughness.png",
+          "assets/production/oath-13/weapons/navy_cloth_metallic.png",
+          "assets/production/oath-13/weapons/navy_cloth_normal.png",
+          "assets/production/oath-13/weapons/red_silk_basecolor.png",
+          "assets/production/oath-13/weapons/red_silk_roughness.png",
+          "assets/production/oath-13/weapons/red_silk_metallic.png",
+          "assets/production/oath-13/weapons/red_silk_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-13/weapons/mirror-codex/front.png",
+          "assets/production/oath-13/weapons/mirror-codex/side.png",
+          "assets/production/oath-13/weapons/mirror-codex/hero.png"
+        ],
+        "animationPreview": "assets/production/oath-13/weapons/mirror-codex/hinge-pose.png"
+      },
+      "dimensionsMeters": [
+        0.364,
+        0.016,
+        0.12
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "status": "CANDIDATE_WEIGHTED",
+        "boneCount": 4
+      },
+      "animations": [
+        {
+          "name": "Codex_fold_open_demo",
+          "frames": 48,
+          "fps": 24,
+          "status": "HINGE_DEMONSTRATION_UNREVIEWED"
+        }
+      ],
+      "remainingGates": [
+        "Owner reference-037 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "Polished mirror renderer/environment reflection parity",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Codex hinge closure clearances, secondary tassel motion and sound/VFX"
+      ],
+      "triangles": {
+        "glb": 840,
+        "lod1": 424,
+        "lod2": 184,
+        "collision": 68
+      }
+    }
+  ]
+}

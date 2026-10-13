@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "baseline_commit": "5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+  "scope": "Document/schema/topological validation only; no runtime/engineering/art/founder approval.",
+  "counts": {
+    "baseline_pois": 63,
+    "total_pois": 318,
+    "settlements": 60,
+    "capital_layouts": 15,
+    "region_blueprints": 15,
+    "capital_districts": 90
+  },
+  "checks": [
+    {
+      "check": "WORLD_POI_REGISTRY.json strict schema and unknown-field rejection",
+      "result": "PASS"
+    },
+    {
+      "check": "SETTLEMENT_REGISTRY.json strict schema and unknown-field rejection",
+      "result": "PASS"
+    },
+    {
+      "check": "CAPITAL_LAYOUT_REGISTRY.json strict schema and unknown-field rejection",
+      "result": "PASS"
+    },
+    {
+      "check": "REGION_BLUEPRINT_INDEX.json strict schema and unknown-field rejection",
+      "result": "PASS"
+    },
+    {
+      "check": "All 63 baseline POIs retained value-for-value, including 15 capital identities",
+      "result": "PASS"
+    },
+    {
+      "check": "15 capital adjacency graphs, valid service routes and connectivity after any single-link closure",
+      "result": "PASS"
+    },
+    {
+      "check": "15 region docs cover all 28 spatial/living fields; 15 capital docs exist; POI and settlement references resolve",
+      "result": "PASS"
+    },
+    {
+      "check": "15 linked SVG plans and unfolded sections parse as XML, render with Inkscape and pass contact-sheet visual inspection; Cindervault and Confluence Quay inspected at full size",
+      "result": "PASS"
+    }
+  ],
+  "open_gates": [
+    "Human art and narrative review",
+    "Terrain coordinates, slope, water/drainage and structural engineering",
+    "Runtime egress, accessibility, occupancy and NPC navigation",
+    "Simulation overlap, encounter/quest state and recovery",
+    "Asset realization, creature/boss design and profiling"
+  ]
+}

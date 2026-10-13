@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "audit:glb": "node audit-glb.mjs",
-    "test": "node --test audit-glb.test.mjs"
+    "test": "node --test *.test.mjs",
+    "validate:deliverables": "node validate-deliverables.mjs"
   },
   "dependencies": {
     "gltf-validator": "2.0.0-dev.3.10"
   },
-  "engines": { "node": ">=22.12.0" }
+  "engines": {
+    "node": ">=22.12.0"
+  }
 }

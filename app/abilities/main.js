@@ -1,5 +1,6 @@
 import '../../runtime/ability-matrix/packs/sandbox/src/ui/styles.css';
 import './wrapper.css';
+import { installProductionEquipment } from './production-equipment.js';
 import { App } from '../../runtime/ability-matrix/packs/sandbox/src/core/App.js';
 import { LoadingScreen } from '../../runtime/ability-matrix/packs/sandbox/src/ui/HUD.js';
 import { installMatrixBridge } from '../../runtime/ability-matrix/packs/sandbox/src/bridge/MatrixBridge.js';
@@ -21,6 +22,12 @@ export async function bootAetherionAbilities() {
     const adapter = createAbilityMatrixAdapter({ bridge, catalog });
     window.aetherionAbilities = adapter;
     bindCatalogControls(adapter, app.slot?.uid);
+    // Independent, opt-in destination equipment. Ability boot does not wait for it.
+    window.aetherionEquipmentReady = installProductionEquipment(app).catch(error => {
+      console.error('[Candidate equipment setup]', error);
+      document.getElementById('equipment-status').textContent = `Equipment unavailable: ${error.message}`;
+      return null;
+    });
     return { app, bridge, adapter };
   } catch (error) {
     console.error('[Aetherion boot] failed', error);

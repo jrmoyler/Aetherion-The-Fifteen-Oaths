@@ -1,0 +1,269 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o03-e-weapons-family",
+  "referenceIds": [
+    "reference-057"
+  ],
+  "status": "PARTIAL_PRODUCTION_CANDIDATES_UNREVIEWED",
+  "coordinateContract": "Blender meters +Y forward +Z up; GLB Y-up; grip origin proposed",
+  "assets": [
+    {
+      "id": "storm-relay-whip-ready",
+      "archetypeId": "storm-relay-whip",
+      "name": "Storm Relay Whip Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready.blend",
+        "glb": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready.glb",
+        "lod1": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-lod1.glb",
+        "lod2": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-lod2.glb",
+        "collision": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-03/weapons/textures/copper_basecolor.png",
+          "assets/production/oath-03/weapons/textures/copper_orm.png",
+          "assets/production/oath-03/weapons/textures/copper_normal.png",
+          "assets/production/oath-03/weapons/textures/ivory_basecolor.png",
+          "assets/production/oath-03/weapons/textures/ivory_orm.png",
+          "assets/production/oath-03/weapons/textures/ivory_normal.png",
+          "assets/production/oath-03/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-03/weapons/textures/cloth_orm.png",
+          "assets/production/oath-03/weapons/textures/cloth_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-hero.png",
+          "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-side.png",
+          "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-front.png",
+          "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready-animated-pose-frame18.png"
+        ]
+      },
+      "triangles": {
+        "glb": 6184,
+        "lod1": 3202,
+        "lod2": 1598,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.40868,
+        1.031,
+        0.11
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "ARTICULATED_CHAIN",
+        "status": "AUTHORED_UNVERIFIED",
+        "boneCount": 26
+      },
+      "animations": [
+        {
+          "name": "chain_settle",
+          "durationSeconds": 1.9583333333333333
+        }
+      ],
+      "remainingGates": [
+        "Art approval and fine inlay/engraving matching",
+        "Hanging fabric tassels not authored",
+        "Damaged state absent",
+        "Chain dynamics/collision requires gameplay solver; settle clip cosmetic only",
+        "Character hand/docking fit",
+        "Actual engine imports, LOD transitions and performance",
+        "Lightning VFX/audio and cast integration",
+        "Whip glass relay chamber and internal electrical arcs not yet matched"
+      ],
+      "referenceIds": [
+        "reference-057"
+      ]
+    },
+    {
+      "id": "storm-relay-whip-stowed",
+      "archetypeId": "storm-relay-whip",
+      "name": "Storm Relay Whip Stowed",
+      "type": "equipment",
+      "variant": "stowed",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed.blend",
+        "glb": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed.glb",
+        "lod1": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-lod1.glb",
+        "lod2": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-lod2.glb",
+        "collision": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-collision.glb",
+        "textures": [
+          "assets/production/oath-03/weapons/textures/copper_basecolor.png",
+          "assets/production/oath-03/weapons/textures/copper_orm.png",
+          "assets/production/oath-03/weapons/textures/copper_normal.png",
+          "assets/production/oath-03/weapons/textures/ivory_basecolor.png",
+          "assets/production/oath-03/weapons/textures/ivory_orm.png",
+          "assets/production/oath-03/weapons/textures/ivory_normal.png",
+          "assets/production/oath-03/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-03/weapons/textures/cloth_orm.png",
+          "assets/production/oath-03/weapons/textures/cloth_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-hero.png",
+          "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-side.png",
+          "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-front.png",
+          "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed-animated-pose-frame18.png"
+        ]
+      },
+      "triangles": {
+        "glb": 6184,
+        "lod1": 3202,
+        "lod2": 1598,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.24626,
+        1.031,
+        0.18861
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "ARTICULATED_CHAIN",
+        "status": "AUTHORED_UNVERIFIED",
+        "boneCount": 26
+      },
+      "animations": [
+        {
+          "name": "chain_settle",
+          "durationSeconds": 1.9583333333333333
+        }
+      ],
+      "remainingGates": [
+        "Art approval and fine inlay/engraving matching",
+        "Hanging fabric tassels not authored",
+        "Damaged state absent",
+        "Chain dynamics/collision requires gameplay solver; settle clip cosmetic only",
+        "Character hand/docking fit",
+        "Actual engine imports, LOD transitions and performance",
+        "Lightning VFX/audio and cast integration",
+        "Whip glass relay chamber and internal electrical arcs not yet matched"
+      ],
+      "referenceIds": [
+        "reference-057"
+      ]
+    },
+    {
+      "id": "storm-conductor-staff-ready",
+      "archetypeId": "storm-conductor-staff",
+      "name": "Storm Conductor Staff Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready.blend",
+        "glb": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready.glb",
+        "lod1": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-lod1.glb",
+        "lod2": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-lod2.glb",
+        "collision": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-03/weapons/textures/copper_basecolor.png",
+          "assets/production/oath-03/weapons/textures/copper_orm.png",
+          "assets/production/oath-03/weapons/textures/copper_normal.png",
+          "assets/production/oath-03/weapons/textures/ivory_basecolor.png",
+          "assets/production/oath-03/weapons/textures/ivory_orm.png",
+          "assets/production/oath-03/weapons/textures/ivory_normal.png",
+          "assets/production/oath-03/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-03/weapons/textures/cloth_orm.png",
+          "assets/production/oath-03/weapons/textures/cloth_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-hero.png",
+          "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-side.png",
+          "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 2864,
+        "lod1": 1640,
+        "lod2": 1002,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.34,
+        1.7775,
+        0.148
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval and fine inlay/engraving matching",
+        "Hanging fabric tassels not authored",
+        "Damaged state absent",
+        "Chain dynamics/collision requires gameplay solver; settle clip cosmetic only",
+        "Character hand/docking fit",
+        "Actual engine imports, LOD transitions and performance",
+        "Lightning VFX/audio and cast integration",
+        "Whip glass relay chamber and internal electrical arcs not yet matched"
+      ],
+      "referenceIds": [
+        "reference-057"
+      ]
+    },
+    {
+      "id": "storm-conductor-staff-stowed",
+      "archetypeId": "storm-conductor-staff",
+      "name": "Storm Conductor Staff Stowed",
+      "type": "equipment",
+      "variant": "stowed",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed.blend",
+        "glb": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed.glb",
+        "lod1": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-lod1.glb",
+        "lod2": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-lod2.glb",
+        "collision": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-collision.glb",
+        "textures": [
+          "assets/production/oath-03/weapons/textures/copper_basecolor.png",
+          "assets/production/oath-03/weapons/textures/copper_orm.png",
+          "assets/production/oath-03/weapons/textures/copper_normal.png",
+          "assets/production/oath-03/weapons/textures/ivory_basecolor.png",
+          "assets/production/oath-03/weapons/textures/ivory_orm.png",
+          "assets/production/oath-03/weapons/textures/ivory_normal.png",
+          "assets/production/oath-03/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-03/weapons/textures/cloth_orm.png",
+          "assets/production/oath-03/weapons/textures/cloth_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-hero.png",
+          "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-side.png",
+          "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 2952,
+        "lod1": 1684,
+        "lod2": 1022,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.34,
+        1.7775,
+        0.148
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval and fine inlay/engraving matching",
+        "Hanging fabric tassels not authored",
+        "Damaged state absent",
+        "Chain dynamics/collision requires gameplay solver; settle clip cosmetic only",
+        "Character hand/docking fit",
+        "Actual engine imports, LOD transitions and performance",
+        "Lightning VFX/audio and cast integration",
+        "Whip glass relay chamber and internal electrical arcs not yet matched"
+      ],
+      "referenceIds": [
+        "reference-057"
+      ]
+    }
+  ]
+}

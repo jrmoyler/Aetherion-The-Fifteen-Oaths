@@ -2,9 +2,9 @@
 
 Generated with `python3 tools/production/inventory.py`; verify without writing using `--check`.
 
-**Status: blocked, incomplete production. Zero new production assets and zero accepted families.**
+**Status: incomplete production. 46 exported candidate asset entries; zero accepted families. States and LODs do not close a family.**
 
-The known Phase I scope is fully indexed at family/registry granularity with a complete canon document catalog. Phase II item scope is unknown because the exact archive is not available locally. This is not a complete Phase I + II production inventory or a completed world.
+The combined registered scope is now indexed from actual Phase I registries and the exact imported Phase II package. The ledger includes all fifteen Oaths and every Phase I category, plus concrete Phase II module/variant entries and world-system obligations. This is a work/acceptance inventory, not a completed world or an exact final mesh estimate.
 
 | Measure | Count |
 |---|---:|
@@ -19,11 +19,22 @@ The known Phase I scope is fully indexed at family/registry granularity with a c
 | linked detail registry records | 789 |
 | linked detail unique ids | 774 |
 | runtime implementation contracts | 20 |
-| new production asset deliverables | 0 |
+| new production asset deliverables | 46 |
+| distinct candidate archetypes | 35 |
+| candidate glb file paths | 204 |
+| families with candidate deliveries | 16 |
+| families without candidate deliveries | 494 |
+| unaccepted production families | 510 |
 | accepted production families | 0 |
 | fully rendered gameplay certified castables | 0 |
 | exact mesh and clip requirement count | UNKNOWN |
-| phase ii item level requirements | UNKNOWN |
+| phase ii architecture module entries | 255 |
+| phase ii regional environment variants | 272 |
+| phase i families refined by phase ii | 210 |
+| combined detail unique ids | 1177 |
+| phase ii payload documents | 115 |
+| candidate texture file paths | 240 |
+| production candidate manifest paths | 16 |
 | phase i canon document paths | 139 |
 | named character ids | 34 |
 | baseline poi ids | 63 |
@@ -72,8 +83,63 @@ This generator verifies local hashes for all 197 preserved source paths and 114 
 
 The ledger intentionally does not auto-close gates based on file existence. Future accepted deliveries must attach their exact paths/hashes and test/review evidence to requirement IDs; rerunning an inventory must not silently promote art.
 
-## Blocked Phase II input
+## Verified Phase II requirements and overlap
 
 Required archive: `Aetherion_Phase_II_Continental_Architecture_2026-10-13.zip` (1,011,575 bytes). SHA256: `02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc`.
 
-Phase II summary figures retained in the JSON are owner/parent-reported, explicitly not locally verified; they describe overlaps such as 255 architecture module entries and 272 regional variants refining 210 existing Phase I family IDs. No Phase II item IDs, diagrams or item requirements have been invented from those figures. Import the unchanged ZIP and unpacked documents through the supported intake, then reconcile IDs and regenerate an extended inventory.
+All 115 imported payload files match their exact archive bytes; the two administrative files remain inside the unchanged ZIP. Counts below are derived from those local files. New designs remain PROPOSED. Static specification checks are not implemented-world evidence.
+
+| Phase II registered scope | Count |
+|---|---:|
+| payload files | 115 |
+| archive admin files | 2 |
+| deliverable families | 20 |
+| regions | 15 |
+| capital layouts | 15 |
+| architecture kits | 15 |
+| architecture module entries | 255 |
+| shared environment families | 24 |
+| regional environment variants | 272 |
+| existing phase i family ids refined | 210 |
+| settlements | 60 |
+| city districts | 90 |
+| enterable service interiors | 45 |
+| pois | 318 |
+| preserved baseline pois | 63 |
+| new poi ids | 255 |
+| event refinements | 15 |
+| streaming contract refinements | 10 |
+| ecology profiles | 15 |
+| transport route refinements | 30 |
+| transport modes | 20 |
+| root registry views | 532 |
+| unique registered identity ids | 526 |
+| registered ids already in phase i detail | 123 |
+| registered ids new to phase i detail | 403 |
+| accepted production assets | 0 |
+
+The 15 architecture kits and 24 shared environment families refine **210 existing Phase I family IDs**, rather than adding 39 independent families. Their 255 module entries and 272 regional variants preserve exact source specifications and JSON-pointer locators. These are not 527 guaranteed unique meshes: reuse, terrain decomposition, state meshes and clip counts remain authoring work.
+
+The 318 POIs already include the 90 districts, 45 interiors and settlement locations. All 63 baseline POI records are retained exactly; 255 POI IDs are new. Region and event IDs retain baseline identity. Repeated views of these subjects are merged into combined_detail_scope_links, with every source pointer preserved.
+
+Ten streaming contracts refine named baseline contracts. Fifteen event refinements, fifteen ecology profiles, fifteen capital-layout runtime obligations and complete ecology/weather/civilization/streaming/transport/exploration documents remain implementation work. Their declarations and static tests never close runtime gates.
+
+| Oath | Candidate entries | Families without candidates | Phase II refined families | Module entries | Regional variants |
+|---|---:|---:|---:|---:|---:|
+| oath-01 | 7 | 32 | 14 | 17 | 21 |
+| oath-02 | 6 | 33 | 14 | 17 | 19 |
+| oath-03 | 4 | 33 | 14 | 17 | 16 |
+| oath-04 | 2 | 33 | 14 | 17 | 24 |
+| oath-05 | 2 | 33 | 14 | 17 | 14 |
+| oath-06 | 2 | 33 | 14 | 17 | 18 |
+| oath-07 | 2 | 33 | 14 | 17 | 17 |
+| oath-08 | 2 | 33 | 14 | 17 | 19 |
+| oath-09 | 2 | 33 | 14 | 17 | 15 |
+| oath-10 | 2 | 33 | 14 | 17 | 17 |
+| oath-11 | 2 | 33 | 14 | 17 | 17 |
+| oath-12 | 2 | 33 | 14 | 17 | 16 |
+| oath-13 | 3 | 33 | 14 | 17 | 17 |
+| oath-14 | 4 | 33 | 14 | 17 | 22 |
+| oath-15 | 4 | 33 | 14 | 17 | 20 |
+
+All 510 families remain unaccepted. A family with candidate files can still lack most of its components. Exact missing mesh/clip totals therefore remain unknown, while every known category, refined requirement, source entry and acceptance gate is visible.

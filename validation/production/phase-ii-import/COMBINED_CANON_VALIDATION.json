@@ -1,0 +1,1206 @@
+{
+  "schema_version": "1.0.0",
+  "validation_scope": "Static canon schemas, identity, topology, references and file integrity only",
+  "counts": {
+    "PASS": 236,
+    "SKIPPED": 1,
+    "HUMAN_REVIEW": 2
+  },
+  "checks": [
+    {
+      "id": "json-parse",
+      "status": "PASS",
+      "detail": "75 JSON documents parsed; individual failures listed separately"
+    },
+    {
+      "id": "schema:source-asset-index",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:source-inventory",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:asset-registry",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:asset-dependencies",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:interaction-rules",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:world-events",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:creatures",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:backlog",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "schema:reference-index",
+      "status": "PASS",
+      "detail": "Field-level schema passed"
+    },
+    {
+      "id": "world-schema-map-coverage",
+      "status": "PASS",
+      "detail": "Thirteen strict world/narrative registry schemas required"
+    },
+    {
+      "id": "schema:world:entity-contract.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:timeline.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:world-graph.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:realm-registry.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:world-poi-registry.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:trade-routes.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:faction-registry.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:character-registry.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:character-role-coverage.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:character-service-registry.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:relationship-graph.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:quest-registry.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:world:ending-prerequisites.schema.json",
+      "status": "PASS",
+      "detail": "Strict field-level world schema passed"
+    },
+    {
+      "id": "schema:implementation-contracts",
+      "status": "PASS",
+      "detail": "Strict proposed interface contract schema passed"
+    },
+    {
+      "id": "unique:00_GOVERNANCE/DELIVERABLE_MANIFEST.json:records",
+      "status": "PASS",
+      "detail": "28 unique IDs"
+    },
+    {
+      "id": "unique:00_GOVERNANCE/SOURCE_INVENTORY.json:sources",
+      "status": "PASS",
+      "detail": "114 unique IDs"
+    },
+    {
+      "id": "unique:00_GOVERNANCE/SOURCE_TRACEABILITY.json:records",
+      "status": "PASS",
+      "detail": "10 unique IDs"
+    },
+    {
+      "id": "unique:01_WORLD_BIBLE/CANON_CLAIMS.json:records",
+      "status": "PASS",
+      "detail": "38 unique IDs"
+    },
+    {
+      "id": "unique:01_WORLD_BIBLE/ENTITY_CONTRACT.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:02_HISTORY_AND_COSMOLOGY/TIMELINE.json:records",
+      "status": "PASS",
+      "detail": "13 unique IDs"
+    },
+    {
+      "id": "unique:03_GEOGRAPHY/REALM_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:03_GEOGRAPHY/TRADE_ROUTES.json:records",
+      "status": "PASS",
+      "detail": "30 unique IDs"
+    },
+    {
+      "id": "unique:03_GEOGRAPHY/WORLD_GRAPH.json:edges",
+      "status": "PASS",
+      "detail": "30 unique IDs"
+    },
+    {
+      "id": "unique:03_GEOGRAPHY/WORLD_GRAPH.json:drainage_networks",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:03_GEOGRAPHY/WORLD_GRAPH.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:03_GEOGRAPHY/WORLD_POI_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "63 unique IDs"
+    },
+    {
+      "id": "unique:04_OATH_DOSSIERS/OATH_DOSSIER_INDEX.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "34 unique IDs"
+    },
+    {
+      "id": "unique:05_FACTIONS_AND_CHARACTERS/CHARACTER_ROLE_COVERAGE.json:records",
+      "status": "PASS",
+      "detail": "10 unique IDs"
+    },
+    {
+      "id": "unique:05_FACTIONS_AND_CHARACTERS/CHARACTER_SERVICE_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:05_FACTIONS_AND_CHARACTERS/FACTION_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:05_FACTIONS_AND_CHARACTERS/RELATIONSHIP_GRAPH.json:records",
+      "status": "PASS",
+      "detail": "43 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/ENDING_PREREQUISITES.json:records",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "83 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.5.resolution_cases",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.10.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.10.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.13.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.13.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.16.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.16.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.19.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.19.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.22.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.22.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.25.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.25.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.28.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.28.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.31.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.31.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.34.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.34.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.37.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.37.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.40.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.40.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.43.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.43.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.46.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.46.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.49.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.49.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.52.phases",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.52.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.70.promise_records",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.70.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.72.branches",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.73.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.74.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.75.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.76.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.77.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.78.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.79.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.80.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.81.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/QUEST_REGISTRY.json:records.82.branches",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/WORLD_NARRATIVE_VALIDATION.json:records",
+      "status": "PASS",
+      "detail": "54 unique IDs"
+    },
+    {
+      "id": "unique:06_NARRATIVE/WORLD_SCHEMA_VALIDATION.json:records",
+      "status": "PASS",
+      "detail": "13 unique IDs"
+    },
+    {
+      "id": "unique:07_GAMEPLAY_SYSTEMS/CASTABLE_WORLD_LINKS.json:records",
+      "status": "PASS",
+      "detail": "100 unique IDs"
+    },
+    {
+      "id": "unique:07_GAMEPLAY_SYSTEMS/INTERACTION_RULES.json:records",
+      "status": "PASS",
+      "detail": "120 unique IDs"
+    },
+    {
+      "id": "unique:07_GAMEPLAY_SYSTEMS/OATH_SYSTEM_PROFILES.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:09_ART_DIRECTION/CROSS_OATH_COLLISION_AUDIT.json:records",
+      "status": "PASS",
+      "detail": "105 unique IDs"
+    },
+    {
+      "id": "unique:09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:10_ASSET_REGISTRY/ASSET_DEPENDENCIES.json:records",
+      "status": "PASS",
+      "detail": "2235 unique IDs"
+    },
+    {
+      "id": "unique:10_ASSET_REGISTRY/ASSET_VALIDATION.json:records",
+      "status": "PASS",
+      "detail": "17 unique IDs"
+    },
+    {
+      "id": "unique:10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "748 unique IDs"
+    },
+    {
+      "id": "unique:10_ASSET_REGISTRY/SOURCE_ASSET_INDEX.json:records",
+      "status": "PASS",
+      "detail": "112 unique IDs"
+    },
+    {
+      "id": "unique:11_REFERENCE_SHEETS/REFERENCE_CASTABLE_LINKS.json:records",
+      "status": "PASS",
+      "detail": "31 unique IDs"
+    },
+    {
+      "id": "unique:11_REFERENCE_SHEETS/REFERENCE_INDEX.json:records",
+      "status": "PASS",
+      "detail": "114 unique IDs"
+    },
+    {
+      "id": "unique:12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "94 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.0.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.1.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.2.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.3.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.4.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.5.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.6.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.7.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.8.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.9.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.10.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.11.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.12.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.13.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:13_WORLD_EVENTS/WORLD_EVENT_REGISTRY.json:records.14.objectives",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.0.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.1.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.2.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.3.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.4.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.5.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.6.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.7.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.8.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.9.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.10.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.11.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.12.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.13.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/ECONOMY_REGISTRY.json:records.14.professions",
+      "status": "PASS",
+      "detail": "2 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/PRODUCTION_RECIPES.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:14_LIFE_SKILLS_AND_ECONOMY/WORLD_RESOURCE_FLOWS.json:records",
+      "status": "PASS",
+      "detail": "60 unique IDs"
+    },
+    {
+      "id": "unique:15_HOUSING/HOUSING_PROFILES.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:16_PVP_AND_TERRITORY/PVP_MODE_CONTRACTS.json:records",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:17_TECHNICAL_ART/PROPOSED_BUDGETS.json:records",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records",
+      "status": "PASS",
+      "detail": "20 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.0.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.1.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.2.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.3.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.4.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.5.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.6.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.7.acceptance_tests",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.8.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.9.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.10.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.11.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.12.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.13.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.14.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.15.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.16.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.17.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.18.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/IMPLEMENTATION_CONTRACTS.json:records.19.acceptance_tests",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:18_IMPLEMENTATION_CONTRACTS/SYSTEMS_STATIC_VALIDATION.json:checks",
+      "status": "PASS",
+      "detail": "31 unique IDs"
+    },
+    {
+      "id": "unique:19_VALIDATION/CANON_COVERAGE_DASHBOARD.json:records",
+      "status": "PASS",
+      "detail": "390 unique IDs"
+    },
+    {
+      "id": "unique:19_VALIDATION/NEGATIVE_FIXTURE_VALIDATION.json:records",
+      "status": "PASS",
+      "detail": "7 unique IDs"
+    },
+    {
+      "id": "unique:20_PRODUCTION_ROADMAP/IMPLEMENTATION_BACKLOG.json:records",
+      "status": "PASS",
+      "detail": "17 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.0.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.1.districts",
+      "status": "PASS",
+      "detail": "5 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.2.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.3.districts",
+      "status": "PASS",
+      "detail": "7 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.4.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.5.districts",
+      "status": "PASS",
+      "detail": "5 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.6.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.7.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.8.districts",
+      "status": "PASS",
+      "detail": "7 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.9.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.10.districts",
+      "status": "PASS",
+      "detail": "5 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.11.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.12.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.13.districts",
+      "status": "PASS",
+      "detail": "7 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json:records.14.districts",
+      "status": "PASS",
+      "detail": "6 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/DELIVERABLE_MANIFEST.json:records",
+      "status": "PASS",
+      "detail": "20 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/ENVIRONMENT_ASSET_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "24 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/ENVIRONMENT_REFERENCE_EVIDENCE.json:records",
+      "status": "PASS",
+      "detail": "114 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/REGIONAL_ECOLOGY_PROFILES.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/REGION_BLUEPRINT_INDEX.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/SETTLEMENT_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "60 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/SOURCE_INVENTORY.json:records",
+      "status": "PASS",
+      "detail": "3 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/STREAMING_PROTOTYPE_CONTRACTS.json:records",
+      "status": "PASS",
+      "detail": "10 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/TRANSPORT_ROUTE_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "30 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/TRANSPORT_ROUTE_REGISTRY.json:mode_catalog",
+      "status": "PASS",
+      "detail": "20 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/WORLD_EVENT_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/WORLD_POI_REGISTRY.json:records",
+      "status": "PASS",
+      "detail": "318 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/WORLD_REGION_GRAPH.json:records",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/WORLD_REGION_GRAPH.json:edges",
+      "status": "PASS",
+      "detail": "30 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/WORLD_REGION_GRAPH.json:drainage_networks",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/WORLD_REGION_GRAPH.json:baseline_poi_manifest",
+      "status": "PASS",
+      "detail": "63 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/validation/baseline_contract.json:regions",
+      "status": "PASS",
+      "detail": "15 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/validation/baseline_contract.json:edges",
+      "status": "PASS",
+      "detail": "30 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/validation/baseline_contract.json:basins",
+      "status": "PASS",
+      "detail": "4 unique IDs"
+    },
+    {
+      "id": "unique:21_WORLD_CONSTRUCTION_PHASE_II/validation/baseline_contract.json:pois",
+      "status": "PASS",
+      "detail": "63 unique IDs"
+    },
+    {
+      "id": "schema:phase-ii-source-inventory",
+      "status": "PASS",
+      "detail": "Package-local provenance inventory schema passed"
+    },
+    {
+      "id": "phase-ii-source-namespace",
+      "status": "PASS",
+      "detail": "Phase II source IDs must remain in their separate P2-SRC-* namespace"
+    },
+    {
+      "id": "source-traceability",
+      "status": "PASS",
+      "detail": "124 global sources; 3 Phase II sources scoped to 21_WORLD_CONSTRUCTION_PHASE_II/; all source_ids resolve"
+    },
+    {
+      "id": "exact-fifteen-oaths",
+      "status": "PASS",
+      "detail": "Founder order and names must match exactly"
+    },
+    {
+      "id": "symmetric-borders",
+      "status": "PASS",
+      "detail": "All conceptual borders reciprocal"
+    },
+    {
+      "id": "continuous-continent",
+      "status": "PASS",
+      "detail": "15/15 regions reachable via land adjacency"
+    },
+    {
+      "id": "oath-region-references",
+      "status": "PASS",
+      "detail": "All declared oath/region references resolve"
+    },
+    {
+      "id": "all-element-pairs",
+      "status": "PASS",
+      "detail": "120 unique unordered pairs including 15 self-pairs"
+    },
+    {
+      "id": "directional-interaction-coverage",
+      "status": "PASS",
+      "detail": "225 individually identified directed transitions, each checked by field schema"
+    },
+    {
+      "id": "asset-dependency-targets",
+      "status": "PASS",
+      "detail": "2235 edges resolve"
+    },
+    {
+      "id": "asset-dependency-dag",
+      "status": "PASS",
+      "detail": "No production prerequisite cycle"
+    },
+    {
+      "id": "reference-count",
+      "status": "PASS",
+      "detail": "inventory 114 / reference index 114"
+    },
+    {
+      "id": "reference-file-hashes",
+      "status": "PASS",
+      "detail": "114 original PNG byte hashes match inventory"
+    },
+    {
+      "id": "no-concept-implementation-claims",
+      "status": "PASS",
+      "detail": "Concept requirements do not assert implementation"
+    },
+    {
+      "id": "source-screenshot-status",
+      "status": "PASS",
+      "detail": "Source screenshots remain Referenced/concept; file presence does not implement an effect"
+    },
+    {
+      "id": "source-asset-index-paths",
+      "status": "PASS",
+      "detail": "All grouped source paths and primary asset references resolve"
+    },
+    {
+      "id": "source-asset-index-hashes",
+      "status": "PASS",
+      "detail": "All indexed source asset bytes match grouped SHA-256 and size"
+    },
+    {
+      "id": "source-asset-implementation-evidence",
+      "status": "PASS",
+      "detail": "Implemented source identities have resolvable static loader/UI/support evidence; no runtime inference"
+    },
+    {
+      "id": "source-asset-index-counts",
+      "status": "PASS",
+      "detail": "Declared unique-identity and source-path counts match records"
+    },
+    {
+      "id": "castable-source-schema",
+      "status": "PASS",
+      "detail": "Preserved source schema valid"
+    },
+    {
+      "id": "castable-unique-count",
+      "status": "PASS",
+      "detail": "100 records / 100 IDs"
+    },
+    {
+      "id": "reference-castable-links",
+      "status": "PASS",
+      "detail": "31 reference links resolve to actual castable UIDs"
+    },
+    {
+      "id": "world-registry-identity-agreement",
+      "status": "PASS",
+      "detail": "Entity, realm and world graph agree on all fifteen Oaths, capitals and borders"
+    },
+    {
+      "id": "realm-civic-cross-references",
+      "status": "PASS",
+      "detail": "Realm settlements, dungeons, event locations, people, institutions, quests and watersheds resolve"
+    },
+    {
+      "id": "world-route-endpoint-references",
+      "status": "PASS",
+      "detail": "Graph edges and named route/POI endpoints agree"
+    },
+    {
+      "id": "character-faction-settlement-crossrefs",
+      "status": "PASS",
+      "detail": "Individual character outcomes link to authored settlement choices and faction roles"
+    },
+    {
+      "id": "quest-external-and-internal-crossrefs",
+      "status": "PASS",
+      "detail": "Quests resolve actual characters, regions, POIs, predecessors and proposed creature encounter records"
+    },
+    {
+      "id": "ending-flags-have-authored-producers",
+      "status": "PASS",
+      "detail": "Every required ending flag/attestation has at least one actual quest producer; reachability separately exercised by world validator"
+    },
+    {
+      "id": "event-location-crossrefs",
+      "status": "PASS",
+      "detail": "All fifteen event definitions reference the correct regional event POI"
+    },
+    {
+      "id": "deliverable-file-presence",
+      "status": "PASS",
+      "detail": "28 requested artifact families have their mandatory paths; presence is not semantic approval"
+    },
+    {
+      "id": "backlog-dependency-targets",
+      "status": "PASS",
+      "detail": "17 work items have resolvable dependency targets"
+    },
+    {
+      "id": "backlog-dependency-dag",
+      "status": "PASS",
+      "detail": "No production work prerequisite cycle"
+    },
+    {
+      "id": "relative-document-links",
+      "status": "PASS",
+      "detail": "1006 local Markdown link targets exist; remote URLs and anchor spelling are outside this file-integrity gate"
+    },
+    {
+      "id": "public-provenance-minimization",
+      "status": "PASS",
+      "detail": "Authored public metadata contains no detected private ChatGPT/Library locators, message/file identifiers or retrieval fields; owner-side originals retained separately"
+    },
+    {
+      "id": "gpu-visual-parity",
+      "status": "SKIPPED",
+      "detail": "Requires functioning WebGL renderer and source-matched visual comparisons; no pass inferred from CPU tests."
+    },
+    {
+      "id": "founder-proposed-canon-approval",
+      "status": "HUMAN_REVIEW",
+      "detail": "New lore, systems, topology, art extensions and balances remain PROPOSED."
+    },
+    {
+      "id": "art-final-production-approval",
+      "status": "HUMAN_REVIEW",
+      "detail": "Public sharing permission does not establish individual final-art approval, mesh/rig/animation or performance validation."
+    }
+  ]
+}
