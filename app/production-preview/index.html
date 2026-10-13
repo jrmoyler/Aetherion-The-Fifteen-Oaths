@@ -4,20 +4,25 @@
 <body>
 <header><div><span class="eyebrow">AETHERION · THE FIFTEEN OATHS</span><h1>Asset workshop</h1></div><span class="badge">Proposed · review required</span></header>
 <main>
-<section class="stage" aria-label="Three-dimensional asset preview"><canvas id="viewport" aria-label="Asset viewer: drag to orbit, scroll to zoom"></canvas><div class="stage-note">Drag to orbit · Scroll to zoom · Right drag to pan</div></section>
-<aside>
+<section class="stage" aria-label="Three-dimensional asset preview"><canvas id="viewport" tabindex="0" aria-label="3D asset viewer" aria-describedby="camera-help"></canvas><div id="renderer-fallback" class="renderer-fallback" role="alert" hidden><p id="renderer-message"></p><button id="renderer-retry" type="button">Retry preview</button></div><div class="stage-note">Drag to orbit · Scroll to zoom · Tab into view for keyboard controls</div></section>
+<aside id="inspector">
 <h2>Inspect an export</h2><p class="muted">Review individual production candidates under neutral lighting.</p>
+<fieldset id="inspector-controls"><legend class="visually-hidden">Asset inspection controls</legend>
 <label>Asset<select id="asset"><option>Loading manifest…</option></select></label>
 <p id="identity" class="muted"></p>
 <label>Authored state<select id="state"></select></label>
 <label>Detail level<select id="lod"></select></label>
+<details><summary>Animation and materials</summary>
 <label>Animation<select id="animation"><option value="">Rest pose</option></select></label>
-<label class="check"><input id="playing" type="checkbox" checked> Play animation</label>
+<label class="check"><input id="playing" type="checkbox" checked aria-describedby="motion-help"> Play animation</label>
+<p id="motion-help" class="muted">Reduced-motion starts clips paused. Play to opt in.</p>
 <label>Material view<select id="material"><option value="pbr">PBR · textured</option><option value="untextured">PBR · without textures</option><option value="normals">Surface normals</option></select></label>
 <label class="check"><input id="wireframe" type="checkbox"> Wireframe</label>
-<button id="fit" type="button">Fit asset to view</button>
+</details>
+<button id="fit" type="button">Fit asset to view</button></fieldset>
+<details><summary>Camera controls</summary><p id="camera-help" class="muted">Drag to orbit; right drag to pan; scroll to zoom. Focus the view with Tab or a click: arrow keys orbit, +/− zoom, F or Home fits the asset. Tab leaves the view. Camera shortcuts do not run in inspection controls.</p></details>
 <p id="status" role="status" aria-live="polite">Discovering available exports…</p><dl id="metrics"></dl>
-<p class="muted" id="acceptance">Preview only. Import, appearance and performance need separate acceptance. This is not gameplay integration.</p>
+<details><summary>Review scope</summary><p class="muted" id="acceptance">Preview only. Import, appearance and performance need separate acceptance. This is not gameplay integration.</p></details>
 <a id="abilities-link" href="http://127.0.0.1:5173" target="_blank" rel="noopener">Open ability sandbox ↗</a><small>Run the existing ability app separately on port 5173.</small>
 </aside></main>
 <script type="module" src="./main.mjs"></script></body></html>

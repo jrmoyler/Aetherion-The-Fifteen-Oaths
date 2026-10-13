@@ -3,20 +3,25 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { AssetSession } from './lifecycle.mjs';
 import { normalizeManifest } from './catalog.mjs';
+import { RenderLifecycle, viewportSize, keyboardAction, bindMotionPreference } from './browser-lifecycle.mjs';
 
 const $ = id => document.getElementById(id);
 const status = text => { $('status').textContent = text; };
 const canvas = $('viewport');
+const fallback = message => { $('renderer-fallback').hidden = false; $('renderer-message').textContent = message; $('inspector-controls').disabled = true; };
+$('renderer-retry').addEventListener('click', () => location.reload());
+async function startPreview() {
 let renderer;
 try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true }); }
-catch (error) { status(`WebGL unavailable: ${error.message}`); throw error; }
+catch (error) { fallback('3D preview is unavailable in this browser. Enable WebGL in a supported browser, then retry.'); status(`Renderer unavailable: ${error.message}`); return; }
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1;
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#202730');
 const camera = new THREE.PerspectiveCamera(40, 1, .01, 2000); camera.position.set(3, 2, 3);
-const controls = new OrbitControls(camera, canvas); controls.enableDamping = true;
+const controls = new OrbitControls(camera, canvas);
+const unbindMotion = bindMotionPreference(matchMedia('(prefers-reduced-motion: reduce)'), $('playing'), controls);
 scene.add(new THREE.HemisphereLight(0xe9f1ff, 0x6f6557, 2));
 const key = new THREE.DirectionalLight(0xfff4e2, 3); key.position.set(4, 7, 5); scene.add(key);
 const fill = new THREE.DirectionalLight(0xc9ddff, 1.3); fill.position.set(-4, 3, -3); scene.add(fill);
@@ -130,10 +135,61 @@ $('asset').addEventListener('change', selectAsset); $('lod').addEventListener('c
 $('state').addEventListener('change', selectState);
 $('animation').addEventListener('change', animateSelection);
 $('material').addEventListener('change', applyMaterials); $('wireframe').addEventListener('change', applyMaterials); $('fit').addEventListener('click', fit);
-const resize = new ResizeObserver(() => { const { width, height } = canvas.parentElement.getBoundingClientRect(); renderer.setSize(width, height, false); camera.aspect = width / Math.max(height, 1); camera.updateProjectionMatrix(); }); resize.observe(canvas.parentElement);
-let lastTime = performance.now();
-renderer.setAnimationLoop(time => { const dt = Math.min(Math.max((time - lastTime) / 1000, 0), .1); lastTime = time; if ($('playing').checked) session.current?.mixer.update(dt); controls.update(); renderer.render(scene, camera); });
-window.addEventListener('pagehide', () => { shuttingDown = true; renderer.setAnimationLoop(null); resize.disconnect(); session.dispose(); controls.dispose(); ground.geometry.dispose(); ground.material.dispose(); renderer.dispose(); }, { once: true });
+function resizeViewport() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const size = viewportSize(rect.width, rect.height, window.devicePixelRatio);
+  if (!size) return; // Do not replace the camera aspect with zero/NaN in a hidden panel.
+  renderer.setPixelRatio(size.pixelRatio); renderer.setSize(size.width, size.height, false);
+  camera.aspect = size.width / size.height; camera.updateProjectionMatrix();
+}
+const resize = new ResizeObserver(resizeViewport); resize.observe(canvas.parentElement);
+window.addEventListener('resize', resizeViewport);
+let lastTime = performance.now(), runtime;
+function frame(time) {
+  const dt = Math.min(Math.max((time - lastTime) / 1000, 0), .1); lastTime = time;
+  try { if ($('playing').checked) session.current?.mixer.update(dt); controls.update(); renderer.render(scene, camera); }
+  catch (error) { runtime.fail(); status(`Renderer stopped: ${error.message}`); }
+}
+runtime = new RenderLifecycle({ canvas, page: window, visibility: document,
+  start: () => { lastTime = performance.now(); resizeViewport(); renderer.setAnimationLoop(frame); },
+  stop: () => renderer.setAnimationLoop(null), setControlsEnabled: enabled => { controls.enabled = enabled; },
+  onState: state => {
+    if (state === 'lost') fallback('The graphics context was lost. Preview is paused while the browser restores it. Retry if recovery does not complete.');
+    else if (state === 'failed') fallback('The graphics renderer stopped. Retry to restart the preview.');
+    else if (state === 'ready') { $('renderer-fallback').hidden = true; $('inspector-controls').disabled = false; }
+  }
+});
+const inspector = $('inspector');
+function updateInputGate() { runtime.setUIActive(inspector.contains(document.activeElement)); }
+function focusCanvas() { canvas.focus({ preventScroll: true }); updateInputGate(); }
+canvas.addEventListener('pointerdown', focusCanvas, { capture: true });
+document.addEventListener('focusin', updateInputGate);
+document.addEventListener('focusout', updateInputGate);
+function cameraKey(event) {
+  const action = keyboardAction(event, canvas); if (!action || !controls.enabled) return;
+  event.preventDefault();
+  if (action === 'fit') { fit(); return; }
+  const offset = camera.position.clone().sub(controls.target), spherical = new THREE.Spherical().setFromVector3(offset);
+  const angle = Math.PI / 24;
+  if (action === 'left') spherical.theta -= angle;
+  if (action === 'right') spherical.theta += angle;
+  if (action === 'up') spherical.phi -= angle;
+  if (action === 'down') spherical.phi += angle;
+  if (action === 'in') spherical.radius *= .9;
+  if (action === 'out') spherical.radius *= 1.1;
+  spherical.makeSafe(); spherical.radius = THREE.MathUtils.clamp(spherical.radius, controls.minDistance, controls.maxDistance);
+  camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(spherical)); controls.update();
+}
+canvas.addEventListener('keydown', cameraKey);
+function shutdown(event) {
+  if (event.persisted) return; // BFCache restoration resumes the same valid scene.
+  shuttingDown = true; runtime.dispose(); resize.disconnect(); unbindMotion();
+  window.removeEventListener('resize', resizeViewport); window.removeEventListener('pagehide', shutdown);
+  document.removeEventListener('focusin', updateInputGate); document.removeEventListener('focusout', updateInputGate);
+  canvas.removeEventListener('pointerdown', focusCanvas, true); canvas.removeEventListener('keydown', cameraKey);
+  session.dispose(); controls.dispose(); ground.geometry.dispose(); ground.material.dispose(); renderer.dispose();
+}
+window.addEventListener('pagehide', shutdown);
 try {
   const response = await fetch('./production-assets/catalog.json'); if (!response.ok) throw new Error(`Catalog HTTP ${response.status}`);
   const catalog = await response.json(); const errors = [];
@@ -147,3 +203,6 @@ try {
     if (errors.length && assets.length) $('acceptance').textContent += ` Manifest warnings: ${errors.join('; ')}`;
   }
 } catch (error) { status(`Manifest discovery failed: ${error.message}`); }
+
+}
+startPreview().catch(error => { fallback('The preview could not start. Retry to load it again.'); status(`Startup failed: ${error.message}`); });

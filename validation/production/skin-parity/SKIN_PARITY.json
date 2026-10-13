@@ -1,0 +1,490 @@
+{
+  "schemaVersion": 1,
+  "scope": "Imported-data CPU weighted vertex evaluation; NOT native RenderingServer/GPU skinning certification",
+  "coordinateConversion": {
+    "threeToGodot": "Identity: X,Y,Z meters retained; no reflection, fitting, rescaling, recentering or pose registration"
+  },
+  "tolerances": {
+    "worldMeters": 0.0001,
+    "localCorrespondenceMeters": 0.00002,
+    "weights": 0.00005
+  },
+  "summary": {
+    "assets": 3,
+    "sampledPoses": 6,
+    "passedPoses": 6,
+    "maximumWorldDifferenceMeters": 0.000024028891984012976,
+    "negativeFixturesRejected": 3,
+    "gpuParityCertified": false,
+    "productionApproved": 0
+  },
+  "records": [
+    {
+      "id": "kiln-ninja-ensemble-candidate",
+      "clip": "cast_release",
+      "timeSeconds": 1,
+      "durationSeconds": 2,
+      "phases": {
+        "rest": {
+          "passed": true,
+          "meshCount": 1,
+          "vertexCount": 11197,
+          "skinnedVertexCount": 11197,
+          "multipleInfluenceVertexCount": 2211,
+          "verticesOutsideTolerance": 0,
+          "maximumWorldDifferenceMeters": 0.0000238804993283624,
+          "maximumLocalDifferenceMeters": 5.114680301139108e-15,
+          "maximumWeightDifference": 0.000014960765839067136,
+          "threeWorldBounds": {
+            "min": [
+              -0.452977773470124,
+              0.016000067894343523,
+              -0.14000000059604645
+            ],
+            "max": [
+              0.452977773470124,
+              1.8228319747943522,
+              0.20499998296324065
+            ]
+          },
+          "godotWorldBounds": {
+            "min": [
+              -0.452970743179321,
+              0.0160000845789909,
+              -0.140000000596046
+            ],
+            "max": [
+              0.452970743179321,
+              1.82283186912537,
+              0.204999983310699
+            ]
+          },
+          "worst": {
+            "mesh": "Kiln_ninja_weighted_lowpoly",
+            "vertex": 9063,
+            "threeWorld": [
+              -0.06097605261135253,
+              1.5550000835955005,
+              0.026961007027656025
+            ],
+            "godotWorld": [
+              -0.06097511947155,
+              1.55497622489929,
+              0.0269605945795774
+            ]
+          }
+        },
+        "animated": {
+          "passed": true,
+          "meshCount": 1,
+          "vertexCount": 11197,
+          "skinnedVertexCount": 11197,
+          "multipleInfluenceVertexCount": 2211,
+          "verticesOutsideTolerance": 0,
+          "maximumWorldDifferenceMeters": 0.000024028891984012976,
+          "maximumLocalDifferenceMeters": 5.114680301139108e-15,
+          "maximumWeightDifference": 0.000014960765839067136,
+          "threeWorldBounds": {
+            "min": [
+              -0.282341906408762,
+              0.016000037815345064,
+              -0.15652998072218588
+            ],
+            "max": [
+              0.3280313004234403,
+              1.8234095646920512,
+              0.5141357335471382
+            ]
+          },
+          "godotWorldBounds": {
+            "min": [
+              -0.282341837882996,
+              0.0160000845789909,
+              -0.156527742743492
+            ],
+            "max": [
+              0.328031331300735,
+              1.82340955734253,
+              0.514135479927063
+            ]
+          },
+          "worst": {
+            "mesh": "Kiln_ninja_weighted_lowpoly",
+            "vertex": 9080,
+            "threeWorld": [
+              -0.0054126908969019585,
+              1.5600129980180284,
+              0.0358399755924371
+            ],
+            "godotWorld": [
+              -0.00541260838508606,
+              1.5599889755249,
+              0.0358394272625446
+            ]
+          }
+        }
+      },
+      "movement": {
+        "three": {
+          "movedSkinnedVertices": 7459,
+          "maximumSkinnedDisplacementMeters": 0.743969808359665
+        },
+        "godot": {
+          "movedSkinnedVertices": 7459,
+          "maximumSkinnedDisplacementMeters": 0.7439697068099079
+        }
+      },
+      "nativeGodotBake": [
+        "UNAVAILABLE_NO_VALID_RENDERING_SERVER_SKELETON_RID"
+      ],
+      "negativeFixture": {
+        "description": "Godot evaluated world vertices translated +0.01m X in memory only",
+        "rejected": true,
+        "verticesOutsideTolerance": 11197,
+        "maximumWorldDifferenceMeters": 0.010003991477834316
+      }
+    },
+    {
+      "id": "tidal-tide-orb-staff",
+      "clip": "Tidal_tassel_sway",
+      "timeSeconds": 1.0166666507720947,
+      "durationSeconds": 2.0333333015441895,
+      "phases": {
+        "rest": {
+          "passed": true,
+          "meshCount": 76,
+          "vertexCount": 23726,
+          "skinnedVertexCount": 1000,
+          "multipleInfluenceVertexCount": 400,
+          "verticesOutsideTolerance": 0,
+          "maximumWorldDifferenceMeters": 0.000012374604162239685,
+          "maximumLocalDifferenceMeters": 0.000007262731765248847,
+          "maximumWeightDifference": 0.000011920928954634036,
+          "threeWorldBounds": {
+            "min": [
+              -0.18355567753314972,
+              -0.8939111232757568,
+              -0.10400000214576721
+            ],
+            "max": [
+              0.19397109746932983,
+              1.1299999952316284,
+              0.13900000043213367
+            ]
+          },
+          "godotWorldBounds": {
+            "min": [
+              -0.18355567753315,
+              -0.893911123275757,
+              -0.104000002145767
+            ],
+            "max": [
+              0.19397109746933,
+              1.12999999523163,
+              0.138999998569489
+            ]
+          },
+          "worst": {
+            "mesh": "Navy_tassel_strand_0",
+            "vertex": 25,
+            "threeWorld": [
+              0.18649999936297534,
+              0.7925000249780716,
+              0
+            ],
+            "godotWorld": [
+              0.186497166752815,
+              0.792487978935242,
+              0
+            ]
+          }
+        },
+        "animated": {
+          "passed": true,
+          "meshCount": 76,
+          "vertexCount": 23726,
+          "skinnedVertexCount": 1000,
+          "multipleInfluenceVertexCount": 400,
+          "verticesOutsideTolerance": 0,
+          "maximumWorldDifferenceMeters": 0.00001244409809619506,
+          "maximumLocalDifferenceMeters": 0.000007262731765248847,
+          "maximumWeightDifference": 0.000011920928954634036,
+          "threeWorldBounds": {
+            "min": [
+              -0.18355567753314972,
+              -0.8939111232757568,
+              -0.10400000214576721
+            ],
+            "max": [
+              0.19397109746932983,
+              1.1299999952316284,
+              0.13900000043213367
+            ]
+          },
+          "godotWorldBounds": {
+            "min": [
+              -0.18355567753315,
+              -0.893911123275757,
+              -0.104000002145767
+            ],
+            "max": [
+              0.19397109746933,
+              1.12999999523163,
+              0.138999998569489
+            ]
+          },
+          "worst": {
+            "mesh": "Navy_tassel_strand_2",
+            "vertex": 25,
+            "threeWorld": [
+              0.17685301457042032,
+              0.7924278256637102,
+              -0.012363734747199224
+            ],
+            "godotWorld": [
+              0.176850318908691,
+              0.792415678501129,
+              -0.0123635465279222
+            ]
+          }
+        }
+      },
+      "movement": {
+        "three": {
+          "movedSkinnedVertices": 1000,
+          "maximumSkinnedDisplacementMeters": 0.00426778451878973
+        },
+        "godot": {
+          "movedSkinnedVertices": 1000,
+          "maximumSkinnedDisplacementMeters": 0.004267803754291493
+        }
+      },
+      "nativeGodotBake": [
+        "UNAVAILABLE_NO_VALID_RENDERING_SERVER_SKELETON_RID"
+      ],
+      "negativeFixture": {
+        "description": "Godot evaluated world vertices translated +0.01m X in memory only",
+        "rejected": true,
+        "verticesOutsideTolerance": 23726,
+        "maximumWorldDifferenceMeters": 0.010000015329169663
+      }
+    },
+    {
+      "id": "oath-06-folding-battle-fan",
+      "clip": "Fan_fold_open",
+      "timeSeconds": 1.0166666507720947,
+      "durationSeconds": 2.0333333015441895,
+      "phases": {
+        "rest": {
+          "passed": true,
+          "meshCount": 47,
+          "vertexCount": 3046,
+          "skinnedVertexCount": 2192,
+          "multipleInfluenceVertexCount": 72,
+          "verticesOutsideTolerance": 0,
+          "maximumWorldDifferenceMeters": 0.000008733905506856208,
+          "maximumLocalDifferenceMeters": 0.0000014196826683771437,
+          "maximumWeightDifference": 0.000011444091797013778,
+          "threeWorldBounds": {
+            "min": [
+              -0.5434325734365524,
+              -0.180864617228508,
+              -0.020000014661530646
+            ],
+            "max": [
+              0.5434325734365524,
+              0.5799999833106995,
+              0.03800000268258286
+            ]
+          },
+          "godotWorldBounds": {
+            "min": [
+              -0.543432533740997,
+              -0.180864617228508,
+              -0.0199997238814831
+            ],
+            "max": [
+              0.543432533740997,
+              0.579999983310699,
+              0.0380000360310078
+            ]
+          },
+          "worst": {
+            "mesh": "Pleated_cream_membrane_3",
+            "vertex": 11,
+            "threeWorld": [
+              -0.12195605247306404,
+              0.5568004302241658,
+              -0.020000008156574475
+            ],
+            "godotWorld": [
+              -0.121954195201397,
+              0.55679190158844,
+              -0.0199997015297413
+            ]
+          }
+        },
+        "animated": {
+          "passed": true,
+          "meshCount": 47,
+          "vertexCount": 3046,
+          "skinnedVertexCount": 2192,
+          "multipleInfluenceVertexCount": 72,
+          "verticesOutsideTolerance": 0,
+          "maximumWorldDifferenceMeters": 0.000008666769701509433,
+          "maximumLocalDifferenceMeters": 0.0000014196826683771437,
+          "maximumWeightDifference": 0.000011444091797013778,
+          "threeWorldBounds": {
+            "min": [
+              -0.040124687896236404,
+              -0.180864617228508,
+              -0.020000018213793158
+            ],
+            "max": [
+              0.09280642122030258,
+              0.5899009446519794,
+              0.03800002438872087
+            ]
+          },
+          "godotWorldBounds": {
+            "min": [
+              -0.040124699473381,
+              -0.180864617228508,
+              -0.019999710842967
+            ],
+            "max": [
+              0.0928064212203026,
+              0.58990091085434,
+              0.0380000434815884
+            ]
+          },
+          "worst": {
+            "mesh": "Pleated_cream_membrane_1",
+            "vertex": 11,
+            "threeWorld": [
+              -0.018391351274786062,
+              0.5656541700356816,
+              -0.0199999965845991
+            ],
+            "godotWorld": [
+              -0.018389880657196,
+              0.565645635128021,
+              -0.0199996717274189
+            ]
+          }
+        }
+      },
+      "movement": {
+        "three": {
+          "movedSkinnedVertices": 2130,
+          "maximumSkinnedDisplacementMeters": 0.6180501027502566
+        },
+        "godot": {
+          "movedSkinnedVertices": 2130,
+          "maximumSkinnedDisplacementMeters": 0.6180500893826153
+        }
+      },
+      "nativeGodotBake": [
+        "UNAVAILABLE_NO_VALID_RENDERING_SERVER_SKELETON_RID"
+      ],
+      "negativeFixture": {
+        "description": "Godot evaluated world vertices translated +0.01m X in memory only",
+        "rejected": true,
+        "verticesOutsideTolerance": 3046,
+        "maximumWorldDifferenceMeters": 0.01000156781874759
+      }
+    }
+  ],
+  "generatedAt": "2026-10-13T20:38:06.764Z",
+  "sourceRevision": "429dc57a1c9748d0e0835504d116bd9112c8dfd7",
+  "inputs": [
+    {
+      "id": "kiln-ninja-ensemble-candidate",
+      "sourcePath": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "cast_release",
+      "sha256": "0f0e975e906600b00291bc8957e94ed0d904b69a5756039036dd4c965e4e570f",
+      "byteLength": 3335892,
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "time": 1
+    },
+    {
+      "id": "tidal-tide-orb-staff",
+      "sourcePath": "assets/production/oath-04/weapons/tide-orb-staff/lod0.glb",
+      "clip": "Tidal_tassel_sway",
+      "sha256": "a0eb059caf6e83a0231a2e5b3ddcb954ebf17986867fb0fb3f2053796aaf7f56",
+      "byteLength": 4328916,
+      "khronos": {
+        "errors": 0,
+        "warnings": 86,
+        "issueCounts": {
+          "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE": 76,
+          "NODE_SKINNED_MESH_NON_ROOT": 10,
+          "NODE_EMPTY": 2
+        }
+      },
+      "time": 1.0166666507720947
+    },
+    {
+      "id": "oath-06-folding-battle-fan",
+      "sourcePath": "assets/production/oath-06/weapons/folding-battle-fan/lod0.glb",
+      "clip": "Fan_fold_open",
+      "sha256": "e81e23c836e17fe20f4cfabead3440702e2d3b22f00c5849414a30186ecc66f2",
+      "byteLength": 4049744,
+      "khronos": {
+        "errors": 0,
+        "warnings": 81,
+        "issueCounts": {
+          "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE": 47,
+          "NODE_SKINNED_MESH_NON_ROOT": 34,
+          "NODE_EMPTY": 2
+        }
+      },
+      "time": 1.0166666507720947
+    }
+  ],
+  "tools": {
+    "three": "0.185.1",
+    "godot": {
+      "build": "official",
+      "hash": "7d41c59c457bd5a245092b4e7eb2d833e3b3f8c3",
+      "hex": 263683,
+      "major": 4,
+      "minor": 6,
+      "patch": 3,
+      "status": "stable",
+      "string": "4.6.3-stable (official)",
+      "timestamp": 0
+    },
+    "node": "v24.19.0",
+    "khronos": "2.0.0-dev.3.10"
+  },
+  "evidence": {
+    "three": {
+      "file": "three-vertices.json.gz",
+      "sha256": "375e048a9efd283bfaba32736529ae5211caed8652b2a0162a067352712d4bf7",
+      "completeVertexDump": true
+    },
+    "godot": {
+      "file": "godot-vertices.json.gz",
+      "sha256": "16425d096ceb0793b546300a3de3c75465d7ea08b2598727b440e7fd6e64e2a2",
+      "completeVertexDump": true
+    }
+  },
+  "toolHashes": {
+    "run.mjs": "d4d79e20ad3842fd5b8b45927f317c048982654e4b5942d539e56c91665aab78",
+    "three-evaluate.mjs": "f5089f850a72ec14a5b1d4973ff2c1cf1aceeb9512e2af41e57d19381699122e",
+    "godot-evaluate.gd": "548fab3c0b24159df86391b05a7c5db916d99fc82646f910d19db928ca60e0da",
+    "compare.py": "2f8f6af1a405c7ff4369ee3936417323e18d07bde2b749961d295b923fe475e6"
+  },
+  "limitations": [
+    "Only three fixed published assets, rest and one clip midpoint each; not all assets/poses/LODs.",
+    "Godot results use explicit linear blend skinning from imported mesh arrays, Skin binds and Skeleton3D global poses. Native bake unavailable: headless RenderingServer has no valid skeleton RID.",
+    "Three.js texture loading is replaced with CPU Texture objects; no appearance, texture decode, normal/tangent or shader parity.",
+    "Normals, morph targets, attachments, retargeting, nonuniform runtime scaling, GPU skinning and Unreal are not certified.",
+    "Passing these samples does not dismiss NODE_SKINNED_MESH_NON_ROOT or generated-tangent warnings, and grants no production/art approval."
+  ]
+}
