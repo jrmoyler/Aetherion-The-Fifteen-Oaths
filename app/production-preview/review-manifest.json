@@ -1,0 +1,49 @@
+{
+  "status": "UNAPPROVED_REVIEW_ONLY",
+  "oath_id": "review revisions",
+  "assets": [
+    {
+      "id": "review-kiln-ninja-v5",
+      "name": "[Review] Kiln ninja V5",
+      "referenceIds": [
+        "reference-090",
+        "reference-060"
+      ],
+      "files": {
+        "glb": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+        "lod1": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+        "lod2": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb"
+      },
+      "status": "UNAPPROVED_REVIEW_ONLY_NOT_PRODUCTION_PROMOTED"
+    },
+    {
+      "id": "review-fault-blade-v9",
+      "name": "[Review] Fault blade V9",
+      "referenceIds": [
+        "reference-053"
+      ],
+      "files": {
+        "glb": "fault-v9/amethyst-short-blade/review.glb"
+      },
+      "status": "UNAPPROVED_REVIEW_ONLY_NOT_PRODUCTION_PROMOTED"
+    },
+    {
+      "id": "review-impulse-shield-v7",
+      "name": "[Review] Impulse shield V7",
+      "referenceIds": [
+        "reference-032"
+      ],
+      "files": {
+        "glb": "impulse-shield-v7/impulse-shield-lateral-review07.glb"
+      },
+      "status": "UNAPPROVED_REVIEW_ONLY_NOT_PRODUCTION_PROMOTED"
+    }
+  ],
+  "sha256": {
+    "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb": "d1c63efe4cdeacb6f77769157393ffad7ab529e6b804e1b37c7f90bf6ef926a3",
+    "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb": "4babdb2a176f5b7d5d6a30c56ceeee90a4cbdab9793cf37498cb06958e101b18",
+    "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb": "15e31ebfed4ac901d03c9d4f43c4173cdbc804d36db7ac811fb0df2770f3e807",
+    "fault-v9/amethyst-short-blade/review.glb": "e0b1af08e141df5f3885a1340c4d5d69fb834d7e121182bf3d69ee2d452f4bbb",
+    "impulse-shield-v7/impulse-shield-lateral-review07.glb": "24a99b69791acda8574d0dff9758d2dfe235c98c5d85083e2687e89b91d881f2"
+  }
+}

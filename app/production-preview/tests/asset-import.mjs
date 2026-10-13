@@ -7,22 +7,22 @@ import { createHash } from 'node:crypto';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { normalizeManifest } from '../catalog.mjs';
+import { collectRuntimeAssets } from '../runtime-assets.mjs';
+import { appendReviewAssets } from '../review-assets.mjs';
 import { disposeGLTF } from '../lifecycle.mjs';
 globalThis.self = globalThis;
 const root=fileURLToPath(new URL('../../../assets/production/',import.meta.url));
-async function discover(directory,relative='') {
-  const entries=await fs.readdir(directory,{withFileTypes:true}); const result=[];
-  for(const entry of entries){ const name=path.posix.join(relative,entry.name);if(entry.isDirectory())result.push(...await discover(path.join(directory,entry.name),name));else if(entry.isFile()&&entry.name==='manifest.json')result.push(name); }
-  return result.sort();
-}
+const repositoryRoot=fileURLToPath(new URL('../../../',import.meta.url));
+const baseCatalog=collectRuntimeAssets(root);
+const catalog=process.env.AETHERION_INCLUDE_REVIEWS==='1'?appendReviewAssets(baseCatalog,repositoryRoot):baseCatalog;
 const records=[],manifests=[];
-for(const manifest of await discover(root)) {
-  const manifestBytes=await fs.readFile(path.join(root,manifest));
-  manifests.push({path:manifest,sha256:createHash('sha256').update(manifestBytes).digest('hex'),bytes:manifestBytes.length});
+for(const manifest of catalog.manifests) {
+  const manifestBytes=await fs.readFile(catalog.files.get(manifest));
+  manifests.push({path:manifest,sourcePath:path.relative(repositoryRoot,catalog.files.get(manifest)),sha256:createHash('sha256').update(manifestBytes).digest('hex'),bytes:manifestBytes.length});
   const rows=normalizeManifest(JSON.parse(manifestBytes.toString('utf8')),manifest);
   for(const row of rows)for(const state of row.states)for(const lod of state.lods){
-    const relative=lod.url.replace('./production-assets/',''),bytes=await fs.readFile(path.join(root,relative));
-    const record={asset:row.id,state:state.value,lod:lod.level,path:relative,sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,status:'FAIL',warnings:[],textureDecode:'NOT_VERIFIED_NODE_HAS_NO_BROWSER_IMAGE_DECODER'};
+    const relative=lod.url.replace('./production-assets/',''),bytes=await fs.readFile(catalog.files.get(relative));
+    const record={asset:row.id,state:state.value,lod:lod.level,path:relative,sourcePath:path.relative(repositoryRoot,catalog.files.get(relative)),sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length,status:'FAIL',warnings:[],textureDecode:'NOT_VERIFIED_NODE_HAS_NO_BROWSER_IMAGE_DECODER'};
     const warn=console.warn,error=console.error;
     let gltf,mixer;
     try {
@@ -55,6 +55,6 @@ for(const manifest of await discover(root)) {
   }
 }
 if(!records.length)process.exitCode=1;
-const report={generatedAt:new Date().toISOString(),node:process.version,three:THREE.REVISION,scope:'Actual Three.js GLTFLoader CPU import, finite geometry/material values, sampled animation matrices, geometry/material disposal. No image decoding, rendering, visual parity or authored-animation approval.',summary:{files:records.length,pass:records.filter(r=>r.status==='PASS_CPU_ONLY').length,fail:records.filter(r=>r.status==='FAIL').length},manifests,records};
+const report={generatedAt:new Date().toISOString(),node:process.version,reviewMode:process.env.AETHERION_INCLUDE_REVIEWS==='1',three:THREE.REVISION,scope:'Actual Three.js GLTFLoader CPU import, finite geometry/material values, sampled animation matrices, geometry/material disposal. No image decoding, rendering, visual parity or authored-animation approval.',summary:{files:records.length,pass:records.filter(r=>r.status==='PASS_CPU_ONLY').length,fail:records.filter(r=>r.status==='FAIL').length},manifests,records};
 if(process.argv[2])await fs.writeFile(process.argv[2],JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(process.argv[2]?report.summary:report,null,2));

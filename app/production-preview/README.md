@@ -27,3 +27,11 @@ The reference panel displays original image bytes in a DOM image, separate from 
 Choose world +Z, +X, −Z or three-quarter orthographic views, or perspective. XYZ view rotation aligns differing authoring axes and resets on asset selection; it does not modify mesh coordinates or source files. Vertical framing and target-height offset use meters. Fit uses actual world bounds. Silhouette, wireframe and PBR modes support shape and material comparison. References carry no inferred physical scale or automatic approval.
 
 Browser screenshots and rendered comparison remain an unexecuted acceptance gate in this environment. CPU camera, correspondence, image replacement, allowlist and original-byte HTTP tests do not establish visual fidelity.
+
+## Opt-in published review revisions
+
+Run `AETHERION_INCLUDE_REVIEWS=1 npm run dev` from this directory to add the published Kiln ninja V5, Fault blade V9 and Impulse shield V7 entries. Select names beginning `[Review]` in the asset menu. The same flag works with `npm run build`, `npm run test:assets`, `npm run test:http` and `npm run test:http:build`; rebuild before switching built modes. The default catalog and production acceptance counts are unchanged.
+
+The opt-in catalog pins five visual GLBs (three character LODs and two weapons) by SHA-256. It exposes no review Blender sources, collision hulls, documents or unused maps. External GLB dependencies, changed bytes at catalog collection, escaping paths and unavailable original-reference IDs fail closed. The development server serves immutable verified review buffers, so later on-disk replacements cannot substitute unpinned bytes; restart after an intentional pinned-manifest update. The models use the existing real GLTFLoader, animation/LOD/material controls and disposal lifecycle. The only reference images are the existing indexed originals; reference imagery is never used as mesh geometry.
+
+These remain unapproved review revisions. CPU import/material-value/animation/disposal and exact-byte HTTP checks do not establish browser texture decoding or GPU appearance. The new review catalog does not certify a match between Blender, Three.js, Godot or Unreal rendering.
