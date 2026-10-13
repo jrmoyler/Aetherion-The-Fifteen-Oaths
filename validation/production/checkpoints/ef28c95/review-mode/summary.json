@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "head": "ef28c950ecaae540d64674cc5c54af3c75360b97",
+  "scope": "Clean remote-head opt-in review build, byte-HTTP and actual Three.js CPU checks; no browser GPU or texture decode",
+  "cpu": {
+    "files": 163,
+    "pass": 163,
+    "fail": 0
+  },
+  "http": {
+    "http-development.log": {
+      "scope": "Local HTTP only; no browser/GPU",
+      "mode": "development",
+      "reviewMode": true,
+      "status": "PASS",
+      "manifests": 17,
+      "glbsByteVerified": 163,
+      "referencesByteVerified": 19
+    },
+    "http-built.log": {
+      "scope": "Local HTTP only; no browser/GPU",
+      "mode": "built",
+      "reviewMode": true,
+      "status": "PASS",
+      "manifests": 17,
+      "glbsByteVerified": 163,
+      "referencesByteVerified": 19
+    }
+  },
+  "checkoutClean": true,
+  "logs": {
+    "asset-import-cpu.json": "e4553efe55573b03b63c6abe644b95b288b2af12c4826a5640dd6226525924a9",
+    "asset-import.log": "7de4c33f035881afdb75c50d3916fb6eda02005c2f3462e45e4a30fd96d5543e",
+    "http-built.log": "75b23642e519ccacc1842548764c2e14814d9b99e436b3fb786896ab3043b9e4",
+    "http-development.log": "ef9bac9a708124c7bd8be9146ea0dc06be8466e38504b8593445dac53d5f653f",
+    "build.log": "9d9fc15db5a80a7d4a1c23743851515527a4dda743f962c8d9dc4bd6d4c6f6ea"
+  }
+}
