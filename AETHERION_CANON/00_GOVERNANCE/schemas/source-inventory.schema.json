@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Recovered source inventory",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "sources",
+    "source_ids",
+    "canon_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 114,
+      "maxItems": 114,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source_id",
+          "title",
+          "source_type",
+          "accessibility",
+          "elements",
+          "objects",
+          "extracted_canon_facts",
+          "visual_traits",
+          "conflicts",
+          "confidence",
+          "verification_status",
+          "canon_status",
+          "sha256",
+          "size_bytes",
+          "reference_path"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^reference-[0-9]{3}$"
+          },
+          "source_id": {
+            "type": "string",
+            "pattern": "^REF-[0-9]{3}$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "reference_path": {
+            "type": "string",
+            "pattern": "^assets/references/reference-[0-9]{3}/original\\.png$"
+          },
+          "elements": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "conflicts": {
+            "type": "array"
+          },
+          "visual_traits": {
+            "type": "array",
+            "minItems": 1
+          },
+          "canon_status": {
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

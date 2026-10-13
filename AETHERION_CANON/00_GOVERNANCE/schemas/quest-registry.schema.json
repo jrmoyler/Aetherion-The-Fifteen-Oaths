@@ -1,0 +1,768 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "canon_status",
+    "records",
+    "schema_version",
+    "source_ids",
+    "state_model_note"
+  ],
+  "properties": {
+    "canon_status": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "branching_note",
+          "canon_status",
+          "failure_recovery",
+          "first_oath_requirement",
+          "grants_flags",
+          "id",
+          "involved_character_ids",
+          "irreversible",
+          "kind",
+          "objectives",
+          "persistence_scope",
+          "region_ids",
+          "required_flags",
+          "required_quest_ids",
+          "source_ids",
+          "title"
+        ],
+        "properties": {
+          "attestation_method": {
+            "type": "string",
+            "minLength": 1
+          },
+          "branches": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "benefit",
+                "canon_status",
+                "cost",
+                "id",
+                "label",
+                "service_continuity",
+                "source_ids"
+              ],
+              "properties": {
+                "actor_actions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "benefit": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "canon_status": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "LOCKED",
+                    "RECOVERED",
+                    "PROPOSED",
+                    "UNRESOLVED",
+                    "DEPRECATED"
+                  ]
+                },
+                "clears_flags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "cost": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "grants_flags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "alliance-daybreak-accept",
+                    "alliance-daybreak-decline",
+                    "alliance-daybreak-end",
+                    "alliance-daybreak-limited-renewal",
+                    "alliance-daybreak-notify",
+                    "alliance-daybreak-renegotiate",
+                    "alliance-daybreak-secret-crossing",
+                    "handler-dessa-common-reserve",
+                    "handler-dessa-independent",
+                    "handler-dessa-repair-route",
+                    "handler-dessa-rest",
+                    "mentor-una-local-teachers",
+                    "mentor-una-modular",
+                    "mentor-una-open-workshop",
+                    "mentor-una-repair",
+                    "rival-oda-early-warning",
+                    "rival-oda-independent-rival",
+                    "rival-oda-joint-credit",
+                    "rival-oda-parallel-report",
+                    "rival-oda-precautionary-closure",
+                    "rival-oda-shared-office",
+                    "settlement-01-civilian_conversion",
+                    "settlement-01-defense_compact",
+                    "settlement-01-mixed_charter",
+                    "settlement-02-audited_seal",
+                    "settlement-02-controlled_release",
+                    "settlement-02-distributed_copies",
+                    "settlement-03-federated_towers",
+                    "settlement-03-licensed_service",
+                    "settlement-03-public_routing",
+                    "settlement-04-capped_repayment",
+                    "settlement-04-chosen_service",
+                    "settlement-04-debt_cancellation",
+                    "settlement-05-distributed_terraces",
+                    "settlement-05-reinforce_district",
+                    "settlement-05-relocate_district",
+                    "settlement-06-independent_stages",
+                    "settlement-06-limited_emergency",
+                    "settlement-06-rotating_conductors",
+                    "settlement-07-audited_network",
+                    "settlement-07-independent_groves",
+                    "settlement-07-voluntary_commons",
+                    "settlement-08-cooperative_labs",
+                    "settlement-08-public_licensing",
+                    "settlement-08-regulated_research",
+                    "settlement-09-independent_appeal",
+                    "settlement-09-limited_bench",
+                    "settlement-09-shared_sanctuary",
+                    "settlement-10-distributed_research",
+                    "settlement-10-independent_review",
+                    "settlement-10-sunset_prediction",
+                    "settlement-11-distributed_witnesses",
+                    "settlement-11-protected_judgments",
+                    "settlement-11-sealed_oversight",
+                    "settlement-12-mixed_kin_charter",
+                    "settlement-12-public_care",
+                    "settlement-12-renewable_pacts",
+                    "settlement-13-audience_councils",
+                    "settlement-13-disclosure_inspectors",
+                    "settlement-13-public_commissions",
+                    "settlement-14-express_concessions",
+                    "settlement-14-rest_charter",
+                    "settlement-14-route_communes",
+                    "settlement-15-civic_utilities",
+                    "settlement-15-repair_cooperatives",
+                    "settlement-15-worker_automation",
+                    "wayfarer-tarin-audited",
+                    "wayfarer-tarin-correct",
+                    "wayfarer-tarin-redacted-copies",
+                    "wayfarer-tarin-sealed-witness"
+                  ]
+                },
+                "label": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "service_continuity": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          },
+          "branching_note": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "choice_rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "conditional_required_quest_ids": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "quest_ids",
+                "when_flags_all"
+              ],
+              "properties": {
+                "quest_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "^quest-[a-z0-9-]+$"
+                  },
+                  "uniqueItems": true
+                },
+                "when_flags_all": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          },
+          "encounter_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^creature-o(?:0[1-9]|1[0-5])-boss$"
+          },
+          "ending_predicate_required": {
+            "type": "boolean"
+          },
+          "entry_rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence_categories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "failure_recovery": {
+            "type": "string",
+            "minLength": 1
+          },
+          "first_oath_requirement": {
+            "type": "null"
+          },
+          "grants_flags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "quest-alliance-daybreak-crossing",
+              "quest-alliance-daybreak-offer",
+              "quest-alliance-daybreak-recovery",
+              "quest-alliance-daybreak-warning",
+              "quest-civic-review-01",
+              "quest-civic-review-02",
+              "quest-civic-review-03",
+              "quest-civic-review-04",
+              "quest-civic-review-05",
+              "quest-civic-review-06",
+              "quest-civic-review-07",
+              "quest-civic-review-08",
+              "quest-civic-review-09",
+              "quest-civic-review-10",
+              "quest-civic-review-11",
+              "quest-civic-review-12",
+              "quest-civic-review-13",
+              "quest-civic-review-14",
+              "quest-civic-review-15",
+              "quest-evidence-independent-record",
+              "quest-handler-dessa-assessment",
+              "quest-handler-dessa-charter",
+              "quest-initiation-01",
+              "quest-initiation-02",
+              "quest-initiation-03",
+              "quest-initiation-04",
+              "quest-initiation-05",
+              "quest-initiation-06",
+              "quest-initiation-07",
+              "quest-initiation-08",
+              "quest-initiation-09",
+              "quest-initiation-10",
+              "quest-initiation-11",
+              "quest-initiation-12",
+              "quest-initiation-13",
+              "quest-initiation-14",
+              "quest-initiation-15",
+              "quest-main-01",
+              "quest-main-02",
+              "quest-main-03",
+              "quest-main-04",
+              "quest-main-05",
+              "quest-main-06",
+              "quest-main-07",
+              "quest-main-08",
+              "quest-main-09",
+              "quest-mentor-una-handback",
+              "quest-mentor-una-override",
+              "quest-region-01",
+              "quest-region-02",
+              "quest-region-03",
+              "quest-region-04",
+              "quest-region-05",
+              "quest-region-06",
+              "quest-region-07",
+              "quest-region-08",
+              "quest-region-09",
+              "quest-region-10",
+              "quest-region-11",
+              "quest-region-12",
+              "quest-region-13",
+              "quest-region-14",
+              "quest-region-15",
+              "quest-rival-oda-final",
+              "quest-rival-oda-record",
+              "quest-rival-oda-trial",
+              "quest-side-01",
+              "quest-side-02",
+              "quest-side-03",
+              "quest-side-04",
+              "quest-side-05",
+              "quest-side-06",
+              "quest-side-07",
+              "quest-side-08",
+              "quest-side-09",
+              "quest-side-10",
+              "quest-side-11",
+              "quest-side-12",
+              "quest-side-13",
+              "quest-side-14",
+              "quest-side-15",
+              "quest-wayfarer-tarin-dispatch",
+              "quest-wayfarer-tarin-road"
+            ]
+          },
+          "independent_witness_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "involved_character_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^character-(?:[0-9]{2}-(?:leader|civilian|handler|wayfarer)|player|archivist)$"
+            },
+            "uniqueItems": true
+          },
+          "irreversible": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "aftermath",
+              "alliance_choice",
+              "alliance_recovery",
+              "alliance_warning",
+              "civilian_side_story",
+              "cross_examination",
+              "final_plan",
+              "finale",
+              "first_commitment",
+              "fixed_opening",
+              "independent_civic_review",
+              "independent_evidence",
+              "investigation",
+              "optional_alliance",
+              "optional_initiation",
+              "orientation",
+              "political_pressure",
+              "regional_arc",
+              "supporting_handler",
+              "supporting_mentor",
+              "supporting_rival",
+              "supporting_wayfarer"
+            ]
+          },
+          "objectives": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "persistence_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "goal",
+                "id"
+              ],
+              "properties": {
+                "goal": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "confront",
+                    "investigate",
+                    "observe",
+                    "settle"
+                  ]
+                }
+              }
+            }
+          },
+          "poi_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^poi-[a-z0-9-]+$"
+            },
+            "uniqueItems": true
+          },
+          "produces_choices": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "promise_records": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "beneficiary_id",
+                "id",
+                "limits",
+                "promisor_id",
+                "review_condition",
+                "undertaking"
+              ],
+              "properties": {
+                "beneficiary_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "promise-daybreak-no-seizure",
+                    "promise-daybreak-notice"
+                  ]
+                },
+                "limits": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "promisor_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "review_condition": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "undertaking": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "protected_party_contact_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "region-01",
+                "region-02",
+                "region-03",
+                "region-04",
+                "region-05",
+                "region-06",
+                "region-07",
+                "region-08",
+                "region-09",
+                "region-10",
+                "region-11",
+                "region-12",
+                "region-13",
+                "region-14",
+                "region-15"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "required_flags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "required_quest_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^quest-[a-z0-9-]+$"
+            },
+            "uniqueItems": true
+          },
+          "resolution_cases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "actions",
+                "clears_flags",
+                "grants_flags",
+                "id",
+                "relationship_outcome",
+                "when_flags_all",
+                "when_flags_none"
+              ],
+              "properties": {
+                "actions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "clears_flags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "grants_flags": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "enum": [
+                    "custody-alliance-honored",
+                    "custody-betrayal",
+                    "custody-independent"
+                  ]
+                },
+                "relationship_outcome": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "when_flags_all": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                },
+                "when_flags_none": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "uniqueItems": true
+                }
+              }
+            }
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+            },
+            "uniqueItems": true
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "warning_actor_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "regional_arc"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "branches",
+                "phases",
+                "encounter_id",
+                "poi_ids",
+                "evidence_categories"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "independent_civic_review"
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "required": [
+                "attestation_method",
+                "evidence_categories",
+                "poi_ids"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "id": {
+                  "const": "quest-main-07"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "then": {
+              "required": [
+                "produces_choices",
+                "choice_rule"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "id": {
+                  "const": "quest-main-08"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            },
+            "then": {
+              "required": [
+                "ending_predicate_required"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+      },
+      "uniqueItems": true
+    },
+    "state_model_note": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aetherion:quest-registry:1.0.0",
+  "title": "Aetherion Quest Registry",
+  "description": "Strict field-level schema for the authored preproduction registry. Stable record IDs and all object fields are explicit. Schema validity does not confer canon approval, implementation or semantic truth."
+}

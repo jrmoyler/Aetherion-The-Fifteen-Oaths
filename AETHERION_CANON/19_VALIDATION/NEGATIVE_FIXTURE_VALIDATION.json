@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-GOVERNANCE-PROPOSAL"
+  ],
+  "scope": "Negative static-validator fixtures, not gameplay tests",
+  "command": "python -m unittest discover -s AETHERION_CANON/19_VALIDATION -p test_validator.py -v",
+  "passed": 7,
+  "failed": 0,
+  "records": [
+    {
+      "id": "test_concept_cannot_claim_implementation",
+      "status": "PASS"
+    },
+    {
+      "id": "test_duplicate_interaction_is_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "test_one_way_border_is_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "test_private_source_locator_is_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "test_reference_cannot_claim_implementation",
+      "status": "PASS"
+    },
+    {
+      "id": "test_source_screenshot_cannot_claim_implementation",
+      "status": "PASS"
+    },
+    {
+      "id": "test_unknown_evidence_is_rejected",
+      "status": "PASS"
+    }
+  ]
+}

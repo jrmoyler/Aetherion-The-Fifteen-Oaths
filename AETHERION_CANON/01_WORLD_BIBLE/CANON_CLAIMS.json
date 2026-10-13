@@ -1,0 +1,536 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "claim-world-fifteen",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "Exactly fifteen foundational Oaths and fifteen major realms on one connected continent.",
+      "locations": [
+        "AETHERION_WORLD_BIBLE.md",
+        "../03_GEOGRAPHY/WORLD_GRAPH.json"
+      ]
+    },
+    {
+      "id": "claim-world-weave",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "The First Fracture damaged the primordial Weave; Oaths arose afterward as living stabilizing covenants with allegiance costs.",
+      "locations": [
+        "AETHERION_WORLD_BIBLE.md",
+        "../02_HISTORY_AND_COSMOLOGY/COSMOLOGY_AND_PACTS.md"
+      ]
+    },
+    {
+      "id": "claim-world-opening",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "Archivist dies on Daybreak great-plaza steps, names player successor and entrusts original Weave fragment enabling multiple Oaths.",
+      "locations": [
+        "AETHERION_WORLD_BIBLE.md",
+        "../06_NARRATIVE/BRANCHING_STORY.md"
+      ]
+    },
+    {
+      "id": "claim-world-systems-direction",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "Hybrid combat, housing/life skills, dynamic events, large-scale PvP and Oath-linked mounts are original conceptual direction, not validated implementations.",
+      "locations": [
+        "AETHERION_WORLD_BIBLE.md"
+      ]
+    },
+    {
+      "id": "claim-unbound-conflict",
+      "canon_status": "UNRESOLVED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "Starting Unbound and last true Unbound need explicit reconciliation.",
+      "decision_id": "DEC-001",
+      "proposed_resolution": "Unclaimed beginner versus demonstrated rare covenant-interface mastery; fragment enables succession, not retroactive prior mastery.",
+      "alternatives": [
+        "True Unbound as institutional title",
+        "True Unbound as ontological state"
+      ],
+      "locations": [
+        "../02_HISTORY_AND_COSMOLOGY/COSMOLOGY_AND_PACTS.md"
+      ]
+    },
+    {
+      "id": "claim-tidal-distinction",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "claim": "Tidal Covenant Water and Tidal Observatory Cosmic & Gravity remain separate Oaths.",
+      "locations": [
+        "ENTITY_CONTRACT.json"
+      ]
+    },
+    {
+      "id": "claim-tidal-language",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "A shared navigational term developed distinct water-circulation and gravitational-attraction meanings.",
+      "decision_id": "DEC-002",
+      "locations": [
+        "../02_HISTORY_AND_COSMOLOGY/COSMOLOGY_AND_PACTS.md"
+      ]
+    },
+    {
+      "id": "claim-fragment-plural",
+      "canon_status": "UNRESOLVED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "Original singular Weave fragment versus plural Oath fragments does not establish the latter's ontology.",
+      "proposed_resolution": "One original interface plus derivative covenant tokens.",
+      "locations": [
+        "../02_HISTORY_AND_COSMOLOGY/COSMOLOGY_AND_PACTS.md"
+      ]
+    },
+    {
+      "id": "claim-chronology",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "All numerical historical dates are editorial relative-year proposals; character ages are not inferred.",
+      "decision_id": "DEC-003",
+      "locations": [
+        "../02_HISTORY_AND_COSMOLOGY/TIMELINE.json"
+      ]
+    },
+    {
+      "id": "claim-geography",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Relative realm placement, four drainage basins, all capitals, route names and political borders are new proposals.",
+      "decision_id": "DEC-004",
+      "locations": [
+        "../03_GEOGRAPHY/REALM_REGISTRY.json",
+        "../03_GEOGRAPHY/WORLD_GRAPH.json"
+      ]
+    },
+    {
+      "id": "claim-characters",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "All named leaders and civic NPCs are new proposals, with identities and relationships in shared registries.",
+      "decision_id": "DEC-005",
+      "locations": [
+        "../05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json"
+      ]
+    },
+    {
+      "id": "claim-ending-design",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Specific ending predicates, service attestations, costs, scope and irreversibility are new design proposals preserving locked directions.",
+      "decision_id": "DEC-007",
+      "locations": [
+        "../06_NARRATIVE/ENDING_PREREQUISITES.json"
+      ]
+    },
+    {
+      "id": "claim-loadout-separation",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE"
+      ],
+      "claim": "Narrative allegiance is separate from loadout; multiple Oaths do not imply all15 simultaneously equipped; source castables are not changed to fit lore.",
+      "locations": [
+        "AETHERION_WORLD_BIBLE.md"
+      ]
+    },
+    {
+      "id": "claim-source-approval",
+      "canon_status": "UNRESOLVED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "REF-113",
+        "REF-112",
+        "REF-111",
+        "REF-110",
+        "REF-109",
+        "REF-108",
+        "REF-107",
+        "REF-106",
+        "REF-105",
+        "REF-104",
+        "REF-103",
+        "REF-102",
+        "REF-100",
+        "REF-099",
+        "REF-101"
+      ],
+      "claim": "Recovered overview images are preserved reference evidence; individual final-production approval and production implementation are not established.",
+      "decision_id": "DEC-008",
+      "locations": [
+        "../00_GOVERNANCE/SOURCE_INVENTORY.json"
+      ]
+    },
+    {
+      "id": "claim-no-single-fracture-cause",
+      "canon_status": "UNRESOLVED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "Ultimate Fracture cause, deity ontology, afterlife, playable species and Archivist selection rationale are not established.",
+      "locations": [
+        "../02_HISTORY_AND_COSMOLOGY/COSMOLOGY_AND_PACTS.md"
+      ]
+    },
+    {
+      "id": "claim-oath-01-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "KILN OATH is Fire; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-01",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/01_KILN_OATH.md"
+      ]
+    },
+    {
+      "id": "claim-oath-02-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "RIME ARCHIVE is Frost; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-02",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/02_RIME_ARCHIVE.md"
+      ]
+    },
+    {
+      "id": "claim-oath-03-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "STORM RELAY is Lightning; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-03",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/03_STORM_RELAY.md"
+      ]
+    },
+    {
+      "id": "claim-oath-04-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "TIDAL COVENANT is Water; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-04",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/04_TIDAL_COVENANT.md"
+      ]
+    },
+    {
+      "id": "claim-oath-05-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "FAULT CHOIR is Earth & Crystal; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-05",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/05_FAULT_CHOIR.md"
+      ]
+    },
+    {
+      "id": "claim-oath-06-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "REED RESONANCE is Wind & Sound; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-06",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/06_REED_RESONANCE.md"
+      ]
+    },
+    {
+      "id": "claim-oath-07-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "GRAFT SANCTUARY is Nature; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-07",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md"
+      ]
+    },
+    {
+      "id": "claim-oath-08-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "BITTERGLASS GUILD is Poison; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-08",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md"
+      ]
+    },
+    {
+      "id": "claim-oath-09-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "OATH OF DAYBREAK is Light & Holy; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-09",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md"
+      ]
+    },
+    {
+      "id": "claim-oath-10-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "TIDAL OBSERVATORY is Cosmic & Gravity; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-10",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md"
+      ]
+    },
+    {
+      "id": "claim-oath-11-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "THE MISSING COURT is Shadow & Void; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-11",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/11_THE_MISSING_COURT.md"
+      ]
+    },
+    {
+      "id": "claim-oath-12-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "SANGUINE COVENANT is Blood; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-12",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md"
+      ]
+    },
+    {
+      "id": "claim-oath-13-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "FOLDED THEATRE is Arcane & Illusion; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-13",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/13_FOLDED_THEATRE.md"
+      ]
+    },
+    {
+      "id": "claim-oath-14-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "ESCAPEMENT ROAD is Time & Motion; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-14",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md"
+      ]
+    },
+    {
+      "id": "claim-oath-15-identity",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "claim": "IMPULSE FOUNDRY is Tech & Force; its source-defined realm identity remains preserved.",
+      "oath_id": "oath-15",
+      "locations": [
+        "ENTITY_CONTRACT.json",
+        "../04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md"
+      ]
+    },
+    {
+      "id": "claim-boss-02-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The Unthawing Custodian as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The Unthawing Custodian is a living senior archivist defending a patient who validly refused awakening, while an evacuation crisis makes continued stasis dangerous. A duel can secure time and access, but the resolution must preserve consent and fund a difficult transfer rather than expose a conveniently invalid order.",
+      "affected_id": "creature-o02-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/02_RIME_ARCHIVE.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    },
+    {
+      "id": "claim-boss-04-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The Debt Leviathan as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The Debt Leviathan is a living estuary guardian whose seasonal nursery migration blocks the port's food route. It is neither a debt-collecting machine nor malicious; relocation harms its young, closure threatens supplies, and a negotiated seasonal corridor requires expensive changes to shipping and habitat protection.",
+      "affected_id": "creature-o04-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/04_TIDAL_COVENANT.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    },
+    {
+      "id": "claim-boss-06-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The Perfect Chorus as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The Perfect Chorus is an ensemble of willing human performers whose protective resonance also suppresses nearby testimony. Members disagree about when to stop because a real crosswind threatens the crowd. The encounter combines stage traversal, protection and negotiation, with a resolution that redistributes risk instead of revealing universal mind control.",
+      "affected_id": "creature-o06-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/06_REED_RESONANCE.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    },
+    {
+      "id": "claim-boss-07-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The Unending Orchard as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The Unending Orchard is a productive living symbiosis whose roots invade independent farms while feeding households with no immediate substitute. Cutting it back reduces food, moving it consumes another habitat and leaving it intact restricts autonomy. Players can fight dangerous growth, but no hidden malicious component removes the need for a costly settlement.",
+      "affected_id": "creature-o07-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    },
+    {
+      "id": "claim-boss-10-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The Unmoored Atlas as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The Unmoored Atlas is a living gravity-adapted colonial organism migrating through an experimental field that researchers mistakenly treated as empty space. Its passage threatens platforms, but tethering or destroying it damages an unknown ecology. Players stabilize residents, revise the model and negotiate an expensive relocation or altered research corridor.",
+      "affected_id": "creature-o10-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    },
+    {
+      "id": "claim-boss-12-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The First Creditor as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The First Creditor is a living pact champion who voluntarily bears a large share of communal care and challenges unilateral withdrawal from agreements. Some obligations are coercive, others were freely renewed and support dependents. A nonlethal contest or mediated hearing establishes standing, but the final settlement must distinguish them and replace lost care.",
+      "affected_id": "creature-o12-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    },
+    {
+      "id": "claim-boss-13-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The Audience of One as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The Audience of One is a living illusionist patron who privately finances shelter by selling an idealized civic story. Exposing the deception restores informed choice but can collapse funding residents rely on. The encounter stages competing viewpoints and protects spectators, then asks who will support the work when the profitable myth ends.",
+      "affected_id": "creature-o13-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/13_FOLDED_THEATRE.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    },
+    {
+      "id": "claim-boss-14-superseded",
+      "canon_status": "DEPRECATED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "claim": "Earlier draft framed The Final Schedule as a malfunctioning or coercive automated institution. Superseded before founder approval by a distinct living, ensemble or ecological encounter.",
+      "replacement_claim": "The Final Schedule is a living transport marshal commanding a relief convoy through a failing temporal corridor. Stopping to rescue trapped travelers risks losing urgent supplies elsewhere; pressing on abandons people nearby. The encounter can become a nonlethal confrontation, but its resolution requires a costly redistribution of time, transport and care.",
+      "affected_id": "creature-o14-boss",
+      "locations": [
+        "../04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md"
+      ],
+      "migration_impact": "No runtime or approved asset migration; proposal-only revision, exact entity ID and name retained."
+    }
+  ]
+}

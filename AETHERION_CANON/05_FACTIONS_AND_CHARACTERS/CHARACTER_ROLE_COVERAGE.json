@@ -1,0 +1,246 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "role-main-cast",
+      "role": "Main cast",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-player",
+        "character-archivist",
+        "character-09-leader",
+        "character-09-civilian"
+      ],
+      "authored_scope": "Locked successor/Archivist opening plus proposed named sponsor and civic witness.",
+      "production_gap": "Exact performance, player customization and Archivist design remain approval gaps.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-leaders",
+      "role": "Realm leaders",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-01-leader",
+        "character-02-leader",
+        "character-03-leader",
+        "character-04-leader",
+        "character-05-leader",
+        "character-06-leader",
+        "character-07-leader",
+        "character-08-leader",
+        "character-09-leader",
+        "character-10-leader",
+        "character-11-leader",
+        "character-12-leader",
+        "character-13-leader",
+        "character-14-leader",
+        "character-15-leader"
+      ],
+      "authored_scope": "All fifteen leaders have concrete motivations, contradictions and settlement-linked personal outcomes.",
+      "production_gap": "Final casting, faces and fully written dialogue remain production work.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-civilians",
+      "role": "Civic professionals",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-01-civilian",
+        "character-02-civilian",
+        "character-03-civilian",
+        "character-04-civilian",
+        "character-05-civilian",
+        "character-06-civilian",
+        "character-07-civilian",
+        "character-08-civilian",
+        "character-09-civilian",
+        "character-10-civilian",
+        "character-11-civilian",
+        "character-12-civilian",
+        "character-13-civilian",
+        "character-14-civilian",
+        "character-15-civilian",
+        "character-07-handler",
+        "character-02-wayfarer"
+      ],
+      "authored_scope": "All fifteen civic counterpoints have occupation, visuals, equipment, voice, conflicts and individual outcomes.",
+      "production_gap": "Additional neighborhood population and ambient schedules remain unbuilt.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-rivals",
+      "role": "Rivals",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-03-civilian"
+      ],
+      "authored_scope": "Oda Kesh recurs in three optional audit/uncertainty/final-plan quests, with actual choices producing colleague or respected-rival outcomes.",
+      "production_gap": "Encounter presentation, dialogue performance, scheduling and service UI remain unbuilt; the authored recurring role is complete.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-mentors",
+      "role": "Mentors",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-15-civilian"
+      ],
+      "authored_scope": "Una Brin teaches safe control, compares legitimate design tradeoffs and then hands authority back to the learner across two optional quests with concrete outcomes.",
+      "production_gap": "Tutorial runtime, performance, teaching props and approved individual art remain production work. Other occupational teachers are not counted as completed mentor arcs.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-antagonists",
+      "role": "Conditional antagonists",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-02-leader",
+        "character-09-leader",
+        "character-12-leader",
+        "character-13-leader",
+        "character-14-leader"
+      ],
+      "authored_scope": "Named living encounter roles and Helia's explicit custody overreach supply concrete conditional opposition.",
+      "production_gap": "AI, nonlethal encounter implementation and final performance are unvalidated.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-quest-givers",
+      "role": "Quest givers",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-01-civilian",
+        "character-02-civilian",
+        "character-03-civilian",
+        "character-04-civilian",
+        "character-05-civilian",
+        "character-06-civilian",
+        "character-07-civilian",
+        "character-08-civilian",
+        "character-09-civilian",
+        "character-10-civilian",
+        "character-11-civilian",
+        "character-12-civilian",
+        "character-13-civilian",
+        "character-14-civilian",
+        "character-15-civilian",
+        "character-01-leader",
+        "character-02-leader",
+        "character-03-leader",
+        "character-04-leader",
+        "character-05-leader",
+        "character-06-leader",
+        "character-07-leader",
+        "character-08-leader",
+        "character-09-leader",
+        "character-10-leader",
+        "character-11-leader",
+        "character-12-leader",
+        "character-13-leader",
+        "character-14-leader",
+        "character-15-leader",
+        "character-07-handler",
+        "character-02-wayfarer"
+      ],
+      "authored_scope": "Quest registry links initiation, regional, civic-review and side-story objectives to these actual people.",
+      "production_gap": "Delivery UI, scene blocking and quest runtime remain proposed.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-merchants-craftspeople",
+      "role": "Merchants and craftspeople",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-01-civilian",
+        "character-05-civilian",
+        "character-07-civilian",
+        "character-08-civilian",
+        "character-13-civilian",
+        "character-15-civilian"
+      ],
+      "authored_scope": "Ivo repairs cooling works, Pella surveys, Tovin breeds seeds, Bram operates an assay booth, Seli runs a market stall and Una teaches maintenance.",
+      "production_gap": "Specific shop inventories, prices and profession interfaces are not implemented.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-creature-handlers",
+      "role": "Creature handlers",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-07-handler"
+      ],
+      "authored_scope": "Dessa Rowan has a specific animal-refusal and transport-contract arc, source-linked training references and an optional care desk tied to existing Graft creature concepts.",
+      "production_gap": "Individual concept art, mount-care AI, animation, welfare feedback and service implementation are unbuilt.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "role-wandering-unbound",
+      "role": "Wandering Unbound-related roles",
+      "coverage_status": "AUTHORED",
+      "character_ids": [
+        "character-02-wayfarer",
+        "character-player",
+        "character-archivist"
+      ],
+      "authored_scope": "Tarin Esh is a travelling, personally Rime-bound courier-historian whose limited dispatch evidence intersects the Archivist's history. He explicitly is not another true Unbound or successor.",
+      "production_gap": "Travel schedule, route scenes, approved individual art and performances remain unbuilt; secret cosmology and the Archivist's motives stay unresolved.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    }
+  ]
+}

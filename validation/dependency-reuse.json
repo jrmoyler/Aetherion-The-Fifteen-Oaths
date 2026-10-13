@@ -1,0 +1,28 @@
+{
+  "cleanNpmCi": "blocked",
+  "reason": "Initial default cache was unwritable; /tmp cache retry was blocked on cancelled network approval. No further network install attempted.",
+  "method": "Copied pre-existing local installed dependencies to destination-only node_modules; versions match destination lockfiles. Registry tarball integrity was not freshly revalidated.",
+  "packages": [
+    {
+      "name": "three",
+      "version": "0.185.1",
+      "lockedVersion": "0.185.1",
+      "packageJsonSha256": "1d5c438acdc1fe5a52fb8ede2e417afd91fec91d22275c40f7b739591b24e4df",
+      "reusedFrom": "pre-existing local Ability-Matrix dependency installation (not part of source snapshot)"
+    },
+    {
+      "name": "vite",
+      "version": "8.1.5",
+      "lockedVersion": "8.1.5",
+      "packageJsonSha256": "2f482c846a1c5b9e5883b458b3e54a171a320c2e8d9b924c7383c4baef607b09",
+      "reusedFrom": "pre-existing local Ability-Matrix dependency installation (not part of source snapshot)"
+    },
+    {
+      "name": "lil-gui",
+      "version": "0.21.0",
+      "lockedVersion": "0.21.0",
+      "packageJsonSha256": "01bc39ab82a108cebeb52e26cefa4e09343df53512537e23b9547e280a9d276a",
+      "reusedFrom": "pre-existing local Ability-Matrix dependency installation (not part of source snapshot)"
+    }
+  ]
+}

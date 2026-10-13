@@ -1,0 +1,790 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "edges": [
+    {
+      "id": "route-01-02",
+      "from_region_id": "region-01",
+      "to_region_id": "region-02",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-01-02"
+    },
+    {
+      "id": "route-01-05",
+      "from_region_id": "region-01",
+      "to_region_id": "region-05",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-01-05"
+    },
+    {
+      "id": "route-01-07",
+      "from_region_id": "region-01",
+      "to_region_id": "region-07",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-01-07"
+    },
+    {
+      "id": "route-02-03",
+      "from_region_id": "region-02",
+      "to_region_id": "region-03",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-02-03"
+    },
+    {
+      "id": "route-02-05",
+      "from_region_id": "region-02",
+      "to_region_id": "region-05",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-02-05"
+    },
+    {
+      "id": "route-03-05",
+      "from_region_id": "region-03",
+      "to_region_id": "region-05",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-03-05"
+    },
+    {
+      "id": "route-03-06",
+      "from_region_id": "region-03",
+      "to_region_id": "region-06",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-03-06"
+    },
+    {
+      "id": "route-03-09",
+      "from_region_id": "region-03",
+      "to_region_id": "region-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-03-09"
+    },
+    {
+      "id": "route-04-07",
+      "from_region_id": "region-04",
+      "to_region_id": "region-07",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-04-07"
+    },
+    {
+      "id": "route-04-08",
+      "from_region_id": "region-04",
+      "to_region_id": "region-08",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-04-08"
+    },
+    {
+      "id": "route-05-07",
+      "from_region_id": "region-05",
+      "to_region_id": "region-07",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-05-07"
+    },
+    {
+      "id": "route-05-08",
+      "from_region_id": "region-05",
+      "to_region_id": "region-08",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-05-08"
+    },
+    {
+      "id": "route-05-09",
+      "from_region_id": "region-05",
+      "to_region_id": "region-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-05-09"
+    },
+    {
+      "id": "route-06-09",
+      "from_region_id": "region-06",
+      "to_region_id": "region-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-06-09"
+    },
+    {
+      "id": "route-06-10",
+      "from_region_id": "region-06",
+      "to_region_id": "region-10",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-06-10"
+    },
+    {
+      "id": "route-06-13",
+      "from_region_id": "region-06",
+      "to_region_id": "region-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-06-13"
+    },
+    {
+      "id": "route-07-08",
+      "from_region_id": "region-07",
+      "to_region_id": "region-08",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-07-08"
+    },
+    {
+      "id": "route-08-09",
+      "from_region_id": "region-08",
+      "to_region_id": "region-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-08-09"
+    },
+    {
+      "id": "route-08-12",
+      "from_region_id": "region-08",
+      "to_region_id": "region-12",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-08-12"
+    },
+    {
+      "id": "route-09-12",
+      "from_region_id": "region-09",
+      "to_region_id": "region-12",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-09-12"
+    },
+    {
+      "id": "route-09-13",
+      "from_region_id": "region-09",
+      "to_region_id": "region-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-09-13"
+    },
+    {
+      "id": "route-10-13",
+      "from_region_id": "region-10",
+      "to_region_id": "region-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-10-13"
+    },
+    {
+      "id": "route-10-11",
+      "from_region_id": "region-10",
+      "to_region_id": "region-11",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-10-11"
+    },
+    {
+      "id": "route-11-13",
+      "from_region_id": "region-11",
+      "to_region_id": "region-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-11-13"
+    },
+    {
+      "id": "route-11-14",
+      "from_region_id": "region-11",
+      "to_region_id": "region-14",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-11-14"
+    },
+    {
+      "id": "route-11-15",
+      "from_region_id": "region-11",
+      "to_region_id": "region-15",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-11-15"
+    },
+    {
+      "id": "route-12-13",
+      "from_region_id": "region-12",
+      "to_region_id": "region-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-12-13"
+    },
+    {
+      "id": "route-12-14",
+      "from_region_id": "region-12",
+      "to_region_id": "region-14",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-12-14"
+    },
+    {
+      "id": "route-13-14",
+      "from_region_id": "region-13",
+      "to_region_id": "region-14",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-13-14"
+    },
+    {
+      "id": "route-14-15",
+      "from_region_id": "region-14",
+      "to_region_id": "region-15",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "route_id": "route-14-15"
+    }
+  ],
+  "drainage_networks": [
+    {
+      "id": "basin-west",
+      "name": "The Thawcourse catchment",
+      "headwaters": [
+        "region-02"
+      ],
+      "river_region_sequence": [
+        "region-02",
+        "region-01",
+        "region-07",
+        "region-04"
+      ],
+      "outlet": "southwestern ocean estuary",
+      "flow": "glacial headwaters through volcanic foothills and forest to tidewater",
+      "hazards": [
+        "ice-dam release",
+        "ash blockage",
+        "forest runoff",
+        "salinity intrusion"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "hydrology_status": "Conceptual directed drainage, not a simulated heightfield or measured discharge."
+    },
+    {
+      "id": "basin-choir",
+      "name": "The Choirwater catchment",
+      "headwaters": [
+        "region-03"
+      ],
+      "river_region_sequence": [
+        "region-03",
+        "region-05",
+        "region-08",
+        "region-04"
+      ],
+      "outlet": "southwestern ocean estuary, separate channel from Thawcourse until estuarine mixing",
+      "flow": "mountain precipitation through canyon drainage and managed wetlands",
+      "hazards": [
+        "flash flooding",
+        "quarry sediment",
+        "treatment saturation",
+        "storm surge"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "hydrology_status": "Conceptual directed drainage, not a simulated heightfield or measured discharge."
+    },
+    {
+      "id": "basin-dawn",
+      "name": "The Dawnrun catchment",
+      "headwaters": [
+        "region-06"
+      ],
+      "river_region_sequence": [
+        "region-06",
+        "region-09",
+        "region-12",
+        "region-14",
+        "region-15"
+      ],
+      "outlet": "southeastern ocean",
+      "flow": "escarpment runoff through central and southern terraces to the coastal plain",
+      "hazards": [
+        "seasonal low flow",
+        "floodplain occupation",
+        "road embankment blockage",
+        "industrial water demand"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "hydrology_status": "Conceptual directed drainage, not a simulated heightfield or measured discharge."
+    },
+    {
+      "id": "basin-east",
+      "name": "The Veilwater catchment",
+      "headwaters": [
+        "region-10"
+      ],
+      "river_region_sequence": [
+        "region-10",
+        "region-13",
+        "region-11",
+        "region-15"
+      ],
+      "outlet": "eastern ocean via coastal channels distinct from Dawnrun until lower plain",
+      "flow": "headland uplands through eastern valleys and karst-fed channels",
+      "hazards": [
+        "coastal fog",
+        "karst sink loss",
+        "concealed culvert blockage",
+        "delta silt buildup"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "hydrology_status": "Conceptual directed drainage, not a simulated heightfield or measured discharge."
+    }
+  ],
+  "coordinate_system": "Relative conceptual bands only; no final terrain coordinates.",
+  "connectivity_requirement": "One connected continent, bidirectional land travel between all15 realms, no cut-edge whose loss blocks access. Maritime services are additional routes, not sole realm connections.",
+  "records": [
+    {
+      "id": "region-01",
+      "oath_id": "oath-01",
+      "name": "KILN OATH major realm",
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-07"
+      ],
+      "capital_id": "poi-01-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-02",
+      "oath_id": "oath-02",
+      "name": "RIME ARCHIVE major realm",
+      "neighbor_ids": [
+        "region-01",
+        "region-03",
+        "region-05"
+      ],
+      "capital_id": "poi-02-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-03",
+      "oath_id": "oath-03",
+      "name": "STORM RELAY major realm",
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-06",
+        "region-09"
+      ],
+      "capital_id": "poi-03-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-04",
+      "oath_id": "oath-04",
+      "name": "TIDAL COVENANT major realm",
+      "neighbor_ids": [
+        "region-07",
+        "region-08"
+      ],
+      "capital_id": "poi-04-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-05",
+      "oath_id": "oath-05",
+      "name": "FAULT CHOIR major realm",
+      "neighbor_ids": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-07",
+        "region-08",
+        "region-09"
+      ],
+      "capital_id": "poi-05-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-06",
+      "oath_id": "oath-06",
+      "name": "REED RESONANCE major realm",
+      "neighbor_ids": [
+        "region-03",
+        "region-09",
+        "region-10",
+        "region-13"
+      ],
+      "capital_id": "poi-06-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-07",
+      "oath_id": "oath-07",
+      "name": "GRAFT SANCTUARY major realm",
+      "neighbor_ids": [
+        "region-01",
+        "region-04",
+        "region-05",
+        "region-08"
+      ],
+      "capital_id": "poi-07-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-08",
+      "oath_id": "oath-08",
+      "name": "BITTERGLASS GUILD major realm",
+      "neighbor_ids": [
+        "region-04",
+        "region-05",
+        "region-07",
+        "region-09",
+        "region-12"
+      ],
+      "capital_id": "poi-08-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-09",
+      "oath_id": "oath-09",
+      "name": "OATH OF DAYBREAK major realm",
+      "neighbor_ids": [
+        "region-03",
+        "region-05",
+        "region-06",
+        "region-08",
+        "region-12",
+        "region-13"
+      ],
+      "capital_id": "poi-09-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-10",
+      "oath_id": "oath-10",
+      "name": "TIDAL OBSERVATORY major realm",
+      "neighbor_ids": [
+        "region-06",
+        "region-13",
+        "region-11"
+      ],
+      "capital_id": "poi-10-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-11",
+      "oath_id": "oath-11",
+      "name": "THE MISSING COURT major realm",
+      "neighbor_ids": [
+        "region-10",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "capital_id": "poi-11-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-12",
+      "oath_id": "oath-12",
+      "name": "SANGUINE COVENANT major realm",
+      "neighbor_ids": [
+        "region-08",
+        "region-09",
+        "region-13",
+        "region-14"
+      ],
+      "capital_id": "poi-12-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-13",
+      "oath_id": "oath-13",
+      "name": "FOLDED THEATRE major realm",
+      "neighbor_ids": [
+        "region-06",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-14"
+      ],
+      "capital_id": "poi-13-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-14",
+      "oath_id": "oath-14",
+      "name": "ESCAPEMENT ROAD major realm",
+      "neighbor_ids": [
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-15"
+      ],
+      "capital_id": "poi-14-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    },
+    {
+      "id": "region-15",
+      "oath_id": "oath-15",
+      "name": "IMPULSE FOUNDRY major realm",
+      "neighbor_ids": [
+        "region-11",
+        "region-14"
+      ],
+      "capital_id": "poi-15-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ]
+    }
+  ]
+}

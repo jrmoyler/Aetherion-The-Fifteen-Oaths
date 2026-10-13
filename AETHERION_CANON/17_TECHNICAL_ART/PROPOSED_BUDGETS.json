@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "budget-baseline",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "profile": "baseline",
+      "validation_status": "UNVALIDATED_HYPOTHESIS",
+      "target_hardware": "UNRESOLVED; values do not constitute platform support",
+      "measurement_scene": "Same staged combat, travel, housing and siege captures across all profiles",
+      "frame_time_target_ms": 33.3,
+      "visible_triangle_soft_cap": 750000,
+      "draw_submission_soft_cap": 600,
+      "resident_texture_mib_soft_cap": 512,
+      "visible_cosmetic_particle_soft_cap": 12000,
+      "local_shadow_light_soft_cap": 2,
+      "hero_deforming_bones_soft_cap": 48,
+      "server_tick_hz_fixture": 30,
+      "network_snapshot_hz_fixture": 10,
+      "maximum_summon_simulation_slots_per_owner": 2,
+      "interaction_candidate_cap_per_region_tick": 256,
+      "interaction_transition_cap_per_region_tick": 64,
+      "interaction_depth_cap": 2,
+      "interaction_children_cap": 3,
+      "quality_degradation": [
+        "Reduce cosmetic particle density",
+        "Reduce distant animation update rate",
+        "Use material/geometry LOD",
+        "Reduce optional local shadows",
+        "Reduce nonessential ambience"
+      ],
+      "protected_information": [
+        "Hostile area boundary and timing",
+        "Target identity and allegiance",
+        "Objectives and escape paths",
+        "Accessibility cues",
+        "Authoritative collision and outcomes"
+      ],
+      "measurement_requirements": [
+        "Warm and cold captures",
+        "p50/p95/p99 CPU/GPU frame time",
+        "Peak and steady memory",
+        "Shader compile and streaming stalls",
+        "Server tick and replication cost",
+        "Device thermal and sustained behavior where applicable"
+      ]
+    },
+    {
+      "id": "budget-mid",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "profile": "mid",
+      "validation_status": "UNVALIDATED_HYPOTHESIS",
+      "target_hardware": "UNRESOLVED; values do not constitute platform support",
+      "measurement_scene": "Same staged combat, travel, housing and siege captures across all profiles",
+      "frame_time_target_ms": 16.7,
+      "visible_triangle_soft_cap": 1500000,
+      "draw_submission_soft_cap": 1000,
+      "resident_texture_mib_soft_cap": 1024,
+      "visible_cosmetic_particle_soft_cap": 24000,
+      "local_shadow_light_soft_cap": 4,
+      "hero_deforming_bones_soft_cap": 72,
+      "server_tick_hz_fixture": 30,
+      "network_snapshot_hz_fixture": 10,
+      "maximum_summon_simulation_slots_per_owner": 2,
+      "interaction_candidate_cap_per_region_tick": 256,
+      "interaction_transition_cap_per_region_tick": 64,
+      "interaction_depth_cap": 2,
+      "interaction_children_cap": 3,
+      "quality_degradation": [
+        "Reduce cosmetic particle density",
+        "Reduce distant animation update rate",
+        "Use material/geometry LOD",
+        "Reduce optional local shadows",
+        "Reduce nonessential ambience"
+      ],
+      "protected_information": [
+        "Hostile area boundary and timing",
+        "Target identity and allegiance",
+        "Objectives and escape paths",
+        "Accessibility cues",
+        "Authoritative collision and outcomes"
+      ],
+      "measurement_requirements": [
+        "Warm and cold captures",
+        "p50/p95/p99 CPU/GPU frame time",
+        "Peak and steady memory",
+        "Shader compile and streaming stalls",
+        "Server tick and replication cost",
+        "Device thermal and sustained behavior where applicable"
+      ]
+    },
+    {
+      "id": "budget-high",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "profile": "high",
+      "validation_status": "UNVALIDATED_HYPOTHESIS",
+      "target_hardware": "UNRESOLVED; values do not constitute platform support",
+      "measurement_scene": "Same staged combat, travel, housing and siege captures across all profiles",
+      "frame_time_target_ms": 16.7,
+      "visible_triangle_soft_cap": 2500000,
+      "draw_submission_soft_cap": 1500,
+      "resident_texture_mib_soft_cap": 2048,
+      "visible_cosmetic_particle_soft_cap": 40000,
+      "local_shadow_light_soft_cap": 6,
+      "hero_deforming_bones_soft_cap": 96,
+      "server_tick_hz_fixture": 30,
+      "network_snapshot_hz_fixture": 10,
+      "maximum_summon_simulation_slots_per_owner": 2,
+      "interaction_candidate_cap_per_region_tick": 256,
+      "interaction_transition_cap_per_region_tick": 64,
+      "interaction_depth_cap": 2,
+      "interaction_children_cap": 3,
+      "quality_degradation": [
+        "Reduce cosmetic particle density",
+        "Reduce distant animation update rate",
+        "Use material/geometry LOD",
+        "Reduce optional local shadows",
+        "Reduce nonessential ambience"
+      ],
+      "protected_information": [
+        "Hostile area boundary and timing",
+        "Target identity and allegiance",
+        "Objectives and escape paths",
+        "Accessibility cues",
+        "Authoritative collision and outcomes"
+      ],
+      "measurement_requirements": [
+        "Warm and cold captures",
+        "p50/p95/p99 CPU/GPU frame time",
+        "Peak and steady memory",
+        "Shader compile and streaming stalls",
+        "Server tick and replication cost",
+        "Device thermal and sustained behavior where applicable"
+      ]
+    }
+  ]
+}

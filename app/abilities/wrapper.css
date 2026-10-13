@@ -1,0 +1,13 @@
+.aetherion-controls { position: fixed; z-index: 40; top: 16px; left: 50%; transform: translateX(-50%); width: min(840px, calc(100vw - 32px)); padding: 12px 16px; border: 1px solid #58738680; border-radius: 12px; background: #09121eef; color: #e4edf5; font: 13px/1.5 system-ui, sans-serif; box-shadow: 0 8px 30px #0006; }
+.aetherion-controls summary { cursor: pointer; font-weight: 650; letter-spacing: .04em; }
+.aetherion-controls__row { display: flex; align-items: end; gap: 10px; margin-top: 10px; }
+.aetherion-controls label { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.aetherion-controls__ability { flex: 1; }
+.aetherion-controls select, .aetherion-controls button { min-height: 36px; border: 1px solid #587386; border-radius: 6px; padding: 7px 9px; background: #142334; color: #e4edf5; font: inherit; }
+.aetherion-controls select { width: 100%; }
+.aetherion-controls button { cursor: pointer; white-space: nowrap; }
+.aetherion-controls button:hover:not(:disabled) { background: #244361; }
+.aetherion-controls :focus-visible { outline: 2px solid #8fcef4; outline-offset: 2px; }
+.aetherion-controls :disabled { opacity: .55; cursor: wait; }
+.aetherion-controls p { margin: 8px 0 0; color: #adc4d7; font-size: 12px; }
+@media (max-width: 650px) { .aetherion-controls { top: 8px; width: calc(100vw - 16px); padding: 8px 10px; } .aetherion-controls__row { flex-wrap: wrap; } .aetherion-controls__ability { flex-basis: 65%; } }

@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "service-hart-care",
+      "name": "Dessa's voluntary care and transport desk",
+      "character_id": "character-07-handler",
+      "region_ids": [
+        "region-07"
+      ],
+      "poi_ids": [
+        "poi-07-settlement"
+      ],
+      "quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter"
+      ],
+      "interaction": "Assess animal condition, inspect tack, plan rest and substitute transport, and explain approved mount-care concepts.",
+      "availability_flag": "service-hart-care-available",
+      "limits": "No ownership transfer, compelled animal behavior, guaranteed mount acquisition or implemented mount AI is implied.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "implementation_status": "PROPOSED authored service contract; no runtime, art or AI implementation claimed.",
+      "essential_access": "Optional service; equivalent public access and all main endings remain available without this arc."
+    },
+    {
+      "id": "service-road-records",
+      "name": "Tarin's mobile route-record desk",
+      "character_id": "character-02-wayfarer",
+      "region_ids": [
+        "region-02",
+        "region-03",
+        "region-09",
+        "region-13",
+        "region-11",
+        "region-14"
+      ],
+      "poi_ids": [
+        "poi-02-settlement",
+        "poi-03-settlement",
+        "poi-neutral-crossroads",
+        "poi-13-settlement",
+        "poi-11-settlement",
+        "poi-14-settlement"
+      ],
+      "quest_ids": [
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road"
+      ],
+      "interaction": "Compare historical route records, identify uncertainty and find the proper public or protected review channel.",
+      "availability_flag": "service-road-records-available",
+      "limits": "No secret true-Unbound status, guaranteed cosmological truth, private identity disclosure or source-independent fast travel.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "implementation_status": "PROPOSED authored service contract; no runtime, art or AI implementation claimed.",
+      "essential_access": "Optional service; equivalent public access and all main endings remain available without this arc."
+    },
+    {
+      "id": "service-independent-routing",
+      "name": "Oda's independent routing review",
+      "character_id": "character-03-civilian",
+      "region_ids": [
+        "region-03",
+        "region-09"
+      ],
+      "poi_ids": [
+        "poi-03-settlement",
+        "poi-neutral-crossroads"
+      ],
+      "quest_ids": [
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final"
+      ],
+      "interaction": "Review warning evidence and compare maintenance plans through either a shared office or an independent rival audit.",
+      "availability_flag": "service-independent-routing-available",
+      "limits": "Does not let Oda inspect private player messages or replace authoritative server routing.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "implementation_status": "PROPOSED authored service contract; no runtime, art or AI implementation claimed.",
+      "essential_access": "Optional service; equivalent public access and all main endings remain available without this arc."
+    },
+    {
+      "id": "service-manual-override-training",
+      "name": "Una's repair and safe-control school",
+      "character_id": "character-15-civilian",
+      "region_ids": [
+        "region-15"
+      ],
+      "poi_ids": [
+        "poi-15-settlement"
+      ],
+      "quest_ids": [
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "interaction": "Teach safe-state recognition, ordinary repair methods and honest comparison of maintainability with efficiency.",
+      "availability_flag": "service-manual-override-training-available",
+      "limits": "Does not automatically bind Tech, unlock castables, create a production crafting system or authorize unsafe machinery use.",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "implementation_status": "PROPOSED authored service contract; no runtime, art or AI implementation claimed.",
+      "essential_access": "Optional service; equivalent public access and all main endings remain available without this arc."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "factory": "packs/sandbox/src/vendor/runtimes/linear.js#create",
+  "ability": "linear/meteor",
+  "stepsBeforeFailure": 17,
+  "hasFissuresInRuntimeContext": false,
+  "status": "confirmed-source-defect",
+  "error": "TypeError: Cannot read properties of undefined (reading 'spawn')\n    at MeteorAbility.onImpact (runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/MeteorAbility.js:972:23)\n    at MeteorAbility.update (runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/Ability.js:219:16)\n    at AbilityManager.update (runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/AbilityManager.js:125:15)\n    at Object.update (runtime/ability-matrix/packs/sandbox/src/sandbox/createRuntime.js:157:15)\n    at tests/runtime-audit/reproduce-meteor-defect.mjs:18:123",
+  "explanation": "MeteorAbility.onImpact requires ctx.fissures.spawn. The standalone linear App constructs FissureSystem; sandbox/createRuntime omits it. No source changes or replacement gameplay services were used."
+}

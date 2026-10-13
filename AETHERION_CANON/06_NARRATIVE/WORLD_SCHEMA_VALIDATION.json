@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "schema-entity-contract",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "entity-contract.schema.json",
+      "registry": "01_WORLD_BIBLE/ENTITY_CONTRACT.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-timeline",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "timeline.schema.json",
+      "registry": "02_HISTORY_AND_COSMOLOGY/TIMELINE.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-world-graph",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "world-graph.schema.json",
+      "registry": "03_GEOGRAPHY/WORLD_GRAPH.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-realm-registry",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "realm-registry.schema.json",
+      "registry": "03_GEOGRAPHY/REALM_REGISTRY.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-world-poi-registry",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "world-poi-registry.schema.json",
+      "registry": "03_GEOGRAPHY/WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-trade-routes",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "trade-routes.schema.json",
+      "registry": "03_GEOGRAPHY/TRADE_ROUTES.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-faction-registry",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "faction-registry.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/FACTION_REGISTRY.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-character-registry",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "character-registry.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/CHARACTER_REGISTRY.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-character-role-coverage",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "character-role-coverage.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/CHARACTER_ROLE_COVERAGE.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-character-service-registry",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "character-service-registry.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/CHARACTER_SERVICE_REGISTRY.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-relationship-graph",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "relationship-graph.schema.json",
+      "registry": "05_FACTIONS_AND_CHARACTERS/RELATIONSHIP_GRAPH.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-quest-registry",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "quest-registry.schema.json",
+      "registry": "06_NARRATIVE/QUEST_REGISTRY.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    },
+    {
+      "id": "schema-ending-prerequisites",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "schema": "ending-prerequisites.schema.json",
+      "registry": "06_NARRATIVE/ENDING_PREREQUISITES.json",
+      "status": "PASS",
+      "positive_instances": 1,
+      "negative_instances_rejected": [
+        "unknown-root-property",
+        "wrong-schema-version-type",
+        "invalid-canon-status",
+        "unregistered-stable-id",
+        "unknown-record-property"
+      ],
+      "scope": "Strict data shape, fields, types, status enums and stable-ID membership; semantic crossrefs and gameplay separate."
+    }
+  ],
+  "summary": {
+    "schemas": 13,
+    "positive_instances": 13,
+    "negative_instances_rejected": 65
+  }
+}

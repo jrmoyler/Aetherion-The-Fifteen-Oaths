@@ -1,0 +1,255 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "canon_status",
+    "records",
+    "route_count_note",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "canon_status": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "alternate_region_path",
+          "canon_status",
+          "cargo_from_destination",
+          "cargo_from_origin",
+          "from_poi_id",
+          "from_region_id",
+          "id",
+          "interruption",
+          "modes",
+          "name",
+          "optional_modes",
+          "ownership",
+          "source_ids",
+          "status",
+          "terrain_transition",
+          "to_poi_id",
+          "to_region_id"
+        ],
+        "properties": {
+          "alternate_region_path": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "region-01",
+                "region-02",
+                "region-03",
+                "region-04",
+                "region-05",
+                "region-06",
+                "region-07",
+                "region-08",
+                "region-09",
+                "region-10",
+                "region-11",
+                "region-12",
+                "region-13",
+                "region-14",
+                "region-15"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "cargo_from_destination": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "cargo_from_origin": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "from_poi_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^poi-[a-z0-9-]+$"
+          },
+          "from_region_id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "region-01",
+              "region-02",
+              "region-03",
+              "region-04",
+              "region-05",
+              "region-06",
+              "region-07",
+              "region-08",
+              "region-09",
+              "region-10",
+              "region-11",
+              "region-12",
+              "region-13",
+              "region-14",
+              "region-15"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "route-01-02",
+              "route-01-05",
+              "route-01-07",
+              "route-02-03",
+              "route-02-05",
+              "route-03-05",
+              "route-03-06",
+              "route-03-09",
+              "route-04-07",
+              "route-04-08",
+              "route-05-07",
+              "route-05-08",
+              "route-05-09",
+              "route-06-09",
+              "route-06-10",
+              "route-06-13",
+              "route-07-08",
+              "route-08-09",
+              "route-08-12",
+              "route-09-12",
+              "route-09-13",
+              "route-10-11",
+              "route-10-13",
+              "route-11-13",
+              "route-11-14",
+              "route-11-15",
+              "route-12-13",
+              "route-12-14",
+              "route-13-14",
+              "route-14-15"
+            ]
+          },
+          "interruption": {
+            "type": "string",
+            "minLength": 1
+          },
+          "modes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "optional_modes": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ownership": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+            },
+            "uniqueItems": true
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "terrain_transition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to_poi_id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^poi-[a-z0-9-]+$"
+          },
+          "to_region_id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "region-01",
+              "region-02",
+              "region-03",
+              "region-04",
+              "region-05",
+              "region-06",
+              "region-07",
+              "region-08",
+              "region-09",
+              "region-10",
+              "region-11",
+              "region-12",
+              "region-13",
+              "region-14",
+              "region-15"
+            ]
+          }
+        }
+      }
+    },
+    "route_count_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aetherion:trade-routes:1.0.0",
+  "title": "Aetherion Trade Routes",
+  "description": "Strict field-level schema for the authored preproduction registry. Stable record IDs and all object fields are explicit. Schema validity does not confer canon approval, implementation or semantic truth."
+}

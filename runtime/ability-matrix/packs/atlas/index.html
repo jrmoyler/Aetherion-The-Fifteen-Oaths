@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1220">
+  <title>Ability Atlas · Casting range</title>
+  <style>
+    :root { color-scheme: dark; font: 13px/1.5 system-ui, sans-serif; color: #e7eef8; background: #0b1220; }
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    #stage { position: fixed; inset: 0; }
+    .panel { position: fixed; background: #101c2eea; border: 1px solid #344456; border-radius: 10px; padding: 12px; backdrop-filter: blur(10px); }
+    #hud { left: 12px; top: 12px; width: min(380px, calc(100% - 24px)); }
+    strong { display: block; margin-bottom: 8px; letter-spacing: .03em; }
+    .row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    button, select, input { font: inherit; color: inherit; background: #192b40; border: 1px solid #52667d; border-radius: 5px; padding: 5px 8px; }
+    button { cursor: pointer; } button:hover, button[aria-pressed="true"] { background: #315271; }
+    button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid #9edfff; outline-offset: 2px; }
+    select { width: 100%; }
+    #description, #hint { color: #b3c6d9; margin: 8px 0 0; }
+    #info { bottom: 12px; left: 12px; font: 12px/1.6 ui-monospace, monospace; white-space: pre-line; max-width: calc(100% - 24px); pointer-events: none; }
+    #editor { top: 12px; right: 12px; width: 220px; }
+    #editor label { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin: 6px 0; }
+    #editor input { width: 104px; min-width: 0; }
+    #editor input[type="color"] { height: 30px; padding: 2px; }
+    #error { color: #ffb7a5; }
+    [hidden], .embedded #hud, .embedded #info { display: none !important; }
+    @media (max-width: 680px) { #editor { top: auto; bottom: 12px; } #info { max-width: 48%; } }
+  </style>
+</head>
+<body>
+  <main id="stage" aria-label="Interactive three-dimensional ability preview"></main>
+  <section class="panel" id="hud" aria-label="Preview controls">
+    <strong>ABILITY ATLAS</strong>
+    <label for="preset">Ability</label>
+    <select id="preset"></select>
+    <div class="row">
+      <button id="cast">Cast</button><button id="arm" aria-pressed="false">Arm</button>
+      <button id="auto" aria-pressed="false">Auto</button><button id="clear">Clear</button>
+      <button id="pause" aria-pressed="false">Pause</button><button id="tune" aria-pressed="false">Tune</button>
+    </div>
+    <p id="description"></p>
+    <p id="hint">Drag to orbit · scroll to zoom · Arm, then click the ground to aim</p>
+  </section>
+  <aside class="panel" id="editor" hidden aria-label="Ability tuning">
+    <strong>Ability tuning</strong>
+    <form id="settings">
+      <label>Radius <input name="radius" type="number" min="0.5" max="8" step="0.1" required></label>
+      <label>Power <input name="power" type="number" min="0.1" max="4" step="0.1" required></label>
+      <label>Duration <input name="duration" type="number" min="1.5" max="15" step="0.1" required></label>
+      <label>Seed <input name="seed" type="number" min="0" max="4294967295" step="1" required></label>
+      <label>Color <input name="color" type="color" required></label>
+      <div class="row"><button type="submit">Apply</button><button id="reset" type="button">Reset</button><button id="close" type="button">Close</button></div>
+    </form>
+    <p id="error" role="status"></p>
+  </aside>
+  <output class="panel" id="info" aria-label="Preview simulation status"></output>
+  <script type="module" src="./src/bootstrap.js"></script>
+</body>
+</html>

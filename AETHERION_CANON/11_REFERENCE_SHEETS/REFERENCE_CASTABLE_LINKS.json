@@ -1,0 +1,598 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "RECOVERED",
+  "source_ids": [
+    "SRC-ABILITY-MATRIX-4c4a1eb",
+    "REF-000",
+    "REF-001",
+    "REF-002",
+    "REF-003",
+    "REF-004",
+    "REF-005",
+    "REF-006",
+    "REF-007",
+    "REF-008",
+    "REF-009",
+    "REF-010",
+    "REF-011",
+    "REF-012",
+    "REF-013",
+    "REF-014",
+    "REF-015",
+    "REF-016",
+    "REF-017",
+    "REF-018",
+    "REF-019",
+    "REF-020",
+    "REF-021",
+    "REF-022",
+    "REF-023",
+    "REF-024",
+    "REF-025",
+    "REF-026",
+    "REF-027",
+    "REF-028",
+    "REF-029",
+    "REF-030"
+  ],
+  "records": [
+    {
+      "id": "reference-link-000",
+      "reference_id": "reference-000",
+      "source_id": "REF-000",
+      "castable_uid": "codex/riptide",
+      "source_label": "Riptide Lash",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-000",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Riptide Lash: Tidal Water VFX Reference.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/RiptideLashAbility.js"
+    },
+    {
+      "id": "reference-link-001",
+      "reference_id": "reference-001",
+      "source_id": "REF-001",
+      "castable_uid": "codex/maelstrom",
+      "source_label": "Maelstrom Vortex",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-001",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Maelstrom Vortex water VFX sheet.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/MaelstromVortexAbility.js"
+    },
+    {
+      "id": "reference-link-002",
+      "reference_id": "reference-002",
+      "source_id": "REF-002",
+      "castable_uid": "casting/shark",
+      "source_label": "Abyssal Maw",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-002",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Abyssal shark breach sequence.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/SharkAbility.js"
+    },
+    {
+      "id": "reference-link-003",
+      "reference_id": "reference-003",
+      "source_id": "REF-003",
+      "castable_uid": "linear-extended/ink",
+      "source_label": "Sumi Tide",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-003",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Water 03 — Sumi tide.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/SumiTideAbility.js"
+    },
+    {
+      "id": "reference-link-004",
+      "reference_id": "reference-004",
+      "source_id": "REF-004",
+      "castable_uid": "linear-ext/aether",
+      "source_label": "Tidewrought Ring",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-004",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Water 02 — Tidewrought ring.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/AetherRingAbility.js"
+    },
+    {
+      "id": "reference-link-005",
+      "reference_id": "reference-005",
+      "source_id": "REF-005",
+      "castable_uid": "linear-ext/kraken",
+      "source_label": "Kraken Crown",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-005",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Water 01 — Kraken crown.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/KrakenAbility.js"
+    },
+    {
+      "id": "reference-link-006",
+      "reference_id": "reference-006",
+      "source_id": "REF-006",
+      "castable_uid": "codex/balllightning",
+      "source_label": "Ball Lightning",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-006",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Lightning 09 — ball lightning.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/BallLightningAbility.js"
+    },
+    {
+      "id": "reference-link-007",
+      "reference_id": "reference-007",
+      "source_id": "REF-007",
+      "castable_uid": "atlas/relay",
+      "source_label": "Arc Relay",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-007",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Branching lightning arc relay.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/atlas/ArcRelayAbility.js"
+    },
+    {
+      "id": "reference-link-008",
+      "reference_id": "reference-008",
+      "source_id": "REF-008",
+      "castable_uid": "matrix-new/ionstorm",
+      "source_label": "Ion Storm Pillar",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-008",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Lightning 07 — Ion storm pillar.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/matrix-new/IonStormPillarAbility.js"
+    },
+    {
+      "id": "reference-link-009",
+      "reference_id": "reference-009",
+      "source_id": "REF-009",
+      "castable_uid": "collective/chain",
+      "source_label": "Chain Arc",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-009",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Lightning 06 — Chain arc.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/collective/ChainArcAbility.js"
+    },
+    {
+      "id": "reference-link-010",
+      "reference_id": "reference-010",
+      "source_id": "REF-010",
+      "castable_uid": "casting/gyro",
+      "source_label": "Stormheart Gyroscope",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-010",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Lightning 05 — Stormheart gyroscope.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/GyroscopeAbility.js"
+    },
+    {
+      "id": "reference-link-011",
+      "reference_id": "reference-011",
+      "source_id": "REF-011",
+      "castable_uid": "linear-ext/boost",
+      "source_label": "Electric Boost",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-011",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Lightning 04 — electric boost.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/effects/ElectricBoost.js"
+    },
+    {
+      "id": "reference-link-012",
+      "reference_id": "reference-012",
+      "source_id": "REF-012",
+      "castable_uid": "linear-ext/electrical",
+      "source_label": "Electrical Sphere",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-012",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Lightning 03 — Electrical sphere.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/ElectricalSphereAbility.js"
+    },
+    {
+      "id": "reference-link-013",
+      "reference_id": "reference-013",
+      "source_id": "REF-013",
+      "castable_uid": "linear/snare",
+      "source_label": "Voltaic Snare",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-013",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Voltaic snare ability sheet.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/SnareAbility.js"
+    },
+    {
+      "id": "reference-link-014",
+      "reference_id": "reference-014",
+      "source_id": "REF-014",
+      "castable_uid": "linear/thunder",
+      "source_label": "Storm Lance",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-014",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Lightning 01 — Storm Lance.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/ThunderAbility.js"
+    },
+    {
+      "id": "reference-link-015",
+      "reference_id": "reference-015",
+      "source_id": "REF-015",
+      "castable_uid": "codex/avalanche",
+      "source_label": "Avalanche Wake",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-015",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Avalanche Wake: Rolling Ice Front.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/AvalancheWakeAbility.js"
+    },
+    {
+      "id": "reference-link-016",
+      "reference_id": "reference-016",
+      "source_id": "REF-016",
+      "castable_uid": "codex/permafrost",
+      "source_label": "Permafrost Bloom",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-016",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Permafrost Bloom VFX Sequence Sheet.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/PermafrostBloomAbility.js"
+    },
+    {
+      "id": "reference-link-017",
+      "reference_id": "reference-017",
+      "source_id": "REF-017",
+      "castable_uid": "handcast/frost",
+      "source_label": "Glacial Prison",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-017",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Glacial Prison Ice Wall Sequence.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/GlacialPrisonAbility.js"
+    },
+    {
+      "id": "reference-link-018",
+      "reference_id": "reference-018",
+      "source_id": "REF-018",
+      "castable_uid": "handcast/glacial",
+      "source_label": "Glacial Shard Storm",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-018",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Frost 03 — Glacial Shard Storm.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/GlacialShardStormAbility.js"
+    },
+    {
+      "id": "reference-link-019",
+      "reference_id": "reference-019",
+      "source_id": "REF-019",
+      "castable_uid": "linear/glacier",
+      "source_label": "Glacial Crown",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-019",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Frost 02: Glacial Crown.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/GlacierAbility.js"
+    },
+    {
+      "id": "reference-link-020",
+      "reference_id": "reference-020",
+      "source_id": "REF-020",
+      "castable_uid": "linear/ice",
+      "source_label": "Frost Lance",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-020",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Frost Lance: Crystalline Corridor VFX.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/IceAbility.js"
+    },
+    {
+      "id": "reference-link-021",
+      "reference_id": "reference-021",
+      "source_id": "REF-021",
+      "castable_uid": "codex/solarlash",
+      "source_label": "Solar Lash",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-021",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Fire 10 — Solar Lash.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/SolarLashAbility.js"
+    },
+    {
+      "id": "reference-link-022",
+      "reference_id": "reference-022",
+      "source_id": "REF-022",
+      "castable_uid": "matrix-new/emberveil",
+      "source_label": "Emberveil Lattice",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-022",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Emberveil Lattice: Collapsing Ember Cage.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/matrix-new/EmberveilLatticeAbility.js"
+    },
+    {
+      "id": "reference-link-023",
+      "reference_id": "reference-023",
+      "source_id": "REF-023",
+      "castable_uid": "collective/swarm",
+      "source_label": "Meteor Swarm",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-023",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Kiln Oath Meteor Swarm.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/abilities/collective/MeteorSwarmAbility.js"
+    },
+    {
+      "id": "reference-link-024",
+      "reference_id": "reference-024",
+      "source_id": "REF-024",
+      "castable_uid": "casting/dragon",
+      "source_label": "Dragonfire Circle",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-024",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Fire 07 — Dragonfire Circle.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/DragonAbility.js"
+    },
+    {
+      "id": "reference-link-025",
+      "reference_id": "reference-025",
+      "source_id": "REF-025",
+      "castable_uid": "handcast/phoenix",
+      "source_label": "Serpent Tide Field",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-025",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "FIRE 06 — SERPENT TIDE FIELD.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/PhoenixAbility.js"
+    },
+    {
+      "id": "reference-link-026",
+      "reference_id": "reference-026",
+      "source_id": "REF-026",
+      "castable_uid": "linear-extended/ward",
+      "source_label": "Volcanic Ward",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-026",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Volcanic ward VFX sequence sheet.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/WardAbility.js"
+    },
+    {
+      "id": "reference-link-027",
+      "reference_id": "reference-027",
+      "source_id": "REF-027",
+      "castable_uid": "linear-ext/fire",
+      "source_label": "Fire Boost",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-027",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Fire Boost: Ember Armor VFX Sequence.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/effects/FireBoost.js"
+    },
+    {
+      "id": "reference-link-028",
+      "reference_id": "reference-028",
+      "source_id": "REF-028",
+      "castable_uid": "linear-ext/firePortal",
+      "source_label": "Fire Portal",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-028",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Fire Portal: Vertical Aperture VFX.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/FirePortalAbility.js"
+    },
+    {
+      "id": "reference-link-029",
+      "reference_id": "reference-029",
+      "source_id": "REF-029",
+      "castable_uid": "linear-ext/pyre",
+      "source_label": "Pyre Crown",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-029",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Pyre Crown — Ember Ring Eruption.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-ext/abilities/PyreAbility.js"
+    },
+    {
+      "id": "reference-link-030",
+      "reference_id": "reference-030",
+      "source_id": "REF-030",
+      "castable_uid": "linear/meteor",
+      "source_label": "Cinder Fall",
+      "link_basis": "Exact on-sheet title and/or UID compared with sourceCatalog UID and label; title aliases retained.",
+      "canon_status": "RECOVERED",
+      "source_ids": [
+        "REF-030",
+        "SRC-ABILITY-MATRIX-4c4a1eb"
+      ],
+      "pixel_identity_review": "COMPLETE_AT_MONTAGE_LEVEL",
+      "full_parameter_equality": "NOT_VERIFIED",
+      "behavior_authority": "Pinned source preset and implementation; never overwrite gameplay from painted labels.",
+      "sheet_alias": "Cinder fall: molten rock impact.png",
+      "implementation_path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/abilities/MeteorAbility.js"
+    }
+  ]
+}

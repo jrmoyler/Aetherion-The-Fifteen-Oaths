@@ -1,0 +1,2670 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "character-01-leader",
+      "name": "Mara Venn",
+      "role": "institutional leader",
+      "oath_id": "oath-01",
+      "faction_id": "faction-01",
+      "region_id": "region-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Keep shared furnaces safe without bankrupting the crews who operate them.",
+      "contradiction": "Mara Venn, proposed elected master of shared furnaces, protects apprentices while concealing how much armament revenue funds safety crews. Her political survival depends on publishing a conversion plan rather than promising painless disarmament.",
+      "personal_stake": "Apprentices depend on armament-funded safety shifts.",
+      "visual_identity": "Recovered overview traits are orange kiln ceramic and charred metal. Proposed chalk safety marks, copper oxidation and localized molten amber add civic function without replacing those anchors; approved reference reconciliation remains required before production.",
+      "equipment": "ceramic-faced work coat, heat gauge and short forge hammer",
+      "combat_role": "protective close-range engineer, prioritizes rescue lanes",
+      "voice": "Clipped workshop language; asks what will carry the load.",
+      "relationships": [
+        {
+          "character_id": "character-01-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Ivo Serr is a cooling-channel engineer whose house would be demolished by the safest spillway. Apprentices, slag sorters, ceramic cooks and displaced quarry workers supply competing firsthand accounts."
+        }
+      ],
+      "arc": "Moves from paternal allocation toward published budgets or becomes an accountable wartime supplier. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-01-civilian_conversion",
+          "personal_outcome": "Mara converts a military workshop into a civilian repair school and must win replacement contracts before apprentice stipends run out.",
+          "unresolved_cost": "Reduces armament revenue and requires transition work for specialist crews.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-01-mixed_charter",
+          "personal_outcome": "Mara remains furnace coordinator but publishes allocations that let Ivo challenge a favored workshop.",
+          "unresolved_cost": "Creates recurring negotiation and a risk that emergencies expand military quotas.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-01-defense_compact",
+          "personal_outcome": "Mara retains defense production under a sunset charter and loses unilateral control of safety inspection.",
+          "unresolved_cost": "Civilian orders wait longer; independent safety oversight and sunset review are mandatory.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-113"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-01-civilian",
+      "name": "Ivo Serr",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-01",
+      "region_id": "region-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Ivo Serr is a cooling-channel engineer whose house would be demolished by the safest spillway. Apprentices, slag sorters, ceramic cooks and displaced quarry workers supply competing firsthand accounts.",
+      "contradiction": "Believes the spillway is safest but resents being asked to surrender the workshop that paid for their expertise.",
+      "personal_stake": "Ivo's spillway dispute weighs a family workshop against downstream risk. A second story follows a novice whose failed ceremonial blade is repurposed as a rescue tool, challenging prestige without punishing imperfect craft.",
+      "visual_identity": "A cooling-channel engineer in patched ash-grey work clothes, a pale ceramic shoulder guard and a rolled workshop apron; old burn-darkened tools are carefully repaired, not decorative damage.",
+      "equipment": [
+        "ceramic flow gauge",
+        "chalk survey roll",
+        "repaired cooling wrench"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Dry humor and exact material descriptions; becomes personal only when the workshop is dismissed as replaceable.",
+      "relationships": [
+        {
+          "character_id": "character-01-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Believes the spillway is safest but resents being asked to surrender the workshop that paid for their expertise. The regional settlement determines whether the character takes the following distinct next step: Ivo relocates the workshop with compensation and designs the new repair school's cooling loop. / Ivo keeps the workshop but becomes a public channel auditor able to challenge Mara's allocations. / Ivo accepts a protected spillway easement while campaigning for shorter civilian tool queues.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-01-civilian_conversion",
+          "personal_outcome": "Ivo relocates the workshop with compensation and designs the new repair school's cooling loop.",
+          "unresolved_cost": "Reduces armament revenue and requires transition work for specialist crews.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-01-mixed_charter",
+          "personal_outcome": "Ivo keeps the workshop but becomes a public channel auditor able to challenge Mara's allocations.",
+          "unresolved_cost": "Creates recurring negotiation and a risk that emergencies expand military quotas.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-01-defense_compact",
+          "personal_outcome": "Ivo accepts a protected spillway easement while campaigning for shorter civilian tool queues.",
+          "unresolved_cost": "Civilian orders wait longer; independent safety oversight and sunset review are mandatory.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-113"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-02-leader",
+      "name": "Sera Pell",
+      "role": "institutional leader",
+      "oath_id": "oath-02",
+      "faction_id": "faction-02",
+      "region_id": "region-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Preserve future choice while respecting present consent.",
+      "contradiction": "Sera Pell believes preservation protects future choice and openly accepts the political cost of unpopular seals. Her dispute with the player concerns genuine uncertainty over release: she will support a risky thaw only when independent evidence and the affected person's wishes justify it, not merely after a hidden crime is uncovered.",
+      "personal_stake": "A failed release could destroy both a patient's wishes and public trust in custody.",
+      "visual_identity": "Recovered overview traits are white, ash tones and translucent ice. Proposed indigo archival textiles and dark rock are secondary civic accents requiring review, not replacement faction colors; warm occupied rooms remain visually distinct from cold storage.",
+      "equipment": "insulated archive coat, provenance tabs and conservation staff",
+      "combat_role": "containment and extraction support; avoids forcing awakening",
+      "voice": "Precise conditional phrasing; distinguishes a record from an interpretation.",
+      "relationships": [
+        {
+          "character_id": "character-02-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Nemi Or maintains meltwater gauges and wants their parent's cryostasis consent reviewed. Porters, translators and winter gardeners reveal that a frozen library also depends on food, transport and difficult family decisions."
+        }
+      ],
+      "arc": "Learns to authorize uncertainty with independent review, or retains narrower custody with appeal. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-02-controlled_release",
+          "personal_outcome": "Sera authorizes only consented releases and personally oversees the difficult transfer of the patient who refuses awakening.",
+          "unresolved_cost": "Creates exposure and transfer costs; valid refusal still binds the plan.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-02-audited_seal",
+          "personal_outcome": "Sera keeps custody but accepts outside review of sealed records and a funded appeal route.",
+          "unresolved_cost": "Delays public use and requires funded appeals and ongoing care.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-02-distributed_copies",
+          "personal_outcome": "Sera trains distributed conservators and gives up the Archive's exclusive power to interpret copies.",
+          "unresolved_cost": "Makes recall impossible and increases the burden of provenance and contextual warnings.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-112"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "encounter_title": "The Unthawing Custodian",
+      "encounter_id": "creature-o02-boss",
+      "encounter_identity_status": "PROPOSED title of this living person, not a separate species or mandatory kill target."
+    },
+    {
+      "id": "character-02-civilian",
+      "name": "Nemi Or",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-02",
+      "region_id": "region-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Nemi Or maintains meltwater gauges and wants their parent's cryostasis consent reviewed. Porters, translators and winter gardeners reveal that a frozen library also depends on food, transport and difficult family decisions.",
+      "contradiction": "Wants a parent awake while knowing that the parent may still prefer stasis.",
+      "personal_stake": "Nemi's parent may have valid reasons to remain in stasis; the player investigates consent rather than deciding that awakening is inherently liberation. A village school requests censored agricultural records for an ordinary food problem.",
+      "visual_identity": "A meltwater technician in layered white-and-ash wool, waterproof note sleeves and mismatched repaired boots; a family consent copy is protected inside an ordinary warm inner pocket.",
+      "equipment": [
+        "meltwater notebook",
+        "felt-wrapped sample vials",
+        "family consent copy"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Quiet questions with long pauses; corrects other people when they speak for the patient.",
+      "relationships": [
+        {
+          "character_id": "character-02-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Wants a parent awake while knowing that the parent may still prefer stasis. The regional settlement determines whether the character takes the following distinct next step: Nemi accompanies the consented transfer and accepts that their parent may remain asleep. / Nemi gains access to the consent review while waiting through a slower, safer custody process. / Nemi helps distribute agricultural copies and keeps the parent's private medical record out of the public release.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-02-controlled_release",
+          "personal_outcome": "Nemi accompanies the consented transfer and accepts that their parent may remain asleep.",
+          "unresolved_cost": "Creates exposure and transfer costs; valid refusal still binds the plan.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-02-audited_seal",
+          "personal_outcome": "Nemi gains access to the consent review while waiting through a slower, safer custody process.",
+          "unresolved_cost": "Delays public use and requires funded appeals and ongoing care.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-02-distributed_copies",
+          "personal_outcome": "Nemi helps distribute agricultural copies and keeps the parent's private medical record out of the public release.",
+          "unresolved_cost": "Makes recall impossible and increases the burden of provenance and contextual warnings.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-112"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-03-leader",
+      "name": "Tal Ren",
+      "role": "institutional leader",
+      "oath_id": "oath-03",
+      "faction_id": "faction-03",
+      "region_id": "region-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Keep every settlement able to send and receive essential warnings.",
+      "contradiction": "Tal Ren coordinates the network and wants universal access, but quietly ranks messages by perceived social importance. Their arc turns on accepting accountable rules that can override their own apparently benevolent judgment.",
+      "personal_stake": "Remote crews trust the network promise even when profitable districts dominate demand.",
+      "visual_identity": "Recovered overview traits are navy, copper and ivory. Proposed narrow violet-white charge accents mark active equipment only, and powered states also change geometry or motion so color is never the sole cue.",
+      "equipment": "navy climbing layers, copper routing frame and insulated line tool",
+      "combat_role": "mobile network support with visible grounding commitments",
+      "voice": "Fast concise sentences, then repeats the unanswered question.",
+      "relationships": [
+        {
+          "character_id": "character-03-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Oda Kesh repairs remote grounding cables and has repeatedly lost contracts after reporting dangerous shortcuts. Couriers, weather readers and kiosk attendants supply evidence of both the network's benefits and its uneven reliability."
+        }
+      ],
+      "arc": "Accepts priorities chosen by affected communities or concentrates routing under enforceable limits. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-03-public_routing",
+          "personal_outcome": "Tal remains coordinator under public routing priorities that sometimes overrule their preferred urgent recipient.",
+          "unresolved_cost": "Concentrates a valuable control point requiring independent review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-03-federated_towers",
+          "personal_outcome": "Tal becomes an inter-tower negotiator and can no longer resolve every outage by central command.",
+          "unresolved_cost": "Coordination is slower and unequal maintenance capacity needs shared support.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-03-licensed_service",
+          "personal_outcome": "Tal enforces operators' public duties and must disclose penalties against a politically valuable contractor.",
+          "unresolved_cost": "Enforcement is costly and commercial incentives can undermine low-profit access.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-111"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-03-civilian",
+      "name": "Oda Kesh",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-03",
+      "region_id": "region-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Oda Kesh repairs remote grounding cables and has repeatedly lost contracts after reporting dangerous shortcuts. Couriers, weather readers and kiosk attendants supply evidence of both the network's benefits and its uneven reliability.",
+      "contradiction": "Wants dangerous shortcuts exposed but worries their evidence will cost innocent crews their jobs.",
+      "personal_stake": "Oda's whistleblowing case uncovers both a dangerous contractor and the lost wages of its innocent crews. Another story reunites a family through a paper courier after a perfectly delivered message was misunderstood.",
+      "visual_identity": "A remote lineworker in navy climbing layers with worn copper fittings, an ivory insulating hood and visibly hand-repaired gloves; the harness shows repeated field repairs.",
+      "equipment": [
+        "insulated cable grips",
+        "fuse ledger",
+        "patched climbing harness"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Blunt maintenance facts, no prestige vocabulary; asks who will climb the tower in winter.",
+      "relationships": [
+        {
+          "character_id": "character-03-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Wants dangerous shortcuts exposed but worries their evidence will cost innocent crews their jobs. The regional settlement determines whether the character takes the following distinct next step: Oda returns to linework with whistleblower protection and documents whether remote districts actually receive service. / Oda trains local crews, trading a stable central contract for more travel and shared responsibility. / Oda becomes an independent inspector whose reports can trigger penalties against former employers. Across three optional appearances, Oda competes with the player for an audit commission, disputes how to warn under uncertainty, then becomes either an equal colleague or a respected independent rival. Both outcomes preserve the right to criticize the player.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-03-public_routing",
+          "personal_outcome": "Oda returns to linework with whistleblower protection and documents whether remote districts actually receive service.",
+          "unresolved_cost": "Concentrates a valuable control point requiring independent review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-03-federated_towers",
+          "personal_outcome": "Oda trains local crews, trading a stable central contract for more travel and shared responsibility.",
+          "unresolved_cost": "Coordination is slower and unequal maintenance capacity needs shared support.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-03-licensed_service",
+          "personal_outcome": "Oda becomes an independent inspector whose reports can trigger penalties against former employers.",
+          "unresolved_cost": "Enforcement is costly and commercial incentives can undermine low-profit access.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-111"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "secondary_roles": [
+        "recurring professional rival",
+        "independent routing reviewer"
+      ],
+      "quest_ids": [
+        "quest-rival-oda-trial",
+        "quest-rival-oda-record",
+        "quest-rival-oda-final"
+      ],
+      "service_ids": [
+        "service-independent-routing"
+      ],
+      "ability_references": [
+        {
+          "castable_uid": "atlas/relay",
+          "source_label": "Arc Relay",
+          "source_element": "storm",
+          "source_kind": "ability",
+          "source_cast_shape": "line",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Proposed supervised relay-line demonstration; Oda's audit arguments depend on evidence, not on this castable proving a message true.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        },
+        {
+          "castable_uid": "linear-ext/boost",
+          "source_label": "Electric Boost",
+          "source_element": "storm",
+          "source_kind": "buff",
+          "source_cast_shape": "self",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Proposed personal movement-training reference; no source cooldown, range or traversal permission is expanded.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        }
+      ],
+      "supporting_choice_outcomes": [
+        {
+          "quest_id": "quest-rival-oda-trial",
+          "quest_choice_id": "rival-oda-joint-credit",
+          "personal_outcome": "Oda accepts the player as a competent collaborator while reserving the right to disagree.",
+          "benefit": "Combines expertise and gives the remote crew paid work.",
+          "cost": "The player shares credit and cannot unilaterally promise the repair schedule.",
+          "produced_flags": [
+            "rival-oda-joint-start"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-rival-oda-trial",
+          "quest_choice_id": "rival-oda-parallel-report",
+          "personal_outcome": "Oda remains a professional rival and publicly acknowledges where the player's measurements are sound.",
+          "benefit": "Preserves independent checks and makes differences inspectable.",
+          "cost": "Duplicates some work and forces the commission to compare competing recommendations.",
+          "produced_flags": [
+            "rival-oda-competitive-start"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-rival-oda-record",
+          "quest_choice_id": "rival-oda-early-warning",
+          "personal_outcome": "Oda records a principled disagreement about timing but helps state the evidence accurately.",
+          "benefit": "Lets travelers respond sooner and distinguishes danger from unproven blame.",
+          "cost": "May divert income from a contractor later cleared of responsibility and requires public correction if findings change.",
+          "produced_flags": [
+            "rival-oda-warning-first"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-rival-oda-record",
+          "quest_choice_id": "rival-oda-precautionary-closure",
+          "personal_outcome": "Oda takes responsibility for the extra test and helps secure support for workers losing shifts.",
+          "benefit": "Reduces immediate exposure without naming an unproven culprit.",
+          "cost": "Disrupts trade and creates a longer detour while the independent test runs.",
+          "produced_flags": [
+            "rival-oda-precaution-first"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-rival-oda-final",
+          "quest_choice_id": "rival-oda-shared-office",
+          "personal_outcome": "Oda becomes an equal colleague who can publicly dissent from the player.",
+          "benefit": "Combines knowledge and gives remote crews a durable voice.",
+          "cost": "Requires shared credit, published disagreement and coordination costs.",
+          "produced_flags": [
+            "rival-oda-colleague"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-rival-oda-final",
+          "quest_choice_id": "rival-oda-independent-rival",
+          "personal_outcome": "Oda remains a recurring professional rival and makes corrections available through the public service desk.",
+          "benefit": "Preserves a credible external check on the player's influence.",
+          "cost": "Requires funding parallel work and accepting that Oda may win future commissions.",
+          "produced_flags": [
+            "rival-oda-respected-rival"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "character-04-leader",
+      "name": "Elen Voss",
+      "role": "institutional leader",
+      "oath_id": "oath-04",
+      "faction_id": "faction-04",
+      "region_id": "region-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Preserve food imports and storm protection through reliable shared agreements.",
+      "contradiction": "Elen Voss openly defends harbor relief debts because those revenues fund storm protection and reliable food imports. They may accept cancellation, but only after confronting who will fund the replacement; their personal stake is the crews who trusted their guarantees, not simply a secret family fortune.",
+      "personal_stake": "Harbor crews and relief recipients depend on guarantees they made publicly.",
+      "visual_identity": "Recovered overview traits are navy, pearl shell and aqua glass. Proposed limestone, rope and salt wear support civilian architecture without displacing those anchors; the palette and channel motifs remain distinct from the Observatory's indigo starstone and orbital instruments.",
+      "equipment": "pearl-inlaid harbor coat, flow ledger and boat-hook staff",
+      "combat_role": "channel control and evacuation support",
+      "voice": "Patient contractual language softened by practical tide metaphors.",
+      "relationships": [
+        {
+          "character_id": "character-04-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Kavi Sen tends a public spring whose water is safe but whose access papers are not. Canal cleaners, navigators, midwives and boatwrights challenge the idea that temple officials alone sustain life."
+        }
+      ],
+      "arc": "Replaces inherited debt with sustainable funding or defends capped obligations under public oversight. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-04-debt_cancellation",
+          "personal_outcome": "Elen relinquishes inherited claims after a replacement harbor fund is agreed and answers publicly for the transition.",
+          "unresolved_cost": "Current crews and barriers need a new funding source before cancellation takes effect.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-04-capped_repayment",
+          "personal_outcome": "Elen keeps a reduced revenue stream while submitting old relief accounts to independent audit.",
+          "unresolved_cost": "Some households remain obligated and oversight must prevent disguised fees.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-04-chosen_service",
+          "personal_outcome": "Elen accepts debtor-chosen service and must reject profitable assignments that fail hardship or fair-value review.",
+          "unresolved_cost": "Service can become coercive unless refusal, hardship relief and fair valuation are protected.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-110"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-04-civilian",
+      "name": "Kavi Sen",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-04",
+      "region_id": "region-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Kavi Sen tends a public spring whose water is safe but whose access papers are not. Canal cleaners, navigators, midwives and boatwrights challenge the idea that temple officials alone sustain life.",
+      "contradiction": "Defends universal spring access while fearing an unmanaged rush could exhaust a fragile source.",
+      "personal_stake": "Kavi's spring case tests whether undocumented residents count as beneficiaries. A boatwright asks for help rebuilding a ferry that competes with the capital's lucrative bridge toll, connecting small work to regional politics.",
+      "visual_identity": "A spring keeper in navy work cloth, a pearl-shell access token and an aqua-glass sample case; salt wear belongs on outer garments while drinking-water tools remain clean.",
+      "equipment": [
+        "spring assay cup",
+        "channel key",
+        "public access slate"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Welcoming practical instructions followed by firm questions about the next household in line.",
+      "relationships": [
+        {
+          "character_id": "character-04-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Defends universal spring access while fearing an unmanaged rush could exhaust a fragile source. The regional settlement determines whether the character takes the following distinct next step: Kavi expands spring access while helping households understand the new contribution scheme. / Kavi monitors hardship exemptions and challenges a capped charge that still excludes an undocumented family. / Kavi coordinates freely chosen channel work and refuses an assignment that would turn water access into forced labor.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-04-debt_cancellation",
+          "personal_outcome": "Kavi expands spring access while helping households understand the new contribution scheme.",
+          "unresolved_cost": "Current crews and barriers need a new funding source before cancellation takes effect.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-04-capped_repayment",
+          "personal_outcome": "Kavi monitors hardship exemptions and challenges a capped charge that still excludes an undocumented family.",
+          "unresolved_cost": "Some households remain obligated and oversight must prevent disguised fees.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-04-chosen_service",
+          "personal_outcome": "Kavi coordinates freely chosen channel work and refuses an assignment that would turn water access into forced labor.",
+          "unresolved_cost": "Service can become coercive unless refusal, hardship relief and fair valuation are protected.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-110"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-05-leader",
+      "name": "Deren Korr",
+      "role": "institutional leader",
+      "oath_id": "oath-05",
+      "faction_id": "faction-05",
+      "region_id": "region-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Keep shared foundations reliable across generations.",
+      "contradiction": "Deren Korr is a patient structural arbiter who has prevented catastrophic collapses. They oppose a needed resettlement because admitting a historic design error would undermine the standards that currently keep other towns safe.",
+      "personal_stake": "A flawed inherited standard underlies buildings they cannot all replace at once.",
+      "visual_identity": "Recovered overview traits are taupe stone, amethyst and bronze. Proposed ochre dust and grey structural rock extend the landscape while keeping calibrated crystal localized; this is visibly different from Frost's translucent ice and cold storage.",
+      "equipment": "bronze survey harness, amethyst gauge and wedge hammer",
+      "combat_role": "position-holding defender and structural support",
+      "voice": "Slow exact statements; revises a claim when shown a measurement.",
+      "relationships": [
+        {
+          "character_id": "character-05-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Pella Ust is a quarry surveyor mapping a fault beneath their childhood hall. Masons, lift operators, miners and cave growers give distinct accounts of the difference between honoring ancestors and repeating their mistakes."
+        }
+      ],
+      "arc": "Admits a standard needs revision while organizing staged repairs rather than abandoning confidence wholesale. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-05-reinforce_district",
+          "personal_outcome": "Deren signs a public statement of residual risk and organizes inspections of the reinforced old hall.",
+          "unresolved_cost": "Requires substantial materials and leaves residual geological risk under review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-05-relocate_district",
+          "personal_outcome": "Deren leads the relocation they resisted and preserves the old hall's records without pretending its loss is painless.",
+          "unresolved_cost": "Disrupts belonging and requires compensation, accessible transport and new services.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-05-distributed_terraces",
+          "personal_outcome": "Deren becomes a standards adviser to several terraces rather than the sole arbiter of one capital.",
+          "unresolved_cost": "Raises coordination and maintenance costs while changing the capital's civic identity.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-109"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-05-civilian",
+      "name": "Pella Ust",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-05",
+      "region_id": "region-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Pella Ust is a quarry surveyor mapping a fault beneath their childhood hall. Masons, lift operators, miners and cave growers give distinct accounts of the difference between honoring ancestors and repeating their mistakes.",
+      "contradiction": "Trusts their new measurements but fears becoming the person blamed for a panic if uncertainty is misunderstood.",
+      "personal_stake": "Pella must decide how to present alarming evidence without overstating uncertain measurements. A cave farmer asks players to protect ventilation from a lucrative lift expansion, making invisible infrastructure emotionally concrete.",
+      "visual_identity": "A quarry surveyor in taupe dust cloth, bronze measuring harness and a small amethyst gauge; chalk marks and replaceable knee guards communicate field work rather than ceremonial mining armor.",
+      "equipment": [
+        "bronze plumb frame",
+        "crystal stress gauge",
+        "annotated canyon map"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Careful distinctions between measured, inferred and unknown; impatient with decorative certainty.",
+      "relationships": [
+        {
+          "character_id": "character-05-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Trusts their new measurements but fears becoming the person blamed for a panic if uncertainty is misunderstood. The regional settlement determines whether the character takes the following distinct next step: Pella maintains the old district's gauges and must explain residual uncertainty without claiming the repairs made it invulnerable. / Pella surveys the new site and helps move the childhood hall's community, including people angry about leaving. / Pella trains terrace survey teams and accepts that no single instrument or expert should settle every dispute.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-05-reinforce_district",
+          "personal_outcome": "Pella maintains the old district's gauges and must explain residual uncertainty without claiming the repairs made it invulnerable.",
+          "unresolved_cost": "Requires substantial materials and leaves residual geological risk under review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-05-relocate_district",
+          "personal_outcome": "Pella surveys the new site and helps move the childhood hall's community, including people angry about leaving.",
+          "unresolved_cost": "Disrupts belonging and requires compensation, accessible transport and new services.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-05-distributed_terraces",
+          "personal_outcome": "Pella trains terrace survey teams and accepts that no single instrument or expert should settle every dispute.",
+          "unresolved_cost": "Raises coordination and maintenance costs while changing the capital's civic identity.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-109"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-06-leader",
+      "name": "Lio Senn",
+      "role": "institutional leader",
+      "oath_id": "oath-06",
+      "faction_id": "faction-06",
+      "region_id": "region-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Protect both free expression and effective emergency coordination.",
+      "contradiction": "Lio Senn values public improvisation and has already ceded authority in ordinary performances, but insists that emergency coordination needs a final voice. Their conflict with the player is a defensible limit question: who decides when immediate danger ends, and who accepts responsibility if a plural command fails?",
+      "personal_stake": "A crowd may be harmed if an unclear command fails during a real crosswind.",
+      "visual_identity": "Recovered references show cream, carved wood, red cord and aged metal. New pale stone and weathered sail accents are PROPOSED additions, kept subordinate until approved alongside the existing silhouette language.",
+      "equipment": "carved-wood conductor frame, red cord and accessible signal cards",
+      "combat_role": "ensemble coordinator; conflict can resolve through staged negotiation",
+      "voice": "Invites response in normal conversation, becomes sharply directive under danger.",
+      "relationships": [
+        {
+          "character_id": "character-06-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Amri Fell repairs acoustic panels and communicates primarily through sign and written notation. Their expertise exposes the error of equating hearing, verbal fluency or public performance with belonging to the Resonance."
+        }
+      ],
+      "arc": "Accepts an independently declared emergency end condition or shares command with explicit responsibility. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-06-rotating_conductors",
+          "personal_outcome": "Lio trains rotating conductors and accepts that another person may end their emergency command.",
+          "unresolved_cost": "Rotation can reduce continuity and needs training and independent end-condition review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-06-independent_stages",
+          "personal_outcome": "Lio keeps a public warning role while independent stages perform works they strongly dislike.",
+          "unresolved_cost": "Coordination during real danger becomes more demanding.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-06-limited_emergency",
+          "personal_outcome": "Lio retains emergency authority but must defend each extension before a review body with access to the full record.",
+          "unresolved_cost": "Concentrated discretion remains risky and must be challengeable after the event.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-108"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "ensemble_encounter_id": "creature-o06-boss",
+      "ensemble_role": "Leads the willing Perfect Chorus ensemble; individual members retain disagreement and consent."
+    },
+    {
+      "id": "character-06-civilian",
+      "name": "Amri Fell",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-06",
+      "region_id": "region-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Amri Fell repairs acoustic panels and communicates primarily through sign and written notation. Their expertise exposes the error of equating hearing, verbal fluency or public performance with belonging to the Resonance.",
+      "contradiction": "Wants access beyond hearing and speech but dislikes being treated as a symbol instead of an expert craftsperson.",
+      "personal_stake": "Amri challenges a licensing test that assumes hearing and voice, while a celebrated singer asks to retire without forfeiting housing. Both stories distinguish a living culture from compulsory artistic identity.",
+      "visual_identity": "An acoustic-panel craftsperson in cream work layers, carved-wood wrist supports and red cord tool loops; unobstructed hands and face preserve signed communication and facial expression.",
+      "equipment": [
+        "panel-tuning tools",
+        "visual signal cards",
+        "carved resonance frame"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Primary signed and written expression, concise technical notation; spoken performance never assumed.",
+      "relationships": [
+        {
+          "character_id": "character-06-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Wants access beyond hearing and speech but dislikes being treated as a symbol instead of an expert craftsperson. The regional settlement determines whether the character takes the following distinct next step: Amri designs a conductor qualification that accepts signed and visual expertise without making them its token representative. / Amri builds accessible panels for independent stages, including work they do not personally enjoy. / Amri gains authority to audit emergency warnings and can challenge Lio when a command excludes residents.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-06-rotating_conductors",
+          "personal_outcome": "Amri designs a conductor qualification that accepts signed and visual expertise without making them its token representative.",
+          "unresolved_cost": "Rotation can reduce continuity and needs training and independent end-condition review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-06-independent_stages",
+          "personal_outcome": "Amri builds accessible panels for independent stages, including work they do not personally enjoy.",
+          "unresolved_cost": "Coordination during real danger becomes more demanding.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-06-limited_emergency",
+          "personal_outcome": "Amri gains authority to audit emergency warnings and can challenge Lio when a command excludes residents.",
+          "unresolved_cost": "Concentrated discretion remains risky and must be challengeable after the event.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-108"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-07-leader",
+      "name": "Yara Moss",
+      "role": "institutional leader",
+      "oath_id": "oath-07",
+      "faction_id": "faction-07",
+      "region_id": "region-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Ensure no household is abandoned by ecological recovery.",
+      "contradiction": "Yara Moss protects devastated land and believes no one should be abandoned. Their flaw is assuming compulsory integration is preferable to freely chosen risk, especially when isolated families refuse the common root network.",
+      "personal_stake": "Families dependent on the common root cannot afford a romantic overnight separation.",
+      "visual_identity": "Recovered bark, moss and amber sap anchor the palette. New linen, clay and fruit colors identify civilian spaces, while threat states change structure and motion rather than simply turning all vegetation red.",
+      "equipment": "bark-laminate caretaker layers, seed records and pruning hook",
+      "combat_role": "support and growth management with a strong rescue priority",
+      "voice": "Warm practical questions that sometimes assume agreement too quickly.",
+      "relationships": [
+        {
+          "character_id": "character-07-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Tovin Hale breeds resilient food plants and wants to preserve an ungrafted family variety with lower yield. Care workers, animal handlers and independent growers show that sanctuary membership is a negotiation, not a single pastoral personality."
+        }
+      ],
+      "arc": "Learns to support voluntary exit while maintaining care for those choosing interdependence. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-07-voluntary_commons",
+          "personal_outcome": "Yara funds care for households choosing to disconnect and learns that refusal need not mean abandonment.",
+          "unresolved_cost": "Disconnected households need costly alternatives and transition support.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-07-audited_network",
+          "personal_outcome": "Yara remains network steward with consent renewals that can block a biologically efficient expansion.",
+          "unresolved_cost": "Autonomy depends on meaningful oversight and enforceable consent renewal.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-07-independent_groves",
+          "personal_outcome": "Yara coordinates mutual aid among groves that disagree with their preferred cultivation methods.",
+          "unresolved_cost": "Fragmentation increases coordination costs and cannot abandon households lacking resources.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-107"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-07-civilian",
+      "name": "Tovin Hale",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-07",
+      "region_id": "region-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Tovin Hale breeds resilient food plants and wants to preserve an ungrafted family variety with lower yield. Care workers, animal handlers and independent growers show that sanctuary membership is a negotiation, not a single pastoral personality.",
+      "contradiction": "Protects a heritage crop whose cultural value is real even when neighbors urgently need higher yields.",
+      "personal_stake": "Tovin's heritage seed story asks whether cultural value justifies lower yield during scarcity. Another follows a sanctuary animal that cannot safely return to the wild, complicating the assumption that release always equals freedom.",
+      "visual_identity": "A seed breeder in bark-brown field clothes, moss-toned weather layers and amber-sap repair patches; labeled seed pockets and ordinary pruning gloves outweigh ornamental foliage.",
+      "equipment": [
+        "seed envelopes",
+        "grafting knife",
+        "family planting journal"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Concrete sensory descriptions of plants; skeptical when the word efficient ends a conversation.",
+      "relationships": [
+        {
+          "character_id": "character-07-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Protects a heritage crop whose cultural value is real even when neighbors urgently need higher yields. The regional settlement determines whether the character takes the following distinct next step: Tovin keeps the heritage crop in an independent plot while contributing seed and food to voluntary relief. / Tovin negotiates a protected heritage allocation inside the common network and accepts transparent yield tradeoffs. / Tovin exchanges resilient seed among independent groves, preserving variety while helping a low-yield neighbor.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-07-voluntary_commons",
+          "personal_outcome": "Tovin keeps the heritage crop in an independent plot while contributing seed and food to voluntary relief.",
+          "unresolved_cost": "Disconnected households need costly alternatives and transition support.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-07-audited_network",
+          "personal_outcome": "Tovin negotiates a protected heritage allocation inside the common network and accepts transparent yield tradeoffs.",
+          "unresolved_cost": "Autonomy depends on meaningful oversight and enforceable consent renewal.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-07-independent_groves",
+          "personal_outcome": "Tovin exchanges resilient seed among independent groves, preserving variety while helping a low-yield neighbor.",
+          "unresolved_cost": "Fragmentation increases coordination costs and cannot abandon households lacking resources.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-107"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-08-leader",
+      "name": "Neris Vale",
+      "role": "institutional leader",
+      "oath_id": "oath-08",
+      "faction_id": "faction-08",
+      "region_id": "region-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Fund trustworthy research and keep remedies available.",
+      "contradiction": "Neris Vale advocates open research while maintaining exclusive antidote licenses to fund safety work. They must confront whether genuine public benefit can justify keeping communities dependent on one company's remedy.",
+      "personal_stake": "Laboratories and cleanup workers lose wages if licensing revenue disappears suddenly.",
+      "visual_identity": "Recovered burgundy, brass and green glass remain the reference anchor. Proposed white sanitation marks and dark wetland tones clarify function; they cannot silently replace approved character materials or equipment silhouettes.",
+      "equipment": "burgundy protective coat, brass assay case and sealed focus staff",
+      "combat_role": "bounded area management and treatment support",
+      "voice": "States confidence levels and asks who checked the sample.",
+      "relationships": [
+        {
+          "character_id": "character-08-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Bram Ilex operates a neighborhood assay booth and is losing suppliers after reporting contamination. Glassworkers, cleaners and wetland keepers reveal who handles chemical risk before celebrated researchers receive credit."
+        }
+      ],
+      "arc": "Accepts independent testing and sustainable open access, or defends a regulated license with real accountability. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-08-public_licensing",
+          "personal_outcome": "Neris releases essential formulas and negotiates a transparent testing budget that cannot rely on scarcity rents.",
+          "unresolved_cost": "Requires replacement funding for testing, cleanup and reliable production.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-08-cooperative_labs",
+          "personal_outcome": "Neris becomes a technical member of the laboratory cooperative and loses exclusive control of its research agenda.",
+          "unresolved_cost": "Transition can delay research and needs expertise as well as participation.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-08-regulated_research",
+          "personal_outcome": "Neris retains a licensed laboratory but must accept adverse independent results and remedy-access conditions.",
+          "unresolved_cost": "Regulatory capture remains possible and public remedies need enforceable access terms.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-106"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-08-civilian",
+      "name": "Bram Ilex",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-08",
+      "region_id": "region-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Bram Ilex operates a neighborhood assay booth and is losing suppliers after reporting contamination. Glassworkers, cleaners and wetland keepers reveal who handles chemical risk before celebrated researchers receive credit.",
+      "contradiction": "Demands independent testing while struggling to keep an assay booth solvent without the suppliers being investigated.",
+      "personal_stake": "Bram's assay booth needs credible evidence and a sustainable livelihood, not a heroic accusation alone. Another story follows a cleaner whose practical observations expose a flaw in an acclaimed laboratory model.",
+      "visual_identity": "A neighborhood tester in a burgundy washable apron over plain work clothes, with brass sample seals and green-glass vessels carried inside a closed protective case.",
+      "equipment": [
+        "portable assay case",
+        "brass sample seals",
+        "wash cloth and record slate"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Plain-language confidence statements and direct requests to repeat the test.",
+      "relationships": [
+        {
+          "character_id": "character-08-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Demands independent testing while struggling to keep an assay booth solvent without the suppliers being investigated. The regional settlement determines whether the character takes the following distinct next step: Bram's booth joins the publicly funded testing network but remains free to publish inconvenient findings. / Bram gains a cooperative vote and must balance local testing demand against other workers' research priorities. / Bram remains independent under a guaranteed sample-access rule and continues scrutinizing Neris's laboratory.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-08-public_licensing",
+          "personal_outcome": "Bram's booth joins the publicly funded testing network but remains free to publish inconvenient findings.",
+          "unresolved_cost": "Requires replacement funding for testing, cleanup and reliable production.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-08-cooperative_labs",
+          "personal_outcome": "Bram gains a cooperative vote and must balance local testing demand against other workers' research priorities.",
+          "unresolved_cost": "Transition can delay research and needs expertise as well as participation.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-08-regulated_research",
+          "personal_outcome": "Bram remains independent under a guaranteed sample-access rule and continues scrutinizing Neris's laboratory.",
+          "unresolved_cost": "Regulatory capture remains possible and public remedies need enforceable access terms.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-106"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-09-leader",
+      "name": "Helia Mar",
+      "role": "institutional leader",
+      "oath_id": "oath-09",
+      "faction_id": "faction-09",
+      "region_id": "region-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Protect the public from another Fracture without surrendering the city to fear.",
+      "contradiction": "Helia Mar has defended refugees against powerful enemies and now seeks custody of the fragment for public safety. Their contradiction is offering generous protection while assuming a protected person owes obedience in return.",
+      "personal_stake": "Refuge residents may suffer if the fragment is seized or mishandled in the plaza.",
+      "visual_identity": "Recovered ivory, gold and lotus language anchors the faction. Proposed muted cloth and worn limestone distinguish daily life from ceremony, with brightness controlled to prevent washed-out combat silhouettes.",
+      "equipment": "ivory ward coat, lotus shield and public petition seal",
+      "combat_role": "defensive ward commander, can ally without holding custody",
+      "voice": "Clear public promises, then uncomfortable silence when asked who may refuse.",
+      "relationships": [
+        {
+          "character_id": "character-09-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Sorin Kes is a plaza medic who witnesses the Archivist's death and refuses to let political investigators delay care. Cleaners, scribes, shelter cooks and petitioners establish the plaza as lived civic space before it becomes an icon."
+        }
+      ],
+      "arc": "Separates protection from ownership and accepts appeal, or serves a constrained emergency charter. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-09-independent_appeal",
+          "personal_outcome": "Helia accepts an appeal that overturns one of their own protective orders and keeps the affected family in sanctuary.",
+          "unresolved_cost": "Slower decisions can expose real risks and require emergency safeguards.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-09-shared_sanctuary",
+          "personal_outcome": "Helia shares sanctuary decisions with residents who may prioritize risks differently from the wardens.",
+          "unresolved_cost": "Competing needs require sustained coordination and conflict resolution.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-09-limited_bench",
+          "personal_outcome": "Helia retains a narrow emergency bench while publicly surrendering custody claims over the player's fragment.",
+          "unresolved_cost": "Discretion remains concentrated and needs sunset review and protected dissent.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-105"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "alliance_quest_ids": [
+        "quest-alliance-daybreak-offer",
+        "quest-alliance-daybreak-warning",
+        "quest-alliance-daybreak-crossing",
+        "quest-main-06",
+        "quest-alliance-daybreak-recovery"
+      ],
+      "alliance_role": "Optional sponsor who can honor or breach a specific custody promise under emergency pressure."
+    },
+    {
+      "id": "character-09-civilian",
+      "name": "Sorin Kes",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-09",
+      "region_id": "region-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Sorin Kes is a plaza medic who witnesses the Archivist's death and refuses to let political investigators delay care. Cleaners, scribes, shelter cooks and petitioners establish the plaza as lived civic space before it becomes an icon.",
+      "contradiction": "Protects frightened witnesses but knows that withholding every observation may let a dangerous actor escape scrutiny.",
+      "personal_stake": "Sorin seeks testimony from frightened bystanders without turning a clinic into an interrogation room. Another story helps a former warden make restitution while respecting victims who do not wish to forgive them.",
+      "visual_identity": "A plaza medic in practical grey cloth and a short ivory overlayer with a small gold lotus care mark; sleeves roll clear of work and the face remains unobstructed.",
+      "equipment": [
+        "clinic satchel",
+        "triage tokens",
+        "consented witness notes"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Calm short care instructions; refuses to answer a political question while a patient needs help.",
+      "relationships": [
+        {
+          "character_id": "character-09-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Protects frightened witnesses but knows that withholding every observation may let a dangerous actor escape scrutiny. The regional settlement determines whether the character takes the following distinct next step: Sorin develops a consented witness process that separates clinic care from compulsory interrogation. / Sorin joins resident care planning and must negotiate fair allocation when every request cannot be met at once. / Sorin keeps an independent clinic voice and documents whether the limited bench respects protected care.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-09-independent_appeal",
+          "personal_outcome": "Sorin develops a consented witness process that separates clinic care from compulsory interrogation.",
+          "unresolved_cost": "Slower decisions can expose real risks and require emergency safeguards.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-09-shared_sanctuary",
+          "personal_outcome": "Sorin joins resident care planning and must negotiate fair allocation when every request cannot be met at once.",
+          "unresolved_cost": "Competing needs require sustained coordination and conflict resolution.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-09-limited_bench",
+          "personal_outcome": "Sorin keeps an independent clinic voice and documents whether the limited bench respects protected care.",
+          "unresolved_cost": "Discretion remains concentrated and needs sunset review and protected dissent.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-105"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "alliance_quest_ids": [
+        "quest-alliance-daybreak-offer",
+        "quest-alliance-daybreak-warning",
+        "quest-alliance-daybreak-crossing",
+        "quest-main-06",
+        "quest-alliance-daybreak-recovery"
+      ],
+      "alliance_role": "Independent witness and mediator who refuses to make care conditional on custody."
+    },
+    {
+      "id": "character-10-leader",
+      "name": "Iria Deyn",
+      "role": "institutional leader",
+      "oath_id": "oath-10",
+      "faction_id": "faction-10",
+      "region_id": "region-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Produce knowledge reliable enough to justify consequential action.",
+      "contradiction": "Iria Deyn publishes their model's uncertainty and opposes rushing an experiment, while political sponsors demand a decisive forecast. Their flaw is withdrawing into methodological caution when a provisional decision is unavoidable; the player must help them act responsibly without pretending uncertainty can be eliminated.",
+      "personal_stake": "Sponsors demand certainty while platform residents need a decision now.",
+      "visual_identity": "Recovered indigo, starstone, orbital rings and aged metal anchor visual identity. Proposed matte sighting surfaces and pale calibration marks support readability; the existing reference palette takes precedence pending explicit art review.",
+      "equipment": "indigo observation mantle, starstone balance and calibration staff",
+      "combat_role": "gravity support and safe-position control",
+      "voice": "Careful qualifications, unexpectedly direct when a measured limit is crossed.",
+      "relationships": [
+        {
+          "character_id": "character-10-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Cal Ro maintains ballast systems and knows where the celebrated models fail in daily use. Navigators, instrument polishers and displaced platform residents provide evidence that technical expertise has several legitimate forms."
+        }
+      ],
+      "arc": "Moves from protective hesitation to transparent provisional action, accepting responsibility without claiming certainty. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-10-independent_review",
+          "personal_outcome": "Iria acts on a provisional forecast only after independent reviewers state the remaining risks and compensation duties.",
+          "unresolved_cost": "Slows some research and requires decisions even when evidence remains incomplete.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-10-distributed_research",
+          "personal_outcome": "Iria coordinates competing observation teams and must publish disagreements rather than wait for one perfect model.",
+          "unresolved_cost": "Data integration and coordinated emergency action become harder.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-10-sunset_prediction",
+          "personal_outcome": "Iria accepts temporary prediction authority with a fixed expiry and responsibility for decisions made under uncertainty.",
+          "unresolved_cost": "Power and uncertainty concentrate; public limits, compensation and expiry are essential.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-104"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-10-civilian",
+      "name": "Cal Ro",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-10",
+      "region_id": "region-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Cal Ro maintains ballast systems and knows where the celebrated models fail in daily use. Navigators, instrument polishers and displaced platform residents provide evidence that technical expertise has several legitimate forms.",
+      "contradiction": "Has strong practical evidence but may overgeneralize local failures when dismissing useful large-scale models.",
+      "personal_stake": "Cal's maintenance logs contradict a prestigious publication, and the player must protect both evidence and workers' livelihoods. Another story helps a navigator admit uncertainty before a voyage instead of selling false confidence.",
+      "visual_identity": "A ballast mechanic in an indigo utility coat with aged-metal fasteners, pale load marks and a compact starstone plumb tool; heavy boots show platform wear.",
+      "equipment": [
+        "ballast key",
+        "wear log",
+        "portable plumb instrument"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Uses weight, wear and repair examples; readily admits when an instrument shows them wrong.",
+      "relationships": [
+        {
+          "character_id": "character-10-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Has strong practical evidence but may overgeneralize local failures when dismissing useful large-scale models. The regional settlement determines whether the character takes the following distinct next step: Cal's wear logs become required review evidence, while Cal also learns where the larger model improves local judgment. / Cal trains maintenance observers at several platforms and shares authorship with theoretical researchers. / Cal receives a protected stop-work channel and uses it when temporary authority exceeds its stated safety limits.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-10-independent_review",
+          "personal_outcome": "Cal's wear logs become required review evidence, while Cal also learns where the larger model improves local judgment.",
+          "unresolved_cost": "Slows some research and requires decisions even when evidence remains incomplete.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-10-distributed_research",
+          "personal_outcome": "Cal trains maintenance observers at several platforms and shares authorship with theoretical researchers.",
+          "unresolved_cost": "Data integration and coordinated emergency action become harder.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-10-sunset_prediction",
+          "personal_outcome": "Cal receives a protected stop-work channel and uses it when temporary authority exceeds its stated safety limits.",
+          "unresolved_cost": "Power and uncertainty concentrate; public limits, compensation and expiry are essential.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-104"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-11-leader",
+      "name": "Veya Noll",
+      "role": "institutional leader",
+      "oath_id": "oath-11",
+      "faction_id": "faction-11",
+      "region_id": "region-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Keep refuge possible without making secrecy a shelter for impunity.",
+      "contradiction": "Veya Noll has saved persecuted people by making them untraceable. They also concealed an ally's wrongdoing to protect the refuge network, forcing a choice between exposing vulnerable routes and allowing impunity.",
+      "personal_stake": "Exposing one harmful ally could reveal routes used by innocent people.",
+      "visual_identity": "Recovered black, grey, pale silver and red tassels remain the anchor. Proposed warm refuge interiors prevent the entire culture from reading as hostile, while contrast limits preserve silhouette clarity in low-light scenes.",
+      "equipment": "grey layered court dress, pale-silver shutter lamp and witness knots",
+      "combat_role": "escort and concealment support; limited direct confrontation",
+      "voice": "Speaks plainly about consequences, avoids naming protected people without purpose.",
+      "relationships": [
+        {
+          "character_id": "character-11-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Rell An ferries people across a ford whose legal existence is disputed and keeps practical records in ordinary objects. Refuge hosts, restorers and clerks show that privacy is sustained by work and trust, not merely stylish disappearance."
+        }
+      ],
+      "arc": "Builds independent sealed oversight or accepts targeted public accountability with protected identities. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-11-sealed_oversight",
+          "personal_outcome": "Veya submits a protected ally's case to sealed independent review and cannot choose the reviewers alone.",
+          "unresolved_cost": "Oversight remains hard for the public to inspect and must earn trust.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-11-distributed_witnesses",
+          "personal_outcome": "Veya divides witness custody across trusted parties, accepting a greater risk of leaks to reduce unilateral erasure.",
+          "unresolved_cost": "More custodians increase leakage risk and coordination burdens.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-11-protected_judgments",
+          "personal_outcome": "Veya publishes a redacted judgment against the ally and helps protect people whose routes might be inferred.",
+          "unresolved_cost": "Redaction can still reveal patterns and requires careful consent and risk review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-103"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-11-civilian",
+      "name": "Rell An",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-11",
+      "region_id": "region-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Rell An ferries people across a ford whose legal existence is disputed and keeps practical records in ordinary objects. Refuge hosts, restorers and clerks show that privacy is sustained by work and trust, not merely stylish disappearance.",
+      "contradiction": "Protects passengers through minimal records but needs enough documentation to defend the ford as a public service.",
+      "personal_stake": "Rell's disputed ford case asks how to prove a service exists without exposing its passengers. Another follows a person who voluntarily changed identity and does not want their former life restored for someone else's closure.",
+      "visual_identity": "A ferry operator in weathered grey layers, a black waterproof shoulder cape and a pale-silver shutter lamp; a red witness tie is removable and never exposes passenger identities.",
+      "equipment": [
+        "ferry hook",
+        "waterproof token pouch",
+        "redacted service ledger"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Tells what a record is for before deciding whether to share it.",
+      "relationships": [
+        {
+          "character_id": "character-11-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Protects passengers through minimal records but needs enough documentation to defend the ford as a public service. The regional settlement determines whether the character takes the following distinct next step: Rell submits minimal ford-service records to a sealed reviewer without exposing passenger identities publicly. / Rell distributes service tokens among witnesses and must coordinate correction when records disagree. / Rell wins public recognition of the ford using redacted evidence and helps passengers manage residual exposure risk.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-11-sealed_oversight",
+          "personal_outcome": "Rell submits minimal ford-service records to a sealed reviewer without exposing passenger identities publicly.",
+          "unresolved_cost": "Oversight remains hard for the public to inspect and must earn trust.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-11-distributed_witnesses",
+          "personal_outcome": "Rell distributes service tokens among witnesses and must coordinate correction when records disagree.",
+          "unresolved_cost": "More custodians increase leakage risk and coordination burdens.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-11-protected_judgments",
+          "personal_outcome": "Rell wins public recognition of the ford using redacted evidence and helps passengers manage residual exposure risk.",
+          "unresolved_cost": "Redaction can still reveal patterns and requires careful consent and risk review.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-103"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "alliance_quest_ids": [
+        "quest-alliance-daybreak-offer",
+        "quest-alliance-daybreak-warning",
+        "quest-alliance-daybreak-crossing",
+        "quest-main-06",
+        "quest-alliance-daybreak-recovery"
+      ],
+      "alliance_role": "Protected-route operator whose urgent witness transport creates a genuine competing duty."
+    },
+    {
+      "id": "character-12-leader",
+      "name": "Adra Kest",
+      "role": "institutional leader",
+      "oath_id": "oath-12",
+      "faction_id": "faction-12",
+      "region_id": "region-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Keep freely undertaken care promises meaningful.",
+      "contradiction": "Adra Kest has personally borne heavy costs to protect their stronghold. They expect others to accept comparable sacrifice and must confront the difference between modeling commitment and coercing people through moral debt.",
+      "personal_stake": "They personally bear costs that others may abandon during reform.",
+      "visual_identity": "Recovered crimson, burnished ivory-gold and glass gems anchor the palette. Proposed warm wood and pale care linens distinguish refuge from battlefield; the faction is not a monochrome red horror biome.",
+      "equipment": "crimson civic armor, removable pact tokens and guarded spear",
+      "combat_role": "nonlethal pact champion with explicit recovery limits",
+      "voice": "Direct and personal; asks who will care for the dependent person tomorrow.",
+      "relationships": [
+        {
+          "character_id": "character-12-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Oren Sol maintains a public care hall and is bound to an inherited service term they did not choose. Healers, genealogists and unrelated household members show that kinship can be chosen, legal, biological or communal."
+        }
+      ],
+      "arc": "Distinguishes consented obligations from inherited coercion and negotiates replacement care rather than demanding equal suffering. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-12-renewable_pacts",
+          "personal_outcome": "Adra renews their own care pact voluntarily and accepts that others may refuse, requiring a replacement rota.",
+          "unresolved_cost": "Contributors may leave; dependents need a funded continuity plan.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-12-public_care",
+          "personal_outcome": "Adra contributes to the public care pool and relinquishes inherited authority over its beneficiaries.",
+          "unresolved_cost": "Requires broad contribution and accountable administration beyond family networks.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-12-mixed_kin_charter",
+          "personal_outcome": "Adra retains a kin leadership role but must honor an exit judgment against their preferred interpretation.",
+          "unresolved_cost": "Powerful households may resist enforcement and exit costs must not become disguised coercion.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-102"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "encounter_title": "The First Creditor",
+      "encounter_id": "creature-o12-boss",
+      "encounter_identity_status": "PROPOSED title of this living person, not a separate species or mandatory kill target."
+    },
+    {
+      "id": "character-12-civilian",
+      "name": "Oren Sol",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-12",
+      "region_id": "region-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Oren Sol maintains a public care hall and is bound to an inherited service term they did not choose. Healers, genealogists and unrelated household members show that kinship can be chosen, legal, biological or communal.",
+      "contradiction": "Wants release from inherited duty and also wants others to remain long enough that the care hall does not collapse.",
+      "personal_stake": "Oren seeks release while insisting that the care hall remain open. Another story follows an adopted household member excluded from memorial rites, asking whether shared life can outweigh inherited definitions of belonging.",
+      "visual_identity": "A care-hall organizer in clean crimson and pale linen, with a removable ivory-gold service token; clothing permits lifting and long work shifts without ritual armor.",
+      "equipment": [
+        "care rota",
+        "removable service token",
+        "clean linen bundle"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Patient but unsentimental; names tomorrow's actual care tasks instead of invoking abstract honor.",
+      "relationships": [
+        {
+          "character_id": "character-12-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Wants release from inherited duty and also wants others to remain long enough that the care hall does not collapse. The regional settlement determines whether the character takes the following distinct next step: Oren leaves the inherited term after helping recruit a voluntary replacement team, then returns only by choice. / Oren becomes a paid public care organizer with hours and exit rights independent of ancestry. / Oren tests the charter's exit process and remains a critic when another household tries to disguise coercion as fees.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-12-renewable_pacts",
+          "personal_outcome": "Oren leaves the inherited term after helping recruit a voluntary replacement team, then returns only by choice.",
+          "unresolved_cost": "Contributors may leave; dependents need a funded continuity plan.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-12-public_care",
+          "personal_outcome": "Oren becomes a paid public care organizer with hours and exit rights independent of ancestry.",
+          "unresolved_cost": "Requires broad contribution and accountable administration beyond family networks.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-12-mixed_kin_charter",
+          "personal_outcome": "Oren tests the charter's exit process and remains a critic when another household tries to disguise coercion as fees.",
+          "unresolved_cost": "Powerful households may resist enforcement and exit costs must not become disguised coercion.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-102"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-13-leader",
+      "name": "Mirren Fane",
+      "role": "institutional leader",
+      "oath_id": "oath-13",
+      "faction_id": "faction-13",
+      "region_id": "region-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Use shared imagination to hold a divided city together.",
+      "contradiction": "Mirren Fane is an acclaimed director who uses illusion to keep a divided city functioning. They conceal failing infrastructure behind a comforting civic spectacle and must choose between preserving hope and allowing people to act on truth.",
+      "personal_stake": "Artists and shelter workers depend on patronage tied to a comforting public story.",
+      "visual_identity": "Recovered navy, ivory, faceted mirrors and gold anchor the art. Proposed chalk and raw timber distinguish working spaces; visual richness comes from arrangement and transformation, not a random rainbow of magical surfaces.",
+      "equipment": "navy and ivory layered coat, reversible mask and mirror-backed staff",
+      "combat_role": "decoy and stage-control specialist with plain-surface tells",
+      "voice": "Playful alternatives followed by exact questions about audience consent.",
+      "relationships": [
+        {
+          "character_id": "character-13-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Seli Dorn runs a plain-surface market stall and can spot practical discrepancies others overlook. Stagehands, tailors, guides and accessibility workers reveal the labor behind apparent impossibility."
+        }
+      ],
+      "arc": "Accepts a less profitable honest public story or shares commissioning authority with affected audiences. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-13-audience_councils",
+          "personal_outcome": "Mirren stages a public work commissioned by residents whose requested ending contradicts their own artistic view.",
+          "unresolved_cost": "Consensus may constrain challenging art and requires minority protections.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-13-disclosure_inspectors",
+          "personal_outcome": "Mirren preserves creative control but discloses the shelter-funding fiction and submits consequential illusions to inspection.",
+          "unresolved_cost": "Inspection can become conservative gatekeeping if its scope expands.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-13-public_commissions",
+          "personal_outcome": "Mirren replaces private myth-based patronage with public commissions and faces a smaller, openly debated budget.",
+          "unresolved_cost": "Requires ongoing public support and protection from political patronage.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-100"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "encounter_title": "The Audience of One",
+      "encounter_id": "creature-o13-boss",
+      "encounter_identity_status": "PROPOSED title of this living person, not a separate species or mandatory kill target."
+    },
+    {
+      "id": "character-13-civilian",
+      "name": "Seli Dorn",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-13",
+      "region_id": "region-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Seli Dorn runs a plain-surface market stall and can spot practical discrepancies others overlook. Stagehands, tailors, guides and accessibility workers reveal the labor behind apparent impossibility.",
+      "contradiction": "Insists on honest storefronts but depends on the tourist economy built partly by the spectacle they criticize.",
+      "personal_stake": "Seli's market disputes a beautiful false storefront that diverted customers without consent. Another story helps a performer retire a beloved persona without being forced to live forever as the audience's preferred version of them.",
+      "visual_identity": "A market inspector in plain navy tailoring with an ivory reversible apron and small gold measuring fittings; mirror ornaments can be covered during plain-surface work.",
+      "equipment": [
+        "plain-surface inspection card",
+        "tailor's measure",
+        "market ledger"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Direct prices and concrete comparisons; enjoys art when its terms are clear.",
+      "relationships": [
+        {
+          "character_id": "character-13-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Insists on honest storefronts but depends on the tourist economy built partly by the spectacle they criticize. The regional settlement determines whether the character takes the following distinct next step: Seli represents small traders on an audience council and resists using that seat to suppress difficult art. / Seli becomes a plain-surface inspector with a narrow mandate and cannot demand that every storefront look conventional. / Seli helps verify public commissions while accepting that honest art may bring fewer tourist customers initially.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-13-audience_councils",
+          "personal_outcome": "Seli represents small traders on an audience council and resists using that seat to suppress difficult art.",
+          "unresolved_cost": "Consensus may constrain challenging art and requires minority protections.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-13-disclosure_inspectors",
+          "personal_outcome": "Seli becomes a plain-surface inspector with a narrow mandate and cannot demand that every storefront look conventional.",
+          "unresolved_cost": "Inspection can become conservative gatekeeping if its scope expands.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-13-public_commissions",
+          "personal_outcome": "Seli helps verify public commissions while accepting that honest art may bring fewer tourist customers initially.",
+          "unresolved_cost": "Requires ongoing public support and protection from political patronage.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-100"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-14-leader",
+      "name": "Jalen Rusk",
+      "role": "institutional leader",
+      "oath_id": "oath-14",
+      "faction_id": "faction-14",
+      "region_id": "region-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Keep relief and transport moving when every route has a cost.",
+      "contradiction": "Jalen Rusk has reopened dangerous routes and sees delay as preventable harm. They conceal accumulated maintenance debt by compressing inspection windows, risking the very continuity their relentless scheduling is meant to protect.",
+      "personal_stake": "Travelers at the immediate scene and distant recipients both face genuine urgency.",
+      "visual_identity": "Recovered dark steel, brass and gears anchor the palette. Proposed worn road stone and faded travel cloth support civilian life; the region remains visually lighter and more linear than Impulse's heavy mass-and-force language.",
+      "equipment": "dark-steel travel armor, brass clock and guarded motion staff",
+      "combat_role": "mobile convoy commander with safe braking and nonlethal duel options",
+      "voice": "Brief route instructions; names the consequence of delay without pretending it settles the decision.",
+      "relationships": [
+        {
+          "character_id": "character-14-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Tessa Wren runs a rest station skipped by a new express route and records wear that official clocks overlook. Drivers, mechanics, cooks and disabled travelers show that mobility is more than maximum speed."
+        }
+      ],
+      "arc": "Learns to distribute responsibility and rest rather than hide triage inside a supposedly neutral schedule. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-14-rest_charter",
+          "personal_outcome": "Jalen publishes the convoy triage record and schedules rest even when the resulting delay is politically costly.",
+          "unresolved_cost": "Some deliveries slow and urgent triage must be explicit.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-14-route_communes",
+          "personal_outcome": "Jalen negotiates relief transfers among route communes rather than issuing a single compulsory timetable.",
+          "unresolved_cost": "Long-distance coordination and unequal resources need shared agreements.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-14-express_concessions",
+          "personal_outcome": "Jalen keeps express authority but pays the local-stop subsidy and accepts independent fatigue limits.",
+          "unresolved_cost": "Local stops need subsidy and commercial priorities require enforceable limits.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-099"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "encounter_title": "The Final Schedule",
+      "encounter_id": "creature-o14-boss",
+      "encounter_identity_status": "PROPOSED title of this living person, not a separate species or mandatory kill target."
+    },
+    {
+      "id": "character-14-civilian",
+      "name": "Tessa Wren",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-14",
+      "region_id": "region-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Tessa Wren runs a rest station skipped by a new express route and records wear that official clocks overlook. Drivers, mechanics, cooks and disabled travelers show that mobility is more than maximum speed.",
+      "contradiction": "Needs the rest stop to survive but accepts that some urgent journeys genuinely benefit from bypassing it.",
+      "personal_stake": "Tessa fights to keep a rest stop viable without denying the benefits of a faster route. Another story follows a courier who wants to stop reliving a celebrated rescue and build an ordinary life afterward.",
+      "visual_identity": "A rest-house keeper in dark travel cloth, a brass key ring and a faded road-service sash; practical pockets hold wear records rather than decorative clockwork.",
+      "equipment": [
+        "rest-house keys",
+        "road-wear log",
+        "portable brake gauge"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Warm hospitality followed by exact questions about fatigue and missed inspection.",
+      "relationships": [
+        {
+          "character_id": "character-14-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Needs the rest stop to survive but accepts that some urgent journeys genuinely benefit from bypassing it. The regional settlement determines whether the character takes the following distinct next step: Tessa's rest stop becomes a protected service point with reliable support and explicit emergency bypass rules. / Tessa helps govern the local route and must contribute to urgent transfers that do not benefit the inn directly. / Tessa accepts an express bypass funded by a local-service subsidy and monitors whether promised support arrives.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-14-rest_charter",
+          "personal_outcome": "Tessa's rest stop becomes a protected service point with reliable support and explicit emergency bypass rules.",
+          "unresolved_cost": "Some deliveries slow and urgent triage must be explicit.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-14-route_communes",
+          "personal_outcome": "Tessa helps govern the local route and must contribute to urgent transfers that do not benefit the inn directly.",
+          "unresolved_cost": "Long-distance coordination and unequal resources need shared agreements.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-14-express_concessions",
+          "personal_outcome": "Tessa accepts an express bypass funded by a local-service subsidy and monitors whether promised support arrives.",
+          "unresolved_cost": "Local stops need subsidy and commercial priorities require enforceable limits.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-099"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-15-leader",
+      "name": "Tarek Voss",
+      "role": "institutional leader",
+      "oath_id": "oath-15",
+      "faction_id": "faction-15",
+      "region_id": "region-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Make reliable tools and services available beyond privileged districts.",
+      "contradiction": "Tarek Voss has brought reliable power and transport to neglected districts. They hide the human cost of a productivity model because they fear that admitting failure will discredit infrastructure people genuinely need.",
+      "personal_stake": "Workers need both safer control and the income current production provides.",
+      "visual_identity": "Recovered gunmetal, charcoal, safety orange and piston shells anchor the palette. Proposed pale inspection marks and civilian cloth accents add function without replacing the established industrial silhouette language.",
+      "equipment": "gunmetal work harness, orange lockout tags and compact force tool",
+      "combat_role": "heavy support engineer with manual override priorities",
+      "voice": "Concrete descriptions of failure and repair; suspicious of decorative abstractions.",
+      "relationships": [
+        {
+          "character_id": "character-15-civilian",
+          "type": "accountable to a civic counterpoint",
+          "tension": "Una Brin is a maintenance organizer who knows which supposedly obsolete manual skills still prevent catastrophe. Machinists, cleaners, dispatchers and displaced craft workers show different stakes in automation rather than one uniform resistance to technology."
+        }
+      ],
+      "arc": "Shares ownership of productivity gains or accepts enforceable civic utility obligations. This resolves through the specific settlement outcomes below, rather than a generic reform/continuity/rupture label.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-15-worker_automation",
+          "personal_outcome": "Tarek shares automation decisions with workers who reject a profitable but unsafe production target.",
+          "unresolved_cost": "Investment and technical decisions still require difficult collective tradeoffs.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-15-civic_utilities",
+          "personal_outcome": "Tarek leads a civic utility with enforceable service duties and cannot quietly shift costs onto a neglected district.",
+          "unresolved_cost": "Central administration can become rigid or captured.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-15-repair_cooperatives",
+          "personal_outcome": "Tarek supplies open repair standards to cooperatives that compete with the central foundry.",
+          "unresolved_cost": "Some scale efficiencies and rapid large-project coordination are lost.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Cannot be killed, compelled or made loyal merely by selecting a dialogue color; consequential outcomes require authored evidence and choice.",
+      "visual_reference_source_ids": [
+        "REF-101"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person."
+    },
+    {
+      "id": "character-15-civilian",
+      "name": "Una Brin",
+      "role": "civic professional and regional counterpoint",
+      "oath_id": null,
+      "faction_id": "faction-15",
+      "region_id": "region-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Una Brin is a maintenance organizer who knows which supposedly obsolete manual skills still prevent catastrophe. Machinists, cleaners, dispatchers and displaced craft workers show different stakes in automation rather than one uniform resistance to technology.",
+      "contradiction": "Defends overlooked manual expertise but must decide which cherished skills need preservation and which exhausting tasks should disappear.",
+      "personal_stake": "Una seeks recognition for maintenance knowledge without rejecting useful new tools. Another story helps an automated workshop's former workers negotiate ownership of the productivity gains rather than simply returning to harder manual labor.",
+      "visual_identity": "A maintenance teacher in charcoal coveralls with gunmetal knee guards and safety-orange lockout tabs; the hand-tool roll is personalized through years of repair.",
+      "equipment": [
+        "lockout tags",
+        "hand-tool roll",
+        "annotated maintenance manual"
+      ],
+      "combat_role": "Civilian witness, rescue or tool-support role; never assumed to be a combat recruit.",
+      "voice": "Practical repair stories, generous with teaching, impatient with claims that workers resist all change.",
+      "relationships": [
+        {
+          "character_id": "character-15-leader",
+          "type": "constructive or adversarial civic accountability",
+          "tension": "Requires a workable service plan, not only symbolic opposition."
+        }
+      ],
+      "arc": "Begins with this concrete conflict: Defends overlooked manual expertise but must decide which cherished skills need preservation and which exhausting tasks should disappear. The regional settlement determines whether the character takes the following distinct next step: Una teaches workers to control and repair the new tools, while accepting the retirement of exhausting manual tasks. / Una becomes a public maintenance inspector and must challenge unsafe shortcuts even when residents want faster service. / Una builds a cooperative training workshop and shares expertise with competitors rather than guarding it as personal leverage. Her mentorship deliberately ends with the learner defending a different reasonable design. She can become an occasional adviser to local teachers or lead an open continuing workshop; she does not require obedience or Tech allegiance.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-15-worker_automation",
+          "personal_outcome": "Una teaches workers to control and repair the new tools, while accepting the retirement of exhausting manual tasks.",
+          "unresolved_cost": "Investment and technical decisions still require difficult collective tradeoffs.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-15-civic_utilities",
+          "personal_outcome": "Una becomes a public maintenance inspector and must challenge unsafe shortcuts even when residents want faster service.",
+          "unresolved_cost": "Central administration can become rigid or captured.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-15-repair_cooperatives",
+          "personal_outcome": "Una builds a cooperative training workshop and shares expertise with competitors rather than guarding it as personal leverage.",
+          "unresolved_cost": "Some scale efficiencies and rapid large-project coordination are lost.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Civilian safety and testimony access are not rewards conditioned on faction loyalty.",
+      "visual_reference_source_ids": [
+        "REF-101"
+      ],
+      "visual_approval": "PROPOSED character; recovered realm traits are reference observations, not approval of this person.",
+      "secondary_roles": [
+        "practical mentor",
+        "open-workshop teacher"
+      ],
+      "quest_ids": [
+        "quest-mentor-una-override",
+        "quest-mentor-una-handback"
+      ],
+      "service_ids": [
+        "service-manual-override-training"
+      ],
+      "ability_references": [
+        {
+          "castable_uid": "collective/aegis",
+          "source_label": "Aegis Bulwark",
+          "source_element": "tech",
+          "source_kind": "ability",
+          "source_cast_shape": "zone",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Proposed reference for studying an authored force-zone warning beside an ordinary manual-override lesson.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        },
+        {
+          "castable_uid": "atlas/reversal",
+          "source_label": "Aegis Reversal",
+          "source_element": "tech",
+          "source_kind": "ability",
+          "source_cast_shape": "zone",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Proposed advanced training reference; the mentor cannot grant a broader counter, rewind or immunity behavior than source implementation supports.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        }
+      ],
+      "supporting_choice_outcomes": [
+        {
+          "quest_id": "quest-mentor-una-override",
+          "quest_choice_id": "mentor-una-repair",
+          "personal_outcome": "Una teaches a method and asks the player to explain its limits back to her.",
+          "benefit": "Preserves local repair knowledge and existing parts.",
+          "cost": "Uses more labor and retains some maintenance complexity.",
+          "produced_flags": [
+            "mentor-una-repair-method"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-mentor-una-override",
+          "quest_choice_id": "mentor-una-modular",
+          "personal_outcome": "Una welcomes the useful improvement and refuses to treat all manual work as sacred.",
+          "benefit": "Reduces routine effort and makes replacement predictable.",
+          "cost": "Needs a parts supply and documentation accessible to local workers.",
+          "produced_flags": [
+            "mentor-una-modular-method"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-mentor-una-handback",
+          "quest_choice_id": "mentor-una-local-teachers",
+          "personal_outcome": "Una becomes an occasional adviser and explicitly accepts a defensible design different from her preference.",
+          "benefit": "Builds community capability and reduces dependence on Una or the player.",
+          "cost": "Takes longer and needs support while new teachers gain experience.",
+          "produced_flags": [
+            "mentor-una-local-succession"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-mentor-una-handback",
+          "quest_choice_id": "mentor-una-open-workshop",
+          "personal_outcome": "Una leads the workshop with published teaching materials and a right for residents to challenge its advice.",
+          "benefit": "Keeps specialist support available and shares new failure lessons.",
+          "cost": "Requires sustained funding and safeguards against becoming a closed expert club.",
+          "produced_flags": [
+            "mentor-una-open-practice"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "character-archivist",
+      "name": "The Archivist of the Rime Archive",
+      "role": "locked inciting figure and last true Unbound",
+      "oath_id": null,
+      "faction_id": "faction-02",
+      "region_id": "region-09",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "motivation": {
+        "canon_status": "UNRESOLVED",
+        "text": "Names the player successor; ultimate selection rationale is not established."
+      },
+      "contradiction": {
+        "canon_status": "PROPOSED",
+        "text": "Works within an oath institution while remaining the last true Unbound; institutional employment and personal binding are distinct."
+      },
+      "personal_stake": "Entrusts the original Weave fragment before dying.",
+      "visual_identity": {
+        "canon_status": "UNRESOLVED",
+        "text": "No individual approved character design recovered; Rime association alone does not determine final costume."
+      },
+      "equipment": {
+        "canon_status": "LOCKED",
+        "text": "Original Weave fragment; all other equipment unresolved."
+      },
+      "combat_role": "Not established; death is not a boss encounter.",
+      "voice": {
+        "canon_status": "UNRESOLVED",
+        "text": "Final breath names the successor; exact dialogue and performance require approval."
+      },
+      "relationships": [
+        {
+          "character_id": "character-player",
+          "type": "names successor; locked opening"
+        }
+      ],
+      "arc": "Dies on Daybreak great-plaza steps; echoes or records cannot silently undo the locked death.",
+      "branch_outcomes": "Death and succession remain fixed in every branch."
+    },
+    {
+      "id": "character-player",
+      "name": "The player",
+      "role": "Unbound successor",
+      "oath_id": null,
+      "faction_id": null,
+      "region_id": "region-09",
+      "canon_status": "LOCKED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE"
+      ],
+      "motivation": {
+        "canon_status": "PROPOSED",
+        "text": "Player-defined among survival, curiosity, duty, freedom and other compatible motivations; no fixed moral personality."
+      },
+      "contradiction": "Begins Unbound and receives a fragment allowing multiple Oaths; true Unbound distinction requires explicit approved resolution.",
+      "personal_stake": "Other powers seek custody, alliance or destruction of the entrusted fragment.",
+      "visual_identity": {
+        "canon_status": "UNRESOLVED",
+        "text": "Character creation, species and fixed appearance are not established."
+      },
+      "equipment": "Original Weave fragment after the opening; other equipment follows player choice and validated systems.",
+      "combat_role": {
+        "canon_status": "PROPOSED",
+        "text": "Loadout-dependent; narrative allegiance is separate from equipped powers."
+      },
+      "voice": {
+        "canon_status": "UNRESOLVED",
+        "text": "Voiced or unvoiced protagonist and exact dialogue format require approval."
+      },
+      "relationships": [
+        {
+          "character_id": "character-archivist",
+          "type": "receives succession and fragment"
+        }
+      ],
+      "arc": "Chooses how covenants should persist, dominate or be replaced without a predetermined morality.",
+      "branch_outcomes": [
+        "Restoration working direction",
+        "Dominion working direction",
+        "Liberation working direction"
+      ]
+    },
+    {
+      "id": "character-07-handler",
+      "name": "Dessa Rowan",
+      "role": "regional creature handler and transport cooperative member",
+      "oath_id": "oath-07",
+      "faction_id": "faction-07",
+      "region_id": "region-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Make reliable animal transport compatible with an animal's ability to refuse a route and a worker's ability to refuse an unsafe contract.",
+      "contradiction": "Dessa depends on delivery income and sometimes interprets a tired animal's willingness too optimistically when neighbors urgently need supplies.",
+      "personal_stake": "A proposed refusal penalty could bankrupt the small herd cooperative; the lead hart's recovery and Tovin's vulnerable seed shipment put care and livelihood in direct tension.",
+      "visual_identity": "A broad weather cape of moss-green cloth over bark-brown working layers, padded forearm wraps, an amber-sap-repaired harness apron and mud-worn soft boots. The face and hands stay readable for quiet handling signals; no antler crown or unbuilt heroic armor is assumed.",
+      "equipment": [
+        "quick-release padded harness with inspection marks",
+        "soft lead line and grooming roll",
+        "hoof and trail assessment notebook",
+        "folding feed measure and emergency portage straps"
+      ],
+      "combat_role": "Evacuation, creature handling and protected training support. Does not use magic to compel animals or treat a mount as disposable combat equipment.",
+      "voice": "Short low instructions to animals, frank practical questions to people; notices an animal turning away before she notices a prestigious visitor.",
+      "relationships": [
+        {
+          "character_id": "character-07-civilian",
+          "type": "seed-delivery client and practical friend",
+          "tension": "Tovin needs timely transport while Dessa must refuse unsafe runs."
+        },
+        {
+          "character_id": "character-07-leader",
+          "type": "cooperative charter negotiation",
+          "tension": "Yara values shared care but may underestimate the cost of a protected refusal."
+        }
+      ],
+      "arc": "Moves from defending one animal's refusal to negotiating a sustainable care and transport contract; may remain in a transparent cooperative or operate a smaller independent route.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-07-voluntary_commons",
+          "personal_outcome": "Dessa keeps her cooperative membership voluntary and secures a right to rest or retire animals without losing public trail access.",
+          "unresolved_cost": "The chosen arrangement still needs funded care, trustworthy review and consented access; the character does not claim the regional choice solves every local problem.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-07-audited_network",
+          "personal_outcome": "Dessa places refusal and welfare records before the common network's auditors, accepting review of her own optimistic assessments.",
+          "unresolved_cost": "The chosen arrangement still needs funded care, trustworthy review and consented access; the character does not claim the regional choice solves every local problem.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-07-independent_groves",
+          "personal_outcome": "Dessa coordinates smaller routes among groves and negotiates shared emergency portage rather than overworking one herd.",
+          "unresolved_cost": "The chosen arrangement still needs funded care, trustworthy review and consented access; the character does not claim the regional choice solves every local problem.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Animal refusal is observed behavior with uncertainty, not telepathic consent. Handling never forces another player's mount, changes ownership or creates guaranteed obedience.",
+      "visual_reference_source_ids": [
+        "REF-107"
+      ],
+      "visual_approval": "New character concept request; recovered Graft traits are reference evidence, not an approved individual design.",
+      "ability_references": [
+        {
+          "castable_uid": "linear-extended/growth",
+          "source_label": "Arborist's Growth",
+          "source_element": "nature",
+          "source_kind": "ability",
+          "source_cast_shape": "zone",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Optional supervised recognition of authored growth-zone boundaries near a training enclosure; no animal-control effect is inferred.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        },
+        {
+          "castable_uid": "casting/reliquary",
+          "source_label": "Wildroot Reliquary",
+          "source_element": "nature",
+          "source_kind": "ability",
+          "source_cast_shape": "zone",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Proposed training reference for Nature spatial warnings, with ordinary trail and harness work doing the actual care assessment.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        }
+      ],
+      "creature_ids": [
+        "creature-o07-mount",
+        "creature-o07-natural"
+      ],
+      "service_ids": [
+        "service-hart-care"
+      ],
+      "quest_ids": [
+        "quest-handler-dessa-assessment",
+        "quest-handler-dessa-charter"
+      ],
+      "supporting_choice_outcomes": [
+        {
+          "quest_id": "quest-handler-dessa-assessment",
+          "quest_choice_id": "handler-dessa-rest",
+          "personal_outcome": "Dessa rests the hart and teaches the player how to record behavior without claiming to read its mind. Tovin selects the most vulnerable seed stock for the slower delivery.",
+          "benefit": "Protects recovery and preserves the handler's refusal standard.",
+          "cost": "Requires extra carriers and delivers less seed stock before the weather change.",
+          "produced_flags": [
+            "handler-refusal-respected"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-handler-dessa-assessment",
+          "quest_choice_id": "handler-dessa-repair-route",
+          "personal_outcome": "Dessa permits a retest only after the animal can turn back safely. If it still refuses, the quest uses portage; the player is not rewarded for forcing compliance.",
+          "benefit": "May preserve the delivery and future trail access if the animal freely resumes the route.",
+          "cost": "Uses labor and time without a guarantee that the hart will accept the trail.",
+          "produced_flags": [
+            "handler-route-retested"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-handler-dessa-charter",
+          "quest_choice_id": "handler-dessa-common-reserve",
+          "personal_outcome": "Dessa stays in the cooperative under a consent-and-care charter. Tovin accepts a higher transparent transport charge.",
+          "benefit": "Shares rest and replacement costs across willing clients.",
+          "cost": "Clients pay more and must agree to publish how the reserve is spent.",
+          "produced_flags": [
+            "handler-common-reserve"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-handler-dessa-charter",
+          "quest_choice_id": "handler-dessa-independent",
+          "personal_outcome": "Dessa limits bookings to what the herd can sustain and refers excess work elsewhere. Yara keeps public trail care available despite the independent contract.",
+          "benefit": "Lets Dessa refuse unsafe contracts without collective pressure.",
+          "cost": "Reduces the route's carrying capacity and stable income; clients need another provider for peak demand.",
+          "produced_flags": [
+            "handler-independent-route"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "character-02-wayfarer",
+      "name": "Tarin Esh",
+      "role": "Rime-bound wandering courier and route historian",
+      "oath_id": "oath-02",
+      "faction_id": "faction-02",
+      "region_id": "region-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "motivation": "Preserve the ordinary work and uncertain evidence behind the Archivist's travels without exploiting the new Unbound legend.",
+      "contradiction": "Tarin resents exaggerated stories but has accepted speaking fees from audiences who mistake an ordinary dispatch connection for privileged knowledge.",
+      "personal_stake": "Correcting the story costs income and prestige; publishing an unredacted old route could expose refuge hosts who helped couriers and still shelter vulnerable travelers.",
+      "visual_identity": "A white-and-ash insulated inner coat under a patched grey travel cape, flat dispatch tabs on one shoulder and a narrow red route cord tied to a document case. His weight sits on practical anti-slip boots; the costume reads as a working traveller rather than a second mystical Archivist.",
+      "equipment": [
+        "weatherproof dispatch case with replaceable cold seals",
+        "folded route journal with separate fact and recollection columns",
+        "portable copying frame",
+        "walking staff and repaired anti-slip soles"
+      ],
+      "combat_role": "Cautious route guide and document escort; any Frost demonstration is a proposed bounded training use, not evidence that he shares the player's exceptional capacity.",
+      "voice": "Begins with what the receipt actually says, then admits what he only remembers; dry humor punctures flattering legends about himself.",
+      "relationships": [
+        {
+          "character_id": "character-02-civilian",
+          "type": "dispatch provenance reviewer",
+          "tension": "Nemi will not certify Tarin's memories merely because his paperwork is genuine."
+        },
+        {
+          "character_id": "character-11-civilian",
+          "type": "protected-route collaborator",
+          "tension": "Rell insists that historical access does not authorize exposing current refuge passengers."
+        },
+        {
+          "character_id": "character-archivist",
+          "type": "proposed indirect dispatch connection",
+          "tension": "Tarin carried Archive packets along a route associated with the Archivist; contents, personal trust and selection motives are not established."
+        }
+      ],
+      "arc": "Gives up the prestige of seeming to know more than he does, then builds a useful mobile record service through redacted copies or independently witnessed sealed custody.",
+      "branch_outcomes": [
+        {
+          "settlement_choice_id": "settlement-02-controlled_release",
+          "personal_outcome": "Tarin helps move consented records but refuses to treat a released document as permission to identify every living host.",
+          "unresolved_cost": "The chosen arrangement still needs funded care, trustworthy review and consented access; the character does not claim the regional choice solves every local problem.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-02-audited_seal",
+          "personal_outcome": "Tarin deposits originals under independent custody while continuing to carry public summaries and appeal instructions.",
+          "unresolved_cost": "The chosen arrangement still needs funded care, trustworthy review and consented access; the character does not claim the regional choice solves every local problem.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "settlement_choice_id": "settlement-02-distributed_copies",
+          "personal_outcome": "Tarin distributes verified copies with visible uncertainty labels and separate redaction review.",
+          "unresolved_cost": "The chosen arrangement still needs funded care, trustworthy review and consented access; the character does not claim the regional choice solves every local problem.",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ],
+      "agency_guardrail": "Explicitly personally bound to Rime. Not a true Unbound, not another successor, not a source of confirmed secret cosmology. The locked Archivist remains the last true Unbound before the player's succession.",
+      "visual_reference_source_ids": [
+        "REF-112"
+      ],
+      "visual_approval": "New character concept request; no approved portrait, model, rig or animation exists.",
+      "ability_references": [
+        {
+          "castable_uid": "linear/ice",
+          "source_label": "Frost Lance",
+          "source_element": "frost",
+          "source_kind": "ability",
+          "source_cast_shape": "line",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Proposed optional field-training reference for recognizing a Frost line telegraph; not a new document-preservation mechanic.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        },
+        {
+          "castable_uid": "handcast/frost",
+          "source_label": "Glacial Prison",
+          "source_element": "frost",
+          "source_kind": "ability",
+          "source_cast_shape": "zone",
+          "assignment_status": "PROPOSED",
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-ABILITY-MATRIX-4c4a1eb",
+            "SRC-WORLD-PROPOSAL"
+          ],
+          "intended_character_use": "Proposed containment-warning demonstration at a controlled station; no claim of global memory arrest or Time-Oath powers.",
+          "behavior_boundary": "Exact source identity is recovered. Character assignment, AI use and training presentation are proposals; do not alter source damage, range, duration, targeting or other behavior to fit this story. No gameplay or GPU validation is implied."
+        }
+      ],
+      "itinerary_region_ids": [
+        "region-02",
+        "region-03",
+        "region-09",
+        "region-13",
+        "region-11",
+        "region-14"
+      ],
+      "service_ids": [
+        "service-road-records"
+      ],
+      "quest_ids": [
+        "quest-wayfarer-tarin-dispatch",
+        "quest-wayfarer-tarin-road"
+      ],
+      "supporting_choice_outcomes": [
+        {
+          "quest_id": "quest-wayfarer-tarin-dispatch",
+          "quest_choice_id": "wayfarer-tarin-correct",
+          "personal_outcome": "Tarin states that he is Rime-bound and was an ordinary courier, not another true Unbound or a second chosen successor.",
+          "benefit": "Stops an inaccurate Unbound legend from becoming accepted testimony.",
+          "cost": "Costs Tarin lucrative speaking invitations and may disappoint people seeking a simple origin story.",
+          "produced_flags": [
+            "wayfarer-public-correction"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-wayfarer-tarin-dispatch",
+          "quest_choice_id": "wayfarer-tarin-audited",
+          "personal_outcome": "Nemi checks the dispatch provenance while Tarin records which memories remain uncertain.",
+          "benefit": "Preserves useful route history without exposing protected hosts or making unverified claims.",
+          "cost": "Takes longer and leaves some rumor unanswered until review finishes.",
+          "produced_flags": [
+            "wayfarer-audited-account"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-wayfarer-tarin-road",
+          "quest_choice_id": "wayfarer-tarin-redacted-copies",
+          "personal_outcome": "Tarin carries copies that omit nonconsenting hosts and separates documents from later interpretation.",
+          "benefit": "Broadens access and prevents one institution from owning the story.",
+          "cost": "Requires clear uncertainty labels and cannot recall every copy if a protected pattern becomes visible.",
+          "produced_flags": [
+            "wayfarer-distributed-history"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        },
+        {
+          "quest_id": "quest-wayfarer-tarin-road",
+          "quest_choice_id": "wayfarer-tarin-sealed-witness",
+          "personal_outcome": "Tarin and Rell select independent custodians; neither can erase the route record alone.",
+          "benefit": "Protects vulnerable hosts while preserving evidence for accountable review.",
+          "cost": "Public access is slower and depends on continued trustworthy custody.",
+          "produced_flags": [
+            "wayfarer-sealed-history"
+          ],
+          "canon_status": "PROPOSED",
+          "source_ids": [
+            "SRC-WORLD-PROPOSAL"
+          ]
+        }
+      ]
+    }
+  ]
+}

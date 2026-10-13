@@ -1,0 +1,3008 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "contract-content-registry",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Versioned content and referential integrity",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "bundle_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Stable unique id"
+        },
+        {
+          "name": "schema_version",
+          "type": "string",
+          "required": true,
+          "constraints": "Supported semantic version"
+        },
+        {
+          "name": "records",
+          "type": "array",
+          "required": true,
+          "constraints": "Unique ids, approval state, source_ids and typed payloads"
+        },
+        {
+          "name": "expected_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Nonnegative compare-and-swap revision"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "accepted_bundle_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Monotonic if committed"
+        },
+        {
+          "name": "validation_issues",
+          "type": "array",
+          "required": true,
+          "constraints": "Path, code, severity and source evidence"
+        },
+        {
+          "name": "migration_required",
+          "type": "boolean",
+          "required": true,
+          "constraints": "True if existing saves would be incompatible"
+        }
+      ],
+      "state": {
+        "states": [
+          "staged",
+          "validated",
+          "published",
+          "deprecated"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "staged",
+          "event": "validate",
+          "to": "validated",
+          "guard": "Schemas, ids, references and DAG pass; human gates remain named",
+          "atomic_changes": "Append validation report"
+        },
+        {
+          "from": "validated",
+          "event": "publish",
+          "to": "published",
+          "guard": "Required approval and migration evidence present",
+          "atomic_changes": "Commit bundle revision"
+        },
+        {
+          "from": "published",
+          "event": "deprecate",
+          "to": "deprecated",
+          "guard": "Replacement and save compatibility established",
+          "atomic_changes": "Preserve alias and migration reference"
+        }
+      ],
+      "authority": {
+        "writer": "Content release authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [],
+      "risks": [
+        "Treating source presence as tested behavior",
+        "Deleting a referenced id",
+        "Publishing proposed lore as approved"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-content-registry-test-01",
+          "given": "A duplicated id",
+          "when": "Validate the bundle",
+          "then": "Fail with both paths",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-content-registry-test-02",
+          "given": "An unknown source id",
+          "when": "Validate traceability",
+          "then": "Reject publication",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-content-registry-test-03",
+          "given": "An implemented asset without test evidence",
+          "when": "Evaluate release gates",
+          "then": "Keep validation blocked",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Keep last valid published bundle; failed publish changes no active revision. Deprecated identifiers remain resolvable.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-resource-ledger",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Atomic resources, inventory and escrow",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "owner_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Authenticated owner or explicit treasury grant"
+        },
+        {
+          "name": "transaction_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Unique idempotency key"
+        },
+        {
+          "name": "expected_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Current ledger version"
+        },
+        {
+          "name": "deltas",
+          "type": "array",
+          "required": true,
+          "constraints": "Integer bounded item/currency changes with provenance"
+        },
+        {
+          "name": "authorization",
+          "type": "object",
+          "required": true,
+          "constraints": "Specific operation and owner scope"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "receipt",
+          "type": "object",
+          "required": true,
+          "constraints": "Exactly one committed or rejected outcome"
+        },
+        {
+          "name": "new_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Unchanged on rejection"
+        },
+        {
+          "name": "balances",
+          "type": "object",
+          "required": true,
+          "constraints": "Authorized-view snapshot only"
+        }
+      ],
+      "state": {
+        "states": [
+          "available",
+          "reserved",
+          "committed",
+          "released"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "available",
+          "event": "reserve",
+          "to": "reserved",
+          "guard": "Sufficient owned resources and matching revision",
+          "atomic_changes": "Move quantities into escrow"
+        },
+        {
+          "from": "reserved",
+          "event": "commit",
+          "to": "committed",
+          "guard": "Same transaction and valid destination",
+          "atomic_changes": "Apply debit/credit once"
+        },
+        {
+          "from": "reserved",
+          "event": "cancel_or_expire",
+          "to": "released",
+          "guard": "No committed delivery",
+          "atomic_changes": "Return reservation once"
+        }
+      ],
+      "authority": {
+        "writer": "Inventory transaction authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Duplication",
+        "Overflow or negative quantities",
+        "Cross-owner spending"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-resource-ledger-test-01",
+          "given": "The same transaction twice",
+          "when": "Commit twice",
+          "then": "One receipt and one balance change",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-resource-ledger-test-02",
+          "given": "Two consumers race",
+          "when": "Reserve the last item",
+          "then": "Exactly one succeeds",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-resource-ledger-test-03",
+          "given": "A crash after commit",
+          "when": "Replay the pending publish",
+          "then": "No second debit or credit",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Durable write-ahead intent and terminal receipt. Reconcile escrow; never infer success from a client animation.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-source-adapter",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Read-only source castable descriptor adapter",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "source_uid",
+          "type": "string",
+          "required": true,
+          "constraints": "Exact audited pack/id; no invented uid"
+        },
+        {
+          "name": "source_commit",
+          "type": "string",
+          "required": true,
+          "constraints": "4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451"
+        },
+        {
+          "name": "source_preset",
+          "type": "object",
+          "required": true,
+          "constraints": "Original schema preserved byte-for-byte where applicable"
+        },
+        {
+          "name": "extension_descriptor",
+          "type": "object",
+          "required": true,
+          "constraints": "Separately versioned proposed gameplay metadata"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "source_reference",
+          "type": "object",
+          "required": true,
+          "constraints": "Immutable uid, element, settings and dependency pointers"
+        },
+        {
+          "name": "extension_bindings",
+          "type": "array",
+          "required": true,
+          "constraints": "Explicit approved mappings only"
+        },
+        {
+          "name": "unsupported",
+          "type": "array",
+          "required": true,
+          "constraints": "Missing gameplay, visual or platform evidence"
+        }
+      ],
+      "state": {
+        "states": [
+          "unmapped",
+          "mapped",
+          "parity_tested",
+          "approved"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "unmapped",
+          "event": "propose_mapping",
+          "to": "mapped",
+          "guard": "Actual uid exists and source fields unchanged",
+          "atomic_changes": "Store separate extension descriptor"
+        },
+        {
+          "from": "mapped",
+          "event": "run_parity_tests",
+          "to": "parity_tested",
+          "guard": "Applicable source regression tests pass; GPU gates separately reported",
+          "atomic_changes": "Attach test evidence"
+        },
+        {
+          "from": "parity_tested",
+          "event": "approve_extension",
+          "to": "approved",
+          "guard": "Design and integration approval recorded",
+          "atomic_changes": "Publish extension version"
+        }
+      ],
+      "authority": {
+        "writer": "Content integration authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Fabricated API",
+        "Source behavior altered by lore",
+        "GPU status overstated"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-source-adapter-test-01",
+          "given": "A nonexistent uid",
+          "when": "Propose mapping",
+          "then": "Reject without generating a filler ability",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-source-adapter-test-02",
+          "given": "An extension edits source element",
+          "when": "Validate adapter",
+          "then": "Reject source mutation",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-source-adapter-test-03",
+          "given": "Unit tests pass but no GPU capture",
+          "when": "Read status",
+          "then": "Behavior evidence remains separate from visual gate",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Fallback runs preserved source runtime only in its supported sandbox; absence of extension does not create production combat mechanics.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-targeting",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Shared tab/action targeting",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "actor_snapshot",
+          "type": "object",
+          "required": true,
+          "constraints": "Authority pose and permissions"
+        },
+        {
+          "name": "aim_intent",
+          "type": "object",
+          "required": true,
+          "constraints": "Selected target or direction/point, declared input mode"
+        },
+        {
+          "name": "technique_descriptor",
+          "type": "object",
+          "required": true,
+          "constraints": "Range, shape, target mask and supported aim modes"
+        },
+        {
+          "name": "collision_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Authoritative geometry revision"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "eligible_targets",
+          "type": "array",
+          "required": true,
+          "constraints": "Stable ids in deterministic order"
+        },
+        {
+          "name": "resolved_geometry",
+          "type": "object",
+          "required": true,
+          "constraints": "Clamped point/volume and collision revision"
+        },
+        {
+          "name": "denial_reason",
+          "type": "string",
+          "required": true,
+          "constraints": "Localized code if invalid"
+        }
+      ],
+      "state": {
+        "states": [
+          "requested",
+          "resolved",
+          "denied"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "requested",
+          "event": "resolve",
+          "to": "resolved",
+          "guard": "Range, line of sight, target mask and collision checks pass",
+          "atomic_changes": "Emit immutable target result"
+        },
+        {
+          "from": "requested",
+          "event": "reject",
+          "to": "denied",
+          "guard": "Any gate fails",
+          "atomic_changes": "Emit explicit denial without cost"
+        }
+      ],
+      "authority": {
+        "writer": "Encounter simulation authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Aim-mode advantage",
+        "Stale collision",
+        "Client-supplied hits"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-targeting-test-01",
+          "given": "Equal technique and pose",
+          "when": "Resolve tab and action intent to same point",
+          "then": "Same eligibility rules apply",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-targeting-test-02",
+          "given": "A wall changed revision",
+          "when": "Commit an old target result",
+          "then": "Revalidate or reject",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-targeting-test-03",
+          "given": "Target is protected",
+          "when": "Resolve hostile action",
+          "then": "No hostile target accepted",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Target result is transient and expires at its declared tick. Reconnect requires fresh intent.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-control-ledger",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Crowd-control and displacement budget",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "target_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Authoritative actor id"
+        },
+        {
+          "name": "control_request",
+          "type": "object",
+          "required": true,
+          "constraints": "Category, integer duration/displacement and root event"
+        },
+        {
+          "name": "window_state",
+          "type": "object",
+          "required": true,
+          "constraints": "Rolling authoritative history and immunity"
+        },
+        {
+          "name": "boundary_profile",
+          "type": "object",
+          "required": true,
+          "constraints": "Protected volumes and safe recovery pose"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "accepted_control",
+          "type": "object",
+          "required": true,
+          "constraints": "Clamped duration/vector or neutral outcome"
+        },
+        {
+          "name": "immunity_state",
+          "type": "object",
+          "required": true,
+          "constraints": "Updated expiry and category"
+        },
+        {
+          "name": "feedback_code",
+          "type": "string",
+          "required": true,
+          "constraints": "Readable resistance/recovery reason"
+        }
+      ],
+      "state": {
+        "states": [
+          "responsive",
+          "controlled",
+          "recovering",
+          "immune"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "responsive",
+          "event": "accept_control",
+          "to": "controlled",
+          "guard": "Budget and avoidance rules permit",
+          "atomic_changes": "Reserve bounded duration"
+        },
+        {
+          "from": "controlled",
+          "event": "end_control",
+          "to": "recovering",
+          "guard": "End tick or valid break",
+          "atomic_changes": "Release input restriction"
+        },
+        {
+          "from": "recovering",
+          "event": "grant_immunity",
+          "to": "immune",
+          "guard": "Rolling threshold reached",
+          "atomic_changes": "Set bounded immunity"
+        },
+        {
+          "from": "immune",
+          "event": "expire",
+          "to": "responsive",
+          "guard": "Authority expiry reached",
+          "atomic_changes": "Clear immunity category"
+        }
+      ],
+      "authority": {
+        "writer": "Encounter simulation authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Infinite stun",
+        "Displacement grief",
+        "Client camera seizure"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-control-ledger-test-01",
+          "given": "Target reached control cap",
+          "when": "Submit another elemental control",
+          "then": "Clamp or deny regardless of element",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-control-ledger-test-02",
+          "given": "Push crosses safe boundary",
+          "when": "Resolve displacement",
+          "then": "Clamp and preserve recovery",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-control-ledger-test-03",
+          "given": "Reduced motion enabled",
+          "when": "Apply control feedback",
+          "then": "No forced camera effect; gameplay unchanged",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Transient control persists only through documented reconnect windows; expiry uses server time, never client clock.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-consequence-journal",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Scoped state changes and compensating recovery",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "cause_event",
+          "type": "object",
+          "required": true,
+          "constraints": "Authority sequence and content rule"
+        },
+        {
+          "name": "scope",
+          "type": "enum",
+          "required": true,
+          "constraints": "personal|party|instance|region|world_aggregate"
+        },
+        {
+          "name": "expected_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Owner aggregate version"
+        },
+        {
+          "name": "patch",
+          "type": "object",
+          "required": true,
+          "constraints": "Whitelisted bounded change"
+        },
+        {
+          "name": "confirmation",
+          "type": "object",
+          "required": true,
+          "constraints": "Required explicit consent for final choices"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "consequence_receipt",
+          "type": "object",
+          "required": true,
+          "constraints": "Cause, before/after reference, lifetime and recovery"
+        },
+        {
+          "name": "new_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Monotonic committed version"
+        },
+        {
+          "name": "recovery_action",
+          "type": "object",
+          "required": true,
+          "constraints": "Declared automatic or compensating operation"
+        }
+      ],
+      "state": {
+        "states": [
+          "pending",
+          "committed",
+          "expired",
+          "compensated"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "pending",
+          "event": "commit",
+          "to": "committed",
+          "guard": "Scope, consent and revision validated",
+          "atomic_changes": "Apply patch and append receipt atomically"
+        },
+        {
+          "from": "committed",
+          "event": "expire",
+          "to": "expired",
+          "guard": "Temporary lifetime ends",
+          "atomic_changes": "Restore permitted baseline"
+        },
+        {
+          "from": "committed",
+          "event": "compensate",
+          "to": "compensated",
+          "guard": "Authorized recovery reason and expected revision",
+          "atomic_changes": "Append inverse or approved corrective transaction"
+        }
+      ],
+      "authority": {
+        "writer": "Scope-owning persistence authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry"
+      ],
+      "risks": [
+        "World-scope escalation",
+        "Silent irreversible choice",
+        "Rollback of unrelated progress"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-consequence-journal-test-01",
+          "given": "Party leader chooses for member",
+          "when": "Submit personal final branch",
+          "then": "Reject absent member consent",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-consequence-journal-test-02",
+          "given": "Temporary terrain expires",
+          "when": "Recover the instance",
+          "then": "Restore route without changing inventory",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-consequence-journal-test-03",
+          "given": "Time effect requests a trade rollback",
+          "when": "Validate scope",
+          "then": "Reject as ineligible state",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Append-only receipts plus checkpoints; recover one aggregate without erasing unrelated commits.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-cast-intent",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Authoritative cast lifecycle",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "request_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Unique action id"
+        },
+        {
+          "name": "actor_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Authenticated controlled actor"
+        },
+        {
+          "name": "source_uid",
+          "type": "string",
+          "required": true,
+          "constraints": "Existing source uid referenced through adapter"
+        },
+        {
+          "name": "loadout_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Current active/equipped state"
+        },
+        {
+          "name": "aim",
+          "type": "object",
+          "required": true,
+          "constraints": "Targeting intent and input mode"
+        },
+        {
+          "name": "server_tick_hint",
+          "type": "integer",
+          "required": true,
+          "constraints": "Untrusted hint subject to bounded validation"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "cast_receipt",
+          "type": "object",
+          "required": true,
+          "constraints": "Accepted/denied, timing, source reference and reserved cost"
+        },
+        {
+          "name": "effect_events",
+          "type": "array",
+          "required": true,
+          "constraints": "Authority-stamped events after commitment"
+        },
+        {
+          "name": "feedback",
+          "type": "object",
+          "required": true,
+          "constraints": "Telegraph and localized reason"
+        }
+      ],
+      "state": {
+        "states": [
+          "requested",
+          "reserved",
+          "anticipation",
+          "committed",
+          "active",
+          "recovery",
+          "complete",
+          "denied"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "requested",
+          "event": "validate",
+          "to": "reserved",
+          "guard": "Source mapping, loadout, targeting and resources valid",
+          "atomic_changes": "Reserve declared costs"
+        },
+        {
+          "from": "reserved",
+          "event": "begin",
+          "to": "anticipation",
+          "guard": "Authority capacity present",
+          "atomic_changes": "Publish telegraph"
+        },
+        {
+          "from": "anticipation",
+          "event": "commit",
+          "to": "committed",
+          "guard": "Commit tick and no valid interruption",
+          "atomic_changes": "Debit committed cost once"
+        },
+        {
+          "from": "committed",
+          "event": "activate",
+          "to": "active",
+          "guard": "Descriptor eligible",
+          "atomic_changes": "Emit bounded events"
+        },
+        {
+          "from": "active",
+          "event": "finish",
+          "to": "recovery",
+          "guard": "Duration/channel ends",
+          "atomic_changes": "Release sustain reservation"
+        },
+        {
+          "from": "recovery",
+          "event": "expire",
+          "to": "complete",
+          "guard": "Recovery ends",
+          "atomic_changes": "Clear transient cast state"
+        },
+        {
+          "from": "requested",
+          "event": "reject",
+          "to": "denied",
+          "guard": "Validation fails",
+          "atomic_changes": "No cost or effects"
+        }
+      ],
+      "authority": {
+        "writer": "Encounter simulation authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-source-adapter",
+        "contract-targeting",
+        "contract-resource-ledger",
+        "contract-control-ledger",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Double casting",
+        "VFX treated as damage proof",
+        "Late intent unfairness"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-cast-intent-test-01",
+          "given": "Duplicate request id",
+          "when": "Submit cast again",
+          "then": "Return original receipt",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-cast-intent-test-02",
+          "given": "Active Oath was unequipped",
+          "when": "Commit stale request",
+          "then": "Deny without partial resource loss",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-cast-intent-test-03",
+          "given": "Interrupted before commitment",
+          "when": "Cancel cast",
+          "then": "Release declared reservation and publish reason",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Pending reservations reconcile on reconnect; committed effects complete or expire under authority. Source sandbox playback remains separate.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-interaction-resolver",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Deterministic contextual elemental transitions",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "events",
+          "type": "array",
+          "required": true,
+          "constraints": "Stamped source events with root ancestry and phenomenon tags"
+        },
+        {
+          "name": "material_snapshot",
+          "type": "object",
+          "required": true,
+          "constraints": "Capabilities, individual directional tags and revision"
+        },
+        {
+          "name": "rule_bundle",
+          "type": "object",
+          "required": true,
+          "constraints": "Versioned 120-pair INTERACTION_RULES"
+        },
+        {
+          "name": "budgets",
+          "type": "object",
+          "required": true,
+          "constraints": "Region, actor, root, target and lifetime allowances"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "transition_receipts",
+          "type": "array",
+          "required": true,
+          "constraints": "Rule, direction, before/after and costs"
+        },
+        {
+          "name": "child_events",
+          "type": "array",
+          "required": true,
+          "constraints": "Inherited scope and shorter lifetime"
+        },
+        {
+          "name": "neutral_reasons",
+          "type": "array",
+          "required": true,
+          "constraints": "Missing context, ownership, capacity or state"
+        }
+      ],
+      "state": {
+        "states": [
+          "queued",
+          "matched",
+          "applied",
+          "neutral",
+          "expired"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "queued",
+          "event": "match_direction",
+          "to": "matched",
+          "guard": "Pair and selected directional predicates pass",
+          "atomic_changes": "Reserve finite transition budget"
+        },
+        {
+          "from": "matched",
+          "event": "apply",
+          "to": "applied",
+          "guard": "Revision and ancestry still valid",
+          "atomic_changes": "Debit and change capability-scoped state atomically"
+        },
+        {
+          "from": "queued",
+          "event": "no_match_or_budget",
+          "to": "neutral",
+          "guard": "Any predicate fails",
+          "atomic_changes": "Leave source behavior unchanged"
+        },
+        {
+          "from": "applied",
+          "event": "expire_or_repair",
+          "to": "expired",
+          "guard": "Declared lifetime or approved repair",
+          "atomic_changes": "Restore reversible material state"
+        }
+      ],
+      "authority": {
+        "writer": "Encounter simulation authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-cast-intent",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Runaway cascades",
+        "Ambiguous reverse direction",
+        "Permanent terrain write"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-interaction-resolver-test-01",
+          "given": "Fire/frost pair targets ice",
+          "when": "Apply heat direction",
+          "then": "Meltable-ice predicate is required",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-interaction-resolver-test-02",
+          "given": "Same pair targets hot surface",
+          "when": "Apply cooling direction",
+          "then": "Hot-surface predicate is required instead",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-interaction-resolver-test-03",
+          "given": "Same tick events shuffled",
+          "when": "Replay with same seed",
+          "then": "Identical ordered receipts",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-interaction-resolver-test-04",
+          "given": "Child exceeds depth two",
+          "when": "Resolve child",
+          "then": "Neutral capacity result; source behavior remains",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Checkpoint only persistent approved event outcomes; transient reactions expire. Never replay rewards from visual effect seeds.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-pact-progression",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Known, bound, active and equipped covenant state",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "character_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Authenticated character"
+        },
+        {
+          "name": "pact_terms_version",
+          "type": "string",
+          "required": true,
+          "constraints": "Reviewed terms and obligations"
+        },
+        {
+          "name": "requested_transition",
+          "type": "object",
+          "required": true,
+          "constraints": "Discovery, initiation, binding, activation, suspension, reconciliation or severance"
+        },
+        {
+          "name": "consent_receipt",
+          "type": "object",
+          "required": true,
+          "constraints": "Explicit confirmation where required"
+        },
+        {
+          "name": "expected_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Character pact version"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "pact_snapshot",
+          "type": "object",
+          "required": true,
+          "constraints": "Separate known/bound/active/equipped/temporary/allegiance fields"
+        },
+        {
+          "name": "entitlements",
+          "type": "array",
+          "required": true,
+          "constraints": "Exactly declared channel and service changes"
+        },
+        {
+          "name": "consequence_preview",
+          "type": "object",
+          "required": true,
+          "constraints": "Costs, alternatives and recovery"
+        }
+      ],
+      "state": {
+        "states": [
+          "known",
+          "initiated",
+          "bound",
+          "suspended",
+          "severed",
+          "reconciled"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "known",
+          "event": "complete_initiation",
+          "to": "initiated",
+          "guard": "Equivalent qualifying route completed",
+          "atomic_changes": "Save milestone"
+        },
+        {
+          "from": "initiated",
+          "event": "accept_pact",
+          "to": "bound",
+          "guard": "Explicit terms acceptance",
+          "atomic_changes": "Create pact without auto-equipping"
+        },
+        {
+          "from": "bound",
+          "event": "declared_breach",
+          "to": "suspended",
+          "guard": "Evidence and published obligation",
+          "atomic_changes": "Suspend named privileges only"
+        },
+        {
+          "from": "suspended",
+          "event": "reconcile",
+          "to": "reconciled",
+          "guard": "Authored remedy completed",
+          "atomic_changes": "Restore eligible channels"
+        },
+        {
+          "from": "bound",
+          "event": "confirm_severance",
+          "to": "severed",
+          "guard": "Preview and consent",
+          "atomic_changes": "Save personal history; preserve owned goods"
+        }
+      ],
+      "authority": {
+        "writer": "Character progression authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-resource-ledger",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Allegiance conflated with slots",
+        "Oath discrimination",
+        "Housing confiscation"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-pact-progression-test-01",
+          "given": "Fifteen known and two active",
+          "when": "Request inactive technique",
+          "then": "Deny casting but retain knowledge",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-pact-progression-test-02",
+          "given": "Standing falls",
+          "when": "Evaluate existing house",
+          "then": "Keep ownership and recovery",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-pact-progression-test-03",
+          "given": "Disconnect at acceptance",
+          "when": "Resume",
+          "then": "No unconfirmed pact is created",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Pact ledger and loadout commit atomically; mastery history survives dormancy and severance.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-mount-morph",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Traversal forms and controlled summons",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "actor_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Persistent owner identity"
+        },
+        {
+          "name": "form_descriptor",
+          "type": "object",
+          "required": true,
+          "constraints": "Collision, rig, seats, permissions, expiry and slot cost"
+        },
+        {
+          "name": "transition_intent",
+          "type": "enum",
+          "required": true,
+          "constraints": "mount|dismount|morph|revert|recall"
+        },
+        {
+          "name": "safe_pose",
+          "type": "object",
+          "required": true,
+          "constraints": "Authority-validated fallback"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "form_state",
+          "type": "object",
+          "required": true,
+          "constraints": "Current form and ownership"
+        },
+        {
+          "name": "control_assignment",
+          "type": "object",
+          "required": true,
+          "constraints": "Controlled body or summon"
+        },
+        {
+          "name": "transition_feedback",
+          "type": "object",
+          "required": true,
+          "constraints": "Warning, denial or safe recovery"
+        }
+      ],
+      "state": {
+        "states": [
+          "normal",
+          "entering",
+          "transformed",
+          "exiting",
+          "recovered"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "normal",
+          "event": "enter",
+          "to": "entering",
+          "guard": "Space, permission and agent slots available",
+          "atomic_changes": "Reserve form slots"
+        },
+        {
+          "from": "entering",
+          "event": "commit",
+          "to": "transformed",
+          "guard": "Pose validated",
+          "atomic_changes": "Swap collision/visual descriptor preserving identity"
+        },
+        {
+          "from": "transformed",
+          "event": "exit_or_expire",
+          "to": "exiting",
+          "guard": "Requested or authoritative expiry",
+          "atomic_changes": "Choose safe exit pose"
+        },
+        {
+          "from": "exiting",
+          "event": "recover",
+          "to": "recovered",
+          "guard": "Exit collision valid",
+          "atomic_changes": "Restore baseline and release slots"
+        }
+      ],
+      "authority": {
+        "writer": "Actor simulation authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-cast-intent",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Clipping through closed spaces",
+        "Owner duplication",
+        "Forced fall"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-mount-morph-test-01",
+          "given": "Large form cannot fit",
+          "when": "Request morph",
+          "then": "Deny before commitment",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-mount-morph-test-02",
+          "given": "Connection drops in air",
+          "when": "Recover form",
+          "then": "Safe landing or approved checkpoint",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-mount-morph-test-03",
+          "given": "Summon cap is consumed",
+          "when": "Request another large summon",
+          "then": "Deny without duplicating owner",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Durable mount entitlement survives; transient form ends at safe pose on recovery according to declared combat rules.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-world-event",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Regional event lifecycle and reconstruction",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "event_definition_id",
+          "type": "string",
+          "required": true,
+          "constraints": "world-event-01..15"
+        },
+        {
+          "name": "region_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Current authority version"
+        },
+        {
+          "name": "seed",
+          "type": "integer",
+          "required": true,
+          "constraints": "Recorded deterministic seed"
+        },
+        {
+          "name": "contributions",
+          "type": "array",
+          "required": true,
+          "constraints": "Verified actor-owned receipts"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "phase_state",
+          "type": "object",
+          "required": true,
+          "constraints": "Forecast through cooldown with deadline"
+        },
+        {
+          "name": "service_changes",
+          "type": "array",
+          "required": true,
+          "constraints": "Whitelisted reversible changes"
+        },
+        {
+          "name": "reward_receipts",
+          "type": "array",
+          "required": true,
+          "constraints": "Exactly-once eligible grants"
+        }
+      ],
+      "state": {
+        "states": [
+          "forecast",
+          "activation",
+          "response",
+          "resolution",
+          "reconstruction",
+          "cooldown"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "forecast",
+          "event": "deadline",
+          "to": "activation",
+          "guard": "Safe routes reserved",
+          "atomic_changes": "Publish danger boundary"
+        },
+        {
+          "from": "activation",
+          "event": "begin",
+          "to": "response",
+          "guard": "Required infrastructure ready",
+          "atomic_changes": "Enable bounded objectives"
+        },
+        {
+          "from": "response",
+          "event": "threshold_or_deadline",
+          "to": "resolution",
+          "guard": "One terminal result selected",
+          "atomic_changes": "Write outcome and rewards"
+        },
+        {
+          "from": "resolution",
+          "event": "recover",
+          "to": "reconstruction",
+          "guard": "Setback or success cleanup",
+          "atomic_changes": "Restore essential service floor"
+        },
+        {
+          "from": "reconstruction",
+          "event": "service_deadline",
+          "to": "cooldown",
+          "guard": "Baseline paths validated",
+          "atomic_changes": "Close temporary patches"
+        }
+      ],
+      "authority": {
+        "writer": "Regional event authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-consequence-journal",
+        "contract-resource-ledger"
+      ],
+      "risks": [
+        "Permanent service loss",
+        "Contribution spam",
+        "Event overlap cascade"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-world-event-test-01",
+          "given": "No one participates",
+          "when": "Deadline arrives",
+          "then": "Essential services recover automatically",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-world-event-test-02",
+          "given": "Reward message duplicated",
+          "when": "Claim again",
+          "then": "No duplicate reward",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-world-event-test-03",
+          "given": "Server restarts mid-event",
+          "when": "Recover checkpoint",
+          "then": "Resume safely or skip stale danger to recovery",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Checkpoint phase, deadlines and contribution receipts; stale danger never restarts without forecast.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-climate-ecology",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Coarse weather, habitat and migration",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "climate_profile",
+          "type": "object",
+          "required": true,
+          "constraints": "Approved region/elevation/watershed parameters"
+        },
+        {
+          "name": "world_time_bucket",
+          "type": "integer",
+          "required": true,
+          "constraints": "Authority clock bucket"
+        },
+        {
+          "name": "seed",
+          "type": "integer",
+          "required": true,
+          "constraints": "Deterministic climate seed"
+        },
+        {
+          "name": "event_modifiers",
+          "type": "array",
+          "required": true,
+          "constraints": "Bounded approved modifiers"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "weather_category",
+          "type": "object",
+          "required": true,
+          "constraints": "Coarse authoritative conditions and forecast"
+        },
+        {
+          "name": "habitat_bands",
+          "type": "array",
+          "required": true,
+          "constraints": "Bounded population/resource states"
+        },
+        {
+          "name": "migration_schedule",
+          "type": "array",
+          "required": true,
+          "constraints": "Authored corridors and safe crossings"
+        }
+      ],
+      "state": {
+        "states": [
+          "baseline",
+          "forecast",
+          "active",
+          "easing",
+          "restored"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "baseline",
+          "event": "schedule",
+          "to": "forecast",
+          "guard": "Profile permits condition",
+          "atomic_changes": "Publish accessible forecast"
+        },
+        {
+          "from": "forecast",
+          "event": "activate",
+          "to": "active",
+          "guard": "Safe alternate routes confirmed",
+          "atomic_changes": "Apply bounded category"
+        },
+        {
+          "from": "active",
+          "event": "ease",
+          "to": "easing",
+          "guard": "Duration ends or controlled event resolution",
+          "atomic_changes": "Remove severe modifiers"
+        },
+        {
+          "from": "easing",
+          "event": "restore",
+          "to": "restored",
+          "guard": "Habitat/service floor valid",
+          "atomic_changes": "Return to bounded baseline"
+        }
+      ],
+      "authority": {
+        "writer": "Regional environment authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-world-event",
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Global cast-driven weather grief",
+        "Species extinction",
+        "Inaccessible essential routes"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-climate-ecology-test-01",
+          "given": "Player casts Frost",
+          "when": "Evaluate world weather",
+          "then": "No global climate mutation",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-climate-ecology-test-02",
+          "given": "Gathering quota depleted",
+          "when": "Advance recovery",
+          "then": "Resource floor returns",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-climate-ecology-test-03",
+          "given": "Reduced visual effects enabled",
+          "when": "Render storm",
+          "then": "Retain exact gameplay warning information",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Persist coarse state/seed only; cosmetic particles and every individual animal are not durable world entities.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-trade-crafting",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Recipes, market escrow and delivery",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "owner_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Authenticated producer or trader"
+        },
+        {
+          "name": "recipe_or_order_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Versioned recipe/listing"
+        },
+        {
+          "name": "input_instances",
+          "type": "array",
+          "required": true,
+          "constraints": "Owned bounded item ids and quantities"
+        },
+        {
+          "name": "destination",
+          "type": "object",
+          "required": true,
+          "constraints": "Approved inventory or delivery endpoint"
+        },
+        {
+          "name": "transaction_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Idempotency key"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "escrow_receipt",
+          "type": "object",
+          "required": true,
+          "constraints": "Reserved inputs and declared fees"
+        },
+        {
+          "name": "output_receipt",
+          "type": "object",
+          "required": true,
+          "constraints": "Versioned output or delivery exactly once"
+        },
+        {
+          "name": "salvage_or_refund",
+          "type": "object",
+          "required": true,
+          "constraints": "Previewed failure/cancellation result"
+        }
+      ],
+      "state": {
+        "states": [
+          "quoted",
+          "reserved",
+          "processing",
+          "fulfilled",
+          "cancelled"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "quoted",
+          "event": "accept",
+          "to": "reserved",
+          "guard": "Terms and owned inputs validated",
+          "atomic_changes": "Reserve ledger entries"
+        },
+        {
+          "from": "reserved",
+          "event": "start",
+          "to": "processing",
+          "guard": "Station and route capacity valid",
+          "atomic_changes": "Start bounded job"
+        },
+        {
+          "from": "processing",
+          "event": "complete",
+          "to": "fulfilled",
+          "guard": "Recipe/result authorized",
+          "atomic_changes": "Consume inputs and issue output atomically"
+        },
+        {
+          "from": "reserved",
+          "event": "cancel",
+          "to": "cancelled",
+          "guard": "No output committed",
+          "atomic_changes": "Release escrow"
+        }
+      ],
+      "authority": {
+        "writer": "Economy transaction authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-resource-ledger",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Profitable exploit cycles",
+        "Escrow duplication",
+        "Involuntary cargo risk"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-trade-crafting-test-01",
+          "given": "Two clients fulfill one order",
+          "when": "Commit concurrently",
+          "then": "One output and one payment",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-trade-crafting-test-02",
+          "given": "Timed effect replays completion",
+          "when": "Submit old receipt",
+          "then": "No new output",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-trade-crafting-test-03",
+          "given": "Route is disrupted",
+          "when": "Resolve essential freight",
+          "then": "Use declared detour/recovery policy",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Reserve/fulfill/cancel are mutually exclusive terminal ledger outcomes; maintenance preserves escrow.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-housing",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Housing ownership, editing and relocation",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "plot_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Stable owned entitlement"
+        },
+        {
+          "name": "actor_permission",
+          "type": "object",
+          "required": true,
+          "constraints": "Owner or explicitly granted editing/use scope"
+        },
+        {
+          "name": "edit_batch",
+          "type": "array",
+          "required": true,
+          "constraints": "Bounded object placements/removals/relocation"
+        },
+        {
+          "name": "expected_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Current layout revision"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "layout_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Committed version"
+        },
+        {
+          "name": "inventory_receipts",
+          "type": "array",
+          "required": true,
+          "constraints": "Exactly-once object transfers"
+        },
+        {
+          "name": "safe_entry",
+          "type": "object",
+          "required": true,
+          "constraints": "Validated accessible arrival and exit"
+        }
+      ],
+      "state": {
+        "states": [
+          "stable",
+          "editing",
+          "validating",
+          "committed",
+          "recovering"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "stable",
+          "event": "begin_edit",
+          "to": "editing",
+          "guard": "Permission valid",
+          "atomic_changes": "Create reversible local preview"
+        },
+        {
+          "from": "editing",
+          "event": "submit",
+          "to": "validating",
+          "guard": "Budget and object ownership valid",
+          "atomic_changes": "Check collision/nav/dependencies"
+        },
+        {
+          "from": "validating",
+          "event": "commit",
+          "to": "committed",
+          "guard": "Safe exit and expected revision pass",
+          "atomic_changes": "Persist layout and inventory atomically"
+        },
+        {
+          "from": "committed",
+          "event": "recover",
+          "to": "recovering",
+          "guard": "Corruption or approved restore",
+          "atomic_changes": "Apply compensating snapshot with preserved inventory"
+        }
+      ],
+      "authority": {
+        "writer": "Housing persistence authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-resource-ledger",
+        "contract-consequence-journal",
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Guest theft",
+        "Blocked exits",
+        "Eviction through inactivity"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-housing-test-01",
+          "given": "Guest lacks storage grant",
+          "when": "Withdraw object",
+          "then": "Deny without layout change",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-housing-test-02",
+          "given": "Siege changes region holder",
+          "when": "Load home",
+          "then": "Same ownership and contents",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-housing-test-03",
+          "given": "Relocation crashes",
+          "when": "Recover",
+          "then": "Exactly one coherent location and inventory",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Periodic snapshots plus reversible edits; missing assets retain original ids in owner-only recovery storage.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-pvp-territory",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Opted-in match and time-limited control",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "mode_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Approved PVP_MODE_CONTRACTS id"
+        },
+        {
+          "name": "roster",
+          "type": "array",
+          "required": true,
+          "constraints": "Explicit participants and team ids"
+        },
+        {
+          "name": "objective_snapshot",
+          "type": "object",
+          "required": true,
+          "constraints": "Current objective revisions"
+        },
+        {
+          "name": "supply_receipts",
+          "type": "array",
+          "required": true,
+          "constraints": "Authorized team-owned resources"
+        },
+        {
+          "name": "season_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Current season lease scope"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "score_receipts",
+          "type": "array",
+          "required": true,
+          "constraints": "Authority-validated deltas"
+        },
+        {
+          "name": "settlement",
+          "type": "object",
+          "required": true,
+          "constraints": "Single holder and lease interval"
+        },
+        {
+          "name": "reconstruction_plan",
+          "type": "object",
+          "required": true,
+          "constraints": "Deadline and protected services"
+        }
+      ],
+      "state": {
+        "states": [
+          "registration",
+          "muster",
+          "contest",
+          "settlement",
+          "reconstruction",
+          "closed"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "registration",
+          "event": "lock",
+          "to": "muster",
+          "guard": "Teams consent and supply valid",
+          "atomic_changes": "Reserve match state"
+        },
+        {
+          "from": "muster",
+          "event": "start",
+          "to": "contest",
+          "guard": "Safe rallies and routes verified",
+          "atomic_changes": "Enable mode-scoped hostile flags"
+        },
+        {
+          "from": "contest",
+          "event": "finish",
+          "to": "settlement",
+          "guard": "Published score/tie-break resolved",
+          "atomic_changes": "Write one durable result"
+        },
+        {
+          "from": "settlement",
+          "event": "restore",
+          "to": "reconstruction",
+          "guard": "Result committed",
+          "atomic_changes": "Begin bounded repair"
+        },
+        {
+          "from": "reconstruction",
+          "event": "complete",
+          "to": "closed",
+          "guard": "Essential services restored",
+          "atomic_changes": "Remove flags and temporary state"
+        }
+      ],
+      "authority": {
+        "writer": "Match/territory authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-world-event",
+        "contract-cast-intent",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Forced PvP",
+        "Two winners after retry",
+        "Permanent content loss"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-pvp-territory-test-01",
+          "given": "Neutral heals participant",
+          "when": "Evaluate flag",
+          "then": "No implicit hostile opt-in",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-pvp-territory-test-02",
+          "given": "Settlement duplicated",
+          "when": "Apply result again",
+          "then": "Single lease and reward",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-pvp-territory-test-03",
+          "given": "All players leave",
+          "when": "Reach repair deadline",
+          "then": "Restore essential access",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Durable single settlement receipt; reconnect never changes team or duplicates score; expire lease through a published transition.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-streaming-assets",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Runtime asset bundles and safe world entry",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "cell_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Stable world cell"
+        },
+        {
+          "name": "bundle_manifest",
+          "type": "object",
+          "required": true,
+          "constraints": "Versioned asset/dependency hashes"
+        },
+        {
+          "name": "quality_profile",
+          "type": "string",
+          "required": true,
+          "constraints": "Measured supported profile when available"
+        },
+        {
+          "name": "entry_pose",
+          "type": "object",
+          "required": true,
+          "constraints": "Candidate safe arrival"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "ready_state",
+          "type": "object",
+          "required": true,
+          "constraints": "Visual, collision, nav and gameplay readiness separately"
+        },
+        {
+          "name": "fallback",
+          "type": "object",
+          "required": true,
+          "constraints": "Safe coarse scene/placeholder preserving ids"
+        },
+        {
+          "name": "load_metrics",
+          "type": "object",
+          "required": true,
+          "constraints": "Latency, memory and missing dependencies"
+        }
+      ],
+      "state": {
+        "states": [
+          "unloaded",
+          "loading",
+          "collision_ready",
+          "visual_ready",
+          "active",
+          "evicting"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "unloaded",
+          "event": "request",
+          "to": "loading",
+          "guard": "Manifest validated",
+          "atomic_changes": "Reserve bounded load budget"
+        },
+        {
+          "from": "loading",
+          "event": "collision_ready",
+          "to": "collision_ready",
+          "guard": "Critical collision/nav ready",
+          "atomic_changes": "Permit safe arrival only"
+        },
+        {
+          "from": "collision_ready",
+          "event": "visual_ready",
+          "to": "visual_ready",
+          "guard": "Minimum telegraphs and assets ready",
+          "atomic_changes": "Enable visible scene"
+        },
+        {
+          "from": "visual_ready",
+          "event": "activate",
+          "to": "active",
+          "guard": "Gameplay dependencies satisfied",
+          "atomic_changes": "Publish cell readiness"
+        },
+        {
+          "from": "active",
+          "event": "evict",
+          "to": "evicting",
+          "guard": "No unsafe owner references",
+          "atomic_changes": "Save durable state and release pooled assets"
+        }
+      ],
+      "authority": {
+        "writer": "Client streaming manager for presentation; authority for entry eligibility",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Falling through unloaded terrain",
+        "Dependency leak",
+        "Visual ready confused with simulation ready"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-streaming-assets-test-01",
+          "given": "Fast mount reaches unready cell",
+          "when": "Cross boundary",
+          "then": "Hold safely or use fallback",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-streaming-assets-test-02",
+          "given": "Cosmetic texture missing",
+          "when": "Load cell",
+          "then": "Placeholder without removing collision or ids",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-streaming-assets-test-03",
+          "given": "Repeated load/unload",
+          "when": "Profile resources",
+          "then": "No unbounded memory growth",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Gameplay state belongs to stable aggregates, not cell objects; reload reconstructs presentation without duplicating entities.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-accessibility-localization",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Semantic feedback and user settings",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "semantic_event",
+          "type": "object",
+          "required": true,
+          "constraints": "Authority outcome and priority"
+        },
+        {
+          "name": "locale",
+          "type": "string",
+          "required": true,
+          "constraints": "Supported locale with explicit fallback"
+        },
+        {
+          "name": "input_profile",
+          "type": "object",
+          "required": true,
+          "constraints": "Remaps and device glyphs"
+        },
+        {
+          "name": "accessibility_settings",
+          "type": "object",
+          "required": true,
+          "constraints": "Persistent user preferences"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "feedback_channels",
+          "type": "array",
+          "required": true,
+          "constraints": "Text/icon/shape/caption/audio variants"
+        },
+        {
+          "name": "localized_message",
+          "type": "object",
+          "required": true,
+          "constraints": "Resolved key and formatted placeholders"
+        },
+        {
+          "name": "missing_key_report",
+          "type": "array",
+          "required": true,
+          "constraints": "Safe diagnostic context"
+        }
+      ],
+      "state": {
+        "states": [
+          "received",
+          "prioritized",
+          "resolved",
+          "presented",
+          "archived"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "received",
+          "event": "prioritize",
+          "to": "prioritized",
+          "guard": "Importance and duplication rules",
+          "atomic_changes": "Reserve essential channel"
+        },
+        {
+          "from": "prioritized",
+          "event": "resolve",
+          "to": "resolved",
+          "guard": "Locale and settings applied",
+          "atomic_changes": "Construct equivalent semantic feedback"
+        },
+        {
+          "from": "resolved",
+          "event": "present",
+          "to": "presented",
+          "guard": "No sole reliance on disabled channel",
+          "atomic_changes": "Display with appropriate duration"
+        },
+        {
+          "from": "presented",
+          "event": "archive",
+          "to": "archived",
+          "guard": "Event-log eligibility",
+          "atomic_changes": "Save bounded accessible summary"
+        }
+      ],
+      "authority": {
+        "writer": "Client presentation authority only; cannot alter gameplay outcomes",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry"
+      ],
+      "risks": [
+        "Danger hidden by lower effects",
+        "Translation changes consent",
+        "Color/audio-only puzzles"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-accessibility-localization-test-01",
+          "given": "Audio disabled",
+          "when": "Issue imminent warning",
+          "then": "Text/shape preserves timing and direction",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-accessibility-localization-test-02",
+          "given": "Right-to-left expanded locale",
+          "when": "Display pact preview",
+          "then": "No clipped obligations or reversed values",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-accessibility-localization-test-03",
+          "given": "Reduced motion enabled",
+          "when": "Enter gravity volume",
+          "then": "Stable camera option retains exact hazard information",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Settings persist independently of a character loadout; bounded event log does not expose private opponent state.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-save-migration",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Versioned save recovery and content migrations",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "snapshot",
+          "type": "object",
+          "required": true,
+          "constraints": "Aggregate id, schema version, revision and checksum"
+        },
+        {
+          "name": "journal_tail",
+          "type": "array",
+          "required": true,
+          "constraints": "Ordered idempotent receipts"
+        },
+        {
+          "name": "target_content_version",
+          "type": "string",
+          "required": true,
+          "constraints": "Validated bundle"
+        },
+        {
+          "name": "migration_plan",
+          "type": "object",
+          "required": true,
+          "constraints": "Approved deterministic transforms and fallback ids"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "recovered_snapshot",
+          "type": "object",
+          "required": true,
+          "constraints": "One coherent aggregate revision"
+        },
+        {
+          "name": "reconciliation_report",
+          "type": "array",
+          "required": true,
+          "constraints": "Applied, skipped, quarantined and compensated records"
+        },
+        {
+          "name": "blocked_dependencies",
+          "type": "array",
+          "required": true,
+          "constraints": "Missing assets/schema/authorization"
+        }
+      ],
+      "state": {
+        "states": [
+          "loaded",
+          "validated",
+          "migrating",
+          "reconciled",
+          "quarantined"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "loaded",
+          "event": "validate",
+          "to": "validated",
+          "guard": "Checksum/schema/journal order valid",
+          "atomic_changes": "Create recovery checkpoint"
+        },
+        {
+          "from": "validated",
+          "event": "migrate",
+          "to": "migrating",
+          "guard": "Approved plan and references resolvable",
+          "atomic_changes": "Transform without external side effects"
+        },
+        {
+          "from": "migrating",
+          "event": "reconcile",
+          "to": "reconciled",
+          "guard": "Conservation and referential checks pass",
+          "atomic_changes": "Commit new snapshot once"
+        },
+        {
+          "from": "loaded",
+          "event": "quarantine",
+          "to": "quarantined",
+          "guard": "Critical validation fails",
+          "atomic_changes": "Preserve original and select safe access mode"
+        }
+      ],
+      "authority": {
+        "writer": "Persistence recovery authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Corrupt overwrite",
+        "Replay duplication",
+        "Deleting deprecated content"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-save-migration-test-01",
+          "given": "Unknown schema version",
+          "when": "Load save",
+          "then": "Quarantine and preserve original",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-save-migration-test-02",
+          "given": "Migration run twice",
+          "when": "Compare outcomes",
+          "then": "Same final snapshot, no duplicate rewards",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-save-migration-test-03",
+          "given": "Missing decoration asset",
+          "when": "Recover housing",
+          "then": "Retain ownership and original id with safe placeholder",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Never overwrite the only valid source snapshot. Restore uses compensating operations and versioned backups with an approved retention policy.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-quest-branch",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Order-independent quest and personal ending state",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "character_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Owner of narrative branch"
+        },
+        {
+          "name": "quest_id",
+          "type": "string",
+          "required": true,
+          "constraints": "Authored stable quest id"
+        },
+        {
+          "name": "prerequisite_snapshot",
+          "type": "object",
+          "required": true,
+          "constraints": "Capabilities/history, not a fixed Oath visit order"
+        },
+        {
+          "name": "choice_intent",
+          "type": "object",
+          "required": true,
+          "constraints": "Selected option and personal consent"
+        },
+        {
+          "name": "party_context",
+          "type": "object",
+          "required": true,
+          "constraints": "Individual eligibility and consent"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "quest_revision",
+          "type": "integer",
+          "required": true,
+          "constraints": "Committed personal state"
+        },
+        {
+          "name": "branch_receipt",
+          "type": "object",
+          "required": true,
+          "constraints": "Choice, preview and outcome"
+        },
+        {
+          "name": "shared_event_contribution",
+          "type": "object",
+          "required": true,
+          "constraints": "Only bounded reversible aggregate effects"
+        }
+      ],
+      "state": {
+        "states": [
+          "available",
+          "active",
+          "choice_preview",
+          "committed",
+          "epilogue"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "available",
+          "event": "start",
+          "to": "active",
+          "guard": "Capability prerequisites satisfied in any allowed order",
+          "atomic_changes": "Set personal checkpoint"
+        },
+        {
+          "from": "active",
+          "event": "preview",
+          "to": "choice_preview",
+          "guard": "Choice reached",
+          "atomic_changes": "Show costs, access and recovery"
+        },
+        {
+          "from": "choice_preview",
+          "event": "confirm",
+          "to": "committed",
+          "guard": "Explicit owner action; party consent separated",
+          "atomic_changes": "Commit personal branch once"
+        },
+        {
+          "from": "committed",
+          "event": "resolve",
+          "to": "epilogue",
+          "guard": "Authored conditions met",
+          "atomic_changes": "Expose outcome while retaining shared access layer"
+        }
+      ],
+      "authority": {
+        "writer": "Character narrative authority",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-pact-progression",
+        "contract-consequence-journal",
+        "contract-world-event"
+      ],
+      "risks": [
+        "Global ending rewrites others",
+        "Fixed Oath order softlock",
+        "Party leader chooses for everyone"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-quest-branch-test-01",
+          "given": "Two valid Oath visit orders",
+          "when": "Reach common milestone",
+          "then": "Both remain eligible",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-quest-branch-test-02",
+          "given": "Member declines leader choice",
+          "when": "Resolve party step",
+          "then": "Member retains own branch",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-quest-branch-test-03",
+          "given": "Personal finale ends",
+          "when": "Visit shared realm",
+          "then": "Other players and core access remain intact",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Personal checkpoints and branch receipts survive region event/control changes; irreversible choices never auto-commit on disconnect.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    },
+    {
+      "id": "contract-event-replication",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "title": "Interest-managed authoritative event delivery",
+      "interface_status": "PROPOSED_NOT_EXISTING_API",
+      "versioning": "Semantic schema version; incompatible payload changes require a migration and approval",
+      "inputs": [
+        {
+          "name": "accepted_events",
+          "type": "array",
+          "required": true,
+          "constraints": "Signed authority receipts, revisions and deterministic cosmetic seeds"
+        },
+        {
+          "name": "interest_set",
+          "type": "array",
+          "required": true,
+          "constraints": "Permitted nearby or owner-private aggregates"
+        },
+        {
+          "name": "client_ack",
+          "type": "object",
+          "required": true,
+          "constraints": "Last received revisions and bounded sequence"
+        },
+        {
+          "name": "priority_budget",
+          "type": "object",
+          "required": true,
+          "constraints": "Measured transport constraints"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "snapshot_delta",
+          "type": "object",
+          "required": true,
+          "constraints": "Authorized current state and ordered events"
+        },
+        {
+          "name": "resync_request",
+          "type": "object",
+          "required": true,
+          "constraints": "Gap or version mismatch"
+        },
+        {
+          "name": "presentation_seed",
+          "type": "object",
+          "required": true,
+          "constraints": "Cosmetics only, no gameplay authority"
+        }
+      ],
+      "state": {
+        "states": [
+          "subscribed",
+          "streaming",
+          "gap_detected",
+          "resynchronizing",
+          "current"
+        ],
+        "storage": "Versioned aggregate; transient state is explicitly marked in each implementation",
+        "identity": "Stable aggregate id plus content version and revision"
+      },
+      "transitions": [
+        {
+          "from": "subscribed",
+          "event": "send",
+          "to": "streaming",
+          "guard": "Interest and privacy checks pass",
+          "atomic_changes": "Emit bounded ordered delta"
+        },
+        {
+          "from": "streaming",
+          "event": "detect_gap",
+          "to": "gap_detected",
+          "guard": "Sequence/revision mismatch",
+          "atomic_changes": "Stop speculative durable updates"
+        },
+        {
+          "from": "gap_detected",
+          "event": "resync",
+          "to": "resynchronizing",
+          "guard": "Authority snapshot available",
+          "atomic_changes": "Replace relevant aggregate view"
+        },
+        {
+          "from": "resynchronizing",
+          "event": "ack",
+          "to": "current",
+          "guard": "Versions agree",
+          "atomic_changes": "Resume deltas without replaying rewards"
+        }
+      ],
+      "authority": {
+        "writer": "Simulation/persistence publisher; clients acknowledge only",
+        "client_permission": "Submit intent; never author accepted outcome or balances",
+        "scope": "Least scope declared by input; no automatic escalation"
+      },
+      "dependencies": [
+        "contract-content-registry",
+        "contract-consequence-journal"
+      ],
+      "risks": [
+        "Private-state leak",
+        "Duplicate effect/reward",
+        "Cosmetic divergence confused with authority"
+      ],
+      "acceptance_tests": [
+        {
+          "id": "contract-event-replication-test-01",
+          "given": "Packet repeated",
+          "when": "Receive twice",
+          "then": "One gameplay outcome",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-event-replication-test-02",
+          "given": "Player leaves interest range",
+          "when": "Replicate private housing",
+          "then": "No unauthorized contents sent",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        },
+        {
+          "id": "contract-event-replication-test-03",
+          "given": "Client misses destruction event",
+          "when": "Resync",
+          "then": "Correct collision stage without duplicate debris gameplay",
+          "status": "SPECIFIED_NOT_EXECUTED"
+        }
+      ],
+      "persistence_recovery": "Current state and receipt sequence recover missed events. Cosmetic seeds can restart visuals but never generate inventory or damage.",
+      "observability": {
+        "record": [
+          "request id",
+          "aggregate revision",
+          "content version",
+          "decision reason",
+          "latency bucket"
+        ],
+        "privacy": "No unnecessary personal data; access-controlled logs and retention policy required"
+      },
+      "performance": "Validate against measured target profile; proposed budgets are unvalidated",
+      "accessibility_localization": "All user-visible reasons map to localized text, redundant icons and optional captioned audio; stable ids remain untranslated"
+    }
+  ],
+  "contract_model": "Responsibility/message contracts, not existing source APIs or a required distributed-services deployment"
+}

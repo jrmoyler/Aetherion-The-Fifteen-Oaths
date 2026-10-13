@@ -1,0 +1,127 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "frost-sandbox",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 5173,
+      "url": "http://127.0.0.1:5173"
+    },
+    {
+      "name": "frost-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5321",
+        "--strictPort"
+      ],
+      "port": 5321,
+      "url": "http://127.0.0.1:5321"
+    },
+    {
+      "name": "gyro-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5344",
+        "--strictPort"
+      ],
+      "port": 5344,
+      "url": "http://127.0.0.1:5344"
+    },
+    {
+      "name": "amethyst-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5361",
+        "--strictPort"
+      ],
+      "port": 5361,
+      "url": "http://127.0.0.1:5361"
+    },
+    {
+      "name": "tome-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5377",
+        "--strictPort"
+      ],
+      "port": 5377,
+      "url": "http://127.0.0.1:5377"
+    },
+    {
+      "name": "reliquary-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5389",
+        "--strictPort"
+      ],
+      "port": 5389,
+      "url": "http://127.0.0.1:5389"
+    },
+    {
+      "name": "dragon-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5395",
+        "--strictPort"
+      ],
+      "port": 5395,
+      "url": "http://127.0.0.1:5395"
+    },
+    {
+      "name": "lance-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5407",
+        "--strictPort"
+      ],
+      "port": 5407,
+      "url": "http://127.0.0.1:5407"
+    },
+    {
+      "name": "wolf-verify",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "5412",
+        "--strictPort"
+      ],
+      "port": 5412,
+      "url": "http://127.0.0.1:5412"
+    }
+  ]
+}

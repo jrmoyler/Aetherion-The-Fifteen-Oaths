@@ -1,0 +1,269 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "canon_status",
+    "records",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "canon_status": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "access_requirement",
+          "canon_status",
+          "coordinate_status",
+          "description",
+          "essential_access_fallback",
+          "id",
+          "kind",
+          "name",
+          "narrative_scope",
+          "oath_id",
+          "persistence",
+          "region_id",
+          "source_ids"
+        ],
+        "properties": {
+          "access_requirement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "adjacent_region_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "enum": [
+                "region-01",
+                "region-02",
+                "region-03",
+                "region-04",
+                "region-05",
+                "region-06",
+                "region-07",
+                "region-08",
+                "region-09",
+                "region-10",
+                "region-11",
+                "region-12",
+                "region-13",
+                "region-14",
+                "region-15"
+              ]
+            },
+            "uniqueItems": true
+          },
+          "canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "coordinate_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "essential_access_fallback": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "poi-01-capital",
+              "poi-01-dungeon",
+              "poi-01-event",
+              "poi-01-settlement",
+              "poi-02-capital",
+              "poi-02-dungeon",
+              "poi-02-event",
+              "poi-02-settlement",
+              "poi-03-capital",
+              "poi-03-dungeon",
+              "poi-03-event",
+              "poi-03-settlement",
+              "poi-04-capital",
+              "poi-04-dungeon",
+              "poi-04-event",
+              "poi-04-settlement",
+              "poi-05-capital",
+              "poi-05-dungeon",
+              "poi-05-event",
+              "poi-05-settlement",
+              "poi-06-capital",
+              "poi-06-dungeon",
+              "poi-06-event",
+              "poi-06-settlement",
+              "poi-07-capital",
+              "poi-07-dungeon",
+              "poi-07-event",
+              "poi-07-settlement",
+              "poi-08-capital",
+              "poi-08-dungeon",
+              "poi-08-event",
+              "poi-08-settlement",
+              "poi-09-capital",
+              "poi-09-dungeon",
+              "poi-09-event",
+              "poi-09-settlement",
+              "poi-10-capital",
+              "poi-10-dungeon",
+              "poi-10-event",
+              "poi-10-settlement",
+              "poi-11-capital",
+              "poi-11-dungeon",
+              "poi-11-event",
+              "poi-11-settlement",
+              "poi-12-capital",
+              "poi-12-dungeon",
+              "poi-12-event",
+              "poi-12-settlement",
+              "poi-13-capital",
+              "poi-13-dungeon",
+              "poi-13-event",
+              "poi-13-settlement",
+              "poi-14-capital",
+              "poi-14-dungeon",
+              "poi-14-event",
+              "poi-14-settlement",
+              "poi-15-capital",
+              "poi-15-dungeon",
+              "poi-15-event",
+              "poi-15-settlement",
+              "poi-contested-pass",
+              "poi-endgame-weave-seam",
+              "poi-neutral-crossroads"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "capital",
+              "contested_border",
+              "dungeon",
+              "endgame_assembly",
+              "event",
+              "neutral_service",
+              "settlement"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "narrative_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "enum": [
+                  "oath-01",
+                  "oath-02",
+                  "oath-03",
+                  "oath-04",
+                  "oath-05",
+                  "oath-06",
+                  "oath-07",
+                  "oath-08",
+                  "oath-09",
+                  "oath-10",
+                  "oath-11",
+                  "oath-12",
+                  "oath-13",
+                  "oath-14",
+                  "oath-15"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "persistence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "region-01",
+              "region-02",
+              "region-03",
+              "region-04",
+              "region-05",
+              "region-06",
+              "region-07",
+              "region-08",
+              "region-09",
+              "region-10",
+              "region-11",
+              "region-12",
+              "region-13",
+              "region-14",
+              "region-15"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aetherion:world-poi-registry:1.0.0",
+  "title": "Aetherion World Poi Registry",
+  "description": "Strict field-level schema for the authored preproduction registry. Stable record IDs and all object fields are explicit. Schema validity does not confer canon approval, implementation or semantic truth."
+}

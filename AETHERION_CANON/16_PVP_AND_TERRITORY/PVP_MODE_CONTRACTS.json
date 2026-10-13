@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "pvp-castle-siege",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Scheduled castle siege",
+      "participants": "Two declared teams; neutral civilians stay outside combat flags",
+      "objective": "Breach designated defenses and control the objective through a held window",
+      "states": [
+        "registration",
+        "muster",
+        "assault",
+        "occupation",
+        "reconstruction"
+      ],
+      "authority": "Match/territory aggregate owns teams, flags, score, objective revisions and settlement",
+      "respawn": "Protected rally points, team wave timers, spawn-exit invulnerability until attack or expiry",
+      "supply": "Finite ammunition and repair stock; supply route has at least two approaches",
+      "concurrency_fixture": {
+        "players_per_team": 16,
+        "status": "UNVALIDATED_PROTOTYPE_ONLY"
+      },
+      "control_policy": "Shared hard-control ledger, capped displacement and no spawn-volume damage",
+      "destructibles": "Whitelisted authored stages only; nav safety test before collision swap",
+      "neutral_rules": "A separate opt-in contract previews PvP flag, cargo risk and reward; otherwise neutral cannot be damaged",
+      "territory_rewards": "Time-limited cosmetic administration, optional services and declared fees under a baseline service floor",
+      "reconstruction": "Essential routes restored at deadline; ownership of homes, quests and personal goods unaffected",
+      "disconnect": "Short reconnect reservation; unattended actor follows published safe despawn policy, never grants duplicate score",
+      "anti_grief": [
+        "No permanent content loss",
+        "No private storage looting",
+        "No cross-instance harmful effects",
+        "No forced flag by friendly healing or area reactions",
+        "Contribution tracking avoids last-hit monopoly"
+      ],
+      "acceptance_tests": [
+        "Nonparticipant crosses a protected route unharmed",
+        "All objectives remain reachable after every allowed destruction state",
+        "Disconnect and duplicate objective messages cannot double score",
+        "Two teams cannot deny the third all safe exits",
+        "Every result restores services without population dependence"
+      ]
+    },
+    {
+      "id": "pvp-node-war",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Regional node war",
+      "participants": "Two opted-in teams with neutral service participation",
+      "objective": "Control a bounded set of relay, road or resource-service nodes",
+      "states": [
+        "registration",
+        "routing",
+        "contest",
+        "settlement",
+        "reconstruction"
+      ],
+      "authority": "Match/territory aggregate owns teams, flags, score, objective revisions and settlement",
+      "respawn": "Alternate rally selected by authority if encamped; personal safe withdrawal always available",
+      "supply": "Score-bearing deliveries require contested route; essential civilian freight remains protected",
+      "concurrency_fixture": {
+        "players_per_team": 16,
+        "status": "UNVALIDATED_PROTOTYPE_ONLY"
+      },
+      "control_policy": "Shared hard-control ledger, capped displacement and no spawn-volume damage",
+      "destructibles": "Whitelisted authored stages only; nav safety test before collision swap",
+      "neutral_rules": "A separate opt-in contract previews PvP flag, cargo risk and reward; otherwise neutral cannot be damaged",
+      "territory_rewards": "Time-limited cosmetic administration, optional services and declared fees under a baseline service floor",
+      "reconstruction": "Essential routes restored at deadline; ownership of homes, quests and personal goods unaffected",
+      "disconnect": "Short reconnect reservation; unattended actor follows published safe despawn policy, never grants duplicate score",
+      "anti_grief": [
+        "No permanent content loss",
+        "No private storage looting",
+        "No cross-instance harmful effects",
+        "No forced flag by friendly healing or area reactions",
+        "Contribution tracking avoids last-hit monopoly"
+      ],
+      "acceptance_tests": [
+        "Nonparticipant crosses a protected route unharmed",
+        "All objectives remain reachable after every allowed destruction state",
+        "Disconnect and duplicate objective messages cannot double score",
+        "Two teams cannot deny the third all safe exits",
+        "Every result restores services without population dependence"
+      ]
+    },
+    {
+      "id": "pvp-three-way",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "name": "Three-way territorial conflict",
+      "participants": "Three declared teams; neutral contracts cannot secretly flag participants",
+      "objective": "Hold independent objectives; victory by published score and tie-break",
+      "states": [
+        "registration",
+        "muster",
+        "multi_front",
+        "resolution",
+        "reconstruction"
+      ],
+      "authority": "Match/territory aggregate owns teams, flags, score, objective revisions and settlement",
+      "respawn": "Protected team-specific rally areas and anti-camp reroutes",
+      "supply": "Supply is team-owned; objective pressure discourages a permanent two-team blockade",
+      "concurrency_fixture": {
+        "players_per_team": 16,
+        "status": "UNVALIDATED_PROTOTYPE_ONLY"
+      },
+      "control_policy": "Shared hard-control ledger, capped displacement and no spawn-volume damage",
+      "destructibles": "Whitelisted authored stages only; nav safety test before collision swap",
+      "neutral_rules": "A separate opt-in contract previews PvP flag, cargo risk and reward; otherwise neutral cannot be damaged",
+      "territory_rewards": "Time-limited cosmetic administration, optional services and declared fees under a baseline service floor",
+      "reconstruction": "Essential routes restored at deadline; ownership of homes, quests and personal goods unaffected",
+      "disconnect": "Short reconnect reservation; unattended actor follows published safe despawn policy, never grants duplicate score",
+      "anti_grief": [
+        "No permanent content loss",
+        "No private storage looting",
+        "No cross-instance harmful effects",
+        "No forced flag by friendly healing or area reactions",
+        "Contribution tracking avoids last-hit monopoly"
+      ],
+      "acceptance_tests": [
+        "Nonparticipant crosses a protected route unharmed",
+        "All objectives remain reachable after every allowed destruction state",
+        "Disconnect and duplicate objective messages cannot double score",
+        "Two teams cannot deny the third all safe exits",
+        "Every result restores services without population dependence"
+      ]
+    }
+  ]
+}

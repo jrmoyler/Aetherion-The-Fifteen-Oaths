@@ -1,0 +1,35 @@
+vite v8.1.5 building client environment for production...
+[2K
+transforming...✓ 600 modules transformed.
+
+(!) outDir validation/build/sandbox is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+validation/build/sandbox/index.html                              1.68 kB │ gzip:   0.67 kB
+validation/build/sandbox/assets/index-Bc-zeLKo.css              14.21 kB │ gzip:   3.66 kB
+validation/build/sandbox/assets/createRuntime-DG6IFlyA.js        2.34 kB │ gzip:   1.19 kB │ map:    10.81 kB
+validation/build/sandbox/assets/Layers-CumvFylt.js              41.07 kB │ gzip:  14.54 kB │ map:   194.54 kB
+validation/build/sandbox/assets/HDRLoader-Ccdm7Ypf.js          100.33 kB │ gzip:  31.07 kB │ map:   548.93 kB
+validation/build/sandbox/assets/lil-gui.esm-DlnAlxoZ.js        287.02 kB │ gzip:  76.98 kB │ map: 1,968.64 kB
+validation/build/sandbox/assets/linear-BdDmRdQj.js             352.95 kB │ gzip: 100.14 kB │ map:   949.55 kB
+validation/build/sandbox/assets/linear-ext-BNadMgrQ.js         534.12 kB │ gzip: 142.76 kB │ map: 1,431.70 kB
+validation/build/sandbox/assets/casting-cZmd5OCm.js            618.82 kB │ gzip: 185.41 kB │ map: 1,720.24 kB
+validation/build/sandbox/assets/handcast-CX_OYfts.js           712.24 kB │ gzip: 194.69 kB │ map: 1,804.79 kB
+validation/build/sandbox/assets/linear-extended-8PSSYPM2.js    926.06 kB │ gzip: 262.55 kB │ map: 2,444.79 kB
+validation/build/sandbox/assets/index-C1XJKGYj.js            3,339.55 kB │ gzip: 953.20 kB │ map: 9,147.48 kB
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vite:build-import-analysis (35%)
+  - vite:worker (29%)
+  - vite:css-post (10%)
+  - vite:asset (6%)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 2000 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 9.86s

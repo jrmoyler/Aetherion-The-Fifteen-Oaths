@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aetherion.invalid/schemas/reference-index.schema.json",
+  "title": "reference-index",
+  "description": "Field-level documentation contract. Passing schema does not establish design approval or runtime behavior.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "source_id",
+          "asset_id",
+          "name",
+          "oath_ids",
+          "repository_path",
+          "approval",
+          "pixel_review",
+          "usable_for",
+          "next_gate"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^oath-(0[1-9]|1[0-5])$"
+            }
+          },
+          "repository_path": {
+            "type": "string",
+            "pattern": "^assets/references/reference-[0-9]{3}/original\\.png$"
+          },
+          "approval": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": true
+      },
+      "minItems": 114,
+      "maxItems": 114
+    }
+  },
+  "additionalProperties": true
+}

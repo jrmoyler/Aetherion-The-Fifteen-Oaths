@@ -1,0 +1,201 @@
+{
+  "sourceCommit": "4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451",
+  "upstreamNodeTests": {
+    "passed": 51,
+    "failed": 0,
+    "command": "npm --prefix runtime/ability-matrix test",
+    "log": "validation/upstream-node-tests.log"
+  },
+  "destinationRepairTests": {
+    "passed": 4,
+    "failed": 0,
+    "files": [
+      "tests/linear-fissures-integration.test.mjs",
+      "tests/adapter-meteor-runtime.test.mjs"
+    ],
+    "executedWithin": "npm test",
+    "log": "validation/wrapper-root-tests.log"
+  },
+  "productionBuilds": {
+    "sandbox": {
+      "status": "passed",
+      "log": "validation/sandbox-build.log",
+      "warnings": [
+        "Large minified chunk: approximately 3.34 MB main bundle."
+      ]
+    },
+    "atlas": {
+      "status": "passed",
+      "log": "validation/atlas-build.log",
+      "warnings": [
+        "Chunk-size warning."
+      ]
+    }
+  },
+  "rawSourceCpuAudit": {
+    "total": 100,
+    "statusCounts": {
+      "passed-cpu-lifecycle-only": 96,
+      "failed-source-or-contract": 1,
+      "blocked-browser-API": 3
+    },
+    "importPassed": 100,
+    "rawSourceCpuLifecyclePassed": 96,
+    "knownSourceFailures": [
+      "linear/meteor"
+    ],
+    "browserApiBlocked": [
+      "linear-extended/quake",
+      "handcast/toxic",
+      "casting/shark"
+    ],
+    "aetherionRepairedCpuLifecyclePassed": [
+      "linear/meteor"
+    ],
+    "distinctCastablesWithCpuLifecycleEvidence": 97,
+    "byPack": {
+      "linear": {
+        "total": 6,
+        "passed": 5,
+        "blocked": 0,
+        "failed": 1
+      },
+      "linear-ext": {
+        "total": 10,
+        "passed": 10,
+        "blocked": 0,
+        "failed": 0
+      },
+      "linear-extended": {
+        "total": 10,
+        "passed": 9,
+        "blocked": 1,
+        "failed": 0
+      },
+      "handcast": {
+        "total": 9,
+        "passed": 8,
+        "blocked": 1,
+        "failed": 0
+      },
+      "casting": {
+        "total": 9,
+        "passed": 8,
+        "blocked": 1,
+        "failed": 0
+      },
+      "collective": {
+        "total": 12,
+        "passed": 12,
+        "blocked": 0,
+        "failed": 0
+      },
+      "matrix-new": {
+        "total": 12,
+        "passed": 12,
+        "blocked": 0,
+        "failed": 0
+      },
+      "atlas": {
+        "total": 10,
+        "passed": 10,
+        "blocked": 0,
+        "failed": 0
+      },
+      "codex": {
+        "total": 22,
+        "passed": 22,
+        "blocked": 0,
+        "failed": 0
+      }
+    }
+  },
+  "gpuVisualValidation": "not_verified",
+  "localBrowserAttempt": {
+    "status": "blocked",
+    "reason": "Chromium process singleton socket() failed: Operation not permitted",
+    "log": "validation/chromium-capability-check.log"
+  },
+  "authoredCharacterAndTargetRigGameplay": "not_verified",
+  "cleanDependencyInstall": "blocked; tests/builds reused exact-version local files",
+  "sourceModified": false,
+  "notes": [
+    "No source gameplay implementation was replaced. Empty-target source lifecycles are not full gameplay verification.",
+    "The raw Meteor failure remains in the preserved source; the destination integration repair is separately tested."
+  ],
+  "supplementaryImageBoundaryAudit": {
+    "total": 3,
+    "passed": 3,
+    "report": "validation/texture-fixture-cpu-audit.json",
+    "castables": [
+      "linear-extended/quake",
+      "handcast/toxic",
+      "casting/shark"
+    ],
+    "method": "Four actual source stone JPEGs decoded by Pillow 12.3.0 to SHA-256-verified RGBA8 bytes; test-only exact-URL TextureLoader boundary creates real DataTextures. No source gameplay/material/shader changes.",
+    "limitations": [
+      "No browser image decode or GPU upload/sampling equivalence claim.",
+      "No populated authored character/target-rig gameplay claim."
+    ]
+  },
+  "combinedCpuLifecycleCoverage": {
+    "distinctCastables": 100,
+    "rawSourceUnadaptedPassed": 96,
+    "destinationMeteorRepairPassed": 1,
+    "supplementaryImageBoundaryPassed": 3,
+    "isGpuVisualOrCompleteGameplayValidation": false
+  },
+  "runnableDestinationWrapper": {
+    "entry": "app/abilities/index.html",
+    "devCommand": "npm run dev:abilities",
+    "buildCommand": "npm run build:abilities",
+    "output": "dist/abilities",
+    "repairBoundary": "Original App loadRuntime, installed before app.load and MatrixBridge",
+    "entryAndSourceSeamTests": {
+      "passed": 5,
+      "failed": 0,
+      "log": "validation/wrapper-entry-tests.log"
+    },
+    "buildVerification": {
+      "status": "passed",
+      "builtEntry": "dist/abilities/index.html",
+      "entryAssetReferences": [
+        "./assets/index-Cp-DDsvx.js",
+        "./assets/three.core-Dz4a11kX.js",
+        "./assets/HDRLoader-C2CHjOfT.js",
+        "./assets/Layers-DlZRwfum.js",
+        "./assets/lil-gui.esm-BsdZdNnU.js",
+        "./assets/color-CHw0Ci9W.js",
+        "./assets/LinearFissuresIntegration-DLba0Hcg.js",
+        "./assets/index-ZgdkeCzq.css"
+      ],
+      "originalPublicFilesByteVerified": 24,
+      "cataloguedCastablesPresent": 100,
+      "originalSourceStylesImported": true,
+      "sourceAppAndBridgeBundled": true,
+      "repairBoundaryBundled": true,
+      "scope": "Build artifact and byte checks only. Browser boot, WebGL render and visual result are not verified."
+    },
+    "gpuBrowserBoot": "not_verified",
+    "localHttpCheck": {
+      "status": "passed",
+      "entryHttpStatus": 200,
+      "moduleHttpStatus": 200,
+      "sourceTextureHttpStatus": 200,
+      "sourceTextureByteIdentical": true,
+      "scope": "Same-executor Vite HTTP serving and transformed entry only; no browser boot or GPU execution."
+    }
+  },
+  "destinationRootTests": {
+    "passed": 215,
+    "failed": 0,
+    "command": "npm test",
+    "log": "validation/wrapper-root-tests.log"
+  },
+  "postWrapperIntegrity": {
+    "passed": 208,
+    "failed": 0,
+    "command": "node tools/validate-migration.mjs",
+    "log": "validation/post-wrapper-integrity.log"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Preserved castable registry",
+  "type": "object",
+  "required": [
+    "format",
+    "sourceCommit",
+    "castableCount",
+    "castables"
+  ],
+  "properties": {
+    "sourceCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "castableCount": {
+      "const": 100
+    },
+    "castables": {
+      "type": "array",
+      "minItems": 100,
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": [
+          "uid",
+          "sourceCatalog",
+          "sourcePreset",
+          "provenance",
+          "implementation"
+        ],
+        "properties": {
+          "uid": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceCatalog": {
+            "type": "object"
+          },
+          "sourcePreset": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "provenance": {
+            "type": "object"
+          },
+          "implementation": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

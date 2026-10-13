@@ -1,0 +1,21 @@
+node_modules/
+dist/
+site/
+*.log
+validation/build/
+!validation/upstream-node-tests.log
+!validation/linear-fissures-integration.log
+!validation/adapter-meteor-runtime.log
+!validation/repaired-runtime-regressions.log
+!validation/sandbox-build.log
+!validation/atlas-build.log
+!validation/chromium-capability-check.log
+!validation/aetherion-wrapper-build.log
+!validation/wrapper-entry-tests.log
+!validation/final-root-tests.log
+!validation/post-wrapper-integrity.log
+!validation/wrapper-root-tests.log
+
+# Generated Python validation caches
+__pycache__/
+*.py[cod]

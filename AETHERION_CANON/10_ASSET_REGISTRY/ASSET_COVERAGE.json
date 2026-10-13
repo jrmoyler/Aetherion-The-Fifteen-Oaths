@@ -1,0 +1,4796 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-ASSET-PROPOSAL",
+    "SRC-ABILITY-MATRIX-4c4a1eb"
+  ],
+  "coverage_policy": "Documentation, reference artwork, imported source implementations and approved/validated production assets are different measures. Shared silhouette sheets may appear under multiple Oaths; do not sum per-Oath reference counts to recover unique file count.",
+  "records": [
+    {
+      "oath_id": "oath-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 17,
+      "source_castable_count": 10,
+      "dedicated_vfx_reference_count": 10,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 11,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 10,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 13,
+      "source_castable_count": 6,
+      "dedicated_vfx_reference_count": 6,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 7,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 6,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 16,
+      "source_castable_count": 9,
+      "dedicated_vfx_reference_count": 9,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 10,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 9,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 13,
+      "source_castable_count": 6,
+      "dedicated_vfx_reference_count": 6,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 7,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 6,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 7,
+      "source_castable_count": 8,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 8,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 8,
+      "source_castable_count": 5,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 6,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 5,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 8,
+      "source_castable_count": 6,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 6,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 6,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 8,
+      "source_castable_count": 5,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 6,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 5,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 8,
+      "source_castable_count": 8,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 6,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 8,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 8,
+      "source_castable_count": 5,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 6,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 5,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 7,
+      "source_castable_count": 6,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 6,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 7,
+      "source_castable_count": 4,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 4,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 8,
+      "source_castable_count": 6,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 3,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 6,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 7,
+      "source_castable_count": 6,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 6,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    },
+    {
+      "oath_id": "oath-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-ASSET-PROPOSAL"
+      ],
+      "production_requirement_families": 34,
+      "reference_image_count": 7,
+      "source_castable_count": 10,
+      "dedicated_vfx_reference_count": 0,
+      "categories": [
+        {
+          "category_id": "A",
+          "documented_requirement": true,
+          "reference_image_count": 5,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "B",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "C",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "D",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "E",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "F",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "G",
+          "documented_requirement": true,
+          "reference_image_count": 4,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "H",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "I",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "J",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "K",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "L",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "M",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "N",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "O",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "P",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Q",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "R",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "S",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "T",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "U",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "V",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "W",
+          "documented_requirement": true,
+          "reference_image_count": 1,
+          "reference_scope": "DEDICATED_OR_COMPOSITE_REFERENCE",
+          "source_runtime_castables": 10,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "X",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Y",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "Z",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AA",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AB",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AC",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AD",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AE",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AF",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AG",
+          "documented_requirement": true,
+          "reference_image_count": 0,
+          "reference_scope": "NONE_IN_RECOVERED_SET",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        },
+        {
+          "category_id": "AH",
+          "documented_requirement": true,
+          "reference_image_count": 2,
+          "reference_scope": "PARTIAL_OR_CONTEXTUAL",
+          "source_runtime_castables": 0,
+          "approved_production_asset_count": 0,
+          "validated_production_asset_count": 0
+        }
+      ]
+    }
+  ]
+}

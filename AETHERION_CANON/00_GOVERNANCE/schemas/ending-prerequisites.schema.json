@@ -1,0 +1,180 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "canon_status",
+    "evaluation_note",
+    "records",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "canon_status": {
+      "type": "string",
+      "minLength": 1,
+      "enum": [
+        "LOCKED",
+        "RECOVERED",
+        "PROPOSED",
+        "UNRESOLVED",
+        "DEPRECATED"
+      ]
+    },
+    "evaluation_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "advantage",
+          "binding_requirement",
+          "canon_status",
+          "commitment",
+          "cost",
+          "direction_source_status",
+          "failure_condition",
+          "fallback",
+          "id",
+          "irreversible_personal_changes",
+          "name",
+          "required_choices",
+          "required_flags",
+          "required_interface_attestations",
+          "shared_world_changes",
+          "source_ids",
+          "working_name"
+        ],
+        "properties": {
+          "advantage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "binding_requirement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED",
+              "RECOVERED",
+              "PROPOSED",
+              "UNRESOLVED",
+              "DEPRECATED"
+            ]
+          },
+          "commitment": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cost": {
+            "type": "string",
+            "minLength": 1
+          },
+          "direction_source_status": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "LOCKED working direction"
+            ]
+          },
+          "failure_condition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fallback": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "enum": [
+              "ending-dominion",
+              "ending-liberation",
+              "ending-restoration"
+            ]
+          },
+          "irreversible_personal_changes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_choices": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "required_flags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "required_interface_attestations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^service-attestation-(?:0[1-9]|1[0-5])$"
+            },
+            "uniqueItems": true
+          },
+          "shared_world_changes": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+            },
+            "uniqueItems": true
+          },
+          "working_name": {
+            "type": "boolean"
+          }
+        }
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "schema_version": {
+      "type": "string",
+      "minLength": 1,
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(SRC-[A-Za-z0-9-]+|REF-[0-9]{3})$"
+      },
+      "uniqueItems": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aetherion:ending-prerequisites:1.0.0",
+  "title": "Aetherion Ending Prerequisites",
+  "description": "Strict field-level schema for the authored preproduction registry. Stable record IDs and all object fields are explicit. Schema validity does not confer canon approval, implementation or semantic truth."
+}

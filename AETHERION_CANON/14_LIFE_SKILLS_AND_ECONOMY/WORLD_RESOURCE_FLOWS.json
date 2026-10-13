@@ -1,0 +1,1694 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "flow-01-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-01",
+      "origin_region_id": "region-01",
+      "destination_region_id": "region-02",
+      "primary_route": [
+        "region-01",
+        "region-02"
+      ],
+      "fallback_route": [
+        "region-01",
+        "region-05",
+        "region-02"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-02: Preserve reference reagents",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-02"
+      ]
+    },
+    {
+      "id": "flow-01-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-01",
+      "origin_region_id": "region-01",
+      "destination_region_id": "region-05",
+      "primary_route": [
+        "region-01",
+        "region-05"
+      ],
+      "fallback_route": [
+        "region-01",
+        "region-02",
+        "region-05"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-05: Cut structural mineral kits",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-05"
+      ]
+    },
+    {
+      "id": "flow-01-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-01",
+      "origin_region_id": "region-01",
+      "destination_region_id": "region-07",
+      "primary_route": [
+        "region-01",
+        "region-07"
+      ],
+      "fallback_route": [
+        "region-01",
+        "region-05",
+        "region-07"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-02-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-02",
+      "origin_region_id": "region-02",
+      "destination_region_id": "region-01",
+      "primary_route": [
+        "region-02",
+        "region-01"
+      ],
+      "fallback_route": [
+        "region-02",
+        "region-05",
+        "region-01"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-01: Temper civic components",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-01"
+      ]
+    },
+    {
+      "id": "flow-02-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-02",
+      "origin_region_id": "region-02",
+      "destination_region_id": "region-03",
+      "primary_route": [
+        "region-02",
+        "region-03"
+      ],
+      "fallback_route": [
+        "region-02",
+        "region-05",
+        "region-03"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-02-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-02",
+      "origin_region_id": "region-02",
+      "destination_region_id": "region-05",
+      "primary_route": [
+        "region-02",
+        "region-05"
+      ],
+      "fallback_route": [
+        "region-02",
+        "region-01",
+        "region-05"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-03-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-03",
+      "origin_region_id": "region-03",
+      "destination_region_id": "region-02",
+      "primary_route": [
+        "region-03",
+        "region-02"
+      ],
+      "fallback_route": [
+        "region-03",
+        "region-05",
+        "region-02"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-02: Preserve reference reagents",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-02"
+      ]
+    },
+    {
+      "id": "flow-03-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-03",
+      "origin_region_id": "region-03",
+      "destination_region_id": "region-05",
+      "primary_route": [
+        "region-03",
+        "region-05"
+      ],
+      "fallback_route": [
+        "region-03",
+        "region-02",
+        "region-05"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-03-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-03",
+      "origin_region_id": "region-03",
+      "destination_region_id": "region-06",
+      "primary_route": [
+        "region-03",
+        "region-06"
+      ],
+      "fallback_route": [
+        "region-03",
+        "region-09",
+        "region-06"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-06: Weave acoustic and sail kits",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-06"
+      ]
+    },
+    {
+      "id": "flow-03-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-03",
+      "origin_region_id": "region-03",
+      "destination_region_id": "region-09",
+      "primary_route": [
+        "region-03",
+        "region-09"
+      ],
+      "fallback_route": [
+        "region-03",
+        "region-05",
+        "region-09"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-04-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-04",
+      "origin_region_id": "region-04",
+      "destination_region_id": "region-07",
+      "primary_route": [
+        "region-04",
+        "region-07"
+      ],
+      "fallback_route": [
+        "region-04",
+        "region-08",
+        "region-07"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-07: Cultivate food and fiber lots",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-07"
+      ]
+    },
+    {
+      "id": "flow-04-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-04",
+      "origin_region_id": "region-04",
+      "destination_region_id": "region-08",
+      "primary_route": [
+        "region-04",
+        "region-08"
+      ],
+      "fallback_route": [
+        "region-04",
+        "region-07",
+        "region-08"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-08: Formulate filters and antidotes",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-08"
+      ]
+    },
+    {
+      "id": "flow-05-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-05",
+      "origin_region_id": "region-05",
+      "destination_region_id": "region-01",
+      "primary_route": [
+        "region-05",
+        "region-01"
+      ],
+      "fallback_route": [
+        "region-05",
+        "region-02",
+        "region-01"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-01: Temper civic components",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-01"
+      ]
+    },
+    {
+      "id": "flow-05-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-05",
+      "origin_region_id": "region-05",
+      "destination_region_id": "region-02",
+      "primary_route": [
+        "region-05",
+        "region-02"
+      ],
+      "fallback_route": [
+        "region-05",
+        "region-01",
+        "region-02"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-05-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-05",
+      "origin_region_id": "region-05",
+      "destination_region_id": "region-03",
+      "primary_route": [
+        "region-05",
+        "region-03"
+      ],
+      "fallback_route": [
+        "region-05",
+        "region-02",
+        "region-03"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-03: Assemble relay conductors",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-03"
+      ]
+    },
+    {
+      "id": "flow-05-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-05",
+      "origin_region_id": "region-05",
+      "destination_region_id": "region-07",
+      "primary_route": [
+        "region-05",
+        "region-07"
+      ],
+      "fallback_route": [
+        "region-05",
+        "region-01",
+        "region-07"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-05-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-05",
+      "origin_region_id": "region-05",
+      "destination_region_id": "region-08",
+      "primary_route": [
+        "region-05",
+        "region-08"
+      ],
+      "fallback_route": [
+        "region-05",
+        "region-07",
+        "region-08"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-08: Formulate filters and antidotes",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-08"
+      ]
+    },
+    {
+      "id": "flow-05-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-05",
+      "origin_region_id": "region-05",
+      "destination_region_id": "region-09",
+      "primary_route": [
+        "region-05",
+        "region-09"
+      ],
+      "fallback_route": [
+        "region-05",
+        "region-03",
+        "region-09"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-09: Assemble ward and relief kits",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-09"
+      ]
+    },
+    {
+      "id": "flow-06-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-06",
+      "origin_region_id": "region-06",
+      "destination_region_id": "region-03",
+      "primary_route": [
+        "region-06",
+        "region-03"
+      ],
+      "fallback_route": [
+        "region-06",
+        "region-09",
+        "region-03"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-03: Assemble relay conductors",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-03"
+      ]
+    },
+    {
+      "id": "flow-06-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-06",
+      "origin_region_id": "region-06",
+      "destination_region_id": "region-09",
+      "primary_route": [
+        "region-06",
+        "region-09"
+      ],
+      "fallback_route": [
+        "region-06",
+        "region-03",
+        "region-09"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-06-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-06",
+      "origin_region_id": "region-06",
+      "destination_region_id": "region-10",
+      "primary_route": [
+        "region-06",
+        "region-10"
+      ],
+      "fallback_route": [
+        "region-06",
+        "region-13",
+        "region-10"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-10: Calibrate navigation instruments",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-10"
+      ]
+    },
+    {
+      "id": "flow-06-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-06",
+      "origin_region_id": "region-06",
+      "destination_region_id": "region-13",
+      "primary_route": [
+        "region-06",
+        "region-13"
+      ],
+      "fallback_route": [
+        "region-06",
+        "region-09",
+        "region-13"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-07-01",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-07",
+      "origin_region_id": "region-07",
+      "destination_region_id": "region-01",
+      "primary_route": [
+        "region-07",
+        "region-01"
+      ],
+      "fallback_route": [
+        "region-07",
+        "region-05",
+        "region-01"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-07-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-07",
+      "origin_region_id": "region-07",
+      "destination_region_id": "region-04",
+      "primary_route": [
+        "region-07",
+        "region-04"
+      ],
+      "fallback_route": [
+        "region-07",
+        "region-08",
+        "region-04"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-04: Treat aqueduct supply",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-04"
+      ]
+    },
+    {
+      "id": "flow-07-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-07",
+      "origin_region_id": "region-07",
+      "destination_region_id": "region-05",
+      "primary_route": [
+        "region-07",
+        "region-05"
+      ],
+      "fallback_route": [
+        "region-07",
+        "region-01",
+        "region-05"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-07-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-07",
+      "origin_region_id": "region-07",
+      "destination_region_id": "region-08",
+      "primary_route": [
+        "region-07",
+        "region-08"
+      ],
+      "fallback_route": [
+        "region-07",
+        "region-04",
+        "region-08"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-08-04",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-08",
+      "origin_region_id": "region-08",
+      "destination_region_id": "region-04",
+      "primary_route": [
+        "region-08",
+        "region-04"
+      ],
+      "fallback_route": [
+        "region-08",
+        "region-07",
+        "region-04"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-04: Treat aqueduct supply",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-04"
+      ]
+    },
+    {
+      "id": "flow-08-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-08",
+      "origin_region_id": "region-08",
+      "destination_region_id": "region-05",
+      "primary_route": [
+        "region-08",
+        "region-05"
+      ],
+      "fallback_route": [
+        "region-08",
+        "region-07",
+        "region-05"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-05: Cut structural mineral kits",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-05"
+      ]
+    },
+    {
+      "id": "flow-08-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-08",
+      "origin_region_id": "region-08",
+      "destination_region_id": "region-07",
+      "primary_route": [
+        "region-08",
+        "region-07"
+      ],
+      "fallback_route": [
+        "region-08",
+        "region-04",
+        "region-07"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-07: Cultivate food and fiber lots",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-07"
+      ]
+    },
+    {
+      "id": "flow-08-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-08",
+      "origin_region_id": "region-08",
+      "destination_region_id": "region-09",
+      "primary_route": [
+        "region-08",
+        "region-09"
+      ],
+      "fallback_route": [
+        "region-08",
+        "region-05",
+        "region-09"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-08-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-08",
+      "origin_region_id": "region-08",
+      "destination_region_id": "region-12",
+      "primary_route": [
+        "region-08",
+        "region-12"
+      ],
+      "fallback_route": [
+        "region-08",
+        "region-09",
+        "region-12"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-12: Make voluntary ritual implements",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-12"
+      ]
+    },
+    {
+      "id": "flow-09-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-09",
+      "origin_region_id": "region-09",
+      "destination_region_id": "region-03",
+      "primary_route": [
+        "region-09",
+        "region-03"
+      ],
+      "fallback_route": [
+        "region-09",
+        "region-05",
+        "region-03"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-09-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-09",
+      "origin_region_id": "region-09",
+      "destination_region_id": "region-05",
+      "primary_route": [
+        "region-09",
+        "region-05"
+      ],
+      "fallback_route": [
+        "region-09",
+        "region-03",
+        "region-05"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-09-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-09",
+      "origin_region_id": "region-09",
+      "destination_region_id": "region-06",
+      "primary_route": [
+        "region-09",
+        "region-06"
+      ],
+      "fallback_route": [
+        "region-09",
+        "region-03",
+        "region-06"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-06: Weave acoustic and sail kits",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-06"
+      ]
+    },
+    {
+      "id": "flow-09-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-09",
+      "origin_region_id": "region-09",
+      "destination_region_id": "region-08",
+      "primary_route": [
+        "region-09",
+        "region-08"
+      ],
+      "fallback_route": [
+        "region-09",
+        "region-05",
+        "region-08"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-09-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-09",
+      "origin_region_id": "region-09",
+      "destination_region_id": "region-12",
+      "primary_route": [
+        "region-09",
+        "region-12"
+      ],
+      "fallback_route": [
+        "region-09",
+        "region-08",
+        "region-12"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-12: Make voluntary ritual implements",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-12"
+      ]
+    },
+    {
+      "id": "flow-09-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-09",
+      "origin_region_id": "region-09",
+      "destination_region_id": "region-13",
+      "primary_route": [
+        "region-09",
+        "region-13"
+      ],
+      "fallback_route": [
+        "region-09",
+        "region-06",
+        "region-13"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-10-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-10",
+      "origin_region_id": "region-10",
+      "destination_region_id": "region-06",
+      "primary_route": [
+        "region-10",
+        "region-06"
+      ],
+      "fallback_route": [
+        "region-10",
+        "region-13",
+        "region-06"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-10-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-10",
+      "origin_region_id": "region-10",
+      "destination_region_id": "region-11",
+      "primary_route": [
+        "region-10",
+        "region-11"
+      ],
+      "fallback_route": [
+        "region-10",
+        "region-13",
+        "region-11"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-10-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-10",
+      "origin_region_id": "region-10",
+      "destination_region_id": "region-13",
+      "primary_route": [
+        "region-10",
+        "region-13"
+      ],
+      "fallback_route": [
+        "region-10",
+        "region-06",
+        "region-13"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-13: Build projection stage panels",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-13"
+      ]
+    },
+    {
+      "id": "flow-11-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-11",
+      "origin_region_id": "region-11",
+      "destination_region_id": "region-10",
+      "primary_route": [
+        "region-11",
+        "region-10"
+      ],
+      "fallback_route": [
+        "region-11",
+        "region-13",
+        "region-10"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-11-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-11",
+      "origin_region_id": "region-11",
+      "destination_region_id": "region-13",
+      "primary_route": [
+        "region-11",
+        "region-13"
+      ],
+      "fallback_route": [
+        "region-11",
+        "region-10",
+        "region-13"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-11-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-11",
+      "origin_region_id": "region-11",
+      "destination_region_id": "region-14",
+      "primary_route": [
+        "region-11",
+        "region-14"
+      ],
+      "fallback_route": [
+        "region-11",
+        "region-13",
+        "region-14"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-11-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-11",
+      "origin_region_id": "region-11",
+      "destination_region_id": "region-15",
+      "primary_route": [
+        "region-11",
+        "region-15"
+      ],
+      "fallback_route": [
+        "region-11",
+        "region-14",
+        "region-15"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-15: Build modular civic actuators",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-15"
+      ]
+    },
+    {
+      "id": "flow-12-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-12",
+      "origin_region_id": "region-12",
+      "destination_region_id": "region-08",
+      "primary_route": [
+        "region-12",
+        "region-08"
+      ],
+      "fallback_route": [
+        "region-12",
+        "region-09",
+        "region-08"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-12-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-12",
+      "origin_region_id": "region-12",
+      "destination_region_id": "region-09",
+      "primary_route": [
+        "region-12",
+        "region-09"
+      ],
+      "fallback_route": [
+        "region-12",
+        "region-08",
+        "region-09"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-09: Assemble ward and relief kits",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-09"
+      ]
+    },
+    {
+      "id": "flow-12-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-12",
+      "origin_region_id": "region-12",
+      "destination_region_id": "region-13",
+      "primary_route": [
+        "region-12",
+        "region-13"
+      ],
+      "fallback_route": [
+        "region-12",
+        "region-09",
+        "region-13"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-12-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-12",
+      "origin_region_id": "region-12",
+      "destination_region_id": "region-14",
+      "primary_route": [
+        "region-12",
+        "region-14"
+      ],
+      "fallback_route": [
+        "region-12",
+        "region-13",
+        "region-14"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-13-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-13",
+      "origin_region_id": "region-13",
+      "destination_region_id": "region-06",
+      "primary_route": [
+        "region-13",
+        "region-06"
+      ],
+      "fallback_route": [
+        "region-13",
+        "region-09",
+        "region-06"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-13-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-13",
+      "origin_region_id": "region-13",
+      "destination_region_id": "region-09",
+      "primary_route": [
+        "region-13",
+        "region-09"
+      ],
+      "fallback_route": [
+        "region-13",
+        "region-06",
+        "region-09"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-13-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-13",
+      "origin_region_id": "region-13",
+      "destination_region_id": "region-10",
+      "primary_route": [
+        "region-13",
+        "region-10"
+      ],
+      "fallback_route": [
+        "region-13",
+        "region-06",
+        "region-10"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-10: Calibrate navigation instruments",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-10"
+      ]
+    },
+    {
+      "id": "flow-13-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-13",
+      "origin_region_id": "region-13",
+      "destination_region_id": "region-11",
+      "primary_route": [
+        "region-13",
+        "region-11"
+      ],
+      "fallback_route": [
+        "region-13",
+        "region-10",
+        "region-11"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-11: Assemble secure record housings",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-11"
+      ]
+    },
+    {
+      "id": "flow-13-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-13",
+      "origin_region_id": "region-13",
+      "destination_region_id": "region-12",
+      "primary_route": [
+        "region-13",
+        "region-12"
+      ],
+      "fallback_route": [
+        "region-13",
+        "region-09",
+        "region-12"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-13-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-13",
+      "origin_region_id": "region-13",
+      "destination_region_id": "region-14",
+      "primary_route": [
+        "region-13",
+        "region-14"
+      ],
+      "fallback_route": [
+        "region-13",
+        "region-11",
+        "region-14"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-14: Assemble timing and transport fittings",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-14"
+      ]
+    },
+    {
+      "id": "flow-14-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-14",
+      "origin_region_id": "region-14",
+      "destination_region_id": "region-11",
+      "primary_route": [
+        "region-14",
+        "region-11"
+      ],
+      "fallback_route": [
+        "region-14",
+        "region-13",
+        "region-11"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-14-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-14",
+      "origin_region_id": "region-14",
+      "destination_region_id": "region-12",
+      "primary_route": [
+        "region-14",
+        "region-12"
+      ],
+      "fallback_route": [
+        "region-14",
+        "region-13",
+        "region-12"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Route capacity only; no local demand or guaranteed buyer is asserted. A downstream order must name its consuming recipe.",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "OPTIONAL_TRANSSHIPMENT_CAPACITY",
+      "consumer_recipe_ids": []
+    },
+    {
+      "id": "flow-14-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-14",
+      "origin_region_id": "region-14",
+      "destination_region_id": "region-13",
+      "primary_route": [
+        "region-14",
+        "region-13"
+      ],
+      "fallback_route": [
+        "region-14",
+        "region-11",
+        "region-13"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-13: Build projection stage panels",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-13"
+      ]
+    },
+    {
+      "id": "flow-14-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-14",
+      "origin_region_id": "region-14",
+      "destination_region_id": "region-15",
+      "primary_route": [
+        "region-14",
+        "region-15"
+      ],
+      "fallback_route": [
+        "region-14",
+        "region-11",
+        "region-15"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-15: Build modular civic actuators",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-15"
+      ]
+    },
+    {
+      "id": "flow-15-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-15",
+      "origin_region_id": "region-15",
+      "destination_region_id": "region-11",
+      "primary_route": [
+        "region-15",
+        "region-11"
+      ],
+      "fallback_route": [
+        "region-15",
+        "region-14",
+        "region-11"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-11: Assemble secure record housings",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-11"
+      ]
+    },
+    {
+      "id": "flow-15-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-SYSTEMS-PROPOSAL"
+      ],
+      "resource_id": "resource-15",
+      "origin_region_id": "region-15",
+      "destination_region_id": "region-14",
+      "primary_route": [
+        "region-15",
+        "region-14"
+      ],
+      "fallback_route": [
+        "region-15",
+        "region-11",
+        "region-14"
+      ],
+      "transport": "Road, protected portage or region-appropriate ferry; transport type must be validated against final map",
+      "exchange_purpose": "Input consumed by recipe-14: Assemble timing and transport fittings",
+      "ownership": "Cargo retains its owner until an atomic confirmed trade or contract delivery",
+      "disruption": "Primary segment can slow during events/opted-in conflict; fallback retains essential access",
+      "price_rule": "Prototype event modifier clamped to 0.8–1.2 of an authored reference price; no live economy claim",
+      "persistence": "Durable inventory reservation and exactly-once delivery receipt",
+      "demand_class": "RECIPE_INPUT_DEMAND",
+      "consumer_recipe_ids": [
+        "recipe-14"
+      ]
+    }
+  ],
+  "geography_source_ids": [
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "route_validation": "Each primary hop and each alternate hop must exist in WORLD_GRAPH; alternate excludes the primary edge.",
+  "demand_policy": "Only RECIPE_INPUT_DEMAND records assert a local consumer. Other links describe optional logistics capacity."
+}

@@ -1,0 +1,5 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Aetherion WebGL diagnostic</title><h1>Cloud browser WebGL capability</h1><pre id="result">Running...</pre><script>
+const result={checkedAt:new Date().toISOString(),userAgent:navigator.userAgent,webgl2:false,webgl:false,errors:[]};
+for(const type of ['webgl2','webgl']){const canvas=document.createElement('canvas');canvas.addEventListener('webglcontextcreationerror',event=>result.errors.push({type,status:event.statusMessage}));try{const gl=canvas.getContext(type);result[type]=!!gl;if(gl){result.version=gl.getParameter(gl.VERSION);gl.getExtension('WEBGL_lose_context')?.loseContext();}}catch(error){result.errors.push({type,message:error.message});}}
+document.querySelector('#result').textContent=JSON.stringify(result,null,2);
+</script></html>

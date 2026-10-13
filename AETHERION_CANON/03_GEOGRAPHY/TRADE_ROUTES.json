@@ -1,0 +1,1157 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-USER-DIRECTIVE",
+    "SRC-RECOVERED-LORE",
+    "SRC-WORLD-PROPOSAL"
+  ],
+  "route_count_note": "Count is derived from proposed symmetric adjacency, not a production asset budget.",
+  "records": [
+    {
+      "id": "route-01-02",
+      "name": "Cindervault–Stillfolio road",
+      "from_region_id": "region-01",
+      "to_region_id": "region-02",
+      "from_poi_id": "poi-01-capital",
+      "to_poi_id": "poi-02-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "tools",
+        "refractory ceramics",
+        "specialist heat work"
+      ],
+      "cargo_from_destination": [
+        "preservation",
+        "records",
+        "cold-chain services"
+      ],
+      "terrain_transition": "basalt passes, managed ash beds and lower temperate forest / snow line descends into mixed stone and conifer margins",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-01",
+        "region-05",
+        "region-02"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-01-05",
+      "name": "Cindervault–Keystone Hall road",
+      "from_region_id": "region-01",
+      "to_region_id": "region-05",
+      "from_poi_id": "poi-01-capital",
+      "to_poi_id": "poi-05-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "tools",
+        "refractory ceramics",
+        "specialist heat work"
+      ],
+      "cargo_from_destination": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "terrain_transition": "basalt passes, managed ash beds and lower temperate forest / exposed stone gives way to cultivated terrace soils and basin woodland",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-01",
+        "region-02",
+        "region-05"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-01-07",
+      "name": "Cindervault–Rootmeet road",
+      "from_region_id": "region-01",
+      "to_region_id": "region-07",
+      "from_poi_id": "poi-01-capital",
+      "to_poi_id": "poi-07-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "tools",
+        "refractory ceramics",
+        "specialist heat work"
+      ],
+      "cargo_from_destination": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "terrain_transition": "basalt passes, managed ash beds and lower temperate forest / ash-rich upper farms grade into riparian woods and managed wetlands",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-01",
+        "region-05",
+        "region-07"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-02-03",
+      "name": "Stillfolio–Crownspan road",
+      "from_region_id": "region-02",
+      "to_region_id": "region-03",
+      "from_poi_id": "poi-02-capital",
+      "to_poi_id": "poi-03-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "preservation",
+        "records",
+        "cold-chain services"
+      ],
+      "cargo_from_destination": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "terrain_transition": "snow line descends into mixed stone and conifer margins / storm towers descend through rocky pasture to basin roads",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-02",
+        "region-05",
+        "region-03"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-02-05",
+      "name": "Stillfolio–Keystone Hall road",
+      "from_region_id": "region-02",
+      "to_region_id": "region-05",
+      "from_poi_id": "poi-02-capital",
+      "to_poi_id": "poi-05-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "preservation",
+        "records",
+        "cold-chain services"
+      ],
+      "cargo_from_destination": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "terrain_transition": "snow line descends into mixed stone and conifer margins / exposed stone gives way to cultivated terrace soils and basin woodland",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-02",
+        "region-01",
+        "region-05"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-03-05",
+      "name": "Crownspan–Keystone Hall road",
+      "from_region_id": "region-03",
+      "to_region_id": "region-05",
+      "from_poi_id": "poi-03-capital",
+      "to_poi_id": "poi-05-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "cargo_from_destination": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "terrain_transition": "storm towers descend through rocky pasture to basin roads / exposed stone gives way to cultivated terrace soils and basin woodland",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-03",
+        "region-02",
+        "region-05"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-03-06",
+      "name": "Crownspan–Cantilever road",
+      "from_region_id": "region-03",
+      "to_region_id": "region-06",
+      "from_poi_id": "poi-03-capital",
+      "to_poi_id": "poi-06-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "cargo_from_destination": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "terrain_transition": "storm towers descend through rocky pasture to basin roads / cliff scrub grades into central grassland and eastern dry valleys",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-03",
+        "region-09",
+        "region-06"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-03-09",
+      "name": "Crownspan–Aureate Steps road",
+      "from_region_id": "region-03",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-03-capital",
+      "to_poi_id": "poi-09-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "terrain_transition": "storm towers descend through rocky pasture to basin roads / meadows and farms connect upland roads to southern river terraces",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-03",
+        "region-05",
+        "region-09"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-04-07",
+      "name": "Confluence Quay–Rootmeet road",
+      "from_region_id": "region-04",
+      "to_region_id": "region-07",
+      "from_poi_id": "poi-04-capital",
+      "to_poi_id": "poi-07-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "shipping",
+        "fisheries",
+        "hydraulics"
+      ],
+      "cargo_from_destination": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "terrain_transition": "fresh river channels become brackish marsh then coastal water / ash-rich upper farms grade into riparian woods and managed wetlands",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-04",
+        "region-08",
+        "region-07"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-04-08",
+      "name": "Confluence Quay–Vitrial road",
+      "from_region_id": "region-04",
+      "to_region_id": "region-08",
+      "from_poi_id": "poi-04-capital",
+      "to_poi_id": "poi-08-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "shipping",
+        "fisheries",
+        "hydraulics"
+      ],
+      "cargo_from_destination": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "terrain_transition": "fresh river channels become brackish marsh then coastal water / terraced drainage becomes managed marsh, then brackish estuary",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-04",
+        "region-07",
+        "region-08"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-05-07",
+      "name": "Keystone Hall–Rootmeet road",
+      "from_region_id": "region-05",
+      "to_region_id": "region-07",
+      "from_poi_id": "poi-05-capital",
+      "to_poi_id": "poi-07-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "cargo_from_destination": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "terrain_transition": "exposed stone gives way to cultivated terrace soils and basin woodland / ash-rich upper farms grade into riparian woods and managed wetlands",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-05",
+        "region-01",
+        "region-07"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-05-08",
+      "name": "Keystone Hall–Vitrial road",
+      "from_region_id": "region-05",
+      "to_region_id": "region-08",
+      "from_poi_id": "poi-05-capital",
+      "to_poi_id": "poi-08-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "cargo_from_destination": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "terrain_transition": "exposed stone gives way to cultivated terrace soils and basin woodland / terraced drainage becomes managed marsh, then brackish estuary",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-05",
+        "region-07",
+        "region-08"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-05-09",
+      "name": "Keystone Hall–Aureate Steps road",
+      "from_region_id": "region-05",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-05-capital",
+      "to_poi_id": "poi-09-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "terrain_transition": "exposed stone gives way to cultivated terrace soils and basin woodland / meadows and farms connect upland roads to southern river terraces",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-05",
+        "region-03",
+        "region-09"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-06-09",
+      "name": "Cantilever–Aureate Steps road",
+      "from_region_id": "region-06",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-06-capital",
+      "to_poi_id": "poi-09-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "terrain_transition": "cliff scrub grades into central grassland and eastern dry valleys / meadows and farms connect upland roads to southern river terraces",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-06",
+        "region-03",
+        "region-09"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-06-10",
+      "name": "Cantilever–Parallax Crown road",
+      "from_region_id": "region-06",
+      "to_region_id": "region-10",
+      "from_poi_id": "poi-06-capital",
+      "to_poi_id": "poi-10-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "cargo_from_destination": [
+        "navigation",
+        "measurement",
+        "gravity engineering"
+      ],
+      "terrain_transition": "cliff scrub grades into central grassland and eastern dry valleys / headland scrub descends through dry gullies toward eastern valleys",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-06",
+        "region-13",
+        "region-10"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-06-13",
+      "name": "Cantilever–Manydoor road",
+      "from_region_id": "region-06",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-06-capital",
+      "to_poi_id": "poi-13-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "terrain_transition": "cliff scrub grades into central grassland and eastern dry valleys / cliff gardens become dry orchards and stable valley towns",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-06",
+        "region-09",
+        "region-13"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-07-08",
+      "name": "Rootmeet–Vitrial road",
+      "from_region_id": "region-07",
+      "to_region_id": "region-08",
+      "from_poi_id": "poi-07-capital",
+      "to_poi_id": "poi-08-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "cargo_from_destination": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "terrain_transition": "ash-rich upper farms grade into riparian woods and managed wetlands / terraced drainage becomes managed marsh, then brackish estuary",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-07",
+        "region-04",
+        "region-08"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-08-09",
+      "name": "Vitrial–Aureate Steps road",
+      "from_region_id": "region-08",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-08-capital",
+      "to_poi_id": "poi-09-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "terrain_transition": "terraced drainage becomes managed marsh, then brackish estuary / meadows and farms connect upland roads to southern river terraces",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-08",
+        "region-05",
+        "region-09"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-08-12",
+      "name": "Vitrial–Kinhold road",
+      "from_region_id": "region-08",
+      "to_region_id": "region-12",
+      "from_poi_id": "poi-08-capital",
+      "to_poi_id": "poi-12-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "cargo_from_destination": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "terrain_transition": "terraced drainage becomes managed marsh, then brackish estuary / central farms grade into scrub pasture and southeastern steppe",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-08",
+        "region-09",
+        "region-12"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-09-12",
+      "name": "Aureate Steps–Kinhold road",
+      "from_region_id": "region-09",
+      "to_region_id": "region-12",
+      "from_poi_id": "poi-09-capital",
+      "to_poi_id": "poi-12-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "cargo_from_destination": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "terrain_transition": "meadows and farms connect upland roads to southern river terraces / central farms grade into scrub pasture and southeastern steppe",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-09",
+        "region-08",
+        "region-12"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-09-13",
+      "name": "Aureate Steps–Manydoor road",
+      "from_region_id": "region-09",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-09-capital",
+      "to_poi_id": "poi-13-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "terrain_transition": "meadows and farms connect upland roads to southern river terraces / cliff gardens become dry orchards and stable valley towns",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-09",
+        "region-06",
+        "region-13"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-10-13",
+      "name": "Parallax Crown–Manydoor road",
+      "from_region_id": "region-10",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-10-capital",
+      "to_poi_id": "poi-13-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "navigation",
+        "measurement",
+        "gravity engineering"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "terrain_transition": "headland scrub descends through dry gullies toward eastern valleys / cliff gardens become dry orchards and stable valley towns",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-10",
+        "region-06",
+        "region-13"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-10-11",
+      "name": "Parallax Crown–Absent Seat road",
+      "from_region_id": "region-10",
+      "to_region_id": "region-11",
+      "from_poi_id": "poi-10-capital",
+      "to_poi_id": "poi-11-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "navigation",
+        "measurement",
+        "gravity engineering"
+      ],
+      "cargo_from_destination": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "terrain_transition": "headland scrub descends through dry gullies toward eastern valleys / dry valley surfaces meet damp cave-fed channels and lower coastal scrub",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-10",
+        "region-13",
+        "region-11"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-11-13",
+      "name": "Absent Seat–Manydoor road",
+      "from_region_id": "region-11",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-11-capital",
+      "to_poi_id": "poi-13-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "terrain_transition": "dry valley surfaces meet damp cave-fed channels and lower coastal scrub / cliff gardens become dry orchards and stable valley towns",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-11",
+        "region-10",
+        "region-13"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-11-14",
+      "name": "Absent Seat–Wayclock road",
+      "from_region_id": "region-11",
+      "to_region_id": "region-14",
+      "from_poi_id": "poi-11-capital",
+      "to_poi_id": "poi-14-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "cargo_from_destination": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "terrain_transition": "dry valley surfaces meet damp cave-fed channels and lower coastal scrub / pasture and roadside settlements approach humid coastal industry",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-11",
+        "region-13",
+        "region-14"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-11-15",
+      "name": "Absent Seat–Counterpoise road",
+      "from_region_id": "region-11",
+      "to_region_id": "region-15",
+      "from_poi_id": "poi-11-capital",
+      "to_poi_id": "poi-15-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "cargo_from_destination": [
+        "machinery",
+        "standardized parts",
+        "repair systems"
+      ],
+      "terrain_transition": "dry valley surfaces meet damp cave-fed channels and lower coastal scrub / river terraces widen into silt plains, ports and managed marsh buffers",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-11",
+        "region-14",
+        "region-15"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-12-13",
+      "name": "Kinhold–Manydoor road",
+      "from_region_id": "region-12",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-12-capital",
+      "to_poi_id": "poi-13-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "terrain_transition": "central farms grade into scrub pasture and southeastern steppe / cliff gardens become dry orchards and stable valley towns",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-12",
+        "region-09",
+        "region-13"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-12-14",
+      "name": "Kinhold–Wayclock road",
+      "from_region_id": "region-12",
+      "to_region_id": "region-14",
+      "from_poi_id": "poi-12-capital",
+      "to_poi_id": "poi-14-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "cargo_from_destination": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "terrain_transition": "central farms grade into scrub pasture and southeastern steppe / pasture and roadside settlements approach humid coastal industry",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-12",
+        "region-13",
+        "region-14"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-13-14",
+      "name": "Manydoor–Wayclock road",
+      "from_region_id": "region-13",
+      "to_region_id": "region-14",
+      "from_poi_id": "poi-13-capital",
+      "to_poi_id": "poi-14-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "cargo_from_destination": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "terrain_transition": "cliff gardens become dry orchards and stable valley towns / pasture and roadside settlements approach humid coastal industry",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-13",
+        "region-11",
+        "region-14"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    },
+    {
+      "id": "route-14-15",
+      "name": "Wayclock–Counterpoise road",
+      "from_region_id": "region-14",
+      "to_region_id": "region-15",
+      "from_poi_id": "poi-14-capital",
+      "to_poi_id": "poi-15-capital",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "SRC-USER-DIRECTIVE",
+        "SRC-RECOVERED-LORE",
+        "SRC-WORLD-PROPOSAL"
+      ],
+      "modes": [
+        "walking",
+        "pack transport"
+      ],
+      "optional_modes": "Local ferry, cable, glider or vehicle service where terrain permits; no Oath-exclusive essential access.",
+      "cargo_from_origin": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "cargo_from_destination": [
+        "machinery",
+        "standardized parts",
+        "repair systems"
+      ],
+      "terrain_transition": "pasture and roadside settlements approach humid coastal industry / river terraces widen into silt plains, ports and managed marsh buffers",
+      "interruption": "Weather, inspection or bounded conflict can affect freight throughput; protected civilian bypass remains.",
+      "alternate_region_path": [
+        "region-14",
+        "region-11",
+        "region-15"
+      ],
+      "ownership": "Shared treaty road; territory control cannot delete access.",
+      "status": "PROPOSED route contract; survey, route length and travel time unmeasured."
+    }
+  ]
+}

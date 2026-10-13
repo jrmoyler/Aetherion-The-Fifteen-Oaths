@@ -1,0 +1,20 @@
+vite v8.1.5 building client environment for production...
+[2K
+transforming...✓ 16 modules transformed.
+
+(!) outDir validation/build/atlas is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+validation/build/atlas/index.html                   3.84 kB │ gzip:   1.60 kB
+validation/build/atlas/assets/index-WXNbyNnY.js     2.82 kB │ gzip:   1.37 kB
+validation/build/atlas/assets/bridge-ChrXyskA.js    8.71 kB │ gzip:   3.65 kB
+validation/build/atlas/assets/main-7VcCXYYw.js    651.63 kB │ gzip: 169.77 kB
+
+✓ built in 1.90s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
