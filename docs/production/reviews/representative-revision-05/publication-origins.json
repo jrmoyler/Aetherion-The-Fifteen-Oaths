@@ -1,0 +1,25 @@
+{
+  "status": "FROZEN_UNAPPROVED_REVIEW_ONLY",
+  "sources": [
+    {
+      "originalLocalRoot": "/tmp/aetherion-fault-review-v11",
+      "bundledRoot": "fault-v11",
+      "frozenManifest": "fault-v11/REVIEW_EVIDENCE.json",
+      "frozenManifestSha256": "73263c00288a2e407e949fb34aa9b37d533bc6740127c82f662b33c228071a47",
+      "listedFiles": 57,
+      "allListedFilesIncludedAndHashesMatched": true
+    },
+    {
+      "originalLocalRoot": "/tmp/ninja-v8b",
+      "bundledRoot": "kiln-ninja-v8b",
+      "frozenManifest": "kiln-ninja-v8b/SHA256SUMS.json",
+      "frozenManifestSha256": "9fcd732358c47a44679ee351ec20e6e4326bd92da11344c4ac4c7ededb5215d3",
+      "listedFiles": 31,
+      "allListedFilesIncludedAndHashesMatched": true
+    }
+  ],
+  "selectedHistory": {
+    "root": "historical-diagnostics",
+    "note": "Selected V7/V8 comparison images, original receipts and V8 failure report only. Complete historical source/GLBs/maps intentionally not duplicated. Their receipt paths refer to original authoring runs, not bundled full exports."
+  }
+}

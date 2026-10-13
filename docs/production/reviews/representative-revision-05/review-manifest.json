@@ -1,0 +1,82 @@
+{
+  "status": "UNAPPROVED_REVIEW_ONLY",
+  "productionPromotion": false,
+  "previousReview": "representative-revision-04",
+  "entries": [
+    {
+      "id": "kiln-ninja-v8b",
+      "title": "Kiln ninja V8b \u2014 mixed hair experiment, unapproved",
+      "references": [
+        90,
+        60
+      ],
+      "changes": "Large crown opening reduced and upper side coverage denser. Dedicated hair ORM map and legal roughness factor repair the rejected V8 GLB. Two final focused CPU views only.",
+      "remaining": "NOT a uniform upgrade over V7: flatter repeated fringe, exposed forehead cap and sparse pointed nape/temple strips. Original eye seating, bright profile white eye, nose and lower-face mismatches persist.",
+      "views": [
+        {
+          "label": "Final focused front",
+          "path": "kiln-ninja-v8b/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png"
+        },
+        {
+          "label": "Final focused profile",
+          "path": "kiln-ninja-v8b/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png"
+        },
+        {
+          "label": "Original / V7 / V8b front",
+          "path": "kiln-ninja-v8b/front-comparison.png"
+        },
+        {
+          "label": "Original / V7 / V8b profile",
+          "path": "kiln-ninja-v8b/profile-comparison.png"
+        }
+      ],
+      "sources": [
+        "kiln-ninja-v8b/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "kiln-ninja-v8b/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-090/original.png",
+          "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+        },
+        {
+          "path": "assets/references/reference-060/original.png",
+          "sha256": "654a8acda2f430f72f92d0c0a45cdc50e64c0dd00fbb37f12b270fbb8815d788"
+        }
+      ]
+    },
+    {
+      "id": "fault-v11",
+      "title": "Fault blade V11 \u2014 focused layered-depth diagnostic",
+      "references": [
+        53
+      ],
+      "changes": "Real thinner overlapping depth, contained crystal, browner leather and a varied crystal boundary; two final CPU views only. First/second diagnostic views are superseded.",
+      "remaining": "NOT EXACT: broad flat adjacent stone cells and narrow zigzag crystal channel; simplified cylindrical guard, large prism pommel and regular grip. Not a uniform improvement across all source forms.",
+      "views": [
+        {
+          "label": "Final focused front",
+          "path": "fault-v11/amethyst-short-blade/matched-front-review.png"
+        },
+        {
+          "label": "Final focused profile",
+          "path": "fault-v11/amethyst-short-blade/matched-profile-review.png"
+        },
+        {
+          "label": "Original / V10 / V11 comparison",
+          "path": "fault-v11/comparison-reference-v10-v11.png"
+        }
+      ],
+      "sources": [
+        "fault-v11/amethyst-short-blade/source.blend",
+        "fault-v11/amethyst-short-blade/review.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-053/original.png",
+          "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+        }
+      ]
+    }
+  ]
+}

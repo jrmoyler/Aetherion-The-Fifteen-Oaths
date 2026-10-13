@@ -1,0 +1,66 @@
+{
+  "status": "NOT_EXACT_FURTHER_GEOMETRY_REPAIR_REQUIRED",
+  "candidate": "Fault blade V11 final focused pair",
+  "scope": "Independent actual-pixel comparison with original053 and frozen V10. Only final front/profile diagnostic views; no full render set or engine revalidation.",
+  "freezeReceiptSha256": "73263c00288a2e407e949fb34aa9b37d533bc6740127c82f662b33c228071a47",
+  "frozenInputs": 57,
+  "frozenInputMismatches": 0,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-053/original.png",
+      "bytes": 2522664,
+      "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v11/comparison-reference-v10-v11.png",
+      "bytes": 654856,
+      "sha256": "6f6bcbc733ba415fe58ee33c398e6636b9e10998a06f964c0f4056b72002cba0"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v11/amethyst-short-blade/matched-front-review.png",
+      "bytes": 702031,
+      "sha256": "f7ef3f2ff49205848bbe15e520fa168fd9234062ce7f534ef41c91390c774604"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v11/amethyst-short-blade/matched-profile-review.png",
+      "bytes": 670668,
+      "sha256": "09be3446fd7d4f67507f5a644c4cca2d6684ada8a15d9e5d80d366bf144191ee"
+    }
+  ],
+  "improvements": [
+    "Profile exposes actual layered stone depth rather than a thick monolithic shell.",
+    "Brown grip is closer in hue to the source than V10 gray.",
+    "The straight V10 crystal opening has a more varied boundary."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Stone construction and blade silhouette",
+      "finding": "Broad near-planar flagstone cells still dominate. The upper row reads as regularly adjacent plates; profile reads as a few long parallel layers. The source has more overlapping chipped lips, uneven thickness and interleaved mineral scales around the crystal.",
+      "nextRepair": "Fit a smaller number of source-recognizable overlapping plate clusters with broken bevel lips, varied longitudinal depth and exposed undercuts; judge front and profile together rather than filling the blade with regular tiles."
+    },
+    {
+      "priority": 1,
+      "area": "Crystal exposure",
+      "finding": "Final front crystal reads as a narrow zigzag purple channel with a mostly continuous opening; source has wider irregular faceted exposures and distinct crystal volumes that interact with overlapping stone.",
+      "nextRepair": "Use several irregular exposure windows and faceted crystal volumes, preserving real containment in profile; avoid another uniform inset stripe."
+    },
+    {
+      "priority": 2,
+      "area": "Guard and pommel",
+      "finding": "Guard remains a simple open cylindrical bronze collar with repeated flanges, lacking the source layered studs and stone-bearing ornament. Pommel shows one large purple prism within a few brown shell faces rather than a compact mixed crystal/stone cluster.",
+      "nextRepair": "Rebuild the guard silhouette and pommel cluster from source component forms before additional microtexture."
+    },
+    {
+      "priority": 2,
+      "area": "Leather and material hierarchy",
+      "finding": "Grip is browner but broad flat wraps and thin dark diagonal seams remain mechanically regular. Stone remains uniformly taupe; bronze reads dark and undifferentiated.",
+      "nextRepair": "Give leather actual overlapping band thickness and restrained edge variation; distinguish stone fracture faces and bronze worn edges under the same neutral light."
+    }
+  ],
+  "decision": "The focused pair is useful diagnostic evidence and contains genuine depth changes, but it is not an exact-match improvement across all major forms. Keep unapproved; do not infer production acceptance or full-view completion.",
+  "limitations": [
+    "Approximate camera matching and different illustrated/rendered lighting; no measured dimension assertion from these images.",
+    "No full backside, hand fit, LOD/collision, GPU/material parity or gameplay review."
+  ]
+}

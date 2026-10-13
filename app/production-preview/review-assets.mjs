@@ -4,7 +4,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { normalizeManifest } from './catalog.mjs';
 import { externalGLBDependencies } from './runtime-assets.mjs';
-export const REVIEW_ROOT = 'docs/production/reviews/representative-revision-04';
+export const REVIEW_ROOT = 'docs/production/reviews';
 export const REVIEW_MANIFEST = '__reviews/manifest.json';
 export function appendReviewAssets(catalog, repositoryRoot) {
  const manifestPath=path.resolve(repositoryRoot,'app/production-preview/review-manifest.json');
