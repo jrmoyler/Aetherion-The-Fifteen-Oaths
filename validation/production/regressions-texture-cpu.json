@@ -1,0 +1,305 @@
+{
+  "sourceCommit": "4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451",
+  "generatedAt": "2026-10-13T19:33:28.954Z",
+  "node": "v24.19.0",
+  "mode": "Supplementary CPU source lifecycle using actual decoded source JPEG DataTexture fixtures; no WebGL renderer",
+  "dependencies": {
+    "method": "Fresh locked npm ci for runtime and sandbox in isolated git archive; see regressions-install-*.log",
+    "three": "0.185.1",
+    "vite": "8.1.5",
+    "lil-gui": "0.21.0"
+  },
+  "limitations": [
+    "No GPU shader compilation or visual validation.",
+    "No authored FBX character or target rigs loaded: target collision/damage, ragdolls, clone appearances, bone-attached buffs, and character-animation presentation are not verified.",
+    "GLB mesh/animation parsing is real; embedded texture decode is unavailable in Node and may use upstream loader fallback.",
+    "Only default settings, a fixed valid cast, lifecycle and pooling/cancellation are exercised; arbitrary settings and gameplay balance are not certified.",
+    "The production browser bootstrap and URL asset-loading paths are not executed."
+  ],
+  "results": [
+    {
+      "uid": "linear-extended/quake",
+      "kind": "ability",
+      "element": "earth",
+      "import": "passed",
+      "status": "blocked-browser-API",
+      "checks": [],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "textureDecodeBoundary": {
+        "method": "Test-only TextureLoader interception for four exact source stone JPEG URLs. Actual Pillow-decoded RGBA8 bytes become Three DataTextures; source image dimensions and bytes are verified by SHA-256. Other URLs use original loader. No gameplay, source material, shader or setting is replaced.",
+        "decoder": "Pillow",
+        "decoderVersion": "12.3.0",
+        "requests": [],
+        "callbacksCompleted": 0,
+        "sourceTextures": [
+          {
+            "url": "./textures/cathedral/color.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/color.jpg",
+            "sourceSha256": "1dca8a336518ce0adca4b5cbe2ab30819c8769388f1c15278082a99f022c615a",
+            "sourceBytes": 1483352,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "3174cafc0de54daac4fb80767afc55c4969f658ae49f4177067607c7cab08c18"
+          },
+          {
+            "url": "./textures/cathedral/normal.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/normal.jpg",
+            "sourceSha256": "8fd1d22eb6c7b6e4a374196c0de791f724538b8b86eb9c7a946fec1f5834cb94",
+            "sourceBytes": 2528233,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "0ca092e5cf83e747f0d54bbf17927aa54df99d3a501893c0e4c0d0b41421b141"
+          },
+          {
+            "url": "./textures/cathedral/roughness.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/roughness.jpg",
+            "sourceSha256": "f37850f72994458994716d084683d80611528d1685264bde3071569e8ca53489",
+            "sourceBytes": 669875,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "27966b40b6bcb994eab0f7df42f1b75993d8d5de8862b04f55e575a5169f5288"
+          },
+          {
+            "url": "./textures/cathedral/ao.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/ao.jpg",
+            "sourceSha256": "405ab1943485560bc01cd0c6c10065195adf7ef9c554f9b24914c3311751dde6",
+            "sourceBytes": 568556,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "2c5e19cfae55d79f302569dca1f69ab7c61e2bae4c6220621e8da076f35ca3a9"
+          }
+        ],
+        "limitation": "DataTexture substitutes decoded image transport. Browser JPEG/color decoding, GPU upload/mipmap generation, texture sampling and final appearance remain unverified."
+      },
+      "error": "ReferenceError: document is not defined\n    at createElementNS (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:1851:2)\n    at ImageLoader.load (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:45175:17)\n    at TextureLoader.load (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:45576:10)\n    at getStoneTextures (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/loaders/StoneTextures.js:60:28)\n    at stoneUniforms (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/materials/MonolithStoneMaterial.js:192:20)\n    at createMonolithMaterial (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/materials/MonolithStoneMaterial.js:268:8)\n    at MonolithRiftAbility.createShaders (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/MonolithRiftAbility.js:136:21)\n    at new Ability (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/Ability.js:80:10)\n    at new MonolithRiftAbility (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/MonolithRiftAbility.js:125:5)\n    at ObjectPool.factory (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/abilities/AbilityManager.js:55:27)"
+    },
+    {
+      "uid": "handcast/toxic",
+      "kind": "ability",
+      "element": "poison",
+      "import": "passed",
+      "status": "blocked-browser-API",
+      "checks": [],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [],
+      "warnings": [],
+      "textureDecodeBoundary": {
+        "method": "Test-only TextureLoader interception for four exact source stone JPEG URLs. Actual Pillow-decoded RGBA8 bytes become Three DataTextures; source image dimensions and bytes are verified by SHA-256. Other URLs use original loader. No gameplay, source material, shader or setting is replaced.",
+        "decoder": "Pillow",
+        "decoderVersion": "12.3.0",
+        "requests": [],
+        "callbacksCompleted": 0,
+        "sourceTextures": [
+          {
+            "url": "./textures/cathedral/color.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/color.jpg",
+            "sourceSha256": "1dca8a336518ce0adca4b5cbe2ab30819c8769388f1c15278082a99f022c615a",
+            "sourceBytes": 1483352,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "3174cafc0de54daac4fb80767afc55c4969f658ae49f4177067607c7cab08c18"
+          },
+          {
+            "url": "./textures/cathedral/normal.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/normal.jpg",
+            "sourceSha256": "8fd1d22eb6c7b6e4a374196c0de791f724538b8b86eb9c7a946fec1f5834cb94",
+            "sourceBytes": 2528233,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "0ca092e5cf83e747f0d54bbf17927aa54df99d3a501893c0e4c0d0b41421b141"
+          },
+          {
+            "url": "./textures/cathedral/roughness.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/roughness.jpg",
+            "sourceSha256": "f37850f72994458994716d084683d80611528d1685264bde3071569e8ca53489",
+            "sourceBytes": 669875,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "27966b40b6bcb994eab0f7df42f1b75993d8d5de8862b04f55e575a5169f5288"
+          },
+          {
+            "url": "./textures/cathedral/ao.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/ao.jpg",
+            "sourceSha256": "405ab1943485560bc01cd0c6c10065195adf7ef9c554f9b24914c3311751dde6",
+            "sourceBytes": 568556,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "2c5e19cfae55d79f302569dca1f69ab7c61e2bae4c6220621e8da076f35ca3a9"
+          }
+        ],
+        "limitation": "DataTexture substitutes decoded image transport. Browser JPEG/color decoding, GPU upload/mipmap generation, texture sampling and final appearance remain unverified."
+      },
+      "error": "ReferenceError: document is not defined\n    at createElementNS (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:1851:2)\n    at ImageLoader.load (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:45175:17)\n    at TextureLoader.load (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:45576:10)\n    at getStoneTextures (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/handcast/loaders/StoneTextures.js:60:28)\n    at stoneUniforms (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/handcast/materials/MonolithStoneMaterial.js:193:20)\n    at createToxicCrustMaterial (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/handcast/materials/ToxicShieldMaterials.js:523:8)\n    at ToxicShieldAbility.createShaders (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/ToxicShieldAbility.js:149:26)\n    at new Ability (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/Ability.js:80:10)\n    at new ToxicShieldAbility (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/ToxicShieldAbility.js:95:5)\n    at ObjectPool.factory (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/handcast/abilities/AbilityManager.js:53:27)"
+    },
+    {
+      "uid": "casting/shark",
+      "kind": "ability",
+      "element": "water",
+      "import": "passed",
+      "status": "blocked-browser-API",
+      "checks": [
+        "authored-GLB-source-rig-built"
+      ],
+      "limitations": [
+        "No target bodies; no authored character rig; no WebGL draw."
+      ],
+      "assets": [
+        {
+          "path": "packs/sandbox/public/models/shark.glb",
+          "bytes": 3068872,
+          "meshes": 5,
+          "bones": 31,
+          "animations": 2,
+          "geometryParse": "passed",
+          "textureDecode": "not-verified"
+        }
+      ],
+      "warnings": [
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:fe53fa79-32f8-428d-b7d9-693325cce770",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:5378dbf3-7444-41db-96bd-9f85ed5b4356",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:bf3b4b23-8394-4d28-8656-b0586073aaba",
+        "THREE.GLTFLoader: Couldn't load texture blob:nodedata:b2fc9589-186d-4e12-913d-730a37311b41"
+      ],
+      "textureDecodeBoundary": {
+        "method": "Test-only TextureLoader interception for four exact source stone JPEG URLs. Actual Pillow-decoded RGBA8 bytes become Three DataTextures; source image dimensions and bytes are verified by SHA-256. Other URLs use original loader. No gameplay, source material, shader or setting is replaced.",
+        "decoder": "Pillow",
+        "decoderVersion": "12.3.0",
+        "requests": [],
+        "callbacksCompleted": 0,
+        "sourceTextures": [
+          {
+            "url": "./textures/cathedral/color.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/color.jpg",
+            "sourceSha256": "1dca8a336518ce0adca4b5cbe2ab30819c8769388f1c15278082a99f022c615a",
+            "sourceBytes": 1483352,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "3174cafc0de54daac4fb80767afc55c4969f658ae49f4177067607c7cab08c18"
+          },
+          {
+            "url": "./textures/cathedral/normal.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/normal.jpg",
+            "sourceSha256": "8fd1d22eb6c7b6e4a374196c0de791f724538b8b86eb9c7a946fec1f5834cb94",
+            "sourceBytes": 2528233,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "0ca092e5cf83e747f0d54bbf17927aa54df99d3a501893c0e4c0d0b41421b141"
+          },
+          {
+            "url": "./textures/cathedral/roughness.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/roughness.jpg",
+            "sourceSha256": "f37850f72994458994716d084683d80611528d1685264bde3071569e8ca53489",
+            "sourceBytes": 669875,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "27966b40b6bcb994eab0f7df42f1b75993d8d5de8862b04f55e575a5169f5288"
+          },
+          {
+            "url": "./textures/cathedral/ao.jpg",
+            "source": "packs/sandbox/public/textures/cathedral/ao.jpg",
+            "sourceSha256": "405ab1943485560bc01cd0c6c10065195adf7ef9c554f9b24914c3311751dde6",
+            "sourceBytes": 568556,
+            "width": 1024,
+            "height": 1024,
+            "decodedFormat": "RGBA8",
+            "decodedBytes": 4194304,
+            "decodedSha256": "2c5e19cfae55d79f302569dca1f69ab7c61e2bae4c6220621e8da076f35ca3a9"
+          }
+        ],
+        "limitation": "DataTexture substitutes decoded image transport. Browser JPEG/color decoding, GPU upload/mipmap generation, texture sampling and final appearance remain unverified."
+      },
+      "error": "ReferenceError: document is not defined\n    at createElementNS (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:1851:2)\n    at ImageLoader.load (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:45175:17)\n    at TextureLoader.load (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/node_modules/three/build/three.core.js:45576:10)\n    at getStoneTextures (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/casting/loaders/StoneTextures.js:60:28)\n    at stoneUniforms (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/casting/materials/MonolithStoneMaterial.js:193:20)\n    at createSharkRockMaterial (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/casting/materials/SharkMaterials.js:846:8)\n    at SharkAbility.createShaders (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/SharkAbility.js:371:25)\n    at new Ability (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/Ability.js:80:10)\n    at new SharkAbility (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/SharkAbility.js:298:5)\n    at ObjectPool.factory (file:///tmp/aetherion-regressions-base/runtime/ability-matrix/packs/sandbox/src/vendor/casting/abilities/AbilityManager.js:53:27)"
+    }
+  ],
+  "textureBoundary": {
+    "decoder": "Pillow",
+    "decoderVersion": "12.3.0",
+    "method": "JPEG decode followed by RGB/L to RGBA8 conversion, without resizing or ICC transform; input contains no ICC profile.",
+    "textures": [
+      {
+        "url": "./textures/cathedral/color.jpg",
+        "source": "packs/sandbox/public/textures/cathedral/color.jpg",
+        "sourceSha256": "1dca8a336518ce0adca4b5cbe2ab30819c8769388f1c15278082a99f022c615a",
+        "sourceBytes": 1483352,
+        "width": 1024,
+        "height": 1024,
+        "decodedFormat": "RGBA8",
+        "decodedBytes": 4194304,
+        "decodedSha256": "3174cafc0de54daac4fb80767afc55c4969f658ae49f4177067607c7cab08c18",
+        "fixturePath": "/tmp/aetherion-stone-fixtures-LbrxUP/color.jpg.rgba"
+      },
+      {
+        "url": "./textures/cathedral/normal.jpg",
+        "source": "packs/sandbox/public/textures/cathedral/normal.jpg",
+        "sourceSha256": "8fd1d22eb6c7b6e4a374196c0de791f724538b8b86eb9c7a946fec1f5834cb94",
+        "sourceBytes": 2528233,
+        "width": 1024,
+        "height": 1024,
+        "decodedFormat": "RGBA8",
+        "decodedBytes": 4194304,
+        "decodedSha256": "0ca092e5cf83e747f0d54bbf17927aa54df99d3a501893c0e4c0d0b41421b141",
+        "fixturePath": "/tmp/aetherion-stone-fixtures-LbrxUP/normal.jpg.rgba"
+      },
+      {
+        "url": "./textures/cathedral/roughness.jpg",
+        "source": "packs/sandbox/public/textures/cathedral/roughness.jpg",
+        "sourceSha256": "f37850f72994458994716d084683d80611528d1685264bde3071569e8ca53489",
+        "sourceBytes": 669875,
+        "width": 1024,
+        "height": 1024,
+        "decodedFormat": "RGBA8",
+        "decodedBytes": 4194304,
+        "decodedSha256": "27966b40b6bcb994eab0f7df42f1b75993d8d5de8862b04f55e575a5169f5288",
+        "fixturePath": "/tmp/aetherion-stone-fixtures-LbrxUP/roughness.jpg.rgba"
+      },
+      {
+        "url": "./textures/cathedral/ao.jpg",
+        "source": "packs/sandbox/public/textures/cathedral/ao.jpg",
+        "sourceSha256": "405ab1943485560bc01cd0c6c10065195adf7ef9c554f9b24914c3311751dde6",
+        "sourceBytes": 568556,
+        "width": 1024,
+        "height": 1024,
+        "decodedFormat": "RGBA8",
+        "decodedBytes": 4194304,
+        "decodedSha256": "2c5e19cfae55d79f302569dca1f69ab7c61e2bae4c6220621e8da076f35ca3a9",
+        "fixturePath": "/tmp/aetherion-stone-fixtures-LbrxUP/ao.jpg.rgba"
+      }
+    ]
+  },
+  "summary": {
+    "total": 3,
+    "statusCounts": {
+      "blocked-browser-API": 3
+    },
+    "importPassed": 3
+  },
+  "testedRevision": "8c4b5d0bfc75a98388ea29231b9cf1d304dff550"
+}

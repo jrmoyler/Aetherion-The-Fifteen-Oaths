@@ -6,6 +6,8 @@ A source-preserving ability foundation and a coherent, proposed game-production 
 
 This repository is a reviewable foundation. It does not claim that the continent-scale game, multiplayer authority, finished realm assets or production economy are implemented.
 
+The new [Phase I/II production status](docs/production/PHASE_I_II_STATUS.md) tracks the requested production work, acceptance inventory, toolchain evidence and exact Phase II archive blocker. Production is incomplete; the requested archive has not yet been materialized or included.
+
 ## Start here
 
 1. [Executive canon overview](AETHERION_CANON/00_GOVERNANCE/EXECUTIVE_CANON_OVERVIEW.md): established premise, evidence and decisions.

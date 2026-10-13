@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-10-13T19:35:34.160Z",
+  "isolation": "Fresh temporary directory containing only package.json and package-lock.json before npm ci",
+  "node": "v24.19.0",
+  "command": "npm --cache /tmp/aetherion-production-npm-cache ci --ignore-scripts",
+  "exitCode": 0,
+  "stdout": "\nadded 1 package in 186ms\n",
+  "stderr": "",
+  "smoke": {
+    "exitCode": 0,
+    "stdout": "{\"version\":\"2.0.0-dev.3.10\",\"errors\":0}\n",
+    "stderr": ""
+  }
+}
