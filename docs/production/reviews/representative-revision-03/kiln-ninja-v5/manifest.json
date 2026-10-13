@@ -1,0 +1,324 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o01-a-characters-family",
+  "referenceIds": [
+    "reference-090",
+    "reference-060"
+  ],
+  "status": "PARTIAL_PRODUCTION_CANDIDATES_UNREVIEWED",
+  "assets": [
+    {
+      "id": "kiln-ninja-ensemble-candidate",
+      "archetypeId": "kiln-ninja",
+      "name": "Kiln oath ninja \u2014 rigged ensemble candidate",
+      "type": "character",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "glb": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+        "lod1": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+        "lod2": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+        "collision": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+        "textures": [
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-basecolor.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-orm.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-normal.png"
+        ],
+        "renders": [
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-front.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-back.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-side.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-hero.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-01.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-13.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-25.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-37.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-01.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-09.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-17.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-25.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-01.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-13.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-25.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-37.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/pose-contact-sheet.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-portrait.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+          "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png"
+        ]
+      },
+      "triangles": {
+        "glb": 64098,
+        "lod1": 39098,
+        "lod2": 21793,
+        "collision": 76
+      },
+      "dimensionsMeters": [
+        0.834658,
+        0.37139,
+        1.790851
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "HUMANOID_WEIGHTED_DEFORMATION",
+        "present": true,
+        "bones": 38,
+        "evidence": {
+          "vertices": 32850,
+          "multiInfluenceVertices": 1473,
+          "unweightedVertices": 0,
+          "maximumWeightSumError": 2.9802322387695312e-08,
+          "boneCount": 38,
+          "boneNames": [
+            "finger1.L",
+            "finger1_tip.L",
+            "finger2.L",
+            "finger2_tip.L",
+            "finger3.L",
+            "finger3_tip.L",
+            "finger4.L",
+            "finger4_tip.L",
+            "thumb.L",
+            "finger1.R",
+            "finger1_tip.R",
+            "finger2.R",
+            "finger2_tip.R",
+            "finger3.R",
+            "finger3_tip.R",
+            "finger4.R",
+            "finger4_tip.R",
+            "thumb.R",
+            "root",
+            "pelvis",
+            "spine",
+            "chest",
+            "neck",
+            "head",
+            "clavicle.L",
+            "upper_arm.L",
+            "forearm.L",
+            "hand.L",
+            "thigh.L",
+            "shin.L",
+            "foot.L",
+            "clavicle.R",
+            "upper_arm.R",
+            "forearm.R",
+            "hand.R",
+            "thigh.R",
+            "shin.R",
+            "foot.R"
+          ],
+          "socketNames": [
+            "grip_primary",
+            "cast_origin",
+            "hit_reference",
+            "stow"
+          ],
+          "evaluatedPoseChecks": [
+            {
+              "clip": "idle_breath",
+              "frame": 1,
+              "finiteVertices": true,
+              "movedVertexCount": 0,
+              "maximumDisplacementMeters": 1.228781230931777e-07,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "idle_breath",
+              "frame": 13,
+              "finiteVertices": true,
+              "movedVertexCount": 27492,
+              "maximumDisplacementMeters": 0.008424193397005356,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "idle_breath",
+              "frame": 24,
+              "finiteVertices": true,
+              "movedVertexCount": 27463,
+              "maximumDisplacementMeters": 0.000562980278756007,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "idle_breath",
+              "frame": 37,
+              "finiteVertices": true,
+              "movedVertexCount": 27492,
+              "maximumDisplacementMeters": 0.008385928307588747,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "idle_breath",
+              "frame": 48,
+              "finiteVertices": true,
+              "movedVertexCount": 0,
+              "maximumDisplacementMeters": 1.228781230931777e-07,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "walk_in_place",
+              "frame": 1,
+              "finiteVertices": true,
+              "movedVertexCount": 32850,
+              "maximumDisplacementMeters": 0.10522932909866398,
+              "footMinimumZmeters": {
+                "L": 0.012889072299003601,
+                "R": 0.012889072299003601
+              }
+            },
+            {
+              "clip": "walk_in_place",
+              "frame": 9,
+              "finiteVertices": true,
+              "movedVertexCount": 32850,
+              "maximumDisplacementMeters": 0.2641137392271688,
+              "footMinimumZmeters": {
+                "L": 0.08194588869810104,
+                "R": 0.009036971256136894
+              }
+            },
+            {
+              "clip": "walk_in_place",
+              "frame": 16,
+              "finiteVertices": true,
+              "movedVertexCount": 32850,
+              "maximumDisplacementMeters": 0.12617881823289284,
+              "footMinimumZmeters": {
+                "L": 0.020077388733625412,
+                "R": 0.01276032067835331
+              }
+            },
+            {
+              "clip": "walk_in_place",
+              "frame": 25,
+              "finiteVertices": true,
+              "movedVertexCount": 32850,
+              "maximumDisplacementMeters": 0.26299951270247585,
+              "footMinimumZmeters": {
+                "L": 0.009101908653974533,
+                "R": 0.08126334846019745
+              }
+            },
+            {
+              "clip": "walk_in_place",
+              "frame": 32,
+              "finiteVertices": true,
+              "movedVertexCount": 32850,
+              "maximumDisplacementMeters": 0.10522932909866398,
+              "footMinimumZmeters": {
+                "L": 0.012889072299003601,
+                "R": 0.012889072299003601
+              }
+            },
+            {
+              "clip": "cast_release",
+              "frame": 1,
+              "finiteVertices": true,
+              "movedVertexCount": 0,
+              "maximumDisplacementMeters": 1.228781230931777e-07,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "cast_release",
+              "frame": 13,
+              "finiteVertices": true,
+              "movedVertexCount": 27492,
+              "maximumDisplacementMeters": 0.580453846764514,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "cast_release",
+              "frame": 24,
+              "finiteVertices": true,
+              "movedVertexCount": 27492,
+              "maximumDisplacementMeters": 0.7362074602891381,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "cast_release",
+              "frame": 37,
+              "finiteVertices": true,
+              "movedVertexCount": 27492,
+              "maximumDisplacementMeters": 0.4821438907640532,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            },
+            {
+              "clip": "cast_release",
+              "frame": 48,
+              "finiteVertices": true,
+              "movedVertexCount": 0,
+              "maximumDisplacementMeters": 1.228781230931777e-07,
+              "footMinimumZmeters": {
+                "L": 0.014000002294778824,
+                "R": 0.014000002294778824
+              }
+            }
+          ]
+        },
+        "facialRig": false
+      },
+      "animations": [
+        {
+          "name": "idle_breath",
+          "frames": 48,
+          "fps": 24,
+          "rootMotion": "IN_PLACE",
+          "status": "AUTHORED_POSE_RENDER_REVIEW_REQUIRED"
+        },
+        {
+          "name": "walk_in_place",
+          "frames": 32,
+          "fps": 24,
+          "rootMotion": "IN_PLACE",
+          "status": "AUTHORED_POSE_RENDER_REVIEW_REQUIRED"
+        },
+        {
+          "name": "cast_release",
+          "frames": 48,
+          "fps": 24,
+          "rootMotion": "IN_PLACE",
+          "status": "AUTHORED_POSE_RENDER_REVIEW_REQUIRED"
+        }
+      ],
+      "remainingGates": [
+        "Exact art approval and face likeness refinement against references090/060",
+        "Facial expressions and speech rig absent; full ensemble/customization not delivered",
+        "Cape follows chest and upper-arm weights; cloth simulation and intersection refinement remain",
+        "Hand grasp fit and socket calibration against actual equipped weapons",
+        "Animation foot-contact/grounding and interruption gameplay tests",
+        "Authored-character retargeting of source castable timing; no source animation replaced",
+        "Godot Unreal and Three.js real import/render/runtime tests",
+        "Collision navigation/hitbox and LOD transition gameplay validation",
+        "Measured device performance and accessibility review"
+      ]
+    }
+  ]
+}

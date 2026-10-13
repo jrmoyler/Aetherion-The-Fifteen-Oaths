@@ -1,0 +1,46 @@
+{
+  "reviewedAtUtc": "2026-10-13T22:28:35.935583+00:00",
+  "status": "NOT_EXACT_REFERENCE_MATCH_NOT_APPROVED",
+  "observations": [
+    "Front/side/back/hero, final masked and unmasked front/profile portraits and pose-contact-sheet inspected against actual original090/060.",
+    "Wider stance and more defined chin/neck transitions support progress, but geometry and facial likeness remain materially below source fidelity.",
+    "Manual bone-center stance ratios are supporting measurements, not exact correspondence to painted garment landmarks."
+  ],
+  "remainingDefects": [
+    {
+      "priority": "P1",
+      "area": "face and hair",
+      "finding": "The unmasked portrait is a simplified stylized face rather than source090 likeness: slit-like eyes, broad smooth cheeks, straight mouth line and shallow nose/jaw anatomy. Hair is evenly repeated thick strips with exposed cap areas; source hair has irregular clumps and directional overlap.",
+      "repair": "Rebuild eye sockets/lids, nose and lip volumes, cheek/jaw planes and irregular hair masses from original front/profile panels."
+    },
+    {
+      "priority": "P1",
+      "area": "armor and tailoring",
+      "finding": "Broad curved orange lames project as separated smooth bands; source chest panels are fitted, flatter and bordered with straps/rivets. Cape is smooth with a tall plain collar; source drapes/folds, buckle anchor and underlayers differ. Rectangular bracer lacks the rounded ceramic casing and latch detail.",
+      "repair": "Fit chest panels to torso, author individual edges/fasteners and cape folds, and build rounded bracer shell/latch from060 detail panels."
+    },
+    {
+      "priority": "P2",
+      "area": "lower body and materials",
+      "finding": "Trouser folds, pocket transitions, straight shin guards and boot straps/foot yaw remain simplified. Gray cloth and smooth orange ceramic lack soot-black weave, porous terracotta and weathered iron.",
+      "repair": "Refine garment volumes and boot construction before localized material wear and microdetail."
+    },
+    {
+      "priority": "P2",
+      "area": "poses",
+      "finding": "Contact sheet demonstrates candidate pose changes but does not reproduce source060 shoulder/elbow/knee flexion diagnostics or establish cloth/armor clearance.",
+      "repair": "Add matched clearance poses and close views after primary geometry repair."
+    }
+  ],
+  "hashVerification": {
+    "checkedFiles": 50,
+    "mismatches": 0,
+    "recordSha256": "60f5cdcaa4073f449f0f8b29e1008893d5806b887b878f0eb20b9e6d03a5f632"
+  },
+  "limits": [
+    "Pixel review and file-identity verification only; no duplicated import/engine or clearance tests.",
+    "No quantitative pixel registration or exact silhouette score.",
+    "Technical checks from other agents are separate evidence and do not establish art acceptance."
+  ],
+  "repositoryChanges": false
+}

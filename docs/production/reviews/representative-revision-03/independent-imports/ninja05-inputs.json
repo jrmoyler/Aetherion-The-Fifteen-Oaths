@@ -1,0 +1,35 @@
+{
+  "glbs": [
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb"
+  ],
+  "blends": [
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend"
+  ],
+  "expectedClips": {
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb": [
+      "idle_breath",
+      "walk_in_place",
+      "cast_release"
+    ],
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb": [
+      "idle_breath",
+      "walk_in_place",
+      "cast_release"
+    ],
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb": [
+      "idle_breath",
+      "walk_in_place",
+      "cast_release"
+    ],
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb": []
+  },
+  "requireSkin": {
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb": true,
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb": true,
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb": true,
+    "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb": false
+  }
+}

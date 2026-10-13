@@ -1,0 +1,709 @@
+{
+  "chronal-v6": {
+    "evidenceFile": "/tmp/aetherion-weapon-revision-v6/checksums.json",
+    "evidenceSha256": "89aa5109a7a236d34438f3c5eb58a564a49352aa19b496955688df7194447d18",
+    "checkedFiles": 34,
+    "mismatches": [],
+    "files": [
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/README.md",
+        "bytes": 1113,
+        "sha256": "1eacde23175becc53c11d38d9b08f8ef057e31d0266d2ee9a78654d8c289899f",
+        "expectedSha256": "1eacde23175becc53c11d38d9b08f8ef057e31d0266d2ee9a78654d8c289899f",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/build.log",
+        "bytes": 72471,
+        "sha256": "689ece5c3d49d90fdd25d602f4410da56ec181d115e332201992cc4f7dd9aab8",
+        "expectedSha256": "689ece5c3d49d90fdd25d602f4410da56ec181d115e332201992cc4f7dd9aab8",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-tool-v6-deployed.png",
+        "bytes": 625259,
+        "sha256": "90be9a083fdb4bae68bdaf06276df8f5bee4728fb725812601c7c45f2c6cce80",
+        "expectedSha256": "90be9a083fdb4bae68bdaf06276df8f5bee4728fb725812601c7c45f2c6cce80",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-tool-v6-front.png",
+        "bytes": 556751,
+        "sha256": "8b5694061f4cba436031b73c27f9f7fc95962e7308f8db49944af6d014778bf7",
+        "expectedSha256": "8b5694061f4cba436031b73c27f9f7fc95962e7308f8db49944af6d014778bf7",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-tool-v6-hero.png",
+        "bytes": 567733,
+        "sha256": "9ea1b72c966d2bb10e6eaa7e227a76bbd3afefda8141ed6368e16b37de47db7b",
+        "expectedSha256": "9ea1b72c966d2bb10e6eaa7e227a76bbd3afefda8141ed6368e16b37de47db7b",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-tool-v6-side.png",
+        "bytes": 534905,
+        "sha256": "d7f02c0dc89b9f0748385a1cc29d78095f9e0d543e98e01276e70e73261d9679",
+        "expectedSha256": "d7f02c0dc89b9f0748385a1cc29d78095f9e0d543e98e01276e70e73261d9679",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-tool-v6-wrist-fit-side.png",
+        "bytes": 468009,
+        "sha256": "55eeebfcb247b1184ee25531c0c6c8332367221eac53d9be606507262a3ff9d7",
+        "expectedSha256": "55eeebfcb247b1184ee25531c0c6c8332367221eac53d9be606507262a3ff9d7",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-tool-v6-wrist-fit.png",
+        "bytes": 484749,
+        "sha256": "63f7092b2a92d1365b79a052d26806209e4a2b0d17db370b182e4891de58a697",
+        "expectedSha256": "63f7092b2a92d1365b79a052d26806209e4a2b0d17db370b182e4891de58a697",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-tool-v6.blend",
+        "bytes": 7111065,
+        "sha256": "46b47024eb67e23dc2f6e9c4e7e411c9f9482f47148990bd2c4ff76098aaad70",
+        "expectedSha256": "46b47024eb67e23dc2f6e9c4e7e411c9f9482f47148990bd2c4ff76098aaad70",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/chronal-wrist-v6-neutral-fit-witness.blend",
+        "bytes": 2361253,
+        "sha256": "cc93067fd0d5ffc2e4a603c4781f164a6075add410736964d9bd9346d4a20076",
+        "expectedSha256": "cc93067fd0d5ffc2e4a603c4781f164a6075add410736964d9bd9346d4a20076",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/fit.log",
+        "bytes": 37921,
+        "sha256": "7cc7f1f63aa3f2210fde035dbaf1a6e1f5ca34a2cf6d792207b65ec4d61ac10a",
+        "expectedSha256": "7cc7f1f63aa3f2210fde035dbaf1a6e1f5ca34a2cf6d792207b65ec4d61ac10a",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/measured-fit.json",
+        "bytes": 819,
+        "sha256": "9a24a9c0fb01e9ad089157acf897634afcab0316b3e02039108379cec42cbc5c",
+        "expectedSha256": "9a24a9c0fb01e9ad089157acf897634afcab0316b3e02039108379cec42cbc5c",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/recipe/chronal_weapons.py",
+        "bytes": 19470,
+        "sha256": "26c97ac3e30fd32f1331f82e2a1105c5762f9768b4b16ae739859009cff763ff",
+        "expectedSha256": "26c97ac3e30fd32f1331f82e2a1105c5762f9768b4b16ae739859009cff763ff",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/recipe/impulse_weapons.py",
+        "bytes": 12205,
+        "sha256": "9c0746edc4a3f45fbfc62cb6e1cc917e1663a892ca1a4c8d958ac9c680e5340f",
+        "expectedSha256": "9c0746edc4a3f45fbfc62cb6e1cc917e1663a892ca1a4c8d958ac9c680e5340f",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/recipe/kiln_weapons.py",
+        "bytes": 18219,
+        "sha256": "6a3e80eb4f5e7289f171339898d74edd78ea777c613dd091cbde1f2743306c57",
+        "expectedSha256": "6a3e80eb4f5e7289f171339898d74edd78ea777c613dd091cbde1f2743306c57",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/recipe/storm_weapons.py",
+        "bytes": 9177,
+        "sha256": "38003fee80a9236cabbdac134414ce91b87d46b04bd5859ddb1864f886dd6c53",
+        "expectedSha256": "38003fee80a9236cabbdac134414ce91b87d46b04bd5859ddb1864f886dd6c53",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/reference/reference-034-original.png",
+        "bytes": 2318271,
+        "sha256": "c5be6ab847392125e07b644c04078b9a809a18bf53162605603e9a5ab19212a5",
+        "expectedSha256": "c5be6ab847392125e07b644c04078b9a809a18bf53162605603e9a5ab19212a5",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/reproduce_fit.py",
+        "bytes": 3047,
+        "sha256": "e38d9cb5a41dcf02c0bad488515366318cb30da9a3638765732065f91b381d8d",
+        "expectedSha256": "e38d9cb5a41dcf02c0bad488515366318cb30da9a3638765732065f91b381d8d",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/reproduce_review.py",
+        "bytes": 2737,
+        "sha256": "eace1549a03a8b6f0288b21fdea560d2bd1c3705f1112c60ecae2e1a9df5c152",
+        "expectedSha256": "eace1549a03a8b6f0288b21fdea560d2bd1c3705f1112c60ecae2e1a9df5c152",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/brass_basecolor.png",
+        "bytes": 430767,
+        "sha256": "83002b6dfdbf68e541e76f80f8fa16e7c5975cb92e7a17ae80a32b0fe7cc9dd8",
+        "expectedSha256": "83002b6dfdbf68e541e76f80f8fa16e7c5975cb92e7a17ae80a32b0fe7cc9dd8",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/brass_normal.png",
+        "bytes": 485494,
+        "sha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "expectedSha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/brass_orm.png",
+        "bytes": 306384,
+        "sha256": "8b91e0a933fcc7c9fa875108dc8acf77f7a1bff0779ed30f33eb47035848eca7",
+        "expectedSha256": "8b91e0a933fcc7c9fa875108dc8acf77f7a1bff0779ed30f33eb47035848eca7",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/chronal_wrist_localized_basecolor.png",
+        "bytes": 481511,
+        "sha256": "4d7f36839e5d3ee39bc5310a33aa439adf1c55992e269eca9f7e6e33306a44c3",
+        "expectedSha256": "4d7f36839e5d3ee39bc5310a33aa439adf1c55992e269eca9f7e6e33306a44c3",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/chronal_wrist_localized_normal.png",
+        "bytes": 20650,
+        "sha256": "a1ee240a2a8296d29cf6c61cbebfd0e6d60b91038b518e9f290388bc8e0895cd",
+        "expectedSha256": "a1ee240a2a8296d29cf6c61cbebfd0e6d60b91038b518e9f290388bc8e0895cd",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/chronal_wrist_localized_orm.png",
+        "bytes": 333966,
+        "sha256": "746b0a1eb7a47f7f07d48645d0f60d34c2781da67a946071fa7566f2d6f23d4e",
+        "expectedSha256": "746b0a1eb7a47f7f07d48645d0f60d34c2781da67a946071fa7566f2d6f23d4e",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/edge_basecolor.png",
+        "bytes": 439337,
+        "sha256": "fbddf318620e28b861cdc65383f1e63ca97c32ff5099a9fe565d0dbc60c19236",
+        "expectedSha256": "fbddf318620e28b861cdc65383f1e63ca97c32ff5099a9fe565d0dbc60c19236",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/edge_normal.png",
+        "bytes": 485494,
+        "sha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "expectedSha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/edge_orm.png",
+        "bytes": 306313,
+        "sha256": "90bf94777fb6c2e8cd3e5c810818407ebe103e4bb7e8d5702a2a8a03e50bc13c",
+        "expectedSha256": "90bf94777fb6c2e8cd3e5c810818407ebe103e4bb7e8d5702a2a8a03e50bc13c",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/leather_basecolor.png",
+        "bytes": 312760,
+        "sha256": "33180e0ea60eb3fb33d83012dfe17d8d9899ac185188707d87e0ed6594456461",
+        "expectedSha256": "33180e0ea60eb3fb33d83012dfe17d8d9899ac185188707d87e0ed6594456461",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/leather_normal.png",
+        "bytes": 485494,
+        "sha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "expectedSha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/leather_orm.png",
+        "bytes": 305521,
+        "sha256": "6f76525cd8b28d6d2ea85cf9d062dc7d0d30bbb2f1c00848d03da82c4db562a9",
+        "expectedSha256": "6f76525cd8b28d6d2ea85cf9d062dc7d0d30bbb2f1c00848d03da82c4db562a9",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/steel_basecolor.png",
+        "bytes": 412774,
+        "sha256": "544864b29bb8b14e47c12aea12c177cdacc039ceb6de5aa0327cc9e2dfff6f17",
+        "expectedSha256": "544864b29bb8b14e47c12aea12c177cdacc039ceb6de5aa0327cc9e2dfff6f17",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/steel_normal.png",
+        "bytes": 485494,
+        "sha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "expectedSha256": "7411366f9a473f18c4a7c0d101e00c6cb3c0a26f6a932c53aaa1fdd9c8ea69cd",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision-v6/textures/steel_orm.png",
+        "bytes": 306502,
+        "sha256": "daa78bad3360ed89161d895bc7662b178d53a7b4c71566aeb6533a8f06340729",
+        "expectedSha256": "daa78bad3360ed89161d895bc7662b178d53a7b4c71566aeb6533a8f06340729",
+        "matches": true
+      }
+    ],
+    "originalReference": {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-034/original.png",
+      "sha256": "c5be6ab847392125e07b644c04078b9a809a18bf53162605603e9a5ab19212a5",
+      "expectedSha256": "c5be6ab847392125e07b644c04078b9a809a18bf53162605603e9a5ab19212a5",
+      "matches": true
+    }
+  },
+  "graft-pass06": {
+    "evidenceFile": "/tmp/aetherion-weapon-revision/graft-pass06/REVIEW_EVIDENCE.json",
+    "evidenceSha256": "d93dcd968819c932226494f55d67d9242d8e6f11e2ea04c82c1e197b872456c9",
+    "checkedFiles": 63,
+    "mismatches": [],
+    "files": [
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Bark_basecolor.png",
+        "bytes": 330447,
+        "sha256": "dc69060b1085b25843b96903929556b2360c991936e9a3f16e8e498d09250887",
+        "expectedSha256": "dc69060b1085b25843b96903929556b2360c991936e9a3f16e8e498d09250887",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Bark_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Bark_normal.png",
+        "bytes": 619045,
+        "sha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "expectedSha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Bark_roughness.png",
+        "bytes": 142382,
+        "sha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "expectedSha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Fiber_basecolor.png",
+        "bytes": 208132,
+        "sha256": "5763bee41279c5326d0d02adcb8e01c45cf2f5161568f36fec33952608f8fd81",
+        "expectedSha256": "5763bee41279c5326d0d02adcb8e01c45cf2f5161568f36fec33952608f8fd81",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Fiber_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Fiber_normal.png",
+        "bytes": 319149,
+        "sha256": "635cb797106a9ed67b59063dff6619b30bba9fff1ef312695ecb40133df4dd82",
+        "expectedSha256": "635cb797106a9ed67b59063dff6619b30bba9fff1ef312695ecb40133df4dd82",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Fiber_roughness.png",
+        "bytes": 15888,
+        "sha256": "774aed70167f4fa1900e2922b3a40a77455e0380eef99822c86e9b6630c31cd0",
+        "expectedSha256": "774aed70167f4fa1900e2922b3a40a77455e0380eef99822c86e9b6630c31cd0",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Husk_basecolor.png",
+        "bytes": 330760,
+        "sha256": "3564a6f39dc0b95beeb6b951faff59968c65c1d8839ce3c1d46d2c8b52fdddf4",
+        "expectedSha256": "3564a6f39dc0b95beeb6b951faff59968c65c1d8839ce3c1d46d2c8b52fdddf4",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Husk_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Husk_normal.png",
+        "bytes": 619045,
+        "sha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "expectedSha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Husk_roughness.png",
+        "bytes": 142382,
+        "sha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "expectedSha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Leaf_basecolor.png",
+        "bytes": 178847,
+        "sha256": "4bace7cf305c820cd27b88fe9d6c596d6570835a2142cd103fa557f671361691",
+        "expectedSha256": "4bace7cf305c820cd27b88fe9d6c596d6570835a2142cd103fa557f671361691",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Leaf_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Leaf_normal.png",
+        "bytes": 268026,
+        "sha256": "4b38562783d584b98c35d07ee9193789657e1df0ebc689d9255832f512c31d07",
+        "expectedSha256": "4b38562783d584b98c35d07ee9193789657e1df0ebc689d9255832f512c31d07",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Leaf_roughness.png",
+        "bytes": 15888,
+        "sha256": "320e0e3649c91b1eeedeac9596fabc814bbc78aa69a9516a3f35782b6c6ed567",
+        "expectedSha256": "320e0e3649c91b1eeedeac9596fabc814bbc78aa69a9516a3f35782b6c6ed567",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/SOURCE_LANDMARKS.json",
+        "bytes": 1795,
+        "sha256": "070845fba28119d365751dc45a7d8547bc854cfee36a25b6e7462f24784ce102",
+        "expectedSha256": "070845fba28119d365751dc45a7d8547bc854cfee36a25b6e7462f24784ce102",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Sap_basecolor.png",
+        "bytes": 558405,
+        "sha256": "f47a8c8ca598fdca9d02dace9e5caf7f34e3030c79ac4df49d5c385f49af5e6c",
+        "expectedSha256": "f47a8c8ca598fdca9d02dace9e5caf7f34e3030c79ac4df49d5c385f49af5e6c",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Sap_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Sap_normal.png",
+        "bytes": 36068,
+        "sha256": "94c60548e76db1966e3ff1f26e6322b9c3df43845594c12d8c46a0ac6f2e48eb",
+        "expectedSha256": "94c60548e76db1966e3ff1f26e6322b9c3df43845594c12d8c46a0ac6f2e48eb",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Sap_roughness.png",
+        "bytes": 149789,
+        "sha256": "9b07f529d8c05ed67e7c5b0369d66f0f99b7b44a05cf86866a153df9b01e2b40",
+        "expectedSha256": "9b07f529d8c05ed67e7c5b0369d66f0f99b7b44a05cf86866a153df9b01e2b40",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Vine_basecolor.png",
+        "bytes": 17706,
+        "sha256": "9b3d07f371237a94d1bf563eae452049db6fa2b0d2093f92efc843181c42dc53",
+        "expectedSha256": "9b3d07f371237a94d1bf563eae452049db6fa2b0d2093f92efc843181c42dc53",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Vine_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Vine_normal.png",
+        "bytes": 17769,
+        "sha256": "a1cbaab69b032001dc23157cd0c9f40bf64aa16cfbb43e69e59a1cc15313a8e8",
+        "expectedSha256": "a1cbaab69b032001dc23157cd0c9f40bf64aa16cfbb43e69e59a1cc15313a8e8",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/Vine_roughness.png",
+        "bytes": 15888,
+        "sha256": "cbce2fd9903de8f60767eef99bc06f3fdb8589c1d791695fcbdfbfcff5b611d5",
+        "expectedSha256": "cbce2fd9903de8f60767eef99bc06f3fdb8589c1d791695fcbdfbfcff5b611d5",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Bark_basecolor.png",
+        "bytes": 330447,
+        "sha256": "dc69060b1085b25843b96903929556b2360c991936e9a3f16e8e498d09250887",
+        "expectedSha256": "dc69060b1085b25843b96903929556b2360c991936e9a3f16e8e498d09250887",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Bark_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Bark_normal.png",
+        "bytes": 619045,
+        "sha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "expectedSha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Bark_roughness.png",
+        "bytes": 142382,
+        "sha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "expectedSha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Fiber_basecolor.png",
+        "bytes": 208132,
+        "sha256": "5763bee41279c5326d0d02adcb8e01c45cf2f5161568f36fec33952608f8fd81",
+        "expectedSha256": "5763bee41279c5326d0d02adcb8e01c45cf2f5161568f36fec33952608f8fd81",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Fiber_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Fiber_normal.png",
+        "bytes": 319149,
+        "sha256": "635cb797106a9ed67b59063dff6619b30bba9fff1ef312695ecb40133df4dd82",
+        "expectedSha256": "635cb797106a9ed67b59063dff6619b30bba9fff1ef312695ecb40133df4dd82",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Fiber_roughness.png",
+        "bytes": 15888,
+        "sha256": "774aed70167f4fa1900e2922b3a40a77455e0380eef99822c86e9b6630c31cd0",
+        "expectedSha256": "774aed70167f4fa1900e2922b3a40a77455e0380eef99822c86e9b6630c31cd0",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Husk_basecolor.png",
+        "bytes": 330760,
+        "sha256": "3564a6f39dc0b95beeb6b951faff59968c65c1d8839ce3c1d46d2c8b52fdddf4",
+        "expectedSha256": "3564a6f39dc0b95beeb6b951faff59968c65c1d8839ce3c1d46d2c8b52fdddf4",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Husk_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Husk_normal.png",
+        "bytes": 619045,
+        "sha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "expectedSha256": "a415c67d3407cc4aa55a579b23b1e8d0d0b0a03d719c8032c8f9bb1be9b458ab",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Husk_roughness.png",
+        "bytes": 142382,
+        "sha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "expectedSha256": "8f60fa3654d016b96cdcef9017def2f67d5f66a91289e721de6fd0acc42a032f",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Leaf_basecolor.png",
+        "bytes": 178847,
+        "sha256": "4bace7cf305c820cd27b88fe9d6c596d6570835a2142cd103fa557f671361691",
+        "expectedSha256": "4bace7cf305c820cd27b88fe9d6c596d6570835a2142cd103fa557f671361691",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Leaf_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Leaf_normal.png",
+        "bytes": 268026,
+        "sha256": "4b38562783d584b98c35d07ee9193789657e1df0ebc689d9255832f512c31d07",
+        "expectedSha256": "4b38562783d584b98c35d07ee9193789657e1df0ebc689d9255832f512c31d07",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Leaf_roughness.png",
+        "bytes": 15888,
+        "sha256": "320e0e3649c91b1eeedeac9596fabc814bbc78aa69a9516a3f35782b6c6ed567",
+        "expectedSha256": "320e0e3649c91b1eeedeac9596fabc814bbc78aa69a9516a3f35782b6c6ed567",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/SOURCE_LANDMARKS.json",
+        "bytes": 1428,
+        "sha256": "96135eb21d740e1c837072db9a2b3cb05e48029b1bb045947a8d30d81a0b4ca0",
+        "expectedSha256": "96135eb21d740e1c837072db9a2b3cb05e48029b1bb045947a8d30d81a0b4ca0",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Sap_basecolor.png",
+        "bytes": 558405,
+        "sha256": "f47a8c8ca598fdca9d02dace9e5caf7f34e3030c79ac4df49d5c385f49af5e6c",
+        "expectedSha256": "f47a8c8ca598fdca9d02dace9e5caf7f34e3030c79ac4df49d5c385f49af5e6c",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Sap_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Sap_normal.png",
+        "bytes": 36068,
+        "sha256": "94c60548e76db1966e3ff1f26e6322b9c3df43845594c12d8c46a0ac6f2e48eb",
+        "expectedSha256": "94c60548e76db1966e3ff1f26e6322b9c3df43845594c12d8c46a0ac6f2e48eb",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Sap_roughness.png",
+        "bytes": 149789,
+        "sha256": "9b07f529d8c05ed67e7c5b0369d66f0f99b7b44a05cf86866a153df9b01e2b40",
+        "expectedSha256": "9b07f529d8c05ed67e7c5b0369d66f0f99b7b44a05cf86866a153df9b01e2b40",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Vine_basecolor.png",
+        "bytes": 17706,
+        "sha256": "9b3d07f371237a94d1bf563eae452049db6fa2b0d2093f92efc843181c42dc53",
+        "expectedSha256": "9b3d07f371237a94d1bf563eae452049db6fa2b0d2093f92efc843181c42dc53",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Vine_metallic.png",
+        "bytes": 13922,
+        "sha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "expectedSha256": "6dc277ac7171be615c76ca0ffe7a721b2f0692c07b51120a0e28824da4c685ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Vine_normal.png",
+        "bytes": 17769,
+        "sha256": "a1cbaab69b032001dc23157cd0c9f40bf64aa16cfbb43e69e59a1cc15313a8e8",
+        "expectedSha256": "a1cbaab69b032001dc23157cd0c9f40bf64aa16cfbb43e69e59a1cc15313a8e8",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/Vine_roughness.png",
+        "bytes": 15888,
+        "sha256": "cbce2fd9903de8f60767eef99bc06f3fdb8589c1d791695fcbdfbfcff5b611d5",
+        "expectedSha256": "cbce2fd9903de8f60767eef99bc06f3fdb8589c1d791695fcbdfbfcff5b611d5",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/previous-save.blend1",
+        "bytes": 8585708,
+        "sha256": "9f7f47a8059e5412e58a21fc7e720d9a702b4802f021f3d7809fd4003e2cbd88",
+        "expectedSha256": "9f7f47a8059e5412e58a21fc7e720d9a702b4802f021f3d7809fd4003e2cbd88",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/revised_graft.py",
+        "bytes": 17895,
+        "sha256": "1d15bd4f7e82c761cad2f7793aac8cce5c22630cc1fc6e280569acaa408b3fdc",
+        "expectedSha256": "1d15bd4f7e82c761cad2f7793aac8cce5c22630cc1fc6e280569acaa408b3fdc",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/sapseed-staff-crown-closeup.png",
+        "bytes": 1311413,
+        "sha256": "2445e52c8e5cf3ff427707db9c586388b689a7ece20b07f99507074482a8f362",
+        "expectedSha256": "2445e52c8e5cf3ff427707db9c586388b689a7ece20b07f99507074482a8f362",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/sapseed-staff-front.png",
+        "bytes": 831721,
+        "sha256": "c63234142b40a82e1ac2d450be71782cf8522b7e107d79049bba6167675e96ad",
+        "expectedSha256": "c63234142b40a82e1ac2d450be71782cf8522b7e107d79049bba6167675e96ad",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/sapseed-staff-hero.png",
+        "bytes": 829215,
+        "sha256": "fab7d2417ace4131c2b97951efa1661013bfbe87eb93736637213c32ca8249ee",
+        "expectedSha256": "fab7d2417ace4131c2b97951efa1661013bfbe87eb93736637213c32ca8249ee",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/sapseed-staff-profile.png",
+        "bytes": 731472,
+        "sha256": "31c3cad6c23637de101e2856073e3d836685569c09f3f3ca77c0b5caaa304513",
+        "expectedSha256": "31c3cad6c23637de101e2856073e3d836685569c09f3f3ca77c0b5caaa304513",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/diagnostic-planar/sapseed-staff.blend",
+        "bytes": 8585708,
+        "sha256": "9f7f47a8059e5412e58a21fc7e720d9a702b4802f021f3d7809fd4003e2cbd88",
+        "expectedSha256": "9f7f47a8059e5412e58a21fc7e720d9a702b4802f021f3d7809fd4003e2cbd88",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/revised_graft.py",
+        "bytes": 18035,
+        "sha256": "bc60192aefbc7b6cc3fa8579383760e8805f9d4e4279c74d69e3feae39679bef",
+        "expectedSha256": "bc60192aefbc7b6cc3fa8579383760e8805f9d4e4279c74d69e3feae39679bef",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/sapseed-staff-crown-closeup.png",
+        "bytes": 1317545,
+        "sha256": "1dde7b0a1d73d9643b24ca20159b259e479a37d9bc7a169e23f0aaee59452a5c",
+        "expectedSha256": "1dde7b0a1d73d9643b24ca20159b259e479a37d9bc7a169e23f0aaee59452a5c",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/sapseed-staff-front.png",
+        "bytes": 831489,
+        "sha256": "ad8bff79b9df7f9b4f57e2c35dda160bbac648ab8f49b2824ce8508092e2337e",
+        "expectedSha256": "ad8bff79b9df7f9b4f57e2c35dda160bbac648ab8f49b2824ce8508092e2337e",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/sapseed-staff-hero.png",
+        "bytes": 829672,
+        "sha256": "98b8fba64758f9a38aed83e032d50dece458aad92816b0fa112ed026c23533da",
+        "expectedSha256": "98b8fba64758f9a38aed83e032d50dece458aad92816b0fa112ed026c23533da",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/sapseed-staff-profile.png",
+        "bytes": 761774,
+        "sha256": "7a6c3477cd9bb36af67581c7cd8a4dc7872c3411a5953e34aea37a8367321752",
+        "expectedSha256": "7a6c3477cd9bb36af67581c7cd8a4dc7872c3411a5953e34aea37a8367321752",
+        "matches": true
+      },
+      {
+        "path": "/tmp/aetherion-weapon-revision/graft-pass06/sapseed-staff.blend",
+        "bytes": 8585708,
+        "sha256": "242ff0a60a62e85c6e6bfd723226a934dcbf66dadbab14ded0fca50223a950c7",
+        "expectedSha256": "242ff0a60a62e85c6e6bfd723226a934dcbf66dadbab14ded0fca50223a950c7",
+        "matches": true
+      }
+    ],
+    "originalReference": {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-049/original.png",
+      "sha256": "5612f785710f5f1e223c9404b975a714f90433c9f05a9afeeecad1d280682116",
+      "expectedSha256": "5612f785710f5f1e223c9404b975a714f90433c9f05a9afeeecad1d280682116",
+      "matches": true
+    }
+  }
+}

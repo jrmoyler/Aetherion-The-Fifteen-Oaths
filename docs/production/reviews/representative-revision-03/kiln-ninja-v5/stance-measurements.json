@@ -1,0 +1,24 @@
+{
+  "scope": "Rest-bone projected horizontal centers compared with manually picked reference090 garment centers; approximate, not exact mesh correspondence or visual approval.",
+  "sourceHeightPixels": 623,
+  "sourceManualUncertaintyPixels": 5,
+  "modelRestMeshHeightMeters": 1.7908516507595778,
+  "measurements": [
+    {
+      "landmark": "knee",
+      "sourceSeparationPixels": 98,
+      "sourceNormalizedHeight": 0.15730337078651685,
+      "modelRestJointSeparationMeters": 0.28999999165534973,
+      "modelNormalizedHeight": 0.16193412309296987,
+      "absoluteNormalizedDifference": 0.004630752306453018
+    },
+    {
+      "landmark": "ankle",
+      "sourceSeparationPixels": 142,
+      "sourceNormalizedHeight": 0.22792937399678972,
+      "modelRestJointSeparationMeters": 0.4180000126361847,
+      "modelNormalizedHeight": 0.2334085084372526,
+      "absoluteNormalizedDifference": 0.005479134440462885
+    }
+  ]
+}

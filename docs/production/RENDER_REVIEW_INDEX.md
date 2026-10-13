@@ -28,3 +28,7 @@ Direct inspection of the Fault Choir sheet against reference-053 shows the inten
 Direct inspection of the Kiln ninja pose sheet against reference-090 and reference-060 shows the dark cloth and terracotta palette, asymmetric shoulder covering, bracers and masked silhouette. Facial likeness, hair, cloth drape, armor construction, surface wear and pose/deformation quality remain visibly unfinished. Its 38-bone rig and three clips are functional technical candidates, not an approved character performance.
 
 The family notes retain further observed gaps, missing states, dimensional differences and unmeasured grip/contact requirements. All15 Oaths remain distinct; coverage of their weapon families does not close any complete realm or family acceptance gate.
+
+## Revised source and render comparisons
+
+[Representative revision 03](reviews/representative-revision-03/README.md) publishes Kiln ninja V5, Fault blade V9 and Impulse shield V7 repairs, alongside preserved Chronal V6 and Graft pass06 revisions. It includes editable sources, comparison views, independent reviews and scoped import evidence. All remain unapproved and excluded from production/runtime acceptance counts.
