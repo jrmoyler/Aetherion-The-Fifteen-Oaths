@@ -1,0 +1,358 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_status": "FROZEN_EXISTING_27_IMAGE_BATCH",
+  "policy": "Lists every payload file except this self-referential checksum manifest. All generated art remains proposed and unapproved.",
+  "file_count_excluding_this_manifest": 70,
+  "records": [
+    {
+      "path": "FIRST_FIVE_IMAGEGEN_BRIEFS.json",
+      "bytes": 30579,
+      "sha256": "8f6f006c90f5cd5c2bf42344861a35940a8fca723c867ed3d69e36610b3fcece"
+    },
+    {
+      "path": "INTEGRATION_MANIFEST.json",
+      "bytes": 73335,
+      "sha256": "1c6fef3948fb1ab3f8f4f63919fba335bcf4f25aedcfeaa75461797b69836d8a"
+    },
+    {
+      "path": "NEXT_FIVE_IMAGEGEN_BRIEFS.json",
+      "bytes": 34490,
+      "sha256": "5429c17400b4f3e95b0b2a6bdbf2074c95c93de6ab2c1ebbb75a2a53769d9c61"
+    },
+    {
+      "path": "NEXT_TEN_SHARED_ENVIRONMENT_BRIEFS.json",
+      "bytes": 44563,
+      "sha256": "5bf6fb6d416b29605fd1fa8ab1984ba296cd16521d3993e0c7c6fd58b0fe0326"
+    },
+    {
+      "path": "OTHER_FOURTEEN_OATH_ARCHITECTURE_BRIEFS.json",
+      "bytes": 146341,
+      "sha256": "d968c7729c93e4ff11ea4f993525c2a07569a16a2b5fef36c587d1975db0d2d4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1101,
+      "sha256": "7f0fa05154b551117bac6b2ec93976cb0746900978cd695d22fae2cde7b59e21"
+    },
+    {
+      "path": "generated/daybreak-clinic-threshold-door-proposed-v01.png",
+      "bytes": 2434477,
+      "sha256": "1fb1243734ff4be442edeb9215d3aaeb387f1458fdefcdc617dab3c574768c5c"
+    },
+    {
+      "path": "generated/daybreak-daylight-baffle-proposed-v01.png",
+      "bytes": 2449856,
+      "sha256": "22998def63dfe8085b7dd79e14aae19649dbbcab0a2e543b67e52eb0cba90472"
+    },
+    {
+      "path": "generated/daybreak-daylight-baffle-proposed-v02.png",
+      "bytes": 2366770,
+      "sha256": "751e6b4444ec563491842b810af83ffc42048e418c7783fbcb8fe8720488f1de"
+    },
+    {
+      "path": "generated/daybreak-foundation-floor-proposed-v01.png",
+      "bytes": 2454155,
+      "sha256": "f9eee481eebb9ec5601b9201881841bf485181931e1e7f8ea2577f8a60688c14"
+    },
+    {
+      "path": "generated/daybreak-prism-backed-courser-proposed-v01.png",
+      "bytes": 2405080,
+      "sha256": "be928880f46ccc90f6a9a8c4b7ddcfcf2d90e3eb4f1a280217ee7ce0cb0fecdf"
+    },
+    {
+      "path": "generated/daybreak-prism-backed-courser-proposed-v02.png",
+      "bytes": 2408286,
+      "sha256": "297b86518d1b4fd97ab3373e1e4aa0772bf8bd27fd2bbc8d9d90ba0dcd6187c9"
+    },
+    {
+      "path": "generated/daybreak-roof-canopy-proposed-v01.png",
+      "bytes": 2305147,
+      "sha256": "dcbc6531860604b21fcad96bc422b5efc24aa80320242322d7fd98d1abd2a0ca"
+    },
+    {
+      "path": "generated/daybreak-service-clothing-proposed-v01.png",
+      "bytes": 2495520,
+      "sha256": "da5c4995430b199b0cf73144a6bfd04ba94e3f3418c76b953b4583c825c42b58"
+    },
+    {
+      "path": "generated/daybreak-service-clothing-proposed-v02.png",
+      "bytes": 2338650,
+      "sha256": "0d8dc04b57e5a3cbba558c1c949c61be7ae7eb1be7ea836124bb1ea1758f88a2"
+    },
+    {
+      "path": "generated/daybreak-stair-ramp-proposed-v01.png",
+      "bytes": 2413007,
+      "sha256": "85db6edfbdb1b34724f3dccbdf905e8bcf75997813f47baa405c55abb932dd37"
+    },
+    {
+      "path": "generated/daybreak-surface-trim-proposed-v01.png",
+      "bytes": 2736628,
+      "sha256": "722bf8474b1b28e9b8935ee1de83bb5a0326994f25aadefec43dcba48aaf9804"
+    },
+    {
+      "path": "generated/daybreak-wall-window-corner-proposed-v01.png",
+      "bytes": 2089873,
+      "sha256": "ca025d7e0e284d0c9d63acf6c3ebbc7d15306787643390259b433b53d428dc51"
+    },
+    {
+      "path": "generated/p2-arch-01-kiln-courts-proposed-v01.png",
+      "bytes": 2624826,
+      "sha256": "dfa29944088daefd159f50893f6eadb0342c69dd2ee65a40b1a0fc9f72da51c3"
+    },
+    {
+      "path": "generated/p2-arch-02-rime-vaults-proposed-v01.png",
+      "bytes": 2808241,
+      "sha256": "5e173f32eedf6ea41a4f076da25b68f6ef9691f2402d979b8326502eddc238d1"
+    },
+    {
+      "path": "generated/p2-arch-03-storm-relays-proposed-v01.png",
+      "bytes": 2633697,
+      "sha256": "3bb5b34df06f57941157c3d8f503837ca278e8df5de212520168da2cf8b65fd9"
+    },
+    {
+      "path": "generated/p2-arch-04-tidal-refuges-proposed-v01.png",
+      "bytes": 2916737,
+      "sha256": "5681164baa3d85036e2e7ebc5bb49dcf8630da815de64351cf4a7badcfea71eb"
+    },
+    {
+      "path": "generated/p2-arch-05-fault-buttresses-proposed-v01.png",
+      "bytes": 2651029,
+      "sha256": "e5cfdbabffce9a11469028154c46672b3c64adf6841abb6b503bca63877aa172"
+    },
+    {
+      "path": "generated/p2-arch-06-reed-halls-proposed-v01.png",
+      "bytes": 2824196,
+      "sha256": "d632818d86b656a84def9364a11b7091f532d5fbeede84d06623cb914a51acdd"
+    },
+    {
+      "path": "generated/p2-arch-07-graft-courts-proposed-v01.png",
+      "bytes": 2874784,
+      "sha256": "b6f4fd2b008f2275e718cb05c37b5c348471f0d1ab1f7cebc74ae958715dba5d"
+    },
+    {
+      "path": "generated/p2-arch-08-bitterglass-stills-proposed-v01.png",
+      "bytes": 2642452,
+      "sha256": "b56d6bfdbd5485e727cfdeb130897e754b1ca75641dfae9795ef862c4d10e081"
+    },
+    {
+      "path": "generated/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "bytes": 2500067,
+      "sha256": "7c5f5acf2871dfdfb2ec0716d91cf8bb1efeb6b8e69b47f2661363e0a74c5106"
+    },
+    {
+      "path": "generated/p2-arch-10-observatory-terraces-proposed-v01.png",
+      "bytes": 2746971,
+      "sha256": "54024756f15dc4b52772eae36053b71a5a3c4eebddc26b41aea25018b764f41c"
+    },
+    {
+      "path": "generated/p2-arch-11-missing-court-proposed-v01.png",
+      "bytes": 2747578,
+      "sha256": "febe476041642db10c84e90bf4a173d2cec191843c8004f5ad70de69bb1809c1"
+    },
+    {
+      "path": "generated/p2-arch-12-sanguine-cloisters-proposed-v01.png",
+      "bytes": 2937388,
+      "sha256": "dabd5ba6f6123b440bfaeb6cf8eee3542ebca0bc63ddf07156577b7920de8b0e"
+    },
+    {
+      "path": "generated/p2-arch-13-folded-stages-proposed-v01.png",
+      "bytes": 2350234,
+      "sha256": "e8c26b8af72243a2225bf5aa7c158d1321c2d08f66e2b2b2632ad7a00be158f9"
+    },
+    {
+      "path": "generated/p2-arch-14-escapement-stations-proposed-v01.png",
+      "bytes": 2694258,
+      "sha256": "f6182474cd520204d1913f96b172bd40a9f5353fe69c90ef0b8ac05f314a2ffd"
+    },
+    {
+      "path": "generated/p2-arch-15-impulse-yards-proposed-v01.png",
+      "bytes": 2592498,
+      "sha256": "d365de62835f5b7e255f105e6ac00f32b77ec3428e5a17c9b9d0664797b4881e"
+    },
+    {
+      "path": "prompts/01_daybreak_public_colonnade.prompt.txt",
+      "bytes": 1841,
+      "sha256": "2a03538bde2a068abc9a6c4f2e1a3fcb1639e3d32fdd2e29a0a218cc506f55c4"
+    },
+    {
+      "path": "prompts/01_p2-arch-01-kiln-courts_first_construction.prompt.txt",
+      "bytes": 2655,
+      "sha256": "cbe5834ba8b445a54c5543b6fc1760b292fd9eea8e989773a95e880714b5036e"
+    },
+    {
+      "path": "prompts/02_daybreak_surface_trim_board.prompt.txt",
+      "bytes": 1977,
+      "sha256": "287bf2391507748e9389327ed188376d92fb9b29e5cfdce70c86a3e3017ff50f"
+    },
+    {
+      "path": "prompts/02_p2-arch-02-rime-vaults_first_construction.prompt.txt",
+      "bytes": 2682,
+      "sha256": "0d0a37809b2fee82773d8aa11f220a9fac12ec55412e7126732425fbbe012eed"
+    },
+    {
+      "path": "prompts/03_daybreak_daylight_baffle.prompt.txt",
+      "bytes": 2135,
+      "sha256": "38c6c254edfe0f60d632ec35c1d6d9bfca35329b457abd3d582136fba332cbf7"
+    },
+    {
+      "path": "prompts/03_p2-arch-03-storm-relays_first_construction.prompt.txt",
+      "bytes": 2749,
+      "sha256": "eddcaeee31ae3ad826aca7793a540031e949c694d8a667d0dd1c0e13be1c9ab7"
+    },
+    {
+      "path": "prompts/04_daybreak_civilian_service_clothing.prompt.txt",
+      "bytes": 2185,
+      "sha256": "cb4022c17fa74d2c38a011640c05408b4e682f28811478b26a2a43321cfd55eb"
+    },
+    {
+      "path": "prompts/04_p2-arch-04-tidal-refuges_first_construction.prompt.txt",
+      "bytes": 2787,
+      "sha256": "ace5e79bbe9589efe5bdd15e0c3296bea70603d167194630e8872418e6d32e7d"
+    },
+    {
+      "path": "prompts/05_daybreak_prism_backed_courser.prompt.txt",
+      "bytes": 2387,
+      "sha256": "4a951fcd3fe79fd580e917180b516f06bfdb158bb1843538683f2e4d00071712"
+    },
+    {
+      "path": "prompts/05_p2-arch-05-fault-buttresses_first_construction.prompt.txt",
+      "bytes": 2708,
+      "sha256": "2fcbf3d6f2ac80608a264274c7d33a7f25c2b8684e40b3919689f4f887ce4490"
+    },
+    {
+      "path": "prompts/06_daybreak_foundation_floor_interfaces.prompt.txt",
+      "bytes": 2042,
+      "sha256": "f13936c7ed5b53246bfbe0ac8acab7a8a641f57416f571cce93d2bda3995ce45"
+    },
+    {
+      "path": "prompts/06_p2-arch-06-reed-halls_first_construction.prompt.txt",
+      "bytes": 2752,
+      "sha256": "ecacfa34aeca9ca000f93b2b4db2f490a70164253bafa022a1d34deea738085c"
+    },
+    {
+      "path": "prompts/07_daybreak_wall_window_corner_interfaces.prompt.txt",
+      "bytes": 2273,
+      "sha256": "8c53519840298083f7bbe31494fc1de44987b6ebc46c3f95a75e4922e5c3497a"
+    },
+    {
+      "path": "prompts/07_p2-arch-07-graft-courts_first_construction.prompt.txt",
+      "bytes": 2804,
+      "sha256": "4c1cafdeb7380bc68021dc1083315cdffa416edbe99b9a8a40ac2a7632921416"
+    },
+    {
+      "path": "prompts/08_daybreak_clinic_threshold_door.prompt.txt",
+      "bytes": 2393,
+      "sha256": "8808a502f900a8f9467eb94a8560d34a4baeebb6f48fc81215671198829c5cd8"
+    },
+    {
+      "path": "prompts/08_p2-arch-08-bitterglass-stills_first_construction.prompt.txt",
+      "bytes": 2904,
+      "sha256": "c80a4cb02c1544f37f8354c41746d6881d321f1c46a50405a89cdca4b3329a79"
+    },
+    {
+      "path": "prompts/09_daybreak_stair_ramp_circulation.prompt.txt",
+      "bytes": 2302,
+      "sha256": "f715cdfd00626533e323b2ed2b5554d5f5f0cd9316296ae4f1ed656ba8a93680"
+    },
+    {
+      "path": "prompts/10_daybreak_roof_canopy_connections.prompt.txt",
+      "bytes": 2331,
+      "sha256": "288050efbd157f1b0aff90c3a5d6276a7f7abe290a9b403bc83b4287a1c3c7db"
+    },
+    {
+      "path": "prompts/10_p2-arch-10-observatory-terraces_first_construction.prompt.txt",
+      "bytes": 2812,
+      "sha256": "f779b89ea3d1ce1a93c318ba295386dcd47be098ac5abcb0bb2da372ad1bbda6"
+    },
+    {
+      "path": "prompts/11_p2-arch-11-missing-court_first_construction.prompt.txt",
+      "bytes": 2778,
+      "sha256": "e46a4ca72c38f8482554db0966ae93442cb9984fb15272316e8c2b22dbda81d6"
+    },
+    {
+      "path": "prompts/12_p2-arch-12-sanguine-cloisters_first_construction.prompt.txt",
+      "bytes": 2814,
+      "sha256": "cee06407a9ed4e6bcb3a5cda230f76f367367145aa36254db18c366bae472dc9"
+    },
+    {
+      "path": "prompts/13_p2-arch-13-folded-stages_first_construction.prompt.txt",
+      "bytes": 2810,
+      "sha256": "0b0d8fff60f12ad6a7f45fd441041c928207338725808b388080b10660b44bef"
+    },
+    {
+      "path": "prompts/14_p2-arch-14-escapement-stations_first_construction.prompt.txt",
+      "bytes": 2929,
+      "sha256": "37a72865e1aba553705fd8f2441bb99ef00e3bc3f2c5220b330d2bd00876be45"
+    },
+    {
+      "path": "prompts/15_p2-arch-15-impulse-yards_first_construction.prompt.txt",
+      "bytes": 2800,
+      "sha256": "a755e263a6270fac00a16e0a1e1b5737cb82d3088a029e7f2f0ca59e95357886"
+    },
+    {
+      "path": "prompts/edit_03_daybreak_daylight_baffle.prompt.txt",
+      "bytes": 973,
+      "sha256": "65ba6919f7f3cd22fa2cdfe6cd87ce4ef92a0a4934ed238cde86aaeea0062e07"
+    },
+    {
+      "path": "prompts/edit_04_daybreak_civilian_service_clothing.prompt.txt",
+      "bytes": 766,
+      "sha256": "19c42f39ec2aaec8966321f84fddabec6f2b937ed70a4abb7d2632d813117695"
+    },
+    {
+      "path": "prompts/edit_05_daybreak_prism_backed_courser.prompt.txt",
+      "bytes": 1305,
+      "sha256": "5cfdf1c5bdc9ce22e44792260622d338cf12a89dac83b2ee08153b5638f1fb56"
+    },
+    {
+      "path": "prompts/env_01_terrain_o09.prompt.txt",
+      "bytes": 1977,
+      "sha256": "9ee124dccc9e77ba66a382c1df51fbce65fefe11bfe44adf725b350f619572dc"
+    },
+    {
+      "path": "prompts/env_02_geology_o05.prompt.txt",
+      "bytes": 1818,
+      "sha256": "24b7ac0485f76098de016555b94a292288680030ccd264c29c6fc175fb30d5de"
+    },
+    {
+      "path": "prompts/env_03_roads_o14.prompt.txt",
+      "bytes": 2015,
+      "sha256": "7aa09f9d0cd1efe62555bc6efc11957d3020e13f1b5564737c66f0be4671f38e"
+    },
+    {
+      "path": "prompts/env_04_bridges_o04.prompt.txt",
+      "bytes": 1917,
+      "sha256": "bc7428de39271388799ad62aa1d259c12bc5afaa5e9be20a5f8bcf00b48276f9"
+    },
+    {
+      "path": "prompts/env_05_residential_o09.prompt.txt",
+      "bytes": 2104,
+      "sha256": "fc58e1113c2a1589928f044d3021198c718e232222fe211777e59efaf409aaa4"
+    },
+    {
+      "path": "prompts/env_06_interiors_o02.prompt.txt",
+      "bytes": 2102,
+      "sha256": "1c62a9a6b8a0fb5927da477adc5181967bb4e232bf86161c8d569df3809ee886"
+    },
+    {
+      "path": "prompts/env_07_workshops_o01.prompt.txt",
+      "bytes": 1963,
+      "sha256": "7061fb8e89b0bda951b75465511b2c957277d4f59704901efc58772d0d2ef3ef"
+    },
+    {
+      "path": "prompts/env_08_institutions_o12.prompt.txt",
+      "bytes": 2122,
+      "sha256": "9bd144b1e5a44ae0f64937e81b4bce3eaf7eeb6f0700331b5d4fb36b6b98fe76"
+    },
+    {
+      "path": "prompts/env_09_vehicles_o15.prompt.txt",
+      "bytes": 2054,
+      "sha256": "38805503bf7fcbd7ba92680de12d1d930e4be49c1b33c066e22dcbd52e27127e"
+    },
+    {
+      "path": "prompts/env_10_transit_o03.prompt.txt",
+      "bytes": 1930,
+      "sha256": "2c07914710c72627270b4ebdc80abee89e3c52aa82d74c489fd7af0b78e9be9e"
+    }
+  ]
+}

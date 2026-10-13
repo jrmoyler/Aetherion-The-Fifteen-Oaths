@@ -1,0 +1,1503 @@
+{
+  "schema_version": "1.0.0",
+  "package_kind": "PROPOSED_REFERENCE_EXPANSION_ONLY",
+  "mounts": {
+    "baseline": "Original Phase I repository; source paths below this mount are read-only.",
+    "phase2": "Existing Phase II package; source paths below this mount are read-only."
+  },
+  "original_reference_preservation": {
+    "count": 114,
+    "all_original_hashes_match_at_initial_audit": true,
+    "do_not_overwrite": true,
+    "all_original_hashes_reverified_at_freeze": true
+  },
+  "snapshot_generated_file_count": 27,
+  "coverage_warning": "Image count is not asset or family completion. Phase II refinements overlap Phase I. No final-art or modeling approval is inferred.",
+  "import_policy": [
+    "Import this expansion in an additive directory only.",
+    "Preserve all existing114 source references and all generated versions.",
+    "Verify file SHA256 before import; reject mismatches.",
+    "Keep canonical IDs as links; do not replace source registry records or change canon status.",
+    "Import pixel QA and unresolved approval alongside each image.",
+    "Files marked pending review remain pending; do not upgrade them automatically.",
+    "No external sharing, repository push or deployment is authorized by this manifest."
+  ],
+  "records": [
+    {
+      "file": "generated/daybreak-clinic-threshold-door-proposed-v01.png",
+      "sha256": "1fb1243734ff4be442edeb9215d3aaeb387f1458fdefcdc617dab3c574768c5c",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "scope": [
+        "clinic threshold",
+        "door-frame"
+      ],
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/08_daybreak_clinic_threshold_door.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/8"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Outer and clear opening dimensions distinguished",
+          "Head-zone remains explicitly to review",
+          "Flush threshold and separate removable frame shown"
+        ],
+        "limitations": [
+          "Plan view leaf/sweep appears to enter marked protected queue/turn rectangle, contrary to caption.",
+          "Exact hinge-side and swing consistency across exterior/interior/plan views needs reconciliation.",
+          "Generated scale silhouette and dimensioned geometry are not calibrated.",
+          "Head-zone 0.4 m remains proposed arithmetic interpretation, not resolved source detail."
+        ],
+        "next_gate": "Resolve remaining construction/view issues; exact-art approval remains open. Not model-ready or full-family coverage."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "8808a502f900a8f9467eb94a8560d34a4baeebb6f48fc81215671198829c5cd8"
+    },
+    {
+      "file": "generated/daybreak-daylight-baffle-proposed-v01.png",
+      "sha256": "22998def63dfe8085b7dd79e14aae19649dbbcab0a2e543b67e52eb0cba90472",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-env-09-shared-mechanisms",
+      "baseline_asset_id": "asset-o09-ae-puzzles-family",
+      "scope": "03_daybreak_daylight_baffle",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/03_daybreak_daylight_baffle.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+          "json_pointer": null
+        },
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Explicit fixed frame, removable cover and manual-release design",
+          "Useful front/rear and context views",
+          "Pale masonry, bronze and cloth remain coherent"
+        ],
+        "limitations": [
+          "HALF OPEN and OPEN are nearly indistinguishable; cannot support state-specific modeling.",
+          "Side-section blade/pivot levels do not read consistently as exactly three moving louvers; audit and reduce ambiguity.",
+          "Side section 0.3 m label does not clearly bound full louver sweep.",
+          "Manual release is shown on an overhead unit; reachable access from floor is not demonstrated.",
+          "Drawn release linkage/stop geometry is illustrative rather than kinematically validated."
+        ],
+        "next_gate": "Apply targeted correction, inspect again, then exact-design review; no full-family completion or model approval implied."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "38c6c254edfe0f60d632ec35c1d6d9bfca35329b457abd3d582136fba332cbf7"
+    },
+    {
+      "file": "generated/daybreak-daylight-baffle-proposed-v02.png",
+      "sha256": "751e6b4444ec563491842b810af83ffc42048e418c7783fbcb8fe8720488f1de",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-env-09-shared-mechanisms",
+      "baseline_asset_id": "asset-o09-ae-puzzles-family",
+      "scope": "03_daybreak_daylight_baffle",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/edit_03_daybreak_daylight_baffle.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+          "json_pointer": null
+        },
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Three moving blades are now explicitly distinguished from fixed rails",
+          "Floor-reachable release extension now shown",
+          "Front-view operating states are more distinct"
+        ],
+        "limitations": [
+          "35-degree and 70-degree side studies remain visually similar; drawn angles do not verify labels.",
+          "New approximately 0.43 m and 0.55 m sweep dimensions are generated proposals, not source values or measured kinematics.",
+          "Mechanical interlock, stop action and powered/failed states still need real construction validation."
+        ],
+        "next_gate": "Resolve remaining construction/view issues; exact-art approval remains open. Not model-ready or full-family coverage."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "65ba6919f7f3cd22fa2cdfe6cd87ce4ef92a0a4934ed238cde86aaeea0062e07"
+    },
+    {
+      "file": "generated/daybreak-foundation-floor-proposed-v01.png",
+      "sha256": "f9eee481eebb9ec5601b9201881841bf485181931e1e7f8ea2577f8a60688c14",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "scope": [
+        "foundation-plinth",
+        "floor-bay"
+      ],
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/06_daybreak_foundation_floor_interfaces.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/8"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Separate plinth and floor concepts, underside, datum and drainage shown",
+          "Adjacent-bay continuity panel present",
+          "Below-grade design remains explicitly unresolved"
+        ],
+        "limitations": [
+          "Decorative raised corner caps on plinth may obstruct floor/pier placement; their relation to bearing seats and continuous floor is unresolved.",
+          "Reversed edge-key panels do not unambiguously show complementary male/female mating geometry.",
+          "Service sleeve outside bearing zone requested by source is not clearly shown.",
+          "Dimension labels are intent only; relative depths and joints are not measurable production geometry."
+        ],
+        "next_gate": "Resolve remaining construction/view issues; exact-art approval remains open. Not model-ready or full-family coverage."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "f13936c7ed5b53246bfbe0ac8acab7a8a641f57416f571cce93d2bda3995ce45"
+    },
+    {
+      "file": "generated/daybreak-prism-backed-courser-proposed-v01.png",
+      "sha256": "be928880f46ccc90f6a9a8c4b7ddcfcf2d90e3eb4f1a280217ee7ce0cb0fecdf",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "creature-o09-natural",
+      "baseline_asset_id": "asset-o09-r-creatures-enemies-family",
+      "scope": "05_daybreak_prism_backed_courser",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/05_daybreak_prism_backed_courser.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "baseline",
+          "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Provides a coherent first-pass long-legged herbivore concept",
+          "Shows scute placement, head and mouth, foot contact and body views",
+          "Preserves noncombat ecological role"
+        ],
+        "limitations": [
+          "2.1 m at-withers label is contradicted by a dimension line reaching head height; neither 2.1 m nor 1.8 m was canonized.",
+          "Hoof segmentation varies among body views and closeups; underside reads different from several standing hooves.",
+          "TROT SEQUENCE shows running/suspension poses without consistent diagonal-pair timing; not usable as a trot specification.",
+          "Gold-rimmed scutes and hoof trim read as manufactured armor rather than natural tissue.",
+          "Body/scute layout and tail differ across views; draft is not an aligned anatomy turnaround."
+        ],
+        "next_gate": "Apply targeted correction, inspect again, then exact-design review; no full-family completion or model approval implied."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "4a951fcd3fe79fd580e917180b516f06bfdb158bb1843538683f2e4d00071712"
+    },
+    {
+      "file": "generated/daybreak-prism-backed-courser-proposed-v02.png",
+      "sha256": "297b86518d1b4fd97ab3373e1e4aa0772bf8bd27fd2bbc8d9d90ba0dcd6187c9",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "creature-o09-natural",
+      "baseline_asset_id": "asset-o09-r-creatures-enemies-family",
+      "scope": "05_daybreak_prism_backed_courser",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/edit_05_daybreak_prism_backed_courser.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "baseline",
+          "path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "False numerical withers scale removed and replaced with unresolved scale",
+          "Metal hoof caps removed; closeup now shows cloven hoof and dewclaws",
+          "Dorsal plates less overtly manufactured"
+        ],
+        "limitations": [
+          "Trot-study contact labels do not prove actual diagonal pairing; poses remain near-repeats and occluded leg sides are hard to establish.",
+          "Body-view hoof clefts remain less clear than closeups; far feet and dewclaws require consistent anatomy reference.",
+          "Scute row counts, tail and body proportions still require measured turnaround reconciliation.",
+          "Reflective plate edges remain stylized; organic material intent should be validated before shading."
+        ],
+        "next_gate": "Resolve remaining construction/view issues; exact-art approval remains open. Not model-ready or full-family coverage."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "5cfdf1c5bdc9ce22e44792260622d338cf12a89dac83b2ee08153b5638f1fb56"
+    },
+    {
+      "file": "generated/daybreak-roof-canopy-proposed-v01.png",
+      "sha256": "dcbc6531860604b21fcad96bc422b5efc24aa80320242322d7fd98d1abd2a0ca",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "scope": [
+        "roof-bay",
+        "shade canopy"
+      ],
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/10_daybreak_roof_canopy_connections.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/8"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Solid roof and cloth canopy shown as separate systems",
+          "Shallow canopy and distinct drainage/attachment details"
+        ],
+        "limitations": [
+          "Solid roof underside central ornament differs among panels; exact repeat geometry unresolved.",
+          "Stowed fabric reads as a rigid framed panel rather than clear flexible cloth folding.",
+          "0.3 m canopy envelope is a target label, not verified geometry; attachment projections and sag require measurement."
+        ],
+        "next_gate": "Resolve exact interfaces and cross-view consistency before model use; exact-art approval unresolved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "288050efbd157f1b0aff90c3a5d6276a7f7abe290a9b403bc83b4287a1c3c7db"
+    },
+    {
+      "file": "generated/daybreak-service-clothing-proposed-v01.png",
+      "sha256": "da5c4995430b199b0cf73144a6bfd04ba94e3f3418c76b953b4583c825c42b58",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "asset-o09-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o09-i-civilian-clothing-family",
+      "scope": "04_daybreak_civilian_service_clothing",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/04_daybreak_civilian_service_clothing.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "baseline",
+          "path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+          "json_pointer": null
+        },
+        {
+          "mount": "baseline",
+          "path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Civilian worker design without weapon or combat armor",
+          "Useful apron flat lay, footwear, seams and mobility studies",
+          "Distinctive practical Daybreak material hierarchy"
+        ],
+        "limitations": [
+          "LEFT and RIGHT profile panels face the same direction; they do not establish two opposite-side views.",
+          "Two three-quarter panels also repeat approximately the same facing direction.",
+          "Pouch location, harness routing and seams need one consistent left/right placement map.",
+          "Motion poses indicate intent, not validated cloth clearance."
+        ],
+        "next_gate": "Apply targeted correction, inspect again, then exact-design review; no full-family completion or model approval implied."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "cb4022c17fa74d2c38a011640c05408b4e682f28811478b26a2a43321cfd55eb"
+    },
+    {
+      "file": "generated/daybreak-service-clothing-proposed-v02.png",
+      "sha256": "0d8dc04b57e5a3cbba558c1c949c61be7ae7eb1be7ea836124bb1ea1758f88a2",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "asset-o09-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o09-i-civilian-clothing-family",
+      "scope": "04_daybreak_civilian_service_clothing",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/edit_04_daybreak_civilian_service_clothing.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "baseline",
+          "path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+          "json_pointer": null
+        },
+        {
+          "mount": "baseline",
+          "path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Pouch detailing more explicit",
+          "Original outfit silhouette and palette preserved"
+        ],
+        "limitations": [
+          "LEFT and RIGHT profiles still face the same direction: requested opposite-side views remain missing.",
+          "Three-quarter panels still repeat the same general facing direction.",
+          "Anatomical pouch placement across front/rear and detail panels is not conclusively consistent."
+        ],
+        "next_gate": "Resolve remaining construction/view issues; exact-art approval remains open. Not model-ready or full-family coverage."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "19c42f39ec2aaec8966321f84fddabec6f2b937ed70a4abb7d2632d813117695"
+    },
+    {
+      "file": "generated/daybreak-stair-ramp-proposed-v01.png",
+      "sha256": "85db6edfbdb1b34724f3dccbdf905e8bcf75997813f47baa405c55abb932dd37",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "scope": [
+        "stair-flight",
+        "ramp-run"
+      ],
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/09_daybreak_stair_ramp_circulation.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/8"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Different stair 1.6 m and ramp 0.4 m rises preserved in labels",
+          "Separate landings and external rail placement intent",
+          "Anti-slip and drainage detail concepts"
+        ],
+        "limitations": [
+          "Visible tread/riser counts are not consistent enough across all views to establish exactly 10 risers and 9 treads.",
+          "EXACT PROFILE labels overstate image precision and should read PROFILE INTENT.",
+          "Headroom rectangle is not demonstrably offset at least 2.4 m above every point of the walking surface.",
+          "Generated perspective and numeric labels do not prove clear widths, rise/run, or accessibility compliance."
+        ],
+        "next_gate": "Resolve remaining construction/view issues; exact-art approval remains open. Not model-ready or full-family coverage."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "f715cdfd00626533e323b2ed2b5554d5f5f0cd9316296ae4f1ed656ba8a93680"
+    },
+    {
+      "file": "generated/daybreak-surface-trim-proposed-v01.png",
+      "sha256": "722bf8474b1b28e9b8935ee1de83bb5a0326994f25aadefec43dcba48aaf9804",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-env-09-shared-materials",
+      "baseline_asset_id": "asset-o09-ah-decals-materials-shaders-family",
+      "scope": "02_daybreak_surface_trim_board",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/02_daybreak_surface_trim_board.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Clear four-family material hierarchy",
+          "Useful intact/weathered/repaired comparisons",
+          "Visible stone/facing/trim/cloth intersection"
+        ],
+        "limitations": [
+          "150 mm masonry, 20 mm marble, 12 mm bronze and 4 mm cloth annotations were generated; absent from source excerpts and unvalidated.",
+          "The section pointer for load-bearing masonry appears to land on a pale outer-facing region rather than clearly isolating structural core.",
+          "No calibrated reflectance, real texture-map channels or material engineering has been established."
+        ],
+        "next_gate": "Apply targeted correction, inspect again, then exact-design review; no full-family completion or model approval implied."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "287bf2391507748e9389327ed188376d92fb9b29e5cfdce70c86a3e3017ff50f"
+    },
+    {
+      "file": "generated/daybreak-wall-window-corner-proposed-v01.png",
+      "sha256": "ca025d7e0e284d0c9d63acf6c3ebbc7d15306787643390259b433b53d428dc51",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "scope": [
+        "solid-wall",
+        "window-wall",
+        "inside-corner",
+        "outside-corner"
+      ],
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/07_daybreak_wall_window_corner_interfaces.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/8"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Different front/rear designs",
+          "Corner sections, replaceable facing and outward sill concept shown",
+          "Assembled L-shaped shell shown"
+        ],
+        "limitations": [
+          "0.35 m is labelled both total wall thickness and structural masonry core while external facing/clips add thickness: contradictory envelope.",
+          "Standalone window frame dimension 1.2 m appears across outer frame; source requires 1.2 m clear aperture.",
+          "Window sill height leader appears ambiguous relative to actual finished sill.",
+          "Corner section offsets and independent edge interfaces require measured reconciliation."
+        ],
+        "next_gate": "Resolve remaining construction/view issues; exact-art approval remains open. Not model-ready or full-family coverage."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "8c53519840298083f7bbe31494fc1de44987b6ebc46c3f95a75e4922e5c3497a"
+    },
+    {
+      "file": "generated/p2-arch-01-kiln-courts-proposed-v01.png",
+      "sha256": "dfa29944088daefd159f50893f6eadb0342c69dd2ee65a40b1a0fc9f72da51c3",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-01-kiln-courts",
+      "baseline_asset_id": "asset-o01-n-architecture-family",
+      "scope": "buttressed vent bay",
+      "source_images": [
+        {
+          "reference_id": "reference-113",
+          "baseline_repository_path": "assets/references/reference-113/original.png",
+          "sha256": "f5743145d9abe76101af9a7f3b382ca3a71bee6fa08641fa918418bbb019975d",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/01_p2-arch-01-kiln-courts_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/0"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "useful_new_coverage": [
+          "Distinctive Kiln basalt, fired-ceramic and oxidized-iron hierarchy",
+          "Compression pier, removable infill, ash cleanout and gallery interfaces shown"
+        ],
+        "limitations": [
+          "Cylindrical vent tower and rectangular vent bay are not consistently reconciled across overview, orthographic set and construction sequence.",
+          "Sealed independent cooling-pipe circuit is not visibly demonstrated.",
+          "Gallery ground/support connection and clear pedestrian bypass require section review; no full-kit coverage."
+        ],
+        "next_gate": "Resolve exact interfaces and cross-view consistency before model use; exact-art approval unresolved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "cbe5834ba8b445a54c5543b6fc1760b292fd9eea8e989773a95e880714b5036e"
+    },
+    {
+      "file": "generated/p2-arch-02-rime-vaults-proposed-v01.png",
+      "sha256": "5e173f32eedf6ea41a4f076da25b68f6ef9691f2402d979b8326502eddc238d1",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-02-rime-vaults",
+      "baseline_asset_id": "asset-o02-n-architecture-family",
+      "scope": "warm vestibule",
+      "source_images": [
+        {
+          "reference_id": "reference-112",
+          "baseline_repository_path": "assets/references/reference-112/original.png",
+          "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/02_p2-arch-02-rime-vaults_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/1"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Dark-stone structure, pale-blue detachable ice facing and warm/cold visual separation match the inspected environment palette.",
+          "Front, rear, sectioned side and plan intent views are present alongside large assembly, layered wall explosion, melt lip and release-handle inset.",
+          "PROPOSED title and construction-intent/review disclaimer are legible; no numerical dimensions printed."
+        ],
+        "limitations": [
+          "Offset doors are asserted by captions but the paired circulation path, actual leaf swings and mutually independent emergency release cannot be verified from these pixels.",
+          "Cold folio-vault drawers and continuous humidity enclosure are not explicitly resolved; the presentation reads partly as open architectural cutaway.",
+          "Plan and elevation masses are illustrative, not a measured mutually consistent orthographic set. Verify hidden geometry, thermal continuity and safe access in blockout."
+        ],
+        "next_gate": "Use for visual grounding; settle listed gaps in reviewed blockout before treating connections or dimensions as fixed."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "0d0a37809b2fee82773d8aa11f220a9fac12ec55412e7126732425fbbe012eed",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "0d0a37809b2fee82773d8aa11f220a9fac12ec55412e7126732425fbbe012eed",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "none",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-03-storm-relays-proposed-v01.png",
+      "sha256": "3bb5b34df06f57941157c3d8f503837ca278e8df5de212520168da2cf8b65fd9",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-03-storm-relays",
+      "baseline_asset_id": "asset-o03-n-architecture-family",
+      "scope": "grounded pylon foot",
+      "source_images": [
+        {
+          "reference_id": "reference-111",
+          "baseline_repository_path": "assets/references/reference-111/original.png",
+          "sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/03_p2-arch-03-storm-relays_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/2"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Stone grounding plinth, tapered copper-dark frame and ceramic breaks follow the inspected Storm environment vocabulary.",
+          "Front, rear and plan views, leg-to-stone explosion, ceramic detail and separate symbolic load/public-route diagrams are present.",
+          "Proposed construction disclaimer present; no voltage, numerical distance or strength claim printed."
+        ],
+        "limitations": [
+          "Grounding and electrical isolation are symbolic; the frame-load path passes through an illustrated ceramic stack and requires structural/effect design review.",
+          "Public route is drawn close to and around the pylon; actual isolation, occupied envelope and hazard clearance remain unresolved.",
+          "Front and rear are closely similar and details vary between illustration panels. Four-leg placement is clearest in plan, not proven by calibrated projections.",
+          "The depicted low hall appears closely integrated with the pylon rather than independently demonstrating a complete occupied grounding envelope."
+        ],
+        "next_gate": "Use for visual grounding; settle listed gaps in reviewed blockout before treating connections or dimensions as fixed."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "eddcaeee31ae3ad826aca7793a540031e949c694d8a667d0dd1c0e13be1c9ab7",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "eddcaeee31ae3ad826aca7793a540031e949c694d8a667d0dd1c0e13be1c9ab7",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "none",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-04-tidal-refuges-proposed-v01.png",
+      "sha256": "5681164baa3d85036e2e7ebc5bb49dcf8630da815de64351cf4a7badcfea71eb",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-04-tidal-refuges",
+      "baseline_asset_id": "asset-o04-n-architecture-family",
+      "scope": "refuge arcade",
+      "source_images": [
+        {
+          "reference_id": "reference-110",
+          "baseline_repository_path": "assets/references/reference-110/original.png",
+          "sha256": "14fc371fac51bae06f397226412a563eb644baf69a1ef0756e1a01e3003af833",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/04_p2-arch-04-tidal-refuges_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/3"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Pale limestone, blue glazed spillway and brass accents follow inspected Tidal environment.",
+          "Raised dry walking level, wet removable timber panel, spillway seating explosion and low/high-water diagrams present.",
+          "Front/rear, both sides and plan intent views included; proposed status and review disclaimer present."
+        ],
+        "limitations": [
+          "Assembly expands the brief's one-bay focus into two visible arches; use only as proposed motif/interface study.",
+          "Low/high-water drawings suggest retained structure but water thresholds, freeboard and downstream capacity are intentionally not quantified or validated.",
+          "Access shown relies on stairs; accessible ramp route, full continuous refuge approach and wet-bay closure barriers are not resolved.",
+          "Rear and side elevations simplify or change some features relative to assembly; establish one coherent model from reviewed blockout."
+        ],
+        "next_gate": "Use for visual grounding; settle listed gaps in reviewed blockout before treating connections or dimensions as fixed."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "ace5e79bbe9589efe5bdd15e0c3296bea70603d167194630e8872418e6d32e7d",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "ace5e79bbe9589efe5bdd15e0c3296bea70603d167194630e8872418e6d32e7d",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "none",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-05-fault-buttresses-proposed-v01.png",
+      "sha256": "e5cfdbabffce9a11469028154c46672b3c64adf6841abb6b503bca63877aa172",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-05-fault-buttresses",
+      "baseline_asset_id": "asset-o05-n-architecture-family",
+      "scope": "compression arch",
+      "source_images": [
+        {
+          "reference_id": "reference-109",
+          "baseline_repository_path": "assets/references/reference-109/original.png",
+          "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/05_p2-arch-05-fault-buttresses_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/4"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Warm stratified stone buttresses, voussoir arch and restrained violet crystal recesses preserve Fault environment vocabulary.",
+          "Distinct front/rear, side/plan intent views, exploded deck joint and crystal cradle included.",
+          "Crystal detail is labelled non-load-bearing and shown removable; proposed and review disclaimer present."
+        ],
+        "limitations": [
+          "Movement-joint/bridge-plate detail is concept-level: crown-area tie, slab gap, fastening, movement direction and actual load transfer require resolution.",
+          "Spring line and keyed abutment caption does not establish calibrated thrust-bearing sockets or structural adequacy.",
+          "Crystals in the main elevation read as long seams within piers; removable cradle detail does not prove all apparent crystal areas are nonstructural.",
+          "Upper walking surface has low or absent guarding in parts; usable public-route safety and clearance require blockout review."
+        ],
+        "next_gate": "Use for visual grounding; settle listed gaps in reviewed blockout before treating connections or dimensions as fixed."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "2fcbf3d6f2ac80608a264274c7d33a7f25c2b8684e40b3919689f4f887ce4490",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "2fcbf3d6f2ac80608a264274c7d33a7f25c2b8684e40b3919689f4f887ce4490",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "none",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-06-reed-halls-proposed-v01.png",
+      "sha256": "d632818d86b656a84def9364a11b7091f532d5fbeede84d06623cb914a51acdd",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-06-reed-halls",
+      "baseline_asset_id": "asset-o06-n-architecture-family",
+      "scope": "tensioned acoustic rib",
+      "source_images": [
+        {
+          "reference_id": "reference-108",
+          "baseline_repository_path": "assets/references/reference-108/original.png",
+          "sha256": "648ae9817a827d2b76653676927bc0d5d133388e465661976b2bd41f8f9bc5e6",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/06_p2-arch-06-reed-halls_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/5"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Timber rib with rock shoes and readable foot pin explosion",
+          "Deployed and rolled sail states",
+          "Cable eye, guy anchor and separated public route inset"
+        ],
+        "limitations": [
+          "Front and rear intent views are near-identical; rear-specific hidden geometry remains unresolved.",
+          "Orthographic projections and repeated rib curvature are not fully consistent with the main three-quarter view.",
+          "No exact wind load, cable tension, scale, clearance or engineering validation."
+        ],
+        "next_gate": "Resolve listed interfaces, views and clearance issues before detailed modeling; exact-art approval remains unresolved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "ecacfa34aeca9ca000f93b2b4db2f490a70164253bafa022a1d34deea738085c",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "ecacfa34aeca9ca000f93b2b4db2f490a70164253bafa022a1d34deea738085c",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-07-graft-courts-proposed-v01.png",
+      "sha256": "b6f4fd2b008f2275e718cb05c37b5c348471f0d1ab1f7cebc74ae958715dba5d",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-07-graft-courts",
+      "baseline_asset_id": "asset-o07-n-architecture-family",
+      "scope": "root pier sleeve",
+      "source_images": [
+        {
+          "reference_id": "reference-107",
+          "baseline_repository_path": "assets/references/reference-107/original.png",
+          "sha256": "ca195ec1b5898a1130b042add577ffee846be7980518ab5d1f1d20c981a142c8",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/07_p2-arch-07-graft-courts_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/6"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Root pier, stable deck, woven infill and leafy canopy",
+          "Exploded segmented collar, sacrificial spacer and inspection flap",
+          "Growth envelope section and initial/later growth state comparison"
+        ],
+        "limitations": [
+          "Front/rear largely mirrored; hidden construction still needs reconciliation.",
+          "Living root visibly passes the deck level; opening and collar clearance need explicit modeling validation.",
+          "Independent stable deck load path is illustrative and not proven; growth rates and numerical clearances unresolved.",
+          "Top view implies a radial branch arrangement needing reconciliation with side and assembled views."
+        ],
+        "next_gate": "Resolve listed interfaces, views and clearance issues before detailed modeling; exact-art approval remains unresolved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "4c1cafdeb7380bc68021dc1083315cdffa416edbe99b9a8a40ac2a7632921416",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "4c1cafdeb7380bc68021dc1083315cdffa416edbe99b9a8a40ac2a7632921416",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-08-bitterglass-stills-proposed-v01.png",
+      "sha256": "b56d6bfdbd5485e727cfdeb130897e754b1ca75641dfae9795ef862c4d10e081",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-08-bitterglass-stills",
+      "baseline_asset_id": "asset-o08-n-architecture-family",
+      "scope": "sealed still bay",
+      "source_images": [
+        {
+          "reference_id": "reference-106",
+          "baseline_repository_path": "assets/references/reference-106/original.png",
+          "sha256": "7e584208b195559e3302a6cf4416e6abf44c063999057f1df25b2d97bbdff227",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/08_p2-arch-08-bitterglass-stills_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/7"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Brass framed pale masonry enclosure with violet roof and contained green glazing",
+          "Distinct front clean face and rear service side",
+          "Pane retainer/gasket explosion, flush sump basket, distinct connector shapes"
+        ],
+        "limitations": [
+          "Clean-side bypass is interpreted as a plumbing connector, not a clearly demonstrated ordinary pedestrian bypass.",
+          "Interior process vessels appear despite architecture-focused brief; treat them as illustrative context only.",
+          "Pane replacement without opening clean side is not geometrically demonstrated.",
+          "No verified emergency route, containment rating, process plan or plumbing engineering."
+        ],
+        "next_gate": "Resolve listed interfaces, views and clearance issues before detailed modeling; exact-art approval remains unresolved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "c80a4cb02c1544f37f8354c41746d6881d321f1c46a50405a89cdca4b3329a79",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "c80a4cb02c1544f37f8354c41746d6881d321f1c46a50405a89cdca4b3329a79",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "sha256": "7c5f5acf2871dfdfb2ec0716d91cf8bb1efeb6b8e69b47f2661363e0a74c5106",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "scope": "01_daybreak_public_colonnade",
+      "source_images": [
+        {
+          "reference_id": "reference-105",
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/01_daybreak_public_colonnade.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": null
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "style_alignment": "Preserves pale stone, marble-facing/bronze/cloth material hierarchy, pointed textile-canopy vocabulary and clean studio reference-board language.",
+        "useful_new_coverage": [
+          "Multiple facing views of one proposed colonnade bay",
+          "Three-quarter assembly",
+          "Exploded stone-core / thin-facing construction proposal",
+          "Canopy socket, underside and drainage concepts"
+        ],
+        "limitations": [
+          "Views retain perspective and are not exact orthographic projections.",
+          "Only top-view 4 m annotations are visible; 4 m height, clear walking height, hidden/back connections and structural sizing remain unverified.",
+          "Rear closely duplicates front; silhouette repetition does not demonstrate every hidden face.",
+          "Canopy curvature, central pendant geometry and bracket positions must be reconciled in a measured construction pass.",
+          "Image is a design proposal, not engineering validation, approved source art, model geometry or the entire 17-module kit.",
+          "Source shade-canopy module has a proposed 4 x 4 x 0.3 m envelope. Deep canopy sag/pendant in this colonnade concept appears incompatible; do not derive exact separate canopy geometry from it without resolving the envelope."
+        ],
+        "next_gate": "Review exact proposed design; then resolve dimensioned multi-view consistency and module interfaces before production modeling."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "2a03538bde2a068abc9a6c4f2e1a3fcb1639e3d32fdd2e29a0a218cc506f55c4"
+    },
+    {
+      "file": "generated/p2-arch-10-observatory-terraces-proposed-v01.png",
+      "sha256": "54024756f15dc4b52772eae36053b71a5a3c4eebddc26b41aea25018b764f41c",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-10-observatory-terraces",
+      "baseline_asset_id": "asset-o10-n-architecture-family",
+      "scope": "ballasted pier",
+      "source_images": [
+        {
+          "reference_id": "reference-104",
+          "baseline_repository_path": "assets/references/reference-104/original.png",
+          "sha256": "b9b3e660eaec9d600d60016238a0ebd4c081cf6ad73c078612b357f3f037c3ef",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/10_p2-arch-10-observatory-terraces_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/9"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Grounded dark stone pier, bronze ring bearing and ballasted base",
+          "Distinct front/rear/top and section intent",
+          "Exploded lock bearing and removable ballast-pocket access",
+          "Separately marked anomaly volume and normal/locked state comparison"
+        ],
+        "limitations": [
+          "Large ring/device dominates rather than a small interface.",
+          "Ring geometry, base arrangement and deck details vary between orthographic/context states and need reconciliation.",
+          "Service platform outside sweep is asserted in labels but no calibrated swept-volume test is provided.",
+          "Load, cantilever, lock performance, numerical clearance and ballast mass remain unvalidated."
+        ],
+        "next_gate": "Resolve listed interfaces, views and clearance issues before detailed modeling; exact-art approval remains unresolved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "f779b89ea3d1ce1a93c318ba295386dcd47be098ac5abcb0bb2da372ad1bbda6",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "f779b89ea3d1ce1a93c318ba295386dcd47be098ac5abcb0bb2da372ad1bbda6",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-11-missing-court-proposed-v01.png",
+      "sha256": "febe476041642db10c84e90bf4a173d2cec191843c8004f5ad70de69bb1809c1",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-11-missing-court",
+      "baseline_asset_id": "asset-o11-n-architecture-family",
+      "scope": "offset entry",
+      "source_images": [
+        {
+          "reference_id": "reference-103",
+          "baseline_repository_path": "assets/references/reference-103/original.png",
+          "sha256": "aedd82f2c659cda63c856a27d6db7674793f17efd0d08d833b2564c3223ffa5d",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/11_p2-arch-11-missing-court_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/10"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Pale repaired masonry and dark freestanding screen match original environment palette.",
+          "Assembled, plan, opposing entry elevations, section and exploded screen-foot intent are present.",
+          "Opaque and phased screen states retain masonry, floor and screen feet."
+        ],
+        "limitations": [
+          "Redundant ordinary bypass/exit markers are not explicit. Verify traversable clearance around screen in a measured plan.",
+          "Screen-foot material label says stone but depicted support is metal-like.",
+          "Plan and perspective frame offsets require reconciliation; no pixel view establishes calibrated dimensions."
+        ],
+        "next_gate": "Resolve noted geometry and clearance ambiguities before detailed or moving-system modeling; source dimensions are initial envelopes, not measured from art."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "e46a4ca72c38f8482554db0966ae93442cb9984fb15272316e8c2b22dbda81d6",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "e46a4ca72c38f8482554db0966ae93442cb9984fb15272316e8c2b22dbda81d6",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-12-sanguine-cloisters-proposed-v01.png",
+      "sha256": "dabd5ba6f6123b440bfaeb6cf8eee3542ebca0bc63ddf07156577b7920de8b0e",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-12-sanguine-cloisters",
+      "baseline_asset_id": "asset-o12-n-architecture-family",
+      "scope": "linked household porch",
+      "source_images": [
+        {
+          "reference_id": "reference-102",
+          "baseline_repository_path": "assets/references/reference-102/original.png",
+          "sha256": "73d19c2e86177602bb1bd367d86544ced90c90a1e881a47ed05b194a35773cff",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/12_p2-arch-12-sanguine-cloisters_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/11"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Redland masonry, dark paving, oxblood shade cloth and pale trim match the source.",
+          "Two private household doors connect directly to shared public route in plan.",
+          "Distinct public/private elevations, shade-beam explosion, privacy screen and recovery seat inset are present."
+        ],
+        "limitations": [
+          "Release hardware is depicted from apparent exterior door side despite inward-accessible label; prove interior operation.",
+          "Continuous accessible loop, opening swings and seating clearances remain unmeasured.",
+          "Shade attachment/load path is illustrative, not mechanically verified."
+        ],
+        "next_gate": "Resolve noted geometry and clearance ambiguities before detailed or moving-system modeling; source dimensions are initial envelopes, not measured from art."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "cee06407a9ed4e6bcb3a5cda230f76f367367145aa36254db18c366bae472dc9",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "cee06407a9ed4e6bcb3a5cda230f76f367367145aa36254db18c366bae472dc9",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-13-folded-stages-proposed-v01.png",
+      "sha256": "e8c26b8af72243a2225bf5aa7c158d1321c2d08f66e2b2b2632ad7a00be158f9",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-13-folded-stages",
+      "baseline_asset_id": "asset-o13-n-architecture-family",
+      "scope": "reversible stage panel",
+      "source_images": [
+        {
+          "reference_id": "reference-100",
+          "baseline_repository_path": "assets/references/reference-100/original.png",
+          "sha256": "8f01c8ae570c323d9b69159318fccaf431de855399c65c083332d261c8f90c3c",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/13_p2-arch-13-folded-stages_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/12"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Ivory/navy enamel patterns, bounded mirror inserts and bronze trim follow source.",
+          "Front and rear faces are genuinely different.",
+          "Fixed backstage service corridor, exploded pivot-cover parts and top-plan swing intent are present."
+        ],
+        "limitations": [
+          "Top-plan shows two panel positions/leaf-like objects and does not establish the same single pivot and fixed frame across states.",
+          "Guard sleeve/interlock is labeled but the swept-space fence and pinch exclusion are not proven.",
+          "Reconcile hinge axis, latch handedness, panel thickness and corridor separation before modeling moving geometry."
+        ],
+        "next_gate": "Resolve noted geometry and clearance ambiguities before detailed or moving-system modeling; source dimensions are initial envelopes, not measured from art."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "0b0d8fff60f12ad6a7f45fd441041c928207338725808b388080b10660b44bef",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "0b0d8fff60f12ad6a7f45fd441041c928207338725808b388080b10660b44bef",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-14-escapement-stations-proposed-v01.png",
+      "sha256": "f6182474cd520204d1913f96b172bd40a9f5353fe69c90ef0b8ac05f314a2ffd",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-14-escapement-stations",
+      "baseline_asset_id": "asset-o14-n-architecture-family",
+      "scope": "low station canopy",
+      "source_images": [
+        {
+          "reference_id": "reference-099",
+          "baseline_repository_path": "assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/14_p2-arch-14-escapement-stations_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/13"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Dark masonry viaduct, bronze trim and shallow repeated canopy follow source.",
+          "Dedicated roof-seat, gutter, latch explosion, underdeck service bracket and locked-shutdown insets are present.",
+          "Fixed passenger deck is visually separate from below-deck maintenance gallery."
+        ],
+        "limitations": [
+          "Image prints 6 m clear zone despite no-numerical-annotations prompt. This repeats source intent only and is not a calibrated drawing.",
+          "Front and rear views are near duplicates and do not resolve rear-only joints.",
+          "Gutter discharge direction, keyed seats and full traffic span need measured verification."
+        ],
+        "next_gate": "Resolve noted geometry and clearance ambiguities before detailed or moving-system modeling; source dimensions are initial envelopes, not measured from art."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "37a72865e1aba553705fd8f2441bb99ef00e3bc3f2c5220b330d2bd00876be45",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "37a72865e1aba553705fd8f2441bb99ef00e3bc3f2c5220b330d2bd00876be45",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    },
+    {
+      "file": "generated/p2-arch-15-impulse-yards-proposed-v01.png",
+      "sha256": "d365de62835f5b7e255f105e6ac00f32b77ec3428e5a17c9b9d0664797b4881e",
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_id": "p2-arch-15-impulse-yards",
+      "baseline_asset_id": "asset-o15-n-architecture-family",
+      "scope": "braced crane bay",
+      "source_images": [
+        {
+          "reference_id": "reference-101",
+          "baseline_repository_path": "assets/references/reference-101/original.png",
+          "sha256": "dbd78a8cf6cba67191c92908d9bcc743a2084f3ba2ce953a15400f4add404362",
+          "included_in_bundle": false,
+          "preserve_original": true
+        }
+      ],
+      "brief_prompt_file": "prompts/15_p2-arch-15-impulse-yards_first_construction.prompt.txt",
+      "prompt_provenance": "Planned generation/edit brief; exact tool-call transcript not included.",
+      "source_records": [
+        {
+          "mount": "phase2",
+          "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+          "json_pointer": "/records/14"
+        }
+      ],
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_ISSUES",
+      "qa": {
+        "pixels_inspected": true,
+        "review_evidence": "Generation worker explicitly inspected actual image pixels; reviewed concept remains unapproved.",
+        "useful_new_coverage": [
+          "Charcoal bolted steel, orange accents and masonry plinths match source.",
+          "Diagonal braces, bolted seat explosion, removable service deck and inspection hatch inset are visible.",
+          "Human-scale porch and separate gallery are shown."
+        ],
+        "limitations": [
+          "Porch is labeled outside crane-load/exhaust footprint but shown beneath industrial framing; safe separation is not geometrically established.",
+          "Beam/column count and support relationship vary or are ambiguous between perspective and elevations.",
+          "Hoist socket is identified but separation from occupied gallery requires a coherent measured section.",
+          "No load capacity or structural adequacy can be inferred from this illustration."
+        ],
+        "next_gate": "Resolve noted geometry and clearance ambiguities before detailed or moving-system modeling; source dimensions are initial envelopes, not measured from art."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "preserve_all_versions": true,
+      "replaces_original": false,
+      "brief_prompt_sha256": "a755e263a6270fac00a16e0a1e1b5737cb82d3088a029e7f2f0ca59e95357886",
+      "generation_prompt_provenance": {
+        "reported_source_prompt_sha256": "a755e263a6270fac00a16e0a1e1b5737cb82d3088a029e7f2f0ca59e95357886",
+        "matches_packaged_brief": true,
+        "source_prompt_modifications": "Reported unmodified source prompt",
+        "pixel_review_evidence": "Actual generated image pixels inspected by generation reviewer; gaps retained in qa."
+      }
+    }
+  ],
+  "snapshot_status": "FROZEN_EXISTING_27_IMAGE_BATCH",
+  "frozen_at_utc": "2026-10-13T22:17:00Z",
+  "reviewed_image_count": 27,
+  "unreviewed_image_count": 0,
+  "future_images_policy": "Any additional image is a separate future batch; this snapshot is immutable after release."
+}

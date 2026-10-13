@@ -1,0 +1,476 @@
+{
+  "records": [
+    {
+      "id": "reference-expansion-env_01_terrain_o09",
+      "canonical_family_id": "p2-env-09-shared-terrain",
+      "regional_oath_id": "oath-09",
+      "baseline_asset_id": "asset-o09-af-terrain-transitions-family",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/0",
+      "exact_source_construction": "Heightfield/mesh chunks with shared border samples, bank shelves, pass cuts and hydrologic outlets.",
+      "exact_source_regional_variant": {
+        "region_id": "region-09",
+        "oath_id": "oath-09",
+        "kit_id": "p2-arch-09-daybreak-arcades",
+        "baseline_asset_id": "asset-o09-af-terrain-transitions-family",
+        "construction_delta": "temperate alluvial terrace; meadow shoulder; riverbank silt; preserve basin-dawn outlet logic. meadows and farms connect upland roads to southern river terraces",
+        "materials": [
+          "alluvial soil",
+          "river gravel",
+          "local bedrock"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-105",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Distinct habitat/climate requires a separate ecological distribution specification.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "A shallow nonnumeric contour hierarchy, grass-root transition and replaceable bank-rubble detail.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: alluvial terrace and riverbank transition. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Heightfield/mesh chunks with shared border samples, bank shelves, pass cuts and hydrologic outlets. EXACT REGIONAL PROPOSAL: temperate alluvial terrace; meadow shoulder; riverbank silt; preserve basin-dawn outlet logic. meadows and farms connect upland roads to southern river terraces MATERIALS: alluvial soil, river gravel, local bedrock. SUBJECT AND VIEWS: One connected terrain patch from meadow shoulder through alluvial terrace to a riverbank shelf and downstream outlet. Show top contour-intent view, two cross-sections, a detached border-strip joint and a restrained perspective. Keep upstream/downstream direction consistent and preserve basin-dawn outlet logic. Separate alluvial soil, river gravel and local bedrock; indicate dry, saturated and eroded presentation with unchanged boundary samples. NEW PROPOSED DETAILS: A shallow nonnumeric contour hierarchy, grass-root transition and replaceable bank-rubble detail. LIMITS: Do not invent continent dimensions, alter basin topology or imply the Daybreak marble court establishes these unseen natural bank details. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_01_terrain_o09.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_02_geology_o05",
+      "canonical_family_id": "p2-env-09-shared-geology",
+      "regional_oath_id": "oath-05",
+      "baseline_asset_id": "asset-o05-q-vegetation-geology-family",
+      "canonical_kit_id": "p2-arch-05-fault-buttresses",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/1",
+      "exact_source_construction": "Author bedding-normal rock sets, convex cliff caps, toe rubble and masked soil transitions; overhangs are separate collision pieces.",
+      "exact_source_regional_variant": {
+        "region_id": "region-05",
+        "oath_id": "oath-05",
+        "kit_id": "p2-arch-05-fault-buttresses",
+        "baseline_asset_id": "asset-o05-q-vegetation-geology-family",
+        "construction_delta": "stratified escarpment; talus fan; shallow-soil plateau; strata/erosion are terrain-led; bounded magical inclusions never replace geological support.",
+        "materials": [
+          "bedded stone",
+          "talus",
+          "surveyed crystal seam"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-109",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Distinct habitat/climate requires a separate ecological distribution specification.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-env-09-shared-terrain"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-109/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Recessed seam joint, erosion channels following bedding and varied talus fragment sizes.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: stratified escarpment and talus module. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Author bedding-normal rock sets, convex cliff caps, toe rubble and masked soil transitions; overhangs are separate collision pieces. EXACT REGIONAL PROPOSAL: stratified escarpment; talus fan; shallow-soil plateau; strata/erosion are terrain-led; bounded magical inclusions never replace geological support. MATERIALS: bedded stone, talus, surveyed crystal seam. SUBJECT AND VIEWS: A small interoperable geology set: bedded cliff face, convex cap, separate overhang, toe rubble and shallow-soil transition. Show one joined assembly plus separated front/side/back contact views with continuous bedding direction. A single bounded surveyed crystal seam occupies a pocket, never the load-bearing whole cliff. NEW PROPOSED DETAILS: Recessed seam joint, erosion channels following bedding and varied talus fragment sizes. LIMITS: No floating cliff support or copied weapon crystals; magical inclusions do not replace geology. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_02_geology_o05.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_03_roads_o14",
+      "canonical_family_id": "p2-env-09-shared-roads",
+      "regional_oath_id": "oath-14",
+      "baseline_asset_id": "asset-o14-af-terrain-transitions-family",
+      "canonical_kit_id": "p2-arch-14-escapement-stations",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/4",
+      "exact_source_construction": "Spline-guided crown, shoulder, drainage ditch, culvert and retaining edge; texture direction follows traffic and slope.",
+      "exact_source_regional_variant": {
+        "region_id": "region-14",
+        "oath_id": "oath-14",
+        "kit_id": "p2-arch-14-escapement-stations",
+        "baseline_asset_id": "asset-o14-af-terrain-transitions-family",
+        "construction_delta": "Crowned steppe freight road includes drainage crossings, repair pullouts and wildlife permeability. Crown, culvert invert, shoulder and drain outlet explicitly join terrain; dimensions from shared family.",
+        "materials": [
+          "steppe soil",
+          "drainage gravel",
+          "cut rock",
+          "compacted aggregate",
+          "local paving where needed"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-099",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-env-09-shared-terrain"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-099/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Compacted aggregate crown, local stone culvert lining, replaceable shoulder edging and a shallow maintenance turnout.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: crowned freight-road drainage crossing. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Spline-guided crown, shoulder, drainage ditch, culvert and retaining edge; texture direction follows traffic and slope. EXACT REGIONAL PROPOSAL: Crowned steppe freight road includes drainage crossings, repair pullouts and wildlife permeability. Crown, culvert invert, shoulder and drain outlet explicitly join terrain; dimensions from shared family. MATERIALS: steppe soil, drainage gravel, cut rock, compacted aggregate, local paving where needed. SUBJECT AND VIEWS: A crowned steppe freight-road segment with shoulder, roadside ditch, culvert crossing, repair pullout and wildlife passage outside traffic. Top plan, road cross-section, culvert longitudinal section and road-to-terrain seam detail. Clearly show ditch water enters culvert and exits downstream without crossing the road surface; traffic texture runs lengthwise. NEW PROPOSED DETAILS: Compacted aggregate crown, local stone culvert lining, replaceable shoulder edging and a shallow maintenance turnout. LIMITS: Use no numeric road widths or invented route endpoints. Do not turn the road into an active clockwork conveyor or choke the wildlife route. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_03_roads_o14.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_04_bridges_o04",
+      "canonical_family_id": "p2-env-09-shared-bridges",
+      "regional_oath_id": "oath-04",
+      "baseline_asset_id": "asset-o04-n-architecture-family",
+      "canonical_kit_id": "p2-arch-04-tidal-refuges",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/3",
+      "exact_source_construction": "Abutment, deck, parapet, expansion joint and bank approach; choose arch, beam or tension span from geology and freight need.",
+      "exact_source_regional_variant": {
+        "region_id": "region-04",
+        "oath_id": "oath-04",
+        "kit_id": "p2-arch-04-tidal-refuges",
+        "baseline_asset_id": "asset-o04-n-architecture-family",
+        "construction_delta": "Limestone arch or beam causeway leaves tidal channel openings and a dry refuge deck; no damming for spectacle. Provide abutment/deck joints, drainage, edge protection and inspection access.",
+        "materials": [
+          "porous limestone",
+          "glazed channel ceramic",
+          "brass fittings",
+          "timber flood floor"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-110",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-env-09-shared-terrain"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-110/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Replaceable brass joint cover, glazed drainage lip and small bank approach inspection recess.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: tidal causeway with dry refuge deck. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Abutment, deck, parapet, expansion joint and bank approach; choose arch, beam or tension span from geology and freight need. EXACT REGIONAL PROPOSAL: Limestone arch or beam causeway leaves tidal channel openings and a dry refuge deck; no damming for spectacle. Provide abutment/deck joints, drainage, edge protection and inspection access. MATERIALS: porous limestone, glazed channel ceramic, brass fittings, timber flood floor. SUBJECT AND VIEWS: One grounded limestone arch causeway bay with abutments, deck, edge protection, expansion joint and bank approach. Top/side/section, underside arch and exploded abutment/deck joint. Water passes through open tidal channels; an ordinary dry refuge route remains continuous in low/high-water concept insets. Wet inspection access is separate from public deck. NEW PROPOSED DETAILS: Replaceable brass joint cover, glazed drainage lip and small bank approach inspection recess. LIMITS: No damming for spectacle, exact flood heights, capacity claims or unsupported water arches. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_04_bridges_o04.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_05_residential_o09",
+      "canonical_family_id": "p2-env-09-shared-residential",
+      "regional_oath_id": "oath-09",
+      "baseline_asset_id": "asset-o09-o-buildings-interiors-family",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/6",
+      "exact_source_construction": "Assemble regional shell around warm/dry core, storage, sanitary/service chase and accessible entry; dwelling count comes from population plan.",
+      "exact_source_regional_variant": {
+        "region_id": "region-09",
+        "oath_id": "oath-09",
+        "kit_id": "p2-arch-09-daybreak-arcades",
+        "baseline_asset_id": "asset-o09-o-buildings-interiors-family",
+        "construction_delta": "Housing includes mixed-income courtyard blocks and refuge rooms, with ward sockets and shared kitchens. Sanctuary status protects access during conflict; players cannot place judgment effects that police other players' identities or movement.",
+        "materials": [
+          "pale masonry",
+          "marble facing",
+          "bronze trim",
+          "woven shade"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-105",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-arch-01-kiln-courts",
+        "p2-arch-02-rime-vaults",
+        "p2-arch-03-storm-relays",
+        "p2-arch-04-tidal-refuges",
+        "p2-arch-05-fault-buttresses",
+        "p2-arch-06-reed-halls",
+        "p2-arch-07-graft-courts",
+        "p2-arch-08-bitterglass-stills",
+        "p2-arch-09-daybreak-arcades",
+        "p2-arch-10-observatory-terraces",
+        "p2-arch-11-missing-court",
+        "p2-arch-12-sanguine-cloisters",
+        "p2-arch-13-folded-stages",
+        "p2-arch-14-escapement-stations",
+        "p2-arch-15-impulse-yards"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Simple replaceable shutters, woven domestic shade, a utility cupboard and plain communal kitchen worktop.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: courtyard dwelling and shared-kitchen interface. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Assemble regional shell around warm/dry core, storage, sanitary/service chase and accessible entry; dwelling count comes from population plan. EXACT REGIONAL PROPOSAL: Housing includes mixed-income courtyard blocks and refuge rooms, with ward sockets and shared kitchens. Sanctuary status protects access during conflict; players cannot place judgment effects that police other players' identities or movement. MATERIALS: pale masonry, marble facing, bronze trim, woven shade. SUBJECT AND VIEWS: A modest lived-in courtyard dwelling section with warm/dry living core, private storage, sanitary/service chase, ordinary entry and connection to shared kitchen/refuge space. Show cutaway, circulation plan, two exterior faces and one service-chase inspection detail. Equal-quality materials for modest homes and refuge rooms. Keep private sleeping area off the public through-route; ward sockets are optional infrastructure. NEW PROPOSED DETAILS: Simple replaceable shutters, woven domestic shade, a utility cupboard and plain communal kitchen worktop. LIMITS: No judgment barrier controlling identity or movement; no invented dwelling count, social hierarchy or grand palace masquerading as housing. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_05_residential_o09.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_06_interiors_o02",
+      "canonical_family_id": "p2-env-09-shared-interiors",
+      "regional_oath_id": "oath-02",
+      "baseline_asset_id": "asset-o02-o-buildings-interiors-family",
+      "canonical_kit_id": "p2-arch-02-rime-vaults",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/11",
+      "exact_source_construction": "Ceiling/floor/partition assemblies with room portals, occlusion volumes, lighting anchors and back-of-house chases; shell exterior dimensions reconciled.",
+      "exact_source_regional_variant": {
+        "region_id": "region-02",
+        "oath_id": "oath-02",
+        "kit_id": "p2-arch-02-rime-vaults",
+        "baseline_asset_id": "asset-o02-o-buildings-interiors-family",
+        "construction_delta": "Rock-founded occupied shell and moisture barrier support a detachable outer ice layer; no occupied room relies on thawing ice. Assembly adaptations: warm vestibule, sealed folio vault, snow-shed roof, melt gutter, cold-store annex. keep warm public room and archive humidity zone independent",
+        "materials": [
+          "dense stone",
+          "insulating felt liner",
+          "replaceable ice facing",
+          "dark metal brackets"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-112",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-arch-01-kiln-courts",
+        "p2-arch-02-rime-vaults",
+        "p2-arch-03-storm-relays",
+        "p2-arch-04-tidal-refuges",
+        "p2-arch-05-fault-buttresses",
+        "p2-arch-06-reed-halls",
+        "p2-arch-07-graft-courts",
+        "p2-arch-08-bitterglass-stills",
+        "p2-arch-09-daybreak-arcades",
+        "p2-arch-10-observatory-terraces",
+        "p2-arch-11-missing-court",
+        "p2-arch-12-sanguine-cloisters",
+        "p2-arch-13-folded-stages",
+        "p2-arch-14-escapement-stations",
+        "p2-arch-15-impulse-yards"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-112/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Accessible liner inspection panel, understated warm-room seating and decoupled archive-service hatch.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: warm reading room and archive service layers. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Ceiling/floor/partition assemblies with room portals, occlusion volumes, lighting anchors and back-of-house chases; shell exterior dimensions reconciled. EXACT REGIONAL PROPOSAL: Rock-founded occupied shell and moisture barrier support a detachable outer ice layer; no occupied room relies on thawing ice. Assembly adaptations: warm vestibule, sealed folio vault, snow-shed roof, melt gutter, cold-store annex. keep warm public room and archive humidity zone independent MATERIALS: dense stone, insulating felt liner, replaceable ice facing, dark metal brackets. SUBJECT AND VIEWS: One habitable Rime reading-room cutaway showing ceiling/floor/partition interfaces, insulated stone shell, moisture barrier, felt liner, room portal and back-of-house service chase. Connect conceptually to a separately bounded cold folio zone via vestibule; detachable exterior ice is nonstructural. Top circulation plan and section must share door/chase positions. NEW PROPOSED DETAILS: Accessible liner inspection panel, understated warm-room seating and decoupled archive-service hatch. LIMITS: No real humidity/temperature specifications; no occupied structure bearing on ice; no duplicate vestibule-only sheet. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_06_interiors_o02.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_07_workshops_o01",
+      "canonical_family_id": "p2-env-09-shared-workshops",
+      "regional_oath_id": "oath-01",
+      "baseline_asset_id": "asset-o01-m-crafting-stations-family",
+      "canonical_kit_id": "p2-arch-01-kiln-courts",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/8",
+      "exact_source_construction": "Regional station capability, material staging, tool sockets, waste collection and protected operator envelope form one work cell.",
+      "exact_source_regional_variant": {
+        "region_id": "region-01",
+        "oath_id": "oath-01",
+        "kit_id": "p2-arch-01-kiln-courts",
+        "baseline_asset_id": "asset-o01-m-crafting-stations-family",
+        "construction_delta": "Forge bench, cooling trough, refractory repair cart; Build compression shell before attaching replaceable vent cassettes; heat channels remain below guarded public decks.",
+        "materials": [
+          "basalt",
+          "fired ceramic roof cassettes",
+          "oxidized iron ties"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-113",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-arch-01-kiln-courts",
+        "p2-arch-02-rime-vaults",
+        "p2-arch-03-storm-relays",
+        "p2-arch-04-tidal-refuges",
+        "p2-arch-05-fault-buttresses",
+        "p2-arch-06-reed-halls",
+        "p2-arch-07-graft-courts",
+        "p2-arch-08-bitterglass-stills",
+        "p2-arch-09-daybreak-arcades",
+        "p2-arch-10-observatory-terraces",
+        "p2-arch-11-missing-court",
+        "p2-arch-12-sanguine-cloisters",
+        "p2-arch-13-folded-stages",
+        "p2-arch-14-escapement-stations",
+        "p2-arch-15-impulse-yards"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-113/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Replaceable ceramic bench inserts, tool-socket rail, contained waste bin and cart dock.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: forge repair workstation cell. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Regional station capability, material staging, tool sockets, waste collection and protected operator envelope form one work cell. EXACT REGIONAL PROPOSAL: Forge bench, cooling trough, refractory repair cart; Build compression shell before attaching replaceable vent cassettes; heat channels remain below guarded public decks. MATERIALS: basalt, fired ceramic roof cassettes, oxidized iron ties. SUBJECT AND VIEWS: One nonweapon civilian craft cell containing forge bench, cooling trough and refractory repair cart. Show plan with separate material staging, operator standing area, tool sockets, waste collection and clear public bypass; front/rear/side bench views and cart wheel/handle detail. Compression shell stays separate from removable vent cassettes, and hot service channels remain below guarded decks. NEW PROPOSED DETAILS: Replaceable ceramic bench inserts, tool-socket rail, contained waste bin and cart dock. LIMITS: No metallurgy recipes or executable hazardous process instructions; no molten flow through operator feet and no conversion into a siege engine. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_07_workshops_o01.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_08_institutions_o12",
+      "canonical_family_id": "p2-env-09-shared-institutions",
+      "regional_oath_id": "oath-12",
+      "baseline_asset_id": "asset-o12-n-architecture-family",
+      "canonical_kit_id": "p2-arch-12-sanguine-cloisters",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/9",
+      "exact_source_construction": "Public counter, waiting shelter, records room, clinic recovery room and relief stores use regional structural kit; function chooses assembly.",
+      "exact_source_regional_variant": {
+        "region_id": "region-12",
+        "oath_id": "oath-12",
+        "kit_id": "p2-arch-12-sanguine-cloisters",
+        "baseline_asset_id": "asset-o12-n-architecture-family",
+        "construction_delta": "Thick courtyard walls shade recovery spaces; privacy screens and independent exit doors prevent coercive circulation. Assembly adaptations: linked household porch, recovery cloister, private withdrawal room, water court, shade pier. private withdrawal and public aid remain separately reachable",
+        "materials": [
+          "redland masonry",
+          "woven shade cloth",
+          "bone-colored ceramic trim",
+          "dark iron"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-102",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P0",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-arch-01-kiln-courts",
+        "p2-arch-02-rime-vaults",
+        "p2-arch-03-storm-relays",
+        "p2-arch-04-tidal-refuges",
+        "p2-arch-05-fault-buttresses",
+        "p2-arch-06-reed-halls",
+        "p2-arch-07-graft-courts",
+        "p2-arch-08-bitterglass-stills",
+        "p2-arch-09-daybreak-arcades",
+        "p2-arch-10-observatory-terraces",
+        "p2-arch-11-missing-court",
+        "p2-arch-12-sanguine-cloisters",
+        "p2-arch-13-folded-stages",
+        "p2-arch-14-escapement-stations",
+        "p2-arch-15-impulse-yards"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-102/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Washable ceramic seat edges, discreet storage doors and reversible privacy screens with inside release.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: public-aid and voluntary recovery rooms. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Public counter, waiting shelter, records room, clinic recovery room and relief stores use regional structural kit; function chooses assembly. EXACT REGIONAL PROPOSAL: Thick courtyard walls shade recovery spaces; privacy screens and independent exit doors prevent coercive circulation. Assembly adaptations: linked household porch, recovery cloister, private withdrawal room, water court, shade pier. private withdrawal and public aid remain separately reachable MATERIALS: redland masonry, woven shade cloth, bone-colored ceramic trim, dark iron. SUBJECT AND VIEWS: One Sanguine public-aid suite: shaded waiting shelter, service counter, quiet recovery room, private withdrawal room and relief storage. Show cutaway and matching top plan with public-aid access and private withdrawal independently reachable; ordinary exit remains open without participation. Include privacy-screen latch and shared-water point as simple architectural fixtures. NEW PROPOSED DETAILS: Washable ceramic seat edges, discreet storage doors and reversible privacy screens with inside release. LIMITS: No blood machinery, compulsory ritual, locked recovery occupants or invented medical protocol. This is fictional environment construction only. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_08_institutions_o12.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_09_vehicles_o15",
+      "canonical_family_id": "p2-env-09-shared-vehicles",
+      "regional_oath_id": "oath-15",
+      "baseline_asset_id": "asset-o15-u-vehicles-family",
+      "canonical_kit_id": "p2-arch-15-impulse-yards",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/14",
+      "exact_source_construction": "Chassis/hull, suspension or buoyancy proxy, cargo restraints, seat rig, boarding sockets and safe dismount points; route determines mode.",
+      "exact_source_regional_variant": {
+        "region_id": "region-15",
+        "oath_id": "oath-15",
+        "kit_id": "p2-arch-15-impulse-yards",
+        "baseline_asset_id": "asset-o15-u-vehicles-family",
+        "construction_delta": "Guarded powered hauler: bolted chassis, shrouded drive wheels, low cargo deck, emergency mechanical brake and safe isolation switch; no unsupervised crane load above passengers.",
+        "materials": [
+          "chassis wood/metal",
+          "axle and brake metal",
+          "cargo textile/rope"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-101",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P1",
+      "source_dependencies": [
+        "p2-env-09-shared-materials"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-101/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Four guarded wheels, simple sprung axle concept, textile cargo straps and a protected low boarding step. Wheel count and suspension details are proposed.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: guarded civilian cargo hauler. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Chassis/hull, suspension or buoyancy proxy, cargo restraints, seat rig, boarding sockets and safe dismount points; route determines mode. EXACT REGIONAL PROPOSAL: Guarded powered hauler: bolted chassis, shrouded drive wheels, low cargo deck, emergency mechanical brake and safe isolation switch; no unsupervised crane load above passengers. MATERIALS: chassis wood/metal, axle and brake metal, cargo textile/rope. SUBJECT AND VIEWS: One civilian powered hauler with bolted chassis, shrouded drive wheels, low cargo deck, cargo restraints, driver position, boarding/dismount step and mechanical emergency brake/isolation switch. Show matching front/rear/both-side/top views plus chassis cutaway, wheel-shroud and restraint details. Separate idle, loaded and safely isolated intent insets without changing wheel count or chassis. NEW PROPOSED DETAILS: Four guarded wheels, simple sprung axle concept, textile cargo straps and a protected low boarding step. Wheel count and suspension details are proposed. LIMITS: No weapons, autonomous behavior, load-capacity numbers or crane loads over passengers; source overview robots are style context, not this hauler design. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_09_vehicles_o15.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_10_transit_o03",
+      "canonical_family_id": "p2-env-09-shared-transit",
+      "regional_oath_id": "oath-03",
+      "baseline_asset_id": "asset-o03-u-vehicles-family",
+      "canonical_kit_id": "p2-arch-03-storm-relays",
+      "source_path": "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+      "source_json_pointer": "/records/15",
+      "exact_source_construction": "Stable boarding platform, berth/stop marker, waiting shelter, baggage zone and step-free ordinary exit; moving transport optional.",
+      "exact_source_regional_variant": {
+        "region_id": "region-03",
+        "oath_id": "oath-03",
+        "kit_id": "p2-arch-03-storm-relays",
+        "baseline_asset_id": "asset-o03-u-vehicles-family",
+        "construction_delta": "Grounded ridge relay stop with covered waiting bay and ordinary-road connection, separate from transmission hardware.",
+        "materials": [
+          "stone grounding plinth",
+          "copper conductor",
+          "matte ceramic break",
+          "shielded timber"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-111",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "source_priority": "P1",
+      "source_dependencies": [
+        "p2-env-09-shared-materials",
+        "p2-env-09-shared-roads",
+        "p2-env-09-shared-vehicles"
+      ],
+      "style_reference_paths": [
+        "baseline/assets/references/reference-111/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_details": "Shielded timber bench, sheltered luggage shelf, plain route-marker frame and separate service-duct cover.",
+      "prompt": "Create a NEW PROPOSED Aetherion environment construction reference: grounded ridge relay waiting stop. Use the attached Oath overview as visual-style anchor only, leaving it unchanged. This is one regional exemplar of a shared family, not a universal design for all realms. EXACT SOURCE FAMILY CONSTRUCTION: Stable boarding platform, berth/stop marker, waiting shelter, baggage zone and step-free ordinary exit; moving transport optional. EXACT REGIONAL PROPOSAL: Grounded ridge relay stop with covered waiting bay and ordinary-road connection, separate from transmission hardware. MATERIALS: stone grounding plinth, copper conductor, matte ceramic break, shielded timber. SUBJECT AND VIEWS: One grounded ordinary-road transit stop with covered waiting bay, baggage zone, stop marker, stable boarding edge and step-free ordinary exit. Front/rear/plan/section and canopy-to-footing joint. Transmission pylon and conductors appear only in a small context inset outside an unresolved hazard exclusion boundary; waiting/boarding infrastructure stays distinct from live machinery. NEW PROPOSED DETAILS: Shielded timber bench, sheltered luggage shelf, plain route-marker frame and separate service-duct cover. LIMITS: Do not invent electric-hazard distances, transport routes or rail system; ordinary road access works when transmission is shut down. No numerical dimensions, material thicknesses, load ratings or performance claims. Studio-neutral technical board with clear top/front/side/section intent views as appropriate, one consistent assembly, restrained large labels, PROPOSED in title. Distinguish actual physical structure from optional effects and indicate hidden connection/ground contact. Preserve original Oath identity without reusing already-referenced weapons or characters. Add footer: REGIONAL EXEMPLAR \u2014 SCALE, CONNECTIONS AND STATES REQUIRE REVIEW. This does not complete the shared family or approve modeling.",
+      "prompt_file": "prompts/env_10_transit_o03.prompt.txt",
+      "status": "READY_NOT_GENERATED",
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    }
+  ]
+}

@@ -1,0 +1,421 @@
+{
+  "records": [
+    {
+      "batch_id": "01_daybreak_public_colonnade",
+      "canonical_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "source_paths": [
+        "phase2/ARCHITECTURAL_KIT_REGISTRY.json"
+      ],
+      "exact_source_excerpts": {
+        "purpose": "Marble arcades, sun-shading colonnades and visible public thresholds frame civic authority. Shelters and clinics share the same durable materials as courts, preventing the architecture from implying that only judgment deserves grandeur.",
+        "construction": "Stone piers and thin removable facing carry distinct structural and decorative roles; canopy ties avoid public head clearance.",
+        "materials": [
+          "pale masonry",
+          "marble facing",
+          "bronze trim",
+          "woven shade"
+        ],
+        "proposed_scale": {
+          "units": "meters",
+          "status": "PROPOSED_UNCALIBRATED",
+          "grid_m": 0.25,
+          "structural_bay_m": 4,
+          "floor_to_floor_m": 3.2,
+          "door_clear_width_m": 1.2,
+          "door_clear_height_m": 2.4,
+          "note": "Clear widths measured after trim; regional chambers/landmarks can vary but must preserve approved traversal capsule and bypass.",
+          "fine_socket_adapter_m": 0.05
+        },
+        "module": {
+          "name": "public colonnade",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Stone column bases support lintel/arch seats; decorative facing has independent attachment points.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Stone column bases support lintel/arch seats; decorative facing has independent attachment points.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      },
+      "oath_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Slender wing-shouldered ninja and columnar ivory judge; lotus waist, pointed folded plates",
+        "material_family": [
+          "folded enamel",
+          "woven cloth",
+          "brushed metal"
+        ],
+        "palette": [
+          "ivory",
+          "gray",
+          "brushed gold"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-074",
+            "role": "sorcerer",
+            "description": "Long ivory tabard over gray cloth, rigid folded shoulders and a gold lotus waist clasp."
+          },
+          {
+            "reference_id": "reference-075",
+            "role": "ninja",
+            "description": "Slender gray fitted suit with ivory pointed hip panels, one wing-like shoulder plate and gold-edged visor."
+          }
+        ],
+        "architecture_motif": "Marble radiant plazas, lotus dais, colonnades and sun-forged screens",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "priority_reason": "Architecture directly supports residential, civic, workshop and interior assemblies; resolve shared load path before buildings.",
+      "proposed_new_design_details": "Reversible bronze canopy sockets, replaceable facing-panel seams, discreet drainage groove and restrained repair wear.",
+      "prompt": "Create a NEW proposed Aetherion Oath of Daybreak production reference sheet. Use the attached reference-105 overview as visual-style context only and never alter or replace it. Preserve its ivory, gray and brushed-gold hierarchy, refined folded planes, restrained trim, realistic fantasy materials and clean light-gray technical-board presentation. The original overview is not evidence for new hidden faces, anatomy or mechanisms. Keep all views of one design consistent, cleanly separated and uncropped; use neutral studio lighting, crisp readable contours, orthographic low-distortion construction views, restrained short labels and a PROPOSED header. No cinematic scene, excessive bloom, gratuitous ornament, copied weapons, new religious symbols or claim of approval. This is a concept reference, not finished geometry, calibration, a texture map or engineering certification. CANON/EXISTING PROPOSAL CONSTRAINTS: One public-colonnade bay with removable pointed woven shade canopy. Show aligned front, rear, side and top views of the SAME 4 m by 4 m by 4 m module, a large three-quarter assembled view, and an exploded corner section clearly separating load-bearing stone pier, thin removable marble facing, restrained bronze attachment and removable woven shade canopy. Show underside and foundation contact. These are proposed dimensions from the registry, not measurements from the source image. Canopy ties remain above public head clearance and the through-route stays unobstructed. Shelters and clinics must be as durable and dignified as courts. PROPOSED NEW DESIGN DETAILS: Reversible bronze canopy sockets, replaceable facing-panel seams, discreet drainage groove and restrained repair wear. Label new construction decisions as proposed. Keep title short and labels large; do not include this whole brief as text on the board.",
+      "completion_limit": "Generated image needs consistency review and explicit exact-art approval; no underlying source file is modified. One sheet does not complete the whole family."
+    },
+    {
+      "batch_id": "02_daybreak_surface_trim_board",
+      "canonical_id": "p2-env-09-shared-materials",
+      "baseline_asset_id": "asset-o09-ah-decals-materials-shaders-family",
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "source_paths": [
+        "phase2/ENVIRONMENT_ASSET_REGISTRY.json"
+      ],
+      "exact_source_excerpts": {
+        "construction": "Reviewed opaque base/normal/roughness set, trim strips, wetness mask, repair decal and rare bounded translucent surfaces; no image-to-texture shortcut.",
+        "regional_variant": {
+          "region_id": "region-09",
+          "oath_id": "oath-09",
+          "kit_id": "p2-arch-09-daybreak-arcades",
+          "baseline_asset_id": "asset-o09-ah-decals-materials-shaders-family",
+          "construction_delta": "pale masonry; marble facing; bronze trim; woven shade; wear follows local moisture, heat, traffic and maintenance.",
+          "materials": [
+            "pale masonry",
+            "marble facing",
+            "bronze trim",
+            "woven shade"
+          ],
+          "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+          "reference_id": "REF-105",
+          "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+          "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+          "entity_ids": []
+        }
+      },
+      "oath_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Slender wing-shouldered ninja and columnar ivory judge; lotus waist, pointed folded plates",
+        "material_family": [
+          "folded enamel",
+          "woven cloth",
+          "brushed metal"
+        ],
+        "palette": [
+          "ivory",
+          "gray",
+          "brushed gold"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-074",
+            "role": "sorcerer",
+            "description": "Long ivory tabard over gray cloth, rigid folded shoulders and a gold lotus waist clasp."
+          },
+          {
+            "reference_id": "reference-075",
+            "role": "ninja",
+            "description": "Slender gray fitted suit with ivory pointed hip panels, one wing-like shoulder plate and gold-edged visor."
+          }
+        ],
+        "architecture_motif": "Marble radiant plazas, lotus dais, colonnades and sun-forged screens",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "priority_reason": "The shared materials family is a prerequisite for all 23 other Phase II environment families; the Daybreak portion also unblocks its Phase I material-dependent modeling.",
+      "proposed_new_design_details": "Fine low-contrast marble veining; brushed bronze grain; reversible trim seating; hand-repaired cloth seam; light moisture staining restricted to exposed masonry edges. All are new proposals for review.",
+      "prompt": "Create a NEW proposed Aetherion Oath of Daybreak production reference sheet. Use the attached reference-105 overview as visual-style context only and never alter or replace it. Preserve its ivory, gray and brushed-gold hierarchy, refined folded planes, restrained trim, realistic fantasy materials and clean light-gray technical-board presentation. The original overview is not evidence for new hidden faces, anatomy or mechanisms. Keep all views of one design consistent, cleanly separated and uncropped; use neutral studio lighting, crisp readable contours, orthographic low-distortion construction views, restrained short labels and a PROPOSED header. No cinematic scene, excessive bloom, gratuitous ornament, copied weapons, new religious symbols or claim of approval. This is a concept reference, not finished geometry, calibration, a texture map or engineering certification. CANON/EXISTING PROPOSAL CONSTRAINTS: A construction-material target board for Daybreak architecture, four clearly separated material families: pale load-bearing masonry, thin marble facing, bronze trim and woven shade. For each show a large flat square sample under identical neutral illumination, an edge/thickness section, one simple rounded sample for reflectance readability, then an intact / weathered / repaired trio. Add bottom strip demonstrating how the four meet on one pier-and-canopy corner. Preserve the overview hierarchy: pale opaque stone dominates, bronze stays a narrow accent and cloth reads woven rather than metal. Do not call these calibrated PBR maps or imply generated lighting is a normal/roughness map. PROPOSED NEW DESIGN DETAILS: Fine low-contrast marble veining; brushed bronze grain; reversible trim seating; hand-repaired cloth seam; light moisture staining restricted to exposed masonry edges. All are new proposals for review. Label new construction decisions as proposed. Keep title short and labels large; do not include this whole brief as text on the board.",
+      "completion_limit": "Generated image needs consistency review and explicit exact-art approval; no underlying source file is modified. One sheet does not complete the whole family."
+    },
+    {
+      "batch_id": "03_daybreak_daylight_baffle",
+      "canonical_id": "p2-env-09-shared-mechanisms",
+      "baseline_asset_id": "asset-o09-ae-puzzles-family",
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "source_paths": [
+        "phase2/ENVIRONMENT_ASSET_REGISTRY.json",
+        "phase2/ARCHITECTURAL_KIT_REGISTRY.json"
+      ],
+      "exact_source_excerpts": {
+        "construction": "Fixed frame, movable member, hinge/slide axis, input affordance, stop, interlock and manual fallback; state machine authored per device.",
+        "regional_variant": {
+          "region_id": "region-09",
+          "oath_id": "oath-09",
+          "kit_id": "p2-arch-09-daybreak-arcades",
+          "baseline_asset_id": "asset-o09-ae-puzzles-family",
+          "construction_delta": "louvered daylight baffle and shielded ward shutter; courthouse, clinic and shelter have equally readable access Build fixed frame, accessible input, guarded pivot/valve axis, hard stop and local manual release. Export swept bounds and locked-safe collision/nav state.",
+          "materials": [
+            "pale masonry",
+            "marble",
+            "bronze trim",
+            "woven shade"
+          ],
+          "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+          "reference_id": "REF-105",
+          "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+          "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+          "entity_ids": []
+        },
+        "module": {
+          "name": "daylight baffle",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            2.0,
+            0.3,
+            1.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Rotating louver frame sits above window socket; hard stop prevents specular glare into route.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Rotating louver frame sits above window socket; hard stop prevents specular glare into route.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      },
+      "oath_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Slender wing-shouldered ninja and columnar ivory judge; lotus waist, pointed folded plates",
+        "material_family": [
+          "folded enamel",
+          "woven cloth",
+          "brushed metal"
+        ],
+        "palette": [
+          "ivory",
+          "gray",
+          "brushed gold"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-074",
+            "role": "sorcerer",
+            "description": "Long ivory tabard over gray cloth, rigid folded shoulders and a gold lotus waist clasp."
+          },
+          {
+            "reference_id": "reference-075",
+            "role": "ninja",
+            "description": "Slender gray fitted suit with ivory pointed hip panels, one wing-like shoulder plate and gold-edged visor."
+          }
+        ],
+        "architecture_motif": "Marble radiant plazas, lotus dais, colonnades and sun-forged screens",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "priority_reason": "Mechanism construction precedes lighting/ward-shutter state assets, puzzles and safe-route state testing.",
+      "proposed_new_design_details": "Three broad linked horizontal louvers, guarded side linkage, removable service cover, tactile manual lever and mechanical open-safe latch. Louver count and mechanism arrangement are proposed, not recovered from the panorama.",
+      "prompt": "Create a NEW proposed Aetherion Oath of Daybreak production reference sheet. Use the attached reference-105 overview as visual-style context only and never alter or replace it. Preserve its ivory, gray and brushed-gold hierarchy, refined folded planes, restrained trim, realistic fantasy materials and clean light-gray technical-board presentation. The original overview is not evidence for new hidden faces, anatomy or mechanisms. Keep all views of one design consistent, cleanly separated and uncropped; use neutral studio lighting, crisp readable contours, orthographic low-distortion construction views, restrained short labels and a PROPOSED header. No cinematic scene, excessive bloom, gratuitous ornament, copied weapons, new religious symbols or claim of approval. This is a concept reference, not finished geometry, calibration, a texture map or engineering certification. CANON/EXISTING PROPOSAL CONSTRAINTS: A single louvered daylight baffle with shielded ward-shutter insert for a public clinic portico, not a weapon. Proposed module envelope 2.0 m width, 0.3 m depth, 1.2 m height, from the registry. Large front view, rear maintenance view, side section, three-quarter exploded assembly, and small CLOSED / HALF OPEN / OPEN states with the same number of louvers and constant outer frame. Show fixed frame, each pivot axis, guarded linkage, physical hard stops, accessible manual release, an interaction handle and swept bounds using sparse dashed lines. Show a small contextual elevation with the mechanism above an unobstructed normal public route. Use pale masonry surround, marble facing, bronze trim and woven shade as specified. The ward insert must stay shielded and readable without bloom; power loss never traps civilians. PROPOSED NEW DESIGN DETAILS: Three broad linked horizontal louvers, guarded side linkage, removable service cover, tactile manual lever and mechanical open-safe latch. Louver count and mechanism arrangement are proposed, not recovered from the panorama. Label new construction decisions as proposed. Keep title short and labels large; do not include this whole brief as text on the board.",
+      "completion_limit": "Generated image needs consistency review and explicit exact-art approval; no underlying source file is modified. One sheet does not complete the whole family."
+    },
+    {
+      "batch_id": "04_daybreak_civilian_service_clothing",
+      "canonical_id": "asset-o09-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o09-i-civilian-clothing-family",
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "source_paths": [
+        "baseline/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "baseline/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json"
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from OATH OF DAYBREAK civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "visual_signature": "Slender wing-shouldered ninja and columnar ivory judge; lotus waist, pointed folded plates",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "folded enamel",
+            "woven cloth",
+            "brushed metal"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "ivory; gray; brushed gold",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "civilian_craft_context": "Ward engraving desk, public aid station, lamp maintenance cart"
+      },
+      "oath_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Slender wing-shouldered ninja and columnar ivory judge; lotus waist, pointed folded plates",
+        "material_family": [
+          "folded enamel",
+          "woven cloth",
+          "brushed metal"
+        ],
+        "palette": [
+          "ivory",
+          "gray",
+          "brushed gold"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-074",
+            "role": "sorcerer",
+            "description": "Long ivory tabard over gray cloth, rigid folded shoulders and a gold lotus waist clasp."
+          },
+          {
+            "reference_id": "reference-075",
+            "role": "ninja",
+            "description": "Slender gray fitted suit with ivory pointed hip panels, one wing-like shoulder plate and gold-edged visor."
+          }
+        ],
+        "architecture_motif": "Marble radiant plazas, lotus dais, colonnades and sun-forged screens",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "priority_reason": "Civilian clothing is an explicit character-ensemble prerequisite missing across every Oath; this supports public-service NPCs without duplicating combat reference art.",
+      "proposed_new_design_details": "Apron pocket layout, side gussets, rolled-cuff fastening, removable light weather cape, low-profile clasp and soft utility belt are new proposed occupational details. This only fills the public-service outfit component, not every worker/merchant/artisan/weather variant.",
+      "prompt": "Create a NEW proposed Aetherion Oath of Daybreak production reference sheet. Use the attached reference-105 overview as visual-style context only and never alter or replace it. Preserve its ivory, gray and brushed-gold hierarchy, refined folded planes, restrained trim, realistic fantasy materials and clean light-gray technical-board presentation. The original overview is not evidence for new hidden faces, anatomy or mechanisms. Keep all views of one design consistent, cleanly separated and uncropped; use neutral studio lighting, crisp readable contours, orthographic low-distortion construction views, restrained short labels and a PROPOSED header. No cinematic scene, excessive bloom, gratuitous ornament, copied weapons, new religious symbols or claim of approval. This is a concept reference, not finished geometry, calibration, a texture map or engineering certification. CANON/EXISTING PROPOSAL CONSTRAINTS: Design one unarmed adult public-aid worker outfit as the first civilian occupational-clothing design, not a redesign of the already-referenced ninja or sorcerer. Show consistent neutral standing front, rear, both profiles and three-quarter views, plus a removed outer-layer flat lay and seam/fastener details. Practical woven ivory apron/tabard over gray working clothes with restrained brushed-gold closure, sleeves safe around an aid station, useful carrying pockets, robust walking footwear, free shoulder/hip/knee motion. One modest folded-enamel role marker may echo the Oath but must not become combat armor. The body is a neutral fitting mannequin with a naturally broad adult build; do not inherit the ninja body as the universal civilian template. No weapon, combat mask, rigid judge shoulders or invented official crest. PROPOSED NEW DESIGN DETAILS: Apron pocket layout, side gussets, rolled-cuff fastening, removable light weather cape, low-profile clasp and soft utility belt are new proposed occupational details. This only fills the public-service outfit component, not every worker/merchant/artisan/weather variant. Label new construction decisions as proposed. Keep title short and labels large; do not include this whole brief as text on the board.",
+      "completion_limit": "Generated image needs consistency review and explicit exact-art approval; no underlying source file is modified. One sheet does not complete the whole family."
+    },
+    {
+      "batch_id": "05_daybreak_prism_backed_courser",
+      "canonical_id": "creature-o09-natural",
+      "baseline_asset_id": "asset-o09-r-creatures-enemies-family",
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "source_paths": [
+        "baseline/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json"
+      ],
+      "exact_source_excerpts": {
+        "anatomy": "Long-legged herbivore with reflective dorsal scutes and flexible neck",
+        "locomotion": "Long-stride trot, careful stair approach and stationary attentive stance",
+        "ecology": {
+          "habitat": "Marble radiant plazas, lotus dais, colonnades and sun-forged screens",
+          "food_or_power": "Short grasses, orchard fallen fruit and mineral salts",
+          "niche": "Maintains open civic greenways and transports seed in mane/hooves",
+          "migration": "Follows serviced roads and open pasture; rests in shade during peak radiance"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "requirements": [
+          "Front/rear/both profiles/3q",
+          "Skeleton and articulation map",
+          "Mouth/feet/grip/contact details",
+          "Scale against player",
+          "Materials/UVs",
+          "Damage or repair states",
+          "Rider/driver interface where applicable"
+        ],
+        "materials_as_written": [
+          "folded enamel",
+          "woven cloth",
+          "brushed metal"
+        ]
+      },
+      "oath_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Slender wing-shouldered ninja and columnar ivory judge; lotus waist, pointed folded plates",
+        "material_family": [
+          "folded enamel",
+          "woven cloth",
+          "brushed metal"
+        ],
+        "palette": [
+          "ivory",
+          "gray",
+          "brushed gold"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-074",
+            "role": "sorcerer",
+            "description": "Long ivory tabard over gray cloth, rigid folded shoulders and a gold lotus waist clasp."
+          },
+          {
+            "reference_id": "reference-075",
+            "role": "ninja",
+            "description": "Slender gray fitted suit with ivory pointed hip panels, one wing-like shoulder plate and gold-edged visor."
+          }
+        ],
+        "architecture_motif": "Marble radiant plazas, lotus dais, colonnades and sun-forged screens",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "priority_reason": "Natural fauna body plan underpins gait/contact rigs and wildlife habitat presentation; similar road-courser concepts may reuse approved anatomy later, but no automatic shared rig or mount design is asserted.",
+      "proposed_new_design_details": "Four hoofed limbs, short seed-catching mane, low overlapping reflective dorsal scutes rather than tall crystalline spikes, broad herbivore muzzle, flexible moderate neck and proposed human-relative scale. These anatomy choices need review; no real species clone is dictated by canon.",
+      "prompt": "Create a NEW proposed Aetherion Oath of Daybreak production reference sheet. Use the attached reference-105 overview as visual-style context only and never alter or replace it. Preserve its ivory, gray and brushed-gold hierarchy, refined folded planes, restrained trim, realistic fantasy materials and clean light-gray technical-board presentation. The original overview is not evidence for new hidden faces, anatomy or mechanisms. Keep all views of one design consistent, cleanly separated and uncropped; use neutral studio lighting, crisp readable contours, orthographic low-distortion construction views, restrained short labels and a PROPOSED header. No cinematic scene, excessive bloom, gratuitous ornament, copied weapons, new religious symbols or claim of approval. This is a concept reference, not finished geometry, calibration, a texture map or engineering certification. CANON/EXISTING PROPOSAL CONSTRAINTS: A species-level anatomy reference for the prism-backed courser: canon proposal says \u201cLong-legged herbivore with reflective dorsal scutes and flexible neck\u201d; it eats short grasses, orchard fallen fruit and mineral salts, maintains open civic greenways and transports seed in mane/hooves. Show front, rear, both profiles and three-quarter neutral stance of one consistent natural animal, a restrained underlying articulation diagram, dorsal-scute overlap detail, mouth/hoof ground-contact closeups, and three small long-stride trot key poses. Include a plain adult human scale silhouette marked SCALE PROPOSED. No rider, saddle, tack, weapons, magic attack, wings or robotic conversion. Natural animal anatomy is primary. Registry materials folded enamel / woven cloth / brushed metal are broad Oath styling context with unresolved physical application; interpret only gentle enamel-like scute reflectance here, never cloth or metal replacing living tissues. Keep gray/ivory coat and restrained warm scute highlights. PROPOSED NEW DESIGN DETAILS: Four hoofed limbs, short seed-catching mane, low overlapping reflective dorsal scutes rather than tall crystalline spikes, broad herbivore muzzle, flexible moderate neck and proposed human-relative scale. These anatomy choices need review; no real species clone is dictated by canon. Label new construction decisions as proposed. Keep title short and labels large; do not include this whole brief as text on the board.",
+      "completion_limit": "Generated image needs consistency review and explicit exact-art approval; no underlying source file is modified. One sheet does not complete the whole family."
+    }
+  ]
+}
