@@ -1,5 +1,6 @@
 {
-  "generatedAt": "2026-10-13T21:21:53.551Z",
+  "reviewMode": false,
+  "generatedAt": "2026-10-13T23:05:04.729Z",
   "scope": "Local bounded file snapshot while production authoring continues; not a final remote-head claim",
   "status": "PASS_AT_CAPTURE",
   "commands": [
@@ -22,6 +23,128 @@
     {
       "command": "npm run test:http:build",
       "exitCode": 0
+    }
+  ],
+  "previewInputsBefore": [
+    {
+      "path": ".gitignore",
+      "sha256": "790e3169bc19b046fe55ba1da6d13b976c28363c8c00462a2195fe5faf260910",
+      "bytes": 20
+    },
+    {
+      "path": "browser-lifecycle.mjs",
+      "sha256": "9655480207577ac4beb747f62878c59b225c3fe6f560930610e0f7d378210859",
+      "bytes": 2920
+    },
+    {
+      "path": "catalog.mjs",
+      "sha256": "ed9a02a648c050f9f112d55efc4c69d2507ec4d446196c132e32a4ddfccace12",
+      "bytes": 2346
+    },
+    {
+      "path": "comparison.mjs",
+      "sha256": "0e7edda7de75e0cb14d060141b8e18082ec683a7a213643c712f71e020997825",
+      "bytes": 2263
+    },
+    {
+      "path": "index.html",
+      "sha256": "c6884167272e9c2e1609a5ba8c34d3d5361c67cf8da4bb5299f4bd093bb46180",
+      "bytes": 4263
+    },
+    {
+      "path": "lifecycle.mjs",
+      "sha256": "6a83a392a7d964d5d81e8ff61e9a9fa6943d26a4f786fbbae6161bd1a2cb50f3",
+      "bytes": 3064
+    },
+    {
+      "path": "main.mjs",
+      "sha256": "5e9ebd8ca80b57451c304a90a31e9486f6ed9700e00e3afb62356f73c5969bc4",
+      "bytes": 15501
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "c8a0b39adaa1ff03d5df8e1f0e4b05568d827af7f04d96f0b0870a8da436d23a",
+      "bytes": 28158
+    },
+    {
+      "path": "package.json",
+      "sha256": "2e076febaee3af62ab96cc8258083006725e8a84292db47baf1c6c577885cb1c",
+      "bytes": 619
+    },
+    {
+      "path": "PLAYTEST.md",
+      "sha256": "c220a1f3422407ec774658bc298383549941feeb559a4c369d5f9f0df1933f76",
+      "bytes": 8163
+    },
+    {
+      "path": "README.md",
+      "sha256": "5a3854faa5010d92f2caa0fd7b9df0da6589df740d24892229a531866cf37d98",
+      "bytes": 6948
+    },
+    {
+      "path": "review-assets.mjs",
+      "sha256": "f78d48afb439239989b33376226bd0aeaf8696c1c508e95c5bc9921239d4827e",
+      "bytes": 2639
+    },
+    {
+      "path": "review-manifest.json",
+      "sha256": "6b7ecd99d1964d4dbf39699044a4f72e8c985493b0c733914e33333d5190eb0f",
+      "bytes": 1998
+    },
+    {
+      "path": "runtime-assets.mjs",
+      "sha256": "434c9d47a880c6b89d3560564dbf8431d04bddb6a3206a69c56397130a3e4add",
+      "bytes": 3822
+    },
+    {
+      "path": "style.css",
+      "sha256": "8c3f4ae216878f24fab325908aa7549814a4125c80de497cd84793e2827077ba",
+      "bytes": 3739
+    },
+    {
+      "path": "tests/asset-import.mjs",
+      "sha256": "54201d2e87d55b5a18a71071a46a45a859302f41602450713c245761b1a8a89d",
+      "bytes": 4988
+    },
+    {
+      "path": "tests/browser-lifecycle.test.mjs",
+      "sha256": "71b458b88c41e6da48d58091403e4d2fe3b1b0c30f357afb820be216b385564d",
+      "bytes": 4031
+    },
+    {
+      "path": "tests/comparison.test.mjs",
+      "sha256": "f5a5c0a893b689b02e884845da2bf4283eff24b8db5883648d15cf40e9b6b10d",
+      "bytes": 3214
+    },
+    {
+      "path": "tests/http-smoke.mjs",
+      "sha256": "39399a2454cccd085ccfc928e19db9e7ff1a6d2aaa1e1e1f704a35371d72b5ae",
+      "bytes": 4523
+    },
+    {
+      "path": "tests/lifecycle.test.mjs",
+      "sha256": "26ec20e144bd401efb30517cfe30f62aa6a58c99e584f1bc1dea8c5c1c51d00a",
+      "bytes": 5847
+    },
+    {
+      "path": "tests/record-validation.mjs",
+      "sha256": "3dd1e72bfcdd1008f93a40b7048e85d29ccc20ff4ff35ac17dae6ef9ed81eb88",
+      "bytes": 7663
+    },
+    {
+      "path": "tests/review-assets.test.mjs",
+      "sha256": "aa7bf076a11a15f77e9956580f301800895cb751ff1befb9f900f918b9c36fe7",
+      "bytes": 3909
+    },
+    {
+      "path": "tests/runtime-assets.test.mjs",
+      "sha256": "cd7b4d12e9ccaf86b1c7aa43ca85758fef389ba02b6dcba7406fb8a7e002e7db",
+      "bytes": 4494
+    },
+    {
+      "path": "vite.config.mjs",
+      "sha256": "0e64f90dd7febcf25f530e9d5e16bc05e0e1c636a9bfcde32522c18a96b5a47b",
+      "bytes": 3835
     }
   ],
   "previewInputs": [
@@ -77,8 +200,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "838b1a7963b84fe6a061a45104bd72b260e606fb3a30ed8bacdecf29fa35186b",
-      "bytes": 5508
+      "sha256": "5a3854faa5010d92f2caa0fd7b9df0da6589df740d24892229a531866cf37d98",
+      "bytes": 6948
+    },
+    {
+      "path": "review-assets.mjs",
+      "sha256": "f78d48afb439239989b33376226bd0aeaf8696c1c508e95c5bc9921239d4827e",
+      "bytes": 2639
+    },
+    {
+      "path": "review-manifest.json",
+      "sha256": "6b7ecd99d1964d4dbf39699044a4f72e8c985493b0c733914e33333d5190eb0f",
+      "bytes": 1998
     },
     {
       "path": "runtime-assets.mjs",
@@ -92,8 +225,8 @@
     },
     {
       "path": "tests/asset-import.mjs",
-      "sha256": "6965bf1a906059a776ce399468ab21300bbe67a8188b1bf6fc7300b29c2e1bc9",
-      "bytes": 4836
+      "sha256": "54201d2e87d55b5a18a71071a46a45a859302f41602450713c245761b1a8a89d",
+      "bytes": 4988
     },
     {
       "path": "tests/browser-lifecycle.test.mjs",
@@ -107,8 +240,8 @@
     },
     {
       "path": "tests/http-smoke.mjs",
-      "sha256": "6f4b5a8718aa05a58609272a5f1d6b8a25c1b1bf01e2fbc6b99c1c033e1ecc67",
-      "bytes": 3904
+      "sha256": "39399a2454cccd085ccfc928e19db9e7ff1a6d2aaa1e1e1f704a35371d72b5ae",
+      "bytes": 4523
     },
     {
       "path": "tests/lifecycle.test.mjs",
@@ -117,8 +250,13 @@
     },
     {
       "path": "tests/record-validation.mjs",
-      "sha256": "4fdbfdb4a629f0bff44f6fc44a6240ada59c44e50760ae308bdb64e3f4a14844",
-      "bytes": 6817
+      "sha256": "3dd1e72bfcdd1008f93a40b7048e85d29ccc20ff4ff35ac17dae6ef9ed81eb88",
+      "bytes": 7663
+    },
+    {
+      "path": "tests/review-assets.test.mjs",
+      "sha256": "aa7bf076a11a15f77e9956580f301800895cb751ff1befb9f900f918b9c36fe7",
+      "bytes": 3909
     },
     {
       "path": "tests/runtime-assets.test.mjs",
@@ -127,10 +265,11 @@
     },
     {
       "path": "vite.config.mjs",
-      "sha256": "b675ab3da08bf89a538653d66c8e2de0e953127ff4d1d299302ee4e9c1fa4852",
-      "bytes": 3174
+      "sha256": "0e64f90dd7febcf25f530e9d5e16bc05e0e1c636a9bfcde32522c18a96b5a47b",
+      "bytes": 3835
     }
   ],
+  "changedPreviewInputs": [],
   "testedAssetInputs": [
     {
       "path": "assets/production/oath-01/characters/manifest.json",
@@ -1484,7 +1623,7 @@
       "unchangedAfterChecks": true
     }
   ],
-  "cpuReportSha256": "ab12b9cb6064c636ea6b77471ef3862aa7043391e5edb60996324649d8d9090f",
+  "cpuReportSha256": "a2f670c2cebf5876708d9476513416605d02cb197097d5a7b167706831e7f64d",
   "results": {
     "CPU": {
       "files": 158,
@@ -1495,6 +1634,7 @@
       "development": {
         "scope": "Local HTTP only; no browser/GPU",
         "mode": "development",
+        "reviewMode": false,
         "status": "PASS",
         "manifests": 16,
         "glbsByteVerified": 158,
@@ -1503,6 +1643,7 @@
       "built": {
         "scope": "Local HTTP only; no browser/GPU",
         "mode": "built",
+        "reviewMode": false,
         "status": "PASS",
         "manifests": 16,
         "glbsByteVerified": 158,
@@ -1511,10 +1652,10 @@
     }
   },
   "logs": {
-    "unit-tests.log": "f7c076a90374f1e5ff60d116ef03e8a01654020c601b7f088c6d2b84df63dad4",
+    "unit-tests.log": "19a2c02912de6713a1404d4d56b13acd97fd040d1a28e70b97cdebb3e5e61dfa",
     "asset-import.log": "c475d69976ebd4fa5cd4488b4c5fcba550db50b6cf79dd6bbd6e5706488b04a4",
-    "build.log": "29f538166951c566583aaad66438915319698213287b39545f1c0ec1d839f6c9",
-    "http-development.log": "66ae8618575556f83437f8914ee4ff193aff62722964888c1e13c8d4a789dd8c",
-    "http-built.log": "c7777bdab88f3ffd530d9e86eafd1327b39205123f0fdbaac24a8f4c505ec910"
+    "build.log": "c8a96be9ba08737b9651b5bc6d7a8bfec735b270b554cf30592dfa77a118c704",
+    "http-development.log": "985ea47ebbe2598a7c7ca9eb3e9c636e084b7e9572fd153c27ffcf987f03c55a",
+    "http-built.log": "c60ad1fb9b22c8b11098b83ad56ad0f95e24242d6c87d27889d08c3873078e84"
   }
 }
