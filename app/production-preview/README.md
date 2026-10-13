@@ -19,3 +19,11 @@ Browser rendering and appearance require a real browser run. Node tests, HTTP ch
 The canvas supports focused keyboard orbit (arrow keys), zoom (+/−), and fit (F/Home). Tab leaves the view; inspection controls gate camera input. Animation/material and long help notes start collapsed. Reduced-motion preference disables camera damping and starts clips paused, with explicit Play opt-in. Context loss pauses rendering and requests browser recovery; restored contexts resume the same CPU scene. Unsupported or failed renderers keep a readable DOM fallback and retry action. Hidden tabs and BFCache navigation suspend rendering without destroying a restorable scene.
 
 [Game Studio audit and browser playtest gates](PLAYTEST.md) separates implemented/tested logic from the mandatory screenshots still blocked by the executor's browser sandbox. A successful Node or HTTP test does not waive that gate.
+
+## Reference comparison
+
+The reference panel displays original image bytes in a DOM image, separate from the real 3D scene. Asset and family `referenceIds` resolve through the canon reference index. Only those indexed original images enter the runtime allowlist; unreferenced images and DCC files stay inaccessible. Unresolved IDs fail the build rather than displaying an unrelated reference.
+
+Choose world +Z, +X, −Z or three-quarter orthographic views, or perspective. XYZ view rotation aligns differing authoring axes and resets on asset selection; it does not modify mesh coordinates or source files. Vertical framing and target-height offset use meters. Fit uses actual world bounds. Silhouette, wireframe and PBR modes support shape and material comparison. References carry no inferred physical scale or automatic approval.
+
+Browser screenshots and rendered comparison remain an unexecuted acceptance gate in this environment. CPU camera, correspondence, image replacement, allowlist and original-byte HTTP tests do not establish visual fidelity.

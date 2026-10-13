@@ -32,17 +32,17 @@ export default {
  plugins:[{
   name:'manifest-runtime-assets',
   configResolved(config){isBuild=config.command==='build';},
-  configureServer(server){server.middlewares.use('/production-assets',middleware(()=>({manifests:runtime().manifests,files:[...runtime().files.keys()].sort()}),name=>runtime().files.get(name)));},
+  configureServer(server){server.middlewares.use('/production-assets',middleware(()=>({manifests:runtime().manifests,references:runtime().references,files:[...runtime().files.keys()].sort()}),name=>runtime().files.get(name)));},
   configurePreviewServer(server){
    const destination=path.join(outDir,'production-assets');
    server.middlewares.use('/production-assets',middleware(()=>JSON.parse(fs.readFileSync(path.join(destination,'catalog.json'),'utf8')),name=>path.join(destination,name)));
   },
   closeBundle(){
    if(!isBuild)return;
-   const {manifests,files}=collectRuntimeAssets(assets),destination=path.join(outDir,'production-assets');
+   const {manifests,files,references}=collectRuntimeAssets(assets),destination=path.join(outDir,'production-assets');
    fs.mkdirSync(destination,{recursive:true});
    for(const [name,source]of files){const target=path.join(destination,name);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(source,target);}
-   fs.writeFileSync(path.join(destination,'catalog.json'),JSON.stringify({manifests,files:[...files.keys()].sort()},null,2)+'\n');
+   fs.writeFileSync(path.join(destination,'catalog.json'),JSON.stringify({manifests,references,files:[...files.keys()].sort()},null,2)+'\n');
   }
  }]
 };

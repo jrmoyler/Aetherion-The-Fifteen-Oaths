@@ -10,3 +10,15 @@ test('shipping boundary excludes DCC, notes, collision and unused images',t=>{co
 test('only actually referenced external GLB images/buffers join the allowlist',t=>{const {root,dir}=fixture(t,{images:[{uri:'material.png'},{uri:'data:image/png;base64,AA=='}],buffers:[{uri:'vertices.bin'}]});fs.writeFileSync(path.join(dir,'material.png'),'image bytes');fs.writeFileSync(path.join(dir,'vertices.bin'),'buffer bytes');const files=collectRuntimeAssets(root).files;assert.equal(files.has('oath-01/weapons/material.png'),true);assert.equal(files.has('oath-01/weapons/vertices.bin'),true);assert.equal(files.has('oath-01/weapons/unused.png'),false);});
 test('GLB cannot smuggle authoring files or remote dependencies into runtime',t=>{const {root,dir}=fixture(t,{images:[{uri:'base.blend'}]});assert.throws(()=>collectRuntimeAssets(root),/runtime image/);fs.writeFileSync(path.join(dir,'base.glb'),glb({images:[{uri:'https://example.invalid/map.png'}]}));assert.throws(()=>collectRuntimeAssets(root),/local/);});
 test('bad GLB length fails closed instead of silently bundling source folder',()=>{const bytes=glb({});bytes.writeUInt32LE(bytes.length+4,8);assert.throws(()=>externalGLBDependencies(bytes),/Invalid GLB/);});
+test('reference boundary serves only explicitly indexed originals and rejects unresolved IDs',t=>{
+ const base=fs.mkdtempSync(path.join(os.tmpdir(),'preview-reference-boundary-'));t.after(()=>fs.rmSync(base,{recursive:true,force:true}));
+ const root=path.join(base,'assets/production'),refs=path.join(base,'assets/references/reference-061'),index=path.join(base,'AETHERION_CANON/11_REFERENCE_SHEETS');
+ fs.mkdirSync(root,{recursive:true});fs.mkdirSync(refs,{recursive:true});fs.mkdirSync(index,{recursive:true});
+ fs.writeFileSync(path.join(root,'a.glb'),glb({}));fs.writeFileSync(path.join(refs,'original.png'),'immutable image');fs.writeFileSync(path.join(refs,'private.blend'),'private DCC');
+ const manifest={referenceIds:['reference-061'],assets:[{id:'a',files:{glb:'a.glb'}}]};fs.writeFileSync(path.join(root,'manifest.json'),JSON.stringify(manifest));
+ const record={id:'reference-061',repository_path:'assets/references/reference-061/original.png',name:'Reference'};
+ fs.writeFileSync(path.join(index,'REFERENCE_INDEX.json'),JSON.stringify({records:[record]}));
+ const result=collectRuntimeAssets(root);assert.equal(result.references.length,1);assert.equal(result.files.has('__references/reference-061/original.png'),true);assert.equal([...result.files.keys()].some(name=>name.endsWith('.blend')),false);
+ record.repository_path='assets/references/reference-061/private.blend';fs.writeFileSync(path.join(index,'REFERENCE_INDEX.json'),JSON.stringify({records:[record]}));assert.throws(()=>collectRuntimeAssets(root),/indexed original/);
+ manifest.referenceIds=['unknown'];fs.writeFileSync(path.join(root,'manifest.json'),JSON.stringify(manifest));assert.throws(()=>collectRuntimeAssets(root),/Unknown reference/);
+});

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { frameCamera, referencesForAsset, showReference, comparisonBounds } from './comparison.mjs';
 import { AssetSession } from './lifecycle.mjs';
 import { normalizeManifest } from './catalog.mjs';
 import { RenderLifecycle, viewportSize, keyboardAction, bindMotionPreference } from './browser-lifecycle.mjs';
@@ -19,7 +20,7 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1;
 const scene = new THREE.Scene(); scene.background = new THREE.Color('#202730');
-const camera = new THREE.PerspectiveCamera(40, 1, .01, 2000); camera.position.set(3, 2, 3);
+let camera = new THREE.PerspectiveCamera(40, 1, .01, 2000); camera.position.set(3, 2, 3);
 const controls = new OrbitControls(camera, canvas);
 const unbindMotion = bindMotionPreference(matchMedia('(prefers-reduced-motion: reduce)'), $('playing'), controls);
 scene.add(new THREE.HemisphereLight(0xe9f1ff, 0x6f6557, 2));
@@ -27,6 +28,7 @@ const key = new THREE.DirectionalLight(0xfff4e2, 3); key.position.set(4, 7, 5); 
 const fill = new THREE.DirectionalLight(0xc9ddff, 1.3); fill.position.set(-4, 3, -3); scene.add(fill);
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ color: 0x343b44, roughness: .95 }));
 ground.rotation.x = -Math.PI / 2; scene.add(ground);
+const viewGroup=new THREE.Group();scene.add(viewGroup);
 const loader = new GLTFLoader();
 const originalMaterials = new Map();
 const originalTextures = new Map();
@@ -48,13 +50,26 @@ const session = new AssetSession({
   makeMixer: root => new THREE.AnimationMixer(root),
   beforeRelease: restoreMaterials
 });
-let assets = [], selected = null, shuttingDown = false;
+let assets = [], references = [], selected = null, shuttingDown = false;
+let framingCenter = [0,0,0], aspect = 1;
+function compareCamera() {
+ const perspective = $('camera-preset').value === 'perspective';
+ if (Boolean(camera.isPerspectiveCamera) !== perspective) {camera = perspective ? new THREE.PerspectiveCamera(40,aspect,.01,2000) : new THREE.OrthographicCamera(-1,1,1,-1,.01,2000);controls.object=camera;}
+ const height=Number($('frame-meters').value),offset=Number($('target-offset').value);
+ if(!Number.isFinite(height)||height<=0||!Number.isFinite(offset))return;
+ controls.target.copy(frameCamera(camera,{preset:$('camera-preset').value,center:framingCenter,height,aspect,offset}));controls.minDistance=height*.01;controls.maxDistance=height*100;controls.update();
+}
+function selectReference(){showReference($('reference-image'),$('reference-link'),$('reference-description'),referencesForAsset(selected,references).find(ref=>ref.id===$('reference').value));}
+
 function option(value, text) { const node = document.createElement('option'); node.value = value; node.textContent = text; return node; }
 function applyMaterials() {
   restoreMaterials();
   const root = session.current?.gltf.scene;
   if (!root) return;
   const mode = $('material').value;
+  if(mode === 'silhouette') normalMaterial = new THREE.MeshBasicMaterial({color:0x050505,wireframe:$('wireframe').checked});
+  ground.visible=mode!=='silhouette';
+  scene.background.set(mode==='silhouette'?'#eeeeee':'#202730');
   if (mode === 'normals') normalMaterial = new THREE.MeshNormalMaterial({ wireframe: $('wireframe').checked });
   root.traverse(node => {
     if (!node.isMesh) return;
@@ -72,19 +87,17 @@ function applyMaterials() {
   });
 }
 function fit() {
+  resizeViewport(); // Measure the current canvas before first-load or user-triggered framing.
   const root = session.current?.gltf.scene;
   if (!root) return;
-  root.updateMatrixWorld(true);
-  const box = new THREE.Box3().setFromObject(root);
+  const box = comparisonBounds(viewGroup, root);
   if (box.isEmpty()) return;
   const size = box.getSize(new THREE.Vector3()), center = box.getCenter(new THREE.Vector3());
-  const radius = Math.max(size.length() / 2, .05);
-  const vertical = THREE.MathUtils.degToRad(camera.fov / 2), horizontal = Math.atan(Math.tan(vertical) * camera.aspect);
-  const distance = radius / Math.sin(Math.min(vertical, horizontal)) * 1.2;
-  camera.position.copy(center).add(new THREE.Vector3(1, .65, 1).normalize().multiplyScalar(distance));
-  camera.near = Math.max(radius / 1000, .001); camera.far = Math.max(distance * 20, 100); camera.updateProjectionMatrix();
-  controls.target.copy(center); controls.maxDistance = distance * 8; controls.minDistance = radius * .2; controls.update();
-  ground.position.y = box.min.y - .005; ground.scale.setScalar(Math.max(1, radius));
+  const radius = Math.max(size.length()/2,.05);
+  framingCenter=center.toArray(); $('target-offset').value='0';
+  $('frame-meters').value=String(Number((Math.max(size.length(),.01)*1.15/Math.min(aspect,1)).toFixed(4)));
+  $('dimensions').textContent=`GLB bounds: X ${size.x.toFixed(3)} m · Y ${size.y.toFixed(3)} m · Z ${size.z.toFixed(3)} m. Asset scale unchanged.`;
+  compareCamera();ground.position.y=box.min.y-.005;ground.scale.setScalar(Math.max(1,radius));
 }
 function animateSelection() {
   const current = session.current; if (!current) return;
@@ -113,16 +126,18 @@ async function loadLOD() {
   status(`Loading ${selected.name} · ${state.value} · LOD ${lod.level}…`);
   try {
     const current = await session.load(lod.url); if (!current) return;
-    scene.add(current.gltf.scene);
+    viewGroup.add(current.gltf.scene);
     current.gltf.animations.forEach((clip, i) => $('animation').append(option(String(i), clip.name || `Clip ${i + 1}`)));
     metrics(current.gltf); applyMaterials(); fit();
     status(`${selected.name} · ${state.value} · LOD ${lod.level} loaded. ${selected.status || 'PRODUCTION_CANDIDATE_UNREVIEWED'}`);
   } catch (error) { status(`Unable to load asset: ${error.message}`); }
 }
 function selectAsset() {
+  viewGroup.rotation.set(0,0,0);for(const axis of ['x','y','z'])$('rotation-'+axis).value='0';
   selected = assets.find(asset => asset.key === $('asset').value);
   $('identity').textContent = selected ? `ID: ${selected.id}${selected.archetypeId ? ` · Archetype: ${selected.archetypeId}` : ''}${selected.variant ? ` · Variant: ${selected.variant}` : ''}` : '';
   $('state').replaceChildren(...(selected?.states || []).map(state => option(state.value, state.label)));
+  $('reference').replaceChildren(...referencesForAsset(selected,references).map(ref=>option(ref.id,ref.name)));selectReference();
   selectState();
 }
 function selectState() {
@@ -131,6 +146,9 @@ function selectState() {
   $('lod').disabled = (state?.lods.length || 0) < 2;
   loadLOD();
 }
+for(const axis of ['x','y','z'])$('rotation-'+axis).addEventListener('change',()=>{const angle=Number($('rotation-'+axis).value);if(Number.isFinite(angle)){viewGroup.rotation[axis]=THREE.MathUtils.degToRad(angle);fit();}});
+$('reference').addEventListener('change',selectReference);
+for(const id of ['camera-preset','frame-meters','target-offset'])$(id).addEventListener('change',compareCamera);
 $('asset').addEventListener('change', selectAsset); $('lod').addEventListener('change', loadLOD);
 $('state').addEventListener('change', selectState);
 $('animation').addEventListener('change', animateSelection);
@@ -140,7 +158,8 @@ function resizeViewport() {
   const size = viewportSize(rect.width, rect.height, window.devicePixelRatio);
   if (!size) return; // Do not replace the camera aspect with zero/NaN in a hidden panel.
   renderer.setPixelRatio(size.pixelRatio); renderer.setSize(size.width, size.height, false);
-  camera.aspect = size.width / size.height; camera.updateProjectionMatrix();
+  aspect = size.width / size.height;
+  if(camera.isPerspectiveCamera){camera.aspect=aspect;camera.updateProjectionMatrix();}else{const height=camera.top-camera.bottom;camera.left=-height*aspect/2;camera.right=height*aspect/2;camera.updateProjectionMatrix();}
 }
 const resize = new ResizeObserver(resizeViewport); resize.observe(canvas.parentElement);
 window.addEventListener('resize', resizeViewport);
@@ -169,6 +188,7 @@ function cameraKey(event) {
   const action = keyboardAction(event, canvas); if (!action || !controls.enabled) return;
   event.preventDefault();
   if (action === 'fit') { fit(); return; }
+  if(camera.isOrthographicCamera && ['in','out'].includes(action)){camera.zoom*=action==='in'?1.1:1/1.1;camera.updateProjectionMatrix();return;}
   const offset = camera.position.clone().sub(controls.target), spherical = new THREE.Spherical().setFromVector3(offset);
   const angle = Math.PI / 24;
   if (action === 'left') spherical.theta -= angle;
@@ -187,12 +207,13 @@ function shutdown(event) {
   window.removeEventListener('resize', resizeViewport); window.removeEventListener('pagehide', shutdown);
   document.removeEventListener('focusin', updateInputGate); document.removeEventListener('focusout', updateInputGate);
   canvas.removeEventListener('pointerdown', focusCanvas, true); canvas.removeEventListener('keydown', cameraKey);
+  showReference($('reference-image'),$('reference-link'),$('reference-description'),null);
   session.dispose(); controls.dispose(); ground.geometry.dispose(); ground.material.dispose(); renderer.dispose();
 }
 window.addEventListener('pagehide', shutdown);
 try {
   const response = await fetch('./production-assets/catalog.json'); if (!response.ok) throw new Error(`Catalog HTTP ${response.status}`);
-  const catalog = await response.json(); const errors = [];
+  const catalog = await response.json(); references=catalog.references || []; const errors = [];
   for (const manifest of catalog.manifests) {
     try { const response = await fetch(`./production-assets/${manifest}`); if (!response.ok) throw new Error(`HTTP ${response.status}`); assets.push(...normalizeManifest(await response.json(), manifest)); }
     catch (error) { errors.push(`${manifest}: ${error.message}`); }

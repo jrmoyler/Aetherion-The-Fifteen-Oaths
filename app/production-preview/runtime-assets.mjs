@@ -35,5 +35,22 @@ export function collectRuntimeAssets(directory) {
    }
   }
  }
- return {manifests,files};
+ const references=[];
+ const indexPath=path.resolve(root,'../../AETHERION_CANON/11_REFERENCE_SHEETS/REFERENCE_INDEX.json');
+ const requested=new Set(manifests.flatMap(name=>normalizeManifest(JSON.parse(fs.readFileSync(path.join(root,name),'utf8')),name).flatMap(row=>row.referenceIds)));
+ if(requested.size){
+  const index=JSON.parse(fs.readFileSync(indexPath,'utf8'));
+  const referenceRoot=fs.realpathSync(path.resolve(root,'../references'));
+  for(const id of requested){
+   const record=index.records.find(record=>record.id===id || record.source_id===id);
+   if(!record)throw new Error(`Unknown reference ID: ${id}`);
+   if(!/^assets\/references\/[^/]+\/original\.(png|jpg|jpeg|webp)$/.test(record.repository_path))throw new Error('Reference must resolve to an indexed original image');
+   const source=fs.realpathSync(path.resolve(root,'../..',record.repository_path));
+   if(!source.startsWith(referenceRoot+path.sep))throw new Error('Reference escapes immutable reference root');
+   const name='__references/'+record.repository_path.slice('assets/references/'.length);
+   files.set(name,source);
+   references.push({id,name:record.name,url:'./production-assets/'+name,sourcePath:record.repository_path,canonicalId:record.id});
+  }
+ }
+ return {manifests,files,references};
 }

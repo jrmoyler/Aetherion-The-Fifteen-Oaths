@@ -25,6 +25,6 @@ export function normalizeManifest(data, manifest) {
     for (const state of ['damaged', 'stowed']) {
       if (row.files?.[state] && state !== primaryState) states.push({value: state, label: `${state} · separate export`, lods: [{level:0,url:assetURL(manifest,row.files[state])}]});
     }
-    return { ...row, key: `${manifest}:${row.id}`, name: row.name || row.id, oath: data.oath_id || manifest.split('/')[0], lods:normalizedLODs, states };
+    return { ...row, key: `${manifest}:${row.id}`, name: row.name || row.id, referenceIds: [...new Set([...(data.referenceIds || []), ...(row.referenceIds || [])])], oath: data.oath_id || manifest.split('/')[0], lods:normalizedLODs, states };
   });
 }

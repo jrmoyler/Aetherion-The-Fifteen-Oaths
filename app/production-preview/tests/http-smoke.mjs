@@ -29,11 +29,16 @@ try {
       assert.equal(sha(bytes),sha(source));assert.equal(bytes.subarray(0,4).toString(),'glTF');glbs++;
     }
   }
+  for(const reference of catalog.references || []){
+    const response=await fetch(new URL(reference.url,base+'/'));assert.equal(response.status,200);
+    const bytes=Buffer.from(await response.arrayBuffer());const original=await fs.readFile(new URL('../../../'+reference.sourcePath,import.meta.url));assert.equal(sha(bytes),sha(original),'Original reference bytes unchanged');
+  }
+  assert.equal((await fetch(base+'/production-assets/__references/unlisted/original.png')).status,404);
   if(built){
     const expected=collectRuntimeAssets(fileURLToPath(new URL('../../../assets/production/',import.meta.url)));
     async function walk(directory,relative=''){const result=[];for(const entry of await fs.readdir(directory,{withFileTypes:true})){const name=relative+entry.name;if(entry.isDirectory())result.push(...await walk(directory+'/'+entry.name,name+'/'));else result.push(name);}return result.sort();}
     assert.deepEqual(await walk(fileURLToPath(new URL('../dist/production-assets/',import.meta.url))),[...expected.files.keys(),'catalog.json'].sort(),'Build must contain exactly runtime allowlist');
   }
   if(!built){const escape=await fetch(base+'/production-assets/%2e%2e%2f%2e%2e%2fpackage.json');assert.equal(escape.status,404);}
-  console.log(JSON.stringify({scope:'Local HTTP only; no browser/GPU',mode:built?'built':'development',status:'PASS',manifests:catalog.manifests.length,glbsByteVerified:glbs}));
+  console.log(JSON.stringify({scope:'Local HTTP only; no browser/GPU',mode:built?'built':'development',status:'PASS',manifests:catalog.manifests.length,glbsByteVerified:glbs,referencesByteVerified:(catalog.references || []).length}));
 } finally { if(built)await new Promise((resolve,reject)=>server.httpServer.close(error=>error?reject(error):resolve()));else await server.close(); }

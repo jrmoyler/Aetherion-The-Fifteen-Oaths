@@ -1,5 +1,6 @@
 /** Capture bounded preview evidence; detect concurrent artist writes honestly. */
 import fs from 'node:fs';
+import {collectRuntimeAssets} from '../runtime-assets.mjs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -15,6 +16,7 @@ const commands=[
  ['http-development.log',['run','test:http']],
  ['http-built.log',['run','test:http:build']]
 ];
+const referenceInputs=collectRuntimeAssets(production).references.map(reference=>{const bytes=fs.readFileSync(path.resolve(production,'../..',reference.sourcePath));return {path:reference.sourcePath,sha256:sha(bytes),bytes:bytes.length};});
 const results=[];
 for(const [log,args] of commands){
  const result=spawnSync('npm',args,{cwd:app,encoding:'utf8',timeout:180000,maxBuffer:20*1024*1024});
@@ -27,6 +29,7 @@ const source=[...report.manifests,...report.records].map(entry=>{
  const current=fs.readFileSync(path.join(production,entry.path));
  return {path:`assets/production/${entry.path}`,sha256:entry.sha256,bytes:entry.bytes,currentSha256:sha(current),unchangedAfterChecks:sha(current)===entry.sha256};
 });
+source.push(...referenceInputs.map(entry=>{const currentSha256=sha(fs.readFileSync(path.resolve(production,'../..',entry.path)));return {...entry,currentSha256,unchangedAfterChecks:currentSha256===entry.sha256};}));
 function inputs(directory,relative=''){
  return fs.readdirSync(directory,{withFileTypes:true}).flatMap(entry=>{
   if(['node_modules','dist','validation','VALIDATION.md'].includes(entry.name))return [];
@@ -49,6 +52,7 @@ const markdown=[
  '',`- Unit tests: **${passes} passed**.`,
  `- Actual Three.js GLTFLoader CPU checks: **${report.summary.pass}/${report.summary.files} GLB state/LOD records passed**, from **${report.manifests.length} manifests**.`,
  `- Development HTTP byte checks: **${http.development.glbsByteVerified} GLBs**. Built preview HTTP byte checks: **${http.built.glbsByteVerified} GLBs**.`,
+ `- Original reference byte checks: **${http.development.referencesByteVerified || 0} development / ${http.built.referencesByteVerified || 0} built**.`,
  '- Production build passed; bundle size warnings are retained in the build log.',
  `- Tested inputs changed after capture: **${changed.length}**. ${changed.length?'Artists rewrote these files during validation; do not treat this as a matching current-source snapshot. Rerun when writers finish.':'All tested GLBs and manifests still matched captured SHA-256 hashes at the end of these checks.'}`,
  '', '| Authored state | Tested GLB/LOD records |','|---|---:|',

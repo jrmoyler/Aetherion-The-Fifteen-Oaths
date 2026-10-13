@@ -47,3 +47,7 @@ Run `npm run dev` or build and run `npm run preview` without disabling the brows
 | Resource/performance | Repeat asset/state/LOD changes and inspect renderer/process memory and frame timings with browser performance tools/SpectorJS when available | Representative scene plus exported diagnostics |
 
 Current status for all real-browser rows: **BLOCKED — screenshots not captured**. GPU material parity, authored animation quality, screenshot-level responsive layout, and target-device performance remain unverified.
+
+### Reference comparison acceptance
+
+Pending supported GPU browser: select assets from multiple families; verify the labeled original image is correct; switch images during loading; check world-axis orthographic and perspective presets; rotate the view group 90° around each axis and fit; compare silhouette, wireframe and PBR; verify meter framing and offsets; confirm original asset dimensions remain unchanged and rotations reset on selection. Capture paired original/3D screenshots at desktop and narrow widths. These checks remain BLOCKED here, not visually approved by Node tests.
