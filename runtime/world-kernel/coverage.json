@@ -1,0 +1,532 @@
+{
+  "schema_version": "1.0.0",
+  "status": "PARTIAL_CPU_IMPLEMENTATION_UNAPPROVED",
+  "sources": {
+    "WORLD_REGION_GRAPH.json": {
+      "sha256": "25b086c36506a3dba47ce629684aedb3476e8d24567ee43a7b2f3ff94c53c96b",
+      "bytes": 55102
+    },
+    "WORLD_POI_REGISTRY.json": {
+      "sha256": "920134133e69ee9aa56522981c989cc553969f9228581fb01c2e025db1267a48",
+      "bytes": 417383
+    },
+    "WORLD_EVENT_REGISTRY.json": {
+      "sha256": "f9daf537d4945b47a506033f63d7a94b79dc0138bc71551d84d995810df4502f",
+      "bytes": 175037
+    },
+    "STREAMING_PROTOTYPE_CONTRACTS.json": {
+      "sha256": "93848bc1e3d4b42fea6a8e3c647f59e8cf4a84473d452fb0ab48f70804bf498c",
+      "bytes": 23418
+    },
+    "DELIVERABLE_MANIFEST.json": {
+      "sha256": "07920f0a93a0a0b5ffc98c9dba038ad62d8df90e14a1897c82088012d1c0e928",
+      "bytes": 4591
+    }
+  },
+  "registryCoverage": {
+    "regions": 15,
+    "pois": 318,
+    "edges": 30
+  },
+  "baselinePoiCount": 63,
+  "deliverableFamilies": [
+    {
+      "id": "p2-deliverable-01",
+      "path": "CONTINENT_MASTER_PLAN.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-02",
+      "path": "CONTINENT_GEOGRAPHY.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-03",
+      "path": "CONTINENT_MAP_SPECIFICATION.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-04",
+      "path": "WORLD_REGION_GRAPH.json",
+      "productionComplete": false,
+      "implementation": "PARTIAL: semantic topology only"
+    },
+    {
+      "id": "p2-deliverable-05",
+      "path": "FIFTEEN_REGION_BLUEPRINTS/",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-06",
+      "path": "CAPITAL_CITY_BLUEPRINTS/",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-07",
+      "path": "SETTLEMENT_REGISTRY.json",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-08",
+      "path": "WORLD_POI_REGISTRY.json",
+      "productionComplete": false,
+      "implementation": "PARTIAL: semantic ID lookup only"
+    },
+    {
+      "id": "p2-deliverable-09",
+      "path": "TRANSPORTATION_NETWORK.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-10",
+      "path": "REGIONAL_BIOME_SPECIFICATIONS.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-11",
+      "path": "WORLD_ECOLOGY_SYSTEM.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-12",
+      "path": "DYNAMIC_WEATHER_SYSTEM.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-13",
+      "path": "NPC_CIVILIZATION_SYSTEM.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-14",
+      "path": "WORLD_EVENT_REGISTRY.json",
+      "productionComplete": false,
+      "implementation": "PARTIAL: trusted in-memory phase/receipt kernel only"
+    },
+    {
+      "id": "p2-deliverable-15",
+      "path": "DUNGEON_AND_EXPLORATION_PLAN.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-16",
+      "path": "ARCHITECTURAL_KIT_REGISTRY.json",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-17",
+      "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-18",
+      "path": "WORLD_STREAMING_ARCHITECTURE.md",
+      "productionComplete": false,
+      "implementation": "PARTIAL: coordinates and residency state only"
+    },
+    {
+      "id": "p2-deliverable-19",
+      "path": "WORLD_CONSTRUCTION_ROADMAP.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    },
+    {
+      "id": "p2-deliverable-20",
+      "path": "CANON_ALIGNMENT_AND_GAP_REPORT.md",
+      "productionComplete": false,
+      "implementation": "NO_IMPLEMENTED_WORLD_EVIDENCE"
+    }
+  ],
+  "streamingContracts": [
+    {
+      "id": "p2-streaming-09-coordinate-rebase",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [
+        "normalizePosition: signed cell normalization with configurable width"
+      ],
+      "missing": [
+        "Origin epoch and synchronized camera/physics/VFX rebase",
+        "Source adapter rebase comparison"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-terrain-seams",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [],
+      "missing": [
+        "Authored terrain, deterministic seams, watershed constraints and physical route tests"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-cell-readiness",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [
+        "CellResidency: monotonic generations, ordered readiness, stale completion refusal",
+        "Shared resource leases, exact final disposal and failure cleanup"
+      ],
+      "missing": [
+        "Actual asynchronous IO/decoder/GPU uploads",
+        "Pinned collision and protected anchors",
+        "Memory budget, hysteresis and movement prefetch",
+        "Atomic side-by-side revision swap"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-render-visibility",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [],
+      "missing": [
+        "LOD, occlusion, instance identity, lighting, weather and water rendering",
+        "Device measurements and silhouette acceptance"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-interior-handover",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [],
+      "missing": [
+        "Permissions, pinned exits, committed portal handover and disconnect recovery"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-population-nav",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [
+        "Semantic region graph routing; not a navmesh or collision route"
+      ],
+      "missing": [
+        "Spawn ownership leases, actor clearance, nav links and schedules"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-destruction-commit",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [],
+      "missing": [
+        "Whitelisted mesh/collision/nav atomic commit",
+        "Durable contribution/reward receipts and protected detours"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-replication-interest",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [],
+      "missing": [
+        "Authority transport, ordered replication, epoch enforcement and private interest filtering"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-save-recovery",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [],
+      "missing": [
+        "Durable journal transactions, validated snapshot restore, migrations and crash recovery"
+      ]
+    },
+    {
+      "id": "p2-streaming-09-platform-gate",
+      "canon_status": "PROPOSED",
+      "productionComplete": false,
+      "implemented": [],
+      "missing": [
+        "Real engine import/gameplay, nominated hardware and GPU/performance/accessibility gates"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "world-event-01",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-02",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-03",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-04",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-05",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-06",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-07",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-08",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-09",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-10",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-11",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-12",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-13",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-14",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    },
+    {
+      "id": "world-event-15",
+      "canon_status": "PROPOSED",
+      "status": "PARTIAL_CPU_KERNEL",
+      "implemented": [
+        "Strict named objective predicate parsing",
+        "Phase order and timer gates",
+        "Distinct authored socket receipts and duplicate/conflict refusal",
+        "Safety/offline transition to recovery without objective rewards"
+      ],
+      "missing": [
+        "Production authored sockets",
+        "NPC assistance integration",
+        "Authority eligibility, catchment arbiter and schedule",
+        "Durable outcome/reward journal, finite credit allocation",
+        "Physical hazards, navigation, protected service restoration and presentation"
+      ]
+    }
+  ],
+  "boundary": "No source castable modification or enabled event extension. No physical POI placement. No engine, network, persistence, art or gameplay certification."
+}

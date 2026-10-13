@@ -282,6 +282,7 @@ class Verification:
         if packages_ready:
             independent += [
                 ('root', ['npm', 'test']), ('source', ['npm', 'run', 'test:source']),
+                ('world-kernel', ['npm', 'run', 'test:world']),
                 ('production-node', ['npm', '--prefix', PACKAGES['production'], 'test']),
             ]
         else:

@@ -61,3 +61,9 @@ Three original source GLB identities retain known structural defects (dragon, ma
 The [Three.js preview](../../app/production-preview/README.md) supports explicit `AETHERION_INCLUDE_REVIEWS=1` mode with five hash-pinned visual review GLBs. Source files, collision meshes, diagnostics and documents remain outside its runtime delivery allowlist. Default mode is unchanged. CPU/HTTP checks do not establish texture decoding, browser GPU appearance or gameplay acceptance.
 
 The separate [27-image proposed reference expansion](../../assets/references/proposed-expansion-2026-10-13/README.md) was reconciled additively from its upload commit. All 70 listed payload hashes matched and all 27 PNGs decoded locally. These images remain proposed; original references were preserved.
+
+## Partial world-state implementation
+
+The additive [world kernel](../../runtime/world-kernel/README.md) implements contract-defined region/POI resolution, signed-cell normalization, request generations/resource leases and event objective/phase state. It reads all 318 POIs and 15 event predicates without altering canon or the 100 source castables. Its [coverage ledger](../../runtime/world-kernel/coverage.json) maps all 20 deliverable families and 10 streaming contracts; none is marked complete.
+
+The installed package passes 50 tests. [Independent review](../../validation/production/world-kernel-review/final-review.md) found and verified repairs for six correctness issues, with seven additional regression tests. This is a CPU state implementation for a trusted caller: physical streaming, authored event sockets, network authority, durable persistence and engine gameplay integration remain missing.

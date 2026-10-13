@@ -1,0 +1,54 @@
+{
+  "sourceSHA256": "a592ccdbcda32bff29f00a879a034249d62a944cf91fc48503087a088f8258ff",
+  "reentrantDisposal": {
+    "callbacks": [
+      {
+        "key": "A",
+        "usersAtDisposal": 0
+      },
+      {
+        "key": "B",
+        "usersAtDisposal": 1
+      }
+    ],
+    "replacement": {
+      "cellKey": "replacement",
+      "revision": "v1",
+      "generation": 1,
+      "stage": "REQUESTED",
+      "resources": [
+        "B"
+      ]
+    },
+    "usersB": 1
+  },
+  "foreignManagerToken": {
+    "retired": true,
+    "otherManagerCell": {
+      "cellKey": "same-cell",
+      "stage": "UNREQUESTED"
+    }
+  },
+  "replayedReceipt": {
+    "error": "Clock moved backwards",
+    "retainedReceipts": 2
+  },
+  "failedSafetyContribution": {
+    "error": "Unsafe contribution",
+    "phase": "response",
+    "outcome": null
+  },
+  "hugeClock": {
+    "entered": 1e+308,
+    "deadline": 1e+308,
+    "effectiveForecastDuration": 0,
+    "authoredDuration": 120000
+  },
+  "duplicateBaseline": {
+    "accepted": {
+      "regions": 15,
+      "pois": 318,
+      "edges": 30
+    }
+  }
+}
