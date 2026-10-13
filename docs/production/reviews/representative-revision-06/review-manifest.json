@@ -1,0 +1,57 @@
+{
+  "status": "UNAPPROVED_REVIEW_ONLY",
+  "productionPromotion": false,
+  "previousReview": "representative-revision-05",
+  "entries": [
+    {
+      "id": "kiln-ninja-v10",
+      "title": "Kiln ninja V10 \u2014 focused face contour, unapproved",
+      "references": [
+        90,
+        60
+      ],
+      "changes": "Reduced sharp nasal projection and reshaped lip/chin contour; V9 eye-occlusion repair retained. Two final CPU renders only.",
+      "remaining": "NOT EXACT: weak nasal tip/ala and mouth/chin planes, round eyes in narrow openings, pinched corners, patterned hair/cap/nape gaps and simplified ear.",
+      "views": [
+        {
+          "label": "Final V10 focused front",
+          "path": "kiln-ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png"
+        },
+        {
+          "label": "Final V10 focused profile",
+          "path": "kiln-ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png"
+        },
+        {
+          "label": "Original / V9 / V10 front",
+          "path": "kiln-ninja-v10/front-comparison.png"
+        },
+        {
+          "label": "Original / V9 / V10 profile",
+          "path": "kiln-ninja-v10/profile-comparison.png"
+        },
+        {
+          "label": "Historical V8b / V9 eye front comparison",
+          "path": "historical-diagnostics/ninja-v9/front-comparison.png"
+        },
+        {
+          "label": "Historical V8b / V9 eye profile comparison",
+          "path": "historical-diagnostics/ninja-v9/profile-comparison.png"
+        }
+      ],
+      "sources": [
+        "kiln-ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "kiln-ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-090/original.png",
+          "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+        },
+        {
+          "path": "assets/references/reference-060/original.png",
+          "sha256": "654a8acda2f430f72f92d0c0a45cdc50e64c0dd00fbb37f12b270fbb8815d788"
+        }
+      ]
+    }
+  ]
+}

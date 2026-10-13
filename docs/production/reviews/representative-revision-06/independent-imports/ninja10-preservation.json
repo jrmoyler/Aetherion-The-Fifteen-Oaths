@@ -1,0 +1,1619 @@
+{
+  "scope": "Normalized recipe AST and exact semantic GLB accessor-byte comparisons; not appearance or proof of all possible authoring behavior",
+  "recipeChangedNodes": [
+    "face_anatomy"
+  ],
+  "recipeOnlyHairAndOutputChanged": false,
+  "exports": [
+    {
+      "file": "kiln-ninja-ensemble-candidate.glb",
+      "animationsIdentical": true,
+      "skinsIdentical": true,
+      "primitives": [
+        {
+          "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+          "identical": false,
+          "old": {
+            "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "5f06af547bb5bc877a94a3f790bc83e0fe4125c3cec19ece0ee9cea0e4c4c0ea"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "b09270d2d08c2429da196ce7cad156ce9ec012759184b0c5046c60a1d027be91"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "5d4cf6c968743f8c5a03593766d7b5411f3009e352d043fd32ad96f7552170b9"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "212fcbcf52478eeead713bb6fc17ab2e49d9a35970058510ca8de0fee281949c"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": true,
+                "sha256": "e7e65c4abc3e291c3f40638bbd4e45aacf453ddacfaf0dec3e9174ac4953e83f"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "3b5e33fb970e0b4de63f7da0a785d4bbb7d97300d58a8a33a2bf3299c0e61c6b"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "eee9c4a17f2a04b2182555903c3b507e858a7f7d79e5751a42675b6172b8391a"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 76860,
+              "normalized": false,
+              "sha256": "47b1f6adc5a6772b94e0d8baf6fd39bb781ae0a5a3910bbf57af1e34260afa79"
+            }
+          },
+          "new": {
+            "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "5f06af547bb5bc877a94a3f790bc83e0fe4125c3cec19ece0ee9cea0e4c4c0ea"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "b09270d2d08c2429da196ce7cad156ce9ec012759184b0c5046c60a1d027be91"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "5d4cf6c968743f8c5a03593766d7b5411f3009e352d043fd32ad96f7552170b9"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "420bf55e2adaa39d14d79d29c3b876fd60b0553f88d5a529d6b7081e66fa9765"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": true,
+                "sha256": "e7e65c4abc3e291c3f40638bbd4e45aacf453ddacfaf0dec3e9174ac4953e83f"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "3b5e33fb970e0b4de63f7da0a785d4bbb7d97300d58a8a33a2bf3299c0e61c6b"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 29508,
+                "normalized": false,
+                "sha256": "eee9c4a17f2a04b2182555903c3b507e858a7f7d79e5751a42675b6172b8391a"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 76860,
+              "normalized": false,
+              "sha256": "47b1f6adc5a6772b94e0d8baf6fd39bb781ae0a5a3910bbf57af1e34260afa79"
+            }
+          }
+        },
+        {
+          "material": "Textured skin with continuous anatomical vertex tint",
+          "identical": false,
+          "old": {
+            "material": "Textured skin with continuous anatomical vertex tint",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9464,
+                "normalized": false,
+                "sha256": "afedd7c9d78ebb154c8242a53b1b3faea0061148a39c16478fc99eb3bbfaffc2"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9464,
+                "normalized": false,
+                "sha256": "f9e8740be77d25d7222a66bb9f74ca4b5c2542f4f7fde3790a5556da9c4e9255"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 9464,
+                "normalized": false,
+                "sha256": "26e5a13767c42bea67faeb5d8075ca1c04217ecafefad4e3e83d73599eb365f5"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9464,
+                "normalized": false,
+                "sha256": "fd9bcd01a3c605832f6ec4eb2e8d899ddcb44d068c0bc88f17cf6d33efac88dc"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 9464,
+                "normalized": true,
+                "sha256": "f1c569ef2662d760149456ad97679b34a83f885c714d52aea143cda31c130f40"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 9464,
+                "normalized": false,
+                "sha256": "58397751a6f7bef7edc6533332930abc302893d1129c3540b9469c725816bc4f"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9464,
+                "normalized": false,
+                "sha256": "8a8c8e999ba8d599e89c041cad3c8d0658cc5e10f12f521fd14347fa9999fa39"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 47958,
+              "normalized": false,
+              "sha256": "6a91696b85f74ff7514d5dd47c0f8ba556610523553e67d8485d0746694ab324"
+            }
+          },
+          "new": {
+            "material": "Textured skin with continuous anatomical vertex tint",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9391,
+                "normalized": false,
+                "sha256": "3d998a60f92af37d9cf8b66b21c71ea80ef4d1cd0be7b63f984d3d2c2c633d60"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9391,
+                "normalized": false,
+                "sha256": "0fd3385f0c766ac8499741c17783fb50bc926a703cfbe1a3dcfe68599a0c58e5"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 9391,
+                "normalized": false,
+                "sha256": "0eb973d858ee324ef406c92650ad28284950d431aa09431957313a2578d40dbf"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9391,
+                "normalized": false,
+                "sha256": "1b0dab5ee1bc5f32a6ccf6a4ce15b9e7adb3c25394d2c0476dd95842beb8fe94"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 9391,
+                "normalized": true,
+                "sha256": "aadb9859564c8d059b235f1b8c601f4abb0b181a54d098afecffecd2ffc28ba6"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 9391,
+                "normalized": false,
+                "sha256": "c14c0bca17c3e7c14daaf3c7ecb140cf3fbef108f1495f006f94e5b54eee89f9"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9391,
+                "normalized": false,
+                "sha256": "c8cca56aabd0e6f937a5759711f63db51c63ee06f241da57a1c0ff010c87c810"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 47958,
+              "normalized": false,
+              "sha256": "3709066f9e920fd31e51bd87bc19cccc7b8a97fd39ae5caf76eb209865aa6ba1"
+            }
+          }
+        },
+        {
+          "material": "Soot black hair PBR",
+          "identical": false,
+          "old": {
+            "material": "Soot black hair PBR",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 552,
+                "normalized": false,
+                "sha256": "46d4de94bfa0611ac5e4fadb24fbe19e5179f78012ad7d27ee920bfb93cedb84"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 552,
+                "normalized": false,
+                "sha256": "1141493e42df38cad2639839e48b5583a2b50198817ed308a2d2b0e17292f826"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 552,
+                "normalized": false,
+                "sha256": "0289334f8946002a2dc1616343b9eedbe1423703838b7bb4c2874cf8c3832e05"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": false,
+                "sha256": "003a1a0b01b6b4fffff3e3e2a32a8b8a61538d1b784376338a8d844c2da1dc0f"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": true,
+                "sha256": "b5e4bcf1ad1791357dc5503b9970b0934f856135efc07407ce6b83363f8c67e7"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": false,
+                "sha256": "baf8c4aff29ab891c1619a772b1de0be8d4db6ea70eb054907aac0991feacd5a"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": false,
+                "sha256": "e33632f976da2eaf021d4873bb46c70f6b5503cefb69da7d87f755a01ab96e8a"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 1860,
+              "normalized": false,
+              "sha256": "26f57f03cad5e71e02daf2c81f53f4f7decade1e64f36261dab02cb031a9a6f9"
+            }
+          },
+          "new": {
+            "material": "Soot black hair PBR",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 552,
+                "normalized": false,
+                "sha256": "33d34f23fdfe493c2ad8880afd073fef773e8cf5fdf5acbb21c18ae388520342"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 552,
+                "normalized": false,
+                "sha256": "7ea11df58532fed408991d306aa3a6bc49a580b15e8def05ca738ac3e889ad44"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 552,
+                "normalized": false,
+                "sha256": "d3669a73bb07eb8fd6895f6b321e5b9b30e7a25f56bcafae6ea7a2be6a47b894"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": false,
+                "sha256": "76425aee995ad291a4fe555cf50a63936241947c0a12216bdb33e466c5211daf"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": true,
+                "sha256": "b5e4bcf1ad1791357dc5503b9970b0934f856135efc07407ce6b83363f8c67e7"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": false,
+                "sha256": "baf8c4aff29ab891c1619a772b1de0be8d4db6ea70eb054907aac0991feacd5a"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 552,
+                "normalized": false,
+                "sha256": "e33632f976da2eaf021d4873bb46c70f6b5503cefb69da7d87f755a01ab96e8a"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 1860,
+              "normalized": false,
+              "sha256": "26f57f03cad5e71e02daf2c81f53f4f7decade1e64f36261dab02cb031a9a6f9"
+            }
+          }
+        },
+        {
+          "material": "V8 mapped soot hair volume material",
+          "identical": false,
+          "old": {
+            "material": "V8 mapped soot hair volume material",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "488872884d1b0d630de6dc4997c755e710b1e26ed9818f7e3176f3831b5e412c"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "4a2aa047ceb96504d899f26416098e5da82f575373a4b1652df1dca837a413d1"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "f07c0d71474ec42e520403fbc228121c68658c303eeb23db890329bd733e604e"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "3f7f589c7c24b26c11c0674993beadc4180d53df32fc4b21704aee1db4763887"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": true,
+                "sha256": "2344cbc406b11297e09999d87986986fc91e54b5dbfbd70fd2079e7d2ee72de8"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "a6f1c1c2316919dc921aad93e11a66fd4d3c39d722ceac02438ab68ff82cbd62"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "78aa93852c2f134f0b04d5ddc4929b06da27b43623359dbe39db18458c421c8e"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 42024,
+              "normalized": false,
+              "sha256": "49225dc7e16258b16962102ef1dee6e39ae37a03f9f07fc4acf12cdaa47b101b"
+            }
+          },
+          "new": {
+            "material": "V8 mapped soot hair volume material",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "488872884d1b0d630de6dc4997c755e710b1e26ed9818f7e3176f3831b5e412c"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "4a2aa047ceb96504d899f26416098e5da82f575373a4b1652df1dca837a413d1"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "f07c0d71474ec42e520403fbc228121c68658c303eeb23db890329bd733e604e"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "24a09b5fab2412e6c120bdca68c7bf12f17e5a3dff67720a28f75f26d9d0a0f5"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": true,
+                "sha256": "2344cbc406b11297e09999d87986986fc91e54b5dbfbd70fd2079e7d2ee72de8"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "a6f1c1c2316919dc921aad93e11a66fd4d3c39d722ceac02438ab68ff82cbd62"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 9599,
+                "normalized": false,
+                "sha256": "78aa93852c2f134f0b04d5ddc4929b06da27b43623359dbe39db18458c421c8e"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 42024,
+              "normalized": false,
+              "sha256": "49225dc7e16258b16962102ef1dee6e39ae37a03f9f07fc4acf12cdaa47b101b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "kiln-ninja-ensemble-candidate-lod1.glb",
+      "animationsIdentical": true,
+      "skinsIdentical": true,
+      "primitives": [
+        {
+          "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+          "identical": false,
+          "old": {
+            "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 26572,
+                "normalized": false,
+                "sha256": "81b630b8a6a12ccc0fe6eed61f749633c944884c3a66d2ac45d9cd43c8ebcf06"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 26572,
+                "normalized": false,
+                "sha256": "30261ed628c9ab0f1eb8dacd21147a37f7a42ef52883dec61c3152f9e2a3a572"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 26572,
+                "normalized": false,
+                "sha256": "f11cd3bb823edaffb4001badc99aeb25977683028d253b52051a00117a4ded62"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 26572,
+                "normalized": false,
+                "sha256": "d5ca719dfdea98b34794abb5335b22817e16cc11a743917134fa15b14a0d4784"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 26572,
+                "normalized": true,
+                "sha256": "e9f37e7657381931680a3fec77a10074fcbef5750f71590e85b1767d83cb4a52"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 26572,
+                "normalized": false,
+                "sha256": "52f776cfb98a5c2195c0c6dd348c6d8213f72982186b6fe82d6dec1f9fb8be36"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 26572,
+                "normalized": false,
+                "sha256": "f9658c45eb77bc5ad087834fd376d7833332b8541bf4cc091da69a65b0b622d3"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 67770,
+              "normalized": false,
+              "sha256": "799f70c30a50f138b268a6fca50999537aa136364dce5c4018abf97c434ab3d8"
+            }
+          },
+          "new": {
+            "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 26598,
+                "normalized": false,
+                "sha256": "0b0cc659c2fd1fa161962f06fdeea38e26c6b0581047126dc635a2a78c16892a"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 26598,
+                "normalized": false,
+                "sha256": "3701ebf3a5b521f10c965011f8a4476dfe0507fdedbc45cebc8db983e2e288ab"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 26598,
+                "normalized": false,
+                "sha256": "eb18cce97f9b880152aad46838c388ae49fa5e979d64952161f98a26f3ec4941"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 26598,
+                "normalized": false,
+                "sha256": "5f6d0eda8b5a198db9c0f4a27fb225c2e2911d731b1e73063bc1547b1fe3ccb4"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 26598,
+                "normalized": true,
+                "sha256": "aff0ff3cba9dad80ec627be29113a4f13ba5c5e875b3a16ea2ef03423bdf6b26"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 26598,
+                "normalized": false,
+                "sha256": "5895e7a17d19d4eaf5986525d0b619db2162b57af66f0772fa08f301750bd72e"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 26598,
+                "normalized": false,
+                "sha256": "ff57591d12dc8f966a4bfa14f18afbb71f1a84749ed86a3f50d07707f9ce9422"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 67818,
+              "normalized": false,
+              "sha256": "0b4a64826f697f53440859449c12db3098ec9e5408ced77ac5a178193129138f"
+            }
+          }
+        },
+        {
+          "material": "Textured skin with continuous anatomical vertex tint",
+          "identical": false,
+          "old": {
+            "material": "Textured skin with continuous anatomical vertex tint",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 2065,
+                "normalized": false,
+                "sha256": "ef3219ffa8897a3a737b6254710955890a28f5b548a97e0fa5840fff810a0922"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 2065,
+                "normalized": false,
+                "sha256": "212127363c427e1167c870cdd485ec246383f02dd99d8d274652182193a4f4d9"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 2065,
+                "normalized": false,
+                "sha256": "ec3f863b311eff719ef3080db309bfb499e6bac9ea6b2e4368fd50c22d51b3b5"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 2065,
+                "normalized": false,
+                "sha256": "907ff0b1d2aaab3d46508b9c1abb95676ab73262f64b364a9dd086d605637d39"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 2065,
+                "normalized": true,
+                "sha256": "496c71226dcf9a090e1be700979faed600cf740350169fdc8128914b8aa08b99"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 2065,
+                "normalized": false,
+                "sha256": "75d6d17393e6aa0c7b1968624dd20b5146d7494b57c317e9a0aede3f00dcb339"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 2065,
+                "normalized": false,
+                "sha256": "a9646a5c1fa9c003b01e0db6c0c36a45b26e8d6909ebf3b193dad89921e63f0d"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 8448,
+              "normalized": false,
+              "sha256": "8caef0772888be71d9284e0348899ab82f5da1a6754e22c7a1f5ad288b8bd410"
+            }
+          },
+          "new": {
+            "material": "Textured skin with continuous anatomical vertex tint",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 2012,
+                "normalized": false,
+                "sha256": "28021391c46f58621f8aeaa289122e62e26b54071ea99b7188c703ec575828a8"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 2012,
+                "normalized": false,
+                "sha256": "3ba8dc56dc20db70c78cc52c79eca2e54c7c966c812a8f41e6fc48d84163cd05"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 2012,
+                "normalized": false,
+                "sha256": "371b7b1b91bc668fb8f9a0fd74fafd3aa6cb1d913cbebc6740de2142f23cbbee"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 2012,
+                "normalized": false,
+                "sha256": "11ec92ad8f848fccfa9004312f52f3a896a61f33639659185fd775231db7c5b0"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 2012,
+                "normalized": true,
+                "sha256": "db4ce5ece06db2caceeb2c3530f280a28642daccf308cc207002c46f87890d86"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 2012,
+                "normalized": false,
+                "sha256": "46ca42507fda84cc790a1941f9fa474fbb1747a411e8d246e40c99402d3fca93"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 2012,
+                "normalized": false,
+                "sha256": "4b8ae51d8477806b5d7ab5d17fdf767e328f64179718343d4d7a963f570d3a71"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 8340,
+              "normalized": false,
+              "sha256": "42f80f5d2535301065ea8c874f69b1e1252290e636a25e1a2ffbc368d9f69ae6"
+            }
+          }
+        },
+        {
+          "material": "Soot black hair PBR",
+          "identical": false,
+          "old": {
+            "material": "Soot black hair PBR",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 227,
+                "normalized": false,
+                "sha256": "0bd836fc9fb952def9b98d5bc8fad4749e73826a54274ca51a92c370e2f36aba"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 227,
+                "normalized": false,
+                "sha256": "808199456288fb2db2d2f14cf297205e2f3f656de0a86fa76115fe47fb735b6c"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 227,
+                "normalized": false,
+                "sha256": "0ac638969fb4e3721365fe379e59da0db4cafc2c8c55c66ccab3d3e6288bdc53"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 227,
+                "normalized": false,
+                "sha256": "0e02b6bcdf834a8ded1f27f7be936fdd8fc36858022a7868d37bf90977b88267"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 227,
+                "normalized": true,
+                "sha256": "041c4216fe0b7f5bb2887d8a46a4390972ba5c6f4184390dadb8a98f1671d5a6"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 227,
+                "normalized": false,
+                "sha256": "6552833747673aa56f4f22928461a3287c5cde87c24e128052b8bd81d4fda0c7"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 227,
+                "normalized": false,
+                "sha256": "a55225823ce2512f2f3e4b6b353d2488b6d31a6d2b769fd52398b27a24178a1a"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 453,
+              "normalized": false,
+              "sha256": "e5b7e02a65dd16165941ec54174196a5d7b16d69b4650dd16c70c48819245e4b"
+            }
+          },
+          "new": {
+            "material": "Soot black hair PBR",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 229,
+                "normalized": false,
+                "sha256": "d7df91b4f8ecd3850300e62111b6fe9fe8819a630f94ce6f31adf68ff88abba9"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 229,
+                "normalized": false,
+                "sha256": "ca91c74c0e68da334071d847702138ce97bfb228957795f8ee3e9246e72dc3d7"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 229,
+                "normalized": false,
+                "sha256": "7dbcdcebc7f1743ad4528a74cd03318be09b34514f18c2b08c4d848355783db5"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 229,
+                "normalized": false,
+                "sha256": "6a51e8f17bfcc9046a2d5193560b632a84869236d49e735d540d222da735b1d4"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 229,
+                "normalized": true,
+                "sha256": "61a2ec40c05953977a349c23d0e30a2ba734eefecea5a64de3df292cc9d701a6"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 229,
+                "normalized": false,
+                "sha256": "2a8bf1c44da32418b449da333bb5c9f675aae1835f714974da6273c8c3b189e6"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 229,
+                "normalized": false,
+                "sha256": "7aa44205d71ae48e80be378fa55968c5653cd3dce109432971eb60b9a58e78c7"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 459,
+              "normalized": false,
+              "sha256": "b5b7dbaf8c8b6f1afd9a99fb0d4f587aa96f7e4ccfc97e38b1cee982f00489fb"
+            }
+          }
+        },
+        {
+          "material": "V8 mapped soot hair volume material",
+          "identical": false,
+          "old": {
+            "material": "V8 mapped soot hair volume material",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 6288,
+                "normalized": false,
+                "sha256": "3d8df99eed5e9a9eed923b999ce244b1b077deb1890ed52f869f8c115a710aa3"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 6288,
+                "normalized": false,
+                "sha256": "b88651c4bdf5393e5588394badba94a82099599bcc7b02f68d7da69542a751cc"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 6288,
+                "normalized": false,
+                "sha256": "e3d66c63487d2fc7615e1efefae76ac0b4160a8d80f65913735f335eca8c5869"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 6288,
+                "normalized": false,
+                "sha256": "0df62c370dafd023f27bc58eb71d6fb513d9af84237fe22e8df3f19f58b18cc8"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 6288,
+                "normalized": true,
+                "sha256": "7efa6f847d5d7107d0d2d3be1428a5518e7380312d0e3d324501a29710d479d3"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 6288,
+                "normalized": false,
+                "sha256": "ad714de0edef89f33c093aa094cfa7c12930e6cb3ebb269fe6ec4512eeac5999"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 6288,
+                "normalized": false,
+                "sha256": "fe863e4afa4438a5ce055657075e30733a1df6bac880c7d05f6404a7b25fb95e"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 26232,
+              "normalized": false,
+              "sha256": "a9f06eb448838374f1e157983d2aa4e66f44e17b5aa17cc8b5009f5e5ad109e8"
+            }
+          },
+          "new": {
+            "material": "V8 mapped soot hair volume material",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 6298,
+                "normalized": false,
+                "sha256": "61cdabe1ec211421858e00ef9eb68a8d082711006b2a859644f4d4817d6703e5"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 6298,
+                "normalized": false,
+                "sha256": "5e1af79157e3ea914cc8530c66341e745c5cc8eae32b958b35833244b0447a98"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 6298,
+                "normalized": false,
+                "sha256": "7ca285c0900ed94bd27ba1b84a7c38b506681a529152a8db86ea155af5728ab1"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 6298,
+                "normalized": false,
+                "sha256": "0f565a30af36d905d3514f9b3ee50ed6c87862987bcacc5d63535f69a8903978"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 6298,
+                "normalized": true,
+                "sha256": "a51cc8e1c31d194960fd9558a2f7cadc9c6dcadb7548395c6381c2ccc2af3ec7"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 6298,
+                "normalized": false,
+                "sha256": "11596a8e43dc21ade1d83a38e28e35ab7634480d7b0cc7df7b6a64e0376e1917"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 6298,
+                "normalized": false,
+                "sha256": "614713f40580ed644fc47e9459d8d19cbf810729b94b7e4ba67b3c257818410f"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 26286,
+              "normalized": false,
+              "sha256": "df021d7f4077ec6091107e24bb6c35f0e88e1028737ea9573207cc06446bf8bb"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "kiln-ninja-ensemble-candidate-lod2.glb",
+      "animationsIdentical": true,
+      "skinsIdentical": true,
+      "primitives": [
+        {
+          "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+          "identical": false,
+          "old": {
+            "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 17397,
+                "normalized": false,
+                "sha256": "6c8c5f24eacbda528d4f797827f0f96751c491a1cf9d8d50dd452b2713a1618d"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 17397,
+                "normalized": false,
+                "sha256": "b5a5f832722a988c7a47dc949357923bf24e6bb1544c69552f807abfc0d13219"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 17397,
+                "normalized": false,
+                "sha256": "b98c1fa44aaa15e9749607c8e071aab88012bdbf096931660e25db41cc187c73"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 17397,
+                "normalized": false,
+                "sha256": "8fe11f3c4c9b185b842cff58dfc943ff0416bcb31a17ea1a5db9d7b1f0e78dce"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 17397,
+                "normalized": true,
+                "sha256": "870f09f0de779993f805049c5b35728f24053da184b80962e09030c077c1391d"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 17397,
+                "normalized": false,
+                "sha256": "a7b0dfa0392188455c2da142c3f8dec278068e7074ff0221752848414bc2df3d"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 17397,
+                "normalized": false,
+                "sha256": "670097f4b94a35cc9f9067032debbc4dbcf5d4d92ee05770516eb121112de7df"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 41940,
+              "normalized": false,
+              "sha256": "e558cf386bff9c3f851e13b1b87ad588c646dc27250c213a26a2c01e9d372ef3"
+            }
+          },
+          "new": {
+            "material": "Kiln firecloth / porous ceramic / oxidized iron atlas",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 17401,
+                "normalized": false,
+                "sha256": "58b9f9fe5e2a0b19433661a79390911ef5db23a8e85b1a98e6c32c38cc4a1cdb"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 17401,
+                "normalized": false,
+                "sha256": "26fe9a4533ce359629a0f95200b3d0c2c7fe6b520111b8bafdc63c253611c30b"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 17401,
+                "normalized": false,
+                "sha256": "17299e75ced345e2a5c4ac6d3139d04de7a5e9decbc5d109094fa1d1580c5674"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 17401,
+                "normalized": false,
+                "sha256": "ebe8dd11f80cac072ab78ba8fb6a94b4b54d309c4bd821b6928abf4546aea606"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 17401,
+                "normalized": true,
+                "sha256": "b6e0bd35a7daa06deefd7dce0a4d862e56205146bcbb8751ab8fcc7559c3c5e5"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 17401,
+                "normalized": false,
+                "sha256": "d34a0d73c2e9969052213090d14ad052b40bac41cb7efba544d5a34e86216678"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 17401,
+                "normalized": false,
+                "sha256": "014b12b9fc2df894ade2153f552c741ff5b98cc59a0a0634b3ede80c5ead3f96"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 41958,
+              "normalized": false,
+              "sha256": "2badf5fea6fd1316e6e9158b5fca924dabf0e5ffdab91e5cf77f00b69d1a030a"
+            }
+          }
+        },
+        {
+          "material": "Textured skin with continuous anatomical vertex tint",
+          "identical": false,
+          "old": {
+            "material": "Textured skin with continuous anatomical vertex tint",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 1005,
+                "normalized": false,
+                "sha256": "7eed389a9912bad28ed85e4d0929bf912efe33cc48ac78978752b67b79b75362"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 1005,
+                "normalized": false,
+                "sha256": "72270e50ffd13e5cd32460bced9eda6f0c22a0055de7e745e5e8f97fa1573213"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 1005,
+                "normalized": false,
+                "sha256": "267a4316bb6281464fe624414407e179c98811213cafa1854e97a1ae2974dbad"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 1005,
+                "normalized": false,
+                "sha256": "3a2ff3987f95b92a8ee8057c93f1b412541cd5d8b3e48e626dcaa3a63146b425"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 1005,
+                "normalized": true,
+                "sha256": "b298c1fc930976c0dd30ddcf15c5787abae99ad06ceda147852e820af0f000e1"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 1005,
+                "normalized": false,
+                "sha256": "8c66fd2c2c78f11703c57b0dcc825eef27f1814d8dc8d43c5aa8f46961f05ac3"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 1005,
+                "normalized": false,
+                "sha256": "8cd1e6e9c4267a018be1aca1723ad8297ecd51c1994f83440eec580c3de590ac"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 3450,
+              "normalized": false,
+              "sha256": "ebd2646a04f8ff127a4b0d2d098348a333974eecad503545b967a50b3e96ef2b"
+            }
+          },
+          "new": {
+            "material": "Textured skin with continuous anatomical vertex tint",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 975,
+                "normalized": false,
+                "sha256": "f694f975d98b920f838d519753f153c7e2c541694e3b78ff0a27eb240d1dd7f4"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 975,
+                "normalized": false,
+                "sha256": "1567f94c9f4ef5d92e62a31b324bc418c03289f44ab0c95a59c6472378f871a6"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 975,
+                "normalized": false,
+                "sha256": "19cde906f655c2ab06da2276166983e238f4a0ce68d27e3441f3a13a4c9e640c"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 975,
+                "normalized": false,
+                "sha256": "fba5dee7f5574870479e6bba14da762466f3260f87217fae8092816b7b51ef72"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 975,
+                "normalized": true,
+                "sha256": "c322fb09946dff38726f8bc623ecacbffbd8f5f78f506e96be0f98b6878794c2"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 975,
+                "normalized": false,
+                "sha256": "66eefd45b16a0e5023058eb80f83dddf7b67a5c8ae4a6e0b40613bf6880d146a"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 975,
+                "normalized": false,
+                "sha256": "01e80d24348fb80d9aafc040eea8af7a6e2c33f015542cf1a07ca58ae012ba01"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 3432,
+              "normalized": false,
+              "sha256": "ac8474877daf2c02436c625ead1f0c87c719254f5aabbaa788e453409cabca27"
+            }
+          }
+        },
+        {
+          "material": "Soot black hair PBR",
+          "identical": false,
+          "old": {
+            "material": "Soot black hair PBR",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 108,
+                "normalized": false,
+                "sha256": "4e25fcadbc4d49b1dd11e1084a667dde95acaaf39d976b05f27d43fe75911648"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 108,
+                "normalized": false,
+                "sha256": "e09f53a10306fbf77ec9ed3803cee6fe59cd10c01e917491d005f9cfa5de4594"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 108,
+                "normalized": false,
+                "sha256": "ab270dfdd2123924d4bd4e627c8a25f836a142ce4a5cece3623950e139067b3d"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": false,
+                "sha256": "6672afbdc28bf9e47e191d8d300d05fa44d95d338a990a8d302eb1ee94ac1eb9"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": true,
+                "sha256": "207009d77acb2fe81c2dfd36a8d8a565147c894f3de9484aa69152fa96db9a42"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": false,
+                "sha256": "bddad010f331f570b31d2eca4b441afaaa363856c3766fbaf68356d0bb087c78"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": false,
+                "sha256": "805a3e7010144363d51fd1761574df3a20bbd7f91a989a1514817bd3e90def3e"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 198,
+              "normalized": false,
+              "sha256": "be3fe139e30de7411e349df43435010600bf33009e5d91501459434b21944e8f"
+            }
+          },
+          "new": {
+            "material": "Soot black hair PBR",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 108,
+                "normalized": false,
+                "sha256": "1079c0406a9c79ca41a6001ca0f7130e540e1d0ba9077a1edf8e6380ec533597"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 108,
+                "normalized": false,
+                "sha256": "8313aa5f4f73a4aa82333e6551eb5ff591db84217452b865871b1977b08e1788"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 108,
+                "normalized": false,
+                "sha256": "84d7c50c50684a0c300a79add95efa72886a4fcf810db3fb32ac338ef9015224"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": false,
+                "sha256": "07ed9bbe7bcaf9e3bd5e034e816abae7735af0626d6ee1e429eff40bbb6a8483"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": true,
+                "sha256": "207009d77acb2fe81c2dfd36a8d8a565147c894f3de9484aa69152fa96db9a42"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": false,
+                "sha256": "bddad010f331f570b31d2eca4b441afaaa363856c3766fbaf68356d0bb087c78"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 108,
+                "normalized": false,
+                "sha256": "805a3e7010144363d51fd1761574df3a20bbd7f91a989a1514817bd3e90def3e"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 198,
+              "normalized": false,
+              "sha256": "be3fe139e30de7411e349df43435010600bf33009e5d91501459434b21944e8f"
+            }
+          }
+        },
+        {
+          "material": "V8 mapped soot hair volume material",
+          "identical": true,
+          "old": {
+            "material": "V8 mapped soot hair volume material",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "37446c29873700d9c6b71b2afcbf03a1a9034d2c2446330fc64338172b89fba0"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "85f70d9b928b5cb8480d6c2d08e34cbebab87bdac6ec743ea09fd659db052744"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "a866330cece54b0cccc72094809ef816e9fff825c2f39cd839f9cc5095ece301"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "7a1acbf57d58e6e1662a75c5e38e90ae716803a4c10e7977e4e18db6465667b4"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": true,
+                "sha256": "e323e221625e09fb0c97c704ca15f2a695574528e3040663549824b0ee6a8b0c"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "b6eb970e88d1cf7c2feeb2aee0d59e9864a338378a46bbc6874e99384e3a5376"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "f958f211e98b464d2a2b53412c1236d099cc527e4699fedc0fab009fd6f46afa"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 11766,
+              "normalized": false,
+              "sha256": "bd35f106b944fe3b2071c5eec10d1b869a51f8f0c89ef61ad7d10fba894dbb4e"
+            }
+          },
+          "new": {
+            "material": "V8 mapped soot hair volume material",
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "37446c29873700d9c6b71b2afcbf03a1a9034d2c2446330fc64338172b89fba0"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "85f70d9b928b5cb8480d6c2d08e34cbebab87bdac6ec743ea09fd659db052744"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "a866330cece54b0cccc72094809ef816e9fff825c2f39cd839f9cc5095ece301"
+              },
+              "TANGENT": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "7a1acbf57d58e6e1662a75c5e38e90ae716803a4c10e7977e4e18db6465667b4"
+              },
+              "COLOR_0": {
+                "componentType": 5123,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": true,
+                "sha256": "e323e221625e09fb0c97c704ca15f2a695574528e3040663549824b0ee6a8b0c"
+              },
+              "JOINTS_0": {
+                "componentType": 5121,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "b6eb970e88d1cf7c2feeb2aee0d59e9864a338378a46bbc6874e99384e3a5376"
+              },
+              "WEIGHTS_0": {
+                "componentType": 5126,
+                "type": "VEC4",
+                "count": 3151,
+                "normalized": false,
+                "sha256": "f958f211e98b464d2a2b53412c1236d099cc527e4699fedc0fab009fd6f46afa"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 11766,
+              "normalized": false,
+              "sha256": "bd35f106b944fe3b2071c5eec10d1b869a51f8f0c89ef61ad7d10fba894dbb4e"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "file": "kiln-ninja-ensemble-candidate-collision.glb",
+      "animationsIdentical": true,
+      "skinsIdentical": true,
+      "primitives": [
+        {
+          "material": null,
+          "identical": true,
+          "old": {
+            "material": null,
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 82,
+                "normalized": false,
+                "sha256": "aba1873d21eafb5fe5f833275b42a149b39410e1e1bc65da183d06893d4171f1"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 82,
+                "normalized": false,
+                "sha256": "a5b78a77f6906dfdc35661d0724a40e4363e1679b1f5ec63f293221da30049a0"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 82,
+                "normalized": false,
+                "sha256": "5c84314c1b17627c64471d78ffa734699790de4f9c622d121deff994225e659c"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 228,
+              "normalized": false,
+              "sha256": "aacf77c1d0dfaf07f4d20b7f05e697144b2c45472f06a8ec700a5bf3e37417b6"
+            }
+          },
+          "new": {
+            "material": null,
+            "attributes": {
+              "POSITION": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 82,
+                "normalized": false,
+                "sha256": "aba1873d21eafb5fe5f833275b42a149b39410e1e1bc65da183d06893d4171f1"
+              },
+              "NORMAL": {
+                "componentType": 5126,
+                "type": "VEC3",
+                "count": 82,
+                "normalized": false,
+                "sha256": "a5b78a77f6906dfdc35661d0724a40e4363e1679b1f5ec63f293221da30049a0"
+              },
+              "TEXCOORD_0": {
+                "componentType": 5126,
+                "type": "VEC2",
+                "count": 82,
+                "normalized": false,
+                "sha256": "5c84314c1b17627c64471d78ffa734699790de4f9c622d121deff994225e659c"
+              }
+            },
+            "indices": {
+              "componentType": 5123,
+              "type": "SCALAR",
+              "count": 228,
+              "normalized": false,
+              "sha256": "aacf77c1d0dfaf07f4d20b7f05e697144b2c45472f06a8ec700a5bf3e37417b6"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

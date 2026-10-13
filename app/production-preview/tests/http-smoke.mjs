@@ -38,7 +38,7 @@ try {
     const bytes=Buffer.from(await response.arrayBuffer());const original=await fs.readFile(new URL('../../../'+reference.sourcePath,import.meta.url));assert.equal(sha(bytes),sha(original),'Original reference bytes unchanged');
   }
   assert.equal((await fetch(base+'/production-assets/__references/unlisted/original.png')).status,404);
-  for(const denied of ['__reviews/representative-revision-05/fault-v11/amethyst-short-blade/source.blend','__reviews/README.md','__reviews/representative-revision-05/kiln-ninja-v8b/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb'])assert.equal((await fetch(base+'/production-assets/'+denied)).status,404);
+  for(const denied of ['__reviews/representative-revision-05/fault-v11/amethyst-short-blade/source.blend','__reviews/README.md','__reviews/representative-revision-06/kiln-ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend','__reviews/representative-revision-06/kiln-ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb'])assert.equal((await fetch(base+'/production-assets/'+denied)).status,404);
   assert.deepEqual(catalog.manifests,expected.manifests);
   if(built){
     async function walk(directory,relative=''){const result=[];for(const entry of await fs.readdir(directory,{withFileTypes:true})){const name=relative+entry.name;if(entry.isDirectory())result.push(...await walk(directory+'/'+entry.name,name+'/'));else result.push(name);}return result.sort();}

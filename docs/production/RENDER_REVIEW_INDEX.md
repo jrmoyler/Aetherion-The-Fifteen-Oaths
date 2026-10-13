@@ -38,3 +38,7 @@ The family notes retain further observed gaps, missing states, dimensional diffe
 [Representative revision 05](reviews/representative-revision-05/README.md) records Kiln ninja V8b and Fault blade V11 focused diagnostics: two editable sources, five final GLBs including the character collision mesh, and four final views. The ninja repairs an invalid roughness export; neither its mixed hair changes nor the blade layering has passed visual acceptance. Independent imports, remaining defects and historical failed diagnostics are explicit.
 
 The later [parent review of revision 04](reviews/representative-revision-04/PARENT_VISUAL_REVIEW.md) is verified separately by the [addendum audit](../../validation/production/review-addenda/README.md), preserving the original frozen evidence unchanged.
+
+## Focused facial revision 06
+
+[Gallery](reviews/representative-revision-06/index.html) · [evidence and limitations](reviews/representative-revision-06/README.md). Final V10 source, three visual LODs, collision export and two CPU diagnostic views are retained with V9 eye history. No visual approval; original090 remains the likeness reference.

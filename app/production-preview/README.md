@@ -30,9 +30,9 @@ Browser screenshots and rendered comparison remain an unexecuted acceptance gate
 
 ## Opt-in published review revisions
 
-Run `AETHERION_INCLUDE_REVIEWS=1 npm run dev` from this directory to add the published Kiln ninja V8b, Fault blade V11 and Impulse shield V8b entries. Select names beginning `[Review]` in the asset menu. The same flag works with `npm run build`, `npm run test:assets`, `npm run test:http` and `npm run test:http:build`; rebuild before switching built modes. The default catalog and production acceptance counts are unchanged.
+Run `AETHERION_INCLUDE_REVIEWS=1 npm run dev` from this directory to add the published Kiln ninja V10, Fault blade V11 and Impulse shield V8b entries. Select names beginning `[Review]` in the asset menu. The same flag works with `npm run build`, `npm run test:assets`, `npm run test:http` and `npm run test:http:build`; rebuild before switching built modes. The default catalog and production acceptance counts are unchanged.
 
-The opt-in catalog selects the latest reviewed ninja/blade from revision 05 and the preserved shield from revision 04. These are explicitly unapproved candidates with mixed visual results.
+The opt-in catalog selects Ninja V10 from revision 06, Fault blade V11 from revision 05, and Impulse shield V8b from revision 04. These are explicitly unapproved candidates with mixed visual results.
 
 The opt-in catalog pins five visual GLBs (three character LODs and two weapons) by SHA-256. It exposes no review Blender sources, collision hulls, documents or unused maps. External GLB dependencies, changed bytes at catalog collection, escaping paths and unavailable original-reference IDs fail closed. The development server serves immutable verified review buffers, so later on-disk replacements cannot substitute unpinned bytes; restart after an intentional pinned-manifest update. The models use the existing real GLTFLoader, animation/LOD/material controls and disposal lifecycle. The only reference images are the existing indexed originals; reference imagery is never used as mesh geometry.
 

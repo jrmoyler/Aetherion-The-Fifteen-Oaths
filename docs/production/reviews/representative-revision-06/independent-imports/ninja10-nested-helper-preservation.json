@@ -1,0 +1,25 @@
+{
+  "scope": "Nested face helper function AST only; does not imply outer orbital vertices are unchanged when surface() changes",
+  "helpers": [
+    {
+      "function": "head_section",
+      "identicalAST": true
+    },
+    {
+      "function": "gaussian",
+      "identicalAST": true
+    },
+    {
+      "function": "surface",
+      "identicalAST": false
+    },
+    {
+      "function": "globe_front",
+      "identicalAST": true
+    },
+    {
+      "function": "lid_edge_y",
+      "identicalAST": true
+    }
+  ]
+}
