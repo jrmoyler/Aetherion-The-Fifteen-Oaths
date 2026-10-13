@@ -1,0 +1,8 @@
+{
+  "scope": "Review-only CPU evaluated animated world-bounds comparison; not per-vertex identity, material rendering, collision proof or visual approval",
+  "coordinateMapping": "glTF/Three XYZ meters -> Blender XYZ meters: (x,-z,y). No fitted offset or scale. Blender hidden bone custom-shape meshes excluded. Absolute clip time samples correspond to frame=seconds*24; first exported key is frame1, not time0. NLA muted to evaluate a single action.",
+  "toleranceMeters": 0.0001,
+  "maxBoundErrorMeters": 1.5283036710611597e-06,
+  "negativeFixture1cmTranslationRejected": true,
+  "status": "SCOPED_CPU_BOUND_COMPARISON_PASS"
+}
