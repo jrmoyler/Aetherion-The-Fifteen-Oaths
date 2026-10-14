@@ -1,0 +1,181 @@
+{
+  "scope": "Frozen review assets only; real CPU/headless imports, no GPU/material-render/appearance/collision or gameplay approval",
+  "inputs": {
+    "/tmp/aetherion-daybreak-architecture-r02/fixtures/civic/assembly.glb": {
+      "sha256": "286adf2cb473c43ec2b58533f7ae25975c69b1c3b7e92ba0a86cd5599d3cd9ee",
+      "bytes": 6658656
+    },
+    "/tmp/aetherion-daybreak-architecture-r02/fixtures/ramp-with-landing/assembly.glb": {
+      "sha256": "3897599ddf3e5ec3fda0bfe30e5d164e4a4b658e45524af449122803cf2a72fb",
+      "bytes": 3932416
+    },
+    "/tmp/aetherion-daybreak-architecture-r02/fixtures/residential/assembly.glb": {
+      "sha256": "77202005501208fd19c7d72f641dc00ba5e8eea59abaeec9f3f9a2a64e73b9eb",
+      "bytes": 6683432
+    },
+    "/tmp/aetherion-daybreak-architecture-r02/fixtures/work/assembly.glb": {
+      "sha256": "69342d1d3feb7330cb280d29ddd4beda19d3268312c6d5afc6f5e3c5123eac77",
+      "bytes": 5517252
+    }
+  },
+  "inputsUnchanged": true,
+  "commands": [
+    {
+      "label": "glb",
+      "command": [
+        "node",
+        "/tmp/aetherion-daybreak-independent-checks/r02/check-glb.mjs",
+        "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-inputs.json",
+        "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-glb.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.55,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-glb.log"
+    },
+    {
+      "label": "blender",
+      "command": [
+        "blender",
+        "-b",
+        "-t",
+        "2",
+        "--python",
+        "/tmp/aetherion-daybreak-independent-checks/r02/check-blender.py",
+        "--",
+        "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-inputs.json",
+        "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-blender.json"
+      ],
+      "returncode": 0,
+      "seconds": 2.435,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-blender.log"
+    },
+    {
+      "label": "godot-0",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r02",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r02/godot_import.gd",
+        "--",
+        "/tmp/aetherion-daybreak-architecture-r02/fixtures/civic/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.248,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-0.log"
+    },
+    {
+      "label": "godot-1",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r02",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r02/godot_import.gd",
+        "--",
+        "/tmp/aetherion-daybreak-architecture-r02/fixtures/ramp-with-landing/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.251,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-1.log"
+    },
+    {
+      "label": "godot-2",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r02",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r02/godot_import.gd",
+        "--",
+        "/tmp/aetherion-daybreak-architecture-r02/fixtures/residential/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.259,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-2.log"
+    },
+    {
+      "label": "godot-3",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r02",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r02/godot_import.gd",
+        "--",
+        "/tmp/aetherion-daybreak-architecture-r02/fixtures/work/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.259,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-3.log"
+    }
+  ],
+  "godot": [
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/civic/assembly.glb",
+      "sha256": "286adf2cb473c43ec2b58533f7ae25975c69b1c3b7e92ba0a86cd5599d3cd9ee",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-0.log",
+      "result": {
+        "animations": 0,
+        "materials": 26,
+        "meshes": 343,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/ramp-with-landing/assembly.glb",
+      "sha256": "3897599ddf3e5ec3fda0bfe30e5d164e4a4b658e45524af449122803cf2a72fb",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-1.log",
+      "result": {
+        "animations": 0,
+        "materials": 6,
+        "meshes": 31,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/residential/assembly.glb",
+      "sha256": "77202005501208fd19c7d72f641dc00ba5e8eea59abaeec9f3f9a2a64e73b9eb",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-2.log",
+      "result": {
+        "animations": 0,
+        "materials": 29,
+        "meshes": 344,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/work/assembly.glb",
+      "sha256": "69342d1d3feb7330cb280d29ddd4beda19d3268312c6d5afc6f5e3c5123eac77",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r02/remaining-fixtures-godot-3.log",
+      "result": {
+        "animations": 1,
+        "materials": 30,
+        "meshes": 289,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    }
+  ],
+  "allCommandsPassed": true,
+  "allGodotImportsPassed": true
+}

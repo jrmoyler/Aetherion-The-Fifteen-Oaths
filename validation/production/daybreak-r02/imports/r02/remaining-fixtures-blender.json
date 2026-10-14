@@ -1,0 +1,106 @@
+{
+  "blenderVersion": "4.3.2",
+  "scope": "Actual Blender open/import and evaluated mesh vertices; CPU only, no re-export or source writes",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/civic/assembly.glb",
+      "sha256": "286adf2cb473c43ec2b58533f7ae25975c69b1c3b7e92ba0a86cd5599d3cd9ee",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 343,
+      "materials": 26,
+      "images": 15,
+      "rest": {
+        "vertices": 27510,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          10.0,
+          4.0
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/ramp-with-landing/assembly.glb",
+      "sha256": "3897599ddf3e5ec3fda0bfe30e5d164e4a4b658e45524af449122803cf2a72fb",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 31,
+      "materials": 6,
+      "images": 12,
+      "rest": {
+        "vertices": 1420,
+        "finite": true,
+        "min": [
+          -0.18000000715255737,
+          -0.07999999821186066,
+          -0.019999999552965164
+        ],
+        "max": [
+          1.9800000190734863,
+          6.600000381469727,
+          1.5399999618530273
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/residential/assembly.glb",
+      "sha256": "77202005501208fd19c7d72f641dc00ba5e8eea59abaeec9f3f9a2a64e73b9eb",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 344,
+      "materials": 29,
+      "images": 15,
+      "rest": {
+        "vertices": 27974,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          8.0,
+          4.0
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/work/assembly.glb",
+      "sha256": "69342d1d3feb7330cb280d29ddd4beda19d3268312c6d5afc6f5e3c5123eac77",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 289,
+      "materials": 30,
+      "images": 12,
+      "rest": {
+        "vertices": 22548,
+        "finite": true,
+        "min": [
+          0.0,
+          -0.007000045385211706,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          8.0,
+          4.0
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    }
+  ]
+}

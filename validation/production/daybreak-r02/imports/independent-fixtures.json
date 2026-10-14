@@ -1,0 +1,47 @@
+{
+  "scope": "Read-only actual collision geometry/source animation; in-memory injected negatives, no candidate saves; not gameplay, swept collision, access-code or engineering certification",
+  "checks": [
+    {
+      "name": "actual_floor_seam_and_displaced_copy",
+      "passed": true,
+      "seamMeters": 0.0,
+      "negativeSeamMeters": 0.01499999999999968,
+      "toleranceMeters": 0.005
+    },
+    {
+      "name": "door-frame_aperture_with_actual_blocker_negative",
+      "passed": true,
+      "rays": 325,
+      "baselineHits": 0,
+      "blockedHits": 9
+    },
+    {
+      "name": "window-wall_aperture_with_actual_blocker_negative",
+      "passed": true,
+      "rays": 325,
+      "baselineHits": 0,
+      "blockedHits": 15
+    },
+    {
+      "name": "ramp_grade_geometry_and_raised_endpoint_negative",
+      "passed": true,
+      "grade": 0.08333333126372769,
+      "negativeGrade": 0.0895833312637277,
+      "negativeEndpointRiseMeters": 0.03
+    },
+    {
+      "name": "baffle_full_integer_frames_sync_and_desync_negative",
+      "passed": true,
+      "pivots": 3,
+      "samples": 121,
+      "maxDifferenceRadians": 0.0,
+      "negativeDifferenceRadians": 0.020000000000000018,
+      "peakDegrees": [
+        69.99999967119774,
+        69.99999967119774,
+        69.99999967119774
+      ]
+    }
+  ],
+  "failures": 0
+}

@@ -1,0 +1,766 @@
+{
+  "status": "FROZEN_INDEPENDENT_EVIDENCE_NOT_PRODUCTION_ACCEPTANCE",
+  "candidate": "Daybreak architecture r02 with preserved r01 failures",
+  "scopeCounts": {
+    "finalGlbImportsCovered": 71,
+    "moduleGlbs": 66,
+    "derivativeAssemblyGlbs": 5,
+    "projectLodErrors": 10,
+    "projectModuleRecords": 17,
+    "frozenAuthoringRowsVerifiedByIndependentReport": 208,
+    "assetCopiesIncluded": 0,
+    "selectedComparisonPngs": 4
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4728,
+      "sha256": "741c8283b776b94e243a1f71451f754449860e77bad9209724fa281daa11526e"
+    },
+    {
+      "path": "imports/EVIDENCE_INDEX.json",
+      "bytes": 21638,
+      "sha256": "8a1d0f2b8eb9901e3a1097ac1751f2a28e3c378692b0c24ea8d80e623c975ede"
+    },
+    {
+      "path": "imports/SUMMARY.md",
+      "bytes": 3109,
+      "sha256": "2302c48bf4b218e59dabd0ff95aa5270b0f9c92f4ec72b028d98cc920a10ecf8"
+    },
+    {
+      "path": "imports/baffle-export-sync.json",
+      "bytes": 3715,
+      "sha256": "2136e1bd8a4657b2a9efeffe46bda6bceba545553d9db1ffef070e1b2b54b21d"
+    },
+    {
+      "path": "imports/check-blender.py",
+      "bytes": 2650,
+      "sha256": "ee93685c7a5c942e4899656c5ff03f89ce63ebf629be31a5c41ce9c84c72bcb8"
+    },
+    {
+      "path": "imports/check-glb.mjs",
+      "bytes": 6238,
+      "sha256": "042fe1354735f6f9f11fee3d6e7b2ac0a9d5723194567fcc8c25faad6e1bb503"
+    },
+    {
+      "path": "imports/check-registry-textures.py",
+      "bytes": 2558,
+      "sha256": "24ae11b04732cdfb37686405feed6db1e8931bb489f04b691a3f921c413011c3"
+    },
+    {
+      "path": "imports/check-source.py",
+      "bytes": 2402,
+      "sha256": "697da6f7e16320ed975308448a98969fbcdba8e513a5e50968d2bb0134b84bbf"
+    },
+    {
+      "path": "imports/check-stair.py",
+      "bytes": 1131,
+      "sha256": "e3581d51054beb12240565187ccf23482d27b0f025074894a13713ae57f0144c"
+    },
+    {
+      "path": "imports/daybreak-blender.json",
+      "bytes": 50243,
+      "sha256": "fa35e5aa8ab56b7c51256a51c1eb356b60d3648f1085a58536b53ed81eb41594"
+    },
+    {
+      "path": "imports/daybreak-blender.log",
+      "bytes": 75965,
+      "sha256": "8fc1d9ee4846fdb2658bc5e9eec0fc128dceaa3adaaf8508854944ed57af017b"
+    },
+    {
+      "path": "imports/daybreak-glb-validator-details.json",
+      "bytes": 249823,
+      "sha256": "ca29866e3077843398ff8b7c1e8be2f84e4aea82ed761ec268a786e7e4cf9512"
+    },
+    {
+      "path": "imports/daybreak-glb.json",
+      "bytes": 94141,
+      "sha256": "e596ac263d97f4072fd80e1a9b08bc8207f68baced490648145ae207119ad5cf"
+    },
+    {
+      "path": "imports/daybreak-glb.log",
+      "bytes": 12141,
+      "sha256": "9ae0de2109f572c323c02c70417e233ed656835d3f229ad45dfd7c849520f8dd"
+    },
+    {
+      "path": "imports/daybreak-godot-0.log",
+      "bytes": 208,
+      "sha256": "c01358bcb4419996fb3eea130bfa0dceaacc7f87fa7f92ca9cb5a74f070ffbc1"
+    },
+    {
+      "path": "imports/daybreak-godot-1.log",
+      "bytes": 209,
+      "sha256": "a344b25f09fb2ff428cfbb398a9a763fff51d57271e2cf84c3c790e854b48468"
+    },
+    {
+      "path": "imports/daybreak-godot-10.log",
+      "bytes": 208,
+      "sha256": "baec5c6e47c256ec70077e55ff6ee9382e71502d0abaf978682f6e1b5d4733cc"
+    },
+    {
+      "path": "imports/daybreak-godot-11.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-12.log",
+      "bytes": 209,
+      "sha256": "8e1adb3e5862d38da40094c7c4dd80198d3faac30b5916f36bd3033682512188"
+    },
+    {
+      "path": "imports/daybreak-godot-13.log",
+      "bytes": 209,
+      "sha256": "0d07f2df6f17e34219b6ce58e1bb091f25cf060bede0b11006ecfda1d8859ebc"
+    },
+    {
+      "path": "imports/daybreak-godot-14.log",
+      "bytes": 209,
+      "sha256": "0d07f2df6f17e34219b6ce58e1bb091f25cf060bede0b11006ecfda1d8859ebc"
+    },
+    {
+      "path": "imports/daybreak-godot-15.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-16.log",
+      "bytes": 209,
+      "sha256": "19636ae9fc458b8df421092d626780e7855342da5f12efee45fbab6341b4dff4"
+    },
+    {
+      "path": "imports/daybreak-godot-17.log",
+      "bytes": 209,
+      "sha256": "19636ae9fc458b8df421092d626780e7855342da5f12efee45fbab6341b4dff4"
+    },
+    {
+      "path": "imports/daybreak-godot-18.log",
+      "bytes": 209,
+      "sha256": "6c5e44e79080aade1290c5cd16432955d7669bc67f8a9b7cf0e8f678b384ec18"
+    },
+    {
+      "path": "imports/daybreak-godot-19.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-2.log",
+      "bytes": 209,
+      "sha256": "9692fa9601b1cecfcd02ac55ef088dfeb24870e3e5b8e9f6ff262d27c0dbe21d"
+    },
+    {
+      "path": "imports/daybreak-godot-20.log",
+      "bytes": 208,
+      "sha256": "852b6bbdf329495cad800df58e4de885bb4e54182fd74ea55ab9df423e5ef5ef"
+    },
+    {
+      "path": "imports/daybreak-godot-21.log",
+      "bytes": 208,
+      "sha256": "852b6bbdf329495cad800df58e4de885bb4e54182fd74ea55ab9df423e5ef5ef"
+    },
+    {
+      "path": "imports/daybreak-godot-22.log",
+      "bytes": 208,
+      "sha256": "4e6f0f30f580ee3ee01e0de563056187b36cedabff4ba6deda88f26e76c9482a"
+    },
+    {
+      "path": "imports/daybreak-godot-23.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-24.log",
+      "bytes": 209,
+      "sha256": "900ee2c885d1596fcd206bfa6b77b752380a4c3cdaab7f43e8fab334ce17d60f"
+    },
+    {
+      "path": "imports/daybreak-godot-25.log",
+      "bytes": 208,
+      "sha256": "852b6bbdf329495cad800df58e4de885bb4e54182fd74ea55ab9df423e5ef5ef"
+    },
+    {
+      "path": "imports/daybreak-godot-26.log",
+      "bytes": 208,
+      "sha256": "4e6f0f30f580ee3ee01e0de563056187b36cedabff4ba6deda88f26e76c9482a"
+    },
+    {
+      "path": "imports/daybreak-godot-27.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-28.log",
+      "bytes": 209,
+      "sha256": "cdd630658c38686240aa023bccd64f87c87f6322b59c1a0e147805e979295aa0"
+    },
+    {
+      "path": "imports/daybreak-godot-29.log",
+      "bytes": 208,
+      "sha256": "916e8a8cf9e72eb1f8ac8af748f61d863050592b1b2ab75f5d00349d9653f14e"
+    },
+    {
+      "path": "imports/daybreak-godot-3.log",
+      "bytes": 209,
+      "sha256": "9a045f9d5628af72d9c65d88cbcd67e035c7080e0a1d5b9abfde8c3616a63399"
+    },
+    {
+      "path": "imports/daybreak-godot-30.log",
+      "bytes": 208,
+      "sha256": "4e6f0f30f580ee3ee01e0de563056187b36cedabff4ba6deda88f26e76c9482a"
+    },
+    {
+      "path": "imports/daybreak-godot-31.log",
+      "bytes": 208,
+      "sha256": "c01358bcb4419996fb3eea130bfa0dceaacc7f87fa7f92ca9cb5a74f070ffbc1"
+    },
+    {
+      "path": "imports/daybreak-godot-32.log",
+      "bytes": 210,
+      "sha256": "52b1cb23a4562e21fdc89c30e1bc8d48a8278a38df53f2aa90eb95dc750f0816"
+    },
+    {
+      "path": "imports/daybreak-godot-33.log",
+      "bytes": 209,
+      "sha256": "6d7c8875c1c7cc4f0d9b85837ba0e080ebb3e9381447b5f1b7ff12e693d5406a"
+    },
+    {
+      "path": "imports/daybreak-godot-34.log",
+      "bytes": 208,
+      "sha256": "7c7f690119ac964e4c04c3332305a18eb1c24e85f8a17bddbb709860f698a3a6"
+    },
+    {
+      "path": "imports/daybreak-godot-35.log",
+      "bytes": 208,
+      "sha256": "7ec8fdb9c0afe2ae5496a6f8b63bf02016f7ddabca17bf7284fda5aaa85ed186"
+    },
+    {
+      "path": "imports/daybreak-godot-36.log",
+      "bytes": 209,
+      "sha256": "ca531eab21895594ad3cc13cf651b837e071bd9f93cba560c23e195288abd0a6"
+    },
+    {
+      "path": "imports/daybreak-godot-37.log",
+      "bytes": 209,
+      "sha256": "d6276b82018809fbfdf2b39b87be0d676389b7ce1d8323ae0818bcdb0bd57936"
+    },
+    {
+      "path": "imports/daybreak-godot-38.log",
+      "bytes": 209,
+      "sha256": "27a1d0259e70ba43e9fdeaf0bc5d3dfcc1f58969ad3735dfc1724c158716d3b0"
+    },
+    {
+      "path": "imports/daybreak-godot-39.log",
+      "bytes": 208,
+      "sha256": "32a1e90eb7cb36578b7836a58f9ec7b2578090d1f102fd8cb2061f8e84afabcf"
+    },
+    {
+      "path": "imports/daybreak-godot-4.log",
+      "bytes": 209,
+      "sha256": "34e131f8da5e04b8e54cbc7f33db58ff6958afcf33d6445bce267ad1bdc222d6"
+    },
+    {
+      "path": "imports/daybreak-godot-40.log",
+      "bytes": 209,
+      "sha256": "02e41944866dc0ec3fab64dceb392c74ab44b37bbfe7511eeab437216759426b"
+    },
+    {
+      "path": "imports/daybreak-godot-41.log",
+      "bytes": 209,
+      "sha256": "02e41944866dc0ec3fab64dceb392c74ab44b37bbfe7511eeab437216759426b"
+    },
+    {
+      "path": "imports/daybreak-godot-42.log",
+      "bytes": 208,
+      "sha256": "7c7f690119ac964e4c04c3332305a18eb1c24e85f8a17bddbb709860f698a3a6"
+    },
+    {
+      "path": "imports/daybreak-godot-43.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-44.log",
+      "bytes": 208,
+      "sha256": "72d91a426b21527d6535924bae9934b6205a54a67a36e0b9e51be9f5afa3d2f1"
+    },
+    {
+      "path": "imports/daybreak-godot-45.log",
+      "bytes": 208,
+      "sha256": "72d91a426b21527d6535924bae9934b6205a54a67a36e0b9e51be9f5afa3d2f1"
+    },
+    {
+      "path": "imports/daybreak-godot-46.log",
+      "bytes": 208,
+      "sha256": "04d57d76641ec288a4ac00ec10493a4d1a3c0f6a93f15fab7408097a1b52bd6c"
+    },
+    {
+      "path": "imports/daybreak-godot-47.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-48.log",
+      "bytes": 208,
+      "sha256": "852b6bbdf329495cad800df58e4de885bb4e54182fd74ea55ab9df423e5ef5ef"
+    },
+    {
+      "path": "imports/daybreak-godot-49.log",
+      "bytes": 208,
+      "sha256": "72d91a426b21527d6535924bae9934b6205a54a67a36e0b9e51be9f5afa3d2f1"
+    },
+    {
+      "path": "imports/daybreak-godot-5.log",
+      "bytes": 209,
+      "sha256": "34e131f8da5e04b8e54cbc7f33db58ff6958afcf33d6445bce267ad1bdc222d6"
+    },
+    {
+      "path": "imports/daybreak-godot-50.log",
+      "bytes": 208,
+      "sha256": "7ab7390efe176dd04bbf62d3e646cdce5f3cefc58f2edf6c4b786686df0aa0a0"
+    },
+    {
+      "path": "imports/daybreak-godot-51.log",
+      "bytes": 208,
+      "sha256": "baec5c6e47c256ec70077e55ff6ee9382e71502d0abaf978682f6e1b5d4733cc"
+    },
+    {
+      "path": "imports/daybreak-godot-52.log",
+      "bytes": 208,
+      "sha256": "baec5c6e47c256ec70077e55ff6ee9382e71502d0abaf978682f6e1b5d4733cc"
+    },
+    {
+      "path": "imports/daybreak-godot-53.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-54.log",
+      "bytes": 208,
+      "sha256": "7e2df7d393750ed4a31b00ed58e40fcb7ae48d8a576748b66154c6d1b3173d04"
+    },
+    {
+      "path": "imports/daybreak-godot-55.log",
+      "bytes": 209,
+      "sha256": "6c5e44e79080aade1290c5cd16432955d7669bc67f8a9b7cf0e8f678b384ec18"
+    },
+    {
+      "path": "imports/daybreak-godot-56.log",
+      "bytes": 209,
+      "sha256": "137992d18dfddc32be5c5c216c3b6b1daf2fb7685a50e17c5c02bb223d015b03"
+    },
+    {
+      "path": "imports/daybreak-godot-57.log",
+      "bytes": 208,
+      "sha256": "1e684f0f698724a1f9540d1f3b2e2c8222eeb039ed12e58593e35cfb64b834c9"
+    },
+    {
+      "path": "imports/daybreak-godot-58.log",
+      "bytes": 208,
+      "sha256": "32a1e90eb7cb36578b7836a58f9ec7b2578090d1f102fd8cb2061f8e84afabcf"
+    },
+    {
+      "path": "imports/daybreak-godot-59.log",
+      "bytes": 209,
+      "sha256": "3628e620e3eabc22eb67bf3afd40d94b7ec0e1a4dbe28fc95e94f4f9768447c9"
+    },
+    {
+      "path": "imports/daybreak-godot-6.log",
+      "bytes": 208,
+      "sha256": "bafbd610a9ebb6b1da5485b1f60688d71d46577af0d1db6803e29e3207c23c09"
+    },
+    {
+      "path": "imports/daybreak-godot-60.log",
+      "bytes": 209,
+      "sha256": "3628e620e3eabc22eb67bf3afd40d94b7ec0e1a4dbe28fc95e94f4f9768447c9"
+    },
+    {
+      "path": "imports/daybreak-godot-61.log",
+      "bytes": 209,
+      "sha256": "d782c1cf80111c11f06710c96b39b031ebd845ce6f336daca90bb2058ddd20e9"
+    },
+    {
+      "path": "imports/daybreak-godot-62.log",
+      "bytes": 208,
+      "sha256": "8e90222a602c84ef581daadc27048c17cea9b441e51bbbe4c2e56c142c398388"
+    },
+    {
+      "path": "imports/daybreak-godot-63.log",
+      "bytes": 209,
+      "sha256": "4823d9f91c95a6a0dc4dc70da308057d21c4783075877842172a1e3026afc848"
+    },
+    {
+      "path": "imports/daybreak-godot-64.log",
+      "bytes": 209,
+      "sha256": "4823d9f91c95a6a0dc4dc70da308057d21c4783075877842172a1e3026afc848"
+    },
+    {
+      "path": "imports/daybreak-godot-65.log",
+      "bytes": 209,
+      "sha256": "f0c082be4d5a7c0359cc30f9f24bed1d45dc02f421cff4349bbef4296f315e0f"
+    },
+    {
+      "path": "imports/daybreak-godot-7.log",
+      "bytes": 208,
+      "sha256": "32a1e90eb7cb36578b7836a58f9ec7b2578090d1f102fd8cb2061f8e84afabcf"
+    },
+    {
+      "path": "imports/daybreak-godot-8.log",
+      "bytes": 209,
+      "sha256": "6c5e44e79080aade1290c5cd16432955d7669bc67f8a9b7cf0e8f678b384ec18"
+    },
+    {
+      "path": "imports/daybreak-godot-9.log",
+      "bytes": 209,
+      "sha256": "6c5e44e79080aade1290c5cd16432955d7669bc67f8a9b7cf0e8f678b384ec18"
+    },
+    {
+      "path": "imports/daybreak-inputs.json",
+      "bytes": 6421,
+      "sha256": "1467f261cd27f52f83f61c5370709a111b669e26685c00fc14ee9e0f84d82a75"
+    },
+    {
+      "path": "imports/daybreak-receipt.json",
+      "bytes": 82986,
+      "sha256": "260412c979dff83c526523c87269eb626f763ebaca45e105f2a553143fe80c63"
+    },
+    {
+      "path": "imports/freeze-verification-after.json",
+      "bytes": 151,
+      "sha256": "9c81a272397f8d7b7b0d5c5e7e536df7f681286813575ba45e741ab63db5bb9b"
+    },
+    {
+      "path": "imports/freeze-verification-before.json",
+      "bytes": 37193,
+      "sha256": "87be7007174699c4dc85fcf52c71172616da8f4d0c6f6cc4a024f92e53291515"
+    },
+    {
+      "path": "imports/godot_import.gd",
+      "bytes": 983,
+      "sha256": "58b7435507fc76a1cd5247720c66afb4e67a5585eb22f50e20a526d87c39950b"
+    },
+    {
+      "path": "imports/independent-fixtures.json",
+      "bytes": 1329,
+      "sha256": "79489e4afb927fa2e00670d99fadafde8f9e2f85b219fea5981cff975fe6d767"
+    },
+    {
+      "path": "imports/independent-fixtures.log",
+      "bytes": 446,
+      "sha256": "d213659a3d195ee3330f5b8e3127406b722d298e145ee67abd0a946d724bd132"
+    },
+    {
+      "path": "imports/independent-fixtures.py",
+      "bytes": 3546,
+      "sha256": "41c870c11484ffa646aeff043375d591b9c5f85129cc070ac7a8cb613dea2238"
+    },
+    {
+      "path": "imports/project.godot",
+      "bytes": 140,
+      "sha256": "937e8201f090578680e465956594eea8bebd96b32698ef7220a8c2a8300b3dbb"
+    },
+    {
+      "path": "imports/r02/SUMMARY.md",
+      "bytes": 2314,
+      "sha256": "9cde9171388c0041d6e2ca0b54d0126e8999399dff585917bf417950cbaa0016"
+    },
+    {
+      "path": "imports/r02/changed-blender.json",
+      "bytes": 4626,
+      "sha256": "0dbe34d5d57d493ab2d2295561e67fa0be688c1dca69f90d0825ea851003a04b"
+    },
+    {
+      "path": "imports/r02/changed-blender.log",
+      "bytes": 10587,
+      "sha256": "65fdd29ed59725cf5191fb13c6569b56fba32bbd988f3e2d78a487df18c9f4c9"
+    },
+    {
+      "path": "imports/r02/changed-glb-validator-details.json",
+      "bytes": 23124,
+      "sha256": "8d603f87b7666b140cade5d5cf08243e7b9ccabdeabcb050e83c52b669d700fc"
+    },
+    {
+      "path": "imports/r02/changed-glb.json",
+      "bytes": 6621,
+      "sha256": "3697a8fde01a3d1241b5493d6826d80e40f528c6de0f08eb02cd6d0d52e1e646"
+    },
+    {
+      "path": "imports/r02/changed-glb.log",
+      "bytes": 945,
+      "sha256": "45bbad0f5f66d9d06ed06e7547326e86b22ee71fa6c0db1ab21f69c8a5db200f"
+    },
+    {
+      "path": "imports/r02/changed-godot-0.log",
+      "bytes": 209,
+      "sha256": "d1435a127d27f7e398785f88bd9f9e53e75292e5f292580b504c312d57f4debf"
+    },
+    {
+      "path": "imports/r02/changed-godot-1.log",
+      "bytes": 208,
+      "sha256": "32a1e90eb7cb36578b7836a58f9ec7b2578090d1f102fd8cb2061f8e84afabcf"
+    },
+    {
+      "path": "imports/r02/changed-godot-2.log",
+      "bytes": 209,
+      "sha256": "7e5a7c994b53650d30a9c6acbce7dc48596b18862488791eaaf10d6e1c7927e3"
+    },
+    {
+      "path": "imports/r02/changed-godot-3.log",
+      "bytes": 209,
+      "sha256": "7e5a7c994b53650d30a9c6acbce7dc48596b18862488791eaaf10d6e1c7927e3"
+    },
+    {
+      "path": "imports/r02/changed-godot-4.log",
+      "bytes": 209,
+      "sha256": "39e16308a72b020703098fd3a9baccf509ba25e4951434b048acc9b589c8bdc6"
+    },
+    {
+      "path": "imports/r02/changed-inputs.json",
+      "bytes": 651,
+      "sha256": "e9ebb2b66e3cda9f305b85ce5988a24ee9b7e0affaebcd39f90dea61cbf540fc"
+    },
+    {
+      "path": "imports/r02/changed-receipt.json",
+      "bytes": 7731,
+      "sha256": "3e5aac9bf562cf40adb304ea1b86747b6d22cf74a599467d80e4c279b4312c98"
+    },
+    {
+      "path": "imports/r02/check-blender.py",
+      "bytes": 2650,
+      "sha256": "ee93685c7a5c942e4899656c5ff03f89ce63ebf629be31a5c41ce9c84c72bcb8"
+    },
+    {
+      "path": "imports/r02/check-glb.mjs",
+      "bytes": 6238,
+      "sha256": "042fe1354735f6f9f11fee3d6e7b2ac0a9d5723194567fcc8c25faad6e1bb503"
+    },
+    {
+      "path": "imports/r02/check-stair-revision.py",
+      "bytes": 4535,
+      "sha256": "efd297dab01c130ba60ba16307944c2f6f1f805da75542062f40b58ab2c551c6"
+    },
+    {
+      "path": "imports/r02/check-stair.py",
+      "bytes": 1183,
+      "sha256": "746ddcd37ad9bf722a41863237c7bfe07f298b09966e8b89a1eb1ac767b5aeb3"
+    },
+    {
+      "path": "imports/r02/final-freeze-verification.json",
+      "bytes": 39596,
+      "sha256": "ada3d68843d691e46ef97f277ac7032211dbce152894874fcf9601c52abd8b71"
+    },
+    {
+      "path": "imports/r02/godot_import.gd",
+      "bytes": 983,
+      "sha256": "58b7435507fc76a1cd5247720c66afb4e67a5585eb22f50e20a526d87c39950b"
+    },
+    {
+      "path": "imports/r02/lineage-after.json",
+      "bytes": 91,
+      "sha256": "28733690f6e4671d56d94a932712286a80d21dc149ac49750a113435ae175308"
+    },
+    {
+      "path": "imports/r02/lineage-before.json",
+      "bytes": 51401,
+      "sha256": "4b67d2255379af76366e63ab327d606b51cd2f7656977c8048db487e83f947ad"
+    },
+    {
+      "path": "imports/r02/project-validator-errors.json",
+      "bytes": 22762,
+      "sha256": "433bb99574fa50d9d7eae6d428f67c209c9c44fbe6d73eae9f9f687d18dad8ff"
+    },
+    {
+      "path": "imports/r02/project.godot",
+      "bytes": 140,
+      "sha256": "937e8201f090578680e465956594eea8bebd96b32698ef7220a8c2a8300b3dbb"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-blender.json",
+      "bytes": 2586,
+      "sha256": "e42285cbb5189325cd8d8fec7c8e9b924de17bebabf17ed8bc6a6bc6e840dc2b"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-blender.log",
+      "bytes": 58399,
+      "sha256": "7a3d2dff355fc9ec74f7b92d955e1472e3f6fbd1d56b63dc77ff69281fe42f71"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-glb-validator-details.json",
+      "bytes": 24038,
+      "sha256": "9f23000ac482736b3b2d06eb8ce4eee7ce323e3ec5030059f4c7b10ab95cebd9"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-glb.json",
+      "bytes": 9748,
+      "sha256": "9d03fa6e40179e20abe0a33545539b8f36dfe3da03b48929d3ed23eaf6c0131e"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-glb.log",
+      "bytes": 792,
+      "sha256": "5aeb10ce9fb0c20d4cb520d340c2861dd5e99d580411745af96b3291d7af147a"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-godot-0.log",
+      "bytes": 211,
+      "sha256": "003bf6b2b4d02b4fecbc2a17f13e544ede813f0edea1a929aa7d8099ad4d2232"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-godot-1.log",
+      "bytes": 209,
+      "sha256": "90d8dd565f2520cfbf6abe96dcc2c8ff634b1cf895a0406d15a80849d8927f09"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-godot-2.log",
+      "bytes": 211,
+      "sha256": "7319410a940ebdd77bd827424f550cf5d96db5dcd03dac0bcdf244a2fa1c2e06"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-godot-3.log",
+      "bytes": 211,
+      "sha256": "877d04342d25777184917b687525826eda5fcb801d6ed26d3c71563813baecd2"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-inputs.json",
+      "bytes": 391,
+      "sha256": "9d2de5ae48b150d2ac5ad259f1294a76bb54453cb9ecfcf86c92e13231ecea21"
+    },
+    {
+      "path": "imports/r02/remaining-fixtures-receipt.json",
+      "bytes": 6255,
+      "sha256": "0bfdc8e83c70ccb6924ba19c0eb9a854670d77561202fc572b9d187b53ff89aa"
+    },
+    {
+      "path": "imports/r02/run_checks.py",
+      "bytes": 2347,
+      "sha256": "2d49d194d4f35030446fc5887a8464c9d323741780660ede8fd8b5299b25e27b"
+    },
+    {
+      "path": "imports/r02/stair-profile.json",
+      "bytes": 1039,
+      "sha256": "b7f5bef30419a2944d69354d83ee7863879b05ba0e34043cdee09000a74d7d9a"
+    },
+    {
+      "path": "imports/r02/stair-profile.log",
+      "bytes": 944,
+      "sha256": "f4e3bb6c6630598789de0cd7885ab748550b08aace56b679948661f6149075c8"
+    },
+    {
+      "path": "imports/r02/stair-revision-validation.json",
+      "bytes": 8637,
+      "sha256": "d56fb698c7e6ea2bf2d67627bd637c73499670ee42fc57c60973ac5c9f6c9da0"
+    },
+    {
+      "path": "imports/r02/stair-revision-validation.log",
+      "bytes": 249,
+      "sha256": "5e5eaa2f1a44d340c93a532bd8dfda68586025a421c61a676a60290b26e76d1d"
+    },
+    {
+      "path": "imports/registry-textures.json",
+      "bytes": 135050,
+      "sha256": "2e96a66839ad6fe3f92bc02f3ab436944c3d04538134a8ee4a831c11f789c50f"
+    },
+    {
+      "path": "imports/registry-textures.log",
+      "bytes": 20,
+      "sha256": "48dc486c4bb8b707152ebf3c563d226d5928dffb4210f7caa2a70c8a8e348c80"
+    },
+    {
+      "path": "imports/run_checks.py",
+      "bytes": 2347,
+      "sha256": "2d49d194d4f35030446fc5887a8464c9d323741780660ede8fd8b5299b25e27b"
+    },
+    {
+      "path": "imports/source-validation.json",
+      "bytes": 10980,
+      "sha256": "7bfef7e5bc854909948be679f4af8d98368ea5c48888f1c704479efe2e614ed7"
+    },
+    {
+      "path": "imports/source-validation.log",
+      "bytes": 1482,
+      "sha256": "9337f5ded75a9349ecbe7a27112cfcc65a2b33fecbfdecd385134c68e0286c71"
+    },
+    {
+      "path": "imports/stair-profile.json",
+      "bytes": 1048,
+      "sha256": "116cb7691ddf0f25ca88d1b4b49c73514dd9410273af75bfc813bf50f585c213"
+    },
+    {
+      "path": "imports/stair-profile.log",
+      "bytes": 951,
+      "sha256": "498e2dc8c2f57515ce7b5a2edcc4480737679429c1f8c7ba0c7829fd7280106f"
+    },
+    {
+      "path": "publication-origins.json",
+      "bytes": 3899,
+      "sha256": "20c447bc59ba89826bc718fe081a3a2d7044fb2efc94aa7d22ae679891b68563"
+    },
+    {
+      "path": "verify_package.py",
+      "bytes": 1926,
+      "sha256": "fb93131bd792d61873ca96ed4d1cf42d9b4595f06acb10b92dd3812b4200b642"
+    },
+    {
+      "path": "visual/build_r02_review.py",
+      "bytes": 5889,
+      "sha256": "0b85c274ac5f40d3e1bd73320c586ace61c11691ba060cd1a11a70cfcc835be2"
+    },
+    {
+      "path": "visual/build_review.py",
+      "bytes": 12815,
+      "sha256": "8c642e8d6fd484ccac3b178e8df567d1b972bc3141f69e42d879e32a45a753aa"
+    },
+    {
+      "path": "visual/freeze-verification.json",
+      "bytes": 14644,
+      "sha256": "c8d608b5a397a4d95da199b73ec67fab17696eecabc2a9bde52c7fca1504623d"
+    },
+    {
+      "path": "visual/pixels/r01-stair-flight.png",
+      "bytes": 622266,
+      "sha256": "d703bcf39c54f723e72ace1c4f048f2b2772399837be011f6c1dd9c8ebe2f2e9"
+    },
+    {
+      "path": "visual/pixels/r01-stairs-with-landing.png",
+      "bytes": 498818,
+      "sha256": "bed4eb7b38dc4bff6045ae988a407b5b22e9e917595a08ce2a75759dde801cfb"
+    },
+    {
+      "path": "visual/pixels/r02-stair-flight.png",
+      "bytes": 613436,
+      "sha256": "5828ccb23fc0201d3a1dc500a146d711f20192bc3806774f91761029a7cf06af"
+    },
+    {
+      "path": "visual/pixels/r02-stairs-with-landing.png",
+      "bytes": 496474,
+      "sha256": "be1c43662fbefe7496c93514bbb090005fcd3ecffc0711261819a6f94acfcb1f"
+    },
+    {
+      "path": "visual/r02/freeze-verification.json",
+      "bytes": 15571,
+      "sha256": "6f519764c4581102e14463961b23fa5b71b07ca4ef7a47b07a264b85bbb34fc3"
+    },
+    {
+      "path": "visual/r02/png-comparison.json",
+      "bytes": 13334,
+      "sha256": "7828cb8342870669270daa313f08166d3bcae7a7cf06e24ecc2fb765a1e36c4e"
+    },
+    {
+      "path": "visual/r02/review.json",
+      "bytes": 3781,
+      "sha256": "f8930bb4d89c2f211fed3053228f876af1b9ff78fc149563db965c74c0136b61"
+    },
+    {
+      "path": "visual/r02/review.md",
+      "bytes": 1963,
+      "sha256": "dfa60bc6a12d020f4694e404d4e4dcc455a81a362add705524b3d77052c03d54"
+    },
+    {
+      "path": "visual/review.json",
+      "bytes": 17305,
+      "sha256": "b3a12b7996ebacdfb5d349f1877384b5ccb6ce79e3fec37062ad61d15f15858d"
+    },
+    {
+      "path": "visual/review.md",
+      "bytes": 8336,
+      "sha256": "db37fc7ead7095a7bee35a7d82cf1cdc8856b84661a7ef3d9bbafd171e2c6ed2"
+    }
+  ]
+}

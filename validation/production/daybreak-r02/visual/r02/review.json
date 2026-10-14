@@ -1,0 +1,81 @@
+{
+  "status": "SCOPED_STAIR_REPAIR_VISIBLE_NOT_EXACT_NOT_VISUALLY_APPROVED",
+  "priorReview": "../review.json",
+  "priorReviewSha256": "b3a12b7996ebacdfb5d349f1877384b5ccb6ce79e3fec37062ad61d15f15858d",
+  "candidate": "Daybreak candidate r02",
+  "freezeSha256": "8c2154a96dedb8ff8436c8b1c29e8221f4c278368aa226e8400f6eee841e9465",
+  "freezeVerified": 208,
+  "freezeExpected": 208,
+  "pixelInspections": [
+    {
+      "revision": "r01",
+      "path": "modules/stair-flight/hero.png",
+      "sha256": "d703bcf39c54f723e72ace1c4f048f2b2772399837be011f6c1dd9c8ebe2f2e9"
+    },
+    {
+      "revision": "r02",
+      "path": "modules/stair-flight/hero.png",
+      "sha256": "5828ccb23fc0201d3a1dc500a146d711f20192bc3806774f91761029a7cf06af"
+    },
+    {
+      "revision": "r01",
+      "path": "fixtures/stairs-with-landing/hero.png",
+      "sha256": "bed4eb7b38dc4bff6045ae988a407b5b22e9e917595a08ce2a75759dde801cfb"
+    },
+    {
+      "revision": "r02",
+      "path": "fixtures/stairs-with-landing/hero.png",
+      "sha256": "be1c43662fbefe7496c93514bbb090005fcd3ecffc0711261819a6f94acfcb1f"
+    },
+    {
+      "revision": "r02",
+      "path": "references/daybreak-stair-ramp-proposed-v01.png",
+      "sha256": "85db6edfbdb1b34724f3dccbdf905e8bcf75997813f47baa405c55abb932dd37"
+    },
+    {
+      "revision": "r02",
+      "path": "module-contact-sheet.png",
+      "sha256": "54fba42ba24b01f0f5dba070d841cd3ba1141dd8171d179387fc7d4c914062d2"
+    }
+  ],
+  "changedPngs": [
+    "fixtures/stairs-with-landing/hero.png",
+    "module-contact-sheet.png",
+    "modules/stair-flight/hero.png"
+  ],
+  "unchangedPngCount": 50,
+  "visualFindings": [
+    {
+      "id": "DV-R02-01",
+      "status": "VISIBLE_SCOPED_IMPROVEMENT",
+      "finding": "The r01 terminal-body intrusion into the topmost exposed tread is absent in r02. The separate landing edge/fascia is more clearly visible at the end of the flight. This visual observation agrees with the stated narrow repair scope; pixels alone do not prove the300mm tread measurement."
+    },
+    {
+      "id": "DV-R02-02",
+      "status": "UNRESOLVED",
+      "finding": "Landing side/rear edges remain visibly unguarded, and the ascending handrails still terminate at the top posts rather than returning around the landing as in the proposed sheet. No new guard or safe exit arrangement is shown."
+    },
+    {
+      "id": "DV-R02-03",
+      "status": "UNRESOLVED",
+      "finding": "The source side infill panels, layered bronze post shoes/caps, brackets, drainage detail and richer radial landing inlay remain absent or simplified. Plain square posts, thin rails and the sparse central floor marker are unchanged."
+    },
+    {
+      "id": "DV-R02-04",
+      "status": "CONTEXT_REQUIRED",
+      "finding": "The standalone stair ends before the receiving landing; its upper post bases have no landing under them in the isolated hero. The assembled fixture supplies the adjoining landing. Judge the receiving-seat/support interface in an assembled side/section view rather than treating the standalone render as a complete circulation unit."
+    }
+  ],
+  "technicalEvidenceRead": {
+    "path": "stair-revision-validation.json",
+    "sha256": "d56fb698c7e6ea2bf2d67627bd637c73499670ee42fc57c60973ac5c9f6c9da0",
+    "scope": "Report read, not rerun by this visual reviewer. Physical geometry checks belong to the independent technical verifier."
+  },
+  "limits": [
+    "No exact-match or final visual approval",
+    "No new geometry, collision, controller, accessibility or engineering certification",
+    "Original r01 review and candidate remain unchanged",
+    "Original reference105 remains binding; proposed stair reference remains unapproved construction guidance",
+    "50unchanged images retain prior visual gaps; no broad rereview claimed"
+  ]
+}

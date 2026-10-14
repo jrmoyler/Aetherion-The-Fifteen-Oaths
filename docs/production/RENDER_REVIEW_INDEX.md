@@ -42,3 +42,7 @@ The later [parent review of revision 04](reviews/representative-revision-04/PARE
 ## Focused facial revision 06
 
 [Gallery](reviews/representative-revision-06/index.html) · [evidence and limitations](reviews/representative-revision-06/README.md). Final V10 source, three visual LODs, collision export and two CPU diagnostic views are retained with V9 eye history. No visual approval; original090 remains the likeness reference.
+
+## Daybreak architecture candidate
+
+[Seventeen-module gallery](../../assets/production/oath-09/architecture/index.html) · [original REF-105 and proposed construction references](../../assets/production/oath-09/architecture/references/) · [limitations](../../assets/production/oath-09/architecture/README.md). Five assembled fixtures demonstrate proposed joins, not complete buildings. Actual pixel review still finds canopy, pier, trim, guard and material differences; zero visual approvals.

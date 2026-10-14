@@ -22,14 +22,14 @@ The archive has 115 payload files under `AETHERION_PHASE_II/` and two root packa
 
 | Delivered candidate artifact | Count |
 | --- | ---: |
-| Distinct designs | 35 (34 weapon/focus designs and one character) |
-| Manifest entries including authored states/configurations | 46 |
-| Family manifests | 16 (15 weapon families and one character family) |
-| Editable Blender sources | 46 |
-| GLB files including LODs, collision and optional states | 204 |
-| External PBR maps | 240 |
-| Rigged distinct designs / distinct design-clip pairs | 14 / 16 |
-| Manifest-listed base/motion render paths | 165 |
+| Distinct designs | 52 (34 weapon/focus designs, one character and 17 architecture modules) |
+| Manifest entries including authored states/configurations | 63 |
+| Family manifests | 17 (15 weapon families, one character family and one architecture family) |
+| Editable Blender sources | 68 (63 manifested sources and five derivative assembly fixtures) |
+| GLB files including LODs, collision and optional states | 275 (270 manifested exports and five derivative assembly fixtures) |
+| External PBR maps | 260 |
+| Rigged distinct designs / distinct design-clip pairs | 14 / 17 (one additional rigid-node baffle clip) |
+| Manifest-listed base/motion render paths | 183 |
 | Production-approved assets or completed families | 0 |
 
 [Exact design/asset IDs and Blender source paths](../../validation/production/DELIVERED_DESIGNS.md) distinguish designs from repeated state exports. [Render review index](RENDER_REVIEW_INDEX.md) links original references, actual candidate contact sheets and family review notes. Sources and exported artifacts are under `assets/production/`; reproducible authoring scripts accompany their actual outputs. Static objects are not artificially rigged. Articulated equipment and the character have functional rigs and authored clips. The character has 38 bones and three clips; its likeness, clothing detail, deformation and grounded animation remain unfinished.
@@ -48,7 +48,7 @@ The [Godot checkpoint](../../validation/production/GODOT_PRODUCTION.checkpoint.j
 
 ## Remaining production work and blockers
 
-All 510 Phase I families remain open for full acceptance. Sixteen have partial candidate deliveries; the other 494 have no newly authored delivery in this checkpoint. Architecture, terrain, environment families, props, the remaining character/costume roster, creatures/mounts/morphs, complete animation libraries, VFX/audio/UI and continental runtime systems remain unfinished. Existing 100 castables retain scoped CPU evidence; none gains rendered-gameplay certification from this work. Phase II registries and diagrams are specifications, not completed regions or capitals.
+All 510 Phase I families remain open for full acceptance. Seventeen have partial candidate deliveries; the other 493 have no newly authored delivery in this checkpoint. Architecture, terrain, environment families, props, the remaining character/costume roster, creatures/mounts/morphs, complete animation libraries, VFX/audio/UI and continental runtime systems remain unfinished. Existing 100 castables retain scoped CPU evidence; none gains rendered-gameplay certification from this work. Phase II registries and diagrams are specifications, not completed regions or capitals.
 
 Blender 4.3.2 CPU authoring/rendering and Godot 4.6.3 headless testing are available. Unreal Editor was absent from PATH and audited installation locations; supported Unreal installation/license access is needed for real import/runtime certification. This executor has no `/dev/dri`. Chromium's normal launch fails its SUID sandbox configuration; no security settings were bypassed. Supported browser/GPU access is needed for rendered gameplay, texture/material parity, grip/contact checks and representative performance measurements. Performance budgets remain proposed.
 
@@ -71,3 +71,11 @@ The installed package passes 50 tests. [Independent review](../../validation/pro
 [Focused review 05](reviews/representative-revision-05/README.md) adds ninja V8b and Fault V11 sources and independent evidence without promoting either to production acceptance. The opt-in preview now selects these alongside the preserved shield V8b. Broader architecture production and further facial repairs continue separately. The ten-sheet [second proposed reference batch](../../assets/references/proposed-expansion-2026-10-13-batch02/README.md) remains additive and unapproved; its 23 payload hashes and ten PNGs were checked locally.
 
 [Focused review 06](reviews/representative-revision-06/README.md) retains final Ninja V10 with historical V9 eye diagnostics. The protruding profile eye disk is reduced and nose/lower-face contours are revised; the compact hair cap, repeated locks, ear shape and overall likeness remain unresolved. The opt-in preview selects V10, Fault V11 and shield V8b from revisions 06/05/04. Independent format/import and animation checks remain separate from visual acceptance.
+
+## Daybreak architecture and scoped physical traversal
+
+The [Daybreak candidate](../../assets/production/oath-09/architecture/README.md) covers all 17 named module requirements in the existing `asset-o09-n-architecture-family`. Its five additional assembled scenes are derivative fixtures, not extra module designs or completed buildings. The baffle explicitly lacks required state-specific collision; non-solid shade fabric has a separately justified no-collision policy. Static modules are not artificially rigged.
+
+Independent inspection found and repaired a shortened final stair tread in r02. Actual Blender, Godot and Three.js CPU imports pass for all 71 kit/fixture GLBs. The project's stricter delivery validator subsequently found ten unreduced LOD transitions, recorded as failures pending an actual export repair. No visual match or full-kit acceptance follows from the import passes.
+
+The [Godot physics harness](../../validation/production/daybreak-physics/README.md) imports collision derived from actual authored fixture sources. Four centerline capsule ascents/descents pass; four deliberately displaced-landing cases fail traversal as expected. Root independently reproduced all eight expectations. Its physics negatives use a 1.0 m gap and 0.65 m step, distinct from the smaller static-interface probes. Controller dimensions are proposed, and the stair movement proxy is a smooth wedge. Guard completion, player/mount clearance, full navigation and rendered gameplay remain unverified.
