@@ -1,6 +1,6 @@
 {
   "reviewMode": false,
-  "generatedAt": "2026-10-14T00:16:51.620Z",
+  "generatedAt": "2026-10-14T01:00:47.563Z",
   "scope": "Local bounded file snapshot while production authoring continues; not a final remote-head claim",
   "status": "PASS_AT_CAPTURE",
   "commands": [
@@ -78,18 +78,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "dfa3e9b6426d03569a50c2bfc63cee00956a9b904b7a38a0e311ad3bab76c41e",
-      "bytes": 7152
+      "sha256": "c65d7ea8e04e4a9bd86426f564254eb3d5a135d4db471c696024223dd4566ae5",
+      "bytes": 8023
     },
     {
       "path": "review-assets.mjs",
-      "sha256": "487a82a3c910f74262c29008278bee79e7ea3b88f49d08daf6ecbe6b7206d152",
-      "bytes": 2612
+      "sha256": "c50b5fa8ea3f30f8c8cb3fc91edde8c56fbd7f3b535c265e3920cece15c5c20e",
+      "bytes": 2870
     },
     {
       "path": "review-manifest.json",
-      "sha256": "1de4cf4f52940067676f86d3d399a4825596552283a9232bd4aeaa0a581a713a",
-      "bytes": 2286
+      "sha256": "51f907d884491834849e4fc40654062908308e35dc1465ca5609680c10756986",
+      "bytes": 21849
     },
     {
       "path": "runtime-assets.mjs",
@@ -118,8 +118,8 @@
     },
     {
       "path": "tests/http-smoke.mjs",
-      "sha256": "2f9c5ca4494ae2301e1cab68a5d696568d85f94813713ca3e5a6d2d1d9a07a3c",
-      "bytes": 4699
+      "sha256": "92fb5d80af9545bd169d77a5e39401f5f51c29a7d17c6d10a4fa5761fd2e828e",
+      "bytes": 6409
     },
     {
       "path": "tests/lifecycle.test.mjs",
@@ -133,8 +133,8 @@
     },
     {
       "path": "tests/review-assets.test.mjs",
-      "sha256": "aa7bf076a11a15f77e9956580f301800895cb751ff1befb9f900f918b9c36fe7",
-      "bytes": 3909
+      "sha256": "55f12f4e6604f41bafc0251b1ac3cf60d7e9a7f5088bcb9a07b986797288f179",
+      "bytes": 7124
     },
     {
       "path": "tests/runtime-assets.test.mjs",
@@ -200,18 +200,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "dfa3e9b6426d03569a50c2bfc63cee00956a9b904b7a38a0e311ad3bab76c41e",
-      "bytes": 7152
+      "sha256": "c65d7ea8e04e4a9bd86426f564254eb3d5a135d4db471c696024223dd4566ae5",
+      "bytes": 8023
     },
     {
       "path": "review-assets.mjs",
-      "sha256": "487a82a3c910f74262c29008278bee79e7ea3b88f49d08daf6ecbe6b7206d152",
-      "bytes": 2612
+      "sha256": "c50b5fa8ea3f30f8c8cb3fc91edde8c56fbd7f3b535c265e3920cece15c5c20e",
+      "bytes": 2870
     },
     {
       "path": "review-manifest.json",
-      "sha256": "1de4cf4f52940067676f86d3d399a4825596552283a9232bd4aeaa0a581a713a",
-      "bytes": 2286
+      "sha256": "51f907d884491834849e4fc40654062908308e35dc1465ca5609680c10756986",
+      "bytes": 21849
     },
     {
       "path": "runtime-assets.mjs",
@@ -240,8 +240,8 @@
     },
     {
       "path": "tests/http-smoke.mjs",
-      "sha256": "2f9c5ca4494ae2301e1cab68a5d696568d85f94813713ca3e5a6d2d1d9a07a3c",
-      "bytes": 4699
+      "sha256": "92fb5d80af9545bd169d77a5e39401f5f51c29a7d17c6d10a4fa5761fd2e828e",
+      "bytes": 6409
     },
     {
       "path": "tests/lifecycle.test.mjs",
@@ -255,8 +255,8 @@
     },
     {
       "path": "tests/review-assets.test.mjs",
-      "sha256": "aa7bf076a11a15f77e9956580f301800895cb751ff1befb9f900f918b9c36fe7",
-      "bytes": 3909
+      "sha256": "55f12f4e6604f41bafc0251b1ac3cf60d7e9a7f5088bcb9a07b986797288f179",
+      "bytes": 7124
     },
     {
       "path": "tests/runtime-assets.test.mjs",
@@ -1994,7 +1994,7 @@
       "unchangedAfterChecks": true
     }
   ],
-  "cpuReportSha256": "06cf6efc1f469ce6f273c2f61b7d95b18cd1f6312ed7c390a7cd80a5dd9cde87",
+  "cpuReportSha256": "36b56613dd9b4ba318cac765c00e47fa59df6c2ff310b9044105fbe8ae1b6cc4",
   "results": {
     "CPU": {
       "files": 209,
@@ -2023,9 +2023,9 @@
     }
   },
   "logs": {
-    "unit-tests.log": "64b15c8f7aab04c19e01a8d11eab099647c41aa8b602ea0a9e124724bdfebaeb",
+    "unit-tests.log": "23c2ff006890a5718ef20ed1e940601f9d3520377a963535dbea0da8b0a8bfad",
     "asset-import.log": "f134064265eac31fc7cf7803cd8f04a9384c96f23cf46d66287d60754ded989b",
-    "build.log": "3d718e38c9948e06dd9dcf606bd33afac151cd32899331ed3cc46c57339227d8",
+    "build.log": "5de0134c3fdf2741d95e49b74b79cf3715a66d3809a4a4ac92a681eacbc19b96",
     "http-development.log": "a00162d4752735d1af3e7bcbe1340f09851ef3aa302c27084cd543845631712c",
     "http-built.log": "5c265eb0aa3e3461c0ce24f90ef49dacfa0328f02b5367bc02abc9af9763917f"
   }

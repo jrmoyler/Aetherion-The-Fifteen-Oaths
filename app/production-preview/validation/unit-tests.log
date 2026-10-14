@@ -2,48 +2,51 @@
 > aetherion-production-preview@0.1.0 test
 > node --test tests/*.test.mjs
 
-✔ context loss pauses rendering, requests recovery and restores exactly once (1.283604ms)
-✔ visibility and BFCache suspend without restarting a lost context (0.372031ms)
-✔ DOM inspection focus gates camera without stopping scene rendering (0.884062ms)
-✔ failed or disposed renderer never restarts after a restore event (0.210647ms)
-✔ resize rejects hidden/invalid dimensions and caps device pixel ratio (1.589135ms)
-✔ keyboard camera shortcuts never hijack form fields, Tab or browser chords (0.154683ms)
-✔ reduced motion pauses clips and damping but permits explicit play opt-in (0.180913ms)
-✔ orthographic framing preserves meter scale and world-axis direction (2.484665ms)
-✔ view-group rotation changes world bounds without changing source mesh coordinates (7.73022ms)
-✔ asset and family reference correspondence is explicit and deduplicated (0.719624ms)
-✔ reference replacement clears old source and ignores stale load event (0.227213ms)
-✔ dirty parent rotation is measured before a renderer updates matrices (0.886095ms)
-✔ first framing uses the resized viewport aspect (0.234523ms)
-✔ resource disposal deduplicates shared geometry, materials, uniforms, images and skeletons (8.950099ms)
-✔ late parsed result after replacement is disposed and never becomes active (1.417316ms)
-✔ shutdown aborts fetch, discards late parse and is idempotent (0.518441ms)
-✔ failed current load surfaces error but a stale rejected load cannot overwrite it (0.238129ms)
-✔ replacement stops actions, uncaches root and restores material ownership before dispose (0.293532ms)
-✔ mixer construction failure disposes the decoded GLTF (0.181614ms)
-✔ artist manifest maps repository-relative exports and authored LODs (0.73684ms)
-✔ manifest refuses non-GLB URLs, external protocols and traversal outside asset root (0.285891ms)
-✔ separate state files never inherit ready LODs (0.368856ms)
-✔ separately manifested variant retains its ID and authored state LODs (0.249145ms)
-✔ review opt-in adds only hash-pinned listed GLBs without mutating production catalog (6.135918ms)
-✔ changed review bytes fail closed (21.629417ms)
-✔ review namespace traversal and outside symlinks are rejected (1.748075ms)
-✔ external resources cannot expand review delivery (0.803962ms)
-✔ review status and original-reference resolution remain explicit (1.271716ms)
-✔ cached reviewed bytes remain pinned after file replacement or symlink swap (1.657027ms)
-✔ shipping boundary excludes DCC, notes, collision and unused images (21.729779ms)
-✔ only actually referenced external GLB images/buffers join the allowlist (1.230164ms)
-✔ GLB cannot smuggle authoring files or remote dependencies into runtime (1.55917ms)
-✔ bad GLB length fails closed instead of silently bundling source folder (0.242465ms)
-✔ reference boundary serves only explicitly indexed originals and rejects unresolved IDs (1.983219ms)
-ℹ tests 34
+✔ context loss pauses rendering, requests recovery and restores exactly once (1.113999ms)
+✔ visibility and BFCache suspend without restarting a lost context (0.448056ms)
+✔ DOM inspection focus gates camera without stopping scene rendering (3.920671ms)
+✔ failed or disposed renderer never restarts after a restore event (0.203677ms)
+✔ resize rejects hidden/invalid dimensions and caps device pixel ratio (0.752794ms)
+✔ keyboard camera shortcuts never hijack form fields, Tab or browser chords (0.139701ms)
+✔ reduced motion pauses clips and damping but permits explicit play opt-in (0.204468ms)
+✔ orthographic framing preserves meter scale and world-axis direction (3.60876ms)
+✔ view-group rotation changes world bounds without changing source mesh coordinates (2.394609ms)
+✔ asset and family reference correspondence is explicit and deduplicated (1.099497ms)
+✔ reference replacement clears old source and ignores stale load event (0.354264ms)
+✔ dirty parent rotation is measured before a renderer updates matrices (0.813827ms)
+✔ first framing uses the resized viewport aspect (0.376718ms)
+✔ resource disposal deduplicates shared geometry, materials, uniforms, images and skeletons (2.298014ms)
+✔ late parsed result after replacement is disposed and never becomes active (1.506732ms)
+✔ shutdown aborts fetch, discards late parse and is idempotent (0.796992ms)
+✔ failed current load surfaces error but a stale rejected load cannot overwrite it (0.371199ms)
+✔ replacement stops actions, uncaches root and restores material ownership before dispose (0.470669ms)
+✔ mixer construction failure disposes the decoded GLTF (0.335065ms)
+✔ artist manifest maps repository-relative exports and authored LODs (1.058196ms)
+✔ manifest refuses non-GLB URLs, external protocols and traversal outside asset root (0.405531ms)
+✔ separate state files never inherit ready LODs (0.644532ms)
+✔ separately manifested variant retains its ID and authored state LODs (0.425912ms)
+✔ review opt-in adds only hash-pinned listed GLBs without mutating production catalog (5.569335ms)
+✔ changed review bytes fail closed (1.923791ms)
+✔ review namespace traversal and outside symlinks are rejected (1.314782ms)
+✔ external resources cannot expand review delivery (0.800557ms)
+✔ review status and original-reference resolution remain explicit (1.192348ms)
+✔ cached reviewed bytes remain pinned after file replacement or symlink swap (1.04816ms)
+✔ duplicate review identities and implicit asset approval fail closed (1.156894ms)
+✔ every new review LOD must carry its own exact byte pin (1.196704ms)
+✔ published review selection preserves historical pins and isolates revision08 candidates (0.81592ms)
+✔ shipping boundary excludes DCC, notes, collision and unused images (5.580252ms)
+✔ only actually referenced external GLB images/buffers join the allowlist (1.38637ms)
+✔ GLB cannot smuggle authoring files or remote dependencies into runtime (1.599021ms)
+✔ bad GLB length fails closed instead of silently bundling source folder (0.350899ms)
+✔ reference boundary serves only explicitly indexed originals and rejects unresolved IDs (2.013876ms)
+ℹ tests 37
 ℹ suites 0
-ℹ pass 34
+ℹ pass 37
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 257.546884
+ℹ duration_ms 229.76169
 npm notice
 npm notice New major version of npm available! 11.9.0 -> 12.2.0
 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
