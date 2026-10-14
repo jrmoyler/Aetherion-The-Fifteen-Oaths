@@ -1,0 +1,34 @@
+{
+  "concept_id": "batch04_12_missing_natural",
+  "reported_group_qa": {
+    "preferred_proposal_file": "batch04_12_missing_natural_v02.png",
+    "pixel_qa": {
+      "pass": [
+        "v02 supplies opposite-facing profiles and removes extra wrist/dewclaw pad from primary foot-detail panels",
+        "Four legs, two large ears, two eyes and single tail readable in neutral views",
+        "Four short claws and four toe pads plus broad central pad readable in v02 foot closeups",
+        "Climbing, low-running, threshold pause and prey encounter show ecological intent",
+        "Living eye-cover open/closed proposal and exposed underside present"
+      ],
+      "issues": [
+        "Eye membrane still reads as silver rigid joined mask in several neutral views; organic material/attachment not resolved",
+        "Opposite profiles differ in neck/trunk pose and partially overlap tails; not exact orthographic pair",
+        "Digit count not reliably countable in every small contextual paw",
+        "Numbered skeleton callouts contain repeated/misaligned labels; not rig-ready anatomy",
+        "Low-poly styling only partly met by faceted illustrative fur",
+        "Human comparison unresolved; no approved dimensions, UVs or locomotion cycle"
+      ]
+    },
+    "acceptance": "PARTIAL_CONCEPT_ONLY_NOT_PRODUCTION_READY"
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {}
+    },
+    {
+      "version": "v02",
+      "qa": {}
+    }
+  ]
+}

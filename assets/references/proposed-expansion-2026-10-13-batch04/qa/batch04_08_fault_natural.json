@@ -1,0 +1,53 @@
+{
+  "concept_id": "batch04_08_fault_natural",
+  "reported_group_qa": {
+    "reference_pixels_inspected": true,
+    "preferred_review_version": "v02",
+    "actual_pixel_qa": {
+      "strengths": [
+        "Compact natural fossorial mammal with low trunk, enlarged forepaws, small hindfeet, fleshy sensing muzzle and one tail.",
+        "Front/rear, two opposing profiles, top, three-quarter, underside and contact studies present.",
+        "Soil/root feeding and canyon terrace context credible; crystals confined to habitat.",
+        "Skeleton gives plausible short-limbed digging posture, but anatomy not technically validated."
+      ],
+      "v01_issues": [
+        "Forepaw palm visibly has six claw projections despite five-digit labels.",
+        "Small underside digits and labels are difficult to resolve; not a reliable rig reference."
+      ],
+      "v02_result": [
+        "All four foot-detail panels now visibly show five clawed digits, numbered 1 through 5.",
+        "Main front paws and underside views visually remain consistent with five digits; some profile/contact-pose digits are occluded and cannot be individually certified.",
+        "No extra limb pair or gemstone carapace.",
+        "Jaw pad shows soft tissue and whiskers, but underlying sensory anatomy not established."
+      ],
+      "remaining_blockers": [
+        "Occluded digits in small action views and exact joint mechanics require modeling review.",
+        "No approved scale, rig, membrane/soft-tissue simulation, UVs or complete anatomy."
+      ]
+    },
+    "pixel_qa_method": "Full-sheet bounded 1400px review plus native-resolution crops of problematic anatomy; not a text-only or filename-only audit.",
+    "production_gate": "Exact-art, anatomy, engineering and scale approval remain unresolved; not a rig, mesh, UV, animation or production asset."
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "actual_pixel_qa": [
+          "Forepaw palm visibly has six claw projections despite five-digit labels.",
+          "Small underside digits and labels are difficult to resolve; not a reliable rig reference."
+        ]
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "actual_pixel_qa": [
+          "All four foot-detail panels now visibly show five clawed digits, numbered 1 through 5.",
+          "Main front paws and underside views visually remain consistent with five digits; some profile/contact-pose digits are occluded and cannot be individually certified.",
+          "No extra limb pair or gemstone carapace.",
+          "Jaw pad shows soft tissue and whiskers, but underlying sensory anatomy not established."
+        ]
+      }
+    }
+  ]
+}

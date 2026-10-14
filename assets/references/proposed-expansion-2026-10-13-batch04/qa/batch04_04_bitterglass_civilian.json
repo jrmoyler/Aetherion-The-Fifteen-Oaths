@@ -1,0 +1,44 @@
+{
+  "concept_id": "batch04_04_bitterglass_civilian",
+  "reported_group_qa": {
+    "preferred_review_version": "v02",
+    "reference_pixels_inspected": true,
+    "unresolved_inconsistencies": [
+      "Tunic remains approximately knee length rather than hip length specified in corrective prompt.",
+      "Subtle decorative hem/cuff edging remains; cuff closeup looks rolled although standing sleeves are full length.",
+      "Apron wrap seam paths and soft padding thickness not fully reconstructable; seated pose hides accessory.",
+      "Rendering is stylized but more smoothly shaded than strongly faceted low-poly target."
+    ],
+    "approval_gate": "No exact-art, modeling, rig, engineering, scale, construction, safety or family-complete approval is implied. Laterality and seam inconsistencies prevent modeling-ready acceptance."
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "pixel_qa": {
+          "inspected": true,
+          "observations": [
+            "Six standing views, front/rear flats, closure details, seated reach and crouch present.",
+            "Plum/oilskin hierarchy readable; ornate gold embroidery, brass cage holster, metal boot fittings and extra belt accessories deviate from plain workwear brief.",
+            "Sleeves are rolled rather than close full-length cuffs; holster/pocket laterality not reliably consistent."
+          ]
+        },
+        "status": "superseded_proposal_preserved"
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "pixel_qa": {
+          "inspected": true,
+          "observations": [
+            "Six distinct standing angles with left-facing and right-facing profiles, garment flats, attachment closeups, seated reach and crouch visible.",
+            "Correction removes ornate cage, extra tools, conspicuous embroidery and boot plates; plain oilskin apron, plum tunic, single empty leather holster and flexible shoes read as civilian workwear.",
+            "Holster left-side placement visually consistent in main front/rear and profiles; small sewing details cannot establish exact construction."
+          ]
+        },
+        "status": "preferred_proposal_with_unresolved_issues"
+      }
+    }
+  ]
+}

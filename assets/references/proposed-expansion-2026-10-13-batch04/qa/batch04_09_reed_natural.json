@@ -1,0 +1,42 @@
+{
+  "concept_id": "batch04_09_reed_natural",
+  "reported_group_qa": {
+    "reference_pixels_inspected": true,
+    "preferred_review_version": "v01",
+    "actual_pixel_qa": {
+      "strengths": [
+        "Distinct light climber body with four limbs and one long balancing tail; no separate wing pair.",
+        "Front/rear, opposing profiles, top, three-quarter, underside and folded/spread studies present.",
+        "Berries and cliff-grip pose give readable ecology.",
+        "Organic tan/ivory/rust feather and membrane surfaces avoid literal mechanical bamboo construction."
+      ],
+      "v01_issues": [
+        "Skeleton labels duplicate/misplace indices (e.g. 1 at shoulder/spine and 8 by hand); numbered articulation map is not usable as rig instructions.",
+        "Grasp detail labels say four digits; oblique hand/foot arrangement is not consistently countable across all small views.",
+        "Spread wrist-to-ankle membrane depicted, but folded state loses clear attachment path and feathers obscure continuity.",
+        "Long feathered ear silhouette and birdlike beaked skull are extra generated interpretations, not source-established anatomy.",
+        "Head, back and tail feathers extend beyond requested edge-only feather fringe; medium reads more detailed painterly than strict large faceted low-poly."
+      ],
+      "remaining_blockers": [
+        "Digit and membrane attachment continuity require targeted review/correction before modeling.",
+        "Skeleton labels need correction and skull/ear interpretation approval."
+      ]
+    },
+    "pixel_qa_method": "Full-sheet bounded 1400px review plus native-resolution crops of problematic anatomy; not a text-only or filename-only audit.",
+    "production_gate": "Exact-art, anatomy, engineering and scale approval remain unresolved; not a rig, mesh, UV, animation or production asset."
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "actual_pixel_qa": [
+          "Skeleton labels duplicate/misplace indices (e.g. 1 at shoulder/spine and 8 by hand); numbered articulation map is not usable as rig instructions.",
+          "Grasp detail labels say four digits; oblique hand/foot arrangement is not consistently countable across all small views.",
+          "Spread wrist-to-ankle membrane depicted, but folded state loses clear attachment path and feathers obscure continuity.",
+          "Long feathered ear silhouette and birdlike beaked skull are extra generated interpretations, not source-established anatomy.",
+          "Head, back and tail feathers extend beyond requested edge-only feather fringe; medium reads more detailed painterly than strict large faceted low-poly."
+        ]
+      }
+    }
+  ]
+}

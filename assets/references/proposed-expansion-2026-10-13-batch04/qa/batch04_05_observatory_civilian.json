@@ -1,0 +1,43 @@
+{
+  "concept_id": "batch04_05_observatory_civilian",
+  "reported_group_qa": {
+    "preferred_review_version": "v02",
+    "reference_pixels_inspected": true,
+    "unresolved_inconsistencies": [
+      "Rear standing view omits right pouch, while rear three-quarter partly shows it; accessory visibility/attachment continuity unresolved.",
+      "Flat-lay sleeve length appears shorter/wider than full-length worn sleeve, requiring pattern reconciliation.",
+      "Calibration props remain speculative and are not separate approved instrument assets.",
+      "No measured orthographic or exact fastener/seam count certification."
+    ],
+    "approval_gate": "No exact-art, modeling, rig, engineering, scale, construction, safety or family-complete approval is implied. Laterality and seam inconsistencies prevent modeling-ready acceptance."
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "pixel_qa": {
+          "inspected": true,
+          "observations": [
+            "Six standing angles, opposing profiles, garment flats, pouch detail and movement poses present.",
+            "Broad half sleeves, gold metallic trim, back ring and decorated belt depart from fitted civilian jacket."
+          ]
+        },
+        "status": "superseded_proposal_preserved"
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "pixel_qa": {
+          "inspected": true,
+          "observations": [
+            "Plain cropped indigo jacket, curved yoke, full-length sleeves, charcoal trousers, restrained silver buttons and violet piping are visually distinct civilian construction.",
+            "Six standing views, two garment flats, closure detail, seated reach and crouch present.",
+            "Right pouch clearly visible in front and right profile and hidden in left profile as intended."
+          ]
+        },
+        "status": "preferred_proposal_with_unresolved_issues"
+      }
+    }
+  ]
+}
