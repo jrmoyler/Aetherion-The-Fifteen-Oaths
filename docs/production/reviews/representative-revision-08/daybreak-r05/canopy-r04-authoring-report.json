@@ -1,0 +1,268 @@
+{
+  "scope": "Two unapproved authored refinements, no design or physics acceptance",
+  "reports": [
+    {
+      "module": "shade-canopy",
+      "counts": {
+        "lod0": 4210,
+        "lod1": 2722,
+        "lod2": 1362
+      },
+      "sockets": [
+        {
+          "name": "canopy-seat-0.3-0.3",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.3,
+            0.3,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            0.3,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            -1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "canopy-seat-0.3-3.7",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.3,
+            3.7,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            0.3,
+            -3.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            -1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "canopy-seat-3.7-0.3",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.7,
+            0.3,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            3.7,
+            0.3,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            -1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "canopy-seat-3.7-3.7",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.7,
+            3.7,
+            0.3
+          ],
+          "position_gltf_xyz_m": [
+            3.7,
+            0.3,
+            -3.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            -1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        }
+      ]
+    },
+    {
+      "module": "public-colonnade",
+      "counts": {
+        "lod0": 6000,
+        "lod1": 3568,
+        "lod2": 1712
+      },
+      "sockets": [
+        {
+          "name": "pier-seat-0.3-0.3",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.3,
+            0.3,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            3.78,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "pier-seat-0.3-3.7",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            0.3,
+            3.7,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            0.3,
+            3.78,
+            -3.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "pier-seat-3.7-0.3",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.7,
+            0.3,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            3.7,
+            3.78,
+            -0.3
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "pier-seat-3.7-3.7",
+          "semantic_type": "attachment_static",
+          "position_blender_xyz_m": [
+            3.7,
+            3.7,
+            3.78
+          ],
+          "position_gltf_xyz_m": [
+            3.7,
+            3.78,
+            -3.7
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "attachment_static"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "base",
+          "semantic_type": "floor_datum",
+          "position_blender_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            0,
+            0,
+            0
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "floor_datum"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": null
+        },
+        {
+          "name": "clear-route",
+          "semantic_type": "door_clear",
+          "position_blender_xyz_m": [
+            2,
+            2,
+            0
+          ],
+          "position_gltf_xyz_m": [
+            2,
+            0,
+            -2
+          ],
+          "outward_normal_blender_xyz": [
+            0,
+            0,
+            1
+          ],
+          "compatible_partner_types": [
+            "door_clear"
+          ],
+          "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+          "clearance": {
+            "width_m": 2.76,
+            "headroom_m": 3.15
+          }
+        }
+      ]
+    }
+  ]
+}

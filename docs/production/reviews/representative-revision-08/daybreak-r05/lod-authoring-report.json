@@ -1,0 +1,563 @@
+{
+  "scope": "Deliberate lower-tier authored geometry; no fidelity or gameplay approval",
+  "reports": [
+    {
+      "module": "foundation-plinth",
+      "counts": {
+        "lod0": 344,
+        "lod1": 328,
+        "lod2": 296
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Corner dry bronze anchor strap",
+          "operation": "Remove top/bottom strap faces fully buried in corner bearing pad",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Corner dry bronze anchor strap.001",
+          "operation": "Remove top/bottom strap faces fully buried in corner bearing pad",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Corner dry bronze anchor strap.002",
+          "operation": "Remove top/bottom strap faces fully buried in corner bearing pad",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Corner dry bronze anchor strap.003",
+          "operation": "Remove top/bottom strap faces fully buried in corner bearing pad",
+          "removed_faces": 4
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "floor-bay",
+      "counts": {
+        "lod0": 228,
+        "lod1": 180,
+        "lod2": 148
+      },
+      "operations": [
+        {
+          "level": 2,
+          "object": "Flush solar medallion",
+          "operation": "16 to8 sided inset medallion; cardinal extents preserved"
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "window-wall",
+      "counts": {
+        "lod0": 584,
+        "lod1": 568,
+        "lod2": 472
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Bronze reveal frame",
+          "operation": "Remove endcaps occluded at reveal-to-stone/frame joints",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Bronze reveal frame.001",
+          "operation": "Remove endcaps occluded at reveal-to-stone/frame joints",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Bronze reveal frame.002",
+          "operation": "Remove endcaps occluded at reveal-to-stone/frame joints",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Bronze reveal frame.003",
+          "operation": "Remove endcaps occluded at reveal-to-stone/frame joints",
+          "removed_faces": 4
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "inside-corner",
+      "counts": {
+        "lod0": 192,
+        "lod1": 96,
+        "lod2": 60
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Corner bronze end cap",
+          "operation": "Replace chamfered straight trim with8vertex rectangular trim, same endpoint bounds"
+        },
+        {
+          "level": 1,
+          "object": "Corner bronze end cap.001",
+          "operation": "Replace chamfered straight trim with8vertex rectangular trim, same endpoint bounds"
+        },
+        {
+          "level": 1,
+          "object": "Corner bronze end cap.002",
+          "operation": "Replace chamfered straight trim with8vertex rectangular trim, same endpoint bounds"
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "door-frame",
+      "counts": {
+        "lod0": 296,
+        "lod1": 168,
+        "lod2": 108
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Bronze jamb trim",
+          "operation": "Replace chamfered straight trim with8vertex rectangular trim, same endpoint bounds"
+        },
+        {
+          "level": 1,
+          "object": "Bronze jamb trim.001",
+          "operation": "Replace chamfered straight trim with8vertex rectangular trim, same endpoint bounds"
+        },
+        {
+          "level": 1,
+          "object": "Bronze jamb trim.002",
+          "operation": "Replace chamfered straight trim with8vertex rectangular trim, same endpoint bounds"
+        },
+        {
+          "level": 1,
+          "object": "Bronze jamb trim.003",
+          "operation": "Replace chamfered straight trim with8vertex rectangular trim, same endpoint bounds"
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "roof-bay",
+      "counts": {
+        "lod0": 72,
+        "lod1": 64,
+        "lod2": 24
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Roof bronze drip edge",
+          "operation": "Remove only buried drip-strip underside triangles",
+          "removed_faces": 2
+        },
+        {
+          "level": 1,
+          "object": "Roof bronze drip edge.001",
+          "operation": "Remove only buried drip-strip underside triangles",
+          "removed_faces": 2
+        },
+        {
+          "level": 1,
+          "object": "Roof bronze drip edge.002",
+          "operation": "Remove only buried drip-strip underside triangles",
+          "removed_faces": 2
+        },
+        {
+          "level": 1,
+          "object": "Roof bronze drip edge.003",
+          "operation": "Remove only buried drip-strip underside triangles",
+          "removed_faces": 2
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "stair-flight",
+      "counts": {
+        "lod0": 836,
+        "lod1": 612,
+        "lod2": 408
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Rail post bronze cap",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.001",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.002",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail.001",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.003",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.004",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.005",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail.002",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail.003",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.001",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.002",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail.001",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.003",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.004",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.005",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail.002",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail.003",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "ramp-run",
+      "counts": {
+        "lod0": 532,
+        "lod1": 308,
+        "lod2": 212
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Rail post bronze cap",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.001",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.002",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail.001",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.003",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.004",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Rail post bronze cap.005",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to8"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail.002",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 1,
+          "object": "Continuous bronze guardrail.003",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.001",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.002",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail.001",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.003",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.004",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Rail post bronze cap.005",
+          "operation": "Retain guardpost cap/endheight, reduce radialsegments to4"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail.002",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        },
+        {
+          "level": 2,
+          "object": "Continuous bronze guardrail.003",
+          "operation": "Retain continuous guardrail, simplify chamfered section to rectangular prism"
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "shade-canopy",
+      "counts": {
+        "lod0": 1024,
+        "lod1": 480,
+        "lod2": 192
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Taut woven removable canopy with shallow sag",
+          "operation": "Sag surface lattice12\u21928, unchangedcorner/center coordinates and4mmthickness"
+        },
+        {
+          "level": 1,
+          "object": "Canopy sewn tension edge",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 1,
+          "object": "Canopy sewn tension edge.001",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 1,
+          "object": "Canopy sewn tension edge.002",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 1,
+          "object": "Canopy sewn tension edge.003",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 1,
+          "object": "Corner socket quick release",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        },
+        {
+          "level": 1,
+          "object": "Corner socket quick release.001",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        },
+        {
+          "level": 1,
+          "object": "Corner socket quick release.002",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        },
+        {
+          "level": 1,
+          "object": "Corner socket quick release.003",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        },
+        {
+          "level": 2,
+          "object": "Taut woven removable canopy with shallow sag",
+          "operation": "Sag surface lattice12\u21924, unchangedcorner/center coordinates and4mmthickness"
+        },
+        {
+          "level": 2,
+          "object": "Canopy sewn tension edge",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 2,
+          "object": "Canopy sewn tension edge.001",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 2,
+          "object": "Canopy sewn tension edge.002",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 2,
+          "object": "Canopy sewn tension edge.003",
+          "operation": "Retain canopy edge, rectangular hem section"
+        },
+        {
+          "level": 2,
+          "object": "Corner socket quick release",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        },
+        {
+          "level": 2,
+          "object": "Corner socket quick release.001",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        },
+        {
+          "level": 2,
+          "object": "Corner socket quick release.002",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        },
+        {
+          "level": 2,
+          "object": "Corner socket quick release.003",
+          "operation": "Retain attachment housing, reduced radialsegments"
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    },
+    {
+      "module": "daylight-baffle",
+      "counts": {
+        "lod0": 264,
+        "lod1": 240,
+        "lod2": 96
+      },
+      "operations": [
+        {
+          "level": 1,
+          "object": "Louver bronze horizontal rim",
+          "operation": "Remove horizontalrim endcaps buried inside verticalrim joints; movingpanel outline/pivot preserved",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Louver bronze horizontal rim.001",
+          "operation": "Remove horizontalrim endcaps buried inside verticalrim joints; movingpanel outline/pivot preserved",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Louver bronze horizontal rim.002",
+          "operation": "Remove horizontalrim endcaps buried inside verticalrim joints; movingpanel outline/pivot preserved",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Louver bronze horizontal rim.003",
+          "operation": "Remove horizontalrim endcaps buried inside verticalrim joints; movingpanel outline/pivot preserved",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Louver bronze horizontal rim.004",
+          "operation": "Remove horizontalrim endcaps buried inside verticalrim joints; movingpanel outline/pivot preserved",
+          "removed_faces": 4
+        },
+        {
+          "level": 1,
+          "object": "Louver bronze horizontal rim.005",
+          "operation": "Remove horizontalrim endcaps buried inside verticalrim joints; movingpanel outline/pivot preserved",
+          "removed_faces": 4
+        }
+      ],
+      "source_lod0_unchanged": true,
+      "collision_exports_unchanged": true
+    }
+  ]
+}

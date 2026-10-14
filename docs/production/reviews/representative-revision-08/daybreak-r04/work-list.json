@@ -1,0 +1,346 @@
+{
+  "baseline_asset_id": "asset-o09-n-architecture-family",
+  "specification_id": "p2-arch-09-daybreak-arcades",
+  "registry_sha256": "145f41ec58c34483362465fcc61f90455d471ed13f4cf39ea91f81c00386433e",
+  "status": "ALL_17_MODULE_REQUIREMENTS_HAVE_UNAPPROVED_CANDIDATES_FULL_KIT_INCOMPLETE",
+  "module_identity_policy": "Registry modules have names, not separate IDs; preserve JSON pointer and original name. Derived output slugs are not canon IDs.",
+  "modules": [
+    {
+      "original_name": "foundation-plinth",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/0",
+      "target_extent_m": [
+        4,
+        4,
+        0.6
+      ],
+      "connections": [
+        "floor_datum:top",
+        "structural_edge:N/E/S/W"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "floor-bay",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/1",
+      "target_extent_m": [
+        4,
+        4,
+        0.4
+      ],
+      "connections": [
+        "structural_edge:N/E/S/W",
+        "floor_datum:top"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "solid-wall",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/2",
+      "target_extent_m": [
+        4,
+        0.35,
+        3.2
+      ],
+      "connections": [
+        "structural_edge:left/right",
+        "floor_datum:base",
+        "roof_seat:top"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "window-wall",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/3",
+      "target_extent_m": [
+        4,
+        0.35,
+        3.2
+      ],
+      "connections": [
+        "structural_edge:left/right",
+        "floor_datum:base",
+        "window_clear:center"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "inside-corner",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/4",
+      "target_extent_m": [
+        0.35,
+        0.35,
+        3.2
+      ],
+      "connections": [
+        "structural_edge:west",
+        "structural_edge:south",
+        "floor_datum:base"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "outside-corner",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/5",
+      "target_extent_m": [
+        0.35,
+        0.35,
+        3.2
+      ],
+      "connections": [
+        "structural_edge:east",
+        "structural_edge:north",
+        "floor_datum:base"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "door-frame",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/6",
+      "target_extent_m": [
+        1.6,
+        0.4,
+        2.8
+      ],
+      "connections": [
+        "door_clear:center",
+        "floor_datum:threshold",
+        "hinge:left-or-right"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "roof-bay",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/7",
+      "target_extent_m": [
+        4,
+        4,
+        0.35
+      ],
+      "connections": [
+        "roof_seat:N/E/S/W",
+        "drain_outlet:low-edge"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "stair-flight",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/8",
+      "target_extent_m": [
+        1.8,
+        2.7,
+        1.6
+      ],
+      "connections": [
+        "landing_start:bottom",
+        "landing_end:top",
+        "guardrail:left/right"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "ramp-run",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/9",
+      "target_extent_m": [
+        1.8,
+        4.8,
+        0.4
+      ],
+      "connections": [
+        "landing_start:bottom",
+        "landing_end:top",
+        "guardrail:left/right"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "parapet",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/10",
+      "target_extent_m": [
+        4,
+        0.2,
+        1.2
+      ],
+      "connections": [
+        "guardrail:start/end",
+        "floor_datum:base"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "service-chase",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/11",
+      "target_extent_m": [
+        0.6,
+        0.6,
+        3.2
+      ],
+      "connections": [
+        "utility_pass:top/bottom",
+        "inspection_panel:front"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "public colonnade",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/12",
+      "target_extent_m": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "shade canopy",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/13",
+      "target_extent_m": [
+        4.0,
+        4.0,
+        0.3
+      ],
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "clinic threshold",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/14",
+      "target_extent_m": [
+        2.4,
+        2.0,
+        2.8
+      ],
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "quiet portico",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/15",
+      "target_extent_m": [
+        4.0,
+        3.0,
+        3.2
+      ],
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    },
+    {
+      "original_name": "daylight baffle",
+      "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/16",
+      "target_extent_m": [
+        2.0,
+        0.3,
+        1.2
+      ],
+      "connections": [
+        "floor_datum:base",
+        "attachment_static:reviewed-structural-seat",
+        "utility_pass:only-if-process-requires"
+      ],
+      "status": "AUTHORED_CANDIDATE_UNAPPROVED"
+    }
+  ],
+  "additional_acceptance_fixtures": [
+    "residential",
+    "civic",
+    "work",
+    "straight-floor-join",
+    "wall-inside-outside-corners",
+    "stacked-floor",
+    "stair-and-landing",
+    "ramp-and-landing"
+  ],
+  "remaining_states": [
+    "repair/event facade overlays",
+    "safe mechanism authority",
+    "damaged/cleared/rebuilt where applicable"
+  ],
+  "reference_files": [
+    {
+      "path": "assets/references/reference-105/original.png",
+      "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+      "status": "ORIGINAL"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-clinic-threshold-door-proposed-v01.png",
+      "sha256": "1fb1243734ff4be442edeb9215d3aaeb387f1458fdefcdc617dab3c574768c5c",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-daylight-baffle-proposed-v01.png",
+      "sha256": "22998def63dfe8085b7dd79e14aae19649dbbcab0a2e543b67e52eb0cba90472",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-daylight-baffle-proposed-v02.png",
+      "sha256": "751e6b4444ec563491842b810af83ffc42048e418c7783fbcb8fe8720488f1de",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-foundation-floor-proposed-v01.png",
+      "sha256": "f9eee481eebb9ec5601b9201881841bf485181931e1e7f8ea2577f8a60688c14",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-prism-backed-courser-proposed-v01.png",
+      "sha256": "be928880f46ccc90f6a9a8c4b7ddcfcf2d90e3eb4f1a280217ee7ce0cb0fecdf",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-prism-backed-courser-proposed-v02.png",
+      "sha256": "297b86518d1b4fd97ab3373e1e4aa0772bf8bd27fd2bbc8d9d90ba0dcd6187c9",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-roof-canopy-proposed-v01.png",
+      "sha256": "dcbc6531860604b21fcad96bc422b5efc24aa80320242322d7fd98d1abd2a0ca",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-service-clothing-proposed-v01.png",
+      "sha256": "da5c4995430b199b0cf73144a6bfd04ba94e3f3418c76b953b4583c825c42b58",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-service-clothing-proposed-v02.png",
+      "sha256": "0d8dc04b57e5a3cbba558c1c949c61be7ae7eb1be7ea836124bb1ea1758f88a2",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-stair-ramp-proposed-v01.png",
+      "sha256": "85db6edfbdb1b34724f3dccbdf905e8bcf75997813f47baa405c55abb932dd37",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-surface-trim-proposed-v01.png",
+      "sha256": "722bf8474b1b28e9b8935ee1de83bb5a0326994f25aadefec43dcba48aaf9804",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-wall-window-corner-proposed-v01.png",
+      "sha256": "ca025d7e0e284d0c9d63acf6c3ebbc7d15306787643390259b433b53d428dc51",
+      "status": "PROPOSED"
+    },
+    {
+      "path": "assets/references/proposed-expansion-2026-10-13/generated/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "sha256": "7c5f5acf2871dfdfb2ec0716d91cf8bb1efeb6b8e69b47f2661363e0a74c5106",
+      "status": "PROPOSED"
+    }
+  ]
+}

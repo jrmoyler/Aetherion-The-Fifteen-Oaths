@@ -1,0 +1,5675 @@
+{
+  "scope": "Three fixture sources/exports remove hidden LOD construction objects and duplicate anchors; all module source/export bytes preserved",
+  "reports": [
+    {
+      "fixture": "civic",
+      "r04_source_sha256": "23f5ec1914a1cea20079d85243bc1a12b1ce3699f5a1fddcb9839507782201e6",
+      "source_sha256": "2521597ed44116573023350c609d8077349878920a3f91a4d285fbb4c76e4118",
+      "removed": [
+        {
+          "name": "LOD2__Stone floor substrate",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Stone floor substrate.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Stone floor substrate.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "Socket marble pedestal.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.095",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.094",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.093",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.092",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.091",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.090",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.089",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.088",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.087",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.086",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.085",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.084",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.083",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.082",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.081",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.080",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.079",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.078",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.077",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.076",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.075",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.074",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.073",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.072",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.071",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.070",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.069",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.068",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.067",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.066",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.065",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.064",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.063",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.062",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.061",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.060",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.059",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.058",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.057",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.056",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.055",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.054",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.053",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.052",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.051",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.050",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.049",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.048",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "Socket keeper.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Small central rib rosette.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Small central rib rosette.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Shallow scalloped four-point tension textile.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Shallow scalloped four-point tension textile.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.095",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.094",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.093",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.092",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.091",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.090",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.089",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.088",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.087",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.086",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.085",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.084",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.083",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.082",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.081",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.080",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.079",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.078",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.077",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.076",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.075",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.074",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.073",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.072",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.071",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.070",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.069",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.068",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.067",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.066",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.065",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.064",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.063",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.062",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.061",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.060",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.059",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.058",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.057",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.056",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.055",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.054",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.053",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.052",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.051",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.050",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.049",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.048",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Faceted underside pendant.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Faceted underside pendant.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.047",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.046",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.045",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.044",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.043",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.042",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.041",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.040",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.039",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.038",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.037",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.036",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.035",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.034",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.033",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.032",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__base.001",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__base.002",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__clear-route.001",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__clear-route.002",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        }
+      ],
+      "remaining_canopy_seats": 4,
+      "remaining_pier_seats": 4,
+      "visible_meshes": 409
+    },
+    {
+      "fixture": "residential",
+      "r04_source_sha256": "f0b751689ab209c449ee37c0a24d0316d75f164cb7e455b2e54f94d789fd6517",
+      "source_sha256": "e8bbea269bc405c25721312d86a3c4a721a947457a7779f12f31b60ed279e9ff",
+      "removed": [
+        {
+          "name": "LOD2__Stone floor substrate",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Stone floor substrate.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Stone floor substrate.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "Socket marble pedestal.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.095",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.094",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.093",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.092",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.091",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.090",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.089",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.088",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.087",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.086",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.085",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.084",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.083",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.082",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.081",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.080",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.079",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.078",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.077",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.076",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.075",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.074",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.073",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.072",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.071",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.070",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.069",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.068",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.067",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.066",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.065",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.064",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.063",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.062",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.061",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.060",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.059",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.058",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.057",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.056",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.055",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.054",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.053",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.052",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.051",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.050",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.049",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.048",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "Socket keeper.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Small central rib rosette.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Small central rib rosette.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Shallow scalloped four-point tension textile.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Shallow scalloped four-point tension textile.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.095",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.094",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.093",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.092",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.091",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.090",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.089",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.088",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.087",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.086",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.085",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.084",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.083",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.082",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.081",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.080",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.079",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.078",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.077",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.076",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.075",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.074",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.073",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.072",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.071",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.070",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.069",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.068",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.067",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.066",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.065",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.064",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.063",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.062",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.061",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.060",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.059",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.058",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.057",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.056",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.055",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.054",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.053",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.052",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.051",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.050",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.049",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.048",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Faceted underside pendant.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Faceted underside pendant.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.047",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.046",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.045",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.044",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.043",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.042",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.041",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.040",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.039",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.038",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.037",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.036",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.035",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.034",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.033",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.032",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Fluted edge pilaster.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Fluted edge pilaster",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Fluted edge pilaster.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Fluted edge pilaster",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Continuous bronze wall seat.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Continuous bronze wall seat",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze edge relief.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze edge relief",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__base.001",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__base.002",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__clear-route.001",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__clear-route.002",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        }
+      ],
+      "remaining_canopy_seats": 4,
+      "remaining_pier_seats": 4,
+      "visible_meshes": 410
+    },
+    {
+      "fixture": "work",
+      "r04_source_sha256": "d9cbdf5cee3791d1ae6527af2437f82d08d32fc2c174faec1b8ebe2b44bdee5c",
+      "source_sha256": "6266b16cae21dd52d4226215ae8d470a6df85e3e56fbcc5e84c38da37216bf96",
+      "removed": [
+        {
+          "name": "LOD2__Stone floor substrate",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Stone floor substrate.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Stone floor substrate.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Stone floor substrate.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable flush radial marble floor sector.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Recessed continuous bronze inlay bed.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Flush solar medallion.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Stone floor substrate.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable flush radial marble floor sector.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Recessed continuous bronze inlay bed.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Flush solar medallion.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-3.7-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__pier-seat-0.3-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "Socket marble pedestal.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket marble pedestal.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Recessed bronze capital course.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Mating socket top.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Lower capital abacus.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing socket neck.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Load-bearing shaft core.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Layered octagonal pier shaft and spreading neck.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Capital retaining finger.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze receiver lower flange.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.095",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.094",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.093",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.092",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.091",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.090",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.089",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.088",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.087",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.086",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.085",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.084",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.083",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.082",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.081",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.080",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.079",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.078",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.077",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.076",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.075",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.074",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.073",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.072",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.071",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.070",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.069",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.068",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.067",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.066",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.065",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.064",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.063",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.062",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.061",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.060",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.059",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.058",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.057",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.056",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.055",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.054",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.053",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.052",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.051",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.050",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.049",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Bronze curved colonnade arch.048",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Broad upper capital bearing.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-3.7-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-3.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-3.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-0.002",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "SOCKET__canopy-seat-0.3-0.001",
+          "type": "EMPTY",
+          "reason": "duplicate LOD anchor"
+        },
+        {
+          "name": "Socket keeper.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Socket keeper.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Small central rib rosette.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Small central rib rosette.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Shallow scalloped four-point tension textile.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Shallow scalloped four-point tension textile.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.095",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.094",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.093",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.092",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.091",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.090",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.089",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.088",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.087",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.086",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.085",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.084",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.083",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.082",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.081",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.080",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.079",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.078",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.077",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.076",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.075",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.074",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.073",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.072",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.071",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.070",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.069",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.068",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.067",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.066",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.065",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.064",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.063",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.062",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.061",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.060",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.059",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.058",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.057",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.056",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.055",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.054",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.053",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.052",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.051",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.050",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.049",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Scalloped bronze-bound fabric hem.048",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Guarded quick release pivot.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Faceted underside pendant.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Faceted underside pendant.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.047",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.046",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.045",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.044",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.043",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.042",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.041",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.040",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.039",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.038",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.037",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.036",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.035",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.034",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.033",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.032",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.031",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.030",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.029",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.028",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.027",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.026",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.025",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Diagonal raised sewn rib.024",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.023",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.022",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.021",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.020",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.019",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.018",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.017",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.016",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.015",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.014",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.013",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.012",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.011",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.010",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.009",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "Corner latch cheek.008",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Replaceable marble facing panel",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Fluted edge pilaster.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Fluted edge pilaster",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bronze reveal frame",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Bearing masonry wall segment",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.007",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.006",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Replaceable marble facing panel",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Fluted edge pilaster.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Fluted edge pilaster",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Continuous bronze wall seat.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Continuous bronze wall seat",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze reveal frame",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze edge relief.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze edge relief",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bearing masonry wall segment",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Marble baffle jamb.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Marble baffle jamb",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Louver_3_woven_shade",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Louver_2_woven_shade",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Louver_1_woven_shade",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Fixed baffle end rail.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Fixed baffle end rail",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD2__Baffle side service housing",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Marble baffle jamb.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Marble baffle jamb",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver_3_woven_shade",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver_2_woven_shade",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver_1_woven_shade",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze side rim.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze side rim.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze side rim.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze side rim.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze side rim.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze side rim",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze horizontal rim.005",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze horizontal rim.004",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze horizontal rim.003",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze horizontal rim.002",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze horizontal rim.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Louver bronze horizontal rim",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Fixed baffle end rail.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Fixed baffle end rail",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze baffle pivot rail.001",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Bronze baffle pivot rail",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "LOD1__Baffle side service housing",
+          "type": "MESH",
+          "reason": "hidden editable LOD construction mesh"
+        },
+        {
+          "name": "SOCKET__base.001",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__base.002",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__clear-route.001",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        },
+        {
+          "name": "SOCKET__clear-route.002",
+          "type": "EMPTY",
+          "reason": "duplicate typed LOD construction anchor within module instance"
+        }
+      ],
+      "remaining_canopy_seats": 4,
+      "remaining_pier_seats": 4,
+      "visible_meshes": 355
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/tmp/aetherion-revision05-import-checks/compare-bounds.py", line 16, in <module>
+    x=a['reports'][0]['clips'][0]['samples'][0];y=b['reports'][1]['actions'][0]['samples'][0];bad=dict(y);bad['min']=[v+.01 for v in y['min']];bad['max']=[v+.01 for v in y['max']];neg=error(x,bad)>tol
+      ~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range

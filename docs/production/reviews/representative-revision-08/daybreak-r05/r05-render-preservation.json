@@ -1,0 +1,56 @@
+{
+  "scope": "Three fixtures re-rendered with unchanged CPU camera/light setup; inherited stair/ramp renders kept exact. Allfive actualGLB visual geometry/material/image/animation fingerprints compared separately.",
+  "reports": [
+    {
+      "fixture": "civic",
+      "cpu_rerendered": true,
+      "r04_sha256": "9460f8eb5267954664fb7a09bed5c643e057c2c6e012104aa79ac3105081812a",
+      "r05_sha256": "a6772a966282f6786a2ded247de8336e6de67cc46df87ea2b13af67a2fe4ca00",
+      "maximum_channel_difference": 0,
+      "mean_channel_difference": 0.0,
+      "changed_pixels": 0,
+      "r05_rerender_path": "evidence/r05-civic-rerender.png",
+      "delivered_primary_render": "r04 bytes preserved after zero pixel difference verification"
+    },
+    {
+      "fixture": "residential",
+      "cpu_rerendered": true,
+      "r04_sha256": "7d43fa23bd437a3a2bbcb968b7e14f5a11dcee9f4600ec0d3ca984c217a64006",
+      "r05_sha256": "5ef48b16d4a3823bbcd46d0e787ed9d203c84952db16e1b9be506bf24a900a60",
+      "maximum_channel_difference": 0,
+      "mean_channel_difference": 0.0,
+      "changed_pixels": 0,
+      "r05_rerender_path": "evidence/r05-residential-rerender.png",
+      "delivered_primary_render": "r04 bytes preserved after zero pixel difference verification"
+    },
+    {
+      "fixture": "work",
+      "cpu_rerendered": true,
+      "r04_sha256": "3e7cdf67b03b0c31e3bcc6141a9458a5d4103faec1b7aebd19ed9a97a5742e06",
+      "r05_sha256": "bf399d211b52dabc67a0f3e3fa6184a3b0f278ca71f7554fcc10ad8c1d491a0f",
+      "maximum_channel_difference": 0,
+      "mean_channel_difference": 0.0,
+      "changed_pixels": 0,
+      "r05_rerender_path": "evidence/r05-work-rerender.png",
+      "delivered_primary_render": "r04 bytes preserved after zero pixel difference verification"
+    },
+    {
+      "fixture": "stairs-with-landing",
+      "cpu_rerendered": false,
+      "r04_sha256": "be1c43662fbefe7496c93514bbb090005fcd3ecffc0711261819a6f94acfcb1f",
+      "r05_sha256": "be1c43662fbefe7496c93514bbb090005fcd3ecffc0711261819a6f94acfcb1f",
+      "maximum_channel_difference": 0,
+      "mean_channel_difference": 0.0,
+      "changed_pixels": 0
+    },
+    {
+      "fixture": "ramp-with-landing",
+      "cpu_rerendered": false,
+      "r04_sha256": "d3a5c7ed5477fd202cbf5b388fc7602654f4f1fb60e74524e4f716140ae21584",
+      "r05_sha256": "d3a5c7ed5477fd202cbf5b388fc7602654f4f1fb60e74524e4f716140ae21584",
+      "maximum_channel_difference": 0,
+      "mean_channel_difference": 0.0,
+      "changed_pixels": 0
+    }
+  ]
+}

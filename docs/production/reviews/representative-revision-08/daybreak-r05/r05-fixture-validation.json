@@ -1,0 +1,317 @@
+{
+  "scope": "Actual exported Three.js geometry/material/image/animation preservation and semantic-anchor checks; textures are CPU placeholders here; no GPU or physics acceptance",
+  "reports": [
+    {
+      "fixture": "civic",
+      "r04_sha256": "dba75092a93c70fa3af60caf5c248b070bba1f5cb6fabff0bb95f2e8c446a927",
+      "r05_sha256": "60dba878dd306d86519bd67644a204b896e28ffdba08fc07c7a618b497bbb21b",
+      "errors": [],
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "meshCount": 409,
+      "embeddedImageCount": 15,
+      "canopyCount": 4,
+      "pierCount": 4,
+      "pairs": [
+        {
+          "canopy": "SOCKET__canopy-seat-03-03",
+          "pier": "SOCKET__pier-seat-03-03",
+          "position": [
+            0.30000001192092896,
+            3.7799999713897705,
+            -0.30000001192092896
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-03-37",
+          "pier": "SOCKET__pier-seat-03-37",
+          "position": [
+            0.30000001192092896,
+            3.7799999713897705,
+            -3.700000047683716
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-37-03",
+          "pier": "SOCKET__pier-seat-37-03",
+          "position": [
+            3.700000047683716,
+            3.7799999713897705,
+            -0.30000001192092896
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-37-37",
+          "pier": "SOCKET__pier-seat-37-37",
+          "position": [
+            3.700000047683716,
+            3.7799999713897705,
+            -3.700000047683716
+          ],
+          "normalDot": -1
+        }
+      ],
+      "negatives": {
+        "duplicateRejected": true,
+        "displacement15mmRejected": true,
+        "reversedNormalRejected": true
+      },
+      "geometryFingerprint": "35d8db5aa637e377458cd00a98b58c5b2c5405a39c9ec92f1a407cd45e7c8c4e",
+      "materialFingerprint": "d5de3b9843d60137802510c2809e1ffdc3d1288227a7336ad0651e0e5ff206c7",
+      "imageFingerprint": "4d0421338cd07b2d432f2293c95dfba6b970b51897b8dac92e736529f06a74e3"
+    },
+    {
+      "fixture": "residential",
+      "r04_sha256": "fb8c19422d829b5dc4faf2ce1c0e7d2d8b2a0d0c8849991040c3148e78f53f45",
+      "r05_sha256": "7b76f5b2a7e4207a35f27b461608fec0d1a4071c0a0f7e5825261bf83222ea12",
+      "errors": [],
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "meshCount": 410,
+      "embeddedImageCount": 15,
+      "canopyCount": 4,
+      "pierCount": 4,
+      "pairs": [
+        {
+          "canopy": "SOCKET__canopy-seat-03-03",
+          "pier": "SOCKET__pier-seat-03-03",
+          "position": [
+            0.30000001192092896,
+            3.7799999713897705,
+            -0.30000001192092896
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-03-37",
+          "pier": "SOCKET__pier-seat-03-37",
+          "position": [
+            0.30000001192092896,
+            3.7799999713897705,
+            -3.700000047683716
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-37-03",
+          "pier": "SOCKET__pier-seat-37-03",
+          "position": [
+            3.700000047683716,
+            3.7799999713897705,
+            -0.30000001192092896
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-37-37",
+          "pier": "SOCKET__pier-seat-37-37",
+          "position": [
+            3.700000047683716,
+            3.7799999713897705,
+            -3.700000047683716
+          ],
+          "normalDot": -1
+        }
+      ],
+      "negatives": {
+        "duplicateRejected": true,
+        "displacement15mmRejected": true,
+        "reversedNormalRejected": true
+      },
+      "geometryFingerprint": "ae3cacaa2984e2ee0d2e0693110635514c972c9f48bb68d225830c7d97acafad",
+      "materialFingerprint": "ea53edf699b0d29d8dbc010003f152d36f3c4559de408bfe2288c165772d07cc",
+      "imageFingerprint": "4d0421338cd07b2d432f2293c95dfba6b970b51897b8dac92e736529f06a74e3"
+    },
+    {
+      "fixture": "work",
+      "r04_sha256": "1a1c279c76a27cb7d88e7aee0cde900b324a5aa9f2cbf403c19dad5a4924fc76",
+      "r05_sha256": "aab2a3be1a0e70b99a0dd1545ca34ae0a0661b7729e2614d73f667de6ffe9861",
+      "errors": [],
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "meshCount": 355,
+      "embeddedImageCount": 12,
+      "canopyCount": 4,
+      "pierCount": 4,
+      "pairs": [
+        {
+          "canopy": "SOCKET__canopy-seat-03-03",
+          "pier": "SOCKET__pier-seat-03-03",
+          "position": [
+            0.30000001192092896,
+            3.7799999713897705,
+            -0.30000001192092896
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-03-37",
+          "pier": "SOCKET__pier-seat-03-37",
+          "position": [
+            0.30000001192092896,
+            3.7799999713897705,
+            -3.700000047683716
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-37-03",
+          "pier": "SOCKET__pier-seat-37-03",
+          "position": [
+            3.700000047683716,
+            3.7799999713897705,
+            -0.30000001192092896
+          ],
+          "normalDot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-37-37",
+          "pier": "SOCKET__pier-seat-37-37",
+          "position": [
+            3.700000047683716,
+            3.7799999713897705,
+            -3.700000047683716
+          ],
+          "normalDot": -1
+        }
+      ],
+      "negatives": {
+        "duplicateRejected": true,
+        "displacement15mmRejected": true,
+        "reversedNormalRejected": true
+      },
+      "geometryFingerprint": "5e9e7974bf80689692d9d78ac10ae39a1f77bc3663fa38fc4a0162037c09beac",
+      "materialFingerprint": "92bbd05d24857fa5219c12a163a23fa9569c4a87ca16ac91c48175091d8f281f",
+      "imageFingerprint": "b167214fd096f0c880982ca4ff4dba8645b172dd04acc3fbcb0d99e09270de34"
+    },
+    {
+      "fixture": "stairs-with-landing",
+      "r04_sha256": "78a0516762b500bb525d570826fd7f94c0b62537c7d8586f2aa66d447d3fc0bd",
+      "r05_sha256": "14788251da1c65c670fcc9b64be97784f67517f9b51e8372d119a82c6a477c6f",
+      "errors": [],
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "meshCount": 56,
+      "embeddedImageCount": 15,
+      "canopyCount": 0,
+      "pierCount": 0,
+      "pairs": [],
+      "negatives": {
+        "duplicateRejected": null,
+        "displacement15mmRejected": null,
+        "reversedNormalRejected": null
+      },
+      "geometryFingerprint": "b738fa7954d74edefc50307a0d4e932ef1094cd0e31bd55925c8d00c5928ccd7",
+      "materialFingerprint": "ae8076a35e6b45c718cf88985fdee0148f1c8172815804a433750773022ec608",
+      "imageFingerprint": "487bf2d25b2addb2de049bc5e80054d0d3e93a95d1d792cb5aed6fc134aa02f7"
+    },
+    {
+      "fixture": "ramp-with-landing",
+      "r04_sha256": "3897599ddf3e5ec3fda0bfe30e5d164e4a4b658e45524af449122803cf2a72fb",
+      "r05_sha256": "05f532fe64df4074e92146ec858f39b2e3672a7e5a9bf9619f25ba58c42d80cb",
+      "errors": [],
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "meshCount": 31,
+      "embeddedImageCount": 12,
+      "canopyCount": 0,
+      "pierCount": 0,
+      "pairs": [],
+      "negatives": {
+        "duplicateRejected": null,
+        "displacement15mmRejected": null,
+        "reversedNormalRejected": null
+      },
+      "geometryFingerprint": "39525892b788436c604567e60d6da470dcacb5391e0e23989fb38a577714b91b",
+      "materialFingerprint": "a275f59b6ca9414bd33b7852b56975a054a0f704b60bdbf623903a2da1e3b78e",
+      "imageFingerprint": "4e03a30b2e220ac593d30a1ec3b0f1abafa1ec2c6581998c4347a9c2219a6933"
+    },
+    {
+      "module": "shade-canopy",
+      "level": 1,
+      "r04_sha256": "58d93379de3db86f70d68d17ae28f8d9a53d5a568e105ed9c50bb1f1ab8c49d0",
+      "r05_sha256": "c00a4d199809d46a87818277e3febcae5e120453c46e059ac55778daaa26696e",
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "errors": [],
+      "geometryFingerprint": "744ec0996624513defeb3545d8262ffe7aeb870339312cb5db0ce65096f149fc",
+      "materialFingerprint": "449091b8f0926b6e384ed40c353e4864833b194a79cec97ef850da085817004c",
+      "imageFingerprint": "8553d51c5eeea93a59541e62ecb4e79f5c9aa046e8e391363772bef96065fc0e"
+    },
+    {
+      "module": "shade-canopy",
+      "level": 2,
+      "r04_sha256": "e0067a473310d2554eed6f4910d1ab9643319fa658fcba3798206501f0fc2b2d",
+      "r05_sha256": "3c3432a08b036742bda718213c4973adabd41684cd0b5a8ee3f6b140be24bb4a",
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "errors": [],
+      "geometryFingerprint": "2e6d63c7151bb6422fac14afd2f85a9664ed364b3f82eb7671e19716916b0a13",
+      "materialFingerprint": "449091b8f0926b6e384ed40c353e4864833b194a79cec97ef850da085817004c",
+      "imageFingerprint": "8553d51c5eeea93a59541e62ecb4e79f5c9aa046e8e391363772bef96065fc0e"
+    },
+    {
+      "module": "public-colonnade",
+      "level": 1,
+      "r04_sha256": "d101839decf7470237b3306bf1d099b2106ca4cde4cb28a72ce046e918769b25",
+      "r05_sha256": "e83f5cd9bce95598cc8f612c51fbe42312bf16b61aaac5580668cdfe0493471a",
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "errors": [],
+      "geometryFingerprint": "054082f7978ba1f24d74e03ffb41aa112d82af0b37a36a54b5dd77259f098f87",
+      "materialFingerprint": "c7fda49e096e7384a2f7e5afc603478baa3c8406c0b3721749862a0400425d19",
+      "imageFingerprint": "dd4c19fb9fa1e4482cd57573321691e416a205ff6d8eeb1913957e5d4a9e10d9"
+    },
+    {
+      "module": "public-colonnade",
+      "level": 2,
+      "r04_sha256": "7d30e346816967aab1eb401b5cf6afab0ea91e6d546875fa7c337e605533491f",
+      "r05_sha256": "a54e41e0ac998071104bbf75f882b7ad868a473706eb59dbc8364159a7530da5",
+      "visualPreservation": {
+        "meshes": true,
+        "embeddedImages": true,
+        "materials": true,
+        "animations": true
+      },
+      "errors": [],
+      "geometryFingerprint": "de85838cae3d18aa70950032a7bf58a5f77b1fd01ad2e1773f5c83acafcae67a",
+      "materialFingerprint": "c7fda49e096e7384a2f7e5afc603478baa3c8406c0b3721749862a0400425d19",
+      "imageFingerprint": "dd4c19fb9fa1e4482cd57573321691e416a205ff6d8eeb1913957e5d4a9e10d9"
+    }
+  ]
+}

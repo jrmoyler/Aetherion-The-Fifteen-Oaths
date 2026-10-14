@@ -1,0 +1,188 @@
+{
+  "original_name": "public colonnade",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/12",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    4.0,
+    4.0,
+    4.0
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      4.0,
+      4.0,
+      3.7800002098083496
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 6000,
+    "lod1": 3568,
+    "lod2": 1712
+  },
+  "visual_meshes": 132,
+  "collider_meshes": 12,
+  "sockets": [
+    {
+      "name": "pier-seat-0.3-0.3",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        0.3,
+        0.3,
+        3.78
+      ],
+      "position_gltf_xyz_m": [
+        0.3,
+        3.78,
+        -0.3
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "pier-seat-0.3-3.7",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        0.3,
+        3.7,
+        3.78
+      ],
+      "position_gltf_xyz_m": [
+        0.3,
+        3.78,
+        -3.7
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "pier-seat-3.7-0.3",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        3.7,
+        0.3,
+        3.78
+      ],
+      "position_gltf_xyz_m": [
+        3.7,
+        3.78,
+        -0.3
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "pier-seat-3.7-3.7",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        3.7,
+        3.7,
+        3.78
+      ],
+      "position_gltf_xyz_m": [
+        3.7,
+        3.78,
+        -3.7
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "base",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "clear-route",
+      "semantic_type": "door_clear",
+      "position_blender_xyz_m": [
+        2,
+        2,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        2,
+        0,
+        -2
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "door_clear"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 2.76,
+        "headroom_m": 3.15
+      }
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ],
+  "revision": "candidate-r04",
+  "change": "Scalloped pointed canopy, radial ribs and real matching supports; layered pier head authoring. Unapproved."
+}

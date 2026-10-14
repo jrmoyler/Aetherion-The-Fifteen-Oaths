@@ -1,0 +1,138 @@
+{
+  "scope": "Actual source open and direct editable meshes/collection flags/UV/material/image checks; no source saves",
+  "reports": [
+    {
+      "source": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/source.blend",
+      "sha256": "91a5fe6cf9ddce052dc6d387b674ef48ea30f2c397c133ed0827b922844128fc",
+      "sourceUnchanged": true,
+      "levels": [
+        {
+          "level": 0,
+          "meshes": 132,
+          "triangles": 6000,
+          "collapsedUvTriangles": 0,
+          "sourceBoundsBlender": {
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              4.0,
+              4.0,
+              3.7800002098083496
+            ]
+          },
+          "maxExportBoundsErrorMeters": null
+        },
+        {
+          "level": 1,
+          "meshes": 84,
+          "triangles": 3568,
+          "collapsedUvTriangles": 0,
+          "sourceBoundsBlender": {
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              4.0,
+              4.0,
+              3.7800002098083496
+            ]
+          },
+          "maxExportBoundsErrorMeters": 1.0523945093154907e-07
+        },
+        {
+          "level": 2,
+          "meshes": 52,
+          "triangles": 1712,
+          "collapsedUvTriangles": 0,
+          "sourceBoundsBlender": {
+            "min": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "max": [
+              4.0,
+              4.0,
+              3.7800002098083496
+            ]
+          },
+          "maxExportBoundsErrorMeters": 1.0523945093154907e-07
+        }
+      ],
+      "packedImageCount": 12,
+      "errors": []
+    },
+    {
+      "source": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/source.blend",
+      "sha256": "8d24e1385c5680c9c3449e4a988cb7c1144cc45e9c9a922ad13883891013ca6b",
+      "sourceUnchanged": true,
+      "levels": [
+        {
+          "level": 0,
+          "meshes": 91,
+          "triangles": 4210,
+          "collapsedUvTriangles": 0,
+          "sourceBoundsBlender": {
+            "min": [
+              0.22450000047683716,
+              0.23500001430511475,
+              0.045068927109241486
+            ],
+            "max": [
+              3.7755000591278076,
+              3.765000104904175,
+              0.3175605535507202
+            ]
+          },
+          "maxExportBoundsErrorMeters": null
+        },
+        {
+          "level": 1,
+          "meshes": 67,
+          "triangles": 2722,
+          "collapsedUvTriangles": 0,
+          "sourceBoundsBlender": {
+            "min": [
+              0.22450000047683716,
+              0.23500001430511475,
+              0.04510548710823059
+            ],
+            "max": [
+              3.7755000591278076,
+              3.765000104904175,
+              0.3175913691520691
+            ]
+          },
+          "maxExportBoundsErrorMeters": 9.872019290924072e-08
+        },
+        {
+          "level": 2,
+          "meshes": 43,
+          "triangles": 1362,
+          "collapsedUvTriangles": 0,
+          "sourceBoundsBlender": {
+            "min": [
+              0.22450000047683716,
+              0.23500001430511475,
+              0.045217808336019516
+            ],
+            "max": [
+              3.7755000591278076,
+              3.765000104904175,
+              0.31768256425857544
+            ]
+          },
+          "maxExportBoundsErrorMeters": 9.872019290924072e-08
+        }
+      ],
+      "packedImageCount": 8,
+      "errors": []
+    }
+  ],
+  "allPass": true
+}

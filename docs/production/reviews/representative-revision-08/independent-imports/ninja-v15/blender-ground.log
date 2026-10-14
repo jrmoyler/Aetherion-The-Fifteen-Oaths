@@ -1,0 +1,32 @@
+CHECKED candidate-source idle_breath 48
+CHECKED candidate-source walk_in_place 993
+CHECKED candidate-source cast_release 48
+RESULT candidate-source 0.0007459242939949033 0.0007501003444194791 2.7885209706867e-18
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender/4.3/extensions').
+00:45:39 | INFO: Data are loaded, start creating Blender stuff
+00:45:39 | INFO: Blender create Mesh node Anatomical underlayer torso loops
+00:45:39 | INFO: glTF import finished in 0.26s
+CHECKED  idle_breath 48
+CHECKED  walk_in_place 993
+CHECKED  cast_release 48
+RESULT  0.0007465855330228803 0.000750938534736633 0.0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender/4.3/extensions').
+00:45:50 | INFO: Data are loaded, start creating Blender stuff
+00:45:50 | INFO: Blender create Mesh node Anatomical underlayer torso loops.001
+00:45:50 | INFO: glTF import finished in 0.13s
+CHECKED -lod1 idle_breath 48
+CHECKED -lod1 walk_in_place 993
+CHECKED -lod1 cast_release 48
+RESULT -lod1 0.0007465855330228803 0.000750938534736633 0.0
+Extensions: writing cache failed ([Errno 30] Read-only file system: '/home/agent/.config/blender/4.3/extensions').
+00:45:59 | INFO: Data are loaded, start creating Blender stuff
+00:45:59 | INFO: Blender create Mesh node Anatomical underlayer torso loops.002
+00:45:59 | INFO: glTF import finished in 0.10s
+CHECKED -lod2 idle_breath 48
+CHECKED -lod2 walk_in_place 993
+CHECKED -lod2 cast_release 48
+RESULT -lod2 0.0006837156713008878 0.0007246491611003873 0.0
+Blender 4.3.2
+Read blend: "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend"
+
+Blender quit

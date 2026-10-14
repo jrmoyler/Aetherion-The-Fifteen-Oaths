@@ -15,7 +15,11 @@ export function appendReviewAssets(catalog, repositoryRoot) {
  const files=new Map(catalog.files),references=[...catalog.references],reviewBuffers=new Map(catalog.reviewBuffers||[]);
  if(files.has(REVIEW_MANIFEST)||catalog.manifests.includes(REVIEW_MANIFEST))throw new Error('Review namespace collides with existing catalog');
  const rows=normalizeManifest(data,REVIEW_MANIFEST);
+ const ids=new Set();
  for(const row of rows){
+  if(ids.has(row.id))throw new Error(`Duplicate review asset ID: ${row.id}`);
+  ids.add(row.id);
+  if(row.status!=='UNAPPROVED_REVIEW_ONLY_NOT_PRODUCTION_PROMOTED')throw new Error(`Review asset status must remain explicit: ${row.id}`);
   for(const id of row.referenceIds)if(!references.some(r=>r.id===id||r.canonicalId===id))throw new Error(`Review reference is not available in original-reference catalog: ${id}`);
   for(const state of row.states)for(const lod of state.lods){
    const logical=decodeURIComponent(lod.url.replace('./production-assets/',''));

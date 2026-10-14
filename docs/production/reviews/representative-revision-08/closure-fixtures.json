@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "positiveFixtures": 1,
+  "positiveScope": "Nested evidence.json included in exact closure",
+  "negativeFixturesRejected": [
+    "duplicate",
+    "escape",
+    "tamper",
+    "extra",
+    "missing",
+    "symlink"
+  ]
+}

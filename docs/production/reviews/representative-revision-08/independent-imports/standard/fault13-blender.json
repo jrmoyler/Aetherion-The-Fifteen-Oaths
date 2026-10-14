@@ -1,0 +1,56 @@
+{
+  "blenderVersion": "4.3.2",
+  "scope": "Actual Blender open/import and evaluated mesh vertices; CPU only, no re-export or source writes",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-fault-review-v13/amethyst-short-blade/source.blend",
+      "sha256": "a1b1b9a506ef09ec48d20b9ecdd3f8a544741c81b8e17768684827ca7494178b",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 167,
+      "materials": 8,
+      "images": 17,
+      "rest": {
+        "vertices": 6514,
+        "finite": true,
+        "min": [
+          -0.06747227907180786,
+          -0.040062304586172104,
+          -0.19889459013938904
+        ],
+        "max": [
+          0.05147227644920349,
+          0.040062304586172104,
+          0.5746277570724487
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v13/amethyst-short-blade/review.glb",
+      "sha256": "c81ccea3e213aa5da0c6231a6dd7f2f05c02ba41d4132342243035549899ba14",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 167,
+      "materials": 7,
+      "images": 11,
+      "rest": {
+        "vertices": 31767,
+        "finite": true,
+        "min": [
+          -0.06747227907180786,
+          -0.040062304586172104,
+          -0.19889459013938904
+        ],
+        "max": [
+          0.05147227644920349,
+          0.040062304586172104,
+          0.5746277570724487
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    }
+  ]
+}

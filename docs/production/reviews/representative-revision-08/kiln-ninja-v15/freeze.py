@@ -1,0 +1,7 @@
+from pathlib import Path
+import json,hashlib,datetime
+p=Path(__file__).resolve().parent;d=p/'kiln-ninja-ensemble-candidate'
+def row(f):return {'path':str(f.relative_to(p)),'bytes':f.stat().st_size,'sha256':hashlib.sha256(f.read_bytes()).hexdigest()}
+files=[p/f for f in ['author_grounding.py','render_pairs.py','check_ground.py']]+sorted((p/'baseline').glob('*'))+sorted(d.glob('*'))+sorted((p/'renders').glob('*.png'))+sorted(p.glob('*comparison.png'))
+receipt={'status':'FROZEN_GROUNDING_CANDIDATE_UNAPPROVED_NOT_PUBLISHED','utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'floorWorldZmeters':.012,'baselineSourceSha256':'5d1fb9fc7042a22dff33939baa3614adbde520c0e77d55d7aa5472e52b14e114','files':[row(f) for f in files]};(p/'grounding-freeze-receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+files=[f for f in p.rglob('*') if f.is_file() and not any(x in f.parts for x in ['rejected-foot-framing','__pycache__']) and f.name!='SHA256SUMS.json'];rows=[row(f) for f in sorted(files)];(p/'SHA256SUMS.json').write_text(json.dumps({'files':rows,'totalFiles':len(rows),'totalBytes':sum(r['bytes'] for r in rows)},indent=2)+'\n');print('receipt',len(receipt['files']),hashlib.sha256((p/'grounding-freeze-receipt.json').read_bytes()).hexdigest());print('manifest',len(rows),sum(r['bytes'] for r in rows),hashlib.sha256((p/'SHA256SUMS.json').read_bytes()).hexdigest());print(next(r for r in rows if r['path']=='kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend'))

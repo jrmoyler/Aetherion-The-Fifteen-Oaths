@@ -1,0 +1,947 @@
+{
+  "scope": "Actual saved Blender LOD geometry envelope, visible aperture rays and stair tread samples; no controller traversal certification",
+  "checks": [
+    {
+      "check": "foundation-plinth all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              0.0,
+              -0.5999999642372131
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              0.0,
+              -0.5999999642372131
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              -0.5999999642372131
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "floor-bay all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              0.0,
+              -0.4000000059604645
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              0.0,
+              -0.4000000059604645
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              -0.4000000059604645
+            ],
+            [
+              4.0,
+              4.0,
+              0.0
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "window-wall all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              -0.0030000004917383194,
+              0.0
+            ],
+            [
+              4.0,
+              0.3499999940395355,
+              3.200000047683716
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              -0.0030000004917383194,
+              0.0
+            ],
+            [
+              4.0,
+              0.3499999940395355,
+              3.200000047683716
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              0.3499999940395355,
+              3.200000047683716
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0030000004917383194,
+        "tolerance_m": 0.00301,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "window-wall LOD0 actual visible aperture",
+      "passed": true,
+      "evidence": {
+        "ray_count": 325,
+        "hit_count": 0
+      }
+    },
+    {
+      "check": "window-wall LOD1 actual visible aperture",
+      "passed": true,
+      "evidence": {
+        "ray_count": 325,
+        "hit_count": 0
+      }
+    },
+    {
+      "check": "window-wall LOD2 actual visible aperture",
+      "passed": true,
+      "evidence": {
+        "ray_count": 325,
+        "hit_count": 0
+      }
+    },
+    {
+      "check": "inside-corner all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.3499999940395355,
+              0.3499999940395355,
+              3.200000047683716
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.3499999940395355,
+              0.3499999940395355,
+              3.200000047683716
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.3499999940395355,
+              0.3499999940395355,
+              3.200000047683716
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "door-frame all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              -4.656612873077393e-10,
+              0.0
+            ],
+            [
+              1.600000023841858,
+              0.4000000059604645,
+              2.799999952316284
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              -4.656612873077393e-10,
+              0.0
+            ],
+            [
+              1.600000023841858,
+              0.4000000059604645,
+              2.799999952316284
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              1.600000023841858,
+              0.4000000059604645,
+              2.799999952316284
+            ]
+          ]
+        },
+        "maximum_delta_m": 4.656612873077393e-10,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "door-frame LOD0 actual visible aperture",
+      "passed": true,
+      "evidence": {
+        "ray_count": 325,
+        "hit_count": 0
+      }
+    },
+    {
+      "check": "door-frame LOD1 actual visible aperture",
+      "passed": true,
+      "evidence": {
+        "ray_count": 325,
+        "hit_count": 0
+      }
+    },
+    {
+      "check": "door-frame LOD2 actual visible aperture",
+      "passed": true,
+      "evidence": {
+        "ray_count": 325,
+        "hit_count": 0
+      }
+    },
+    {
+      "check": "roof-bay all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0,
+              0.3499999940395355
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0,
+              0.3499999940395355
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0,
+              0.3499999940395355
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "stair-flight all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              -0.18000000715255737,
+              -0.07999999821186066,
+              0.0
+            ],
+            [
+              1.9800000190734863,
+              2.7799999713897705,
+              2.740000009536743
+            ]
+          ],
+          "1": [
+            [
+              -0.18000000715255737,
+              -0.07999999821186066,
+              0.0
+            ],
+            [
+              1.9800000190734863,
+              2.7799999713897705,
+              2.740000009536743
+            ]
+          ],
+          "2": [
+            [
+              -0.18000000715255737,
+              -0.07999999821186066,
+              0.0
+            ],
+            [
+              1.9800000190734863,
+              2.7799999713897705,
+              2.740000009536743
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "stair LOD0 all nine exposed treads",
+      "passed": true,
+      "evidence": [
+        {
+          "y": 0.001,
+          "z": 0.15999984741210938,
+          "expected": 0.16
+        },
+        {
+          "y": 0.15,
+          "z": 0.15999984741210938,
+          "expected": 0.16
+        },
+        {
+          "y": 0.299,
+          "z": 0.16000008583068848,
+          "expected": 0.16
+        },
+        {
+          "y": 0.301,
+          "z": 0.32000017166137695,
+          "expected": 0.32
+        },
+        {
+          "y": 0.44999999999999996,
+          "z": 0.31999993324279785,
+          "expected": 0.32
+        },
+        {
+          "y": 0.599,
+          "z": 0.32000017166137695,
+          "expected": 0.32
+        },
+        {
+          "y": 0.601,
+          "z": 0.4799997806549072,
+          "expected": 0.48
+        },
+        {
+          "y": 0.75,
+          "z": 0.48000001907348633,
+          "expected": 0.48
+        },
+        {
+          "y": 0.899,
+          "z": 0.4799997806549072,
+          "expected": 0.48
+        },
+        {
+          "y": 0.9009999999999999,
+          "z": 0.6400003433227539,
+          "expected": 0.64
+        },
+        {
+          "y": 1.0499999999999998,
+          "z": 0.6399998664855957,
+          "expected": 0.64
+        },
+        {
+          "y": 1.1989999999999998,
+          "z": 0.6399998664855957,
+          "expected": 0.64
+        },
+        {
+          "y": 1.2009999999999998,
+          "z": 0.7999999523162842,
+          "expected": 0.8
+        },
+        {
+          "y": 1.3499999999999999,
+          "z": 0.7999999523162842,
+          "expected": 0.8
+        },
+        {
+          "y": 1.4989999999999999,
+          "z": 0.8000004291534424,
+          "expected": 0.8
+        },
+        {
+          "y": 1.501,
+          "z": 0.9600005149841309,
+          "expected": 0.96
+        },
+        {
+          "y": 1.65,
+          "z": 0.9600000381469727,
+          "expected": 0.96
+        },
+        {
+          "y": 1.799,
+          "z": 0.9600000381469727,
+          "expected": 0.96
+        },
+        {
+          "y": 1.8009999999999997,
+          "z": 1.119999885559082,
+          "expected": 1.12
+        },
+        {
+          "y": 1.9499999999999997,
+          "z": 1.119999885559082,
+          "expected": 1.12
+        },
+        {
+          "y": 2.0989999999999998,
+          "z": 1.119999647140503,
+          "expected": 1.12
+        },
+        {
+          "y": 2.101,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.25,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.399,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.401,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        },
+        {
+          "y": 2.55,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        },
+        {
+          "y": 2.699,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        }
+      ]
+    },
+    {
+      "check": "stair LOD1 all nine exposed treads",
+      "passed": true,
+      "evidence": [
+        {
+          "y": 0.001,
+          "z": 0.15999984741210938,
+          "expected": 0.16
+        },
+        {
+          "y": 0.15,
+          "z": 0.15999984741210938,
+          "expected": 0.16
+        },
+        {
+          "y": 0.299,
+          "z": 0.16000008583068848,
+          "expected": 0.16
+        },
+        {
+          "y": 0.301,
+          "z": 0.32000017166137695,
+          "expected": 0.32
+        },
+        {
+          "y": 0.44999999999999996,
+          "z": 0.31999993324279785,
+          "expected": 0.32
+        },
+        {
+          "y": 0.599,
+          "z": 0.32000017166137695,
+          "expected": 0.32
+        },
+        {
+          "y": 0.601,
+          "z": 0.4799997806549072,
+          "expected": 0.48
+        },
+        {
+          "y": 0.75,
+          "z": 0.48000001907348633,
+          "expected": 0.48
+        },
+        {
+          "y": 0.899,
+          "z": 0.4799997806549072,
+          "expected": 0.48
+        },
+        {
+          "y": 0.9009999999999999,
+          "z": 0.6400003433227539,
+          "expected": 0.64
+        },
+        {
+          "y": 1.0499999999999998,
+          "z": 0.6399998664855957,
+          "expected": 0.64
+        },
+        {
+          "y": 1.1989999999999998,
+          "z": 0.6399998664855957,
+          "expected": 0.64
+        },
+        {
+          "y": 1.2009999999999998,
+          "z": 0.7999999523162842,
+          "expected": 0.8
+        },
+        {
+          "y": 1.3499999999999999,
+          "z": 0.7999999523162842,
+          "expected": 0.8
+        },
+        {
+          "y": 1.4989999999999999,
+          "z": 0.8000004291534424,
+          "expected": 0.8
+        },
+        {
+          "y": 1.501,
+          "z": 0.9600005149841309,
+          "expected": 0.96
+        },
+        {
+          "y": 1.65,
+          "z": 0.9600000381469727,
+          "expected": 0.96
+        },
+        {
+          "y": 1.799,
+          "z": 0.9600000381469727,
+          "expected": 0.96
+        },
+        {
+          "y": 1.8009999999999997,
+          "z": 1.119999885559082,
+          "expected": 1.12
+        },
+        {
+          "y": 1.9499999999999997,
+          "z": 1.119999885559082,
+          "expected": 1.12
+        },
+        {
+          "y": 2.0989999999999998,
+          "z": 1.119999647140503,
+          "expected": 1.12
+        },
+        {
+          "y": 2.101,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.25,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.399,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.401,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        },
+        {
+          "y": 2.55,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        },
+        {
+          "y": 2.699,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        }
+      ]
+    },
+    {
+      "check": "stair LOD2 all nine exposed treads",
+      "passed": true,
+      "evidence": [
+        {
+          "y": 0.001,
+          "z": 0.15999984741210938,
+          "expected": 0.16
+        },
+        {
+          "y": 0.15,
+          "z": 0.15999984741210938,
+          "expected": 0.16
+        },
+        {
+          "y": 0.299,
+          "z": 0.16000008583068848,
+          "expected": 0.16
+        },
+        {
+          "y": 0.301,
+          "z": 0.32000017166137695,
+          "expected": 0.32
+        },
+        {
+          "y": 0.44999999999999996,
+          "z": 0.31999993324279785,
+          "expected": 0.32
+        },
+        {
+          "y": 0.599,
+          "z": 0.32000017166137695,
+          "expected": 0.32
+        },
+        {
+          "y": 0.601,
+          "z": 0.4799997806549072,
+          "expected": 0.48
+        },
+        {
+          "y": 0.75,
+          "z": 0.48000001907348633,
+          "expected": 0.48
+        },
+        {
+          "y": 0.899,
+          "z": 0.4799997806549072,
+          "expected": 0.48
+        },
+        {
+          "y": 0.9009999999999999,
+          "z": 0.6400003433227539,
+          "expected": 0.64
+        },
+        {
+          "y": 1.0499999999999998,
+          "z": 0.6399998664855957,
+          "expected": 0.64
+        },
+        {
+          "y": 1.1989999999999998,
+          "z": 0.6399998664855957,
+          "expected": 0.64
+        },
+        {
+          "y": 1.2009999999999998,
+          "z": 0.7999999523162842,
+          "expected": 0.8
+        },
+        {
+          "y": 1.3499999999999999,
+          "z": 0.7999999523162842,
+          "expected": 0.8
+        },
+        {
+          "y": 1.4989999999999999,
+          "z": 0.8000004291534424,
+          "expected": 0.8
+        },
+        {
+          "y": 1.501,
+          "z": 0.9600005149841309,
+          "expected": 0.96
+        },
+        {
+          "y": 1.65,
+          "z": 0.9600000381469727,
+          "expected": 0.96
+        },
+        {
+          "y": 1.799,
+          "z": 0.9600000381469727,
+          "expected": 0.96
+        },
+        {
+          "y": 1.8009999999999997,
+          "z": 1.119999885559082,
+          "expected": 1.12
+        },
+        {
+          "y": 1.9499999999999997,
+          "z": 1.119999885559082,
+          "expected": 1.12
+        },
+        {
+          "y": 2.0989999999999998,
+          "z": 1.119999647140503,
+          "expected": 1.12
+        },
+        {
+          "y": 2.101,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.25,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.399,
+          "z": 1.2800002098083496,
+          "expected": 1.28
+        },
+        {
+          "y": 2.401,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        },
+        {
+          "y": 2.55,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        },
+        {
+          "y": 2.699,
+          "z": 1.440000057220459,
+          "expected": 1.44
+        }
+      ]
+    },
+    {
+      "check": "ramp-run all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              -0.18000000715255737,
+              -0.07999999821186066,
+              -0.019999999552965164
+            ],
+            [
+              1.9800000190734863,
+              4.880000114440918,
+              1.5399999618530273
+            ]
+          ],
+          "1": [
+            [
+              -0.18000000715255737,
+              -0.07999999821186066,
+              -0.019999999552965164
+            ],
+            [
+              1.9800000190734863,
+              4.880000114440918,
+              1.5399999618530273
+            ]
+          ],
+          "2": [
+            [
+              -0.18000000715255737,
+              -0.07999999821186066,
+              -0.019999999552965164
+            ],
+            [
+              1.9800000190734863,
+              4.880000114440918,
+              1.5399999618530273
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "shade-canopy all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.03500000387430191,
+              0.03500000387430191,
+              0.01599999889731407
+            ],
+            [
+              3.9650001525878906,
+              3.9650001525878906,
+              0.30900031328201294
+            ]
+          ],
+          "1": [
+            [
+              0.03500000387430191,
+              0.03500000387430191,
+              0.01599999889731407
+            ],
+            [
+              3.9650001525878906,
+              3.9650001525878906,
+              0.30900031328201294
+            ]
+          ],
+          "2": [
+            [
+              0.03500000387430191,
+              0.03500000387430191,
+              0.01599999889731407
+            ],
+            [
+              3.9650001525878906,
+              3.9650001525878906,
+              0.30900031328201294
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    },
+    {
+      "check": "daylight-baffle all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              2.0,
+              0.30000001192092896,
+              1.2000000476837158
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              2.0,
+              0.30000001192092896,
+              1.2000000476837158
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              2.0,
+              0.30000001192092896,
+              1.2000000476837158
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.0001,
+        "policy": "Window lower LOD omits 3mm decorative surface lip; structural aperture and typed sockets unchanged. Other envelopes within 0.1mm."
+      }
+    }
+  ],
+  "failures": 0
+}

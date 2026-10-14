@@ -1,0 +1,120 @@
+{
+  "method": "Exact source pixel crops and proportional resampling; labels added outside images. No generated or repainted imagery. Views are not camera/light registered and do not support pixel-error fidelity scores.",
+  "panels": [
+    {
+      "source": "references/reference-105-original.png",
+      "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_pixels": [
+        9,
+        661,
+        1236,
+        1012
+      ],
+      "label": "ORIGINAL REF105 | environment crop | establishes design language"
+    },
+    {
+      "source": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "sha256": "7c5f5acf2871dfdfb2ec0716d91cf8bb1efeb6b8e69b47f2661363e0a74c5106",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_pixels": [
+        10,
+        412,
+        745,
+        1004
+      ],
+      "label": "PROPOSED public colonnade | deep folded canopy / underside ribs"
+    },
+    {
+      "source": "fixtures/civic/hero.png",
+      "sha256": "9460f8eb5267954664fb7a09bed5c643e057c2c6e012104aa79ac3105081812a",
+      "source_size": [
+        900,
+        760
+      ],
+      "crop_pixels": null,
+      "label": "R04 CANDIDATE | actual CPU civic assembly | not approved"
+    },
+    {
+      "source": "references/daybreak-roof-canopy-proposed-v01.png",
+      "sha256": "dcbc6531860604b21fcad96bc422b5efc24aa80320242322d7fd98d1abd2a0ca",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_pixels": [
+        515,
+        110,
+        1024,
+        315
+      ],
+      "label": "PROPOSED shallow removable canopy | 0.3m initial envelope"
+    },
+    {
+      "source": "modules/shade-canopy/hero.png",
+      "sha256": "dd62e6debfc875ab0c7d88e556e0ab8ef2d1dd490525f3d4b06b28e31a7b0bda",
+      "source_size": [
+        900,
+        760
+      ],
+      "crop_pixels": null,
+      "label": "R04 CANDIDATE | top view render | scalloped edges / ribs"
+    },
+    {
+      "source": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "sha256": "7c5f5acf2871dfdfb2ec0716d91cf8bb1efeb6b8e69b47f2661363e0a74c5106",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_pixels": [
+        1260,
+        570,
+        1520,
+        696
+      ],
+      "label": "PROPOSED underside | converging ribs and substantial pendant"
+    },
+    {
+      "source": "modules/shade-canopy/underside-detail.png",
+      "sha256": "87b5a1d53fbd1f39f0babfa6d3a4bb3f24f8ea6d7f31698ed4020c5bc8baf555",
+      "source_size": [
+        900,
+        760
+      ],
+      "crop_pixels": null,
+      "label": "R04 CANDIDATE | underside | ribs faint, pendant very small"
+    },
+    {
+      "source": "references/daybreak-roof-canopy-proposed-v01.png",
+      "sha256": "dcbc6531860604b21fcad96bc422b5efc24aa80320242322d7fd98d1abd2a0ca",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "crop_pixels": [
+        827,
+        626,
+        1140,
+        964
+      ],
+      "label": "PROPOSED corner | articulated release / hollow receiver"
+    },
+    {
+      "source": "modules/public-colonnade/capital-detail.png",
+      "sha256": "b860ba2f1f76468086da6e35e51e12b500db11cceca0d7f951ce4d7f07724c0e",
+      "source_size": [
+        900,
+        760
+      ],
+      "crop_pixels": null,
+      "label": "R04 CANDIDATE | layered head | simplified solid receiver"
+    }
+  ]
+}

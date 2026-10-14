@@ -1,0 +1,67 @@
+{
+  "generatedAt": "2026-10-14T00:37:15.332778+00:00",
+  "reviewMethod": "Actual established original source sheet plus final front/profile CPU pixels and predecessor comparisons inspected one image per call. Read-only hash checks; no authoring, publication, candidate mutation or engine/GPU retest.",
+  "approval": "NOT_APPROVED",
+  "limitations": [
+    "Only two focused final views per candidate. No full-body/weapon detail set is certified.",
+    "Source illustration and candidate lighting/cameras are not calibrated; no exact dimensions/anatomical ratios inferred.",
+    "Pixel review does not prove topology, UVs, optics parity, collision, animation quality, performance or engine compatibility."
+  ],
+  "candidate": "Kiln ninja V14 material-only diagnostic",
+  "predecessor": "Frozen Ninja V13",
+  "verdict": "MIXED_NEAR_NEUTRAL_NO_CLEAR_SOURCE_LIKENESS_GAIN",
+  "concreteImprovement": "The material finish changes subtly, but these front/profile views do not demonstrate a meaningful improvement toward reference090 hair. No clear new silhouette regression is visible; no structural gain is claimed.",
+  "frozenFilesVerified": 42,
+  "frozenManifestSha256": "3fe34a79acb22a22795d779787263c8d4aa2985c83c259c5088930ca04394326",
+  "predecessorFilesVerified": 30,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "bytes": 2129998,
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+    },
+    {
+      "path": "/tmp/ninja-v14/front-comparison.png",
+      "bytes": 740677,
+      "sha256": "94265f306e24df169c56f1374cc5ded4ad1627d5fb970ced6db9354f0d1f1bdd"
+    },
+    {
+      "path": "/tmp/ninja-v14/profile-comparison.png",
+      "bytes": 758451,
+      "sha256": "dc544adeba9d74c5f677fc79cb1d3d048f10b0472f5f413c66847faffcf063e8"
+    },
+    {
+      "path": "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png",
+      "bytes": 805392,
+      "sha256": "383171042c20d42e397c4f54f92df8c48a39eaafa019e99110c6e3ae8fb206ce"
+    },
+    {
+      "path": "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+      "bytes": 815499,
+      "sha256": "12636c3656205e387d710f37e4e6aa67eed57404802aade3a602a96ec52bc3f7"
+    }
+  ],
+  "findings": [
+    {
+      "priority": 1,
+      "area": "Hair primary forms",
+      "finding": "Broad similarly smooth ribbon/rope-like locks and rounded ridges remain dominant. The source fine irregular overlapping clumps and natural part/sweep structure are not recovered by the material adjustment."
+    },
+    {
+      "priority": 1,
+      "area": "Crown and side/back silhouette",
+      "finding": "Exposed dark cap/crown areas, conspicuous folded curls/ridges and pointed repeated nape locks remain. Front/source mass and profile/source flow still differ."
+    },
+    {
+      "priority": 1,
+      "area": "Material efficacy",
+      "finding": "Fine finish variation is subtle at the supplied framing and CPU render noise limits microdetail assessment. Smooth broad highlights still reinforce a plastic-clump reading. The material bake is not visual evidence that the hairstyle matches."
+    },
+    {
+      "priority": 1,
+      "area": "Face and ears",
+      "finding": "Narrow cut-like eyes with pinched corners and a tiny bright profile sliver, soft nasal tip/ala, separate dark nostril patches, simplified mouth/chin and thick cord-like ear folds persist."
+    }
+  ],
+  "recommendedPriority": "Retain V14 as a material diagnostic, not a likeness upgrade. Future repair should address the primary hair guide/cross-section/overlap shapes and facial/ear forms before further microtexture polish. No new authoring was performed."
+}

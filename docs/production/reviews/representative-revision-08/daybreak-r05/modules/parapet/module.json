@@ -1,0 +1,111 @@
+{
+  "original_name": "parapet",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/10",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    4,
+    0.2,
+    1.2
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      -0.007000045385211706,
+      0.0
+    ],
+    [
+      4.0,
+      0.20000000298023224,
+      1.2000000476837158
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 752,
+    "lod1": 48,
+    "lod2": 36
+  },
+  "visual_meshes": 20,
+  "collider_meshes": 1,
+  "sockets": [
+    {
+      "name": "start",
+      "semantic_type": "guardrail",
+      "position_blender_xyz_m": [
+        0,
+        0.1,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        -0.1
+      ],
+      "outward_normal_blender_xyz": [
+        -1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "guardrail"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "end",
+      "semantic_type": "guardrail",
+      "position_blender_xyz_m": [
+        4,
+        0.1,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        4,
+        0,
+        -0.1
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "guardrail"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "base",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "fixture": "stairs-with-landing",
+  "placements": [
+    {
+      "module": "stair-flight",
+      "translation_blender_m": [
+        0,
+        0,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "extra_geometry": "1.8m landing support adapter",
+      "translation_blender_m": [
+        0,
+        2.7,
+        1.6
+      ]
+    }
+  ],
+  "status": "ASSEMBLY_REVIEW_CANDIDATE_NOT_GAMEPLAY_VALIDATED",
+  "bounds_blender_m": [
+    [
+      -0.18000000715255737,
+      -0.07999999821186066,
+      0.0
+    ],
+    [
+      1.9800000190734863,
+      4.5,
+      2.740000009536743
+    ]
+  ],
+  "final_riser_ownership": "The receiving landing front fascia at y2.70 spans z1.44\u20131.60; flight tread9 remains y2.40\u20132.70",
+  "gaps": [
+    "visual fidelity",
+    "connection and circulation review",
+    "event/restoration states",
+    "nav/controller traversal",
+    "source references are PROPOSED"
+  ]
+}

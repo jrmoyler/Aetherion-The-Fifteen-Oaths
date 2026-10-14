@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-10-14T00:37:15.332778+00:00",
+  "reviewMethod": "Actual established original source sheet plus final front/profile CPU pixels and predecessor comparisons inspected one image per call. Read-only hash checks; no authoring, publication, candidate mutation or engine/GPU retest.",
+  "approval": "NOT_APPROVED",
+  "limitations": [
+    "Only two focused final views per candidate. No full-body/weapon detail set is certified.",
+    "Source illustration and candidate lighting/cameras are not calibrated; no exact dimensions/anatomical ratios inferred.",
+    "Pixel review does not prove topology, UVs, optics parity, collision, animation quality, performance or engine compatibility."
+  ],
+  "candidate": "Fault blade V13 focused diagnostic",
+  "predecessor": "Frozen Fault V12",
+  "verdict": "CONCRETE_LOCAL_IMPROVEMENT_OVERALL_MIXED_UNACCEPTED",
+  "concreteImprovement": "Crystal faces are visibly more varied and faceted than the flatter V12 strip, with distinct angular highlights/planes; stone relief/overlaps are more articulated. This is a real local visual improvement, not an exact construction match.",
+  "frozenFilesVerified": 48,
+  "frozenManifestSha256": "8948b0d41c7d77be6ead6a5991099b647fae2e02cf8272a65d9075c9db8439ea",
+  "predecessorFilesVerified": 63,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-053/original.png",
+      "bytes": 2522664,
+      "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v13/comparison-reference-v12-v13.png",
+      "bytes": 656298,
+      "sha256": "09fcab2d1e3a7986651f6b0f7e89c81c38b9e28d153e756135621684c680a342"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v13/amethyst-short-blade/matched-front-review.png",
+      "bytes": 708672,
+      "sha256": "a6bb4024c162ef5ab0b5281dd601bb766c0d22dd3a234a6b77ea8b80d274464f"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v13/amethyst-short-blade/matched-profile-review.png",
+      "bytes": 674928,
+      "sha256": "8ed8bb89046e4b6af956f83c7e4429f3e62274695c83be94aaa2ebb71e9d3f79"
+    }
+  ],
+  "findings": [
+    {
+      "priority": 1,
+      "area": "Crystal exposure hierarchy",
+      "finding": "The interior still reads as one long connected central channel despite improved facets. Source053 has a more irregular substantial interior with changing exposure/occlusion and interlocking crystal clusters; that composition remains unmatched."
+    },
+    {
+      "priority": 1,
+      "area": "Stone construction",
+      "finding": "Large similarly scaled primary stone banks remain tile-like. Added small facets/terraces increase detail, but the profile still reveals long near-parallel substrate edges around the center instead of source-defined interleaved fracture hierarchy."
+    },
+    {
+      "priority": 1,
+      "area": "Guard and pommel",
+      "finding": "The guard remains a bulky cylindrical/cuff structure with regular flange rhythm; source fitted irregular bronze-and-stone enclosure and studs are absent. Pommel remains one long purple prism in sparse shell pieces rather than a compact fractured cluster."
+    },
+    {
+      "priority": 2,
+      "area": "Grip and finish",
+      "finding": "Broad regular leather wraps and thin repeating seam rhythm remain; bronze/stone material divisions and localized source wear are simplified. Warmer leather color is retained but does not fix wrap construction."
+    }
+  ],
+  "recommendedPriority": "Keep the stronger facet/depth direction, then address the primary bank/channel composition and guard/pommel silhouettes. Do not use microfracture detail as a substitute for the larger construction differences. No new authoring was performed."
+}
