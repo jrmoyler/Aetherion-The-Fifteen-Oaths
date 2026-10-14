@@ -1,0 +1,704 @@
+{
+  "status": "FROZEN_UNAPPROVED_REVIEW_ONLY",
+  "productionPromotion": false,
+  "acceptedAssetFamilies": 0,
+  "scopeCounts": {
+    "authorPayloadFiles": 72,
+    "independentTechnicalPayloadFiles": 50,
+    "finalGLBs": 4,
+    "finalVisualGLBs": 3,
+    "finalCollisionGLBs": 1,
+    "historicalBaselineGLBs": 4,
+    "componentIntermediateGLBs": 3,
+    "finalBlendSources": 1,
+    "historicalBlendSources": 1,
+    "actualRenderImages": 16,
+    "pairedComparisonImages": 8,
+    "originalReferenceCopies": 1
+  },
+  "fileCountExcludingSelf": 136,
+  "bytesExcludingSelf": 174070554,
+  "logFiles": 20,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5664,
+      "sha256": "3b4006cc2f5d94d5f7c0f2b37adb0b4c1e0a20b613b2d61804c9fa246057a620"
+    },
+    {
+      "path": "build_gallery.py",
+      "bytes": 2754,
+      "sha256": "44e154ffdd89f60ddab29fde17e2ae3feb999f909949b92aa8947f52c29c33dc"
+    },
+    {
+      "path": "closure-fixtures.json",
+      "bytes": 172,
+      "sha256": "c8c0be44f5ed8b23388cff2f2161c0c4420e9090dcb8021d1e2d974d3104e9f6"
+    },
+    {
+      "path": "independent-imports/EVIDENCE_INDEX.json",
+      "bytes": 8126,
+      "sha256": "d66aed16749ea40ae94d55c9016422642e4d4524c3c13f46152c59aed15b28c1"
+    },
+    {
+      "path": "independent-imports/SUMMARY.md",
+      "bytes": 4579,
+      "sha256": "06cfc35f23791c419dfd924cdd60b93c4f69ecd61525383e13090d81ca3da2b5"
+    },
+    {
+      "path": "independent-imports/check-blender.py",
+      "bytes": 2650,
+      "sha256": "ee93685c7a5c942e4899656c5ff03f89ce63ebf629be31a5c41ce9c84c72bcb8"
+    },
+    {
+      "path": "independent-imports/check-glb-preservation.py",
+      "bytes": 3943,
+      "sha256": "580865d78757aaed4e53a57be989cefbce9965c0a68de79229bba929f9c3e369"
+    },
+    {
+      "path": "independent-imports/check-glb.mjs",
+      "bytes": 6238,
+      "sha256": "042fe1354735f6f9f11fee3d6e7b2ac0a9d5723194567fcc8c25faad6e1bb503"
+    },
+    {
+      "path": "independent-imports/check-inherited-defects.py",
+      "bytes": 2143,
+      "sha256": "d8293d3383a49863a029e3745431446ab554ce47ed9df9bf781da5f1d07bdd5f"
+    },
+    {
+      "path": "independent-imports/check-source-poses.py",
+      "bytes": 3645,
+      "sha256": "31753bee4cf28547ca1984eda46aa5fa223934366ce101684310839368ce2bb1"
+    },
+    {
+      "path": "independent-imports/check-source-preservation.py",
+      "bytes": 2664,
+      "sha256": "9baaa26efeac5f667e9583bd90566bf0ad3b3a35c6c7ef16b58772028bfac5b9"
+    },
+    {
+      "path": "independent-imports/check-source-removal.json",
+      "bytes": 6171,
+      "sha256": "5670f77e3a1c9beb2d5cc967cfffa1b9726fec99b67b597f99ccc91586bcf2d6"
+    },
+    {
+      "path": "independent-imports/check-source-removal.py",
+      "bytes": 1397,
+      "sha256": "5e4843ab3a1cc9e33e10bbe26ccb8cb4060e90701b75539dbc223784a5a41807"
+    },
+    {
+      "path": "independent-imports/compare-bounds.py",
+      "bytes": 2247,
+      "sha256": "078d583a05c3600e4bd45daf12d565fc9572aecc075b68818b413d8424872a51"
+    },
+    {
+      "path": "independent-imports/delivery-summary.json",
+      "bytes": 342,
+      "sha256": "d0a89d559ec02222f731021a24a8f9615d7eff7821f6bb72aaf35763d0555f0c"
+    },
+    {
+      "path": "independent-imports/freeze-verification.json",
+      "bytes": 17429,
+      "sha256": "e47853a9c9b7ca99aa5b3a5b2185a64f203b42ac22a5eef8c11d372196f57045"
+    },
+    {
+      "path": "independent-imports/glb-preservation.json",
+      "bytes": 33443,
+      "sha256": "1a3968a92f29ed985a11d5bf669eb66797ada8c8bd2cdecea9012ab6b639c335"
+    },
+    {
+      "path": "independent-imports/godot_import.gd",
+      "bytes": 983,
+      "sha256": "58b7435507fc76a1cd5247720c66afb4e67a5585eb22f50e20a526d87c39950b"
+    },
+    {
+      "path": "independent-imports/ground-godot-192fps.gd",
+      "bytes": 3676,
+      "sha256": "27e9da1ca422e721dd5f8f854a3ad001367b950b232e8c9c691da46387710383"
+    },
+    {
+      "path": "independent-imports/ground-summary.json",
+      "bytes": 2180,
+      "sha256": "d76cb5de68debcc21f63cc663b85b9d2a717b7942363417a875447692d03a6e8"
+    },
+    {
+      "path": "independent-imports/ground-three.mjs",
+      "bytes": 2518,
+      "sha256": "62c75b7d1a9cc2f4dbb9fb0a85803e16c0d8d4ca922dd024e7dc650f0134f72e"
+    },
+    {
+      "path": "independent-imports/inherited-geometry-defects.json",
+      "bytes": 207805,
+      "sha256": "eb88f7ae5e584c4255693e0949a07388c516ea8d84a92331016a106929abe187"
+    },
+    {
+      "path": "independent-imports/input-hashes.json",
+      "bytes": 1548,
+      "sha256": "3df399ee6b4d665811d8853518529527b6c061a764b9ec75fb7e13a594bca2da"
+    },
+    {
+      "path": "independent-imports/kiln-ninja-ensemble-candidate-192fps-godot-ground.json",
+      "bytes": 225348,
+      "sha256": "16c73f4eb83b51f04dda4738a483fb2a33a46d119520b2ec83a76e94d3beb8bf"
+    },
+    {
+      "path": "independent-imports/kiln-ninja-ensemble-candidate-192fps-godot-ground.log",
+      "bytes": 93,
+      "sha256": "3fa41542af946bdbaac0a1250880594921ef826c6b8df8e19cc9913dc44bf31b"
+    },
+    {
+      "path": "independent-imports/kiln-ninja-ensemble-candidate-lod1-192fps-godot-ground.json",
+      "bytes": 225353,
+      "sha256": "f4ba8a28d94c22339d9ccaf581287d9ab894e6d3738d8d26992c01ba0367db17"
+    },
+    {
+      "path": "independent-imports/kiln-ninja-ensemble-candidate-lod1-192fps-godot-ground.log",
+      "bytes": 93,
+      "sha256": "3fa41542af946bdbaac0a1250880594921ef826c6b8df8e19cc9913dc44bf31b"
+    },
+    {
+      "path": "independent-imports/kiln-ninja-ensemble-candidate-lod2-192fps-godot-ground.json",
+      "bytes": 225326,
+      "sha256": "cd76fec5278988b786624654a80b5eb2cfe30ee1085bb92dcda86fac929cfce3"
+    },
+    {
+      "path": "independent-imports/kiln-ninja-ensemble-candidate-lod2-192fps-godot-ground.log",
+      "bytes": 93,
+      "sha256": "3fa41542af946bdbaac0a1250880594921ef826c6b8df8e19cc9913dc44bf31b"
+    },
+    {
+      "path": "independent-imports/ninja16-blender.json",
+      "bytes": 36088,
+      "sha256": "7d5fb164e6600adf827e500f1587573c49c5da58d3aec13f442b08017a8ece4a"
+    },
+    {
+      "path": "independent-imports/ninja16-blender.log",
+      "bytes": 1455,
+      "sha256": "edb0dfcaa419980eaaf83b579da338cc8c8f3fe816f7158e6797da3be5e63dbf"
+    },
+    {
+      "path": "independent-imports/ninja16-comparison.json",
+      "bytes": 22776,
+      "sha256": "b59bb581d23ffbc10277884fa580c8a66df1ade9c652994511397246fb549865"
+    },
+    {
+      "path": "independent-imports/ninja16-comparison.log",
+      "bytes": 627,
+      "sha256": "e26b59b08bbcefa3dee3efeca657c500fe1ea13b8efa5dd53eed7cceb3b8783b"
+    },
+    {
+      "path": "independent-imports/ninja16-glb-validator-details.json",
+      "bytes": 10927,
+      "sha256": "98922ae326f1931ee3178586aab4853e0da90da33557b85f314152d2597cbb5a"
+    },
+    {
+      "path": "independent-imports/ninja16-glb.json",
+      "bytes": 99689,
+      "sha256": "c85697fa8f8615c9de6abd601ec3bb53eab336db96ba5b2dbd0d5a99d408bac8"
+    },
+    {
+      "path": "independent-imports/ninja16-glb.log",
+      "bytes": 1073,
+      "sha256": "9881a67eb5c5e32ef31847413055563052079531c352c176212da81e0d057533"
+    },
+    {
+      "path": "independent-imports/ninja16-godot-0.log",
+      "bytes": 208,
+      "sha256": "0cb2685f2f1432a54f8d93094ee68fdf6404f3681167360a67db63b56f4a4113"
+    },
+    {
+      "path": "independent-imports/ninja16-godot-1.log",
+      "bytes": 208,
+      "sha256": "0cb2685f2f1432a54f8d93094ee68fdf6404f3681167360a67db63b56f4a4113"
+    },
+    {
+      "path": "independent-imports/ninja16-godot-2.log",
+      "bytes": 208,
+      "sha256": "0cb2685f2f1432a54f8d93094ee68fdf6404f3681167360a67db63b56f4a4113"
+    },
+    {
+      "path": "independent-imports/ninja16-godot-3.log",
+      "bytes": 208,
+      "sha256": "d6911625a504d3284788bca6a9d541edcf47d258a78a8e0feb466715bef98fa6"
+    },
+    {
+      "path": "independent-imports/ninja16-inputs.json",
+      "bytes": 1697,
+      "sha256": "3a0d48c75b2c57d9d502efd562fae882c42fcc66e1e50f05fe3876fe1820401c"
+    },
+    {
+      "path": "independent-imports/ninja16-receipt.json",
+      "bytes": 6780,
+      "sha256": "a3b96d312214226b4d2fdfd7ab7249a29ba1a3574d9882aca3b01f81c50dc141"
+    },
+    {
+      "path": "independent-imports/prepare-rerun.py",
+      "bytes": 1418,
+      "sha256": "5db3a88cca9886bf68d424059d5b649289633228b9c78ecb612fe32666424c0c"
+    },
+    {
+      "path": "independent-imports/project.godot",
+      "bytes": 140,
+      "sha256": "937e8201f090578680e465956594eea8bebd96b32698ef7220a8c2a8300b3dbb"
+    },
+    {
+      "path": "independent-imports/run-godot-192fps.py",
+      "bytes": 703,
+      "sha256": "89bc02aba6d22dac1bf087dd7f75457dda5dbacd1ffeeb747385198acf327c16"
+    },
+    {
+      "path": "independent-imports/run_checks.py",
+      "bytes": 2347,
+      "sha256": "2d49d194d4f35030446fc5887a8464c9d323741780660ede8fd8b5299b25e27b"
+    },
+    {
+      "path": "independent-imports/source-pose-ground.json",
+      "bytes": 399744,
+      "sha256": "f5e4c67ed6d12a37521691e9e1e2500093c75a50dd887bee1c0dafdef0c4769f"
+    },
+    {
+      "path": "independent-imports/source-pose-ground.log",
+      "bytes": 239,
+      "sha256": "fbdb7c2e7b171ffaa9696d3a3839e0fdbd57b0c7d2690fac609eae91357019ac"
+    },
+    {
+      "path": "independent-imports/source-preservation.json",
+      "bytes": 5934,
+      "sha256": "8adbc6eb3d3c4bbbdbdaaf34af63c59d9a6907b7643fbfbe28dcedf1be1e01a1"
+    },
+    {
+      "path": "independent-imports/source-preservation.log",
+      "bytes": 428,
+      "sha256": "0616deff610609cb8580704d127408e7818dcfe7720b86c85945644c6a6cb83c"
+    },
+    {
+      "path": "independent-imports/source-removal.log",
+      "bytes": 145,
+      "sha256": "d370349532502a55a43f7893e1f4bcdb024e41a7038e3f6af39f1b4c930c9355"
+    },
+    {
+      "path": "independent-imports/summarize-ground.py",
+      "bytes": 1581,
+      "sha256": "e24103bf9755e7bbe865ebdb909b7d64d3e9551b90017cf8e183e8335cf80135"
+    },
+    {
+      "path": "independent-imports/three-ground.json",
+      "bytes": 902751,
+      "sha256": "74e2b156d9b8748663fe40bb7c85de0a79da28f1341583c76fb87dcdc3b25276"
+    },
+    {
+      "path": "independent-imports/three-ground.log",
+      "bytes": 421,
+      "sha256": "6f22f3d108a6abf1aefea302825f9cfa365adcc38813cf82c6dc85fc203d4232"
+    },
+    {
+      "path": "independent-review/FINAL_PIXEL_REVIEW.md",
+      "bytes": 2573,
+      "sha256": "978c3ba0249f45a29377044eadb880fb20a35e525cdebdec5c6d64285b30c1c4"
+    },
+    {
+      "path": "independent-review/TARGET_CRITERIA.md",
+      "bytes": 1627,
+      "sha256": "ffbb99316351eef10bcbe7c95bdcbf2ae0947b559a1edf3eae9d3c9bbcb2c835"
+    },
+    {
+      "path": "independent-review/baseline-pixel-inputs.json",
+      "bytes": 476,
+      "sha256": "4f0e80fb825481572bd8ca756f00df5612e8add85120bdb2cd14d6365969ba9d"
+    },
+    {
+      "path": "independent-review/final-pixel-review.json",
+      "bytes": 6999,
+      "sha256": "79a449bfeb3cad43c45d6a951a0ba7533cf0e4b03fa463541075cb77a552f586"
+    },
+    {
+      "path": "index.html",
+      "bytes": 3561,
+      "sha256": "93596be6e48d87b7b85b082a1b833f5990981f49ed4a0e2504dfe600040503a6"
+    },
+    {
+      "path": "kiln-ninja-v16/DEFECT_LEDGER.md",
+      "bytes": 2905,
+      "sha256": "8599a4ffc910b80251bcd0721981baf842e710e10db579d845b1499cc3918453"
+    },
+    {
+      "path": "kiln-ninja-v16/README.md",
+      "bytes": 6191,
+      "sha256": "f1e8fa332ec632531bb362a4c6784095ba511914b6e448ca3e42c8b28447e89c"
+    },
+    {
+      "path": "kiln-ninja-v16/SHA256SUMS.json",
+      "bytes": 12187,
+      "sha256": "70538e15d9126a48e72ebfbec297c0efd36b46bb0a1aa62b71c8a84faeabc9df"
+    },
+    {
+      "path": "kiln-ninja-v16/all-views-contact-sheet.png",
+      "bytes": 842033,
+      "sha256": "d55681ad9bccc642b05199acb2cac2a922f2cbae23a529b2610212e4cd554c71"
+    },
+    {
+      "path": "kiln-ninja-v16/asset-input-hashes.json",
+      "bytes": 1775,
+      "sha256": "e74ab95ef416ca99851dd62ff90de8ca45d05b76d48ac84d4ec129142a98efbc"
+    },
+    {
+      "path": "kiln-ninja-v16/author.log",
+      "bytes": 207,
+      "sha256": "63d3e7e132e74823f7b48df0773064f76a7fecb8e16fd5112788e2abc665ee53"
+    },
+    {
+      "path": "kiln-ninja-v16/author_bracer.py",
+      "bytes": 6843,
+      "sha256": "a43b373faa917b05c4721d2c5ed9a42d6a75b39e3666b1ace5ad99c482ea6e42"
+    },
+    {
+      "path": "kiln-ninja-v16/baseline/kiln-ninja-ensemble-candidate-collision.glb",
+      "bytes": 4300,
+      "sha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7"
+    },
+    {
+      "path": "kiln-ninja-v16/baseline/kiln-ninja-ensemble-candidate-lod1.glb",
+      "bytes": 14635092,
+      "sha256": "a9aae0c2590d2c47f5e2cce3f8568257e76caa565eb559141b915127f3f6fcef"
+    },
+    {
+      "path": "kiln-ninja-v16/baseline/kiln-ninja-ensemble-candidate-lod2.glb",
+      "bytes": 13482300,
+      "sha256": "3189c723eaa6124a3215af90caa94349c29ebacf7a6d07a7a344e3a00e22e27f"
+    },
+    {
+      "path": "kiln-ninja-v16/baseline/kiln-ninja-ensemble-candidate.blend",
+      "bytes": 13405125,
+      "sha256": "b144a70ebef204f4d63f39b287d49cced68860985638f9e7ccc1d93905274572"
+    },
+    {
+      "path": "kiln-ninja-v16/baseline/kiln-ninja-ensemble-candidate.glb",
+      "bytes": 15852548,
+      "sha256": "4d48d3e22968bb752c277543f6b0452cb628420cb9e2264bc21fec3859947d86"
+    },
+    {
+      "path": "kiln-ninja-v16/baseline-components.json",
+      "bytes": 10337,
+      "sha256": "876c26d0c9565e8e398fa73af253e720ea0ef259afcdc47d12a9e5af7192b638"
+    },
+    {
+      "path": "kiln-ninja-v16/check_components.py",
+      "bytes": 715,
+      "sha256": "e18ab1d175c2b5fc55ec0d56d861c944cab1a6f022908b900d9325fd3dd91516"
+    },
+    {
+      "path": "kiln-ninja-v16/check_source.py",
+      "bytes": 2620,
+      "sha256": "3a028940bcee2b699224a9422e943888ef078467bfbc9683a2e1328867c9c8dc"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/back.png",
+      "bytes": 365155,
+      "sha256": "b3beb4042f3218bfa89b0fc634e58295f58e7160baa663c169558959d0c2b3c5"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/bracer-far.png",
+      "bytes": 669749,
+      "sha256": "479f306e898bfbf714653f915b407aa8ea99331ecfcb6f47e7745c31bcfb5dae"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/bracer-front.png",
+      "bytes": 664251,
+      "sha256": "c7e99996c93b1e1201ec4998991805bfebe57abdcf1e8da09864d77dee4e7d5f"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/bracer-near.png",
+      "bytes": 901947,
+      "sha256": "5ed60cfb81448e292eed39a7d1cebbaee5ab22f582c587516a720bccd1aa9b34"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/cast.png",
+      "bytes": 545862,
+      "sha256": "348b18dd2b8c3cd121a7643884b41c2adf39a54e97749ea664d2e4f14bc5d391"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/front.png",
+      "bytes": 377701,
+      "sha256": "79e6f888c25f12435d6b61f464cc7ca6747ca365aa499e02a67bc17eb7ce35a3"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/hero.png",
+      "bytes": 564821,
+      "sha256": "2d5f4a8b7612a7039572232cd20f8b4e69e7f5d96a5f407c75ecf9d6dc660161"
+    },
+    {
+      "path": "kiln-ninja-v16/comparisons/side.png",
+      "bytes": 310846,
+      "sha256": "e999a4793f990bf1aa34a19f66b9274b4adf477902f31bd524fe7c9ec88b851f"
+    },
+    {
+      "path": "kiln-ninja-v16/component-export.log",
+      "bytes": 10530,
+      "sha256": "83e7021abe640bd2d0dcb6f85032edc7ceb4d4a2eac835202dab7979a1d09a1f"
+    },
+    {
+      "path": "kiln-ninja-v16/component-exports/bracer-lod0.glb",
+      "bytes": 9407272,
+      "sha256": "40ce208468b12fd8c22333dafa60da90b86442e9066e8950a12528840e7e2f56"
+    },
+    {
+      "path": "kiln-ninja-v16/component-exports/bracer-lod1.glb",
+      "bytes": 9338048,
+      "sha256": "c3752825053f39bed3fe6c159eb9cbc8a60259fa5f648cc312d00ab757eec916"
+    },
+    {
+      "path": "kiln-ninja-v16/component-exports/bracer-lod2.glb",
+      "bytes": 9282256,
+      "sha256": "473bb79b25a7953c1a4845fed4399535b79adb08422ad4ff7d3c1d19adae9914"
+    },
+    {
+      "path": "kiln-ninja-v16/component-lods.json",
+      "bytes": 262,
+      "sha256": "7de3cd4eb845d9b698b4755cf09bf4c203f784d9d414464fe87d1182ca0c8c73"
+    },
+    {
+      "path": "kiln-ninja-v16/component-topology.json",
+      "bytes": 4331,
+      "sha256": "cfc2ae07f3280cee68824ba6fb4d424531c3024404cb6fa7da3d509e34a0007d"
+    },
+    {
+      "path": "kiln-ninja-v16/component-topology.log",
+      "bytes": 158,
+      "sha256": "fada3fafa46d023bd4f22bd1460bb028da4bc8981f14f2e631951d5f4c91e2c1"
+    },
+    {
+      "path": "kiln-ninja-v16/export-preservation.json",
+      "bytes": 30372,
+      "sha256": "7c1c2594ba5af50bad69b6fd3481a7f2abbcb5ef4d67c468c33c67363d352c33"
+    },
+    {
+      "path": "kiln-ninja-v16/export_components.py",
+      "bytes": 1750,
+      "sha256": "f0bc43d43368b7df623ea58afbf67b2f2d71252eb85cc7df886433eeb3dfecc8"
+    },
+    {
+      "path": "kiln-ninja-v16/freeze.py",
+      "bytes": 2138,
+      "sha256": "1fc27aa39bcfe1a73ecbe627670a8e5d86b74434f37894ed9874194bdbc73768"
+    },
+    {
+      "path": "kiln-ninja-v16/geometry-freeze-receipt.json",
+      "bytes": 9594,
+      "sha256": "b10f04f5b3433723b907a78aec4485800d53caed4e61ad77e522b9aa76773a5e"
+    },
+    {
+      "path": "kiln-ninja-v16/inspect_components.py",
+      "bytes": 1093,
+      "sha256": "de2f71dadfde065a323faef6ca8029a006ab4e870432d485867730e0858ed3f8"
+    },
+    {
+      "path": "kiln-ninja-v16/khronos-author-check.json",
+      "bytes": 9273,
+      "sha256": "b3973b20516b93d0c2f96e9232c764402b8cab556090b2eb36efd9ff29ee33d0"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-basecolor.png",
+      "bytes": 2950897,
+      "sha256": "255f9a489e6d62b681ecc92ec155a91e3096c2e45233fcbd3cbc1357491b5f87"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+      "bytes": 4300,
+      "sha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-hair-orm.png",
+      "bytes": 2445983,
+      "sha256": "1cc14fbcc7463fd58beb0535b4e3c39d7bbb3c22643c920c29bd5f9e2a797cc7"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "bytes": 15103796,
+      "sha256": "5e5b66cab2e717f329372655fcd51e9988f4be4bdbc7893eb647953d03a54b6c"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "bytes": 13790980,
+      "sha256": "c640443c9ac2b311cbcbb3ef13049a1668349c81b2ef8efd52d776f3ee1a8169"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-normal.png",
+      "bytes": 3750405,
+      "sha256": "e535bb17035db5477e923caf81588a2d162636fd5767a97fbeb73c152611eb03"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-orm.png",
+      "bytes": 2428399,
+      "sha256": "06918d4b6529fb00df18840acbf392f2e94bbb384e010531f733a67d59b40275"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+      "bytes": 13539764,
+      "sha256": "06d9ae2520310ce153049aeba49af8bd15e0f13b8de3ab2c6678cab3eeaa73fb"
+    },
+    {
+      "path": "kiln-ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "bytes": 16433212,
+      "sha256": "1763d1cc5d655ccfe0c10482e748c8cea63ef6aa812ac84b406ba68da0eeeada"
+    },
+    {
+      "path": "kiln-ninja-v16/make_comparisons.py",
+      "bytes": 887,
+      "sha256": "525e73eab53c1b019821c4bdc1d1226cdfc950a7d882f8a1ab7206c3164c4a20"
+    },
+    {
+      "path": "kiln-ninja-v16/new-components.json",
+      "bytes": 7608,
+      "sha256": "265a2faddada6561d3c00622585abac68d86c99d4410cc2a0c36a196b533ff4a"
+    },
+    {
+      "path": "kiln-ninja-v16/patch_exports.py",
+      "bytes": 5288,
+      "sha256": "750707489c0052565d03cafa8622f95ba8ed4212c49536143999418f35189370"
+    },
+    {
+      "path": "kiln-ninja-v16/reference090-original.png",
+      "bytes": 2129998,
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+    },
+    {
+      "path": "kiln-ninja-v16/render-evidence.json",
+      "bytes": 6883,
+      "sha256": "86b5c42ed548ea0aaf731df5aa22df0784f7082bd1ed688c8e1a4eacac35a312"
+    },
+    {
+      "path": "kiln-ninja-v16/render-framing.log",
+      "bytes": 28704,
+      "sha256": "b44a61c12ce5147f05689cef982dd4d3d1ac522c1e96f51b8b486aa6cd1f3b95"
+    },
+    {
+      "path": "kiln-ninja-v16/render.log",
+      "bytes": 113603,
+      "sha256": "c0a5db72de45d96f8b6bc931fe0d7744026846757e1bc877ed7acca3740b7c5f"
+    },
+    {
+      "path": "kiln-ninja-v16/render_compare.py",
+      "bytes": 3033,
+      "sha256": "9a61534ccc222f204d8048978ee57b4515b34c93132e8f4fc64d187e9827f1aa"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-back.png",
+      "bytes": 427219,
+      "sha256": "a7e45dec1f98a75d163823a34f24cf72082a463525bdb68c92452f0a779ffea9"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-bracer-far.png",
+      "bytes": 531839,
+      "sha256": "e740587db9277711ca5f70644f7e49c9a617db1cb149cb555f3e105823b62a9d"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-bracer-front.png",
+      "bytes": 470984,
+      "sha256": "ef52454b084ff48628ed4d15da295e0c33efcc7de0cc4654e2b828769da7c7e1"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-bracer-near.png",
+      "bytes": 606199,
+      "sha256": "3cfffe1691fadb5043550da1f8fd8cc60e91c4c9375382c5db22b93bd1dc2a8c"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-cast.png",
+      "bytes": 578107,
+      "sha256": "9f361a50334ce421be8b3f5a7df14702b1ebdd4f9a2d11d2c385833a3d01ea51"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-front.png",
+      "bytes": 438711,
+      "sha256": "25271ed5ecf8cd1eee7547ed8005f6eb79a80e93618c4e5143f80a996e57bacb"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-hero.png",
+      "bytes": 600986,
+      "sha256": "f871d1999478581348691aa0e22f2783afc8770ca1eebfbfadda584b1ce6b4c8"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v15-side.png",
+      "bytes": 368925,
+      "sha256": "71555b157a8863e48a3d45fa67080ae20585ff8fa8938dbae7aadffaf49b8e9c"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-back.png",
+      "bytes": 426651,
+      "sha256": "1a578a25a95a6a1c4a44a04c95a7de9fa294e1feec95a71b675f441fa26aabec"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-bracer-far.png",
+      "bytes": 518136,
+      "sha256": "34ab2cbaf8192c7096676143a550ca0769c657dda77d56a0bfc1750ff5694b4f"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-bracer-front.png",
+      "bytes": 469240,
+      "sha256": "1316340f90fbeb3a84170effdb82008a330d2173898e1233fa74e5a245fea024"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-bracer-near.png",
+      "bytes": 605111,
+      "sha256": "4944217384a8d40d3f590d2d9aa9c2b207ae8dea08f6483007b96bc310a9e5ab"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-cast.png",
+      "bytes": 578974,
+      "sha256": "740f2e270aaaa58f0f0b19d7473fe7ce07e54867aab6bfc2cd7b2921c99160c4"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-front.png",
+      "bytes": 438029,
+      "sha256": "f68ae55486124e9edbf853f29edeb940262689af1abd5758e8a202fa99d246c8"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-hero.png",
+      "bytes": 600593,
+      "sha256": "667a564256e331d29d03647d1a09c2e22580d292cdfd38046bf06174fc6106da"
+    },
+    {
+      "path": "kiln-ninja-v16/renders/v16-side.png",
+      "bytes": 369643,
+      "sha256": "95aa52ca91e0efe39a0226a5295998283e1d16fc5c301604663fd80f0a417ee1"
+    },
+    {
+      "path": "kiln-ninja-v16/source-check.log",
+      "bytes": 449,
+      "sha256": "96de52d7d7d6c7147ea47e7146bcd42cc4a7c3120ab28b703b370dc08fbaebd3"
+    },
+    {
+      "path": "kiln-ninja-v16/source-preservation.json",
+      "bytes": 5934,
+      "sha256": "8adbc6eb3d3c4bbbdbdaaf34af63c59d9a6907b7643fbfbe28dcedf1be1e01a1"
+    },
+    {
+      "path": "kiln-ninja-v16/source-removal.json",
+      "bytes": 10302,
+      "sha256": "97cf6902cb984097d5c3fd2724789b0abe1264f428b95419bcbb3494d6e88ed4"
+    },
+    {
+      "path": "kiln-ninja-v16/validate.mjs",
+      "bytes": 653,
+      "sha256": "bded49fe08fea94520f16617dd9480778ba5a710ec9ea64b4dc685ab3c53c257"
+    },
+    {
+      "path": "publication-origins.json",
+      "bytes": 654,
+      "sha256": "eb5492655ee2235a3840608c0a270e6f4db211456566609c604bb6ec99ec4e73"
+    },
+    {
+      "path": "review-manifest.json",
+      "bytes": 1221,
+      "sha256": "a173dee1fbe940215a13b647852f6fdd3719da037b45e801cee0079b242bf1b6"
+    },
+    {
+      "path": "test_closure.py",
+      "bytes": 1238,
+      "sha256": "a088e161cfac9a674be9603938066984fa36c136b8c3ea60f828f33a63d8873b"
+    },
+    {
+      "path": "verify_bundle.py",
+      "bytes": 2775,
+      "sha256": "8e60f779a8c0307a39e2cfc20b180c57b8de9c8bdbbb3d83d83a23006ff21183"
+    }
+  ]
+}

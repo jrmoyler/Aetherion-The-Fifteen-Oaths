@@ -1,0 +1,664 @@
+{
+  "reports": [
+    {
+      "receipt": "geometry-freeze-receipt.json",
+      "sha256": "b10f04f5b3433723b907a78aec4485800d53caed4e61ad77e522b9aa76773a5e",
+      "files": [
+        {
+          "path": "DEFECT_LEDGER.md",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "README.md",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "all-views-contact-sheet.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "asset-input-hashes.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "author_bracer.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "baseline-components.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "check_components.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "check_source.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/back.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/bracer-far.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/bracer-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/bracer-near.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/cast.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/hero.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/side.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-lods.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-topology.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "export-preservation.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "export_components.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "freeze.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "inspect_components.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "khronos-author-check.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-basecolor.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-hair-orm.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-normal.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-orm.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "make_comparisons.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "new-components.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "patch_exports.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "reference090-original.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "render-evidence.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "render_compare.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-back.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-bracer-far.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-bracer-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-bracer-near.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-cast.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-hero.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-side.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-back.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-bracer-far.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-bracer-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-bracer-near.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-cast.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-hero.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-side.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "source-preservation.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "source-removal.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "validate.mjs",
+          "hashMatches": true,
+          "bytesMatch": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "receipt": "SHA256SUMS.json",
+      "sha256": "70538e15d9126a48e72ebfbec297c0efd36b46bb0a1aa62b71c8a84faeabc9df",
+      "files": [
+        {
+          "path": "DEFECT_LEDGER.md",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "README.md",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "all-views-contact-sheet.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "asset-input-hashes.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "author.log",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "author_bracer.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "baseline/kiln-ninja-ensemble-candidate-collision.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "baseline/kiln-ninja-ensemble-candidate-lod1.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "baseline/kiln-ninja-ensemble-candidate-lod2.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "baseline/kiln-ninja-ensemble-candidate.blend",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "baseline/kiln-ninja-ensemble-candidate.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "baseline-components.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "check_components.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "check_source.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/back.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/bracer-far.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/bracer-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/bracer-near.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/cast.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/hero.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "comparisons/side.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-export.log",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-exports/bracer-lod0.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-exports/bracer-lod1.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-exports/bracer-lod2.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-lods.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-topology.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "component-topology.log",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "export-preservation.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "export_components.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "freeze.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "geometry-freeze-receipt.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "inspect_components.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "khronos-author-check.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-basecolor.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-hair-orm.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-normal.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-orm.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "make_comparisons.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "new-components.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "patch_exports.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "reference090-original.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "render-evidence.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "render-framing.log",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "render.log",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "render_compare.py",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-back.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-bracer-far.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-bracer-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-bracer-near.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-cast.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-hero.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v15-side.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-back.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-bracer-far.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-bracer-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-bracer-near.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-cast.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-front.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-hero.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "renders/v16-side.png",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "source-check.log",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "source-preservation.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "source-removal.json",
+          "hashMatches": true,
+          "bytesMatch": true
+        },
+        {
+          "path": "validate.mjs",
+          "hashMatches": true,
+          "bytesMatch": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "nineAssetsStableSinceTestStart": true
+}

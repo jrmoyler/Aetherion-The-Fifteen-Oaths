@@ -36,19 +36,25 @@ test('every new review LOD must carry its own exact byte pin',t=>{
  assert.equal(x.catalog.files.size,1);
 });
 
-test('published review selection preserves historical pins and isolates revision08 candidates',()=>{
+test('published review selection preserves historical pins and isolates revision08/09 candidates',()=>{
  const data=JSON.parse(fs.readFileSync(new URL('../review-manifest.json',import.meta.url),'utf8'));
  assert.equal(data.status,'UNAPPROVED_REVIEW_ONLY');
- assert.equal(data.assets.length,22);
- assert.equal(new Set(data.assets.map(row=>row.id)).size,22);
+ assert.equal(data.assets.length,23);
+ assert.equal(new Set(data.assets.map(row=>row.id)).size,23);
  const listed=data.assets.flatMap(row=>Object.values(row.files));
- assert.equal(listed.length,60);
+ assert.equal(listed.length,63);
  assert.deepEqual(Object.keys(data.sha256).sort(),[...listed].sort());
  for(const row of data.assets){
   assert.equal(row.status,'UNAPPROVED_REVIEW_ONLY_NOT_PRODUCTION_PROMOTED');
   assert.ok(row.id.startsWith('review-'));
   assert.ok(Object.keys(row.files).every(key=>['glb','lod1','lod2'].includes(key)));
  }
+ const retained=Object.entries(data.sha256).filter(([name])=>!name.startsWith('representative-revision-09/')).sort(([a],[b])=>a<b?-1:a>b?1:0);
+ assert.equal(retained.length,60);
+ assert.equal(createHash('sha256').update(JSON.stringify(retained)).digest('hex'),'d2284e83027a0c315898b6059070b5d7da7a137aa01fb5fe45a55bf599e141eb','All prior 60 review pins must remain unchanged');
+ const revision09=listed.filter(name=>name.startsWith('representative-revision-09/'));
+ assert.equal(revision09.length,3);
+ assert.ok(revision09.every(name=>name.startsWith('representative-revision-09/kiln-ninja-v16/kiln-ninja-ensemble-candidate/')&&!name.includes('collision')));
  const historical={
   'representative-revision-05/fault-v11/amethyst-short-blade/review.glb':'f704cbdc1b3364e0902dcd2ddd944f834ad9b183f5385c903559b8892db1e8af',
   'representative-revision-04/impulse-shield-v8b/impulse-shield-lateral-review08b.glb':'27a08329146d305df4bee61e642c4fff3f0ed716f8f5e7ee7d9433b652ca8f34',

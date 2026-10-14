@@ -1,0 +1,3297 @@
+{
+  "generatedAt": "2026-10-14T01:18:38.967Z",
+  "scope": "Read-only review copies; no GPU, appearance, collision-fit or production certification",
+  "textureDecode": "Three.js CPU placeholder textures; actual geometry/skins/animations loaded",
+  "reports": [
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "sha256": "5e5b66cab2e717f329372655fcd51e9988f4be4bdbc7893eb647953d03a54b6c",
+      "bytes": 15103796,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {
+          "UNUSED_OBJECT": 2
+        }
+      },
+      "weights": {
+        "weightedVertices": 38416,
+        "blendedVertices": 2824,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 2.9802322387695312e-8
+      },
+      "rest": {
+        "vertices": 38416,
+        "skinnedVertices": 38416,
+        "bounds": {
+          "min": [
+            -0.4173289187572917,
+            0.014000030466122967,
+            -0.18031179904937744
+          ],
+          "max": [
+            0.4173289187572917,
+            1.8274717198295085,
+            0.19107850508900842
+          ],
+          "dimensionsMeters": [
+            0.8346578375145834,
+            1.8134716893633855,
+            0.37139030413838586
+          ]
+        },
+        "minBoneScale": 0.9999997615814209,
+        "minScaleRatio": 1,
+        "maxScaleRatio": 1,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": [
+        {
+          "name": "cast_release",
+          "durationSeconds": 2,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            2
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274717794341533,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.813471520867144,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.5,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.29840713103712996,
+                  0.014000258567009462,
+                  -0.18732395180012074
+                ],
+                "max": [
+                  0.30829151552417566,
+                  1.82720898272882,
+                  0.45988425866178245
+                ],
+                "dimensionsMeters": [
+                  0.6066986465613056,
+                  1.8132087241618107,
+                  0.6472082104619032
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.27707535649198256,
+                  0.014000258567009462,
+                  -0.19148447474194838
+                ],
+                "max": [
+                  0.294268517240639,
+                  1.8263254907267816,
+                  0.509746599328777
+                ],
+                "dimensionsMeters": [
+                  0.5713438737326215,
+                  1.8123252321597723,
+                  0.7012310740707254
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.5,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.3013408213580685,
+                  0.014000258567009462,
+                  -0.18787192259420127
+                ],
+                "max": [
+                  0.29993639002686445,
+                  1.8271206039642818,
+                  0.44281719499825123
+                ],
+                "dimensionsMeters": [
+                  0.601277211384933,
+                  1.8131203453972724,
+                  0.6306891175924525
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 2,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274717794341533,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.813471520867144,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "name": "idle_breath",
+          "durationSeconds": 2,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            2
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274717794341533,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.813471520867144,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.5,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4172461301942833,
+                  0.014000258567009462,
+                  -0.17905186280707241
+                ],
+                "max": [
+                  0.4173783524314634,
+                  1.8273128346861576,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346244826257467,
+                  1.8133125761191482,
+                  0.3701303757553158
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4173224317722997,
+                  0.014000258567009462,
+                  -0.18022847318855786
+                ],
+                "max": [
+                  0.41733536480285016,
+                  1.8274677676921591,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346577965751498,
+                  1.8134675091251498,
+                  0.37130698613680124
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.5,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4174437012618093,
+                  0.014000258567009462,
+                  -0.1815790909130814
+                ],
+                "max": [
+                  0.4171804804146027,
+                  1.8274174183690564,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.834624181676412,
+                  1.813417159802047,
+                  0.3726576038613248
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 2,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274717794341533,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.813471520867144,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "name": "walk_in_place",
+          "durationSeconds": 1.3333333730697632,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            1.3333333730697632
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.000000238418579
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1.0000001192092896,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.000000238418579
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1.0000001192092896,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4079167970624145,
+                  0.012750444351356315,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4079167970624145,
+                  1.8033326135558645,
+                  0.1916561043741289
+                ],
+                "dimensionsMeters": [
+                  0.815833594124829,
+                  1.790582169204508,
+                  0.37196790342350633
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.3333333432674408,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4535814374707356,
+                  0.012750492197998165,
+                  -0.23002557575382462
+                ],
+                "max": [
+                  0.37011331654295476,
+                  1.803211496917681,
+                  0.33447955196541046
+                ],
+                "dimensionsMeters": [
+                  0.8236947540136903,
+                  1.7904610047196827,
+                  0.5645051277192351
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.6666666865348816,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4123745718785573,
+                  0.012750339725087309,
+                  -0.18010362314622505
+                ],
+                "max": [
+                  0.4038972808668529,
+                  1.8034204111976186,
+                  0.20628696857329515
+                ],
+                "dimensionsMeters": [
+                  0.8162718527454103,
+                  1.7906700714725314,
+                  0.38639059171952017
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.0000000298023224,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.36463952576391634,
+                  0.01275035890468431,
+                  -0.23152042626199215
+                ],
+                "max": [
+                  0.4540852881060493,
+                  1.8031949268400758,
+                  0.3359623672667805
+                ],
+                "dimensionsMeters": [
+                  0.8187248138699657,
+                  1.7904445679353915,
+                  0.5674827935287727
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.3333333730697632,
+              "vertices": 38416,
+              "skinnedVertices": 38416,
+              "bounds": {
+                "min": [
+                  -0.4079167970624145,
+                  0.012750444351356315,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4079167970624145,
+                  1.8033326135558645,
+                  0.1916561043741289
+                ],
+                "dimensionsMeters": [
+                  0.815833594124829,
+                  1.790582169204508,
+                  0.37196790342350633
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "sha256": "c640443c9ac2b311cbcbb3ef13049a1668349c81b2ef8efd52d776f3ee1a8169",
+      "bytes": 13790980,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {
+          "UNUSED_OBJECT": 2
+        }
+      },
+      "weights": {
+        "weightedVertices": 23744,
+        "blendedVertices": 2124,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 2.9802322387695312e-8
+      },
+      "rest": {
+        "vertices": 23744,
+        "skinnedVertices": 23744,
+        "bounds": {
+          "min": [
+            -0.4173289187572917,
+            0.013992118048448176,
+            -0.180808424949646
+          ],
+          "max": [
+            0.4173289187572917,
+            1.8269719944579257,
+            0.19138281650735448
+          ],
+          "dimensionsMeters": [
+            0.8346578375145834,
+            1.8129798764094776,
+            0.37219124145700044
+          ]
+        },
+        "minBoneScale": 0.9999997615814209,
+        "minScaleRatio": 1,
+        "maxScaleRatio": 1,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": [
+        {
+          "name": "cast_release",
+          "durationSeconds": 2,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            2
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.013992345186430262,
+                  -0.180808424949646
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8269720540625705,
+                  0.19138282437160745
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8129797088761401,
+                  0.37219124932125347
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.5,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.2978919379389339,
+                  0.013992345186430262,
+                  -0.18742960584925283
+                ],
+                "max": [
+                  0.30829151552417566,
+                  1.8267123900981823,
+                  0.45983853100388317
+                ],
+                "dimensionsMeters": [
+                  0.6061834534631096,
+                  1.812720044911752,
+                  0.647268136853136
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.27707535649198256,
+                  0.013992345186430262,
+                  -0.19132214404020484
+                ],
+                "max": [
+                  0.294268517240639,
+                  1.8258311164624528,
+                  0.5102055909023134
+                ],
+                "dimensionsMeters": [
+                  0.5713438737326215,
+                  1.8118387712760224,
+                  0.7015277349425183
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.5,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.30110215886841796,
+                  0.013992345186430262,
+                  -0.18795426548762506
+                ],
+                "max": [
+                  0.29993639002686445,
+                  1.8266243142267906,
+                  0.44230893449049347
+                ],
+                "dimensionsMeters": [
+                  0.6010385488952824,
+                  1.8126319690403603,
+                  0.6302631999781185
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 2,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.013992345186430262,
+                  -0.180808424949646
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8269720540625705,
+                  0.19138282437160745
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8129797088761401,
+                  0.37219124932125347
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "name": "idle_breath",
+          "durationSeconds": 2,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            2
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.013992345186430262,
+                  -0.180808424949646
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8269720540625705,
+                  0.19138282437160745
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8129797088761401,
+                  0.37219124932125347
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.5,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4172461301942833,
+                  0.013992345186430262,
+                  -0.17961570510412606
+                ],
+                "max": [
+                  0.4173783524314634,
+                  1.8268603982691933,
+                  0.19138282437160745
+                ],
+                "dimensionsMeters": [
+                  0.8346244826257467,
+                  1.812868053082763,
+                  0.37099852947573353
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4173224317722997,
+                  0.013992345186430262,
+                  -0.18072961471132398
+                ],
+                "max": [
+                  0.41733536480285016,
+                  1.8269712054748384,
+                  0.19138282437160745
+                ],
+                "dimensionsMeters": [
+                  0.8346577965751498,
+                  1.812978860288408,
+                  0.37211243908293146
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.5,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4174437012618093,
+                  0.013992345186430262,
+                  -0.18196595117303807
+                ],
+                "max": [
+                  0.4171804804146027,
+                  1.826870574945028,
+                  0.19138282437160745
+                ],
+                "dimensionsMeters": [
+                  0.834624181676412,
+                  1.8128782297585977,
+                  0.3733487755446455
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 2,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.013992345186430262,
+                  -0.180808424949646
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8269720540625705,
+                  0.19138282437160745
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8129797088761401,
+                  0.37219124932125347
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "name": "walk_in_place",
+          "durationSeconds": 1.3333333730697632,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            1.3333333730697632
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.000000238418579
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1.0000001192092896,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.000000238418579
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1.0000001192092896,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4079167970624145,
+                  0.012691246330188886,
+                  -0.180808424949646
+                ],
+                "max": [
+                  0.4079167970624145,
+                  1.8028328881842817,
+                  0.19194956989393802
+                ],
+                "dimensionsMeters": [
+                  0.815833594124829,
+                  1.7901416418540927,
+                  0.372757994843584
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.3333333432674408,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4536094537616686,
+                  0.012723856658313305,
+                  -0.23032062682427779
+                ],
+                "max": [
+                  0.37011331654295476,
+                  1.802711771546098,
+                  0.3347677424137546
+                ],
+                "dimensionsMeters": [
+                  0.8237227703046234,
+                  1.7899879148877849,
+                  0.5650883692380324
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.6666666865348816,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4123745718785573,
+                  0.012692717610733789,
+                  -0.1806642656413585
+                ],
+                "max": [
+                  0.4038972808668529,
+                  1.8029206858260358,
+                  0.20657938741456383
+                ],
+                "dimensionsMeters": [
+                  0.8162718527454103,
+                  1.790227968215302,
+                  0.38724365305592234
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.0000000298023224,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.36463952576391634,
+                  0.012724289990687008,
+                  -0.23181553425792437
+                ],
+                "max": [
+                  0.4541145201384164,
+                  1.802695201468493,
+                  0.3362505337736431
+                ],
+                "dimensionsMeters": [
+                  0.8187540459023328,
+                  1.789970911477806,
+                  0.5680660680315675
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.3333333730697632,
+              "vertices": 23744,
+              "skinnedVertices": 23744,
+              "bounds": {
+                "min": [
+                  -0.4079167970624145,
+                  0.012691246330188886,
+                  -0.180808424949646
+                ],
+                "max": [
+                  0.4079167970624145,
+                  1.8028328881842817,
+                  0.19194956989393802
+                ],
+                "dimensionsMeters": [
+                  0.815833594124829,
+                  1.7901416418540927,
+                  0.372757994843584
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "sha256": "1763d1cc5d655ccfe0c10482e748c8cea63ef6aa812ac84b406ba68da0eeeada",
+      "bytes": 16433212,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {
+          "UNUSED_OBJECT": 2
+        }
+      },
+      "weights": {
+        "weightedVertices": 53555,
+        "blendedVertices": 2905,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 2.9802322387695312e-8
+      },
+      "rest": {
+        "vertices": 53555,
+        "skinnedVertices": 53555,
+        "bounds": {
+          "min": [
+            -0.4173289187572917,
+            0.014000030466122967,
+            -0.18031179904937744
+          ],
+          "max": [
+            0.4173289187572917,
+            1.8274003134608114,
+            0.19107850508900842
+          ],
+          "dimensionsMeters": [
+            0.8346578375145834,
+            1.8134002829946885,
+            0.37139030413838586
+          ]
+        },
+        "minBoneScale": 0.9999997615814209,
+        "minScaleRatio": 1,
+        "maxScaleRatio": 1,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": [
+        {
+          "name": "cast_release",
+          "durationSeconds": 2,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            2
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274003730654562,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8134001144984468,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.5,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.29840713103712996,
+                  0.014000258567009462,
+                  -0.18732395180012074
+                ],
+                "max": [
+                  0.30829151552417566,
+                  1.8271377755318727,
+                  0.45988425866178245
+                ],
+                "dimensionsMeters": [
+                  0.6066986465613056,
+                  1.8131375169648634,
+                  0.6472082104619032
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.27707535649198256,
+                  0.014000258567009462,
+                  -0.19148447474194838
+                ],
+                "max": [
+                  0.294268517240639,
+                  1.8262544317722134,
+                  0.509746599328777
+                ],
+                "dimensionsMeters": [
+                  0.5713438737326215,
+                  1.812254173205204,
+                  0.7012310740707254
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.5,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.3013408213580685,
+                  0.014000258567009462,
+                  -0.18787192259420127
+                ],
+                "max": [
+                  0.29993639002686445,
+                  1.8270494166745972,
+                  0.44281719499825123
+                ],
+                "dimensionsMeters": [
+                  0.601277211384933,
+                  1.8130491581075878,
+                  0.6306891175924525
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 2,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274003730654562,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8134001144984468,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "name": "idle_breath",
+          "durationSeconds": 2,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            2
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274003730654562,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8134001144984468,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.5,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4172461301942833,
+                  0.014000258567009462,
+                  -0.17905186280707241
+                ],
+                "max": [
+                  0.4173783524314634,
+                  1.827244927751196,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346244826257467,
+                  1.8132446691841866,
+                  0.3701303757553158
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4173224317722997,
+                  0.014000258567009462,
+                  -0.18022847318855786
+                ],
+                "max": [
+                  0.41733536480285016,
+                  1.8273965945793447,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346577965751498,
+                  1.8133963360123353,
+                  0.37130698613680124
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.5,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4174437012618093,
+                  0.014000258567009462,
+                  -0.1815790909130814
+                ],
+                "max": [
+                  0.4171804804146027,
+                  1.8273425515958965,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.834624181676412,
+                  1.8133422930288872,
+                  0.3726576038613248
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 2,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4173289736909312,
+                  0.014000258567009462,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4173289736909312,
+                  1.8274003730654562,
+                  0.1910785129482434
+                ],
+                "dimensionsMeters": [
+                  0.8346579473818624,
+                  1.8134001144984468,
+                  0.37139031199762085
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.999999821186087,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.999999821186087,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        },
+        {
+          "name": "walk_in_place",
+          "durationSeconds": 1.3333333730697632,
+          "trackCount": 114,
+          "timeRange": [
+            0.0416666679084301,
+            1.3333333730697632
+          ],
+          "scaleTracks": [
+            {
+              "name": "root.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "pelvis.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "spine.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "chest.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "neck.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "head.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "clavicleL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "handL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1L.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.000000238418579
+            },
+            {
+              "name": "finger1_tipL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger2L.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipL.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3L.scale",
+              "minimum": 1.0000001192092896,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger4L.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger4_tipL.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "thumbL.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "clavicleR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "upper_armR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "forearmR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "handR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "finger1R.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1.000000238418579
+            },
+            {
+              "name": "finger1_tipR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger2R.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 0.9999999403953552
+            },
+            {
+              "name": "finger2_tipR.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3R.scale",
+              "minimum": 1.0000001192092896,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger3_tipR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "finger4R.scale",
+              "minimum": 0.9999998807907104,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "finger4_tipR.scale",
+              "minimum": 0.9999999403953552,
+              "maximum": 1
+            },
+            {
+              "name": "thumbR.scale",
+              "minimum": 1,
+              "maximum": 1.0000001192092896
+            },
+            {
+              "name": "thighL.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinL.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "footL.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "thighR.scale",
+              "minimum": 0.9999997615814209,
+              "maximum": 1.0000243186950684
+            },
+            {
+              "name": "shinR.scale",
+              "minimum": 0.9999998211860657,
+              "maximum": 1
+            },
+            {
+              "name": "footR.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4079167970624145,
+                  0.012750444351356315,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4079167970624145,
+                  1.8032612071871674,
+                  0.1916561043741289
+                ],
+                "dimensionsMeters": [
+                  0.815833594124829,
+                  1.790510762835811,
+                  0.37196790342350633
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.3333333432674408,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4535814374707356,
+                  0.012750492197998165,
+                  -0.23002557575382462
+                ],
+                "max": [
+                  0.37011331654295476,
+                  1.8031400905489838,
+                  0.33447955196541046
+                ],
+                "dimensionsMeters": [
+                  0.8236947540136903,
+                  1.7903895983509857,
+                  0.5645051277192351
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 0.6666666865348816,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4123745718785573,
+                  0.012750339725087309,
+                  -0.18010362314622505
+                ],
+                "max": [
+                  0.4038972808668529,
+                  1.8033490048289216,
+                  0.20628696857329515
+                ],
+                "dimensionsMeters": [
+                  0.8162718527454103,
+                  1.7905986651038344,
+                  0.38639059171952017
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.0000000298023224,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.36463952576391634,
+                  0.01275035890468431,
+                  -0.23152042626199215
+                ],
+                "max": [
+                  0.4540852881060493,
+                  1.8031235204713787,
+                  0.3359623672667805
+                ],
+                "dimensionsMeters": [
+                  0.8187248138699657,
+                  1.7903731615666945,
+                  0.5674827935287727
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            },
+            {
+              "time": 1.3333333730697632,
+              "vertices": 53555,
+              "skinnedVertices": 53555,
+              "bounds": {
+                "min": [
+                  -0.4079167970624145,
+                  0.012750444351356315,
+                  -0.18031179904937744
+                ],
+                "max": [
+                  0.4079167970624145,
+                  1.8032612071871674,
+                  0.1916561043741289
+                ],
+                "dimensionsMeters": [
+                  0.815833594124829,
+                  1.790510762835811,
+                  0.37196790342350633
+                ]
+              },
+              "minBoneScale": 0.9999997615814209,
+              "minScaleRatio": 0.9999997615814493,
+              "maxScaleRatio": 1.000000178813945,
+              "minNodeScaleRatio": 0.9999997615814493,
+              "maxNodeScaleRatio": 1.000000178813945,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+      "sha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7",
+      "bytes": 4300,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {
+          "UNUSED_OBJECT": 1
+        }
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 82,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.28999999165534973,
+            0.03500000014901161,
+            -0.13314791023731232
+          ],
+          "max": [
+            0.28999999165534973,
+            1.809999942779541,
+            0.13314791023731232
+          ],
+          "dimensionsMeters": [
+            0.5799999833106995,
+            1.7749999426305294,
+            0.26629582047462463
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    }
+  ]
+}

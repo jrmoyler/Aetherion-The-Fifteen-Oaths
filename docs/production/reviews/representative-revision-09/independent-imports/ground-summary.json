@@ -1,0 +1,49 @@
+{
+  "floorMeters": 0.012,
+  "penetrationEpsilonMeters": 1e-06,
+  "scope": "Finite CPU/headless vertex sampling; no continuous-time, GPU, blend transition, physics or visual acceptance",
+  "reports": [
+    {
+      "report": "kiln-ninja-ensemble-candidate-192fps-godot-ground.json",
+      "bakeFps": 192,
+      "input": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "inputSha256": "1763d1cc5d655ccfe0c10482e748c8cea63ef6aa812ac84b406ba68da0eeeada",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000745989486575126,
+      "walkMaxClearance": 0.000750428169965744,
+      "maximumGodotThreeMinimumDifferenceMeters": 5.145473170248879e-07,
+      "negative10mmTranslationRejectedSamples": 993
+    },
+    {
+      "report": "kiln-ninja-ensemble-candidate-lod1-192fps-godot-ground.json",
+      "bakeFps": 192,
+      "input": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "inputSha256": "5e5b66cab2e717f329372655fcd51e9988f4be4bdbc7893eb647953d03a54b6c",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000745989486575126,
+      "walkMaxClearance": 0.000750428169965744,
+      "maximumGodotThreeMinimumDifferenceMeters": 5.145473170248879e-07,
+      "negative10mmTranslationRejectedSamples": 993
+    },
+    {
+      "report": "kiln-ninja-ensemble-candidate-lod2-192fps-godot-ground.json",
+      "bakeFps": 192,
+      "input": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "inputSha256": "c640443c9ac2b311cbcbb3ef13049a1668349c81b2ef8efd52d776f3ee1a8169",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000683268636465072,
+      "walkMaxClearance": 0.0007241350710392,
+      "maximumGodotThreeMinimumDifferenceMeters": 5.193040089479387e-07,
+      "negative10mmTranslationRejectedSamples": 993
+    }
+  ]
+}
