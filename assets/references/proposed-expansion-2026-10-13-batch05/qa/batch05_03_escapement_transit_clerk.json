@@ -1,0 +1,83 @@
+{
+  "concept_id": "batch05_03_escapement_transit_clerk",
+  "reported_group_qa": {
+    "selected_version": "v3",
+    "source_inspection_preview": "generated/batch05_03_escapement_transit_clerk_source_preview.png",
+    "unresolved_review_items": [
+      "PROPOSED derivative occupational design only; exact art approval is unresolved.",
+      "Image generation is not measured geometry, a sewing pattern, validated anatomy, a rig or a clip package.",
+      "One adult fitting form and outfit provide partial clothing-family coverage, not a full population or all occupational variants.",
+      "Faceted low-poly PBR intent was requested, but rendered cloth and anatomy are relatively smooth; exact game-style translation remains for art review.",
+      "All main views, flat lays, closure/pocket details, seated reach and crouch are represented. Small occluded details and fingers cannot all be established reliably at sheet resolution.",
+      "No original artwork, source registry, repository file, model, rig or scene was modified.",
+      "Top-row FRONT has a small additional gold mark immediately below cape clasp: six apparent waistcoat buttons plus clasp, conflicting with the proposed five-button lock.",
+      "Detail crop shows four buttons only because the front opening is cropped; not a complete count diagram.",
+      "Main dressed waistcoat neckline under cape and flat-lay V neckline need construction reconciliation."
+    ]
+  },
+  "versions": [
+    {
+      "version": "v1",
+      "qa": {
+        "status": "PRESERVED_SUPERSEDED_OR_UNSUCCESSFUL_VARIANT",
+        "qa": {
+          "passed": [
+            "Civilian teal/ivory/brass hierarchy, two document pockets, short cape and work poses are present."
+          ],
+          "unresolved": [
+            "Full-body front/three-quarter views show five waistcoat buttons while flat lay and legend specify four.",
+            "Shirt is included in outer-garment flat lays, obscuring garment separation."
+          ]
+        }
+      }
+    },
+    {
+      "version": "v2",
+      "qa": {
+        "status": "PRESERVED_SUPERSEDED_OR_UNSUCCESSFUL_VARIANT",
+        "qa": {
+          "passed": [
+            "Both flat lays now separate cape and waistcoat with shirt removed."
+          ],
+          "unresolved": [
+            "Five-button full-body rendering versus four-button flat lay/legend mismatch survived the attempted correction."
+          ]
+        }
+      }
+    },
+    {
+      "version": "v3",
+      "qa": {
+        "status": "PROPOSED_REVIEW_CANDIDATE",
+        "qa": {
+          "passed": [
+            "Front flat lay and legend explicitly agree on revised proposed five-button count.",
+            "Front-left three-quarter visibly has five waistcoat buttons and a separate cape clasp.",
+            "Cape and waistcoat remain separate in both flat lays; civilian silhouette and all views retained."
+          ],
+          "unresolved": [
+            "Top-row FRONT has a small additional gold mark immediately below cape clasp: six apparent waistcoat buttons plus clasp, conflicting with the proposed five-button lock.",
+            "Detail crop shows four buttons only because the front opening is cropped; not a complete count diagram.",
+            "Main dressed waistcoat neckline under cape and flat-lay V neckline need construction reconciliation."
+          ]
+        }
+      }
+    },
+    {
+      "version": "v4",
+      "qa": {
+        "status": "PRESERVED_SUPERSEDED_OR_UNSUCCESSFUL_VARIANT",
+        "qa": {
+          "passed": [
+            "Five-button flat lay and legend retained."
+          ],
+          "unresolved": [
+            "Targeted single-dot removal did not remove the extra top-front gold mark.",
+            "Some unrelated cloth/face shading changed; v3 remains the selected review candidate.",
+            "All v3 construction/count caveats still apply."
+          ]
+        }
+      }
+    }
+  ]
+}

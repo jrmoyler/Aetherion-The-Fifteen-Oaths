@@ -1,0 +1,56 @@
+{
+  "concept_id": "batch05_09_o12_natural",
+  "reported_group_qa": {
+    "selected_version": "v02",
+    "source_preview": "generated/batch05_09_o12_natural_source_preview.jpg",
+    "global_unresolved": [
+      "Only a first dedicated proposed species board; population, age and sexual variation are not established.",
+      "Source realm artwork is style provenance only. Exact-art approval remains unresolved.",
+      "Matched image turnarounds are design intent, not calibrated orthographic geometry; exact proportion agreement requires a measured modeling pass.",
+      "Occluded limbs are not consistently mapped with dashed outlines in dorsal/front/rear studies; silhouette occlusion is not anatomical verification.",
+      "External articulation graphics and single motion poses are speculative; no validated joint hierarchy, rig, gait phase/contact timing or animation clips.",
+      "Images remain more richly fur-rendered than a final faceted low-poly implementation; asset-specific surface simplification and material response require review.",
+      "No player scale, numeric dimensions, speed, anatomy approval or production acceptance is established."
+    ]
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "status": "PROPOSED_NOT_APPROVED",
+        "pixel_review": {
+          "strengths": [
+            "Four legs, two ears, one tail and one nasal horn remain visually coherent across principal views.",
+            "Main left and right profiles face opposite directions and show four distinct limbs.",
+            "Natural hair mane, horn tissue and non-gory grazing ecology are visually represented.",
+            "Hoof close-up shows two toe capsules and central split."
+          ],
+          "defects": [
+            "Rear hind hooves contain unwanted rounded spur-like nodules, contradicting the no-dewclaw lock.",
+            "Hoof panel is labeled plantar but predominantly illustrates a front/oblique contact view, not an unambiguous sole."
+          ],
+          "resolution": "Preserved non-selected initial version. Targeted hoof correction attempted in v02."
+        }
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "status": "PROPOSED_NOT_APPROVED",
+        "pixel_review": {
+          "strengths": [
+            "Rear-hoof spur-like nodules removed; inspected enlarged actual pixel crop confirms clean two-part hoof appearance.",
+            "Main four-limb silhouettes, one nasal horn, two ears, one tail and organic brush mane retained.",
+            "Single-horn placement remains stable in opposing profiles and lowered feeding studies.",
+            "Cloven hoof split remains visible in main front/rear and ventral illustrations."
+          ],
+          "defects": [
+            "Hoof study remains more front/oblique than a true square-on underside despite the correction request. A dedicated sole/contact diagram is still needed before detailed modeling.",
+            "Dorsal view hides limbs and ventral view is stylized, not a measured underbody projection."
+          ],
+          "resolution": "Selected improved proposed reference, not approved. No further edit was made because the major extra-spur defect is resolved and remaining geometric/sole issues are explicitly gated."
+        }
+      }
+    }
+  ]
+}
