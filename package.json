@@ -14,7 +14,11 @@
     "preview:abilities": "node tools/run-abilities.mjs preview",
     "test:canon": "python3 AETHERION_CANON/19_VALIDATION/validate_canon.py --repo .",
     "test:canon-fixtures": "python3 -m unittest discover -s AETHERION_CANON/19_VALIDATION -p test_validator.py",
-    "test:world": "npm --prefix runtime/world-kernel test"
+    "test:world": "npm --prefix runtime/world-kernel test",
+    "dev:daybreak": "node tools/run-daybreak.mjs dev",
+    "build:daybreak": "node tools/run-daybreak.mjs build",
+    "preview:daybreak": "node tools/run-daybreak.mjs preview",
+    "test:daybreak": "node --test app/daybreak/*.test.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

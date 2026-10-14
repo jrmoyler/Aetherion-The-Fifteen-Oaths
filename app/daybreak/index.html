@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="description" content="Aetherion Daybreak practice courtyard with all 100 imported castables."><title>Aetherion · Daybreak practice courtyard</title></head>
+<body>
+<canvas id="viewport" aria-label="Daybreak practice courtyard: move with WASD, aim with pointer, click to cast"></canvas>
+<div id="loader" class="loader"><div class="loader__inner"><h1>Daybreak</h1><div class="loader__bar"><i id="loader-fill"></i></div><p id="loader-status">Loading practice courtyard…</p></div></div>
+<div id="hud" class="hud"></div>
+<section id="controls" aria-label="Practice controls">
+  <details open><summary>Daybreak · 100 castables</summary>
+    <div class="filters"><label>Search<input id="search" type="search" placeholder="Name, element or source ID"></label><label>Element<select id="element"><option value="">All elements</option></select></label><label>Category<select id="kind"><option value="">All categories</option><option value="ability">Abilities (95)</option><option value="buff">Buffs (3)</option><option value="summon">Summons (2)</option></select></label></div>
+    <label>Castable <span id="count"></span><select id="picker" disabled></select></label>
+    <div class="row"><label>Loadout slot<select id="slot"><option value="0">1</option><option value="1">2</option><option value="2">3</option><option value="3">4</option></select></label><button id="assign" disabled>Assign selected</button><button id="reset" disabled>Reset targets + player</button><button id="clear" disabled>Clear effects</button></div>
+    <p class="hint">WASD / arrows: move · Shift: run · Space: dash · 1–4: loadout · click: cast · right-drag: orbit · wheel: zoom. Touch: left pad moves, drag the world to aim, two fingers orbit. Summons retain their source movement / Space / held-fire controls; use Deploy / recall to return.</p>
+  </details>
+  <nav id="loadout" aria-label="Four castable loadout slots"></nav>
+  <p id="status" role="status">Loading…</p>
+</section>
+<div id="touch-controls"><div id="stick" role="group" aria-label="Touch movement pad"><span id="knob"></span><span class="pad-label">MOVE</span></div><div class="actions"><button id="dash" aria-label="Hold Space for dash or summon action">Dash / Space</button><button id="fire" disabled>Cast</button><button id="action" disabled>Deploy / recall</button></div></div>
+<script type="module" src="./main.js"></script></body></html>

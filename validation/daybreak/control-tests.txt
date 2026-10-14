@@ -1,0 +1,22 @@
+
+> aetherion-foundation@0.1.0 test:daybreak
+> node --test app/daybreak/*.test.mjs
+
+✔ all 100 castables remain discoverable, including buffs and summons (8.679043ms)
+✔ loadout accepts every source kind and rejects invalid slots and IDs (0.639013ms)
+✔ movement pad has a deadzone and camera-relative diagonal key intent (0.145829ms)
+✔ selected existing GLBs have pinned bytes, PBR textures, UVs and flat floor bounds (50.964818ms)
+✔ destination controls route all 100, preserve aim, release touch input and surface failures (25.724318ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 229.791397
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
