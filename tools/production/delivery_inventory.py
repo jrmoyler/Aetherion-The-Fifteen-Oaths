@@ -51,7 +51,8 @@ def validate_compressed_source(root, asset, data):
         raise ValueError(f'Blender import report hash mismatch: {asset["id"]}')
     report = json.loads(report_bytes)
     tool = report.get('tool', {})
-    if (report.get('schemaVersion') != 1 or tool.get('name') != 'Blender' or
+    if (type(report.get('schemaVersion')) not in (int, float) or report['schemaVersion'] != 1 or
+            tool.get('name') != 'Blender' or
             not isinstance(tool.get('version'), str) or not tool['version'].strip()):
         raise ValueError(f'Invalid Blender import report tool/schema: {asset["id"]}')
     records = report.get('reports')

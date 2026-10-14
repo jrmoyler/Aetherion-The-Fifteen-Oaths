@@ -139,7 +139,8 @@ class DeliveryInventoryTests(unittest.TestCase):
 
     def test_compressed_source_requires_hash_bound_successful_actual_open_report(self):
         for mutation in ('none', 'source_changed', 'report_changed', 'errors', 'not_opened',
-                         'wrong_source_hash', 'wrong_record', 'duplicate_record', 'wrong_tool', 'missing_report'):
+                         'wrong_source_hash', 'wrong_record', 'duplicate_record', 'wrong_tool', 'missing_report',
+                         'boolean_schema', 'float_schema'):
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as folder:
                 root = Path(folder); manifest, value = self.fixture(root); asset = value['assets'][0]
                 path, report = self.import_evidence(root, asset)
@@ -151,11 +152,13 @@ class DeliveryInventoryTests(unittest.TestCase):
                 if mutation == 'wrong_record': asset['sourceValidation']['recordId'] = 'another-module'
                 if mutation == 'duplicate_record': report['reports'].append(report['reports'][0].copy())
                 if mutation == 'wrong_tool': report['tool']['name'] = 'Signature-only fake'
-                if mutation in ('errors', 'not_opened', 'wrong_source_hash', 'duplicate_record', 'wrong_tool'):
+                if mutation == 'boolean_schema': report['schemaVersion'] = True
+                if mutation == 'float_schema': report['schemaVersion'] = 1.0
+                if mutation in ('errors', 'not_opened', 'wrong_source_hash', 'duplicate_record', 'wrong_tool', 'boolean_schema', 'float_schema'):
                     path.write_text(json.dumps(report)); asset['sourceValidation']['reportSha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
                 if mutation == 'missing_report': asset.pop('sourceValidation')
                 manifest.write_text(json.dumps(value))
-                if mutation == 'none':
+                if mutation in ('none', 'float_schema'):
                     row = collect_deliveries(root, {'family-test'})[0]
                     self.assertIn('source_validation', [a['role'] for a in row['artifacts']])
                     self.assertFalse(row['production_accepted'])

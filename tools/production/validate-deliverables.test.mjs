@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { measureGlb, compareDimensions, validateAsset, resolveManifestAsset, collisionPolicy, validateCompressedSource } from './validate-deliverables.mjs';
+import { measureGlb, compareDimensions, validateAsset, resolveManifestAsset, collisionPolicy, validateCompressedSource, summarizeDeliveryStatuses } from './validate-deliverables.mjs';
 import { mkdtemp, mkdir, writeFile, readFile, symlink, rm } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
@@ -55,7 +55,8 @@ test('compressed source evidence binds exact report schema, record and source by
   const asset={sourceValidation:{report:'assets/production/kit/report.json',recordId:'test'}};
   const save=async report=>{const data=Buffer.from(JSON.stringify(report));await writeFile(path.join(dir,'report.json'),data);asset.sourceValidation.reportSha256=hash(data);};
   await save(valid);assert.equal((await validateCompressedSource(asset,bytes,repo)).path,asset.sourceValidation.report);
-  for(const mutate of [r=>r.schemaVersion=2,r=>r.tool.name='Other',r=>r.tool.version=' ',r=>r.reports.push({...r.reports[0]}),r=>r.reports[0].opened=false,r=>r.reports[0].errors=['failed'],r=>r.reports[0].source_sha256='stale',r=>r.reports[0].module='other',r=>r.reports=[null]]){
+  await save({...valid,schemaVersion:1.0});assert.equal((await validateCompressedSource(asset,bytes,repo)).path,asset.sourceValidation.report);
+  for(const mutate of [r=>r.schemaVersion=2,r=>r.schemaVersion=true,r=>r.tool.name='Other',r=>r.tool.version=' ',r=>r.reports.push({...r.reports[0]}),r=>r.reports[0].opened=false,r=>r.reports[0].errors=['failed'],r=>r.reports[0].source_sha256='stale',r=>r.reports[0].module='other',r=>r.reports=[null]]){
     const report=structuredClone(valid);mutate(report);await save(report);await assert.rejects(validateCompressedSource(asset,bytes,repo));
   }
   await save(valid);asset.sourceValidation.reportSha256='stale';await assert.rejects(validateCompressedSource(asset,bytes,repo));
@@ -68,6 +69,9 @@ test('pending collision retains an explicit incomplete result on otherwise valid
   asset.collisionPolicy={mode:'PENDING',reason:'Collider awaiting fit review',remainingGate:'Author missing collider'};
   const result=await validateAsset(asset);
   assert.deepEqual(result.errors,[]);assert.equal(result.status,'CANDIDATE_INCOMPLETE_MISSING_REQUIRED_COLLISION');assert.ok(result.remainingGates.includes('Author missing collider'));
+  const invalid=structuredClone(asset);invalid.files.lod1=invalid.files.glb;invalid.triangles.lod1=invalid.triangles.glb;
+  const failed=await validateAsset(invalid);assert.equal(failed.status,'HARD_ERRORS');assert.ok(failed.errors.some(e=>e.code==='LOD_NOT_REDUCED'));
+  assert.deepEqual(summarizeDeliveryStatuses([result,failed]),{hardErrorAssets:1,structurallyPassed:0,incompleteAssets:2});
   delete asset.collisionPolicy;const required=await validateAsset(asset);assert.equal(required.status,'HARD_ERRORS');assert.ok(required.errors.some(e=>e.code==='COLLISION_POLICY'));
 });
 
@@ -92,4 +96,18 @@ test('candidate report aggregates retain complete compressed issues and source h
     }
   }
   assert.equal(report.summary.productionApproved,0);
+});
+
+
+test('required GLB roles cannot evade parsing through another filename extension',async t=>{
+  const repo=await mkdtemp(path.join(os.tmpdir(),'delivery-role-'));t.after(()=>rm(repo,{recursive:true,force:true}));
+  const dir=path.join(repo,'assets/production/kit');await mkdir(dir,{recursive:true});
+  await writeFile(path.join(dir,'source.blend'),'BLENDER');await writeFile(path.join(dir,'mesh.txt'),'not a GLB');
+  const png=Buffer.alloc(24);Buffer.from([137,80,78,71,13,10,26,10]).copy(png);png.writeUInt32BE(1,16);png.writeUInt32BE(1,20);await writeFile(path.join(dir,'image.png'),png);
+  const p=n=>'assets/production/kit/'+n;
+  const asset={id:'role-test',name:'Role test',type:'static',status:'CANDIDATE',remainingGates:[],rig:'NOT_APPLICABLE',animations:[],dimensionsMeters:[1,2,3],files:{blend:p('source.blend'),glb:p('mesh.txt'),lod1:p('mesh.txt'),lod2:p('mesh.txt'),collision:p('mesh.txt'),textures:[p('image.png')],renders:[p('image.png')]}};
+  const invalid=await validateAsset(asset,repo);assert.equal(invalid.status,'HARD_ERRORS');
+  for(const role of ['glb','lod1','lod2','collision'])assert.ok(invalid.errors.some(e=>e.code==='DELIVERABLE_READ_OR_PARSE'&&e.message.startsWith(role+' (')));
+  await writeFile(path.join(dir,'mesh.txt'),boxScene());
+  const parsed=await validateAsset(asset,repo);for(const role of ['glb','lod1','lod2','collision'])assert.equal(parsed.exports[role].triangles,2,'GLB role is parsed regardless of suffix');
 });

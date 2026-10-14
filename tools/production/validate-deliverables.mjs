@@ -120,7 +120,7 @@ export async function validateAsset(asset,repo=root) {
         else if(bytes[0]===255&&bytes[1]===216)files[key].image={format:'JPEG',dimensions:'NOT_MEASURED'};
         else error('IMAGE_SIGNATURE',`Unrecognized image signature: ${p}`);
       }
-      if(typeof p==='string'&&p.endsWith('.glb')) {
+      if(['glb','lod1','lod2','collision'].includes(key)||typeof p==='string'&&/\.glb$/i.test(p)) {
         const report=await validator.validateBytes(new Uint8Array(bytes),{uri:p,format:'glb',maxIssues:0,writeTimestamp:false,
           externalResourceFunction:async uri=>localFile(repo,path.relative(repo,path.resolve(repo,path.dirname(p),decodeURIComponent(uri))))});
         const measured=measureGlb(bytes),{json:j,inventory,...geometry}=measured;
@@ -188,6 +188,14 @@ export async function validateAsset(asset,repo=root) {
   gates.push('VISUAL_REFERENCE_APPROVAL','BLENDER_SOURCE_OPEN_AND_REEXPORT','UNREAL_IMPORT_AND_RUNTIME','GODOT_IMPORT_AND_RUNTIME','THREEJS_RENDER_AND_DISPOSE','MEASURED_PERFORMANCE','COLLISION_GAMEPLAY_FIT');
   return {id:asset.id,name:asset.name,type:asset.type,declaredStatus:asset.status,status:errors.length?'HARD_ERRORS':policy.mode==='PENDING'?'CANDIDATE_INCOMPLETE_MISSING_REQUIRED_COLLISION':'STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN',collisionPolicy:policy,errors,remainingGates:[...new Set(gates)],files,exports};
 }
+export function summarizeDeliveryStatuses(records) {
+  return {
+    hardErrorAssets:records.filter(r=>r.errors.length).length,
+    structurallyPassed:records.filter(r=>r.status==='STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN').length,
+    // Missing required collision remains incomplete even when another check fails.
+    incompleteAssets:records.filter(r=>r.collisionPolicy?.mode==='PENDING').length,
+  };
+}
 export async function auditDeliverables() {
   let paths=[];try{paths=await manifests(path.join(root,'assets/production'));}catch(e){if(e.code!=='ENOENT')throw e;}
   const records=[],manifestErrors=[],ids=new Set();
@@ -210,7 +218,7 @@ export async function auditDeliverables() {
   }
   const result={schemaVersion:1,generatedAt:new Date().toISOString(),sourceRevision:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),validatorVersion:validator.version(),
     limitations:['Input file hashes identify this working-tree snapshot; sourceRevision records HEAD without asserting a clean checkout','Static structure and manifest integrity only; no visual approval or engine parity','Open gates are unevaluated by this audit; independent engine evidence must be reviewed separately','Dimensions compared with axis permutation and 0.5%/2mm tolerance; no unit metadata claim substitutes for vertices','Blend signature and image headers checked; actual Blender opening and texture decoding require separate engine evidence','Collision geometry existence/complexity checked, not hull convexity or gameplay fitness'],
-    summary:{manifests:paths.length,assets:records.length,hardErrorAssets:records.filter(r=>r.errors.length).length,hardErrors:records.reduce((n,r)=>n+r.errors.length,0)+manifestErrors.length,structurallyPassed:records.filter(r=>r.status==='STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN').length,incompleteAssets:records.filter(r=>r.status==='CANDIDATE_INCOMPLETE_MISSING_REQUIRED_COLLISION').length,glbPaths:[...new Set(records.flatMap(r=>Object.values(r.files).filter(f=>f.path.endsWith('.glb')).map(f=>f.path)))].length,khronosErrors:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numErrors,0),khronosWarnings:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numWarnings,0),productionApproved:0},manifestErrors,records};
+    summary:{manifests:paths.length,assets:records.length,...summarizeDeliveryStatuses(records),hardErrors:records.reduce((n,r)=>n+r.errors.length,0)+manifestErrors.length,glbPaths:[...new Set(records.flatMap(r=>Object.keys(r.exports).map(key=>r.files[key].path)))].length,khronosErrors:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numErrors,0),khronosWarnings:records.flatMap(r=>Object.values(r.exports)).reduce((n,e)=>n+e.validator.issues.numWarnings,0),productionApproved:0},manifestErrors,records};
   const dir=path.join(root,'validation/production');await mkdir(dir,{recursive:true});
   const fullIssues=[];
   for(const r of records)for(const [key,ex] of Object.entries(r.exports)) {
@@ -225,7 +233,7 @@ export async function auditDeliverables() {
   const compressed=gzipSync(Buffer.from(JSON.stringify({validatorVersion:validator.version(),records:fullIssues})+'\n'),{level:9});
   await writeFile(path.join(dir,'DELIVERABLE_AUDIT_DETAILS.json.gz'),compressed);result.fullIssueEvidence={path:'DELIVERABLE_AUDIT_DETAILS.json.gz',sha256:digest(compressed),complete:true};
   await writeFile(path.join(dir,'DELIVERABLE_AUDIT.json'),JSON.stringify(result,null,2)+'\n');
-  const lines=['# Candidate production deliverable audit','',`Generated ${result.generatedAt}; source revision ${result.sourceRevision}.`, '',`${result.summary.assets} candidate assets across ${paths.length} manifests: ${result.summary.structurallyPassed} pass these structural checks; ${result.summary.hardErrorAssets} have hard errors. Production approvals: 0. Khronos reports ${result.summary.khronosErrors} errors and ${result.summary.khronosWarnings} warnings; warnings remain recorded and are not engine-parity approval.`, '', '| Asset | Structural result | Errors | Open gates |','| --- | --- | ---: | ---: |',...records.map(r=>`| ${r.id} | ${r.status} | ${r.errors.length} | ${r.remainingGates.length} |`),'',...result.limitations.map(l=>`- ${l}`),'','Geometry summaries, file hashes, Khronos counts and example issues: [DELIVERABLE_AUDIT.json](DELIVERABLE_AUDIT.json).','','Run `npm --prefix tools/production run validate:deliverables`. All primitive inventories, UV ranges, animation sampler details and unsuppressed Khronos issues are stored losslessly in DELIVERABLE_AUDIT_DETAILS.json.gz with checksum in the JSON report. Hard errors produce exit 1. An empty production inventory produces exit 2; zero files never counts as passing.'];
+  const lines=['# Candidate production deliverable audit','',`Generated ${result.generatedAt}; source revision ${result.sourceRevision}.`, '',`${result.summary.assets} candidate assets across ${paths.length} manifests: ${result.summary.structurallyPassed} pass these structural checks; ${result.summary.hardErrorAssets} have hard errors. ${result.summary.incompleteAssets} remain incomplete for missing required collision (including any also counted as hard errors). Production approvals: 0. Khronos reports ${result.summary.khronosErrors} errors and ${result.summary.khronosWarnings} warnings; warnings remain recorded and are not engine-parity approval.`, '', '| Asset | Structural result | Errors | Open gates |','| --- | --- | ---: | ---: |',...records.map(r=>`| ${r.id} | ${r.status} | ${r.errors.length} | ${r.remainingGates.length} |`),'',...result.limitations.map(l=>`- ${l}`),'','Geometry summaries, file hashes, Khronos counts and example issues: [DELIVERABLE_AUDIT.json](DELIVERABLE_AUDIT.json).','','Run `npm --prefix tools/production run validate:deliverables`. All primitive inventories, UV ranges, animation sampler details and unsuppressed Khronos issues are stored losslessly in DELIVERABLE_AUDIT_DETAILS.json.gz with checksum in the JSON report. Hard errors produce exit 1. An empty production inventory produces exit 2; zero files never counts as passing.'];
   await writeFile(path.join(dir,'DELIVERABLE_AUDIT.md'),lines.join('\n')+'\n');console.log(JSON.stringify(result.summary,null,2));process.exitCode=result.summary.hardErrors?1:records.length?0:2;return result;
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))await auditDeliverables();
