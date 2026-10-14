@@ -3,7 +3,7 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 O=pathlib.Path(__file__).resolve().parent;results=[]
 def load(slug):
- bpy.ops.wm.open_mainfile(filepath=str(O/'modules'/slug/'source.blend'));return [o for o in bpy.context.scene.objects if o.type=='MESH' and o.hide_render]
+ bpy.ops.wm.open_mainfile(filepath=str(O/'modules'/slug/'source.blend'));return [o for o in bpy.context.scene.objects if o.type=='MESH' and o.hide_render and o.get('representation')!='lod_variant']
 def bound(obs):
  pts=[o.matrix_world@Vector(v) for o in obs for v in o.bound_box];return [min(p[i] for p in pts) for i in range(3)],[max(p[i] for p in pts) for i in range(3)]
 def check(name,ok,details):results.append({'check':name,'passed':bool(ok),'details':details})

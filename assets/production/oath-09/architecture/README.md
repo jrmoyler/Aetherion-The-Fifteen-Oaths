@@ -1,8 +1,19 @@
-# Daybreak architecture candidate r02 — incomplete production kit
+# Daybreak architecture candidate r03 — incomplete production kit
 
 This isolated Blender-authored candidate covers every **17 named module requirement** in `p2-arch-09-daybreak-arcades`. It refines the existing family `asset-o09-n-architecture-family`; it does not create a new canon family. Exact source module names and JSON pointers are preserved in [work-list.json](work-list.json), [source-kit-record.json](source-kit-record.json) and the additive [runtime manifest](manifest.json). All dimensions and designs remain PROPOSED. **Zero visual or full-production approvals.**
 
 [Comparison gallery](index.html) · [Module contact sheet](module-contact-sheet.png)
+
+
+## r03 scoped LOD repair
+
+Ten module designs received deliberately simplified lower-tier geometry, eliminating the ten strict descending-LOD failures discovered after r02 import checks. LOD0 meshes, all movement proxies, primary renders, all five derivative fixtures and the other seven module payloads retain exact r02 bytes. Ten source Blender files changed and now retain editable geometry in hidden `LOD1_EDITABLE_HIDDEN` and `LOD2_EDITABLE_HIDDEN` collections, excluded from normal rendering and selected export. The authoring helper explicitly selects the intended tier. Source audits enable hidden collection evaluation only in memory before inspecting transforms.
+
+[LOD comparison sheet 1](lod-comparison-1.png) · [LOD comparison sheet 2](lod-comparison-2.png) contain actual CPU renders. Inspection shows preserved overall silhouette/openings with reduced trim; the baffle LOD2 loses bronze blade rims. This is a topology repair, not the outstanding canopy, pier, inlay, guard-return or surface-art repair. Window LOD2 omits a 3mm decorative face lip; its structural aperture and typed socket positions remain unchanged.
+
+Own checks: 20 lower-tier GLBs loaded with Khronos zero errors/warnings and Three.js CPU geometry/animation checks; actual Godot 4.6.3 imports decoded embedded textures and sampled animation successfully. All 17 Blender source opens pass UV/packed-image checks; 10 changed sources have hidden editable tiers. Nineteen actual source-geometry LOD checks cover bounds, visible aperture raycasts and nine stair treads; eight r02 landing/socket/negative-fixture checks and seven shared-interface checks still pass. These are scoped checks, not GPU fidelity, physics/controller traversal, Unreal compatibility or art approval. Independent publication gate is separate.
+
+Reproduce in this directory: Blender `author-lods.py` (then hidden collection grouping, included by helper); Blender `check-source.py`, `check-lod-interfaces.py`, `check-interfaces.py`, `check-stair-revision.py`; Python `package.py` refreshes metadata/pins after successful source checks. The base authoring/fixture helpers remain available. `lineage/r02-final-FREEZE.json` pins the preceding package, while `GEOMETRY_FREEZE.json` separates changed and unchanged payloads. Historical r01/r02 reports remain explicitly scoped to their revisions.
 
 ## Actual deliverables and counting
 

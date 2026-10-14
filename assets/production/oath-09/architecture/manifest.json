@@ -5,7 +5,7 @@
   "specification_ids": [
     "p2-arch-09-daybreak-arcades"
   ],
-  "revision": "candidate-r02",
+  "revision": "candidate-r03",
   "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
   "referenceIds": [
     "reference-105"
@@ -13,7 +13,7 @@
   "axes": "Blender Z-up meters; glTF exporter converts to Y-up exactly once",
   "assets": [
     {
-      "id": "asset-o09-n-architecture-family__foundation-plinth__candidate-r01",
+      "id": "asset-o09-n-architecture-family__foundation-plinth__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__foundation-plinth",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak foundation-plinth",
@@ -56,7 +56,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/foundation-plinth/hero.png"
+          "modules/foundation-plinth/hero.png",
+          "modules/foundation-plinth/lod1.png",
+          "modules/foundation-plinth/lod2.png"
         ],
         "collision": "modules/foundation-plinth/collision.glb"
       },
@@ -73,7 +75,7 @@
       ],
       "triangles": {
         "glb": 344,
-        "lod1": 344,
+        "lod1": 328,
         "lod2": 296
       },
       "rig": {
@@ -213,7 +215,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "foundation-plinth"
       },
       "collisionPolicy": {
@@ -222,7 +224,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__floor-bay__candidate-r01",
+      "id": "asset-o09-n-architecture-family__floor-bay__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__floor-bay",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak floor-bay",
@@ -265,7 +267,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/floor-bay/hero.png"
+          "modules/floor-bay/hero.png",
+          "modules/floor-bay/lod1.png",
+          "modules/floor-bay/lod2.png"
         ],
         "collision": "modules/floor-bay/collision.glb"
       },
@@ -283,7 +287,7 @@
       "triangles": {
         "glb": 228,
         "lod1": 180,
-        "lod2": 180
+        "lod2": 148
       },
       "rig": {
         "type": "Static architectural shell; no rig",
@@ -422,7 +426,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "floor-bay"
       },
       "collisionPolicy": {
@@ -607,7 +611,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "solid-wall"
       },
       "collisionPolicy": {
@@ -616,7 +620,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__window-wall__candidate-r01",
+      "id": "asset-o09-n-architecture-family__window-wall__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__window-wall",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak window-wall",
@@ -659,7 +663,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/window-wall/hero.png"
+          "modules/window-wall/hero.png",
+          "modules/window-wall/lod1.png",
+          "modules/window-wall/lod2.png"
         ],
         "collision": "modules/window-wall/collision.glb"
       },
@@ -676,8 +682,8 @@
       ],
       "triangles": {
         "glb": 584,
-        "lod1": 584,
-        "lod2": 424
+        "lod1": 568,
+        "lod2": 472
       },
       "rig": {
         "type": "Static architectural shell; no rig",
@@ -820,7 +826,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "window-wall"
       },
       "collisionPolicy": {
@@ -829,7 +835,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__inside-corner__candidate-r01",
+      "id": "asset-o09-n-architecture-family__inside-corner__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__inside-corner",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak inside-corner",
@@ -872,7 +878,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/inside-corner/hero.png"
+          "modules/inside-corner/hero.png",
+          "modules/inside-corner/lod1.png",
+          "modules/inside-corner/lod2.png"
         ],
         "collision": "modules/inside-corner/collision.glb"
       },
@@ -889,8 +897,8 @@
       ],
       "triangles": {
         "glb": 192,
-        "lod1": 192,
-        "lod2": 36
+        "lod1": 96,
+        "lod2": 60
       },
       "rig": {
         "type": "Static architectural shell; no rig",
@@ -981,7 +989,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "inside-corner"
       },
       "collisionPolicy": {
@@ -1142,7 +1150,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "outside-corner"
       },
       "collisionPolicy": {
@@ -1151,7 +1159,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__door-frame__candidate-r01",
+      "id": "asset-o09-n-architecture-family__door-frame__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__door-frame",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak door-frame",
@@ -1194,7 +1202,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/door-frame/hero.png"
+          "modules/door-frame/hero.png",
+          "modules/door-frame/lod1.png",
+          "modules/door-frame/lod2.png"
         ],
         "collision": "modules/door-frame/collision.glb"
       },
@@ -1211,7 +1221,7 @@
       ],
       "triangles": {
         "glb": 296,
-        "lod1": 296,
+        "lod1": 168,
         "lod2": 108
       },
       "rig": {
@@ -1308,7 +1318,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "door-frame"
       },
       "collisionPolicy": {
@@ -1317,7 +1327,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__roof-bay__candidate-r01",
+      "id": "asset-o09-n-architecture-family__roof-bay__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__roof-bay",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak roof-bay",
@@ -1360,7 +1370,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/roof-bay/hero.png"
+          "modules/roof-bay/hero.png",
+          "modules/roof-bay/lod1.png",
+          "modules/roof-bay/lod2.png"
         ],
         "collision": "modules/roof-bay/collision.glb"
       },
@@ -1377,7 +1389,7 @@
       ],
       "triangles": {
         "glb": 72,
-        "lod1": 72,
+        "lod1": 64,
         "lod2": 24
       },
       "rig": {
@@ -1445,7 +1457,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "roof-bay"
       },
       "collisionPolicy": {
@@ -1454,7 +1466,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__stair-flight__candidate-r02",
+      "id": "asset-o09-n-architecture-family__stair-flight__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__stair-flight",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak stair-flight",
@@ -1497,7 +1509,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/stair-flight/hero.png"
+          "modules/stair-flight/hero.png",
+          "modules/stair-flight/lod1.png",
+          "modules/stair-flight/lod2.png"
         ],
         "collision": "modules/stair-flight/collision.glb"
       },
@@ -1514,8 +1528,8 @@
       ],
       "triangles": {
         "glb": 836,
-        "lod1": 836,
-        "lod2": 288
+        "lod1": 612,
+        "lod2": 408
       },
       "rig": {
         "type": "Static architectural shell; no rig",
@@ -1618,7 +1632,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "stair-flight"
       },
       "collisionPolicy": {
@@ -1627,7 +1641,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__ramp-run__candidate-r01",
+      "id": "asset-o09-n-architecture-family__ramp-run__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__ramp-run",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak ramp-run",
@@ -1670,7 +1684,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/ramp-run/hero.png"
+          "modules/ramp-run/hero.png",
+          "modules/ramp-run/lod1.png",
+          "modules/ramp-run/lod2.png"
         ],
         "collision": "modules/ramp-run/collision.glb"
       },
@@ -1687,8 +1703,8 @@
       ],
       "triangles": {
         "glb": 532,
-        "lod1": 532,
-        "lod2": 92
+        "lod1": 308,
+        "lod2": 212
       },
       "rig": {
         "type": "Static architectural shell; no rig",
@@ -1761,7 +1777,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "ramp-run"
       },
       "collisionPolicy": {
@@ -1922,7 +1938,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "parapet"
       },
       "collisionPolicy": {
@@ -2083,7 +2099,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "service-chase"
       },
       "collisionPolicy": {
@@ -2319,7 +2335,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "public-colonnade"
       },
       "collisionPolicy": {
@@ -2328,7 +2344,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__shade-canopy__candidate-r01",
+      "id": "asset-o09-n-architecture-family__shade-canopy__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__shade-canopy",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak shade canopy",
@@ -2371,7 +2387,9 @@
           "textures/weave_roughness.png"
         ],
         "renders": [
-          "modules/shade-canopy/hero.png"
+          "modules/shade-canopy/hero.png",
+          "modules/shade-canopy/lod1.png",
+          "modules/shade-canopy/lod2.png"
         ]
       },
       "dimensionsCoordinateSystem": "BLENDER_Z_UP",
@@ -2387,8 +2405,8 @@
       ],
       "triangles": {
         "glb": 1024,
-        "lod1": 1024,
-        "lod2": 672
+        "lod1": 480,
+        "lod2": 192
       },
       "rig": {
         "type": "Static architectural shell; no rig",
@@ -2503,7 +2521,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "shade-canopy"
       },
       "collisionPolicy": {
@@ -2817,7 +2835,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "clinic-threshold"
       },
       "collisionPolicy": {
@@ -3149,7 +3167,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "quiet-portico"
       },
       "collisionPolicy": {
@@ -3158,7 +3176,7 @@
       }
     },
     {
-      "id": "asset-o09-n-architecture-family__daylight-baffle__candidate-r01",
+      "id": "asset-o09-n-architecture-family__daylight-baffle__candidate-r03",
       "archetypeId": "asset-o09-n-architecture-family__daylight-baffle",
       "idScope": "Derived production-artifact identity, not a new canon family/module ID",
       "name": "Daybreak daylight baffle",
@@ -3202,7 +3220,9 @@
         ],
         "renders": [
           "modules/daylight-baffle/hero.png",
-          "modules/daylight-baffle/open.png"
+          "modules/daylight-baffle/open.png",
+          "modules/daylight-baffle/lod1.png",
+          "modules/daylight-baffle/lod2.png"
         ]
       },
       "dimensionsCoordinateSystem": "BLENDER_Z_UP",
@@ -3218,7 +3238,7 @@
       ],
       "triangles": {
         "glb": 264,
-        "lod1": 264,
+        "lod1": 240,
         "lod2": 96
       },
       "rig": {
@@ -3382,7 +3402,7 @@
       ],
       "sourceValidation": {
         "report": "assets/production/oath-09/architecture/source-validation.json",
-        "reportSha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c",
+        "reportSha256": "9b1fec28fdb22da25b1c8708194e5c4160aee72828afcad2f085980404722b64",
         "recordId": "daylight-baffle"
       },
       "collisionPolicy": {

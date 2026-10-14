@@ -22,8 +22,8 @@
   ],
   "lod_triangle_counts": {
     "lod0": 192,
-    "lod1": 192,
-    "lod2": 36
+    "lod1": 96,
+    "lod2": 60
   },
   "visual_meshes": 8,
   "collider_meshes": 1,
@@ -107,5 +107,18 @@
     "Gameplay traversal and mechanism authority",
     "Texture texel density and mip validation",
     "Unreal import unavailable; Godot/Three independent import pending"
-  ]
+  ],
+  "editable_lod_geometry": {
+    "lod1": {
+      "source_object_prefix": "LOD1__",
+      "objects": 8,
+      "triangles": 96
+    },
+    "lod2": {
+      "source_object_prefix": "LOD2__",
+      "objects": 5,
+      "triangles": 60
+    }
+  },
+  "lod_revision": "r03 deliberate topology reduction; same primary/collision payloads"
 }

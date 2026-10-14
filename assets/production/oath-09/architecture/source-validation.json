@@ -13,6 +13,12 @@
       "visual_meshes": 29,
       "collider_meshes": 4,
       "triangles": 524,
+      "lod_editable_meshes": 0,
+      "lod_hidden_collections": [],
+      "lod_triangles": {
+        "1": 0,
+        "2": 0
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 118.07337766919679,
@@ -25,11 +31,30 @@
     },
     {
       "module": "daylight-baffle",
-      "source_sha256": "7d2d1c9fbd641a2bc2316aa40c2bcd1b16106b60fa64a326bb4941832261cf6a",
+      "source_sha256": "4136ba9e7fb89b5ba055d35e082440cdff76eede3d7b7d99aae7f4afed7b3a73",
       "opened": true,
       "visual_meshes": 22,
       "collider_meshes": 0,
       "triangles": 264,
+      "lod_editable_meshes": 30,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 22
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 8
+        }
+      ],
+      "lod_triangles": {
+        "1": 240,
+        "2": 96
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 310.8081296173675,
@@ -42,15 +67,34 @@
     },
     {
       "module": "door-frame",
-      "source_sha256": "a87f13b9a81a44df0eaf374e5cae0324c79e9bd0c440613b6281af1856344273",
+      "source_sha256": "e83f369cbb74eb9ab2e36072d6141136ab8a88228b3bd070ae9a681ee197957d",
       "opened": true,
       "visual_meshes": 14,
       "collider_meshes": 3,
       "triangles": 296,
+      "lod_editable_meshes": 23,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 14
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 9
+        }
+      ],
+      "lod_triangles": {
+        "1": 168,
+        "2": 108
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 147.23386657679174,
-        "median": 181.96352612417107,
+        "median": 182.2841186894296,
         "maximum": 425.58926180479705
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
@@ -59,15 +103,34 @@
     },
     {
       "module": "floor-bay",
-      "source_sha256": "1bbe66ad73e0164edffa83a268fa25b78ce776eb5169c4cd99cd23e4af141bcf",
+      "source_sha256": "bf6d9355352b65f4cc252a0942daa870d468e87dc3edd64d67372f84e988be5e",
       "opened": true,
       "visual_meshes": 15,
       "collider_meshes": 1,
       "triangles": 228,
+      "lod_editable_meshes": 22,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 11
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 11
+        }
+      ],
+      "lod_triangles": {
+        "1": 180,
+        "2": 148
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 63.272576239600596,
-        "median": 133.9070879870315,
+        "median": 133.9068646019319,
         "maximum": 2934.720036399483
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
@@ -76,16 +139,35 @@
     },
     {
       "module": "foundation-plinth",
-      "source_sha256": "a8e80a347bf980cfe664193fab603e4cd48608052364a54261dfe41fc2308def",
+      "source_sha256": "f9ba8f02fc6a99b64fa0bd18cc63638564ea33b7611fbf85d288756dc8b64493",
       "opened": true,
       "visual_meshes": 18,
       "collider_meshes": 1,
       "triangles": 344,
+      "lod_editable_meshes": 32,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 18
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 14
+        }
+      ],
+      "lod_triangles": {
+        "1": 328,
+        "2": 296
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 63.36697968033028,
-        "median": 323.7884953616866,
-        "maximum": 506.7199853326382
+        "median": 323.78832161777274,
+        "maximum": 1020.7134539132178
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
       "all_used_images_packed": true,
@@ -93,15 +175,34 @@
     },
     {
       "module": "inside-corner",
-      "source_sha256": "b95c61db8a3c463e37407cc4d24b4669c75d45769955d8e20b25f34081dcaa65",
+      "source_sha256": "f7e7ffba457df48f84489db174a265309bef45667ce1a86ce4d3be895477e058",
       "opened": true,
       "visual_meshes": 8,
       "collider_meshes": 1,
       "triangles": 192,
+      "lod_editable_meshes": 13,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 8
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 5
+        }
+      ],
+      "lod_triangles": {
+        "1": 96,
+        "2": 60
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 127.8353538530386,
-        "median": 152.02391861966828,
+        "median": 164.60220852390506,
         "maximum": 722.296755998776
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
@@ -115,6 +216,12 @@
       "visual_meshes": 16,
       "collider_meshes": 1,
       "triangles": 544,
+      "lod_editable_meshes": 0,
+      "lod_hidden_collections": [],
+      "lod_triangles": {
+        "1": 0,
+        "2": 0
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 127.8353538530386,
@@ -132,6 +239,12 @@
       "visual_meshes": 20,
       "collider_meshes": 1,
       "triangles": 752,
+      "lod_editable_meshes": 0,
+      "lod_hidden_collections": [],
+      "lod_triangles": {
+        "1": 0,
+        "2": 0
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 127.21478867317491,
@@ -149,6 +262,12 @@
       "visual_meshes": 148,
       "collider_meshes": 4,
       "triangles": 6768,
+      "lod_editable_meshes": 0,
+      "lod_hidden_collections": [],
+      "lod_triangles": {
+        "1": 0,
+        "2": 0
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 111.03188500087137,
@@ -166,6 +285,12 @@
       "visual_meshes": 83,
       "collider_meshes": 5,
       "triangles": 3092,
+      "lod_editable_meshes": 0,
+      "lod_hidden_collections": [],
+      "lod_triangles": {
+        "1": 0,
+        "2": 0
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 65.46190269950472,
@@ -178,16 +303,35 @@
     },
     {
       "module": "ramp-run",
-      "source_sha256": "48f1a2d7feb2487ec8744d4e2be4e74e7868bd8d591b487fe6a4e82afc8702a8",
+      "source_sha256": "acc711ab62f662980c3be15bf533df3bbd03c59bfe8075fa94a3ee5f7c09d0be",
       "opened": true,
       "visual_meshes": 18,
       "collider_meshes": 3,
       "triangles": 532,
+      "lod_editable_meshes": 36,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 18
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 18
+        }
+      ],
+      "lod_triangles": {
+        "1": 308,
+        "2": 212
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 53.08643247305948,
-        "median": 462.88978999988035,
-        "maximum": 1634.4376985066588
+        "median": 462.8897736085873,
+        "maximum": 2227.6313206616232
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
       "all_used_images_packed": true,
@@ -195,16 +339,35 @@
     },
     {
       "module": "roof-bay",
-      "source_sha256": "c69c37b15292f33e3a2a982d5f877963e418a22b81bc0d9df4cda615d9b2d58b",
+      "source_sha256": "0cee2b5f735644c8d8d9a4eb0b75b3aad31a82359a9622aba5fdaf6aa05326e2",
       "opened": true,
       "visual_meshes": 6,
       "collider_meshes": 1,
       "triangles": 72,
+      "lod_editable_meshes": 8,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 6
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 2
+        }
+      ],
+      "lod_triangles": {
+        "1": 64,
+        "2": 24
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 62.890312589774055,
-        "median": 127.8276762151867,
-        "maximum": 127.82794234404888
+        "median": 127.82765728329441,
+        "maximum": 127.86427082474582
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
       "all_used_images_packed": true,
@@ -217,6 +380,12 @@
       "visual_meshes": 8,
       "collider_meshes": 1,
       "triangles": 160,
+      "lod_editable_meshes": 0,
+      "lod_hidden_collections": [],
+      "lod_triangles": {
+        "1": 0,
+        "2": 0
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 148.60796513167855,
@@ -229,16 +398,35 @@
     },
     {
       "module": "shade-canopy",
-      "source_sha256": "6a95d1d9b797040af38590bac051aa83ad8c2fe3cfa070e8c0f40ff1b836ba37",
+      "source_sha256": "7fc1037e00dfd9da2cbc01cc5868fad61560dc1c7c1eff4eae64a9d9a7daa9ca",
       "opened": true,
       "visual_meshes": 9,
       "collider_meshes": 0,
       "triangles": 1024,
+      "lod_editable_meshes": 18,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 9
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 9
+        }
+      ],
+      "lod_triangles": {
+        "1": 480,
+        "2": 192
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 65.9918353499694,
-        "median": 66.70689022507973,
-        "maximum": 2008.6309426863725
+        "median": 66.72360360816872,
+        "maximum": 2601.121245177077
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
       "all_used_images_packed": true,
@@ -251,6 +439,12 @@
       "visual_meshes": 14,
       "collider_meshes": 1,
       "triangles": 456,
+      "lod_editable_meshes": 0,
+      "lod_hidden_collections": [],
+      "lod_triangles": {
+        "1": 0,
+        "2": 0
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 65.46266420299919,
@@ -263,16 +457,35 @@
     },
     {
       "module": "stair-flight",
-      "source_sha256": "1171845fafd719d86a8270e0dfce5f4406794002372bf7b4fd301b0648703f1c",
+      "source_sha256": "12a1f26327cc4ee57aeb161d3f91e1af6ca93b0c5c13e2c852200a869f20f15d",
       "opened": true,
       "visual_meshes": 43,
       "collider_meshes": 3,
       "triangles": 836,
+      "lod_editable_meshes": 77,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 43
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 34
+        }
+      ],
+      "lod_triangles": {
+        "1": 612,
+        "2": 408
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 123.75280060837264,
-        "median": 304.23911200593244,
-        "maximum": 1634.4376985066588
+        "median": 304.2389726272571,
+        "maximum": 2227.6313206616232
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
       "all_used_images_packed": true,
@@ -280,16 +493,35 @@
     },
     {
       "module": "window-wall",
-      "source_sha256": "11e086a8af9a1c70e30bea8e29457460eb030541d774ef131dc692468fcf0cf9",
+      "source_sha256": "0952508e47993bd3de9d8fac18aeda758b9175193f29e249730ac17d7f4bb4a7",
       "opened": true,
       "visual_meshes": 22,
       "collider_meshes": 8,
       "triangles": 584,
+      "lod_editable_meshes": 40,
+      "lod_hidden_collections": [
+        {
+          "name": "LOD1_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 22
+        },
+        {
+          "name": "LOD2_EDITABLE_HIDDEN",
+          "hide_render": true,
+          "hide_viewport": true,
+          "objects": 18
+        }
+      ],
+      "lod_triangles": {
+        "1": 568,
+        "2": 472
+      },
       "zero_area_uv_triangles": 0,
       "measured_triangle_texel_density_px_per_m": {
         "minimum": 127.8589699332684,
-        "median": 159.58539668573218,
-        "maximum": 423.9671505303021
+        "median": 159.5855129431685,
+        "maximum": 424.33381453855833
       },
       "density_limit": "Smart-unwrapped per-object islands; 512px textures. No 512px/m compliance claim; large faces fall below proposed close-view target.",
       "all_used_images_packed": true,

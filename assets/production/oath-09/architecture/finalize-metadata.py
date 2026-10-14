@@ -12,13 +12,11 @@ for asset in m['assets']:
   if asset['collisionPolicy']['remainingGate'] not in asset['remainingGates']:asset['remainingGates'].append(asset['collisionPolicy']['remainingGate'])
  else:asset['collisionPolicy']={'mode':'REQUIRED','reason':'Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated.'}
 (P/'manifest.json').write_text(json.dumps(m,indent=2)+'\n')
-# Preserve source identity across review metadata filename migration.
-old=json.loads((P/'lineage/r01-FREEZE.json').read_text());changed=[];unchanged=[]
+# Pin all inherited payloads and exact changes against frozen r02.
+old=json.loads((P/'lineage/r02-final-FREEZE.json').read_text());changed=[];unchanged=[]
 for row in old['files']:
  if not row['path'].startswith(('modules/','fixtures/','textures/','references/')):continue
- newpath=row['path']
- if newpath.startswith('modules/') and newpath.endswith('/manifest.json'):newpath=newpath[:-13]+'module.json'
- elif newpath.startswith('fixtures/') and newpath.endswith('/manifest.json'):newpath=newpath[:-13]+'fixture.json'
- f=P/newpath;sha=hashlib.sha256(f.read_bytes()).hexdigest();entry={'path':newpath,'r01_path':row['path'],'sha256':sha,'bytes':f.stat().st_size,'r01_sha256':row['sha256'],'metadataPathRenamed':newpath!=row['path']};(changed if sha!=row['sha256'] else unchanged).append(entry)
-receipt={'status':'GEOMETRY_FROZEN_R02_UNAPPROVED_METADATA_PATHS_FINAL','lineage':'r01 FREEZE 1e0017444b1c84cce5538de38843d3f87766f0a308aa541b8cbbb29ac4fb0092','previousR02GeometryReceipt':'4ee710084709215ee0376613d6f5f8975b8c64dd514f3353f2109ff129c0730f','policy':'Nine full300mm exposed treads; tenth riser belongs receiving160mm landing fascia at y2.70,z1.44..1.60. Proxy endpoint/socket unchanged. No intrusive terminal riser body.','metadataNaming':'Only runtime root uses manifest.json; nested construction metadata renamed module.json and fixture.json without geometry changes. r01_path preserves provenance.','changed':changed,'unchanged':unchanged};(P/'GEOMETRY_FREEZE.json').write_text(json.dumps(receipt,indent=2)+'\n')
-print('Truthful collision policy and compressed-source report pins finalized; lineage',len(changed),'changed-content',len(unchanged),'unchanged-content')
+ f=P/row['path'];sha=hashlib.sha256(f.read_bytes()).hexdigest();entry={'path':row['path'],'sha256':sha,'bytes':f.stat().st_size,'r02_sha256':row['sha256']};(changed if sha!=row['sha256'] else unchanged).append(entry)
+receipt={'status':'GEOMETRY_FROZEN_R03_UNAPPROVED','lineage':'r02 FREEZE 8c2154a96dedb8ff8436c8b1c29e8221f4c278368aa226e8400f6eee841e9465','policy':'Deliberate descending visual LOD topology; LOD0, movement proxies, primary renders, all fixture assets unchanged. Ten changed sources contain hidden editable LOD1/2 collections. Window LOD2 omits 3mm decorative face lip; all typed sockets and clear apertures preserved. No aesthetic repair/approval.','changed':changed,'unchanged':unchanged}
+(P/'GEOMETRY_FREEZE.json').write_text(json.dumps(receipt,indent=2)+'\n')
+print('Geometry lineage',len(changed),'changed',len(unchanged),'unchanged')
