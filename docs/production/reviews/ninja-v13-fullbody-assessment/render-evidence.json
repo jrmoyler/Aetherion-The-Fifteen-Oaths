@@ -1,0 +1,970 @@
+{
+  "source": "/tmp/ninja-v13/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+  "sourceSha256Before": "5d1fb9fc7042a22dff33939baa3614adbde520c0e77d55d7aa5472e52b14e114",
+  "sourceSha256After": "5d1fb9fc7042a22dff33939baa3614adbde520c0e77d55d7aa5472e52b14e114",
+  "sourceUnchanged": true,
+  "renderCount": 19,
+  "expectedCount": 19,
+  "engine": "Blender4.3.2 Cycles CPU24samples",
+  "boneCount": 38,
+  "clips": [
+    "idle_breath",
+    "walk_in_place",
+    "cast_release"
+  ],
+  "sourceObjects": [
+    {
+      "name": "cast_origin",
+      "type": "EMPTY",
+      "parent": "Kiln_Ninja_Rig",
+      "parentBone": "hand.R"
+    },
+    {
+      "name": "grip_primary",
+      "type": "EMPTY",
+      "parent": "Kiln_Ninja_Rig",
+      "parentBone": "hand.R"
+    },
+    {
+      "name": "hit_reference",
+      "type": "EMPTY",
+      "parent": "Kiln_Ninja_Rig",
+      "parentBone": "chest"
+    },
+    {
+      "name": "Kiln_Ninja_Rig",
+      "type": "ARMATURE",
+      "parent": null,
+      "parentBone": ""
+    },
+    {
+      "name": "Kiln_ninja_weighted_lowpoly",
+      "type": "MESH",
+      "parent": null,
+      "parentBone": ""
+    },
+    {
+      "name": "stow",
+      "type": "EMPTY",
+      "parent": "Kiln_Ninja_Rig",
+      "parentBone": "chest"
+    }
+  ],
+  "equipment": "No equipped weapon mesh authored in source; empty sockets are present, weapon grasp/clearance untested.",
+  "maskDiagnosticRemovedVertices": 434,
+  "views": [
+    {
+      "file": "rest-front.png",
+      "view": "front",
+      "clip": null,
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "450df4eeed22fb682f4dfb3d5e94ebfe27f4e29f0c8dac0126b5ded60ec56d26"
+    },
+    {
+      "file": "rest-back.png",
+      "view": "back",
+      "clip": null,
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "df14ffb788240468577d21e3b7f1976229f80bed5c234dbf79daaaec8e108970"
+    },
+    {
+      "file": "rest-side.png",
+      "view": "side",
+      "clip": null,
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "c29e2e1cedc2c5c2358a29772ce14185548a1f397a1d30c05eb7bd961958986e"
+    },
+    {
+      "file": "rest-hero.png",
+      "view": "hero",
+      "clip": null,
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "5c37174df3d436e8d34a42065d10c050c70b92600304aa6d91b4f875c7b0d883"
+    },
+    {
+      "file": "idle_breath-01.png",
+      "view": "hero",
+      "clip": "idle_breath",
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "b9817f6bf32229545327aae0e1f0b748ff29c79100c097933cc2d3fe1c1a19aa"
+    },
+    {
+      "file": "idle_breath-13.png",
+      "view": "hero",
+      "clip": "idle_breath",
+      "frame": 13,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.38189437985420227,
+          -0.013452929444611073,
+          0.9478559494018555
+        ],
+        "cast_origin": [
+          -0.3863093852996826,
+          -0.0785025879740715,
+          0.9480763673782349
+        ],
+        "hit_reference": [
+          0.001084698480553925,
+          -0.12058613449335098,
+          1.3285572528839111
+        ],
+        "stow": [
+          -0.0013394220732152462,
+          0.14890381693840027,
+          1.3717925548553467
+        ]
+      },
+      "sha256": "49858fbcb8f859abbb7f1f15e741bebe5a09b3670d794220d7248d023a771a71"
+    },
+    {
+      "file": "idle_breath-25.png",
+      "view": "hero",
+      "clip": "idle_breath",
+      "frame": 25,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.38200849294662476,
+          -0.01403645146638155,
+          0.9480113387107849
+        ],
+        "cast_origin": [
+          -0.38704752922058105,
+          -0.07903261482715607,
+          0.9490634202957153
+        ],
+        "hit_reference": [
+          -7.211192132672295e-05,
+          -0.11995986104011536,
+          1.3300962448120117
+        ],
+        "stow": [
+          9.021338337333873e-05,
+          0.15007206797599792,
+          1.3698797225952148
+        ]
+      },
+      "sha256": "4686f5e8d70d9ca9499b6278c64deeafcbf1518977ced64dc23ab613aacf3eb0"
+    },
+    {
+      "file": "idle_breath-37.png",
+      "view": "hero",
+      "clip": "idle_breath",
+      "frame": 37,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.382145494222641,
+          -0.014541481621563435,
+          0.9481906890869141
+        ],
+        "cast_origin": [
+          -0.38772717118263245,
+          -0.07947752624750137,
+          0.9499667286872864
+        ],
+        "hit_reference": [
+          -0.0010691393399611115,
+          -0.11938967555761337,
+          1.331429362297058
+        ],
+        "stow": [
+          0.0013527286937460303,
+          0.15105780959129333,
+          1.368202805519104
+        ]
+      },
+      "sha256": "de8260102ebfbd0bc3cdf96c7ffba32abc4bc4de624828cdb25770b480ba3aa7"
+    },
+    {
+      "file": "walk_in_place-01.png",
+      "view": "hero",
+      "clip": "walk_in_place",
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.012889072299003601,
+          "maximumZ": 0.2548508644104004,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0008890722990036008,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.012889072299003601,
+          "maximumZ": 0.2548508644104004,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0008890722990036008,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3715229034423828,
+          -0.051090843975543976,
+          0.9256641268730164
+        ],
+        "cast_origin": [
+          -0.37456709146499634,
+          -0.1156294196844101,
+          0.9344108700752258
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.305999994277954
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3459999561309814
+        ]
+      },
+      "sha256": "27378256da39d1a171db886fcdb1cc9e57e7267475dc9cde43492356ef27ae1c"
+    },
+    {
+      "file": "walk_in_place-09.png",
+      "view": "hero",
+      "clip": "walk_in_place",
+      "frame": 9,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.08194588869810104,
+          "maximumZ": 0.32509881258010864,
+          "floorZ": 0.012,
+          "minimumClearance": 0.06994588869810105,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.009036971256136894,
+          "maximumZ": 0.2516634464263916,
+          "floorZ": 0.012,
+          "minimumClearance": -0.002963028743863106,
+          "verticesBelowFloor": 9,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.41807234287261963,
+          0.026060229167342186,
+          0.940340518951416
+        ],
+        "cast_origin": [
+          -0.4219191372394562,
+          -0.03902570903301239,
+          0.940190851688385
+        ],
+        "hit_reference": [
+          0.0065882145427167416,
+          -0.11981900781393051,
+          1.3020102977752686
+        ],
+        "stow": [
+          -0.008235269226133823,
+          0.14977377653121948,
+          1.342010259628296
+        ]
+      },
+      "sha256": "702aaf8d466af0670eb169d4d6da028a375d733b0e0dcca41cd04d69d1580892"
+    },
+    {
+      "file": "walk_in_place-17.png",
+      "view": "hero",
+      "clip": "walk_in_place",
+      "frame": 17,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.01276032067835331,
+          "maximumZ": 0.2549585998058319,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0007603206783533094,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.020077388733625412,
+          "maximumZ": 0.2624909281730652,
+          "floorZ": 0.012,
+          "minimumClearance": 0.008077388733625412,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.36683398485183716,
+          -0.0591471791267395,
+          0.9249745011329651
+        ],
+        "cast_origin": [
+          -0.36982640624046326,
+          -0.12355740368366241,
+          0.9346372485160828
+        ],
+        "hit_reference": [
+          -0.0006677074125036597,
+          -0.11999813467264175,
+          1.3059591054916382
+        ],
+        "stow": [
+          0.000834634352941066,
+          0.14999768137931824,
+          1.3459590673446655
+        ]
+      },
+      "sha256": "a768e8342e98657c4e5c326054dfcef7b8d90e093f52c8878d648983cafc48f6"
+    },
+    {
+      "file": "walk_in_place-25.png",
+      "view": "hero",
+      "clip": "walk_in_place",
+      "frame": 25,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.009101908653974533,
+          "maximumZ": 0.2517489492893219,
+          "floorZ": 0.012,
+          "minimumClearance": -0.002898091346025467,
+          "verticesBelowFloor": 9,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.08126334846019745,
+          "maximumZ": 0.32442858815193176,
+          "floorZ": 0.012,
+          "minimumClearance": 0.06926334846019745,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3265742063522339,
+          -0.1304466873407364,
+          0.9253243803977966
+        ],
+        "cast_origin": [
+          -0.329311728477478,
+          -0.1931277960538864,
+          0.9430608153343201
+        ],
+        "hit_reference": [
+          -0.006520677357912064,
+          -0.11982270330190659,
+          1.3020917177200317
+        ],
+        "stow": [
+          0.008150847628712654,
+          0.14977838099002838,
+          1.342091679573059
+        ]
+      },
+      "sha256": "06b122462f75ab6c0cd68a640c6aee6f944a1feab960aef1df36ed673bef1549"
+    },
+    {
+      "file": "cast_release-01.png",
+      "view": "hero",
+      "clip": "cast_release",
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "92743a9e27137aedd297f3f498f527d3cf34120afb9e746f999dbda53c1ea86a"
+    },
+    {
+      "file": "cast_release-13.png",
+      "view": "hero",
+      "clip": "cast_release",
+      "frame": 13,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.18884512782096863,
+          -0.4038555920124054,
+          1.201059103012085
+        ],
+        "cast_origin": [
+          -0.1886751353740692,
+          -0.4241684675216675,
+          1.2630136013031006
+        ],
+        "hit_reference": [
+          -0.011358190327882767,
+          -0.11593780666589737,
+          1.3377010822296143
+        ],
+        "stow": [
+          0.015165084972977638,
+          0.15479639172554016,
+          1.3600506782531738
+        ]
+      },
+      "sha256": "da320956509bd9687d7a570a251e5309cb825d088acc97fd55c4c80771794b66"
+    },
+    {
+      "file": "cast_release-25.png",
+      "view": "hero",
+      "clip": "cast_release",
+      "frame": 25,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.129271000623703,
+          -0.44365641474723816,
+          1.323789119720459
+        ],
+        "cast_origin": [
+          -0.13139767944812775,
+          -0.4420139789581299,
+          1.3889333009719849
+        ],
+        "hit_reference": [
+          -0.01708539016544819,
+          -0.11313041299581528,
+          1.341722011566162
+        ],
+        "stow": [
+          0.023628592491149902,
+          0.15645605325698853,
+          1.3545868396759033
+        ]
+      },
+      "sha256": "b06d82444d1cd52bd8c0663c18e4b842d1177b2b44941e4ae261a6abc5f36e0b"
+    },
+    {
+      "file": "cast_release-37.png",
+      "view": "hero",
+      "clip": "cast_release",
+      "frame": 37,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.258963018655777,
+          -0.3111698627471924,
+          1.049035906791687
+        ],
+        "cast_origin": [
+          -0.25591668486595154,
+          -0.3552343249320984,
+          1.0969946384429932
+        ],
+        "hit_reference": [
+          -0.01041280385106802,
+          -0.11634905636310577,
+          1.337048053741455
+        ],
+        "stow": [
+          0.01382444053888321,
+          0.15446949005126953,
+          1.3609201908111572
+        ]
+      },
+      "sha256": "fa7f4468ab75518e6019c05448f947f174ed3fa4f5e3bd370608f991a8e441c9"
+    },
+    {
+      "file": "masked-portrait.png",
+      "view": "portrait",
+      "clip": null,
+      "frame": 1,
+      "unmasked": false,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "b1f67e9f1e37740a889596f969e32ce64a6f1cb249c96a09560465c9e1573a58"
+    },
+    {
+      "file": "unmasked-portrait.png",
+      "view": "portrait",
+      "clip": null,
+      "frame": 1,
+      "unmasked": true,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "cee5c9b12fd90457383bcba418be93cd1fd39fb88dfd6e934a3ee808978fa34e"
+    },
+    {
+      "file": "unmasked-face_profile.png",
+      "view": "face_profile",
+      "clip": null,
+      "frame": 1,
+      "unmasked": true,
+      "feet": {
+        "L": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        },
+        "R": {
+          "minimumZ": 0.014000002294778824,
+          "maximumZ": 0.25039809942245483,
+          "floorZ": 0.012,
+          "minimumClearance": 0.0020000022947788236,
+          "verticesBelowFloor": 0,
+          "footWeightedVertexCount": 1786
+        }
+      },
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      },
+      "sha256": "ec0aa53b61524efad85fb5911dfe78c6de64066d8bfde3492ce38cf96e0c9f0c"
+    }
+  ],
+  "scope": "19 actual views from frozen source, sampled animation frames only; no art, gameplay, foot-contact or equipment-fit acceptance."
+}

@@ -1,0 +1,10 @@
+
+> aetherion-production-preview@0.1.0 validate:snapshot
+> node tests/record-validation.mjs
+
+{"status":"PASS_AT_CAPTURE","unitPasses":"34","cpu":{"files":209,"pass":209,"fail":0},"http":{"development":{"scope":"Local HTTP only; no browser/GPU","mode":"development","reviewMode":false,"status":"PASS","manifests":17,"glbsByteVerified":209,"referencesByteVerified":20},"built":{"scope":"Local HTTP only; no browser/GPU","mode":"built","reviewMode":false,"status":"PASS","manifests":17,"glbsByteVerified":209,"referencesByteVerified":20}},"changedInputs":0}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

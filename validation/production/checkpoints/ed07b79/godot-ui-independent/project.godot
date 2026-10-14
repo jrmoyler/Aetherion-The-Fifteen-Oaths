@@ -1,0 +1,12 @@
+config_version=5
+[application]
+config/name="Aetherion Daybreak manifest inspection"
+run/main_scene="res://preview.tscn"
+[display]
+window/size/viewport_width=1100
+window/size/viewport_height=760
+[rendering]
+renderer/rendering_method="gl_compatibility"
+[physics]
+common/physics_ticks_per_second=60
+3d/physics_engine="GodotPhysics3D"

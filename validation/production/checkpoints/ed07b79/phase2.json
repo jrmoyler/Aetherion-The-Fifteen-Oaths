@@ -1,0 +1,2317 @@
+{
+  "generated_at_utc": "2026-10-14T00:29:06.488683+00:00",
+  "input_sha256": {
+    "ENVIRONMENT_ASSET_REGISTRY.json": "5cca3c25b0943aca297e8857d34fda8fdf9c5dc21396ced9f1e1178806f1ea8a",
+    "WORLD_POI_REGISTRY.json": "920134133e69ee9aa56522981c989cc553969f9228581fb01c2e025db1267a48",
+    "ENVIRONMENT_REFERENCE_EVIDENCE.json": "69bd3edd696cafcd04dd24091fcb9d4958a3162b580e5a371e54f977fb3fdb93",
+    "REGION_BLUEPRINT_INDEX.json": "c53e5400d63e17823d75c8944f02d8d39ab76eea3274f267295ddc0a90b02999",
+    "ARCHITECTURAL_KIT_REGISTRY.json": "145f41ec58c34483362465fcc61f90455d471ed13f4cf39ea91f81c00386433e",
+    "STREAMING_PROTOTYPE_CONTRACTS.json": "93848bc1e3d4b42fea6a8e3c647f59e8cf4a84473d452fb0ab48f70804bf498c",
+    "WORLD_EVENT_REGISTRY.json": "f9daf537d4945b47a506033f63d7a94b79dc0138bc71551d84d995810df4502f",
+    "TRANSPORT_ROUTE_REGISTRY.json": "86aff3bb0008dde11d343fadc8a465be9e52c521e473e408d3a20259a179a91a",
+    "CAPITAL_LAYOUT_REGISTRY.json": "3e78d1ff99d4ffecada096e027aeb22e219ec97dba4e3339f0935301fef9356c",
+    "DELIVERABLE_MANIFEST.json": "07920f0a93a0a0b5ffc98c9dba038ad62d8df90e14a1897c82088012d1c0e928",
+    "SOURCE_INVENTORY.json": "dbd06b2da3ba45ca90c7788951b44d4a7b38cc35b9fd9d778c82d99a0026ac26",
+    "WORLD_REGION_GRAPH.json": "25b086c36506a3dba47ce629684aedb3476e8d24567ee43a7b2f3ff94c53c96b",
+    "SETTLEMENT_REGISTRY.json": "7f92b8b3fbae272d40204e18bfdeddeb5cc3a3ded15f16f5587353aeca374466",
+    "REGIONAL_ECOLOGY_PROFILES.json": "a6874b23296b41d4acf970e77c76f7fbe7a052cfc83549ea9c77f5a31c2c3204",
+    "schemas/world-region-graph.schema.json": "9b151668b1519330a8f515562a956430087a5af19ec476cbe1dc7cd6e4bfa530",
+    "schemas/capital-layout.schema.json": "10fcfab573625745280bc256192aea44ddcec7149ce59d0a4d7e889f9becb7f1",
+    "schemas/streaming-prototype-contracts.schema.json": "affae4368accc236543eb1d470980ff8722702a90f5d44e54e279aac5cd277ef",
+    "schemas/transport-route-registry.schema.json": "b730aeebe41b835592be28abc9ab0c15107950dc076d6ed5bbd7faf26191900a",
+    "schemas/region-blueprint-index.schema.json": "000e42612f1a4e4e8199cb0474855a95ebdd5bb72ac256a57273fbc5a529b202",
+    "schemas/world_event_registry.schema.json": "751d850a12aa593071008922c39ac1d540deae91070177e695d634a4396708b6",
+    "schemas/deliverable-manifest.schema.json": "41faad3830d304e605744614f30f590f8507e383f30739c507bb182966994d1d",
+    "schemas/source-inventory.schema.json": "224a284fc10a76532b3e51422f84df433dae2e323ff00ee59a5b33686180fc42",
+    "schemas/regional_ecology_profiles.schema.json": "152db5e3974f51aded3bbe5cc0f977d0a2a4ee2747771ce219fa1e6f37a7c049",
+    "schemas/environment-reference-evidence.schema.json": "19b79b82bbc957a2a3b2a1911beee0b888ff7bfbf0dea944e0d1c82d2c16093f",
+    "schemas/settlement.schema.json": "ab29c22a5cbae80a25a6c6a17584ba8ad717ba53b0757ef2c4128ee1343c5772",
+    "schemas/environment-asset-registry.schema.json": "c5e0eacdf60616d20cc777a7879d9725f6c8c87f3bdbdf4a6dbf27b744534d8d",
+    "schemas/architectural-kit-registry.schema.json": "2400455abab3e12d0adff925e2bb9ee676d2ac0c62f5db59b7ac2ee8c50ebf81",
+    "schemas/world-poi.schema.json": "d92fe6b2653a27aab8088713d2878b1985a33986739b2781dc1b10d925e8b15b"
+  },
+  "scope": "Static specification validation only; no implementation or founder approval implied.",
+  "counts": {
+    "PASS": 445,
+    "FAIL": 0,
+    "SKIPPED": 5,
+    "HUMAN_REVIEW": 5
+  },
+  "checks": [
+    {
+      "check": "deliverable:CONTINENT_MASTER_PLAN.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:CONTINENT_GEOGRAPHY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:CONTINENT_MAP_SPECIFICATION.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:FIFTEEN_REGION_BLUEPRINTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:CAPITAL_CITY_BLUEPRINTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:TRANSPORTATION_NETWORK.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:REGIONAL_BIOME_SPECIFICATIONS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:WORLD_ECOLOGY_SYSTEM.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:DYNAMIC_WEATHER_SYSTEM.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:NPC_CIVILIZATION_SYSTEM.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:DUNGEON_AND_EXPLORATION_PLAN.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:WORLD_STREAMING_ARCHITECTURE.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:WORLD_CONSTRUCTION_ROADMAP.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "deliverable:CANON_ALIGNMENT_AND_GAP_REPORT.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "document_count:FIFTEEN_REGION_BLUEPRINTS",
+      "status": "PASS",
+      "detail": "15; expected 15"
+    },
+    {
+      "check": "document_count:CAPITAL_CITY_BLUEPRINTS",
+      "status": "PASS",
+      "detail": "15; expected 15"
+    },
+    {
+      "check": "schema_valid:schemas/world-region-graph.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/world-region-graph.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/capital-layout.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/capital-layout.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/streaming-prototype-contracts.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/streaming-prototype-contracts.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/transport-route-registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/transport-route-registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/region-blueprint-index.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/region-blueprint-index.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/world_event_registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/world_event_registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/deliverable-manifest.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/deliverable-manifest.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/source-inventory.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/source-inventory.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/regional_ecology_profiles.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/regional_ecology_profiles.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/environment-reference-evidence.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/environment-reference-evidence.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/settlement.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/settlement.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/environment-asset-registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/environment-asset-registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/architectural-kit-registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/architectural-kit-registry.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_valid:schemas/world-poi.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_strict:schemas/world-poi.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": "schemas/environment-asset-registry.schema.json"
+    },
+    {
+      "check": "schema_instance:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": "schemas/world-poi.schema.json"
+    },
+    {
+      "check": "schema_instance:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "detail": "schemas/environment-reference-evidence.schema.json"
+    },
+    {
+      "check": "schema_instance:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "detail": "schemas/region-blueprint-index.schema.json"
+    },
+    {
+      "check": "schema_instance:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": "schemas/architectural-kit-registry.schema.json"
+    },
+    {
+      "check": "schema_instance:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "detail": "schemas/streaming-prototype-contracts.schema.json"
+    },
+    {
+      "check": "schema_instance:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": "schemas/world_event_registry.schema.json"
+    },
+    {
+      "check": "schema_instance:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "detail": "schemas/transport-route-registry.schema.json"
+    },
+    {
+      "check": "schema_instance:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "detail": "schemas/capital-layout.schema.json"
+    },
+    {
+      "check": "schema_instance:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "detail": "schemas/deliverable-manifest.schema.json"
+    },
+    {
+      "check": "schema_instance:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:SOURCE_INVENTORY.json",
+      "status": "PASS",
+      "detail": "schemas/source-inventory.schema.json"
+    },
+    {
+      "check": "schema_instance:SOURCE_INVENTORY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": "schemas/world-region-graph.schema.json"
+    },
+    {
+      "check": "schema_instance:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": "schemas/settlement.schema.json"
+    },
+    {
+      "check": "schema_instance:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "schema_present:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "detail": "schemas/regional_ecology_profiles.schema.json"
+    },
+    {
+      "check": "schema_instance:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "envelope:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "records_nonempty:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "record_metadata:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "unique_ids:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "cross_references_resolve",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "source_ids_resolve",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "exact_fifteen_regions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "exact_fifteen_oaths",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "baseline_capitals_preserved",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "baseline_adjacencies_preserved",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "land_connected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "single_edge_loss_connected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "baseline_63_pois_preserved",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "baseline_four_basins_preserved",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "drainage_adjacency:basin-west",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "conceptual_downhill:basin-west",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "drainage_adjacency:basin-choir",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "conceptual_downhill:basin-choir",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "drainage_adjacency:basin-dawn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "conceptual_downhill:basin-dawn",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "drainage_adjacency:basin-east",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "conceptual_downhill:basin-east",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_route_coverage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-01-01-02",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-01-01-02",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-01-01-05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-01-01-05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-01-01-07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-01-01-07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-02-02-03",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-02-02-03",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-02-02-05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-02-02-05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-03-03-05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-03-03-05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-03-03-06",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-03-03-06",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-03-03-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-03-03-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-04-04-07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-04-04-07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-04-04-08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-04-04-08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-05-05-07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-05-05-07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-05-05-08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-05-05-08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-05-05-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-05-05-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-06-06-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-06-06-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-06-06-10",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-06-06-10",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-06-06-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-06-06-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-07-07-08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-07-07-08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-08-08-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-08-08-09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-08-08-12",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-08-08-12",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-09-09-12",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-09-09-12",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-09-09-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-09-09-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-10-10-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-10-10-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-10-10-11",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-10-10-11",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-11-11-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-11-11-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-11-11-14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-11-11-14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-11-11-15",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-11-11-15",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-12-12-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-12-12-13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-12-12-14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-12-12-14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-13-13-14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-13-13-14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ordinary_access:p2-route-14-14-15",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour:p2-route-14-14-15",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "dependency_graph_acyclic",
+      "status": "PASS",
+      "detail": "158 package prerequisite edges plus 2235 foundation prerequisite edges checked; semantic association links excluded."
+    },
+    {
+      "check": "event_field_coverage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "event_ordinary_player_roles",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "event_adapters_not_implemented",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "event_regional_distinction",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ecology_field_coverage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "ecology_regional_distinction",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "source_reference_paths",
+      "status": "SKIPPED",
+      "detail": "Supply --foundation to check baseline source paths."
+    },
+    {
+      "check": "architecture_fifteen_oaths",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "asset_family_coverage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "asset_required_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "assets_not_implemented",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "architecture_distinct_construction",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "prototype_tests_not_executed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_evidence_114",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_review_scope_honest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "reference_hashes_independently_verified",
+      "status": "SKIPPED",
+      "detail": "Supply baseline repository to recompute hashes."
+    },
+    {
+      "check": "source_inventory_hashes_verified",
+      "status": "SKIPPED",
+      "detail": "Supply baseline repository to recompute hashes."
+    },
+    {
+      "check": "capital_layout_coverage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-01-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-01-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-01-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-01-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-01-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-02-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-02-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-02-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-02-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-02-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-03-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-03-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-03-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-03-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-03-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-04-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-04-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-04-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-04-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-04-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-05-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-05-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-05-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-05-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-05-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-06-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-06-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-06-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-06-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-06-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-07-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-07-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-07-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-07-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-07-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-08-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-08-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-08-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-08-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-08-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-09-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-09-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-09-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-09-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-09-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-10-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-10-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-10-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-10-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-10-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-11-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-11-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-11-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-11-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-11-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-12-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-12-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-12-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-12-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-12-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-13-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-13-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-13-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-13-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-13-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-14-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-14-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-14-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-14-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-14-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_service_path:p2-capital-15-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_connected:p2-capital-15-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_adjacency_consistent:p2-capital-15-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_interior_parents:p2-capital-15-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_refuge_resolves:p2-capital-15-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "settlement_roles_by_region",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "settlement_functional_fields",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "settlement_dependency_acyclic",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-01-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-01-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-02-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-02-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-03-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-03-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-04-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-04-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-05-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-05-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-06-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-06-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-07-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-07-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-08-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-08-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-09-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-09-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-10-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-10-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-11-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-11-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-12-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-12-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-13-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-13-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-14-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-14-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-15-blueprint:region_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "blueprint_document:p2-region-15-blueprint:capital_document",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:ENVIRONMENT_ASSET_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:WORLD_POI_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:REGION_BLUEPRINT_INDEX.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:ARCHITECTURAL_KIT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:STREAMING_PROTOTYPE_CONTRACTS.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:WORLD_EVENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:TRANSPORT_ROUTE_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:CAPITAL_LAYOUT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:DELIVERABLE_MANIFEST.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:SOURCE_INVENTORY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:WORLD_REGION_GRAPH.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:SETTLEMENT_REGISTRY.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_oath_alignment:REGIONAL_ECOLOGY_PROFILES.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "settlement_poi_consistency",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "capital_district_poi_consistency",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "detour_time_targets_sum",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-01-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-01-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-02-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-02-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-03-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-03-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-04-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-04-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-05-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-05-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-06-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-06-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-07-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-07-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-08-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-08-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-09-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-09-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-10-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-10-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-11-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-11-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-12-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-12-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-13-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-13-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-14-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-14-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_substantive_sections:p2-region-15-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "region_sacred_or_commemorative_space:p2-region-15-blueprint",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "prose_file_references",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-01-kiln-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-01-kiln-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-01-kiln-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-01-kiln-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-02-rime-vaults",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-02-rime-vaults",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-02-rime-vaults",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-02-rime-vaults",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-03-storm-relays",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-03-storm-relays",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-03-storm-relays",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-03-storm-relays",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-04-tidal-refuges",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-04-tidal-refuges",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-04-tidal-refuges",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-04-tidal-refuges",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-05-fault-buttresses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-05-fault-buttresses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-05-fault-buttresses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-05-fault-buttresses",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-06-reed-halls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-06-reed-halls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-06-reed-halls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-06-reed-halls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-07-graft-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-07-graft-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-07-graft-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-07-graft-courts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-08-bitterglass-stills",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-08-bitterglass-stills",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-08-bitterglass-stills",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-08-bitterglass-stills",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-09-daybreak-arcades",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-09-daybreak-arcades",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-09-daybreak-arcades",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-09-daybreak-arcades",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-10-observatory-terraces",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-10-observatory-terraces",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-10-observatory-terraces",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-10-observatory-terraces",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-11-missing-court",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-11-missing-court",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-11-missing-court",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-11-missing-court",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-12-sanguine-cloisters",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-12-sanguine-cloisters",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-12-sanguine-cloisters",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-12-sanguine-cloisters",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-13-folded-stages",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-13-folded-stages",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-13-folded-stages",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-13-folded-stages",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-14-escapement-stations",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-14-escapement-stations",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-14-escapement-stations",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-14-escapement-stations",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_ramp_arithmetic:p2-arch-15-impulse-yards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_stair_arithmetic:p2-arch-15-impulse-yards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_aperture_envelope:p2-arch-15-impulse-yards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "kit_role_dimensions:p2-arch-15-impulse-yards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "exploration_readiness_discovery_coverage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "founder_canon_art_approval",
+      "status": "HUMAN_REVIEW",
+      "detail": "All additions are proposals; static review cannot grant founder approval or commercial asset rights."
+    },
+    {
+      "check": "prose_ids_resolve",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "terrain_derived_drainage",
+      "status": "HUMAN_REVIEW",
+      "detail": "No authored heightfield exists; conceptual sequence checks cannot verify terrain."
+    },
+    {
+      "check": "runtime_navigation_and_service_access",
+      "status": "HUMAN_REVIEW",
+      "detail": "Requires navmesh, movement agents and event-state tests."
+    },
+    {
+      "check": "performance_and_multiplayer",
+      "status": "HUMAN_REVIEW",
+      "detail": "Requires engine prototype, target devices and multiplayer load tests."
+    },
+    {
+      "check": "visual_asset_implementation",
+      "status": "HUMAN_REVIEW",
+      "detail": "Specifications and references are not meshes, textures, rigs or shipped assets."
+    },
+    {
+      "check": "public_provenance_privacy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_markdown_links",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "repository_unchanged:destination",
+      "status": "SKIPPED",
+      "detail": "Supply optional repository path to verify locally."
+    },
+    {
+      "check": "repository_unchanged:source",
+      "status": "SKIPPED",
+      "detail": "Supply optional repository path to verify locally."
+    }
+  ]
+}
