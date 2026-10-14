@@ -1,0 +1,40 @@
+{
+  "source": "reference-090 unmasked front panel",
+  "sourceSha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa",
+  "method": "Manual pixel picks on an enlarged unchanged source crop; approximate +/-4px, not a scan or likeness certification. Painted panel/body views have different scales.",
+  "uncertaintyPixels": 4,
+  "points": {
+    "mainCrownTop": [
+      100,
+      740
+    ],
+    "leftIris": [
+      79,
+      842
+    ],
+    "rightIris": [
+      121,
+      842
+    ],
+    "nasalTip": [
+      100,
+      870
+    ],
+    "lipCleft": [
+      100,
+      890
+    ],
+    "visibleChin": [
+      99,
+      914
+    ]
+  },
+  "eyeLineY": 842,
+  "eyeToChinPixels": 72,
+  "eyeToNoseOverEyeToChin": 0.3888888888888889,
+  "eyeToLipOverEyeToChin": 0.6666666666666666,
+  "limitations": [
+    "Model lowest head vertex is partly hidden by collar and is not homologous to painted visible chin.",
+    "Iris centers are approximately handpicked and should be independently reviewed."
+  ]
+}

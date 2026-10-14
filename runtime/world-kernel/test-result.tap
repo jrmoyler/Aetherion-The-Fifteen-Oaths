@@ -1,0 +1,310 @@
+TAP version 13
+# Subtest: entire actual continent resolves all318 POIs, all225 topological region pairs and63baseline identities
+ok 1 - entire actual continent resolves all318 POIs, all225 topological region pairs and63baseline identities
+  ---
+  duration_ms: 15.49981
+  type: 'test'
+  ...
+# Subtest: route ordering independent of record and edge input ordering
+ok 2 - route ordering independent of record and edge input ordering
+  ---
+  duration_ms: 7.280208
+  type: 'test'
+  ...
+# Subtest: unknown region and POI refused; callers cannot mutate indexed canon
+ok 3 - unknown region and POI refused; callers cannot mutate indexed canon
+  ---
+  duration_ms: 2.171434
+  type: 'test'
+  ...
+# Subtest: invalid graph rejects duplicate
+ok 4 - invalid graph rejects duplicate
+  ---
+  duration_ms: 0.612714
+  type: 'test'
+  ...
+# Subtest: invalid graph rejects endpoint
+ok 5 - invalid graph rejects endpoint
+  ---
+  duration_ms: 2.052024
+  type: 'test'
+  ...
+# Subtest: invalid graph rejects adjacency
+ok 6 - invalid graph rejects adjacency
+  ---
+  duration_ms: 1.73745
+  type: 'test'
+  ...
+# Subtest: invalid graph rejects baseline
+ok 7 - invalid graph rejects baseline
+  ---
+  duration_ms: 1.716678
+  type: 'test'
+  ...
+# Subtest: invalid graph rejects schema
+ok 8 - invalid graph rejects schema
+  ---
+  duration_ms: 0.333663
+  type: 'test'
+  ...
+# Subtest: POI Oath and capital identity validated
+ok 9 - POI Oath and capital identity validated
+  ---
+  duration_ms: 7.172785
+  type: 'test'
+  ...
+# Subtest: signed coordinates normalize reversibly at 128m hypothesis
+ok 10 - signed coordinates normalize reversibly at 128m hypothesis
+  ---
+  duration_ms: 0.832034
+  type: 'test'
+  ...
+# Subtest: signed coordinates normalize reversibly at 256m hypothesis
+ok 11 - signed coordinates normalize reversibly at 256m hypothesis
+  ---
+  duration_ms: 0.40455
+  type: 'test'
+  ...
+# Subtest: signed coordinates normalize reversibly at 512m hypothesis
+ok 12 - signed coordinates normalize reversibly at 512m hypothesis
+  ---
+  duration_ms: 0.196186
+  type: 'test'
+  ...
+# Subtest: coordinates reject invalid version, NaN, infinite, unsafe integer and bad width
+ok 13 - coordinates reject invalid version, NaN, infinite, unsafe integer and bad width
+  ---
+  duration_ms: 0.244699
+  type: 'test'
+  ...
+# Subtest: readiness gates collision/nav/authority/mandatory cues and content revision
+ok 14 - readiness gates collision/nav/authority/mandatory cues and content revision
+  ---
+  duration_ms: 0.610951
+  type: 'test'
+  ...
+# Subtest: valid readiness permits coarse gameplay before presentation
+ok 15 - valid readiness permits coarse gameplay before presentation
+  ---
+  duration_ms: 0.147593
+  type: 'test'
+  ...
+# Subtest: out-of-order stage and duplicate requests refused
+ok 16 - out-of-order stage and duplicate requests refused
+  ---
+  duration_ms: 0.106181
+  type: 'test'
+  ...
+# Subtest: CANCELLED generation cannot revive or release replacement
+ok 17 - CANCELLED generation cannot revive or release replacement
+  ---
+  duration_ms: 0.274153
+  type: 'test'
+  ...
+# Subtest: FAILED generation cannot revive or release replacement
+ok 18 - FAILED generation cannot revive or release replacement
+  ---
+  duration_ms: 0.156336
+  type: 'test'
+  ...
+# Subtest: RETIRING generation cannot revive or release replacement
+ok 19 - RETIRING generation cannot revive or release replacement
+  ---
+  duration_ms: 0.063806
+  type: 'test'
+  ...
+# Subtest: shared leases dispose exactly once after final owner, duplicate acquisition ignored
+ok 20 - shared leases dispose exactly once after final owner, duplicate acquisition ignored
+  ---
+  duration_ms: 0.213341
+  type: 'test'
+  ...
+# Subtest: failing disposer still releases all leases and invokes other disposers once
+ok 21 - failing disposer still releases all leases and invokes other disposers once
+  ---
+  duration_ms: 0.330318
+  type: 'test'
+  ...
+# Subtest: actual world-event-01 exact objective targets succeed with distinct authored test sockets
+ok 22 - actual world-event-01 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 1.36676
+  type: 'test'
+  ...
+# Subtest: actual world-event-02 exact objective targets succeed with distinct authored test sockets
+ok 23 - actual world-event-02 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.772495
+  type: 'test'
+  ...
+# Subtest: actual world-event-03 exact objective targets succeed with distinct authored test sockets
+ok 24 - actual world-event-03 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.347054
+  type: 'test'
+  ...
+# Subtest: actual world-event-04 exact objective targets succeed with distinct authored test sockets
+ok 25 - actual world-event-04 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.392793
+  type: 'test'
+  ...
+# Subtest: actual world-event-05 exact objective targets succeed with distinct authored test sockets
+ok 26 - actual world-event-05 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.286903
+  type: 'test'
+  ...
+# Subtest: actual world-event-06 exact objective targets succeed with distinct authored test sockets
+ok 27 - actual world-event-06 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.277008
+  type: 'test'
+  ...
+# Subtest: actual world-event-07 exact objective targets succeed with distinct authored test sockets
+ok 28 - actual world-event-07 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.253653
+  type: 'test'
+  ...
+# Subtest: actual world-event-08 exact objective targets succeed with distinct authored test sockets
+ok 29 - actual world-event-08 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.365712
+  type: 'test'
+  ...
+# Subtest: actual world-event-09 exact objective targets succeed with distinct authored test sockets
+ok 30 - actual world-event-09 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.533495
+  type: 'test'
+  ...
+# Subtest: actual world-event-10 exact objective targets succeed with distinct authored test sockets
+ok 31 - actual world-event-10 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.510139
+  type: 'test'
+  ...
+# Subtest: actual world-event-11 exact objective targets succeed with distinct authored test sockets
+ok 32 - actual world-event-11 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.259982
+  type: 'test'
+  ...
+# Subtest: actual world-event-12 exact objective targets succeed with distinct authored test sockets
+ok 33 - actual world-event-12 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.286001
+  type: 'test'
+  ...
+# Subtest: actual world-event-13 exact objective targets succeed with distinct authored test sockets
+ok 34 - actual world-event-13 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.243687
+  type: 'test'
+  ...
+# Subtest: actual world-event-14 exact objective targets succeed with distinct authored test sockets
+ok 35 - actual world-event-14 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.241444
+  type: 'test'
+  ...
+# Subtest: actual world-event-15 exact objective targets succeed with distinct authored test sockets
+ok 36 - actual world-event-15 exact objective targets succeed with distinct authored test sockets
+  ---
+  duration_ms: 0.406253
+  type: 'test'
+  ...
+# Subtest: missing authored sockets and injected predicate code refused
+ok 37 - missing authored sockets and injected predicate code refused
+  ---
+  duration_ms: 0.392502
+  type: 'test'
+  ...
+# Subtest: incorrect phase order and initial state types refused
+ok 38 - incorrect phase order and initial state types refused
+  ---
+  duration_ms: 0.345221
+  type: 'test'
+  ...
+# Subtest: receipt retry idempotent across phase transition; conflicting retry and duplicate socket refused
+ok 39 - receipt retry idempotent across phase transition; conflicting retry and duplicate socket refused
+  ---
+  duration_ms: 0.347003
+  type: 'test'
+  ...
+# Subtest: unknown socket, early/late contribution and backwards clocks refused
+ok 40 - unknown socket, early/late contribution and backwards clocks refused
+  ---
+  duration_ms: 0.454676
+  type: 'test'
+  ...
+# Subtest: zero-player deadline reaches setback then nonhazardous recovery without fabricated rewards
+ok 41 - zero-player deadline reaches setback then nonhazardous recovery without fabricated rewards
+  ---
+  duration_ms: 0.158659
+  type: 'test'
+  ...
+# Subtest: safety abort unpenalized and offline recovery never completes objectives
+ok 42 - safety abort unpenalized and offline recovery never completes objectives
+  ---
+  duration_ms: 0.27199
+  type: 'test'
+  ...
+# Subtest: missing or stale safety attestation fails closed without changing state/time
+ok 43 - missing or stale safety attestation fails closed without changing state/time
+  ---
+  duration_ms: 0.487265
+  type: 'test'
+  ...
+# Subtest: lost catchment lease aborts response without credit and no stale success
+ok 44 - lost catchment lease aborts response without credit and no stale success
+  ---
+  duration_ms: 0.315876
+  type: 'test'
+  ...
+# Subtest: reentrant disposal preserves newly acquired shared resource
+ok 45 - reentrant disposal preserves newly acquired shared resource
+  ---
+  duration_ms: 0.20556
+  type: 'test'
+  ...
+# Subtest: tokens are manager-local capabilities, not transferable matching IDs
+ok 46 - tokens are manager-local capabilities, not transferable matching IDs
+  ---
+  duration_ms: 0.123076
+  type: 'test'
+  ...
+# Subtest: exact receipt retry survives newer action without moving simulation clock
+ok 47 - exact receipt retry survives newer action without moving simulation clock
+  ---
+  duration_ms: 0.328365
+  type: 'test'
+  ...
+# Subtest: unsafe and sub-millisecond event clocks cannot collapse authored duration
+ok 48 - unsafe and sub-millisecond event clocks cannot collapse authored duration
+  ---
+  duration_ms: 0.653004
+  type: 'test'
+  ...
+# Subtest: baseline manifest requires63 distinct identities
+ok 49 - baseline manifest requires63 distinct identities
+  ---
+  duration_ms: 3.613367
+  type: 'test'
+  ...
+# Subtest: same resource cannot be reacquired while its disposer is executing
+ok 50 - same resource cannot be reacquired while its disposer is executing
+  ---
+  duration_ms: 0.166791
+  type: 'test'
+  ...
+1..50
+# tests 50
+# suites 0
+# pass 50
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 146.207335

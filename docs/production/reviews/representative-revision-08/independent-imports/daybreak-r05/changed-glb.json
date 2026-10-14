@@ -1,0 +1,592 @@
+{
+  "generatedAt": "2026-10-14T00:53:47.215Z",
+  "scope": "Read-only review copies; no GPU, appearance, collision-fit or production certification",
+  "textureDecode": "Three.js CPU placeholder textures; actual geometry/skins/animations loaded",
+  "reports": [
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/civic/assembly.glb",
+      "sha256": "60dba878dd306d86519bd67644a204b896e28ffdba08fc07c7a618b497bbb21b",
+      "bytes": 7014496,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 33019,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            -0.4000000059604645,
+            -10.000000381842256
+          ],
+          "max": [
+            8,
+            3.7975604608654976,
+            0
+          ],
+          "dimensionsMeters": [
+            8,
+            4.197560466825962,
+            10.000000381842256
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/ramp-with-landing/assembly.glb",
+      "sha256": "05f532fe64df4074e92146ec858f39b2e3672a7e5a9bf9619f25ba58c42d80cb",
+      "bytes": 3932984,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 1420,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.17999999970197678,
+            -0.019999999552965164,
+            -6.600000262260437
+          ],
+          "max": [
+            1.9799999743700027,
+            1.5399999804794788,
+            0.07999999821186066
+          ],
+          "dimensionsMeters": [
+            2.1599999740719795,
+            1.559999980032444,
+            6.680000260472298
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/residential/assembly.glb",
+      "sha256": "7b76f5b2a7e4207a35f27b461608fec0d1a4071c0a0f7e5825261bf83222ea12",
+      "bytes": 7038932,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 33483,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            -0.4000000059604645,
+            -8.000000283122063
+          ],
+          "max": [
+            8.000000055879354,
+            3.7975604608654976,
+            0
+          ],
+          "dimensionsMeters": [
+            8.000000055879354,
+            4.197560466825962,
+            8.000000283122063
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/stairs-with-landing/assembly.glb",
+      "sha256": "14788251da1c65c670fcc9b64be97784f67517f9b51e8372d119a82c6a477c6f",
+      "bytes": 5198940,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 1996,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.17999999970197678,
+            0,
+            -4.500000103376806
+          ],
+          "max": [
+            1.9799999743700027,
+            2.7400000281631947,
+            0.07999999821186066
+          ],
+          "dimensionsMeters": [
+            2.1599999740719795,
+            2.7400000281631947,
+            4.580000101588666
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/work/assembly.glb",
+      "sha256": "aab2a3be1a0e70b99a0dd1545ca34ae0a0661b7729e2614d73f667de6ffe9861",
+      "bytes": 5869408,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 28057,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            -0.4000000059604645,
+            -8.000000283122063
+          ],
+          "max": [
+            8.000000055879354,
+            3.7975604608654976,
+            0.007000045385211706
+          ],
+          "dimensionsMeters": [
+            8.000000055879354,
+            4.197560466825962,
+            8.007000328507274
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": [
+        {
+          "name": "daylight_baffle_open_close",
+          "durationSeconds": 5.041666507720947,
+          "trackCount": 3,
+          "timeRange": [
+            0.0416666679084301,
+            5.041666507720947
+          ],
+          "scaleTracks": [],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.2604166269302368,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.5208332538604736,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.7812498807907104,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.041666507720947,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod1.glb",
+      "sha256": "e83f5cd9bce95598cc8f612c51fbe42312bf16b61aaac5580668cdfe0493471a",
+      "bytes": 3443416,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 7471,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            -4.000000059604645
+          ],
+          "max": [
+            4.000000059604645,
+            3.7800001045688987,
+            0
+          ],
+          "dimensionsMeters": [
+            4.000000059604645,
+            3.7800001045688987,
+            4.000000059604645
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod2.glb",
+      "sha256": "a54e41e0ac998071104bbf75f882b7ad868a473706eb59dbc8364159a7530da5",
+      "bytes": 3218060,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 3577,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            -4.000000059604645
+          ],
+          "max": [
+            4.000000059604645,
+            3.7800001045688987,
+            0
+          ],
+          "dimensionsMeters": [
+            4.000000059604645,
+            3.7800001045688987,
+            4.000000059604645
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod1.glb",
+      "sha256": "c00a4d199809d46a87818277e3febcae5e120453c46e059ac55778daaa26696e",
+      "bytes": 2334296,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 6094,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0.2244999948889017,
+            0.04510548710823059,
+            -3.76500004529953
+          ],
+          "max": [
+            3.7754999604076147,
+            0.3175913840532303,
+            -0.23500001430511475
+          ],
+          "dimensionsMeters": [
+            3.550999965518713,
+            0.2724858969449997,
+            3.5300000309944153
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod2.glb",
+      "sha256": "3c3432a08b036742bda718213c4973adabd41684cd0b5a8ee3f6b140be24bb4a",
+      "bytes": 2157952,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 3080,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0.2244999948889017,
+            0.045217808336019516,
+            -3.76500004529953
+          ],
+          "max": [
+            3.7754999604076147,
+            0.31768256425857544,
+            -0.23500001430511475
+          ],
+          "dimensionsMeters": [
+            3.550999965518713,
+            0.2724647559225559,
+            3.5300000309944153
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    }
+  ]
+}

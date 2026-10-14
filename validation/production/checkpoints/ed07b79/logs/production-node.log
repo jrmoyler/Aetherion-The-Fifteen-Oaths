@@ -1,0 +1,32 @@
+
+> aetherion-production-validation@0.1.0 test
+> node --test *.test.mjs
+
+✔ minimal valid GLB passes official validator and inventory (13.132296ms)
+✔ inventory rejects declared file length and chunk bounds corruption (0.783281ms)
+✔ official validator detects accessor overrun of embedded buffer view (13.749487ms)
+✔ official validator detects texture and skin references outside arrays (3.280966ms)
+✔ checked-in audit preserves complete issue counts and compressed evidence checksum (532.676863ms)
+✔ geometry dimensions derive from actual positions and parent transforms (2.886501ms)
+✔ dimension comparison permits coordinate axis permutation, rejects changed scale (0.185319ms)
+✔ missing exports are hard errors and do not remove open acceptance gates (1.721945ms)
+✔ paths cannot escape repository (0.432342ms)
+✔ collision policy keeps default strict and distinguishes absence from pending work (0.390669ms)
+✔ manifest-local paths normalize while traversal and symlink escapes reject (18.013485ms)
+✔ compressed source evidence binds exact report schema, record and source bytes (14.135279ms)
+✔ pending collision retains an explicit incomplete result on otherwise valid exports (798.340459ms)
+✔ candidate report aggregates retain complete compressed issues and source hashes (2351.595941ms)
+✔ required GLB roles cannot evade parsing through another filename extension (28.992003ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3340.419548
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,0 +1,384 @@
+{
+  "scope": "Frozen review assets only; real CPU/headless imports, no GPU/material-render/appearance/collision or gameplay approval",
+  "inputs": {
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/civic/source.blend": {
+      "sha256": "2521597ed44116573023350c609d8077349878920a3f91a4d285fbb4c76e4118",
+      "bytes": 7522437
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/ramp-with-landing/source.blend": {
+      "sha256": "ebdf9f2af018bbca5476f3dfd2596ffc1f5e36d0255d897c2530736f14bfae79",
+      "bytes": 3584825
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/residential/source.blend": {
+      "sha256": "e8bbea269bc405c25721312d86a3c4a721a947457a7779f12f31b60ed279e9ff",
+      "bytes": 7639790
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/stairs-with-landing/source.blend": {
+      "sha256": "3916611111842e15a5a50bfe4034086df573e43bf40be30b53b3fe6a78a3e294",
+      "bytes": 4070120
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/work/source.blend": {
+      "sha256": "6266b16cae21dd52d4226215ae8d470a6df85e3e56fbcc5e84c38da37216bf96",
+      "bytes": 7572507
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/source.blend": {
+      "sha256": "91a5fe6cf9ddce052dc6d387b674ef48ea30f2c397c133ed0827b922844128fc",
+      "bytes": 3839364
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/source.blend": {
+      "sha256": "8d24e1385c5680c9c3449e4a988cb7c1144cc45e9c9a922ad13883891013ca6b",
+      "bytes": 1970837
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/civic/assembly.glb": {
+      "sha256": "60dba878dd306d86519bd67644a204b896e28ffdba08fc07c7a618b497bbb21b",
+      "bytes": 7014496
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/ramp-with-landing/assembly.glb": {
+      "sha256": "05f532fe64df4074e92146ec858f39b2e3672a7e5a9bf9619f25ba58c42d80cb",
+      "bytes": 3932984
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/residential/assembly.glb": {
+      "sha256": "7b76f5b2a7e4207a35f27b461608fec0d1a4071c0a0f7e5825261bf83222ea12",
+      "bytes": 7038932
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/stairs-with-landing/assembly.glb": {
+      "sha256": "14788251da1c65c670fcc9b64be97784f67517f9b51e8372d119a82c6a477c6f",
+      "bytes": 5198940
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/work/assembly.glb": {
+      "sha256": "aab2a3be1a0e70b99a0dd1545ca34ae0a0661b7729e2614d73f667de6ffe9861",
+      "bytes": 5869408
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod1.glb": {
+      "sha256": "e83f5cd9bce95598cc8f612c51fbe42312bf16b61aaac5580668cdfe0493471a",
+      "bytes": 3443416
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod2.glb": {
+      "sha256": "a54e41e0ac998071104bbf75f882b7ad868a473706eb59dbc8364159a7530da5",
+      "bytes": 3218060
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod1.glb": {
+      "sha256": "c00a4d199809d46a87818277e3febcae5e120453c46e059ac55778daaa26696e",
+      "bytes": 2334296
+    },
+    "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod2.glb": {
+      "sha256": "3c3432a08b036742bda718213c4973adabd41684cd0b5a8ee3f6b140be24bb4a",
+      "bytes": 2157952
+    }
+  },
+  "inputsUnchanged": true,
+  "commands": [
+    {
+      "label": "glb",
+      "command": [
+        "node",
+        "/tmp/aetherion-daybreak-independent-checks/r05/check-glb.mjs",
+        "/tmp/aetherion-daybreak-independent-checks/r05/changed-inputs.json",
+        "/tmp/aetherion-daybreak-independent-checks/r05/changed-glb.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.8,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-glb.log"
+    },
+    {
+      "label": "blender",
+      "command": [
+        "blender",
+        "-b",
+        "-t",
+        "2",
+        "--python",
+        "/tmp/aetherion-daybreak-independent-checks/r05/check-blender.py",
+        "--",
+        "/tmp/aetherion-daybreak-independent-checks/r05/changed-inputs.json",
+        "/tmp/aetherion-daybreak-independent-checks/r05/changed-blender.json"
+      ],
+      "returncode": 0,
+      "seconds": 4.109,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-blender.log"
+    },
+    {
+      "label": "godot-0",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/civic/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.263,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-0.log"
+    },
+    {
+      "label": "godot-1",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/ramp-with-landing/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.253,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-1.log"
+    },
+    {
+      "label": "godot-2",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/residential/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.249,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-2.log"
+    },
+    {
+      "label": "godot-3",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/stairs-with-landing/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.248,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-3.log"
+    },
+    {
+      "label": "godot-4",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/work/assembly.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.243,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-4.log"
+    },
+    {
+      "label": "godot-5",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod1.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.247,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-5.log"
+    },
+    {
+      "label": "godot-6",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod2.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.25,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-6.log"
+    },
+    {
+      "label": "godot-7",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod1.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.252,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-7.log"
+    },
+    {
+      "label": "godot-8",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-daybreak-independent-checks/r05",
+        "--script",
+        "/tmp/aetherion-daybreak-independent-checks/r05/godot_import.gd",
+        "--",
+        "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod2.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.256,
+      "log": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-8.log"
+    }
+  ],
+  "godot": [
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/civic/assembly.glb",
+      "sha256": "60dba878dd306d86519bd67644a204b896e28ffdba08fc07c7a618b497bbb21b",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-0.log",
+      "result": {
+        "animations": 0,
+        "materials": 26,
+        "meshes": 409,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/ramp-with-landing/assembly.glb",
+      "sha256": "05f532fe64df4074e92146ec858f39b2e3672a7e5a9bf9619f25ba58c42d80cb",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-1.log",
+      "result": {
+        "animations": 0,
+        "materials": 6,
+        "meshes": 31,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/residential/assembly.glb",
+      "sha256": "7b76f5b2a7e4207a35f27b461608fec0d1a4071c0a0f7e5825261bf83222ea12",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-2.log",
+      "result": {
+        "animations": 0,
+        "materials": 29,
+        "meshes": 410,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/stairs-with-landing/assembly.glb",
+      "sha256": "14788251da1c65c670fcc9b64be97784f67517f9b51e8372d119a82c6a477c6f",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-3.log",
+      "result": {
+        "animations": 0,
+        "materials": 7,
+        "meshes": 56,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/fixtures/work/assembly.glb",
+      "sha256": "aab2a3be1a0e70b99a0dd1545ca34ae0a0661b7729e2614d73f667de6ffe9861",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-4.log",
+      "result": {
+        "animations": 1,
+        "materials": 30,
+        "meshes": 355,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod1.glb",
+      "sha256": "e83f5cd9bce95598cc8f612c51fbe42312bf16b61aaac5580668cdfe0493471a",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-5.log",
+      "result": {
+        "animations": 0,
+        "materials": 3,
+        "meshes": 84,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/public-colonnade/lod2.glb",
+      "sha256": "a54e41e0ac998071104bbf75f882b7ad868a473706eb59dbc8364159a7530da5",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-6.log",
+      "result": {
+        "animations": 0,
+        "materials": 3,
+        "meshes": 52,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod1.glb",
+      "sha256": "c00a4d199809d46a87818277e3febcae5e120453c46e059ac55778daaa26696e",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-7.log",
+      "result": {
+        "animations": 0,
+        "materials": 2,
+        "meshes": 67,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/workspace/scratch/aetherion-daybreak-architecture-r05/modules/shade-canopy/lod2.glb",
+      "sha256": "3c3432a08b036742bda718213c4973adabd41684cd0b5a8ee3f6b140be24bb4a",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-daybreak-independent-checks/r05/changed-godot-8.log",
+      "result": {
+        "animations": 0,
+        "materials": 2,
+        "meshes": 43,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    }
+  ],
+  "allCommandsPassed": true,
+  "allGodotImportsPassed": true
+}

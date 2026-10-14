@@ -1,0 +1,39 @@
+
+> aetherion-foundation@0.1.0 build:abilities
+> node tools/run-abilities.mjs build
+
+vite v8.1.5 building client environment for production...
+[2Ktransforming...✓ 609 modules transformed.
+
+(!) outDir /tmp/aetherion-production-workingtree/dist/abilities is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+
+rendering chunks...
+computing gzip size...
+dist/abilities/index.html                                        3.10 kB │ gzip:   1.03 kB
+dist/abilities/assets/index-ZgdkeCzq.css                        15.49 kB │ gzip:   3.98 kB
+dist/abilities/assets/createRuntime-DG6IFlyA.js                  2.34 kB │ gzip:   1.19 kB │ map:    10.80 kB
+dist/abilities/assets/LinearFissuresIntegration-CxmyaUon.js     10.85 kB │ gzip:   4.26 kB │ map:    34.92 kB
+dist/abilities/assets/color-BqTA_cbY.js                         25.67 kB │ gzip:   9.66 kB │ map:   140.22 kB
+dist/abilities/assets/lil-gui.esm-BsdZdNnU.js                   30.66 kB │ gzip:   7.99 kB │ map:    83.34 kB
+dist/abilities/assets/Layers-DwhP4g8y.js                        41.07 kB │ gzip:  14.54 kB │ map:   194.52 kB
+dist/abilities/assets/HDRLoader-BE51Pk0J.js                    100.33 kB │ gzip:  30.94 kB │ map:   549.02 kB
+dist/abilities/assets/linear-B5f6xp9w.js                       327.75 kB │ gzip:  91.18 kB │ map:   809.31 kB
+dist/abilities/assets/three.core-BKPROtWL.js                   373.95 kB │ gzip:  99.98 kB │ map: 2,030.66 kB
+dist/abilities/assets/linear-ext-CYxK7BDu.js                   534.15 kB │ gzip: 142.69 kB │ map: 1,431.56 kB
+dist/abilities/assets/casting-B52FEpju.js                      618.85 kB │ gzip: 185.48 kB │ map: 1,720.07 kB
+dist/abilities/assets/handcast-Bt2xP3Rm.js                     712.27 kB │ gzip: 194.79 kB │ map: 1,804.59 kB
+dist/abilities/assets/linear-extended-DZInH1pZ.js              926.05 kB │ gzip: 262.56 kB │ map: 2,444.56 kB
+dist/abilities/assets/index-ahefslPA.js                      3,445.49 kB │ gzip: 980.18 kB │ map: 9,181.68 kB
+
+✓ built in 3.00s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 2000 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

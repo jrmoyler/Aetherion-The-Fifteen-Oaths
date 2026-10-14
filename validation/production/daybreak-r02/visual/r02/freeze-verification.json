@@ -1,0 +1,834 @@
+[
+  {
+    "path": "GEOMETRY_FREEZE.json",
+    "matches": true
+  },
+  {
+    "path": "README.md",
+    "matches": true
+  },
+  {
+    "path": "all-glb-request.json",
+    "matches": true
+  },
+  {
+    "path": "all-glb-validation-validator-details.json",
+    "matches": true
+  },
+  {
+    "path": "all-glb-validation.json",
+    "matches": true
+  },
+  {
+    "path": "all-glb-validation.log",
+    "matches": true
+  },
+  {
+    "path": "all-godot-validation.json",
+    "matches": true
+  },
+  {
+    "path": "all-godot-validation.log",
+    "matches": true
+  },
+  {
+    "path": "author.py",
+    "matches": true
+  },
+  {
+    "path": "check-interfaces.py",
+    "matches": true
+  },
+  {
+    "path": "check-source.py",
+    "matches": true
+  },
+  {
+    "path": "check-stair-revision.py",
+    "matches": true
+  },
+  {
+    "path": "compress-sources.py",
+    "matches": true
+  },
+  {
+    "path": "engine-checks/check-glb.mjs",
+    "matches": true
+  },
+  {
+    "path": "engine-checks/import.gd",
+    "matches": true
+  },
+  {
+    "path": "engine-checks/project.godot",
+    "matches": true
+  },
+  {
+    "path": "finalize-metadata.py",
+    "matches": true
+  },
+  {
+    "path": "fixture-run.json",
+    "matches": true
+  },
+  {
+    "path": "fixtures/civic/assembly.glb",
+    "matches": true
+  },
+  {
+    "path": "fixtures/civic/fixture.json",
+    "matches": true
+  },
+  {
+    "path": "fixtures/civic/hero.png",
+    "matches": true
+  },
+  {
+    "path": "fixtures/civic/source.blend",
+    "matches": true
+  },
+  {
+    "path": "fixtures/ramp-with-landing/assembly.glb",
+    "matches": true
+  },
+  {
+    "path": "fixtures/ramp-with-landing/fixture.json",
+    "matches": true
+  },
+  {
+    "path": "fixtures/ramp-with-landing/hero.png",
+    "matches": true
+  },
+  {
+    "path": "fixtures/ramp-with-landing/source.blend",
+    "matches": true
+  },
+  {
+    "path": "fixtures/residential/assembly.glb",
+    "matches": true
+  },
+  {
+    "path": "fixtures/residential/fixture.json",
+    "matches": true
+  },
+  {
+    "path": "fixtures/residential/hero.png",
+    "matches": true
+  },
+  {
+    "path": "fixtures/residential/source.blend",
+    "matches": true
+  },
+  {
+    "path": "fixtures/stairs-with-landing/assembly.glb",
+    "matches": true
+  },
+  {
+    "path": "fixtures/stairs-with-landing/fixture.json",
+    "matches": true
+  },
+  {
+    "path": "fixtures/stairs-with-landing/hero.png",
+    "matches": true
+  },
+  {
+    "path": "fixtures/stairs-with-landing/source.blend",
+    "matches": true
+  },
+  {
+    "path": "fixtures/work/assembly.glb",
+    "matches": true
+  },
+  {
+    "path": "fixtures/work/fixture.json",
+    "matches": true
+  },
+  {
+    "path": "fixtures/work/hero.png",
+    "matches": true
+  },
+  {
+    "path": "fixtures/work/source.blend",
+    "matches": true
+  },
+  {
+    "path": "fixtures.py",
+    "matches": true
+  },
+  {
+    "path": "index.html",
+    "matches": true
+  },
+  {
+    "path": "interface-validation.json",
+    "matches": true
+  },
+  {
+    "path": "interface-validation.log",
+    "matches": true
+  },
+  {
+    "path": "lineage/r01-FREEZE.json",
+    "matches": true
+  },
+  {
+    "path": "lineage/r01-independent-stair-profile.json",
+    "matches": true
+  },
+  {
+    "path": "lineage/r01-independent-visual-review.json",
+    "matches": true
+  },
+  {
+    "path": "lineage/r01-independent-visual-review.md",
+    "matches": true
+  },
+  {
+    "path": "lineage/r02-initial-FREEZE.json",
+    "matches": true
+  },
+  {
+    "path": "lineage/r02-initial-GEOMETRY_FREEZE.json",
+    "matches": true
+  },
+  {
+    "path": "manifest.json",
+    "matches": true
+  },
+  {
+    "path": "module-contact-sheet.png",
+    "matches": true
+  },
+  {
+    "path": "modules/clinic-threshold/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/clinic-threshold/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/clinic-threshold/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/clinic-threshold/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/clinic-threshold/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/clinic-threshold/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/clinic-threshold/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/daylight-baffle/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/daylight-baffle/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/daylight-baffle/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/daylight-baffle/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/daylight-baffle/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/daylight-baffle/open.png",
+    "matches": true
+  },
+  {
+    "path": "modules/daylight-baffle/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/door-frame/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/door-frame/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/door-frame/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/door-frame/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/door-frame/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/door-frame/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/door-frame/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/floor-bay/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/floor-bay/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/floor-bay/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/floor-bay/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/floor-bay/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/floor-bay/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/floor-bay/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/foundation-plinth/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/foundation-plinth/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/foundation-plinth/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/foundation-plinth/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/foundation-plinth/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/foundation-plinth/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/foundation-plinth/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/inside-corner/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/inside-corner/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/inside-corner/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/inside-corner/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/inside-corner/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/inside-corner/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/inside-corner/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/outside-corner/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/outside-corner/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/outside-corner/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/outside-corner/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/outside-corner/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/outside-corner/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/outside-corner/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/parapet/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/parapet/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/parapet/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/parapet/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/parapet/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/parapet/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/parapet/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/public-colonnade/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/public-colonnade/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/public-colonnade/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/public-colonnade/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/public-colonnade/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/public-colonnade/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/public-colonnade/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/quiet-portico/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/quiet-portico/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/quiet-portico/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/quiet-portico/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/quiet-portico/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/quiet-portico/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/quiet-portico/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/ramp-run/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/ramp-run/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/ramp-run/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/ramp-run/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/ramp-run/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/ramp-run/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/ramp-run/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/roof-bay/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/roof-bay/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/roof-bay/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/roof-bay/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/roof-bay/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/roof-bay/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/roof-bay/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/service-chase/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/service-chase/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/service-chase/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/service-chase/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/service-chase/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/service-chase/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/service-chase/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/shade-canopy/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/shade-canopy/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/shade-canopy/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/shade-canopy/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/shade-canopy/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/shade-canopy/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/solid-wall/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/solid-wall/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/solid-wall/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/solid-wall/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/solid-wall/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/solid-wall/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/solid-wall/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/stair-flight/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/stair-flight/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/stair-flight/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/stair-flight/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/stair-flight/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/stair-flight/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/stair-flight/source.blend",
+    "matches": true
+  },
+  {
+    "path": "modules/window-wall/collision.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/window-wall/hero.png",
+    "matches": true
+  },
+  {
+    "path": "modules/window-wall/lod0.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/window-wall/lod1.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/window-wall/lod2.glb",
+    "matches": true
+  },
+  {
+    "path": "modules/window-wall/module.json",
+    "matches": true
+  },
+  {
+    "path": "modules/window-wall/source.blend",
+    "matches": true
+  },
+  {
+    "path": "motion-render.py",
+    "matches": true
+  },
+  {
+    "path": "package.py",
+    "matches": true
+  },
+  {
+    "path": "prepare.py",
+    "matches": true
+  },
+  {
+    "path": "references/daybreak-clinic-threshold-door-proposed-v01.png",
+    "matches": true
+  },
+  {
+    "path": "references/daybreak-daylight-baffle-proposed-v02.png",
+    "matches": true
+  },
+  {
+    "path": "references/daybreak-foundation-floor-proposed-v01.png",
+    "matches": true
+  },
+  {
+    "path": "references/daybreak-roof-canopy-proposed-v01.png",
+    "matches": true
+  },
+  {
+    "path": "references/daybreak-stair-ramp-proposed-v01.png",
+    "matches": true
+  },
+  {
+    "path": "references/daybreak-surface-trim-proposed-v01.png",
+    "matches": true
+  },
+  {
+    "path": "references/daybreak-wall-window-corner-proposed-v01.png",
+    "matches": true
+  },
+  {
+    "path": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+    "matches": true
+  },
+  {
+    "path": "references/reference-105-original.png",
+    "matches": true
+  },
+  {
+    "path": "source-kit-record.json",
+    "matches": true
+  },
+  {
+    "path": "source-validation.json",
+    "matches": true
+  },
+  {
+    "path": "source-validation.log",
+    "matches": true
+  },
+  {
+    "path": "stair-r02-author.log",
+    "matches": true
+  },
+  {
+    "path": "stair-r02-fixture.log",
+    "matches": true
+  },
+  {
+    "path": "stair-revision-validation.json",
+    "matches": true
+  },
+  {
+    "path": "stair-revision-validation.log",
+    "matches": true
+  },
+  {
+    "path": "textures/bronze_basecolor.png",
+    "matches": true
+  },
+  {
+    "path": "textures/bronze_metallic.png",
+    "matches": true
+  },
+  {
+    "path": "textures/bronze_normal.png",
+    "matches": true
+  },
+  {
+    "path": "textures/bronze_roughness.png",
+    "matches": true
+  },
+  {
+    "path": "textures/gripstone_basecolor.png",
+    "matches": true
+  },
+  {
+    "path": "textures/gripstone_metallic.png",
+    "matches": true
+  },
+  {
+    "path": "textures/gripstone_normal.png",
+    "matches": true
+  },
+  {
+    "path": "textures/gripstone_roughness.png",
+    "matches": true
+  },
+  {
+    "path": "textures/marble_basecolor.png",
+    "matches": true
+  },
+  {
+    "path": "textures/marble_metallic.png",
+    "matches": true
+  },
+  {
+    "path": "textures/marble_normal.png",
+    "matches": true
+  },
+  {
+    "path": "textures/marble_roughness.png",
+    "matches": true
+  },
+  {
+    "path": "textures/masonry_basecolor.png",
+    "matches": true
+  },
+  {
+    "path": "textures/masonry_metallic.png",
+    "matches": true
+  },
+  {
+    "path": "textures/masonry_normal.png",
+    "matches": true
+  },
+  {
+    "path": "textures/masonry_roughness.png",
+    "matches": true
+  },
+  {
+    "path": "textures/weave_basecolor.png",
+    "matches": true
+  },
+  {
+    "path": "textures/weave_metallic.png",
+    "matches": true
+  },
+  {
+    "path": "textures/weave_normal.png",
+    "matches": true
+  },
+  {
+    "path": "textures/weave_roughness.png",
+    "matches": true
+  },
+  {
+    "path": "work-list.json",
+    "matches": true
+  }
+]

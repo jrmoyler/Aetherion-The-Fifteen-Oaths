@@ -1,0 +1,156 @@
+{
+  "scope": "Geometry/socket/proxy checks only; no structural safety, rigid-body gameplay or visual approval",
+  "checks": [
+    {
+      "check": "shade-canopy strictly reduced actual topology",
+      "passed": true,
+      "evidence": {
+        "lod0": 4210,
+        "lod1": 2722,
+        "lod2": 1362
+      }
+    },
+    {
+      "check": "Canopy bounded within proposed300mm envelope",
+      "passed": true,
+      "evidence": {
+        "height_m": 0.27249162644147873
+      }
+    },
+    {
+      "check": "public-colonnade strictly reduced actual topology",
+      "passed": true,
+      "evidence": {
+        "lod0": 6000,
+        "lod1": 3568,
+        "lod2": 1712
+      }
+    },
+    {
+      "check": "Pier surfaces conservatively covered by stepped movement proxies",
+      "passed": true,
+      "evidence": {
+        "vertices": 2112,
+        "uncovered_vertices": 0,
+        "examples": [],
+        "proxy_meshes": 12,
+        "scope": "Axis-aligned proxy coverage only, not physics or controller testing; curved overhead arches excluded"
+      }
+    },
+    {
+      "check": "civic four actual source sockets coincide and oppose",
+      "passed": true,
+      "evidence": [
+        {
+          "canopy": "SOCKET__canopy-seat-0.3-0.3",
+          "support": "SOCKET__pier-seat-0.3-0.3",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-0.3-3.7",
+          "support": "SOCKET__pier-seat-0.3-3.7",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-3.7-0.3",
+          "support": "SOCKET__pier-seat-3.7-0.3",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-3.7-3.7",
+          "support": "SOCKET__pier-seat-3.7-3.7",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        }
+      ]
+    },
+    {
+      "check": "civic displaced15mm attachment negative rejected",
+      "passed": true,
+      "evidence": {
+        "gap_m": 0.01500010512965212,
+        "in_memory_only": true
+      }
+    },
+    {
+      "check": "residential four actual source sockets coincide and oppose",
+      "passed": true,
+      "evidence": [
+        {
+          "canopy": "SOCKET__canopy-seat-0.3-0.3",
+          "support": "SOCKET__pier-seat-0.3-0.3",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-0.3-3.7",
+          "support": "SOCKET__pier-seat-0.3-3.7",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-3.7-0.3",
+          "support": "SOCKET__pier-seat-3.7-0.3",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-3.7-3.7",
+          "support": "SOCKET__pier-seat-3.7-3.7",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        }
+      ]
+    },
+    {
+      "check": "residential displaced15mm attachment negative rejected",
+      "passed": true,
+      "evidence": {
+        "gap_m": 0.01500010512965212,
+        "in_memory_only": true
+      }
+    },
+    {
+      "check": "work four actual source sockets coincide and oppose",
+      "passed": true,
+      "evidence": [
+        {
+          "canopy": "SOCKET__canopy-seat-0.3-0.3",
+          "support": "SOCKET__pier-seat-0.3-0.3",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-0.3-3.7",
+          "support": "SOCKET__pier-seat-0.3-3.7",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-3.7-0.3",
+          "support": "SOCKET__pier-seat-3.7-0.3",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        },
+        {
+          "canopy": "SOCKET__canopy-seat-3.7-3.7",
+          "support": "SOCKET__pier-seat-3.7-3.7",
+          "gap_m": 0.0,
+          "normal_dot": -1
+        }
+      ]
+    },
+    {
+      "check": "work displaced15mm attachment negative rejected",
+      "passed": true,
+      "evidence": {
+        "gap_m": 0.01500010512965212,
+        "in_memory_only": true
+      }
+    }
+  ],
+  "failures": 0
+}

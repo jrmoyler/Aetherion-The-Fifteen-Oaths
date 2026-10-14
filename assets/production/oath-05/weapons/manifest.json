@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o05-e-weapons-family",
+  "referenceIds": [
+    "reference-053"
+  ],
+  "assets": [
+    {
+      "id": "prod-o05-amethyst-short-blade",
+      "name": "Amethyst Short Blade",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade.blend",
+        "glb": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade.glb",
+        "lod1": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade_lod1.glb",
+        "lod2": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade_lod2.glb",
+        "collision": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade_collision.glb",
+        "textures": [
+          "assets/production/oath-05/weapons/taupe_stone_basecolor.png",
+          "assets/production/oath-05/weapons/taupe_stone_roughness.png",
+          "assets/production/oath-05/weapons/taupe_stone_metallic.png",
+          "assets/production/oath-05/weapons/taupe_stone_normal.png",
+          "assets/production/oath-05/weapons/amethyst_basecolor.png",
+          "assets/production/oath-05/weapons/amethyst_roughness.png",
+          "assets/production/oath-05/weapons/amethyst_metallic.png",
+          "assets/production/oath-05/weapons/amethyst_normal.png",
+          "assets/production/oath-05/weapons/aged_bronze_basecolor.png",
+          "assets/production/oath-05/weapons/aged_bronze_roughness.png",
+          "assets/production/oath-05/weapons/aged_bronze_metallic.png",
+          "assets/production/oath-05/weapons/aged_bronze_normal.png",
+          "assets/production/oath-05/weapons/dark_leather_basecolor.png",
+          "assets/production/oath-05/weapons/dark_leather_roughness.png",
+          "assets/production/oath-05/weapons/dark_leather_metallic.png",
+          "assets/production/oath-05/weapons/dark_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-05/weapons/amethyst-short-blade/front.png",
+          "assets/production/oath-05/weapons/amethyst-short-blade/side.png",
+          "assets/production/oath-05/weapons/amethyst-short-blade/hero.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1380,
+        "lod1": 714,
+        "lod2": 344,
+        "collision": 148
+      },
+      "dimensionsMeters": [
+        0.296,
+        0.172,
+        1.006
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner art review against reference-053",
+        "Character grip/stow fit and carry poses",
+        "Damaged geometry state",
+        "Engine import and runtime material/socket tests",
+        "LOD silhouette and collision gameplay approval",
+        "Sound and VFX response integration"
+      ],
+      "archetypeId": "prod-o05-amethyst-short-blade"
+    },
+    {
+      "id": "prod-o05-amethyst-seer-mace",
+      "name": "Amethyst Seer Mace",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace.blend",
+        "glb": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace.glb",
+        "lod1": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace_lod1.glb",
+        "lod2": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace_lod2.glb",
+        "collision": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace_collision.glb",
+        "textures": [
+          "assets/production/oath-05/weapons/taupe_stone_basecolor.png",
+          "assets/production/oath-05/weapons/taupe_stone_roughness.png",
+          "assets/production/oath-05/weapons/taupe_stone_metallic.png",
+          "assets/production/oath-05/weapons/taupe_stone_normal.png",
+          "assets/production/oath-05/weapons/amethyst_basecolor.png",
+          "assets/production/oath-05/weapons/amethyst_roughness.png",
+          "assets/production/oath-05/weapons/amethyst_metallic.png",
+          "assets/production/oath-05/weapons/amethyst_normal.png",
+          "assets/production/oath-05/weapons/aged_bronze_basecolor.png",
+          "assets/production/oath-05/weapons/aged_bronze_roughness.png",
+          "assets/production/oath-05/weapons/aged_bronze_metallic.png",
+          "assets/production/oath-05/weapons/aged_bronze_normal.png",
+          "assets/production/oath-05/weapons/dark_leather_basecolor.png",
+          "assets/production/oath-05/weapons/dark_leather_roughness.png",
+          "assets/production/oath-05/weapons/dark_leather_metallic.png",
+          "assets/production/oath-05/weapons/dark_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-05/weapons/amethyst-seer-mace/front.png",
+          "assets/production/oath-05/weapons/amethyst-seer-mace/side.png",
+          "assets/production/oath-05/weapons/amethyst-seer-mace/hero.png"
+        ]
+      },
+      "triangles": {
+        "glb": 2272,
+        "lod1": 1182,
+        "lod2": 546,
+        "collision": 182
+      },
+      "dimensionsMeters": [
+        0.261,
+        0.2629,
+        1.03
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner art review against reference-053",
+        "Character grip/stow fit and carry poses",
+        "Damaged geometry state",
+        "Engine import and runtime material/socket tests",
+        "LOD silhouette and collision gameplay approval",
+        "Sound and VFX response integration"
+      ],
+      "archetypeId": "prod-o05-amethyst-seer-mace"
+    }
+  ]
+}

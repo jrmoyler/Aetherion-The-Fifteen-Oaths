@@ -1,0 +1,65 @@
+{
+  "status": "NOT_EXACT_FURTHER_LIKENESS_REPAIR_REQUIRED",
+  "candidate": "Kiln ninja V10 final pass2 focused face contour",
+  "scope": "Actual original090, final front/profile and V9/V10 comparisons inspected; prior V8b/V9 eye comparison reviewed separately. No candidate edits or engine revalidation by this pixel reviewer.",
+  "frozenManifestSha256": "5b96a82570bd80af24120396db2c090718357239f60722a69eac240da068c2d8",
+  "frozenInputs": 26,
+  "frozenInputMismatches": 0,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "bytes": 2129998,
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+    },
+    {
+      "path": "/tmp/ninja-v10/front-comparison.png",
+      "bytes": 721348,
+      "sha256": "63f1c05f779721eae999c9ade3a9003db96b73192600c0bdb0c19f976e862712"
+    },
+    {
+      "path": "/tmp/ninja-v10/profile-comparison.png",
+      "bytes": 727688,
+      "sha256": "375b8717cbca843863ddbfaec0e233a7ab58fbe70549d8a2a9bb050bcc3db32a"
+    },
+    {
+      "path": "/tmp/ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png",
+      "bytes": 785803,
+      "sha256": "867c4434a83bd9a33c047247d267fe173e98ec47f6889982efa19c62cebb6b34"
+    },
+    {
+      "path": "/tmp/ninja-v10/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+      "bytes": 781491,
+      "sha256": "a0e525033ba8d685634895192a4c3b763fc35349dd9d2156f63e5d1bbb042c48"
+    }
+  ],
+  "improvements": [
+    "Profile nose is less sharply projecting than the V9 wedge.",
+    "Lower-face profile is more continuous with reduced lip projection.",
+    "V9 improved profile eye occlusion remains visible."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Nose/lips/chin likeness",
+      "finding": "Nose tip and ala remain soft and poorly differentiated; front nostril marks read as separate dark patches. Lip volume, mouth corners and chin plane do not match the source, and the lower-face outline remains generic.",
+      "nextRepair": "Fit connected nasal tip/ala/philtrum and lip-corner/chin planes to both views; do not treat reduced projection alone as source likeness."
+    },
+    {
+      "priority": 1,
+      "area": "Orbital construction",
+      "finding": "Round eyes in narrow cuts, pinched canthi, weak lid-to-cheek transition and a small bright profile sliver remain.",
+      "nextRepair": "Close canthal gaps and blend continuous lids into the orbit while preserving the reduced side exposure."
+    },
+    {
+      "priority": 1,
+      "area": "Hair and ear",
+      "finding": "Repeated bent-strip fringe, exposed smooth cap, sparse pointed nape/temple strips and a polygonal ring-like ear remain conspicuous against the source.",
+      "nextRepair": "Repair hair guide mass/root coverage and ear helix/antihelix/concha anatomy separately; these are unchanged unresolved areas."
+    }
+  ],
+  "decision": "A bounded connected-face contour change, still not an exact match or accepted character. Publish only as a two-view diagnostic with V9 lineage; no full nineteen-view or production-completeness claim.",
+  "limitations": [
+    "Comparison cameras/lighting are not calibrated; no exact facial proportion measurement inferred.",
+    "Independent engine reports are separate CPU/headless evidence, not visual approval."
+  ]
+}

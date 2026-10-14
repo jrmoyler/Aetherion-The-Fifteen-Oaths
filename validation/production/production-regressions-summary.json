@@ -1,0 +1,295 @@
+{
+  "generatedAt": "2026-10-13T20:06:53.282680+00:00",
+  "scope": "Isolated working-tree copy based on ef349c3804b2e29aca96a396eaa2fd6aefb40229 plus uncommitted production changes; not final remote-head verification. Captured before two later candidate asset corrections; use separate final asset validation.",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "python": "3.12.14",
+    "jsonschema": "4.26.0"
+  },
+  "installs": "Fresh locked npm ci runtime and sandbox succeeded in isolated copy",
+  "sourceSnapshot": {
+    "files": 1896,
+    "bytes": 331989108,
+    "hashMismatches": []
+  },
+  "tests": {
+    "root": {
+      "pass": 223,
+      "fail": 0
+    },
+    "inheritedSource": {
+      "pass": 51,
+      "fail": 0
+    },
+    "canon": {
+      "PASS": 197,
+      "SKIPPED": 1,
+      "HUMAN_REVIEW": 2
+    },
+    "canonFixtures": {
+      "pass": 7
+    },
+    "systems": {
+      "pass": 31,
+      "fail": 0
+    },
+    "narrative": {
+      "pass": 49,
+      "fail": 0,
+      "skipped": 5
+    },
+    "abilityBuild": "PASS; bundle size warning retained",
+    "buildArtifacts": {
+      "originalPublicFilesByteVerified": 24,
+      "cataloguedCastablesPresent": 100
+    }
+  },
+  "inputCodeAndLockfiles": [
+    {
+      "path": "app/abilities/index.html",
+      "sha256": "82ddbf214b584e8591fc4ee3ae1e6effcab8254283c1275c15033132127ff834"
+    },
+    {
+      "path": "app/abilities/main.js",
+      "sha256": "40ee1fe86686dcba6bd3fbe0cb47f0898e9acb040b802f3aa3c150586b3c441c"
+    },
+    {
+      "path": "app/abilities/production-equipment.js",
+      "sha256": "83e8538dd1eee0ce40ecdffd673aec679d44d84a5af75a7b0f360733e89bb34c"
+    },
+    {
+      "path": "app/abilities/vite.config.mjs",
+      "sha256": "5256fb78cbb7d94ffba8d51e2732e60330f9e31fb274f69587283d7758cb4233"
+    },
+    {
+      "path": "src/production/SOURCE_RIG_INSPECTION.json",
+      "sha256": "86a0c20ab4e83fdb02c938c2fc4d81f4cfccecbc88513af3a44666d710409011"
+    },
+    {
+      "path": "src/production/catalog.js",
+      "sha256": "ca0257c8a0520b3940b963a52caacaef4382600349167e0ccb455f5ea6c80fc7"
+    },
+    {
+      "path": "src/production/equipment.js",
+      "sha256": "f7fb1a324b5f01ce7e3f5567a7a6d8b505f002012d0971a30f61800dd9ee9f7f"
+    },
+    {
+      "path": "src/production/vite-assets.mjs",
+      "sha256": "4b6d2cc6cce8ed284a3c4d0ef59b79e24cff27b3df7dd7536aac9895be29ca58"
+    },
+    {
+      "path": "tests/ability-adapter.test.mjs",
+      "sha256": "11f7fe99fac91a1c34a5cc58b367ae43798d4f427d8894c34303b851ff9ec4f5"
+    },
+    {
+      "path": "tests/adapter-meteor-runtime.test.mjs",
+      "sha256": "922d5de9a952e1a50daeda61be192d43bc3b9f9979079ce6fbf4aa5679d94479"
+    },
+    {
+      "path": "tests/linear-fissures-integration.test.mjs",
+      "sha256": "a73e7f660b4a974f68a5307729d84e301b1d0a083b350ee6b7e4d11e0517b0df"
+    },
+    {
+      "path": "tests/migration-integrity.test.mjs",
+      "sha256": "470bbf4d89ae665d93bd744e701154891d90cfe666bbbb33d3efb75b3d4b57bb"
+    },
+    {
+      "path": "tests/production/test_import_phase_ii.py",
+      "sha256": "fc9dbeee2afecab1e84739547ac3de0c49a07a07bca39551423e7f5ccb0d2b14"
+    },
+    {
+      "path": "tests/production-equipment.test.mjs",
+      "sha256": "ada1e5c09ccedaef53220ad66fcc083d50b17e38a16edcf2ecac670057eed12f"
+    },
+    {
+      "path": "tests/runtime-audit/check-wrapper-dev.mjs",
+      "sha256": "4acc6b5c6a5c1c7032bc6c38f21d6e82028dc307e7c9a5afd05a6943a6b135fa"
+    },
+    {
+      "path": "tests/runtime-audit/cpu-lifecycle.mjs",
+      "sha256": "dfd9311f6b15f5e2ff8008bafe43f5faf87618893c9fcc3bf494178eda3d8e01"
+    },
+    {
+      "path": "tests/runtime-audit/decode-stone-textures.py",
+      "sha256": "6f1362f0c77814a7de4b5978e316bc4e767a14c2ce80b9aaef55eae113560d81"
+    },
+    {
+      "path": "tests/runtime-audit/install-stone-texture-fixture.mjs",
+      "sha256": "061d58b654543474ea87c6e73c34dc332a7f95e17c19ed687103dabb8321a2f6"
+    },
+    {
+      "path": "tests/runtime-audit/reproduce-meteor-defect.mjs",
+      "sha256": "c4249a54b9f05b831e0c7334228326e83346112e33c9d54688ee14f3f4409874"
+    },
+    {
+      "path": "tests/runtime-audit/static-references.py",
+      "sha256": "5844bcdb4741fe42cfbe7d50d44d14838549a7faf93a6f56e31f0e4d1ef6b4dd"
+    },
+    {
+      "path": "tests/runtime-audit/verify-wrapper-build.mjs",
+      "sha256": "f919d90d1d2516e094870659f40df4795d704304e8e5de656e04b81cd5adc1e0"
+    },
+    {
+      "path": "tests/wrapper-entry.test.mjs",
+      "sha256": "7bf6995e4da57a063f109d58d60c33dffe57c7707efad537cce73201a295abae"
+    },
+    {
+      "path": "tools/generate-migration.py",
+      "sha256": "1e903c38d529c2973d67ade75c7c65bb00b2dd7a5cc85978337398b63e13ba10"
+    },
+    {
+      "path": "tools/production/audit-glb.mjs",
+      "sha256": "b73eeae71b17473e328d1c41fdcc13c1b4f94cd9473ec8fb033bd0976c621666"
+    },
+    {
+      "path": "tools/production/audit-glb.test.mjs",
+      "sha256": "9b14eb1bd25c239920b8e97fe2625aa9b0b813e4f8222f9e6e7815462bf43459"
+    },
+    {
+      "path": "tools/production/authoring/bitterglass_weapons.py",
+      "sha256": "a424f0faa11738d9e309c5450543a9c392f2bb5cb2c6920d16b6ca3d3b8336dc"
+    },
+    {
+      "path": "tools/production/authoring/chronal_weapons.py",
+      "sha256": "b7ab6feeae07d90be4acce3c0ebc6fed9d2ab122eb431ed16c5ef622eb3f2d84"
+    },
+    {
+      "path": "tools/production/authoring/cosmic_weapons.py",
+      "sha256": "5db05e5b380d1e780981cfcdd862acc56500bf54ad165bb8493916025714d0af"
+    },
+    {
+      "path": "tools/production/authoring/daybreak_weapons.py",
+      "sha256": "f7a598945abe06cede6168a896ba3e221a4832397941054be45f91b0d820af03"
+    },
+    {
+      "path": "tools/production/authoring/fault_weapons.py",
+      "sha256": "c8f63e3bbd56a88d63f0cfab347bc7f191be3dc83d96fd9d2e77f76fea830b73"
+    },
+    {
+      "path": "tools/production/authoring/folded_theatre_weapons.py",
+      "sha256": "d5e576c27e292a0fa321691ed96031f9799fa9d527dbf192cf06804cf2aff46f"
+    },
+    {
+      "path": "tools/production/authoring/graft_weapons.py",
+      "sha256": "74f90bad9168c284eb6ee38ce38d9810b5bb282693fa1c1a08978518060ba059"
+    },
+    {
+      "path": "tools/production/authoring/impulse_weapons.py",
+      "sha256": "3848623852e2c096c1690e9b3afd08748cec4165b38f5e86b1d0b47077c300f5"
+    },
+    {
+      "path": "tools/production/authoring/kiln_ninja.py",
+      "sha256": "2d671cdd5ef37f6a743ac138dcf9a721bfea3c92db037b98009691a728813f6a"
+    },
+    {
+      "path": "tools/production/authoring/kiln_weapons.py",
+      "sha256": "7d2439c6cb35005d58ce25119c9cf0264dc239c17f038d1af29748c498bc5b4e"
+    },
+    {
+      "path": "tools/production/authoring/missing_court_weapons.py",
+      "sha256": "59955aad7407fc03d63c45f928bf18152f703403faabf5dc52327cd8c5e2bf1a"
+    },
+    {
+      "path": "tools/production/authoring/reed_weapons.py",
+      "sha256": "3d82db66bd520cf4180ea60a12857d934bfebba18b49db1abe513447cc91718f"
+    },
+    {
+      "path": "tools/production/authoring/rime_weapons.py",
+      "sha256": "d7d91bd11198721643933f0aee6ecc65210ca648c7231dd5705520c25a379916"
+    },
+    {
+      "path": "tools/production/authoring/sanguine_weapons.py",
+      "sha256": "3249f41d3b4471844903426e78b21765f56f49dbcd642be267cfe1c9c6ab4cb8"
+    },
+    {
+      "path": "tools/production/authoring/storm_weapons.py",
+      "sha256": "38003fee80a9236cabbdac134414ce91b87d46b04bd5859ddb1864f886dd6c53"
+    },
+    {
+      "path": "tools/production/authoring/tidal_weapons.py",
+      "sha256": "149d654b3b79b63c76196f271c34ef6560397731e0d77f621f09060213dfc6ee"
+    },
+    {
+      "path": "tools/production/delivery_inventory.py",
+      "sha256": "a51b58166df9895ff8acb6db8d69a013069a47574b3b738b34181b633f52e8d6"
+    },
+    {
+      "path": "tools/production/engine-probes/blender_import.py",
+      "sha256": "d4bb616c8ff799e3b8111d24237708e37e82b857206ccf7bc54150ff2f9e0170"
+    },
+    {
+      "path": "tools/production/engine-probes/run.py",
+      "sha256": "19a1247f085451bf4844d9fc180e5d6fa529d93474a487366834bb0f2f422a4f"
+    },
+    {
+      "path": "tools/production/import_phase_ii.py",
+      "sha256": "859d2cf67b4d954a26781ac74d31bef4f85f6f08944e0dbf8e32679cb7f83773"
+    },
+    {
+      "path": "tools/production/inventory.py",
+      "sha256": "8784f7f91b27d9c32d8de0462a0925a5fa534ace5e705b29a2bf615ae6db2618"
+    },
+    {
+      "path": "tools/production/package-lock.json",
+      "sha256": "023650af599fe640ecfac2e789584b64e2d6d51f7d01a123d8b63e9e125f9984"
+    },
+    {
+      "path": "tools/production/package.json",
+      "sha256": "5d301d13a2789e0a0053804c6cc848c310aabd879282f6e763a740fdeaae8ef2"
+    },
+    {
+      "path": "tools/production/test_delivery_inventory.py",
+      "sha256": "bfab2eb90d5ba51269de573a65191a60c8dc2166e2064f801bce64aa591c2c9a"
+    },
+    {
+      "path": "tools/production/test_inventory.py",
+      "sha256": "e0d99cea787d87325e71b8d39ab07f8e1f1cc63d1751a18710734b14c7fdd018"
+    },
+    {
+      "path": "tools/production/validate-deliverables.mjs",
+      "sha256": "2620936dae1388429459a42d5d431ee0b151be744ce2a69bac66a7d69a22be28"
+    },
+    {
+      "path": "tools/production/validate-deliverables.test.mjs",
+      "sha256": "35abc2256440700e9fef858260ee494d5f33160ed2d406b7207deb645d9dcca5"
+    },
+    {
+      "path": "tools/run-abilities.mjs",
+      "sha256": "829ecba2826fa37567da3bdb77ad0da8fb245de928c93be76026163c2925e13b"
+    },
+    {
+      "path": "tools/validate-migration.mjs",
+      "sha256": "1c726193769905439e18044dde318a1596b1640da8f5b9f313e21927c54734f9"
+    },
+    {
+      "path": "package.json",
+      "sha256": "c912a55d5cb95e4583b5ab4a785f1404e444e6db63fda409eae8082be575dd24"
+    },
+    {
+      "path": "runtime/ability-matrix/package-lock.json",
+      "sha256": "92fa23b0372a7b9ac2b50189a0f12c56f2876173c05736a56d76fa8bd4941725"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/package-lock.json",
+      "sha256": "6777a25ab3ec086eac659d93c5f8f5cd52379172725689646d126f0669913ada"
+    }
+  ],
+  "limitations": [
+    "No GPU/browser rendered-gameplay/visual approval.",
+    "Equipment tests include actual FBX bones/GLB mesh and animation but test-only texture placeholders; no image decoding or art certification.",
+    "Working-tree results do not certify future changes or remote head."
+  ],
+  "commands": [
+    "npm ci --prefix runtime/ability-matrix",
+    "npm ci --prefix runtime/ability-matrix/packs/sandbox",
+    "npm test",
+    "npm run test:source",
+    "npm run build:abilities",
+    "node tests/runtime-audit/verify-wrapper-build.mjs",
+    "python3 AETHERION_CANON/19_VALIDATION/validate_canon.py --repo . --output <external report>",
+    "python3 -m unittest discover -s AETHERION_CANON/19_VALIDATION -p test_validator.py",
+    "python3 AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/validate_systems.py --repo-root . --output <external report>",
+    "python3 AETHERION_CANON/06_NARRATIVE/validate_world_narrative.py AETHERION_CANON"
+  ]
+}

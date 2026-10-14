@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/tmp/aetherion-fault-review-v12/fault_weapons.review.py", line 403, in <module>
+    sockets(top);bpy.context.view_layer.update();obs=list(scene.objects);uv_all(obs)
+                                                                         ~~~~~~^^^^^
+  File "/tmp/aetherion-fault-review-v12/fault_weapons.review.py", line 291, in uv_all
+    assert all(loop.tangent.length>.9 for loop in ob.data.loops),ob.name+' invalid tangent after final UV unwrap'
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Underlying_thin_shard_-1_0_0 invalid tangent after final UV unwrap
+Info: Applied modifier was not first, result may not be as expected
+Info: Applied modifier was not first, result may not be as expected
+FINAL_TRIANGLE_UV_REPAIR Underlying_thin_shard_-1_0_0 1
+Blender 4.3.2
+
+Blender quit

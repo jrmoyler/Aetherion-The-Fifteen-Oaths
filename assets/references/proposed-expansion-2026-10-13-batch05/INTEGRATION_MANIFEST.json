@@ -1,0 +1,1818 @@
+{
+  "schema_version": "1.0.0",
+  "batch_id": "reference-expansion-batch05",
+  "status": "FROZEN_REVIEWED_PROPOSALS_WITH_UNRESOLVED_QA",
+  "distinct_concepts": 10,
+  "image_versions": 21,
+  "repository": "jrmoyler/Aetherion-The-Fifteen-Oaths",
+  "source_commit": "04c33f6c4ff51f843eca490a3e3260e8311ed2b8",
+  "external_path_basis": "Repository-root paths with pinned URLs. Local file/prompt/QA paths are package-relative.",
+  "import_destination": "assets/references/proposed-expansion-2026-10-13-batch05/",
+  "source_groups": [
+    {
+      "source_manifest": "BATCH05_09_10_COURTLY_WILDLIFE_MANIFEST.json",
+      "source_sha256": "c8b13e5e833d495fb98c2aa001e241336b71667d5be647b716a97c936ac3611e"
+    },
+    {
+      "source_manifest": "BATCH05_FRONTIER_WILDLIFE_06_08_MANIFEST.json",
+      "source_sha256": "a755530352faf8cebb0147895f778a29b14d4676f66d0124d754f1fa06393c0b"
+    },
+    {
+      "source_manifest": "BRIEFS01_03_MANIFEST.json",
+      "source_sha256": "d8c412e53da53e13e59675ae6b6a198f021d875a50cb69f41781367ac5fead8d"
+    },
+    {
+      "source_manifest": "MANIFEST_briefs04-05.json",
+      "source_sha256": "a1d2ac9505b7904636328d5222ae7747bb76cf5634dbb1976313ba7a66537c95"
+    }
+  ],
+  "preservation": {
+    "original114_unchanged": true,
+    "prior_frozen_packages_unchanged": true,
+    "all_versions_preserved": true
+  },
+  "cumulative_generated_proposals": {
+    "concepts": 68,
+    "versions": 95,
+    "approved_coverage_added": 0
+  },
+  "coverage_warning": "One occupational outfit or natural species per listed canonical record; no complete family coverage or model acceptance. All preferred versions retain QA issues.",
+  "records": [
+    {
+      "concept_id": "batch05_09_o12_natural",
+      "canonical_id": "creature-o12-natural",
+      "baseline_asset_id": "asset-o12-r-creatures-enemies-family",
+      "oath_id": "oath-12",
+      "version": "v01",
+      "file": "generated/batch05_09_o12_natural_v01.png",
+      "sha256": "6c5d6360b4711b6072ea631e025c5ad48f4be5d62f3d34f00ede9ce7d0351ed5",
+      "bytes": 2510190,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_09_o12_natural_v01.prompt.txt",
+      "actual_prompt_sha256": "d78b2eabb49ed47855cdf003a54a560761ed2992a990f2624e9586f45d3476fd",
+      "planning_prompt_file": "planning-prompts/batch05_09_o12_natural.prompt.txt",
+      "planning_prompt_sha256": "1b1b2dc29110f877b70a1a0ac09b69447560c007b9043ebee3d5986918a89929",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/66"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/11"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-102/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-102/original.png",
+          "sha256": "73d19c2e86177602bb1bd367d86544ced90c90a1e881a47ed05b194a35773cff",
+          "git_blob_sha1": "62980476cbdefd2967a9d240ab931460f4047dbb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "ironbrush herdbeast",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Crimson fortresses, ritual pillars and bound ceremonial platforms",
+          "food_or_power": "Coarse iron-rich grass, scrub leaves and seasonal fruit",
+          "niche": "Maintains firebreak-like grazing strips; transports seeds through dung and long brush mane",
+          "migration": "Shifts between communal wells and seasonal grazing strips; calving routes remain protected"
+        },
+        "anatomy": "Heavy grazing quadruped with brushlike mane, strong neck and horned muzzle",
+        "locomotion": "Heavy four-beat walk, forceful shoulder turn and short herd-defense surge",
+        "materials": [
+          "oxblood leather",
+          "crimson glass/enamel",
+          "patinated iron"
+        ],
+        "references": [
+          "reference-102"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o12-r-creatures-enemies-family",
+          "asset-o12-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Heavy four-beat walk, forceful shoulder turn and short herd-defense surge",
+          "Feeding posture matching: Coarse iron-rich grass, scrub leaves and seasonal fruit"
+        ]
+      },
+      "proposed_new_details": "Heavy four-legged herbivore with brushlike organic mane, strong neck and horned muzzle; horn number and position are proposed and must be locked before generation.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_09_o12_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_09_o12_natural",
+      "canonical_id": "creature-o12-natural",
+      "baseline_asset_id": "asset-o12-r-creatures-enemies-family",
+      "oath_id": "oath-12",
+      "version": "v02",
+      "file": "generated/batch05_09_o12_natural_v02.png",
+      "sha256": "72d6519624368e407f448ba86cc03fa0135d49862cbcbe7e8ae7434fa4c083c4",
+      "bytes": 2363477,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_09_o12_natural_v02.prompt.txt",
+      "actual_prompt_sha256": "e438f3c683a8228875e8b62e869e4067e683f2eb6e507f9164cdad29134ac062",
+      "planning_prompt_file": "planning-prompts/batch05_09_o12_natural.prompt.txt",
+      "planning_prompt_sha256": "1b1b2dc29110f877b70a1a0ac09b69447560c007b9043ebee3d5986918a89929",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/66"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/11"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-102/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-102/original.png",
+          "sha256": "73d19c2e86177602bb1bd367d86544ced90c90a1e881a47ed05b194a35773cff",
+          "git_blob_sha1": "62980476cbdefd2967a9d240ab931460f4047dbb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "ironbrush herdbeast",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Crimson fortresses, ritual pillars and bound ceremonial platforms",
+          "food_or_power": "Coarse iron-rich grass, scrub leaves and seasonal fruit",
+          "niche": "Maintains firebreak-like grazing strips; transports seeds through dung and long brush mane",
+          "migration": "Shifts between communal wells and seasonal grazing strips; calving routes remain protected"
+        },
+        "anatomy": "Heavy grazing quadruped with brushlike mane, strong neck and horned muzzle",
+        "locomotion": "Heavy four-beat walk, forceful shoulder turn and short herd-defense surge",
+        "materials": [
+          "oxblood leather",
+          "crimson glass/enamel",
+          "patinated iron"
+        ],
+        "references": [
+          "reference-102"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o12-r-creatures-enemies-family",
+          "asset-o12-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Heavy four-beat walk, forceful shoulder turn and short herd-defense surge",
+          "Feeding posture matching: Coarse iron-rich grass, scrub leaves and seasonal fruit"
+        ]
+      },
+      "proposed_new_details": "Heavy four-legged herbivore with brushlike organic mane, strong neck and horned muzzle; horn number and position are proposed and must be locked before generation.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_09_o12_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_10_o13_natural",
+      "canonical_id": "creature-o13-natural",
+      "baseline_asset_id": "asset-o13-r-creatures-enemies-family",
+      "oath_id": "oath-13",
+      "version": "v01",
+      "file": "generated/batch05_10_o13_natural_v01.png",
+      "sha256": "ee8e03b91d8ea2eca4250f7a17a70c5310aecb811d2b5d3037d85631b093a013",
+      "bytes": 2637634,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_10_o13_natural_v01.prompt.txt",
+      "actual_prompt_sha256": "6bd531452aee86fd75715b567932f9acd4780cd1b94c2f6b4aacb0812f731607",
+      "planning_prompt_file": "planning-prompts/batch05_10_o13_natural.prompt.txt",
+      "planning_prompt_sha256": "b1bd23abfbab0e9e10e0ed4bb9936e7309a6c7cf016b9be599c4a27eedda94ad",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/72"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/12"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-100/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-100/original.png",
+          "sha256": "8f01c8ae570c323d9b69159318fccaf431de855399c65c083332d261c8f90c3c",
+          "git_blob_sha1": "58ad3f04671a5e39d80614325467c98da1e65031"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "mirror-mantled fox",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Folded screen plazas, optical gates and rearranging mirror corridors",
+          "food_or_power": "Small rodents, beetles and fallen theatre-garden fruit",
+          "niche": "Suppresses pests around cultivated mirror groves; reflective coat also displays social signals",
+          "migration": "Uses real service passages behind rearranged scenery; shelter access cannot depend on a lethal illusion"
+        },
+        "anatomy": "Light foxlike omnivore with layered reflective coat and articulated ears",
+        "locomotion": "Light quadruped trot, crouched stalk and quick lateral feint",
+        "materials": [
+          "folded lacquer/enamel",
+          "cloth",
+          "old silver",
+          "faceted mirror"
+        ],
+        "references": [
+          "reference-100"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o13-r-creatures-enemies-family",
+          "asset-o13-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Light quadruped trot, crouched stalk and quick lateral feint",
+          "Feeding posture matching: Small rodents, beetles and fallen theatre-garden fruit"
+        ]
+      },
+      "proposed_new_details": "Light foxlike four-legged omnivore with layered reflective natural coat and independently articulated ears; no literal glass plates, artificial mirrors or magical clones.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_10_o13_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_10_o13_natural",
+      "canonical_id": "creature-o13-natural",
+      "baseline_asset_id": "asset-o13-r-creatures-enemies-family",
+      "oath_id": "oath-13",
+      "version": "v02",
+      "file": "generated/batch05_10_o13_natural_v02.png",
+      "sha256": "536d2bec27c15c3afefcf831cfc097907d1a5b5d60f03e8d51b166720f3893fc",
+      "bytes": 2545525,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_10_o13_natural_v02.prompt.txt",
+      "actual_prompt_sha256": "e858841a19b7797592737a012efa2af7d4deca98fe82ef82771e512d8b099f17",
+      "planning_prompt_file": "planning-prompts/batch05_10_o13_natural.prompt.txt",
+      "planning_prompt_sha256": "b1bd23abfbab0e9e10e0ed4bb9936e7309a6c7cf016b9be599c4a27eedda94ad",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/72"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/12"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-100/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-100/original.png",
+          "sha256": "8f01c8ae570c323d9b69159318fccaf431de855399c65c083332d261c8f90c3c",
+          "git_blob_sha1": "58ad3f04671a5e39d80614325467c98da1e65031"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "mirror-mantled fox",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Folded screen plazas, optical gates and rearranging mirror corridors",
+          "food_or_power": "Small rodents, beetles and fallen theatre-garden fruit",
+          "niche": "Suppresses pests around cultivated mirror groves; reflective coat also displays social signals",
+          "migration": "Uses real service passages behind rearranged scenery; shelter access cannot depend on a lethal illusion"
+        },
+        "anatomy": "Light foxlike omnivore with layered reflective coat and articulated ears",
+        "locomotion": "Light quadruped trot, crouched stalk and quick lateral feint",
+        "materials": [
+          "folded lacquer/enamel",
+          "cloth",
+          "old silver",
+          "faceted mirror"
+        ],
+        "references": [
+          "reference-100"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o13-r-creatures-enemies-family",
+          "asset-o13-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Light quadruped trot, crouched stalk and quick lateral feint",
+          "Feeding posture matching: Small rodents, beetles and fallen theatre-garden fruit"
+        ]
+      },
+      "proposed_new_details": "Light foxlike four-legged omnivore with layered reflective natural coat and independently articulated ears; no literal glass plates, artificial mirrors or magical clones.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_10_o13_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_06_o07_natural",
+      "canonical_id": "creature-o07-natural",
+      "baseline_asset_id": "asset-o07-r-creatures-enemies-family",
+      "oath_id": "oath-07",
+      "version": 1,
+      "file": "generated/batch05_06_o07_natural_v1.png",
+      "sha256": "e360dbaed21cbe555b43cf1ce18dc85fa8540194a33d0e3e260f654027aa5d9e",
+      "bytes": 2389105,
+      "dimensions_px": [
+        1312,
+        1199
+      ],
+      "actual_prompt_file": "prompts/batch05_06_o07_natural_v1.prompt.txt",
+      "actual_prompt_sha256": "52f01acb1ec40266bb15c3e6362efb2d4d28cd0ffcd30e7b5d96daa6dba63f8b",
+      "planning_prompt_file": "planning-prompts/batch05_06_o07_natural.prompt.txt",
+      "planning_prompt_sha256": "25ca6910a0b34fc160302d3def0a31a536efd6d4c9cfb7bf440e8f4e3a539e9a",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/36"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/6"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-107/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-107/original.png",
+          "sha256": "ca195ec1b5898a1130b042add577ffee846be7980518ab5d1f1d20c981a142c8",
+          "git_blob_sha1": "4a9f5597c4b3fadf084a6258c985754d7f5690f7"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "seed-carrier browser",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Root arches, woven living platforms and cultivated tree chambers",
+          "food_or_power": "Young leaves, fruit and seed husks",
+          "niche": "Carries burrs between managed groves; browsing opens germination patches and returns nutrients",
+          "migration": "Rotates between harvest groves under husbandry schedules; avoids newly grafted saplings"
+        },
+        "anatomy": "Long-necked browsing quadruped with seed-catching coat and broad grinding teeth",
+        "locomotion": "Slow long-necked walk, branch duck and careful root step",
+        "materials": [
+          "living bark",
+          "moss fiber",
+          "straw weave",
+          "translucent sap"
+        ],
+        "references": [
+          "reference-107"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o07-r-creatures-enemies-family",
+          "asset-o07-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Slow long-necked walk, branch duck and careful root step",
+          "Feeding posture matching: Young leaves, fruit and seed husks"
+        ]
+      },
+      "proposed_new_details": "Long-necked browsing quadruped with soft seed-catching fur, broad grinding muzzle and four ordinary articulated legs. Seed hooks are plant material caught in coat, not living branches growing through the body.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_06_o07_natural.json",
+      "reported_preferred_version": 1,
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_07_o15_natural",
+      "canonical_id": "creature-o15-natural",
+      "baseline_asset_id": "asset-o15-r-creatures-enemies-family",
+      "oath_id": "oath-15",
+      "version": 1,
+      "file": "generated/batch05_07_o15_natural_v1.png",
+      "sha256": "749a9f05df656f1154d7a112114186be3a422bd25cdbc263d856a8c80f8e6257",
+      "bytes": 2616386,
+      "dimensions_px": [
+        1312,
+        1199
+      ],
+      "actual_prompt_file": "prompts/batch05_07_o15_natural_v1.prompt.txt",
+      "actual_prompt_sha256": "1afe13681d92a4a97f31aa856d5d099bad9c05a40428ead3d4730a1e59868673",
+      "planning_prompt_file": "planning-prompts/batch05_07_o15_natural.prompt.txt",
+      "planning_prompt_sha256": "1ce354acea1625dcc46c17fa5119f3ea840979682650ac883455d8c52c484ba5",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/84"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/14"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-101/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-101/original.png",
+          "sha256": "dbd78a8cf6cba67191c92908d9bcc743a2084f3ba2ce953a15400f4add404362",
+          "git_blob_sha1": "8f8253a01fb3120197376682f6edface1f8ca8c8"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "scrap-nesting scavenger",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Industrial rail bays, modular gantries and kinetic fortifications",
+          "food_or_power": "Seeds, insects and discarded organic food; metal scraps used for nesting, not eaten",
+          "niche": "Recycles nesting material and controls pests around industrial storage",
+          "migration": "Moves between inactive scrap bays after work shifts; avoids live press and vehicle lanes"
+        },
+        "anatomy": "Compact omnivore with dexterous forepaws, tough pads and nesting grasp",
+        "locomotion": "Dexterous four-limbed scramble, short wall-cling and careful gap jump",
+        "materials": [
+          "steel",
+          "ceramic inserts",
+          "rubber grips",
+          "heavy cloth"
+        ],
+        "references": [
+          "reference-101"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o15-r-creatures-enemies-family",
+          "asset-o15-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Dexterous four-limbed scramble, short wall-cling and careful gap jump",
+          "Feeding posture matching: Seeds, insects and discarded organic food; metal scraps used for nesting, not eaten"
+        ]
+      },
+      "proposed_new_details": "Compact four-limbed omnivore with dexterous forepaws, tough organic pads and short natural coat; metal pieces exist only as loose nest material, never built-in armor.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_07_o15_natural.json",
+      "reported_preferred_version": 1,
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_08_o14_natural",
+      "canonical_id": "creature-o14-natural",
+      "baseline_asset_id": "asset-o14-r-creatures-enemies-family",
+      "oath_id": "oath-14",
+      "version": 1,
+      "file": "generated/batch05_08_o14_natural_v1.png",
+      "sha256": "e53ec176fa584787d7d6449c1667f12d2d2b309e6d804d19f7241e4cf4c978a6",
+      "bytes": 2347209,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_08_o14_natural_v1.prompt.txt",
+      "actual_prompt_sha256": "5f9400859ba55b596d5928826cd39a62e815397204f463ecc310e82b654c84f0",
+      "planning_prompt_file": "planning-prompts/batch05_08_o14_natural.prompt.txt",
+      "planning_prompt_sha256": "6760af973d015a2e845108dd9716503317d2e2ebbd1a58343c2e294cc4a94fea",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/78"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-099/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "git_blob_sha1": "876365e739fa74448577e584fdcb863f8fc3589c"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "steppe longrunner",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+          "food_or_power": "Dry grasses, bulbs and seasonal insects",
+          "niche": "Opens steppe tracks and spreads seeds along verge refuges",
+          "migration": "Follows seasonal grass bands beside roads; uses wildlife crossings rather than occupying high-speed lanes"
+        },
+        "anatomy": "Long-legged steppe runner with compliant tendons and balancing tail",
+        "locomotion": "Elastic long-stride running, tendon-powered hop and long braking slide",
+        "materials": [
+          "woven cloth",
+          "leather",
+          "aged brass",
+          "smoked glass"
+        ],
+        "references": [
+          "reference-099"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o14-r-creatures-enemies-family",
+          "asset-o14-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Elastic long-stride running, tendon-powered hop and long braking slide",
+          "Feeding posture matching: Dry grasses, bulbs and seasonal insects"
+        ]
+      },
+      "proposed_new_details": "Long-legged quadruped proposal with flexible hocks, visibly natural tendons and balancing tail; no gears, springs or glass body inserts.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_08_o14_natural.json",
+      "reported_preferred_version": 3,
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_08_o14_natural",
+      "canonical_id": "creature-o14-natural",
+      "baseline_asset_id": "asset-o14-r-creatures-enemies-family",
+      "oath_id": "oath-14",
+      "version": 2,
+      "file": "generated/batch05_08_o14_natural_v2.png",
+      "sha256": "a0a0ef232bd5f33040f285ad2acdb0dc8e0a8f41d4d9d958b04000fdb5b0ceab",
+      "bytes": 2257265,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_08_o14_natural_v2.prompt.txt",
+      "actual_prompt_sha256": "2ec2af8485699deae11677e0b71bcbaef242b0aef39140ff4e9d2cfac4d1f883",
+      "planning_prompt_file": "planning-prompts/batch05_08_o14_natural.prompt.txt",
+      "planning_prompt_sha256": "6760af973d015a2e845108dd9716503317d2e2ebbd1a58343c2e294cc4a94fea",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/78"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-099/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "git_blob_sha1": "876365e739fa74448577e584fdcb863f8fc3589c"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "steppe longrunner",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+          "food_or_power": "Dry grasses, bulbs and seasonal insects",
+          "niche": "Opens steppe tracks and spreads seeds along verge refuges",
+          "migration": "Follows seasonal grass bands beside roads; uses wildlife crossings rather than occupying high-speed lanes"
+        },
+        "anatomy": "Long-legged steppe runner with compliant tendons and balancing tail",
+        "locomotion": "Elastic long-stride running, tendon-powered hop and long braking slide",
+        "materials": [
+          "woven cloth",
+          "leather",
+          "aged brass",
+          "smoked glass"
+        ],
+        "references": [
+          "reference-099"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o14-r-creatures-enemies-family",
+          "asset-o14-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Elastic long-stride running, tendon-powered hop and long braking slide",
+          "Feeding posture matching: Dry grasses, bulbs and seasonal insects"
+        ]
+      },
+      "proposed_new_details": "Long-legged quadruped proposal with flexible hocks, visibly natural tendons and balancing tail; no gears, springs or glass body inserts.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_08_o14_natural.json",
+      "reported_preferred_version": 3,
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_08_o14_natural",
+      "canonical_id": "creature-o14-natural",
+      "baseline_asset_id": "asset-o14-r-creatures-enemies-family",
+      "oath_id": "oath-14",
+      "version": 3,
+      "file": "generated/batch05_08_o14_natural_v3.png",
+      "sha256": "47a61d68cb9fff1e17760d5c97b44de32b2205b668436513b1d65a5f3e43e16a",
+      "bytes": 2146762,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_08_o14_natural_v3.prompt.txt",
+      "actual_prompt_sha256": "a54d329808e76443c3344f50cfd7506a98b3f63eac764f01e331f55e06204723",
+      "planning_prompt_file": "planning-prompts/batch05_08_o14_natural.prompt.txt",
+      "planning_prompt_sha256": "6760af973d015a2e845108dd9716503317d2e2ebbd1a58343c2e294cc4a94fea",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/78"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-099/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "git_blob_sha1": "876365e739fa74448577e584fdcb863f8fc3589c"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "steppe longrunner",
+        "role": "natural",
+        "ecology": {
+          "habitat": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+          "food_or_power": "Dry grasses, bulbs and seasonal insects",
+          "niche": "Opens steppe tracks and spreads seeds along verge refuges",
+          "migration": "Follows seasonal grass bands beside roads; uses wildlife crossings rather than occupying high-speed lanes"
+        },
+        "anatomy": "Long-legged steppe runner with compliant tendons and balancing tail",
+        "locomotion": "Elastic long-stride running, tendon-powered hop and long braking slide",
+        "materials": [
+          "woven cloth",
+          "leather",
+          "aged brass",
+          "smoked glass"
+        ],
+        "references": [
+          "reference-099"
+        ],
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "dependencies": [
+          "asset-o14-r-creatures-enemies-family",
+          "asset-o14-aa-audio-music-family"
+        ],
+        "animation_requirements": [
+          "Idle and attention",
+          "Locomotion starts/stops/turns",
+          "Habitat interaction",
+          "Threat warning and recovery",
+          "Stagger or noncombat evade",
+          "Spawn/despawn/reset",
+          "Elastic long-stride running, tendon-powered hop and long braking slide",
+          "Feeding posture matching: Dry grasses, bulbs and seasonal insects"
+        ]
+      },
+      "proposed_new_details": "Long-legged quadruped proposal with flexible hocks, visibly natural tendons and balancing tail; no gears, springs or glass body inserts.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_08_o14_natural.json",
+      "reported_preferred_version": 3,
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_01_storm_relay_bench_technician",
+      "canonical_id": "asset-o03-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o03-i-civilian-clothing-family",
+      "oath_id": "oath-03",
+      "version": "v1",
+      "file": "generated/batch05_01_storm_relay_bench_technician_v1.png",
+      "sha256": "75fb9f71f3495efc0a678f594ceda18060b31e274de55bc51f09ecd18d6d07e4",
+      "bytes": 1825158,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_01_storm_relay_bench_technician_v1.prompt.txt",
+      "actual_prompt_sha256": "2026604b0761a0a1609b626108730c2e91d56f1941ae1da66580a87e8f8c3aa1",
+      "planning_prompt_file": "planning-prompts/batch05_01_storm_relay_bench_technician.prompt.txt",
+      "planning_prompt_sha256": "e815d6ee067eb95009c2b115437e46ea9958482e9cd9feed1372b1a91d6e0cf9",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/190"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/2"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-111/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-111/original.png",
+          "sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+          "git_blob_sha1": "1da6d5e533a29b4e5304c40799b621a9ec14d588"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from STORM RELAY civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "insulating cloth",
+            "copper",
+            "matte ceramic"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "navy; oxidized copper; ceramic white",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Thin antenna ninja contrasted with broad capelet sorcerer; open copper branches and insulator nodes",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Relay service bench, insulated cable reel, message terminal",
+          "architecture_context": "Mountain relay pylons, suspended conductive bridges and linked towers",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Short navy cloth workshop jacket with two symmetric patch pockets, ivory fold-back cuffs, modest copper-colored fasteners and plain trousers. No antennas, capacitor backpack, shoulder armor or arcing effect.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_01_storm_relay_bench_technician.json",
+      "reported_preferred_version": "v2",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_01_storm_relay_bench_technician",
+      "canonical_id": "asset-o03-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o03-i-civilian-clothing-family",
+      "oath_id": "oath-03",
+      "version": "v2",
+      "file": "generated/batch05_01_storm_relay_bench_technician_v2.png",
+      "sha256": "e3d36e96fb2ca051513f5b13d13154745eafb4bb7429636e36f74bea3c56c67e",
+      "bytes": 1748876,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_01_storm_relay_bench_technician_v2.prompt.txt",
+      "actual_prompt_sha256": "182a72f3619b39029c6d7da18e4848db4cdcb9b2eecf073aa9122325e6573d48",
+      "planning_prompt_file": "planning-prompts/batch05_01_storm_relay_bench_technician.prompt.txt",
+      "planning_prompt_sha256": "e815d6ee067eb95009c2b115437e46ea9958482e9cd9feed1372b1a91d6e0cf9",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/190"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/2"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-111/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-111/original.png",
+          "sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+          "git_blob_sha1": "1da6d5e533a29b4e5304c40799b621a9ec14d588"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from STORM RELAY civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "insulating cloth",
+            "copper",
+            "matte ceramic"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "navy; oxidized copper; ceramic white",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Thin antenna ninja contrasted with broad capelet sorcerer; open copper branches and insulator nodes",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Relay service bench, insulated cable reel, message terminal",
+          "architecture_context": "Mountain relay pylons, suspended conductive bridges and linked towers",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Short navy cloth workshop jacket with two symmetric patch pockets, ivory fold-back cuffs, modest copper-colored fasteners and plain trousers. No antennas, capacitor backpack, shoulder armor or arcing effect.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_01_storm_relay_bench_technician.json",
+      "reported_preferred_version": "v2",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_02_impulse_assembly_worker",
+      "canonical_id": "asset-o15-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o15-i-civilian-clothing-family",
+      "oath_id": "oath-15",
+      "version": "v1",
+      "file": "generated/batch05_02_impulse_assembly_worker_v1.png",
+      "sha256": "e88a1230cf0977e31fcfc6863ab389c75669e9d3b7b95e00773e06b025958b8f",
+      "bytes": 2028002,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_02_impulse_assembly_worker_v1.prompt.txt",
+      "actual_prompt_sha256": "ed2ec79d273ff472ee0326d6c115282316e9d559de1d33e471973f29c68680a0",
+      "planning_prompt_file": "planning-prompts/batch05_02_impulse_assembly_worker.prompt.txt",
+      "planning_prompt_sha256": "4911161aa575ea294d19413e8030724b26f8cd0e9ddcdcb5dccc37122a5d6eb9",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/598"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/14"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-101/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-101/original.png",
+          "sha256": "dbd78a8cf6cba67191c92908d9bcc743a2084f3ba2ce953a15400f4add404362",
+          "git_blob_sha1": "8f8253a01fb3120197376682f6edface1f8ca8c8"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from IMPULSE FOUNDRY civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "steel",
+            "ceramic inserts",
+            "rubber grips",
+            "heavy cloth"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "gunmetal; charcoal; safety orange",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Sleeveless exoskeletal ninja and long power-pack coat; large modular cylinders, hinges and piston limbs",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Actuator bench, assembly jig, recycling press",
+          "architecture_context": "Industrial rail bays, modular gantries and kinetic fortifications",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Charcoal heavy-cloth short overalls with orange seam tabs, soft replaceable knee panels, two symmetric cargo pockets and plain flexible shoes; no exoskeleton, piston limbs, power pack or weapon.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_02_impulse_assembly_worker.json",
+      "reported_preferred_version": "v3",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_02_impulse_assembly_worker",
+      "canonical_id": "asset-o15-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o15-i-civilian-clothing-family",
+      "oath_id": "oath-15",
+      "version": "v2",
+      "file": "generated/batch05_02_impulse_assembly_worker_v2.png",
+      "sha256": "e4af3885dc673e32bd12a831d4e3d3f2430d81bbc57a018a6cc96c603b10c7c0",
+      "bytes": 1917287,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_02_impulse_assembly_worker_v2.prompt.txt",
+      "actual_prompt_sha256": "8497e798aa49954d274c0c6c854ffcc2a91c914d10ba9fc20faa6770b8da3a06",
+      "planning_prompt_file": "planning-prompts/batch05_02_impulse_assembly_worker.prompt.txt",
+      "planning_prompt_sha256": "4911161aa575ea294d19413e8030724b26f8cd0e9ddcdcb5dccc37122a5d6eb9",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/598"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/14"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-101/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-101/original.png",
+          "sha256": "dbd78a8cf6cba67191c92908d9bcc743a2084f3ba2ce953a15400f4add404362",
+          "git_blob_sha1": "8f8253a01fb3120197376682f6edface1f8ca8c8"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from IMPULSE FOUNDRY civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "steel",
+            "ceramic inserts",
+            "rubber grips",
+            "heavy cloth"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "gunmetal; charcoal; safety orange",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Sleeveless exoskeletal ninja and long power-pack coat; large modular cylinders, hinges and piston limbs",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Actuator bench, assembly jig, recycling press",
+          "architecture_context": "Industrial rail bays, modular gantries and kinetic fortifications",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Charcoal heavy-cloth short overalls with orange seam tabs, soft replaceable knee panels, two symmetric cargo pockets and plain flexible shoes; no exoskeleton, piston limbs, power pack or weapon.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_02_impulse_assembly_worker.json",
+      "reported_preferred_version": "v3",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_02_impulse_assembly_worker",
+      "canonical_id": "asset-o15-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o15-i-civilian-clothing-family",
+      "oath_id": "oath-15",
+      "version": "v3",
+      "file": "generated/batch05_02_impulse_assembly_worker_v3.png",
+      "sha256": "730942bb9760e16d1d8202281f53eba874524613e558667420437390bf7edbf5",
+      "bytes": 1832144,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_02_impulse_assembly_worker_v3.prompt.txt",
+      "actual_prompt_sha256": "4515b34cf3499277a6d35b364131eefc5f87356ca1b5d15e775e6b8ab7f5e465",
+      "planning_prompt_file": "planning-prompts/batch05_02_impulse_assembly_worker.prompt.txt",
+      "planning_prompt_sha256": "4911161aa575ea294d19413e8030724b26f8cd0e9ddcdcb5dccc37122a5d6eb9",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/598"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/14"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-101/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-101/original.png",
+          "sha256": "dbd78a8cf6cba67191c92908d9bcc743a2084f3ba2ce953a15400f4add404362",
+          "git_blob_sha1": "8f8253a01fb3120197376682f6edface1f8ca8c8"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from IMPULSE FOUNDRY civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "steel",
+            "ceramic inserts",
+            "rubber grips",
+            "heavy cloth"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "gunmetal; charcoal; safety orange",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Sleeveless exoskeletal ninja and long power-pack coat; large modular cylinders, hinges and piston limbs",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Actuator bench, assembly jig, recycling press",
+          "architecture_context": "Industrial rail bays, modular gantries and kinetic fortifications",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Charcoal heavy-cloth short overalls with orange seam tabs, soft replaceable knee panels, two symmetric cargo pockets and plain flexible shoes; no exoskeleton, piston limbs, power pack or weapon.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_02_impulse_assembly_worker.json",
+      "reported_preferred_version": "v3",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_03_escapement_transit_clerk",
+      "canonical_id": "asset-o14-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o14-i-civilian-clothing-family",
+      "oath_id": "oath-14",
+      "version": "v1",
+      "file": "generated/batch05_03_escapement_transit_clerk_v1.png",
+      "sha256": "e8f7638289392087204a83cb8d6d0f56c629f562fdc4081e93ef014b6218342f",
+      "bytes": 1936554,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_03_escapement_transit_clerk_v1.prompt.txt",
+      "actual_prompt_sha256": "e4f5f47f8eb44b492288ec661404c36be09280ec9db3b486786974f40b057782",
+      "planning_prompt_file": "planning-prompts/batch05_03_escapement_transit_clerk.prompt.txt",
+      "planning_prompt_sha256": "1d847675a1fbb97e7d7ed005e8fc2c717020d0645bbc44b0061fae76fa9eba01",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/564"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-099/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "git_blob_sha1": "876365e739fa74448577e584fdcb863f8fc3589c"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from ESCAPEMENT ROAD civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "woven cloth",
+            "leather",
+            "aged brass",
+            "smoked glass"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "petrol teal; aged brass; ivory; dark steel",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Slim teal asymmetric dress, flywheel hip and pendulum back harness; gears and segmented rings",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Clockwork bench, transit timing console, winding station",
+          "architecture_context": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Petrol-teal woven waistcoat over ivory sleeves, straight trousers, short removable weather cape and symmetric flat document pockets; tiny aged-brass closures only, no flywheel hip or pendulum harness.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_03_escapement_transit_clerk.json",
+      "reported_preferred_version": "v3",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_03_escapement_transit_clerk",
+      "canonical_id": "asset-o14-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o14-i-civilian-clothing-family",
+      "oath_id": "oath-14",
+      "version": "v2",
+      "file": "generated/batch05_03_escapement_transit_clerk_v2.png",
+      "sha256": "2f4e227206262bd2dbd2d2fd6da657e47d7e01cd7bc40f9eb1dce8e87089461c",
+      "bytes": 1824481,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_03_escapement_transit_clerk_v2.prompt.txt",
+      "actual_prompt_sha256": "1b179001c3f2445b58d155b632601aef3d335df6d35f7260241eebcf8fd62a7f",
+      "planning_prompt_file": "planning-prompts/batch05_03_escapement_transit_clerk.prompt.txt",
+      "planning_prompt_sha256": "1d847675a1fbb97e7d7ed005e8fc2c717020d0645bbc44b0061fae76fa9eba01",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/564"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-099/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "git_blob_sha1": "876365e739fa74448577e584fdcb863f8fc3589c"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from ESCAPEMENT ROAD civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "woven cloth",
+            "leather",
+            "aged brass",
+            "smoked glass"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "petrol teal; aged brass; ivory; dark steel",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Slim teal asymmetric dress, flywheel hip and pendulum back harness; gears and segmented rings",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Clockwork bench, transit timing console, winding station",
+          "architecture_context": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Petrol-teal woven waistcoat over ivory sleeves, straight trousers, short removable weather cape and symmetric flat document pockets; tiny aged-brass closures only, no flywheel hip or pendulum harness.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_03_escapement_transit_clerk.json",
+      "reported_preferred_version": "v3",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_03_escapement_transit_clerk",
+      "canonical_id": "asset-o14-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o14-i-civilian-clothing-family",
+      "oath_id": "oath-14",
+      "version": "v3",
+      "file": "generated/batch05_03_escapement_transit_clerk_v3.png",
+      "sha256": "26bb753c76e1f8ccacc1da6e22778b7a4ecfc14335a3664016d5a11773926ed1",
+      "bytes": 1777059,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_03_escapement_transit_clerk_v3.prompt.txt",
+      "actual_prompt_sha256": "0e4b5ac22e750ff4c37c083eaaf96183d30a5daf35a57c3c329ba4a298a726fe",
+      "planning_prompt_file": "planning-prompts/batch05_03_escapement_transit_clerk.prompt.txt",
+      "planning_prompt_sha256": "1d847675a1fbb97e7d7ed005e8fc2c717020d0645bbc44b0061fae76fa9eba01",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/564"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-099/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "git_blob_sha1": "876365e739fa74448577e584fdcb863f8fc3589c"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from ESCAPEMENT ROAD civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "woven cloth",
+            "leather",
+            "aged brass",
+            "smoked glass"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "petrol teal; aged brass; ivory; dark steel",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Slim teal asymmetric dress, flywheel hip and pendulum back harness; gears and segmented rings",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Clockwork bench, transit timing console, winding station",
+          "architecture_context": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Petrol-teal woven waistcoat over ivory sleeves, straight trousers, short removable weather cape and symmetric flat document pockets; tiny aged-brass closures only, no flywheel hip or pendulum harness.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_03_escapement_transit_clerk.json",
+      "reported_preferred_version": "v3",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_03_escapement_transit_clerk",
+      "canonical_id": "asset-o14-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o14-i-civilian-clothing-family",
+      "oath_id": "oath-14",
+      "version": "v4",
+      "file": "generated/batch05_03_escapement_transit_clerk_v4.png",
+      "sha256": "4a7e2ec4923b81e2ab4dad5f44b30e9c5d85a0f1e35b263328339381084bd690",
+      "bytes": 1763823,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_03_escapement_transit_clerk_v4.prompt.txt",
+      "actual_prompt_sha256": "f1b37cbcbe8618451b54b069b3378c8360e4061eafbbc876b8f669e6cfbf98dd",
+      "planning_prompt_file": "planning-prompts/batch05_03_escapement_transit_clerk.prompt.txt",
+      "planning_prompt_sha256": "1d847675a1fbb97e7d7ed005e8fc2c717020d0645bbc44b0061fae76fa9eba01",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/564"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/13"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-099/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "git_blob_sha1": "876365e739fa74448577e584fdcb863f8fc3589c"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from ESCAPEMENT ROAD civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "woven cloth",
+            "leather",
+            "aged brass",
+            "smoked glass"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "petrol teal; aged brass; ivory; dark steel",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Slim teal asymmetric dress, flywheel hip and pendulum back harness; gears and segmented rings",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Clockwork bench, transit timing console, winding station",
+          "architecture_context": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Petrol-teal woven waistcoat over ivory sleeves, straight trousers, short removable weather cape and symmetric flat document pockets; tiny aged-brass closures only, no flywheel hip or pendulum harness.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_03_escapement_transit_clerk.json",
+      "reported_preferred_version": "v3",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_04_sanguine_cord_braider",
+      "canonical_id": "asset-o12-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o12-i-civilian-clothing-family",
+      "oath_id": "oath-12",
+      "version": "v01",
+      "file": "generated/batch05_04_sanguine_cord_braider_v01.png",
+      "sha256": "55219844b12cc3b6d6683f7e3cb14be81d4620230b836eabb017eacc399af471",
+      "bytes": 2219246,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_04_sanguine_cord_braider_v01.prompt.txt",
+      "actual_prompt_sha256": "48265f92d30373775795dceb8141ffc15f1398c5f83ae1a7a124f42e891e6e90",
+      "planning_prompt_file": "planning-prompts/batch05_04_sanguine_cord_braider.prompt.txt",
+      "planning_prompt_sha256": "71b23234a267160965224da156b9ea8a98da5f9ef17bbb1c985107fda9a475b5",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/496"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/11"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-102/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-102/original.png",
+          "sha256": "73d19c2e86177602bb1bd367d86544ced90c90a1e881a47ed05b194a35773cff",
+          "git_blob_sha1": "62980476cbdefd2967a9d240ab931460f4047dbb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from SANGUINE COVENANT civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "oxblood leather",
+            "crimson glass/enamel",
+            "patinated iron"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "oxblood; burgundy; aged iron; restrained ivory-gold",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Muscular chain-bearing ninja and reservoir-loop sorcerer; loops, hooks and ritual bindings",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Pact inscription desk, restorative preparation bench, cord braiding frame",
+          "architecture_context": "Crimson fortresses, ritual pillars and bound ceremonial platforms",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Oxblood soft leather half-apron over a proposed burgundy cloth tunic, short sleeves, two symmetric cord pockets and plain footwear. Restrained ivory stitching; no blood reservoirs, chains, hooks or medical claims.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_04_sanguine_cord_braider.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_04_sanguine_cord_braider",
+      "canonical_id": "asset-o12-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o12-i-civilian-clothing-family",
+      "oath_id": "oath-12",
+      "version": "v02",
+      "file": "generated/batch05_04_sanguine_cord_braider_v02.png",
+      "sha256": "73f8c3074c09bb5713237d0c1c9a8a7e9de3efb3358f5e3cc8ae1ab88a54ce10",
+      "bytes": 2057102,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_04_sanguine_cord_braider_v02.prompt.txt",
+      "actual_prompt_sha256": "0517dfe5c8a3e7078a3b8197e814ee82a69f2600b639c2bd8442bf5093abf9cb",
+      "planning_prompt_file": "planning-prompts/batch05_04_sanguine_cord_braider.prompt.txt",
+      "planning_prompt_sha256": "71b23234a267160965224da156b9ea8a98da5f9ef17bbb1c985107fda9a475b5",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/496"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/11"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-102/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-102/original.png",
+          "sha256": "73d19c2e86177602bb1bd367d86544ced90c90a1e881a47ed05b194a35773cff",
+          "git_blob_sha1": "62980476cbdefd2967a9d240ab931460f4047dbb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from SANGUINE COVENANT civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "oxblood leather",
+            "crimson glass/enamel",
+            "patinated iron"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "oxblood; burgundy; aged iron; restrained ivory-gold",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Muscular chain-bearing ninja and reservoir-loop sorcerer; loops, hooks and ritual bindings",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Pact inscription desk, restorative preparation bench, cord braiding frame",
+          "architecture_context": "Crimson fortresses, ritual pillars and bound ceremonial platforms",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Oxblood soft leather half-apron over a proposed burgundy cloth tunic, short sleeves, two symmetric cord pockets and plain footwear. Restrained ivory stitching; no blood reservoirs, chains, hooks or medical claims.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_04_sanguine_cord_braider.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch05_05_folded_stage_prop_mender",
+      "canonical_id": "asset-o13-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o13-i-civilian-clothing-family",
+      "oath_id": "oath-13",
+      "version": "v01",
+      "file": "generated/batch05_05_folded_stage_prop_mender_v01.png",
+      "sha256": "93af6e5c91481d04fa85710f8f5b3677cd981d957a731af40edd723bdb6db1c9",
+      "bytes": 1989816,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch05_05_folded_stage_prop_mender_v01.prompt.txt",
+      "actual_prompt_sha256": "950eb1d512dc5f6d7b8a4c6c405f7d41f8238fb97877e8adca8a3899001eea68",
+      "planning_prompt_file": "planning-prompts/batch05_05_folded_stage_prop_mender.prompt.txt",
+      "planning_prompt_sha256": "fa45f374f9bc9b195aa621db75962c5163b776b94ac740326755fb1befd4a028",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/530"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/12"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-100/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-100/original.png",
+          "sha256": "8f01c8ae570c323d9b69159318fccaf431de855399c65c083332d261c8f90c3c",
+          "git_blob_sha1": "58ad3f04671a5e39d80614325467c98da1e65031"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from FOLDED THEATRE civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "folded lacquer/enamel",
+            "cloth",
+            "old silver",
+            "faceted mirror"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "plum/mauve character variants; ivory/navy/gold overview variants",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Asymmetric tailored triangles and folded planes; faceted mask and nested mirror frames",
+        "model_construction": {
+          "status": "PROPOSED",
+          "components": [
+            "Worker",
+            "merchant",
+            "healer/service",
+            "artisan",
+            "weather layer"
+          ],
+          "acceptance": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+          "civilian_context": "Mirror alignment table, prop workshop, reversible stage screen",
+          "architecture_context": "Folded screen plazas, optical gates and rearranging mirror corridors",
+          "required_artifacts": [
+            "source scene",
+            "portable mesh where applicable",
+            "UV/material package",
+            "rig/clip package where applicable",
+            "export manifest",
+            "review evidence"
+          ]
+        }
+      },
+      "proposed_new_details": "Ivory/navy cloth short tailored work smock with restrained folded seams, a detachable symmetrical split apron and two equal pockets; no mask, mirror armor, magical duplicate or trailing strips.",
+      "source_ambiguities": "New occupational/anatomical details are proposed, not approved source facts.",
+      "qa_file": "qa/batch05_05_folded_stage_prop_mender.json",
+      "reported_preferred_version": "v01",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    }
+  ]
+}

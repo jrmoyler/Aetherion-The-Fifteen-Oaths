@@ -1,0 +1,264 @@
+{
+  "original_name": "clinic threshold",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/14",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    2.4,
+    2.0,
+    2.8
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      0.0,
+      -0.12000000476837158
+    ],
+    [
+      2.4000000953674316,
+      2.0,
+      2.799999952316284
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 524,
+    "lod1": 500,
+    "lod2": 300
+  },
+  "visual_meshes": 29,
+  "collider_meshes": 4,
+  "sockets": [
+    {
+      "name": "west",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        0,
+        1.0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        -1.0
+      ],
+      "outward_normal_blender_xyz": [
+        -1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "east",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        2.4,
+        1.0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        2.4,
+        0,
+        -1.0
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "south",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        1.2,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        1.2,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        -1,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "north",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        1.2,
+        2,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        1.2,
+        0,
+        -2
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        1,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "finished-floor",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "door-aperture",
+      "semantic_type": "door_clear",
+      "position_blender_xyz_m": [
+        1.2000000000000002,
+        1.8,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        1.2000000000000002,
+        0,
+        -1.8
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "door_clear"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 1.2,
+        "height_m": 2.4
+      }
+    },
+    {
+      "name": "threshold",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0.4,
+        1.6,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0.4,
+        0,
+        -1.6
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "hinge-provision",
+      "semantic_type": "mechanism_axis",
+      "position_blender_xyz_m": [
+        0.6000000000000001,
+        1.8,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0.6000000000000001,
+        0,
+        -1.8
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "mechanism_axis"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "leaf": "NOT_AUTHORED_FRAME_ONLY"
+      }
+    },
+    {
+      "name": "protected-queue",
+      "semantic_type": "door_clear",
+      "position_blender_xyz_m": [
+        1.2,
+        0.8,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        1.2,
+        0,
+        -0.8
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "door_clear"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 2.4,
+        "depth_m": 1.6,
+        "NOTE": "2m nominal footprint includes .4m door assembly. Requested full 2m clear queue requires external reservation beyond module."
+      }
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ]
+}

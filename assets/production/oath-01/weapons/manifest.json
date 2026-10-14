@@ -1,0 +1,402 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o01-e-weapons-family",
+  "referenceIds": [
+    "reference-061",
+    "reference-113"
+  ],
+  "status": "PARTIAL_PRODUCTION_CANDIDATES_UNREVIEWED",
+  "coordinateContract": "Blender meters +Y forward +Z up; grip reference origin; GLB standard Y-up conversion",
+  "assets": [
+    {
+      "id": "kiln-sword-ready",
+      "name": "Kiln Sword Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready.blend",
+        "glb": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready.glb",
+        "lod1": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-lod1.glb",
+        "lod2": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-lod2.glb",
+        "collision": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-01/weapons/textures/ceramic_basecolor.png",
+          "assets/production/oath-01/weapons/textures/ceramic_orm.png",
+          "assets/production/oath-01/weapons/textures/ceramic_normal.png",
+          "assets/production/oath-01/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-01/weapons/textures/iron_orm.png",
+          "assets/production/oath-01/weapons/textures/iron_normal.png",
+          "assets/production/oath-01/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-01/weapons/textures/leather_orm.png",
+          "assets/production/oath-01/weapons/textures/leather_normal.png",
+          "assets/production/oath-01/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-01/weapons/textures/brass_orm.png",
+          "assets/production/oath-01/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-hero.png",
+          "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-side.png",
+          "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1916,
+        "lod1": 1210,
+        "lod2": 854,
+        "collision": 20
+      },
+      "dimensionsMeters": [
+        0.1745,
+        1.307,
+        0.092
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE",
+        "requiredForRigidBody": false,
+        "present": false,
+        "omittedArticulatedDetails": [
+          "hanging chain and tassel"
+        ]
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval against references 061 and 113",
+        "Hanging chain/tassel mesh, rig and settle animation",
+        "Character hand and stowed mount calibration",
+        "Real Three.js, Godot and Unreal import/runtime validation",
+        "LOD silhouette transition review and measured performance",
+        "Combat collision and elemental effects integration",
+        "Reference wear and fine engraved details refinement"
+      ],
+      "archetypeId": "kiln-sword"
+    },
+    {
+      "id": "kiln-sword-stowed",
+      "name": "Kiln Sword Stowed",
+      "type": "equipment",
+      "variant": "stowed",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed.blend",
+        "glb": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed.glb",
+        "lod1": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-lod1.glb",
+        "lod2": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-lod2.glb",
+        "collision": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-collision.glb",
+        "textures": [
+          "assets/production/oath-01/weapons/textures/ceramic_basecolor.png",
+          "assets/production/oath-01/weapons/textures/ceramic_orm.png",
+          "assets/production/oath-01/weapons/textures/ceramic_normal.png",
+          "assets/production/oath-01/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-01/weapons/textures/iron_orm.png",
+          "assets/production/oath-01/weapons/textures/iron_normal.png",
+          "assets/production/oath-01/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-01/weapons/textures/leather_orm.png",
+          "assets/production/oath-01/weapons/textures/leather_normal.png",
+          "assets/production/oath-01/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-01/weapons/textures/brass_orm.png",
+          "assets/production/oath-01/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-hero.png",
+          "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-side.png",
+          "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 2548,
+        "lod1": 1710,
+        "lod2": 1282,
+        "collision": 20
+      },
+      "dimensionsMeters": [
+        0.1905,
+        1.332,
+        0.092
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE",
+        "requiredForRigidBody": false,
+        "present": false,
+        "omittedArticulatedDetails": [
+          "hanging chain and tassel"
+        ]
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval against references 061 and 113",
+        "Hanging chain/tassel mesh, rig and settle animation",
+        "Character hand and stowed mount calibration",
+        "Real Three.js, Godot and Unreal import/runtime validation",
+        "LOD silhouette transition review and measured performance",
+        "Combat collision and elemental effects integration",
+        "Reference wear and fine engraved details refinement"
+      ],
+      "archetypeId": "kiln-sword"
+    },
+    {
+      "id": "kiln-sword-damaged",
+      "name": "Kiln Sword Damaged",
+      "type": "equipment",
+      "variant": "damaged",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged.blend",
+        "glb": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged.glb",
+        "lod1": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-lod1.glb",
+        "lod2": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-lod2.glb",
+        "collision": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-collision.glb",
+        "textures": [
+          "assets/production/oath-01/weapons/textures/ceramic_basecolor.png",
+          "assets/production/oath-01/weapons/textures/ceramic_orm.png",
+          "assets/production/oath-01/weapons/textures/ceramic_normal.png",
+          "assets/production/oath-01/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-01/weapons/textures/iron_orm.png",
+          "assets/production/oath-01/weapons/textures/iron_normal.png",
+          "assets/production/oath-01/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-01/weapons/textures/leather_orm.png",
+          "assets/production/oath-01/weapons/textures/leather_normal.png",
+          "assets/production/oath-01/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-01/weapons/textures/brass_orm.png",
+          "assets/production/oath-01/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-hero.png",
+          "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-side.png",
+          "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1960,
+        "lod1": 1232,
+        "lod2": 850,
+        "collision": 20
+      },
+      "dimensionsMeters": [
+        0.1745,
+        1.307,
+        0.092
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE",
+        "requiredForRigidBody": false,
+        "present": false,
+        "omittedArticulatedDetails": [
+          "hanging chain and tassel"
+        ]
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval against references 061 and 113",
+        "Hanging chain/tassel mesh, rig and settle animation",
+        "Character hand and stowed mount calibration",
+        "Real Three.js, Godot and Unreal import/runtime validation",
+        "LOD silhouette transition review and measured performance",
+        "Combat collision and elemental effects integration",
+        "Reference wear and fine engraved details refinement"
+      ],
+      "archetypeId": "kiln-sword"
+    },
+    {
+      "id": "kiln-focus-ready",
+      "name": "Kiln Focus Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready.blend",
+        "glb": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready.glb",
+        "lod1": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-lod1.glb",
+        "lod2": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-lod2.glb",
+        "collision": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-01/weapons/textures/ceramic_basecolor.png",
+          "assets/production/oath-01/weapons/textures/ceramic_orm.png",
+          "assets/production/oath-01/weapons/textures/ceramic_normal.png",
+          "assets/production/oath-01/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-01/weapons/textures/iron_orm.png",
+          "assets/production/oath-01/weapons/textures/iron_normal.png",
+          "assets/production/oath-01/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-01/weapons/textures/leather_orm.png",
+          "assets/production/oath-01/weapons/textures/leather_normal.png",
+          "assets/production/oath-01/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-01/weapons/textures/brass_orm.png",
+          "assets/production/oath-01/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-hero.png",
+          "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-side.png",
+          "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 7400,
+        "lod1": 4218,
+        "lod2": 2532,
+        "collision": 116
+      },
+      "dimensionsMeters": [
+        0.256,
+        0.864,
+        0.2875
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE",
+        "requiredForRigidBody": false,
+        "present": false,
+        "omittedArticulatedDetails": [
+          "hanging chain and tassel"
+        ]
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval against references 061 and 113",
+        "Hanging chain/tassel mesh, rig and settle animation",
+        "Character hand and stowed mount calibration",
+        "Real Three.js, Godot and Unreal import/runtime validation",
+        "LOD silhouette transition review and measured performance",
+        "Combat collision and elemental effects integration",
+        "Reference wear and fine engraved details refinement"
+      ],
+      "archetypeId": "kiln-focus"
+    },
+    {
+      "id": "kiln-focus-stowed",
+      "name": "Kiln Focus Stowed",
+      "type": "equipment",
+      "variant": "stowed",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed.blend",
+        "glb": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed.glb",
+        "lod1": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-lod1.glb",
+        "lod2": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-lod2.glb",
+        "collision": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-collision.glb",
+        "textures": [
+          "assets/production/oath-01/weapons/textures/ceramic_basecolor.png",
+          "assets/production/oath-01/weapons/textures/ceramic_orm.png",
+          "assets/production/oath-01/weapons/textures/ceramic_normal.png",
+          "assets/production/oath-01/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-01/weapons/textures/iron_orm.png",
+          "assets/production/oath-01/weapons/textures/iron_normal.png",
+          "assets/production/oath-01/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-01/weapons/textures/leather_orm.png",
+          "assets/production/oath-01/weapons/textures/leather_normal.png",
+          "assets/production/oath-01/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-01/weapons/textures/brass_orm.png",
+          "assets/production/oath-01/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-hero.png",
+          "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-side.png",
+          "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 7576,
+        "lod1": 4306,
+        "lod2": 2572,
+        "collision": 116
+      },
+      "dimensionsMeters": [
+        0.256,
+        0.864,
+        0.3175
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE",
+        "requiredForRigidBody": false,
+        "present": false,
+        "omittedArticulatedDetails": [
+          "hanging chain and tassel"
+        ]
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval against references 061 and 113",
+        "Hanging chain/tassel mesh, rig and settle animation",
+        "Character hand and stowed mount calibration",
+        "Real Three.js, Godot and Unreal import/runtime validation",
+        "LOD silhouette transition review and measured performance",
+        "Combat collision and elemental effects integration",
+        "Reference wear and fine engraved details refinement"
+      ],
+      "archetypeId": "kiln-focus"
+    },
+    {
+      "id": "kiln-focus-damaged",
+      "name": "Kiln Focus Damaged",
+      "type": "equipment",
+      "variant": "damaged",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged.blend",
+        "glb": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged.glb",
+        "lod1": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-lod1.glb",
+        "lod2": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-lod2.glb",
+        "collision": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-collision.glb",
+        "textures": [
+          "assets/production/oath-01/weapons/textures/ceramic_basecolor.png",
+          "assets/production/oath-01/weapons/textures/ceramic_orm.png",
+          "assets/production/oath-01/weapons/textures/ceramic_normal.png",
+          "assets/production/oath-01/weapons/textures/iron_basecolor.png",
+          "assets/production/oath-01/weapons/textures/iron_orm.png",
+          "assets/production/oath-01/weapons/textures/iron_normal.png",
+          "assets/production/oath-01/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-01/weapons/textures/leather_orm.png",
+          "assets/production/oath-01/weapons/textures/leather_normal.png",
+          "assets/production/oath-01/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-01/weapons/textures/brass_orm.png",
+          "assets/production/oath-01/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-hero.png",
+          "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-side.png",
+          "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 7364,
+        "lod1": 4182,
+        "lod2": 2496,
+        "collision": 116
+      },
+      "dimensionsMeters": [
+        0.256,
+        0.864,
+        0.2875
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE",
+        "requiredForRigidBody": false,
+        "present": false,
+        "omittedArticulatedDetails": [
+          "hanging chain and tassel"
+        ]
+      },
+      "animations": [],
+      "remainingGates": [
+        "Art approval against references 061 and 113",
+        "Hanging chain/tassel mesh, rig and settle animation",
+        "Character hand and stowed mount calibration",
+        "Real Three.js, Godot and Unreal import/runtime validation",
+        "LOD silhouette transition review and measured performance",
+        "Combat collision and elemental effects integration",
+        "Reference wear and fine engraved details refinement"
+      ],
+      "archetypeId": "kiln-focus"
+    }
+  ]
+}

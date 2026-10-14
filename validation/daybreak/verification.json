@@ -1,0 +1,50 @@
+{
+  "status": "CPU_BUILD_HTTP_VERIFIED_RENDERED_GAMEPLAY_BLOCKED",
+  "testedAt": "2026-10-14",
+  "baseCommit": "09a508810143404c99f58fbd6987157b9a60dfb5",
+  "testContext": "Pre-publication working tree. SHA-256 below pins the tested destination files; immutable source bytes checked separately. No rendered gameplay claim.",
+  "node": "v24.19.0",
+  "tests": {
+    "daybreak": {
+      "passed": 5,
+      "failed": 0,
+      "routing": "100 mock-backed selections and action routes"
+    },
+    "sourceAndAdapter": {
+      "passed": 208,
+      "failed": 0,
+      "immutableFiles": 1896
+    }
+  },
+  "build": {
+    "passed": true,
+    "warning": "Large original runtime chunk",
+    "files": 41,
+    "bytes": 66824080
+  },
+  "http": {
+    "passed": true,
+    "allFilesByteCompared": true
+  },
+  "browser": {
+    "passed": false,
+    "blocker": "Chromium SUID sandbox helper misconfigured; launch aborted",
+    "bypassUsed": false
+  },
+  "physicalMobile": "NOT_TESTED",
+  "deployment": "NOT_PERFORMED",
+  "files": {
+    "app/daybreak/README.md": "ca3b954bc4e6db619fc361c6ea0a68060e2a762c905d1c9c74d006e17c3b5ba4",
+    "app/daybreak/assets.json": "a0beed8fbbe4252eb090419ac5d29a204857d62c1ab73828039c581d3a6125a0",
+    "app/daybreak/controls.js": "1cf6eee641b715fa1db6f311b352cbb492930ea5d44633c5cd4c793dc62ae16b",
+    "app/daybreak/courtyard.js": "94d3d2406bf6b281e9da42defa6b56df2f6b61dccca9b69c8f6a6acd5552829f",
+    "app/daybreak/daybreak.test.mjs": "c49f84145632596e5c6e76f6cdcc82451907be73572ce223b0271e659f84f9aa",
+    "app/daybreak/index.html": "a8477133e83c43c59b08682e5b5df1565fb435b056aa7d7a73ef9abef6e0b5b7",
+    "app/daybreak/main.js": "47d1631b2d88395d14d10f680cabe4ce260edbd0b3dbb34b6a52862c3a57d90b",
+    "app/daybreak/model.mjs": "e61f62e904499be76f24435776c375529970601198ec958f279b363cc14352ce",
+    "app/daybreak/style.css": "84d8de7cec6f43b2fa2260929edbaf4c376d10810b9453a47ee8159ea4dfd9e9",
+    "app/daybreak/vite.config.mjs": "143c6edcaff7d4d0bfcfb8df9fe49a46e5472acc4171fa2781eae260823aadba",
+    "package.json": "ce7c4ff0b90eef24938b6222bd78e3b18d46bb1f6658daf2530ffa1e1d9d52c2",
+    "tools/run-daybreak.mjs": "b7c7a3f64d493dd2ea56e66d929a326e0e4cc90d65f67368c7f82f036ebf7c98"
+  }
+}

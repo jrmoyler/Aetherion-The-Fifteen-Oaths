@@ -1,0 +1,448 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "P2-SRC-FOUNDATION",
+    "P2-SRC-DIRECTIVE",
+    "P2-SRC-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "p2-biome-01-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-01",
+      "oath_id": "oath-01",
+      "basin_ids": [
+        "basin-west"
+      ],
+      "habitat_poi_id": "p2-poi-01-habitat",
+      "resource_poi_id": "p2-poi-01-resource",
+      "climate": "wet windward slopes with rain shadows inside calderas",
+      "substrate": "Porous basalt and ash loam on old caldera terraces",
+      "habitat_sequence": "Vent exclusions \u2192 scrub apron \u2192 managed ash orchard \u2192 cool riparian forest",
+      "seasonal_cycle": "Wet ash compacts in renewal; dry growth season raises dust; harvest pruning opens firebreaks; cold rain increases steam",
+      "land_use_loop": "Ash orchard compost and refractory-clay extraction share settling ponds",
+      "pressure": "Dumping seals burrow outlets; nesting loss reduces soil mixing",
+      "migration": "Slag-backed burrowers move laterally between cooled terraces, never through active vents",
+      "recovery": "Clear drainage and cap dumping before reseeding; no instant forest growth",
+      "foundation_ecology": "Heat-tolerant scrub occupies cooled terraces; burrowers disperse mineral salts and nest beyond active vents. Slag-backed burrowers become hostile when dumping blocks nesting channels, creating a sanitation conflict rather than an evil species.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-01",
+        "AETHERION_CANON/04_OATH_DOSSIERS/01_KILN_OATH.md"
+      ]
+    },
+    {
+      "id": "p2-biome-02-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-02",
+      "oath_id": "oath-02",
+      "basin_ids": [
+        "basin-west"
+      ],
+      "habitat_poi_id": "p2-poi-02-habitat",
+      "resource_poi_id": "p2-poi-02-resource",
+      "climate": "cold alpine with seasonal melt and whiteouts",
+      "substrate": "Rock-founded alpine valleys, moraine gravel, peat-free thin soil",
+      "habitat_sequence": "Permanent ice \u2192 scree/lichen \u2192 dwarf shrub \u2192 sheltered conifer margin",
+      "seasonal_cycle": "Melt releases water in renewal; short growth is forage-rich; harvest stores fungi; cold season closes optional high trails",
+      "land_use_loop": "Warm-core fungus rooms use imported substrate and measured ventilation",
+      "pressure": "Heavy traffic narrows grazer thaw-margin passage",
+      "migration": "Rime-antler grazers follow receding snowline; predators follow at a separate lower-density band",
+      "recovery": "Reopen a marked corridor and wait a season step; frost casting cannot mint preserved food",
+      "foundation_ecology": "Lichen and sheltered fungi feed rime-antler grazers that browse thaw margins. Seasonal migration signals changing snowpack; predators approach towns when sealed roads interrupt that movement, not because frost creatures are inherently cruel.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-02",
+        "AETHERION_CANON/04_OATH_DOSSIERS/02_RIME_ARCHIVE.md"
+      ]
+    },
+    {
+      "id": "p2-biome-03-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-03",
+      "oath_id": "oath-03",
+      "basin_ids": [
+        "basin-choir"
+      ],
+      "habitat_poi_id": "p2-poi-03-habitat",
+      "resource_poi_id": "p2-poi-03-resource",
+      "climate": "orographic storms and icing",
+      "substrate": "Ridge scree and shallow turf, water collected below saddles",
+      "habitat_sequence": "Exposed lightning ridge \u2192 rocky pasture \u2192 sheltered garden \u2192 basin road",
+      "seasonal_cycle": "Renewal icing; growth convective storms; harvest crosswinds; cold snow and rime",
+      "land_use_loop": "Pasture, kite nesting sleeves and insulator workshops share ridge access",
+      "pressure": "Discharge hardware and nest removal reduce kite warning behavior",
+      "migration": "Copper-wing kites track uplift bands outside grounded work corridors",
+      "recovery": "Restore sleeves and lower work disturbance during breeding windows",
+      "foundation_ecology": "Copper-wing kites exploit rising air and roost outside discharge zones. Protective nesting sleeves reduce outages; indiscriminate pest removal harms a species that also warns crews of unstable air currents.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-03",
+        "AETHERION_CANON/04_OATH_DOSSIERS/03_STORM_RELAY.md"
+      ]
+    },
+    {
+      "id": "p2-biome-04-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-04",
+      "oath_id": "oath-04",
+      "basin_ids": [
+        "basin-west",
+        "basin-choir"
+      ],
+      "habitat_poi_id": "p2-poi-04-habitat",
+      "resource_poi_id": "p2-poi-04-resource",
+      "climate": "warm maritime, seasonal rain and storm surge",
+      "substrate": "Alluvial silt, brackish mud, porous limestone refuge terraces",
+      "habitat_sequence": "Fresh distributary \u2192 reed nursery \u2192 brackish flats \u2192 coastal reef",
+      "seasonal_cycle": "Renewal rain raises freshwater flow; growth marine storms; harvest saline intrusion; cold calmer fishing windows",
+      "land_use_loop": "Aquaculture respects nursery closures; grazer husbandry keeps small channels open",
+      "pressure": "Overgrazing strips banks; total exclusion silts channels",
+      "migration": "Reedback grazers shift between dry hummocks; juvenile fish remain in shallow cover",
+      "recovery": "Alternating grazing lanes and sediment removal restore nursery band",
+      "foundation_ecology": "Reedback grazers keep channels open and shelter fish nurseries. Overgrazing or exclusion damages habitat differently, giving husbandry and fishing meaningful seasonal responsibilities beyond harvesting a decorative coastal biome.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-04",
+        "AETHERION_CANON/04_OATH_DOSSIERS/04_TIDAL_COVENANT.md"
+      ]
+    },
+    {
+      "id": "p2-biome-05-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-05",
+      "oath_id": "oath-05",
+      "basin_ids": [
+        "basin-choir"
+      ],
+      "habitat_poi_id": "p2-poi-05-habitat",
+      "resource_poi_id": "p2-poi-05-resource",
+      "climate": "wet western faces, dry eastern lee and flash-flooding canyon bottoms",
+      "substrate": "Fractured ridge stone, thin terrace soils, sheltered cave substrate",
+      "habitat_sequence": "Wet western shoulder \u2192 divide \u2192 dry eastern terrace \u2192 flash-flood canyon",
+      "seasonal_cycle": "Renewal runoff scours gullies; growth lee drought; harvest survey; cold freeze-thaw rockfall",
+      "land_use_loop": "Ventilated cave fungi and stepped gardens trade water against mine access",
+      "pressure": "Machinery vibration drives resonance moles from aerating thin soils",
+      "migration": "Moles reroute under low-vibration berms; no persistent tunneling physics",
+      "recovery": "Pause noisy extraction windows, repair ventilation, stabilize terrace drains",
+      "foundation_ecology": "Resonance moles aerate thin soils and react to machinery vibrations. Cave fungi support food production but depend on ventilation and waste management, preventing the underground realm from becoming a consequence-free pantry.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-05",
+        "AETHERION_CANON/04_OATH_DOSSIERS/05_FAULT_CHOIR.md"
+      ]
+    },
+    {
+      "id": "p2-biome-06-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-06",
+      "oath_id": "oath-06",
+      "basin_ids": [
+        "basin-dawn"
+      ],
+      "habitat_poi_id": "p2-poi-06-habitat",
+      "resource_poi_id": "p2-poi-06-resource",
+      "climate": "gusty upland with sheltered garden microclimates",
+      "substrate": "Cliff crevice soils and pocket gardens behind wind baffles",
+      "habitat_sequence": "Wind edge \u2192 nesting fissure \u2192 lee orchard \u2192 lower reed meadow",
+      "seasonal_cycle": "Renewal breeding shelter; growth gust fronts; harvest seed dispersal; cold low cloud",
+      "land_use_loop": "Sail weaving, reed cutting and garden tending rotate cliff access",
+      "pressure": "Gliders crossing breeding paths lower nesting capacity",
+      "migration": "Sail-feather climbers move along fissure shelves and carry seeds",
+      "recovery": "Seasonal flight detour and untouched seed strips restore occupancy",
+      "foundation_ecology": "Sail-feather climbers nest in sheltered cracks and spread cliff plants on their plumage. Glider traffic disturbs breeding paths; seasonal route closures can support husbandry and gathering without making wildlife mere hazards.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-06",
+        "AETHERION_CANON/04_OATH_DOSSIERS/06_REED_RESONANCE.md"
+      ]
+    },
+    {
+      "id": "p2-biome-07-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-07",
+      "oath_id": "oath-07",
+      "basin_ids": [
+        "basin-west"
+      ],
+      "habitat_poi_id": "p2-poi-07-habitat",
+      "resource_poi_id": "p2-poi-07-resource",
+      "climate": "wet temperate to warm southern forest",
+      "substrate": "Deep woodland humus and ash-enriched riparian soils",
+      "habitat_sequence": "Upper orchard \u2192 mixed canopy \u2192 browsing glade \u2192 floodplain wetwood",
+      "seasonal_cycle": "Renewal fungal bloom; growth shaded moisture; harvest fruit pulse; cold canopy opening",
+      "land_use_loop": "Fruit, fibers, pruning mulch and managed livestock circulate organic matter",
+      "pressure": "Overbrowsing removes saplings while indiscriminate growth closes glades",
+      "migration": "Seed-carrier browsers travel glade links; rootpath harts use tended forage stops",
+      "recovery": "Thin invasive growth, retain deadwood pockets and replant diverse age bands",
+      "foundation_ecology": "Seed-carrier browsers distribute fruit and maintain glades; predators prevent destructive overbrowsing. Rootpath harts are trained animals with welfare and forage needs, not summonable equipment that disappears when inconvenient.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-07",
+        "AETHERION_CANON/04_OATH_DOSSIERS/07_GRAFT_SANCTUARY.md"
+      ]
+    },
+    {
+      "id": "p2-biome-08-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-08",
+      "oath_id": "oath-08",
+      "basin_ids": [
+        "basin-choir"
+      ],
+      "habitat_poi_id": "p2-poi-08-habitat",
+      "resource_poi_id": "p2-poi-08-resource",
+      "climate": "humid seasonal floodplain with stagnant-air episodes",
+      "substrate": "Waterlogged mineral silt with alternating fresh and stagnant pools",
+      "habitat_sequence": "Raised lab garden \u2192 filter marsh \u2192 settling pool \u2192 reed buffer",
+      "seasonal_cycle": "Renewal floods spread sediment; growth stagnant heat; harvest filter renewal; cold low biological uptake",
+      "land_use_loop": "Reagent cultivation uses closed vessels and replaceable filter beds",
+      "pressure": "Crawler harvesting increases short-term reagent supply but reduces filtration",
+      "migration": "Filter-shelled crawlers move between connected clean pools, not across contaminated plots",
+      "recovery": "Isolate fictional contaminant ledger first, then rebuild filtration habitat",
+      "foundation_ecology": "Filter-shelled crawlers concentrate minerals and require careful habitat management. Harvesting them for reagents can improve short-term treatment while reducing long-term filtration, giving gatherers ecological choices beyond rarity tiers.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-08",
+        "AETHERION_CANON/04_OATH_DOSSIERS/08_BITTERGLASS_GUILD.md"
+      ]
+    },
+    {
+      "id": "p2-biome-09-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-09",
+      "oath_id": "oath-09",
+      "basin_ids": [
+        "basin-dawn"
+      ],
+      "habitat_poi_id": "p2-poi-09-habitat",
+      "resource_poi_id": "p2-poi-09-resource",
+      "climate": "moderate continental basin with seasonal fog and summer heat",
+      "substrate": "Basin meadow loam, drained civic gardens, river margins",
+      "habitat_sequence": "Public meadow \u2192 orchard belt \u2192 urban pollinator patch \u2192 night refuge garden",
+      "seasonal_cycle": "Renewal fog and flood pulses; growth heat; harvest hay; cold dormant meadow",
+      "land_use_loop": "Coursers pull clinic carts; meadow rotations feed animals without consuming pollinator refuges",
+      "pressure": "Overbright wards disrupt nocturnal feeding and nearby sleep",
+      "migration": "Prism-backed coursers use meadow corridors; birds shift to low-light garden bands",
+      "recovery": "Dim nonessential wards at night and restore meadow rotation",
+      "foundation_ecology": "Prism-backed coursers graze public meadow belts and pull clinic carts. Urban birds and pollinator gardens support ordinary life, while excessive ward brightness can disrupt nocturnal wildlife and neighboring residents.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-09",
+        "AETHERION_CANON/04_OATH_DOSSIERS/09_OATH_OF_DAYBREAK.md"
+      ]
+    },
+    {
+      "id": "p2-biome-10-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-10",
+      "oath_id": "oath-10",
+      "basin_ids": [
+        "basin-east"
+      ],
+      "habitat_poi_id": "p2-poi-10-habitat",
+      "resource_poi_id": "p2-poi-10-resource",
+      "climate": "clear dry intervals, sea wind and coastal fog",
+      "substrate": "Coastal rocky shelf, dry calcareous soil, wind-scoured outcrops",
+      "habitat_sequence": "Stable inland ground \u2192 sheltered shrub \u2192 thermal cliff \u2192 fog shore",
+      "seasonal_cycle": "Renewal sea fog; growth clear dry intervals; harvest wind; cold maritime squalls",
+      "land_use_loop": "Dry gardens and roost monitoring support provisioned scientific outposts",
+      "pressure": "Shifting gravity volumes displace roostlings from thermal columns",
+      "migration": "Ballast-wing roostlings follow stable uplift; they do not forecast exact celestial events",
+      "recovery": "Keep anomalous volumes off roost corridors; restore conventional access",
+      "foundation_ecology": "Ballast-wing roostlings nest around stable thermal updrafts and avoid shifting gravity fields. Their movements warn workers of local anomalies, giving ecology an observational role without claiming animals understand celestial mathematics.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-10",
+        "AETHERION_CANON/04_OATH_DOSSIERS/10_TIDAL_OBSERVATORY.md"
+      ]
+    },
+    {
+      "id": "p2-biome-11-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-11",
+      "oath_id": "oath-11",
+      "basin_ids": [
+        "basin-east"
+      ],
+      "habitat_poi_id": "p2-poi-11-habitat",
+      "resource_poi_id": "p2-poi-11-resource",
+      "climate": "cool fog pockets amid drier sheltered slopes",
+      "substrate": "Sheltered dry slope soil, damp caves, fog-collecting rock",
+      "habitat_sequence": "Dry scrub \u2192 patchy shade \u2192 cave mouth \u2192 crowded fixed refuge",
+      "seasonal_cycle": "Renewal fog; growth dry slope heat; harvest longer shade; cold cave damp",
+      "land_use_loop": "Fog-water gardens and careful cave gathering supply fixed public refuges",
+      "pressure": "Excess lighting and sealed corridors push stalkers toward refuge edges",
+      "migration": "Dusk-window stalkers follow physical patchy-light corridors; no dimension travel implied",
+      "recovery": "Restore unbroken habitat strips without concealing public exits",
+      "foundation_ecology": "Dusk-window stalkers hunt along patchy light boundaries and avoid crowded refuges. Habitat corridors remain physical even when an Oath conceals them, allowing ecological study without claiming every shadow is another dimension.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-11",
+        "AETHERION_CANON/04_OATH_DOSSIERS/11_THE_MISSING_COURT.md"
+      ]
+    },
+    {
+      "id": "p2-biome-12-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-12",
+      "oath_id": "oath-12",
+      "basin_ids": [
+        "basin-dawn"
+      ],
+      "habitat_poi_id": "p2-poi-12-habitat",
+      "resource_poi_id": "p2-poi-12-resource",
+      "climate": "seasonal dry heat, cool uplands and flood pulses",
+      "substrate": "Iron-rich scrub soils, alluvial pasture pockets, cool upland stone",
+      "habitat_sequence": "Dry scrub \u2192 communal pasture \u2192 flood terrace \u2192 cool upland rest station",
+      "seasonal_cycle": "Renewal flood pulse; growth heat; harvest forage scarcity; cold upland rest",
+      "land_use_loop": "Herd fiber, food and pack transport require load limits, water and pasture rotation",
+      "pressure": "Overloading packhorns and exhausted pasture reduce welfare band",
+      "migration": "Ironbrush herdbeasts follow seasonal water; redland packhorns travel staffed stages",
+      "recovery": "Rest stock and repair water stops; lifeforce effects do not replace nutrition",
+      "foundation_ecology": "Ironbrush herdbeasts graze scrub and support transport, fiber and food economies. Redland packhorns require careful load management and communal pasture agreements, creating husbandry beyond the covenant's combat identity.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-12",
+        "AETHERION_CANON/04_OATH_DOSSIERS/12_SANGUINE_COVENANT.md"
+      ]
+    },
+    {
+      "id": "p2-biome-13-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-13",
+      "oath_id": "oath-13",
+      "basin_ids": [
+        "basin-east"
+      ],
+      "habitat_poi_id": "p2-poi-13-habitat",
+      "resource_poi_id": "p2-poi-13-resource",
+      "climate": "dry summers, cool nights and episodic valley fog",
+      "substrate": "Dry valley alluvium, scrub hillside, shaded cultivated courtyards",
+      "habitat_sequence": "Summer-dry hillside \u2192 orchard \u2192 cool courtyard \u2192 fog valley floor",
+      "seasonal_cycle": "Renewal orchard bloom; growth dry heat; harvest cool nights; cold valley fog",
+      "land_use_loop": "Dye plants, textiles and stage carpentry draw on managed gardens and traded wood",
+      "pressure": "Festival footfall fragments fox cover and compacts soil",
+      "migration": "Mirror-mantled foxes use patterned fur through scrub; natural camouflage is not illusion",
+      "recovery": "Rotate festival grounds and restore hedgerow cover with visible true exits",
+      "foundation_ecology": "Mirror-mantled foxes use patterned fur and behavior to evade predators without literally becoming magical holograms. Altered variants require separate concepts, preserving a meaningful distinction between natural camouflage and Oath-driven illusion.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-13",
+        "AETHERION_CANON/04_OATH_DOSSIERS/13_FOLDED_THEATRE.md"
+      ]
+    },
+    {
+      "id": "p2-biome-14-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-14",
+      "oath_id": "oath-14",
+      "basin_ids": [
+        "basin-dawn"
+      ],
+      "habitat_poi_id": "p2-poi-14-habitat",
+      "resource_poi_id": "p2-poi-14-resource",
+      "climate": "seasonal drought with intense rain and flash floods",
+      "substrate": "Steppe loam, gravel fans and flash-flood channels",
+      "habitat_sequence": "Forage steppe \u2192 seasonal stream \u2192 maintained road \u2192 wildlife underpass",
+      "seasonal_cycle": "Renewal brief grass pulse; growth drought; harvest migration; cold hard ground",
+      "land_use_loop": "Roadside grain stores and grazing stops serve long-haul caravans",
+      "pressure": "Fenced highways cut forage routes and intensify local pressure",
+      "migration": "Steppe longrunners cross protected lanes on scheduled seasonal windows",
+      "recovery": "Open crossings, reseed verges, retire event detours after flood recession",
+      "foundation_ecology": "Steppe longrunners migrate along seasonal forage routes that highways can sever. Road crews maintain wildlife crossings, making faster transport answerable to ecological continuity rather than automatically superior to older paths.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-14",
+        "AETHERION_CANON/04_OATH_DOSSIERS/14_ESCAPEMENT_ROAD.md"
+      ]
+    },
+    {
+      "id": "p2-biome-15-living-profile",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "region_id": "region-15",
+      "oath_id": "oath-15",
+      "basin_ids": [
+        "basin-dawn",
+        "basin-east"
+      ],
+      "habitat_poi_id": "p2-poi-15-habitat",
+      "resource_poi_id": "p2-poi-15-resource",
+      "climate": "humid maritime with storm surge and industrial heat islands",
+      "substrate": "Disturbed coastal fill, humid garden pockets, warm service cavities",
+      "habitat_sequence": "Storm berm \u2192 industrial service strip \u2192 planted buffer \u2192 tidal outlet",
+      "seasonal_cycle": "Renewal heavy rain; growth heat island; harvest surge readiness; cold corrosion maintenance",
+      "land_use_loop": "Repair salvage and container gardens share inspected drainage, not waste dumping",
+      "pressure": "Warm scrap cavities attract scavengers; contaminated waste harms useful seed carriers",
+      "migration": "Scrap-nesting scavengers move through planted service buffers",
+      "recovery": "Sort waste, cool safe nesting boxes and restore drainage before planting",
+      "foundation_ecology": "Scrap-nesting scavengers exploit warm service cavities and transport seeds between disturbed sites. Habitat design and waste management can reduce conflict, while indiscriminate extermination removes useful scavenging without fixing the underlying problem.",
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#/region-15",
+        "AETHERION_CANON/04_OATH_DOSSIERS/15_IMPULSE_FOUNDRY.md"
+      ]
+    }
+  ]
+}

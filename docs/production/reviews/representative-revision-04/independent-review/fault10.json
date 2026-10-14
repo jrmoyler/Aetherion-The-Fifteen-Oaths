@@ -1,0 +1,45 @@
+{
+  "status": "NOT_EXACT_REFERENCE_MATCH_NOT_APPROVED",
+  "method": "Actual053 and six frozen final renders plus V9 rolled-front comparison inspected. Frozen file hashes checked. No duplicate engine tests.",
+  "improvements": [
+    "Stone perimeter has more uneven chips and thinner seams; less regular raised panel appearance thanV9.",
+    "Crystal has deeper violet/transmission variation; broad pale opaque V9 channel reduced.",
+    "Opposing leather wrap strips and fitted guard flanges add visible structure."
+  ],
+  "remainingDefects": [
+    {
+      "priority": "P1",
+      "area": "stone shell",
+      "finding": "Large cracked tan cells still dominate instead of source thin irregular overlapping plates. Edge remains too smooth and globally leaf-like, with insufficient asymmetric chip layering.",
+      "nextRepair": "Match large plate boundaries and stepped edge breaks from053 rather than adding uniform fine fractures."
+    },
+    {
+      "priority": "P1",
+      "area": "crystal",
+      "finding": "Long continuous narrow channel and dark glass do not match source intermittent branching exposures and lively multifaceted highlights. Transmission sampling noise complicates judgment.",
+      "nextRepair": "Rebuild uneven exposed crystal islands/overhangs and assess neutral-lit optics without simply increasing transmission."
+    },
+    {
+      "priority": "P1",
+      "area": "guard and pommel",
+      "finding": "Guard remains a symmetrical crown collar with broad blank band; source has angular fitted trims, stone inclusions and projecting anchors. Pommel remains a regular pointed pod.",
+      "nextRepair": "Author individual source-matched collar/anchor and pommel stone pieces."
+    },
+    {
+      "priority": "P2",
+      "area": "grip and materials",
+      "finding": "Grip is gray with regular strip geometry, lacking dark brown layered leather and small collars/rivets. Stone still lacks differentiated mineral strata values.",
+      "nextRepair": "Refine leather overlap, small manufacturing fittings and localized material variation."
+    }
+  ],
+  "hashCheck": {
+    "manifestSha256": "912f781df17f1ea280c3fac3ce0f502595b22de5ab0909bf9451db495cb29835",
+    "files": 47,
+    "mismatches": 0
+  },
+  "limits": [
+    "No exact image registration or visual approval.",
+    "Author reports UV repair after final triangulation and0Khronoserrors/0warnings; not independently rerun in this visual review.",
+    "No GPU/material parity, grip/stow, LOD/collision or performance certification."
+  ]
+}

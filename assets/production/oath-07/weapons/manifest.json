@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o07-e-weapons-family",
+  "referenceIds": [
+    "reference-049"
+  ],
+  "assets": [
+    {
+      "id": "oath-07-living-twig-bow",
+      "archetypeId": "oath-07-living-twig-bow",
+      "name": "Living Twig Bow",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-07/weapons/living-twig-bow/living-twig-bow.blend",
+        "glb": "assets/production/oath-07/weapons/living-twig-bow/lod0.glb",
+        "lod1": "assets/production/oath-07/weapons/living-twig-bow/lod1.glb",
+        "lod2": "assets/production/oath-07/weapons/living-twig-bow/lod2.glb",
+        "collision": "assets/production/oath-07/weapons/living-twig-bow/collision.glb",
+        "damaged": "assets/production/oath-07/weapons/living-twig-bow/damaged.glb",
+        "stowed": "assets/production/oath-07/weapons/living-twig-bow/stowed.glb",
+        "textures": [
+          "assets/production/oath-07/weapons/textures/Bark_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Bark_roughness.png",
+          "assets/production/oath-07/weapons/textures/Bark_metallic.png",
+          "assets/production/oath-07/weapons/textures/Bark_normal.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_basecolor.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_roughness.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_metallic.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_normal.png",
+          "assets/production/oath-07/weapons/textures/Amber_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Amber_roughness.png",
+          "assets/production/oath-07/weapons/textures/Amber_metallic.png",
+          "assets/production/oath-07/weapons/textures/Amber_normal.png",
+          "assets/production/oath-07/weapons/textures/Leaf_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Leaf_roughness.png",
+          "assets/production/oath-07/weapons/textures/Leaf_metallic.png",
+          "assets/production/oath-07/weapons/textures/Leaf_normal.png",
+          "assets/production/oath-07/weapons/textures/Vine_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Vine_roughness.png",
+          "assets/production/oath-07/weapons/textures/Vine_metallic.png",
+          "assets/production/oath-07/weapons/textures/Vine_normal.png",
+          "assets/production/oath-07/weapons/textures/Fiber_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Fiber_roughness.png",
+          "assets/production/oath-07/weapons/textures/Fiber_metallic.png",
+          "assets/production/oath-07/weapons/textures/Fiber_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-07/weapons/living-twig-bow/front.png",
+          "assets/production/oath-07/weapons/living-twig-bow/side.png",
+          "assets/production/oath-07/weapons/living-twig-bow/hero.png",
+          "assets/production/oath-07/weapons/living-twig-bow/motion.png"
+        ]
+      },
+      "triangles": {
+        "glb": 6254,
+        "lod1": 3718,
+        "lod2": 1840,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.468460903,
+        0.095008936,
+        1.711692393
+      ],
+      "rig": {
+        "type": "three-bone limb flex and weighted draw string",
+        "bones": 3
+      },
+      "animations": [
+        "Living_bow_draw_release"
+      ],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Bow nock/arrow fitting, force curve and release timing",
+        "Root weighting and endpoint string contact under deformation"
+      ]
+    },
+    {
+      "id": "oath-07-sapseed-staff",
+      "archetypeId": "oath-07-sapseed-staff",
+      "name": "Sapseed Staff",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-07/weapons/sapseed-staff/sapseed-staff.blend",
+        "glb": "assets/production/oath-07/weapons/sapseed-staff/lod0.glb",
+        "lod1": "assets/production/oath-07/weapons/sapseed-staff/lod1.glb",
+        "lod2": "assets/production/oath-07/weapons/sapseed-staff/lod2.glb",
+        "collision": "assets/production/oath-07/weapons/sapseed-staff/collision.glb",
+        "damaged": "assets/production/oath-07/weapons/sapseed-staff/damaged.glb",
+        "stowed": "assets/production/oath-07/weapons/sapseed-staff/stowed.glb",
+        "textures": [
+          "assets/production/oath-07/weapons/textures/Bark_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Bark_roughness.png",
+          "assets/production/oath-07/weapons/textures/Bark_metallic.png",
+          "assets/production/oath-07/weapons/textures/Bark_normal.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_basecolor.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_roughness.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_metallic.png",
+          "assets/production/oath-07/weapons/textures/BarkLight_normal.png",
+          "assets/production/oath-07/weapons/textures/Amber_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Amber_roughness.png",
+          "assets/production/oath-07/weapons/textures/Amber_metallic.png",
+          "assets/production/oath-07/weapons/textures/Amber_normal.png",
+          "assets/production/oath-07/weapons/textures/Leaf_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Leaf_roughness.png",
+          "assets/production/oath-07/weapons/textures/Leaf_metallic.png",
+          "assets/production/oath-07/weapons/textures/Leaf_normal.png",
+          "assets/production/oath-07/weapons/textures/Vine_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Vine_roughness.png",
+          "assets/production/oath-07/weapons/textures/Vine_metallic.png",
+          "assets/production/oath-07/weapons/textures/Vine_normal.png",
+          "assets/production/oath-07/weapons/textures/Fiber_basecolor.png",
+          "assets/production/oath-07/weapons/textures/Fiber_roughness.png",
+          "assets/production/oath-07/weapons/textures/Fiber_metallic.png",
+          "assets/production/oath-07/weapons/textures/Fiber_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-07/weapons/sapseed-staff/front.png",
+          "assets/production/oath-07/weapons/sapseed-staff/side.png",
+          "assets/production/oath-07/weapons/sapseed-staff/hero.png"
+        ]
+      },
+      "triangles": {
+        "glb": 7468,
+        "lod1": 4414,
+        "lod2": 2177,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.6102451086044312,
+        0.2016615867614746,
+        2.040600538253784
+      ],
+      "rig": {
+        "type": "static, intentionally unrigged",
+        "bones": 0
+      },
+      "animations": [],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Sap transparency and liquid animation",
+        "Wind-driven leaf motion"
+      ]
+    }
+  ]
+}

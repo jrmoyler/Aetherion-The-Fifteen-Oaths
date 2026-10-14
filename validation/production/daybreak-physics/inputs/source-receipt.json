@@ -1,0 +1,42 @@
+[
+  {
+    "source": "/tmp/aetherion-daybreak-architecture-r02/fixtures/stairs-with-landing/source.blend",
+    "source_relative_to_candidate": "fixtures/stairs-with-landing/source.blend",
+    "candidate_freeze_sha256": "8c2154a96dedb8ff8436c8b1c29e8221f4c278368aa226e8400f6eee841e9465",
+    "source_sha256": "0263cd592b5d4070b4a1a6498baab6e9dac006134b327d13968738d86d7b269a",
+    "source_unchanged": true,
+    "export": "stairs-with-landing-collision.glb",
+    "sha256": "f38507a4f8c73a217bd66477a3003ba84507c34c89d6bbcdd2d76c06d4050cd8",
+    "objects": [
+      "COL_smooth_navigation_proxy",
+      "COL_guard.001",
+      "COL_guard",
+      "COL_floor"
+    ]
+  },
+  {
+    "source": "/tmp/aetherion-daybreak-architecture-r02/fixtures/ramp-with-landing/source.blend",
+    "source_relative_to_candidate": "fixtures/ramp-with-landing/source.blend",
+    "candidate_freeze_sha256": "8c2154a96dedb8ff8436c8b1c29e8221f4c278368aa226e8400f6eee841e9465",
+    "source_sha256": "87cc30d9c3ef4c21d002f41fc7f4406961ebe048622f184ed251dc2aa6740cbf",
+    "source_unchanged": true,
+    "export": "ramp-with-landing-collision.glb",
+    "sha256": "e5e0ddbdbcf87026ff82329d2b300eb76de193f5f842af59327f24a5b9296474",
+    "objects": [
+      "COL_smooth_navigation_proxy",
+      "COL_guard.001",
+      "COL_guard",
+      "COL_floor"
+    ]
+  },
+  {
+    "source": "/tmp/aetherion-daybreak-architecture-r02/modules/floor-bay/collision.glb",
+    "source_relative_to_candidate": "modules/floor-bay/collision.glb",
+    "candidate_freeze_sha256": "8c2154a96dedb8ff8436c8b1c29e8221f4c278368aa226e8400f6eee841e9465",
+    "source_sha256": "af0ac1abd9947e96b682585d38223954e8b37e1fc35f7f6b1e480f615bbc63bb",
+    "source_unchanged": true,
+    "export": "start-floor-collision.glb",
+    "sha256": "af0ac1abd9947e96b682585d38223954e8b37e1fc35f7f6b1e480f615bbc63bb",
+    "method": "Exact copy of authored starting floor collision GLB"
+  }
+]

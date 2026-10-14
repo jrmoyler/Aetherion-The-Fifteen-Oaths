@@ -1,0 +1,47 @@
+{
+  "concept_id": "batch04_01_rime_civilian",
+  "reported_group_qa": {
+    "selected_version": "v02",
+    "reference_pixels_inspected": true,
+    "pixel_qa": {
+      "method": "Human visual inspection of original reference previews and all generated output pixels; no automatic all-pass claim",
+      "selected_version": "v02",
+      "result": "PARTIAL_CONCEPT_PASS_CONSTRUCTION_REVIEW_REQUIRED",
+      "checks": [
+        "Six whole-body views, separate opposing profiles and front/rear flat lays present",
+        "Corrected uncovered head and hip-length coat clearly reduce ninja/scholar resemblance",
+        "Charcoal quilted yoke, chalk cuffs, flexible boots, seated/crouch poses and readable review footer present"
+      ],
+      "unresolved_inconsistencies": [
+        "Front and rear sling laterality conflicts: front viewer right is anatomical left, rear viewer right is anatomical right; cannot use as exact turnaround geometry",
+        "Some pale blue carried folios still read rigid rather than flexible paper",
+        "Left/right profile labels describe facing direction, anatomical camera side needs explicit review",
+        "Seam/stitch counts and sling attachments not proven consistent across every view"
+      ]
+    }
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "pixel_qa_rejection_reasons": [
+          "Masked hooded ninja-like head",
+          "Long coat rather than hip-length",
+          "Rigid scholar-like folio hip rack",
+          "Sling side drift"
+        ]
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "pixel_qa_unresolved": [
+          "Front and rear sling laterality conflicts: front viewer right is anatomical left, rear viewer right is anatomical right; cannot use as exact turnaround geometry",
+          "Some pale blue carried folios still read rigid rather than flexible paper",
+          "Left/right profile labels describe facing direction, anatomical camera side needs explicit review",
+          "Seam/stitch counts and sling attachments not proven consistent across every view"
+        ]
+      }
+    }
+  ]
+}

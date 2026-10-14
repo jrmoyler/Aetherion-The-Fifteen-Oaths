@@ -1,0 +1,75 @@
+{
+  "status": "PASS_SCOPED_GODOT_RUNTIME_NOT_GPU_OR_ART_APPROVAL",
+  "candidate_freeze_sha256": "0888a8dd5fb85401f58a49e79a6dff5d050f7a0dea8d9481170905bc2a88d9fc",
+  "candidate_verified_files": 242,
+  "candidate_expected_files": 242,
+  "checks_passed": 691,
+  "failures": [],
+  "visual_records": 51,
+  "unique_colliders": 15,
+  "manifest_sha256": "8e036d1b74bc2532887efdc7dd0f2c4fe8395ff95158725af44e85d9a3a7be0d",
+  "source_files": [
+    {
+      "path": "engines/godot/daybreak-preview/.gitignore",
+      "sha256": "896c50a6ff522a9b9acfd787cba6e572a72d34e6448c8fa7dd3fc69f8d8d2ce3",
+      "bytes": 21
+    },
+    {
+      "path": "engines/godot/daybreak-preview/README.md",
+      "sha256": "553d6174bc5cd12b74d9c5bd88be56991a3d984eb36bab8f05758bf271c9a6df",
+      "bytes": 6196
+    },
+    {
+      "path": "engines/godot/daybreak-preview/project.godot",
+      "sha256": "d489e58c820972587b2a67c62f82be599c93e2df19269ba90ccf3e1d1da1d5fa",
+      "bytes": 331
+    },
+    {
+      "path": "engines/godot/daybreak-preview/preview.tscn",
+      "sha256": "2fcfbf583e4717dd7497d2e87078ba760569d8a2994bf1e874d3ce6a5d3ee25d",
+      "bytes": 165
+    },
+    {
+      "path": "engines/godot/daybreak-preview/preview.gd",
+      "sha256": "a8b4e478394ec45470d245c36cb96554d044d7e5435bdd40f56fbc46cc483617",
+      "bytes": 5325
+    },
+    {
+      "path": "engines/godot/daybreak-preview/daybreak_importer.gd",
+      "sha256": "d476c76dc1717e4c9ebf58ef3648c63bf62e7019c6bc1e6fe88e20e8934eeeb4",
+      "bytes": 16788
+    },
+    {
+      "path": "engines/godot/daybreak-preview/tests.gd",
+      "sha256": "8e2a2e20db1e908a84640cbbfa47ea4e09c7ca62e51f29ac80c869c055a8ef6a",
+      "bytes": 11627
+    },
+    {
+      "path": "engines/godot/daybreak-preview/validate.py",
+      "sha256": "c26045cfb170e0b43284d4a8d6b5c8c87be4210a7e42310a2e0b96910926de43",
+      "bytes": 7423
+    }
+  ],
+  "evidence_files": [
+    {
+      "path": "results.json",
+      "sha256": "0c12dd9e95fea5779515fa73d9ff55e999ff445fa1fef9e553b46aaee202e35e",
+      "bytes": 935735
+    },
+    {
+      "path": "godot.log",
+      "sha256": "fcdc729b19dc8bfdb79c1a5bc5a7007c9920e539e8e2c3330021f2654ccdb3f5",
+      "bytes": 112
+    },
+    {
+      "path": "run-receipt.json",
+      "sha256": "aa8b50490c6bb933cc2285152e5b095ef98a19a5c42d682dac31aebc7fbf120d",
+      "bytes": 11325
+    },
+    {
+      "path": "viewer-startup.log",
+      "sha256": "a9912b85473f126d3f4f63ec824170c828df3473a292f866dde86cafda5b66da",
+      "bytes": 73
+    }
+  ]
+}

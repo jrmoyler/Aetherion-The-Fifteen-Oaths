@@ -1,0 +1,640 @@
+{
+  "generatedAt": "2026-10-14T00:35:08.938Z",
+  "scope": "Read-only review copies; no GPU, appearance, collision-fit or production certification",
+  "textureDecode": "Three.js CPU placeholder textures; actual geometry/skins/animations loaded",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/civic/assembly.glb",
+      "sha256": "dba75092a93c70fa3af60caf5c248b070bba1f5cb6fabff0bb95f2e8c446a927",
+      "bytes": 7015512,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 33019,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            -0.4000000059604645,
+            -10.000000381842256
+          ],
+          "max": [
+            8,
+            3.7975604608654976,
+            0
+          ],
+          "dimensionsMeters": [
+            8,
+            4.197560466825962,
+            10.000000381842256
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/residential/assembly.glb",
+      "sha256": "fb8c19422d829b5dc4faf2ce1c0e7d2d8b2a0d0c8849991040c3148e78f53f45",
+      "bytes": 7040016,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 33483,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            -0.4000000059604645,
+            -8.000000283122063
+          ],
+          "max": [
+            8.000000055879354,
+            3.7975604608654976,
+            0
+          ],
+          "dimensionsMeters": [
+            8.000000055879354,
+            4.197560466825962,
+            8.000000283122063
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/work/assembly.glb",
+      "sha256": "1a1c279c76a27cb7d88e7aee0cde900b324a5aa9f2cbf403c19dad5a4924fc76",
+      "bytes": 5870864,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 28057,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            -0.4000000059604645,
+            -8.000000283122063
+          ],
+          "max": [
+            8.000000055879354,
+            3.7975604608654976,
+            0.007000045385211706
+          ],
+          "dimensionsMeters": [
+            8.000000055879354,
+            4.197560466825962,
+            8.007000328507274
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": [
+        {
+          "name": "daylight_baffle_open_close",
+          "durationSeconds": 5.041666507720947,
+          "trackCount": 3,
+          "timeRange": [
+            0.0416666679084301,
+            5.041666507720947
+          ],
+          "scaleTracks": [],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.2604166269302368,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.5208332538604736,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.7812498807907104,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.041666507720947,
+              "vertices": 28057,
+              "skinnedVertices": 0,
+              "bounds": {
+                "min": [
+                  0,
+                  -0.4000000059604645,
+                  -8.000000283122063
+                ],
+                "max": [
+                  8.000000055879354,
+                  3.7975604608654976,
+                  0.007000045385211706
+                ],
+                "dimensionsMeters": [
+                  8.000000055879354,
+                  4.197560466825962,
+                  8.007000328507274
+                ]
+              },
+              "minBoneScale": null,
+              "minScaleRatio": null,
+              "maxScaleRatio": 0,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/collision.glb",
+      "sha256": "ba46af29a2a1cafd59dde7d63c7c451c6f8c2863826f27a2845670b58ca56219",
+      "bytes": 1257828,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 288,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            -4.000000059604645
+          ],
+          "max": [
+            4.000000059604645,
+            3.7800000607967377,
+            0
+          ],
+          "dimensionsMeters": [
+            4.000000059604645,
+            3.7800000607967377,
+            4.000000059604645
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/lod0.glb",
+      "sha256": "0f33bbeaccbf18b1b1dcb52971e82473bbe7ec010bbaec16b2aa3a2302c39a85",
+      "bytes": 3763792,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 13019,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            -4.000000059604645
+          ],
+          "max": [
+            4.000000059604645,
+            3.7800001045688987,
+            0
+          ],
+          "dimensionsMeters": [
+            4.000000059604645,
+            3.7800001045688987,
+            4.000000059604645
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/lod1.glb",
+      "sha256": "d101839decf7470237b3306bf1d099b2106ca4cde4cb28a72ce046e918769b25",
+      "bytes": 3442868,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 7471,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            -4.000000059604645
+          ],
+          "max": [
+            4.000000059604645,
+            3.7800001045688987,
+            0
+          ],
+          "dimensionsMeters": [
+            4.000000059604645,
+            3.7800001045688987,
+            4.000000059604645
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/lod2.glb",
+      "sha256": "7d30e346816967aab1eb401b5cf6afab0ea91e6d546875fa7c337e605533491f",
+      "bytes": 3217516,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 3577,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0,
+            0,
+            -4.000000059604645
+          ],
+          "max": [
+            4.000000059604645,
+            3.7800001045688987,
+            0
+          ],
+          "dimensionsMeters": [
+            4.000000059604645,
+            3.7800001045688987,
+            4.000000059604645
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/shade-canopy/lod0.glb",
+      "sha256": "7f4b8096727949486d6fe7dea439c38b0d5da092e09b0f75a7b62fa377f12584",
+      "bytes": 2536068,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 9598,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0.2244999948889017,
+            0.045068925246596336,
+            -3.76500004529953
+          ],
+          "max": [
+            3.7754999604076147,
+            0.3175605610013008,
+            -0.23500001430511475
+          ],
+          "dimensionsMeters": [
+            3.550999965518713,
+            0.2724916357547045,
+            3.5300000309944153
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/shade-canopy/lod1.glb",
+      "sha256": "58d93379de3db86f70d68d17ae28f8d9a53d5a568e105ed9c50bb1f1ab8c49d0",
+      "bytes": 2333908,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 6094,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0.2244999948889017,
+            0.04510548710823059,
+            -3.76500004529953
+          ],
+          "max": [
+            3.7754999604076147,
+            0.3175913840532303,
+            -0.23500001430511475
+          ],
+          "dimensionsMeters": [
+            3.550999965518713,
+            0.2724858969449997,
+            3.5300000309944153
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/shade-canopy/lod2.glb",
+      "sha256": "e0067a473310d2554eed6f4910d1ab9643319fa658fcba3798206501f0fc2b2d",
+      "bytes": 2157564,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 3080,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            0.2244999948889017,
+            0.045217808336019516,
+            -3.76500004529953
+          ],
+          "max": [
+            3.7754999604076147,
+            0.31768256425857544,
+            -0.23500001430511475
+          ],
+          "dimensionsMeters": [
+            3.550999965518713,
+            0.2724647559225559,
+            3.5300000309944153
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    }
+  ]
+}

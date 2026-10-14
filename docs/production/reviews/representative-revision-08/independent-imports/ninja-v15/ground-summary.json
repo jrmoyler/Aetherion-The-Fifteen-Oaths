@@ -1,0 +1,91 @@
+{
+  "floorMeters": 0.012,
+  "penetrationEpsilonMeters": 1e-06,
+  "scope": "Finite CPU/headless vertex sampling; no continuous-time, GPU, blend transition, physics or visual acceptance",
+  "reports": [
+    {
+      "report": "kiln-ninja-ensemble-candidate-192fps-godot-ground.json",
+      "bakeFps": 192,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "inputSha256": "4d48d3e22968bb752c277543f6b0452cb628420cb9e2264bc21fec3859947d86",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000745989486575126,
+      "walkMaxClearance": 0.000750428169965744,
+      "maximumGodotThreeMinimumDifferenceMeters": 5.145473170248879e-07,
+      "negative10mmTranslationRejectedSamples": 993
+    },
+    {
+      "report": "kiln-ninja-ensemble-candidate-godot-ground.json",
+      "bakeFps": 30,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "inputSha256": "4d48d3e22968bb752c277543f6b0452cb628420cb9e2264bc21fec3859947d86",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000650294229388237,
+      "walkMaxClearance": 0.00333608511090279,
+      "maximumGodotThreeMinimumDifferenceMeters": 0.0025856434576775928,
+      "negative10mmTranslationRejectedSamples": 993
+    },
+    {
+      "report": "kiln-ninja-ensemble-candidate-lod1-192fps-godot-ground.json",
+      "bakeFps": 192,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "inputSha256": "a9aae0c2590d2c47f5e2cce3f8568257e76caa565eb559141b915127f3f6fcef",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000745989486575126,
+      "walkMaxClearance": 0.000750428169965744,
+      "maximumGodotThreeMinimumDifferenceMeters": 5.145473170248879e-07,
+      "negative10mmTranslationRejectedSamples": 993
+    },
+    {
+      "report": "kiln-ninja-ensemble-candidate-lod1-godot-ground.json",
+      "bakeFps": 30,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "inputSha256": "a9aae0c2590d2c47f5e2cce3f8568257e76caa565eb559141b915127f3f6fcef",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000650294229388237,
+      "walkMaxClearance": 0.00333608511090279,
+      "maximumGodotThreeMinimumDifferenceMeters": 0.0025856434576775928,
+      "negative10mmTranslationRejectedSamples": 993
+    },
+    {
+      "report": "kiln-ninja-ensemble-candidate-lod2-192fps-godot-ground.json",
+      "bakeFps": 192,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "inputSha256": "3189c723eaa6124a3215af90caa94349c29ebacf7a6d07a7a344e3a00e22e27f",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000683268636465072,
+      "walkMaxClearance": 0.0007241350710392,
+      "maximumGodotThreeMinimumDifferenceMeters": 5.193040089479387e-07,
+      "negative10mmTranslationRejectedSamples": 993
+    },
+    {
+      "report": "kiln-ninja-ensemble-candidate-lod2-godot-ground.json",
+      "bakeFps": 30,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "inputSha256": "3189c723eaa6124a3215af90caa94349c29ebacf7a6d07a7a344e3a00e22e27f",
+      "samples": 1089,
+      "walkSamples": 993,
+      "all128IntegerFramesPresent": true,
+      "penetratingSamples": 0,
+      "walkMinClearance": 0.000592649087309837,
+      "walkMaxClearance": 0.00327239941060543,
+      "maximumGodotThreeMinimumDifferenceMeters": 0.0025856420606589453,
+      "negative10mmTranslationRejectedSamples": 993
+    }
+  ]
+}

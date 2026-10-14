@@ -1,0 +1,2283 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "P2-SRC-FOUNDATION",
+    "P2-SRC-DIRECTIVE",
+    "P2-SRC-PROPOSAL"
+  ],
+  "records": [
+    {
+      "id": "p2-route-01-01-02",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-01-02",
+      "name": "Moraine stair road",
+      "from_region_id": "region-01",
+      "to_region_id": "region-02",
+      "from_poi_id": "poi-01-capital",
+      "to_poi_id": "poi-02-capital",
+      "terrain_corridor": "glacial moraine above Thawcourse gorge",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mount_paths",
+        "mountain_passes",
+        "climbing_paths"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        24,
+        36
+      ],
+      "target_foot_capacity_persons_per_hour": 60,
+      "target_pack_capacity_loads_per_hour": 20,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "avalanche or melt release",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-01",
+        "region-05",
+        "region-02"
+      ],
+      "detour_baseline_route_ids": [
+        "route-01-05",
+        "route-02-05"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "tools",
+        "refractory ceramics",
+        "specialist heat work"
+      ],
+      "cargo_from_destination": [
+        "preservation",
+        "records",
+        "cold-chain services"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-01-01-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-01-05",
+      "name": "Caldera saddle road",
+      "from_region_id": "region-01",
+      "to_region_id": "region-05",
+      "from_poi_id": "poi-01-capital",
+      "to_poi_id": "poi-05-capital",
+      "terrain_corridor": "cooled basalt saddle meeting folded stone",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "roads",
+        "underground_passages"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "ashfall and rock inspection",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-01",
+        "region-07",
+        "region-05"
+      ],
+      "detour_baseline_route_ids": [
+        "route-01-07",
+        "route-05-07"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "tools",
+        "refractory ceramics",
+        "specialist heat work"
+      ],
+      "cargo_from_destination": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-01-01-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-01-07",
+      "name": "Ash orchard descent",
+      "from_region_id": "region-01",
+      "to_region_id": "region-07",
+      "from_poi_id": "poi-01-capital",
+      "to_poi_id": "poi-07-capital",
+      "terrain_corridor": "west river terrace outside the active channel",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "bridges",
+        "mount_paths"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "ash blockage and bank washout",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-01",
+        "region-05",
+        "region-07"
+      ],
+      "detour_baseline_route_ids": [
+        "route-01-05",
+        "route-05-07"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "tools",
+        "refractory ceramics",
+        "specialist heat work"
+      ],
+      "cargo_from_destination": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-02-02-03",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-02-03",
+      "name": "Northern archive traverse",
+      "from_region_id": "region-02",
+      "to_region_id": "region-03",
+      "from_poi_id": "poi-02-capital",
+      "to_poi_id": "poi-03-capital",
+      "terrain_corridor": "sheltered south face below the snow crest",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mountain_passes",
+        "storm_relay_transportation"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        24,
+        36
+      ],
+      "target_foot_capacity_persons_per_hour": 60,
+      "target_pack_capacity_loads_per_hour": 20,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "whiteout and wind slab",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-02",
+        "region-05",
+        "region-03"
+      ],
+      "detour_baseline_route_ids": [
+        "route-02-05",
+        "route-03-05"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "preservation",
+        "records",
+        "cold-chain services"
+      ],
+      "cargo_from_destination": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-02-02-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-02-05",
+      "name": "Archive quarry descent",
+      "from_region_id": "region-02",
+      "to_region_id": "region-05",
+      "from_poi_id": "poi-02-capital",
+      "to_poi_id": "poi-05-capital",
+      "terrain_corridor": "rock benches descending from the moraine",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "underground_passages",
+        "mount_paths"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "ice-dam warning or tunnel inspection",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-02",
+        "region-01",
+        "region-05"
+      ],
+      "detour_baseline_route_ids": [
+        "route-01-02",
+        "route-01-05"
+      ],
+      "detour_target_walk_minutes": [
+        38,
+        57
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "preservation",
+        "records",
+        "cold-chain services"
+      ],
+      "cargo_from_destination": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-03-03-05",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-03-05",
+      "name": "Choir gorge shoulder",
+      "from_region_id": "region-03",
+      "to_region_id": "region-05",
+      "from_poi_id": "poi-03-capital",
+      "to_poi_id": "poi-05-capital",
+      "terrain_corridor": "contour path above gorge flood scour",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "bridges",
+        "storm_relay_transportation"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "rockfall and lightning",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-03",
+        "region-09",
+        "region-05"
+      ],
+      "detour_baseline_route_ids": [
+        "route-03-09",
+        "route-05-09"
+      ],
+      "detour_target_walk_minutes": [
+        38,
+        57
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "cargo_from_destination": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-03-03-06",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-03-06",
+      "name": "Shared Saddle road",
+      "from_region_id": "region-03",
+      "to_region_id": "region-06",
+      "from_poi_id": "poi-03-capital",
+      "to_poi_id": "poi-06-capital",
+      "terrain_corridor": "wind gap in the northern ridge",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mountain_passes",
+        "gliding_routes",
+        "storm_relay_transportation"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        24,
+        36
+      ],
+      "target_foot_capacity_persons_per_hour": 60,
+      "target_pack_capacity_loads_per_hour": 20,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "seized freight checkpoint or crosswind",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-03",
+        "region-09",
+        "region-06"
+      ],
+      "detour_baseline_route_ids": [
+        "route-03-09",
+        "route-06-09"
+      ],
+      "detour_target_walk_minutes": [
+        38,
+        57
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "cargo_from_destination": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-03-03-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-03-09",
+      "name": "Southern relay descent",
+      "from_region_id": "region-03",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-03-capital",
+      "to_poi_id": "poi-09-capital",
+      "terrain_corridor": "switchback from ridge to basin orchard",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "roads",
+        "storm_relay_transportation"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "icing or damaged grounding tower",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-03",
+        "region-05",
+        "region-09"
+      ],
+      "detour_baseline_route_ids": [
+        "route-03-05",
+        "route-05-09"
+      ],
+      "detour_target_walk_minutes": [
+        38,
+        57
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "communications",
+        "weather services",
+        "routing"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-04-04-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-04-07",
+      "name": "Root estuary causeway",
+      "from_region_id": "region-04",
+      "to_region_id": "region-07",
+      "from_poi_id": "poi-04-capital",
+      "to_poi_id": "poi-07-capital",
+      "terrain_corridor": "raised terrace beside tidal forest marsh",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "bridges",
+        "rivers",
+        "maritime_routes"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        18,
+        27
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "storm surge and drifting logs",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-04",
+        "region-08",
+        "region-07"
+      ],
+      "detour_baseline_route_ids": [
+        "route-04-08",
+        "route-07-08"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "shipping",
+        "fisheries",
+        "hydraulics"
+      ],
+      "cargo_from_destination": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-04-04-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-04-08",
+      "name": "Treatment channel road",
+      "from_region_id": "region-04",
+      "to_region_id": "region-08",
+      "from_poi_id": "poi-04-capital",
+      "to_poi_id": "poi-08-capital",
+      "terrain_corridor": "twin embanked freshwater and brackish channels",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "canals",
+        "rivers",
+        "bridges"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        18,
+        27
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "contamination alert or surge gate closure",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-04",
+        "region-07",
+        "region-08"
+      ],
+      "detour_baseline_route_ids": [
+        "route-04-07",
+        "route-07-08"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "shipping",
+        "fisheries",
+        "hydraulics"
+      ],
+      "cargo_from_destination": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-05-05-07",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-05-07",
+      "name": "Forest quarry road",
+      "from_region_id": "region-05",
+      "to_region_id": "region-07",
+      "from_poi_id": "poi-05-capital",
+      "to_poi_id": "poi-07-capital",
+      "terrain_corridor": "bedrock shoulder to wooded alluvial fan",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mount_paths",
+        "roads"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "debris fan or controlled forest burn",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-05",
+        "region-01",
+        "region-07"
+      ],
+      "detour_baseline_route_ids": [
+        "route-01-05",
+        "route-01-07"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "cargo_from_destination": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-05-05-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-05-08",
+      "name": "Choirwater towpath",
+      "from_region_id": "region-05",
+      "to_region_id": "region-08",
+      "from_poi_id": "poi-05-capital",
+      "to_poi_id": "poi-08-capital",
+      "terrain_corridor": "gorge exit and sediment settling terraces",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "rivers",
+        "canals",
+        "roads"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        18,
+        27
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "flash flood or treatment saturation",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-05",
+        "region-07",
+        "region-08"
+      ],
+      "detour_baseline_route_ids": [
+        "route-05-07",
+        "route-07-08"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "cargo_from_destination": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-05-05-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-05-09",
+      "name": "Divide survey pass",
+      "from_region_id": "region-05",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-05-capital",
+      "to_poi_id": "poi-09-capital",
+      "terrain_corridor": "dry-side saddle across the Fault divide",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mountain_passes",
+        "underground_passages",
+        "trade_highways"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        24,
+        36
+      ],
+      "target_foot_capacity_persons_per_hour": 60,
+      "target_pack_capacity_loads_per_hour": 20,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "seismic survey or contested ore toll",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-05",
+        "region-03",
+        "region-09"
+      ],
+      "detour_baseline_route_ids": [
+        "route-03-05",
+        "route-03-09"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "ore",
+        "crystal instruments",
+        "structural surveying"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-06-06-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-06-09",
+      "name": "Dawn escarpment road",
+      "from_region_id": "region-06",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-06-capital",
+      "to_poi_id": "poi-09-capital",
+      "terrain_corridor": "terraced shoulder beside steep headwater reach",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "climbing_paths",
+        "gliding_routes",
+        "bridges"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        24,
+        36
+      ],
+      "target_foot_capacity_persons_per_hour": 60,
+      "target_pack_capacity_loads_per_hour": 20,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "downdraft or slope inspection",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-06",
+        "region-13",
+        "region-09"
+      ],
+      "detour_baseline_route_ids": [
+        "route-06-13",
+        "route-09-13"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-06-06-10",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-06-10",
+      "name": "Headland ridge road",
+      "from_region_id": "region-06",
+      "to_region_id": "region-10",
+      "from_poi_id": "poi-06-capital",
+      "to_poi_id": "poi-10-capital",
+      "terrain_corridor": "exposed inland ridge behind coastal cliffs",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "gliding_routes",
+        "observatory_gravity_traversal"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "sea fog and crosswind",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-06",
+        "region-13",
+        "region-10"
+      ],
+      "detour_baseline_route_ids": [
+        "route-06-13",
+        "route-10-13"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "cargo_from_destination": [
+        "navigation",
+        "measurement",
+        "gravity engineering"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-06-06-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-06-13",
+      "name": "Hush valley descent",
+      "from_region_id": "region-06",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-06-capital",
+      "to_poi_id": "poi-13-capital",
+      "terrain_corridor": "lee switchbacks to a dry fan apron",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "gliding_routes",
+        "mount_paths"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "gust front and talus fall",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-06",
+        "region-10",
+        "region-13"
+      ],
+      "detour_baseline_route_ids": [
+        "route-06-10",
+        "route-10-13"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "textiles",
+        "instruments",
+        "wind engineering"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-07-07-08",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-07-08",
+      "name": "Forest fen margin",
+      "from_region_id": "region-07",
+      "to_region_id": "region-08",
+      "from_poi_id": "poi-07-capital",
+      "to_poi_id": "poi-08-capital",
+      "terrain_corridor": "firm gravel edge above seasonal flood beds",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mount_paths",
+        "roads"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "fungal bloom quarantine or inundation",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-07",
+        "region-05",
+        "region-08"
+      ],
+      "detour_baseline_route_ids": [
+        "route-05-07",
+        "route-05-08"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "food",
+        "fibers",
+        "ecological restoration"
+      ],
+      "cargo_from_destination": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-08-08-09",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-08-09",
+      "name": "Clear terrace road",
+      "from_region_id": "region-08",
+      "to_region_id": "region-09",
+      "from_poi_id": "poi-08-capital",
+      "to_poi_id": "poi-09-capital",
+      "terrain_corridor": "alluvial terrace across shallow tributaries",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "bridges",
+        "trade_highways"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "chemical spill isolation or fog",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-08",
+        "region-12",
+        "region-09"
+      ],
+      "detour_baseline_route_ids": [
+        "route-08-12",
+        "route-09-12"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "cargo_from_destination": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-08-08-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-08-12",
+      "name": "Redland filter road",
+      "from_region_id": "region-08",
+      "to_region_id": "region-12",
+      "from_poi_id": "poi-08-capital",
+      "to_poi_id": "poi-12-capital",
+      "terrain_corridor": "wet clay grades up to iron-rich hills",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mount_paths",
+        "trade_highways"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "saturated clay and freight inspection",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-08",
+        "region-09",
+        "region-12"
+      ],
+      "detour_baseline_route_ids": [
+        "route-08-09",
+        "route-09-12"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "medicines",
+        "testing",
+        "glass",
+        "reagents"
+      ],
+      "cargo_from_destination": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-09-09-12",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-09-12",
+      "name": "Dawnrun upper highway",
+      "from_region_id": "region-09",
+      "to_region_id": "region-12",
+      "from_poi_id": "poi-09-capital",
+      "to_poi_id": "poi-12-capital",
+      "terrain_corridor": "broad flood-safe river terrace",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "rivers",
+        "trade_highways",
+        "bridges"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        18,
+        27
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "flood warning and bridge inspection",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-09",
+        "region-08",
+        "region-12"
+      ],
+      "detour_baseline_route_ids": [
+        "route-08-09",
+        "route-08-12"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "cargo_from_destination": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-09-09-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-09-13",
+      "name": "Common valley road",
+      "from_region_id": "region-09",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-09-capital",
+      "to_poi_id": "poi-13-capital",
+      "terrain_corridor": "low pass between adjacent sheltered basins",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "trade_highways",
+        "teleportation_infrastructure"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "dust front or staged gate malfunction",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-09",
+        "region-06",
+        "region-13"
+      ],
+      "detour_baseline_route_ids": [
+        "route-06-09",
+        "route-06-13"
+      ],
+      "detour_target_walk_minutes": [
+        38,
+        57
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "sanctuary",
+        "arbitration",
+        "precision light work"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-10-10-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-10-13",
+      "name": "Veilwater headland descent",
+      "from_region_id": "region-10",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-10-capital",
+      "to_poi_id": "poi-13-capital",
+      "terrain_corridor": "stream-cut bench below a coastal watershed",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "observatory_gravity_traversal",
+        "mount_paths"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "gravity rig fault or sea fog",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-10",
+        "region-06",
+        "region-13"
+      ],
+      "detour_baseline_route_ids": [
+        "route-06-10",
+        "route-06-13"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "navigation",
+        "measurement",
+        "gravity engineering"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-10-10-11",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-10-11",
+      "name": "Eastern cliff inland road",
+      "from_region_id": "region-10",
+      "to_region_id": "region-11",
+      "from_poi_id": "poi-10-capital",
+      "to_poi_id": "poi-11-capital",
+      "terrain_corridor": "limestone contact well behind cliff retreat",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "observatory_gravity_traversal",
+        "underground_passages"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "sinkhole survey and local void alert",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-10",
+        "region-13",
+        "region-11"
+      ],
+      "detour_baseline_route_ids": [
+        "route-10-13",
+        "route-11-13"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "navigation",
+        "measurement",
+        "gravity engineering"
+      ],
+      "cargo_from_destination": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-11-11-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-11-13",
+      "name": "Witness spring road",
+      "from_region_id": "region-11",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-11-capital",
+      "to_poi_id": "poi-13-capital",
+      "terrain_corridor": "mapped karst springs and rock-founded valley floor",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "hidden_court_void_passages",
+        "bridges"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "sink blockage and bounded void event",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-11",
+        "region-10",
+        "region-13"
+      ],
+      "detour_baseline_route_ids": [
+        "route-10-11",
+        "route-10-13"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-11-11-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-11-14",
+      "name": "Karst terrace road",
+      "from_region_id": "region-11",
+      "to_region_id": "region-14",
+      "from_poi_id": "poi-11-capital",
+      "to_poi_id": "poi-14-capital",
+      "terrain_corridor": "dry rock shelf above damp sink valleys",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "hidden_court_void_passages",
+        "escapement_road_vehicles"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "collapse survey or time-stutter perimeter",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-11",
+        "region-13",
+        "region-14"
+      ],
+      "detour_baseline_route_ids": [
+        "route-11-13",
+        "route-13-14"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "cargo_from_destination": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-11-11-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-11-15",
+      "name": "Veilwater lower road",
+      "from_region_id": "region-11",
+      "to_region_id": "region-15",
+      "from_poi_id": "poi-11-capital",
+      "to_poi_id": "poi-15-capital",
+      "terrain_corridor": "limestone springs to raised eastern floodplain",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "rivers",
+        "underground_passages",
+        "trade_highways"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        18,
+        27
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "karst discharge surge and delta silt",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-11",
+        "region-14",
+        "region-15"
+      ],
+      "detour_baseline_route_ids": [
+        "route-11-14",
+        "route-14-15"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "confidential mediation",
+        "refuge logistics",
+        "restoration"
+      ],
+      "cargo_from_destination": [
+        "machinery",
+        "standardized parts",
+        "repair systems"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-12-12-13",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-12-13",
+      "name": "Red hill low pass",
+      "from_region_id": "region-12",
+      "to_region_id": "region-13",
+      "from_poi_id": "poi-12-capital",
+      "to_poi_id": "poi-13-capital",
+      "terrain_corridor": "grazing ridge between southern and eastern basins",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "mountain_passes",
+        "mount_paths"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        24,
+        36
+      ],
+      "target_foot_capacity_persons_per_hour": 60,
+      "target_pack_capacity_loads_per_hour": 20,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "dust and seasonal pasture closure",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-12",
+        "region-09",
+        "region-13"
+      ],
+      "detour_baseline_route_ids": [
+        "route-09-12",
+        "route-09-13"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "cargo_from_destination": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-12-12-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-12-14",
+      "name": "Dawn terrace highway",
+      "from_region_id": "region-12",
+      "to_region_id": "region-14",
+      "from_poi_id": "poi-12-capital",
+      "to_poi_id": "poi-14-capital",
+      "terrain_corridor": "long river-cut steppe bench",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "trade_highways",
+        "escapement_road_vehicles",
+        "rivers"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        18,
+        27
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "flash flood at tributary culverts",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-12",
+        "region-13",
+        "region-14"
+      ],
+      "detour_baseline_route_ids": [
+        "route-12-13",
+        "route-13-14"
+      ],
+      "detour_target_walk_minutes": [
+        38,
+        57
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "textiles",
+        "care networks",
+        "caravan support"
+      ],
+      "cargo_from_destination": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-13-13-14",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-13-14",
+      "name": "Manydoor freight road",
+      "from_region_id": "region-13",
+      "to_region_id": "region-14",
+      "from_poi_id": "poi-13-capital",
+      "to_poi_id": "poi-14-capital",
+      "terrain_corridor": "dry basin outlet to graded southern terraces",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "trade_highways",
+        "escapement_road_vehicles",
+        "teleportation_infrastructure"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        14,
+        21
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "optical gate malfunction or washout",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-13",
+        "region-11",
+        "region-14"
+      ],
+      "detour_baseline_route_ids": [
+        "route-11-13",
+        "route-11-14"
+      ],
+      "detour_target_walk_minutes": [
+        28,
+        42
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "performance",
+        "training simulations",
+        "illusion craft"
+      ],
+      "cargo_from_destination": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    },
+    {
+      "id": "p2-route-14-14-15",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "baseline_route_id": "route-14-15",
+      "name": "Counterpoise freight crossing",
+      "from_region_id": "region-14",
+      "to_region_id": "region-15",
+      "from_poi_id": "poi-14-capital",
+      "to_poi_id": "poi-15-capital",
+      "terrain_corridor": "raised embankment across lower distributaries",
+      "baseline_modes": [
+        "walkable_routes",
+        "mount_paths"
+      ],
+      "optional_mode_keys": [
+        "bridges",
+        "trade_highways",
+        "escapement_road_vehicles",
+        "canals"
+      ],
+      "ordinary_oath_requirement": "NONE",
+      "target_walk_minutes": [
+        18,
+        27
+      ],
+      "target_foot_capacity_persons_per_hour": 120,
+      "target_pack_capacity_loads_per_hour": 40,
+      "ordinary_fare_target_abstract_credits": 0,
+      "optional_fare_policy": "Mode catalog range; relief voucher waives fare; no compulsory fee for story access.",
+      "closure_trigger": "freight bridge damage or storm surge",
+      "protected_local_bypass": "Separate inspected service trace on stable ground outside the same failure footprint; if unsafe use listed regional detour. Exact local alignment is a terrain acceptance gate.",
+      "detour_region_ids": [
+        "region-14",
+        "region-11",
+        "region-15"
+      ],
+      "detour_baseline_route_ids": [
+        "route-11-14",
+        "route-11-15"
+      ],
+      "detour_target_walk_minutes": [
+        32,
+        48
+      ],
+      "detour_capacity_policy": "Limited by weakest open edge; reserve at least one quarter of scheduled civilian capacity for relief. Queue rather than teleport surplus.",
+      "cargo_from_origin": [
+        "transport",
+        "vehicles",
+        "precision motion parts"
+      ],
+      "cargo_from_destination": [
+        "machinery",
+        "standardized parts",
+        "repair systems"
+      ],
+      "operating_authority": "Joint adjacent-realm maintenance charter; freight control cannot revoke protected civilian passage.",
+      "measurement_status": "Greybox target only; no length, terrain slope, concurrency or travel time has been measured."
+    }
+  ],
+  "mode_catalog": [
+    {
+      "id": "p2-mode-09-walkable-routes",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "walkable_routes",
+      "name": "Ordinary walking",
+      "fare_target_abstract_credits": [
+        0,
+        1
+      ],
+      "capacity_target_persons_per_hour": 120,
+      "access_rules": "No unlock; public safe-service approaches available immediately.",
+      "constraints": "Fatigue, slope, visibility and shelter constrain travel.",
+      "ordinary_fallback": "Marked towpaths and terrace paths remain the universal baseline.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-09-roads",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "roads",
+      "name": "Ordinary roads",
+      "fare_target_abstract_credits": [
+        0,
+        1
+      ],
+      "capacity_target_persons_per_hour": 240,
+      "access_rules": "No Oath; foot priority at crossings.",
+      "constraints": "Road inspection may narrow lanes.",
+      "ordinary_fallback": "Raised local foot path or registered alternate regional road.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-15-bridges",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "bridges",
+      "name": "Bridges and causeways",
+      "fare_target_abstract_credits": [
+        0,
+        1
+      ],
+      "capacity_target_persons_per_hour": 160,
+      "access_rules": "Posted load class; no alignment or reputation gate.",
+      "constraints": "Scour, surge, overload and inspection close a specific deck.",
+      "ordinary_fallback": "Separate upstream relief crossing or edge-removal detour, never same failed support.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-03-mountain-passes",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "mountain_passes",
+      "name": "Mountain passes",
+      "fare_target_abstract_credits": [
+        0,
+        2
+      ],
+      "capacity_target_persons_per_hour": 60,
+      "access_rules": "Weather briefing and ordinary clothing available through relief services.",
+      "constraints": "Avalanche, lightning and whiteout suspend main pass.",
+      "ordinary_fallback": "Lower sheltered trail or non-pass regional detour.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-06-climbing-paths",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "climbing_paths",
+      "name": "Climbing paths",
+      "fare_target_abstract_credits": [
+        0,
+        2
+      ],
+      "capacity_target_persons_per_hour": 12,
+      "access_rules": "Optional equipment/tutorial; auto-assist usable; not required for story access.",
+      "constraints": "Handhold ice, rockfall and rescue limits.",
+      "ordinary_fallback": "Ramp or stair road around the cliff; climbing never essential.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-04-rivers",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "rivers",
+      "name": "River ferries and barges",
+      "fare_target_abstract_credits": [
+        1,
+        3
+      ],
+      "capacity_target_persons_per_hour": 48,
+      "access_rules": "Public boarding; marked potable/non-potable water and reach class.",
+      "constraints": "Low flow, flood, weirs and tide separate navigable reaches.",
+      "ordinary_fallback": "Parallel road; upstream towing only in surveyed low-gradient reaches.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-08-canals",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "canals",
+      "name": "Canals and locks",
+      "fare_target_abstract_credits": [
+        1,
+        3
+      ],
+      "capacity_target_persons_per_hour": 32,
+      "access_rules": "Public lock schedule; contaminant cargo sealed and separately inspected.",
+      "constraints": "Silt, lock power, water budget and treatment isolation.",
+      "ordinary_fallback": "Towpath and dry transfer quay; no canal assumed through the continental divide.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-04-maritime-routes",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "maritime_routes",
+      "name": "Coastal maritime routes",
+      "fare_target_abstract_credits": [
+        2,
+        5
+      ],
+      "capacity_target_persons_per_hour": 80,
+      "access_rules": "Mainland quay access and weather advisory; no essential isolated islands.",
+      "constraints": "Surge, visibility and loading windows.",
+      "ordinary_fallback": "Entire land network remains available; coastwise ferry is supplemental.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-06-gliding-routes",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "gliding_routes",
+      "name": "Gliding routes",
+      "fare_target_abstract_credits": [
+        1,
+        2
+      ],
+      "capacity_target_persons_per_hour": 8,
+      "access_rules": "Public trained operator; optional personal rig; inspect landing before launch.",
+      "constraints": "Crosswind, downdraft and fog; directional not freely reversible.",
+      "ordinary_fallback": "Ground switchback returns uphill; catch platforms and short abort landing.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-05-underground-passages",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "underground_passages",
+      "name": "Underground passages",
+      "fare_target_abstract_credits": [
+        0,
+        2
+      ],
+      "capacity_target_persons_per_hour": 36,
+      "access_rules": "Public audited tunnel only; ventilation and flood clearance.",
+      "constraints": "Gas, collapse, groundwater and structural inspection.",
+      "ordinary_fallback": "Surface route on a separate slope; no forced cave crossing.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-07-mount-paths",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "mount_paths",
+      "name": "Mount and pack paths",
+      "fare_target_abstract_credits": [
+        1,
+        3
+      ],
+      "capacity_target_persons_per_hour": 40,
+      "access_rules": "Rental or companion stable; ordinary mounts never require Oath binding.",
+      "constraints": "Grade, width, forage, rest, traction and turning radius.",
+      "ordinary_fallback": "Walk, relief porter or accessible passenger conveyance.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-09-trade-highways",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "trade_highways",
+      "name": "Trade highways",
+      "fare_target_abstract_credits": [
+        0,
+        2
+      ],
+      "capacity_target_persons_per_hour": 300,
+      "access_rules": "Civic lane protected; tariffs apply to cargo, not relief movement.",
+      "constraints": "Axle class, cargo inspection, queue and maintenance.",
+      "ordinary_fallback": "Parallel foot lane plus geographically separate detour.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-09-teleportation-infrastructure",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "teleportation_infrastructure",
+      "name": "Chartered teleportation",
+      "fare_target_abstract_credits": [
+        4,
+        8
+      ],
+      "capacity_target_persons_per_hour": 6,
+      "access_rules": "Visit both anchors first; pay abstract fare or earn transit voucher; no Oath binding.",
+      "constraints": "No combat escape, contraband cargo, siege bypass, private housing entry or unverified destination.",
+      "ordinary_fallback": "Ordinary route endpoints remain staffed; failed charge refunded; no involuntary displacement.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-03-storm-relay-transportation",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "storm_relay_transportation",
+      "name": "Storm Relay grounded carriers",
+      "fare_target_abstract_credits": [
+        2,
+        4
+      ],
+      "capacity_target_persons_per_hour": 24,
+      "access_rules": "Inspected grounded carriage with public operator; binding Storm is not required.",
+      "constraints": "Lightning lockout, anchor integrity and charge reserve; no uncontrolled lightning riding.",
+      "ordinary_fallback": "Sheltered road below the relay span; travel can be slower but never inaccessible.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-14-escapement-road-vehicles",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "escapement_road_vehicles",
+      "name": "Escapement Road vehicles",
+      "fare_target_abstract_credits": [
+        2,
+        4
+      ],
+      "capacity_target_persons_per_hour": 48,
+      "access_rules": "Public timetable, brake inspection and ticket/voucher; no time Oath required.",
+      "constraints": "Road capacity, winding reserve and time-stutter boundary; cannot rewind ownership or schedules.",
+      "ordinary_fallback": "Foot lane outside anomalous timing volume; conventional relief wagon.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-10-observatory-gravity-traversal",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "observatory_gravity_traversal",
+      "name": "Observatory ballast platforms",
+      "fare_target_abstract_credits": [
+        2,
+        5
+      ],
+      "capacity_target_persons_per_hour": 12,
+      "access_rules": "Public operator, restraints and stable docks; no gravity Oath required.",
+      "constraints": "Mass rating, bounded lift volume and emergency ballast; no open-world flight.",
+      "ordinary_fallback": "Ground stairs/ramps, conventional lift and reachable emergency dock.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-11-hidden-court-void-passages",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "hidden_court_void_passages",
+      "name": "The Missing Court threshold passages",
+      "fare_target_abstract_credits": [
+        3,
+        6
+      ],
+      "capacity_target_persons_per_hour": 4,
+      "access_rules": "Optional visited-anchor charter with identity check; never arbitrary phasing.",
+      "constraints": "Boundary, cooldown, cargo volume and visible reentry; cannot enter locked homes or skip siege conditions.",
+      "ordinary_fallback": "Physical lit road outside void volume; abort returns to origin.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-04-swimming",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "swimming",
+      "name": "Swimming and optional diving",
+      "fare_target_abstract_credits": [
+        0,
+        1
+      ],
+      "capacity_target_persons_per_hour": 8,
+      "access_rules": "Optional ability and safe exit markers; no required underwater civic access.",
+      "constraints": "Current, breath, pollution, cold and surf; cannot swim every mapped river.",
+      "ordinary_fallback": "Bridge, ferry or surfaced walkway; rescue exit always remains on same reachable bank.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-06-local-cable-lifts",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "local_cable_lifts",
+      "name": "Conventional cable lifts",
+      "fare_target_abstract_credits": [
+        1,
+        2
+      ],
+      "capacity_target_persons_per_hour": 20,
+      "access_rules": "Public inspected cabins; no Oath; accessible boarding.",
+      "constraints": "Wind, cable wear, load and rescue power.",
+      "ordinary_fallback": "Ground switchback with relief cart; cabins have retrieval protocol.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    },
+    {
+      "id": "p2-mode-11-morph-traversal",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "mode_key": "morph_traversal",
+      "name": "Bounded optional traversal morphs",
+      "fare_target_abstract_credits": [
+        0,
+        3
+      ],
+      "capacity_target_persons_per_hour": 1,
+      "access_rules": "Explicit opt-in, authored unlock and validated endpoint; never primary story transport.",
+      "constraints": "Duration, recharge, clearance, camera comfort and consent; no universal hazard immunity.",
+      "ordinary_fallback": "Ordinary route and safe deactivation pad available before entering morph corridor.",
+      "measurement_status": "Design target; abstract test credits are not a named canon currency, capacity is not benchmarked."
+    }
+  ],
+  "coastal_service": {
+    "id": "p2-transport-04-southern-coastwise-service",
+    "canon_status": "PROPOSED",
+    "source_ids": [
+      "P2-SRC-FOUNDATION",
+      "P2-SRC-DIRECTIVE",
+      "P2-SRC-PROPOSAL"
+    ],
+    "endpoint_poi_ids": [
+      "poi-04-capital",
+      "poi-15-capital"
+    ],
+    "mode_key": "maritime_routes",
+    "relationship": "Optional coastwise service around southern shore; not a new land adjacency.",
+    "closure_detour": [
+      "region-04",
+      "region-08",
+      "region-12",
+      "region-14",
+      "region-15"
+    ]
+  }
+}

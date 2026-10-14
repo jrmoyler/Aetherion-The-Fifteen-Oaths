@@ -1,0 +1,71 @@
+{
+  "status": "NOT_EXACT_FURTHER_FOCUSED_REPAIR_REQUIRED",
+  "candidate": "Kiln ninja V7 final pass5",
+  "scope": "Independent actual-pixel inspection of original090, final front/profile renders and V6/V7 comparisons. No candidate edits, engine tests, calibrated landmark fitting or art approval.",
+  "frozenInputs": 11,
+  "frozenInputMismatches": 0,
+  "freezeReceiptSha256": "21fbb8966b1accf23446c291f24980b3a7fe76b8b27b958a0cde7a3e923f14e1",
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa",
+      "bytes": 2129998
+    },
+    {
+      "path": "/tmp/ninja-v7/front-comparison.png",
+      "sha256": "9959f9c64f7eb57a8c0aee3755680a4be93767ae350e162718272a85a5449aa0",
+      "bytes": 843577
+    },
+    {
+      "path": "/tmp/ninja-v7/profile-comparison.png",
+      "sha256": "850f8c4b54de01d93c5bebbe209aa1e935c36f8ae2ebd50e8488232d66d6726b",
+      "bytes": 820523
+    },
+    {
+      "path": "/tmp/ninja-v7/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png",
+      "sha256": "41823b6c3f18c31a4f8cf6d701529d9b996e4e05ebccd5c1dacef36a491f8701",
+      "bytes": 787312
+    },
+    {
+      "path": "/tmp/ninja-v7/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+      "sha256": "42a0b38a2d3f5803ad03a8fabd13985485c651c9b86c3cee00d1a9dd6b34a068",
+      "bytes": 806913
+    }
+  ],
+  "improvements": [
+    "Wider visible eye openings and less abrupt cheek transitions improve the front over V6.",
+    "Nasal recesses are visible instead of the previous indistinct nasal shading.",
+    "Hair direction is less uniformly swept and side tufts have more variation."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Hair crown and silhouette",
+      "finding": "Front and profile expose large smooth cap patches and open crown seams. Thick rounded ribbon clumps and sparse temple/back coverage differ strongly from the source irregular, closely layered strands.",
+      "nextRepair": "Close crown coverage with overlapping root placement; replace thick isolated ribbons with thinner tapered clump groups and restore temporal/occipital silhouette before adding microdetail."
+    },
+    {
+      "priority": 1,
+      "area": "Eyes and orbital anatomy",
+      "finding": "Front eyes remain flat almond cutouts with excessive continuous visible whites; the profile shows a bright white eye disk instead of a seated, partly occluded eye. Brow/upper-lid depth and surrounding orbital planes remain generic.",
+      "nextRepair": "Seat sclera/iris within the orbital opening and wrap lids around the globe in depth. Judge profile occlusion and iris seating before final eye size."
+    },
+    {
+      "priority": 2,
+      "area": "Nose and lower-face profile",
+      "finding": "The profile nose still forms a pointed wedge, with weak tip/alar separation. Lip/chin contour is soft and pinched; front lower face tapers more abruptly than the source. Nostril marks alone do not recover the source anatomy.",
+      "nextRepair": "Fit bridge, tip, ala, philtrum and chin as a connected profile contour; restore distinct cheek/jaw planes and source lower-face width."
+    },
+    {
+      "priority": 2,
+      "area": "Ear and finish",
+      "finding": "Ear remains a simple polygonal rim and broad cavity. Smooth skin and uniform black hair do not match the reference material variation.",
+      "nextRepair": "Address visible ear folds and material variation after primary silhouette/anatomy repair."
+    }
+  ],
+  "decision": "Do not run a full 19-view acceptance set or promote the character based on this focused diagnostic. Continue primary face/hair geometry repair.",
+  "limitations": [
+    "Only two final rendered views; no full body, animation appearance, facial-expression or final rig/collision-fit review.",
+    "Comparison lighting/cameras are not calibrated; no exact numerical facial proportion claims."
+  ]
+}

@@ -1,0 +1,740 @@
+{
+  "scope": "Review-only CPU evaluated animated world-bounds comparison; not per-vertex identity, material rendering, collision proof or visual approval",
+  "coordinateMapping": "glTF/Three XYZ meters -> Blender XYZ meters: (x,-z,y). No fitted offset or scale. Blender hidden bone custom-shape meshes excluded. Absolute clip time samples correspond to frame=seconds*24; first exported key is frame1, not time0. NLA muted to evaluate a single action.",
+  "toleranceMeters": 0.0001,
+  "samples": [
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "cast_release",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 7.286839798226197e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "cast_release",
+      "timeSeconds": 0.5,
+      "blenderFrame": 12.0,
+      "maxBoundErrorMeters": 1.322995613062261e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "cast_release",
+      "timeSeconds": 1,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 8.796131162336351e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "cast_release",
+      "timeSeconds": 1.5,
+      "blenderFrame": 36.0,
+      "maxBoundErrorMeters": 9.547120038977397e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "cast_release",
+      "timeSeconds": 2,
+      "blenderFrame": 48.0,
+      "maxBoundErrorMeters": 7.286839798226197e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 7.286839798226197e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 0.5,
+      "blenderFrame": 12.0,
+      "maxBoundErrorMeters": 6.410273502982511e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 1,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 6.410273502982511e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 1.5,
+      "blenderFrame": 36.0,
+      "maxBoundErrorMeters": 7.449745975662836e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 2,
+      "blenderFrame": 48.0,
+      "maxBoundErrorMeters": 7.286839798226197e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 3.0419357509650635e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0.3333333432674408,
+      "blenderFrame": 8.0,
+      "maxBoundErrorMeters": 2.507589977988889e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0.6666666865348816,
+      "blenderFrame": 16.0,
+      "maxBoundErrorMeters": 4.23721005296529e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 1.0000000298023224,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 3.598379247141126e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 1.3333333730697632,
+      "blenderFrame": 32.0,
+      "maxBoundErrorMeters": 3.0419357509650635e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "cast_release",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 7.289818393374503e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "cast_release",
+      "timeSeconds": 0.5,
+      "blenderFrame": 12.0,
+      "maxBoundErrorMeters": 1.5736968250745775e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "cast_release",
+      "timeSeconds": 1,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 8.796131162336351e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "cast_release",
+      "timeSeconds": 1.5,
+      "blenderFrame": 36.0,
+      "maxBoundErrorMeters": 9.547120038977397e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "cast_release",
+      "timeSeconds": 2,
+      "blenderFrame": 48.0,
+      "maxBoundErrorMeters": 7.289818393374503e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 7.289818393374503e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 0.5,
+      "blenderFrame": 12.0,
+      "maxBoundErrorMeters": 6.310407514760474e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 1,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 8.702088916123785e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 1.5,
+      "blenderFrame": 36.0,
+      "maxBoundErrorMeters": 1.049103186545608e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 2,
+      "blenderFrame": 48.0,
+      "maxBoundErrorMeters": 7.289818393374503e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 2.9990131936857845e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0.3333333432674408,
+      "blenderFrame": 8.0,
+      "maxBoundErrorMeters": 2.4674775835759055e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0.6666666865348816,
+      "blenderFrame": 16.0,
+      "maxBoundErrorMeters": 4.19319731909118e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 1.0000000298023224,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 3.554451230812494e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 1.3333333730697632,
+      "blenderFrame": 32.0,
+      "maxBoundErrorMeters": 2.9990131936857845e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "cast_release",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 7.287265413324917e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "cast_release",
+      "timeSeconds": 0.5,
+      "blenderFrame": 12.0,
+      "maxBoundErrorMeters": 1.1667200355836016e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "cast_release",
+      "timeSeconds": 1,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 8.796131162336351e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "cast_release",
+      "timeSeconds": 1.5,
+      "blenderFrame": 36.0,
+      "maxBoundErrorMeters": 9.547120038977397e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "cast_release",
+      "timeSeconds": 2,
+      "blenderFrame": 48.0,
+      "maxBoundErrorMeters": 7.287265413324917e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 7.287265413324917e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 0.5,
+      "blenderFrame": 12.0,
+      "maxBoundErrorMeters": 6.410273502982511e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 1,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 6.410273502982511e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 1.5,
+      "blenderFrame": 36.0,
+      "maxBoundErrorMeters": 6.410273502982511e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "idle_breath",
+      "timeSeconds": 2,
+      "blenderFrame": 48.0,
+      "maxBoundErrorMeters": 7.287265413324917e-08,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.999999821186087,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0,
+      "blenderFrame": 0.0,
+      "maxBoundErrorMeters": 3.0419357509650635e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0.3333333432674408,
+      "blenderFrame": 8.0,
+      "maxBoundErrorMeters": 2.507589977988889e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 0.6666666865348816,
+      "blenderFrame": 16.0,
+      "maxBoundErrorMeters": 4.23721005296529e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 1.0000000298023224,
+      "blenderFrame": 24.0,
+      "maxBoundErrorMeters": 3.598379247141126e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "clip": "walk_in_place",
+      "timeSeconds": 1.3333333730697632,
+      "blenderFrame": 32.0,
+      "maxBoundErrorMeters": 3.0419357509650635e-07,
+      "blenderFinite": true,
+      "blenderBoneScaleRange": [
+        0.9999997615814209,
+        1.0000243186950684
+      ],
+      "threeNodeScaleRange": [
+        0.9999997615814493,
+        1.000000178813945
+      ]
+    }
+  ],
+  "maxBoundErrorMeters": 4.23721005296529e-07,
+  "negativeFixture1cmTranslationRejected": true,
+  "inputReports": [
+    {
+      "path": "/tmp/aetherion-revision05-import-checks/ninja16-glb.json",
+      "sha256": "c85697fa8f8615c9de6abd601ec3bb53eab336db96ba5b2dbd0d5a99d408bac8"
+    },
+    {
+      "path": "/tmp/aetherion-revision05-import-checks/ninja16-blender.json",
+      "sha256": "7d5fb164e6600adf827e500f1587573c49c5da58d3aec13f442b08017a8ece4a"
+    }
+  ],
+  "status": "SCOPED_CPU_BOUND_COMPARISON_PASS"
+}

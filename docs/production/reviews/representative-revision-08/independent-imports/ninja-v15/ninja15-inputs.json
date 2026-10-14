@@ -1,0 +1,35 @@
+{
+  "glbs": [
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+  ],
+  "blends": [
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend"
+  ],
+  "expectedClips": {
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb": [],
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb": [
+      "idle_breath",
+      "walk_in_place",
+      "cast_release"
+    ],
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb": [
+      "idle_breath",
+      "walk_in_place",
+      "cast_release"
+    ],
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb": [
+      "idle_breath",
+      "walk_in_place",
+      "cast_release"
+    ]
+  },
+  "requireSkin": {
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb": false,
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb": true,
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb": true,
+    "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb": true
+  }
+}

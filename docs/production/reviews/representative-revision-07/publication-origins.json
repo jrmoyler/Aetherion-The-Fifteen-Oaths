@@ -1,0 +1,23 @@
+{
+  "status": "FROZEN_UNAPPROVED_REVIEW_ONLY",
+  "sources": [
+    {
+      "originalLocalRoot": "/tmp/ninja-v13",
+      "bundledRoot": "kiln-ninja-v13",
+      "frozenManifest": "kiln-ninja-v13/SHA256SUMS.json",
+      "frozenManifestSha256": "ca7ed8bc730fa472302c51a613db15a224ba14bf52064805720039a9d01f7395",
+      "listedFiles": 30,
+      "allListedBytesVerified": true
+    },
+    {
+      "originalLocalRoot": "/tmp/aetherion-fault-review-v12",
+      "bundledRoot": "fault-v12",
+      "frozenManifest": "fault-v12/REVIEW_EVIDENCE.json",
+      "frozenManifestSha256": "6961cd329a0b962aef41168d062377d8c7fc493187a30466af361cbdb5b1e91b",
+      "listedFiles": 63,
+      "allListedBytesVerified": true
+    }
+  ],
+  "selectedHistory": "V11 ear and V12 mixed hair comparisons/notes/receipts only. Full historical exports are not duplicated.",
+  "parentReviewRead": "docs/production/reviews/representative-revision-05/PARENT_VISUAL_REVIEW.md"
+}

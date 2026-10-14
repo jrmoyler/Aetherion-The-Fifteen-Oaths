@@ -1,0 +1,15 @@
+✔ reentrant later-resource acquisition keeps B alive until replacement retires (1.432881ms)
+✔ current disposal cannot reacquire itself and unrelated later cleanup survives throw (0.394564ms)
+✔ cross-manager and serialized tokens cannot advance/acquire/retire current cell (0.289977ms)
+✔ historical exact retry returns receipt without clock mutation; conflicts still reject (1.206008ms)
+✔ unsafe time or overflow refused in constructor and public operations without state mutation (1.022071ms)
+✔ fresh failed contribution safety enters unpenalized reconstruction without objectives or credit (1.391828ms)
+✔ duplicate baseline manifest cannot satisfy distinct63identity requirement (4.59681ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84.260032

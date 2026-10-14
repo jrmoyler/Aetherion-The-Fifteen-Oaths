@@ -1,0 +1,105 @@
+{
+  "fixture": "civic",
+  "placements": [
+    {
+      "module": "floor-bay",
+      "translation_blender_m": [
+        0,
+        0,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "module": "floor-bay",
+      "translation_blender_m": [
+        0,
+        4,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "module": "floor-bay",
+      "translation_blender_m": [
+        4,
+        4,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "module": "public-colonnade",
+      "translation_blender_m": [
+        0,
+        0,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "module": "shade-canopy",
+      "translation_blender_m": [
+        0,
+        0,
+        3.48
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "extra_geometry": "4x1m flush circulation adapter",
+      "translation_blender_m": [
+        4,
+        3,
+        0
+      ]
+    },
+    {
+      "module": "clinic-threshold",
+      "translation_blender_m": [
+        4.8,
+        8,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "module": "quiet-portico",
+      "translation_blender_m": [
+        4,
+        0,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "module": "solid-wall",
+      "translation_blender_m": [
+        0,
+        7.65,
+        0
+      ],
+      "rotation_z_radians": 0
+    }
+  ],
+  "status": "ASSEMBLY_REVIEW_CANDIDATE_NOT_GAMEPLAY_VALIDATED",
+  "bounds_blender_m": [
+    [
+      0.0,
+      0.0,
+      -0.4000000059604645
+    ],
+    [
+      8.0,
+      10.0,
+      4.0
+    ]
+  ],
+  "gaps": [
+    "visual fidelity",
+    "connection and circulation review",
+    "event/restoration states",
+    "nav/controller traversal",
+    "source references are PROPOSED"
+  ]
+}

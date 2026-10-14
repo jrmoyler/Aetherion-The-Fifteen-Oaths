@@ -1,0 +1,148 @@
+{
+  "original_name": "shade canopy",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/13",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    4.0,
+    4.0,
+    0.3
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.03500000387430191,
+      0.03500000387430191,
+      0.01599999889731407
+    ],
+    [
+      3.9650001525878906,
+      3.9650001525878906,
+      0.30900031328201294
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 1024,
+    "lod1": 480,
+    "lod2": 192
+  },
+  "visual_meshes": 9,
+  "collider_meshes": 0,
+  "sockets": [
+    {
+      "name": "canopy-seat-0.1-0.1",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        0.1,
+        0.1,
+        0.3
+      ],
+      "position_gltf_xyz_m": [
+        0.1,
+        0.3,
+        -0.1
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "canopy-seat-0.1-3.9",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        0.1,
+        3.9,
+        0.3
+      ],
+      "position_gltf_xyz_m": [
+        0.1,
+        0.3,
+        -3.9
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "canopy-seat-3.9-0.1",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        3.9,
+        0.1,
+        0.3
+      ],
+      "position_gltf_xyz_m": [
+        3.9,
+        0.3,
+        -0.1
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "canopy-seat-3.9-3.9",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        3.9,
+        3.9,
+        0.3
+      ],
+      "position_gltf_xyz_m": [
+        3.9,
+        0.3,
+        -3.9
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ],
+  "editable_lod_geometry": {
+    "lod1": {
+      "source_object_prefix": "LOD1__",
+      "objects": 9,
+      "triangles": 480
+    },
+    "lod2": {
+      "source_object_prefix": "LOD2__",
+      "objects": 9,
+      "triangles": 192
+    }
+  },
+  "lod_revision": "r03 deliberate topology reduction; same primary/collision payloads"
+}

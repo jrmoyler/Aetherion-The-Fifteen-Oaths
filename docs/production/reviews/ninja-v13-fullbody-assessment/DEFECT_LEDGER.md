@@ -1,0 +1,26 @@
+# V13 broader posed assessment — unapproved
+
+All19previously defined views were rendered from the frozen V13 packed source: four rest views, four samples of each of idle_breath/walk_in_place/cast_release, one masked portrait and two unmasked head views. Actual rest images, all three four-frame clip sheets and masked/unmasked portraits were inspected against original090. This extends evidence beyond the two head views; it does not approve the model or animation.
+
+The exact source hash before and after is `5d1fb9fc7042a22dff33939baa3614adbde520c0e77d55d7aa5472e52b14e114`. No save, mesh edit, rig edit, new export or material change was made to V13. The unmasked copy is temporary in memory. V14 materials were not used. The38bones and three existing clips are unchanged; no additional rigs or production assets are counted.
+
+| Area | Actual observation / finding | Evidence | Status |
+|---|---|---|---|
+| Cape/bracer asymmetry | Longer cape falls toward character-right (front viewer-left); ceramic bracer remains on character-left. This preserves the established asymmetry. | rest-front, rest-back, rest-hero | Retained; not art approval |
+| Cape shape and motion | Cape reads as a stiff broad sheet over the shoulders. Sampled casts raise the arms without a gross detached cape, but the shoulder mass remains rigid-looking. No cloth simulation or full intersection test was performed. | cast_release13/25/37; side rest | Shape/motion unresolved |
+| Torso armor | Terracotta bands flare outward with large dark gaps, especially in side/back views; they read as stacked projecting rings rather than the reference's fitted segmented cuirass. | rest-side, rest-back, rest-hero | Likeness defect |
+| Ceramic bracer | Rectangular open ladder construction remains visibly simplified compared with the reference's substantial perforated plate and fitted latch. | rest-front; cast_release13/25 | Likeness defect; latch/fit not accepted |
+| Mask | Large box-like lower-face profile, repeated bars and protruding lateral strap/hardware ends remain conspicuous. Coverage and facial fit differ from original090. | rest-side; masked-portrait | Likeness/fit defect |
+| Collar and nape | Exposed neck gap remains between nape and collar in rest back/profile. No obvious nape/collar penetration is visible in the inspected frames, but this is not a clearance certificate. Collar reads as a short stiff tube rather than the reference folds. | rest-back, rest-side, unmasked-face_profile; clip sheets | Likeness unresolved; collision unverified |
+| Hair/face/ear | Broad pointed locks, folded crown pieces, smooth root patches, simplified face and over-regular ear structures remain. Small bright eye sliver/canthus defects persist. | masked/unmasked head sheet | Existing likeness failures remain |
+| Rest stance and boots | Symmetric stance is retained; boots and repeated hardware are bulky/simple relative to the reference. Dominant-foot vertices are2mm above review floor at rest. | rest-front, rest-side; render-evidence | Ground/contact not accepted |
+| Walk grounding | All32authored walk frames were evaluated;22have at least one dominant-foot vertex below the floor. Worst penetration2.963mm at frame9, right foot. Rendered frame25 similarly penetrates left support foot≈2.900mm. | walk_in_place09/25; ground-clearance-allframes.json | Grounding defect |
+| Idle/cast grounding | All48idle and48cast frames retain2mm sole clearance on this stage. This is not pressure/contact, foot sliding or continuous-motion validation. | ground-clearance-allframes.json | Measured gap; no gameplay pass |
+| Hands and cast gesture | Existing hand/finger motion is visible in the cast samples. Hands remain simplified and no weapon-grasp fit can be assessed. | cast_release13/25/37 | Gesture present; grasp unverified |
+| Equipment and sockets | Source contains only one combined character mesh, one armature and four empty sockets. No equipped weapon was authored/attached. Socket world positions are recorded per view, not calibrated fit evidence. | sourceObjects and socketWorldPositions in render-evidence | Weapon/equipment tests missing |
+| Animation inventory | Only idle_breath48f, walk_in_place32f and cast_release48f at24fps exist. No added locomotion/combat transitions, interruption tests, retargeted castable timing or facial animation were created. | frozen source actions | Broader runtime/animation work missing |
+| Review limits | Four sampled views per clip can miss intermediate visible intersections. All128frames were evaluated only for dominant-foot ground clearance. No collision, GPU/engine parity, live gameplay, LOD transition or device budget acceptance follows. | render and ground evidence | Remaining validation gates |
+
+All19renders are750×900 Cycles CPU,24samples, AgX. The stage floor is at BlenderZ0.012m. Ground measurements use vertices with foot-bone weight>0.5; these are explicit geometric checks, not simulated contacts. Still images cannot establish timing quality or foot-slip velocity. Source/reference framing is not calibrated for anatomical ratio claims.
+
+No fresh tool/preview/quota error occurred in this executor. Other workers' reported limits were not bypassed. Work stops after this authorized assessment; no further revision was started.

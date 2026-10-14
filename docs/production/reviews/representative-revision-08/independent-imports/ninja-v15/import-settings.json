@@ -1,0 +1,128 @@
+[
+  {
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "/tmp/aetherion-revision05-import-checks",
+      "--script",
+      "/tmp/aetherion-ninja-v15-independent/import-settings.gd",
+      "--",
+      "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "30"
+    ],
+    "returncode": 0,
+    "result": {
+      "animationTracks": [
+        {
+          "clip": "cast_release",
+          "keyCount": 1098,
+          "length": 2.0,
+          "trackCount": 18
+        },
+        {
+          "clip": "idle_breath",
+          "keyCount": 305,
+          "length": 2.0,
+          "trackCount": 5
+        },
+        {
+          "clip": "walk_in_place",
+          "keyCount": 492,
+          "length": 1.33333337306976,
+          "trackCount": 12
+        }
+      ],
+      "bakeFps": 30.0,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "memoryScope": "Godot static allocator snapshot; not processRSS/VRAM or isolated animation allocation",
+      "staticMemoryBytesAfterImport": 82013014,
+      "staticMemoryBytesBefore": 21663032,
+      "version": "4.6.3-stable (official)"
+    }
+  },
+  {
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "/tmp/aetherion-revision05-import-checks",
+      "--script",
+      "/tmp/aetherion-ninja-v15-independent/import-settings.gd",
+      "--",
+      "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "192"
+    ],
+    "returncode": 0,
+    "result": {
+      "animationTracks": [
+        {
+          "clip": "cast_release",
+          "keyCount": 6930,
+          "length": 2.0,
+          "trackCount": 18
+        },
+        {
+          "clip": "idle_breath",
+          "keyCount": 1925,
+          "length": 2.0,
+          "trackCount": 5
+        },
+        {
+          "clip": "walk_in_place",
+          "keyCount": 3084,
+          "length": 1.33333337306976,
+          "trackCount": 12
+        }
+      ],
+      "bakeFps": 192.0,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "memoryScope": "Godot static allocator snapshot; not processRSS/VRAM or isolated animation allocation",
+      "staticMemoryBytesAfterImport": 82420730,
+      "staticMemoryBytesBefore": 21663036,
+      "version": "4.6.3-stable (official)"
+    }
+  },
+  {
+    "command": [
+      "godot",
+      "--headless",
+      "--path",
+      "/tmp/aetherion-revision05-import-checks",
+      "--script",
+      "/tmp/aetherion-ninja-v15-independent/import-settings.gd",
+      "--",
+      "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "768"
+    ],
+    "returncode": 0,
+    "result": {
+      "animationTracks": [
+        {
+          "clip": "cast_release",
+          "keyCount": 27666,
+          "length": 2.0,
+          "trackCount": 18
+        },
+        {
+          "clip": "idle_breath",
+          "keyCount": 7685,
+          "length": 2.0,
+          "trackCount": 5
+        },
+        {
+          "clip": "walk_in_place",
+          "keyCount": 12300,
+          "length": 1.33333337306976,
+          "trackCount": 12
+        }
+      ],
+      "bakeFps": 768.0,
+      "input": "/workspace/scratch/ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "memoryScope": "Godot static allocator snapshot; not processRSS/VRAM or isolated animation allocation",
+      "staticMemoryBytesAfterImport": 83536730,
+      "staticMemoryBytesBefore": 21663036,
+      "version": "4.6.3-stable (official)"
+    }
+  }
+]

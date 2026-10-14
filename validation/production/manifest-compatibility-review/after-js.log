@@ -1,0 +1,42 @@
+{
+  "fixtureRoot": "/tmp/aetherion-manifest-compatibility-jXHumq",
+  "wrongRequiredRole": {
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "DELIVERABLE_READ_OR_PARSE",
+        "message": "glb (assets/production/kit/mesh.txt): Missing GLB header"
+      },
+      {
+        "code": "DELIVERABLE_READ_OR_PARSE",
+        "message": "lod1 (assets/production/kit/mesh.txt): Missing GLB header"
+      },
+      {
+        "code": "DELIVERABLE_READ_OR_PARSE",
+        "message": "lod2 (assets/production/kit/mesh.txt): Missing GLB header"
+      },
+      {
+        "code": "DELIVERABLE_READ_OR_PARSE",
+        "message": "collision (assets/production/kit/mesh.txt): Missing GLB header"
+      }
+    ],
+    "exports": []
+  },
+  "booleanSchema": "REJECTED: Invalid Blender import report tool/schema",
+  "pendingWithLodError": {
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "PENDING",
+      "reason": "Awaiting collider",
+      "remainingGate": "Author collider"
+    },
+    "jsIncompleteAssetsPredicate": 0,
+    "pythonPendingPredicate": 1
+  }
+}

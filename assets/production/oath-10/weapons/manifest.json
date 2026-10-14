@@ -1,0 +1,160 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o10-e-weapons-family",
+  "referenceIds": [
+    "reference-043"
+  ],
+  "assets": [
+    {
+      "id": "oath-10-paired-gravity-flail",
+      "archetypeId": "oath-10-paired-gravity-flail",
+      "name": "Paired Gravity Flail",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-10/weapons/paired-gravity-flail/paired-gravity-flail.blend",
+        "glb": "assets/production/oath-10/weapons/paired-gravity-flail/lod0.glb",
+        "lod1": "assets/production/oath-10/weapons/paired-gravity-flail/lod1.glb",
+        "lod2": "assets/production/oath-10/weapons/paired-gravity-flail/lod2.glb",
+        "collision": "assets/production/oath-10/weapons/paired-gravity-flail/collision.glb",
+        "damaged": "assets/production/oath-10/weapons/paired-gravity-flail/damaged.glb",
+        "stowed": "assets/production/oath-10/weapons/paired-gravity-flail/stowed.glb",
+        "textures": [
+          "assets/production/oath-10/weapons/textures/Meteor_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Meteor_roughness.png",
+          "assets/production/oath-10/weapons/textures/Meteor_metallic.png",
+          "assets/production/oath-10/weapons/textures/Meteor_normal.png",
+          "assets/production/oath-10/weapons/textures/Steel_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Steel_roughness.png",
+          "assets/production/oath-10/weapons/textures/Steel_metallic.png",
+          "assets/production/oath-10/weapons/textures/Steel_normal.png",
+          "assets/production/oath-10/weapons/textures/Starstone_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Starstone_roughness.png",
+          "assets/production/oath-10/weapons/textures/Starstone_metallic.png",
+          "assets/production/oath-10/weapons/textures/Starstone_normal.png",
+          "assets/production/oath-10/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-10/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-10/weapons/textures/Gold_normal.png",
+          "assets/production/oath-10/weapons/textures/Enamel_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Enamel_roughness.png",
+          "assets/production/oath-10/weapons/textures/Enamel_metallic.png",
+          "assets/production/oath-10/weapons/textures/Enamel_normal.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_basecolor.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_roughness.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_metallic.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-10/weapons/paired-gravity-flail/front.png",
+          "assets/production/oath-10/weapons/paired-gravity-flail/side.png",
+          "assets/production/oath-10/weapons/paired-gravity-flail/hero.png",
+          "assets/production/oath-10/weapons/paired-gravity-flail/motion.png"
+        ]
+      },
+      "triangles": {
+        "glb": 22328,
+        "lod1": 13390,
+        "lod2": 6684,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.8399614691734314,
+        0.24340000748634338,
+        1.0298000574111938
+      ],
+      "rig": {
+        "type": "eight-bone rigid-linked paired chains and weights",
+        "bones": 8
+      },
+      "animations": [
+        "Paired_weight_idle_swing"
+      ],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Full combat swing/recovery/chain self-collision and physics authority",
+        "Meteor crater smoothing/LOD review"
+      ]
+    },
+    {
+      "id": "oath-10-orbital-astrolabe-staff",
+      "archetypeId": "oath-10-orbital-astrolabe-staff",
+      "name": "Orbital Astrolabe Staff",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-10/weapons/orbital-astrolabe-staff/orbital-astrolabe-staff.blend",
+        "glb": "assets/production/oath-10/weapons/orbital-astrolabe-staff/lod0.glb",
+        "lod1": "assets/production/oath-10/weapons/orbital-astrolabe-staff/lod1.glb",
+        "lod2": "assets/production/oath-10/weapons/orbital-astrolabe-staff/lod2.glb",
+        "collision": "assets/production/oath-10/weapons/orbital-astrolabe-staff/collision.glb",
+        "damaged": "assets/production/oath-10/weapons/orbital-astrolabe-staff/damaged.glb",
+        "stowed": "assets/production/oath-10/weapons/orbital-astrolabe-staff/stowed.glb",
+        "textures": [
+          "assets/production/oath-10/weapons/textures/Meteor_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Meteor_roughness.png",
+          "assets/production/oath-10/weapons/textures/Meteor_metallic.png",
+          "assets/production/oath-10/weapons/textures/Meteor_normal.png",
+          "assets/production/oath-10/weapons/textures/Steel_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Steel_roughness.png",
+          "assets/production/oath-10/weapons/textures/Steel_metallic.png",
+          "assets/production/oath-10/weapons/textures/Steel_normal.png",
+          "assets/production/oath-10/weapons/textures/Starstone_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Starstone_roughness.png",
+          "assets/production/oath-10/weapons/textures/Starstone_metallic.png",
+          "assets/production/oath-10/weapons/textures/Starstone_normal.png",
+          "assets/production/oath-10/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-10/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-10/weapons/textures/Gold_normal.png",
+          "assets/production/oath-10/weapons/textures/Enamel_basecolor.png",
+          "assets/production/oath-10/weapons/textures/Enamel_roughness.png",
+          "assets/production/oath-10/weapons/textures/Enamel_metallic.png",
+          "assets/production/oath-10/weapons/textures/Enamel_normal.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_basecolor.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_roughness.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_metallic.png",
+          "assets/production/oath-10/weapons/textures/NavyCord_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-10/weapons/orbital-astrolabe-staff/front.png",
+          "assets/production/oath-10/weapons/orbital-astrolabe-staff/side.png",
+          "assets/production/oath-10/weapons/orbital-astrolabe-staff/hero.png",
+          "assets/production/oath-10/weapons/orbital-astrolabe-staff/motion.png"
+        ]
+      },
+      "triangles": {
+        "glb": 21736,
+        "lod1": 13012,
+        "lod2": 6488,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.47865039110183716,
+        0.281411349773407,
+        2.3299999237060547
+      ],
+      "rig": {
+        "type": "two articulated orbital bands",
+        "bones": 2
+      },
+      "animations": [
+        "Astrolabe_orbit"
+      ],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Orbital bands clearance and runtime emissive starfield response"
+      ]
+    }
+  ]
+}

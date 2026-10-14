@@ -1,0 +1,33 @@
+{
+  "concept_id": "batch05_05_folded_stage_prop_mender",
+  "reported_group_qa": {
+    "selected_version": "v01"
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "status": "PROPOSED_GENERATED_REVIEW_REQUIRED",
+        "selected_working_version": true,
+        "qa": {
+          "actual_pixels_inspected": true,
+          "inspection_method": "Full rendered image examined at 1536x1024; original source previews bounded at 1200px.",
+          "visible_checks": [
+            "Six same-model turnaround views present, with front, rear, opposite-facing profiles and two three-quarter views.",
+            "Seated-work and crouch views present; garment clears floor visibly.",
+            "Two symmetric exterior front pockets, one rear tie closure, no visible buttons or buckles.",
+            "Soft cloth bends; no armor, masks, weapon, reservoirs or magical apparatus.",
+            "Outside and inside apron flats, pocket and rear-tie details, fixed-count legend, PROPOSED title and review footer present."
+          ],
+          "correction": "None needed for major visible garment topology/count/pose-clearance checks.",
+          "unresolved": [
+            "Rendered finish is smoother/more illustrative than strongly faceted low-poly intent; art-direction review needed.",
+            "No dimensioned garment pattern, material physical properties, seam allowance, cloth simulation, measured geometry or production validation.",
+            "Small hand/cord detail and exact anatomical/orthographic alignment require modeler review.",
+            "Exact-art approval, final sizing, rig, clips and production acceptance unresolved."
+          ]
+        }
+      }
+    }
+  ]
+}

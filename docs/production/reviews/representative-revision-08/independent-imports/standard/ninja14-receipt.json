@@ -1,0 +1,196 @@
+{
+  "scope": "Frozen review assets only; real CPU/headless imports, no GPU/material-render/appearance/collision or gameplay approval",
+  "inputs": {
+    "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend": {
+      "sha256": "195fec1c7b78e975f2b722340971d1eca41338bafcda1ffb4d400efce54b94d1",
+      "bytes": 12176814
+    },
+    "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb": {
+      "sha256": "9ca1b8dfc6ccc8cafe691ab78563d9abbce133cd88bb78d4ea3c3d1a5db49dae",
+      "bytes": 17037540
+    },
+    "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb": {
+      "sha256": "e8536e492b8ccdcad04706dab061af7dff58cdc03a9c31a919822a0ddb35722f",
+      "bytes": 15820084
+    },
+    "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb": {
+      "sha256": "28781ec5988bd52af72cf66df90b89e875fae9a27ca2a1a614609b7b3af501de",
+      "bytes": 14667292
+    },
+    "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb": {
+      "sha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7",
+      "bytes": 4300
+    }
+  },
+  "inputsUnchanged": true,
+  "commands": [
+    {
+      "label": "glb",
+      "command": [
+        "node",
+        "/tmp/aetherion-revision05-import-checks/check-glb.mjs",
+        "/tmp/aetherion-revision05-import-checks/ninja14-inputs.json",
+        "/tmp/aetherion-revision05-import-checks/ninja14-glb.json"
+      ],
+      "returncode": 0,
+      "seconds": 3.013,
+      "log": "/tmp/aetherion-revision05-import-checks/ninja14-glb.log"
+    },
+    {
+      "label": "blender",
+      "command": [
+        "blender",
+        "-b",
+        "-t",
+        "2",
+        "--python",
+        "/tmp/aetherion-revision05-import-checks/check-blender.py",
+        "--",
+        "/tmp/aetherion-revision05-import-checks/ninja14-inputs.json",
+        "/tmp/aetherion-revision05-import-checks/ninja14-blender.json"
+      ],
+      "returncode": 0,
+      "seconds": 13.848,
+      "log": "/tmp/aetherion-revision05-import-checks/ninja14-blender.log"
+    },
+    {
+      "label": "comparison",
+      "command": [
+        "python",
+        "/tmp/aetherion-revision05-import-checks/compare-bounds.py",
+        "/tmp/aetherion-revision05-import-checks/ninja14"
+      ],
+      "returncode": 0,
+      "seconds": 0.059,
+      "log": "/tmp/aetherion-revision05-import-checks/ninja14-comparison.log"
+    },
+    {
+      "label": "godot-0",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-revision05-import-checks",
+        "--script",
+        "/tmp/aetherion-revision05-import-checks/godot_import.gd",
+        "--",
+        "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+      ],
+      "returncode": 0,
+      "seconds": 1.095,
+      "log": "/tmp/aetherion-revision05-import-checks/ninja14-godot-0.log"
+    },
+    {
+      "label": "godot-1",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-revision05-import-checks",
+        "--script",
+        "/tmp/aetherion-revision05-import-checks/godot_import.gd",
+        "--",
+        "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.815,
+      "log": "/tmp/aetherion-revision05-import-checks/ninja14-godot-1.log"
+    },
+    {
+      "label": "godot-2",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-revision05-import-checks",
+        "--script",
+        "/tmp/aetherion-revision05-import-checks/godot_import.gd",
+        "--",
+        "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.955,
+      "log": "/tmp/aetherion-revision05-import-checks/ninja14-godot-2.log"
+    },
+    {
+      "label": "godot-3",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-revision05-import-checks",
+        "--script",
+        "/tmp/aetherion-revision05-import-checks/godot_import.gd",
+        "--",
+        "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.475,
+      "log": "/tmp/aetherion-revision05-import-checks/ninja14-godot-3.log"
+    }
+  ],
+  "godot": [
+    {
+      "path": "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "sha256": "9ca1b8dfc6ccc8cafe691ab78563d9abbce133cd88bb78d4ea3c3d1a5db49dae",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-revision05-import-checks/ninja14-godot-0.log",
+      "result": {
+        "animations": 3,
+        "materials": 4,
+        "meshes": 1,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "sha256": "e8536e492b8ccdcad04706dab061af7dff58cdc03a9c31a919822a0ddb35722f",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-revision05-import-checks/ninja14-godot-1.log",
+      "result": {
+        "animations": 3,
+        "materials": 4,
+        "meshes": 1,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "sha256": "28781ec5988bd52af72cf66df90b89e875fae9a27ca2a1a614609b7b3af501de",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-revision05-import-checks/ninja14-godot-2.log",
+      "result": {
+        "animations": 3,
+        "materials": 4,
+        "meshes": 1,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    },
+    {
+      "path": "/tmp/ninja-v14/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+      "sha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-revision05-import-checks/ninja14-godot-3.log",
+      "result": {
+        "animations": 0,
+        "materials": 0,
+        "meshes": 1,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    }
+  ],
+  "allCommandsPassed": true,
+  "allGodotImportsPassed": true
+}

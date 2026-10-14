@@ -1,0 +1,95 @@
+{
+  "testedRevision": "8c4b5d0bfc75a98388ea29231b9cf1d304dff550",
+  "generatedAt": "2026-10-13T19:34:32.814201+00:00",
+  "environment": {
+    "node": "24.19.0",
+    "npm": "11.9.0",
+    "python": "3.12.14",
+    "jsonschema": "4.26.0",
+    "workspace": "isolated git archive; fresh npm ci runtime and sandbox"
+  },
+  "sourceSnapshot": {
+    "files": 1896,
+    "totalBytes": 331989108,
+    "mismatches": []
+  },
+  "results": {
+    "rootTests": {
+      "pass": 215,
+      "fail": 0
+    },
+    "inheritedSourceTests": {
+      "pass": 51,
+      "fail": 0
+    },
+    "canon": {
+      "pass": 197,
+      "skipped": 1,
+      "humanReview": 2
+    },
+    "canonNegativeFixtures": {
+      "pass": 7,
+      "fail": 0
+    },
+    "systemStatic": {
+      "pass": 31,
+      "fail": 0
+    },
+    "narrativeStatic": {
+      "pass": 49,
+      "fail": 0,
+      "skipped": 5
+    },
+    "coverageCells": 390,
+    "abilityBuild": "PASS with large-chunk warning",
+    "wrapperArtifact": {
+      "byteIdenticalPublicFiles": 24,
+      "castablesPresent": 100
+    },
+    "localHttp": "PASS",
+    "sourceCpuLifecycle": {
+      "imports": 100,
+      "cpuPass": 96,
+      "originalMeteorFailure": 1,
+      "browserApiBlocked": 3
+    },
+    "supplementaryTextureCpu": {
+      "pass": 0,
+      "browserApiBlocked": 3
+    }
+  },
+  "lockfileSha256": {
+    "runtime/ability-matrix/package-lock.json": "92fa23b0372a7b9ac2b50189a0f12c56f2876173c05736a56d76fa8bd4941725",
+    "runtime/ability-matrix/packs/sandbox/package-lock.json": "6777a25ab3ec086eac659d93c5f8f5cd52379172725689646d126f0669913ada",
+    "runtime/ability-matrix/packs/linear/package-lock.json": "6777a25ab3ec086eac659d93c5f8f5cd52379172725689646d126f0669913ada",
+    "runtime/ability-matrix/packs/linear-extended/package-lock.json": "6777a25ab3ec086eac659d93c5f8f5cd52379172725689646d126f0669913ada",
+    "runtime/ability-matrix/packs/linear-ext/package-lock.json": "6777a25ab3ec086eac659d93c5f8f5cd52379172725689646d126f0669913ada",
+    "runtime/ability-matrix/packs/handcast/package-lock.json": "0cd42a92193fa005519aaad4c30ef0cf84ff44d7ff95caa13eb71a4a6b9f9fb7",
+    "runtime/ability-matrix/packs/collective/package-lock.json": "6777a25ab3ec086eac659d93c5f8f5cd52379172725689646d126f0669913ada",
+    "runtime/ability-matrix/packs/casting/package-lock.json": "0cd42a92193fa005519aaad4c30ef0cf84ff44d7ff95caa13eb71a4a6b9f9fb7"
+  },
+  "limitations": [
+    "This validates the merged foundation base, not later production work or a final remote head.",
+    "No browser boot, WebGL shader/GPU render, visual parity, populated targets, rigs gameplay, networking, streaming, or target-device performance certification.",
+    "Supplementary fixture patches root Three module, while separately installed sandbox source uses its own Three module. Thus all three texture cases remain blocked by absent browser document; this is a harness isolation issue, not a reported source regression.",
+    "Known original Meteor omission remains in unchanged source; destination repair tests pass."
+  ],
+  "commands": [
+    "git archive 8c4b5d0bfc75a98388ea29231b9cf1d304dff550 | tar -x -C /tmp/aetherion-regressions-base",
+    "npm ci --prefix runtime/ability-matrix --cache /tmp/aetherion-npm-regressions",
+    "npm ci --prefix runtime/ability-matrix/packs/sandbox --cache /tmp/aetherion-npm-regressions-sandbox",
+    "npm test",
+    "npm run test:source",
+    "npm run build:abilities",
+    "python3 AETHERION_CANON/19_VALIDATION/validate_canon.py --repo . --output <report>",
+    "python3 -m unittest discover -s AETHERION_CANON/19_VALIDATION -p test_validator.py",
+    "python3 AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/validate_systems.py --repo-root . --output <report>",
+    "python3 AETHERION_CANON/06_NARRATIVE/validate_world_narrative.py AETHERION_CANON",
+    "python3 AETHERION_CANON/19_VALIDATION/build_coverage.py --repo .",
+    "node tests/runtime-audit/verify-wrapper-build.mjs",
+    "node tests/runtime-audit/check-wrapper-dev.mjs",
+    "python3 tests/runtime-audit/static-references.py",
+    "node tests/runtime-audit/cpu-lifecycle.mjs",
+    "AUDIT_TEXTURE_FIXTURES=1 node tests/runtime-audit/cpu-lifecycle.mjs"
+  ]
+}

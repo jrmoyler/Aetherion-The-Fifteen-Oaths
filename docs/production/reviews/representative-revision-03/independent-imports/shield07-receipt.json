@@ -1,0 +1,97 @@
+{
+  "scope": "Frozen review assets only; real CPU/headless imports, no GPU/material-render/appearance/collision or gameplay approval",
+  "inputs": {
+    "/tmp/aetherion-impulse-shield-lateral-review07/impulse-shield-lateral-review07.blend": {
+      "sha256": "9e4d5bb7758aed41f711cc0b08450c8e74633420af52755c41051fb6a8dc3d33",
+      "bytes": 6226780
+    },
+    "/tmp/aetherion-impulse-shield-lateral-review07/impulse-shield-lateral-review07.glb": {
+      "sha256": "24a99b69791acda8574d0dff9758d2dfe235c98c5d85083e2687e89b91d881f2",
+      "bytes": 4846080
+    }
+  },
+  "inputsUnchanged": true,
+  "commands": [
+    {
+      "label": "glb",
+      "command": [
+        "node",
+        "/tmp/aetherion-resumed-import-checks/check-glb.mjs",
+        "/tmp/aetherion-resumed-import-checks/shield07-inputs.json",
+        "/tmp/aetherion-resumed-import-checks/shield07-glb.json"
+      ],
+      "returncode": 0,
+      "seconds": 1.789,
+      "log": "/tmp/aetherion-resumed-import-checks/shield07-glb.log"
+    },
+    {
+      "label": "blender",
+      "command": [
+        "blender",
+        "-b",
+        "-t",
+        "2",
+        "--python",
+        "/tmp/aetherion-resumed-import-checks/check-blender.py",
+        "--",
+        "/tmp/aetherion-resumed-import-checks/shield07-inputs.json",
+        "/tmp/aetherion-resumed-import-checks/shield07-blender.json"
+      ],
+      "returncode": 0,
+      "seconds": 9.362,
+      "log": "/tmp/aetherion-resumed-import-checks/shield07-blender.log"
+    },
+    {
+      "label": "comparison",
+      "command": [
+        "python",
+        "/tmp/aetherion-resumed-import-checks/compare-bounds.py",
+        "/tmp/aetherion-resumed-import-checks/shield07"
+      ],
+      "returncode": 0,
+      "seconds": 0.025,
+      "log": "/tmp/aetherion-resumed-import-checks/shield07-comparison.log"
+    },
+    {
+      "label": "godot-0",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-resumed-import-checks",
+        "--script",
+        "/tmp/aetherion-resumed-import-checks/godot_import.gd",
+        "--",
+        "/tmp/aetherion-impulse-shield-lateral-review07/impulse-shield-lateral-review07.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.245,
+      "log": "/tmp/aetherion-resumed-import-checks/shield07-godot-0.log"
+    }
+  ],
+  "godot": [
+    {
+      "path": "/tmp/aetherion-impulse-shield-lateral-review07/impulse-shield-lateral-review07.glb",
+      "sha256": "24a99b69791acda8574d0dff9758d2dfe235c98c5d85083e2687e89b91d881f2",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-resumed-import-checks/shield07-godot-0.log",
+      "result": {
+        "animations": 1,
+        "materials": 4,
+        "meshes": 312,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    }
+  ],
+  "allCommandsPassed": true,
+  "allGodotImportsPassed": true,
+  "authorFreezeReceipt": {
+    "path": "/tmp/aetherion-impulse-shield-lateral-review07/geometry-freeze-receipt.json",
+    "sha256": "3162378a1067d0364c60050043b67c3065467bf43593f1e1578c9c91569507e7",
+    "checkedFiles": 6,
+    "mismatches": []
+  }
+}

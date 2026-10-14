@@ -1,0 +1,58 @@
+{
+  "status": "NOT_EXACT_EYE_OCCLUSION_IMPROVED",
+  "candidate": "Kiln ninja V9 eye-only diagnostic",
+  "scope": "Actual final front/profile, source090 and V8b/V9 comparisons inspected. Two final CPU views only; no engine revalidation or candidate edits.",
+  "frozenManifestSha256": "fdd5546564c0d9c7e484fa946a636a81b13ee5803ba845dd50233bbaef5d3d5f",
+  "frozenInputs": 28,
+  "frozenInputMismatches": 0,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "bytes": 2129998,
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+    },
+    {
+      "path": "/tmp/ninja-v9/front-comparison.png",
+      "bytes": 714571,
+      "sha256": "7e7c417856babc9b01ec7642dbc46ce696fcfd82c5967283f0e3558feea36000"
+    },
+    {
+      "path": "/tmp/ninja-v9/profile-comparison.png",
+      "bytes": 714079,
+      "sha256": "56df5ebd8e5ba27ddc5d097dad37bce3639e9b8a05523a8be5a3b4ba7bba678b"
+    },
+    {
+      "path": "/tmp/ninja-v9/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png",
+      "bytes": 790002,
+      "sha256": "e8fea4c74c0c7b8607116296ae2ca1c2c8dd470c593c67d51ab01b3b6b036195"
+    },
+    {
+      "path": "/tmp/ninja-v9/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+      "bytes": 783180,
+      "sha256": "5da6c660e96f61f5c74e49be39b67667426e115d76355d472ba84949b3b98275"
+    }
+  ],
+  "improvements": [
+    "The large exposed profile white eye disk from V8b is reduced to a small bright sliver.",
+    "Front globes and wrapping lids read with more depth than flat V8b almond patches."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Eye opening and canthi",
+      "finding": "Front eyes still read as rounded globes inserted into narrow horizontal cuts. Inner/outer corners have abrupt dark gaps and pinched edges; upper/lower lid planes are weak. Tiny bright profile sliver remains.",
+      "nextRepair": "Refine the continuous eyelid rim into the surrounding brow/cheek and close corner gaps while preserving the improved profile occlusion."
+    },
+    {
+      "priority": 1,
+      "area": "Source likeness beyond eyes",
+      "finding": "Patterned bent-strip hair, smooth forehead cap, sparse nape/temple coverage, wedge nose, soft lip/chin contour and simplified ear remain visibly different from original090.",
+      "nextRepair": "Continue connected facial contour and hair guide/coverage repairs; do not interpret eye improvement as overall character acceptance."
+    }
+  ],
+  "decision": "Specific eye-occlusion improvement is visible, but exact likeness remains open. Keep focused diagnostic status; no full-view, GPU, gameplay or art approval claim.",
+  "limitations": [
+    "No calibrated source-camera registration or numerical facial proportion claims.",
+    "Technical engine evidence is separate from this visual inspection."
+  ]
+}

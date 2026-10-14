@@ -1,10 +1,14 @@
 # Aetherion: The Fifteen Oaths
 
+**Daybreak browser practice area:** [run locally and prepare the owner-operated Vercel build](app/daybreak/README.md). All 100 imported castables are exposed; rendered gameplay/mobile acceptance remains unverified.
+
 **Every force has a covenant. Every covenant has a price.**
 
 A source-preserving ability foundation and a coherent, proposed game-production canon for one interconnected continent and exactly fifteen Oaths. The founder-established premises, recovered artwork, existing source behavior and new design proposals have separate evidence and approval states.
 
 This repository is a reviewable foundation. It does not claim that the continent-scale game, multiplayer authority, finished realm assets or production economy are implemented.
+
+The [Phase I/II production status](docs/production/PHASE_I_II_STATUS.md) tracks the full work ledger, 35 distinct Blender-authored candidate designs, Three.js/Godot evidence, and the exact Phase II ZIP with its unpacked documents. [Inspect candidate renders and references](docs/production/RENDER_REVIEW_INDEX.md). Full production and art approval remain incomplete.
 
 ## Start here
 

@@ -1,0 +1,181 @@
+{
+  "status": "FROZEN_UNAPPROVED_REVIEW_ONLY",
+  "productionPromotion": false,
+  "previousReview": "representative-revision-07",
+  "entries": [
+    {
+      "id": "ninja-v15",
+      "title": "Ninja V15 \u2014 narrow walk grounding repair",
+      "references": [
+        90
+      ],
+      "changes": "Author dense measurements against the unchanged world Z=0.012 m floor: V13 penetrates in 742/993 walk samples (worst 2.963029 mm); V15 source and actual Blender-imported primary/LOD1/LOD2 each have 0/993 penetrating samples. Minimum clearances are 0.745924 / 0.746586 / 0.746586 / 0.683716 mm respectively. Four before/after comparison views show the small sole-clearance correction. Independent Blender/Three.js/Godot checks now complete: all three visual LODs have 1,089 samples each with zero penetration. Godot default 30 fps support gaps span 0.59265\u20133.33609 mm; explicit 192 fps spans 0.68326\u20130.75043 mm. A 10 mm downward negative fixture rejects all 993 walk samples per LOD in Three.js/Godot.",
+      "remaining": "Godot uses imported Skeleton/Skin CPU evaluation, not rendering. Importer bake-rate differences and preserved provisional harness failures limit the claim; no GPU or continuous-time acceptance. This V13-derived animation repair excludes V14 material changes. Contact IK, foot sliding, terrain response and walk/idle/cast transitions remain unvalidated; existing likeness/equipment defects remain. Sampled nonpenetration is not continuous proof or gameplay acceptance.",
+      "views": [
+        {
+          "label": "V13 / V15 walk frame 09: feet",
+          "path": "kiln-ninja-v15/walk-09-feet-comparison.png"
+        },
+        {
+          "label": "V13 / V15 walk frame 09: hero",
+          "path": "kiln-ninja-v15/walk-09-hero-comparison.png"
+        },
+        {
+          "label": "V13 / V15 walk frame 25: feet",
+          "path": "kiln-ninja-v15/walk-25-feet-comparison.png"
+        },
+        {
+          "label": "V13 / V15 walk frame 25: hero",
+          "path": "kiln-ninja-v15/walk-25-hero-comparison.png"
+        }
+      ],
+      "sources": [
+        "kiln-ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "kiln-ninja-v15/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-090/original.png",
+          "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+        }
+      ]
+    },
+    {
+      "id": "daybreak-r05",
+      "title": "Daybreak r05 \u2014 exported socket repair",
+      "references": [
+        105
+      ],
+      "changes": "Three anchor defects repaired without visual refinement: hidden LOD duplicates, damaged lower-LOD canonical identities and 20 misplaced floor-adapter anchors. Frozen author evidence records 22 changed / 169 unchanged inherited payloads, seven Blender sources and nine GLBs repaired. All 56 visual-module/fixture socket audits pass; visible geometry, material, image and animation fingerprints are unchanged. Three CPU rerenders have zero changed RGB pixels. Independent checks verify the full 290-payload freeze, nine actual GLB imports and seven saved-source opens, zero Khronos errors/warnings, all 56 exported socket audits, and 391 actual Three.js world positions (maximum error 0.39321 micrometers). Duplicate and 15 mm displacement negatives reject; all five saved fixture anchors match and four adapter mesh bounds agree within 0.26227 micrometers.",
+      "remaining": "Independent project gate: 16 structural passes, one explicitly incomplete baffle, zero hard errors; this is not 17 accepted modules. The native module consumer passes 691 checks but does not alone certify fixture assemblies. This remains 17 module designs, not a new art family: baffle collision, art fidelity, physics/controller traversal, Unreal, GPU and performance acceptance remain open.",
+      "views": [
+        {
+          "label": "Repaired civic assembly \u2014 same visual pixels as r04",
+          "path": "daybreak-r05/fixtures/civic/hero.png"
+        },
+        {
+          "label": "Canopy \u2014 visual geometry unchanged",
+          "path": "daybreak-r05/modules/shade-canopy/hero.png"
+        },
+        {
+          "label": "Public colonnade \u2014 visual geometry unchanged",
+          "path": "daybreak-r05/modules/public-colonnade/hero.png"
+        }
+      ],
+      "sources": [
+        "daybreak-r05/modules/shade-canopy/source.blend",
+        "daybreak-r05/modules/public-colonnade/source.blend",
+        "daybreak-r05/fixtures/civic/source.blend"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893"
+        }
+      ]
+    },
+    {
+      "id": "fault-v13",
+      "title": "Fault V13 \u2014 local facet improvement only",
+      "references": [
+        53
+      ],
+      "changes": "Angular crystal faces and articulated stone relief improve over flatter V12. This local change does not establish exact matching quality.",
+      "remaining": "The long connected central channel, tiled stone banks, near-parallel substrate rails, bulky cuff, prism pommel and regular wrap remain unlike the source.",
+      "views": [
+        {
+          "label": "Actual front",
+          "path": "fault-v13/amethyst-short-blade/matched-front-review.png"
+        },
+        {
+          "label": "Actual profile",
+          "path": "fault-v13/amethyst-short-blade/matched-profile-review.png"
+        },
+        {
+          "label": "Original / V12 / V13",
+          "path": "fault-v13/comparison-reference-v12-v13.png"
+        }
+      ],
+      "sources": [
+        "fault-v13/amethyst-short-blade/source.blend",
+        "fault-v13/amethyst-short-blade/review.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-053/original.png",
+          "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+        }
+      ]
+    },
+    {
+      "id": "ninja-v14",
+      "title": "Ninja V14 \u2014 near-neutral material diagnostic",
+      "references": [
+        90
+      ],
+      "changes": "Material baking produces subtle finish changes; independent pixels show no clear source-likeness gain over V13. This is not an overall art improvement. Baseline exports are historical reproduction inputs, not additional delivered designs.",
+      "remaining": "Broad repeated locks, cap/crown patches, pointed nape, eye corners, nasal/lip/chin shape and cord-like ear folds remain. These focused portraits do not establish full-body animation quality. V15 is a separate V13-derived animation repair; independent sampled CPU grounding checks pass with importer and contact limits.",
+      "views": [
+        {
+          "label": "Actual front portrait",
+          "path": "ninja-v14-material-diagnostic/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png"
+        },
+        {
+          "label": "Actual profile",
+          "path": "ninja-v14-material-diagnostic/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png"
+        },
+        {
+          "label": "Original / V13 / V14 front",
+          "path": "ninja-v14-material-diagnostic/front-comparison.png"
+        },
+        {
+          "label": "Original / V13 / V14 profile",
+          "path": "ninja-v14-material-diagnostic/profile-comparison.png"
+        }
+      ],
+      "sources": [
+        "ninja-v14-material-diagnostic/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "ninja-v14-material-diagnostic/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-090/original.png",
+          "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+        }
+      ]
+    },
+    {
+      "id": "daybreak-r04",
+      "title": "Daybreak r04 \u2014 failed technical baseline",
+      "references": [
+        105
+      ],
+      "changes": "Four-point fabric silhouette and layered pier heads are concrete local gains; lost shaft ornament and shallow underside make the result mixed. This frozen baseline has duplicate fixture anchors and is retained offline for comparison.",
+      "remaining": "Each affected fixture has 12 canopy-seat and 12 pier-seat nodes instead of four each: hidden LOD anchors leaked into exports. Four fixtures also inherit 20 misplaced floor-adapter anchor positions at the origin, with meter-scale errors; two modules have altered lower-LOD canonical names from Blender decimal suffixing. The 691-check native module-consumer pass does not certify fixture-assembly anchors. R05 repairs are independently checked and published separately in this bundle; this r04 baseline remains failed and unchanged. Canopy underside, receiver hardware, arches, materials and full-kit acceptance remain open.",
+      "views": [
+        {
+          "label": "Civic assembly",
+          "path": "daybreak-r04/fixtures/civic/hero.png"
+        },
+        {
+          "label": "Canopy comparison",
+          "path": "daybreak-r04/r04-canopy-comparison.png"
+        },
+        {
+          "label": "Independent reference comparison",
+          "path": "independent-review/daybreak-r04/01-original-proposed-assembly.png"
+        }
+      ],
+      "sources": [
+        "daybreak-r04/modules/shade-canopy/source.blend",
+        "daybreak-r04/modules/public-colonnade/source.blend"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893"
+        }
+      ]
+    }
+  ]
+}

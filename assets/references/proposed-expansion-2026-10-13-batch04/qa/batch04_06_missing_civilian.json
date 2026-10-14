@@ -1,0 +1,44 @@
+{
+  "concept_id": "batch04_06_missing_civilian",
+  "reported_group_qa": {
+    "preferred_review_version": "v02",
+    "reference_pixels_inspected": true,
+    "unresolved_inconsistencies": [
+      "LEFT PROFILE faces right and RIGHT PROFILE faces left despite correction prompt; labels not usable as requested view-direction authority.",
+      "Pouch appears anatomical left in front but anatomical right in standing rear; flat rear locates it differently from standing rear.",
+      "Buttons are dark cloth-covered rather than requested pale silver; closure line is near center rather than distinctly offset.",
+      "Flat sleeves and worn sleeves differ in apparent width/length; exact seam/button count still requires reconciliation."
+    ],
+    "approval_gate": "No exact-art, modeling, rig, engineering, scale, construction, safety or family-complete approval is implied. Laterality and seam inconsistencies prevent modeling-ready acceptance."
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "pixel_qa": {
+          "inspected": true,
+          "observations": [
+            "Six views, front/rear flats, clear seam diagram, pouch details, seated reach and crouch present.",
+            "Overshirt is calf length with flared sleeves and metal hinge closures, departing from brief.",
+            "Both profile labels face opposite requested directions."
+          ]
+        },
+        "status": "superseded_proposal_preserved"
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "pixel_qa": {
+          "inspected": true,
+          "observations": [
+            "Correction gives knee-length charcoal overshirt, low folded collar, ordinary sleeves/shoes, finished split hem and restrained crimson inner facing.",
+            "Cloth-covered buttons and plain soft clothing replace exposed hinge closures and wizard-like silhouette.",
+            "Six standing views, flats, seam diagram, detail views, seated reach and crouch retained."
+          ]
+        },
+        "status": "preferred_proposal_with_unresolved_issues"
+      }
+    }
+  ]
+}

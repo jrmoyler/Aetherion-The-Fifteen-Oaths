@@ -1,0 +1,15 @@
+{
+  "wrongRequiredRole": {
+    "result": "REJECTED",
+    "error": "Not a GLB deliverable: assets/production/kit/mesh.txt"
+  },
+  "booleanSchema": {
+    "result": "ACCEPTED",
+    "evidence": {
+      "role": "source_validation",
+      "path": "assets/production/kit/report.json",
+      "size_bytes": 205,
+      "sha256": "0606ebb440071836c1fa27bd1ea2baccdb203173324a852716fd0e0e1c2522fa"
+    }
+  }
+}

@@ -1,0 +1,320 @@
+[
+  {
+    "path": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+    "sha256": "e208fc2e33e15c301dd7b00facfed1d18b8d3fb02222de6b80fe3ecc9c08939b",
+    "validation": {
+      "uri": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "mimeType": "model/gltf-binary",
+      "validatorVersion": "2.0.0-dev.3.10",
+      "issues": {
+        "numErrors": 1,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "VALUE_NOT_IN_RANGE",
+            "message": "Value 1.25 is out of range.",
+            "severity": 0,
+            "pointer": "/materials/3/pbrMetallicRoughness/roughnessFactor"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "Khronos glTF Blender I/O v4.3.47",
+        "extensionsUsed": [
+          "KHR_materials_specular"
+        ],
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 13124612
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          },
+          {
+            "pointer": "/images/1",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          },
+          {
+            "pointer": "/images/2",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 3,
+        "materialCount": 4,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 4,
+        "totalVertexCount": 47870,
+        "totalTriangleCount": 54212,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 7
+      }
+    }
+  },
+  {
+    "path": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+    "sha256": "dfd339bf8b87f88aac200f8481a89ad55cd58d118cf39c0ad84180da4f8736c4",
+    "validation": {
+      "uri": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "mimeType": "model/gltf-binary",
+      "validatorVersion": "2.0.0-dev.3.10",
+      "issues": {
+        "numErrors": 1,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "VALUE_NOT_IN_RANGE",
+            "message": "Value 1.25 is out of range.",
+            "severity": 0,
+            "pointer": "/materials/3/pbrMetallicRoughness/roughnessFactor"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "Khronos glTF Blender I/O v4.3.47",
+        "extensionsUsed": [
+          "KHR_materials_specular"
+        ],
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 11941500
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          },
+          {
+            "pointer": "/images/1",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          },
+          {
+            "pointer": "/images/2",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 3,
+        "materialCount": 4,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 4,
+        "totalVertexCount": 33972,
+        "totalTriangleCount": 33068,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 7
+      }
+    }
+  },
+  {
+    "path": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+    "sha256": "0aa631b901ff130c8cd41cacc276423bebea7e4f421bd21ca63c8bc57ce6f17f",
+    "validation": {
+      "uri": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "mimeType": "model/gltf-binary",
+      "validatorVersion": "2.0.0-dev.3.10",
+      "issues": {
+        "numErrors": 1,
+        "numWarnings": 0,
+        "numInfos": 0,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "VALUE_NOT_IN_RANGE",
+            "message": "Value 1.25 is out of range.",
+            "severity": 0,
+            "pointer": "/materials/3/pbrMetallicRoughness/roughnessFactor"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "Khronos glTF Blender I/O v4.3.47",
+        "extensionsUsed": [
+          "KHR_materials_specular"
+        ],
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 10866520
+          },
+          {
+            "pointer": "/images/0",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          },
+          {
+            "pointer": "/images/1",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          },
+          {
+            "pointer": "/images/2",
+            "mimeType": "image/png",
+            "storage": "buffer-view",
+            "image": {
+              "width": 2048,
+              "height": 1024,
+              "format": "rgba",
+              "primaries": "srgb",
+              "transfer": "srgb",
+              "bits": 8
+            }
+          }
+        ],
+        "animationCount": 3,
+        "materialCount": 4,
+        "hasMorphTargets": false,
+        "hasSkins": true,
+        "hasTextures": true,
+        "hasDefaultScene": true,
+        "drawCallCount": 4,
+        "totalVertexCount": 20983,
+        "totalTriangleCount": 18432,
+        "maxUVs": 1,
+        "maxInfluences": 4,
+        "maxAttributes": 7
+      }
+    }
+  },
+  {
+    "path": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+    "sha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7",
+    "validation": {
+      "uri": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+      "mimeType": "model/gltf-binary",
+      "validatorVersion": "2.0.0-dev.3.10",
+      "issues": {
+        "numErrors": 0,
+        "numWarnings": 0,
+        "numInfos": 1,
+        "numHints": 0,
+        "messages": [
+          {
+            "code": "UNUSED_OBJECT",
+            "message": "This object may be unused.",
+            "severity": 2,
+            "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+          }
+        ],
+        "truncated": false
+      },
+      "info": {
+        "version": "2.0",
+        "generator": "Khronos glTF Blender I/O v4.3.47",
+        "resources": [
+          {
+            "pointer": "/buffers/0",
+            "mimeType": "application/gltf-buffer",
+            "storage": "glb",
+            "byteLength": 3080
+          }
+        ],
+        "animationCount": 0,
+        "materialCount": 0,
+        "hasMorphTargets": false,
+        "hasSkins": false,
+        "hasTextures": false,
+        "hasDefaultScene": true,
+        "drawCallCount": 1,
+        "totalVertexCount": 82,
+        "totalTriangleCount": 76,
+        "maxUVs": 1,
+        "maxInfluences": 0,
+        "maxAttributes": 3
+      }
+    }
+  }
+]

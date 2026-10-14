@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aetherion-phase2/schemas/settlement.schema.json",
+  "$comment": "Planning-package schema identifier, not a hosted service.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parent_settlement_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "function": {
+            "type": "string",
+            "minLength": 1
+          },
+          "siting": {
+            "type": "string",
+            "minLength": 1
+          },
+          "service_dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "public_access": {
+            "type": "string",
+            "minLength": 1
+          },
+          "failure_response": {
+            "type": "string",
+            "minLength": 1
+          },
+          "population_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "name",
+          "region_id",
+          "kind",
+          "poi_id",
+          "parent_settlement_id",
+          "function",
+          "siting",
+          "service_dependencies",
+          "public_access",
+          "failure_response",
+          "population_status",
+          "source_refs"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "canon_status",
+    "records"
+  ]
+}

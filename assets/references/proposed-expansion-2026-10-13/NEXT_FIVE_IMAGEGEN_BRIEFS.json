@@ -1,0 +1,613 @@
+{
+  "records": [
+    {
+      "batch_id": "06_daybreak_foundation_floor_interfaces",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "module_names": [
+        "foundation-plinth",
+        "floor-bay"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/8",
+      "exact_source_module_records": [
+        {
+          "name": "foundation-plinth",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4,
+            4,
+            0.6
+          ],
+          "extent_note": "Footprint bearing pad; below-grade depth requires terrain/geotechnical fiction review.",
+          "connections": [
+            "floor_datum:top",
+            "structural_edge:N/E/S/W"
+          ],
+          "construction": "Seat region-specific structural pier; keep service sleeve outside bearing zone.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "floor-bay",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4,
+            4,
+            0.4
+          ],
+          "extent_note": "4 m occupied bay including structural thickness.",
+          "connections": [
+            "structural_edge:N/E/S/W",
+            "floor_datum:top"
+          ],
+          "construction": "Connect opposing edge normals; terrain infill never covers floor datum.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_kit_construction": "Stone piers and thin removable facing carry distinct structural and decorative roles; canopy ties avoid public head clearance.",
+      "materials": [
+        "pale masonry",
+        "marble facing",
+        "bronze trim",
+        "woven shade"
+      ],
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "new_proposed_details": "Recessed reversible edge keys, separate perimeter drainage channel, flush replaceable marble surface panels and discrete bronze locator inserts. All new joinery is proposed.",
+      "priority_reason": "This establishes datum, structural edge and bearing interfaces used by every shell and circulation module.",
+      "prompt": "Create a NEW PROPOSED Aetherion Oath of Daybreak asset-construction reference sheet, grounded in the attached original overview. Preserve pale opaque masonry and marble, restrained bronze trim, ivory woven shade, clean folded-plane civic design and practical public access. Neutral studio illumination, clean pale-gray board, orthographic front/side/top panels wherever requested, large readable labels, one consistent design across panels. No characters except a simple scale silhouette if needed; no weapons, new symbols, decorative clutter or magical structural support. Newly specified joinery is PROPOSED and must not be portrayed as observed canon. Every numerical dimension mentioned below is a PROPOSED SOURCE TARGET, not a measurement of generated pixels, approval or an engineering certification. Do not invent extra dimensions. Show construction clearly instead of adding a grand city scene. FOUNDATION AND FLOOR INTERFACES. Show two discrete components and one joint assembly: FOUNDATION PLINTH, nominal 4 m width x 4 m depth x 0.6 m height; FLOOR BAY, nominal 4 m x 4 m x 0.4 m. Large top views with four cardinal mating edges, front and side sections, underside view and exploded corner assembly. Distinguish the plinth bearing pad from the floor structural thickness; make finished floor datum explicit. Show stone pier seating only on bearing zone; a separate service sleeve routes outside that zone. Opposing floor edges meet flush without gaps or raised metallic trip strips. Ground/terrain infill terminates below the finished floor datum. Keep below-grade depth unmeasured and label BELOW-GRADE DESIGN UNRESOLVED. Add two adjacent floor bays in a small continuity panel to prove edge matching. PROPOSED NEW DETAILS: Recessed reversible edge keys, separate perimeter drainage channel, flush replaceable marble surface panels and discrete bronze locator inserts. All new joinery is proposed. Keep a small footer: CONCEPT CONSTRUCTION INTENT \u2014 DIMENSIONS AND CONNECTIONS REQUIRE REVIEW. Avoid tiny paragraphs on the board.",
+      "completion_limit": "Covers specified module design intent only; generated geometry must be checked and exact artifact reviewed before modeling approval."
+    },
+    {
+      "batch_id": "07_daybreak_wall_window_corner_interfaces",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "module_names": [
+        "solid-wall",
+        "window-wall",
+        "inside-corner",
+        "outside-corner"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/8",
+      "exact_source_module_records": [
+        {
+          "name": "solid-wall",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4,
+            0.35,
+            3.2
+          ],
+          "extent_note": "Width, wall thickness, floor-to-floor height; thickness can increase outward only.",
+          "connections": [
+            "structural_edge:left/right",
+            "floor_datum:base",
+            "roof_seat:top"
+          ],
+          "construction": "Visible load path and facing are regional; no moving interior clear plane.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "window-wall",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4,
+            0.35,
+            3.2
+          ],
+          "extent_note": "Window aperture target 1.2 m wide x 1.2 m high, sill 1 m.",
+          "connections": [
+            "structural_edge:left/right",
+            "floor_datum:base",
+            "window_clear:center"
+          ],
+          "construction": "Frame independent pane/shutter, drain sill outward; no collider across open traversal window if authorized.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "inside-corner",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            0.35,
+            0.35,
+            3.2
+          ],
+          "extent_note": "Corner return thickness; adjacent wall bays terminate on its two perpendicular planes.",
+          "connections": [
+            "structural_edge:west",
+            "structural_edge:south",
+            "floor_datum:base"
+          ],
+          "construction": "Miter or interlock regional wall structure; do not overlay two full thicknesses into circulation.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "outside-corner",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            0.35,
+            0.35,
+            3.2
+          ],
+          "extent_note": "Exterior return thickness, outward decoration separately bounded.",
+          "connections": [
+            "structural_edge:east",
+            "structural_edge:north",
+            "floor_datum:base"
+          ],
+          "construction": "Cap exposed material ends and route rain clear of structural seam.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_kit_construction": "Stone piers and thin removable facing carry distinct structural and decorative roles; canopy ties avoid public head clearance.",
+      "materials": [
+        "pale masonry",
+        "marble facing",
+        "bronze trim",
+        "woven shade"
+      ],
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "new_proposed_details": "Shallow restrained vertical marble relief, replaceable bronze-edged window frame, dry recessed facing clips and weather-shedding external corner cap; no new load-bearing fantasy ornaments.",
+      "priority_reason": "Closes shell continuity and corner thickness before interiors, roof and dwelling assembly.",
+      "prompt": "Create a NEW PROPOSED Aetherion Oath of Daybreak asset-construction reference sheet, grounded in the attached original overview. Preserve pale opaque masonry and marble, restrained bronze trim, ivory woven shade, clean folded-plane civic design and practical public access. Neutral studio illumination, clean pale-gray board, orthographic front/side/top panels wherever requested, large readable labels, one consistent design across panels. No characters except a simple scale silhouette if needed; no weapons, new symbols, decorative clutter or magical structural support. Newly specified joinery is PROPOSED and must not be portrayed as observed canon. Every numerical dimension mentioned below is a PROPOSED SOURCE TARGET, not a measurement of generated pixels, approval or an engineering certification. Do not invent extra dimensions. Show construction clearly instead of adding a grand city scene. WALL AND CORNER CONSTRUCTION. Create a single intercompatible wall system with four clearly separated labeled components: SOLID WALL, WINDOW WALL, INSIDE CORNER, OUTSIDE CORNER. Both wall modules have nominal envelope 4 m width x 0.35 m thickness x 3.2 m height. Window aperture target 1.2 m wide x 1.2 m high with sill at 1 m. Corner-return nominal extent 0.35 x 0.35 x 3.2 m. Show front and rear of solid and window wall; top cross-sections through BOTH corner types; one exploded wall edge section separating load-bearing masonry from removable marble facing; tiny assembled L-shaped interior proving wall thickness is not doubled into circulation. Window frame/pane or shutter is independent; slope sill drainage outward. Preserve the interior clear plane; any decorative thickness grows outward. Cap exposed outside ends, route rain away from structural seam, mark floor datum, roof seat and left/right edge connection planes. Do not put a baffle inside the 1.2 m opening; baffle is a separate previously proposed module. PROPOSED NEW DETAILS: Shallow restrained vertical marble relief, replaceable bronze-edged window frame, dry recessed facing clips and weather-shedding external corner cap; no new load-bearing fantasy ornaments. Keep a small footer: CONCEPT CONSTRUCTION INTENT \u2014 DIMENSIONS AND CONNECTIONS REQUIRE REVIEW. Avoid tiny paragraphs on the board.",
+      "completion_limit": "Covers specified module design intent only; generated geometry must be checked and exact artifact reviewed before modeling approval."
+    },
+    {
+      "batch_id": "08_daybreak_clinic_threshold_door",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "module_names": [
+        "clinic threshold",
+        "door-frame"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/8",
+      "exact_source_module_records": [
+        {
+          "name": "clinic threshold",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            2.4,
+            2.0,
+            2.8
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Wide door-clear socket and flush floor align to protected queue/turn space; signage mounts out of sweep.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Wide door-clear socket and flush floor align to protected queue/turn space; signage mounts out of sweep.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "door-frame",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.6,
+            0.4,
+            2.8
+          ],
+          "extent_note": "Outer frame; clear aperture 1.2 m width x 2.4 m height after trim.",
+          "connections": [
+            "door_clear:center",
+            "floor_datum:threshold",
+            "hinge:left-or-right"
+          ],
+          "construction": "Leave 0.2 m jamb/head zones; leaf sweep outside protected route or use pocket leaf.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": 1.2,
+            "door_height_m": 2.4,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_kit_construction": "Stone piers and thin removable facing carry distinct structural and decorative roles; canopy ties avoid public head clearance.",
+      "materials": [
+        "pale masonry",
+        "marble facing",
+        "bronze trim",
+        "woven shade"
+      ],
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "new_proposed_details": "A reversible side-hinged leaf, low-profile service latch, flush contrasting stone threshold strip and wall-mounted plain service-name panel; these are design proposals.",
+      "priority_reason": "Public entry, protected circulation and door sweeps constrain all clinics, civic services and habitable interiors.",
+      "prompt": "Create a NEW PROPOSED Aetherion Oath of Daybreak asset-construction reference sheet, grounded in the attached original overview. Preserve pale opaque masonry and marble, restrained bronze trim, ivory woven shade, clean folded-plane civic design and practical public access. Neutral studio illumination, clean pale-gray board, orthographic front/side/top panels wherever requested, large readable labels, one consistent design across panels. No characters except a simple scale silhouette if needed; no weapons, new symbols, decorative clutter or magical structural support. Newly specified joinery is PROPOSED and must not be portrayed as observed canon. Every numerical dimension mentioned below is a PROPOSED SOURCE TARGET, not a measurement of generated pixels, approval or an engineering certification. Do not invent extra dimensions. Show construction clearly instead of adding a grand city scene. CLINIC THRESHOLD AND DOOR FRAME. Show a public-clinic threshold assembly and an independently removable standard door frame: threshold nominal envelope 2.4 m width x 2.0 m depth x 2.8 m height; door-frame outer envelope 1.6 m width x 0.4 m depth x 2.8 m height; its CLEAR APERTURE is 1.2 m width x 2.4 m height AFTER trim. Use a large front elevation, rear interior elevation, plan view clearly showing protected queue/turn area, side section across flush threshold and exploded frame-to-wall seat. Distinguish outer frame dimensions from clear opening. Use a door leaf opening away from the protected through-route; show sweep in plan and a separate open-state inset with identical hinges. Place a simple signage bracket outside leaf sweep without inventing a clinic emblem. Flush floor joins, no trip sill, no access requiring magic or allegiance. Do not infer legal accessibility compliance from conceptual dimensions. IMPORTANT SOURCE AMBIGUITY: source mentions 0.2 m jamb/head zones but outer 2.8 m height minus 2.4 m clear leaves 0.4 m; do not assert a resolved head thickness. Label HEAD-ZONE DETAIL TO REVIEW and preserve the specified outer/clear envelopes. PROPOSED NEW DETAILS: A reversible side-hinged leaf, low-profile service latch, flush contrasting stone threshold strip and wall-mounted plain service-name panel; these are design proposals. Keep a small footer: CONCEPT CONSTRUCTION INTENT \u2014 DIMENSIONS AND CONNECTIONS REQUIRE REVIEW. Avoid tiny paragraphs on the board.",
+      "completion_limit": "Covers specified module design intent only; generated geometry must be checked and exact artifact reviewed before modeling approval."
+    },
+    {
+      "batch_id": "09_daybreak_stair_ramp_circulation",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "module_names": [
+        "stair-flight",
+        "ramp-run"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/8",
+      "exact_source_module_records": [
+        {
+          "name": "stair-flight",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.8,
+            2.7,
+            1.6
+          ],
+          "extent_note": "10 risers at 0.16 m, nine visible treads at 0.30 m; two flights plus landing connect 3.2 m floors.",
+          "connections": [
+            "landing_start:bottom",
+            "landing_end:top",
+            "guardrail:left/right"
+          ],
+          "construction": "Smooth navigation wedge plus detailed foot surface; at least 2.4 m headroom; 1.8 m deep landings supplied separately.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": 1.8,
+            "headroom_m": 2.4
+          },
+          "slope": {
+            "rise_m": 1.6,
+            "run_m": 2.7,
+            "riser_m": 0.16,
+            "tread_m": 0.3,
+            "riser_count": 10,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "ramp-run",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.8,
+            4.8,
+            0.4
+          ],
+          "extent_note": "Rise/run 0.4/4.8 = 1:12; eight runs yield 3.2 m rise with landings and turning space.",
+          "connections": [
+            "landing_start:bottom",
+            "landing_end:top",
+            "guardrail:left/right"
+          ],
+          "construction": "4.8 m run is an explicit off-grid length adapter; integrate on 0.05 m fine socket subgrid with endpoint manifest, not silent scaling.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": 1.8,
+            "headroom_m": 2.4
+          },
+          "slope": {
+            "rise_m": 0.4,
+            "run_m": 4.8,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": 0.08333333333333333
+          }
+        }
+      ],
+      "exact_kit_construction": "Stone piers and thin removable facing carry distinct structural and decorative roles; canopy ties avoid public head clearance.",
+      "materials": [
+        "pale masonry",
+        "marble facing",
+        "bronze trim",
+        "woven shade"
+      ],
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "new_proposed_details": "Minimal continuous bronze handrail brackets placed outside clear width, replaceable lightly textured tread nosings and shallow outer drainage strip. Every added joint/detail is proposed.",
+      "priority_reason": "Resolves vertical level transitions and safe ordinary routes before level assemblies; exact counts and rise/run must be audited after generation.",
+      "prompt": "Create a NEW PROPOSED Aetherion Oath of Daybreak asset-construction reference sheet, grounded in the attached original overview. Preserve pale opaque masonry and marble, restrained bronze trim, ivory woven shade, clean folded-plane civic design and practical public access. Neutral studio illumination, clean pale-gray board, orthographic front/side/top panels wherever requested, large readable labels, one consistent design across panels. No characters except a simple scale silhouette if needed; no weapons, new symbols, decorative clutter or magical structural support. Newly specified joinery is PROPOSED and must not be portrayed as observed canon. Every numerical dimension mentioned below is a PROPOSED SOURCE TARGET, not a measurement of generated pixels, approval or an engineering certification. Do not invent extra dimensions. Show construction clearly instead of adding a grand city scene. STAIR AND RAMP CIRCULATION. Show TWO DISTINCT modules, not alternative shapes of one object. STAIR FLIGHT nominal 1.8 m clear width, 2.7 m horizontal run and 1.6 m rise: exactly 10 equal risers at 0.16 m and nine visible treads at 0.30 m, with separately identified upper landing. RAMP RUN nominal 1.8 m clear width, 4.8 m horizontal run, 0.4 m rise, source grade 1:12. Large exact-profile intent side drawings, front and top views, one restrained three-quarter view each. Use matching pale stone/marble finishes and separate bronze guardrails that DO NOT subtract from the 1.8 m clear circulation width. Mark start/end landing planes and feet-clear anti-slip surface detail. A dotted separate volume indicates at least 2.4 m headroom. Landings are separate modules, depth target 1.8 m; do not silently include them in run dimensions. Note the 4.8 m ramp is an off-grid adapter on 0.05 m fine socket subgrid, not silently stretched to 4 m. Do NOT show one ramp equaling the 1.6 m stair rise: this ramp gains only 0.4 m. No asserted building-code compliance. PROPOSED NEW DETAILS: Minimal continuous bronze handrail brackets placed outside clear width, replaceable lightly textured tread nosings and shallow outer drainage strip. Every added joint/detail is proposed. Keep a small footer: CONCEPT CONSTRUCTION INTENT \u2014 DIMENSIONS AND CONNECTIONS REQUIRE REVIEW. Avoid tiny paragraphs on the board.",
+      "completion_limit": "Covers specified module design intent only; generated geometry must be checked and exact artifact reviewed before modeling approval."
+    },
+    {
+      "batch_id": "10_daybreak_roof_canopy_connections",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "baseline_asset_id": "asset-o09-n-architecture-family",
+      "module_names": [
+        "roof-bay",
+        "shade canopy"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/8",
+      "exact_source_module_records": [
+        {
+          "name": "roof-bay",
+          "geometry_policy": "SHARED_INTERFACE_REGIONAL_VISIBLE_GEOMETRY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4,
+            4,
+            0.35
+          ],
+          "extent_note": "Structural roof panel thickness; regional slope/ridge may exceed envelope and must be declared.",
+          "connections": [
+            "roof_seat:N/E/S/W",
+            "drain_outlet:low-edge"
+          ],
+          "construction": "Support on wall/pier seats, author slope and rain/snow outlet; no occupied roof without traversal declaration.",
+          "acceptance": [
+            "Proposed extent and connection interface pass blockout review.",
+            "No seam, blocked protected route or mismatched collider."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "shade canopy",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            0.3
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Fabric corners latch to column-head sockets with safe release; shade edge above public headroom.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Fabric corners latch to column-head sockets with safe release; shade edge above public headroom.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_kit_construction": "Stone piers and thin removable facing carry distinct structural and decorative roles; canopy ties avoid public head clearance.",
+      "materials": [
+        "pale masonry",
+        "marble facing",
+        "bronze trim",
+        "woven shade"
+      ],
+      "status": "PROPOSED_NEW_REFERENCE_NOT_APPROVED",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-105/original.png"
+      ],
+      "new_proposed_details": "Discrete replaceable roof-seat bronze clips, shallow fall to one declared outlet, four fabric corner sockets with guarded release tabs and a modest removable edge hem; all details are proposed.",
+      "priority_reason": "Defines roof seating, weather protection and canopy attachment independently of colonnade decoration.",
+      "prompt": "Create a NEW PROPOSED Aetherion Oath of Daybreak asset-construction reference sheet, grounded in the attached original overview. Preserve pale opaque masonry and marble, restrained bronze trim, ivory woven shade, clean folded-plane civic design and practical public access. Neutral studio illumination, clean pale-gray board, orthographic front/side/top panels wherever requested, large readable labels, one consistent design across panels. No characters except a simple scale silhouette if needed; no weapons, new symbols, decorative clutter or magical structural support. Newly specified joinery is PROPOSED and must not be portrayed as observed canon. Every numerical dimension mentioned below is a PROPOSED SOURCE TARGET, not a measurement of generated pixels, approval or an engineering certification. Do not invent extra dimensions. Show construction clearly instead of adding a grand city scene. ROOF BAY AND REMOVABLE SHADE CANOPY. Show two clearly different components: SOLID ROOF BAY nominal 4 m x 4 m with 0.35 m structural thickness; and WOVEN SHADE CANOPY nominal 4 m x 4 m with initial 0.3 m bounding-envelope target. Top/underside and edge-section views for each, plus large exploded roof-seat joint and separate enlarged fabric-corner quick-release socket. Roof panel bears on masonry wall/pier seats; show drainage direction to low-edge outlet and clearly distinguish structural thickness from any proposed slope/ridge above envelope. Canopy latches to column-head sockets and has a safe release above public head clearance; it is shade cloth, NOT the load-bearing roof. Keep proposed canopy curvature shallow enough for 0.3 m target; do not copy the much deeper hanging canopy from the first draft. If curvature cannot fit, label ENVELOPE TO REVIEW rather than changing dimensions. No tall central pendant. Show stowed/removable cloth panel beside installed panel without changing its corner pattern. Solid roof is non-occupied unless future traversal is declared. PROPOSED NEW DETAILS: Discrete replaceable roof-seat bronze clips, shallow fall to one declared outlet, four fabric corner sockets with guarded release tabs and a modest removable edge hem; all details are proposed. Keep a small footer: CONCEPT CONSTRUCTION INTENT \u2014 DIMENSIONS AND CONNECTIONS REQUIRE REVIEW. Avoid tiny paragraphs on the board.",
+      "completion_limit": "Covers specified module design intent only; generated geometry must be checked and exact artifact reviewed before modeling approval."
+    }
+  ]
+}

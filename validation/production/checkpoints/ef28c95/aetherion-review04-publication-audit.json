@@ -1,0 +1,1207 @@
+{
+  "status": "PASS",
+  "head": "b6ca38d297e25d67d37a0312c5b8b92aa62b6101",
+  "baseline": "e67fa874c53f0b9a6b319b2e7eab82141fa7c9bc",
+  "method": "Read-only audit of git blob bytes; unrelated dirty worktree excluded. Frozen bundle additionally compared to current local files.",
+  "errors": [],
+  "bundle": {
+    "files": 204,
+    "logs": 21,
+    "bytes": 133408738,
+    "evidenceSha256": "bb8ac26eed9d8a39e48715b730361517470c521763c192b932224a24c5526e10",
+    "listedFiles": 203,
+    "allGitPathsExactlyMatchManifest": true
+  },
+  "optInPreview": {
+    "reviewRoot": "docs/production/reviews/representative-revision-04",
+    "visualGLBs": [
+      {
+        "path": "kiln-ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+        "bytes": 12855048,
+        "sha256": "18ea22599cd377d2a4116fe6c0917ad6fd961895f354cbc234452b64b2cc13b5"
+      },
+      {
+        "path": "kiln-ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+        "bytes": 11780008,
+        "sha256": "000f794f7668b62582de1562842a60aff5fb793fec19497fe8da98493726e9c2"
+      },
+      {
+        "path": "kiln-ninja-v6/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+        "bytes": 10822628,
+        "sha256": "73da83ada08297d3a82bf3857cbc7d2ff773da759aa4ebc13289166806dda060"
+      },
+      {
+        "path": "fault-v10/amethyst-short-blade/review.glb",
+        "bytes": 4705784,
+        "sha256": "6cd472308714dfd488dee23aeb82b3ff8fca711514342b16a15fe15da199d53c"
+      },
+      {
+        "path": "impulse-shield-v8b/impulse-shield-lateral-review08b.glb",
+        "bytes": 9469192,
+        "sha256": "27a08329146d305df4bee61e642c4fff3f0ed716f8f5e7ee7d9433b652ca8f34"
+      }
+    ]
+  },
+  "originalReferences": {
+    "count": 114,
+    "allUnchanged": true,
+    "files": [
+      {
+        "path": "assets/references/reference-000/original.png",
+        "sha256": "bbf568d23fa95dbfd5ee540acab00b1c20078445a1d153771e9dd6e0bba52331",
+        "bytes": 2989470
+      },
+      {
+        "path": "assets/references/reference-001/original.png",
+        "sha256": "40cab1f398405ef04a39c3949568d4411d4fc5f4f53f8e3f6a83075d0c4d91eb",
+        "bytes": 3173501
+      },
+      {
+        "path": "assets/references/reference-002/original.png",
+        "sha256": "0510497d0408ddbfddb2b3c60e172d5428cccdee60339c2c2325c9c9178c6d36",
+        "bytes": 2692886
+      },
+      {
+        "path": "assets/references/reference-003/original.png",
+        "sha256": "1347402b8731417b81628c650f37d651c81a5dd64569e1703e36d63944aafa93",
+        "bytes": 3089470
+      },
+      {
+        "path": "assets/references/reference-004/original.png",
+        "sha256": "00592a6e9d1b5109c77efd4e28c966bf3931ad4ea26c007ba21e1ac9f16c4eeb",
+        "bytes": 2843148
+      },
+      {
+        "path": "assets/references/reference-005/original.png",
+        "sha256": "9432f7595e29a877e27b42bc38d0c7603ec563dba3b2a15652d5c9f7f0638b64",
+        "bytes": 3320139
+      },
+      {
+        "path": "assets/references/reference-006/original.png",
+        "sha256": "c36418d614014150cc1ad1d123ab2efd9dc77a4abeed7e5cfd1a52c1caa8f199",
+        "bytes": 2659135
+      },
+      {
+        "path": "assets/references/reference-007/original.png",
+        "sha256": "6f09645138c26bf8819c5e56216040fb40e8ba5e750895c57bbfdaeae077d24f",
+        "bytes": 2770067
+      },
+      {
+        "path": "assets/references/reference-008/original.png",
+        "sha256": "11e6c5769a2e7bdda98aba2ef14c38c5fa8f4d661eff2ac61c29ffe1d800d878",
+        "bytes": 2574932
+      },
+      {
+        "path": "assets/references/reference-009/original.png",
+        "sha256": "79ebe401dffe8c0b4cbce79cae4bf3f06978327cdb7d928e957bef4c08bd1885",
+        "bytes": 2742377
+      },
+      {
+        "path": "assets/references/reference-010/original.png",
+        "sha256": "d44231509a9d46d9721f80d51d909940c612cbe004d00d792b9262812e69cd6f",
+        "bytes": 2853600
+      },
+      {
+        "path": "assets/references/reference-011/original.png",
+        "sha256": "5b5c562ca794d2e37d4730dc03e976fc8113a0335041199afad7afe98aad9f63",
+        "bytes": 2417156
+      },
+      {
+        "path": "assets/references/reference-012/original.png",
+        "sha256": "4ca97059e3e5df179f2da6fe1ff069d1eb12e0a7741ba7107d37af0321aadcb6",
+        "bytes": 2750145
+      },
+      {
+        "path": "assets/references/reference-013/original.png",
+        "sha256": "847deca483538603239f075e49f149832e5f69cc8fa728847b48d0b96e7e12ab",
+        "bytes": 2544657
+      },
+      {
+        "path": "assets/references/reference-014/original.png",
+        "sha256": "614e6ca388980dbfa2f453e70729509332795fdb26b5c8caf7b9efb1f1be8e09",
+        "bytes": 2436498
+      },
+      {
+        "path": "assets/references/reference-015/original.png",
+        "sha256": "be9cfc6191a261db67309933d56ffa4ae5c4dccea907c1c27043dc36816ad80f",
+        "bytes": 3089025
+      },
+      {
+        "path": "assets/references/reference-016/original.png",
+        "sha256": "7cb0b4e3a8a7e41d392880414d35b4bcd486d0eac1782f05989647ebcda716f5",
+        "bytes": 3156345
+      },
+      {
+        "path": "assets/references/reference-017/original.png",
+        "sha256": "53184d35923a415e08175365510a70ebc828fdbac5c1c94511cf2c6e41b70e1b",
+        "bytes": 3038784
+      },
+      {
+        "path": "assets/references/reference-018/original.png",
+        "sha256": "9f5592c3c22682bfb323f3b83f560f7503890140b5e42525ea730da7cbca38b1",
+        "bytes": 2466663
+      },
+      {
+        "path": "assets/references/reference-019/original.png",
+        "sha256": "ab211209c6f58658fbdc240ad01f2ce77b7406ed53c0708dce6f98481367ea04",
+        "bytes": 3131540
+      },
+      {
+        "path": "assets/references/reference-020/original.png",
+        "sha256": "ccf4792d77c576be210e97e8448137184924cd218e44a371ee58d4d68d22e08b",
+        "bytes": 2548894
+      },
+      {
+        "path": "assets/references/reference-021/original.png",
+        "sha256": "3da69f58b6bffd7e7beebbf2bee9a51dabf501ac280e33088e25456dd86bb290",
+        "bytes": 2525463
+      },
+      {
+        "path": "assets/references/reference-022/original.png",
+        "sha256": "5917a9a14fda52fc998daaaedc5f43fde6e79a7fd46f9ca4fb4cb94afc547420",
+        "bytes": 2816198
+      },
+      {
+        "path": "assets/references/reference-023/original.png",
+        "sha256": "41af205cdaf67e3d04d9522dfcbacd4ebdb131d39f63405cbb3bbe755dc5a011",
+        "bytes": 2919480
+      },
+      {
+        "path": "assets/references/reference-024/original.png",
+        "sha256": "59af685a81e1bcbe2441af5e90873f5b03928f878f81a1b2adbc0571fb594c97",
+        "bytes": 2561543
+      },
+      {
+        "path": "assets/references/reference-025/original.png",
+        "sha256": "fcd8f4ad5f96215e2756e95c7c1facc148f6d99a1e79789f404512ddcd24439d",
+        "bytes": 2841397
+      },
+      {
+        "path": "assets/references/reference-026/original.png",
+        "sha256": "889a6d960714865a5dc73e375622480df6026bb3bfbb27986f681e03a16a0c74",
+        "bytes": 2642108
+      },
+      {
+        "path": "assets/references/reference-027/original.png",
+        "sha256": "af4d77006803fd45189c625b6205c2ce4e6046395a5ab27f0c620ee6b5a44778",
+        "bytes": 2546951
+      },
+      {
+        "path": "assets/references/reference-028/original.png",
+        "sha256": "8b98329aaf3bef520482bbfe039f5b1eff68a98c2c50fe174a274c466a9974c6",
+        "bytes": 2402497
+      },
+      {
+        "path": "assets/references/reference-029/original.png",
+        "sha256": "f908eacbe80c5e73f1907a854339fc3d73d0d6e6a78c1c3d9519a8c78c531de2",
+        "bytes": 2913820
+      },
+      {
+        "path": "assets/references/reference-030/original.png",
+        "sha256": "24a0302ae51363edc77aab700979c597966195631d082fa1af38992e7ef8393d",
+        "bytes": 2673513
+      },
+      {
+        "path": "assets/references/reference-031/original.png",
+        "sha256": "08c72a7503ae2224a52448a753b0218edb974533dc7c6d470571354527c61467",
+        "bytes": 2751847
+      },
+      {
+        "path": "assets/references/reference-032/original.png",
+        "sha256": "77e948588fbd7a17687c3caa4fd206833ed039896118974b472928155f87f197",
+        "bytes": 2445256
+      },
+      {
+        "path": "assets/references/reference-033/original.png",
+        "sha256": "e3265e4d22d37f2f3ec967085eef705e5e6e3ba3adf74c008efd14eb7e552b1d",
+        "bytes": 2547094
+      },
+      {
+        "path": "assets/references/reference-034/original.png",
+        "sha256": "c5be6ab847392125e07b644c04078b9a809a18bf53162605603e9a5ab19212a5",
+        "bytes": 2318271
+      },
+      {
+        "path": "assets/references/reference-035/original.png",
+        "sha256": "e0f8213f99a852d1ddbbb4bb95375ad5db363688c52bb677686c0aac1ccea2c7",
+        "bytes": 2664411
+      },
+      {
+        "path": "assets/references/reference-036/original.png",
+        "sha256": "a395b4548c7cd220d78c48b737b697a60e45c3a5242c2195867130d3e0c22bb7",
+        "bytes": 2357246
+      },
+      {
+        "path": "assets/references/reference-037/original.png",
+        "sha256": "c93d1163e627df76d100257bc65000a61556da56f644e73f6321c4449c710db0",
+        "bytes": 2407856
+      },
+      {
+        "path": "assets/references/reference-038/original.png",
+        "sha256": "7577f7eb70a736be236d965d265eeaede53416e319ee4079be2b13ea9ae31bb2",
+        "bytes": 2633632
+      },
+      {
+        "path": "assets/references/reference-039/original.png",
+        "sha256": "db46a557b6994555e337f10c096fd404e2a4175d5fc419d584f19b48369faf9c",
+        "bytes": 2692408
+      },
+      {
+        "path": "assets/references/reference-040/original.png",
+        "sha256": "d2b7e3b6c9b28480358af72a4d95f619973657ade1bc15944d8a6b59649eb3c1",
+        "bytes": 2564695
+      },
+      {
+        "path": "assets/references/reference-041/original.png",
+        "sha256": "122f8227a5c637a72fd4151b9ed8a9d97a66d68295cca558ca2474d3de5fc95c",
+        "bytes": 2478112
+      },
+      {
+        "path": "assets/references/reference-042/original.png",
+        "sha256": "cec6e5153e684924b1d079ffc23a46ca0e99a152da3e17d4c02d7deddffebe77",
+        "bytes": 2705118
+      },
+      {
+        "path": "assets/references/reference-043/original.png",
+        "sha256": "52696111f3ac71e852f67942c07bc752a3f4b2c9fe13299f853f77c37978763f",
+        "bytes": 2474085
+      },
+      {
+        "path": "assets/references/reference-044/original.png",
+        "sha256": "d797dcbb7625f2ab650a3c91cb1eede8761c74850cc2198ea6dc1e362efc1d72",
+        "bytes": 2465644
+      },
+      {
+        "path": "assets/references/reference-045/original.png",
+        "sha256": "d31fb1c16a33ea659608994eee5a14b614a98d0edaf512b21ca6dc4ca601a8a1",
+        "bytes": 2634759
+      },
+      {
+        "path": "assets/references/reference-046/original.png",
+        "sha256": "62e25a7007ba880424803e8e74c79a891358cd1e3ba1f1140fe7d8d6de5dbd19",
+        "bytes": 2227225
+      },
+      {
+        "path": "assets/references/reference-047/original.png",
+        "sha256": "7c8bfe1214f3a789f2cabe274483f29dc8fc9f2ea0fcb0b98c70f982106c06b8",
+        "bytes": 2490181
+      },
+      {
+        "path": "assets/references/reference-048/original.png",
+        "sha256": "a17e792f40cc2edae8580067cb4dcf1c0a697e6ff38dbabe1154b3a2841d7679",
+        "bytes": 2766300
+      },
+      {
+        "path": "assets/references/reference-049/original.png",
+        "sha256": "5612f785710f5f1e223c9404b975a714f90433c9f05a9afeeecad1d280682116",
+        "bytes": 2350871
+      },
+      {
+        "path": "assets/references/reference-050/original.png",
+        "sha256": "2333c1749ef9adef354e789953ee75a57d335b297cfe119693fe0ccf3925ae61",
+        "bytes": 2505503
+      },
+      {
+        "path": "assets/references/reference-051/original.png",
+        "sha256": "677d2ddaa0e770bd0e43fa7628e97310650a27936cf149310ebb30ca460b2260",
+        "bytes": 2666753
+      },
+      {
+        "path": "assets/references/reference-052/original.png",
+        "sha256": "0e24b4f602b6da2942b44bb483a156bba20e6042487b9691361ab1615f55a950",
+        "bytes": 2564581
+      },
+      {
+        "path": "assets/references/reference-053/original.png",
+        "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b",
+        "bytes": 2522664
+      },
+      {
+        "path": "assets/references/reference-054/original.png",
+        "sha256": "c2b2fce1dc4f9c94553c41aa3094f7e1aaa0c4adeb9d9655ef29e7e09c05baf1",
+        "bytes": 2831961
+      },
+      {
+        "path": "assets/references/reference-055/original.png",
+        "sha256": "4c7f0d35643b884036143cc57302bd74935f4d25cd6e4976200b8f84c05a6c23",
+        "bytes": 2446225
+      },
+      {
+        "path": "assets/references/reference-056/original.png",
+        "sha256": "e6510b33db6cfea1b9f9216187db1ad12f0c548572863a5a5a20e93589df9fcc",
+        "bytes": 2594967
+      },
+      {
+        "path": "assets/references/reference-057/original.png",
+        "sha256": "eb220e946ef1cfbf89b897836f68c2f0b196f5d3cf77aac006f11ad3027e7026",
+        "bytes": 2384938
+      },
+      {
+        "path": "assets/references/reference-058/original.png",
+        "sha256": "d74f6039be5cda44ff29271253a2545d03683493db9684e2189657cbc6f111e1",
+        "bytes": 2688730
+      },
+      {
+        "path": "assets/references/reference-059/original.png",
+        "sha256": "3566521c72d9d73f790ee791ff16eeedbaf8426d920c1afd308864eb73b95262",
+        "bytes": 2418946
+      },
+      {
+        "path": "assets/references/reference-060/original.png",
+        "sha256": "654a8acda2f430f72f92d0c0a45cdc50e64c0dd00fbb37f12b270fbb8815d788",
+        "bytes": 2717071
+      },
+      {
+        "path": "assets/references/reference-061/original.png",
+        "sha256": "d266e1901bd2fc57ecb11ab3d1372ac44fd229d2202004a4f4518c691bed632d",
+        "bytes": 2730291
+      },
+      {
+        "path": "assets/references/reference-062/original.png",
+        "sha256": "ecb76249b575c86d22a03c56e6b7c4f56fed799f2a6bf77805868ef83fc79e07",
+        "bytes": 2405604
+      },
+      {
+        "path": "assets/references/reference-063/original.png",
+        "sha256": "2dc95c17deafd81e98dfa7c7be43c9e6424459147935ac7240ad192aa5a2bb60",
+        "bytes": 2309969
+      },
+      {
+        "path": "assets/references/reference-064/original.png",
+        "sha256": "6296f4e6f95dde927db829a3986490560b6c68e960ed7c8857326b715b7b1c17",
+        "bytes": 2293666
+      },
+      {
+        "path": "assets/references/reference-065/original.png",
+        "sha256": "0df5febae9f55b5abad6e4a0e398ff2caa4a171e3b1ac5f7c5db6c2422a6797d",
+        "bytes": 2235082
+      },
+      {
+        "path": "assets/references/reference-066/original.png",
+        "sha256": "a3e51e638a3f64e443479a1594498e1d7c454343ab20c5285c341920b105b8bb",
+        "bytes": 2183856
+      },
+      {
+        "path": "assets/references/reference-067/original.png",
+        "sha256": "59ece6ed311f7066bc292599dd192a3fc5d77bed4700815bc8fe69e485ffa719",
+        "bytes": 2346593
+      },
+      {
+        "path": "assets/references/reference-068/original.png",
+        "sha256": "ab4b930474e9d714b1e4db4f845d98116bdacb4fa656032615c2e62c1cc2fb37",
+        "bytes": 2137391
+      },
+      {
+        "path": "assets/references/reference-069/original.png",
+        "sha256": "126529961f15ed50443968f6e5b2e7b1e482649e4635f0f3d98a929019198d15",
+        "bytes": 2189710
+      },
+      {
+        "path": "assets/references/reference-070/original.png",
+        "sha256": "524ab5ee36d498de523e157c93a012cf614c7d7ea9954df4c3494ce5151eb0b6",
+        "bytes": 2146050
+      },
+      {
+        "path": "assets/references/reference-071/original.png",
+        "sha256": "110d8bfd4c57e39703f338e874c53f87985e871d9e5de2009f5b7585cc36f789",
+        "bytes": 2155258
+      },
+      {
+        "path": "assets/references/reference-072/original.png",
+        "sha256": "30e00e448456d61d955e6330bc04ff35f87a4725ad75efa5d11b6a34ff94dd74",
+        "bytes": 2462939
+      },
+      {
+        "path": "assets/references/reference-073/original.png",
+        "sha256": "63d872346a606c0b1d781098052df6f8b2b19a00bc91f1288c589f7c050bb3ef",
+        "bytes": 2406954
+      },
+      {
+        "path": "assets/references/reference-074/original.png",
+        "sha256": "cda674e8dc3d492c7f72e9d8c71e71eb333c8a9a9448b7765b8ed91cce00b19a",
+        "bytes": 2126942
+      },
+      {
+        "path": "assets/references/reference-075/original.png",
+        "sha256": "1342f30182f8c78d6f80018cef5779874f17d1453c5e596e4e28ec546b5d919e",
+        "bytes": 2040365
+      },
+      {
+        "path": "assets/references/reference-076/original.png",
+        "sha256": "c4eb26dab4e7eddfa08ba09f8d716a9097411d9c2dc35b8356046ecd1ec5c23f",
+        "bytes": 2155536
+      },
+      {
+        "path": "assets/references/reference-077/original.png",
+        "sha256": "a637949f33fa92010aac30a1d5f78a3e78b65c8b6eb89c4619f7f785cd48acd5",
+        "bytes": 2118492
+      },
+      {
+        "path": "assets/references/reference-078/original.png",
+        "sha256": "544fbe6eb28679241d5ca65a3ea5c1cd32c02b3d4bef6053c9de0d1b8f03a8bd",
+        "bytes": 2426953
+      },
+      {
+        "path": "assets/references/reference-079/original.png",
+        "sha256": "05cbf4d382b10e1b4116aa16151c605148d0271b93a9b3d10368b93b27148f33",
+        "bytes": 2371230
+      },
+      {
+        "path": "assets/references/reference-080/original.png",
+        "sha256": "5fc91cc7f0778c736bbc53635205a8245bc2989d59b1e9c5ad13bc55e7eee322",
+        "bytes": 2252589
+      },
+      {
+        "path": "assets/references/reference-081/original.png",
+        "sha256": "b7d73b106d10213059d11c55d0f2c3c4ada226bd8fa1fd04d82132c806e86083",
+        "bytes": 2154704
+      },
+      {
+        "path": "assets/references/reference-082/original.png",
+        "sha256": "ec395b860f3841a0f616474484c19f78a8b8ae9c6ae4127a158607dfadf1d94a",
+        "bytes": 2353429
+      },
+      {
+        "path": "assets/references/reference-083/original.png",
+        "sha256": "ce818e3384bfcadf4fd34bc02d84741fe67be45b8c47cadc5dcabc372d3b4006",
+        "bytes": 2310592
+      },
+      {
+        "path": "assets/references/reference-084/original.png",
+        "sha256": "5492e5d9eef015ca4a7de82fd6d0098f07c279755b4765532180105fd089d0d7",
+        "bytes": 2138651
+      },
+      {
+        "path": "assets/references/reference-085/original.png",
+        "sha256": "f9329a1d627bb26944c4c9803e9fd691728ea08d54bcbe229894ccf5b8bc5a13",
+        "bytes": 1998303
+      },
+      {
+        "path": "assets/references/reference-086/original.png",
+        "sha256": "00eacae470886f2da75ef705ca66f18cbc458f95aa384a1d3e8a9107c36821b8",
+        "bytes": 2400653
+      },
+      {
+        "path": "assets/references/reference-087/original.png",
+        "sha256": "2fae558bbcea23b8f8c6cce4ac6683a5adb4e39d9b4f4f58fb15b664211f58bc",
+        "bytes": 2250983
+      },
+      {
+        "path": "assets/references/reference-088/original.png",
+        "sha256": "110f2c5bce3ab42ec5818f985a8bf80a88a665b8c3195d41abf4e3e710df6650",
+        "bytes": 2139228
+      },
+      {
+        "path": "assets/references/reference-089/original.png",
+        "sha256": "da7f7f00c09223c26899b0034f7632e912b656344351ac230a4bca3d6a294609",
+        "bytes": 2072526
+      },
+      {
+        "path": "assets/references/reference-090/original.png",
+        "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa",
+        "bytes": 2129998
+      },
+      {
+        "path": "assets/references/reference-091/original.png",
+        "sha256": "2b03f16908520bab779c0400ad50f87f3aad53e1bab950bc7781fe4a368a39d0",
+        "bytes": 2380050
+      },
+      {
+        "path": "assets/references/reference-092/original.png",
+        "sha256": "696ae8326a6fef15b0d03c42ca56cf762eb9a178da1fae0e741ae1ed55b84b77",
+        "bytes": 1755252
+      },
+      {
+        "path": "assets/references/reference-093/original.png",
+        "sha256": "3081ae2382903deff83e0e67a4af493326d6c042b1d30eb7b21daf9d72cc4133",
+        "bytes": 1519316
+      },
+      {
+        "path": "assets/references/reference-094/original.png",
+        "sha256": "11823e4760ff2ef87f568fdf336f0651638cd0adc94316705740672023c590f5",
+        "bytes": 1639544
+      },
+      {
+        "path": "assets/references/reference-095/original.png",
+        "sha256": "3dbb3f809dba1aa7da414ba0d5fe8d2239bed88f3901ca7e5a01b3400e92f61d",
+        "bytes": 1629258
+      },
+      {
+        "path": "assets/references/reference-096/original.png",
+        "sha256": "7730b33fa426037c8b61398dd0167b0cea13d194dbd0c12f728c61ecd03ebadf",
+        "bytes": 1636267
+      },
+      {
+        "path": "assets/references/reference-097/original.png",
+        "sha256": "ec484604f72bca9029da8c6140ef4f7812f2b20b095a39e03392d4fee70e147d",
+        "bytes": 1563078
+      },
+      {
+        "path": "assets/references/reference-098/original.png",
+        "sha256": "20284aace143f2e33e6bccf577903cfae3846e973e35447cb54f01edf48cf86e",
+        "bytes": 1563121
+      },
+      {
+        "path": "assets/references/reference-099/original.png",
+        "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+        "bytes": 2638195
+      },
+      {
+        "path": "assets/references/reference-100/original.png",
+        "sha256": "8f01c8ae570c323d9b69159318fccaf431de855399c65c083332d261c8f90c3c",
+        "bytes": 2708296
+      },
+      {
+        "path": "assets/references/reference-101/original.png",
+        "sha256": "dbd78a8cf6cba67191c92908d9bcc743a2084f3ba2ce953a15400f4add404362",
+        "bytes": 2540174
+      },
+      {
+        "path": "assets/references/reference-102/original.png",
+        "sha256": "73d19c2e86177602bb1bd367d86544ced90c90a1e881a47ed05b194a35773cff",
+        "bytes": 2639765
+      },
+      {
+        "path": "assets/references/reference-103/original.png",
+        "sha256": "aedd82f2c659cda63c856a27d6db7674793f17efd0d08d833b2564c3223ffa5d",
+        "bytes": 2664051
+      },
+      {
+        "path": "assets/references/reference-104/original.png",
+        "sha256": "b9b3e660eaec9d600d60016238a0ebd4c081cf6ad73c078612b357f3f037c3ef",
+        "bytes": 2908009
+      },
+      {
+        "path": "assets/references/reference-105/original.png",
+        "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+        "bytes": 2676565
+      },
+      {
+        "path": "assets/references/reference-106/original.png",
+        "sha256": "7e584208b195559e3302a6cf4416e6abf44c063999057f1df25b2d97bbdff227",
+        "bytes": 2781377
+      },
+      {
+        "path": "assets/references/reference-107/original.png",
+        "sha256": "ca195ec1b5898a1130b042add577ffee846be7980518ab5d1f1d20c981a142c8",
+        "bytes": 2705427
+      },
+      {
+        "path": "assets/references/reference-108/original.png",
+        "sha256": "648ae9817a827d2b76653676927bc0d5d133388e465661976b2bd41f8f9bc5e6",
+        "bytes": 2804741
+      },
+      {
+        "path": "assets/references/reference-109/original.png",
+        "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+        "bytes": 2702206
+      },
+      {
+        "path": "assets/references/reference-110/original.png",
+        "sha256": "14fc371fac51bae06f397226412a563eb644baf69a1ef0756e1a01e3003af833",
+        "bytes": 2883988
+      },
+      {
+        "path": "assets/references/reference-111/original.png",
+        "sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+        "bytes": 2863472
+      },
+      {
+        "path": "assets/references/reference-112/original.png",
+        "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+        "bytes": 2917673
+      },
+      {
+        "path": "assets/references/reference-113/original.png",
+        "sha256": "f5743145d9abe76101af9a7f3b382ca3a71bee6fa08641fa918418bbb019975d",
+        "bytes": 2783782
+      }
+    ]
+  },
+  "phaseII": {
+    "archivePath": "docs/archives/Aetherion_Phase_II_Continental_Architecture_2026-10-13.zip",
+    "bytes": 1011575,
+    "sha256": "02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc",
+    "payloadCount": 115,
+    "files": [
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ARCHITECTURAL_KIT_REGISTRY.json",
+        "sha256": "145f41ec58c34483362465fcc61f90455d471ed13f4cf39ea91f81c00386433e",
+        "bytes": 442946
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ASSET_CONSTRUCTION_HANDBOOK.md",
+        "sha256": "99ac06ba229460641b6f270d577f4f814ff74b1e8091c4bfa680cf1e85515ed0",
+        "bytes": 18643
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CANON_ALIGNMENT_AND_GAP_REPORT.md",
+        "sha256": "82a1296de9c1c964f6c83a59c6d8dfb774cb305bb9b694554ba5c84784f78034",
+        "bytes": 5928
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/01_CINDERVAULT.md",
+        "sha256": "9fc7d5757b5ac520a0b962a6e9d8c33e0f9d6321d556da087273b821e0b8ab12",
+        "bytes": 15930
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/01_PLAN_AND_SECTION.svg",
+        "sha256": "d195c7fd8a9acbf5bebd08374932a207c9c92c01af21d35ec34bddfed892e0e3",
+        "bytes": 8122
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/02_PLAN_AND_SECTION.svg",
+        "sha256": "bb8453798ce31452e362b5d6fbd24eb1b87d00ccd4641736e015967f484d9cc1",
+        "bytes": 7257
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/02_STILLFOLIO.md",
+        "sha256": "a8781e704a16666731bd4d852ea87fbe4af9950a100bf115edbc1ee5563c1321",
+        "bytes": 15199
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/03_CROWNSPAN.md",
+        "sha256": "3ca7dc08ffd09793cc4f0505bfccb9c636f63946eb7e092ecc8009d546998fa9",
+        "bytes": 15804
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/03_PLAN_AND_SECTION.svg",
+        "sha256": "73769600760560291b2a5ddd73812f618dfa3e7665e7f9fb05986be3e3ffd9c0",
+        "bytes": 8104
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/04_CONFLUENCE_QUAY.md",
+        "sha256": "058d8123c59e5e1f47c08b08885a30446c4b71e82cf5034fd7a69b7035447614",
+        "bytes": 16590
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/04_PLAN_AND_SECTION.svg",
+        "sha256": "b52ea0cfa6ad831899921af4f1672f6f5bd13828318e938c1b5435deb496c5bf",
+        "bytes": 8940
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/05_KEYSTONE_HALL.md",
+        "sha256": "268b022ec82b833e8c2e665a873f05dab602059c8266a9b808d33d8dc6207ea1",
+        "bytes": 15968
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/05_PLAN_AND_SECTION.svg",
+        "sha256": "f10f1212d324f6a024640fe6e119ae34f4303aaeceeca51b0f68259f415e0151",
+        "bytes": 8093
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/06_CANTILEVER.md",
+        "sha256": "fdffc9741e6b91b50bacdac2fa4a84378d5db7b26b39766d06fea8924a5e9c7e",
+        "bytes": 15231
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/06_PLAN_AND_SECTION.svg",
+        "sha256": "8870184a22d082fdd4a56f4c82b0fef1a1a5bf8d7227a97050be298dd2607c3c",
+        "bytes": 7279
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/07_PLAN_AND_SECTION.svg",
+        "sha256": "d9f12124fdb7e2a2c5ccac2b04ff73f14bff770a967eb420d00a69841244b210",
+        "bytes": 8182
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/07_ROOTMEET.md",
+        "sha256": "2ffacb06977ec8a379fc1c2b5283ab874b68e9894ddebe9d7ff350c231e5dc64",
+        "bytes": 16025
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/08_PLAN_AND_SECTION.svg",
+        "sha256": "f7e2bebed8385e5faafddb0d7a3aa3aec8e40375891606eba2738d03cd2439f7",
+        "bytes": 8094
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/08_VITRIAL.md",
+        "sha256": "59604d0ffda914ef96eadcfff09b114b2e703f1613482637d67c3f5fa8398862",
+        "bytes": 16043
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/09_AUREATE_STEPS.md",
+        "sha256": "6e23f31239de1cd962d9ed757789a64da22538cd340992019a570bf270678cab",
+        "bytes": 16721
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/09_PLAN_AND_SECTION.svg",
+        "sha256": "d509936103e93a92063798a7bb30907fc0021c499e8a863439c9b353296f9fda",
+        "bytes": 9030
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/10_PARALLAX_CROWN.md",
+        "sha256": "d47a89bc6906ee9ed3822af1464f477ecd38fbf4e87856f40ed2bbda5aea9d86",
+        "bytes": 16209
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/10_PLAN_AND_SECTION.svg",
+        "sha256": "1d15524cce8faee3c313684c700c11200183b6f31c6d52cda68e16cdc535da6f",
+        "bytes": 8144
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/11_ABSENT_SEAT.md",
+        "sha256": "baed38a9725e1b0662f0cc49874242e84e8f7deaf17e1ab49005f54c8b3a5668",
+        "bytes": 15474
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/11_PLAN_AND_SECTION.svg",
+        "sha256": "6e3bc8cde740cc53747ad3d801030bf1a1c991ad4c97c2b4e5eacd240d368a82",
+        "bytes": 7395
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/12_KINHOLD.md",
+        "sha256": "eb67be43dbb96adb47a1ecdeb1c19bcc0b7a6277843fea2bb5cd142cf2c1236a",
+        "bytes": 15972
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/12_PLAN_AND_SECTION.svg",
+        "sha256": "1f7068b0995cf4ba9e836862785b981f37772c5d3a7bc625bc462c3ca7f26645",
+        "bytes": 8096
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/13_MANYDOOR.md",
+        "sha256": "83f1503b0bcc8cc5b969f9f174758c0aadb53efd28c2c8e01ba4eca07035a5ae",
+        "bytes": 16060
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/13_PLAN_AND_SECTION.svg",
+        "sha256": "fdfbd32a0087b7bf2bee1bd567fff74ed7dbb6350c5bb68148218e76c35186b0",
+        "bytes": 8029
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/14_PLAN_AND_SECTION.svg",
+        "sha256": "16e57d5e3c7846684de24027a8eb8a843f4dcba8fee32927cb12b4d3da05a5f2",
+        "bytes": 8956
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/14_WAYCLOCK.md",
+        "sha256": "63e04f24469080310f1c6b8243d0687c11a174d31d3f916da6796bf8939495c4",
+        "bytes": 16664
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/15_COUNTERPOISE.md",
+        "sha256": "5f256b024b97ae0d5ecf0b1148f6fe1c21c8575864c8f148ac4ef880ce4bfa4a",
+        "bytes": 16210
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_CITY_BLUEPRINTS/15_PLAN_AND_SECTION.svg",
+        "sha256": "0d3ee7e48738c3e1bf04c65432917fabcb7548f2ffc9b5d620c71f7054b5b48a",
+        "bytes": 8243
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CAPITAL_LAYOUT_REGISTRY.json",
+        "sha256": "3e78d1ff99d4ffecada096e027aeb22e219ec97dba4e3339f0935301fef9356c",
+        "bytes": 234092
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CONTINENT_GEOGRAPHY.md",
+        "sha256": "0e67e423327b8f5ba40d7a46e0d532876d8c0a30e0200eab46fff66846e19b01",
+        "bytes": 10775
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CONTINENT_MAP_SPECIFICATION.md",
+        "sha256": "5df54427bec0271d1945912dfef78cec275c0b51d0f250f1b7ebbcd61bd3f6f1",
+        "bytes": 5619
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/CONTINENT_MASTER_PLAN.md",
+        "sha256": "6a963f220521f12396eacdbd5384415cbb4cc2478990307cbce4713f3e451770",
+        "bytes": 6457
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/DELIVERABLE_MANIFEST.json",
+        "sha256": "07920f0a93a0a0b5ffc98c9dba038ad62d8df90e14a1897c82088012d1c0e928",
+        "bytes": 4591
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/DUNGEON_AND_EXPLORATION_PLAN.md",
+        "sha256": "c18a56c47b492985596b6b2de05b1bf227fd4b6388efb142675ffc7e2ce57239",
+        "bytes": 61452
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/DYNAMIC_WEATHER_SYSTEM.md",
+        "sha256": "002e6998f53ff4c6fe88cd738bdd951fa808fd21bcaf9cff0a9ca2d4109b223b",
+        "bytes": 11838
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ENVIRONMENT_ASSET_REGISTRY.json",
+        "sha256": "5cca3c25b0943aca297e8857d34fda8fdf9c5dc21396ced9f1e1178806f1ea8a",
+        "bytes": 547358
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/ENVIRONMENT_REFERENCE_EVIDENCE.json",
+        "sha256": "69bd3edd696cafcd04dd24091fcb9d4958a3162b580e5a371e54f977fb3fdb93",
+        "bytes": 161044
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/01_KILN_OATH.md",
+        "sha256": "3ae4f50505ee2278bf388b69d4e38c30c2e4ef22973e8de03182a9e8a6124ef3",
+        "bytes": 17215
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/02_RIME_ARCHIVE.md",
+        "sha256": "ec7934b18308951938154aff9a997c36e5172d9a21f1f79375874cef44eea9a4",
+        "bytes": 17405
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/03_STORM_RELAY.md",
+        "sha256": "d483641bd30a26e51b1bca85db450168c2119b766b6cf74128b8c2037fd3cb8d",
+        "bytes": 17086
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/04_TIDAL_COVENANT.md",
+        "sha256": "2e0da53dc99144fc1d4942428cf4eac7577b549f732342c5eedf2d5a37ceaa2f",
+        "bytes": 17216
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/05_FAULT_CHOIR.md",
+        "sha256": "44d767a718bb5d6b8bf16a6d17b5354b94965685c565512c6d2c95b472eb4499",
+        "bytes": 17404
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/06_REED_RESONANCE.md",
+        "sha256": "aaa6734c24925beaf65872cf379f6fe3ce9593a843c087a89121d92fe38e86d6",
+        "bytes": 17480
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/07_GRAFT_SANCTUARY.md",
+        "sha256": "df3e0ab108f80d145ebcaa4cfda3a33d3c6f6720556a95b83a502b4ed36e4b5b",
+        "bytes": 17522
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/08_BITTERGLASS_GUILD.md",
+        "sha256": "f44c1a31c8df09b96040dc9a639a175b78d209ed0de9f10a8d51b24f0120e349",
+        "bytes": 17393
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/09_OATH_OF_DAYBREAK.md",
+        "sha256": "d4c4e8c77543feb164cbef570de0183776f5aeaaba3798c9288b95ad16710b6a",
+        "bytes": 17474
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/10_TIDAL_OBSERVATORY.md",
+        "sha256": "6fc8ccd18fd3d9ea5fbfafff16912c973ede3629664476bbfd88e7a45eef4f4d",
+        "bytes": 17666
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/11_THE_MISSING_COURT.md",
+        "sha256": "420fff0cdcb9adffff42de3e215ca0725c05c64d59dfa8178878685eedb9804c",
+        "bytes": 17487
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/12_SANGUINE_COVENANT.md",
+        "sha256": "a79b0487d860cd256925f37dd1c0ea3ff2df72138ac14aad7fedfd91786dd1fd",
+        "bytes": 17541
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/13_FOLDED_THEATRE.md",
+        "sha256": "dc785be56b529565bfbeff599ddb8730e4a055132ec4e36c90c0979e852347bf",
+        "bytes": 17731
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/14_ESCAPEMENT_ROAD.md",
+        "sha256": "fed512dc7aef27f6ce741fc0a127a3b08ec89ded18026e8bfa5bc01b77062fbf",
+        "bytes": 17654
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/FIFTEEN_REGION_BLUEPRINTS/15_IMPULSE_FOUNDRY.md",
+        "sha256": "f3f92bad5f951c3b0e8be9286eb6134dbcf1798ebfa570035aa5e5ebda181841",
+        "bytes": 17614
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/INTEGRATION_PLAN.md",
+        "sha256": "1f7874f5aa946d40448e11f40dd272171f94882c3d71526dea2ff5da992c62b7",
+        "bytes": 16483
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/NPC_CIVILIZATION_SYSTEM.md",
+        "sha256": "259b08c69c3f2b8b48c8fc383dd15ec96ae3146b51b7a1429ce5cfd3ff6c04e9",
+        "bytes": 16609
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/README.md",
+        "sha256": "fd3faa1a4313ce9bfbe678f3178c8bd68b58b8fcef0891e05e46f368725c26bb",
+        "bytes": 7725
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/REGIONAL_BIOME_SPECIFICATIONS.md",
+        "sha256": "1c1427f52ce08a84fcb3bdbea4a113f90f76e16c37d2de029f7bc14f3bfe6b03",
+        "bytes": 33858
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/REGIONAL_ECOLOGY_PROFILES.json",
+        "sha256": "a6874b23296b41d4acf970e77c76f7fbe7a052cfc83549ea9c77f5a31c2c3204",
+        "bytes": 24271
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/REGION_BLUEPRINT_INDEX.json",
+        "sha256": "c53e5400d63e17823d75c8944f02d8d39ab76eea3274f267295ddc0a90b02999",
+        "bytes": 36118
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/SETTLEMENT_REGISTRY.json",
+        "sha256": "7f92b8b3fbae272d40204e18bfdeddeb5cc3a3ded15f16f5587353aeca374466",
+        "bytes": 84315
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/SOURCE_INVENTORY.json",
+        "sha256": "dbd06b2da3ba45ca90c7788951b44d4a7b38cc35b9fd9d778c82d99a0026ac26",
+        "bytes": 84826
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/SOURCE_INVENTORY.md",
+        "sha256": "cec914db42fd7c057da5435321097a2fa97544a6effa8a70377e8940b8ae360d",
+        "bytes": 2337
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/STREAMING_PROTOTYPE_CONTRACTS.json",
+        "sha256": "93848bc1e3d4b42fea6a8e3c647f59e8cf4a84473d452fb0ab48f70804bf498c",
+        "bytes": 23418
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/TRANSPORTATION_NETWORK.md",
+        "sha256": "b6b7b8fed905103a10d7b774908c815e5fc2212c246982d868751ebaff3e11d4",
+        "bytes": 10064
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/TRANSPORT_ROUTE_REGISTRY.json",
+        "sha256": "86aff3bb0008dde11d343fadc8a465be9e52c521e473e408d3a20259a179a91a",
+        "bytes": 84296
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_CONSTRUCTION_ROADMAP.md",
+        "sha256": "a0a9c64514d25cbdd1635f1a01384216543eb7a342d0ad310ff239e32e70967c",
+        "bytes": 13725
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_ECOLOGY_SYSTEM.md",
+        "sha256": "d39e21d09892f7c2f0ba2b4d8bef844661a1d679d60f11f6a39afc40d7f10b97",
+        "bytes": 10784
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_EVENT_REGISTRY.json",
+        "sha256": "f9daf537d4945b47a506033f63d7a94b79dc0138bc71551d84d995810df4502f",
+        "bytes": 175037
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_POI_REGISTRY.json",
+        "sha256": "920134133e69ee9aa56522981c989cc553969f9228581fb01c2e025db1267a48",
+        "bytes": 417383
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_REGION_GRAPH.json",
+        "sha256": "25b086c36506a3dba47ce629684aedb3476e8d24567ee43a7b2f3ff94c53c96b",
+        "bytes": 55102
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/WORLD_STREAMING_ARCHITECTURE.md",
+        "sha256": "240370b2e96645b78c36e7cfe7f3d1fe68dd1c46f30cf23d58781984d4392ad8",
+        "bytes": 22673
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/maps/CONTINENT_CONCEPT.png",
+        "sha256": "5feafccce18ea10612642fa731426492dba36d04c07e3e006f316651a4747bc5",
+        "bytes": 343287
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/maps/CONTINENT_CONCEPT.svg",
+        "sha256": "67980fa14b752dbd011f4ece80308bc59502fe28b59e621c34b3a985bc81fbfe",
+        "bytes": 16520
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/architectural-kit-registry.schema.json",
+        "sha256": "2400455abab3e12d0adff925e2bb9ee676d2ac0c62f5db59b7ac2ee8c50ebf81",
+        "bytes": 14485
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/capital-layout.schema.json",
+        "sha256": "10fcfab573625745280bc256192aea44ddcec7149ce59d0a4d7e889f9becb7f1",
+        "bytes": 9787
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/deliverable-manifest.schema.json",
+        "sha256": "41faad3830d304e605744614f30f590f8507e383f30739c507bb182966994d1d",
+        "bytes": 1502
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/environment-asset-registry.schema.json",
+        "sha256": "c5e0eacdf60616d20cc777a7879d9725f6c8c87f3bdbdf4a6dbf27b744534d8d",
+        "bytes": 10452
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/environment-reference-evidence.schema.json",
+        "sha256": "19b79b82bbc957a2a3b2a1911beee0b888ff7bfbf0dea944e0d1c82d2c16093f",
+        "bytes": 3851
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/region-blueprint-index.schema.json",
+        "sha256": "000e42612f1a4e4e8199cb0474855a95ebdd5bb72ac256a57273fbc5a529b202",
+        "bytes": 4820
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/regional_ecology_profiles.schema.json",
+        "sha256": "152db5e3974f51aded3bbe5cc0f977d0a2a4ee2747771ce219fa1e6f37a7c049",
+        "bytes": 3240
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/settlement.schema.json",
+        "sha256": "ab29c22a5cbae80a25a6c6a17584ba8ad717ba53b0757ef2c4128ee1343c5772",
+        "bytes": 2732
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/source-inventory.schema.json",
+        "sha256": "224a284fc10a76532b3e51422f84df433dae2e323ff00ee59a5b33686180fc42",
+        "bytes": 3910
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/streaming-prototype-contracts.schema.json",
+        "sha256": "affae4368accc236543eb1d470980ff8722702a90f5d44e54e279aac5cd277ef",
+        "bytes": 4304
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/transport-route-registry.schema.json",
+        "sha256": "b730aeebe41b835592be28abc9ab0c15107950dc076d6ed5bbd7faf26191900a",
+        "bytes": 8159
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/world-poi.schema.json",
+        "sha256": "d92fe6b2653a27aab8088713d2878b1985a33986739b2781dc1b10d925e8b15b",
+        "bytes": 3484
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/world-region-graph.schema.json",
+        "sha256": "9b151668b1519330a8f515562a956430087a5af19ec476cbe1dc7cd6e4bfa530",
+        "bytes": 10351
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/schemas/world_event_registry.schema.json",
+        "sha256": "751d850a12aa593071008922c39ac1d540deae91070177e695d634a4396708b6",
+        "bytes": 15797
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/GEOGRAPHY_ACCEPTANCE.md",
+        "sha256": "87a328e6863ab14daba893f06e19f7137b8cf5fa07d669dd4cd29f52ec7df71a",
+        "bytes": 3943
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/GEOGRAPHY_BASELINE_COMPARISON.json",
+        "sha256": "e772c16d5edb22b4be88b6c43a6abb161b5fbfe9a0fa58276b593ee6d4682419",
+        "bytes": 472
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/GEOGRAPHY_VALIDATION.json",
+        "sha256": "f0cc05c31a4ab7310ca16ed2ffbc26cbb160bc2cd25bd7a9ca0120d5ff050d0a",
+        "bytes": 8509
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/LIVING_WORLD_ACCEPTANCE_AND_GAPS.md",
+        "sha256": "52ac1086f0527fc7be431663ac8d565fe2d67cc20fd5a67a998db44ecf596452",
+        "bytes": 4694
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/LIVING_WORLD_SOURCE_INSPECTION.json",
+        "sha256": "ef872a5bbc468397e608d657bdca7c1a3671683e59dcaef34159a26c69e8feaa",
+        "bytes": 7768
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/LIVING_WORLD_STATIC_CHECKS.json",
+        "sha256": "968a48e7c839f3143db87628aa2b918b10a37d6163d14dacbfc5638f3c3329bb",
+        "bytes": 3884
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/NEGATIVE_FIXTURE_REPORT.json",
+        "sha256": "83d13a6c1c915437ba33adfc1f5392ceeedecf25fe182b3ac6425bcd23667f61",
+        "bytes": 7524
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/PORTABILITY_REPORT.json",
+        "sha256": "924aa8fd4bb7a3daf70dec9d01da322e16835562c8d6568e384a7d270e29e616",
+        "bytes": 678
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REGION_CAPITAL_ACCEPTANCE.json",
+        "sha256": "4f2191c3fbce5a89838e32f8fb7fabf17d2e7e8c6747766ea17250d49a0e039c",
+        "bytes": 1918
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REGION_CAPITAL_EVIDENCE_AND_GAPS.md",
+        "sha256": "336ef738f85eb2953f27940dcde04c6d52e998fe3483140475a70f9d57f7986d",
+        "bytes": 1272
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REQUIREMENTS_COVERAGE.json",
+        "sha256": "f9b3ad93ad48f910e0a524a89a22b6f48e1c88f7c5e41f7cc5e4189a6e974ad0",
+        "bytes": 91102
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/REQUIREMENTS_COVERAGE.md",
+        "sha256": "db59f8bb61e024e089e939adf92c74cd94fadb6b3952255de7a579ef4b6d2b7d",
+        "bytes": 58565
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/VALIDATION_REPORT.json",
+        "sha256": "3b7872ccf4fbf4171cb11709db2672ed08e5658329c8327c424a59960247eb4d",
+        "bytes": 57751
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/VALIDATION_REPORT.md",
+        "sha256": "6d4e610561fb1d9e79a2e008acce80c30b557f532db21e6e8bd7413e61600866",
+        "bytes": 10065
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/baseline_contract.json",
+        "sha256": "47993bff3675a4b372c640fd98ac660d606534ec11f644e7eed226a367c912d3",
+        "bytes": 524888
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/build_coverage.py",
+        "sha256": "2eea18079a3886ccb4c4d78a9517ec30d292e8792afed53ca092d22c95aed624",
+        "bytes": 6124
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/environment_assets_report.json",
+        "sha256": "17653e6bef8a512387a57f017d7d35f2aac62181dcaaccbf1b29212b7238b4e8",
+        "bytes": 7063
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/requirements-validation.txt",
+        "sha256": "756cc9e506ae4ee1a6f6c0507088b5cfc0dc8ba350fb2d2d46f1ffa72033adb6",
+        "bytes": 19
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/run_negative_fixtures.py",
+        "sha256": "6f473211d94c925706afdd0cdd8640e39dbddba9fba56287e8e80a0c95660680",
+        "bytes": 4362
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/streaming_contracts_report.json",
+        "sha256": "d25cf4e8eb73bc5955a0cfc791011219b5bdf3d76ad7cbadceeb7c465863525e",
+        "bytes": 2056
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_geography.py",
+        "sha256": "558542169aecc122c11c2a1a463a8cc203ba7832b82106c2e8b18883cdcccea0",
+        "bytes": 5962
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_living_world.py",
+        "sha256": "98e2d1235144652a9b03e8f721ca8a902e93a80cd98c6255fa79fcdd7bd66894",
+        "bytes": 2775
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_phase2.py",
+        "sha256": "3b8153d320bfae48940835b39bc60cd346464269fe8021a3acf62978e9a01010",
+        "bytes": 23020
+      },
+      {
+        "path": "AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_streaming_contracts.py",
+        "sha256": "72f01bf119635507840f80e6a25f2b6dbbd906e623ad7a863f5877425ed37d38",
+        "bytes": 3500
+      }
+    ]
+  },
+  "limitations": [
+    "No new engine/GPU/visual certification; checks concern committed publication integrity."
+  ]
+}

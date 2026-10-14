@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o02-e-weapons-family",
+  "referenceIds": [
+    "reference-059"
+  ],
+  "status": "PARTIAL_PRODUCTION_CANDIDATES_UNREVIEWED",
+  "coordinateContract": "Blender meters +Y forward +Z up; GLB Y-up; grip socket at origin",
+  "assets": [
+    {
+      "id": "rime-sword-ready",
+      "archetypeId": "rime-frost-saber",
+      "name": "Frost Saber Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready.blend",
+        "glb": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready.glb",
+        "lod1": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-lod1.glb",
+        "lod2": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-lod2.glb",
+        "collision": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-02/weapons/textures/ice_basecolor.png",
+          "assets/production/oath-02/weapons/textures/ice_orm.png",
+          "assets/production/oath-02/weapons/textures/ice_normal.png",
+          "assets/production/oath-02/weapons/textures/silver_basecolor.png",
+          "assets/production/oath-02/weapons/textures/silver_orm.png",
+          "assets/production/oath-02/weapons/textures/silver_normal.png",
+          "assets/production/oath-02/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-02/weapons/textures/cloth_orm.png",
+          "assets/production/oath-02/weapons/textures/cloth_normal.png",
+          "assets/production/oath-02/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-02/weapons/textures/brass_orm.png",
+          "assets/production/oath-02/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-hero.png",
+          "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-side.png",
+          "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-front.png",
+          "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready-animated-pose-frame18.png"
+        ]
+      },
+      "triangles": {
+        "glb": 972,
+        "lod1": 544,
+        "lod2": 328,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.216,
+        1.444,
+        0.264
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "ARTICULATED_TASSEL",
+        "status": "AUTHORED_UNVERIFIED",
+        "boneCount": 4
+      },
+      "animations": [
+        {
+          "name": "tassel_settle",
+          "durationSeconds": 1.9583333333333333,
+          "purpose": "Damped cloth accessory settle, not combat clip"
+        }
+      ],
+      "remainingGates": [
+        "Reference art review; finer silver engraving and frost edge wear",
+        "Character grip and docking calibration",
+        "Runtime frost effects, combat animation, audio integration",
+        "Actual engine import/runtime checks and measured performance",
+        "LOD transition and damaged-state acceptance"
+      ],
+      "referenceIds": [
+        "reference-059"
+      ]
+    },
+    {
+      "id": "rime-sword-stowed",
+      "archetypeId": "rime-frost-saber",
+      "name": "Frost Saber Stowed",
+      "type": "equipment",
+      "variant": "stowed",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed.blend",
+        "glb": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed.glb",
+        "lod1": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-lod1.glb",
+        "lod2": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-lod2.glb",
+        "collision": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-collision.glb",
+        "textures": [
+          "assets/production/oath-02/weapons/textures/ice_basecolor.png",
+          "assets/production/oath-02/weapons/textures/ice_orm.png",
+          "assets/production/oath-02/weapons/textures/ice_normal.png",
+          "assets/production/oath-02/weapons/textures/silver_basecolor.png",
+          "assets/production/oath-02/weapons/textures/silver_orm.png",
+          "assets/production/oath-02/weapons/textures/silver_normal.png",
+          "assets/production/oath-02/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-02/weapons/textures/cloth_orm.png",
+          "assets/production/oath-02/weapons/textures/cloth_normal.png",
+          "assets/production/oath-02/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-02/weapons/textures/brass_orm.png",
+          "assets/production/oath-02/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-hero.png",
+          "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-side.png",
+          "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-front.png",
+          "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed-animated-pose-frame18.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1092,
+        "lod1": 620,
+        "lod2": 380,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.216,
+        1.464,
+        0.264
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "ARTICULATED_TASSEL",
+        "status": "AUTHORED_UNVERIFIED",
+        "boneCount": 4
+      },
+      "animations": [
+        {
+          "name": "tassel_settle",
+          "durationSeconds": 1.9583333333333333,
+          "purpose": "Damped cloth accessory settle, not combat clip"
+        }
+      ],
+      "remainingGates": [
+        "Reference art review; finer silver engraving and frost edge wear",
+        "Character grip and docking calibration",
+        "Runtime frost effects, combat animation, audio integration",
+        "Actual engine import/runtime checks and measured performance",
+        "LOD transition and damaged-state acceptance"
+      ],
+      "referenceIds": [
+        "reference-059"
+      ]
+    },
+    {
+      "id": "rime-sword-damaged",
+      "archetypeId": "rime-frost-saber",
+      "name": "Frost Saber Damaged",
+      "type": "equipment",
+      "variant": "damaged",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged.blend",
+        "glb": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged.glb",
+        "lod1": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-lod1.glb",
+        "lod2": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-lod2.glb",
+        "collision": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-collision.glb",
+        "textures": [
+          "assets/production/oath-02/weapons/textures/ice_basecolor.png",
+          "assets/production/oath-02/weapons/textures/ice_orm.png",
+          "assets/production/oath-02/weapons/textures/ice_normal.png",
+          "assets/production/oath-02/weapons/textures/silver_basecolor.png",
+          "assets/production/oath-02/weapons/textures/silver_orm.png",
+          "assets/production/oath-02/weapons/textures/silver_normal.png",
+          "assets/production/oath-02/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-02/weapons/textures/cloth_orm.png",
+          "assets/production/oath-02/weapons/textures/cloth_normal.png",
+          "assets/production/oath-02/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-02/weapons/textures/brass_orm.png",
+          "assets/production/oath-02/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-hero.png",
+          "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-side.png",
+          "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-front.png",
+          "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged-animated-pose-frame18.png"
+        ]
+      },
+      "triangles": {
+        "glb": 972,
+        "lod1": 544,
+        "lod2": 328,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.216,
+        1.3624,
+        0.264
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "ARTICULATED_TASSEL",
+        "status": "AUTHORED_UNVERIFIED",
+        "boneCount": 4
+      },
+      "animations": [
+        {
+          "name": "tassel_settle",
+          "durationSeconds": 1.9583333333333333,
+          "purpose": "Damped cloth accessory settle, not combat clip"
+        }
+      ],
+      "remainingGates": [
+        "Reference art review; finer silver engraving and frost edge wear",
+        "Character grip and docking calibration",
+        "Runtime frost effects, combat animation, audio integration",
+        "Actual engine import/runtime checks and measured performance",
+        "LOD transition and damaged-state acceptance"
+      ],
+      "referenceIds": [
+        "reference-059"
+      ]
+    },
+    {
+      "id": "rime-focus-ready",
+      "archetypeId": "rime-repeater",
+      "name": "Rime Repeater Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready.blend",
+        "glb": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready.glb",
+        "lod1": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-lod1.glb",
+        "lod2": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-lod2.glb",
+        "collision": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-02/weapons/textures/ice_basecolor.png",
+          "assets/production/oath-02/weapons/textures/ice_orm.png",
+          "assets/production/oath-02/weapons/textures/ice_normal.png",
+          "assets/production/oath-02/weapons/textures/silver_basecolor.png",
+          "assets/production/oath-02/weapons/textures/silver_orm.png",
+          "assets/production/oath-02/weapons/textures/silver_normal.png",
+          "assets/production/oath-02/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-02/weapons/textures/cloth_orm.png",
+          "assets/production/oath-02/weapons/textures/cloth_normal.png",
+          "assets/production/oath-02/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-02/weapons/textures/brass_orm.png",
+          "assets/production/oath-02/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-hero.png",
+          "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-side.png",
+          "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1168,
+        "lod1": 714,
+        "lod2": 468,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.2355,
+        0.86,
+        0.275
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Reference art review; finer silver engraving and frost edge wear",
+        "Character grip and docking calibration",
+        "Runtime frost effects, combat animation, audio integration",
+        "Actual engine import/runtime checks and measured performance",
+        "LOD transition and damaged-state acceptance"
+      ],
+      "referenceIds": [
+        "reference-059"
+      ]
+    },
+    {
+      "id": "rime-focus-stowed",
+      "archetypeId": "rime-repeater",
+      "name": "Rime Repeater Stowed",
+      "type": "equipment",
+      "variant": "stowed",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed.blend",
+        "glb": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed.glb",
+        "lod1": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-lod1.glb",
+        "lod2": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-lod2.glb",
+        "collision": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-collision.glb",
+        "textures": [
+          "assets/production/oath-02/weapons/textures/ice_basecolor.png",
+          "assets/production/oath-02/weapons/textures/ice_orm.png",
+          "assets/production/oath-02/weapons/textures/ice_normal.png",
+          "assets/production/oath-02/weapons/textures/silver_basecolor.png",
+          "assets/production/oath-02/weapons/textures/silver_orm.png",
+          "assets/production/oath-02/weapons/textures/silver_normal.png",
+          "assets/production/oath-02/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-02/weapons/textures/cloth_orm.png",
+          "assets/production/oath-02/weapons/textures/cloth_normal.png",
+          "assets/production/oath-02/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-02/weapons/textures/brass_orm.png",
+          "assets/production/oath-02/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-hero.png",
+          "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-side.png",
+          "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1256,
+        "lod1": 758,
+        "lod2": 488,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.2355,
+        0.86,
+        0.312
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Reference art review; finer silver engraving and frost edge wear",
+        "Character grip and docking calibration",
+        "Runtime frost effects, combat animation, audio integration",
+        "Actual engine import/runtime checks and measured performance",
+        "LOD transition and damaged-state acceptance"
+      ],
+      "referenceIds": [
+        "reference-059"
+      ]
+    },
+    {
+      "id": "rime-focus-damaged",
+      "archetypeId": "rime-repeater",
+      "name": "Rime Repeater Damaged",
+      "type": "equipment",
+      "variant": "damaged",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged.blend",
+        "glb": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged.glb",
+        "lod1": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-lod1.glb",
+        "lod2": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-lod2.glb",
+        "collision": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-collision.glb",
+        "textures": [
+          "assets/production/oath-02/weapons/textures/ice_basecolor.png",
+          "assets/production/oath-02/weapons/textures/ice_orm.png",
+          "assets/production/oath-02/weapons/textures/ice_normal.png",
+          "assets/production/oath-02/weapons/textures/silver_basecolor.png",
+          "assets/production/oath-02/weapons/textures/silver_orm.png",
+          "assets/production/oath-02/weapons/textures/silver_normal.png",
+          "assets/production/oath-02/weapons/textures/cloth_basecolor.png",
+          "assets/production/oath-02/weapons/textures/cloth_orm.png",
+          "assets/production/oath-02/weapons/textures/cloth_normal.png",
+          "assets/production/oath-02/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-02/weapons/textures/brass_orm.png",
+          "assets/production/oath-02/weapons/textures/brass_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-hero.png",
+          "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-side.png",
+          "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1168,
+        "lod1": 714,
+        "lod2": 468,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.2355,
+        0.86,
+        0.275
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Reference art review; finer silver engraving and frost edge wear",
+        "Character grip and docking calibration",
+        "Runtime frost effects, combat animation, audio integration",
+        "Actual engine import/runtime checks and measured performance",
+        "LOD transition and damaged-state acceptance"
+      ],
+      "referenceIds": [
+        "reference-059"
+      ]
+    }
+  ]
+}

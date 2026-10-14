@@ -1,0 +1,35 @@
+{
+  "baseline": "Frozen V7",
+  "current": "Frozen V8",
+  "counts": [
+    {
+      "lod": "glb",
+      "v7": 61556,
+      "v8": 54212,
+      "delta": -7344,
+      "deltaPercent": -11.930599779062968
+    },
+    {
+      "lod": "lod1",
+      "v7": 37548,
+      "v8": 33068,
+      "delta": -4480,
+      "deltaPercent": -11.931394481730052
+    },
+    {
+      "lod": "lod2",
+      "v7": 20928,
+      "v8": 18432,
+      "delta": -2496,
+      "deltaPercent": -11.926605504587156
+    },
+    {
+      "lod": "collision",
+      "v7": 76,
+      "v8": 76,
+      "delta": 0,
+      "deltaPercent": 0.0
+    }
+  ],
+  "budgetStatus": "PROPOSED_UNMEASURED"
+}

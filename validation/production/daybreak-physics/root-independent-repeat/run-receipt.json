@@ -1,0 +1,68 @@
+{
+  "status": "PASS_SCOPED_ACTUAL_GODOT_PHYSICS",
+  "command": [
+    "godot",
+    "--headless",
+    "--fixed-fps",
+    "60",
+    "--path",
+    "/tmp/aetherion-daybreak-physics",
+    "--script",
+    "traverse.gd",
+    "--",
+    "/tmp/aetherion-daybreak-physics-root-repeat/results.json"
+  ],
+  "godot_executable": "/usr/local/bin/godot",
+  "cases": 8,
+  "expected_traversable": 4,
+  "expected_negative_refusals": 4,
+  "inputs": [
+    {
+      "path": "inputs/ramp-with-landing-collision.glb",
+      "sha256": "e5e0ddbdbcf87026ff82329d2b300eb76de193f5f842af59327f24a5b9296474",
+      "bytes": 6372
+    },
+    {
+      "path": "inputs/source-receipt.json",
+      "sha256": "93aa8ba00768b016fcaebcfc524cad9d246e8de1201b14c69e3e3c745fce4f28",
+      "bytes": 1900
+    },
+    {
+      "path": "inputs/stairs-with-landing-collision.glb",
+      "sha256": "f38507a4f8c73a217bd66477a3003ba84507c34c89d6bbcdd2d76c06d4050cd8",
+      "bytes": 6392
+    },
+    {
+      "path": "inputs/start-floor-collision.glb",
+      "sha256": "af0ac1abd9947e96b682585d38223954e8b37e1fc35f7f6b1e480f615bbc63bb",
+      "bytes": 1234452
+    }
+  ],
+  "implementation": [
+    {
+      "path": "project.godot",
+      "sha256": "0abe67940e8e61dbebca179eec413290f6b7976f5e6941787b0a16af0aeb6e53"
+    },
+    {
+      "path": "traverse.gd",
+      "sha256": "ac112315ed8ba81c6c0437a0ee58beabb82653a7a6a67a6f44ba72dd436ff964"
+    },
+    {
+      "path": "run.py",
+      "sha256": "8b0ff489503f217655597dc902d1a7366c010d6cbeb446553c917df7f617e9e7"
+    },
+    {
+      "path": "export_collision.py",
+      "sha256": "be701250262abef354e7fbf57380d6685cbc5361f8a6fdcf92df6831d48cc615"
+    }
+  ],
+  "results_sha256": "392f3e4a4580e69b463c1093f0c1832464a7ed8fbd61a14aa613ae736a35ea1e",
+  "log_sha256": "4c90414f1980a8b5ae58a26f003255ea467fdd604ad58a5890b0834a83edb463",
+  "limitations": [
+    "Stair movement proxy is a smooth wedge, not rendered discrete treads",
+    "Only centerline single-capsule straight ascents/descents tested",
+    "Controller parameters are proposed, not approved player/mount clearances",
+    "No landing guard, navmesh, multiplayer, accessibility, material or visual approval",
+    "Negative gap and step are explicit destructive test mutations of in-memory landing bodies only"
+  ]
+}

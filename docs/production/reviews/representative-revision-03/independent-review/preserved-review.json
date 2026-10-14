@@ -1,0 +1,108 @@
+{
+  "reviewedAtUtc": "2026-10-13T22:20:19.899534+00:00",
+  "reviewer": "independent_review",
+  "status": "NOT_EXACT_REFERENCE_MATCH_NOT_APPROVED",
+  "method": "Viewed original 034 and 049 pixels and all 10 current candidate renders; compared Chronal v4 front, Graft pass05 front and pass06 planar diagnostic profile. Read-only source review; no repository edits. SHA256 verification is file identity evidence only.",
+  "limits": [
+    "No new Blender source-open/import test or render performed by this reviewer.",
+    "No engine, animation-clearance, character-fit, performance or GPU certification.",
+    "Visual findings are qualitative, not automated silhouette scores. Illustrative source views are not mutually exact engineering orthographs."
+  ],
+  "assets": [
+    {
+      "asset": "chronal-wrist-tool-v6",
+      "reference": "reference-034",
+      "viewsInspected": [
+        "front",
+        "side",
+        "hero",
+        "deployed",
+        "wrist-fit",
+        "wrist-fit-side"
+      ],
+      "improvementsVsV4": [
+        "Broad dark hub replaced by brass bearing cover with smaller dark center, closer to reference material distribution.",
+        "Hooked crescents replace shallow triangular blades; clearer curved blade identity."
+      ],
+      "remainingVisualGaps": [
+        {
+          "priority": "P1",
+          "finding": "Broad flat rectangular bridge and cuff dominate silhouette; reference shows a compact articulated assembly with narrower curved carriers and more visible negative space.",
+          "nextRepair": "Trace carrier outline and hub-to-blade proportions from wrist construction panel; reduce slab area and form distinct curved supports."
+        },
+        {
+          "priority": "P1",
+          "finding": "Blade roots and continuous wide crescents remain too broad; reference blade carriers, cutouts and pointed transitions differ.",
+          "nextRepair": "Match each visible deployed and stowed contour and preserve separate carrier/blade boundaries."
+        },
+        {
+          "priority": "P2",
+          "finding": "Brass is bright and uniformly orange; plate edges, cleats and hub read coarse. Reference has darker aged brass, small fasteners, layered bearing recesses and brushed steel.",
+          "nextRepair": "Refine manufacturing forms first, then local roughness/wear and material value under a fixed neutral lighting rig."
+        },
+        {
+          "priority": "P2",
+          "finding": "Large smooth cuff lacks the glove, wrap and strap construction visible in wrist-fit reference. Neutral fixture demonstrates placement only.",
+          "nextRepair": "Validate on actual character glove with stowed/deployed wrist poses and clearance sampling."
+        }
+      ],
+      "gates": [
+        "Art fidelity",
+        "Motion clearance and actual glove/character fit",
+        "Revised runtime exports and engine checks"
+      ],
+      "hashVerification": {
+        "manifestFilesMatched": 34,
+        "mismatches": 0,
+        "originalReferenceMatched": true
+      }
+    },
+    {
+      "asset": "sapseed-staff-pass06",
+      "reference": "reference-049",
+      "viewsInspected": [
+        "front",
+        "profile",
+        "hero",
+        "crown-closeup"
+      ],
+      "improvementsVsPass05": [
+        "Elongated split husks replace overlapping short bud scales; crown is closer to the source elongated wood pod.",
+        "Thinner alternating leaf sprigs and clearer root spread move toward source fine branching.",
+        "True profile has branch/root depth beyond the preserved planar diagnostic."
+      ],
+      "remainingVisualGaps": [
+        {
+          "priority": "P1",
+          "finding": "Crown still reads as a symmetric rib cage around an exposed smooth orange droplet. Source has irregular layered broken wood enclosing a smaller angular opening.",
+          "nextRepair": "Vary splinter widths, curvature, overlap and break tips; narrow the central opening and integrate sap into the husk."
+        },
+        {
+          "priority": "P1",
+          "finding": "Branches form a clean broad Y; shaft fibers look smooth, continuous and evenly combed. Reference has irregular interlocking forks, knots, recesses and broken ridges.",
+          "nextRepair": "Rebuild dominant branch junctions and interrupted twisted wood masses before adding texture noise."
+        },
+        {
+          "priority": "P2",
+          "finding": "Uniform reddish brown surface and fine parallel striations lack source golden ridge edges, dark fissures and moss pockets. Leaves remain sparse and simple.",
+          "nextRepair": "Add localized bark relief and value variation tied to geometry; author uneven leaf/moss clusters in reference locations."
+        },
+        {
+          "priority": "P2",
+          "finding": "Profile crown appears mostly closed and narrower than source side illustration; no held or docked view exists in this candidate.",
+          "nextRepair": "Compare three-dimensional crown and branch depth in a matched side view; add actual hand/back contact renders after primary form repair."
+        }
+      ],
+      "gates": [
+        "Art fidelity",
+        "Profile-depth interpretation and held/docked fit",
+        "Revised runtime exports and engine checks"
+      ],
+      "hashVerification": {
+        "manifestFilesMatched": 63,
+        "mismatches": 0,
+        "originalReferenceMatched": true
+      }
+    }
+  ]
+}

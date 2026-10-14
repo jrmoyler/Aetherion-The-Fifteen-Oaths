@@ -31,6 +31,11 @@
         <button id="cast-button" type="button" disabled>Cast</button>
         <button id="clear-button" type="button" disabled>Clear</button>
       </div>
+      <div class="aetherion-controls__row">
+        <label>Candidate equipment<select id="equipment-select" disabled aria-describedby="equipment-status"><option value="">Off</option></select></label>
+        <label>Placement<select id="equipment-placement" disabled><option value="hand">Right hand</option><option value="stow">Back stow</option></select></label>
+      </div>
+      <p id="equipment-status" role="status">Equipment off · proposed alignments; visual fit unverified</p>
       <p id="ability-status" role="status">Starting the original Ability Matrix sandbox…</p>
     </details>
     <script type="module" src="./main.js"></script>

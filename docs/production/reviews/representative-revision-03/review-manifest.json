@@ -1,0 +1,235 @@
+{
+  "status": "UNAPPROVED_REVIEW_ONLY",
+  "productionPromotion": false,
+  "baseline": "45d8a93a45da09b75a184274f26c837db118f973",
+  "entries": [
+    {
+      "id": "kiln-ninja-v5",
+      "title": "Kiln ninja revision05",
+      "references": [
+        90,
+        60
+      ],
+      "changes": "Continuous face and neck repairs, revised hair ribbons and wider reference-measured knee/ankle spacing; matching rest-bone adjustments accompany the mesh changes.",
+      "remaining": "Facial likeness, helmet-like hair flow, chest plates, cape and trouser tailoring, boots and surface detail still differ. Primary mesh is 64,098 triangles; performance is unmeasured.",
+      "sources": [
+        "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+        "kiln-ninja-v5/kiln_ninja.py"
+      ],
+      "views": [
+        {
+          "label": "Front",
+          "path": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-front.png"
+        },
+        {
+          "label": "Profile",
+          "path": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-side.png"
+        },
+        {
+          "label": "Hero",
+          "path": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-hero.png"
+        },
+        {
+          "label": "Masked portrait",
+          "path": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-portrait.png"
+        },
+        {
+          "label": "Unmasked portrait",
+          "path": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png"
+        },
+        {
+          "label": "Unmasked profile",
+          "path": "kiln-ninja-v5/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png"
+        }
+      ],
+      "comparisons": [
+        "kiln-ninja-v5/front-comparison.png",
+        "kiln-ninja-v5/profile-comparison.png",
+        "kiln-ninja-v5/face-comparison.png",
+        "kiln-ninja-v5/face-profile-comparison.png"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-090/original.png",
+          "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+        },
+        {
+          "path": "assets/references/reference-060/original.png",
+          "sha256": "654a8acda2f430f72f92d0c0a45cdc50e64c0dd00fbb37f12b270fbb8815d788"
+        }
+      ]
+    },
+    {
+      "id": "fault-v9",
+      "title": "Fault Choir \u2014 Amethyst Short Blade V9",
+      "references": [
+        53
+      ],
+      "changes": "Rebuilt overlapping fracture planes, widened the exposed crystal channel, narrowed guard supports and corrected the authored stone, bronze and leather values.",
+      "remaining": "Stone divisions and bevels remain too regular, the crystal channel too uniform and the guard/pommel too simplified. The suspected data-texture gamma defect was disproved by byte-level comparison.",
+      "sources": [
+        "fault-v9/amethyst-short-blade/source.blend",
+        "fault-v9/fault_weapons.review.py",
+        "fault-v9/amethyst-short-blade/review.glb"
+      ],
+      "views": [
+        {
+          "label": "Approximate source orientation",
+          "path": "fault-v9/amethyst-short-blade/matched-front-review.png"
+        },
+        {
+          "label": "Front",
+          "path": "fault-v9/amethyst-short-blade/front-review.png"
+        },
+        {
+          "label": "Profile",
+          "path": "fault-v9/amethyst-short-blade/profile-review.png"
+        },
+        {
+          "label": "Hero",
+          "path": "fault-v9/amethyst-short-blade/hero-review.png"
+        },
+        {
+          "label": "Material detail",
+          "path": "fault-v9/amethyst-short-blade/material-closeup.png"
+        },
+        {
+          "label": "Rolled profile",
+          "path": "fault-v9/amethyst-short-blade/matched-profile-review.png"
+        }
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-053/original.png",
+          "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+        }
+      ]
+    },
+    {
+      "id": "impulse-shield-v7",
+      "title": "Impulse folding shield revision07",
+      "references": [
+        32
+      ],
+      "changes": "Rebuilt telescopic fork supports, travel slots, hinge connections and folding sequence. All 721 sampled quarter-frame states have no intergroup triangle-surface intersections.",
+      "remaining": "Flat casing and uniform surfaces remain below reference detail. Hidden mechanism is proposed; stowed depth is 0.227 m and maximum sampled movement depth is 0.554 m including straps. Wearer fit, continuous clearance and mechanical strength are unverified.",
+      "sources": [
+        "impulse-shield-v7/impulse-shield-lateral-review07.blend",
+        "impulse-shield-v7/impulse-shield-lateral-review07.glb",
+        "impulse-shield-v7/reproduce.py"
+      ],
+      "views": [
+        {
+          "label": "Deployed front",
+          "path": "impulse-shield-v7/deployed-front.png"
+        },
+        {
+          "label": "Deployed hero",
+          "path": "impulse-shield-v7/deployed-hero.png"
+        },
+        {
+          "label": "Intermediate frame 61",
+          "path": "impulse-shield-v7/intermediate.png"
+        },
+        {
+          "label": "Stowed front",
+          "path": "impulse-shield-v7/stowed-front.png"
+        },
+        {
+          "label": "Stowed hero",
+          "path": "impulse-shield-v7/stowed-hero.png"
+        }
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-032/original.png",
+          "sha256": "77e948588fbd7a17687c3caa4fd206833ed039896118974b472928155f87f197"
+        }
+      ]
+    },
+    {
+      "id": "chronal-v6",
+      "title": "Chronal wrist tool V6 \u2014 preserved revision",
+      "references": [
+        34
+      ],
+      "changes": "Compact brass bearing and hooked crescent outlines replace the broad dark hub and triangular blade forms. Includes a separate neutral wrist-fit witness.",
+      "remaining": "Broad flat bridge and blade roots, coarse bright brass and bulky cuff remain visibly unlike the reference. The fixture does not establish character fit or moving-blade clearance.",
+      "sources": [
+        "chronal-v6/chronal-wrist-tool-v6.blend",
+        "chronal-v6/chronal-wrist-v6-neutral-fit-witness.blend",
+        "chronal-v6/reproduce_review.py"
+      ],
+      "views": [
+        {
+          "label": "Hero",
+          "path": "chronal-v6/chronal-wrist-tool-v6-hero.png"
+        },
+        {
+          "label": "Front",
+          "path": "chronal-v6/chronal-wrist-tool-v6-front.png"
+        },
+        {
+          "label": "Side",
+          "path": "chronal-v6/chronal-wrist-tool-v6-side.png"
+        },
+        {
+          "label": "Articulated frame 18",
+          "path": "chronal-v6/chronal-wrist-tool-v6-deployed.png"
+        },
+        {
+          "label": "Neutral wrist-fit witness",
+          "path": "chronal-v6/chronal-wrist-tool-v6-wrist-fit.png"
+        },
+        {
+          "label": "Wrist-fit side",
+          "path": "chronal-v6/chronal-wrist-tool-v6-wrist-fit-side.png"
+        }
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-034/original.png",
+          "sha256": "c5be6ab847392125e07b644c04078b9a809a18bf53162605603e9a5ab19212a5"
+        }
+      ]
+    },
+    {
+      "id": "graft-pass06",
+      "title": "Graft Sapseed staff pass06 \u2014 preserved revision",
+      "references": [
+        49
+      ],
+      "changes": "Long split husks, thinner sprigs, twisted shaft relief and actual profile depth replace the earlier short-bract and planar forms.",
+      "remaining": "The regular open crown, smooth exposed orange core, uniform bark and branch junctions still differ from the source. Held and docked contact views are missing.",
+      "sources": [
+        "graft-pass06/sapseed-staff.blend",
+        "graft-pass06/revised_graft.py"
+      ],
+      "views": [
+        {
+          "label": "Front",
+          "path": "graft-pass06/sapseed-staff-front.png"
+        },
+        {
+          "label": "True profile",
+          "path": "graft-pass06/sapseed-staff-profile.png"
+        },
+        {
+          "label": "Hero",
+          "path": "graft-pass06/sapseed-staff-hero.png"
+        },
+        {
+          "label": "Crown detail",
+          "path": "graft-pass06/sapseed-staff-crown-closeup.png"
+        }
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-049/original.png",
+          "sha256": "5612f785710f5f1e223c9404b975a714f90433c9f05a9afeeecad1d280682116"
+        }
+      ]
+    }
+  ]
+}

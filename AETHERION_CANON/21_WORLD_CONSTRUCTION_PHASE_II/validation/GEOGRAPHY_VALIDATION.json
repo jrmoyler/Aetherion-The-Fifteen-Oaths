@@ -1,0 +1,441 @@
+{
+  "status": "PASS",
+  "scope": "Conceptual topology, schemas, drainage control-station targets and detours; not actual terrain or runtime validation.",
+  "checks": [
+    {
+      "check": "schema WORLD_REGION_GRAPH.json",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "schema TRANSPORT_ROUTE_REGISTRY.json",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "unique counts",
+      "passed": true,
+      "detail": "15 unique regions,30 unique undirected edges,4 basins,63 preserved POIs"
+    },
+    {
+      "check": "capital and POI uniqueness",
+      "passed": true,
+      "detail": "63 distinct POIs and15 matching capitals"
+    },
+    {
+      "check": "neighbor reciprocity",
+      "passed": true,
+      "detail": "Record neighbors match bidirectional edges"
+    },
+    {
+      "check": "ordinary connectivity",
+      "passed": true,
+      "detail": "One connected ordinary graph"
+    },
+    {
+      "check": "all single-edge failures",
+      "passed": true,
+      "detail": "All30 edge removals preserve all15 regions"
+    },
+    {
+      "check": "straight-line planarity",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "territory simple positive rings",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "exact physical shared-border pairs",
+      "passed": true,
+      "detail": {
+        "missing": [],
+        "extra": []
+      }
+    },
+    {
+      "check": "no three-way shared segments",
+      "passed": true,
+      "detail": "Junction points may be triple; positive-length borders have at most2 owners"
+    },
+    {
+      "check": "territory interior noncrossing",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "single simple coastline",
+      "passed": true,
+      "detail": "One ordered positive-area outer ring"
+    },
+    {
+      "check": "coast equals territory perimeter",
+      "passed": true,
+      "detail": "No unexplained internal hole or detached perimeter edge"
+    },
+    {
+      "check": "land area conserved",
+      "passed": true,
+      "detail": {
+        "territories": 472332.7392559999,
+        "coast": 472332.7392559999,
+        "units": "editorial square units"
+      }
+    },
+    {
+      "check": "drainage basin-west",
+      "passed": true,
+      "detail": {
+        "sequence": [
+          "region-02",
+          "region-01",
+          "region-07",
+          "region-04"
+        ],
+        "descending_targets_m": [
+          2600,
+          900,
+          280,
+          10,
+          0
+        ]
+      }
+    },
+    {
+      "check": "drainage basin-choir",
+      "passed": true,
+      "detail": {
+        "sequence": [
+          "region-03",
+          "region-05",
+          "region-08",
+          "region-04"
+        ],
+        "descending_targets_m": [
+          1900,
+          700,
+          110,
+          10,
+          0
+        ]
+      }
+    },
+    {
+      "check": "drainage basin-dawn",
+      "passed": true,
+      "detail": {
+        "sequence": [
+          "region-06",
+          "region-09",
+          "region-12",
+          "region-14",
+          "region-15"
+        ],
+        "descending_targets_m": [
+          1050,
+          430,
+          220,
+          95,
+          8,
+          0
+        ]
+      }
+    },
+    {
+      "check": "drainage basin-east",
+      "passed": true,
+      "detail": {
+        "sequence": [
+          "region-10",
+          "region-13",
+          "region-11",
+          "region-15"
+        ],
+        "descending_targets_m": [
+          850,
+          380,
+          170,
+          8,
+          0
+        ]
+      }
+    },
+    {
+      "check": "detour route-01-02",
+      "passed": true,
+      "detail": [
+        "region-01",
+        "region-05",
+        "region-02"
+      ]
+    },
+    {
+      "check": "detour route-01-05",
+      "passed": true,
+      "detail": [
+        "region-01",
+        "region-07",
+        "region-05"
+      ]
+    },
+    {
+      "check": "detour route-01-07",
+      "passed": true,
+      "detail": [
+        "region-01",
+        "region-05",
+        "region-07"
+      ]
+    },
+    {
+      "check": "detour route-02-03",
+      "passed": true,
+      "detail": [
+        "region-02",
+        "region-05",
+        "region-03"
+      ]
+    },
+    {
+      "check": "detour route-02-05",
+      "passed": true,
+      "detail": [
+        "region-02",
+        "region-01",
+        "region-05"
+      ]
+    },
+    {
+      "check": "detour route-03-05",
+      "passed": true,
+      "detail": [
+        "region-03",
+        "region-09",
+        "region-05"
+      ]
+    },
+    {
+      "check": "detour route-03-06",
+      "passed": true,
+      "detail": [
+        "region-03",
+        "region-09",
+        "region-06"
+      ]
+    },
+    {
+      "check": "detour route-03-09",
+      "passed": true,
+      "detail": [
+        "region-03",
+        "region-05",
+        "region-09"
+      ]
+    },
+    {
+      "check": "detour route-04-07",
+      "passed": true,
+      "detail": [
+        "region-04",
+        "region-08",
+        "region-07"
+      ]
+    },
+    {
+      "check": "detour route-04-08",
+      "passed": true,
+      "detail": [
+        "region-04",
+        "region-07",
+        "region-08"
+      ]
+    },
+    {
+      "check": "detour route-05-07",
+      "passed": true,
+      "detail": [
+        "region-05",
+        "region-01",
+        "region-07"
+      ]
+    },
+    {
+      "check": "detour route-05-08",
+      "passed": true,
+      "detail": [
+        "region-05",
+        "region-07",
+        "region-08"
+      ]
+    },
+    {
+      "check": "detour route-05-09",
+      "passed": true,
+      "detail": [
+        "region-05",
+        "region-03",
+        "region-09"
+      ]
+    },
+    {
+      "check": "detour route-06-09",
+      "passed": true,
+      "detail": [
+        "region-06",
+        "region-13",
+        "region-09"
+      ]
+    },
+    {
+      "check": "detour route-06-10",
+      "passed": true,
+      "detail": [
+        "region-06",
+        "region-13",
+        "region-10"
+      ]
+    },
+    {
+      "check": "detour route-06-13",
+      "passed": true,
+      "detail": [
+        "region-06",
+        "region-10",
+        "region-13"
+      ]
+    },
+    {
+      "check": "detour route-07-08",
+      "passed": true,
+      "detail": [
+        "region-07",
+        "region-05",
+        "region-08"
+      ]
+    },
+    {
+      "check": "detour route-08-09",
+      "passed": true,
+      "detail": [
+        "region-08",
+        "region-12",
+        "region-09"
+      ]
+    },
+    {
+      "check": "detour route-08-12",
+      "passed": true,
+      "detail": [
+        "region-08",
+        "region-09",
+        "region-12"
+      ]
+    },
+    {
+      "check": "detour route-09-12",
+      "passed": true,
+      "detail": [
+        "region-09",
+        "region-08",
+        "region-12"
+      ]
+    },
+    {
+      "check": "detour route-09-13",
+      "passed": true,
+      "detail": [
+        "region-09",
+        "region-06",
+        "region-13"
+      ]
+    },
+    {
+      "check": "detour route-10-13",
+      "passed": true,
+      "detail": [
+        "region-10",
+        "region-06",
+        "region-13"
+      ]
+    },
+    {
+      "check": "detour route-10-11",
+      "passed": true,
+      "detail": [
+        "region-10",
+        "region-13",
+        "region-11"
+      ]
+    },
+    {
+      "check": "detour route-11-13",
+      "passed": true,
+      "detail": [
+        "region-11",
+        "region-10",
+        "region-13"
+      ]
+    },
+    {
+      "check": "detour route-11-14",
+      "passed": true,
+      "detail": [
+        "region-11",
+        "region-13",
+        "region-14"
+      ]
+    },
+    {
+      "check": "detour route-11-15",
+      "passed": true,
+      "detail": [
+        "region-11",
+        "region-14",
+        "region-15"
+      ]
+    },
+    {
+      "check": "detour route-12-13",
+      "passed": true,
+      "detail": [
+        "region-12",
+        "region-09",
+        "region-13"
+      ]
+    },
+    {
+      "check": "detour route-12-14",
+      "passed": true,
+      "detail": [
+        "region-12",
+        "region-13",
+        "region-14"
+      ]
+    },
+    {
+      "check": "detour route-13-14",
+      "passed": true,
+      "detail": [
+        "region-13",
+        "region-11",
+        "region-14"
+      ]
+    },
+    {
+      "check": "detour route-14-15",
+      "passed": true,
+      "detail": [
+        "region-14",
+        "region-11",
+        "region-15"
+      ]
+    },
+    {
+      "check": "all17 requested modes",
+      "passed": true,
+      "detail": []
+    }
+  ]
+}

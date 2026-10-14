@@ -1,0 +1,24 @@
+{
+  "reachableSandboxModules": 581,
+  "missingReachableSandboxImports": [],
+  "missingReachableSandboxAssets": [],
+  "method": "Static literal relative JS import paths and quoted ./models, ./textures, ./hdri references. Dynamic template URLs, CSS, HTML, FBX/GLB embedded asset references and remote URLs are outside coverage. Archive references included and marked by path.",
+  "moduleReferences": 6593,
+  "assetReferences": 157,
+  "uniquePublicAssets": 83,
+  "missingAssetReferences": [
+    {
+      "source": "packs/sandbox/src/vendor/casting/world/DuelHall.js",
+      "reference": "./models/duel_hall.glb",
+      "publicFile": "packs/sandbox/public/models/duel_hall.glb",
+      "exists": false
+    },
+    {
+      "source": "packs/sandbox/src/vendor/casting/world/DuelHall.js",
+      "reference": "./textures/duelhall/",
+      "publicFile": "packs/sandbox/public/textures/duelhall",
+      "exists": false
+    }
+  ],
+  "licensingCaveat": "Source packs carry MIT notices; presets/new/LICENSE expressly does not relicense upstream code or third-party assets. README calls the character FBX files Mixamo exports and identifies only the ambientCG Rock030 texture scan as CC0, but no complete per-model/probe/texture provenance and license manifest was found. This inventory does not establish asset redistribution clearance."
+}

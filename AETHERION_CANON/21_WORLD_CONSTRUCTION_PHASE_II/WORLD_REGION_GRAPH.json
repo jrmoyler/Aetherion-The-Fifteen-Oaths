@@ -1,0 +1,2545 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "P2-SRC-FOUNDATION",
+    "P2-SRC-DIRECTIVE",
+    "P2-SRC-PROPOSAL"
+  ],
+  "coordinate_system": {
+    "name": "P2 relative editorial canvas",
+    "width": 1120,
+    "height": 960,
+    "north": "negative y",
+    "units": "arbitrary composition units",
+    "survey_status": "UNSURVEYED; no implied distance conversion"
+  },
+  "records": [
+    {
+      "id": "region-01",
+      "oath_id": "oath-01",
+      "capital_id": "poi-01-capital",
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-07"
+      ],
+      "drainage_basin_ids": [
+        "basin-west"
+      ],
+      "relative_position": "western volcanic upland",
+      "climate": "wet windward slopes with rain shadows inside calderas",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 180,
+        "y": 320
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 200,
+        "maximum": 1800
+      },
+      "main_channel_station_target_m": 900,
+      "geological_continuity": "Older basalt shield cut by young cinder vents; caldera rim rests on cooled rock.",
+      "baseline_poi_ids": [
+        "poi-01-capital",
+        "poi-01-settlement",
+        "poi-01-dungeon",
+        "poi-01-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-01"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          97.163,
+          340.661
+        ],
+        [
+          105.0,
+          293.0
+        ],
+        [
+          111.243,
+          231.321
+        ],
+        [
+          172.416,
+          191.708
+        ],
+        [
+          225.0,
+          230.0
+        ],
+        [
+          271.667,
+          270.0
+        ],
+        [
+          272.5,
+          335.0
+        ],
+        [
+          251.667,
+          386.667
+        ],
+        [
+          195.0,
+          405.0
+        ],
+        [
+          130.878,
+          393.61
+        ]
+      ]
+    },
+    {
+      "id": "region-02",
+      "oath_id": "oath-02",
+      "capital_id": "poi-02-capital",
+      "neighbor_ids": [
+        "region-01",
+        "region-03",
+        "region-05"
+      ],
+      "drainage_basin_ids": [
+        "basin-west"
+      ],
+      "relative_position": "northwestern high headwaters",
+      "climate": "cold alpine with seasonal melt and whiteouts",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 270,
+        "y": 140
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 900,
+        "maximum": 3700
+      },
+      "main_channel_station_target_m": 2600,
+      "geological_continuity": "Uplifted metamorphic basement with glacial cirques, moraine and rock-founded valley benches.",
+      "baseline_poi_ids": [
+        "poi-02-capital",
+        "poi-02-settlement",
+        "poi-02-dungeon",
+        "poi-02-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-02"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          171.351,
+          115.576
+        ],
+        [
+          213.0,
+          77.0
+        ],
+        [
+          264.045,
+          73.823
+        ],
+        [
+          313.61,
+          102.878
+        ],
+        [
+          355.0,
+          155.0
+        ],
+        [
+          358.333,
+          220.0
+        ],
+        [
+          317.5,
+          245.0
+        ],
+        [
+          271.667,
+          270.0
+        ],
+        [
+          225.0,
+          230.0
+        ],
+        [
+          172.416,
+          191.708
+        ]
+      ]
+    },
+    {
+      "id": "region-03",
+      "oath_id": "oath-03",
+      "capital_id": "poi-03-capital",
+      "neighbor_ids": [
+        "region-02",
+        "region-05",
+        "region-06",
+        "region-09"
+      ],
+      "drainage_basin_ids": [
+        "basin-choir"
+      ],
+      "relative_position": "north-central mountain saddles",
+      "climate": "orographic storms and icing",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 440,
+        "y": 170
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 650,
+        "maximum": 2900
+      },
+      "main_channel_station_target_m": 1900,
+      "geological_continuity": "Folded metamorphic ridge with resistant quartzite saddles and fractured storm-facing scarps.",
+      "baseline_poi_ids": [
+        "poi-03-capital",
+        "poi-03-settlement",
+        "poi-03-dungeon",
+        "poi-03-event",
+        "poi-contested-pass"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-03"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          313.61,
+          102.878
+        ],
+        [
+          373.51,
+          97.202
+        ],
+        [
+          417.0,
+          113.0
+        ],
+        [
+          477.962,
+          118.787
+        ],
+        [
+          525.493,
+          171.952
+        ],
+        [
+          535.0,
+          207.5
+        ],
+        [
+          536.667,
+          281.667
+        ],
+        [
+          490.0,
+          300.0
+        ],
+        [
+          448.333,
+          316.667
+        ],
+        [
+          402.5,
+          260.0
+        ],
+        [
+          358.333,
+          220.0
+        ],
+        [
+          355.0,
+          155.0
+        ]
+      ]
+    },
+    {
+      "id": "region-04",
+      "oath_id": "oath-04",
+      "capital_id": "poi-04-capital",
+      "neighbor_ids": [
+        "region-07",
+        "region-08"
+      ],
+      "drainage_basin_ids": [
+        "basin-west",
+        "basin-choir"
+      ],
+      "relative_position": "southwestern mainland estuary",
+      "climate": "warm maritime, seasonal rain and storm surge",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 170,
+        "y": 700
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 0,
+        "maximum": 90
+      },
+      "main_channel_station_target_m": 10,
+      "geological_continuity": "Marine silts and river alluvium over a shallow shelf; raised old beach ridges support settlement.",
+      "baseline_poi_ids": [
+        "poi-04-capital",
+        "poi-04-settlement",
+        "poi-04-dungeon",
+        "poi-04-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-04"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          92.732,
+          686.275
+        ],
+        [
+          131.735,
+          625.807
+        ],
+        [
+          190.0,
+          595.0
+        ],
+        [
+          246.667,
+          593.333
+        ],
+        [
+          265.0,
+          645.0
+        ],
+        [
+          202.992,
+          676.077
+        ],
+        [
+          147.168,
+          726.883
+        ],
+        [
+          93.0,
+          749.0
+        ]
+      ]
+    },
+    {
+      "id": "region-05",
+      "oath_id": "oath-05",
+      "capital_id": "poi-05-capital",
+      "neighbor_ids": [
+        "region-01",
+        "region-02",
+        "region-03",
+        "region-07",
+        "region-08",
+        "region-09"
+      ],
+      "drainage_basin_ids": [
+        "basin-choir"
+      ],
+      "relative_position": "central-west watershed divide",
+      "climate": "wet western faces, dry eastern lee and flash-flooding canyon bottoms",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 365,
+        "y": 350
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 150,
+        "maximum": 2400
+      },
+      "main_channel_station_target_m": 700,
+      "geological_continuity": "Folded sandstone and shale with mineral veins; resistant ribs separate west and interior catchments.",
+      "baseline_poi_ids": [
+        "poi-05-capital",
+        "poi-05-settlement",
+        "poi-05-dungeon",
+        "poi-05-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-05"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          251.667,
+          386.667
+        ],
+        [
+          272.5,
+          335.0
+        ],
+        [
+          271.667,
+          270.0
+        ],
+        [
+          317.5,
+          245.0
+        ],
+        [
+          358.333,
+          220.0
+        ],
+        [
+          402.5,
+          260.0
+        ],
+        [
+          448.333,
+          316.667
+        ],
+        [
+          452.5,
+          390.0
+        ],
+        [
+          421.667,
+          456.667
+        ],
+        [
+          362.5,
+          470.0
+        ],
+        [
+          311.667,
+          476.667
+        ],
+        [
+          287.5,
+          420.0
+        ]
+      ]
+    },
+    {
+      "id": "region-06",
+      "oath_id": "oath-06",
+      "capital_id": "poi-06-capital",
+      "neighbor_ids": [
+        "region-03",
+        "region-09",
+        "region-10",
+        "region-13"
+      ],
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "relative_position": "northeastern inland escarpment",
+      "climate": "gusty upland with sheltered garden microclimates",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 630,
+        "y": 245
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 500,
+        "maximum": 1700
+      },
+      "main_channel_station_target_m": 1050,
+      "geological_continuity": "Tilted sedimentary escarpment; hard caprock protects terraces above soft eroding beds.",
+      "baseline_poi_ids": [
+        "poi-06-capital",
+        "poi-06-settlement",
+        "poi-06-dungeon",
+        "poi-06-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-06"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          525.493,
+          171.952
+        ],
+        [
+          599.246,
+          172.038
+        ],
+        [
+          645.0,
+          203.0
+        ],
+        [
+          706.703,
+          188.362
+        ],
+        [
+          767.032,
+          225.941
+        ],
+        [
+          732.5,
+          257.5
+        ],
+        [
+          728.333,
+          335.0
+        ],
+        [
+          675.0,
+          367.5
+        ],
+        [
+          630.0,
+          388.333
+        ],
+        [
+          585.0,
+          337.5
+        ],
+        [
+          536.667,
+          281.667
+        ],
+        [
+          535.0,
+          207.5
+        ]
+      ]
+    },
+    {
+      "id": "region-07",
+      "oath_id": "oath-07",
+      "capital_id": "poi-07-capital",
+      "neighbor_ids": [
+        "region-01",
+        "region-04",
+        "region-05",
+        "region-08"
+      ],
+      "drainage_basin_ids": [
+        "basin-west"
+      ],
+      "relative_position": "western lowland forest belt",
+      "climate": "wet temperate to warm southern forest",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 210,
+        "y": 490
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 25,
+        "maximum": 850
+      },
+      "main_channel_station_target_m": 280,
+      "geological_continuity": "Alluvial fans and weathered basalt-derived soils over the western foothill apron.",
+      "baseline_poi_ids": [
+        "poi-07-capital",
+        "poi-07-settlement",
+        "poi-07-dungeon",
+        "poi-07-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-07"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          115.619,
+          450.994
+        ],
+        [
+          130.878,
+          393.61
+        ],
+        [
+          195.0,
+          405.0
+        ],
+        [
+          251.667,
+          386.667
+        ],
+        [
+          287.5,
+          420.0
+        ],
+        [
+          311.667,
+          476.667
+        ],
+        [
+          285.0,
+          540.0
+        ],
+        [
+          246.667,
+          593.333
+        ],
+        [
+          190.0,
+          595.0
+        ],
+        [
+          131.735,
+          625.807
+        ],
+        [
+          118.652,
+          550.195
+        ],
+        [
+          141.0,
+          497.0
+        ]
+      ]
+    },
+    {
+      "id": "region-08",
+      "oath_id": "oath-08",
+      "capital_id": "poi-08-capital",
+      "neighbor_ids": [
+        "region-04",
+        "region-05",
+        "region-07",
+        "region-09",
+        "region-12"
+      ],
+      "drainage_basin_ids": [
+        "basin-choir"
+      ],
+      "relative_position": "southwestern treatment wetlands",
+      "climate": "humid seasonal floodplain with stagnant-air episodes",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 360,
+        "y": 590
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 15,
+        "maximum": 240
+      },
+      "main_channel_station_target_m": 110,
+      "geological_continuity": "Fine overbank clay over older alluvial gravel; perched treatment beds are separate engineered cells.",
+      "baseline_poi_ids": [
+        "poi-08-capital",
+        "poi-08-settlement",
+        "poi-08-dungeon",
+        "poi-08-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-08"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          202.992,
+          676.077
+        ],
+        [
+          265.0,
+          645.0
+        ],
+        [
+          246.667,
+          593.333
+        ],
+        [
+          285.0,
+          540.0
+        ],
+        [
+          311.667,
+          476.667
+        ],
+        [
+          362.5,
+          470.0
+        ],
+        [
+          421.667,
+          456.667
+        ],
+        [
+          450.0,
+          510.0
+        ],
+        [
+          476.667,
+          560.0
+        ],
+        [
+          445.0,
+          625.0
+        ],
+        [
+          428.711,
+          645.13
+        ],
+        [
+          358.265,
+          653.974
+        ],
+        [
+          321.0,
+          617.0
+        ],
+        [
+          277.303,
+          667.719
+        ]
+      ]
+    },
+    {
+      "id": "region-09",
+      "oath_id": "oath-09",
+      "capital_id": "poi-09-capital",
+      "neighbor_ids": [
+        "region-03",
+        "region-05",
+        "region-06",
+        "region-08",
+        "region-12",
+        "region-13"
+      ],
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "relative_position": "central temperate basin",
+      "climate": "moderate continental basin with seasonal fog and summer heat",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 540,
+        "y": 430
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 180,
+        "maximum": 760
+      },
+      "main_channel_station_target_m": 430,
+      "geological_continuity": "Broad subsiding alluvial basin with stable older terrace gravels above active river bends.",
+      "baseline_poi_ids": [
+        "poi-09-capital",
+        "poi-09-settlement",
+        "poi-09-dungeon",
+        "poi-09-event",
+        "poi-neutral-crossroads",
+        "poi-endgame-weave-seam"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-09"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          421.667,
+          456.667
+        ],
+        [
+          452.5,
+          390.0
+        ],
+        [
+          448.333,
+          316.667
+        ],
+        [
+          490.0,
+          300.0
+        ],
+        [
+          536.667,
+          281.667
+        ],
+        [
+          585.0,
+          337.5
+        ],
+        [
+          630.0,
+          388.333
+        ],
+        [
+          630.0,
+          460.0
+        ],
+        [
+          596.667,
+          526.667
+        ],
+        [
+          535.0,
+          545.0
+        ],
+        [
+          476.667,
+          560.0
+        ],
+        [
+          450.0,
+          510.0
+        ]
+      ]
+    },
+    {
+      "id": "region-10",
+      "oath_id": "oath-10",
+      "capital_id": "poi-10-capital",
+      "neighbor_ids": [
+        "region-06",
+        "region-13",
+        "region-11"
+      ],
+      "drainage_basin_ids": [
+        "basin-east"
+      ],
+      "relative_position": "northeastern sea headland",
+      "climate": "clear dry intervals, sea wind and coastal fog",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 835,
+        "y": 270
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 80,
+        "maximum": 1200
+      },
+      "main_channel_station_target_m": 850,
+      "geological_continuity": "Resistant crystalline headland with jointed cliffs; lenses and towers stand behind retreating edges.",
+      "baseline_poi_ids": [
+        "poi-10-capital",
+        "poi-10-settlement",
+        "poi-10-dungeon",
+        "poi-10-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-10"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          728.333,
+          335.0
+        ],
+        [
+          732.5,
+          257.5
+        ],
+        [
+          767.032,
+          225.941
+        ],
+        [
+          838.817,
+          210.518
+        ],
+        [
+          891.0,
+          233.0
+        ],
+        [
+          918.56,
+          302.422
+        ],
+        [
+          909.35,
+          386.223
+        ],
+        [
+          862.5,
+          395.0
+        ],
+        [
+          815.0,
+          426.667
+        ],
+        [
+          777.5,
+          380.0
+        ]
+      ]
+    },
+    {
+      "id": "region-11",
+      "oath_id": "oath-11",
+      "capital_id": "poi-11-capital",
+      "neighbor_ids": [
+        "region-10",
+        "region-13",
+        "region-14",
+        "region-15"
+      ],
+      "drainage_basin_ids": [
+        "basin-east"
+      ],
+      "relative_position": "eastern karst valleys",
+      "climate": "cool fog pockets amid drier sheltered slopes",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 890,
+        "y": 520
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 30,
+        "maximum": 650
+      },
+      "main_channel_station_target_m": 170,
+      "geological_continuity": "Limestone karst above impermeable shale; mapped sinks drain to lower springs.",
+      "baseline_poi_ids": [
+        "poi-11-capital",
+        "poi-11-settlement",
+        "poi-11-dungeon",
+        "poi-11-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-11"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          785.0,
+          581.667
+        ],
+        [
+          805.0,
+          505.0
+        ],
+        [
+          815.0,
+          426.667
+        ],
+        [
+          862.5,
+          395.0
+        ],
+        [
+          909.35,
+          386.223
+        ],
+        [
+          962.013,
+          462.703
+        ],
+        [
+          957.0,
+          533.0
+        ],
+        [
+          985.279,
+          597.827
+        ],
+        [
+          973.113,
+          675.342
+        ],
+        [
+          910.0,
+          637.5
+        ],
+        [
+          855.0,
+          670.0
+        ],
+        [
+          817.5,
+          627.5
+        ]
+      ]
+    },
+    {
+      "id": "region-12",
+      "oath_id": "oath-12",
+      "capital_id": "poi-12-capital",
+      "neighbor_ids": [
+        "region-08",
+        "region-09",
+        "region-13",
+        "region-14"
+      ],
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "relative_position": "southern interior redlands",
+      "climate": "seasonal dry heat, cool uplands and flood pulses",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 530,
+        "y": 660
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 90,
+        "maximum": 700
+      },
+      "main_channel_station_target_m": 220,
+      "geological_continuity": "Iron-stained sandstone hills and colluvial slopes, not blood-derived ground.",
+      "baseline_poi_ids": [
+        "poi-12-capital",
+        "poi-12-settlement",
+        "poi-12-dungeon",
+        "poi-12-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-12"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          428.711,
+          645.13
+        ],
+        [
+          445.0,
+          625.0
+        ],
+        [
+          476.667,
+          560.0
+        ],
+        [
+          535.0,
+          545.0
+        ],
+        [
+          596.667,
+          526.667
+        ],
+        [
+          625.0,
+          575.0
+        ],
+        [
+          665.0,
+          628.333
+        ],
+        [
+          637.5,
+          697.5
+        ],
+        [
+          656.635,
+          738.446
+        ],
+        [
+          576.49,
+          735.907
+        ],
+        [
+          525.0,
+          701.0
+        ],
+        [
+          469.567,
+          696.56
+        ]
+      ]
+    },
+    {
+      "id": "region-13",
+      "oath_id": "oath-13",
+      "capital_id": "poi-13-capital",
+      "neighbor_ids": [
+        "region-06",
+        "region-09",
+        "region-10",
+        "region-11",
+        "region-12",
+        "region-14"
+      ],
+      "drainage_basin_ids": [
+        "basin-east"
+      ],
+      "relative_position": "east-central sheltered valleys",
+      "climate": "dry summers, cool nights and episodic valley fog",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 720,
+        "y": 490
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 200,
+        "maximum": 850
+      },
+      "main_channel_station_target_m": 380,
+      "geological_continuity": "Intermontane sedimentary valleys with dry fans, low sills and occasional saline soil crusts.",
+      "baseline_poi_ids": [
+        "poi-13-capital",
+        "poi-13-settlement",
+        "poi-13-dungeon",
+        "poi-13-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-13"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          596.667,
+          526.667
+        ],
+        [
+          630.0,
+          460.0
+        ],
+        [
+          630.0,
+          388.333
+        ],
+        [
+          675.0,
+          367.5
+        ],
+        [
+          728.333,
+          335.0
+        ],
+        [
+          777.5,
+          380.0
+        ],
+        [
+          815.0,
+          426.667
+        ],
+        [
+          805.0,
+          505.0
+        ],
+        [
+          785.0,
+          581.667
+        ],
+        [
+          732.5,
+          612.5
+        ],
+        [
+          665.0,
+          628.333
+        ],
+        [
+          625.0,
+          575.0
+        ]
+      ]
+    },
+    {
+      "id": "region-14",
+      "oath_id": "oath-14",
+      "capital_id": "poi-14-capital",
+      "neighbor_ids": [
+        "region-11",
+        "region-12",
+        "region-13",
+        "region-15"
+      ],
+      "drainage_basin_ids": [
+        "basin-dawn"
+      ],
+      "relative_position": "southeastern inland transport terraces",
+      "climate": "seasonal drought with intense rain and flash floods",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 745,
+        "y": 735
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 15,
+        "maximum": 340
+      },
+      "main_channel_station_target_m": 95,
+      "geological_continuity": "Older river terraces and loess steppe cut by shallow flash-flood channels.",
+      "baseline_poi_ids": [
+        "poi-14-capital",
+        "poi-14-settlement",
+        "poi-14-dungeon",
+        "poi-14-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-14"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          637.5,
+          697.5
+        ],
+        [
+          665.0,
+          628.333
+        ],
+        [
+          732.5,
+          612.5
+        ],
+        [
+          785.0,
+          581.667
+        ],
+        [
+          817.5,
+          627.5
+        ],
+        [
+          855.0,
+          670.0
+        ],
+        [
+          837.5,
+          745.0
+        ],
+        [
+          895.612,
+          788.087
+        ],
+        [
+          830.55,
+          808.21
+        ],
+        [
+          783.0,
+          791.0
+        ],
+        [
+          717.128,
+          780.73
+        ],
+        [
+          656.635,
+          738.446
+        ]
+      ]
+    },
+    {
+      "id": "region-15",
+      "oath_id": "oath-15",
+      "capital_id": "poi-15-capital",
+      "neighbor_ids": [
+        "region-11",
+        "region-14"
+      ],
+      "drainage_basin_ids": [
+        "basin-dawn",
+        "basin-east"
+      ],
+      "relative_position": "southeastern coastal plain",
+      "climate": "humid maritime with storm surge and industrial heat islands",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "relative_anchor": {
+        "x": 930,
+        "y": 755
+      },
+      "relative_anchor_role": "Regional label and connection anchor, not capital survey or polygon centroid",
+      "elevation_target_m": {
+        "minimum": 0,
+        "maximum": 130
+      },
+      "main_channel_station_target_m": 8,
+      "geological_continuity": "Young alluvial coastal plain; freight foundations use raised gravel terraces outside distributaries.",
+      "baseline_poi_ids": [
+        "poi-15-capital",
+        "poi-15-settlement",
+        "poi-15-dungeon",
+        "poi-15-event"
+      ],
+      "source_refs": [
+        "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json#region-15"
+      ],
+      "conceptual_territory_polygon": [
+        [
+          837.5,
+          745.0
+        ],
+        [
+          855.0,
+          670.0
+        ],
+        [
+          910.0,
+          637.5
+        ],
+        [
+          973.113,
+          675.342
+        ],
+        [
+          1002.327,
+          751.618
+        ],
+        [
+          1005.0,
+          815.0
+        ],
+        [
+          949.355,
+          831.113
+        ],
+        [
+          895.612,
+          788.087
+        ]
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "route-01-02",
+      "from_region_id": "region-01",
+      "to_region_id": "region-02",
+      "route_id": "route-01-02",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-01-05",
+      "from_region_id": "region-01",
+      "to_region_id": "region-05",
+      "route_id": "route-01-05",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-01-07",
+      "from_region_id": "region-01",
+      "to_region_id": "region-07",
+      "route_id": "route-01-07",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-02-03",
+      "from_region_id": "region-02",
+      "to_region_id": "region-03",
+      "route_id": "route-02-03",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-02-05",
+      "from_region_id": "region-02",
+      "to_region_id": "region-05",
+      "route_id": "route-02-05",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-03-05",
+      "from_region_id": "region-03",
+      "to_region_id": "region-05",
+      "route_id": "route-03-05",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-03-06",
+      "from_region_id": "region-03",
+      "to_region_id": "region-06",
+      "route_id": "route-03-06",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-03-09",
+      "from_region_id": "region-03",
+      "to_region_id": "region-09",
+      "route_id": "route-03-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-04-07",
+      "from_region_id": "region-04",
+      "to_region_id": "region-07",
+      "route_id": "route-04-07",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-04-08",
+      "from_region_id": "region-04",
+      "to_region_id": "region-08",
+      "route_id": "route-04-08",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-05-07",
+      "from_region_id": "region-05",
+      "to_region_id": "region-07",
+      "route_id": "route-05-07",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-05-08",
+      "from_region_id": "region-05",
+      "to_region_id": "region-08",
+      "route_id": "route-05-08",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-05-09",
+      "from_region_id": "region-05",
+      "to_region_id": "region-09",
+      "route_id": "route-05-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-06-09",
+      "from_region_id": "region-06",
+      "to_region_id": "region-09",
+      "route_id": "route-06-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-06-10",
+      "from_region_id": "region-06",
+      "to_region_id": "region-10",
+      "route_id": "route-06-10",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-06-13",
+      "from_region_id": "region-06",
+      "to_region_id": "region-13",
+      "route_id": "route-06-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-07-08",
+      "from_region_id": "region-07",
+      "to_region_id": "region-08",
+      "route_id": "route-07-08",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-08-09",
+      "from_region_id": "region-08",
+      "to_region_id": "region-09",
+      "route_id": "route-08-09",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-08-12",
+      "from_region_id": "region-08",
+      "to_region_id": "region-12",
+      "route_id": "route-08-12",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-09-12",
+      "from_region_id": "region-09",
+      "to_region_id": "region-12",
+      "route_id": "route-09-12",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-09-13",
+      "from_region_id": "region-09",
+      "to_region_id": "region-13",
+      "route_id": "route-09-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-10-13",
+      "from_region_id": "region-10",
+      "to_region_id": "region-13",
+      "route_id": "route-10-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-10-11",
+      "from_region_id": "region-10",
+      "to_region_id": "region-11",
+      "route_id": "route-10-11",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-11-13",
+      "from_region_id": "region-11",
+      "to_region_id": "region-13",
+      "route_id": "route-11-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-11-14",
+      "from_region_id": "region-11",
+      "to_region_id": "region-14",
+      "route_id": "route-11-14",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-11-15",
+      "from_region_id": "region-11",
+      "to_region_id": "region-15",
+      "route_id": "route-11-15",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-12-13",
+      "from_region_id": "region-12",
+      "to_region_id": "region-13",
+      "route_id": "route-12-13",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-12-14",
+      "from_region_id": "region-12",
+      "to_region_id": "region-14",
+      "route_id": "route-12-14",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-13-14",
+      "from_region_id": "region-13",
+      "to_region_id": "region-14",
+      "route_id": "route-13-14",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    },
+    {
+      "id": "route-14-15",
+      "from_region_id": "region-14",
+      "to_region_id": "region-15",
+      "route_id": "route-14-15",
+      "kind": "bidirectional_land_adjacency",
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ]
+    }
+  ],
+  "drainage_networks": [
+    {
+      "id": "basin-west",
+      "name": "The Thawcourse catchment",
+      "headwaters": [
+        "region-02"
+      ],
+      "river_region_sequence": [
+        "region-02",
+        "region-01",
+        "region-07",
+        "region-04"
+      ],
+      "outlet": "southwestern ocean estuary",
+      "flow": "glacial headwaters through volcanic foothills and forest to tidewater",
+      "hazards": [
+        "ice-dam release",
+        "ash blockage",
+        "forest runoff",
+        "salinity intrusion"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "channel_stations": [
+        {
+          "region_id": "region-02",
+          "target_elevation_m": 2600
+        },
+        {
+          "region_id": "region-01",
+          "target_elevation_m": 900
+        },
+        {
+          "region_id": "region-07",
+          "target_elevation_m": 280
+        },
+        {
+          "region_id": "region-04",
+          "target_elevation_m": 10
+        }
+      ],
+      "terminal_ocean_target_m": 0,
+      "validation_limit": "Station targets descend; no terrain-derived flow, catchment polygon, flood extent or discharge simulation exists."
+    },
+    {
+      "id": "basin-choir",
+      "name": "The Choirwater catchment",
+      "headwaters": [
+        "region-03"
+      ],
+      "river_region_sequence": [
+        "region-03",
+        "region-05",
+        "region-08",
+        "region-04"
+      ],
+      "outlet": "southwestern ocean estuary, separate channel from Thawcourse until estuarine mixing",
+      "flow": "mountain precipitation through canyon drainage and managed wetlands",
+      "hazards": [
+        "flash flooding",
+        "quarry sediment",
+        "treatment saturation",
+        "storm surge"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "channel_stations": [
+        {
+          "region_id": "region-03",
+          "target_elevation_m": 1900
+        },
+        {
+          "region_id": "region-05",
+          "target_elevation_m": 700
+        },
+        {
+          "region_id": "region-08",
+          "target_elevation_m": 110
+        },
+        {
+          "region_id": "region-04",
+          "target_elevation_m": 10
+        }
+      ],
+      "terminal_ocean_target_m": 0,
+      "validation_limit": "Station targets descend; no terrain-derived flow, catchment polygon, flood extent or discharge simulation exists."
+    },
+    {
+      "id": "basin-dawn",
+      "name": "The Dawnrun catchment",
+      "headwaters": [
+        "region-06"
+      ],
+      "river_region_sequence": [
+        "region-06",
+        "region-09",
+        "region-12",
+        "region-14",
+        "region-15"
+      ],
+      "outlet": "southeastern ocean",
+      "flow": "escarpment runoff through central and southern terraces to the coastal plain",
+      "hazards": [
+        "seasonal low flow",
+        "floodplain occupation",
+        "road embankment blockage",
+        "industrial water demand"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "channel_stations": [
+        {
+          "region_id": "region-06",
+          "target_elevation_m": 1050
+        },
+        {
+          "region_id": "region-09",
+          "target_elevation_m": 430
+        },
+        {
+          "region_id": "region-12",
+          "target_elevation_m": 220
+        },
+        {
+          "region_id": "region-14",
+          "target_elevation_m": 95
+        },
+        {
+          "region_id": "region-15",
+          "target_elevation_m": 8
+        }
+      ],
+      "terminal_ocean_target_m": 0,
+      "validation_limit": "Station targets descend; no terrain-derived flow, catchment polygon, flood extent or discharge simulation exists."
+    },
+    {
+      "id": "basin-east",
+      "name": "The Veilwater catchment",
+      "headwaters": [
+        "region-10"
+      ],
+      "river_region_sequence": [
+        "region-10",
+        "region-13",
+        "region-11",
+        "region-15"
+      ],
+      "outlet": "eastern ocean via coastal channels distinct from Dawnrun until lower plain",
+      "flow": "headland uplands through eastern valleys and karst-fed channels",
+      "hazards": [
+        "coastal fog",
+        "karst sink loss",
+        "concealed culvert blockage",
+        "delta silt buildup"
+      ],
+      "canon_status": "PROPOSED",
+      "source_ids": [
+        "P2-SRC-FOUNDATION",
+        "P2-SRC-DIRECTIVE",
+        "P2-SRC-PROPOSAL"
+      ],
+      "channel_stations": [
+        {
+          "region_id": "region-10",
+          "target_elevation_m": 850
+        },
+        {
+          "region_id": "region-13",
+          "target_elevation_m": 380
+        },
+        {
+          "region_id": "region-11",
+          "target_elevation_m": 170
+        },
+        {
+          "region_id": "region-15",
+          "target_elevation_m": 8
+        }
+      ],
+      "terminal_ocean_target_m": 0,
+      "validation_limit": "Station targets descend; no terrain-derived flow, catchment polygon, flood extent or discharge simulation exists."
+    }
+  ],
+  "baseline_poi_manifest": [
+    {
+      "id": "poi-01-capital",
+      "region_id": "region-01",
+      "name": "Cindervault"
+    },
+    {
+      "id": "poi-01-settlement",
+      "region_id": "region-01",
+      "name": "Ashbridge"
+    },
+    {
+      "id": "poi-01-dungeon",
+      "region_id": "region-01",
+      "name": "The Quench Below"
+    },
+    {
+      "id": "poi-01-event",
+      "region_id": "region-01",
+      "name": "Cindervault service catchment"
+    },
+    {
+      "id": "poi-02-capital",
+      "region_id": "region-02",
+      "name": "Stillfolio"
+    },
+    {
+      "id": "poi-02-settlement",
+      "region_id": "region-02",
+      "name": "Meltgate"
+    },
+    {
+      "id": "poi-02-dungeon",
+      "region_id": "region-02",
+      "name": "The Uncatalogued Vault"
+    },
+    {
+      "id": "poi-02-event",
+      "region_id": "region-02",
+      "name": "Stillfolio service catchment"
+    },
+    {
+      "id": "poi-03-capital",
+      "region_id": "region-03",
+      "name": "Crownspan"
+    },
+    {
+      "id": "poi-03-settlement",
+      "region_id": "region-03",
+      "name": "Grounding Reach"
+    },
+    {
+      "id": "poi-03-dungeon",
+      "region_id": "region-03",
+      "name": "The Silent Junction"
+    },
+    {
+      "id": "poi-03-event",
+      "region_id": "region-03",
+      "name": "Crownspan service catchment"
+    },
+    {
+      "id": "poi-04-capital",
+      "region_id": "region-04",
+      "name": "Confluence Quay"
+    },
+    {
+      "id": "poi-04-settlement",
+      "region_id": "region-04",
+      "name": "Brackensluice"
+    },
+    {
+      "id": "poi-04-dungeon",
+      "region_id": "region-04",
+      "name": "The Undertide Ledger"
+    },
+    {
+      "id": "poi-04-event",
+      "region_id": "region-04",
+      "name": "Confluence Quay service catchment"
+    },
+    {
+      "id": "poi-05-capital",
+      "region_id": "region-05",
+      "name": "Keystone Hall"
+    },
+    {
+      "id": "poi-05-settlement",
+      "region_id": "region-05",
+      "name": "Talus Steps"
+    },
+    {
+      "id": "poi-05-dungeon",
+      "region_id": "region-05",
+      "name": "The Counterweight Halls"
+    },
+    {
+      "id": "poi-05-event",
+      "region_id": "region-05",
+      "name": "Keystone Hall service catchment"
+    },
+    {
+      "id": "poi-06-capital",
+      "region_id": "region-06",
+      "name": "Cantilever"
+    },
+    {
+      "id": "poi-06-settlement",
+      "region_id": "region-06",
+      "name": "Hush Vale"
+    },
+    {
+      "id": "poi-06-dungeon",
+      "region_id": "region-06",
+      "name": "The Muted Amphitheatre"
+    },
+    {
+      "id": "poi-06-event",
+      "region_id": "region-06",
+      "name": "Cantilever service catchment"
+    },
+    {
+      "id": "poi-07-capital",
+      "region_id": "region-07",
+      "name": "Rootmeet"
+    },
+    {
+      "id": "poi-07-settlement",
+      "region_id": "region-07",
+      "name": "Gleaning Margin"
+    },
+    {
+      "id": "poi-07-dungeon",
+      "region_id": "region-07",
+      "name": "The Common Root"
+    },
+    {
+      "id": "poi-07-event",
+      "region_id": "region-07",
+      "name": "Rootmeet service catchment"
+    },
+    {
+      "id": "poi-08-capital",
+      "region_id": "region-08",
+      "name": "Vitrial"
+    },
+    {
+      "id": "poi-08-settlement",
+      "region_id": "region-08",
+      "name": "Clearfen"
+    },
+    {
+      "id": "poi-08-dungeon",
+      "region_id": "region-08",
+      "name": "The Sealed Distillatory"
+    },
+    {
+      "id": "poi-08-event",
+      "region_id": "region-08",
+      "name": "Vitrial service catchment"
+    },
+    {
+      "id": "poi-09-capital",
+      "region_id": "region-09",
+      "name": "Aureate Steps"
+    },
+    {
+      "id": "poi-09-settlement",
+      "region_id": "region-09",
+      "name": "Lantern Ward"
+    },
+    {
+      "id": "poi-09-dungeon",
+      "region_id": "region-09",
+      "name": "The Chamber of Appeals"
+    },
+    {
+      "id": "poi-09-event",
+      "region_id": "region-09",
+      "name": "Aureate Steps service catchment"
+    },
+    {
+      "id": "poi-10-capital",
+      "region_id": "region-10",
+      "name": "Parallax Crown"
+    },
+    {
+      "id": "poi-10-settlement",
+      "region_id": "region-10",
+      "name": "Ballast Haven"
+    },
+    {
+      "id": "poi-10-dungeon",
+      "region_id": "region-10",
+      "name": "The Falling Meridian"
+    },
+    {
+      "id": "poi-10-event",
+      "region_id": "region-10",
+      "name": "Parallax Crown service catchment"
+    },
+    {
+      "id": "poi-11-capital",
+      "region_id": "region-11",
+      "name": "Absent Seat"
+    },
+    {
+      "id": "poi-11-settlement",
+      "region_id": "region-11",
+      "name": "Witness Ford"
+    },
+    {
+      "id": "poi-11-dungeon",
+      "region_id": "region-11",
+      "name": "The Unfiled Palace"
+    },
+    {
+      "id": "poi-11-event",
+      "region_id": "region-11",
+      "name": "Absent Seat service catchment"
+    },
+    {
+      "id": "poi-12-capital",
+      "region_id": "region-12",
+      "name": "Kinhold"
+    },
+    {
+      "id": "poi-12-settlement",
+      "region_id": "region-12",
+      "name": "Open Hearth"
+    },
+    {
+      "id": "poi-12-dungeon",
+      "region_id": "region-12",
+      "name": "The Inheritance Engine"
+    },
+    {
+      "id": "poi-12-event",
+      "region_id": "region-12",
+      "name": "Kinhold service catchment"
+    },
+    {
+      "id": "poi-13-capital",
+      "region_id": "region-13",
+      "name": "Manydoor"
+    },
+    {
+      "id": "poi-13-settlement",
+      "region_id": "region-13",
+      "name": "Plainmarket"
+    },
+    {
+      "id": "poi-13-dungeon",
+      "region_id": "region-13",
+      "name": "The Unfinished House"
+    },
+    {
+      "id": "poi-13-event",
+      "region_id": "region-13",
+      "name": "Manydoor service catchment"
+    },
+    {
+      "id": "poi-14-capital",
+      "region_id": "region-14",
+      "name": "Wayclock"
+    },
+    {
+      "id": "poi-14-settlement",
+      "region_id": "region-14",
+      "name": "Restmile"
+    },
+    {
+      "id": "poi-14-dungeon",
+      "region_id": "region-14",
+      "name": "The Returned Mile"
+    },
+    {
+      "id": "poi-14-event",
+      "region_id": "region-14",
+      "name": "Wayclock service catchment"
+    },
+    {
+      "id": "poi-15-capital",
+      "region_id": "region-15",
+      "name": "Counterpoise"
+    },
+    {
+      "id": "poi-15-settlement",
+      "region_id": "region-15",
+      "name": "Handshift"
+    },
+    {
+      "id": "poi-15-dungeon",
+      "region_id": "region-15",
+      "name": "The Idle Assembly"
+    },
+    {
+      "id": "poi-15-event",
+      "region_id": "region-15",
+      "name": "Counterpoise service catchment"
+    },
+    {
+      "id": "poi-neutral-crossroads",
+      "region_id": "region-09",
+      "name": "Common Waystation"
+    },
+    {
+      "id": "poi-contested-pass",
+      "region_id": "region-03",
+      "name": "The Shared Saddle"
+    },
+    {
+      "id": "poi-endgame-weave-seam",
+      "region_id": "region-09",
+      "name": "The Confluence Chamber"
+    }
+  ],
+  "invariants": {
+    "major_realm_count": 15,
+    "land_adjacency_count": 30,
+    "basin_count": 4,
+    "baseline_poi_count": 63,
+    "all_capitals_require_ordinary_access": true,
+    "no_new_sovereign_neutral_realm": true
+  },
+  "coastline_polygon": [
+    [
+      213.0,
+      77.0
+    ],
+    [
+      264.045,
+      73.823
+    ],
+    [
+      313.61,
+      102.878
+    ],
+    [
+      373.51,
+      97.202
+    ],
+    [
+      417.0,
+      113.0
+    ],
+    [
+      477.962,
+      118.787
+    ],
+    [
+      525.493,
+      171.952
+    ],
+    [
+      599.246,
+      172.038
+    ],
+    [
+      645.0,
+      203.0
+    ],
+    [
+      706.703,
+      188.362
+    ],
+    [
+      767.032,
+      225.941
+    ],
+    [
+      838.817,
+      210.518
+    ],
+    [
+      891.0,
+      233.0
+    ],
+    [
+      918.56,
+      302.422
+    ],
+    [
+      909.35,
+      386.223
+    ],
+    [
+      962.013,
+      462.703
+    ],
+    [
+      957.0,
+      533.0
+    ],
+    [
+      985.279,
+      597.827
+    ],
+    [
+      973.113,
+      675.342
+    ],
+    [
+      1002.327,
+      751.618
+    ],
+    [
+      1005.0,
+      815.0
+    ],
+    [
+      949.355,
+      831.113
+    ],
+    [
+      895.612,
+      788.087
+    ],
+    [
+      830.55,
+      808.21
+    ],
+    [
+      783.0,
+      791.0
+    ],
+    [
+      717.128,
+      780.73
+    ],
+    [
+      656.635,
+      738.446
+    ],
+    [
+      576.49,
+      735.907
+    ],
+    [
+      525.0,
+      701.0
+    ],
+    [
+      469.567,
+      696.56
+    ],
+    [
+      428.711,
+      645.13
+    ],
+    [
+      358.265,
+      653.974
+    ],
+    [
+      321.0,
+      617.0
+    ],
+    [
+      277.303,
+      667.719
+    ],
+    [
+      202.992,
+      676.077
+    ],
+    [
+      147.168,
+      726.883
+    ],
+    [
+      93.0,
+      749.0
+    ],
+    [
+      92.732,
+      686.275
+    ],
+    [
+      131.735,
+      625.807
+    ],
+    [
+      118.652,
+      550.195
+    ],
+    [
+      141.0,
+      497.0
+    ],
+    [
+      115.619,
+      450.994
+    ],
+    [
+      130.878,
+      393.61
+    ],
+    [
+      97.163,
+      340.661
+    ],
+    [
+      105.0,
+      293.0
+    ],
+    [
+      111.243,
+      231.321
+    ],
+    [
+      172.416,
+      191.708
+    ],
+    [
+      171.351,
+      115.576
+    ]
+  ],
+  "territory_geometry_method": "Planar dual subdivision around crossing-free graph, extended to one coastal apron. This realizes adjacency only; border alignment to terrain remains proposed.",
+  "embedding_faces": [
+    [
+      "region-01",
+      "region-02",
+      "region-05"
+    ],
+    [
+      "region-01",
+      "region-05",
+      "region-07"
+    ],
+    [
+      "region-02",
+      "region-03",
+      "region-05"
+    ],
+    [
+      "region-03",
+      "region-06",
+      "region-09"
+    ],
+    [
+      "region-03",
+      "region-09",
+      "region-05"
+    ],
+    [
+      "region-04",
+      "region-07",
+      "region-08"
+    ],
+    [
+      "region-05",
+      "region-09",
+      "region-08"
+    ],
+    [
+      "region-05",
+      "region-08",
+      "region-07"
+    ],
+    [
+      "region-06",
+      "region-10",
+      "region-13"
+    ],
+    [
+      "region-06",
+      "region-13",
+      "region-09"
+    ],
+    [
+      "region-08",
+      "region-09",
+      "region-12"
+    ],
+    [
+      "region-09",
+      "region-13",
+      "region-12"
+    ],
+    [
+      "region-10",
+      "region-11",
+      "region-13"
+    ],
+    [
+      "region-11",
+      "region-15",
+      "region-14"
+    ],
+    [
+      "region-11",
+      "region-14",
+      "region-13"
+    ],
+    [
+      "region-12",
+      "region-13",
+      "region-14"
+    ]
+  ]
+}

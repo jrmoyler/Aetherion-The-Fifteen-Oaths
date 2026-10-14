@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-10-14T00:07:23.156Z",
+  "scope": "Read-only review copies; no GPU, appearance, collision-fit or production certification",
+  "textureDecode": "Three.js CPU placeholder textures; actual geometry/skins/animations loaded",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-fault-review-v12/amethyst-short-blade/review.glb",
+      "sha256": "63e190f7a2499a59a92f5662e4f33553bb6f2ea3fd6316f33e1b6c86d6e31a9c",
+      "bytes": 4821128,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {
+          "UNUSED_MESH_TANGENT": 6
+        }
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 29070,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.06747227907180786,
+            -0.19889459013938904,
+            -0.04006230435334146
+          ],
+          "max": [
+            0.05147227644920349,
+            0.5746277570724487,
+            0.04006230435334146
+          ],
+          "dimensionsMeters": [
+            0.11894455552101135,
+            0.7735223472118378,
+            0.08012460870668292
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    }
+  ]
+}

@@ -1,0 +1,2788 @@
+{
+  "reports": [
+    {
+      "root": "/workspace/scratch/aetherion-daybreak-architecture-r05",
+      "freezeSha256": "2fe7d88e8041f2a0430ca12ee877282fe7fd5336808352cf58abc5c17b7a0431",
+      "files": [
+        {
+          "path": "GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "R04_REVIEW.md",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "R05_REVIEW.md",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "README.md",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-request.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-validation-validator-details.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-godot-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-godot-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "author-canopy-r04.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "author-lods.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "author.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "canopy-r04-authoring-report.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-all-socket-cardinality.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-interfaces.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-lod-interfaces.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-r04-connections.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-r04-lod-interfaces.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-r05-fixtures.mjs",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-r05-source-preservation.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-source.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-stair-revision.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "compare-r04-renders.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "compress-sources.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "engine-checks/check-glb.mjs",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "engine-checks/import.gd",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "engine-checks/project.godot",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "evidence/r05-civic-rerender.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "evidence/r05-residential-rerender.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "evidence/r05-work-rerender.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "finalize-metadata.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fix-adapter-sockets-r05.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fix-module-socket-identity-r05.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixture-run.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "freeze-package.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "group-lod-sources.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "index.html",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "interface-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "interface-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-independent-stair-profile.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-independent-visual-review.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-independent-visual-review.md",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-final-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-final-GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-initial-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-initial-GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-final-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-final-GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-public-colonnade-hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-shade-canopy-hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r04-exported-socket-defects.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r04-final-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r04-final-GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r05-pre-adapter-repair-export-failures.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-authoring-report.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-comparison-1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-comparison-2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-glb-request.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-glb-validation-validator-details.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-glb-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-godot-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-interface-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "manifest.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "module-contact-sheet.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/open.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/capital-detail.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/underside-detail.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "motion-render.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "package.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "prepare.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-all-request.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-all-validation-validator-details.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-all-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-canopy-comparison.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-connection-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-godot-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-lod-interface-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-adapter-repair.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-all-socket-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-fixture-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-godot-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-import-request.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-import-validation-validator-details.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-import-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-membership-repair.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-module-identity-repair.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-render-preservation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r05-source-preservation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-clinic-threshold-door-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-daylight-baffle-proposed-v02.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-foundation-floor-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-roof-canopy-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-stair-ramp-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-surface-trim-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-wall-window-corner-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/reference-105-original.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "render-r04-details.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "repair-fixture-membership-r05.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "source-kit-record.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "source-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "source-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-r02-author.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-r02-fixture.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-revision-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-revision-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "tag-fixture-canonical-identities-r05.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "work-list.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "root": "/tmp/aetherion-daybreak-architecture-r04",
+      "freezeSha256": "b08331817661347462f07d96e586fbaccbd51751b77493ef17bb012bcbe22fd8",
+      "files": [
+        {
+          "path": "GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "R04_REVIEW.md",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "README.md",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-request.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-validation-validator-details.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-glb-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-godot-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "all-godot-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "author-canopy-r04.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "author-lods.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "author.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "canopy-r04-authoring-report.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-interfaces.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-lod-interfaces.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-r04-connections.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-r04-lod-interfaces.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-source.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "check-stair-revision.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "compare-r04-renders.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "compress-sources.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "engine-checks/check-glb.mjs",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "engine-checks/import.gd",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "engine-checks/project.godot",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "finalize-metadata.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixture-run.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/civic/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/ramp-with-landing/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/residential/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/stairs-with-landing/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/assembly.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/fixture.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "fixtures/work/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "freeze-package.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "group-lod-sources.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "index.html",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "interface-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "interface-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-independent-stair-profile.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-independent-visual-review.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r01-independent-visual-review.md",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-final-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-final-GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-initial-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r02-initial-GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-final-FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-final-GEOMETRY_FREEZE.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-public-colonnade-hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lineage/r03-shade-canopy-hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-authoring-report.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-comparison-1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-comparison-2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-glb-request.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-glb-validation-validator-details.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-glb-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-godot-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "lod-interface-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "manifest.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "module-contact-sheet.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/clinic-threshold/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/open.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/daylight-baffle/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/door-frame/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/floor-bay/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/foundation-plinth/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/inside-corner/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/outside-corner/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/parapet/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/capital-detail.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/public-colonnade/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/quiet-portico/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/ramp-run/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/roof-bay/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/service-chase/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/shade-canopy/underside-detail.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/solid-wall/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/stair-flight/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/collision.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/hero.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod0.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod1.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod1.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod2.glb",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/lod2.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/module.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "modules/window-wall/source.blend",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "motion-render.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "package.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "prepare.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-all-request.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-all-validation-validator-details.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-all-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-canopy-comparison.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-connection-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-godot-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "r04-lod-interface-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-clinic-threshold-door-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-daylight-baffle-proposed-v02.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-foundation-floor-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-roof-canopy-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-stair-ramp-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-surface-trim-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/daybreak-wall-window-corner-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "references/reference-105-original.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "render-r04-details.py",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "source-kit-record.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "source-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "source-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-r02-author.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-r02-fixture.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-revision-validation.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "stair-revision-validation.log",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/bronze_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/gripstone_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/marble_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/masonry_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_basecolor.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_metallic.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_normal.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "textures/weave_roughness.png",
+          "bytesMatch": true,
+          "sha256Match": true
+        },
+        {
+          "path": "work-list.json",
+          "bytesMatch": true,
+          "sha256Match": true
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

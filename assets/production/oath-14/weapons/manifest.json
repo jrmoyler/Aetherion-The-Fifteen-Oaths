@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o14-e-weapons-family",
+  "referenceIds": [
+    "reference-034"
+  ],
+  "status": "PARTIAL_PRODUCTION_CANDIDATES_UNREVIEWED",
+  "coordinateContract": "Blender meters +Y forward +Z up; GLB Y-up; grip origin proposed",
+  "assets": [
+    {
+      "id": "chronal-scythe-ready",
+      "archetypeId": "chronal-scythe",
+      "name": "Chronal Scythe Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready.blend",
+        "glb": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready.glb",
+        "lod1": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-lod1.glb",
+        "lod2": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-lod2.glb",
+        "collision": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-14/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-14/weapons/textures/steel_orm.png",
+          "assets/production/oath-14/weapons/textures/steel_normal.png",
+          "assets/production/oath-14/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-14/weapons/textures/brass_orm.png",
+          "assets/production/oath-14/weapons/textures/brass_normal.png",
+          "assets/production/oath-14/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-14/weapons/textures/leather_orm.png",
+          "assets/production/oath-14/weapons/textures/leather_normal.png",
+          "assets/production/oath-14/weapons/textures/edge_basecolor.png",
+          "assets/production/oath-14/weapons/textures/edge_orm.png",
+          "assets/production/oath-14/weapons/textures/edge_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-hero.png",
+          "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-side.png",
+          "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 6176,
+        "lod1": 3150,
+        "lod2": 1576,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.84,
+        1.739,
+        0.062
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Individual art approval and engraved detail refinement",
+        "Stowed and damaged variants missing",
+        "Character grip/mount calibration",
+        "Runtime time-motion VFX/audio/combat integration",
+        "Actual engine imports, LOD transitions and performance",
+        "Current overall Y length 1.739m versus reference 1.80m; nominal scale fit remains open"
+      ],
+      "referenceIds": [
+        "reference-034"
+      ]
+    },
+    {
+      "id": "chronal-ring-ready",
+      "archetypeId": "chronal-ring",
+      "name": "Chronal Ring Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready.blend",
+        "glb": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready.glb",
+        "lod1": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-lod1.glb",
+        "lod2": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-lod2.glb",
+        "collision": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-14/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-14/weapons/textures/steel_orm.png",
+          "assets/production/oath-14/weapons/textures/steel_normal.png",
+          "assets/production/oath-14/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-14/weapons/textures/brass_orm.png",
+          "assets/production/oath-14/weapons/textures/brass_normal.png",
+          "assets/production/oath-14/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-14/weapons/textures/leather_orm.png",
+          "assets/production/oath-14/weapons/textures/leather_normal.png",
+          "assets/production/oath-14/weapons/textures/edge_basecolor.png",
+          "assets/production/oath-14/weapons/textures/edge_orm.png",
+          "assets/production/oath-14/weapons/textures/edge_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-hero.png",
+          "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-side.png",
+          "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 1956,
+        "lod1": 1088,
+        "lod2": 618,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.35977,
+        0.35551,
+        0.0725
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Individual art approval and engraved detail refinement",
+        "Stowed and damaged variants missing",
+        "Character grip/mount calibration",
+        "Runtime time-motion VFX/audio/combat integration",
+        "Actual engine imports, LOD transitions and performance"
+      ],
+      "referenceIds": [
+        "reference-034"
+      ]
+    },
+    {
+      "id": "chronal-wrist-tool-ready",
+      "archetypeId": "chronal-wrist-tool",
+      "name": "Chronal Wrist Tool Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready.blend",
+        "glb": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready.glb",
+        "lod1": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-lod1.glb",
+        "lod2": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-lod2.glb",
+        "collision": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-14/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-14/weapons/textures/steel_orm.png",
+          "assets/production/oath-14/weapons/textures/steel_normal.png",
+          "assets/production/oath-14/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-14/weapons/textures/brass_orm.png",
+          "assets/production/oath-14/weapons/textures/brass_normal.png",
+          "assets/production/oath-14/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-14/weapons/textures/leather_orm.png",
+          "assets/production/oath-14/weapons/textures/leather_normal.png",
+          "assets/production/oath-14/weapons/textures/edge_basecolor.png",
+          "assets/production/oath-14/weapons/textures/edge_orm.png",
+          "assets/production/oath-14/weapons/textures/edge_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-hero.png",
+          "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-side.png",
+          "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-front.png",
+          "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready-animated-pose-frame18.png"
+        ]
+      },
+      "triangles": {
+        "glb": 492,
+        "lod1": 312,
+        "lod2": 216,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.154,
+        0.165,
+        0.07497
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "ARTICULATED_WRIST_BLADES",
+        "status": "AUTHORED_UNVERIFIED",
+        "boneCount": 2
+      },
+      "animations": [
+        {
+          "name": "wrist_deploy_retract",
+          "durationSeconds": 1.9583333333333333
+        }
+      ],
+      "remainingGates": [
+        "Individual art approval and engraved detail refinement",
+        "Stowed and damaged variants missing",
+        "Character grip/mount calibration",
+        "Runtime time-motion VFX/audio/combat integration",
+        "Actual engine imports, LOD transitions and performance",
+        "Current overall Y length 0.165m versus reference 0.16m; wrist fit remains open"
+      ],
+      "referenceIds": [
+        "reference-034"
+      ]
+    },
+    {
+      "id": "chronal-compact-dart-ready",
+      "archetypeId": "chronal-compact-dart",
+      "name": "Chronal Compact Dart Ready",
+      "type": "equipment",
+      "variant": "ready",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready.blend",
+        "glb": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready.glb",
+        "lod1": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-lod1.glb",
+        "lod2": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-lod2.glb",
+        "collision": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-collision.glb",
+        "textures": [
+          "assets/production/oath-14/weapons/textures/steel_basecolor.png",
+          "assets/production/oath-14/weapons/textures/steel_orm.png",
+          "assets/production/oath-14/weapons/textures/steel_normal.png",
+          "assets/production/oath-14/weapons/textures/brass_basecolor.png",
+          "assets/production/oath-14/weapons/textures/brass_orm.png",
+          "assets/production/oath-14/weapons/textures/brass_normal.png",
+          "assets/production/oath-14/weapons/textures/leather_basecolor.png",
+          "assets/production/oath-14/weapons/textures/leather_orm.png",
+          "assets/production/oath-14/weapons/textures/leather_normal.png",
+          "assets/production/oath-14/weapons/textures/edge_basecolor.png",
+          "assets/production/oath-14/weapons/textures/edge_orm.png",
+          "assets/production/oath-14/weapons/textures/edge_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-hero.png",
+          "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-side.png",
+          "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready-front.png"
+        ]
+      },
+      "triangles": {
+        "glb": 488,
+        "lod1": 274,
+        "lod2": 164,
+        "collision": 12
+      },
+      "dimensionsMeters": [
+        0.034,
+        0.22,
+        0.038
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "STATIC_RIGID_BODY",
+        "status": "NOT_APPLICABLE"
+      },
+      "animations": [],
+      "remainingGates": [
+        "Individual art approval and engraved detail refinement",
+        "Stowed and damaged variants missing",
+        "Character grip/mount calibration",
+        "Runtime time-motion VFX/audio/combat integration",
+        "Actual engine imports, LOD transitions and performance"
+      ],
+      "referenceIds": [
+        "reference-034"
+      ]
+    }
+  ]
+}

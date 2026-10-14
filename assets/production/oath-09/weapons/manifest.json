@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o09-e-weapons-family",
+  "referenceIds": [
+    "reference-046"
+  ],
+  "assets": [
+    {
+      "id": "oath-09-lotus-short-sword",
+      "archetypeId": "oath-09-lotus-short-sword",
+      "name": "Lotus Short Sword",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-09/weapons/lotus-short-sword/lotus-short-sword.blend",
+        "glb": "assets/production/oath-09/weapons/lotus-short-sword/lod0.glb",
+        "lod1": "assets/production/oath-09/weapons/lotus-short-sword/lod1.glb",
+        "lod2": "assets/production/oath-09/weapons/lotus-short-sword/lod2.glb",
+        "collision": "assets/production/oath-09/weapons/lotus-short-sword/collision.glb",
+        "damaged": "assets/production/oath-09/weapons/lotus-short-sword/damaged.glb",
+        "stowed": "assets/production/oath-09/weapons/lotus-short-sword/stowed.glb",
+        "textures": [
+          "assets/production/oath-09/weapons/textures/Enamel_basecolor.png",
+          "assets/production/oath-09/weapons/textures/Enamel_roughness.png",
+          "assets/production/oath-09/weapons/textures/Enamel_metallic.png",
+          "assets/production/oath-09/weapons/textures/Enamel_normal.png",
+          "assets/production/oath-09/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-09/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-09/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-09/weapons/textures/Gold_normal.png",
+          "assets/production/oath-09/weapons/textures/Cloth_basecolor.png",
+          "assets/production/oath-09/weapons/textures/Cloth_roughness.png",
+          "assets/production/oath-09/weapons/textures/Cloth_metallic.png",
+          "assets/production/oath-09/weapons/textures/Cloth_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-09/weapons/lotus-short-sword/front.png",
+          "assets/production/oath-09/weapons/lotus-short-sword/side.png",
+          "assets/production/oath-09/weapons/lotus-short-sword/hero.png",
+          "assets/production/oath-09/weapons/lotus-short-sword/motion.png"
+        ]
+      },
+      "triangles": {
+        "glb": 5818,
+        "lod1": 3418,
+        "lod2": 1658,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.43149998784065247,
+        0.09200000017881393,
+        1.3914999961853027
+      ],
+      "rig": {
+        "type": "one-bone hanging pommel charm, blade rigid",
+        "bones": 1
+      },
+      "animations": [
+        "Lotus_charm_sway"
+      ],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Fine filigree and enamel wear review"
+      ]
+    },
+    {
+      "id": "oath-09-radiant-lotus-staff",
+      "archetypeId": "oath-09-radiant-lotus-staff",
+      "name": "Radiant Lotus Staff",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-09/weapons/radiant-lotus-staff/radiant-lotus-staff.blend",
+        "glb": "assets/production/oath-09/weapons/radiant-lotus-staff/lod0.glb",
+        "lod1": "assets/production/oath-09/weapons/radiant-lotus-staff/lod1.glb",
+        "lod2": "assets/production/oath-09/weapons/radiant-lotus-staff/lod2.glb",
+        "collision": "assets/production/oath-09/weapons/radiant-lotus-staff/collision.glb",
+        "damaged": "assets/production/oath-09/weapons/radiant-lotus-staff/damaged.glb",
+        "stowed": "assets/production/oath-09/weapons/radiant-lotus-staff/stowed.glb",
+        "textures": [
+          "assets/production/oath-09/weapons/textures/Enamel_basecolor.png",
+          "assets/production/oath-09/weapons/textures/Enamel_roughness.png",
+          "assets/production/oath-09/weapons/textures/Enamel_metallic.png",
+          "assets/production/oath-09/weapons/textures/Enamel_normal.png",
+          "assets/production/oath-09/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-09/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-09/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-09/weapons/textures/Gold_normal.png",
+          "assets/production/oath-09/weapons/textures/Cloth_basecolor.png",
+          "assets/production/oath-09/weapons/textures/Cloth_roughness.png",
+          "assets/production/oath-09/weapons/textures/Cloth_metallic.png",
+          "assets/production/oath-09/weapons/textures/Cloth_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-09/weapons/radiant-lotus-staff/front.png",
+          "assets/production/oath-09/weapons/radiant-lotus-staff/side.png",
+          "assets/production/oath-09/weapons/radiant-lotus-staff/hero.png"
+        ]
+      },
+      "triangles": {
+        "glb": 5986,
+        "lod1": 3514,
+        "lod2": 1702,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.4715000092983246,
+        0.09200000017881393,
+        2.251500129699707
+      ],
+      "rig": {
+        "type": "static, intentionally unrigged",
+        "bones": 0
+      },
+      "animations": [],
+      "remainingGates": [
+        "Owner exact art and scale approval",
+        "Host rig grip/docking and gameplay state transitions",
+        "Engine import/runtime parity",
+        "Collision and LOD gameplay/performance acceptance",
+        "Source ornate surface engraving simplification review",
+        "Radiance shader and gameplay response remain open"
+      ]
+    }
+  ]
+}

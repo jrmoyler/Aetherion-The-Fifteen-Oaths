@@ -1,0 +1,57 @@
+{
+  "concept_id": "batch05_10_o13_natural",
+  "reported_group_qa": {
+    "selected_version": "v02",
+    "source_preview": "generated/batch05_10_o13_natural_source_preview.jpg",
+    "global_unresolved": [
+      "Only a first dedicated proposed species board; population, age and sexual variation are not established.",
+      "Source realm artwork is style provenance only. Exact-art approval remains unresolved.",
+      "Matched image turnarounds are design intent, not calibrated orthographic geometry; exact proportion agreement requires a measured modeling pass.",
+      "Occluded limbs are not consistently mapped with dashed outlines in dorsal/front/rear studies; silhouette occlusion is not anatomical verification.",
+      "External articulation graphics and single motion poses are speculative; no validated joint hierarchy, rig, gait phase/contact timing or animation clips.",
+      "Images remain more richly fur-rendered than a final faceted low-poly implementation; asset-specific surface simplification and material response require review.",
+      "No player scale, numeric dimensions, speed, anatomy approval or production acceptance is established."
+    ]
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "status": "PROPOSED_NOT_APPROVED",
+        "pixel_review": {
+          "strengths": [
+            "Main turnarounds and motion studies visibly maintain four legs, two ears and one tail.",
+            "Opposing profiles and opposing three-quarter views supplied.",
+            "Paw close-ups clearly show four toe pads plus central pad; fore adds one medial dewclaw, hind does not.",
+            "Ear detail retains two stable ear roots, and feeding/service passage context is naturalistic."
+          ],
+          "defects": [
+            "Layered mantle clumps read too much like feathers or smooth blades rather than unmistakable mammal fur."
+          ],
+          "resolution": "Preserved non-selected initial version. Targeted fur-material correction attempted in v02."
+        }
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "status": "PROPOSED_NOT_APPROVED",
+        "pixel_review": {
+          "strengths": [
+            "Fur-material correction visibly produces fine strands, fibrous edges and soft clumps instead of feather-like plates.",
+            "Ivory/navy color zones and main body proportions remain broadly consistent across left/right profiles.",
+            "Four-leg/two-ear/one-tail silhouettes preserved in main turnaround and motion studies.",
+            "Enlarged actual paw crop reconfirms four toe pads in each diagram and only one forepaw dewclaw.",
+            "Ear poses, feeding image, non-illusion habitat and proposed disclaimer remain intact."
+          ],
+          "defects": [
+            "Small full-body paws do not resolve every toe/dewclaw; the close-up is the count reference, not proof of consistent hidden anatomy.",
+            "Reflective guard-hair response remains visual intent; no calibrated material or groom specification is established.",
+            "Exact hair-clump placement and coat stripe proportions drift modestly between projections."
+          ],
+          "resolution": "Selected improved proposed reference, not approved. Major feather-material ambiguity is resolved; explicit geometry/material gates remain."
+        }
+      }
+    }
+  ]
+}

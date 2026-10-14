@@ -1,0 +1,92 @@
+{
+  "status": "INDEPENDENT_EVIDENCE_ONLY_NOT_ACCEPTANCE",
+  "sources": [
+    {
+      "sourceRoot": "/tmp/aetherion-daybreak-independent-checks",
+      "bundledRoot": "imports",
+      "sourceManifest": "imports/EVIDENCE_INDEX.json",
+      "sourceManifestSha256": "8a1d0f2b8eb9901e3a1097ac1751f2a28e3c378692b0c24ea8d80e623c975ede",
+      "listedFiles": 133,
+      "allListedBytesVerified": true
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/review.md",
+      "bundledPath": "visual/review.md",
+      "bytes": 8336,
+      "sha256": "db37fc7ead7095a7bee35a7d82cf1cdc8856b84661a7ef3d9bbafd171e2c6ed2"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/review.json",
+      "bundledPath": "visual/review.json",
+      "bytes": 17305,
+      "sha256": "b3a12b7996ebacdfb5d349f1877384b5ccb6ce79e3fec37062ad61d15f15858d"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/freeze-verification.json",
+      "bundledPath": "visual/freeze-verification.json",
+      "bytes": 14644,
+      "sha256": "c8d608b5a397a4d95da199b73ec67fab17696eecabc2a9bde52c7fca1504623d"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/build_review.py",
+      "bundledPath": "visual/build_review.py",
+      "bytes": 12815,
+      "sha256": "8c642e8d6fd484ccac3b178e8df567d1b972bc3141f69e42d879e32a45a753aa"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/build_r02_review.py",
+      "bundledPath": "visual/build_r02_review.py",
+      "bytes": 5889,
+      "sha256": "0b85c274ac5f40d3e1bd73320c586ace61c11691ba060cd1a11a70cfcc835be2"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/r02/review.md",
+      "bundledPath": "visual/r02/review.md",
+      "bytes": 1963,
+      "sha256": "dfa60bc6a12d020f4694e404d4e4dcc455a81a362add705524b3d77052c03d54"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/r02/review.json",
+      "bundledPath": "visual/r02/review.json",
+      "bytes": 3781,
+      "sha256": "f8930bb4d89c2f211fed3053228f876af1b9ff78fc149563db965c74c0136b61"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/r02/freeze-verification.json",
+      "bundledPath": "visual/r02/freeze-verification.json",
+      "bytes": 15571,
+      "sha256": "6f519764c4581102e14463961b23fa5b71b07ca4ef7a47b07a264b85bbb34fc3"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-independent-visual-review/r02/png-comparison.json",
+      "bundledPath": "visual/r02/png-comparison.json",
+      "bytes": 13334,
+      "sha256": "7828cb8342870669270daa313f08166d3bcae7a7cf06e24ecc2fb765a1e36c4e"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-architecture/modules/stair-flight/hero.png",
+      "bundledPath": "visual/pixels/r01-stair-flight.png",
+      "bytes": 622266,
+      "sha256": "d703bcf39c54f723e72ace1c4f048f2b2772399837be011f6c1dd9c8ebe2f2e9"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-architecture/fixtures/stairs-with-landing/hero.png",
+      "bundledPath": "visual/pixels/r01-stairs-with-landing.png",
+      "bytes": 498818,
+      "sha256": "bed4eb7b38dc4bff6045ae988a407b5b22e9e917595a08ce2a75759dde801cfb"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/hero.png",
+      "bundledPath": "visual/pixels/r02-stair-flight.png",
+      "bytes": 613436,
+      "sha256": "5828ccb23fc0201d3a1dc500a146d711f20192bc3806774f91761029a7cf06af"
+    },
+    {
+      "source": "/tmp/aetherion-daybreak-architecture-r02/fixtures/stairs-with-landing/hero.png",
+      "bundledPath": "visual/pixels/r02-stairs-with-landing.png",
+      "bytes": 496474,
+      "sha256": "be1c43662fbefe7496c93514bbb090005fcd3ecffc0711261819a6f94acfcb1f"
+    }
+  ],
+  "excluded": "No Blender/GLB copies, Godot caches, generated imported scenes or separate physics evidence."
+}

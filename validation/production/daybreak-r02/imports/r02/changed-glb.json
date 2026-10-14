@@ -1,0 +1,247 @@
+{
+  "generatedAt": "2026-10-13T23:50:23.106Z",
+  "scope": "Read-only review copies; no GPU, appearance, collision-fit or production certification",
+  "textureDecode": "Three.js CPU placeholder textures; actual geometry/skins/animations loaded",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/stairs-with-landing/assembly.glb",
+      "sha256": "78a0516762b500bb525d570826fd7f94c0b62537c7d8586f2aa66d447d3fc0bd",
+      "bytes": 5198324,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 1996,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.17999999970197678,
+            0,
+            -4.500000103376806
+          ],
+          "max": [
+            1.9799999743700027,
+            2.7400000281631947,
+            0.07999999821186066
+          ],
+          "dimensionsMeters": [
+            2.1599999740719795,
+            2.7400000281631947,
+            4.580000101588666
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/collision.glb",
+      "sha256": "879f782cc5401fca4333de87b7e809959970d97bf3d16512e9fd1ff892c8ad1d",
+      "bytes": 1238656,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 66,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.17999999970197678,
+            0,
+            -2.9803912931922287
+          ],
+          "max": [
+            1.9799999743700027,
+            2.6231604204002323,
+            0.2803912455085129
+          ],
+          "dimensionsMeters": [
+            2.1599999740719795,
+            2.6231604204002323,
+            3.2607825387007416
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/lod0.glb",
+      "sha256": "bd778a0d3e65120ead8cbf8769b6559fb9a6909034a66bb4a910ae7fdf784e7e",
+      "bytes": 4314920,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 1612,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.17999999970197678,
+            0,
+            -2.7800000458955765
+          ],
+          "max": [
+            1.9799999743700027,
+            2.7400000281631947,
+            0.07999999821186066
+          ],
+          "dimensionsMeters": [
+            2.1599999740719795,
+            2.7400000281631947,
+            2.860000044107437
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/lod1.glb",
+      "sha256": "bd778a0d3e65120ead8cbf8769b6559fb9a6909034a66bb4a910ae7fdf784e7e",
+      "bytes": 4314920,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 1612,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.17999999970197678,
+            0,
+            -2.7800000458955765
+          ],
+          "max": [
+            1.9799999743700027,
+            2.7400000281631947,
+            0.07999999821186066
+          ],
+          "dimensionsMeters": [
+            2.1599999740719795,
+            2.7400000281631947,
+            2.860000044107437
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/lod2.glb",
+      "sha256": "3f7bb0e86483f209771de731de990577c650ebe1d18222c130d4212ea501b838",
+      "bytes": 2166408,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 0,
+        "issueCounts": {}
+      },
+      "weights": {
+        "weightedVertices": 0,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 576,
+        "skinnedVertices": 0,
+        "bounds": {
+          "min": [
+            -0.1600000001490116,
+            0,
+            -2.7600000463426113
+          ],
+          "max": [
+            1.9599999748170376,
+            2.7000001072883606,
+            0.05999999865889549
+          ],
+          "dimensionsMeters": [
+            2.119999974966049,
+            2.7000001072883606,
+            2.820000045001507
+          ]
+        },
+        "minBoneScale": null,
+        "minScaleRatio": null,
+        "maxScaleRatio": 0,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": []
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "original_name": "quiet portico",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/15",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    4.0,
+    3.0,
+    3.2
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      0.0,
+      -0.15000000596046448
+    ],
+    [
+      4.0,
+      3.0,
+      3.200000047683716
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 3092,
+    "lod1": 1548,
+    "lod2": 784
+  },
+  "visual_meshes": 83,
+  "collider_meshes": 5,
+  "sockets": [
+    {
+      "name": "west",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        0,
+        1.5,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        -1.5
+      ],
+      "outward_normal_blender_xyz": [
+        -1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "east",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        4,
+        1.5,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        4,
+        0,
+        -1.5
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "south",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        2.0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        2.0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        -1,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "north",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        2.0,
+        3,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        2.0,
+        0,
+        -3
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        1,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "finished-floor",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "left",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        0,
+        2.8249999999999997,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        -2.8249999999999997
+      ],
+      "outward_normal_blender_xyz": [
+        -1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "right",
+      "semantic_type": "structural_edge",
+      "position_blender_xyz_m": [
+        4,
+        2.8249999999999997,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        4,
+        0,
+        -2.8249999999999997
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "structural_edge"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "base",
+      "semantic_type": "floor_datum",
+      "position_blender_xyz_m": [
+        0,
+        2.65,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        -2.65
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "floor_datum"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "roof",
+      "semantic_type": "roof_seat",
+      "position_blender_xyz_m": [
+        0,
+        2.65,
+        3.2
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        3.2,
+        -2.65
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "roof_seat"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "front-protected-route",
+      "semantic_type": "door_clear",
+      "position_blender_xyz_m": [
+        2,
+        0.9,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        2,
+        0,
+        -0.9
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "door_clear"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "width_m": 2.98,
+        "headroom_m": 3.0
+      }
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ]
+}

@@ -1,0 +1,8 @@
+config_version=5
+[application]
+config/name="Daybreak isolated actual-proxy physics validation"
+[physics]
+common/physics_ticks_per_second=60
+3d/physics_engine="GodotPhysics3D"
+[rendering]
+renderer/rendering_method="gl_compatibility"

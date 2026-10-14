@@ -1,0 +1,76 @@
+
+> aetherion-foundation@0.1.0 test:world
+> npm --prefix runtime/world-kernel test
+
+
+> @aetherion/world-kernel@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ entire actual continent resolves all318 POIs, all225 topological region pairs and63baseline identities (38.201758ms)
+✔ route ordering independent of record and edge input ordering (10.868725ms)
+✔ unknown region and POI refused; callers cannot mutate indexed canon (3.393385ms)
+✔ invalid graph rejects duplicate (1.010172ms)
+✔ invalid graph rejects endpoint (3.698094ms)
+✔ invalid graph rejects adjacency (3.054135ms)
+✔ invalid graph rejects baseline (2.894814ms)
+✔ invalid graph rejects schema (0.559524ms)
+✔ POI Oath and capital identity validated (16.050195ms)
+✔ signed coordinates normalize reversibly at 128m hypothesis (0.964494ms)
+✔ signed coordinates normalize reversibly at 256m hypothesis (0.456468ms)
+✔ signed coordinates normalize reversibly at 512m hypothesis (0.355606ms)
+✔ coordinates reject invalid version, NaN, infinite, unsafe integer and bad width (0.349166ms)
+✔ readiness gates collision/nav/authority/mandatory cues and content revision (0.49749ms)
+✔ valid readiness permits coarse gameplay before presentation (0.207463ms)
+✔ out-of-order stage and duplicate requests refused (0.188073ms)
+✔ CANCELLED generation cannot revive or release replacement (0.265911ms)
+✔ FAILED generation cannot revive or release replacement (0.091728ms)
+✔ RETIRING generation cannot revive or release replacement (0.060952ms)
+✔ shared leases dispose exactly once after final owner, duplicate acquisition ignored (0.202315ms)
+✔ failing disposer still releases all leases and invokes other disposers once (0.400214ms)
+✔ actual world-event-01 exact objective targets succeed with distinct authored test sockets (1.974376ms)
+✔ actual world-event-02 exact objective targets succeed with distinct authored test sockets (0.646996ms)
+✔ actual world-event-03 exact objective targets succeed with distinct authored test sockets (0.541125ms)
+✔ actual world-event-04 exact objective targets succeed with distinct authored test sockets (0.554166ms)
+✔ actual world-event-05 exact objective targets succeed with distinct authored test sockets (0.472232ms)
+✔ actual world-event-06 exact objective targets succeed with distinct authored test sockets (0.449217ms)
+✔ actual world-event-07 exact objective targets succeed with distinct authored test sockets (0.428256ms)
+✔ actual world-event-08 exact objective targets succeed with distinct authored test sockets (0.592453ms)
+✔ actual world-event-09 exact objective targets succeed with distinct authored test sockets (0.787547ms)
+✔ actual world-event-10 exact objective targets succeed with distinct authored test sockets (0.462608ms)
+✔ actual world-event-11 exact objective targets succeed with distinct authored test sockets (0.422998ms)
+✔ actual world-event-12 exact objective targets succeed with distinct authored test sockets (0.402397ms)
+✔ actual world-event-13 exact objective targets succeed with distinct authored test sockets (0.45817ms)
+✔ actual world-event-14 exact objective targets succeed with distinct authored test sockets (0.45753ms)
+✔ actual world-event-15 exact objective targets succeed with distinct authored test sockets (0.381485ms)
+✔ missing authored sockets and injected predicate code refused (0.483879ms)
+✔ incorrect phase order and initial state types refused (0.376738ms)
+✔ receipt retry idempotent across phase transition; conflicting retry and duplicate socket refused (0.421315ms)
+✔ unknown socket, early/late contribution and backwards clocks refused (0.327924ms)
+✔ zero-player deadline reaches setback then nonhazardous recovery without fabricated rewards (0.206161ms)
+✔ safety abort unpenalized and offline recovery never completes objectives (0.425832ms)
+✔ missing or stale safety attestation fails closed without changing state/time (0.50427ms)
+✔ lost catchment lease aborts response without credit and no stale success (0.359101ms)
+✔ reentrant disposal preserves newly acquired shared resource (0.293172ms)
+✔ tokens are manager-local capabilities, not transferable matching IDs (0.134813ms)
+✔ exact receipt retry survives newer action without moving simulation clock (0.386503ms)
+✔ unsafe and sub-millisecond event clocks cannot collapse authored duration (1.33345ms)
+✔ baseline manifest requires63 distinct identities (4.399903ms)
+✔ same resource cannot be reacquired while its disposer is executing (0.180021ms)
+ℹ tests 50
+ℹ suites 0
+ℹ pass 50
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 276.500244
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

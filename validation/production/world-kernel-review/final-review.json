@@ -1,0 +1,73 @@
+{
+  "status": "SCOPED_INDEPENDENT_CPU_REVIEW_PASS_AFTER_SIX_REPAIRS",
+  "reviewedFinalSourceSHA256": "218d0c562a54770a8a7a7c619d56d29b3d76a2371c0cb9520ec131e6f283fc7a",
+  "candidateReceiptSHA256": "0b137af2cf71cdc09fed31b66e1e4fbf62f0978ce522b16d1f8362e6de2b16bf",
+  "candidateFilesVerified": [
+    {
+      "path": "README.md",
+      "matches": true,
+      "sha256": "ab9bde13ce8cdcc18537b85e0d91a6d79dfeea60f99d56577888ce76315acabe"
+    },
+    {
+      "path": "audit.mjs",
+      "matches": true,
+      "sha256": "c220d63bb325a76a0c1695eabd06719974829d2f7b6e350896872cf1e3fa7585"
+    },
+    {
+      "path": "coverage.json",
+      "matches": true,
+      "sha256": "de031636a2d5b891dce714ae4de2562b5b416edcdb32d2e330b19be9b67251e0"
+    },
+    {
+      "path": "index.d.mts",
+      "matches": true,
+      "sha256": "1873b322185b0b8883a7a2d4759db7cb39f16bb7fca837399801323e27a33293"
+    },
+    {
+      "path": "index.mjs",
+      "matches": true,
+      "sha256": "218d0c562a54770a8a7a7c619d56d29b3d76a2371c0cb9520ec131e6f283fc7a"
+    },
+    {
+      "path": "package.json",
+      "matches": true,
+      "sha256": "e4dc5f5019212ef14fc4b7d5326aca17dc804a404998740942454346fdcde1b9"
+    },
+    {
+      "path": "test/kernel.test.mjs",
+      "matches": true,
+      "sha256": "e24e4495eb544e6e49633abeb30b90b1d51d131af05165be55f8b9f2c7300bba"
+    },
+    {
+      "path": "test-result.tap",
+      "matches": true,
+      "sha256": "a70157c7c0584fbb4d5ddeb384c2a99687644b4d75351274df49bb602fc5ffe0"
+    }
+  ],
+  "authoredSuite": {
+    "passed": 50,
+    "failed": 0,
+    "log": "authored-suite-repaired.tap"
+  },
+  "independentRegressionSuite": {
+    "passed": 7,
+    "failed": 0,
+    "log": "regression-result.tap",
+    "source": "regression.test.mjs"
+  },
+  "resolvedFindings": [
+    "Zero-user disposal under synchronous callback reentry",
+    "Manager-local opaque request token ownership",
+    "Idempotent historical exact receipt replay without clock mutation",
+    "Safe integer event clocks and bounded deadline arithmetic",
+    "Distinct63baseline identity guard",
+    "Fresh failed contribution safety enters unpenalized reconstruction without credit"
+  ],
+  "remainingBlockers": [],
+  "scopeLimits": [
+    "Trusted in-memory CPU kernel only",
+    "Not authority/network/nav/physical-service/persistence implementation",
+    "No engine/GPU/gameplay or full-world acceptance",
+    "Cooldown scheduler,NPC assistance,durable journal/reward allocation,physical recovery remain declared missing"
+  ]
+}

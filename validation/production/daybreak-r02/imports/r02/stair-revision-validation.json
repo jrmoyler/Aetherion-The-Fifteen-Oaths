@@ -1,0 +1,337 @@
+{
+  "scope": "r02 actual Blender visual geometry rays and movement collider seams; no source saves, no gameplay certification",
+  "checks": [
+    {
+      "check": "r01 intruding terminal body removed; tread9 surface remains1.44m through2.69999m",
+      "passed": true,
+      "evidence": {
+        "actual_visual_ray_profile": [
+          {
+            "y": 2.4,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.41,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.65,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.66,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.669,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.671,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.68,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.69,
+            "hit": [
+              1.4399998188018799,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.699,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.69999,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.70001,
+            "hit": null
+          }
+        ],
+        "source_sha256": "1171845fafd719d86a8270e0dfce5f4406794002372bf7b4fd301b0648703f1c"
+      }
+    },
+    {
+      "check": "Unassembled flight has no top landing face beyond2.70m",
+      "passed": true,
+      "evidence": {
+        "final_riser_owner": "receiving landing front fascia, not an overlapping stair body"
+      }
+    },
+    {
+      "check": "Landing end socket preserved",
+      "passed": true,
+      "evidence": {
+        "name": "top",
+        "semantic_type": "landing_end",
+        "position_blender_xyz_m": [
+          0,
+          2.7,
+          1.6
+        ],
+        "position_gltf_xyz_m": [
+          0,
+          1.6,
+          -2.7
+        ],
+        "outward_normal_blender_xyz": [
+          0,
+          1,
+          0
+        ],
+        "compatible_partner_types": [
+          "landing_start"
+        ],
+        "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+        "clearance": {
+          "width_m": 1.8,
+          "headroom_m": 2.4
+        }
+      }
+    },
+    {
+      "check": "Actual assembled geometry has nine300mm exposed treads at three cross-stair positions",
+      "passed": true,
+      "evidence": {
+        "downward_ray_boundary_search": [
+          {
+            "x": 0.3,
+            "riser_planes_y_m": [
+              0.0,
+              0.29999996722326616,
+              0.5999999940337147,
+              0.8999999463616404,
+              1.1999999880732504,
+              1.4999999403895345,
+              1.8000000119267496,
+              2.0999997854174586,
+              2.3999997377453837,
+              2.6999996900500265
+            ],
+            "exposed_tread_widths_m": [
+              0.29999996722326616,
+              0.3000000268104486,
+              0.29999995232792565,
+              0.30000004171161,
+              0.2999999523162842,
+              0.3000000715372151,
+              0.29999977349070894,
+              0.2999999523279251,
+              0.2999999523046428
+            ]
+          },
+          {
+            "x": 0.9,
+            "riser_planes_y_m": [
+              0.0,
+              0.29999996722326616,
+              0.5999999940337147,
+              0.8999999463616404,
+              1.1999999880732504,
+              1.4999999403895345,
+              1.8000000119267496,
+              2.0999997854174586,
+              2.3999997377453837,
+              2.6999996900500265
+            ],
+            "exposed_tread_widths_m": [
+              0.29999996722326616,
+              0.3000000268104486,
+              0.29999995232792565,
+              0.30000004171161,
+              0.2999999523162842,
+              0.3000000715372151,
+              0.29999977349070894,
+              0.2999999523279251,
+              0.2999999523046428
+            ]
+          },
+          {
+            "x": 1.5,
+            "riser_planes_y_m": [
+              0.0,
+              0.29999996722326616,
+              0.5999999940337147,
+              0.8999999463616404,
+              1.1999999880732504,
+              1.4999999403895345,
+              1.8000000119267496,
+              2.0999997854174586,
+              2.3999997377453837,
+              2.6999996900500265
+            ],
+            "exposed_tread_widths_m": [
+              0.29999996722326616,
+              0.3000000268104486,
+              0.29999995232792565,
+              0.30000004171161,
+              0.2999999523162842,
+              0.3000000715372151,
+              0.29999977349070894,
+              0.2999999523279251,
+              0.2999999523046428
+            ]
+          }
+        ],
+        "tolerance_m": 5e-05
+      }
+    },
+    {
+      "check": "Tenth riser occurs at landing seam,1.44m to1.60m",
+      "passed": true,
+      "evidence": {
+        "samples": [
+          {
+            "y": 2.669,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.671,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.69,
+            "hit": [
+              1.4399998188018799,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.699,
+            "hit": [
+              1.440000057220459,
+              "Replaceable marble tread.008"
+            ]
+          },
+          {
+            "y": 2.7001,
+            "hit": [
+              1.599900245666504,
+              "Recessed continuous bronze inlay bed"
+            ]
+          },
+          {
+            "y": 2.71,
+            "hit": [
+              1.599900245666504,
+              "Recessed continuous bronze inlay bed"
+            ]
+          },
+          {
+            "y": 2.72,
+            "hit": [
+              1.599900484085083,
+              "Recessed continuous bronze inlay bed"
+            ]
+          },
+          {
+            "y": 2.73,
+            "hit": [
+              1.599900245666504,
+              "Recessed continuous bronze inlay bed"
+            ]
+          },
+          {
+            "y": 2.74,
+            "hit": [
+              1.599900245666504,
+              "Recessed continuous bronze inlay bed"
+            ]
+          }
+        ],
+        "riser_owner": "160mm receiving landing front fascia"
+      }
+    },
+    {
+      "check": "Actual movement proxy and landing collider meet at same height",
+      "passed": true,
+      "evidence": {
+        "gap_m": -2.384185791015625e-07,
+        "step_m": 0.0,
+        "wedge_bounds": [
+          [
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            1.7999999523162842,
+            2.700000047683716,
+            1.600000023841858
+          ]
+        ],
+        "landing_bounds": [
+          [
+            0.0,
+            2.6999998092651367,
+            1.4399999380111694
+          ],
+          [
+            1.7999999523162842,
+            4.5,
+            1.600000023841858
+          ]
+        ]
+      }
+    },
+    {
+      "check": "15mm displaced physical landing negative fixture rejected",
+      "passed": true,
+      "evidence": {
+        "actual_collider_gap_m": 0.015000104904174805,
+        "visual_gap_probe": null,
+        "tolerance_m": 0.005,
+        "scene_modified_in_memory_only": true
+      }
+    },
+    {
+      "check": "20mm landing collider step negative fixture rejected",
+      "passed": true,
+      "evidence": {
+        "actual_step_m": 0.019999980926513672,
+        "tolerance_m": 0.01,
+        "scene_modified_in_memory_only": true
+      }
+    }
+  ],
+  "failures": 0
+}

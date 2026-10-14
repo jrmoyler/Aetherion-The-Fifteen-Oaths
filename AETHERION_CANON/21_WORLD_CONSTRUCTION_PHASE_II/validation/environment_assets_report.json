@@ -1,0 +1,186 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "P2-SRC-FOUNDATION",
+    "P2-SRC-PROPOSAL"
+  ],
+  "checks": [
+    {
+      "file": "ARCHITECTURAL_KIT_REGISTRY.json",
+      "schema": "schemas/architectural-kit-registry.schema.json",
+      "record_count": 15,
+      "schema_pass": true,
+      "unknown_property_negative_test_pass": true
+    },
+    {
+      "file": "ENVIRONMENT_ASSET_REGISTRY.json",
+      "schema": "schemas/environment-asset-registry.schema.json",
+      "record_count": 24,
+      "schema_pass": true,
+      "unknown_property_negative_test_pass": true
+    },
+    {
+      "file": "ENVIRONMENT_REFERENCE_EVIDENCE.json",
+      "schema": "schemas/environment-reference-evidence.schema.json",
+      "record_count": 114,
+      "schema_pass": true,
+      "unknown_property_negative_test_pass": true
+    }
+  ],
+  "baseline_asset_count": 748,
+  "baseline_asset_links_resolved": true,
+  "source_file_paths_exist": true,
+  "dependency_graph_acyclic": true,
+  "kit_dimension_checks": [
+    {
+      "kit_id": "p2-arch-01-kiln-courts",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-02-rime-vaults",
+      "module_count": 17,
+      "role_specific_dimension_variants": 14,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-03-storm-relays",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-04-tidal-refuges",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-05-fault-buttresses",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-06-reed-halls",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-07-graft-courts",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-08-bitterglass-stills",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-09-daybreak-arcades",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-10-observatory-terraces",
+      "module_count": 17,
+      "role_specific_dimension_variants": 14,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-11-missing-court",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-12-sanguine-cloisters",
+      "module_count": 17,
+      "role_specific_dimension_variants": 14,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-13-folded-stages",
+      "module_count": 17,
+      "role_specific_dimension_variants": 13,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-14-escapement-stations",
+      "module_count": 17,
+      "role_specific_dimension_variants": 15,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    },
+    {
+      "kit_id": "p2-arch-15-impulse-yards",
+      "module_count": 17,
+      "role_specific_dimension_variants": 14,
+      "door_clearance_target_pass": true,
+      "stair_arithmetic_pass": true,
+      "ramp_grade_target_pass": true,
+      "note": "Arithmetic and proposal-schema checks only; physical traversal/runtime not tested."
+    }
+  ],
+  "reference_count": 114,
+  "direct_original_overview_review_count": 15,
+  "reference_hash_matches": 114,
+  "originals_copied": 0,
+  "production_assets_built": 0,
+  "production_validation": false,
+  "gaps": [
+    "Individual final-art and licensing approval unresolved.",
+    "Orthographic fabrication, source scenes, production meshes/UV/collision/rig/animation and engine integration absent.",
+    "Dimensions are proposed authoring targets, not measurements extracted from images.",
+    "Species anatomy and individual source art outside overview require separate review.",
+    "Performance, hardware, runtime travel/clearance and accessibility require actual implementation tests."
+  ],
+  "acceptance_summary": "Strict proposal schemas and static reference/dependency/dimension consistency pass; no runtime or final-art certification."
+}

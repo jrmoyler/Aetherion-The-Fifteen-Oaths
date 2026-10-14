@@ -1,0 +1,76 @@
+{
+  "source": "assets/references/reference-049/original.png",
+  "sourceSha256": "5612f785710f5f1e223c9404b975a714f90433c9f05a9afeeecad1d280682116",
+  "measurementMethod": "Manual landmark reading from actual source pixels; approximate, not segmentation or exact approval",
+  "sourceCanvas": [
+    1536,
+    1024
+  ],
+  "frontStaffPixelHeight": 422,
+  "assumedHeightMeters": 2,
+  "pixelToWorld": "x=(px-1073)/211; z=(570-py)/211-1",
+  "frontLandmarks": {
+    "tip": [
+      1073,
+      148
+    ],
+    "rootBottom": [
+      1060,
+      570
+    ],
+    "crownBounds": [
+      1040,
+      148,
+      1105,
+      235
+    ],
+    "crownCenter": [
+      1073,
+      193
+    ],
+    "leftBranchTip": [
+      1020,
+      193
+    ],
+    "rightBranchTip": [
+      1130,
+      180
+    ],
+    "mainFork": [
+      1073,
+      280
+    ],
+    "secondaryPodCenter": [
+      1104,
+      291
+    ],
+    "shaftSampleWidthAt360": [
+      12,
+      17
+    ]
+  },
+  "ratios": {
+    "crownWidthToHeight": 0.15402843601895735,
+    "crownHeightToHeight": 0.20616113744075829,
+    "shaftWidthToHeight": [
+      0.02843601895734597,
+      0.04028436018957346
+    ]
+  },
+  "interpretationLimits": [
+    "Source side/front/hero are illustrative and differ; matching every outline simultaneously is not possible from these views",
+    "Profile depth and rear husk splinter paths are interpretive, proposed",
+    "No exact fidelity or art approval claimed"
+  ],
+  "profileInterpretation": {
+    "mainShaftDepthVariationMeters": 0.018,
+    "primaryBranchTipDepthsMeters": [
+      0.14,
+      -0.13
+    ],
+    "secondaryPodDepthMeters": 0.095,
+    "rootsDepthSpreadMeters": 0.156,
+    "status": "PROPOSED_FROM_ILLUSTRATED_SIDE_VIEW_NOT_APPROVED",
+    "diagnostic": "First planar recipe/renders preserved in diagnostic-planar"
+  }
+}

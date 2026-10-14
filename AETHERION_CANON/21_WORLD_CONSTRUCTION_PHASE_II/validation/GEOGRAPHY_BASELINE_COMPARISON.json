@@ -1,0 +1,15 @@
+{
+  "baseline_commit": "5dce9edae0bb3587eb7c72433395e7d5a19857ea",
+  "source_paths": [
+    "AETHERION_CANON/03_GEOGRAPHY/WORLD_GRAPH.json",
+    "AETHERION_CANON/03_GEOGRAPHY/WORLD_POI_REGISTRY.json",
+    "AETHERION_CANON/03_GEOGRAPHY/REALM_REGISTRY.json"
+  ],
+  "checks": {
+    "exact_30_edge_ids_and_endpoints": true,
+    "exact_4_basin_ids_and_ordered_sequences": true,
+    "exact_63_poi_ids_names_regions": true,
+    "exact_15_capitals": true
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,4087 @@
+{
+  "reachableSandboxModules": 581,
+  "missingReachableSandboxImports": [],
+  "missingReachableSandboxAssets": [],
+  "method": "Static literal relative JS import paths and quoted ./models, ./textures, ./hdri references. Dynamic template URLs, CSS, HTML, FBX/GLB embedded asset references and remote URLs are outside coverage. Archive references included and marked by path.",
+  "moduleReferences": 6593,
+  "missingModuleReferences": [
+    {
+      "source": "bridge/MatrixBridge.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/vendor/linear/main.js",
+      "reference": "./bridge/MatrixBridge.js",
+      "exists": false,
+      "target": "packs/sandbox/src/vendor/linear/bridge/MatrixBridge.js"
+    },
+    {
+      "source": "packs/sandbox/src/vendor/linear-extended/main.js",
+      "reference": "./bridge/MatrixBridge.js",
+      "exists": false,
+      "target": "packs/sandbox/src/vendor/linear-extended/bridge/MatrixBridge.js"
+    },
+    {
+      "source": "packs/sandbox/src/vendor/linear-ext/main.js",
+      "reference": "./bridge/MatrixBridge.js",
+      "exists": false,
+      "target": "packs/sandbox/src/vendor/linear-ext/bridge/MatrixBridge.js"
+    },
+    {
+      "source": "packs/sandbox/src/vendor/handcast/main.js",
+      "reference": "./bridge/MatrixBridge.js",
+      "exists": false,
+      "target": "packs/sandbox/src/vendor/handcast/bridge/MatrixBridge.js"
+    },
+    {
+      "source": "packs/sandbox/src/vendor/casting/main.js",
+      "reference": "./bridge/MatrixBridge.js",
+      "exists": false,
+      "target": "packs/sandbox/src/vendor/casting/bridge/MatrixBridge.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/WindMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/WindMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/WindMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/TrailMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/TrailMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/TrailMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/RockMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/RockMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/RockMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/DistortionMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/DistortionMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/input/PathDrawer.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/input/PathDrawer.js",
+      "reference": "../utils/EventEmitter.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/EventEmitter.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/PathTrail.js",
+      "reference": "./RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/PathTrail.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/PathTrail.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/PathTrail.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "./BurstSphere.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "./GroundDecals.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/effects/AirScooter.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/assets/ProceduralGeometry.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/animation/WalkController.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/animation/WalkController.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/animation/WalkController.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/animation/WalkController.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/animation/WalkController.js",
+      "reference": "./CharacterController.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/animation/CharacterController.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/Ability.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/Ability.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/Ability.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/sandbox/src/archive/abilities/Ability.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/sandbox/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/WindMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/WindMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/WindMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/TrailMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/TrailMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/TrailMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/RockMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/RockMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/RockMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/DistortionMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/DistortionMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/input/PathDrawer.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/input/PathDrawer.js",
+      "reference": "../utils/EventEmitter.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/EventEmitter.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/PathTrail.js",
+      "reference": "./RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/PathTrail.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/PathTrail.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/PathTrail.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "./BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "./GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/effects/AirScooter.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/assets/ProceduralGeometry.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/animation/WalkController.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/animation/WalkController.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear/src/archive/animation/WalkController.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/animation/WalkController.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/animation/WalkController.js",
+      "reference": "./CharacterController.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/animation/CharacterController.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/Ability.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/Ability.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/Ability.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear/src/archive/abilities/Ability.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/WindMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/WindMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/WindMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/TrailMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/TrailMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/TrailMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/RockMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/RockMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/RockMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/DistortionMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/DistortionMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/input/PathDrawer.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/input/PathDrawer.js",
+      "reference": "../utils/EventEmitter.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/EventEmitter.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/PathTrail.js",
+      "reference": "./RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/PathTrail.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/PathTrail.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/PathTrail.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "./BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "./GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/effects/AirScooter.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/assets/ProceduralGeometry.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/animation/WalkController.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/animation/WalkController.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/animation/WalkController.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/animation/WalkController.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/animation/WalkController.js",
+      "reference": "./CharacterController.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/animation/CharacterController.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/Ability.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/Ability.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/Ability.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-extended/src/archive/abilities/Ability.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-extended/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/WindMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/WindMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/WindMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/TrailMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/TrailMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/TrailMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/RockMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/RockMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/RockMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/DistortionMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/DistortionMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/input/PathDrawer.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/input/PathDrawer.js",
+      "reference": "../utils/EventEmitter.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/EventEmitter.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/PathTrail.js",
+      "reference": "./RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/PathTrail.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/PathTrail.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/PathTrail.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "./BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "./GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/effects/AirScooter.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/assets/ProceduralGeometry.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/animation/WalkController.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/animation/WalkController.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/animation/WalkController.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/animation/WalkController.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/animation/WalkController.js",
+      "reference": "./CharacterController.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/animation/CharacterController.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/Ability.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/Ability.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/Ability.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/linear-ext/src/archive/abilities/Ability.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/linear-ext/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/WindMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/WindMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/WindMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/TrailMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/TrailMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/TrailMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/RockMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/RockMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/RockMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/DistortionMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/DistortionMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/input/PathDrawer.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/input/PathDrawer.js",
+      "reference": "../utils/EventEmitter.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/EventEmitter.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/PathTrail.js",
+      "reference": "./RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/PathTrail.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/PathTrail.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/PathTrail.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "./BurstSphere.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "./GroundDecals.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/effects/AirScooter.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/assets/ProceduralGeometry.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/animation/WalkController.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/animation/WalkController.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/animation/WalkController.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/animation/WalkController.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/animation/WalkController.js",
+      "reference": "./CharacterController.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/animation/CharacterController.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/Ability.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/Ability.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/Ability.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/handcast/src/archive/abilities/Ability.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/handcast/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/WindMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/WindMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/WindMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/TrailMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/TrailMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/TrailMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/RockMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/RockMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/RockMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/DistortionMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/DistortionMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/input/PathDrawer.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/input/PathDrawer.js",
+      "reference": "../utils/EventEmitter.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/EventEmitter.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/PathTrail.js",
+      "reference": "./RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/PathTrail.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/PathTrail.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/PathTrail.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "./BurstSphere.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "./GroundDecals.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/effects/AirScooter.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/assets/ProceduralGeometry.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/animation/WalkController.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/animation/WalkController.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/collective/src/archive/animation/WalkController.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/animation/WalkController.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/animation/WalkController.js",
+      "reference": "./CharacterController.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/animation/CharacterController.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/Ability.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/Ability.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/Ability.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/collective/src/archive/abilities/Ability.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/collective/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/WindMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/WindMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/WindMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/WindMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/VolumetricFireMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/TrailMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/TrailMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/TrailMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/TrailMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/RockMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/RockMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/RockMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/OceanWaterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/DistortionMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/DistortionMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/noise.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/noise.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../shaders/lib/common.glsl.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/shaders/lib/common.glsl.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/materials/AirScooterMaterial.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/input/PathDrawer.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/input/PathDrawer.js",
+      "reference": "../utils/EventEmitter.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/EventEmitter.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/PathTrail.js",
+      "reference": "./RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/PathTrail.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/PathTrail.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/PathTrail.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "./BurstSphere.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "./GroundDecals.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/effects/AirScooter.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/assets/ProceduralGeometry.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/animation/WalkController.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/animation/WalkController.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/casting/src/archive/animation/WalkController.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/animation/WalkController.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/animation/WalkController.js",
+      "reference": "./CharacterController.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/animation/CharacterController.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WindAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/WaterAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/RibbonGeometry.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/RibbonGeometry.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/FireAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleSystem.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleSystem.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../particles/ParticleEngine.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/particles/ParticleEngine.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/GroundDecals.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/GroundDecals.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../effects/BurstSphere.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/effects/BurstSphere.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/Layers.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../core/FrameUniforms.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/FrameUniforms.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/EarthAbility.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/Ability.js",
+      "reference": "../config/settings.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/config/settings.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/Ability.js",
+      "reference": "../utils/math.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/math.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/Ability.js",
+      "reference": "../utils/color.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/utils/color.js"
+    },
+    {
+      "source": "packs/casting/src/archive/abilities/Ability.js",
+      "reference": "../core/Layers.js",
+      "exists": false,
+      "target": "packs/casting/src/archive/core/Layers.js"
+    }
+  ],
+  "bareSpecifiers": {
+    "three": 1301,
+    "vite": 9,
+    "@vitejs/plugin-basic-ssl": 2,
+    "three/addons/shaders/HorizontalBlurShader.js": 12,
+    "three/addons/shaders/VerticalBlurShader.js": 12,
+    "lil-gui": 12,
+    "\n      )\n      .name(": 12,
+    ");\n    R(vines, c, ": 4,
+    "three/addons/postprocessing/EffectComposer.js": 12,
+    "three/addons/postprocessing/RenderPass.js": 12,
+    "three/addons/postprocessing/ShaderPass.js": 12,
+    "three/addons/postprocessing/UnrealBloomPass.js": 10,
+    "three/addons/postprocessing/OutputPass.js": 12,
+    "three/addons/loaders/FBXLoader.js": 12,
+    "three/addons/loaders/GLTFLoader.js": 10,
+    "three/addons/loaders/HDRLoader.js": 12,
+    "three/addons/controls/OrbitControls.js": 13,
+    "three/addons/utils/SkeletonUtils.js": 20,
+    "dark, reflective, opaque": 2,
+    "qrcode-generator": 4,
+    ");\n    R(cone, c, ": 2,
+    ");\n    R(lance, c, ": 2,
+    ");\n    R(core, c, ": 2,
+    "@mediapipe/tasks-vision": 4,
+    "three/addons/math/MeshSurfaceSampler.js": 2,
+    "three/addons/utils/BufferGeometryUtils.js": 5,
+    "bottom": 1,
+    ");\n  R(roots, c, ": 1,
+    ");\n  R(wave, c, ": 1,
+    ");\n  R(ground, c, ": 1,
+    "node:http": 2,
+    "node:module": 1
+  },
+  "assetReferences": 157,
+  "uniquePublicAssets": 83,
+  "missingAssetReferences": [
+    {
+      "source": "packs/sandbox/src/vendor/casting/world/DuelHall.js",
+      "reference": "./models/duel_hall.glb",
+      "publicFile": "packs/sandbox/public/models/duel_hall.glb",
+      "exists": false
+    },
+    {
+      "source": "packs/sandbox/src/vendor/casting/world/DuelHall.js",
+      "reference": "./textures/duelhall/",
+      "publicFile": "packs/sandbox/public/textures/duelhall",
+      "exists": false
+    }
+  ],
+  "licenseFiles": [
+    {
+      "path": "packs/sandbox/LICENSE",
+      "sha256": "de0205a4245c21d41c5ef20dc9262b1c85e4e97096c2f62272677472b4ca5233",
+      "text": "MIT License\n\nCopyright (c) 2026 mohamedachrefelouafi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n---\nThe Collective Originals (src/abilities/collective, src/config/collective,\nsrc/materials/collective, src/assets/collective) are Copyright (c) 2026\nCollective AI Inc. and released under the same MIT terms as above.\n"
+    },
+    {
+      "path": "packs/linear/LICENSE",
+      "sha256": "fa655f413edefb7d5416d743714e4cdd7899134b2fb4003732b2ef9eecac4fd4",
+      "text": "MIT License\n\nCopyright (c) 2026 mohamedachrefelouafi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    {
+      "path": "packs/linear-extended/LICENSE",
+      "sha256": "fa655f413edefb7d5416d743714e4cdd7899134b2fb4003732b2ef9eecac4fd4",
+      "text": "MIT License\n\nCopyright (c) 2026 mohamedachrefelouafi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    {
+      "path": "packs/linear-ext/LICENSE",
+      "sha256": "fa655f413edefb7d5416d743714e4cdd7899134b2fb4003732b2ef9eecac4fd4",
+      "text": "MIT License\n\nCopyright (c) 2026 mohamedachrefelouafi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    {
+      "path": "packs/handcast/LICENSE",
+      "sha256": "fa655f413edefb7d5416d743714e4cdd7899134b2fb4003732b2ef9eecac4fd4",
+      "text": "MIT License\n\nCopyright (c) 2026 mohamedachrefelouafi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    {
+      "path": "packs/collective/LICENSE",
+      "sha256": "de0205a4245c21d41c5ef20dc9262b1c85e4e97096c2f62272677472b4ca5233",
+      "text": "MIT License\n\nCopyright (c) 2026 mohamedachrefelouafi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\n---\nThe Collective Originals (src/abilities/collective, src/config/collective,\nsrc/materials/collective, src/assets/collective) are Copyright (c) 2026\nCollective AI Inc. and released under the same MIT terms as above.\n"
+    },
+    {
+      "path": "packs/casting/LICENSE",
+      "sha256": "fa655f413edefb7d5416d743714e4cdd7899134b2fb4003732b2ef9eecac4fd4",
+      "text": "MIT License\n\nCopyright (c) 2026 mohamedachrefelouafi\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    {
+      "path": "presets/new/LICENSE",
+      "sha256": "d0f804cea0adfd912c8b6bf0c77a1e6b5eeb09241d25da7a55a1413d47dafb03",
+      "text": "MIT License\n\nCopyright (c) 2026 Ability Atlas contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof the newly authored Ability Atlas integration and procedural preset code\nand associated documentation files (the \"Software\"), to deal in the Software\nwithout restriction, including without limitation the rights to use, copy,\nmodify, merge, publish, distribute, sublicense, and/or sell copies of the\nSoftware, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nThis license does not relicense upstream code or third-party assets. Original\nlicenses and notices remain with the existing source packs under packs/.\n"
+    }
+  ],
+  "licensingCaveat": "Source packs carry MIT notices; presets/new/LICENSE expressly does not relicense upstream code or third-party assets. README calls the character FBX files Mixamo exports and identifies only the ambientCG Rock030 texture scan as CC0, but no complete per-model/probe/texture provenance and license manifest was found. This inventory does not establish asset redistribution clearance.",
+  "testedRevision": "8c4b5d0bfc75a98388ea29231b9cf1d304dff550"
+}

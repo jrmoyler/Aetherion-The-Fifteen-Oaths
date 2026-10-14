@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aetherion-phase2/schemas/region-blueprint-index.schema.json",
+  "$comment": "Planning-package schema identifier, not a hosted service.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capital_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_document": {
+            "type": "string",
+            "minLength": 1
+          },
+          "capital_document": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline_poi_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "new_poi_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "settlement_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "architecture_kit_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_sections": {
+            "type": "array",
+            "prefixItems": [
+              {
+                "const": "terrain"
+              },
+              {
+                "const": "capital"
+              },
+              {
+                "const": "settlements"
+              },
+              {
+                "const": "villages"
+              },
+              {
+                "const": "outposts"
+              },
+              {
+                "const": "architecture"
+              },
+              {
+                "const": "infrastructure"
+              },
+              {
+                "const": "civilian"
+              },
+              {
+                "const": "commercial"
+              },
+              {
+                "const": "military"
+              },
+              {
+                "const": "institution"
+              },
+              {
+                "const": "sacred"
+              },
+              {
+                "const": "underground"
+              },
+              {
+                "const": "landmarks"
+              },
+              {
+                "const": "routes"
+              },
+              {
+                "const": "habitats"
+              },
+              {
+                "const": "resources"
+              },
+              {
+                "const": "dungeon"
+              },
+              {
+                "const": "worldboss"
+              },
+              {
+                "const": "secret"
+              },
+              {
+                "const": "housing"
+              },
+              {
+                "const": "events"
+              },
+              {
+                "const": "pvp"
+              },
+              {
+                "const": "hazards"
+              },
+              {
+                "const": "weather"
+              },
+              {
+                "const": "daynight"
+              },
+              {
+                "const": "ambient"
+              },
+              {
+                "const": "npc_routines"
+              }
+            ],
+            "items": false,
+            "minItems": 28,
+            "maxItems": 28
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "region_id",
+          "oath_id",
+          "capital_id",
+          "region_document",
+          "capital_document",
+          "baseline_poi_ids",
+          "new_poi_ids",
+          "settlement_ids",
+          "architecture_kit_id",
+          "required_sections",
+          "source_refs"
+        ]
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "canon_status",
+    "records"
+  ]
+}

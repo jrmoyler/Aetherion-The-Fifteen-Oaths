@@ -1,0 +1,157 @@
+{
+  "status": "UNAPPROVED_INDEPENDENT_PIXEL_REVIEW",
+  "verdict": "CONCRETE_SCOPED_GEOMETRY_LIKENESS_IMPROVEMENT",
+  "visualApproval": false,
+  "productionPromotion": false,
+  "inspectedComparisonViews": 8,
+  "actualRenderHashesVerified": 16,
+  "matchingCameraMetadataPairs": 8,
+  "scope": "Left ceramic bracer only, original090 and matched V15/V16 rendered views. No independent engine/rig/animation-preservation test in this pixel review.",
+  "improvements": [
+    "Continuous broad ceramic plate with closed top/bottom and rounded perimeter replaces literal ladder.",
+    "Three recessed rounded rectangular apertures read clearly at body and closeup distances.",
+    "Final endcaps no longer have early diagonal folded faces; latches moved off aperture interiors.",
+    "Side hinge knuckles, through-pin silhouettes and latch tabs materially improve distinct attachment construction.",
+    "Cast pose retains forearm-following plate and visible wrist separation; no obvious new harmful intersection visible in inspected pixels."
+  ],
+  "remainingGaps": [
+    "Far view retention bands are coarse and broad; lower band edge stands proud of sleeve and reads like a stiff collar. This is a fit/finish gap, not proven harmful clipping.",
+    "Ceramic slots/spacing and overall plate proportions are simplified relative to illustration; latch is recognizable but still generic versus reference side-spine/hinge assembly.",
+    "Pitting is fairly uniform; reference has richer dark recesses, worn edges and iron roughness variation.",
+    "Closeups do not establish strap compression, exact attachment mechanics, all-frame deformation/collision, or true wrist range.",
+    "Existing whole-character hair/face/mask/cape/chest/boot/equipment defects persist; no whole-character likeness claim."
+  ],
+  "rejectedRegressions": "Early endcap folds and latch/slot overlap were corrected in final views; final broad proud bands remain explicitly open. No gross new silhouette or visible cast-wrist clipping regression found in the eight matched views.",
+  "inputs": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "bytes": 2129998,
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/render-evidence.json",
+      "bytes": 6883,
+      "sha256": "86b5c42ed548ea0aaf731df5aa22df0784f7082bd1ed688c8e1a4eacac35a312"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-front.png",
+      "bytes": 438711,
+      "sha256": "25271ed5ecf8cd1eee7547ed8005f6eb79a80e93618c4e5143f80a996e57bacb"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-back.png",
+      "bytes": 427219,
+      "sha256": "a7e45dec1f98a75d163823a34f24cf72082a463525bdb68c92452f0a779ffea9"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-side.png",
+      "bytes": 368925,
+      "sha256": "71555b157a8863e48a3d45fa67080ae20585ff8fa8938dbae7aadffaf49b8e9c"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-hero.png",
+      "bytes": 600986,
+      "sha256": "f871d1999478581348691aa0e22f2783afc8770ca1eebfbfadda584b1ce6b4c8"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-bracer-front.png",
+      "bytes": 470984,
+      "sha256": "ef52454b084ff48628ed4d15da295e0c33efcc7de0cc4654e2b828769da7c7e1"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-bracer-near.png",
+      "bytes": 606199,
+      "sha256": "3cfffe1691fadb5043550da1f8fd8cc60e91c4c9375382c5db22b93bd1dc2a8c"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-front.png",
+      "bytes": 438029,
+      "sha256": "f68ae55486124e9edbf853f29edeb940262689af1abd5758e8a202fa99d246c8"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-back.png",
+      "bytes": 426651,
+      "sha256": "1a578a25a95a6a1c4a44a04c95a7de9fa294e1feec95a71b675f441fa26aabec"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-side.png",
+      "bytes": 369643,
+      "sha256": "95aa52ca91e0efe39a0226a5295998283e1d16fc5c301604663fd80f0a417ee1"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-hero.png",
+      "bytes": 600593,
+      "sha256": "667a564256e331d29d03647d1a09c2e22580d292cdfd38046bf06174fc6106da"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-bracer-front.png",
+      "bytes": 469240,
+      "sha256": "1316340f90fbeb3a84170effdb82008a330d2173898e1233fa74e5a245fea024"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-bracer-near.png",
+      "bytes": 605111,
+      "sha256": "4944217384a8d40d3f590d2d9aa9c2b207ae8dea08f6483007b96bc310a9e5ab"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-bracer-far.png",
+      "bytes": 531839,
+      "sha256": "e740587db9277711ca5f70644f7e49c9a617db1cb149cb555f3e105823b62a9d"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v15-cast.png",
+      "bytes": 578107,
+      "sha256": "9f361a50334ce421be8b3f5a7df14702b1ebdd4f9a2d11d2c385833a3d01ea51"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-bracer-far.png",
+      "bytes": 518136,
+      "sha256": "34ab2cbaf8192c7096676143a550ca0769c657dda77d56a0bfc1750ff5694b4f"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/renders/v16-cast.png",
+      "bytes": 578974,
+      "sha256": "740f2e270aaaa58f0f0b19d7473fe7ce07e54867aab6bfc2cd7b2921c99160c4"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/front.png",
+      "bytes": 377701,
+      "sha256": "79e6f888c25f12435d6b61f464cc7ca6747ca365aa499e02a67bc17eb7ce35a3"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/back.png",
+      "bytes": 365155,
+      "sha256": "b3beb4042f3218bfa89b0fc634e58295f58e7160baa663c169558959d0c2b3c5"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/side.png",
+      "bytes": 310846,
+      "sha256": "e999a4793f990bf1aa34a19f66b9274b4adf477902f31bd524fe7c9ec88b851f"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/hero.png",
+      "bytes": 564821,
+      "sha256": "2d5f4a8b7612a7039572232cd20f8b4e69e7f5d96a5f407c75ecf9d6dc660161"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/bracer-front.png",
+      "bytes": 664251,
+      "sha256": "c7e99996c93b1e1201ec4998991805bfebe57abdcf1e8da09864d77dee4e7d5f"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/bracer-near.png",
+      "bytes": 901947,
+      "sha256": "5ed60cfb81448e292eed39a7d1cebbaee5ab22f582c587516a720bccd1aa9b34"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/bracer-far.png",
+      "bytes": 669749,
+      "sha256": "479f306e898bfbf714653f915b407aa8ea99331ecfcb6f47e7745c31bcfb5dae"
+    },
+    {
+      "path": "/workspace/scratch/ninja-v16/comparisons/cast.png",
+      "bytes": 545862,
+      "sha256": "348b18dd2b8c3cd121a7643884b41c2adf39a54e97749ea664d2e4f14bc5d391"
+    }
+  ]
+}

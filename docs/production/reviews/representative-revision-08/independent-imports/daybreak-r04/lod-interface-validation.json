@@ -1,0 +1,100 @@
+{
+  "scope": "Actual saved Blender LOD geometry envelope, visible aperture rays and stair tread samples; no controller traversal certification",
+  "checks": [
+    {
+      "check": "shade-canopy all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.22450000047683716,
+              0.23500001430511475,
+              0.045068927109241486
+            ],
+            [
+              3.7755000591278076,
+              3.765000104904175,
+              0.3175605535507202
+            ]
+          ],
+          "1": [
+            [
+              0.22450000047683716,
+              0.23500001430511475,
+              0.04510548710823059
+            ],
+            [
+              3.7755000591278076,
+              3.765000104904175,
+              0.3175913691520691
+            ]
+          ],
+          "2": [
+            [
+              0.22450000047683716,
+              0.23500001430511475,
+              0.045217808336019516
+            ],
+            [
+              3.7755000591278076,
+              3.765000104904175,
+              0.31768256425857544
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0001488812267780304,
+        "tolerance_m": 0.00025,
+        "policy": "All corner fittings retained. Subdivision-dependent textile solidify normals may differ within0.25mm; structural bay endpoints and typed sockets remain exact."
+      }
+    },
+    {
+      "check": "public-colonnade all LOD socket envelope",
+      "passed": true,
+      "evidence": {
+        "bounds_blender_m": {
+          "0": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0,
+              3.7800002098083496
+            ]
+          ],
+          "1": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0,
+              3.7800002098083496
+            ]
+          ],
+          "2": [
+            [
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              4.0,
+              4.0,
+              3.7800002098083496
+            ]
+          ]
+        },
+        "maximum_delta_m": 0.0,
+        "tolerance_m": 0.00025,
+        "policy": "All corner fittings retained. Subdivision-dependent textile solidify normals may differ within0.25mm; structural bay endpoints and typed sockets remain exact."
+      }
+    }
+  ],
+  "failures": 0
+}

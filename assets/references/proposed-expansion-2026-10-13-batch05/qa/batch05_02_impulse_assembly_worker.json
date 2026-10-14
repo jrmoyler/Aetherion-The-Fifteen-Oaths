@@ -1,0 +1,74 @@
+{
+  "concept_id": "batch05_02_impulse_assembly_worker",
+  "reported_group_qa": {
+    "selected_version": "v3",
+    "source_inspection_preview": "generated/batch05_02_impulse_assembly_worker_source_preview.png",
+    "unresolved_review_items": [
+      "PROPOSED derivative occupational design only; exact art approval is unresolved.",
+      "Image generation is not measured geometry, a sewing pattern, validated anatomy, a rig or a clip package.",
+      "One adult fitting form and outfit provide partial clothing-family coverage, not a full population or all occupational variants.",
+      "Faceted low-poly PBR intent was requested, but rendered cloth and anatomy are relatively smooth; exact game-style translation remains for art review.",
+      "All main views, flat lays, closure/pocket details, seated reach and crouch are represented. Small occluded details and fingers cannot all be established reliably at sheet resolution.",
+      "No original artwork, source registry, repository file, model, rig or scene was modified.",
+      "Faint rear seat-pocket-like outlines remain ambiguous at image resolution; do not count the no-seat-pocket construction as verified.",
+      "A small orange fleck near the rear outer thigh persists; exact two-tab count is not verified in every body view.",
+      "Cargo-pocket top-edge/flap interpretation differs slightly between body and close-up views.",
+      "Compact bib plus full-length leg interpretation of short overalls requires art approval."
+    ]
+  },
+  "versions": [
+    {
+      "version": "v1",
+      "qa": {
+        "status": "PRESERVED_SUPERSEDED_OR_UNSUCCESSFUL_VARIANT",
+        "qa": {
+          "passed": [
+            "Civilian heavy-cloth overalls, restrained orange tabs, flexible shoes and soft knee panels are present.",
+            "Views and work-pose coverage present."
+          ],
+          "unresolved": [
+            "Erroneous bib/chest pocket and rear seat-pocket shapes violate the intended two-pocket count.",
+            "Small brass-colored rivets and side marks violate the intended two-buckle closure specification.",
+            "Rear flat lay omits the side-pocket/tab silhouette."
+          ]
+        }
+      }
+    },
+    {
+      "version": "v2",
+      "qa": {
+        "status": "PRESERVED_SUPERSEDED_OR_UNSUCCESSFUL_VARIANT",
+        "qa": {
+          "passed": [
+            "Visible chest pocket was removed; flat lay bib is plain.",
+            "Large erroneous rivets reduced; rear flat lay now includes outer-thigh cargo-pocket edges and tabs."
+          ],
+          "unresolved": [
+            "Rear body view still shows faint seat-pocket-like U/rectangular seams.",
+            "Small orange fleck above a rear cargo pocket persists.",
+            "Some main body cargo pockets read flap-like while detail/flat lays read open-top; construction is not locked."
+          ]
+        }
+      }
+    },
+    {
+      "version": "v3",
+      "qa": {
+        "status": "PROPOSED_REVIEW_CANDIDATE",
+        "qa": {
+          "passed": [
+            "Bib remains plain, two shoulder buckles and two cloth knee panels retained.",
+            "Rear flat-lay side-pocket/tab omissions are corrected.",
+            "Rear seat surfaces have been simplified by a second targeted correction."
+          ],
+          "unresolved": [
+            "Faint rear seat-pocket-like outlines remain ambiguous at image resolution; do not count the no-seat-pocket construction as verified.",
+            "A small orange fleck near the rear outer thigh persists; exact two-tab count is not verified in every body view.",
+            "Cargo-pocket top-edge/flap interpretation differs slightly between body and close-up views.",
+            "Compact bib plus full-length leg interpretation of short overalls requires art approval."
+          ]
+        }
+      }
+    }
+  ]
+}

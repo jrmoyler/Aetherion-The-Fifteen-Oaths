@@ -1,0 +1,50 @@
+{
+  "concept_id": "batch04_03_reed_civilian",
+  "reported_group_qa": {
+    "selected_version": "v02",
+    "reference_pixels_inspected": true,
+    "pixel_qa": {
+      "method": "Human visual inspection of original reference previews and all generated output pixels; no automatic all-pass claim",
+      "selected_version": "v02",
+      "result": "PARTIAL_CONCEPT_PASS_CONSTRUCTION_REVIEW_REQUIRED",
+      "checks": [
+        "Six full-body turnaround views, separate opposing profiles and working poses present",
+        "Corrected tucked waist tie eliminates long red tie tails",
+        "Soft linen shuttle pocket replaces rigid multi-tube rack",
+        "Ivory soft smock, rolled sleeves, gussets and design-intent footer present"
+      ],
+      "unresolved_inconsistencies": [
+        "Main front and rear standing views keep left-side pocket, but rear garment flat lay moves pocket to viewer right (anatomical right)",
+        "Right profile shows a pouch-like projection, so hidden-side occlusion needs review",
+        "Crouch pose still has fabric pooling near ground; hem work clearance not validated",
+        "Close-up pocket appears to hold multiple wooden elements, not unequivocally one shuttle",
+        "Seam paths and exact proportions not mechanically consistent enough for modeling approval"
+      ]
+    }
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "pixel_qa_rejection_reasons": [
+          "Long waist-tie ends",
+          "Rigid tube-rack shuttle case",
+          "Rear-right three-quarter pouch side drift",
+          "Missing requested review footer"
+        ]
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "pixel_qa_unresolved": [
+          "Main front and rear standing views keep left-side pocket, but rear garment flat lay moves pocket to viewer right (anatomical right)",
+          "Right profile shows a pouch-like projection, so hidden-side occlusion needs review",
+          "Crouch pose still has fabric pooling near ground; hem work clearance not validated",
+          "Close-up pocket appears to hold multiple wooden elements, not unequivocally one shuttle",
+          "Seam paths and exact proportions not mechanically consistent enough for modeling approval"
+        ]
+      }
+    }
+  ]
+}

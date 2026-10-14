@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o11-e-weapons-family",
+  "referenceIds": [
+    "reference-041"
+  ],
+  "assets": [
+    {
+      "id": "prod-o11-void-cleaver",
+      "archetypeId": "prod-o11-void-cleaver",
+      "name": "Void Cleaver",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-11/weapons/void-cleaver/void-cleaver.blend",
+        "glb": "assets/production/oath-11/weapons/void-cleaver/void-cleaver.glb",
+        "lod1": "assets/production/oath-11/weapons/void-cleaver/void-cleaver_lod1.glb",
+        "lod2": "assets/production/oath-11/weapons/void-cleaver/void-cleaver_lod2.glb",
+        "collision": "assets/production/oath-11/weapons/void-cleaver/void-cleaver_collision.glb",
+        "textures": [
+          "assets/production/oath-11/weapons/pale_silver_basecolor.png",
+          "assets/production/oath-11/weapons/pale_silver_roughness.png",
+          "assets/production/oath-11/weapons/pale_silver_metallic.png",
+          "assets/production/oath-11/weapons/pale_silver_normal.png",
+          "assets/production/oath-11/weapons/red_cloth_basecolor.png",
+          "assets/production/oath-11/weapons/red_cloth_roughness.png",
+          "assets/production/oath-11/weapons/red_cloth_metallic.png",
+          "assets/production/oath-11/weapons/red_cloth_normal.png",
+          "assets/production/oath-11/weapons/weathered_iron_basecolor.png",
+          "assets/production/oath-11/weapons/weathered_iron_roughness.png",
+          "assets/production/oath-11/weapons/weathered_iron_metallic.png",
+          "assets/production/oath-11/weapons/weathered_iron_normal.png",
+          "assets/production/oath-11/weapons/charcoal_leather_basecolor.png",
+          "assets/production/oath-11/weapons/charcoal_leather_roughness.png",
+          "assets/production/oath-11/weapons/charcoal_leather_metallic.png",
+          "assets/production/oath-11/weapons/charcoal_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-11/weapons/void-cleaver/front.png",
+          "assets/production/oath-11/weapons/void-cleaver/side.png",
+          "assets/production/oath-11/weapons/void-cleaver/hero.png"
+        ]
+      },
+      "dimensionsMeters": [
+        0.373,
+        0.078,
+        1.236
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner reference-041 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Tassel secondary motion and void focus VFX/audio"
+      ],
+      "triangles": {
+        "glb": 1810,
+        "lod1": 980,
+        "lod2": 477,
+        "collision": 98
+      }
+    },
+    {
+      "id": "prod-o11-missing-court-lotus-focus",
+      "archetypeId": "prod-o11-missing-court-lotus-focus",
+      "name": "Missing Court Lotus Focus",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus.blend",
+        "glb": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus.glb",
+        "lod1": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus_lod1.glb",
+        "lod2": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus_lod2.glb",
+        "collision": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus_collision.glb",
+        "textures": [
+          "assets/production/oath-11/weapons/pale_silver_basecolor.png",
+          "assets/production/oath-11/weapons/pale_silver_roughness.png",
+          "assets/production/oath-11/weapons/pale_silver_metallic.png",
+          "assets/production/oath-11/weapons/pale_silver_normal.png",
+          "assets/production/oath-11/weapons/red_cloth_basecolor.png",
+          "assets/production/oath-11/weapons/red_cloth_roughness.png",
+          "assets/production/oath-11/weapons/red_cloth_metallic.png",
+          "assets/production/oath-11/weapons/red_cloth_normal.png",
+          "assets/production/oath-11/weapons/weathered_iron_basecolor.png",
+          "assets/production/oath-11/weapons/weathered_iron_roughness.png",
+          "assets/production/oath-11/weapons/weathered_iron_metallic.png",
+          "assets/production/oath-11/weapons/weathered_iron_normal.png",
+          "assets/production/oath-11/weapons/charcoal_leather_basecolor.png",
+          "assets/production/oath-11/weapons/charcoal_leather_roughness.png",
+          "assets/production/oath-11/weapons/charcoal_leather_metallic.png",
+          "assets/production/oath-11/weapons/charcoal_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-11/weapons/missing-court-lotus-focus/front.png",
+          "assets/production/oath-11/weapons/missing-court-lotus-focus/side.png",
+          "assets/production/oath-11/weapons/missing-court-lotus-focus/hero.png"
+        ]
+      },
+      "dimensionsMeters": [
+        0.3503,
+        0.3441,
+        1.1272
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner reference-041 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Tassel secondary motion and void focus VFX/audio"
+      ],
+      "triangles": {
+        "glb": 4488,
+        "lod1": 2446,
+        "lod2": 1210,
+        "collision": 224
+      }
+    }
+  ]
+}

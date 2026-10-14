@@ -1,0 +1,385 @@
+{
+  "revision": "ef28c950ecaae540d64674cc5c54af3c75360b97",
+  "startedAt": "2026-10-13T23:10:26.990767+00:00",
+  "checkout": "/tmp/aetherion-release-verification",
+  "initialCheckoutClean": true,
+  "scope": "Local supplied checkpoint, fresh locked dependency installs; no fetch, clone, push, merge or deployment performed.",
+  "limitations": [
+    "No GPU/browser-render, visual approval, target-device performance, complete gameplay or Unreal/Godot engine execution is certified by this runner. Engine validators must run separately against the same SHA.",
+    "A local HEAD match does not prove a remote branch points to that SHA; capture remote evidence separately.",
+    "Art approvals remain separate from format, CPU, HTTP and static planning checks."
+  ],
+  "runnerSHA256": "77c98cb550eb60d4da8178d70f467757c7701887410d22ec702f777118cc8e84",
+  "before": {
+    "sourceFiles": 1896,
+    "sourceBytes": 331989108,
+    "sourceMismatches": [],
+    "phaseIIArchiveBytes": 1011575,
+    "phaseIIArchiveSHA256": "02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc",
+    "phaseIIPayloadFiles": 115,
+    "phaseIIPayloadMismatches": [],
+    "pass": true
+  },
+  "committedPreviewSnapshot": {
+    "sourceSnapshot": "2026-10-13T23:09:31.221Z",
+    "mismatches": []
+  },
+  "after": {
+    "sourceFiles": 1896,
+    "sourceBytes": 331989108,
+    "sourceMismatches": [],
+    "phaseIIArchiveBytes": 1011575,
+    "phaseIIArchiveSHA256": "02306b20f0c070f6fe488d7bf2e4fa25412503010c037860fe3a2a91244be2bc",
+    "phaseIIPayloadFiles": 115,
+    "phaseIIPayloadMismatches": [],
+    "pass": true
+  },
+  "trackedFileMismatches": [],
+  "lockfileMismatches": [],
+  "finishedAt": "2026-10-13T23:11:30.934542+00:00",
+  "commands": [
+    {
+      "name": "inventory-before",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tools/production/inventory.py",
+        "--check"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:31.669056+00:00",
+      "log": "logs/inventory-before.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:34.034284+00:00",
+      "pass": true
+    },
+    {
+      "name": "install-runtime",
+      "argv": [
+        "npm",
+        "ci",
+        "--prefix",
+        "runtime/ability-matrix",
+        "--cache",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/scratch/npm-cache-runtime"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:34.034699+00:00",
+      "log": "logs/install-runtime.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:39.825725+00:00",
+      "pass": true
+    },
+    {
+      "name": "install-sandbox",
+      "argv": [
+        "npm",
+        "ci",
+        "--prefix",
+        "runtime/ability-matrix/packs/sandbox",
+        "--cache",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/scratch/npm-cache-sandbox"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:34.035096+00:00",
+      "log": "logs/install-sandbox.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:40.226808+00:00",
+      "pass": true
+    },
+    {
+      "name": "install-production",
+      "argv": [
+        "npm",
+        "ci",
+        "--prefix",
+        "tools/production",
+        "--cache",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/scratch/npm-cache-production"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:34.045673+00:00",
+      "log": "logs/install-production.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:35.385484+00:00",
+      "pass": true
+    },
+    {
+      "name": "install-preview",
+      "argv": [
+        "npm",
+        "ci",
+        "--prefix",
+        "app/production-preview",
+        "--cache",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/scratch/npm-cache-preview"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:34.046170+00:00",
+      "log": "logs/install-preview.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:40.230970+00:00",
+      "pass": true
+    },
+    {
+      "name": "production-python",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/production",
+        "-p",
+        "test_*.py"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:40.236214+00:00",
+      "log": "logs/production-python.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:43.186716+00:00",
+      "pass": true
+    },
+    {
+      "name": "importer",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/production"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:40.236514+00:00",
+      "log": "logs/importer.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:40.401491+00:00",
+      "pass": true
+    },
+    {
+      "name": "canon",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "AETHERION_CANON/19_VALIDATION/validate_canon.py",
+        "--repo",
+        ".",
+        "--output",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/canon.json"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:40.236983+00:00",
+      "log": "logs/canon.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:42.178742+00:00",
+      "pass": true
+    },
+    {
+      "name": "canon-fixtures",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "AETHERION_CANON/19_VALIDATION",
+        "-p",
+        "test_validator.py"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:40.237174+00:00",
+      "log": "logs/canon-fixtures.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:01.280665+00:00",
+      "pass": true
+    },
+    {
+      "name": "systems",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "AETHERION_CANON/18_IMPLEMENTATION_CONTRACTS/validate_systems.py",
+        "--repo-root",
+        ".",
+        "--output",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/systems.json"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:40.401595+00:00",
+      "log": "logs/systems.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:40.629307+00:00",
+      "pass": true
+    },
+    {
+      "name": "phase2",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-c",
+        "import importlib.util,json,pathlib,sys; p=pathlib.Path(sys.argv[1]);s=importlib.util.spec_from_file_location(\"phase2\",p);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);r=m.run(write=False);pathlib.Path(sys.argv[2]).write_text(json.dumps(r,indent=2)+\"\\n\");print(json.dumps(r[\"counts\"]));raise SystemExit(bool(r[\"counts\"].get(\"FAIL\")))",
+        "/tmp/aetherion-release-verification/AETHERION_CANON/21_WORLD_CONSTRUCTION_PHASE_II/validation/validate_phase2.py",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/phase2.json"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:40.629398+00:00",
+      "log": "logs/phase2.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:41.394977+00:00",
+      "pass": true
+    },
+    {
+      "name": "phase2-negative",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/aetherion-checkpoint-evidence-ef28c95/scratch/phase2-negative-package/validation/run_negative_fixtures.py"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:41.395060+00:00",
+      "log": "logs/phase2-negative.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:50.152657+00:00",
+      "pass": true
+    },
+    {
+      "name": "root",
+      "argv": [
+        "npm",
+        "test"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:42.178833+00:00",
+      "log": "logs/root.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:43.986152+00:00",
+      "pass": true
+    },
+    {
+      "name": "source",
+      "argv": [
+        "npm",
+        "run",
+        "test:source"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:43.186817+00:00",
+      "log": "logs/source.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:48.276310+00:00",
+      "pass": true
+    },
+    {
+      "name": "production-node",
+      "argv": [
+        "npm",
+        "--prefix",
+        "tools/production",
+        "test"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:10:43.986419+00:00",
+      "log": "logs/production-node.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:10:46.988440+00:00",
+      "pass": true
+    },
+    {
+      "name": "narrative",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "AETHERION_CANON/06_NARRATIVE/validate_world_narrative.py",
+        "AETHERION_CANON"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:11:01.281853+00:00",
+      "log": "logs/narrative.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:01.396265+00:00",
+      "pass": true
+    },
+    {
+      "name": "ability-build",
+      "argv": [
+        "npm",
+        "run",
+        "build:abilities"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:11:01.396912+00:00",
+      "log": "logs/ability-build.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:03.639804+00:00",
+      "pass": true
+    },
+    {
+      "name": "preview-snapshot",
+      "argv": [
+        "npm",
+        "run",
+        "validate:snapshot"
+      ],
+      "cwd": "/tmp/aetherion-release-verification/app/production-preview",
+      "startedAt": "2026-10-13T23:11:03.640553+00:00",
+      "log": "logs/preview-snapshot.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:19.040704+00:00",
+      "pass": true
+    },
+    {
+      "name": "deliverables",
+      "argv": [
+        "npm",
+        "--prefix",
+        "tools/production",
+        "run",
+        "validate:deliverables"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:11:19.043156+00:00",
+      "log": "logs/deliverables.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:25.538337+00:00",
+      "pass": true
+    },
+    {
+      "name": "ability-artifacts",
+      "argv": [
+        "node",
+        "tests/runtime-audit/verify-wrapper-build.mjs"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:11:25.545856+00:00",
+      "log": "logs/ability-artifacts.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:25.960759+00:00",
+      "pass": true
+    },
+    {
+      "name": "ability-http",
+      "argv": [
+        "node",
+        "tests/runtime-audit/check-wrapper-dev.mjs"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:11:25.961344+00:00",
+      "log": "logs/ability-http.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:26.978549+00:00",
+      "pass": true
+    },
+    {
+      "name": "inventory-after",
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tools/production/inventory.py",
+        "--check"
+      ],
+      "cwd": "/tmp/aetherion-release-verification",
+      "startedAt": "2026-10-13T23:11:26.979171+00:00",
+      "log": "logs/inventory-after.log",
+      "exitCode": 0,
+      "finishedAt": "2026-10-13T23:11:28.748252+00:00",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "blocked": [],
+  "status": "PASS"
+}

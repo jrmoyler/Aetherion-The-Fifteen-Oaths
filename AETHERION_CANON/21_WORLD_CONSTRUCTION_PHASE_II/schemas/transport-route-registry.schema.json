@@ -1,0 +1,330 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "records",
+    "mode_catalog",
+    "coastal_service"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "baseline_route_id",
+          "name",
+          "from_region_id",
+          "to_region_id",
+          "from_poi_id",
+          "to_poi_id",
+          "terrain_corridor",
+          "baseline_modes",
+          "optional_mode_keys",
+          "ordinary_oath_requirement",
+          "target_walk_minutes",
+          "target_foot_capacity_persons_per_hour",
+          "target_pack_capacity_loads_per_hour",
+          "ordinary_fare_target_abstract_credits",
+          "optional_fare_policy",
+          "closure_trigger",
+          "protected_local_bypass",
+          "detour_region_ids",
+          "detour_baseline_route_ids",
+          "detour_target_walk_minutes",
+          "detour_capacity_policy",
+          "cargo_from_origin",
+          "cargo_from_destination",
+          "operating_authority",
+          "measurement_status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "baseline_route_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from_region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to_region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from_poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to_poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "terrain_corridor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline_modes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "optional_mode_keys": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "ordinary_oath_requirement": {
+            "type": "string",
+            "minLength": 1
+          },
+          "target_walk_minutes": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "target_foot_capacity_persons_per_hour": {
+            "type": "number"
+          },
+          "target_pack_capacity_loads_per_hour": {
+            "type": "number"
+          },
+          "ordinary_fare_target_abstract_credits": {
+            "type": "number"
+          },
+          "optional_fare_policy": {
+            "type": "string",
+            "minLength": 1
+          },
+          "closure_trigger": {
+            "type": "string",
+            "minLength": 1
+          },
+          "protected_local_bypass": {
+            "type": "string",
+            "minLength": 1
+          },
+          "detour_region_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "detour_baseline_route_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "detour_target_walk_minutes": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "detour_capacity_policy": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cargo_from_origin": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "cargo_from_destination": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "operating_authority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "measurement_status": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "minItems": 30,
+      "maxItems": 30
+    },
+    "mode_catalog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "mode_key",
+          "name",
+          "fare_target_abstract_credits",
+          "capacity_target_persons_per_hour",
+          "access_rules",
+          "constraints",
+          "ordinary_fallback",
+          "measurement_status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "mode_key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fare_target_abstract_credits": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "capacity_target_persons_per_hour": {
+            "type": "number"
+          },
+          "access_rules": {
+            "type": "string",
+            "minLength": 1
+          },
+          "constraints": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ordinary_fallback": {
+            "type": "string",
+            "minLength": 1
+          },
+          "measurement_status": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "coastal_service": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "canon_status",
+        "source_ids",
+        "endpoint_poi_ids",
+        "mode_key",
+        "relationship",
+        "closure_detour"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canon_status": {
+          "const": "PROPOSED"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "endpoint_poi_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "mode_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relationship": {
+          "type": "string",
+          "minLength": 1
+        },
+        "closure_detour": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aetherion.example/proposed/transport-route-registry.schema.json",
+  "title": "TRANSPORT_ROUTE_REGISTRY.json closed structural schema"
+}

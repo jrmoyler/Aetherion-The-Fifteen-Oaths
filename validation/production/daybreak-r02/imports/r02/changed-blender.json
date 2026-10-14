@@ -1,0 +1,181 @@
+{
+  "blenderVersion": "4.3.2",
+  "scope": "Actual Blender open/import and evaluated mesh vertices; CPU only, no re-export or source writes",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/stairs-with-landing/source.blend",
+      "sha256": "0263cd592b5d4070b4a1a6498baab6e9dac006134b327d13968738d86d7b269a",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 60,
+      "materials": 8,
+      "images": 37,
+      "rest": {
+        "vertices": 632,
+        "finite": true,
+        "min": [
+          -0.18000000715255737,
+          -0.07999999821186066,
+          0.0
+        ],
+        "max": [
+          1.9800000190734863,
+          4.5,
+          2.740000009536743
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/source.blend",
+      "sha256": "1171845fafd719d86a8270e0dfce5f4406794002372bf7b4fd301b0648703f1c",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 46,
+      "materials": 5,
+      "images": 21,
+      "rest": {
+        "vertices": 504,
+        "finite": true,
+        "min": [
+          -0.18000000715255737,
+          -0.07999999821186066,
+          0.0
+        ],
+        "max": [
+          1.9800000190734863,
+          2.7799999713897705,
+          2.740000009536743
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/fixtures/stairs-with-landing/assembly.glb",
+      "sha256": "78a0516762b500bb525d570826fd7f94c0b62537c7d8586f2aa66d447d3fc0bd",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 56,
+      "materials": 7,
+      "images": 15,
+      "rest": {
+        "vertices": 1996,
+        "finite": true,
+        "min": [
+          -0.18000000715255737,
+          -0.07999999821186066,
+          0.0
+        ],
+        "max": [
+          1.9800000190734863,
+          4.5,
+          2.740000009536743
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/collision.glb",
+      "sha256": "879f782cc5401fca4333de87b7e809959970d97bf3d16512e9fd1ff892c8ad1d",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 3,
+      "materials": 1,
+      "images": 3,
+      "rest": {
+        "vertices": 66,
+        "finite": true,
+        "min": [
+          -0.18000000715255737,
+          -0.28039124608039856,
+          0.0
+        ],
+        "max": [
+          1.9800000190734863,
+          2.980391263961792,
+          2.6231603622436523
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/lod0.glb",
+      "sha256": "bd778a0d3e65120ead8cbf8769b6559fb9a6909034a66bb4a910ae7fdf784e7e",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 43,
+      "materials": 4,
+      "images": 12,
+      "rest": {
+        "vertices": 1612,
+        "finite": true,
+        "min": [
+          -0.18000000715255737,
+          -0.07999999821186066,
+          0.0
+        ],
+        "max": [
+          1.9800000190734863,
+          2.7799999713897705,
+          2.740000009536743
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/lod1.glb",
+      "sha256": "bd778a0d3e65120ead8cbf8769b6559fb9a6909034a66bb4a910ae7fdf784e7e",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 43,
+      "materials": 4,
+      "images": 12,
+      "rest": {
+        "vertices": 1612,
+        "finite": true,
+        "min": [
+          -0.18000000715255737,
+          -0.07999999821186066,
+          0.0
+        ],
+        "max": [
+          1.9800000190734863,
+          2.7799999713897705,
+          2.740000009536743
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r02/modules/stair-flight/lod2.glb",
+      "sha256": "3f7bb0e86483f209771de731de990577c650ebe1d18222c130d4212ea501b838",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 24,
+      "materials": 2,
+      "images": 6,
+      "rest": {
+        "vertices": 576,
+        "finite": true,
+        "min": [
+          -0.1599999964237213,
+          -0.05999999865889549,
+          0.0
+        ],
+        "max": [
+          1.959999918937683,
+          2.759999990463257,
+          2.700000047683716
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    }
+  ]
+}

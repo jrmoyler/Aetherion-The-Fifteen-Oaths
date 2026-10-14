@@ -1,0 +1,2407 @@
+{
+  "generatedAt": "2026-10-13T22:26:27.285Z",
+  "scope": "Read-only review copies; no GPU, appearance, collision-fit or production certification",
+  "textureDecode": "Three.js CPU placeholder textures; actual geometry/skins/animations loaded",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-impulse-shield-lateral-review07/impulse-shield-lateral-review07.glb",
+      "sha256": "24a99b69791acda8574d0dff9758d2dfe235c98c5d85083e2687e89b91d881f2",
+      "bytes": 4846080,
+      "status": "SCOPED_CPU_CHECKS_PASS",
+      "errors": [],
+      "khronos": {
+        "errors": 0,
+        "warnings": 312,
+        "issueCounts": {
+          "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE": 312
+        }
+      },
+      "weights": {
+        "weightedVertices": 52320,
+        "blendedVertices": 0,
+        "unweightedVertices": 0,
+        "negativeWeights": 0,
+        "invalidJointIndices": 0,
+        "maxWeightSumError": 0
+      },
+      "rest": {
+        "vertices": 52320,
+        "skinnedVertices": 52320,
+        "bounds": {
+          "min": [
+            -0.26499998569488525,
+            -0.09999999795870411,
+            -0.4749999780548067
+          ],
+          "max": [
+            0.26499998569488525,
+            0.04899999777532916,
+            0.4749999780548067
+          ],
+          "dimensionsMeters": [
+            0.5299999713897705,
+            0.14899999573403327,
+            0.9499999561096134
+          ]
+        },
+        "minBoneScale": 1,
+        "minScaleRatio": 1,
+        "maxScaleRatio": 1,
+        "minNodeScaleRatio": 1,
+        "maxNodeScaleRatio": 1,
+        "errors": []
+      },
+      "clips": [
+        {
+          "name": "hub_retract_then_sequenced_lateral_fold",
+          "durationSeconds": 7.541666507720947,
+          "trackCount": 24,
+          "timeRange": [
+            0.0416666679084301,
+            7.541666507720947
+          ],
+          "scaleTracks": [
+            {
+              "name": "carrier.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "hub_slide.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "left_lift.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "left_wing.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "lift_stage_1.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "lift_stage_2.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "lift_stage_3.scale",
+              "minimum": 1,
+              "maximum": 1
+            },
+            {
+              "name": "right_wing.scale",
+              "minimum": 1,
+              "maximum": 1
+            }
+          ],
+          "samples": [
+            {
+              "time": 0,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.04899999777532916,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.14899999573403327,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.09310699392248083,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.054191366949198266,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.15419136490790236,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.18621398784496165,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.09888272226863323,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.19888272022733733,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.27932098176744247,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.14357407922167792,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.24357407718038204,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.3724279756899233,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.18826543145970007,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.28826542941840416,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.46553496961240415,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.2329567740395627,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.3329567719982668,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.5586419635348849,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26594875458761397,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.26949999859664975,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5309487402824993,
+                  0.36949999655535387,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.6517489574573658,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26125122146913904,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.3155199432488812,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5262512071640243,
+                  0.41551994120758534,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.7448559513798466,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.24030679917281889,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.365488459447312,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5053067848677042,
+                  0.46548845740601613,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.8379629453023274,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.20489472334384373,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.40673571150217885,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.469894709038729,
+                  0.506735709460883,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 0.9310699392248083,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.15971612355401882,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.43692107614767695,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.4247161092489041,
+                  0.536921074106381,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.024176933147289,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.11580801481026659,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.4519917644377371,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.38080800050515184,
+                  0.5519917623964412,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.1172839270697699,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.45293608956611797,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.552936087524822,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.2103909209922508,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.4378696778420521,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.5378696758007562,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.3034979149147317,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.40752324767989134,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.5075232456385954,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.3966049088372123,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.36447472246417545,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4644747204228796,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.4897119027596932,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.3177620554376127,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.41776205339631683,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.5828188966821741,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.6759258906046548,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.7690328845271357,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.8621398784496166,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 1.9552468723720973,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.048353866294578,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26544011091707226,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37744011437414166,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.141460860217059,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26258817829378905,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37458818175085845,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.2345678541395397,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.24337576675144046,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.35537577020850986,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.3276748480620206,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.20943499217504374,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.32143499563211314,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.4207818419845015,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.16468551189274683,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.2766855153498162,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.5138888359069824,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.6069958298294633,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.7001028237519438,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.7932098176744247,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.8863168115969056,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 2.9794238055193865,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.11875792526662929,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.2437579123761919,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.0725307994418674,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.29124753393218394,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.39124753189088807,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.1656377933643483,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.25866012547610945,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.35866012343481357,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.2587447872868287,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.2260726583353534,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.3260726562940575,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.3518517812093096,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.19348518825121436,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.2934851862099185,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.4449587751317905,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.16089775635821635,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.26089775431692047,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.5380657690542714,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.12831034275109748,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.2283103407098016,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.6311727629767523,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.127050003132451,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.22705000109115508,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.724279756899233,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.127050003132451,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.22705000109115508,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.817386750821714,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.127050003132451,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.22705000109115508,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 3.9104937447441945,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.127050003132451,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.22705000109115508,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.003600738666676,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.127050003132451,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.22705000109115508,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.096707732589156,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.14631433908381436,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.24631433704251848,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.189814726511638,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.1789018196545638,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.27890181761326793,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.282921720434118,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.21148931564081097,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.3114893135995151,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.3760287143565995,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.24407672479567455,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.34407672275437867,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.4691357082790795,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12499998710956262,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.2766641166577821,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24999997421912523,
+                  0.37666411461648625,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.562242702201561,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.12375298251995834,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.24875296962952095,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.655349696124041,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.748456690046522,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.841563683969003,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 4.934670677891484,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.027777671813965,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.12499998710956262,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.236999990566632,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.120884665736446,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.14400316092591317,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.25600316438298254,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.213991659658927,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.19019733627289304,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.30219733972996243,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.3070986535814075,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.22986221825416986,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.34186222171123926,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.4002056475038875,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.2559466808925994,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.3679466843496688,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.493312641426369,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26623485094445876,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37823485440152815,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.586419635348849,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.679526629271331,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.772633623193811,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.865740617116292,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 5.958847611038773,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30204999416222406,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4020499921209282,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.051954604961254,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.30310056996878826,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.4031005679274924,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.145061598883735,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.34418145666266764,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.44418145462137176,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.238168592806216,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.3896323426634669,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.48963234062217104,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.3312755867286965,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.42605238069008056,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.5260523786487846,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.424382580651177,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.4481963788834604,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.5481963768421645,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.517489574573657,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1120000034570694,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.45418303288124884,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.37699998915195465,
+                  0.5541830308399529,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.610596568496139,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.1386872694906408,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.44565249440110455,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.40368725518552606,
+                  0.5456524923598086,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.703703562418619,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.18511718031655267,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.4219396114854553,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.4501171660114379,
+                  0.5219396094441594,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.796810556341101,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.2260945111295482,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.3851211666202506,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.49109449682443346,
+                  0.4851211645789547,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.889917550263581,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.25381142331430445,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.3387527955725468,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5188114090091898,
+                  0.4387527935312509,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 6.983024544186062,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26591347886170635,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.28590911319372203,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5309134645565916,
+                  0.38590911115242615,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 7.076131538108543,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.25295691424175476,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.3529569122004589,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 7.169238532031024,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.20826543631610941,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.3082654342748135,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 7.262345525953505,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.16357413214837413,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.26357413010707825,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 7.3554525198759855,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.11888283162309318,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.21888282958179728,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 7.448559513798466,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.074191490101563,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.17419148806026713,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            },
+            {
+              "time": 7.541666507720947,
+              "vertices": 52320,
+              "skinnedVertices": 52320,
+              "bounds": {
+                "min": [
+                  -0.26499998569488525,
+                  -0.09999999795870411,
+                  -0.4749999780548067
+                ],
+                "max": [
+                  0.26499998569488525,
+                  0.04899999777532916,
+                  0.4749999780548067
+                ],
+                "dimensionsMeters": [
+                  0.5299999713897705,
+                  0.14899999573403327,
+                  0.9499999561096134
+                ]
+              },
+              "minBoneScale": 1,
+              "minScaleRatio": 1,
+              "maxScaleRatio": 1,
+              "minNodeScaleRatio": 1,
+              "maxNodeScaleRatio": 1,
+              "errors": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

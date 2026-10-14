@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0.0",
+  "canon_status": "PROPOSED",
+  "source_ids": [
+    "SRC-SYSTEMS-PROPOSAL"
+  ],
+  "validation_scope": "STATIC_DATA_ONLY_NOT_GAMEPLAY_IMPLEMENTATION",
+  "checks": [
+    {
+      "id": "all-120-element-pairs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all-225-directed-entries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "neutral-defaults",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "individual-directional-predicates",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "fire-frost-distinct-target-gates",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bounded-interaction-cascades",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "no-universal-damage-advantage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "contract-json-schema",
+      "status": "PASS",
+      "detail": "Draft 2020-12 validator; structural pass only"
+    },
+    {
+      "id": "contract-reference-integrity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "contract-dependency-dag",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "contract-state-references",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "contract-tests-honestly-unexecuted",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all-trade-routes-follow-geography",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "trade-detours-exclude-interrupted-edge",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all-15-realms-have-typed-recipes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "recipe-imports-resolve-to-output-and-route",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "each-recipe-has-two-foreign-inputs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "every-refined-resource-has-consumer",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "actual-demand-is-separated-from-route-capacity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "production-has-nonzero-raw-and-labor-cost",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "fallback-cannot-feed-refined-loop",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all-100-real-castables-world-linked",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "castable-source-identity-preserved",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "castable-asset-family-references",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "castable-candidate-interaction-references",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "castable-implementation-contract-references",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "castable-source-paths-exist",
+      "status": "PASS",
+      "detail": "Source file presence only; no GPU or visual inference"
+    },
+    {
+      "id": "OATH_SYSTEM_PROFILES.json-all-fifteen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "WORLD_EVENT_REGISTRY.json-all-fifteen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "ECONOMY_REGISTRY.json-all-fifteen",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "HOUSING_PROFILES.json-all-fifteen",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "summary": {
+    "pass": 31,
+    "fail": 0,
+    "runtime_acceptance": "NOT_EXECUTED",
+    "human_review": "REQUIRED",
+    "gpu_visual": "NOT_TESTED_BY_THIS_SCRIPT"
+  }
+}

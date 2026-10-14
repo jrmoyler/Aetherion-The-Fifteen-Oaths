@@ -1,0 +1,54 @@
+{
+  "status": "NOT_EXACT_MIXED_RESULT_DIAGNOSTIC_ONLY",
+  "candidate": "Kiln ninja V8b legal-material repair",
+  "scope": "Actual original090 and V7/V8b final front/profile comparisons inspected. V8b repairs invalid V8 roughness export; independent import reports remain separate.",
+  "freezeReceiptSha256": "2ae1e787275780e25f429b2dd38a25362a567ac4a303ca79d51047816aee4b10",
+  "frozenInputs": 12,
+  "frozenInputMismatches": 0,
+  "inspectedImages": [
+    {
+      "path": "/tmp/ninja-v8b/front-comparison.png",
+      "bytes": 781957,
+      "sha256": "7f1b4471f45239562f7c5e8879a9eca37a9e1c173ed834d6aa56b907f40d4faa"
+    },
+    {
+      "path": "/tmp/ninja-v8b/profile-comparison.png",
+      "bytes": 780587,
+      "sha256": "bf750c46b6078c00844cff36041783d53a104fe1859128b30be9e94b328b8efa"
+    },
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "bytes": 2129998,
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+    }
+  ],
+  "improvements": [
+    "The large top crown opening visible in V7 is reduced.",
+    "More overlapping narrow clumps cover the upper side/back cap."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Hair mass and fringe",
+      "finding": "V8 has a flatter, closer-fitted cap and a repeated zigzag/toothed fringe. Smooth cap remains conspicuous over the front-right forehead. The source has a fuller asymmetric sweep and irregular layered clumps; V7 retained more volume in that area.",
+      "nextRepair": "Recover source front/side mass before subdividing more strands; fit a few broad guide clumps, then vary split points, curvature and length without repeating one bent-strip pattern."
+    },
+    {
+      "priority": 1,
+      "area": "Temple and nape coverage",
+      "finding": "Side/back hair ends as sparse long pointed vertical strips with large exposed scalp gaps. This is not the source dense backward-flowing temporal and nape structure.",
+      "nextRepair": "Build contiguous overlapping root coverage and shorter directional taper groups that turn with the skull; eliminate isolated dangling strips and exposed lower scalp bands."
+    },
+    {
+      "priority": 1,
+      "area": "Face unchanged from V7",
+      "finding": "Flat front eyes, bright profile white eye disk, wedge nose and soft lower-face profile remain visible. The V8 hair repair does not resolve those anatomy differences.",
+      "nextRepair": "Continue V7 eye seating/lid depth and connected nose/lip/chin contour corrections separately."
+    }
+  ],
+  "decision": "V8b is the latest legal-material repair experiment, with the same mixed visual outcome: crown coverage improves but fringe mass/pattern and nape gaps still differ. It is not a uniform fidelity upgrade or accepted character. Independent engine/material legality checks are separately required.",
+  "limitations": [
+    "Two final CPU images only; no full-body, rig-animation appearance, GPU/material or facial-expression certification.",
+    "Camera/light differences prevent calibrated numerical likeness claims."
+  ]
+}

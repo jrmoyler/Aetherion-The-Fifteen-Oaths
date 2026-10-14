@@ -1,0 +1,587 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_status",
+    "source_ids",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "canon_status",
+          "source_ids",
+          "refinement_of",
+          "region_id",
+          "oath_id",
+          "poi_id",
+          "name",
+          "narrative",
+          "trigger",
+          "location",
+          "npc_roles",
+          "player_roles",
+          "state_variables",
+          "phases",
+          "success_predicate",
+          "failure_predicate",
+          "success_result",
+          "setback_result",
+          "castable_interactions",
+          "rewards",
+          "consequences",
+          "recovery",
+          "reset",
+          "grief_limits",
+          "accessible_feedback",
+          "source_refs"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "world-event-01",
+              "world-event-02",
+              "world-event-03",
+              "world-event-04",
+              "world-event-05",
+              "world-event-06",
+              "world-event-07",
+              "world-event-08",
+              "world-event-09",
+              "world-event-10",
+              "world-event-11",
+              "world-event-12",
+              "world-event-13",
+              "world-event-14",
+              "world-event-15"
+            ]
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "refinement_of": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "poi_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "narrative": {
+            "type": "string",
+            "minLength": 1
+          },
+          "trigger": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "foundation_trigger",
+              "eligibility",
+              "required_state",
+              "weather_link",
+              "trigger_scope"
+            ],
+            "properties": {
+              "foundation_trigger": {
+                "type": "string",
+                "minLength": 1
+              },
+              "eligibility": {
+                "type": "string",
+                "minLength": 1
+              },
+              "required_state": {
+                "type": "string",
+                "minLength": 1
+              },
+              "weather_link": {
+                "type": "string",
+                "minLength": 1
+              },
+              "trigger_scope": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "location": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "hazard_poi_id",
+              "refuge_poi_id",
+              "habitat_poi_id",
+              "placement"
+            ],
+            "properties": {
+              "hazard_poi_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "refuge_poi_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "habitat_poi_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "placement": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "npc_roles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "character_id",
+                "name",
+                "task",
+                "refuge_poi_id"
+              ],
+              "properties": {
+                "character_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "task": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "refuge_poi_id": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "minItems": 1
+          },
+          "player_roles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "role",
+                "goal",
+                "binding_required"
+              ],
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "goal": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "binding_required": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "minItems": 1
+          },
+          "state_variables": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "type",
+                "initial",
+                "authority"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "initial": {
+                  "oneOf": [
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  ]
+                },
+                "authority": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "minItems": 1
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "duration_ms",
+                "entry_action",
+                "transition",
+                "reentry"
+              ],
+              "properties": {
+                "name": {
+                  "enum": [
+                    "forecast",
+                    "activation",
+                    "response",
+                    "resolution",
+                    "reconstruction",
+                    "cooldown"
+                  ]
+                },
+                "duration_ms": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "entry_action": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "transition": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "reentry": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "minItems": 6,
+            "maxItems": 6
+          },
+          "success_predicate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "failure_predicate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "success_result": {
+            "type": "string",
+            "minLength": 1
+          },
+          "setback_result": {
+            "type": "string",
+            "minLength": 1
+          },
+          "castable_interactions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "castable_world_id",
+                "source_uid",
+                "source_name",
+                "source_path",
+                "source_line",
+                "source_observation",
+                "proposed_event_use",
+                "status",
+                "enabled",
+                "activation_gates",
+                "ordinary_alternative"
+              ],
+              "properties": {
+                "castable_world_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_uid": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source_line": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "source_observation": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "proposed_event_use": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "status": {
+                  "const": "PROPOSED_ADAPTER_DISABLED"
+                },
+                "enabled": {
+                  "const": false
+                },
+                "activation_gates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "minItems": 1
+                },
+                "ordinary_alternative": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "minItems": 1
+          },
+          "rewards": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "budget_units",
+              "budget_unit_definition",
+              "allocation",
+              "receipt_key",
+              "missed_event",
+              "success_only_optional"
+            ],
+            "properties": {
+              "budget_units": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "budget_unit_definition": {
+                "type": "string",
+                "minLength": 1
+              },
+              "allocation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "receipt_key": {
+                "type": "string",
+                "minLength": 1
+              },
+              "missed_event": {
+                "type": "string",
+                "minLength": 1
+              },
+              "success_only_optional": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "consequences": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "economy_id",
+              "recipe_id",
+              "production_multiplier_bounds",
+              "modifier_duration_ms",
+              "ecology",
+              "infrastructure",
+              "housing",
+              "story"
+            ],
+            "properties": {
+              "economy_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "recipe_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "production_multiplier_bounds": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "minItems": 1
+              },
+              "modifier_duration_ms": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "ecology": {
+                "type": "string",
+                "minLength": 1
+              },
+              "infrastructure": {
+                "type": "string",
+                "minLength": 1
+              },
+              "housing": {
+                "type": "string",
+                "minLength": 1
+              },
+              "story": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "recovery": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "disconnect",
+              "server_restart",
+              "low_participation",
+              "missed_event"
+            ],
+            "properties": {
+              "disconnect": {
+                "type": "string",
+                "minLength": 1
+              },
+              "server_restart": {
+                "type": "string",
+                "minLength": 1
+              },
+              "low_participation": {
+                "type": "string",
+                "minLength": 1
+              },
+              "missed_event": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "reset": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "preserved",
+              "cleared",
+              "offline",
+              "duration_status"
+            ],
+            "properties": {
+              "preserved": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              },
+              "cleared": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              },
+              "offline": {
+                "type": "string",
+                "minLength": 1
+              },
+              "duration_status": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "grief_limits": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "accessible_feedback": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "minItems": 15,
+      "maxItems": 15
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PROPOSED Phase II world_event_registry"
+}

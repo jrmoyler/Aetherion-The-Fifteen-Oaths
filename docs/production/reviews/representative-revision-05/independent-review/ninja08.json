@@ -1,0 +1,64 @@
+{
+  "status": "NOT_EXACT_MIXED_RESULT_DIAGNOSTIC_ONLY",
+  "candidate": "Kiln ninja V8 final pass5",
+  "scope": "Actual original090 and frozen V7/V8 front/profile pixel comparison; no engine revalidation or candidate modifications.",
+  "freezeReceiptSha256": "db30849ca3f80dfb695fc3cea3753a88341b99176379b971533abf6466832d11",
+  "frozenInputs": 11,
+  "frozenInputMismatches": 0,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa",
+      "bytes": 2129998
+    },
+    {
+      "path": "/tmp/ninja-v8/front-comparison.png",
+      "sha256": "ebaf6d2be88fb12e5ae0f493d1e973fb40e9f1d9c3d097ffac64437e0c13b214",
+      "bytes": 781866
+    },
+    {
+      "path": "/tmp/ninja-v8/profile-comparison.png",
+      "sha256": "8e12cfd056e0d673936165d68e5d766c0c926fdeb77dfe77f2f810018ba36b68",
+      "bytes": 780967
+    },
+    {
+      "path": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png",
+      "sha256": "f00c8e1d587016b1a3cb998d178ffdfcd7d2bb6da3278e0bf3fef666f6f2cbc4",
+      "bytes": 790077
+    },
+    {
+      "path": "/tmp/ninja-v8/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+      "sha256": "80af3ec1e2b2aac7195d080da01c4960f8e5f91b105e2d35d5ea64bb91f6442c",
+      "bytes": 783261
+    }
+  ],
+  "improvements": [
+    "The large top crown opening visible in V7 is reduced.",
+    "More overlapping narrow clumps cover the upper side/back cap."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Hair mass and fringe",
+      "finding": "V8 has a flatter, closer-fitted cap and a repeated zigzag/toothed fringe. Smooth cap remains conspicuous over the front-right forehead. The source has a fuller asymmetric sweep and irregular layered clumps; V7 retained more volume in that area.",
+      "nextRepair": "Recover source front/side mass before subdividing more strands; fit a few broad guide clumps, then vary split points, curvature and length without repeating one bent-strip pattern."
+    },
+    {
+      "priority": 1,
+      "area": "Temple and nape coverage",
+      "finding": "Side/back hair ends as sparse long pointed vertical strips with large exposed scalp gaps. This is not the source dense backward-flowing temporal and nape structure.",
+      "nextRepair": "Build contiguous overlapping root coverage and shorter directional taper groups that turn with the skull; eliminate isolated dangling strips and exposed lower scalp bands."
+    },
+    {
+      "priority": 1,
+      "area": "Face unchanged from V7",
+      "finding": "Flat front eyes, bright profile white eye disk, wedge nose and soft lower-face profile remain visible. The V8 hair repair does not resolve those anatomy differences.",
+      "nextRepair": "Continue V7 eye seating/lid depth and connected nose/lip/chin contour corrections separately."
+    }
+  ],
+  "decision": "V8 is a mixed diagnostic result, not a uniform fidelity upgrade over V7. It may be published as the latest explicitly unapproved hair experiment with V7 comparison, but should not be described as the closer or accepted character. No full nineteen-view completion claim.",
+  "limitations": [
+    "Two final CPU images only; no full-body, rig-animation appearance, GPU/material or facial-expression certification.",
+    "Camera/light differences prevent calibrated numerical likeness claims."
+  ]
+}

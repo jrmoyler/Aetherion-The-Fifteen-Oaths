@@ -1,0 +1,93 @@
+{
+  "reviewedAtUtc": "2026-10-13T23:06:58.507612+00:00",
+  "status": "REVERSE_COVERAGE_REPAIRED_NOT_EXACT_NOT_APPROVED",
+  "method": "Independently inspected actual original032, all eight revision08b render PNGs, and revision08 stowed-hero. Scoped visual comparison, not registered image similarity or engineering acceptance.",
+  "views": [
+    "deployed-front",
+    "deployed-hero",
+    "intermediate",
+    "stowed-front",
+    "stowed-hero",
+    "hub-closeup",
+    "casing-closeup",
+    "deployed-back"
+  ],
+  "improvements": [
+    "Broad separate reverse armor now extends to the center waist; revision08 exposed-gray-casting regression is repaired in stowed and intermediate views.",
+    "Front stepped casings, paired mounting plates and segmented hub detail remain visible.",
+    "Added true deployed-back view exposes rear construction for candid assessment."
+  ],
+  "remainingDefects": [
+    {
+      "priority": "P1",
+      "area": "rear and stowed hardware",
+      "finding": "The broad reverse plates fix coverage but remain plain. Reference032 shows shaped rear framing, dense layered hardware, two detailed buckle straps and cable-like runs; the model has a broad plain center, circular back disk and simplified strap blocks. The stowed casing lacks the reference elongated orange feature and compact mechanical segmentation."
+    },
+    {
+      "priority": "P1",
+      "area": "hub and overall form",
+      "finding": "Hub remains relatively small and uniformly concentric; rear silhouette, layered transitions and source-specific mechanical construction remain simplified. No dimensional contradiction in source should be concealed by changing the fixed 95 cm height or treating 25 cm as collapsed height."
+    },
+    {
+      "priority": "P2",
+      "area": "material character",
+      "finding": "Visible finish is clean, evenly gray and orange accents appear salmon under these controls. Reference has darker gunmetal, saturated safety orange, localized chipped edges and stronger part-specific wear. Fine roughness speckle does not yet match that character."
+    },
+    {
+      "priority": "P2",
+      "area": "view and fit evidence",
+      "finding": "True deployed-back view is now supplied, but no true orthographic side or wearer-fit motion evidence. Normal-to-face carriage extension remains a proposed mechanism with unresolved wearer clearance/fit."
+    }
+  ],
+  "inspectedFiles": [
+    {
+      "path": "deployed-front.png",
+      "sha256": "cb307c6998908dcd706f5915fd9c727b973fc51cf940ff9056c8bbe3c56f736b"
+    },
+    {
+      "path": "deployed-hero.png",
+      "sha256": "272160eafdb31233d9248afc9dedaf9a7d8763e03060db4c96448b480f6fb1ae"
+    },
+    {
+      "path": "intermediate.png",
+      "sha256": "ee54ed37e656c4945f688be0003b34ff5fdd3447a0a71634fc0de797e800ddf8"
+    },
+    {
+      "path": "stowed-front.png",
+      "sha256": "2e10e47af083bcbea7a1be44182b4c7f3019df6270b6c17f1457fa3a114152ab"
+    },
+    {
+      "path": "stowed-hero.png",
+      "sha256": "5809aed1ca0c7e08bec7bee0d0b22d6f5ff0db055351652c3f8719a3fe3f16dd"
+    },
+    {
+      "path": "hub-closeup.png",
+      "sha256": "bfa62c6e02023a701f1302aeda5bb0f5e75653f6d2e14a0e445794b8e461a04d"
+    },
+    {
+      "path": "casing-closeup.png",
+      "sha256": "f6ae0273ed053d54e72a2e417aa8a92e12713b47475a98372be4ea9747d88be6"
+    },
+    {
+      "path": "deployed-back.png",
+      "sha256": "5f8d9e39057323d35dc5a083886eed652f56cfd5706f55712710782a6323d327"
+    },
+    {
+      "path": "reverse-coverage-comparison.png",
+      "sha256": "a89699b3bcaabc89025ee7cd43e8c24055d099123b1fb8ae743d6e122a86090d"
+    }
+  ],
+  "original032CopyMatches": true,
+  "hashVerification": {
+    "status": "ALL_LISTED_BYTES_MATCH",
+    "manifestSha256": "2eb4a60a600937d1ae0573d93e9c2ab346d23262db171a6085a78047f86a38af",
+    "files": 65,
+    "bytes": 38231946,
+    "mismatches": 0
+  },
+  "limits": [
+    "No visual acceptance, GPU appearance, Unreal import, structural or gameplay certification.",
+    "Separate actual Blender/Godot/Three CPU import and animation-bound evidence is in shield08b-* import-check reports.",
+    "Author-reported 721 sampled surface clearance states are not independently rerun by this review."
+  ]
+}

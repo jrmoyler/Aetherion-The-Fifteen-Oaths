@@ -1,0 +1,383 @@
+{
+  "status": "NOT_EXACT_REFERENCE_MATCH_NOT_VISUALLY_APPROVED",
+  "scope": "Independent bounded pixel comparison, not engine/physics/engineering certification",
+  "candidateFreezeSha256": "1e0017444b1c84cce5538de38843d3f87766f0a308aa541b8cbbb29ac4fb0092",
+  "freezeFilesVerified": 195,
+  "freezeFilesExpected": 195,
+  "freezeBytes": 376222967,
+  "sourceReferenceMatches": [
+    {
+      "candidate": "references/daybreak-clinic-threshold-door-proposed-v01.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-clinic-threshold-door-proposed-v01.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/daybreak-daylight-baffle-proposed-v02.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-daylight-baffle-proposed-v02.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/daybreak-foundation-floor-proposed-v01.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-foundation-floor-proposed-v01.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/daybreak-roof-canopy-proposed-v01.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-roof-canopy-proposed-v01.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/daybreak-stair-ramp-proposed-v01.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-stair-ramp-proposed-v01.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/daybreak-surface-trim-proposed-v01.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-surface-trim-proposed-v01.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/daybreak-wall-window-corner-proposed-v01.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/daybreak-wall-window-corner-proposed-v01.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "repository": "assets/references/proposed-expansion-2026-10-13/generated/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "matches": true
+    },
+    {
+      "candidate": "references/reference-105-original.png",
+      "repository": "assets/references/reference-105/original.png",
+      "matches": true
+    }
+  ],
+  "requiredModuleNames": [
+    "foundation-plinth",
+    "floor-bay",
+    "solid-wall",
+    "window-wall",
+    "inside-corner",
+    "outside-corner",
+    "door-frame",
+    "roof-bay",
+    "stair-flight",
+    "ramp-run",
+    "parapet",
+    "service-chase",
+    "public colonnade",
+    "shade canopy",
+    "clinic threshold",
+    "quiet portico",
+    "daylight baffle"
+  ],
+  "actualModuleNames": [
+    "foundation-plinth",
+    "floor-bay",
+    "solid-wall",
+    "window-wall",
+    "inside-corner",
+    "outside-corner",
+    "door-frame",
+    "roof-bay",
+    "stair-flight",
+    "ramp-run",
+    "parapet",
+    "service-chase",
+    "public colonnade",
+    "shade canopy",
+    "clinic threshold",
+    "quiet portico",
+    "daylight baffle"
+  ],
+  "missingModules": [],
+  "unexpectedModules": [],
+  "duplicateModules": [],
+  "moduleReview": [
+    {
+      "name": "foundation-plinth",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Stepped pad is recognizable; reference corner pyramids, bronze bearing trims and differentiated stone courses are substantially simplified. Dark exposed corner recesses need match-lit review."
+    },
+    {
+      "name": "floor-bay",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Flush slab and central bronze marker read clearly; thin radial lines and a plain polygon replace the reference broad tapering sunburst inlays, nested diamond and corner locator discs."
+    },
+    {
+      "name": "solid-wall",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Pale panel and sparse Y motif convey palette; reference pilaster-edge profiles, long central spear/diamond relief, gold base/cap bands and marble panel hierarchy are absent or too faint."
+    },
+    {
+      "name": "window-wall",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Open square aperture remains visible; heavy plain bronze reveal lacks the layered pale/bronze trim, sill lip, top diamond and flanking ornamental wall frames in the proposed sheet."
+    },
+    {
+      "name": "inside-corner",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "A plain square upright with bronze end cap; proposed reveal/miter and edge-covering ornamental profile are not visually demonstrated by the isolated hero or assembled fixtures."
+    },
+    {
+      "name": "outside-corner",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Two thin diamond outlines give a motif cue; source full-height bronze spine, tapered cap and integrated base treatment are much richer."
+    },
+    {
+      "name": "door-frame",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "A simple rectangular stone portal; source stepped frame relief, bronze inner reveal, crown/diamond ornament and base shoes are missing. A door leaf is not demonstrated; do not count a frame as a working door."
+    },
+    {
+      "name": "roof-bay",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Plain pale slab; reference radial top/underside divisions, perimeter bronze relief, corner bearing blocks and legible outlets are not reproduced visually."
+    },
+    {
+      "name": "stair-flight",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Distinct risers/treads and bilateral rails are present; square posts and thin bars omit the source side infill, substantial bases/caps and bracket detail. The fixture landing has exposed unguarded side/rear edges."
+    },
+    {
+      "name": "ramp-run",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Continuous inclined surface and side rails read coherently; source inset side panels, grip/drain details and rail returns around the separate landing are absent in the image."
+    },
+    {
+      "name": "parapet",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Repeated shallow lozenges communicate a Daybreak cue, but remain a very sparse motif on a plain slab; no assembled corner/end treatment is demonstrated."
+    },
+    {
+      "name": "service-chase",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Visible hollow top and sparse hinge-colored tabs distinguish it from a solid post; clad access door/seam identity and integrated wall junction remain visually rudimentary. No direct orthographic reference establishes exact match."
+    },
+    {
+      "name": "public colonnade",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Slim uprights and low diamond accents hint at the source, but faceted pale knob caps and thin zigzag ties replace layered bronze capitals, broad tapered bases and supported pointed canopy ribs."
+    },
+    {
+      "name": "shade canopy",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Woven surface is visible at close hero scale; it reads almost planar with straight edges, not the source bowed fabric edges, tensioned diagonal folds and pronounced central pendant/rib hierarchy."
+    },
+    {
+      "name": "clinic threshold",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "The open threshold and clear apron are readable; source stepped jambs, bronze crowned head, contrasting flush sill strip, detailed hanging sign and visible wall-seat join are not reproduced."
+    },
+    {
+      "name": "quiet portico",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "An open shelter with bench and roof is legible; the canopy/pier detailing and sheltered marble/bronze articulation are sparse, with heavy grain in shadow limiting material comparison."
+    },
+    {
+      "name": "daylight baffle",
+      "evidence": "module-contact-sheet.png",
+      "status": "UNAPPROVED_VISUAL_GAPS",
+      "finding": "Closed hero exposes three separate white panels; open hero exposes only two clearly between the rails from this view. Technical checker confirms three animated pivots; third-panel visibility/swept rail clearance remains unresolved. Detailed source pivots, service cover, manual release and post motifs are absent."
+    }
+  ],
+  "pixelInspections": [
+    {
+      "path": "references/daybreak-clinic-threshold-door-proposed-v01.png",
+      "sha256": "1fb1243734ff4be442edeb9215d3aaeb387f1458fdefcdc617dab3c574768c5c"
+    },
+    {
+      "path": "references/daybreak-daylight-baffle-proposed-v02.png",
+      "sha256": "751e6b4444ec563491842b810af83ffc42048e418c7783fbcb8fe8720488f1de"
+    },
+    {
+      "path": "references/daybreak-foundation-floor-proposed-v01.png",
+      "sha256": "f9eee481eebb9ec5601b9201881841bf485181931e1e7f8ea2577f8a60688c14"
+    },
+    {
+      "path": "references/daybreak-roof-canopy-proposed-v01.png",
+      "sha256": "dcbc6531860604b21fcad96bc422b5efc24aa80320242322d7fd98d1abd2a0ca"
+    },
+    {
+      "path": "references/daybreak-stair-ramp-proposed-v01.png",
+      "sha256": "85db6edfbdb1b34724f3dccbdf905e8bcf75997813f47baa405c55abb932dd37"
+    },
+    {
+      "path": "references/daybreak-surface-trim-proposed-v01.png",
+      "sha256": "722bf8474b1b28e9b8935ee1de83bb5a0326994f25aadefec43dcba48aaf9804"
+    },
+    {
+      "path": "references/daybreak-wall-window-corner-proposed-v01.png",
+      "sha256": "ca025d7e0e284d0c9d63acf6c3ebbc7d15306787643390259b433b53d428dc51"
+    },
+    {
+      "path": "references/p2-arch-09-daybreak-arcades-proposed-v01.png",
+      "sha256": "7c5f5acf2871dfdfb2ec0716d91cf8bb1efeb6b8e69b47f2661363e0a74c5106"
+    },
+    {
+      "path": "references/reference-105-original.png",
+      "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893"
+    },
+    {
+      "path": "module-contact-sheet.png",
+      "sha256": "0ca6f145aa8c3700dba4ec23119d06bf559c63a2c09fb7b91be33b5daf4cf71d"
+    },
+    {
+      "path": "fixtures/civic/hero.png",
+      "sha256": "049f2226cb2a89b74bb0d875c65b804e9b21a85cca26487d184668d011936db5"
+    },
+    {
+      "path": "fixtures/residential/hero.png",
+      "sha256": "c96fad8ab6eb6472705b8535d27350cc48e23816ec31ff6dbf123cac5aaf1c6e"
+    },
+    {
+      "path": "fixtures/work/hero.png",
+      "sha256": "d51901337ab5a441629d0482962585821ed9c23b5306570ee52914c52ca34eb2"
+    },
+    {
+      "path": "fixtures/stairs-with-landing/hero.png",
+      "sha256": "bed4eb7b38dc4bff6045ae988a407b5b22e9e917595a08ce2a75759dde801cfb"
+    },
+    {
+      "path": "fixtures/ramp-with-landing/hero.png",
+      "sha256": "d3a5c7ed5477fd202cbf5b388fc7602654f4f1fb60e74524e4f716140ae21584"
+    },
+    {
+      "path": "modules/public-colonnade/hero.png",
+      "sha256": "38f9533a9c52977b69ea335926a0f711a4196b5a2a90ff13256ed4ce04183a1a"
+    },
+    {
+      "path": "modules/shade-canopy/hero.png",
+      "sha256": "c5c231f03d247b050b67162449ed1649e956346f1bd561d1738abdc7acb84430"
+    },
+    {
+      "path": "modules/window-wall/hero.png",
+      "sha256": "bfc3170af7862dd7f6085947d75047d7fd9f8d698438455f179935434638402d"
+    },
+    {
+      "path": "modules/clinic-threshold/hero.png",
+      "sha256": "12414c4332c1067f0256dad215033b8e058c88ee690ecd0889138a9c26142ebe"
+    },
+    {
+      "path": "modules/daylight-baffle/hero.png",
+      "sha256": "b1e027016b45340e633f5a886b40a7fed6a7486892ce519a535f286c7d4d4bae"
+    },
+    {
+      "path": "modules/daylight-baffle/open.png",
+      "sha256": "d9aa040f193644387f60e3921cbd7bd145cd462cbc54784f5dfaea5cb5bf9c8b"
+    }
+  ],
+  "findings": [
+    {
+      "id": "DV-01",
+      "priority": "HIGH_ART_FIDELITY",
+      "modules": [
+        "public colonnade",
+        "shade canopy",
+        "quiet portico"
+      ],
+      "finding": "The characteristic pointed fabric-and-bronze canopy/arcade silhouette is not matched. Near-planar fabric, zigzag wire-like ties and pale knob capitals replace layered ribs, sag/tension geometry, central pendant and decorated pier heads.",
+      "next_step": "Rework the primary canopy and pier silhouettes from source105 plus proposed colonnade/roof sheets before multiplying bays; render matched front, side and underside views."
+    },
+    {
+      "id": "DV-02",
+      "priority": "HIGH_ART_FIDELITY",
+      "modules": [
+        "solid-wall",
+        "window-wall",
+        "door-frame",
+        "inside-corner",
+        "outside-corner",
+        "clinic threshold"
+      ],
+      "finding": "Large plain rectangles and sparse trim make the wall/threshold family much less specific than the references. Door/window seat relief, crowned head motifs, pilaster bases/caps and bronze framed sills are missing.",
+      "next_step": "Author continuous trim profiles and corner termination pieces; demonstrate one L-corner, one seated window and one seated clinic frame at readable front/section angles."
+    },
+    {
+      "id": "DV-03",
+      "priority": "HIGH_INTERFACE_VISUAL_GAP",
+      "modules": [
+        "stair-flight",
+        "ramp-run"
+      ],
+      "finding": "Both assembled landing fixtures terminate rails at the flight/run and leave side/rear landing edges visibly unguarded. The references show guarded landings with returns; side infill and substantial post bases/caps also differ.",
+      "next_step": "Build a guarded landing join fixture with intentional exit opening, consistent rail transitions and source-like side treatment; technical controller/collision/accessibility acceptance remains separate."
+    },
+    {
+      "id": "DV-04",
+      "priority": "MEDIUM_ART_FIDELITY",
+      "modules": [
+        "foundation-plinth",
+        "floor-bay",
+        "roof-bay",
+        "parapet"
+      ],
+      "finding": "Reference sunburst inlays, layered bearing blocks, differentiated borders and structural/decorative material divisions are reduced to plain slabs, thin lines and a central polygon.",
+      "next_step": "Restore recognizable radial/diamond layout and stepped bronze/stone interfaces at low polygon cost; inspect paired floor bays and roof/pier seats in match-lit closeups."
+    },
+    {
+      "id": "DV-05",
+      "priority": "MEDIUM_MATERIAL_FIDELITY",
+      "modules": [
+        "foundation-plinth",
+        "floor-bay",
+        "solid-wall",
+        "window-wall",
+        "inside-corner",
+        "outside-corner",
+        "door-frame",
+        "roof-bay",
+        "stair-flight",
+        "ramp-run",
+        "parapet",
+        "service-chase",
+        "public colonnade",
+        "shade canopy",
+        "clinic threshold",
+        "quiet portico",
+        "daylight baffle"
+      ],
+      "finding": "Pale marble and bronze are consistent, but marble reads as sparse smooth wave lines, bronze as broad brown strips, and masonry as uniformly noisy edge bands. The material sheet shows branching mineral veins, brushed highlights, restrained localized wear and explicit facing/substrate separation. Current noisy shadow renders limit finer assessment.",
+      "next_step": "Refine texture scale/variation and material response with source-matched neutral closeups; improve sample quality where available without claiming an unavailable denoiser or GPU pass."
+    },
+    {
+      "id": "DV-06",
+      "priority": "UNRESOLVED_MOVING_INTERFACE",
+      "modules": [
+        "daylight baffle"
+      ],
+      "finding": "Three closed panels are evident, but only two are clearly exposed in the open hero. Independent technical checker reports three synchronized pivots; this review does not infer a missing blade. Decorative pivots/service cover/manual release are not modeled to the proposed sheet.",
+      "next_step": "Render orthographic side/front open states and inspect swept contacts against fixed rails; retain zero physical motion-clearance approval until measured."
+    }
+  ],
+  "positiveFindings": [
+    "All17required names represented once",
+    "Consistent pale stone and bronze visual palette",
+    "Five assembled fixtures expose useful interface and circulation questions",
+    "Open square window and clinic passage visibly legible",
+    "Separate canopy fabric and rigid baffle louver concepts are recognizable"
+  ],
+  "limits": [
+    "Reference105 is binding original artwork; eight construction images remain PROPOSED, not engineering-approved",
+    "No mesh edit, source edit or repository edit performed",
+    "Static perspective pixels do not prove collision/nav clearance, exact dimensions or animation swept contact",
+    "Importer/GLB/module counts are not art approvals",
+    "No technical-test pass is asserted by this visual review"
+  ]
+}

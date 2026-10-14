@@ -1,0 +1,508 @@
+{
+  "status": "FROZEN_FOCUSED_DIAGNOSTIC_UNAPPROVED_NOT_EXACT_REFERENCE_MATCH",
+  "generatedAt": "2026-10-13T23:23:10.262973+00:00",
+  "reference": "reference-053.original.png",
+  "referenceAndFinalPixelsInspected": true,
+  "finalRenders": [
+    "amethyst-short-blade/matched-front-review.png",
+    "amethyst-short-blade/matched-profile-review.png"
+  ],
+  "renderScope": "Two focused Cycles CPU views,256 samples;no full render set or GPU appearance certification",
+  "sourceInspection": {
+    "status": "REVIEW_ONLY_NOT_APPROVED",
+    "reference": "reference-053",
+    "meshObjects": 147,
+    "sourceTriangles": 10098,
+    "dimensionsMeters": [
+      0.11894455552101135,
+      0.08012460917234421,
+      0.7735223472118378
+    ],
+    "missingUV": [],
+    "missingMaterials": [],
+    "images": [
+      {
+        "name": "aged_bronze_basecolor",
+        "packed": true,
+        "colorspace": "sRGB",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "aged_bronze_metallic",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "aged_bronze_normal",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "aged_bronze_roughness",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "amethyst_basecolor",
+        "packed": true,
+        "colorspace": "sRGB",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "amethyst_metallic",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "amethyst_normal",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "amethyst_roughness",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "dark_leather_basecolor",
+        "packed": true,
+        "colorspace": "sRGB",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "dark_leather_metallic",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "dark_leather_normal",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "dark_leather_roughness",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "taupe_stone_basecolor",
+        "packed": true,
+        "colorspace": "sRGB",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "taupe_stone_metallic",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "taupe_stone_normal",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "taupe_stone_roughness",
+        "packed": true,
+        "colorspace": "Non-Color",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "engineValidation": "NOT_RUN",
+    "visualAcceptance": "OPEN"
+  },
+  "localImport": {
+    "status": "SCOPED_BLENDER_IMPORT_ONLY",
+    "blender": "4.3.2",
+    "glbSHA256": "f704cbdc1b3364e0902dcd2ddd944f834ad9b183f5385c903559b8892db1e8af",
+    "meshObjects": 147,
+    "triangles": 11324,
+    "dimensionsMeters": [
+      0.11894455552101135,
+      0.08012460917234421,
+      0.7735223472118378
+    ],
+    "missingUV": [],
+    "missingMaterials": [],
+    "renderParity": "NOT_TESTED",
+    "engineAcceptance": "OPEN"
+  },
+  "khronos": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 6,
+    "infoCode": "UNUSED_MESH_TANGENT"
+  },
+  "changes": [
+    "Separate overlapping thin slab geometry on both faces",
+    "Irregular occluding tongues around closed transmitting crystal",
+    "Thin coherent leaf backing preserves source perimeter",
+    "Actual crystal cross-section depth reduced into stone envelope after profile review",
+    "Multilobed bronze collars over narrower curved cuff",
+    "Warmer brown leather PBR map"
+  ],
+  "remainingVisualGaps": [
+    "Some plate placements remain row-like",
+    "Connected exposed purple band persists in places",
+    "Guard and pommel ornament remain simplified",
+    "Surface age and optical brightness differ from source"
+  ],
+  "openProductionGates": [
+    "Exact art acceptance",
+    "LOD/collision package",
+    "Grip/stow fit",
+    "Engine-rendered transmission parity",
+    "GPU/performance and gameplay testing"
+  ],
+  "preservedDiagnostics": [
+    "diagnostic-first-pass",
+    "diagnostic-second-pass"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3414,
+      "sha256": "129302b02fbdf904da8269648b6cc6259e12a955c20abd3cb7fab2d41a688b7d"
+    },
+    {
+      "path": "aged_bronze_basecolor.png",
+      "bytes": 396897,
+      "sha256": "fe9070a235d36cf9f99d3dc609f16818e2638cb8a77b80112db1ed037d8c28a7"
+    },
+    {
+      "path": "aged_bronze_metallic.png",
+      "bytes": 4516,
+      "sha256": "d71ead5e34891a5f4c5060533b9b5863b5f177ceafdc9ce1313ed9948365f13b"
+    },
+    {
+      "path": "aged_bronze_normal.png",
+      "bytes": 416578,
+      "sha256": "d7f9dfc9cbb1156dd0318ea01c8f6fb9b93678575925e6748e30cd3e92ac9c3d"
+    },
+    {
+      "path": "aged_bronze_roughness.png",
+      "bytes": 216011,
+      "sha256": "c90bafb26fee2bdd64a75cf309e33af1aebbdabeb0d5675a6cdeb315a3fe3f75"
+    },
+    {
+      "path": "amethyst-short-blade/matched-front-review.png",
+      "bytes": 702031,
+      "sha256": "f7ef3f2ff49205848bbe15e520fa168fd9234062ce7f534ef41c91390c774604"
+    },
+    {
+      "path": "amethyst-short-blade/matched-profile-review.png",
+      "bytes": 670668,
+      "sha256": "09be3446fd7d4f67507f5a644c4cca2d6684ada8a15d9e5d80d366bf144191ee"
+    },
+    {
+      "path": "amethyst-short-blade/review.glb",
+      "bytes": 4738280,
+      "sha256": "f704cbdc1b3364e0902dcd2ddd944f834ad9b183f5385c903559b8892db1e8af"
+    },
+    {
+      "path": "amethyst-short-blade/source.blend",
+      "bytes": 5398708,
+      "sha256": "91120936be7aa8ef2643d19c04cf59af710d4d45900e1c7770677aee27265c59"
+    },
+    {
+      "path": "amethyst_basecolor.png",
+      "bytes": 254251,
+      "sha256": "e8c142cd2b9598f01aa18226ab44d5bf941a8ac0ad45fcef8aab2d1c59518f2c"
+    },
+    {
+      "path": "amethyst_metallic.png",
+      "bytes": 3620,
+      "sha256": "051db79660cf909d63bd480d9eabcf856b2d778f03a8d98efb2528600171c91a"
+    },
+    {
+      "path": "amethyst_normal.png",
+      "bytes": 200340,
+      "sha256": "e9e052176dbb61bc42c07a8b5cc3f905a1e3c5029765234bcaf38a460ce5f3ef"
+    },
+    {
+      "path": "amethyst_roughness.png",
+      "bytes": 4516,
+      "sha256": "c14405d51a5e7dcc319e8492ebb796caf7a4365daee0a9ec993591373ae9f840"
+    },
+    {
+      "path": "blender-glb-import.json",
+      "bytes": 403,
+      "sha256": "1b862274b0ad5db87f2f0dc4ee03dda9be4c5cb1912895700cde183dfe706391"
+    },
+    {
+      "path": "build-final.log",
+      "bytes": 41,
+      "sha256": "8401fd7d084a231627cb058f2777cff7d3a1ebd1d6ec430f2c36e14953a0f310"
+    },
+    {
+      "path": "build-second.log",
+      "bytes": 41,
+      "sha256": "8401fd7d084a231627cb058f2777cff7d3a1ebd1d6ec430f2c36e14953a0f310"
+    },
+    {
+      "path": "build.log",
+      "bytes": 41,
+      "sha256": "8401fd7d084a231627cb058f2777cff7d3a1ebd1d6ec430f2c36e14953a0f310"
+    },
+    {
+      "path": "comparison-reference-v10-v11.png",
+      "bytes": 654856,
+      "sha256": "6f6bcbc733ba415fe58ee33c398e6636b9e10998a06f964c0f4056b72002cba0"
+    },
+    {
+      "path": "comparison-v10-matched-front.png",
+      "bytes": 710689,
+      "sha256": "2474ceb91bd0ae403f0d2f5ad8b094c608da4cfad5bd39be6c24200442d9d360"
+    },
+    {
+      "path": "comparison.html",
+      "bytes": 1516,
+      "sha256": "68645295b9669213a9c4c4e246ba69dc1fd2932e4e6f3cc142820a4d1e4380de"
+    },
+    {
+      "path": "dark_leather_basecolor.png",
+      "bytes": 331668,
+      "sha256": "8fb1e4e8b33c85cc1993c885f463070be9a8f5da273f2a6e7109100aee2d189f"
+    },
+    {
+      "path": "dark_leather_metallic.png",
+      "bytes": 3620,
+      "sha256": "051db79660cf909d63bd480d9eabcf856b2d778f03a8d98efb2528600171c91a"
+    },
+    {
+      "path": "dark_leather_normal.png",
+      "bytes": 373699,
+      "sha256": "8368031bb1d79bf64bf02d1940a0983c5172d800f83bae29f896ff6e9f14209d"
+    },
+    {
+      "path": "dark_leather_roughness.png",
+      "bytes": 201730,
+      "sha256": "5a1ff02ada7d0fbd8d229e684569b8a898052e0034187cf6a2f1a008667d6629"
+    },
+    {
+      "path": "diagnostic-first-pass/glb-validation.json",
+      "bytes": 5866,
+      "sha256": "5fd5fc5014a6ee1cf230247ee350427056dc51bbaca84e7db0eb4a78ef80de66"
+    },
+    {
+      "path": "diagnostic-first-pass/initial-revision-script.py",
+      "bytes": 4593,
+      "sha256": "32e5fba633779f748c46b30ce8f61e1044a57f3016e1d67fcf683ab26c7259ad"
+    },
+    {
+      "path": "diagnostic-first-pass/matched-front-review.png",
+      "bytes": 707659,
+      "sha256": "6fecb6f9818d7a63b2d4c871cb2cb62db6104fe509f5be27bc4533f8b29cbc71"
+    },
+    {
+      "path": "diagnostic-first-pass/matched-profile-review.png",
+      "bytes": 690144,
+      "sha256": "54a3c3d0ad76ac4e7e1607a435f7364cba251950261c0e4cf04690076e5509c6"
+    },
+    {
+      "path": "diagnostic-second-pass/matched-front-review.png",
+      "bytes": 715241,
+      "sha256": "a0222f028c19bddf6db5493f9fce292df1ed7bcd3c94ae20ca743eded561a4e6"
+    },
+    {
+      "path": "diagnostic-second-pass/matched-profile-review.png",
+      "bytes": 689780,
+      "sha256": "0347263c945272aa8b06155b5744190b9a01a2f8819c4517d272636f560d9589"
+    },
+    {
+      "path": "export-final.log",
+      "bytes": 17016,
+      "sha256": "ff6ae495b901a9006c337f9b5b52b08d934dde5f0f95e36904188edda444e26c"
+    },
+    {
+      "path": "export-second.log",
+      "bytes": 17017,
+      "sha256": "4bcf33ead6c5ceac6285c0e9a0fa78b7f5f7b5e1d9b0776d954810933fff8b01"
+    },
+    {
+      "path": "export.log",
+      "bytes": 16466,
+      "sha256": "070cdbdc2f395586be7023dca7776c30bb6b0bf6ca05b00b674d52d53d7a5ae4"
+    },
+    {
+      "path": "export_review_glb.py",
+      "bytes": 1255,
+      "sha256": "0261ca8dc3c908022943c6a4e30fd196d0d5764bf10e4cc9ec6d02d704418f10"
+    },
+    {
+      "path": "fault_weapons.review.py",
+      "bytes": 30545,
+      "sha256": "b981824d3ddad312c4a5e20698f60e03b9d3b90bd51ef26d6104a1e5aac03747"
+    },
+    {
+      "path": "geometry-freeze-receipt.json",
+      "bytes": 3471,
+      "sha256": "e5d5f2e9b25e84a7c796cc61d1f90e056e62086739393d1eb7e68cbb2a6ea86a"
+    },
+    {
+      "path": "glb-export-receipt.json",
+      "bytes": 413,
+      "sha256": "0e61859d26fe3b0e8b0761c6ef30378984c9989828adeee37751ccda61cb45e0"
+    },
+    {
+      "path": "glb-validation.json",
+      "bytes": 5631,
+      "sha256": "bdf448b5c938118e8f9a3e5107fcc367e1eba8e5b7f501116a9baa8954a0dc04"
+    },
+    {
+      "path": "import-final.log",
+      "bytes": 10423,
+      "sha256": "2abf745c802e2d44b8df3c7aeae55bcb752029590612f4611a0ad0e3cf553651"
+    },
+    {
+      "path": "import-second.log",
+      "bytes": 10423,
+      "sha256": "ba3c008d986d46ab0958e16de4f4cb922c840a30edcf4282c7dd3bba2df6330c"
+    },
+    {
+      "path": "import_review_glb.py",
+      "bytes": 940,
+      "sha256": "b7dc7e9b4c3b3ab7491d806c564bde5b8dca09aed393353f35b3956417851bb0"
+    },
+    {
+      "path": "inspect-final.log",
+      "bytes": 108,
+      "sha256": "fd186209f879e6356c09494edeec10476525138018d2c86bbbbe2c88d3a6464a"
+    },
+    {
+      "path": "inspect-second.log",
+      "bytes": 108,
+      "sha256": "fd186209f879e6356c09494edeec10476525138018d2c86bbbbe2c88d3a6464a"
+    },
+    {
+      "path": "inspect.log",
+      "bytes": 108,
+      "sha256": "fd186209f879e6356c09494edeec10476525138018d2c86bbbbe2c88d3a6464a"
+    },
+    {
+      "path": "inspect_source.py",
+      "bytes": 1013,
+      "sha256": "3190ed03cd75758b5652ecd929b7a10783694f55d60dcb04a629bc9ba66bfc66"
+    },
+    {
+      "path": "make_comparison.py",
+      "bytes": 785,
+      "sha256": "d293214caf90aeb340a70c6fb0646e3fe7fe9fab119237de6142a59ad1f112d2"
+    },
+    {
+      "path": "matched-final.log",
+      "bytes": 59496,
+      "sha256": "87ac552023bdf056dc7d30b8be6bc5e6724f318b963faf0608c57d64b7e912f6"
+    },
+    {
+      "path": "matched-second.log",
+      "bytes": 59353,
+      "sha256": "1abaa8785102818eed05f6b0c143dd06aa48b7b1f587cf6c73eed366fd622fb4"
+    },
+    {
+      "path": "matched.log",
+      "bytes": 57597,
+      "sha256": "742d48e27b0c0ce50d4aa0f131ccd73e4e9575e3a8ef37c8fc79e48689357b72"
+    },
+    {
+      "path": "reference-053.original.png",
+      "bytes": 2522664,
+      "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+    },
+    {
+      "path": "render_matched.py",
+      "bytes": 1184,
+      "sha256": "b3ea00f355fac689c313a142966aad3acac07bd516b6d7805ce78bfa17375103"
+    },
+    {
+      "path": "source-inspection.json",
+      "bytes": 2805,
+      "sha256": "2c4c2ebfa78643f8d3fecac63d68c395fd3e5a27abc144e4d7a42dc4b61c9be3"
+    },
+    {
+      "path": "taupe_stone_basecolor.png",
+      "bytes": 379211,
+      "sha256": "d5bbc5898f94f1df3a08f1287a777dda996f763926691506de9ca8348755be6a"
+    },
+    {
+      "path": "taupe_stone_metallic.png",
+      "bytes": 3620,
+      "sha256": "051db79660cf909d63bd480d9eabcf856b2d778f03a8d98efb2528600171c91a"
+    },
+    {
+      "path": "taupe_stone_normal.png",
+      "bytes": 375804,
+      "sha256": "e165c8eec5a62e1d9d79f15b81c8591aed3ebe86f9364452a0066af95c1bc2a8"
+    },
+    {
+      "path": "taupe_stone_roughness.png",
+      "bytes": 204465,
+      "sha256": "7d085d8cfd54d05208da1d1f3b3e15a64e4370722e4db013f025b39fb95bbab3"
+    },
+    {
+      "path": "validate_glb.cjs",
+      "bytes": 617,
+      "sha256": "7dcf7d3068ee1bbd3c3a7d0d30d1fa5c8321e4b378733ee9161ffc34453e6d33"
+    }
+  ],
+  "listedFileCount": 57,
+  "listedBytes": 21883955
+}

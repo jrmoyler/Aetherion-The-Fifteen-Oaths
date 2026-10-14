@@ -1,0 +1,27 @@
+test_actual_pinned_public_archive (test_import_phase_ii.PhaseIIImportTests.test_actual_pinned_public_archive) ... ok
+test_administrative_files_excluded_after_exact_allowlist_verification (test_import_phase_ii.PhaseIIImportTests.test_administrative_files_excluded_after_exact_allowlist_verification) ... ok
+test_checksum_manifest_rejects_unlisted_missing_duplicate_and_corrupt_files (test_import_phase_ii.PhaseIIImportTests.test_checksum_manifest_rejects_unlisted_missing_duplicate_and_corrupt_files) ... ok
+test_common_folder_discovered (test_import_phase_ii.PhaseIIImportTests.test_common_folder_discovered) ... ok
+test_control_characters_rejected (test_import_phase_ii.PhaseIIImportTests.test_control_characters_rejected) ... ok
+test_deep_layout_needs_explicit_mapping (test_import_phase_ii.PhaseIIImportTests.test_deep_layout_needs_explicit_mapping) ... ok
+test_different_existing_file_prevents_entire_import (test_import_phase_ii.PhaseIIImportTests.test_different_existing_file_prevents_entire_import) ... ok
+test_duplicate_and_case_colliding_entries_rejected (test_import_phase_ii.PhaseIIImportTests.test_duplicate_and_case_colliding_entries_rejected) ... ok
+test_exact_archive_and_payload_bytes_preserved (test_import_phase_ii.PhaseIIImportTests.test_exact_archive_and_payload_bytes_preserved) ... ok
+test_file_directory_collision_rejected (test_import_phase_ii.PhaseIIImportTests.test_file_directory_collision_rejected) ... ok
+test_mapping_cannot_silently_drop_payloads (test_import_phase_ii.PhaseIIImportTests.test_mapping_cannot_silently_drop_payloads) ... ok
+test_missing_or_ambiguous_review_documents_rejected (test_import_phase_ii.PhaseIIImportTests.test_missing_or_ambiguous_review_documents_rejected) ... ok
+test_production_pin_rejects_synthetic_fixture_without_writes (test_import_phase_ii.PhaseIIImportTests.test_production_pin_rejects_synthetic_fixture_without_writes) ... ok
+test_publish_error_rolls_back_new_files_and_directories (test_import_phase_ii.PhaseIIImportTests.test_publish_error_rolls_back_new_files_and_directories) ... ok
+test_repeat_import_preserves_existing_files (test_import_phase_ii.PhaseIIImportTests.test_repeat_import_preserves_existing_files) ... ok
+test_repository_case_collision_rejected (test_import_phase_ii.PhaseIIImportTests.test_repository_case_collision_rejected) ... ok
+test_repository_symlink_rejected (test_import_phase_ii.PhaseIIImportTests.test_repository_symlink_rejected) ... ok
+test_review_token_required_and_bound_to_mapping_and_documents (test_import_phase_ii.PhaseIIImportTests.test_review_token_required_and_bound_to_mapping_and_documents) ... ok
+test_size_and_digest_checked_independently (test_import_phase_ii.PhaseIIImportTests.test_size_and_digest_checked_independently) ... ok
+test_symlink_payload_rejected (test_import_phase_ii.PhaseIIImportTests.test_symlink_payload_rejected) ... ok
+test_traversal_and_absolute_paths_rejected (test_import_phase_ii.PhaseIIImportTests.test_traversal_and_absolute_paths_rejected) ... ok
+test_unicode_normalization_collisions_rejected (test_import_phase_ii.PhaseIIImportTests.test_unicode_normalization_collisions_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.054s
+
+OK

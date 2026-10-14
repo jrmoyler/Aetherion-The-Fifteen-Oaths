@@ -1,0 +1,17 @@
+{
+  "name": "aetherion-production-validation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "audit:glb": "node audit-glb.mjs",
+    "test": "node --test *.test.mjs",
+    "validate:deliverables": "node validate-deliverables.mjs"
+  },
+  "dependencies": {
+    "gltf-validator": "2.0.0-dev.3.10"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

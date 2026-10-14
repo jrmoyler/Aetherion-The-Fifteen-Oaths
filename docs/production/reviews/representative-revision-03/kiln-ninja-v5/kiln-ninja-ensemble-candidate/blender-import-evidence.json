@@ -1,0 +1,243 @@
+{
+  "scope": "Blender 4.3.2 CPU source open and actual GLB import / evaluated animation checks; not Unreal/Godot/Three.js validation",
+  "files": [
+    {
+      "path": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+      "sha256": "e7c753945d2c3b841de2c9ed7b0b3cb03c723cd89d810914bd11d33946b12aa4",
+      "meshObjects": 1,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release",
+        "idle_breath",
+        "walk_in_place"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 32850,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 32850,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 32850,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819999396800995,
+          -0.01399998925626278,
+          0.9480000138282776
+        ],
+        "cast_origin": [
+          -0.3869999349117279,
+          -0.07899998873472214,
+          0.9490000605583191
+        ],
+        "hit_reference": [
+          0.0,
+          -0.11999999731779099,
+          1.3300000429153442
+        ],
+        "stow": [
+          0.0,
+          0.15000000596046448,
+          1.3700000047683716
+        ]
+      }
+    },
+    {
+      "path": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+      "sha256": "d1c63efe4cdeacb6f77769157393ffad7ab529e6b804e1b37c7f90bf6ef926a3",
+      "meshObjects": 2,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release_Kiln_Ninja_Rig",
+        "idle_breath_Kiln_Ninja_Rig",
+        "walk_in_place_Kiln_Ninja_Rig"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 53641,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 53641,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 53641,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819998800754547,
+          -0.013999871909618378,
+          0.9479994177818298
+        ],
+        "cast_origin": [
+          -0.38699981570243835,
+          -0.07899985462427139,
+          0.9489995241165161
+        ],
+        "hit_reference": [
+          4.107424178556585e-09,
+          -0.1199999451637268,
+          1.3300000429153442
+        ],
+        "stow": [
+          -5.134281000351848e-09,
+          0.15000005066394806,
+          1.3700000047683716
+        ]
+      }
+    },
+    {
+      "path": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+      "sha256": "4babdb2a176f5b7d5d6a30c56ceeee90a4cbdab9793cf37498cb06958e101b18",
+      "meshObjects": 2,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release_Kiln_Ninja_Rig",
+        "idle_breath_Kiln_Ninja_Rig",
+        "walk_in_place_Kiln_Ninja_Rig"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 38453,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 38453,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 38453,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819998800754547,
+          -0.013999871909618378,
+          0.9479994177818298
+        ],
+        "cast_origin": [
+          -0.38699981570243835,
+          -0.07899985462427139,
+          0.9489995241165161
+        ],
+        "hit_reference": [
+          4.107424178556585e-09,
+          -0.1199999451637268,
+          1.3300000429153442
+        ],
+        "stow": [
+          -5.134281000351848e-09,
+          0.15000005066394806,
+          1.3700000047683716
+        ]
+      }
+    },
+    {
+      "path": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+      "sha256": "15e31ebfed4ac901d03c9d4f43c4173cdbc804d36db7ac811fb0df2770f3e807",
+      "meshObjects": 2,
+      "armatures": 1,
+      "boneCounts": [
+        38
+      ],
+      "actionNames": [
+        "cast_release_Kiln_Ninja_Rig",
+        "idle_breath_Kiln_Ninja_Rig",
+        "walk_in_place_Kiln_Ninja_Rig"
+      ],
+      "images": 3,
+      "finitePoses": [
+        {
+          "clip": "idle_breath",
+          "frame": 12,
+          "vertices": 24036,
+          "finite": true
+        },
+        {
+          "clip": "walk_in_place",
+          "frame": 12,
+          "vertices": 24036,
+          "finite": true
+        },
+        {
+          "clip": "cast_release",
+          "frame": 12,
+          "vertices": 24036,
+          "finite": true
+        }
+      ],
+      "socketWorldPositions": {
+        "grip_primary": [
+          -0.3819998800754547,
+          -0.013999871909618378,
+          0.9479994177818298
+        ],
+        "cast_origin": [
+          -0.38699981570243835,
+          -0.07899985462427139,
+          0.9489995241165161
+        ],
+        "hit_reference": [
+          4.107424178556585e-09,
+          -0.1199999451637268,
+          1.3300000429153442
+        ],
+        "stow": [
+          -5.134281000351848e-09,
+          0.15000005066394806,
+          1.3700000047683716
+        ]
+      }
+    },
+    {
+      "path": "/tmp/kiln-ninja-revision05/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+      "sha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7",
+      "meshObjects": 1,
+      "armatures": 0,
+      "boneCounts": [],
+      "actionNames": [],
+      "images": 0,
+      "finitePoses": []
+    }
+  ]
+}

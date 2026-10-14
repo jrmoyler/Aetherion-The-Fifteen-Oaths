@@ -1,0 +1,82 @@
+{
+  "scope": "Actual scratch export build using the environment override. No byte-identical Blender/GLB rebuild guarantee. JSON/array checks are described per file.",
+  "command": "AETHERION_REVIEW_OUT=/tmp/ninja-v8b-reproduction-final blender -b -t 6 --python /tmp/ninja-v8b/kiln_ninja.py -- --face-diagnostic --export-only",
+  "rows": [
+    {
+      "path": "kiln-ninja-ensemble-candidate-basecolor.png",
+      "originalSha256": "255f9a489e6d62b681ecc92ec155a91e3096c2e45233fcbd3cbc1357491b5f87",
+      "scratchSha256": "255f9a489e6d62b681ecc92ec155a91e3096c2e45233fcbd3cbc1357491b5f87",
+      "byteIdentical": true
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate-collision.glb",
+      "originalSha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7",
+      "scratchSha256": "26e8191e964f81dccee93fb02f88a20b075b20844f1fdca849d0574203f717f7",
+      "byteIdentical": true,
+      "jsonMetadataIdentical": true,
+      "changedAccessorIndices": []
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate-hair-orm.png",
+      "originalSha256": "1cc14fbcc7463fd58beb0535b4e3c39d7bbb3c22643c920c29bd5f9e2a797cc7",
+      "scratchSha256": "1cc14fbcc7463fd58beb0535b4e3c39d7bbb3c22643c920c29bd5f9e2a797cc7",
+      "byteIdentical": true
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate-lod1.glb",
+      "originalSha256": "fcf9b4011fbd1650579406c0ac12c27c0abbea908ee3241587c26bc09a5239bf",
+      "scratchSha256": "2368b48e38bdfadcc7f17a5459a395c13a24a44f4ed55e039afa55fe78ae8b53",
+      "byteIdentical": false,
+      "jsonMetadataIdentical": true,
+      "changedAccessorIndices": [
+        3,
+        11,
+        15,
+        27
+      ]
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate-lod2.glb",
+      "originalSha256": "5e7e2770fc1ac062e5782129092189b4107547e3561f7a0dfa2da189afef0df8",
+      "scratchSha256": "b106237f1cb578cf21e0af83afa1c8127c1c1e1d1bcac438aaf64584bfc3087d",
+      "byteIdentical": false,
+      "jsonMetadataIdentical": true,
+      "changedAccessorIndices": [
+        3,
+        15,
+        27
+      ]
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate-normal.png",
+      "originalSha256": "e535bb17035db5477e923caf81588a2d162636fd5767a97fbeb73c152611eb03",
+      "scratchSha256": "e535bb17035db5477e923caf81588a2d162636fd5767a97fbeb73c152611eb03",
+      "byteIdentical": true
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate-orm.png",
+      "originalSha256": "06918d4b6529fb00df18840acbf392f2e94bbb384e010531f733a67d59b40275",
+      "scratchSha256": "06918d4b6529fb00df18840acbf392f2e94bbb384e010531f733a67d59b40275",
+      "byteIdentical": true
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate.blend",
+      "originalSha256": "34ed4dbeb3a3b7d6598525b4c1f2072deef1059103b4e35fc6006e3af9162153",
+      "scratchSha256": "3efd7be0ca1d4702354c8e6fd6ec33f9894ac3b946f6177a7d1064a551a966ab",
+      "byteIdentical": false
+    },
+    {
+      "path": "kiln-ninja-ensemble-candidate.glb",
+      "originalSha256": "187afb5cca521618932237ea11914f5bfad9617c7f2fe8c4cc6749fce05c50f6",
+      "scratchSha256": "491b3992a1ab99fd95240e8b5705e0beccd6e9800db5b2116963cfa6cfc2ff34",
+      "byteIdentical": false,
+      "jsonMetadataIdentical": true,
+      "changedAccessorIndices": [
+        3,
+        11,
+        15,
+        27
+      ]
+    }
+  ]
+}

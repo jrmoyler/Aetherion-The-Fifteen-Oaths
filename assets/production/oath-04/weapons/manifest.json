@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o04-e-weapons-family",
+  "referenceIds": [
+    "reference-055"
+  ],
+  "assets": [
+    {
+      "id": "tidal-crescent-blade",
+      "archetypeId": "tidal-crescent-blade",
+      "name": "Crescent Blade",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-04/weapons/crescent-blade/crescent-blade.blend",
+        "glb": "assets/production/oath-04/weapons/crescent-blade/lod0.glb",
+        "lod1": "assets/production/oath-04/weapons/crescent-blade/lod1.glb",
+        "lod2": "assets/production/oath-04/weapons/crescent-blade/lod2.glb",
+        "collision": "assets/production/oath-04/weapons/crescent-blade/collision.glb",
+        "textures": [
+          "assets/production/oath-04/weapons/textures/Nacre_basecolor.png",
+          "assets/production/oath-04/weapons/textures/Nacre_roughness.png",
+          "assets/production/oath-04/weapons/textures/Nacre_metallic.png",
+          "assets/production/oath-04/weapons/textures/Nacre_normal.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_basecolor.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_roughness.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_metallic.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_normal.png",
+          "assets/production/oath-04/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-04/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-04/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-04/weapons/textures/Gold_normal.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_basecolor.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_roughness.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_metallic.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-04/weapons/crescent-blade/front.png",
+          "assets/production/oath-04/weapons/crescent-blade/side.png",
+          "assets/production/oath-04/weapons/crescent-blade/hero.png"
+        ],
+        "damaged": "assets/production/oath-04/weapons/crescent-blade/damaged.glb",
+        "stowed": "assets/production/oath-04/weapons/crescent-blade/stowed.glb"
+      },
+      "triangles": {
+        "glb": 10428,
+        "lod1": 6244,
+        "lod2": 3108,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.6625940203666687,
+        0.09735000506043434,
+        1.0779437720775604
+      ],
+      "rig": {
+        "type": "static, intentionally unrigged",
+        "bones": 0
+      },
+      "animations": [],
+      "remainingGates": [
+        "Owner visual approval versus reference-055",
+        "Exact human grip and back-socket fit",
+        "Damaged-state transition and effect/audio hooks",
+        "LOD visual/performance acceptance",
+        "Unreal, Godot and Three.js final runtime parity",
+        "Glass transmission/volume parity; portable material currently opaque aqua reservoir",
+        "Collision gameplay envelope and weapon hit shape acceptance"
+      ]
+    },
+    {
+      "id": "tidal-tide-orb-staff",
+      "archetypeId": "tidal-tide-orb-staff",
+      "name": "Tide Orb Staff",
+      "type": "equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-04/weapons/tide-orb-staff/tide-orb-staff.blend",
+        "glb": "assets/production/oath-04/weapons/tide-orb-staff/lod0.glb",
+        "lod1": "assets/production/oath-04/weapons/tide-orb-staff/lod1.glb",
+        "lod2": "assets/production/oath-04/weapons/tide-orb-staff/lod2.glb",
+        "collision": "assets/production/oath-04/weapons/tide-orb-staff/collision.glb",
+        "textures": [
+          "assets/production/oath-04/weapons/textures/Nacre_basecolor.png",
+          "assets/production/oath-04/weapons/textures/Nacre_roughness.png",
+          "assets/production/oath-04/weapons/textures/Nacre_metallic.png",
+          "assets/production/oath-04/weapons/textures/Nacre_normal.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_basecolor.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_roughness.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_metallic.png",
+          "assets/production/oath-04/weapons/textures/AquaGlass_normal.png",
+          "assets/production/oath-04/weapons/textures/Gold_basecolor.png",
+          "assets/production/oath-04/weapons/textures/Gold_roughness.png",
+          "assets/production/oath-04/weapons/textures/Gold_metallic.png",
+          "assets/production/oath-04/weapons/textures/Gold_normal.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_basecolor.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_roughness.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_metallic.png",
+          "assets/production/oath-04/weapons/textures/NavyCord_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-04/weapons/tide-orb-staff/front.png",
+          "assets/production/oath-04/weapons/tide-orb-staff/side.png",
+          "assets/production/oath-04/weapons/tide-orb-staff/hero.png",
+          "assets/production/oath-04/weapons/tide-orb-staff/motion.png"
+        ],
+        "damaged": "assets/production/oath-04/weapons/tide-orb-staff/damaged.glb",
+        "stowed": "assets/production/oath-04/weapons/tide-orb-staff/stowed.glb"
+      },
+      "triangles": {
+        "glb": 23608,
+        "lod1": 14132,
+        "lod2": 7022,
+        "collision": 12
+      },
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "dimensionsMeters": [
+        0.37752677500247955,
+        0.24300000071525574,
+        2.0239111185073853
+      ],
+      "rig": {
+        "type": "two-bone skinned tassel",
+        "bones": 2
+      },
+      "animations": [
+        "Tidal_tassel_sway"
+      ],
+      "remainingGates": [
+        "Owner visual approval versus reference-055",
+        "Exact human grip and back-socket fit",
+        "Damaged-state transition and effect/audio hooks",
+        "LOD visual/performance acceptance",
+        "Unreal, Godot and Three.js final runtime parity",
+        "Glass transmission/volume parity; portable material currently opaque aqua reservoir",
+        "Collision gameplay envelope and weapon hit shape acceptance"
+      ]
+    }
+  ]
+}

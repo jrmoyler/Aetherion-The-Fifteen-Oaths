@@ -1,0 +1,100 @@
+{
+  "original_name": "roof-bay",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/7",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    4,
+    4,
+    0.35
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      4.0,
+      4.0,
+      0.3499999940395355
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 72,
+    "lod1": 64,
+    "lod2": 24
+  },
+  "visual_meshes": 6,
+  "collider_meshes": 1,
+  "sockets": [
+    {
+      "name": "roof-base",
+      "semantic_type": "roof_seat",
+      "position_blender_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        0,
+        0,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        -1
+      ],
+      "compatible_partner_types": [
+        "roof_seat"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "drain-low-edge",
+      "semantic_type": "utility_pass",
+      "position_blender_xyz_m": [
+        2,
+        0,
+        0.32
+      ],
+      "position_gltf_xyz_m": [
+        2,
+        0.32,
+        0
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        -1,
+        0
+      ],
+      "compatible_partner_types": [
+        "utility_pass"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ],
+  "editable_lod_geometry": {
+    "lod1": {
+      "source_object_prefix": "LOD1__",
+      "objects": 6,
+      "triangles": 64
+    },
+    "lod2": {
+      "source_object_prefix": "LOD2__",
+      "objects": 2,
+      "triangles": 24
+    }
+  },
+  "lod_revision": "r03 deliberate topology reduction; same primary/collision payloads"
+}

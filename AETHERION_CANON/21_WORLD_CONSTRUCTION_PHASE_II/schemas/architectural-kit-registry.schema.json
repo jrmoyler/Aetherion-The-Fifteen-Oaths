@@ -1,0 +1,540 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "baseline_commit",
+    "baseline_url",
+    "canon_status",
+    "counting_policy",
+    "records",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "baseline_commit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "counting_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "acceptance",
+          "animation",
+          "baseline_asset_id",
+          "canon_status",
+          "collision",
+          "construction",
+          "delta",
+          "dependencies",
+          "id",
+          "interactions",
+          "lod",
+          "materials",
+          "modules",
+          "name",
+          "oath_id",
+          "performance",
+          "priority",
+          "proposed_physical_scale",
+          "purpose",
+          "reference_evidence",
+          "region_id",
+          "signature_modules",
+          "source_ids",
+          "source_refs",
+          "status",
+          "variants"
+        ],
+        "properties": {
+          "acceptance": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "animation": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "baseline_asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "collision": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "construction": {
+            "type": "string",
+            "minLength": 1
+          },
+          "delta": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^p2-(arch|env)-(0[1-9]|1[0-5])-[a-z0-9-]+$"
+          },
+          "interactions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "lod": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "acceptance",
+                "clearance",
+                "connections",
+                "construction",
+                "dimension_axes",
+                "extent_note",
+                "geometry_policy",
+                "name",
+                "slope",
+                "target_extent_m"
+              ],
+              "properties": {
+                "acceptance": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "clearance": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "circulation_width_m",
+                    "door_height_m",
+                    "door_width_m",
+                    "headroom_m"
+                  ],
+                  "properties": {
+                    "circulation_width_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "door_height_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "door_width_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "headroom_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "connections": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "construction": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "dimension_axes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "extent_note": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "geometry_policy": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "slope": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "maximum_ramp_grade",
+                    "rise_m",
+                    "riser_count",
+                    "riser_m",
+                    "run_m",
+                    "tread_m"
+                  ],
+                  "properties": {
+                    "maximum_ramp_grade": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "rise_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "riser_count": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "riser_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "run_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "tread_m": {
+                      "anyOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "target_extent_m": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "performance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "acceptance",
+              "cost_class",
+              "cost_drivers",
+              "fallback",
+              "status"
+            ],
+            "properties": {
+              "acceptance": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cost_class": {
+                "type": "string",
+                "minLength": 1
+              },
+              "cost_drivers": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "fallback": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "priority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proposed_physical_scale": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "door_clear_height_m",
+              "door_clear_width_m",
+              "fine_socket_adapter_m",
+              "floor_to_floor_m",
+              "grid_m",
+              "note",
+              "status",
+              "structural_bay_m",
+              "units"
+            ],
+            "properties": {
+              "door_clear_height_m": {
+                "type": "number"
+              },
+              "door_clear_width_m": {
+                "type": "number"
+              },
+              "fine_socket_adapter_m": {
+                "type": "number"
+              },
+              "floor_to_floor_m": {
+                "type": "number"
+              },
+              "grid_m": {
+                "type": "number"
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              },
+              "structural_bay_m": {
+                "type": "number"
+              },
+              "units": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference_evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "individual_final_art_approved",
+              "missing",
+              "observed",
+              "reference_ids",
+              "repository_paths",
+              "sha256",
+              "status"
+            ],
+            "properties": {
+              "individual_final_art_approved": {
+                "type": "boolean"
+              },
+              "missing": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "observed": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reference_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "repository_paths": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "sha256": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "status": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "region_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "signature_modules": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "status": {
+            "const": "PROPOSED_NOT_BUILT"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "assembly",
+                "use"
+              ],
+              "properties": {
+                "assembly": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "use": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "architectural-kit-registry.schema.json",
+  "title": "ARCHITECTURAL_KIT_REGISTRY strict proposal schema"
+}

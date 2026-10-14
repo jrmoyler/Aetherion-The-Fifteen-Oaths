@@ -1,0 +1,55 @@
+{
+  "concept_id": "batch04_07_rime_natural",
+  "reported_group_qa": {
+    "reference_pixels_inspected": true,
+    "preferred_review_version": "v02",
+    "actual_pixel_qa": {
+      "strengths": [
+        "Distinct shaggy four-legged grazer with organic charcoal/chalk coat; no ice armor.",
+        "Front, rear, opposite profiles, top and three-quarter panels present.",
+        "Padded split-hoof underside explicitly illustrated; snow feeding contact credible.",
+        "Skeleton follows quadruped silhouette and major hinge locations; remains proposal."
+      ],
+      "v01_issues": [
+        "Main front feet have multiple narrow toe-like tips inconsistent with two split-hoof digits in closeup.",
+        "Main and detail antler branch layouts differ; requested three-tip topology not consistent.",
+        "Dense fur obscures shoulder/hip attachment; no approved rig or complete skeletal specification."
+      ],
+      "v02_result": [
+        "Two broad hoof halves visibly replace main-view multi-toe feet; detail soles remain padded.",
+        "Antlers simplified, but front/rear show only two clearly visible terminal tips per antler versus three in profile and antler detail. Perspective overlap is not sufficiently resolved to validate identical topology.",
+        "Mouth shows prominent pointed teeth; grazing dentition needs review.",
+        "Skeleton legend has numbers but blue joint dots are not individually numbered."
+      ],
+      "remaining_blockers": [
+        "Antler topology across views remains unresolved.",
+        "Padded versus hoof reconciliation is a proposal needing approval; dentition and joint-map review outstanding."
+      ]
+    },
+    "pixel_qa_method": "Full-sheet bounded 1400px review plus native-resolution crops of problematic anatomy; not a text-only or filename-only audit.",
+    "production_gate": "Exact-art, anatomy, engineering and scale approval remain unresolved; not a rig, mesh, UV, animation or production asset."
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "actual_pixel_qa": [
+          "Main front feet have multiple narrow toe-like tips inconsistent with two split-hoof digits in closeup.",
+          "Main and detail antler branch layouts differ; requested three-tip topology not consistent.",
+          "Dense fur obscures shoulder/hip attachment; no approved rig or complete skeletal specification."
+        ]
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "actual_pixel_qa": [
+          "Two broad hoof halves visibly replace main-view multi-toe feet; detail soles remain padded.",
+          "Antlers simplified, but front/rear show only two clearly visible terminal tips per antler versus three in profile and antler detail. Perspective overlap is not sufficiently resolved to validate identical topology.",
+          "Mouth shows prominent pointed teeth; grazing dentition needs review.",
+          "Skeleton legend has numbers but blue joint dots are not individually numbered."
+        ]
+      }
+    }
+  ]
+}

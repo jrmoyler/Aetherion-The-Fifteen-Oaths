@@ -1,0 +1,55 @@
+{
+  "concept_id": "batch05_08_o14_natural",
+  "reported_group_qa": {
+    "selected_version": 3,
+    "pixel_review_observations": [
+      "v1, v2 and v3 actual pixels inspected; v1 profile and foot detail also viewed at native crop scale. Selected v3 retains a lean four-legged natural mammal, long balancing tail, two ears and opposite-facing profiles.",
+      "v2 made the proposed foot clearer: front view shows three discrete clawed toes; plantar view shows three digital pads and one central metapad. v3 retains this detail.",
+      "v3 replaces corrupted or anatomically over-specific joint legend words with EXTERNAL LANDMARKS / PROPOSED ONLY.",
+      "Stride, hop, braking, grazing and protected wildlife crossing panels remain present. No gears, springs, brass inserts or glass body parts are visible."
+    ],
+    "unresolved_qa": [
+      "Registry does not establish a limb count; four legs and three toes per foot remain new proposed design choices.",
+      "Not all digits/claws are independently countable in small whole-body poses. Central plantar claw is partly obscured by viewing angle.",
+      "Only near-leg profile callouts are present; all occluded limbs are not explicitly mapped.",
+      "External landmark overlay is simplified design intent and not a validated rig; pelvis/hock alignment, tendon behavior, landing and braking contacts remain review items.",
+      "Grazing close-up does not establish dental detail; bulb and seasonal-insect feeding are not separately demonstrated.",
+      "v2/v3 removed the small full count box while retaining the three-toe foot caption; full proposed counts are preserved in this manifest."
+    ]
+  },
+  "versions": [
+    {
+      "version": 1,
+      "qa": {
+        "pixel_review_performed": true,
+        "version_notes": [
+          "Initial version. Foot front view has three claws on closer inspection, but crowded oblique plantar details make the proposed count hard to read.",
+          "Hind-joint legend uses Hock at the forward stifle and Ankle at the lower hock; not anatomical authority. Superseded by clarified versions."
+        ],
+        "selected_for_review": false
+      }
+    },
+    {
+      "version": 2,
+      "qa": {
+        "pixel_review_performed": true,
+        "version_notes": [
+          "Foot panel clarified with front and plantar views and three-toe caption.",
+          "Attempted named-joint correction produced malformed words in the landmark legend; superseded by v3."
+        ],
+        "selected_for_review": false
+      }
+    },
+    {
+      "version": 3,
+      "qa": {
+        "pixel_review_performed": true,
+        "version_notes": [
+          "Selected review version. Malformed named-joint legend removed; concise EXTERNAL LANDMARKS / PROPOSED ONLY retained.",
+          "Foot front/plantar panel remains clearer; all remaining limitations listed at record level."
+        ],
+        "selected_for_review": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "baseline_commit",
+    "baseline_url",
+    "canon_status",
+    "counting_policy",
+    "records",
+    "schema_version",
+    "source_ids"
+  ],
+  "properties": {
+    "baseline_commit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "baseline_url": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "counting_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "baseline_asset_id",
+          "baseline_hash_match",
+          "baseline_reference_id",
+          "bytes",
+          "canon_status",
+          "copied_into_package",
+          "decode_verified",
+          "direct_visual_review_this_phase",
+          "environment_observation",
+          "height",
+          "id",
+          "limitations",
+          "mode",
+          "name",
+          "oath_ids",
+          "repository_path",
+          "repository_url",
+          "review_depth",
+          "sha256",
+          "source_ids",
+          "width"
+        ],
+        "properties": {
+          "baseline_asset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "baseline_hash_match": {
+            "type": "boolean"
+          },
+          "baseline_reference_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bytes": {
+            "type": "number"
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "copied_into_package": {
+            "type": "boolean"
+          },
+          "decode_verified": {
+            "type": "boolean"
+          },
+          "direct_visual_review_this_phase": {
+            "type": "boolean"
+          },
+          "environment_observation": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string",
+                "minLength": 1
+              }
+            ]
+          },
+          "height": {
+            "type": "number"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^REF-[0-9]{3}$"
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "mode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "oath_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "repository_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "repository_url": {
+            "type": "string",
+            "minLength": 1
+          },
+          "review_depth": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "width": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "environment-reference-evidence.schema.json",
+  "title": "ENVIRONMENT_REFERENCE_EVIDENCE strict proposal schema"
+}

@@ -1,0 +1,410 @@
+{
+  "blenderVersion": "4.3.2",
+  "openedSource": "/tmp/aetherion-fault-review-v9/amethyst-short-blade/source.blend",
+  "meshObjects": 116,
+  "missingUV": [],
+  "missingMaterials": [],
+  "images": [
+    {
+      "name": "aged_bronze_basecolor",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "sRGB",
+      "packed": true,
+      "packedSha256": "ff9a194d52ee1a7275c76823267edf280b565b0fe7e133c78d1c08a22cc6d2ea"
+    },
+    {
+      "name": "aged_bronze_metallic",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "d71ead5e34891a5f4c5060533b9b5863b5f177ceafdc9ce1313ed9948365f13b"
+    },
+    {
+      "name": "aged_bronze_normal",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "d7f9dfc9cbb1156dd0318ea01c8f6fb9b93678575925e6748e30cd3e92ac9c3d"
+    },
+    {
+      "name": "aged_bronze_roughness",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "0c4b16afafebe4a041892b5cb94b84380f5ce0e36471e05062efab7023ff2c77"
+    },
+    {
+      "name": "amethyst_basecolor",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "sRGB",
+      "packed": true,
+      "packedSha256": "6426ceec6ebe24c53ef5b62635bee45f7379417f29d483837d9c49cbc6371027"
+    },
+    {
+      "name": "amethyst_metallic",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "051db79660cf909d63bd480d9eabcf856b2d778f03a8d98efb2528600171c91a"
+    },
+    {
+      "name": "amethyst_normal",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "e9e052176dbb61bc42c07a8b5cc3f905a1e3c5029765234bcaf38a460ce5f3ef"
+    },
+    {
+      "name": "amethyst_roughness",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "a41f947522e4761c259c1c782009bdb298a5468272642a00653a27d3bd04255a"
+    },
+    {
+      "name": "dark_leather_basecolor",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "sRGB",
+      "packed": true,
+      "packedSha256": "a3758b3565621885cde81f351a20d1c3c82d0f971ae87bdd08adc01c429435c2"
+    },
+    {
+      "name": "dark_leather_metallic",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "051db79660cf909d63bd480d9eabcf856b2d778f03a8d98efb2528600171c91a"
+    },
+    {
+      "name": "dark_leather_normal",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "8368031bb1d79bf64bf02d1940a0983c5172d800f83bae29f896ff6e9f14209d"
+    },
+    {
+      "name": "dark_leather_roughness",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "c2427c4dff6dde6fe73bdfd2e0e0af59276f11ecc84395603c98b3b9cb33a63f"
+    },
+    {
+      "name": "taupe_stone_basecolor",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "sRGB",
+      "packed": true,
+      "packedSha256": "436cc205e63b0163c24dd7aead601c1267ca7c3cfb008695e8bf96678d041a82"
+    },
+    {
+      "name": "taupe_stone_metallic",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "051db79660cf909d63bd480d9eabcf856b2d778f03a8d98efb2528600171c91a"
+    },
+    {
+      "name": "taupe_stone_normal",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "e165c8eec5a62e1d9d79f15b81c8591aed3ebe86f9364452a0066af95c1bc2a8"
+    },
+    {
+      "name": "taupe_stone_roughness",
+      "size": [
+        512,
+        512
+      ],
+      "colorspace": "Non-Color",
+      "packed": true,
+      "packedSha256": "d9daae1938a63cdbd015d2c09128739e453061eeb75f83e88b4f1a6f79137354"
+    }
+  ],
+  "nodeConnections": {
+    "aged_bronze": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      },
+      {
+        "fromNode": "Image Texture",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Base Color"
+      },
+      {
+        "fromNode": "Image Texture.001",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Roughness"
+      },
+      {
+        "fromNode": "Image Texture.002",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Metallic"
+      },
+      {
+        "fromNode": "Image Texture.003",
+        "fromSocket": "Color",
+        "toNode": "Normal Map",
+        "toSocket": "Color"
+      },
+      {
+        "fromNode": "Normal Map",
+        "fromSocket": "Normal",
+        "toNode": "Principled BSDF",
+        "toSocket": "Normal"
+      }
+    ],
+    "amethyst": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      },
+      {
+        "fromNode": "Image Texture",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Base Color"
+      },
+      {
+        "fromNode": "Image Texture.001",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Roughness"
+      },
+      {
+        "fromNode": "Image Texture.002",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Metallic"
+      },
+      {
+        "fromNode": "Image Texture.003",
+        "fromSocket": "Color",
+        "toNode": "Normal Map",
+        "toSocket": "Color"
+      }
+    ],
+    "Amethyst_natural_color_zone_0": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      },
+      {
+        "fromNode": "Image Texture.001",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Roughness"
+      },
+      {
+        "fromNode": "Image Texture.002",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Metallic"
+      },
+      {
+        "fromNode": "Image Texture.003",
+        "fromSocket": "Color",
+        "toNode": "Normal Map",
+        "toSocket": "Color"
+      }
+    ],
+    "Amethyst_natural_color_zone_1": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      },
+      {
+        "fromNode": "Image Texture.001",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Roughness"
+      },
+      {
+        "fromNode": "Image Texture.002",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Metallic"
+      },
+      {
+        "fromNode": "Image Texture.003",
+        "fromSocket": "Color",
+        "toNode": "Normal Map",
+        "toSocket": "Color"
+      }
+    ],
+    "dark_leather": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      },
+      {
+        "fromNode": "Image Texture",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Base Color"
+      },
+      {
+        "fromNode": "Image Texture.001",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Roughness"
+      },
+      {
+        "fromNode": "Image Texture.002",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Metallic"
+      },
+      {
+        "fromNode": "Image Texture.003",
+        "fromSocket": "Color",
+        "toNode": "Normal Map",
+        "toSocket": "Color"
+      },
+      {
+        "fromNode": "Normal Map",
+        "fromSocket": "Normal",
+        "toNode": "Principled BSDF",
+        "toSocket": "Normal"
+      }
+    ],
+    "Fresh_mineral_break": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      },
+      {
+        "fromNode": "Image Texture.001",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Roughness"
+      },
+      {
+        "fromNode": "Image Texture.002",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Metallic"
+      },
+      {
+        "fromNode": "Image Texture.003",
+        "fromSocket": "Color",
+        "toNode": "Normal Map",
+        "toSocket": "Color"
+      },
+      {
+        "fromNode": "Normal Map",
+        "fromSocket": "Normal",
+        "toNode": "Principled BSDF",
+        "toSocket": "Normal"
+      }
+    ],
+    "Material": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      }
+    ],
+    "taupe_stone": [
+      {
+        "fromNode": "Principled BSDF",
+        "fromSocket": "BSDF",
+        "toNode": "Material Output",
+        "toSocket": "Surface"
+      },
+      {
+        "fromNode": "Image Texture",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Base Color"
+      },
+      {
+        "fromNode": "Image Texture.001",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Roughness"
+      },
+      {
+        "fromNode": "Image Texture.002",
+        "fromSocket": "Color",
+        "toNode": "Principled BSDF",
+        "toSocket": "Metallic"
+      },
+      {
+        "fromNode": "Image Texture.003",
+        "fromSocket": "Color",
+        "toNode": "Normal Map",
+        "toSocket": "Color"
+      },
+      {
+        "fromNode": "Normal Map",
+        "fromSocket": "Normal",
+        "toNode": "Principled BSDF",
+        "toSocket": "Normal"
+      }
+    ]
+  },
+  "sourceModified": false
+}

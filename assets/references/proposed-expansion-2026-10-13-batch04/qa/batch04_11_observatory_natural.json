@@ -1,0 +1,33 @@
+{
+  "concept_id": "batch04_11_observatory_natural",
+  "reported_group_qa": {
+    "preferred_proposal_file": "batch04_11_observatory_natural_v02.png",
+    "pixel_qa": {
+      "pass": [
+        "v02 supplies visibly opposite-facing profiles",
+        "Two wings replacing forelimbs, two hind legs and one lobe-bearing prehensile tail visible",
+        "Three wing rays numbered in anatomy proposal; three-toed grip readable in large foot detail",
+        "Wing flight, foot and tail perch contact, feeding ecology panels included"
+      ],
+      "issues": [
+        "Full-view small feet/rays not independently countable everywhere; digit invariance still needs production anatomy audit",
+        "Tail lobe sits farther down tail than proximal-base specification; attachment and ballast mechanism unresolved",
+        "Independent underside view absent; articulation map is numbered surface map rather than skeleton",
+        "v02 heading misspells CONTACT as SONTACT",
+        "Left/right profiles have minor wing and leg pose differences; not measured orthographic turnaround",
+        "Detailed feather/scales approach instead of requested simple low-poly down masses"
+      ]
+    },
+    "acceptance": "PARTIAL_CONCEPT_ONLY_NOT_PRODUCTION_READY"
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {}
+    },
+    {
+      "version": "v02",
+      "qa": {}
+    }
+  ]
+}

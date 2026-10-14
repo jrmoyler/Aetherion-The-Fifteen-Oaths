@@ -1,0 +1,24 @@
+{
+  "status": "PROPOSED_UNVERIFIED_IN_UNREAL",
+  "api_documentation_baseline": "Unreal Python 5.6",
+  "source_format": "glTF 2.0 binary GLB; repository-relative production manifests schemaVersion 1",
+  "destination_policy": "New /Game/AetherionProductionReview/<RunName> only; no replacements",
+  "source_units": "glTF meters",
+  "unreal_expected_units": "centimeters; verify imported bounds against manifest dimensionsMeters before approval",
+  "coordinate_conversion": "Importer-managed; verify orientation, handedness, pivot and scale in editor",
+  "materials": "Inspect actual imported material slots and textures; visually verify base color, normal orientation, roughness and metallic channels",
+  "pipeline_policy": "Installed glTF pipeline defaults; operator must record project/engine pipeline settings. Adapter does not modify defaults or guess engine plugin asset paths",
+  "lod_policy": "Each GLB imports separately. External LODs are NOT assigned to the base mesh by this adapter",
+  "collision_policy": "Collision GLBs import as review geometry only. No collision body/physics assignment claim",
+  "animation_policy": "Record actual imported AnimSequence objects and duration; compare source clip count. Playback, retargeting and deformation require separate tests",
+  "performance_budgets": "PROPOSED_UNMEASURED; no rendering performance claim",
+  "required_remaining_gates": [
+    "Real editor import and supported-property inspection",
+    "Material and texture visual review",
+    "Native LOD attachment and distance switching tests",
+    "Native collision/physics integration and gameplay tests",
+    "Animation playback and deformation tests",
+    "Reference matching and scale/pivot review",
+    "Rendered parity and measured performance"
+  ]
+}

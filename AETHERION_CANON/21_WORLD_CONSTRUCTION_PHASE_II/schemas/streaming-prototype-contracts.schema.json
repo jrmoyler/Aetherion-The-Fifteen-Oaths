@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Phase II streaming prototype planning contracts",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "canon_status",
+    "records"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "canon_status": {
+      "const": "PROPOSED"
+    },
+    "records": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "authority",
+          "source_refs",
+          "inputs",
+          "outputs",
+          "invariants",
+          "acceptance_tests",
+          "failure_cases",
+          "id",
+          "canon_status",
+          "source_ids",
+          "pilot_region_id",
+          "scope_regions",
+          "baseline_contract_ids",
+          "interface_status",
+          "acceptance_status"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "authority": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_refs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "inputs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "invariants": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "acceptance_tests": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "failure_cases": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^p2-streaming-09-[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "canon_status": {
+            "const": "PROPOSED"
+          },
+          "source_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "P2-SRC-FOUNDATION",
+                "P2-SRC-DIRECTIVE",
+                "P2-SRC-PROPOSAL"
+              ]
+            }
+          },
+          "pilot_region_id": {
+            "const": "region-09"
+          },
+          "scope_regions": {
+            "type": "array",
+            "minItems": 15,
+            "maxItems": 15,
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "region-01",
+                "region-02",
+                "region-03",
+                "region-04",
+                "region-05",
+                "region-06",
+                "region-07",
+                "region-08",
+                "region-09",
+                "region-10",
+                "region-11",
+                "region-12",
+                "region-13",
+                "region-14",
+                "region-15"
+              ]
+            }
+          },
+          "baseline_contract_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^contract-[a-z0-9]+(?:-[a-z0-9]+)*$"
+            }
+          },
+          "interface_status": {
+            "const": "PROPOSED_NOT_EXISTING_API"
+          },
+          "acceptance_status": {
+            "const": "SPECIFIED_NOT_EXECUTED"
+          }
+        }
+      }
+    }
+  }
+}

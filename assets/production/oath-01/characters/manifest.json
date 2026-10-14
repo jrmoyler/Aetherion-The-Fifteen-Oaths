@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o01-a-characters-family",
+  "referenceIds": [
+    "reference-090",
+    "reference-060"
+  ],
+  "status": "PARTIAL_PRODUCTION_CANDIDATES_UNREVIEWED",
+  "assets": [
+    {
+      "id": "kiln-ninja-ensemble-candidate",
+      "archetypeId": "kiln-ninja",
+      "name": "Kiln oath ninja \u2014 rigged ensemble candidate",
+      "type": "character",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "glb": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+        "lod1": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod1.glb",
+        "lod2": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-lod2.glb",
+        "collision": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-collision.glb",
+        "textures": [
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-basecolor.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-orm.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-front.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-back.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-side.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-hero.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-01.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-13.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-25.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-idle_breath-37.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-01.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-09.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-17.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-walk_in_place-25.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-01.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-13.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-25.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-cast_release-37.png",
+          "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/pose-contact-sheet.png"
+        ]
+      },
+      "triangles": {
+        "glb": 4586,
+        "lod1": 2788,
+        "lod2": 1505,
+        "collision": 76
+      },
+      "dimensionsMeters": [
+        0.905956,
+        0.345,
+        1.806832
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "applicability": "HUMANOID_WEIGHTED_DEFORMATION",
+        "present": true,
+        "bones": 38,
+        "evidence": {
+          "vertices": 2577,
+          "multiInfluenceVertices": 486,
+          "unweightedVertices": 0,
+          "maximumWeightSumError": 3.5762786865234375e-07,
+          "boneCount": 38,
+          "boneNames": [
+            "finger1.L",
+            "finger1_tip.L",
+            "finger2.L",
+            "finger2_tip.L",
+            "finger3.L",
+            "finger3_tip.L",
+            "finger4.L",
+            "finger4_tip.L",
+            "thumb.L",
+            "finger1.R",
+            "finger1_tip.R",
+            "finger2.R",
+            "finger2_tip.R",
+            "finger3.R",
+            "finger3_tip.R",
+            "finger4.R",
+            "finger4_tip.R",
+            "thumb.R",
+            "root",
+            "pelvis",
+            "spine",
+            "chest",
+            "neck",
+            "head",
+            "clavicle.L",
+            "upper_arm.L",
+            "forearm.L",
+            "hand.L",
+            "thigh.L",
+            "shin.L",
+            "foot.L",
+            "clavicle.R",
+            "upper_arm.R",
+            "forearm.R",
+            "hand.R",
+            "thigh.R",
+            "shin.R",
+            "foot.R"
+          ],
+          "socketNames": [
+            "grip_primary",
+            "cast_origin",
+            "hit_reference",
+            "stow"
+          ],
+          "evaluatedPoseChecks": [
+            {
+              "clip": "idle_breath",
+              "frame": 24,
+              "finiteVertices": true,
+              "movedVertexCount": 1694,
+              "maximumDisplacementMeters": 0.0006170234192704665
+            },
+            {
+              "clip": "walk_in_place",
+              "frame": 16,
+              "finiteVertices": true,
+              "movedVertexCount": 2577,
+              "maximumDisplacementMeters": 0.06832067361186124
+            },
+            {
+              "clip": "cast_release",
+              "frame": 24,
+              "finiteVertices": true,
+              "movedVertexCount": 1705,
+              "maximumDisplacementMeters": 0.7439691930470625
+            }
+          ]
+        },
+        "facialRig": false
+      },
+      "animations": [
+        {
+          "name": "idle_breath",
+          "frames": 48,
+          "fps": 24,
+          "rootMotion": "IN_PLACE",
+          "status": "AUTHORED_POSE_RENDER_REVIEW_REQUIRED"
+        },
+        {
+          "name": "walk_in_place",
+          "frames": 32,
+          "fps": 24,
+          "rootMotion": "IN_PLACE",
+          "status": "AUTHORED_POSE_RENDER_REVIEW_REQUIRED"
+        },
+        {
+          "name": "cast_release",
+          "frames": 48,
+          "fps": 24,
+          "rootMotion": "IN_PLACE",
+          "status": "AUTHORED_POSE_RENDER_REVIEW_REQUIRED"
+        }
+      ],
+      "remainingGates": [
+        "Exact art approval and face likeness refinement against references090/060",
+        "Facial expressions and speech rig absent; full ensemble/customization not delivered",
+        "Cape is chest-weighted; cloth deformation/collision refinement required",
+        "Hand grasp fit and socket calibration against actual equipped weapons",
+        "Animation foot-contact/grounding and interruption gameplay tests",
+        "Authored-character retargeting of source castable timing; no source animation replaced",
+        "Godot Unreal and Three.js real import/render/runtime tests",
+        "Collision navigation/hitbox and LOD transition gameplay validation",
+        "Measured device performance and accessibility review"
+      ]
+    }
+  ]
+}

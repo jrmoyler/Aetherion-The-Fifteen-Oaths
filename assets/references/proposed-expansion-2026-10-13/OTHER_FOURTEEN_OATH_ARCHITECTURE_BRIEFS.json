@@ -1,0 +1,2508 @@
+{
+  "records": [
+    {
+      "id": "reference-expansion-architecture-o01-first",
+      "canonical_kit_id": "p2-arch-01-kiln-courts",
+      "baseline_asset_id": "asset-o01-n-architecture-family",
+      "primary_module": "buttressed vent bay",
+      "supporting_interface_modules": [
+        "cooling gallery",
+        "removable roof cassette"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/0",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Heavy buttressed shells enclose ventilated work courts, with replaceable ceramic roofs and external cooling galleries. Public buildings display repair seams as civic records rather than hiding all wear behind black spikes.",
+      "exact_source_construction": "Build compression shell before attaching replaceable vent cassettes; heat channels remain below guarded public decks.",
+      "exact_module_records": [
+        {
+          "name": "buttressed vent bay",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            2.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Compression pier seats on plinth; slotted ceramic infill hangs on replaceable iron rails; side service gap drains ash.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Compression pier seats on plinth; slotted ceramic infill hangs on replaceable iron rails; side service gap drains ash.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "cooling gallery",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            2.4,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Outer bracket seats bolt to buttress sockets; guarded deck lies above independently sealed cooling pipes.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Outer bracket seats bolt to buttress sockets; guarded deck lies above independently sealed cooling pipes.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "removable roof cassette",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            2.0,
+            4.0,
+            0.45
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Ceramic lap edges engage roof-seat cleats; lifting sockets sit outside drain channels.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Ceramic lap edges engage roof-seat cleats; lifting sockets sit outside drain channels.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "external cooling loop and hand-operated isolation shutter",
+        "separate cool evacuation deck from furnace operation",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Vented rectangular kilns, ceramic slats, wedge blades; short broad sorcerer contrasts lean caped ninja",
+        "material_family": [
+          "fired ceramic",
+          "oxidized iron",
+          "firecloth"
+        ],
+        "palette": [
+          "soot black",
+          "fired terracotta",
+          "ember orange"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-090",
+            "role": "ninja",
+            "description": "Short asymmetric dark cape, red ceramic torso slats and vented forearm blocks over black fabric."
+          },
+          {
+            "reference_id": "reference-091",
+            "role": "sorcerer",
+            "description": "Short broad forge-worker silhouette, terracotta apron panels and tall rectangular back kiln; backpack-removed fifth view."
+          }
+        ],
+        "architecture_motif": "Obsidian basalt terraces, vented foundry towers and lava-lit channels",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Terracotta and dark basalt courts, pointed openings, cylindrical slit-vent towers and restrained ember channels.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-113/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Replaceable iron rail end caps, shallow ash collection lip and inspectable cassette lifting socket.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion KILN OATH inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Terracotta and dark basalt courts, pointed openings, cylindrical slit-vent towers and restrained ember channels. Existing proposed kit purpose: Heavy buttressed shells enclose ventilated work courts, with replaceable ceramic roofs and external cooling galleries. Public buildings display repair seams as civic records rather than hiding all wear behind black spikes. Existing construction constraint: Build compression shell before attaching replaceable vent cassettes; heat channels remain below guarded public decks. Materials: basalt, fired ceramic roof cassettes, oxidized iron ties. PRIMARY SUBJECT: One buttressed vent-bay corner with detachable ceramic infill, a short external cooling-gallery connection and a small roof-cassette seat. Make the compression pier legible under the cladding. Show ash cleanout and the cool public deck physically separated from sealed heat/cooling service runs. EXACT SOURCE MODULE CONSTRAINTS: buttressed vent bay: Compression pier seats on plinth; slotted ceramic infill hangs on replaceable iron rails; side service gap drains ash. cooling gallery: Outer bracket seats bolt to buttress sockets; guarded deck lies above independently sealed cooling pipes. removable roof cassette: Ceramic lap edges engage roof-seat cleats; lifting sockets sit outside drain channels. PROPOSED NEW JOINERY: Replaceable iron rail end caps, shallow ash collection lip and inspectable cassette lifting socket. LIMITS: Do not turn the whole bay into a fire-emitting weapon or copy the overview mechanical bird. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/01_p2-arch-01-kiln-courts_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o02-first",
+      "canonical_kit_id": "p2-arch-02-rime-vaults",
+      "baseline_asset_id": "asset-o02-n-architecture-family",
+      "primary_module": "warm vestibule",
+      "supporting_interface_modules": [
+        "sealed folio vault"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/1",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Insulated stone shells surround blue-white ice vaults, with narrow vestibules and warm public rooms. Outer ice is replaceable environmental architecture; manuscript rooms and occupied structures need credible humidity and thermal separation.",
+      "exact_source_construction": "Rock-founded occupied shell and moisture barrier support a detachable outer ice layer; no occupied room relies on thawing ice.",
+      "exact_module_records": [
+        {
+          "name": "warm vestibule",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            3.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Two offset door-clear sockets enclose insulated buffer; independent emergency leaves cannot mutually lock occupants.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Two offset door-clear sockets enclose insulated buffer; independent emergency leaves cannot mutually lock occupants.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "sealed folio vault",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Stone base and thermal liner join at vapor-control seam; cold storage drawers isolate from warm occupied room.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Stone base and thermal liner join at vapor-control seam; cold storage drawers isolate from warm occupied room.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "double-door thermal vestibule with manual release",
+        "keep warm public room and archive humidity zone independent",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Quilted compact hood versus tall narrow scholar; laminated translucent edges and angular folio stacks",
+        "material_family": [
+          "quilted felt",
+          "dark leather",
+          "rime laminate"
+        ],
+        "palette": [
+          "charcoal",
+          "chalk white",
+          "pale ice blue"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-088",
+            "role": "sorcerer",
+            "description": "Very tall narrow gray-and-white robe, sharp raised collar, long white beard and a rigid frost-folio hip rack."
+          },
+          {
+            "reference_id": "reference-089",
+            "role": "ninja",
+            "description": "Compact hooded charcoal suit with light quilted chest block, pale rime forearm plates and compact boot profile."
+          }
+        ],
+        "architecture_motif": "Glacial vault shelves, ice pillars and dark stone archive thresholds",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Dark stone vaulted surroundings, pale blue ice plates, broad cold paving and vertical ice/cliff masses.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-112/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Inspectable liner junction, detachable outer-ice clip, recessed melt collection lip and simple mechanical release handles.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion RIME ARCHIVE inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Dark stone vaulted surroundings, pale blue ice plates, broad cold paving and vertical ice/cliff masses. Existing proposed kit purpose: Insulated stone shells surround blue-white ice vaults, with narrow vestibules and warm public rooms. Outer ice is replaceable environmental architecture; manuscript rooms and occupied structures need credible humidity and thermal separation. Existing construction constraint: Rock-founded occupied shell and moisture barrier support a detachable outer ice layer; no occupied room relies on thawing ice. Materials: dense stone, insulating felt liner, replaceable ice facing, dark metal brackets. PRIMARY SUBJECT: A warm vestibule section connecting a stone public room to a cold archive zone, with two offset door sockets. Show independent emergency leaves, thermal liner and vapor-control seam. A small external cladding inset distinguishes removable ice facing from the load-bearing stone. Keep warm-room and folio-vault humidity boundaries explicit. EXACT SOURCE MODULE CONSTRAINTS: warm vestibule: Two offset door-clear sockets enclose insulated buffer; independent emergency leaves cannot mutually lock occupants. sealed folio vault: Stone base and thermal liner join at vapor-control seam; cold storage drawers isolate from warm occupied room. PROPOSED NEW JOINERY: Inspectable liner junction, detachable outer-ice clip, recessed melt collection lip and simple mechanical release handles. LIMITS: No habitable room bears on melting ice. No paired doors that lock a person between them. No universal crystal castle. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/02_p2-arch-02-rime-vaults_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o03-first",
+      "canonical_kit_id": "p2-arch-03-storm-relays",
+      "baseline_asset_id": "asset-o03-n-architecture-family",
+      "primary_module": "grounded pylon foot",
+      "supporting_interface_modules": [
+        "insulator gap",
+        "shielded low hall"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/2",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Tall open-frame towers lean into cable tension, with ceramic breaks and broad grounding feet. Habitable spaces are low and shielded; dangerous transmission hardware remains visibly distinct from ordinary domestic lighting.",
+      "exact_source_construction": "Grounding feet and frame carry conductor load; isolate decorative glow and live hazard volume from footpaths.",
+      "exact_module_records": [
+        {
+          "name": "grounded pylon foot",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            2.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Stone footing anchors four frame legs and segregated grounding lugs; cable load and walking deck separate.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Stone footing anchors four frame legs and segregated grounding lugs; cable load and walking deck separate.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "insulator gap",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.2,
+            0.5,
+            0.5
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Ceramic break interfaces to conductor clamps; separate minimum hazard-clearance envelope unresolved pending effect design.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Ceramic break interfaces to conductor clamps; separate minimum hazard-clearance envelope unresolved pending effect design.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "shielded low hall",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            8.0,
+            4.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Grounded perimeter frame supports roof; isolated service duct does not pierce occupied grounding envelope.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Grounded perimeter frame supports roof; isolated service duct does not pierce occupied grounding envelope.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "grounding switch and mechanically interlocked service cage",
+        "maintain sheltered pedestrian bypass beneath cable spans",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Thin antenna ninja contrasted with broad capelet sorcerer; open copper branches and insulator nodes",
+        "material_family": [
+          "insulating cloth",
+          "copper",
+          "matte ceramic"
+        ],
+        "palette": [
+          "navy",
+          "oxidized copper",
+          "ceramic white"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-085",
+            "role": "ninja",
+            "description": "Tall slim navy sleeveless suit, copper forearm aerial apparatus and slim dorsal relay/cable loop."
+          },
+          {
+            "reference_id": "reference-087",
+            "role": "sorcerer",
+            "description": "Broad navy capelet and cropped trouser silhouette, copper branching collar aerials and pale ceramic shin plates."
+          }
+        ],
+        "architecture_motif": "Mountain relay pylons, suspended conductive bridges and linked towers",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Tapered dark pylons on broad stone feet, copper-colored rings and suspended cables; ordinary walkways sit below transmission hardware.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-111/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Bolted leg shoes, removable ceramic collar cover and segregated cable-service channel.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion STORM RELAY inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Tapered dark pylons on broad stone feet, copper-colored rings and suspended cables; ordinary walkways sit below transmission hardware. Existing proposed kit purpose: Tall open-frame towers lean into cable tension, with ceramic breaks and broad grounding feet. Habitable spaces are low and shielded; dangerous transmission hardware remains visibly distinct from ordinary domestic lighting. Existing construction constraint: Grounding feet and frame carry conductor load; isolate decorative glow and live hazard volume from footpaths. Materials: stone grounding plinth, copper conductor, matte ceramic break, shielded timber. PRIMARY SUBJECT: A grounded pylon footing supporting four fixed frame legs, with separate conductor/grounding lugs and a shielded low-hall interface. Show front/rear/top and a footing section; one exploded leg-to-stone joint; a small ceramic-break inset. Draw separate symbolic cable-load and public-route paths. EXACT SOURCE MODULE CONSTRAINTS: grounded pylon foot: Stone footing anchors four frame legs and segregated grounding lugs; cable load and walking deck separate. insulator gap: Ceramic break interfaces to conductor clamps; separate minimum hazard-clearance envelope unresolved pending effect design. shielded low hall: Grounded perimeter frame supports roof; isolated service duct does not pierce occupied grounding envelope. PROPOSED NEW JOINERY: Bolted leg shoes, removable ceramic collar cover and segregated cable-service channel. LIMITS: Electrical hazard clearance is explicitly unresolved; do not invent safe distances, real-voltage ratings or exposed live arcs across footpaths. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/03_p2-arch-03-storm-relays_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o04-first",
+      "canonical_kit_id": "p2-arch-04-tidal-refuges",
+      "baseline_asset_id": "asset-o04-n-architecture-family",
+      "primary_module": "refuge arcade",
+      "supporting_interface_modules": [
+        "spillway edge",
+        "removable flood floor"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/3",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Porous limestone arcades, glazed channel walls and removable flood floors embrace changing water levels. Public quays include accessible ramps and dry refuge levels; living aqueduct growth needs pruning and inspection.",
+      "exact_source_construction": "Pile or rock foundations support a dry refuge datum; wet channel segments assemble separately with visible overflow route.",
+      "exact_module_records": [
+        {
+          "name": "refuge arcade",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Stone arch feet bear on raised dry datum; deck connection remains above authored flood threshold.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Stone arch feet bear on raised dry datum; deck connection remains above authored flood threshold.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "spillway edge",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            1.2,
+            1.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Channel lip keys into sealed bank sockets; separate overflow volume drains downstream.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Channel lip keys into sealed bank sockets; separate overflow volume drains downstream.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "removable flood floor",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            0.3
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Timber/tile panel seats on permanent ledges; removal closes wet bay while dry bypass stays intact.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Timber/tile panel seats on permanent ledges; removal closes wet bay while dry bypass stays intact.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "counterweighted sluice with hand-crank override",
+        "retain dry refuge route above authored surge state",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Fitted shell diver and broad reservoir keeper; crescents, overlapping nacre plates, water vessels",
+        "material_family": [
+          "diving cloth",
+          "nacre shell",
+          "brass",
+          "clear reservoir glass"
+        ],
+        "palette": [
+          "deep blue",
+          "pearl",
+          "sea green"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-084",
+            "role": "ninja",
+            "description": "Fitted deep-blue diving suit, asymmetric nacre shoulder scales, crescent shell helmet and clear hip reservoir."
+          },
+          {
+            "reference_id": "reference-086",
+            "role": "sorcerer",
+            "description": "Broad deep-blue coat, large round nacre collar plates, brass fixtures and three clear water reservoirs at the belt."
+          }
+        ],
+        "architecture_motif": "Pale coastal aqueduct terraces, shell arches and canal gates",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Pale limestone-like sea arcades, blue glazed water channels, flowing terraces, broad bridges and brass accents.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-110/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Replaceable brass deck-panel retaining clips, ceramic spillway sealing strip and simple inspection access slot.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion TIDAL COVENANT inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Pale limestone-like sea arcades, blue glazed water channels, flowing terraces, broad bridges and brass accents. Existing proposed kit purpose: Porous limestone arcades, glazed channel walls and removable flood floors embrace changing water levels. Public quays include accessible ramps and dry refuge levels; living aqueduct growth needs pruning and inspection. Existing construction constraint: Pile or rock foundations support a dry refuge datum; wet channel segments assemble separately with visible overflow route. Materials: porous limestone, glazed channel ceramic, brass fittings, timber flood floor. PRIMARY SUBJECT: One refuge-arcade bay seated on a dry raised structural datum, adjacent to but independent of a wet spillway segment. Show section through arch-foot bearing and dry deck; a removable timber flood-floor panel in the wet bay; separate arrows for flood overflow and continuous dry civilian route. Include low-water and authored-high-water intent insets with identical structural geometry. EXACT SOURCE MODULE CONSTRAINTS: refuge arcade: Stone arch feet bear on raised dry datum; deck connection remains above authored flood threshold. spillway edge: Channel lip keys into sealed bank sockets; separate overflow volume drains downstream. removable flood floor: Timber/tile panel seats on permanent ledges; removal closes wet bay while dry bypass stays intact. PROPOSED NEW JOINERY: Replaceable brass deck-panel retaining clips, ceramic spillway sealing strip and simple inspection access slot. LIMITS: Flood heights and freeboard remain unresolved: no invented numbers. Do not imply residents must swim or bind the Oath to reach refuge. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/04_p2-arch-04-tidal-refuges_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o05-first",
+      "canonical_kit_id": "p2-arch-05-fault-buttresses",
+      "baseline_asset_id": "asset-o05-n-architecture-family",
+      "primary_module": "compression arch",
+      "supporting_interface_modules": [
+        "expansion joint",
+        "resonator pocket"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/4",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Compression arches, buttressed galleries and deliberately separated movement joints make endurance visible. Crystal appears in surveyed seams and replaceable resonators, not as unsupported sharp geometry holding every roof.",
+      "exact_source_construction": "Use arch voussoirs and braced piers with visible movement joints; crystal occupies pockets rather than bearing entire inhabited roofs.",
+      "exact_module_records": [
+        {
+          "name": "compression arch",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            1.2,
+            4.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Voussoir ring transfers load to two keyed abutment seats; spring line and thrust buttress sockets explicit.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Voussoir ring transfers load to two keyed abutment seats; spring line and thrust buttress sockets explicit.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "expansion joint",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            0.25,
+            4.0,
+            0.4
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Independent slab faces retain movement gap; removable bridge plate maintains walk datum.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Independent slab faces retain movement gap; removable bridge plate maintains walk datum.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "resonator pocket",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.2,
+            0.8,
+            1.6
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Replaceable crystal cradle mounts in non-load-bearing recess with padded clamp sockets.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Replaceable crystal cradle mounts in non-load-bearing recess with padded clamp sockets.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "calibrated resonator cradle and manual survey stop",
+        "protect relief corridor while inspection bay is closed",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Squared stocky worker silhouettes, stacked slabs and prismatic amethyst inclusions",
+        "material_family": [
+          "layered shale",
+          "sandstone",
+          "leather",
+          "raw amethyst"
+        ],
+        "palette": [
+          "shale gray",
+          "sandstone tan",
+          "amethyst violet"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-082",
+            "role": "ninja",
+            "description": "Stocky square silhouette, thick slate plates, short dark sleeves, stone mask, sandstone trim and hip amethyst."
+          },
+          {
+            "reference_id": "reference-083",
+            "role": "sorcerer",
+            "description": "Broad sleeveless stone-worker body, square slate apron plates and a rectangular rear mineral clamp frame."
+          }
+        ],
+        "architecture_motif": "Canyon terraces, broad lintels and crystal-seamed retaining walls",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Warm bedded stone pillars and buttresses, sharp surveyed strata and restrained violet crystal seams.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-109/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Distinct keyed stone seating, inspectable iron movement tie, padded removable resonator cradle and flush bridge-plate fastening.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion FAULT CHOIR inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Warm bedded stone pillars and buttresses, sharp surveyed strata and restrained violet crystal seams. Existing proposed kit purpose: Compression arches, buttressed galleries and deliberately separated movement joints make endurance visible. Crystal appears in surveyed seams and replaceable resonators, not as unsupported sharp geometry holding every roof. Existing construction constraint: Use arch voussoirs and braced piers with visible movement joints; crystal occupies pockets rather than bearing entire inhabited roofs. Materials: bedded stone, replaceable crystal resonator, iron movement tie. PRIMARY SUBJECT: One load-bearing compression-arch bay with two keyed abutments, visible voussoir ring, spring line and thrust-buttress seats. Show a movement-joint cutaway with removable walking cover and a separate non-load-bearing crystal-resonator pocket. One small assembly section proves the crystal can be removed without dropping the roof. EXACT SOURCE MODULE CONSTRAINTS: compression arch: Voussoir ring transfers load to two keyed abutment seats; spring line and thrust buttress sockets explicit. expansion joint: Independent slab faces retain movement gap; removable bridge plate maintains walk datum. resonator pocket: Replaceable crystal cradle mounts in non-load-bearing recess with padded clamp sockets. PROPOSED NEW JOINERY: Distinct keyed stone seating, inspectable iron movement tie, padded removable resonator cradle and flush bridge-plate fastening. LIMITS: No levitating structural arch stones, universal crystal supports or numerical movement/strength claims. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/05_p2-arch-05-fault-buttresses_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o06-first",
+      "canonical_kit_id": "p2-arch-06-reed-halls",
+      "baseline_asset_id": "asset-o06-n-architecture-family",
+      "primary_module": "tensioned acoustic rib",
+      "supporting_interface_modules": [
+        "guy anchor",
+        "storm-stowed sail"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/5",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Carved timber ribs, tension cables and adjustable acoustic baffles create open structures that respond to weather. Large occupied buildings anchor to rock, and flexible bridges have visible load limits and calm-weather alternatives.",
+      "exact_source_construction": "Pin ribs to rock-founded shoes; sail membranes are removable and tension paths remain visible.",
+      "exact_module_records": [
+        {
+          "name": "tensioned acoustic rib",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.0,
+            4.0,
+            4.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Curved timber rib pins to two rock shoes; cable tie sockets at head keep reaction path visible.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Curved timber rib pins to two rock shoes; cable tie sockets at head keep reaction path visible.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "guy anchor",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.2,
+            1.2,
+            0.6
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Rock bolt plinth exposes cable eye and service collar; cable corridor excluded from ordinary route.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Rock bolt plinth exposes cable eye and service collar; cable corridor excluded from ordinary route.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "storm-stowed sail",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            0.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Cloth panel uses reinforced corner sockets and roll-drum edge; stowed solid bundle gets independent bounds.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Cloth panel uses reinforced corner sockets and roll-drum edge; stowed solid bundle gets independent bounds.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "baffle lever and sail stow brake",
+        "safe low route works when cliff sails are stowed",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Narrow exposed silhouettes, U-shaped resonator collar, beak mask and long streaming ribbons",
+        "material_family": [
+          "woven linen",
+          "dry bamboo",
+          "carved resonator wood"
+        ],
+        "palette": [
+          "ivory",
+          "weathered wood",
+          "vermilion accent"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-080",
+            "role": "sorcerer",
+            "description": "Tall thin pleated ivory tunic, flared sleeves, U-shaped wooden resonator collar and hip reed-pipe rack."
+          },
+          {
+            "reference_id": "reference-081",
+            "role": "ninja",
+            "description": "Narrow fitted silhouette, ivory torso wraps, long red ribbons, beak-like wood mask and angled back reed pipes."
+          }
+        ],
+        "architecture_motif": "Open cliff amphitheaters, curved acoustic fins and tensile walkways",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Sweeping timber ribs, ivory sail canopies, narrow red cloth accents and rock-footed open cliff courts.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-108/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Replaceable pin sleeve, guarded turnbuckle housing and reinforced cloth edge at a hand-serviced roll drum.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion REED RESONANCE inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Sweeping timber ribs, ivory sail canopies, narrow red cloth accents and rock-footed open cliff courts. Existing proposed kit purpose: Carved timber ribs, tension cables and adjustable acoustic baffles create open structures that respond to weather. Large occupied buildings anchor to rock, and flexible bridges have visible load limits and calm-weather alternatives. Existing construction constraint: Pin ribs to rock-founded shoes; sail membranes are removable and tension paths remain visible. Materials: bent timber ribs, woven sail cloth, tension cable, stone footings. PRIMARY SUBJECT: One tensioned acoustic rib anchored to two rock-founded shoes, with visible head cable sockets and one removable cloth panel. Show front/rear/profile/top, an exploded rib-foot pin joint and cable-eye detail. Two clear small states: deployed sail and rolled/stowed sail; fixed rib remains identical. Separate public low route from guy-cable corridor. EXACT SOURCE MODULE CONSTRAINTS: tensioned acoustic rib: Curved timber rib pins to two rock shoes; cable tie sockets at head keep reaction path visible. guy anchor: Rock bolt plinth exposes cable eye and service collar; cable corridor excluded from ordinary route. storm-stowed sail: Cloth panel uses reinforced corner sockets and roll-drum edge; stowed solid bundle gets independent bounds. PROPOSED NEW JOINERY: Replaceable pin sleeve, guarded turnbuckle housing and reinforced cloth edge at a hand-serviced roll drum. LIMITS: Do not turn sail cloth into the main structural rib. Wind loads, cable tensions and attachment dimensions stay unresolved; do not add numerical ratings. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/06_p2-arch-06-reed-halls_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o07-first",
+      "canonical_kit_id": "p2-arch-07-graft-courts",
+      "baseline_asset_id": "asset-o07-n-architecture-family",
+      "primary_module": "root pier sleeve",
+      "supporting_interface_modules": [
+        "woven wall bay",
+        "canopy rib"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/6",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Living timber frames combine trained roots with replaceable woven walls and stone hearth islands. Occupied structures include rot inspections, firebreaks and accessible ground routes rather than assuming every resident climbs a giant tree.",
+      "exact_source_construction": "Separate living growth envelope from stable occupancy deck; grafted members have inspectable joints and sacrificial infill.",
+      "exact_module_records": [
+        {
+          "name": "root pier sleeve",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.2,
+            1.2,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Split collar mediates living root and stable deck shoe; allow growth clearance and inspection opening.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Split collar mediates living root and stable deck shoe; allow growth clearance and inspection opening.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "woven wall bay",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            0.2,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Replaceable woven infill laces to nonliving edge battens between trained timber piers.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Replaceable woven infill laces to nonliving edge battens between trained timber piers.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "canopy rib",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            1.0,
+            4.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Grafted curved member joins sleeve saddles; growth exclusion volume preserves headroom.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Grafted curved member joins sleeve saddles; growth exclusion volume preserves headroom.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "irrigation splitter and growth restraint latch",
+        "ground route survives canopy growth and firebreak closure",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Bark-armored broad ninja and rounded basket-bearing gardener; branching growth and seed pods",
+        "material_family": [
+          "living bark",
+          "moss fiber",
+          "straw weave",
+          "translucent sap"
+        ],
+        "palette": [
+          "bark brown",
+          "moss green",
+          "amber sap"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-078",
+            "role": "sorcerer",
+            "description": "Short rounded gardener silhouette, woven brown/green clothing, twig-filled back basket and hanging seed/fiber cords."
+          },
+          {
+            "reference_id": "reference-079",
+            "role": "ninja",
+            "description": "Broad bark-armored torso, leafy shoulder mass, closed wood mask, forearm branch guards and split green panels."
+          }
+        ],
+        "architecture_motif": "Root arches, woven living platforms and cultivated tree chambers",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Warm living wood columns and curved root arches, woven/branch railings, leafy green canopy and grounded earth/stone courts.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-107/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Segmented non-constricting collar, sacrificial inner spacers, removable woven-infill lacing and an accessible inspection flap.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion GRAFT SANCTUARY inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Warm living wood columns and curved root arches, woven/branch railings, leafy green canopy and grounded earth/stone courts. Existing proposed kit purpose: Living timber frames combine trained roots with replaceable woven walls and stone hearth islands. Occupied structures include rot inspections, firebreaks and accessible ground routes rather than assuming every resident climbs a giant tree. Existing construction constraint: Separate living growth envelope from stable occupancy deck; grafted members have inspectable joints and sacrificial infill. Materials: trained living timber, replaceable woven panel, stone hearth island, bark trim. PRIMARY SUBJECT: One living-root pier passing through an inspectable split sleeve that supports a stable occupancy-deck shoe and a removable woven wall edge. Show a growth-clearance section, front/rear/profile and exploded collar; small initial-growth and later-growth intent insets keep the occupied deck stationary. Separate living growth volume from headroom and public ground route. EXACT SOURCE MODULE CONSTRAINTS: root pier sleeve: Split collar mediates living root and stable deck shoe; allow growth clearance and inspection opening. woven wall bay: Replaceable woven infill laces to nonliving edge battens between trained timber piers. canopy rib: Grafted curved member joins sleeve saddles; growth exclusion volume preserves headroom. PROPOSED NEW JOINERY: Segmented non-constricting collar, sacrificial inner spacers, removable woven-infill lacing and an accessible inspection flap. LIMITS: No roots silently penetrating the walking surface or reliance on climbing; growth rates and numerical clearances are unresolved. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/07_p2-arch-07-graft-courts_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o08-first",
+      "canonical_kit_id": "p2-arch-08-bitterglass-stills",
+      "baseline_asset_id": "asset-o08-n-architecture-family",
+      "primary_module": "sealed still bay",
+      "supporting_interface_modules": [
+        "observation pane",
+        "drain trap"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/7",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Brass-framed glasshouses, washable masonry and compartmentalized work courts support isolation and observation. Housing and markets remain separated from hazardous process areas, with emergency exits independent of sealed research corridors.",
+      "exact_source_construction": "Compartmented process bays drain to isolated sumps; residential supply and waste never share process plumbing.",
+      "exact_module_records": [
+        {
+          "name": "sealed still bay",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Brass frame and washable tile bund form independent process cell; pipe penetrations use sealed collars.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Brass frame and washable tile bund form independent process cell; pipe penetrations use sealed collars.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "observation pane",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            2.0,
+            0.2,
+            2.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Gasketed pane attaches to compartment frame; glazing is replaceable without opening occupied clean side.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Gasketed pane attaches to compartment frame; glazing is replaceable without opening occupied clean side.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "drain trap",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            0.8,
+            0.8,
+            0.8
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Removable sump basket locks below flush cover; dirty outlet typed differently from clean supply.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Removable sump basket locks below flush cover; dirty outlet typed differently from clean supply.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "sample interlock and manual process isolation valve",
+        "clean market access remains outside hazardous process envelope",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Compact respirator fieldworker and tall paired-reservoir alchemist; enclosed glass chambers and valves",
+        "material_family": [
+          "oilskin",
+          "leather",
+          "pitted brass",
+          "sealed glass"
+        ],
+        "palette": [
+          "oil-black",
+          "pitted brass",
+          "yellow-green reagent"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-076",
+            "role": "sorcerer",
+            "description": "Long dark fitted oilskin coat, brass fittings, high rear apparatus and paired yellow-green glass reservoirs."
+          },
+          {
+            "reference_id": "reference-077",
+            "role": "ninja",
+            "description": "Compact dark oilskin field suit, circular respirator, belt ampoules and a narrow tube backpack."
+          }
+        ],
+        "architecture_motif": "Greenhouse arcades, isolated reaction towers and bounded treatment pools",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Washable pale masonry, deep violet roofing, brass-framed process vessels and controlled yellow-green glass/process accents.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-106/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Removable brass pane retainers, double-identifiable clean/dirty connection shapes, simple sealed penetration collars and flush sump basket cover.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion BITTERGLASS GUILD inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Washable pale masonry, deep violet roofing, brass-framed process vessels and controlled yellow-green glass/process accents. Existing proposed kit purpose: Brass-framed glasshouses, washable masonry and compartmentalized work courts support isolation and observation. Housing and markets remain separated from hazardous process areas, with emergency exits independent of sealed research corridors. Existing construction constraint: Compartmented process bays drain to isolated sumps; residential supply and waste never share process plumbing. Materials: washable masonry, brass frame, sealed glass pane, chemical-resistant tile. PRIMARY SUBJECT: One architectural sealed still-bay enclosure, not a chemical manufacturing apparatus: washable tiled bund, brass structural frame, replaceable gasketed observation pane and flush drain-trap access. Show clean exterior and contained service side in front/rear views, cutaway and plan. Explicitly separate dirty process outlet from clean supply and maintain an ordinary clean-side bypass. EXACT SOURCE MODULE CONSTRAINTS: sealed still bay: Brass frame and washable tile bund form independent process cell; pipe penetrations use sealed collars. observation pane: Gasketed pane attaches to compartment frame; glazing is replaceable without opening occupied clean side. drain trap: Removable sump basket locks below flush cover; dirty outlet typed differently from clean supply. PROPOSED NEW JOINERY: Removable brass pane retainers, double-identifiable clean/dirty connection shapes, simple sealed penetration collars and flush sump basket cover. LIMITS: No chemical recipes, pipe/process operating instructions or invented pressure/containment ratings. Green effect stays contained and never becomes ambient poison across housing. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/08_p2-arch-08-bitterglass-stills_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o10-first",
+      "canonical_kit_id": "p2-arch-10-observatory-terraces",
+      "baseline_asset_id": "asset-o10-n-architecture-family",
+      "primary_module": "ballasted pier",
+      "supporting_interface_modules": [
+        "instrument bearing",
+        "safe observation rail"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/9",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Balanced cantilevers, broad instrument bearings and visible ballast masses frame controlled imbalance. Floating structures require legible anchoring, safe shutdown and occupied-space clearance, not decorative impossibility everywhere.",
+      "exact_source_construction": "Grounded pier and ballast carry normal loads; floating decorative or Oath devices remain separately bounded systems.",
+      "exact_module_records": [
+        {
+          "name": "ballasted pier",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Bearing plinth and visible ballast pockets react cantilever load; locked base exists without Oath lift.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Bearing plinth and visible ballast pockets react cantilever load; locked base exists without Oath lift.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "instrument bearing",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            3.0,
+            3.0,
+            1.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Ring trunnions align to explicit rotation axis; lock pin and service platform lie outside sweep.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Ring trunnions align to explicit rotation axis; lock pin and service platform lie outside sweep.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "safe observation rail",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            0.3,
+            1.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Continuous guard fixes to grounded deck and declares anomaly-facing exclusion plane.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Continuous guard fixes to grounded deck and declares anomaly-facing exclusion plane.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "bearing lock and physical ballast brake",
+        "ordinary approach uses grounded deck outside anomaly volume",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Heavy crescent armor and weighted bell-coat scholar; offset orbit rings and spherical counterweights",
+        "material_family": [
+          "meteor iron",
+          "wool",
+          "violet enamel",
+          "brushed metal"
+        ],
+        "palette": [
+          "midnight indigo",
+          "charcoal",
+          "violet",
+          "antique silver"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-072",
+            "role": "sorcerer",
+            "description": "Broad midnight-blue bell coat, circular violet belt focus, curved astrolabe collar and weighted metallic hem spheres."
+          },
+          {
+            "reference_id": "reference-073",
+            "role": "ninja",
+            "description": "Heavy rounded charcoal armor, crescent shoulders and hip plates, deep-indigo panels and slit-visored helmet."
+          }
+        ],
+        "architecture_motif": "Cliff observatories, orbital monuments and suspended platforms",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Dark inclined stone masses, bronze orbital rings, broad circular terraces and violet/cosmic devices distinct from occupied paving.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-104/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Inspectable ballast pocket covers, a guarded lock-pin bracket and simple stable-base service access.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion TIDAL OBSERVATORY inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Dark inclined stone masses, bronze orbital rings, broad circular terraces and violet/cosmic devices distinct from occupied paving. Existing proposed kit purpose: Balanced cantilevers, broad instrument bearings and visible ballast masses frame controlled imbalance. Floating structures require legible anchoring, safe shutdown and occupied-space clearance, not decorative impossibility everywhere. Existing construction constraint: Grounded pier and ballast carry normal loads; floating decorative or Oath devices remain separately bounded systems. Materials: dark stone, bronze instrument ring, ballast block, metal bearing. PRIMARY SUBJECT: One grounded ballasted pier with visible removable ballast pockets and a small instrument-bearing interface. Front/rear/top, longitudinal section and exploded bearing-lock joint. Show the grounded ordinary observation deck beside a separately bounded device-sweep/anomaly volume; compare normal device operation and locked-safe device state with unchanged deck. EXACT SOURCE MODULE CONSTRAINTS: ballasted pier: Bearing plinth and visible ballast pockets react cantilever load; locked base exists without Oath lift. instrument bearing: Ring trunnions align to explicit rotation axis; lock pin and service platform lie outside sweep. safe observation rail: Continuous guard fixes to grounded deck and declares anomaly-facing exclusion plane. PROPOSED NEW JOINERY: Inspectable ballast pocket covers, a guarded lock-pin bracket and simple stable-base service access. LIMITS: Do not draw an inhabited floating deck without ground support. No invented ballast weights or cantilever certification. Floating spectacle is separate from structure. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/10_p2-arch-10-observatory-terraces_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o11-first",
+      "canonical_kit_id": "p2-arch-11-missing-court",
+      "baseline_asset_id": "asset-o11-n-architecture-family",
+      "primary_module": "offset entry",
+      "supporting_interface_modules": [
+        "sightline screen",
+        "stable phase threshold"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/10",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Partially screened courtyards, offset doorways and visibly repaired ruined halls control sightlines. Phasing chambers have stable thresholds and fallback exits, preventing impossible architecture from becoming arbitrary player entrapment.",
+      "exact_source_construction": "Build persistent collision shell first; removable screens and phase effects alter visibility only within authored rooms.",
+      "exact_module_records": [
+        {
+          "name": "offset entry",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            3.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Two nonaligned door sockets connect via stable floor; offset screen controls sightline without blocking exit.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Two nonaligned door sockets connect via stable floor; offset screen controls sightline without blocking exit.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "sightline screen",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            2.0,
+            0.25,
+            2.4
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Dark panel pivots or clips to freestanding feet; physical footprint stays visible when opacity changes.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Dark panel pivots or clips to freestanding feet; physical footprint stays visible when opacity changes.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "stable phase threshold",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            2.4,
+            1.2,
+            2.8
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Persistent door-clear frame owns phase volume; ordinary bypass connection remains outside effect.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Persistent door-clear frame owns phase volume; ordinary bypass connection remains outside effect.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "screen pivot and threshold stability latch",
+        "stable exit remains visible through every phase state",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Narrow absent-edge silhouettes, high black collar, half mask and notched segmented focus",
+        "material_family": [
+          "matte cloth",
+          "worn dark metal",
+          "black velvet"
+        ],
+        "palette": [
+          "ink black",
+          "charcoal",
+          "pale silver",
+          "muted crimson detail"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-070",
+            "role": "sorcerer",
+            "description": "Tall narrow black coat, severe raised collar, silver square clasps and elongated tapered sleeves."
+          },
+          {
+            "reference_id": "reference-071",
+            "role": "ninja",
+            "description": "Matte black short-sleeved asymmetrical tunic, half mask, long ponytail and strapped thigh case."
+          }
+        ],
+        "architecture_motif": "Eroded court blocks, broken thresholds and interrupted monumental walls",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Pale repaired block masonry, dark missing-plane shadows, slim iron-like trim and sparse muted red banners.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-103/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Replaceable dark screen panel, pinned iron threshold seat, visible masonry repair straps and plain redundant exit markers.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion THE MISSING COURT inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Pale repaired block masonry, dark missing-plane shadows, slim iron-like trim and sparse muted red banners. Existing proposed kit purpose: Partially screened courtyards, offset doorways and visibly repaired ruined halls control sightlines. Phasing chambers have stable thresholds and fallback exits, preventing impossible architecture from becoming arbitrary player entrapment. Existing construction constraint: Build persistent collision shell first; removable screens and phase effects alter visibility only within authored rooms. Materials: pale repaired masonry, dark screen cloth, iron threshold frame. PRIMARY SUBJECT: One offset entry composed of two nonaligned door frames connected by a persistent floor and a separate sightline screen. Show plan, opposing elevations, section, exploded screen foot and two visibility states; frame, floor and ordinary bypass never change. Make repair straps and stable threshold physically legible. EXACT SOURCE MODULE CONSTRAINTS: offset entry: Two nonaligned door sockets connect via stable floor; offset screen controls sightline without blocking exit. sightline screen: Dark panel pivots or clips to freestanding feet; physical footprint stays visible when opacity changes. stable phase threshold: Persistent door-clear frame owns phase volume; ordinary bypass connection remains outside effect. PROPOSED NEW JOINERY: Replaceable dark screen panel, pinned iron threshold seat, visible masonry repair straps and plain redundant exit markers. LIMITS: No arbitrary geometry disappearance, unmarked dead end or required portal. Shadow/phase effects alter presentation only inside a clearly bounded room. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/11_p2-arch-11-missing-court_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o12-first",
+      "canonical_kit_id": "p2-arch-12-sanguine-cloisters",
+      "baseline_asset_id": "asset-o12-n-architecture-family",
+      "primary_module": "linked household porch",
+      "supporting_interface_modules": [
+        "recovery cloister",
+        "private withdrawal room"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/11",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Thick communal halls, shaded recovery courts and interlinked household thresholds express mutual dependence. Private rooms and withdrawal spaces are equally important, giving architectural form to the right to refuse participation.",
+      "exact_source_construction": "Thick courtyard walls shade recovery spaces; privacy screens and independent exit doors prevent coercive circulation.",
+      "exact_module_records": [
+        {
+          "name": "linked household porch",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            2.4,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Shared shade beam joins independent household door bays; guest circulation never crosses private room.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Shared shade beam joins independent household door bays; guest circulation never crosses private room.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "recovery cloister",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Shaded arcade encloses calm courtyard; benches attach outside clear perimeter loop.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Shaded arcade encloses calm courtyard; benches attach outside clear perimeter loop.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "private withdrawal room",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Solid room shell and independently released door connect directly to stable public circulation.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Solid room shell and independently released door connect directly to stable public circulation.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "privacy screen latch and shared-water ration gate",
+        "private withdrawal and public aid remain separately reachable",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Muscular chain-bearing ninja and reservoir-loop sorcerer; loops, hooks and ritual bindings",
+        "material_family": [
+          "oxblood leather",
+          "crimson glass/enamel",
+          "patinated iron"
+        ],
+        "palette": [
+          "oxblood",
+          "burgundy",
+          "aged iron",
+          "restrained ivory-gold"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-067",
+            "role": "sorcerer",
+            "description": "Burgundy layered split robe with wide sleeves, paired upper-arm reservoirs and looping crimson hoses."
+          },
+          {
+            "reference_id": "reference-069",
+            "role": "ninja",
+            "description": "Muscular sleeveless oxblood leather silhouette, closed red helmet, heavy chains anchored at both hips."
+          }
+        ],
+        "architecture_motif": "Crimson fortresses, ritual pillars and bound ceremonial platforms",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Redland masonry courts, oxblood fabric swags, dark stone paving, bone-colored trim and shaded communal thresholds.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-102/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Replaceable woven shade attachments, discreet ceramic trim caps and simple inward-accessible private release hardware.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion SANGUINE COVENANT inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Redland masonry courts, oxblood fabric swags, dark stone paving, bone-colored trim and shaded communal thresholds. Existing proposed kit purpose: Thick communal halls, shaded recovery courts and interlinked household thresholds express mutual dependence. Private rooms and withdrawal spaces are equally important, giving architectural form to the right to refuse participation. Existing construction constraint: Thick courtyard walls shade recovery spaces; privacy screens and independent exit doors prevent coercive circulation. Materials: redland masonry, woven shade cloth, bone-colored ceramic trim, dark iron. PRIMARY SUBJECT: One shared household-porch bay connecting two independent household doors to a common shaded public route. Show front/rear/plan and section, shade-beam joint, separate independent door-release details and a small privacy-screen inset. Include a quiet recovery seating recess outside the clear perimeter loop. Public visiting must never pass through a private room. EXACT SOURCE MODULE CONSTRAINTS: linked household porch: Shared shade beam joins independent household door bays; guest circulation never crosses private room. recovery cloister: Shaded arcade encloses calm courtyard; benches attach outside clear perimeter loop. private withdrawal room: Solid room shell and independently released door connect directly to stable public circulation. PROPOSED NEW JOINERY: Replaceable woven shade attachments, discreet ceramic trim caps and simple inward-accessible private release hardware. LIMITS: Do not add blood channels, coercive ritual fixtures or imply that residents must participate. The right to withdraw has a physically independent route. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/12_p2-arch-12-sanguine-cloisters_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o13-first",
+      "canonical_kit_id": "p2-arch-13-folded-stages",
+      "baseline_asset_id": "asset-o13-n-architecture-family",
+      "primary_module": "reversible stage panel",
+      "supporting_interface_modules": [
+        "hinge guard",
+        "backstage spine"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/12",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Reversible panels, mirrored courtyards and stage-like thresholds make transformation mechanically legible. Backstage corridors and structural columns remain readable, giving artists tools instead of making every building arbitrarily impossible.",
+      "exact_source_construction": "Fixed columns and backstage service corridor carry loads; changing panels pivot inside fenced swept bounds.",
+      "exact_module_records": [
+        {
+          "name": "reversible stage panel",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            2.0,
+            0.25,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Two-faced enamel panel turns around offset guarded hinge; both visual states share persistent frame.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Two-faced enamel panel turns around offset guarded hinge; both visual states share persistent frame.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "hinge guard",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            0.4,
+            0.4,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Guard sleeves mechanism axis and blocks pinch access; maintenance panel interlocks with stopped state.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Guard sleeves mechanism axis and blocks pinch access; maintenance panel interlocks with stopped state.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "backstage spine",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            2.4,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Fixed service corridor carries columns and power/data chase; no illusion may remove physical exit.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Fixed service corridor carries columns and power/data chase; no illusion may remove physical exit.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "panel turntable with mechanical latch and cue light",
+        "backstage route remains physically consistent during illusion show",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Asymmetric tailored triangles and folded planes; faceted mask and nested mirror frames",
+        "material_family": [
+          "folded lacquer/enamel",
+          "cloth",
+          "old silver",
+          "faceted mirror"
+        ],
+        "palette": [
+          "plum/mauve character variants",
+          "ivory/navy/gold overview variants"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-066",
+            "role": "sorcerer",
+            "description": "Mauve/aubergine angular folded collar and asymmetric coat, old-silver fittings, hinged spell cases."
+          },
+          {
+            "reference_id": "reference-068",
+            "role": "ninja",
+            "description": "Slim black/plum asymmetrical tailored layers, sharply faceted pearl-white mask and rectangular forearm cases."
+          }
+        ],
+        "architecture_motif": "Folded screen plazas, optical gates and rearranging mirror corridors",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Ivory and dark-blue faceted panels, bronze edging, mirror inlays and orderly upright stage-wall frames.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-100/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Removable bronze pivot cover, positive mechanical latch, subtle contrasting face patterns and fixed backstage guide strip.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion FOLDED THEATRE inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Ivory and dark-blue faceted panels, bronze edging, mirror inlays and orderly upright stage-wall frames. Existing proposed kit purpose: Reversible panels, mirrored courtyards and stage-like thresholds make transformation mechanically legible. Backstage corridors and structural columns remain readable, giving artists tools instead of making every building arbitrarily impossible. Existing construction constraint: Fixed columns and backstage service corridor carry loads; changing panels pivot inside fenced swept bounds. Materials: timber stage frame, enameled reversible panel, bounded mirror insert, bronze pivot. PRIMARY SUBJECT: One two-faced enamel stage panel in a fixed timber frame with an offset guarded hinge. Show BOTH genuinely different faces, front/rear/profile, exploded pivot/guard and top-plan swing diagram. Separate fixed backstage corridor and structural column from moving panel; two reversed-face states share identical fixed frame and pivot. EXACT SOURCE MODULE CONSTRAINTS: reversible stage panel: Two-faced enamel panel turns around offset guarded hinge; both visual states share persistent frame. hinge guard: Guard sleeves mechanism axis and blocks pinch access; maintenance panel interlocks with stopped state. backstage spine: Fixed service corridor carries columns and power/data chase; no illusion may remove physical exit. PROPOSED NEW JOINERY: Removable bronze pivot cover, positive mechanical latch, subtle contrasting face patterns and fixed backstage guide strip. LIMITS: No impossible extra hinges, mirror-created passage or disappearing load-bearing column. Angles, clearances and thicknesses remain proposed/unresolved rather than invented. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/13_p2-arch-13-folded-stages_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o14-first",
+      "canonical_kit_id": "p2-arch-14-escapement-stations",
+      "baseline_asset_id": "asset-o14-n-architecture-family",
+      "primary_module": "low station canopy",
+      "supporting_interface_modules": [
+        "modular viaduct",
+        "service gallery"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/13",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Long low canopies, modular viaducts and exposed service galleries communicate continuous movement. Moving architecture has locked safe states, guarded pinch points and alternate passages for people unable to use kinetic shortcuts.",
+      "exact_source_construction": "Static viaduct carries ordinary traffic; moving shortcuts sit on isolated bearings with locked safe-state bridges.",
+      "exact_module_records": [
+        {
+          "name": "low station canopy",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Repeated shallow rafters latch to platform piers; service gutter does not drip onto boarding edge.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Repeated shallow rafters latch to platform piers; service gutter does not drip onto boarding edge.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "modular viaduct",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            6.0,
+            8.0,
+            1.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Deck segment joins keyed pier seats with expansion cover; 6 m clear traffic zone independent of rail.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Deck segment joins keyed pier seats with expansion cover; 6 m clear traffic zone independent of rail.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "service gallery",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            1.8,
+            2.8
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Below-deck walk seats on separate brackets; locked gates keep workers clear of moving systems.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Below-deck walk seats on separate brackets; locked gates keep workers clear of moving systems.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "escapement brake and locked crossing gate",
+        "fixed passage and wildlife crossing survive transport shutdown",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Slim teal asymmetric dress, flywheel hip and pendulum back harness; gears and segmented rings",
+        "material_family": [
+          "woven cloth",
+          "leather",
+          "aged brass",
+          "smoked glass"
+        ],
+        "palette": [
+          "petrol teal",
+          "aged brass",
+          "ivory",
+          "dark steel"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-064",
+            "role": "sorcerer",
+            "description": "Petrol-teal asymmetric coat with ivory folds, brass wrist mechanisms and suspended rear pendulum harness."
+          },
+          {
+            "reference_id": "reference-065",
+            "role": "ninja",
+            "description": "Slim teal sleeveless split coat, horizontal brass eye visor, hip flywheel and articulated ankle struts."
+          }
+        ],
+        "architecture_motif": "Elevated clockwork highways, kinetic arch gates and temporal workshop bays",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Long dark-stone viaducts, shallow station roofs, bronze rail details, circular service mechanisms and continuous layered roads.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-099/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Replaceable shallow rafter seat, covered drainage joint, inspectable bracket pin and flush expansion-cover edge.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion ESCAPEMENT ROAD inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Long dark-stone viaducts, shallow station roofs, bronze rail details, circular service mechanisms and continuous layered roads. Existing proposed kit purpose: Long low canopies, modular viaducts and exposed service galleries communicate continuous movement. Moving architecture has locked safe states, guarded pinch points and alternate passages for people unable to use kinetic shortcuts. Existing construction constraint: Static viaduct carries ordinary traffic; moving shortcuts sit on isolated bearings with locked safe-state bridges. Materials: stone viaduct pier, bronze escapement, dark metal rail, replaceable timber deck. PRIMARY SUBJECT: One low station-canopy bay seated on a fixed platform/viaduct edge with a separate below-deck service-gallery bracket. Front/rear/profile/top, roof-seat section, underside gutter and exploded rafter latch. Keep ordinary traffic deck fixed, drainage away from boarding edge and maintenance route distinct from passenger circulation. Include a locked-shutdown intent inset that leaves fixed passage intact. EXACT SOURCE MODULE CONSTRAINTS: low station canopy: Repeated shallow rafters latch to platform piers; service gutter does not drip onto boarding edge. modular viaduct: Deck segment joins keyed pier seats with expansion cover; 6 m clear traffic zone independent of rail. service gallery: Below-deck walk seats on separate brackets; locked gates keep workers clear of moving systems. PROPOSED NEW JOINERY: Replaceable shallow rafter seat, covered drainage joint, inspectable bracket pin and flush expansion-cover edge. LIMITS: Do not shrink the source modular-viaduct six-meter clear traffic intent into a four-meter common bay; show interface schematically and label FULL TRAFFIC SPAN TO REVIEW. No kinetic shortcut required for ordinary access. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/14_p2-arch-14-escapement-stations_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    },
+    {
+      "id": "reference-expansion-architecture-o15-first",
+      "canonical_kit_id": "p2-arch-15-impulse-yards",
+      "baseline_asset_id": "asset-o15-n-architecture-family",
+      "primary_module": "braced crane bay",
+      "supporting_interface_modules": [
+        "service deck",
+        "human-scale porch"
+      ],
+      "source_path": "phase2/ARCHITECTURAL_KIT_REGISTRY.json",
+      "source_json_pointer": "/records/14",
+      "source_canon_status": "PROPOSED",
+      "exact_source_purpose": "Large bolted frames, crane spans and modular service decks expose how forces travel. Human-scale entrances, repair access and sheltered civic courts prevent the entire city from reading as machinery with incidental people attached.",
+      "exact_source_construction": "Bolted frame and bracing expose force paths; crane load zones and pressure housings remain separate from civic courts.",
+      "exact_module_records": [
+        {
+          "name": "braced crane bay",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            8.0,
+            8.0,
+            8.0
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Bolted columns, diagonals and beam seats expose load path; hoist rail socket separate from occupied gallery.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Bolted columns, diagonals and beam seats expose load path; hoist rail socket separate from occupied gallery.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "service deck",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            4.0,
+            0.4
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Removable grating panels bolt to edge beams with locked inspection hatches.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Removable grating panels bolt to edge beams with locked inspection hatches.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        },
+        {
+          "name": "human-scale porch",
+          "geometry_policy": "BESPOKE_REGIONAL_ASSEMBLY",
+          "dimension_axes": [
+            "width_x",
+            "depth_or_run_z",
+            "height_or_rise_y"
+          ],
+          "target_extent_m": [
+            4.0,
+            2.4,
+            3.2
+          ],
+          "extent_note": "Initial bounding envelope, explicitly not measured from art; review local engineering/clearance assumptions.",
+          "connections": [
+            "floor_datum:base",
+            "attachment_static:reviewed-structural-seat",
+            "utility_pass:only-if-process-requires"
+          ],
+          "construction": "Low shelter clips to independent civic frame, outside crane load footprint and exhaust.",
+          "acceptance": [
+            "Keep visible construction and silhouette distinct from all other regional kits.",
+            "Low shelter clips to independent civic frame, outside crane load footprint and exhaust.",
+            "Prove clearances and typed joint placement in blockout section and exploded assembly."
+          ],
+          "clearance": {
+            "door_width_m": null,
+            "door_height_m": null,
+            "circulation_width_m": null,
+            "headroom_m": null
+          },
+          "slope": {
+            "rise_m": null,
+            "run_m": null,
+            "riser_m": null,
+            "tread_m": null,
+            "riser_count": null,
+            "maximum_ramp_grade": null
+          }
+        }
+      ],
+      "exact_source_interactions": [
+        "crane isolation pin and pressure relief guard",
+        "public route stays outside suspended-load and exhaust footprints",
+        "Public routes and services remain usable without binding this Oath."
+      ],
+      "oath_visual_constraints": {
+        "status": "RECOVERED",
+        "silhouette": "Sleeveless exoskeletal ninja and long power-pack coat; large modular cylinders, hinges and piston limbs",
+        "material_family": [
+          "steel",
+          "ceramic inserts",
+          "rubber grips",
+          "heavy cloth"
+        ],
+        "palette": [
+          "gunmetal",
+          "charcoal",
+          "safety orange"
+        ],
+        "character_views": [
+          {
+            "reference_id": "reference-062",
+            "role": "sorcerer",
+            "description": "Long charcoal split coat, orange inner panels, tall back power pack, bulky paired actuator gauntlets; graphite cloth, oxidized steel and orange ceramic."
+          },
+          {
+            "reference_id": "reference-063",
+            "role": "ninja",
+            "description": "Sleeveless charcoal-orange harness, mechanical knee struts, forearm cylinders, hoses and angular white visor."
+          }
+        ],
+        "architecture_motif": "Industrial rail bays, modular gantries and kinetic fortifications",
+        "approval": "Individual final-art approval unresolved; preserve recovered design"
+      },
+      "direct_pixel_observation": "Charcoal bolted steel, concrete/masonry plinths, orange safety accents, rectangular deck plates and heavy industrial crane spans.",
+      "style_reference_paths": [
+        "baseline/assets/references/reference-101/original.png"
+      ],
+      "style_reference_inspected": true,
+      "proposed_new_joinery": "Replaceable gusset plates, captive inspection-hatch latch, discrete ceramic service isolator and removable deck edge guard.",
+      "ambiguity_policy": "No numeric dimensions printed; retain proposed source envelope records for later engineering/blockout review. No hidden geometry asserted recovered from overview.",
+      "prompt": "Create a NEW PROPOSED Aetherion IMPULSE FOUNDRY inhabited architecture kit construction reference sheet. The attached original Oath overview is the visual anchor and must remain unchanged; derive architecture from its ENVIRONMENT panel rather than copying existing characters, weapons or prop silhouettes. Directly observed source traits: Charcoal bolted steel, concrete/masonry plinths, orange safety accents, rectangular deck plates and heavy industrial crane spans. Existing proposed kit purpose: Large bolted frames, crane spans and modular service decks expose how forces travel. Human-scale entrances, repair access and sheltered civic courts prevent the entire city from reading as machinery with incidental people attached. Existing construction constraint: Bolted frame and bracing expose force paths; crane load zones and pressure housings remain separate from civic courts. Materials: bolted steel frame, cast masonry plinth, ceramic insulator, replaceable metal deck. PRIMARY SUBJECT: One braced crane-bay structural corner with two columns, clear diagonal/braced beam-seat load path and separate hoist-rail socket. Front/rear/profile/top, bolted seat explosion and removable service-deck panel inset. A small human-scale porch remains outside suspended-load and exhaust footprint; the occupied gallery is not the hoist track. EXACT SOURCE MODULE CONSTRAINTS: braced crane bay: Bolted columns, diagonals and beam seats expose load path; hoist rail socket separate from occupied gallery. service deck: Removable grating panels bolt to edge beams with locked inspection hatches. human-scale porch: Low shelter clips to independent civic frame, outside crane load footprint and exhaust. PROPOSED NEW JOINERY: Replaceable gusset plates, captive inspection-hatch latch, discrete ceramic service isolator and removable deck edge guard. LIMITS: No invented crane capacity, structural strength certification or numerical suspended-load clearance. Architecture is inhabitable industry, not a giant weapon. No numerical dimension annotations in this first concept sheet. Source envelope targets exist but are not calibrated; keep them for later measured review. Give one coherent constructible design, not five unrelated variants. Studio-neutral light-gray technical board, aligned front/rear/side/top intent views, one large assembled three-quarter and one exploded joint section; restrained large labels only. Keep all repeated parts and side assignments consistent. Do not merely duplicate front as rear. Use opaque masses and readable joins; avoid cinematic bloom. Title names the Oath and primary module, with PROPOSED. Footer: CONSTRUCTION INTENT \u2014 CONNECTIONS AND SCALE REQUIRE REVIEW. This sheet covers the named module and interface concepts only, not the full kit or modeling approval.",
+      "prompt_file": "prompts/15_p2-arch-15-impulse-yards_first_construction.prompt.txt",
+      "generation_status": "NOT_GENERATED",
+      "approval_status": "UNRESOLVED"
+    }
+  ]
+}

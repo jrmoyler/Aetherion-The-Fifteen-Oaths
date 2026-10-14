@@ -1,0 +1,102 @@
+{
+  "scope": "Read-only r04 exported evidence; known name/cardinality failures. Prior r04 static checks did not cover exported socket identity or adapter offsets.",
+  "reports": [
+    {
+      "path": "modules/shade-canopy/lod1.glb",
+      "sha256": "58d93379de3db86f70d68d17ae28f8d9a53d5a568e105ed9c50bb1f1ab8c49d0",
+      "expected_names": [
+        "SOCKET__canopy-seat-0.3-0.3",
+        "SOCKET__canopy-seat-0.3-3.7",
+        "SOCKET__canopy-seat-3.7-0.3",
+        "SOCKET__canopy-seat-3.7-3.7"
+      ],
+      "actual_names": [
+        "SOCKET__canopy-seat-0.3-0.001",
+        "SOCKET__canopy-seat-0.3-3.001",
+        "SOCKET__canopy-seat-3.7-0.001",
+        "SOCKET__canopy-seat-3.7-3.001"
+      ],
+      "canonical_names_equal": false
+    },
+    {
+      "path": "modules/shade-canopy/lod2.glb",
+      "sha256": "e0067a473310d2554eed6f4910d1ab9643319fa658fcba3798206501f0fc2b2d",
+      "expected_names": [
+        "SOCKET__canopy-seat-0.3-0.3",
+        "SOCKET__canopy-seat-0.3-3.7",
+        "SOCKET__canopy-seat-3.7-0.3",
+        "SOCKET__canopy-seat-3.7-3.7"
+      ],
+      "actual_names": [
+        "SOCKET__canopy-seat-0.3-0.002",
+        "SOCKET__canopy-seat-0.3-3.002",
+        "SOCKET__canopy-seat-3.7-0.002",
+        "SOCKET__canopy-seat-3.7-3.002"
+      ],
+      "canonical_names_equal": false
+    },
+    {
+      "path": "modules/public-colonnade/lod1.glb",
+      "sha256": "d101839decf7470237b3306bf1d099b2106ca4cde4cb28a72ce046e918769b25",
+      "expected_names": [
+        "SOCKET__pier-seat-0.3-0.3",
+        "SOCKET__pier-seat-0.3-3.7",
+        "SOCKET__pier-seat-3.7-0.3",
+        "SOCKET__pier-seat-3.7-3.7",
+        "SOCKET__base",
+        "SOCKET__clear-route"
+      ],
+      "actual_names": [
+        "SOCKET__pier-seat-0.3-0.001",
+        "SOCKET__pier-seat-0.3-3.001",
+        "SOCKET__pier-seat-3.7-0.001",
+        "SOCKET__pier-seat-3.7-3.001",
+        "SOCKET__base.001",
+        "SOCKET__clear-route.001"
+      ],
+      "canonical_names_equal": false
+    },
+    {
+      "path": "modules/public-colonnade/lod2.glb",
+      "sha256": "7d30e346816967aab1eb401b5cf6afab0ea91e6d546875fa7c337e605533491f",
+      "expected_names": [
+        "SOCKET__pier-seat-0.3-0.3",
+        "SOCKET__pier-seat-0.3-3.7",
+        "SOCKET__pier-seat-3.7-0.3",
+        "SOCKET__pier-seat-3.7-3.7",
+        "SOCKET__base",
+        "SOCKET__clear-route"
+      ],
+      "actual_names": [
+        "SOCKET__pier-seat-0.3-0.002",
+        "SOCKET__pier-seat-0.3-3.002",
+        "SOCKET__pier-seat-3.7-0.002",
+        "SOCKET__pier-seat-3.7-3.002",
+        "SOCKET__base.002",
+        "SOCKET__clear-route.002"
+      ],
+      "canonical_names_equal": false
+    },
+    {
+      "path": "fixtures/civic/assembly.glb",
+      "sha256": "dba75092a93c70fa3af60caf5c248b070bba1f5cb6fabff0bb95f2e8c446a927",
+      "canopy_seat_count": 12,
+      "pier_seat_count": 12,
+      "expected_each": 4
+    },
+    {
+      "path": "fixtures/residential/assembly.glb",
+      "sha256": "fb8c19422d829b5dc4faf2ce1c0e7d2d8b2a0d0c8849991040c3148e78f53f45",
+      "canopy_seat_count": 12,
+      "pier_seat_count": 12,
+      "expected_each": 4
+    },
+    {
+      "path": "fixtures/work/assembly.glb",
+      "sha256": "1a1c279c76a27cb7d88e7aee0cde900b324a5aa9f2cbf403c19dad5a4924fc76",
+      "canopy_seat_count": 12,
+      "pier_seat_count": 12,
+      "expected_each": 4
+    }
+  ]
+}

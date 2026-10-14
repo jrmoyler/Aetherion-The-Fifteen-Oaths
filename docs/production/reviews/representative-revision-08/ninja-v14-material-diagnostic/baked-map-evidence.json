@@ -1,0 +1,77 @@
+{
+  "scope": "Actual Blender CPU EMIT channel bakes for basecolor and roughness; NORMAL tangent bake from procedural bump, ORM R=1 B=0 packed after roughness bake. Existing root-to-tip clump UVs unchanged.",
+  "maps": [
+    {
+      "map": "hair-basecolor",
+      "size": [
+        2048,
+        1024
+      ],
+      "mode": "RGB",
+      "minimum": [
+        6,
+        6,
+        5
+      ],
+      "maximum": [
+        12,
+        11,
+        10
+      ],
+      "mean": [
+        9.213361263275146,
+        8.391616821289062,
+        7.405516147613525
+      ],
+      "sha256": "44acd5704ddcf3a900c7ab79ae30b5c43e508595a16216ca3981485c0c55757f"
+    },
+    {
+      "map": "hair-orm",
+      "size": [
+        2048,
+        1024
+      ],
+      "mode": "RGB",
+      "minimum": [
+        255,
+        175,
+        0
+      ],
+      "maximum": [
+        255,
+        197,
+        0
+      ],
+      "mean": [
+        255.0,
+        186.10208559036255,
+        0.0
+      ],
+      "sha256": "3f30de646ba6c4250a5a38e37a6b8f24de8d9287f6162f45f25b351505b6e532"
+    },
+    {
+      "map": "hair-normal",
+      "size": [
+        2048,
+        1024
+      ],
+      "mode": "RGB",
+      "minimum": [
+        116,
+        128,
+        254
+      ],
+      "maximum": [
+        139,
+        128,
+        255
+      ],
+      "mean": [
+        127.63127994537354,
+        128.0,
+        254.99999237060547
+      ],
+      "sha256": "f2f454d1c94f1bba48085d6c3e257bef9c1718ae8af6767f5acd0cda66ceb5b2"
+    }
+  ]
+}

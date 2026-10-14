@@ -1,0 +1,381 @@
+{
+  "blenderVersion": "4.3.2",
+  "scope": "Actual Blender open/import and evaluated mesh vertices; CPU only, no re-export or source writes",
+  "reports": [
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/civic/source.blend",
+      "sha256": "23f5ec1914a1cea20079d85243bc1a12b1ce3699f5a1fddcb9839507782201e6",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 747,
+      "materials": 27,
+      "images": 113,
+      "rest": {
+        "vertices": 8415,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          10.0,
+          3.797560453414917
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/residential/source.blend",
+      "sha256": "f0b751689ab209c449ee37c0a24d0316d75f164cb7e455b2e54f94d789fd6517",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 793,
+      "materials": 53,
+      "images": 217,
+      "rest": {
+        "vertices": 8527,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          8.0,
+          3.797560453414917
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/work/source.blend",
+      "sha256": "d9cbdf5cee3791d1ae6527af2437f82d08d32fc2c174faec1b8ebe2b44bdee5c",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 785,
+      "materials": 83,
+      "images": 337,
+      "rest": {
+        "vertices": 7151,
+        "finite": true,
+        "min": [
+          0.0,
+          -0.007000045385211706,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          8.0,
+          3.797560453414917
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/source.blend",
+      "sha256": "a1efbc17b4ebbe50da297efac13a6e6f51c28960635e4ae0ad1e8750fb038d51",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 280,
+      "materials": 5,
+      "images": 21,
+      "rest": {
+        "vertices": 3264,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          4.0,
+          4.0,
+          3.7800002098083496
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/shade-canopy/source.blend",
+      "sha256": "54b98dd311b442912699bec0602c390268f36bfb9d3b8292de11e9a3da7d04b1",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 201,
+      "materials": 3,
+      "images": 21,
+      "rest": {
+        "vertices": 2287,
+        "finite": true,
+        "min": [
+          0.22450000047683716,
+          0.23500001430511475,
+          0.045068927109241486
+        ],
+        "max": [
+          3.7755000591278076,
+          3.765000104904175,
+          0.3175605535507202
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/civic/assembly.glb",
+      "sha256": "dba75092a93c70fa3af60caf5c248b070bba1f5cb6fabff0bb95f2e8c446a927",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 409,
+      "materials": 26,
+      "images": 15,
+      "rest": {
+        "vertices": 33019,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          10.0,
+          3.797560453414917
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/residential/assembly.glb",
+      "sha256": "fb8c19422d829b5dc4faf2ce1c0e7d2d8b2a0d0c8849991040c3148e78f53f45",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 410,
+      "materials": 29,
+      "images": 15,
+      "rest": {
+        "vertices": 33483,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          8.0,
+          3.797560453414917
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/fixtures/work/assembly.glb",
+      "sha256": "1a1c279c76a27cb7d88e7aee0cde900b324a5aa9f2cbf403c19dad5a4924fc76",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 355,
+      "materials": 30,
+      "images": 12,
+      "rest": {
+        "vertices": 28057,
+        "finite": true,
+        "min": [
+          0.0,
+          -0.007000045385211706,
+          -0.4000000059604645
+        ],
+        "max": [
+          8.0,
+          8.0,
+          3.797560453414917
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/collision.glb",
+      "sha256": "ba46af29a2a1cafd59dde7d63c7c451c6f8c2863826f27a2845670b58ca56219",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 12,
+      "materials": 1,
+      "images": 3,
+      "rest": {
+        "vertices": 288,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          4.0,
+          4.0,
+          3.7799999713897705
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/lod0.glb",
+      "sha256": "0f33bbeaccbf18b1b1dcb52971e82473bbe7ec010bbaec16b2aa3a2302c39a85",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 132,
+      "materials": 3,
+      "images": 9,
+      "rest": {
+        "vertices": 13019,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          4.0,
+          4.0,
+          3.7800002098083496
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/lod1.glb",
+      "sha256": "d101839decf7470237b3306bf1d099b2106ca4cde4cb28a72ce046e918769b25",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 84,
+      "materials": 3,
+      "images": 9,
+      "rest": {
+        "vertices": 7471,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          4.0,
+          4.0,
+          3.7800002098083496
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/public-colonnade/lod2.glb",
+      "sha256": "7d30e346816967aab1eb401b5cf6afab0ea91e6d546875fa7c337e605533491f",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 52,
+      "materials": 3,
+      "images": 9,
+      "rest": {
+        "vertices": 3577,
+        "finite": true,
+        "min": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max": [
+          4.0,
+          4.0,
+          3.7800002098083496
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/shade-canopy/lod0.glb",
+      "sha256": "7f4b8096727949486d6fe7dea439c38b0d5da092e09b0f75a7b62fa377f12584",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 91,
+      "materials": 2,
+      "images": 6,
+      "rest": {
+        "vertices": 9598,
+        "finite": true,
+        "min": [
+          0.22450000047683716,
+          0.23500001430511475,
+          0.045068927109241486
+        ],
+        "max": [
+          3.7755000591278076,
+          3.765000104904175,
+          0.3175605535507202
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/shade-canopy/lod1.glb",
+      "sha256": "58d93379de3db86f70d68d17ae28f8d9a53d5a568e105ed9c50bb1f1ab8c49d0",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 67,
+      "materials": 2,
+      "images": 6,
+      "rest": {
+        "vertices": 6094,
+        "finite": true,
+        "min": [
+          0.22450000047683716,
+          0.23500001430511475,
+          0.04510548710823059
+        ],
+        "max": [
+          3.7755000591278076,
+          3.765000104904175,
+          0.3175913691520691
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture-r04/modules/shade-canopy/lod2.glb",
+      "sha256": "e0067a473310d2554eed6f4910d1ab9643319fa658fcba3798206501f0fc2b2d",
+      "armatures": 0,
+      "bones": 0,
+      "meshes": 43,
+      "materials": 2,
+      "images": 6,
+      "rest": {
+        "vertices": 3080,
+        "finite": true,
+        "min": [
+          0.22450000047683716,
+          0.23500001430511475,
+          0.045217808336019516
+        ],
+        "max": [
+          3.7755000591278076,
+          3.765000104904175,
+          0.31768256425857544
+        ]
+      },
+      "actions": [],
+      "sourceBytesUnchanged": true
+    }
+  ]
+}

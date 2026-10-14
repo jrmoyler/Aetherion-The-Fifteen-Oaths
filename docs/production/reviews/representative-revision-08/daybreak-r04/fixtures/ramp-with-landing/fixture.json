@@ -1,0 +1,42 @@
+{
+  "fixture": "ramp-with-landing",
+  "placements": [
+    {
+      "module": "ramp-run",
+      "translation_blender_m": [
+        0,
+        0,
+        0
+      ],
+      "rotation_z_radians": 0
+    },
+    {
+      "extra_geometry": "1.8m landing support adapter",
+      "translation_blender_m": [
+        0,
+        4.8,
+        0.4
+      ]
+    }
+  ],
+  "status": "ASSEMBLY_REVIEW_CANDIDATE_NOT_GAMEPLAY_VALIDATED",
+  "bounds_blender_m": [
+    [
+      -0.18000000715255737,
+      -0.07999999821186066,
+      -0.019999999552965164
+    ],
+    [
+      1.9800000190734863,
+      6.600000381469727,
+      1.5399999618530273
+    ]
+  ],
+  "gaps": [
+    "visual fidelity",
+    "connection and circulation review",
+    "event/restoration states",
+    "nav/controller traversal",
+    "source references are PROPOSED"
+  ]
+}

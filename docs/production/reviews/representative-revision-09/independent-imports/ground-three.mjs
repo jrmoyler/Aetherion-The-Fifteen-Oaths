@@ -1,0 +1,12 @@
+import fs from 'node:fs';import{createHash}from'node:crypto';
+import{GLTFLoader}from'/workspace/Aetherion-The-Fifteen-Oaths/runtime/ability-matrix/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import{Texture,Vector3,AnimationMixer,LoopOnce}from'/workspace/Aetherion-The-Fifteen-Oaths/runtime/ability-matrix/node_modules/three/build/three.module.js';
+const inputs=JSON.parse(fs.readFileSync(process.argv[2])), reports=[];
+for(const file of inputs.glbs.filter(p=>!p.includes('collision'))){
+ const bytes=fs.readFileSync(file),loader=new GLTFLoader();loader.register(()=>({name:'CPU_TEXTURE_PLACEHOLDER',loadTexture:()=>Promise.resolve(new Texture())}));const g=await loader.parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');const meshes=[];g.scene.traverse(n=>{if(n.isMesh)meshes.push(n)});const rows=[];let negatives=0;
+ for(const clip of g.animations){const mixer=new AnimationMixer(g.scene),a=mixer.clipAction(clip).setLoop(LoopOnce,1);a.clampWhenFinished=true;a.play();const walk=clip.name==='walk_in_place',frames=walk?Array.from({length:993},(_,i)=>1+i/32):Array.from({length:48},(_,i)=>i+1);
+ for(const frame of frames){mixer.setTime(frame/24);g.scene.updateMatrixWorld(true);let minimum=Infinity,below=0,vertices=0;const v=new Vector3();for(const n of meshes){const p=n.geometry.attributes.position;for(let i=0;i<p.count;i++){v.fromBufferAttribute(p,i);if(n.isSkinnedMesh)n.applyBoneTransform(i,v);v.applyMatrix4(n.matrixWorld);minimum=Math.min(minimum,v.y);if(v.y<.012-1e-6)below++;vertices++;}}const clearance=minimum-.012;rows.push({clip:clip.name,frame,time:frame/24,minimumWorldY:minimum,clearance,verticesBelowFloor:below,vertices});if(walk&&clearance-.01 < -1e-6)negatives++;}
+ mixer.stopAllAction();mixer.uncacheRoot(g.scene);}
+ const walk=rows.filter(r=>r.clip==='walk_in_place');reports.push({file,sha256:createHash('sha256').update(bytes).digest('hex'),samples:rows,walkSamples:walk.length,all128IntegerFramesIncluded:true,walkMinimumClearance:Math.min(...walk.map(r=>r.clearance)),walkMaximumClearance:Math.max(...walk.map(r=>r.clearance)),penetratingSamples:rows.filter(r=>r.verticesBelowFloor).length,translatedDown10mmNegativeRejectedSamples:negatives});console.log(file, reports.at(-1).walkMinimumClearance,reports.at(-1).walkMaximumClearance);
+}
+fs.writeFileSync(process.argv[3],JSON.stringify({scope:'Actual Three.js CPU skinned vertex evaluation; sampled not continuous; floor Y=.012m; textures placeholders, no GPU claim',reports},null,2)+'\n');

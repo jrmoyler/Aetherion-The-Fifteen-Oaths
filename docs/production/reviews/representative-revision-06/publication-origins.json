@@ -1,0 +1,18 @@
+{
+  "status": "FROZEN_UNAPPROVED_REVIEW_ONLY",
+  "sources": [
+    {
+      "originalLocalRoot": "/tmp/ninja-v10",
+      "bundledRoot": "kiln-ninja-v10",
+      "frozenManifest": "kiln-ninja-v10/SHA256SUMS.json",
+      "frozenManifestSha256": "5b96a82570bd80af24120396db2c090718357239f60722a69eac240da068c2d8",
+      "listedFiles": 26,
+      "allListedFilesIncludedAndHashesMatched": true
+    }
+  ],
+  "selectedHistory": {
+    "root": "historical-diagnostics/ninja-v9",
+    "originalLocalRoot": "/tmp/ninja-v9",
+    "note": "Selected V9 comparisons, REVIEW.md, original geometry receipt and full SHA256SUMS only; complete V9 source/GLBs/maps are not bundled. Historical receipt paths describe external original runs."
+  }
+}

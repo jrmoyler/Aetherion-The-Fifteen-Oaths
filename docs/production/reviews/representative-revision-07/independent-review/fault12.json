@@ -1,0 +1,60 @@
+{
+  "status": "NOT_EXACT_FURTHER_MINERAL_AND_CRYSTAL_REPAIR_REQUIRED",
+  "candidate": "Fault V12 frozen point-tip correction",
+  "scope": "Independent actual final front/profile and original053/V11/V12 comparison pixel review; two final CPU diagnostic views, no candidate writes or technical reruns.",
+  "frozenManifestSha256": "6961cd329a0b962aef41168d062377d8c7fc493187a30466af361cbdb5b1e91b",
+  "frozenFiles": 63,
+  "frozenFileMismatches": 0,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-053/original.png",
+      "bytes": 2522664,
+      "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v12/comparison-reference-v11-v12.png",
+      "bytes": 653800,
+      "sha256": "2d3937d0db81509ad59e0e22da048ab8982bf38c327f33b3b91ab0dcb055ef92"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v12/amethyst-short-blade/matched-front-review.png",
+      "bytes": 704905,
+      "sha256": "926608e183965a05418c866e9b460b475025936d327cd51393dfbe39d0a2faee"
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v12/amethyst-short-blade/matched-profile-review.png",
+      "bytes": 671354,
+      "sha256": "b39634cfcaa04fe84dffd1c55b850784faaff5d6a3ae7d918d16dc4da35f1a01"
+    }
+  ],
+  "improvements": [
+    "Broader crystal exposure reduces V11 narrow zigzag-crack reading.",
+    "Profile plate depth is less uniform than the previous long parallel layers.",
+    "Pointed tip transition remains visible without a blunt end plate."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Crystal volume and exposure",
+      "finding": "The crystal still reads as one continuous flat purple strip along most of the blade, rather than distinct irregular faceted exposures interacting with mineral overlaps. Wider opening alone does not reproduce source crystal volume.",
+      "nextRepair": "Compose several recognizable irregular facet clusters/exposure windows, varying the stone overlap and crystal planes together while preserving thin contained profile."
+    },
+    {
+      "priority": 1,
+      "area": "Stone plate hierarchy",
+      "finding": "Large similarly scaled adjacent plates still read as a tiled surface. Profile relief is more varied but remains a stack of broad terraces with repeated protruding lips, rather than the source chipped interleaved mineral plates.",
+      "nextRepair": "Vary plate grouping, orientation and lip thickness around source-defined overlaps; avoid uniform cell size and parallel terracing."
+    },
+    {
+      "priority": 2,
+      "area": "Guard/pommel/grip",
+      "finding": "Bulky cuff-like guard dominates the blade base; pommel remains a large purple prism in a sparse shell. Grip wrap and bronze ornament remain much simpler and more regular than source053.",
+      "nextRepair": "Reduce and articulate the guard into layered studded bands and stone-bearing ornament, then rebuild the pommel cluster and overlapping leather bands."
+    }
+  ],
+  "decision": "Useful focused repair with visible aperture/depth improvement, but not exact art and not a complete weapon acceptance set. Keep V11 unchanged; do not publish a new combined bundle until the next final ninja candidate is independently checked.",
+  "limitations": [
+    "Lighting and camera matching are approximate; no inferred canon dimensions.",
+    "GPU optical parity, material render parity, collision/hand fit, LOD completeness and gameplay remain unevaluated by this pixel review."
+  ]
+}

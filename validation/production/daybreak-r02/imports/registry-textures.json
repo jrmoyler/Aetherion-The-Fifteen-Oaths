@@ -1,0 +1,4875 @@
+{
+  "registrySha256": "145f41ec58c34483362465fcc61f90455d471ed13f4cf39ea91f81c00386433e",
+  "exactOriginalModules": [
+    "foundation-plinth",
+    "floor-bay",
+    "solid-wall",
+    "window-wall",
+    "inside-corner",
+    "outside-corner",
+    "door-frame",
+    "roof-bay",
+    "stair-flight",
+    "ramp-run",
+    "parapet",
+    "service-chase",
+    "public colonnade",
+    "shade canopy",
+    "clinic threshold",
+    "quiet portico",
+    "daylight baffle"
+  ],
+  "modules": 17,
+  "glbs": 66,
+  "reports": [
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/clinic-threshold/collision.glb",
+      "sha256": "c9e77218f63380ed9fbdeeae435df32a601f07ec45c4de8c6a46cf3bd99815f7",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/clinic-threshold/lod0.glb",
+      "sha256": "47417c761cf88170a4a415f36db3c0bd5c636137a3cd6d41d083aafe29b6a1bc",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/clinic-threshold/lod1.glb",
+      "sha256": "887b9a1ccebf617468e99a4d3193e647199218035155b7335ae1883265829c34",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/clinic-threshold/lod2.glb",
+      "sha256": "0c2147a09d410bd3a673282f2d9c9a2a9a5321a812f2e1a4a03096495ffb3331",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/daylight-baffle/lod0.glb",
+      "sha256": "cfe0bda9cead6e6f8e3f3ffb5e456da2cd37582b657a6e91ab2a9e44aa5fcdb1",
+      "materials": 4,
+      "decodedEmbeddedImages": [
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "weave_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "0c18bd00c5c0b23c17bc77671cd7bb8b72693de6990bb6754abb11685f3e1f68"
+        },
+        {
+          "name": "weave_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "7eb30afb98b93835225eecc1e67f8d0b5cefd77260f72fa25949298f29f1ced0"
+        },
+        {
+          "name": "weave_metallic-weave_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "225c4b1514a111e16a1d0e46e473b0d006471174b44731a621463de3ab30adbe"
+        },
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/daylight-baffle/lod1.glb",
+      "sha256": "cfe0bda9cead6e6f8e3f3ffb5e456da2cd37582b657a6e91ab2a9e44aa5fcdb1",
+      "materials": 4,
+      "decodedEmbeddedImages": [
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "weave_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "0c18bd00c5c0b23c17bc77671cd7bb8b72693de6990bb6754abb11685f3e1f68"
+        },
+        {
+          "name": "weave_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "7eb30afb98b93835225eecc1e67f8d0b5cefd77260f72fa25949298f29f1ced0"
+        },
+        {
+          "name": "weave_metallic-weave_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "225c4b1514a111e16a1d0e46e473b0d006471174b44731a621463de3ab30adbe"
+        },
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/daylight-baffle/lod2.glb",
+      "sha256": "881d397176d8b1202c0fa9cc2a7fff2ba57b42f0ad042bf07310d01eb9f33643",
+      "materials": 4,
+      "decodedEmbeddedImages": [
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "weave_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "0c18bd00c5c0b23c17bc77671cd7bb8b72693de6990bb6754abb11685f3e1f68"
+        },
+        {
+          "name": "weave_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "7eb30afb98b93835225eecc1e67f8d0b5cefd77260f72fa25949298f29f1ced0"
+        },
+        {
+          "name": "weave_metallic-weave_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "225c4b1514a111e16a1d0e46e473b0d006471174b44731a621463de3ab30adbe"
+        },
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/door-frame/collision.glb",
+      "sha256": "1b94262ed156ad71d2a2feae4b46e339f9b04645790a9347e3d3f63236a1b07e",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/door-frame/lod0.glb",
+      "sha256": "472d09b425888225a25fb1ca41f313e2371de7fccd1ccdf7b0660faf0f67ed94",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/door-frame/lod1.glb",
+      "sha256": "472d09b425888225a25fb1ca41f313e2371de7fccd1ccdf7b0660faf0f67ed94",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/door-frame/lod2.glb",
+      "sha256": "f8150e351fae98cb101e4bac4c1fd27e9fa4ed6ca27299f594f5b69c16bcf29c",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/floor-bay/collision.glb",
+      "sha256": "af0ac1abd9947e96b682585d38223954e8b37e1fc35f7f6b1e480f615bbc63bb",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/floor-bay/lod0.glb",
+      "sha256": "84cb492ce2711002c96245887663c331b9279661dbedb21dc4045afa45a3d818",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/floor-bay/lod1.glb",
+      "sha256": "2c8c26fd07bc86140ddcc58e6ca5f419ce8764e5c05d590bab7cd7333f4779f5",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/floor-bay/lod2.glb",
+      "sha256": "2c8c26fd07bc86140ddcc58e6ca5f419ce8764e5c05d590bab7cd7333f4779f5",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/foundation-plinth/collision.glb",
+      "sha256": "408a330e072acf48b5618f16652edae6f6d6326355f13a303d71e7dc7d7b6da1",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/foundation-plinth/lod0.glb",
+      "sha256": "8e8031dda1e42e6e0864bd24b9e09404c9e402e8e08020d34d680ca4f743d3d1",
+      "materials": 4,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "gripstone_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "gripstone_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "ea95ee018a00ab514211b4ad557165e4844de8bb39938acbed73053ee3680a5b"
+        },
+        {
+          "name": "gripstone_metallic-gripstone_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "73879bb066f13912591d988ef4d094509690a3fa2c0e08d389cb468027465453"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/foundation-plinth/lod1.glb",
+      "sha256": "8e8031dda1e42e6e0864bd24b9e09404c9e402e8e08020d34d680ca4f743d3d1",
+      "materials": 4,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "gripstone_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "gripstone_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "ea95ee018a00ab514211b4ad557165e4844de8bb39938acbed73053ee3680a5b"
+        },
+        {
+          "name": "gripstone_metallic-gripstone_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "73879bb066f13912591d988ef4d094509690a3fa2c0e08d389cb468027465453"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/foundation-plinth/lod2.glb",
+      "sha256": "5356b34d2df818e3ce5f49f0339c3ce4e22caedc3aa2270d79a9fd68157ed65e",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "gripstone_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "gripstone_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "ea95ee018a00ab514211b4ad557165e4844de8bb39938acbed73053ee3680a5b"
+        },
+        {
+          "name": "gripstone_metallic-gripstone_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "73879bb066f13912591d988ef4d094509690a3fa2c0e08d389cb468027465453"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/inside-corner/collision.glb",
+      "sha256": "57a55c3148b1e247b372576b68d5c1a3308e08aea4ea013e175e66afaac73770",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/inside-corner/lod0.glb",
+      "sha256": "a130d1e8f37e5ae5d857f3cc8a75b611306261dd48bb6f7ae9f0da067eff2cd4",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/inside-corner/lod1.glb",
+      "sha256": "a130d1e8f37e5ae5d857f3cc8a75b611306261dd48bb6f7ae9f0da067eff2cd4",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/inside-corner/lod2.glb",
+      "sha256": "7e9ffbd1919d95f5cd3ae01605a44e0a393fcb3326000c3ef21b0c138b006fe2",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/outside-corner/collision.glb",
+      "sha256": "dd7c01758d3969aca2b5b8fd20f15349562e7d23ab923d2395e6bf8b66d8c7e3",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/outside-corner/lod0.glb",
+      "sha256": "86fbbfc52ddb497dc0914364859fb068ff07d371205b634b1d59995a8c44d743",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/outside-corner/lod1.glb",
+      "sha256": "5a49b43172f8804226eab8b8754390f6304e9f6ae59cc8be71555f00c0b8d395",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/outside-corner/lod2.glb",
+      "sha256": "c973b1ee59ca8c1d9d0f164f540e66f4d50d5150b71e4ffd995ceb77a0aefc3e",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/parapet/collision.glb",
+      "sha256": "6681ca06572e4474a383e41f340ceb42c52e02a7c2e6517b1c724c18519a6b25",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/parapet/lod0.glb",
+      "sha256": "ab30df0ded0596324dcba91207e68dcf82d07255b37d27abfeed5995251f2b01",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/parapet/lod1.glb",
+      "sha256": "d658838bd3878acc7ffdb91562b2c4a0d795fae6333ee7c8476cd110a0ba8d45",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/parapet/lod2.glb",
+      "sha256": "43a1e32e9f1a8461f4f7568f4d3b526425f2ca0937209057b9f70e807ffbf932",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/public-colonnade/collision.glb",
+      "sha256": "a78dfaa1f1514276d51318043cc17b6f1c977cd960f4be8206681f4cf3c4249d",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/public-colonnade/lod0.glb",
+      "sha256": "bfe6f770a14ecdb792b522343eaea0bbf417a7493599c5b2a6c7cba7805bb2d1",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/public-colonnade/lod1.glb",
+      "sha256": "e6eaddda18bdcf293f2bfc92603b780affae7dd4b1736b456cbb69b270e8fb81",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/public-colonnade/lod2.glb",
+      "sha256": "60bae1065cb8f20dcc2e25f3daa9bb4aab7d0bac69fce35744eedeee3695b4f6",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/quiet-portico/collision.glb",
+      "sha256": "4383a953744d9bf4a18fb46ae4dc397335fc44e74b168af1a52e3d720ac509e2",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/quiet-portico/lod0.glb",
+      "sha256": "971244a512dcbd57548fad1db3724360636f5a34cfc116722f00eba606ced00d",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/quiet-portico/lod1.glb",
+      "sha256": "93883d5efd2819b769e6a03e3b63d761363a7128ca722eee8e8edae2a792a75a",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/quiet-portico/lod2.glb",
+      "sha256": "59bf28bb3cd7b00b7c92b8893992c2f976c9a8b1d6602fa8dc5183eab788e798",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/ramp-run/collision.glb",
+      "sha256": "63a4f9ec1d2e67dd66b8a382a3f2ed14ef8bf7bb452c16219eb2a43a35f792f0",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/ramp-run/lod0.glb",
+      "sha256": "fc8d8b3c5ac93ee14570f4d168d281a95a7b5e1dc3d1904802e629bb23a0b077",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/ramp-run/lod1.glb",
+      "sha256": "fc8d8b3c5ac93ee14570f4d168d281a95a7b5e1dc3d1904802e629bb23a0b077",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/ramp-run/lod2.glb",
+      "sha256": "8c8a000b413edfc90189809d3223d17bdf8a43a17bf517f45b6bf3e8e686db43",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/roof-bay/collision.glb",
+      "sha256": "cbc8a5aa11479899af763440656f9f01878355a98d0dc4a063b3e006263e2484",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/roof-bay/lod0.glb",
+      "sha256": "a1f6a3ea917cf6efb3a0ef89ef82f4647ae52286ceacc6084a4478c9e2f8af28",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/roof-bay/lod1.glb",
+      "sha256": "a1f6a3ea917cf6efb3a0ef89ef82f4647ae52286ceacc6084a4478c9e2f8af28",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/roof-bay/lod2.glb",
+      "sha256": "78f6e2ff21bae7d881932f90aea10f8979025105c4995ce8af65060e82e8b899",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/service-chase/collision.glb",
+      "sha256": "d89b6e0ea12fc150be16b1b776c0eccbf601da42069293ae4525ecf17b765bc3",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/service-chase/lod0.glb",
+      "sha256": "a15bfea91d065083243b9eb04e29f3e02898b9c4b2229baa343c86adb1302cc0",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/service-chase/lod1.glb",
+      "sha256": "600b222fcbdbc2540ed0d44cea3735e0e510a49226e3db44aa40b1b4d23f4082",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/service-chase/lod2.glb",
+      "sha256": "7c91dd5854f377850cbf0456c370bc6ab4e778d87824bdc7cff2151d02f83a95",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/shade-canopy/lod0.glb",
+      "sha256": "6a1bdd918144127a2f0ec2ef6d0566e23af17a319b8b3820da60c2a852d5ad0d",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "weave_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "0c18bd00c5c0b23c17bc77671cd7bb8b72693de6990bb6754abb11685f3e1f68"
+        },
+        {
+          "name": "weave_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "7eb30afb98b93835225eecc1e67f8d0b5cefd77260f72fa25949298f29f1ced0"
+        },
+        {
+          "name": "weave_metallic-weave_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "225c4b1514a111e16a1d0e46e473b0d006471174b44731a621463de3ab30adbe"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/shade-canopy/lod1.glb",
+      "sha256": "6a1bdd918144127a2f0ec2ef6d0566e23af17a319b8b3820da60c2a852d5ad0d",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "weave_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "0c18bd00c5c0b23c17bc77671cd7bb8b72693de6990bb6754abb11685f3e1f68"
+        },
+        {
+          "name": "weave_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "7eb30afb98b93835225eecc1e67f8d0b5cefd77260f72fa25949298f29f1ced0"
+        },
+        {
+          "name": "weave_metallic-weave_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "225c4b1514a111e16a1d0e46e473b0d006471174b44731a621463de3ab30adbe"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/shade-canopy/lod2.glb",
+      "sha256": "fa667e38f2868ee46d1156a4c286d1e7732b33ca026b31ff636599cdfff5fafa",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "weave_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "0c18bd00c5c0b23c17bc77671cd7bb8b72693de6990bb6754abb11685f3e1f68"
+        },
+        {
+          "name": "weave_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "7eb30afb98b93835225eecc1e67f8d0b5cefd77260f72fa25949298f29f1ced0"
+        },
+        {
+          "name": "weave_metallic-weave_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "225c4b1514a111e16a1d0e46e473b0d006471174b44731a621463de3ab30adbe"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/solid-wall/collision.glb",
+      "sha256": "868da5844588958aedc32a24befec17fec204754ec545bb631fbdea9efb8d4ae",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/solid-wall/lod0.glb",
+      "sha256": "b8792212f2d6d768f9a3a313731320f64254145216d7feb8f7b316418f5dd099",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/solid-wall/lod1.glb",
+      "sha256": "c43249ecc2c1b80bb21cdf5cd4a7eabbd83ea6faf153eaa3497d7264f4470cf2",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/solid-wall/lod2.glb",
+      "sha256": "6de9cd3e25bef01834965d9c84afb5194b8c9e23cd49e0f2225cddcc82bc85dd",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/stair-flight/collision.glb",
+      "sha256": "96f7043929c1c5628db0e8be03f9dcf281c699572ea568149da5878cb5d2bb7a",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/stair-flight/lod0.glb",
+      "sha256": "86793dbe51d37f0aafad51ad0f500c11b1c002bf85c403011249280720e09a11",
+      "materials": 4,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "gripstone_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "gripstone_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "ea95ee018a00ab514211b4ad557165e4844de8bb39938acbed73053ee3680a5b"
+        },
+        {
+          "name": "gripstone_metallic-gripstone_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "73879bb066f13912591d988ef4d094509690a3fa2c0e08d389cb468027465453"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/stair-flight/lod1.glb",
+      "sha256": "86793dbe51d37f0aafad51ad0f500c11b1c002bf85c403011249280720e09a11",
+      "materials": 4,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "gripstone_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "gripstone_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "ea95ee018a00ab514211b4ad557165e4844de8bb39938acbed73053ee3680a5b"
+        },
+        {
+          "name": "gripstone_metallic-gripstone_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "73879bb066f13912591d988ef4d094509690a3fa2c0e08d389cb468027465453"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/stair-flight/lod2.glb",
+      "sha256": "d90deb9887d8096a0f918f75fec3f861a0e5b41af185a9bb129d513beba91a91",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/window-wall/collision.glb",
+      "sha256": "acb9180488c6bd92e8ef73bfa97858bf0f7aeb3cab2f104dc79620fcb74651a6",
+      "materials": 1,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/window-wall/lod0.glb",
+      "sha256": "27f944141df9ff1d535f7fe125f709f55f47c9c9f68a9153d4df1ddb59074f30",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/window-wall/lod1.glb",
+      "sha256": "27f944141df9ff1d535f7fe125f709f55f47c9c9f68a9153d4df1ddb59074f30",
+      "materials": 3,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        },
+        {
+          "name": "bronze_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8c4175beab70f3c14aad3cba16b4c3b35f5b7eb6f62db7670509109e378343f5"
+        },
+        {
+          "name": "bronze_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "67626476db314c01ee9f0cad93d884e5f8f34dbd35e107d4d0556aa4cfe326e5"
+        },
+        {
+          "name": "bronze_metallic-bronze_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "934c2efbeabb16bd3c6548a1c0a8383be6c05eb49ecc05b1be44b09eb764db0b"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "path": "/tmp/aetherion-daybreak-architecture/modules/window-wall/lod2.glb",
+      "sha256": "f010c56e72a6db46dae5b3323861d67a57140a6527f9b40f39f4eb4918651805",
+      "materials": 2,
+      "decodedEmbeddedImages": [
+        {
+          "name": "masonry_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "8499057affa2061b4099ca2e3cbccfb330b4b8a602bcbd35165d7a50211be128"
+        },
+        {
+          "name": "masonry_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "59ef7827ca40e25f8e536e8e49f4858ff5094fd4c84a0129305fab0469c0d06b"
+        },
+        {
+          "name": "masonry_metallic-masonry_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "31903cc1dcc35c6b997421dfcece83cdf4c753aaa6a8ef9fb8256424801e1da9"
+        },
+        {
+          "name": "marble_normal",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "400ebccd0a647390f5e3de9f63a82c825ad5d2b7744d77fdc98ed63d93303a44"
+        },
+        {
+          "name": "marble_basecolor",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "a64324949b4fadd3e9361efbe7431fc5e8064d0cb2395f2a6d6a28b198189524"
+        },
+        {
+          "name": "marble_metallic-marble_roughness",
+          "format": "PNG",
+          "size": [
+            512,
+            512
+          ],
+          "sha256": "6d3e32bd124edf0fe6ca06ee289ed291354f1c466a5280425aa7a1201e2c6506"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "allPass": true
+}

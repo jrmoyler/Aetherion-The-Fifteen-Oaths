@@ -1,0 +1,181 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "records",
+    "baseline_commit",
+    "source_ability_matrix_commit",
+    "files",
+    "reference_evidence",
+    "repository_status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "source_type",
+          "location",
+          "accessibility",
+          "canon_status",
+          "verification",
+          "facts",
+          "limitations"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "string",
+            "minLength": 1
+          },
+          "accessibility": {
+            "type": "string",
+            "minLength": 1
+          },
+          "canon_status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "verification": {
+            "type": "string",
+            "minLength": 1
+          },
+          "facts": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "baseline_commit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ability_matrix_commit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "url",
+          "sha256",
+          "bytes",
+          "verification",
+          "semantic_review"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "verification": {
+            "type": "string",
+            "minLength": 1
+          },
+          "semantic_review": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "reference_evidence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observed_at",
+        "pr_url",
+        "merged",
+        "merged_at",
+        "merge_commit",
+        "reviewed_head",
+        "merger_identity",
+        "scope"
+      ],
+      "properties": {
+        "observed_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pr_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "merged": {
+          "type": "boolean"
+        },
+        "merged_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "merge_commit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewed_head": {
+          "type": "string",
+          "minLength": 1
+        },
+        "merger_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

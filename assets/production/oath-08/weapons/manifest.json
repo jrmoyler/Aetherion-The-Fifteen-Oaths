@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o08-e-weapons-family",
+  "referenceIds": [
+    "reference-047"
+  ],
+  "assets": [
+    {
+      "id": "prod-o08-poison-saber",
+      "archetypeId": "prod-o08-poison-saber",
+      "name": "Poison Saber",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-08/weapons/poison-saber/poison-saber.blend",
+        "glb": "assets/production/oath-08/weapons/poison-saber/poison-saber.glb",
+        "lod1": "assets/production/oath-08/weapons/poison-saber/poison-saber_lod1.glb",
+        "lod2": "assets/production/oath-08/weapons/poison-saber/poison-saber_lod2.glb",
+        "collision": "assets/production/oath-08/weapons/poison-saber/poison-saber_collision.glb",
+        "textures": [
+          "assets/production/oath-08/weapons/silver_edge_basecolor.png",
+          "assets/production/oath-08/weapons/silver_edge_roughness.png",
+          "assets/production/oath-08/weapons/silver_edge_metallic.png",
+          "assets/production/oath-08/weapons/silver_edge_normal.png",
+          "assets/production/oath-08/weapons/bitterglass_basecolor.png",
+          "assets/production/oath-08/weapons/bitterglass_roughness.png",
+          "assets/production/oath-08/weapons/bitterglass_metallic.png",
+          "assets/production/oath-08/weapons/bitterglass_normal.png",
+          "assets/production/oath-08/weapons/brushed_gold_basecolor.png",
+          "assets/production/oath-08/weapons/brushed_gold_roughness.png",
+          "assets/production/oath-08/weapons/brushed_gold_metallic.png",
+          "assets/production/oath-08/weapons/brushed_gold_normal.png",
+          "assets/production/oath-08/weapons/burgundy_leather_basecolor.png",
+          "assets/production/oath-08/weapons/burgundy_leather_roughness.png",
+          "assets/production/oath-08/weapons/burgundy_leather_metallic.png",
+          "assets/production/oath-08/weapons/burgundy_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-08/weapons/poison-saber/front.png",
+          "assets/production/oath-08/weapons/poison-saber/side.png",
+          "assets/production/oath-08/weapons/poison-saber/hero.png"
+        ]
+      },
+      "dimensionsMeters": [
+        0.3285,
+        0.0936,
+        1.165
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner reference-047 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "KHR_materials_transmission renderer parity and reference optical review",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Saber charm secondary motion and alchemical focus firing VFX/audio"
+      ],
+      "triangles": {
+        "glb": 4084,
+        "lod1": 2220,
+        "lod2": 1101,
+        "collision": 164
+      }
+    },
+    {
+      "id": "prod-o08-alchemical-crossbow",
+      "archetypeId": "prod-o08-alchemical-crossbow",
+      "name": "Alchemical Crossbow",
+      "type": "static_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow.blend",
+        "glb": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow.glb",
+        "lod1": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow_lod1.glb",
+        "lod2": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow_lod2.glb",
+        "collision": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow_collision.glb",
+        "textures": [
+          "assets/production/oath-08/weapons/silver_edge_basecolor.png",
+          "assets/production/oath-08/weapons/silver_edge_roughness.png",
+          "assets/production/oath-08/weapons/silver_edge_metallic.png",
+          "assets/production/oath-08/weapons/silver_edge_normal.png",
+          "assets/production/oath-08/weapons/bitterglass_basecolor.png",
+          "assets/production/oath-08/weapons/bitterglass_roughness.png",
+          "assets/production/oath-08/weapons/bitterglass_metallic.png",
+          "assets/production/oath-08/weapons/bitterglass_normal.png",
+          "assets/production/oath-08/weapons/brushed_gold_basecolor.png",
+          "assets/production/oath-08/weapons/brushed_gold_roughness.png",
+          "assets/production/oath-08/weapons/brushed_gold_metallic.png",
+          "assets/production/oath-08/weapons/brushed_gold_normal.png",
+          "assets/production/oath-08/weapons/burgundy_leather_basecolor.png",
+          "assets/production/oath-08/weapons/burgundy_leather_roughness.png",
+          "assets/production/oath-08/weapons/burgundy_leather_metallic.png",
+          "assets/production/oath-08/weapons/burgundy_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-08/weapons/alchemical-crossbow/front.png",
+          "assets/production/oath-08/weapons/alchemical-crossbow/side.png",
+          "assets/production/oath-08/weapons/alchemical-crossbow/hero.png"
+        ]
+      },
+      "dimensionsMeters": [
+        0.374,
+        0.324,
+        0.9806
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": "NOT_APPLICABLE_STATIC_WEAPON",
+      "animations": [],
+      "remainingGates": [
+        "Owner reference-047 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "KHR_materials_transmission renderer parity and reference optical review",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Saber charm secondary motion and alchemical focus firing VFX/audio"
+      ],
+      "triangles": {
+        "glb": 9582,
+        "lod1": 5213,
+        "lod2": 2601,
+        "collision": 252
+      }
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "method": "Manually picked pixel landmarks from inspected reference090 original (1536x1024); approximate +/-5px. Painted views are not a calibrated orthographic scan. Body and face panel are measured separately. No subpixel accuracy claimed.",
+  "bodyFront": {
+    "hairTop": [
+      222,
+      58
+    ],
+    "chinMasked": [
+      222,
+      149
+    ],
+    "eyeLine": [
+      222,
+      109
+    ],
+    "shoulderLeft": [
+      160,
+      177
+    ],
+    "shoulderRight": [
+      303,
+      177
+    ],
+    "chestLeft": [
+      173,
+      244
+    ],
+    "chestRight": [
+      278,
+      244
+    ],
+    "waistLeft": [
+      177,
+      300
+    ],
+    "waistRight": [
+      276,
+      300
+    ],
+    "crotch": [
+      221,
+      373
+    ],
+    "kneeLeft": [
+      172,
+      510
+    ],
+    "kneeRight": [
+      270,
+      510
+    ],
+    "ankleLeft": [
+      151,
+      614
+    ],
+    "ankleRight": [
+      293,
+      614
+    ],
+    "sole": [
+      220,
+      681
+    ],
+    "capeLowEdge": [
+      109,
+      253
+    ],
+    "capeAnchor": [
+      257,
+      174
+    ],
+    "bootLeftEdges": [
+      [
+        98,
+        664
+      ],
+      [
+        168,
+        664
+      ]
+    ]
+  },
+  "bodyProfile": {
+    "hairTop": [
+      935,
+      62
+    ],
+    "chinMasked": [
+      924,
+      151
+    ],
+    "shoulder": [
+      947,
+      177
+    ],
+    "chestFront": [
+      901,
+      245
+    ],
+    "chestBack": [
+      971,
+      245
+    ],
+    "waistFront": [
+      903,
+      303
+    ],
+    "waistBack": [
+      971,
+      303
+    ],
+    "crotch": [
+      940,
+      373
+    ],
+    "knee": [
+      940,
+      511
+    ],
+    "ankle": [
+      940,
+      619
+    ],
+    "sole": [
+      940,
+      681
+    ],
+    "toeHeelEdges": [
+      [
+        881,
+        665
+      ],
+      [
+        972,
+        665
+      ]
+    ]
+  },
+  "unmaskedFacePanel": {
+    "frontHairTop": [
+      94,
+      740
+    ],
+    "frontChin": [
+      92,
+      920
+    ],
+    "eyeLine": [
+      92,
+      839
+    ],
+    "noseTip": [
+      92,
+      871
+    ],
+    "mouthLine": [
+      92,
+      894
+    ],
+    "jawLeft": [
+      54,
+      884
+    ],
+    "jawRight": [
+      128,
+      884
+    ],
+    "profileHairTop": [
+      259,
+      741
+    ],
+    "profileChin": [
+      232,
+      928
+    ],
+    "profileNoseTip": [
+      205,
+      863
+    ]
+  },
+  "limitations": [
+    "Handpicked points need independent art review; <=5px precision only.",
+    "Boot width includes perspective/foot yaw; compare profile length separately.",
+    "Face panel has different scale from fullbody turnaround.",
+    "Pose/shoulder garment boundaries are ambiguous; landmarks do not imply exact anatomical measurements."
+  ],
+  "frontRatiosFromSole": {
+    "hairTop": 1.0,
+    "chinMasked": 0.8539,
+    "eyeLine": 0.9181,
+    "shoulderLeft": 0.809,
+    "shoulderRight": 0.809,
+    "chestLeft": 0.7014,
+    "chestRight": 0.7014,
+    "waistLeft": 0.6116,
+    "waistRight": 0.6116,
+    "crotch": 0.4944,
+    "kneeLeft": 0.2745,
+    "kneeRight": 0.2745,
+    "ankleLeft": 0.1075,
+    "ankleRight": 0.1075,
+    "sole": 0.0,
+    "capeLowEdge": 0.687,
+    "capeAnchor": 0.8138
+  },
+  "bodyFrontWidthsRelativeHeight": {
+    "shoulders": 0.2295,
+    "chest": 0.1685,
+    "waist": 0.1589,
+    "boot": 0.1124
+  }
+}

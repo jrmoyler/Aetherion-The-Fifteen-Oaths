@@ -1,0 +1,51 @@
+{
+  "concept_id": "batch05_01_storm_relay_bench_technician",
+  "reported_group_qa": {
+    "selected_version": "v2",
+    "source_inspection_preview": "generated/batch05_01_storm_relay_bench_technician_source_preview.png",
+    "unresolved_review_items": [
+      "PROPOSED derivative occupational design only; exact art approval is unresolved.",
+      "Image generation is not measured geometry, a sewing pattern, validated anatomy, a rig or a clip package.",
+      "One adult fitting form and outfit provide partial clothing-family coverage, not a full population or all occupational variants.",
+      "Faceted low-poly PBR intent was requested, but rendered cloth and anatomy are relatively smooth; exact game-style translation remains for art review.",
+      "All main views, flat lays, closure/pocket details, seated reach and crouch are represented. Small occluded details and fingers cannot all be established reliably at sheet resolution.",
+      "No original artwork, source registry, repository file, model, rig or scene was modified.",
+      "Cropped closure detail shows only three snaps; it is a crop, not a full count illustration.",
+      "Exact seam pattern, cuff construction, jacket removability terminology, anthropometry and cloth clearance require review."
+    ]
+  },
+  "versions": [
+    {
+      "version": "v1",
+      "qa": {
+        "status": "PRESERVED_SUPERSEDED_OR_UNSUCCESSFUL_VARIANT",
+        "qa": {
+          "passed": [
+            "Palette, civilian silhouette, four front snaps and two symmetric patch pockets are coherent in main front/flat lay.",
+            "Two profiles face their labeled directions; rear-right view, work poses, details and review disclaimers are present."
+          ],
+          "unresolved": [
+            "FRONT-LEFT 3/4 figure faces screen-right and shows the wrong front quadrant.",
+            "Highly detailed soft shading is less faceted than requested."
+          ]
+        }
+      }
+    },
+    {
+      "version": "v2",
+      "qa": {
+        "status": "PROPOSED_REVIEW_CANDIDATE",
+        "qa": {
+          "passed": [
+            "FRONT-LEFT 3/4 figure now faces screen-left, correcting the quadrant mismatch.",
+            "Main four-snap count, two symmetric lower patch pockets, ivory cuffs, plain rear, short hem and civilian material hierarchy remain coherent."
+          ],
+          "unresolved": [
+            "Cropped closure detail shows only three snaps; it is a crop, not a full count illustration.",
+            "Exact seam pattern, cuff construction, jacket removability terminology, anthropometry and cloth clearance require review."
+          ]
+        }
+      }
+    }
+  ]
+}

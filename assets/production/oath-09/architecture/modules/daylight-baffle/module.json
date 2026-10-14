@@ -1,0 +1,192 @@
+{
+  "original_name": "daylight baffle",
+  "source_pointer": "ARCHITECTURAL_KIT_REGISTRY.json#/records/8/modules/16",
+  "source_axes": "Blender right-handed X-right Y-depth Z-up meters; exporter +Y-up glTF conversion once",
+  "origin": "Lower southwest finished-floor footprint corner at z=0; slab thickness below datum",
+  "target_extent_width_depth_height_m": [
+    2.0,
+    0.3,
+    1.2
+  ],
+  "actual_bounds_blender_m": [
+    [
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      2.0,
+      0.30000001192092896,
+      1.2000000476837158
+    ]
+  ],
+  "lod_triangle_counts": {
+    "lod0": 264,
+    "lod1": 240,
+    "lod2": 96
+  },
+  "visual_meshes": 22,
+  "collider_meshes": 0,
+  "sockets": [
+    {
+      "name": "louver-axis-0",
+      "semantic_type": "mechanism_axis",
+      "position_blender_xyz_m": [
+        1.0,
+        0.15000000596046448,
+        0.4399999976158142
+      ],
+      "position_gltf_xyz_m": [
+        1.0,
+        0.4399999976158142,
+        -0.15000000596046448
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "mechanism_axis"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "limits_degrees": [
+          0,
+          70
+        ],
+        "required_state_authority": "NOT_IMPLEMENTED"
+      }
+    },
+    {
+      "name": "louver-axis-1",
+      "semantic_type": "mechanism_axis",
+      "position_blender_xyz_m": [
+        1.0,
+        0.15000000596046448,
+        0.7599999904632568
+      ],
+      "position_gltf_xyz_m": [
+        1.0,
+        0.7599999904632568,
+        -0.15000000596046448
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "mechanism_axis"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "limits_degrees": [
+          0,
+          70
+        ],
+        "required_state_authority": "NOT_IMPLEMENTED"
+      }
+    },
+    {
+      "name": "louver-axis-2",
+      "semantic_type": "mechanism_axis",
+      "position_blender_xyz_m": [
+        1.0,
+        0.15000000596046448,
+        1.0800000429153442
+      ],
+      "position_gltf_xyz_m": [
+        1.0,
+        1.0800000429153442,
+        -0.15000000596046448
+      ],
+      "outward_normal_blender_xyz": [
+        1,
+        0,
+        0
+      ],
+      "compatible_partner_types": [
+        "mechanism_axis"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "limits_degrees": [
+          0,
+          70
+        ],
+        "required_state_authority": "NOT_IMPLEMENTED"
+      }
+    },
+    {
+      "name": "window-attachment",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        1,
+        0.3,
+        0
+      ],
+      "position_gltf_xyz_m": [
+        1,
+        0,
+        -0.3
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        1,
+        0
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": null
+    },
+    {
+      "name": "manual-release-extension",
+      "semantic_type": "attachment_static",
+      "position_blender_xyz_m": [
+        1.91,
+        0.3,
+        0.08
+      ],
+      "position_gltf_xyz_m": [
+        1.91,
+        0.08,
+        -0.3
+      ],
+      "outward_normal_blender_xyz": [
+        0,
+        0,
+        1
+      ],
+      "compatible_partner_types": [
+        "attachment_static"
+      ],
+      "occupancy_rule": "one partner per structural seam; attachment slots individually owned",
+      "clearance": {
+        "floor_reachable_extension": "NOT_YET_AUTHORED"
+      }
+    }
+  ],
+  "status": "AUTHORED_CANDIDATE_UNAPPROVED",
+  "remaining": [
+    "Exact reference likeness review",
+    "Gameplay traversal and mechanism authority",
+    "Texture texel density and mip validation",
+    "Unreal import unavailable; Godot/Three independent import pending"
+  ],
+  "editable_lod_geometry": {
+    "lod1": {
+      "source_object_prefix": "LOD1__",
+      "objects": 22,
+      "triangles": 240
+    },
+    "lod2": {
+      "source_object_prefix": "LOD2__",
+      "objects": 8,
+      "triangles": 96
+    }
+  },
+  "lod_revision": "r03 deliberate topology reduction; same primary/collision payloads"
+}

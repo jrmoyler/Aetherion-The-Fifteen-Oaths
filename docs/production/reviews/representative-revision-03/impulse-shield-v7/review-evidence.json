@@ -1,0 +1,271 @@
+{
+  "status": "FROZEN_PROPOSED_NOT_VISUALLY_ACCEPTED",
+  "generatedAt": "2026-10-13T22:26:57.816192+00:00",
+  "reference": "reference-032-original.png",
+  "clearance": {
+    "samples": 721,
+    "intergroupIntersections": 0,
+    "method": "evaluated triangle BVH at 0.25 frame increments; 1 micrometer epsilon",
+    "excludedIntergroupContacts": 0,
+    "limitations": [
+      "No continuous swept-volume test",
+      "No containment test",
+      "No structural strength/manufacturability test",
+      "No wearer fit test"
+    ]
+  },
+  "geometry": {
+    "triangles": 27456,
+    "bones": 8,
+    "scaleKeyframes": 0,
+    "deployedWidthHeightMeters": [
+      0.53,
+      0.95
+    ],
+    "stowedWidthHeightDepthMeters": [
+      0.25,
+      0.95,
+      0.22705
+    ],
+    "maximumSampledDepthMeters": 0.55433384
+  },
+  "localGLB": {
+    "errors": 0,
+    "warnings": 312,
+    "warningCode": "MESH_PRIMITIVE_GENERATED_TANGENT_SPACE",
+    "textureAppearanceTested": false
+  },
+  "visualReview": "Compared original032 and all final state renders. Still flatter construction, overly uniform materials, missing localized wear/edge casing depth. PROPOSED hidden extension mechanism; no final acceptance.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3828,
+      "sha256": "798bdd36a209b3b92767fc45398867b724f9c03532c2ebb21ffb4ee04ff74b78"
+    },
+    {
+      "path": "audit_clearance.py",
+      "bytes": 1793,
+      "sha256": "0403157279524e7c0b185deec99aee7fdcd435ac30821cdce2411efae040264a"
+    },
+    {
+      "path": "audit_quarter_clearance.py",
+      "bytes": 1851,
+      "sha256": "8fe639fa867bc60d5ac742ef2c5ec248ecd473d90023c8c6e42f54d9d2292d4d"
+    },
+    {
+      "path": "clearance-audit.json",
+      "bytes": 11309,
+      "sha256": "10736c99cec1c15195d0b7e97c0891440eee78f563feac54b950327f2c33c114"
+    },
+    {
+      "path": "clearance-quarter-audit.json",
+      "bytes": 44259,
+      "sha256": "d3dbd04aeea0cd42db5bbfec1270be95f236f4b8674c23a10d2683f2a9bae306"
+    },
+    {
+      "path": "comparison.html",
+      "bytes": 1477,
+      "sha256": "7b5d4098fd0badbda4c6302c0de2759decf6641e88c899ea7d3ffcee962eec7c"
+    },
+    {
+      "path": "deployed-front.png",
+      "bytes": 760842,
+      "sha256": "cfa3969ca7dec74fd4602f7000eab06eabdff7020eb160f2fce42c3102986963"
+    },
+    {
+      "path": "deployed-hero.png",
+      "bytes": 728331,
+      "sha256": "22d48db3ec11b10091d4996087161c7f95496e53378126205c69f93863e124a3"
+    },
+    {
+      "path": "geometry-freeze-receipt.json",
+      "bytes": 1155,
+      "sha256": "3162378a1067d0364c60050043b67c3065467bf43593f1e1578c9c91569507e7"
+    },
+    {
+      "path": "glb-validation-validator-details.json",
+      "bytes": 115546,
+      "sha256": "04c036c405f0c5cfe132ab51f39e98cdd2c70c9e86100d531a1585e5da5aab35"
+    },
+    {
+      "path": "glb-validation.json",
+      "bytes": 162251,
+      "sha256": "7d327cf50ea0697471c4fb8abe63b9d407cc1dbf4816535f950ffe28feb4ca90"
+    },
+    {
+      "path": "impulse-shield-lateral-review07.blend",
+      "bytes": 6226780,
+      "sha256": "9e4d5bb7758aed41f711cc0b08450c8e74633420af52755c41051fb6a8dc3d33"
+    },
+    {
+      "path": "impulse-shield-lateral-review07.glb",
+      "bytes": 4846080,
+      "sha256": "24a99b69791acda8574d0dff9758d2dfe235c98c5d85083e2687e89b91d881f2"
+    },
+    {
+      "path": "intermediate.png",
+      "bytes": 598594,
+      "sha256": "0efedb55391aa13a865a90f254056238ef1ccbfff3ca424d6ccce70e2fb90528"
+    },
+    {
+      "path": "iteration01/clearance-audit.json",
+      "bytes": 720825,
+      "sha256": "9e13d3a43eea375dc4b208cd7d2072590cf7d8ad8527038b91ca908ee1084440"
+    },
+    {
+      "path": "iteration01/measured-animation.json",
+      "bytes": 65299,
+      "sha256": "374d35643f86295b5b66f1678595232666c2d6658037c087c477183d5016bfcd"
+    },
+    {
+      "path": "iteration01/reproduce.py",
+      "bytes": 15312,
+      "sha256": "42f95c283582a6de0d8517af77672aab2e5add9adbb32eccb8c8a756c61f1d26"
+    },
+    {
+      "path": "iteration02/clearance-audit.json",
+      "bytes": 42077,
+      "sha256": "5f13f0990fdef8514fa372a3d7a18c3aaeda48233a07db62021a75cc77f2e1c1"
+    },
+    {
+      "path": "iteration02/measured-animation.json",
+      "bytes": 64727,
+      "sha256": "b990cf5e83873d0d2140398e9df9b8cddceeaaed0740148c18b14e5ee6977d01"
+    },
+    {
+      "path": "iteration02/reproduce.py",
+      "bytes": 15766,
+      "sha256": "c9984b4e56492916f6729fce9025ab7799f94abc9ca7993ea3d36c6df95ab184"
+    },
+    {
+      "path": "iteration03/clearance-audit.json",
+      "bytes": 11821,
+      "sha256": "74774c271c69421d6cf5177c1d6856d7f1ab6c7634a13a424abc83be735bf780"
+    },
+    {
+      "path": "iteration03/measured-animation.json",
+      "bytes": 64723,
+      "sha256": "864d4b81a6f2aea5be9eae4eb08a14eb709a6ca3c864a60ae918ee7bb16316dc"
+    },
+    {
+      "path": "iteration03/reproduce.py",
+      "bytes": 15920,
+      "sha256": "7c3c02e9f6ebb33a402dee07ccb7bb97dd0fee4215421012633a7c50900d5bd3"
+    },
+    {
+      "path": "iteration04/clearance-quarter-audit.json",
+      "bytes": 58775,
+      "sha256": "96a1b6eead8ca65e1df64b8da76950cfd79aebf4234306d619cd920c15594780"
+    },
+    {
+      "path": "iteration04/measured-animation.json",
+      "bytes": 64723,
+      "sha256": "d49ae2ab7379c592079e4689ba527c43aa99835b03e6d90b640d00ae6b491c5a"
+    },
+    {
+      "path": "iteration04/reproduce.py",
+      "bytes": 16182,
+      "sha256": "2d3eb105bd46ab9313328568d822f6e7688fa9393b111fea8b789a1fe6b1eb99"
+    },
+    {
+      "path": "measured-animation.json",
+      "bytes": 64723,
+      "sha256": "afd62c35ef757eac9dbc7c1aba19d71047cf03c77e37c135c9a5ca4e5230e234"
+    },
+    {
+      "path": "recipe/kiln_weapons.py",
+      "bytes": 18183,
+      "sha256": "efdd66f0ff77488808b148b88fff9cff93cd27204938dde5128fa8d4936934cd"
+    },
+    {
+      "path": "reference-032-original.png",
+      "bytes": 2445256,
+      "sha256": "77e948588fbd7a17687c3caa4fd206833ed039896118974b472928155f87f197"
+    },
+    {
+      "path": "render_first.py",
+      "bytes": 2044,
+      "sha256": "e334ff178a9bdaac503f88041aefd93604e34018eeb5ce7dcef999b64483497e"
+    },
+    {
+      "path": "reproduce.py",
+      "bytes": 16184,
+      "sha256": "bd629feece3b295a399eabb7a704f1c94be29c17d57419aa308dce1d5e6de630"
+    },
+    {
+      "path": "stowed-front.png",
+      "bytes": 586303,
+      "sha256": "1b842e0a5ba944f7deb261afe7817f06190a0f19d40c327bc637135eaf8df6ac"
+    },
+    {
+      "path": "stowed-hero.png",
+      "bytes": 562931,
+      "sha256": "202dc1bbe2918ef3e6048e6b5c853e07d899e61587f766664299f0b3f2c41ac9"
+    },
+    {
+      "path": "textures/iron_basecolor.png",
+      "bytes": 195414,
+      "sha256": "5485d1a0cb45b534e5b3fd3d44a0e08dd27842fe0e65bce0e9db67364f252115"
+    },
+    {
+      "path": "textures/iron_normal.png",
+      "bytes": 5732,
+      "sha256": "66c6bffa297f6ba2171d42946876f5efe3effd4374ac5defb1fdbdb73a0d2761"
+    },
+    {
+      "path": "textures/iron_orm.png",
+      "bytes": 229845,
+      "sha256": "aefcb2ac931406dafc4c52cee762603083131c8c409d768ee095a64cdab1ef4f"
+    },
+    {
+      "path": "textures/orange_basecolor.png",
+      "bytes": 292768,
+      "sha256": "69171f480829e1d38c6b7de30163b4c5c2a86a5df5dca2847f524b57112a524d"
+    },
+    {
+      "path": "textures/orange_normal.png",
+      "bytes": 5732,
+      "sha256": "66c6bffa297f6ba2171d42946876f5efe3effd4374ac5defb1fdbdb73a0d2761"
+    },
+    {
+      "path": "textures/orange_orm.png",
+      "bytes": 231891,
+      "sha256": "fa36eeaa6217d51fe116036aa04ca270f4d8d2cc5e14bbcef0c6309477f01e24"
+    },
+    {
+      "path": "textures/rubber_basecolor.png",
+      "bytes": 5733,
+      "sha256": "bb2171d6ba7b873fe24b08b3b29009f5a71637fd5dd8c8a1e57abc9f06052ceb"
+    },
+    {
+      "path": "textures/rubber_normal.png",
+      "bytes": 5732,
+      "sha256": "66c6bffa297f6ba2171d42946876f5efe3effd4374ac5defb1fdbdb73a0d2761"
+    },
+    {
+      "path": "textures/rubber_orm.png",
+      "bytes": 229502,
+      "sha256": "d02d7f4cd9555b442dd3d7e2538a82dcce053e26ad3abeb1d48420a34be73be1"
+    },
+    {
+      "path": "textures/steel_basecolor.png",
+      "bytes": 288797,
+      "sha256": "1c0b66766474c4f1b565d698022c335059e46b2edc136ca70003d684ada738b6"
+    },
+    {
+      "path": "textures/steel_normal.png",
+      "bytes": 5732,
+      "sha256": "66c6bffa297f6ba2171d42946876f5efe3effd4374ac5defb1fdbdb73a0d2761"
+    },
+    {
+      "path": "textures/steel_orm.png",
+      "bytes": 229958,
+      "sha256": "d72f8e484a6ada4bf7b070e700651089e6f69b848a756f94bb2c1f0754306b1a"
+    },
+    {
+      "path": "validation-inputs.json",
+      "bytes": 3849,
+      "sha256": "8f81765cd3eb8a8fd17a179763d44c060454e56e29c558fe5e60ee0cb56905d9"
+    }
+  ]
+}

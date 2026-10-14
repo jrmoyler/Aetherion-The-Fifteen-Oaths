@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "familyId": "asset-o12-e-weapons-family",
+  "referenceIds": [
+    "reference-039"
+  ],
+  "assets": [
+    {
+      "id": "prod-o12-blood-lash",
+      "archetypeId": "prod-o12-blood-lash",
+      "name": "Blood Lash",
+      "type": "articulated_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-12/weapons/blood-lash/blood-lash.blend",
+        "glb": "assets/production/oath-12/weapons/blood-lash/blood-lash.glb",
+        "lod1": "assets/production/oath-12/weapons/blood-lash/blood-lash_lod1.glb",
+        "lod2": "assets/production/oath-12/weapons/blood-lash/blood-lash_lod2.glb",
+        "collision": "assets/production/oath-12/weapons/blood-lash/blood-lash_collision.glb",
+        "textures": [
+          "assets/production/oath-12/weapons/ivory_gold_basecolor.png",
+          "assets/production/oath-12/weapons/ivory_gold_roughness.png",
+          "assets/production/oath-12/weapons/ivory_gold_metallic.png",
+          "assets/production/oath-12/weapons/ivory_gold_normal.png",
+          "assets/production/oath-12/weapons/crimson_glass_basecolor.png",
+          "assets/production/oath-12/weapons/crimson_glass_roughness.png",
+          "assets/production/oath-12/weapons/crimson_glass_metallic.png",
+          "assets/production/oath-12/weapons/crimson_glass_normal.png",
+          "assets/production/oath-12/weapons/dark_steel_basecolor.png",
+          "assets/production/oath-12/weapons/dark_steel_roughness.png",
+          "assets/production/oath-12/weapons/dark_steel_metallic.png",
+          "assets/production/oath-12/weapons/dark_steel_normal.png",
+          "assets/production/oath-12/weapons/red_leather_basecolor.png",
+          "assets/production/oath-12/weapons/red_leather_roughness.png",
+          "assets/production/oath-12/weapons/red_leather_metallic.png",
+          "assets/production/oath-12/weapons/red_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-12/weapons/blood-lash/front.png",
+          "assets/production/oath-12/weapons/blood-lash/side.png",
+          "assets/production/oath-12/weapons/blood-lash/hero.png"
+        ],
+        "animationPreview": "assets/production/oath-12/weapons/blood-lash/flex-pose.png"
+      },
+      "dimensionsMeters": [
+        0.5029,
+        0.092,
+        1.2257
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "status": "CANDIDATE_WEIGHTED",
+        "boneCount": 13
+      },
+      "animations": [
+        {
+          "name": "Lash_flex_demo",
+          "frames": 32,
+          "fps": 24,
+          "status": "AUTHORING_DEMONSTRATION_UNREVIEWED"
+        }
+      ],
+      "remainingGates": [
+        "Owner reference-039 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "Crimson enamel and leather reference material review",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Pose deformation review and character retargeting; sound/VFX"
+      ],
+      "triangles": {
+        "glb": 1928,
+        "lod1": 1026,
+        "lod2": 505,
+        "collision": 228
+      }
+    },
+    {
+      "id": "prod-o12-blood-gauntlet",
+      "archetypeId": "prod-o12-blood-gauntlet",
+      "name": "Blood Gauntlet",
+      "type": "articulated_equipment",
+      "status": "PRODUCTION_CANDIDATE_UNREVIEWED",
+      "files": {
+        "blend": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet.blend",
+        "glb": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet.glb",
+        "lod1": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet_lod1.glb",
+        "lod2": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet_lod2.glb",
+        "collision": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet_collision.glb",
+        "textures": [
+          "assets/production/oath-12/weapons/ivory_gold_basecolor.png",
+          "assets/production/oath-12/weapons/ivory_gold_roughness.png",
+          "assets/production/oath-12/weapons/ivory_gold_metallic.png",
+          "assets/production/oath-12/weapons/ivory_gold_normal.png",
+          "assets/production/oath-12/weapons/crimson_glass_basecolor.png",
+          "assets/production/oath-12/weapons/crimson_glass_roughness.png",
+          "assets/production/oath-12/weapons/crimson_glass_metallic.png",
+          "assets/production/oath-12/weapons/crimson_glass_normal.png",
+          "assets/production/oath-12/weapons/dark_steel_basecolor.png",
+          "assets/production/oath-12/weapons/dark_steel_roughness.png",
+          "assets/production/oath-12/weapons/dark_steel_metallic.png",
+          "assets/production/oath-12/weapons/dark_steel_normal.png",
+          "assets/production/oath-12/weapons/red_leather_basecolor.png",
+          "assets/production/oath-12/weapons/red_leather_roughness.png",
+          "assets/production/oath-12/weapons/red_leather_metallic.png",
+          "assets/production/oath-12/weapons/red_leather_normal.png"
+        ],
+        "renders": [
+          "assets/production/oath-12/weapons/blood-gauntlet/front.png",
+          "assets/production/oath-12/weapons/blood-gauntlet/side.png",
+          "assets/production/oath-12/weapons/blood-gauntlet/hero.png"
+        ],
+        "animationPreview": "assets/production/oath-12/weapons/blood-gauntlet/flex-pose.png"
+      },
+      "dimensionsMeters": [
+        0.2008,
+        0.1433,
+        0.4853
+      ],
+      "dimensionsCoordinateSystem": "BLENDER_Z_UP",
+      "rig": {
+        "status": "CANDIDATE_WEIGHTED",
+        "boneCount": 15
+      },
+      "animations": [
+        {
+          "name": "Gauntlet_grasp_demo",
+          "frames": 32,
+          "fps": 24,
+          "status": "AUTHORING_DEMONSTRATION_UNREVIEWED"
+        }
+      ],
+      "remainingGates": [
+        "Owner reference-039 art review",
+        "Carried/stowed character fit",
+        "Damaged state",
+        "Crimson enamel and leather reference material review",
+        "Engine import/runtime parity",
+        "Gameplay collision and LOD checks",
+        "Pose deformation review and character retargeting; sound/VFX"
+      ],
+      "triangles": {
+        "glb": 2520,
+        "lod1": 1344,
+        "lod2": 644,
+        "collision": 290
+      }
+    }
+  ]
+}

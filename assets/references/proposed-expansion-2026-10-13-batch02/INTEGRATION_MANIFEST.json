@@ -1,0 +1,731 @@
+{
+  "schema_version": "1.0.0",
+  "batch_id": "reference-expansion-batch02",
+  "status": "FROZEN_TEN_REVIEWED_PROPOSED_REGIONAL_EXEMPLARS",
+  "image_count": 10,
+  "preservation": {
+    "original114_reverified_unchanged": true,
+    "batch01_unchanged": true,
+    "additive_only": true
+  },
+  "source_mounts": {
+    "baseline": "Original Phase I repository, read-only",
+    "phase2": "Existing Phase II package, read-only"
+  },
+  "coverage_warning": "Ten regional exemplars of shared environment families; no full-family, all-realm or production-model coverage claimed.",
+  "import_policy": [
+    "Keep separate from immutable batch01.",
+    "Verify all payload hashes.",
+    "Preserve proposal status, image versions and QA issues.",
+    "No exact-art approval, modeling acceptance or permission to publish follows from this package."
+  ],
+  "records": [
+    {
+      "id": "reference-expansion-env_01_terrain_o09",
+      "file": "generated/p2-env-09-shared-terrain-oath-09-proposed-v01.png",
+      "sha256": "6c3c7e3908bdcb71dc83fbdd19ff4685ea30fd2257ed1dbb9f615c7004d1df96",
+      "bytes": 3356116,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-terrain",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "regional_oath_id": "oath-09",
+      "baseline_asset_id": "asset-o09-af-terrain-transitions-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/0"
+      },
+      "exact_source_construction": "Heightfield/mesh chunks with shared border samples, bank shelves, pass cuts and hydrologic outlets.",
+      "exact_source_regional_variant": {
+        "region_id": "region-09",
+        "oath_id": "oath-09",
+        "kit_id": "p2-arch-09-daybreak-arcades",
+        "baseline_asset_id": "asset-o09-af-terrain-transitions-family",
+        "construction_delta": "temperate alluvial terrace; meadow shoulder; riverbank silt; preserve basin-dawn outlet logic. meadows and farms connect upland roads to southern river terraces",
+        "materials": [
+          "alluvial soil",
+          "river gravel",
+          "local bedrock"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-105",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Distinct habitat/climate requires a separate ecological distribution specification.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "A shallow nonnumeric contour hierarchy, grass-root transition and replaceable bank-rubble detail.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_01_terrain_o09.prompt.txt",
+      "prompt_sha256": "9ee124dccc9e77ba66a382c1df51fbce65fefe11bfe44adf725b350f619572dc",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Connected meadow shoulder, farm terrace, riverbank shelf and downstream river presentation, with consistent broadly rightward downstream arrows.",
+          "Two cutaway soil/gravel/bedrock sections, detached terrain-border strip, materials and dry/saturated/eroded state panels.",
+          "Title declares PROPOSED and footer explicitly disclaims complete shared-family coverage/modeling approval."
+        ],
+        "gaps": [
+          "Top contour-intent panel is a perspective terrain map with terrace edges, not a true contour plan; no real boundary sample coordinates or terrain mesh continuity are verified.",
+          "Decorative gold veins/trim contaminate the bank-rubble detail; do not treat these as approved natural rock material or copy them automatically into the terrain kit.",
+          "State panels alter local rocks and erosion rather than prove unchanged boundary samples. Reconcile one boundary-locked geometry set in blockout.",
+          "Architectural courts/bridges are contextual inventions derived from overview motifs. Basin-dawn global topology and actual south/outlet location cannot be verified from this local proposal.",
+          "Legend calls vegetation/debris optional effects; collision-bearing and ecological assets still require explicit physical-vs-render-only classification."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Use for regional visual grounding only; resolve all listed construction/consistency gaps in reviewed blockout.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_02_geology_o05",
+      "file": "generated/p2-env-09-shared-geology-oath-05-proposed-v01.png",
+      "sha256": "6953d94d58ad749fb12350353d0039b30476e37196d51817419c666e17355879",
+      "bytes": 3053482,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-geology",
+      "canonical_kit_id": "p2-arch-05-fault-buttresses",
+      "regional_oath_id": "oath-05",
+      "baseline_asset_id": "asset-o05-q-vegetation-geology-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/1"
+      },
+      "exact_source_construction": "Author bedding-normal rock sets, convex cliff caps, toe rubble and masked soil transitions; overhangs are separate collision pieces.",
+      "exact_source_regional_variant": {
+        "region_id": "region-05",
+        "oath_id": "oath-05",
+        "kit_id": "p2-arch-05-fault-buttresses",
+        "baseline_asset_id": "asset-o05-q-vegetation-geology-family",
+        "construction_delta": "stratified escarpment; talus fan; shallow-soil plateau; strata/erosion are terrain-led; bounded magical inclusions never replace geological support.",
+        "materials": [
+          "bedded stone",
+          "talus",
+          "surveyed crystal seam"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-109",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Distinct habitat/climate requires a separate ecological distribution specification.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Recessed seam joint, erosion channels following bedding and varied talus fragment sizes.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-109/original.png",
+          "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_02_geology_o05.prompt.txt",
+      "prompt_sha256": "24b7ac0485f76098de016555b94a292288680030ccd264c29c6fc175fb30d5de",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Warm bedded escarpment palette, talus foot and violet crystal inclusion align with inspected Fault overview.",
+          "Joined assembly plus individual cliff, cap, overhang, toe rubble and shallow-soil transition pieces.",
+          "Front/side/back/plan intent views, hidden ground contact diagram and physical-versus-optional effect inset."
+        ],
+        "gaps": [
+          "Crystal seam extends diagonally across a substantial face rather than a small bounded pocket, and includes vertical branches; reduce/bound it explicitly before modeling if strict brief compliance is required.",
+          "Front, back and plan are illustrative and do not prove identical geometry or continuous bedding at modular seams.",
+          "The convex cap and overhang pieces are separated illustratively; exact attachment/contact volumes and collision pieces require blockout definition.",
+          "Erosion detail includes vertical channels despite its following-bedding label; geologic orientation needs review.",
+          "Floating particles are confined to the optional-effects inset; they are not structural support. Actual cliff support and overhang stability are unverified."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Use for regional visual grounding only; resolve all listed construction/consistency gaps in reviewed blockout.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_03_roads_o14",
+      "file": "generated/p2-env-09-shared-roads-oath-14-proposed-v01.png",
+      "sha256": "f42d8edea300b4f623c5da906ddd5f0fdf916bde908f7a9c22a33c0fd04f5aa6",
+      "bytes": 3483014,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-roads",
+      "canonical_kit_id": "p2-arch-14-escapement-stations",
+      "regional_oath_id": "oath-14",
+      "baseline_asset_id": "asset-o14-af-terrain-transitions-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/4"
+      },
+      "exact_source_construction": "Spline-guided crown, shoulder, drainage ditch, culvert and retaining edge; texture direction follows traffic and slope.",
+      "exact_source_regional_variant": {
+        "region_id": "region-14",
+        "oath_id": "oath-14",
+        "kit_id": "p2-arch-14-escapement-stations",
+        "baseline_asset_id": "asset-o14-af-terrain-transitions-family",
+        "construction_delta": "Crowned steppe freight road includes drainage crossings, repair pullouts and wildlife permeability. Crown, culvert invert, shoulder and drain outlet explicitly join terrain; dimensions from shared family.",
+        "materials": [
+          "steppe soil",
+          "drainage gravel",
+          "cut rock",
+          "compacted aggregate",
+          "local paving where needed"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-099",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Compacted aggregate crown, local stone culvert lining, replaceable shoulder edging and a shallow maintenance turnout.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-099/original.png",
+          "sha256": "c0a50545492e01f54edd0bcd4e0f27a1683eda6f8363a6f63605322404da44ab",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_03_roads_o14.prompt.txt",
+      "prompt_sha256": "7aa09f9d0cd1efe62555bc6efc11957d3020e13f1b5564737c66f0be4671f38e",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Crowned compacted roadway, gravel foundation, shoulders, ditch, stone culvert, repair pullout and steppe landscape are visible.",
+          "Top plan, cross-section, road-to-terrain seam, materials, perspective and wildlife-passage inset present.",
+          "Longitudinal road texture and decorative Escapement metal vocabulary; no active conveyor or numeric road dimensions."
+        ],
+        "gaps": [
+          "Panel labelled CULVERT LONGITUDINAL SECTION depicts an arch facade/cutaway rather than a resolved inlet-to-outlet longitudinal invert profile; drainage grade, cover and flow-through remain unproven.",
+          "Road cross-section shows enclosing edge/curb geometry with no explicit openings; verify crown runoff can actually reach roadside ditches.",
+          "Wildlife passage appears only in a separate inset and is not clearly located in plan or assembly; preserve a connected route outside traffic in blockout.",
+          "Gold road-center hardware and circular ornaments are added visual proposals, not recovered road construction; ensure flush, traversable surfaces and avoid treating motif as mandatory engineering.",
+          "Culvert proportions and trim vary across panels; reconcile one geometry set before modeling."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Use for regional visual grounding only; resolve all listed construction/consistency gaps in reviewed blockout.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_04_bridges_o04",
+      "file": "generated/p2-env-09-shared-bridges-o04-proposed-v01.png",
+      "sha256": "cc61b0b7aaeffd06c7706853bb6549466769d98a56593dd6c70ed27015459cec",
+      "bytes": 3315565,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-bridges",
+      "canonical_kit_id": "p2-arch-04-tidal-refuges",
+      "regional_oath_id": "oath-04",
+      "baseline_asset_id": "asset-o04-n-architecture-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/3"
+      },
+      "exact_source_construction": "Abutment, deck, parapet, expansion joint and bank approach; choose arch, beam or tension span from geology and freight need.",
+      "exact_source_regional_variant": {
+        "region_id": "region-04",
+        "oath_id": "oath-04",
+        "kit_id": "p2-arch-04-tidal-refuges",
+        "baseline_asset_id": "asset-o04-n-architecture-family",
+        "construction_delta": "Limestone arch or beam causeway leaves tidal channel openings and a dry refuge deck; no damming for spectacle. Provide abutment/deck joints, drainage, edge protection and inspection access.",
+        "materials": [
+          "porous limestone",
+          "glazed channel ceramic",
+          "brass fittings",
+          "timber flood floor"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-110",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Replaceable brass joint cover, glazed drainage lip and small bank approach inspection recess.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-110/original.png",
+          "sha256": "14fc371fac51bae06f397226412a563eb644baf69a1ef0756e1a01e3003af833",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_04_bridges_o04.prompt.txt",
+      "prompt_sha256": "bc7428de39271388799ad62aa1d259c12bc5afaa5e9be20a5f8bcf00b48276f9",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Limestone arch causeway with open tidal channels and raised deck",
+          "Underside arch, approach recess, parapet and exploded abutment/deck detail",
+          "Low/high-water intent with dry deck and separate wet inspection access"
+        ],
+        "gaps": [
+          "Top view is an oblique perspective rather than true orthographic plan.",
+          "Main design expands into several bays; repeated arch counts and joint positions vary across views.",
+          "Dry-refuge continuity is conceptual only, with no verified flood envelope or accessible route geometry.",
+          "Drainage waterfalls and decorative fixtures require separation from actual hydraulic and structural design."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Resolve cross-view geometry, access, connections and the recorded QA gaps before detailed modeling; no exact-image approval is implied.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_05_residential_o09",
+      "file": "generated/p2-env-09-shared-residential-o09-proposed-v01.png",
+      "sha256": "9422c58393f587d05f1efab2ab911a29dc4ddb38538101864a4869e86d4b4483",
+      "bytes": 3151981,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-residential",
+      "canonical_kit_id": "p2-arch-09-daybreak-arcades",
+      "regional_oath_id": "oath-09",
+      "baseline_asset_id": "asset-o09-o-buildings-interiors-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/6"
+      },
+      "exact_source_construction": "Assemble regional shell around warm/dry core, storage, sanitary/service chase and accessible entry; dwelling count comes from population plan.",
+      "exact_source_regional_variant": {
+        "region_id": "region-09",
+        "oath_id": "oath-09",
+        "kit_id": "p2-arch-09-daybreak-arcades",
+        "baseline_asset_id": "asset-o09-o-buildings-interiors-family",
+        "construction_delta": "Housing includes mixed-income courtyard blocks and refuge rooms, with ward sockets and shared kitchens. Sanctuary status protects access during conflict; players cannot place judgment effects that police other players' identities or movement.",
+        "materials": [
+          "pale masonry",
+          "marble facing",
+          "bronze trim",
+          "woven shade"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-105",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Simple replaceable shutters, woven domestic shade, a utility cupboard and plain communal kitchen worktop.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-105/original.png",
+          "sha256": "63291b08d33436aa92771ee49574c004bd5feaa10577f82b749486549d2da893",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_05_residential_o09.prompt.txt",
+      "prompt_sha256": "fc58e1113c2a1589928f044d3021198c718e232222fe211777e59efaf409aaa4",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Private sleeping core is drawn off public courtyard through-route",
+          "Warm living room, storage, sanitary chase and shared kitchen/refuge interface",
+          "Different courtyard/service faces with replaceable shutters, shade and utility cupboard"
+        ],
+        "gaps": [
+          "Ornate marble-and-gold courtyard presentation is more lavish than the requested modest dwelling.",
+          "Stepped entries are shown; accessible entry or step-free route is not demonstrated.",
+          "Plan and cutaway doors, service positions and extent need measured reconciliation.",
+          "Chase adds optional data and power labels beyond grounded prompt; do not adopt these as established canon.",
+          "Ward socket is shown as optional with no identity or movement barrier."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Resolve cross-view geometry, access, connections and the recorded QA gaps before detailed modeling; no exact-image approval is implied.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_06_interiors_o02",
+      "file": "generated/p2-env-09-shared-interiors-o02-proposed-v01.png",
+      "sha256": "8075a3ab432e6307485d807ab5d293c283fd145d2eb8bc2c9f6b43d2e291aab9",
+      "bytes": 2920669,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-interiors",
+      "canonical_kit_id": "p2-arch-02-rime-vaults",
+      "regional_oath_id": "oath-02",
+      "baseline_asset_id": "asset-o02-o-buildings-interiors-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/11"
+      },
+      "exact_source_construction": "Ceiling/floor/partition assemblies with room portals, occlusion volumes, lighting anchors and back-of-house chases; shell exterior dimensions reconciled.",
+      "exact_source_regional_variant": {
+        "region_id": "region-02",
+        "oath_id": "oath-02",
+        "kit_id": "p2-arch-02-rime-vaults",
+        "baseline_asset_id": "asset-o02-o-buildings-interiors-family",
+        "construction_delta": "Rock-founded occupied shell and moisture barrier support a detachable outer ice layer; no occupied room relies on thawing ice. Assembly adaptations: warm vestibule, sealed folio vault, snow-shed roof, melt gutter, cold-store annex. keep warm public room and archive humidity zone independent",
+        "materials": [
+          "dense stone",
+          "insulating felt liner",
+          "replaceable ice facing",
+          "dark metal brackets"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-112",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Accessible liner inspection panel, understated warm-room seating and decoupled archive-service hatch.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-112/original.png",
+          "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_06_interiors_o02.prompt.txt",
+      "prompt_sha256": "1c62a9a6b8a0fb5927da477adc5181967bb4e232bf86161c8d569df3809ee886",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Habitable furnished warm reading room rather than vestibule-only concept",
+          "Stone shell with felt liner, moisture barrier, detachable nonstructural ice and service chase",
+          "Separately labeled cold folio zone, vestibule, inspection panel and service hatch",
+          "Portal, ceiling and floor detail insets"
+        ],
+        "gaps": [
+          "Plan and section door/chase locations are not fully reconcilable; labels do not establish exact geometry.",
+          "Warm/cold humidity separation and door seals remain conceptual.",
+          "Some exterior imagery makes thick ice read visually adjacent to support; stone-only load paths must be explicit in model.",
+          "Light sources and ceiling attachments are illustrative; no temperature, humidity or structural performance validation."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Resolve cross-view geometry, access, connections and the recorded QA gaps before detailed modeling; no exact-image approval is implied.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_07_workshops_o01",
+      "file": "generated/env_07_workshops_o01-proposed-v01.png",
+      "sha256": "d9c6143de11b904b5ebd85ca6f0063d7eeddce9f34e422012a57188bec01ebd0",
+      "bytes": 2740011,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-workshops",
+      "canonical_kit_id": "p2-arch-01-kiln-courts",
+      "regional_oath_id": "oath-01",
+      "baseline_asset_id": "asset-o01-m-crafting-stations-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/8"
+      },
+      "exact_source_construction": "Regional station capability, material staging, tool sockets, waste collection and protected operator envelope form one work cell.",
+      "exact_source_regional_variant": {
+        "region_id": "region-01",
+        "oath_id": "oath-01",
+        "kit_id": "p2-arch-01-kiln-courts",
+        "baseline_asset_id": "asset-o01-m-crafting-stations-family",
+        "construction_delta": "Forge bench, cooling trough, refractory repair cart; Build compression shell before attaching replaceable vent cassettes; heat channels remain below guarded public decks.",
+        "materials": [
+          "basalt",
+          "fired ceramic roof cassettes",
+          "oxidized iron ties"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-113",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Replaceable ceramic bench inserts, tool-socket rail, contained waste bin and cart dock.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-113/original.png",
+          "sha256": "f5743145d9abe76101af9a7f3b382ca3a71bee6fa08641fa918418bbb019975d",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_07_workshops_o01.prompt.txt",
+      "prompt_sha256": "7061fb8e89b0bda951b75465511b2c957277d4f59704901efc58772d0d2ef3ef",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Forge bench, cooling trough, refractory repair cart and replaceable insert detail are visible.",
+          "Plan distinguishes staging, tool sockets, operator area, waste collection and public bypass.",
+          "Compression-shell section distinguishes vent cassettes and enclosed below-deck heat channels.",
+          "Front/rear/both-side views are present with source terracotta/basalt/iron identity."
+        ],
+        "gaps": [
+          "Operator reach and hot-surface separation are diagrammatic, not measured or safety verified.",
+          "Cart dock connection is not clearly shown.",
+          "Below-deck heat enclosure is open in sectional depiction; enclosure continuity and guards require authored geometry.",
+          "Workcell footprint and cart position vary between isolated views and plan, requiring reconciliation."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Reconcile view consistency and all noted access/mechanical ambiguities before detailed or functional modeling; no image is a calibrated engineering drawing.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_08_institutions_o12",
+      "file": "generated/env_08_institutions_o12-proposed-v01.png",
+      "sha256": "24bd101810751b5d28054098179643fcd53b0f9b2e3cdcd9f45c9cb470bfe901",
+      "bytes": 2896239,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-institutions",
+      "canonical_kit_id": "p2-arch-12-sanguine-cloisters",
+      "regional_oath_id": "oath-12",
+      "baseline_asset_id": "asset-o12-n-architecture-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/9"
+      },
+      "exact_source_construction": "Public counter, waiting shelter, records room, clinic recovery room and relief stores use regional structural kit; function chooses assembly.",
+      "exact_source_regional_variant": {
+        "region_id": "region-12",
+        "oath_id": "oath-12",
+        "kit_id": "p2-arch-12-sanguine-cloisters",
+        "baseline_asset_id": "asset-o12-n-architecture-family",
+        "construction_delta": "Thick courtyard walls shade recovery spaces; privacy screens and independent exit doors prevent coercive circulation. Assembly adaptations: linked household porch, recovery cloister, private withdrawal room, water court, shade pier. private withdrawal and public aid remain separately reachable",
+        "materials": [
+          "redland masonry",
+          "woven shade cloth",
+          "bone-colored ceramic trim",
+          "dark iron"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-102",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Washable ceramic seat edges, discreet storage doors and reversible privacy screens with inside release.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-102/original.png",
+          "sha256": "73d19c2e86177602bb1bd367d86544ced90c90a1e881a47ed05b194a35773cff",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_08_institutions_o12.prompt.txt",
+      "prompt_sha256": "9bd144b1e5a44ae0f64937e81b4bce3eaf7eeb6f0700331b5d4fb36b6b98fe76",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Cutaway and top plan include waiting shelter, counter, recovery, withdrawal and relief storage.",
+          "Independent public-aid and withdrawal access arrows are shown.",
+          "Interior privacy-release latch detail is distinct from outside view.",
+          "Regional red masonry, pale ceramic edges, oxblood cloth and dark iron retained."
+        ],
+        "gaps": [
+          "Ground contact/hidden connections are indicated principally by legend, without a resolved foundation section.",
+          "Door swings, continuous accessible circulation and independent recovery exit clearance remain unresolved.",
+          "Room proportion and doorway relationships must be reconciled between cutaway, plan and elevations.",
+          "Optional-atmosphere legend includes cloth states; actual shade cloth remains physical geometry and must not be treated as removable collision."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Reconcile view consistency and all noted access/mechanical ambiguities before detailed or functional modeling; no image is a calibrated engineering drawing.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_09_vehicles_o15",
+      "file": "generated/env_09_vehicles_o15-proposed-v01.png",
+      "sha256": "1ce061fc41080adb467dbb089fa28b942a5b2cfd55cfd9a3a8e4c980a53c1ec1",
+      "bytes": 2766684,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-vehicles",
+      "canonical_kit_id": "p2-arch-15-impulse-yards",
+      "regional_oath_id": "oath-15",
+      "baseline_asset_id": "asset-o15-u-vehicles-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/14"
+      },
+      "exact_source_construction": "Chassis/hull, suspension or buoyancy proxy, cargo restraints, seat rig, boarding sockets and safe dismount points; route determines mode.",
+      "exact_source_regional_variant": {
+        "region_id": "region-15",
+        "oath_id": "oath-15",
+        "kit_id": "p2-arch-15-impulse-yards",
+        "baseline_asset_id": "asset-o15-u-vehicles-family",
+        "construction_delta": "Guarded powered hauler: bolted chassis, shrouded drive wheels, low cargo deck, emergency mechanical brake and safe isolation switch; no unsupervised crane load above passengers.",
+        "materials": [
+          "chassis wood/metal",
+          "axle and brake metal",
+          "cargo textile/rope"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-101",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Four guarded wheels, simple sprung axle concept, textile cargo straps and a protected low boarding step. Wheel count and suspension details are proposed.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-101/original.png",
+          "sha256": "dbd78a8cf6cba67191c92908d9bcc743a2084f3ba2ce953a15400f4add404362",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_09_vehicles_o15.prompt.txt",
+      "prompt_sha256": "38805503bf7fcbd7ba92680de12d1d930e4be49c1b33c066e22dcbd52e27127e",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Front, rear, both sides, top and chassis cutaway show a civilian four-wheel cargo hauler.",
+          "Shrouds, boarding step, driver position, textile restraints and brake/isolation control are represented.",
+          "Idle, loaded and isolated insets retain overall chassis form; isolated view adds wheel chocks.",
+          "Charcoal steel/orange regional identity retained without weapon conversion."
+        ],
+        "gaps": [
+          "Brake linkage and isolation function are labels/intent only, not verified mechanical systems.",
+          "Suspension, steering articulation, wheel envelope and safe dismount clearance require authored measurements.",
+          "Cargo arrangement, railing and minor fittings vary between views/states; reconcile fixed parts before modeling.",
+          "Shrouds cover wheel tops/sides rather than proving complete entanglement protection."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Reconcile view consistency and all noted access/mechanical ambiguities before detailed or functional modeling; no image is a calibrated engineering drawing.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    },
+    {
+      "id": "reference-expansion-env_10_transit_o03",
+      "file": "generated/env_10_transit_o03-proposed-v01.png",
+      "sha256": "e16468b25c8f1bab3d91d837141a4080e9d1bc61cea6022a4c516f2b46a232c9",
+      "bytes": 2819135,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "canonical_family_id": "p2-env-09-shared-transit",
+      "canonical_kit_id": "p2-arch-03-storm-relays",
+      "regional_oath_id": "oath-03",
+      "baseline_asset_id": "asset-o03-u-vehicles-family",
+      "source_registry": {
+        "mount": "phase2",
+        "path": "ENVIRONMENT_ASSET_REGISTRY.json",
+        "json_pointer": "/records/15"
+      },
+      "exact_source_construction": "Stable boarding platform, berth/stop marker, waiting shelter, baggage zone and step-free ordinary exit; moving transport optional.",
+      "exact_source_regional_variant": {
+        "region_id": "region-03",
+        "oath_id": "oath-03",
+        "kit_id": "p2-arch-03-storm-relays",
+        "baseline_asset_id": "asset-o03-u-vehicles-family",
+        "construction_delta": "Grounded ridge relay stop with covered waiting bay and ordinary-road connection, separate from transmission hardware.",
+        "materials": [
+          "stone grounding plinth",
+          "copper conductor",
+          "matte ceramic break",
+          "shielded timber"
+        ],
+        "reference_status": "OVERVIEW_CONTEXT_VERIFIED_DETAIL_MISSING",
+        "reference_id": "REF-111",
+        "reference_limit": "Overview establishes motif only; this local functional variant is PROPOSED, not observed finished design.",
+        "justification": "Local process, structural load path or safety envelope changes assembly; do not create a variant for color alone.",
+        "entity_ids": []
+      },
+      "proposed_new_details": "Shielded timber bench, sheltered luggage shelf, plain route-marker frame and separate service-duct cover.",
+      "source_images": [
+        {
+          "baseline_repository_path": "assets/references/reference-111/original.png",
+          "sha256": "6160ee1764057a225bbe9d064d725aaeb9c679d5a2fb5f908f6a1796b6eb04a8",
+          "included": false,
+          "role": "Read-only Oath overview style anchor, not exact design evidence."
+        }
+      ],
+      "prompt_file": "prompts/env_10_transit_o03.prompt.txt",
+      "prompt_sha256": "2c07914710c72627270b4ebdc80abee89e3c52aa82d74c489fd7af0b78e9be9e",
+      "prompt_modifications": "none reported",
+      "review_status": "PIXEL_REVIEWED_WITH_OPEN_GAPS",
+      "qa": {
+        "observed": [
+          "Front, rear, side, plan and section show road-side waiting canopy, bench, baggage shelf and marker.",
+          "Live transmission appears only in a separate context inset with a schematic exclusion line.",
+          "Source dark masonry, copper-colored hardware and pale ceramic breaks retained.",
+          "Service-duct cover and upper canopy joint shown separately."
+        ],
+        "gaps": [
+          "Narrow ramp-like strips at front do not demonstrate a usable step-free ordinary exit; treat access as unresolved.",
+          "Canopy-to-footing joint detail depicts only upper canopy/post connection, leaving actual footing unresolved.",
+          "Exclusion boundary is schematic and has no reviewed electrical safety meaning; context wording is ambiguous about which side is hazardous.",
+          "No explicit shutdown-state inset demonstrates ordinary access continuity; route concept remains static.",
+          "Stop marker is ornamental despite plain-frame prompt; style still aligns with source."
+        ],
+        "review_basis": "Actual pixels inspected by the generating reviewer; reported observations and limitations preserved."
+      },
+      "canon_status": "PROPOSED",
+      "approval_status": "UNRESOLVED",
+      "modeling_gate": "Reconcile view consistency and all noted access/mechanical ambiguities before detailed or functional modeling; no image is a calibrated engineering drawing.",
+      "full_family_coverage": false,
+      "coverage_limit": "One regional functional exemplar; all other variants and final measured construction remain open."
+    }
+  ]
+}

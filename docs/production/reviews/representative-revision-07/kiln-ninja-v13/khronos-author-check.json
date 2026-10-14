@@ -1,0 +1,322 @@
+{
+  "kiln-ninja-ensemble-candidate-collision.glb": {
+    "uri": "kiln-ninja-ensemble-candidate-collision.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 1,
+      "numHints": 0,
+      "messages": [
+        {
+          "code": "UNUSED_OBJECT",
+          "message": "This object may be unused.",
+          "severity": 2,
+          "pointer": "/meshes/0/primitives/0/attributes/TEXCOORD_0"
+        }
+      ],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Khronos glTF Blender I/O v4.3.47",
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 3080
+        }
+      ],
+      "animationCount": 0,
+      "materialCount": 0,
+      "hasMorphTargets": false,
+      "hasSkins": false,
+      "hasTextures": false,
+      "hasDefaultScene": true,
+      "drawCallCount": 1,
+      "totalVertexCount": 82,
+      "totalTriangleCount": 76,
+      "maxUVs": 1,
+      "maxInfluences": 0,
+      "maxAttributes": 3
+    }
+  },
+  "kiln-ninja-ensemble-candidate-lod1.glb": {
+    "uri": "kiln-ninja-ensemble-candidate-lod1.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Khronos glTF Blender I/O v4.3.47",
+      "extensionsUsed": [
+        "KHR_materials_specular"
+      ],
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 14537504
+        },
+        {
+          "pointer": "/images/0",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/1",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/2",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/3",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        }
+      ],
+      "animationCount": 3,
+      "materialCount": 4,
+      "hasMorphTargets": false,
+      "hasSkins": true,
+      "hasTextures": true,
+      "hasDefaultScene": true,
+      "drawCallCount": 4,
+      "totalVertexCount": 35798,
+      "totalTriangleCount": 34942,
+      "maxUVs": 1,
+      "maxInfluences": 4,
+      "maxAttributes": 7
+    }
+  },
+  "kiln-ninja-ensemble-candidate-lod2.glb": {
+    "uri": "kiln-ninja-ensemble-candidate-lod2.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Khronos glTF Blender I/O v4.3.47",
+      "extensionsUsed": [
+        "KHR_materials_specular"
+      ],
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 13384736
+        },
+        {
+          "pointer": "/images/0",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/1",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/2",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/3",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        }
+      ],
+      "animationCount": 3,
+      "materialCount": 4,
+      "hasMorphTargets": false,
+      "hasSkins": true,
+      "hasTextures": true,
+      "hasDefaultScene": true,
+      "drawCallCount": 4,
+      "totalVertexCount": 21851,
+      "totalTriangleCount": 19476,
+      "maxUVs": 1,
+      "maxInfluences": 4,
+      "maxAttributes": 7
+    }
+  },
+  "kiln-ninja-ensemble-candidate.glb": {
+    "uri": "kiln-ninja-ensemble-candidate.glb",
+    "mimeType": "model/gltf-binary",
+    "validatorVersion": "2.0.0-dev.3.10",
+    "issues": {
+      "numErrors": 0,
+      "numWarnings": 0,
+      "numInfos": 0,
+      "numHints": 0,
+      "messages": [],
+      "truncated": false
+    },
+    "info": {
+      "version": "2.0",
+      "generator": "Khronos glTF Blender I/O v4.3.47",
+      "extensionsUsed": [
+        "KHR_materials_specular"
+      ],
+      "resources": [
+        {
+          "pointer": "/buffers/0",
+          "mimeType": "application/gltf-buffer",
+          "storage": "glb",
+          "byteLength": 15754936
+        },
+        {
+          "pointer": "/images/0",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/1",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/2",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        },
+        {
+          "pointer": "/images/3",
+          "mimeType": "image/png",
+          "storage": "buffer-view",
+          "image": {
+            "width": 2048,
+            "height": 1024,
+            "format": "rgba",
+            "primaries": "srgb",
+            "transfer": "srgb",
+            "bits": 8
+          }
+        }
+      ],
+      "animationCount": 3,
+      "materialCount": 4,
+      "hasMorphTargets": false,
+      "hasSkins": true,
+      "hasTextures": true,
+      "hasDefaultScene": true,
+      "drawCallCount": 4,
+      "totalVertexCount": 50053,
+      "totalTriangleCount": 57284,
+      "maxUVs": 1,
+      "maxInfluences": 4,
+      "maxAttributes": 7
+    }
+  }
+}

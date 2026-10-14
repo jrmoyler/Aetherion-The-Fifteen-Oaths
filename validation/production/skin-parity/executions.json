@@ -1,0 +1,44 @@
+[
+  {
+    "command": "node",
+    "args": [
+      "<repo>/tools/production/skin-parity/three-evaluate.mjs",
+      "<scratch>/inputs.json",
+      "<scratch>/three.json"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "godot",
+    "args": [
+      "--headless",
+      "--path",
+      "<scratch>",
+      "--script",
+      "<repo>/tools/production/skin-parity/godot-evaluate.gd",
+      "--",
+      "<scratch>/inputs.json",
+      "<scratch>/godot.json"
+    ],
+    "exitCode": 0,
+    "stdout": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\n",
+    "stderr": "",
+    "error": null
+  },
+  {
+    "command": "python3",
+    "args": [
+      "<repo>/tools/production/skin-parity/compare.py",
+      "<scratch>/three.json",
+      "<scratch>/godot.json",
+      "<scratch>/comparison.json"
+    ],
+    "exitCode": 0,
+    "stdout": "{\"assets\": 3, \"sampledPoses\": 6, \"passedPoses\": 6, \"maximumWorldDifferenceMeters\": 2.4028891984012976e-05, \"negativeFixturesRejected\": 3, \"gpuParityCertified\": false, \"productionApproved\": 0}\n",
+    "stderr": "",
+    "error": null
+  }
+]

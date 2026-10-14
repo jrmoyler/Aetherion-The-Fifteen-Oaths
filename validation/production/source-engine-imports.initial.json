@@ -1,0 +1,577 @@
+{
+  "scope": "Existing source GLB CPU import and scene instantiation only; no rendering, playback or parity certification",
+  "timestamp_utc": "2026-10-13T19:35:21.663621+00:00",
+  "source_commit": "8c4b5d0bfc75a98388ea29231b9cf1d304dff550",
+  "runtime_paths": 26,
+  "unique_payloads": 13,
+  "scratch": "/tmp/aetherion-source-engine-probes/aetherion-import-wioezndy",
+  "results": [
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/amethyst_stones.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/amethyst_stones.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/amethyst_stones.glb"
+      ],
+      "sha256": "c91ec4ecede0d1c5bd2f4db78da8784587e96cd11565338dd94dca9b2cb19d72",
+      "exit_code": 0,
+      "console": "19:35:00 | INFO: Data are loaded, start creating Blender stuff\n19:35:00 | INFO: Blender create Mesh node Amethyst_A\n19:35:00 | INFO: Blender create Mesh node Amethyst_B\n19:35:00 | INFO: Blender create Mesh node Amethyst_C\n19:35:00 | INFO: Blender create Mesh node Amethyst_D\n19:35:00 | INFO: Blender create Mesh node Amethyst_E\n19:35:00 | INFO: glTF import finished in 0.01s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 5, \"materials\": 0, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 5,
+        "materials": 0,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/amethyst_stones.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/amethyst_stones.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/amethyst_stones.glb"
+      ],
+      "sha256": "c91ec4ecede0d1c5bd2f4db78da8784587e96cd11565338dd94dca9b2cb19d72",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":0,\"meshes\":5,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 0,
+        "meshes": 5,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/arcane_tome.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/arcane_tome.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/arcane_tome.glb"
+      ],
+      "sha256": "9071b301202753b4b71aee68b9736bb024d37dc2513250b092c822ca3cfecbc0",
+      "exit_code": 0,
+      "console": "19:35:01 | INFO: Data are loaded, start creating Blender stuff\n19:35:01 | INFO: Blender create Mesh node Tome_CoverTop\n19:35:01 | INFO: Blender create Mesh node Tome_CoverBottom\n19:35:01 | INFO: Blender create Mesh node Tome_Pages\n19:35:01 | INFO: Blender create Mesh node Tome_Spine\n19:35:01 | INFO: Blender create Mesh node Tome_SpineRib0\n19:35:01 | INFO: Blender create Mesh node Tome_SpineRib1\n19:35:01 | INFO: Blender create Mesh node Tome_Corner0\n19:35:01 | INFO: Blender create Mesh node Tome_CornerCap0\n19:35:01 | INFO: Blender create Mesh node Tome_GemSocket0\n19:35:01 | INFO: Blender create Mesh node Tome_Gem0\n19:35:01 | INFO: Blender create Mesh node Tome_Corner1\n19:35:01 | INFO: Blender create Mesh node Tome_CornerCap1\n19:35:01 | INFO: Blender create Mesh node Tome_GemSocket1\n19:35:01 | INFO: Blender create Mesh node Tome_Gem1\n19:35:01 | INFO: Blender create Mesh node Tome_Corner2\n19:35:01 | INFO: Blender create Mesh node Tome_CornerCap2\n19:35:01 | INFO: Blender create Mesh node Tome_GemSocket2\n19:35:01 | INFO: Blender create Mesh node Tome_Gem2\n19:35:01 | INFO: Blender create Mesh node Tome_Corner3\n19:35:01 | INFO: Blender create Mesh node Tome_CornerCap3\n19:35:01 | INFO: Blender create Mesh node Tome_GemSocket3\n19:35:01 | INFO: Blender create Mesh node Tome_Gem3\n19:35:01 | INFO: Blender create Mesh node Tome_ClampFront\n19:35:01 | INFO: Blender create Mesh node Tome_ClampLeft\n19:35:01 | INFO: Blender create Mesh node Tome_ClampRight\n19:35:01 | INFO: Blender create Mesh node Tome_Knob\n19:35:01 | INFO: Blender create Mesh node Tome_KnobRing\n19:35:01 | INFO: Blender create Mesh node Tome_DialBase\n19:35:01 | INFO: Blender create Mesh node Tome_GlyphRing\n19:35:01 | INFO: Blender create Mesh node Tome_DialRimOuter\n19:35:01 | INFO: Blender create Mesh node Tome_DialRimInner\n19:35:01 | INFO: Blender create Mesh node Tome_Core\n19:35:01 | INFO: Blender create Mesh node Tome_StrapTop\n19:35:01 | INFO: Blender create Mesh node Tome_StrapDrop\n19:35:01 | INFO: Blender create Mesh node Tome_StrapRing\n19:35:01 | INFO: Blender create Mesh node Tome_TrimN\n19:35:01 | INFO: Blender create Mesh node Tome_TrimS\n19:35:01 | INFO: Blender create Mesh node Tome_TrimE\n19:35:01 | INFO: Blender create Mesh node Tome_TrimW\n19:35:01 | INFO: glTF import finished in 0.04s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 39, \"materials\": 7, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 39,
+        "materials": 7,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/arcane_tome.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/arcane_tome.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/arcane_tome.glb"
+      ],
+      "sha256": "9071b301202753b4b71aee68b9736bb024d37dc2513250b092c822ca3cfecbc0",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":7,\"meshes\":39,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 7,
+        "meshes": 39,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/dragon.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/dragon.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/dragon.glb"
+      ],
+      "sha256": "904fc29f889668ef82204feb0d87849060ae2c7cb486769a35081a415beb4db5",
+      "exit_code": 0,
+      "console": "19:35:03 | INFO: Data are loaded, start creating Blender stuff\n19:35:03 | INFO: Blender create Mesh node Plane_Material_0\n19:35:03 | INFO: Blender create Mesh node Dragon_EYES_0\n19:35:03 | INFO: Blender create Mesh node Dragon_Game_dragon_0\n19:35:03 | INFO: Blender create Mesh node Dragon_Game_dragon.001_0\n19:35:04 | INFO: glTF import finished in 0.59s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 5, \"materials\": 4, \"armatures\": 1, \"actions\": 6}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 5,
+        "materials": 4,
+        "armatures": 1,
+        "actions": 6
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/dragon.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/dragon.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/dragon.glb"
+      ],
+      "sha256": "904fc29f889668ef82204feb0d87849060ae2c7cb486769a35081a415beb4db5",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":1,\"materials\":4,\"meshes\":4,\"scene_instantiated\":true,\"skins\":1,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 1,
+        "materials": 4,
+        "meshes": 4,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/duel_hall.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/duel_hall.glb"
+      ],
+      "sha256": "0c7344c414e3a3fad7fc2cce38e7f0245dd2eed3969779ef0e3c03867fc58972",
+      "exit_code": 0,
+      "console": "19:35:06 | INFO: Data are loaded, start creating Blender stuff\n19:35:06 | INFO: Blender create Mesh node DuelCloth\n19:35:06 | INFO: Blender create Mesh node PlatformDisc\n19:35:06 | INFO: Blender create Mesh node PlatformRockUnderside\n19:35:06 | INFO: Blender create Mesh node GoldUnderRing_A\n19:35:06 | INFO: Blender create Mesh node GoldUnderRing_B\n19:35:06 | INFO: Blender create Mesh node RuneRing_A\n19:35:06 | INFO: Blender create Mesh node RuneRing_B\n19:35:06 | INFO: Blender create Mesh node RuneRing_C\n19:35:06 | INFO: Blender create Mesh node DebrisRocks\n19:35:06 | INFO: Blender create Mesh node HallWall\n19:35:06 | INFO: Blender create Mesh node WindowGlass\n19:35:06 | INFO: Blender create Mesh node WindowFrames\n19:35:06 | INFO: Blender create Mesh node WindowTracery\n19:35:06 | INFO: Blender create Mesh node Dome\n19:35:06 | INFO: Blender create Mesh node Oculus\n19:35:06 | INFO: Blender create Mesh node Floor\n19:35:06 | INFO: Blender create Mesh node Pillars\n19:35:06 | INFO: Blender create Mesh node Cornice\n19:35:06 | INFO: Blender create Mesh node CorniceLow\n19:35:06 | INFO: Blender create Mesh node Balcony\n19:35:06 | INFO: Blender create Mesh node Balusters\n19:35:06 | INFO: Blender create Mesh node BalconyFascia\n19:35:06 | INFO: Blender create Mesh node DomeRibs\n19:35:06 | INFO: Blender create Mesh node WindowRoses\n19:35:06 | INFO: Blender create Mesh node BalconyRail\n19:35:06 | INFO: Blender create Mesh node OrreryCage.001\n19:35:06 | INFO: Blender create Mesh node OrreryRing_0.001\n19:35:06 | INFO: Blender create Mesh node OrreryPlanet_0.001\n19:35:06 | INFO: Blender create Mesh node OrreryRing_1.001\n19:35:06 | INFO: Blender create Mesh node OrreryPlanet_1.001\n19:35:06 | INFO: Blender create Mesh node OrreryRing_2.001\n19:35:06 | INFO: Blender create Mesh node OrreryPlanet_2.001\n19:35:06 | INFO: Blender create Mesh node OrreryRing_3.001\n19:35:06 | INFO: Blender create Mesh node OrreryPlanet_3.001\n19:35:06 | INFO: Blender create Mesh node OrreryRod.001\n19:35:06 | INFO: Blender create Mesh node OrrerySun.001\n19:35:06 | INFO: Blender create Mesh node Banner_00\n19:35:06 | INFO: Blender create Mesh node Banner_01\n19:35:06 | INFO: Blender create Mesh node Banner_02\n19:35:06 | INFO: Blender create Mesh node Banner_03\n19:35:06 | INFO: Blender create Mesh node Banner_04\n19:35:06 | INFO: Blender create Mesh node Banner_05\n19:35:06 | INFO: Blender create Mesh node Banner_06\n19:35:06 | INFO: Blender create Mesh node Banner_07\n19:35:06 | INFO: Blender create Mesh node Banner_08\n19:35:06 | INFO: Blender create Mesh node Banner_09\n19:35:06 | INFO: Blender create Mesh node Banner_10\n19:35:06 | INFO: Blender create Mesh node Banner_11\n19:35:06 | INFO: Blender create Mesh node Banner_12\n19:35:06 | INFO: Blender create Mesh node Banner_13\n19:35:06 | INFO: Blender create Mesh node Banner_14\n19:35:06 | INFO: Blender create Mesh node Banner_15\n19:35:06 | INFO: Blender create Mesh node FloorSigil\n19:35:06 | INFO: Blender create Mesh node BookshelfModule\n19:35:06 | INFO: Blender create Mesh node CandleWax\n19:35:06 | INFO: Blender create Mesh node CandleFlame\n19:35:06 | INFO: Blender create Mesh node GodRayShafts\n19:35:06 | INFO: glTF import finished in 0.51s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 57, \"materials\": 18, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 57,
+        "materials": 18,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/duel_hall.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/duel_hall.glb"
+      ],
+      "sha256": "0c7344c414e3a3fad7fc2cce38e7f0245dd2eed3969779ef0e3c03867fc58972",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":17,\"meshes\":57,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 17,
+        "meshes": 57,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/magical_gyroscope.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/magical_gyroscope.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/magical_gyroscope.glb"
+      ],
+      "sha256": "715905b8213abcd514ed9b6f7bced500c27f9a6abd0f1297b7b289582004938c",
+      "exit_code": 0,
+      "console": "19:35:08 | INFO: Data are loaded, start creating Blender stuff\n19:35:08 | INFO: Blender create Mesh node Object_0\n19:35:08 | ERROR: File is invalid: Some vertices are not assigned to bone(s) \n19:35:08 | INFO: glTF import finished in 0.04s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 2, \"materials\": 1, \"armatures\": 1, \"actions\": 2}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [
+        "19:35:08 | ERROR: File is invalid: Some vertices are not assigned to bone(s) "
+      ],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 2,
+        "materials": 1,
+        "armatures": 1,
+        "actions": 2
+      },
+      "status": "WITH_DEFECT",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/magical_gyroscope.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/magical_gyroscope.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/magical_gyroscope.glb"
+      ],
+      "sha256": "715905b8213abcd514ed9b6f7bced500c27f9a6abd0f1297b7b289582004938c",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":2,\"materials\":1,\"meshes\":1,\"scene_instantiated\":true,\"skins\":1,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 2,
+        "materials": 1,
+        "meshes": 1,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/shark.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/shark.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/shark.glb"
+      ],
+      "sha256": "744c9715fce8f7859efbcfccf11178b7d5dca552435e290499331ab129bdc05d",
+      "exit_code": 0,
+      "console": "19:35:09 | INFO: Data are loaded, start creating Blender stuff\n19:35:09 | INFO: Blender create Mesh node SharkMesh01_SharkBody_0\n19:35:09 | INFO: Blender create Mesh node Cube.004__0\n19:35:09 | INFO: Blender create Mesh node Cube.003__0\n19:35:09 | INFO: Blender create Mesh node SharkRock\n19:35:09 | INFO: Blender create Mesh node SharkRockChip\n19:35:09 | INFO: glTF import finished in 0.05s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 6, \"materials\": 3, \"armatures\": 1, \"actions\": 2}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 6,
+        "materials": 3,
+        "armatures": 1,
+        "actions": 2
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/shark.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/shark.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/shark.glb"
+      ],
+      "sha256": "744c9715fce8f7859efbcfccf11178b7d5dca552435e290499331ab129bdc05d",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":2,\"materials\":3,\"meshes\":5,\"scene_instantiated\":true,\"skins\":1,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 2,
+        "materials": 3,
+        "meshes": 5,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/wildroot_reliquary.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/wildroot_reliquary.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/wildroot_reliquary.glb"
+      ],
+      "sha256": "9fe8b09bdfc4482a28e340a14ec037e7089c7db39615bf35be5df81848a5100d",
+      "exit_code": 0,
+      "console": "19:35:11 | INFO: Data are loaded, start creating Blender stuff\n19:35:11 | INFO: Blender create Mesh node Reliquary_Slab_A.002\n19:35:11 | INFO: Blender create Mesh node Reliquary_Slab_B.002\n19:35:11 | INFO: Blender create Mesh node Reliquary_Slab_C.002\n19:35:11 | INFO: Blender create Mesh node Reliquary_Cube_A.002\n19:35:11 | INFO: Blender create Mesh node Reliquary_Cube_B.002\n19:35:11 | INFO: Blender create Mesh node Reliquary_Cube_C.002\n19:35:11 | INFO: glTF import finished in 0.10s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 6, \"materials\": 0, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 6,
+        "materials": 0,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/wildroot_reliquary.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/wildroot_reliquary.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/wildroot_reliquary.glb"
+      ],
+      "sha256": "9fe8b09bdfc4482a28e340a14ec037e7089c7db39615bf35be5df81848a5100d",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":0,\"meshes\":6,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 0,
+        "meshes": 6,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/casting/public/models/wolf.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/wolf.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/wolf.glb"
+      ],
+      "sha256": "d3f970ddfeefd79d2a2f63beafd541ae9a0d4ba6380bc7072dbdfa14d295dac2",
+      "exit_code": 0,
+      "console": "19:35:13 | INFO: Data are loaded, start creating Blender stuff\n19:35:13 | INFO: Blender create Mesh node Wolf3_eyes_0\n19:35:13 | INFO: Blender create Mesh node Wolf3_claws_0\n19:35:13 | INFO: Blender create Mesh node Wolf3_teeth__nor2_tga_0\n19:35:13 | INFO: Blender create Mesh node Wolf2_fur__fella3_jpg_001_0\n19:35:13 | INFO: Blender create Mesh node Wolf1_Material__wolf_col_tga_0\n19:35:13 | INFO: glTF import finished in 0.20s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 6, \"materials\": 5, \"armatures\": 1, \"actions\": 7}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 6,
+        "materials": 5,
+        "armatures": 1,
+        "actions": 7
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/casting/public/models/wolf.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/casting/public/models/wolf.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/wolf.glb"
+      ],
+      "sha256": "d3f970ddfeefd79d2a2f63beafd541ae9a0d4ba6380bc7072dbdfa14d295dac2",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":7,\"materials\":5,\"meshes\":5,\"scene_instantiated\":true,\"skins\":1,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 7,
+        "materials": 5,
+        "meshes": 5,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/collective/public/models/snake.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/collective/public/models/snake.glb",
+        "runtime/ability-matrix/packs/linear-extended/public/models/snake.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/snake.glb"
+      ],
+      "sha256": "2f77f26510efd3ffa03f8ee5cfb779b4ce0697c5343aa635ea3af32f6904989d",
+      "exit_code": 0,
+      "console": "19:35:14 | INFO: Data are loaded, start creating Blender stuff\n19:35:14 | INFO: Blender create Mesh node Mesh_001_Texture_001_0\n19:35:14 | INFO: glTF import finished in 0.01s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 1, \"materials\": 1, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 1,
+        "materials": 1,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/collective/public/models/snake.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/collective/public/models/snake.glb",
+        "runtime/ability-matrix/packs/linear-extended/public/models/snake.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/snake.glb"
+      ],
+      "sha256": "2f77f26510efd3ffa03f8ee5cfb779b4ce0697c5343aa635ea3af32f6904989d",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":1,\"meshes\":1,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 1,
+        "meshes": 1,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/handcast/public/models/drone.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/handcast/public/models/drone.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/drone.glb"
+      ],
+      "sha256": "0a76415a6ea716f5b4524828f51d67a89674c3bb95328a10d2b431d3193b1193",
+      "exit_code": 0,
+      "console": "19:35:16 | INFO: Data are loaded, start creating Blender stuff\n19:35:16 | INFO: Blender create Mesh node Cube.001\n19:35:16 | INFO: Blender create Mesh node Cube.002\n19:35:16 | INFO: Blender create Mesh node Cube.003\n19:35:16 | INFO: Blender create Mesh node Cube.004\n19:35:16 | INFO: Blender create Mesh node Cube.005\n19:35:16 | INFO: Blender create Mesh node Cube.006\n19:35:16 | INFO: Blender create Mesh node Cube.007\n19:35:16 | INFO: Blender create Mesh node Sphere\n19:35:16 | INFO: glTF import finished in 0.04s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 8, \"materials\": 1, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 8,
+        "materials": 1,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/handcast/public/models/drone.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/handcast/public/models/drone.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/drone.glb"
+      ],
+      "sha256": "0a76415a6ea716f5b4524828f51d67a89674c3bb95328a10d2b431d3193b1193",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":1,\"meshes\":8,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 1,
+        "meshes": 8,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/handcast/public/models/monowheelArmyBot.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/handcast/public/models/monowheelArmyBot.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/monowheelArmyBot.glb"
+      ],
+      "sha256": "5f36fc08b97de1e22ddd0588f83deef9529eb55d94aac8ee4d235d512d087324",
+      "exit_code": 0,
+      "console": "19:35:18 | INFO: Data are loaded, start creating Blender stuff\n19:35:18 | INFO: Blender create Mesh node Cube.010\n19:35:18 | INFO: Blender create Mesh node Cube.012\n19:35:18 | INFO: Blender create Mesh node Sphere.001\n19:35:18 | INFO: Blender create Mesh node Sphere.002\n19:35:18 | INFO: glTF import finished in 0.03s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 4, \"materials\": 1, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 4,
+        "materials": 1,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/handcast/public/models/monowheelArmyBot.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/handcast/public/models/monowheelArmyBot.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/monowheelArmyBot.glb"
+      ],
+      "sha256": "5f36fc08b97de1e22ddd0588f83deef9529eb55d94aac8ee4d235d512d087324",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":1,\"meshes\":4,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 1,
+        "meshes": 4,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/handcast/public/models/phoenix_bird.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/handcast/public/models/phoenix_bird.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/phoenix_bird.glb"
+      ],
+      "sha256": "cb68b7f4827d6f7bee47ca7b8bb882437b9945d00c974338e55a720f53b5d6f0",
+      "exit_code": 0,
+      "console": "19:35:19 | INFO: Data are loaded, start creating Blender stuff\n19:35:19 | INFO: Blender create Mesh node AMesh_Ride_FengHuang_01_MatI_Ride_FengHuang_01a_0\n19:35:19 | INFO: Blender create Mesh node AMesh_Ride_FengHuang_01_MatI_Ride_FengHuang_01b_0\n19:35:19 | INFO: glTF import finished in 0.08s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 3, \"materials\": 2, \"armatures\": 1, \"actions\": 1}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 3,
+        "materials": 2,
+        "armatures": 1,
+        "actions": 1
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/handcast/public/models/phoenix_bird.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/handcast/public/models/phoenix_bird.glb",
+        "runtime/ability-matrix/packs/sandbox/public/models/phoenix_bird.glb"
+      ],
+      "sha256": "cb68b7f4827d6f7bee47ca7b8bb882437b9945d00c974338e55a720f53b5d6f0",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":1,\"materials\":2,\"meshes\":2,\"scene_instantiated\":true,\"skins\":1,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 1,
+        "materials": 2,
+        "meshes": 2,
+        "scene_instantiated": true,
+        "skins": 1,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "blender",
+      "path": "runtime/ability-matrix/packs/linear-ext/public/textures/textures.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/linear-ext/public/textures/textures.glb",
+        "runtime/ability-matrix/packs/sandbox/public/textures/textures.glb"
+      ],
+      "sha256": "9ab9c00e0fd2a06c9d84ab639ec3dfb0ab269d2de4d229c40ca21e153a17a938",
+      "exit_code": 0,
+      "console": "19:35:21 | INFO: Data are loaded, start creating Blender stuff\n19:35:21 | INFO: Blender create Mesh node Cube.001\n19:35:21 | INFO: Blender create Mesh node Cube.003\n19:35:21 | INFO: glTF import finished in 0.01s\nAETHERION_PROBE_JSON {\"version\": \"4.3.2\", \"meshes\": 2, \"materials\": 2, \"armatures\": 0, \"actions\": 0}\nBlender 4.3.2\n\nBlender quit\n",
+      "diagnostics": [],
+      "counts": {
+        "version": "4.3.2",
+        "meshes": 2,
+        "materials": 2,
+        "armatures": 0,
+        "actions": 0
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    },
+    {
+      "engine": "godot",
+      "path": "runtime/ability-matrix/packs/linear-ext/public/textures/textures.glb",
+      "aliases": [
+        "runtime/ability-matrix/packs/linear-ext/public/textures/textures.glb",
+        "runtime/ability-matrix/packs/sandbox/public/textures/textures.glb"
+      ],
+      "sha256": "9ab9c00e0fd2a06c9d84ab639ec3dfb0ab269d2de4d229c40ca21e153a17a938",
+      "exit_code": 0,
+      "console": "Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org\n\nAETHERION_PROBE_JSON {\"animations\":0,\"materials\":2,\"meshes\":2,\"scene_instantiated\":true,\"skins\":0,\"version\":\"4.6.3-stable (official)\"}\n",
+      "diagnostics": [],
+      "counts": {
+        "animations": 0,
+        "materials": 2,
+        "meshes": 2,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "status": "PASS",
+      "source_unchanged": true
+    }
+  ],
+  "summary": {
+    "PASS": 25,
+    "WITH_DEFECT": 1,
+    "FAIL": 0,
+    "UNAVAILABLE": 0
+  }
+}

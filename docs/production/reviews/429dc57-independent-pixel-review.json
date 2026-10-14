@@ -1,0 +1,938 @@
+{
+  "reviewed_commit": "429dc57a1c9748d0e0835504d116bd9112c8dfd7",
+  "review_date": "2026-10-13",
+  "source": "Independent supervising pixel review, preserved as an actionable summary.",
+  "decision": "EXACT_REFERENCE_PRODUCTION_ACCEPTANCE_NOT_MET",
+  "scope": {
+    "weapon_designs": 34,
+    "character_designs": 1,
+    "production_passes": 0
+  },
+  "limits": [
+    "Art/pose review of PNGs; not continuous GLB playback, gameplay, all exports or engine certification.",
+    "Normal-map pixel sample covers only Kiln ninja, Oath05 aged bronze and Oath13 aged gold; generic noise finding is not generalized to every texture.",
+    "Bone/clip counts and dimensional discrepancies quoted from manifests, not independently measured by the reviewer."
+  ],
+  "representative_gate": "Review and approve one representative design to the requested quality bar before multiplying variants/exports. All revised artifacts remain unapproved until exact-artifact review.",
+  "families": [
+    {
+      "family_id": "asset-o01-a-characters-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "kiln-ninja",
+          "asset_ids": [
+            "kiln-ninja-ensemble-candidate"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-01/characters/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb",
+              "sha256": "0f0e975e906600b00291bc8957e94ed0d904b69a5756039036dd4c965e4e570f"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o01-a-characters-family-review-01",
+          "finding_and_required_correction": "Rebuild anatomical face, eyelids, ears, hands and feet; layered tousled hair and fitted mask.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o01-a-characters-family-review-02",
+          "finding_and_required_correction": "Replace flat rectangular chest bands with contoured segmented terracotta armor; draped asymmetric cape with strap/buckle anchor and tailored cloth folds/pockets.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o01-a-characters-family-review-03",
+          "finding_and_required_correction": "Construct articulated vented bracers, boot straps and seams; improve garment topology/weighting and representative shoulder/elbow/knee clearance.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o01-a-characters-family-review-04",
+          "finding_and_required_correction": "Demonstrate grounded gait, upper-body motion, cast timing and equipped grips. Still frames do not establish foot sliding, interpolation or continuous performance.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o01-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "kiln-sword",
+          "asset_ids": [
+            "kiln-sword-ready",
+            "kiln-sword-stowed",
+            "kiln-sword-damaged"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-01/weapons/kiln-sword-damaged/kiln-sword-damaged.glb",
+              "sha256": "5f6b40549a0af104cefc384d9692e542fafa79a6052cbbba775bfbd2033f990b"
+            },
+            {
+              "path": "assets/production/oath-01/weapons/kiln-sword-ready/kiln-sword-ready.glb",
+              "sha256": "c15abd302e28ce1727f5dec71744ef4496962bfb0e8581ec19556efdea8e0e9b"
+            },
+            {
+              "path": "assets/production/oath-01/weapons/kiln-sword-stowed/kiln-sword-stowed.glb",
+              "sha256": "ad43334c1c0047fe9aede381ba4c383eeed54f24170d4b3773d3890ee70c6a47"
+            }
+          ]
+        },
+        {
+          "design_id": "kiln-focus",
+          "asset_ids": [
+            "kiln-focus-ready",
+            "kiln-focus-stowed",
+            "kiln-focus-damaged"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-01/weapons/kiln-focus-damaged/kiln-focus-damaged.glb",
+              "sha256": "d59fd7e8ccf0aa94c69fb6966969dd1eb9c872845c640f22e4b2ddc048efb293"
+            },
+            {
+              "path": "assets/production/oath-01/weapons/kiln-focus-ready/kiln-focus-ready.glb",
+              "sha256": "4e9d70df08285dd17b66d1a47fd8a98ee871cc579e3ed61b8946e15b8f3e0408"
+            },
+            {
+              "path": "assets/production/oath-01/weapons/kiln-focus-stowed/kiln-focus-stowed.glb",
+              "sha256": "fa1c1ee7c809c9ee8b2bf958dd423ba6601202e03aa793cd0d709023a4b5e9e6"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o01-e-weapons-family-review-01",
+          "finding_and_required_correction": "Sword needs long rounded vent slots, shaped guard/pommel and hanging chain/ring.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o01-e-weapons-family-review-02",
+          "finding_and_required_correction": "Focus needs thick vented ceramic housings, fastening bands, layered end collars and rear rope/tassel rather than bare cylinders and rails.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o01-e-weapons-family-review-03",
+          "finding_and_required_correction": "Author ceramic chips, oxidized metal, leather cross-wrap and more legible damage; add appropriate secondary motion and calibrated mounts.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o02-e-weapons-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "rime-frost-saber",
+          "asset_ids": [
+            "rime-sword-ready",
+            "rime-sword-stowed",
+            "rime-sword-damaged"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-02/weapons/rime-sword-damaged/rime-sword-damaged.glb",
+              "sha256": "551cb593d3b67ff28103104964143b47d97af0f666404fe5c3fde258f9dd5fcb"
+            },
+            {
+              "path": "assets/production/oath-02/weapons/rime-sword-ready/rime-sword-ready.glb",
+              "sha256": "202fd0848ef57c48fb260e436c4d7405a28a1033a9961f50e4041dc828f49658"
+            },
+            {
+              "path": "assets/production/oath-02/weapons/rime-sword-stowed/rime-sword-stowed.glb",
+              "sha256": "4acbb237e21f9d37d1eca95178c62ba53b637ce7c29fec3df2c923addc7ecbea"
+            }
+          ]
+        },
+        {
+          "design_id": "rime-repeater",
+          "asset_ids": [
+            "rime-focus-ready",
+            "rime-focus-stowed",
+            "rime-focus-damaged"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-02/weapons/rime-focus-damaged/rime-focus-damaged.glb",
+              "sha256": "f7faef93b637e3165cff10b0ce1423e311a68c0cd76df10b46564549bdc55e11"
+            },
+            {
+              "path": "assets/production/oath-02/weapons/rime-focus-ready/rime-focus-ready.glb",
+              "sha256": "8b8c77f540897d239674628bb691403f81b5b59b1b564001c6d513d9f86e8779"
+            },
+            {
+              "path": "assets/production/oath-02/weapons/rime-focus-stowed/rime-focus-stowed.glb",
+              "sha256": "ab934d03ea257c4cac07d223ecd43abae3e0d6419b4065ad3b52eec5bc9bb5f1"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o02-e-weapons-family-review-01",
+          "finding_and_required_correction": "Rebuild repeater's shaped ornate body, grip/trigger and close-fitting cartridge braces; remove crude rectilinear open framework.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o02-e-weapons-family-review-02",
+          "finding_and_required_correction": "Refine saber guard, crystal pommel and tassel; author fractured transparent ice with silver-edged clarity.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o02-e-weapons-family-review-03",
+          "finding_and_required_correction": "Four-bone tassel settle does not prove combat/equip functionality; repeater mechanism remains open.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o03-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "storm-relay-whip",
+          "asset_ids": [
+            "storm-relay-whip-ready",
+            "storm-relay-whip-stowed"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-03/weapons/storm-relay-whip-ready/storm-relay-whip-ready.glb",
+              "sha256": "ff53157b2ad29bf13afd44a537beaa9962e7d35d23e8e14445c95eb14ef4e49e"
+            },
+            {
+              "path": "assets/production/oath-03/weapons/storm-relay-whip-stowed/storm-relay-whip-stowed.glb",
+              "sha256": "9e31bba356a235f151a4edbf2b6c3e94caa51357bce4b0a2166d6e1ac51c5ccc"
+            }
+          ]
+        },
+        {
+          "design_id": "storm-conductor-staff",
+          "asset_ids": [
+            "storm-conductor-staff-ready",
+            "storm-conductor-staff-stowed"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-03/weapons/storm-conductor-staff-ready/storm-conductor-staff-ready.glb",
+              "sha256": "baa8c6aae16a6f185dee57db7d40d58f609e6a88ac556f5cfa5aea4b6fbbcc93"
+            },
+            {
+              "path": "assets/production/oath-03/weapons/storm-conductor-staff-stowed/storm-conductor-staff-stowed.glb",
+              "sha256": "ada0c8e8388075932f02510d89f4e31929f55ffeb01e0801369e387b766bc087"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o03-e-weapons-family-review-01",
+          "finding_and_required_correction": "Replace plain wedge prongs with sculpted blades and opaque relay cylinder with enclosed glass/internal electrical detail.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o03-e-weapons-family-review-02",
+          "finding_and_required_correction": "Build heavier links, fitted copper collars, braided wraps and missing hanging tassels; enrich staff shaft/head assemblies.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o03-e-weapons-family-review-03",
+          "finding_and_required_correction": "Chain settle is cosmetic; combat solver, collisions, mounting and secondary motion remain open.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o04-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "tidal-crescent-blade",
+          "asset_ids": [
+            "tidal-crescent-blade"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-04/weapons/crescent-blade/lod0.glb",
+              "sha256": "bafad47b22d65ca5c37bbf87ccb1c6f692b15a7b1aa34b9dce4f313bc35d153a"
+            }
+          ]
+        },
+        {
+          "design_id": "tidal-tide-orb-staff",
+          "asset_ids": [
+            "tidal-tide-orb-staff"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-04/weapons/tide-orb-staff/lod0.glb",
+              "sha256": "a0eb059caf6e83a0231a2e5b3ddcb954ebf17986867fb0fb3f2053796aaf7f56"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o04-e-weapons-family-review-01",
+          "finding_and_required_correction": "Narrow and taper crescent curvature; sculpt swept nacre shell enclosure, integrated fittings and teardrop pommel instead of plain U.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o04-e-weapons-family-review-02",
+          "finding_and_required_correction": "Staff requires thick spiral pearl-shell coverage, foot/mount and dense ornamental collars rather than orb and rings.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o04-e-weapons-family-review-03",
+          "finding_and_required_correction": "Author water-glass depth and pearl layers; transmission metadata alone does not prove target-engine appearance.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o05-e-weapons-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "prod-o05-amethyst-short-blade",
+          "asset_ids": [
+            "prod-o05-amethyst-short-blade"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-05/weapons/amethyst-short-blade/amethyst-short-blade.glb",
+              "sha256": "212a2e4af1d1901f93191b5090f42a1a8c7b6b3fd4aaec394713e08c5125cb13"
+            }
+          ]
+        },
+        {
+          "design_id": "prod-o05-amethyst-seer-mace",
+          "asset_ids": [
+            "prod-o05-amethyst-seer-mace"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-05/weapons/amethyst-seer-mace/amethyst-seer-mace.glb",
+              "sha256": "4eadd4c5471cf38bfa90818ddc2eda9dcdf595d0156acd0e4c166b6a6c1961c6"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o05-e-weapons-family-review-01",
+          "finding_and_required_correction": "Replace regular flat woodgrain-like tan plates with thick irregular fractured/chipped taupe stone, varied relief and uneven crack spacing.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o05-e-weapons-family-review-02",
+          "finding_and_required_correction": "Build volumetric refractive amethyst clusters; restore dense rocky mace head and fitted engraved bronze bands instead of sparse head/straight cage strips.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o05-e-weapons-family-review-03",
+          "finding_and_required_correction": "Refine guard, pommel, grips and damage states; closeups must visibly prove rock/crystal construction.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o06-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "oath-06-folding-battle-fan",
+          "asset_ids": [
+            "oath-06-folding-battle-fan"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-06/weapons/folding-battle-fan/lod0.glb",
+              "sha256": "e81e23c836e17fe20f4cfabead3440702e2d3b22f00c5849414a30186ecc66f2"
+            }
+          ]
+        },
+        {
+          "design_id": "oath-06-reed-tuning-fork",
+          "asset_ids": [
+            "oath-06-reed-tuning-fork"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-06/weapons/reed-tuning-fork/lod0.glb",
+              "sha256": "dd8ef977844dda5b0757b2db4c4ca6f4628c38871b9ba09fa11834a5c262264f"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o06-e-weapons-family-review-01",
+          "finding_and_required_correction": "Fan needs pleated/stiched woven membrane, carved wood guard rails, layered engraved hinge hardware, beads and tassel.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o06-e-weapons-family-review-02",
+          "finding_and_required_correction": "Fork needs sculpted filigree/scroll web, beveled prongs and authored wood/wrap details.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o06-e-weapons-family-review-03",
+          "finding_and_required_correction": "Show mid-fold clearance and equipped grip, not only endpoint images; static fork tassel is incomplete.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o07-e-weapons-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "oath-07-living-twig-bow",
+          "asset_ids": [
+            "oath-07-living-twig-bow"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-07/weapons/living-twig-bow/lod0.glb",
+              "sha256": "72ab24afd59d053a5948335d7ce2b404ee541a49602fba3f4ae84c5132523152"
+            }
+          ]
+        },
+        {
+          "design_id": "oath-07-sapseed-staff",
+          "asset_ids": [
+            "oath-07-sapseed-staff"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-07/weapons/sapseed-staff/lod0.glb",
+              "sha256": "f6d871e384b574785d6c10f2d5fbbbd64c0240ff0462aea19295394574dd38d2"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o07-e-weapons-family-review-01",
+          "finding_and_required_correction": "Rebuild broad branched bow limbs, curled tips, bark ridges, moss, clustered serrated leaves and embedded sap forms; avoid thin uniform tubes and diamond leaves.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o07-e-weapons-family-review-02",
+          "finding_and_required_correction": "Staff requires asymmetric dense bark petals enclosing sap, irregular forks and foliage; pods must not be simple symmetric ovals.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o07-e-weapons-family-review-03",
+          "finding_and_required_correction": "Author bark/moss and translucent sap with component-aligned UVs; demonstrate arrow/nock/hand/string contacts and leaf motion.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o08-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "prod-o08-poison-saber",
+          "asset_ids": [
+            "prod-o08-poison-saber"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-08/weapons/poison-saber/poison-saber.glb",
+              "sha256": "548b00a472c225b7fcb3bed5d6661495b523401c18dc5def5ce5da47880aaaee"
+            }
+          ]
+        },
+        {
+          "design_id": "prod-o08-alchemical-crossbow",
+          "asset_ids": [
+            "prod-o08-alchemical-crossbow"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-08/weapons/alchemical-crossbow/alchemical-crossbow.glb",
+              "sha256": "8152b42c210b2b877217a7369f0d0f4d0f1217f2655c8ccf341296e40d6c32cb"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o08-e-weapons-family-review-01",
+          "finding_and_required_correction": "Saber requires thin fluid/glass channel, bubbles/veins and heavily worked guard.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o08-e-weapons-family-review-02",
+          "finding_and_required_correction": "Rebuild compact crossbow valves, ampoules, barrel, straps, fasteners and ornamental metal instead of exposed sphere/cylinders/grip loop.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o08-e-weapons-family-review-03",
+          "finding_and_required_correction": "Author burgundy cross-wrap, wear and liquid optics; charm/firing behavior remain unimplemented.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o09-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "oath-09-lotus-short-sword",
+          "asset_ids": [
+            "oath-09-lotus-short-sword"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-09/weapons/lotus-short-sword/lod0.glb",
+              "sha256": "1fa368389f1cda9ccb96d648880ceaf80cf5d32cfb0fb7ab5f63d1e4cd4da7d8"
+            }
+          ]
+        },
+        {
+          "design_id": "oath-09-radiant-lotus-staff",
+          "asset_ids": [
+            "oath-09-radiant-lotus-staff"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-09/weapons/radiant-lotus-staff/lod0.glb",
+              "sha256": "1809fa29d4cf7003e05fc3bdb944c606ee041a9f3dccbe381776f3038c5daa84"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o09-e-weapons-family-review-01",
+          "finding_and_required_correction": "Replace inflated regular sunburst petals with layered folded enamel overlaps, sculpted gold outlines/inlays and recessed core bezel.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o09-e-weapons-family-review-02",
+          "finding_and_required_correction": "Refine blade ridge/filigree, head-to-shaft proportions, lower fittings and shaped butt assembly.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o09-e-weapons-family-review-03",
+          "finding_and_required_correction": "Author brushed gold/local wear and cloth/leather detail; charm sway does not approve animation or radiance gameplay.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o10-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "oath-10-paired-gravity-flail",
+          "asset_ids": [
+            "oath-10-paired-gravity-flail"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-10/weapons/paired-gravity-flail/lod0.glb",
+              "sha256": "9d0ea7e5bf691769db6235bb7061206ceba9d0373118c63fe8b47ebc388428e2"
+            }
+          ]
+        },
+        {
+          "design_id": "oath-10-orbital-astrolabe-staff",
+          "asset_ids": [
+            "oath-10-orbital-astrolabe-staff"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-10/weapons/orbital-astrolabe-staff/lod0.glb",
+              "sha256": "bb3fbfdb5653b43fb5f4ab9ec7426465b3d603cceab51893d460e535e8dc479d"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o10-e-weapons-family-review-01",
+          "finding_and_required_correction": "Replace smooth flail balls/shallow dents with jagged deep-cratered meteor shells, fitted bearing cages, many brass mounts and jewel sockets.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o10-e-weapons-family-review-02",
+          "finding_and_required_correction": "Replace spherical handle fittings with stepped swivels/ferrules; astrolabe needs thick partial orbital blades, rivets/enamel, lateral assembly and large spear tip.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o10-e-weapons-family-review-03",
+          "finding_and_required_correction": "Separate stone/metal/starfield through authored UV detail; combat motion, chain self-collision and orbital clearance remain open.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o11-e-weapons-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "prod-o11-void-cleaver",
+          "asset_ids": [
+            "prod-o11-void-cleaver"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-11/weapons/void-cleaver/void-cleaver.glb",
+              "sha256": "cb649eef80bde735e3e88f9f612356b411ad064631ec16fb0cfd378c747d8a76"
+            }
+          ]
+        },
+        {
+          "design_id": "prod-o11-missing-court-lotus-focus",
+          "asset_ids": [
+            "prod-o11-missing-court-lotus-focus"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-11/weapons/missing-court-lotus-focus/missing-court-lotus-focus.glb",
+              "sha256": "8240da14c7ae02ceda0098cebc3ffedc62e9c041de79384c933fe63db1aaff8e"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o11-e-weapons-family-review-01",
+          "finding_and_required_correction": "Restore cleaver curved tip, uneven weathered plates, shaped silver edge and fitted clamps.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o11-e-weapons-family-review-02",
+          "finding_and_required_correction": "Replace patched sphere/straight struts with actual layered curved lotus petals around red core and opened lower petal collar.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o11-e-weapons-family-review-03",
+          "finding_and_required_correction": "Author weathered cracks, selective roughness and wraps; tassels remain static and require appropriate secondary behavior.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o12-e-weapons-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "prod-o12-blood-lash",
+          "asset_ids": [
+            "prod-o12-blood-lash"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-12/weapons/blood-lash/blood-lash.glb",
+              "sha256": "e584ae52c125734f1901276d89ee34418cb5849aaf82305cc20eb900fcdbce8c"
+            }
+          ]
+        },
+        {
+          "design_id": "prod-o12-blood-gauntlet",
+          "asset_ids": [
+            "prod-o12-blood-gauntlet"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-12/weapons/blood-gauntlet/blood-gauntlet.glb",
+              "sha256": "b5b5875a093435d804a1ec5dd42cdf5411abb670f0f78e9f3be20313faebaabb"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o12-e-weapons-family-review-01",
+          "finding_and_required_correction": "Lash needs braided crimson thorn structure and layered gold/crimson blade instead of angular brown strip/sparse triangles.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o12-e-weapons-family-review-02",
+          "finding_and_required_correction": "Gauntlet needs anatomical segmented fingers/opposed thumb, pointed claws, shaped ivory-gold joint plates, red lacing/knots, deep glass lens and detailed cuff ribs.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o12-e-weapons-family-review-03",
+          "finding_and_required_correction": "Refine weights after hand-fit topology; provide animated closeups and fitted-host demonstrations, not only front/hero/side or demo-clip metadata.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o13-e-weapons-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "prod-o13-ceremonial-rapier",
+          "asset_ids": [
+            "prod-o13-ceremonial-rapier"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-13/weapons/ceremonial-rapier/ceremonial-rapier.glb",
+              "sha256": "0eba9f83aeae3236e62493337430a6ddffafddf750d77db22110048bdf62685c"
+            }
+          ]
+        },
+        {
+          "design_id": "prod-o13-mirrored-baton",
+          "asset_ids": [
+            "prod-o13-mirrored-baton"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-13/weapons/mirrored-baton/mirrored-baton.glb",
+              "sha256": "b81aa127fcc779e8c859dd4c71e64865200eb5f3280bf8e9b28371f529da7887"
+            }
+          ]
+        },
+        {
+          "design_id": "prod-o13-mirror-codex",
+          "asset_ids": [
+            "prod-o13-mirror-codex"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-13/weapons/mirror-codex/mirror-codex.glb",
+              "sha256": "4bc24f5b5cf14c0bf6f197754e44ff090b53b971caef7f6974dbb166df8d3a0f"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o13-e-weapons-family-review-01",
+          "finding_and_required_correction": "Rapier requires multi-arc orbital cage, sculpted side fittings and concentrated faceted mirror center.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o13-e-weapons-family-review-02",
+          "finding_and_required_correction": "Baton needs continuous crisp faceted mirror shaft and cross-laced end grips rather than marked tube/chunky caps.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o13-e-weapons-family-review-03",
+          "finding_and_required_correction": "Codex needs dense irregular reflective facets, layered enamel covers, substantial hinges/spine/closure and clearance; prove reflection-readable lighting and target-engine behavior.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o14-e-weapons-family",
+      "visual_status": "FAIL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "chronal-scythe",
+          "asset_ids": [
+            "chronal-scythe-ready"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-14/weapons/chronal-scythe-ready/chronal-scythe-ready.glb",
+              "sha256": "d1bde58fd9a21f10606e5791294267ec0e0e442f3dad4298a3e38535deccf087"
+            }
+          ]
+        },
+        {
+          "design_id": "chronal-ring",
+          "asset_ids": [
+            "chronal-ring-ready"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-14/weapons/chronal-ring-ready/chronal-ring-ready.glb",
+              "sha256": "a964757e441fc9ad0474460fb8ad295d2c253b7d596c65406fbb30ea6d016fc0"
+            }
+          ]
+        },
+        {
+          "design_id": "chronal-wrist-tool",
+          "asset_ids": [
+            "chronal-wrist-tool-ready"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-14/weapons/chronal-wrist-tool-ready/chronal-wrist-tool-ready.glb",
+              "sha256": "6a176bf55f1c2e932881b5938810af6bf5d45d099f460ca30fb52291d156a42a"
+            }
+          ]
+        },
+        {
+          "design_id": "chronal-compact-dart",
+          "asset_ids": [
+            "chronal-compact-dart-ready"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-14/weapons/chronal-compact-dart-ready/chronal-compact-dart-ready.glb",
+              "sha256": "2a9402c3bd41d8688cb36fdca81045d02b2665db4c054b05a1d52cb72b3c910a"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o14-e-weapons-family-review-01",
+          "finding_and_required_correction": "Replace square wrist backing slab with compact fitted curved mechanism, contoured blade/hub assembly and proper joints.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o14-e-weapons-family-review-02",
+          "finding_and_required_correction": "Refine scythe/ring curvature, layered shells, pod housings, fasteners, etched brass and grip wraps.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o14-e-weapons-family-review-03",
+          "finding_and_required_correction": "Reconcile measured scythe 1.739m versus proposed 1.80m and wrist 0.165m versus 0.16m; carry/damaged states and fit remain open.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    },
+    {
+      "family_id": "asset-o15-e-weapons-family",
+      "visual_status": "PARTIAL",
+      "production_acceptance": "FAIL",
+      "designs": [
+        {
+          "design_id": "impulse-hammer",
+          "asset_ids": [
+            "impulse-hammer-long-grip",
+            "impulse-hammer-short-grip"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-15/weapons/impulse-hammer-long-grip/impulse-hammer-long-grip.glb",
+              "sha256": "9e4499f074493f69c9b848c60d9db582a03f622931ad05e07b4a29b2e9390376"
+            },
+            {
+              "path": "assets/production/oath-15/weapons/impulse-hammer-short-grip/impulse-hammer-short-grip.glb",
+              "sha256": "cdaa06426ddad6c7550d640229dab3fb9b986ad55e957f3bac3c1c051036cc63"
+            }
+          ]
+        },
+        {
+          "design_id": "impulse-folding-shield",
+          "asset_ids": [
+            "impulse-folding-shield-unfolded"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-15/weapons/impulse-folding-shield-unfolded/impulse-folding-shield-unfolded.glb",
+              "sha256": "16f7d7df38edcbd4c5194e292f8626730921b95871b3ec08053d098541532d56"
+            }
+          ]
+        },
+        {
+          "design_id": "impulse-belt-module",
+          "asset_ids": [
+            "impulse-belt-module-ready"
+          ],
+          "checkpoint_primary_exports": [
+            {
+              "path": "assets/production/oath-15/weapons/impulse-belt-module-ready/impulse-belt-module-ready.glb",
+              "sha256": "1dfcf00ddf6019d487bbd50a7d6a45f0de9b1d881a941fa954b5f5e3f1c4c6cd"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "id": "asset-o15-e-weapons-family-review-01",
+          "finding_and_required_correction": "Hammer needs layered endcaps, recessed orange insets, central mechanism and complex seams; shield needs interlocking panels, hinges and forearm housing.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o15-e-weapons-family-review-02",
+          "finding_and_required_correction": "Belt module must be a closed layered hand-held unit rather than shallow open tray/rails.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o15-e-weapons-family-review-03",
+          "finding_and_required_correction": "Shield requires longitudinal compaction to proposed 25cm stowed length, not width-only fold; reconcile hammer 1.486/0.836m versus 1.40/0.75m and shield 0.93m versus 0.95m.",
+          "status": "OPEN",
+          "revised_evidence": []
+        },
+        {
+          "id": "asset-o15-e-weapons-family-review-04",
+          "finding_and_required_correction": "Add manufactured relief, worn finish, straps and mechanism-clearance evidence; missing damage/carry states remain open.",
+          "status": "OPEN",
+          "revised_evidence": []
+        }
+      ]
+    }
+  ]
+}

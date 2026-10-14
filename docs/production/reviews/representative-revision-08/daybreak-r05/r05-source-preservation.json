@@ -1,0 +1,195 @@
+{
+  "scope": "Actual Blender opens compare all primary visual and collision mesh topology/positions/UV/material slots/worldmatrices; hidden editable variants excluded from fixture-delivery checks",
+  "reports": [
+    {
+      "path": "modules/shade-canopy/source.blend",
+      "opened": true,
+      "source_sha256": "8d24e1385c5680c9c3449e4a988cb7c1144cc45e9c9a922ad13883891013ca6b",
+      "r04": {
+        "visual": {
+          "mesh_count": 91,
+          "sha256": "f270e60ef30fa5172994e00b106aae7ebc21c5da825d78f7cf6a1850c9b189e9"
+        },
+        "collision": {
+          "mesh_count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "r05": {
+        "visual": {
+          "mesh_count": 91,
+          "sha256": "f270e60ef30fa5172994e00b106aae7ebc21c5da825d78f7cf6a1850c9b189e9"
+        },
+        "collision": {
+          "mesh_count": 0,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "visual_equal": true,
+      "collision_equal": true
+    },
+    {
+      "path": "modules/public-colonnade/source.blend",
+      "opened": true,
+      "source_sha256": "91a5fe6cf9ddce052dc6d387b674ef48ea30f2c397c133ed0827b922844128fc",
+      "r04": {
+        "visual": {
+          "mesh_count": 132,
+          "sha256": "e477bd0d5f1884d076373a2332649857449271fd6e2a92f865bafc0b71e0c067"
+        },
+        "collision": {
+          "mesh_count": 12,
+          "sha256": "f797b405f288e1985ee5ce19e561dae190877ba9b6fb7c5b56dbd3cfa74eb1d7"
+        }
+      },
+      "r05": {
+        "visual": {
+          "mesh_count": 132,
+          "sha256": "e477bd0d5f1884d076373a2332649857449271fd6e2a92f865bafc0b71e0c067"
+        },
+        "collision": {
+          "mesh_count": 12,
+          "sha256": "f797b405f288e1985ee5ce19e561dae190877ba9b6fb7c5b56dbd3cfa74eb1d7"
+        }
+      },
+      "visual_equal": true,
+      "collision_equal": true
+    },
+    {
+      "path": "fixtures/civic/source.blend",
+      "opened": true,
+      "source_sha256": "2521597ed44116573023350c609d8077349878920a3f91a4d285fbb4c76e4118",
+      "r04": {
+        "visual": {
+          "mesh_count": 409,
+          "sha256": "e81892b4c3f674522677e4fd52f30157ea4df1eef8e894cfcf026c0aea76fdb3"
+        },
+        "collision": {
+          "mesh_count": 26,
+          "sha256": "12d878721dafeaa54b71eebda23745df94fccf09b5d0831efabaf75a62839702"
+        }
+      },
+      "r05": {
+        "visual": {
+          "mesh_count": 409,
+          "sha256": "e81892b4c3f674522677e4fd52f30157ea4df1eef8e894cfcf026c0aea76fdb3"
+        },
+        "collision": {
+          "mesh_count": 26,
+          "sha256": "12d878721dafeaa54b71eebda23745df94fccf09b5d0831efabaf75a62839702"
+        }
+      },
+      "visual_equal": true,
+      "collision_equal": true
+    },
+    {
+      "path": "fixtures/residential/source.blend",
+      "opened": true,
+      "source_sha256": "e8bbea269bc405c25721312d86a3c4a721a947457a7779f12f31b60ed279e9ff",
+      "r04": {
+        "visual": {
+          "mesh_count": 410,
+          "sha256": "3b19daa7d77e516f284cc10746b92efe4183483de0b717f60a6c7fe3cfc0104a"
+        },
+        "collision": {
+          "mesh_count": 31,
+          "sha256": "f2d951ce37505a3a5c6978acece93dc48d2d5dac6dfb23fd94f966bc94cd5867"
+        }
+      },
+      "r05": {
+        "visual": {
+          "mesh_count": 410,
+          "sha256": "3b19daa7d77e516f284cc10746b92efe4183483de0b717f60a6c7fe3cfc0104a"
+        },
+        "collision": {
+          "mesh_count": 31,
+          "sha256": "f2d951ce37505a3a5c6978acece93dc48d2d5dac6dfb23fd94f966bc94cd5867"
+        }
+      },
+      "visual_equal": true,
+      "collision_equal": true
+    },
+    {
+      "path": "fixtures/work/source.blend",
+      "opened": true,
+      "source_sha256": "6266b16cae21dd52d4226215ae8d470a6df85e3e56fbcc5e84c38da37216bf96",
+      "r04": {
+        "visual": {
+          "mesh_count": 355,
+          "sha256": "5c37fab6c2f3c16261fe7b83fd04fe565a734f9d10a0169c7906b0e495e86085"
+        },
+        "collision": {
+          "mesh_count": 26,
+          "sha256": "be6760595ad0bf36f464eaab54c15f99ca277215a78d8b9e500ac523d7eebb3f"
+        }
+      },
+      "r05": {
+        "visual": {
+          "mesh_count": 355,
+          "sha256": "5c37fab6c2f3c16261fe7b83fd04fe565a734f9d10a0169c7906b0e495e86085"
+        },
+        "collision": {
+          "mesh_count": 26,
+          "sha256": "be6760595ad0bf36f464eaab54c15f99ca277215a78d8b9e500ac523d7eebb3f"
+        }
+      },
+      "visual_equal": true,
+      "collision_equal": true
+    },
+    {
+      "path": "fixtures/stairs-with-landing/source.blend",
+      "opened": true,
+      "source_sha256": "3916611111842e15a5a50bfe4034086df573e43bf40be30b53b3fe6a78a3e294",
+      "r04": {
+        "visual": {
+          "mesh_count": 56,
+          "sha256": "a15c7910c3c534eeac358fcdfaf2314e3f5cd0e81b2e3f0666e3e2df863004e4"
+        },
+        "collision": {
+          "mesh_count": 4,
+          "sha256": "2981346cd30ebd1e54c7670b7189944302bd06acf9cc69f9182d86bae06e8196"
+        }
+      },
+      "r05": {
+        "visual": {
+          "mesh_count": 56,
+          "sha256": "a15c7910c3c534eeac358fcdfaf2314e3f5cd0e81b2e3f0666e3e2df863004e4"
+        },
+        "collision": {
+          "mesh_count": 4,
+          "sha256": "2981346cd30ebd1e54c7670b7189944302bd06acf9cc69f9182d86bae06e8196"
+        }
+      },
+      "visual_equal": true,
+      "collision_equal": true
+    },
+    {
+      "path": "fixtures/ramp-with-landing/source.blend",
+      "opened": true,
+      "source_sha256": "ebdf9f2af018bbca5476f3dfd2596ffc1f5e36d0255d897c2530736f14bfae79",
+      "r04": {
+        "visual": {
+          "mesh_count": 31,
+          "sha256": "3819e2af3bc518d2363d2d560ffedcf3d14fbef3aee09219882ec4449325f19f"
+        },
+        "collision": {
+          "mesh_count": 4,
+          "sha256": "7921fea31e66107c33e47045b51f64150ec116584ddc6efbc556273155d2ad2d"
+        }
+      },
+      "r05": {
+        "visual": {
+          "mesh_count": 31,
+          "sha256": "3819e2af3bc518d2363d2d560ffedcf3d14fbef3aee09219882ec4449325f19f"
+        },
+        "collision": {
+          "mesh_count": 4,
+          "sha256": "7921fea31e66107c33e47045b51f64150ec116584ddc6efbc556273155d2ad2d"
+        }
+      },
+      "visual_equal": true,
+      "collision_equal": true
+    }
+  ],
+  "failures": 0
+}

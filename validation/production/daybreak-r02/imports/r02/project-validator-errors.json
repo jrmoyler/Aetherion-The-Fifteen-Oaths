@@ -1,0 +1,563 @@
+[
+  {
+    "id": "asset-o09-n-architecture-family__foundation-plinth__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__floor-bay__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod2 must have fewer triangles than lod1"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__solid-wall__candidate-r01",
+    "status": "STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN",
+    "errors": [],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__window-wall__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__inside-corner__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__outside-corner__candidate-r01",
+    "status": "STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN",
+    "errors": [],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__door-frame__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__roof-bay__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__stair-flight__candidate-r02",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__ramp-run__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__parapet__candidate-r01",
+    "status": "STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN",
+    "errors": [],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__service-chase__candidate-r01",
+    "status": "STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN",
+    "errors": [],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__public-colonnade__candidate-r01",
+    "status": "STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN",
+    "errors": [],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__shade-canopy__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "NONE",
+      "reason": "Non-solid overhead woven shade; the separate supporting colonnade supplies movement collision. Fabric does not provide a walkable or blocking gameplay surface."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__clinic-threshold__candidate-r01",
+    "status": "STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN",
+    "errors": [],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__quiet-portico__candidate-r01",
+    "status": "STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN",
+    "errors": [],
+    "collisionPolicy": {
+      "mode": "REQUIRED",
+      "reason": "Separate authored movement proxy supplied; actual engine physics assignment and controller traversal remain unvalidated."
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "TRIANGLE_METADATA_UNSPECIFIED:collision",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  },
+  {
+    "id": "asset-o09-n-architecture-family__daylight-baffle__candidate-r01",
+    "status": "HARD_ERRORS",
+    "errors": [
+      {
+        "code": "LOD_NOT_REDUCED",
+        "message": "lod1 must have fewer triangles than glb"
+      }
+    ],
+    "collisionPolicy": {
+      "mode": "PENDING",
+      "reason": "State-specific moving-body and interaction collision are not authored; the decorative animation is not a collision-ready gameplay mechanism.",
+      "remainingGate": "State-specific interaction/collision and runtime authority validation"
+    },
+    "remainingGates": [
+      "Exact visual reference fidelity and review",
+      "Full semantic socket fit / mixed-family and stacked-floor fixtures",
+      "All event/repair/damage/restoration variants",
+      "Runtime collision/nav/controller traversal",
+      "Unreal real import; browser GPU parity; hardware performance",
+      "Physical mip/texel-density target and source texture refinement",
+      "Mechanism occupancy/reservation/state authority, hard-stop swept-contact tests and floor-reachable manual release",
+      "State-specific interaction/collision and runtime authority validation",
+      "VISUAL_REFERENCE_APPROVAL",
+      "BLENDER_SOURCE_OPEN_AND_REEXPORT",
+      "UNREAL_IMPORT_AND_RUNTIME",
+      "GODOT_IMPORT_AND_RUNTIME",
+      "THREEJS_RENDER_AND_DISPOSE",
+      "MEASURED_PERFORMANCE",
+      "COLLISION_GAMEPLAY_FIT"
+    ],
+    "sourceValidation": {
+      "path": "assets/production/oath-09/architecture/source-validation.json",
+      "bytes": 11439,
+      "sha256": "8e8c9e28eea5d440701bb80ea1900cd427557cf76d65d43f45cc3ef773165a3c"
+    }
+  }
+]
