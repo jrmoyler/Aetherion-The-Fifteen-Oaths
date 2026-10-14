@@ -33,7 +33,7 @@ Normal abilities use the current world aim, not the bridge's automated cast dire
 
 ## Owner-operated Vercel deployment
 
-No deployment has been performed. In the Vercel project build settings, use:
+The root `vercel.json` sets the install, build and output values below, and those take precedence over the dashboard. The last production deployments failed with `STATIC_BUILD_NO_OUT_DIR` because the project was looking for `dist` rather than `dist/daybreak`. Set the framework preset to Other in the dashboard as well so it does not apply the Vite preset. The table lists the same values for reference:
 
 | Setting | Value |
 | --- | --- |
