@@ -2,7 +2,7 @@
 
 Generated with `python3 tools/production/inventory.py`; verify without writing using `--check`.
 
-**Status: incomplete production. 46 exported candidate asset entries; zero accepted families. States and LODs do not close a family.**
+**Status: incomplete production. 63 exported candidate asset entries; zero accepted families. States and LODs do not close a family.**
 
 The combined registered scope is now indexed from actual Phase I registries and the exact imported Phase II package. The ledger includes all fifteen Oaths and every Phase I category, plus concrete Phase II module/variant entries and world-system obligations. This is a work/acceptance inventory, not a completed world or an exact final mesh estimate.
 
@@ -19,11 +19,13 @@ The combined registered scope is now indexed from actual Phase I registries and 
 | linked detail registry records | 789 |
 | linked detail unique ids | 774 |
 | runtime implementation contracts | 20 |
-| new production asset deliverables | 46 |
-| distinct candidate archetypes | 35 |
-| candidate glb file paths | 204 |
-| families with candidate deliveries | 16 |
-| families without candidate deliveries | 494 |
+| new production asset deliverables | 63 |
+| distinct candidate archetypes | 52 |
+| candidates missing required collision | 1 |
+| candidates declared nonblocking | 1 |
+| candidate glb file paths | 270 |
+| families with candidate deliveries | 17 |
+| families without candidate deliveries | 493 |
 | unaccepted production families | 510 |
 | accepted production families | 0 |
 | fully rendered gameplay certified castables | 0 |
@@ -33,8 +35,8 @@ The combined registered scope is now indexed from actual Phase I registries and 
 | phase i families refined by phase ii | 210 |
 | combined detail unique ids | 1177 |
 | phase ii payload documents | 115 |
-| candidate texture file paths | 240 |
-| production candidate manifest paths | 16 |
+| candidate texture file paths | 260 |
+| production candidate manifest paths | 17 |
 | phase i canon document paths | 139 |
 | named character ids | 34 |
 | baseline poi ids | 63 |
@@ -134,7 +136,7 @@ Ten streaming contracts refine named baseline contracts. Fifteen event refinemen
 | oath-06 | 2 | 33 | 14 | 17 | 18 |
 | oath-07 | 2 | 33 | 14 | 17 | 17 |
 | oath-08 | 2 | 33 | 14 | 17 | 19 |
-| oath-09 | 2 | 33 | 14 | 17 | 15 |
+| oath-09 | 19 | 32 | 14 | 17 | 15 |
 | oath-10 | 2 | 33 | 14 | 17 | 17 |
 | oath-11 | 2 | 33 | 14 | 17 | 17 |
 | oath-12 | 2 | 33 | 14 | 17 | 16 |

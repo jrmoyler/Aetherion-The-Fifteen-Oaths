@@ -46,3 +46,7 @@ The later [parent review of revision 04](reviews/representative-revision-04/PARE
 ## Daybreak architecture candidate
 
 [Seventeen-module gallery](../../assets/production/oath-09/architecture/index.html) · [original REF-105 and proposed construction references](../../assets/production/oath-09/architecture/references/) · [limitations](../../assets/production/oath-09/architecture/README.md). Five assembled fixtures demonstrate proposed joins, not complete buildings. Actual pixel review still finds canopy, pier, trim, guard and material differences; zero visual approvals.
+
+## Focused review 07
+
+[Gallery](reviews/representative-revision-07/index.html) · [scope and limitations](reviews/representative-revision-07/README.md). Ninja V13 ear/hair and Fault V12 crystal/layer comparisons remain unapproved. Historical intermediate views and failures are retained separately; the opt-in runtime catalog identifies its pinned older selection explicitly.

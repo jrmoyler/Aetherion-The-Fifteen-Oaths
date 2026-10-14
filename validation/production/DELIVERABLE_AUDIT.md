@@ -1,8 +1,8 @@
 # Candidate production deliverable audit
 
-Generated 2026-10-13T20:08:58.849Z; source revision 4794c8ed0292878cd8d5cefe199824bb6e4db56a.
+Generated 2026-10-14T00:16:39.344Z; source revision 398b1984d9fc0c4fe0230a34507e190362f1dfe4.
 
-46 candidate assets across 16 manifests: 46 pass these structural checks; 0 have hard errors. Production approvals: 0. Khronos reports 0 errors and 9516 warnings; warnings remain recorded and are not engine-parity approval.
+63 candidate assets across 17 manifests: 62 pass these structural checks; 0 have hard errors. 1 remain incomplete for missing required collision (including any also counted as hard errors). Production approvals: 0. Khronos reports 0 errors and 9516 warnings; warnings remain recorded and are not engine-parity approval.
 
 | Asset | Structural result | Errors | Open gates |
 | --- | --- | ---: | ---: |
@@ -33,6 +33,23 @@ Generated 2026-10-13T20:08:58.849Z; source revision 4794c8ed0292878cd8d5cefe1998
 | oath-07-sapseed-staff | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 16 |
 | prod-o08-poison-saber | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
 | prod-o08-alchemical-crossbow | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 17 |
+| asset-o09-n-architecture-family__foundation-plinth__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__floor-bay__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__solid-wall__candidate-r01 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__window-wall__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__inside-corner__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__outside-corner__candidate-r01 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__door-frame__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__roof-bay__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__stair-flight__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__ramp-run__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__parapet__candidate-r01 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__service-chase__candidate-r01 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__public-colonnade__candidate-r01 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__shade-canopy__candidate-r03 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 13 |
+| asset-o09-n-architecture-family__clinic-threshold__candidate-r01 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__quiet-portico__candidate-r01 | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 14 |
+| asset-o09-n-architecture-family__daylight-baffle__candidate-r03 | CANDIDATE_INCOMPLETE_MISSING_REQUIRED_COLLISION | 0 | 15 |
 | oath-09-lotus-short-sword | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 15 |
 | oath-09-radiant-lotus-staff | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 15 |
 | oath-10-paired-gravity-flail | STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN | 0 | 16 |

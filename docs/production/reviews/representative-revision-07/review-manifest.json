@@ -1,0 +1,82 @@
+{
+  "status": "UNAPPROVED_REVIEW_ONLY",
+  "productionPromotion": false,
+  "previousReview": "representative-revision-06",
+  "entries": [
+    {
+      "id": "kiln-ninja-v13",
+      "title": "Kiln ninja V13 \u2014 combined ear/hair repair, unapproved",
+      "references": [
+        90,
+        60
+      ],
+      "changes": "Rounded ear folds and fuller asymmetric hair coverage compared with V10. V13 removes the horizontal V12 tier break and shortens isolated nape tips. Two final diagnostic views.",
+      "remaining": "NOT EXACT: broad plastic-looking repeated locks, exposed crown areas, thick cord-like ear folds and persistent orbital/nasal/lower-face likeness gaps.",
+      "views": [
+        {
+          "label": "Final V13 front",
+          "path": "kiln-ninja-v13/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png"
+        },
+        {
+          "label": "Final V13 profile",
+          "path": "kiln-ninja-v13/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png"
+        },
+        {
+          "label": "Original / intermediate V12 / V13 front",
+          "path": "kiln-ninja-v13/front-comparison.png"
+        },
+        {
+          "label": "Original / intermediate V12 / V13 profile",
+          "path": "kiln-ninja-v13/profile-comparison.png"
+        }
+      ],
+      "sources": [
+        "kiln-ninja-v13/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.blend",
+        "kiln-ninja-v13/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-090/original.png",
+          "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+        },
+        {
+          "path": "assets/references/reference-060/original.png",
+          "sha256": "654a8acda2f430f72f92d0c0a45cdc50e64c0dd00fbb37f12b270fbb8815d788"
+        }
+      ]
+    },
+    {
+      "id": "fault-v12",
+      "title": "Fault blade V12 \u2014 aperture/depth repair, unapproved",
+      "references": [
+        53
+      ],
+      "changes": "Broader crystal aperture, less uniform profile plate depth and corrected pointed tip. Two final diagnostic views.",
+      "remaining": "NOT EXACT: continuous flat crystal strip, broad tiled stone terraces, bulky cuff guard, prism pommel and regular grip remain below source construction.",
+      "views": [
+        {
+          "label": "Final V12 front",
+          "path": "fault-v12/amethyst-short-blade/matched-front-review.png"
+        },
+        {
+          "label": "Final V12 profile",
+          "path": "fault-v12/amethyst-short-blade/matched-profile-review.png"
+        },
+        {
+          "label": "Original / V11 / V12 comparison",
+          "path": "fault-v12/comparison-reference-v11-v12.png"
+        }
+      ],
+      "sources": [
+        "fault-v12/amethyst-short-blade/source.blend",
+        "fault-v12/amethyst-short-blade/review.glb"
+      ],
+      "referenceFiles": [
+        {
+          "path": "assets/references/reference-053/original.png",
+          "sha256": "63d522b782814d275e125df0e4ba298980bae7e3db719a3c3cf1757f74c8882b"
+        }
+      ]
+    }
+  ]
+}

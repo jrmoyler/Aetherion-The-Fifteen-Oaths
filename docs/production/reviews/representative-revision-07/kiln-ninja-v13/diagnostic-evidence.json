@@ -1,0 +1,229 @@
+{
+  "triangles": {
+    "glb": 57284,
+    "lod1": 34942,
+    "lod2": 19476,
+    "collision": 76
+  },
+  "rig": {
+    "vertices": 29669,
+    "multiInfluenceVertices": 1473,
+    "unweightedVertices": 0,
+    "maximumWeightSumError": 2.9802322387695312e-08,
+    "boneCount": 38,
+    "boneNames": [
+      "finger1.L",
+      "finger1_tip.L",
+      "finger2.L",
+      "finger2_tip.L",
+      "finger3.L",
+      "finger3_tip.L",
+      "finger4.L",
+      "finger4_tip.L",
+      "thumb.L",
+      "finger1.R",
+      "finger1_tip.R",
+      "finger2.R",
+      "finger2_tip.R",
+      "finger3.R",
+      "finger3_tip.R",
+      "finger4.R",
+      "finger4_tip.R",
+      "thumb.R",
+      "root",
+      "pelvis",
+      "spine",
+      "chest",
+      "neck",
+      "head",
+      "clavicle.L",
+      "upper_arm.L",
+      "forearm.L",
+      "hand.L",
+      "thigh.L",
+      "shin.L",
+      "foot.L",
+      "clavicle.R",
+      "upper_arm.R",
+      "forearm.R",
+      "hand.R",
+      "thigh.R",
+      "shin.R",
+      "foot.R"
+    ],
+    "socketNames": [
+      "grip_primary",
+      "cast_origin",
+      "hit_reference",
+      "stow"
+    ],
+    "evaluatedPoseChecks": [
+      {
+        "clip": "idle_breath",
+        "frame": 1,
+        "finiteVertices": true,
+        "movedVertexCount": 0,
+        "maximumDisplacementMeters": 1.228781230931777e-07,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "idle_breath",
+        "frame": 13,
+        "finiteVertices": true,
+        "movedVertexCount": 24311,
+        "maximumDisplacementMeters": 0.009089451053577322,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "idle_breath",
+        "frame": 24,
+        "finiteVertices": true,
+        "movedVertexCount": 24282,
+        "maximumDisplacementMeters": 0.000608082287678398,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "idle_breath",
+        "frame": 37,
+        "finiteVertices": true,
+        "movedVertexCount": 24311,
+        "maximumDisplacementMeters": 0.009068408585907087,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "idle_breath",
+        "frame": 48,
+        "finiteVertices": true,
+        "movedVertexCount": 0,
+        "maximumDisplacementMeters": 1.228781230931777e-07,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "walk_in_place",
+        "frame": 1,
+        "finiteVertices": true,
+        "movedVertexCount": 29669,
+        "maximumDisplacementMeters": 0.10522932909866398,
+        "footMinimumZmeters": {
+          "L": 0.012889072299003601,
+          "R": 0.012889072299003601
+        }
+      },
+      {
+        "clip": "walk_in_place",
+        "frame": 9,
+        "finiteVertices": true,
+        "movedVertexCount": 29669,
+        "maximumDisplacementMeters": 0.2641137392271688,
+        "footMinimumZmeters": {
+          "L": 0.08194588869810104,
+          "R": 0.009036971256136894
+        }
+      },
+      {
+        "clip": "walk_in_place",
+        "frame": 16,
+        "finiteVertices": true,
+        "movedVertexCount": 29669,
+        "maximumDisplacementMeters": 0.12617881823289284,
+        "footMinimumZmeters": {
+          "L": 0.020077388733625412,
+          "R": 0.01276032067835331
+        }
+      },
+      {
+        "clip": "walk_in_place",
+        "frame": 25,
+        "finiteVertices": true,
+        "movedVertexCount": 29669,
+        "maximumDisplacementMeters": 0.26299951270247585,
+        "footMinimumZmeters": {
+          "L": 0.009101908653974533,
+          "R": 0.08126334846019745
+        }
+      },
+      {
+        "clip": "walk_in_place",
+        "frame": 32,
+        "finiteVertices": true,
+        "movedVertexCount": 29669,
+        "maximumDisplacementMeters": 0.10522932909866398,
+        "footMinimumZmeters": {
+          "L": 0.012889072299003601,
+          "R": 0.012889072299003601
+        }
+      },
+      {
+        "clip": "cast_release",
+        "frame": 1,
+        "finiteVertices": true,
+        "movedVertexCount": 0,
+        "maximumDisplacementMeters": 1.228781230931777e-07,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "cast_release",
+        "frame": 13,
+        "finiteVertices": true,
+        "movedVertexCount": 24311,
+        "maximumDisplacementMeters": 0.580453846764514,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "cast_release",
+        "frame": 24,
+        "finiteVertices": true,
+        "movedVertexCount": 24311,
+        "maximumDisplacementMeters": 0.7362074602891381,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "cast_release",
+        "frame": 37,
+        "finiteVertices": true,
+        "movedVertexCount": 24311,
+        "maximumDisplacementMeters": 0.4821438907640532,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      },
+      {
+        "clip": "cast_release",
+        "frame": 48,
+        "finiteVertices": true,
+        "movedVertexCount": 0,
+        "maximumDisplacementMeters": 1.228781230931777e-07,
+        "footMinimumZmeters": {
+          "L": 0.014000002294778824,
+          "R": 0.014000002294778824
+        }
+      }
+    ]
+  },
+  "scope": "Two actual unmasked CPU renders; no visual acceptance. Body/rig retained from V5 except head geometry."
+}

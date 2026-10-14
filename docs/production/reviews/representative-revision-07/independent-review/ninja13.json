@@ -1,0 +1,71 @@
+{
+  "status": "NOT_EXACT_EAR_AND_HAIR_STRUCTURE_IMPROVED",
+  "candidate": "Kiln ninja V13 final pass2 combined ear/hair checkpoint",
+  "scope": "Parent review05 read first; actual original090, publishedV10 comparison, finalV13 views and V12/V13 comparisons inspected individually. No engine rerun or candidate modification.",
+  "parentReviewSha256": "28fb4d59314f3c8f229b68103cffa904728d62a02219e69898c46556ac2da49c",
+  "frozenManifestSha256": "ca7ed8bc730fa472302c51a613db15a224ba14bf52064805720039a9d01f7395",
+  "frozenFiles": 30,
+  "frozenFileMismatches": 0,
+  "inspectedImages": [
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/assets/references/reference-090/original.png",
+      "bytes": 2129998,
+      "sha256": "10849ac503bdeaf98636a5cad8b2bb8c9d6da593107bc3e624c0251c980858aa"
+    },
+    {
+      "path": "/workspace/Aetherion-The-Fifteen-Oaths/docs/production/reviews/representative-revision-06/kiln-ninja-v10/profile-comparison.png",
+      "bytes": 727688,
+      "sha256": "375b8717cbca843863ddbfaec0e233a7ab58fbe70549d8a2a9bb050bcc3db32a"
+    },
+    {
+      "path": "/tmp/ninja-v13/front-comparison.png",
+      "bytes": 724963,
+      "sha256": "42f424008899f2a7c1f2cbdbef32462187d1d6c04429e64f032193f8f637d446"
+    },
+    {
+      "path": "/tmp/ninja-v13/profile-comparison.png",
+      "bytes": 780651,
+      "sha256": "77dffb866d0252ae12bc98b00d25452cda52cfafd537d8465016f175e081a7c5"
+    },
+    {
+      "path": "/tmp/ninja-v13/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-face_profile.png",
+      "bytes": 799949,
+      "sha256": "8db0dbd014d8386590dd684d926c493cd61499cfc38abf73a8a7af0a2054debd"
+    },
+    {
+      "path": "/tmp/ninja-v13/kiln-ninja-ensemble-candidate/kiln-ninja-ensemble-candidate-unmasked-portrait.png",
+      "bytes": 810904,
+      "sha256": "ba15c7edb85ad01cb4d3891384dcd86ceed739f9ee768c516ef1974b2391f739"
+    }
+  ],
+  "improvements": [
+    "Compared with V10, rounded ear helix/concha/lobe forms replace the polygonal rim.",
+    "Hair has fuller connected side/back coverage and a more asymmetric front sweep than V10.",
+    "V13 removes the horizontal tier break visible in V12 and shortens isolated long nape tips."
+  ],
+  "remaining": [
+    {
+      "priority": 1,
+      "area": "Hair hierarchy",
+      "finding": "Broad smooth plastic ribbons, repeated rounded edges, exposed crown/cap areas and oversized curls/ridges remain. Source finer irregular interleaved strand hierarchy is missing.",
+      "nextRepair": "Vary split/merge hierarchy, cross sections and connecting overlaps without recreating tier seams."
+    },
+    {
+      "priority": 1,
+      "area": "Ear anatomy",
+      "finding": "Thick regular cord-like helix/inner folds surround a simple cavity; front protrusions remain abrupt.",
+      "nextRepair": "Vary helix thickness and soften fold junctions into a continuous asymmetric surface."
+    },
+    {
+      "priority": 1,
+      "area": "Retained face likeness",
+      "finding": "Narrow cut-like eye openings, pinched corners, small bright side-eye sliver, weak nasal tip/ala, nostril patches and simple mouth/chin planes remain.",
+      "nextRepair": "Preserve eye containment while refining connected orbital/nasal/lower-face planes."
+    }
+  ],
+  "decision": "Visible combined ear/hair repair, still unapproved two-view diagnostic. No full-body/cape/animation/hand-fit certification.",
+  "limitations": [
+    "Unmatched cameras/lighting and collar-obscured contours prohibit precise ratio claims.",
+    "Import success remains separate from GPU appearance and likeness."
+  ]
+}

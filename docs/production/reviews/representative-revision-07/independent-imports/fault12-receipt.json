@@ -1,0 +1,80 @@
+{
+  "scope": "Frozen review assets only; real CPU/headless imports, no GPU/material-render/appearance/collision or gameplay approval",
+  "inputs": {
+    "/tmp/aetherion-fault-review-v12/amethyst-short-blade/source.blend": {
+      "sha256": "00f0a18351d2e92c47975c63b97a32947f7bb911a865bf37e1527d43870c3086",
+      "bytes": 5670352
+    },
+    "/tmp/aetherion-fault-review-v12/amethyst-short-blade/review.glb": {
+      "sha256": "63e190f7a2499a59a92f5662e4f33553bb6f2ea3fd6316f33e1b6c86d6e31a9c",
+      "bytes": 4821128
+    }
+  },
+  "inputsUnchanged": true,
+  "commands": [
+    {
+      "label": "glb",
+      "command": [
+        "node",
+        "/tmp/aetherion-revision05-import-checks/check-glb.mjs",
+        "/tmp/aetherion-revision05-import-checks/fault12-inputs.json",
+        "/tmp/aetherion-revision05-import-checks/fault12-glb.json"
+      ],
+      "returncode": 0,
+      "seconds": 0.267,
+      "log": "/tmp/aetherion-revision05-import-checks/fault12-glb.log"
+    },
+    {
+      "label": "blender",
+      "command": [
+        "blender",
+        "-b",
+        "-t",
+        "2",
+        "--python",
+        "/tmp/aetherion-revision05-import-checks/check-blender.py",
+        "--",
+        "/tmp/aetherion-revision05-import-checks/fault12-inputs.json",
+        "/tmp/aetherion-revision05-import-checks/fault12-blender.json"
+      ],
+      "returncode": 0,
+      "seconds": 1.569,
+      "log": "/tmp/aetherion-revision05-import-checks/fault12-blender.log"
+    },
+    {
+      "label": "godot-0",
+      "command": [
+        "godot",
+        "--headless",
+        "--path",
+        "/tmp/aetherion-revision05-import-checks",
+        "--script",
+        "/tmp/aetherion-revision05-import-checks/godot_import.gd",
+        "--",
+        "/tmp/aetherion-fault-review-v12/amethyst-short-blade/review.glb"
+      ],
+      "returncode": 0,
+      "seconds": 0.243,
+      "log": "/tmp/aetherion-revision05-import-checks/fault12-godot-0.log"
+    }
+  ],
+  "godot": [
+    {
+      "path": "/tmp/aetherion-fault-review-v12/amethyst-short-blade/review.glb",
+      "sha256": "63e190f7a2499a59a92f5662e4f33553bb6f2ea3fd6316f33e1b6c86d6e31a9c",
+      "returncode": 0,
+      "fullLog": "/tmp/aetherion-revision05-import-checks/fault12-godot-0.log",
+      "result": {
+        "animations": 0,
+        "materials": 7,
+        "meshes": 147,
+        "scene_instantiated": true,
+        "skins": 0,
+        "version": "4.6.3-stable (official)"
+      },
+      "success": true
+    }
+  ],
+  "allCommandsPassed": true,
+  "allGodotImportsPassed": true
+}

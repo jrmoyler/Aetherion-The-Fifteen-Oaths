@@ -1,0 +1,18 @@
+{
+  "scope": "Static world bounds only; no animation expected, per-vertex identity not established",
+  "coordinateMapping": "glTF XYZ -> Blender (x,-z,y), no fitted offset/scale",
+  "toleranceMeters": 0.0001,
+  "samples": [
+    {
+      "path": "/tmp/aetherion-fault-review-v12/amethyst-short-blade/source.blend",
+      "maxBoundErrorMeters": 2.3283064365386963e-10,
+      "negativeFixture1cmTranslationRejected": true
+    },
+    {
+      "path": "/tmp/aetherion-fault-review-v12/amethyst-short-blade/review.glb",
+      "maxBoundErrorMeters": 2.3283064365386963e-10,
+      "negativeFixture1cmTranslationRejected": true
+    }
+  ],
+  "status": "SCOPED_STATIC_BOUND_CHECK_PASS"
+}
