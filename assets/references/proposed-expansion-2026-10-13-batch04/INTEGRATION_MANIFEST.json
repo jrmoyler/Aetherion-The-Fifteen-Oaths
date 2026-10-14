@@ -1,0 +1,1624 @@
+{
+  "schema_version": "1.0.0",
+  "batch_id": "reference-expansion-batch04",
+  "status": "FROZEN_REVIEWED_PROPOSALS_WITH_UNRESOLVED_QA",
+  "distinct_concepts": 12,
+  "image_versions": 22,
+  "repository": "jrmoyler/Aetherion-The-Fifteen-Oaths",
+  "source_commit": "04c33f6c4ff51f843eca490a3e3260e8311ed2b8",
+  "external_path_basis": "Repository-root paths with pinned URLs. Local file/prompt/QA paths are package-relative.",
+  "import_destination": "assets/references/proposed-expansion-2026-10-13-batch04/",
+  "source_groups": [
+    {
+      "source_manifest": "NORTHERN_CIVILIAN_GROUP_MANIFEST.json",
+      "source_sha256": "5a7a8a57032a1d10c78609f9eed7dfd370de940e5d42ef59b482c1634a1fb611"
+    },
+    {
+      "source_manifest": "MANIFEST_ESOTERIC_CIVILIANS_04_06.json",
+      "source_sha256": "ff0df550afd7c2723859f5a135ad426c23488229e05e4cb57afd8004e76d75d1"
+    },
+    {
+      "source_manifest": "BATCH04_NORTHERN_NATURAL_MANIFEST.json",
+      "source_sha256": "be7fc953bf4e83ae0aa34eda847155ef1f79c8c395b654140819fd74d394bf68"
+    },
+    {
+      "source_manifest": "BATCH04_NATURAL_10_12_MANIFEST.json",
+      "source_sha256": "f8de265ee4743bcebcf622c74cd64cd7b734ad91cb23c37427c45a3bf7eb8e1b"
+    }
+  ],
+  "preservation": {
+    "original114_unchanged": true,
+    "prior_frozen_packages_unchanged": true,
+    "all_22_versions_preserved": true
+  },
+  "cumulative_generated_proposals": {
+    "concepts": 58,
+    "versions": 74,
+    "approved_coverage_added": 0
+  },
+  "coverage_warning": "One occupational outfit or natural species per listed canonical record; no complete family coverage or model acceptance. All preferred versions retain QA issues.",
+  "records": [
+    {
+      "concept_id": "batch04_01_rime_civilian",
+      "canonical_id": "asset-o02-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o02-i-civilian-clothing-family",
+      "oath_id": "oath-02",
+      "version": "v01",
+      "file": "generated/batch04_01_rime_civilian.png",
+      "sha256": "f02c9abc99daadca83284bfddc318f80180c9e2de92daca2915bb178d0c456d6",
+      "bytes": 2618184,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_01_rime_civilian.submitted_prompt.txt",
+      "actual_prompt_sha256": "398642f21fedff506df93178f154906a7fb3e6e38f0e47987d20ecaf079955fd",
+      "planning_prompt_file": "planning-prompts/batch04_01_rime_civilian.prompt.txt",
+      "planning_prompt_sha256": "691b8f04d98aaf80a06b6a8d7e17fe1ab1433c6fb8591e1255688a29a11a943e",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/156"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/1"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-112/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-112/original.png",
+          "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+          "git_blob_sha1": "44953dbac3d2b6a19adfafbb6b64d91b7739d72b"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from RIME ARCHIVE civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "quilted felt",
+            "dark leather",
+            "rime laminate"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "charcoal; chalk white; pale ice blue",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Quilted compact hood versus tall narrow scholar; laminated translucent edges and angular folio stacks",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Folio vault, cryostorage drawer, insulated reading desk"
+      },
+      "proposed_new_details": "Compact adult with a wide quilted shoulder yoke, hip-length charcoal felt coat, pale fold-back cuffs, reinforced soft elbows and a detachable broad folio sling. Straight loose trousers and flexible insulated boots. All soft clothing; no icy plate armor or scholar folio hip rack.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_01_rime_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_01_rime_civilian",
+      "canonical_id": "asset-o02-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o02-i-civilian-clothing-family",
+      "oath_id": "oath-02",
+      "version": "v02",
+      "file": "generated/batch04_01_rime_civilian_v02.png",
+      "sha256": "0966490cc735e63c4cbe9c11714baf85d9d237e8523e94872f71891a3e0397fd",
+      "bytes": 2315295,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_01_rime_civilian_v02.submitted_prompt.txt",
+      "actual_prompt_sha256": "b1e1d84daaa39d65e54dbea37b61e3306ff14ce57b4d3e349cbc55c363632b86",
+      "planning_prompt_file": "planning-prompts/batch04_01_rime_civilian.prompt.txt",
+      "planning_prompt_sha256": "691b8f04d98aaf80a06b6a8d7e17fe1ab1433c6fb8591e1255688a29a11a943e",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/156"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/1"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-112/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-112/original.png",
+          "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+          "git_blob_sha1": "44953dbac3d2b6a19adfafbb6b64d91b7739d72b"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from RIME ARCHIVE civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "quilted felt",
+            "dark leather",
+            "rime laminate"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "charcoal; chalk white; pale ice blue",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Quilted compact hood versus tall narrow scholar; laminated translucent edges and angular folio stacks",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Folio vault, cryostorage drawer, insulated reading desk"
+      },
+      "proposed_new_details": "Compact adult with a wide quilted shoulder yoke, hip-length charcoal felt coat, pale fold-back cuffs, reinforced soft elbows and a detachable broad folio sling. Straight loose trousers and flexible insulated boots. All soft clothing; no icy plate armor or scholar folio hip rack.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_01_rime_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_02_fault_civilian",
+      "canonical_id": "asset-o05-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o05-i-civilian-clothing-family",
+      "oath_id": "oath-05",
+      "version": "v01",
+      "file": "generated/batch04_02_fault_civilian.png",
+      "sha256": "9bb258b89f0c8d408656deb592054ce8de6dcea793712a0bf65651bc0aa928f7",
+      "bytes": 2401616,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_02_fault_civilian.submitted_prompt.txt",
+      "actual_prompt_sha256": "3bc98a77d9d674106c204f9727bfb8401d5a50cdd8f6f167a29cd589b3422a67",
+      "planning_prompt_file": "planning-prompts/batch04_02_fault_civilian.prompt.txt",
+      "planning_prompt_sha256": "6790c328cf1b3f260bd3e94aacc096b3f892101de6e1f33b64528750dcdc0600",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/258"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/4"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-109/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-109/original.png",
+          "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+          "git_blob_sha1": "409b3cb3660e3e2e4a330cd32304bf96a9720dcb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from FAULT CHOIR civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "layered shale",
+            "sandstone",
+            "leather",
+            "raw amethyst"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "shale gray; sandstone tan; amethyst violet",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Squared stocky worker silhouettes, stacked slabs and prismatic amethyst inclusions",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Stone saw, resonant survey frame, crystal sorting table"
+      },
+      "proposed_new_details": "Broad adult in a square-cut sandstone canvas bib apron with leather-bound replaceable pocket strips, rolled sleeves, wide soft knee patches and plain low work shoes. A tiny violet thread tab, not crystal armor. Canvas is proposed new civilian fabric.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_02_fault_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_02_fault_civilian",
+      "canonical_id": "asset-o05-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o05-i-civilian-clothing-family",
+      "oath_id": "oath-05",
+      "version": "v02",
+      "file": "generated/batch04_02_fault_civilian_v02.png",
+      "sha256": "1b989b30e9faa137c05b94c3d8ef91eaf19656cbdfcb2ba2d8f6b14ca82ca245",
+      "bytes": 2224764,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_02_fault_civilian_v02.submitted_prompt.txt",
+      "actual_prompt_sha256": "9a250e8c82aa1268addb819629c77401767102d118029c4f16b3aa9f5c7aa152",
+      "planning_prompt_file": "planning-prompts/batch04_02_fault_civilian.prompt.txt",
+      "planning_prompt_sha256": "6790c328cf1b3f260bd3e94aacc096b3f892101de6e1f33b64528750dcdc0600",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/258"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/4"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-109/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-109/original.png",
+          "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+          "git_blob_sha1": "409b3cb3660e3e2e4a330cd32304bf96a9720dcb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from FAULT CHOIR civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "layered shale",
+            "sandstone",
+            "leather",
+            "raw amethyst"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "shale gray; sandstone tan; amethyst violet",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Squared stocky worker silhouettes, stacked slabs and prismatic amethyst inclusions",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Stone saw, resonant survey frame, crystal sorting table"
+      },
+      "proposed_new_details": "Broad adult in a square-cut sandstone canvas bib apron with leather-bound replaceable pocket strips, rolled sleeves, wide soft knee patches and plain low work shoes. A tiny violet thread tab, not crystal armor. Canvas is proposed new civilian fabric.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_02_fault_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_03_reed_civilian",
+      "canonical_id": "asset-o06-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o06-i-civilian-clothing-family",
+      "oath_id": "oath-06",
+      "version": "v01",
+      "file": "generated/batch04_03_reed_civilian.png",
+      "sha256": "3ad946ce1d5f2c1686ac5922232ba76a62c9994fc790d13aba8a0905eb7bfe54",
+      "bytes": 2388630,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_03_reed_civilian.submitted_prompt.txt",
+      "actual_prompt_sha256": "a57d867117df19f7019c95f87f4f4a378971509fbbb7fbaa296bd63daa514259",
+      "planning_prompt_file": "planning-prompts/batch04_03_reed_civilian.prompt.txt",
+      "planning_prompt_sha256": "9d569597ad0a8191907f9a8527afc747c11497e517462e865430b557d09a32bd",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/292"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/5"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-108/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-108/original.png",
+          "sha256": "648ae9817a827d2b76653676927bc0d5d133388e465661976b2bd41f8f9bc5e6",
+          "git_blob_sha1": "18953463df1868d984c332b275de393465e3f3ea"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from REED RESONANCE civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "woven linen",
+            "dry bamboo",
+            "carved resonator wood"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "ivory; weathered wood; vermilion accent",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Narrow exposed silhouettes, U-shaped resonator collar, beak mask and long streaming ribbons",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Pipe tuning bench, sail loom, wind vane workstand"
+      },
+      "proposed_new_details": "Tall adult with long but restrained ivory linen smock, fitted roll-up sleeves, split side gussets, short vermilion waist tie tucked away, and removable flat shuttle pocket on anatomical left. No giant resonator collar, mask or trailing combat ribbons.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_03_reed_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_03_reed_civilian",
+      "canonical_id": "asset-o06-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o06-i-civilian-clothing-family",
+      "oath_id": "oath-06",
+      "version": "v02",
+      "file": "generated/batch04_03_reed_civilian_v02.png",
+      "sha256": "26c53ecb0a9a8fc552ab04cf921f00c01dfe1eb2bcc3dc6d54d6f1fb448fb6ca",
+      "bytes": 2404373,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_03_reed_civilian_v02.submitted_prompt.txt",
+      "actual_prompt_sha256": "9b9c422e70265a876855897c864751d0d0d785f5127b5c139af8f8841acba948",
+      "planning_prompt_file": "planning-prompts/batch04_03_reed_civilian.prompt.txt",
+      "planning_prompt_sha256": "9d569597ad0a8191907f9a8527afc747c11497e517462e865430b557d09a32bd",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/292"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/5"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-108/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-108/original.png",
+          "sha256": "648ae9817a827d2b76653676927bc0d5d133388e465661976b2bd41f8f9bc5e6",
+          "git_blob_sha1": "18953463df1868d984c332b275de393465e3f3ea"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from REED RESONANCE civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "woven linen",
+            "dry bamboo",
+            "carved resonator wood"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "ivory; weathered wood; vermilion accent",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Narrow exposed silhouettes, U-shaped resonator collar, beak mask and long streaming ribbons",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Pipe tuning bench, sail loom, wind vane workstand"
+      },
+      "proposed_new_details": "Tall adult with long but restrained ivory linen smock, fitted roll-up sleeves, split side gussets, short vermilion waist tie tucked away, and removable flat shuttle pocket on anatomical left. No giant resonator collar, mask or trailing combat ribbons.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_03_reed_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_04_bitterglass_civilian",
+      "canonical_id": "asset-o08-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o08-i-civilian-clothing-family",
+      "oath_id": "oath-08",
+      "version": "v01",
+      "file": "generated/batch04_04_bitterglass_civilian.png",
+      "sha256": "e1f230772c8bf2b1a9d734a18fea53f81137f76ac20370ed7ec9d4ed515c8f80",
+      "bytes": 2349440,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_04_bitterglass_civilian.prompt.txt",
+      "actual_prompt_sha256": "5037cdc3119b84df5958b97ef02c7a627324d767d74c7aafc7cc76a1c5cda30f",
+      "planning_prompt_file": "planning-prompts/batch04_04_bitterglass_civilian.prompt.txt",
+      "planning_prompt_sha256": "c931c62d3b230aa321c9a9d7a191b3ca1552455343d9aefabb033c7c204f7de0",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/360"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/7"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-106/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-106/original.png",
+          "sha256": "7e584208b195559e3302a6cf4416e6abf44c063999057f1df25b2d97bbdff227",
+          "git_blob_sha1": "02ac0001f0108d9747379b9791d27f9bff78b345"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from BITTERGLASS GUILD civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "oilskin",
+            "leather",
+            "pitted brass",
+            "sealed glass"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "oil-black; pitted brass; yellow-green reagent",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Compact respirator fieldworker and tall paired-reservoir alchemist; enclosed glass chambers and valves",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Retort bench, antidote cabinet, sealed spill pallet"
+      },
+      "proposed_new_details": "Medium-height adult in plum work tunic with a plain dark oilskin wrap apron, one side overlap, close cuffs, small pitted-brass fasteners and removable empty padded glass-carrier holster. Leather loops and no chemical canister backpack or combat respirator.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_04_bitterglass_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_04_bitterglass_civilian",
+      "canonical_id": "asset-o08-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o08-i-civilian-clothing-family",
+      "oath_id": "oath-08",
+      "version": "v02",
+      "file": "generated/batch04_04_bitterglass_civilian_v02.png",
+      "sha256": "96ad14cd55d39b1188ef8f65716f9f6ef4e4415098f784ee26b762ba92a1bb5c",
+      "bytes": 2216134,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_04_bitterglass_civilian_v02.prompt.txt",
+      "actual_prompt_sha256": "ddd3503dd415bee8029fff22fa6692a449097af79f65f776a9c1a6df8255141a",
+      "planning_prompt_file": "planning-prompts/batch04_04_bitterglass_civilian.prompt.txt",
+      "planning_prompt_sha256": "c931c62d3b230aa321c9a9d7a191b3ca1552455343d9aefabb033c7c204f7de0",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/360"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/7"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-106/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-106/original.png",
+          "sha256": "7e584208b195559e3302a6cf4416e6abf44c063999057f1df25b2d97bbdff227",
+          "git_blob_sha1": "02ac0001f0108d9747379b9791d27f9bff78b345"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from BITTERGLASS GUILD civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "oilskin",
+            "leather",
+            "pitted brass",
+            "sealed glass"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "oil-black; pitted brass; yellow-green reagent",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Compact respirator fieldworker and tall paired-reservoir alchemist; enclosed glass chambers and valves",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Retort bench, antidote cabinet, sealed spill pallet"
+      },
+      "proposed_new_details": "Medium-height adult in plum work tunic with a plain dark oilskin wrap apron, one side overlap, close cuffs, small pitted-brass fasteners and removable empty padded glass-carrier holster. Leather loops and no chemical canister backpack or combat respirator.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_04_bitterglass_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_05_observatory_civilian",
+      "canonical_id": "asset-o10-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o10-i-civilian-clothing-family",
+      "oath_id": "oath-10",
+      "version": "v01",
+      "file": "generated/batch04_05_observatory_civilian.png",
+      "sha256": "64b5e43d5b97d60e63fbc9596a19d8505e3cf6569d189fde6bcf234a9ee85fc4",
+      "bytes": 2544039,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_05_observatory_civilian.prompt.txt",
+      "actual_prompt_sha256": "a1b5df98e648711e61fac6d1dcbadc7dbfc187f209e992869cefbae84c8f1708",
+      "planning_prompt_file": "planning-prompts/batch04_05_observatory_civilian.prompt.txt",
+      "planning_prompt_sha256": "dcb34cb4f9dd02a525794310038a1885f2b8132bc131994bb4f73f94e15de6c9",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/428"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/9"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-104/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-104/original.png",
+          "sha256": "b9b3e660eaec9d600d60016238a0ebd4c081cf6ad73c078612b357f3f037c3ef",
+          "git_blob_sha1": "6b01814ab1be25de49f9dd5ae5e989ec1f4f1433"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from TIDAL OBSERVATORY civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "meteor iron",
+            "wool",
+            "violet enamel",
+            "brushed metal"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "midnight indigo; charcoal; violet; antique silver",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Heavy crescent armor and weighted bell-coat scholar; offset orbit rings and spherical counterweights",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Navigation table, balance calibration stand, suspended lens rack"
+      },
+      "proposed_new_details": "Short round adult with a cropped indigo wool jacket over wide charcoal trousers, a curved seam yoke, fitted sleeves and a detachable soft lens pouch fixed at anatomical right. Small dull silver fasteners and muted violet piping, no weighted sorcerer hem or orbit collar.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_05_observatory_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_05_observatory_civilian",
+      "canonical_id": "asset-o10-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o10-i-civilian-clothing-family",
+      "oath_id": "oath-10",
+      "version": "v02",
+      "file": "generated/batch04_05_observatory_civilian_v02.png",
+      "sha256": "5d142e58feb2fe93aa05a999f2599e05a02e2d403faa67f3713075a4ff82ddf5",
+      "bytes": 2344823,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_05_observatory_civilian_v02.prompt.txt",
+      "actual_prompt_sha256": "ae6163f785435560ebd106a9da412175f21c4e44983d6154a915e82a3df228bd",
+      "planning_prompt_file": "planning-prompts/batch04_05_observatory_civilian.prompt.txt",
+      "planning_prompt_sha256": "dcb34cb4f9dd02a525794310038a1885f2b8132bc131994bb4f73f94e15de6c9",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/428"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/9"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-104/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-104/original.png",
+          "sha256": "b9b3e660eaec9d600d60016238a0ebd4c081cf6ad73c078612b357f3f037c3ef",
+          "git_blob_sha1": "6b01814ab1be25de49f9dd5ae5e989ec1f4f1433"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from TIDAL OBSERVATORY civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "meteor iron",
+            "wool",
+            "violet enamel",
+            "brushed metal"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "midnight indigo; charcoal; violet; antique silver",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Heavy crescent armor and weighted bell-coat scholar; offset orbit rings and spherical counterweights",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Navigation table, balance calibration stand, suspended lens rack"
+      },
+      "proposed_new_details": "Short round adult with a cropped indigo wool jacket over wide charcoal trousers, a curved seam yoke, fitted sleeves and a detachable soft lens pouch fixed at anatomical right. Small dull silver fasteners and muted violet piping, no weighted sorcerer hem or orbit collar.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_05_observatory_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_06_missing_civilian",
+      "canonical_id": "asset-o11-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o11-i-civilian-clothing-family",
+      "oath_id": "oath-11",
+      "version": "v01",
+      "file": "generated/batch04_06_missing_civilian.png",
+      "sha256": "1fe6e914a4497433745724ab24319558edc81e2ca13782ed3d3e42b1ba26154f",
+      "bytes": 2486505,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_06_missing_civilian.prompt.txt",
+      "actual_prompt_sha256": "71b09b55a4e02eeaa0fce8cb90c7aff1fc5cb00c737da28ec64f2bee146fb0d4",
+      "planning_prompt_file": "planning-prompts/batch04_06_missing_civilian.prompt.txt",
+      "planning_prompt_sha256": "6cf9386fa04c7b5ade87d00421b1f7602617b62ab4b35455b62e774eacd8a42b",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/462"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/10"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-103/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-103/original.png",
+          "sha256": "aedd82f2c659cda63c856a27d6db7674793f17efd0d08d833b2564c3223ffa5d",
+          "git_blob_sha1": "4e890231b5423323cc8bb43cf7ecf11b4265d1d1"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from THE MISSING COURT civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "matte cloth",
+            "worn dark metal",
+            "black velvet"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "ink black; charcoal; pale silver; muted crimson detail",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Narrow absent-edge silhouettes, high black collar, half mask and notched segmented focus",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Archive seal desk, concealed compartment, threshold survey frame"
+      },
+      "proposed_new_details": "Slender adult with knee-length charcoal matte overshirt, low folded collar, offset pale-silver cloth-covered closures and a small muted-crimson inner facing. Soft split hem with intact finished seams, ordinary shoes and one removable seal-roll pouch. No combat mask, spikes or missing body parts.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_06_missing_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_06_missing_civilian",
+      "canonical_id": "asset-o11-i-civilian-clothing-family",
+      "baseline_asset_id": "asset-o11-i-civilian-clothing-family",
+      "oath_id": "oath-11",
+      "version": "v02",
+      "file": "generated/batch04_06_missing_civilian_v02.png",
+      "sha256": "0c802350ddff635abad1eb86098c8bf257e11a41c99d790a1bd7f4dff0a1393d",
+      "bytes": 2286444,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_06_missing_civilian_v02.prompt.txt",
+      "actual_prompt_sha256": "49339b450496e158e7057b981bb354776dabcb63e01e59674fc68aac625b2ebe",
+      "planning_prompt_file": "planning-prompts/batch04_06_missing_civilian.prompt.txt",
+      "planning_prompt_sha256": "6cf9386fa04c7b5ade87d00421b1f7602617b62ab4b35455b62e774eacd8a42b",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/10_ASSET_REGISTRY/MASTER_ASSET_REGISTRY.json",
+        "sha256": "30ce765a70b0628ddd9b37544364abe365fba3a5d4a5535ba252b8da1da3314d",
+        "json_pointer": "/records/462"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/10"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-103/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-103/original.png",
+          "sha256": "aedd82f2c659cda63c856a27d6db7674793f17efd0d08d833b2564c3223ffa5d",
+          "git_blob_sha1": "4e890231b5423323cc8bb43cf7ecf11b4265d1d1"
+        }
+      ],
+      "exact_source_excerpts": {
+        "description": "PROPOSED production requirement. Civilian occupational clothing derived from THE MISSING COURT civilization and existing references. Components are a scope list, not completed assets.",
+        "gameplay_purpose": "Occupational silhouette, pockets/tools, affordable repair, readable fabric ownership",
+        "materials": {
+          "status": "PROPOSED_DERIVATIVE",
+          "families": [
+            "matte cloth",
+            "worn dark metal",
+            "black velvet"
+          ],
+          "rule": "Preserve observed material hierarchy; any new finish requires review."
+        },
+        "palette": {
+          "status": "PROPOSED_DERIVATIVE",
+          "description": "ink black; charcoal; pale silver; muted crimson detail",
+          "rule": "Preserve per-reference variants; no universal recolor or new hex palette silently approved."
+        },
+        "shape_language": "Narrow absent-edge silhouettes, high black collar, half mask and notched segmented focus",
+        "family_components": [
+          "Worker",
+          "merchant",
+          "healer/service",
+          "artisan",
+          "weather layer"
+        ],
+        "civilian_craft_context": "Archive seal desk, concealed compartment, threshold survey frame"
+      },
+      "proposed_new_details": "Slender adult with knee-length charcoal matte overshirt, low folded collar, offset pale-silver cloth-covered closures and a small muted-crimson inner facing. Soft split hem with intact finished seams, ordinary shoes and one removable seal-roll pouch. No combat mask, spikes or missing body parts.",
+      "source_ambiguities": "Occupation, body silhouette and sewing pattern are proposed extensions of a broad family, not named canonical character facts.",
+      "qa_file": "qa/batch04_06_missing_civilian.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_07_rime_natural",
+      "canonical_id": "creature-o02-natural",
+      "baseline_asset_id": "asset-o02-r-creatures-enemies-family",
+      "oath_id": "oath-02",
+      "version": "v01",
+      "file": "generated/batch04_07_rime_natural.png",
+      "sha256": "87d704585b974ca31d58653a79dcdcd22dc968db934e6bccd49f25f83179571a",
+      "bytes": 2683223,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_07_rime_natural.prompt.txt",
+      "actual_prompt_sha256": "a6fad81187baed00ec6c92a3cb8052aa1274db9f918f687781a1ba5175be865f",
+      "planning_prompt_file": "planning-prompts/batch04_07_rime_natural.prompt.txt",
+      "planning_prompt_sha256": "cf4dd9899fff9b583494ac19b592f78fc7fdaf4921b5db458782d9d3619c9b85",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/6"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/1"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-112/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-112/original.png",
+          "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+          "git_blob_sha1": "44953dbac3d2b6a19adfafbb6b64d91b7739d72b"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "rime-antler grazer",
+        "anatomy": "Four-legged grazer with broad padded feet, insulating coat and branching antlers",
+        "locomotion": "Broad-hoofed walk and short bounding trot; lowers head to sweep snow",
+        "ecology": {
+          "habitat": "Glacial vault shelves, ice pillars and dark stone archive thresholds",
+          "food_or_power": "Wind-blown grass, moss and exposed bark",
+          "niche": "Keeps snow meadows open; antler-shed minerals return to thaw pools",
+          "migration": "Descends to wind-scoured feeding slopes in deep snow; returns above thaw streams in spring"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Four legs, broad padded soles inside a split-hoof rim as an explicit proposed reconciliation of padded feet and broad-hoofed locomotion; shaggy insulating coat and one paired branching antler set. Show one proposed branch layout consistently.",
+      "source_ambiguities": "Foot padding versus hoof wording needs reviewer selection; do not silently choose an ungulate foot from real-world memory. Antler symmetry and shed state must retain a single coherent body.",
+      "qa_file": "qa/batch04_07_rime_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_07_rime_natural",
+      "canonical_id": "creature-o02-natural",
+      "baseline_asset_id": "asset-o02-r-creatures-enemies-family",
+      "oath_id": "oath-02",
+      "version": "v02",
+      "file": "generated/batch04_07_rime_natural_v02.png",
+      "sha256": "0511e14b85e028b3b0b142b060e08e688d5eb2983cce9e890cb47b900645e4ef",
+      "bytes": 2569112,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_07_rime_natural_v02.prompt.txt",
+      "actual_prompt_sha256": "7200a8beaa489e6bb8d416c7cd5ca88e56f07e70742d045b5d5c86be0c8c19eb",
+      "planning_prompt_file": "planning-prompts/batch04_07_rime_natural.prompt.txt",
+      "planning_prompt_sha256": "cf4dd9899fff9b583494ac19b592f78fc7fdaf4921b5db458782d9d3619c9b85",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/6"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/1"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-112/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-112/original.png",
+          "sha256": "d19868909333dcf43c4497a455e61a4f6b24d4872bf35e2e9df88a038de7fed1",
+          "git_blob_sha1": "44953dbac3d2b6a19adfafbb6b64d91b7739d72b"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "rime-antler grazer",
+        "anatomy": "Four-legged grazer with broad padded feet, insulating coat and branching antlers",
+        "locomotion": "Broad-hoofed walk and short bounding trot; lowers head to sweep snow",
+        "ecology": {
+          "habitat": "Glacial vault shelves, ice pillars and dark stone archive thresholds",
+          "food_or_power": "Wind-blown grass, moss and exposed bark",
+          "niche": "Keeps snow meadows open; antler-shed minerals return to thaw pools",
+          "migration": "Descends to wind-scoured feeding slopes in deep snow; returns above thaw streams in spring"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Four legs, broad padded soles inside a split-hoof rim as an explicit proposed reconciliation of padded feet and broad-hoofed locomotion; shaggy insulating coat and one paired branching antler set. Show one proposed branch layout consistently.",
+      "source_ambiguities": "Foot padding versus hoof wording needs reviewer selection; do not silently choose an ungulate foot from real-world memory. Antler symmetry and shed state must retain a single coherent body.",
+      "qa_file": "qa/batch04_07_rime_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_08_fault_natural",
+      "canonical_id": "creature-o05-natural",
+      "baseline_asset_id": "asset-o05-r-creatures-enemies-family",
+      "oath_id": "oath-05",
+      "version": "v01",
+      "file": "generated/batch04_08_fault_natural.png",
+      "sha256": "6f2428e4bf515e705985ad373289d25fd0c08cafb6546256c8f298f0f267dae6",
+      "bytes": 2893875,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_08_fault_natural.prompt.txt",
+      "actual_prompt_sha256": "be800dfa23b869f50b836fbbfdf0fd9107c7bbad3edfa6eb70e4edbfa167f4ff",
+      "planning_prompt_file": "planning-prompts/batch04_08_fault_natural.prompt.txt",
+      "planning_prompt_sha256": "d1be43062ffc88de38283300b8a481c97bf29953a3b2a1a95b884b5a4d67996b",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/24"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/4"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-109/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-109/original.png",
+          "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+          "git_blob_sha1": "409b3cb3660e3e2e4a330cd32304bf96a9720dcb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "resonance mole",
+        "anatomy": "Compact fossorial mammal, oversized digging forepaws and vibration-sensitive jaw",
+        "locomotion": "Powerful forepaw digging, low-body crawl and short reverse shuffle",
+        "ecology": {
+          "habitat": "Canyon terraces, broad lintels and crystal-seamed retaining walls",
+          "food_or_power": "Root bulbs, burrowing insects and mineral-rich clay",
+          "niche": "Aerates terrace soils and exposes safe small mineral seams without destabilizing load-bearing strata",
+          "migration": "Tracks moist strata below terraced farms; avoids engineered foundations and loud quarry faces"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Proposed four-limbed compact mammalian body, oversized forepaws, small rear feet, low furred trunk and a broad fleshy vibration-sensitive jaw. Five foredigits per paw proposed and clearly indexed. No gemstone carapace or extra Kiln limb pair.",
+      "source_ambiguities": "Limb count and digit count are proposed; reconcile in every view. Jaw sensing organ is soft anatomy, not a crystal drill. Digging contact must show the same forepaw geometry.",
+      "qa_file": "qa/batch04_08_fault_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_08_fault_natural",
+      "canonical_id": "creature-o05-natural",
+      "baseline_asset_id": "asset-o05-r-creatures-enemies-family",
+      "oath_id": "oath-05",
+      "version": "v02",
+      "file": "generated/batch04_08_fault_natural_v02.png",
+      "sha256": "0700176a06f4bc1d3f899f62d726ba5aff0a670b11916ce39fff616bb855f643",
+      "bytes": 2668697,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_08_fault_natural_v02.prompt.txt",
+      "actual_prompt_sha256": "634332d6277b4fc36b17f355ef1e18d6cdbaa1bfd13582589c6e31fd7d8c3516",
+      "planning_prompt_file": "planning-prompts/batch04_08_fault_natural.prompt.txt",
+      "planning_prompt_sha256": "d1be43062ffc88de38283300b8a481c97bf29953a3b2a1a95b884b5a4d67996b",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/24"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/4"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-109/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-109/original.png",
+          "sha256": "225476f98186b2235fa4c13508bd5c1d6254e2bca0f9c756e1e23fb1f67fc0a0",
+          "git_blob_sha1": "409b3cb3660e3e2e4a330cd32304bf96a9720dcb"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "resonance mole",
+        "anatomy": "Compact fossorial mammal, oversized digging forepaws and vibration-sensitive jaw",
+        "locomotion": "Powerful forepaw digging, low-body crawl and short reverse shuffle",
+        "ecology": {
+          "habitat": "Canyon terraces, broad lintels and crystal-seamed retaining walls",
+          "food_or_power": "Root bulbs, burrowing insects and mineral-rich clay",
+          "niche": "Aerates terrace soils and exposes safe small mineral seams without destabilizing load-bearing strata",
+          "migration": "Tracks moist strata below terraced farms; avoids engineered foundations and loud quarry faces"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Proposed four-limbed compact mammalian body, oversized forepaws, small rear feet, low furred trunk and a broad fleshy vibration-sensitive jaw. Five foredigits per paw proposed and clearly indexed. No gemstone carapace or extra Kiln limb pair.",
+      "source_ambiguities": "Limb count and digit count are proposed; reconcile in every view. Jaw sensing organ is soft anatomy, not a crystal drill. Digging contact must show the same forepaw geometry.",
+      "qa_file": "qa/batch04_08_fault_natural.json",
+      "reported_preferred_version": "v02",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_09_reed_natural",
+      "canonical_id": "creature-o06-natural",
+      "baseline_asset_id": "asset-o06-r-creatures-enemies-family",
+      "oath_id": "oath-06",
+      "version": "v01",
+      "file": "generated/batch04_09_reed_natural.png",
+      "sha256": "af3baacc8e0caae9fab6691d330749e61e65154245c22ac41f65f49e07b45f3b",
+      "bytes": 2743133,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_09_reed_natural.prompt.txt",
+      "actual_prompt_sha256": "f560e00810250386fc56dba0849c82e8dde19c16a44a7b48f3ed02e2c05dcd71",
+      "planning_prompt_file": "planning-prompts/batch04_09_reed_natural.prompt.txt",
+      "planning_prompt_sha256": "21f8fe3fdbff752ec406075351fe59515f704a432f72af8d66e4e58150ef3fbf",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/30"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/5"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-108/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-108/original.png",
+          "sha256": "648ae9817a827d2b76653676927bc0d5d133388e465661976b2bd41f8f9bc5e6",
+          "git_blob_sha1": "18953463df1868d984c332b275de393465e3f3ea"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "sail-feather climber",
+        "anatomy": "Light climber with grasping limbs, feathered membrane surfaces and balancing tail",
+        "locomotion": "Grasping-foot climb, membrane-assisted leap and feather-braked descent",
+        "ecology": {
+          "habitat": "Open cliff amphitheaters, curved acoustic fins and tensile walkways",
+          "food_or_power": "Cliff berries, insects and grass seeds",
+          "niche": "Disperses plants onto exposed ledges and nests in abandoned acoustic cavities",
+          "migration": "Follows seasonal updraft shelves; descends into quiet ravines during dangerous gusts"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Proposed four grasping limbs, one balancing tail and paired flank membranes joining forelimb to hindlimb; feather fringes along membrane edges, no separate extra wings. Light tapered torso and opposable gripping digit proposal.",
+      "source_ambiguities": "Source does not fix limb count or membrane attachment: mark these proposals. Folded and spread membranes must share attachment points and permit grip; do not duplicate the overview mechanical flying construct.",
+      "qa_file": "qa/batch04_09_reed_natural.json",
+      "reported_preferred_version": "v01",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_10_bitterglass_natural",
+      "canonical_id": "creature-o08-natural",
+      "baseline_asset_id": "asset-o08-r-creatures-enemies-family",
+      "oath_id": "oath-08",
+      "version": "v01",
+      "file": "generated/batch04_10_bitterglass_natural.png",
+      "sha256": "d164da02d09c8ae40091fea4da3bc1782e830aed2d18e4c289e11f09d0164e37",
+      "bytes": 2964636,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_10_bitterglass_natural.prompt.txt",
+      "actual_prompt_sha256": "dc64f97aafae0eab60e74fd52dcbfb5ec5edfea77ddd34db8ed49973b7c92af3",
+      "planning_prompt_file": "planning-prompts/batch04_10_bitterglass_natural.prompt.txt",
+      "planning_prompt_sha256": "c8d07c302da08f97fc34b0855b153d6dceb85a11bd47e0c6f30f777c6fa8b990",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/42"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/7"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-106/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-106/original.png",
+          "sha256": "7e584208b195559e3302a6cf4416e6abf44c063999057f1df25b2d97bbdff227",
+          "git_blob_sha1": "02ac0001f0108d9747379b9791d27f9bff78b345"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "filter-shelled crawler",
+        "anatomy": "Low many-legged wetland crawler with porous filter shell and protected breathing channels",
+        "locomotion": "Many-legged creeping over mud; shell seals during sudden chemical change",
+        "ecology": {
+          "habitat": "Greenhouse arcades, isolated reaction towers and bounded treatment pools",
+          "food_or_power": "Algae, suspended organic matter and decaying reed fibers",
+          "niche": "Filters shallow pools; stores contaminants in shed shell layers that require safe collection",
+          "migration": "Tracks clean-water margins upstream of treatment outlets; retreats to sealed dry hollows during spills"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Proposed eight limbs in four pairs under a low porous organic shell; sheltered soft vent channels and a hinged organic breathing cover. Limb labels L1\u2013L4/R1\u2013R4. Green-brown shell pigment with muted plum underside, no brass pipes, glass windows or oilskin tissue.",
+      "source_ambiguities": "Eight limbs and hinged-cover mechanism are explicit new proposals. Sealed state closes openings without shrinking shell or losing limbs. Natural filtration is not an industrial poison projector.",
+      "qa_file": "qa/batch04_10_bitterglass_natural.json",
+      "reported_preferred_version": "batch04_10_bitterglass_natural.png",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_11_observatory_natural",
+      "canonical_id": "creature-o10-natural",
+      "baseline_asset_id": "asset-o10-r-creatures-enemies-family",
+      "oath_id": "oath-10",
+      "version": "v01",
+      "file": "generated/batch04_11_observatory_natural.png",
+      "sha256": "d59a9923f7350a86a1013144fad35146e6f3c79a62fe79dfb30a8f5b12953b37",
+      "bytes": 2785738,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_11_observatory_natural.prompt.txt",
+      "actual_prompt_sha256": "7ac1a228fa5e6835d0015e40bf1f9be8cb374e722992324ffd282d637c05cc8e",
+      "planning_prompt_file": "planning-prompts/batch04_11_observatory_natural.prompt.txt",
+      "planning_prompt_sha256": "31f92801879dcafe84f2d2c314daf7c91e9c4a688bf519bc7eb134d5902bc3db",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/54"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/9"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-104/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-104/original.png",
+          "sha256": "b9b3e660eaec9d600d60016238a0ebd4c081cf6ad73c078612b357f3f037c3ef",
+          "git_blob_sha1": "6b01814ab1be25de49f9dd5ae5e989ec1f4f1433"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "ballast-wing roostling",
+        "anatomy": "Small winged roost animal with controllable tail ballast and grasping hind feet",
+        "locomotion": "Alternates wingbeats and controlled ballast shifts; lands with a grasping tail",
+        "ecology": {
+          "habitat": "Cliff observatories, orbital monuments and suspended platforms",
+          "food_or_power": "High-altitude insects and mineral-coated cliff seeds",
+          "niche": "Connects isolated ledge food webs and deposits ballast-grit in nesting basins",
+          "migration": "Moves between gravity-stable roost shelves after local anomalies; stranded groups require guided return"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Proposed two membrane wings replacing forelimbs, two grasping hind feet, and one flexible tail with an enlarged proximal ballast lobe plus a slim distal prehensile tip. Dark down and muted violet membrane. No orbiting metal weights or external harness.",
+      "source_ambiguities": "Registry describes tail ballast and grasping tail but not its mechanism; proposed lobe/tip arrangement needs approval. Grasping tail and hind feet must remain distinct, with consistent wing/finger structure.",
+      "qa_file": "qa/batch04_11_observatory_natural.json",
+      "reported_preferred_version": "batch04_11_observatory_natural_v02.png",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_11_observatory_natural",
+      "canonical_id": "creature-o10-natural",
+      "baseline_asset_id": "asset-o10-r-creatures-enemies-family",
+      "oath_id": "oath-10",
+      "version": "v02",
+      "file": "generated/batch04_11_observatory_natural_v02.png",
+      "sha256": "369bcbd9cab985f2398da6f3f45ce9276636e05f636d795a1384c743a782c989",
+      "bytes": 2673163,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_11_observatory_natural_v02.prompt.txt",
+      "actual_prompt_sha256": "bb460907e6561216630480e251ea466b2d3a6a56fb8d5a79e446a2df788aaadc",
+      "planning_prompt_file": "planning-prompts/batch04_11_observatory_natural.prompt.txt",
+      "planning_prompt_sha256": "31f92801879dcafe84f2d2c314daf7c91e9c4a688bf519bc7eb134d5902bc3db",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/54"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/9"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-104/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-104/original.png",
+          "sha256": "b9b3e660eaec9d600d60016238a0ebd4c081cf6ad73c078612b357f3f037c3ef",
+          "git_blob_sha1": "6b01814ab1be25de49f9dd5ae5e989ec1f4f1433"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "ballast-wing roostling",
+        "anatomy": "Small winged roost animal with controllable tail ballast and grasping hind feet",
+        "locomotion": "Alternates wingbeats and controlled ballast shifts; lands with a grasping tail",
+        "ecology": {
+          "habitat": "Cliff observatories, orbital monuments and suspended platforms",
+          "food_or_power": "High-altitude insects and mineral-coated cliff seeds",
+          "niche": "Connects isolated ledge food webs and deposits ballast-grit in nesting basins",
+          "migration": "Moves between gravity-stable roost shelves after local anomalies; stranded groups require guided return"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Proposed two membrane wings replacing forelimbs, two grasping hind feet, and one flexible tail with an enlarged proximal ballast lobe plus a slim distal prehensile tip. Dark down and muted violet membrane. No orbiting metal weights or external harness.",
+      "source_ambiguities": "Registry describes tail ballast and grasping tail but not its mechanism; proposed lobe/tip arrangement needs approval. Grasping tail and hind feet must remain distinct, with consistent wing/finger structure.",
+      "qa_file": "qa/batch04_11_observatory_natural.json",
+      "reported_preferred_version": "batch04_11_observatory_natural_v02.png",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_12_missing_natural",
+      "canonical_id": "creature-o11-natural",
+      "baseline_asset_id": "asset-o11-r-creatures-enemies-family",
+      "oath_id": "oath-11",
+      "version": "v01",
+      "file": "generated/batch04_12_missing_natural.png",
+      "sha256": "970deb09914441bdfc21b2f392987989ea47a6e8cdc18c56c5cb16e296020976",
+      "bytes": 2624002,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_12_missing_natural.prompt.txt",
+      "actual_prompt_sha256": "aad35ac67f1cd7bed509979a35601a39a602c8e5e7fab03ba252f3a8560c1e07",
+      "planning_prompt_file": "planning-prompts/batch04_12_missing_natural.prompt.txt",
+      "planning_prompt_sha256": "011ee54d26663fb4bc5ee11552f8e23f3579c046ab64313840462796e6cf9bbc",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/60"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/10"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-103/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-103/original.png",
+          "sha256": "aedd82f2c659cda63c856a27d6db7674793f17efd0d08d833b2564c3223ffa5d",
+          "git_blob_sha1": "4e890231b5423323cc8bb43cf7ecf11b4265d1d1"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "dusk-window stalker",
+        "anatomy": "Low-lit-window hunting quadruped with broad ears, soft pads and reflective eye cover",
+        "locomotion": "Soft-padded low run, vertical frame climb and deliberate pause at lit thresholds",
+        "ecology": {
+          "habitat": "Eroded court blocks, broken thresholds and interrupted monumental walls",
+          "food_or_power": "Small nocturnal insects and rodents near abandoned windows",
+          "niche": "Controls vermin in ruined courts and uses broken wall cavities without erasing other species",
+          "migration": "Uses continuous dusk corridors; moves into sheltered courtyards during bright public events"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Four-legged low mammalian hunter with broad mobile ears, soft paw pads and a thin translucent reflective eye cover proposed as a living protective membrane. Long flexible back and tapered tail, no detached shadows or metal faceplate.",
+      "source_ambiguities": "Exactly four legs; proposed claw/digit layout remains constant. Eye cover open/closed changes membrane only, not eye count or skull. Bright neutral views must reveal the same anatomy as dusk context.",
+      "qa_file": "qa/batch04_12_missing_natural.json",
+      "reported_preferred_version": "batch04_12_missing_natural_v02.png",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    },
+    {
+      "concept_id": "batch04_12_missing_natural",
+      "canonical_id": "creature-o11-natural",
+      "baseline_asset_id": "asset-o11-r-creatures-enemies-family",
+      "oath_id": "oath-11",
+      "version": "v02",
+      "file": "generated/batch04_12_missing_natural_v02.png",
+      "sha256": "6a4fe55f8c8da036c6be42a7dcd81e5ac356da1e8e2ff7efb2c84b8963c0ea03",
+      "bytes": 2466416,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "actual_prompt_file": "prompts/batch04_12_missing_natural_v02.prompt.txt",
+      "actual_prompt_sha256": "a7ea8f3ee9ed3adc03d8ecf72efd6c3f0704b0e3d2e9c45933a97b66d7a3b171",
+      "planning_prompt_file": "planning-prompts/batch04_12_missing_natural.prompt.txt",
+      "planning_prompt_sha256": "011ee54d26663fb4bc5ee11552f8e23f3579c046ab64313840462796e6cf9bbc",
+      "source_registry": {
+        "repository_path": "AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/12_CREATURES_AND_MOUNTS/CREATURE_MOUNT_MORPH_REGISTRY.json",
+        "sha256": "0205e27eaaf664ad49dfc7a18c356bad309318cae6f3abc45b9e51134a1ad77b",
+        "json_pointer": "/records/60"
+      },
+      "art_source": {
+        "repository_path": "AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/AETHERION_CANON/09_ART_DIRECTION/FIFTEEN_OATH_ART_GUIDE.json",
+        "sha256": "cd6cbfd88c66949ff2a04330078098e93c735aa416db0dc65479207d1e52916e",
+        "json_pointer": "/records/10"
+      },
+      "source_references": [
+        {
+          "repository_path": "assets/references/reference-103/original.png",
+          "pinned_url": "https://github.com/jrmoyler/Aetherion-The-Fifteen-Oaths/blob/04c33f6c4ff51f843eca490a3e3260e8311ed2b8/assets/references/reference-103/original.png",
+          "sha256": "aedd82f2c659cda63c856a27d6db7674793f17efd0d08d833b2564c3223ffa5d",
+          "git_blob_sha1": "4e890231b5423323cc8bb43cf7ecf11b4265d1d1"
+        }
+      ],
+      "exact_source_excerpts": {
+        "name": "dusk-window stalker",
+        "anatomy": "Low-lit-window hunting quadruped with broad ears, soft pads and reflective eye cover",
+        "locomotion": "Soft-padded low run, vertical frame climb and deliberate pause at lit thresholds",
+        "ecology": {
+          "habitat": "Eroded court blocks, broken thresholds and interrupted monumental walls",
+          "food_or_power": "Small nocturnal insects and rodents near abandoned windows",
+          "niche": "Controls vermin in ruined courts and uses broken wall cavities without erasing other species",
+          "migration": "Uses continuous dusk corridors; moves into sheltered courtyards during bright public events"
+        },
+        "reference_scope": "Realm motif only; no dedicated creature sheet is implied.",
+        "model_construction": {
+          "rig_family": "UNRESOLVED; choose after approved body plan",
+          "requirements": [
+            "Front/rear/both profiles/3q",
+            "Skeleton and articulation map",
+            "Mouth/feet/grip/contact details",
+            "Scale against player",
+            "Materials/UVs",
+            "Damage or repair states",
+            "Rider/driver interface where applicable"
+          ]
+        }
+      },
+      "proposed_new_details": "Four-legged low mammalian hunter with broad mobile ears, soft paw pads and a thin translucent reflective eye cover proposed as a living protective membrane. Long flexible back and tapered tail, no detached shadows or metal faceplate.",
+      "source_ambiguities": "Exactly four legs; proposed claw/digit layout remains constant. Eye cover open/closed changes membrane only, not eye count or skull. Bright neutral views must reveal the same anatomy as dusk context.",
+      "qa_file": "qa/batch04_12_missing_natural.json",
+      "reported_preferred_version": "batch04_12_missing_natural_v02.png",
+      "preference_is_approval": false,
+      "approval_status": "UNRESOLVED",
+      "review_status": "REVIEWED_PROPOSAL_WITH_OPEN_ISSUES",
+      "modeling_gate": "No exact-art, anatomy, rig, engineering, scale, construction or family-complete acceptance."
+    }
+  ]
+}

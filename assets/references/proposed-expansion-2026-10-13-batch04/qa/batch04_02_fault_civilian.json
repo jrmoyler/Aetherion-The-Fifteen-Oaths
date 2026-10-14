@@ -1,0 +1,48 @@
+{
+  "concept_id": "batch04_02_fault_civilian",
+  "reported_group_qa": {
+    "selected_version": "v02",
+    "reference_pixels_inspected": true,
+    "pixel_qa": {
+      "method": "Human visual inspection of original reference previews and all generated output pixels; no automatic all-pass claim",
+      "selected_version": "v02",
+      "result": "PARTIAL_CONCEPT_PASS_CONSTRUCTION_REVIEW_REQUIRED",
+      "checks": [
+        "Six whole-body views, opposing profiles, front/rear apron flats and two work poses present",
+        "Correction removes armored hands and gaiters, simplifies low shoes",
+        "Square bib apron, tied cross-back straps, tan canvas and violet tab are readable"
+      ],
+      "unresolved_inconsistencies": [
+        "Three-pocket correction is not met consistently: several views/flat lay show two narrow pockets while close-up shows three",
+        "Pocket side/count changes between front and rear",
+        "Knee patches retain plate-like faceting and need soft-material review",
+        "Back apron flat lay omits visible pocket/strap geometry needed for exact construction",
+        "Small violet tabs appear on both bib attachments rather than one tiny tab"
+      ]
+    }
+  },
+  "versions": [
+    {
+      "version": "v01",
+      "qa": {
+        "pixel_qa_rejection_reasons": [
+          "Hard-looking knee pads",
+          "Armored gloves and feet",
+          "Inconsistent pouch strip"
+        ]
+      }
+    },
+    {
+      "version": "v02",
+      "qa": {
+        "pixel_qa_unresolved": [
+          "Three-pocket correction is not met consistently: several views/flat lay show two narrow pockets while close-up shows three",
+          "Pocket side/count changes between front and rear",
+          "Knee patches retain plate-like faceting and need soft-material review",
+          "Back apron flat lay omits visible pocket/strap geometry needed for exact construction",
+          "Small violet tabs appear on both bib attachments rather than one tiny tab"
+        ]
+      }
+    }
+  ]
+}
