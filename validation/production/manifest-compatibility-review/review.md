@@ -1,0 +1,15 @@
+# Independent delivery-manifest compatibility review
+
+Reviewed commit bd2c1c3 and fixed three reproduced gaps with parent authorization. No frozen assets, generated reports, snapshots or production geometry were edited.
+
+1. **Required GLB roles bypassed JavaScript parsing via filename suffix.** A manifest whose glb/lod1/lod2/collision roles all named a non-GLB `mesh.txt` returned `STRUCTURAL_CHECKS_PASSED_ACCEPTANCE_OPEN`, zero errors and no parsed exports. Python correctly rejected the same fixture. JavaScript now parses the four required export roles regardless of filename suffix, also recognizes `.GLB` extras case-insensitively, and counts successfully parsed GLB paths instead of guessing by suffix. Regression tests reject text masquerading as each required role and confirm valid GLB bytes under a renamed suffix are actually parsed.
+
+2. **Python accepted `schemaVersion: true` in pinned compressed-source evidence.** Python's `True == 1` equality passed the old schema check; JavaScript rejected it. Python now accepts numeric value 1 from integer or float JSON representations, matching JavaScript, while explicitly rejecting booleans. The 1.0 receipt is a positive fixture and true is negative. Existing hash-bound report tests gained those negative cases; JavaScript also explicitly tests boolean rejection. Report SHA, source SHA, unique record, actual-open flag and empty errors remain required.
+
+3. **JavaScript incomplete counts hid pending collision behind other errors.** A valid PENDING policy plus a real `LOD_NOT_REDUCED` failure produced `HARD_ERRORS` and summary incompleteAssets=0, while Python's missing-collision count remained 1. The summary now counts collisionPolicy.mode=PENDING independently of the primary status. Generated Markdown explains that incomplete counts overlap hard-error counts. A regression combines real valid-pending and failed-pending records and confirms two incomplete assets, one hard-error asset and zero structural passes.
+
+The explicit path-base confinement and policy checks passed targeted negative cases for traversal, backslashes, absolute paths, outward symlinks, invalid bases, empty/contradictory waivers, missing pending gates, stale source/report hashes and duplicate/failed source records. No broad aggregate audit was run because the shared workspace contains unrelated dirty character assets; root will run final clean-checkpoint regressions.
+
+Validation: five targeted JavaScript tests passed; all 12 Python inventory tests passed; before/after standalone reproductions agree with the fixes; scoped git diff whitespace check passed. No production approval is granted by either adapter.
+
+Evidence: `/tmp/aetherion-manifest-compatibility-before-js.json`, `...-before-python.json`, `/tmp/aetherion-manifest-compatibility-audit.mjs`, current `...-audit-js.json`, and `...-after-python.json`. The standalone reproduction retains the historical status-only counting predicate for demonstration; the targeted regression directly tests the new summary helper.

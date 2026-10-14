@@ -74,7 +74,7 @@ The installed package passes 50 tests. [Independent review](../../validation/pro
 
 ## Daybreak architecture and scoped physical traversal
 
-The [Daybreak candidate](../../assets/production/oath-09/architecture/README.md) covers all 17 named module requirements in the existing `asset-o09-n-architecture-family`. Its five additional assembled scenes are derivative fixtures, not extra module designs or completed buildings. The baffle explicitly lacks required state-specific collision; non-solid shade fabric has a separately justified no-collision policy. Static modules are not artificially rigged.
+The [Daybreak candidate](../../assets/production/oath-09/architecture/README.md) covers all 17 named module requirements in the existing `asset-o09-n-architecture-family`. Its five additional assembled scenes are derivative fixtures, not extra module designs or completed buildings. This supplies candidates for 17 of the 255 named Phase II architecture module entries; the other 238 entries have no new module export in this checkpoint. None of the 272 shared-environment regional variants has been delivered as a completed variant. The baffle explicitly lacks required state-specific collision; non-solid shade fabric has a separately justified no-collision policy. Static modules are not artificially rigged.
 
 Independent inspection found and repaired a shortened final stair tread in r02. Actual Blender, Godot and Three.js CPU imports pass for all 71 kit/fixture GLBs. The project's stricter delivery validator subsequently found ten unreduced LOD transitions, recorded as failures pending an actual export repair. No visual match or full-kit acceptance follows from the import passes.
 
