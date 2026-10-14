@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm ci --prefix runtime/ability-matrix && npm ci --prefix runtime/ability-matrix/packs/sandbox",
+  "installCommand": "(cd runtime/ability-matrix && npm ci) && (cd runtime/ability-matrix/packs/sandbox && npm ci)",
   "buildCommand": "npm run build:daybreak",
   "outputDirectory": "dist/daybreak"
 }

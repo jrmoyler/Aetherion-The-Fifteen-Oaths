@@ -9,8 +9,8 @@ All **100 imported castables** are available: **95 abilities, 3 buffs, 2 summons
 From the repository root with Node 24 (tested with 24.19.0):
 
 ```sh
-npm ci --prefix runtime/ability-matrix
-npm ci --prefix runtime/ability-matrix/packs/sandbox
+(cd runtime/ability-matrix && npm ci)
+(cd runtime/ability-matrix/packs/sandbox && npm ci)
 npm run dev:daybreak
 ```
 
@@ -40,7 +40,7 @@ The root `vercel.json` sets the install, build and output values below, and thos
 | Git branch for this draft | `production/phase-i-ii-assets` |
 | Root directory | Repository root (`.`), not `app/daybreak` |
 | Framework preset | Other |
-| Install command | `npm ci --prefix runtime/ability-matrix && npm ci --prefix runtime/ability-matrix/packs/sandbox` |
+| Install command | `(cd runtime/ability-matrix && npm ci) && (cd runtime/ability-matrix/packs/sandbox && npm ci)` |
 | Build command | `npm run build:daybreak` |
 | Output directory | `dist/daybreak` |
 | Node version | 24.x |
