@@ -52,13 +52,21 @@ func _ready():
     add_child(camera)
     show_asset()
 
-func show_asset():
+func show_asset(requested_selection: int = -1, requested_lod: int = -1):
     if assets.is_empty():return
-    var loaded=importer.load_asset(assets[selected].id,lod)
+    var next_selection=selected if requested_selection==-1 else requested_selection
+    var next_lod=lod if requested_lod==-1 else requested_lod
+    if next_selection<0 or next_selection>=assets.size():
+        error="Selection index is outside the catalog"
+        update_label()
+        return
+    var loaded=importer.load_asset(assets[next_selection].id,next_lod)
     if not loaded.ok:
         error=loaded.error
         update_label()
         return
+    selected=next_selection
+    lod=next_lod
     error=""
     playing=false
     var scene=importer.current_instance()
@@ -84,22 +92,23 @@ func orbit():
 func update_label():
     if assets.is_empty():return
     var state=importer.current_report()
-    label.text="Daybreak • "+assets[selected].originalModuleName+" • LOD "+str(lod)+"\n"
+    label.text="Daybreak • No asset loaded\n"
     if not state.is_empty():
+        label.text="Daybreak • "+assets[selected].originalModuleName+" • "+state.asset_id+" • LOD "+str(state.lod)+"\n"
         label.text+="Collision: "+state.collision_policy+" • "+str(state.static_bodies)+" authored static bodies\n"
         if state.collision_policy=="PENDING":label.text+="Moving baffle physics is not authored. Animation is presentation only.\n"
         if state.collision_policy=="NONE":label.text+="Non-solid canopy; no collision is created.\n"
         label.text+="Animation: "+("playing" if playing else "paused")+"\n"
     label.text+="Left/Right: module   1/2/3: LOD   Space: start/reset   [/]: start/midpoint\nDrag: orbit   Wheel: zoom\nPROPOSED / UNAPPROVED — desktop appearance requires visual review."
-    if not error.is_empty():label.text+="\n"+error
+    if not error.is_empty():label.text+="\nRequest failed: "+error
 
 func _unhandled_input(event):
     if assets.is_empty():return
     if event is InputEventKey and event.pressed and not event.echo:
         match event.keycode:
-            KEY_LEFT: selected=posmod(selected-1,assets.size());show_asset()
-            KEY_RIGHT:selected=(selected+1)%assets.size();show_asset()
-            KEY_1,KEY_2,KEY_3:lod=event.keycode-KEY_1;show_asset()
+            KEY_LEFT: show_asset(posmod(selected-1,assets.size()),lod)
+            KEY_RIGHT:show_asset((selected+1)%assets.size(),lod)
+            KEY_1,KEY_2,KEY_3:show_asset(selected,event.keycode-KEY_1)
             KEY_SPACE,KEY_BRACKETLEFT,KEY_BRACKETRIGHT:
                 var clips=importer.current_report().get("animations",[])
                 if clips.is_empty():return

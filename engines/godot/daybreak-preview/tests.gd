@@ -1,5 +1,6 @@
 extends SceneTree
 const Importer=preload("res://daybreak_importer.gd")
+const Preview=preload("res://preview.gd")
 var failures: Array=[]
 var checks: Array=[]
 var visual_reports: Array=[]
@@ -132,7 +133,41 @@ func run():
     importer.free()
     check(not is_instance_valid(importer),"importer freed")
     check(int(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT))<=before_free,"no orphan increase after importer free")
+    test_preview_transactions()
     finish()
+
+func test_preview_transactions():
+    var viewer=Preview.new()
+    root.add_child(viewer)
+    var current=viewer.importer.current_instance()
+    check(is_instance_valid(current),"inspector startup loads actual scene")
+    if not is_instance_valid(current):
+        viewer.free()
+        return
+    var prior_report=viewer.importer.current_report()
+    var prior_label=viewer.label.text
+    var prior_camera=viewer.camera.transform
+    var prior_selected=viewer.selected
+    var prior_lod=viewer.lod
+    viewer.assets.append({"id":"unknown-inspector-request","originalModuleName":"Wrong requested geometry"})
+    var event=InputEventKey.new()
+    event.pressed=true
+    event.keycode=KEY_LEFT
+    viewer._unhandled_input(event)
+    check(viewer.importer.current_instance()==current,"failed keyboard selection retains actual scene")
+    check(viewer.selected==prior_selected and viewer.lod==prior_lod,"failed keyboard selection retains committed selection and LOD")
+    check(viewer.label.text.begins_with(prior_label) and viewer.label.text.contains("Request failed: Unknown asset ID") and not viewer.label.text.contains("Wrong requested geometry"),"failed selection labels retained geometry and visible request error")
+    viewer.show_asset(prior_selected,9)
+    check(viewer.importer.current_instance()==current and viewer.importer.current_report()==prior_report,"failed LOD request retains actual scene and collision report")
+    check(viewer.selected==prior_selected and viewer.lod==prior_lod and viewer.camera.transform==prior_camera,"failed LOD request retains committed selection and framing")
+    check(viewer.label.text.begins_with(prior_label) and viewer.label.text.contains("Request failed: Invalid LOD"),"failed LOD request labels retained LOD and visible error")
+    event.keycode=KEY_2
+    viewer._unhandled_input(event)
+    check(viewer.lod==1 and viewer.importer.current_report().lod==1 and viewer.error.is_empty() and not viewer.label.text.contains("Request failed:"),"successful keyboard LOD request commits and clears error")
+    check(not is_instance_valid(current),"successful inspector replacement frees prior scene")
+    var resources=viewer.importer.resource_weakrefs()
+    viewer.free()
+    check(resources.all(func(r):return r.weak.get_ref()==null),"inspector teardown releases imported resources")
 
 func finish():
     var report={"status":"PASS_HEADLESS_RUNTIME" if failures.is_empty() else "FAIL_HEADLESS_RUNTIME","engine":Engine.get_version_info().string,"manifest":manifest_path,"manifest_sha256":FileAccess.get_sha256(manifest_path),"checks":checks,"failures":failures,"visual_imports":visual_reports,"negative_fixtures":negative_reports,"scope":"Actual runtime import, embedded PBR decoding, LOD replacement, StaticBody3D construction, rigid animation seek/advance and cleanup; no GPU parity, world authority or final art approval"}
