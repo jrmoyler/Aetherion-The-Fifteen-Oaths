@@ -1,0 +1,42 @@
+name: Canon character and creature model intake
+
+on:
+  pull_request:
+    paths:
+      - 'assets/production/intake/**'
+      - 'src/production/identity-catalog.js'
+      - 'tests/identity-catalog.test.mjs'
+      - 'tools/production/intake_prototype_pack.py'
+      - '.github/workflows/asset-identity-intake.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-and-fidelity-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate canonical roster, existing Blender sources and fail-closed resolver
+        run: node --test tests/identity-catalog.test.mjs
+      - name: Compile quarantine importer without executing unknown user archives
+        run: python3 -m py_compile tools/production/intake_prototype_pack.py
+      - name: Assert no accidental production-approved identity links
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const p = JSON.parse(readFileSync('assets/production/intake/ROSTER_AND_EXISTING_CANDIDATES.json','utf8'));
+          if (p.counts.approved_assets !== 0 || p.characters.some(x => x.approved_model_id) || p.creatures.some(x => x.approved_model_id))
+            throw Error('Unreviewed asset falsely promoted into production');
+          if (p.characters.length !== 34 || p.creatures.length !== 94 || p.existing_blender_candidates.length !== 52)
+            throw Error('Canon roster intake drift');
+          console.log('Identity intake guard passed');
+          NODE
