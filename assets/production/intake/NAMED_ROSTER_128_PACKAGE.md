@@ -1,3 +1,15 @@
+# Superseded package notice
+
+The first 128-asset technical pack documented below has been superseded by the **r05 Y-up + degenerate-triangle repair pack**. Use [ROSTER_R05_TECHNICAL_QA.json](ROSTER_R05_TECHNICAL_QA.json) and [REFERENCE_FIDELITY_ACCEPTANCE_R05.md](REFERENCE_FIDELITY_ACCEPTANCE_R05.md).
+
+- New archive: `Aetherion_Roster_R05_YUp_Mesh_Correction_2026-10-16.zip`
+- SHA-256: `eb7e8f9322390138ff79c52604cce08146478b2ba9ebbb81e3cb17ef3d704c74`
+- 128/128 strict CPU checks and 128/128 offscreen importer passes.
+- **Not reference exact; artwork, gameplay, GPU runtime and GitHub binary delivery remain open.**
+- The original, uncorrected archive no longer qualifies for the strengthened intake gate.
+
+---
+
 # Named roster GLB candidate package — October 16, 2026
 
 ## Integrity and availability
