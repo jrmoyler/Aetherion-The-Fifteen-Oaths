@@ -17,7 +17,7 @@ def parse(data):
     doc = json.loads(data[20:20+n])
     start = 20+n
     length, kind = struct.unpack_from("<I4s", data, start)
-    if kind != b"BIN\\x00" or start+8+length != len(data):
+    if kind != b"BIN\x00" or start+8+length != len(data):
         raise ValueError("Missing embedded BIN chunk")
     return doc, bytearray(data[start+8:])
 
@@ -27,14 +27,14 @@ def finish(doc, body):
     js += b" " * (-len(js) % 4)
     return (b"glTF" + struct.pack("<II", 2, 12+8+len(js)+8+len(body))
             + struct.pack("<I4s", len(js), b"JSON") + js
-            + struct.pack("<I4s", len(body), b"BIN\\x00") + body)
+            + struct.pack("<I4s", len(body), b"BIN\x00") + body)
 
 def accessor(doc, body, values, dimensions):
     arr = np.asarray(values, dtype=np.float32)
     if arr.ndim != 2 or arr.shape[1] != dimensions or not np.isfinite(arr).all():
         raise ValueError("Invalid float32 accessor")
     offset = len(body); raw = arr.tobytes()
-    body.extend(raw); body.extend(b"\\0" * (-len(body) % 4))
+    body.extend(raw); body.extend(b"\0" * (-len(body) % 4))
     view_id = len(doc["bufferViews"])
     doc["bufferViews"].append({"buffer": 0, "byteOffset": offset, "byteLength": len(raw)})
     acc_id = len(doc["accessors"])
@@ -155,11 +155,11 @@ def main():
             for name in inp.namelist():
                 if name==PREFIX+"ROSTER_REBUILD_MANIFEST.json":continue
                 out.writestr(name,replacements.get(name,inp.read(name)))
-            out.writestr(PREFIX+"ROSTER_REBUILD_MANIFEST.json",json.dumps(manifest,indent=2)+"\\n")
+            out.writestr(PREFIX+"ROSTER_REBUILD_MANIFEST.json",json.dumps(manifest,indent=2)+"\n")
             out.writestr(PREFIX+"R06_ANIMATION_AUDIT.json",json.dumps({
                 "models":128,"new_clips":sum(counts),"new_clips_per_model":{"min":min(counts),"max":max(counts)},
                 "all_unapproved":True,"IK":False,"engine_gameplay_accepted":False,
-                "status":"ROLE_SCOPED_PREVIEW_NOT_FINAL_MOTION"},indent=2)+"\\n")
+                "status":"ROLE_SCOPED_PREVIEW_NOT_FINAL_MOTION"},indent=2)+"\n")
     print(json.dumps({"models":128,"new_clips":sum(counts),"approved":False}))
 
 if __name__=="__main__":main()
