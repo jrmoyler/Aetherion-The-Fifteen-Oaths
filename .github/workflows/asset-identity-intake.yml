@@ -4,6 +4,9 @@ on:
   pull_request:
     paths:
       - 'assets/production/intake/**'
+      - 'assets/production/reviews/roster-r07/**'
+      - 'tools/production/rebuild_three_creature_candidates_r07.py'
+      - 'tests/test_r07_creature_review.py'
       - 'src/production/identity-catalog.js'
       - 'tests/identity-catalog.test.mjs'
       - 'tools/production/intake_prototype_pack.py'
@@ -30,6 +33,10 @@ jobs:
         run: python3 -m py_compile tools/production/intake_prototype_pack.py tools/production/ingest_named_roster.py tools/production/repair_named_roster_glb.py tools/production/author_roster_motion_preview.py
       - name: Run geometry repair regressions
         run: python3 -m unittest discover -s tests -p test_named_roster_repair.py -v
+      - name: Validate checked-in reference-guided R07 GLBs
+        run: python3 -m unittest discover -s tests -p test_r07_creature_review.py -v
+      - name: Compile reference-guided R07 sculpt script
+        run: python3 -m py_compile tools/production/rebuild_three_creature_candidates_r07.py
       - name: Assert no accidental production-approved identity links
         shell: bash
         run: |
