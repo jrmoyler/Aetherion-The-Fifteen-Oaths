@@ -27,7 +27,7 @@ jobs:
       - name: Validate canonical roster, existing Blender sources and fail-closed resolver
         run: node --test tests/identity-catalog.test.mjs
       - name: Compile quarantine importer without executing unknown user archives
-        run: python3 -m py_compile tools/production/intake_prototype_pack.py
+        run: python3 -m py_compile tools/production/intake_prototype_pack.py tools/production/ingest_named_roster.py
       - name: Assert no accidental production-approved identity links
         shell: bash
         run: |
