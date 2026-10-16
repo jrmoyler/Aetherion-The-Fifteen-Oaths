@@ -36,7 +36,7 @@ def inspect_glb(data, entry):
             raise ValueError("Misaligned/overlong GLB chunk")
         chunks.append((kind, data[position:position + count]))
         position += count
-    if position != total or len(chunks) != 2 or chunks[0][0] != b"JSON" or chunks[1][0] != b"BIN\\0":
+    if position != total or len(chunks) != 2 or chunks[0][0] != b"JSON" or chunks[1][0] != b"BIN\x00":
         raise ValueError("Expected embedded JSON and BIN chunks")
     doc = json.loads(chunks[0][1])
     if doc.get("asset", {}).get("version") != "2.0" or not doc.get("meshes"):
