@@ -60,6 +60,72 @@ def check_glb(data: bytes, row: dict) -> dict:
         for primitive in mesh.get("primitives", []):
             if not {"POSITION","NORMAL","TEXCOORD_0","JOINTS_0","WEIGHTS_0"}.issubset(primitive.get("attributes", {})):
                 raise ValueError("Missing UV, normal or skeletal vertex attributes")
+    # Real importer regression: raw procedural geometry was authored Z-up, so
+    # old archive imports sideways in standard glTF Y-up renderers.
+    # Require common root conversion of BOTH skeleton and visible mesh.
+    if doc.get("extras", {}).get("coordinate_convention") != "GLTF_Y_UP_ROOT_ALIGNED_V1":
+        raise ValueError("Uncorrected Z-up glTF; use the r05 Y-up package")
+    scene_index = doc.get("scene", 0)
+    roots = doc["scenes"][scene_index]["nodes"]
+    if len(roots) != 1:
+        raise ValueError("Missing single Y-up orientation parent")
+    root = doc["nodes"][roots[0]]
+    if root.get("name") != "Aetherion_ZUp_to_glTF_YUp":
+        raise ValueError("Unexpected coordinate correction root")
+    q = root.get("rotation", [])
+    if len(q) != 4 or abs(q[0] + 2**-0.5) > 1e-5 or abs(q[3] - 2**-0.5) > 1e-5:
+        raise ValueError("Incorrect +Z to +Y root quaternion")
+    # Reject zero-area triangles, not just binary-valid mesh indices.
+    # Index buffers in this candidate pack are tightly packed UINT32.
+    import math
+    buffer_start = bpos + 8
+    glb_binary = data[buffer_start:buffer_start + bsize]
+    degenerate_count = 0
+    triangle_count = 0
+    draw_calls = 0
+    soft_skin_vertices = 0
+    for mesh in doc["meshes"]:
+        for primitive in mesh["primitives"]:
+            draw_calls += 1
+            accessor = doc["accessors"][primitive["attributes"]["POSITION"]]
+            view = doc["bufferViews"][accessor["bufferView"]]
+            if accessor["componentType"] != 5126 or accessor["type"] != "VEC3" or view.get("byteStride"):
+                raise ValueError("Unsupported vertex format; requires explicit mesh review")
+            offset = view.get("byteOffset", 0) + accessor.get("byteOffset", 0)
+            positions = [struct.unpack_from("<fff", glb_binary, offset + 12*i)
+                         for i in range(accessor["count"])]
+            indices_accessor = doc["accessors"][primitive["indices"]]
+            index_view = doc["bufferViews"][indices_accessor["bufferView"]]
+            dtype = {5123: ("<H", 2), 5125: ("<I", 4)}.get(indices_accessor["componentType"])
+            if dtype is None or index_view.get("byteStride") or indices_accessor["count"] % 3:
+                raise ValueError("Unsupported triangle index format")
+            io = index_view.get("byteOffset", 0) + indices_accessor.get("byteOffset", 0)
+            ids = [struct.unpack_from(dtype[0], glb_binary, io + i*dtype[1])[0]
+                   for i in range(indices_accessor["count"])]
+            if ids and max(ids) >= len(positions):
+                raise ValueError("Out-of-range triangle")
+            for i in range(0, len(ids), 3):
+                a, b, c = (positions[ids[i+j]] for j in range(3))
+                ab = (b[0]-a[0], b[1]-a[1], b[2]-a[2])
+                ac = (c[0]-a[0], c[1]-a[1], c[2]-a[2])
+                cross = (ab[1]*ac[2]-ab[2]*ac[1], ab[2]*ac[0]-ab[0]*ac[2], ab[0]*ac[1]-ab[1]*ac[0])
+                if sum(v*v for v in cross) < 1e-20:
+                    degenerate_count += 1
+            triangle_count += len(ids)//3
+            weights_accessor = doc["accessors"][primitive["attributes"]["WEIGHTS_0"]]
+            weights_view = doc["bufferViews"][weights_accessor["bufferView"]]
+            if weights_accessor["componentType"] != 5126 or weights_accessor["type"] != "VEC4" or weights_view.get("byteStride"):
+                raise ValueError("Unsupported skin weight format")
+            wo = weights_view.get("byteOffset", 0) + weights_accessor.get("byteOffset", 0)
+            for i in range(weights_accessor["count"]):
+                ws = struct.unpack_from("<ffff", glb_binary, wo + i*16)
+                if not all(math.isfinite(w) and -0.0001 <= w <= 1.0001 for w in ws):
+                    raise ValueError("Nonfinite or out-of-range skin weight")
+                if abs(sum(ws)-1.0) > 1e-3:
+                    raise ValueError("Unnormalized skin weights")
+                soft_skin_vertices += (sum(w > .01 for w in ws) > 1)
+    if degenerate_count:
+        raise ValueError(f"{degenerate_count} zero-area triangles")
     clips = [a["name"] for a in doc.get("animations", [])]
     if clips != row["clip_names"]:
         raise ValueError("Missing or incorrectly ordered clips")
@@ -71,7 +137,7 @@ def check_glb(data: bytes, row: dict) -> dict:
         for channel in clip.get("channels", []):
             if channel["target"]["node"] >= len(doc["nodes"]):
                 raise ValueError("Out of bounds animation node")
-    return {"clips": clips, "skins": len(doc["skins"]), "meshes": len(doc["meshes"])}
+    return {"clips": clips, "skins": len(doc["skins"]), "meshes": len(doc["meshes"]), "triangles": triangle_count, "draw_calls_proxy": draw_calls, "soft_skin_vertices": soft_skin_vertices, "glTF_up_axis": "Y", "degenerate_triangles": 0}
 
 def validate(z: zipfile.ZipFile, repository: Path):
     infos = z.infolist()
