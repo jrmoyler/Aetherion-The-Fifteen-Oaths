@@ -155,9 +155,10 @@ def build(oath=None):
                     P.move(f"orb{i + 1}", z=-2.2 * env(t, [(0.3, 0), (0.6, 1)]))
     elif iron:  # rivet rows along plate edges, chimney vents
         acc = mats.surface("iron", "hi_rivet", dark=0.8, light=0.95, rough=0.25)
-        for bn, c, w in (("chest", (0, 0.62, 2.30), 1.1), ("chest", (0, 0.62, 1.84), 1.0), ("hips", (0, 0.36, 1.30), 0.8)):
-            pts = [V((x, c[1], c[2])) for x in np.linspace(-w / 2, w / 2, 8)]
-            S.part(kit.rivets(f"riv{bn}{c[2]}", pts, 0.035), bn, "accent", acc)
+        for bn, c, w in (("chest", (0, 0.60, 2.32), 0.95), ("chest", (0, 0.60, 2.00), 0.95), ("spine1", (0, 0.42, 1.82), 0.75),
+                         ("hips", (0, 0.32, 1.30), 0.8)):
+            pts = [V((x, c[1], c[2])) for x in np.linspace(-w / 2, w / 2, 7) if abs(x) > 0.08]
+            S.part(kit.rivets(f"riv{bn}{c[2]}", pts, 0.03), bn, "accent", acc)
         for s, g in biped.SIDES:
             S.part(core.cylinder(f"vent{s}", 0.09, 0.45, (0.30 * g, -0.42, 2.62), rot=(-0.35, 0.2 * g, 0), segs=10, bevel=0.01),
                    "chest", "accent", mat_acc)

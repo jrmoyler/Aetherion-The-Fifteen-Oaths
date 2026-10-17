@@ -63,6 +63,13 @@ void terrainSurface(vec3 wp, vec3 nG, out vec3 albedo, out vec3 nOut, out float 
       if (abs(LY[i] - tP2.z) < 0.5) lavaA = A[i].a; }
   }
   alb /= ws; dd /= ws; ro /= ws; ao /= ws;
+  // far field: fade texture detail toward each layer's mean colour (kills tiling moire)
+  float farK = smoothstep(35.0, 260.0, dist);
+  if (farK > 0.01) {
+    vec3 avg = vec3(0.0); float aw = 0.0;
+    for (int i = 0; i < 8; i++) { float w = max(HB[i] - hmax + 0.22, 0.0); if (w > 0.0) { avg += tSRGB(textureLod(tAlb, vec3(0.5, 0.5, LY[i]), 12.0).rgb) * w; aw += w; } }
+    alb = mix(alb, avg / max(aw, 1e-4), farK * 0.75);
+  }
   // anti-tiling: large-scale resample of the dominant planar layer
   if (TR[dom] < 0.5) { vec4 a2 = texture(tAlb, vec3(wp.xz * sc * 0.21 + 0.5, LY[dom])); alb = mix(alb, tSRGB(a2.rgb) * (dot(alb, vec3(0.33)) / max(dot(tSRGB(a2.rgb), vec3(0.33)), 0.01)) * 0.5 + alb * 0.5, 0.5 * smoothstep(8.0, 60.0, dist)); }
   // roads

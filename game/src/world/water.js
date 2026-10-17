@@ -72,7 +72,7 @@ void main() {
   float NdV = max(dot(N, V), 0.0);
   float F = 0.02 + 0.98 * pow(1.0 - NdV, 5.0);
   vec3 R = reflect(-V, N); R.y = abs(R.y) + 0.02;
-  vec3 refl = wP2.z > 0.5 ? textureCube(envTex, R).rgb : ambCol * 1.4;
+  vec3 refl = (wP2.z > 0.5 ? textureCube(envTex, R).rgb : ambCol * 1.4) * mix(vec3(0.62, 0.74, 0.86), vec3(1.0), smoothstep(0.05, 0.5, R.y));
   vec3 absorb = mix(shallowCol, deepCol, 1.0 - exp(-depth * 0.12));
   vec3 body = absorb * (sunCol * max(sunDir.y, 0.0) * 0.75 + ambCol * 1.3);
   body += shallowCol * sunCol * 0.18 * smoothstep(0.0, 1.5, vCrest) * max(sunDir.y, 0.0); // light through crests
@@ -122,7 +122,7 @@ export function createWater(ctx, noiseTex) {
     });
     m.backFaceCulling = false; m.alphaMode = Constants.ALPHA_COMBINE; m.metadata = { noAerial: true };
     m.setTexture('noiseTex', noiseTex); m.setTexture('hmTex', hmTex);
-    m.state = { kind, level: kind ? MARSH_LEVEL : SEA_LEVEL, wave: kind ? 0 : 1, shallow: [0.05, 0.5, 0.52], deep: [0.01, 0.07, 0.13], reflect: 0.62, foam: 1, detail: kind ? 0.5 : 1 };
+    m.state = { kind, level: kind ? MARSH_LEVEL : SEA_LEVEL, wave: kind ? 0 : 1, shallow: [0.05, 0.5, 0.52], deep: [0.01, 0.075, 0.14], reflect: 0.5, foam: 1, detail: kind ? 0.5 : 1 };
     m.onBind = () => {
       const e = m.getEffect(); if (!e) return; const s = m.state; const cam = scene.activeCamera; const cp = cam ? (cam.globalPosition ?? cam.position) : atmo.camPos;
       e.setFloat4('wP', atmo.time, s.wave, s.level, s.kind);

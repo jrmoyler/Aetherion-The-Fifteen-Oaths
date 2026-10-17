@@ -64,7 +64,7 @@ export function createGrass(ctx) {
     let amt = 0;
     if (h > 0.5 && nv.y > 0.8 && road > 3.6 && lava < 0.05) {
       classify(x, z, { h, lava, road, coast, plaza, roadW }, nv.y, W, tint);
-      amt = grassAmount(W);
+      amt = grassAmount(W) * Math.max(0, 1 - (W[L.basalt] + W[L.snow] + W[L.ice] + W[L.lava] + W[L.strata] + W[L.sand] * 0.8 + W[L.rock] * 0.6 + W[L.shale] * 0.6) * 1.4);
       if (plaza > 0.05 && sanctuaryDist(x, z) < 95) amt = 0;
       amt *= Math.min(1, (road - 3.6) / 2.5);
     }
@@ -104,7 +104,7 @@ export function createGrass(ctx) {
     const counts = [0, 0];
     const list = [];
     for (let iz = gz0; iz <= gz1; iz++) for (let ix = gx0; ix <= gx1; ix++) {
-      const e = cache.get(ix * 100003 + iz); if (!e || e.amt < 0.15) continue;
+      const e = cache.get(ix * 100003 + iz); if (!e || e.amt < 0.22) continue;
       const d = Math.hypot(e.x - cam.x, e.z - cam.z); if (d > RG) continue;
       const fade = 1 - Math.max(0, (d - RG * 0.6) / (RG * 0.4));
       list.push(e, fade); counts[e.flower ? 1 : 0]++;

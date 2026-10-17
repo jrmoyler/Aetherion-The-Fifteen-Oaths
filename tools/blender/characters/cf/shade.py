@@ -274,6 +274,12 @@ def build_material(key, kind, color, opts=None):
     rough = _value(nb, rough if rough is not None else 0.6)
     metal = _value(nb, metal)
     base = _rgb(nb, base) if not isinstance(base, bpy.types.NodeSocket) else base
+    if k not in ('glow', 'eye'):
+        # restrained saturation (art direction): pull 15% toward luminance, skin slightly deeper
+        bw = nb.node('ShaderNodeRGBToBW', {'Color': base}).outputs[0]
+        base = nb.mix(0.15 if k != 'skin' else 0.06, base, nb.node('ShaderNodeCombineColor', {0: bw, 1: bw, 2: bw}).outputs[0])
+        if k == 'skin':
+            base = nb.mix(1.0, base, (0.86, 0.84, 0.84), 'MULTIPLY')
     bsdf = nb.node('ShaderNodeBsdfPrincipled', {'Base Color': base, 'Roughness': rough, 'Metallic': metal})
     if normal is not None:
         nb.link(normal, bsdf.inputs['Normal'])

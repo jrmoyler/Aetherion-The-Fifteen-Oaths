@@ -62,7 +62,7 @@ class Forge:
                 lo = np.minimum(lo, op[2].lo)
                 hi = np.maximum(hi, op[2].hi)
         lo = np.maximum(lo, [-3, -3, -0.05])
-        return lo - 0.14, hi + 0.14
+        return lo - 0.07, hi + 0.07
 
     def label_field(self, bone):
         if bone in self._lf:
@@ -81,7 +81,11 @@ class Forge:
 
     def evaluate(self):
         t0 = time.time()
-        g = self.grid = S.Grid(*self._bounds(), self.h)
+        lo, hi = self._bounds()
+        nvox = np.prod((hi - lo) / self.h)
+        if nvox > 100e6:
+            self.h = self.h * (nvox / 100e6) ** (1 / 3)
+        g = self.grid = S.Grid(lo, hi, self.h)
         self._lf = {}
         n = g.n
         self.log(f'grid {n.tolist()} = {np.prod(n)/1e6:.1f}M voxels')

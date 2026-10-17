@@ -88,7 +88,7 @@ export function createWeather(scene, quality) {
     const e = box(ps, 45, -1, 4); e.direction1 = new Vector3(-0.2, 0, -0.1); e.direction2 = new Vector3(0.2, 0.05, 0.1);
     ps.minSize = 9; ps.maxSize = 18; ps.minLifeTime = 10; ps.maxLifeTime = 16; ps.minEmitPower = 0.2; ps.maxEmitPower = 0.6;
     ps.emitRate = n / 13; ps.gravity = new Vector3(0, 0, 0);
-    ps.color1 = new Color4(0.85, 0.88, 0.9, 0.22); ps.color2 = new Color4(0.8, 0.84, 0.86, 0.15); ps.colorDead = new Color4(0.8, 0.8, 0.8, 0);
+    ps.color1 = new Color4(0.85, 0.88, 0.9, 0.1); ps.color2 = new Color4(0.8, 0.84, 0.86, 0.06); ps.colorDead = new Color4(0.8, 0.8, 0.8, 0);
     ps.blendMode = ParticleSystem.BLENDMODE_STANDARD;
   });
 
@@ -96,7 +96,7 @@ export function createWeather(scene, quality) {
     clear: { rain: 0, snow: 0, ash: 0, embers: 0, mist: 0, cover: 0.4, fog: 1, wet: 0, dark: 0.3, light: 1 },
     rain: { rain: 1, mist: 0.3, cover: 0.85, fog: 1.8, wet: 1, dark: 0.75, light: 0.45 },
     snow: { snow: 1, mist: 0.2, cover: 0.8, fog: 2.0, wet: 0, dark: 0.45, light: 0.6, snowCover: 1 },
-    ash: { ash: 1, embers: 1, cover: 0.65, fog: 1.7, wet: 0, dark: 0.6, light: 0.7 },
+    ash: { ash: 1, embers: 1, cover: 0.6, fog: 1.25, wet: 0, dark: 0.6, light: 0.7 },
     storm: { rain: 1.3, mist: 0.4, cover: 0.97, fog: 2.2, wet: 1, dark: 0.95, light: 0.3, lightning: 1 },
     mist: { mist: 1, cover: 0.55, fog: 3.0, wet: 0.3, dark: 0.4, light: 0.75 },
   };

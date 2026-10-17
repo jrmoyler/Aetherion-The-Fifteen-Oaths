@@ -95,8 +95,8 @@ def plate(name, c, size, rot=(0, 0, 0), bevel=0.006, taper=(0.85, 0.85)):
     return core.box(name, size, c, rot, bevel=bevel, segs=2, taper=taper)
 
 
-def rivets(name, pts, r=0.008):
-    obs = [core.ico(f"{name}{i}", r, p, sub=1, scale=(1, 1, 0.6)) for i, p in enumerate(pts)]
+def rivets(name, pts, r=0.008, squash=(1, 0.6, 1)):
+    obs = [core.ico(f"{name}{i}", r, p, sub=1, scale=squash) for i, p in enumerate(pts)]
     return core.join(obs)
 
 

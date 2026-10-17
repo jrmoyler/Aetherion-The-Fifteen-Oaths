@@ -4,7 +4,7 @@ Usage (from repo root):
   /opt/blender-venv/bin/python tools/blender/creatures/forge.py                # all archetypes + variants
   /opt/blender-venv/bin/python tools/blender/creatures/forge.py hound golem    # selected archetypes (+their variants)
   /opt/blender-venv/bin/python tools/blender/creatures/forge.py hound-oath-01  # one id
-  options: --base-only  --no-review  --jobs N
+  options: --base-only  --no-review
 Requires scikit-image in the Blender venv (marching cubes):  /opt/blender-venv/bin/pip install scikit-image
 
 Each id is built in its own Python process (fresh Blender state), then re-imported for
@@ -62,27 +62,19 @@ def main():
         return
     base_only = "--base-only" in argv
     review = "--no-review" not in argv
-    jobs = 1
-    if "--jobs" in argv:
-        jobs = int(argv[argv.index("--jobs") + 1])
     names = [a for a in argv if not a.startswith("--") and not a.isdigit()]
     ids = ids_for(names, base_only)
     py = sys.executable
     env = dict(os.environ)
     env.setdefault("FORGE_SCRATCH", "/tmp/creatureforge")
-    procs = []
     failed = []
     for cid in ids:
-        while len([p for p in procs if p[1].poll() is None]) >= jobs:
-            time.sleep(1)
-        p = subprocess.Popen([py, os.path.abspath(__file__), "--build", cid], env=env)
-        procs.append((cid, p))
-    for cid, p in procs:
-        if p.wait() != 0:
+        # one fresh process per creature (clean Blender state); validate + review right after
+        if subprocess.call([py, os.path.abspath(__file__), "--build", cid], env=env) != 0:
             failed.append(cid)
-    ok = [c for c in ids if c not in failed]
-    if review and ok:
-        subprocess.call([py, os.path.join(HERE, "validate.py")] + ok, env=env)
+            continue
+        if review:
+            subprocess.call([py, os.path.join(HERE, "validate.py"), cid], env=env)
     if failed:
         print("FAILED:", failed)
         sys.exit(1)

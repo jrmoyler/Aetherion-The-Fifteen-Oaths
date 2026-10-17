@@ -98,7 +98,7 @@ def clips_wraith(ctx, p, cloth):
             P.r(f"upperarm_{s}", x=-0.9 * a + 1.6 * k, z=-g * (0.6 * a - 0.1 * k))
             P.r(f"forearm_{s}", x=0.8 * a - 0.2 * k)
             P.r(f"hand_{s}", x=0.4 * a - 0.3 * k)
-        flutter(P, t, 0.12, 0.4 * k - 0.2 * a, 2, flare=0.35 * k)
+        flutter(P, t, 0.10, 0.22 * k - 0.12 * a, 2, flare=0.18 * k)
         if xf: xf("attack", t, P)
 
     def hit(t, P):

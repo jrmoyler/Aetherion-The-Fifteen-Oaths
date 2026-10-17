@@ -151,7 +151,7 @@ export const MATERIALS = {
       const pat = smooth(0.35, 0.75, fbm(u, v, 5, 5, 12));
       const n = fbm(u, v, 24, 2, 4);
       o.h = 0.5 + n * 0.05 + pat * 0.06;
-      o.r = lerp(0.82, 0.32, pat); o.g = lerp(0.46, 0.55, pat); o.b = lerp(0.3, 0.46, pat);
+      o.r = lerp(0.74, 0.32, pat); o.g = lerp(0.47, 0.55, pat); o.b = lerp(0.34, 0.46, pat);
       o.rough = lerp(0.3 + br * 0.1, 0.8, pat); o.metal = lerp(1, 0.1, pat);
     },
   },
@@ -347,7 +347,7 @@ export const MATERIALS = {
       o.h = 0.4 + s * 0.4;
       o.r = lerp(0.35, 0.92, foam); o.g = lerp(0.6, 0.96, foam); o.b = lerp(0.7, 0.98, foam);
       o.rough = 0.1 + foam * 0.3; o.metal = 0;
-      const e = foam * 0.25; o.er = e * 0.8; o.eg = e * 0.9; o.eb = e;
+      const e = 0.18 + foam * 0.45; o.er = e * 0.82; o.eg = e * 0.92; o.eb = e;
     },
   },
   'liquid.reagent': {
@@ -390,3 +390,5 @@ export const MATERIALS = {
 };
 
 export const MATERIAL_KEYS = Object.keys(MATERIALS);
+/** Bump when shared bake code (noise / post-process / stoneBlocks) changes, to invalidate IndexedDB caches. */
+export const LIB_VERSION = 5;

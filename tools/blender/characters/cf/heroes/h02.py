@@ -68,7 +68,7 @@ def rime_ninja(F, b, spec):
     K.hood(F, b, hood_p, thick=0.012, face_open=0.065, drape=False)
     hc, hs = b.hc, b.hs
     F.paint(lining, S.ellipsoid(hc + v3(0, -0.105, -0.02) * hs, (0.09 * hs, 0.04 * hs, 0.12 * hs)), only=[hood_p])
-    F.shell(lining, S.ellipsoid(J['neck'] + v3(0, -0.02, 0.02), (0.11 * w, 0.11, 0.08)).inter(S.halfspace(J['neck'], (0, 1, 0.3)), 0.01), 0.006, 0.02, 0.006)
+    F.shell(lining, K.below_head(b, S.ellipsoid(J['neck'] + v3(0, -0.02, 0.02), (0.11 * w, 0.11, 0.08)).inter(S.halfspace(J['neck'], (0, 1, 0.3)), 0.01)), 0.006, 0.02, 0.006)
     # frost saber
     fr = W.grip_frame(b, 'R')
     wl = F.part(('leather', '#202226'), 'hand.R', 'rigid', 'w_grip')

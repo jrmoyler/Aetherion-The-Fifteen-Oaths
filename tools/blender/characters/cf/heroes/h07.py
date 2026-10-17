@@ -118,7 +118,7 @@ def graft_sorcerer(F, b, spec):
         K.band(F, b, cream, 'forearm.' + sd, 0.92, 0.03, 0.01, reach=0.06)
         for t in (0.75, 0.9):
             K.band(F, b, strapp, 'shin.' + sd, t, 0.012, 0.02, reach=0.09)
-    F.shell(cream, S.ellipsoid(J['neck'] + v3(0, -0.03, -0.02), (0.08, 0.08, 0.07)).inter(S.halfspace(J['neck'], (0, 1, 0)), 0.01), 0.006, 0.02, 0.006)
+    F.shell(cream, K.below_head(b, S.ellipsoid(J['neck'] + v3(0, -0.03, -0.02), (0.08, 0.08, 0.07)).inter(S.halfspace(J['neck'], (0, 1, 0)), 0.01)), 0.006, 0.02, 0.006)
     zt = J['pelvis'][2] + 0.05 * s
     yf = K.body_extent(b, zt, 0, 'front'); yb = K.body_extent(b, zt, 0, 'back')
     xr = abs(K.body_extent(b, zt, 0, 'right', y=(yf + yb) / 2, axis='x'))

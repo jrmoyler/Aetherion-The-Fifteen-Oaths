@@ -309,12 +309,12 @@ def clips(cls, legs):
                   (14, merge(R, {'hips_loc': (0, -0.30 * sc, -0.06), 'hips': (10, 10, 4), 'spine': (-10, 0, 0), 'spine1': (-12, 0, 0), 'head': (-20, 10, 0),
                                  'thighL': (60, 0, 8), 'shinL': 110, 'thighR': (40, 0, 4), 'shinR': 90, 'armL': (40, 50, 0), 'armR': (60, 50, 0), 'foreL': 40, 'foreR': 30})),
                   (24, merge({'hips_loc': (0, -(dz - 0.16) * 1.0, -0.18 * sc), 'hips': (-70, 12, 6), 'spine': (-6, 0, 0), 'spine1': (-4, 0, 0), 'neck': (6, 0, 0), 'head': (10, 25, 0),
-                              'thighL': (78, 0, 12), 'shinL': 60, 'thighR': (55, 0, 8), 'shinR': 40, 'armL': (40, 80, 0), 'foreL': 20, 'armR': (20, 75, 0), 'foreR': 30})),
+                              'thighL': (40, 0, 12), 'shinL': 60, 'thighR': (30, 0, 8), 'shinR': 50, 'armL': (40, 80, 0), 'foreL': 20, 'armR': (20, 75, 0), 'foreR': 30})),
                   (30, merge({'hips_loc': (0, -(dz - 0.13), -0.2 * sc), 'hips': (-86, 12, 6), 'spine': (2, 0, 0), 'spine1': (2, 0, 0), 'neck': (8, 0, 0), 'head': (14, 35, 0),
-                              'thighL': (88, 0, 14), 'shinL': 30, 'thighR': (78, 0, 10), 'shinR': 20, 'footL': (-30,), 'footR': (-30,),
+                              'thighL': (14, 0, 14), 'shinL': 20, 'thighR': (24, 0, 10), 'shinR': 35, 'footL': (-30,), 'footR': (-30,),
                               'armL': (30, 85, 0), 'foreL': 15, 'armR': (10, 80, 0), 'foreR': 25})),
                   (48, merge({'hips_loc': (0, -(dz - 0.13), -0.2 * sc), 'hips': (-88, 12, 6), 'spine': (2, 0, 0), 'spine1': (2, 0, 0), 'neck': (10, 0, 0), 'head': (16, 40, 0),
-                              'thighL': (90, 0, 14), 'shinL': 26, 'thighR': (80, 0, 10), 'shinR': 16, 'footL': (-34,), 'footR': (-34,),
+                              'thighL': (10, 0, 14), 'shinL': 14, 'thighR': (20, 0, 10), 'shinR': 30, 'footL': (-34,), 'footR': (-34,),
                               'armL': (30, 88, 0), 'foreL': 12, 'armR': (10, 84, 0), 'foreR': 22}))]
     C['death'] = (48, False, Keys(death_keys))
     reach = merge(R, {'hips_loc': (0, -0.10 * sc, 0.0), 'hips': (16, 0, 0), 'spine': (14, 0, 0), 'spine1': (12, 0, 0), 'head': (-6, 0, 0),
@@ -411,12 +411,38 @@ class Applier:
             pbs['toe.' + side].rotation_quaternion = self.eul(g('toe' + side, 1)[0], 0, 0, m)
 
 
+UNGROUNDED = {'jump_loop', 'death', 'sit'}
+
+
+def foot_points(arm):
+    out = []
+    for sd in 'LR':
+        for bn, end in (('foot.' + sd, 'head'), ('foot.' + sd, 'tail'), ('toe.' + sd, 'tail')):
+            pb = arm.pose.bones[bn]
+            out.append(float(getattr(pb, end).z))
+    return out
+
+
+def ground(arm, rest):
+    bpy.context.view_layer.update()
+    cur = foot_points(arm)
+    d = min(c - r for c, r in zip(cur, rest))
+    hb = arm.pose.bones['hips']
+    hb.location = (hb.location[0], hb.location[1] - d, hb.location[2])
+
+
 def bake_actions(arm, cls, legs, log=print, only=None, abd_off=0.0):
     app = Applier(arm, abd_off)
     C = clips(cls, legs)
     if arm.animation_data is None:
         arm.animation_data_create()
     acts = []
+    for pb in arm.pose.bones:
+        pb.rotation_mode = 'QUATERNION'
+        pb.rotation_quaternion = (1, 0, 0, 0)
+        pb.location = (0, 0, 0)
+    bpy.context.view_layer.update()
+    rest_feet = foot_points(arm)
     for name in CLIP_ORDER:
         if only and name not in only:
             continue
@@ -432,6 +458,8 @@ def bake_actions(arm, cls, legs, log=print, only=None, abd_off=0.0):
         for f in frames:
             pose = fn(f if not loop else f % n)
             app.apply(pose)
+            if name not in UNGROUNDED:
+                ground(arm, rest_feet)
             for pb in arm.pose.bones:
                 q = pb.rotation_quaternion
                 if pb.name in prev and prev[pb.name].dot(q) < 0:
@@ -440,6 +468,13 @@ def bake_actions(arm, cls, legs, log=print, only=None, abd_off=0.0):
                 pb.keyframe_insert('rotation_quaternion', frame=f + 1)
                 if pb.name == 'hips':
                     pb.keyframe_insert('location', frame=f + 1)
+        try:
+            fcs = act.fcurves
+        except AttributeError:
+            fcs = [fc for layer in act.layers for strip in layer.strips for bag in strip.channelbags for fc in bag.fcurves]
+        for fc in fcs:
+            for kp in fc.keyframe_points:
+                kp.interpolation = 'LINEAR'
         acts.append(act)
     arm.animation_data.action = None
     return acts

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Roster Viewer</title>
+<style>
+  :root { --bg: #d9d6cf; --ink: #1c1d24; --panel: rgba(240, 236, 228, 0.88); }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 13px Georgia, 'Times New Roman', serif; overflow: hidden; }
+  canvas { width: 100%; height: 100%; display: block; touch-action: none; }
+  #hud { position: fixed; left: 12px; top: 10px; background: var(--panel); padding: 8px 12px; border-left: 3px solid #2a3450; max-width: calc(100vw - 48px); }
+  #hud b { font-variant: small-caps; letter-spacing: .04em; }
+  select { font: inherit; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud"><b>Aetherion hero roster</b> — clip <select id="clip"></select> <span id="stat"></span></div>
+<script type="module">
+// Dev-only check page: serve with the game's Vite dev server and open
+// /assets/characters/viewer.html?clip=walk&only=oath-01-ninja
+import { Engine } from '/node_modules/@babylonjs/core/Engines/engine.js';
+import { Scene } from '/node_modules/@babylonjs/core/scene.js';
+import { ArcRotateCamera } from '/node_modules/@babylonjs/core/Cameras/arcRotateCamera.js';
+import { HemisphericLight } from '/node_modules/@babylonjs/core/Lights/hemisphericLight.js';
+import { DirectionalLight } from '/node_modules/@babylonjs/core/Lights/directionalLight.js';
+import { Vector3 } from '/node_modules/@babylonjs/core/Maths/math.vector.js';
+import { Color4, Color3 } from '/node_modules/@babylonjs/core/Maths/math.color.js';
+import { SceneLoader } from '/node_modules/@babylonjs/core/Loading/sceneLoader.js';
+import '/node_modules/@babylonjs/core/Helpers/sceneHelpers.js';
+import '/node_modules/@babylonjs/loaders/glTF/index.js';
+
+const qs = new URLSearchParams(location.search);
+const clipName = qs.get('clip') || 'idle';
+const only = qs.get('only');
+const canvas = document.getElementById('c');
+const engine = new Engine(canvas, true, { preserveDrawingBuffer: true });
+const scene = new Scene(engine);
+scene.clearColor = new Color4(0.85, 0.84, 0.81, 1);
+const cam = new ArcRotateCamera('cam', -Math.PI / 2 + 0.35, 1.32, 14, new Vector3(0, 1.0, 0), scene);
+cam.attachControl(canvas, true);
+new HemisphericLight('h', new Vector3(0, 1, 0), scene).intensity = 0.7;
+const sun = new DirectionalLight('d', new Vector3(-0.5, -1, 0.6), scene);
+sun.intensity = 2.2;
+scene.createDefaultEnvironment({ createGround: true, createSkybox: false, groundColor: new Color3(0.7, 0.7, 0.68) });
+window.__aetherion = { engine, scene };
+
+const manifest = await (await fetch('./manifest.json')).json();
+const list = only ? manifest.filter((m) => only.split(',').includes(m.id)) : manifest;
+const sel = document.getElementById('clip');
+for (const c of (manifest[0]?.clips || [])) { const o = document.createElement('option'); o.textContent = c; o.selected = c === clipName; sel.appendChild(o); }
+sel.onchange = () => { qs.set('clip', sel.value); location.search = qs.toString(); };
+const cols = Math.ceil(Math.sqrt(list.length));
+let loaded = 0;
+const report = [];
+await Promise.all(list.map(async (m, i) => {
+  const res = await SceneLoader.ImportMeshAsync('', './', m.file, scene);
+  const root = res.meshes[0];
+  root.position.x = (i % cols - (cols - 1) / 2) * 1.6;
+  root.position.z = -Math.floor(i / cols) * 1.8;
+  res.animationGroups.forEach((g) => g.stop());
+  const g = res.animationGroups.find((a) => a.name === clipName);
+  if (g) g.start(true);
+  report.push({ id: m.id, groups: res.animationGroups.length, playing: !!g, skeletons: res.skeletons.length });
+  loaded++;
+}));
+cam.radius = Math.max(4, cols * 2.4);
+document.getElementById('stat').textContent = `${loaded} heroes, clip "${clipName}"`;
+window.__charReport = report;
+console.log('roster', JSON.stringify(report));
+engine.runRenderLoop(() => scene.render());
+addEventListener('resize', () => engine.resize());
+</script>
+</body>
+</html>

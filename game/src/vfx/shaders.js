@@ -137,7 +137,7 @@ void main(){
     float heat = clamp(shape*1.7, 0.0, 1.1);
     col = mix(uC3, uC2, smoothstep(0.0,0.35,heat)); col = mix(col, uC1, smoothstep(0.3,0.75,heat)); col = mix(col, uC0, smoothstep(0.8,1.15,heat));
     col *= 0.5 + heat*0.5;
-    a = smoothstep(0.1, 0.6, heat) * 0.7 * smoothstep(0.0, 0.08, uGrow - vUV.y + 0.02) * (0.55 + 0.45*(1.0-fres));
+    a = smoothstep(0.1, 0.6, heat) * 0.7 * smoothstep(0.0, 0.08, uGrow - vUV.y + 0.02) * smoothstep(0.0, 0.07, vUV.y) * (0.55 + 0.45*(1.0-fres));
   } else if (k == 3) { // smoke / void sheet (alpha blended)
     float n = fbm(uv); float n2 = fbm(uv*1.9 - n);
     col = mix(uC3, uC2, n2*0.6) + uC1*pow(fres, 2.0)*1.2 + uC1*smoothstep(0.62,0.8,n2)*0.8;

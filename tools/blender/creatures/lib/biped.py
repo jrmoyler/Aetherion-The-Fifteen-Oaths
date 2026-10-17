@@ -255,7 +255,7 @@ def clips_raptor(ctx, p):
         a = env(t, [(0, 0), (0.3, 1), (0.42, -0.3), (0.62, -0.3), (1, 0)])
         k = env(t, [(0, 0), (0.3, 0), (0.42, 1), (0.6, 1), (0.95, 0)])
         kick = env(t, [(0, 0), (0.36, 0), (0.46, 1), (0.6, 0.6), (0.8, 0)])
-        P.move("hips", y=(-0.05 * a + 0.08 * k) * H, z=-0.06 * H * max(a, 0) + 0.03 * H * k)
+        P.move("hips", y=(-0.03 * a + 0.03 * k) * H, z=-0.04 * H * max(a, 0) + 0.01 * H * k)
         P.r("hips", x=0.1 * a - 0.1 * k)
         P.r("chest", x=-0.1 * a)
         P.r("neck1", x=0.35 * a - 0.35 * k)
@@ -263,7 +263,7 @@ def clips_raptor(ctx, p):
         P.r("head", x=-0.15 * a + 0.1 * k)
         jaw_open = env(t, [(0, 0.05), (0.3, 0.6), (0.43, 0.7), (0.5, 0.0), (1, 0.05)])
         P.r("jaw", x=-jaw_open)
-        P.chain(tail, x=-(0.15 * a - 0.15 * k), falloff=1.1)
+        P.chain(tail, x=-(0.08 * a - 0.06 * k), falloff=1.05)
         arms(P, 0.8 * k, 0)
         P.foot("L")
         # right foot: sickle-claw rake forward

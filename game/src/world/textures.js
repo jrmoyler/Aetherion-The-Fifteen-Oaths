@@ -89,7 +89,7 @@ export function buildLayer(name, N, seed = 1) {
       nStr = name === 'mud' ? 1 : 3; break;
     }
     case 'rock': case 'basalt': case 'shale': case 'limestone': case 'strata': {
-      const big = g.fbm(3, 6, seed, 0.55); const crk = g.voronoi(7, seed + 7, 0.95); const fine = g.fbm(28, 3, seed + 8); const lich = g.fbm(10, 3, seed + 9);
+      const big = g.fbm(3, 6, seed, 0.55); const crk = g.voronoi(7, seed + 7, 0.95); const fine = g.fbm(28, 3, seed + 8); const lich = name === 'strata' ? g.fbm(14, 3, seed + 9, 0.5, 1, 0.12) : g.fbm(10, 3, seed + 9);
       const bands = g.fbm(2, 4, seed + 10, 0.5, 1, 1);
       for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
         const i = y * N + x; const v = y / N; const edge = crk.f2[i] - crk.f1[i];
@@ -114,12 +114,15 @@ export function buildLayer(name, N, seed = 1) {
           c = mix3(c, hex(0x6a6a50), ss(0.7, 0.85, lich[i]) * 0.25);
           h = big[i] * 0.6 + fine[i] * 0.2 - crack * 0.35 - ss(0.75, 0.9, pits[i]) * 0.2; r = 0.8;
         } else { // strata: horizontal sandstone bands along v (world-up in side projections)
-          const t = v * 9 + bands[i] * 1.6 + big[i] * 0.4;
+          const t = v * 7 + bands[i] * 2.2 + big[i] * 0.6;
           const band = t - Math.floor(t);
-          const hue = Math.floor(t) % 4;
-          const pal = [hex(0x9a6644), hex(0xc0905e), hex(0x7e4c34), hex(0xd8b080)][hue];
-          c = mix3(pal, hex(0x5e3a28), ss(0.85, 1.0, band) * 0.6);
-          c = mix3(c, hex(0xe2c49a), fine[i] * 0.2);
+          const hue = ((Math.floor(t) % 5) + 5) % 5;
+          const pal = [hex(0xa87252), hex(0xbc8a62), hex(0x9a6448), hex(0xc89c70), hex(0xb07a56)][hue];
+          const next = [hex(0xbc8a62), hex(0x9a6448), hex(0xc89c70), hex(0xb07a56), hex(0xa87252)][hue];
+          c = mix3(pal, next, ss(0.55, 1.0, band) * 0.5);
+          c = mix3(c, hex(0x6e4430), ss(0.9, 1.0, band) * 0.35);
+          const streak = g.N && lich; c = mix3(c, hex(0x5a3c2c), ss(0.6, 0.85, streak[i]) * 0.25); // vertical weathering
+          c = mix3(c, hex(0xe2c49a), fine[i] * 0.15);
           h = 0.5 + 0.3 * ss(0.0, 0.15, band) - 0.3 * ss(0.8, 1, band) + fine[i] * 0.2 - crack * 0.2; r = 0.85;
         }
         put(i, c, sat(h), r);
@@ -149,7 +152,7 @@ export function buildLayer(name, N, seed = 1) {
       nStr = 2.4; break;
     }
     case 'marble': case 'cobble': {
-      const cells = g.voronoi(name === 'cobble' ? 9 : 22, seed, 0.85, 1); const fine = g.fbm(32, 3, seed + 1); const big = g.fbm(3, 3, seed + 2);
+      const cells = g.voronoi(name === 'cobble' ? 13 : 22, seed, 0.85, 1); const fine = g.fbm(32, 3, seed + 1); const big = g.fbm(3, 3, seed + 2);
       for (let i = 0; i < NN; i++) {
         const e = cells.f2[i] - cells.f1[i]; const stone = ss(0.02, name === 'cobble' ? 0.14 : 0.2, e);
         const sc = name === 'cobble' ? ramp([[0, hex(0x5a554c)], [0.5, hex(0x6e685e)], [1, hex(0x857e72)]], sat(cells.id[i] * 0.45 + fine[i] * 0.35 + big[i] * 0.3 - 0.05))
@@ -157,7 +160,7 @@ export function buildLayer(name, N, seed = 1) {
         const mortar = name === 'cobble' ? hex(0x4a4032) : hex(0x6a6052);
         put(i, mix3(mortar, sc, stone), stone * (0.6 + 0.4 * Math.sqrt(sat(e * 3))) + fine[i] * 0.1, 0.62 + (1 - stone) * 0.3);
       }
-      nStr = 3.5; break;
+      nStr = name === 'cobble' ? 2.2 : 3; break;
     }
     case 'lava': {
       const crk = g.voronoi(5, seed, 0.9); const big = g.fbm(4, 5, seed + 1); const fine = g.fbm(30, 2, seed + 2);

@@ -263,7 +263,7 @@ def hood(F, b, pid, thick=0.012, face_open=0.06, drape=True):
     F.solid(pid, shell.displaced(folds(0.004, (30, 30, 30), 11), 0.006), 0.006)
     if drape:
         # cowl drape over shoulders/neck
-        F.shell(pid, S.ellipsoid(b.J['neck'] + v3(0, 0.01, 0.0), (0.17 * b.w, 0.15 * b.s, 0.1 * b.s)), -0.002, thick,
+        F.shell(pid, below_head(b, S.ellipsoid(b.J['neck'] + v3(0, 0.01, 0.0), (0.17 * b.w, 0.15 * b.s, 0.1 * b.s))), -0.002, thick,
                 0.01, 'cur', folds(0.005, (25, 25, 12), 12))
 
 
@@ -430,3 +430,8 @@ def quilt(amp=0.003, period=0.05, axes=(0, 2)):
         q = np.abs(np.sin((u + v) * 0.5)) * np.abs(np.sin((u - v) * 0.5))
         return amp * (np.sqrt(q) - 0.5)
     return fn
+
+
+def below_head(b, prim, extra=0.035):
+    """Clip a mask so conformed shells never climb onto the jaw / face."""
+    return prim.inter(S.halfspace(b.J['neck'] + v3(0, 0, extra * b.s), (0, 0, 1)), 0.01)

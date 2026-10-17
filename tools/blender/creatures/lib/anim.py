@@ -104,19 +104,32 @@ class Rig:
         return (pb.tail - rest).length
 
     def _calibrate_poles(self):
-        best = {n: (1e9, 0) for n in self.legs}
-        for ang in (-90, 0, 90, 180):
-            for leg in self.legs.values():
-                self.ob.pose.bones[leg.bones[1]].constraints["IK"].pole_angle = math.radians(ang)
-            bpy.context.view_layer.update()
-            for leg in self.legs.values():
-                e = self._knee_err(leg)
-                if e < best[leg.name][0]:
-                    best[leg.name] = (e, ang)
-        for leg in self.legs.values():
-            self.ob.pose.bones[leg.bones[1]].constraints["IK"].pole_angle = math.radians(best[leg.name][1])
-            if best[leg.name][0] > 0.02:
-                print(f"  warn: leg {leg.name} rest IK error {best[leg.name][0]:.3f}")
+        """search the IK pole angle per leg (coarse 10 deg sweep + 1 deg refine) that reproduces
+        the rest pose exactly, whatever the bone roll / leg orientation."""
+        legs = list(self.legs.values())
+        if not legs:
+            return
+
+        def sweep(cands):
+            best = {l.name: (1e9, 0.0) for l in legs}
+            for i in range(len(cands[legs[0].name])):
+                for l in legs:
+                    self.ob.pose.bones[l.bones[1]].constraints["IK"].pole_angle = math.radians(cands[l.name][i])
+                bpy.context.view_layer.update()
+                for l in legs:
+                    e = self._knee_err(l)
+                    if e < best[l.name][0]:
+                        best[l.name] = (e, cands[l.name][i])
+            return best
+
+        coarse = sweep({l.name: list(range(-180, 180, 10)) for l in legs})
+        fine = sweep({l.name: [coarse[l.name][1] + d for d in range(-9, 10)] for l in legs})
+        for l in legs:
+            e, ang = fine[l.name]
+            self.ob.pose.bones[l.bones[1]].constraints["IK"].pole_angle = math.radians(ang)
+            if e > 0.01:
+                print(f"  warn: leg {l.name} rest IK error {e:.3f}")
+
 
     # ------------------------------------------------------------------ sampling
     def apply(self, P):

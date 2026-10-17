@@ -240,6 +240,7 @@ export function getMaterial(scene, key, opts = {}) {
       m.alpha = alpha;
       m.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHABLEND;
       m.backFaceCulling = false;
+      m.twoSidedLighting = true;
     }
   }
   if (opts.backFaceCulling !== undefined) { m.backFaceCulling = opts.backFaceCulling; if (!opts.backFaceCulling) m.twoSidedLighting = true; }

@@ -241,7 +241,7 @@ export default {
       const oz = 18;
       for (const [r, hh] of [[5.2, 0.5], [4.2, 1.0], [3.2, 1.5]]) S.b.cyl(M.trim, 0, 0.16, oz, r, r, hh, 28);
       S.col.circle(0, oz, 5.2, -1, 0.66, true); S.col.circle(0, oz, 4.2, -1, 1.16, true); S.col.circle(0, oz, 3.2, -1, 1.66, true);
-      for (const s of [-1, 1]) S.b.tube(M.meteor, [[s * 3.4, 1.4, oz], [s * 4.6, 4.5, oz], [s * 4.2, 8, oz], [s * 2.6, 10.6, oz]], (t) => 0.75 - t * 0.6, 8);
+      for (const s of [-1, 1]) S.b.tube(M.meteor, [[s * 3.6, 1.4, oz], [s * 5.4, 5, oz], [s * 5.2, 9.5, oz], [s * 3.4, 12.8, oz], [s * 1.8, 13.6, oz]], (t) => 1.25 - t * 1.1, 10);
       S.animMesh('orb', 0, 7.2, oz, 0, (b) => { b.sphere(M.meteor, 0, 0, 0, 1.7, 18); }, (n, t) => { n.rotation.y = t * 0.25; n.position.y = Math.sin(t * 0.7) * 0.3; });
       S.animMesh('ring1', 0, 7.2, oz, 0, (b) => { b.torus(M.metal, 0, 0, 0, 3.0, 0.11, 48, 5, { rx: Math.PI / 2 }); }, (n, t) => { n.rotation.y = t * 0.4; n.rotation.x = 0.35; });
       S.animMesh('ring2', 0, 7.2, oz, 0, (b) => { b.torus(M.metal, 0, 0, 0, 3.6, 0.07, 48, 4); b.sphere(M.meteor, 3.6, 0, 0, 0.35, 10); }, (n, t) => { n.rotation.y = -t * 0.3; n.rotation.z = 0.5; });
@@ -351,7 +351,7 @@ export default {
     },
     signature(S) {
       const M = S.M; const P = [];
-      for (const [x, z] of [[-46, -46], [46, -46], [-46, 46], [46, 46], [-58, 0], [58, 0], [0, -58]]) if (S.clear(x, z, 3)) { ritualPillar(S, x, z, 18, 0); P.push([x, z, Math.atan2(x, z)]); S.reserve(x, z, 4); }
+      for (const [x, z] of [[-46, -46], [46, -46], [-46, 46], [46, 46], [-58, 0], [58, 0]]) if (S.clear(x, z, 3)) { ritualPillar(S, x, z, 18, 0); P.push([x, z, Math.atan2(x, z)]); S.reserve(x, z, 4); }
       P.sort((p, q) => p[2] - q[2]);
       for (let i = 0; i < P.length; i++) { const p = P[i], q = P[(i + 1) % P.length]; const d = Math.hypot(p[0] - q[0], p[1] - q[1]); if (d < 70 && P.length > 1) swag(S, M.drape, [p[0], 18.4, p[1]], [q[0], 18.4, q[1]], 4 + d * 0.05, 1.6); }
       outerRocks(S, M.red, 12, 160, 240, [14, 28], [14, 34]);
@@ -378,7 +378,7 @@ export default {
     rim: (S) => ({ type: 'solid', rail: S.M.trim, post: S.M.wall, h: 1.0 }),
     hall(S) {
       const M = S.M; const h = 2.6;
-      terraceStairs(S, { x0: -44, x1: 44, z0: 50, z1: 90, h, mat: M.wall, coping: M.metal, stairW: 20, run: 4.4 });
+      terraceStairs(S, { x0: -44, x1: 44, z0: 50, z1: 90, h, mat: M.wall, coping: M.trim, stairW: 20, run: 4.4 });
       S.reserve(0, 70, 46);
       foldedScreen(S, -40, 82, 0, 16, 15, h, true);
       S.d.torus(M.metal, 0, h + 8, 80.8, 5.2, 0.32, 48, 6, { rx: Math.PI / 2 });
@@ -389,8 +389,8 @@ export default {
     signature(S) {
       const M = S.M;
       for (const a of S.roads) opticalGate(S, ...polar(46.2, a), a);
-      for (const a of freeSpots(S, 56, [40 * D, -40 * D, 90 * D, -90 * D, 140 * D, -140 * D, 180 * D], 7)) {
-        const [x, z] = polar(56, a); S.F.push(x, 0, z, a); foldedScreen(S, -9, 0, 0, 8, 7.5 + S.rand() * 2.5, 0.06, false); S.F.pop(); S.reserve(x, z, 10);
+      for (const a of freeSpots(S, 55, [30 * D, -30 * D, 55 * D, -55 * D, 90 * D, -90 * D, 120 * D, -120 * D, 145 * D, -145 * D], 5)) {
+        const [x, z] = polar(55, a); S.F.push(x, 0, z, a); foldedScreen(S, -7, 0, 0, 6, 7.5 + S.rand() * 2.5, 0.06, false); S.F.pop(); S.reserve(x, z, 10);
       }
       for (const s of [-1, 1]) {
         const x = s * 60; if (!S.clear(x, -20, 4) || !S.clear(x, 20, 4) || !S.clear(x, 0, 4)) continue;
@@ -416,7 +416,7 @@ export default {
     mats: {
       pave: ['paving.slab', { tint: '#6e6d6a' }], border: ['stone.darkgranite', { tint: '#3a3e44' }], ground: ['paving.flagstone', { tint: '#5e5e5c' }],
       wall: ['stone.darkgranite', { tint: '#3f444c' }], trim: ['stone.darkgranite', { tint: '#4d535c' }], metal: ['metal.brass', { tint: '#b8904a' }], inlay: ['metal.brass'],
-      roof: ['metal.brass', { tint: '#7a6034' }], glass: ['glass.tinted', { tint: '#8a8a80' }], face: ['plaster.lime', { tint: '#e8dcc0' }],
+      roof: ['stone.slate', { tint: '#2c3a40' }], glass: ['glass.tinted', { tint: '#8a8a80' }], face: ['plaster.lime', { tint: '#e8dcc0' }],
       house: ['stone.darkgranite', { tint: '#464b53' }], found: ['stone.darkgranite', { tint: '#383c42' }], cube: ['stone.basalt', { tint: '#202226' }],
     },
     inlayExtra(S, mat, y) {
@@ -426,7 +426,7 @@ export default {
     rim: (S) => ({ type: 'stone', rail: S.M.trim, post: S.M.wall, cap: (x, y, z) => S.d.sphere(S.M.metal, x, y + 0.08, z, 0.18, 8) }),
     hall(S) {
       const M = S.M; const h = 3;
-      terraceStairs(S, { x0: -40, x1: 40, z0: 52, z1: 92, h, mat: M.wall, coping: M.metal, stairW: 14, run: 5 });
+      terraceStairs(S, { x0: -40, x1: 40, z0: 52, z1: 92, h, mat: M.wall, coping: M.trim, stairW: 14, run: 5 });
       S.reserve(0, 72, 44);
       arcade(S, M.wall, -30, 66, 30, 66, 14, 10, 3, 10, { y: h });
       S.b.box(M.wall, 0, h, 79, 64, 14, 22); S.b.hip(M.roof, 0, h + 14, 79, 65, 23, 6);

@@ -134,7 +134,7 @@ def clips(ctx, p):
         # anticipation (0-.35) -> strike (.35-.5) -> follow through (.5-.7) -> recover
         a = env(t, [(0, 0), (0.32, 1), (0.42, -0.2), (0.62, -0.2), (1.0, 0)])   # crouch(+)/extend(-)
         k = env(t, [(0, 0), (0.30, 0), (0.42, 1), (0.6, 1), (0.95, 0)])          # strike amount
-        P.move("hips", y=(-0.05 * a + 0.05 * k) * H, z=-0.035 * H * max(a, 0) - 0.01 * H * k)
+        P.move("hips", y=(-0.025 * a + 0.015 * k) * H, z=-0.03 * H * max(a, 0) - 0.008 * H * k)
         P.r("hips", x=0.06 * a)
         P.chain(SPINE, x=-0.05 * a + 0.04 * k)
         if style == "bite":

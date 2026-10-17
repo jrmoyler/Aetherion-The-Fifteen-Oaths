@@ -93,7 +93,7 @@ export function createVegetation(ctx, pool, terrainRes) {
   const crystalMat = new PBRMaterial('vegCrystal', scene);
   crystalMat.metallic = 0; crystalMat.roughness = 0.12; crystalMat.emissiveColor = new Color3(0.22, 0.07, 0.4); crystalMat.environmentIntensity = 1.4;
   const rockMat = new PBRMaterial('vegRock', scene);
-  rockMat.metallic = 0; rockMat.roughness = 0.85; rockMat.transparencyMode = PBRMaterial.PBRMATERIAL_OPAQUE;
+  rockMat.metallic = 0; rockMat.roughness = 0.85; rockMat.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHATEST; rockMat.alphaCutOff = 0.01; // keeps VERTEXALPHA so instance alpha (rock layer) reaches the shader
   if (terrainRes) new RockPlugin(rockMat, terrainRes);
 
   // species meshes per LOD

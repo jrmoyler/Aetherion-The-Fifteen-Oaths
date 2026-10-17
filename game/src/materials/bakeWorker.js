@@ -1,6 +1,9 @@
 // Web Worker: bakes full-resolution procedural texture sets off the main thread, with an
 // IndexedDB cache so repeat visits upload instantly.
 import { bake } from './bake.js';
+import { MATERIALS, LIB_VERSION } from './library.js';
+
+function defHash(key) { const d = MATERIALS[key]; const src = `${LIB_VERSION}|${d.gen}|${d.size}|${d.normal}|${d.alpha}`; let h = 5381; for (let i = 0; i < src.length; i++) h = ((h << 5) + h + src.charCodeAt(i)) | 0; return (h >>> 0).toString(36); }
 
 const VERSION = 'v3';
 let dbp = null;
@@ -26,7 +29,7 @@ async function put(id, v) {
 }
 
 self.onmessage = async (e) => {
-  const { key, N } = e.data; const id = `${VERSION}:${key}@${N}`;
+  const { key, N } = e.data; const id = `${VERSION}:${key}@${N}:${defHash(key)}`;
   try {
     let r = await get(id); let cached = !!r;
     if (!r) { r = bake(key, N, false); await put(id, { N: r.N, albedo: r.albedo, normal: r.normal, orm: r.orm, emis: r.emis, avgLin: r.avgLin, ms: r.ms }); }

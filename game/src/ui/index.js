@@ -86,6 +86,7 @@ function build(ctx) {
   scrim.addEventListener('click', () => { if (stack.length && stack[stack.length - 1] !== 'dialog') closeWindow(stack[stack.length - 1]); });
   const stack = [];
   const windows = {};
+  const syncTyping = () => { try { ctx.input?.setTyping?.(stack.length > 0 || !!ui.chat?.focused); } catch { /* ignore */ } };
   ui.openWindow = (name) => {
     const w = windows[name]; if (!w) return;
     if (stack.includes(name)) return;
@@ -94,6 +95,7 @@ function build(ctx) {
     w.win.hidden = false; w.win.style.opacity = '1';
     w.win.style.zIndex = String(45 + stack.length * 2); scrim.style.zIndex = String(44 + stack.length * 2);
     scrim.hidden = false;
+    syncTyping();
     if (document.pointerLockElement) document.exitPointerLock?.();
     w.onOpen?.();
     if (name !== 'dialog') ui.sfx('open');
@@ -105,6 +107,7 @@ function build(ctx) {
     windows[name].win.hidden = true;
     windows[name].onClose?.();
     if (!stack.length) scrim.hidden = true; else scrim.style.zIndex = String(44 + stack.length * 2);
+    syncTyping();
     if (name === 'dialog') dialogs.cancel?.();
     if (!silent && name !== 'dialog') ui.sfx('close');
   }
@@ -206,13 +209,19 @@ function build(ctx) {
       default: break;
     }
   });
-  // Escape also closes windows when the canvas isn't focused (input module ignores keys while typing).
+  // While a window is open the game keys are suspended (Tab navigates focus, typing is safe);
+  // Escape / M / I / B / J still toggle windows here.
   addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && stack.length && document.activeElement && document.activeElement !== document.body && document.activeElement.tagName !== 'CANVAS') {
-      if (document.activeElement.tagName === 'INPUT' && document.activeElement.closest('.ae-chat')) return;
-      closeWindow(stack[stack.length - 1]);
-    }
-  });
+    if (!stack.length) return;
+    const t = e.target;
+    if (t && t.tagName === 'INPUT' && (t.type === 'text' || t.type === 'search')) return;
+    const top = stack[stack.length - 1];
+    const done = () => { e.preventDefault(); e.stopPropagation(); };
+    if (e.code === 'Escape') { done(); closeWindow(top); return; }
+    if (top === 'dialog' || !gs.inGame) return;
+    if (e.code === 'KeyM') { done(); ui.toggleWindow('map'); }
+    else if (e.code === 'KeyI' || e.code === 'KeyB') { done(); ui.toggleWindow('character'); }
+  }, true);
 
   // ---------- bus: loading / fatal
   let loadingDone; const loadingReady = new Promise((r) => { loadingDone = r; });

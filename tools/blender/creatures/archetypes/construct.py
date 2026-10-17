@@ -93,6 +93,20 @@ def build(oath=None):
         for d in (-1, 1):
             plate(f"toe{s}{d}", f"toe_{s}", X((0.26 + d * 0.065, 0.32, 0.045), g), (0.10, 0.20, 0.08), slot="accent", taper=(0.7, 0.6))
         plate(f"heel{s}", f"foot_{s}", X((0.26, -0.12, 0.05), g), (0.12, 0.12, 0.09), slot="accent")
+    # segmented abdomen slats, chest grille, cables, axle caps (mechanical read, not a toy block)
+    for k in range(3):
+        plate(f"slat{k}", "spine1", (0, 0.13, 1.25 + 0.085 * k), (0.34 - 0.02 * k, 0.06, 0.07), rot=(0.1, 0, 0), slot="body", taper=(0.9, 0.9))
+    for k in range(4):
+        P(core.box(f"grille{k}", (0.16, 0.025, 0.022), (0, 0.345, 1.76 - 0.04 * k), rot=(0.3, 0, 0), bevel=0.004), "chest", "secondary", sec_m)
+    for s, g in biped.SIDES:
+        cp = core.bezier_pts(X((0.30, 0.10, 1.48), g), X((0.36, 0.20, 1.30), g), X((0.30, 0.18, 1.12), g), X((0.20, 0.12, 1.10), g), 8)
+        P(core.horn(f"cable{s}", cp, [0.022] * 8, segs=6, cap_flat=True), "spine1", "secondary", sec_m)
+        cp2 = core.bezier_pts(X((0.18, -0.28, 1.86), g), X((0.40, -0.24, 1.95), g), X((0.52, -0.10, 1.90), g), None, 7)
+        P(core.horn(f"cable2{s}", cp2, [0.02] * 7, segs=6, cap_flat=True), "chest", "secondary", sec_m)
+        for nm, bn, pnt, r in (("axk", f"shin_{s}", J["knee"], 0.07), ("axe", f"forearm_{s}", J["elbow"], 0.065)):
+            P(core.cylinder(f"{nm}{s}", r, 0.06, X((pnt[0] + 0.07, pnt[1], pnt[2]), g), rot=(0, math.radians(90), 0), segs=12, bevel=0.008),
+              bn, "accent", acc_m)
+        P(core.cylinder(f"tank{s}", 0.075, 0.42, X((0.20, -0.36, 1.55), g), rot=(0, 0, 0), segs=12, bevel=0.012), "chest", "body", body_m)
     # exhaust stacks on the back
     for s, g in biped.SIDES:
         P(core.cylinder(f"stack{s}", 0.05, 0.36, X((0.16, -0.36, 1.92), g), rot=(-0.25, 0, 0), segs=10, bevel=0.006), "chest", "secondary", sec_m)
@@ -101,11 +115,11 @@ def build(oath=None):
     xf = None
     if clock:
         brass = acc_m
-        for i, (c, r, rot, bn) in enumerate((((0.22, 0.27, 1.78), 0.12, (math.radians(84), 0, 0), "chest"),
-                                             ((-0.20, 0.28, 1.52), 0.09, (math.radians(84), 0, 0), "chest"),
+        for i, (c, r, rot, bn) in enumerate((((0.24, 0.29, 1.80), 0.16, (math.radians(84), 0, 0), "chest"),
+                                             ((-0.22, 0.30, 1.52), 0.12, (math.radians(84), 0, 0), "chest"),
                                              ((0.62, 0.02, 1.84), 0.10, (0, math.radians(90), 0), "upperarm_L"),
                                              ((-0.62, 0.02, 1.84), 0.10, (0, math.radians(90), 0), "upperarm_R"),
-                                             ((0, -0.34, 1.66), 0.16, (math.radians(90), 0, 0), "chest"))):
+                                             ((0, -0.36, 1.66), 0.22, (math.radians(90), 0, 0), "chest"))):
             P(kit.gear(f"gear{i}", r, 12 + 2 * i, 0.03, c, rot), bn, "accent", brass)
         # pendulum hanging in an open cage below the chest
         extra.append(Bone("pendulum", (0, 0.10, 1.48), (0, 0.10, 1.12), "chest"))

@@ -171,7 +171,7 @@ def build(oath=None):
         for i in range(9):
             y = 0.30 - 0.12 * i
             for sgn in (-1, 1):
-                c = V((0.18 * sgn, y, 1.27 - 0.012 * i))
+                c = V((0.17 * sgn, y, 1.32 - 0.014 * i))
                 S.part(core.slab(f"cpl{i}{sgn}", (0.18, 0.13, 0.05), c, (0.15, -0.45 * sgn, 0), seed=i * 3 + sgn, chips=6),
                        "chest" if y > 0.1 else "spine2" if y > -0.3 else "spine1", "accent", plate_m)
         for s, g in quad.SIDES:

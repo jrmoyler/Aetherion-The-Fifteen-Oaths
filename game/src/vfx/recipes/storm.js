@@ -95,8 +95,8 @@ export default {
   // 008 Ion Storm Pillar — a cyan pillar of ionised air, spiralling arcs and a crown of cloud.
   'matrix-new/ionstorm'(fx) {
     K.gather(fx); B.telegraph(fx); const L = life(fx, 3.4) + 0.4; const c = fx.tgt; const t = fx.T.hit; const H = 9;
-    B.column(fx, { pos: c, r: fx.R * 0.38, h: H, t0: t, dur: L, rise: 0.2, kind: 'energy', p: [3, 4, 0, 1.6], scroll: [0.4, -3] });
-    B.column(fx, { pos: c, r: fx.R * 0.15, h: H, t0: t, dur: L, rise: 0.15, kind: 'glow', c0: C('#ffffff'), c1: fx.pal.glow });
+    B.column(fx, { pos: c, r: fx.R * 0.38, h: H, t0: t, dur: L, rise: 0.2, kind: 'energy', p: [3, 4, 0, 2.5], scroll: [0.4, -3], opacity: 0.45 });
+    B.column(fx, { pos: c, r: fx.R * 0.1, h: H, t0: t, dur: L, rise: 0.15, kind: 'glow', c0: C('#ffffff'), c1: fx.pal.glow, opacity: 0.6 });
     for (let i = 0; i < 3; i++) {
       const ph = (i / 3) * 6.28;
       B.bolt(fx, { from: () => { const a = ph + fx.t * 4; return V(c.x + Math.cos(a) * fx.R * 0.5, fx.gy(c) + 0.2, c.z + Math.sin(a) * fx.R * 0.5); }, to: () => { const a = ph + fx.t * 4 + 2; return V(c.x + Math.cos(a) * fx.R * 0.35, fx.gy(c) + H * 0.9, c.z + Math.sin(a) * fx.R * 0.35); }, t0: t + 0.1, dur: L - 0.2, width: 0.2, forks: 2, segs: 18, regen: 0.06, jag: 0.15 });

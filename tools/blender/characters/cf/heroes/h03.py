@@ -99,6 +99,7 @@ def storm_sorcerer(F, b, spec):
     # capelet over the shoulders, copper hem
     mc = J['neck'] + v3(0, 0.01, -0.02)
     cm = S.ellipsoid(mc, (0.42 * w, 0.30 * s, 0.30 * s)).inter(S.halfspace(mc + v3(0, 0, -0.22 * s), (0, 0, -1)), 0.004)
+    cm = K.below_head(b, cm)
     F.shell(cape, cm, 0.02, 0.034, 0.01, 'cur', K.folds(0.006, (14, 14, 8), 31))
     F.paint(trim, S.slab(mc + v3(0, 0, -0.215 * s), (0, 0, 1), 0.016).inter(S.sphere(mc, 0.5), 0), only=[cape])
     K.belt(F, b, leather, J['pelvis'][2] + 0.05 * s, 0.06 * s, 0.03, t1=0.008)

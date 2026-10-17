@@ -56,9 +56,8 @@ export default {
       // lava moat around three sides of the plaza
       const lavaChunk = (x, z, ry, L) => {
         S.F.push(x, 0, z, ry);
-        S.b.box(M.wall, 0, -0.9, 0, 5.6, 0.7, L);
-        S.d.box(M.lava, 0, -0.3, 0, 4.4, 0.1, L + 0.02);
-        for (const s of [-1, 1]) S.b.box(M.wall, s * 2.5, -0.6, 0, 0.7, 1.25, L + 0.02);
+        S.d.box(M.lava, 0, 0.0, 0, 4.4, 0.12, L + 0.02);
+        for (const s of [-1, 1]) S.b.box(M.wall, s * 2.5, -0.3, 0, 0.7, 1.0, L + 0.02);
         S.F.pop();
         S.col.box(x, z, 2.8, L / 2, ry, -1, 0.7, false);
       };
@@ -76,7 +75,7 @@ export default {
           S.d.box(M.wall, c.mx, 10, c.mz, c.L + 0.1, 0.9, 0.6, { ry: c.ry });
           S.reserve(c.mx, c.mz, 4);
           const [ox, oz] = rot2(0, -4.6, c.ry);
-          if (S.rand() < 0.7) { S.d.box(M.lava, c.mx + ox, -0.25, c.mz + oz, c.L * 0.9, 0.1, 4.5, { ry: c.ry }); S.light(c.mx + ox, 1.5, c.mz + oz, '#ff5a10', 10, 0.8); }
+          if (S.rand() < 0.7) { S.d.box(M.lava, c.mx + ox, 0.0, c.mz + oz, c.L * 0.9, 0.12, 4.5, { ry: c.ry }); S.light(c.mx + ox, 1.5, c.mz + oz, '#ff5a10', 10, 0.8); }
         }
       }
       // vented foundry towers
@@ -187,7 +186,7 @@ export default {
     glow: '#b4a2ff', flame: '#d6ccff', lamp: 'lantern',
     banner: { color: '#1e2a44', trim: '#c58a4a', emblem: '#d89a5a' },
     mats: {
-      pave: ['stone.slate', { tint: '#30353e', roughness: 0.55 }], border: ['stone.darkgranite', { tint: '#2a2d33' }], ground: ['stone.slate', { tint: '#2d3139', roughness: 0.7 }],
+      pave: ['stone.slate', { tint: '#3c424c', roughness: 0.55 }], border: ['stone.darkgranite', { tint: '#2a2d33' }], ground: ['stone.slate', { tint: '#2d3139', roughness: 0.7 }],
       wall: ['stone.darkgranite', { tint: '#2f333a' }], trim: ['stone.darkgranite', { tint: '#3b3f47' }], metal: ['metal.copper'], inlay: ['metal.copper'],
       roof: ['metal.copper', { tint: '#4f8473' }], slate: ['stone.slate', { tint: '#2a2e36' }], ceramic: ['plaster.lime', { tint: '#e8e6e0' }], house: ['stone.darkgranite', { tint: '#3b3f47' }],
       found: ['stone.darkgranite', { tint: '#2a2d33' }], dark: ['stone.basalt', { tint: '#101216' }], wood: ['wood.weathered', { tint: '#2a2620' }],

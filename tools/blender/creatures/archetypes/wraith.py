@@ -158,13 +158,13 @@ def build(oath=None):
         S.part(panel, wfn, "secondary", cloth_m)
     if radiant:
         gold = mats.surface("brass", "hi_gold", dark=0.75, light=0.95, rough=0.25)
-        S.part(core.cylinder("halo", 0.26, 0.03, (0, -0.12, 2.32), rot=(math.radians(75), 0, 0), segs=24, bevel=0.006), "head", "glow", glow)
+        S.part(core.torus("halo", 0.27, 0.018, (0, -0.10, 2.30), rot=(math.radians(78), 0, 0), major=40, minor=8), "head", "glow", glow)
         for i in range(6):
             a = math.radians(-60 + 24 * i)
             base = V((math.sin(a) * 0.12, -0.14, 1.85))
             S.part(kit.spike(f"blade{i}", base, (math.sin(a) * 1.2, -0.6, 0.9), 0.7 - 0.06 * abs(i - 2.5), 0.05, flat=0.25,
                              flat_side=False), "chest", "glow", glow)
-        S.part(core.cylinder("circlet", 0.11, 0.025, (0, 0.13, 2.22), rot=(0.15, 0, 0), segs=20, bevel=0.005), "head", "accent", gold)
+        S.part(core.torus("circlet", 0.105, 0.012, (0, 0.13, 2.22), rot=(0.15, 0, 0), major=28, minor=6), "head", "accent", gold)
     if oath == "oath-11":
         S.tint.update(body="#121214", accent="#a8a8b0", glow="#a070ff")
     S.bones = hover.wraith_skeleton(J, CLOTH)

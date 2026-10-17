@@ -50,7 +50,8 @@ class Geo {
 }
 
 const norm = (x, y, z) => { const l = Math.hypot(x, y, z) || 1; return [x / l, y / l, z / l]; };
-const QUAD = { broad: [0, 0, 0.5, 0.5], needle: [0.5, 0, 1, 0.5], tuft: [0, 0.5, 0.5, 1], blade: [0.5, 0.5, 1, 1] };
+// DynamicTexture is vertically inverted: canvas top half = v in [0.5, 1]
+const QUAD = { broad: [0, 0.5, 0.5, 1], needle: [0.5, 0.5, 1, 1], tuft: [0, 0, 0.5, 0.5], blade: [0.5, 0, 1, 0.5] };
 
 /** random leaf cards in a blob around centre; normals blend blob-outward with canopy-outward */
 function blob(g, R, cx, cy, cz, rad, count, size, col, quad, canopyC, flat = 0, vary = 0.12) {
@@ -193,8 +194,8 @@ export function buildSpecies(name, lod, seed = 1) {
         const k = 0.8 + R() * 0.4; const col = [0.55 * k, 0.6 * k, 0.32 * k];
         const b = leaves.count; const ux = -Math.sin(la) * w, uz = Math.cos(la) * w;
         for (let s = 0; s <= 3; s++) { const t = s / 3; const ww = 1 - t * 0.85; const bx = x + lx * t * t, by = t * h, bz = z + lz * t * t;
-          leaves.v(bx - ux * ww, by, bz - uz * ww, lx, 1, lz, col[0] * (0.6 + 0.4 * t), col[1] * (0.6 + 0.4 * t), col[2] * (0.6 + 0.4 * t), 0.5, 1 - t * 0.5 + 0.0);
-          leaves.v(bx + ux * ww, by, bz + uz * ww, lx, 1, lz, col[0] * (0.6 + 0.4 * t), col[1] * (0.6 + 0.4 * t), col[2] * (0.6 + 0.4 * t), 1.0, 1 - t * 0.5); }
+          leaves.v(bx - ux * ww, by, bz - uz * ww, lx, 1, lz, col[0] * (0.6 + 0.4 * t), col[1] * (0.6 + 0.4 * t), col[2] * (0.6 + 0.4 * t), 0.55, 0.02 + t * 0.46);
+          leaves.v(bx + ux * ww, by, bz + uz * ww, lx, 1, lz, col[0] * (0.6 + 0.4 * t), col[1] * (0.6 + 0.4 * t), col[2] * (0.6 + 0.4 * t), 0.95, 0.02 + t * 0.46); }
         for (let s = 0; s < 3; s++) { const q = b + s * 2; leaves.tri(q, q + 2, q + 1); leaves.tri(q + 1, q + 2, q + 3); }
         if (!far && i % 5 === 0) bark.tube([{ x: x + lx * 0.8, y: h * 0.8, z: z + lz * 0.8, r: 0.045 }, { x: x + lx * 0.85, y: h * 0.8 + 0.25, z: z + lz * 0.85, r: 0.045 }], 5, [0.3, 0.2, 0.12]);
       }
@@ -285,16 +286,16 @@ export function makeLeafAtlas(scene, size = 512) {
   // Q1 conifer needle spray (twig along u)
   c.save(); c.beginPath(); c.rect(h, 0, h, h); c.clip(); c.translate(h, 0);
   c.strokeStyle = 'rgb(60,45,35)'; c.lineWidth = size / 140; c.beginPath(); c.moveTo(h * 0.02, h / 2); c.lineTo(h * 0.98, h / 2); c.stroke();
-  for (let i = 0; i < 420; i++) { const u = R(); const x = h * (0.04 + u * 0.92); const side = R() < 0.5 ? -1 : 1; const wfac = 0.42 * (1 - Math.abs(u - 0.45) * 0.9);
+  for (let i = 0; i < 700; i++) { const u = R(); const x = h * (0.04 + u * 0.92); const side = R() < 0.5 ? -1 : 1; const wfac = 0.46 * (1 - Math.abs(u - 0.45) * 0.9);
     const len = h * wfac * (0.5 + R() * 0.5); const a = side * (0.9 + R() * 0.5) - 0.3; const l = R();
-    c.strokeStyle = `rgb(${Math.round(40 + l * 40)},${Math.round(70 + l * 50)},${Math.round(40 + l * 25)})`; c.lineWidth = size / 300 + R() * size / 400;
+    c.strokeStyle = `rgb(${Math.round(40 + l * 40)},${Math.round(70 + l * 50)},${Math.round(40 + l * 25)})`; c.lineWidth = size / 170 + R() * size / 260;
     c.beginPath(); c.moveTo(x, h / 2); c.lineTo(x + Math.cos(a) * len * 0.35, h / 2 + Math.sin(a) * len); c.stroke(); }
   c.restore();
   // Q2 tuft (stone pine / cypress scale foliage)
   c.save(); c.beginPath(); c.rect(0, h, h, h); c.clip(); c.translate(0, h);
   for (let k = 0; k < 9; k++) { const cx = h * (0.2 + R() * 0.6), cy = h * (0.2 + R() * 0.6);
     for (let i = 0; i < 70; i++) { const a = R() * Math.PI * 2; const len = h * (0.08 + R() * 0.14); const l = R();
-      c.strokeStyle = `rgb(${Math.round(45 + l * 45)},${Math.round(75 + l * 55)},${Math.round(40 + l * 30)})`; c.lineWidth = size / 260;
+      c.strokeStyle = `rgb(${Math.round(45 + l * 45)},${Math.round(75 + l * 55)},${Math.round(40 + l * 30)})`; c.lineWidth = size / 150;
       c.beginPath(); c.moveTo(cx, cy); c.lineTo(cx + Math.cos(a) * len, cy + Math.sin(a) * len); c.stroke(); } }
   c.restore();
   // Q3 reed / grass blade (vertical gradient strip)

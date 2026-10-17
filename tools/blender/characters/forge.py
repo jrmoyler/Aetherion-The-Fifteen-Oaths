@@ -213,7 +213,7 @@ def export_glb(path, objs, log):
               export_lights=False, export_extras=False, export_def_bones=False, export_force_sampling=False,
               export_optimize_animation_size=True, export_morph=False, export_vertex_color='NONE')
     try:
-        kw['export_jpeg_quality'] = 86
+        kw['export_jpeg_quality'] = 82
         bpy.ops.export_scene.gltf(**kw)
     except TypeError:
         kw.pop('export_jpeg_quality')

@@ -550,9 +550,9 @@
   .ae-cc__head h1 { font-size: 22px; }
   .ae-cc__head .ae-cc__lede { display: none; }
 }
-@media (max-width: 1280px) {
-  .ae-unit--target { left: calc(var(--gut) + var(--sal) + 330px); width: 270px; }
-  .ae-unit { width: 310px; }
+@media (max-width: 1640px) {
+  .ae-unit--target { left: calc(var(--gut) + var(--sal)); top: calc(var(--gut) + var(--sat) + 102px); width: 300px; }
+  .ae-buffs { left: calc(var(--gut) + var(--sal) + 340px); top: calc(var(--gut) + var(--sat) + 6px); }
 }
 @media (max-width: 980px), (max-height: 560px) {
   :root { --gut: 8px; }
@@ -685,3 +685,5 @@
   .ae-swatches { grid-template-columns: repeat(3, 1fr); }
   .ae-titlebar .ae-tb-sub { display: none; }
 }
+
+.ae-tooltip.ae-panel { background: linear-gradient(180deg, #1a2232, #10151f); }

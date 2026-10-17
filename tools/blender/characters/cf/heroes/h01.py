@@ -79,6 +79,7 @@ def kiln_ninja(F, b, spec):
     cut_n = S.normalize((-0.28, 0.0, 1.0))
     hem_p = mc + v3(0, 0, -0.17 * s)
     mmask = mmask.inter(S.halfspace(hem_p, -cut_n), 0.004)
+    mmask = mmask.inter(S.halfspace(J['neck'] + v3(0, 0, 0.035 * s), (0, 0, 1)), 0.01)
     F.shell(mantle, mmask, 0.010, 0.024, 0.006, 'cur', K.folds(0.004, (22, 22, 14), 33))
     F.paint(trim, S.slab(hem_p + cut_n * 0.012, cut_n, 0.018).inter(S.sphere(mc, 0.36 * w), 0), only=[mantle])
     # --- forearms: right leather bracer, left vented ceramic block

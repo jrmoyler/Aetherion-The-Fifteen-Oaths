@@ -32,7 +32,7 @@ def clay():
     c.ell((0, -0.48, 1.10), (0.155, 0.17, 0.13), k=0.06)                       # croup
     c.ell((0.115, -0.44, 0.93), (0.075, 0.16, 0.2), R=rot_to((0, 0.3, -1)), k=0.06, mirror=True)
     c.cone(J["hip"], J["stifle"], 0.10, 0.06, k=0.05, mirror=True)
-    c.ell((0.135, -0.47, 0.62), (0.045, 0.07, 0.12), R=rot_to((0, -0.9, -1)), k=0.045, mirror=True)
+    c.ell((0.13, -0.47, 0.64), (0.038, 0.06, 0.10), R=rot_to((0, -0.9, -1)), k=0.05, mirror=True)
     c.cone(J["stifle"], J["hock"], 0.05, 0.026, k=0.035, mirror=True)
     c.cone((0.12, -0.52, 0.58), (0.12, -0.63, 0.45), 0.018, 0.015, k=0.03, mirror=True)
     c.cone(J["hock"], J["hball"], 0.026, 0.022, k=0.02, mirror=True)
@@ -55,7 +55,7 @@ def clay():
     c.add("sphere", k=0.006, op="sub", c=(0.022, 0.955, 1.49), r=0.012, mirror=True)
     c.ell((0.05, 0.64, 1.665), (0.025, 0.025, 0.02), k=0.02, mirror=True)       # pedicles
     c.add("flatcone", k=0.025, a=J["ear0"], b=J["ear1"], ra=0.04, rb=0.012, flat=0.35, up=(0.2, 0.3, 1), mirror=True)
-    c.chain([J["t0"], J["t1"], J["t2"], J["t3"], J["t4"]], [0.05, 0.045, 0.035, 0.025, 0.012], k=0.03)
+    c.chain([J["t0"], J["t1"], J["t2"], J["t3"], J["t4"]], [0.04, 0.034, 0.026, 0.018, 0.008], k=0.025)
     c.lumps(0.003, 30.0, seed=11, n=12)
     return c
 

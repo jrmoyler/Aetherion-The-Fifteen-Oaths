@@ -164,6 +164,10 @@ function biomeHeight(r, x, z) {
       const t = h / 7; const fl = Math.floor(t); h = (fl + smooth(0.25, 0.75, t - fl)) * 7 * 0.6 + h * 0.4;
       return h;
     }
+    case 8: { // marsh: shallow pools and reed islands
+      h -= 2.6 * smooth(0.02, 0.3, fbm(x / 95 + 1.7, z / 95 - 4.2, 3)) + 1.2 * smooth(0.1, 0.4, noise2(x / 33, z / 33));
+      break;
+    }
     case 11: { // badlands: eroded hoodoo fields
       h += 10 * smooth(0.55, 0.75, rr) * smooth(0.0, 0.3, n);
       break;

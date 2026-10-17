@@ -188,7 +188,7 @@ def surface(kind, name=None, scale=1.0, **kw):
         edge = nb.ramp(vo.outputs["Distance"], [(0.0, 0.0), (0.12, 1.0)])
         dome = nb.math("SUBTRACT", 1.0, vc.outputs["Distance"])
         h = nb.math("MULTIPLY", edge, nb.math("POWER", dome, 0.6))
-        cellv = nb.ramp(nb.n_sep_r(vc) if False else vc.outputs["Color"], [(0.0, 0.7), (1.0, 1.0)])
+        cellv = nb.ramp(vc.outputs["Color"], [(0.0, 0.7), (1.0, 1.0)])
         cav = nb.ramp(nb.pointiness(), [(0.42, 0.6), (0.55, 1.0)])
         col = nb.mix(1.0, nb.mix(1.0, cellv, edge, "MULTIPLY"), cav, "MULTIPLY")
         col = nb.mix(0.35, col, kw.get("base", 0.82), "MULTIPLY")
@@ -314,9 +314,6 @@ def surface(kind, name=None, scale=1.0, **kw):
         raise ValueError(kind)
     _aux(nb, metal if "metal" not in kw else kw["metal"])
     return m
-
-
-NB.n_sep_r = lambda self, x: x  # placeholder (unused)
 
 
 def assign(ob, mat):

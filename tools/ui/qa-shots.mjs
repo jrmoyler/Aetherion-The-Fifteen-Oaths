@@ -40,7 +40,6 @@ if (run('desktop')) {
   await p.waitForSelector('.ae-hud:not(.is-hidden)', { timeout: 15000 });
   await wait(p, 2200); await shot(p, 'd05-hud-banner');
   await wait(p, 6000); await shot(p, 'd06-hud');
-  await p.mouse.click(960, 700); await p.keyboard.press('Escape').catch(() => {});
   await p.keyboard.press('Digit3'); await wait(p, 250); await p.keyboard.press('Digit2'); await wait(p, 200); await shot(p, 'd06b-cast-cooldown');
   await wait(p, 2500); await shot(p, 'd06c-cooldown');
   await p.keyboard.press('KeyM'); await wait(p, 4500); await shot(p, 'd07-map');

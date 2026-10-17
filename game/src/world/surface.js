@@ -139,7 +139,7 @@ export function classify(x, z, s, ny, out, tint) {
 }
 
 /** Share of cobbles (vs packed earth) for road surfaces near a sanctuary. */
-export function cobbleFraction(x, z) { return smooth(520, 300, sanctuaryDist(x, z)); }
+export function cobbleFraction(x, z) { return smooth(320, 190, sanctuaryDist(x, z)); }
 
 // ---------------------------------------------------------------------------------------------
 // Vegetation
