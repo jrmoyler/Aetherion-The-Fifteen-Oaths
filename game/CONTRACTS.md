@@ -100,7 +100,7 @@ Creature clips: `idle, walk, run, attack, hit, death` (+ optional `roar`).
 ## combat/ — Targeting, casting, feedback (agent: combat-vfx)
 `init(ctx) → { hotbar /* hotbarFor(oath, cls) */, target, setTarget(id), cast(slot), cooldowns, castBar }`.
 Reads `ctx.input.consume('slot0'..'slot5'|'target'|'click')`. Sends `{t:'cast', slot, target, aim, dir}`, plays local
-anticipation immediately, resolves visuals on `net:ev` `cast`/`hit`/`death`. Floating damage numbers, hit flashes,
+anticipation immediately, resolves visuals on `net:ev` `cast`/`hit`/`death`. Floating damage numbers via `bus.emit('combat:floater', {x,y,z,text,kind:'damage'|'crit'|'heal'|'xp'|'miss'|'status', element})` (the UI renders them as DOM), hit flashes,
 camera shake (`bus.emit('camera:shake', {strength, duration})` — actors' camera listens).
 Bus events emitted: `combat:target {id}`, `combat:cooldown {slot, until}`, `combat:cast {slot}`.
 
@@ -111,13 +111,19 @@ Visual language: the reference sheets' graphic design — warm parchment / slate
 small-caps serif headers (e.g. "Cormorant Garamond"-style via system serif stack — no web font downloads required),
 navy title bars, numbered section tabs. Elegant, readable, not cartoony.
 
+## Shared rosters
+`shared/creatures.js` — 12 creature archetypes and 60 region mobs/bosses (ids, names, roles, tints). `shared/oaths.js` — 15 Oaths, palettes, regions, classes. `shared/abilities.js` — `hotbarFor(oath, cls)`.
+
+## audio/ (agent: ui)
+Procedural WebAudio only (no sample files): generative ambience per region/biome, music, UI sounds, spell/hit/footstep sounds driven by bus events.
+
 ## Ownership (one agent per directory — never edit another agent's files; ask the integrator)
 - `shared/oaths.js`, `shared/abilities*.js`, `shared/protocol.js`, `game/src/main.js`, `game/src/core/*`, `game/index.html`, `game/vite.config.js`, `game/package.json`: **integrator**
 - `shared/terrain.js`, `game/src/render/`, `game/src/world/`: **world-nature**
 - `game/src/architecture/`, `game/src/materials/`: **architecture**
 - `game/src/actors/`: **actors**
 - `game/src/combat/`, `game/src/vfx/`: **combat-vfx**
-- `game/src/ui/`, `game/public/manifest.webmanifest`, `game/public/icons/`: **ui**
+- `game/src/ui/`, `game/src/audio/`, `game/public/manifest.webmanifest`, `game/public/icons/`, `tools/ui/`: **ui**
 - `server/`, `shared/sim/`, `game/src/net/`: **server**
 - `tools/blender/characters/`, `game/public/assets/characters/`: **character-forge**
 - `tools/blender/creatures/`, `game/public/assets/creatures/`: **creature-forge**

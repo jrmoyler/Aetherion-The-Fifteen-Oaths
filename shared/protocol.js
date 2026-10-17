@@ -38,6 +38,8 @@
 //   'chat'   {from, name, text, channel}
 //   'system' {text}
 //   'discover' {id, shrine}
+//   'teleport' {id, x, y, z, ry}                    authoritative reposition (respawn, travel, correction)
+//   'npc'    {id, npc, name, role, text, options:[{id,label}]}   NPC dialogue for the interacting player
 
 export const PROTOCOL_VERSION = 1;
 export const TICK_HZ = 20;
