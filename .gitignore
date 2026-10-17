@@ -22,3 +22,9 @@ __pycache__/
 
 # Blender working backups; current editable sources are committed separately.
 assets/production/**/*.blend[0-9]
+
+# MMO client/server
+game/node_modules/
+game/dist/
+server/node_modules/
+server/data/
