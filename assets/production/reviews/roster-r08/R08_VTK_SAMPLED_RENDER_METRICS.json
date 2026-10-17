@@ -1,0 +1,127 @@
+{
+  "environment": "VTK 9.6.2 EGL OpenGL offscreen",
+  "status": "NOT_GAMEPLAY_BENCHMARK",
+  "reference_fidelity_approved": 0,
+  "samples": [
+    {
+      "id": "character-01-leader",
+      "median_ms": 10.06,
+      "p95_ms": 50.41,
+      "triangles": 8028,
+      "draw_calls_proxy": 6,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "character-07-leader",
+      "median_ms": 10.86,
+      "p95_ms": 28.27,
+      "triangles": 7920,
+      "draw_calls_proxy": 6,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "character-15-leader",
+      "median_ms": 10.08,
+      "p95_ms": 16.67,
+      "triangles": 7840,
+      "draw_calls_proxy": 6,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o02-natural",
+      "median_ms": 10.64,
+      "p95_ms": 13.89,
+      "triangles": 5296,
+      "draw_calls_proxy": 6,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o03-altered",
+      "median_ms": 8.03,
+      "p95_ms": 10.46,
+      "triangles": 3240,
+      "draw_calls_proxy": 4,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o04-altered",
+      "median_ms": 7.83,
+      "p95_ms": 9.41,
+      "triangles": 2480,
+      "draw_calls_proxy": 3,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o05-boss",
+      "median_ms": 9.06,
+      "p95_ms": 10.57,
+      "triangles": 5636,
+      "draw_calls_proxy": 6,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o06-boss",
+      "median_ms": 8.66,
+      "p95_ms": 10.01,
+      "triangles": 7568,
+      "draw_calls_proxy": 6,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o07-boss",
+      "median_ms": 14.88,
+      "p95_ms": 17.17,
+      "triangles": 5240,
+      "draw_calls_proxy": 4,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o08-guardian",
+      "median_ms": 10.16,
+      "p95_ms": 14.38,
+      "triangles": 2912,
+      "draw_calls_proxy": 5,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o09-boss",
+      "median_ms": 7.56,
+      "p95_ms": 11.34,
+      "triangles": 3288,
+      "draw_calls_proxy": 5,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o10-boss",
+      "median_ms": 11.14,
+      "p95_ms": 15.68,
+      "triangles": 8144,
+      "draw_calls_proxy": 3,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o11-boss",
+      "median_ms": 5.52,
+      "p95_ms": 6.02,
+      "triangles": 928,
+      "draw_calls_proxy": 3,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o12-boss",
+      "median_ms": 8.98,
+      "p95_ms": 17.96,
+      "triangles": 7748,
+      "draw_calls_proxy": 6,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    },
+    {
+      "id": "creature-o15-mount",
+      "median_ms": 8.21,
+      "p95_ms": 8.73,
+      "triangles": 3384,
+      "draw_calls_proxy": 5,
+      "method": "VTK EGL 512x512 rest pose, 10 warmed frames wallclock, isolated"
+    }
+  ]
+}

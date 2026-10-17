@@ -1,0 +1,87 @@
+{
+  "schema_version": "r06.qa.1",
+  "date": "2026-10-16",
+  "status": "REVIEW_ONLY_NONAPPROVED",
+  "deliverables": {
+    "pack": "Aetherion_Roster_R06_Role_Motion_Preview_2026-10-16.zip",
+    "pack_bytes": 32048602,
+    "pack_sha256": "d78e44a910c20f3764cceb47a4d3cf331e2b321fc74faa9152a136da886e6a7b",
+    "evidence_archive": "Aetherion_R06_Render_Deformation_Engine_Proofs.zip",
+    "evidence_bytes": 928380,
+    "evidence_sha256": "8404317b8cc69187e5c56731a480bb68676dbf8b33375faa68c750aa005173c6",
+    "repository_binary_delivery": "NOT_PERFORMED"
+  },
+  "population": {
+    "named_characters": 34,
+    "creatures_and_manifestations": 94,
+    "glbs": 128,
+    "added_procedural_preview_motion_clips": 2382,
+    "added_clips_per_asset_min": 18,
+    "added_clips_per_asset_max": 20
+  },
+  "validation": {
+    "full_roster_sha256_passes": 128,
+    "glb_animation_sampler_bounds_passes": 128,
+    "independent_trimesh_imports": 128,
+    "independent_VTK_9_6_2_scene_imports": 128,
+    "CPU_skinning_pose_finite_vertices": 128,
+    "CPU_skinning_nonzero_vertex_movement": 128,
+    "VTK_offscreen_renderer": "vtkEGLRenderWindow",
+    "VTK_sampled_render_assets": 6,
+    "direct_proposed_reference_to_render_comparisons": 3,
+    "direct_proposed_reference_art_rejections": 3,
+    "animation_frame_changed_in_VTK_selected_clip": 0,
+    "VTK_animation_warning": "VTK importer exposed only 18 of 21 creature clips and 20 of 24 humanoid clips in representative trials; live imported animation did not change the rendered images despite valid independent CPU pose sampling",
+    "rest_pose_renderer_warmed_frame_count_per_asset": 12,
+    "measured_VTK_EGL_offscreen_rest_frame_512x512_ms": [
+      {
+        "id": "creature-o01-natural",
+        "median": 3.06,
+        "p95": 3.69
+      },
+      {
+        "id": "creature-o03-natural",
+        "median": 3.97,
+        "p95": 4.22
+      },
+      {
+        "id": "creature-o04-natural",
+        "median": 3.02,
+        "p95": 3.87
+      },
+      {
+        "id": "character-01-leader",
+        "median": 4.77,
+        "p95": 6.19
+      },
+      {
+        "id": "creature-o09-boss",
+        "median": 3.6,
+        "p95": 3.91
+      },
+      {
+        "id": "creature-o06-boss",
+        "median": 3.57,
+        "p95": 4.19
+      }
+    ]
+  },
+  "quality_gates": {
+    "artwork_reference_match": "FAILED on three directly comparable candidate concepts; others unreviewed; zero approvals",
+    "deformation": "CPU NUMERIC VALID / VISUAL AND CONTACT DEFORMATION NOT APPROVED",
+    "gameplay_animation": "PREVIEW ONLY: NO IK, ROOT MOTION FIT, HIT WINDOWS OR STATE GRAPH",
+    "threejs_runtime": "NOT_TESTED",
+    "godot_runtime": "NOT_TESTED",
+    "unreal_runtime": "NOT_TESTED",
+    "physical_android_performance": "NOT_TESTED",
+    "true_engine_gpu_frametime": "NOT_TESTED",
+    "per_identity_art_approval_count": 0,
+    "required_next_steps": "Retopologize each design from authoritative individual source sheets; re-rig; paint reference-derived PBR; author/contact-test real locomotion/combat; test actual target engine and device; commit source/blend/GLB binaries; obtain signed artifact-specific approval."
+  },
+  "environment": {
+    "available": "VTK 9.6.2 EGL offscreen OpenGL, CPU numpy and trimesh",
+    "unavailable": "Blender, Godot, Unreal and directly measurable Three.js browser rendering in this execution environment",
+    "observed_device": "Linux x86_64 executor, 512x512 offscreen renders; GPU hardware backend unverified",
+    "caveat": "3–6 ms single-object 512x512 VTK rest-frame times cannot be extrapolated to game 60 fps mobile performance, and are not a GPU game benchmark."
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0.0",
+  "audit_date": "2026-10-16",
+  "source_archive": "Aetherion_Roster_R05_YUp_Mesh_Correction_2026-10-16.zip",
+  "sha256": "eb7e8f9322390138ff79c52604cce08146478b2ba9ebbb81e3cb17ef3d704c74",
+  "bytes": 31541334,
+  "package_ownership": "User-facing ChatGPT download; binaries NOT attached to this GitHub pull request",
+  "verified_counts": {
+    "named_characters": 34,
+    "creature_records": 94,
+    "glb_exports": 128,
+    "glb_y_up_corrected": 128,
+    "glb_degenerate_cleanup": 115,
+    "zero_area_triangles_removed": 3912,
+    "strict_cpu_bind_weight_geometry_passed": 128,
+    "trimesh_imported": 128,
+    "vtk_imported": 128
+  },
+  "qa_warnings": {
+    "incomplete_gameplay_motion_set": 128,
+    "missing_authored_lod_chain": 128,
+    "high_draw_call_proxy_24plus": 45,
+    "limited_soft_skin_weighting": 30
+  },
+  "performance_proxy": {
+    "p95_triangle_count": 2060,
+    "p95_primitive_draw_calls": 33,
+    "cpu_parse_seconds_median": 0.0028,
+    "cpu_parse_seconds_p95": 0.0041,
+    "measurement_context": "Python geometry/skin audit walltime on executor CPU only; NOT engine graphics frame time or device benchmark"
+  },
+  "approved": {
+    "reference_likeness": 0,
+    "production_assets": 0,
+    "gameplay_animation_state_sets": 0,
+    "gpu_engine_runtime": 0
+  },
+  "engine_test_matrix": [
+    {
+      "engine": "trimesh Python glTF",
+      "import_passes": 128,
+      "rendered_shader_validation": false,
+      "deformation_in_motion": false,
+      "performance_certification": false
+    },
+    {
+      "engine": "VTK glTF importer",
+      "import_passes": 128,
+      "rendered_shader_validation": false,
+      "deformation_in_motion": false,
+      "performance_certification": false
+    },
+    {
+      "engine": "Three.js WebGL/WebGPU",
+      "import_passes": null,
+      "rendered_shader_validation": false,
+      "deformation_in_motion": false,
+      "performance_certification": false
+    },
+    {
+      "engine": "Godot 4",
+      "import_passes": null,
+      "rendered_shader_validation": false,
+      "deformation_in_motion": false,
+      "performance_certification": false
+    },
+    {
+      "engine": "Unreal Editor",
+      "import_passes": null,
+      "rendered_shader_validation": false,
+      "deformation_in_motion": false,
+      "performance_certification": false
+    },
+    {
+      "engine": "Physical target-device graphics",
+      "import_passes": null,
+      "rendered_shader_validation": false,
+      "deformation_in_motion": false,
+      "performance_certification": false
+    }
+  ],
+  "automatic_promotion_allowed": false,
+  "acceptance_gates": [
+    "Per-identity source-art front/side/back/three-quarter correspondence and signed art direction approval",
+    "PBR texture swatches, material parity and visible source-specific details",
+    "Deformation screenshots at extreme joint flexion and reference rig retargeting validation",
+    "Full authored gameplay animation set, root motion/contact/transition/attack event semantics and reproducible playtests",
+    "Real Three.js and Godot/Unreal render captures and performance metrics on specified hardware",
+    "Individual named candidate/model sources added as binary objects in the PR and linked only after approval"
+  ]
+}
