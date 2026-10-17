@@ -22,12 +22,15 @@ def build_armature(bones, name="Armature"):
         e = arm.edit_bones.new(b.name)
         e.head, e.tail = b.head, b.tail
         d = (b.tail - b.head).normalized()
+        # Convention: every bone that is not mainly lateral gets local X == world +X, so a
+        # positive X rotation is the same world-space pitch for spines, necks, tails and legs
+        # ("tip up / back").  Lateral bones (arms, clavicles, wings) keep local Z ~ up.
         if b.roll_ref is not None:
             ref = Vector(b.roll_ref)
-        elif abs(d.z) < 0.72:
-            ref = Vector((0, 0, 1))
+        elif abs(d.x) < 0.7:
+            ref = Vector((1, 0, 0)).cross(d)
         else:
-            ref = Vector((0, 1, 0))  # vertical bones: local Z faces forward (+Y design)
+            ref = Vector((0, 0, 1))
         e.align_roll(ref)
         e.use_deform = b.deform
         eb[b.name] = e

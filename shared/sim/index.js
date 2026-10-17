@@ -502,6 +502,7 @@ class Sim {
   onInteract(p, msg) {
     if (!p.alive) return;
     const id = String(msg.id ?? '');
+    if (msg.option != null && msg.option !== '') return this.onDialog(p, { npc: id, option: msg.option }); // {t:'interact', id, option} form
     if (id.startsWith('shrine:')) {
       const s = this.sanctuaries.find((x) => x.oathId === id.slice(7));
       if (s && (s.shrine.x - p.x) ** 2 + (s.shrine.z - p.z) ** 2 < (SHRINE_DISCOVER_RADIUS + 4) ** 2) {

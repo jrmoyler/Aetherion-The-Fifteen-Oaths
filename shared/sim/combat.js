@@ -107,6 +107,7 @@ export function dealDamage(S, src, dst, base, element, abilityId, opts = {}) {
     if (!opts.raw) mul *= src.pow ?? src.stats?.power ?? 1;
   }
   if (element && dst.element) mul *= 1 + (ELEMENT_MOD[element]?.[dst.element] ?? 0);
+  if (element === 'storm' && S.world?.storm && S.regionOf(dst.x, dst.z) === S.world.storm) mul *= 1.2;
   if (element && !opts.dot) {
     for (const r of REACTIONS) {
       if (r.el !== element) continue;

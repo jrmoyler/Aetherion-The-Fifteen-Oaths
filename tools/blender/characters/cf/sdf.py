@@ -96,6 +96,26 @@ class Prim:
         base = self.fn
         return Prim(lambda P: base(P) - fn(P), self.lo - amp, self.hi + amp)
 
+    def moved(self, off):
+        off = np.asarray(off, dtype=np.float64)
+        base = self.fn
+        of = off.astype(np.float32)
+        return Prim(lambda P: base(P - of), self.lo + off, self.hi + off)
+
+    def mirrored(self, axis=1, about=0.0):
+        """Mirror across the plane coord[axis] = about."""
+        base = self.fn
+        m = np.ones(3, dtype=np.float32)
+        m[axis] = -1
+        o = np.zeros(3, dtype=np.float32)
+        o[axis] = 2 * about
+
+        def fn(P):
+            return base(P * m + o)
+        lo = self.lo * m + o
+        hi = self.hi * m + o
+        return Prim(fn, np.minimum(lo, hi), np.maximum(lo, hi))
+
     def rounded(self, r):
         base = self.fn
         return Prim(lambda P: base(P) - r, self.lo - r, self.hi + r)

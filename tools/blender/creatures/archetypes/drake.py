@@ -23,8 +23,8 @@ J = dict(
     scap=(0.22, 0.16, 1.12), shoulder=(0.30, 0.30, 0.80), elbow=(0.33, 0.10, 0.50),
     wrist=(0.29, 0.28, 0.18), fball=(0.28, 0.34, 0.06), ftoe=(0.28, 0.50, 0.015),
 )
-W = dict(root=(0.18, 0.10, 1.28), elbow=(0.58, -0.05, 1.78), wrist=(0.88, -0.62, 1.58),
-         f1=(1.38, -1.60, 1.38), f2=(1.12, -1.55, 0.98), f3=(0.76, -1.28, 0.84))
+W = dict(root=(0.18, 0.10, 1.26), elbow=(0.60, -0.02, 1.58), wrist=(0.86, -0.60, 1.50),
+         f1=(1.30, -1.55, 1.30), f2=(1.06, -1.50, 0.98), f3=(0.72, -1.25, 0.86))
 
 
 def clay():
@@ -110,11 +110,12 @@ def build(oath=None):
     for s, g in quad.SIDES:
         X = V((g, 1, 1))
         w = {k: V(p) * X for k, p in W.items()}
-        extra += [Bone(f"wing1_{s}", w["root"], w["elbow"], "chest"),
-                  Bone(f"wing2_{s}", w["elbow"], w["wrist"], f"wing1_{s}"),
-                  Bone(f"fing1_{s}", w["wrist"], w["f1"], f"wing2_{s}"),
-                  Bone(f"fing2_{s}", w["wrist"], w["f2"], f"wing2_{s}"),
-                  Bone(f"fing3_{s}", w["wrist"], w["f3"], f"wing2_{s}")]
+        up = (0, 0, 1)
+        extra += [Bone(f"wing1_{s}", w["root"], w["elbow"], "chest", roll_ref=up),
+                  Bone(f"wing2_{s}", w["elbow"], w["wrist"], f"wing1_{s}", roll_ref=up),
+                  Bone(f"fing1_{s}", w["wrist"], w["f1"], f"wing2_{s}", roll_ref=up),
+                  Bone(f"fing2_{s}", w["wrist"], w["f2"], f"wing2_{s}", roll_ref=up),
+                  Bone(f"fing3_{s}", w["wrist"], w["f3"], f"wing2_{s}", roll_ref=up)]
         # wing arm + finger bones (visible, lofted)
         S.part(core.horn(f"wa1{s}", [w["root"], w["root"].lerp(w["elbow"], 0.5), w["elbow"]], [0.07, 0.06, 0.05], segs=8), f"wing1_{s}", "body", S.surface)
         S.part(core.horn(f"wa2{s}", [w["elbow"], w["elbow"].lerp(w["wrist"], 0.5), w["wrist"]], [0.05, 0.04, 0.035], segs=8), f"wing2_{s}", "body", S.surface)

@@ -110,6 +110,13 @@ export const MATERIALS = {
       o.rough = lerp(0.95, 0.68 + n2 * 0.1, t); o.metal = 0;
     },
   },
+  'paving.slab': {
+    size: [9, 9], normal: 1.3,
+    gen(u, v, o) {
+      stoneBlocks(u, v, o, { rows: 6, cols: 4, tile: [9, 9], base: [0.56, 0.54, 0.51], var: 0.16, mortar: 0.008, bevel: 0.025, rough: 0.7, seed: 41, irr: 0.7, mortarCol: [0.36, 0.35, 0.33] });
+      const st = smooth(0.3, 0.9, fbm(u, v, 5, 4, 77)) * 0.08; o.r -= st; o.g -= st; o.b -= st * 0.9;
+    },
+  },
   'paving.hex': {
     // tile = 2 x-periods (6 hex units) by 3 y-periods (3*sqrt3); circumradius 0.75 m
     size: [4.5, 4.5 * (3 * Math.sqrt(3)) / 6], normal: 1.4,
@@ -133,7 +140,7 @@ export const MATERIALS = {
       const tar = smooth(0.15, 0.7, fbm(u, v, 6, 4, 8));
       const n = fbm(u, v, 24, 2, 4);
       o.h = 0.5 + br * 0.05 + n * 0.04;
-      o.r = lerp(0.86, 0.42, tar * 0.7); o.g = lerp(0.66, 0.32, tar * 0.7); o.b = lerp(0.36, 0.18, tar * 0.7);
+      o.r = lerp(0.8, 0.4, tar * 0.7); o.g = lerp(0.65, 0.32, tar * 0.7); o.b = lerp(0.42, 0.2, tar * 0.7);
       o.rough = 0.28 + tar * 0.35 + br * 0.08; o.metal = 1 - tar * 0.25;
     },
   },
@@ -325,11 +332,11 @@ export const MATERIALS = {
     },
   },
   'liquid.water': {
-    size: [8, 8], normal: 0.6, alpha: 0.82, animated: [0.02, 0.013],
+    size: [8, 8], normal: 0.6, alpha: 0.9, animated: [0.02, 0.013],
     gen(u, v, o) {
       const n = fbm(u, v, 4, 5, 3) + fbm(u, v, 9, 3, 11) * 0.5;
       o.h = 0.5 + n * 0.3;
-      o.r = 0.07; o.g = 0.26; o.b = 0.32; o.rough = 0.04; o.metal = 0;
+      o.r = 0.12 + n * 0.03; o.g = 0.4 + n * 0.05; o.b = 0.44 + n * 0.04; o.rough = 0.07; o.metal = 0;
     },
   },
   'liquid.fall': {

@@ -131,16 +131,17 @@ export function giantTree(S, x, z, R, H, o = {}) {
     S.b.tube(bark, [p0, p1, p2], (t) => R * (0.42 - t * 0.3), 7);
   }
   const branches = [];
-  const nb = o.branches ?? 5;
+  const nb = o.branches ?? 7;
   for (let i = 0; i < nb; i++) {
     const a = (i / nb) * TAU + rand() * 0.8; const hy = H * (0.55 + rand() * 0.35); const L = H * (0.35 + rand() * 0.25);
     const p0 = [x, y + hy, z]; const p1 = [x + Math.sin(a) * L * 0.5, y + hy + L * 0.35, z + Math.cos(a) * L * 0.5];
     const p2 = [x + Math.sin(a) * L, y + hy + L * 0.45, z + Math.cos(a) * L];
     S.b.tube(bark, [p0, p1, p2], (t) => R * (0.4 - t * 0.28), 6);
     branches.push(p2);
-    S.b.sphere(leaves, p2[0], p2[1] + 1, p2[2], H * (0.16 + rand() * 0.08), 9, { sy: 0.7 });
+    S.b.sphere(leaves, p2[0], p2[1] + 1, p2[2], H * (0.22 + rand() * 0.1), 10, { sy: 0.62 });
+    S.b.sphere(leaves, (p1[0] + p2[0]) / 2, p2[1] - 1.5, (p1[2] + p2[2]) / 2, H * (0.14 + rand() * 0.06), 8, { sy: 0.6 });
   }
-  S.b.sphere(leaves, x, y + H + 1, z, H * 0.26, 10, { sy: 0.65 });
+  S.b.sphere(leaves, x, y + H + 1, z, H * 0.34, 12, { sy: 0.55 });
   S.col.circle(x, z, R * 1.15, y - 1, y + H, false);
   return { top: [x, y + H, z], branches };
 }

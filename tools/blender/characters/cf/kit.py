@@ -62,7 +62,7 @@ def shirt(F, b, pid, sleeve=0.45, neck=0.4, hem=0.0, thick=0.006, fold=0.0025, s
     if thigh is not None:
         for s in 'LR':
             cov['thigh.' + s] = (None, thigh)
-    F.tight(pid, cov, thick, add_noise(folds(fold, (30, 30, 12), seed), ridges(fold * 0.5, 160, 'z', seed=seed)))
+    F.tight(pid, cov, thick, add_noise(folds(fold, (30, 30, 12), seed), ridges(fold * 0.15, 160, 'z', seed=seed)))
 
 
 def pants(F, b, pid, bottom=0.85, waist=0.55, thick=0.008, bag=0.025, bag_z=None, fold=0.004, seed=2):
@@ -82,7 +82,7 @@ def pants(F, b, pid, bottom=0.85, waist=0.55, thick=0.008, bag=0.025, bag_z=None
         taper = np.clip((z - (za + 0.05 * b.s)) / (0.25 * b.s), 0, 1)
         crotch = np.clip((zh - z) / 0.08, 0, 1)
         return thick + bag * prof * taper * (0.4 + 0.6 * crotch)
-    F.tight(pid, cov, th, add_noise(folds(fold, (22, 22, 10), seed), ridges(fold * 0.6, 120, 'z', seed=seed)))
+    F.tight(pid, cov, th, add_noise(folds(fold, (16, 16, 7), seed), ridges(fold * 0.18, 90, 'z', seed=seed)))
 
 
 def boots(F, b, pid, top=0.45, thick=0.010, sole_pid=None, sole=0.018, toe_cap=None):
@@ -200,7 +200,7 @@ def hair_strands(F, b, pid, style='messy', n=70, length=0.07, r0=0.010, seed=4, 
         L = length * hs * (0.7 + 0.6 * rng.random())
         down = np.array([0, 0.25, -1.0])
         if style == 'messy':
-            flow = normalize(d * 0.9 + np.array([0, -0.25 if d[1] < 0 else 0.1, -0.35]) + rng.normal(0, 0.35, 3))
+            flow = normalize(d * 0.35 + np.array([0, -0.25 if d[1] < 0 else 0.25, -0.65]) + rng.normal(0, 0.28, 3))
         elif style == 'swept':
             flow = normalize(d * 0.4 + np.array([0, 0.9, -0.3]) + rng.normal(0, 0.15, 3))
         elif style == 'spiky':
@@ -210,14 +210,14 @@ def hair_strands(F, b, pid, style='messy', n=70, length=0.07, r0=0.010, seed=4, 
         else:  # wisps / fringe
             flow = normalize(d * 0.3 + down + rng.normal(0, 0.3, 3))
         if d[1] < -0.3 and d[2] < 0.75 and style in ('messy', 'fringe'):
-            flow = normalize(np.array([rng.normal(0, 0.4), -0.6, -1.0]))
-            L *= 0.85
+            flow = normalize(np.array([rng.normal(0, 0.5), -0.45, -1.0]))
+            L *= 0.5
         p0 = p - d * 0.004
         p1 = p0 + d * L * 0.30 + flow * L * 0.25
         p2 = p1 + flow * L * 0.75 + rng.normal(0, 0.006, 3)
         chainp = S.bezier(p0, p1, p2, 5)
         rr = r0 * hs * (0.7 + 0.5 * rng.random())
-        prims.append(S.chain(chainp, [rr, rr * 0.85, rr * 0.6, rr * 0.38, rr * 0.18], 0.003))
+        prims.append(S.chain(chainp, [rr, rr * 0.9, rr * 0.72, rr * 0.5, rr * 0.3], 0.003))
     for pr in prims:
         F.solid(pid, pr, k)
 

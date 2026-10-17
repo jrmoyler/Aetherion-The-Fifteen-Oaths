@@ -210,7 +210,7 @@ def export_glb(path, objs, log):
     kw = dict(filepath=path, export_format='GLB', use_selection=True, export_apply=False, export_animations=True,
               export_animation_mode='ACTIONS', export_skins=True, export_all_influences=False, export_image_format='JPEG',
               export_draco_mesh_compression_enable=False, export_yup=True, export_tangents=True, export_cameras=False,
-              export_lights=False, export_extras=False, export_def_bones=False, export_force_sampling=True,
+              export_lights=False, export_extras=False, export_def_bones=False, export_force_sampling=False,
               export_optimize_animation_size=True, export_morph=False, export_vertex_color='NONE')
     try:
         kw['export_jpeg_quality'] = 86

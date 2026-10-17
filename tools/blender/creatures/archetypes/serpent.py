@@ -169,7 +169,7 @@ def build(oath=None):
             P.move("hips", x=0.02 * H * math.sin(w))
             # raised neck stays aimed forward, gentle counter-sway
             for j, b in enumerate(neck_bones):
-                P.r(b, z=0.05 * math.sin(w + 1.0 + j * 0.4), x=(0.12 if run else 0.0) * (j == 0))
+                P.r(b, z=0.05 * math.sin(w + 1.0 + j * 0.4), x=(-0.12 if run else 0.0) * (j == 0))
             P.r("head", z=-0.06 * math.sin(w + 1.6))
             P.r("tongue", x=0.0)
 
@@ -180,17 +180,17 @@ def build(oath=None):
             P.r("head", z=0.08 * math.sin(w + 2.0), x=-0.03 * math.sin(w * 2))
             P.chain(tail, z=0.03 * math.sin(w), falloff=1.1)
             flick = env(t, [(0, 0), (0.4, 0), (0.45, 1), (0.5, 0), (0.55, 1), (0.6, 0), (1, 0)])
-            P.r("jaw", x=0.12 * flick)
-            P.r("tongue", x=0.3 * flick)
+            P.r("jaw", x=-0.12 * flick)
+            P.r("tongue", x=-0.3 * flick)
             P.move("tongue", y=0.0)
 
         def attack(t, P):
             coil = env(t, [(0, 0), (0.35, 1), (0.45, -0.2), (0.65, -0.2), (1, 0)])
             strike = env(t, [(0, 0), (0.36, 0), (0.46, 1), (0.62, 1), (0.95, 0)])
             for j, b in enumerate(neck_bones):
-                P.r(b, x=-0.28 * coil + 0.30 * strike * (1.0 if j < 3 else 0.5))
+                P.r(b, x=0.28 * coil - 0.30 * strike * (1.0 if j < 3 else 0.5))
             P.r("head", x=0.2 * coil - 0.25 * strike)
-            P.r("jaw", x=0.9 * env(t, [(0, 0), (0.3, 0.6), (0.45, 1.0), (0.5, 0.2), (0.7, 0.1), (1, 0)]))
+            P.r("jaw", x=-0.9 * env(t, [(0, 0), (0.3, 0.6), (0.45, 1.0), (0.5, 0.2), (0.7, 0.1), (1, 0)]))
             for s in ("L", "R"):
                 P.r(f"hood_{s}", z=(0.5 if s == "L" else -0.5) * coil)
             P.move("hips", y=(-0.05 * coil + 0.10 * strike) * H)
@@ -199,18 +199,18 @@ def build(oath=None):
         def hit(t, P):
             k = env(t, [(0, 0), (0.15, 1), (0.4, 0.6), (1, 0)])
             for j, b in enumerate(neck_bones):
-                P.r(b, x=-0.15 * k, z=0.12 * k)
+                P.r(b, x=0.15 * k, z=0.12 * k)
             P.r("head", y=0.3 * k, x=0.1 * k)
-            P.r("jaw", x=0.5 * k)
+            P.r("jaw", x=-0.5 * k)
             P.chain(tail, z=-0.1 * k, falloff=1.05)
 
         def death(t, P):
             k1 = env(t, [(0, 0), (0.4, 1)])
             k2 = env(t, [(0.3, 0), (0.75, 1)])
             for j, b in enumerate(neck_bones):
-                P.r(b, x=0.55 * k1 - 0.08 * k2 * j, z=0.15 * k2)
+                P.r(b, x=-0.55 * k1 + 0.08 * k2 * j, z=0.15 * k2)
             P.r("head", y=0.9 * k2, x=-0.2 * k2)
-            P.r("jaw", x=0.4 * k2)
+            P.r("jaw", x=-0.4 * k2)
             P.r("hips", y=0.5 * k2)
             P.chain(tail, z=0.1 * k2, y=-0.3 * k2, falloff=0.9)
             P.chain(ground_fw, y=0.2 * k2, falloff=1.0)
@@ -219,10 +219,10 @@ def build(oath=None):
             k = env(t, [(0, 0), (0.25, 1), (0.8, 1), (1, 0)])
             sh = math.sin(t * 2 * math.pi * 12) * env(t, [(0.25, 0), (0.35, 1), (0.75, 1), (0.85, 0)])
             for j, b in enumerate(neck_bones):
-                P.r(b, x=-0.18 * k, z=0.02 * sh)
+                P.r(b, x=0.18 * k, z=0.02 * sh)
             P.r("head", x=0.15 * k)
-            P.r("jaw", x=1.0 * k)
-            P.r("tongue", x=0.2 * k)
+            P.r("jaw", x=-1.0 * k)
+            P.r("tongue", x=-0.2 * k)
             for s in ("L", "R"):
                 P.r(f"hood_{s}", z=(0.7 if s == "L" else -0.7) * k, x=0.15 * k)
             P.chain(tail, z=0.08 * math.sin(t * 2 * math.pi * 2) * k, falloff=1.1)

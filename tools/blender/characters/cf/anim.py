@@ -426,7 +426,10 @@ def bake_actions(arm, cls, legs, log=print, only=None, abd_off=0.0):
         arm.animation_data.action = act
         last = n if loop else n
         prev = {}
-        for f in range(0, last + 1):
+        frames = list(range(0, last + 1, 2))
+        if frames[-1] != last:
+            frames.append(last)
+        for f in frames:
             pose = fn(f if not loop else f % n)
             app.apply(pose)
             for pb in arm.pose.bones:

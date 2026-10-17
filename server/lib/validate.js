@@ -16,7 +16,7 @@ const V = {
     && { t: 'cast', slot: m.slot, target: m.target ?? null, aim: m.aim ? { x: m.aim.x, y: m.aim.y, z: m.aim.z } : null, dir: m.dir ? { x: m.dir.x, z: m.dir.z } : null },
   target: (m) => optStr(m.id, 48) && { t: 'target', id: m.id ?? null },
   chat: (m) => str(m.text, 400) && (m.channel === undefined || ['say', 'world', 'oath'].includes(m.channel)) && { t: 'chat', text: m.text, channel: m.channel ?? 'say' },
-  interact: (m) => str(m.id, 64) && { t: 'interact', id: m.id },
+  interact: (m) => str(m.id, 64) && optStr(m.option, 32) && { t: 'interact', id: m.id, option: m.option ?? undefined },
   dialog: (m) => str(m.npc, 64) && str(m.option, 32) && { t: 'dialog', npc: m.npc, option: m.option },
   travel: (m) => str(m.shrine, 16) && { t: 'travel', shrine: m.shrine },
   respawn: () => ({ t: 'respawn' }),

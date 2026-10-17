@@ -10,7 +10,7 @@ export default {
     plaza: 'square', glow: '#ff6a1a', flame: '#ff8a3a', lamp: 'brazier',
     banner: { color: '#7a1c14', trim: '#c8783a', emblem: '#e8a050' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#34302d' }], border: ['stone.terracotta', { tint: '#7a3a24' }], ground: ['paving.flagstone', { tint: '#3b3633' }],
+      pave: ['paving.slab', { tint: '#34302d' }], border: ['stone.terracotta', { tint: '#7a3a24' }], ground: ['paving.flagstone', { tint: '#3b3633' }],
       wall: ['stone.basalt'], terra: ['stone.terracotta'], trim: ['stone.terracotta', { tint: '#8a4428' }], metal: ['metal.iron'],
       inlay: ['stone.terracotta', { tint: '#a85430' }], roof: ['stone.basalt'], lava: ['emissive.lava', { emissiveIntensity: 2.4 }],
       house: ['stone.basalt', { tint: '#302c2a' }], found: ['stone.basalt'], wood: ['wood.weathered', { tint: '#3a2a20' }], dark: ['stone.basalt', { tint: '#0f0d0c' }],
@@ -241,7 +241,7 @@ export default {
     glow: '#58d4ff', flame: '#ffcf80', lamp: 'brazier',
     banner: { color: '#1d3352', trim: '#b08a4a', emblem: '#e9e1d2' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#dad2c2' }], border: ['stone.limestone', { tint: '#cdc4b2' }], ground: ['paving.flagstone', { tint: '#cfc7b6' }],
+      pave: ['paving.slab', { tint: '#dad2c2' }], border: ['stone.limestone', { tint: '#cdc4b2' }], ground: ['paving.flagstone', { tint: '#cfc7b6' }],
       wall: ['stone.limestone', { tint: '#e2dacb' }], trim: ['stone.limestone', { tint: '#d0c6b2' }], metal: ['metal.brass'], inlay: ['metal.brass'],
       roof: ['tile.roof', { tint: '#bba98e' }], house: ['plaster.lime', { tint: '#ece6dc' }], found: ['stone.limestone', { tint: '#c4baa6' }],
       nacre: ['stone.marble', { tint: '#efe9df', backFaceCulling: false }], glass: ['glass.tinted', { tint: '#7ab0c0' }],
@@ -253,7 +253,7 @@ export default {
       terraceStairs(S, { x0: -38, x1: 38, z0: 56, z1: 90, h, mat: M.wall, coping: M.trim, stairW: 16, run: 5 });
       S.reserve(0, 72, 42);
       // scallop shell half-dome
-      const cz = 76, R = 13;
+      const cz = 74, R = 16;
       S.b.sphere(M.nacre, 0, h, cz, R, 20, { hemi: true, rx: Math.PI / 2 });
       for (let i = 0; i <= 10; i++) {
         const ph = (i / 10) * Math.PI; const pts = [];
@@ -307,7 +307,7 @@ export default {
     glow: '#b07cff', flame: '#ffb070', lamp: 'brazier',
     banner: { color: '#7a2a22', trim: '#c8a77a', emblem: '#e6cfa6' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#c6a67c' }], border: ['stone.sandstone', { tint: '#a8865c' }], ground: ['paving.flagstone', { tint: '#b4946a' }],
+      pave: ['paving.slab', { tint: '#c6a67c' }], border: ['stone.sandstone', { tint: '#a8865c' }], ground: ['paving.flagstone', { tint: '#b4946a' }],
       wall: ['stone.sandstone'], shale: ['stone.shale', { tint: '#8a7058' }], trim: ['stone.sandstone', { tint: '#9a7a56' }], metal: ['metal.iron'],
       inlay: ['stone.shale', { tint: '#7a6248' }], roof: ['stone.sandstone', { tint: '#a88a64' }], crystal: ['crystal.amethyst', { emissiveIntensity: 1.6 }],
       house: ['stone.sandstone', { tint: '#b89a74' }], found: ['stone.shale', { tint: '#7a6450' }], wood: ['wood.weathered', { tint: '#5a4430' }],
@@ -348,7 +348,7 @@ export default {
     glow: '#ffe6c0', flame: '#ffd090', lamp: 'lantern',
     banner: { color: '#c0402a', trim: '#efe6d6', emblem: '#f6f0e4' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#ddd3c0' }], border: ['stone.limestone', { tint: '#cfc3aa' }], ground: ['paving.flagstone', { tint: '#cfc4ae' }],
+      pave: ['paving.slab', { tint: '#ddd3c0' }], border: ['stone.limestone', { tint: '#cfc3aa' }], ground: ['paving.flagstone', { tint: '#cfc4ae' }],
       wall: ['stone.limestone', { tint: '#d8ccb4' }], trim: ['wood.weathered', { tint: '#8a6a4a' }], metal: ['wood.weathered', { tint: '#5a4632' }],
       inlay: ['wood.lacquer', { tint: '#b8402a' }], roof: ['tile.roof', { tint: '#7a6048' }], wood: ['wood.weathered', { tint: '#9a7a52' }],
       linen: ['cloth.banner', { tint: '#e8dfcf', backFaceCulling: false }], house: ['plaster.lime', { tint: '#e6dccb' }], found: ['stone.limestone', { tint: '#bfb29a' }],

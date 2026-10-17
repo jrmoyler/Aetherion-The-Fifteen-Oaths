@@ -75,7 +75,7 @@ def kiln_ninja(F, b, spec):
     F.solid(iron_sp, S.torus(bk, 0.022, 0.0055, S.frame_from_axis((0.25, -1, 0.1))), 0.002)
     # --- asymmetric short mantle over the shoulders (longer on the left), red trim
     mc = J['neck'] + v3(0.0, 0.015 * s, 0.0)
-    mmask = S.ellipsoid(mc + v3(0.01, 0, -0.03), (0.30 * w, 0.24 * s, 0.30 * s))
+    mmask = S.ellipsoid(mc + v3(0.01, 0, -0.03), (0.25 * w, 0.24 * s, 0.30 * s))
     cut_n = S.normalize((-0.28, 0.0, 1.0))
     hem_p = mc + v3(0, 0, -0.17 * s)
     mmask = mmask.inter(S.halfspace(hem_p, -cut_n), 0.004)
@@ -119,7 +119,7 @@ def kiln_ninja(F, b, spec):
     F.shell(mask_i, S.slab(hc + v3(0, 0, -0.045) * hs, (0, -0.25, 1), 0.012 * hs).inter(S.sphere(hc, 0.14 * hs), 0), 0.0, 0.006, 0.003, 'cur')
     # --- hair: messy black, fringe over the brow
     K.hair_cap(F, b, hair, thick=0.010, front=0.05, side=0.012, back=-0.06)
-    K.hair_strands(F, b, hair, 'messy', n=95, length=0.085, r0=0.011, seed=7)
+    K.hair_strands(F, b, hair, 'messy', n=110, length=0.065, r0=0.013, seed=7)
     # --- weapon: ceramic wedge blade in the right hand
     fr = W.grip_frame(b, 'R')
     wl = F.part(('leather', '#2c1f17'), 'hand.R', 'rigid', 'w_wrap')

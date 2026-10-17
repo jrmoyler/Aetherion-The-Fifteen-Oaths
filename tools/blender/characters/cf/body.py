@@ -212,7 +212,6 @@ class Body:
             Sj, E, W, Hd = J['S' + side], J['E' + side], J['W' + side], J['Hd' + side]
             ua = S.normalize(E - Sj)
             fa = S.normalize(W - E)
-            out = S.normalize(np.cross(ua, (0, -1, 0)) * -sx) if False else None
             ar = lerp(1.0, 0.82, fem) * lerp(0.92, 1.12, mus) * (1 + max(m, 0) * 0.25)
             # deltoid
             add(S.ellipsoid(Sj + ua * 0.035 * s + S.v3(sx * 0.012 * s, 0, 0.018 * s), (0.058 * s * ar, 0.060 * s * ar, 0.085 * s * ar),

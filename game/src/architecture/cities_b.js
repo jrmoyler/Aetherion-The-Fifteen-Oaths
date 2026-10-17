@@ -51,7 +51,7 @@ export default {
     plaza: 'square', glow: '#c4ff3a', flame: '#d8ff70', lamp: 'lantern',
     banner: { color: '#4a2a46', trim: '#b89a50', emblem: '#d8b860' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#8c867b' }], border: ['stone.darkgranite', { tint: '#4a4a40' }], ground: ['paving.flagstone', { tint: '#7a766c' }],
+      pave: ['paving.slab', { tint: '#8c867b' }], border: ['stone.darkgranite', { tint: '#4a4a40' }], ground: ['paving.flagstone', { tint: '#7a766c' }],
       wall: ['stone.limestone', { tint: '#8a867c' }], trim: ['stone.darkgranite', { tint: '#555048' }], metal: ['metal.brass', { tint: '#9a8048' }], inlay: ['metal.brass'],
       roof: ['tile.roof', { tint: '#5e3c56' }], glass: ['glass.tinted', { tint: '#9ab890' }], reagent: ['liquid.reagent'], house: ['stone.limestone', { tint: '#7e7a70' }],
       found: ['stone.darkgranite', { tint: '#4a4a42' }], wood: ['wood.weathered', { tint: '#4a3a2a' }], leaves: ['foliage.leaves', { tint: '#5a7a30' }],
@@ -64,7 +64,7 @@ export default {
     rim: (S) => ({ type: 'iron', rail: S.M.metal, post: S.M.trim, balMat: S.M.metal }),
     hall(S) {
       const M = S.M; const h = 2.4;
-      terraceStairs(S, { x0: -42, x1: 42, z0: 50, z1: 92, h, mat: M.trim, coping: M.metal, stairW: 14, run: 4.2 });
+      terraceStairs(S, { x0: -42, x1: 42, z0: 50, z1: 92, h, mat: M.trim, coping: M.wall, stairW: 14, run: 4.2 });
       S.reserve(0, 72, 44);
       S.b.box(M.wall, 0, h, 77, 40, 13, 18); S.b.hip(M.roof, 0, h + 13, 77, 42.5, 20.5, 7);
       S.d.box(M.trim, 0, h + 12.4, 77, 40.6, 0.6, 18.6);
@@ -90,7 +90,7 @@ export default {
         if (S.clear(x, -24, 7)) { roundPool(S, x, -24, 6, { water: M.reagent, rim: M.trim }); S.reserve(x, -24, 8); S.d.cyl(M.metal, x, 0.6, -24, 1.2, 0.9, 3.5, 12); S.d.cyl(M.glass, x, 4.1, -24, 1.0, 1.0, 2.5, 12); S.d.cyl(M.metal, x, 6.6, -24, 1.1, 0.3, 1.2, 12); }
       }
       // greenhouse arcades with glass barrel vaults
-      for (const a of freeSpots(S, 71, [58 * D, -58 * D, 122 * D, -122 * D], 16)) {
+      for (const a of freeSpots(S, 70, [58 * D, -58 * D, 122 * D, -122 * D, 90 * D, -90 * D, 35 * D, -35 * D, 150 * D, -150 * D], 13).slice(0, 4)) {
         const [x, z] = polar(71, a); S.F.push(x, 0, z, a);
         for (const zz of [-5, 5]) arcade(S, M.wall, -14, zz, 14, zz, 5.5, 4, 0.8, 4.2);
         S.b.cyl(M.glass, -14, 5.5, 0, 5.4, 5.4, 28, 18, { rz: -Math.PI / 2, a0: Math.PI, arc: Math.PI, caps: false });
@@ -100,7 +100,7 @@ export default {
         for (let k = 0; k < 5; k++) S.d.sphere(M.leaves, -11 + k * 5.5, 1.5, (k % 2 ? 1.5 : -1.5), 1.6, 8);
         S.F.pop(); S.reserve(x, z, 16);
       }
-      for (const a of freeSpots(S, 76, [100 * D, -100 * D, 155 * D, -155 * D, 180 * D], 6)) {
+      for (const a of freeSpots(S, 82, [100 * D, -100 * D, 155 * D, -155 * D, 75 * D, -75 * D, 45 * D, -45 * D], 5).slice(0, 4)) {
         const [x, z] = polar(76, a);
         roundTower(S, x, z, 3, 17, { mat: M.wall, trim: M.metal, roof: 'cone', roofMat: M.roof });
         for (let k = 0; k < 3; k++) S.d.torus(M.metal, x, 4 + k * 4.5, z, 3.05, 0.14, 20, 4);
@@ -271,7 +271,7 @@ export default {
     plaza: 'square', glow: '#a070ff', flame: '#a070ff', lamp: 'brazier',
     banner: { color: '#8a2a30', trim: '#a8a8b0', emblem: '#d6d6dc' },
     mats: {
-      pave: ['stone.limestone', { tint: '#cac6be' }], border: ['stone.limestone', { tint: '#a19d96' }], ground: ['paving.flagstone', { tint: '#aaa69f' }],
+      pave: ['paving.slab', { tint: '#cac6be' }], border: ['stone.limestone', { tint: '#a19d96' }], ground: ['paving.flagstone', { tint: '#aaa69f' }],
       wall: ['stone.limestone', { tint: '#b9b5ad' }], trim: ['stone.limestone', { tint: '#8f8b85' }], metal: ['metal.iron', { tint: '#2a2a2c' }],
       inlay: ['metal.iron', { tint: '#1c1c1e' }], roof: ['stone.limestone', { tint: '#9a968e' }], void: ['stone.basalt', { tint: '#060607', roughness: 0.3 }],
       house: ['stone.limestone', { tint: '#b0aca4' }], found: ['stone.limestone', { tint: '#8f8b85' }],
@@ -319,7 +319,7 @@ export default {
     plaza: 'square', glow: '#ff2a3a', flame: '#ff6a3a', lamp: 'brazier',
     banner: { color: '#4a1418', trim: '#c8a060', emblem: '#d8b070' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#503f3c' }], border: ['stone.sandstone', { tint: '#7a4840' }], ground: ['paving.flagstone', { tint: '#5e4640' }],
+      pave: ['paving.slab', { tint: '#503f3c' }], border: ['stone.sandstone', { tint: '#7a4840' }], ground: ['paving.flagstone', { tint: '#5e4640' }],
       wall: ['stone.sandstone', { tint: '#8a4e44' }], red: ['stone.sandstone', { tint: '#6e3430' }], trim: ['stone.sandstone', { tint: '#9a6a58' }],
       metal: ['metal.iron', { tint: '#4a3e38' }], gold: ['metal.gold', { tint: '#c8a060' }], inlay: ['metal.gold', { tint: '#c8a060' }], roof: ['tile.roof', { tint: '#3e2a28' }],
       rglass: ['emissive.glow', { emissive: '#d81828', emissiveIntensity: 1.8 }], drape: ['cloth.banner', { tint: '#7a1418', backFaceCulling: false }],
@@ -414,7 +414,7 @@ export default {
     glow: '#ffd88a', flame: '#ffd88a', lamp: 'lantern',
     banner: { color: '#e8dcc0', trim: '#b8904a', emblem: '#8a6a34' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#6e6d6a' }], border: ['stone.darkgranite', { tint: '#3a3e44' }], ground: ['paving.flagstone', { tint: '#5e5e5c' }],
+      pave: ['paving.slab', { tint: '#6e6d6a' }], border: ['stone.darkgranite', { tint: '#3a3e44' }], ground: ['paving.flagstone', { tint: '#5e5e5c' }],
       wall: ['stone.darkgranite', { tint: '#3f444c' }], trim: ['stone.darkgranite', { tint: '#4d535c' }], metal: ['metal.brass', { tint: '#b8904a' }], inlay: ['metal.brass'],
       roof: ['metal.brass', { tint: '#7a6034' }], glass: ['glass.tinted', { tint: '#8a8a80' }], face: ['plaster.lime', { tint: '#e8dcc0' }],
       house: ['stone.darkgranite', { tint: '#464b53' }], found: ['stone.darkgranite', { tint: '#383c42' }], cube: ['stone.basalt', { tint: '#202226' }],

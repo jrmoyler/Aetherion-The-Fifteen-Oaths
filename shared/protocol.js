@@ -59,7 +59,8 @@
 //   bleed weaken expose sunder shield haste empower regen slow gravity freeze invuln ...).
 //
 // CLIENT -> SERVER additions
-//   { t:'dialog', npc, option }                      choose an NPC dialogue option (ids from the 'npc' event)
+//   { t:'dialog', npc, option }                      choose an NPC dialogue option (ids from the 'npc' event);
+//                                                    { t:'interact', id:npcId, option } is accepted as the same thing
 //   { t:'equip', item } / { t:'unequip', slot } / { t:'use', item } / { t:'drop', item }   inventory (item = item id)
 //   hello may carry `spawn:{x,z}` (honoured only by the offline LocalServer, for ?spawn=x,z) and `v` (protocol version).
 //   chat text starting with '/' is a command: /who /where /stuck /events

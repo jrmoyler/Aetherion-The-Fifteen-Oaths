@@ -13,6 +13,7 @@ const KINDS = ['storm', 'meteors', 'worldboss', 'surge'];
 export function initEvents(S, opts) {
   S.world = {
     active: [], // {kind, region, until, ...}
+    storm: null, // region id under a storm
     nextAt: S.t + (opts.firstEventMs ?? 90000),
     interval: opts.eventIntervalMs ?? [300000, 480000],
   };
@@ -30,7 +31,8 @@ export function startEvent(S, kind = S.rng.pick(KINDS), region = pickRegion(S)) 
   const ev = { kind, region, start: S.t, id: S.nextId('w') };
   if (kind === 'storm') {
     ev.until = S.t + 180000;
-    S.system(`A ${o.element === 'storm' ? 'relay' : 'violent'} storm gathers over ${o.name}.`);
+    S.world.storm = region; // storm-element damage +20% inside the region (combat.js)
+    S.system(`A ${o.element === 'storm' ? 'relay' : 'violent'} storm gathers over ${o.name}. Lightning strikes harder here.`);
   } else if (kind === 'meteors') {
     ev.until = S.t + 90000; ev.nextDrop = S.t + 3000;
     S.system(`Meteors streak across the sky above ${o.name}! Find cover or claim the fallen star-iron.`);
@@ -83,7 +85,10 @@ function endEvent(S, ev, success) {
       S.system(`${o.name} is secure: the Oathbound managed to ${ev.text}.`);
       S.pgrid.forEachNear(ev.x, ev.z, 120, (p) => { if (p.alive) { p.gold += 40 + p.lvl * 5; S.giveXp(p, 60 + p.lvl * 25); S.evTo(p, { type: 'loot', id: p.id, gold: 40 + p.lvl * 5, items: [] }); } });
     } else S.system(`The surge near ${WARDS[o.index - 1]} subsides.`);
-  } else S.system(`The ${ev.kind === 'storm' ? 'storm' : 'meteor shower'} over ${o.name} passes.`);
+  } else {
+    if (ev.kind === 'storm' && S.world.storm === ev.region) S.world.storm = null;
+    S.system(`The ${ev.kind === 'storm' ? 'storm' : 'meteor shower'} over ${o.name} passes.`);
+  }
   S.ev({ type: 'world', kind: ev.kind, region: ev.region, state: 'end', success: !!success }, 0, 0, true);
 }
 

@@ -242,7 +242,7 @@ export function getMaterial(scene, key, opts = {}) {
       m.backFaceCulling = false;
     }
   }
-  if (opts.backFaceCulling !== undefined) m.backFaceCulling = opts.backFaceCulling;
+  if (opts.backFaceCulling !== undefined) { m.backFaceCulling = opts.backFaceCulling; if (!opts.backFaceCulling) m.twoSidedLighting = true; }
   if (opts.wind) { m.aetherWind = new WindPlugin(m); m.backFaceCulling = false; m.twoSidedLighting = true; }
   const animated = opts.wind || def.animated;
   if (!animated) m.freeze();

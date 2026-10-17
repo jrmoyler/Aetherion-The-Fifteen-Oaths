@@ -106,7 +106,7 @@ def clips(ctx, p):
             P.chain(SPINE, x=-0.11 * flex * (1 - 0.6 * heavy), falloff=0.8)
             P.r("neck1", x=0.12 * math.sin(w + 2.4) - 0.12)
             P.r("head", x=-0.10 * math.sin(w + 2.4) + 0.06)
-            P.chain(tail, x=0.12 * math.sin(w + 1.0) - 0.1, z=0.03 * math.sin(w), falloff=1.15)
+            P.chain(tail, x=-(0.12 * math.sin(w + 1.0) - 0.1), z=0.03 * math.sin(w), falloff=1.15)
         else:
             # diagonal-sequence walk
             ph = {"HL": 0.0, "FR": 0.25, "HR": 0.5, "FL": 0.75}
@@ -116,7 +116,7 @@ def clips(ctx, p):
             P.chain(SPINE, z=-0.035 * math.sin(w), y=-0.02 * math.sin(w))
             P.r("neck1", x=0.04 * math.cos(w * 2) - 0.04, z=0.04 * math.sin(w + 0.5))
             P.r("head", x=-0.05 * math.cos(w * 2), z=-0.03 * math.sin(w + 0.5))
-            P.chain(tail, z=0.12 * math.sin(w + 1.2), x=-0.03, falloff=1.1)
+            P.chain(tail, z=0.12 * math.sin(w + 1.2), x=0.03, falloff=1.1)
         for leg, o in ph.items():
             dy, dz, pitch = step_cycle(t + o, duty, stride, lft, curl)
             P.foot(leg, (0, dy, dz), pitch)
@@ -151,7 +151,7 @@ def clips(ctx, p):
             P.r("head", x=-0.2 * a - 0.25 * k, z=0.25 * env(t, [(0, 0), (0.45, 0), (0.6, 1), (0.9, 0)]))
             if has_jaw:
                 P.r("jaw", x=-0.3 * k)
-        P.chain(tail, x=0.25 * k - 0.1 * a, z=0.1 * math.sin(t * 12), falloff=1.1)
+        P.chain(tail, x=-(0.25 * k - 0.1 * a), z=0.1 * math.sin(t * 12), falloff=1.1)
         for leg in ("HL", "HR"):
             P.foot(leg)
         lf = env(t, [(0, 0), (0.36, 0), (0.46, 1), (0.6, 1), (0.8, 0)])
@@ -167,7 +167,7 @@ def clips(ctx, p):
         P.r("head", x=0.2 * k, y=0.2 * k)
         if has_jaw:
             P.r("jaw", x=-0.4 * k)
-        P.chain(tail, x=-0.2 * k, falloff=1.1)
+        P.chain(tail, x=-(-0.2 * k), falloff=1.1)
         if has_ears:
             P.r("ear_L", x=-0.6 * k); P.r("ear_R", x=-0.6 * k)
         for leg in ("HL", "HR", "FL", "FR"):
@@ -189,7 +189,7 @@ def clips(ctx, p):
         P.r("head", x=0.1 * k3, y=-0.3 * k3)
         if has_jaw:
             P.r("jaw", x=-0.35 * k3)
-        P.chain(tail, z=0.25 * k3, x=-0.1 * k3, falloff=1.0)
+        P.chain(tail, z=0.25 * k3, x=0.1 * k3, falloff=1.0)
         ik = 1.0 - k2
         for leg in ("HL", "HR", "FL", "FR"):
             P.foot(leg, (0, 0, 0), 0, ik)
@@ -213,7 +213,7 @@ def clips(ctx, p):
         P.r("head", x=0.25 * k + 0.03 * sh, z=0.04 * sh)
         if has_jaw:
             P.r("jaw", x=-0.85 * k)
-        P.chain(tail, x=0.3 * k, z=0.05 * sh, falloff=1.1)
+        P.chain(tail, x=-(0.3 * k), z=0.05 * sh, falloff=1.1)
         for leg in ("HL", "HR", "FL", "FR"):
             P.foot(leg)
         if xf: xf("roar", t, P)
