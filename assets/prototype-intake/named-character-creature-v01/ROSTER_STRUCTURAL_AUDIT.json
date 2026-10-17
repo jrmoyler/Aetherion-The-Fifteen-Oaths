@@ -1,0 +1,33 @@
+{
+  "status": "Y_UP_GEOMETRY_AND_CPU_BIND_QA_NOT_ART_APPROVAL",
+  "passes": 128,
+  "hard_errors": 0,
+  "asset_count": 128,
+  "note": "CPU bind + geometry checks passed. No visual match or gameplay certification",
+  "summary": {
+    "audit": "Aetherion 128 entity CPU geometric/skeletal QA, NOT reference/art/engine certification",
+    "identity_count": 128,
+    "technical_cpu_passes": 128,
+    "technical_cpu_failures": 0,
+    "error_codes": {},
+    "warning_codes": {
+      "GAMEPLAY_MOTION_SET_INCOMPLETE": 128,
+      "HIGH_DRAW_CALL_COUNT": 45,
+      "NO_AUTHORED_LODS": 128,
+      "LIMITED_SOFT_SKINNING": 30
+    },
+    "import_parse_seconds_median": 0.0028,
+    "import_parse_seconds_p95": 0.0041,
+    "draw_call_proxy_p95": 33,
+    "triangles_p95": 2060,
+    "fully_reference_matched_assets": 0,
+    "engine_gpu_certified_assets": 0,
+    "gameplay_animation_certified_assets": 0,
+    "methodological_limits": [
+      "No source image rasters or camera annotations were supplied with roster zip; no image similarity measured",
+      "This is a CPU parse/rest-pose/geometry/proxy audit; not graphics-runtime frame benchmark",
+      "Scene root axis conversion is non-destructive; real in-engine skinning and retargeting remain unverified",
+      "Animation is tested for finite keys, norm, and some motion, not contact or realistic action"
+    ]
+  }
+}

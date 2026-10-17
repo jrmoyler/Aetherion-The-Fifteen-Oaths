@@ -5,7 +5,8 @@ The first 128-asset technical pack documented below has been superseded by the *
 - New archive: `Aetherion_Roster_R05_YUp_Mesh_Correction_2026-10-16.zip`
 - SHA-256: `eb7e8f9322390138ff79c52604cce08146478b2ba9ebbb81e3cb17ef3d704c74`
 - 128/128 strict CPU checks and 128/128 offscreen importer passes.
-- **Not reference exact; artwork, gameplay, GPU runtime and GitHub binary delivery remain open.**
+- **Not reference exact; artwork, gameplay, and GPU runtime remain open.**
+- GitHub binary delivery of this r05 pack is staged, unapproved, under `assets/prototype-intake/named-character-creature-v01/` only. It is not in `assets/production/` and is not art acceptance.
 - The original, uncorrected archive no longer qualifies for the strengthened intake gate.
 
 ---
@@ -41,7 +42,7 @@ python3 tools/production/ingest_named_roster.py Aetherion_Named_Character_Creatu
 
 The validator demands **all 128 canon identities**, matching case-sensitive names, SHA-256 digests, complete embedded texture channels, rig data and 3/4 animation clips; rejects unexpected or duplicate paths; and refuses to overwrite a previous intake.
 
-If successful it stages GLBs under `assets/prototype-intake/named-character-creature-v01/` only. This path is **outside** `assets/production/`; the existing 52 Blender-authored designs and ability logic are untouched. External ZIP model binary bytes are **not present on PR #5**: the available GitHub file-write connector supports UTF-8 text files but cannot transmit the local 31.5 MB binary archive. Staging locally is not proof of remote binary delivery.
+If successful it stages GLBs under `assets/prototype-intake/named-character-creature-v01/` only. This path is **outside** `assets/production/`; the existing 52 Blender-authored designs and ability logic are untouched. PR #5 did not contain these binaries. The superseding r05 Y-up archive is now committed in that prototype-intake path and remains unapproved.
 
 ## Acceptance gates still OPEN
 
@@ -50,6 +51,6 @@ If successful it stages GLBs under `assets/prototype-intake/named-character-crea
 - Proper hand/foot contact, anatomical deformation, LOD/collision fit, gameplay animation.
 - Three.js/WebGL GPU visuals, Godot 4 imports, Unreal editor imports, and mobile hardware.
 - Explicit sign-off for each artifact and character playability, not inferred from role.
-- Actual binary upload of the reviewed, accepted files to GitHub on this PR.
+- r05 corrected binaries are committed under `assets/prototype-intake/named-character-creature-v01/` and are still unapproved. The original uncorrected archive is not the intake target.
 
 **Do not merge this draft on the mistaken premise that artwork, characters, creatures or binary delivery are finished.**

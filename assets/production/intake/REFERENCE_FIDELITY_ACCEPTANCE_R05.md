@@ -24,7 +24,7 @@ Detailed summary and full package checksum: [ROSTER_R05_TECHNICAL_QA.json](ROSTE
 | **Gameplay animation** | State-machine mapping, move timing, root-motion decisions, stop/turn/contact, attack/cast hit windows, transitions, cancel/interruption and hit reaction, engine tests | **NOT CERTIFIED**; 3–4 example keyframe clips per asset |
 | **PBR fidelity** | Verified UV layout, source-painted textures for each material, channel packing/color spaces, glancing light probes, identical camera/lighting/renderer captures vs each reference | **NOT CERTIFIED**; embedded procedural PBR maps exist, but are not source-painted |
 | **Runtime/device performance** | Real Three.js WebGL and/or Godot/Unreal frame captures, measured median/p95/p99 frame time, CPU/GPU times, draw calls, peak memory, texture residency, stutter and shader compilation, hardware/device details | **NOT CERTIFIED**; local Python parse time and mesh complexity are proxies, not frame budget results |
-| **Delivery** | All accepted GLB binaries, editable Blender sources, PBR textures, LOD/collision and QA evidence committed and hash verified in this PR | **INCOMPLETE**; ZIP is user-facing, not an uploaded GitHub binary payload |
+| **Delivery** | All accepted GLB binaries, editable Blender sources, PBR textures, LOD/collision and QA evidence committed and hash verified in this PR | **STAGED, NOT ACCEPTED**. r05 Y-up GLBs plus package audits are committed under `assets/prototype-intake/named-character-creature-v01/` (ZIP SHA-256 `eb7e8f9322390138ff79c52604cce08146478b2ba9ebbb81e3cb17ef3d704c74`). Not production, not reference-exact, no Blender sources or LODs. |
 
 ### Important gameplay semantics
 
