@@ -1,0 +1,20 @@
+{
+  "name": "aetherion-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Authoritative game server for Aetherion: The Fifteen Oaths (HTTP static + WebSocket /ws).",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node --test test/*.test.js",
+    "loadtest": "node loadtest.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
+}

@@ -40,6 +40,55 @@
 //   'discover' {id, shrine}
 //   'teleport' {id, x, y, z, ry}                    authoritative reposition (respawn, travel, correction)
 //   'npc'    {id, npc, name, role, text, options:[{id,label}]}   NPC dialogue for the interacting player
+//
+// ---------------------------------------------------------------------------------------------
+// ADDITIONS (server agent; all backwards compatible - existing fields keep their meaning)
+//
+// Framing: a server frame is either one message object or a JSON ARRAY of message objects
+// (messages produced in the same tick window are batched). game/src/net unpacks both.
+//
+// Snapshot deltas (wire only; game/src/net re-hydrates so `net:snap` always carries full
+// EntityState objects for every entity in the interest radius):
+//   - an entry WITH `k` is a full EntityState (entity new to this client): replace.
+//   - an entry WITHOUT `k` is a delta {id, ...changed fields}: merge into the known entity.
+//   - entities that did not change since the last snapshot are omitted entirely.
+//   - entities that left the interest radius / despawned are listed in `gone`.
+// EntityState extra fields: role (mob role 'common'|'veteran'|'elite'|'boss'|'pet', or NPC role),
+//   el (mob element), own (owner player id for summoned pets, k:'m'), scale (model scale for bosses).
+//   fx = active status ids (see shared/sim/data.js STATUSES: burn chill shock soak root stagger poison
+//   bleed weaken expose sunder shield haste empower regen slow gravity freeze invuln ...).
+//
+// CLIENT -> SERVER additions
+//   { t:'dialog', npc, option }                      choose an NPC dialogue option (ids from the 'npc' event)
+//   { t:'equip', item } / { t:'unequip', slot } / { t:'use', item } / { t:'drop', item }   inventory (item = item id)
+//   hello may carry `spawn:{x,z}` (honoured only by the offline LocalServer, for ?spawn=x,z) and `v` (protocol version).
+//   chat text starting with '/' is a command: /who /where /stuck /events
+//
+// SERVER -> CLIENT additions
+//   welcome.world also has: daySeconds, protocol, tickHz, snapHz, interest, events:[{kind,region,until,text}],
+//     sanctuaries:[{oathId, center:[x,z], y, shrine:{x,y,z}, spawn:{x,y,z,ry}, npcs:[{role,id,x,y,z,ry}]}],
+//     lairs:[{oath, boss, x,y,z, level}]
+//   welcome.resumed = true when a token resumed a live character (reconnect within the grace window).
+//   'you' may be PARTIAL (`partial:true`): inventory/equipment and quests/discovered are omitted when unchanged;
+//     game/src/net merges partial updates so `net:you` always carries the full PlayerState.
+//   PlayerState: {id, name, oath, cls, lvl, xp, next, gold, hp, mhp, mp, mmp, alive, x,y,z,ry,
+//     stats:{power, armor, crit, haste, speed}, cooldowns:[6 x server-ms ready time | 0], gcd, casting:{slot,until}|null,
+//     inventory:[Item], equipment:{slot: Item}, quests:[Quest], discovered:[oathId], combat:bool, fx:[status]}
+//   Item: {id, kind:'gear'|'consumable'|'material', name, rarity:'common'|'uncommon'|'rare'|'epic'|'legendary', qty,
+//     value, slot?:'weapon'|'head'|'chest'|'hands'|'legs'|'feet'|'trinket', lvl?, oath?, stats?:{power,armor,hp,mp,crit,haste}, key?}
+//
+// GameEvent additions / extra fields
+//   'cast'   + element, shape, radius, speed (projectile/line travel m/s), release:true (end of a cast-time cast),
+//            telegraph:true (mob/world AoE warning; resolve after castTime at aim with radius), phase (boss phase change).
+//            Mob/world ability ids: mob/claw mob/bolt mob/slam mob/nova mob/roar mob/phase pet/strike world/meteor item/<key>.
+//            src is null for world hazards.
+//   'hit'    + rx (element reaction name, e.g. 'Overload'), absorbed (shield), dot:true (status tick)
+//   'loot'   + gold, src (killed mob id)
+//   'teleport' + reason: 'speed'|'teleport'|'bounds'|'height' (movement correction) |'respawn'|'travel'|'stuck'
+//   'interrupt' {id, slot, reason}                   a cast-time cast was cancelled (moved, stunned, travel)
+//   'fail'   {id, slot, reason}                       private: cast rejected ('cooldown'|'gcd'|'mana'|'range'|'stunned'|'casting'|'dead')
+//   'world'  {kind:'storm'|'meteors'|'worldboss'|'surge', region, state:'start'|'end', until?, x?, z?, text?, success?}
+//   'chat'   + oath (sender's Oath)
 
 export const PROTOCOL_VERSION = 1;
 export const TICK_HZ = 20;

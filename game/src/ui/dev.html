@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#14181f" />
+  <title>Aetherion UI Harness</title>
+  <style>
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #0d1015; overscroll-behavior: none; touch-action: none; }
+    #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; outline: none; touch-action: none; }
+    #ui { position: fixed; inset: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <canvas id="game" tabindex="0"></canvas>
+  <div id="ui"></div>
+  <script type="module" src="./dev.js"></script>
+</body>
+</html>

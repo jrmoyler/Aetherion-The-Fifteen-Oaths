@@ -1,0 +1,120 @@
+{
+ "hound": {
+  "id": "hound",
+  "file": "game/public/assets/creatures/hound.glb",
+  "bytes": 1843880,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 33,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 18302,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.042,
+     0.033,
+     0.03,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.013,
+     0.01,
+     0.009,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.485,
+     0.418,
+     0.314,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.144,
+     0.01,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.144,
+     0.01
+    ]
+   }
+  },
+  "bones": 33,
+  "bbox_min": [
+   -0.17,
+   -0.86,
+   0.006
+  ],
+  "bbox_max": [
+   0.169,
+   0.883,
+   1.093
+  ],
+  "height": 1.093,
+  "faces_plus_z": true,
+  "death_end_height": 0.302,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/hound.png"
+ }
+}
