@@ -1,6 +1,6 @@
 # Aetherion: The Fifteen Oaths
 
-**Play the MMO:** `npm run mmo:install && npm run mmo:start`, then open http://localhost:8787 — an open-world Babylon.js MMORPG of the fifteen Oaths (desktop, mobile, PWA; offline realm when no server). The static client (offline realm) deploys to Vercel from `vercel.json` (`cd game && npm ci` / `cd game && npm run build`, output `game/dist`). See [MEMORY.md](MEMORY.md) for architecture, verification and known gaps, and [game/CONTRACTS.md](game/CONTRACTS.md) for module contracts.
+**Play the MMO:** `npm run mmo:install && npm run mmo:start`, then open http://localhost:8787 — an open-world Babylon.js MMORPG of the fifteen Oaths (desktop, mobile, PWA; offline realm when no server). The static client (offline realm) deploys to Vercel from the repo-root `vercel.json` with the project's Root Directory set to `game` (`npm ci` / `npm run build`, output `dist`). See [MEMORY.md](MEMORY.md) for architecture, verification and known gaps, and [game/CONTRACTS.md](game/CONTRACTS.md) for module contracts.
 
 **Daybreak browser practice area:** [run locally and prepare the owner-operated Vercel build](app/daybreak/README.md). All 100 imported castables are exposed; rendered gameplay/mobile acceptance remains unverified.
 

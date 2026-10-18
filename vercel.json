@@ -1,8 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "cd game && npm ci --no-audit --no-fund",
-  "buildCommand": "cd game && npm run build",
-  "outputDirectory": "game/dist",
+  "installCommand": "npm ci --no-audit --no-fund",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/assets/(.*)\\.(js|css|woff2)",

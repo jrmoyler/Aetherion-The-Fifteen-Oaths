@@ -14,7 +14,7 @@ npm run mmo:start           # build client, then serve everything on :8787
 npm run mmo:test            # simulation + server tests (21)
 ```
 URL params: `?oath=oath-04&cls=ninja&name=X` (skip character creation), `?offline=1`, `?server=wss://host/ws`, `?q=low|medium|high|ultra`, `?spawn=x,z` (offline only), `?time=18.5`.
-Deploy: `vercel.json` builds the static client (offline realm); run `server/` anywhere Node 22 runs (`server/Dockerfile`, `server/README.md`) for real multiplayer. The Vercel install/build commands are `cd game && npm ci` / `cd game && npm run build` on purpose: `npm ci --prefix game` fails on Vercel's npm 11 with `missing_lock_file` even though `game/package-lock.json` exists (every deployment up to PR #9 errored this way). Hashed bundles under `/assets/*.js|css` are served immutable; GLB/JSON assets stay `must-revalidate` for the service worker.
+Deploy: `vercel.json` builds the static client (offline realm); run `server/` anywhere Node 22 runs (`server/Dockerfile`, `server/README.md`) for real multiplayer. The Vercel project's **Root Directory is `game`** (with "include source files outside the root directory" on, so the `@shared` alias resolves); the repo-root `vercel.json` is still the file Vercel reads, but its commands run inside `game/`, so they are plain `npm ci` / `npm run build` with `outputDirectory: dist`. Every deployment up to PR #9 errored because the old `npm ci --prefix game` looked for `game/game/package-lock.json` (`missing_lock_file`); `cd game && …` fails the same way (`cd: game: No such file`). Hashed bundles under `/assets/*.js|css` are served immutable; GLB/JSON assets stay `must-revalidate` for the service worker.
 
 ## Map of the code
 | Path | Owner role | What |
