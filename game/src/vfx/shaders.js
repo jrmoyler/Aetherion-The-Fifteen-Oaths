@@ -154,7 +154,7 @@ void main(){
     float n = vnoise(vec2(uv.x*0.5, vUV.y*uP.y*3.0 + uSeed)); float st = smoothstep(0.55, 0.9, n);
     float n2 = fbm(uv*0.7);
     col = mix(uC2, uC1, st) * (st*1.4 + n2*0.4) + uC0*st*st;
-    a = clamp(st*0.8 + n2*0.18, 0.0, 1.0) * edgeY * (0.4 + 0.6*fres*0.0 + 0.6);
+    a = clamp(st*0.8 + n2*0.18, 0.0, 1.0) * edgeY * (1.0 - smoothstep(0.7, 1.0, vUV.y)) * smoothstep(0.0, 0.08, vUV.y);
   } else if (k == 6) { // plain glow (beams, halos, pillars of light, shock bands)
     float facing = pow(abs(dot(N, V)), 1.5);
     float g = max(0.0, 1.0 - abs(vUV.x*2.0 - 1.0)*uP.z);

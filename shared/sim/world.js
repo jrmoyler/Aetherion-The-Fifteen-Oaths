@@ -4,6 +4,7 @@ import { OATHS, SANCTUARY, ROUTES } from '../oaths.js';
 import { heightAt, roadInfo, SANCTUARY_HEIGHT, WORLD_HALF } from '../terrain.js';
 import { CREATURES, NPC_ROLES } from '../creatures.js';
 import { makeRng, clamp } from './util.js';
+import { SANCTUARY_LAYOUT } from '../sanctuary-layout.js';
 
 export const SAFE_RADIUS = SANCTUARY.cityRadius; // 150 m: no mobs, no aggro inside
 export const SHRINE_DISCOVER_RADIUS = 12;
@@ -18,17 +19,18 @@ export function buildSanctuaries() {
   return OATHS.map((o, i) => {
     const [cx, cz] = o.center;
     const y = SANCTUARY_HEIGHT[o.id];
-    const npcs = NPC_ROLES.map((role, k) => {
+    const L = SANCTUARY_LAYOUT[o.id];
+    // Prefer the architecture module's measured layout so NPCs stand where the city expects them.
+    const npcs = L ? NPC_ROLES.map((role) => ({ ...L.npcs.find((n) => n.role === role) })).filter((n) => n.role) : NPC_ROLES.map((role, k) => {
       const a = (k / NPC_ROLES.length) * Math.PI * 2 + Math.PI / 6;
       const x = cx + Math.cos(a) * NPC_RING, z = cz + Math.sin(a) * NPC_RING;
-      // face the plaza center
       return { role, x, y, z, ry: Math.atan2(cx - x, cz - z) };
     });
     const neighbours = ROUTES.filter((r) => r.includes(o.id)).map((r) => (r[0] === o.id ? r[1] : r[0]));
     return {
       oathId: o.id, index: i, oath: o, center: [cx, cz], y,
-      shrine: { x: cx, y, z: cz },
-      spawn: { x: cx, y, z: cz - 14, ry: 0 },
+      shrine: L ? { ...L.shrine } : { x: cx, y, z: cz },
+      spawn: L ? { ...L.spawn, ry: Math.atan2(L.shrine.x - L.spawn.x, L.shrine.z - L.spawn.z) } : { x: cx, y, z: cz - 14, ry: 0 },
       npcs, neighbours,
     };
   });
