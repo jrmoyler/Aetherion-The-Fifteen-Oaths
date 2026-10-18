@@ -112,7 +112,7 @@ ${NOISE}
 void main(){
   if (vUV.y > uGrow || vUV.y < uTail) discard;
   vec3 V = normalize(uCam - vW); vec3 N = normalize(vN);
-  float fres = pow(1.0 - abs(dot(N, V)), max(uP.w, 0.5));
+  float fres = pow(1.0 - abs(dot(N, V)), max(abs(uP.w), 0.5));
   vec2 uv = vUV*vec2(uP.x, uP.y) + uScroll*uTime + uSeed;
   float edgeY = (uTail < 0.0 ? 1.0 : smoothstep(0.0, 0.12, vUV.y - uTail)) * (uGrow > 1.0 ? 1.0 : smoothstep(0.0, 0.18, uGrow - vUV.y));
   vec3 col; float a;
@@ -159,7 +159,7 @@ void main(){
     float facing = pow(abs(dot(N, V)), 1.5);
     float g = max(0.0, 1.0 - abs(vUV.x*2.0 - 1.0)*uP.z);
     float n = vnoise(vec2(vUV.x*uP.x*6.0, vUV.y*uP.y - uTime*uScroll.y));
-    float top = 1.0 - smoothstep(0.5, 1.0, vUV.y);
+    float top = uP.w < 0.0 ? 1.0 : 1.0 - smoothstep(0.5, 1.0, vUV.y);
     col = mix(uC1, uC0, pow(facing, 5.0)) * (0.75 + 0.5*n);
     a = g * (0.2 + 0.6*facing) * (0.6 + 0.4*n) * top * edgeY;
   } else { // dark rock-energy (cracked lava / crystal glow veins)

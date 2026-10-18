@@ -297,7 +297,7 @@ export function slash(fx, o) {
   m.rotation.set(o.pitch ?? 0, Math.atan2(d.x, d.z) + (o.yaw ?? 0), o.tilt ?? 0);
   const sweep = o.sweep ?? 0.6;
   return surf(fx, {
-    mesh: m, pos: p0, kind: o.kind ?? 'energy', p: o.p ?? [1, 3, 0, 1], scroll: o.scroll ?? [0, -3], t0: o.t0, dur: o.dur ?? 0.45, fadeIn: 0.02, fadeOut: o.fadeOut ?? 0.18,
+    mesh: m, pos: p0, kind: o.kind ?? 'energy', p: o.p ?? (o.kind === 'glow' ? [1, 1, 0.9, -1] : [1, 3, 0, 1]), scroll: o.scroll ?? [0, -3], t0: o.t0, dur: o.dur ?? 0.45, fadeIn: 0.02, fadeOut: o.fadeOut ?? 0.18,
     c0: o.c0, c1: o.c1, c2: o.c2, c3: o.c3, opacity: o.opacity ?? 1, blend: o.blend,
     grow: (lt, u) => (o.reverse ? 1.02 : clamp01(lt / (o.dur * sweep || 0.25)) * 1.02),
     tail: (lt, u) => (o.reverse ? 1 - clamp01(lt / ((o.dur ?? 0.45) * sweep)) : clamp01((u - 0.45) / 0.55) * 0.9),

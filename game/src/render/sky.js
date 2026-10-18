@@ -105,12 +105,12 @@ void main() {
     if (r2 < 1.0) { vec3 n = normalize(q.x * mx + q.y * my + sqrt(1.0 - r2) * moonDir);
       float lit = clamp(dot(n, sunDir) * 1.5 + 0.08, 0.02, 1.0);
       float maria = 0.75 + 0.25 * texture2D(noiseTex, q * 0.35 + 0.5).r;
-      col = mix(col, vec3(0.9, 0.92, 1.0) * 0.6 * lit * maria * (0.3 + sunInt.w), smoothstep(1.0, 0.92, r2)); }
+      col = mix(col, vec3(0.9, 0.92, 1.0) * 0.6 * lit * maria * (0.3 + sunInt.w), smoothstep(1.0, 0.92, r2) * (0.35 + 0.65 * min(1.0, sunInt.w * 3.0))); }
   }
   // clouds: one fbm layer projected on a curved plane, lit toward the sun
   if (d.y > 0.0 && cloud.y > 0.001) {
     // overcast base deck under heavy cover
-    float deck = smoothstep(0.72, 0.98, cloud.x) * smoothstep(0.0, 0.12, d.y);
+    float deck = smoothstep(0.55, 0.85, cloud.x) * smoothstep(0.0, 0.12, d.y);
     col = mix(col, mix(cloudShade, cloudLit, 0.35 * (1.0 - cloud.z)) * skyTint.rgb, deck);
     float t = 1.0 / (d.y + 0.07);
     vec2 uv = d.xz * t * cloud.w + cloud2.xy;
@@ -126,7 +126,7 @@ void main() {
       cc += cloudLit * 0.6 * pow(max(mu, 0.0), 12.0) * (1.0 - thick); // silver lining
       cc += vec3(0.75, 0.8, 1.0) * cloud2.z * 4.0 * (0.4 + 0.6 * thick);
       float fade = smoothstep(0.0, 0.16, d.y);
-      col = mix(col, cc * skyTint.rgb, dens * fade * cloud.y);
+      col = mix(col, cc * skyTint.rgb, dens * fade * cloud.y * (1.0 - 0.6 * smoothstep(0.55, 0.85, cov)));
     }
   }
   col += vec3(0.6, 0.65, 0.9) * cloud2.z * 0.6;

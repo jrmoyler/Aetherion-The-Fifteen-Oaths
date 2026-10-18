@@ -351,7 +351,7 @@ export async function init(ctx) {
     // exposure: eye adaptation for night, region grade
     const ip = pipeline?.imageProcessing;
     if (ip) {
-      ip.exposure = (1.0 + g.exposure) * (1 + night * 1.6) * (1 + over * 0.25);
+      ip.exposure = (0.9 + g.exposure) * (1 + night * 1.6) * (1 + over * 0.25);
       ip.contrast = g.contrast;
     }
 

@@ -356,6 +356,226 @@
   "ok": true,
   "review": "tools/blender/creatures/review/construct-oath-14.png"
  },
+ "drake": {
+  "id": "drake",
+  "file": "game/public/assets/creatures/drake.glb",
+  "bytes": 2079788,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 43,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 13958,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.042,
+     0.025,
+     0.019,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.023,
+     0.012,
+     0.009,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.584,
+     0.474,
+     0.305,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.195,
+     0.023,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.195,
+     0.023
+    ]
+   }
+  },
+  "bones": 43,
+  "bbox_min": [
+   -1.581,
+   -1.838,
+   -0.009
+  ],
+  "bbox_max": [
+   1.581,
+   3.414,
+   2.58
+  ],
+  "height": 2.58,
+  "faces_plus_z": true,
+  "death_end_height": 3.444,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/drake.png"
+ },
+ "golem": {
+  "id": "golem",
+  "file": "game/public/assets/creatures/golem.glb",
+  "bytes": 1541368,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 22,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 8038,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.102,
+     0.093,
+     0.08,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.195,
+     0.144,
+     0.098,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.254,
+     0.042,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.254,
+     0.042
+    ]
+   }
+  },
+  "bones": 22,
+  "bbox_min": [
+   -1.411,
+   -1.133,
+   -0.033
+  ],
+  "bbox_max": [
+   1.404,
+   0.637,
+   3.201
+  ],
+  "height": 3.201,
+  "faces_plus_z": true,
+  "death_end_height": 0.895,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/golem.png"
+ },
  "hound": {
   "id": "hound",
   "file": "game/public/assets/creatures/hound.glb",

@@ -28,7 +28,7 @@ export const GRADES = {
 export const REGION_WEATHER = {
   'oath-01': ['ash', 0.7],
   'oath-02': ['snow', 0.6],
-  'oath-03': ['storm', 0.8],
+  'oath-03': ['storm', 1.0],
   'oath-08': ['mist', 0.7],
   'oath-11': ['mist', 0.35],
 };

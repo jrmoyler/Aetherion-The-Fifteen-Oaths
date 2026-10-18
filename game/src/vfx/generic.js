@@ -10,7 +10,7 @@ import { clamp01, easeOut } from './core.js';
 const V = (x = 0, y = 0, z = 0) => new Vector3(x, y, z);
 const follow = (fx) => fx.opts.follow ?? (fx.caster ? () => fx.caster.position : null);
 
-function slashKind(el) { return el === 'water' || el === 'blood' ? 'water' : el === 'shadow' || el === 'earth' ? 'smoke' : el === 'fire' ? 'energy' : 'energy'; }
+function slashKind(el) { return el === 'water' || el === 'blood' ? 'water' : el === 'shadow' || el === 'earth' ? 'smoke' : 'glow'; }
 
 export const GENERIC = {
   /** Fallback for unknown abilities: anticipation → shape-appropriate delivery → impact → linger. */
@@ -29,8 +29,8 @@ export const GENERIC = {
       const combo = fx.opts.combo ?? Math.floor(fx.rnd() * 3); const t0 = 0.06;
       const tilt = [0.5, -0.6, 0.15][combo % 3]; const pitch = combo % 3 === 2 ? -0.25 : 0;
       const at = fx.g.add(V(0, 1.15, 0)).add(fx.dir.scale(0.25));
-      B.slash(fx, { pos: at, dir: fx.dir, r: 1.7, arc: 2.6, width: 0.55, tilt, pitch, t0, dur: 0.3, kind: slashKind(el.id), reverse: combo % 2 === 1, p: [1, 2, 0, 1], scroll: [0, -4] });
-      B.slash(fx, { pos: at, dir: fx.dir, r: 1.55, arc: 2.3, width: 0.18, tilt, pitch, t0: t0 + 0.02, dur: 0.26, kind: 'glow', reverse: combo % 2 === 1, c0: P.core, c1: P.core, blend: 'add', opacity: 0.8 });
+      B.slash(fx, { pos: at, dir: fx.dir, r: 1.7, arc: 2.6, width: 0.55, tilt, pitch, t0, dur: 0.3, kind: slashKind(el.id), reverse: combo % 2 === 1, p: [1, 2, 0.9, -1], scroll: [0, -4] });
+      B.slash(fx, { pos: at, dir: fx.dir, r: 1.55, arc: 2.3, width: 0.18, tilt, pitch, t0: t0 + 0.02, dur: 0.26, kind: 'glow', reverse: combo % 2 === 1, c0: P.core, c1: P.core, blend: 'add', opacity: 0.9, p: [1, 1, 1, -1] });
       B.emit(fx, el.spark === 'rock' ? 'dust' : el.spark, { pos: at.add(fx.dir.scale(1.2)), t0: t0 + 0.08, burst: 18, shape: 'dir', dir: fx.dir, spread: 0.6, speed: [2, 5], size: el.spark === 'rock' ? 0.3 : undefined });
       if (fx.opts.target) { K.impact(fx, fx.tgt, { t: t0 + 0.14, scale: 0.55, shake: true }); }
       B.shake(fx, t0 + 0.12, 0.12, 0.12);
@@ -108,7 +108,7 @@ export const GENERIC = {
       B.ring(fx, { pos: at, r0: 0.4, r1: 5, h: 0.6, t0: 0.15, dur: 0.5 });
     } else { // ascending sigil + pillar + orbiting motes
       B.decal(fx, { kind: fx.el.decal === 'clock' ? 'clock' : 'glyph', pos: at, r: 3.2, t0: 0, dur: Math.max(1.2, fx.T.ant + 0.8), p: [16, 8, 0, 0], scroll: [1.2, 6], grow: [0, 1, 0.35] });
-      B.column(fx, { pos: at, r: 1.2, h: 10, t0: 0.05, dur: Math.max(0.9, fx.T.ant + 0.5), rise: 0.25, kind: 'glow', opacity: 0.7 });
+      B.column(fx, { pos: at, r: 0.9, h: 10, t0: 0.05, dur: Math.max(0.9, fx.T.ant + 0.5), rise: 0.25, kind: 'glow', opacity: 0.35 });
       B.emit(fx, 'mote', { pos: at.add(V(0, 0.3, 0)), t0: 0, dur: Math.max(0.6, fx.T.ant), rate: 120, shape: 'disc', r: 2.6, speed: [1, 3], g: 4 });
     }
     B.flash(fx, { pos: at.add(V(0, 1.2, 0)), t0: 0.05, size: 4, light: 6, pri: 3 });
