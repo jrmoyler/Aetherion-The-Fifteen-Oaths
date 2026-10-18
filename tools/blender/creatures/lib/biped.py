@@ -141,9 +141,10 @@ def clips_heavy(ctx, p):
         ik = 1 - k1
         for s, g in SIDES:
             P.foot(s, (0, 0, 0), 0, ik)
-            P.r(f"thigh_{s}", x=1.2 * k1 - 1.0 * k2)
-            P.r(f"shin_{s}", x=-1.9 * k1 + 1.3 * k2)
-            P.r(f"foot_{s}", x=0.4 * k1)
+            # knees buckle to ~65 deg (was 110) -- the fall forward comes from the hips pitching
+            P.r(f"thigh_{s}", x=0.75 * k1 - 0.65 * k2)
+            P.r(f"shin_{s}", x=-1.15 * k1 + 0.85 * k2)
+            P.r(f"foot_{s}", x=0.3 * k1)
             P.r(f"upperarm_{s}", x=0.4 * k1 + 1.0 * k2, z=-g * 0.4 * k2)
             P.r(f"forearm_{s}", x=0.3 * k2)
         if has_jaw:
@@ -317,9 +318,9 @@ def clips_raptor(ctx, p):
         P.r("jaw", x=-0.4 * k2)
         P.chain(tail, z=0.15 * k2, falloff=1.0)
         for s in ("L", "R"):
-            P.foot(s, (0, 0, 0), 0, 1 - k2)
-            P.r(f"thigh_{s}", x=0.4 * k2)
-            P.r(f"shin_{s}", x=-0.5 * k2)
+            P.foot(s, (0, 0, 0), 0, 1 - env(t, [(0.08, 0), (0.30, 1)]))
+            P.r(f"thigh_{s}", x=0.22 * k2)
+            P.r(f"shin_{s}", x=-0.28 * k2)
         arms(P, -0.3 * k2, 0)
         if xf: xf("death", t, P)
 

@@ -126,8 +126,8 @@ def clips_spider(ctx, p, legs_spec):
         # legs curl inward under the body (classic death curl), solved by IK
         for n in names:
             r = radial[n]
-            curl = span * 0.55 * k2
-            P.foot(n, (-r.x * curl, -r.y * curl, -(hz * 0.62) * k1 * 0.3 + 0.35 * span * k2), 0.0)
+            curl = span * 0.30 * k2
+            P.foot(n, (-r.x * curl, -r.y * curl, -(hz * 0.62) * k1 * 0.3 + 0.20 * span * k2), 0.0)
         if xf: xf("death", t, P)
 
     def roar(t, P):

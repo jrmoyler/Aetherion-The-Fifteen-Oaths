@@ -42,6 +42,9 @@ class Spec:
         self.ao_samples = 4
         self.extra = {}
         self.weighting = "geodesic"   # organic skin: "geodesic" (volumetric, default) | "heat"
+        # soft joint limits (deg from rest) on the baked clips, per bone-name prefix
+        self.joint_limits = {"thigh_": 48, "upper_": 50, "shin_": 55, "fore_": 60, "meta_": 55, "carp_": 60,
+                             "femur": 40, "tibia": 60, "arm_": 70}
         self.corrective = True        # gate-driven corrective weight smoothing after the clips bake
         self.weight_rules = None      # f(bone_names, V_design, W, ei, ej) -> W  anatomical fixes
 
@@ -174,7 +177,8 @@ def build(spec, out_dir=None, verbose=True):
     game.matrix_parent_inverse = Matrix.Identity(4)
     # 6. animation
     ctx = Ctx(spec, s, arm)
-    R = anim.Rig(arm, spec.legs, spec.hips, halves=[(b.name, b.half_of) for b in spec.bones if b.half_of])
+    R = anim.Rig(arm, spec.legs, spec.hips, halves=[(b.name, b.half_of) for b in spec.bones if b.half_of],
+                 limits=spec.joint_limits)
     clips = spec.clip_fn(ctx)
     for name, (frames, fn) in clips.items():
         R.bake_clip(name, frames, fn, spec.loc_bones)

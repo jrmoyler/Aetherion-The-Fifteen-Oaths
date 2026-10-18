@@ -54,9 +54,16 @@ class Pose:
 
 
 class Rig:
-    def __init__(self, arm_ob, legs, hips="hips", halves=()):
+    def __init__(self, arm_ob, legs, hips="hips", halves=(), limits=None):
         self.ob, self.legs, self.hips = arm_ob, {l.name: l for l in legs}, hips
         self.halves = [(h, src) for h, src in halves if h in arm_ob.pose.bones]
+        # soft joint limits (deg) per bone-name prefix, applied to the baked local rotations
+        self.limits = {}
+        for pb in arm_ob.pose.bones:
+            for k, v in (limits or {}).items():
+                if pb.name.startswith(k):
+                    self.limits[pb.name] = math.radians(v)
+                    break
         self.targets = {}
         self.rest = {}
         self.pivot = {}
@@ -169,6 +176,29 @@ class Rig:
             ob.pose.bones[h].rotation_euler = Quaternion().slerp(q, 0.5).to_euler("XYZ")
         bpy.context.view_layer.update()
 
+    def clamp(self, smp):
+        """soft-limit limb rotations (|angle| from rest): untouched below 70% of the limit, then
+        compressed smoothly (tanh knee) toward the limit.  IK targets that would need more are
+        simply not reached -- a foot hangs a touch short instead of the leg folding the flank /
+        armpit skin.  Joint helpers are re-derived from the limited rotation."""
+        if not self.limits:
+            return smp
+        for bn, lim in self.limits.items():
+            loc, q = smp[bn]
+            q = q.normalized()
+            if q.w < 0:
+                q = -q
+            a = 2 * math.acos(min(1.0, q.w))
+            k0 = 0.7 * lim
+            if a > k0:
+                a2 = k0 + 0.3 * lim * math.tanh((a - k0) / (0.3 * lim))
+                q = Quaternion().slerp(q, a2 / a)
+                smp[bn] = (loc, q)
+        for h, src in self.halves:
+            loc, _q = smp[h]
+            smp[h] = (loc, Quaternion().slerp(smp[src][1], 0.5))
+        return smp
+
     def sample(self):
         ob = self.ob
         out = {}
@@ -187,7 +217,7 @@ class Rig:
             pose_fn(t, P)
             self.apply(P)
             self.drive_halves()
-            samples.append(self.sample())
+            samples.append(self.clamp(self.sample()))
         self._write_action(name, samples, loc_bones)
         return samples
 

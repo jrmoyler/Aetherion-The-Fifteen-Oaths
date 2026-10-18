@@ -237,7 +237,7 @@ def _top4(W):
     return out
 
 
-def corrective_pass(arm, mesh_ob, actions, iters=16, rings=3, smooth_iters=4, log=print):
+def corrective_pass(arm, mesh_ob, actions, iters=30, rings=3, smooth_iters=4, log=print):
     """Gate-driven corrective weighting (runs inside the forge, after the clips are baked):
     evaluate every frame of every clip, collect the vertices of inverted triangles and try two
     local repairs there (everything else locked): Laplacian *smoothing* (flattens steep weight
@@ -295,6 +295,7 @@ def corrective_pass(arm, mesh_ob, actions, iters=16, rings=3, smooth_iters=4, lo
             m = gm
         return m & g.omask
 
+    depth = np.array([len(arm.data.bones[n].parent_recursive) for n in g.bones], float)
     W = _top4(g.W)
     total, bad = sweep(W)
     hist = [total]
@@ -313,6 +314,18 @@ def corrective_pass(arm, mesh_ob, actions, iters=16, rings=3, smooth_iters=4, lo
         Wp[core] = Wp[core] ** 2
         Wp[core] /= np.maximum(Wp[core].sum(1, keepdims=True), 1e-9)
         cands.append(("sharpen", _top4(Wp), core))
+        # "proximal": crease skin rides the least-moving (most proximal) bone it is weighted to --
+        # skin that stretches does not invert, skin crushed between two limbs does
+        Wq = W.copy()
+        sub = Wq[core]
+        big = sub > 0.08
+        dsel = np.where(big, depth[None, :], 999)
+        pj = dsel.argmin(1)
+        oh = np.zeros_like(sub); oh[np.arange(len(sub)), pj] = 1.0
+        Wq[core] = 0.5 * sub + 0.5 * oh
+        cands.append(("proximal", _top4(Wq), core))
+        Wz = _top4(smooth_weights(Wq, ei, ej, iters=smooth_iters, lam=0.6, lock=~zone))
+        cands.append(("proximal+smooth", Wz, zone))
         res = [(sweep(Wc), nm, Wc, z) for nm, Wc, z in cands]
         (t2, b2), nm, Wc, z = min(res, key=lambda r: r[0][0])
         log(f"  corrective pass {it}: {t2} inverted tri-frames ({nm}), {int(b2.sum())} verts")
@@ -324,7 +337,7 @@ def corrective_pass(arm, mesh_ob, actions, iters=16, rings=3, smooth_iters=4, lo
         else:
             stall += 1
             rings += 1
-            if stall >= 3:
+            if stall >= 4:
                 break
     # write back (organic vertices that were touched)
     idx = np.where(touched)[0].tolist()

@@ -219,13 +219,15 @@ def clips(ctx, p):
         if has_jaw:
             P.r("jaw", x=-0.35 * k3)
         P.chain(tail, z=0.25 * k3, x=0.1 * k3, falloff=1.0)
-        ik = 1.0 - k2
+        # legs go limp (IK released) *before* the body drops, so they are never crushed between a
+        # planted foot and a falling trunk; the body settles with a slight spine curl instead
+        ik = 1.0 - env(t, [(0.06, 0), (0.30, 1)])
         for leg in ("HL", "HR", "FL", "FR"):
             P.foot(leg, (0, 0, 0), 0, ik)
         for s in ("L", "R"):
-            P.r(f"thigh_{s}", x=0.35 * k3); P.r(f"shin_{s}", x=-0.4 * k3)
-            P.r(f"upper_{s}", x=-0.3 * k3); P.r(f"fore_{s}", x=0.5 * k3)
-            P.r(f"carp_{s}", x=-0.4 * k3)
+            P.r(f"thigh_{s}", x=0.15 * k3); P.r(f"shin_{s}", x=-0.18 * k3)
+            P.r(f"upper_{s}", x=-0.12 * k3); P.r(f"fore_{s}", x=0.22 * k3)
+            P.r(f"carp_{s}", x=-0.18 * k3)
         if has_ears:
             P.r("ear_L", x=-0.5 * k3); P.r("ear_R", x=-0.5 * k3)
         if xf: xf("death", t, P)
