@@ -1,109 +1,131 @@
-// Aetherion client boot. Owns module wiring and the frame loop only; every subsystem lives
-// in its own directory and exposes `async init(ctx)` -> api (see game/CONTRACTS.md).
-import { Engine } from '@babylonjs/core/Engines/engine.js';
-import { Scene } from '@babylonjs/core/scene.js';
-import { Color4 } from '@babylonjs/core/Maths/math.color.js';
-import '@babylonjs/core/Loading/loadingScreen.js';
-
+// Three.js client: simulation and UI are independent of the render graph.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { Bus } from './core/bus.js';
 import { detectQuality } from './core/quality.js';
 import { createInput } from './core/input.js';
 import { CollisionWorld } from './core/collision.js';
 import { createFrameBudget } from './core/frameBudget.js';
-
 import * as UI from './ui/index.js';
-import * as Render from './render/index.js';
-import * as World from './world/index.js';
-import * as Architecture from './architecture/index.js';
 import * as Net from './net/index.js';
-import * as Actors from './actors/index.js';
-import * as VFX from './vfx/index.js';
 import * as Combat from './combat/index.js';
+import { initWorld } from './three/world.js';
+import { initAtmosphere } from './three/atmosphere.js';
+import { initActors } from './three/actors.js';
+import { initVFX } from './three/vfx.js';
+import { OATH_BY_ID } from '@shared/oaths.js';
+import { heightAt } from '@shared/terrain.js';
 
 async function startClient() {
-const canvas = document.getElementById('game');
-const bus = new Bus();
-const quality = detectQuality();
-
-const engine = new Engine(canvas, quality.name !== 'low', {
-  preserveDrawingBuffer: false, stencil: true, antialias: false, powerPreference: 'high-performance',
-  adaptToDeviceRatio: false, doNotHandleContextLost: false,
-}, false);
-const budget = createFrameBudget({ maxScale: quality.renderScale });
-const applyScale = () => engine.setHardwareScalingLevel(1 / (Math.min(devicePixelRatio || 1, 2) * budget.scale));
-applyScale();
-
-const scene = new Scene(engine);
-scene.metadata = { quality: quality.name, anisotropy: quality.anisotropy ?? 8 }; // read by materials/ texture factories
-scene.clearColor = new Color4(0.05, 0.06, 0.08, 1);
-scene.skipPointerMovePicking = true;
-scene.autoClear = true;
-
-const updaters = [];
-const ctx = {
-  engine, scene, canvas, bus, quality,
-  input: createInput(canvas, bus),
-  collision: new CollisionWorld(),
-  clock: { time: 0, dt: 0, frame: 0 },
-  params: new URLSearchParams(location.search),
-  /** Register a per-frame update. Lower order runs first. */
-  addUpdate(fn, order = 50) { updaters.push({ fn, order }); updaters.sort((a, b) => a.order - b.order); return () => { const i = updaters.findIndex((u) => u.fn === fn); if (i >= 0) updaters.splice(i, 1); }; },
-  setLoading(p, label) { bus.emit('loading', { p, label }); },
-};
-window.__aetherion = ctx; // debugging / automated QA hook
-
-async function boot() {
-  ctx.ui = await UI.init(ctx);                    // title screen, loading screen, HUD shell
-  ctx.setLoading(0.05, 'Kindling the renderer');
-  ctx.render = await Render.init(ctx);            // sky, sun, IBL, shadows, post-processing
-  ctx.setLoading(0.15, 'Raising the continent');
-  ctx.world = await World.init(ctx);              // terrain, water, vegetation, weather
-  ctx.setLoading(0.45, 'Building the fifteen sanctuaries');
-  ctx.architecture = await Architecture.init(ctx); // sanctuary cities, shrines, props, colliders
-  ctx.setLoading(0.65, 'Opening the Weave');
-  ctx.net = await Net.init(ctx);                  // online WebSocket or in-browser LocalServer
-  ctx.vfx = await VFX.init(ctx);                  // particle/mesh effect library
-  ctx.setLoading(0.75, 'Summoning the Oathbound');
-  ctx.actors = await Actors.init(ctx);            // characters, controller, camera, mobs, NPCs
-  ctx.combat = await Combat.init(ctx);            // targeting, casting, ability visuals, damage
-  ctx.setLoading(1, 'Ready');
-
-  engine.runRenderLoop(() => {
-    if (document.hidden) return;
-    const frameMs = engine.getDeltaTime();
-    const dt = Math.min(frameMs / 1000, 0.1);
-    if (ctx.clock.time > 8 && budget.sample(frameMs) !== null) { applyScale(); bus.emit('render:scale', { scale: budget.scale }); }
+  const canvas = document.getElementById('game');
+  const bus = new Bus(), quality = detectQuality();
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: quality.name !== 'low', powerPreference: 'high-performance' });
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = .93;
+  renderer.shadowMap.enabled = quality.shadows;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#aebcc4');
+  scene.fog = new THREE.FogExp2('#aebcc4', .0018);
+  const camera = new THREE.PerspectiveCamera(53, 1, .3, 4000);
+  scene.activeCamera = camera;
+  const environment = new RoomEnvironment();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const envTarget = pmrem.fromScene(environment, .05);
+  scene.environment = envTarget.texture;
+  scene.environmentIntensity = .32;
+  environment.dispose(); pmrem.dispose();
+  const hemi = new THREE.HemisphereLight('#d5e8ff', '#574a38', 1.2); scene.add(hemi);
+  const sun = new THREE.DirectionalLight('#fff0ce', 2.3);
+  sun.position.set(-90, 140, 75); sun.castShadow = quality.shadows;
+  sun.shadow.mapSize.set(quality.shadowSize, quality.shadowSize);
+  Object.assign(sun.shadow.camera, { left: -65, right: 65, top: 65, bottom: -65, near: 1, far: 400 });
+  sun.shadow.bias = -.0003; sun.shadow.normalBias = .035;
+  scene.add(sun, sun.target);
+  const updaters = [];
+  const budget = createFrameBudget({ maxScale: quality.renderScale });
+  let frameMs = 16.7, suspended = false, stopped = false, timeOfDay = 16;
+  const ctx = {
+    renderer, scene, camera, canvas, bus, quality,
+    engine: { getFps: () => 1000 / frameMs, getRenderWidth: () => canvas.width, getRenderHeight: () => canvas.height },
+    input: createInput(canvas, bus), collision: new CollisionWorld(),
+    clock: { time: 0, dt: 0, frame: 0 }, params: new URLSearchParams(location.search),
+    addUpdate(fn, order = 50) { const item = { fn, order }; updaters.push(item); updaters.sort((a,b) => a.order-b.order); return () => { const i = updaters.indexOf(item); if(i >= 0) updaters.splice(i,1); }; },
+    setLoading(p, label) { bus.emit('loading', { p, label }); },
+    render: { sun, hemi, addShadowCaster(mesh) { mesh.castShadow = quality.shadows; }, removeShadowCaster(mesh) { mesh.castShadow = false; }, get timeOfDay() { return timeOfDay; }, setTimeOfDay(h) { timeOfDay = h; }, setTimeScale() {}, attachCamera() {}, setWeather(kind, intensity) { bus.emit('world:weather', { kind, intensity }); }, setRegionGrade() {} },
+  };
+  window.__aetherion = ctx;
+  ctx.input.setEnabled(false);
+  function resize() {
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, quality.name === 'low' ? 1.25 : 1.75) * budget.scale);
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth / Math.max(1, innerHeight); camera.updateProjectionMatrix();
+  }
+  resize(); addEventListener('resize', resize);
+  canvas.addEventListener('pointermove', e => { scene.pointerX = e.clientX; scene.pointerY = e.clientY; });
+  canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); suspended = true; ctx.input.setEnabled(false); ctx.ui?.toast('Graphics paused. Recovering your view…', 'info'); });
+  canvas.addEventListener('webglcontextrestored', () => { suspended = false; budget.reset(); ctx.input.setEnabled(!!ctx.character); });
+  document.addEventListener('visibilitychange', () => { budget.reset(); });
+  ctx.ui = await UI.init(ctx);
+  ctx.setLoading(.1, 'Shaping the continent');
+  ctx.world = await initWorld(ctx);
+  const atmosphere = initAtmosphere(ctx);
+  Object.defineProperty(ctx.render, 'timeOfDay', { get: () => atmosphere.timeOfDay, configurable: true });
+  ctx.render.setTimeOfDay = atmosphere.setTimeOfDay;
+  ctx.render.setTimeScale = atmosphere.setTimeScale;
+  ctx.render.setWeather = atmosphere.setWeather;
+  ctx.setLoading(.55, 'Opening the Weave');
+  ctx.net = await Net.init(ctx);
+  ctx.vfx = await initVFX(ctx);
+  ctx.actors = await initActors(ctx);
+  ctx.combat = await Combat.init(ctx);
+  const home = OATH_BY_ID['oath-09'].center;
+  const h = heightAt(home[0], home[1]);
+  camera.position.set(home[0] + 45, h + 28, home[1] + 65);
+  camera.lookAt(home[0], h + 5, home[1]);
+  ctx.world.focus(home[0], home[1]);
+  let last = performance.now();
+  renderer.setAnimationLoop(now => {
+    if(stopped) return;
+    const raw = now - last; last = now;
+    if(document.hidden || suspended) return;
+    const dt = Math.min(Math.max(raw / 1000, .001), .05);
+    frameMs = frameMs * .92 + raw * .08;
+    if(ctx.clock.time > 8 && budget.sample(raw) !== null) resize();
     ctx.clock.dt = dt; ctx.clock.time += dt; ctx.clock.frame++;
     ctx.input.poll();
-    for (const u of updaters) u.fn(dt);
-    scene.render();
+    for(const u of updaters) u.fn(dt);
+    const p = ctx.actors?.player?.position ?? camera.position;
+    sun.position.copy(p).add(atmosphere.sunOffset);
+    sun.target.position.set(p.x, p.y, p.z); sun.target.updateMatrixWorld();
+    renderer.render(scene, camera);
     ctx.input.endFrame();
   });
-
-  const character = await ctx.ui.chooseCharacter(); // {name, oath, cls}
-  ctx.character = character;
-  bus.emit('game:character', character);
+  ctx.setLoading(1, 'Your covenant awaits');
+  const character = await ctx.ui.chooseCharacter();
+  ctx.character = character; bus.emit('game:character', character);
+  const center = OATH_BY_ID[character.oath].center;
+  await ctx.world.ready(center[0], center[1]);
   await ctx.net.connect(character);
-  ctx.ui.enterGame();
+  await ctx.actors.ready?.();
+  ctx.ui.enterGame(); ctx.input.setEnabled(true);
   bus.emit('game:start', character);
+  ctx.dispose = () => {
+    stopped = true; renderer.setAnimationLoop(null); ctx.net.disconnect?.();
+    ctx.vfx.stopAll?.(); ctx.actors.dispose?.(); atmosphere.dispose(); ctx.world.dispose?.();
+    envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
+  };
 }
-
-addEventListener('resize', () => { applyScale(); engine.resize(); });
-addEventListener('visibilitychange', () => budget.reset());
-await boot();
-}
-startClient().catch((err) => {
+startClient().catch(err => {
   console.error(err);
   window.__aetherion?.bus.emit('fatal', err);
-  const el = document.createElement('section');
-  el.setAttribute('role', 'alert');
-  el.style.cssText = 'position:fixed;inset:auto 0 0 0;color:#f88;background:#000c;padding:12px;font:12px monospace;white-space:pre-wrap;z-index:99';
-  el.textContent = 'Aetherion could not start. Retry with reduced graphics, or reload to try again. Your saved character is kept.';
-  for (const [label, low] of [['Retry with reduced graphics', true], ['Reload', false]]) {
-    const button = document.createElement('button'); button.textContent = label;
-    button.style.cssText = 'margin:12px;padding:12px;min-height:44px;cursor:pointer';
-    button.onclick = () => { const url = new URL(location.href); if (low) url.searchParams.set('q', 'low'); location.href = url.href; };
-    el.append(button);
-  }
-  document.body.appendChild(el);
+  const box = document.createElement('section');
+  box.setAttribute('role','alert');
+  box.style.cssText = 'position:fixed;inset:auto 12px 12px;color:#f4eee1;background:#182028;padding:20px;font:16px system-ui;z-index:100';
+  box.textContent = 'The realm could not open. Your character is saved. ';
+  const retry = document.createElement('button'); retry.textContent = 'Retry with reduced graphics';
+  retry.style.cssText = 'padding:12px;margin:8px;cursor:pointer';
+  retry.onclick = () => { const url = new URL(location.href); url.searchParams.set('q','low'); location.href = url.href; };
+  box.append(retry); document.body.append(box);
 });

@@ -1,7 +1,6 @@
 // Combat feedback helpers: per-mesh hit flashes (overlay pass, no material mutation) and persistent
 // status visuals attached to actors, synced from `status` events and snapshot/you `fx` lists.
-import { Color3 } from '@babylonjs/core/Maths/math.color.js';
-import '@babylonjs/core/Rendering/outlineRenderer.js';
+import { Color } from 'three';
 
 /** Server status id -> visual kind understood by vfx `status:<kind>`. */
 export const STATUS_VISUAL = {
@@ -13,27 +12,30 @@ const IGNORE = new Set(['combat', 'stagger', 'radiant']);
 
 export class HitFlashes {
   constructor() { this.list = []; }
-  /** Pulse an emissive-looking overlay over every mesh of an actor. */
-  flash(actor, color = Color3.White(), strength = 0.65, dur = 0.18) {
-    const root = actor?.root; if (!root?.getChildMeshes) return;
-    let meshes; try { meshes = root.getChildMeshes(false); } catch { return; }
-    for (const m of meshes) {
-      if (!m?.getTotalVertices || m.getTotalVertices() === 0 || m.getClassName?.() === 'InstancedMesh') continue;
+  // Private material clones prevent one hit from flashing every actor sharing a GLTF material.
+  flash(actor, color = new Color(0xffffff), strength = 0.65, dur = 0.18) {
+    actor?.root?.traverse?.((m) => {
+      if (!m.isMesh || !m.material) return;
       const old = this.list.find((f) => f.m === m);
-      if (old) { old.t = 0; old.dur = dur; old.s = strength; old.c.copyFrom(color); continue; }
-      this.list.push({ m, t: 0, dur, s: strength, c: color.clone(), prevColor: m.overlayColor?.clone?.(), prevAlpha: m.overlayAlpha, prevOn: m.renderOverlay });
-    }
+      if (old) { old.t = 0; old.dur = dur; old.s = strength; old.c.copy(color); return; }
+      const original = m.material;
+      const materials = (Array.isArray(original) ? original : [original]).map((mat) => mat.clone());
+      m.material = Array.isArray(original) ? materials : materials[0];
+      this.list.push({ m, t: 0, dur, s: strength, c: color.clone(), original, materials,
+        base: materials.map((mat) => ({ color: mat.emissive?.clone(), intensity: mat.emissiveIntensity ?? 1 })) });
+    });
   }
   update(dt) {
     for (let i = this.list.length - 1; i >= 0; i--) {
       const f = this.list[i]; f.t += dt;
-      const m = f.m;
-      if (m.isDisposed?.() || f.t >= f.dur) {
-        if (!m.isDisposed?.()) { m.renderOverlay = !!f.prevOn; if (f.prevColor) m.overlayColor = f.prevColor; if (f.prevAlpha !== undefined) m.overlayAlpha = f.prevAlpha; }
+      if (f.t >= f.dur || !f.m.parent) {
+        f.m.material = f.original; f.materials.forEach((m) => m.dispose());
         this.list.splice(i, 1); continue;
       }
-      const k = 1 - f.t / f.dur;
-      m.renderOverlay = true; m.overlayColor = f.c; m.overlayAlpha = f.s * k * k;
+      const k = f.s * (1 - f.t / f.dur) ** 2;
+      f.materials.forEach((mat, j) => {
+        if (mat.emissive) { mat.emissive.copy(f.base[j].color).lerp(f.c, k); mat.emissiveIntensity = f.base[j].intensity + k * 2; }
+      });
     }
   }
 }

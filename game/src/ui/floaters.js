@@ -1,6 +1,6 @@
 // Floating combat text from `combat:floater` {x,y,z,text,kind,element}. Projected world->screen
 // each frame with Vector3.Project so numbers stay pinned to the world as the camera moves.
-import { Vector3, Matrix } from '@babylonjs/core/Maths/math.vector.js';
+import { Vector3 } from 'three';
 import { h } from './dom.js';
 
 const ELEMENT_TINT = {
@@ -16,7 +16,6 @@ export function createFloaters(ui) {
   const live = [];
   const world = new Vector3();
   const out = new Vector3();
-  const ident = Matrix.Identity();
 
   function acquire() {
     let n = pool.pop();
@@ -44,24 +43,21 @@ export function createFloaters(ui) {
   function update(dt) {
     if (!live.length) return;
     const scene = ctx.scene;
-    const cam = scene?.activeCamera;
+    const cam = ctx.camera;
     const canvas = ctx.canvas;
     if (!cam || !canvas) return;
     const w = canvas.clientWidth, hh = canvas.clientHeight;
-    let vp;
-    try { vp = cam.viewport.toGlobal(w, hh); } catch { return; }
-    const tm = scene.getTransformMatrix();
     for (let i = live.length - 1; i >= 0; i--) {
       const f = live[i];
       f.t += dt;
       const k = f.t / f.life;
       if (k >= 1) { f.el.style.display = 'none'; pool.push(f.el); live.splice(i, 1); continue; }
       world.set(f.x, f.y, f.z);
-      Vector3.ProjectToRef(world, ident, tm, vp, out);
-      if (out.z < 0 || out.z > 1) { f.el.style.opacity = '0'; continue; }
+      out.copy(world).project(cam);
+      if (out.z < -1 || out.z > 1) { f.el.style.opacity = '0'; continue; }
       const ease = 1 - (1 - k) ** 3;
-      const sx = out.x + f.dx * ease;
-      const sy = out.y - f.rise * ease - 20;
+      const sx = (out.x + 1) * 0.5 * w + f.dx * ease;
+      const sy = (1 - out.y) * 0.5 * hh - f.rise * ease - 20;
       const pop = f.crit ? (k < 0.12 ? 0.6 + k / 0.12 * 0.9 : 1.5 - Math.min(0.5, (k - 0.12) * 2)) : (k < 0.1 ? 0.7 + k * 3 : 1);
       const op = k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3;
       f.el.style.opacity = op.toFixed(3);

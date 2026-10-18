@@ -5,9 +5,9 @@ import { ICONS } from './icons.js';
 export function createQuests(ui) {
   const { gs } = ui;
   const count = h('span', { class: 'n ae-num' }, '0');
-  const head = h('button', { class: 'ae-quests__head', type: 'button', 'aria-expanded': 'true', html: `${ICONS.quest}<span>Covenant Tasks</span>` }, count);
+  const head = h('button', { class: 'ae-quests__head', type: 'button', 'aria-expanded': 'false', html: `${ICONS.quest}<span>Covenant Tasks</span>` }, count);
   const list = h('div', { role: 'list' });
-  const el = h('div', { class: 'ae-quests', hidden: true }, head, list);
+  const el = h('div', { class: 'ae-quests is-collapsed', hidden: true }, head, list);
   head.addEventListener('click', () => {
     const c = el.classList.toggle('is-collapsed');
     head.setAttribute('aria-expanded', c ? 'false' : 'true'); ui.sfx('click');

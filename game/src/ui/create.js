@@ -15,10 +15,7 @@ const BIOME_LABEL = {
 };
 export const biomeLabel = (b) => BIOME_LABEL[b] || b;
 
-const SIL = {
-  ninja: '<svg viewBox="0 0 34 46" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="16" cy="6" r="4"/><path d="M16 10L14 24L9 34L7 45M14 24L20 34L23 45M15 13L7 20L4 16M16 13L24 18L31 8"/></svg>',
-  sorcerer: '<svg viewBox="0 0 34 46" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="15" cy="6" r="4"/><path d="M15 10L9 26L5 45H25L21 26L15 10M11 16L4 24M19 16L26 20M28 2V45"/><circle cx="28" cy="4" r="2.5"/></svg>',
-};
+import { artHTML } from './art.js';
 
 const NAME_RE = /^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ' -]{1,14}[A-Za-zÀ-ɏ]$/;
 export function validateName(raw) {
@@ -98,6 +95,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
         h('div', { class: 'ae-cls', role: 'radiogroup', 'aria-label': 'Discipline' }, clsCards), inspect,
         h('div', { class: 'ae-bar-preview' }, h('div', { class: 'ae-section-label', style: { marginBottom: '8px' } }, h('b', null, 'i.'), 'Techniques of the Oath'), slotsEl, abDetail, ledger)),
       h('div', { class: 'ae-name-row' },
+        h('p', { class: 'ae-first-steps' }, 'Your first steps: move with WASD or the left stick. Aim at a foe, then use 1–5 or R. On touch, use the on-screen controls. Follow the field guide to your first encounter.'),
         h('div', { class: 'ae-field' }, h('label', { for: 'ae-name' }, 'Name'), h('div', { style: { display: 'flex', gap: '8px' } }, nameInput, dice), nameErr),
         confirmBtn)));
 
@@ -108,7 +106,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     return b;
   });
   const back = h('button', { class: 'ae-btn ae-btn--sm', type: 'button' }, 'Back');
-  const next = h('button', { class: 'ae-btn ae-btn--sm ae-btn--primary', type: 'button' }, 'Next');
+  const next = h('button', { class: 'ae-btn ae-btn--sm ae-btn--primary', type: 'button' }, 'Read the covenant');
   const nav = h('div', { class: 'ae-cc__nav' }, back, next);
   const el = h('section', { class: 'ae-cc', hidden: true, 'aria-label': 'Character creation' },
     h('header', { class: 'ae-cc__head' }, h('h1', null, 'Swear an Oath'), h('span', { class: 'ae-cc__lede' }, 'A covenant, a discipline, a name'), h('div', { class: 'ae-cc__steps', role: 'tablist' }, steps)),
@@ -122,6 +120,8 @@ export function createCharacterScreen(root, { sfx } = {}) {
     steps.forEach((s, k) => s.setAttribute('aria-selected', k === state.pane ? 'true' : 'false'));
     back.disabled = state.pane === 0;
     next.hidden = state.pane === 2;
+    next.textContent = state.pane === 0 ? 'Read the covenant →' : 'Choose your discipline →';
+    cols[state.pane].querySelector('.ae-scroll')?.scrollTo({ top: 0 });
     if (getComputedStyle(cols[1]).display !== 'none' && getComputedStyle(cols[0]).display !== 'none') return; // all visible
     anim(cols[state.pane], { opacity: [0, 1], translateX: [12, 0], duration: 320, ease: 'outCubic' });
   }
@@ -164,7 +164,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     clsCards.forEach((b) => {
       const c = b.dataset.cls; const d = o[c]; const base = CLASSES[c];
       b.setAttribute('aria-checked', c === state.cls ? 'true' : 'false');
-      b.innerHTML = `<span class="sil">${SIL[c]}</span><div class="t">${esc(d.title)}</div>
+      b.innerHTML = `<span class="sil">${artHTML(o.id, c)}</span><div class="t">${esc(d.title)}</div>
         <div class="k">${c === 'ninja' ? 'Agile · melee & line' : 'Ranged · zone caster'}</div>
         <p>${esc(d.silhouette)}</p><div class="w">Wields a ${esc(d.weapon)}</div>
         <dl class="ae-mini-stats"><div><dt>Health</dt><dd>${base.hp}</dd></div><div><dt>Mana</dt><dd>${base.mp}</dd></div><div><dt>Speed</dt><dd>${base.moveSpeed}</dd></div><div><dt>Reach</dt><dd>${base.basicRange} m</dd></div></dl>`;
@@ -179,8 +179,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
         style: `--ab:${v.accent};--ab-rgb:${v.accentRgb}`, html: slotHTML(v) });
       const pick = () => { state.slot = i; renderSlots(); };
       s.addEventListener('click', () => { pick(); sfx?.('click'); });
-      s.addEventListener('mouseenter', () => { if (state.slot !== i) { pick(); sfx?.('hover'); } });
-      s.addEventListener('focus', () => { if (state.slot !== i) pick(); });
+
       slotsEl.append(s);
     });
     const a = view[state.slot] || view[0];
@@ -202,6 +201,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     el.style.setProperty('--accent', o.accent); el.style.setProperty('--accent-rgb', rgbTriplet(o.accent));
     cards.forEach((c) => { const on = c.dataset.oath === id; c.setAttribute('aria-checked', on ? 'true' : 'false'); c.tabIndex = on ? 0 : -1; });
     renderDossier(); renderClasses(); renderSlots();
+    dossier.scrollTop = 0;
   }
   function selectClass(c) { state.cls = c; renderClasses(); renderSlots(); }
 
@@ -228,6 +228,8 @@ export function createCharacterScreen(root, { sfx } = {}) {
     }
     const ch = { name: r.name, oath: state.oath, cls: state.cls };
     leaving = true;
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'Entering the Weave…';
     inspection?.close(); inspection = null;
     saveCharacter(ch);
     sfx?.('confirm');
@@ -242,6 +244,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     el,
     open() {
       leaving = false;
+      confirmBtn.disabled = false; confirmBtn.textContent = 'Swear the Oath';
       el.hidden = false; el.style.opacity = '1';
       return new Promise((res) => {
         resolveFn = res;

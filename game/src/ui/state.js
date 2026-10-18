@@ -1,6 +1,6 @@
 // UI-side game state mirror: everything the HUD needs, fed from bus events, with
 // defensive accessors over ctx.actors / ctx.net (which may be stubs or not yet booted).
-import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
+import { Vector3 } from 'three';
 import { OATH_BY_ID, CLASSES, xpForLevel, regionAt } from '@shared/oaths.js';
 
 export function createState(ctx) {
@@ -30,9 +30,9 @@ export function createState(ctx) {
   };
   /** Camera heading in radians: 0 = north (+Z), PI/2 = east (+X). */
   gs.heading = () => {
-    const cam = ctx.actors?.camera || ctx.scene?.activeCamera;
-    if (!cam?.getDirection) return gs.yaw();
-    try { cam.getDirectionToRef ? cam.getDirectionToRef(fwd, dir) : dir.copyFrom(cam.getDirection(fwd)); } catch { return 0; }
+    const cam = ctx.camera || ctx.actors?.camera;
+    if (!cam?.getWorldDirection) return gs.yaw();
+    try { cam.getWorldDirection(dir); } catch { return 0; }
     if (Math.abs(dir.x) + Math.abs(dir.z) < 1e-4) return 0;
     return Math.atan2(dir.x, dir.z);
   };

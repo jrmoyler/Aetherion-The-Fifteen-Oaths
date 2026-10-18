@@ -41,7 +41,7 @@ export function createNotify(ui) {
   }
 
   // level up
-  const rays = h('div', { class: 'ae-levelup__rays', html: `<svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width=".8">${Array.from({ length: 30 }, (_, i) => { const a = (i / 30) * Math.PI * 2; return `<line x1="${100 + Math.cos(a) * 46}" y1="${100 + Math.sin(a) * 46}" x2="${100 + Math.cos(a) * (i % 2 ? 80 : 96)}" y2="${100 + Math.sin(a) * (i % 2 ? 80 : 96)}"/>`; }).join('')}<circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="98" stroke-dasharray="2 5"/></svg>` });
+  const rays = h('div', { class: 'ae-levelup__rays', 'aria-hidden': 'true' });
   const lvN = h('div', { class: 'ae-levelup__n ae-num' }, '2');
   const lvS = h('div', { class: 'ae-levelup__s' }, '');
   const level = h('div', { class: 'ae-levelup', hidden: true, role: 'status', 'aria-live': 'assertive' }, rays, h('div', { class: 'ae-levelup__k' }, 'Level attained'), lvN, lvS);

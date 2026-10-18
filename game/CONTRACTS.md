@@ -1,3 +1,7 @@
+# Active runtime update — Three.js
+
+The shipped entry point now uses Three.js 0.180 (`game/src/main.js` and `game/src/three/`). The Babylon modules documented below remain as legacy authoring/development sources; they are not loaded by the shipped game. The shared simulation, input, networking, UI and combat bus contracts remain in use. Actor positions are THREE.Vector3, roots are THREE.Group, renderer is ctx.renderer, and camera is ctx.camera. Vector operations mutate: clone before deriving aims.
+
 # Aetherion MMO — module contracts
 
 The client is plain ES modules (no TypeScript) built with Vite 6 and **Babylon.js 9.31**

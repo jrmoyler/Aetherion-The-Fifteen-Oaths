@@ -14,7 +14,7 @@ export default defineConfig({
       injectRegister: false,
       manifest: false, // public/manifest.webmanifest is authored by hand (ui owner)
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,webmanifest,woff2}', 'icons/*.png', 'assets/**/manifest.json'],
+        globPatterns: ['**/*.{js,css,html,webmanifest,woff2}', 'icons/*.png', 'ui/*.webp', 'assets/**/manifest.json'],
         cleanupOutdatedCaches: true,
         skipWaiting: false,
         clientsClaim: true,
