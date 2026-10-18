@@ -11,7 +11,7 @@ export const SEA_LEVEL = 0;
 export const WORLD_SEED = 15015;
 export const WORLD_HALF = 2600; // playable square half-extent in metres
 /** Surface level of the shallow marsh pools around the Bitterglass Guild. */
-export const MARSH_LEVEL = 2.6;
+export const MARSH_LEVEL = 3.4;
 
 // ---------- seeded gradient noise (allocation free) ----------
 const perm = new Uint8Array(512);
@@ -165,7 +165,7 @@ function biomeHeight(r, x, z) {
       return h;
     }
     case 8: { // marsh: shallow pools and reed islands
-      h -= 2.6 * smooth(0.02, 0.3, fbm(x / 95 + 1.7, z / 95 - 4.2, 3)) + 1.2 * smooth(0.1, 0.4, noise2(x / 33, z / 33));
+      h -= 3.6 * smooth(-0.05, 0.25, fbm(x / 95 + 1.7, z / 95 - 4.2, 3)) + 1.4 * smooth(0.0, 0.35, noise2(x / 33, z / 33));
       break;
     }
     case 11: { // badlands: eroded hoodoo fields

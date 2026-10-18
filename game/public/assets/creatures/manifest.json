@@ -1,10 +1,64 @@
 [
  {
+  "id": "construct",
+  "archetype": "construct",
+  "oath": null,
+  "file": "/assets/creatures/construct.glb",
+  "bytes": 1120584,
+  "tris": 7944,
+  "height": 2.4,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
+  "id": "construct-oath-13",
+  "archetype": "construct",
+  "oath": "oath-13",
+  "file": "/assets/creatures/construct-oath-13.glb",
+  "bytes": 1286620,
+  "tris": 6784,
+  "height": 2.4,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
+  "id": "construct-oath-14",
+  "archetype": "construct",
+  "oath": "oath-14",
+  "file": "/assets/creatures/construct-oath-14.glb",
+  "bytes": 1402400,
+  "tris": 10738,
+  "height": 2.4,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
   "id": "hound",
   "archetype": "hound",
   "oath": null,
   "file": "/assets/creatures/hound.glb",
-  "bytes": 1843880,
+  "bytes": 1861008,
   "tris": 18302,
   "height": 1.1,
   "clips": [
@@ -14,6 +68,59 @@
    "attack",
    "hit",
    "death"
+  ]
+ },
+ {
+  "id": "hound-oath-01",
+  "archetype": "hound",
+  "oath": "oath-01",
+  "file": "/assets/creatures/hound-oath-01.glb",
+  "bytes": 1919140,
+  "tris": 18650,
+  "height": 1.1,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death"
+  ]
+ },
+ {
+  "id": "spider",
+  "archetype": "spider",
+  "oath": null,
+  "file": "/assets/creatures/spider.glb",
+  "bytes": 1777396,
+  "tris": 17860,
+  "height": 1.2,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
+  "id": "treant",
+  "archetype": "treant",
+  "oath": null,
+  "file": "/assets/creatures/treant.glb",
+  "bytes": 1463108,
+  "tris": 14088,
+  "height": 3.6,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
   ]
  }
 ]

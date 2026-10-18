@@ -1,8 +1,365 @@
 {
+ "construct": {
+  "id": "construct",
+  "file": "game/public/assets/creatures/construct.glb",
+  "bytes": 1120584,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 22,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 7944,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.045,
+     0.051,
+     0.065,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.019,
+     0.02,
+     0.024,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.558,
+     0.254,
+     0.068,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.456,
+     0.361,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.456,
+     0.361,
+     1
+    ]
+   }
+  },
+  "bones": 22,
+  "bbox_min": [
+   -0.87,
+   -0.6,
+   0.005
+  ],
+  "bbox_max": [
+   0.87,
+   0.494,
+   2.398
+  ],
+  "height": 2.398,
+  "faces_plus_z": true,
+  "death_end_height": 0.734,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/construct.png"
+ },
+ "construct-oath-13": {
+  "id": "construct-oath-13",
+  "file": "game/public/assets/creatures/construct-oath-13.glb",
+  "bytes": 1286620,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 22,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 6784,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.745,
+     0.687,
+     0.604,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.023,
+     0.034,
+     0.08,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.023,
+     0.034,
+     0.08,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.745,
+     0.162,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.745,
+     0.162,
+     1
+    ]
+   }
+  },
+  "bones": 22,
+  "bbox_min": [
+   -0.863,
+   -0.591,
+   0.004
+  ],
+  "bbox_max": [
+   0.86,
+   0.571,
+   2.395
+  ],
+  "height": 2.395,
+  "faces_plus_z": true,
+  "death_end_height": 0.767,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/construct-oath-13.png"
+ },
+ "construct-oath-14": {
+  "id": "construct-oath-14",
+  "file": "game/public/assets/creatures/construct-oath-14.glb",
+  "bytes": 1402400,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 23,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 10738,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.254,
+     0.231,
+     0.188,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.027,
+     0.023,
+     0.018,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.479,
+     0.279,
+     0.068,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.687,
+     0.254,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.687,
+     0.254
+    ]
+   }
+  },
+  "bones": 23,
+  "bbox_min": [
+   -0.87,
+   -0.6,
+   0.005
+  ],
+  "bbox_max": [
+   0.87,
+   0.494,
+   2.398
+  ],
+  "height": 2.398,
+  "faces_plus_z": true,
+  "death_end_height": 0.734,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/construct-oath-14.png"
+ },
  "hound": {
   "id": "hound",
   "file": "game/public/assets/creatures/hound.glb",
-  "bytes": 1843880,
+  "bytes": 1861008,
   "animations": [
    "attack",
    "death",
@@ -112,9 +469,247 @@
   ],
   "height": 1.093,
   "faces_plus_z": true,
-  "death_end_height": 0.302,
+  "death_end_height": 0.34,
   "issues": [],
   "ok": true,
   "review": "tools/blender/creatures/review/hound.png"
+ },
+ "spider": {
+  "id": "spider",
+  "file": "game/public/assets/creatures/spider.glb",
+  "bytes": 1777396,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 31,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 17860,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.023,
+     0.019,
+     0.016,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.007,
+     0.006,
+     0.005,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.254,
+     0.195,
+     0.102,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.552,
+     1,
+     0.042,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.552,
+     1,
+     0.042
+    ]
+   }
+  },
+  "bones": 31,
+  "bbox_min": [
+   -1.298,
+   -1.418,
+   0.005
+  ],
+  "bbox_max": [
+   1.298,
+   1.201,
+   1.199
+  ],
+  "height": 1.199,
+  "faces_plus_z": true,
+  "death_end_height": 1.056,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/spider.png"
+ },
+ "treant": {
+  "id": "treant",
+  "file": "game/public/assets/creatures/treant.glb",
+  "bytes": 1463108,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 22,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 14088,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.068,
+     0.042,
+     0.021,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.068,
+     0.102,
+     0.023,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.102,
+     0.061,
+     0.032,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.527,
+     0.068,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.527,
+     0.068
+    ]
+   }
+  },
+  "bones": 22,
+  "bbox_min": [
+   -1.149,
+   -1.096,
+   -0.006
+  ],
+  "bbox_max": [
+   1.136,
+   0.573,
+   3.58
+  ],
+  "height": 3.58,
+  "faces_plus_z": true,
+  "death_end_height": 0.787,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/treant.png"
  }
 }

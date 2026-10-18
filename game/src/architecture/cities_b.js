@@ -198,8 +198,8 @@ export default {
     rimFurniture(S) {
       for (const [x, z] of [[-30, -43], [-15, -43], [15, -43], [30, -43], [-43, -30], [-43, 30], [43, -30], [43, 30], [-43, -15], [43, -15], [-43, 15], [43, 15]]) if (S.clear(x, z, 0.5)) lanternPost(S, x, z, 0.06, 3.8);
     },
-    house(S, w, d, h, rand) { genericHouse(S, w, d, h, { roofType: rand() < 0.3 ? 'dome' : 'flat', roof: S.M.metal, trim: S.M.trim }); },
-    wallOpts: (S) => ({ mat: S.M.wall, trim: S.M.metal, h: 7.5 }),
+    house(S, w, d, h, rand) { genericHouse(S, w, d, h, { roofType: rand() < 0.3 ? 'dome' : 'flat', roof: S.M.roof, trim: S.M.trim }); },
+    wallOpts: (S) => ({ mat: S.M.wall, trim: S.M.trim, h: 7.5 }),
     gateRoof: 'pyramid',
   },
 

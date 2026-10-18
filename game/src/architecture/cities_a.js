@@ -410,7 +410,7 @@ export default {
     glow: '#ffc04a', flame: '#ffb040', lamp: 'lantern',
     banner: { color: '#3a4a2a', trim: '#c89a40', emblem: '#ffc04a' },
     mats: {
-      pave: ['paving.flagstone', { tint: '#a98d68' }], border: ['bark.living', { tint: '#5a4430' }], ground: ['paving.flagstone', { tint: '#8a7656' }],
+      pave: ['ground.rock', { tint: '#a08462', uvScale: 0.7 }], border: ['bark.living', { tint: '#5a4430' }], ground: ['paving.flagstone', { tint: '#8a7656' }],
       wall: ['stone.sandstone', { tint: '#7a6a50' }], trim: ['wood.weathered', { tint: '#6a5038' }], metal: ['wood.weathered', { tint: '#4a3a28' }],
       inlay: ['wood.weathered', { tint: '#4a3826' }], roof: ['tile.roof', { tint: '#9a8452' }], bark: ['bark.living'], leaves: ['foliage.leaves', { tint: '#4c6c2c' }],
       wood: ['wood.weathered', { tint: '#7a5a3a' }], house: ['wood.weathered', { tint: '#7a5e40' }], found: ['stone.sandstone', { tint: '#6a5a44' }],
