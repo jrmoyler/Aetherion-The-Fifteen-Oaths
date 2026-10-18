@@ -8,6 +8,21 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { DistortionShader } from '../../../runtime/ability-matrix/packs/sandbox/src/postprocessing/DistortionShader.js';
 
+// Bloom-input cap. The Ability Matrix source shaders were authored for a near-zero bloom
+// (source settings: strength 0.03) and carry their brightness in HDR glow values far above 1.
+// The game's world bloom is much stronger, so uncapped VFX cores (beams, domes, pillars) flooded
+// the whole frame white. Capping only what feeds the bloom keeps the displayed HDR image (and
+// hot white cores) untouched while bounding the halo each pixel can spread.
+export const BLOOM_INPUT_CEILING = 2.4;
+function capBloomInput(bloom, ceiling) {
+  const m = bloom.materialHighPassFilter;
+  m.uniforms.bloomCeiling = { value: ceiling };
+  m.fragmentShader = m.fragmentShader
+    .replace('uniform float smoothWidth;', 'uniform float smoothWidth;\nuniform float bloomCeiling;')
+    .replace('gl_FragColor = mix( outputColor, texel, alpha );', 'texel.rgb = max( texel.rgb, vec3( 0.0 ) ) * min( 1.0, bloomCeiling / max( v, 1e-4 ) );\n\t\t\tgl_FragColor = mix( outputColor, texel, alpha );');
+  m.needsUpdate = true;
+}
+
 export function createPostprocessing(renderer, scene, camera, quality) {
   const depthTarget = new WebGLRenderTarget(2, 2);
   depthTarget.texture.generateMipmaps = false;
@@ -29,6 +44,7 @@ export function createPostprocessing(renderer, scene, camera, quality) {
     // HDR highlights bloom; pale architecture and skin retain their contrast.
     bloom = new UnrealBloomPass(new Vector2(1, 1), .38, .38, 1.05);
     output = new OutputPass();
+    capBloomInput(bloom, BLOOM_INPUT_CEILING);
     for (const pass of [scenePass, distortionPass, bloom, output]) composer.addPass(pass);
   }
   function auxiliary(target, layer, override, color, alpha) {

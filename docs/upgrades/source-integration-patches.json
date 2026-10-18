@@ -10,5 +10,83 @@
     "upstreamSHA256": "90851f2977e86ae0b448821578adf68c3be6e970a4b5ae038ddb74419ea71865",
     "sha256": "1ffbdbf419d7fb3b19bd2cb251fb5efcb30e17da6ea310dee2cd7a59285365e5",
     "reason": "Resolve source preset named color fields to actual colors instead of passing invalid color names to Three.js."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/casting/src/assets/AmethystRig.js",
+    "upstreamSHA256": "3e3f70fb14809c78dff078713af1d6a9690b2a8a63c0344f89c73b3d17399897",
+    "sha256": "7c0b809f9584c9b767186f36849a48b7b1443fa39081cd6b75029792fcf502cb",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/casting/src/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/collective/src/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/handcast/src/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/linear-extended/src/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/linear/src/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "5b5e51bfe4dd81ed0a6c823efe488d339b2caec74cd32a6a38bcea00f147d8f9",
+    "sha256": "6bf064fc4bf6a8f7d91fb674a5a5277d0cd60d341642b182891b80925cd3b753",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/vendor/casting/assets/AmethystRig.js",
+    "upstreamSHA256": "3e3f70fb14809c78dff078713af1d6a9690b2a8a63c0344f89c73b3d17399897",
+    "sha256": "7c0b809f9584c9b767186f36849a48b7b1443fa39081cd6b75029792fcf502cb",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/vendor/casting/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/vendor/handcast/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear-extended/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "37dc99e1fe30ecea0d0673930d71dc75b5a6975ad9cb6de95afa69c90d1bb6ca",
+    "sha256": "c2bba1c0f2b526b38a4871a5ea296e0f0e50d566b459f7559f2907fd17c853b1",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/vendor/linear/assets/ProceduralGeometry.js",
+    "upstreamSHA256": "5b5e51bfe4dd81ed0a6c823efe488d339b2caec74cd32a6a38bcea00f147d8f9",
+    "sha256": "6bf064fc4bf6a8f7d91fb674a5a5277d0cd60d341642b182891b80925cd3b753",
+    "reason": "Skip redundant toNonIndexed() on Three r180 polyhedra (already non-indexed) so casts stop emitting console warnings; geometry is byte-identical."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/glyphs.js",
+    "upstreamSHA256": "0172dedb6f5cbd739a145b7202d9b40213e1cb36e5af960805f16ea65443ed46",
+    "sha256": "c7a87220a640a456b762144c69dfd0bb9db74e9275c2824be6769a2f67be0685",
+    "reason": "Tone down Glyph Barrage pillar glow (1.6->0.8) and white core (1.25->0.35): four pillars stacked along a behind-the-caster view summed to a flat white slab that bloomed across the frame."
   }
 ]

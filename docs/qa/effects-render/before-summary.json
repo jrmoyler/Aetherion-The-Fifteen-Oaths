@@ -1,0 +1,934 @@
+{
+ "note": "Audit of the code as found (PR #13 head + only the harness hooks), original bright review stage, before any fix in this change.",
+ "summary": {
+  "total": 150,
+  "pass": 149,
+  "flagged": {
+   "codex/orbital": [
+    "blown-out"
+   ]
+  },
+  "errorFree": 150,
+  "warningFree": 146,
+  "rendered": 150,
+  "minBestChanged": 0.01059,
+  "wallSeconds": 2003
+ },
+ "abilities": [
+  {
+   "id": "linear/ice",
+   "flags": [],
+   "bestChanged": 0.15137,
+   "warnings": []
+  },
+  {
+   "id": "linear/glacier",
+   "flags": [],
+   "bestChanged": 0.14284,
+   "warnings": []
+  },
+  {
+   "id": "handcast/glacial",
+   "flags": [],
+   "bestChanged": 0.09301,
+   "warnings": []
+  },
+  {
+   "id": "handcast/frost",
+   "flags": [],
+   "bestChanged": 0.34536,
+   "warnings": []
+  },
+  {
+   "id": "codex/permafrost",
+   "flags": [],
+   "bestChanged": 0.20609,
+   "warnings": []
+  },
+  {
+   "id": "codex/avalanche",
+   "flags": [],
+   "bestChanged": 0.37428,
+   "warnings": []
+  },
+  {
+   "id": "codex/hoarfrost",
+   "flags": [],
+   "bestChanged": 0.54691,
+   "warnings": []
+  },
+  {
+   "id": "codex/rimehalo",
+   "flags": [],
+   "bestChanged": 0.13568,
+   "warnings": []
+  },
+  {
+   "id": "codex/whiteout",
+   "flags": [],
+   "bestChanged": 0.11499,
+   "warnings": []
+  },
+  {
+   "id": "codex/calving",
+   "flags": [],
+   "bestChanged": 0.32546,
+   "warnings": []
+  },
+  {
+   "id": "linear/thunder",
+   "flags": [],
+   "bestChanged": 0.07873,
+   "warnings": []
+  },
+  {
+   "id": "linear/snare",
+   "flags": [],
+   "bestChanged": 0.14233,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/electrical",
+   "flags": [],
+   "bestChanged": 0.04009,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/boost",
+   "flags": [],
+   "bestChanged": 0.07971,
+   "warnings": []
+  },
+  {
+   "id": "casting/gyro",
+   "flags": [],
+   "bestChanged": 0.11369,
+   "warnings": []
+  },
+  {
+   "id": "collective/chain",
+   "flags": [],
+   "bestChanged": 0.09557,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/ionstorm",
+   "flags": [],
+   "bestChanged": 0.65243,
+   "warnings": []
+  },
+  {
+   "id": "atlas/relay",
+   "flags": [],
+   "bestChanged": 0.07994,
+   "warnings": []
+  },
+  {
+   "id": "codex/balllightning",
+   "flags": [],
+   "bestChanged": 0.07275,
+   "warnings": []
+  },
+  {
+   "id": "codex/fulgur",
+   "flags": [],
+   "bestChanged": 0.5009,
+   "warnings": []
+  },
+  {
+   "id": "linear/meteor",
+   "flags": [],
+   "bestChanged": 0.11138,
+   "warnings": [
+    "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed."
+   ]
+  },
+  {
+   "id": "linear-ext/pyre",
+   "flags": [],
+   "bestChanged": 0.12689,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/firePortal",
+   "flags": [],
+   "bestChanged": 0.0984,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/fire",
+   "flags": [],
+   "bestChanged": 0.0652,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/ward",
+   "flags": [],
+   "bestChanged": 0.1818,
+   "warnings": []
+  },
+  {
+   "id": "handcast/phoenix",
+   "flags": [],
+   "bestChanged": 0.1268,
+   "warnings": []
+  },
+  {
+   "id": "casting/dragon",
+   "flags": [],
+   "bestChanged": 0.02026,
+   "warnings": [
+    "THREE.PropertyBinding: No target node found for track: Hemi.position.",
+    "THREE.PropertyBinding: No target node found for track: Hemi.scale.",
+    "THREE.PropertyBinding: No target node found for track: Hemi.quaternion.",
+    "THREE.PropertyBinding: No target node found for track: Plane.position.",
+    "THREE.PropertyBinding: No target node found for track: Plane.scale.",
+    "THREE.PropertyBinding: No target node found for track: Plane.quaternion."
+   ]
+  },
+  {
+   "id": "collective/swarm",
+   "flags": [],
+   "bestChanged": 0.44857,
+   "warnings": [
+    "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed."
+   ]
+  },
+  {
+   "id": "matrix-new/emberveil",
+   "flags": [],
+   "bestChanged": 0.87879,
+   "warnings": []
+  },
+  {
+   "id": "codex/solarlash",
+   "flags": [],
+   "bestChanged": 0.05744,
+   "warnings": []
+  },
+  {
+   "id": "linear/beam",
+   "flags": [],
+   "bestChanged": 0.35101,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/rend",
+   "flags": [],
+   "bestChanged": 0.0912,
+   "warnings": []
+  },
+  {
+   "id": "casting/chains",
+   "flags": [],
+   "bestChanged": 0.0627,
+   "warnings": []
+  },
+  {
+   "id": "casting/lance",
+   "flags": [],
+   "bestChanged": 0.11053,
+   "warnings": []
+  },
+  {
+   "id": "collective/prism",
+   "flags": [],
+   "bestChanged": 0.23329,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/starfall",
+   "flags": [],
+   "bestChanged": 0.03232,
+   "warnings": []
+  },
+  {
+   "id": "atlas/sanctuary",
+   "flags": [],
+   "bestChanged": 0.04309,
+   "warnings": []
+  },
+  {
+   "id": "codex/seraph",
+   "flags": [],
+   "bestChanged": 0.40401,
+   "warnings": []
+  },
+  {
+   "id": "codex/haloguillotine",
+   "flags": [],
+   "bestChanged": 0.13104,
+   "warnings": []
+  },
+  {
+   "id": "codex/reliquarydawn",
+   "flags": [],
+   "bestChanged": 0.37371,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/kraken",
+   "flags": [],
+   "bestChanged": 0.13946,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/aether",
+   "flags": [],
+   "bestChanged": 0.03318,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/ink",
+   "flags": [],
+   "bestChanged": 0.14959,
+   "warnings": []
+  },
+  {
+   "id": "casting/shark",
+   "flags": [],
+   "bestChanged": 0.08084,
+   "warnings": []
+  },
+  {
+   "id": "codex/maelstrom",
+   "flags": [],
+   "bestChanged": 0.06687,
+   "warnings": []
+  },
+  {
+   "id": "codex/riptide",
+   "flags": [],
+   "bestChanged": 0.04411,
+   "warnings": []
+  },
+  {
+   "id": "codex/brine",
+   "flags": [],
+   "bestChanged": 0.1448,
+   "warnings": []
+  },
+  {
+   "id": "codex/glasstide",
+   "flags": [],
+   "bestChanged": 0.07477,
+   "warnings": []
+  },
+  {
+   "id": "codex/undertow",
+   "flags": [],
+   "bestChanged": 0.06877,
+   "warnings": []
+  },
+  {
+   "id": "codex/pearltempest",
+   "flags": [],
+   "bestChanged": 0.05965,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/earth",
+   "flags": [],
+   "bestChanged": 0.0906,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/quake",
+   "flags": [],
+   "bestChanged": 0.13409,
+   "warnings": [
+    "THREE.BufferGeometry.toNonIndexed(): BufferGeometry is already non-indexed."
+   ]
+  },
+  {
+   "id": "casting/amethyst",
+   "flags": [],
+   "bestChanged": 0.03875,
+   "warnings": []
+  },
+  {
+   "id": "collective/dune",
+   "flags": [],
+   "bestChanged": 0.11018,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/geode",
+   "flags": [],
+   "bestChanged": 0.4892,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/obsidianwall",
+   "flags": [],
+   "bestChanged": 0.03748,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/crystallineheart",
+   "flags": [],
+   "bestChanged": 0.02293,
+   "warnings": []
+  },
+  {
+   "id": "codex/basalt",
+   "flags": [],
+   "bestChanged": 0.08929,
+   "warnings": []
+  },
+  {
+   "id": "codex/faultchoir",
+   "flags": [],
+   "bestChanged": 0.04889,
+   "warnings": []
+  },
+  {
+   "id": "codex/quartzspire",
+   "flags": [],
+   "bestChanged": 0.10768,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/portal",
+   "flags": [],
+   "bestChanged": 0.0484,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/growth",
+   "flags": [],
+   "bestChanged": 0.06888,
+   "warnings": []
+  },
+  {
+   "id": "casting/reliquary",
+   "flags": [],
+   "bestChanged": 0.0323,
+   "warnings": []
+  },
+  {
+   "id": "collective/spore",
+   "flags": [],
+   "bestChanged": 0.07087,
+   "warnings": []
+  },
+  {
+   "id": "codex/pollen",
+   "flags": [],
+   "bestChanged": 0.04884,
+   "warnings": []
+  },
+  {
+   "id": "codex/seedstorm",
+   "flags": [],
+   "bestChanged": 0.12509,
+   "warnings": []
+  },
+  {
+   "id": "codex/briar",
+   "flags": [],
+   "bestChanged": 0.11487,
+   "warnings": []
+  },
+  {
+   "id": "codex/mycelium",
+   "flags": [],
+   "bestChanged": 0.05482,
+   "warnings": []
+  },
+  {
+   "id": "codex/thornvolley",
+   "flags": [],
+   "bestChanged": 0.03353,
+   "warnings": []
+  },
+  {
+   "id": "codex/bloomcrown",
+   "flags": [],
+   "bestChanged": 0.02732,
+   "warnings": []
+  },
+  {
+   "id": "linear-ext/magic",
+   "flags": [],
+   "bestChanged": 0.04246,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/cascade",
+   "flags": [],
+   "bestChanged": 0.05095,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/aetherblade",
+   "flags": [],
+   "bestChanged": 0.18591,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/mirage",
+   "flags": [],
+   "bestChanged": 0.0178,
+   "warnings": []
+  },
+  {
+   "id": "atlas/echoes",
+   "flags": [],
+   "bestChanged": 0.0279,
+   "warnings": []
+  },
+  {
+   "id": "codex/glyphs",
+   "flags": [],
+   "bestChanged": 0.48871,
+   "warnings": []
+  },
+  {
+   "id": "codex/sigilgate",
+   "flags": [],
+   "bestChanged": 0.20027,
+   "warnings": []
+  },
+  {
+   "id": "codex/prismlie",
+   "flags": [],
+   "bestChanged": 0.05481,
+   "warnings": []
+  },
+  {
+   "id": "codex/runemeteor",
+   "flags": [],
+   "bestChanged": 0.0566,
+   "warnings": []
+  },
+  {
+   "id": "codex/mindlattice",
+   "flags": [],
+   "bestChanged": 0.46806,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/acid",
+   "flags": [],
+   "bestChanged": 0.11644,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/venom",
+   "flags": [],
+   "bestChanged": 0.05632,
+   "warnings": []
+  },
+  {
+   "id": "handcast/toxic",
+   "flags": [],
+   "bestChanged": 0.15642,
+   "warnings": []
+  },
+  {
+   "id": "codex/plague",
+   "flags": [],
+   "bestChanged": 0.16832,
+   "warnings": []
+  },
+  {
+   "id": "codex/miasma",
+   "flags": [],
+   "bestChanged": 0.0416,
+   "warnings": []
+  },
+  {
+   "id": "codex/acidchoir",
+   "flags": [],
+   "bestChanged": 0.19707,
+   "warnings": []
+  },
+  {
+   "id": "codex/bilelance",
+   "flags": [],
+   "bestChanged": 0.03598,
+   "warnings": []
+  },
+  {
+   "id": "codex/sporecoffin",
+   "flags": [],
+   "bestChanged": 0.11923,
+   "warnings": []
+  },
+  {
+   "id": "codex/noxioushalo",
+   "flags": [],
+   "bestChanged": 0.2335,
+   "warnings": []
+  },
+  {
+   "id": "codex/vitriol",
+   "flags": [],
+   "bestChanged": 0.20837,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/cyber",
+   "flags": [],
+   "bestChanged": 0.07543,
+   "warnings": []
+  },
+  {
+   "id": "handcast/monowheel",
+   "flags": [],
+   "bestChanged": 0.37844,
+   "warnings": []
+  },
+  {
+   "id": "handcast/drone",
+   "flags": [],
+   "bestChanged": 0.19764,
+   "warnings": []
+  },
+  {
+   "id": "collective/aegis",
+   "flags": [],
+   "bestChanged": 0.33114,
+   "warnings": []
+  },
+  {
+   "id": "atlas/polarity",
+   "flags": [],
+   "bestChanged": 0.0247,
+   "warnings": []
+  },
+  {
+   "id": "atlas/chakram",
+   "flags": [],
+   "bestChanged": 0.08899,
+   "warnings": []
+  },
+  {
+   "id": "atlas/reversal",
+   "flags": [],
+   "bestChanged": 0.01717,
+   "warnings": []
+  },
+  {
+   "id": "atlas/refractor",
+   "flags": [],
+   "bestChanged": 0.06084,
+   "warnings": []
+  },
+  {
+   "id": "codex/railgun",
+   "flags": [],
+   "bestChanged": 0.09598,
+   "warnings": []
+  },
+  {
+   "id": "codex/orbital",
+   "flags": [
+    "blown-out"
+   ],
+   "bestChanged": 0.95404,
+   "warnings": []
+  },
+  {
+   "id": "linear-extended/astral",
+   "flags": [],
+   "bestChanged": 0.38392,
+   "warnings": []
+  },
+  {
+   "id": "casting/tome",
+   "flags": [],
+   "bestChanged": 0.04351,
+   "warnings": []
+  },
+  {
+   "id": "casting/wolf",
+   "flags": [],
+   "bestChanged": 0.12859,
+   "warnings": []
+  },
+  {
+   "id": "collective/graviton",
+   "flags": [],
+   "bestChanged": 0.05475,
+   "warnings": []
+  },
+  {
+   "id": "codex/nebula",
+   "flags": [],
+   "bestChanged": 0.12754,
+   "warnings": []
+  },
+  {
+   "id": "codex/horizon",
+   "flags": [],
+   "bestChanged": 0.23093,
+   "warnings": []
+  },
+  {
+   "id": "codex/pulsar",
+   "flags": [],
+   "bestChanged": 0.42686,
+   "warnings": []
+  },
+  {
+   "id": "codex/darkwell",
+   "flags": [],
+   "bestChanged": 0.10941,
+   "warnings": []
+  },
+  {
+   "id": "codex/cometharpoon",
+   "flags": [],
+   "bestChanged": 0.07917,
+   "warnings": []
+  },
+  {
+   "id": "codex/orbitlock",
+   "flags": [],
+   "bestChanged": 0.11188,
+   "warnings": []
+  },
+  {
+   "id": "handcast/flux",
+   "flags": [],
+   "bestChanged": 0.06273,
+   "warnings": []
+  },
+  {
+   "id": "collective/crimson",
+   "flags": [],
+   "bestChanged": 0.11632,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/bloodroot",
+   "flags": [],
+   "bestChanged": 0.05774,
+   "warnings": []
+  },
+  {
+   "id": "codex/sanguine",
+   "flags": [],
+   "bestChanged": 0.08351,
+   "warnings": []
+  },
+  {
+   "id": "codex/hemorrhage",
+   "flags": [],
+   "bestChanged": 0.04901,
+   "warnings": []
+  },
+  {
+   "id": "codex/clotarmor",
+   "flags": [],
+   "bestChanged": 0.08304,
+   "warnings": []
+  },
+  {
+   "id": "codex/arterial",
+   "flags": [],
+   "bestChanged": 0.02493,
+   "warnings": []
+  },
+  {
+   "id": "codex/baptism",
+   "flags": [],
+   "bestChanged": 0.12255,
+   "warnings": []
+  },
+  {
+   "id": "codex/heartstake",
+   "flags": [],
+   "bestChanged": 0.03758,
+   "warnings": []
+  },
+  {
+   "id": "codex/veinlattice",
+   "flags": [],
+   "bestChanged": 0.10582,
+   "warnings": []
+  },
+  {
+   "id": "handcast/voidslash",
+   "flags": [],
+   "bestChanged": 0.06191,
+   "warnings": []
+  },
+  {
+   "id": "handcast/shard",
+   "flags": [],
+   "bestChanged": 0.03179,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/umbra",
+   "flags": [],
+   "bestChanged": 0.03112,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/voidstep",
+   "flags": [],
+   "bestChanged": 0.06027,
+   "warnings": []
+  },
+  {
+   "id": "codex/nightfall",
+   "flags": [],
+   "bestChanged": 0.1071,
+   "warnings": []
+  },
+  {
+   "id": "codex/wraiths",
+   "flags": [],
+   "bestChanged": 0.0844,
+   "warnings": []
+  },
+  {
+   "id": "codex/umbral",
+   "flags": [],
+   "bestChanged": 0.12861,
+   "warnings": []
+  },
+  {
+   "id": "codex/voidbloom",
+   "flags": [],
+   "bestChanged": 0.06165,
+   "warnings": []
+  },
+  {
+   "id": "codex/shadepuppet",
+   "flags": [],
+   "bestChanged": 0.11089,
+   "warnings": []
+  },
+  {
+   "id": "codex/eclipseneedle",
+   "flags": [],
+   "bestChanged": 0.04958,
+   "warnings": []
+  },
+  {
+   "id": "collective/tempest",
+   "flags": [],
+   "bestChanged": 0.23277,
+   "warnings": []
+  },
+  {
+   "id": "collective/sonic",
+   "flags": [],
+   "bestChanged": 0.06253,
+   "warnings": []
+  },
+  {
+   "id": "matrix-new/gale",
+   "flags": [],
+   "bestChanged": 0.01059,
+   "warnings": []
+  },
+  {
+   "id": "codex/zephyr",
+   "flags": [],
+   "bestChanged": 0.02621,
+   "warnings": []
+  },
+  {
+   "id": "codex/downburst",
+   "flags": [],
+   "bestChanged": 0.28613,
+   "warnings": []
+  },
+  {
+   "id": "codex/sirennote",
+   "flags": [],
+   "bestChanged": 0.05139,
+   "warnings": []
+  },
+  {
+   "id": "codex/vortexbell",
+   "flags": [],
+   "bestChanged": 0.44871,
+   "warnings": []
+  },
+  {
+   "id": "codex/shearwall",
+   "flags": [],
+   "bestChanged": 0.12129,
+   "warnings": []
+  },
+  {
+   "id": "codex/dustmarch",
+   "flags": [],
+   "bestChanged": 0.17027,
+   "warnings": []
+  },
+  {
+   "id": "codex/harmonic",
+   "flags": [],
+   "bestChanged": 0.32667,
+   "warnings": []
+  },
+  {
+   "id": "collective/blink",
+   "flags": [],
+   "bestChanged": 0.04996,
+   "warnings": []
+  },
+  {
+   "id": "collective/chrono",
+   "flags": [],
+   "bestChanged": 0.22327,
+   "warnings": []
+  },
+  {
+   "id": "atlas/recall",
+   "flags": [],
+   "bestChanged": 0.27106,
+   "warnings": []
+  },
+  {
+   "id": "atlas/parallax",
+   "flags": [],
+   "bestChanged": 0.09325,
+   "warnings": []
+  },
+  {
+   "id": "atlas/stillpoint",
+   "flags": [],
+   "bestChanged": 0.12543,
+   "warnings": []
+  },
+  {
+   "id": "codex/hourglass",
+   "flags": [],
+   "bestChanged": 0.07752,
+   "warnings": []
+  },
+  {
+   "id": "codex/secondself",
+   "flags": [],
+   "bestChanged": 0.03436,
+   "warnings": []
+  },
+  {
+   "id": "codex/rewindsnare",
+   "flags": [],
+   "bestChanged": 0.09099,
+   "warnings": []
+  },
+  {
+   "id": "codex/pendulum",
+   "flags": [],
+   "bestChanged": 0.11911,
+   "warnings": []
+  },
+  {
+   "id": "codex/stasisbell",
+   "flags": [],
+   "bestChanged": 0.12139,
+   "warnings": []
+  }
+ ]
+}

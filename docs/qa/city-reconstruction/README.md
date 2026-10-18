@@ -11,7 +11,7 @@ Two comparison sets (left = ENVIRONMENT panel from `assets/references/reference-
   warm sun is ×1.9, the sky fill ×0.55, and an LDR gradient sky dome replaces the Preetham sky. This is a review aid only; no
   game file is changed.
 
-**Finding (not fixed, outside my files):** in the real stack the bloom pass (threshold 1.05, strength 0.38) picks up
+**Finding (since fixed in `game/src/three/atmosphere.js`: the sky dome is scaled and clamped under the bloom threshold; only the sun disk still blooms — the `-compare.jpg` sheets predate this fix):** in the real stack the bloom pass (threshold 1.05, strength 0.38) picks up
 the HDR Preetham sky, which is well above 1.0, and spreads it over the whole frame as a milky white veil
 (compare any `-compare.jpg` with its `-keylight` twin). With bloom off, or with the sky hidden, the veil disappears
 (verified on oath-14). A fix belongs in `atmosphere.js`/`postprocessing.js`, for example by clamping the sky's

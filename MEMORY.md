@@ -74,3 +74,9 @@ Tiers now declare `msaa` (4× hardware MSAA on the scene target for high/ultra; 
 - Every visual system reads `ctx.quality` and must degrade to `low` for phones.
 - Anything flat on top of another surface goes through `overlayOf()`; cameras never go under `NEAR_PLANE`.
 - Compare against the reference sheets before calling visual work done.
+
+## Character groom, city reconstruction, rendered VFX audit (PR #14)
+- Hero heads are procedural at runtime (`game/src/three/character/`): the GLB head is culled and replaced by a sculpted head, eyes, strand-card hair, beards and per-Oath face gear fitted to the head bone; garment atlases get physical cloth/metal shading. Profiles come from sheets 099–113 (099 = Oath 14 … 113 = Oath 01). Inspect at `/inspect.html?id=oath-13-ninja&view=face`. See `docs/qa/character-groom/`.
+- City surfaces are metre-scaled procedural textures (`architecture/surfaces.js`) plus instanced dressing; `tools/qa/city-reconstruction.mjs` renders reference-vs-city sheets (`docs/qa/city-reconstruction/`).
+- Headless WebGL works in cloud containers via the preinstalled Chromium + SwiftShader (`--use-angle=swiftshader --enable-unsafe-swiftshader`). `tools/qa/effects-render-audit.mjs` renders all 150 abilities (`docs/qa/effects-render/`). VFX tests need a gitignored symlink `runtime/ability-matrix/node_modules/three -> game/node_modules/three`.
+- The Preetham sky is clamped under the bloom threshold (`atmosphere.js`); without it bloom veils every frame. Bloom input is capped at 2.4 (`postprocessing.js`) so source VFX cores don't white out the frame.

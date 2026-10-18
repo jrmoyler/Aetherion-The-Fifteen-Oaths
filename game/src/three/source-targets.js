@@ -29,6 +29,8 @@ export function createSourceTargetReactions(ctx={}) {
     const p={
       get position(){const e=entries.get(actor);return vec(actor.position).add(e?.offset??new Vector3()).add(new Vector3(0,-floor,0));},
       get alive(){return actor.alive!==false&&!entries.get(actor)?.affected;},get finished(){return actor.disposed===true;},get root(){return actor.root;},
+      // Source Dummy fields read by casts that lay out round the body (casting/chains uses facing; NaN here put every portal at NaN).
+      get facing(){const y=actor.facing??actor.yaw??actor.root?.rotation?.y??0;return Number.isFinite(y)?y:0;},get sliced(){return false;},get height(){return actor.body?.height??1.8;},
       get cutPoint(){return this.position.add(new Vector3(0,(actor.body?.height??1.8)*.5,0));},
       get state(){const e=entries.get(actor);return e?.frozen?'frozen':e?.affected?'falling':'alive';},
       kill(x=0,z=0,force={}){const e=entry(actor);if(e.affected)return false;e.affected=true;e.velocity.set(clamp(x,-1,1)*clamp(force.impulse??2,0,12),clamp(force.lift??2,0,8),clamp(z,-1,1)*clamp(force.impulse??2,0,12));e.tilt=.95;e.spin=clamp(force.spin??.3,-2,2);touch(e,1.8);actor.playAnim?.('hit');return true;},

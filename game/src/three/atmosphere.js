@@ -9,6 +9,12 @@ const wrapHour=h=>((h%24)+24)%24;
 export function initAtmosphere(ctx){
   const {scene,bus}=ctx, sun=ctx.render.sun, hemi=ctx.render.hemi;
   const sky=new Sky();sky.name='Preetham atmospheric scattering';sky.scale.setScalar((ctx.camera?.far ?? 1500)*.85);sky.frustumCulled=false;sky.renderOrder=-1000;scene.add(sky);
+  // Preetham radiance is calibrated for ~0.5 exposure; at the game's exposure the whole dome
+  // sat above the bloom threshold and bloomed into a full-frame haze. Scale the dome and keep
+  // it under the threshold; only the sun disk stays hot enough to bloom.
+  sky.material.uniforms.skyGain={value:.62};
+  sky.material.fragmentShader=sky.material.fragmentShader.replace('uniform vec3 up;','uniform vec3 up;\nuniform float skyGain;')
+    .replace('gl_FragColor = vec4( retColor, 1.0 );','vec3 skyC = retColor * skyGain;\n\t\t\tskyC = mix( min( skyC, vec3( .97 ) ), skyC, sundisk );\n\t\t\tgl_FragColor = vec4( skyC, 1.0 );');
   const u=sky.material.uniforms;u.rayleigh.value=2.1;u.turbidity.value=3.8;u.mieCoefficient.value=.006;u.mieDirectionalG.value=.82;
   let hour=16.0,scale=1,daySeconds=2400,time=0,manualWeather=false,lastRegion='',kind='clear',intensity=0,disposed=false;
   const initialHour=Number(ctx.params?.get?.('time')),initialScale=Number(ctx.params?.get?.('timescale'));
