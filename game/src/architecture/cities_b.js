@@ -1,5 +1,5 @@
 // City styles oath-08 .. oath-15.
-import { TAU, polar, rot2, colBox, stairs, terrace, banner, balustrade, genericHouse, brazier, lanternPost, emblemStanding, emblemFlat, treeProto, pool, roundPool, squareTower, roundTower, swag, crateProto, boxProto, arcPts, segPts, crenelProto, guardRail } from './kit.js';
+import { TAU, polar, rot2, colBox, stairs, terrace, banner, balustrade, genericHouse, brazier, lanternPost, emblemStanding, emblemFlat, treeProto, pool, roundPool, squareTower, roundTower, swag, crateProto, boxProto, arcPts, segPts, crenelProto, guardRail, overlayOf } from './kit.js';
 
 const D = Math.PI / 180;
 import { terraceStairs, arcade, arcArcade, blockWall, gear, cable, ringBanners, rockMass, freeSpots, outerRocks, channelRing } from './motifs.js';
@@ -104,7 +104,7 @@ export default {
         const [x, z] = polar(76, a);
         roundTower(S, x, z, 3, 17, { mat: M.wall, trim: M.metal, roof: 'cone', roofMat: M.roof });
         for (let k = 0; k < 3; k++) S.d.torus(M.metal, x, 4 + k * 4.5, z, 3.05, 0.14, 20, 4);
-        const [cx, cz] = polar(80.5, a); S.d.cyl(M.metal, cx, 0, cz, 0.7, 0.6, 22, 10); S.d.disc(M.glow, cx, 22.02, cz, 0.55, 10); S.col.circle(cx, cz, 0.8, -1, 22, false);
+        const [cx, cz] = polar(80.5, a); S.d.cyl(M.metal, cx, 0, cz, 0.7, 0.6, 22, 10); S.d.disc(overlayOf(M.glow), cx, 22.02, cz, 0.55, 10); S.col.circle(cx, cz, 0.8, -1, 22, false);
         const [px, pz] = polar(64, a); S.d.tube(M.metal, [[x, 6, z], [px, 6, pz], [px, 0.5, pz]], 0.32, 8);
         S.reserve(x, z, 6);
       }

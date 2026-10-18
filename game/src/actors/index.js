@@ -390,7 +390,12 @@ function createActors(ctx) {
     }
     for (const a of pending) finalize(a);
     pending.length = 0;
-    if (player?.body) { player.body.animator.interval = 0; player.body.animator.update(dt); if (!player.alive) player.deadT += dt; }
+    if (player?.body) {
+      player.body.animator.interval = 0; player.body.animator.update(dt); if (!player.alive) player.deadT += dt;
+      // camera pulled into the body (walls, corners): fade instead of clipping the near plane
+      const bf = orbit.bodyFade ?? 1;
+      if (bf < 1 || player.nearFaded) { player.body.setFade(Math.min(player.fade ?? 1, bf)); player.nearFaded = bf < 1; }
+    }
     plates.update(dt, orbit.cam, player);
   }
   ctx.addUpdate(update, 20);

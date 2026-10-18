@@ -31,6 +31,8 @@ import { copyGrade, approach, approachHue } from './environmentState.js';
 
 export { atmo } from './atmosphere.js';
 
+/** Gameplay near plane (metres). Shared with actors/camera.js — keep the two in step. */
+export const NEAR_PLANE = 0.3;
 const HOURS_PER_SECOND = 24 / (48 * 60); // one game day = 48 real minutes
 const LAT = 40 * Math.PI / 180, DECL = 12 * Math.PI / 180, MOON_DECL = -6 * Math.PI / 180;
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -75,8 +77,15 @@ export async function init(ctx) {
       shadows.numCascades = Math.max(1, Math.min(4, quality.cascades));
       shadows.lambda = 0.82;
       shadows.stabilizeCascades = true;
-      shadows.usePercentageCloserFiltering = true;
-      shadows.filteringQuality = quality.name === 'ultra' ? CascadedShadowGenerator.QUALITY_HIGH : CascadedShadowGenerator.QUALITY_MEDIUM;
+      if (quality.softShadows) {
+        // contact-hardening (PCSS): sharp at the contact, soft with distance from the caster
+        shadows.useContactHardeningShadow = true;
+        shadows.contactHardeningLightSizeUVRatio = 0.035;
+        shadows.penumbraDarkness = 0.85;
+      } else {
+        shadows.usePercentageCloserFiltering = true;
+      }
+      shadows.filteringQuality = quality.shadowFilter === 'high' || quality.name === 'ultra' ? CascadedShadowGenerator.QUALITY_HIGH : CascadedShadowGenerator.QUALITY_MEDIUM;
       shadows.cascadeBlendPercentage = 0.08;
       shadows.depthClamp = true;
       shadows.bias = 0.0025; shadows.normalBias = 0.012;
@@ -127,8 +136,12 @@ export async function init(ctx) {
     }
     try {
       const p = new DefaultRenderingPipeline('aePipeline', true, scene, [cam]);
-      p.samples = 1;
-      p.fxaaEnabled = quality.fxaa !== false;
+      // Hardware MSAA on the scene target (WebGL2) resolves geometry edges without FXAA's blur;
+      // FXAA stays on as the cheap fallback for the tiers (and contexts) that cannot multisample.
+      const maxSamples = engine.getCaps?.()?.maxMSAASamples ?? 1;
+      const samples = engine.webGLVersion >= 2 ? Math.min(quality.msaa ?? 1, maxSamples) : 1;
+      p.samples = Math.max(1, samples);
+      p.fxaaEnabled = quality.fxaa !== false && p.samples <= 1;
       p.imageProcessingEnabled = true;
       const ip = p.imageProcessing;
       ip.toneMappingEnabled = true;
@@ -376,7 +389,9 @@ export async function init(ctx) {
     if (!cam || cam === camera) { if (cam) scene.activeCamera = cam; return; }
     const old = camera; camera = cam;
     if (!cam.maxZ || cam.maxZ < 9000) cam.maxZ = 12000; // distant mountains + sky need a long far plane
-    if (cam.minZ < 0.05) cam.minZ = 0.1;
+    // Never let a gameplay camera bring the near plane under NEAR_PLANE: with a 12 km far plane the
+    // 24-bit depth buffer only keeps ~2 cm of resolution at 250 m when near = 0.3 m (and 80 m at 0.1).
+    if (cam.minZ < NEAR_PLANE) cam.minZ = NEAR_PLANE;
     scene.activeCamera = cam;
     buildPipeline(cam);
     if (shadows) { try { shadows.splitFrustum(); } catch { /* ignore */ } }
@@ -413,7 +428,7 @@ function makeTempCamera(ctx) {
   if (!Number.isFinite(y)) { let g = 0; try { g = Math.max(0, heightAt(x, z)); } catch { /* ignore */ } y = g + (parseFloat(params?.get?.('eye')) || 1.8); }
   const cam = new UniversalCamera('tempCam', new Vector3(x, y, z), scene);
   cam.rotation.set(-pitch * Math.PI / 180, yaw * Math.PI / 180, 0);
-  cam.fov = 0.9; cam.minZ = 0.2; cam.maxZ = 12000;
+  cam.fov = 0.9; cam.minZ = NEAR_PLANE; cam.maxZ = 12000;
   cam.speed = 4; cam.angularSensibility = 3000;
   cam.metadata = { aeTemp: true };
   if (params?.get?.('freecam')) { try { cam.attachControl(canvas, true); cam.keysUp.push(87); cam.keysDown.push(83); cam.keysLeft.push(65); cam.keysRight.push(68); } catch { /* ignore */ } }

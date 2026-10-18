@@ -14,7 +14,7 @@ npm run mmo:start           # build client, then serve everything on :8787
 npm run mmo:test            # simulation + server tests (21)
 ```
 URL params: `?oath=oath-04&cls=ninja&name=X` (skip character creation), `?offline=1`, `?server=wss://host/ws`, `?q=low|medium|high|ultra`, `?spawn=x,z` (offline only), `?time=18.5`.
-Deploy: `vercel.json` builds the static client (offline realm); run `server/` anywhere Node 22 runs (`server/Dockerfile`, `server/README.md`) for real multiplayer.
+Deploy: `vercel.json` builds the static client (offline realm); run `server/` anywhere Node 22 runs (`server/Dockerfile`, `server/README.md`) for real multiplayer. The Vercel install/build commands are `cd game && npm ci` / `cd game && npm run build` on purpose: `npm ci --prefix game` fails on Vercel's npm 11 with `missing_lock_file` even though `game/package-lock.json` exists (every deployment up to PR #9 errored this way). Hashed bundles under `/assets/*.js|css` are served immutable; GLB/JSON assets stay `must-revalidate` for the service worker.
 
 ## Map of the code
 | Path | Owner role | What |
@@ -60,8 +60,17 @@ Reference map: 000–030 ability VFX sheets (water, lightning, frost, fire); 031
 - Social: parties, duels, opt-in PvP flag, war zones and atomic trading are server-authoritative (`shared/sim/social.js`, 35 server tests). Gamepad: full action map + menu navigation (`game/src/core/input.js`, `game/src/ui/gamepad.js`), verified with a stubbed pad only. Projectiles are still timed hits.
 - The 11 failing root tests (`npm test`) predate the MMO work (ability-matrix runtime deps not installed) — identical on the base commit.
 
+## Depth precision and z-fighting (read before touching cameras or flat overlays)
+- Gameplay cameras use `NEAR_PLANE = 0.3` m (`actors/camera.js`, enforced again in `render.attachCamera`) against the 12 km far plane the horizon ring needs. A 24-bit depth buffer resolves roughly z²/(near·2²⁴) m, so 0.3 m keeps ~2 cm at 250 m; the old 0.08–0.1 m lost the 2.5–6 cm overlay gaps from ~200 m out. When the camera is pulled closer than `BODY_FADE_DIST` (walls, corners) the player body fades instead of cutting the near plane (`orbit.bodyFade`).
+- Thin flat geometry that lies on another surface must use `overlayOf(matId)` from `architecture/kit.js` (inlays and emblems on the paving, the 82 m plaza paving over the flat terrain plateau, glow discs on pillar tops, pool rims). It is the same PBR recipe with a negative polygon offset (`materials.getMaterial` `zOffset`/`zOffsetUnits`), so it wins the depth test at every distance. Do not fix a new overlay by raising it a few centimetres; that only moves the distance at which it starts to flicker.
+- VFX decals (`vfx/shaders.js`) and nameplates already carry their own `zOffset`.
+
+## Render tiers (core/quality.js)
+Tiers now declare `msaa` (4× hardware MSAA on the scene target for high/ultra; FXAA only where MSAA is 1), `shadowFilter` (PCF kernel), `softShadows` (PCSS contact hardening, ultra only) and `anisotropy` (16 on high/ultra, clamped to the GPU cap). Auto-detect probes `WEBGL_debug_renderer_info`: discrete GPUs get high, integrated get medium, software renderers get low; ultra is opt-in from Settings. `?q=` and the saved setting still override everything.
+
 ## Conventions worth keeping
 - Shared code is pure and deterministic; anything the server needs lives in `shared/`.
 - Regenerate, don't hand-edit: abilities catalog, sanctuary layout, icons, forge outputs.
 - Every visual system reads `ctx.quality` and must degrade to `low` for phones.
+- Anything flat on top of another surface goes through `overlayOf()`; cameras never go under `NEAR_PLANE`.
 - Compare against the reference sheets before calling visual work done.

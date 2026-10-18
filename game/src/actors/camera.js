@@ -4,12 +4,18 @@ import { TargetCamera } from '@babylonjs/core/Cameras/targetCamera.js';
 import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
 
 export const CAM = { minDist: 2.5, maxDist: 18, defaultDist: 6.2, minPitch: -0.45, maxPitch: 1.3, sens: 0.0032, touchSens: 0.0045, fov: 0.9, sprintFov: 1.0, lag: 12, shoulder: 0.42 };
+// Depth precision: a 24-bit depth buffer resolves ~z²/(near·2²⁴) metres, so the near plane is the
+// single biggest lever against z-fighting on a 12 km far plane. 0.3 m keeps 3× the resolution of the
+// old 0.1 m (2 cm at 250 m instead of 80 m) and the body is faded out when the camera comes closer.
+export const NEAR_PLANE = 0.3;
+/** Camera–pivot distance below which the local player's body fades out (it would cut the near plane). */
+export const BODY_FADE_DIST = 1.35;
 
 export class OrbitCamera {
   constructor(ctx) {
     this.ctx = ctx;
     const cam = new TargetCamera('actorsCam', new Vector3(0, 30, -30), ctx.scene);
-    cam.minZ = 0.08;
+    cam.minZ = NEAR_PLANE;
     cam.maxZ = Math.max(1500, (ctx.quality?.drawDistance ?? 1500) * 1.4);
     cam.fov = CAM.fov;
     cam.inertia = 0;
@@ -18,6 +24,7 @@ export class OrbitCamera {
     this.pivot = new Vector3(0, 0, 0); this.pivotInit = false;
     this.target = null; // actor
     this.shake = 0; this.shakeDur = 0; this.shakeT = 0;
+    this.bodyFade = 1;
     this.intro = null;
     this.lookIdle = 10;
     this.drag = null;
@@ -163,6 +170,8 @@ export class OrbitCamera {
     cam.position.set(cx, cy, cz);
     this.look.set(lx, ly, lz);
     cam.setTarget(this.look);
+    // 0 → the body would intersect the near plane, 1 → comfortably clear (read by actors/index.js)
+    this.bodyFade = Math.max(0, Math.min(1, (d - NEAR_PLANE * 1.5) / (BODY_FADE_DIST - NEAR_PLANE * 1.5)));
     // FOV kick
     const fovT = a.sprinting && !this.reducedMotion ? CAM.sprintFov : CAM.fov;
     cam.fov += (fovT - cam.fov) * Math.min(1, dt * 4);

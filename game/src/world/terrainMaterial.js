@@ -184,7 +184,8 @@ export function createTerrainResources(scene, layers, N, macroTexture, quality) 
   for (const l of layers) { alb.set(l.alb, l.index * N * N * 4); nrm.set(l.nrm, l.index * N * N * 4); }
   const mk = (data, name) => {
     const t = new RawTexture2DArray(data, N, N, count, Constants.TEXTUREFORMAT_RGBA, scene, true, false, Texture.TRILINEAR_SAMPLINGMODE, Constants.TEXTURETYPE_UNSIGNED_BYTE);
-    t.wrapU = t.wrapV = Texture.WRAP_ADDRESSMODE; t.anisotropicFilteringLevel = quality.name === 'low' ? 2 : 8; t.name = name;
+    const cap = scene.getEngine()?.getCaps?.()?.maxAnisotropy || 16;
+    t.wrapU = t.wrapV = Texture.WRAP_ADDRESSMODE; t.anisotropicFilteringLevel = Math.min(cap, quality.anisotropy ?? (quality.name === 'low' ? 2 : 8)); t.name = name;
     return t;
   };
   return { alb: mk(alb, 'terrainAlbedo'), nrm: mk(nrm, 'terrainNormal'), macro: macroTexture, scale: 1 / 4.5, normalStrength: 0.9, layersRaw: layers, N };

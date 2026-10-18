@@ -32,7 +32,7 @@ Update order convention: 0 input/ui-pre · 10 net · 20 actors (controller, came
 |---|---|---|
 | `engine, scene, canvas` | main | Babylon `Engine` (WebGL2) and the single `Scene` |
 | `bus` | main | `on(type, fn) → off`, `once`, `emit(type, payload)` |
-| `quality` | core/quality.js | `{name:'low'|'medium'|'high'|'ultra', renderScale, shadows, shadowSize, cascades, ssao, bloom, grass, drawDistance, particles, water}` |
+| `quality` | core/quality.js | `{name:'low'|'medium'|'high'|'ultra', renderScale, shadows, shadowSize, cascades, ssao, bloom, grass, drawDistance, particles, water, fxaa, msaa, shadowFilter:'medium'|'high', softShadows, anisotropy}` |
 | `input` | core/input.js | `state {moveX, moveY, lookDX, lookDY, zoom, sprint, jump, mouseLeft, mouseRight, pointerLocked}`, `consume(action)`, `isDown(action)`, `press(action)`, `hold(action,on)`, `setVirtualMove(x,y)`, `addVirtualLook(dx,dy)`, `setVirtualSprint(b)`, `setTyping(b)`, `setEnabled(b)`, `requestPointerLock()`. Actions: `forward back left right jump sprint dodge interact slot0..slot5 target map inventory chat menu quest walkToggle click` |
 | `collision` | core/collision.js | `addBox(cx,cz,hw,hd,rot,yMin,yMax,{walkable,tag})`, `addCircle(cx,cz,r,yMin,yMax,opts)`, `addRamp(cx,cz,hw,hd,rot,y0,y1)`, `groundAt(x,z,yHint)`, `resolve(pos,r,h)`, `blocked(ax,az,bx,bz,y)` |
 | `clock` | main | `{time, dt, frame}` |
@@ -67,6 +67,10 @@ update(dt) /* LOD / visibility */, shrineAt(x,z) }`. Registers colliders into `c
 and shadow casters via `ctx.render.addShadowCaster`. Shared procedural PBR material library in
 `game/src/materials/` (owned by architecture) — other modules may import it:
 `getMaterial(scene, key, opts)` with keys like `stone.basalt`, `stone.marble`, `stone.sandstone`, `metal.brass`, `metal.copper`, `metal.iron`, `wood.weathered`, `cloth.banner` + palette tint.
+Flat geometry resting on another surface (inlays, emblems, glow discs, rims, the plaza paving over the
+terrain plateau) must use `overlayOf(matId)` from `architecture/kit.js` (= the same recipe with a negative
+`zOffset` polygon offset) rather than a few centimetres of lift, so it never z-fights at distance.
+Gameplay cameras keep `minZ >= NEAR_PLANE` (0.3 m, `actors/camera.js` / `render.attachCamera`).
 
 ## net/ — Networking (agent: server)
 `init(ctx) → { mode:'online'|'offline', selfId, connect(character) → Promise<welcome>, send(msg), rtt, serverTime() }`.
