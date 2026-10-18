@@ -86,7 +86,7 @@ export function tickStatuses(S) {
     for (let i = st.length - 1; i >= 0; i--) {
       const s = st[i];
       const kind = STATUSES[s.id]?.kind;
-      if ((kind === 'dot' || kind === 'hot') && S.t >= s.next) {
+      if ((kind === 'dot' || kind === 'hot') && S.t >= s.next && s.next <= s.until) {
         s.next += 1000;
         if (kind === 'dot') {
           const src = S.ents.get(s.src) ?? null;
@@ -228,7 +228,17 @@ export function processDelayed(S) {
       const dst = S.ents.get(it.dst);
       // A claw strike checks reach at impact, letting movement/dodge beat its windup.
       if (it.reach != null && (!src || !dst || Math.hypot(dst.x - src.x, dst.z - src.z) > it.reach)) continue;
-      if (dst && dst.alive) dealDamage(S, src, dst, it.amount, it.element, it.ability, it.opts);
+      if (!dst?.alive) continue;
+      // Sweeps occupy a corridor, not a homing lock. A target that sidesteps
+      // during travel must be able to avoid the hit on the authoritative server.
+      if (it.corridor) {
+        const { x, z, ex, ez, radius } = it.corridor;
+        if (segDist2(dst.x, dst.z, x, z, ex, ez) > (radius + (dst.radius ?? 0.5)) ** 2) continue;
+      }
+      // A disconnected caster cannot turn a projectile into unattributed damage
+      // against a former ally. Keep team allegiance with launched attacks.
+      if (!src && it.team != null && (dst.team === it.team || dst.team === 0)) continue;
+      dealDamage(S, src, dst, it.amount, it.element, it.ability, it.opts);
     } else if (it.kind === 'area') {
       areaDamage(S, src, it, it.x, it.z, it.r);
     } else if (it.kind === 'zonetick') {
@@ -301,7 +311,7 @@ export function resolveAbility(S, c, ab, slot, aim, dir, target) {
       }
       dd = best;
     }
-    if (dst) schedule(S, dd / speed, { kind: 'hit', src: c.id, dst: dst.id, amount: base, element: el, ability: ab.id, opts: { statusMul: ab.kind === 'basic' ? 0.5 : 1 } });
+    if (dst) schedule(S, dd / speed, { kind: 'hit', src: c.id, team: c.team, dst: dst.id, amount: base, element: el, ability: ab.id, opts: { statusMul: ab.kind === 'basic' ? 0.5 : 1 } });
   } else if (shape === 'line') {
     const len = range, r = Math.max(0.8, ab.radius ?? 1);
     const ex = c.x + d.x * len, ez = c.z + d.z * len;
@@ -311,7 +321,7 @@ export function resolveAbility(S, c, ab, slot, aim, dir, target) {
       const rr = r + (e.radius ?? 0.5);
       if (segDist2(e.x, e.z, c.x, c.z, ex, ez) > rr * rr) continue;
       const t = Math.max(0, (e.x - c.x) * d.x + (e.z - c.z) * d.z);
-      schedule(S, ab.speed ? Math.min(1, t / ab.speed) : 0, { kind: 'hit', src: c.id, dst: e.id, amount: base, element: el, ability: ab.id });
+      schedule(S, ab.speed ? Math.min(1, t / ab.speed) : 0, { kind: 'hit', src: c.id, team: c.team, dst: e.id, amount: base, element: el, ability: ab.id, corridor: { x: c.x, z: c.z, ex, ez, radius: r } });
       if (++n >= 8) break;
     }
   } else if (shape === 'zone') {
@@ -327,7 +337,7 @@ export function resolveAbility(S, c, ab, slot, aim, dir, target) {
   } else if (shape === 'self') {
     const buffs = SELF_BUFF[el] ?? SELF_BUFF.default;
     for (const [id, dur, mag] of buffs) {
-      applyStatus(S, c, id, dur, mag, c);
+      applyStatus(S, c, id, dur, mag, c, id === 'regen' ? Math.max(1, Math.round(c.mhp * mag)) : 0);
       if (id === 'shield') { const s = hasStatus(c, 'shield'); if (s) s.pool = Math.round(c.mhp * mag + base); }
     }
     if (base > 0) schedule(S, 0.1, { kind: 'area', src: c.id, team: c.team, x: c.x, z: c.z, r: Math.max(4, ab.radius || 0), amount: base * 0.5, element: el, ability: ab.id, max: 8 });

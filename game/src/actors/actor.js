@@ -104,6 +104,8 @@ export class Actor {
   }
 
   dispose() {
+    if (this.disposedBody) return;
+    this.disposed = true; this.disposedBody = true;
     this.body?.dispose();
     this.root.dispose();
   }

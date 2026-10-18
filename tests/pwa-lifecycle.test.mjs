@@ -25,10 +25,8 @@ test('installation is consumed once and prompt rejection is handled', async () =
   assert.equal(await pwa.prompt(), 'accepted');
   assert.equal(await pwa.prompt(), 'unavailable');
   assert.equal(prompts, 1);
-  events.get('beforeinstallprompt')({ preventDefault() {}, async prompt() { throw new Error('denied'); } });
-  assert.equal(await pwa.prompt(), 'error');
-  assert.equal(pwa.canPrompt, false);
-  assert.equal(notified, 4);
+  assert.equal(pwa.available, false);
+  assert.equal(notified, 3);
   unsubscribe();
 });
 
@@ -53,4 +51,33 @@ test('all advertised install icons exist and PNG dimensions match manifest', asy
       assert.equal(`${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}`, icon.sizes);
     }
   }
+});
+
+
+test('prompt rejection is recoverable and a later browser event can retry', async () => {
+  const { pwa, events } = await fixture();
+  events.get('beforeinstallprompt')({ preventDefault() {}, async prompt() { throw new Error('denied'); } });
+  assert.equal(await pwa.prompt(), 'error');
+  assert.equal(pwa.canPrompt, false);
+  events.get('beforeinstallprompt')({ preventDefault() {}, async prompt() {}, userChoice: Promise.resolve({ outcome: 'dismissed' }) });
+  assert.equal(pwa.available, true);
+  assert.equal(await pwa.prompt(), 'dismissed');
+});
+
+test('appinstalled hides iOS guidance even in the original browser tab', async () => {
+  const { pwa, navigator, events } = await fixture();
+  navigator.userAgent = 'iPhone';
+  assert.equal(pwa.available, true);
+  events.get('appinstalled')();
+  assert.equal(pwa.available, false);
+  events.get('beforeinstallprompt')({ preventDefault() {} });
+  assert.equal(pwa.canPrompt, false);
+});
+
+test('install helpers tolerate browsers without matchMedia', async () => {
+  const context = vm.createContext({ navigator: { userAgent: 'Desktop' }, addEventListener() {} });
+  context.window = context;
+  const source = await readFile(new URL('../game/src/ui/pwa.js', import.meta.url), 'utf8');
+  vm.runInContext(source.replace('export const pwa =', 'globalThis.pwa =').replace('export async function', 'async function'), context);
+  assert.equal(context.pwa.available, false);
 });

@@ -721,3 +721,24 @@
 .ae-loadout__actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
 .ae-loadout__status { min-height:42px; }
 @media(max-width:600px) { .ae-loadout__slots { grid-template-columns:1fr; } .ae-char__tabs { padding:8px; gap:4px; } .ae-char__tabs .ae-btn { padding:10px; font-size:12px; } }
+
+/* Optional inspection uses the actual playable character and disposes on close. */
+.ae-inspect { width:min(720px,calc(100vw - 24px)); max-height:calc(100dvh - 24px); padding:0; color:#f5f0e6; background:#111827; border:1px solid var(--accent,#bfa879); border-radius:8px; overflow:auto; }
+.ae-inspect::backdrop { background:rgba(3,7,15,.85); }
+.ae-inspect header { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 20px; border-bottom:1px solid #ffffff20; }
+.ae-inspect h2 { font:500 24px Georgia,serif; margin:4px 0 0; }
+.ae-inspect small { color:var(--accent); text-transform:uppercase; letter-spacing:.1em; }
+.ae-inspect canvas { display:block; width:100%; height:clamp(200px,48dvh,440px); touch-action:none; }
+.ae-inspect__status { padding:0 20px; font:13px/1.5 system-ui,sans-serif; color:#c4cbd6; }
+.ae-inspect__controls { display:flex; flex-wrap:wrap; gap:8px; padding:0 20px 20px; }
+.ae-inspect button { min-height:44px; }
+.ae-inspect-launch { margin:8px 14px 12px; width:calc(100% - 28px); }
+.ae-inspect :focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+
+/* A long character name must not force health/mana underneath the minimap. */
+.ae-unit > div { min-width:0; }
+.ae-unit__name .nm { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.is-touch .ae-xpbar { min-width:0; }
+@media (max-width:600px) {
+  .is-touch .ae-unit__name small { display:none; }
+}

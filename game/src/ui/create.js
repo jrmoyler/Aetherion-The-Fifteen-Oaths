@@ -38,6 +38,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
   const last = loadCharacter();
   const state = { oath: last?.oath && OATH_BY_ID[last.oath] ? last.oath : 'oath-09', cls: last?.cls === 'sorcerer' ? 'sorcerer' : 'ninja', name: last?.name || '', slot: 1, pane: 0 };
   let resolveFn = null;
+  let inspection = null, leaving = false;
 
   // --- column 1: oath grid
   const cards = OATHS.map((o) => {
@@ -72,6 +73,15 @@ export function createCharacterScreen(root, { sfx } = {}) {
     b.addEventListener('mouseenter', () => sfx?.('hover'));
     return b;
   });
+  const inspect = h('button', { class: 'ae-btn ae-inspect-launch', type: 'button' }, 'Inspect character in 3D');
+  inspect.onclick = async () => {
+    inspect.disabled = true;
+    try {
+      const { inspectCharacter } = await import('./character-preview.js');
+      if (!el.hidden && !leaving) inspection = inspectCharacter({ oath: state.oath, cls: state.cls });
+    } catch (error) { console.warn('[ui] inspection unavailable', error); }
+    finally { inspect.disabled = false; }
+  };
   const slotsEl = h('div', { class: 'slots', role: 'listbox', 'aria-label': 'Ability preview' });
   const abDetail = h('div', { class: 'ae-ab-detail', 'aria-live': 'polite' });
   const ledger = h('table', { class: 'ae-ledger' });
@@ -85,7 +95,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     h('div', { class: 'ae-panel' },
       h('div', { class: 'ae-titlebar' }, h('span', { class: 'ae-tab-num' }, '03'), h('h2', null, 'Discipline & Name')),
       h('div', { class: 'ae-scroll', style: { flex: 1, minHeight: 0 } },
-        h('div', { class: 'ae-cls', role: 'radiogroup', 'aria-label': 'Discipline' }, clsCards),
+        h('div', { class: 'ae-cls', role: 'radiogroup', 'aria-label': 'Discipline' }, clsCards), inspect,
         h('div', { class: 'ae-bar-preview' }, h('div', { class: 'ae-section-label', style: { marginBottom: '8px' } }, h('b', null, 'i.'), 'Techniques of the Oath'), slotsEl, abDetail, ledger)),
       h('div', { class: 'ae-name-row' },
         h('div', { class: 'ae-field' }, h('label', { for: 'ae-name' }, 'Name'), h('div', { style: { display: 'flex', gap: '8px' } }, nameInput, dice), nameErr),
@@ -217,6 +227,8 @@ export function createCharacterScreen(root, { sfx } = {}) {
       return;
     }
     const ch = { name: r.name, oath: state.oath, cls: state.cls };
+    leaving = true;
+    inspection?.close(); inspection = null;
     saveCharacter(ch);
     sfx?.('confirm');
     const fn = resolveFn; resolveFn = null;
@@ -229,6 +241,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
   return {
     el,
     open() {
+      leaving = false;
       el.hidden = false; el.style.opacity = '1';
       return new Promise((res) => {
         resolveFn = res;
@@ -241,6 +254,8 @@ export function createCharacterScreen(root, { sfx } = {}) {
       });
     },
     async hide() {
+      leaving = true;
+      inspection?.close(); inspection = null;
       await new Promise((res) => { const a = anim(el, { opacity: [1, 0], duration: 450, ease: 'inQuad', onComplete: res }); if (!a) res(); setTimeout(res, 600); });
       el.hidden = true;
     },

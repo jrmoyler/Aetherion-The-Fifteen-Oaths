@@ -166,7 +166,9 @@ export function createVegetation(ctx, pool, terrainRes) {
     for (const c of cells.values()) {
       const d = Math.hypot(c.x0 + CELL / 2 - camPos.x, c.z0 + CELL / 2 - camPos.z); c.d = d;
       if (d > R_VEG + CELL * 1.5) { cells.delete(c.k); if (c.state === 2) dirty = true; continue; }
-      const near = d < R_NEAR + CELL * 0.5;
+      // Keep the current LOD inside a 24 m band so walking around a boundary
+      // does not repeatedly rebuild every species buffer and flicker its silhouette.
+      const near = d < R_NEAR + CELL * 0.5 + (c.near ? 12 : -12);
       if (near !== c.near && c.state === 2) dirty = true;
       c.near = near;
     }

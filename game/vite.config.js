@@ -14,12 +14,12 @@ export default defineConfig({
       injectRegister: false,
       manifest: false, // public/manifest.webmanifest is authored by hand (ui owner)
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,webmanifest,woff2}', 'icons/*.png'],
+        globPatterns: ['**/*.{js,css,html,svg,webmanifest,woff2}', 'icons/*.png', 'assets/**/manifest.json'],
         cleanupOutdatedCaches: true,
         skipWaiting: false,
         clientsClaim: true,
         maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
-        navigateFallbackDenylist: [/^\/ws/],
+        navigateFallbackDenylist: [/\/ws(?:\/|$)/, /\/api(?:\/|$)/, /\/assets\//],
         runtimeCaching: [
           { urlPattern: ({ url, sameOrigin }) => sameOrigin && /\/assets\/.*\.(glb|ktx2|bin|png|jpe?g|webp|json)$/.test(url.pathname),
             handler: 'StaleWhileRevalidate',

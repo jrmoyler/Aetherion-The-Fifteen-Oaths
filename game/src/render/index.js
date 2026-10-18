@@ -27,6 +27,7 @@ import { atmo, registerAerialPlugin, skyRadiance, transmittance } from './atmosp
 import { createSky } from './sky.js';
 import { createWeather } from './weather.js';
 import { GRADES, NEUTRAL_GRADE, REGION_WEATHER } from './grades.js';
+import { copyGrade, approach, approachHue } from './environmentState.js';
 
 export { atmo } from './atmosphere.js';
 
@@ -109,7 +110,7 @@ export async function init(ctx) {
 
   // ---------------- post-processing ----------------
   let pipeline = null, ssao = null;
-  const grade = { cur: { ...NEUTRAL_GRADE }, target: { ...NEUTRAL_GRADE }, manual: null };
+  const grade = { cur: copyGrade(NEUTRAL_GRADE), target: copyGrade(NEUTRAL_GRADE), manual: null };
   const curves = new ColorCurves();
   function buildPipeline(cam) {
     try { ssao?.dispose(); } catch { /* ignore */ }
@@ -139,9 +140,9 @@ export async function init(ctx) {
       ip.ditheringEnabled = true; ip.ditheringIntensity = 1 / 255;
       p.bloomEnabled = !!quality.bloom;
       if (p.bloomEnabled) { p.bloomThreshold = 1.15; p.bloomWeight = 0.16; p.bloomKernel = 64; p.bloomScale = 0.5; }
-      p.grainEnabled = quality.name !== 'low';
+      p.grainEnabled = false; // Keep distant silhouettes and ability telegraphs clean.
       if (p.grainEnabled) { p.grain.intensity = 3.5; p.grain.animated = true; }
-      p.chromaticAberrationEnabled = quality.name === 'high' || quality.name === 'ultra';
+      p.chromaticAberrationEnabled = false;
       if (p.chromaticAberrationEnabled) { p.chromaticAberration.aberrationAmount = 4; p.chromaticAberration.radialIntensity = 0.8; }
       p.sharpenEnabled = quality.name !== 'low';
       if (p.sharpenEnabled) { p.sharpen.edgeAmount = 0.22; p.sharpen.colorAmount = 1; }
@@ -225,9 +226,10 @@ export async function init(ctx) {
   }
 
   function applyGrade(dt) {
-    const c = grade.cur, t = grade.target; const k = Math.min(1, dt * 0.8);
-    for (const key of ['fogMul', 'sat', 'hue', 'density', 'exposure', 'contrast', 'shadowsHue', 'shadowsDensity']) c[key] += (t[key] - c[key]) * k;
-    for (let i = 0; i < 3; i++) { c.tint[i] += (t.tint[i] - c.tint[i]) * k; c.amb[i] += (t.amb[i] - c.amb[i]) * k; }
+    const c = grade.cur, t = grade.target;
+    for (const key of ['fogMul', 'sat', 'density', 'exposure', 'contrast', 'shadowsDensity']) c[key] = approach(c[key], t[key], 0.8, dt);
+    for (const key of ['hue', 'shadowsHue']) c[key] = approachHue(c[key], t[key], 0.8, dt);
+    for (let i = 0; i < 3; i++) { c.tint[i] = approach(c.tint[i], t.tint[i], 0.8, dt); c.amb[i] = approach(c.amb[i], t.amb[i], 0.8, dt); }
     curves.globalSaturation = c.sat; curves.globalHue = c.hue; curves.globalDensity = c.density;
     curves.shadowsHue = c.shadowsHue; curves.shadowsDensity = c.shadowsDensity; curves.shadowsSaturation = 0;
   }

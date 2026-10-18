@@ -96,12 +96,12 @@ void terrainSurface(vec3 wp, vec3 nG, out vec3 albedo, out vec3 nOut, out float 
   alb = mix(alb, vec3(0.82, 0.85, 0.9), sn); ro = mix(ro, 0.62, sn);
   // wetness: rain on flat ground, plus the wet shore band
   float coast = vTAux.w;
-  float shore = smoothstep(1.2, 0.2, wp.y) * smoothstep(-3.0, -0.5, wp.y) * smoothstep(260.0, 120.0, coast);
+  float shore = (1.0 - smoothstep(0.2, 1.2, wp.y)) * smoothstep(-3.0, -0.5, wp.y) * (1.0 - smoothstep(120.0, 260.0, coast));
   float wet = max(tP.y * smoothstep(0.4, 0.9, n.y) * (1.0 - sn), shore);
   alb *= mix(1.0, 0.6, wet); ro = mix(ro, 0.32, wet); n = normalize(mix(n, nG, wet * 0.6));
   // shoreline foam
   float wave = sin(tP.x * 1.1 + dot(wp.xz, vec2(0.045, 0.031))) * 0.16 + sin(tP.x * 0.7 - wp.x * 0.02) * 0.08;
-  float band = smoothstep(0.55, 0.0, abs(wp.y - 0.08 - wave)) * smoothstep(260.0, 120.0, coast);
+  float band = (1.0 - smoothstep(0.0, 0.55, abs(wp.y - 0.08 - wave))) * (1.0 - smoothstep(120.0, 260.0, coast));
   if (band > 0.001) { float fp = texture(tMacro, wp.xz * 0.11 + vec2(tP.x * 0.013, tP.x * 0.009)).b;
     float foam = band * smoothstep(0.35, 0.65, fp + band * 0.3); alb = mix(alb, vec3(0.85, 0.88, 0.88), foam); ro = mix(ro, 0.35, foam); }
   // lava: molten cracks glow through a dark crust, slow flowing pattern

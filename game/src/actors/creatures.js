@@ -677,9 +677,9 @@ export class CreatureAnimator {
     this.motion = this.I.pelvis ?? this.I.body ?? this.I.s0 ?? this.I.core ?? 1;
     this.A = { ph: 0, t: 0, sp: 0, run: 0, act: null, ak: 0, dead: 0, hit: 0 };
   }
-  setState(s) { this.state = s; }
+  setState(s) { this.state = s; if (s === 'dead') { this.action = null; this.hit = 0; } }
   playAnim(name, o = {}) {
-    if (name === 'death' || name === 'dead') { this.state = 'dead'; return; }
+    if (name === 'death' || name === 'dead') { this.setState('dead'); return; }
     if (name === 'hit') { this.hit = 1; return; }
     if (name === 'idle' || name === 'walk' || name === 'run') { if (this.state === 'dead') this.state = 'loco'; return; }
     if (name.startsWith('attack') || name.startsWith('cast') || name === 'roar') { this.action = name === 'roar' ? 'roar' : 'attack'; this.actionT = 0; this.actionDur = (name === 'roar' ? 1.4 : 0.75) / (o.speed ?? 1); }

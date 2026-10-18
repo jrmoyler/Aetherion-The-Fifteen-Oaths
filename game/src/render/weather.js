@@ -8,6 +8,7 @@ import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
 import { Color4 } from '@babylonjs/core/Maths/math.color.js';
 import '@babylonjs/core/Particles/particleSystemComponent.js';
 import '@babylonjs/core/Particles/webgl2ParticleSystem.js';
+import { approach, particleCapacity } from './environmentState.js';
 
 function spriteTexture(scene, kind) {
   const S = 64; const t = new DynamicTexture(`wx_${kind}`, { width: S, height: S }, scene, true);
@@ -37,15 +38,18 @@ export function createWeather(scene, quality) {
   const systems = {};
 
   function make(name, cap, setup) {
-    const n = Math.max(50, Math.round(cap * q));
+    let n = particleCapacity(cap, q, useGPU);
     let ps;
-    try { ps = useGPU ? new GPUParticleSystem(name, { capacity: n }, scene) : new ParticleSystem(name, Math.min(n, 3000), scene); }
-    catch { ps = new ParticleSystem(name, Math.min(n, 3000), scene); }
+    // A zero-quality setting must not silently emit a minimum of fifty particles.
+    const disabled = n === 0;
+    try { ps = useGPU ? new GPUParticleSystem(name, { capacity: Math.max(1, n) }, scene) : new ParticleSystem(name, Math.max(1, n), scene); }
+    catch { n = particleCapacity(cap, q, false); ps = new ParticleSystem(name, Math.max(1, n), scene); }
     ps.emitter = emitter;
     ps.updateSpeed = 0.016;
     setup(ps, n);
     ps.stop();
-    ps._baseRate = ps.emitRate;
+    ps._baseRate = disabled ? 0 : ps.emitRate;
+    ps._weatherRate = 0;
     return ps;
   }
   const box = (ps, x, y0, y1) => { const e = new BoxParticleEmitter(); e.minEmitBox = new Vector3(-x, y0, -x); e.maxEmitBox = new Vector3(x, y1, x); ps.particleEmitterType = e; return e; };
@@ -106,7 +110,7 @@ export function createWeather(scene, quality) {
 
   function setWeather(kind, intensity = 1) {
     if (!KIND[kind]) kind = 'clear';
-    cur.kind = kind; cur.intensity = Math.max(0, Math.min(1, intensity));
+    cur.kind = kind; cur.intensity = Number.isFinite(intensity) ? Math.max(0, Math.min(1, intensity)) : 0;
   }
 
   function update(dt, camPos, camDir) {
@@ -115,8 +119,11 @@ export function createWeather(scene, quality) {
     const k = KIND[cur.kind], it = cur.intensity;
     for (const name of Object.keys(systems)) {
       const ps = systems[name]; const target = (k[name] ?? 0) * it;
-      if (target > 0.01) { ps.emitRate = ps._baseRate * target; if (!ps.isStarted()) ps.start(); }
-      else if (ps.isStarted()) ps.stop();
+      // Blend precipitation along with the sky, instead of instantly switching biomes.
+      ps._weatherRate = approach(ps._weatherRate, target, 0.8, dt);
+      ps.emitRate = ps._baseRate * ps._weatherRate;
+      if (ps.emitRate > 0.1) { if (!ps.isStarted()) ps.start(); }
+      else if (ps.isStarted()) { ps.emitRate = 0; ps.stop(); }
     }
     const lerp = (a, b, t) => a + (b - a) * t; const c = KIND.clear; const r = Math.min(1, dt * 0.5);
     out.cover = lerp(out.cover, lerp(c.cover, k.cover, it), r);
@@ -138,5 +145,14 @@ export function createWeather(scene, quality) {
     }
     return out;
   }
-  return { setWeather, update, state: cur, out, systems };
+  let disposed = false;
+  function dispose() {
+    if (disposed) return;
+    disposed = true;
+    // Textures are shared by snow/embers. Dispose them once after all systems.
+    for (const ps of Object.values(systems)) ps.dispose(false);
+    for (const texture of Object.values(tex)) texture.dispose();
+  }
+  scene.onDisposeObservable.addOnce(dispose);
+  return { setWeather, update, dispose, state: cur, out, systems };
 }

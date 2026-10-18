@@ -14,3 +14,12 @@ test('new input replaces old input; expired and cancelled taps cannot fire', () 
   b.push(2, 100); assert.equal(b.take(281, () => true), null);
   b.push(5, 300); b.clear(); assert.equal(b.take(301, () => true), null);
 });
+
+test('authoritative cooldown reductions and resets reach the hotbar', async () => {
+  const { reconcileCooldown } = await import('./timing.js');
+  assert.equal(reconcileCooldown(12000, 10000, 500, 9000), 2500);
+  assert.equal(reconcileCooldown(0, 10000, 500, 9000), 0);
+  assert.equal(reconcileCooldown(9000, 10000, 500, 9000), 0);
+  assert.equal(reconcileCooldown(0, 10000, 500, 9000, true), 9000);
+  assert.equal(reconcileCooldown(NaN, 10000, 500, 9000), 9000);
+});
