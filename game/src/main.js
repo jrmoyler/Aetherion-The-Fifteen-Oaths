@@ -34,6 +34,7 @@ const applyScale = () => engine.setHardwareScalingLevel(1 / (Math.min(devicePixe
 applyScale();
 
 const scene = new Scene(engine);
+scene.metadata = { quality: quality.name, anisotropy: quality.anisotropy ?? 8 }; // read by materials/ texture factories
 scene.clearColor = new Color4(0.05, 0.06, 0.08, 1);
 scene.skipPointerMovePicking = true;
 scene.autoClear = true;

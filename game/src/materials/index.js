@@ -35,6 +35,13 @@ function sceneCache(scene) {
   return c;
 }
 
+/** Anisotropic filtering level for this scene's quality tier (clamped to the GPU cap). */
+export function anisotropyFor(scene) {
+  const want = scene?.metadata?.anisotropy ?? 8;
+  const cap = scene?.getEngine?.()?.getCaps?.()?.maxAnisotropy ?? 16;
+  return Math.max(1, Math.min(want, cap || 16));
+}
+
 /** Replace a placeholder texture's GPU storage with full-resolution data (same texture object,
  * so materials - frozen or not - keep their references). */
 function swapIn(tex, data, N, gamma) {
@@ -48,7 +55,7 @@ function swapIn(tex, data, N, gamma) {
 function rawTex(scene, data, N, gamma, name) {
   const t = RawTexture.CreateRGBATexture(data, N, N, scene, true, false, Texture.TRILINEAR_SAMPLINGMODE, Constants.TEXTURETYPE_UNSIGNED_BYTE);
   t.name = name; t.gammaSpace = gamma; t.wrapU = Texture.WRAP_ADDRESSMODE; t.wrapV = Texture.WRAP_ADDRESSMODE;
-  t.anisotropicFilteringLevel = 8;
+  t.anisotropicFilteringLevel = anisotropyFor(scene);
   return t;
 }
 
@@ -200,12 +207,15 @@ function toColor3Lin(c) { const [r, g, b] = hexToRgb(c); return new Color3(srgbT
 export function getMaterial(scene, key, opts = {}) {
   const c = sceneCache(scene);
   if (!MATERIALS[key]) { console.warn('[materials] unknown key', key); key = 'stone.limestone'; }
-  const cacheKey = `${key}|${JSON.stringify(opts.tint ?? '')}|${JSON.stringify(opts.uvScale ?? 1)}|${JSON.stringify(opts.emissive ?? '')}|${opts.emissiveIntensity ?? ''}|${opts.alpha ?? ''}|${opts.roughness ?? ''}|${opts.metallic ?? ''}|${opts.wind ? 1 : 0}|${opts.id ?? ''}|${opts.backFaceCulling ?? ''}`;
+  const cacheKey = `${key}|${JSON.stringify(opts.tint ?? '')}|${JSON.stringify(opts.uvScale ?? 1)}|${JSON.stringify(opts.emissive ?? '')}|${opts.emissiveIntensity ?? ''}|${opts.alpha ?? ''}|${opts.roughness ?? ''}|${opts.metallic ?? ''}|${opts.wind ? 1 : 0}|${opts.id ?? ''}|${opts.backFaceCulling ?? ''}|${opts.zOffset ?? ''}|${opts.zOffsetUnits ?? ''}`;
   let m = c.mat.get(cacheKey);
   if (m) return m;
   const def = MATERIALS[key];
-  m = new PBRMaterial(`mat:${key}${opts.id ? ':' + opts.id : ''}`, scene);
+  m = new PBRMaterial(`mat:${key}${opts.id ? ':' + opts.id : ''}${opts.zOffset ? ':overlay' : ''}`, scene);
   m.maxSimultaneousLights = opts.maxLights ?? 6;
+  // Thin overlays (inlays, glow discs, rims, plaza paving over the flat terrain) get a polygon
+  // offset so they never z-fight with the surface they rest on at any distance.
+  if (opts.zOffset) { m.zOffset = opts.zOffset; m.zOffsetUnits = opts.zOffsetUnits ?? opts.zOffset * 4; }
   if (def.flat) {
     const col = toColor3Lin(opts.emissive ?? opts.tint ?? linearArrToHex(def.color));
     m.albedoColor = col.scale(0.15);

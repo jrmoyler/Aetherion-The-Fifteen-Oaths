@@ -1,9 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm ci --prefix game",
-  "buildCommand": "npm --prefix game run build",
-  "outputDirectory": "game/dist",
+  "installCommand": "d=$PWD; until [ -f \"$d/game/package.json\" ] || [ \"$d\" = / ]; do d=$(dirname \"$d\"); done; sh \"$d/tools/vercel-build.sh\" install",
+  "buildCommand": "d=$PWD; until [ -f \"$d/game/package.json\" ] || [ \"$d\" = / ]; do d=$(dirname \"$d\"); done; sh \"$d/tools/vercel-build.sh\" build",
+  "outputDirectory": "dist",
   "headers": [
+    {
+      "source": "/assets/(.*)\\.(js|css|woff2)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [
@@ -23,6 +32,15 @@
         {
           "key": "Service-Worker-Allowed",
           "value": "/"
+        }
+      ]
+    },
+    {
+      "source": "/workbox-(.*)\\.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },

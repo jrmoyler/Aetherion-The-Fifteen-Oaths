@@ -19,6 +19,18 @@ export function M(key, opts) { const id = opts ? `${key}|${JSON.stringify(opts)}
 /** Register a factory-backed material id (e.g. per-oath banner with a canvas texture). */
 export function MF(id, factory) { if (!MAT_DEFS.has(id)) MAT_DEFS.set(id, { factory }); return id; }
 export function matDef(id) { return MAT_DEFS.get(id); }
+/**
+ * Overlay variant of a material id for thin flat geometry that lies on another surface (inlays,
+ * emblems, glow discs, pool rims, the plaza paving over the flat terrain plateau). The variant is
+ * the same PBR recipe with a negative polygon offset, so it wins the depth test at every distance
+ * instead of z-fighting once the 24-bit depth buffer can no longer resolve a 2–6 cm gap.
+ * Factory-backed ids (banners) are returned unchanged.
+ */
+export function overlayOf(id, strength = 1) {
+  const def = MAT_DEFS.get(id);
+  if (!def || !def.key) return id;
+  return M(def.key, { ...def.opts, zOffset: -strength, zOffsetUnits: -4 * strength });
+}
 
 // ------------------------------------------------------------ prototypes for thin instances
 const PROTOS = {};
@@ -102,8 +114,9 @@ export function colBox(S, x, z, w, d, ry, y0, y1, walkable = false) { S.col.box(
 export function plaza(S) {
   const { b, d, style } = S; const Mx = S.M;
   const R = 42;
-  // inner city paving (covers the flat terrain disc)
-  b.cyl(Mx.ground, 0, -0.6, 0, 82, 82, 0.66, 72, { caps: true });
+  // inner city paving (covers the flat terrain disc; its top sits 6 cm over the terrain plateau and is
+  // visible out to the 'main' LOD distance, so it carries a polygon offset instead of relying on the gap)
+  b.cyl(overlayOf(Mx.ground), 0, -0.6, 0, 82, 82, 0.66, 72, { caps: true });
   S.col.circle(0, 0, 82, -2, 0.06, true);
   if (style.plaza === 'square') {
     const h = 38;
@@ -119,7 +132,7 @@ export function plaza(S) {
 }
 
 export function inlay(S) {
-  const { d, style } = S; const mat = S.M.inlay; const y = 0.16;
+  const { d, style } = S; const mat = overlayOf(S.M.inlay, 2); const y = 0.16; // 2.5 cm proud of the paving
   if (style.plaza === 'square') {
     const h = 36.6;
     for (const [hh, w] of [[h, 0.35], [h - 1.1, 0.14]]) {
@@ -357,7 +370,7 @@ export function roundPool(S, x, z, r, o = {}) {
   S.d.cyl(o.water ?? S.M.water, x, wy - 0.05, z, r - 0.2, r - 0.2, 0.05, 40, { caps: true });
   S.b.cyl(rim, x, -0.2, z, r + 0.35, r + 0.35, rh + 0.2, 40, { caps: false });
   S.b.cyl(rim, x, -0.2, z, r - 0.15, r - 0.15, rh + 0.2, 40, { caps: false });
-  S.d.ring(rim, x, rh, z, r - 0.15, r + 0.35, 0.02, 40);
+  S.d.ring(overlayOf(rim), x, rh, z, r - 0.15, r + 0.35, 0.02, 40);
   S.col.circle(x, z, r + 0.35, -1, rh, true);
 }
 /** Falling water sheet (scrolling texture) from (x,ytop,z) down to ybot, width w, facing ry. */
@@ -460,7 +473,7 @@ export function shrine(S, x, z, o = {}) {
   d.torus(metal, x, ey, z, 1.75, 0.04, 40, 4, { rx: Math.PI / 2 });
   d.box(metal, x, y + 6.2, z, 0.18, 0.4, 0.18);
   emblemStanding(S, d, S.M.shrineGlow, x, ey, z, 1.25, 0, 0.16);
-  d.disc(S.M.shrineGlow, x, y + 0.92, z, 1.5, 24);
+  d.disc(overlayOf(S.M.shrineGlow), x, y + 0.92, z, 1.5, 24);
   S.light(x, ey, z - 1.5, S.style.glow, 18, 2.2, true);
   S.shrine = { x, y: y + 0.9, z };
 }

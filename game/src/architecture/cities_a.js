@@ -1,5 +1,5 @@
 // City styles oath-01 .. oath-07.
-import { TAU, polar, rot2, colBox, stairs, terrace, banner, bannerPole, balustrade, genericHouse, brazier, lanternPost, emblemStanding, treeProto, pool, roundPool, squareTower, roundTower, crenelProto, arcPts, waterfall, hangingLanternProto, boxProto, proto, circleArcs, catenary, guardRail, deckStrip } from './kit.js';
+import { TAU, polar, rot2, colBox, stairs, terrace, banner, bannerPole, balustrade, genericHouse, brazier, lanternPost, emblemStanding, treeProto, pool, roundPool, squareTower, roundTower, crenelProto, arcPts, waterfall, hangingLanternProto, boxProto, proto, circleArcs, catenary, guardRail, deckStrip, overlayOf } from './kit.js';
 import { terraceStairs, arcade, arcArcade, blockWall, relayPylon, cable, giantTree, sail, hangLanterns, crystalCluster, rockMass, ringBanners, channelRing, freeSpots, outerRocks } from './motifs.js';
 
 const D = Math.PI / 180;
@@ -84,7 +84,7 @@ export default {
         roundTower(S, x, z, 3.8, 16, { mat: M.terra, trim: M.metal, taper: 0.8 });
         for (let k = 0; k < 4; k++) S.d.torus(M.metal, x, 2 + k * 3.6, z, 3.75 - k * 0.2, 0.12, 24, 4);
         for (let k = 0; k < 8; k++) { const b = (k / 8) * TAU; const r = 3.8 * (1 - 0.2 * (11 / 16)) + 0.02; S.d.box(M.glow, x + Math.sin(b) * r, 9.5, z + Math.cos(b) * r, 0.35, 2.6, 0.08, { ry: b }); }
-        S.d.cyl(M.metal, x, 16.5, z, 1.4, 1.1, 3.2, 10); S.d.disc(M.glow, x, 19.72, z, 1.05, 12);
+        S.d.cyl(M.metal, x, 16.5, z, 1.4, 1.1, 3.2, 10); S.d.disc(overlayOf(M.glow), x, 19.72, z, 1.05, 12);
         S.reserve(x, z, 7); S.light(x, 10, z, '#ff6020', 12, 1);
       }
       // volcanic outcrops beyond the walls, with lava pools
@@ -97,7 +97,7 @@ export default {
       S.d.box(M.trim, 0, h - 0.7, d / 2, w + 0.25, 0.7, d + 0.25);
       S.d.box(M.trim, 0, h, d / 2, w + 0.25, 0.5, d + 0.25);
       S.b.box(M.house, 0, h + 0.5, d / 2, w - 0.8, 0.12, d - 0.8);
-      S.d.box(M.trim, w * 0.28, h, d * 0.7, 1.2, 2.4, 1.2); S.d.disc(M.glow, w * 0.28, h + 2.42, d * 0.7, 0.4, 8);
+      S.d.box(M.trim, w * 0.28, h, d * 0.7, 1.2, 2.4, 1.2); S.d.disc(overlayOf(M.glow), w * 0.28, h + 2.42, d * 0.7, 0.4, 8);
       S.d.box(M.dark, 0, 0, -0.04, 1.5, 2.5, 0.1); S.d.box(M.trim, 0, 2.5, -0.08, 2.0, 0.35, 0.2);
       for (const sx of [-1, 1]) if (w > 6) S.d.box(rand() < 0.5 ? M.glow : M.dark, sx * w * 0.3, h * 0.5, -0.03, 0.7, 1.1, 0.06);
     },
