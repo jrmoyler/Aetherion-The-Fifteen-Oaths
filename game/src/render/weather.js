@@ -95,9 +95,9 @@ export function createWeather(scene, quality) {
   const KIND = {
     clear: { rain: 0, snow: 0, ash: 0, embers: 0, mist: 0, cover: 0.4, fog: 1, wet: 0, dark: 0.3, light: 1 },
     rain: { rain: 1, mist: 0.3, cover: 0.85, fog: 1.8, wet: 1, dark: 0.75, light: 0.45 },
-    snow: { snow: 1, mist: 0.2, cover: 0.8, fog: 2.0, wet: 0, dark: 0.45, light: 0.6, snowCover: 1 },
+    snow: { snow: 1, mist: 0.2, cover: 0.8, fog: 1.6, wet: 0, dark: 0.45, light: 0.6, snowCover: 1 },
     ash: { ash: 1, embers: 1, cover: 0.6, fog: 1.25, wet: 0, dark: 0.6, light: 0.7 },
-    storm: { rain: 1.3, mist: 0.4, cover: 0.97, fog: 2.2, wet: 1, dark: 0.95, light: 0.3, lightning: 1 },
+    storm: { rain: 1.3, mist: 0.3, cover: 0.97, fog: 1.6, wet: 1, dark: 0.95, light: 0.3, lightning: 1 },
     mist: { mist: 1, cover: 0.55, fog: 3.0, wet: 0.3, dark: 0.4, light: 0.75 },
   };
   const cur = { kind: 'clear', intensity: 0 };

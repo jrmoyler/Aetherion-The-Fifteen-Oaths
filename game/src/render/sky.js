@@ -87,7 +87,7 @@ void main() {
     vec3 p = d * 260.0; vec3 c = floor(p); float h = hash13(c);
     if (h > 0.9965) { vec3 f = fract(p) - 0.5; float s = smoothstep(0.32, 0.0, length(f));
       float tw = 0.65 + 0.35 * sin(cloud2.w * (2.0 + h * 9.0) + h * 80.0);
-      col += vec3(0.9, 0.95, 1.0) * mix(vec3(1.0, 0.8, 0.7), vec3(0.8, 0.9, 1.0), fract(h * 37.0)) * s * tw * sunInt.w * (h - 0.9965) * 900.0 * smoothstep(0.0, 0.25, d.y); }
+      col += vec3(0.9, 0.95, 1.0) * mix(vec3(1.0, 0.8, 0.7), vec3(0.8, 0.9, 1.0), fract(h * 37.0)) * s * tw * sunInt.w * (h - 0.9965) * 2400.0 * smoothstep(0.0, 0.25, d.y); }
     // faint milky band
     float band = exp(-pow(dot(d, normalize(vec3(0.3, 0.2, 0.93))) * 3.2, 2.0));
     col += vec3(0.010, 0.012, 0.018) * band * sunInt.w * (0.6 + 0.4 * texture2D(noiseTex, d.xz * 3.0).r);
@@ -117,7 +117,7 @@ void main() {
     if (dens > 0.001) {
       vec2 toS = normalize(sunDir.xz + 1e-4) * 0.035;
       float n2 = cloudN(uv + toS);
-      float lit = clamp(0.55 + (n - n2) * 6.0, 0.0, 1.0);
+      float lit = clamp(0.55 + (n - n2) * mix(6.0, 1.5, smoothstep(0.8, 0.97, cov)), 0.0, 1.0);
       float thick = smoothstep(1.0 - cov, 1.0, n);
       vec3 cc = mix(cloudShade, cloudLit, lit * (1.0 - cloud.z * thick));
       cc += cloudLit * 0.6 * pow(max(mu, 0.0), 12.0) * (1.0 - thick); // silver lining

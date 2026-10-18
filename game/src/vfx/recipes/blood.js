@@ -1,5 +1,5 @@
 // BLOOD — Sanguine Covenant. Cast study reference-110: arterial reds, dark clots, ribbons and thorned roots.
-import { B, K, V, C, life, along, polar, serpent, clamp01, easeOut, smooth } from './h.js';
+import { B, K, V, C, life, fade, along, polar, serpent, clamp01, easeOut, smooth } from './h.js';
 import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
 
 const BLOOD = { c0: C('#ffb9bf'), c1: C('#ff2d55'), c2: C('#6e0512'), c3: C('#26010a') };
