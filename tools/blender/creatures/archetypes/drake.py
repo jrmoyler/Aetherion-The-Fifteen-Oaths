@@ -89,8 +89,16 @@ def membrane(name, rays, wts, sag=0.0):
     kd.balance()
 
     def fn(co):
-        _, idx, _ = kd.find(co)
-        return flat[idx]
+        # inverse-distance blend of the nearest ray samples: the membrane bends smoothly between
+        # finger bones instead of moving as stiff per-ray panels
+        hits = kd.find_n(co, 6)
+        acc, tot = {}, 0.0
+        for _p, idx, d in hits:
+            w = 1.0 / (d * d + 1e-6)
+            tot += w
+            for k, x in flat[idx].items():
+                acc[k] = acc.get(k, 0.0) + w * x
+        return {k: v / tot for k, v in acc.items()}
     return ob, fn
 
 

@@ -442,7 +442,7 @@ export default {
       viaductDeck(S, chords);
       chords.forEach((c, i) => { if (i % 4 === 2) { const [bx, bz] = rot2(0, -2.9, c.ry); banner(S, c.mx + bx, 11.3, c.mz + bz, c.ry, 1.7, 5.5, { bar: M.metal }); } });
       // gears where the highway breaks for roads
-      for (const a of S.roads) for (const s of [-1, 1]) { const b = a + s * 16 / 60; const [x, z] = polar(60, b); gear(S, x, 16.8, z, b, 3.2, M.metal, 0.22 * s); }
+      for (const a of S.roads) for (const s of [-1, 1]) { const b = a + s * 16 / 60; const [x, z] = polar(60, b); gear(S, x, 16.8, z, b, 3.2, M.metal, 0.22 * s); colBox(S, x, z, 5.2, 1.2, b, 16.8 - 3.6, 16.8 + 3.6, false); } // teeth dip to head height over the deck
       // hourglass cages with floating cubes
       for (const a of [45 * D, -45 * D, 135 * D, -135 * D]) {
         const [x, z] = polar(35, a); if (!S.clear(x, z, 3)) continue;

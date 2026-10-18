@@ -13,7 +13,7 @@ from lib.anim import env
 V = Vector
 CTRL = [(0.05, -2.25, 0), (-0.22, -1.95, 0), (-0.32, -1.50, 0), (-0.05, -1.05, 0), (0.28, -0.62, 0), (0.24, -0.18, 0),
         (0.0, 0.14, 0), (0.0, 0.34, 0.36), (0.0, 0.44, 0.78), (0.0, 0.52, 1.10), (0.0, 0.62, 1.28)]
-RAD = [0.02, 0.08, 0.13, 0.17, 0.195, 0.2, 0.195, 0.18, 0.165, 0.15, 0.14]
+RAD = [0.02, 0.08, 0.13, 0.17, 0.195, 0.2, 0.195, 0.175, 0.15, 0.12, 0.10]   # neck tapers under the head
 N = 18
 
 
@@ -60,10 +60,11 @@ SNOUT = V((0, 0.97, 1.30))
 def clay():
     c = Clay()
     c.chain(PTS, RADS, k=0.015)
-    c.cone(PTS[-1], HEAD0, RADS[-1], 0.12, k=0.04)
-    c.ell((0, 0.72, 1.335), (0.15, 0.15, 0.08), k=0.04)                         # skull (wide, flat)
-    c.add("flatcone", k=0.035, a=(0, 0.78, 1.33), b=(0, 0.95, 1.30), ra=0.12, rb=0.075, flat=0.5)
-    c.ell((0.09, 0.75, 1.30), (0.06, 0.09, 0.055), k=0.035, mirror=True)        # venom glands
+    c.cone(PTS[-1], HEAD0, RADS[-1], 0.10, k=0.03)
+    # viper/cobra wedge: broad flat skull widest at the jaw hinge, tapering to a narrow snout
+    c.ell((0, 0.71, 1.33), (0.155, 0.13, 0.068), k=0.03)                         # skull (wide, flat)
+    c.add("flatcone", k=0.03, a=(0, 0.76, 1.33), b=(0, 0.965, 1.30), ra=0.12, rb=0.045, flat=0.42)
+    c.ell((0.105, 0.70, 1.30), (0.065, 0.085, 0.06), k=0.03, mirror=True)       # venom glands / jaw hinge
     c.cone((0, 0.70, 1.28), (0, 0.92, 1.265), 0.06, 0.045, k=0.03)              # jaw
     c.add("box", k=0.008, op="sub", c=(0, 0.88, 1.282), h=(0.1, 0.11, 0.005))
     c.add("sphere", k=0.01, op="sub", c=(0.085, 0.81, 1.355), r=0.02, mirror=True)
@@ -90,7 +91,7 @@ def bones():
         nm = f"tail{MID - k + 1}"
         B.append(Bone(nm, PTS[k], PTS[k - 1], prev)); bk.append(nm); prev = nm
     for s, g in (("L", 1), ("R", -1)):
-        B.append(Bone(f"hood_{s}", V((0.06 * g, 0.52, 1.02)), V((0.34 * g, 0.47, 1.06)), fw[-3]))
+        B.append(Bone(f"hood_{s}", V((0.05 * g, 0.56, 1.12)), V((0.40 * g, 0.50, 1.14)), fw[-3]))
     return B, fw[1:], bk
 
 
@@ -115,27 +116,32 @@ def build(oath=None):
     S.part(core.horn("tongue", tp, [0.008, 0.006, 0.004], segs=5, flat=0.4), "tongue", "glow", glow)
     for s, g in (("L", 1), ("R", -1)):
         S.part(core.horn(f"tfork{s}", [V((0, 1.03, 1.28)), V((0.015 * g, 1.07, 1.28))], [0.004, 0.0015], segs=4), "tongue", "glow", glow)
-    # hood: ribbed membrane flaring from the upper neck
+    # hood: cobra hood flaring from directly behind the head down the neck, widest about a third
+    # of the way down, wrapping back around the neck at its edges (ribs spread it laterally)
+    def neck_y(z):
+        return 0.44 + (z - 0.78) * 0.25 if z < 1.10 else 0.52 + (z - 1.10) * 0.55
     rows = []
-    for i in range(7):
-        u = i / 6
-        z = 0.80 + 0.40 * u
-        y = 0.45 + 0.06 * u
-        w = 0.10 + 0.30 * math.sin(math.pi * min(1.0, u * 1.1 + 0.05))
-        rows.append([V((x * w, y + 0.10 - 0.10 * abs(x) ** 2, z)) for x in np.linspace(-1, 1, 9)])
+    for i in range(9):
+        u = i / 8                                           # 0 = top (behind the head)
+        z = 1.29 - 0.42 * u
+        w = 0.09 + 0.36 * math.sin(math.pi * min(1.0, 0.12 + u * 0.9)) ** 0.8
+        yc = neck_y(z)
+        rows.append([V((x * w, yc + 0.075 - 0.14 * abs(x) ** 1.6, z + 0.015 * (1 - abs(x)))) for x in np.linspace(-1, 1, 11)])
     hood = core.grid_strip("hood", rows, 0.012)
     hb = neck_bones
 
     def hood_w(co):
         side = "L" if co.x > 0 else "R"
-        out = min(1.0, abs(co.x) / 0.3)
-        nb = hb[1] if co.z < 1.0 else hb[2]
+        out = min(1.0, abs(co.x) / 0.32) ** 1.3
+        nb = hb[1] if co.z < 1.02 else hb[2] if co.z < 1.17 else hb[3]
         return {nb: 1 - out, f"hood_{side}": out}
     S.part(hood, hood_w, "secondary", hood_m)
     for s, g in (("L", 1), ("R", -1)):
-        for j in range(3):
-            u = 0.25 + 0.25 * j
-            S.part(core.horn(f"hrib{s}{j}", [V((0.06 * g, 0.56, 0.85 + 0.35 * u)), V((0.34 * g, 0.47, 0.88 + 0.32 * u))], [0.014, 0.006], segs=5),
+        for j in range(4):
+            z = 1.24 - 0.10 * j
+            w = 0.09 + 0.36 * math.sin(math.pi * min(1.0, 0.12 + (1.29 - z) / 0.42 * 0.9)) ** 0.8
+            yc = neck_y(z)
+            S.part(core.horn(f"hrib{s}{j}", [V((0.05 * g, yc + 0.07, z)), V((w * 0.95 * g, yc + 0.075 - 0.13, z))], [0.012, 0.005], segs=5),
                    f"hood_{s}", "accent", fang_m)
     # dorsal spine ridge along the back, keeled
     for k in range(2, N - 2):

@@ -27,13 +27,16 @@ await vite.close();
 
 // ---- routes
 const v = qa['oath-14'].viaductAccess[0]; // stair foot -> mid landing -> flight 2 -> top landing -> deck
-const decks = qa['oath-14'].viaductDeck.map((d) => [(d[0][0] + d[1][0]) / 2, d[0][1], (d[0][2] + d[1][2]) / 2, d[2]]);
+// chord centre, outer rail point, inner rail point; walk the inner lane (the clock gears stand on the centre line)
+const decks = qa['oath-14'].viaductDeck.map((d) => { const c = [(d[0][0] + d[1][0]) / 2, d[0][1], (d[0][2] + d[1][2]) / 2]; return [...c, d[2], [c[0] + (d[3][0] - c[0]) * 0.6, c[1], c[2] + (d[3][2] - c[2]) * 0.6]]; });
 const deckEnd = v[v.length - 1];
 // continue along the deck: chord centres in order starting from the access chord, then push into the outer rail
 let k0 = 0, bd = 1e9; decks.forEach((d, k) => { const dd = Math.hypot(d[0] - deckEnd[0], d[2] - deckEnd[2]); if (dd < bd) { bd = dd; k0 = k; } });
 const along = []; for (let k = k0 + 1; k < decks.length && along.length < 3; k++) { const p = along.length ? along[along.length - 1] : decks[k0]; if (Math.hypot(decks[k][0] - p[0], decks[k][2] - p[2]) > 8.5) break; along.push(decks[k]); }
-const last = along.length ? along[along.length - 1] : decks[k0]; const railPush = [last[0] + (last[3][0] - last[0]) * 3, last[1], last[2] + (last[3][2] - last[2]) * 3];
-const viaRoute = [...v.slice(1), ...along.map((d) => [d[0], d[1], d[2]]), railPush];
+// finally push from the inner lane into the inner parapet (no gear between them; only the access chord has an opening)
+const last = along.length ? along[along.length - 1] : decks[k0]; const inDir = [(last[4][0] - last[0]) / 0.6, (last[4][2] - last[2]) / 0.6];
+const railPush = [last[0] + inDir[0] * 3, last[1], last[2] + inDir[1] * 3];
+const viaRoute = [...v.slice(1), ...along.map((d) => d[4]), railPush];
 
 const st7 = qa['oath-07'].treeStair[0]; const br = qa['oath-07'].ropeBridge.find((b) => Math.hypot(b[b.length - 1][0] - st7[1][0], b[b.length - 1][2] - st7[1][2]) < 20) ?? qa['oath-07'].ropeBridge[0];
 const tree = br[br.length - 1], cp = br.slice(1, -1).reverse(); // tree side first
@@ -69,7 +72,6 @@ async function scenario(name, oath, start, route, opts = {}) {
         if (Math.hypot(dx, dz) < 0.6) { wi++; k--; continue; }
         yaw = Math.atan2(dx, dz); st.moveY = 1; st.moveX = 0; pc.update(1 / 30);
         if (k % 3 === 0) out.push([+P.x.toFixed(2), +P.y.toFixed(2), +P.z.toFixed(2), wi]);
-        if (route[wi][3] === 'push' && k > 60) { wi++; break; }
       }
       st.moveY = 0; pc.getCameraYaw = saveYaw;
       return { wi, out };
@@ -94,7 +96,7 @@ async function scenario(name, oath, start, route, opts = {}) {
 const r14 = await scenario('oath14-viaduct', 'oath-14', v[0], viaRoute, { lastIsPush: true });
 const deckTop = v[v.length - 1][1];
 const onDeck = r14.log.filter((l) => typeof l[0] === 'number' && l[3] >= v.length - 2);
-r14.check = { deckTop, finalErr: +(r14.final[1] - deckTop).toFixed(3), deckSamples: onDeck.length, deckMinY: Math.min(...onDeck.map((l) => l[1])), deckMaxY: Math.max(...onDeck.map((l) => l[1])), railPushDistFromRail: +Math.hypot(r14.final[0] - railPush[0], r14.final[2] - railPush[2]).toFixed(2) };
+r14.check = { deckTop, finalErr: +(r14.final[1] - deckTop).toFixed(3), deckSamples: onDeck.length, deckMinY: Math.min(...onDeck.map((l) => l[1])), deckMaxY: Math.max(...onDeck.map((l) => l[1])), railPushRadialOffset: (() => { const rx = inDir[0], rz = inDir[1]; const l = Math.hypot(rx, rz); return +(((r14.final[0] - last[0]) * rx + (r14.final[2] - last[2]) * rz) / l).toFixed(2); })(), railAt: 2.6 };
 console.log('oath-14', JSON.stringify(r14.check), 'reached', r14.reached, 'errors', r14.errors.length);
 
 // Graft Sanctuary: tree stair, around the platform ring, across the rope bridge to the hall-tree ring

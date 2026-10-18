@@ -145,7 +145,7 @@ def smooth_weights(W, ei, ej, iters=4, lam=0.5, lock=None):
 # skin), <1 "fatter".  Limb-root bones sit on the trunk wall; letting them own that skin is what
 # made shoulders/brisket/groin crumple whenever a leg swung -- the trunk keeps it instead.
 WEIGHT_BIAS = {"upper_": 1.25, "thigh_": 1.25, "upperarm_": 1.2, "arm_": 1.2, "femur": 1.15,
-               "chest": 0.9, "spine": 0.9, "hips": 0.95, "sternum": 0.85}
+               "chest": 0.9, "spine": 0.9, "hips": 0.95, "sternum": 1.15}
 
 
 def _bias(name, table):
@@ -214,12 +214,14 @@ def geodesic_weights(mesh_ob, arm_ob, clay, s, height, rules=None, verbose=True,
     if os.environ.get("FORGE_WBIAS"):
         table.update(json.loads(os.environ["FORGE_WBIAS"]))
     D = D * np.array([_bias(nm, table) for nm in names])[None]
-    # distal limb gating: a knee/elbow segment (shin, fore, forearm) must not own skin above its
-    # own joint -- the flank fold / armpit belongs to the thigh / upper arm and the trunk
-    ROOTS = ("thigh_", "upper_", "upperarm_", "arm_")
+    # distal gating: a knee/elbow segment (shin, fore, forearm) must not own skin above its own
+    # joint -- the flank fold / armpit belongs to the thigh / upper arm and the trunk; likewise
+    # jaw / ears / fangs / palps must not own the throat or neck behind their hinge
+    ROOTS = ("thigh_", "upper_", "upperarm_", "arm_", "femur")
     for j, nm in enumerate(names):
         bn = arm_ob.data.bones[nm]
-        if bn.parent is None or not bn.parent.name.startswith(ROOTS):
+        if not ((bn.parent is not None and bn.parent.name.startswith(ROOTS)) or nm == "jaw"
+                or nm.startswith(("ear_", "fang", "palp"))):
             continue
         h = np.array(bn.head_local) / s; ab = np.array(bn.tail_local) / s - h
         tt = (V - h) @ ab / max(ab @ ab, 1e-12)

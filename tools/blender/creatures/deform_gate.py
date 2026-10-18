@@ -237,12 +237,14 @@ def _top4(W):
     return out
 
 
-def corrective_pass(arm, mesh_ob, actions, iters=20, rings=3, smooth_iters=4, log=print):
+def corrective_pass(arm, mesh_ob, actions, iters=16, rings=3, smooth_iters=4, log=print):
     """Gate-driven corrective weighting (runs inside the forge, after the clips are baked):
-    evaluate every frame of every clip, collect the vertices of inverted triangles, grow that
-    set by `rings`, Laplacian-smooth the weights there only (everything else locked), re-limit
-    to 4 influences, repeat until no frame folds.  Steep weight gradients between bones that
-    move differently are what fold LBS skin; this flattens them exactly where a pose needs it."""
+    evaluate every frame of every clip, collect the vertices of inverted triangles and try two
+    local repairs there (everything else locked): Laplacian *smoothing* (flattens steep weight
+    gradients that fold stretched skin) and *sharpening* toward the dominant bone (lets skin
+    that is being crushed between two limbs ride one of them rigidly instead of folding).  The
+    repair that removes more folds is kept; weights are re-limited to 4 influences each time;
+    the best iterate wins."""
     import bpy
     from lib.rig import smooth_weights
     g = Gate(arm, mesh_ob)
@@ -252,39 +254,78 @@ def corrective_pass(arm, mesh_ob, actions, iters=20, rings=3, smooth_iters=4, lo
     e = e.reshape(-1, 2)
     ei, ej = e[:, 0], e[:, 1]
     ad = arm.animation_data or arm.animation_data_create()
-    hist = []
-    W = _top4(g.W)
-    g.W = W
-    touched = np.zeros(len(W), bool)
-    for it in range(iters + 1):
-        bad = np.zeros(len(W), bool)
-        total = 0
-        for act in actions:
+    frames = []
+    for act in actions:
+        f0, f1 = (int(x) for x in act.frame_range)
+        frames += [(act, f) for f in range(f0, f1 + 1)]
+    # cache skin matrices per frame once (weights change, poses do not)
+    mats = []
+    for act, f in frames:
+        if ad.action != act:
             ad.action = act
             if act.slots:
                 ad.action_slot = act.slots[0]
-            f0, f1 = (int(x) for x in act.frame_range)
-            for f in range(f0, f1 + 1):
-                bpy.context.scene.frame_set(f)
-                fl = g.frame_metrics()["flips"]
-                if len(fl):
-                    total += len(fl)
-                    bad[g.T[fl].ravel()] = True
-        hist.append(total)
-        log(f"  corrective pass {it}: {total} inverted tri-frames, {int(bad.sum())} verts")
-        if total == 0 or it == iters:
-            break
-        for _ in range(rings):
-            grow = bad.copy()
-            grow[ej[bad[ei]]] = True
-            grow[ei[bad[ej]]] = True
-            bad = grow
-        bad &= g.omask
-        touched |= bad
-        W = smooth_weights(W, ei, ej, iters=smooth_iters, lam=0.6, lock=~bad)
-        W = _top4(W)
-        g.W = W
+        bpy.context.scene.frame_set(f)
+        mats.append(skin_mats(arm, mesh_ob, g.bones))
     ad.action = None
+    Ph = np.c_[g.rest, np.ones(len(g.rest))]
+
+    def sweep(W):
+        bad = np.zeros(len(W), bool)
+        total = 0
+        Wt = W[g.T]                                         # (t, 3, nb)
+        for S in mats:
+            M = np.einsum("vb,bij->vij", W, S)
+            P = np.einsum("vij,vj->vi", M, Ph)[:, :3]
+            n1, _ = tri_normals(P, g.T)
+            Rt = M[g.T, :3, :3].mean(1)
+            c = np.einsum("tij,tj->ti", Rt, g.n0)
+            fl = np.einsum("ij,ij->i", n1, c) < FLIP_DOT
+            k = int(fl.sum())
+            if k:
+                total += k
+                bad[g.T[fl].ravel()] = True
+        return total, bad
+
+    def grow(m, r):
+        for _ in range(r):
+            gm = m.copy()
+            gm[ej[m[ei]]] = True
+            gm[ei[m[ej]]] = True
+            m = gm
+        return m & g.omask
+
+    W = _top4(g.W)
+    total, bad = sweep(W)
+    hist = [total]
+    log(f"  corrective pass 0: {total} inverted tri-frames, {int(bad.sum())} verts")
+    touched = np.zeros(len(W), bool)
+    stall = 0
+    for it in range(1, iters + 1):
+        if total == 0:
+            break
+        zone = grow(bad, rings)
+        cands = []
+        Ws = _top4(smooth_weights(W, ei, ej, iters=smooth_iters, lam=0.6, lock=~zone))
+        cands.append(("smooth", Ws, zone))
+        core = grow(bad, 1)
+        Wp = W.copy()
+        Wp[core] = Wp[core] ** 2
+        Wp[core] /= np.maximum(Wp[core].sum(1, keepdims=True), 1e-9)
+        cands.append(("sharpen", _top4(Wp), core))
+        res = [(sweep(Wc), nm, Wc, z) for nm, Wc, z in cands]
+        (t2, b2), nm, Wc, z = min(res, key=lambda r: r[0][0])
+        log(f"  corrective pass {it}: {t2} inverted tri-frames ({nm}), {int(b2.sum())} verts")
+        hist.append(t2)
+        if t2 < total:
+            W, total, bad = Wc, t2, b2
+            touched |= z
+            stall = 0
+        else:
+            stall += 1
+            rings += 1
+            if stall >= 3:
+                break
     # write back (organic vertices that were touched)
     idx = np.where(touched)[0].tolist()
     if idx:

@@ -31,6 +31,10 @@ def humanoid(J, jaw=False, extra=None, fingers=0):
         B.append(Bone(f"shin_{s}", mx(J["knee"], g), mx(J["ankle"], g), f"thigh_{s}"))
         B.append(Bone(f"foot_{s}", mx(J["ankle"], g), mx(J["ball"], g), f"shin_{s}"))
         B.append(Bone(f"toe_{s}", mx(J["ball"], g), mx(J["toe"], g), f"foot_{s}"))
+    by = {b.name: b for b in B}
+    for s, g in SIDES:
+        B.append(half_bone(by[f"upperarm_{s}"], f"clav_{s}"))
+        B.append(half_bone(by[f"thigh_{s}"], "hips"))
     if extra:
         B += extra
     return B
@@ -95,14 +99,17 @@ def clips_heavy(ctx, p):
         up = env(t, [(0, 0), (0.35, 1), (0.45, 0.2), (0.5, -0.4), (0.68, -0.4), (1, 0)])
         slam = env(t, [(0, 0), (0.38, 0), (0.48, 1), (0.68, 1), (1, 0)])
         P.move("hips", z=-0.06 * H * slam - 0.015 * H * max(up, 0), y=-0.03 * H * max(up, 0) + 0.04 * H * slam)
-        P.r("spine1", x=0.12 * max(up, 0) - 0.28 * slam)
-        P.r("chest", x=0.15 * max(up, 0) - 0.25 * slam)
-        P.r("neck", x=-0.1 * max(up, 0) + 0.15 * slam)
-        P.r("head", x=-0.05 * max(up, 0))
+        # the overhead raise is shared: clavicles shrug, the torso arches back, so the humerus only
+        # travels ~110 deg (it was 150 deg in the shoulder alone -> shoulder/chest crumple)
+        U = max(up, 0)
+        P.r("spine1", x=0.16 * U - 0.22 * slam)
+        P.r("chest", x=0.12 * U - 0.16 * slam)
+        P.r("neck", x=-0.12 * U + 0.15 * slam)
+        P.r("head", x=-0.05 * U)
         for s, g in SIDES:
-            P.r(f"upperarm_{s}", x=2.6 * max(up, 0) + 1.2 * slam, z=-g * (0.25 * max(up, 0) - 0.05 * slam))
-            P.r(f"forearm_{s}", x=0.9 * max(up, 0) + 0.15 * slam)
-            P.r(f"clav_{s}", x=0.15 * max(up, 0))
+            P.r(f"upperarm_{s}", x=1.9 * U + 0.9 * slam, z=-g * (0.2 * U - 0.05 * slam))
+            P.r(f"forearm_{s}", x=0.9 * U + 0.15 * slam)
+            P.r(f"clav_{s}", x=0.35 * U + 0.1 * slam)
         if has_jaw:
             P.r("jaw", x=-0.3 * slam - 0.15 * max(up, 0))
         P.foot("L", (0, 0.04 * leglen * slam, 0))
@@ -220,8 +227,8 @@ def clips_raptor(ctx, p):
 
     def arms(P, k=0.0, w=0.0):
         for s in ("L", "R"):
-            P.r(f"arm_{s}", x=-0.1 + 0.08 * math.sin(w) + k * 0.6)
-            P.r(f"forearm_{s}", x=0.5 + k * 0.4)
+            P.r(f"arm_{s}", x=-0.05 + 0.06 * math.sin(w) + k * 0.5)
+            P.r(f"forearm_{s}", x=0.15 + k * 0.35)
 
     def idle(t, P):
         w = 2 * math.pi * t
@@ -261,22 +268,27 @@ def clips_raptor(ctx, p):
         if xf: xf("run" if run else "walk", t, P)
 
     def attack(t, P):
-        a = env(t, [(0, 0), (0.3, 1), (0.42, -0.3), (0.62, -0.3), (1, 0)])
-        k = env(t, [(0, 0), (0.3, 0), (0.42, 1), (0.6, 1), (0.95, 0)])
-        kick = env(t, [(0, 0), (0.36, 0), (0.46, 1), (0.6, 0.6), (0.8, 0)])
-        P.move("hips", y=(-0.03 * a + 0.03 * k) * H, z=-0.04 * H * max(a, 0) + 0.01 * H * k)
-        P.r("hips", x=0.1 * a - 0.1 * k)
-        P.r("chest", x=-0.04 * a)
-        P.r("neck1", x=0.2 * a - 0.18 * k)
-        P.r("neck2", x=-0.12 * a + 0.1 * k)
-        P.r("head", x=-0.15 * a + 0.1 * k)
-        jaw_open = env(t, [(0, 0.05), (0.3, 0.6), (0.43, 0.7), (0.5, 0.0), (1, 0.05)])
+        """coil (0-.28) -> hop-lunge with a snapping bite and a sickle-claw kick (.28-.45) ->
+        head-shake / rake follow-through (.45-.65) -> recover.  Drive comes from the hips
+        travelling forward ~10% of height and the neck thrust; the chest only pitches a little
+        and the kick keeps the thigh under ~55 deg so the flank / groin skin is not folded."""
+        c = env(t, [(0, 0), (0.28, 1), (0.36, 0.2), (0.42, 0), (1, 0)])            # coil
+        l = env(t, [(0, 0), (0.28, 0), (0.40, 1), (0.60, 1), (0.92, 0)])           # lunge
+        kick = env(t, [(0, 0), (0.33, 0), (0.43, 1), (0.52, 0.8), (0.62, 0.15), (0.85, 0)])
+        sh = math.sin(2 * math.pi * (t - 0.42) * 7) * env(t, [(0.42, 0), (0.46, 1), (0.58, 1), (0.68, 0)])
+        P.move("hips", y=(-0.035 * c + 0.10 * l) * H, z=(-0.05 * c + 0.012 * l) * H)
+        P.r("hips", x=0.06 * c - 0.04 * l + 0.16 * kick)          # pelvis rocks back into the kick
+        P.r("chest", x=-0.03 * c + 0.02 * l)
+        P.r("neck1", x=0.22 * c - 0.45 * l, z=0.08 * sh)
+        P.r("neck2", x=-0.20 * c + 0.12 * l, z=0.08 * sh)
+        P.r("head", x=-0.06 * c + 0.22 * l, y=0.22 * sh)
+        jaw_open = env(t, [(0, 0.05), (0.2, 0.35), (0.36, 0.8), (0.42, 0.0), (0.56, 0.0), (0.62, 0.2), (0.7, 0.0), (1, 0.05)])
         P.r("jaw", x=-jaw_open)
-        P.chain(tail, x=-(0.08 * a - 0.06 * k), falloff=1.05)
-        arms(P, 0.8 * k, 0)
-        P.foot("L")
-        # right foot: sickle-claw rake forward
-        P.foot("R", (0, 0.5 * leglen * kick, 0.35 * leglen * kick), -0.8 * kick, 1.0)
+        P.chain(tail, x=0.10 * c - 0.08 * l, z=0.05 * sh, falloff=1.05)
+        arms(P, 0.5 * c + 0.7 * l, 0)
+        P.foot("L", (0, 0.10 * H * l * 0.6, 0))
+        # right foot: sickle-claw kick forward/up, then the claw rakes down and back
+        P.foot("R", (0, (0.10 * H * 0.6) * l + 0.40 * leglen * kick, 0.17 * leglen * kick), -0.75 * kick, 1.0)
         if xf: xf("attack", t, P)
 
     def hit(t, P):

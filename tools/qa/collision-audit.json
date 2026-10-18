@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-18T03:34:47.364Z",
+ "generated": "2026-10-18T03:56:53.492Z",
  "cell": 0.4,
  "results": [
   {
@@ -675,7 +675,7 @@
    "colliders": 419,
    "tris": 52726,
    "unreachableDeckArea": 12428.3,
-   "ms": 5204
+   "ms": 2422
   },
   {
    "id": "oath-02",
@@ -1350,7 +1350,7 @@
    "colliders": 328,
    "tris": 56716,
    "unreachableDeckArea": 11438.4,
-   "ms": 3451
+   "ms": 1961
   },
   {
    "id": "oath-03",
@@ -2025,7 +2025,7 @@
    "colliders": 327,
    "tris": 167822,
    "unreachableDeckArea": 8206.2,
-   "ms": 3530
+   "ms": 2044
   },
   {
    "id": "oath-04",
@@ -2718,7 +2718,7 @@
    "colliders": 590,
    "tris": 202414,
    "unreachableDeckArea": 12596.8,
-   "ms": 3581
+   "ms": 1817
   },
   {
    "id": "oath-05",
@@ -3411,7 +3411,7 @@
    "colliders": 387,
    "tris": 70042,
    "unreachableDeckArea": 15649.6,
-   "ms": 3053
+   "ms": 1940
   },
   {
    "id": "oath-06",
@@ -4086,7 +4086,7 @@
    "colliders": 523,
    "tris": 167926,
    "unreachableDeckArea": 12374.1,
-   "ms": 2605
+   "ms": 1712
   },
   {
    "id": "oath-07",
@@ -4632,7 +4632,7 @@
    "colliders": 421,
    "tris": 164880,
    "unreachableDeckArea": 582.4,
-   "ms": 2768
+   "ms": 2006
   },
   {
    "id": "oath-08",
@@ -5307,7 +5307,7 @@
    "colliders": 359,
    "tris": 208222,
    "unreachableDeckArea": 13124.6,
-   "ms": 2507
+   "ms": 1973
   },
   {
    "id": "oath-09",
@@ -5982,7 +5982,7 @@
    "colliders": 335,
    "tris": 193029,
    "unreachableDeckArea": 9201.8,
-   "ms": 2389
+   "ms": 1963
   },
   {
    "id": "oath-10",
@@ -5993,24 +5993,6 @@
    "phantom": 7.36,
    "wallGap": 0.64,
    "unreachableDecks": [
-    {
-     "area": 275.52,
-     "local": [
-      59.5,
-      19.5
-     ],
-     "y": 9.4,
-     "world": [
-      1939.3,
-      77.4,
-      771.4
-     ],
-     "size": [
-      30,
-      76
-     ],
-     "centreCovered": false
-    },
     {
      "area": 269.44,
      "local": [
@@ -6026,6 +6008,24 @@
      "size": [
       22.4,
       22.4
+     ],
+     "centreCovered": false
+    },
+    {
+     "area": 265.28,
+     "local": [
+      59.3,
+      19.6
+     ],
+     "y": 9.4,
+     "world": [
+      1939.2,
+      77.4,
+      771.5
+     ],
+     "size": [
+      30,
+      76
      ],
      "centreCovered": false
     },
@@ -6655,9 +6655,9 @@
     ]
    },
    "colliders": 480,
-   "tris": 191158,
-   "unreachableDeckArea": 11559.7,
-   "ms": 2088
+   "tris": 194630,
+   "unreachableDeckArea": 11549.4,
+   "ms": 1826
   },
   {
    "id": "oath-11",
@@ -7332,7 +7332,7 @@
    "colliders": 361,
    "tris": 57928,
    "unreachableDeckArea": 11744.8,
-   "ms": 2247
+   "ms": 1819
   },
   {
    "id": "oath-12",
@@ -8007,7 +8007,7 @@
    "colliders": 349,
    "tris": 187406,
    "unreachableDeckArea": 14526.4,
-   "ms": 3037
+   "ms": 1644
   },
   {
    "id": "oath-13",
@@ -8682,27 +8682,27 @@
    "colliders": 298,
    "tris": 65058,
    "unreachableDeckArea": 7570.4,
-   "ms": 2720
+   "ms": 1948
   },
   {
    "id": "oath-14",
    "name": "Escapement Road",
-   "walkElevated": 3307.36,
+   "walkElevated": 3302.24,
    "uncovered": 0,
    "solidOnly": 51.36,
    "phantom": 0,
    "wallGap": 0,
    "unreachableDecks": [
     {
-     "area": 1672,
+     "area": 1669.28,
      "local": [
       0,
       77.5
      ],
-     "y": 19.42,
+     "y": 19.43,
      "world": [
       1138,
-      69.42,
+      69.43,
       -1150.6
      ],
      "size": [
@@ -9354,10 +9354,10 @@
      }
     ]
    },
-   "colliders": 586,
-   "tris": 177698,
-   "unreachableDeckArea": 9939.2,
-   "ms": 2239
+   "colliders": 594,
+   "tris": 185602,
+   "unreachableDeckArea": 9936.5,
+   "ms": 1682
   },
   {
    "id": "oath-15",
@@ -10030,9 +10030,9 @@
     ]
    },
    "colliders": 334,
-   "tris": 33492,
+   "tris": 34308,
    "unreachableDeckArea": 14376.3,
-   "ms": 2329
+   "ms": 1549
   }
  ]
 }

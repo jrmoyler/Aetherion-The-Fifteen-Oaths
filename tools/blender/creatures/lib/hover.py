@@ -2,7 +2,7 @@
 orbiting shards + trailing tendrils)."""
 import math
 from mathutils import Vector
-from .rig import Bone
+from .rig import Bone, half_bone
 from .anim import env
 
 SIDES = (("L", 1.0), ("R", -1.0))
@@ -32,6 +32,7 @@ def wraith_skeleton(J, cloth):
         B.append(Bone(f"upperarm_{s}", mx(J["shoulder"], g), mx(J["elbow"], g), f"clav_{s}"))
         B.append(Bone(f"forearm_{s}", mx(J["elbow"], g), mx(J["wrist"], g), f"upperarm_{s}"))
         B.append(Bone(f"hand_{s}", mx(J["wrist"], g), mx(J["hand"], g), f"forearm_{s}"))
+        B.append(half_bone(B[-3], f"clav_{s}"))
     for name, theta, pts, parent in cloth:
         prev = parent
         for k in range(len(pts) - 1):
@@ -95,7 +96,10 @@ def clips_wraith(ctx, p, cloth):
         P.r("neck", x=-0.1 * a + 0.2 * k)
         P.r("jaw", x=-0.5 * k - 0.2 * a)
         for s, g in SIDES:
-            P.r(f"upperarm_{s}", x=-0.9 * a + 1.6 * k, z=-g * (0.6 * a - 0.1 * k))
+            # claw rake: clavicles carry part of the wind-up and the reach so the humerus stays
+            # inside ~95 deg and the shoulder / mantle keep their volume
+            P.r(f"clav_{s}", x=-0.2 * a + 0.3 * k, z=-g * 0.12 * a)
+            P.r(f"upperarm_{s}", x=-0.7 * a + 1.25 * k, z=-g * (0.45 * a - 0.1 * k))
             P.r(f"forearm_{s}", x=0.8 * a - 0.2 * k)
             P.r(f"hand_{s}", x=0.4 * a - 0.3 * k)
         flutter(P, t, 0.10, 0.22 * k - 0.12 * a, 2, flare=0.18 * k)

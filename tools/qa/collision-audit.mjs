@@ -32,7 +32,8 @@ try {
     if (r.clusters.solidOnly.length) console.log(`  ${r.id} solidOnly:`, r.clusters.solidOnly.slice(0, 5).map((c) => `${c.area}m² @local(${c.local}) y=${c.y} size=${c.size}`).join(' | '));
     if (r.clusters.wall.length) console.log(`  ${r.id} wall:`, r.clusters.wall.slice(0, 4).map((c) => `${c.area}m² @local(${c.local}) y=${c.y}`).join(' | '));
   }
-  writeFileSync(out, JSON.stringify({ generated: new Date().toISOString(), cell: 0.4, results }, null, 1));
+  // one line per sanctuary keeps the committed report diffable
+  writeFileSync(out, `{"generated":"${new Date().toISOString()}","cell":0.4,"units":"m2 (areas), local = sanctuary frame","results":[\n${results.map((r) => JSON.stringify(r)).join(',\n')}\n]}\n`);
   console.log('wrote', path.relative(process.cwd(), out));
   process.exitCode = results.some((r) => r.uncovered > maxUncovered) ? 1 : 0;
 } finally {

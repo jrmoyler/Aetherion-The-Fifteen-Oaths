@@ -151,5 +151,5 @@ def build(oath=None):
     S.bones = quad.skeleton(J)
     S.legs = quad.legs()
     S.clip_fn = lambda ctx: quad.clips(ctx, dict(stride_w=0.55, stride_r=1.2, lift=0.18, attack="bite",
-                                                 roar=False, body_half_width=0.15))
+                                                 roar=True, body_half_width=0.15))
     return S

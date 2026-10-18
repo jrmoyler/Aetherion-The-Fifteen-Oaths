@@ -1,7 +1,7 @@
 """Eight-legged skeleton + alternating-tetrapod gait (spider)."""
 import math
 from mathutils import Vector, Matrix
-from .rig import Bone
+from .rig import Bone, half_bone
 from .anim import Leg, env, smooth, step_cycle
 
 SIDES = (("L", 1.0), ("R", -1.0))
@@ -21,6 +21,8 @@ def spider_skeleton(body, legs, extra=None):
             B.append(Bone(f"femur{i}_{s}", Vector(cox) * X, Vector(knee) * X, "hips"))
             B.append(Bone(f"tibia{i}_{s}", Vector(knee) * X, Vector(ank) * X, f"femur{i}_{s}"))
             B.append(Bone(f"tarsus{i}_{s}", Vector(ank) * X, Vector(tip) * X, f"tibia{i}_{s}"))
+            B.append(half_bone(B[-3], "hips"))                    # coxa joint helper
+            B.append(half_bone(B[-3], f"femur{i}_{s}"))           # knee joint helper
     if extra:
         B += extra
     return B

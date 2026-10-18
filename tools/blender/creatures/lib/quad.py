@@ -51,7 +51,7 @@ def skeleton(J, tail_n=4, jaw=True, ears=True, extra=None):
         B.append(half_bone(by[f"fore_{s}"], f"upper_{s}"))
     B.append(half_bone(by["neck1"], "chest"))
     B.append(Bone("sternum", (0, sh.y, 0), (0, s2.y, 0), "chest", ventral=0.32))
-    B.append(Bone("belly", (0, s2.y, 0), (0, s1.y + 0.35 * (pel.y - s1.y), 0), "spine2", ventral=0.32))
+    B.append(Bone("belly", (0, s2.y, 0), (0, s1.y + 0.05 * (pel.y - s1.y), 0), "spine2", ventral=0.32))
     if extra:
         B += extra
     return B
@@ -154,11 +154,11 @@ def clips(ctx, p):
         l = env(t, [(0, 0), (0.26, 0), (0.38, 1), (0.58, 1), (0.9, 0)])            # lunge
         sh = math.sin(2 * math.pi * (t - 0.40) * 7) * env(t, [(0.40, 0), (0.44, 1), (0.58, 1), (0.68, 0)])
         reach = p.get("lunge", 0.11) * (1 - 0.35 * heavy)
-        P.move("hips", y=(-0.045 * c + reach * l) * H, z=(-0.055 * c - 0.022 * l) * H)
+        P.move("hips", y=(-0.03 * c + reach * l) * H, z=(-0.04 * c - 0.022 * l) * H)
         P.r("hips", x=-0.05 * c + 0.02 * l)
         P.chain(SPINE, x=-0.03 * c + 0.03 * l, falloff=0.8)
         if style == "bite":
-            P.r("neck1", x=-0.20 * c - 0.42 * l, z=0.10 * sh)
+            P.r("neck1", x=-0.20 * c - 0.36 * l, z=0.10 * sh)
             P.r("neck2", x=0.30 * c + 0.05 * l, z=0.10 * sh)
             P.r("head", x=0.05 * c + 0.20 * l, y=0.25 * sh)
             if has_jaw:
@@ -175,13 +175,17 @@ def clips(ctx, p):
         if has_ears:
             P.r("ear_L", x=-0.7 * max(c, l)); P.r("ear_R", x=-0.7 * max(c, l))
         P.chain(tail, x=-(0.35 * l - 0.1 * c), z=0.05 * sh, falloff=1.1)
+        # hind feet push off then follow ~60% of the lunge (a stiff planted hind end over-extends
+        # the hips and stretches the flank fold)
+        hs = env(t, [(0, 0), (0.34, 0), (0.48, 1), (0.66, 1), (0.95, 0)])
+        hup = math.sin(math.pi * min(max((t - 0.34) / 0.14, 0), 1)) + 0.5 * math.sin(math.pi * min(max((t - 0.66) / 0.29, 0), 1))
         for leg in ("HL", "HR"):
-            P.foot(leg)
+            P.foot(leg, (0, 0.6 * reach * H * hs, 0.05 * leglen * hup), 0.0)
         # forefeet pounce forward with the body (lifted on the way out and back)
         fs = env(t, [(0, 0), (0.27, 0), (0.39, 1), (0.62, 1), (0.9, 0)])
         up = math.sin(math.pi * min(max((t - 0.27) / 0.12, 0), 1)) + 0.5 * math.sin(math.pi * min(max((t - 0.62) / 0.28, 0), 1))
         for leg, ph in (("FL", 0.0), ("FR", 0.02)):
-            P.foot(leg, (0, reach * H * fs, 0.10 * leglen * up), -0.25 * up)
+            P.foot(leg, (0, reach * H * fs, 0.07 * leglen * up), -0.15 * up)
         if xf: xf("attack", t, P)
 
     def hit(t, P):
@@ -233,9 +237,10 @@ def clips(ctx, p):
         P.move("hips", y=-0.05 * H * k, z=-0.02 * H * a)
         P.r("hips", x=0.05 * k)
         P.chain(SPINE, x=0.08 * k - 0.06 * a)
-        P.r("neck1", x=0.35 * k - 0.3 * a)
-        P.r("neck2", x=0.1 * k)
-        P.r("head", x=0.25 * k + 0.03 * sh, z=0.04 * sh)
+        # head thrown up: spread over neck1/neck2/head so the throat does not crush at the chest
+        P.r("neck1", x=0.22 * k - 0.25 * a)
+        P.r("neck2", x=0.18 * k)
+        P.r("head", x=0.28 * k + 0.03 * sh, z=0.04 * sh)
         if has_jaw:
             P.r("jaw", x=-0.85 * k)
         P.chain(tail, x=-(0.3 * k), z=0.05 * sh, falloff=1.1)
