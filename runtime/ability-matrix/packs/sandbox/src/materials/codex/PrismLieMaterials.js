@@ -172,7 +172,7 @@ export function createPrismCrystalMaterial() {
     const c = settings[ID];
     const g = settings.global;
     const u = material.uniforms;
-    u.uColor.value.copy(getColor(s.color));
+    u.uColor.value.copy(getColor(c[s.color] ?? s.color));
     u.uCore.value.copy(getColor(c.colorCore));
     u.uBody.value = c.bodyGlow * g.glow;
     u.uEdge.value = c.edgeGlow * g.glow;

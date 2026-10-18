@@ -5,10 +5,19 @@
 import { Group, Vector3, Vector2, PerspectiveCamera, DataTexture, RGBAFormat, UnsignedByteType } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { LightPool } from '../../../runtime/ability-matrix/packs/linear/src/effects/LightPool.js';
-import { patchOnBeforeCompile } from '../../../runtime/ability-matrix/packs/linear/src/utils/shaderPatch.js';
+import { patchOnBeforeCompile } from '../../../runtime/ability-matrix/packs/sandbox/src/utils/shaderPatch.js';
 import { buildDroneRig } from '../../../runtime/ability-matrix/packs/handcast/src/assets/DroneRig.js';
 import { buildMonowheelRig } from '../../../runtime/ability-matrix/packs/handcast/src/assets/MonowheelRig.js';
 import { buildPhoenixRig } from '../../../runtime/ability-matrix/packs/handcast/src/assets/PhoenixRig.js';
+import { buildSharkRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/SharkRig.js';
+import { buildWolfRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/WolfRig.js';
+import { buildDragonRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/DragonRig.js';
+import { buildGyroscopeRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/GyroscopeRig.js';
+import { buildAmethystRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/AmethystRig.js';
+import { buildTomeRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/TomeRig.js';
+import { buildReliquaryRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/ReliquaryRig.js';
+import { buildSerpentGeometry } from '../../../runtime/ability-matrix/packs/linear-extended/src/assets/SerpentGeometry.js';
+import { createSourceTargetReactions } from './source-targets.js';
 import { ABILITIES_BY_OATH } from '../../../shared/abilities.generated.js';
 
 const LOADERS = {
@@ -32,8 +41,9 @@ export async function createSourceAbilities(ctx) {
   const camera = ctx.camera ?? new PerspectiveCamera(55, 1, .1, 1000);
   camera.layers.enable(1); camera.layers.enable(4); // Original WORLD and VFX; distortion remains a separate render layer.
   const lights = new LightPool(root);
-  const sessions = new Map(), handles = new Set(), models = {};
+  const sessions = new Map(), handles = new Set(), models = {...ctx.sourceModels};
   const ownership = new WeakMap();
+  const targetReactions = createSourceTargetReactions(ctx);
   const farDepth = new DataTexture(new Uint8Array([255,255,255,255]), 1, 1, RGBAFormat, UnsignedByteType);
   farDepth.needsUpdate = true;
   const resolution = new Vector2(1,1);
@@ -47,12 +57,24 @@ export async function createSourceAbilities(ctx) {
     models.drone = buildDroneRig(drone.scene, { span: modules.handcast.settings.drone.size });
     models.monowheel = buildMonowheelRig(monowheel.scene, { height: modules.handcast.settings.monowheel.size });
     models.phoenix = buildPhoenixRig(phoenix, { wingspan: modules.handcast.settings.phoenix.wingspan });
+    const castingBase = `${import.meta.env?.BASE_URL ?? '/'}assets/ability-source/casting/models/`;
+    const [shark,wolf,dragon,gyro,amethyst,tome,reliquary,serpent] = await Promise.all([
+      ...['shark','wolf','dragon','magical_gyroscope','amethyst_stones','arcane_tome','wildroot_reliquary'].map(name=>loader.loadAsync(castingBase+name+'.glb')),
+      loader.loadAsync(`${import.meta.env?.BASE_URL ?? '/'}assets/ability-source/linear-extended/models/snake.glb`),
+    ]);
+    const settings=modules.casting.settings;
+    Object.assign(models,{
+      shark:buildSharkRig(shark,{length:settings.shark.length}), wolf:buildWolfRig(wolf,{length:settings.wolf.length}),
+      dragon:buildDragonRig(dragon,{wingspan:settings.dragon.wingspan}), gyro:buildGyroscopeRig(gyro,{height:settings.gyro.size}),
+      amethyst:buildAmethystRig(amethyst),tome:buildTomeRig(tome),reliquary:buildReliquaryRig(reliquary),
+      serpent:buildSerpentGeometry(serpent.scene,{ghosts:8}),
+    });
   }
 
   const environment = {
     scene: ctx.scene,
     registerShadowCaster: material => material,
-    registerShadowCasterWithPatch: (material, patch) => patchOnBeforeCompile(material, patch),
+    registerShadowCasterWithPatch: (material, patch, key) => patchOnBeforeCompile(material, patch, key),
   };
   const shake = { add(amount) { ctx.bus?.emit?.('camera:shake', { intensity: Math.min(.6, amount) }); }, rumble() {} };
   const flash = { trigger(color, intensity) { ctx.bus?.emit?.('combat:flash', { color, intensity }); } };
@@ -60,9 +82,14 @@ export async function createSourceAbilities(ctx) {
   function sessionFor(pack, ground) {
     // Source floor-space effects assume y=0. Each elevation gets a translated
     // scene, so a cast on a bridge never drags ground effects uphill with it.
-    const floor = Math.round(ground * 2) / 2;
+    const floor = Math.round(ground * 100) / 100;
     const key = `${pack}:${floor}`;
     if (sessions.has(key)) return sessions.get(key);
+    if(sessions.size>=12) {
+      const oldest=[...sessions.values()].sort((a,b)=>a.touched-b.touched)[0];
+      for(const handle of [...handles])if(handle.sessionKey===oldest.key)handle.stop();
+      clearSession(oldest);
+    }
     const m = modules[pack], group = new Group(); group.name = `SourcePack:${key}`; group.position.y = floor; root.add(group);
     const particles = new m.ParticleEngine(group), decals = new m.DecalSystem(group), bursts = new m.BurstSystem(group);
     const fissures = m.FissureSystem ? new m.FissureSystem(group) : null;
@@ -70,12 +97,13 @@ export async function createSourceAbilities(ctx) {
       acquire: () => lights.acquire(), release: e => lights.release(e),
       set(e,p,c,i,r,dt) { lights.set(e,position(p).add(new Vector3(0,floor,0)),c,i,r,dt); },
     };
+    const targetProxy=actor=>targetReactions.proxy(actor,floor);
     const targets = {
       findTargets(x,z,range,out=[]) {
         out.length=0;
         const actors = ctx.actors?.entities ?? ctx.actors?.mobs ?? ctx.actors?.all ?? [];
         for(const actor of actors instanceof Map ? actors.values() : Array.isArray(actors) ? actors : []) {
-          if(actor.position && actor.alive !== false && Math.hypot(actor.position.x-x,actor.position.z-z)<=range) out.push(actor);
+          if(actor.kind==='mob' && actor.position && actor.alive !== false && Math.hypot(actor.position.x-x,actor.position.z-z)<=range) out.push(targetProxy(actor));
         }
         return out.sort((a,b)=>Math.hypot(a.position.x-x,a.position.z-z)-Math.hypot(b.position.x-x,b.position.z-z));
       },
@@ -121,12 +149,14 @@ export async function createSourceAbilities(ctx) {
         instance=new Type({...s.context,character:characterProxy(opts.caster,s.floor)});
         s.buffs.add(instance); instance.activate();
       } else {
+        s.context.character=characterProxy(opts.caster,s.floor);
         instance=s.manager.cast(origin.clone().setY(origin.y-s.floor),direction,Math.max(.1,distance||ab.range||4),id);
         if(!instance) throw new Error(`Original source class missing for ${ab.id}`);
+        instance.ctx={...s.context};
       }
       ownership.set(instance,token);
     };
-    const handle={ sourceId:ab.id, sourcePack:pack,
+    const handle={ sourceId:ab.id, sourcePack:pack, sessionKey:s.key,
       get instance(){return instance;}, get done(){return stopped || !!instance && (ownership.get(instance)!==token || (isBuff ? !instance.active : !instance.isActive));},
       stop(){if(stopped)return;stopped=true;handles.delete(handle);if(!instance || ownership.get(instance)!==token)return;if(isBuff){instance.cancel();instance.dispose();s.buffs.delete(instance);}else{const index=s.manager.active.indexOf(instance);if(index>=0){s.manager.active.splice(index,1);instance.destroy();s.manager.pools.get(id)?.release(instance);}}},
       advance(dt){if(stopped)return;if(!instance){delay-=dt;if(delay<=0)spawn();}if(isBuff&&instance)instance.update(dt);if(handle.done)handle.stop();},
@@ -150,9 +180,10 @@ export async function createSourceAbilities(ctx) {
       // Keep source particle tails alive; retire idle floor caches instead of leaking GPU pools.
       if(elapsed-s.touched>18)clearSession(s);
     }
+    targetReactions.update(dt);
     lights.update(dt);
   }
-  function stopAll(){for(const h of [...handles])h.stop();for(const s of [...sessions.values()])clearSession(s);lights.reset();}
+  function stopAll(){for(const h of [...handles])h.stop();for(const s of [...sessions.values()])clearSession(s);targetReactions.reset();lights.reset();}
   return { cast, update, stopAll, dispose(){stopAll();lights.dispose();farDepth.dispose();root.removeFromParent();},
     get activeCount(){return [...handles].filter(h=>!h.done).length;},
     get stats(){return { supportedIds:SOURCE_ABILITY_IDS, loadedPacks:Object.keys(modules), active:handles.size, sessions:sessions.size, models:Object.keys(models) };},

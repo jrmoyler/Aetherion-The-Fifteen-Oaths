@@ -7,14 +7,14 @@ export default defineConfig({
   cacheDir: process.env.VITE_CACHE_DIR || 'node_modules/.vite',
   resolve: { dedupe: ['three'], alias: { '@shared': fileURLToPath(new URL('../shared', import.meta.url)) } },
   server: { fs: { allow: ['..'] }, proxy: { '/ws': { target: 'ws://localhost:8787', ws: true } } },
-  build: { target: 'es2022', outDir: 'dist', chunkSizeWarningLimit: 6000, assetsInlineLimit: 0 },
+  build: { rollupOptions: { input: { game: fileURLToPath(new URL('./index.html', import.meta.url)), review: fileURLToPath(new URL('./review.html', import.meta.url)) } }, target: 'es2022', outDir: 'dist', chunkSizeWarningLimit: 6000, assetsInlineLimit: 0 },
   plugins: [
     VitePWA({
       registerType: 'prompt',
       injectRegister: false,
       manifest: false, // public/manifest.webmanifest is authored by hand (ui owner)
       workbox: {
-        globPatterns: ['**/*.{js,css,html,webmanifest,woff2}', 'icons/*.png', 'ui/*.webp', 'assets/**/manifest.json'],
+        globPatterns: ['**/*.{js,css,html,webmanifest,woff2}', 'icons/*.png', 'ui/*.webp', 'assets/**/manifest.json', 'assets/*.hdr', 'textures/**/*.{png,jpg,jpeg,webp}'],
         cleanupOutdatedCaches: true,
         skipWaiting: false,
         clientsClaim: true,
