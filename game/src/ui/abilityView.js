@@ -3,7 +3,7 @@ import { hotbarFor } from '@shared/abilities.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { rgbTriplet } from './dom.js';
 
-import { artHTML } from './art.js';
+import { abilityIcon } from './painted-icons.js';
 export const SLOT_KEYS = ['1', '2', '3', '4', '5', 'R'];
 
 const ELEMENT_VERB = {
@@ -41,7 +41,7 @@ export function hotbarView(oathId, cls, live = null) {
     const accent = a.accent || oath.accent;
     return {
       ...a, index: i, key: SLOT_KEYS[i], accent, accentRgb: rgbTriplet(accent),
-      glyphSvg: artHTML(oathId, i === 0 ? 'weapon' : ['cast','weapon','item','armor','cast','cast'][i]),
+      glyphSvg: abilityIcon(a, cls),
       desc: describe(a, cls), ult: i === 5,
     };
   });

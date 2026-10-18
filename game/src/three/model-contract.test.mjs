@@ -27,3 +27,21 @@ test('sanitized GLTF bone and socket names preserve the public attachment API', 
   assert.equal(body.sockets['socket.head'].name, 'sockethead');
   body.dispose();
 });
+test('animation LOD skips pose evaluation without dropping elapsed time', () => {
+  const scene = new Group(), bone = new Bone(); bone.name = 'hips'; scene.add(bone);
+  const gltf = { scene, animations: [new AnimationClip('idle', 2, [new NumberKeyframeTrack('hips.position[y]', [0, 2], [0, 2])])] };
+  const body = createModelBody(gltf, new Group()), reference = createModelBody(gltf, new Group());
+  body.animator.interval = 1 / 8;
+  for (let i = 0; i < 7; i++) assert.equal(body.animator.update(1 / 60), false);
+  assert.equal(body.sockets.hips.position.y, 0);
+  assert.equal(body.animator.update(1 / 60), true);
+  reference.animator.update(8 / 60);
+  assert.ok(Math.abs(body.sockets.hips.position.y - reference.sockets.hips.position.y) < 1e-6);
+  body.animator.update(1 / 60);
+  body.animator.interval = 0;
+  assert.equal(body.animator.update(1 / 60), true);
+  reference.animator.update(2 / 60);
+  assert.ok(Math.abs(body.sockets.hips.position.y - reference.sockets.hips.position.y) < 1e-6);
+  assert.equal(body.animator.update(NaN), false);
+  body.dispose(); reference.dispose();
+});

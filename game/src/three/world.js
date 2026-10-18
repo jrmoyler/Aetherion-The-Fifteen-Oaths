@@ -79,7 +79,7 @@ export async function initWorld(ctx){
   const birds=new THREE.Group(),birdMat=new THREE.MeshStandardMaterial({color:'#37413f',side:THREE.DoubleSide,roughness:1});
   for(let i=0;i<14;i++){const bird=new THREE.Group();for(const side of [-1,1]){const wing=new THREE.Mesh(new THREE.PlaneGeometry(1.6,.28),birdMat);wing.position.x=side*.65;wing.rotation.x=-Math.PI/2;bird.add(wing);}birds.add(bird);}scene.add(birds);
   let t=0;
-  function update(dt){t+=Math.min(dt,.1);wind.time.value=t;water.time.value=t;
+  function update(dt){architecture.update(dt);t+=Math.min(dt,.1);wind.time.value=t;water.time.value=t;
     // Terrain build is bounded to one tile per frame, with nearest tiles first.
     if(jobs.length){const job=jobs.shift();build(job[0],job[1]);}
     const target=ctx.actors?.player?.position||ctx.actors?.player?.root?.position||ctx.player?.position||ctx.player?.root?.position||ctx.camera?.position;if(target)focus(target.x,target.z);
