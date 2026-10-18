@@ -116,7 +116,7 @@ def clips(ctx, p):
             P.move("hips", z=0.025 * H * math.sin(w * 1 + 2.0) * (1 - 0.5 * heavy) - 0.01 * H,
                    y=0.03 * H * math.sin(w))
             P.r("hips", x=0.10 * flex)
-            P.chain(SPINE, x=-0.11 * flex * (1 - 0.6 * heavy), falloff=0.8)
+            P.chain(SPINE, x=-0.08 * flex * (1 - 0.6 * heavy), falloff=0.8)
             P.r("neck1", x=0.12 * math.sin(w + 2.4) - 0.12)
             P.r("head", x=-0.10 * math.sin(w + 2.4) + 0.06)
             P.chain(tail, x=-(0.12 * math.sin(w + 1.0) - 0.1), z=0.03 * math.sin(w), falloff=1.15)

@@ -43,8 +43,8 @@ class Spec:
         self.extra = {}
         self.weighting = "geodesic"   # organic skin: "geodesic" (volumetric, default) | "heat"
         # soft joint limits (deg from rest) on the baked clips, per bone-name prefix
-        self.joint_limits = {"thigh_": 48, "upper_": 50, "shin_": 55, "fore_": 60, "meta_": 55, "carp_": 60,
-                             "femur": 40, "tibia": 60, "arm_": 70}
+        self.joint_limits = {"thigh_": 36, "upper_": 34, "shin_": 50, "fore_": 50, "meta_": 50, "carp_": 55,
+                             "femur": 34, "tibia": 55, "arm_": 70}
         self.corrective = True        # gate-driven corrective weight smoothing after the clips bake
         self.weight_rules = None      # f(bone_names, V_design, W, ei, ej) -> W  anatomical fixes
 

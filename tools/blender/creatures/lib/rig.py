@@ -226,6 +226,13 @@ def geodesic_weights(mesh_ob, arm_ob, clay, s, height, rules=None, verbose=True,
         h = np.array(bn.head_local) / s; ab = np.array(bn.tail_local) / s - h
         tt = (V - h) @ ab / max(ab @ ab, 1e-12)
         D[:, j] += np.maximum(0.0, -tt - 0.05) * np.sqrt(ab @ ab) * 4.0
+        if nm.startswith(("ear_", "fang", "palp", "tongue")):
+            # appendages own only their own capsule (a boar's ears pointed back over the hump and
+            # dragged the withers along with every head turn)
+            L = np.sqrt(ab @ ab)
+            q = h + np.clip(tt, 0, 1)[:, None] * ab
+            dperp = np.linalg.norm(V - q, axis=1)
+            D[:, j] += np.maximum(0.0, dperp - 0.6 * L) * 6.0 + np.maximum(0.0, tt - 1.15) * L * 6.0
     dmin = D.min(1, keepdims=True)
     import os
     kb = float(os.environ.get("FORGE_WBAND", "0.55"))

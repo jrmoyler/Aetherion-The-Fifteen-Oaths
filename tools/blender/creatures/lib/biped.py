@@ -321,7 +321,7 @@ def clips_raptor(ctx, p):
             P.foot(s, (0, 0, 0), 0, 1 - env(t, [(0.08, 0), (0.30, 1)]))
             P.r(f"thigh_{s}", x=0.22 * k2)
             P.r(f"shin_{s}", x=-0.28 * k2)
-        arms(P, -0.3 * k2, 0)
+        arms(P, -0.1 * k2, 0)
         if xf: xf("death", t, P)
 
     def roar(t, P):

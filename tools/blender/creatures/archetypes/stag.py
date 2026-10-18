@@ -99,6 +99,7 @@ def build(oath=None):
                                 jitter=0.25, seed=j), "head", "secondary", moss)
     S.bones = quad.skeleton(J)
     S.legs = quad.legs()
+    S.joint_limits = dict(S.joint_limits, thigh_=30)   # long-legged: keep the flank fold open
     S.clip_fn = lambda ctx: quad.clips(ctx, dict(stride_w=0.5, stride_r=1.15, lift=0.2, attack="gore", roar=True,
                                                  body_half_width=0.2, walk_frames=34, run_frames=18))
     return S

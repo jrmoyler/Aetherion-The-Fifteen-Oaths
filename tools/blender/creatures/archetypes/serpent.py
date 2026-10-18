@@ -213,8 +213,11 @@ def build(oath=None):
         def death(t, P):
             k1 = env(t, [(0, 0), (0.4, 1)])
             k2 = env(t, [(0.3, 0), (0.75, 1)])
+            # the reared neck topples from its base and lands stretched out (was a 157 deg curl
+            # spread over five bones that folded the neck onto itself)
+            fall = [0.62, 0.40, 0.24, 0.12, 0.05]
             for j, b in enumerate(neck_bones):
-                P.r(b, x=-0.55 * k1 + 0.08 * k2 * j, z=0.15 * k2)
+                P.r(b, x=-fall[min(j, len(fall) - 1)] * k1, z=0.10 * k2)
             P.r("head", y=0.9 * k2, x=-0.2 * k2)
             P.r("jaw", x=-0.4 * k2)
             P.r("hips", y=0.5 * k2)

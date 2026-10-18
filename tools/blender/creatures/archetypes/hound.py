@@ -51,7 +51,7 @@ def clay():
     c.ell((0.095, 0.27, 0.74), (0.048, 0.10, 0.14), R=rot_to((0, 0.4, -1)), k=0.05, mirror=True)   # scapula
     c.cone(J["shoulder"], J["elbow"], 0.06, 0.042, k=0.05, mirror=True)
     c.ell((0.10, 0.31, 0.56), (0.05, 0.06, 0.08), k=0.05, mirror=True)                            # deltoid/triceps
-    c.cone((0.105, 0.19, 0.42), (0.105, 0.20, 0.38), 0.03, 0.025, k=0.025, mirror=True)            # olecranon
+    c.cone((0.105, 0.195, 0.395), (0.105, 0.205, 0.36), 0.026, 0.022, k=0.04, mirror=True)          # olecranon (clear of the brisket crease)
     c.cone(J["elbow"], J["wrist"], 0.04, 0.022, k=0.03, mirror=True)
     c.ell((0.105, 0.235, 0.32), (0.034, 0.042, 0.075), k=0.03, mirror=True)                       # forearm muscle
     c.cone(J["wrist"], J["fball"], 0.022, 0.02, k=0.02, mirror=True)
@@ -150,6 +150,7 @@ def build(oath=None):
                    f"fore_{s}", "accent", iron)
     S.bones = quad.skeleton(J)
     S.legs = quad.legs()
+    S.joint_limits = dict(S.joint_limits, thigh_=30, upper_=30)   # keep flank / armpit / coxa folds open
     S.clip_fn = lambda ctx: quad.clips(ctx, dict(stride_w=0.55, stride_r=1.2, lift=0.18, attack="bite",
                                                  roar=True, body_half_width=0.15))
     return S

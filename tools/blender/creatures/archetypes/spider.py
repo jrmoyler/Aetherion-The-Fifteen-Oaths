@@ -104,5 +104,6 @@ def build(oath=None):
         S.tint.update(body="#e9e1d2", accent="#1d3352", glow="#58d4ff")
     S.bones = multi.spider_skeleton(BODY, LEGS)
     S.legs = multi.spider_legs(LEGS)
+    S.joint_limits = dict(S.joint_limits, femur=28)   # keep flank / armpit / coxa folds open
     S.clip_fn = lambda ctx: multi.clips_spider(ctx, dict(stride=0.30, lift=0.14), LEGS)
     return S

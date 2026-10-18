@@ -29,6 +29,8 @@ MIN_AREA_FRAC = 0.05     # ignore specks smaller than this fraction of the media
 MIN_QUALITY = 0.15       # ignore needle slivers: 4*sqrt(3)*A / sum(e^2) (1 = equilateral); their
                          # sign flips from sub-millimetre jitter and is invisible
 MIN_REGION_TRIS = 24
+RELAX_MAX_STUBBORN = 0.015  # ... up to 1.5% for the last few stubborn sliver triangles of a creature
+RELAX_MAX = 0.008        # corrective pass may slide crease vertices tangentially <= 0.8% of height
 FRONT_PREFIX = ("chest", "spine2", "scap_", "clav_", "neck", "upper_", "upperarm_", "arm_", "sternum",
                 "half_upper", "half_arm")
 
@@ -270,22 +272,25 @@ def corrective_pass(arm, mesh_ob, actions, iters=30, rings=3, smooth_iters=4, lo
     ad.action = None
     Ph = np.c_[g.rest, np.ones(len(g.rest))]
 
-    def sweep(W):
+    def sweep(W, per_tri=False):
         bad = np.zeros(len(W), bool)
         total = 0
-        Wt = W[g.T]                                         # (t, 3, nb)
+        cnt = np.zeros(len(g.T), np.int64)
+        Phc = np.c_[rest, np.ones(len(rest))]
+        n0c, _a = tri_normals(rest, g.T)
         for S in mats:
             M = np.einsum("vb,bij->vij", W, S)
-            P = np.einsum("vij,vj->vi", M, Ph)[:, :3]
+            P = np.einsum("vij,vj->vi", M, Phc)[:, :3]
             n1, _ = tri_normals(P, g.T)
             Rt = M[g.T, :3, :3].mean(1)
-            c = np.einsum("tij,tj->ti", Rt, g.n0)
+            c = np.einsum("tij,tj->ti", Rt, n0c)
             fl = np.einsum("ij,ij->i", n1, c) < FLIP_DOT
             k = int(fl.sum())
             if k:
                 total += k
                 bad[g.T[fl].ravel()] = True
-        return total, bad
+                cnt += fl
+        return (total, bad, cnt) if per_tri else (total, bad)
 
     def grow(m, r):
         for _ in range(r):
@@ -296,50 +301,205 @@ def corrective_pass(arm, mesh_ob, actions, iters=30, rings=3, smooth_iters=4, lo
         return m & g.omask
 
     depth = np.array([len(arm.data.bones[n].parent_recursive) for n in g.bones], float)
-    W = _top4(g.W)
+    rest = g.rest.copy()
+    # welded neighbour lists for geometric relaxation (seam duplicates move together)
+    wkey = np.round(g.rest / 1e-5).astype(np.int64)
+    _u, winv = np.unique(wkey, axis=0, return_inverse=True); winv = winv.ravel()
+    wei, wej = winv[ei], winv[ej]
+    height = float(g.rest[:, 2].max() - g.rest[:, 2].min())
+    vn_t, va_t = tri_normals(g.rest, g.T)
+    vnrm = np.zeros((winv.max() + 1, 3))
+    for k in range(3):
+        np.add.at(vnrm, winv[g.T[:, k]], vn_t * va_t[:, None])
+    vnrm = vnrm[winv]
+    vnrm /= np.maximum(np.linalg.norm(vnrm, axis=1), 1e-12)[:, None]
+
+    def relax(Pr, verts, its=3, lam=0.5, cap=None):
+        """tangential Laplacian relaxation of the *rest* shape at a pinched crease (mm-scale;
+        evens out the sliver triangles that fold first)."""
+        Pw = np.zeros((winv.max() + 1, 3)); np.add.at(Pw, winv, Pr); cntw = np.bincount(winv)[:, None]
+        Pw /= cntw
+        mv = np.zeros(len(Pw), bool); mv[winv[verts]] = True
+        for _ in range(its):
+            acc = np.zeros_like(Pw); deg = np.zeros(len(Pw))
+            np.add.at(acc, wei, Pw[wej]); np.add.at(acc, wej, Pw[wei])
+            np.add.at(deg, wei, 1); np.add.at(deg, wej, 1)
+            avg = acc / np.maximum(deg, 1)[:, None]
+            Pw[mv] = (1 - lam) * Pw[mv] + lam * avg[mv]
+        out = Pr.copy(); sel = mv[winv]; out[sel] = Pw[winv[sel]]
+        # tangential only (no shrinking), and never more than RELAX_MAX of the height from the
+        # sculpted rest shape
+        d = out - g.rest
+        d -= np.einsum("ij,ij->i", d, vnrm)[:, None] * vnrm
+        L = np.linalg.norm(d, axis=1)
+        lim = (cap or RELAX_MAX) * height
+        d *= np.minimum(1.0, lim / np.maximum(L, 1e-12))[:, None]
+        return g.rest + d
+    LIMB = ("upper_", "fore_", "carp_", "ftoe_", "thigh_", "shin_", "meta_", "htoe_", "toe_", "foot_", "upperarm_",
+            "forearm_", "hand_", "arm_", "femur", "tibia", "tarsus", "half_", "jaw", "ear_", "fang", "palp", "tongue")
+    limb = np.array([n.startswith(LIMB) and not n.startswith("half_neck") for n in g.bones])
+    # appendage capsules: ears / fangs / palps / tongue may only ever weight their own capsule
+    # (smoothing must not leak them over the neck -- a boar's ear rides the 49 deg head turn)
+    A_ = arm.matrix_world; Mi_ = mesh_ob.matrix_world.inverted()
+    amask = np.ones((len(W0 := g.W), len(g.bones)), bool)
+    for j, n in enumerate(g.bones):
+        if not n.startswith(("ear_", "fang", "palp", "tongue")):
+            continue
+        bn = arm.data.bones[n]
+        h = np.array(Mi_ @ A_ @ bn.head_local); ab = np.array(Mi_ @ A_ @ bn.tail_local) - h
+        L = np.sqrt(ab @ ab)
+        tt = (g.rest - h) @ ab / max(L * L, 1e-12)
+        dp = np.linalg.norm(g.rest - (h + np.clip(tt, 0, 1)[:, None] * ab), axis=1)
+        amask[:, j] = (dp < 0.9 * L) & (tt > -0.15) & (tt < 1.25)
+
+    def am(Wc):
+        return _top4(np.where(amask, Wc, 0.0))
+
+    W = _top4(np.where(amask, g.W, 0.0))
+    touched = (np.abs(W - _top4(g.W)).sum(1) > 1e-6) & g.omask
+    rest_ok = rest.copy()
     total, bad = sweep(W)
     hist = [total]
     log(f"  corrective pass 0: {total} inverted tri-frames, {int(bad.sum())} verts")
-    touched = np.zeros(len(W), bool)
+    moved = np.zeros(len(W), bool)
     stall = 0
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components
+
+    def local_flips(Wc, tri_idx, vidx, Pr=None):
+        """flip count over all frames for triangles tri_idx (vertex subset vidx only)."""
+        Pr = rest if Pr is None else Pr
+        Tl = g.T[tri_idx]
+        remap = -np.ones(len(Wc), np.int64); remap[vidx] = np.arange(len(vidx))
+        Tl = remap[Tl]
+        Pl = np.c_[Pr[vidx], np.ones(len(vidx))]
+        n0, _a = tri_normals(Pr[vidx], Tl)
+        Wl = Wc[vidx]
+        c = 0
+        for S in mats:
+            M = np.einsum("vb,bij->vij", Wl, S)
+            P = np.einsum("vij,vj->vi", M, Pl)[:, :3]
+            n1, _ = tri_normals(P, Tl)
+            Rt = M[Tl, :3, :3].mean(1)
+            cc = np.einsum("tij,tj->ti", Rt, n0)
+            c += int((np.einsum("ij,ij->i", n1, cc) < FLIP_DOT).sum())
+        return c
+
+    def candidates(W, zone, core):
+        out = [("smooth", _top4(smooth_weights(W, ei, ej, iters=smooth_iters, lam=0.6, lock=~zone)))]
+        for its in (10, 25, 60):
+            out.append((f"smooth{its}", _top4(smooth_weights(W, ei, ej, iters=its, lam=0.9, lock=~zone))))
+        Wp = W.copy(); Wp[core] = Wp[core] ** 2
+        Wp[core] /= np.maximum(Wp[core].sum(1, keepdims=True), 1e-9)
+        out.append(("sharpen", _top4(Wp)))
+        Wq = W.copy(); sub = Wq[core]
+        pj = np.where(sub > 0.08, depth[None, :], 999).argmin(1)
+        oh = np.zeros_like(sub); oh[np.arange(len(sub)), pj] = 1.0
+        for f in (0.5, 1.0):
+            Wq2 = W.copy(); Wq2[core] = (1 - f) * sub + f * oh
+            out.append((f"proximal{f}", _top4(Wq2)))
+            out.append((f"proximal{f}+smooth", _top4(smooth_weights(Wq2, ei, ej, iters=smooth_iters, lam=0.6, lock=~zone))))
+        Wr = W.copy(); Wr[core] = 0.0; Wr[core, W[core].argmax(1)] = 1.0
+        out.append(("rigid+smooth", _top4(smooth_weights(Wr, ei, ej, iters=2, lam=0.5, lock=~zone))))
+        # "trunk": skin crushed by a limb against the body rides the body only (the limb may then
+        # graze it, but the body surface never folds)
+        for rz in (core, zone):
+            Wt = W.copy(); sub = Wt[rz] * (~limb)[None, :]
+            ok = sub.sum(1) > 0.05
+            sub[ok] /= sub[ok].sum(1, keepdims=True)
+            sub[~ok] = Wt[rz][~ok]
+            Wt[rz] = sub
+            out.append(("trunk", _top4(Wt)))
+            out.append(("trunk+smooth", _top4(smooth_weights(Wt, ei, ej, iters=3, lam=0.5, lock=~zone))))
+        return [(nm, am(Wc)) for nm, Wc in out]
+
     for it in range(1, iters + 1):
         if total == 0:
             break
-        zone = grow(bad, rings)
-        cands = []
-        Ws = _top4(smooth_weights(W, ei, ej, iters=smooth_iters, lam=0.6, lock=~zone))
-        cands.append(("smooth", Ws, zone))
-        core = grow(bad, 1)
-        Wp = W.copy()
-        Wp[core] = Wp[core] ** 2
-        Wp[core] /= np.maximum(Wp[core].sum(1, keepdims=True), 1e-9)
-        cands.append(("sharpen", _top4(Wp), core))
-        # "proximal": crease skin rides the least-moving (most proximal) bone it is weighted to --
-        # skin that stretches does not invert, skin crushed between two limbs does
-        Wq = W.copy()
-        sub = Wq[core]
-        big = sub > 0.08
-        dsel = np.where(big, depth[None, :], 999)
-        pj = dsel.argmin(1)
-        oh = np.zeros_like(sub); oh[np.arange(len(sub)), pj] = 1.0
-        Wq[core] = 0.5 * sub + 0.5 * oh
-        cands.append(("proximal", _top4(Wq), core))
-        Wz = _top4(smooth_weights(Wq, ei, ej, iters=smooth_iters, lam=0.6, lock=~zone))
-        cands.append(("proximal+smooth", Wz, zone))
-        res = [(sweep(Wc), nm, Wc, z) for nm, Wc, z in cands]
-        (t2, b2), nm, Wc, z = min(res, key=lambda r: r[0][0])
-        log(f"  corrective pass {it}: {t2} inverted tri-frames ({nm}), {int(b2.sum())} verts")
+        core_all = grow(bad, 1)
+        sel = core_all[ei] & core_all[ej]
+        A = coo_matrix((np.ones(sel.sum()), (ei[sel], ej[sel])), shape=(len(W), len(W)))
+        _n, lab = connected_components(A, directed=False)
+        Wn = W.copy()
+        picks = {}
+        for k in np.unique(lab[core_all]):
+            core = core_all & (lab == k)
+            zone = grow(core, rings)
+            reg = grow(zone, 1)
+            vidx = np.where(reg)[0]
+            tri_idx = np.where(reg[g.T].all(1) & zone[g.T].any(1))[0]
+            if not len(tri_idx):
+                continue
+            best = ("keep", Wn, local_flips(Wn, tri_idx, vidx))
+            if best[2] == 0:
+                continue
+            bestP = None
+            for nm, Wc in candidates(Wn, zone, core):
+                f = local_flips(Wc, tri_idx, vidx)
+                if f < best[2]:
+                    best = (nm, Wc, f)
+            if best[2] > 0:
+                opts = [(core, 2, None), (core, 5, None), (core, 10, None), (zone, 5, None), (zone, 15, None)]
+                if best[2] <= 6:                           # a last stubborn sliver may slide further
+                    opts += [(core, 10, RELAX_MAX_STUBBORN), (zone, 15, RELAX_MAX_STUBBORN)]
+                for vm, its, cap in opts:
+                    Pr2 = relax(rest, np.where(vm)[0], its, cap=cap)
+                    pool = [("keep", Wn), (best[0], best[1])]
+                    if best[2] <= 6:                       # last stubborn folds: try every repair
+                        pool += candidates(Wn, zone, core)
+                    for nm, Wc in pool:
+                        f = local_flips(Wc, tri_idx, vidx, Pr2)
+                        if f < best[2]:
+                            best = (f"relax{its}+{nm}", Wc, f); bestP = Pr2
+            if 0 < best[2] and core.sum() <= 48:
+                # stubborn sliver: greedy per-vertex search over "copy a neighbour's weights" /
+                # "ride one of its own bones rigidly", keeping the shape fix found above
+                Wg = best[1].copy(); Pg = bestP if bestP is not None else rest
+                cur = best[2]
+                nbrs = {}
+                for a, b in zip(ei, ej):
+                    nbrs.setdefault(a, []).append(b); nbrs.setdefault(b, []).append(a)
+                for _sweep in range(2):
+                    for v in np.where(core)[0]:
+                        opts = [Wg[n] for n in nbrs.get(v, [])]
+                        for j in np.where(Wg[v] > 0.02)[0]:
+                            oh = np.zeros(Wg.shape[1]); oh[j] = 1.0; opts.append(oh)
+                        keep_w = Wg[v].copy()
+                        for o in opts:
+                            Wg[v] = o
+                            f = local_flips(Wg, tri_idx, vidx, Pg)
+                            if f < cur:
+                                cur, keep_w = f, o.copy()
+                        Wg[v] = keep_w
+                if cur < best[2]:
+                    best = ("vertex-search", Wg, cur)
+            if best[0] != "keep":
+                Wn[zone] = best[1][zone]
+                touched[zone] = True
+            if bestP is not None:
+                rest[:] = bestP
+                moved[:] = moved | (np.abs(bestP - g.rest).sum(1) > 0)
+            picks[best[0]] = picks.get(best[0], 0) + 1
+        t2, b2 = sweep(Wn)
+        log(f"  corrective pass {it}: {t2} inverted tri-frames {picks}, {int(b2.sum())} verts")
         hist.append(t2)
         if t2 < total:
-            W, total, bad = Wc, t2, b2
-            touched |= z
+            W, total, bad = Wn, t2, b2
+            rest_ok[:] = rest
             stall = 0
         else:
+            rest[:] = rest_ok
             stall += 1
             rings += 1
-            if stall >= 4:
+            if stall >= 3:
                 break
-    # write back (organic vertices that were touched)
+    # write back: relaxed rest positions, then weights (organic vertices that were touched)
+    sel = np.where(np.abs(rest_ok - g.rest).sum(1) > 0)[0]
+    if len(sel):
+        co = np.empty(len(me.vertices) * 3); me.vertices.foreach_get("co", co); co = co.reshape(-1, 3)
+        co[sel] = rest_ok[sel]
+        me.vertices.foreach_set("co", co.ravel()); me.update()
+        log(f"  corrective pass: relaxed {len(sel)} rest vertices (max {np.abs(rest_ok - g.rest).max() * 1000:.1f} mm)")
     idx = np.where(touched)[0].tolist()
     if idx:
         for j, n in enumerate(g.bones):

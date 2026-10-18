@@ -23,10 +23,12 @@ def clay():
     c.ell((0, 0.17, 1.05), (0.17, 0.36, 0.19), k=0.06)                          # torso
     c.ell((0, 0.40, 1.02), (0.14, 0.16, 0.18), k=0.06)                          # chest/furcula
     c.ell((0, -0.08, 1.05), (0.13, 0.18, 0.13), k=0.06)                         # pelvis
-    c.ell((0.12, 0.07, 0.84), (0.085, 0.15, 0.21), R=rot_to((0, 0.55, -1)), k=0.06, mirror=True)  # drumstick
-    c.cone(J["hip"], J["knee"], 0.10, 0.06, k=0.05, mirror=True)
-    c.ell((0.14, 0.08, 0.50), (0.05, 0.07, 0.13), R=rot_to((0, -0.9, -1)), k=0.04, mirror=True)  # calf
-    c.cone(J["knee"], J["ankle"], 0.055, 0.032, k=0.035, mirror=True)
+    # leg mass as long tapered forms with generous blends (the old drumstick / calf ellipsoids met
+    # the thin bone cones in hard knobs that read as lumpy, bulbous knees)
+    c.cone((0.115, -0.02, 0.93), (0.145, 0.17, 0.66), 0.125, 0.062, k=0.09, mirror=True)       # drumstick
+    c.cone(J["hip"], J["knee"], 0.095, 0.058, k=0.08, mirror=True)
+    c.cone((0.148, 0.16, 0.60), (0.135, -0.04, 0.38), 0.058, 0.036, k=0.08, mirror=True)       # calf
+    c.cone(J["knee"], J["ankle"], 0.052, 0.032, k=0.06, mirror=True)
     c.cone(J["ankle"], J["ball"], 0.032, 0.026, k=0.025, mirror=True)
     for dx, L in ((-0.035, 0.12), (0.0, 0.16), (0.035, 0.13)):
         c.cone((0.12 + dx * 0.4, -0.02, 0.04), (0.12 + dx, -0.02 + L, 0.018), 0.022, 0.013, k=0.015, mirror=True)

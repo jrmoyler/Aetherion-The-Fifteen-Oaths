@@ -116,6 +116,7 @@ def build(oath=None):
            "secondary", bristle)
     S.bones = quad.skeleton(J)
     S.legs = quad.legs()
+    S.joint_limits = dict(S.joint_limits, thigh_=30, upper_=30)   # keep flank / armpit / coxa folds open
     S.clip_fn = lambda ctx: quad.clips(ctx, dict(stride_w=0.5, stride_r=1.0, lift=0.2, heavy=0.6, attack="gore",
                                                  roar=True, body_half_width=0.24, walk_frames=30, run_frames=16))
     return S
