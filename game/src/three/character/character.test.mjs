@@ -20,7 +20,8 @@ test('every hero builds a finite head, groom and gear kit on each tier', () => {
     assert.equal(head.eyes.length, 2);
     const groom = buildGroom(id, profile, head.P, head.lash, tier);
     if (profile.hair?.style !== 'none') { assert.ok(groom.cap && finite(groom.cap), `${id} cap`); assert.ok(groom.cards && finite(groom.cards), `${id} cards`); }
-    if (profile.beard) assert.ok(groom.cards.index.count > 0, `${id} beard`);
+    if (profile.beard) assert.ok(groom.beard?.index?.count > 0, `${id} beard`);
+    else assert.equal(groom.beard, null, `${id} no phantom beard`);
     assert.ok(finite(groom.brows));
     const gear = buildGear(profile, head.P, .23, tier);
     assert.equal(gear.filter(p => p.geo).length > 0, (profile.gear ?? []).length > 0, `${id} gear`);
@@ -34,4 +35,15 @@ test('low tier keeps head and groom cheaper than high', () => {
   assert.ok(lo.skinGeo.attributes.position.count < hi.skinGeo.attributes.position.count / 2);
   const glo = buildGroom('k', p, lo.P, lo.lash, 'low'), ghi = buildGroom('k', p, hi.P, hi.lash, 'high');
   assert.ok(glo.cards.attributes.position.count < ghi.cards.attributes.position.count);
+});
+
+
+test('Rime sorcerer beard is a distinct geometry from hair concealed by a hood', () => {
+  const id = 'oath-02-sorcerer', profile = PROFILES[id];
+  const head = buildHead(profile, .23, 'high');
+  const groom = buildGroom(id, profile, head.P, head.lash, 'high');
+  assert.ok(groom.cards && groom.beard, 'separate scalp and beard surfaces');
+  assert.notEqual(groom.cards, groom.beard);
+  assert.ok(groom.beard.index.count > 0);
+  assert.ok(groom.cards.index.count > 0);
 });
