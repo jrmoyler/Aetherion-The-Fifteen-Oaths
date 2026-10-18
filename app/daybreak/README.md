@@ -33,7 +33,9 @@ Normal abilities use the current world aim, not the bridge's automated cast dire
 
 ## Owner-operated Vercel deployment
 
-The root `vercel.json` sets the install, build and output values below, and those take precedence over the dashboard. The last production deployments failed with `STATIC_BUILD_NO_OUT_DIR` because the project was looking for `dist` rather than `dist/daybreak`. Set the framework preset to Other in the dashboard as well so it does not apply the Vite preset. The table lists the same values for reference:
+> **Superseded:** the repo-root `vercel.json` now deploys the Babylon.js MMO client in `game/` (see the root `README.md` and `MEMORY.md`), not this practice area. The table below records the settings this draft used; to publish Daybreak again, deploy it as a separate Vercel project with these values.
+
+The root `vercel.json` used to set the install, build and output values below, and those take precedence over the dashboard. The last production deployments failed with `STATIC_BUILD_NO_OUT_DIR` because the project was looking for `dist` rather than `dist/daybreak`. Set the framework preset to Other in the dashboard as well so it does not apply the Vite preset. The table lists the same values for reference:
 
 | Setting | Value |
 | --- | --- |

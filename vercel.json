@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "npm ci --no-audit --no-fund",
-  "buildCommand": "npm run build",
+  "installCommand": "d=$PWD; until [ -f \"$d/game/package.json\" ] || [ \"$d\" = / ]; do d=$(dirname \"$d\"); done; sh \"$d/tools/vercel-build.sh\" install",
+  "buildCommand": "d=$PWD; until [ -f \"$d/game/package.json\" ] || [ \"$d\" = / ]; do d=$(dirname \"$d\"); done; sh \"$d/tools/vercel-build.sh\" build",
   "outputDirectory": "dist",
   "headers": [
     {
