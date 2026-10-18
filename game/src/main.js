@@ -126,7 +126,7 @@ async function startClient() {
   bus.emit('game:start', character);
   ctx.dispose = () => {
     stopped = true; renderer.setAnimationLoop(null); ctx.net.disconnect?.();
-    ctx.vfx.stopAll?.(); ctx.actors.dispose?.(); atmosphere.dispose(); ctx.world.dispose?.();
+    ctx.vfx.dispose?.(); ctx.actors.dispose?.(); atmosphere.dispose(); ctx.world.dispose?.();
     ctx.sourceEnvironmentTexture?.dispose(); postprocessing.dispose(); envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
   };
 }

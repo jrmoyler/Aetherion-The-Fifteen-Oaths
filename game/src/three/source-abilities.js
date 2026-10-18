@@ -17,6 +17,7 @@ import { buildAmethystRig } from '../../../runtime/ability-matrix/packs/casting/
 import { buildTomeRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/TomeRig.js';
 import { buildReliquaryRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/ReliquaryRig.js';
 import { buildSerpentGeometry } from '../../../runtime/ability-matrix/packs/linear-extended/src/assets/SerpentGeometry.js';
+import { createSourceBoostAuras } from './source-boost-aura.js';
 import { createSourceTargetReactions } from './source-targets.js';
 import { ABILITIES_BY_OATH } from '../../../shared/abilities.generated.js';
 
@@ -76,6 +77,7 @@ export async function createSourceAbilities(ctx) {
     registerShadowCaster: material => material,
     registerShadowCasterWithPatch: (material, patch, key) => patchOnBeforeCompile(material, patch, key),
   };
+  const boostAuras = createSourceBoostAuras(environment);
   const shake = { add(amount) { ctx.bus?.emit?.('camera:shake', { intensity: Math.min(.6, amount) }); }, rumble() {} };
   const flash = { trigger(color, intensity) { ctx.bus?.emit?.('combat:flash', { color, intensity }); } };
 
@@ -141,13 +143,14 @@ export async function createSourceAbilities(ctx) {
     const direction=target.clone().sub(origin).setY(0); const distance=direction.length();
     if(distance<.001) direction.set(opts.dir?.x??0,0,opts.dir?.z??1); direction.normalize();
     const s=sessionFor(pack,origin.y); s.touched=elapsed;
-    let instance, stopped=false, delay=Math.max(0,opts.castTime??opts.ant??0);
+    let instance, releaseAura, stopped=false, delay=Math.max(0,opts.castTime??opts.ant??0);
     const isBuff=pack==='linear-ext' && BUFFS[id];
     const spawn=()=>{
       if(isBuff) {
         const Type=modules[pack][BUFFS[id]];
         instance=new Type({...s.context,character:characterProxy(opts.caster,s.floor)});
         s.buffs.add(instance); instance.activate();
+        releaseAura=boostAuras.claim(opts.caster,token,instance,modules[pack].settings[id]);
       } else {
         s.context.character=characterProxy(opts.caster,s.floor);
         instance=s.manager.cast(origin.clone().setY(origin.y-s.floor),direction,Math.max(.1,distance||ab.range||4),id);
@@ -158,7 +161,7 @@ export async function createSourceAbilities(ctx) {
     };
     const handle={ sourceId:ab.id, sourcePack:pack, sessionKey:s.key,
       get instance(){return instance;}, get done(){return stopped || !!instance && (ownership.get(instance)!==token || (isBuff ? !instance.active : !instance.isActive));},
-      stop(){if(stopped)return;stopped=true;handles.delete(handle);if(!instance || ownership.get(instance)!==token)return;if(isBuff){instance.cancel();instance.dispose();s.buffs.delete(instance);}else{const index=s.manager.active.indexOf(instance);if(index>=0){s.manager.active.splice(index,1);instance.destroy();s.manager.pools.get(id)?.release(instance);}}},
+      stop(){if(stopped)return;stopped=true;handles.delete(handle);if(!instance || ownership.get(instance)!==token)return;if(isBuff){releaseAura?.();instance.cancel();instance.dispose();s.buffs.delete(instance);}else{const index=s.manager.active.indexOf(instance);if(index>=0){s.manager.active.splice(index,1);instance.destroy();s.manager.pools.get(id)?.release(instance);}}},
       advance(dt){if(stopped)return;if(!instance){delay-=dt;if(delay<=0)spawn();}if(isBuff&&instance)instance.update(dt);if(handle.done)handle.stop();},
     };
     handles.add(handle); if(delay===0)spawn();
@@ -180,10 +183,11 @@ export async function createSourceAbilities(ctx) {
       // Keep source particle tails alive; retire idle floor caches instead of leaking GPU pools.
       if(elapsed-s.touched>18)clearSession(s);
     }
+    boostAuras.update();
     targetReactions.update(dt);
     lights.update(dt);
   }
-  function stopAll(){for(const h of [...handles])h.stop();for(const s of [...sessions.values()])clearSession(s);targetReactions.reset();lights.reset();}
+  function stopAll(){for(const h of [...handles])h.stop();for(const s of [...sessions.values()])clearSession(s);targetReactions.reset();boostAuras.reset();lights.reset();}
   return { cast, update, stopAll, dispose(){stopAll();lights.dispose();farDepth.dispose();root.removeFromParent();},
     get activeCount(){return [...handles].filter(h=>!h.done).length;},
     get stats(){return { supportedIds:SOURCE_ABILITY_IDS, loadedPacks:Object.keys(modules), active:handles.size, sessions:sessions.size, models:Object.keys(models) };},

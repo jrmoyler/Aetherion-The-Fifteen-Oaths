@@ -1,4 +1,4 @@
-import { Color } from 'three';
+import { Color, UniformsUtils } from 'three';
 import { noiseGLSL } from '../shaders/lib/noise.glsl.js';
 import { frame } from '../core/FrameUniforms.js';
 import { settings } from '../config/settings.js';
@@ -170,9 +170,9 @@ const FRAGMENT_BODY = /* glsl */ `
  * @param {import('three').Material} material
  * @param {import('../world/Environment.js').Environment} environment
  */
-export function applyFresnelAura(material, environment) {
+export function applyFresnelAura(material, environment, auraUniforms = uniforms) {
   return environment.registerShadowCasterWithPatch(material, (shader) => {
-    Object.assign(shader.uniforms, uniforms);
+    Object.assign(shader.uniforms, auraUniforms);
 
     shader.vertexShader = shader.vertexShader
       .replace('#include <common>', `#include <common>\n${VERTEX_HEAD}`)
@@ -237,7 +237,8 @@ export function syncFresnelAura(
 }
 
 /** Shade the rig from one claim. */
-function applyClaim({ strength, baseY, height, config }) {
+function applyClaim({ strength, baseY, height, config }, targetUniforms = uniforms) {
+  const uniforms = targetUniforms;
   const c = config;
   const g = settings.global;
 
@@ -265,4 +266,19 @@ function applyClaim({ strength, baseY, height, config }) {
   uniforms.uAuraColorRim.value.copy(getColor(c.colorRim));
   uniforms.uAuraColorCore.value.copy(getColor(c.colorCore));
   uniforms.uAuraColorVein.value.copy(getColor(c.colorVein));
+}
+
+/** Multiplayer adapter: retain the original GLSL and preset math while each
+ * actor owns its own uniform boxes. The source demo singleton remains unchanged.
+ */
+export function createIsolatedFresnelAura() {
+  const isolated = UniformsUtils.clone(uniforms);
+  isolated.uTime = frame.uTime;
+  isolated.uAuraStrength.value = 0;
+  return {
+    uniforms: isolated,
+    apply(material, environment) { return applyFresnelAura(material, environment, isolated); },
+    sync(strength, baseY, height, config) { applyClaim({ strength, baseY, height, config }, isolated); },
+    clear() { isolated.uAuraStrength.value = 0; },
+  };
 }

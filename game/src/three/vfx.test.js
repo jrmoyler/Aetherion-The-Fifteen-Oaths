@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Scene, Vector3, PerspectiveCamera } from 'three';
+import { Scene, Vector3, PerspectiveCamera, Group, Mesh, MeshStandardMaterial, BoxGeometry } from 'three';
 import { initVFX, ELEMENT_STYLES } from './vfx.js';
 import { SOURCE_ABILITY_IDS } from './source-abilities.js';
 
@@ -50,4 +50,17 @@ test('cancelling cast anticipation allocates no original ability geometry',async
   const h=vfx.castEffect({id:'codex/hoarfrost'},{castTime:2,caster:{position:new Vector3()}});
   assert.equal(h.instance,undefined);h.stop();for(let i=0;i<30;i++)tick(.1);
   assert.equal(h.instance,undefined);assert.equal(vfx.activeCount,0);vfx.dispose();
+});
+
+
+test('three original boosts bind and restore body material hooks through cast cancellation',async()=>{
+  const scene=new Scene();let tick;const vfx=await initVFX({scene,addUpdate(fn){tick=fn;}});
+  const material=new MeshStandardMaterial(),root=new Group();root.add(new Mesh(new BoxGeometry(),material));
+  const caster={root,position:new Vector3(2,5,3),height:1.9};
+  for(const id of ['boost','magic','fire']) {
+    const handle=vfx.castEffect({id:`linear-ext/${id}`},{caster});
+    assert.notEqual(root.children[0].material,material);
+    tick(.1);handle.stop();assert.equal(root.children[0].material,material);
+  }
+  vfx.dispose();assert.deepEqual(caster.position.toArray(),[2,5,3]);
 });

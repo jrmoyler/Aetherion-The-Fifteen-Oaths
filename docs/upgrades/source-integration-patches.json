@@ -1,0 +1,14 @@
+[
+  {
+    "path": "runtime/ability-matrix/packs/linear-ext/src/materials/FresnelAura.js",
+    "upstreamSHA256": "56265b6274f41fc6dc06fa094bc3be9019c19af6e1cbc0c59e1460151a998ce3",
+    "sha256": "448a4da3291c662aa0ab8e68bea1765083d7c776120facf5a49b8fd5f421423a",
+    "reason": "Add optional actor-isolated uniform channels while reusing original GLSL and preset calculations; prevent one caster recoloring another."
+  },
+  {
+    "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/PrismLieMaterials.js",
+    "upstreamSHA256": "90851f2977e86ae0b448821578adf68c3be6e970a4b5ae038ddb74419ea71865",
+    "sha256": "1ffbdbf419d7fb3b19bd2cb251fb5efcb30e17da6ea310dee2cd7a59285365e5",
+    "reason": "Resolve source preset named color fields to actual colors instead of passing invalid color names to Three.js."
+  }
+]

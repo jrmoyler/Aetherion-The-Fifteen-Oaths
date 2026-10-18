@@ -9,16 +9,23 @@ const read = (p) => readFileSync(path.join(root,p));
 const json = (p) => JSON.parse(read(p));
 const sha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const manifest = json('CASTABLE_SOURCE_MANIFEST.json');
+const upgrade = json('docs/upgrades/ability-source-import.json');
+const patches = json('docs/upgrades/source-integration-patches.json');
+const upgraded = new Map(upgrade.files.map(e => [e.path,e]));
+const patched = new Map(patches.map(e => [e.path,e]));
 const registry = json('CASTABLE_REGISTRY.json');
 const catalog = json('runtime/ability-matrix/presets/catalog.json');
 const library = json('runtime/ability-matrix/presets/library.json');
 const live = catalog.abilities.filter((a)=>a.status==='live'&&['ability','buff','summon'].includes(a.kind));
-test('all 1,896 tracked source files and assets remain byte-identical', () => {
+test('original source inventory is preserved; pinned upstream upgrades and integration patches match recorded hashes', () => {
  assert.equal(manifest.sourceCommit,'4c4a1eb6de6b17fba94c6a074d28cb6b9f32d451');
  assert.equal(manifest.files.length,1896);
  let bytes=0;
- for(const entry of manifest.files){const content=read(entry.destinationPath);assert.equal(content.length,entry.bytes,entry.sourcePath);assert.equal(sha(content),entry.sha256,entry.sourcePath);bytes+=content.length;}
+ for(const entry of manifest.files){const content=read(entry.destinationPath);const current=patched.get(entry.destinationPath)||upgraded.get(entry.destinationPath);if(!current)assert.equal(content.length,entry.bytes,entry.sourcePath);assert.equal(sha(content),current?.sha256||entry.sha256,entry.sourcePath);bytes+=entry.bytes;}
  assert.equal(bytes,manifest.totalBytes);
+ assert.equal(upgrade.commit,'c16da3c978a4815f46273fdcda2252ab48977a53');
+ for(const entry of upgrade.files)assert.equal(sha(read(entry.path)),patched.get(entry.path)?.sha256||entry.sha256,entry.path);
+ for(const entry of patches){assert.ok(entry.reason.length>20);const upstream=upgraded.get(entry.path)?.sha256||manifest.files.find(e=>e.destinationPath===entry.path)?.sha256;assert.equal(entry.upstreamSHA256,upstream,entry.path);assert.equal(sha(read(entry.path)),entry.sha256,entry.path);}
 });
 test('100 castables, 15 elements, source kinds, and separate exclusions reconcile', () => {
  assert.equal(live.length,100);assert.equal(registry.castables.length,100);

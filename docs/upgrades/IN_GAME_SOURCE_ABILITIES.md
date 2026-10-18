@@ -21,10 +21,13 @@ The adapter preserves original procedural geometries, shader patches, GPU partic
 
 Authored rigs: Drone, Monowheel, Phoenix, Shark, Wolf, Dragon, Gyroscope, Amethyst, Tome, Reliquary, Serpent. These are loaded through their original rig builders rather than replaced with primitives. See attribution and source-import manifest for their individual provenance and license terms.
 
+The three original boost body shaders now bind to isolated per-actor uniform blocks. Each actor resolves its strongest active boost locally; shared mesh materials are cloned for the active aura, existing shader callbacks are preserved, and exact material references are restored when the final boost ends or is cancelled. The original FresnelAura GLSL and preset calculations are reused through an isolated-channel factory added to that source module.
+
 The imported Prism Lie material had a named-colour defect: `s.color` contains a settings key (`colorPrismA`), not a CSS colour. The integration resolves that key through its original configuration before passing the value to Three.Color.
 
 ## Validation and limits
 
+- Aura lifecycle tests additionally cover separate actor colours/envelopes/world heights, overlapping-boost precedence, shared-material isolation, original shader callback preservation, and cleanup for all three source buffs.
 - Lifecycle regression tests cover source IceAbility instanced crystals, source pooling, stale handle cancellation, anticipation cancellation, 150 unique dispatch IDs, actor-coordinate preservation, render layers, and distinct shader program cache keys.
 - CPU scene sweep exercises each cast and target interactions for 12 simulated seconds. 147/150 complete without nonfinite geometry or actor-position mutation. Shark, Quake and Toxic Shield call browser TextureLoader and require browser execution; this is not a rendered appearance test.
 - Production Vite build bundles the original source dependencies successfully.
