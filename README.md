@@ -1,5 +1,7 @@
 # Aetherion: The Fifteen Oaths
 
+**Play the MMO:** `npm run mmo:install && npm run mmo:start`, then open http://localhost:8787 — an open-world Babylon.js MMORPG of the fifteen Oaths (desktop, mobile, PWA; offline realm when no server). See [MEMORY.md](MEMORY.md) for architecture, verification and known gaps, and [game/CONTRACTS.md](game/CONTRACTS.md) for module contracts.
+
 **Daybreak browser practice area:** [run locally and prepare the owner-operated Vercel build](app/daybreak/README.md). All 100 imported castables are exposed; rendered gameplay/mobile acceptance remains unverified.
 
 **Every force has a covenant. Every covenant has a price.**

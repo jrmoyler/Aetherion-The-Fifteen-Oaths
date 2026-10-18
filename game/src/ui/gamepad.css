@@ -1,0 +1,79 @@
+/* Gamepad presentation: glyphs, focus ring, prompt bar, on-screen keyboard, controller settings.
+   Everything here is inert unless #ui has .is-pad (the gamepad is the active device). */
+svg.ae-pg { display: block; width: 100%; height: 100%; flex: none; }
+.ae-pg-plus { font: 600 9px var(--sans); color: var(--text-2); font-style: normal; align-self: center; margin: 0 1px; }
+
+/* glyph badges on hotbar / preview slots replace the keyboard key labels */
+.ae-pglyph { display: none; position: absolute; left: 2px; top: 2px; z-index: 4; height: 19px; pointer-events: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.7)); }
+.ae-pglyph svg.ae-pg { width: 19px; height: 19px; }
+.ae-pglyph.is-chord svg.ae-pg { width: 15px; height: 15px; }
+.ae-pglyph.is-chord { height: 15px; }
+#ui.is-pad .ae-pglyph { display: flex; }
+#ui.is-pad .ae-slot .key,
+#ui.is-pad .ae-ledger .k,
+#ui.is-pad .ae-opt > b { display: none; }
+#ui.is-pad .ae-tbtn .ae-pglyph { display: none; } /* touch cluster keeps its own look */
+
+/* B glyph on window close buttons */
+.ae-pglyph--x { position: static; height: 18px; width: 18px; filter: none; }
+.ae-pglyph--x svg.ae-pg { width: 18px; height: 18px; }
+#ui.is-pad .ae-x > :not(.ae-pglyph) { display: none; }
+#ui.is-pad .ae-x { width: 32px; height: 32px; border-color: transparent; }
+
+/* focus ring: double hairline + soft accent bloom, matches the gold rules of the panels */
+#ui.is-pad .ae-pad-focus {
+  outline: 2px solid var(--gold-2) !important; outline-offset: 2px;
+  box-shadow: 0 0 0 5px rgba(var(--accent-rgb), .28), 0 0 22px rgba(230, 205, 142, .35);
+  position: relative; z-index: 2;
+}
+#ui.is-pad .ae-ab-detail, #ui.is-pad .ae-dossier { scroll-behavior: smooth; }
+#ui.is-pad .ae-oath-card.ae-pad-focus { transform: translateY(-1px); }
+#ui.is-pad .ae-map__view.ae-pad-focus { outline-offset: -3px; box-shadow: inset 0 0 0 1px rgba(230,205,142,.35); }
+#ui.is-pad .ae-range.ae-pad-focus { outline-offset: 4px; }
+.ae-padbadge { position: absolute; left: 0; top: 0; width: 22px; height: 22px; z-index: 90; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,.6)); transition: transform .12s ease-out; }
+#ui:not(.is-pad) .ae-padbadge, #ui:not(.is-pad) .ae-padbar { display: none !important; }
+.ae-reduce .ae-padbadge { transition: none; }
+
+/* contextual prompt bar */
+.ae-padbar {
+  position: absolute; left: 50%; bottom: calc(14px + var(--sab)); transform: translateX(-50%); z-index: 88; pointer-events: none;
+  display: flex; gap: 18px; align-items: center; padding: 7px 16px;
+  background: linear-gradient(180deg, rgba(var(--slate-2), .9), rgba(var(--slate), .92)); border: 1px solid var(--rule);
+  box-shadow: 0 10px 30px rgba(0,0,0,.45); white-space: nowrap;
+  font-variant: small-caps; letter-spacing: .12em; font-size: 15px; color: var(--text);
+}
+.ae-padbar .it { display: inline-flex; align-items: center; gap: 7px; }
+.ae-padbar svg.ae-pg { width: 22px; height: 22px; }
+@media (max-width: 720px) { .ae-padbar { gap: 10px; font-size: 13px; padding: 6px 10px; } .ae-padbar svg.ae-pg { width: 18px; height: 18px; } }
+
+/* on-screen keyboard */
+.ae-osk { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 92; width: min(620px, calc(100% - 24px)); pointer-events: auto; }
+.ae-osk__disp { margin: 14px 18px 4px; padding: 10px 14px; min-height: 46px; font: 500 24px var(--serif); letter-spacing: .06em; color: var(--gold-2);
+  border: 1px solid var(--rule-2); background: rgba(0,0,0,.35); }
+.ae-osk__err { min-height: 18px; margin: 0 18px 6px; font: 500 12px var(--sans); color: var(--bad); }
+.ae-osk__grid { display: flex; flex-direction: column; gap: 6px; padding: 4px 18px 18px; }
+.ae-osk__row { display: flex; gap: 6px; justify-content: center; }
+.ae-osk__k { flex: 0 0 auto; width: 46px; height: 44px; display: grid; place-items: center; cursor: pointer;
+  background: linear-gradient(180deg, rgba(31,45,72,.92), rgba(20,29,47,.95)); border: 1px solid var(--rule); font: 600 16px var(--sans); color: var(--text); }
+.ae-osk__k:hover { border-color: var(--gold); }
+.ae-osk__k.w2 { width: 98px; font-size: 13px; letter-spacing: .06em; }
+.ae-osk__k.w4 { width: 150px; font-size: 13px; letter-spacing: .06em; }
+.ae-osk__k[aria-pressed="true"] { border-color: var(--gold); color: var(--gold-2); }
+.ae-osk__k.is-done { border-color: var(--gold); color: var(--gold-2); }
+@media (max-width: 600px) { .ae-osk__k { width: 30px; height: 40px; font-size: 14px; } .ae-osk__k.w2 { width: 64px; } .ae-osk__k.w4 { width: 92px; } .ae-osk__grid { padding: 4px 8px 12px; gap: 5px; } .ae-osk__row { gap: 4px; } }
+
+/* controller settings */
+.ae-pad-status { margin: 0 0 6px; }
+.ae-padmap-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 8px 0 6px; }
+.ae-padmap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 18px; }
+.ae-padmap-row { display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 10px; min-height: 36px; padding: 3px 6px; text-align: left;
+  background: transparent; border: 0; border-bottom: 1px solid var(--rule-faint); color: var(--text-2); font-size: 15px; }
+button.ae-padmap-row { cursor: pointer; }
+button.ae-padmap-row:hover { color: var(--text); background: rgba(255,255,255,.03); }
+.ae-padmap-row .g { display: flex; align-items: center; height: 24px; }
+.ae-padmap-row .g svg.ae-pg { width: 24px; height: 24px; }
+.ae-padmap-row .n { font: 600 11px var(--sans); color: var(--muted); letter-spacing: .04em; }
+.ae-padmap-row.is-listening { color: var(--gold-2); background: rgba(201,168,102,.1); }
+.ae-padmap-row.is-listening .n { color: var(--gold-2); }
+#ui.is-pad .ae-set-keys { opacity: .55; }
+@media (max-width: 640px) { .ae-padmap { grid-template-columns: 1fr; } }
