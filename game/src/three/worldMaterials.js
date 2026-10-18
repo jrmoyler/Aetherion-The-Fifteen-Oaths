@@ -19,6 +19,7 @@ export function naturalMaterial(color, roughness = .92, masonry = false) {
       float seam = 1.-smoothstep(.012,.04,min(edge.x,edge.y));
       diffuseColor.rgb *= (.88 + g*.08 + strata*.035) * (1.-seam*.15*${masonry ? '1.' : '0.'});`);
   };
+  mat.customProgramCacheKey = () => `natural-world-v2-${masonry ? "masonry" : "mineral"}`;
   return mat;
 }
 export function terrainMaterial() {

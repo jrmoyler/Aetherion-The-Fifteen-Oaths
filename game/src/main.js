@@ -1,6 +1,8 @@
 // Three.js client: simulation and UI are independent of the render graph.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import sourceEnvironmentUrl from '../../runtime/ability-matrix/packs/handcast/public/hdri/spruit_sunrise.hdr?url';
 import { Bus } from './core/bus.js';
 import { detectQuality } from './core/quality.js';
 import { createInput } from './core/input.js';
@@ -13,6 +15,7 @@ import { initWorld } from './three/world.js';
 import { initAtmosphere } from './three/atmosphere.js';
 import { initActors } from './three/actors.js';
 import { initVFX } from './three/vfx.js';
+import { createPostprocessing } from './three/postprocessing.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { heightAt } from '@shared/terrain.js';
 
@@ -29,6 +32,7 @@ async function startClient() {
   scene.background = new THREE.Color('#aebcc4');
   scene.fog = new THREE.FogExp2('#aebcc4', .0018);
   const camera = new THREE.PerspectiveCamera(53, 1, .3, 4000);
+  const postprocessing = createPostprocessing(renderer, scene, camera, quality);
   scene.activeCamera = camera;
   const environment = new RoomEnvironment();
   const pmrem = new THREE.PMREMGenerator(renderer);
@@ -47,7 +51,7 @@ async function startClient() {
   const budget = createFrameBudget({ maxScale: quality.renderScale });
   let frameMs = 16.7, suspended = false, stopped = false, timeOfDay = 16;
   const ctx = {
-    renderer, scene, camera, canvas, bus, quality,
+    renderer, scene, camera, canvas, bus, quality, postprocessing,
     engine: { getFps: () => 1000 / frameMs, getRenderWidth: () => canvas.width, getRenderHeight: () => canvas.height },
     input: createInput(canvas, bus), collision: new CollisionWorld(),
     clock: { time: 0, dt: 0, frame: 0 }, params: new URLSearchParams(location.search),
@@ -56,10 +60,18 @@ async function startClient() {
     render: { sun, hemi, addShadowCaster(mesh) { mesh.castShadow = quality.shadows; }, removeShadowCaster(mesh) { mesh.castShadow = false; }, get timeOfDay() { return timeOfDay; }, setTimeOfDay(h) { timeOfDay = h; }, setTimeScale() {}, attachCamera() {}, setWeather(kind, intensity) { bus.emit('world:weather', { kind, intensity }); }, setRegionGrade() {} },
   };
   window.__aetherion = ctx;
+  ctx.render.sceneDepth = postprocessing.depthTexture;
+  // Source ability shaders sample the unfiltered equirectangular HDR directly;
+  // the world's PMREM room texture is a different layout and cannot replace it.
+  const sourceEnvironmentReady = new RGBELoader().loadAsync(sourceEnvironmentUrl).then(texture => {
+    texture.mapping = THREE.EquirectangularReflectionMapping;
+    ctx.sourceEnvironmentTexture = texture;
+  }).catch(error => console.warn('[abilities] Source reflection environment unavailable', error));
   ctx.input.setEnabled(false);
   function resize() {
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, quality.name === 'low' ? 1.25 : 1.75) * budget.scale);
     renderer.setSize(innerWidth, innerHeight, false);
+    postprocessing.resize(innerWidth, innerHeight, renderer.getPixelRatio());
     camera.aspect = innerWidth / Math.max(1, innerHeight); camera.updateProjectionMatrix();
   }
   resize(); addEventListener('resize', resize);
@@ -77,6 +89,7 @@ async function startClient() {
   ctx.render.setWeather = atmosphere.setWeather;
   ctx.setLoading(.55, 'Opening the Weave');
   ctx.net = await Net.init(ctx);
+  await sourceEnvironmentReady;
   ctx.vfx = await initVFX(ctx);
   ctx.actors = await initActors(ctx);
   ctx.combat = await Combat.init(ctx);
@@ -99,7 +112,7 @@ async function startClient() {
     const p = ctx.actors?.player?.position ?? camera.position;
     sun.position.copy(p).add(atmosphere.sunOffset);
     sun.target.position.set(p.x, p.y, p.z); sun.target.updateMatrixWorld();
-    renderer.render(scene, camera);
+    postprocessing.render(dt, !!ctx.vfx?.hasActiveSourceEffects);
     ctx.input.endFrame();
   });
   ctx.setLoading(1, 'Your covenant awaits');
@@ -114,7 +127,7 @@ async function startClient() {
   ctx.dispose = () => {
     stopped = true; renderer.setAnimationLoop(null); ctx.net.disconnect?.();
     ctx.vfx.stopAll?.(); ctx.actors.dispose?.(); atmosphere.dispose(); ctx.world.dispose?.();
-    envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
+    ctx.sourceEnvironmentTexture?.dispose(); postprocessing.dispose(); envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
   };
 }
 startClient().catch(err => {

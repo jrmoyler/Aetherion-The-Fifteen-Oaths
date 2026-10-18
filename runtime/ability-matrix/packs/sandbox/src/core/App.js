@@ -21,6 +21,7 @@ import { VENDOR_PACKS, loadVendorRuntime } from '../sandbox/vendors.js';
 import { DummyField } from '../combat/DummyField.js';
 
 import { InputManager } from '../input/InputManager.js';
+import { TouchControls } from '../input/TouchControls.js';
 import { AimController } from '../input/AimController.js';
 
 import { ParticleEngine } from '../particles/ParticleEngine.js';
@@ -181,6 +182,7 @@ export class App {
       decals: this.decals,
       shake: this.shake
     });
+    this.touch = new TouchControls(this);
 
     /* ---- post ---- */
     this.post = new PostProcessing(this.renderer, this.scene, this.camera);

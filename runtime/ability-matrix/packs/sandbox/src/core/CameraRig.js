@@ -19,9 +19,12 @@ const _desiredTarget = new Vector3();
  */
 export class CameraRig {
   constructor(domElement) {
+    const box = domElement.getBoundingClientRect();
+    const w = Math.max(2, box.width || window.innerWidth);
+    const h = Math.max(2, box.height || window.innerHeight);
     this.camera = new PerspectiveCamera(
       settings.camera.fov,
-      window.innerWidth / window.innerHeight,
+      w / h,
       0.1,
       400
     );
@@ -125,6 +128,20 @@ export class CameraRig {
       this.camera.position.add(this.shakeOffset);
       this.camera.rotateZ(this.shakeRoll);
     }
+  }
+
+  /** One-finger look. Same orbit the right mouse uses, in pixels. */
+  applyLook(dx, dy) {
+    const w = this.domElement.getBoundingClientRect().width || window.innerWidth || 1;
+    const speed = this.controls.rotateSpeed ?? 0.65;
+    this.controls.rotateLeft((2 * Math.PI * dx * speed) / w);
+    this.controls.rotateUp((2 * Math.PI * dy * speed) / w);
+  }
+
+  /** Pinch zoom. `ratio` > 1 means fingers moved apart (pull the camera in). */
+  pinch(ratio) {
+    const cam = settings.camera;
+    cam.distance = clamp(cam.distance / ratio, cam.minDistance, cam.maxDistance);
   }
 
   resize(width, height) {

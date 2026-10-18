@@ -1,0 +1,53 @@
+name: Three.js source fidelity evidence
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'game/**'
+      - 'shared/**'
+      - 'runtime/ability-matrix/**'
+      - 'tools/qa/source-fidelity-*'
+      - '.github/workflows/source-fidelity.yml'
+permissions:
+  contents: read
+jobs:
+  rendered-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install game and original ability dependencies
+        run: |
+          npm ci --prefix game
+          npm ci --prefix runtime/ability-matrix
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      - name: Install WebGL browser
+        run: cd game && npx playwright install --with-deps chromium
+      - name: Build production game
+        run: npm --prefix game run build
+      - name: Capture actual WebGL gameplay and all 150 source casts
+        timeout-minutes: 10
+        run: |
+          mkdir -p evidence
+          npm --prefix game run preview -- --host 127.0.0.1 --port 4173 > evidence/server.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID"' EXIT
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4173/ > /dev/null && break
+            sleep 1
+          done
+          node tools/qa/source-fidelity-browser.mjs http://127.0.0.1:4173 evidence
+      - name: Upload screenshots and runtime diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aetherion-three-source-fidelity
+          path: evidence/
+          retention-days: 14
+          if-no-files-found: warn

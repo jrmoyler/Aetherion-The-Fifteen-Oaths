@@ -112,8 +112,13 @@ export class Locomotion {
       if (keys.has('KeyS') || keys.has('ArrowDown')) iz -= 1;
       if (keys.has('KeyD') || keys.has('ArrowRight')) ix += 1;
       if (keys.has('KeyA') || keys.has('ArrowLeft')) ix -= 1;
+      const analog = this.ctx.input.analog;
+      if (analog) {
+        ix += analog.x || 0;
+        iz += analog.z || 0;
+      }
     }
-    const running = keys.has('ShiftLeft') || keys.has('ShiftRight');
+    const running = keys.has('ShiftLeft') || keys.has('ShiftRight') || !!this.ctx.input.runLock;
     const space = enabled && keys.has('Space');
     const pressedDash = (space && !this._spaceWas) || (enabled && this._dashRequested);
     this._spaceWas = space;

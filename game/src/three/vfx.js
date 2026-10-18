@@ -22,6 +22,7 @@ export const ELEMENT_STYLES = {
   time: { color: '#d9b86f', core: '#fff1c3', motion: 'orbit', form: 'clock' },
   tech: { color: '#45dbe1', core: '#d4ffff', motion: 'jitter', form: 'grid' },
 };
+import { createSourceAbilities } from './source-abilities.js';
 import { PALETTES } from '../vfx/palettes.generated.js';
 
 const STATUS_ELEMENT = { burning:'fire', chilled:'frost', shocked:'storm', soaked:'water', rooted:'nature', poisoned:'poison', gravity:'cosmic', cursed:'shadow', bleeding:'blood', hexed:'arcane', slowed:'time', sundered:'earth', shielded:'light', haste:'wind', blessed:'nature', empowered:'tech' };
@@ -30,6 +31,7 @@ const pointFragment = `uniform vec3 tint; uniform vec3 core; uniform float opaci
 const vec = (p) => new Vector3(p?.x ?? 0, p?.y ?? 0, p?.z ?? 0);
 
 export async function initVFX(ctx) {
+  const source = await createSourceAbilities(ctx);
   const active = new Set(); const MAX_EFFECTS = 64;
   const scene = ctx.scene;
   function material(color, opacity = 1) { return new MeshBasicMaterial({ color, transparent: true, opacity, depthWrite: false, side: DoubleSide, blending: AdditiveBlending }); }
@@ -100,14 +102,17 @@ export async function initVFX(ctx) {
     active.add(handle);return handle;
   }
   const api = {
-    castEffect(ab, opts={}) { const shape=ab.shape??'projectile';const kind=shape==='line'?'projectile':shape==='self'||shape==='summon'?'burst':shape;return make(opts.element??ab.element??'arcane',kind,{...opts,palette:PALETTES[ab.id],abilityId:ab.id,radius:ab.radius??opts.radius??(opts.ultimate?5:2)}); },
+    castEffect(ab, opts={}) { const original=source.cast(ab,opts);if(original)return original;const shape=ab.shape??'projectile';const kind=shape==='line'?'projectile':shape==='self'||shape==='summon'?'burst':shape;return make(opts.element??ab.element??'arcane',kind,{...opts,palette:PALETTES[ab.id],abilityId:ab.id,radius:ab.radius??opts.radius??(opts.ultimate?5:2)}); },
     play(key,opts={}) {const parts=String(key).split(':');let element=parts.find(p=>ELEMENT_STYLES[p])??(key==='heal'?'nature':'light');let kind=parts[0];if(kind==='basic')kind=parts[1]==='ninja'?'melee':'projectile';if(kind==='ultimate')kind='zone';return make(element,kind,{...opts,ultimate:parts[0]==='ultimate',duration:opts.duration??(key==='levelup'?2.2:undefined)});},
     impact(element,pos,strength=1,opts={}) { return make(element,'impact',{...opts,pos,radius:Math.max(.5,strength*2),duration:.7}); },
     status(actor,kind,duration=3){return make(STATUS_ELEMENT[kind]??'arcane','status',{caster:actor,duration:Math.min(60,duration),radius:1});},
-    stopAll(){for(const h of [...active])h.stop();},
-    get activeCount(){return active.size;},
+    stopAll(){source.stopAll();for(const h of [...active])h.stop();},
+    get sourceStats(){return source.stats;},
+    get hasActiveSourceEffects(){return source.activeCount>0 || source.stats.sessions>0;},
+    get activeCount(){return active.size+source.activeCount;},
+    dispose(){this.stopAll();source.dispose();},
   };
-  ctx.addUpdate?.(dt=>{for(const h of [...active])h.update(Math.min(.1,Math.max(0,dt)));},35);
+  ctx.addUpdate?.(dt=>{source.update(Math.min(.1,Math.max(0,dt)));for(const h of [...active])h.update(Math.min(.1,Math.max(0,dt)));},35);
   return api;
 }
 export const init = initVFX;

@@ -20,9 +20,60 @@ import * as SeraphicDescent from './SeraphicDescentAbility.js';
 import * as BallLightning from './BallLightningAbility.js';
 import * as RailgunLance from './RailgunLanceAbility.js';
 import * as OrbitalStrike from './OrbitalStrikeAbility.js';
+import * as HoarfrostMirror from './HoarfrostMirrorAbility.js';
+import * as RimeHalo from './RimeHaloAbility.js';
+import * as WhiteoutNeedle from './WhiteoutNeedleAbility.js';
+import * as GlacierCalving from './GlacierCalvingAbility.js';
+import * as FulgurCage from './FulgurCageAbility.js';
+import * as BrineGeyser from './BrineGeyserAbility.js';
+import * as GlassTide from './GlassTideAbility.js';
+import * as UndertowChains from './UndertowChainsAbility.js';
+import * as PearlTempest from './PearlTempestAbility.js';
+import * as FaultChoir from './FaultChoirAbility.js';
+import * as QuartzSpire from './QuartzSpireAbility.js';
+import * as SirenNote from './SirenNoteAbility.js';
+import * as VortexBell from './VortexBellAbility.js';
+import * as ShearWall from './ShearWallAbility.js';
+import * as DustDevilMarch from './DustDevilMarchAbility.js';
+import * as HarmonicReed from './HarmonicReedAbility.js';
+import * as BriarCathedral from './BriarCathedralAbility.js';
+import * as MyceliumWake from './MyceliumWakeAbility.js';
+import * as ThornVolley from './ThornVolleyAbility.js';
+import * as BloomCrown from './BloomCrownAbility.js';
+import * as AcidChoir from './AcidChoirAbility.js';
+import * as BileLance from './BileLanceAbility.js';
+import * as SporeCoffin from './SporeCoffinAbility.js';
+import * as NoxiousHalo from './NoxiousHaloAbility.js';
+import * as VitriolRain from './VitriolRainAbility.js';
+import * as HaloGuillotine from './HaloGuillotineAbility.js';
+import * as ReliquaryDawn from './ReliquaryDawnAbility.js';
+import * as EventHorizon from './EventHorizonAbility.js';
+import * as PulsarLash from './PulsarLashAbility.js';
+import * as DarkMatterWell from './DarkMatterWellAbility.js';
+import * as CometHarpoon from './CometHarpoonAbility.js';
+import * as OrbitLock from './OrbitLockAbility.js';
+import * as UmbralGuillotine from './UmbralGuillotineAbility.js';
+import * as VoidBloom from './VoidBloomAbility.js';
+import * as ShadePuppets from './ShadePuppetsAbility.js';
+import * as EclipseNeedle from './EclipseNeedleAbility.js';
+import * as HemorrhageRing from './HemorrhageRingAbility.js';
+import * as ClotArmor from './ClotArmorAbility.js';
+import * as ArterialWhip from './ArterialWhipAbility.js';
+import * as CrimsonBaptism from './CrimsonBaptismAbility.js';
+import * as Heartstake from './HeartstakeAbility.js';
+import * as VeinLattice from './VeinLatticeAbility.js';
+import * as SigilGate from './SigilGateAbility.js';
+import * as PrismLie from './PrismLieAbility.js';
+import * as RuneMeteor from './RuneMeteorAbility.js';
+import * as MindLattice from './MindLatticeAbility.js';
+import * as SecondSelf from './SecondSelfAbility.js';
+import * as RewindSnare from './RewindSnareAbility.js';
+import * as PendulumCleaver from './PendulumCleaverAbility.js';
+import * as StasisBell from './StasisBellAbility.js';
 
+const TENTH = [HoarfrostMirror, RimeHalo, WhiteoutNeedle, GlacierCalving, FulgurCage, BrineGeyser, GlassTide, UndertowChains, PearlTempest, FaultChoir, QuartzSpire, SirenNote, VortexBell, ShearWall, DustDevilMarch, HarmonicReed, BriarCathedral, MyceliumWake, ThornVolley, BloomCrown, AcidChoir, BileLance, SporeCoffin, NoxiousHalo, VitriolRain, HaloGuillotine, ReliquaryDawn, EventHorizon, PulsarLash, DarkMatterWell, CometHarpoon, OrbitLock, UmbralGuillotine, VoidBloom, ShadePuppets, EclipseNeedle, HemorrhageRing, ClotArmor, ArterialWhip, CrimsonBaptism, Heartstake, VeinLattice, SigilGate, PrismLie, RuneMeteor, MindLattice, SecondSelf, RewindSnare, PendulumCleaver, StasisBell];
 export const CODEX_ABILITIES = [
-  SolarLash, PermafrostBloom, AvalancheWake, MaelstromVortex, RiptideLash, ZephyrShuriken, Downburst, PollenNova, SeedstormVolley, PlagueSwarm, MiasmaSpit, NebulaCollapse, NightfallScythe, WraithHost, SanguineTide, GlyphBarrage, HourglassSunder, BasaltColumns, SeraphicDescent, BallLightning, RailgunLance, OrbitalStrike
+  SolarLash, PermafrostBloom, AvalancheWake, MaelstromVortex, RiptideLash, ZephyrShuriken, Downburst, PollenNova, SeedstormVolley, PlagueSwarm, MiasmaSpit, NebulaCollapse, NightfallScythe, WraithHost, SanguineTide, GlyphBarrage, HourglassSunder, BasaltColumns, SeraphicDescent, BallLightning, RailgunLance, OrbitalStrike, ...TENTH
 ].map((m) => ({
   ID: m.ID,
   Ability: m[Object.keys(m).find((k) => k.endsWith('Ability'))],
