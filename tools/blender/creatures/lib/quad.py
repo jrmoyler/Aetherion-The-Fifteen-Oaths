@@ -238,8 +238,9 @@ def clips(ctx, p):
         P.r("hips", x=0.05 * k)
         P.chain(SPINE, x=0.08 * k - 0.06 * a)
         # head thrown up: spread over neck1/neck2/head so the throat does not crush at the chest
-        P.r("neck1", x=0.22 * k - 0.25 * a)
-        P.r("neck2", x=0.18 * k)
+        nk = 1.0 - 0.6 * heavy                    # short thick necks (boar) throw the head less
+        P.r("neck1", x=(0.22 * k - 0.25 * a) * nk)
+        P.r("neck2", x=0.18 * k * nk)
         P.r("head", x=0.28 * k + 0.03 * sh, z=0.04 * sh)
         if has_jaw:
             P.r("jaw", x=-0.85 * k)

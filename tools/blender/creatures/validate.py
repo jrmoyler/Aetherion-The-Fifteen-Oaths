@@ -303,19 +303,28 @@ def main():
     turn = "--no-turntable" not in sys.argv
     if not args:
         args = sorted(f[:-4] for f in os.listdir(OUT) if f.endswith(".glb"))
-    data = {}
-    if os.path.exists(VALID):
-        try:
-            data = json.load(open(VALID))
-        except Exception:
-            data = {}
+    def load():
+        if os.path.exists(VALID):
+            try:
+                return json.load(open(VALID))
+            except Exception:
+                return {}
+        return {}
+    data = load()
     for cid in args:
         print(f"[validate] {cid}")
         rep = validate(cid, render, strips, turn)
+        if not render and cid in data:          # keep the review render paths of the last render
+            for k in ("review", "review_extra"):
+                if k in data[cid]:
+                    rep[k] = data[cid][k]
         data[cid] = rep
         print(json.dumps({k: rep[k] for k in ("tris", "bytes", "bones", "height", "animations", "issues")}))
         import deform_gate
         print(deform_gate.table(cid, rep["deform"]))
+        cur = load()                            # re-read: other forge processes may have written
+        cur[cid] = data[cid]
+        data = cur
         with open(VALID, "w") as fh:
             json.dump(dict(sorted(data.items())), fh, indent=1)
 

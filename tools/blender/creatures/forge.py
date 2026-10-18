@@ -8,7 +8,9 @@ Usage (from repo root):
 Requires scikit-image in the Blender venv (marching cubes):  /opt/blender-venv/bin/pip install scikit-image
 
 Each id is built in its own Python process (fresh Blender state), then re-imported for
-validation (VALIDATION.json) and rendered to a review contact sheet (review/<id>.png).
+validation (VALIDATION.json, including the per-clip skin-deformation gate from deform_gate.py)
+and rendered to review sheets: review/<id>.png (side, front-3/4, mid-attack),
+review/<id>_attack_{side,front34}.png (4-frame attack strips) and review/<id>_turn.png.
 """
 import os
 import sys
@@ -74,7 +76,10 @@ def main():
             failed.append(cid)
             continue
         if review:
-            subprocess.call([py, os.path.join(HERE, "validate.py"), cid], env=env)
+            # validate = re-import checks + deformation gate + review renders (turntable for
+            # base archetypes only; variants share their rig and clips)
+            extra = ["--no-turntable"] if "-oath-" in cid else []
+            subprocess.call([py, os.path.join(HERE, "validate.py"), cid] + extra, env=env)
     if failed:
         print("FAILED:", failed)
         sys.exit(1)

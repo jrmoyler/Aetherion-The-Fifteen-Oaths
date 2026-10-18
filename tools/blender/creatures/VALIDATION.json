@@ -2,7 +2,7 @@
  "boar": {
   "id": "boar",
   "file": "game/public/assets/creatures/boar.glb",
-  "bytes": 1648048,
+  "bytes": 1795488,
   "animations": [
    "attack",
    "death",
@@ -19,7 +19,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 33,
+  "joints": 44,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -100,28 +100,251 @@
     ]
    }
   },
-  "bones": 33,
+  "bones": 44,
   "bbox_min": [
    -0.284,
-   -1.144,
+   -1.147,
    -0.008
   ],
   "bbox_max": [
-   0.283,
+   0.287,
    0.79,
    1.297
   ],
   "height": 1.297,
   "faces_plus_z": true,
-  "death_end_height": 0.618,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/boar.png"
+  "death_end_height": 0.562,
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "ear_L",
+    "ear_R",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "hips",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "thigh_L",
+    "thigh_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9481,
+   "clips": {
+    "attack": {
+     "front_loss": 0.101,
+     "front_loss_region": "chest",
+     "front_loss_frame": 6,
+     "any_loss": 0.9787,
+     "any_loss_region": "ear_R",
+     "max_gain": 40.7919,
+     "max_gain_region": "ear_L",
+     "flips": 57,
+     "flip_frame": 9,
+     "flip_bones": [
+      "head",
+      "chest",
+      "scap_R",
+      "scap_L"
+     ],
+     "min_edge_ratio": 0.0905,
+     "max_edge_ratio": 7.0346,
+     "p01_edge_ratio": 0.688,
+     "ok": false,
+     "reasons": [
+      "57 inverted tris @f9 (head,chest,scap_R,scap_L)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.1518,
+     "front_loss_region": "chest",
+     "front_loss_frame": 29,
+     "any_loss": 0.7723,
+     "any_loss_region": "ear_R",
+     "max_gain": 17.8844,
+     "max_gain_region": "ear_L",
+     "flips": 103,
+     "flip_frame": 12,
+     "flip_bones": [
+      "head",
+      "half_thigh_L",
+      "thigh_L",
+      "chest"
+     ],
+     "min_edge_ratio": 0.0826,
+     "max_edge_ratio": 7.0346,
+     "p01_edge_ratio": 0.6023,
+     "ok": false,
+     "reasons": [
+      "chest volume -15% @f29",
+      "103 inverted tris @f12 (head,half_thigh_L,thigh_L,chest)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.1323,
+     "front_loss_region": "neck",
+     "front_loss_frame": 2,
+     "any_loss": 0.9179,
+     "any_loss_region": "ear_R",
+     "max_gain": 13.591,
+     "max_gain_region": "ear_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.4823,
+     "max_edge_ratio": 7.6056,
+     "p01_edge_ratio": 0.7671,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0586,
+     "front_loss_region": "neck",
+     "front_loss_frame": 5,
+     "any_loss": 0.759,
+     "any_loss_region": "ear_L",
+     "max_gain": 4.7146,
+     "max_gain_region": "ear_L",
+     "flips": 4,
+     "flip_frame": 37,
+     "flip_bones": [
+      "head",
+      "scap_L"
+     ],
+     "min_edge_ratio": 0.2517,
+     "max_edge_ratio": 2.4727,
+     "p01_edge_ratio": 0.8682,
+     "ok": false,
+     "reasons": [
+      "4 inverted tris @f37 (head,scap_L)"
+     ]
+    },
+    "roar": {
+     "front_loss": 0.1984,
+     "front_loss_region": "neck",
+     "front_loss_frame": 28,
+     "any_loss": 0.9559,
+     "any_loss_region": "ear_L",
+     "max_gain": 2.6991,
+     "max_gain_region": "ear_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.1908,
+     "max_edge_ratio": 15.4892,
+     "p01_edge_ratio": 0.7941,
+     "ok": false,
+     "reasons": [
+      "neck volume -20% @f28"
+     ]
+    },
+    "run": {
+     "front_loss": 0.0978,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 1,
+     "any_loss": 0.5562,
+     "any_loss_region": "fore_L",
+     "max_gain": 5.72,
+     "max_gain_region": "ear_L",
+     "flips": 131,
+     "flip_frame": 9,
+     "flip_bones": [
+      "thigh_R",
+      "thigh_L",
+      "half_thigh_R",
+      "half_thigh_L"
+     ],
+     "min_edge_ratio": 0.0218,
+     "max_edge_ratio": 5.6621,
+     "p01_edge_ratio": 0.6072,
+     "ok": false,
+     "reasons": [
+      "131 inverted tris @f9 (thigh_R,thigh_L,half_thigh_R,half_thigh_L)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.0696,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.8324,
+     "any_loss_region": "ear_L",
+     "max_gain": 2.4157,
+     "max_gain_region": "ear_L",
+     "flips": 51,
+     "flip_frame": 8,
+     "flip_bones": [
+      "thigh_R",
+      "half_thigh_R",
+      "half_upper_L",
+      "head"
+     ],
+     "min_edge_ratio": 0.058,
+     "max_edge_ratio": 3.6837,
+     "p01_edge_ratio": 0.6615,
+     "ok": false,
+     "reasons": [
+      "51 inverted tris @f8 (thigh_R,half_thigh_R,half_upper_L,head)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 57 inverted tris @f9 (head,chest,scap_R,scap_L)",
+    "death: chest volume -15% @f29; 103 inverted tris @f12 (head,half_thigh_L,thigh_L,chest)",
+    "idle: 4 inverted tris @f37 (head,scap_L)",
+    "roar: neck volume -20% @f28",
+    "run: 131 inverted tris @f9 (thigh_R,thigh_L,half_thigh_R,half_thigh_L)",
+    "walk: 51 inverted tris @f8 (thigh_R,half_thigh_R,half_upper_L,head)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 57 inverted tris @f9 (head,chest,scap_R,scap_L)",
+   "deform death: chest volume -15% @f29; 103 inverted tris @f12 (head,half_thigh_L,thigh_L,chest)",
+   "deform idle: 4 inverted tris @f37 (head,scap_L)",
+   "deform roar: neck volume -20% @f28",
+   "deform run: 131 inverted tris @f9 (thigh_R,thigh_L,half_thigh_R,half_thigh_L)",
+   "deform walk: 51 inverted tris @f8 (thigh_R,half_thigh_R,half_upper_L,head)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/boar.png",
+  "review_extra": [
+   "tools/blender/creatures/review/boar_attack_side.png",
+   "tools/blender/creatures/review/boar_attack_front34.png",
+   "tools/blender/creatures/review/boar_turn.png"
+  ]
  },
  "construct": {
   "id": "construct",
   "file": "game/public/assets/creatures/construct.glb",
-  "bytes": 1120584,
+  "bytes": 1181744,
   "animations": [
    "attack",
    "death",
@@ -138,7 +361,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 22,
+  "joints": 26,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -219,7 +442,7 @@
     ]
    }
   },
-  "bones": 22,
+  "bones": 26,
   "bbox_min": [
    -0.87,
    -0.6,
@@ -233,14 +456,178 @@
   "height": 2.398,
   "faces_plus_z": true,
   "death_end_height": 0.734,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 6516,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 20,
+     "any_loss": 0.0,
+     "any_loss_region": "neck",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "neck",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 11,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 50,
+     "any_loss": 0.0,
+     "any_loss_region": "head",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 45,
+     "any_loss": 0.0,
+     "any_loss_region": "neck",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 2,
+     "any_loss": 0.0,
+     "any_loss_region": "chest",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 5,
+     "any_loss": 0.0,
+     "any_loss_region": "neck",
+     "max_gain": 0.0,
+     "max_gain_region": "shin_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/construct.png"
+  "review": "tools/blender/creatures/review/construct.png",
+  "review_extra": [
+   "tools/blender/creatures/review/construct_attack_side.png",
+   "tools/blender/creatures/review/construct_attack_front34.png",
+   "tools/blender/creatures/review/construct_turn.png"
+  ]
  },
  "construct-oath-13": {
   "id": "construct-oath-13",
   "file": "game/public/assets/creatures/construct-oath-13.glb",
-  "bytes": 1286620,
+  "bytes": 1348960,
   "animations": [
    "attack",
    "death",
@@ -257,7 +644,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 22,
+  "joints": 26,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -338,7 +725,7 @@
     ]
    }
   },
-  "bones": 22,
+  "bones": 26,
   "bbox_min": [
    -0.863,
    -0.591,
@@ -352,14 +739,177 @@
   "height": 2.395,
   "faces_plus_z": true,
   "death_end_height": 0.767,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 5215,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 20,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_R",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 13,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_R",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 7,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_R",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 9,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 5,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_R",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "foot_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/construct-oath-13.png"
+  "review": "tools/blender/creatures/review/construct-oath-13.png",
+  "review_extra": [
+   "tools/blender/creatures/review/construct-oath-13_attack_side.png",
+   "tools/blender/creatures/review/construct-oath-13_attack_front34.png"
+  ]
  },
  "construct-oath-14": {
   "id": "construct-oath-14",
   "file": "game/public/assets/creatures/construct-oath-14.glb",
-  "bytes": 1402400,
+  "bytes": 1460104,
   "animations": [
    "attack",
    "death",
@@ -376,7 +926,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 23,
+  "joints": 27,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -457,7 +1007,7 @@
     ]
    }
   },
-  "bones": 23,
+  "bones": 27,
   "bbox_min": [
    -0.87,
    -0.6,
@@ -471,14 +1021,178 @@
   "height": 2.398,
   "faces_plus_z": true,
   "death_end_height": 0.734,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "neck",
+    "pendulum",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 8184,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 20,
+     "any_loss": 0.0,
+     "any_loss_region": "pendulum",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 2,
+     "any_loss": 0.0,
+     "any_loss_region": "pendulum",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 11,
+     "any_loss": 0.0,
+     "any_loss_region": "pendulum",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 50,
+     "any_loss": 0.0,
+     "any_loss_region": "pendulum",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 45,
+     "any_loss": 0.0,
+     "any_loss_region": "pendulum",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 2,
+     "any_loss": 0.0,
+     "any_loss_region": "pendulum",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "neck",
+     "front_loss_frame": 21,
+     "any_loss": 0.0,
+     "any_loss_region": "pendulum",
+     "max_gain": 0.0,
+     "max_gain_region": "shin_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/construct-oath-14.png"
+  "review": "tools/blender/creatures/review/construct-oath-14.png",
+  "review_extra": [
+   "tools/blender/creatures/review/construct-oath-14_attack_side.png",
+   "tools/blender/creatures/review/construct-oath-14_attack_front34.png"
+  ]
  },
  "drake": {
   "id": "drake",
   "file": "game/public/assets/creatures/drake.glb",
-  "bytes": 2079788,
+  "bytes": 2181488,
   "animations": [
    "attack",
    "death",
@@ -495,7 +1209,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 43,
+  "joints": 54,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -576,10 +1290,10 @@
     ]
    }
   },
-  "bones": 43,
+  "bones": 54,
   "bbox_min": [
    -1.581,
-   -1.838,
+   -1.836,
    -0.009
   ],
   "bbox_max": [
@@ -590,14 +1304,232 @@
   "height": 2.58,
   "faces_plus_z": true,
   "death_end_height": 3.444,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/drake.png"
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "tail5",
+    "tail6",
+    "thigh_L",
+    "thigh_R",
+    "wing1_L",
+    "wing1_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9442,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0584,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 8,
+     "any_loss": 0.2357,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.602,
+     "max_gain_region": "jaw",
+     "flips": 10,
+     "flip_frame": 6,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_shin_R",
+      "half_fore_L",
+      "fore_L"
+     ],
+     "min_edge_ratio": 0.2472,
+     "max_edge_ratio": 12.0016,
+     "p01_edge_ratio": 0.7535,
+     "ok": false,
+     "reasons": [
+      "10 inverted tris @f6 (half_thigh_L,half_shin_R,half_fore_L,fore_L)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.0696,
+     "front_loss_region": "chest",
+     "front_loss_frame": 28,
+     "any_loss": 0.3101,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.3368,
+     "max_gain_region": "jaw",
+     "flips": 19,
+     "flip_frame": 27,
+     "flip_bones": [
+      "half_thigh_R",
+      "half_shin_R",
+      "upper_R",
+      "half_thigh_L"
+     ],
+     "min_edge_ratio": 0.0701,
+     "max_edge_ratio": 6.1505,
+     "p01_edge_ratio": 0.6841,
+     "ok": false,
+     "reasons": [
+      "19 inverted tris @f27 (half_thigh_R,half_shin_R,upper_R,half_thigh_L)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.0011,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.1889,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.4047,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3689,
+     "max_edge_ratio": 6.6276,
+     "p01_edge_ratio": 0.8016,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0103,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 16,
+     "any_loss": 0.0397,
+     "any_loss_region": "wing1_R",
+     "max_gain": 0.1093,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7731,
+     "max_edge_ratio": 2.3146,
+     "p01_edge_ratio": 0.9276,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0059,
+     "front_loss_region": "chest",
+     "front_loss_frame": 6,
+     "any_loss": 0.14,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.6916,
+     "max_gain_region": "jaw",
+     "flips": 1,
+     "flip_frame": 10,
+     "flip_bones": [
+      "tail1"
+     ],
+     "min_edge_ratio": 0.2566,
+     "max_edge_ratio": 13.1984,
+     "p01_edge_ratio": 0.6981,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f10 (tail1)"
+     ]
+    },
+    "run": {
+     "front_loss": 0.1243,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.6282,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.3754,
+     "max_gain_region": "shin_R",
+     "flips": 91,
+     "flip_frame": 11,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_thigh_R",
+      "half_shin_R",
+      "half_shin_L"
+     ],
+     "min_edge_ratio": 0.0877,
+     "max_edge_ratio": 4.1028,
+     "p01_edge_ratio": 0.6358,
+     "ok": false,
+     "reasons": [
+      "91 inverted tris @f11 (half_thigh_L,half_thigh_R,half_shin_R,half_shin_L)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1109,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.4961,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.1445,
+     "max_gain_region": "shin_R",
+     "flips": 20,
+     "flip_frame": 10,
+     "flip_bones": [
+      "half_shin_R",
+      "half_thigh_R",
+      "thigh_R",
+      "shin_R"
+     ],
+     "min_edge_ratio": 0.0849,
+     "max_edge_ratio": 2.6177,
+     "p01_edge_ratio": 0.7168,
+     "ok": false,
+     "reasons": [
+      "20 inverted tris @f10 (half_shin_R,half_thigh_R,thigh_R,shin_R)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 10 inverted tris @f6 (half_thigh_L,half_shin_R,half_fore_L,fore_L)",
+    "death: 19 inverted tris @f27 (half_thigh_R,half_shin_R,upper_R,half_thigh_L)",
+    "roar: 1 inverted tris @f10 (tail1)",
+    "run: 91 inverted tris @f11 (half_thigh_L,half_thigh_R,half_shin_R,half_shin_L)",
+    "walk: 20 inverted tris @f10 (half_shin_R,half_thigh_R,thigh_R,shin_R)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 10 inverted tris @f6 (half_thigh_L,half_shin_R,half_fore_L,fore_L)",
+   "deform death: 19 inverted tris @f27 (half_thigh_R,half_shin_R,upper_R,half_thigh_L)",
+   "deform roar: 1 inverted tris @f10 (tail1)",
+   "deform run: 91 inverted tris @f11 (half_thigh_L,half_thigh_R,half_shin_R,half_shin_L)",
+   "deform walk: 20 inverted tris @f10 (half_shin_R,half_thigh_R,thigh_R,shin_R)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/drake.png",
+  "review_extra": [
+   "tools/blender/creatures/review/drake_attack_side.png",
+   "tools/blender/creatures/review/drake_attack_front34.png",
+   "tools/blender/creatures/review/drake_turn.png"
+  ]
  },
  "drake-oath-01": {
   "id": "drake-oath-01",
   "file": "game/public/assets/creatures/drake-oath-01.glb",
-  "bytes": 2374696,
+  "bytes": 2511388,
   "animations": [
    "attack",
    "death",
@@ -614,7 +1546,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 43,
+  "joints": 54,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -695,10 +1627,10 @@
     ]
    }
   },
-  "bones": 43,
+  "bones": 54,
   "bbox_min": [
    -1.581,
-   -1.838,
+   -1.836,
    -0.009
   ],
   "bbox_max": [
@@ -709,14 +1641,231 @@
   "height": 2.58,
   "faces_plus_z": true,
   "death_end_height": 3.444,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/drake-oath-01.png"
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "tail5",
+    "tail6",
+    "thigh_L",
+    "thigh_R",
+    "wing1_L",
+    "wing1_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9442,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0584,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 8,
+     "any_loss": 0.2357,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.602,
+     "max_gain_region": "jaw",
+     "flips": 10,
+     "flip_frame": 6,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_shin_R",
+      "half_fore_L",
+      "fore_L"
+     ],
+     "min_edge_ratio": 0.2472,
+     "max_edge_ratio": 12.0016,
+     "p01_edge_ratio": 0.7535,
+     "ok": false,
+     "reasons": [
+      "10 inverted tris @f6 (half_thigh_L,half_shin_R,half_fore_L,fore_L)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.0696,
+     "front_loss_region": "chest",
+     "front_loss_frame": 28,
+     "any_loss": 0.3101,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.3368,
+     "max_gain_region": "jaw",
+     "flips": 19,
+     "flip_frame": 27,
+     "flip_bones": [
+      "half_thigh_R",
+      "half_shin_R",
+      "upper_R",
+      "half_thigh_L"
+     ],
+     "min_edge_ratio": 0.0701,
+     "max_edge_ratio": 6.1505,
+     "p01_edge_ratio": 0.6841,
+     "ok": false,
+     "reasons": [
+      "19 inverted tris @f27 (half_thigh_R,half_shin_R,upper_R,half_thigh_L)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.0011,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.1889,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.4047,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3689,
+     "max_edge_ratio": 6.6276,
+     "p01_edge_ratio": 0.8016,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0103,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 16,
+     "any_loss": 0.0397,
+     "any_loss_region": "wing1_R",
+     "max_gain": 0.1093,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7731,
+     "max_edge_ratio": 2.3146,
+     "p01_edge_ratio": 0.9276,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0059,
+     "front_loss_region": "chest",
+     "front_loss_frame": 6,
+     "any_loss": 0.14,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.6916,
+     "max_gain_region": "jaw",
+     "flips": 1,
+     "flip_frame": 10,
+     "flip_bones": [
+      "tail1"
+     ],
+     "min_edge_ratio": 0.2566,
+     "max_edge_ratio": 13.1984,
+     "p01_edge_ratio": 0.6981,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f10 (tail1)"
+     ]
+    },
+    "run": {
+     "front_loss": 0.1243,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.6282,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.3754,
+     "max_gain_region": "shin_R",
+     "flips": 91,
+     "flip_frame": 11,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_thigh_R",
+      "half_shin_R",
+      "half_shin_L"
+     ],
+     "min_edge_ratio": 0.0877,
+     "max_edge_ratio": 4.1028,
+     "p01_edge_ratio": 0.6358,
+     "ok": false,
+     "reasons": [
+      "91 inverted tris @f11 (half_thigh_L,half_thigh_R,half_shin_R,half_shin_L)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1109,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.4961,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.1445,
+     "max_gain_region": "shin_R",
+     "flips": 20,
+     "flip_frame": 10,
+     "flip_bones": [
+      "half_shin_R",
+      "half_thigh_R",
+      "thigh_R",
+      "shin_R"
+     ],
+     "min_edge_ratio": 0.0849,
+     "max_edge_ratio": 2.6177,
+     "p01_edge_ratio": 0.7168,
+     "ok": false,
+     "reasons": [
+      "20 inverted tris @f10 (half_shin_R,half_thigh_R,thigh_R,shin_R)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 10 inverted tris @f6 (half_thigh_L,half_shin_R,half_fore_L,fore_L)",
+    "death: 19 inverted tris @f27 (half_thigh_R,half_shin_R,upper_R,half_thigh_L)",
+    "roar: 1 inverted tris @f10 (tail1)",
+    "run: 91 inverted tris @f11 (half_thigh_L,half_thigh_R,half_shin_R,half_shin_L)",
+    "walk: 20 inverted tris @f10 (half_shin_R,half_thigh_R,thigh_R,shin_R)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 10 inverted tris @f6 (half_thigh_L,half_shin_R,half_fore_L,fore_L)",
+   "deform death: 19 inverted tris @f27 (half_thigh_R,half_shin_R,upper_R,half_thigh_L)",
+   "deform roar: 1 inverted tris @f10 (tail1)",
+   "deform run: 91 inverted tris @f11 (half_thigh_L,half_thigh_R,half_shin_R,half_shin_L)",
+   "deform walk: 20 inverted tris @f10 (half_shin_R,half_thigh_R,thigh_R,shin_R)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/drake-oath-01.png",
+  "review_extra": [
+   "tools/blender/creatures/review/drake-oath-01_attack_side.png",
+   "tools/blender/creatures/review/drake-oath-01_attack_front34.png"
+  ]
  },
  "golem": {
   "id": "golem",
   "file": "game/public/assets/creatures/golem.glb",
-  "bytes": 1541368,
+  "bytes": 1583156,
   "animations": [
    "attack",
    "death",
@@ -732,7 +1881,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 22,
+  "joints": 26,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -796,7 +1945,7 @@
     ]
    }
   },
-  "bones": 22,
+  "bones": 26,
   "bbox_min": [
    -1.411,
    -1.133,
@@ -810,14 +1959,176 @@
   "height": 3.201,
   "faces_plus_z": true,
   "death_end_height": 0.895,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 6639,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 4,
+     "any_loss": 0.0,
+     "any_loss_region": "thigh_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 18,
+     "any_loss": 0.0,
+     "any_loss_region": "thigh_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "thigh_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 13,
+     "any_loss": 0.0,
+     "any_loss_region": "foot_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 5,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 11,
+     "any_loss": 0.0,
+     "any_loss_region": "foot_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 1,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/golem.png"
+  "review": "tools/blender/creatures/review/golem.png",
+  "review_extra": [
+   "tools/blender/creatures/review/golem_attack_side.png",
+   "tools/blender/creatures/review/golem_attack_front34.png",
+   "tools/blender/creatures/review/golem_turn.png"
+  ]
  },
  "golem-oath-02": {
   "id": "golem-oath-02",
   "file": "game/public/assets/creatures/golem-oath-02.glb",
-  "bytes": 1505764,
+  "bytes": 1546900,
   "animations": [
    "attack",
    "death",
@@ -833,7 +2144,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 22,
+  "joints": 26,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -897,7 +2208,7 @@
     ]
    }
   },
-  "bones": 22,
+  "bones": 26,
   "bbox_min": [
    -1.267,
    -1.018,
@@ -911,14 +2222,175 @@
   "height": 3.194,
   "faces_plus_z": true,
   "death_end_height": 0.804,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 7387,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 31,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "chest",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 15,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 20,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 52,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 11,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_L",
+     "max_gain": 0.0,
+     "max_gain_region": "hips",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "chest",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/golem-oath-02.png"
+  "review": "tools/blender/creatures/review/golem-oath-02.png",
+  "review_extra": [
+   "tools/blender/creatures/review/golem-oath-02_attack_side.png",
+   "tools/blender/creatures/review/golem-oath-02_attack_front34.png"
+  ]
  },
  "golem-oath-05": {
   "id": "golem-oath-05",
   "file": "game/public/assets/creatures/golem-oath-05.glb",
-  "bytes": 1603332,
+  "bytes": 1644100,
   "animations": [
    "attack",
    "death",
@@ -934,7 +2406,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 22,
+  "joints": 26,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -998,7 +2470,7 @@
     ]
    }
   },
-  "bones": 22,
+  "bones": 26,
   "bbox_min": [
    -1.346,
    -1.033,
@@ -1012,14 +2484,175 @@
   "height": 3.194,
   "faces_plus_z": true,
   "death_end_height": 0.831,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 6639,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 30,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_R",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 15,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_R",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 11,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 20,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 45,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "foot_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 5,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "thigh_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 30,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "foot_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/golem-oath-05.png"
+  "review": "tools/blender/creatures/review/golem-oath-05.png",
+  "review_extra": [
+   "tools/blender/creatures/review/golem-oath-05_attack_side.png",
+   "tools/blender/creatures/review/golem-oath-05_attack_front34.png"
+  ]
  },
  "golem-oath-10": {
   "id": "golem-oath-10",
   "file": "game/public/assets/creatures/golem-oath-10.glb",
-  "bytes": 1650352,
+  "bytes": 1692228,
   "animations": [
    "attack",
    "death",
@@ -1035,7 +2668,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 26,
+  "joints": 30,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -1099,7 +2732,7 @@
     ]
    }
   },
-  "bones": 26,
+  "bones": 30,
   "bbox_min": [
    -1.739,
    -1.595,
@@ -1113,14 +2746,178 @@
   "height": 3.201,
   "faces_plus_z": true,
   "death_end_height": 2.005,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "orb1",
+    "orb2",
+    "orb3",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 7800,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 4,
+     "any_loss": 0.0,
+     "any_loss_region": "thigh_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "thigh_R",
+     "max_gain": 0.0,
+     "max_gain_region": "orb3",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "thigh_R",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 3,
+     "any_loss": 0.0,
+     "any_loss_region": "foot_R",
+     "max_gain": 0.0,
+     "max_gain_region": "orb2",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 45,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "orb3",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 11,
+     "any_loss": 0.0,
+     "any_loss_region": "foot_R",
+     "max_gain": 0.0,
+     "max_gain_region": "orb3",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 37,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "orb3",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/golem-oath-10.png"
+  "review": "tools/blender/creatures/review/golem-oath-10.png",
+  "review_extra": [
+   "tools/blender/creatures/review/golem-oath-10_attack_side.png",
+   "tools/blender/creatures/review/golem-oath-10_attack_front34.png"
+  ]
  },
  "golem-oath-15": {
   "id": "golem-oath-15",
   "file": "game/public/assets/creatures/golem-oath-15.glb",
-  "bytes": 967196,
+  "bytes": 1008108,
   "animations": [
    "attack",
    "death",
@@ -1136,7 +2933,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 22,
+  "joints": 26,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -1200,7 +2997,7 @@
     ]
    }
   },
-  "bones": 22,
+  "bones": 26,
   "bbox_min": [
    -1.344,
    -1.105,
@@ -1214,19 +3011,181 @@
   "height": 3.194,
   "faces_plus_z": true,
   "death_end_height": 0.878,
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 2860,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 29,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "forearm_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 12,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 6,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 5,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 5,
+     "any_loss": 0.0,
+     "any_loss_region": "hand_L",
+     "max_gain": 0.0,
+     "max_gain_region": "shoulder_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 2,
+     "any_loss": 0.0,
+     "any_loss_region": "toe_R",
+     "max_gain": 0.0,
+     "max_gain_region": "toe_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/golem-oath-15.png"
+  "review": "tools/blender/creatures/review/golem-oath-15.png",
+  "review_extra": [
+   "tools/blender/creatures/review/golem-oath-15_attack_side.png",
+   "tools/blender/creatures/review/golem-oath-15_attack_front34.png"
+  ]
  },
  "hound": {
   "id": "hound",
   "file": "game/public/assets/creatures/hound.glb",
-  "bytes": 1861008,
+  "bytes": 2026792,
   "animations": [
    "attack",
    "death",
    "hit",
    "idle",
+   "roar",
    "run",
    "walk"
   ],
@@ -1237,7 +3196,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 33,
+  "joints": 44,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -1318,7 +3277,7 @@
     ]
    }
   },
-  "bones": 33,
+  "bones": 44,
   "bbox_min": [
    -0.17,
    -0.86,
@@ -1331,20 +3290,231 @@
   ],
   "height": 1.093,
   "faces_plus_z": true,
-  "death_end_height": 0.34,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/hound.png"
+  "death_end_height": 0.321,
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "ear_L",
+    "ear_R",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "hips",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "thigh_L",
+    "thigh_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9455,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0339,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 7,
+     "any_loss": 0.1598,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.9445,
+     "max_gain_region": "ear_R",
+     "flips": 4,
+     "flip_frame": 7,
+     "flip_bones": [
+      "spine2",
+      "half_upper_L",
+      "upper_L",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.2601,
+     "max_edge_ratio": 9.5587,
+     "p01_edge_ratio": 0.746,
+     "ok": false,
+     "reasons": [
+      "4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.1414,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 14,
+     "any_loss": 0.3372,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.6038,
+     "max_gain_region": "ear_L",
+     "flips": 27,
+     "flip_frame": 13,
+     "flip_bones": [
+      "upper_L",
+      "half_thigh_L",
+      "half_shin_R",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.1132,
+     "max_edge_ratio": 4.9169,
+     "p01_edge_ratio": 0.6648,
+     "ok": false,
+     "reasons": [
+      "27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.001,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 0,
+     "any_loss": 0.1415,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.7801,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3595,
+     "max_edge_ratio": 5.2941,
+     "p01_edge_ratio": 0.7864,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0172,
+     "front_loss_region": "neck",
+     "front_loss_frame": 31,
+     "any_loss": 0.1657,
+     "any_loss_region": "ear_R",
+     "max_gain": 0.2026,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7206,
+     "max_edge_ratio": 1.9274,
+     "p01_edge_ratio": 0.9329,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0182,
+     "front_loss_region": "neck",
+     "front_loss_frame": 8,
+     "any_loss": 0.0989,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.6035,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3985,
+     "max_edge_ratio": 10.5105,
+     "p01_edge_ratio": 0.8032,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.1081,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.4681,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.3725,
+     "max_gain_region": "shin_L",
+     "flips": 67,
+     "flip_frame": 11,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_thigh_R",
+      "thigh_L",
+      "thigh_R"
+     ],
+     "min_edge_ratio": 0.0862,
+     "max_edge_ratio": 3.4808,
+     "p01_edge_ratio": 0.5824,
+     "ok": false,
+     "reasons": [
+      "67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1001,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.3765,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.1761,
+     "max_gain_region": "shin_L",
+     "flips": 11,
+     "flip_frame": 0,
+     "flip_bones": [
+      "upper_L",
+      "spine2",
+      "half_upper_L"
+     ],
+     "min_edge_ratio": 0.107,
+     "max_edge_ratio": 2.8549,
+     "p01_edge_ratio": 0.6884,
+     "ok": false,
+     "reasons": [
+      "11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+    "death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+    "run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+    "walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+   "deform death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+   "deform run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+   "deform walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/hound.png",
+  "review_extra": [
+   "tools/blender/creatures/review/hound_attack_side.png",
+   "tools/blender/creatures/review/hound_attack_front34.png",
+   "tools/blender/creatures/review/hound_turn.png"
+  ]
  },
  "hound-oath-01": {
   "id": "hound-oath-01",
   "file": "game/public/assets/creatures/hound-oath-01.glb",
-  "bytes": 1919140,
+  "bytes": 2079672,
   "animations": [
    "attack",
    "death",
    "hit",
    "idle",
+   "roar",
    "run",
    "walk"
   ],
@@ -1355,7 +3525,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 33,
+  "joints": 44,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -1436,7 +3606,7 @@
     ]
    }
   },
-  "bones": 33,
+  "bones": 44,
   "bbox_min": [
    -0.17,
    -0.86,
@@ -1449,20 +3619,230 @@
   ],
   "height": 1.093,
   "faces_plus_z": true,
-  "death_end_height": 0.34,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/hound-oath-01.png"
+  "death_end_height": 0.321,
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "ear_L",
+    "ear_R",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "hips",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "thigh_L",
+    "thigh_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9455,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0339,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 7,
+     "any_loss": 0.1598,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.9445,
+     "max_gain_region": "ear_R",
+     "flips": 4,
+     "flip_frame": 7,
+     "flip_bones": [
+      "spine2",
+      "half_upper_L",
+      "upper_L",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.2601,
+     "max_edge_ratio": 9.5587,
+     "p01_edge_ratio": 0.746,
+     "ok": false,
+     "reasons": [
+      "4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.1414,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 14,
+     "any_loss": 0.3372,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.6038,
+     "max_gain_region": "ear_L",
+     "flips": 27,
+     "flip_frame": 13,
+     "flip_bones": [
+      "upper_L",
+      "half_thigh_L",
+      "half_shin_R",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.1132,
+     "max_edge_ratio": 4.9169,
+     "p01_edge_ratio": 0.6648,
+     "ok": false,
+     "reasons": [
+      "27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.001,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 0,
+     "any_loss": 0.1415,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.7801,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3595,
+     "max_edge_ratio": 5.2941,
+     "p01_edge_ratio": 0.7864,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0172,
+     "front_loss_region": "neck",
+     "front_loss_frame": 31,
+     "any_loss": 0.1657,
+     "any_loss_region": "ear_R",
+     "max_gain": 0.2026,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7206,
+     "max_edge_ratio": 1.9274,
+     "p01_edge_ratio": 0.9329,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0182,
+     "front_loss_region": "neck",
+     "front_loss_frame": 8,
+     "any_loss": 0.0989,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.6035,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3985,
+     "max_edge_ratio": 10.5105,
+     "p01_edge_ratio": 0.8032,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.1081,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.4681,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.3725,
+     "max_gain_region": "shin_L",
+     "flips": 67,
+     "flip_frame": 11,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_thigh_R",
+      "thigh_L",
+      "thigh_R"
+     ],
+     "min_edge_ratio": 0.0862,
+     "max_edge_ratio": 3.4808,
+     "p01_edge_ratio": 0.5824,
+     "ok": false,
+     "reasons": [
+      "67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1001,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.3765,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.1761,
+     "max_gain_region": "shin_L",
+     "flips": 11,
+     "flip_frame": 0,
+     "flip_bones": [
+      "upper_L",
+      "spine2",
+      "half_upper_L"
+     ],
+     "min_edge_ratio": 0.107,
+     "max_edge_ratio": 2.8549,
+     "p01_edge_ratio": 0.6884,
+     "ok": false,
+     "reasons": [
+      "11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+    "death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+    "run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+    "walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+   "deform death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+   "deform run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+   "deform walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/hound-oath-01.png",
+  "review_extra": [
+   "tools/blender/creatures/review/hound-oath-01_attack_side.png",
+   "tools/blender/creatures/review/hound-oath-01_attack_front34.png"
+  ]
  },
  "hound-oath-02": {
   "id": "hound-oath-02",
   "file": "game/public/assets/creatures/hound-oath-02.glb",
-  "bytes": 1974260,
+  "bytes": 2135032,
   "animations": [
    "attack",
    "death",
    "hit",
    "idle",
+   "roar",
    "run",
    "walk"
   ],
@@ -1473,7 +3853,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 33,
+  "joints": 44,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -1554,7 +3934,7 @@
     ]
    }
   },
-  "bones": 33,
+  "bones": 44,
   "bbox_min": [
    -0.17,
    -0.86,
@@ -1567,20 +3947,230 @@
   ],
   "height": 1.093,
   "faces_plus_z": true,
-  "death_end_height": 0.34,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/hound-oath-02.png"
+  "death_end_height": 0.321,
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "ear_L",
+    "ear_R",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "hips",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "thigh_L",
+    "thigh_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9455,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0339,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 7,
+     "any_loss": 0.1598,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.9445,
+     "max_gain_region": "ear_R",
+     "flips": 4,
+     "flip_frame": 7,
+     "flip_bones": [
+      "spine2",
+      "half_upper_L",
+      "upper_L",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.2601,
+     "max_edge_ratio": 9.5587,
+     "p01_edge_ratio": 0.746,
+     "ok": false,
+     "reasons": [
+      "4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.1414,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 14,
+     "any_loss": 0.3372,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.6038,
+     "max_gain_region": "ear_L",
+     "flips": 27,
+     "flip_frame": 13,
+     "flip_bones": [
+      "upper_L",
+      "half_thigh_L",
+      "half_shin_R",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.1132,
+     "max_edge_ratio": 4.9169,
+     "p01_edge_ratio": 0.6648,
+     "ok": false,
+     "reasons": [
+      "27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.001,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 0,
+     "any_loss": 0.1415,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.7801,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3595,
+     "max_edge_ratio": 5.2941,
+     "p01_edge_ratio": 0.7864,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0172,
+     "front_loss_region": "neck",
+     "front_loss_frame": 31,
+     "any_loss": 0.1657,
+     "any_loss_region": "ear_R",
+     "max_gain": 0.2026,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7206,
+     "max_edge_ratio": 1.9274,
+     "p01_edge_ratio": 0.9329,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0182,
+     "front_loss_region": "neck",
+     "front_loss_frame": 8,
+     "any_loss": 0.0989,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.6035,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3985,
+     "max_edge_ratio": 10.5105,
+     "p01_edge_ratio": 0.8032,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.1081,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.4681,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.3725,
+     "max_gain_region": "shin_L",
+     "flips": 67,
+     "flip_frame": 11,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_thigh_R",
+      "thigh_L",
+      "thigh_R"
+     ],
+     "min_edge_ratio": 0.0862,
+     "max_edge_ratio": 3.4808,
+     "p01_edge_ratio": 0.5824,
+     "ok": false,
+     "reasons": [
+      "67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1001,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.3765,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.1761,
+     "max_gain_region": "shin_L",
+     "flips": 11,
+     "flip_frame": 0,
+     "flip_bones": [
+      "upper_L",
+      "spine2",
+      "half_upper_L"
+     ],
+     "min_edge_ratio": 0.107,
+     "max_edge_ratio": 2.8549,
+     "p01_edge_ratio": 0.6884,
+     "ok": false,
+     "reasons": [
+      "11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+    "death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+    "run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+    "walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+   "deform death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+   "deform run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+   "deform walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/hound-oath-02.png",
+  "review_extra": [
+   "tools/blender/creatures/review/hound-oath-02_attack_side.png",
+   "tools/blender/creatures/review/hound-oath-02_attack_front34.png"
+  ]
  },
  "hound-oath-15": {
   "id": "hound-oath-15",
   "file": "game/public/assets/creatures/hound-oath-15.glb",
-  "bytes": 1948792,
+  "bytes": 2117336,
   "animations": [
    "attack",
    "death",
    "hit",
    "idle",
+   "roar",
    "run",
    "walk"
   ],
@@ -1591,7 +4181,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 33,
+  "joints": 44,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -1672,7 +4262,7 @@
     ]
    }
   },
-  "bones": 33,
+  "bones": 44,
   "bbox_min": [
    -0.17,
    -0.86,
@@ -1685,15 +4275,224 @@
   ],
   "height": 1.093,
   "faces_plus_z": true,
-  "death_end_height": 0.34,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/hound-oath-15.png"
+  "death_end_height": 0.321,
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "ear_L",
+    "ear_R",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "hips",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "thigh_L",
+    "thigh_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9455,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0339,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 7,
+     "any_loss": 0.1598,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.9445,
+     "max_gain_region": "ear_R",
+     "flips": 4,
+     "flip_frame": 7,
+     "flip_bones": [
+      "spine2",
+      "half_upper_L",
+      "upper_L",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.2601,
+     "max_edge_ratio": 9.5587,
+     "p01_edge_ratio": 0.746,
+     "ok": false,
+     "reasons": [
+      "4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.1414,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 14,
+     "any_loss": 0.3372,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.6038,
+     "max_gain_region": "ear_L",
+     "flips": 27,
+     "flip_frame": 13,
+     "flip_bones": [
+      "upper_L",
+      "half_thigh_L",
+      "half_shin_R",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.1132,
+     "max_edge_ratio": 4.9169,
+     "p01_edge_ratio": 0.6648,
+     "ok": false,
+     "reasons": [
+      "27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.001,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 0,
+     "any_loss": 0.1415,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.7801,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3595,
+     "max_edge_ratio": 5.2941,
+     "p01_edge_ratio": 0.7864,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0172,
+     "front_loss_region": "neck",
+     "front_loss_frame": 31,
+     "any_loss": 0.1657,
+     "any_loss_region": "ear_R",
+     "max_gain": 0.2026,
+     "max_gain_region": "ear_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7206,
+     "max_edge_ratio": 1.9274,
+     "p01_edge_ratio": 0.9329,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0182,
+     "front_loss_region": "neck",
+     "front_loss_frame": 8,
+     "any_loss": 0.0989,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.6035,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3985,
+     "max_edge_ratio": 10.5105,
+     "p01_edge_ratio": 0.8032,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.1081,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.4681,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.3725,
+     "max_gain_region": "shin_L",
+     "flips": 67,
+     "flip_frame": 11,
+     "flip_bones": [
+      "half_thigh_L",
+      "half_thigh_R",
+      "thigh_L",
+      "thigh_R"
+     ],
+     "min_edge_ratio": 0.0862,
+     "max_edge_ratio": 3.4808,
+     "p01_edge_ratio": 0.5824,
+     "ok": false,
+     "reasons": [
+      "67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1001,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 0,
+     "any_loss": 0.3765,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.1761,
+     "max_gain_region": "shin_L",
+     "flips": 11,
+     "flip_frame": 0,
+     "flip_bones": [
+      "upper_L",
+      "spine2",
+      "half_upper_L"
+     ],
+     "min_edge_ratio": 0.107,
+     "max_edge_ratio": 2.8549,
+     "p01_edge_ratio": 0.6884,
+     "ok": false,
+     "reasons": [
+      "11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+    "death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+    "run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+    "walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 4 inverted tris @f7 (spine2,half_upper_L,upper_L,upper_R)",
+   "deform death: 27 inverted tris @f13 (upper_L,half_thigh_L,half_shin_R,upper_R)",
+   "deform run: 67 inverted tris @f11 (half_thigh_L,half_thigh_R,thigh_L,thigh_R)",
+   "deform walk: 11 inverted tris @f0 (upper_L,spine2,half_upper_L)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/hound-oath-15.png",
+  "review_extra": [
+   "tools/blender/creatures/review/hound-oath-15_attack_side.png",
+   "tools/blender/creatures/review/hound-oath-15_attack_front34.png"
+  ]
  },
  "raptor": {
   "id": "raptor",
   "file": "game/public/assets/creatures/raptor.glb",
-  "bytes": 1816748,
+  "bytes": 1867344,
   "animations": [
    "attack",
    "death",
@@ -1710,7 +4509,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 27,
+  "joints": 36,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -1791,28 +4590,235 @@
     ]
    }
   },
-  "bones": 27,
+  "bones": 36,
   "bbox_min": [
-   -0.242,
-   -1.207,
+   -0.249,
+   -1.208,
    0.002
   ],
   "bbox_max": [
-   0.242,
+   0.248,
    1.804,
    1.892
   ],
   "height": 1.892,
   "faces_plus_z": true,
-  "death_end_height": 0.417,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/raptor.png"
+  "death_end_height": 0.41,
+  "deform": {
+   "regions": [
+    "chest",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "tail5",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 8954,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0492,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 23,
+     "any_loss": 0.1176,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.9576,
+     "max_gain_region": "jaw",
+     "flips": 20,
+     "flip_frame": 11,
+     "flip_bones": [
+      "spine1",
+      "thigh_R",
+      "half_shin_R"
+     ],
+     "min_edge_ratio": 0.1765,
+     "max_edge_ratio": 8.8813,
+     "p01_edge_ratio": 0.704,
+     "ok": false,
+     "reasons": [
+      "20 inverted tris @f11 (spine1,thigh_R,half_shin_R)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.1418,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 31,
+     "any_loss": 0.248,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.5538,
+     "max_gain_region": "jaw",
+     "flips": 12,
+     "flip_frame": 19,
+     "flip_bones": [
+      "spine1",
+      "half_shin_L",
+      "half_shin_R",
+      "thigh_L"
+     ],
+     "min_edge_ratio": 0.0308,
+     "max_edge_ratio": 5.1472,
+     "p01_edge_ratio": 0.6712,
+     "ok": false,
+     "reasons": [
+      "12 inverted tris @f19 (spine1,half_shin_L,half_shin_R,thigh_L)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.0492,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 12,
+     "any_loss": 0.0509,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.6844,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.6655,
+     "max_edge_ratio": 5.9903,
+     "p01_edge_ratio": 0.8546,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.111,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 34,
+     "any_loss": 0.111,
+     "any_loss_region": "shoulder_R",
+     "max_gain": 0.09,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7354,
+     "max_edge_ratio": 1.5834,
+     "p01_edge_ratio": 0.9272,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0492,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 0,
+     "any_loss": 0.0492,
+     "any_loss_region": "shoulder_R",
+     "max_gain": 1.0056,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.5586,
+     "max_edge_ratio": 9.2083,
+     "p01_edge_ratio": 0.8319,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0476,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 13,
+     "any_loss": 0.3938,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.3674,
+     "max_gain_region": "shoulder_R",
+     "flips": 131,
+     "flip_frame": 3,
+     "flip_bones": [
+      "spine1",
+      "thigh_R",
+      "half_thigh_R",
+      "half_shin_R"
+     ],
+     "min_edge_ratio": 0.0639,
+     "max_edge_ratio": 5.9016,
+     "p01_edge_ratio": 0.5725,
+     "ok": false,
+     "reasons": [
+      "131 inverted tris @f3 (spine1,thigh_R,half_thigh_R,half_shin_R)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1543,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 2,
+     "any_loss": 0.2337,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.1912,
+     "max_gain_region": "shin_L",
+     "flips": 47,
+     "flip_frame": 21,
+     "flip_bones": [
+      "spine1",
+      "thigh_L",
+      "half_shin_L"
+     ],
+     "min_edge_ratio": 0.095,
+     "max_edge_ratio": 3.7214,
+     "p01_edge_ratio": 0.6572,
+     "ok": false,
+     "reasons": [
+      "shoulder_R volume -15% @f2",
+      "47 inverted tris @f21 (spine1,thigh_L,half_shin_L)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 20 inverted tris @f11 (spine1,thigh_R,half_shin_R)",
+    "death: 12 inverted tris @f19 (spine1,half_shin_L,half_shin_R,thigh_L)",
+    "run: 131 inverted tris @f3 (spine1,thigh_R,half_thigh_R,half_shin_R)",
+    "walk: shoulder_R volume -15% @f2; 47 inverted tris @f21 (spine1,thigh_L,half_shin_L)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 20 inverted tris @f11 (spine1,thigh_R,half_shin_R)",
+   "deform death: 12 inverted tris @f19 (spine1,half_shin_L,half_shin_R,thigh_L)",
+   "deform run: 131 inverted tris @f3 (spine1,thigh_R,half_thigh_R,half_shin_R)",
+   "deform walk: shoulder_R volume -15% @f2; 47 inverted tris @f21 (spine1,thigh_L,half_shin_L)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/raptor.png",
+  "review_extra": [
+   "tools/blender/creatures/review/raptor_attack_side.png",
+   "tools/blender/creatures/review/raptor_attack_front34.png",
+   "tools/blender/creatures/review/raptor_turn.png"
+  ]
  },
  "serpent": {
   "id": "serpent",
   "file": "game/public/assets/creatures/serpent.glb",
-  "bytes": 1575092,
+  "bytes": 1616384,
   "animations": [
    "attack",
    "death",
@@ -1838,7 +4844,7 @@
   "extensionsUsed": [
    "KHR_materials_emissive_strength"
   ],
-  "tris": 11500,
+  "tris": 11680,
   "max_influences": 4,
   "materials_detail": {
    "body": {
@@ -1912,26 +4918,219 @@
   },
   "bones": 24,
   "bbox_min": [
-   -0.455,
-   -0.937,
-   -0.021
+   -0.465,
+   -0.986,
+   -0.02
   ],
   "bbox_max": [
-   0.4,
-   2.04,
+   0.445,
+   2.148,
    1.407
   ],
   "height": 1.407,
   "faces_plus_z": true,
-  "death_end_height": 1.178,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/serpent.png"
+  "death_end_height": 1.306,
+  "deform": {
+   "regions": [
+    "chest",
+    "head",
+    "hips",
+    "hood_L",
+    "hood_R",
+    "jaw",
+    "spine1",
+    "spine3",
+    "spine4",
+    "spine5",
+    "spine6",
+    "spine7",
+    "spine8",
+    "spine9",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "tail5",
+    "tail6",
+    "tail7"
+   ],
+   "front_regions": [
+    "chest"
+   ],
+   "organic_tris": 9968,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 8,
+     "any_loss": 0.0211,
+     "any_loss_region": "hood_R",
+     "max_gain": 0.1273,
+     "max_gain_region": "head",
+     "flips": 2,
+     "flip_frame": 10,
+     "flip_bones": [
+      "spine9",
+      "head"
+     ],
+     "min_edge_ratio": 0.3475,
+     "max_edge_ratio": 4.0228,
+     "p01_edge_ratio": 0.8487,
+     "ok": false,
+     "reasons": [
+      "2 inverted tris @f10 (spine9,head)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.0184,
+     "front_loss_region": "chest",
+     "front_loss_frame": 29,
+     "any_loss": 0.047,
+     "any_loss_region": "spine6",
+     "max_gain": 0.149,
+     "max_gain_region": "hood_L",
+     "flips": 22,
+     "flip_frame": 27,
+     "flip_bones": [
+      "spine9",
+      "head",
+      "jaw",
+      "spine6"
+     ],
+     "min_edge_ratio": 0.0592,
+     "max_edge_ratio": 3.2913,
+     "p01_edge_ratio": 0.7305,
+     "ok": false,
+     "reasons": [
+      "22 inverted tris @f27 (spine9,head,jaw,spine6)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 12,
+     "any_loss": 0.0406,
+     "any_loss_region": "hood_R",
+     "max_gain": 0.0825,
+     "max_gain_region": "hood_L",
+     "flips": 1,
+     "flip_frame": 2,
+     "flip_bones": [
+      "head"
+     ],
+     "min_edge_ratio": 0.3236,
+     "max_edge_ratio": 2.7245,
+     "p01_edge_ratio": 0.8715,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f2 (head)"
+     ]
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 0,
+     "any_loss": 0.0557,
+     "any_loss_region": "jaw",
+     "max_gain": 0.0467,
+     "max_gain_region": "head",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.6701,
+     "max_edge_ratio": 1.8213,
+     "p01_edge_ratio": 0.9374,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": "chest",
+     "front_loss_frame": 0,
+     "any_loss": 0.0404,
+     "any_loss_region": "jaw",
+     "max_gain": 0.1537,
+     "max_gain_region": "hood_R",
+     "flips": 1,
+     "flip_frame": 10,
+     "flip_bones": [
+      "head"
+     ],
+     "min_edge_ratio": 0.1142,
+     "max_edge_ratio": 4.5632,
+     "p01_edge_ratio": 0.8144,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f10 (head)"
+     ]
+    },
+    "run": {
+     "front_loss": 0.0073,
+     "front_loss_region": "chest",
+     "front_loss_frame": 19,
+     "any_loss": 0.0241,
+     "any_loss_region": "hood_L",
+     "max_gain": 0.0253,
+     "max_gain_region": "hood_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7384,
+     "max_edge_ratio": 1.3169,
+     "p01_edge_ratio": 0.9005,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0045,
+     "front_loss_region": "chest",
+     "front_loss_frame": 31,
+     "any_loss": 0.0243,
+     "any_loss_region": "hood_L",
+     "max_gain": 0.0252,
+     "max_gain_region": "hood_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.75,
+     "max_edge_ratio": 1.2568,
+     "p01_edge_ratio": 0.931,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 2 inverted tris @f10 (spine9,head)",
+    "death: 22 inverted tris @f27 (spine9,head,jaw,spine6)",
+    "hit: 1 inverted tris @f2 (head)",
+    "roar: 1 inverted tris @f10 (head)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 2 inverted tris @f10 (spine9,head)",
+   "deform death: 22 inverted tris @f27 (spine9,head,jaw,spine6)",
+   "deform hit: 1 inverted tris @f2 (head)",
+   "deform roar: 1 inverted tris @f10 (head)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/serpent.png",
+  "review_extra": [
+   "tools/blender/creatures/review/serpent_attack_side.png",
+   "tools/blender/creatures/review/serpent_attack_front34.png",
+   "tools/blender/creatures/review/serpent_turn.png"
+  ]
  },
  "spider": {
   "id": "spider",
   "file": "game/public/assets/creatures/spider.glb",
-  "bytes": 1777396,
+  "bytes": 1949024,
   "animations": [
    "attack",
    "death",
@@ -1948,7 +5147,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 31,
+  "joints": 47,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -2029,28 +5228,233 @@
     ]
    }
   },
-  "bones": 31,
+  "bones": 47,
   "bbox_min": [
    -1.298,
-   -1.418,
+   -1.417,
    0.005
   ],
   "bbox_max": [
    1.298,
-   1.201,
-   1.199
+   1.2,
+   1.2
   ],
-  "height": 1.199,
+  "height": 1.2,
   "faces_plus_z": true,
-  "death_end_height": 1.056,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/spider.png"
+  "death_end_height": 0.859,
+  "deform": {
+   "regions": [
+    "abdomen",
+    "fang_L",
+    "fang_R",
+    "femur1_L",
+    "femur1_R",
+    "femur2_L",
+    "femur2_R",
+    "femur3_L",
+    "femur3_R",
+    "femur4_L",
+    "femur4_R",
+    "hips",
+    "palp_L",
+    "palp_R",
+    "tarsus1_L",
+    "tarsus1_R",
+    "tarsus2_L",
+    "tarsus2_R",
+    "tarsus3_L",
+    "tarsus3_R",
+    "tarsus4_L",
+    "tarsus4_R",
+    "tibia1_L",
+    "tibia1_R",
+    "tibia2_L",
+    "tibia2_R",
+    "tibia3_L",
+    "tibia3_R",
+    "tibia4_L",
+    "tibia4_R"
+   ],
+   "front_regions": [],
+   "organic_tris": 9985,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.3626,
+     "any_loss_region": "femur4_R",
+     "max_gain": 0.1373,
+     "max_gain_region": "femur4_R",
+     "flips": 15,
+     "flip_frame": 8,
+     "flip_bones": [
+      "half_femur1_R",
+      "half_femur1_L",
+      "palp_L",
+      "femur1_L"
+     ],
+     "min_edge_ratio": 0.3323,
+     "max_edge_ratio": 3.7989,
+     "p01_edge_ratio": 0.7403,
+     "ok": false,
+     "reasons": [
+      "15 inverted tris @f8 (half_femur1_R,half_femur1_L,palp_L,femur1_L)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.9717,
+     "any_loss_region": "femur4_L",
+     "max_gain": 1.0641,
+     "max_gain_region": "femur4_R",
+     "flips": 423,
+     "flip_frame": 24,
+     "flip_bones": [
+      "half_femur4_R",
+      "femur4_R",
+      "half_femur4_L",
+      "femur3_L"
+     ],
+     "min_edge_ratio": 0.013,
+     "max_edge_ratio": 7.4357,
+     "p01_edge_ratio": 0.3774,
+     "ok": false,
+     "reasons": [
+      "423 inverted tris @f24 (half_femur4_R,femur4_R,half_femur4_L,femur3_L)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0765,
+     "any_loss_region": "fang_R",
+     "max_gain": 0.0964,
+     "max_gain_region": "femur4_R",
+     "flips": 1,
+     "flip_frame": 2,
+     "flip_bones": [
+      "fang_L"
+     ],
+     "min_edge_ratio": 0.4834,
+     "max_edge_ratio": 1.8852,
+     "p01_edge_ratio": 0.89,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f2 (fang_L)"
+     ]
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.1406,
+     "any_loss_region": "femur4_L",
+     "max_gain": 0.0619,
+     "max_gain_region": "femur4_L",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7699,
+     "max_edge_ratio": 1.316,
+     "p01_edge_ratio": 0.9558,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.1688,
+     "any_loss_region": "fang_R",
+     "max_gain": 0.0518,
+     "max_gain_region": "femur1_R",
+     "flips": 17,
+     "flip_frame": 17,
+     "flip_bones": [
+      "half_femur1_R",
+      "half_femur1_L",
+      "palp_L",
+      "femur1_L"
+     ],
+     "min_edge_ratio": 0.3638,
+     "max_edge_ratio": 3.7989,
+     "p01_edge_ratio": 0.7145,
+     "ok": false,
+     "reasons": [
+      "17 inverted tris @f17 (half_femur1_R,half_femur1_L,palp_L,femur1_L)"
+     ]
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.489,
+     "any_loss_region": "femur4_R",
+     "max_gain": 0.5353,
+     "max_gain_region": "femur4_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3484,
+     "max_edge_ratio": 1.8632,
+     "p01_edge_ratio": 0.8474,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.5247,
+     "any_loss_region": "femur4_R",
+     "max_gain": 0.4301,
+     "max_gain_region": "femur4_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.4847,
+     "max_edge_ratio": 1.6227,
+     "p01_edge_ratio": 0.883,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 15 inverted tris @f8 (half_femur1_R,half_femur1_L,palp_L,femur1_L)",
+    "death: 423 inverted tris @f24 (half_femur4_R,femur4_R,half_femur4_L,femur3_L)",
+    "hit: 1 inverted tris @f2 (fang_L)",
+    "roar: 17 inverted tris @f17 (half_femur1_R,half_femur1_L,palp_L,femur1_L)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 15 inverted tris @f8 (half_femur1_R,half_femur1_L,palp_L,femur1_L)",
+   "deform death: 423 inverted tris @f24 (half_femur4_R,femur4_R,half_femur4_L,femur3_L)",
+   "deform hit: 1 inverted tris @f2 (fang_L)",
+   "deform roar: 17 inverted tris @f17 (half_femur1_R,half_femur1_L,palp_L,femur1_L)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/spider.png",
+  "review_extra": [
+   "tools/blender/creatures/review/spider_attack_side.png",
+   "tools/blender/creatures/review/spider_attack_front34.png",
+   "tools/blender/creatures/review/spider_turn.png"
+  ]
  },
  "stag": {
   "id": "stag",
   "file": "game/public/assets/creatures/stag.glb",
-  "bytes": 1661964,
+  "bytes": 1744660,
   "animations": [
    "attack",
    "death",
@@ -2067,7 +5471,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 33,
+  "joints": 44,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -2148,10 +5552,10 @@
     ]
    }
   },
-  "bones": 33,
+  "bones": 44,
   "bbox_min": [
    -0.509,
-   -0.924,
+   -0.926,
    0.002
   ],
   "bbox_max": [
@@ -2161,15 +5565,231 @@
   ],
   "height": 2.096,
   "faces_plus_z": true,
-  "death_end_height": 0.618,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/stag.png"
+  "death_end_height": 0.615,
+  "deform": {
+   "regions": [
+    "carp_L",
+    "carp_R",
+    "chest",
+    "ear_L",
+    "ear_R",
+    "fore_L",
+    "fore_R",
+    "ftoe_L",
+    "ftoe_R",
+    "head",
+    "hips",
+    "htoe_L",
+    "htoe_R",
+    "jaw",
+    "meta_L",
+    "meta_R",
+    "neck",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "tail1",
+    "tail2",
+    "tail3",
+    "tail4",
+    "thigh_L",
+    "thigh_R"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 8970,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0572,
+     "front_loss_region": "neck",
+     "front_loss_frame": 9,
+     "any_loss": 0.1544,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.1942,
+     "max_gain_region": "tail1",
+     "flips": 7,
+     "flip_frame": 7,
+     "flip_bones": [
+      "half_upper_L",
+      "upper_R"
+     ],
+     "min_edge_ratio": 0.1942,
+     "max_edge_ratio": 3.5391,
+     "p01_edge_ratio": 0.6648,
+     "ok": false,
+     "reasons": [
+      "7 inverted tris @f7 (half_upper_L,upper_R)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.1523,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 14,
+     "any_loss": 0.2499,
+     "any_loss_region": "ftoe_R",
+     "max_gain": 0.2262,
+     "max_gain_region": "jaw",
+     "flips": 24,
+     "flip_frame": 13,
+     "flip_bones": [
+      "upper_L",
+      "half_upper_L",
+      "half_thigh_L",
+      "half_thigh_R"
+     ],
+     "min_edge_ratio": 0.1529,
+     "max_edge_ratio": 3.539,
+     "p01_edge_ratio": 0.6407,
+     "ok": false,
+     "reasons": [
+      "shoulder_L volume -15% @f14",
+      "24 inverted tris @f13 (upper_L,half_upper_L,half_thigh_L,half_thigh_R)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.0203,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 2,
+     "any_loss": 0.1609,
+     "any_loss_region": "tail1",
+     "max_gain": 0.2549,
+     "max_gain_region": "jaw",
+     "flips": 1,
+     "flip_frame": 2,
+     "flip_bones": [
+      "half_thigh_R"
+     ],
+     "min_edge_ratio": 0.5225,
+     "max_edge_ratio": 3.7833,
+     "p01_edge_ratio": 0.7663,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f2 (half_thigh_R)"
+     ]
+    },
+    "idle": {
+     "front_loss": 0.0138,
+     "front_loss_region": "chest",
+     "front_loss_frame": 18,
+     "any_loss": 0.0292,
+     "any_loss_region": "ear_R",
+     "max_gain": 0.0701,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7977,
+     "max_edge_ratio": 1.6085,
+     "p01_edge_ratio": 0.9395,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0151,
+     "front_loss_region": "chest",
+     "front_loss_frame": 6,
+     "any_loss": 0.089,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.4458,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.4588,
+     "max_edge_ratio": 7.1613,
+     "p01_edge_ratio": 0.8171,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.1337,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.4056,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.2611,
+     "max_gain_region": "shin_R",
+     "flips": 141,
+     "flip_frame": 10,
+     "flip_bones": [
+      "thigh_R",
+      "thigh_L",
+      "spine2",
+      "half_thigh_R"
+     ],
+     "min_edge_ratio": 0.0552,
+     "max_edge_ratio": 4.0882,
+     "p01_edge_ratio": 0.5294,
+     "ok": false,
+     "reasons": [
+      "141 inverted tris @f10 (thigh_R,thigh_L,spine2,half_thigh_R)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.1387,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 7,
+     "any_loss": 0.2957,
+     "any_loss_region": "shin_R",
+     "max_gain": 0.1184,
+     "max_gain_region": "shin_R",
+     "flips": 23,
+     "flip_frame": 10,
+     "flip_bones": [
+      "half_thigh_R",
+      "thigh_R",
+      "half_neck1",
+      "spine2"
+     ],
+     "min_edge_ratio": 0.118,
+     "max_edge_ratio": 3.0025,
+     "p01_edge_ratio": 0.6742,
+     "ok": false,
+     "reasons": [
+      "23 inverted tris @f10 (half_thigh_R,thigh_R,half_neck1,spine2)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 7 inverted tris @f7 (half_upper_L,upper_R)",
+    "death: shoulder_L volume -15% @f14; 24 inverted tris @f13 (upper_L,half_upper_L,half_thigh_L,half_thigh_R)",
+    "hit: 1 inverted tris @f2 (half_thigh_R)",
+    "run: 141 inverted tris @f10 (thigh_R,thigh_L,spine2,half_thigh_R)",
+    "walk: 23 inverted tris @f10 (half_thigh_R,thigh_R,half_neck1,spine2)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 7 inverted tris @f7 (half_upper_L,upper_R)",
+   "deform death: shoulder_L volume -15% @f14; 24 inverted tris @f13 (upper_L,half_upper_L,half_thigh_L,half_thigh_R)",
+   "deform hit: 1 inverted tris @f2 (half_thigh_R)",
+   "deform run: 141 inverted tris @f10 (thigh_R,thigh_L,spine2,half_thigh_R)",
+   "deform walk: 23 inverted tris @f10 (half_thigh_R,thigh_R,half_neck1,spine2)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/stag.png",
+  "review_extra": [
+   "tools/blender/creatures/review/stag_attack_side.png",
+   "tools/blender/creatures/review/stag_attack_front34.png",
+   "tools/blender/creatures/review/stag_turn.png"
+  ]
  },
  "treant": {
   "id": "treant",
   "file": "game/public/assets/creatures/treant.glb",
-  "bytes": 1463108,
+  "bytes": 1543876,
   "animations": [
    "attack",
    "death",
@@ -2186,7 +5806,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 22,
+  "joints": 26,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -2267,7 +5887,7 @@
     ]
    }
   },
-  "bones": 22,
+  "bones": 26,
   "bbox_min": [
    -1.149,
    -1.096,
@@ -2281,9 +5901,206 @@
   "height": 3.58,
   "faces_plus_z": true,
   "death_end_height": 0.787,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/treant.png"
+  "deform": {
+   "regions": [
+    "chest",
+    "foot_L",
+    "foot_R",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "shin_L",
+    "shin_R",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1",
+    "thigh_L",
+    "thigh_R",
+    "toe_L",
+    "toe_R"
+   ],
+   "front_regions": [
+    "chest",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 9472,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0934,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 13,
+     "any_loss": 0.0934,
+     "any_loss_region": "shoulder_L",
+     "max_gain": 0.0693,
+     "max_gain_region": "spine1",
+     "flips": 8,
+     "flip_frame": 12,
+     "flip_bones": [
+      "half_upperarm_R",
+      "half_upperarm_L",
+      "upperarm_R"
+     ],
+     "min_edge_ratio": 0.1787,
+     "max_edge_ratio": 3.5083,
+     "p01_edge_ratio": 0.6342,
+     "ok": false,
+     "reasons": [
+      "8 inverted tris @f12 (half_upperarm_R,half_upperarm_L,upperarm_R)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.0569,
+     "front_loss_region": "chest",
+     "front_loss_frame": 13,
+     "any_loss": 0.1676,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.0077,
+     "max_gain_region": "shoulder_L",
+     "flips": 74,
+     "flip_frame": 14,
+     "flip_bones": [
+      "thigh_L",
+      "shin_R",
+      "thigh_R",
+      "shin_L"
+     ],
+     "min_edge_ratio": 0.1414,
+     "max_edge_ratio": 3.8297,
+     "p01_edge_ratio": 0.5427,
+     "ok": false,
+     "reasons": [
+      "74 inverted tris @f14 (thigh_L,shin_R,thigh_R,shin_L)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.004,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 2,
+     "any_loss": 0.0167,
+     "any_loss_region": "thigh_L",
+     "max_gain": 0.052,
+     "max_gain_region": "chest",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.524,
+     "max_edge_ratio": 1.8921,
+     "p01_edge_ratio": 0.8358,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.004,
+     "front_loss_region": "chest",
+     "front_loss_frame": 14,
+     "any_loss": 0.004,
+     "any_loss_region": "chest",
+     "max_gain": 0.0051,
+     "max_gain_region": "shoulder_R",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.7925,
+     "max_edge_ratio": 1.2387,
+     "p01_edge_ratio": 0.9473,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0172,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 28,
+     "any_loss": 0.0283,
+     "any_loss_region": "shin_L",
+     "max_gain": 0.0674,
+     "max_gain_region": "chest",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3334,
+     "max_edge_ratio": 3.2297,
+     "p01_edge_ratio": 0.7361,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0171,
+     "front_loss_region": "chest",
+     "front_loss_frame": 23,
+     "any_loss": 0.0994,
+     "any_loss_region": "thigh_L",
+     "max_gain": 0.0312,
+     "max_gain_region": "toe_L",
+     "flips": 7,
+     "flip_frame": 25,
+     "flip_bones": [
+      "shin_R",
+      "foot_R",
+      "half_thigh_L",
+      "hips"
+     ],
+     "min_edge_ratio": 0.2996,
+     "max_edge_ratio": 3.9146,
+     "p01_edge_ratio": 0.7187,
+     "ok": false,
+     "reasons": [
+      "7 inverted tris @f25 (shin_R,foot_R,half_thigh_L,hips)"
+     ]
+    },
+    "walk": {
+     "front_loss": 0.0052,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 1,
+     "any_loss": 0.0567,
+     "any_loss_region": "thigh_L",
+     "max_gain": 0.0307,
+     "max_gain_region": "thigh_L",
+     "flips": 2,
+     "flip_frame": 17,
+     "flip_bones": [
+      "half_thigh_R",
+      "shin_R"
+     ],
+     "min_edge_ratio": 0.3181,
+     "max_edge_ratio": 2.8711,
+     "p01_edge_ratio": 0.7945,
+     "ok": false,
+     "reasons": [
+      "2 inverted tris @f17 (half_thigh_R,shin_R)"
+     ]
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 8 inverted tris @f12 (half_upperarm_R,half_upperarm_L,upperarm_R)",
+    "death: 74 inverted tris @f14 (thigh_L,shin_R,thigh_R,shin_L)",
+    "run: 7 inverted tris @f25 (shin_R,foot_R,half_thigh_L,hips)",
+    "walk: 2 inverted tris @f17 (half_thigh_R,shin_R)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 8 inverted tris @f12 (half_upperarm_R,half_upperarm_L,upperarm_R)",
+   "deform death: 74 inverted tris @f14 (thigh_L,shin_R,thigh_R,shin_L)",
+   "deform run: 7 inverted tris @f25 (shin_R,foot_R,half_thigh_L,hips)",
+   "deform walk: 2 inverted tris @f17 (half_thigh_R,shin_R)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/treant.png",
+  "review_extra": [
+   "tools/blender/creatures/review/treant_attack_side.png",
+   "tools/blender/creatures/review/treant_attack_front34.png",
+   "tools/blender/creatures/review/treant_turn.png"
+  ]
  },
  "wisp": {
   "id": "wisp",
@@ -2400,14 +6217,155 @@
   "height": 1.6,
   "faces_plus_z": true,
   "death_end_height": 0.639,
+  "deform": {
+   "regions": [
+    "core"
+   ],
+   "front_regions": [],
+   "organic_tris": 3584,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0,
+     "any_loss_region": "core",
+     "max_gain": 0.0,
+     "max_gain_region": "core",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0,
+     "any_loss_region": "core",
+     "max_gain": 0.0,
+     "max_gain_region": "core",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0,
+     "any_loss_region": "core",
+     "max_gain": 0.0,
+     "max_gain_region": "core",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0,
+     "any_loss_region": "core",
+     "max_gain": 0.0,
+     "max_gain_region": "core",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0,
+     "any_loss_region": "core",
+     "max_gain": 0.0,
+     "max_gain_region": "core",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0,
+     "any_loss_region": "core",
+     "max_gain": 0.0,
+     "max_gain_region": "core",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0,
+     "front_loss_region": null,
+     "front_loss_frame": null,
+     "any_loss": 0.0,
+     "any_loss_region": "core",
+     "max_gain": 0.0,
+     "max_gain_region": "core",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 1.0,
+     "max_edge_ratio": 1.0,
+     "p01_edge_ratio": 1.0,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/wisp.png"
+  "review": "tools/blender/creatures/review/wisp.png",
+  "review_extra": [
+   "tools/blender/creatures/review/wisp_attack_side.png",
+   "tools/blender/creatures/review/wisp_attack_front34.png",
+   "tools/blender/creatures/review/wisp_turn.png"
+  ]
  },
  "wraith": {
   "id": "wraith",
   "file": "game/public/assets/creatures/wraith.glb",
-  "bytes": 1595980,
+  "bytes": 1615396,
   "animations": [
    "attack",
    "death",
@@ -2424,7 +6382,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 45,
+  "joints": 47,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -2505,7 +6463,7 @@
     ]
    }
   },
-  "bones": 45,
+  "bones": 47,
   "bbox_min": [
    -0.722,
    -0.789,
@@ -2519,14 +6477,200 @@
   "height": 2.386,
   "faces_plus_z": true,
   "death_end_height": 1.642,
-  "issues": [],
-  "ok": true,
-  "review": "tools/blender/creatures/review/wraith.png"
+  "deform": {
+   "regions": [
+    "chest",
+    "cloth0_1",
+    "cloth1_1",
+    "cloth2_1",
+    "cloth3_1",
+    "cloth4_1",
+    "cloth5_1",
+    "cloth8_1",
+    "cloth9_1",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "jaw",
+    "neck",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 6923,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0907,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 8,
+     "any_loss": 0.289,
+     "any_loss_region": "cloth1_1",
+     "max_gain": 1.1483,
+     "max_gain_region": "jaw",
+     "flips": 1,
+     "flip_frame": 11,
+     "flip_bones": [
+      "spine1"
+     ],
+     "min_edge_ratio": 0.3322,
+     "max_edge_ratio": 2.2879,
+     "p01_edge_ratio": 0.7591,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f11 (spine1)"
+     ]
+    },
+    "death": {
+     "front_loss": 0.0239,
+     "front_loss_region": "neck",
+     "front_loss_frame": 11,
+     "any_loss": 0.2998,
+     "any_loss_region": "cloth9_1",
+     "max_gain": 1.6233,
+     "max_gain_region": "jaw",
+     "flips": 1,
+     "flip_frame": 26,
+     "flip_bones": [
+      "spine1"
+     ],
+     "min_edge_ratio": 0.0561,
+     "max_edge_ratio": 2.9075,
+     "p01_edge_ratio": 0.7874,
+     "ok": false,
+     "reasons": [
+      "1 inverted tris @f26 (spine1)"
+     ]
+    },
+    "hit": {
+     "front_loss": 0.0154,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 2,
+     "any_loss": 0.5536,
+     "any_loss_region": "cloth9_1",
+     "max_gain": 1.1761,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.606,
+     "max_edge_ratio": 2.2901,
+     "p01_edge_ratio": 0.8544,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0065,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 33,
+     "any_loss": 0.0754,
+     "any_loss_region": "cloth9_1",
+     "max_gain": 0.3615,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.8414,
+     "max_edge_ratio": 1.3289,
+     "p01_edge_ratio": 0.9712,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0221,
+     "front_loss_region": "neck",
+     "front_loss_frame": 36,
+     "any_loss": 0.7942,
+     "any_loss_region": "cloth9_1",
+     "max_gain": 1.8348,
+     "max_gain_region": "jaw",
+     "flips": 2,
+     "flip_frame": 13,
+     "flip_bones": [
+      "spine1",
+      "cloth1_1"
+     ],
+     "min_edge_ratio": 0.1606,
+     "max_edge_ratio": 3.1782,
+     "p01_edge_ratio": 0.7488,
+     "ok": false,
+     "reasons": [
+      "2 inverted tris @f13 (spine1,cloth1_1)"
+     ]
+    },
+    "run": {
+     "front_loss": 0.0172,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 4,
+     "any_loss": 0.49,
+     "any_loss_region": "cloth1_1",
+     "max_gain": 0.6387,
+     "max_gain_region": "cloth9_1",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.473,
+     "max_edge_ratio": 1.721,
+     "p01_edge_ratio": 0.884,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.01,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 10,
+     "any_loss": 0.2765,
+     "any_loss_region": "cloth1_1",
+     "max_gain": 0.378,
+     "max_gain_region": "cloth9_1",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.6448,
+     "max_edge_ratio": 1.4318,
+     "p01_edge_ratio": 0.926,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": false,
+   "fails": [
+    "attack: 1 inverted tris @f11 (spine1)",
+    "death: 1 inverted tris @f26 (spine1)",
+    "roar: 2 inverted tris @f13 (spine1,cloth1_1)"
+   ],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
+  "issues": [
+   "deform attack: 1 inverted tris @f11 (spine1)",
+   "deform death: 1 inverted tris @f26 (spine1)",
+   "deform roar: 2 inverted tris @f13 (spine1,cloth1_1)"
+  ],
+  "ok": false,
+  "review": "tools/blender/creatures/review/wraith.png",
+  "review_extra": [
+   "tools/blender/creatures/review/wraith_attack_side.png",
+   "tools/blender/creatures/review/wraith_attack_front34.png",
+   "tools/blender/creatures/review/wraith_turn.png"
+  ]
  },
  "wraith-oath-09": {
   "id": "wraith-oath-09",
   "file": "game/public/assets/creatures/wraith-oath-09.glb",
-  "bytes": 1674404,
+  "bytes": 1685956,
   "animations": [
    "attack",
    "death",
@@ -2543,7 +6687,7 @@
    "glow"
   ],
   "skins": 1,
-  "joints": 45,
+  "joints": 47,
   "images": [
    "image/jpeg",
    "image/jpeg",
@@ -2624,7 +6768,7 @@
     ]
    }
   },
-  "bones": 45,
+  "bones": 47,
   "bbox_min": [
    -0.678,
    -0.742,
@@ -2638,8 +6782,172 @@
   "height": 2.386,
   "faces_plus_z": true,
   "death_end_height": 1.569,
+  "deform": {
+   "regions": [
+    "chest",
+    "cloth0_1",
+    "cloth1_1",
+    "cloth3_1",
+    "cloth4_1",
+    "cloth5_1",
+    "cloth6_1",
+    "cloth8_1",
+    "cloth9_1",
+    "forearm_L",
+    "forearm_R",
+    "hand_L",
+    "hand_R",
+    "head",
+    "hips",
+    "jaw",
+    "neck",
+    "shoulder_L",
+    "shoulder_R",
+    "spine1"
+   ],
+   "front_regions": [
+    "chest",
+    "neck",
+    "shoulder_L",
+    "shoulder_R"
+   ],
+   "organic_tris": 6925,
+   "clips": {
+    "attack": {
+     "front_loss": 0.0738,
+     "front_loss_region": "shoulder_L",
+     "front_loss_frame": 8,
+     "any_loss": 0.5992,
+     "any_loss_region": "cloth9_1",
+     "max_gain": 1.1126,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.3832,
+     "max_edge_ratio": 2.2674,
+     "p01_edge_ratio": 0.7534,
+     "ok": true,
+     "reasons": []
+    },
+    "death": {
+     "front_loss": 0.0212,
+     "front_loss_region": "neck",
+     "front_loss_frame": 11,
+     "any_loss": 0.1183,
+     "any_loss_region": "cloth5_1",
+     "max_gain": 1.6018,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.1427,
+     "max_edge_ratio": 2.7816,
+     "p01_edge_ratio": 0.7616,
+     "ok": true,
+     "reasons": []
+    },
+    "hit": {
+     "front_loss": 0.0065,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 2,
+     "any_loss": 0.1336,
+     "any_loss_region": "cloth5_1",
+     "max_gain": 1.5212,
+     "max_gain_region": "cloth9_1",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.5373,
+     "max_edge_ratio": 2.205,
+     "p01_edge_ratio": 0.8545,
+     "ok": true,
+     "reasons": []
+    },
+    "idle": {
+     "front_loss": 0.0029,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 31,
+     "any_loss": 0.1313,
+     "any_loss_region": "cloth9_1",
+     "max_gain": 0.3487,
+     "max_gain_region": "jaw",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.8108,
+     "max_edge_ratio": 1.3076,
+     "p01_edge_ratio": 0.9692,
+     "ok": true,
+     "reasons": []
+    },
+    "roar": {
+     "front_loss": 0.0148,
+     "front_loss_region": "neck",
+     "front_loss_frame": 36,
+     "any_loss": 0.171,
+     "any_loss_region": "cloth5_1",
+     "max_gain": 1.9086,
+     "max_gain_region": "cloth9_1",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.2901,
+     "max_edge_ratio": 3.0344,
+     "p01_edge_ratio": 0.7332,
+     "ok": true,
+     "reasons": []
+    },
+    "run": {
+     "front_loss": 0.017,
+     "front_loss_region": "shoulder_R",
+     "front_loss_frame": 16,
+     "any_loss": 0.8716,
+     "any_loss_region": "cloth0_1",
+     "max_gain": 0.1187,
+     "max_gain_region": "cloth3_1",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.5182,
+     "max_edge_ratio": 1.9021,
+     "p01_edge_ratio": 0.8827,
+     "ok": true,
+     "reasons": []
+    },
+    "walk": {
+     "front_loss": 0.0053,
+     "front_loss_region": "chest",
+     "front_loss_frame": 20,
+     "any_loss": 0.9934,
+     "any_loss_region": "cloth9_1",
+     "max_gain": 0.054,
+     "max_gain_region": "cloth3_1",
+     "flips": 0,
+     "flip_frame": null,
+     "flip_bones": [],
+     "min_edge_ratio": 0.6107,
+     "max_edge_ratio": 1.4685,
+     "p01_edge_ratio": 0.9282,
+     "ok": true,
+     "reasons": []
+    }
+   },
+   "ok": true,
+   "fails": [],
+   "limits": {
+    "front_volume_loss_max": 0.15,
+    "inverted_tris_max": 0,
+    "tri_quality_min": 0.15,
+    "tri_area_min_frac": 0.05
+   }
+  },
   "issues": [],
   "ok": true,
-  "review": "tools/blender/creatures/review/wraith-oath-09.png"
+  "review": "tools/blender/creatures/review/wraith-oath-09.png",
+  "review_extra": [
+   "tools/blender/creatures/review/wraith-oath-09_attack_side.png",
+   "tools/blender/creatures/review/wraith-oath-09_attack_front34.png"
+  ]
  }
 }
