@@ -24,6 +24,9 @@ try {
   for (const icon of ['icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png']) {
     assert(cache.some(url => url.endsWith(`/icons/${icon}`)), `${icon} precached`);
   }
+  for (const atlas of ['ability-atlas.webp', 'equipment-atlas.webp']) {
+    assert(cache.some(url => url.endsWith(`/ui/${atlas}`)), `${atlas} precached`);
+  }
   assert(cache.some(url => /simWorker.*\.js$/.test(url)), 'offline simulation worker cached');
   assert(cache.some(url => url.endsWith('/assets/characters/manifest.json')), 'character catalog precached before visiting every model');
   await context.setOffline(true);

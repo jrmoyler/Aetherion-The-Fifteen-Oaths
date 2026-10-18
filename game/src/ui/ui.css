@@ -808,3 +808,28 @@
 #ui .ae-quests.is-collapsed { width:190px; background:rgba(12,18,26,.72); }
 #ui .ae-quests.is-collapsed .ae-quests__head { font-size:12px; padding:8px; }
 @media (pointer:coarse) { #ui .ae-chat__open,#ui .ae-guide__head { min-height:44px; } }
+
+/* Touch help panels share a flow container, so expanding either cannot cover the other. */
+#ui .is-touch .ae-help-dock, #ui.is-touch .ae-help-dock {
+  position:absolute; left:calc(var(--sal) + var(--gut)); top:calc(var(--sat) + var(--gut) + 172px);
+  width:min(240px, 56vw); max-height:calc(100dvh - var(--sat) - var(--sab) - 360px);
+  display:flex; flex-direction:column; gap:6px; overflow:auto; pointer-events:auto;
+}
+#ui .ae-help-dock > .ae-guide, #ui .ae-help-dock > .ae-quests {
+  position:relative; inset:auto; width:100%; max-height:none; flex:none; box-sizing:border-box;
+}
+#ui .is-touch .ae-chat:not(.is-active), #ui.is-touch .ae-chat:not(.is-active) {
+  top:auto; bottom:calc(var(--sab) + 10px); left:50%; right:auto;
+  transform:translateX(-50%); width:max-content; height:max-content; max-width:40vw;
+}
+@media (orientation:landscape) {
+  #ui .is-touch .ae-help-dock, #ui.is-touch .ae-help-dock {
+    top:calc(var(--sat) + var(--gut) + 124px); max-height:calc(100dvh - var(--sat) - var(--sab) - 200px);
+  }
+}
+
+/* Dedicated painted atlas tiles occupy the full ability face, with key/mana overlays. */
+#ui .ae-slot .glyph { width:100%; height:100%; filter:none; overflow:hidden; border-radius:4px; }
+#ui .ae-painted-icon { min-width:0; min-height:0; border-radius:inherit; }
+#ui .ae-slot .key, #ui .ae-slot .mana { z-index:2; text-shadow:0 1px 3px #000,0 0 4px #000; }
+#ui .ae-slot .key { background:rgba(5,8,14,.8); padding:1px 3px; border-radius:2px; }

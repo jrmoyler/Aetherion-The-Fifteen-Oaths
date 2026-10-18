@@ -3,7 +3,7 @@
 import { h, clamp } from './dom.js';
 import { requestRaster, rasterToCanvas } from './terrainService.js';
 import { sanctuaries, ROUTE_SEGMENTS, ENTITY_STYLE } from './mapData.js';
-import { emblemImage, emblemSVG } from './emblems.js';
+import { emblemImage, emblemSVG, emblemRect } from './emblems.js';
 import { ICONS } from './icons.js';
 import { CREATURES } from '@shared/creatures.js';
 import { prefs } from './prefs.js';
@@ -118,7 +118,7 @@ export function createMinimap(ui) {
       if (img.complete && img.naturalWidth) {
         g.save(); g.translate(x, y); if (rotate) g.rotate(head);
         g.fillStyle = 'rgba(16,22,34,.85)'; g.beginPath(); g.arc(0, 0, 10, 0, Math.PI * 2); g.fill();
-        g.drawImage(img, img.naturalWidth * .035, img.naturalHeight * .06, img.naturalWidth * .17, img.naturalHeight * .34, -7, -7, 14, 14); g.restore();
+        g.drawImage(img, ...emblemRect(sa.oath.id, img), -7, -7, 14, 14); g.restore();
       }
       const sx = (sa.shrine.x - p.x) * s, sy = -(sa.shrine.z - p.z) * s;
       const known = gs.shrines.has(sa.oath.id);

@@ -44,6 +44,7 @@ export function createModelBody(gltf, parent) {
   let current, hold = 0;
   const animator = {
     state: 'loco', speed: 0, yawVel: 0, channel: false, action: null,
+    interval: 0, accum: 0,
     setState(name) { if (this.state !== name) { this.state = name; if (name === 'loco') hold = 0; } },
     playAnim(name) { this.action = name; hold = name === 'cast_channel' ? 2 : .65; this.select(name, true); },
     select(name, once = false) {
@@ -54,6 +55,11 @@ export function createModelBody(gltf, parent) {
       next.enabled = true; next.setEffectiveWeight(1).fadeIn(.18).play(); current?.fadeOut(.18); current = next;
     },
     update(dt) {
+      if (!Number.isFinite(dt) || dt <= 0) return false;
+      // Evaluate distant skeletons less often, retaining all elapsed animation time.
+      this.accum += dt;
+      if (this.accum + 1e-9 < this.interval) return false;
+      dt = this.accum; this.accum = 0;
       if (hold > 0) { hold -= dt; if (hold <= 0) this.action = null; }
       if (hold <= 0) {
         const name = this.state === 'loco' ? (this.speed < .2 ? 'idle' : this.backwards ? 'backpedal' : this.speed < 3 ? 'walk' : this.speed > 7 ? 'sprint' : 'run') : this.state;
@@ -62,6 +68,7 @@ export function createModelBody(gltf, parent) {
       }
       mixer.update(dt);
       if (this.state === 'land') this.state = 'loco';
+      return true;
     },
   };
   animator.select('idle');

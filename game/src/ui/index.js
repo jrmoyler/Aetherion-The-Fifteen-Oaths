@@ -130,7 +130,10 @@ function build(ctx) {
   if (touch) hudLayer.append(touch.ctrl);
   hudLayer.append(dialogs.death);
   const guide = createFieldGuide(ui);
-  hud.el.append(guide.el, guide.prompt);
+  // Keep expandable help panels in document flow on touch screens.
+  if (touchMode) hud.el.append(h('div', { class: 'ae-help-dock' }, quests.el, guide.el));
+  else hud.el.append(guide.el);
+  hud.el.append(guide.prompt);
   hud.showFps(!!prefs.get('showFps'));
   ui.log = (text) => chat.system(text);
   ui.on('hotbar', (view) => touch?.build(view));

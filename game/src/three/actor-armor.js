@@ -11,6 +11,9 @@ function fabricTexture() {
 // Armor is fitted to the existing continuous skinned body, and carried by its
 // actual bones. Profile surfaces taper and overlap at joints like worn equipment.
 export function equipArmor(body, desc) {
+  // Production GLBs contain their own fitted, skinned costume. Adding rigid
+  // generic shells over them hides the authored neckline and intersects sleeves.
+  if (body.meshes?.some(mesh => mesh.name === `${desc.oath}-${desc.cls}`)) return;
   if (desc.kind === 'mob' || !body.sockets.spine2) return;
   const oath = OATH_BY_ID[desc.oath], accent = new Color(oath?.accent ?? '#c6b181');
   const number = Number(desc.oath?.slice(-2)) || 1, mage = desc.cls === 'sorcerer';

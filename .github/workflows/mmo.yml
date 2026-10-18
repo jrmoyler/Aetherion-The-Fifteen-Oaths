@@ -28,11 +28,13 @@ jobs:
       - name: Simulation + server tests
         run: npm --prefix server test
       - name: Client regressions
-        run: node --test game/test/*.test.mjs game/tests/*.test.mjs game/src/combat/*.test.js game/src/vfx/*.test.js game/src/actors/*.test.js game/src/render/*.test.js tests/pwa-lifecycle.test.mjs tests/pwa-update.test.mjs tests/ability-expansion.test.mjs tests/ability-generation.test.mjs
+        run: node --test game/test/*.test.mjs game/tests/*.test.mjs game/src/combat/*.test.js game/src/vfx/*.test.js game/src/actors/*.test.js game/src/render/*.test.js game/src/three/*.test.js game/src/three/*.test.mjs game/src/ui/painted-icons.test.mjs tests/pwa-lifecycle.test.mjs tests/pwa-update.test.mjs tests/ability-expansion.test.mjs tests/ability-generation.test.mjs
       - name: Client production build
         run: npm --prefix game run build
       - name: Install test browser
         run: cd game && npx playwright install --with-deps chromium
+      - name: Mobile HUD layout regressions
+        run: node --test game/test/mobile-hud-layout.browser.mjs
       - name: Production PWA offline smoke
         run: |
           npm --prefix game run preview -- --host 127.0.0.1 --port 4173 > /tmp/aetherion-preview.log 2>&1 &

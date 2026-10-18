@@ -3,7 +3,7 @@
 import { h, clamp, esc } from './dom.js';
 import { requestRaster, rasterToCanvas } from './terrainService.js';
 import { sanctuaries, ROUTE_SEGMENTS } from './mapData.js';
-import { emblemImage, emblemSVG } from './emblems.js';
+import { emblemImage, emblemSVG, emblemRect } from './emblems.js';
 import { ICONS } from './icons.js';
 import { WORLD_HALF } from '@shared/terrain.js';
 import { biomeLabel } from './create.js';
@@ -117,7 +117,7 @@ export function createWorldMap(ui) {
       g.beginPath(); g.arc(x, y, md / 2, 0, Math.PI * 2); g.fill(); g.stroke();
       g.beginPath(); g.arc(x, y, md / 2 + 3, 0, Math.PI * 2); g.strokeStyle = 'rgba(236,224,196,.3)'; g.lineWidth = 1; g.stroke();
       const img = emblemImage(s.oath.id, '#f0e6c8');
-      if (img.complete && img.naturalWidth) g.drawImage(img, img.naturalWidth * .035, img.naturalHeight * .06, img.naturalWidth * .17, img.naturalHeight * .34, x - md * 0.32, y - md * 0.32, md * 0.64, md * 0.64);
+      if (img.complete && img.naturalWidth) g.drawImage(img, ...emblemRect(s.oath.id, img), x - md * 0.32, y - md * 0.32, md * 0.64, md * 0.64);
       else img.onload = () => { dirty = true; };
       const ly = y + md / 2 + labelSize * 0.95;
       const lw = s.oath.name.length * labelSize * 0.86;
