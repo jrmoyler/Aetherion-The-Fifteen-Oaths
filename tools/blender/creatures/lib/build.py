@@ -41,6 +41,9 @@ class Spec:
         self.bake_res = 1024
         self.ao_samples = 4
         self.extra = {}
+        self.weighting = "geodesic"   # organic skin: "geodesic" (volumetric, default) | "heat"
+        self.corrective = True        # gate-driven corrective weight smoothing after the clips bake
+        self.weight_rules = None      # f(bone_names, V_design, W, ei, ej) -> W  anatomical fixes
 
     def part(self, ob, bone, slot="accent", surf=None, detail=None):
         """detail=(subsurf_levels, displace_strength_m, noise_size_m): extra geometric detail on the
@@ -81,6 +84,7 @@ def build(spec, out_dir=None, verbose=True):
         hi = core.mesh_from_arrays("hi_organic", v, f)
         if verbose:
             print(f"  clay: {len(f)} tris ({time.time() - t0:.1f}s)")
+        rigmod.place_ventral(spec.bones, spec.clay, spec.height / 100.0)
     objs = ([hi] if hi else []) + [p.ob for p in spec.parts]
     lo_b, hi_b = core.stats_bbox(objs)
     s = spec.height / hi_b.z
@@ -96,7 +100,11 @@ def build(spec, out_dir=None, verbose=True):
     if hi:
         lo = core.duplicate(hi, "lo_organic")
         core.decimate_to(lo, spec.low_tris)
-        rigmod.heat_weights(lo, arm)
+        if spec.weighting == "heat":
+            rigmod.heat_weights(lo, arm)
+        else:
+            rigmod.geodesic_weights(lo, arm, spec.clay, s, spec.height, rules=spec.weight_rules,
+                                    halves=[(b.name, b.half_of) for b in spec.bones if b.half_of])
         for m in list(lo.modifiers):
             lo.modifiers.remove(m)
         lo.parent = None
@@ -166,11 +174,18 @@ def build(spec, out_dir=None, verbose=True):
     game.matrix_parent_inverse = Matrix.Identity(4)
     # 6. animation
     ctx = Ctx(spec, s, arm)
-    R = anim.Rig(arm, spec.legs, spec.hips)
+    R = anim.Rig(arm, spec.legs, spec.hips, halves=[(b.name, b.half_of) for b in spec.bones if b.half_of])
     clips = spec.clip_fn(ctx)
     for name, (frames, fn) in clips.items():
         R.bake_clip(name, frames, fn, spec.loc_bones)
     R.finalize()
+    # 6b. gate-driven corrective weighting: smooth weights only where some baked frame folds skin
+    if hi is not None and spec.corrective:
+        import sys as _sys
+        _sys.path.insert(0, HERE)
+        import deform_gate
+        acts = [bpy.data.actions[n] for n in clips]
+        spec.extra["corrective_hist"] = deform_gate.corrective_pass(arm, game, acts, log=print if verbose else (lambda *a: None))
     # 7. face +Z in glTF  (Blender -Y): rotate 180 about Z, apply
     game.parent = None
     for o in (arm, game):

@@ -1,5 +1,5 @@
 // City styles oath-01 .. oath-07.
-import { TAU, polar, rot2, colBox, stairs, terrace, banner, bannerPole, balustrade, genericHouse, brazier, lanternPost, emblemStanding, treeProto, pool, roundPool, squareTower, roundTower, crenelProto, arcPts, waterfall, hangingLanternProto, boxProto, proto } from './kit.js';
+import { TAU, polar, rot2, colBox, stairs, terrace, banner, bannerPole, balustrade, genericHouse, brazier, lanternPost, emblemStanding, treeProto, pool, roundPool, squareTower, roundTower, crenelProto, arcPts, waterfall, hangingLanternProto, boxProto, proto, circleArcs, catenary, guardRail, deckStrip } from './kit.js';
 import { terraceStairs, arcade, arcArcade, blockWall, relayPylon, cable, giantTree, sail, hangLanterns, crystalCluster, rockMass, ringBanners, channelRing, freeSpots, outerRocks } from './motifs.js';
 
 const D = Math.PI / 180;
@@ -39,7 +39,7 @@ export default {
       S.b.box(M.wall, 0, y + 13, 80, 13, 8, 10);
       for (const x of [-3.4, 0, 3.4]) S.d.box(M.glow, x, y + 15, 74.95, 0.9, 4.2, 0.1);
       S.d.box(M.trim, 0, y + 21, 80, 14, 0.6, 11);
-      S.col.box(0, 80, 17, 9.5, 0, y - 1, y + 21, false);
+      S.col.box(0, 81, 17, 10.5, 0, y - 1, y + 21, false);
       S.light(0, y + 4, 70, '#ff6a20', 22, 2.2);
       // flanking vented towers
       for (const s of [-1, 1]) {
@@ -89,7 +89,7 @@ export default {
       }
       // volcanic outcrops beyond the walls, with lava pools
       outerRocks(S, M.wall, 12, 165, 230, [12, 26], [10, 26]);
-      for (let i = 0; i < 4; i++) { const a = S.rand() * TAU; const [x, z] = polar(175 + S.rand() * 40, a); if (S.clear(x, z, 6)) { const g = S.gy(x, z); S.d.box(M.lava, x, g + 0.05, z, 10 + S.rand() * 8, 0.1, 6 + S.rand() * 6, { ry: a }); } }
+      for (let i = 0; i < 4; i++) { const a = S.rand() * TAU; const [x, z] = polar(175 + S.rand() * 40, a); if (S.clear(x, z, 6)) { const w = 10 + S.rand() * 8, d = 6 + S.rand() * 6; let g = S.gy(x, z); for (const [cx, cz] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) { const [ox, oz] = rot2(cx * w / 2, cz * d / 2, a); g = Math.min(g, S.gy(x + ox, z + oz)); } S.d.box(M.lava, x, g - 0.02, z, w, 0.1, d, { ry: a }); } }
     },
     house(S, w, d, h, rand) {
       const M = S.M;
@@ -128,7 +128,7 @@ export default {
       for (let x = -45; x <= 45; x += 1.3) { const L = 1.5 + S.rand() * 4.5; S.d.cyl(M.ice, x + S.rand() * 0.5, 17.1, 50 + S.rand() * 0.6, 0.32, 0.02, L, 5, { rx: Math.PI }); }
       // glacial waterfalls down the back wall and slab sides
       for (const x of [-50, -36, -22, 22, 36, 50]) { waterfall(S, x, 27.5, 85.4, 9, h, 0); S.d.box(M.water, x, h + 0.02, 83.5, 10, 0.05, 3.5); S.d.box(M.ice, x, h, 85.6, 10.5, 1.4, 1.4); }
-      for (const s of [-1, 1]) { waterfall(S, s * 46.5, 16.9, 60, 5, 0.06, s * Math.PI / 2); S.d.box(M.ice, s * 46.5, 0.06, 60, 3, 0.6, 6); }
+      for (const s of [-1, 1]) { waterfall(S, s * 46.5, 16.9, 60, 5, 0.06, s * Math.PI / 2); S.d.box(M.ice, s * 46.5, 0.06, 60, 3, 0.6, 6); colBox(S, s * 46.5, 60, 3, 6, 0, -1, 0.66, true); }
       // central archive tower with glowing ice core
       S.b.box(M.wall, 0, h, 66, 8, 30, 8);
       S.d.box(M.glow, 0, h + 4, 61.95, 1.3, 20, 0.12);
@@ -137,7 +137,7 @@ export default {
       colBox(S, 0, 66, 8, 8, 0, h - 1, h + 30, false);
       S.light(0, h + 6, 60, '#9fe0ff', 18, 1.8);
       // vault shelves with ice ledgers
-      for (const x of [-36, -26, 26, 36]) { S.b.box(M.trim, x, h, 80, 7, 12, 3); for (let k = 0; k < 4; k++) S.d.box(M.ice, x, h + 1.4 + k * 2.6, 78.4, 6, 1.6, 0.4); }
+      for (const x of [-36, -26, 26, 36]) { S.b.box(M.trim, x, h, 80, 7, 12, 3); colBox(S, x, 80, 7, 3, 0, h - 1, h + 12, false); for (let k = 0; k < 4; k++) S.d.box(M.ice, x, h + 1.4 + k * 2.6, 78.4, 6, 1.6, 0.4); }
       S.hallDoor = { x: 0, y: h, z: 58 };
     },
     signature(S) {
@@ -171,7 +171,7 @@ export default {
         const hh = 34 + S.rand() * 14; const g = Math.min(S.gy(x0, z0), S.gy(x1, z1));
         blockWall(S, M.wall, x0, z0, x1, z1, hh, { y: g, bw: 6, bh: 4.5, th: 7, colH: hh });
         const [mx, mz] = polar(R - 3.6, (a0 + a1) / 2);
-        if (i % 2 === 0) { waterfall(S, mx, g + hh - 1, mz, 7 + S.rand() * 4, g, (a0 + a1) / 2 + Math.PI); S.d.box(M.ice, mx, g, mz, 9, 1.6, 3, { ry: (a0 + a1) / 2 }); }
+        if (i % 2 === 0) { waterfall(S, mx, g + hh - 1, mz, 7 + S.rand() * 4, g, (a0 + a1) / 2 + Math.PI); S.d.box(M.ice, mx, g, mz, 9, 1.6, 3, { ry: (a0 + a1) / 2 }); colBox(S, mx, mz, 9, 3, (a0 + a1) / 2, g - 1, g + 1.6, true); }
       }
       outerRocks(S, M.wall, 10, 165, 235, [16, 30], [16, 34]);
       outerRocks(S, M.ice, 6, 175, 240, [10, 20], [8, 18]);
@@ -211,7 +211,7 @@ export default {
       S.d.box(M.trim, 0, h + 17, 70, 26, 0.6, 3.2);
       for (const sz of [-1.5, 1.5]) S.d.box(M.metal, 0, h + 18.1, 70 + sz, 26, 0.12, 0.12);
       for (let x = -12; x <= 12; x += 2) for (const sz of [-1.5, 1.5]) S.d.box(M.metal, x, h + 17.6, 70 + sz, 0.08, 0.6, 0.08);
-      S.b.box(M.wall, 0, h, 84, 54, 16, 14); S.b.hip(M.slate, 0, h + 16, 84, 55, 15, 5.5);
+      S.b.box(M.wall, 0, h, 84, 54, 16, 14); S.b.hip(M.slate, 0, h + 16, 84, 55, 15, 5.5); colBox(S, 0, 84, 54, 14, 0, h - 1, h + 16, false);
       for (let i = -3; i <= 3; i++) { S.d.box(M.metal, i * 7.5, h, 76.9, 0.5, 16, 0.3); if (i) S.d.box(M.glow, i * 7.5 - 3.75 * Math.sign(i) * 0, h + 9, 76.95, 1.4, 3.2, 0.1); }
       S.d.box(M.dark, 0, h, 76.9, 4, 6, 0.2);
       S.hallDoor = { x: 0, y: h, z: 70 };
@@ -422,33 +422,42 @@ export default {
       S.reserve(0, 74, 40);
       const T = giantTree(S, 0, 76, 6, 32, { y: h, roots: 9, branches: 7 });
       S.d.box(M.dark, 0, h, 69.6, 2.8, 5, 0.3); S.d.box(M.glow, 0, h, 69.8, 2.4, 4.6, 0.2);
-      S.b.archWall(M.wood, 0, h, 69.3, 4.6, 6.2, 0.6, 2.8, 5.0);
+      S.b.archWall(M.wood, 0, h, 69.3, 4.6, 6.2, 0.6, 2.8, 5.0); colBox(S, 0, 69.3, 4.6, 0.6, 0, h - 1, h + 6.2, false);
       S.light(0, h + 3, 67, '#ffb040', 14, 1.6);
       S.b.ring(M.wood, 0, 12, 76, 6.2, 11.5, 0.45, 40, { bottom: true });
-      balustrade(S, arcPts(11.3, 0, TAU * 0.92, 2.5).map(([x, z]) => [x, z + 76]), { type: 'wood', rail: M.trim, y: 12.45, h: 1.0 });
       S.col.circle(0, 76, 11.5, 11.8, 12.45, true);
-      stairs(S, M.wood, 9.5, 59.5, 0, 3, 14, h, 12.45);
+      // stair from the terrace rising straight at the trunk, landing on the ring through a rail gap
+      treeStair(S, 0, 76, 11.5, 135 * D, h + 0.2, 12.45, 15, 2.6);
+      // ring balustrade is built in signature() once the rope-bridge openings are known
+      S.hallRing = { x: 0, z: 76, r: 11.3, y: 12.45, gaps: [135 * D], halfW: 1.9 };
       hangLanterns(S, T.branches);
       S.hallDoor = { x: 0, y: h, z: 66 };
     },
     signature(S) {
-      const M = S.M; const trees = [];
-      for (const a of freeSpots(S, 66, [50 * D, -50 * D, 100 * D, -100 * D, 150 * D, -150 * D], 10)) {
-        const [x, z] = polar(66, a); const R = 2.6 + S.rand() * 0.8;
+      const M = S.M; const PY = 8.4; // platform deck height
+      const trees = freeSpots(S, 66, [50 * D, -50 * D, 100 * D, -100 * D, 150 * D, -150 * D], 10).map((a) => { const [x, z] = polar(66, a); return { x, z, a, R: 2.6 + S.rand() * 0.8, gaps: [a] }; });
+      trees.sort((p, q) => p.a - q.a);
+      // rope bridges: neighbouring trees, and each tree to the hall tree's upper ring
+      const bridges = []; const H = S.hallRing;
+      const ends = trees.map((t) => Object.assign(t, { r: t.R + 4.4, y: PY }));
+      const link = (p, q) => { bridges.push([p, q]); p.gaps.push(Math.atan2(q.x - p.x, q.z - p.z)); q.gaps.push(Math.atan2(p.x - q.x, p.z - q.z)); };
+      for (let i = 0; i < ends.length - 1; i++) if (Math.hypot(ends[i].x - ends[i + 1].x, ends[i].z - ends[i + 1].z) <= 70) link(ends[i], ends[i + 1]);
+      if (H) for (const e of ends) if (Math.hypot(e.x - H.x, e.z - H.z) <= 75) link(H, e);
+      for (const t of trees) {
+        const { x, z, a, R } = t;
         const T = giantTree(S, x, z, R, 20 + S.rand() * 6);
         S.b.ring(M.wood, x, 8, z, R + 0.6, R + 4.6, 0.4, 28, { bottom: true });
-        balustrade(S, arcPts(R + 4.4, 0, TAU * 0.9, 2.5).map(([px, pz]) => [px + x, pz + z]), { type: 'wood', rail: M.trim, y: 8.4, h: 0.95 });
-        S.col.circle(x, z, R + 4.6, 7.8, 8.4, true);
-        const [sx, sz] = polar(R + 6.5, a + Math.PI * 0.5); stairs(S, M.wood, x + sx, z + sz, a + Math.PI, 2.6, 11, 0.06, 8.4);
-        hangLanterns(S, T.branches); trees.push({ x, z, a }); S.reserve(x, z, R + 7);
+        S.col.circle(x, z, R + 4.6, 7.8, PY, true);
+        // stair on the outward side, rising at the trunk and landing on the platform ring
+        const [bx, bz] = polar(R + 17.3, a);
+        treeStair(S, x, z, R + 4.6, a, Math.max(0.06, S.gy(x + bx, z + bz)), PY, 13, 2.6);
+        ringRail(S, x, z, R + 4.4, PY, t.gaps, 1.5, 0.95);
+        hangLanterns(S, T.branches); S.reserve(x, z, R + 7);
+        const [rx, rz] = polar(R + 12, a); S.reserve(x + rx, z + rz, 7);
       }
-      trees.sort((p, q) => p.a - q.a);
-      for (let i = 0; i < trees.length - 1; i++) {
-        const p = trees[i], q = trees[i + 1]; const d = Math.hypot(p.x - q.x, p.z - q.z); if (d > 70) continue;
-        const pts = []; for (let k = 0; k <= 16; k++) { const t = k / 16; pts.push([p.x + (q.x - p.x) * t, 8.2 - Math.sin(t * Math.PI) * 1.4, p.z + (q.z - p.z) * t]); }
-        for (let k = 0; k < 16; k++) S.d.beam(M.wood, pts[k], pts[k + 1], 1.4, 0.12);
-        S.d.tube(M.metal, pts.map(([x, y, z]) => [x, y + 1.0, z]), 0.04, 4);
-      }
+      if (H) ringRail(S, H.x, H.z, H.r, H.y, H.gaps, H.halfW);
+      for (const [p, q] of bridges) ropeBridge(S, p, q);
+      for (const t of trees) { const [bx, bz] = polar(t.R + 17.6, t.a), [tx, tz] = polar(t.R + 2.5, t.a); S.qaMark('treeStair', [[t.x + bx, 0.06, t.z + bz], [t.x + tx, PY, t.z + tz]]); }
       // root arches over the plaza entrances and roots along the rim
       for (const a of [...S.roads, 0]) {
         for (const off of [0, 0.6]) {
@@ -468,6 +477,55 @@ export default {
     wallOpts: (S) => ({ type: 'palisade', h: 5, trim: S.M.bark, stakeProto: proto(`stake:${S.M.bark}`, (b) => { b.cyl(S.M.bark, 0, 0, 0, 0.24, 0.2, 5.6, 6); b.cyl(S.M.bark, 0, 5.6, 0, 0.2, 0.02, 0.8, 6); }), towers: false }),
   },
 };
+
+/** Straight stair rising toward a tree (cx,cz) from compass side `phi`, top landing `rTop` from the trunk. */
+function treeStair(S, cx, cz, rTop, phi, y0, y1, run, w) {
+  const M = S.M; const r1 = rTop - 0.3, rm = r1 + run / 2, r0 = r1 + run;
+  const [mx, mz] = polar(rm, phi);
+  stairs(S, M.wood, cx + mx, cz + mz, phi + Math.PI, w, run, y0, y1);
+  // side rails up to the platform edge (so walking along the ring is not blocked)
+  const rEdge = rTop + 0.15; const yEdge = y0 + (y1 - y0) * ((r0 - rEdge) / run);
+  for (const s of [-1, 1]) {
+    const [ox, oz] = rot2(s * (w / 2 + 0.05), 0, phi);
+    const [bx, bz] = polar(r0, phi), [tx, tz] = polar(rEdge, phi);
+    guardRail(S, [cx + bx + ox, y0, cz + bz + oz], [cx + tx + ox, yEdge, cz + tz + oz], { rail: M.wood, post: M.trim, h: 0.95 });
+  }
+}
+
+/** Wooden balustrade around a tree platform with openings at the given compass angles. */
+function ringRail(S, cx, cz, r, y, gaps, halfW, h = 1.0) {
+  for (const [a0, a1] of circleArcs(r, gaps, halfW)) balustrade(S, arcPts(r, a0, a1, 2.5).map(([x, z]) => [x + cx, z + cz]), { type: 'wood', rail: S.M.trim, y, h });
+}
+
+/**
+ * Sagging rope bridge between two tree platforms (ring edge to ring edge, deck flush with both
+ * platforms): planks, two side hand-ropes with hangers, end posts; colliders = a chain of short
+ * tilted ramps following the catenary plus solid rope-rail strips on both sides.
+ */
+function ropeBridge(S, p, q) {
+  // p/q: {x, z, r (deck starts this far from the trunk centre, on the platform), y (platform top)}
+  const M = S.M; const dx = q.x - p.x, dz = q.z - p.z; const d = Math.hypot(dx, dz); const ux = dx / d, uz = dz / d;
+  const a = [p.x + ux * p.r, p.y - 0.06, p.z + uz * p.r], b = [q.x - ux * q.r, q.y - 0.06, q.z - uz * q.r];
+  const L = Math.hypot(b[0] - a[0], b[2] - a[2]); const sag = Math.min(1.4, L * 0.04);
+  const N = 16; const pts = catenary(a, b, sag, N); // plank centre line
+  for (let k = 0; k < N; k++) S.d.beam(M.wood, pts[k], pts[k + 1], 1.4, 0.12);
+  const ry = Math.atan2(ux, uz); const side = (s, o) => rot2(s * o, 0, ry);
+  for (const s of [-1, 1]) {
+    const [ox, oz] = side(s, 0.72);
+    const rope = pts.map(([x, y, z], k) => [x + ox, y + 1.0 + Math.sin((k / N) * Math.PI) * 0.25, z + oz]);
+    S.d.tube(M.metal, rope, 0.04, 4);
+    for (let k = 2; k < N; k += 2) S.d.tube(M.metal, [[pts[k][0] + ox, pts[k][1], pts[k][2] + oz], rope[k]], 0.02, 3);
+    for (const e of [a, b]) S.d.cyl(M.trim, e[0] + ox, e[1] - 0.35, e[2] + oz, 0.12, 0.1, 1.9, 6);
+  }
+  // colliders: 6 straight pieces approximate the sag within ~4 cm
+  const C = 6; const cp = catenary([a[0], p.y, a[2]], [b[0], q.y, b[2]], sag, C);
+  deckStrip(S, cp, 0.75);
+  S.qaMark('ropeBridge', [[p.x, p.y, p.z], ...cp, [q.x, q.y, q.z]]);
+  for (const s of [-1, 1]) {
+    const [ox, oz] = side(s, 0.8);
+    for (let k = 0; k < C; k++) guardRail(S, [cp[k][0] + ox, cp[k][1], cp[k][2] + oz], [cp[k + 1][0] + ox, cp[k + 1][1], cp[k + 1][2] + oz], { visual: false, h: 1.0, chunk: 1e9 });
+  }
+}
 
 function trilithon(S, x, z, ry, y, h, span) {
   const M = S.M; S.F.push(x, y, z, ry);

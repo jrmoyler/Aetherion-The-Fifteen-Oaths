@@ -2,7 +2,7 @@
 'raptor' horizontal theropod gait with tail counterbalance and bird-like head bob."""
 import math
 from mathutils import Vector
-from .rig import Bone
+from .rig import Bone, half_bone
 from .anim import Leg, env, smooth, step_cycle
 
 SIDES = (("L", 1.0), ("R", -1.0))
@@ -190,6 +190,15 @@ def raptor(J, tail_n=5, extra=None):
         B.append(Bone(f"arm_{s}", mx(J["shoulder"], g), mx(J["elbow"], g), "chest"))
         B.append(Bone(f"forearm_{s}", mx(J["elbow"], g), mx(J["wrist"], g), f"arm_{s}"))
         B.append(Bone(f"hand_{s}", mx(J["wrist"], g), mx(J["hand"], g), f"forearm_{s}"))
+    by = {b.name: b for b in B}
+    for s, g in SIDES:
+        B.append(half_bone(by[f"thigh_{s}"], "hips"))
+        B.append(half_bone(by[f"arm_{s}"], "chest"))
+        B.append(half_bone(by[f"shin_{s}"], f"thigh_{s}"))
+    B.append(half_bone(by["neck1"], "chest"))
+    sh, s1, hp = Vector(J["shoulder"]), Vector(J["s1"]), Vector(J["hips"])
+    B.append(Bone("sternum", (0, sh.y, 0), (0, s1.y, 0), "chest", ventral=0.32))
+    B.append(Bone("belly", (0, s1.y, 0), (0, hp.y + 0.3 * (s1.y - hp.y), 0), "spine1", ventral=0.32))
     if extra:
         B += extra
     return B

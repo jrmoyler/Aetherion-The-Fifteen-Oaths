@@ -54,8 +54,9 @@ class Pose:
 
 
 class Rig:
-    def __init__(self, arm_ob, legs, hips="hips"):
+    def __init__(self, arm_ob, legs, hips="hips", halves=()):
         self.ob, self.legs, self.hips = arm_ob, {l.name: l for l in legs}, hips
+        self.halves = [(h, src) for h, src in halves if h in arm_ob.pose.bones]
         self.targets = {}
         self.rest = {}
         self.pivot = {}
@@ -156,6 +157,18 @@ class Rig:
                 ob.pose.bones[leg.bones[k]].constraints["DT"].influence = ik
         bpy.context.view_layer.update()
 
+    def drive_halves(self):
+        """joint helpers take half of their source bone's final (post-IK) local rotation."""
+        if not self.halves:
+            return
+        ob = self.ob
+        for h, src in self.halves:
+            pb = ob.pose.bones[src]
+            m = ob.convert_space(pose_bone=pb, matrix=pb.matrix, from_space="POSE", to_space="LOCAL")
+            q = m.to_quaternion()
+            ob.pose.bones[h].rotation_euler = Quaternion().slerp(q, 0.5).to_euler("XYZ")
+        bpy.context.view_layer.update()
+
     def sample(self):
         ob = self.ob
         out = {}
@@ -173,6 +186,7 @@ class Rig:
             P = Pose()
             pose_fn(t, P)
             self.apply(P)
+            self.drive_halves()
             samples.append(self.sample())
         self._write_action(name, samples, loc_bones)
         return samples

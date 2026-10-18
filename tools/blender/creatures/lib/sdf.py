@@ -187,6 +187,13 @@ class Clay:
         return lo - 0.03, hi + 0.03
 
     def evaluate(self, voxel):
+        cache = self.__dict__.setdefault("_eval_cache", {})
+        if voxel in cache:
+            return cache[voxel]
+        cache[voxel] = self._evaluate(voxel)
+        return cache[voxel]
+
+    def _evaluate(self, voxel):
         lo, hi = self.bounds()
         n = np.ceil((hi - lo) / voxel).astype(int) + 1
         xs = [lo[i] + np.arange(n[i]) * voxel for i in range(3)]

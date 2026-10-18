@@ -1,5 +1,5 @@
 // City styles oath-08 .. oath-15.
-import { TAU, polar, rot2, colBox, stairs, terrace, banner, balustrade, genericHouse, brazier, lanternPost, emblemStanding, emblemFlat, treeProto, pool, roundPool, squareTower, roundTower, swag, crateProto, boxProto, arcPts, segPts, crenelProto } from './kit.js';
+import { TAU, polar, rot2, colBox, stairs, terrace, banner, balustrade, genericHouse, brazier, lanternPost, emblemStanding, emblemFlat, treeProto, pool, roundPool, squareTower, roundTower, swag, crateProto, boxProto, arcPts, segPts, crenelProto, guardRail } from './kit.js';
 
 const D = Math.PI / 180;
 import { terraceStairs, arcade, arcArcade, blockWall, gear, cable, ringBanners, rockMass, freeSpots, outerRocks, channelRing } from './motifs.js';
@@ -68,7 +68,7 @@ export default {
       S.reserve(0, 72, 44);
       S.b.box(M.wall, 0, h, 77, 40, 13, 18); S.b.hip(M.roof, 0, h + 13, 77, 42.5, 20.5, 7);
       S.d.box(M.trim, 0, h + 12.4, 77, 40.6, 0.6, 18.6);
-      S.b.archWall(M.wall, 0, h, 67.3, 12, 13.6, 1.4, 5.2, 9);
+      S.b.archWall(M.wall, 0, h, 67.3, 12, 13.6, 1.4, 5.2, 9); for (const s of [-1, 1]) colBox(S, s * 4.3, 67.3, 3.4, 1.4, 0, h - 1, h + 13.6, false);
       S.d.box(M.dark, 0, h, 67.9, 5.2, 9, 0.2);
       emblemStanding(S, S.d, M.metal, 0, h + 11, 66.5, 1.5, 0, 0.12);
       for (const x of [-15, -9, 9, 15]) { S.b.archWall(M.trim, x, h + 3, 67.95, 3, 6, 0.3, 1.8, 5); S.d.box(M.glass, x, h + 3, 68.05, 1.8, 5, 0.1); }
@@ -96,7 +96,7 @@ export default {
         S.b.cyl(M.glass, -14, 5.5, 0, 5.4, 5.4, 28, 18, { rz: -Math.PI / 2, a0: Math.PI, arc: Math.PI, caps: false });
         for (let k = 0; k <= 8; k++) S.d.torus(M.metal, -14 + k * 3.5, 5.5, 0, 5.45, 0.09, 18, 4, { rz: Math.PI / 2, a0: -Math.PI / 2, arc: Math.PI });
         S.d.box(M.metal, 0, 10.85, 0, 28.4, 0.18, 0.3);
-        for (const ex of [-14.3, 14.3]) { S.b.box(M.wall, ex, 0, 0, 0.8, 5.5, 11); S.d.prism(M.glass, arcPts(5.4, -Math.PI / 2, Math.PI / 2, 1.2).map(([px, pz]) => [px, pz]), ex, 5.5, 0, 0.12, { vertical: true, ry: Math.PI / 2 }); }
+        for (const ex of [-14.3, 14.3]) { S.b.box(M.wall, ex, 0, 0, 0.8, 5.5, 11); colBox(S, ex, 0, 0.8, 11, 0, -1, 5.5, false); S.d.prism(M.glass, arcPts(5.4, -Math.PI / 2, Math.PI / 2, 1.2).map(([px, pz]) => [px, pz]), ex, 5.5, 0, 0.12, { vertical: true, ry: Math.PI / 2 }); }
         for (let k = 0; k < 5; k++) S.d.sphere(M.leaves, -11 + k * 5.5, 1.5, (k % 2 ? 1.5 : -1.5), 1.6, 8);
         S.F.pop(); S.reserve(x, z, 16);
       }
@@ -281,7 +281,7 @@ export default {
       const M = S.M; const h = 5;
       terraceStairs(S, { x0: -42, x1: 42, z0: 50, z1: 94, h, mat: M.wall, coping: M.trim, stairW: 14, run: 8 });
       S.reserve(0, 74, 46);
-      for (const [r, hh] of [[7, 0.6], [5.6, 1.2], [4.2, 1.8]]) S.b.box(M.trim, 0, h, 76, r * 2, hh, r * 2);
+      for (const [r, hh] of [[7, 0.6], [5.6, 1.2], [4.2, 1.8]]) { S.b.box(M.trim, 0, h, 76, r * 2, hh, r * 2); colBox(S, 0, 76, r * 2, r * 2, 0, h - 1, h + hh, true); }
       for (const s of [-1, 1]) { S.b.box(M.wall, s * 6.5, h + 1.8, 76, 3.2, 22, 3.2); S.d.box(M.trim, s * 6.5, h + 23.8, 76, 3.8, 0.8, 3.8); colBox(S, s * 6.5, 76, 3.2, 3.2, 0, h, h + 24, false); banner(S, s * 6.5, h + 21, 74.25, 0, 2.2, 11, { bar: M.metal }); }
       S.b.sphere(M.void, 0, h + 16, 76, 3.8, 22);
       S.d.torus(M.glow, 0, h + 16, 76, 4.4, 0.05, 48, 4, { rx: Math.PI / 2 });
@@ -336,7 +336,7 @@ export default {
       S.reserve(0, 74, 46);
       S.b.box(M.wall, 0, h, 80, 34, 17, 20); S.d.box(M.trim, 0, h + 17, 80, 35, 0.7, 21);
       S.F.push(0, h + 17.7, 80, 0); for (let i = 0; i < 13; i++) { const x = -16 + i * 2.66; S.inst.add(crenelProto(M.trim, 1.2, 1.2, 0.7), x, 0, -10.2); } S.F.pop();
-      S.b.archWall(M.red, 0, h, 69.6, 12, 15, 1.6, 5.4, 11);
+      S.b.archWall(M.red, 0, h, 69.6, 12, 15, 1.6, 5.4, 11); for (const s of [-1, 1]) colBox(S, s * 4.35, 69.6, 3.3, 1.6, 0, h - 1, h + 15, false);
       S.d.box(M.dark, 0, h, 70.3, 5.4, 11, 0.2); S.d.box(M.gold, 0, h + 15, 69.6, 12.4, 0.4, 1.9);
       emblemStanding(S, S.d, M.gold, 0, h + 13, 68.7, 1.2, 0, 0.1);
       for (const s of [-1, 1]) {
@@ -398,6 +398,7 @@ export default {
         for (let z = -27; z <= 27; z += 6) for (const sx of [-2.6, 2.6]) { S.b.box(M.navy, x + sx, -0.5, z, 0.6, 5.9, 0.6); S.col.circle(x + sx, z, 0.4, -1, 5.4, false); }
         for (const sx of [-2.9, 2.9]) balustrade(S, segPts([x + sx, -27], [x + sx, 27], 0, 1, 3), { type: 'iron', rail: M.navy, post: M.navy, y: 6.0, h: 1.0, balMat: M.metal });
         stairs(S, M.wall, x, -31.5, 0, 4.6, 9, 0.06, 6.0);
+        guardRail(S, [x - 2.9, 6.0, 27.9], [x + 2.9, 6.0, 27.9], { rail: M.navy, post: M.navy, h: 1.0 }); // closed far end
         for (let z = -24; z <= 24; z += 8) S.d.cloth(M.red, x - s * 3.1, 5.4, z, 1.2, 3.6, s > 0 ? -Math.PI / 2 : Math.PI / 2, 2, 6);
         S.reserve(x, 0, 30);
       }
@@ -429,7 +430,7 @@ export default {
       terraceStairs(S, { x0: -40, x1: 40, z0: 52, z1: 92, h, mat: M.wall, coping: M.trim, stairW: 14, run: 5 });
       S.reserve(0, 72, 44);
       arcade(S, M.wall, -30, 66, 30, 66, 14, 10, 3, 10, { y: h });
-      S.b.box(M.wall, 0, h, 79, 64, 14, 22); S.b.hip(M.roof, 0, h + 14, 79, 65, 23, 6);
+      S.b.box(M.wall, 0, h, 79, 64, 14, 22); S.b.hip(M.roof, 0, h + 14, 79, 65, 23, 6); colBox(S, 0, 79, 64, 22, 0, h - 1, h + 14, false);
       S.d.box(M.metal, 0, h + 14, 66, 61, 0.5, 3.4);
       gear(S, 0, h + 21, 66.5, 0, 6, M.metal, 0.15);
       gear(S, 8.6, h + 18.5, 66.6, 0, 3.2, M.metal, -0.28);
@@ -438,11 +439,7 @@ export default {
     signature(S) {
       const M = S.M;
       const chords = arcArcade(S, M.wall, 60, 0, TAU, 12, 7.5, 5, 8.6, { skip: (x, z) => !S.clear(x, z, 4) });
-      for (const c of chords) {
-        S.d.box(M.trim, c.mx, 12, c.mz, c.L + 0.1, 0.7, 5.6, { ry: c.ry }); S.d.box(M.metal, c.mx, 11.4, c.mz, c.L + 0.12, 0.35, 5.7, { ry: c.ry });
-        for (const s of [-1, 1]) { const [ox, oz] = rot2(0, s * 2.6, c.ry); S.d.box(M.metal, c.mx + ox, 13.3, c.mz + oz, c.L, 0.12, 0.12, { ry: c.ry }); S.d.box(M.trim, c.mx + ox, 12.7, c.mz + oz, 0.25, 0.7, 0.25, { ry: c.ry }); }
-        S.reserve(c.mx, c.mz, 5);
-      }
+      viaductDeck(S, chords);
       chords.forEach((c, i) => { if (i % 4 === 2) { const [bx, bz] = rot2(0, -2.9, c.ry); banner(S, c.mx + bx, 11.3, c.mz + bz, c.ry, 1.7, 5.5, { bar: M.metal }); } });
       // gears where the highway breaks for roads
       for (const a of S.roads) for (const s of [-1, 1]) { const b = a + s * 16 / 60; const [x, z] = polar(60, b); gear(S, x, 16.8, z, b, 3.2, M.metal, 0.22 * s); }
@@ -498,7 +495,7 @@ export default {
         S.col.circle(x, 70, 7, h - 1, h + 19, false);
       }
       for (const x of [-18.7, 0, 18.7]) S.d.tube(M.metal, [[x - 9, h + 13, 70], [x, h + 15, 70], [x + 9, h + 13, 70]], 0.5, 8);
-      S.b.box(M.wall, 0, h, 86, 92, 16, 10); S.d.box(M.orange, 0, h + 12, 80.95, 92, 1.2, 0.1); S.b.box(M.roof, 0, h + 16, 86, 93, 0.6, 11);
+      S.b.box(M.wall, 0, h, 86, 92, 16, 10); colBox(S, 0, 86, 92, 10, 0, h - 1, h + 16, false); S.d.box(M.orange, 0, h + 12, 80.95, 92, 1.2, 0.1); S.b.box(M.roof, 0, h + 16, 86, 93, 0.6, 11);
       gantry(S, -46, 58, 46, 58, 22, h);
       S.hallDoor = { x: 0, y: h, z: 60 };
     },
@@ -508,7 +505,7 @@ export default {
       for (const a of freeSpots(S, 64, [55 * D, -55 * D, 125 * D, -125 * D, 180 * D, 90 * D, -90 * D], 10)) {
         const [x, z] = polar(64, a); S.F.push(x, 0, z, a);
         S.b.box(M.wall, 0, -1, 0, 18, 10, 1.4); S.d.box(M.orange, 0, 3.4, -0.72, 18, 1.0, 0.06); S.d.box(M.trim, 0, 9, 0, 18.4, 0.4, 1.8);
-        for (let k = 0; k < 5; k++) { const cx = -7 + k * 3.4; const big = (k % 2) === 0; S.b.box(big ? M.dark : M.orange, cx, 0.06, -2.6, 3, big ? 2.6 : 1.8, 2.4, { ry: (S.rand() - 0.5) * 0.2 }); }
+        for (let k = 0; k < 5; k++) { const cx = -7 + k * 3.4; const big = (k % 2) === 0; const cr = (S.rand() - 0.5) * 0.2; S.b.box(big ? M.dark : M.orange, cx, 0.06, -2.6, 3, big ? 2.6 : 1.8, 2.4, { ry: cr }); colBox(S, cx, -2.6, 3, 2.4, cr, -1, big ? 2.66 : 1.86, true); }
         S.F.pop(); S.col.box(x, z, 9, 0.7, a, -1, 9, false); S.reserve(x, z, 10);
       }
     },
@@ -521,6 +518,100 @@ export default {
     wallOpts: (S) => ({ mat: S.M.wall, trim: S.M.orange, h: 9, crenels: false }),
   },
 };
+
+// Escapement Road elevated clockwork viaduct: deck, parapet rails, end rails and switchback
+// access stairs, all with colliders. Chord frame: local X along the chord, local +Z radially out.
+const DECK_Y = 12.7, DECK_HW = 2.8, RAIL_Z = 2.6;
+function viaductDeck(S, chords) {
+  const M = S.M; const n = chords.length;
+  const near = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]) < 0.05;
+  // runs of contiguous chords (the highway breaks where roads pass); one access stair per run,
+  // on a chord whose stair footprint (inside the ring) is clear of roads and reserved areas.
+  // The stair extends 16 m along the ring, toward the previous chords (sx=1) or mirrored (sx=-1).
+  const access = new Map(); // chord index -> [sx, sz]  (sz=1 stair inside the ring, -1 outside)
+  const foot = [[-15.8, -11.2], [2.8, -11.2], [-15.8, -4.6], [2.8, -4.6], [-6.5, -11.2], [-6.5, -8], [-15.8, -8], [2.8, -8]];
+  const fits = (c, sx, sz) => foot.every(([lx, lz]) => { const [ox, oz] = rot2(lx * sx, lz * sz, c.ry); return S.clear(c.mx + ox, c.mz + oz, 1); });
+  const runs = []; let cur = [];
+  for (let i = 0; i < n; i++) { if (cur.length && !near(chords[cur[cur.length - 1]].q, chords[i].p)) { runs.push(cur); cur = []; } cur.push(i); }
+  if (cur.length) { if (runs.length && near(chords[n - 1].q, chords[runs[0][0]].p)) runs[0] = [...cur, ...runs[0]]; else runs.push(cur); }
+  for (const run of runs) {
+    let best = null, bd = Infinity;
+    for (const sz of [1, -1]) {
+      run.forEach((ci, k) => {
+        for (const sx of [1, -1]) {
+          if (!fits(chords[ci], sx, sz)) continue;
+          const d = Math.abs(k - (run.length - 1) / 2); if (d < bd) { bd = d; best = [ci, sx, sz]; }
+        }
+      });
+      if (best) break;
+    }
+    if (best) access.set(best[0], [best[1], best[2]]);
+  }
+  for (let i = 0; i < n; i++) {
+    const c = chords[i]; const hasPrev = near(chords[(i - 1 + n) % n].q, c.p) && n > 1, hasNext = near(c.q, chords[(i + 1) % n].p) && n > 1;
+    S.F.push(c.mx, 0, c.mz, c.ry);
+    S.d.box(M.trim, 0, 12, 0, c.L + 0.1, 0.7, 5.6); S.d.box(M.metal, 0, 11.4, 0, c.L + 0.12, 0.35, 5.7);
+    // deck collider: overlaps its neighbours (no seam wedges at the outer edge), walk under the arches
+    colBox(S, 0, 0, c.L + 0.7, DECK_HW * 2, 0, 11.3, DECK_Y, true);
+    const half = c.L / 2 + 0.2;
+    for (const s of [-1, 1]) {
+      const z = s * RAIL_Z;
+      const [sx, sz] = access.get(i) ?? [0, 0];
+      const open = sx && s === -sz;
+      const segs = open ? (sx > 0 ? [[-half, -1.1], [2.6, half]] : [[-half, -2.6], [1.1, half]]) : [[-half, half]];
+      for (const [x0, x1] of segs) {
+        S.d.box(M.metal, (x0 + x1) / 2, 13.3, z, x1 - x0, 0.12, 0.12);
+        colBox(S, (x0 + x1) / 2, z, x1 - x0 + 0.1, 0.25, 0, DECK_Y - 0.3, DECK_Y + 0.85, false);
+      }
+      if (!open) S.d.box(M.trim, 0, DECK_Y, z, 0.25, 0.7, 0.25);
+    }
+    // open ends where the highway breaks for a road: guard rail across the deck
+    if (!hasPrev) guardRail(S, [-c.L / 2 + 0.15, DECK_Y, -DECK_HW], [-c.L / 2 + 0.15, DECK_Y, DECK_HW], { rail: M.metal, post: M.trim });
+    if (!hasNext) guardRail(S, [c.L / 2 - 0.15, DECK_Y, -DECK_HW], [c.L / 2 - 0.15, DECK_Y, DECK_HW], { rail: M.metal, post: M.trim });
+    if (access.has(i)) {
+      viaductStairs(S, ...access.get(i));
+      const [sx, sz] = access.get(i);
+      // walking route: flight 1 foot -> mid landing -> flight 2 -> top landing -> deck centre
+      S.qaMark('viaductAccess', [[-0.2 * sx, 0.06, -9.4 * sz], [-13.75 * sx, 6.4, -9.4 * sz], [-13.75 * sx, 6.4, -5.9 * sz], [-0.5 * sx, DECK_Y, -5.9 * sz], [0.75 * sx, DECK_Y, -4.4 * sz], [0.75 * sx, DECK_Y, 0]]);
+    }
+    S.qaMark('viaductDeck', [[-c.L / 2, DECK_Y, 0], [c.L / 2, DECK_Y, 0], [0, DECK_Y, RAIL_Z], [0, DECK_Y, -RAIL_Z]]);
+    S.F.pop();
+    S.reserve(c.mx, c.mz, 5);
+    if (access.has(i)) { const [sx, sz] = access.get(i); for (const [lx, lz, r] of [[-12, -8, 5], [-4, -8, 5], [1, -6, 4]]) { const [ox, oz] = rot2(lx * sx, lz * sz, c.ry); S.reserve(c.mx + ox, c.mz + oz, r); } }
+  }
+}
+
+/**
+ * Switchback stair up to the deck in the access chord's frame: inside the ring (local -Z, sz=1)
+ * or outside (sz=-1); sx=-1 mirrors it along the chord. Coordinates below are for sx=sz=1.
+ */
+function viaductStairs(S, sx = 1, sz = 1) {
+  const M = S.M; const y0 = 0.06, ym = 6.4, y1 = DECK_Y;
+  const X = (x) => x * sx; const Z = (z) => z * sz; const P = (x, y, z) => [x * sx, y, z * sz];
+  // flight 1 rises toward -X along z=-9.4; flight 2 back toward +X along z=-5.9
+  stairs(S, M.trim, X(-6.5), Z(-9.4), -sx * Math.PI / 2, 3, 11, y0, ym);
+  stairs(S, M.trim, X(-6.5), Z(-5.9), sx * Math.PI / 2, 3, 11, ym, y1);
+  // solid core under flight 2 (stairs are built on top of it)
+  S.b.box(M.wall, X(-6.5), -0.5, Z(-5.9), 11, ym + 0.5, 3); colBox(S, X(-6.5), Z(-5.9), 11, 3, 0, -1, ym, false);
+  // mid landing (x -15.5..-12, z -10.9..-4.9) on a solid pier
+  S.b.box(M.wall, X(-13.75), -0.5, Z(-7.9), 3.5, ym + 0.5, 6); colBox(S, X(-13.75), Z(-7.9), 3.5, 6, 0, -1, ym, true);
+  S.d.box(M.metal, X(-13.75), ym - 0.3, Z(-7.9), 3.7, 0.3, 6.2);
+  // top landing (x -1..2.5, z -7.4..-2.5) on a pillar, joining the deck through the rail opening
+  S.b.box(M.trim, X(0.75), y1 - 0.7, Z(-4.95), 3.5, 0.7, 4.9); S.d.box(M.metal, X(0.75), y1 - 1.05, Z(-4.95), 3.6, 0.35, 5.0);
+  colBox(S, X(0.75), Z(-4.95), 3.5, 4.9, 0, y1 - 1.4, y1, true);
+  S.b.box(M.wall, X(0.75), -0.5, Z(-5.9), 1.6, y1 - 0.2, 1.6); colBox(S, X(0.75), Z(-5.9), 1.6, 1.6, 0, -1, y1 - 1.4, false);
+  // guard rails on every open edge
+  const o = { rail: M.metal, post: M.trim };
+  guardRail(S, P(-1, y0, -10.9), P(-12, ym, -10.9), o);         // flight 1, plaza side
+  guardRail(S, P(-12, ym, -7.4), P(-1, y1, -7.4), o);           // flight 2, over flight 1
+  guardRail(S, P(-12, ym, -4.4), P(-1, y1, -4.4), o);           // flight 2, arcade side
+  guardRail(S, P(-15.5, ym, -10.9), P(-15.5, ym, -4.9), o);     // mid landing, far end
+  guardRail(S, P(-15.5, ym, -10.9), P(-12, ym, -10.9), o);      // mid landing, plaza side
+  guardRail(S, P(-15.5, ym, -4.9), P(-12, ym, -4.9), o);        // mid landing, arcade side
+  guardRail(S, P(-1, y1, -7.4), P(2.5, y1, -7.4), o);           // top landing, plaza side
+  guardRail(S, P(2.5, y1, -7.4), P(2.5, y1, -2.9), o);          // top landing, open end
+  guardRail(S, P(-1, y1, -4.4), P(-1, y1, -2.9), o);            // between flight top and deck
+}
 
 function ritualPillar(S, x, z, h, y = 0) {
   const M = S.M; S.F.push(x, y, z, 0);

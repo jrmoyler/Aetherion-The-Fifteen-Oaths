@@ -164,6 +164,14 @@ export function createWorldMap(ui) {
     const vg = g.createRadialGradient(vw / 2, vh / 2, Math.min(vw, vh) * 0.4, vw / 2, vh / 2, Math.max(vw, vh) * 0.75);
     vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.45)');
     g.fillStyle = vg; g.fillRect(0, 0, vw, vh);
+    // gamepad reticle (stick-panned map; A selects whatever sits under it)
+    if (padMode) {
+      const cx2 = vw / 2, cy2 = vh / 2;
+      g.strokeStyle = 'rgba(255,243,208,.9)'; g.lineWidth = 1.5;
+      g.beginPath(); g.arc(cx2, cy2, 14, 0, Math.PI * 2); g.stroke();
+      g.beginPath(); g.moveTo(cx2 - 24, cy2); g.lineTo(cx2 - 8, cy2); g.moveTo(cx2 + 8, cy2); g.lineTo(cx2 + 24, cy2);
+      g.moveTo(cx2, cy2 - 24); g.lineTo(cx2, cy2 - 8); g.moveTo(cx2, cy2 + 8); g.lineTo(cx2, cy2 + 24); g.stroke();
+    }
   }
 
   function zoomAt(f, sx = vw / 2, sy = vh / 2) {
@@ -256,6 +264,21 @@ export function createWorldMap(ui) {
       shrineList.append(h('li', { class: `${known ? 'is-known' : ''}${gs.region?.id === s.oath.id ? ' is-here' : ''}` }, b));
     }
   }
+
+  // gamepad hook (ui/gamepad.js): stick pan in css px, trigger zoom, select under the centre reticle
+  let padMode = false;
+  win._pad = {
+    setActive(v) { v = !!v; if (padMode !== v) { padMode = v; dirty = true; if (!v) tip.hidden = true; } },
+    pan(dx, dy) {
+      if (!dx && !dy) return;
+      cam.x += dx / cam.s; cam.z -= dy / cam.s; clampCam(); dirty = true;
+      const hit = hitTest(vw / 2, vh / 2); if (hit !== hover) { hover = hit; } showTip(hit);
+    },
+    zoom(f) { zoomAt(f); },
+    select() { const hit = hitTest(vw / 2, vh / 2); if (hit) select(hit); return !!hit; },
+    centreOnMe() { loc.click(); },
+    get cam() { return { ...cam }; },
+  };
 
   let raf = 0, lastPulse = 0, centred = false;
   function loop(now) {

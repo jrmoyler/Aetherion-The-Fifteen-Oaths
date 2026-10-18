@@ -1,6 +1,6 @@
 // Reusable composite motifs (arcades, terraces with stairs, broken walls, gears, pylons, trees,
 // sails...) composed from kit primitives. Shared by the per-oath city styles.
-import { TAU, polar, rot2, stairs, terrace, colBox, banner, catenary, balustrade, arcPts, hangingLanternProto, proto } from './kit.js';
+import { TAU, polar, rot2, stairs, terrace, colBox, banner, catenary, balustrade, arcPts, hangingLanternProto, proto, deckStrip } from './kit.js';
 
 /** Raised terrace spanning x0..x1, z0..z1 with a front staircase (from plaza level y0) at stairX. */
 export function terraceStairs(S, o) {
@@ -129,6 +129,10 @@ export function giantTree(S, x, z, R, H, o = {}) {
     const p1 = [x + Math.sin(a) * (R + L * 0.45), y + R * 0.6, z + Math.cos(a) * (R + L * 0.45)];
     const p2 = [x + Math.sin(a) * (R + L), y - 0.4, z + Math.cos(a) * (R + L)];
     S.b.tube(bark, [p0, p1, p2], (t) => R * (0.42 - t * 0.3), 7);
+    // lower root (p1 -> p2) lies on the ground: walkable ramp along its crown if gentle, else a solid
+    const top1 = p1[1] + R * 0.27, top2 = p2[1] + R * 0.12; const run = L * 0.55;
+    if ((top1 - top2) / run < 0.78) deckStrip(S, [[p2[0], top2, p2[2]], [p1[0], top1, p1[2]]], R * 0.2, { overlap: 0 });
+    else colBox(S, (p1[0] + p2[0]) / 2, (p1[2] + p2[2]) / 2, R * 0.4, run, a, y - 1, top1, false);
   }
   const branches = [];
   const nb = o.branches ?? 7;
@@ -171,9 +175,11 @@ export function rockMass(S, mat, x, z, w, h, o = {}) {
   const n = o.n ?? 4;
   for (let i = 0; i < n; i++) {
     const sw = w * (0.55 + rand() * 0.5), sd = w * (0.5 + rand() * 0.5), sh = h * (0.5 + rand() * 0.55);
-    S.b.box(mat, x + (rand() - 0.5) * w * 0.5, y, z + (rand() - 0.5) * w * 0.5, sw, sh + 2, sd, { ry: rand() * TAU, rz: (rand() - 0.5) * 0.08, rx: (rand() - 0.5) * 0.08 });
+    const bx = x + (rand() - 0.5) * w * 0.5, bz = z + (rand() - 0.5) * w * 0.5, ry = rand() * TAU;
+    S.b.box(mat, bx, y, bz, sw, sh + 2, sd, { ry, rz: (rand() - 0.5) * 0.08, rx: (rand() - 0.5) * 0.08 });
+    // one oriented collider per block: sides block, the (near-flat) top can be stood on
+    colBox(S, bx, bz, sw, sd, ry, y, y + sh + 2, true);
   }
-  S.col.circle(x, z, w * 0.55, y, y + h + 2, false);
 }
 
 /** Pennant/banner pole set around a circle at given compass angles. */

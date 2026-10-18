@@ -259,6 +259,46 @@ export function terrace(S, mat, x, z, w, d, h, o = {}) {
   colBox(S, x, z, w, d, o.ry || 0, (o.y0 ?? -3), h + (o.coping ? 0.2 : 0), true);
 }
 
+// ------------------------------------------------------------ walkway helpers
+/**
+ * Guard rail between frame points a=[x,y,z] -> b, where y is the walking surface at each end:
+ * posts, top + mid rail, and solid colliders (split in <= 4 m chunks so sloped runs stay tight).
+ */
+export function guardRail(S, a, b, o = {}) {
+  const h = o.h ?? 1.05, rail = o.rail ?? S.M.metal, post = o.post ?? rail;
+  const dx = b[0] - a[0], dz = b[2] - a[2]; const L = Math.hypot(dx, dz); if (L < 0.05) return;
+  const lerp = (t) => [a[0] + dx * t, a[1] + (b[1] - a[1]) * t, a[2] + dz * t];
+  if (o.visual !== false) {
+    const n = Math.max(1, Math.round(L / (o.postEvery ?? 1.8)));
+    for (let i = 0; i <= n; i++) { const [x, y, z] = lerp(i / n); S.d.box(post, x, y, z, 0.11, h + 0.04, 0.11); }
+    S.d.beam(rail, [a[0], a[1] + h + 0.04, a[2]], [b[0], b[1] + h + 0.04, b[2]], 0.09);
+    S.d.beam(rail, [a[0], a[1] + h * 0.5, a[2]], [b[0], b[1] + h * 0.5, b[2]], 0.05);
+  }
+  const ry = Math.atan2(dx, dz); const k = Math.max(1, Math.ceil(L / (o.chunk ?? 4)));
+  for (let j = 0; j < k; j++) {
+    const p = lerp(j / k), q = lerp((j + 1) / k);
+    colBox(S, (p[0] + q[0]) / 2, (p[2] + q[2]) / 2, 0.25, L / k + 0.2, ry, Math.min(p[1], q[1]) - 0.5, Math.max(p[1], q[1]) + h, false);
+  }
+}
+
+/**
+ * Walkable collider strip following a polyline of deck-top points [[x,y,z],...] (frame space):
+ * one tilted ramp per segment (flat segments become plain walkable boxes). hw = half width.
+ * yMin of each piece sits `depth` below its lowest end so people can walk underneath.
+ */
+export function deckStrip(S, pts, hw, o = {}) {
+  const depth = o.depth ?? 0.8; const over = o.overlap ?? 0.15;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p = pts[i], q = pts[i + 1]; const dx = q[0] - p[0], dz = q[2] - p[2]; const L = Math.hypot(dx, dz); if (L < 1e-3) continue;
+    const ry = Math.atan2(dx, dz); const mx = (p[0] + q[0]) / 2, mz = (p[2] + q[2]) / 2;
+    if (Math.abs(q[1] - p[1]) < 0.02) { colBox(S, mx, mz, hw * 2, L + over * 2, ry, p[1] - depth, p[1], true); continue; }
+    // extend the ramp by `over` at both ends along its own slope so neighbours overlap without steps
+    const k = (q[1] - p[1]) / L; const hd = L / 2 + over;
+    const y0 = (p[1] + q[1]) / 2 - k * hd, y1 = (p[1] + q[1]) / 2 + k * hd;
+    S.col.ramp(mx, mz, hw, hd, ry, y0, y1);
+  }
+}
+
 // ------------------------------------------------------------ banners, lamps
 /** Hanging banner (per-oath emblem cloth, wind animated) from crossbar at top y. */
 export function banner(S, x, ytop, z, ry, w = 1.6, h = 5, o = {}) {
@@ -310,7 +350,7 @@ export function pool(S, x, z, w, d, o = {}) {
   for (const [ox, oz, ww, dd] of [[0, d / 2, w + 0.6, 0.6], [0, -d / 2, w + 0.6, 0.6], [w / 2, 0, 0.6, d], [-w / 2, 0, 0.6, d]]) {
     const [cx, cz] = rot2(ox, oz, ry); S.b.box(rim, x + cx, -0.2, z + cz, ww, rh + 0.2, dd, { ry });
   }
-  colBox(S, x, z, w, d, ry, -1, rh, true);
+  colBox(S, x, z, w + 0.6, d + 0.6, ry, -1, rh, true); // whole basin incl. the rim can be stood on
 }
 export function roundPool(S, x, z, r, o = {}) {
   const rim = o.rim ?? S.M.trim; const wy = o.waterY ?? 0.35; const rh = o.rimH ?? 0.6;
@@ -504,6 +544,8 @@ export function defaultGate(S, a, r, h, th) {
   const gw = 17; // total gap
   for (const s of [-1, 1]) { const [tx, tz] = rot2(s * (gw / 2 + 2.6), 0, a); const gx = x + tx, gz = z + tz; squareTower(S, gx, gz, 5.4, h + 6, { y: S.gy(gx, gz), ry: a, roof: S.style.gateRoof }); }
   S.b.archWall(S.M.wall, x, g + 0.0, z, gw, h + 4.5, th + 1, gw - 4, h + 1.8, { ry: a + Math.PI / 2 * 0, seg: 12 });
+  // arch jambs between the gate towers (the towers carry their own colliders)
+  for (const s of [-1, 1]) { const [jx, jz] = rot2(s * (gw / 2 - 1), 0, a); colBox(S, x + jx, z + jz, 2, th + 1, a, g - 1, g + h + 4.5, false); }
   // banners on gate
   for (const s of [-1, 1]) { const [bx, bz] = rot2(s * 4.5, -(th / 2 + 0.6), a); banner(S, x + bx, g + h + 3.6, z + bz, a, 1.6, 4.5); }
   const [ix, iz] = polar(r - 6, a);

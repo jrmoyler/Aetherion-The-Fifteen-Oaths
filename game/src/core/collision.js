@@ -74,7 +74,11 @@ export class CollisionWorld {
   resolve(pos, r = 0.45, h = 1.8, stepUp = 0.6) {
     for (let iter = 0; iter < 2; iter++) {
       for (const sh of this._near(pos.x, pos.z)) {
-        if (pos.y + h < sh.yMin || pos.y + stepUp >= sh.yMax) continue; // above or stepping onto it
+        // a ramp/stair is only as high as its surface under the player (clamped to its footprint),
+        // otherwise its high end would wall off the low end and nobody could walk up it
+        let top = sh.yMax;
+        if (sh.ramp) { const lz = this._local(sh, pos.x, pos.z)[1]; const t = Math.max(0, Math.min(1, (lz + sh.hd) / (2 * sh.hd))); top = sh.ramp.y0 + (sh.ramp.y1 - sh.ramp.y0) * t; }
+        if (pos.y + h < sh.yMin || pos.y + stepUp >= top) continue; // above or stepping onto it
         if (sh.type === 'circle') {
           const dx = pos.x - sh.cx, dz = pos.z - sh.cz, d = Math.hypot(dx, dz), m = sh.r + r;
           if (d < m && d > 1e-6) { pos.x = sh.cx + (dx / d) * m; pos.z = sh.cz + (dz / d) * m; }
