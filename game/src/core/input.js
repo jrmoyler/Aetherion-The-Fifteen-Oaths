@@ -303,6 +303,9 @@ export function createInput(canvas, bus) {
     // ---- gamepad extras
     /** fn() -> true while a menu owns the pad (gameplay then gets nothing; `gamepad:nav` is emitted instead). */
     setPadCapture(fn) { captureFn = typeof fn === 'function' ? fn : (fn ? () => true : null); },
+    /** True while a menu / chat owns the pad (diagnostics, QA). */
+    get padCaptured() { return wasCaptured; },
+    get padCaptureReason() { return { typing, enabled, menu: !!(captureFn && captureFn()) }; },
     padConfig: cfg,
     setPadConfig(partial) { Object.assign(cfg, partial || {}); },
     get padBindings() { return { ...bindings }; },

@@ -245,7 +245,12 @@ export function createGamepadUI(ui) {
     el.classList.add('ae-pad-focus');
     try { el.focus({ preventScroll: true }); } catch { /* ignore */ }
     if (!el.isConnected) { const sc = scope(); if (sc && !recovering) { recovering = true; try { recover(sc); } finally { recovering = false; } } return; }
-    try { el.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch { /* ignore */ }
+    try {
+      el.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      // keep the focused control clear of the prompt bar docked at the bottom
+      const sp = scrollParent(el.parentElement, null);
+      if (sp) { const r = el.getBoundingClientRect(), pr = sp.getBoundingClientRect(); const over = r.bottom - (Math.min(pr.bottom, innerHeight) - 64); if (over > 0) sp.scrollTop += over; }
+    } catch { /* ignore */ }
     // radio grid: selection follows focus (the dossier updates as you browse the Oaths)
     if (el.classList.contains('ae-oath-card') && el.getAttribute('aria-checked') !== 'true') el.click();
     placeBadge();
@@ -263,7 +268,7 @@ export function createGamepadUI(ui) {
     const list = focusables(s);
     if (!list.length) return null;
     const pref = (sel) => list.find((e) => e.matches(sel));
-    if (isMap(s)) return s.querySelector('.ae-map__view');
+    if (isMap(s)) { const v = s.querySelector('.ae-map__view'); if (v && !v.hasAttribute('tabindex')) v.tabIndex = -1; return v; }
     return pref('[data-nav-default]') || pref('.ae-oath-card[aria-checked="true"]') || pref('.ae-opt') || pref('.ae-btn--primary:not([disabled])')
       || list.find((e) => !e.classList.contains('ae-x')) || list[0];
   }
