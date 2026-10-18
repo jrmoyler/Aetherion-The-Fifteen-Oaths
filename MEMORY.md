@@ -54,10 +54,10 @@ Reference map: 000–030 ability VFX sheets (water, lightning, frost, fire); 031
 
 ## Not verified / known weak spots (be honest about these)
 - **Real-GPU frame rate was never measured** — every number here comes from CPU SwiftShader (0.3–3 fps). Profile on real desktop + phone hardware first.
-- Fidelity vs. the reference art: compositions, palettes and silhouettes match; surface detail does not. Faces are simple, houses repetitive, metals flat, trees painterly cards, no waterfalls/ice cliffs, some sanctuary pieces lack colliders (rope bridges, Escapement viaduct deck).
+- Fidelity vs. the reference art: compositions, palettes and silhouettes match; surface detail does not. Faces are simple, houses repetitive, metals flat, trees painterly cards, no waterfalls/ice cliffs. Walkable-surface collider audit (`tools/qa/collision-audit.mjs`) reports 0 m² uncovered across all 15 sanctuaries.
 - Creature anims: hound/raptor attack poses crumple at the chest; drake wing membranes are stiff; serpent head soft.
 - Procedural audio is wired and starts on the first gesture, but nobody has listened to it critically.
-- Gameplay gaps: no PvP, parties, trading or gamepad; projectiles are timed hits.
+- Social: parties, duels, opt-in PvP flag, war zones and atomic trading are server-authoritative (`shared/sim/social.js`, 35 server tests). Gamepad: full action map + menu navigation (`game/src/core/input.js`, `game/src/ui/gamepad.js`), verified with a stubbed pad only. Projectiles are still timed hits.
 - The 11 failing root tests (`npm test`) predate the MMO work (ability-matrix runtime deps not installed) — identical on the base commit.
 
 ## Conventions worth keeping
