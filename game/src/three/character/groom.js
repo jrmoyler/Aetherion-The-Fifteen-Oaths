@@ -26,7 +26,7 @@ function kitFor(key, H, quality) {
   const gear = buildGear(profile, head.P, H, quality);
   const cover = gearCoverage(profile);
   const scale = (g) => { if (g) g.scale(H, H, H); return g; };
-  scale(groom.cap); scale(groom.cards); scale(groom.brows);
+  scale(groom.cap); scale(groom.cards); scale(groom.beard); scale(groom.brows);
   for (const part of gear) if (part.geo) scale(part.geo);
   const leaves = gear.some(p => p.leaves) ? scale(leafTufts(head.P, key, quality === 'low' ? 30 : 80)) : null;
   // eyes are built around their own centre so one eye material serves both
@@ -142,7 +142,9 @@ export function applyGroom(body, desc, quality = 'high') {
   const hairColor = prof.hair?.color ?? '#141012';
   if (kit.groom.cap && !kit.cover.hood) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
   if (kit.groom.cards && !kit.cover.hood) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
-  else if (kit.groom.cards && prof.beard) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
+  // Facial hair must never smuggle a scalp groom through a hood. Likewise,
+  // sealed lower-face equipment hides beards without amputating the scalp.
+  if (kit.groom.beard && !kit.cover.lower) add(kit.groom.beard, own(hairMaterial(prof.beard?.color ?? hairColor, true, q)), { order: 1 });
   const browColor = new Color(hairColor).multiplyScalar(prof.age > .6 ? .85 : .7).getStyle();
   if (!kit.cover.eyes) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
   for (const part of kit.gear) if (part.geo) add(part.geo, own(part.material));
