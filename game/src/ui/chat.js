@@ -19,7 +19,9 @@ export function createChat(ui) {
     b.addEventListener('click', () => setTab(id));
     return b;
   });
-  const el = h('div', { class: 'ae-chat ae-int' }, h('div', { class: 'ae-chat__tabs', role: 'tablist' }, tabEls), log, h('div', { class: 'ae-chat__input' }, chanBtn, input));
+  const open = h('button', { class: 'ae-chat__open', type: 'button', 'aria-expanded': 'false' }, ui.touchMode ? 'Chat' : 'Chat · Enter');
+  const el = h('div', { class: 'ae-chat ae-int' }, open, h('div', { class: 'ae-chat__tabs', role: 'tablist' }, tabEls), log, h('div', { class: 'ae-chat__input' }, chanBtn, input));
+  open.addEventListener('click', () => focus());
   const lines = [];
 
   function setTab(id) {
@@ -53,8 +55,8 @@ export function createChat(ui) {
   function blur() {
     input.blur();
   }
-  input.addEventListener('focus', () => { el.classList.add('is-active'); ctx.input?.setTyping?.(true); });
-  input.addEventListener('blur', () => { el.classList.remove('is-active'); ctx.input?.setTyping?.(false); });
+  input.addEventListener('focus', () => { open.setAttribute('aria-expanded', 'true'); el.classList.add('is-active'); ctx.input?.setTyping?.(true); });
+  input.addEventListener('blur', () => { open.setAttribute('aria-expanded', 'false'); el.classList.remove('is-active'); ctx.input?.setTyping?.(false); });
   input.addEventListener('keyup', (e) => e.stopPropagation());
   input.addEventListener('keydown', (e) => {
     e.stopPropagation();

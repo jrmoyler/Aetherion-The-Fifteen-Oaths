@@ -1,11 +1,7 @@
 // PvP arenas in the world: the duel ring (orange curtain while a duel you take part in or watch is
 // running) and the boundaries of the contested border war zones (red curtain, only built when near).
 // Terrain-following ribbons with a vertical alpha gradient; a handful of draw calls at most.
-import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder.js';
-import { StandardMaterial } from '@babylonjs/core/Materials/standardMaterial.js';
-import { DynamicTexture } from '@babylonjs/core/Materials/Textures/dynamicTexture.js';
-import { Color3 } from '@babylonjs/core/Maths/math.color.js';
-import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
+import { BufferGeometry, Float32BufferAttribute, Mesh, MeshBasicMaterial, CanvasTexture, DoubleSide } from 'three';
 
 const WAR_SHOW = 420; // build / show a war-zone curtain within this distance of its edge
 
@@ -21,31 +17,31 @@ export function createArenas(ctx) {
   let gradTex = null;
   function gradient() {
     if (gradTex) return gradTex;
-    gradTex = new DynamicTexture('arenaGrad', { width: 4, height: 128 }, scene, false);
-    const c = gradTex.getContext();
+    const canvas = document.createElement('canvas'); canvas.width = 4; canvas.height = 128;
+    const c = canvas.getContext('2d');
     const g = c.createLinearGradient(0, 0, 0, 128);
     g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(0.55, 'rgba(255,255,255,0.35)'); g.addColorStop(0.92, 'rgba(255,255,255,0.95)'); g.addColorStop(1, 'rgba(255,255,255,0.6)');
     c.fillStyle = g; c.fillRect(0, 0, 4, 128);
-    gradTex.hasAlpha = true; gradTex.update(false);
+    gradTex = new CanvasTexture(canvas);
     return gradTex;
   }
   function material(name, hex, alpha) {
-    const m = new StandardMaterial(name, scene);
-    m.disableLighting = true; m.emissiveColor = Color3.FromHexString(hex); m.diffuseColor = Color3.Black();
-    m.opacityTexture = gradient(); m.alpha = alpha; m.backFaceCulling = false; m.disableDepthWrite = true; m.fogEnabled = true;
+    const m = new MeshBasicMaterial({ color: hex, map: gradient(), transparent: true, opacity: alpha, side: DoubleSide, depthWrite: false });
     return m;
   }
   /** Vertical curtain along a circle that follows the ground. */
   function curtain(name, x, z, r, height, segs, mat) {
-    const lo = [], hi = [];
+    const positions = [], uvs = [], indices = [];
     for (let i = 0; i <= segs; i++) {
-      const a = (i / segs) * Math.PI * 2;
-      const px = x + Math.cos(a) * r, pz = z + Math.sin(a) * r;
+      const a = i / segs * Math.PI * 2, px = x + Math.cos(a) * r, pz = z + Math.sin(a) * r;
       const y = groundY(px, pz);
-      lo.push(new Vector3(px, y - 0.2, pz)); hi.push(new Vector3(px, y + height, pz));
+      positions.push(px, y - .2, pz, px, y + height, pz);
+      uvs.push(i / segs, 0, i / segs, 1);
+      if (i < segs) { const k = i * 2; indices.push(k, k + 1, k + 2, k + 1, k + 3, k + 2); }
     }
-    const m = MeshBuilder.CreateRibbon(name, { pathArray: [hi, lo], closePath: false, sideOrientation: 2, updatable: false }, scene);
-    m.material = mat; m.isPickable = false; m.renderingGroupId = 1; m.alwaysSelectAsActiveMesh = false;
+    const geometry = new BufferGeometry(); geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('uv', new Float32BufferAttribute(uvs, 2)); geometry.setIndex(indices);
+    const m = new Mesh(geometry, mat); m.name = name; m.renderOrder = 1; scene.add(m);
     return m;
   }
 
@@ -59,7 +55,7 @@ export function createArenas(ctx) {
     duelMesh = curtain(`duelRing:${e.id}`, e.x, e.z, e.r, 2.6, 96, duelMat);
     duelId = e.id;
   }
-  function hideDuel(id) { if (id != null && id !== duelId) return; duelMesh?.dispose(); duelMesh = null; duelId = null; }
+  function hideDuel(id) { if (id != null && id !== duelId) return; if (duelMesh) { duelMesh.removeFromParent(); duelMesh.geometry.dispose(); } duelMesh = null; duelId = null; }
   bus.on('social:duel', (e) => { try { showDuel(e); } catch (err) { console.warn('[combat] duel ring', err); } });
   bus.on('social:duelNearby', (e) => { try { showDuel(e); } catch (err) { console.warn('[combat] duel ring', err); } });
 
@@ -78,7 +74,7 @@ export function createArenas(ctx) {
         warMat ??= material('warZoneMat', '#ff4a3a', 0.55);
         z = { zone: w, mesh: curtain(`warZone:${w.id}`, w.x, w.z, w.r, 9, 220, warMat) };
         zones.set(w.id, z);
-      } else if (!near && z && edge > WAR_SHOW * 1.4) { z.mesh.dispose(); zones.delete(w.id); }
+      } else if (!near && z && edge > WAR_SHOW * 1.4) { z.mesh.removeFromParent(); z.mesh.geometry.dispose(); zones.delete(w.id); }
     }
   }
 
@@ -88,9 +84,9 @@ export function createArenas(ctx) {
       t += dt; acc += dt;
       if (acc > 1) { acc = 0; updateWar(); }
       const pulse = 0.5 + 0.5 * Math.sin(t * 2.4);
-      if (warMat) warMat.alpha = 0.4 + 0.2 * pulse;
-      if (duelMat) duelMat.alpha = 0.6 + 0.25 * pulse;
+      if (warMat) warMat.opacity = 0.4 + 0.2 * pulse;
+      if (duelMat) duelMat.opacity = 0.6 + 0.25 * pulse;
     },
-    dispose() { hideDuel(); for (const z of zones.values()) z.mesh.dispose(); zones.clear(); },
+    dispose() { hideDuel(); for (const z of zones.values()) { z.mesh.removeFromParent(); z.mesh.geometry.dispose(); } zones.clear(); warMat?.dispose(); duelMat?.dispose(); gradTex?.dispose(); },
   };
 }

@@ -19,7 +19,7 @@ function showNotice(message, action, label) {
   notice = document.createElement('aside');
   notice.setAttribute('role', 'status');
   notice.setAttribute('aria-live', 'polite');
-  notice.style.cssText = 'position:fixed;z-index:10000;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(440px,calc(100vw - 32px));box-sizing:border-box;padding:16px;background:#14181f;color:#f0e4ce;border:1px solid #b89961;border-radius:8px;font:14px/1.5 system-ui;box-shadow:0 8px 32px #0008;pointer-events:auto';
+  notice.style.cssText = 'position:fixed;z-index:10000;top:calc(100px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);width:min(440px,calc(100vw - 32px));box-sizing:border-box;padding:16px;background:#14181f;color:#f0e4ce;border:1px solid #b89961;border-radius:8px;font:14px/1.5 system-ui;box-shadow:0 8px 32px #0008;pointer-events:auto';
   const text = document.createElement('p');
   text.textContent = message;
   text.style.margin = '0 0 12px';

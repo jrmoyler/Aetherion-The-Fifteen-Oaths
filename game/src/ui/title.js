@@ -1,29 +1,10 @@
 // Title screen over the live 3D scene: SVG/CSS logotype, tagline, Play / Settings / Install.
 import { createTimeline, stagger } from 'animejs';
 import { h, anim, prefersReducedMotion } from './dom.js';
-import { emblemMark } from './emblems.js';
+import { emblemSVG } from './emblems.js';
 import { OATHS } from '@shared/oaths.js';
 import { pwa } from './pwa.js';
 import { ICONS } from './icons.js';
-
-function wheelSVG() {
-  const R = 228;
-  const marks = OATHS.map((o, i) => {
-    const a = (i / 15) * Math.PI * 2 - Math.PI / 2;
-    const x = 250 + Math.cos(a) * R; const y = 250 + Math.sin(a) * R;
-    return `<g class="wm" transform="translate(${x - 13} ${y - 13}) scale(.26)" stroke-width="5">${emblemMark(o.id)}</g>`;
-  }).join('');
-  const ticks = Array.from({ length: 120 }, (_, i) => {
-    const a = (i / 120) * Math.PI * 2; const r1 = 196; const r2 = i % 8 === 0 ? 206 : 200;
-    return `<line x1="${250 + Math.cos(a) * r1}" y1="${250 + Math.sin(a) * r1}" x2="${250 + Math.cos(a) * r2}" y2="${250 + Math.sin(a) * r2}"/>`;
-  }).join('');
-  // fifteen-point star polygon {15/7} — the covenant lattice
-  const pts = Array.from({ length: 15 }, (_, i) => { const a = ((i * 7) / 15) * Math.PI * 2 - Math.PI / 2; return `${250 + Math.cos(a) * 190},${250 + Math.sin(a) * 190}`; }).join(' ');
-  return `<svg viewBox="0 0 500 500" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-    <g class="wheel-rot"><circle cx="250" cy="250" r="246" opacity=".6"/><circle cx="250" cy="250" r="210"/>${ticks}${marks}</g>
-    <polygon class="star" points="${pts}" stroke-width=".7" opacity=".55"/>
-    <circle cx="250" cy="250" r="150" opacity=".35"/></svg>`;
-}
 
 export function createTitle(root, { onPlay, onSettings, onClickSound, version = '' }) {
   const letters = 'AETHERION'.split('').map((c) => h('span', null, c));
@@ -32,7 +13,7 @@ export function createTitle(root, { onPlay, onSettings, onClickSound, version = 
   const sub = h('div', { class: 'ae-logo__sub' }, 'The Fifteen Oaths');
   const logo = h('h1', { class: 'ae-logo', 'aria-label': 'Aetherion: The Fifteen Oaths', style: { margin: 0, fontWeight: 400 } },
     word, h('div', { class: 'ae-logo__rule' }, ruleL, h('span', { class: 'ae-diamond' }), sub, h('span', { class: 'ae-diamond' }), ruleR));
-  const wheel = h('div', { class: 'ae-title__wheel', html: wheelSVG() });
+  const wheel = h('div', { class: 'ae-title__wheel', html: '' });
   const tagline = h('p', { class: 'ae-tagline' }, 'Every force has a covenant. Every covenant has a price.');
 
   const play = h('button', { class: 'ae-btn ae-btn--primary', type: 'button' }, 'Enter the Weave');

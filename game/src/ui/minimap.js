@@ -115,10 +115,10 @@ export function createMinimap(ui) {
       g.strokeStyle = 'rgba(240,226,190,.7)'; g.lineWidth = 1;
       g.beginPath(); g.arc(x, y, Math.max(6, 42 * s), 0, Math.PI * 2); g.stroke();
       const img = emblemImage(sa.oath.id, '#f2e8cc');
-      if (img.complete) {
+      if (img.complete && img.naturalWidth) {
         g.save(); g.translate(x, y); if (rotate) g.rotate(head);
         g.fillStyle = 'rgba(16,22,34,.85)'; g.beginPath(); g.arc(0, 0, 10, 0, Math.PI * 2); g.fill();
-        g.drawImage(img, -7, -7, 14, 14); g.restore();
+        g.drawImage(img, img.naturalWidth * .035, img.naturalHeight * .06, img.naturalWidth * .17, img.naturalHeight * .34, -7, -7, 14, 14); g.restore();
       }
       const sx = (sa.shrine.x - p.x) * s, sy = -(sa.shrine.z - p.z) * s;
       const known = gs.shrines.has(sa.oath.id);

@@ -3,10 +3,7 @@ import { hotbarFor } from '@shared/abilities.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { rgbTriplet } from './dom.js';
 
-const BASIC_GLYPH = {
-  ninja: '<svg class="glyph-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 82L70 30"/><path d="M70 30L84 16L80 34Z"/><path d="M26 64L36 74M14 86L22 78"/><path d="M30 20C52 22 76 42 82 66" stroke-dasharray="3 7"/></svg>',
-  sorcerer: '<svg class="glyph-svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="64" cy="36" r="13"/><circle cx="64" cy="36" r="5" fill="currentColor"/><path d="M52 48L16 84M46 42L22 54M58 54L46 78"/></svg>',
-};
+import { artHTML } from './art.js';
 export const SLOT_KEYS = ['1', '2', '3', '4', '5', 'R'];
 
 const ELEMENT_VERB = {
@@ -44,7 +41,7 @@ export function hotbarView(oathId, cls, live = null) {
     const accent = a.accent || oath.accent;
     return {
       ...a, index: i, key: SLOT_KEYS[i], accent, accentRgb: rgbTriplet(accent),
-      glyphSvg: a.glyph || BASIC_GLYPH[cls] || BASIC_GLYPH.ninja,
+      glyphSvg: artHTML(oathId, i === 0 ? 'weapon' : ['cast','weapon','item','armor','cast','cast'][i]),
       desc: describe(a, cls), ult: i === 5,
     };
   });

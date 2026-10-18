@@ -29,16 +29,8 @@ import { ABILITY_BY_ID } from '@shared/abilities.js';
 const VERSION = '1.0';
 
 export async function init(ctx) {
-  try {
-    return build(ctx);
-  } catch (err) {
-    console.error('[ui] init failed, falling back to minimal UI', err);
-    const p = ctx.params || new URLSearchParams(location.search);
-    return {
-      chooseCharacter: async () => ({ name: p.get('name') || 'Wayfarer', oath: p.get('oath') || 'oath-09', cls: p.get('cls') || 'ninja' }),
-      enterGame() {}, toast() {}, log() {}, showDialog: async () => null,
-    };
-  }
+  // Surface failures to main's recovery screen; never bypass the player's covenant choice.
+  return build(ctx);
 }
 
 function build(ctx) {
@@ -368,10 +360,7 @@ function build(ctx) {
       if (po && OATH_BY_ID[po] && (pc === 'ninja' || pc === 'sorcerer')) {
         ch = { name: (p.get('name') || 'Wayfarer').slice(0, 16), oath: po, cls: pc };
       } else {
-        try { ch = await runTitleFlow(); } catch (err) {
-          console.warn('[ui] character flow failed', err);
-          ch = { name: p.get('name') || 'Wayfarer', oath: po && OATH_BY_ID[po] ? po : 'oath-09', cls: pc === 'sorcerer' ? 'sorcerer' : 'ninja' };
-        }
+        ch = await runTitleFlow();
       }
       gs.setCharacter(ch);
       const o = OATH_BY_ID[ch.oath];

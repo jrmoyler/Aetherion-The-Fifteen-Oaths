@@ -3,7 +3,7 @@
 // cooldown, the PvP-combat lock and the sanctuary rule; this only mirrors them.
 import { h } from '../dom.js';
 
-const SWORDS = '<svg viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"><path d="M18 18L70 70M82 18L30 70M62 78L78 62M22 62L38 78"/></svg>';
+const SWORDS = '<span class="ae-text-icon">PVP</span>';
 
 export function createPvp(env) {
   const { ui, gs } = env;

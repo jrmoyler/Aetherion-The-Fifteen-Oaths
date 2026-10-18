@@ -17,13 +17,14 @@ export function createFieldGuide(ui) {
   const title = h('strong'); const hint = h('p'); const progress = h('span', { class: 'ae-guide__progress' });
   const content = h('div', { class: 'ae-guide__body' }, title, hint, progress);
   const el = h('aside', { class: 'ae-guide ae-panel', 'aria-label': 'Field guide', hidden: true }, heading, content);
-  content.hidden = ui.touchMode || steps.every(([id]) => completed.has(id));
+  content.hidden = true;
   heading.setAttribute('aria-expanded', String(!content.hidden));
-  heading.onclick = () => { content.hidden = !content.hidden; heading.setAttribute('aria-expanded', String(!content.hidden)); };
+  heading.onclick = () => { content.hidden = !content.hidden; heading.setAttribute('aria-expanded', String(!content.hidden)); render(); };
   const prompt = h('button', { type: 'button', class: 'ae-interact ae-panel', hidden: true });
   prompt.onclick = () => ctx.input?.press?.('interact');
   function render() {
     const step = steps.find(([id]) => !completed.has(id));
+    heading.textContent = `${content.hidden ? '+ ' : '− '}Field guide${content.hidden && step ? ' · ' + step[1] : ''}`;
     title.textContent = step ? step[1] : 'Your journey is yours';
     hint.textContent = step ? step[2][device] || step[2].kbm : 'Citizens offer tasks. Explore the sanctuaries to attune fast travel. Your map reveals the continent.';
     progress.textContent = `${steps.filter(([id]) => completed.has(id)).length} / ${steps.length} foundations learned`;

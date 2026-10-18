@@ -2,8 +2,7 @@
 // Client-side prediction: cooldown/mana pre-checks against the latest `net:you`, local anticipation VFX and
 // animation the instant a slot is pressed, then `{t:'cast'}` to the server. Server events resolve visuals
 // for everyone else (cast/hit/heal/status/death/interrupt/fail). See game/CONTRACTS.md.
-import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
-import { Color3 } from '@babylonjs/core/Maths/math.color.js';
+import { Vector3, Vector2, Raycaster, Color } from 'three';
 import { hotbarFor, ABILITY_BY_ID } from '@shared/abilities.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { HitFlashes, StatusVisuals } from './feedback.js';
@@ -104,7 +103,7 @@ export async function init(ctx) {
   function cycleTarget() {
     const p = player(); if (!p) return;
     const list = [];
-    try { ctx.actors?.forEach?.((a) => { if (a !== p && a.visible !== false && isEnemy(a)) { const d = Vector3.Distance(a.position, p.position); if (d < 40) list.push({ a, d }); } }); } catch { /* stub */ }
+    try { ctx.actors?.forEach?.((a) => { if (a !== p && a.visible !== false && isEnemy(a)) { const d = a.position.distanceTo(p.position); if (d < 40) list.push({ a, d }); } }); } catch { /* stub */ }
     if (!list.length) { const n = nearestEnemy(40); if (n) setTarget(n.id); return; }
     list.sort((x, y) => x.d - y.d);
     const i = list.findIndex((e) => e.a.id === state.target);
@@ -119,42 +118,45 @@ export async function init(ctx) {
 
   // ------------------------------------------------------------------------------------------ aiming
   function camForward() {
-    const cam = ctx.actors?.camera ?? ctx.scene.activeCamera;
+    const cam = ctx.actors?.camera ?? ctx.camera;
     let d = null;
-    try { d = cam?.getForwardRay?.(1)?.direction?.clone?.(); } catch { d = null; }
+    try { d = cam?.getWorldDirection?.(new Vector3()); } catch { d = null; }
     if (!d) { const p = player(); const ry = p?.root?.rotation?.y ?? 0; d = new Vector3(Math.sin(ry), 0, Math.cos(ry)); }
-    d.y = 0; if (d.lengthSquared() < 1e-6) d.set(0, 0, 1); return d.normalize();
+    d.y = 0; if (d.lengthSq() < 1e-6) d.set(0, 0, 1); return d.normalize();
   }
   /** Ground point under the screen-centre (pointer locked) / mouse reticle, clamped to range. */
   function reticle(range) {
     const p = player(); const pos = p.position;
-    const cam = ctx.actors?.camera ?? ctx.scene.activeCamera;
-    if (!cam || isTouch()) return pos.add(camForward().scale(Math.min(range, 8)));
+    const cam = ctx.actors?.camera ?? ctx.camera;
+    if (!cam || isTouch()) return pos.clone().add(camForward().multiplyScalar(Math.min(range, 8)));
     try {
       const sc = ctx.scene; const locked = ctx.input?.state?.pointerLocked;
-      const x = locked ? sc.getEngine().getRenderWidth() / 2 : sc.pointerX; const y = locked ? sc.getEngine().getRenderHeight() * 0.45 : sc.pointerY;
-      const ray = sc.createPickingRay(x, y, null, cam);
+      const rect = ctx.canvas.getBoundingClientRect();
+      const x = locked ? rect.width / 2 : sc.pointerX; const y = locked ? rect.height * 0.45 : sc.pointerY;
+      const raycaster = new Raycaster();
+      raycaster.setFromCamera(new Vector2(x / rect.width * 2 - 1, 1 - y / rect.height * 2), cam);
+      const ray = raycaster.ray;
       if (ray.direction.y < -0.02) {
         let t = (pos.y - ray.origin.y) / ray.direction.y; // plane at player height, then refine on terrain
-        for (let k = 0; k < 3; k++) { const q = ray.origin.add(ray.direction.scale(t)); const gy = groundY(q.x, q.z, pos.y); t = (gy - ray.origin.y) / ray.direction.y; }
-        const hit = ray.origin.add(ray.direction.scale(t)); const off = hit.subtract(pos); off.y = 0;
-        const d = off.length(); if (d > range) off.scaleInPlace(range / d);
-        return pos.add(off);
+        for (let k = 0; k < 3; k++) { const q = ray.origin.clone().add(ray.direction.clone().multiplyScalar(t)); const gy = groundY(q.x, q.z, pos.y); t = (gy - ray.origin.y) / ray.direction.y; }
+        const hit = ray.origin.clone().add(ray.direction.clone().multiplyScalar(t)); const off = hit.clone().sub(pos); off.y = 0;
+        const d = off.length(); if (d > range) off.multiplyScalar(range / d);
+        return pos.clone().add(off);
       }
     } catch { /* fall through */ }
-    return pos.add(camForward().scale(Math.min(range, 8)));
+    return pos.clone().add(camForward().multiplyScalar(Math.min(range, 8)));
   }
   function computeAim(ab, tgt) {
     const p = player(); const pos = p.position; const range = ab.range ?? 12;
     let dir; let aim;
-    if (ab.shape === 'self' || ab.shape === 'summon') { dir = tgt ? tgt.position.subtract(pos) : camForward(); aim = pos.clone(); }
+    if (ab.shape === 'self' || ab.shape === 'summon') { dir = tgt ? tgt.position.clone().sub(pos) : camForward(); aim = pos.clone(); }
     else if (ab.shape === 'zone') {
-      if (tgt && Vector3.Distance(tgt.position, pos) <= range + 2) aim = tgt.position.clone(); else aim = reticle(range);
-      dir = aim.subtract(pos);
+      if (tgt && tgt.position.distanceTo(pos) <= range + 2) aim = tgt.position.clone(); else aim = reticle(range);
+      dir = aim.clone().sub(pos);
     } else { // line / melee / projectile
-      if (tgt) { dir = tgt.position.subtract(pos); aim = tgt.position.clone(); } else { dir = camForward(); aim = pos.add(dir.scale(range)); }
+      if (tgt) { dir = tgt.position.clone().sub(pos); aim = tgt.position.clone(); } else { dir = camForward(); aim = pos.clone().add(dir.clone().multiplyScalar(range)); }
     }
-    dir.y = 0; if (dir.lengthSquared() < 1e-6) dir = camForward(); dir.normalize();
+    dir.y = 0; if (dir.lengthSq() < 1e-6) dir = camForward(); dir.normalize();
     aim.y = groundY(aim.x, aim.z, aim.y);
     return { dir, aim };
   }
@@ -174,7 +176,7 @@ export async function init(ctx) {
       let tgt = targetActor();
       if (tgt && !isEnemy(tgt)) tgt = null; // friendly players, neutral NPCs and allied pets are never attacked
       const melee = ab.shape === 'melee';
-      if (tgt && Vector3.Distance(tgt.position, p.position) > (ab.range ?? 12) + (melee ? 1.5 : 10)) tgt = melee ? null : tgt;
+      if (tgt && tgt.position.distanceTo(p.position) > (ab.range ?? 12) + (melee ? 1.5 : 10)) tgt = melee ? null : tgt;
       if (!tgt && (melee || ab.kind === 'basic')) { const n = nearestEnemy((ab.range ?? 3) + (melee ? 1.8 : 0)); if (n) { tgt = n; setTarget(n.id); } }
       const { dir, aim } = computeAim(ab, tgt);
       try { p.faceToward?.(aim.x + dir.x * 0.01, aim.z + dir.z * 0.01, 0.6); } catch { /* optional */ }
@@ -191,7 +193,7 @@ export async function init(ctx) {
       const element = ab.element ?? elementOfActor(p) ?? OATH_BY_ID[state.character?.oath]?.element ?? 'arcane';
       const ult = slot === 5;
       const chain = [];
-      if (ab.id === 'collective/chain') { try { ctx.actors?.forEach?.((a) => { if (a !== p && a !== tgt && isEnemy(a) && tgt && Vector3.Distance(a.position, tgt.position) < 7.5 && chain.length < 5) chain.push(a); }); } catch { /* ignore */ } }
+      if (ab.id === 'collective/chain') { try { ctx.actors?.forEach?.((a) => { if (a !== p && a !== tgt && isEnemy(a) && tgt && a.position.distanceTo(tgt.position) < 7.5 && chain.length < 5) chain.push(a); }); } catch { /* ignore */ } }
       const tpos = tgt ? tgt.position.clone() : aim.clone();
       const handle = ctx.vfx?.castEffect?.(ab, { caster: p, target: tpos, dir: { x: dir.x, z: dir.z }, castTime, element, local: true, shake: true, ultimate: ult, combo: state.combo, chain }) ?? null;
       if (ult) ctx.vfx?.play?.(`ultimate:${state.character?.cls ?? p.cls ?? 'sorcerer'}:${element}`, { caster: p, dir: { x: dir.x, z: dir.z }, target: tpos, local: true, shake: true, ant: castTime + 0.05 });
@@ -269,7 +271,7 @@ export async function init(ctx) {
     else if (/roar|phase/.test(e.ability)) h = ctx.vfx?.play?.(`burst:${element}`, { ...common, pos: pos ?? aimV, radius: e.radius ?? 6 });
     else if (String(e.ability).startsWith('item/')) h = ctx.vfx?.play?.('heal', { ...common, pos: pos ?? aimV, follow: caster ? () => caster.position : undefined });
     else if (tpos && pos) { // mob / pet strike: melee arc if close, bolt otherwise
-      const far = Vector3.Distance(pos, tpos) > 4.5;
+      const far = pos.distanceTo(tpos) > 4.5;
       h = ctx.vfx?.play?.(`basic:${far ? 'sorcerer' : 'ninja'}:${element}`, common);
     }
     if (h) { recentFxBySrc.set(e.src, now); if ((e.castTime ?? 0) > 0.05) remoteFx.set(key, now); }
@@ -291,7 +293,7 @@ export async function init(ctx) {
     else if (amount > 0) bus.emit('combat:floater', { x: hx, y: hy, z: hz, text: String(amount), kind: e.crit ? 'crit' : 'damage', element, taken: selfDst, dot: !!e.dot });
     if (e.absorbed) bus.emit('combat:floater', { x: hx, y: hy + 0.35, z: hz, text: `${Math.round(e.absorbed)} absorbed`, kind: 'status', element, taken: selfDst });
     if (e.rx) bus.emit('combat:floater', { x: hx, y: hy + 0.6, z: hz, text: e.rx, kind: 'status', element });
-    if (dst) flashes.flash(dst, Color3.FromHexString(ELEMENT_FLASH[element] ?? '#ffffff'), e.crit ? 0.85 : e.dot ? 0.35 : 0.6, e.crit ? 0.24 : 0.16);
+    if (dst) flashes.flash(dst, new Color(ELEMENT_FLASH[element] ?? '#ffffff'), e.crit ? 0.85 : e.dot ? 0.35 : 0.6, e.crit ? 0.24 : 0.16);
     // Anchor a restrained impact to the confirmed victim. Predicted travel effects
     // cannot suppress all subsequent hits from this caster for three seconds.
     const castShown = e.src != null && now - (recentFxBySrc.get(e.src) ?? -1e9) < 3000 && !e.dot;
@@ -406,6 +408,6 @@ export async function init(ctx) {
     nearestEnemy,
     /** True for creatures and players the local player may attack (PvP rules mirrored from net.canAttack). */
     isEnemy: (id) => isEnemy(actorOf(id)),
-    flash: (actor, color, s, d) => flashes.flash(actor, color ?? Color3.White(), s, d),
+    flash: (actor, color, s, d) => flashes.flash(actor, color ?? new Color(0xffffff), s, d),
   };
 }

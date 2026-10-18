@@ -27,47 +27,9 @@ const NAME = {
 const INK = '#efe6cf';
 const BODY = '#121a27';
 
-function face(btn, style) {
-  const c = (style === 'ps' ? PS : XB)[btn];
-  let mark;
-  if (style === 'ps') {
-    mark = {
-      A: `<path d="M10.6 10.6L21.4 21.4M21.4 10.6L10.6 21.4" stroke="${c}" stroke-width="2.6" stroke-linecap="round"/>`,
-      B: `<circle cx="16" cy="16" r="6.2" fill="none" stroke="${c}" stroke-width="2.5"/>`,
-      X: `<rect x="10.2" y="10.2" width="11.6" height="11.6" fill="none" stroke="${c}" stroke-width="2.4"/>`,
-      Y: `<path d="M16 9.2L22.6 20.8H9.4Z" fill="none" stroke="${c}" stroke-width="2.4" stroke-linejoin="round"/>`,
-    }[btn];
-  } else {
-    mark = `<text x="16" y="21.2" text-anchor="middle" font-family="Inter,Segoe UI,system-ui,sans-serif" font-weight="700" font-size="14.5" fill="${c}">${btn}</text>`;
-  }
-  return `<circle cx="16" cy="16" r="13.6" fill="${BODY}" stroke="${c}" stroke-width="1.8"/>${mark}`;
-}
-function textIn(t, size = 10, y = 20) { return `<text x="16" y="${y}" text-anchor="middle" font-family="Inter,Segoe UI,system-ui,sans-serif" font-weight="700" font-size="${size}" fill="${INK}">${t}</text>`; }
-function dpad(arm) {
-  const on = (a) => (a === arm ? '#e6cd8e' : '#3a4560');
-  return `<path d="M12 3h8v9h9v8h-9v9h-8v-9H3v-8h9z" fill="${BODY}" stroke="#8d8778" stroke-width="1.2" stroke-linejoin="round"/>
-    <path d="M13.2 4.6h5.6v6.6h-5.6z" fill="${on('UP')}"/><path d="M13.2 20.8h5.6v6.6h-5.6z" fill="${on('DOWN')}"/>
-    <path d="M4.6 13.2h6.6v5.6H4.6z" fill="${on('LEFT')}"/><path d="M20.8 13.2h6.6v5.6h-6.6z" fill="${on('RIGHT')}"/>`;
-}
-/** Inline SVG for one pad input. btn: A B X Y LB RB LT RT BACK START L3 R3 UP DOWN LEFT RIGHT LS RS. */
+// Platform button labels use native text and CSS; no vector markup.
 export function glyphSVG(btn, style = 'xbox') {
-  const st = style === 'ps' ? 'ps' : 'xbox';
-  let body;
-  if (FACE[btn]) body = face(btn, st);
-  else if (btn === 'LB' || btn === 'RB') body = `<path d="M3 24V13c0-3 2.4-5.4 5.4-5.4h15.2c3 0 5.4 2.4 5.4 5.4v11z" fill="${BODY}" stroke="#a89f8a" stroke-width="1.5"/>${textIn(LABEL[st][btn], 10.5, 20.5)}`;
-  else if (btn === 'LT' || btn === 'RT') body = `<path d="M6 29V10.5C6 6 9.5 2.6 14 2.6h4c4.5 0 8 3.4 8 7.9V29z" fill="${BODY}" stroke="#a89f8a" stroke-width="1.5"/>${textIn(LABEL[st][btn], 10.5, 21)}`;
-  else if (btn === 'L3' || btn === 'R3' || btn === 'LS' || btn === 'RS') {
-    const l = btn[0];
-    body = `<circle cx="16" cy="16" r="13.4" fill="${BODY}" stroke="#a89f8a" stroke-width="1.5"/><circle cx="16" cy="16" r="8.4" fill="none" stroke="#6d6758" stroke-width="1.2"/>${textIn(l, 11, 20)}`
-      + (btn.endsWith('3') ? '<path d="M16 27.5l-2.6-2.8h5.2z" fill="#e6cd8e"/>' : '');
-  } else if (btn === 'START') body = `<rect x="3" y="7" width="26" height="18" rx="9" fill="${BODY}" stroke="#a89f8a" stroke-width="1.5"/><path d="M10.5 12.5h11M10.5 16h11M10.5 19.5h11" stroke="${INK}" stroke-width="1.7" stroke-linecap="round"/>`;
-  else if (btn === 'BACK') {
-    body = st === 'ps'
-      ? `<rect x="3" y="7" width="26" height="18" rx="9" fill="${BODY}" stroke="#a89f8a" stroke-width="1.5"/><path d="M12 11v10M16 10v12M20 11v10" stroke="${INK}" stroke-width="1.7" stroke-linecap="round"/>`
-      : `<rect x="3" y="7" width="26" height="18" rx="9" fill="${BODY}" stroke="#a89f8a" stroke-width="1.5"/><rect x="10" y="11" width="8" height="7" fill="none" stroke="${INK}" stroke-width="1.4"/><rect x="14" y="14" width="8" height="7" fill="${BODY}" stroke="${INK}" stroke-width="1.4"/>`;
-  } else if (btn === 'UP' || btn === 'DOWN' || btn === 'LEFT' || btn === 'RIGHT') body = dpad(btn);
-  else body = `<circle cx="16" cy="16" r="13.4" fill="${BODY}" stroke="#a89f8a" stroke-width="1.5"/>${textIn(esc(btn).slice(0, 3), 9)}`;
-  return `<svg class="ae-pg" viewBox="0 0 32 32" data-btn="${btn}" aria-hidden="true">${body}</svg>`;
+  return `<span class="ae-pg" data-btn="${esc(btn)}" aria-hidden="true">${esc((LABEL[style === 'ps' ? 'ps' : 'xbox'][btn] || (style === 'ps' ? {A:'×',B:'○',X:'□',Y:'△'}[btn] : '') || btn))}</span>`;
 }
 /** Glyph(s) for a binding string ('X' or 'LT+RT'). */
 export function bindingSVG(bind, style) {
