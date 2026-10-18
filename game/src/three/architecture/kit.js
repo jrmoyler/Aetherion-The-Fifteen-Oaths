@@ -144,8 +144,13 @@ export function inlay(S) {
   } else {
     d.ring(mat, 0, y, 0, 38.0, 38.5, 0.025, 128); d.ring(mat, 0, y, 0, 37.1, 37.3, 0.025, 128);
   }
-  d.ring(mat, 0, y, 0, 14.4, 14.9, 0.025, 96); d.ring(mat, 0, y, 0, 13.5, 13.7, 0.025, 96);
-  emblemFlat(S, d, mat, 0, y, 0, style.emblemScale ?? 10.5);
+  if (style.centerRings !== false) { d.ring(mat, 0, y, 0, 14.4, 14.9, 0.025, 96); d.ring(mat, 0, y, 0, 13.5, 13.7, 0.025, 96); }
+  // compact emblem medallion (the concept plazas use fine metal rings, not a plaza-sized logo)
+  const es = style.emblemScale ?? 4.2;
+  if (es > 0) {
+    emblemFlat(S, d, mat, 0, y, 0, es);
+    if (style.medallion !== false) { d.ring(mat, 0, y, 0, es * 1.38, es * 1.38 + 0.22, 0.025, 72); d.ring(mat, 0, y, 0, es * 1.58, es * 1.58 + 0.08, 0.025, 72); }
+  }
   if (style.inlayExtra) style.inlayExtra(S, mat, y);
 }
 
@@ -345,14 +350,36 @@ export function catenary(a, b, sag, n = 14) {
   for (let i = 0; i <= n; i++) { const t = i / n; pts.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t - sag * 4 * t * (1 - t), a[2] + (b[2] - a[2]) * t]); }
   return pts;
 }
-/** Draped cloth swag between two points (ribbon following a catenary). */
-export function swag(S, mat, a, b, sag, width = 1.2) {
-  const pts = catenary(a, b, sag, 12);
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p = pts[i], q = pts[i + 1]; const t0 = i / 12, t1 = (i + 1) / 12;
-    const w0 = width * (0.4 + Math.sin(t0 * Math.PI) * 0.6), w1 = width * (0.4 + Math.sin(t1 * Math.PI) * 0.6);
-    S.d.quad(mat, [[p[0], p[1], p[2]], [q[0], q[1], q[2]], [q[0], q[1] - w1, q[2]], [p[0], p[1] - w0, p[2]]], { double: true, uv: [t0, 1, t1, 0] });
+/**
+ * Draped cloth swag between two points: a gathered fabric sheet hanging along a catenary, deepest
+ * and widest mid-span, with vertical gathers (folds) radiating from the two hang points, plus
+ * optional hanging tails at both ends. One indexed mesh per swag.
+ */
+export function swag(S, mat, a, b, sag, width = 1.2, o = {}) {
+  if (S.d.dry) return;
+  const N = o.seg ?? 20, M = 5; const folds = o.folds ?? Math.max(3, Math.round(Math.hypot(b[0] - a[0], b[2] - a[2]) / 2.2));
+  const dx = b[0] - a[0], dz = b[2] - a[2]; const L = Math.hypot(dx, dz) || 1; const nx = dz / L, nz = -dx / L; // horizontal normal of the swag plane
+  const P = [], Nn = [], U = [], I = [];
+  for (let i = 0; i <= N; i++) {
+    const t = i / N; const s = Math.sin(t * Math.PI);
+    const cx = a[0] + dx * t, cz = a[2] + dz * t, cy = a[1] + (b[1] - a[1]) * t - sag * 4 * t * (1 - t);
+    const w = width * (0.25 + 0.75 * s);
+    for (let j = 0; j <= M; j++) {
+      const v = j / M; const depth = v * w;
+      // gathers: sinusoidal ripples across the span, stronger toward the hem
+      const f = Math.sin(t * folds * Math.PI * 2) * (0.08 + 0.22 * v) * width * (0.3 + 0.7 * s);
+      const belly = Math.sin(v * Math.PI * 0.5) * 0.25 * width * s;
+      P.push(cx + nx * (f + belly), cy - depth - v * v * 0.25 * width * s, cz + nz * (f + belly));
+      const df = Math.cos(t * folds * Math.PI * 2) * folds * Math.PI * 2 * (0.08 + 0.22 * v) * width / L;
+      const tx = dx / L, tz = dz / L; let ex = nx - tx * df, ez = nz - tz * df; const el = Math.hypot(ex, ez) || 1;
+      Nn.push(ex / el, 0.15, ez / el); U.push(t * L / (width * 2), 1 - v);
+      if (i < N && j < M) { const k = i * (M + 1) + j; I.push(k, k + M + 1, k + 1, k + 1, k + M + 1, k + M + 2); }
+    }
   }
+  S.d.emit(mat, P, Nn, U, I, 0, 0, 0);
+  // reverse face so both sides shade correctly
+  const P2 = P.slice(), N2 = Nn.map((v, k) => (k % 3 === 1 ? v : -v)); S.d.emit(mat, P2, N2, U, I.slice().reverse(), 0, 0, 0);
+  if (o.tails !== false) for (const e of [a, b]) S.d.cloth(mat, e[0], e[1], e[2], width * 0.55, width * (o.tailLen ?? 2.2), Math.atan2(dx, dz) + Math.PI / 2, 2, 6, { vcut: 0.25 });
 }
 
 // ------------------------------------------------------------ water
@@ -380,13 +407,121 @@ export function waterfall(S, x, ytop, z, w, ybot, ry = 0) {
   S.d.quad(S.M.fall, [[x - cx, ybot, z - cz], [x + cx, ybot, z + cz], [x + cx + fx * 0.4, ytop, z + cz + fz * 0.4], [x - cx + fx * 0.4, ytop, z - cz + fz * 0.4]], { double: true, uv: [0, 0, w, ytop - ybot] });
 }
 
+// ------------------------------------------------------------ finishing details
+/** Stepped corbel cornice (three projecting mouldings) around a w x d footprint, top at y + 0.55. */
+export function cornice(S, mat, x, y, z, w, d, ry = 0) {
+  for (const [dy, o, hh] of [[0, 0.12, 0.16], [0.16, 0.26, 0.14], [0.3, 0.42, 0.25]]) S.d.box(mat, x, y + dy, z, w + o, hh, d + o, { ry });
+}
+/** Spire finial: collar, tapered spike and orb. */
+export function finial(S, mat, x, y, z, s = 1) {
+  S.d.cyl(mat, x, y - 0.1 * s, z, 0.22 * s, 0.18 * s, 0.3 * s, 8); S.d.cyl(mat, x, y + 0.2 * s, z, 0.12 * s, 0.02 * s, 1.5 * s, 8); S.d.sphere(mat, x, y + 0.55 * s, z, 0.16 * s, 8);
+}
+
+// ------------------------------------------------------------ set dressing (instanced props)
+export function urnProto(stone, metal) {
+  return proto(`urn:${stone}:${metal}`, (b) => {
+    b.box(stone, 0, 0, 0, 0.78, 0.18, 0.78); b.box(stone, 0, 0.18, 0, 0.62, 0.5, 0.62); b.box(stone, 0, 0.68, 0, 0.74, 0.1, 0.74);
+    b.lathe(stone, 0, 0.78, 0, [[0.12, 0], [0.18, 0.06], [0.14, 0.14], [0.3, 0.3], [0.38, 0.55], [0.32, 0.78], [0.22, 0.88], [0.28, 0.96], [0.26, 1.0], [0, 1.0]], 14);
+    b.torus(metal, 0, 1.72, 0, 0.27, 0.025, 16, 4); b.torus(metal, 0, 1.3, 0, 0.385, 0.02, 18, 4);
+  });
+}
+export function planterProto(stone, leaves, bloom = leaves) {
+  return proto(`planter:${stone}:${leaves}:${bloom}`, (b) => {
+    b.box(stone, 0, 0, 0, 1.7, 0.7, 0.85); b.box(stone, 0, 0.7, 0, 1.86, 0.1, 1.0); b.box(stone, 0, -0.05, 0, 1.8, 0.12, 0.95);
+    for (const [px, pz, r, m] of [[-0.5, 0.05, 0.42, leaves], [0.05, -0.1, 0.48, bloom], [0.55, 0.08, 0.4, leaves], [0.2, 0.18, 0.3, bloom], [-0.2, -0.15, 0.3, bloom]]) b.sphere(m, px, 0.62, pz, r, 7, { sy: 0.8 });
+  });
+}
+/** Robed guardian statue on a stepped pedestal (reads as carved figure at plaza distances). */
+export function statueProto(stone, metal) {
+  return proto(`statue:${stone}:${metal}`, (b) => {
+    b.box(stone, 0, 0, 0, 1.7, 0.3, 1.7); b.box(stone, 0, 0.3, 0, 1.3, 1.25, 1.3); b.box(stone, 0, 1.55, 0, 1.5, 0.16, 1.5);
+    const y0 = 1.71;
+    b.lathe(stone, 0, y0, 0, [[0.5, 0], [0.52, 0.18], [0.42, 0.9], [0.32, 1.55], [0.4, 1.86], [0.36, 2.0], [0.15, 2.08], [0, 2.1]], 12);
+    b.sphere(stone, 0, y0 + 2.28, 0, 0.17, 10); b.lathe(stone, 0, y0 + 2.1, 0, [[0.24, 0], [0.23, 0.2], [0.17, 0.38], [0, 0.46]], 10, {});
+    b.tube(stone, [[0.36, y0 + 1.82, 0], [0.42, y0 + 1.35, -0.18], [0.12, y0 + 1.15, -0.34]], 0.1, 6); b.tube(stone, [[-0.36, y0 + 1.82, 0], [-0.42, y0 + 1.35, -0.18], [-0.12, y0 + 1.15, -0.34]], 0.1, 6);
+    b.cyl(metal, 0, y0 - 0.1, -0.38, 0.04, 0.04, 3.2, 6); b.sphere(metal, 0, y0 + 3.15, -0.38, 0.1, 8);
+  });
+}
+export function crateStackProto(wood, metal) {
+  return proto(`crates:${wood}:${metal}`, (b) => {
+    const crate = (x, y, z, s, ry) => { b.box(wood, x, y, z, 0.9 * s, 0.9 * s, 0.9 * s, { ry }); for (const yy of [0.04, 0.78]) b.box(metal, x, y + yy * s, z, 0.93 * s, 0.07 * s, 0.93 * s, { ry }); };
+    crate(0, 0, 0, 1, 0.1); crate(1.0, 0, 0.15, 0.9, -0.2); crate(0.45, 0.9, 0.05, 0.85, 0.35);
+    b.lathe(wood, -0.95, 0, 0.2, [[0.28, 0], [0.34, 0.25], [0.36, 0.45], [0.34, 0.65], [0.28, 0.9], [0, 0.9]], 10);
+    b.torus(metal, -0.95, 0.15, 0.2, 0.33, 0.02, 12, 3); b.torus(metal, -0.95, 0.75, 0.2, 0.33, 0.02, 12, 3);
+  });
+}
+export function benchProto(stone) { return proto(`bench:${stone}`, (b) => { b.box(stone, 0, 0.45, 0, 2.2, 0.14, 0.6); b.box(stone, 0, 0.55, 0.28, 2.2, 0.5, 0.1); for (const x of [-0.85, 0.85]) b.box(stone, x, 0, 0, 0.3, 0.45, 0.5); }); }
+/** Hanging vine curtain (4 m drop) with leaf clusters; hang point at origin, falls down -Y. */
+export function vineProto(stem, leaves) {
+  return proto(`vine:${stem}:${leaves}`, (b) => {
+    for (let k = 0; k < 5; k++) {
+      const x0 = (k - 2) * 0.45, L = 2.2 + ((k * 7) % 5) * 0.45; const pts = [];
+      for (let j = 0; j <= 6; j++) { const t = j / 6; pts.push([x0 + Math.sin(t * 5 + k) * 0.15, -t * L, -0.08 - Math.sin(t * 3.1) * 0.1]); }
+      b.tube(stem, pts, 0.025, 4);
+      for (let j = 1; j <= 6; j++) b.sphere(leaves, pts[j][0], pts[j][1], pts[j][2] - 0.05, 0.16 + ((j + k) % 3) * 0.05, 6, { sy: 0.7 });
+    }
+  });
+}
+const DRESS = {
+  urn: (S) => urnProto(S.M.trim, S.M.metal),
+  planter: (S) => planterProto(S.M.trim, S.M.leaves ?? M('foliage.leaves', { tint: '#4e6a34' }), S.M.bloom ?? S.M.leaves ?? M('foliage.leaves', { tint: '#4e6a34' })),
+  statue: (S) => statueProto(S.M.statue ?? S.M.wall, S.M.metal),
+  crates: (S) => crateStackProto(S.M.wood ?? M('wood.weathered', { tint: '#5a4632' }), S.M.metal),
+  bench: (S) => benchProto(S.M.trim),
+};
+const DRESS_R = { urn: 0.6, planter: 1.0, statue: 1.0, crates: 1.4, bench: 1.2 };
+/** Place one dressing item (instanced) facing angle `face`, with a solid collider and a reservation. */
+export function dressItem(S, kind, x, z, face = 0, y = 0.06, s = 1) {
+  if (kind === 'brazier') { brazier(S, x, z, y, s); return; }
+  if (kind === 'lantern') { lanternPost(S, x, z, y, 3.4); return; }
+  S.inst.add(DRESS[kind](S), x, y, z, face, s, s, s);
+  S.col.circle(x, z, DRESS_R[kind] * s, y - 0.5, y + 2, false);
+}
+/**
+ * Rim dressing: a rhythm of props just outside the plaza balustrade, skipping roads and reserved
+ * areas. o: {items:[kind...], step metres, r (circle radius / square half-size), y}
+ */
+export function dressRim(S, o) {
+  const items = o.items; const step = o.step ?? 7; let k = 0;
+  if (S.style.plaza === 'square') {
+    const h = o.r ?? 45.2;
+    for (const [ax, az, nx, nz] of [[-1, -1, 1, 0], [1, -1, 0, 1], [1, 1, -1, 0], [-1, 1, 0, -1]]) {
+      for (let t = 2; t < 2 * h - 1; t += step) {
+        const x = ax * h + nx * t, z = az * h + nz * t; if (!S.clear(x, z, 1.6)) continue;
+        dressItem(S, items[k++ % items.length], x, z, Math.atan2(-x, -z) + Math.PI, o.y ?? 0.06); S.reserve(x, z, 1.4);
+      }
+    }
+  } else {
+    const r = o.r ?? 47; const n = Math.round((Math.PI * 2 * r) / step);
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + (o.a0 ?? 0.11); const [x, z] = polar(r, a); if (!S.clear(x, z, 1.6) || (o.skip && o.skip(a))) continue;
+      dressItem(S, items[k++ % items.length], x, z, a + Math.PI, o.y ?? 0.06); S.reserve(x, z, 1.4);
+    }
+  }
+}
+/** Terrace-edge dressing on every hall terrace recorded by terraceStairs (front edge, skipping stairs). */
+export function dressTiers(S, o) {
+  const items = o.items; const step = o.step ?? 6.5; let k = 0;
+  for (const t of S.terraces ?? []) {
+    const y = t.h + (t.coping ? 0.2 : 0); const z = t.z0 + (o.inset ?? 1.0);
+    for (let x = t.x0 + 2; x <= t.x1 - 2; x += step) {
+      if (t.stairXs.some((sx) => Math.abs(x - sx) < t.w / 2 + 1.6)) continue;
+      dressItem(S, items[k++ % items.length], x, z, Math.PI, y);
+      if (o.vines && S.M.leaves) S.inst.add(vineProto(S.M.bark ?? S.M.wood ?? S.M.trim, S.M.leaves), x + step / 2, y, t.z0 - 0.05, 0, 1, Math.min(1, (y + 0.5) / 4), 1);
+    }
+  }
+}
+
 // ------------------------------------------------------------ generic modules
 /** Generic square tower with crenellated top. */
 export function squareTower(S, x, z, w, h, o = {}) {
   const y = o.y ?? 0; const mat = o.mat ?? S.M.wall; const trim = o.trim ?? S.M.trim; const ry = o.ry || 0;
   S.b.box(mat, x, y - 3, z, w, h + 3, w, { ry });
+  // plinth course, string course and a stepped corbel cornice instead of a bare slab top
+  S.d.box(trim, x, y - 0.2, z, w + 0.5, 1.0, w + 0.5, { ry }); S.d.box(trim, x, y + h * 0.58, z, w + 0.22, 0.28, w + 0.22, { ry });
+  cornice(S, trim, x, y + h - 0.55, z, w, w, ry);
   S.b.box(trim, x, y + h, z, w + 0.6, 0.5, w + 0.6, { ry });
-  if (o.roof === 'pyramid') S.b.hip(o.roofMat ?? S.M.roof, x, y + h + 0.5, z, w + 0.8, w + 0.8, w * 0.9, { ry });
+  if (o.roof === 'pyramid') { const rm = o.roofMat ?? S.M.roof; S.b.hip(rm, x, y + h + 0.5, z, w + 0.8, w + 0.8, w * 0.9, { ry }); finial(S, o.finial ?? S.M.metal, x, y + h + 0.5 + w * 0.9, z, 0.9); }
   else if (o.roof !== 'none') {
     S.F.push(x, y + h + 0.5, z, ry);
     const n = Math.max(2, Math.round(w / 1.5)); const step = (w + 0.4) / n;
@@ -405,8 +540,12 @@ export function squareTower(S, x, z, w, h, o = {}) {
 export function roundTower(S, x, z, r, h, o = {}) {
   const y = o.y ?? 0; const mat = o.mat ?? S.M.wall;
   S.b.cyl(mat, x, y - 3, z, r, r * (o.taper ?? 0.92), h + 3, 16);
-  S.b.cyl(o.trim ?? S.M.trim, x, y + h, z, r * (o.taper ?? 0.92) + 0.35, r * (o.taper ?? 0.92) + 0.35, 0.5, 16);
-  if (o.roof === 'cone') S.b.cyl(o.roofMat ?? S.M.roof, x, y + h + 0.5, z, r + 0.6, 0.05, r * 1.6, 16);
+  const tr = o.trim ?? S.M.trim, rt = r * (o.taper ?? 0.92);
+  S.d.cyl(tr, x, y - 0.2, z, r + 0.3, r + 0.25, 0.9, 16); S.d.cyl(tr, x, y + h * 0.6, z, r * (1 - (1 - (o.taper ?? 0.92)) * 0.6) + 0.12, r * (1 - (1 - (o.taper ?? 0.92)) * 0.6) + 0.12, 0.24, 16);
+  for (const [dy, dr, hh] of [[-0.6, 0.1, 0.2], [-0.38, 0.22, 0.16], [-0.18, 0.3, 0.18]]) S.d.cyl(tr, x, y + h + dy, z, rt + dr, rt + dr, hh, 16);
+  S.b.cyl(tr, x, y + h, z, rt + 0.35, rt + 0.35, 0.5, 16);
+  if (o.roof === 'cone') { S.b.cyl(o.roofMat ?? S.M.roof, x, y + h + 0.5, z, r + 0.6, 0.05, r * 1.6, 16); finial(S, o.finial ?? S.M.metal, x, y + h + 0.5 + r * 1.6, z, 0.8); }
+  else if (o.roof === 'dome') finial(S, o.finial ?? S.M.metal, x, y + h + 0.5 + r * 0.95, z, 0.7);
   else if (o.roof === 'dome') S.b.sphere(o.roofMat ?? S.M.roof, x, y + h + 0.5, z, r * 0.95, 14, { hemi: true });
   S.col.circle(x, z, r, y - 3, y + h + 1, false);
 }
@@ -417,6 +556,8 @@ export function genericHouse(S, w, d, h, o = {}) {
   const b = S.b, dd = S.d; const rand = S.rand;
   b.box(wall, 0, 0, d / 2, w, h, d);
   dd.box(trim, 0, 0, d / 2, w + 0.3, 0.55, d + 0.3);
+  // eave cornice (two stepped mouldings) so the roof sits on a crafted edge, not a bare box
+  dd.box(trim, 0, h - 0.32, d / 2, w + 0.34, 0.2, d + 0.34); dd.box(trim, 0, h - 0.12, d / 2, w + 0.6, 0.14, d + 0.6);
   for (const sx of [-1, 1]) { dd.box(trim, sx * (w / 2 - 0.12), 0, -0.04, 0.42, h, 0.16); dd.box(trim, sx * (w / 2 + 0.02), 0, d - 0.25, 0.16, h, 0.42); }
   const storeys = h > 6.2 ? 2 : 1; const sh = h / storeys;
   if (storeys > 1) dd.box(trim, 0, sh - 0.1, d / 2, w + 0.18, 0.22, d + 0.18);
@@ -424,7 +565,7 @@ export function genericHouse(S, w, d, h, o = {}) {
   if (rt === 'flat') { dd.box(trim, 0, h, d / 2, w + 0.4, 0.35, d + 0.4); dd.box(wall, 0, h + 0.35, d / 2, w - 0.6, 0.45, d - 0.6); b.box(wall, 0, h + 0.35, d / 2, w - 1.4, 0.06, d - 1.4); }
   else if (rt === 'hip') b.hip(roof, 0, h, d / 2, w + 1, d + 1, Math.min(w, d) * 0.45);
   else if (rt === 'dome') { dd.box(trim, 0, h, d / 2, w + 0.3, 0.3, d + 0.3); b.sphere(roof, 0, h + 0.3, d / 2, Math.min(w, d) * 0.38, 12, { hemi: true }); }
-  else b.gable(roof, 0, h, d / 2, w + 1.0, d + 1.2, Math.min(w, d) * (o.pitch ?? 0.42), { gableMat: wall, inset: 0.5 });
+  else { const rise = Math.min(w, d) * (o.pitch ?? 0.42); b.gable(roof, 0, h, d / 2, w + 1.0, d + 1.4, rise, { gableMat: wall, inset: 0.5 }); dd.beam(trim, [-w / 2 - 0.55, h + rise + 0.04, d / 2], [w / 2 + 0.55, h + rise + 0.04, d / 2], 0.24, 0.2); }
   // door
   const door = o.door ?? S.M.wood ?? trim;
   dd.box(trim, 0, 0, -0.06, 1.8, 2.6, 0.14); dd.box(door, 0, 0.05, -0.1, 1.25, 2.3, 0.1);
@@ -489,9 +630,10 @@ export function districts(S, houseFn, o = {}) {
   for (const r of rings) {
     let a = rand() * 0.2;
     while (a < TAU) {
-      const w = (o.w ?? [7, 11])[0] + rand() * ((o.w ?? [7, 11])[1] - (o.w ?? [7, 11])[0]);
-      const dd = (o.d ?? [6, 9])[0] + rand() * ((o.d ?? [6, 9])[1] - (o.d ?? [6, 9])[0]);
-      const step = (w + (o.gapM ?? 4.5)) / r;
+      // dense, continuous street frontage (townhouse rows) instead of scattered cottages
+      const w = (o.w ?? [8, 13])[0] + rand() * ((o.w ?? [8, 13])[1] - (o.w ?? [8, 13])[0]);
+      const dd = (o.d ?? [8, 11])[0] + rand() * ((o.d ?? [8, 11])[1] - (o.d ?? [8, 11])[0]);
+      const step = (w + (o.gapM ?? 1.4)) / r;
       const rr = r + (rand() - 0.5) * 3;
       const [x, z] = polar(rr, a);
       if (rand() <= dens && S.clear(x, z, w * 0.6) && !(o.skip && o.skip(a, rr))) {
@@ -499,7 +641,7 @@ export function districts(S, houseFn, o = {}) {
         const corners = [[-w / 2, 0], [w / 2, 0], [-w / 2, dd], [w / 2, dd]].map(([lx, lz]) => { const [cx, cz] = rot2(lx, lz, ry); return S.gy(x + cx, z + cz); });
         const gmin = Math.min(...corners), gmax = Math.max(...corners);
         if (gmax - gmin < 6) {
-          const h = (o.h ?? [4.5, 7])[0] + rand() * ((o.h ?? [4.5, 7])[1] - (o.h ?? [4.5, 7])[0]);
+          const h = (o.h ?? [6.5, 10.5])[0] + rand() * ((o.h ?? [6.5, 10.5])[1] - (o.h ?? [6.5, 10.5])[0]);
           const fy = gmax + 0.25;
           S.F.push(x, fy, z, ry);
           S.b.box(S.M.found ?? S.M.trim, 0, gmin - fy - 1.5, dd / 2, w + 0.5, fy - gmin + 1.5 + 0.02, dd + 0.5);

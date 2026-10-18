@@ -2,7 +2,9 @@ import * as THREE from 'three';
 import { computeMetas, makeContext, cityGen, toWorld } from './architecture/gen.js';
 import { Frame, Builder } from './architecture/builder.js';
 import { matDef, getProtos } from './architecture/kit.js';
-import { naturalMaterial, pavingMaterial } from './worldMaterials.js';
+import { architectureMaterial } from './worldMaterials.js';
+import { surfaceMaps, familyOf, bannerTexture, fallMaps, lavaMaps } from './architecture/surfaces.js';
+import { emblemPolys } from './architecture/emblems.js';
 
 const KEY_COLORS = {
   'stone.basalt': '#2a2826', 'stone.marble': '#e4e0d8', 'stone.limestone': '#d8d0c0', 'stone.sandstone': '#b8946a', 'stone.slate': '#3e434b',
@@ -21,18 +23,52 @@ export function buildSanctuaries(ctx) {
   const group=new THREE.Group();group.name='Fifteen canonical sanctuary cities';
   const metas=computeMetas(), cache=new Map(), anims=[];
   const low=ctx.quality?.name==='low';
+  const texSize=low?256:512,scroll=new Set(),lavaScroll=new Set();
   function material(id) {
     if(cache.has(id))return cache.get(id);
     const def=matDef(id)||{},key=def.key||id,opts=def.opts||{};
-    const oath=metas.find(m=>id===`banner:${m.id}`)?.oath;
+    const meta=metas.find(m=>id===`banner:${m.id}`),oath=meta?.oath;
     const color=opts.tint||oath?.accent||KEY_COLORS[key]||'#887b67';
     const metal=key.startsWith('metal.'),liquid=key.startsWith('liquid.'),glow=key.startsWith('emissive.');
-    const mat=key.startsWith('paving.')?pavingMaterial(color):naturalMaterial(color,metal?.34:liquid?.22:.9,key.startsWith('stone.'));
-    mat.name=id;mat.metalness=metal?.8:0;
-    if(glow){mat.emissive.set(opts.emissive||color);mat.emissiveIntensity=Math.min(opts.emissiveIntensity||1,1.8);}
-    if(liquid||key.startsWith('glass.')){mat.transparent=true;mat.opacity=liquid?.82:.48;mat.depthWrite=false;}
+    let mat;
+    if(oath){
+      // woven oath banner: field, trim border and the oath emblem
+      const b=meta.style.banner;
+      mat=new THREE.MeshStandardMaterial({map:bannerTexture(emblemPolys(oath.id),b.color,b.trim,b.emblem),roughness:.88,side:THREE.DoubleSide});
+      const cloth=surfaceMaps('cloth','',256);mat.normalMap=cloth.normalMap;mat.normalScale.set(.6,.6);
+    } else if(liquid){
+      const fm=fallMaps(low?128:256);
+      if(key==='liquid.fall'){
+        mat=new THREE.MeshStandardMaterial({color,map:fm.fall,roughness:.35,metalness:0,transparent:true,depthWrite:false,side:THREE.DoubleSide,emissive:new THREE.Color(color).multiplyScalar(.18)});
+        fm.fall.repeat.set(1/3.2,1/9);
+      } else {
+        mat=architectureMaterial(color,{roughness:.06,metalness:.15,envBoost:4,macro:.05,wear:0,grime:0});
+        mat.normalMap=fm.ripple;mat.normalScale.set(.35,.35);fm.ripple.repeat.set(1/7,1/7);
+        if(key==='liquid.reagent'){mat.emissive.set(color);mat.emissiveIntensity=.42;}else{mat.emissive.set(color);mat.emissiveIntensity=.06;}
+      }
+      scroll.add(fm);
+    } else if(key==='emissive.lava'){
+      const lm=lavaMaps(low?128:256);
+      mat=new THREE.MeshStandardMaterial({color:'#ffffff',map:lm.map,normalMap:lm.normalMap,emissiveMap:lm.emissiveMap,emissive:new THREE.Color(opts.emissive||'#ff5a14'),emissiveIntensity:Math.min(opts.emissiveIntensity||2.2,2.6),roughness:.82});
+      lavaScroll.add(lm);
+    } else if(glow||key.startsWith('glass.')||key.startsWith('crystal.')){
+      mat=architectureMaterial(color,{roughness:glow?.6:.08,metalness:.1,envBoost:glow?1:3,macro:.04,wear:0,grime:0});
+      if(key.startsWith('crystal.')){mat.emissive.set(color);mat.emissiveIntensity=(opts.emissiveIntensity||1)*.42;}
+    } else {
+      const fam=familyOf(key);
+      const maps=fam?surfaceMaps(fam[0],fam[1],texSize):null;
+      const rough=opts.roughness!=null?opts.roughness/.8:undefined;
+      mat=architectureMaterial(color,{maps,metalness:metal?.88:0,roughness:rough,envBoost:metal?3.4:key.startsWith('stone.marble')?1.6:1,
+        normal:key.startsWith('paving.')||key.startsWith('concrete.')?.8:1,macro:metal?.06:key.startsWith('cloth.')?.05:.14});
+      if(key.startsWith('ice.')){mat.emissive.set(color);mat.emissiveIntensity=.18;mat.transparent=true;mat.opacity=.88;}
+      if(opts.mirror){mat.emissive.set('#9fb4d0');mat.emissiveIntensity=.32;mat.metalness=1;}
+    }
+    mat.name=id;
+    if(glow&&key!=='emissive.lava'){mat.emissive.set(opts.emissive||color);mat.color.set(opts.emissive||color);mat.emissiveIntensity=Math.min(opts.emissiveIntensity||1,1.8)*.62;}
+    if(liquid&&key!=='liquid.fall'){mat.transparent=true;mat.opacity=.86;mat.depthWrite=false;}
+    if(key.startsWith('glass.')){mat.transparent=true;mat.opacity=.38;mat.depthWrite=false;mat.metalness=.3;mat.roughness=.05;}
     if(opts.zOffset){mat.polygonOffset=true;mat.polygonOffsetFactor=opts.zOffset;mat.polygonOffsetUnits=opts.zOffsetUnits||-2;}
-    if(key.startsWith('cloth.')||oath)mat.side=THREE.DoubleSide;
+    if(key.startsWith('cloth.')||oath||key.startsWith('foliage.'))mat.side=THREE.DoubleSide;
     cache.set(id,mat);return mat;
   }
   const env={ctx,scene:group,collision:ctx.collision,lightBudget:0,qDensity:low?.55:.85,
@@ -64,6 +100,8 @@ export function buildSanctuaries(ctx) {
     const player=ctx.actors?.player,position=player?.root?.position||player?.mesh?.position||ctx.camera?.position;
     if(position)for(const m of metas){const distance=Math.hypot(position.x-m.cx,position.z-m.cz);m.city.visible=distance<(low?1300:1900);for(const mesh of m.detail)mesh.visible=distance<(low?320:620);}
     for(const a of anims)if(a.city.visible)a.update(a.spin,time,dt);
+    for(const fm of scroll){fm.fall.offset.y=(fm.fall.offset.y+dt*.55)%1;fm.ripple.offset.x=(fm.ripple.offset.x+dt*.004)%1;fm.ripple.offset.y=(fm.ripple.offset.y+dt*.0025)%1;}
+    for(const lm of lavaScroll){lm.emissiveMap.offset.x=lm.map.offset.x=lm.normalMap.offset.x=(lm.map.offset.x+dt*.006)%1;}
   };
   ctx.architecture=group;ctx.scene.add(group);return group;
 }

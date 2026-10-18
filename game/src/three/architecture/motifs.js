@@ -1,6 +1,7 @@
 // Pure Three.js migration of the canonical measured city kit.
 // Reusable composite motifs (arcades, terraces with stairs, broken walls, gears, pylons, trees,
 // sails...) composed from kit primitives. Shared by the per-oath city styles.
+import { M as Mat, matDef } from './kit.js';
 import { TAU, polar, rot2, stairs, terrace, colBox, banner, catenary, balustrade, arcPts, hangingLanternProto, proto, deckStrip } from './kit.js';
 
 /** Raised terrace spanning x0..x1, z0..z1 with a front staircase (from plaza level y0) at stairX. */
@@ -8,6 +9,7 @@ export function terraceStairs(S, o) {
   const { x0, x1, z0, z1, h, mat } = o; const y0 = o.y0 ?? 0.06;
   terrace(S, mat, (x0 + x1) / 2, (z0 + z1) / 2, x1 - x0, z1 - z0, h, { coping: o.coping, y0: o.base ?? -3 });
   const run = o.run ?? Math.max(3, (h - y0) / 0.22 * 0.36); const w = o.stairW ?? 12;
+  (S.terraces ??= []).push({ x0, x1, z0, z1, h, w, coping: !!o.coping, stairXs: o.stairXs ?? [o.stairX ?? 0] });
   for (const sx of (o.stairXs ?? [o.stairX ?? 0])) stairs(S, o.stairMat ?? mat, sx, z0 - run / 2, 0, w, run, y0, h, { cheek: o.cheek });
   if (o.rail) {
     const ys = h + (o.coping ? 0.2 : 0);
@@ -122,6 +124,8 @@ export function giantTree(S, x, z, R, H, o = {}) {
   const bark = S.M.bark, leaves = S.M.leaves; const y = o.y ?? 0;
   const rand = S.rand;
   S.b.lathe(bark, x, y - 1, z, [[R * 1.6, 0], [R * 1.25, 1.2], [R, 3], [R * 0.9, H * 0.4], [R * 0.75, H * 0.75], [R * 0.6, H], [0, H + 0.2]], 14);
+  // braided bark strands spiralling up the bole (gnarled, grafted look)
+  for (let k = 0; k < 6; k++) { const a0 = (k / 6) * TAU; const pts = []; for (let j = 0; j <= 8; j++) { const t = j / 8; const a = a0 + t * 1.6; const rr = R * (1.05 - t * 0.45); pts.push([x + Math.sin(a) * rr, y + t * H * 0.8, z + Math.cos(a) * rr]); } S.d.tube(bark, pts, (t) => R * (0.26 - t * 0.12), 5); }
   // buttress roots
   const nr = o.roots ?? 7;
   for (let i = 0; i < nr; i++) {
@@ -143,16 +147,48 @@ export function giantTree(S, x, z, R, H, o = {}) {
     const p2 = [x + Math.sin(a) * L, y + hy + L * 0.45, z + Math.cos(a) * L];
     S.b.tube(bark, [p0, p1, p2], (t) => R * (0.4 - t * 0.28), 6);
     branches.push(p2);
-    S.b.sphere(leaves, p2[0], p2[1] + 1, p2[2], H * (0.22 + rand() * 0.1), 10, { sy: 0.62 });
-    S.b.sphere(leaves, (p1[0] + p2[0]) / 2, p2[1] - 1.5, (p1[2] + p2[2]) / 2, H * (0.14 + rand() * 0.06), 8, { sy: 0.6 });
+    // twig forks off the bough, then a broken canopy of leaf clumps (no single ball silhouette)
+    for (let k = 0; k < 3; k++) { const b = a + (k - 1) * 0.7 + (rand() - 0.5) * 0.3; const tl = L * (0.25 + rand() * 0.2); S.d.tube(bark, [p2, [p2[0] + Math.sin(b) * tl, p2[1] + tl * (0.25 + rand() * 0.35), p2[2] + Math.cos(b) * tl]], (t) => R * (0.14 - t * 0.1), 5); }
+    leafClumps(S, leaves, p2[0], p2[1] + 1.4, p2[2], H * (0.22 + rand() * 0.08), 9 + Math.floor(rand() * 5), rand);
   }
-  S.b.sphere(leaves, x, y + H + 1, z, H * 0.34, 12, { sy: 0.55 });
+  leafClumps(S, leaves, x, y + H + 1, z, H * 0.3, 9, rand);
   S.col.circle(x, z, R * 1.15, y - 1, y + H, false);
   return { top: [x, y + H, z], branches };
 }
 
-/** Tensile sail between 4 corner points (frame space). */
-export function sail(S, mat, c) { S.d.quad(mat, c, { double: true, uv: [0, 0, 1, 1] }); }
+/** Broken canopy: flattened, irregular leaf clumps scattered in an oblate volume of radius r. */
+export function leafClumps(S, mat, x, y, z, r, n, rand) {
+  for (let i = 0; i < n; i++) {
+    const a = rand() * Math.PI * 2, d = Math.sqrt(rand()) * r * 0.8, h = (rand() - 0.3) * r * 0.9;
+    const cr = r * (0.28 + rand() * 0.22);
+    S.b.sphere(mat, x + Math.sin(a) * d, y + h - cr * 0.3, z + Math.cos(a) * d, cr, 8, { sy: 0.72 + rand() * 0.25, sx: 0.9 + rand() * 0.3, ry: rand() * 3 });
+  }
+}
+
+/**
+ * Tensile sail between 4 corner points (frame space, order a,b,c,d around the edge): a subdivided
+ * patch that sags under its own weight and bellies slightly, with metric UVs for the weave.
+ */
+export function sail(S, mat, c, o = {}) {
+  if (S.d.dry) return;
+  const n = o.seg ?? 10, sag = o.sag ?? 0.12; const [A, B, C, Dd] = c;
+  const span = Math.max(Math.hypot(B[0] - A[0], B[2] - A[2]), Math.hypot(Dd[0] - A[0], Dd[2] - A[2]));
+  const P = [], N = [], U = [], I = [];
+  const at = (u, v) => [0, 1, 2].map((k) => (A[k] * (1 - u) + B[k] * u) * (1 - v) + (Dd[k] * (1 - u) + C[k] * u) * v);
+  for (let j = 0; j <= n; j++) for (let i = 0; i <= n; i++) {
+    const u = i / n, v = j / n; const p = at(u, v); p[1] -= Math.sin(Math.PI * u) * Math.sin(Math.PI * v) * sag * span;
+    P.push(...p); U.push(u * span / 1.2, v * span / 1.2);
+    if (i < n && j < n) { const k = j * (n + 1) + i; I.push(k, k + 1, k + n + 1, k + 1, k + n + 2, k + n + 1); }
+  }
+  // per-vertex normals from the grid
+  for (let j = 0; j <= n; j++) for (let i = 0; i <= n; i++) {
+    const g = (ii, jj) => { const k = (Math.min(n, Math.max(0, jj)) * (n + 1) + Math.min(n, Math.max(0, ii))) * 3; return [P[k], P[k + 1], P[k + 2]]; };
+    const du = g(i + 1, j).map((v, k) => v - g(i - 1, j)[k]), dv = g(i, j + 1).map((v, k) => v - g(i, j - 1)[k]);
+    let nx = du[1] * dv[2] - du[2] * dv[1], ny = du[2] * dv[0] - du[0] * dv[2], nz = du[0] * dv[1] - du[1] * dv[0]; if (ny < 0) { nx = -nx; ny = -ny; nz = -nz; } const l = Math.hypot(nx, ny, nz) || 1; N.push(nx / l, ny / l, nz / l);
+  }
+  S.d.emit(mat, P, N, U, I, 0, 0, 0);
+  S.d.emit(mat, P, N.map((v) => -v), U, I, 0, 0, 0);
+}
 
 /** Hanging lanterns along a list of points. */
 export function hangLanterns(S, pts) { const p = hangingLanternProto(S.M.metal, S.M.glow); for (const q of pts) S.inst.add(p, q[0], q[1] - 1.2, q[2]); }
@@ -173,13 +209,20 @@ export function crystalCluster(S, x, z, s = 1, y = 0) {
 /** Rough rock mass (stack of rotated boxes) e.g. outcrops, mesas. */
 export function rockMass(S, mat, x, z, w, h, o = {}) {
   const rand = S.rand; const y = (o.y ?? S.gy(x, z)) - 2;
+  mat = cliffOf(mat);
   const n = o.n ?? 4;
   for (let i = 0; i < n; i++) {
     const sw = w * (0.55 + rand() * 0.5), sd = w * (0.5 + rand() * 0.5), sh = h * (0.5 + rand() * 0.55);
     const bx = x + (rand() - 0.5) * w * 0.5, bz = z + (rand() - 0.5) * w * 0.5, ry = rand() * TAU;
-    S.b.box(mat, bx, y, bz, sw, sh + 2, sd, { ry, rz: (rand() - 0.5) * 0.08, rx: (rand() - 0.5) * 0.08 });
+    // crag: tapered, faceted frusta stacked with offsets and a slight lean (pyramidal, weathered silhouette)
+    let yy = y, rr = Math.max(sw, sd) * 0.55, ox = 0, oz = 0; const tiers = [0.5, 0.32, 0.22]; const seg = 6 + Math.floor(rand() * 3);
+    for (let t = 0; t < tiers.length; t++) {
+      const th = (sh + 2) * tiers[t]; const r1 = rr * (0.58 + rand() * 0.14);
+      S.b.cyl(mat, bx + ox, yy, bz + oz, rr, r1, th + 0.3, seg, { ry: ry + t * 0.7, rx: (rand() - 0.5) * 0.08, rz: (rand() - 0.5) * 0.08 });
+      yy += th; rr = r1 * (0.92 + rand() * 0.1); ox += (rand() - 0.5) * sw * 0.1; oz += (rand() - 0.5) * sd * 0.1;
+    }
     // one oriented collider per block: sides block, the (near-flat) top can be stood on
-    colBox(S, bx, bz, sw, sd, ry, y, y + sh + 2, true);
+    colBox(S, bx, bz, sw * 0.85, sd * 0.85, ry, y, y + (sh + 2) * 0.55, true);
   }
 }
 
@@ -226,6 +269,34 @@ export function freeSpots(S, r, prefs, margin = 6) {
   const out = [];
   for (const a of prefs) { const [x, z] = polar(r, a); if (S.clear(x, z, margin)) out.push(a); }
   return out;
+}
+
+/** Natural-rock (stratified cliff) variant of a masonry material id, keeping its tint. */
+export function cliffOf(mat) { const def = matDef(mat); if (!def || !def.key || !/^stone\./.test(def.key) || /marble/.test(def.key)) return mat; return Mat('rock.cliff', { tint: def.opts.tint ?? { 'stone.basalt': '#2e2b28', 'stone.sandstone': '#b8946a', 'stone.limestone': '#c8c0b0', 'stone.darkgranite': '#44464c', 'stone.slate': '#3e434b', 'stone.shale': '#5e5650' }[def.key] ?? '#777068' }); }
+
+/** Horizon crag range: tall stratified rock masses on an arc beyond the city (skyline framing). */
+export function horizonCrags(S, mat, a0, a1, r0, r1, n, w = [30, 60], h = [40, 90], o = {}) {
+  const rand = S.rand;
+  for (let i = 0; i < n; i++) {
+    const a = a0 + (a1 - a0) * ((i + rand() * 0.8) / n); const r = r0 + rand() * (r1 - r0); const [x, z] = polar(r, a);
+    if (!S.clear(x, z, 8)) continue; const g = S.gy(x, z); if (o.minGround != null && g > o.minGround) continue; if (o.maxGround != null && g < o.maxGround) continue;
+    rockMass(S, mat, x, z, w[0] + rand() * (w[1] - w[0]), h[0] + rand() * (h[1] - h[0]), { n: 3 + Math.floor(rand() * 2), y: o.y ?? g });
+  }
+}
+/** Distant skyline of towers / spires / stacks (simple massing, cornice + crown) on an arc. */
+export function skyline(S, mats, a0, a1, r0, r1, n, hRange, kind = 'spire') {
+  const rand = S.rand;
+  for (let i = 0; i < n; i++) {
+    const a = a0 + (a1 - a0) * ((i + rand()) / n); const r = r0 + rand() * (r1 - r0); const [x, z] = polar(r, a);
+    if (!S.clear(x, z, 6)) continue; const g = S.gy(x, z); const H = hRange[0] + rand() * (hRange[1] - hRange[0]); const w = 6 + rand() * 7;
+    const m = mats[i % mats.length];
+    if (kind === 'stack') { S.b.cyl(m, x, g - 2, z, w * 0.35, w * 0.28, H + 2, 12); S.b.cyl(S.M.trim, x, g + H - 1, z, w * 0.33, w * 0.33, 1.2, 12); }
+    else {
+      S.b.box(m, x, g - 2, z, w, H + 2, w * (0.7 + rand() * 0.5), { ry: a }); S.b.box(S.M.trim, x, g + H, z, w + 0.8, 0.9, w + 0.6, { ry: a });
+      if (kind === 'spire') S.b.cyl(S.M.roof ?? S.M.trim, x, g + H + 0.9, z, w * 0.42, 0.1, w * 1.4, 4, { ry: a + Math.PI / 4 });
+      else S.b.box(m, x, g + H + 0.9, z, w * 0.6, H * 0.18, w * 0.5, { ry: a });
+    }
+  }
 }
 
 /** Big rock masses scattered in a ring beyond the city (skyline framing). */

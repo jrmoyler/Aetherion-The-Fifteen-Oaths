@@ -22,6 +22,59 @@ export function naturalMaterial(color, roughness = .92, masonry = false) {
   mat.customProgramCacheKey = () => `natural-world-v2-${masonry ? "masonry" : "mineral"}`;
   return mat;
 }
+/**
+ * Textured PBR material for sanctuary architecture. `maps` comes from architecture/surfaces.js
+ * (tileable albedo / normal / roughness in metric UV space). A world-space macro variation breaks
+ * tiling across large walls and plazas, and `envBoost` lifts image-based reflections for metals
+ * (the scene environment intensity is deliberately low for stone and foliage).
+ */
+export function architectureMaterial(color, o = {}) {
+  const albedo = new THREE.Color(color);
+  const lum = Math.max(albedo.r, albedo.g, albedo.b);
+  if (lum > .72) albedo.multiplyScalar(.72 / lum + (1 - .72 / lum) * .35);
+  const maps = o.maps;
+  const mat = new THREE.MeshStandardMaterial({
+    color: albedo, roughness: maps ? (o.roughness ?? 1) : (o.roughness ?? .9), metalness: o.metalness ?? 0,
+    map: maps?.map ?? null, normalMap: maps?.normalMap ?? null, roughnessMap: maps?.roughnessMap ?? null,
+  });
+  if (maps) {
+    for (const t of [maps.map, maps.normalMap, maps.roughnessMap]) t.repeat.set(1 / maps.tile, 1 / maps.tile);
+    mat.normalScale.set(maps.normalScale * (o.normal ?? 1), maps.normalScale * (o.normal ?? 1));
+  }
+  const macro = o.macro ?? .14, boost = o.envBoost ?? 1, wear = o.wear ?? .22, grime = o.grime ?? 1.6;
+  mat.onBeforeCompile = shader => {
+    shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vArchWorld;\nattribute vec4 aEdge;\nvarying vec4 vEdge;').replace('#include <worldpos_vertex>', '#include <worldpos_vertex>\nvec4 archLocal = vec4(transformed,1.);\n#ifdef USE_INSTANCING\narchLocal = instanceMatrix * archLocal;\n#endif\nvArchWorld = (modelMatrix * archLocal).xyz;\nvEdge = aEdge;');
+    shader.fragmentShader = shader.fragmentShader.replace('#include <common>', `#include <common>
+      varying vec3 vArchWorld;
+      varying vec4 vEdge;
+      float archHash(vec3 p){return fract(sin(dot(p,vec3(127.1,311.7,74.7)))*43758.5453);}
+      float archNoise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+        return mix(mix(mix(archHash(i),archHash(i+vec3(1,0,0)),f.x),mix(archHash(i+vec3(0,1,0)),archHash(i+vec3(1,1,0)),f.x),f.y),
+                   mix(mix(archHash(i+vec3(0,0,1)),archHash(i+vec3(1,0,1)),f.x),mix(archHash(i+vec3(0,1,1)),archHash(i+vec3(1,1,1)),f.x),f.y),f.z);}`)
+      .replace('#include <color_fragment>', `#include <color_fragment>
+      float archMacro = archNoise(vArchWorld*.09)*.65 + archNoise(vArchWorld*.31)*.35;
+      diffuseColor.rgb *= 1. - ${macro.toFixed(3)} + archMacro * ${(macro * 2).toFixed(3)};
+      // weathering from builder face coordinates (vEdge = u, v, width, height[<0: horizontal face])
+      float archWear = 0., archGrime = 0.;
+      if (vEdge.z > 0.) {
+        float fw = vEdge.z, fh = abs(vEdge.w);
+        float d = min(min(vEdge.x, fw - vEdge.x), min(vEdge.y, fh - vEdge.y));
+        archWear = (1. - smoothstep(.012, .085, d)) * (.55 + archNoise(vArchWorld * 7.) * .9);
+        if (vEdge.w > 0.) {
+          float reach = min(1.7, fh * .45);
+          archGrime = (1. - smoothstep(0., reach, vEdge.y)) * .42;                    // contact grime / AO at the base
+          archGrime += (1. - smoothstep(0., min(.45, fh * .2), fh - vEdge.y)) * .14;  // shadowed under the cap / eave
+          float streak = archNoise(vec3((vArchWorld.x + vArchWorld.z) * 2.1, vArchWorld.y * .16, 3.));
+          archGrime += smoothstep(.55, .85, streak) * .16 * (1. - vEdge.y / max(fh, .01));   // rain streaks fading upward
+        }
+      }
+      diffuseColor.rgb *= (1. + archWear * ${wear.toFixed(3)}) * (1. - archGrime * ${grime.toFixed(3)});`)
+      .replace('#include <lights_fragment_maps>', `#include <lights_fragment_maps>
+      radiance *= ${boost.toFixed(2)};`);
+  };
+  mat.customProgramCacheKey = () => `arch-v2-${macro}-${boost}-${wear}-${grime}`;
+  return mat;
+}
 export function terrainMaterial() {
   const material=naturalMaterial('#ffffff'); material.vertexColors=true; return material;
 }

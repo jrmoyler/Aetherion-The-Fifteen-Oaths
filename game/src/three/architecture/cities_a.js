@@ -1,17 +1,21 @@
 // Pure Three.js migration of the canonical measured city kit.
 // City styles oath-01 .. oath-07.
+import { cornice, finial } from './kit.js';
 import { TAU, polar, rot2, colBox, stairs, terrace, banner, bannerPole, balustrade, genericHouse, brazier, lanternPost, emblemStanding, treeProto, pool, roundPool, squareTower, roundTower, crenelProto, arcPts, waterfall, hangingLanternProto, boxProto, proto, circleArcs, catenary, guardRail, deckStrip, overlayOf } from './kit.js';
-import { terraceStairs, arcade, arcArcade, blockWall, relayPylon, cable, giantTree, sail, hangLanterns, crystalCluster, rockMass, ringBanners, channelRing, freeSpots, outerRocks } from './motifs.js';
+import { terraceStairs, arcade, arcArcade, blockWall, relayPylon, cable, giantTree, sail, hangLanterns, crystalCluster, rockMass, ringBanners, channelRing, freeSpots, outerRocks, horizonCrags, skyline } from './motifs.js';
 
 const D = Math.PI / 180;
 
 export default {
   // ================================================================ 01 Kiln Oath
   'oath-01': {
-    plaza: 'square', glow: '#ff6a1a', flame: '#ff8a3a', lamp: 'brazier',
+    plaza: 'square', glow: '#ff6a1a', flame: '#ff8a3a', lamp: 'brazier', emblemScale: 0, centerRings: false,
+    dress: { rim: { items: ['crates', 'urn'], step: 13, r: 44.1 }, tiers: { items: ['brazier', 'urn', 'statue'], step: 7 } },
     banner: { color: '#7a1c14', trim: '#c8783a', emblem: '#e8a050' },
+    // kiln court: one broad fired-clay ring band with a fine outer and inner ring (no logo)
+    inlayExtra(S, mat, y) { for (const [r, w] of [[8.0, 1.1], [6.1, 0.35], [10.1, 0.18], [4.9, 0.12]]) S.d.ring(mat, 0, y, 0, r, r + w, 0.025, 96); },
     mats: {
-      pave: ['paving.slab', { tint: '#34302d' }], border: ['stone.terracotta', { tint: '#7a3a24' }], ground: ['paving.flagstone', { tint: '#3b3633' }],
+      pave: ['paving.slab', { tint: '#3a3633' }], border: ['stone.basalt', { tint: '#2a2624' }], ground: ['paving.flagstone', { tint: '#3b3633' }],
       wall: ['stone.basalt'], terra: ['stone.terracotta'], trim: ['stone.terracotta', { tint: '#8a4428' }], metal: ['metal.iron'],
       inlay: ['stone.terracotta', { tint: '#a85430' }], roof: ['stone.basalt'], lava: ['emissive.lava', { emissiveIntensity: 2.4 }],
       house: ['stone.basalt', { tint: '#302c2a' }], found: ['stone.basalt'], wood: ['wood.weathered', { tint: '#3a2a20' }], dark: ['stone.basalt', { tint: '#0f0d0c' }],
@@ -31,13 +35,13 @@ export default {
         S.d.box(M.metal, x, y + 8.6, 71.3, 5.4, 0.5, 0.3);
       }
       for (const s of [-1, 1]) S.b.box(M.terra, s * 15.5, y, 72.5, 3, 13, 2.2);
-      S.b.box(M.terra, 0, y, 82, 34, 13, 17);
+      S.b.box(M.terra, 0, y, 82, 34, 13, 17); cornice(S, M.trim, 0, y + 12.45, 82, 34, 17);
       S.d.box(M.trim, 0, y + 13, 81.5, 35, 0.6, 18.4);
       S.F.push(0, y + 13.6, 81.5, 0);
       for (let i = 0; i < 14; i++) { const x = -16.5 + i * 2.54; S.inst.add(crenelProto(M.trim, 1.1, 1.1, 0.6), x, 0, -8.9); S.inst.add(crenelProto(M.trim, 1.1, 1.1, 0.6), x, 0, 8.9); }
       S.F.pop();
       // central keep with glowing slits
-      S.b.box(M.wall, 0, y + 13, 80, 13, 8, 10);
+      S.b.box(M.wall, 0, y + 13, 80, 13, 8, 10); cornice(S, M.trim, 0, y + 20.45, 80, 13, 10);
       for (const x of [-3.4, 0, 3.4]) S.d.box(M.glow, x, y + 15, 74.95, 0.9, 4.2, 0.1);
       S.d.box(M.trim, 0, y + 21, 80, 14, 0.6, 11);
       S.col.box(0, 81, 17, 10.5, 0, y - 1, y + 21, false);
@@ -90,6 +94,8 @@ export default {
       }
       // volcanic outcrops beyond the walls, with lava pools
       outerRocks(S, M.wall, 12, 165, 230, [12, 26], [10, 26]);
+      // horizon: jagged basalt escarpments ringing the caldera
+      horizonCrags(S, M.wall, -Math.PI, Math.PI, 260, 420, 22, [40, 80], [30, 70]);
       for (let i = 0; i < 4; i++) { const a = S.rand() * TAU; const [x, z] = polar(175 + S.rand() * 40, a); if (S.clear(x, z, 6)) { const w = 10 + S.rand() * 8, d = 6 + S.rand() * 6; let g = S.gy(x, z); for (const [cx, cz] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) { const [ox, oz] = rot2(cx * w / 2, cz * d / 2, a); g = Math.min(g, S.gy(x + ox, z + oz)); } S.d.box(M.lava, x, g - 0.02, z, w, 0.1, d, { ry: a }); } }
     },
     house(S, w, d, h, rand) {
@@ -107,13 +113,19 @@ export default {
 
   // ================================================================ 02 Rime Archive
   'oath-02': {
-    glow: '#8fdcff', flame: '#c4ecff', lamp: 'lantern',
+    glow: '#8fdcff', flame: '#c4ecff', lamp: 'lantern', emblemScale: 2.6, centerRings: false,
+    dress: { rim: { items: ['statue', 'urn'], step: 12, r: 50.5 }, tiers: { items: ['urn', 'statue'], step: 8 } },
     banner: { color: '#2b2e33', trim: '#c9d3da', emblem: '#9fd4f0' },
+    // archive floor: gold rule lines on frosted slabs - centre roundel, cross axes, outer ring
+    inlayExtra(S, mat, y) {
+      for (const [r, w] of [[5.4, 0.16], [6.2, 0.08], [12, 0.12], [24, 0.14]]) S.d.ring(mat, 0, y, 0, r, r + w, 0.025, 96);
+      for (const a of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) for (const o of [-0.45, 0.45]) { const [x, z] = polar(22, a); const [ox, oz] = rot2(o, 0, a); S.d.box(mat, x + ox, y, z + oz, 0.1, 0.025, 31, { ry: a }); }
+    },
     mats: {
-      pave: ['stone.slate', { tint: '#6c7783' }], border: ['stone.darkgranite', { tint: '#454b54' }], ground: ['paving.flagstone', { tint: '#66707a' }],
-      wall: ['stone.darkgranite', { tint: '#4a515b' }], trim: ['stone.slate', { tint: '#5a626c' }], metal: ['metal.iron', { tint: '#4a4c50' }],
-      inlay: ['metal.brass', { tint: '#b4a47c' }], roof: ['tile.roof', { tint: '#c4ced6' }], ice: ['ice.glacial'], house: ['stone.darkgranite', { tint: '#464b53' }],
-      found: ['stone.darkgranite', { tint: '#34383e' }], wood: ['wood.weathered', { tint: '#3a3430' }], fall: ['liquid.fall', { tint: '#e6f4fb', emissiveIntensity: 1.5 }],
+      pave: ['paving.slab', { tint: '#9aa8b6', roughness: 0.4 }], border: ['stone.darkgranite', { tint: '#6a7684' }], ground: ['paving.flagstone', { tint: '#7e8a96' }],
+      wall: ['stone.darkgranite', { tint: '#7d8a98' }], trim: ['stone.slate', { tint: '#8f9cab' }], snow: ['rock.cliff', { tint: '#e8eef2' }], metal: ['metal.iron', { tint: '#4a4c50' }],
+      inlay: ['metal.brass', { tint: '#b4a47c' }], roof: ['tile.roof', { tint: '#c4ced6' }], ice: ['ice.glacial'], house: ['stone.darkgranite', { tint: '#6e7a87' }],
+      found: ['stone.darkgranite', { tint: '#5a6470' }], wood: ['wood.weathered', { tint: '#3a3430' }], fall: ['liquid.fall', { tint: '#e6f4fb', emissiveIntensity: 1.5 }],
     },
     rim: (S) => ({ type: 'solid', rail: S.M.wall, post: S.M.trim, h: 1.0, postEvery: 5, cap: (x, y, z) => S.d.box(S.M.ice, x, y - 0.12, z, 0.72, 0.38, 0.72) }),
     hall(S) {
@@ -176,6 +188,9 @@ export default {
       }
       outerRocks(S, M.wall, 10, 165, 235, [16, 30], [16, 34]);
       outerRocks(S, M.ice, 6, 175, 240, [10, 20], [8, 18]);
+      // horizon: snow-capped granite peaks behind the glacial basin
+      horizonCrags(S, M.wall, -100 * D, 100 * D, 240, 380, 16, [50, 90], [60, 120]);
+      horizonCrags(S, M.snow, -95 * D, 95 * D, 300, 420, 10, [40, 70], [90, 140]);
     },
     house(S, w, d, h) { genericHouse(S, w, d, h, { roof: S.M.roof, pitch: 0.6 }); },
     districts: { skip: (a) => Math.abs(Math.atan2(Math.sin(a), Math.cos(a))) < 88 * D },
@@ -184,13 +199,14 @@ export default {
 
   // ================================================================ 03 Storm Relay
   'oath-03': {
-    glow: '#b4a2ff', flame: '#d6ccff', lamp: 'lantern',
+    glow: '#b4a2ff', flame: '#d6ccff', lamp: 'lantern', emblemScale: 0,
+    dress: { rim: { items: ['urn', 'bench'], step: 11, r: 47.5 }, tiers: { items: ['lantern', 'urn', 'statue'], step: 7 } },
     banner: { color: '#1e2a44', trim: '#c58a4a', emblem: '#d89a5a' },
     mats: {
-      pave: ['stone.slate', { tint: '#3c424c', roughness: 0.55 }], border: ['stone.darkgranite', { tint: '#2a2d33' }], ground: ['stone.slate', { tint: '#2d3139', roughness: 0.7 }],
+      pave: ['paving.slab', { tint: '#454c57', roughness: 0.34 }], border: ['stone.darkgranite', { tint: '#2a2d33' }], ground: ['paving.flagstone', { tint: '#353a43', roughness: 0.5 }],
       wall: ['stone.darkgranite', { tint: '#2f333a' }], trim: ['stone.darkgranite', { tint: '#3b3f47' }], metal: ['metal.copper'], inlay: ['metal.copper'],
       roof: ['metal.copper', { tint: '#4f8473' }], slate: ['stone.slate', { tint: '#2a2e36' }], ceramic: ['plaster.lime', { tint: '#e8e6e0' }], house: ['stone.darkgranite', { tint: '#3b3f47' }],
-      found: ['stone.darkgranite', { tint: '#2a2d33' }], dark: ['stone.basalt', { tint: '#101216' }], wood: ['wood.weathered', { tint: '#2a2620' }],
+      found: ['stone.darkgranite', { tint: '#2a2d33' }], dark: ['stone.basalt', { tint: '#101216' }], wood: ['wood.weathered', { tint: '#2a2620' }], bolt: ['emissive.glow', { emissive: '#ffe6a0', emissiveIntensity: 1.8 }],
     },
     inlayExtra(S, mat, y) { for (const [r, w] of [[20.5, 0.28], [26.5, 0.28], [32.5, 0.28], [33.3, 0.1], [21.2, 0.1]]) S.d.ring(mat, 0, y, 0, r, r + w, 0.025, 112); },
     rim: (S) => ({ type: 'stone', rail: S.M.trim, post: S.M.wall, cap: (x, y, z) => S.d.sphere(S.M.metal, x, y + 0.1, z, 0.17, 8) }),
@@ -212,7 +228,7 @@ export default {
       S.d.box(M.trim, 0, h + 17, 70, 26, 0.6, 3.2);
       for (const sz of [-1.5, 1.5]) S.d.box(M.metal, 0, h + 18.1, 70 + sz, 26, 0.12, 0.12);
       for (let x = -12; x <= 12; x += 2) for (const sz of [-1.5, 1.5]) S.d.box(M.metal, x, h + 17.6, 70 + sz, 0.08, 0.6, 0.08);
-      S.b.box(M.wall, 0, h, 84, 54, 16, 14); S.b.hip(M.slate, 0, h + 16, 84, 55, 15, 5.5); colBox(S, 0, 84, 54, 14, 0, h - 1, h + 16, false);
+      S.b.box(M.wall, 0, h, 84, 54, 16, 14); cornice(S, M.trim, 0, h + 15.45, 84, 54, 14); S.b.hip(M.slate, 0, h + 16.2, 84, 55.6, 15.6, 5.5); finial(S, M.metal, -27.5 + 9.5, h + 21.7, 84, 1.2); finial(S, M.metal, 27.5 - 9.5, h + 21.7, 84, 1.2); colBox(S, 0, 84, 54, 14, 0, h - 1, h + 16, false);
       for (let i = -3; i <= 3; i++) { S.d.box(M.metal, i * 7.5, h, 76.9, 0.5, 16, 0.3); if (i) S.d.box(M.glow, i * 7.5 - 3.75 * Math.sign(i) * 0, h + 9, 76.95, 1.4, 3.2, 0.1); }
       S.d.box(M.dark, 0, h, 76.9, 4, 6, 0.2);
       S.hallDoor = { x: 0, y: h, z: 70 };
@@ -229,8 +245,15 @@ export default {
         if (d > 80) continue;
         cable(S, M.metal, p.top, q.top, 3 + d * 0.06, 0.08);
         cable(S, M.dark, [p.top[0], p.top[1] - 1.1, p.top[2]], [q.top[0], q.top[1] - 1.1, q.top[2]], 4 + d * 0.07, 0.06);
+        // arcing discharge along every other span: a jagged, forked bolt hugging the cable sag
+        if (i % 2 === 0) {
+          const bolt = (a0, b0, sag, amp) => { const c = catenary(a0, b0, sag, 18).map(([x, y, z], k) => (k === 0 || k === 18 ? [x, y, z] : [x + (S.rand() - 0.5) * amp, y + (S.rand() - 0.5) * amp, z + (S.rand() - 0.5) * amp])); S.d.tube(M.bolt, c, 0.06, 4); return c; };
+          const c = bolt(p.top, q.top, 2 + d * 0.05, 1.6); const k = 6 + Math.floor(S.rand() * 6); bolt(c[k], [c[k][0] + (S.rand() - 0.5) * 6, c[k][1] - 4 - S.rand() * 4, c[k][2] + (S.rand() - 0.5) * 6], 0.5, 1.0);
+        }
       }
       outerRocks(S, M.wall, 12, 160, 240, [16, 30], [22, 46]);
+      // horizon: sheer dark crags crowding the relay
+      horizonCrags(S, M.wall, -Math.PI, Math.PI, 200, 340, 26, [30, 60], [50, 110]);
     },
     house(S, w, d, h, rand) { genericHouse(S, w, d, h, { roofType: 'hip', roof: rand() < 0.2 ? S.M.roof : S.M.slate }); },
     wallOpts: (S) => ({ mat: S.M.wall, trim: S.M.trim, h: 7 }),
@@ -238,7 +261,8 @@ export default {
 
   // ================================================================ 04 Tidal Covenant
   'oath-04': {
-    glow: '#58d4ff', flame: '#ffcf80', lamp: 'brazier',
+    glow: '#58d4ff', flame: '#ffcf80', lamp: 'brazier', emblemScale: 2.8,
+    dress: { rim: null, tiers: { items: ['urn', 'planter', 'urn', 'statue'], step: 6, vines: true } },
     banner: { color: '#1d3352', trim: '#b08a4a', emblem: '#e9e1d2' },
     mats: {
       pave: ['paving.slab', { tint: '#dad2c2' }], border: ['stone.limestone', { tint: '#cdc4b2' }], ground: ['paving.flagstone', { tint: '#cfc7b6' }],
@@ -286,9 +310,10 @@ export default {
           S.d.box(M.water, c.mx, 15.05, c.mz, c.L, 0.05, 1.7, { ry: c.ry });
           for (const s of [-1, 1]) { const [ox, oz] = rot2(0, s * 1.2, c.ry); S.d.box(M.trim, c.mx + ox, 15, c.mz + oz, c.L, 0.6, 0.35, { ry: c.ry }); }
           S.reserve(c.mx, c.mz, 4.5);
+          // a fall pours from every aqueduct bay (the panel's curtain of cascades between the arches)
+          { const [ix, iz] = rot2(0, -1.7, c.ry); waterfall(S, c.mx + ix, 15.1, c.mz + iz, i % 3 === 1 ? 2.8 : 1.8, i % 3 === 1 ? 0.4 : 9.2, c.ry); }
           if (i % 3 === 1) {
             const [ix, iz] = rot2(0, -1.7, c.ry);
-            waterfall(S, c.mx + ix, 15.1, c.mz + iz, 2.4, 0.4, c.ry);
             const [px, pz] = rot2(0, -4.6, c.ry); roundPool(S, c.mx + px, c.mz + pz, 3.2, { rim: M.trim });
           }
         });
@@ -297,6 +322,11 @@ export default {
       const palm = treeProto('palm', M.bark, M.leaves);
       for (let i = 0; i < 18; i++) { const a = (i / 18) * TAU + 0.1; const [x, z] = polar(56 + (i % 2) * 6, a); if (S.clear(x, z, 2)) S.inst.add(palm, x, 0.06, z, a * 3, 1, 1 + (i % 3) * 0.15, 1); }
       outerRocks(S, M.wall, 8, 170, 230, [14, 26], [10, 22]);
+      // seaward horizon: white limestone sea stacks and headlands standing in the open water behind the hall
+      horizonCrags(S, M.wall, -70 * D, 70 * D, 230, 520, 18, [24, 55], [26, 70], { minGround: -6 });
+      horizonCrags(S, M.wall, 110 * D, 250 * D, 260, 520, 12, [20, 45], [20, 55], { minGround: -6 });
+      // sea-wall terraces with tall falls dropping off the fortress lip toward the water
+      for (const a of [-40 * D, -20 * D, 20 * D, 40 * D]) { const [x, z] = polar(118, a); if (!S.clear(x, z, 6)) continue; const g = S.gy(x, z); S.b.box(M.wall, x, g - 4, z, 16, 18 - g + 4, 6, { ry: a }); S.d.box(M.trim, x, 18, z, 16.6, 0.6, 6.6, { ry: a }); const [fx, fz] = polar(121.2, a); waterfall(S, fx, 17.6, fz, 6, g, a + Math.PI); S.col.box(x, z, 8, 3, a, g - 4, 18, false); S.reserve(x, z, 9); }
     },
     house(S, w, d, h, rand) { genericHouse(S, w, d, h, { roofType: rand() < 0.25 ? 'dome' : 'flat', roof: S.M.roof }); },
     wallOpts: (S) => ({ mat: S.M.wall, trim: S.M.trim, h: 7 }),
@@ -304,12 +334,13 @@ export default {
 
   // ================================================================ 05 Fault Choir
   'oath-05': {
-    glow: '#b07cff', flame: '#ffb070', lamp: 'brazier',
+    glow: '#b07cff', flame: '#ffb070', lamp: 'brazier', emblemScale: 0,
+    dress: { rim: { items: ['urn', 'statue'], step: 12, r: 47, skip: (a) => Math.abs(Math.atan2(Math.sin(a), Math.cos(a))) > 2.1 }, tiers: { items: ['urn', 'statue', 'brazier'], step: 7 } },
     banner: { color: '#7a2a22', trim: '#c8a77a', emblem: '#e6cfa6' },
     mats: {
       pave: ['paving.slab', { tint: '#c6a67c' }], border: ['stone.sandstone', { tint: '#a8865c' }], ground: ['paving.flagstone', { tint: '#b4946a' }],
       wall: ['stone.sandstone'], shale: ['stone.shale', { tint: '#8a7058' }], trim: ['stone.sandstone', { tint: '#9a7a56' }], metal: ['metal.iron'],
-      inlay: ['stone.shale', { tint: '#7a6248' }], roof: ['stone.sandstone', { tint: '#a88a64' }], crystal: ['crystal.amethyst', { emissiveIntensity: 1.6 }],
+      inlay: ['stone.shale', { tint: '#7a6248' }], roof: ['stone.sandstone', { tint: '#a88a64' }], crystal: ['crystal.amethyst', { tint: '#8a62c8', emissiveIntensity: 1.4 }], vein: ['emissive.glow', { emissive: '#a070ff', emissiveIntensity: 1.6 }],
       house: ['stone.sandstone', { tint: '#b89a74' }], found: ['stone.shale', { tint: '#7a6450' }], wood: ['wood.weathered', { tint: '#5a4430' }],
     },
     rim: (S) => ({ type: 'solid', rail: S.M.wall, post: S.M.shale, h: 1.3, postEvery: 3 }),
@@ -320,7 +351,7 @@ export default {
       stairs(S, M.trim, 0, 60.5, 0, 12, 5.2, 2.4, 5.2);
       S.reserve(0, 74, 46);
       trilithon(S, 0, 54.5, 0, 2.2, 20, 17);
-      S.b.box(M.wall, 0, 5.2, 90, 62, 18, 12);
+      S.b.box(M.wall, 0, 5.2, 90, 62, 18, 12); cornice(S, M.trim, 0, 5.2 + 17.45, 90, 62, 12);
       S.d.box(M.trim, 0, 23.2, 90, 63, 1.2, 13);
       S.d.box(M.dark, 0, 5.2, 83.9, 6, 9, 0.2);
       for (const x of [-20, -10, 10, 20]) { S.b.box(M.trim, x, 5.2, 83, 2.4, 18, 2.4); S.col.box(x, 83, 1.2, 1.2, 0, 4, 23, false); }
@@ -333,8 +364,22 @@ export default {
       const M = S.M;
       for (const a of freeSpots(S, 63, [60 * D, -60 * D, 120 * D, -120 * D, 180 * D], 8)) { const [x, z] = polar(63, a); trilithon(S, x, z, a, 0.06, 18, 15); S.reserve(x, z, 10); crystalCluster(S, x + Math.cos(a) * 7, z - Math.sin(a) * 7, 1.2, 0.06); }
       for (let i = 0; i < 14; i++) { const a = (i / 14) * TAU + 0.2; const [x, z] = polar(48 + (i % 3), a); if (S.clear(x, z, 2)) crystalCluster(S, x, z, 0.8 + (i % 2) * 0.5, 0.06); }
+      // stratified canyon walls closing the view behind the hall, laced with crystal veins
+      for (let i = 0; i < 26; i++) {
+        const a = -118 * D + (236 * D) * (i / 25) + (S.rand() - 0.5) * 0.05; const r = 112 + S.rand() * 22; const [x, z] = polar(r, a);
+        if (!S.clear(x, z, 6)) continue;
+        const w = 18 + S.rand() * 14, hh = 34 + S.rand() * 22; rockMass(S, i % 3 ? M.wall : M.shale, x, z, w, hh, { n: 3 });
+        if (i % 2 === 0) { const g = S.gy(x, z); const pts = []; for (let k = 0; k <= 8; k++) { const t = k / 8; pts.push([x - Math.cos(a) * (w * 0.5 - t * w) + (S.rand() - 0.5) * 2, g + hh * (0.25 + 0.4 * t) + (S.rand() - 0.5) * 3, z + Math.sin(a) * (w * 0.5 - t * w) - Math.sin(a) * 0]); } S.d.tube(M.vein, pts.map(([px, py, pz]) => { const [ox, oz] = polar(-w * 0.32, a); return [px + ox, py, pz + oz]; }), 0.22, 4); }
+      }
+      // fractured plaza lip in front: tumbled sandstone blocks split by glowing crystal seams
+      for (let i = 0; i < 40; i++) {
+        const a = 128 * D + (104 * D) * (i / 39); const r = 45.5 + (i % 3) * 1.7 + S.rand(); const [x, z] = polar(r, a);
+        if (!S.clear(x, z, 2)) continue;
+        const bw = 1.8 + S.rand() * 1.6, bh = 0.8 + S.rand() * 2.6; S.b.box(i % 4 ? M.wall : M.shale, x, -1.5, z, bw, bh + 1.5, bw * (0.8 + S.rand() * 0.4), { ry: a + (S.rand() - 0.5) * 0.3, rz: (S.rand() - 0.5) * 0.06 });
+        colBox(S, x, z, bw, bw, a, -1.5, bh, false);
+        if (i % 3 === 0) S.d.box(M.vein, x + Math.cos(a) * bw * 0.55, -0.2, z - Math.sin(a) * bw * 0.55, 0.12, 0.25 + bh * 0.5, bw, { ry: a });
+      }
       outerRocks(S, M.shale, 9, 160, 240, [20, 36], [20, 44]);
-      outerRocks(S, M.wall, 8, 170, 240, [16, 30], [14, 32]);
     },
     house(S, w, d, h) {
       genericHouse(S, w, d, h, { roofType: 'flat' });
@@ -345,15 +390,20 @@ export default {
 
   // ================================================================ 06 Reed Resonance
   'oath-06': {
-    glow: '#ffe6c0', flame: '#ffd090', lamp: 'lantern',
+    glow: '#ffe6c0', flame: '#ffd090', lamp: 'lantern', emblemScale: 0, centerRings: false,
+    dress: { rim: { items: ['crates', 'bench', 'planter'], step: 9, r: 47, skip: (a) => Math.abs(Math.atan2(Math.sin(a), Math.cos(a))) < 66 * Math.PI / 180 } },
     banner: { color: '#c0402a', trim: '#efe6d6', emblem: '#f6f0e4' },
     mats: {
       pave: ['paving.slab', { tint: '#ddd3c0' }], border: ['stone.limestone', { tint: '#cfc3aa' }], ground: ['paving.flagstone', { tint: '#cfc4ae' }],
       wall: ['stone.limestone', { tint: '#d8ccb4' }], trim: ['wood.weathered', { tint: '#8a6a4a' }], metal: ['wood.weathered', { tint: '#5a4632' }],
       inlay: ['wood.lacquer', { tint: '#b8402a' }], roof: ['tile.roof', { tint: '#7a6048' }], wood: ['wood.weathered', { tint: '#9a7a52' }],
-      linen: ['cloth.banner', { tint: '#e8dfcf', backFaceCulling: false }], house: ['plaster.lime', { tint: '#e6dccb' }], found: ['stone.limestone', { tint: '#bfb29a' }],
+      linen: ['cloth.banner', { tint: '#ece2cc' }], house: ['plaster.lime', { tint: '#e6dccb' }], found: ['stone.limestone', { tint: '#bfb29a' }],
     },
-    inlayExtra(S, mat, y) { S.d.ring(mat, 0, y, 0, 24.8, 25.1, 0.025, 64, { a0: 0.4, arc: 4.4 }); S.d.ring(mat, 0, y, 0, 31.2, 31.5, 0.025, 72, { a0: 2.4, arc: 3.4 }); S.d.ring(mat, 0, y, 0, 20, 20.2, 0.025, 64, { a0: 3.6, arc: 3.0 }); },
+    // wind-swept rule lines: broken concentric arcs in lacquer red and weathered timber
+    inlayExtra(S, mat, y) {
+      for (const [r, a0, arc, w] of [[9, 0.3, 5.0, 0.12], [13.6, 2.2, 3.6, 0.1], [20, 3.6, 3.0, 0.1], [24.8, 0.4, 4.4, 0.12], [31.2, 2.4, 3.4, 0.1], [35.5, 4.6, 2.6, 0.08]]) S.d.ring(mat, 0, y, 0, r, r + w, 0.025, 72, { a0, arc });
+      for (const [r, a0, arc] of [[11, 3.4, 2.2], [27.5, 5.2, 2.0], [17, 0.9, 1.6]]) S.d.ring(S.M.trim, 0, y, 0, r, r + 0.35, 0.025, 48, { a0, arc });
+    },
     rim: (S) => ({ type: 'wood', rail: S.M.wood, post: S.M.trim, cap: (x, y, z) => S.d.sphere(S.M.trim, x, y + 0.05, z, 0.17, 8) }),
     hall(S) {
       const M = S.M; const A0 = -62 * D, A1 = 62 * D;
@@ -373,7 +423,7 @@ export default {
         S.b.tube(M.wood, pts, 0.45, 7); ribs.push(pts);
         const [bx, bz] = polar(63, a); S.col.circle(bx, bz, 0.6, -1, 10, false);
       }
-      for (let i = 0; i < ribs.length - 1; i += 2) { const p = ribs[i], q = ribs[i + 1]; S.d.quad(M.linen, [p[1], q[1], q[3], p[3]], { double: true, uv: [0, 0, 1, 1] }); }
+      for (let i = 0; i < ribs.length - 1; i += 2) { const p = ribs[i], q = ribs[i + 1]; sail(S, M.linen, [p[1], q[1], q[3], p[3]], { sag: 0.06, seg: 8 }); }
       S.hallDoor = { x: 0, y: 3.5, z: 56 };
     },
     signature(S) {
@@ -383,7 +433,7 @@ export default {
         const tops = angs.map((a) => { const [x, z] = polar(57, a); S.b.cyl(M.wood, x, -0.5, z, 0.28, 0.22, 13, 8); S.col.circle(x, z, 0.4, -1, 12, false); S.reserve(x, z, 3); return [x, 12.4, z]; });
         for (let i = 0; i < tops.length - 1; i++) {
           const a = angs[i], b = angs[i + 1]; const [ix, iz] = polar(47.5, a), [jx, jz] = polar(47.5, b);
-          S.d.quad(M.linen, [tops[i], tops[i + 1], [jx, 6.5, jz], [ix, 6.5, iz]], { double: true, uv: [0, 0, 1, 1] });
+          sail(S, M.linen, [tops[i], tops[i + 1], [jx, 6.5, jz], [ix, 6.5, iz]], { sag: 0.1 });
           S.d.tube(M.metal, [tops[i], [ix, 6.5, iz]], 0.03, 4); S.d.tube(M.metal, [tops[i + 1], [jx, 6.5, jz]], 0.03, 4);
         }
       }
@@ -396,6 +446,8 @@ export default {
       }
       ringBanners(S, 47.8, [24 * D, -24 * D, 140 * D, -140 * D, 165 * D, -165 * D], 9, { pole: M.wood, base: M.trim, w: 0.9, bh: 6.5 });
       outerRocks(S, M.wall, 8, 170, 235, [18, 30], [10, 24]);
+      // seaward cliffs and headlands (the panel's open coast beyond the terraces)
+      horizonCrags(S, M.wall, -60 * D, 80 * D, 250, 480, 16, [30, 70], [30, 80]);
     },
     house(S, w, d, h) {
       const M = S.M; genericHouse(S, w, d, h, { trim: M.trim, roof: M.roof });
@@ -408,12 +460,14 @@ export default {
 
   // ================================================================ 07 Graft Sanctuary
   'oath-07': {
-    glow: '#ffc04a', flame: '#ffb040', lamp: 'lantern',
+    glow: '#ffc04a', flame: '#ffb040', lamp: 'lantern', emblemScale: 0, centerRings: false,
+    dress: { rim: { items: ['planter', 'crates', 'planter'], step: 9, r: 46.5 }, tiers: { items: ['planter', 'lantern'], step: 6, vines: true } },
+    inlayExtra(S, mat, y) { for (const [r, w] of [[9.5, 0.14], [21, 0.14], [33, 0.12]]) S.d.ring(mat, 0, y, 0, r, r + w, 0.02, 96); },
     banner: { color: '#3a4a2a', trim: '#c89a40', emblem: '#ffc04a' },
     mats: {
-      pave: ['ground.rock', { tint: '#a08462', uvScale: 0.7 }], border: ['bark.living', { tint: '#5a4430' }], ground: ['paving.flagstone', { tint: '#8a7656' }],
+      pave: ['paving.earth', { tint: '#b48c5e' }], border: ['paving.earth', { tint: '#94724c' }], ground: ['paving.earth', { tint: '#9a7a52' }],
       wall: ['stone.sandstone', { tint: '#7a6a50' }], trim: ['wood.weathered', { tint: '#6a5038' }], metal: ['wood.weathered', { tint: '#4a3a28' }],
-      inlay: ['wood.weathered', { tint: '#4a3826' }], roof: ['tile.roof', { tint: '#9a8452' }], bark: ['bark.living'], leaves: ['foliage.leaves', { tint: '#4c6c2c' }],
+      inlay: ['paving.earth', { tint: '#7a5a3a' }], roof: ['tile.roof', { tint: '#9a8452' }], bark: ['bark.living', { tint: '#6a5236' }], leaves: ['foliage.leaves', { tint: '#7a9a42' }],
       wood: ['wood.weathered', { tint: '#7a5a3a' }], house: ['wood.weathered', { tint: '#7a5e40' }], found: ['stone.sandstone', { tint: '#6a5a44' }],
     },
     rim: (S) => ({ type: 'wood', rail: S.M.trim, post: S.M.bark, h: 1.0 }),
@@ -436,7 +490,7 @@ export default {
     },
     signature(S) {
       const M = S.M; const PY = 8.4; // platform deck height
-      const trees = freeSpots(S, 66, [50 * D, -50 * D, 100 * D, -100 * D, 150 * D, -150 * D], 10).map((a) => { const [x, z] = polar(66, a); return { x, z, a, R: 2.6 + S.rand() * 0.8, gaps: [a] }; });
+      const trees = freeSpots(S, 57, [40 * D, -40 * D, 62 * D, -62 * D, 118 * D, -118 * D, 150 * D, -150 * D], 6).map((a) => { const [x, z] = polar(57, a); return { x, z, a, R: 2.6 + S.rand() * 0.8, gaps: [a] }; });
       trees.sort((p, q) => p.a - q.a);
       // rope bridges: neighbouring trees, and each tree to the hall tree's upper ring
       const bridges = []; const H = S.hallRing;
@@ -446,7 +500,8 @@ export default {
       if (H) for (const e of ends) if (Math.hypot(e.x - H.x, e.z - H.z) <= 75) link(H, e);
       for (const t of trees) {
         const { x, z, a, R } = t;
-        const T = giantTree(S, x, z, R, 20 + S.rand() * 6);
+        const T = giantTree(S, x, z, R, 22 + S.rand() * 6, { branches: 8 });
+        S.F.push(x, 0, z, a + Math.PI); banner(S, 0, 7.4, R + 4.5, 0, 1.5, 5.2, { bar: M.trim }); S.F.pop();
         S.b.ring(M.wood, x, 8, z, R + 0.6, R + 4.6, 0.4, 28, { bottom: true });
         S.col.circle(x, z, R + 4.6, 7.8, PY, true);
         // stair on the outward side, rising at the trunk and landing on the platform ring
