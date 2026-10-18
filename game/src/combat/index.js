@@ -7,6 +7,7 @@ import { Color3 } from '@babylonjs/core/Maths/math.color.js';
 import { hotbarFor, ABILITY_BY_ID } from '@shared/abilities.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { HitFlashes, StatusVisuals } from './feedback.js';
+import { createArenas } from './arenas.js';
 
 const ELEMENT_FLASH = {
   fire: '#ff8a3c', frost: '#bfefff', storm: '#cfe0ff', water: '#8fe6ff', earth: '#ffd7a0', wind: '#e6fbff', nature: '#c8ff9a', poison: '#b6ff3d',
@@ -58,11 +59,24 @@ export async function init(ctx) {
     if (!a || a.alive === false) return null;
     return a;
   }
+  // PvP: hostile players (both flagged / war zone, or the live duel opponent) are valid enemies; friendlies never are.
+  const canAttackPlayer = (a) => { try { return !!ctx.net?.canAttack?.(a.id); } catch { return false; } };
+  const isEnemy = (a) => !!a && a !== player() && a.alive !== false && (a.kind === 'mob' ? !isFriendlyPet(a) : a.kind === 'player' && canAttackPlayer(a));
+  const isFriendlyPet = (a) => { const own = ctx.net?.entities?.get?.(a.id)?.own; return own != null && (isSelf(own) || !ctx.net?.canAttack?.(own)); };
+  /** Nearest enemy (creature or attackable player) favouring the camera's facing, like actors.nearestHostile. */
+  function nearestEnemy(maxDist) {
+    const p = player(); if (!p) return null;
+    let best = ctx.actors?.nearestHostile?.(maxDist) ?? null;
+    if (best && isFriendlyPet(best)) best = null;
+    let bd = best ? Vector3.Distance(best.position, p.position) : Infinity;
+    try { ctx.actors?.forEach?.((a) => { if (a.kind === 'player' && a.visible !== false && isEnemy(a)) { const d = Vector3.Distance(a.position, p.position); if (d <= maxDist && d < bd) { bd = d; best = a; } } }); } catch { /* stub */ }
+    return best;
+  }
   function cycleTarget() {
     const p = player(); if (!p) return;
     const list = [];
-    try { ctx.actors?.forEach?.((a) => { if (a !== p && a.kind === 'mob' && a.alive !== false && a.visible !== false) { const d = Vector3.Distance(a.position, p.position); if (d < 40) list.push({ a, d }); } }); } catch { /* stub */ }
-    if (!list.length) { const n = ctx.actors?.nearestHostile?.(40); if (n) setTarget(n.id); return; }
+    try { ctx.actors?.forEach?.((a) => { if (a !== p && a.visible !== false && isEnemy(a)) { const d = Vector3.Distance(a.position, p.position); if (d < 40) list.push({ a, d }); } }); } catch { /* stub */ }
+    if (!list.length) { const n = nearestEnemy(40); if (n) setTarget(n.id); return; }
     list.sort((x, y) => x.d - y.d);
     const i = list.findIndex((e) => e.a.id === state.target);
     setTarget(list[(i + 1) % list.length].a.id);
@@ -129,9 +143,10 @@ export async function init(ctx) {
       if (slot > 0 && state.gcdUntil > now + 40) return false;
       if (!manaOk(ab)) { toast('Not enough mana.'); return false; }
       let tgt = targetActor();
+      if (tgt && tgt.kind !== 'mob' && !isEnemy(tgt)) tgt = null; // a selected friendly/neutral player is never attacked
       const melee = ab.shape === 'melee';
       if (tgt && Vector3.Distance(tgt.position, p.position) > (ab.range ?? 12) + (melee ? 1.5 : 10)) tgt = melee ? null : tgt;
-      if (!tgt && (melee || ab.kind === 'basic')) { const n = ctx.actors?.nearestHostile?.((ab.range ?? 3) + (melee ? 1.8 : 0)); if (n) { tgt = n; setTarget(n.id); } }
+      if (!tgt && (melee || ab.kind === 'basic')) { const n = nearestEnemy((ab.range ?? 3) + (melee ? 1.8 : 0)); if (n) { tgt = n; setTarget(n.id); } }
       const { dir, aim } = computeAim(ab, tgt);
       try { p.faceToward?.(aim.x + dir.x * 0.01, aim.z + dir.z * 0.01, 0.6); } catch { /* optional */ }
       const castTime = ab.castTime ?? 0;
@@ -146,7 +161,7 @@ export async function init(ctx) {
       const element = ab.element ?? elementOfActor(p) ?? OATH_BY_ID[state.character?.oath]?.element ?? 'arcane';
       const ult = slot === 5;
       const chain = [];
-      if (ab.id === 'collective/chain') { try { ctx.actors?.forEach?.((a) => { if (a !== p && a !== tgt && a.kind === 'mob' && a.alive !== false && tgt && Vector3.Distance(a.position, tgt.position) < 7.5 && chain.length < 5) chain.push(a); }); } catch { /* ignore */ } }
+      if (ab.id === 'collective/chain') { try { ctx.actors?.forEach?.((a) => { if (a !== p && a !== tgt && isEnemy(a) && tgt && Vector3.Distance(a.position, tgt.position) < 7.5 && chain.length < 5) chain.push(a); }); } catch { /* ignore */ } }
       const tpos = tgt ? tgt.position.clone() : aim.clone();
       const handle = ctx.vfx?.castEffect?.(ab, { caster: p, target: tpos, dir: { x: dir.x, z: dir.z }, castTime, element, local: true, shake: true, ultimate: ult, combo: state.combo, chain }) ?? null;
       if (ult) ctx.vfx?.play?.(`ultimate:${state.character?.cls ?? p.cls ?? 'sorcerer'}:${element}`, { caster: p, dir: { x: dir.x, z: dir.z }, target: tpos, local: true, shake: true, ant: castTime + 0.05 });
@@ -301,7 +316,11 @@ export async function init(ctx) {
     bus.on('actor:despawn', (p) => { const id = p?.id ?? p; statuses.clear(id); if (id === state.target) setTarget(null); });
   } catch (err) { console.warn('[combat] wiring failed', err); }
 
+  let arenas = null;
+  try { arenas = createArenas(ctx); } catch (err) { console.warn('[combat] arenas', err); }
+
   ctx.addUpdate?.((dt) => {
+    try { arenas?.update(dt); } catch (err) { console.warn('[combat] arenas', err); arenas = null; }
     try {
       const inp = ctx.input;
       if (inp) {
@@ -327,6 +346,9 @@ export async function init(ctx) {
     /** Remaining cooldown seconds for a slot (client view). */
     remaining(slot) { return Math.max(0, ((state.cooldowns[slot] ?? 0) - nowMs()) / 1000); },
     cycleTarget,
+    nearestEnemy,
+    /** True for creatures and players the local player may attack (PvP rules mirrored from net.canAttack). */
+    isEnemy: (id) => isEnemy(actorOf(id)),
     flash: (actor, color, s, d) => flashes.flash(actor, color ?? Color3.White(), s, d),
   };
 }

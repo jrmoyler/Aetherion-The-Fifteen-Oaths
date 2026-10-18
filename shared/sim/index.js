@@ -16,7 +16,7 @@ import { heightAt, WORLD_HALF, SEA_LEVEL } from '../terrain.js';
 import { TICK_HZ, SNAP_HZ, INTEREST_RADIUS, ANIMS, PROTOCOL_VERSION } from '../protocol.js';
 import { makeRng, clamp, q2, randomToken, Grid, Ring } from './util.js';
 import { NPC_TEXT, OATH_LEADERS, OATH_CIVICS, CONSUMABLES, MASK_WORDS, genName } from './data.js';
-import { buildSanctuaries, buildCamps, buildLairs, SAFE_RADIUS, SHRINE_DISCOVER_RADIUS, levelForDistance } from './world.js';
+import { buildSanctuaries, buildCamps, buildLairs, SAFE_RADIUS, SHRINE_DISCOVER_RADIUS, levelForDistance, WAR_ZONES } from './world.js';
 import { computeStats, rollLoot, addItem, makeGear, makeConsumable } from './items.js';
 import {
   TEAM_PLAYER, hostile, resolveAbility, processDelayed, tickStatuses, applyStatus, clearStatuses, isStunned,
@@ -26,6 +26,11 @@ import { createMob, thinkMob, engage, spawnPet } from './mobs.js';
 import { chainStep, addQuest, questView, onKill, onTalk, onDiscover, makeBounty } from './quests.js';
 import { spawnBot, thinkBot } from './bots.js';
 import { initEvents, tickEvents, startEvent, activeEvents } from './events.js';
+import {
+  initSocial, initPlayerSocial, handleSocial, socialChat, tickSocial, resyncSocial, onDisconnect, removeSocial, updatePvpZone,
+  rewardRecipients, onPvpKill, duelDefeat, isPvp, PARTY_MAX, TRADE_MAX_ITEMS, TRADE_RANGE, DUEL_RING, PVP_DAMAGE_MUL, PVP_TOGGLE_CD_MS,
+} from './social.js';
+import { botInvited, botTrade, botWhispered } from './bots.js';
 
 const DAY_SECONDS = 2400; // one in-game day = 40 real minutes
 const SNAP_EVERY = Math.max(1, Math.round(TICK_HZ / SNAP_HZ)); // 2 at 20/10 Hz; players are staggered across phases
@@ -49,6 +54,13 @@ export function sanitizeName(s) {
   const t = sanitizeText(s, 20).replace(/[^\p{L}\p{N} '\-]/gu, '').trim();
   return t.length >= 2 ? t : 'Wanderer';
 }
+
+// chat command -> [message type, op, needs a target]
+const SOCIAL_CMDS = {
+  invite: ['party', 'invite', true], inv: ['party', 'invite', true], leave: ['party', 'leave'], kick: ['party', 'kick', true], lead: ['party', 'lead', true],
+  promote: ['party', 'lead', true], disband: ['party', 'disband'], duel: ['duel', 'challenge', true], forfeit: ['duel', 'forfeit'], yield: ['duel', 'forfeit'],
+  trade: ['trade', 'request', true], pvp: ['pvp'], p: ['chat', 'party'], party: ['chat', 'party'], w: ['chat', 'whisper'], whisper: ['chat', 'whisper'], tell: ['chat', 'whisper'],
+};
 
 class Sim {
   constructor(opts) {
@@ -84,6 +96,10 @@ class Sim {
     this.lairs = buildLairs(this.seed);
     this.populate();
     initEvents(this, opts);
+    initSocial(this);
+    this.botInvited = (b, inv) => botInvited(this, b, inv);
+    this.botTrade = (b, tr, state) => botTrade(this, b, tr, state);
+    this.botWhispered = (b, from, text) => botWhispered(this, b, from, text);
   }
 
   // ---------- entity bookkeeping ----------
@@ -178,6 +194,7 @@ class Sim {
       known: new Map(), phase: 0, pets: [], h: 0, hx: NaN, hz: NaN,
     };
     p.phase = this.players.size % SNAP_EVERY;
+    initPlayerSocial(p, saved);
     if (saved) {
       p.inventory = Array.isArray(saved.inventory) ? saved.inventory.slice(0, 40) : [];
       p.equipment = saved.equipment && typeof saved.equipment === 'object' ? saved.equipment : {};
@@ -215,6 +232,7 @@ class Sim {
 
   welcome(p) {
     p.known.clear();
+    resyncSocial(this, p);
     p.lastSeq = -1;
     p.budgetT = this.t; p.corrGrace = this.t + 500;
     p.youDirty = false;
@@ -225,6 +243,8 @@ class Sim {
         interest: INTEREST_RADIUS, events: activeEvents(this),
         sanctuaries: this.sanctuaries.map((s) => ({ oathId: s.oathId, center: s.center, y: s.y, shrine: s.shrine, spawn: s.spawn, npcs: s.npcs.map((n) => ({ role: n.role, id: `n-${s.oathId}-${n.role}`, x: q2(n.x), y: n.y, z: q2(n.z), ry: q2(n.ry) })) })),
         lairs: this.lairs.map((l) => ({ oath: l.oath, boss: l.boss, x: q2(l.x), y: q2(l.y), z: q2(l.z), level: l.level })),
+        warZones: WAR_ZONES,
+        social: { partyMax: PARTY_MAX, tradeMaxItems: TRADE_MAX_ITEMS, tradeRange: TRADE_RANGE, duelRing: DUEL_RING, pvpDamageMul: PVP_DAMAGE_MUL, pvpToggleCdMs: PVP_TOGGLE_CD_MS, safeRadius: SAFE_RADIUS },
       },
     };
   }
@@ -268,6 +288,8 @@ class Sim {
       casting: p.casting ? { slot: p.casting.slot, until: Math.round(this.wall0 + p.casting.until) } : null,
       combat: p.combatUntil > this.t,
       fx: p.st.map((s) => s.id),
+      pvp: p.pvp, pvpEff: p.pvpEff, pvpCd: Math.round(this.wall0 + p.pvpAt + PVP_TOGGLE_CD_MS), pvpCombat: p.pvpCombatUntil > this.t,
+      honor: p.honor, pvpKills: p.pvpKills, party: p.party, duel: p.duel, trade: p.trade, war: p.war,
     };
   }
 
@@ -275,7 +297,7 @@ class Sim {
     return {
       v: 1, token: p.token, name: p.name, oath: p.oath, cls: p.cls, lvl: p.lvl, xp: Math.floor(p.xp), gold: p.gold,
       hp: Math.ceil(p.hp), mp: Math.floor(p.mp), inventory: p.inventory, equipment: p.equipment,
-      quests: [...p.quests.values()], discovered: [...p.discovered], chainStep: p.chainStep, bountiesDone: p.bountiesDone ?? 0,
+      quests: [...p.quests.values()], discovered: [...p.discovered], chainStep: p.chainStep, bountiesDone: p.bountiesDone ?? 0, honor: p.honor ?? 0, pvpKills: p.pvpKills ?? 0,
       pos: p.alive ? { x: q2(p.x), y: q2(p.y), z: q2(p.z) } : null, savedAt: this.serverTime(),
     };
   }
@@ -289,6 +311,7 @@ class Sim {
   removePlayer(id) {
     const p = this.players.get(id);
     if (!p) return null;
+    removeSocial(this, p);
     const data = p.bot ? null : this.serialize(p);
     this.persist(p);
     for (const pet of p.pets ?? []) if (this.ents.has(pet.id)) this.despawnMob(pet);
@@ -339,6 +362,7 @@ class Sim {
       case 'unequip': return this.unequip(p, msg.slot);
       case 'use': return this.useItem(p, msg.item);
       case 'drop': { const i = p.inventory.findIndex((it) => it.id === msg.item); if (i >= 0) { p.inventory.splice(i, 1); p.youDirty = true; p.saveDirty = true; } return; }
+      case 'party': case 'duel': case 'trade': case 'pvp': return handleSocial(this, p, msg);
       case 'hello': return;
       case 'ping': this.send(p, { t: 'pong', c: isNum(msg.c) ? msg.c : 0, s: this.serverTime() }); return;
       default: this.send(p, { t: 'error', msg: `unknown message type` });
@@ -463,6 +487,7 @@ class Sim {
       p.chatTokens -= 1;
     }
     if (text[0] === '/') return this.command(p, text);
+    if ((msg.channel === 'party' || msg.channel === 'whisper') && socialChat(this, p, text, msg.channel, typeof msg.to === 'string' ? msg.to.slice(0, 48) : null)) return;
     const channel = ['say', 'world', 'oath'].includes(msg.channel) ? msg.channel : 'say';
     this.chat(p, text, channel);
   }
@@ -489,7 +514,19 @@ class Sim {
     } else if (cmd === 'events') {
       const ev = activeEvents(this);
       this.sysTo(p, ev.length ? ev.map((e) => `${e.kind} in ${OATH_BY_ID[e.region].name}`).join('; ') : 'The world is quiet.');
-    } else this.sysTo(p, 'Commands: /who /where /stuck /events');
+    } else if (SOCIAL_CMDS[cmd]) {
+      const rest = text.slice(cmd.length + 2).trim();
+      const [kind, op, needs] = SOCIAL_CMDS[cmd];
+      if (kind === 'pvp') return handleSocial(this, p, { t: 'pvp', on: rest ? /^(on|1|yes|true)$/i.test(rest) : !p.pvp });
+      if (kind === 'chat') {
+        if (op === 'party') return socialChat(this, p, rest, 'party');
+        const m = rest.match(/^"([^"]+)"\s+(.+)$/) || rest.match(/^(\S+)\s+(.+)$/);
+        if (!m) return this.sysTo(p, 'Usage: /w <name> <message>');
+        return socialChat(this, p, m[2], 'whisper', m[1]);
+      }
+      if (needs && !rest) return this.sysTo(p, `Usage: /${cmd} <name>`);
+      return handleSocial(this, p, { t: kind, op, target: rest || undefined });
+    } else this.sysTo(p, 'Commands: /who /where /stuck /events /invite /leave /kick /lead /disband /duel /forfeit /trade /pvp /p /w');
   }
 
   nearNpc(p, id) {
@@ -648,6 +685,7 @@ class Sim {
     p.budget = this.maxSpeed(p) * 1.2; p.budgetT = this.t; p.corrGrace = this.t + 600;
     this.grid.move(p); this.pgrid.move(p);
     this.ev({ type: 'teleport', id: p.id, x: q2(p.x), y: q2(p.y), z: q2(p.z), ry: q2(p.ry), reason }, p.x, p.z);
+    if (p.k === 'p') updatePvpZone(this, p);
     if (p.pets) for (const pet of p.pets) if (this.ents.has(pet.id)) { pet.x = x + 1.5; pet.z = z; pet.y = p.y; this.grid.move(pet); }
     p.youDirty = true;
   }
@@ -705,6 +743,8 @@ class Sim {
   }
 
   // ---------- combat hooks used by combat.js / mobs.js ----------
+  duelDefeat(loser, winner) { duelDefeat(this, loser, winner); }
+
   onMobDamaged(m, src) {
     if (m.k !== 'm' || m.own || !m.alive) return;
     if (m.state === 'idle') engage(this, m, src);
@@ -741,6 +781,7 @@ class Sim {
     this.ev({ type: 'death', id: dst.id, killer: credit?.id ?? src?.id ?? null }, dst.x, dst.z);
     if (dst.k === 'p') {
       this.stats.deaths++;
+      if (isPvp(credit, dst)) onPvpKill(this, credit, dst); // honor + kill credit; no item loss, normal shrine respawn
       dst.deadAt = this.t; dst.tgt = null;
       for (const pet of dst.pets ?? []) if (this.ents.has(pet.id)) this.despawnMob(pet);
       if (!dst.bot) this.sysTo(dst, `You were slain${src ? ` by ${src.name}` : ''}. Respawn at your nearest attuned shrine.`);
@@ -757,10 +798,11 @@ class Sim {
       if (p && (p.x - dst.x) ** 2 + (p.z - dst.z) ** 2 < 110 * 110) contributors.push(p);
     }
     if (credit && credit.k === 'p' && !contributors.includes(credit)) contributors.push(credit);
-    const n = contributors.length;
+    const recipients = rewardRecipients(this, contributors, dst); // + party members in range share XP, loot rolls and quest credit
+    const n = recipients.length;
     const xpMul = { common: 1, veteran: 1.8, elite: 4, boss: 30 }[dst.role] ?? 1;
     const baseXp = (18 + 9 * dst.lvl) * xpMul * (dst.temp ? 0.5 : 1);
-    for (const p of contributors) {
+    for (const p of recipients) {
       const diff = dst.lvl - p.lvl;
       const f = diff < -7 ? 0.05 : clamp(1 + 0.1 * diff, 0.2, 1.5);
       this.giveXp(p, (baseXp * f * (1 + 0.2 * (n - 1))) / n);
@@ -781,6 +823,7 @@ class Sim {
   // ---------- snapshots (delta encoded per client) ----------
   prep(e, ph) {
     if (!e._ph) e._ph = [null, null, null, null];
+    const pl = e.k === 'p';
     let st = e._ph[ph];
     if (!st) st = e._ph[ph] = { stamp: -1, ver: 0, x: 0, y: 0, z: 0, ry: 0, anim: '', hp: 0, mhp: 0, lvl: 0, tgt: null, fx: -1, diff: null, full: null, fullVer: -1, dyn: null, dynVer: -1 };
     if (st.stamp === this.tickN) return st;
@@ -788,6 +831,7 @@ class Sim {
     const x = q2(e.x), y = q2(e.y), z = q2(e.z), ry = q2(e.ry), hp = Math.ceil(e.hp), tgt = e.tgt ?? null;
     if (st.ver === 0) {
       st.x = x; st.y = y; st.z = z; st.ry = ry; st.anim = e.anim; st.hp = hp; st.mhp = e.mhp; st.lvl = e.lvl; st.tgt = tgt; st.fx = e.fxVer; st.ver = 1;
+      if (pl) { st.pvp = e.pvpEff; st.party = e.party; st.duel = e.duel; }
       return st;
     }
     let d = null;
@@ -801,6 +845,11 @@ class Sim {
     if (st.lvl !== e.lvl) { (d ??= { id: e.id }).lvl = e.lvl; st.lvl = e.lvl; }
     if (st.tgt !== tgt) { (d ??= { id: e.id }).tgt = tgt; st.tgt = tgt; }
     if (st.fx !== e.fxVer) { (d ??= { id: e.id }).fx = e.st.map((s) => s.id); st.fx = e.fxVer; }
+    if (pl) {
+      if (st.pvp !== e.pvpEff) { (d ??= { id: e.id }).pvp = e.pvpEff; st.pvp = e.pvpEff; }
+      if (st.party !== e.party) { (d ??= { id: e.id }).party = e.party; st.party = e.party; }
+      if (st.duel !== e.duel) { (d ??= { id: e.id }).duel = e.duel; st.duel = e.duel; }
+    }
     if (d) { st.ver++; st.diff = d; }
     return st;
   }
@@ -814,6 +863,7 @@ class Sim {
     if (e.element && e.k === 'm') f.el = e.element;
     if (e.own) f.own = e.own;
     if (e.def?.scale || e.worldBoss) f.scale = (e.def?.scale ?? 1) * (e.worldBoss ? 1.6 : 1);
+    if (e.k === 'p') { if (st.pvp) f.pvp = st.pvp; if (st.party) f.party = st.party; if (st.duel) f.duel = st.duel; }
     st.full = f; st.fullVer = st.ver;
     return f;
   }
@@ -821,6 +871,7 @@ class Sim {
   dynState(e, st) {
     if (st.dynVer === st.ver) return st.dyn;
     st.dyn = { id: e.id, x: st.x, y: st.y, z: st.z, ry: st.ry, anim: st.anim, hp: st.hp, mhp: st.mhp, lvl: st.lvl, tgt: st.tgt, fx: e.st.map((s) => s.id) };
+    if (e.k === 'p') { st.dyn.pvp = st.pvp ?? 0; st.dyn.party = st.party ?? null; st.dyn.duel = st.duel ?? null; }
     st.dynVer = st.ver;
     return st.dyn;
   }
@@ -909,6 +960,7 @@ class Sim {
     }
 
     tickEvents(this);
+    tickSocial(this);
     if (this.t >= this.nextBotCheck) this.balanceBots();
 
     // snapshots: players are split into phases so each gets SNAP_HZ while load is spread over ticks
@@ -965,6 +1017,7 @@ export function createSim(opts = {}) {
   return {
     addPlayer: (id, hello, saved) => S.addPlayer(id, hello, saved),
     removePlayer: (id) => S.removePlayer(id),
+    disconnected: (id) => { const p = S.players.get(id); if (p) onDisconnect(S, p); },
     resume: (id) => S.resume(id),
     hasPlayer: (id) => S.players.has(id),
     handle: (id, msg) => S.handle(id, msg),

@@ -229,7 +229,7 @@ export function spawnPet(S, owner, ab, dir) {
   if (owner.pets.length >= 2) S.despawnMob(owner.pets.shift());
   const x = owner.x + dir.x * 2, z = owner.z + dir.z * 2;
   const pet = {
-    id: S.nextId('pet'), k: 'm', team: TEAM_PLAYER, own: owner.id, name: `${owner.name}'s ${ab.name}`, oath: owner.oath, cls: null,
+    id: S.nextId('pet'), k: 'm', team: TEAM_PLAYER, own: owner.id, ownerEnt: owner, name: `${owner.name}'s ${ab.name}`, oath: owner.oath, cls: null,
     model: ab.id, role: 'pet', lvl: owner.lvl, element: ab.element ?? owner.element,
     x, y: S.groundY(x, z), z, ry: owner.ry, anim: 'idle', hp: 0, mhp: 0, alive: true, st: [], fxVer: 0, tgt: null,
     radius: 0.6, headY: 1.2, speed: 8.5, armor: owner.stats.armor, pow: owner.stats.power,

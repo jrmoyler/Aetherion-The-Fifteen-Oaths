@@ -115,3 +115,30 @@ export function buildLairs(seed) {
     return { oath: o.id, boss: boss.id, x, y: heightAt(x, z), z, level: 14 };
   });
 }
+
+/**
+ * Contested border war zones: named points of interest on three region boundaries (the midpoint
+ * of a covenant road between two sanctuaries). Everyone inside is auto-flagged for PvP. Pure data,
+ * shared with the client through welcome.world.warZones.
+ */
+export const WAR_ZONE_RADIUS = 110;
+export const WAR_ZONES = [
+  { id: 'wz-cinderreach', name: 'Cinderreach Marches', between: ['oath-01', 'oath-07'] },
+  { id: 'wz-reedstorm', name: 'The Reedstorm Ford', between: ['oath-03', 'oath-06'] },
+  { id: 'wz-bloodclock', name: 'Bloodclock Pass', between: ['oath-12', 'oath-14'] },
+].map((z) => {
+  const a = OATHS.find((o) => o.id === z.between[0]).center, b = OATHS.find((o) => o.id === z.between[1]).center;
+  return { ...z, x: Math.round((a[0] + b[0]) / 2), z: Math.round((a[1] + b[1]) / 2), r: WAR_ZONE_RADIUS };
+});
+
+/** War zone containing (x, z), or null. */
+export function warZoneAt(x, z) {
+  for (const w of WAR_ZONES) if ((w.x - x) ** 2 + (w.z - z) ** 2 < w.r * w.r) return w;
+  return null;
+}
+
+/** True inside any sanctuary's safe radius (no PvP, no mob aggro). Pure: uses the canonical centres. */
+export function inSafeZone(x, z) {
+  for (const o of OATHS) if ((o.center[0] - x) ** 2 + (o.center[1] - z) ** 2 < SAFE_RADIUS * SAFE_RADIUS) return true;
+  return false;
+}

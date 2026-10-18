@@ -10,6 +10,8 @@ import { OATH_BY_ID } from '@shared/oaths.js';
 
 const W = 512, H = 128;
 const ROLE_COL = { common: '#e2b49a', veteran: '#f0a060', elite: '#ff8a5a', boss: '#ff5a4a' };
+// player relation colours (PvP / party): party green, hostile red, neutral white, duel orange
+const REL_COL = { party: '#86e08c', hostile: '#ff5a4a', duel: '#ffa040', neutral: '#f4ecd8' };
 const FONT = '"Cormorant Garamond", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif';
 
 export class Nameplates {
@@ -52,16 +54,27 @@ export class Nameplates {
     return p;
   }
 
+  relation(a) {
+    if (a.kind !== 'player' || a.isSelf) return null;
+    try { return this.ctx.net?.relation?.(a.id) ?? 'neutral'; } catch { return 'neutral'; }
+  }
+
   redraw(p) {
     const a = p.actor;
-    const key = `${a.name}|${a.level}|${a.kind}|${a.role ?? ''}|${a.alive}|${a.title ?? ''}`;
+    const rel = this.relation(a);
+    if (rel !== p.rel) {
+      p.rel = rel;
+      if (a.kind === 'player') p.fill.material = rel === 'hostile' || rel === 'duel' ? this.barMob : this.barFriend;
+    }
+    const key = `${a.name}|${a.level}|${a.kind}|${a.role ?? ''}|${a.alive}|${a.title ?? ''}|${rel ?? ''}`;
     if (key === p.drawn) return;
     p.drawn = key;
     const ctx = p.tex.getContext();
     ctx.clearRect(0, 0, W, H);
-    const col = a.kind === 'mob' ? (ROLE_COL[a.role] ?? ROLE_COL.common) : a.kind === 'npc' ? '#e8d49a' : (a.isSelf ? '#f4ecd8' : (OATH_BY_ID[a.oath]?.accent ? mixHex(OATH_BY_ID[a.oath].accent, '#f4ecd8', 0.55) : '#e8e4da'));
+    const col = a.kind === 'mob' ? (ROLE_COL[a.role] ?? ROLE_COL.common) : a.kind === 'npc' ? '#e8d49a' : (a.isSelf ? '#f4ecd8' : (REL_COL[rel] ?? (OATH_BY_ID[a.oath]?.accent ? mixHex(OATH_BY_ID[a.oath].accent, '#f4ecd8', 0.55) : '#e8e4da')));
     const name = a.name ?? '';
-    const sub = a.kind === 'npc' ? (a.title ?? '') : a.kind === 'mob' && a.role && a.role !== 'common' ? a.role.toUpperCase() : '';
+    const sub = a.kind === 'npc' ? (a.title ?? '') : a.kind === 'mob' && a.role && a.role !== 'common' ? a.role.toUpperCase()
+      : rel === 'hostile' ? 'HOSTILE' : rel === 'duel' ? 'DUEL' : rel === 'party' ? 'PARTY' : '';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     let size = 46;
     ctx.font = `600 ${size}px ${FONT}`;
@@ -134,7 +147,8 @@ export class Nameplates {
       const gy = this.ctx.collision?.groundAt?.(tp.x, tp.z, tp.y + 0.5) ?? tp.y;
       r.position.set(tp.x, Math.max(gy, tp.y - 0.4) + 0.06, tp.z);
       r.rotation.y += dt * 0.6;
-      const hostile = ta.kind === 'mob';
+      const rel = this.relation(ta);
+      const hostile = ta.kind === 'mob' || rel === 'hostile' || rel === 'duel';
       r.material.emissiveColor.copyFrom(hostile ? this.ringHostile : this.ringFriend);
       r.material.alpha = 0.75 + Math.sin(performance.now() * 0.004) * 0.15;
     } else r.setEnabled(false);

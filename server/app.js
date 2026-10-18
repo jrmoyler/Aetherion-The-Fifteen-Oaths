@@ -52,7 +52,7 @@ export async function startServer(opts = {}) {
   const log = (...a) => { if (!cfg.quiet) console.log('[aetherion]', ...a); };
 
   const store = createStore(cfg.dataDir);
-  const sim = createSim({ seed: cfg.seed, persistence: store, bots: cfg.bots, ...cfg.simOpts });
+  const sim = createSim({ seed: cfg.seed, persistence: store, bots: cfg.bots, log: (line) => log(line), ...cfg.simOpts });
   const statics = createStatic(cfg.staticDir);
 
   // ---------- connection state ----------
@@ -127,6 +127,7 @@ export async function startServer(opts = {}) {
     const pid = conn.pid;
     outBufs.delete(pid);
     conns.delete(pid);
+    try { sim.disconnected(pid); } catch (e) { console.error('[aetherion] disconnect cleanup', e); } // cancel trade / forfeit duel now; party survives the grace window
     const sess = sessions.get(conn.token);
     if (sess && sess.conn === conn) {
       sess.conn = null;

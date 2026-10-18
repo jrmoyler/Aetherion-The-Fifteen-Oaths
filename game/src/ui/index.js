@@ -18,8 +18,10 @@ import { createWorldMap } from './worldmap.js';
 import { createCharPanel } from './charpanel.js';
 import { createSettings } from './settings.js';
 import { createTouch } from './touch.js';
+import { createGamepadUI } from './gamepad.js';
 import { enterImmersive } from './pwa.js';
 import { createAudio } from '../audio/index.js';
+import { createSocial } from './social/index.js';
 import { OATH_BY_ID, CLASSES } from '@shared/oaths.js';
 import { ABILITY_BY_ID } from '@shared/abilities.js';
 
@@ -156,11 +158,13 @@ function build(ctx) {
   windows.settings = { win: settings.win };
   windows.dialog = { win: dialogs.win };
   winLayer.append(scrim, worldmap.win, charpanel.win, settings.win, dialogs.win);
+  try { ui.social = createSocial(ui); } catch (err) { console.warn('[ui] social UI unavailable', err); }
 
   // ---------- title & creation
   const title = createTitle(screens, { onPlay: () => titlePlay?.(), onSettings: () => ui.openWindow('settings'), onClickSound: () => ui.sfx('click'), version: VERSION });
   const creation = createCharacterScreen(screens, { sfx: ui.sfx });
   let titlePlay = null;
+  try { ui.gamepad = createGamepadUI(ui); } catch (err) { console.warn('[ui] gamepad', err); }
 
   // ---------- fatal
   const fatal = (err) => {

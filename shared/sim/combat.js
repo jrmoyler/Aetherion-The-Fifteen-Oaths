@@ -2,9 +2,18 @@
 // Functions take the simulation instance `S` (see index.js) as their first argument.
 import { ELEMENT_STATUS, STATUSES, ELEMENT_MOD, REACTIONS, SELF_BUFF } from './data.js';
 import { clamp, segDist2 } from './util.js';
+import { pvpHostile, isPvp, diminish, onPvpDamage, PVP_DAMAGE_MUL } from './social.js';
 
 export const TEAM_PLAYER = 1, TEAM_MOB = 2;
-export const hostile = (a, b) => a.team !== b.team && a.team !== 0 && b.team !== 0;
+/**
+ * Hostility. Different teams fight (neutral team 0 never); two TEAM_PLAYER entities (players or their
+ * pets) are hostile only under the PvP rules in social.js (duel partners, or both flagged outside
+ * sanctuaries and not in the same party).
+ */
+export const hostile = (a, b) => {
+  if (a.team !== b.team) return a.team !== 0 && b.team !== 0;
+  return a.team === TEAM_PLAYER && a !== b && pvpHostile(a, b);
+};
 
 // ---------- statuses ----------
 export function hasStatus(e, id) {
@@ -36,9 +45,16 @@ export function applyStatus(S, dst, id, dur, mag = 0, src = null, dps = 0) {
   if (!dst.alive) return;
   const kind = STATUSES[id]?.kind;
   if (dst.role === 'boss' && (kind === 'stun' || kind === 'root')) { id = 'slow'; mag = 0.2; dur = Math.min(dur, 1.5); }
-  else if (kind === 'stun') {
-    if (dst.stunImmune > S.t) return;
-    dst.stunImmune = S.t + (dur + 3) * 1000;
+  else {
+    // PvP crowd-control diminishing returns (stun / root / slow): x1, x0.5, x0.25, then immune for 15 s
+    if (dst.k === 'p' && src && (kind === 'stun' || kind === 'root' || kind === 'slow')) {
+      const c = src.k === 'p' ? src : src.ownerEnt;
+      if (c && c !== dst) { const f = diminish(S, dst, kind); if (f <= 0) return; dur *= f; }
+    }
+    if (kind === 'stun') {
+      if (dst.stunImmune > S.t) return;
+      dst.stunImmune = S.t + (dur + 3) * 1000;
+    }
   }
   const until = S.t + dur * 1000;
   const ex = hasStatus(dst, id);
@@ -130,6 +146,9 @@ export function dealDamage(S, src, dst, base, element, abilityId, opts = {}) {
   const armor = (dst.stats?.armor ?? dst.armor ?? 0) * (sunder ? 1 - sunder.mag : 1);
   mul *= 100 / (100 + armor);
   if (!opts.dot) mul *= 0.9 + S.rng() * 0.2;
+  const credit = creditOf(S, src);
+  const pvp = isPvp(credit, dst);
+  if (pvp) mul *= PVP_DAMAGE_MUL;
   let amount = Math.max(1, Math.round(base * mul));
   // shields absorb first
   const sh = hasStatus(dst, 'shield');
@@ -138,9 +157,12 @@ export function dealDamage(S, src, dst, base, element, abilityId, opts = {}) {
     absorbed = Math.min(sh.pool, amount); sh.pool -= absorbed; amount -= absorbed;
     if (sh.pool <= 0) removeStatus(S, dst, 'shield');
   }
+  // duels end at 1 HP: the opponent can never kill a duellist
+  let duelWon = false;
+  if (pvp && dst.duelLive && credit.duel === dst.duel && dst.hp - amount < 1) { amount = Math.max(0, Math.ceil(dst.hp) - 1); duelWon = true; }
   dst.hp -= amount;
   dst.combatUntil = S.t + 6000;
-  const credit = creditOf(S, src);
+  if (pvp) onPvpDamage(S, credit, dst);
   if (src) {
     src.combatUntil = S.t + 6000;
     if (credit && credit !== src) credit.combatUntil = S.t + 6000;
@@ -159,6 +181,7 @@ export function dealDamage(S, src, dst, base, element, abilityId, opts = {}) {
   // lifesteal / radiant healing
   if (src && src.alive && element === 'blood' && !opts.dot) heal(S, src, src, amount * 0.15);
   if (src && src.alive && element === 'light' && !opts.dot) heal(S, src, src, amount * ELEMENT_STATUS.light[3]);
+  if (duelWon) { dst.hp = Math.max(1, dst.hp); S.duelDefeat(dst, credit); return amount; }
   if (dst.hp <= 0) { dst.hp = 0; S.kill(dst, src); return amount; }
   // on-hit element status
   if (element && !opts.dot && !opts.noStatus) {
@@ -214,7 +237,7 @@ export function processDelayed(S) {
 export function areaDamage(S, src, it, x, z, r) {
   const team = it.team ?? src?.team;
   if (!it.world && src == null && team == null) return;
-  const list = S.grid.query(x, z, r + 4, [], (e) => e.alive && e.k !== 'n' && (it.world ? true : e.team !== team && e.team !== 0));
+  const list = S.grid.query(x, z, r + 4, [], (e) => e.alive && e.k !== 'n' && (it.world ? true : src ? hostile(src, e) : e.team !== team && e.team !== 0));
   let n = 0;
   for (const e of list) {
     const rr = r + (e.radius ?? 0.5);

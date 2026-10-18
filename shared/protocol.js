@@ -90,6 +90,51 @@
 //   'fail'   {id, slot, reason}                       private: cast rejected ('cooldown'|'gcd'|'mana'|'range'|'stunned'|'casting'|'dead')
 //   'world'  {kind:'storm'|'meteors'|'worldboss'|'surge', region, state:'start'|'end', until?, x?, z?, text?, success?}
 //   'chat'   + oath (sender's Oath)
+//
+// ---------------------------------------------------------------------------------------------
+// SOCIAL: parties, duels, PvP flag + war zones, honor, trading (additive; PROTOCOL_VERSION unchanged -
+// old clients ignore the new fields/events). Server-authoritative: every request is schema-checked
+// (server/lib/validate.js) AND re-validated in shared/sim/social.js (also offline). Social requests
+// share a per-player token bucket (8 burst, 2/s) on top of the connection rate limit.
+//
+// CLIENT -> SERVER
+//   { t:'party', op:'invite'|'accept'|'decline'|'leave'|'kick'|'lead'|'disband', target?, from? }
+//        target = entity id or player name (invite/kick/lead); from = inviter id (accept/decline; omit = newest)
+//   { t:'duel',  op:'challenge'|'accept'|'decline'|'forfeit', target?, from? }
+//   { t:'trade', op:'request'|'accept'|'decline'|'offer'|'lock'|'unlock'|'confirm'|'cancel', target?, from?,
+//        items?:[itemId x <=6], gold?:int }    offer replaces your whole offer (whole stacks); any offer change unlocks BOTH sides
+//   { t:'pvp', on:bool }                       raise/lower the PvP banner (10 s toggle cooldown; can't lower during PvP combat)
+//   chat channel 'party' (members) and 'whisper' (+ to: id|name). Chat commands: /invite /leave /kick /lead /disband
+//        /duel /forfeit /trade /pvp [on|off] /p <text> /w|/tell <name> <text>
+//
+// EntityState additions (players only; deltas as usual, null/0 when cleared):
+//   pvp: 0|1|2   effective PvP state (1 = flagged, 2 = inside a war zone; always 0 inside a sanctuary)
+//   party: id|null   duel: id|null
+// PlayerState additions: pvp (flag), pvpEff, pvpCd (server ms when the flag may change), pvpCombat, honor, pvpKills,
+//   party, duel, trade, war (war zone id|null)
+// welcome.world additions: warZones:[{id, name, between:[oathA, oathB], x, z, r}],
+//   social:{partyMax, tradeMaxItems, tradeRange, duelRing, pvpDamageMul, pvpToggleCdMs, safeRadius}
+//
+// GameEvent additions (private unless noted)
+//   'invite'  {kind:'party'|'duel'|'trade', from, name, lvl, oath, until, state:'open'}   (30 s timeout)
+//             {kind, from, state:'closed', reason?:'expired'|'logout'}               remove the prompt
+//   'party'   {id, party:{id, leader, members:[{id,name,oath,cls,lvl,hp,mhp,mp,mmp,alive,x,z,pvp,tgt}]}|null}
+//             sent on every change and at 2 Hz while values change: members are shown on the maps regardless of interest
+//   'duel'    {id, a, b, an, bn, x, z, r, state:'countdown', at}  (fight starts at server time `at`, 3 s)
+//             {..., state:'fight'} | {..., state:'end', winner?, loser?, reason:'defeat'|'fled'|'forfeit'|'death'|'logout'|'timeout'|'cancelled'}
+//             to both duellists and spectators within 120 m. Duels end at 1 HP (no death); leaving the ring (r) forfeits.
+//   'pvp'     {id, on, cd}
+//   'warzone' {id, zone:{id,name,x,z,r}|null}            entered / left a contested border (everyone auto-flagged)
+//   'honor'   {id, victim, name, honor, total, kills}     PvP kill credit (0 honor for repeat kills within 10 min / far lower level)
+//   'trade'   {id, state:'open'|'update', with, name, ver, you:{items:[Item],gold,locked,confirmed}, them:{...}}
+//             {id, state:'done', gave:[item], got:[item], goldGave, goldGot} | {id, state:'cancelled', reason, by?}
+//             reasons: cancelled distance(>12 m) combat death logout invalid(re-validation failed at commit) full duel
+//
+// RULES (shared/sim/social.js + combat.js): party max 5; XP, personal loot rolls and quest kill credit are shared by party
+// members alive within 110 m of the kill (XP split by recipient count with the group bonus). Players can damage each other only
+// when (a) duelling each other after the countdown, or (b) both are effectively flagged (flag or war zone), neither is inside a
+// sanctuary's 150 m safe radius, and they are not in the same party (pets follow their owner). PvP damage x0.6; stun/root/slow
+// from players diminish x1, x0.5, x0.25 then immune (15 s window). PvP death: normal shrine respawn, no item loss.
 
 export const PROTOCOL_VERSION = 1;
 export const TICK_HZ = 20;
@@ -99,3 +144,8 @@ export const INTEREST_RADIUS = 220;
 export const DEFAULT_PORT = 8787;
 
 export const ANIMS = ['idle', 'walk', 'run', 'sprint', 'jump', 'fall', 'dodge', 'attack', 'cast', 'hit', 'dead', 'swim', 'emote'];
+
+// Social (see "SOCIAL" above). Authoritative values live in shared/sim/social.js; welcome.world.social mirrors them.
+export const SOCIAL_MESSAGES = ['party', 'duel', 'trade', 'pvp'];
+export const SOCIAL_EVENTS = ['invite', 'party', 'duel', 'pvp', 'warzone', 'honor', 'trade'];
+export const CHAT_CHANNELS = ['say', 'world', 'oath', 'party', 'whisper'];

@@ -16,8 +16,10 @@
 // objects are stable (mutated in place across snapshots) until the entity appears in `gone`.
 import { PROTOCOL_VERSION } from '@shared/protocol.js';
 import { createLocalServer } from './localServer.js';
+import { createSocialStore } from './social.js';
 
 const CONNECT_TIMEOUT_MS = 2500;
+const SOCIAL_EV = new Set(['invite', 'party', 'duel', 'pvp', 'warzone', 'honor', 'trade']);
 const PING_MS = 2000;
 const LS = {
   get(k) { try { return localStorage.getItem(k); } catch { return null; } },
@@ -35,6 +37,8 @@ export async function init(ctx) {
     you: null, welcome: null, transport: null,
   };
   const ents = new Map();
+  // parties / duels / trades / PvP flag mirror (social fields on entities - pvp, party, duel - merge like any other delta)
+  const social = createSocialStore(bus, { selfId: () => state.selfId, entities: () => ents });
   let character = null;
   let ws = null;
   let local = null;
@@ -72,11 +76,12 @@ export async function init(ctx) {
     if (!state.welcome && m.t !== 'welcome' && m.t !== 'pong' && m.t !== 'error') return; // pre-join broadcasts
     switch (m.t) {
       case 'snap': hydrate(m); break;
-      case 'ev': bus.emit('net:ev', m.e); break;
+      case 'ev': if (m.e && SOCIAL_EV.has(m.e.type)) { try { social.onEvent(m.e); } catch (err) { console.warn('[net] social', err); } } bus.emit('net:ev', m.e); break;
       case 'you': {
         // partial updates omit unchanged inventory/equipment/quests/discovered: merge into the full state
         const y = m.you;
         if (y.partial && state.you) { delete y.partial; state.you = Object.assign({}, state.you, y); } else { delete y.partial; state.you = y; }
+        social.onYou(state.you);
         bus.emit('net:you', state.you);
         break;
       }
@@ -84,6 +89,7 @@ export async function init(ctx) {
         state.selfId = m.id; state.welcome = m; state.you = m.you; token = m.token;
         LS.set(tokenKey(), m.token);
         ents.clear();
+        social.onWelcome(m);
         syncClock(m.serverTime, 0);
         attempts = 0;
         state.connected = true;
@@ -229,6 +235,12 @@ export async function init(ctx) {
     get entities() { return ents; },
     get transport() { return state.transport; },
     serverTime: () => Date.now() + state.offset,
+    /** Social state mirror (see net/social.js): party, invites, duel, trade, pvp flag, war zones. */
+    social,
+    /** 'self'|'party'|'duel'|'hostile'|'neutral' for players, null otherwise. */
+    relation: (id) => social.relation(id),
+    /** True when the local player may damage this player (hostile flag pair outside sanctuaries, or live duel opponent). */
+    canAttack: (id) => social.canAttack(id),
 
     async connect(ch) {
       character = { name: ch?.name ?? 'Wanderer', oath: ch?.oath ?? 'oath-09', cls: ch?.cls ?? 'ninja' };

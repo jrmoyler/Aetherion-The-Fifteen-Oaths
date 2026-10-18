@@ -6,6 +6,12 @@ const optStr = (v, max) => v === undefined || v === null || str(v, max);
 const vec3 = (v) => v && typeof v === 'object' && num(v.x, 1e5) && num(v.z, 1e5) && (v.y === undefined || num(v.y, 1e5));
 const vec2 = (v) => v && typeof v === 'object' && num(v.x, 1e3) && num(v.z, 1e3);
 
+const oneOf = (v, list) => typeof v === 'string' && list.includes(v);
+const CHANNELS = ['say', 'world', 'oath', 'party', 'whisper'];
+const PARTY_OPS = ['invite', 'accept', 'decline', 'leave', 'kick', 'lead', 'disband'];
+const DUEL_OPS = ['challenge', 'accept', 'decline', 'forfeit'];
+const TRADE_OPS = ['request', 'accept', 'decline', 'offer', 'lock', 'unlock', 'confirm', 'cancel'];
+
 const V = {
   hello: (m) => str(m.name ?? '', 40) && str(m.oath ?? '', 16) && str(m.cls ?? '', 16) && optStr(m.token, 80)
     && { t: 'hello', name: m.name ?? '', oath: m.oath ?? '', cls: m.cls ?? '', token: m.token ?? undefined },
@@ -15,7 +21,16 @@ const V = {
     && (m.aim === undefined || m.aim === null || vec3(m.aim)) && (m.dir === undefined || m.dir === null || vec2(m.dir))
     && { t: 'cast', slot: m.slot, target: m.target ?? null, aim: m.aim ? { x: m.aim.x, y: m.aim.y, z: m.aim.z } : null, dir: m.dir ? { x: m.dir.x, z: m.dir.z } : null },
   target: (m) => optStr(m.id, 48) && { t: 'target', id: m.id ?? null },
-  chat: (m) => str(m.text, 400) && (m.channel === undefined || ['say', 'world', 'oath'].includes(m.channel)) && { t: 'chat', text: m.text, channel: m.channel ?? 'say' },
+  chat: (m) => str(m.text, 400) && (m.channel === undefined || CHANNELS.includes(m.channel)) && optStr(m.to, 48) && (m.channel !== 'whisper' || str(m.to, 48))
+    && { t: 'chat', text: m.text, channel: m.channel ?? 'say', to: m.to ?? undefined },
+  // social (shared/protocol.js "SOCIAL"): op whitelist per type; target = entity id or player name, from = inviter id
+  party: (m) => oneOf(m.op, PARTY_OPS) && optStr(m.target, 48) && optStr(m.from, 48) && { t: 'party', op: m.op, target: m.target ?? undefined, from: m.from ?? undefined },
+  duel: (m) => oneOf(m.op, DUEL_OPS) && optStr(m.target, 48) && optStr(m.from, 48) && { t: 'duel', op: m.op, target: m.target ?? undefined, from: m.from ?? undefined },
+  trade: (m) => oneOf(m.op, TRADE_OPS) && optStr(m.target, 48) && optStr(m.from, 48)
+    && (m.items === undefined || (Array.isArray(m.items) && m.items.length <= 6 && m.items.every((i) => str(i, 48))))
+    && (m.gold === undefined || (Number.isInteger(m.gold) && m.gold >= 0 && m.gold <= 1e9))
+    && { t: 'trade', op: m.op, target: m.target ?? undefined, from: m.from ?? undefined, items: m.items ? [...m.items] : undefined, gold: m.gold ?? undefined },
+  pvp: (m) => typeof m.on === 'boolean' && { t: 'pvp', on: m.on },
   interact: (m) => str(m.id, 64) && optStr(m.option, 32) && { t: 'interact', id: m.id, option: m.option ?? undefined },
   dialog: (m) => str(m.npc, 64) && str(m.option, 32) && { t: 'dialog', npc: m.npc, option: m.option },
   travel: (m) => str(m.shrine, 16) && { t: 'travel', shrine: m.shrine },
