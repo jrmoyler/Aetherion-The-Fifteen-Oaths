@@ -1,6 +1,26 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "(cd runtime/ability-matrix && npm ci) && (cd runtime/ability-matrix/packs/sandbox && npm ci)",
-  "buildCommand": "npm run build:daybreak",
-  "outputDirectory": "dist/daybreak"
+  "installCommand": "npm ci --prefix game",
+  "buildCommand": "npm --prefix game run build",
+  "outputDirectory": "game/dist",
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        }
+      ]
+    }
+  ]
 }

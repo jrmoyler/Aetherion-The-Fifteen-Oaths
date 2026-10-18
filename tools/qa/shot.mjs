@@ -8,7 +8,7 @@ page.on('console', (m) => { if (['error', 'warning'].includes(m.type())) console
 page.on('pageerror', (e) => console.log('[pageerror]', e.message));
 await page.goto(url, { waitUntil: 'load' });
 await page.waitForTimeout(+wait);
-await page.screenshot({ path: out });
+await page.screenshot({ path: out, timeout: 240000 });
 const info = await page.evaluate(() => { const c = window.__aetherion; return c ? { fps: c.engine.getFps().toFixed(1), meshes: c.scene.meshes.length, active: c.scene.getActiveMeshes().length, draw: c.engine._drawCalls?.current } : null; });
 console.log('info', JSON.stringify(info));
 await browser.close();

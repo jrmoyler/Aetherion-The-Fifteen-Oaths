@@ -1,4 +1,123 @@
 {
+ "boar": {
+  "id": "boar",
+  "file": "game/public/assets/creatures/boar.glb",
+  "bytes": 1648048,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 33,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 15988,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.068,
+     0.05,
+     0.04,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.014,
+     0.01,
+     0.009,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.644,
+     0.552,
+     0.392,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.434,
+     0.068,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.434,
+     0.068
+    ]
+   }
+  },
+  "bones": 33,
+  "bbox_min": [
+   -0.284,
+   -1.144,
+   -0.008
+  ],
+  "bbox_max": [
+   0.283,
+   0.79,
+   1.297
+  ],
+  "height": 1.297,
+  "faces_plus_z": true,
+  "death_end_height": 0.618,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/boar.png"
+ },
  "construct": {
   "id": "construct",
   "file": "game/public/assets/creatures/construct.glb",
@@ -812,6 +931,244 @@
   "ok": true,
   "review": "tools/blender/creatures/review/hound-oath-01.png"
  },
+ "raptor": {
+  "id": "raptor",
+  "file": "game/public/assets/creatures/raptor.glb",
+  "bytes": 1816748,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 27,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 12180,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.045,
+     0.042,
+     0.034,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.012,
+     0.011,
+     0.01,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.624,
+     0.546,
+     0.418,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.456,
+     0.361,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.456,
+     0.361,
+     1
+    ]
+   }
+  },
+  "bones": 27,
+  "bbox_min": [
+   -0.242,
+   -1.207,
+   0.002
+  ],
+  "bbox_max": [
+   0.242,
+   1.804,
+   1.892
+  ],
+  "height": 1.892,
+  "faces_plus_z": true,
+  "death_end_height": 0.417,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/raptor.png"
+ },
+ "serpent": {
+  "id": "serpent",
+  "file": "game/public/assets/creatures/serpent.glb",
+  "bytes": 1575092,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 24,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 11500,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.027,
+     0.042,
+     0.03,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.01,
+     0.018,
+     0.014,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.672,
+     0.591,
+     0.392,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.098,
+     0.658,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.098,
+     0.658,
+     1
+    ]
+   }
+  },
+  "bones": 24,
+  "bbox_min": [
+   -0.455,
+   -0.937,
+   -0.021
+  ],
+  "bbox_max": [
+   0.4,
+   2.04,
+   1.407
+  ],
+  "height": 1.407,
+  "faces_plus_z": true,
+  "death_end_height": 1.178,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/serpent.png"
+ },
  "spider": {
   "id": "spider",
   "file": "game/public/assets/creatures/spider.glb",
@@ -931,6 +1288,125 @@
   "ok": true,
   "review": "tools/blender/creatures/review/spider.png"
  },
+ "stag": {
+  "id": "stag",
+  "file": "game/public/assets/creatures/stag.glb",
+  "bytes": 1661964,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 33,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 14352,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.102,
+     0.068,
+     0.042,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.027,
+     0.019,
+     0.014,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.687,
+     0.597,
+     0.434,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.745,
+     0.352,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.745,
+     0.352
+    ]
+   }
+  },
+  "bones": 33,
+  "bbox_min": [
+   -0.509,
+   -0.924,
+   0.002
+  ],
+  "bbox_max": [
+   0.519,
+   0.696,
+   2.096
+  ],
+  "height": 2.096,
+  "faces_plus_z": true,
+  "death_end_height": 0.618,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/stag.png"
+ },
  "treant": {
   "id": "treant",
   "file": "game/public/assets/creatures/treant.glb",
@@ -1049,5 +1525,243 @@
   "issues": [],
   "ok": true,
   "review": "tools/blender/creatures/review/treant.png"
+ },
+ "wisp": {
+  "id": "wisp",
+  "file": "game/public/assets/creatures/wisp.glb",
+  "bytes": 995352,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 30,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 4254,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.042,
+     0.048,
+     0.068,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.102,
+     0.117,
+     0.162,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.392,
+     0.413,
+     0.479,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.578,
+     0.479,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.578,
+     0.479,
+     1
+    ]
+   }
+  },
+  "bones": 30,
+  "bbox_min": [
+   -0.644,
+   -0.561,
+   0.412
+  ],
+  "bbox_max": [
+   0.644,
+   0.797,
+   1.6
+  ],
+  "height": 1.6,
+  "faces_plus_z": true,
+  "death_end_height": 0.639,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/wisp.png"
+ },
+ "wraith": {
+  "id": "wraith",
+  "file": "game/public/assets/creatures/wraith.glb",
+  "bytes": 1595980,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 45,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 10934,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.042,
+     0.042,
+     0.048,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.012,
+     0.012,
+     0.016,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.485,
+     0.445,
+     0.352,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.275,
+     0.716,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.275,
+     0.716,
+     1
+    ]
+   }
+  },
+  "bones": 45,
+  "bbox_min": [
+   -0.722,
+   -0.789,
+   -0.23
+  ],
+  "bbox_max": [
+   0.736,
+   0.401,
+   2.386
+  ],
+  "height": 2.386,
+  "faces_plus_z": true,
+  "death_end_height": 1.642,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/wraith.png"
  }
 }

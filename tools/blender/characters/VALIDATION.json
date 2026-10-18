@@ -1,7 +1,7 @@
 {
  "oath-01-ninja": {
   "id": "oath-01-ninja",
-  "bytes": 2940228,
+  "bytes": 2890084,
   "tris": 24025,
   "max_influences": 4,
   "bones": 23,
@@ -53,8 +53,8 @@
  },
  "oath-01-sorcerer": {
   "id": "oath-01-sorcerer",
-  "bytes": 2703132,
-  "tris": 26053,
+  "bytes": 2527100,
+  "tris": 26050,
   "max_influences": 4,
   "bones": 23,
   "missing_bones": [],
@@ -99,14 +99,14 @@
   "bbox_max": [
    0.951,
    1.0,
-   1.881
+   1.895
   ],
   "ok": true
  },
  "oath-02-ninja": {
   "id": "oath-02-ninja",
-  "bytes": 3315392,
-  "tris": 24016,
+  "bytes": 3025868,
+  "tris": 24019,
   "max_influences": 4,
   "bones": 23,
   "missing_bones": [],
@@ -151,14 +151,14 @@
   "bbox_max": [
    0.951,
    1.0,
-   1.826
+   1.823
   ],
   "ok": true
  },
  "oath-02-sorcerer": {
   "id": "oath-02-sorcerer",
-  "bytes": 2732220,
-  "tris": 24007,
+  "bytes": 2450576,
+  "tris": 24003,
   "max_influences": 4,
   "bones": 23,
   "missing_bones": [],
@@ -203,7 +203,7 @@
   "bbox_max": [
    0.951,
    1.0,
-   1.968
+   1.976
   ],
   "ok": true
  },
@@ -1195,6 +1195,58 @@
   ],
   "ok": true
  },
+ "oath-13-ninja": {
+  "id": "oath-13-ninja",
+  "bytes": 2258916,
+  "tris": 24070,
+  "max_influences": 4,
+  "bones": 23,
+  "missing_bones": [],
+  "clips": 23,
+  "clip_names": [
+   "attack_1",
+   "attack_2",
+   "attack_3",
+   "backpedal",
+   "cast_aoe",
+   "cast_channel",
+   "cast_release",
+   "death",
+   "dodge",
+   "emote_bow",
+   "hit",
+   "idle",
+   "idle_combat",
+   "interact",
+   "jump_loop",
+   "jump_start",
+   "land",
+   "run",
+   "sit",
+   "sprint",
+   "strafe_l",
+   "strafe_r",
+   "walk"
+  ],
+  "missing_clips": [],
+  "sockets": [
+   "socket.head",
+   "socket.hand.L",
+   "socket.hand.R",
+   "socket.back"
+  ],
+  "bbox_min": [
+   -0.951,
+   -1.0,
+   -1.0
+  ],
+  "bbox_max": [
+   0.951,
+   1.0,
+   2.013
+  ],
+  "ok": true
+ },
  "oath-13-sorcerer": {
   "id": "oath-13-sorcerer",
   "bytes": 2126888,
@@ -1244,6 +1296,214 @@
    0.951,
    1.0,
    1.762
+  ],
+  "ok": true
+ },
+ "oath-14-ninja": {
+  "id": "oath-14-ninja",
+  "bytes": 2269320,
+  "tris": 25053,
+  "max_influences": 4,
+  "bones": 23,
+  "missing_bones": [],
+  "clips": 23,
+  "clip_names": [
+   "attack_1",
+   "attack_2",
+   "attack_3",
+   "backpedal",
+   "cast_aoe",
+   "cast_channel",
+   "cast_release",
+   "death",
+   "dodge",
+   "emote_bow",
+   "hit",
+   "idle",
+   "idle_combat",
+   "interact",
+   "jump_loop",
+   "jump_start",
+   "land",
+   "run",
+   "sit",
+   "sprint",
+   "strafe_l",
+   "strafe_r",
+   "walk"
+  ],
+  "missing_clips": [],
+  "sockets": [
+   "socket.head",
+   "socket.hand.L",
+   "socket.hand.R",
+   "socket.back"
+  ],
+  "bbox_min": [
+   -0.951,
+   -1.0,
+   -1.0
+  ],
+  "bbox_max": [
+   0.951,
+   1.0,
+   1.777
+  ],
+  "ok": true
+ },
+ "oath-14-sorcerer": {
+  "id": "oath-14-sorcerer",
+  "bytes": 2379608,
+  "tris": 27070,
+  "max_influences": 4,
+  "bones": 23,
+  "missing_bones": [],
+  "clips": 23,
+  "clip_names": [
+   "attack_1",
+   "attack_2",
+   "attack_3",
+   "backpedal",
+   "cast_aoe",
+   "cast_channel",
+   "cast_release",
+   "death",
+   "dodge",
+   "emote_bow",
+   "hit",
+   "idle",
+   "idle_combat",
+   "interact",
+   "jump_loop",
+   "jump_start",
+   "land",
+   "run",
+   "sit",
+   "sprint",
+   "strafe_l",
+   "strafe_r",
+   "walk"
+  ],
+  "missing_clips": [],
+  "sockets": [
+   "socket.head",
+   "socket.hand.L",
+   "socket.hand.R",
+   "socket.back"
+  ],
+  "bbox_min": [
+   -0.951,
+   -1.0,
+   -1.0
+  ],
+  "bbox_max": [
+   0.951,
+   1.0,
+   1.721
+  ],
+  "ok": true
+ },
+ "oath-15-ninja": {
+  "id": "oath-15-ninja",
+  "bytes": 2796772,
+  "tris": 25828,
+  "max_influences": 4,
+  "bones": 23,
+  "missing_bones": [],
+  "clips": 23,
+  "clip_names": [
+   "attack_1",
+   "attack_2",
+   "attack_3",
+   "backpedal",
+   "cast_aoe",
+   "cast_channel",
+   "cast_release",
+   "death",
+   "dodge",
+   "emote_bow",
+   "hit",
+   "idle",
+   "idle_combat",
+   "interact",
+   "jump_loop",
+   "jump_start",
+   "land",
+   "run",
+   "sit",
+   "sprint",
+   "strafe_l",
+   "strafe_r",
+   "walk"
+  ],
+  "missing_clips": [],
+  "sockets": [
+   "socket.head",
+   "socket.hand.L",
+   "socket.hand.R",
+   "socket.back"
+  ],
+  "bbox_min": [
+   -0.951,
+   -1.0,
+   -1.0
+  ],
+  "bbox_max": [
+   0.951,
+   1.0,
+   1.741
+  ],
+  "ok": true
+ },
+ "oath-15-sorcerer": {
+  "id": "oath-15-sorcerer",
+  "bytes": 2425504,
+  "tris": 27009,
+  "max_influences": 4,
+  "bones": 23,
+  "missing_bones": [],
+  "clips": 23,
+  "clip_names": [
+   "attack_1",
+   "attack_2",
+   "attack_3",
+   "backpedal",
+   "cast_aoe",
+   "cast_channel",
+   "cast_release",
+   "death",
+   "dodge",
+   "emote_bow",
+   "hit",
+   "idle",
+   "idle_combat",
+   "interact",
+   "jump_loop",
+   "jump_start",
+   "land",
+   "run",
+   "sit",
+   "sprint",
+   "strafe_l",
+   "strafe_r",
+   "walk"
+  ],
+  "missing_clips": [],
+  "sockets": [
+   "socket.head",
+   "socket.hand.L",
+   "socket.hand.R",
+   "socket.back"
+  ],
+  "bbox_min": [
+   -0.951,
+   -1.0,
+   -1.0
+  ],
+  "bbox_max": [
+   0.951,
+   1.0,
+   1.918
   ],
   "ok": true
  }

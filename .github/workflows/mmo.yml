@@ -1,0 +1,31 @@
+name: Aetherion MMO
+
+on:
+  pull_request:
+    paths: ['game/**', 'server/**', 'shared/**', 'tools/generate-mmo-abilities.mjs', '.github/workflows/mmo.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install
+        run: npm ci --prefix server && npm ci --prefix game
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      - name: Ability catalog is in sync with the castable registry
+        run: node tools/generate-mmo-abilities.mjs && git diff --exit-code shared/abilities.generated.js
+      - name: Simulation + server tests
+        run: npm --prefix server test
+      - name: Client production build
+        run: npm --prefix game run build

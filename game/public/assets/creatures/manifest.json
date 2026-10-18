@@ -1,5 +1,23 @@
 [
  {
+  "id": "boar",
+  "archetype": "boar",
+  "oath": null,
+  "file": "/assets/creatures/boar.glb",
+  "bytes": 1648048,
+  "tris": 15988,
+  "height": 1.3,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
   "id": "construct",
   "archetype": "construct",
   "oath": null,
@@ -124,6 +142,42 @@
   ]
  },
  {
+  "id": "raptor",
+  "archetype": "raptor",
+  "oath": null,
+  "file": "/assets/creatures/raptor.glb",
+  "bytes": 1816748,
+  "tris": 12180,
+  "height": 1.9,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
+  "id": "serpent",
+  "archetype": "serpent",
+  "oath": null,
+  "file": "/assets/creatures/serpent.glb",
+  "bytes": 1575092,
+  "tris": 11500,
+  "height": 1.4,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
   "id": "spider",
   "archetype": "spider",
   "oath": null,
@@ -142,6 +196,24 @@
   ]
  },
  {
+  "id": "stag",
+  "archetype": "stag",
+  "oath": null,
+  "file": "/assets/creatures/stag.glb",
+  "bytes": 1661964,
+  "tris": 14352,
+  "height": 2.1,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
   "id": "treant",
   "archetype": "treant",
   "oath": null,
@@ -149,6 +221,42 @@
   "bytes": 1463108,
   "tris": 14088,
   "height": 3.6,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
+  "id": "wisp",
+  "archetype": "wisp",
+  "oath": null,
+  "file": "/assets/creatures/wisp.glb",
+  "bytes": 995352,
+  "tris": 4254,
+  "height": 1.6,
+  "clips": [
+   "idle",
+   "walk",
+   "run",
+   "attack",
+   "hit",
+   "death",
+   "roar"
+  ]
+ },
+ {
+  "id": "wraith",
+  "archetype": "wraith",
+  "oath": null,
+  "file": "/assets/creatures/wraith.glb",
+  "bytes": 1595980,
+  "tris": 10934,
+  "height": 2.4,
   "clips": [
    "idle",
    "walk",

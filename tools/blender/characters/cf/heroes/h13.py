@@ -40,12 +40,12 @@ def theatre_ninja(F, b, spec):
     yf = K.body_extent(b, zt, 0, 'front'); yb = K.body_extent(b, zt, 0, 'back')
     ymid = (yf + yb) / 2
     xr = abs(K.body_extent(b, zt, 0, 'right', y=ymid, axis='x'))
-    ap = K.apron(F, b, tail, zt, J['KL'][2] - 0.08, 0.10 * w, yf - 0.025, 0.01, 0.4, 0.05).moved((0.07 * w, 0, 0))
+    ap = K.apron(F, b, tail, zt, J['KL'][2] - 0.08, 0.10 * w, yf - 0.025, 0.016, 0.4, 0.05).moved((0.07 * w, 0, 0))
     F.solid(tail, ap.inter(S.halfspace(v3(0, 0, J['KL'][2] + 0.1), (0.7, 0, -1)), 0.003), 0.004)
-    ap2 = K.apron(F, b, tail, zt, J['KL'][2] - 0.02, 0.13 * w, 2 * ymid - yb - 0.025, 0.01, 0.45, 0.05).mirrored(1, ymid)
+    ap2 = K.apron(F, b, tail, zt, J['KL'][2] - 0.02, 0.13 * w, 2 * ymid - yb - 0.025, 0.016, 0.45, 0.05).mirrored(1, ymid)
     F.solid(tail, ap2.inter(S.halfspace(v3(0, 0, J['KL'][2] + 0.15), (0.6, 0, -1)), 0.003), 0.004)
     F.paint(tailp, S.halfspace(v3(0.04, 0, 0), (-1, 0, 0)).inter(S.sphere(v3(0, ymid, zt - 0.3), 0.5), 0), only=[tail])
-    F.paint(trim, S.Prim(lambda P: 0.006 - np.abs((P[..., 2] - (J['KL'][2] + 0.1)) - 0.7 * P[..., 0]) * 0.8, (-0.4, -0.5, 0.2), (0.4, 0.5, 1.2)), only=[tail])
+    pass
     K.stand_collar(F, b, collar, height=0.11, flare=0.03, r0=0.075, open_front=30, th=0.008)
     for sd, fp in (('L', frL), ('R', frR)):
         a, c = b.bones['forearm.' + sd]

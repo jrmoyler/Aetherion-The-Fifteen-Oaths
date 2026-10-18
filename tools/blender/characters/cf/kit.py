@@ -295,6 +295,7 @@ def cape(F, b, pid, top_z, bottom_z, width_top, width_bot, depth=0.02, thick=0.0
 
 def apron(F, b, pid, top_z, bottom_z, half_w, front_y, thick=0.010, curve_r=0.35, flare=0.04):
     """Flat-ish front panel hanging from the waist (curved around a vertical axis behind it)."""
+    thick = max(thick, 0.015)
     def fn(P):
         z = P[..., 2]
         t = np.clip((top_z - z) / (top_z - bottom_z), 0, 1)
@@ -416,6 +417,8 @@ def body_extent(b, z, x=0.0, direction='front', y=0.0, axis='y'):
         P = np.stack([ts, np.full_like(ts, y), np.full_like(ts, z)], axis=-1)
     D = np.full(len(ts), 1.0, dtype=np.float32)
     for prim, bone, k in b.anatomy:
+        if bone.split('.')[0] in ('upperarm', 'forearm', 'hand'):
+            continue
         if prim.lo[2] - 0.02 <= z <= prim.hi[2] + 0.02:
             D = np.minimum(D, prim(P))
     inside = np.nonzero(D < 0)[0]

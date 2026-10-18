@@ -188,8 +188,8 @@ def build(oath=None):
             coil = env(t, [(0, 0), (0.35, 1), (0.45, -0.2), (0.65, -0.2), (1, 0)])
             strike = env(t, [(0, 0), (0.36, 0), (0.46, 1), (0.62, 1), (0.95, 0)])
             for j, b in enumerate(neck_bones):
-                P.r(b, x=0.2 * coil - 0.17 * strike * (1.0 if j < 3 else 0.5))
-            P.r("head", x=0.2 * coil - 0.25 * strike)
+                P.r(b, x=0.16 * coil - 0.09 * strike * (1.0 if j < 3 else 0.5))
+            P.r("head", x=0.15 * coil - 0.08 * strike)
             P.r("jaw", x=-0.9 * env(t, [(0, 0), (0.3, 0.6), (0.45, 1.0), (0.5, 0.2), (0.7, 0.1), (1, 0)]))
             for s in ("L", "R"):
                 P.r(f"hood_{s}", z=(0.5 if s == "L" else -0.5) * coil)

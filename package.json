@@ -18,7 +18,14 @@
     "dev:daybreak": "node tools/run-daybreak.mjs dev",
     "build:daybreak": "node tools/run-daybreak.mjs build",
     "preview:daybreak": "node tools/run-daybreak.mjs preview",
-    "test:daybreak": "node --test app/daybreak/*.test.mjs"
+    "test:daybreak": "node --test app/daybreak/*.test.mjs",
+    "mmo:install": "npm ci --prefix game && npm ci --prefix server",
+    "mmo:dev": "npm --prefix game run dev",
+    "mmo:build": "npm --prefix game run build",
+    "mmo:server": "npm --prefix server start",
+    "mmo:start": "npm run mmo:build && npm run mmo:server",
+    "mmo:test": "npm --prefix server test",
+    "mmo:abilities": "node tools/generate-mmo-abilities.mjs"
   },
   "engines": {
     "node": ">=22.12.0"
