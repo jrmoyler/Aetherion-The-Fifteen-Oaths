@@ -8,6 +8,8 @@ import { hotbarFor, ABILITY_BY_ID } from '@shared/abilities.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { HitFlashes, StatusVisuals } from './feedback.js';
 import { createArenas } from './arenas.js';
+import { ActionBuffer } from './timing.js';
+import { replaceHotbar } from './loadout.js';
 
 const ELEMENT_FLASH = {
   fire: '#ff8a3c', frost: '#bfefff', storm: '#cfe0ff', water: '#8fe6ff', earth: '#ffd7a0', wind: '#e6fbff', nature: '#c8ff9a', poison: '#b6ff3d',
@@ -27,7 +29,12 @@ export async function init(ctx) {
   const remoteFx = new Map(); // `${src}|${slot}` -> t  (to skip release echoes)
   const recentFxBySrc = new Map(); // src -> t (a cast effect already showed an impact)
   const lastImpactAt = new Map(); // dst -> t
-  let toastAt = 0;
+  let toastAt = -Infinity;
+  const actionBuffer = new ActionBuffer(180);
+  let releaseTimer = null;
+  let pruneAt = 0;
+  const cancelRelease = () => { clearTimeout(releaseTimer); releaseTimer = null; };
+  ctx.scene.onDisposeObservable?.addOnce(() => { cancelRelease(); actionBuffer.clear(); });
 
   const bus = ctx.bus;
   const actors = () => ctx.actors;
@@ -39,10 +46,24 @@ export async function init(ctx) {
   const groundY = (x, z, fallback = 0) => { try { const h = ctx.world?.heightAt?.(x, z); return Number.isFinite(h) ? h : fallback; } catch { return fallback; } };
   const toast = (text) => { const t = nowMs(); if (t - toastAt < 900) return; toastAt = t; try { ctx.ui?.toast?.(text, 'warn'); } catch { /* ui optional */ } };
 
-  function setHotbar(character) {
-    if (!character) return;
-    state.character = character;
-    try { state.hotbar.splice(0, state.hotbar.length, ...hotbarFor(character.oath, character.cls)); } catch (err) { console.warn('[combat] hotbar', err); }
+  function setHotbar(character, selectedIds, authoritative) {
+    if (!character && !authoritative) return false;
+    if (character) state.character = character;
+    try {
+      const next = authoritative ?? hotbarFor(character.oath, character.cls, selectedIds);
+      if (!replaceHotbar(state.hotbar, next)) return false;
+      // The server confirmed a different kit. Retire only the old kit's prediction;
+      // repeated snapshots of the same kit must never interrupt a cast.
+      cancelRelease(); actionBuffer.clear();
+      for (const entry of localCasts.values()) entry.handle?.stop?.();
+      localCasts.clear(); state.castBar = null; state.gcdUntil = 0; state.combo = 0;
+      for (let slot = 0; slot < 6; slot++) {
+        state.cooldowns[slot] = 0;
+        bus.emit('combat:cooldown', { slot, until: 0, duration: 0 });
+      }
+      bus.emit('combat:hotbar', { hotbar: state.hotbar, loadout: state.hotbar.slice(1).map((ab) => ab.id) });
+      return true;
+    } catch (err) { console.warn('[combat] hotbar', err); return false; }
   }
   setHotbar(ctx.character);
 
@@ -66,10 +87,18 @@ export async function init(ctx) {
   /** Nearest enemy (creature or attackable player) favouring the camera's facing, like actors.nearestHostile. */
   function nearestEnemy(maxDist) {
     const p = player(); if (!p) return null;
-    let best = ctx.actors?.nearestHostile?.(maxDist) ?? null;
-    if (best && isFriendlyPet(best)) best = null;
-    let bd = best ? Vector3.Distance(best.position, p.position) : Infinity;
-    try { ctx.actors?.forEach?.((a) => { if (a.kind === 'player' && a.visible !== false && isEnemy(a)) { const d = Vector3.Distance(a.position, p.position); if (d <= maxDist && d < bd) { bd = d; best = a; } } }); } catch { /* stub */ }
+    let best = null, score = Infinity;
+    const forward = camForward();
+    ctx.actors?.forEach?.((a) => {
+      if (a.visible === false || !isEnemy(a)) return;
+      const dx = a.position.x - p.position.x, dz = a.position.z - p.position.z;
+      const distance = Math.hypot(dx, dz);
+      if (distance > maxDist || Math.abs(a.position.y - p.position.y) > 8) return;
+      if (ctx.collision?.blocked?.(p.position.x, p.position.z, a.position.x, a.position.z, p.position.y + 1)) return;
+      const facing = distance > 0.01 ? (dx * forward.x + dz * forward.z) / distance : 1;
+      const candidate = distance * (1 + (1 - facing) * 0.65);
+      if (candidate < score) { score = candidate; best = a; }
+    });
     return best;
   }
   function cycleTarget() {
@@ -143,7 +172,7 @@ export async function init(ctx) {
       if (slot > 0 && state.gcdUntil > now + 40) return false;
       if (!manaOk(ab)) { toast('Not enough mana.'); return false; }
       let tgt = targetActor();
-      if (tgt && tgt.kind !== 'mob' && !isEnemy(tgt)) tgt = null; // a selected friendly/neutral player is never attacked
+      if (tgt && !isEnemy(tgt)) tgt = null; // friendly players, neutral NPCs and allied pets are never attacked
       const melee = ab.shape === 'melee';
       if (tgt && Vector3.Distance(tgt.position, p.position) > (ab.range ?? 12) + (melee ? 1.5 : 10)) tgt = melee ? null : tgt;
       if (!tgt && (melee || ab.kind === 'basic')) { const n = nearestEnemy((ab.range ?? 3) + (melee ? 1.8 : 0)); if (n) { tgt = n; setTarget(n.id); } }
@@ -156,7 +185,8 @@ export async function init(ctx) {
       else if (castTime >= 0.4) anim = 'cast_channel';
       else anim = ab.shape === 'zone' ? 'cast_aoe' : 'cast_release';
       try { p.playAnim?.(anim, { speed: 1 }); p.lastActionAt = now / 1000; } catch { /* optional */ }
-      if (castTime >= 0.4) setTimeout(() => { try { p.playAnim?.(ab.shape === 'zone' ? 'cast_aoe' : 'cast_release'); } catch { /* ignore */ } }, castTime * 1000);
+      cancelRelease();
+      if (castTime >= 0.4) releaseTimer = setTimeout(() => { releaseTimer = null; if (p.alive === false || p !== player()) return; try { p.playAnim?.(ab.shape === 'zone' ? 'cast_aoe' : 'cast_release'); } catch { /* ignore */ } }, castTime * 1000);
       // visuals
       const element = ab.element ?? elementOfActor(p) ?? OATH_BY_ID[state.character?.oath]?.element ?? 'arcane';
       const ult = slot === 5;
@@ -180,10 +210,29 @@ export async function init(ctx) {
     } catch (err) { console.warn('[combat] cast failed', err); return false; }
   }
 
+  function readyAt(slot) {
+    return Math.max(state.cooldowns[slot] ?? 0, slot > 0 ? state.gcdUntil : 0, state.castBar?.end ?? 0);
+  }
+  // A single deliberate press just before recovery completes should not disappear.
+  function requestCast(slot) {
+    const now = nowMs(), remaining = readyAt(slot) - now;
+    if (remaining > 0 && remaining <= actionBuffer.windowMs && player()?.alive !== false) {
+      actionBuffer.push(slot, now); return false;
+    }
+    actionBuffer.clear();
+    return cast(slot);
+  }
+
   // ------------------------------------------------------------------------------------------ server events
   function onYou(you) {
     if (!you) return;
     state.you = you;
+    const character = state.character ?? ctx.character;
+    if (Array.isArray(you.hotbar) && you.hotbar.length === 6 && you.hotbar.every((ab) => ab?.id)) {
+      setHotbar(character, you.loadout, you.hotbar);
+    } else if (Array.isArray(you.loadout) && character) {
+      setHotbar(character, you.loadout);
+    }
     if (Array.isArray(you.cooldowns) && ctx.net?.serverTime) {
       let st = 0; try { st = ctx.net.serverTime(); } catch { st = 0; }
       const now = nowMs();
@@ -232,14 +281,8 @@ export async function init(ctx) {
     const hy = Number.isFinite(e.y) ? e.y : (dst?.position?.y ?? 0) + (dst?.headY ?? 1.6);
     const selfDst = isSelf(e.dst); const selfSrc = isSelf(e.src);
     const element = e.element ?? null;
-    // i-frames: show a dodge instead of a hit
+    // Server hit events are authoritative. Local dodge prediction must never hide damage.
     const p = player();
-    const dodging = selfDst && p && (p.dodging || p.controller?.iframes);
-    if (dodging && !e.dot) {
-      bus.emit('combat:floater', { x: hx, y: hy, z: hz, text: 'Dodge', kind: 'miss', taken: true });
-      ctx.vfx?.play?.(`dodge:${element ?? 'wind'}`, { caster: p, follow: () => p.position });
-      return;
-    }
     const amount = Math.round(e.amount ?? 0);
     if (amount <= 0 && !e.absorbed) bus.emit('combat:floater', { x: hx, y: hy, z: hz, text: 'Miss', kind: 'miss', element, taken: selfDst });
     else if (amount > 0) bus.emit('combat:floater', { x: hx, y: hy, z: hz, text: String(amount), kind: e.crit ? 'crit' : 'damage', element, taken: selfDst, dot: !!e.dot });
@@ -273,6 +316,7 @@ export async function init(ctx) {
         break;
       }
       case 'death': {
+        if (isSelf(e.id)) { cancelRelease(); actionBuffer.clear(); state.castBar = null; }
         const a = actorOf(e.id);
         statuses.clear(e.id);
         if (a) ctx.vfx?.play?.(`death:${elementOfActor(a) ?? 'shadow'}`, { pos: a.position.clone() });
@@ -282,13 +326,14 @@ export async function init(ctx) {
       case 'level': { const a = actorOf(e.id); if (a) ctx.vfx?.play?.('levelup', { pos: a.position.clone(), caster: a, local: isSelf(e.id) }); break; }
       case 'interrupt': {
         const a = actorOf(e.id);
-        if (isSelf(e.id)) { const lc = localCasts.get(e.slot); lc?.handle?.stop?.(); state.castBar = null; bus.emit('combat:cast', { slot: e.slot, castTime: 0, interrupted: true }); }
+        if (isSelf(e.id)) { cancelRelease(); actionBuffer.clear(); const lc = localCasts.get(e.slot); lc?.handle?.stop?.(); state.castBar = null; bus.emit('combat:cast', { slot: e.slot, castTime: 0, interrupted: true }); }
         else a?._fxCast?.stop?.();
         if (a) bus.emit('combat:floater', { x: a.position.x, y: a.position.y + (a.headY ?? 1.7) + 0.3, z: a.position.z, text: 'Interrupted', kind: 'status' });
         break;
       }
       case 'fail': {
         if (!isSelf(e.id)) break;
+        cancelRelease();
         const lc = localCasts.get(e.slot);
         if (lc && nowMs() - lc.t < 2000) { lc.handle?.stop?.(); localCasts.delete(e.slot); }
         if (e.reason !== 'cooldown') { state.cooldowns[e.slot] = 0; bus.emit('combat:cooldown', { slot: e.slot, until: 0, duration: 0 }); }
@@ -326,10 +371,18 @@ export async function init(ctx) {
       if (inp) {
         if (inp.consume('target')) cycleTarget();
         if (inp.consume('click')) clickPick();
-        for (let s = 0; s < 6; s++) if (inp.consume(`slot${s}`)) cast(s);
+        for (let s = 0; s < 6; s++) if (inp.consume(`slot${s}`)) requestCast(s);
+        const queued = actionBuffer.take(nowMs(), (slot) => readyAt(slot) <= nowMs());
+        if (queued !== null) cast(queued);
       }
       if (state.target != null && !actorOf(state.target)) setTarget(null);
       if (state.castBar && nowMs() > state.castBar.end + 100) state.castBar = null;
+      const now = nowMs();
+      if (now >= pruneAt) {
+        pruneAt = now + 5000;
+        for (const map of [remoteFx, recentFxBySrc, lastImpactAt]) for (const [id, time] of map) if (now - time > 15000) map.delete(id);
+        for (const [slot, entry] of localCasts) if (now - entry.t > 15000) localCasts.delete(slot);
+      }
       flashes.update(dt);
       statuses.update();
     } catch (err) { console.warn('[combat] update', err); }
@@ -340,7 +393,7 @@ export async function init(ctx) {
     get target() { return state.target; },
     set target(id) { setTarget(id); },
     setTarget,
-    cast,
+    cast: requestCast,
     cooldowns: state.cooldowns,
     get castBar() { return state.castBar; },
     /** Remaining cooldown seconds for a slot (client view). */

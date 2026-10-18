@@ -115,6 +115,8 @@ export function createHud(ui) {
       s.addEventListener('click', () => { ctx.input?.press?.(`slot${i}`); flash(i); });
       s.addEventListener('mouseenter', () => ui.showAbilityTip?.(v, s));
       s.addEventListener('mouseleave', () => ui.hideTip?.());
+      s.addEventListener('focus', () => ui.showAbilityTip?.(v, s));
+      s.addEventListener('blur', () => ui.hideTip?.());
       hotbar.append(s); slotEls.push(s);
       cds[i] = cds[i] || { end: 0, total: 1, active: false };
     });

@@ -1,18 +1,25 @@
-// Generates shared/abilities.generated.js from CASTABLE_REGISTRY.json (the 100 live castables).
+// Generates the Babylon gameplay adaptation from the pinned CASTABLE_REGISTRY.json.
 // Sandbox timings are rescaled into MMO cooldowns / mana costs; source fields are kept for traceability.
 import fs from 'node:fs';
 const reg = JSON.parse(fs.readFileSync(new URL('../CASTABLE_REGISTRY.json', import.meta.url)));
 const elementToOath = Object.fromEntries(reg.elements.map((e) => [e.sourceElementId, e.oathId]));
 const out = {};
-for (const c of reg.castables) {
+const supplement = JSON.parse(fs.readFileSync(new URL('../shared/ability-supplement.json', import.meta.url)));
+const originalIds = new Set(reg.castables.map(c => c.sourceCatalog.uid));
+const seen = new Set();
+for (const c of [...reg.castables, ...supplement.castables]) {
   const s = c.sourceCatalog;
   const set = c.sourcePreset?.settings ?? {};
   const oath = elementToOath[s.element];
+  if (!oath) throw new Error(`Unmapped ability element: ${s.uid} (${s.element})`);
+  if (seen.has(s.uid)) throw new Error(`Duplicate ability uid: ${s.uid}`);
+  seen.add(s.uid);
   const shape = s.kind === 'buff' ? 'self' : s.kind === 'summon' ? 'summon' : (s.cast === 'line' ? 'line' : 'zone');
-  const radius = s.zoneRadius ?? set.zoneRadius ?? set.radius ?? (shape === 'zone' ? 5 : shape === 'line' ? 1.2 : 0);
-  const range = Math.min(30, Math.max(shape === 'self' ? 0 : 8, s.range ?? set.range ?? 18));
+  const radius = shape === 'self' ? 0 : s.zoneRadius ?? set.zoneRadius ?? set.radius ?? (shape === 'zone' ? 5 : shape === 'line' ? 1.2 : 0);
+  const range = shape === 'self' ? 0 : Math.min(30, Math.max(8, s.range ?? set.range ?? 18));
   (out[oath] ??= []).push({
     id: s.uid, name: s.label, element: s.element, kind: s.kind, shape,
+    sourceShape: s.cast ?? s.kind,
     accent: s.accent, range, radius: Math.round(Math.min(9, Math.max(0, radius)) * 10) / 10,
     speed: set.speed ?? null, sourceCooldown: s.cooldown, castAnim: s.castAnim ?? null,
     glyph: s.glyph?.replace(/\s+/g, ' ') ?? null,
@@ -21,8 +28,10 @@ for (const c of reg.castables) {
 // Deterministic kit assignment: ninja prefers line/self, sorcerer prefers zone/summon.
 const kits = {};
 for (const [oath, list] of Object.entries(out)) {
-  const lines = list.filter((a) => a.shape === 'line' || a.shape === 'self');
-  const zones = list.filter((a) => a.shape === 'zone' || a.shape === 'summon' || a.shape === 'ring');
+  // Preserve established default kits; expanded abilities are explicitly equipped.
+  const defaults = list.filter(a => originalIds.has(a.id));
+  const lines = defaults.filter((a) => a.shape === 'line' || a.shape === 'self');
+  const zones = defaults.filter((a) => a.shape === 'zone' || a.shape === 'summon' || a.shape === 'ring');
   const pick = (pref, other) => { const r = [...pref, ...other]; const k = []; for (const a of r) if (!k.includes(a) && k.length < 5) k.push(a); while (k.length < 5) k.push(r[k.length % r.length]); return k; };
   const n = pick(lines, zones), so = pick(zones, lines);
   const scale = (a, slot) => ({

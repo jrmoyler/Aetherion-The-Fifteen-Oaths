@@ -6,6 +6,7 @@ import { VertexBuffer } from '@babylonjs/core/Buffers/buffer.js';
 import { BoundingInfo } from '@babylonjs/core/Culling/boundingInfo.js';
 import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
 import { buildIndices } from './terrainCore.js';
+import { TERRAIN_CACHE_LIMITS, terrainEvictions } from './residency.js';
 import { heightAt } from '@shared/terrain.js';
 
 const ROOT = 1024, EXTENT = 3072;
@@ -18,24 +19,25 @@ export function createTerrain(ctx, pool, material) {
   const indices = buildIndices(res);
   const nodes = new Map(); // key -> node
   const viewers = []; // {x, z, until}
-  let shownCount = 0, built = 0;
+  let shownCount = 0, built = 0, retired = 0;
+  const cacheLimit = TERRAIN_CACHE_LIMITS[quality.name] ?? TERRAIN_CACHE_LIMITS.high;
   const shadowLimit = quality.shadows ? 128 : 0;
   const root = new Mesh('terrainRoot', scene); root.isPickable = false; root.setEnabled(true);
 
   const key = (x0, z0, size) => `${x0},${z0},${size}`;
   function getNode(x0, z0, size) {
     const k = key(x0, z0, size); let n = nodes.get(k);
-    if (!n) { n = { k, x0, z0, size, mesh: null, state: 0, used: 0, minY: 0, maxY: 120, shown: false, caster: false }; nodes.set(k, n); }
+    if (!n) { n = { k, x0, z0, size, mesh: null, state: 0, used: 0, lastUsed: performance.now(), minY: 0, maxY: 120, shown: false, caster: false }; nodes.set(k, n); }
     return n;
   }
 
   function request(n, prio) {
+    n.prio = prio;
     if (n.state !== 0) return;
     n.state = 1;
-    n.prio = prio;
-    pool.run({ t: 'node', x0: n.x0, z0: n.z0, size: n.size, res, skirt: Math.max(2, n.size / 24) }, () => n.prio, () => !nodes.has(n.k))
-      .then((r) => { n.data = r; n.state = 2; pendingMeshes.push(n); })
-      .catch(() => { n.state = 0; });
+    pool.run({ t: 'node', x0: n.x0, z0: n.z0, size: n.size, res, skirt: Math.max(2, n.size / 24) }, () => n.prio, () => nodes.get(n.k) !== n)
+      .then((r) => { if (nodes.get(n.k) !== n) return; n.data = r; n.state = 2; pendingMeshes.push(n); })
+      .catch(() => { if (nodes.get(n.k) === n) n.state = 0; });
   }
   const pendingMeshes = [];
 
@@ -78,7 +80,7 @@ export function createTerrain(ctx, pool, material) {
   let frame = 0;
   // returns true if this subtree is fully covered by shown meshes
   function visit(n, cam, toShow) {
-    n.used = frame;
+    n.used = frame; n.lastUsed = performance.now();
     const d = viewDist(n, cam);
     const split = n.size > minSize && d < n.size * K;
     request(n, d - n.size * 3);
@@ -104,7 +106,7 @@ export function createTerrain(ctx, pool, material) {
     // build meshes under a budget
     const t0 = performance.now(); const budget = ctx.__loading ? 30 : 4;
     pendingMeshes.sort((a, b) => a.prio - b.prio);
-    while (pendingMeshes.length && performance.now() - t0 < budget) { const n = pendingMeshes.shift(); if (nodes.has(n.k)) makeMesh(n); }
+    while (pendingMeshes.length && performance.now() - t0 < budget) { const n = pendingMeshes.shift(); if (nodes.get(n.k) === n && n.state === 2) makeMesh(n); }
     // traverse
     const toShow = [];
     for (let z = -EXTENT; z < EXTENT; z += ROOT) for (let x = -EXTENT; x < EXTENT; x += ROOT) visit(getNode(x, z, ROOT), camPos, toShow);
@@ -116,9 +118,16 @@ export function createTerrain(ctx, pool, material) {
       if (wantCast !== n.caster && n.mesh) { if (wantCast) ctx.render?.addShadowCaster(n.mesh, false); else ctx.render?.removeShadowCaster(n.mesh); n.caster = wantCast; }
     }
     shown = next; shownCount = next.size;
-    // evict stale nodes
-    if (frame % 60 === 0 && nodes.size > 900) {
-      for (const n of nodes.values()) if (!n.shown && frame - n.used > 300 && n.size < ROOT) { n.mesh?.dispose(); nodes.delete(n.k); }
+    // Retire a bounded number of cold meshes each frame. Never evict desired LODs,
+    // currently visible fallback coverage, or coarse roots that prevent terrain holes.
+    for (const n of terrainEvictions(nodes, { frame, now, limit: cacheLimit, rootSize: ROOT })) {
+      if (n.caster) ctx.render?.removeShadowCaster(n.mesh);
+      n.mesh?.dispose(); n.mesh = null; n.data = null;
+      nodes.delete(n.k); retired++;
+    }
+    // Discard stale worker payload references immediately instead of waiting for upload.
+    for (let i = pendingMeshes.length - 1; i >= 0; i--) {
+      if (nodes.get(pendingMeshes[i].k) !== pendingMeshes[i]) pendingMeshes.splice(i, 1);
     }
   }
 
@@ -144,5 +153,5 @@ export function createTerrain(ctx, pool, material) {
     return ok;
   }
 
-  return { update, focus, isReady, get shownCount() { return shownCount; }, get builtCount() { return built; }, nodes, root };
+  return { update, focus, isReady, get shownCount() { return shownCount; }, get builtCount() { return built; }, get residentCount() { return nodes.size; }, get retiredCount() { return retired; }, cacheLimit, nodes, root };
 }

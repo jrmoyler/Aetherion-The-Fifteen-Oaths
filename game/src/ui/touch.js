@@ -70,7 +70,7 @@ export function createTouch(ui) {
     ctx.input?.setVirtualMove?.(0, 0); ctx.input?.setVirtualSprint?.(false);
     const r = rest(); placeJoy(r.x, r.y);
   };
-  move.addEventListener('pointerup', endJoy); move.addEventListener('pointercancel', endJoy);
+  move.addEventListener('pointerup', endJoy); move.addEventListener('pointercancel', endJoy); move.addEventListener('lostpointercapture', endJoy);
 
   // --- look + tap to target
   const looks = new Map();
@@ -94,7 +94,7 @@ export function createTouch(ui) {
       } catch { /* stub */ }
     }
   };
-  look.addEventListener('pointerup', endLook); look.addEventListener('pointercancel', endLook);
+  look.addEventListener('pointerup', endLook); look.addEventListener('pointercancel', endLook); look.addEventListener('lostpointercapture', endLook);
 
   // --- action cluster
   const slots = [];
@@ -117,7 +117,7 @@ export function createTouch(ui) {
       if (u.mode === 'hold') ctx.input?.hold?.(u.id, true); else ctx.input?.press?.(u.id);
     });
     const up = () => { b.classList.remove('is-down'); if (u.mode === 'hold') ctx.input?.hold?.(u.id, false); };
-    b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up);
+    b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('lostpointercapture', up);
     cluster.append(b);
   }
   for (const [id, icon, label] of [['map', 'map', 'World map'], ['character', 'bag', 'Character'], ['chat', 'chat', 'Chat'], ['settings', 'gear', 'Settings']]) {
@@ -137,10 +137,19 @@ export function createTouch(ui) {
   ctrl.addEventListener('touchmove', stop, { passive: false });
   ctrl.addEventListener('contextmenu', stop);
 
+  function reset() {
+    joyId = null; looks.clear(); setKnob(0, 0);
+    joy.classList.remove('is-active', 'is-sprint');
+    cluster.querySelectorAll('.is-down').forEach(b => b.classList.remove('is-down'));
+    ctx.input?.setVirtualMove?.(0, 0); ctx.input?.setVirtualSprint?.(false); ctx.input?.hold?.('jump', false);
+  }
+  addEventListener('blur', reset);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) reset(); });
+
   return {
-    el, ctrl, build, flash,
+    el, ctrl, build, flash, reset,
     show() { el.hidden = false; ctrl.hidden = false; fit(); requestAnimationFrame(() => { const r = rest(); placeJoy(r.x, r.y); }); },
-    hide() { el.hidden = true; ctrl.hidden = true; ctx.input?.setVirtualMove?.(0, 0); ctx.input?.setVirtualSprint?.(false); },
+    hide() { el.hidden = true; ctrl.hidden = true; reset(); },
     setCooldown() { /* drawn in update() */ },
     update(now, cds, view, mana) {
       if (el.hidden) return;

@@ -6,14 +6,16 @@ const notify = () => subs.forEach((f) => { try { f(); } catch { /* ignore */ } }
 if (typeof window !== 'undefined') {
   addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferred = e; notify(); });
   addEventListener('appinstalled', () => { deferred = null; notify(); });
+  window.matchMedia?.('(display-mode: standalone)').addEventListener?.('change', notify);
 }
 
 export const pwa = {
   get canPrompt() { return !!deferred; },
   get isStandalone() {
-    return matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true;
+    return typeof window !== 'undefined' && (window.matchMedia?.('(display-mode: standalone)').matches || window.matchMedia?.('(display-mode: fullscreen)').matches || window.navigator.standalone === true);
   },
   get isIOS() {
+    if (typeof navigator === 'undefined') return false;
     const ua = navigator.userAgent || '';
     return /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   },
@@ -22,7 +24,7 @@ export const pwa = {
   async prompt() {
     if (!deferred) return 'unavailable';
     const e = deferred; deferred = null; notify();
-    try { e.prompt(); const r = await e.userChoice; return r?.outcome || 'dismissed'; } catch { return 'error'; }
+    try { await e.prompt(); const r = await e.userChoice; return r?.outcome || 'dismissed'; } catch { return 'error'; }
   },
   onChange(fn) { subs.add(fn); return () => subs.delete(fn); },
 };

@@ -9,6 +9,7 @@ import { Bus } from './core/bus.js';
 import { detectQuality } from './core/quality.js';
 import { createInput } from './core/input.js';
 import { CollisionWorld } from './core/collision.js';
+import { createFrameBudget } from './core/frameBudget.js';
 
 import * as UI from './ui/index.js';
 import * as Render from './render/index.js';
@@ -19,6 +20,7 @@ import * as Actors from './actors/index.js';
 import * as VFX from './vfx/index.js';
 import * as Combat from './combat/index.js';
 
+async function startClient() {
 const canvas = document.getElementById('game');
 const bus = new Bus();
 const quality = detectQuality();
@@ -27,7 +29,9 @@ const engine = new Engine(canvas, quality.name !== 'low', {
   preserveDrawingBuffer: false, stencil: true, antialias: false, powerPreference: 'high-performance',
   adaptToDeviceRatio: false, doNotHandleContextLost: false,
 }, false);
-engine.setHardwareScalingLevel(1 / (Math.min(devicePixelRatio, 2) * quality.renderScale));
+const budget = createFrameBudget({ maxScale: quality.renderScale });
+const applyScale = () => engine.setHardwareScalingLevel(1 / (Math.min(devicePixelRatio || 1, 2) * budget.scale));
+applyScale();
 
 const scene = new Scene(engine);
 scene.clearColor = new Color4(0.05, 0.06, 0.08, 1);
@@ -42,7 +46,7 @@ const ctx = {
   clock: { time: 0, dt: 0, frame: 0 },
   params: new URLSearchParams(location.search),
   /** Register a per-frame update. Lower order runs first. */
-  addUpdate(fn, order = 50) { updaters.push({ fn, order }); updaters.sort((a, b) => a.order - b.order); return () => updaters.splice(updaters.findIndex((u) => u.fn === fn), 1); },
+  addUpdate(fn, order = 50) { updaters.push({ fn, order }); updaters.sort((a, b) => a.order - b.order); return () => { const i = updaters.findIndex((u) => u.fn === fn); if (i >= 0) updaters.splice(i, 1); }; },
   setLoading(p, label) { bus.emit('loading', { p, label }); },
 };
 window.__aetherion = ctx; // debugging / automated QA hook
@@ -64,7 +68,10 @@ async function boot() {
   ctx.setLoading(1, 'Ready');
 
   engine.runRenderLoop(() => {
-    const dt = Math.min(engine.getDeltaTime() / 1000, 0.1);
+    if (document.hidden) return;
+    const frameMs = engine.getDeltaTime();
+    const dt = Math.min(frameMs / 1000, 0.1);
+    if (ctx.clock.time > 8 && budget.sample(frameMs) !== null) { applyScale(); bus.emit('render:scale', { scale: budget.scale }); }
     ctx.clock.dt = dt; ctx.clock.time += dt; ctx.clock.frame++;
     ctx.input.poll();
     for (const u of updaters) u.fn(dt);
@@ -80,12 +87,22 @@ async function boot() {
   bus.emit('game:start', character);
 }
 
-addEventListener('resize', () => engine.resize());
-boot().catch((err) => {
+addEventListener('resize', () => { applyScale(); engine.resize(); });
+addEventListener('visibilitychange', () => budget.reset());
+await boot();
+}
+startClient().catch((err) => {
   console.error(err);
-  bus.emit('fatal', err);
-  const el = document.createElement('pre');
+  window.__aetherion?.bus.emit('fatal', err);
+  const el = document.createElement('section');
+  el.setAttribute('role', 'alert');
   el.style.cssText = 'position:fixed;inset:auto 0 0 0;color:#f88;background:#000c;padding:12px;font:12px monospace;white-space:pre-wrap;z-index:99';
-  el.textContent = `Boot failed: ${err?.stack ?? err}`;
+  el.textContent = 'Aetherion could not start. Retry with reduced graphics, or reload to try again. Your saved character is kept.';
+  for (const [label, low] of [['Retry with reduced graphics', true], ['Reload', false]]) {
+    const button = document.createElement('button'); button.textContent = label;
+    button.style.cssText = 'margin:12px;padding:12px;min-height:44px;cursor:pointer';
+    button.onclick = () => { const url = new URL(location.href); if (low) url.searchParams.set('q', 'low'); location.href = url.href; };
+    el.append(button);
+  }
   document.body.appendChild(el);
 });

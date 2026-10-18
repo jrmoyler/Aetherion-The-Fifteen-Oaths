@@ -49,7 +49,11 @@ export class StatusVisuals {
     const k = this.key(id, kind); const now = performance.now() / 1000;
     const until = now + (Number.isFinite(dur) && dur > 0 ? dur : 9999);
     const cur = this.map.get(k);
-    if (cur && !cur.h?.done) { if (until > cur.until + 0.25) { cur.h?.stop?.(); } else { cur.seen = now; return; } }
+    if (cur && !cur.h?.done) {
+      // Snapshots refresh presence, not the effect clock. Restarting each snapshot
+      // repeatedly rebuilds particles and prevents status animations progressing.
+      cur.until = Math.max(cur.until, until); cur.seen = now; return;
+    }
     const h = this.ctx.vfx?.status?.(actor, kind, Math.min(60, until - now)) ?? null;
     this.map.set(k, { id, kind, status: statusId, h, until, seen: now, born: now });
   }

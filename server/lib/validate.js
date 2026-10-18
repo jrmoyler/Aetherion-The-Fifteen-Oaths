@@ -20,6 +20,9 @@ const V = {
   cast: (m) => Number.isInteger(m.slot) && m.slot >= 0 && m.slot <= 5 && optStr(m.target, 48)
     && (m.aim === undefined || m.aim === null || vec3(m.aim)) && (m.dir === undefined || m.dir === null || vec2(m.dir))
     && { t: 'cast', slot: m.slot, target: m.target ?? null, aim: m.aim ? { x: m.aim.x, y: m.aim.y, z: m.aim.z } : null, dir: m.dir ? { x: m.dir.x, z: m.dir.z } : null },
+  loadout: (m) => m.ids !== undefined
+    ? Array.isArray(m.ids) && m.ids.length === 5 && m.ids.every((id) => str(id, 100)) && { t: 'loadout', ids: [...m.ids] }
+    : Number.isInteger(m.slot) && m.slot >= 1 && m.slot <= 5 && str(m.ability, 100) && { t: 'loadout', slot: m.slot, ability: m.ability },
   target: (m) => optStr(m.id, 48) && { t: 'target', id: m.id ?? null },
   chat: (m) => str(m.text, 400) && (m.channel === undefined || CHANNELS.includes(m.channel)) && optStr(m.to, 48) && (m.channel !== 'whisper' || str(m.to, 48))
     && { t: 'chat', text: m.text, channel: m.channel ?? 'say', to: m.to ?? undefined },

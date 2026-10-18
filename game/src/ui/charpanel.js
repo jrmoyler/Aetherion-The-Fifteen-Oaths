@@ -3,6 +3,7 @@ import { h, esc, fmtNum } from './dom.js';
 import { emblemSVG } from './emblems.js';
 import { ICONS, itemIcon, rarityOf } from './icons.js';
 import { OATH_BY_ID, CLASSES } from '@shared/oaths.js';
+import { createLoadout } from './loadout.js';
 import { biomeLabel } from './create.js';
 
 const LEFT = [['head', 'Head'], ['shoulders', 'Shoulders'], ['chest', 'Chest'], ['hands', 'Hands']];
@@ -28,6 +29,18 @@ export function createCharPanel(ui) {
       h('div', { class: 'ae-char__col ae-scroll' }, h('div', { class: 'ae-section-label', style: { marginBottom: '10px' } }, h('b', null, '02'), 'Bag'), bag, gold),
       h('div', { class: 'ae-char__col ae-scroll' }, h('div', { class: 'ae-section-label', style: { marginBottom: '10px' } }, h('b', null, '03'), 'Attributes'), stats)),
     tip);
+  const loadout = createLoadout(ui);
+  const body = win.querySelector('.ae-char__body');
+  const equipmentTab = h('button', { type: 'button', class: 'ae-btn', 'aria-pressed': 'true' }, 'Equipment & attributes');
+  const loadoutTab = h('button', { type: 'button', class: 'ae-btn', 'aria-pressed': 'false' }, 'Oath techniques');
+  const tabs = h('div', { class: 'ae-char__tabs', role: 'group', 'aria-label': 'Character sections' }, equipmentTab, loadoutTab);
+  body.before(tabs); body.after(loadout.el);
+  function selectTab(isLoadout) {
+    body.hidden = isLoadout; loadout.el.hidden = !isLoadout;
+    equipmentTab.setAttribute('aria-pressed', String(!isLoadout)); loadoutTab.setAttribute('aria-pressed', String(isLoadout));
+    if (isLoadout) loadout.refresh(true);
+  }
+  equipmentTab.onclick = () => selectTab(false); loadoutTab.onclick = () => selectTab(true);
   close.addEventListener('click', () => { ui.sfx('close'); ui.closeWindow('character'); });
 
   function slotEl(item, label) {
@@ -61,6 +74,7 @@ export function createCharPanel(ui) {
     const inv = you.inventory || you.bag || you.items || [];
     sub.textContent = `${c.name || ''} · Level ${gs.level}`;
     renderStats(you, c, o);
+    loadout.refresh();
     const nsig = JSON.stringify([eq, inv, you.gold ?? you.coins ?? you.marks, c.oath, c.cls]);
     if (nsig === sig) return;
     sig = nsig;

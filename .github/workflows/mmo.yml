@@ -2,7 +2,7 @@ name: Aetherion MMO
 
 on:
   pull_request:
-    paths: ['game/**', 'server/**', 'shared/**', 'tools/generate-mmo-abilities.mjs', '.github/workflows/mmo.yml']
+    paths: ['game/**', 'server/**', 'shared/**', 'tools/generate-mmo-abilities.mjs', 'tests/pwa-*', 'vercel.json', '.github/workflows/mmo.yml']
   workflow_dispatch:
 
 permissions:
@@ -27,5 +27,19 @@ jobs:
         run: node tools/generate-mmo-abilities.mjs && git diff --exit-code shared/abilities.generated.js
       - name: Simulation + server tests
         run: npm --prefix server test
+      - name: Client regressions
+        run: node --test game/test/*.test.mjs game/tests/*.test.mjs game/src/combat/*.test.js game/src/vfx/*.test.js tests/pwa-lifecycle.test.mjs tests/ability-expansion.test.mjs
       - name: Client production build
         run: npm --prefix game run build
+      - name: Install test browser
+        run: cd game && npx playwright install --with-deps chromium
+      - name: Production PWA offline smoke
+        run: |
+          npm --prefix game run preview -- --host 127.0.0.1 --port 4173 > /tmp/aetherion-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID"' EXIT
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:4173/ > /dev/null && break
+            sleep 1
+          done
+          node tests/pwa-offline.browser.mjs http://127.0.0.1:4173

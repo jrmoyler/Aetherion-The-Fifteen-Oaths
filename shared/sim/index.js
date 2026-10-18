@@ -11,7 +11,7 @@
 // Snapshots are delta-encoded per client (see protocol.js "Snapshot deltas"); game/src/net
 // re-hydrates them so bus consumers always see full EntityState objects.
 import { OATHS, OATH_BY_ID, CLASSES, MAX_LEVEL, xpForLevel, regionAt } from '../oaths.js';
-import { hotbarFor } from '../abilities.js';
+import { abilityForSlot, restoreLoadout } from './loadout.js';
 import { heightAt, WORLD_HALF, SEA_LEVEL } from '../terrain.js';
 import { TICK_HZ, SNAP_HZ, INTEREST_RADIUS, ANIMS, PROTOCOL_VERSION } from '../protocol.js';
 import { makeRng, clamp, q2, randomToken, Grid, Ring } from './util.js';
@@ -185,7 +185,7 @@ class Sim {
       lvl: clamp(saved?.lvl ?? extra.lvl ?? 1, 1, MAX_LEVEL), xp: saved?.xp ?? 0, gold: saved?.gold ?? 15,
       x: sp.x + (this.rng() - 0.5) * 6, y: sp.y, z: sp.z + (this.rng() - 0.5) * 4, ry: 0, anim: 'idle',
       hp: 1, mhp: 1, mp: 1, mmp: 1, alive: true, st: [], fxVer: 0, tgt: null, radius: 0.45, headY: 1.8,
-      inventory: [], equipment: {}, stats: null, hotbar: hotbarFor(oath, cls),
+      inventory: [], equipment: {}, stats: null, hotbar: restoreLoadout(oath, cls, saved?.loadout), loadoutAt: -Infinity,
       cds: new Array(6).fill(0), gcd: 0, casting: null, potionCd: 0,
       discovered: new Set([home]), quests: new Map(), chainStep: saved?.chainStep ?? 1,
       combatUntil: 0, stunImmune: 0, deadAt: 0, regenAt: 0,
@@ -261,6 +261,8 @@ class Sim {
     const invSig = this.invSig(p), qSig = this.questSig(p);
     if (!partial || invSig !== p.sentInv) { y.inventory = p.inventory; y.equipment = p.equipment; p.sentInv = invSig; }
     if (!partial || qSig !== p.sentQ) { y.quests = [...p.quests.values()].map(questView); y.discovered = [...p.discovered]; p.sentQ = qSig; }
+    const loadoutSig = p.hotbar.map((a) => a.id).join('|');
+    if (!partial || p.sentLoadout !== loadoutSig) { y.hotbar = p.hotbar; y.loadout = p.hotbar.slice(1).map((a) => a.id); p.sentLoadout = loadoutSig; }
     if (partial) y.partial = true;
     return y;
   }
@@ -295,6 +297,7 @@ class Sim {
 
   serialize(p) {
     return {
+      loadout: p.hotbar.slice(1).map((a) => a.id),
       v: 1, token: p.token, name: p.name, oath: p.oath, cls: p.cls, lvl: p.lvl, xp: Math.floor(p.xp), gold: p.gold,
       hp: Math.ceil(p.hp), mp: Math.floor(p.mp), inventory: p.inventory, equipment: p.equipment,
       quests: [...p.quests.values()], discovered: [...p.discovered], chainStep: p.chainStep, bountiesDone: p.bountiesDone ?? 0, honor: p.honor ?? 0, pvpKills: p.pvpKills ?? 0,
@@ -352,6 +355,7 @@ class Sim {
     switch (msg.t) {
       case 'move': return this.onMove(p, msg);
       case 'cast': return this.castFor(p, msg);
+      case 'loadout': return this.setLoadout(p, msg);
       case 'target': { const e = msg.id == null ? null : this.ents.get(String(msg.id)); p.tgt = e && e !== p ? e.id : null; return; }
       case 'chat': return this.onChat(p, msg);
       case 'interact': return this.onInteract(p, msg);
@@ -423,6 +427,25 @@ class Sim {
   }
 
   fail(p, slot, reason) { this.evTo(p, { type: 'fail', id: p.id, slot, reason }); }
+
+  setLoadout(p, msg) {
+    // Limit feedback as well as work, including invalid requests from offline clients.
+    if (this.t - p.loadoutAt < 250) return;
+    p.loadoutAt = this.t;
+    const reject = (text) => { this.sysTo(p, text); this.send(p, { t: 'you', you: this.youState(p) }); };
+    if (!p.alive || p.casting || p.combatUntil > this.t || p.duel || p.trade || p.cds.some((cd) => cd > this.t)) {
+      return reject('Loadout changes require rest: leave combat and wait for all cooldowns.');
+    }
+    const ids = msg.ids ?? p.hotbar.slice(1).map((a, i) => i + 1 === msg.slot ? msg.ability : a.id);
+    if ((!msg.ids && (!Number.isInteger(msg.slot) || msg.slot < 1 || msg.slot > 5)) ||
+        !Array.isArray(ids) || ids.length !== 5 || new Set(ids).size !== 5) return reject('Choose five unique abilities belonging to your Oath.');
+    const selected = ids.map((id, i) => abilityForSlot(p.oath, p.cls, i + 1, id));
+    if (selected.some((a) => !a)) return reject('Choose five unique abilities belonging to your Oath.');
+    p.hotbar = [p.hotbar[0], ...selected];
+    p.youDirty = true; p.saveDirty = true;
+    this.send(p, { t: 'you', you: this.youState(p) });
+    this.persist(p);
+  }
 
   castFor(p, msg) {
     const slot = msg.slot | 0;
@@ -764,6 +787,7 @@ class Sim {
   }
 
   respawnMob(m) {
+    if (m.camp) m.camp.cleared = false;
     const h = m.home;
     m.x = h.x; m.z = h.z; m.y = this.groundY(h.x, h.z);
     m.alive = true; m.hp = m.mhp; m.state = 'idle'; m.anim = 'idle'; m.tgt = null; m.phase = 0; m.pow = 1; m.invuln = false;
@@ -790,6 +814,7 @@ class Sim {
     }
     // mob death
     this.stats.kills++;
+    if (dst.role === 'boss') for (const add of [...this.mobs]) if (add.encounterOwner === dst.id) this.despawnMob(add);
     dst.state = 'dead'; dst.tgt = null;
     if (dst.own) { this.despawnMob(dst); return; }
     const contributors = [];
@@ -813,6 +838,20 @@ class Sim {
       if (dst.role === 'boss' && !p.bot) this.system(`${p.name} helped defeat ${dst.name}!`, dst.x, dst.z, 600);
       onKill(this, p, dst);
       p.youDirty = true; p.saveDirty = true;
+    }
+    // One reward per complete camp cycle. Any respawn re-arms the objective.
+    const camp = dst.camp;
+    if (camp && !camp.cleared && camp.mobs.every((m) => !m.alive)) {
+      camp.cleared = true;
+      for (const p of recipients) {
+        if (!p.alive || p.lvl > camp.level + 7) continue;
+        const gold = 8 + camp.level * 2;
+        p.gold += gold;
+        this.giveXp(p, (24 + camp.level * 12) / Math.max(1, recipients.length));
+        this.evTo(p, { type: 'loot', id: p.id, gold, items: [] });
+        this.sysTo(p, `Camp secured! +${gold} gold. The road is safe until its defenders return.`);
+        p.youDirty = true; p.saveDirty = true;
+      }
     }
     dst.threat.clear(); dst.credit.clear();
     if (dst.respawnMs > 0) dst.respawnAt = this.t + dst.respawnMs * (0.85 + this.rng() * 0.3);

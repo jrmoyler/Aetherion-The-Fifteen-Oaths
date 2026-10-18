@@ -8,7 +8,7 @@ import { makeGear } from './items.js';
 
 const roster = (oath, role) => CREATURES.find((c) => c.oath === oath && c.role === role);
 
-/** Build the n-th step (1..5) of the starter chain for an Oath. */
+/** Build the n-th step (1..8) of the starter chain for an Oath. */
 export function chainStep(S, oath, n) {
   const o = OATH_BY_ID[oath];
   const i = o.index - 1;
@@ -21,6 +21,9 @@ export function chainStep(S, oath, n) {
     case 3: return { id: `chain-${oath}-3`, title: 'An Open Road', text: `Follow the road to ${nb.name} and attune to the shrine at its sanctuary.`, kind: 'discover', shrine: nb.id, goal: 1, step: 3, reward: { xpf: 1, gold: 40, item: 'uncommon' } };
     case 4: { const v = roster(oath, 'veteran'); return { id: `chain-${oath}-4`, title: `${OATH_CIVICS[i]}: the everyday covenant`, text: `${OATH_CIVICS[i]} asks you to defeat a ${v.name} preying on the roads of ${o.name}.`, kind: 'kill', targets: [v.id], goal: 1, step: 4, reward: { xpf: 1, gold: 50 } }; }
     case 5: return { id: `chain-${oath}-5`, title: 'No Single Witness', text: `Report back to ${leader} in ${o.name}.`, kind: 'talk', role: 'oathkeeper', oath, goal: 1, step: 5, reward: { xpf: 1.5, gold: 80, item: 'rare' } };
+    case 6: { const e = roster(oath, 'elite'); return { id: `chain-${oath}-6`, title: 'Proof beyond the walls', text: `Defeat two ${e.name}s in ${o.name}. Prepare your equipment and recruit allies before entering the deep wilds.`, kind: 'kill', targets: [e.id], goal: 2, step: 6, reward: { xpf: 1.5, gold: 120, item: 'rare' } }; }
+    case 7: { const b = roster(oath, 'boss'); return { id: `chain-${oath}-7`, title: 'The price of a covenant', text: `Confront ${b.name} at the regional lair. Watch its telegraphs, evade its strikes, and survive its changing phases.`, kind: 'kill', targets: [b.id], goal: 1, step: 7, reward: { xpf: 2, gold: 250, item: 'epic' } }; }
+    case 8: return { id: `chain-${oath}-8`, title: 'A witness to the Fracture', text: `Return to ${leader}. Your victory has earned a place in the memory of ${o.name}.`, kind: 'talk', role: 'oathkeeper', oath, goal: 1, step: 8, reward: { xpf: 1, gold: 150 } };
     default: return null;
   }
 }
@@ -42,7 +45,9 @@ export function addQuest(S, p, def) {
   const q = { ...def, progress: 0, done: false };
   p.quests.set(q.id, q);
   S.evTo(p, { type: 'quest', id: p.id, quest: questView(q) });
-  p.youDirty = true;
+  p.youDirty = true; p.saveDirty = true;
+  // Discovery is permanent: arriving here after exploration must never strand the chain.
+  if (q.kind === 'discover' && p.discovered.has(q.shrine)) progress(S, p, q);
   return q;
 }
 
@@ -75,7 +80,7 @@ function progress(S, p, q, n = 1) {
   if (q.done) return;
   q.progress = Math.min(q.goal, q.progress + n);
   if (q.progress >= q.goal) complete(S, p, q);
-  else { S.evTo(p, { type: 'quest', id: p.id, quest: questView(q) }); p.youDirty = true; }
+  else { S.evTo(p, { type: 'quest', id: p.id, quest: questView(q) }); p.youDirty = true; p.saveDirty = true; }
 }
 
 export function onKill(S, p, mob) {

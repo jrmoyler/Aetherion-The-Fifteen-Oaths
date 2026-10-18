@@ -221,8 +221,13 @@ export function processDelayed(S) {
     if (it.at > S.t) continue;
     d[i] = d[d.length - 1]; d.pop();
     const src = S.ents.get(it.src) ?? null;
+    // Enemy windups cannot survive a death, leash reset, or despawn. World hazards
+    // and already-launched player projectiles retain their existing semantics.
+    if (!it.world && it.team === TEAM_MOB && (!src?.alive || src.state === 'return')) continue;
     if (it.kind === 'hit') {
       const dst = S.ents.get(it.dst);
+      // A claw strike checks reach at impact, letting movement/dodge beat its windup.
+      if (it.reach != null && (!src || !dst || Math.hypot(dst.x - src.x, dst.z - src.z) > it.reach)) continue;
       if (dst && dst.alive) dealDamage(S, src, dst, it.amount, it.element, it.ability, it.opts);
     } else if (it.kind === 'area') {
       areaDamage(S, src, it, it.x, it.z, it.r);

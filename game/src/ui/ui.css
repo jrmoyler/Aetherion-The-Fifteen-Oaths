@@ -687,3 +687,37 @@
 }
 
 .ae-tooltip.ae-panel { background: linear-gradient(180deg, #1a2232, #10151f); }
+
+/* The field guide teaches real actions without covering the combat sightline. */
+.ae-guide { position:absolute; left:calc(var(--gut) + var(--sal)); top:calc(var(--gut) + var(--sat) + 130px); width:250px; pointer-events:auto; background:rgba(var(--slate),.9); }
+.ae-guide__head { display:block; width:100%; padding:10px 12px; border:0; border-bottom:1px solid var(--rule); background:transparent; color:var(--gold); text-align:left; font:600 14px var(--sans); cursor:pointer; }
+.ae-guide__body { padding:12px; font:13px/1.5 var(--sans); }
+.ae-guide__body strong { color:var(--text); }
+.ae-guide__body p { margin:7px 0; color:var(--text-2); }
+.ae-guide__progress { color:var(--gold); font-size:11px; }
+.ae-interact { position:absolute; left:50%; transform:translateX(-50%); bottom:190px; max-width:min(420px,80vw); padding:12px 20px; color:#fff1ce; background:rgba(var(--slate),.94); border:1px solid var(--gold); pointer-events:auto; cursor:pointer; font:14px/1.4 var(--sans); }
+.ae-guide [hidden], .ae-interact[hidden] { display:none !important; }
+.is-touch .ae-guide { top:auto; bottom:calc(var(--sab) + 14px); left:calc(var(--sal) + 12px); width: min(220px, 42vw); }
+.is-touch .ae-guide__head { padding:8px 10px; min-height:44px; }
+.is-touch .ae-guide__body { padding:8px 10px; font-size:11px; }
+.is-touch .ae-interact { bottom:calc(var(--tscale-px, 300px) + 12px); padding:10px 14px; min-height:44px; }
+.is-touch .ae-touch__top .ae-iconbtn { width:44px; height:44px; }
+@media (max-height:550px) {
+  .is-touch .ae-guide { left:calc(var(--sal) + 165px); bottom:8px; width:190px; }
+  .is-touch .ae-guide__body { max-height:100px; overflow:auto; }
+  .is-touch .ae-interact { bottom:110px; }
+}
+.ae-char__tabs { display:flex; gap:8px; padding:10px 14px; border-bottom:1px solid var(--rule); flex-shrink:0; }
+.ae-char__tabs [aria-pressed="true"] { border-color:var(--gold); color:var(--gold); }
+.ae-char__body[hidden], .ae-loadout[hidden] { display:none!important; }
+.ae-loadout { padding:18px; overflow:auto; min-height:0; font:14px/1.5 var(--sans); }
+.ae-loadout > h3 { color:var(--gold); margin:0; }
+.ae-loadout > p { max-width:650px; color:var(--text-2); }
+.ae-loadout__slots { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.ae-loadout__slot { padding:12px; border:1px solid var(--rule-faint); background:rgba(0,0,0,.15); }
+.ae-loadout__slot label { display:block; margin-bottom:7px; color:var(--gold); }
+.ae-loadout__slot select { width:100%; min-height:44px; color:var(--text); background:#182132; border:1px solid var(--rule); border-radius:3px; padding:8px; font:inherit; }
+.ae-loadout__slot p { margin:8px 0 0; font-size:12px; color:var(--text-2); }
+.ae-loadout__actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+.ae-loadout__status { min-height:42px; }
+@media(max-width:600px) { .ae-loadout__slots { grid-template-columns:1fr; } .ae-char__tabs { padding:8px; gap:4px; } .ae-char__tabs .ae-btn { padding:10px; font-size:12px; } }

@@ -78,7 +78,7 @@ export async function init(ctx) {
     Object.assign(api, {
       update, ready,
       focus: (x, z) => terrain.focus(x, z, 40),
-      stats: () => ({ terrainNodes: terrain.shownCount, built: terrain.builtCount, vegInstances: veg?.stats.instances ?? 0, vegCells: veg?.stats.cells ?? 0, grassPatches: grass?.stats.patches ?? 0, pending: pool.pending, threaded: pool.threaded }),
+      stats: () => ({ terrainNodes: terrain.shownCount, built: terrain.builtCount, terrainResident: terrain.residentCount, terrainCacheTarget: terrain.cacheLimit, terrainRetired: terrain.retiredCount, vegInstances: veg?.stats.instances ?? 0, vegCells: veg?.stats.cells ?? 0, grassPatches: grass?.stats.patches ?? 0, pending: pool.pending, threaded: pool.threaded }),
       terrain, water, vegetation: veg, grass, horizon, material, resources: res,
     });
     ctx.addUpdate(update, 40);
