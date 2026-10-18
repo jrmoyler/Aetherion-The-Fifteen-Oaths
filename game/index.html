@@ -10,7 +10,8 @@
   <meta name="description" content="Aetherion: The Fifteen Oaths — an open-world MMORPG of fifteen elemental covenants." />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Aetherion" />
   <title>Aetherion: The Fifteen Oaths</title>
   <style>
     html, body { margin: 0; height: 100%; overflow: hidden; background: #0d1015; overscroll-behavior: none; touch-action: none; }
@@ -19,8 +20,10 @@
   </style>
 </head>
 <body>
-  <canvas id="game" tabindex="0"></canvas>
+  <noscript>Aetherion requires JavaScript to play. Enable JavaScript and reload.</noscript>
+  <canvas id="game" tabindex="0" aria-label="Aetherion game world"></canvas>
   <div id="ui"></div>
+  <script type="module" src="./src/ui/pwa-register.js"></script>
   <script type="module" src="./src/main.js"></script>
 </body>
 </html>

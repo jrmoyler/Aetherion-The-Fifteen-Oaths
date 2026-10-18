@@ -22,21 +22,34 @@ export class OrbitCamera {
     this.lookIdle = 10;
     this.drag = null;
     this.tmp = new Vector3(); this.tmp2 = new Vector3(); this.look = new Vector3();
+    ctx.scene.onDisposeObservable?.addOnce(() => this.dispose());
     this.time = 0;
-    ctx.bus?.on('camera:shake', (e) => { const s = e?.strength ?? 0.3; if (s >= this.shake * 0.7) { this.shake = Math.min(1.5, s); this.shakeDur = e?.duration ?? 0.35; this.shakeT = 0; } });
+    this.cleanup = [];
+    this.reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const offShake = ctx.bus?.on('camera:shake', (e) => { if (this.reducedMotion) return; const s = e?.strength ?? 0.3; if (s >= this.shake * 0.7) { this.shake = Math.min(1.5, s); this.shakeDur = e?.duration ?? 0.35; this.shakeT = 0; } });
+    if (offShake) this.cleanup.push(offShake);
     // left-drag orbits the camera (input only tracks right-drag / pointer lock)
     const canvas = ctx.canvas;
     if (canvas?.addEventListener) {
-      canvas.addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse' && e.button === 0) this.drag = { x: e.clientX, y: e.clientY, moved: false }; });
-      addEventListener('pointermove', (e) => {
+      const listen = (target, type, fn) => { target.addEventListener(type, fn); this.cleanup.push(() => target.removeEventListener(type, fn)); };
+      listen(canvas, 'pointerdown', (e) => { if (e.pointerType === 'mouse' && e.button === 0) this.drag = { x: e.clientX, y: e.clientY, moved: false }; });
+      listen(globalThis, 'pointermove', (e) => {
         if (!this.drag || e.pointerType !== 'mouse' || document.pointerLockElement === canvas) return;
         const dx = e.clientX - this.drag.x, dy = e.clientY - this.drag.y;
         if (!this.drag.moved && Math.hypot(dx, dy) < 4) return;
         this.drag.moved = true; this.drag.x = e.clientX; this.drag.y = e.clientY;
         if (!(ctx.input?.state?.mouseRight)) this.addLook(dx, dy, CAM.sens);
       });
-      addEventListener('pointerup', (e) => { if (e.button === 0) this.drag = null; });
+      listen(globalThis, 'pointerup', (e) => { if (e.button === 0) this.drag = null; });
+      listen(globalThis, 'blur', () => { this.drag = null; });
+      listen(globalThis, 'pointercancel', () => { this.drag = null; });
     }
+  }
+
+  dispose() {
+    if (this.disposed) return; this.disposed = true;
+    for (const off of this.cleanup.splice(0)) off();
+    this.cam.dispose(); this.target = null; this.drag = null;
   }
 
   addLook(dx, dy, sens) {
@@ -54,7 +67,7 @@ export class OrbitCamera {
   }
 
   startIntro() {
-    if (!this.target || this.ctx.params?.get?.('nointro') === '1') return;
+    if (this.reducedMotion || !this.target || this.ctx.params?.get?.('nointro') === '1') return;
     this.intro = { t: 0, dur: 4.2, yaw0: this.yaw + Math.PI * 0.85, yaw1: this.yaw, d0: 15, p0: 0.5 };
   }
 
@@ -126,8 +139,8 @@ export class OrbitCamera {
       if (!blocked && col?.blocked && t > 2.2) blocked = col.blocked(px, pz, x + bx * 0.6, z + bz * 0.6, y);
       if (blocked) { allowed = Math.max(0.6, t - dist / steps * 0.9); break; }
     }
-    // smooth: pull in fast, ease out slowly
-    if (allowed < this.curDist) this.curDist += (allowed - this.curDist) * Math.min(1, dt * 22);
+    // Obstruction pull-in must be immediate: smoothing can leave the camera inside a wall.
+    if (allowed < this.curDist) this.curDist = allowed;
     else this.curDist += (allowed - this.curDist) * Math.min(1, dt * 3.5);
     const d = this.curDist;
     let cx = px + bx * d, cy = py + by * d, cz = pz + bz * d;
@@ -151,7 +164,7 @@ export class OrbitCamera {
     this.look.set(lx, ly, lz);
     cam.setTarget(this.look);
     // FOV kick
-    const fovT = a.sprinting ? CAM.sprintFov : CAM.fov;
+    const fovT = a.sprinting && !this.reducedMotion ? CAM.sprintFov : CAM.fov;
     cam.fov += (fovT - cam.fov) * Math.min(1, dt * 4);
   }
 }

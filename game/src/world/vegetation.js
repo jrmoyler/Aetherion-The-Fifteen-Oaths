@@ -159,7 +159,7 @@ export function createVegetation(ctx, pool, terrainRes) {
       if (!c) {
         c = { k, x0, z0, state: 1, per: null, near: false, d };
         cells.set(k, c);
-        pool.run({ t: 'scatter', x0, z0, size: CELL, density: DENS }, () => c.d + 400, () => !cells.has(k)).then((r) => { if (cells.has(k)) processCell(c, r); }).catch(() => { cells.delete(k); });
+        pool.run({ t: 'scatter', x0, z0, size: CELL, density: DENS }, () => c.d + 400, () => cells.get(k) !== c).then((r) => { if (cells.get(k) === c) processCell(c, r); }).catch(() => { if (cells.get(k) === c) cells.delete(k); });
       }
       c.d = d;
     }

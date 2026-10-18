@@ -3,10 +3,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createSim, sanitizeText } from '../../shared/sim/index.js';
-import { dealDamage, applyStatus, hasStatus, resolveAbility } from '../../shared/sim/combat.js';
+import { dealDamage, applyStatus, hasStatus, resolveAbility, processDelayed, clearStatuses } from '../../shared/sim/combat.js';
 import { createMob } from '../../shared/sim/mobs.js';
 import { OATHS, CLASSES, xpForLevel, OATH_BY_ID } from '../../shared/oaths.js';
-import { hotbarFor } from '../../shared/abilities.js';
+import { abilityForSlot } from '../../shared/sim/loadout.js';
+import { ABILITIES_BY_OATH, hotbarFor } from '../../shared/abilities.js';
 import { CREATURES } from '../../shared/creatures.js';
 
 const DT = 0.05;
@@ -312,7 +313,7 @@ test('quest chain: talk -> kill N -> discover neighbour shrine -> veteran -> rep
   p.x = keeper.x + 1; p.z = keeper.z; S.grid.move(p); S.pgrid.move(p);
   const gold = p.gold;
   sim.handle('c1', { t: 'interact', id: keeper.id });
-  assert.equal(p.quests.size, 0, 'chain complete');
+  assert.ok(p.quests.has('chain-oath-04-6'), 'initiation opens elite hunt');
   assert.ok(p.gold > gold);
   assert.ok(p.inventory.some((i) => i.rarity === 'rare' && i.slot === 'weapon'), 'reward item');
   // bounty from the warden
@@ -450,4 +451,41 @@ test('world events and AI adventurers', () => {
   const botsMoved = [...sim._S.players.values()].filter((b) => b.bot && b.anim !== 'idle').length;
   assert.ok(botsMoved >= 1, 'bots are active');
   assert.ok(sim._S.stats.hits > 0, 'combat happened');
+});
+
+
+test('all 150 selectable castables produce their shape effect in every class and loadout slot', () => {
+  const sim = mkSim(); const S = sim._S;
+  let checks = 0;
+  assert.equal(Object.values(ABILITIES_BY_OATH).flat().length, 150);
+  for (const oath of OATHS) for (const cls of ['ninja', 'sorcerer']) {
+    const { p } = join(sim, `catalog-${oath.id}-${cls}`, oath.id, cls);
+    outside(sim, p);
+    const m = dummy(sim, p, 'reef-serpent', 1, 1);
+    m.mhp = m.hp = 1000000; m.invuln = false; m.armor = 0;
+    for (const catalog of ABILITIES_BY_OATH[oath.id]) for (let slot = 1; slot <= 5; slot++) {
+      const label = `${cls}/${catalog.id}/slot${slot}/${catalog.shape}`;
+      const ab = abilityForSlot(oath.id, cls, slot, catalog.id);
+      assert.ok(ab, label);
+      clearStatuses(p); clearStatuses(m); S.delayed.length = 0;
+      for (const pet of [...p.pets]) S.despawnMob(pet);
+      p.pets.length = 0; m.hp = m.mhp;
+      m.x = p.x + 1; m.z = p.z; m.y = p.y; S.grid.move(m);
+      resolveAbility(S, p, ab, slot, { x: m.x, y: m.y, z: m.z }, { x: 1, z: 0 }, m);
+      S.t += 5000; processDelayed(S);
+      if (ab.shape === 'self') {
+        assert.ok(p.st.length > 0, `${label}: applies a defensive or utility status`);
+      } else if (ab.shape === 'summon') {
+        assert.equal(p.pets.length, 1, `${label}: creates a companion`);
+        const pet = p.pets[0];
+        assert.ok(pet.alive && pet.hp > 0 && pet.dmg > 0 && S.ents.has(pet.id), `${label}: companion can fight`);
+      } else {
+        assert.ok(ab.damage > 0, `${label}: offensive tuning is nonzero`);
+        assert.ok(m.hp < m.mhp, `${label}: damages target through authoritative resolver`);
+      }
+      checks++;
+    }
+    S.despawnMob(m); sim.removePlayer(p.id);
+  }
+  assert.equal(checks, 1500, '150 castables × two classes × five equip slots');
 });

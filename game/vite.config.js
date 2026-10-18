@@ -10,16 +10,21 @@ export default defineConfig({
   build: { target: 'es2022', outDir: 'dist', chunkSizeWarningLimit: 6000, assetsInlineLimit: 0 },
   plugins: [
     VitePWA({
-      registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      registerType: 'prompt',
+      injectRegister: false,
       manifest: false, // public/manifest.webmanifest is authored by hand (ui owner)
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,webmanifest,woff2}'],
+        globPatterns: ['**/*.{js,css,html,svg,webmanifest,woff2}', 'icons/*.png'],
+        cleanupOutdatedCaches: true,
+        skipWaiting: false,
+        clientsClaim: true,
         maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
         navigateFallbackDenylist: [/^\/ws/],
         runtimeCaching: [
-          { urlPattern: /\/assets\/.*\.(glb|ktx2|bin|png|jpg)$/, handler: 'CacheFirst',
-            options: { cacheName: 'aetherion-models', expiration: { maxEntries: 400 } } },
+          { urlPattern: ({ url, sameOrigin }) => sameOrigin && /\/assets\/.*\.(glb|ktx2|bin|png|jpe?g|webp|json)$/.test(url.pathname),
+            handler: 'StaleWhileRevalidate',
+            options: { cacheName: 'aetherion-assets-v2', cacheableResponse: { statuses: [200] },
+              expiration: { maxEntries: 160, maxAgeSeconds: 30 * 24 * 60 * 60, purgeOnQuotaError: true } } },
         ],
       },
     }),

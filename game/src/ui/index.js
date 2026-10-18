@@ -7,6 +7,7 @@ import { createState } from './state.js';
 import { createLoading } from './loading.js';
 import { createTitle } from './title.js';
 import { createCharacterScreen } from './create.js';
+import { createFieldGuide } from './fieldguide.js';
 import { createHud } from './hud.js';
 import { createFloaters } from './floaters.js';
 import { createMinimap } from './minimap.js';
@@ -87,13 +88,16 @@ function build(ctx) {
   const scrim = h('div', { class: 'ae-scrim', hidden: true });
   scrim.addEventListener('click', () => { if (stack.length && stack[stack.length - 1] !== 'dialog') closeWindow(stack[stack.length - 1]); });
   const stack = [];
+  const returnFocus = new Map();
   const windows = {};
   const syncTyping = () => { try { ctx.input?.setTyping?.(stack.length > 0 || !!ui.chat?.focused); } catch { /* ignore */ } };
   ui.openWindow = (name) => {
     const w = windows[name]; if (!w) return;
     if (stack.includes(name)) return;
     if (name !== 'dialog') for (const n of [...stack]) if (n !== 'dialog') closeWindow(n, true);
+    returnFocus.set(name, document.activeElement);
     stack.push(name);
+    ui.touch?.reset?.();
     w.win.hidden = false; w.win.style.opacity = '1';
     w.win.style.zIndex = String(45 + stack.length * 2); scrim.style.zIndex = String(44 + stack.length * 2);
     scrim.hidden = false;
@@ -110,6 +114,8 @@ function build(ctx) {
     windows[name].onClose?.();
     if (!stack.length) scrim.hidden = true; else scrim.style.zIndex = String(44 + stack.length * 2);
     syncTyping();
+    const previous = returnFocus.get(name); returnFocus.delete(name);
+    if (!silent && previous?.isConnected) previous.focus?.({ preventScroll: true });
     if (name === 'dialog') dialogs.cancel?.();
     if (!silent && name !== 'dialog') ui.sfx('close');
   }
@@ -131,6 +137,8 @@ function build(ctx) {
   hudLayer.append(hud.el);
   if (touch) hudLayer.append(touch.ctrl);
   hudLayer.append(dialogs.death);
+  const guide = createFieldGuide(ui);
+  hud.el.append(guide.el, guide.prompt);
   hud.showFps(!!prefs.get('showFps'));
   ui.log = (text) => chat.system(text);
   ui.on('hotbar', (view) => touch?.build(view));
@@ -217,6 +225,15 @@ function build(ctx) {
   // Escape / M / I / B / J still toggle windows here.
   addEventListener('keydown', (e) => {
     if (!stack.length) return;
+    const topWindow = windows[stack[stack.length - 1]]?.win;
+    if (e.code === 'Tab' && topWindow) {
+      const items = [...topWindow.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]')].filter(el => el.getClientRects().length);
+      const first = items[0], last = items[items.length - 1];
+      if (!items.length) { e.preventDefault(); return; }
+      if (e.shiftKey && (document.activeElement === first || !topWindow.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && (document.activeElement === last || !topWindow.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+      return;
+    }
     const t = e.target;
     if (t && t.tagName === 'INPUT' && (t.type === 'text' || t.type === 'search')) return;
     const top = stack[stack.length - 1];
@@ -306,6 +323,7 @@ function build(ctx) {
 
   // ---------- bus: combat / actors / player
   ctx.bus.on('combat:target', (p) => { const id = p?.id ?? null; if (id !== gs.target) { gs.target = id; hud.targetChanged(); if (id != null) ui.sfx('target'); } });
+  ctx.bus.on('combat:hotbar', () => hud.buildHotbar());
   ctx.bus.on('combat:cooldown', (p) => hud.setCooldown(p || {}));
   ctx.bus.on('combat:cast', (p) => {
     const slot = Number(p?.slot);

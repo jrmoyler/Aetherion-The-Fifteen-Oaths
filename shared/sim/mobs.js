@@ -54,6 +54,7 @@ function face(m, t) { m.ry = Math.atan2(t.x - m.x, t.z - m.z); }
 
 export function resetMob(S, m) {
   m.state = 'return'; m.tgt = null; m.casting = null;
+  for (const add of [...S.mobs]) if (add.encounterOwner === m.id) S.despawnMob(add);
   m.threat.clear(); m.credit.clear();
   m.invuln = true; clearStatuses(m);
 }
@@ -109,7 +110,7 @@ function bossPhase(S, m) {
   const add = CREATURES.find((c) => c.oath === m.oath && c.role === 'common');
   for (let i = 0; i < 2; i++) {
     const a = S.rng() * Math.PI * 2;
-    const ad = createMob(S, add.id, m.x + Math.cos(a) * 6, m.z + Math.sin(a) * 6, Math.max(1, m.lvl - 3), { fields: { temp: true, respawnMs: 0 } });
+    const ad = createMob(S, add.id, m.x + Math.cos(a) * 6, m.z + Math.sin(a) * 6, Math.max(1, m.lvl - 3), { fields: { temp: true, respawnMs: 0, encounterOwner: m.id } });
     const t = topThreat(S, m); if (t) engage(S, ad, t);
   }
 }
@@ -195,7 +196,7 @@ export function thinkMob(S, m, dt) {
           const ability = m.ranged ? 'mob/bolt' : 'mob/claw';
           m.anim = 'attack';
           S.ev({ type: 'cast', src: m.id, ability, slot: -1, target: t.id, aim: { x: t.x, y: t.y, z: t.z }, dir: { x: Math.sin(m.ry), z: Math.cos(m.ry) }, castTime: 0, element: m.element }, m.x, m.z);
-          schedule(S, m.ranged ? d / 22 : 0.25, { kind: 'hit', src: m.id, dst: t.id, amount: mobDmg(m.lvl, m.role), element: m.element, ability, opts: { statusMul: m.role === 'common' ? 0.3 : 0.6 } });
+          schedule(S, m.ranged ? d / 22 : 0.25, { kind: 'hit', src: m.id, team: m.team, dst: t.id, amount: mobDmg(m.lvl, m.role), element: m.element, ability, reach: m.ranged ? null : range + 0.65, opts: { statusMul: m.role === 'common' ? 0.3 : 0.6 } });
         } else if (m.anim === 'run') m.anim = 'idle';
       }
       break;

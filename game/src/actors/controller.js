@@ -84,7 +84,7 @@ export class PlayerController {
     const fx = Math.sin(cy), fz = Math.cos(cy);
     const rx = Math.cos(cy), rz = -Math.sin(cy);
     let mx = st.moveX ?? 0, my = st.moveY ?? 0;
-    if (!alive || this.frozen) { mx = 0; my = 0; }
+    if (!alive || this.frozen) { mx = 0; my = 0; this.dodgeT = -1; this.jumpReq = -1; this.vel.x = 0; this.vel.z = 0; }
     let wx = fx * my + rx * mx, wz = fz * my + rz * mx;
     const mag = Math.min(1, Math.hypot(wx, wz));
     if (mag > 1e-3) { const wl0 = Math.hypot(wx, wz); wx /= wl0; wz /= wl0; }
@@ -95,10 +95,10 @@ export class PlayerController {
 
     // ---- jump / dodge requests
     const jumpHeld = !!st.jump;
-    if ((input?.consume?.('jump') || (jumpHeld && !this.prevJumpHeld)) && alive) this.jumpReq = this.time;
+    if ((input?.consume?.('jump') || (jumpHeld && !this.prevJumpHeld)) && alive && !this.frozen) this.jumpReq = this.time;
     this.prevJumpHeld = jumpHeld;
     this.dodgeCd -= dt;
-    if (input?.consume?.('dodge') && alive && this.dodgeT < 0 && this.dodgeCd <= 0 && !this.swimming) {
+    if (input?.consume?.('dodge') && alive && !this.frozen && this.dodgeT < 0 && this.dodgeCd <= 0 && !this.swimming) {
       this.dodgeT = 0; this.dodgeCd = T.dodgeCooldown;
       const dx = mag > 0.1 ? wx : Math.sin(this.yaw), dz = mag > 0.1 ? wz : Math.cos(this.yaw);
       this.dodgeDir.x = dx; this.dodgeDir.z = dz;
@@ -168,7 +168,7 @@ export class PlayerController {
       this.grounded = false; this.airT = 0; this.lastGrounded = this.time;
     } else {
       const canJump = this.time - this.lastGrounded <= T.coyote && this.dodgeT < 0;
-      if (this.jumpReq >= 0 && this.time - this.jumpReq <= T.jumpBuffer && canJump && alive) {
+      if (this.jumpReq >= 0 && this.time - this.jumpReq <= T.jumpBuffer && canJump && alive && !this.frozen) {
         this.vel.y = T.jumpVel; this.grounded = false; this.lastGrounded = -1; this.jumpReq = -1;
         a.body?.animator.setState('jump');
         ctx.bus?.emit('player:jump', {});

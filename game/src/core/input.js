@@ -79,7 +79,8 @@ export function createInput(canvas, bus) {
     bus.emit('input:action', a);
   });
   addEventListener('keyup', (e) => { const a = actionOf(e.code); if (a) down.delete(a); });
-  addEventListener('blur', () => down.clear());
+  addEventListener('blur', resetTransientInput);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) resetTransientInput(); });
 
   canvas.addEventListener('contextmenu', (e) => e.preventDefault());
   canvas.addEventListener('pointerdown', (e) => {
@@ -138,6 +139,13 @@ export function createInput(canvas, bus) {
     padDown.clear(); padSprint = false; fullPushT = 0;
     padHeld.fill(false); suppressed.fill(false);
     pad.lx = pad.ly = pad.rx = pad.ry = pad.lt = pad.rt = 0; pad.move = null; pad.sprint = false;
+  }
+  function resetTransientInput() {
+    down.clear(); pressed.clear();
+    Object.assign(state, { moveX: 0, moveY: 0, lookDX: 0, lookDY: 0, zoom: 0, sprint: false, jump: false, mouseLeft: false, mouseRight: false });
+    Object.assign(virtual, { mx: 0, my: 0, active: false, lookDX: 0, lookDY: 0, sprint: false });
+    const held = [...padHeld]; releasePad();
+    held.forEach((on, i) => { suppressed[i] = on; });
   }
   function readPads() {
     let list = [];

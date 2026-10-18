@@ -112,11 +112,11 @@ export class Effect {
     this.t += dt; const t = this.t;
     for (const e of this.events) if (!e.done && t >= e.t) { e.done = true; try { e.fn(this); } catch (err) { console.warn('[vfx] event', err); } }
     for (const p of this.items) {
-      if (p._s === 0 && t >= p.t0) { p._s = 1; try { p.start?.(this); } catch (err) { console.warn('[vfx] start', err); p._s = 2; } }
+      if (p._s === 0 && t >= p.t0) { p._s = 1; try { p.start?.(this); } catch (err) { console.warn('[vfx] start', err); p._s = 2; try { p.stop?.(); } catch {} } }
       if (p._s === 1) {
         const lt = t - p.t0; const u = clamp01(lt / (p.t1 - p.t0));
-        try { p.update?.(lt, u, dt); } catch (err) { console.warn('[vfx] update', err); p._s = 2; }
-        if (t >= p.t1) { p._s = 2; try { p.stop?.(); } catch { /* ignore */ } }
+        try { p.update?.(lt, u, dt); } catch (err) { console.warn('[vfx] update', err); p._s = 2; try { p.stop?.(); } catch {} }
+        if (p._s === 1 && t >= p.t1) { p._s = 2; try { p.stop?.(); } catch { /* ignore */ } }
       }
       if (p._s === 2 && !p._d && t >= p.t1 + (p.tail ?? 0)) { p._d = true; try { p.dispose?.(); } catch { /* ignore */ } }
     }
