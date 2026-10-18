@@ -289,7 +289,8 @@ class Body:
         add(S.ellipsoid(V(0, -0.088, 0.042), (0.030 * hs, 0.012 * hs, 0.026 * hs)), 'head', 0.02)
         # nose
         nz = p['nose']
-        add(S.roundcone(V(0, -0.093, 0.016), V(0, -0.110 - 0.004 * nz, -0.024), 0.0055 * hs, 0.0080 * hs * nz), 'head', 0.008)
+        add(S.roundcone(V(0, -0.092, 0.022), V(0, -0.113 - 0.004 * nz, -0.024), 0.0062 * hs, 0.0085 * hs * nz), 'head', 0.008)
+        add(S.ellipsoid(V(0, -0.098, -0.004), (0.010 * hs, 0.010 * hs, 0.018 * hs)), 'head', 0.008)
         add(S.sphere(V(0, -0.108 - 0.004 * nz, -0.029), 0.0095 * hs * nz), 'head', 0.007)
         for sx in (1, -1):
             add(S.sphere(V(sx * 0.0115, -0.098, -0.032), 0.0072 * hs * nz), 'head', 0.012)
@@ -304,12 +305,12 @@ class Body:
             ear = S.ellipsoid(ec, (0.009 * hs, 0.021 * hs, 0.031 * hs), S.rot_euler(0, sx * -8, sx * -12))
             ear = ear.sub(S.sphere(ec + S.v3(sx * 0.008 * hs, -0.002 * hs, -0.004 * hs), 0.010 * hs), 0.004 * hs)
             add(ear, 'head', 0.006)
-        self.eye_c = {sx: V(sx * 0.0315, -0.077, 0.012) for sx in (1, -1)}
+        self.eye_c = {sx: V(sx * 0.0315, -0.0785, 0.012) for sx in (1, -1)}
         self.eye_r = 0.0120 * hs
         # cut list: eye sockets + mouth line (applied after union as smooth subtraction)
         self.head_cuts = []
         for sx in (1, -1):
-            self.head_cuts.append((S.sphere(V(sx * 0.0315, -0.078, 0.012), 0.0128 * hs), 0.005 * hs))
+            self.head_cuts.append((S.sphere(V(sx * 0.0315, -0.0785, 0.012), 0.0134 * hs), 0.003 * hs))
         self.head_cuts.append((S.roundbox(V(0, -0.104, -0.0595), (0.020 * hs, 0.006 * hs, 0.0009 * hs), S.rot_euler(0, 0, 0), 0.0008 * hs), 0.002 * hs))
         self.mouth_c = V(0, -0.098, -0.059)
         self.nose_tip = V(0, -0.118, -0.03)
@@ -323,12 +324,13 @@ class Body:
         for sx in (1, -1):
             c = self.eye_c[sx]
             eyes.append(S.sphere(c, self.eye_r))
-            # upper and lower lid rims
-            M = S.rot_euler(90, 0, 0)
-            up = S.torus(c + S.v3(0, -0.004 * hs, 0.0035 * hs), self.eye_r * 0.86, 0.0028 * hs, S.rot_euler(80, 0, 0))
-            lo = S.torus(c + S.v3(0, -0.003 * hs, -0.0045 * hs), self.eye_r * 0.82, 0.0022 * hs, S.rot_euler(100, 0, 0))
-            lids.append(up.inter(S.halfspace(c + S.v3(0, 0, 0.002 * hs), (0, 0, -1)), 0.002 * hs))
-            lids.append(lo.inter(S.halfspace(c + S.v3(0, 0, -0.003 * hs), (0, 0, 1)), 0.002 * hs))
+            # closed eyelid caps: shells of the eyeball sphere covering the top and bottom (almond opening)
+            r = self.eye_r
+            cap = S.sphere(c + S.v3(0, 0.0005 * hs, 0), r + 0.0017 * hs).sub(S.sphere(c, r + 0.0004 * hs), 0.0)
+            up = cap.inter(S.halfspace(c + S.v3(0, 0, 0.32 * r), (0, -0.25, -1)), 0.0012 * hs)
+            lo = cap.inter(S.halfspace(c + S.v3(0, 0, -0.52 * r), (0, -0.2, 1)), 0.0012 * hs)
+            lids.append(up.inter(S.halfspace(c + S.v3(0, 0.25 * r, 0), (0, 1, 0)), 0.001))
+            lids.append(lo.inter(S.halfspace(c + S.v3(0, 0.25 * r, 0), (0, 1, 0)), 0.001))
         return eyes, lids
 
     def add_hand(self, add, side, sx, W, fa, grip):

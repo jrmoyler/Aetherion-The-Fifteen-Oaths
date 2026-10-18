@@ -98,7 +98,7 @@ void terrainSurface(vec3 wp, vec3 nG, out vec3 albedo, out vec3 nOut, out float 
   float coast = vTAux.w;
   float shore = smoothstep(1.2, 0.2, wp.y) * smoothstep(-3.0, -0.5, wp.y) * smoothstep(260.0, 120.0, coast);
   float wet = max(tP.y * smoothstep(0.4, 0.9, n.y) * (1.0 - sn), shore);
-  alb *= mix(1.0, 0.55, wet); ro = mix(ro, 0.12, wet); n = normalize(mix(n, nG, wet * 0.6));
+  alb *= mix(1.0, 0.6, wet); ro = mix(ro, 0.32, wet); n = normalize(mix(n, nG, wet * 0.6));
   // shoreline foam
   float wave = sin(tP.x * 1.1 + dot(wp.xz, vec2(0.045, 0.031))) * 0.16 + sin(tP.x * 0.7 - wp.x * 0.02) * 0.08;
   float band = smoothstep(0.55, 0.0, abs(wp.y - 0.08 - wave)) * smoothstep(260.0, 120.0, coast);

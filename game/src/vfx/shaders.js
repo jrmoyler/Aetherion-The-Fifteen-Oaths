@@ -133,7 +133,7 @@ void main(){
     float spd = max(uScroll.y, 0.6);
     float n = fbm(vec2(vUV.x*uP.x*5.0 + uSeed, vUV.y*uP.y*0.6 - uTime*spd));
     float n2 = vnoise(vec2(vUV.x*uP.x*11.0 - uSeed, vUV.y*3.5 - uTime*spd*1.8));
-    float shape = n*1.1 + n2*0.4 - vUV.y*1.2 - 0.16;
+    float shape = n*1.1 + n2*0.4 - vUV.y*(1.2 - max(uP.z, 0.0)*0.55) - 0.16;
     float heat = clamp(shape*1.7, 0.0, 1.1);
     col = mix(uC3, uC2, smoothstep(0.0,0.35,heat)); col = mix(col, uC1, smoothstep(0.3,0.75,heat)); col = mix(col, uC0, smoothstep(0.8,1.15,heat));
     col *= 0.5 + heat*0.5;
@@ -160,8 +160,8 @@ void main(){
     float g = max(0.0, 1.0 - abs(vUV.x*2.0 - 1.0)*uP.z);
     float n = vnoise(vec2(vUV.x*uP.x*6.0, vUV.y*uP.y - uTime*uScroll.y));
     float top = 1.0 - smoothstep(0.5, 1.0, vUV.y);
-    col = mix(uC1, uC0, facing*facing) * (0.75 + 0.5*n);
-    a = g * (0.3 + 0.7*facing) * (0.6 + 0.4*n) * top * edgeY;
+    col = mix(uC1, uC0, pow(facing, 5.0)) * (0.75 + 0.5*n);
+    a = g * (0.2 + 0.6*facing) * (0.6 + 0.4*n) * top * edgeY;
   } else { // dark rock-energy (cracked lava / crystal glow veins)
     vec2 vr = vor(uv*1.5); float crack = 1.0 - smoothstep(0.0, 0.08, vr.y - vr.x);
     col = uC3*(0.4 + fres*0.4) + uC1*crack*1.6 + uC0*crack*crack;
@@ -234,7 +234,7 @@ void main(){
     float lace = smoothstep(0.045, 0.0, abs(fbm(p*6.0 + n*1.5 + uSeed) - 0.5)) * smoothstep(1.0, 0.3, r);
     float lace2 = smoothstep(0.03, 0.0, abs(fbm(p*11.0 - n + uSeed*2.0) - 0.5)) * 0.6;
     float wet = smoothstep(1.0, 0.35, r + (n - 0.5)*0.3) * step(r, uGrow);
-    float ringf = smoothstep(0.05, 0.0, abs(r - uGrow*0.95)) * (0.4 + n) * (1.0 - smoothstep(0.85, 1.0, uGrow));
+    float ringf = smoothstep(0.08, 0.0, abs(r - uGrow*0.9)) * smoothstep(0.5, 0.75, fbm(p*9.0 + uSeed)) * 0.6 * step(r, uGrow);
     col = mix(uC3, uC1, n*0.35)*0.55 + uC0*(lace + lace2)*0.75*wet + uC0*ringf;
     a = clamp(wet*(0.42 + 0.2*n) + (lace + lace2)*wet*0.45 + ringf, 0.0, 0.95);
   } else if (k == 6) { // clockwork dial: ticks, numeral bars, sweeping hands

@@ -39,7 +39,7 @@ class Spec:
         self.glow_strength = 4.0
         self.loc_bones = None
         self.bake_res = 1024
-        self.ao_samples = 8
+        self.ao_samples = 4
         self.extra = {}
 
     def part(self, ob, bone, slot="accent", surf=None, detail=None):

@@ -61,7 +61,7 @@ export default {
     K.gather(fx); B.telegraph(fx); const c = fx.tgt.add(V(0, 1.5, 0)); const t = fx.T.hit; const L = life(fx, 1.8) + 1;
     const NEB = [[C('#ff6fbf'), C('#8a4dff'), C('#1a0a30')], [C('#2fd6c8'), C('#4f6dff'), C('#0a1430')], [C('#c18cff'), C('#ff6fbf'), C('#120820')]];
     NEB.forEach((cols, i) => B.emit(fx, 'mist', { pos: c, t0: t + i * 0.08, dur: L * 0.75, rate: 10, shape: 'shell', r: fx.R * (0.9 - i * 0.15), speed: [-1.6, -1], life: [1.2, 1.8], size: 2.2, colors: cols, alpha: 0.8 }));
-    B.vortex(fx, { pos: fx.tgt, r0: fx.R * 0.2, r1: fx.R * 0.9, h: 3, y: 0.2, t0: t, dur: L * 0.8, kind: 'energy', spin: 2.5, opacity: 0.5, c0: C('#fff2d6'), c1: C('#c18cff'), c2: C('#2fd6c8'), p: [3, 2, 0, 1.5] });
+    B.vortex(fx, { pos: fx.tgt, r0: fx.R * 0.2, r1: fx.R * 0.9, h: 3, y: 0.2, t0: t, dur: L * 0.8, kind: 'wind', spin: 2.5, opacity: 0.3, c0: C('#fff2d6'), c1: C('#c18cff'), c2: C('#2fd6c8'), p: [3, 2, 0, 1.5] });
     B.emit(fx, 'mote', { pos: c, t0: t, dur: L * 0.8, rate: 80, shape: 'shell', r: fx.R, speed: [-4, -2.5], life: [0.6, 0.9], g: 0, c0: C('#ffffff'), c1: C('#e8f4ff'), c2: C('#c18cff') });
     const flare = t + L * 0.8;
     B.surf(fx, { shape: 'sphere', tess: 14, pos: c, kind: 'glow', scale: 0.01, t0: t + 0.3, dur: flare - t - 0.2, c0: C('#ffffff'), c1: C('#fff2d6'), anim: (lt, u, m) => m.scaling.setAll(0.5 * easeOut(u)) });

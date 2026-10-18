@@ -341,8 +341,9 @@ export async function init(ctx) {
       st.flash = flash;
       const lit = 1.15 * day + 0.04;
       st.cloudLit[0] = (T.r / tm * 0.9 + 0.1) * lit * 2.1 * light + skyCols.ms.r * 2; st.cloudLit[1] = (T.g / tm * 0.9 + 0.1) * lit * 2.1 * light + skyCols.ms.g * 2; st.cloudLit[2] = (T.b / tm * 0.9 + 0.1) * lit * 2.1 * light + skyCols.ms.b * 2;
-      const sh = 1.3 * (1 - 0.6 * dark);
-      st.cloudShade[0] = skyCols.zen.r * sh + 0.03 * day; st.cloudShade[1] = skyCols.zen.g * sh + 0.03 * day; st.cloudShade[2] = skyCols.zen.b * sh + 0.035 * day;
+      const sh = 1.3 * (1 - 0.6 * dark); const zl = (skyCols.zen.r + skyCols.zen.g + skyCols.zen.b) / 3;
+      const gz = (c) => (c + (zl - c) * (0.45 + 0.5 * over)) * sh + 0.03 * day;
+      st.cloudShade[0] = gz(skyCols.zen.r); st.cloudShade[1] = gz(skyCols.zen.g); st.cloudShade[2] = gz(skyCols.zen.b) + 0.005 * day;
       st.tint[0] = g.tint[0] * (1 - 0.4 * over * dark); st.tint[1] = g.tint[1] * (1 - 0.4 * over * dark); st.tint[2] = g.tint[2] * (1 - 0.35 * over * dark);
       st.haze = 1 + (w ? (w.fogMul - 1) * 0.6 : 0);
     }

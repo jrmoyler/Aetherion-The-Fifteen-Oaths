@@ -8,7 +8,7 @@ export default {
   // Tempest Spiral — a tight tornado spins up on the target, flinging debris and leaves.
   'collective/tempest'(fx) {
     K.gather(fx); B.telegraph(fx); const c = fx.tgt; const t = fx.T.hit; const L = life(fx, 3.2) + 0.6;
-    B.vortex(fx, { pos: c, r0: 0.35, r1: fx.R * 1.1, h: 6, t0: t, dur: L, kind: 'wind', spin: 6, scroll: [1.5, -0.4], p: [6, 3, 0, 1.5], opacity: 0.85 });
+    B.vortex(fx, { pos: c, r0: 0.35, r1: fx.R * 1.1, h: 6, t0: t, dur: L, kind: 'wind', spin: 6, scroll: [1.5, -0.4], p: [6, 3, 0, 1.5], opacity: 0.5 });
     B.vortex(fx, { pos: c, r0: 0.2, r1: fx.R * 0.7, h: 5, t0: t + 0.1, dur: L - 0.2, kind: 'wind', spin: -8, scroll: [2, -0.6], p: [8, 4, 0, 1.5], opacity: 0.6 });
     B.decal(fx, { kind: 'spiral', pos: c, r: fx.R * 1.3, t0: t, dur: L, p: [5, 1, 0, 0], scroll: [3, 7], opacity: 0.6 });
     B.debris(fx, { pos: c, mode: 'orbit', count: 12, mat: 'rock', size: [0.1, 0.28], r: fx.R * 0.9, y: [0.5, 4.5], orbit: 4, t0: t, dur: L });

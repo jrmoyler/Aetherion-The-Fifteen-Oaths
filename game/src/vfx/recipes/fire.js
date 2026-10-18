@@ -89,7 +89,7 @@ export default {
       const u = (lt - arrive - trace) / hold; return V(c.x + R * (1 + u * 2), fx.gy(c) + alt + u * 9, c.z + u * 3);
     };
     const tot = arrive + trace + hold;
-    serpent(fx, (lt) => head.copyFrom(dpath(lt)), t1, tot, { kind: 'flame', width: 0.75, n: 34, taperPow: 0.45, parts: 'ember', rate: 40 });
+    serpent(fx, (lt) => head.copyFrom(dpath(lt)), t1, tot, { kind: 'flame', width: 0.8, n: 18, taperPow: 0.45, parts: 'ember', rate: 40, p: [14, 6, 1, 0], scroll: [8, 0] });
     B.solid(fx, { mat: 'lava', size: V(0.5, 0.45, 0.9), t0: t1, dur: tot, path: () => head, emissive: 0.4, anim: (lt, u, m) => { m.rotation.y = Math.atan2(head.x - c.x, head.z - c.z) + Math.PI / 2; } });
     // wings: two crescents riding with the head
     for (const s of [-1, 1]) {
@@ -105,7 +105,7 @@ export default {
       B.emit(fx, 'flame', { pos: p.add(V(0, 0.3, 0)), t0: ti, dur: hold + trace - (i / nSeg) * trace + 0.6, rate: 10, r: 0.5, speed: [1.5, 3], size: 1.0 });
       if (i % 3 === 0) B.emit(fx, 'smoke', { pos: p.add(V(0, 2, 0)), t0: ti, dur: hold + 2, rate: 2, r: 0.5, colors: ASH, alpha: 0.6, size: 1.8 });
     }
-    B.column(fx, { pos: c, r: R, h: 2.3, kind: 'fire', t0: t1 + arrive + trace * 0.95, dur: hold + 1.4, rise: 0.3, p: [10, 2.2, 0, 1], scroll: [0, 1.4], fadeOut: 1.0 });
+    B.column(fx, { pos: c, r: R, h: 2.6, kind: 'fire', t0: t1 + arrive + trace * 0.95, dur: hold + 1.4, rise: 0.3, p: [14, 2.2, 1, 1], scroll: [0, 1.4], fadeOut: 1.0 });
     B.decal(fx, { kind: 'lava', pos: c, r: R * 1.15, t0: t1 + arrive, dur: trace + hold + fd, grow: [0.2, 1, trace], p: [2.5, 1, 0, 0] });
     B.decal(fx, { kind: 'scorch', pos: c, r: R * 1.2, t0: t1 + arrive + trace, dur: hold + fd, p: [1, 0.6, 0, 0], c3: C('#141010'), opacity: 0.8 });
     B.light(fx, { pos: c.add(V(0, 1.5, 0)), t0: t1 + arrive, dur: trace + hold + 1, intensity: 6, range: R * 4, flicker: true, env: (lt, u) => Math.min(1, lt / 0.5) * (1 - smooth((u - 0.75) / 0.25)), pri: 2 });

@@ -167,8 +167,10 @@ def hairline_mask(b, front=0.045, side=0.008, back=-0.055, ear_cut=True, pad=0.0
 
 
 def hair_cap(F, b, pid, thick=0.009, front=0.045, side=0.008, back=-0.055, fold=0.002):
+    thick = max(thick * 1.5, 0.016)
+    fold = max(fold * 1.5, 0.0035)
     m = hairline_mask(b, front, side, back)
-    F.shell(pid, m.inter(S.sphere(b.hc, 0.16 * b.hs), 0), -0.004, thick, 0.004, 'body', folds(fold, (90, 90, 90), 7))
+    F.shell(pid, m.inter(S.sphere(b.hc, 0.16 * b.hs), 0), -0.004, thick, 0.008, 'body', add_noise(folds(fold, (40, 40, 40), 7), ridges(fold * 0.35, 260, 'z')))
 
 
 def _scalp_points(b, n, zmin=0.0, seed=3, front_cut=None):
@@ -192,6 +194,9 @@ def _scalp_points(b, n, zmin=0.0, seed=3, front_cut=None):
 
 
 def hair_strands(F, b, pid, style='messy', n=70, length=0.07, r0=0.010, seed=4, k=0.005):
+    n = max(12, int(n * 0.45))
+    r0 = r0 * 1.7
+    k = max(k, 0.012)
     """Clumped strands rooted on the scalp. style: messy | swept | fringe | spiky | wisps"""
     hs = b.hs
     pts, rng = _scalp_points(b, n, -0.15 if style != 'top' else 0.35, seed)
@@ -217,9 +222,10 @@ def hair_strands(F, b, pid, style='messy', n=70, length=0.07, r0=0.010, seed=4, 
         p2 = p1 + flow * L * 0.75 + rng.normal(0, 0.006, 3)
         chainp = S.bezier(p0, p1, p2, 5)
         rr = r0 * hs * (0.7 + 0.5 * rng.random())
-        prims.append(S.chain(chainp, [rr, rr * 0.9, rr * 0.72, rr * 0.5, rr * 0.3], 0.003))
+        prims.append(S.chain(chainp, [rr, rr * 0.95, rr * 0.82, rr * 0.66, rr * 0.5], 0.006))
+    face = S.ellipsoid(b.hc + v3(0, -0.085, -0.035) * hs, (0.068 * hs, 0.07 * hs, 0.062 * hs))
     for pr in prims:
-        F.solid(pid, pr, k)
+        F.solid(pid, pr.sub(face, 0.006), k)
 
 
 def bun(F, b, pid, pos='back', size=0.045, wisps=10, seed=8):
@@ -347,21 +353,22 @@ def wide_sleeve(F, b, pid, side, t0=0.15, r_end=0.11, length=1.0, th=0.007, hang
 
 
 def beard(F, b, pid, length=0.06, width=0.045, moustache=True, seed=5, pointed=False):
+    """Solid sculpted beard volume: jaw mass + chin drop + moustache, smoothly merged."""
     hs = b.hs
     hc = b.hc
-    chin = hc + v3(0, -0.086, -0.105) * hs
-    tip = chin + v3(0, -0.012, -length)
+    chin = hc + v3(0, -0.084, -0.108) * hs
+    tip = chin + v3(0, -0.010, -length)
     w = width * hs
-    pts = [chin + v3(0, 0.015, 0.03) * hs, chin, chin + (tip - chin) * 0.5 + v3(0, -0.006, 0), tip]
-    rad = [w * 0.9, w * 0.75, w * (0.55 if not pointed else 0.35), 0.006 if pointed else w * 0.3]
-    F.solid(pid, S.chain(pts, rad, 0.01).displaced(folds(0.004, (60, 60, 25), seed), 0.006), 0.008)
-    # sideburn / jaw beard shell
-    F.shell(pid, S.ellipsoid(hc + v3(0, -0.04, -0.075) * hs, (0.07 * hs, 0.075 * hs, 0.045 * hs)).inter(
-        S.halfspace(hc + v3(0, 0, -0.045) * hs, (0, 0, 1)), 0.01).sub(S.ellipsoid(b.mouth_c, (0.02 * hs, 0.03 * hs, 0.011 * hs)), 0.004),
-        -0.002, 0.006, 0.005, 'body', folds(0.002, (90, 90, 90), seed + 1))
+    jaw = S.ellipsoid(hc + v3(0, -0.035, -0.080) * hs, (0.064 * hs, 0.066 * hs, 0.040 * hs))
+    jaw = jaw.inter(S.halfspace(hc + v3(0, 0, -0.052) * hs, (0, 0.35, 1)), 0.01).inter(S.halfspace(hc + v3(0, 0.02, 0) * hs, (0, 1, 0)), 0.01)
+    vol = jaw.sub(S.ellipsoid(b.mouth_c + v3(0, -0.01, 0.001), (0.019 * hs, 0.03 * hs, 0.009 * hs)), 0.004)
+    pts = [chin + v3(0, 0.02, 0.02), chin, chin + (tip - chin) * 0.55 + v3(0, -0.004, 0), tip]
+    rad = [w * 0.85, w * 0.8, w * (0.6 if not pointed else 0.38), max(0.008, w * (0.35 if not pointed else 0.12))]
+    vol = vol.union(S.chain(pts, rad, 0.012), 0.012)
     if moustache:
         for sx in (1, -1):
-            F.solid(pid, S.roundcone(b.mouth_c + v3(0, -0.004, 0.0095) * hs, b.mouth_c + v3(sx * 0.024, -0.0, -0.002) * hs, 0.0042 * hs, 0.0028 * hs), 0.004)
+            vol = vol.union(S.roundcone(b.mouth_c + v3(0, -0.005, 0.010) * hs, b.mouth_c + v3(sx * 0.026, -0.0, -0.006) * hs, 0.0055 * hs, 0.0035 * hs), 0.006)
+    F.solid(pid, vol.displaced(add_noise(folds(0.0025, (50, 50, 30), seed), ridges(0.0012, 500, 'x')), 0.004), 0.008)
 
 
 def pauldron(F, b, pid, side, size=1.0, layers=1, drop=0.0, t2=0.016, gap=0.006, flare=0.0):

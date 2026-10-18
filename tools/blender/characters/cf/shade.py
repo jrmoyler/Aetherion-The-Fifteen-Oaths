@@ -239,8 +239,8 @@ def build_material(key, kind, color, opts=None):
         mott = nb.noise(14, 4, 0.6)
         hi = scale_rgb(c, 1.6) if c2 is None else c2
         base = nb.mix(nb.math('MULTIPLY', st, mott), scale_rgb(c, 0.6), hi)
-        rough = 0.42
-        normal = nb.bump(st, 0.35, 0.0015)
+        rough = nb.math('ADD', 0.5, nb.math('MULTIPLY', st, 0.18))
+        normal = nb.bump(st, 0.25, 0.0015)
     elif k == 'fur':
         st = nb.noise(240, 8, 0.8, dist=4.0)
         base = nb.mix(st, scale_rgb(c, 0.55), scale_rgb(c, 1.35) if c2 is None else c2)
@@ -328,7 +328,7 @@ def bake(hi, lo, sources, size, outdir, name, log=print, ao_samples=16, has_emis
     bk.use_selected_to_active = True
     bk.cage_extrusion = 0.012
     bk.max_ray_distance = 0.035
-    bk.margin = 6
+    bk.margin = 12
     bk.margin_type = 'EXTEND'
     bpy.ops.object.select_all(action='DESELECT')
     hi.select_set(True)

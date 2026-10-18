@@ -2,7 +2,7 @@
 import { B, K, V, C, life, along, polar, meteor, skyStrike, portal, clamp01, easeOut, smooth } from './h.js';
 import { Vector3 } from '@babylonjs/core/Maths/math.vector.js';
 
-const GOLD = { c0: C('#ffffff'), c1: C('#ffe6a0'), c2: C('#ffb547') };
+const GOLD = { c0: C('#fff6dc'), c1: C('#ffc860'), c2: C('#ff9a2e') };
 
 export default {
   // Nova Beam — a wide radiant beam with travelling halo rings and a blinding terminus.

@@ -474,6 +474,124 @@
   "ok": true,
   "review": "tools/blender/creatures/review/hound.png"
  },
+ "hound-oath-01": {
+  "id": "hound-oath-01",
+  "file": "game/public/assets/creatures/hound-oath-01.glb",
+  "bytes": 1919140,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 33,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 18650,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.023,
+     0.018,
+     0.016,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.013,
+     0.01,
+     0.009,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.323,
+     0.068,
+     0.025,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.144,
+     0.01,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.144,
+     0.01
+    ]
+   }
+  },
+  "bones": 33,
+  "bbox_min": [
+   -0.17,
+   -0.86,
+   0.006
+  ],
+  "bbox_max": [
+   0.169,
+   0.883,
+   1.093
+  ],
+  "height": 1.093,
+  "faces_plus_z": true,
+  "death_end_height": 0.34,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/hound-oath-01.png"
+ },
  "spider": {
   "id": "spider",
   "file": "game/public/assets/creatures/spider.glb",

@@ -106,7 +106,7 @@ class Forge:
         eyes, lids = self.body.eye_parts()
         for prim in lids:
             sl = g.box(prim.lo, prim.hi, pad=0.004)
-            Db[sl] = S.smin(Db[sl], prim(g.points(sl)), 0.0015)
+            Db[sl] = S.smin(Db[sl], prim(g.points(sl)), 0.001)
         self.Db, self.LAB = Db, LAB
         D = Db.copy()
         PID = np.full(n, self.skin, dtype=np.uint8)

@@ -109,6 +109,9 @@ void main() {
   }
   // clouds: one fbm layer projected on a curved plane, lit toward the sun
   if (d.y > 0.0 && cloud.y > 0.001) {
+    // overcast base deck under heavy cover
+    float deck = smoothstep(0.72, 0.98, cloud.x) * smoothstep(0.0, 0.12, d.y);
+    col = mix(col, mix(cloudShade, cloudLit, 0.35 * (1.0 - cloud.z)) * skyTint.rgb, deck);
     float t = 1.0 / (d.y + 0.07);
     vec2 uv = d.xz * t * cloud.w + cloud2.xy;
     float n = cloudN(uv);

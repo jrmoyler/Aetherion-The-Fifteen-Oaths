@@ -308,12 +308,10 @@ export function slash(fx, o) {
 /** Curling water crest travelling from -> to. */
 export function wave(fx, o) {
   const scene = fx.sys.scene; const W = o.width ?? 3; const H = o.h ?? 2;
-  const prof = []; const NP = 16;
-  for (let i = 0; i <= NP; i++) { // C-shaped curl: back slope, face, crest, lip curling forward/down
-    const t = i / NP; const ang = lerp(-0.2, 3.6, t);
-    const rad = lerp(1.2, 0.25, Math.pow(t, 0.8));
-    prof.push([Math.sin(ang) * rad * 0.6 + t * 0.4 - 0.4, (1 - Math.cos(Math.min(ang, Math.PI))) * 0.5 * (t < 0.85 ? 1 : 1 - (t - 0.85) * 2) + (ang > Math.PI ? -Math.sin(ang - Math.PI) * 0.4 : 0)]);
-  }
+  // explicit curl cross-section (z forward, y up): back slope -> face -> crest -> lip curling forward and down
+  const K = [[-1.0, 0], [-0.6, 0.22], [-0.25, 0.55], [0.0, 0.85], [0.18, 1.0], [0.38, 1.02], [0.55, 0.92], [0.64, 0.74], [0.62, 0.55], [0.52, 0.42]];
+  const NP = 18; const prof = [];
+  for (let i = 0; i <= NP; i++) { const f = (i / NP) * (K.length - 1); const k = Math.min(K.length - 2, Math.floor(f)); const u = f - k; prof.push([lerp(K[k][0], K[k + 1][0], u), lerp(K[k][1], K[k + 1][1], u)]); }
   const NW = 14; const pos = []; const uvs = []; const idx = [];
   for (let j = 0; j <= NW; j++) {
     const x = (j / NW - 0.5); const amp = Math.pow(Math.sin((j / NW) * Math.PI), 0.6);
@@ -498,7 +496,7 @@ export function light(fx, o) {
       if (!L || L._fxOwner !== fx) return;
       const p = posOf(o.pos ?? fx.tgt); L.position.copyFrom(p);
       const e = o.env ? o.env(lt, u) : (u < 0.15 ? u / 0.15 : 1 - (u - 0.15) / 0.85);
-      L.intensity = (o.intensity ?? 4) * 0.45 * e * (o.flicker ? 0.8 + Math.random() * 0.4 : 1);
+      L.intensity = (o.intensity ?? 4) * 0.3 * e * (o.flicker ? 0.8 + Math.random() * 0.4 : 1);
     },
     stop() { if (L && L._fxOwner === fx) { L.intensity = 0; L._fxOwner = null; L.position.set(0, -1000, 0); } },
   };

@@ -19,16 +19,28 @@
 <script type="module">
 // Dev-only check page: serve with the game's Vite dev server and open
 // /assets/characters/viewer.html?clip=walk&only=oath-01-ninja
-import { Engine } from '/node_modules/@babylonjs/core/Engines/engine.js';
-import { Scene } from '/node_modules/@babylonjs/core/scene.js';
-import { ArcRotateCamera } from '/node_modules/@babylonjs/core/Cameras/arcRotateCamera.js';
-import { HemisphericLight } from '/node_modules/@babylonjs/core/Lights/hemisphericLight.js';
-import { DirectionalLight } from '/node_modules/@babylonjs/core/Lights/directionalLight.js';
-import { Vector3 } from '/node_modules/@babylonjs/core/Maths/math.vector.js';
-import { Color4, Color3 } from '/node_modules/@babylonjs/core/Maths/math.color.js';
-import { SceneLoader } from '/node_modules/@babylonjs/core/Loading/sceneLoader.js';
-import '/node_modules/@babylonjs/core/Helpers/sceneHelpers.js';
-import '/node_modules/@babylonjs/loaders/glTF/index.js';
+// Vite serves node_modules with a ?v= hash; reuse it so core + loaders share one module instance.
+const probe = await (await fetch('/node_modules/@babylonjs/loaders/glTF/glTFFileLoader.js')).text();
+const V = (probe.match(/\?v=[0-9a-f]+/) || [''])[0];
+const pure = await (await fetch(`/node_modules/@babylonjs/loaders/glTF/glTFFileLoader.pure.js${V}`)).text();
+const DEPS = (pure.match(/\/node_modules\/[^"']*\/deps\//) || [null])[0];
+const imp = async (p) => {
+  if (DEPS && p.startsWith('core/')) {
+    const name = '@babylonjs_core_' + p.slice(5).replace(/\//g, '_').replace(/\.js$/, '__js') + '.js';
+    try { return await import(`${DEPS}${name}${V}`); } catch (e) { /* not pre-bundled */ }
+  }
+  return import(`/node_modules/@babylonjs/${p}${V}`);
+};
+const { Engine } = await imp('core/Engines/engine.js');
+const { Scene } = await imp('core/scene.js');
+const { ArcRotateCamera } = await imp('core/Cameras/arcRotateCamera.js');
+const { HemisphericLight } = await imp('core/Lights/hemisphericLight.js');
+const { DirectionalLight } = await imp('core/Lights/directionalLight.js');
+const { Vector3 } = await imp('core/Maths/math.vector.js');
+const { Color4, Color3 } = await imp('core/Maths/math.color.js');
+const { SceneLoader } = await imp('core/Loading/sceneLoader.js');
+await imp('core/Helpers/sceneHelpers.js');
+await imp('loaders/glTF/index.js');
 
 const qs = new URLSearchParams(location.search);
 const clipName = qs.get('clip') || 'idle';

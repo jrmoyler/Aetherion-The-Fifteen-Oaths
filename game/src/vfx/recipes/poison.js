@@ -27,7 +27,7 @@ export default {
   'handcast/toxic'(fx) {
     K.gather(fx); B.telegraph(fx); const c = fx.tgt; const t = fx.T.hit; const L = life(fx, 5.5);
     B.dome(fx, { pos: c, r: fx.R, kind: 'smoke', t0: t, dur: L, opacity: 0.75, rise: 0.5, c0: C('#ff7a1a'), c1: C('#73ffb8'), c2: C('#4f5350'), c3: C('#0a1a0e'), p: [3, 2, 0, 1.6], scroll: [0.1, 0.2] });
-    B.dome(fx, { pos: c, r: fx.R * 1.02, kind: 'hex', t0: t + 0.2, dur: L - 0.2, opacity: 0.35, c0: C('#ffcf8a'), c1: C('#ff7a1a'), c2: C('#1e211f') });
+    B.dome(fx, { pos: c, r: fx.R * 1.02, kind: 'hex', t0: t + 0.2, dur: L - 0.2, opacity: 0.14, c0: C('#dcffb0'), c1: C('#73ffb8'), c2: C('#1e211f') });
     B.emit(fx, 'smoke', { pos: c.add(V(0, 0.5, 0)), t0: t, dur: L, rate: 14, shape: 'disc', r: fx.R * 0.9, colors: GAS(fx), alpha: 0.6, size: 1.6 });
     B.emit(fx, 'bubble', { pos: c.add(V(0, 0.2, 0)), t0: t, dur: L, rate: 20, shape: 'disc', r: fx.R });
     K.linger(fx, c, { t0: t, dur: L });

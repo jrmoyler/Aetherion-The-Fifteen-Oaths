@@ -24,7 +24,7 @@ export default {
     B.decal(fx, { kind: 'wash', pos: c, r: fx.R, t0: t, dur: L + 0.8, ...BLOOD });
     for (let i = 0; i < 5; i++) {
       const p = polar(fx, c, (i / 5) * 6.28, fx.R * 0.7); const ti = t + i * 0.08;
-      B.column(fx, { pos: p, r: 0.35, h: 3.6, kind: 'water', t0: ti, dur: L * 0.6, rise: 0.2, shrink: 0.5, ...BLOOD, p: [3, 2, 0.8, 2], scroll: [0.2, 2.5], opacity: 0.95 });
+      B.column(fx, { pos: p, r: 0.35, h: 3.6, kind: 'water', t0: ti, dur: L * 0.6, rise: 0.2, shrink: 0.5, ...BLOOD, p: [3, 2, 0.8, 2], scroll: [0.2, 2.5], opacity: 0.7 });
       B.emit(fx, 'drip', { pos: p.add(V(0, 3.4, 0)), t0: ti + 0.15, dur: L * 0.5, rate: 40, r: 0.3, speed: [1, 3], c0: BLOOD.c0, c1: BLOOD.c1, c2: BLOOD.c2 });
     }
     B.column(fx, { pos: c, r: 0.7, h: 5, kind: 'water', t0: t + 0.45, dur: L * 0.5, rise: 0.2, shrink: 0.5, ...BLOOD, p: [4, 2, 0.8, 2], scroll: [0.2, 3] });

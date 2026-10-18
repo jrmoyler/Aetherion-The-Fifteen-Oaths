@@ -67,7 +67,7 @@ export default {
     K.gather(fx); const c = fx.tgt; const t = fx.T.hit; const L = life(fx, 2.8) + 1.5; const half = 3.2;
     const a = c.add(fx.side.scale(-half)); const b = c.add(fx.side.scale(half));
     B.decal(fx, { kind: 'telegraph', pos: c, r: half, t0: 0, dur: t + 0.2, grow: [0.05, 1, t], opacity: 0.5 });
-    B.spikes(fx, { layout: 'wall', from: a, to: b, shape: 'slab', mat: 'obsidian', emissive: 0.25, count: 9, h: [2.4, 3.4], w: [0.85, 1.1], travel: 0.25, lean: 0.06, jitter: 0.12, t0: t, dur: L, rise: 0.22, sinkAt: 0.85, overshoot: false });
+    B.spikes(fx, { layout: 'wall', from: a, to: b, shape: 'slab', mat: 'obsidian', emissive: 0.4, count: 9, h: [2.4, 3.4], w: [0.85, 1.1], travel: 0.25, lean: 0.06, jitter: 0.12, t0: t, dur: L, rise: 0.22, sinkAt: 0.85, overshoot: false });
     B.spikes(fx, { layout: 'wall', from: a.subtract(fx.dir.scale(0.6)), to: b.subtract(fx.dir.scale(0.6)), shape: 'shard', mat: 'obsidian', emissive: 0.3, count: 12, h: [0.6, 1.3], w: [0.2, 0.4], travel: 0.3, lean: 0.4, t0: t + 0.1, dur: L - 0.2, rise: 0.15, sinkAt: 0.8 });
     B.emit(fx, 'mote', { pos: c.add(V(0, 1.5, 0)), t0: t, dur: L * 0.8, rate: 30, shape: 'box', box: [half, 1.2, 0.2], dir1: V(-0.2, 1, -0.2), dir2: V(0.2, 1, 0.2) });
     B.emit(fx, 'dust', { pos: c.add(V(0, 0.3, 0)), t0: t, burst: 20, shape: 'box', box: [half, 0.1, 0.4], colors: DUST });

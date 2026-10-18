@@ -33,7 +33,7 @@ export default {
     B.solid(fx, { shape: 'box', mat: 'steel', size: V(0.6, 0.18, 0.6), t0: t, dur: L, path: () => cur, spin: V(0, 0.5, 0) });
     for (let i = 0; i < 4; i++) { const a = i * Math.PI / 2 + Math.PI / 4; B.solid(fx, { shape: 'torus', mat: 'metal', thick: 0.05, size: 0.4, t0: t, dur: L, path: () => cur.add(V(Math.cos(a + fx.t * 0.5) * 0.48, 0.05, Math.sin(a + fx.t * 0.5) * 0.48)) }); }
     B.surf(fx, { shape: 'sphere', tess: 8, pos: hover, follow: () => cur.add(V(0, -0.12, 0)), kind: 'glow', scale: 0.1, t0: t, dur: L, c0: C('#ffffff'), c1: C('#ff3b2f') });
-    B.surf(fx, { shape: 'cylinder', top: 0.05, bottom: 2, pos: hover, kind: 'glow', scale: V(1.6, 3.2, 1.6), t0: t + 0.5, dur: 0.9, opacity: 0.35, c0: C('#ff5a3c'), c1: C('#ff3b2f'), anim: (lt, u, m) => { m.position.copyFrom(cur).addInPlace(V(0, -1.6, 0)); m.rotation.y = lt * 4; } });
+    B.surf(fx, { shape: 'cylinder', top: 0.05, bottom: 2, pos: hover, kind: 'glow', scale: V(1.6, 3.2, 1.6), t0: t + 0.5, dur: 0.9, opacity: 0.12, c0: C('#ff5a3c'), c1: C('#ff3b2f'), anim: (lt, u, m) => { m.position.copyFrom(cur).addInPlace(V(0, -1.6, 0)); m.rotation.y = lt * 4; } });
     B.decal(fx, { kind: 'hex', pos: fx.tgt, r: 1.4, t0: t + 0.6, dur: L - 0.6, p: [5, 0, 0, 0], c1: C('#ff3b2f') });
     for (let k = 0; k < 3; k++) {
       const tk = t + 1.4 + k * 0.5;

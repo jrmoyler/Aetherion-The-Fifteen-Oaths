@@ -117,7 +117,7 @@ def decimate(hi, target, protect, log):
     for w in (1.0, 0.5):
         idx = np.nonzero(np.isclose(protect, w))[0]
         if len(idx):
-            vg.add(idx.tolist(), w * 0.35, 'REPLACE')
+            vg.add(idx.tolist(), w * 0.6, 'REPLACE')
     mod = lo.modifiers.new('dec', 'DECIMATE')
     mod.decimate_type = 'COLLAPSE'
     mod.ratio = min(1.0, target / len(hi.data.polygons))
@@ -155,7 +155,7 @@ def unwrap(lo, head_center, head_r, log):
     bpy.context.view_layer.objects.active = lo
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.ops.mesh.select_all(action='SELECT')
-    bpy.ops.uv.smart_project(angle_limit=math.radians(58), island_margin=0.0, area_weight=0.0, scale_to_bounds=False)
+    bpy.ops.uv.smart_project(angle_limit=math.radians(70), island_margin=0.0, area_weight=0.0, scale_to_bounds=False)
     bm = bmesh.from_edit_mesh(lo.data)
     uvl = bm.loops.layers.uv.active
     # islands
@@ -193,7 +193,7 @@ def unwrap(lo, head_center, head_r, log):
             c = sum((u.copy() for u in uvs), uvs[0].copy() * 0) / len(uvs)
             for g in isl:
                 for l in g.loops:
-                    l[uvl].uv = c + (l[uvl].uv - c) * 1.7
+                    l[uvl].uv = c + (l[uvl].uv - c) * 2.0
     bmesh.update_edit_mesh(lo.data)
     bpy.ops.mesh.select_all(action='SELECT')
     bpy.ops.uv.select_all(action='SELECT')

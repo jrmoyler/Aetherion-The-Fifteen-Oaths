@@ -15,9 +15,10 @@ export default {
     B.wave(fx, { from: wStart, to: fx.tgt.subtract(fx.dir.scale(0.6)), width: 3.4, h: 2.6, t0: t + jetDur * 0.7, dur: wDur, c0: C('#f4fcff'), c1: P.glow, c2: P.edge, c3: P.deep, p: [3, 1.5, 1.5, 2], growRate: 2.2, spread: 0.25 });
     const head = V(); fx.at(t + jetDur * 0.7, wDur, { update(lt) { head.copyFrom(Vector3.Lerp(wStart, fx.tgt, easeOut(clamp01(lt / wDur)))); head.y = fx.gy(head) + 1.2; } });
     B.emit(fx, 'splash', { follow: () => head, t0: t + jetDur, dur: wDur - 0.2, rate: 120, shape: 'box', box: [1.1, 0.4, 0.3], dir1: V(-1, 2, 0.5), dir2: V(1, 4, 2), speed: [1, 3] });
-    B.emit(fx, 'foam', { follow: () => head, t0: t + jetDur, dur: wDur - 0.2, rate: 30, shape: 'box', box: [1.2, 0.6, 0.3], size: 0.8 });
+    B.emit(fx, 'foam', { follow: () => head, t0: t + jetDur, dur: wDur - 0.2, rate: 70, shape: 'box', box: [1.5, 0.7, 0.4], size: 1.1, speed: [0.5, 2] });
+    B.emit(fx, 'mist', { follow: () => head, t0: t + jetDur, dur: wDur, rate: 12, shape: 'box', box: [1.5, 0.6, 0.4], size: 1.4, alpha: 0.5, c0: C('#ffffff'), c1: C('#bfe8ff'), c2: P.edge });
     const hit = t + jetDur * 0.7 + wDur * 0.85;
-    B.emit(fx, 'splash', { pos: fx.tgtH, t0: hit, burst: 140, shape: 'dir', dir: fx.dir.add(V(0, 1.2, 0)), spread: 0.9, r: 0.6, speed: [3, 10], size: 0.2 });
+    B.emit(fx, 'splash', { pos: fx.tgtH, t0: hit, burst: 160, shape: 'dir', dir: fx.dir.add(V(0, 1.2, 0)), spread: 0.9, r: 0.6, speed: [2, 6], size: 0.2, c0: C('#ffffff'), c1: C('#dff6ff'), c2: P.glow });
     B.emit(fx, 'foam', { pos: fx.tgtH, t0: hit, burst: 30, shape: 'dir', dir: fx.dir.add(V(0, 1, 0)), spread: 0.8, r: 0.6, speed: [2, 5], size: 1.0 });
     B.flash(fx, { pos: fx.tgtH, t0: hit, size: 2.4, light: 3, color: P.glow });
     B.decal(fx, { kind: 'wash', pos: Vector3.Lerp(fx.tgt, wStart, 0.25), r: 3.4, t0: t + jetDur, dur: life(fx, 2) + 2, grow: [0.1, 1, wDur], opacity: 0.85 });

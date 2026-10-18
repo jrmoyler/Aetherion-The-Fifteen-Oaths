@@ -38,10 +38,11 @@ class VfxSystem {
     const e = emissive ?? null;
     const T = (k) => new Color3(t.r * k, t.g * k, t.b * k);
     switch (type) {
-      case 'ice': m.albedoColor = Color3.Lerp(t, Color3.White(), 0.2).scale(0.7); m.roughness = 0.05; m.alpha = 0.62; m.emissiveColor = T(e ?? 0.5); m.indexOfRefraction = 1.31; m.clearCoat.isEnabled = true; m.clearCoat.intensity = 0.8; break;
-      case 'crystal': m.albedoColor = Color3.Lerp(t, Color3.White(), 0.3); m.roughness = 0.1; m.alpha = 0.8; m.emissiveColor = T(e ?? 0.45); m.clearCoat.isEnabled = true; break;
+      case 'ice': m.albedoColor = Color3.Lerp(t, Color3.White(), 0.15).scale(0.45); m.roughness = 0.18; m.metallicF0Factor = 0.4; m.environmentIntensity = 0.5; m.alpha = 0.55; m.emissiveColor = T(e ?? 0.6); break;
+      case 'iceSheet': m.albedoColor = t.scale(0.3); m.roughness = 0.12; m.metallicF0Factor = 0.4; m.environmentIntensity = 0.5; m.alpha = 0.28; m.emissiveColor = T(e ?? 0.4); m.indexOfRefraction = 1.31; m.clearCoat.isEnabled = true; m.clearCoat.intensity = 0.8; break;
+      case 'crystal': m.albedoColor = t.scale(0.35); m.roughness = 0.28; m.metallicF0Factor = 0.35; m.environmentIntensity = 0.4; m.alpha = 0.8; m.emissiveColor = T(e ?? 0.85); m.clearCoat.isEnabled = true; break;
       case 'glass': m.albedoColor = new Color3(0.85, 0.9, 0.95); m.metallic = 0.9; m.roughness = 0.04; m.alpha = 0.85; m.emissiveColor = T(e ?? 0.25); break;
-      case 'obsidian': m.albedoColor = new Color3(0.035, 0.03, 0.045); m.roughness = 0.18; m.metallic = 0.3; m.emissiveColor = T(e ?? 0.12); m.clearCoat.isEnabled = true; break;
+      case 'obsidian': m.albedoColor = new Color3(0.06, 0.05, 0.08); m.roughness = 0.15; m.metallic = 0.4; m.emissiveColor = T(Math.min(0.18, e ?? 0.15)); m.metallic = 0.1; m.environmentIntensity = 0.3; m.clearCoat.isEnabled = true; break;
       case 'basalt': m.albedoColor = new Color3(0.09, 0.08, 0.085); m.roughness = 0.88; m.emissiveColor = T(e ?? 0.1); break;
       case 'lava': m.albedoColor = new Color3(0.06, 0.045, 0.04); m.roughness = 0.8; m.emissiveColor = T(e ?? 0.45); break;
       case 'metal': m.albedoColor = Color3.Lerp(hex('#b08d57'), t, 0.25); m.metallic = 1; m.roughness = 0.32; m.emissiveColor = T(e ?? 0.05); break;
@@ -50,7 +51,7 @@ class VfxSystem {
       case 'thorn': m.albedoColor = Color3.Lerp(hex('#2a0a10'), t, 0.15); m.roughness = 0.45; m.metallic = 0.1; m.emissiveColor = T(e ?? 0.12); m.clearCoat.isEnabled = true; break;
       case 'sand': m.albedoColor = hex('#b8935c'); m.roughness = 1; m.emissiveColor = T(e ?? 0); break;
       case 'bone': m.albedoColor = hex('#d8cdb8'); m.roughness = 0.6; m.emissiveColor = T(e ?? 0.05); break;
-      default: m.albedoColor = Color3.Lerp(hex('#57524c'), t, 0.06); m.roughness = 0.92; m.emissiveColor = T(e ?? 0.0); // rock
+      default: m.albedoColor = Color3.Lerp(hex('#3e3a35'), t, 0.06); m.roughness = 0.92; m.emissiveColor = T(e ?? 0.0); // rock
     }
     if (m.alpha < 1) { m.transparencyMode = PBRMaterial.PBRMATERIAL_ALPHABLEND; m.backFaceCulling = false; }
     m.freeze?.();

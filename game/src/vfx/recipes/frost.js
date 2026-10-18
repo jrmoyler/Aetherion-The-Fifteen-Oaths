@@ -44,7 +44,8 @@ export default {
     K.gather(fx); const c = fx.tgt; const R = fx.R;
     const floor = fx.T.ant + 0.12; const wall = floor + 0.4; const encase = wall + 0.97; const hold = encase + 0.55 + 1.1; const shatter = hold + 0.45;
     B.decal(fx, { kind: 'frost', pos: c, r: R * 1.35, t0: 0, dur: shatter + 1.7, p: [9, 0, 0, 0], grow: [0.05, 1, floor + 0.4], opacity: 0.95 });
-    B.spikes(fx, { layout: 'ring', pos: c, r: R * 0.92, shape: 'slab', count: 12, h: [5.2, 6.9], w: [1.4, 1.9], lean: 0.05, jitter: 0.08, t0: wall, dur: shatter - wall + 0.2, rise: 0.9, overshoot: false, sweep: 0.3, sinkAt: 0.92, shatter: true, mat: 'ice' });
+    B.spikes(fx, { layout: 'ring', pos: c, r: R * 0.92, shape: 'slab', count: 12, h: [5.2, 6.9], w: [1.4, 1.9], lean: 0.05, jitter: 0.08, t0: wall, dur: shatter - wall + 0.2, rise: 0.9, overshoot: false, sweep: 0.3, sinkAt: 0.92, shatter: true, mat: 'iceSheet' });
+    B.column(fx, { pos: c, r: R * 0.93, h: 6.6, t0: wall + 0.2, dur: shatter - wall, rise: 0.9, kind: 'energy', opacity: 0.35, p: [10, 6, 0, 2.5], scroll: [0, -0.3] });
     B.spikes(fx, { layout: 'ring', pos: c, r: R * 1.05, count: 30, h: [0.5, 0.95], w: [0.14, 0.28], lean: 0.4, t0: floor, dur: shatter - floor + 1.4, rise: 0.25, sinkAt: 0.8, mat: 'ice' });
     B.spikes(fx, { layout: 'cluster', pos: c, r: 0.9, count: 6, h: [1.6, 2.1], w: [0.4, 0.6], lean: 0.1, t0: encase - 0.3, dur: shatter - encase + 0.35, rise: 0.55, overshoot: false, shatter: true, sinkAt: 0.95, mat: 'ice' });
     B.dome(fx, { pos: c, r: R * 0.95, kind: 'energy', t0: wall + 0.4, dur: shatter - wall - 0.3, opacity: 0.35, p: [5, 3, 0, 1.8] });
