@@ -6,7 +6,7 @@
 import { OATHS, OATH_BY_ID, ROUTES } from '@shared/oaths.js';
 import { SANCTUARY_HEIGHT, heightAt } from '@shared/terrain.js';
 import { Frame, Builder, Instancer } from './builder.js';
-import { M, mulberry, polar, TAU, angDiff, plaza, plazaRim, districts, cityWall, shrine, stall, brazier, lanternPost, circleArcs, rot2 } from './kit.js';
+import { M, mulberry, polar, TAU, angDiff, plaza, plazaRim, districts, cityWall, shrine, stall, brazier, lanternPost, circleArcs, rot2, dressRim, dressTiers } from './kit.js';
 import { STYLES } from './cities.js';
 
 /** Per-oath sanctuary metadata (centre, plaza height, orientation theta, road angles, style). */
@@ -103,6 +103,10 @@ export function* cityGen(S) {
   market(S); yield;
   st.signature(S); yield;
   rimFurniture(S); yield;
+  // instanced set dressing: rim rhythm + terrace edges (after signature so it respects its reservations)
+  if (st.dress?.rim) dressRim(S, st.dress.rim);
+  if (st.dress?.tiers) dressTiers(S, st.dress.tiers);
+  yield;
   if (st.house) districts(S, st.house, st.districts || {});
   yield;
   if (st.wall !== 'none') cityWall(S, st.wallOpts ? st.wallOpts(S) : {});

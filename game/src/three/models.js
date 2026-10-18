@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { equipArmor } from './actor-armor.js';
 import { attachWeapon } from './actor-weapons.js';
+import { applyGroom } from './character/groom.js';
 const cache = new Map();
 const loader = new GLTFLoader();
 export function loadModel(url) {
@@ -80,10 +81,14 @@ export function createModelBody(gltf, parent) {
   };
 }
 export class BodyFactory {
-  constructor() { this.lodDist = [70, 180]; }
+  constructor(ctx) { this.lodDist = [70, 180]; this.quality = ctx?.quality?.name ?? 'high'; }
   humanoidTemplate() {}
   // Loading anchor deliberately has no placeholder person: only authored skinned
   // characters are rendered, never disconnected geometric limbs.
   createProcedural(desc, parent) { return createModelBody({ scene: new Group(), animations: [] }, parent); }
-  createGltf(gltf, desc, parent) { const body = createModelBody(gltf, parent); equipArmor(body, desc); attachWeapon(body, desc); return body; }
+  createGltf(gltf, desc, parent) {
+    const body = createModelBody(gltf, parent); equipArmor(body, desc); attachWeapon(body, desc);
+    try { applyGroom(body, desc, this.quality); } catch (error) { console.warn('[actors] groom failed', desc.oath, desc.cls, error); }
+    return body;
+  }
 }

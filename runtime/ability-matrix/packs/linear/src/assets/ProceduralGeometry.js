@@ -259,7 +259,7 @@ export function createAsteroidGeometry({
   craterDepth = 0.18,
   craterSize = 0.5
 } = {}) {
-  const geometry = new IcosahedronGeometry(1, clamp(Math.round(detail), 0, 3)).toNonIndexed();
+  const geometry = (g => (g.index ? g.toNonIndexed() : g))(new IcosahedronGeometry(1, clamp(Math.round(detail), 0, 3))); // r180 polyhedra are already non-indexed
   const array = geometry.attributes.position.array;
 
   /** A deterministic point on the unit sphere. */

@@ -4,4 +4,4 @@ export { ParticleEngine } from '../../../../runtime/ability-matrix/packs/linear-
 export { DecalSystem } from '../../../../runtime/ability-matrix/packs/linear-extended/src/effects/GroundDecals.js';
 export { BurstSystem } from '../../../../runtime/ability-matrix/packs/linear-extended/src/effects/BurstSphere.js';
 export { frame } from '../../../../runtime/ability-matrix/packs/linear-extended/src/core/FrameUniforms.js';
-export { settings } from '../../../../runtime/ability-matrix/packs/linear-extended/src/config/settings.js';
+export { settings, CastShape, castShapeOf, zoneRadiusOf } from '../../../../runtime/ability-matrix/packs/linear-extended/src/config/settings.js';

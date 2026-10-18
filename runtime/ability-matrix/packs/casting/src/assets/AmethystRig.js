@@ -90,7 +90,7 @@ function canonical(geometry) {
 
 /** A stretched, faceted lump, if the model never arrives. */
 function fallback() {
-  const geometry = new IcosahedronGeometry(0.5, 0).toNonIndexed();
+  const geometry = (g => (g.index ? g.toNonIndexed() : g))(new IcosahedronGeometry(0.5, 0)); // r180 polyhedra are already non-indexed
   geometry.scale(0.55, 1.4, 0.5);
   const out = new BufferGeometry();
   out.setAttribute('position', geometry.attributes.position);

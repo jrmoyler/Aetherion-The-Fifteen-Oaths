@@ -5,7 +5,7 @@
 // courses stay level), revolved shapes get arc-length UVs. Thin instances handle repeated
 // modules. A "dry" builder only records big masses (for far skyline silhouettes).
 import * as THREE from 'three';
-function geometry(b) { const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(b.p,3)); g.setAttribute('normal',new THREE.Float32BufferAttribute(b.n,3)); g.setAttribute('uv',new THREE.Float32BufferAttribute(b.u,2)); g.setIndex(b.i); g.computeBoundingSphere(); return g; }
+function geometry(b) { const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(b.p,3)); g.setAttribute('normal',new THREE.Float32BufferAttribute(b.n,3)); g.setAttribute('uv',new THREE.Float32BufferAttribute(b.u,2)); g.setAttribute('aEdge',new THREE.Float32BufferAttribute(b.e,4)); g.setIndex(b.i); g.computeBoundingSphere(); return g; }
 function place(mesh,scene,opts) { if(opts.position)mesh.position.copy(opts.position);mesh.rotation.y=opts.rotY||0;mesh.castShadow=true;mesh.receiveShadow=true;scene.add(mesh); }
 
 const TAU = Math.PI * 2;
@@ -80,7 +80,7 @@ export class Builder {
 
   _bucket(mat) {
     let b = this.buckets.get(mat);
-    if (!b) { b = { p: [], n: [], u: [], i: [] }; this.buckets.set(mat, b); }
+    if (!b) { b = { p: [], n: [], u: [], i: [], e: [] }; this.buckets.set(mat, b); }
     return b;
   }
 
@@ -95,7 +95,11 @@ export class Builder {
    * Core emit. pos/nrm local primitive arrays (flat xyz), uv null -> planar projection.
    * Rotation (rx,ry,rz) about primitive origin, then translate (x,y,z) in frame space.
    */
-  emit(mat, pos, nrm, uv, idx, x, y, z, rx = 0, ry = 0, rz = 0) {
+  /**
+   * edge (optional, 4 floats per vertex): face-local (u, v, faceWidth, faceHeight) in metres for the
+   * material's wear/grime shading; faceHeight < 0 marks a horizontal face, width 0 = no edge info.
+   */
+  emit(mat, pos, nrm, uv, idx, x, y, z, rx = 0, ry = 0, rz = 0, edge = null) {
     const b = this._bucket(mat);
     const R = rotMat(rx, ry + this.F.yaw, rz);
     const [ox, oz] = this.F.xz(x, z); const oy = this.F.oy + y;
@@ -107,6 +111,7 @@ export class Builder {
       const nx0 = nrm[k * 3], ny0 = nrm[k * 3 + 1], nz0 = nrm[k * 3 + 2];
       const nx = R[0] * nx0 + R[1] * ny0 + R[2] * nz0, ny = R[3] * nx0 + R[4] * ny0 + R[5] * nz0, nz = R[6] * nx0 + R[7] * ny0 + R[8] * nz0;
       b.p.push(qx, qy, qz); b.n.push(nx, ny, nz);
+      if (edge) b.e.push(edge[k * 4], edge[k * 4 + 1], edge[k * 4 + 2], edge[k * 4 + 3]); else b.e.push(0, 0, 0, 0);
       if (uv) b.u.push(uv[k * 2], uv[k * 2 + 1]);
       else {
         // tangent-plane projection in metres
@@ -137,15 +142,22 @@ export class Builder {
   box(mat, x, y, z, sx, sy, sz, o = {}) {
     if (this.dry) { this._sil(x, y, z, sx, sy, sz, o.ry || 0, mat); return; }
     const hx = sx / 2, hy = sy / 2, hz = sz / 2;
-    const P = [], N = [], I = [];
-    const face = (nx, ny, nz, verts) => { const b = P.length / 3; for (const v of verts) { P.push(v[0], v[1], v[2]); N.push(nx, ny, nz); } I.push(b, b + 1, b + 2, b, b + 2, b + 3); };
+    const P = [], N = [], I = [], E = [];
+    const face = (nx, ny, nz, verts) => {
+      const b = P.length / 3;
+      for (const v of verts) {
+        P.push(v[0], v[1], v[2]); N.push(nx, ny, nz);
+        if (nz) E.push(v[0] + hx, v[1] + hy, sx, sy); else if (nx) E.push(v[2] + hz, v[1] + hy, sz, sy); else E.push(v[0] + hx, v[2] + hz, sx, -sz);
+      }
+      I.push(b, b + 1, b + 2, b, b + 2, b + 3);
+    };
     face(0, 0, 1, [[-hx, -hy, hz], [hx, -hy, hz], [hx, hy, hz], [-hx, hy, hz]]);
     face(0, 0, -1, [[hx, -hy, -hz], [-hx, -hy, -hz], [-hx, hy, -hz], [hx, hy, -hz]]);
     face(1, 0, 0, [[hx, -hy, hz], [hx, -hy, -hz], [hx, hy, -hz], [hx, hy, hz]]);
     face(-1, 0, 0, [[-hx, -hy, -hz], [-hx, -hy, hz], [-hx, hy, hz], [-hx, hy, -hz]]);
     if (!o.noTop) face(0, 1, 0, [[-hx, hy, hz], [hx, hy, hz], [hx, hy, -hz], [-hx, hy, -hz]]);
     if (!o.noBottom) face(0, -1, 0, [[-hx, -hy, -hz], [hx, -hy, -hz], [hx, -hy, hz], [-hx, -hy, hz]]);
-    this.emit(mat, P, N, null, I, x, y + hy, z, o.rx || 0, o.ry || 0, o.rz || 0);
+    this.emit(mat, P, N, null, I, x, y + hy, z, o.rx || 0, o.ry || 0, o.rz || 0, E);
   }
 
   /** Box between two points (beam / rail), square section w x h. */
@@ -160,21 +172,21 @@ export class Builder {
   cyl(mat, x, y, z, r0, r1, h, seg = 12, o = {}) {
     if (this.dry) { this._sil(x, y, z, Math.max(r0, r1) * 2, h, Math.max(r0, r1) * 2, 0, mat); return; }
     const arc = o.arc ?? TAU; const full = arc >= TAU - 1e-6;
-    const P = [], N = [], U = [], I = [];
-    const slope = (r0 - r1) / h; const nl = Math.hypot(1, slope);
+    const P = [], N = [], U = [], I = [], E = [];
+    const slope = (r0 - r1) / h; const nl = Math.hypot(1, slope); const slant = Math.hypot(h, r0 - r1);
     const rm = (r0 + r1) / 2;
     for (let i = 0; i <= seg; i++) {
       const a = (o.a0 || 0) + (i / seg) * arc; const ca = Math.sin(a), sa = Math.cos(a);
       P.push(ca * r0, 0, sa * r0, ca * r1, h, sa * r1);
       N.push(ca / nl, slope / nl, sa / nl, ca / nl, slope / nl, sa / nl);
-      U.push(a * rm, 0, a * rm, Math.hypot(h, r0 - r1));
+      U.push(a * rm, 0, a * rm, slant); E.push(1e4, 0, 2e4, slant, 1e4, slant, 2e4, slant);
       if (i < seg) { const b = i * 2; I.push(b, b + 2, b + 1, b + 1, b + 2, b + 3); }
     }
     if (o.caps !== false) {
       for (const [yy, r, ny] of [[h, r1, 1], [0, r0, -1]]) {
         if (r <= 1e-4) continue;
-        const c = P.length / 3; P.push(0, yy, 0); N.push(0, ny, 0); U.push(0, 0);
-        for (let i = 0; i <= seg; i++) { const a = (o.a0 || 0) + (i / seg) * arc; P.push(Math.sin(a) * r, yy, Math.cos(a) * r); N.push(0, ny, 0); U.push(Math.sin(a) * r, Math.cos(a) * r); }
+        const c = P.length / 3; P.push(0, yy, 0); N.push(0, ny, 0); U.push(0, 0); E.push(r, 5e3, 1e4, -1e4);
+        for (let i = 0; i <= seg; i++) { const a = (o.a0 || 0) + (i / seg) * arc; P.push(Math.sin(a) * r, yy, Math.cos(a) * r); N.push(0, ny, 0); U.push(Math.sin(a) * r, Math.cos(a) * r); E.push(0, 5e3, 1e4, -1e4); }
         for (let i = 0; i < seg; i++) I.push(c, c + 1 + i, c + 2 + i);
       }
     }
@@ -185,11 +197,11 @@ export class Builder {
         const b = P.length / 3;
         P.push(0, 0, 0, ca * r0, 0, sa * r0, ca * r1, h, sa * r1, 0, h, 0);
         for (let k = 0; k < 4; k++) N.push(nx, 0, nz);
-        U.push(0, 0, r0, 0, r1, h, 0, h);
+        U.push(0, 0, r0, 0, r1, h, 0, h); E.push(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         I.push(b, b + 1, b + 2, b, b + 2, b + 3);
       }
     }
-    this.emit(mat, P, N, U, I, x, y, z, o.rx || 0, o.ry || 0, o.rz || 0);
+    this.emit(mat, P, N, U, I, x, y, z, o.rx || 0, o.ry || 0, o.rz || 0, E);
   }
 
   /** Revolved profile [[r,y],...] bottom->top. */
@@ -293,11 +305,11 @@ export class Builder {
       return;
     }
     const tris = triangulate(pts); const n = pts.length;
-    const P = [], N = [], I = [];
+    const P = [], N = [], I = [], E = [];
     const map = o.vertical ? (px, pz, yy) => [px, pz, yy - h / 2] : (px, pz, yy) => [px, yy, pz];
     const up = o.vertical ? [0, 0, 1] : [0, 1, 0];
-    if (o.top !== false) { const b = P.length / 3; for (const [px, pz] of pts) { P.push(...map(px, pz, h)); N.push(...up); } for (const t of tris) I.push(b + t[0], b + t[1], b + t[2]); }
-    if (o.bottom !== false) { const b = P.length / 3; for (const [px, pz] of pts) { P.push(...map(px, pz, 0)); N.push(-up[0], -up[1], -up[2]); } for (const t of tris) I.push(b + t[0], b + t[1], b + t[2]); }
+    if (o.top !== false) { const b = P.length / 3; for (const [px, pz] of pts) { P.push(...map(px, pz, h)); N.push(...up); E.push(0, 0, 0, 0); } for (const t of tris) I.push(b + t[0], b + t[1], b + t[2]); }
+    if (o.bottom !== false) { const b = P.length / 3; for (const [px, pz] of pts) { P.push(...map(px, pz, 0)); N.push(-up[0], -up[1], -up[2]); E.push(0, 0, 0, 0); } for (const t of tris) I.push(b + t[0], b + t[1], b + t[2]); }
     if (o.sides !== false) {
       const ccw = polyArea(pts) > 0;
       for (let i = 0; i < n; i++) {
@@ -309,10 +321,12 @@ export class Builder {
         const b = P.length / 3;
         P.push(...map(p[0], p[1], 0), ...map(q[0], q[1], 0), ...map(q[0], q[1], h), ...map(p[0], p[1], h));
         for (let k = 0; k < 4; k++) N.push(...nn);
+        const el = Math.hypot(q[0] - p[0], q[1] - p[1]);
+        if (o.vertical) E.push(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); else E.push(0, 0, el, h, el, 0, el, h, el, h, el, h, 0, h, el, h);
         I.push(b, b + 1, b + 2, b, b + 2, b + 3);
       }
     }
-    this.emit(mat, P, N, null, I, x, y, z, o.rx || 0, o.ry || 0, o.rz || 0);
+    this.emit(mat, P, N, null, I, x, y, z, o.rx || 0, o.ry || 0, o.rz || 0, E);
   }
 
   /** Tube along a 3D polyline (frame-space points) with radius r (number or fn(t)). */

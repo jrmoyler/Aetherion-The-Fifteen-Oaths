@@ -64,6 +64,9 @@ export async function createSourceAbilities(ctx) {
       loader.loadAsync(`${import.meta.env?.BASE_URL ?? '/'}assets/ability-source/linear-extended/models/snake.glb`),
     ]);
     const settings=modules.casting.settings;
+    // DragonRig drops the export's presentation nodes (Plane, Hemi) but keeps the idle clip that
+    // still animates them; strip those dead tracks so binding the clip does not warn on every cast.
+    for(const clip of dragon.animations??[])clip.tracks=clip.tracks.filter(t=>!/^(Plane|Hemi)\./.test(t.name));
     Object.assign(models,{
       shark:buildSharkRig(shark,{length:settings.shark.length}), wolf:buildWolfRig(wolf,{length:settings.wolf.length}),
       dragon:buildDragonRig(dragon,{wingspan:settings.dragon.wingspan}), gyro:buildGyroscopeRig(gyro,{height:settings.gyro.size}),
@@ -167,6 +170,38 @@ export async function createSourceAbilities(ctx) {
     handles.add(handle); if(delay===0)spawn();
     return handle;
   }
+  // Presentation-only port of the source DummyField#applyHits: packs whose source app stands
+  // practice targets knock a body back when a line cast's front sweeps it or a zone cast lands
+  // on it. Casts that pick their own targets (handlesOwnHits) are left alone, as in the source.
+  const _hitPoint=new Vector3(), _hitList=[];
+  function applyHits(s){
+    const m=modules[s.pack], hit=m.settings?.dummies?.hit;
+    if(!m.castShapeOf || !hit || hit.enabled===false || m.settings.dummies.enabled===false)return;
+    const bodyRadius=m.settings.dummies.bodyRadius??.3;
+    for(const ability of s.manager.active){
+      if(!ability.isActive || ability.handlesOwnHits || !ability.origin || !ability.position || !ability.direction)continue;
+      if(m.castShapeOf(ability.element)===m.CastShape.ZONE){
+        if(!(ability.u>=1))continue;
+        if(ability.pointAt)ability.pointAt(1,_hitPoint);else _hitPoint.copy(ability.position);
+        const radius=m.zoneRadiusOf(ability.element)*(hit.zoneScale??1)+bodyRadius;
+        for(const target of s.context.dummies.findTargets(_hitPoint.x,_hitPoint.z,radius,_hitList)){
+          if(!target.alive)continue;
+          let dx=target.position.x-_hitPoint.x,dz=target.position.z-_hitPoint.z;const len=Math.hypot(dx,dz);
+          if(len<1e-3){dx=ability.direction.x;dz=ability.direction.z;}else{dx/=len;dz/=len;}
+          target.kill(dx,dz,hit);
+        }
+      } else {
+        const a=ability.origin,b=ability.position,reach=(hit.radius??1.5)+bodyRadius;
+        const mx=(a.x+b.x)/2,mz=(a.z+b.z)/2,half=Math.hypot(b.x-a.x,b.z-a.z)/2;
+        for(const target of s.context.dummies.findTargets(mx,mz,half+reach,_hitList)){
+          if(!target.alive)continue;
+          const ex=b.x-a.x,ez=b.z-a.z,l2=ex*ex+ez*ez,p=target.position;
+          const k=l2>1e-9?Math.min(1,Math.max(0,((p.x-a.x)*ex+(p.z-a.z)*ez)/l2)):0;
+          if(Math.hypot(p.x-(a.x+ex*k),p.z-(a.z+ez*k))<=reach)target.kill(ability.direction.x,ability.direction.z,hit);
+        }
+      }
+    }
+  }
   function update(dt) {
     elapsed+=dt; ctx.renderer?.getDrawingBufferSize?.(resolution);
     for(const m of Object.values(modules)) {
@@ -177,14 +212,18 @@ export async function createSourceAbilities(ctx) {
       f.uShaderIntensity.value=m.settings.global.shaderIntensity??1; f.uGlobalGlow.value=m.settings.global.glow??1;
     }
     for(const h of [...handles])h.advance(dt);
+    // Source App order: abilities.update -> targets step -> abilities.lateUpdate -> particles.flush(time).
+    for(const s of sessions.values()){s.manager.update(dt);applyHits(s);}
+    targetReactions.update(dt);
     for(const s of [...sessions.values()]) {
-      s.manager.update(dt);s.particles.flush();s.decals.update(dt);s.bursts.update(dt);s.fissures?.update(dt);
+      // lateUpdate lays geometry off the pose the targets were just given (e.g. casting/chains links);
+      // flush(time) is required by the casting/handcast engines, whose systems hide when time is undefined.
+      s.manager.lateUpdate?.(dt);s.particles.flush(elapsed);s.decals.update(dt);s.bursts.update(dt);s.fissures?.update(dt);
       if(s.manager.active.length || s.buffs.size)s.touched=elapsed;
       // Keep source particle tails alive; retire idle floor caches instead of leaking GPU pools.
       if(elapsed-s.touched>18)clearSession(s);
     }
     boostAuras.update();
-    targetReactions.update(dt);
     lights.update(dt);
   }
   function stopAll(){for(const h of [...handles])h.stop();for(const s of [...sessions.values()])clearSession(s);targetReactions.reset();boostAuras.reset();lights.reset();}

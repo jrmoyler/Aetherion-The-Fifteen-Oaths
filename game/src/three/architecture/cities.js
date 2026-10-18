@@ -17,6 +17,7 @@ function base(id) {
       wall: ['stone.limestone', { tint: p.stone }], trim: ['stone.darkgranite', { tint: p.trim }], metal: ['metal.iron'], roof: ['tile.roof', { tint: p.trim }],
       wood: ['wood.weathered'], inlay: ['metal.brass'], found: ['stone.darkgranite', { tint: p.primary }],
     },
+    dress: { rim: { items: ['urn', 'planter'], step: 10 }, tiers: { items: ['urn', 'planter', 'statue'], step: 7 } },
     hall(S) {}, signature(S) {},
     house(S, w, d, h) { genericHouse(S, w, d, h); },
   };
@@ -25,5 +26,5 @@ function base(id) {
 export const STYLES = {};
 for (const id of Object.keys(OATH_BY_ID)) {
   const b = base(id); const over = CITIES_A[id] || CITIES_B[id] || {};
-  STYLES[id] = { ...b, ...over, mats: { ...b.mats, ...(over.mats || {}) }, banner: { ...b.banner, ...(over.banner || {}) } };
+  STYLES[id] = { ...b, ...over, mats: { ...b.mats, ...(over.mats || {}) }, banner: { ...b.banner, ...(over.banner || {}) }, dress: over.dress === undefined ? b.dress : over.dress };
 }
