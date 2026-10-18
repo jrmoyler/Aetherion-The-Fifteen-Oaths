@@ -695,6 +695,107 @@
   "ok": true,
   "review": "tools/blender/creatures/review/golem.png"
  },
+ "golem-oath-05": {
+  "id": "golem-oath-05",
+  "file": "game/public/assets/creatures/golem-oath-05.glb",
+  "bytes": 1603332,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 22,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 8358,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.156,
+     0.102,
+     0.058,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.323,
+     0.107,
+     0.672,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.434,
+     0.202,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.434,
+     0.202,
+     1
+    ]
+   }
+  },
+  "bones": 22,
+  "bbox_min": [
+   -1.346,
+   -1.033,
+   -0.029
+  ],
+  "bbox_max": [
+   1.28,
+   0.667,
+   3.194
+  ],
+  "height": 3.194,
+  "faces_plus_z": true,
+  "death_end_height": 0.831,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/golem-oath-05.png"
+ },
  "hound": {
   "id": "hound",
   "file": "game/public/assets/creatures/hound.glb",
