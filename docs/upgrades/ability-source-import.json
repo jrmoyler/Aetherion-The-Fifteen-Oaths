@@ -1,0 +1,901 @@
+{
+  "repository": "https://github.com/jrmoyler/Ability-Matrix",
+  "commit": "c16da3c978a4815f46273fdcda2252ab48977a53",
+  "files": [
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/elements.js",
+      "sha256": "a6edc4f84fa33f25ac771bf679e96e4999ae414d7d86f8eef9b3ebf66e0d8279"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/core/CameraRig.js",
+      "sha256": "a03429dfd97a3b018c954d4f0f1ccdbbf8314620207598af06e69d5c0a323cf0"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/core/Renderer.js",
+      "sha256": "59af65c48229d64495b895b3895cc0b6e62b07b702c814dd951dac55c2ebf4cf"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/core/App.js",
+      "sha256": "1e34ad5695afee2adb2c156d198c9c92568ec5ece8aa924dd1e12b881ea34b9d"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/sandbox/Locomotion.js",
+      "sha256": "b629eb3bef449d0e08d83af7c2ce577ace802f01c908af6f06d018893fdda121"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/input/TouchControls.js",
+      "sha256": "6da3f0e5c71f175fbd5a5ee80e46924f30917f0fb0460897a9891742d90ce2bd"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/input/InputManager.js",
+      "sha256": "17d30526e3e2ce37e95b09b9e733bf2e05a8a5066abb6255af376556a458ce6e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/ui/styles.css",
+      "sha256": "ff9d6ecea4049c591b76ee73773c1f6dcfbceaa0e2cd81d580b46ca49c1a19f1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/ui/HUD.js",
+      "sha256": "a78ba073bc0298bb641b17c3947a09019d0471208dc54a4646655e3a6816e4b4"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/orbitlock.js",
+      "sha256": "f05b2a8c41aca047f3a2e7b134f773a554be7ee3f71c7a86994f1d96072d17f9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/bilelance.js",
+      "sha256": "fcc4cc4e06587896894f0ce38da1e8a942c7af6efbbc1227d9a9c6f4e482f613"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/brine.js",
+      "sha256": "952e175b7a587a4f11828700e6b3df6d5b472197a68f1742d985352e83f56381"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/bloomcrown.js",
+      "sha256": "e4210ce6cba6aa360e44b89fb0b586102a119303dc60a47463821bf1b6d0513c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/acidchoir.js",
+      "sha256": "c5239bfc77ad3cbd909aa3d599ca439de0c2d04a2d78eb59ad9f5e220f204b9d"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/shadepuppet.js",
+      "sha256": "412b7a62c20c58c070c2069903d7719e74011f379dbdb1b01acbc80bbe7651b8"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/hemorrhage.js",
+      "sha256": "67ace7b9970e94358ac23f0c34c4260e1797eef8535434a807760f972412114a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/pulsar.js",
+      "sha256": "2d68b11092ab5e22e5d35f274a35f2cbff8ea9797376d3859ef31af92136fe4d"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/cometharpoon.js",
+      "sha256": "9a17ef569d0e0087308554b537539cc50187e07c7ad28869ac5d033091e04ac6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/haloguillotine.js",
+      "sha256": "3d44134d20d350e3d303baad0d6154a72f6460ffd4ea4abe8c194e2fff052a2a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/noxioushalo.js",
+      "sha256": "abe22f250c85af9b34c0f9b2535306126c5e0e2c1211ca2297e42fc2f75eb783"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/sporecoffin.js",
+      "sha256": "f78ff87d4daa4768ab2631786b774494b50b28eb38428131a44d66b709056d3f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/quartzspire.js",
+      "sha256": "9661655b141706b61313e45175e8647687ee40527404cdf9d125ea50c5dcbd3a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/glasstide.js",
+      "sha256": "085ac2f2dd03abb1e4e57228cc664bae0a4338edd0348c33c784f3e24ed76ffa"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/rewindsnare.js",
+      "sha256": "b0aec4c51a207ce598fb5e5f1129495a1f2096d633ba45cf0590a621227b3bd6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/baptism.js",
+      "sha256": "7d2993150ea232dd1f25f823dc007312cd9116b9d8c80462ec102d64c5ec5c6e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/shearwall.js",
+      "sha256": "0e65f8b7e7bd3542b54e2c2db6bdca30a651c221aca0695f258d1bb527723825"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/faultchoir.js",
+      "sha256": "ac719d2ad2102fed0f042965ddc9a9064a42575bf045ec74d7baa5148a82d0c0"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/veinlattice.js",
+      "sha256": "cda96cafc9e036df3690c6c43f418bae45631b3902e6eda78af1fb26d7150a75"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/hoarfrost.js",
+      "sha256": "6ef91027b7a64bfdf53dc7cc6e3af82965e4eb3feb7780df30e05eefa1d207d3"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/arterial.js",
+      "sha256": "3b2ebedd9fa864f6bae3ce890e98ed7d1c47b76d16294f118472bd23868a6567"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/eclipseneedle.js",
+      "sha256": "fe7ea1462cf70ed757f58f52566ea0b12234aa1a0ed0746001e857da3773f5aa"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/briar.js",
+      "sha256": "ea49087526d01454a24baa8641969780151e34452428f5f6a40613e050965e50"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/vitriol.js",
+      "sha256": "b197ad0dcbd90530b54e08da9d2814aad8e571140f8f8e377f2857af1dbcd1cb"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/horizon.js",
+      "sha256": "ed56dcf55a4cba177c9484b98ad3ec1e63291f29d561cc0f10ef2a2c2649f2f6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/voidbloom.js",
+      "sha256": "500cacb6379680f0f74396ba857b37d643d7b9140ef9f0702625deb39059cc4c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/darkwell.js",
+      "sha256": "8e8cc9ab9984305bfdbaf135db9567388976ce0e24393c971580678de1558dfb"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/runemeteor.js",
+      "sha256": "f1a6795fc5f09ee44c282471e5c8a945bf9544f442c6daded64ab549f01e95b6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/undertow.js",
+      "sha256": "6e89d5f6ad8e475eef94c334fc01cf5f8430d368eb996a7add5efb158ddfcdf7"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/vortexbell.js",
+      "sha256": "40a06186630553b8b9c8a01d90f752a2df881999c1cc8aeaca96f2dc73f0f859"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/sirennote.js",
+      "sha256": "9cfce50511845a0187640091bde9a6d202c0f148238ea09bd00b409908e6638c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/dustmarch.js",
+      "sha256": "d0ba063f742547e31cd03095869091381f82c096c36d7b5c33343b0497d9e539"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/clotarmor.js",
+      "sha256": "b2ca4bf84dd48bb9d82e49220d40f03cb925f78186d46f8847ab2426cce52b9f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/prismlie.js",
+      "sha256": "a6e06f969a3807259942c7511634637acae87dccae2530090a321bda59e8c6f3"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/fulgur.js",
+      "sha256": "3241136edbd563d56a720a983c6eb4767bf3c8825d596bd301324f4f8b2b8df1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/rimehalo.js",
+      "sha256": "a2a4e0da0238d0ce185e6b16b3fc06cba3145d6b858ec6782e9c626c64a236be"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/pendulum.js",
+      "sha256": "761a79984588e7090217428ed3eea385f9bc3e8a71840e1407f50124963a6dfb"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/stasisbell.js",
+      "sha256": "bfc4fceb7bfb813d2c7d52fd75787c34440ef1f7b62b0c98e2bdf3eae3c87102"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/heartstake.js",
+      "sha256": "96eaababda646111f2e67cefb25f0906dc0571c1f65468c85930c759546a98ca"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/thornvolley.js",
+      "sha256": "9a023398c2460f7252729c874a0ff0d1a44c76e71712432edd3de06d9277a351"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/secondself.js",
+      "sha256": "a65b56cf389e4445c5a0ed005cf11322eee84e3531f6d34791db38286738225f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/pearltempest.js",
+      "sha256": "b26b64e46c4eac14f69515826e4d90670e02bc9441569a0ac7e130e7f0af7103"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/mycelium.js",
+      "sha256": "30b9317720a3322cf4e0c149ef2db0c8fafa6ae81582b88883e99e57d05facaa"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/harmonic.js",
+      "sha256": "2cb7feaf8cf140d400535c2967d93d704632cb31110221324ca3895be0b81ac9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/calving.js",
+      "sha256": "50967d2d7aeb97de570cdfd4e55aabb6456c1293c0e175fa422bbd2b235395ee"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/index.js",
+      "sha256": "40ecfac922ac1204edfbb25b1eb8633f7f76f6f5fe323f1efa84100d84979b80"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/umbral.js",
+      "sha256": "e225121f17cbe5d0a175bd9738b3ecd28c9ac63f188b84c65e26c6cd7aaec514"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/sigilgate.js",
+      "sha256": "f902a7c931ea54f85bffc005556381f72ffc4921d452f558994baa82f72e97aa"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/reliquarydawn.js",
+      "sha256": "09cb81c0db5db873a798981eadfa4d99af9a2832ba4a87a6890b8fc16507ec47"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/mindlattice.js",
+      "sha256": "8c31f966643eb37eaf46bbb5305b21ee1040206e6be4832af49aced77de44654"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/config/codex/whiteout.js",
+      "sha256": "f21ee44bfb2eec47d22b89c557cdb38e1122df9362dccecb67e4cd0369912965"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/NoxiousHaloAbility.js",
+      "sha256": "442fa8abd7ee156232079a96b8af795f3532e4dfe0485c4c13256d5da13d9559"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/AcidChoirAbility.js",
+      "sha256": "5f34b71a792bcb87ac4b3882d63aae90ff2e5a84c379073b856c07387634fdc0"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/SecondSelfAbility.js",
+      "sha256": "51e6894d8907ad96fa1a25b468d2d83784b3c21738eb5544bd8172bed0cba4c2"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/VortexBellAbility.js",
+      "sha256": "b8de0c5a2d636e446013653f2ca33738390fb50dfc333fc78a50f5445425796a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/GlacierCalvingAbility.js",
+      "sha256": "dafc861d1095b1ecd09504b2896ddfa889bd30c441c3da878a61cec825731128"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/GlassTideAbility.js",
+      "sha256": "33208f4576c2d1c0fc7f9771a2f5aacbee792b47c0a0f4651714b30f04389315"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/HemorrhageRingAbility.js",
+      "sha256": "066b6374b708632f587399167ce72a7d475904ddccd0770c4f9e75a6e0f9c549"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/EventHorizonAbility.js",
+      "sha256": "51e698dea8379c484441512e994b208fedf3d17cd36bdac1403eb0416658e1cb"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/ReliquaryDawnAbility.js",
+      "sha256": "683279202a146f3722d9c2d8d6308d69e34db9bb95b092fbfc5579cc78cdabbc"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/HeartstakeAbility.js",
+      "sha256": "6e09cb12163f617bb1079e357eb6d4bbce980200e7190213924fa90c5d780fb2"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/SporeCoffinAbility.js",
+      "sha256": "7f43865c660340a650618e07ed4e875ca29360a94f583756fb57fc3c34b33cc3"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/MyceliumWakeAbility.js",
+      "sha256": "c96c031b924ff8ce3a7d6497c675d60dc5094b2d5fbd2dd66202f9153e8f5363"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/FaultChoirAbility.js",
+      "sha256": "c316c1c3f9834932cb9d022f9585a55ad4589188a7403adaf490572cf87d789f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/PendulumCleaverAbility.js",
+      "sha256": "7acee30012531201450e14d8a51b8d494a8fedff83e39a462f64f417dca6ac90"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/BrineGeyserAbility.js",
+      "sha256": "c8ab3942b500efaaafa805f7248cfe92e09b6d2f6db2d839ef4dc340322d2096"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/QuartzSpireAbility.js",
+      "sha256": "316c288d9244c600baf1c9f1266f2a76fff3e82332d3ec060ef9229694ceb88c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/RimeHaloAbility.js",
+      "sha256": "90b1a46473e35e13a37c5be21b9bfa7070cc7044535ba57e3eb51cc704deaa2c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/PulsarLashAbility.js",
+      "sha256": "6e8ed1a29b9553a7365316f112f465225b84de3cd7cb0b4b48c920266f2ed1a9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/MindLatticeAbility.js",
+      "sha256": "4eec7a6214f4fcbacf44c5f26987b99a0be3ea8f38e5650e917e13bfd5b59c9b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/CometHarpoonAbility.js",
+      "sha256": "f025db0cbac3bcc13bbf89d545f0c9124bc460926570d6e2e71b975acc183ed9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/DarkMatterWellAbility.js",
+      "sha256": "b8d62209396730712395083ab547a69375938b79e7da21c657eeb429fc11a7b1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/RuneMeteorAbility.js",
+      "sha256": "54c2c076bcb212f8981e0ad6bb148b0f6334dc15a21350daa0c4ec1631616c1b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/VeinLatticeAbility.js",
+      "sha256": "695d83e0e3d1910f84ec52014f3977015ccb8c20c65c01b53cbef79382c32d47"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/HoarfrostMirrorAbility.js",
+      "sha256": "b580b64d2310399c82d17bf5a66a21dbfad000c0566d2f60bc42c5506e65f4ef"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/DustDevilMarchAbility.js",
+      "sha256": "c024c1493b5e7926f6fc18704900063e1bb0eb627c4ef5a409ab79c792f8317f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/UmbralGuillotineAbility.js",
+      "sha256": "8f4e4d57c38cf4fe3bf47f4f46c3d0340a72014d5594c008c61f25d0e5fac270"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/BriarCathedralAbility.js",
+      "sha256": "e569c88cc00b6be6daa18485cb5740131034e225ff72c548e20d8c4ba099278b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/HaloGuillotineAbility.js",
+      "sha256": "cf609839e7424e1e2a95dc6870170c00bac8cf5823da0ec8eeaec6f1bd85a225"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/ShadePuppetsAbility.js",
+      "sha256": "42cd4c44a42243dc089675b821544e010f0703e4e83c4fa8796321e22274e188"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/ShearWallAbility.js",
+      "sha256": "496622204e1d4efcc856a1966d8f2ceb4343d96b5c1d06528a2c458a6d14daac"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/SigilGateAbility.js",
+      "sha256": "962186eadb286cc3d0d2f2ec2504331592653aea73d48e3d59f088e661f1a6fc"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/PrismLieAbility.js",
+      "sha256": "e9021d32a5e9f4f14fbcb2f6dde30fed745e618049a1a7f8774b19382bda7b6a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/UndertowChainsAbility.js",
+      "sha256": "0a387c39515411eb6229532aba8609425a94941ffe2c930954c61899b0eeb014"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/ArterialWhipAbility.js",
+      "sha256": "1a705d47d8414bcb749790f0846138cf792837b59cff7c4caa7d3332e600d5e9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/WhiteoutNeedleAbility.js",
+      "sha256": "6468f3a805d6b7474ba760f4d967e057c5939d59ed2803860fc3a69bfb002bd3"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/ClotArmorAbility.js",
+      "sha256": "6f85e3aebdaadfc527e8f5df25f05497b462864d998e5e9c659bfa52d7306610"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/EclipseNeedleAbility.js",
+      "sha256": "d41686260ab8b75a71743d7f63bb3a89ee4edfaa27204030037b3208e0a6e3ca"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/HarmonicReedAbility.js",
+      "sha256": "921cc5b2ce5c3408875f1b2555b4aa953244c6c276a83a37a7e6333edc2f3683"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/VitriolRainAbility.js",
+      "sha256": "a551eba6becb5539ea7d11a1f968aa849503fb28b4e95fcdd5dbc0d3f6a73fcc"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/CrimsonBaptismAbility.js",
+      "sha256": "fbf401c124dfbdef4c8a8cc9823fdaa910b47b2f812a0f92f5fc8d7f3e953bd1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/PearlTempestAbility.js",
+      "sha256": "878dbfb4cf1039001fe771c6759e6b979e75c5a72a2eef5ca9d68f000e8e6b7c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/index.js",
+      "sha256": "2a26465fccb6713f1f6d2fa66fe625949990b8743941359f91f5e51dd7de5aea"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/BileLanceAbility.js",
+      "sha256": "51315cab4c0218528feb9bc61ac891d8b2119b9a105d144dd950bf62f77bba14"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/BloomCrownAbility.js",
+      "sha256": "bf0764e86be2fc48c3359a112ec353517cd617fc24d0552c16c54ba5c52dd6c2"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/OrbitLockAbility.js",
+      "sha256": "a447b8a889b0a4b1e5af4dfc3144b4dcad1e2561e6556ff9c59e3b1df1eee1c6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/SirenNoteAbility.js",
+      "sha256": "4a032efe7426fd87ac8f8115f9faa533893f74c79266b1041e0a95a1a8e75a8c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/StasisBellAbility.js",
+      "sha256": "87721a0c666af6cd8de916fc189d0ccb369606d65fc5112d28d7160b4347a52f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/RewindSnareAbility.js",
+      "sha256": "ce278d280a3e5e867e1123f453d06644c07b3c36d9e4a1d1964e05eab751c4d1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/VoidBloomAbility.js",
+      "sha256": "cfc2066f163ccb2b3f8e9d08deeaa2645c5525698df1293234fbf826760b8cc4"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/FulgurCageAbility.js",
+      "sha256": "94495036a55c11819dc783419b7ebe0581d59395f58b6c08b6104e83d9c226e5"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/abilities/codex/ThornVolleyAbility.js",
+      "sha256": "7cdc763b05ced485599bcb4af0e34fa09a7bfb091682a43bc0588c6eb2684f04"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/HoarfrostMirrorGeometry.js",
+      "sha256": "e9d672078c551e3e318286a5c46312a89df3f709e416777472e14242f00b04a9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/RimeHaloGeometry.js",
+      "sha256": "9f028da9ac0fb804bc1f64a8ba541e95b24cc527858f333cd898082c0d4526c6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/ReliquaryDawnGeometry.js",
+      "sha256": "5b7ec5f80ac0ba2f0518eca2a9d3779fdb6143ae6da34c919362fe94aaf3812d"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/EclipseNeedleGeometry.js",
+      "sha256": "9bc5b92cff7769441ad9dbe61bfe48bd6176361c10422c6cc118f4b583a49527"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/FaultChoirGeometry.js",
+      "sha256": "c3a9dc7ef2df0ca1a3eae68af788810a400eaa12f9d2e9d810d952b0502c8f21"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/PearlTempestGeometry.js",
+      "sha256": "50ed380698b17c02684e4e1e386cd0a681c66aed103e3bf10ed41094167b2650"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/HeartstakeGeometry.js",
+      "sha256": "3cc22e3f4624e147c8498884cbd1d9a0793a8fecd7ca55dea4349a8155f4e2b1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/GlacierCalvingGeometry.js",
+      "sha256": "3e111b1faf81eac54d148859aa436393e64803ec17fdc5d2ffcdab9e170d155b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/WhiteoutNeedleGeometry.js",
+      "sha256": "dbfa82ca75c087460ef9dc80c34d765aba302f1e61d90bee70e9a5f9d7c9cb45"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/SecondSelfGeometry.js",
+      "sha256": "3cb69043fceb8a5a5f38ebc536f0e431dd0f2e9734117c6412d808ce2d2cdc72"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/HaloGuillotineGeometry.js",
+      "sha256": "ffd6679ebe7df96cb7f91cc332c7ad7c8bc498344d695a14f01b8aae47e8e188"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/ArterialWhipGeometry.js",
+      "sha256": "449e631d7b724a99e432f1ef35e1a304654ea5fc694c94cf622bc7ebcd0a6918"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/BriarCathedralGeometry.js",
+      "sha256": "915201ed20ae6b4ae80a6cff5167694bce3cea33b0f2687848ee960416c91ac1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/CometHarpoonGeometry.js",
+      "sha256": "17b51ad545df0f7666c03e27a10f371a83aee49186e6a419f0975de4c2f04a1c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/DustDevilMarchGeometry.js",
+      "sha256": "cca52b71d98d05b10fb5e63dbb0d4deab12226cd438a4fc45f7dd4e6a69c6714"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/StasisBellGeometry.js",
+      "sha256": "4381fd9e26d6a0a4494216db7507e29c4cb6018a87ac06112479f180337c48ca"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/PulsarLashGeometry.js",
+      "sha256": "1daafa49a315ed5568512db97127488f414a2799836c54870224abbce76c4340"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/NoxiousHaloGeometry.js",
+      "sha256": "361e5d27f31af87617cf94a9cf13b7f8d58615e0f395b53e00c5576fd1efc6a7"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/MyceliumWakeGeometry.js",
+      "sha256": "355db40fd012e7c29af7d5ea1d835b1b156f0ee8b948545d33090336a81667aa"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/VoidBloomGeometry.js",
+      "sha256": "b7d99e9ba6d03b6cd100ab418e6c984c156b99cb08300a14678d380c4b5eac8f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/BileLanceGeometry.js",
+      "sha256": "5544b01578349d11a6ce967c50cdc9a20c36d907845db5ad31bfb46fbf97122f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/RewindSnareGeometry.js",
+      "sha256": "b309ef9846abd3164090ddbd2d642741329beca0dbedf62a6cb6d3a1e73030c6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/UmbralGuillotineGeometry.js",
+      "sha256": "c1a34e0492ff92368ff076a262f27a3c3826b3e8f76f2597e50bb0541a771c3c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/GlassTideGeometry.js",
+      "sha256": "8c6d19a32d33b024c16923a1ecf3a523fee37b63a6820c6dfee4f8c31e671a38"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/CrimsonBaptismGeometry.js",
+      "sha256": "4266e71f2de8b71304f495f9cf360643074b96a8721efc1c6de7355503975834"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/PrismLieGeometry.js",
+      "sha256": "87ad8609296bdb14f6775e0ac573c24346bc0aed91a43f15b6acb4207e9f4a55"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/FulgurCageGeometry.js",
+      "sha256": "7c8def7fda7fd2b2373f75e4c3383ac7d8d4abd8cf33394da21f2d3cbe7cebec"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/SigilGateGeometry.js",
+      "sha256": "d09b5aeac79327d8926476fe820014ef03771367485ed3ac2d7acdf0b362cd3e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/DarkMatterWellGeometry.js",
+      "sha256": "cd19d04987e532f2ffff7cda84e14a7ec8715aef54818ca281331337216e956e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/BloomCrownGeometry.js",
+      "sha256": "1b906808dc7ca0d8f984f3c16560e41266eb1d9a06f8bd53f56fae64001c18af"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/OrbitLockGeometry.js",
+      "sha256": "ed1e4e002a29cb1a04805ba8af1cfb766a3d7223ebfb3f63f7903b1d07a5f7e6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/BrineGeyserGeometry.js",
+      "sha256": "c11bbd8f191b85da1bb6a772c29081a45f78cadc3e74e5bec3a45e911335f87b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/SporeCoffinGeometry.js",
+      "sha256": "1728badfa10bc1a6ba92d7a94b8d30b9698c9d93ba58990122dbfa38b5ed9070"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/ClotArmorGeometry.js",
+      "sha256": "76ffbe46fd617cb2cc20569f74838df2020db9cdbf6b382b2416ed8358541ec9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/ThornVolleyGeometry.js",
+      "sha256": "14623d9412bae7858a42ebac89b14f1a49d26db82977c8bf99817c48c8ba0d15"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/ShadePuppetsGeometry.js",
+      "sha256": "df4273f88e9c52836112613389da56ab7b2bc6151cf5f86b34f103d786661e0c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/VeinLatticeGeometry.js",
+      "sha256": "46e7177dbd66e91027b52c7ee87c0a021ff1155c8cd18cc03b4b5e23eb6b0410"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/EventHorizonGeometry.js",
+      "sha256": "bea844e565466fff9b0cfe289175db948cde21d880134de04af05f375c77c309"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/QuartzSpireGeometry.js",
+      "sha256": "055e1d0305dbbbcfde2f9bf548f4a80ee079ffb57350014a8a3a4fec08bb72e3"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/PendulumCleaverGeometry.js",
+      "sha256": "65ac09d87600c628a22aedeb631da690edb4a90b944aa4978c84c98f3c39116a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/VitriolRainGeometry.js",
+      "sha256": "203c2165a081eb230659e645fc8a402c2760b8c5214c694e5c6d1b20144ed413"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/RuneMeteorGeometry.js",
+      "sha256": "29ebec7506a9cd9fd96e749b95bcfe182526343a9a17e267fb0d55a5606e70d9"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/AcidChoirGeometry.js",
+      "sha256": "e0e550d3338b4ae1c1a28d1c90bea298063dd6be5acc21b2d0e25596326dc545"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/assets/codex/HemorrhageRingGeometry.js",
+      "sha256": "18e6c4e70e79bca4594b6e4e58f2af7d378c077877a3354c259bf895af2d0f9d"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/FaultChoirMaterials.js",
+      "sha256": "64b33baaf847431a0fb0ec2ca81ae38fffd0c2466efc218359de8fc2b3419ae0"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/BloomCrownMaterials.js",
+      "sha256": "0500b9cc2280b994f899e435efd404ac940e34e8f4ceb7fb1f7ef5cdb8c197d1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/VortexBellMaterials.js",
+      "sha256": "a6ec1be44aeef8710c2c6a7282b68b57c4e1647b7c7cf92e7ee3e9c0f5af7edc"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/ShearWallMaterials.js",
+      "sha256": "7fb89dae88357da88720fcc054adc0d8ed3ce99a91c85cb120e85984ed5ac965"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/DarkMatterWellMaterials.js",
+      "sha256": "06e0490bf4c030f3a02d1a4f74f91f6c50bac313b5ba34718882a2f79ecbda57"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/VeinLatticeMaterials.js",
+      "sha256": "41c21d8434a3110a782cfffd625e35d1de1c1549c0141a9b2e5323e20ff210dd"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/SirenNoteMaterials.js",
+      "sha256": "047188ac57c956099587dcd56a02d55627b97639f322981e17b0a2f69fe20d9a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/PrismLieMaterials.js",
+      "sha256": "90851f2977e86ae0b448821578adf68c3be6e970a4b5ae038ddb74419ea71865"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/HaloGuillotineMaterials.js",
+      "sha256": "f3ae6b75743f88401132ae3e653657c4bb1b0ff20a177f18e44f6b6fb5ed867b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/RewindSnareMaterials.js",
+      "sha256": "0282373750348452244965307983ea4fbacebc3b267a273585942752eb2a1c34"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/AcidChoirMaterials.js",
+      "sha256": "5a32cdd7dfa7ed1ccf8a46ac8a6fcc503a781ad72fa6d2fa7a2a37769031521b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/GlassTideMaterials.js",
+      "sha256": "d2527b6344c6b82660365f6942f88faeb5724b15b7769d23e88a884f07fbac27"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/VoidBloomMaterials.js",
+      "sha256": "47aeb95ebe6de23c7d27bd774be58cba9c9265237ca040a40dd08a1c93257731"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/NoxiousHaloMaterials.js",
+      "sha256": "1477ecccc5d2fec4d68f858bc6d0859af1f8eb1253fc880077cce508c24f80db"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/EclipseNeedleMaterials.js",
+      "sha256": "820ff0e77208adc7cee4f70097c859af3b6fd894f1562e1a02cce8cf125c45d5"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/GlacierCalvingMaterials.js",
+      "sha256": "1cc4e6a0d6d4b82de328d0c035b12421301bdaf040606c9e2626108a0ec6245e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/PendulumCleaverMaterials.js",
+      "sha256": "e4678b2d2962ec337b518d45b7e7aea02b3e1ba601a5e1dc1f01ed94be41187e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/HarmonicReedMaterials.js",
+      "sha256": "b9a3ef22f8ab674bfd3fd50886e2b6b6b33ee74fd568ae8c5683fbcc8a6c4ee8"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/SecondSelfMaterials.js",
+      "sha256": "d784164e6a3b6ca8ccb55e740bb3fdcf770097f290c1fbb4c80e313809c77bb8"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/MindLatticeMaterials.js",
+      "sha256": "6a702ab22fcf937b7b843b75bc940da56e97e2f1c16dc18dcfbadda369fbad0e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/BrineGeyserMaterials.js",
+      "sha256": "bf3f4c0b8eda2da884ca4e7b79e8b33a3c90fe36599d93480ace753a350209d2"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/PulsarLashMaterials.js",
+      "sha256": "ea39c1a07416f8f1091ba035a0427c38e3e5d8731cbed95d0e4d0b1a49d4d6ce"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/CrimsonBaptismMaterials.js",
+      "sha256": "1f12299e64e60b0c53fa09193e1fc34c1bdfeda897c03af5102ad596b4352ee4"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/ShadePuppetsMaterials.js",
+      "sha256": "0bb9068783ffe9a8725c1951ee84f951cb878be94c647ec145e34964b0a005b0"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/BileLanceMaterials.js",
+      "sha256": "c2c94e70997fc6e95e12e9ffabd4a7b80a010289be57219e918815ff2a5b5360"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/HemorrhageRingMaterials.js",
+      "sha256": "eebc8c34a72cdecb387dbdb4f1434c7a982279bb9a117d7f684c9cddf43f9f6a"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/CometHarpoonMaterials.js",
+      "sha256": "ffbcd01f9eb7e5a62aca6a7a46870f892f9deb0b7a7009d4eafdc2bcd933cc93"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/HeartstakeMaterials.js",
+      "sha256": "ec5dcebcc38ecd9cc764f6e157934a08574249aafc90f810d3b5861baf0f4cfd"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/StasisBellMaterials.js",
+      "sha256": "b0aa76911c426915044f4f78dfa227d3585e05937251e08c4aec4093055db4af"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/FulgurCageMaterials.js",
+      "sha256": "924600f45e291c11e12b3f9159bf79e227406e38253b032bad0900aeb6847de8"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/UndertowChainsMaterials.js",
+      "sha256": "8bf03c7d5451c1d876f345af09a1adb8a365d351c321e071f5d525279dc58ec6"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/RimeHaloMaterials.js",
+      "sha256": "d33135ef4374cff9856a9ba67964c2869dac4590f22bbae28d672c6b84aa9c2d"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/MyceliumWakeMaterials.js",
+      "sha256": "b3ba3d8aaa6389a7dc2e57fcf4132435716f0105968be36241e2730d2cd670f8"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/ThornVolleyMaterials.js",
+      "sha256": "fe2a7768ea53fdea109bc4c1374d83f64c00d182a35f13d72e491a9403401219"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/UmbralGuillotineMaterials.js",
+      "sha256": "c2f799240da93675dc74d724be79b37e41713c93a09594c99d663e0d1e3f64de"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/ClotArmorMaterials.js",
+      "sha256": "346014eb34b2f67fe89f4dfba2f595193733604a819c3c952d10c63a46fcaf4f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/BriarCathedralMaterials.js",
+      "sha256": "762d6cdcbbda4973db7b09426a621db592b8d44830ce0acd6b999dbfbdfe1b42"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/QuartzSpireMaterials.js",
+      "sha256": "706a9d9582bc038932b6a81cfc51188b3bbec779138d849d12b56db635cdd35e"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/WhiteoutNeedleMaterials.js",
+      "sha256": "c7aea5e478291db49e4589293b17cc2f54f32230110068af37f46f81922b112f"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/OrbitLockMaterials.js",
+      "sha256": "371129b058554f051989cc5a57122d21e1603bcded7ed92bb79dd5250636e42b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/SigilGateMaterials.js",
+      "sha256": "ddca0db259ef979c73e1730c9834d9659066330d19813c5c793c20079d97ec95"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/VitriolRainMaterials.js",
+      "sha256": "fc195bb8b31b14c8d6c75a4051ad2f39ba5fd2dc706eb2c640327f9cd915587c"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/ReliquaryDawnMaterials.js",
+      "sha256": "e323f5b1b33467dc0c7ac2cfa1e0726ca4917b40486ec302c5c5b1a57bbe4349"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/ArterialWhipMaterials.js",
+      "sha256": "592e17b76b8712287475e1935fcff18faab749170187a5ac2925f090a302a69b"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/HoarfrostMirrorMaterials.js",
+      "sha256": "79dbdc46c96d49ef72fb57c2e3516455507b7e42c24e34d70a39d0d6c53385bb"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/DustDevilMarchMaterials.js",
+      "sha256": "1cdffa64ad42e934b7cb401890e607668218900d7302f92197146c134007fd31"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/PearlTempestMaterials.js",
+      "sha256": "84deea96ea057b6fbbb41efb544c5adba021810501e6eed728bf64fb80d2a1b1"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/EventHorizonMaterials.js",
+      "sha256": "5689bf2796813acc2ee81fd64b52df421a53134f0935d5252120e9a42f08d8d4"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/RuneMeteorMaterials.js",
+      "sha256": "c09801d27f646abefb1eeb78df468af00f348ada65d2b77dfc7a0b06d091e476"
+    },
+    {
+      "path": "runtime/ability-matrix/packs/sandbox/src/materials/codex/SporeCoffinMaterials.js",
+      "sha256": "67a7e8fcb49063ce3ee5c626c8927352e025745b8c1049dc7b2d3efbeed2deb7"
+    },
+    {
+      "path": "game/public/assets/ability-source/handcast/models/drone.glb",
+      "upstream_path": "packs/handcast/public/models/drone.glb",
+      "sha256": "0a76415a6ea716f5b4524828f51d67a89674c3bb95328a10d2b431d3193b1193"
+    },
+    {
+      "path": "game/public/assets/ability-source/handcast/models/monowheelArmyBot.glb",
+      "upstream_path": "packs/handcast/public/models/monowheelArmyBot.glb",
+      "sha256": "5f36fc08b97de1e22ddd0588f83deef9529eb55d94aac8ee4d235d512d087324"
+    },
+    {
+      "path": "game/public/assets/ability-source/handcast/models/phoenix_bird.glb",
+      "upstream_path": "packs/handcast/public/models/phoenix_bird.glb",
+      "sha256": "cb68b7f4827d6f7bee47ca7b8bb882437b9945d00c974338e55a720f53b5d6f0"
+    },
+    {
+      "path": "game/public/assets/ability-source/casting/models/shark.glb",
+      "upstream_path": "packs/casting/public/models/shark.glb",
+      "sha256": "744c9715fce8f7859efbcfccf11178b7d5dca552435e290499331ab129bdc05d"
+    },
+    {
+      "path": "game/public/assets/ability-source/casting/models/wolf.glb",
+      "upstream_path": "packs/casting/public/models/wolf.glb",
+      "sha256": "d3f970ddfeefd79d2a2f63beafd541ae9a0d4ba6380bc7072dbdfa14d295dac2"
+    },
+    {
+      "path": "game/public/assets/ability-source/casting/models/dragon.glb",
+      "upstream_path": "packs/casting/public/models/dragon.glb",
+      "sha256": "904fc29f889668ef82204feb0d87849060ae2c7cb486769a35081a415beb4db5"
+    },
+    {
+      "path": "game/public/assets/ability-source/casting/models/magical_gyroscope.glb",
+      "upstream_path": "packs/casting/public/models/magical_gyroscope.glb",
+      "sha256": "715905b8213abcd514ed9b6f7bced500c27f9a6abd0f1297b7b289582004938c"
+    },
+    {
+      "path": "game/public/assets/ability-source/casting/models/amethyst_stones.glb",
+      "upstream_path": "packs/casting/public/models/amethyst_stones.glb",
+      "sha256": "c91ec4ecede0d1c5bd2f4db78da8784587e96cd11565338dd94dca9b2cb19d72"
+    },
+    {
+      "path": "game/public/assets/ability-source/casting/models/arcane_tome.glb",
+      "upstream_path": "packs/casting/public/models/arcane_tome.glb",
+      "sha256": "9071b301202753b4b71aee68b9736bb024d37dc2513250b092c822ca3cfecbc0"
+    },
+    {
+      "path": "game/public/assets/ability-source/casting/models/wildroot_reliquary.glb",
+      "upstream_path": "packs/casting/public/models/wildroot_reliquary.glb",
+      "sha256": "9fe8b09bdfc4482a28e340a14ec037e7089c7db39615bf35be5df81848a5100d"
+    },
+    {
+      "path": "game/public/assets/ability-source/linear-extended/models/snake.glb",
+      "upstream_path": "packs/linear-extended/public/models/snake.glb",
+      "sha256": "2f77f26510efd3ffa03f8ee5cfb779b4ce0697c5343aa635ea3af32f6904989d"
+    },
+    {
+      "path": "game/public/textures/cathedral/roughness.jpg",
+      "upstream_path": "packs/handcast/public/textures/cathedral/roughness.jpg",
+      "sha256": "f37850f72994458994716d084683d80611528d1685264bde3071569e8ca53489"
+    },
+    {
+      "path": "game/public/textures/cathedral/color.jpg",
+      "upstream_path": "packs/handcast/public/textures/cathedral/color.jpg",
+      "sha256": "1dca8a336518ce0adca4b5cbe2ab30819c8769388f1c15278082a99f022c615a"
+    },
+    {
+      "path": "game/public/textures/cathedral/normal.jpg",
+      "upstream_path": "packs/handcast/public/textures/cathedral/normal.jpg",
+      "sha256": "8fd1d22eb6c7b6e4a374196c0de791f724538b8b86eb9c7a946fec1f5834cb94"
+    },
+    {
+      "path": "game/public/textures/cathedral/ao.jpg",
+      "upstream_path": "packs/handcast/public/textures/cathedral/ao.jpg",
+      "sha256": "405ab1943485560bc01cd0c6c10065195adf7ef9c554f9b24914c3311751dde6"
+    }
+  ]
+}

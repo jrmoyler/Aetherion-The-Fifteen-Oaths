@@ -4,7 +4,7 @@ import { OATH_BY_ID } from '@shared/oaths.js';
 export function attachWeapon(body, desc) {
   // Canon character GLBs already include their weapon bound to the skeleton.
   // Keep these generated families for unequipped bodies only.
-  if (body.meshes?.some(mesh => mesh.name === `${desc.oath}-${desc.cls}`)) return;
+  if (body.meshes?.some(mesh => mesh.name === `${desc.oath}-${desc.cls}` || mesh.name.startsWith(`${desc.oath}-${desc.cls}_`))) return;
   const hand = body.sockets['socket.hand.R'] ?? body.sockets['hand.R'];
   if (!hand || desc.kind === 'mob' || desc.noWeapon) return;
   const oath = OATH_BY_ID[desc.oath], weapon = oath?.[desc.cls]?.weapon ?? 'short sword';

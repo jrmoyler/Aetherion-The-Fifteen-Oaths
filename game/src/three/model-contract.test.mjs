@@ -45,3 +45,13 @@ test('animation LOD skips pose evaluation without dropping elapsed time', () => 
   assert.equal(body.animator.update(NaN), false);
   body.dispose(); reference.dispose();
 });
+test('multi-primitive authored characters retain their own costume and weapon', async () => {
+  const { equipArmor } = await import('./actor-armor.js');
+  const { attachWeapon } = await import('./actor-weapons.js');
+  const head = new Bone(); head.name='head'; const spine = new Bone(); spine.name='spine2'; const hand=new Bone();
+  const mesh=new SkinnedMesh(new BufferGeometry(),new MeshStandardMaterial());mesh.name='oath-01-sorcerer_1';
+  const body={meshes:[mesh],sockets:{head,spine2:spine,'socket.hand.R':hand},dispose(){}};
+  equipArmor(body,{oath:'oath-01',cls:'sorcerer'});attachWeapon(body,{oath:'oath-01',cls:'sorcerer'});
+  assert.equal(spine.children.length,0);assert.equal(hand.children.length,0);
+  mesh.geometry.dispose();mesh.material.dispose();
+});

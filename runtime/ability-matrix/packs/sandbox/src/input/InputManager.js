@@ -21,6 +21,10 @@ export class InputManager extends EventEmitter {
     this.pointer = new Vector2(); // NDC
     this.keys = new Set();
     this.enabled = true;
+    /** Stick input, -1..1. x is screen-right, z is screen-up (forward). */
+    this.analog = { x: 0, z: 0 };
+    /** Latched by the on-screen Run control. ORed with Shift. */
+    this.runLock = false;
 
     this._bind();
   }
@@ -37,9 +41,12 @@ export class InputManager extends EventEmitter {
   _onContextMenu = (event) => event.preventDefault();
 
   _updatePointer(event) {
+    const rect = this.dom.getBoundingClientRect();
+    const w = rect.width || window.innerWidth || 1;
+    const h = rect.height || window.innerHeight || 1;
     this.pointer.set(
-      (event.clientX / window.innerWidth) * 2 - 1,
-      -(event.clientY / window.innerHeight) * 2 + 1
+      ((event.clientX - rect.left) / w) * 2 - 1,
+      -((event.clientY - rect.top) / h) * 2 + 1
     );
   }
 

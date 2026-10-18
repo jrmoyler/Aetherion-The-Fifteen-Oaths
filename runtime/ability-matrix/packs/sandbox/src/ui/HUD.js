@@ -41,7 +41,8 @@ export class HUD {
         <div><strong>[ / ]</strong> — previous / next ability, across every pack</div>
         <div><strong>Q E R F V X B Z N K Y U</strong> — the twelve Collective originals</div>
         <div><strong>W A S D</strong> — walk &nbsp; <strong>Shift</strong> — run &nbsp; <strong>Space</strong> — dash</div>
-        <div class="hud__help-note">The matrix page lists all 100, by element, with their presets.</div>
+        <div class="hud__help-note">On a phone: stick to move, drag the right side to look, tap to cast. Run and Dash sit in the corner.</div>
+        <div class="hud__help-note">The matrix lists every castable, ten in each element, with their presets.</div>
         <div class="hud__help-note">Circle casts are aimed with a ring; the rest with the arrow.</div>
         <div><strong>Move</strong> — aim &nbsp; <strong>Left click</strong> — cast</div>
         <div><strong>Esc / right click</strong> — cancel the cast</div>
