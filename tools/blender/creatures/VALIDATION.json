@@ -594,6 +594,125 @@
   "ok": true,
   "review": "tools/blender/creatures/review/drake.png"
  },
+ "drake-oath-01": {
+  "id": "drake-oath-01",
+  "file": "game/public/assets/creatures/drake-oath-01.glb",
+  "bytes": 2374696,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 43,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 18514,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.025,
+     0.014,
+     0.01,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.023,
+     0.012,
+     0.009,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.323,
+     0.068,
+     0.025,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.195,
+     0.023,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.195,
+     0.023
+    ]
+   }
+  },
+  "bones": 43,
+  "bbox_min": [
+   -1.581,
+   -1.838,
+   -0.009
+  ],
+  "bbox_max": [
+   1.581,
+   3.414,
+   2.58
+  ],
+  "height": 2.58,
+  "faces_plus_z": true,
+  "death_end_height": 3.444,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/drake-oath-01.png"
+ },
  "golem": {
   "id": "golem",
   "file": "game/public/assets/creatures/golem.glb",
@@ -695,6 +814,107 @@
   "ok": true,
   "review": "tools/blender/creatures/review/golem.png"
  },
+ "golem-oath-02": {
+  "id": "golem-oath-02",
+  "file": "game/public/assets/creatures/golem-oath-02.glb",
+  "bytes": 1505764,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 22,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 8966,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.347,
+     0.479,
+     0.578,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.068,
+     0.08,
+     0.098,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.521,
+     0.807,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.521,
+     0.807,
+     1
+    ]
+   }
+  },
+  "bones": 22,
+  "bbox_min": [
+   -1.267,
+   -1.018,
+   -0.029
+  ],
+  "bbox_max": [
+   1.261,
+   0.572,
+   3.194
+  ],
+  "height": 3.194,
+  "faces_plus_z": true,
+  "death_end_height": 0.804,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/golem-oath-02.png"
+ },
  "golem-oath-05": {
   "id": "golem-oath-05",
   "file": "game/public/assets/creatures/golem-oath-05.glb",
@@ -795,6 +1015,208 @@
   "issues": [],
   "ok": true,
   "review": "tools/blender/creatures/review/golem-oath-05.png"
+ },
+ "golem-oath-10": {
+  "id": "golem-oath-10",
+  "file": "game/public/assets/creatures/golem-oath-10.glb",
+  "bytes": 1650352,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 26,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 9562,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.068,
+     0.072,
+     0.098,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.254,
+     0.102,
+     0.687,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.323,
+     0.195,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.323,
+     0.195,
+     1
+    ]
+   }
+  },
+  "bones": 26,
+  "bbox_min": [
+   -1.739,
+   -1.595,
+   -0.033
+  ],
+  "bbox_max": [
+   1.404,
+   1.331,
+   3.201
+  ],
+  "height": 3.201,
+  "faces_plus_z": true,
+  "death_end_height": 2.005,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/golem-oath-10.png"
+ },
+ "golem-oath-15": {
+  "id": "golem-oath-15",
+  "file": "game/public/assets/creatures/golem-oath-15.glb",
+  "bytes": 967196,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 22,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 4836,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.042,
+     0.045,
+     0.051,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.871,
+     0.195,
+     0.014,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.434,
+     0.08,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.434,
+     0.08
+    ]
+   }
+  },
+  "bones": 22,
+  "bbox_min": [
+   -1.344,
+   -1.105,
+   -0.0
+  ],
+  "bbox_max": [
+   1.342,
+   0.646,
+   3.194
+  ],
+  "height": 3.194,
+  "faces_plus_z": true,
+  "death_end_height": 0.878,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/golem-oath-15.png"
  },
  "hound": {
   "id": "hound",
@@ -1031,6 +1453,242 @@
   "issues": [],
   "ok": true,
   "review": "tools/blender/creatures/review/hound-oath-01.png"
+ },
+ "hound-oath-02": {
+  "id": "hound-oath-02",
+  "file": "game/public/assets/creatures/hound-oath-02.glb",
+  "bytes": 1974260,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 33,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 18686,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.687,
+     0.723,
+     0.761,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.013,
+     0.01,
+     0.009,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.068,
+     0.08,
+     0.098,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     0.275,
+     0.716,
+     1,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0.275,
+     0.716,
+     1
+    ]
+   }
+  },
+  "bones": 33,
+  "bbox_min": [
+   -0.17,
+   -0.86,
+   0.006
+  ],
+  "bbox_max": [
+   0.169,
+   0.883,
+   1.093
+  ],
+  "height": 1.093,
+  "faces_plus_z": true,
+  "death_end_height": 0.34,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/hound-oath-02.png"
+ },
+ "hound-oath-15": {
+  "id": "hound-oath-15",
+  "file": "game/public/assets/creatures/hound-oath-15.glb",
+  "bytes": 1948792,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 33,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 19502,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.042,
+     0.045,
+     0.051,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.013,
+     0.01,
+     0.009,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.871,
+     0.195,
+     0.014,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.352,
+     0.051,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.352,
+     0.051
+    ]
+   }
+  },
+  "bones": 33,
+  "bbox_min": [
+   -0.17,
+   -0.86,
+   0.006
+  ],
+  "bbox_max": [
+   0.169,
+   0.883,
+   1.093
+  ],
+  "height": 1.093,
+  "faces_plus_z": true,
+  "death_end_height": 0.34,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/hound-oath-15.png"
  },
  "raptor": {
   "id": "raptor",
@@ -1864,5 +2522,124 @@
   "issues": [],
   "ok": true,
   "review": "tools/blender/creatures/review/wraith.png"
+ },
+ "wraith-oath-09": {
+  "id": "wraith-oath-09",
+  "file": "game/public/assets/creatures/wraith-oath-09.glb",
+  "bytes": 1674404,
+  "animations": [
+   "attack",
+   "death",
+   "hit",
+   "idle",
+   "roar",
+   "run",
+   "walk"
+  ],
+  "materials": [
+   "body",
+   "secondary",
+   "accent",
+   "glow"
+  ],
+  "skins": 1,
+  "joints": 45,
+  "images": [
+   "image/jpeg",
+   "image/jpeg",
+   "image/jpeg"
+  ],
+  "extensionsUsed": [
+   "KHR_materials_emissive_strength"
+  ],
+  "tris": 12258,
+  "max_influences": 4,
+  "materials_detail": {
+   "body": {
+    "baseColorFactor": [
+     0.905,
+     0.855,
+     0.745,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "secondary": {
+    "baseColorFactor": [
+     0.807,
+     0.716,
+     0.527,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "accent": {
+    "baseColorFactor": [
+     0.687,
+     0.434,
+     0.117,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     0,
+     0,
+     0
+    ]
+   },
+   "glow": {
+    "baseColorFactor": [
+     1,
+     0.922,
+     0.578,
+     1
+    ],
+    "baseColorTexture": true,
+    "metallicRoughnessTexture": true,
+    "normalTexture": true,
+    "occlusionTexture": true,
+    "emissiveFactor": [
+     1,
+     0.922,
+     0.578
+    ]
+   }
+  },
+  "bones": 45,
+  "bbox_min": [
+   -0.678,
+   -0.742,
+   -0.216
+  ],
+  "bbox_max": [
+   0.692,
+   0.5,
+   2.386
+  ],
+  "height": 2.386,
+  "faces_plus_z": true,
+  "death_end_height": 1.569,
+  "issues": [],
+  "ok": true,
+  "review": "tools/blender/creatures/review/wraith-oath-09.png"
  }
 }
