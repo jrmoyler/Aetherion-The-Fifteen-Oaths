@@ -1,0 +1,35 @@
+{
+  "playerModel": "/assets/characters/oath-04-ninja.glb",
+  "playerState": "loco",
+  "grounded": true,
+  "entities": [
+    {
+      "name": "Ember Hound",
+      "kind": "mob",
+      "model": "/assets/creatures/hound-oath-01.glb"
+    },
+    {
+      "name": "Maren of the Tide",
+      "kind": "npc",
+      "model": "/assets/characters/oath-04-sorcerer.glb"
+    }
+  ],
+  "meshCount": 70,
+  "activeMeshes": 16,
+  "observedFps": 6.177669782957632,
+  "initial": {
+    "x": -1428,
+    "z": -1638
+  },
+  "moved": {
+    "x": -1428,
+    "z": -1635.4916617047604
+  },
+  "distance": 2.5083382952395823,
+  "jump": {
+    "state": "jump",
+    "grounded": false
+  },
+  "errors": [],
+  "runtime": "Headless Chromium, ANGLE SwiftShader software WebGL; not a physical-device performance benchmark."
+}

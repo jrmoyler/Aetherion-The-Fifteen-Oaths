@@ -344,7 +344,10 @@ export class HumanoidAnimator {
     this.yawVel = 0;
   }
 
-  setState(s) { if (s !== this.state) { this.state = s; this.stateT = 0; } }
+  setState(s) {
+    if (s !== this.state) { this.state = s; this.stateT = 0; }
+    if (s === 'dead') { this.action = null; this.additive = null; this.channel = false; this.channelW = 0; }
+  }
 
   /** one-shot or state request from gameplay strings */
   playAnim(name, o = {}) {

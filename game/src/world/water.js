@@ -53,7 +53,7 @@ uniform vec3 shallowCol; uniform vec3 deepCol; uniform vec4 wP2; // x reflect st
 ${AERIAL_GLSL}
 float hN(vec2 uv) { return texture2D(noiseTex, uv).r; }
 void main() {
-  vec3 V = camPos - vW; float dist = length(V); V /= dist;
+  vec3 V = camPos - vW; float dist = length(V); V /= max(dist, 0.001);
   float t = wP.x;
   // detail normals: two scrolling noise layers
   vec2 uv1 = vW.xz * 0.045 + vec2(t * 0.012, t * 0.008), uv2 = vW.xz * 0.11 - vec2(t * 0.017, -t * 0.011);
@@ -82,7 +82,7 @@ void main() {
   col += sunCol * (pow(sp, 900.0) * 60.0 + pow(sp, 90.0) * 0.6) * (0.4 + 0.6 * F) * step(0.0, sunDir.y);
   // foam: shoreline + crests
   float fn = texture2D(noiseTex, vW.xz * 0.09 + vec2(t * 0.02, t * 0.013)).b;
-  float shoreFoam = smoothstep(1.4, 0.1, depth) * smoothstep(0.3, 0.7, fn + 0.25 * sin(t * 1.5 + depth * 4.0));
+  float shoreFoam = (1.0 - smoothstep(0.1, 1.4, depth)) * smoothstep(0.3, 0.7, fn + 0.25 * sin(t * 1.5 + depth * 4.0));
   float crestFoam = smoothstep(1.25, 1.9, vCrest) * smoothstep(0.45, 0.8, fn);
   float foam = clamp((shoreFoam + crestFoam) * wP2.y, 0.0, 1.0);
   col = mix(col, vec3(0.9, 0.93, 0.95) * (sunCol * max(sunDir.y, 0.05) * 0.8 + ambCol * 1.2), foam);

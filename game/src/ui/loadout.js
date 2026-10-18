@@ -1,5 +1,5 @@
 import { h } from './dom.js';
-import { ABILITIES_BY_OATH, hotbarFor } from '@shared/abilities.js';
+import { ABILITIES_BY_OATH, hotbarFor, equippedAbilityForSlot } from '@shared/abilities.js';
 
 /** Draft edits never replace the live kit until the server acknowledges them. */
 export function createLoadout(ui) {
@@ -24,13 +24,12 @@ export function createLoadout(ui) {
     rows.replaceChildren();
     const c = ui.gs.character; if (!c) return;
     const catalog = ABILITIES_BY_OATH[c.oath] || [];
-    const preview = hotbarFor(c.oath, c.cls, valid() ? draft : undefined);
     draft.forEach((id, i) => {
       const label = h('label', { for: `ae-loadout-${i}` }, i === 4 ? 'R · Ultimate' : `${i + 2} · Technique ${i + 1}`);
       const select = h('select', { id: `ae-loadout-${i}`, disabled: pending });
       for (const a of catalog) select.append(h('option', { value: a.id }, a.name));
       select.value = id;
-      const a = preview[i + 1];
+      const a = equippedAbilityForSlot(c.oath, c.cls, i + 1, id);
       const detail = h('p', null, a ? `${a.shape} · ${a.range}m range · ${a.mana} mana · ${a.cooldown}s cooldown` : '');
       select.onchange = () => { draft[i] = select.value; draw(); rows.querySelector(`#ae-loadout-${i}`)?.focus(); };
       rows.append(h('div', { class: 'ae-loadout__slot' }, label, select, detail));

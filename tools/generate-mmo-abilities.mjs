@@ -1,49 +1,83 @@
 // Generates the Babylon gameplay adaptation from the pinned CASTABLE_REGISTRY.json.
 // Sandbox timings are rescaled into MMO cooldowns / mana costs; source fields are kept for traceability.
 import fs from 'node:fs';
-const reg = JSON.parse(fs.readFileSync(new URL('../CASTABLE_REGISTRY.json', import.meta.url)));
-const elementToOath = Object.fromEntries(reg.elements.map((e) => [e.sourceElementId, e.oathId]));
-const out = {};
-const supplement = JSON.parse(fs.readFileSync(new URL('../shared/ability-supplement.json', import.meta.url)));
-const originalIds = new Set(reg.castables.map(c => c.sourceCatalog.uid));
-const seen = new Set();
-for (const c of [...reg.castables, ...supplement.castables]) {
-  const s = c.sourceCatalog;
-  const set = c.sourcePreset?.settings ?? {};
-  const oath = elementToOath[s.element];
-  if (!oath) throw new Error(`Unmapped ability element: ${s.uid} (${s.element})`);
-  if (seen.has(s.uid)) throw new Error(`Duplicate ability uid: ${s.uid}`);
-  seen.add(s.uid);
-  const shape = s.kind === 'buff' ? 'self' : s.kind === 'summon' ? 'summon' : (s.cast === 'line' ? 'line' : 'zone');
-  const radius = shape === 'self' ? 0 : s.zoneRadius ?? set.zoneRadius ?? set.radius ?? (shape === 'zone' ? 5 : shape === 'line' ? 1.2 : 0);
-  const range = shape === 'self' ? 0 : Math.min(30, Math.max(8, s.range ?? set.range ?? 18));
-  (out[oath] ??= []).push({
-    id: s.uid, name: s.label, element: s.element, kind: s.kind, shape,
-    sourceShape: s.cast ?? s.kind,
-    accent: s.accent, range, radius: Math.round(Math.min(9, Math.max(0, radius)) * 10) / 10,
-    speed: set.speed ?? null, sourceCooldown: s.cooldown, castAnim: s.castAnim ?? null,
-    glyph: s.glyph?.replace(/\s+/g, ' ') ?? null,
-  });
+import { pathToFileURL } from 'node:url';
+
+/** Validate source identity before adapting settings into the gameplay budget. */
+export function generateAbilities(reg, supplement) {
+  for (const source of [reg, supplement]) {
+    if (!/^[a-f0-9]{40}$/.test(source.sourceCommit)) throw new Error('Missing pinned ability source revision');
+  }
+  const elementToOath = Object.fromEntries(reg.elements.map((e) => [e.sourceElementId, e.oathId]));
+  const out = {};
+  const originalIds = new Set(reg.castables.map(c => c.sourceCatalog.uid));
+  const seen = new Set();
+  for (const c of [...reg.castables, ...supplement.castables]) {
+    const s = c.sourceCatalog;
+    const preset = c.sourcePreset;
+    if (!s || !['ability', 'buff', 'summon'].includes(s.kind)) throw new Error('Unsupported castable kind');
+    if (!preset || preset.uid !== s.uid || preset.pack !== s.pack || preset.id !== s.id || preset.element !== s.element) {
+      throw new Error(`Preset identity mismatch: ${s.uid}`);
+    }
+    if (s.uid !== `${s.pack}/${s.id}`) throw new Error(`Malformed ability uid: ${s.uid}`);
+    const set = preset.settings ?? {};
+    for (const [key, value] of Object.entries({ range: s.range, minRange: s.minRange, zoneRadius: s.zoneRadius, cooldown: s.cooldown,
+      settingsRange: set.range, settingsRadius: set.radius, settingsZoneRadius: set.zoneRadius, speed: set.speed })) {
+      if (value != null && (!Number.isFinite(value) || value < 0)) throw new Error(`Invalid ${key}: ${s.uid}`);
+    }
+    const oath = elementToOath[s.element];
+    if (!oath) throw new Error(`Unmapped ability element: ${s.uid} (${s.element})`);
+    if (seen.has(s.uid)) throw new Error(`Duplicate ability uid: ${s.uid}`);
+    seen.add(s.uid);
+    const shape = s.kind === 'buff' ? 'self' : s.kind === 'summon' ? 'summon' : (s.cast === 'line' ? 'line' : 'zone');
+    const radius = shape === 'self' ? 0 : s.zoneRadius ?? set.zoneRadius ?? set.radius ?? (shape === 'zone' ? 5 : shape === 'line' ? 1.2 : 0);
+    const range = shape === 'self' ? 0 : Math.min(30, Math.max(8, s.range ?? set.range ?? 18));
+    (out[oath] ??= []).push({
+      id: s.uid, name: s.label, element: s.element, kind: s.kind, shape,
+      sourceShape: s.cast ?? s.kind,
+      sourceCommit: originalIds.has(s.uid) ? reg.sourceCommit : supplement.sourceCommit,
+      sourceMinRange: s.minRange ?? set.minRange ?? 0,
+      accent: s.accent, range, radius: Math.round(Math.min(9, Math.max(0, radius)) * 10) / 10,
+      speed: set.speed ?? null, sourceCooldown: s.cooldown, castAnim: s.castAnim ?? null,
+      glyph: s.glyph?.replace(/\s+/g, ' ') ?? null,
+    });
+  }
+  // Deterministic kit assignment: ninja prefers line/self, sorcerer prefers zone/summon.
+  const kits = {};
+  for (const [oath, list] of Object.entries(out)) {
+    // Preserve established default kits; expanded abilities are explicitly equipped.
+    const defaults = list.filter(a => originalIds.has(a.id));
+    const lines = defaults.filter((a) => a.shape === 'line' || a.shape === 'self');
+    const zones = defaults.filter((a) => a.shape === 'zone' || a.shape === 'summon' || a.shape === 'ring');
+    const pick = (pref, other) => { const r = [...pref, ...other]; const k = []; for (const a of r) if (!k.includes(a) && k.length < 5) k.push(a); while (k.length < 5) k.push(r[k.length % r.length]); return k; };
+    const n = pick(lines, zones), so = pick(zones, lines);
+    const scale = (a, slot) => ({
+      id: a.id, slot,
+      cooldown: slot === 4 ? 45 : [6, 9, 13, 18][slot],
+      mana: slot === 4 ? 45 : [12, 18, 24, 30][slot],
+      damage: a.shape === 'self' ? 0 : Math.round((slot === 4 ? 95 : [32, 40, 52, 64][slot]) * (a.shape === 'zone' ? 0.85 : 1)),
+      castTime: slot === 4 ? 0.9 : a.shape === 'zone' ? 0.45 : 0.25,
+    });
+    kits[oath] = { ninja: n.map((a, i) => scale(a, i)), sorcerer: so.map((a, i) => scale(a, i)) };
+  }
+  return { abilities: out, kits };
 }
-// Deterministic kit assignment: ninja prefers line/self, sorcerer prefers zone/summon.
-const kits = {};
-for (const [oath, list] of Object.entries(out)) {
-  // Preserve established default kits; expanded abilities are explicitly equipped.
-  const defaults = list.filter(a => originalIds.has(a.id));
-  const lines = defaults.filter((a) => a.shape === 'line' || a.shape === 'self');
-  const zones = defaults.filter((a) => a.shape === 'zone' || a.shape === 'summon' || a.shape === 'ring');
-  const pick = (pref, other) => { const r = [...pref, ...other]; const k = []; for (const a of r) if (!k.includes(a) && k.length < 5) k.push(a); while (k.length < 5) k.push(r[k.length % r.length]); return k; };
-  const n = pick(lines, zones), so = pick(zones, lines);
-  const scale = (a, slot) => ({
-    id: a.id, slot,
-    cooldown: slot === 4 ? 45 : [6, 9, 13, 18][slot],
-    mana: slot === 4 ? 45 : [12, 18, 24, 30][slot],
-    damage: a.shape === 'self' ? 0 : Math.round((slot === 4 ? 95 : [32, 40, 52, 64][slot]) * (a.shape === 'zone' ? 0.85 : 1)),
-    castTime: slot === 4 ? 0.9 : a.shape === 'zone' ? 0.45 : 0.25,
-  });
-  kits[oath] = { ninja: n.map((a, i) => scale(a, i)), sorcerer: so.map((a, i) => scale(a, i)) };
+
+export function renderAbilities(reg, supplement) {
+  const { abilities: out, kits } = generateAbilities(reg, supplement);
+  const header = '// GENERATED by tools/generate-mmo-abilities.mjs from CASTABLE_REGISTRY.json and shared/ability-supplement.json. Do not edit by hand.\n';
+  return header + `export const ABILITIES_BY_OATH = ${JSON.stringify(out, null, 1)};\n\nexport const KITS = ${JSON.stringify(kits, null, 1)};\n`;
 }
-const header = '// GENERATED by tools/generate-mmo-abilities.mjs from CASTABLE_REGISTRY.json. Do not edit by hand.\n';
-fs.writeFileSync(new URL('../shared/abilities.generated.js', import.meta.url),
-  header + `export const ABILITIES_BY_OATH = ${JSON.stringify(out, null, 1)};\n\nexport const KITS = ${JSON.stringify(kits, null, 1)};\n`);
-console.log(Object.entries(out).map(([k, v]) => `${k}:${v.length}`).join(' '));
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const reg = JSON.parse(fs.readFileSync(new URL('../CASTABLE_REGISTRY.json', import.meta.url)));
+  const supplement = JSON.parse(fs.readFileSync(new URL('../shared/ability-supplement.json', import.meta.url)));
+  const target = new URL('../shared/abilities.generated.js', import.meta.url);
+  const output = renderAbilities(reg, supplement);
+  if (process.argv.includes('--check')) {
+    if (fs.readFileSync(target, 'utf8') !== output) throw new Error('Generated ability catalog is stale; run npm run mmo:abilities');
+    console.log('Ability catalog matches both pinned sources.');
+  } else {
+    fs.writeFileSync(target, output);
+    console.log(Object.entries(generateAbilities(reg, supplement).abilities).map(([k, v]) => `${k}:${v.length}`).join(' '));
+  }
+}

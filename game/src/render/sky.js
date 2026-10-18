@@ -85,7 +85,7 @@ void main() {
   // stars
   if (sunInt.w > 0.001 && d.y > 0.0) {
     vec3 p = d * 260.0; vec3 c = floor(p); float h = hash13(c);
-    if (h > 0.9965) { vec3 f = fract(p) - 0.5; float s = smoothstep(0.32, 0.0, length(f));
+    if (h > 0.9965) { vec3 f = fract(p) - 0.5; float s = (1.0 - smoothstep(0.0, 0.32, length(f)));
       float tw = 0.65 + 0.35 * sin(cloud2.w * (2.0 + h * 9.0) + h * 80.0);
       col += vec3(0.9, 0.95, 1.0) * mix(vec3(1.0, 0.8, 0.7), vec3(0.8, 0.9, 1.0), fract(h * 37.0)) * s * tw * sunInt.w * (h - 0.9965) * 2400.0 * smoothstep(0.0, 0.25, d.y); }
     // faint milky band
@@ -105,7 +105,7 @@ void main() {
     if (r2 < 1.0) { vec3 n = normalize(q.x * mx + q.y * my + sqrt(1.0 - r2) * moonDir);
       float lit = clamp(dot(n, sunDir) * 1.5 + 0.08, 0.02, 1.0);
       float maria = 0.75 + 0.25 * texture2D(noiseTex, q * 0.35 + 0.5).r;
-      col = mix(col, vec3(0.9, 0.92, 1.0) * 0.6 * lit * maria * (0.3 + sunInt.w), smoothstep(1.0, 0.92, r2) * (0.35 + 0.65 * min(1.0, sunInt.w * 3.0))); }
+      col = mix(col, vec3(0.9, 0.92, 1.0) * 0.6 * lit * maria * (0.3 + sunInt.w), (1.0 - smoothstep(0.92, 1.0, r2)) * (0.35 + 0.65 * min(1.0, sunInt.w * 3.0))); }
   }
   // clouds: one fbm layer projected on a curved plane, lit toward the sun
   if (d.y > 0.0 && cloud.y > 0.001) {
@@ -134,7 +134,7 @@ void main() {
   vec3 fc; float f = aeFogAmount(aeFogD.xyz + vec3(d.x, max(d.y, -0.02), d.z) * 30000.0, fc);
   float hb = skyTint.a * (1.0 - smoothstep(-0.02, 0.22, d.y));
   col = mix(col, fc, clamp(f * hb, 0.0, 1.0));
-  if (d.y < -0.02) col = mix(col, fc, smoothstep(-0.02, -0.12, d.y));
+  if (d.y < -0.02) col = mix(col, fc, (1.0 - smoothstep(-0.12, -0.02, d.y)));
   gl_FragColor = vec4(max(col, 0.0), 1.0);
 }`;
 

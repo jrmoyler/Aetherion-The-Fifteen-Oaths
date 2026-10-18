@@ -1,6 +1,14 @@
 # Ability Matrix integration contract
 
-## Actual implemented boundary
+## Active game and preserved sandbox are separate integrations
+
+The active Babylon game exposes **150 selectable castables**, ten per Oath, through `shared/abilities.generated.js`. Its inputs are the original 100-entry registry plus `shared/ability-supplement.json` (50 additional catalog entries and complete presets, pinned to `c16da3c978a4815f46273fdcda2252ab48977a53`). On 2026-10-18 all 150 source catalog entries matched the latest upstream catalog exactly; zero IDs were missing. Counts were already 150 before this upgrade.
+
+This is a gameplay adaptation: Babylon uses authoritative slot costs, line/zone/self/summon resolution and its own VFX. It does not claim to execute every upstream shader, special mechanic or model. The unchanged Three.js sandbox described below remains the original **100-castable** snapshot. Its adapter and the Linear fissure repair remain intact. The additional 50 presets do not expand that isolated sandbox runtime.
+
+Run `npm run mmo:abilities` after changing the source data, and `node tools/generate-mmo-abilities.mjs --check` to detect stale generated output. Generation rejects duplicate IDs, unknown elements, invalid numeric tuning, mismatched preset identity and unpinned revisions. Generated entries retain their source commit, original aim shape and original minimum range for traceability; source minimum range is metadata, not an additional gameplay constraint.
+
+## Preserved sandbox boundary
 
 The source at `runtime/ability-matrix` is the complete original program, not a data-only approximation. Run `npm run dev:abilities` to boot the runnable [Aetherion wrapper](app/abilities/README.md). It installs the Linear repair at the real App runtime-loading seam, exposes `window.matrix` and `window.aetherionAbilities`, and offers all 100 castables. `npm run build:abilities` creates `dist/abilities`; `npm run preview:abilities` serves that build. The original sandbox also remains separately runnable for comparison. Create an adapter by importing `createAbilityMatrixAdapter` from `src/abilities/AbilityMatrixAdapter.js` and passing `{ bridge: sandboxWindow.matrix, catalog: originalCatalog }`. `originalCatalog` is the JSON at `runtime/ability-matrix/presets/catalog.json`.
 

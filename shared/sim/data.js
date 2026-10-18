@@ -95,11 +95,24 @@ export const REACTIONS = [
   { el: 'cosmic', on: 'root', mul: 1.2, consume: false, name: 'Crush' },
 ];
 
-/** Self-buff ability results by element. */
+/** Self-buff ability results by element. Regen magnitude is max-HP fraction per second.
+ * Combat tuning profiles, not changes to the world/ability canon. */
 export const SELF_BUFF = {
   storm: [['haste', 8, 0.35], ['empower', 8, 0.2]],
   fire: [['empower', 8, 0.3]],
   arcane: [['shield', 8, 0.25], ['empower', 8, 0.15]],
+  frost: [['shield', 9, 0.3]],
+  water: [['regen', 6, 0.025], ['shield', 6, 0.12]],
+  earth: [['shield', 7, 0.35]],
+  wind: [['haste', 9, 0.4]],
+  nature: [['regen', 8, 0.035]],
+  poison: [['empower', 10, 0.22]],
+  light: [['regen', 6, 0.03], ['shield', 6, 0.16]],
+  cosmic: [['shield', 8, 0.28], ['empower', 5, 0.1]],
+  shadow: [['haste', 6, 0.25], ['empower', 6, 0.2]],
+  blood: [['regen', 5, 0.02], ['empower', 7, 0.25]],
+  time: [['haste', 10, 0.3]],
+  tech: [['shield', 10, 0.2], ['empower', 10, 0.12]],
   default: [['shield', 6, 0.2]],
 };
 

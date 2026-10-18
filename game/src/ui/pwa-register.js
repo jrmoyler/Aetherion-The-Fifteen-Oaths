@@ -7,7 +7,12 @@ let updateSW;
 let notice;
 let updateAvailable = false;
 function offerUpdate() {
-  showNotice('A new version of Aetherion is ready. Restart when you are ready to leave your current session.', () => updateSW(true), 'Restart & update');
+  showNotice('A new version of Aetherion is ready. Restart when you are ready to leave your current session.', async () => {
+    try { await updateSW?.(true); } catch (error) {
+      console.warn('Could not activate the downloaded update.', error);
+      showNotice('The update could not restart. Your current session is still running. Try again when you are ready.', offerUpdate, 'Try again');
+    }
+  }, 'Restart & update');
 }
 function showNotice(message, action, label) {
   notice?.remove();
@@ -29,9 +34,13 @@ function showNotice(message, action, label) {
   const dismiss = document.createElement('button');
   dismiss.textContent = action ? 'Later' : 'Dismiss';
   dismiss.style.cssText = 'padding:10px;background:transparent;color:inherit;border:1px solid #8b795e;border-radius:4px;cursor:pointer;font:inherit';
-  dismiss.onclick = () => notice.remove();
+  const currentNotice = notice;
+  dismiss.onclick = () => currentNotice.remove();
   notice.append(dismiss);
   document.body.append(notice);
+  // Readiness is informational: do not leave it covering the hotbar indefinitely.
+  // Update actions remain until the player chooses Later or Restart.
+  if (!action) window.setTimeout(() => currentNotice.remove(), 10000);
 }
 
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
@@ -41,16 +50,28 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
       updateAvailable = true; offerUpdate();
     },
     onOfflineReady() {
-      showNotice('Aetherion is ready for offline play. Previously visited character assets remain available on this device.');
+      if (!updateAvailable) showNotice('The game shell is available offline. Downloaded character assets remain available while stored on this device. Multiplayer requires a connection.');
     },
     onRegisteredSW(_url, registration) {
-      // Long-lived installed games should discover releases on resume as well.
+      // Discover releases on reconnect/resume without overlapping update requests.
+      let checking = false;
+      let lastCheck = 0;
+      const checkForUpdate = async () => {
+        if (!registration || !navigator.onLine || checking || document.visibilityState === 'hidden') return;
+        if (Date.now() - lastCheck < 60_000) return;
+        checking = true;
+        lastCheck = Date.now();
+        try { await registration.update(); } catch { /* Network may be captive or intermittent. */ }
+        finally { checking = false; }
+      };
       document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') {
           if (updateAvailable) offerUpdate();
-          if (navigator.onLine) registration?.update().catch(() => {});
+          void checkForUpdate();
         }
       });
+      window.addEventListener('online', checkForUpdate);
+      window.setInterval(checkForUpdate, 60 * 60 * 1000);
     },
     onRegisterError(error) {
       console.warn('Offline installation is unavailable for this visit.', error);

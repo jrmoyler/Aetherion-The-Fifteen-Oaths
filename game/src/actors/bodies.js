@@ -115,7 +115,7 @@ export class BodyFactory {
     const body = instantiateGltf(this.scene, container, parent, c ? { tint: c.tint, tintKey: c.id } : {});
     const height = c ? (ARCH_H[c.archetype] ?? 1.5) : 1.8;
     let weapon = null;
-    if (!c && !body.hasWeapon) weapon = attachWeapon(this.scene, outfitKey(desc.oath, desc.cls), body.sockets);
+    if (!c && !desc.noWeapon && !body.hasWeapon) weapon = attachWeapon(this.scene, outfitKey(desc.oath, desc.cls), body.sockets);
     const animator = new GltfAnimator(body, { creature: !!c, runSpeed: desc.runSpeed ?? 6, height });
     for (const m of body.meshes) m.alwaysSelectAsActiveMesh = false;
     return this._wrap({ kind: c ? 'creature' : 'humanoid', arch: c?.archetype, rig: null, meshes: body.meshes, lods: [], animator, sockets: body.sockets, height, radius: c ? 0.7 : 0.35, weapon, gltf: body, procedural: false });
@@ -133,7 +133,7 @@ export class BodyFactory {
     b.dispose = () => {
       if (b.weapon) { for (const i of b.weapon.instances) i.dispose(); b.weapon.node.dispose(); }
       for (const m of b.lods) m.dispose(false, false);
-      for (const m of b.meshes) m.dispose(false, false);
+      if (!b.gltf) for (const m of b.meshes) m.dispose(false, false);
       if (b.rig) disposeRig(b.rig);
       if (b.gltf) b.gltf.dispose();
     };

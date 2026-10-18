@@ -8,7 +8,7 @@ import { hotbarFor, ABILITY_BY_ID } from '@shared/abilities.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { HitFlashes, StatusVisuals } from './feedback.js';
 import { createArenas } from './arenas.js';
-import { ActionBuffer } from './timing.js';
+import { ActionBuffer, reconcileCooldown } from './timing.js';
 import { replaceHotbar } from './loadout.js';
 
 const ELEMENT_FLASH = {
@@ -237,10 +237,13 @@ export async function init(ctx) {
       let st = 0; try { st = ctx.net.serverTime(); } catch { st = 0; }
       const now = nowMs();
       you.cooldowns.forEach((c, slot) => {
-        if (!(c > 0) || !st) return;
-        const rem = (c - st) / 1000; if (!(rem > 0 && rem < 600)) return;
-        const until = now + rem * 1000;
-        if (Math.abs(until - (state.cooldowns[slot] ?? 0)) > 350) { state.cooldowns[slot] = until; bus.emit('combat:cooldown', { slot, until, duration: rem, total: state.hotbar[slot]?.cooldown ?? rem }); }
+        const prediction = localCasts.get(slot);
+        const pending = prediction && !prediction.confirmed && now - prediction.t < 1500;
+        const until = reconcileCooldown(c, st, now, state.cooldowns[slot] ?? 0, pending);
+        if (Math.abs(until - (state.cooldowns[slot] ?? 0)) > 80) {
+          state.cooldowns[slot] = until;
+          bus.emit('combat:cooldown', { slot, until, duration: Math.max(0, until - now) / 1000, total: state.hotbar[slot]?.cooldown ?? 0 });
+        }
       });
     }
     if (you.casting === null && state.castBar && nowMs() > state.castBar.end) state.castBar = null;
@@ -250,7 +253,7 @@ export async function init(ctx) {
   function playRemoteCast(e) {
     const caster = actorOf(e.src);
     const key = `${e.src}|${e.slot}`; const now = nowMs();
-    if (isSelf(e.src) && e.slot >= 0) { const lc = localCasts.get(e.slot); if (lc && now - lc.t < 2500) return; }
+    if (isSelf(e.src) && e.slot >= 0) { const lc = localCasts.get(e.slot); if (lc && now - lc.t < 2500) { lc.confirmed = true; return; } }
     if (e.release && remoteFx.has(key) && now - remoteFx.get(key) < ((e.castTime ?? 0) + 3) * 1000) { remoteFx.delete(key); return; }
     const aimV = e.aim ? new Vector3(e.aim.x, e.aim.y ?? 0, e.aim.z) : null;
     const tActor = actorOf(e.target);
@@ -289,12 +292,13 @@ export async function init(ctx) {
     if (e.absorbed) bus.emit('combat:floater', { x: hx, y: hy + 0.35, z: hz, text: `${Math.round(e.absorbed)} absorbed`, kind: 'status', element, taken: selfDst });
     if (e.rx) bus.emit('combat:floater', { x: hx, y: hy + 0.6, z: hz, text: e.rx, kind: 'status', element });
     if (dst) flashes.flash(dst, Color3.FromHexString(ELEMENT_FLASH[element] ?? '#ffffff'), e.crit ? 0.85 : e.dot ? 0.35 : 0.6, e.crit ? 0.24 : 0.16);
-    // impact VFX unless the caster's own cast effect already showed one (and throttle DoT ticks)
+    // Anchor a restrained impact to the confirmed victim. Predicted travel effects
+    // cannot suppress all subsequent hits from this caster for three seconds.
     const castShown = e.src != null && now - (recentFxBySrc.get(e.src) ?? -1e9) < 3000 && !e.dot;
     const last = lastImpactAt.get(e.dst) ?? -1e9;
-    if (element && !castShown && now - last > (e.dot ? 900 : 140)) {
+    if (element && (amount > 0 || e.absorbed) && now - last > (e.dot ? 900 : 140)) {
       lastImpactAt.set(e.dst, now);
-      ctx.vfx?.impact?.(element, { x: hx, y: groundY(hx, hz, hy - 1.6), z: hz }, e.dot ? 0.35 : e.crit ? 1 : 0.65, { shake: false });
+      ctx.vfx?.impact?.(element, { x: hx, y: groundY(hx, hz, hy - 1.6), z: hz }, e.rx ? 1.15 : e.dot ? 0.35 : e.crit ? 1 : castShown ? 0.35 : 0.65, { shake: false });
     }
     if (selfDst && amount > 0) bus.emit('camera:shake', { strength: Math.min(0.6, 0.12 + amount / Math.max(1, p?.mhp ?? state.you?.mhp ?? 150) * 1.6), duration: 0.25 });
     else if (selfSrc && amount > 0 && !e.dot) bus.emit('camera:shake', { strength: e.crit ? 0.18 : 0.08, duration: 0.15 });
@@ -316,7 +320,7 @@ export async function init(ctx) {
         break;
       }
       case 'death': {
-        if (isSelf(e.id)) { cancelRelease(); actionBuffer.clear(); state.castBar = null; }
+        if (isSelf(e.id)) { cancelRelease(); actionBuffer.clear(); state.castBar = null; for (const lc of localCasts.values()) lc.handle?.stop?.(); localCasts.clear(); }
         const a = actorOf(e.id);
         statuses.clear(e.id);
         if (a) ctx.vfx?.play?.(`death:${elementOfActor(a) ?? 'shadow'}`, { pos: a.position.clone() });

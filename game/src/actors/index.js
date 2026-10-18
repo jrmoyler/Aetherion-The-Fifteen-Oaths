@@ -87,15 +87,23 @@ function createActors(ctx) {
     try {
       const nb = factory.createGltf(container, desc, actor.root);
       const old = actor.body;
-      const wasDead = old?.animator.state === 'dead';
+      // Promote assets without resetting an in-flight jump, cast, visibility or fade.
+      const previous = old?.animator;
+      nb.animator.setState(previous?.state ?? 'loco');
+      nb.animator.stateT = previous?.stateT ?? 0;
+      nb.animator.speed = previous?.speed ?? 0;
+      nb.animator.yawVel = previous?.yawVel ?? 0;
+      nb.animator.backwards = previous?.backwards ?? false;
+      nb.animator.channel = previous?.channel ?? false;
+      nb.setVisible(actor.visible);
+      nb.setFade(actor === player ? 1 : actor.fade);
       shadowSet.delete(actor); removeShadows(old);
       old?.dispose();
       actor.body = nb; actor.bodyUrl = url; actor.radius = nb.radius;
-      if (wasDead) nb.animator.setState('dead');
-      if (actor === player) controller.actor = player;
+      if (actor === player) { if (controller) controller.actor = player; addShadows(nb); }
     } catch (e) { console.warn('[actors] GLB swap failed', url, e); }
   }
-  assets.onChange(() => { api.forEach((a) => { if (!a.bodyUrl) tryUpgrade(a, { kind: a.kind, oath: a.oath, cls: a.cls, model: a.model }); }); });
+  assets.onChange(() => { api.forEach((a) => { if (!a.bodyUrl) tryUpgrade(a, { kind: a.kind, oath: a.oath, cls: a.cls, model: a.model, runSpeed: CLASSES[a.cls]?.moveSpeed, noWeapon: a.kind === 'npc' && a.title === 'chronicler' }); }); });
   assets.start();
 
   function addShadows(body) { if (!body || !ctx.render?.addShadowCaster) return; for (const m of body.meshes) ctx.render.addShadowCaster(m, false); }
@@ -367,7 +375,7 @@ function createActors(ctx) {
       if (!a.local) a.interpolate(rt, dt);
       a.animHold += dt;
       if (!a.alive) a.deadT += dt;
-      if (a.castUntil && now > a.castUntil) { a.castUntil = 0; a.playAnim('cast_release'); }
+      if (a.castUntil && now > a.castUntil) { a.castUntil = 0; a.body?.animator && (a.body.animator.channel = false); a.playAnim('cast_release'); }
       // fade in / out
       if (a.fadeDir > 0 && a.fade < 1) { a.fade = Math.min(1, a.fade + dt * 2.5); a.body?.setFade(a.fade); }
       else if (a.fadeDir < 0) {

@@ -9,8 +9,8 @@ import { TransformNode } from '@babylonjs/core/Meshes/transformNode.js';
 import { Color3 } from '@babylonjs/core/Maths/math.color.js';
 import { hex } from './geom.js';
 
-let CHAR_DIR = './assets/characters/';
-let CREATURE_DIR = './assets/creatures/';
+const CHAR_DIR = './assets/characters/';
+const CREATURE_DIR = './assets/creatures/';
 const UPPER_BONES = ['spine1', 'spine2', 'neck', 'head', 'shoulder.L', 'upperarm.L', 'forearm.L', 'hand.L', 'shoulder.R', 'upperarm.R', 'forearm.R', 'hand.R'];
 
 // Lazy glTF 2.0 loader registration: the loader chunk is only fetched once a GLB exists.
@@ -43,7 +43,11 @@ export class AssetLibrary {
     this.listeners = new Set();
     this.manifestSeen = false;
     this.disabled = ctx.params?.get?.('glb') === '0';
-    if (ctx.assetBase) { CHAR_DIR = `${ctx.assetBase}characters/`; CREATURE_DIR = `${ctx.assetBase}creatures/`; }
+    this.charDir = ctx.assetBase ? `${ctx.assetBase}characters/` : CHAR_DIR;
+    this.creatureDir = ctx.assetBase ? `${ctx.assetBase}creatures/` : CREATURE_DIR;
+    this.disposed = false;
+    this.abort = new AbortController();
+    this.scene.onDisposeObservable?.addOnce(() => this.dispose());
     this.creatureManifest = null; // Set of urls once a creatures manifest is seen
     this.firstPoll = new Promise((r) => { this._firstPollDone = r; });
     this.pollTimer = null;
@@ -51,6 +55,7 @@ export class AssetLibrary {
   }
 
   start() {
+    if (this.disposed) return;
     if (this.disabled) { this._firstPollDone?.(); return; }
     this.pollManifest();
   }
@@ -58,11 +63,12 @@ export class AssetLibrary {
   onChange(fn) { this.listeners.add(fn); return () => this.listeners.delete(fn); }
 
   async pollManifest() {
+    if (this.disposed) return;
     this.pollCount++;
     let changed = false;
-    for (const [dir, kind] of [[CHAR_DIR, 'char'], [CREATURE_DIR, 'creature']]) {
+    for (const [dir, kind] of [[this.charDir, 'char'], [this.creatureDir, 'creature']]) {
       try {
-        const res = await fetch(`${dir}manifest.json`, { cache: 'no-cache' });
+        const res = await fetch(`${dir}manifest.json`, { cache: 'no-cache', signal: this.abort.signal });
         const type = res.headers.get('content-type') ?? '';
         if (!res.ok || type.includes('text/html')) continue;
         const json = await res.json();
@@ -85,6 +91,7 @@ export class AssetLibrary {
       } catch { /* manifest absent or invalid: keep procedural */ }
     }
     this._firstPollDone?.(); this._firstPollDone = null;
+    if (this.disposed) return;
     if (changed) for (const fn of this.listeners) { try { fn(); } catch (e) { console.warn('[actors] asset listener', e); } }
     // poll: every 15 s for the first 10 minutes, then every 2 min
     clearTimeout(this.pollTimer);
@@ -95,29 +102,37 @@ export class AssetLibrary {
 
   /** Resolve a creature model url per shared/creatures.js order, or null. */
   async creatureUrl(arch, oath) {
-    if (this.disabled) return null;
+    if (this.disabled || this.disposed) return null;
     await this.firstPoll;
-    const specific = `${CREATURE_DIR}${arch}-${oath}.glb`, generic = `${CREATURE_DIR}${arch}.glb`;
+    if (this.disposed) return null;
+    const specific = `${this.creatureDir}${arch}-${oath}.glb`, generic = `${this.creatureDir}${arch}.glb`;
     if (this.creatureManifest) return this.creatureManifest.has(specific) ? specific : this.creatureManifest.has(generic) ? generic : null;
     // no manifest: probe the archetype file first (one request per archetype), then the regional variant
-    if (!(await this.probe(generic))) return null;
+    if (!(await this.probe(generic))) return (await this.probe(specific)) ? specific : null;
     return (await this.probe(specific)) ? specific : generic;
   }
 
   probe(url) {
     let p = this.probes.get(url);
     if (!p) {
-      p = fetch(url, { method: 'HEAD' }).then((r) => r.ok && !(r.headers.get('content-type') ?? '').includes('text/html')).catch(() => false);
+      p = fetch(url, { signal: this.abort.signal }).then(async (r) => {
+        // GET participates in the service worker's asset cache; HEAD does not.
+        const valid = r.ok && !(r.headers.get('content-type') ?? '').includes('text/html');
+        if (r.body) await r.body.cancel();
+        return valid;
+      }).catch(() => false);
       this.probes.set(url, p);
     }
     return p;
   }
 
   load(url) {
+    if (this.disposed) return Promise.resolve(null);
     let p = this.containers.get(url);
     if (!p) {
       registerGltf();
       p = LoadAssetContainerAsync(url, this.scene).then((c) => {
+        if (this.disposed) { c.dispose(); return null; }
         // keep source hidden; instances are cloned per entity
         for (const g of c.animationGroups) g.stop();
         return c;
@@ -125,6 +140,17 @@ export class AssetLibrary {
       this.containers.set(url, p);
     }
     return p;
+  }
+
+  dispose() {
+    if (this.disposed) return;
+    this.disposed = true;
+    clearTimeout(this.pollTimer);
+    this.abort.abort();
+    this._firstPollDone?.(); this._firstPollDone = null;
+    this.listeners.clear();
+    for (const promise of this.containers.values()) promise.then((c) => c?.dispose());
+    this.containers.clear(); this.probes.clear();
   }
 }
 
@@ -167,13 +193,16 @@ export function instantiateGltf(scene, container, parent, opts = {}) {
   const hasWeapon = [...nodes.keys()].some((n) => /weapon|sword|staff|blade/i.test(n));
   return {
     root, meshes, groups, sockets, nodes, hasWeapon, skeletons: inst.skeletons,
-    dispose() { for (const g of inst.animationGroups) g.dispose(); for (const s of inst.skeletons) s.dispose(); root.dispose(false, true); },
+    dispose() { for (const g of inst.animationGroups) g.dispose(); for (const s of inst.skeletons) s.dispose(); root.dispose(false, false); }, // Shared materials/textures are owned by the cached container.
   };
 }
 
 const tintCache = new WeakMap();
 function tintMeshes(scene, meshes, tint, key = '') {
-  let c = tintCache.get(scene); if (!c) { c = new Map(); tintCache.set(scene, c); }
+  let c = tintCache.get(scene); if (!c) {
+    c = new Map(); tintCache.set(scene, c);
+    scene.onDisposeObservable?.addOnce(() => { for (const mat of c.values()) mat.dispose(false, false); c.clear(); });
+  }
   for (const m of meshes) {
     const mat = m.material;
     if (!mat) continue;
@@ -212,12 +241,19 @@ export class GltfAnimator {
     for (const [, grp] of this.g) { grp.weight = 0; }
   }
   clip(...names) { for (const n of names) { const g = this.g.get(n); if (g) return g; } return null; }
-  setState(s) { this.state = s; }
+  setState(s) {
+    if (s === this.state) return;
+    this.state = s; this.stateT = 0;
+    if (s === 'dead') { this.action = null; this.channel = false; }
+    if (s === 'dead' || s === 'loco') { this.deathStarted = false; this.deathHeld = false; }
+  }
   playAnim(name, o = {}) {
-    if (name === 'cast_channel') { this.channel = o.loop !== false; return; }
-    if (name === 'death' || name === 'dead') { this.state = 'dead'; return; }
-    if (['jump', 'fall', 'dodge', 'swim', 'land', 'emote', 'emote_bow'].includes(name)) { this.state = name; this.stateT = 0; return; }
-    if (LOCO.includes(name)) { if (this.state === 'dead') this.state = 'loco'; return; }
+    if (name === 'cast_channel') { if (this.state !== 'dead') this.channel = o.loop !== false; return; }
+    if (name === 'death' || name === 'dead') { this.setState('dead'); return; }
+    if (LOCO.includes(name)) { this.setState('loco'); return; }
+    if (this.state === 'dead') return;
+    if (name === 'cast_release' || name === 'cast_aoe') this.channel = false;
+    if (['jump', 'fall', 'dodge', 'swim', 'land', 'emote', 'emote_bow'].includes(name)) { this.setState(name); return; }
     const map = this.creature ? { roar: ['roar', 'attack'], hit: ['hit'] } : {};
     const cands = map[name] ?? [name, name.replace(/_\d$/, ''), name.startsWith('attack') ? 'attack_1' : name, name.startsWith('attack') && this.creature ? 'attack' : name];
     const grp = this.clip(...cands);
@@ -238,8 +274,9 @@ export class GltfAnimator {
     const T = this.target; T.clear();
     const sp = this.speed;
     const want = (grp, w) => { if (grp) T.set(grp, (T.get(grp) ?? 0) + w); };
-    if (this.state === 'dead') want(this.clip('death'), 1);
-    else if (this.state === 'jump') want(this.clip('jump_loop', 'jump_start', 'jump'), 1);
+    const death = this.clip('death');
+    if (this.state === 'dead') want(death ?? this.clip('idle'), 1);
+    else if (this.state === 'jump') want(this.stateT < 0.16 ? this.clip('jump_start', 'jump_loop', 'jump', 'idle') : this.clip('jump_loop', 'jump', 'idle'), 1);
     else if (this.state === 'fall') want(this.clip('jump_loop', 'fall', 'jump'), 1);
     else if (this.state === 'dodge') want(this.clip('dodge', 'run'), 1);
     else if (this.state === 'land') { want(this.clip('land', 'idle'), 1); if (this.stateT > 0.3) this.state = 'loco'; }
@@ -267,13 +304,16 @@ export class GltfAnimator {
     }
     if (this.channel && this.state === 'loco' && !this.action && sp > 0.6) want(this.clip('cast_channel'), 0.7);
     // ease weights
-    for (const [grp] of this.g.entries()) void grp;
     for (const grp of new Set([...this.w.keys(), ...T.keys()])) {
       const target = T.get(grp) ?? 0;
       let w = this.w.get(grp) ?? 0;
       w += (target - w) * Math.min(1, dt * 10);
       if (target === 0 && w < 0.01) { w = 0; if (grp.isPlaying && grp !== this.action) grp.stop(); this.w.delete(grp); grp.weight = 0; continue; }
-      if (!grp.isPlaying) grp.play(grp !== this.action && grp !== this.clip('death'));
+      if (grp === death && this.state === 'dead') {
+        if (!this.deathStarted) { grp.mask = null; grp.speedRatio = 1; grp.play(false); grp.goToFrame(grp.from); this.deathStarted = true; }
+        // A finished non-looping group must retain its final pose, never restart.
+        else if (!grp.isPlaying && !this.deathHeld) { grp.play(false); grp.goToFrame(grp.to); grp.pause(); this.deathHeld = true; }
+      } else if (!grp.isPlaying) grp.play(grp !== this.action);
       grp.weight = w;
       this.w.set(grp, w);
     }
