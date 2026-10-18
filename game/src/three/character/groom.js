@@ -43,7 +43,7 @@ function own(m) {
 function headIndex(skeleton) { return skeleton.bones.findIndex(b => b.name === 'head'); }
 
 // Removes head-skinned triangles inside the skull volume from the shared GLB geometry.
-function cullHead(mesh, hi, center, H) {
+export function cullHead(mesh, hi, center, H, hasBeard = false) {
   const ni = mesh.skeleton.bones.findIndex(b => b.name === 'neck');
   const geo = mesh.geometry; if (culled.has(geo)) return; culled.add(geo);
   const j = geo.attributes.skinIndex, w = geo.attributes.skinWeight, p = geo.attributes.position, idx = geo.index;
@@ -55,7 +55,12 @@ function cullHead(mesh, hi, center, H) {
     const dx = (p.getX(i) - center.x) / H, dy = (p.getY(i) - center.y) / H, dz = (p.getZ(i) - center.z) / H;
     // skull volume, plus anything head-borne above the brow (crests, spikes, old hair)
     const r2 = dx * dx + dz * dz;
-    if ((dy > -.44 && (dx * dx) / .2 + (dy * dy) / .3 + ((dz - .06) * (dz - .06)) / .22 < 1) || (dy > -.3 && (dx * dx) / .42 + (dy * dy) / .55 + (dz * dz) / .5 < 1) || (dy > -.12 && r2 < 1.1) || (hh > .6 && dy > -.48 && r2 < 2.5)) kill[i] = 1;
+    // Older source GLBs retain head-weighted sculpted beard wedges well BELOW
+    // the skull ellipse. Remove only these when an independently authored beard
+    // is fitted; never cull chest, neck-weighted collars or hanging costumes.
+    const legacyBeard = hasBeard && hh > .72 &&
+      dy >= -1.25 && dy < -.36 && Math.abs(dx) < .6 && dz > -.02 && dz < 1.1;
+    if (legacyBeard || (dy > -.44 && (dx * dx) / .2 + (dy * dy) / .3 + ((dz - .06) * (dz - .06)) / .22 < 1) || (dy > -.3 && (dx * dx) / .42 + (dy * dy) / .55 + (dz * dz) / .5 < 1) || (dy > -.12 && r2 < 1.1) || (hh > .6 && dy > -.48 && r2 < 2.5)) kill[i] = 1;
   }
   const src = idx.array, keep = [];
   for (let i = 0; i < src.length; i += 3) if (!(kill[src[i]] && kill[src[i + 1]] && kill[src[i + 2]])) keep.push(src[i], src[i + 1], src[i + 2]);
@@ -121,7 +126,7 @@ export function applyGroom(body, desc, quality = 'high') {
     if (!m.isSkinnedMesh) continue;
     const names = (Array.isArray(m.material) ? m.material : [m.material]).map(x => x.name);
     if (names.includes('iris') || names.includes('pupil')) { m.visible = false; m.userData.groomHidden = true; continue; }
-    if (m.skeleton) cullHead(m, hi, center, H);
+    if (m.skeleton) cullHead(m, hi, center, H, !!kit.profile.beard);
   }
   // 2. head rig in bind space under the head bone
   const anchor = new Group(); anchor.name = 'procedural-head';
