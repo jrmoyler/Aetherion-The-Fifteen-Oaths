@@ -363,7 +363,7 @@ export function buildGroom(key, profile, P, lash, quality = 'high') {
   const hair = profile.hair ?? { style: 'none' }, style = hair.style;
   const recede = profile.sex === 'm' ? Math.max(0, (profile.age - .45) * .12) : 0;
   const dens = quality === 'low' ? .45 : quality === 'medium' ? .7 : 1;
-  const cards = new CardSet(), browCards = new CardSet();
+  const cards = new CardSet(), beardCards = new CardSet(), browCards = new CardSet();
   let flowFn = (p) => { const n = p.clone().normalize(); const f = V(0, .3, -1); return f.addScaledVector(n, -f.dot(n)).normalize(); };
   let bun = null;
   if (style !== 'none') {
@@ -394,11 +394,11 @@ export function buildGroom(key, profile, P, lash, quality = 'high') {
       sweptHair(cards, P, R, Math.round(340 * dens), recede);
     }
   }
-  if (profile.beard) beard(cards, P, R, profile.beard.style, profile.beard.length ?? .3);
+  if (profile.beard) beard(beardCards, P, R, profile.beard.style, profile.beard.length ?? .3);
   brows(browCards, P, R, profile.sex === 'f');
   lashes(browCards, lash, R);
   const cap = style === 'none' ? null : scalpCap(P, recede, quality, flowFn, hair.coils ? .016 : .007);
-  return { cap, cards: cards.n ? cards.geometry() : null, brows: browCards.geometry(), bun };
+  return { cap, cards: cards.n ? cards.geometry() : null, beard: beardCards.n ? beardCards.geometry() : null, brows: browCards.geometry(), bun };
 }
 
 // Moss/leaf tufts over a hood surface (Graft Sanctuary).

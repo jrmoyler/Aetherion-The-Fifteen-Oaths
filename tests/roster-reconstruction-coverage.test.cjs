@@ -1,0 +1,20 @@
+'use strict';
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const { spawnSync } = require('node:child_process');
+const path = require('node:path');
+const root = path.resolve(__dirname,'..');
+test('every shipped and staged character identity has a source-traceable inventory entry',()=>{
+ const proc=spawnSync(process.execPath,['tools/qa/roster-reconstruction-audit.cjs','--json','--check'],{cwd:root,encoding:'utf8'});
+ assert.equal(proc.status,0,proc.stderr+'\n'+proc.stdout.slice(-2000));
+ const data=JSON.parse(proc.stdout),s=data.summary;
+ assert.equal(s.playable_archetypes,30);
+ assert.equal(s.concept_sheets_for_archetypes,15);
+ assert.equal(s.named_characters,34);
+ assert.equal(s.named_creature_and_manifestation_roles,94);
+ assert.equal(s.named_candidate_glbs,128);
+ assert.equal(s.approved_named_models,0,'do not promote intake candidates without identity-specific art acceptance');
+ assert.equal(s.inventory_errors,0);
+ assert.equal(data.player_archetypes.length,30);
+ assert.equal(data.named_characters.length+data.creature_identities.length,128);
+});
