@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
+import {weatheredRock} from './terrain-detail.js';
 import {sampleTerrain} from '@shared/terrain.js';
 import {regionAt} from '@shared/oaths.js';
 
@@ -48,7 +49,7 @@ function crystalGeometry(){const parts=[];for(let i=0;i<3;i++){
 }return combine(parts);}
 export function createBiomeDetails(ctx){
   const low=ctx.quality?.name==='low',medium=ctx.quality?.name==='medium';
-  const time={value:0},geometries={fern:fernGeometry(),reed:reedGeometry(),flower:flowerGeometry(),crystal:crystalGeometry(),scree:colored(new THREE.IcosahedronGeometry(1,0),'#8f8879')};
+  const time={value:0},geometries={fern:fernGeometry(),reed:reedGeometry(),flower:flowerGeometry(),crystal:crystalGeometry(),scree:colored(weatheredRock(low?1:3,2),'#8f8879')};
   const plant=new THREE.MeshStandardMaterial({vertexColors:true,roughness:.9,side:THREE.DoubleSide});
   plant.onBeforeCompile=s=>{s.uniforms.detailTime=time;s.vertexShader=s.vertexShader.replace('#include <common>','#include <common>\nuniform float detailTime;').replace('#include <begin_vertex>',`#include <begin_vertex>
     #ifdef USE_INSTANCING
