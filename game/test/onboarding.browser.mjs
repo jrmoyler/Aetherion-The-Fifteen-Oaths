@@ -27,7 +27,7 @@ try {
     const errors=[];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/${filename}`);
-    await page.locator('[data-oath="oath-15"]').click();
+    await page.locator('.ae-oath-card[data-oath="oath-15"]').click();
     await page.locator('.ae-cc__nav button').last().click();
     if (width<500) {
       const session=await page.context().newCDPSession(page);

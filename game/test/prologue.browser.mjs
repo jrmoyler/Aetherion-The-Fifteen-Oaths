@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import {writeFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {preview} from 'vite';import {chromium} from 'playwright';
+const root=fileURLToPath(new URL('../',import.meta.url));let server,browser;
+const out='validation/prologue-upgrade/';
+try {
+ server=await preview({root,preview:{host:'127.0.0.1',port:0}});
+ browser=await chromium.launch({executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ const page=await browser.newPage({viewport:{width:1280,height:800}}),errors=[],http=[];
+ page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});page.on('response',r=>{if(r.status()>=400)http.push(`${r.status()} ${r.url()}`)});
+ await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/?offline=1&q=low&bots=0`);
+ await page.getByRole('button',{name:/Choose your Oath/}).waitFor({timeout:120000});
+ await page.screenshot({path:out+'title.png'});
+ await page.getByRole('button',{name:/Choose your Oath/}).click();
+ await page.locator('.ae-oath-card[data-oath="oath-04"]').click();
+ await page.locator('.ae-cls-card[data-cls="sorcerer"]').click();
+ await page.waitForFunction(()=>{const e=document.querySelector('.ae-oath-stage');return e?.dataset.status==='ready'&&e.dataset.model?.includes('oath-04-sorcerer')},null,{timeout:120000});
+ const stage=await page.locator('.ae-oath-stage').evaluate(e=>({...e.dataset}));
+ await page.getByRole('button',{name:'Try stance',exact:true}).click();
+ await page.screenshot({path:out+'oath-selection.png'});
+ await page.locator('#ae-name').fill('Tidal Witness');
+ await page.getByRole('button',{name:'Swear the Oath',exact:true}).click();
+ await page.locator('.ae-arrival').waitFor({timeout:120000});
+ await page.waitForFunction(()=>document.querySelector('.ae-arrival__chapter')?.textContent.startsWith('02'),null,{timeout:120000});
+ await page.screenshot({path:out+'code-cinematic.png'});
+ const film=await page.evaluate(()=>({active:window.__aetherion.cinematicActive,paused:window.__aetherion.net.paused,enabled:window.__aetherion.input.gameplayEnabled,chapter:document.querySelector('.ae-arrival__chapter').textContent,videos:document.querySelectorAll('video').length}));
+ assert.equal(film.active,true);assert.equal(film.enabled,false);assert.equal(film.videos,0);
+ await page.getByRole('button',{name:'Skip arrival and enter the realm'}).click();
+ await page.waitForFunction(()=>window.__aetherion?.ui?.state?.inGame&&!window.__aetherion.cinematicActive);
+ const start=await page.evaluate(()=>window.__aetherion.actors.player.position.toArray());
+ await page.keyboard.down('KeyW');await page.waitForTimeout(1800);await page.keyboard.up('KeyW');
+ const end=await page.evaluate(()=>{const c=window.__aetherion;return{position:c.actors.player.position.toArray(),enabled:c.input.gameplayEnabled,paused:c.net.paused,hero:c.actors.player.bodyUrl,overflow:document.documentElement.scrollWidth>innerWidth,chapter:document.querySelector('.ae-onboarding__title')?.textContent}});
+ assert.ok(Math.hypot(end.position[0]-start[0],end.position[2]-start[2])>.1);assert.equal(end.enabled,true);assert.equal(end.paused,false);assert.equal(end.overflow,false);assert.match(end.hero,/oath-04-sorcerer/);
+ await page.screenshot({path:out+'hud.png'});
+ assert.deepEqual(errors,[]);assert.deepEqual(http,[]);
+ await writeFile(out+'flow.json',JSON.stringify({stage,film,end,errors,http},null,2));console.log('PASS title → selected water sorcerer → code cinematic → skip → control/HUD');
+}finally{await browser?.close();if(server)await new Promise(r=>server.httpServer.close(r));}

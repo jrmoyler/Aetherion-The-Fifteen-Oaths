@@ -14,6 +14,9 @@ import * as Net from './net/index.js';
 import * as Combat from './combat/index.js';
 import { initWorld } from './three/world.js';
 import { initAtmosphere } from './three/atmosphere.js';
+import { playArrival } from './three/cinematics.js';
+import './three/cinematics.css';
+import { initObjectiveBeacon } from './three/objectiveBeacon.js';
 import { initActors } from './three/actors.js';
 import { initVFX } from './three/vfx.js';
 import { createPostprocessing } from './three/postprocessing.js';
@@ -100,6 +103,7 @@ async function startClient() {
   ctx.vfx = await initVFX(ctx);
   ctx.actors = await initActors(ctx);
   ctx.combat = await Combat.init(ctx);
+  const objectiveBeacon = initObjectiveBeacon(ctx);
   const home = OATH_BY_ID['oath-09'].center;
   const h = heightAt(home[0], home[1]);
   camera.position.set(home[0] + 45, h + 28, home[1] + 65);
@@ -133,12 +137,17 @@ async function startClient() {
   // Keep the offline world still while the chosen hero finishes loading.
   ctx.net.setPaused(true);
   await ctx.actors.ready?.();
+  if (ctx.params.get('cinematic') !== '0') {
+    await ctx.ui.beginArrival();
+    try { await playArrival(ctx, character); } catch (error) { console.warn('[arrival] Continuing to the realm', error); }
+  }
   ctx.ui.enterGame(); ctx.input.setEnabled(true);
   bus.emit('game:start', character);
+  if (ctx.params.get('cinematic') !== '0' && ctx.actors.orbit) ctx.actors.orbit.intro = null;
   syncPause();
   ctx.dispose = () => {
     stopped = true; renderer.setAnimationLoop(null); ctx.net.disconnect?.();
-    ctx.input.dispose?.(); ctx.ui.audio?.dispose?.(); offPause();
+    objectiveBeacon.dispose(); ctx.input.dispose?.(); ctx.ui.audio?.dispose?.(); offPause();
     document.removeEventListener('visibilitychange', onVisibility);
     ctx.vfx.dispose?.(); ctx.actors.dispose?.(); atmosphere.dispose(); ctx.world.dispose?.();
     ctx.sourceEnvironmentTexture?.dispose(); postprocessing.dispose(); envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);

@@ -377,6 +377,11 @@ function build(ctx) {
       loading.show(`Crossing into ${o.name}`, 0.92);
       return ch;
     },
+    async beginArrival() {
+      await loading.hide();
+      title.el.hidden = true; creation.el.hidden = true;
+      audio?.setScene('game');
+    },
     enterGame() {
       try {
         gs.inGame = true;

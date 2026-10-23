@@ -1,7 +1,14 @@
 import { esc } from './dom.js';
 import { tileHTML, equipmentTile } from './painted-icons.js';
 const label = (text) => `<span class="ico ae-text-icon" aria-hidden="true">${esc(text)}</span>`;
-export const ICONS = Object.fromEntries(Object.entries({map:'Map',bag:'Bag',gear:'Set',chat:'Chat',quest:'Log',close:'×',jump:'Jump',dodge:'Roll',target:'Aim',interact:'Use',sprint:'Run',menu:'Menu',compass:'N',plus:'+',minus:'−',locate:'Here',install:'↓',skull:'KO',shrine:'Rest'}).map(([k,v])=>[k, ({map:27,bag:29,gear:32,chat:33,quest:31,compass:28,skull:37,shrine:34,target:30,interact:39})[k] !== undefined ? tileHTML(({map:27,bag:29,gear:32,chat:33,quest:31,compass:28,skull:37,shrine:34,target:30,interact:39})[k], v) : label(v)]));
+const UTILITY = {
+  map: [27, 'Map'], bag: [29, 'Gear'], gear: [32, 'Menu'], chat: [33, 'Chat'], quest: [31, 'Tasks'],
+  compass: [28, 'North'], skull: [37, 'Fallen'], shrine: [34, 'Rest'], target: [30, 'Target'], interact: [39, 'Interact'],
+};
+export const ICONS = Object.fromEntries(Object.entries({map:'Map',bag:'Gear',gear:'Menu',chat:'Chat',quest:'Tasks',close:'×',jump:'Jump',dodge:'Roll',target:'Target',interact:'Interact',sprint:'Run',menu:'Menu',compass:'N',plus:'+',minus:'−',locate:'Here',install:'↓',skull:'Fallen',shrine:'Rest'}).map(([key,text]) => {
+  const entry = UTILITY[key];
+  return [key, entry ? tileHTML(entry[0], entry[1]).replace('class="ae-painted-icon"', `class="ae-painted-icon ae-utility-icon" data-label="${entry[1]}"`) : label(text)];
+}));
 export const DEBUFFS = new Set(['burn','chill','freeze','stun','slow','root','poison','bleed','silence','weaken','shock','daze']);
 export function statusIcon(status) { const key=String(status||'Effect').toLowerCase(); return { svg:label(key.slice(0,3)), debuff:DEBUFFS.has(key), key }; }
 export function itemIcon(name='', type='') { return tileHTML(equipmentTile(name, type), name || type || 'Item'); }

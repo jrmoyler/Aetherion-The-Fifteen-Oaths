@@ -6,6 +6,7 @@ import { COVENANT_TERMS } from './lore.js';
 import { emblemSVG } from './emblems.js';
 import { hotbarView, slotHTML, shapeLabel } from './abilityView.js';
 import { loadCharacter, saveCharacter } from './prefs.js';
+import { createOathStage } from './oath-stage.js';
 
 const BIOME_LABEL = {
   volcanic: 'Volcanic basalt fields', glacial: 'Glacial headwaters', alpine: 'High alpine spine', coast: 'Southwest estuary coast',
@@ -15,7 +16,6 @@ const BIOME_LABEL = {
 };
 export const biomeLabel = (b) => BIOME_LABEL[b] || b;
 
-import { artHTML } from './art.js';
 
 const NAME_RE = /^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ' -]{1,14}[A-Za-zÀ-ɏ]$/;
 export function validateName(raw) {
@@ -35,7 +35,8 @@ export function createCharacterScreen(root, { sfx } = {}) {
   const last = loadCharacter();
   const state = { oath: last?.oath && OATH_BY_ID[last.oath] ? last.oath : 'oath-09', cls: last?.cls === 'sorcerer' ? 'sorcerer' : 'ninja', name: last?.name || '', slot: 1, pane: 0 };
   let resolveFn = null;
-  let inspection = null, leaving = false;
+  let leaving = false;
+  const stage = createOathStage();
 
   // --- column 1: oath grid
   const cards = OATHS.map((o) => {
@@ -70,15 +71,6 @@ export function createCharacterScreen(root, { sfx } = {}) {
     b.addEventListener('mouseenter', () => sfx?.('hover'));
     return b;
   });
-  const inspect = h('button', { class: 'ae-btn ae-inspect-launch', type: 'button' }, 'Inspect character in 3D');
-  inspect.onclick = async () => {
-    inspect.disabled = true;
-    try {
-      const { inspectCharacter } = await import('./character-preview.js');
-      if (!el.hidden && !leaving) inspection = inspectCharacter({ oath: state.oath, cls: state.cls });
-    } catch (error) { console.warn('[ui] inspection unavailable', error); }
-    finally { inspect.disabled = false; }
-  };
   const slotsEl = h('div', { class: 'slots', role: 'listbox', 'aria-label': 'Ability preview' });
   const abDetail = h('div', { class: 'ae-ab-detail', 'aria-live': 'polite' });
   const ledger = h('table', { class: 'ae-ledger' });
@@ -92,7 +84,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     h('div', { class: 'ae-panel' },
       h('div', { class: 'ae-titlebar' }, h('span', { class: 'ae-tab-num' }, '03'), h('h2', null, 'Discipline & Name')),
       h('div', { class: 'ae-scroll', style: { flex: 1, minHeight: 0 } },
-        h('div', { class: 'ae-cls', role: 'radiogroup', 'aria-label': 'Discipline' }, clsCards), inspect,
+        h('div', { class: 'ae-cls', role: 'radiogroup', 'aria-label': 'Discipline' }, clsCards),
         h('div', { class: 'ae-bar-preview' }, h('div', { class: 'ae-section-label', style: { marginBottom: '8px' } }, h('b', null, 'i.'), 'Techniques of the Oath'), slotsEl, abDetail, ledger)),
       h('div', { class: 'ae-name-row' },
         h('p', { class: 'ae-first-steps' }, 'Your first steps: move with WASD or the left stick. Aim at a foe, then use 1–5 or R. On touch, use the on-screen controls. Follow the field guide to your first encounter.'),
@@ -112,6 +104,13 @@ export function createCharacterScreen(root, { sfx } = {}) {
     h('header', { class: 'ae-cc__head' }, h('h1', null, 'Swear an Oath'), h('span', { class: 'ae-cc__lede' }, 'A covenant, a discipline, a name'), h('div', { class: 'ae-cc__steps', role: 'tablist' }, steps)),
     h('div', { class: 'ae-cc__body' }, col1, col2, col3), nav);
   root.append(el);
+  el.classList.add('ae-cc--live');
+  const mobileStage = matchMedia('(max-width: 1100px), (max-height: 720px)');
+  function placeStage() {
+    if (mobileStage.matches) el.insertBefore(stage.el, el.querySelector('.ae-cc__body'));
+    else col2.prepend(stage.el);
+  }
+  mobileStage.addEventListener('change', placeStage); placeStage();
   const cols = [col1, col2, col3];
 
   function setPane(i) {
@@ -164,7 +163,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     clsCards.forEach((b) => {
       const c = b.dataset.cls; const d = o[c]; const base = CLASSES[c];
       b.setAttribute('aria-checked', c === state.cls ? 'true' : 'false');
-      b.innerHTML = `<span class="sil">${artHTML(o.id, c)}</span><div class="t">${esc(d.title)}</div>
+      b.innerHTML = `<div class="ae-class-kind">${c === 'ninja' ? 'MARTIAL DISCIPLINE' : 'ARCANE DISCIPLINE'}</div><div class="t">${esc(d.title)}</div>
         <div class="k">${c === 'ninja' ? 'Agile · melee & line' : 'Ranged · zone caster'}</div>
         <p>${esc(d.silhouette)}</p><div class="w">Wields a ${esc(d.weapon)}</div>
         <dl class="ae-mini-stats"><div><dt>Health</dt><dd>${base.hp}</dd></div><div><dt>Mana</dt><dd>${base.mp}</dd></div><div><dt>Speed</dt><dd>${base.moveSpeed}</dd></div><div><dt>Reach</dt><dd>${base.basicRange} m</dd></div></dl>`;
@@ -200,10 +199,10 @@ export function createCharacterScreen(root, { sfx } = {}) {
     const o = OATH_BY_ID[id];
     el.style.setProperty('--accent', o.accent); el.style.setProperty('--accent-rgb', rgbTriplet(o.accent));
     cards.forEach((c) => { const on = c.dataset.oath === id; c.setAttribute('aria-checked', on ? 'true' : 'false'); c.tabIndex = on ? 0 : -1; });
-    renderDossier(); renderClasses(); renderSlots();
+    renderDossier(); renderClasses(); renderSlots(); stage.update(state.oath, state.cls);
     dossier.scrollTop = 0;
   }
-  function selectClass(c) { state.cls = c; renderClasses(); renderSlots(); }
+  function selectClass(c) { state.cls = c; renderClasses(); renderSlots(); stage.update(state.oath, state.cls); }
 
   function checkName(showError) {
     const r = validateName(nameInput.value);
@@ -230,7 +229,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     leaving = true;
     confirmBtn.disabled = true;
     confirmBtn.textContent = 'Entering the Weave…';
-    inspection?.close(); inspection = null;
+    stage.dispose();
     saveCharacter(ch);
     sfx?.('confirm');
     const fn = resolveFn; resolveFn = null;
@@ -245,7 +244,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     open() {
       leaving = false;
       confirmBtn.disabled = false; confirmBtn.textContent = 'Swear the Oath';
-      el.hidden = false; el.style.opacity = '1';
+      el.hidden = false; el.style.opacity = '1'; stage.show();
       return new Promise((res) => {
         resolveFn = res;
         if (!prefersReducedMotion()) {
@@ -258,7 +257,7 @@ export function createCharacterScreen(root, { sfx } = {}) {
     },
     async hide() {
       leaving = true;
-      inspection?.close(); inspection = null;
+      stage.dispose();
       await new Promise((res) => { const a = anim(el, { opacity: [1, 0], duration: 450, ease: 'inQuad', onComplete: res }); if (!a) res(); setTimeout(res, 600); });
       el.hidden = true;
     },
