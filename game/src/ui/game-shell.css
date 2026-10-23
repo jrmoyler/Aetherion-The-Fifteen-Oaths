@@ -1,0 +1,113 @@
+/* Title and HUD share restrained ink, brass and authored covenant art. */
+#ui .ae-title { align-items:stretch; justify-content:center; padding:clamp(24px,6vw,100px); background:linear-gradient(90deg,rgba(5,9,15,.98),rgba(5,9,15,.84) 42%,rgba(5,9,15,.26)),linear-gradient(0deg,rgba(5,9,15,.94),transparent 40%); overflow:auto; }
+#ui .ae-title__content { width:min(790px,75%); position:relative; z-index:1; }
+#ui .ae-title__chapter,#ui .ae-title__eyebrow { font:600 11px/1.4 var(--sans); letter-spacing:.25em; color:var(--gold); }
+#ui .ae-title__chapter { margin:0 0 28px; display:flex; gap:14px; align-items:center; }
+#ui .ae-title__chapter::before { content:''; width:38px; height:1px; background:var(--gold); }
+#ui .ae-title__crest { display:block; width:auto; aspect-ratio:auto; }
+#ui .ae-logo { text-align:left; }
+#ui .ae-logo__word { justify-content:flex-start; font-size:clamp(44px,7.8vw,112px); letter-spacing:.075em; padding:0; gap:0; }
+#ui .ae-logo__word span { background:none; color:#f2e9d5; filter:none; text-shadow:0 3px 20px #0008; }
+#ui .ae-logo__rule { justify-content:flex-start; margin:15px 0 0; width:auto; gap:12px; }
+#ui .ae-logo__rule i,#ui .ae-logo__rule .ae-diamond { display:none; }
+#ui .ae-logo__sub { padding:0; font:400 clamp(16px,2vw,24px)/1.4 var(--serif); letter-spacing:.2em; text-transform:uppercase; }
+#ui .ae-tagline { text-align:left; margin:28px 0 12px; max-width:500px; font-size:clamp(18px,2vw,24px); }
+#ui .ae-title__synopsis { max-width:470px; color:#b8b6af; font:14px/1.8 var(--sans); margin:0; }
+#ui .ae-title__menu { margin-top:30px; width:min(360px,100%); gap:10px; }
+#ui .ae-title__menu .ae-btn { justify-content:flex-start; text-align:left; font:500 15px var(--sans); letter-spacing:.04em; font-variant:normal; min-height:52px; padding:14px 20px; background:rgba(9,15,23,.76); border-color:#89744d66; }
+#ui .ae-title__menu .ae-btn--primary { background:#c9a866; color:#10151d; font-weight:650; border-color:#e6cd8e; }
+#ui .ae-title__menu .ae-btn--primary::after { content:'›'; position:static; transform:none; width:auto; height:auto; margin-left:auto; box-shadow:none; background:none; font:24px/1 var(--sans); }
+#ui .ae-title__menu .ae-btn::before { display:none; }
+#ui .ae-title__registry { position:absolute; right:clamp(24px,5vw,80px); bottom:100px; width:290px; padding:20px; border-top:1px solid #c9a86666; background:linear-gradient(180deg,#0a1019b8,#0a101940); }
+#ui .ae-title__covenants { display:grid; grid-template-columns:repeat(5,1fr); gap:9px; margin:16px 0; }
+#ui .ae-title__covenant { padding:4px; width:42px; height:42px; border:1px solid #c9a86633; border-radius:50%; background:#090f18; cursor:pointer; opacity:.65; transition:opacity .2s,border-color .2s; }
+#ui .ae-title__covenant > span { border-radius:50%; }
+#ui .ae-title__covenant:hover,#ui .ae-title__covenant[aria-pressed=true] { opacity:1; border-color:var(--oath-color); }
+#ui .ae-title__covenant-caption { display:flex; flex-direction:column; gap:3px; min-height:42px; }
+#ui .ae-title__covenant-caption strong { font:500 20px var(--serif); }
+#ui .ae-title__covenant-caption > span { font:11px var(--sans); color:var(--text-2); }
+#ui .ae-title__foot { left:clamp(24px,6vw,100px); right:clamp(24px,5vw,80px); bottom:24px; font:10px/1.5 var(--sans); letter-spacing:.1em; border-top:1px solid #c9a86633; padding-top:14px; }
+#ui .ae-actionbar__covenant { font:500 10px/1.3 var(--sans); letter-spacing:.13em; text-transform:uppercase; color:var(--gold-2); padding:2px 6px 1px; }
+#ui .ae-actionbar { background:rgba(9,15,23,.94); border-radius:6px; }
+#ui .ae-command { font:500 12px var(--sans); }
+#ui .ae-unit { border-radius:5px; background:linear-gradient(100deg,#0b121ee8,#101a26d9); box-shadow:0 4px 20px #0004; }
+#ui .ae-unit::before { border-radius:3px; }
+#ui .ae-unit__name { font:500 17px var(--serif); margin-bottom:7px; }
+#ui .ae-unit__name small { font:9px var(--sans); letter-spacing:.12em; }
+#ui .ae-unit .ae-bar { height:14px; border-radius:2px; }
+#ui .ae-unit .ae-bar__txt { font-size:10px; }
+#ui .ae-hud.is-critical .ae-unit--player { border-color:#ee6b59; box-shadow:0 0 0 1px #ee6b5955,0 4px 20px #0004; }
+#ui .ae-hud.is-critical .ae-unit--player .ae-bar--hp { box-shadow:0 0 0 1px #ee6b59; }
+#ui .ae-iconbtn { position:relative; }
+#ui .ae-iconbtn .ae-utility-icon::after { content:attr(data-label); position:absolute; left:50%; transform:translateX(-50%); top:calc(100% + 2px); padding:2px 4px; color:#f1ead8; background:#080e16ef; border-radius:2px; font:9px/1.3 var(--sans); letter-spacing:.02em; white-space:nowrap; pointer-events:none; }
+#ui .ae-minimap__btns .ae-utility-icon::after { display:none; }
+#ui .ae-unit--target { left:50%; transform:translateX(-50%); top:calc(var(--sat) + 80px); width:280px; }
+@media (max-width:1050px) {
+ #ui .ae-title__content { width:100%; }
+ #ui .ae-title__registry { position:relative; right:auto; bottom:auto; margin:30px 0 60px; width:min(520px,100%); padding:15px 0 0; background:none; }
+ #ui .ae-title__covenants { grid-template-columns:repeat(15,minmax(0,1fr)); gap:4px; }
+ #ui .ae-title__covenant { width:100%; height:auto; aspect-ratio:1; padding:2px; }
+ #ui .ae-title__covenant-caption { flex-direction:row; align-items:baseline; gap:12px; }
+ #ui .ae-title { justify-content:flex-start; padding-top:clamp(28px,8vh,70px); }
+}
+@media (max-width:600px) {
+ #ui .ae-title { padding:calc(28px + var(--sat)) 24px calc(30px + var(--sab)); background:linear-gradient(90deg,#070d15f5,#070d15c9),linear-gradient(0deg,#070d15,transparent); }
+ #ui .ae-logo__word { font-size:clamp(30px,8.7vw,52px); letter-spacing:.04em; }
+ #ui .ae-logo__sub { font-size:14px; letter-spacing:.16em; }
+ #ui .ae-title__chapter { margin-bottom:22px; font-size:9px; }
+ #ui .ae-tagline { margin:23px 0 10px; font-size:20px; }
+ #ui .ae-title__synopsis { font-size:12px; line-height:1.7; }
+ #ui .ae-title__menu { margin-top:24px; }
+ #ui .ae-title__registry { margin:24px 0 20px; }
+ #ui .ae-title__covenants { grid-template-columns:repeat(8,minmax(0,1fr)); gap:6px; }
+ #ui .ae-title__covenant { min-height:32px; }
+ #ui .ae-title__foot { position:static; gap:12px; margin-top:auto; padding-top:15px; font-size:9px; align-items:flex-start; }
+ #ui .ae-title__foot > span:first-child { max-width:170px; }
+ #ui .ae-actionbar__covenant { display:none; }
+ #ui.is-touch .ae-unit--target { left:12px; transform:none; top:90px; width:calc(100% - 180px); min-width:170px; }
+}
+@media (max-height:520px) and (min-width:601px) {
+ #ui .ae-title { padding:24px; }
+ #ui .ae-title__content { width:65%; }
+ #ui .ae-title__chapter { margin-bottom:12px; }
+ #ui .ae-logo__word { font-size:50px; }
+ #ui .ae-tagline { margin:16px 0 6px; font-size:17px; }
+ #ui .ae-title__synopsis { font-size:11px; max-width:400px; }
+ #ui .ae-title__menu { flex-direction:row; width:100%; margin-top:15px; }
+ #ui .ae-title__menu .ae-btn { padding:10px; font-size:12px; }
+ #ui .ae-title__registry { position:absolute; right:24px; bottom:65px; width:28%; padding:12px 0; margin:0; }
+ #ui .ae-title__covenants { grid-template-columns:repeat(5,1fr); }
+ #ui .ae-title__covenant-caption { flex-direction:column; gap:4px; }
+ #ui .ae-title__foot { bottom:12px; left:24px; right:24px; }
+}
+@media (prefers-reduced-motion:reduce) { #ui .ae-title__covenant { transition:none; } }
+/* The menu belongs to the same game shell, with readable controls and calm surfaces. */
+#ui .ae-window { border-radius:8px; background:linear-gradient(145deg,#111b29,#0b111c); border-color:#b59b665c; box-shadow:0 24px 90px #000a; }
+#ui .ae-window > .ae-titlebar { background:#0a111c; padding:16px 20px; min-height:64px; }
+#ui .ae-titlebar h2 { font:500 25px var(--serif); letter-spacing:.03em; }
+#ui .ae-titlebar .ae-tab-num { color:#c9a866; background:transparent; border:0; }
+#ui .ae-x { min-width:44px; min-height:44px; border-radius:4px; }
+#ui .ae-settings__body { padding:8px 24px 24px; }
+#ui .ae-set-sec { padding:20px 0; border-bottom:1px solid #c9a86622; }
+#ui .ae-set-sec h3 { font:500 18px var(--serif); letter-spacing:.04em; margin-bottom:16px; }
+#ui .ae-set-sec h3 b { font:10px var(--sans); color:var(--gold); }
+#ui .ae-set-row { min-height:48px; gap:14px; }
+#ui .ae-set-row > label { font:13px/1.4 var(--sans); color:#d7d3c9; }
+#ui .ae-set-row .v { font:11px var(--sans); color:var(--gold-2); }
+#ui .ae-seg { border-radius:4px; overflow:hidden; background:#080e18; border:1px solid #c9a86640; }
+#ui .ae-seg button { min-height:44px; font:12px var(--sans); letter-spacing:.03em; }
+#ui .ae-seg button[aria-pressed=true] { background:#c9a866; color:#0b111c; }
+#ui .ae-settings__return { padding:16px 24px; background:#b69a5e0b; }
+#ui .ae-settings__return .ae-btn { font:600 13px var(--sans); letter-spacing:.03em; background:#c9a866; color:#0b111c; border-radius:4px; }
+#ui .ae-settings__return .ae-btn::before,#ui .ae-settings__return .ae-btn::after { display:none; }
+#ui .ae-settings .ae-note { font:11px/1.6 var(--sans); }
+#ui .ae-keys > div { min-height:36px; font:12px var(--sans); }
+#ui .ae-keys kbd { border-radius:3px; background:#080e18; color:#d8c18f; border-color:#c9a86644; }
+#ui .ae-scrim { background:rgba(3,7,13,.76); }
+@media (max-width:600px) {
+ #ui .ae-window > .ae-titlebar { padding:12px; }
+ #ui .ae-settings__body { padding:4px 14px 16px; }
+ #ui .ae-set-row { gap:10px; }
+ #ui .ae-settings__return { padding:14px; }
+ #ui .ae-set-sec { padding:16px 0; }
+}

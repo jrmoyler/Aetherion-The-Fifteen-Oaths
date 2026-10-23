@@ -1,4 +1,5 @@
 // HUD core: unit frames, buffs, compass, region banner, hotbar with cooldown sweeps, cast bar, XP bar.
+import './game-shell.css';
 import { createTimeline } from 'animejs';
 import { h, esc, fmtNum, rgbTriplet, prefersReducedMotion } from './dom.js';
 import { emblemSVG } from './emblems.js';
@@ -17,7 +18,7 @@ export function makeBar(kind, { thin = false, text = true } = {}) {
   const fill = h('div', { class: 'ae-bar__fill' });
   const trail = h('div', { class: 'ae-bar__trail' });
   const txt = text ? h('div', { class: 'ae-bar__txt ae-num' }) : null;
-  const el = h('div', { class: `ae-bar ae-bar--${kind}${thin ? ' ae-bar--thin' : ''}`, role: 'meter', 'aria-valuemin': 0 }, trail, fill, txt);
+  const el = h('div', { class: `ae-bar ae-bar--${kind}${thin ? ' ae-bar--thin' : ''}`, role: 'meter', 'aria-label': ({hp:'Health',mp:'Mana',xp:'Experience',cast:'Cast progress'})[kind] || kind, 'aria-valuemin': 0 }, trail, fill, txt);
   let target = 1, shown = 1, trailV = 1, hold = 0, lastTxt = '', lastF = -1, lastT = -1;
   return {
     el,
@@ -92,7 +93,8 @@ export function createHud(ui) {
   const xpL = h('span', { class: 'ae-num' }, 'Level 1');
   const xpR = h('span', { class: 'ae-num' }, '0 / 0');
   const xpWrap = h('div', { class: 'ae-xpbar' }, xpBar.el, h('div', { class: 'ae-xpbar__lbl' }, xpL, xpR));
-  const actionbar = h('div', { class: 'ae-actionbar ae-panel ae-panel--glass' }, hotbar, xpWrap);
+  const covenantLabel = h('div', {class:'ae-actionbar__covenant'});
+  const actionbar = h('div', { class: 'ae-actionbar ae-panel ae-panel--glass' }, covenantLabel, hotbar, xpWrap);
   const castLbl = h('div', { class: 'ae-castbar__lbl' });
   const castBar = makeBar('cast', { text: false });
   const cast = h('div', { class: 'ae-castbar', hidden: true }, castLbl, castBar.el);
@@ -299,6 +301,7 @@ export function createHud(ui) {
       ui.touch?.update?.(now, cds, view, mana);
       // frames
       pf.hp.set(gs.hp, gs.mhp); pf.mp.set(gs.mp, gs.mmp);
+      root.classList.toggle('is-critical', gs.alive && gs.hp / Math.max(1,gs.mhp) < .25);
       setText(pf.lvl, gs.level);
       xpBar.set(gs.xp, gs.next);
       setText(xpL, `Level ${gs.level}`); setText(xpR, `${fmtNum(gs.xp)} / ${fmtNum(gs.next)} XP`);
@@ -325,10 +328,12 @@ export function createHud(ui) {
     const o = OATH_BY_ID[c.oath];
     root.style.setProperty('--accent', o.accent); root.style.setProperty('--accent-rgb', rgbTriplet(o.accent));
     pf.name.textContent = c.name;
+    covenantLabel.textContent = `${o.name} · ${c.cls === 'sorcerer' ? 'Sorcerer' : 'Ninja'}`;
     pf.sub.textContent = o[c.cls]?.title || c.cls;
     pf.portrait.innerHTML = emblemSVG(o.id, { title: false });
     pf.portrait.append(pf.lvl);
-    pf.hp.set(gs.hp, gs.mhp); pf.mp.set(gs.mp, gs.mmp); pf.hp.snap(); pf.mp.snap();
+    pf.hp.set(gs.hp, gs.mhp); pf.mp.set(gs.mp, gs.mmp);
+      root.classList.toggle('is-critical', gs.alive && gs.hp / Math.max(1,gs.mhp) < .25); pf.hp.snap(); pf.mp.snap();
     buildHotbar();
   }
 

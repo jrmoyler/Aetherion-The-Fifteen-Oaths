@@ -360,7 +360,7 @@ function createActors(ctx) {
     const now = performance.now() / 1000;
     const rt = now - INTERP_DELAY;
     if (controller) controller.update(dt);
-    orbit.update(dt);
+    if (!ctx.cinematicActive) orbit.update(dt);
     const cam = orbit.cam.position;
     // visibility cap + shadow casters (every 0.5 s)
     sortT -= dt;

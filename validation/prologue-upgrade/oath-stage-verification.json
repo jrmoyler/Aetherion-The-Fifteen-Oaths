@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE=/tmp/chromium node game/test/oath-stage.browser.mjs",
+      "viewports": [
+        "1440x900",
+        "390x844",
+        "320x568"
+      ],
+      "result": "passed",
+      "assertions": [
+        "fire and water actual GLB selection",
+        "ninja to sorcerer actual GLB selection",
+        "rotation and authored stance",
+        "no page errors",
+        "no document overflow"
+      ]
+    },
+    {
+      "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE=/tmp/chromium node game/test/onboarding.browser.mjs",
+      "viewports": [
+        "390x844",
+        "320x568",
+        "1440x900"
+      ],
+      "result": "passed",
+      "assertions": [
+        "oath selection",
+        "native touch covenant scroll",
+        "name and submit",
+        "no SVG",
+        "no document overflow"
+      ]
+    }
+  ],
+  "screenshot_review": "Final screenshots refreshed after crest sizing, tab layout and generic portrait corrections. All three viewport checks passed."
+}
