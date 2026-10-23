@@ -114,3 +114,34 @@ test('spawn fade restores authored translucent materials and depth-write intent'
   assert.equal(body.meshes[0].material.depthWrite, false);
   body.dispose();
 });
+
+test('complete authored replacements retain head geometry, hair and PBR materials on every instance', async () => {
+  const { BodyFactory } = await import('./models.js');
+  const scene = new Group();
+  scene.userData.aetherion = { presentation: 'authored-v1' };
+  const bone = new Bone(); bone.name = 'head';
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new Float32BufferAttribute([0,1.6,0, .1,1.7,0, -.1,1.7,0], 3));
+  geometry.setIndex([0,1,2]);
+  geometry.setAttribute('skinIndex', new Uint16BufferAttribute(new Array(12).fill(0), 4));
+  geometry.setAttribute('skinWeight', new Float32BufferAttribute([1,0,0,0,1,0,0,0,1,0,0,0], 4));
+  const material = new MeshStandardMaterial({ roughness: .83, metalness: .12 });
+  const mesh = new SkinnedMesh(geometry, material);
+  mesh.add(bone); mesh.bind(new Skeleton([bone])); scene.add(mesh);
+  const gltf = { scene, animations: [new AnimationClip('idle', 1, [new NumberKeyframeTrack('head.position[y]', [0,1], [0,.01])])] };
+  const factory = new BodyFactory({ quality: { name: 'high' } });
+  const desc = { kind: 'player', oath: 'oath-01', cls: 'sorcerer' };
+  const a = factory.createGltf(gltf, desc, new Group());
+  const b = factory.createGltf(gltf, desc, new Group());
+  assert.equal(a.meshes.length, 1);
+  assert.equal(a.groom, undefined);
+  assert.deepEqual(Array.from(geometry.index.array), [0,1,2]);
+  assert.equal(a.meshes[0].material.type, 'MeshStandardMaterial');
+  assert.equal(a.meshes[0].material.roughness, .83);
+  assert.equal(a.meshes[0].material.metalness, .12);
+  a.animator.update(.5);
+  assert.ok(a.sockets.head.position.y > 0);
+  assert.equal(b.sockets.head.position.y, 0);
+  a.setFade(.2); assert.equal(b.meshes[0].material.opacity, 1);
+  a.dispose(); b.dispose(); geometry.dispose(); material.dispose();
+});

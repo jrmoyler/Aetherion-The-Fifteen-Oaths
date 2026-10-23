@@ -131,7 +131,12 @@ export class BodyFactory {
   // characters are rendered, never disconnected geometric limbs.
   createProcedural(desc, parent) { return createModelBody({ scene: new Group(), animations: [] }, parent); }
   createGltf(gltf, desc, parent) {
-    const body = createModelBody(gltf, parent, desc.kind !== 'mob'); equipArmor(body, desc); attachWeapon(body, desc);
+    const body = createModelBody(gltf, parent, desc.kind !== 'mob');
+    // A complete replacement owns its face, hair, costume and PBR materials.
+    // Read the exported scene extras explicitly: mesh count/names cannot tell
+    // a reconstruction apart from the legacy procedural forge assets.
+    if (gltf.scene.userData?.aetherion?.presentation === 'authored-v1') return body;
+    equipArmor(body, desc); attachWeapon(body, desc);
     try { applyGroom(body, desc, this.quality); } catch (error) { console.warn('[actors] groom failed', desc.oath, desc.cls, error); }
     return body;
   }
