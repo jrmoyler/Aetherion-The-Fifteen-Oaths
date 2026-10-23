@@ -48,6 +48,7 @@ export function createEngine() {
         E.music.connect(E.master); E.sfx.connect(E.master); E.amb.connect(E.master);
         E.reverb = ac.createConvolver(); E.reverb.buffer = makeIR(ac);
         E.reverbSend = ac.createGain(); E.reverbSend.gain.value = 0.9;
+        E.sfxSend = ac.createGain(); E.sfxSend.connect(E.reverbSend);
         E.reverbSend.connect(E.reverb); E.reverb.connect(E.master);
         E.noise.white = makeNoise(ac, 'white'); E.noise.pink = makeNoise(ac, 'pink'); E.noise.brown = makeNoise(ac, 'brown');
         E.applyVolumes();
@@ -66,6 +67,7 @@ export function createEngine() {
     E.master.gain.setTargetAtTime(sq(E.vol.master), t, 0.05);
     E.music.gain.setTargetAtTime(sq(E.vol.music) * 0.55, t, 0.05);
     E.sfx.gain.setTargetAtTime(sq(E.vol.sfx), t, 0.05);
+    E.sfxSend?.gain.setTargetAtTime(sq(E.vol.sfx), t, 0.05);
     E.amb.gain.setTargetAtTime(sq(E.vol.ambience) * 0.7, t, 0.05);
   };
 
@@ -75,6 +77,7 @@ export function createEngine() {
     s.loopStart = Math.random(); s.loopEnd = s.buffer.duration;
     return s;
   };
+  E.dispose = () => { E.ready = false; E.ac?.close?.().catch?.(() => {}); E.ac = null; };
   E.now = () => (E.ac ? E.ac.currentTime : 0);
   E.mtof = (m) => 440 * Math.pow(2, (m - 69) / 12);
   return E;

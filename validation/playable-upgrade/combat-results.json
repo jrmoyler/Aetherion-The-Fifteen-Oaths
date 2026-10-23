@@ -1,0 +1,210 @@
+{
+  "scenario": {
+    "camp": {
+      "oath": "oath-01",
+      "x": -1810.0134692522806,
+      "y": 50.29479440210304,
+      "z": 644.6156151106674,
+      "level": 3,
+      "members": [
+        "ember-hound",
+        "ember-hound",
+        "slag-golem"
+      ]
+    },
+    "spawn": {
+      "x": -1786.0134692522806,
+      "z": 644.6156151106674
+    },
+    "oath": "oath-01",
+    "cls": "sorcerer"
+  },
+  "checks": {
+    "keyboardTarget": "mo",
+    "pointerLock": true,
+    "mouseHoldCastCount": 3,
+    "playerDeath": true,
+    "shrineRespawn": true,
+    "enemyDefeated": true,
+    "targetDamage": 159
+  },
+  "targetBefore": {
+    "id": "mo",
+    "hp": 159,
+    "maxHp": 159
+  },
+  "runtime": {
+    "self": "c1",
+    "hp": 77,
+    "level": 1,
+    "xp": 54,
+    "frames": 67,
+    "model": "./assets/characters/oath-01-sorcerer.glb",
+    "drawCalls": 217,
+    "triangles": 448082,
+    "casts": [
+      {
+        "slot": 5,
+        "ability": "casting/dragon"
+      },
+      {
+        "slot": 5,
+        "ability": "casting/dragon"
+      },
+      {
+        "slot": 1,
+        "ability": "linear-ext/pyre"
+      },
+      {
+        "slot": 1,
+        "ability": "linear-ext/pyre"
+      },
+      {
+        "slot": 2,
+        "ability": "linear-ext/firePortal"
+      },
+      {
+        "slot": 2,
+        "ability": "linear-ext/firePortal"
+      },
+      {
+        "slot": 0,
+        "ability": "basic/sorcerer"
+      },
+      {
+        "slot": 0,
+        "ability": "basic/sorcerer"
+      },
+      {
+        "slot": 3,
+        "ability": "linear-extended/ward"
+      },
+      {
+        "slot": 3,
+        "ability": "linear-extended/ward"
+      },
+      {
+        "slot": 0,
+        "ability": "basic/sorcerer"
+      }
+    ],
+    "hits": [
+      {
+        "dst": "mo",
+        "amount": 70
+      },
+      {
+        "dst": "mo",
+        "amount": 21
+      },
+      {
+        "dst": "mp",
+        "amount": 22
+      },
+      {
+        "dst": "mp",
+        "amount": 21
+      },
+      {
+        "dst": "mp",
+        "amount": 2
+      },
+      {
+        "dst": "mp",
+        "amount": 2
+      },
+      {
+        "dst": "mp",
+        "amount": 2
+      },
+      {
+        "dst": "mo",
+        "amount": 25
+      },
+      {
+        "dst": "mp",
+        "amount": 24
+      },
+      {
+        "dst": "mp",
+        "amount": 2
+      },
+      {
+        "dst": "mo",
+        "amount": 32
+      },
+      {
+        "dst": "mp",
+        "amount": 28
+      },
+      {
+        "dst": "mo",
+        "amount": 11
+      },
+      {
+        "dst": "mp",
+        "amount": 2
+      },
+      {
+        "dst": "mp",
+        "amount": 2
+      },
+      {
+        "dst": "mp",
+        "amount": 11
+      },
+      {
+        "dst": "mp",
+        "amount": 2
+      },
+      {
+        "dst": "mp",
+        "amount": 38
+      },
+      {
+        "dst": "mq",
+        "amount": 39
+      },
+      {
+        "dst": "mp",
+        "amount": 11
+      },
+      {
+        "dst": "mq",
+        "amount": 4
+      }
+    ],
+    "deaths": [
+      {
+        "type": "death",
+        "id": "mo",
+        "killer": "c1"
+      },
+      {
+        "type": "death",
+        "id": "c1",
+        "killer": "mq"
+      }
+    ],
+    "rewards": [
+      {
+        "type": "xp",
+        "id": "c1",
+        "amount": 54,
+        "total": 54,
+        "next": 80
+      },
+      {
+        "type": "loot",
+        "id": "c1",
+        "src": "mo",
+        "gold": 9,
+        "items": []
+      }
+    ],
+    "failures": []
+  },
+  "status": "passed",
+  "errors": [],
+  "httpFailures": []
+}

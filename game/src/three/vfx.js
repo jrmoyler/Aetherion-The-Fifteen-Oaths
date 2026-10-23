@@ -2,7 +2,7 @@
 import {
   Group, Vector3, Color, BufferGeometry, Float32BufferAttribute, Points, ShaderMaterial,
   Mesh, MeshBasicMaterial, RingGeometry, IcosahedronGeometry, TorusGeometry,
-  Line, LineBasicMaterial, AdditiveBlending, DoubleSide,
+  Line, LineBasicMaterial, AdditiveBlending, DoubleSide, PlaneGeometry,
 } from 'three';
 
 export const ELEMENT_STYLES = {
@@ -34,6 +34,15 @@ export async function initVFX(ctx) {
   const source = await createSourceAbilities(ctx);
   const active = new Set(); const MAX_EFFECTS = 64;
   const scene = ctx.scene;
+  function glowMaterial(color) {
+    const m = material(color);
+    m.onBeforeCompile = shader => {
+      shader.fragmentShader = shader.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec2 glowUv;').replace('#include <alphamap_fragment>', '#include <alphamap_fragment>\nfloat glow = max(0.0, 1.0 - length(glowUv - 0.5) * 2.0); diffuseColor.a *= glow * glow;');
+      shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec2 glowUv;').replace('#include <begin_vertex>', '#include <begin_vertex>\nglowUv = uv;');
+    };
+    m.customProgramCacheKey = () => 'aetherion-soft-combat-glow-v1';
+    return m;
+  }
   function material(color, opacity = 1) { return new MeshBasicMaterial({ color, transparent: true, opacity, depthWrite: false, side: DoubleSide, blending: AdditiveBlending }); }
   function make(element, kind, opts = {}) {
     if (active.size >= MAX_EFFECTS) active.values().next().value.stop();
@@ -46,6 +55,7 @@ export async function initVFX(ctx) {
     const radius = Math.min(10, Math.max(.4, opts.radius ?? 2));
     const anticipation = Math.min(4, Math.max(0, opts.ant ?? opts.castTime ?? 0));
     const projectile = kind === 'projectile';
+    root.name = `CombatEffect:${kind}:${element}`;
     const travel = projectile ? Math.min(.85, Math.max(.18, origin.distanceTo(target) / Math.max(12, Math.min(100, palette?.s ?? 25)))) : 0;
     const life = opts.duration ?? (anticipation + travel + (kind === 'status' ? 3 : kind === 'zone' ? Math.min(3, palette?.l ?? 1.65) : Math.min(1.6, palette?.l ?? .8)));
     let age = 0; let done = false;
@@ -58,11 +68,30 @@ export async function initVFX(ctx) {
     const shader = new ShaderMaterial({ uniforms: { tint: { value: new Color(style.color) }, core: { value: new Color(style.core) }, opacity: { value: 1 }, size: { value: style.form === 'mist' ? .75 : .23 } }, vertexShader: pointVertex, fragmentShader: pointFragment, transparent: true, depthWrite: false, blending: AdditiveBlending });
     const points = new Points(geo, shader); points.frustumCulled = false; root.add(points);
     const accents = [];
+    const ribbons = [];
+    // Camera-facing ribbons retain the travel direction, so missiles read as motion
+    // instead of a cloud that simply translates. Bounded to eight quads per cast.
+    if (projectile) {
+      const direction = target.clone().sub(origin).normalize();
+      for (let i = 0; i < 8; i++) {
+        const ribbon = new Mesh(new PlaneGeometry(1, 1), glowMaterial(i < 2 ? style.core : style.color));
+        ribbon.name = 'ProjectileRibbon'; ribbon.userData.direction = direction;
+        root.add(ribbon); ribbons.push(ribbon);
+      }
+    }
+    let shockwave = null, flash = null;
+    if (kind === 'impact') {
+      shockwave = new Mesh(new RingGeometry(.85, 1, 48), material(style.color));
+      shockwave.name = 'ImpactShockwave'; shockwave.rotation.x = -Math.PI / 2;
+      shockwave.position.y = .045; root.add(shockwave);
+      flash = new Mesh(new PlaneGeometry(1, 1), glowMaterial(style.core));
+      flash.name = 'ImpactFlash'; flash.position.y = .8; root.add(flash);
+    }
     function ring(r, thickness, tilt = -Math.PI / 2) { const m = new Mesh(new RingGeometry(r, r + thickness, 56), material(style.color,.65)); m.rotation.x = tilt; m.position.y = .08; root.add(m); accents.push(m); return m; }
     // Topology varies with the force rather than recolouring one generic particle cloud.
     if (kind === 'melee') {
       const slash = new Mesh(new TorusGeometry(1.5,.055,5,36,Math.PI * 1.3),material(style.core));
-      slash.rotation.x = Math.PI / 2.7; slash.position.y = 1; root.add(slash); accents.push(slash);
+      slash.name = 'MeleeArc'; slash.rotation.x = Math.PI / 2.7; slash.position.y = 1; root.add(slash); accents.push(slash);
     } else if (['crystal','rock','leaf','shard','grid'].includes(style.form)) {
       for (let i=0;i<7;i++) { const m=new Mesh(new IcosahedronGeometry(style.form==='rock'?.3:.16,0),material(i%2?style.color:style.core)); const a=i/7*Math.PI*2;m.position.set(Math.cos(a)*radius*.6,.2,Math.sin(a)*radius*.6);m.scale.set(.5,style.form==='leaf'?.4:2.5,.5);m.rotation.z=a;root.add(m);accents.push(m); }
     } else if (style.form === 'lightning') {
@@ -97,13 +126,28 @@ export async function initVFX(ctx) {
         attr.setXYZ(i,x,Math.max(.06,y),z);
       }
       attr.needsUpdate=true;
+      for (let i = 0; i < ribbons.length; i++) {
+        const ribbon = ribbons[i], d = ribbon.userData.direction;
+        const tail = Math.min(phase / Math.max(.01, travel), 1) * (.15 + i * .16);
+        ribbon.position.copy(d).multiplyScalar(-tail); ribbon.position.y += 1.15;
+        if (ctx.camera) ribbon.quaternion.copy(ctx.camera.quaternion);
+        ribbon.scale.set(.16 + (8-i)*.025, .16 + (8-i)*.025, 1);
+        ribbon.material.opacity = windup ? 0 : fade * (1-i/8) * .65;
+      }
+      if (shockwave) {
+        shockwave.scale.setScalar(radius * (.15 + Math.min(1, phase / .36)));
+        shockwave.material.opacity = Math.max(0, 1-phase/.5) * .65;
+        if (ctx.camera) flash.quaternion.copy(ctx.camera.quaternion);
+        flash.scale.setScalar(radius * (.65 + phase*2));
+        flash.material.opacity = Math.max(0, 1-phase/.14) * .8;
+      }
       accents.forEach((m,i)=>{m.material.opacity=(windup?.2:.75)*fade;if(m===telegraph){m.material.opacity=(windup?.35:.65)*fade;return;}if(m.isLine&&style.form==='lightning')m.rotation.y=Math.sin(age*36+i)*1.2;else if(kind==='melee'){m.rotation.z=phase*8;m.scale.setScalar(.65+phase*.8);}else {m.rotation.y+=dt*(i%2?1:-1);if(['crystal','rock','leaf','shard','grid'].includes(style.form)){m.position.y=.15+Math.sin(Math.min(1,phase)*Math.PI)*(i%2?.9:1.4);}}});
     } };
     active.add(handle);return handle;
   }
   const api = {
     castEffect(ab, opts={}) { const original=source.cast(ab,opts);if(original)return original;const shape=ab.shape??'projectile';const kind=shape==='line'?'projectile':shape==='self'||shape==='summon'?'burst':shape;return make(opts.element??ab.element??'arcane',kind,{...opts,palette:PALETTES[ab.id],abilityId:ab.id,radius:ab.radius??opts.radius??(opts.ultimate?5:2)}); },
-    play(key,opts={}) {const parts=String(key).split(':');let element=parts.find(p=>ELEMENT_STYLES[p])??(key==='heal'?'nature':'light');let kind=parts[0];if(kind==='basic')kind=parts[1]==='ninja'?'melee':'projectile';if(kind==='ultimate')kind='zone';return make(element,kind,{...opts,ultimate:parts[0]==='ultimate',duration:opts.duration??(key==='levelup'?2.2:undefined)});},
+    play(key,opts={}) {const parts=String(key).split(':');let element=opts.element??parts.find(p=>ELEMENT_STYLES[p])??(key==='heal'?'nature':'light');let kind=parts[0];if(kind==='basic')kind=parts[1]==='ninja'?'melee':'projectile';if(kind==='ultimate')kind='zone';return make(element,kind,{...opts,ultimate:parts[0]==='ultimate',duration:opts.duration??(key==='levelup'?2.2:undefined)});},
     impact(element,pos,strength=1,opts={}) { return make(element,'impact',{...opts,pos,radius:Math.max(.5,strength*2),duration:.7}); },
     status(actor,kind,duration=3){return make(STATUS_ELEMENT[kind]??'arcane','status',{caster:actor,duration:Math.min(60,duration),radius:1});},
     stopAll(){source.stopAll();for(const h of [...active])h.stop();},

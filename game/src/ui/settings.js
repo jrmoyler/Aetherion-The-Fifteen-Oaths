@@ -8,9 +8,13 @@ import { saveQuality, TIERS } from '../core/quality.js';
 export function createSettings(ui) {
   const { ctx } = ui;
   const close = h('button', { class: 'ae-x', type: 'button', 'aria-label': 'Close settings', html: ICONS.close });
+  const resume = h('button', { class: 'ae-btn ae-btn--primary', type: 'button' }, 'Return to world');
+  resume.onclick = () => ui.closeWindow('settings');
+  const pauseStatus = h('p', { class: 'ae-note ae-pause-status', role: 'status' });
+  const returnBar = h('div', { class: 'ae-settings__return', hidden: true }, pauseStatus, resume);
   const body = h('div', { class: 'ae-settings__body ae-scroll', style: { flex: 1, minHeight: 0 } });
   const win = h('div', { class: 'ae-window ae-settings ae-panel', hidden: true, role: 'dialog', 'aria-label': 'Settings' },
-    h('div', { class: 'ae-titlebar' }, h('span', { class: 'ae-tab-num' }, 'III'), h('h2', null, 'Settings'), h('span', { class: 'ae-tb-sub' }, 'Saved automatically'), close), body);
+    h('div', { class: 'ae-titlebar' }, h('span', { class: 'ae-tab-num' }, 'III'), h('h2', null, 'Settings'), h('span', { class: 'ae-tb-sub' }, 'Saved automatically'), close), returnBar, body);
   close.addEventListener('click', () => { ui.sfx('close'); ui.closeWindow('settings'); });
 
   const sec = (n, title, ...rows) => h('section', { class: 'ae-set-sec' }, h('h3', null, h('b', null, n), title), ...rows);
@@ -68,5 +72,8 @@ export function createSettings(ui) {
     sec('04', 'Key reference', h('div', { class: 'ae-keys' }, keys.map(([a, k]) => h('div', null, h('span', null, a), h('kbd', null, k))))),
   );
 
-  return { win };
+  return { win, onOpen() {
+    returnBar.hidden = !ui.gs.inGame;
+    pauseStatus.textContent = ctx.net?.mode === 'online' ? 'Online realm · the world continues while this menu is open.' : (ctx.net?.paused ? 'Realm paused · take your time.' : 'Controls suspended · return to continue your journey.');
+  } };
 }

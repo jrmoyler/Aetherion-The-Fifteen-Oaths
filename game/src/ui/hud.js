@@ -98,6 +98,13 @@ export function createHud(ui) {
   const cast = h('div', { class: 'ae-castbar', hidden: true }, castLbl, castBar.el);
   const fps = h('div', { class: 'ae-fps ae-num', hidden: true }, '');
 
+  const commands = h('nav', { class: 'ae-command-dock', 'aria-label': 'Game menus' });
+  for (const [id, label, key] of [['map', 'World map', 'M'], ['character', 'Character', 'I'], ['guide', 'Controls', '?'], ['settings', 'Menu', 'Esc']]) {
+    const button = h('button', { type: 'button', class: 'ae-command' }, h('span', null, label), h('kbd', null, key));
+    button.onclick = () => id === 'guide' ? ui.guide?.toggle() : ui.toggleWindow(id);
+    commands.append(button);
+  }
+  root.append(commands);
   root.append(pf.el, tf.el, buffs, compass, regionChip, banner, actionbar, cast, fps);
 
   // ----- hotbar build & cooldown state
@@ -134,12 +141,12 @@ export function createHud(ui) {
     if (Number.isFinite(p.remaining)) return p.remaining;
     const u = Number(p.until);
     if (!Number.isFinite(u)) return 0;
-    const perf = performance.now(), clk = ctx.clock?.time ?? 0;
+    const perf = (ctx.gameplayNow?.() ?? performance.now()), clk = ctx.clock?.time ?? 0;
     let st; try { st = ctx.net?.serverTime?.(); } catch { st = undefined; }
     const inRange = (r) => Number.isFinite(r) && r >= 0 && r <= 600;
     let r;
     if (u > 1e12) r = (u - (Number.isFinite(st) && st > 1e12 ? st : Date.now())) / 1000; // epoch ms
-    else if (u > 1e4) r = (u - perf) / 1000; // performance.now() ms
+    else if (u > 1e4) r = (u - perf) / 1000; // (ctx.gameplayNow?.() ?? performance.now()) ms
     else r = [u - clk, u - perf / 1000, Number.isFinite(st) ? u - st : NaN].find(inRange); // seconds
     return inRange(r) ? r : 0;
   }
@@ -147,7 +154,7 @@ export function createHud(ui) {
     const i = Number(p?.slot); if (!(i >= 0 && i < 6)) return;
     const rem = remainingFrom(p);
     const total = Math.max(rem, Number(p.total) || view[i]?.cooldown || rem || 1);
-    cds[i] = { end: performance.now() + rem * 1000, total, active: rem > 0 };
+    cds[i] = { end: (ctx.gameplayNow?.() ?? performance.now()) + rem * 1000, total, active: rem > 0 };
     ui.touch?.setCooldown?.(i, cds[i]);
   }
 
@@ -155,7 +162,7 @@ export function createHud(ui) {
   let castEnd = 0, castDur = 0, castStart = 0;
   function startCast(slot, dur, name) {
     if (!(dur > 0.05)) return;
-    const now = performance.now();
+    const now = (ctx.gameplayNow?.() ?? performance.now());
     if (now < castEnd && Math.abs(now - castStart) < 120) return;
     castStart = now; castDur = dur; castEnd = now + dur * 1000;
     castLbl.textContent = name || view[slot]?.name || 'Casting';
@@ -202,7 +209,7 @@ export function createHud(ui) {
       b = { el, span, end: 0 };
       buffEls.set(key, b);
     }
-    b.end = performance.now() + (Number(dur) || 5) * 1000;
+    b.end = (ctx.gameplayNow?.() ?? performance.now()) + (Number(dur) || 5) * 1000;
   }
 
   // ----- region
@@ -310,7 +317,7 @@ export function createHud(ui) {
       if (now - lastRegionCheck > 1000) { lastRegionCheck = now; if (!ui._regionFromBus) setRegion(gs.regionHere()); }
     }
     fpsAcc += dt;
-    if (!fps.hidden && fpsAcc > 0.5) { fpsAcc = 0; try { fps.textContent = `${ctx.engine.getFps().toFixed(0)} fps`; } catch { /* ignore */ } }
+    if (!fps.hidden && fpsAcc > 0.5) { fpsAcc = 0; try { fps.textContent = `${(ctx.engine?.getFps?.() || (dt > 0 ? 1 / dt : 0)).toFixed(0)} fps`; } catch { /* ignore */ } }
   }
 
   function setPlayer() {

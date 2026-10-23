@@ -28,7 +28,8 @@ export function createAudio(ctx, opts = {}) {
   };
   const unlock = () => { if (E.unlock()) startAll(); };
   for (const ev of ['pointerdown', 'keydown', 'touchend']) addEventListener(ev, unlock, { capture: true, passive: true });
-  document.addEventListener('visibilitychange', () => { if (!E.ac) return; if (document.hidden) E.ac.suspend?.(); else E.ac.resume?.(); });
+  const visibility = () => { if (!E.ac) return; if (document.hidden) E.ac.suspend?.(); else E.ac.resume?.(); };
+  document.addEventListener('visibilitychange', visibility);
 
   function applyRegion(oathId) {
     region = oathId;
@@ -38,7 +39,8 @@ export function createAudio(ctx, opts = {}) {
   }
 
   // ---- bus wiring
-  const bus = ctx.bus;
+  const subscriptions = [];
+  const bus = { on(type, fn) { subscriptions.push(ctx.bus.on(type, fn)); } };
   const lastLocalCast = { t: 0 };
   bus.on('player:region', (p) => { const id = typeof p?.oath === 'string' ? p.oath : p?.oath?.id; if (id) applyRegion(id); });
   bus.on('game:start', (c) => { scene = 'game'; if (!region && c?.oath) region = c.oath; applyRegion(region); });
@@ -48,7 +50,7 @@ export function createAudio(ctx, opts = {}) {
     try { const a = (ctx.combat?.hotbar?.length ? ctx.combat.hotbar : hotbarFor(c.oath, c.cls))[slot]; return a?.element || `basic_${c.cls}`; } catch { return null; }
   };
   bus.on('combat:cast', (p) => {
-    const el = elementOfSlot(Number(p?.slot)); if (!el) return;
+    const el = elementOfSlot(Number(p?.slot)); if (!el || p?.interrupted) return;
     lastLocalCast.t = performance.now();
     sfx.cast(el, null, null, Number(p?.slot) === 5 ? 1.5 : 1);
   });
@@ -90,9 +92,16 @@ export function createAudio(ctx, opts = {}) {
     try { if (ctx.world?.isWater?.(p.x, p.z)) return 'water'; } catch { /* ignore */ }
     return SURFACE[o.biome] || 'earth';
   }
+  bus.on('world:weather', (w) => amb.setWeather(w?.kind, w?.intensity));
   bus.on('weather', (w) => amb.setWeather(w?.kind, w?.intensity));
 
   return {
+    dispose() {
+      for (const ev of ['pointerdown', 'keydown', 'touchend']) removeEventListener(ev, unlock, true);
+      document.removeEventListener('visibilitychange', visibility);
+      subscriptions.forEach(off => off?.());
+      music.stop(); amb.dispose(); sfx.dispose(); E.dispose();
+    },
     unlock,
     ui: (name) => sfx.ui(name),
     setVolumes: (v) => E.setVolumes(v),

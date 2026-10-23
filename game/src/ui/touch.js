@@ -32,7 +32,7 @@ export function createTouch(ui) {
   const ctrl = h('div', { class: 'ae-touch-ui', hidden: true }, cluster, top);
   const fit = () => {
     const portrait = innerHeight > innerWidth;
-    const sc = portrait ? Math.min(1, (innerWidth * 0.68) / CLUSTER) : Math.min(1, Math.max(0.58, (innerHeight - 40) / 470));
+    const sc = portrait ? Math.min(1, Math.max(0.75, (innerWidth * 0.68) / CLUSTER)) : Math.min(1, Math.max(0.75, (innerHeight - 40) / 470));
     ctrl.style.setProperty('--tscale', sc.toFixed(3));
     ui.root?.style.setProperty('--tscale-px', `${Math.round(CLUSTER * sc + 18)}px`);
   };
@@ -111,7 +111,8 @@ export function createTouch(ui) {
     });
   }
   for (const u of UTIL) {
-    const b = h('button', { class: 'ae-tbtn util', type: 'button', 'aria-label': u.label, html: ICONS[u.icon], style: `left:${u.x - 24}px;top:${u.y - 24}px` });
+    const b = h('button', { class: 'ae-tbtn util', type: 'button', 'aria-label': u.label, html: ICONS[u.icon], style: `left:${u.x - 30}px;top:${u.y - 30}px;width:60px;height:60px` });
+    b.append(h('span', { class: 'ae-touch-label' }, u.label === 'Next target' ? 'Target' : u.label));
     b.addEventListener('pointerdown', (e) => {
       e.preventDefault(); e.stopPropagation(); b.setPointerCapture(e.pointerId); b.classList.add('is-down');
       if (u.mode === 'hold') ctx.input?.hold?.(u.id, true); else ctx.input?.press?.(u.id);
@@ -130,8 +131,8 @@ export function createTouch(ui) {
 
   // block page zoom/scroll gestures
   const stop = (e) => e.preventDefault();
-  document.addEventListener('gesturestart', stop, { passive: false });
-  document.addEventListener('dblclick', stop, { passive: false });
+  el.addEventListener('gesturestart', stop, { passive: false });
+  ctrl.addEventListener('gesturestart', stop, { passive: false });
   el.addEventListener('touchmove', stop, { passive: false });
   el.addEventListener('contextmenu', stop);
   ctrl.addEventListener('touchmove', stop, { passive: false });

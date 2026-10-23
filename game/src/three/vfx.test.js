@@ -64,3 +64,19 @@ test('three original boosts bind and restore body material hooks through cast ca
   }
   vfx.dispose();assert.deepEqual(caster.position.toArray(),[2,5,3]);
 });
+
+test('confirmed impacts expand and projectiles carry a bounded directional trail', async () => {
+  const scene = new Scene(), camera = new PerspectiveCamera(); let tick;
+  const vfx = await initVFX({ scene, camera, addUpdate(fn) { tick = fn; } });
+  vfx.play('basic:sorcerer', { element: 'fire', pos: new Vector3(), target: new Vector3(10, 0, 0) });
+  const projectile = scene.getObjectByName('CombatEffect:projectile:fire');
+  assert.ok(projectile, 'explicit element is respected for basic attacks');
+  assert.equal(projectile.children.filter(c => c.name === 'ProjectileRibbon').length, 8);
+  vfx.impact('earth', new Vector3(3, 0, 2));
+  const wave = scene.getObjectByName('ImpactShockwave');
+  tick(.05); const first = wave.scale.x;
+  tick(.05); assert.ok(wave.scale.x > first);
+  const ribbons = projectile.children.filter(c => c.name === 'ProjectileRibbon');
+  assert.ok(ribbons[7].position.x < ribbons[0].position.x, 'trail follows behind travel');
+  vfx.dispose(); assert.equal(scene.children.length, 0);
+});

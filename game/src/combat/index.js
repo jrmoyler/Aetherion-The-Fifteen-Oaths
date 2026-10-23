@@ -9,15 +9,17 @@ import { HitFlashes, StatusVisuals } from './feedback.js';
 import { createArenas } from './arenas.js';
 import { ActionBuffer, reconcileCooldown } from './timing.js';
 import { replaceHotbar } from './loadout.js';
+import { gameplayInputAllowed, readCombatActions } from './input-actions.js';
 
 const ELEMENT_FLASH = {
   fire: '#ff8a3c', frost: '#bfefff', storm: '#cfe0ff', water: '#8fe6ff', earth: '#ffd7a0', wind: '#e6fbff', nature: '#c8ff9a', poison: '#b6ff3d',
   light: '#fff4c0', cosmic: '#d8b8ff', shadow: '#b48cff', blood: '#ff5a6a', arcane: '#e0a8ff', time: '#ffe0a0', tech: '#a8f0ff',
 };
 const isTouch = () => typeof matchMedia !== 'undefined' && matchMedia('(pointer: coarse)').matches;
-const nowMs = () => performance.now();
+
 
 export async function init(ctx) {
+  const nowMs = () => ctx.gameplayNow?.() ?? performance.now();
   const state = {
     hotbar: [], target: null, cooldowns: {}, castBar: null, gcdUntil: 0,
     you: null, character: ctx.character ?? null, combo: 0,
@@ -36,6 +38,7 @@ export async function init(ctx) {
   ctx.scene.onDisposeObservable?.addOnce(() => { cancelRelease(); actionBuffer.clear(); });
 
   const bus = ctx.bus;
+  bus.on('game:paused', ({ paused }) => { if (paused) { cancelRelease(); actionBuffer.clear(); } });
   const actors = () => ctx.actors;
   const player = () => ctx.actors?.player ?? null;
   const selfId = () => ctx.net?.selfId ?? player()?.id ?? null;
@@ -165,6 +168,7 @@ export async function init(ctx) {
   function manaOk(ab) { const mp = state.you?.mp; return !(Number.isFinite(mp) && mp < (ab.mana ?? 0)); }
 
   function cast(slot) {
+    if (!gameplayInputAllowed(ctx.input)) return false;
     try {
       const ab = state.hotbar[slot]; const p = player();
       if (!ab || !p || p.alive === false) return false;
@@ -217,6 +221,7 @@ export async function init(ctx) {
   }
   // A single deliberate press just before recovery completes should not disappear.
   function requestCast(slot) {
+    if (!gameplayInputAllowed(ctx.input)) { actionBuffer.clear(); return false; }
     const now = nowMs(), remaining = readyAt(slot) - now;
     if (remaining > 0 && remaining <= actionBuffer.windowMs && player()?.alive !== false) {
       actionBuffer.push(slot, now); return false;
@@ -375,11 +380,17 @@ export async function init(ctx) {
     try {
       const inp = ctx.input;
       if (inp) {
-        if (inp.consume('target')) cycleTarget();
-        if (inp.consume('click')) clickPick();
-        for (let s = 0; s < 6; s++) if (inp.consume(`slot${s}`)) requestCast(s);
-        const queued = actionBuffer.take(nowMs(), (slot) => readyAt(slot) <= nowMs());
-        if (queued !== null) cast(queued);
+        const actions = readCombatActions(inp);
+        if (actions.blocked) actionBuffer.clear();
+        else {
+          if (actions.cycle) cycleTarget();
+          if (actions.nearest) setTarget(nearestEnemy(40)?.id ?? null);
+          if (actions.pick) clickPick();
+          for (const slot of actions.slots) requestCast(slot);
+          const queued = actionBuffer.take(nowMs(), (slot) => readyAt(slot) <= nowMs());
+          if (queued !== null) cast(queued);
+          else if (actions.repeatBasic && !actions.slots.includes(0) && readyAt(0) <= nowMs()) cast(0);
+        }
       }
       if (state.target != null && !actorOf(state.target)) setTarget(null);
       if (state.castBar && nowMs() > state.castBar.end + 100) state.castBar = null;

@@ -50,6 +50,11 @@ export function padStyle(id = '') {
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
 
 export function createInput(canvas, bus) {
+  const listeners = [];
+  const listen = (target, type, fn, options) => {
+    target.addEventListener(type, fn, options);
+    listeners.push(() => target.removeEventListener(type, fn, options));
+  };
   const down = new Set();
   const pressed = new Set();
   const state = { moveX: 0, moveY: 0, lookDX: 0, lookDY: 0, zoom: 0, sprint: false, jump: false, mouseLeft: false, mouseRight: false, pointerLocked: false };
@@ -68,9 +73,9 @@ export function createInput(canvas, bus) {
 
   const actionOf = (code) => Object.keys(BINDINGS).find((a) => BINDINGS[a].includes(code));
 
-  addEventListener('keydown', (e) => {
+  listen(globalThis, 'keydown', (e) => {
     setDevice('kbm');
-    if (typing || !enabled) return;
+    if (!gameplayEnabled()) return;
     const a = actionOf(e.code);
     if (!a) return;
     if (a === 'target' || a === 'jump') e.preventDefault();
@@ -78,27 +83,27 @@ export function createInput(canvas, bus) {
     down.add(a);
     bus.emit('input:action', a);
   });
-  addEventListener('keyup', (e) => { const a = actionOf(e.code); if (a) down.delete(a); });
-  addEventListener('blur', resetTransientInput);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) resetTransientInput(); });
+  listen(globalThis, 'keyup', (e) => { const a = actionOf(e.code); if (a) down.delete(a); });
+  listen(globalThis, 'blur', resetTransientInput);
+  listen(document, 'visibilitychange', () => { if (document.hidden) resetTransientInput(); });
 
-  canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-  canvas.addEventListener('pointerdown', (e) => {
-    if (e.pointerType !== 'mouse') return;
+  listen(canvas, 'contextmenu', (e) => e.preventDefault());
+  listen(canvas, 'pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || !gameplayEnabled()) return;
     if (e.button === 0) { state.mouseLeft = true; pressed.add('click'); }
     if (e.button === 2) state.mouseRight = true;
     canvas.focus();
   });
-  addEventListener('pointerdown', (e) => setDevice(e.pointerType === 'mouse' ? 'kbm' : 'touch'), true);
-  addEventListener('pointerup', (e) => { if (e.button === 0) state.mouseLeft = false; if (e.button === 2) state.mouseRight = false; });
+  listen(globalThis, 'pointerdown', (e) => setDevice(e.pointerType === 'mouse' ? 'kbm' : 'touch'), true);
+  listen(globalThis, 'pointerup', (e) => { if (e.button === 0) state.mouseLeft = false; if (e.button === 2) state.mouseRight = false; });
   let mouseTravel = 0;
-  addEventListener('pointermove', (e) => {
-    if (e.pointerType !== 'mouse') return;
+  listen(globalThis, 'pointermove', (e) => {
+    if (e.pointerType !== 'mouse' || !gameplayEnabled()) return;
     if (device !== 'kbm') { mouseTravel += Math.abs(e.movementX || 0) + Math.abs(e.movementY || 0); if (mouseTravel > 24) { mouseTravel = 0; setDevice('kbm'); } }
-    if (document.pointerLockElement === canvas || state.mouseRight) { state.lookDX += e.movementX; state.lookDY += e.movementY; }
+    if (document.pointerLockElement === canvas || state.mouseRight) { state.lookDX += e.movementX || 0; state.lookDY += e.movementY || 0; }
   });
-  canvas.addEventListener('wheel', (e) => { state.zoom += Math.sign(e.deltaY); e.preventDefault(); }, { passive: false });
-  document.addEventListener('pointerlockchange', () => { state.pointerLocked = document.pointerLockElement === canvas; });
+  listen(canvas, 'wheel', (e) => { if (gameplayEnabled()) state.zoom += Math.sign(e.deltaY); e.preventDefault(); }, { passive: false });
+  listen(document, 'pointerlockchange', () => { state.pointerLocked = document.pointerLockElement === canvas; });
 
   // ---------------------------------------------------------------- gamepad
   const cfg = { deadzone: 0.16, outer: 0.96, moveCurve: 1.15, lookCurve: 1.9, lookSpeed: 1, invertY: false, vibration: true, autoSprint: true,
@@ -116,13 +121,15 @@ export function createInput(canvas, bus) {
   const padDown = new Map(); // action -> button index holding it
   let padSprint = false, fullPushT = 0, lastPadPoll = 0, captureFn = null, wasCaptured = false, captureNext = null;
   const nav = { dir: null, src: null, next: 0 };
+  const gameplayEnabled = () => enabled && !typing && !(captureFn && captureFn());
+  let gameplayWasEnabled = true;
 
-  addEventListener('gamepadconnected', (e) => {
+  listen(globalThis, 'gamepadconnected', (e) => {
     const g = e.gamepad;
     if (g && !pad.connected) adoptPad(g);
     try { bus.emit('input:pad', { connected: true, id: g?.id || '', style: padStyle(g?.id) }); } catch { /* ignore */ }
   });
-  addEventListener('gamepaddisconnected', (e) => {
+  listen(globalThis, 'gamepaddisconnected', (e) => {
     if (e.gamepad && e.gamepad.index === pad.index) dropPad();
   });
   function adoptPad(g) {
@@ -144,7 +151,7 @@ export function createInput(canvas, bus) {
     down.clear(); pressed.clear();
     Object.assign(state, { moveX: 0, moveY: 0, lookDX: 0, lookDY: 0, zoom: 0, sprint: false, jump: false, mouseLeft: false, mouseRight: false });
     Object.assign(virtual, { mx: 0, my: 0, active: false, lookDX: 0, lookDY: 0, sprint: false });
-    const held = [...padHeld]; releasePad();
+    const held = padHeld.map((on, i) => on || suppressed[i]); releasePad();
     held.forEach((on, i) => { suppressed[i] = on; });
   }
   function readPads() {
@@ -193,17 +200,18 @@ export function createInput(canvas, bus) {
   function emitNav(dir, src, repeat) { try { bus.emit('gamepad:nav', { dir, src, repeat }); } catch (e) { console.warn('[input] nav', e); } }
 
   function pollPad(now) {
+    const captured = !gameplayEnabled();
+    if (captured !== wasCaptured) {
+      // Preserve button edges across menus: release before an action can fire again.
+      for (let i = 0; i < padHeld.length; i++) suppressed[i] = suppressed[i] || padHeld[i];
+      padDown.clear(); padSprint = false; fullPushT = 0;
+      pad.move = null; pad.sprint = false; wasCaptured = captured; nav.dir = null;
+    }
     const g = readPads();
     if (!g) return;
     pad.polls++;
     const dt = Math.min(0.1, Math.max(0.001, lastPadPoll ? (now - lastPadPoll) / 1000 : 1 / 60));
     lastPadPoll = now;
-    const captured = typing || !enabled || !!(captureFn && captureFn());
-    if (captured !== wasCaptured) {
-      // A press that opened/closed a menu must not leak into the other mode.
-      for (let i = 0; i < padHeld.length; i++) suppressed[i] = padHeld[i];
-      padDown.clear(); wasCaptured = captured; nav.dir = null;
-    }
     const ax = g.axes || [];
     const [lx, ly, ln] = shape(ax[0] || 0, ax[1] || 0, cfg.moveCurve);
     const [rx, ry] = shape(ax[2] || 0, ax[3] || 0, cfg.lookCurve);
@@ -218,7 +226,7 @@ export function createInput(canvas, bus) {
       const trig = i === 6 || i === 7;
       const on = trig ? val > (padHeld[i] ? 0.35 : 0.55) : (!!bt?.pressed || val > 0.5);
       if (on && !padHeld[i]) { padHeld[i] = true; active = true; if (!suppressed[i]) onPadPress(i, captured); }
-      else if (!on && padHeld[i]) {
+      else if (!on) {
         padHeld[i] = false; suppressed[i] = false;
         for (const [a, bi] of padDown) if (bi === i) padDown.delete(a);
       }
@@ -279,10 +287,20 @@ export function createInput(canvas, bus) {
     state,
     BINDINGS,
     get device() { return device; },
+    get gameplayEnabled() { return gameplayEnabled(); },
+    dispose() { enabled = false; resetTransientInput(); for (const off of listeners.splice(0)) off(); const resolve = captureNext; captureNext = null; resolve?.(null); },
     pad,
     /** Called once per frame before gameplay updates. */
     poll() {
+      const active = gameplayEnabled();
+      if (!active && gameplayWasEnabled) resetTransientInput();
+      gameplayWasEnabled = active;
       pollPad(performance.now());
+      if (!gameplayEnabled()) {
+        down.clear(); pressed.clear();
+        Object.assign(state, { moveX: 0, moveY: 0, lookDX: 0, lookDY: 0, zoom: 0, sprint: false, jump: false, mouseLeft: false, mouseRight: false });
+        return;
+      }
       const kx = (down.has('right') ? 1 : 0) - (down.has('left') ? 1 : 0);
       const ky = (down.has('forward') ? 1 : 0) - (down.has('back') ? 1 : 0);
       const pm = !wasCaptured && pad.move;
@@ -297,20 +315,23 @@ export function createInput(canvas, bus) {
     },
     /** Called once per frame after gameplay updates. */
     endFrame() { state.lookDX = 0; state.lookDY = 0; state.zoom = 0; pressed.clear(); },
-    isDown: (a) => down.has(a) || padDown.has(a),
-    consume(a) { if (pressed.has(a)) { pressed.delete(a); return true; } return false; },
-    press(a) { pressed.add(a); bus.emit('input:action', a); },
-    hold(a, on) { if (on) { if (!down.has(a)) pressed.add(a); down.add(a); } else down.delete(a); },
-    setVirtualMove(x, y) { virtual.mx = x; virtual.my = y; virtual.active = Math.hypot(x, y) > 0.02; if (virtual.active) setDevice('touch'); },
-    setVirtualSprint(on) { virtual.sprint = on; },
-    addVirtualLook(dx, dy) { virtual.lookDX += dx; virtual.lookDY += dy; },
-    setTyping(v) { typing = v; if (v) down.clear(); },
-    setEnabled(v) { enabled = v; if (!v) down.clear(); },
-    requestPointerLock() { if (!matchMedia('(pointer: coarse)').matches) canvas.requestPointerLock?.(); },
+    isDown: (a) => gameplayEnabled() && (down.has(a) || padDown.has(a)),
+    consume(a) { if (!gameplayEnabled()) { pressed.delete(a); return false; } if (pressed.has(a)) { pressed.delete(a); return true; } return false; },
+    press(a) { if (!gameplayEnabled()) return; pressed.add(a); bus.emit('input:action', a); },
+    hold(a, on) { if (on && !gameplayEnabled()) return; if (on) { if (!down.has(a)) pressed.add(a); down.add(a); } else down.delete(a); },
+    setVirtualMove(x, y) { if (!gameplayEnabled()) return; virtual.mx = x; virtual.my = y; virtual.active = Math.hypot(x, y) > 0.02; if (virtual.active) setDevice('touch'); },
+    setVirtualSprint(on) { virtual.sprint = gameplayEnabled() && on; },
+    addVirtualLook(dx, dy) { if (!gameplayEnabled()) return; virtual.lookDX += dx; virtual.lookDY += dy; },
+    setTyping(v) { typing = !!v; if (typing) resetTransientInput(); },
+    setEnabled(v) { enabled = !!v; if (!enabled) resetTransientInput(); },
+    requestPointerLock() {
+      if (!gameplayEnabled() || coarse) return;
+      try { canvas.requestPointerLock?.()?.catch?.(() => {}); } catch { /* Browser denied lock; drag controls remain available. */ }
+    },
 
     // ---- gamepad extras
     /** fn() -> true while a menu owns the pad (gameplay then gets nothing; `gamepad:nav` is emitted instead). */
-    setPadCapture(fn) { captureFn = typeof fn === 'function' ? fn : (fn ? () => true : null); },
+    setPadCapture(fn) { captureFn = typeof fn === 'function' ? fn : (fn ? () => true : null); if (!gameplayEnabled()) resetTransientInput(); },
     /** True while a menu / chat owns the pad (diagnostics, QA). */
     get padCaptured() { return wasCaptured; },
     get padCaptureReason() { return { typing, enabled, menu: !!(captureFn && captureFn()) }; },

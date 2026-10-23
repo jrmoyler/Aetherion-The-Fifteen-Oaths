@@ -15,18 +15,21 @@ export function createFieldGuide(ui) {
   ];
   const heading = h('button', { type: 'button', class: 'ae-guide__head', 'aria-expanded': 'true' }, 'Field guide');
   const title = h('strong'); const hint = h('p'); const progress = h('span', { class: 'ae-guide__progress' });
-  const content = h('div', { class: 'ae-guide__body' }, title, hint, progress);
+  const reset = h('button', { class: 'ae-guide__reset', type: 'button' }, 'Review controls');
+  const content = h('div', { class: 'ae-guide__body' }, title, hint, progress, reset);
   const el = h('aside', { class: 'ae-guide ae-panel', 'aria-label': 'Field guide', hidden: true }, heading, content);
-  content.hidden = true;
+  content.hidden = ui.touchMode || completed.size >= steps.length;
   heading.setAttribute('aria-expanded', String(!content.hidden));
   heading.onclick = () => { content.hidden = !content.hidden; heading.setAttribute('aria-expanded', String(!content.hidden)); render(); };
   const prompt = h('button', { type: 'button', class: 'ae-interact ae-panel', hidden: true });
   prompt.onclick = () => ctx.input?.press?.('interact');
+  reset.onclick = () => { completed.clear(); try { localStorage.removeItem(key); } catch {} render(); };
   function render() {
     const step = steps.find(([id]) => !completed.has(id));
     heading.textContent = `${content.hidden ? '+ ' : '− '}Field guide${content.hidden && step ? ' · ' + step[1] : ''}`;
     title.textContent = step ? step[1] : 'Your journey is yours';
     hint.textContent = step ? step[2][device] || step[2].kbm : 'Citizens offer tasks. Explore the sanctuaries to attune fast travel. Your map reveals the continent.';
+    reset.hidden = completed.size < steps.length;
     progress.textContent = `${steps.filter(([id]) => completed.has(id)).length} / ${steps.length} foundations learned`;
   }
   function mark(id) {
@@ -67,5 +70,5 @@ export function createFieldGuide(ui) {
     }
   }, 59);
   render();
-  return { el, prompt };
+  return { el, prompt, toggle() { content.hidden = !content.hidden; heading.setAttribute('aria-expanded', String(!content.hidden)); render(); } };
 }

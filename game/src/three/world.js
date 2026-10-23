@@ -4,6 +4,7 @@ import {regionAt,OATH_BY_ID} from '@shared/oaths.js';
 import {terrainMaterial,naturalMaterial,waterMaterial} from './worldMaterials.js';
 import {buildSanctuaries} from './worldArchitecture.js';
 import {branchingTrunk,grassClump,coniferCrown} from './vegetation.js';
+import {createBiomeDetails} from './biomeDetails.js';
 const TILE=160;
 const colors={volcanic:0x45413b,glacial:0xc5d1cd,alpine:0x727d6a,coast:0x9c9a72,canyon:0x9a805a,cliffs:0x78866b,forest:0x4a6840,marsh:0x526a45,meadow:0x6e8150,highland:0x7a7966,badlands:0x74695b,crimson:0x76504a,terraces:0x77755e,plateau:0x817b60,industrial:0x6a6a5a};
 function leafCluster(count=44){
@@ -13,6 +14,7 @@ function leafCluster(count=44){
 const seed=(x,z)=>{let v=Math.imul(x|0,374761393)^Math.imul(z|0,668265263);v=Math.imul(v^(v>>>13),1274126177);return((v^(v>>>16))>>>0)/4294967296;};
 export async function initWorld(ctx){
   const scene=ctx.scene, low=ctx.quality?.name==='low', medium=ctx.quality?.name==='medium', chunks=new Map(), jobs=[];
+  const details=createBiomeDetails(ctx);
   const terrainMat=terrainMaterial(), stone=naturalMaterial('#777b6e'), bark=naturalMaterial('#594c39');
   const foliage=new THREE.MeshStandardMaterial({color:0x4c6240,roughness:1,side:THREE.DoubleSide});
   const wind={time:{value:0}};
@@ -27,13 +29,13 @@ export async function initWorld(ctx){
   scene.fog=new THREE.FogExp2('#b5c7c4',.00165);scene.background=new THREE.Color('#b5c7c4');
   function terrain(x,z,size,res){
     const g=new THREE.PlaneGeometry(size,size,res,res);g.rotateX(-Math.PI/2);
-    const p=g.attributes.position, col=new Float32Array(p.count*3), c=new THREE.Color(), dust=new THREE.Color('#a69b81');
+    const p=g.attributes.position, col=new Float32Array(p.count*3), masks=new Float32Array(p.count*3), c=new THREE.Color(), dust=new THREE.Color('#a69b81');
     for(let i=0;i<p.count;i++){
       const wx=x+p.getX(i),wz=z+p.getZ(i),s=sampleTerrain(wx,wz,{}),o=regionAt(wx,wz);
-      p.setY(i,s.h);c.setHex(colors[o.biome]||0x727b60);c.lerp(dust,Math.min(.8,s.roadW*.8+s.plaza*.35));
+      p.setY(i,s.h);masks.set([s.roadW,s.plaza,s.lava],i*3);c.setHex(colors[o.biome]||0x727b60);c.lerp(dust,Math.min(.8,s.roadW*.8+s.plaza*.35));
       c.multiplyScalar(.9+noise2(wx*.12,wz*.12)*.23);c.toArray(col,i*3);
     }
-    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.computeVertexNormals();
+    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setAttribute('terrainMask',new THREE.BufferAttribute(masks,3));g.computeVertexNormals();
     const m=new THREE.Mesh(g,terrainMat);m.position.set(x,0,z);m.receiveShadow=true;return m;
   }
   function batch(geo,mat,list,parent){if(!list.length)return;const m=new THREE.InstancedMesh(geo,mat,list.length);for(let i=0;i<list.length;i++){const a=list[i];dummy.position.set(a[0],a[1],a[2]);dummy.scale.set(a[3],a[4],a[5]);dummy.rotation.set(0,a[6]||0,0);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);if(a[7])m.setColorAt(i,new THREE.Color(a[7]));}m.castShadow=geo===trunkGeo||(!low&&geo===leafGeo);m.receiveShadow=true;m.computeBoundingSphere();parent.add(m);}
@@ -61,6 +63,7 @@ export async function initWorld(ctx){
     for(let i=0;i<(low?220:medium?500:900);i++){const px=ix*TILE+seed(i+892,iz+ix*39)*TILE,pz=iz*TILE+seed(i+352,ix+iz*61)*TILE;const s=sampleTerrain(px,pz,{}),o=regionAt(px,pz);if(s.h>4&&s.road>6&&s.plaza<.1&&['meadow','forest','marsh','cliffs','coast'].includes(o.biome)){const r=seed(i,ix+iz);grass.push([px,s.h,pz,2+r,1+r,2+r,r*7]);}}
     batch(grassGeo,grassMat,grass,group);
     batch(pineGeo,foliage,pines,group);batch(trunkGeo,bark,trunks,group);batch(leafGeo,foliage,leaves,group);batch(rockGeo,stone,rocks,group);
+    details.build(ix,iz,TILE,group);
     group.name='Terrain '+key;scene.add(group);chunks.set(key,group);
   }
   let focusX=0,focusZ=0,cell='';
@@ -85,7 +88,7 @@ export async function initWorld(ctx){
   for(let i=0;i<14;i++){const bird=new THREE.Group();for(const side of [-1,1]){const wing=new THREE.Mesh(wingGeo,birdMat);wing.scale.x=side;bird.add(wing);}bird.add(new THREE.Mesh(bodyGeo,birdMat));birds.add(bird);}scene.add(birds);
   const flockCenter=new THREE.Vector3();let flockReady=false;
   let t=0;
-  function update(dt){architecture.update(dt);t+=Math.min(dt,.1);wind.time.value=t;water.time.value=t;
+  function update(dt){architecture.update(dt);t+=Math.min(dt,.1);wind.time.value=t;water.time.value=t;details.update(t);
     // Terrain build is bounded to one tile per frame, with nearest tiles first.
     if(jobs.length){const job=jobs.shift();build(job[0],job[1]);}
     const target=ctx.actors?.player?.position||ctx.actors?.player?.root?.position||ctx.player?.position||ctx.player?.root?.position||ctx.camera?.position;if(target)focus(target.x,target.z);
@@ -95,8 +98,8 @@ export async function initWorld(ctx){
   async function ready(x=focusX,z=focusZ){focus(x,z);let n=0;while(jobs.length&&n<9){const j=jobs.shift();build(j[0],j[1]);n++;if(n%2===0)await new Promise(r=>setTimeout(r,0));}return true;}
   const isWater=(x,z)=>heightAt(x,z)<waterLevelAt(x,z);
   const waterLevelAt=(x,z)=>Math.hypot(x-marsh[0],z-marsh[1])<630?MARSH_LEVEL:SEA_LEVEL;
-  ctx.addUpdate?.(update,40);
-  function dispose(){for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon,birds);for(const g of [trunkGeo,pineGeo,leafGeo,rockGeo,grassGeo,sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,stone,bark,foliage,grassMat,water.material,birdMat])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
+  const stopUpdate=ctx.addUpdate?.(update,40);
+  function dispose(){stopUpdate?.();details.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon,birds);for(const g of [trunkGeo,pineGeo,leafGeo,rockGeo,grassGeo,sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,stone,bark,foliage,grassMat,water.material,birdMat])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
   return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
 }
 export const init=initWorld;

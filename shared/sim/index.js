@@ -260,7 +260,7 @@ class Sim {
     const y = this.youCore(p);
     const invSig = this.invSig(p), qSig = this.questSig(p);
     if (!partial || invSig !== p.sentInv) { y.inventory = p.inventory; y.equipment = p.equipment; p.sentInv = invSig; }
-    if (!partial || qSig !== p.sentQ) { y.quests = [...p.quests.values()].map(questView); y.discovered = [...p.discovered]; p.sentQ = qSig; }
+    if (!partial || qSig !== p.sentQ) { y.quests = [...p.quests.values()].map((q) => questView(q, this, p)); y.discovered = [...p.discovered]; p.sentQ = qSig; }
     const loadoutSig = p.hotbar.map((a) => a.id).join('|');
     if (!partial || p.sentLoadout !== loadoutSig) { y.hotbar = p.hotbar; y.loadout = p.hotbar.slice(1).map((a) => a.id); p.sentLoadout = loadoutSig; }
     if (partial) y.partial = true;

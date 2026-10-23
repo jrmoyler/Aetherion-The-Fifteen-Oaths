@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import sourceEnvironmentUrl from '../../runtime/ability-matrix/packs/handcast/public/hdri/spruit_sunrise.hdr?url';
+import { createGameClock } from './core/gameClock.js';
 import { Bus } from './core/bus.js';
 import { detectQuality } from './core/quality.js';
 import { createInput } from './core/input.js';
@@ -48,10 +49,12 @@ async function startClient() {
   sun.shadow.bias = -.0003; sun.shadow.normalBias = .035;
   scene.add(sun, sun.target);
   const updaters = [];
+  const gameClock = createGameClock();
+  bus.on('game:paused', ({ paused }) => gameClock.setPaused(paused));
   const budget = createFrameBudget({ maxScale: quality.renderScale });
   let frameMs = 16.7, suspended = false, stopped = false, timeOfDay = 16;
   const ctx = {
-    renderer, scene, camera, canvas, bus, quality, postprocessing,
+    renderer, scene, camera, canvas, bus, quality, postprocessing, gameplayNow: gameClock.now,
     engine: { getFps: () => 1000 / frameMs, getRenderWidth: () => canvas.width, getRenderHeight: () => canvas.height },
     input: createInput(canvas, bus), collision: new CollisionWorld(),
     clock: { time: 0, dt: 0, frame: 0 }, params: new URLSearchParams(location.search),
@@ -78,7 +81,11 @@ async function startClient() {
   canvas.addEventListener('pointermove', e => { scene.pointerX = e.clientX; scene.pointerY = e.clientY; });
   canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); suspended = true; ctx.input.setEnabled(false); ctx.ui?.toast('Graphics paused. Recovering your view…', 'info'); });
   canvas.addEventListener('webglcontextrestored', () => { suspended = false; budget.reset(); ctx.input.setEnabled(!!ctx.character); });
-  document.addEventListener('visibilitychange', () => { budget.reset(); });
+  let menuPaused = false;
+  const syncPause = () => ctx.net?.setPaused(menuPaused || document.hidden);
+  const onVisibility = () => { budget.reset(); syncPause(); };
+  const offPause = bus.on('ui:pause', ({ paused }) => { menuPaused = !!paused; syncPause(); });
+  document.addEventListener('visibilitychange', onVisibility);
   ctx.ui = await UI.init(ctx);
   ctx.setLoading(.1, 'Shaping the continent');
   ctx.world = await initWorld(ctx);
@@ -106,13 +113,15 @@ async function startClient() {
     const dt = Math.min(Math.max(raw / 1000, .001), .05);
     frameMs = frameMs * .92 + raw * .08;
     if(ctx.clock.time > 8 && budget.sample(raw) !== null) resize();
-    ctx.clock.dt = dt; ctx.clock.time += dt; ctx.clock.frame++;
+    const simDt = ctx.net?.paused ? 0 : dt;
+    ctx.clock.dt = simDt; ctx.clock.time += simDt; ctx.clock.frame++;
     ctx.input.poll();
-    for(const u of updaters) u.fn(dt);
+    // Keep menu navigation alive while the local simulation and presentation are frozen.
+    for(const u of updaters) if (simDt > 0 || u.order <= 0 || u.order >= 60) u.fn(simDt);
     const p = ctx.actors?.player?.position ?? camera.position;
     sun.position.copy(p).add(atmosphere.sunOffset);
     sun.target.position.set(p.x, p.y, p.z); sun.target.updateMatrixWorld();
-    postprocessing.render(dt, !!ctx.vfx?.hasActiveSourceEffects);
+    postprocessing.render(simDt, !!ctx.vfx?.hasActiveSourceEffects);
     ctx.input.endFrame();
   });
   ctx.setLoading(1, 'Your covenant awaits');
@@ -121,11 +130,16 @@ async function startClient() {
   const center = OATH_BY_ID[character.oath].center;
   await ctx.world.ready(center[0], center[1]);
   await ctx.net.connect(character);
+  // Keep the offline world still while the chosen hero finishes loading.
+  ctx.net.setPaused(true);
   await ctx.actors.ready?.();
   ctx.ui.enterGame(); ctx.input.setEnabled(true);
   bus.emit('game:start', character);
+  syncPause();
   ctx.dispose = () => {
     stopped = true; renderer.setAnimationLoop(null); ctx.net.disconnect?.();
+    ctx.input.dispose?.(); ctx.ui.audio?.dispose?.(); offPause();
+    document.removeEventListener('visibilitychange', onVisibility);
     ctx.vfx.dispose?.(); ctx.actors.dispose?.(); atmosphere.dispose(); ctx.world.dispose?.();
     ctx.sourceEnvironmentTexture?.dispose(); postprocessing.dispose(); envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
   };
