@@ -5,10 +5,20 @@
 // courses stay level), revolved shapes get arc-length UVs. Thin instances handle repeated
 // modules. A "dry" builder only records big masses (for far skyline silhouettes).
 import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 function geometry(b) { const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(b.p,3)); g.setAttribute('normal',new THREE.Float32BufferAttribute(b.n,3)); g.setAttribute('uv',new THREE.Float32BufferAttribute(b.u,2)); g.setAttribute('aEdge',new THREE.Float32BufferAttribute(b.e,4)); g.setIndex(b.i); g.computeBoundingSphere(); return g; }
 function place(mesh,scene,opts) { if(opts.position)mesh.position.copy(opts.position);mesh.rotation.y=opts.rotY||0;mesh.castShadow=true;mesh.receiveShadow=true;scene.add(mesh); }
 
 const TAU = Math.PI * 2;
+const bevelTemplates=new Map();
+function bevelGeometry(x,y,z){
+  const key=[x,y,z].join('|');
+  if(!bevelTemplates.has(key)){
+    if(bevelTemplates.size>=256){const oldest=bevelTemplates.keys().next().value;bevelTemplates.get(oldest).dispose();bevelTemplates.delete(oldest);}
+    bevelTemplates.set(key,new RoundedBoxGeometry(x,y,z,1,Math.min(.065,Math.min(x,y,z)*.065)));
+  }
+  return bevelTemplates.get(key);
+}
 
 /** Transform frame stack shared by builders, instancer and collider adapter. */
 export class Frame {
@@ -141,6 +151,20 @@ export class Builder {
   /** Box with base at y (centre x,z). o: {ry, rx, rz, noBottom, noTop} */
   box(mat, x, y, z, sx, sy, sz, o = {}) {
     if (this.dry) { this._sil(x, y, z, sx, sy, sz, o.ry || 0, mat); return; }
+    // Structural stone/metal edges need real light-catching bevels. Thin
+    // panels/open boxes keep their original topology and collision footprint.
+    const minimum=Math.min(sx,sy,sz),maximum=Math.max(sx,sy,sz);
+    if(!o.noTop&&!o.noBottom&&minimum>=.5&&maximum<=12&&o.bevel!==false){
+      const g=bevelGeometry(sx,sy,sz);
+      const p=g.attributes.position,n=g.attributes.normal,indices=Array.from({length:p.count},(_,i)=>i),edge=[];
+      for(let i=0;i<p.count;i++){
+        const nx=Math.abs(n.getX(i)),ny=Math.abs(n.getY(i)),nz=Math.abs(n.getZ(i));
+        if(ny>nx&&ny>nz)edge.push(p.getX(i)+sx/2,p.getZ(i)+sz/2,sx,-sz);
+        else if(nx>nz)edge.push(p.getZ(i)+sz/2,p.getY(i)+sy/2,sz,sy);
+        else edge.push(p.getX(i)+sx/2,p.getY(i)+sy/2,sx,sy);
+      }
+      this.emit(mat,p.array,n.array,null,indices,x,y+sy/2,z,o.rx||0,o.ry||0,o.rz||0,edge);return;
+    }
     const hx = sx / 2, hy = sy / 2, hz = sz / 2;
     const P = [], N = [], I = [], E = [];
     const face = (nx, ny, nz, verts) => {

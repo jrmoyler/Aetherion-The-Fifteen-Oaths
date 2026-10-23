@@ -111,7 +111,7 @@ export function withSurface(material, mode, strength = 1, extra = '') {
     shader.fragmentShader = shader.fragmentShader
       .replace('#include <common>', `#include <common>\nvarying vec3 vCsP;\nuniform float csStrength;\n${NOISE}`)
       .replace('#include <roughnessmap_fragment>', `#include <roughnessmap_fragment>\nfloat csH=0.;\n{${program}}\n${extra}`)
-      .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * .0012);');
+      .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * ${mode === 'skin' ? '.00007' : mode === 'hair' ? '.00012' : '.00035'});`);
   };
   const key = material.customProgramCacheKey?.bind(material);
   material.customProgramCacheKey = () => `${key ? key() : ''}|cs:${mode}:${extra.length}`;

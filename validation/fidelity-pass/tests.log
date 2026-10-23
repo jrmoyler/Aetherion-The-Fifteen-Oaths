@@ -1,0 +1,25 @@
+✔ every shipped hero has a face/hair/gear profile (1.216312ms)
+✔ every hero builds a finite head, groom and gear kit on each tier (7444.51268ms)
+✔ low tier keeps head and groom cheaper than high (213.089054ms)
+✔ all 30 heroes have distinct facial geometry, independent of color and hair (1351.457423ms)
+✔ NPC identity stays deterministic and does not mutate hero canon (1.114248ms)
+✔ retiming preserves authored poses and source clips with monotonic contact times (0.535947ms)
+✔ terrain spends triangles nearby and rocks have finite smooth normals (12.985199ms)
+✔ cloned characters isolate skeleton poses, action mixers and mutable materials (7.38968ms)
+✔ sanitized GLTF bone and socket names preserve the public attachment API (0.72404ms)
+✔ animation LOD skips pose evaluation without dropping elapsed time (0.86583ms)
+✔ multi-primitive authored characters retain their own costume and weapon (1.200153ms)
+✔ same authored attack replays immediately without fading itself out (0.941398ms)
+✔ action lifetime respects clip duration and speed instead of cutting at .65 seconds (0.647566ms)
+✔ death interrupts actions, clamps its final pose and blocks late hit callbacks until respawn (0.413783ms)
+✔ landing pose persists for the authored clip instead of a single rendered frame (0.648718ms)
+✔ spawn fade restores authored translucent materials and depth-write intent (1.306107ms)
+✔ fifteen native Three cities preserve finite geometry and collision metadata (10964.888279ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11187.385654

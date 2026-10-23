@@ -4,6 +4,7 @@ import {regionAt,OATH_BY_ID} from '@shared/oaths.js';
 import {terrainMaterial,naturalMaterial,waterMaterial} from './worldMaterials.js';
 import {buildSanctuaries} from './worldArchitecture.js';
 import {branchingTrunk,grassClump,coniferCrown} from './vegetation.js';
+import {terrainResolution,weatheredRock,addTerrainSkirt} from './terrain-detail.js';
 import {createBiomeDetails} from './biomeDetails.js';
 const TILE=160;
 const colors={volcanic:0x45413b,glacial:0xc5d1cd,alpine:0x727d6a,coast:0x9c9a72,canyon:0x9a805a,cliffs:0x78866b,forest:0x4a6840,marsh:0x526a45,meadow:0x6e8150,highland:0x7a7966,badlands:0x74695b,crimson:0x76504a,terraces:0x77755e,plateau:0x817b60,industrial:0x6a6a5a};
@@ -22,7 +23,7 @@ export async function initWorld(ctx){
     #ifdef USE_INSTANCING
     transformed.x += sin(windTime*1.1+instanceMatrix[3].x*.17+instanceMatrix[3].z*.21) * .10 * max(position.y,0.);
     #endif`);};
-  const trunkGeo=branchingTrunk(low), pineGeo=coniferCrown(low), leafGeo=leafCluster(low?12:medium?22:44), rockGeo=new THREE.IcosahedronGeometry(1,low?0:1);
+  const trunkGeo=branchingTrunk(low), pineGeo=coniferCrown(low), leafGeo=leafCluster(low?12:medium?22:44), rockGeo=weatheredRock(low?2:medium?4:6);
   const dummy=new THREE.Object3D();
   const grassGeo=grassClump(low);
   const grassMat=foliage.clone();grassMat.side=THREE.DoubleSide;grassMat.onBeforeCompile=foliage.onBeforeCompile;
@@ -32,16 +33,19 @@ export async function initWorld(ctx){
     const p=g.attributes.position, col=new Float32Array(p.count*3), masks=new Float32Array(p.count*3), c=new THREE.Color(), dust=new THREE.Color('#a69b81');
     for(let i=0;i<p.count;i++){
       const wx=x+p.getX(i),wz=z+p.getZ(i),s=sampleTerrain(wx,wz,{}),o=regionAt(wx,wz);
-      p.setY(i,s.h);masks.set([s.roadW,s.plaza,s.lava],i*3);c.setHex(colors[o.biome]||0x727b60);c.lerp(dust,Math.min(.8,s.roadW*.8+s.plaza*.35));
+            p.setY(i,s.h);masks.set([s.roadW,s.plaza,s.lava],i*3);c.setHex(colors[o.biome]||0x727b60);c.lerp(dust,Math.min(.8,s.roadW*.8+s.plaza*.35));
       c.multiplyScalar(.9+noise2(wx*.12,wz*.12)*.23);c.toArray(col,i*3);
     }
-    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setAttribute('terrainMask',new THREE.BufferAttribute(masks,3));g.computeVertexNormals();
+    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setAttribute('terrainMask',new THREE.BufferAttribute(masks,3));g.computeVertexNormals();if(size===TILE)addTerrainSkirt(g,res,6);
     const m=new THREE.Mesh(g,terrainMat);m.position.set(x,0,z);m.receiveShadow=true;return m;
   }
   function batch(geo,mat,list,parent){if(!list.length)return;const m=new THREE.InstancedMesh(geo,mat,list.length);for(let i=0;i<list.length;i++){const a=list[i];dummy.position.set(a[0],a[1],a[2]);dummy.scale.set(a[3],a[4],a[5]);dummy.rotation.set(0,a[6]||0,0);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);if(a[7])m.setColorAt(i,new THREE.Color(a[7]));}m.castShadow=geo===trunkGeo||(!low&&geo===leafGeo);m.receiveShadow=true;m.computeBoundingSphere();parent.add(m);}
   function build(ix,iz){
-    const key=ix+','+iz;if(chunks.has(key))return;
-    const group=new THREE.Group(),x=(ix+.5)*TILE,z=(iz+.5)*TILE;group.add(terrain(x,z,TILE,low?20:medium?28:40));
+    const key=ix+','+iz;const existing=chunks.get(key);
+    if(existing){const resolution=terrainResolution(ctx.quality?.name,Math.max(Math.abs(ix-Math.floor(focusX/TILE)),Math.abs(iz-Math.floor(focusZ/TILE))));const old=existing.children[0];const replacement=terrain((ix+.5)*TILE,(iz+.5)*TILE,TILE,resolution);existing.remove(old);existing.children.unshift(replacement);replacement.parent=existing;old.geometry.dispose();existing.userData.resolution=resolution;return;}
+    const group=new THREE.Group(),x=(ix+.5)*TILE,z=(iz+.5)*TILE;const band=Math.max(Math.abs(ix-Math.floor(focusX/TILE)),Math.abs(iz-Math.floor(focusZ/TILE)));
+    const resolution=terrainResolution(ctx.quality?.name,band);
+    group.add(terrain(x,z,TILE,resolution));group.userData.resolution=resolution;
     const trunks=[],leaves=[],pines=[],rocks=[], grass=[];const count=low?48:medium?90:150;
     for(let i=0;i<count;i++){
       const px=ix*TILE+seed(ix*971+i,iz*43)*TILE,pz=iz*TILE+seed(ix*103+i,iz*239)*TILE;
@@ -71,7 +75,7 @@ export async function initWorld(ctx){
     if(!Number.isFinite(x)||!Number.isFinite(z))return;
     focusX=x;focusZ=z;const ix=Math.floor(x/TILE),iz=Math.floor(z/TILE),next=ix+','+iz;if(next===cell)return;cell=next;jobs.length=0;
     const radius=low||medium?2:3;
-    for(let dz=-radius;dz<=radius;dz++)for(let dx=-radius;dx<=radius;dx++)if(!chunks.has((ix+dx)+','+(iz+dz)))jobs.push([ix+dx,iz+dz,dx*dx+dz*dz]);
+    for(let dz=-radius;dz<=radius;dz++)for(let dx=-radius;dx<=radius;dx++){const old=chunks.get((ix+dx)+','+(iz+dz));const resolution=terrainResolution(ctx.quality?.name,Math.max(Math.abs(dx),Math.abs(dz)));if(!old||old.userData.resolution!==resolution)jobs.push([ix+dx,iz+dz,dx*dx+dz*dz]);}
     jobs.sort((a,b)=>a[2]-b[2]);
     for(const[k,g]of chunks){const[a,b]=k.split(',').map(Number);if(Math.abs(a-ix)>radius+1||Math.abs(b-iz)>radius+1){scene.remove(g);g.children[0].geometry.dispose();g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});chunks.delete(k);}}
   }

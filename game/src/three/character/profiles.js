@@ -14,7 +14,7 @@ const HAIR = {
 
 export const PROFILES = {
   'oath-01-ninja': { sex: 'm', skin: SKIN.olive, eye: '#3a2414', age: .2, build: 1.04, hair: { style: 'short', color: HAIR.black, length: .55 }, gear: [{ type: 'wrap', color: '#1e1c1b', top: -.02 }] },
-  'oath-01-sorcerer': { sex: 'f', skin: SKIN.olive, eye: '#3a2a1c', age: .62, build: 1.08, hair: { style: 'bun', color: HAIR.gray, bun: [0, .38, -.28] }, gear: [] },
+  'oath-01-sorcerer': { sex: 'f', skin: SKIN.olive, eye: '#3a2a1c', age: .82, build: 1.12, hair: { style: 'bun', color: '#403b36', bun: [0, .38, -.28] }, gear: [] },
   'oath-02-ninja': { sex: 'f', skin: SKIN.pale, eye: '#5a7088', age: .2, build: .96, hair: { style: 'none' }, gear: [{ type: 'hood', color: '#3b4250', deep: true }, { type: 'faceplate', color: '#eceae6', finish: 'porcelain' }] },
   'oath-02-sorcerer': { sex: 'm', skin: SKIN.light, eye: '#6a7a88', age: .9, build: .98, hair: { style: 'long', color: HAIR.white, knot: true }, beard: { style: 'braided', color: HAIR.white }, gear: [] },
   'oath-03-ninja': { sex: 'm', skin: SKIN.olive, eye: '#2a1a10', age: .25, build: 1.02, hair: { style: 'topknot', color: HAIR.black }, gear: [{ type: 'plate', color: '#a6824a', finish: 'brass' }] },
@@ -40,11 +40,43 @@ export const PROFILES = {
   'oath-13-ninja': { sex: 'm', skin: SKIN.light, eye: '#2a1c14', age: .2, build: .96, hair: { style: 'messy', color: HAIR.ink }, gear: [{ type: 'blademask', color: '#ece6da', trim: '#8a8a90', finish: 'porcelain' }] },
   'oath-13-sorcerer': { sex: 'f', skin: SKIN.light, eye: '#4a3a30', age: .5, build: 1.0, hair: { style: 'bun', color: HAIR.silver, bun: [0, .36, -.3], strands: 4 }, gear: [] },
   'oath-14-ninja': { sex: 'm', skin: SKIN.deep, eye: '#1e140c', age: .25, build: 1.04, hair: { style: 'short', color: HAIR.black, length: .35, coils: true }, gear: [{ type: 'wrap', color: '#2a2e3a', top: -.02 }] },
-  'oath-14-sorcerer': { sex: 'f', skin: SKIN.light, eye: '#3a2a1c', age: .8, build: 1.0, hair: { style: 'bun', color: HAIR.silver, bun: [0, .46, -.2] }, gear: [{ type: 'glasses', color: '#a8844a' }] },
+  'oath-14-sorcerer': { sex: 'f', skin: SKIN.light, eye: '#3a2a1c', age: .25, build: .96, hair: { style: 'bun', color: HAIR.black, bun: [0, .46, -.2] }, gear: [] },
   'oath-15-ninja': { sex: 'f', skin: SKIN.olive, eye: '#2a1a10', age: .22, build: .97, hair: { style: 'bun', color: HAIR.black, bun: [0, .46, -.24], strands: 5 }, gear: [{ type: 'visor', color: '#4a4c52', lens: '#d8dde4' }] },
   'oath-15-sorcerer': { sex: 'm', skin: SKIN.light, eye: '#3a2a1c', age: .4, build: 1.06, hair: { style: 'swept', color: HAIR.brown }, beard: { style: 'full', color: HAIR.brown, length: .12 }, gear: [] },
 };
 
-export function profileFor(key) {
-  return PROFILES[key] ?? { sex: 'm', skin: SKIN.tan, eye: '#2a1a10', age: .3, build: 1, hair: { style: 'short', color: HAIR.black, length: .5 }, gear: [] };
+// Explicit sculpt controls, separate from complexion/costume. These are art-direction
+// interpretations of the sheets, not measurements or a claim of reference identity.
+// jaw, brow, nose projection, lip volume, chin, cheek, nose width, face depth.
+const SCULPTS = [
+ [.80,1.15,1.12,.82,1.12,.85,.9,1], [.82,.72,.88,1.02,.82,1.28,1.16,.94],
+ [.63,.48,.91,.92,.75,1.12,.9,.95], [.70,1.18,1.3,.68,1.12,.72,.86,1.06],
+ [.76,1.25,1.08,.8,1.2,1.12,.92,.98], [.76,.74,.93,1.48,.88,1.22,1.35,1.04],
+ [.61,.52,.94,1.04,.72,1.2,.86,.96], [.78,1.05,1.2,.78,1.08,.88,1.08,1.07],
+ [.88,1.3,1.12,.88,1.25,1.12,1.1,1.08], [.84,.86,1.04,1.18,1.02,1.25,1.12,1.02],
+ [.60,.56,1.04,.94,.78,1.28,.84,.94], [.72,1.18,1.24,.78,1.06,.8,.92,1.02],
+ [.82,1.18,1.03,.98,1.12,1.16,1.14,1.05], [.69,.85,1.13,.8,.9,.8,.94,.97],
+ [.74,1.2,1.18,.9,1.12,.92,.98,1.02], [.72,.82,1.16,.78,.88,.9,.88,1],
+ [.65,.66,.97,1.35,.82,1.22,1.22,.98], [.78,1.12,1.28,.74,1.15,.86,.9,1.08],
+ [.82,1.22,1.09,.85,1.18,1.08,1.02,1.02], [.86,.8,1.02,1.2,.95,1.32,1.18,1.06],
+ [.59,.48,.88,1.02,.68,1.22,.84,.94], [.65,1.16,1.34,.68,1.04,.7,.82,1.01],
+ [.86,1.3,1.18,.94,1.22,1.06,1.08,1.06], [.72,.7,.92,1.42,.85,1.18,1.3,1],
+ [.67,.9,1.04,.88,.84,1.14,.88,.95], [.72,.7,1.02,.94,.88,1.1,.94,.97],
+ [.82,1.12,.98,1.25,1.12,1.18,1.28,1.02], [.68,.84,1.22,.74,.86,.78,.86,.96],
+ [.64,.64,.96,1.08,.8,1.2,.92,.98], [.84,1.2,1.14,.9,1.18,1.02,1.04,1.08],
+];
+Object.values(PROFILES).forEach((profile, i) => {
+  profile.face = Object.fromEntries(['jaw','brow','nose','lip','chin','cheek','noseWidth','depth'].map((name,j)=>[name,SCULPTS[i][j]]));
+});
+
+export function profileFor(key, identity = '') {
+  const base = PROFILES[key] ?? PROFILES['oath-01-ninja'];
+  if (!identity) return base;
+  // NPC identity is stable across reloads and independent of spawn order. Eight
+  // bounded sculpt variants per costume keep the shared geometry cache finite.
+  let hash = 2166136261;
+  for (const c of identity) hash = Math.imul(hash ^ c.charCodeAt(0), 16777619);
+  const variant = (hash >>> 0) % 8, t = (variant - 3.5) / 3.5;
+  return {...base, build:base.build*(1+t*.065), age:Math.max(.18,Math.min(.95,base.age+t*.18)),
+    face:{...base.face,jaw:base.face.jaw+t*.055,nose:base.face.nose-t*.09,cheek:base.face.cheek+t*.12}, variant};
 }

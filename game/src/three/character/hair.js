@@ -41,7 +41,7 @@ const HAIR_COLOR = /* glsl */`
     float len=.55+.45*h1;
     float end=smoothstep(len,len-.18,along);
     float edge=smoothstep(.5,.38,abs(across-.5));
-    alpha=line*end*mix(.55,1.,edge)+ (1.-step(.35,abs(across-.5)))*smoothstep(.45,.2,along)*.6;
+    alpha=max(line,.72*(1.-smoothstep(.55,.88,along)))*end*mix(.8,1.,edge)+ (1.-step(.35,abs(across-.5)))*smoothstep(.45,.2,along)*.6;
     alpha=clamp(alpha,0.,1.);
     strand=mix(strand,h1,.6);
     diffuseColor.rgb*=1.+(h2-.5)*.5*spread;
@@ -119,7 +119,7 @@ class CardSet {
     }
     for (let i = 0; i < n - 1; i++) for (let k = 0; k < 2; k++) {
       const a = base + i * 3 + k, b = a + 3;
-      this.idx.push(a, b, a + 1, a + 1, b, b + 1);
+      this.idx.push(a, a + 1, b, a + 1, b + 1, b);
     }
     this.n += n * 3;
   }
@@ -136,7 +136,7 @@ class CardSet {
 // ---------------------------------------------------------------- scalp helpers
 function hairline(p, P, recede = 0) {
   const a = Math.atan2(p.x, p.z), f = Math.cos(a);
-  const front = .3 + recede, side = .05, nape = -.3;
+  const front = .215 + recede, side = .05, nape = -.3;
   const yl = f > 0 ? side + (front - side) * f ** 1.6 : side + (nape - side) * (-f) ** 1.1;
   // widow's peak / temple recess
   const temple = Math.exp(-(((Math.abs(a) - .62) / .18) ** 2)) * (.03 + recede * .8);
@@ -397,8 +397,24 @@ export function buildGroom(key, profile, P, lash, quality = 'high') {
   if (profile.beard) beard(cards, P, R, profile.beard.style, profile.beard.length ?? .3);
   brows(browCards, P, R, profile.sex === 'f');
   lashes(browCards, lash, R);
-  const cap = style === 'none' ? null : scalpCap(P, recede, quality, flowFn, hair.coils ? .016 : .007);
-  return { cap, cards: cards.n ? cards.geometry() : null, brows: browCards.geometry(), bun };
+  const cap = style === 'none' ? null : scalpCap(P, recede, quality, flowFn, hair.coils ? .028 : .018);
+  let volume = cap;
+  if (cap && bun && ['bun','topknot','ponytail','long'].includes(style)) {
+    const radius = style === 'bun' ? (hair.coils ? .13 : .11) : .065;
+    const knot = new SphereGeometry(radius, 32, 24); knot.deleteAttribute('uv');
+    const p = knot.attributes.position, flow = [], info = [], color = [];
+    for(let i=0;i<p.count;i++) {
+      const x=p.getX(i), y=p.getY(i), z=p.getZ(i), a=Math.atan2(z,x);
+      const rib=1+.045*Math.sin(a*18+y*65);
+      p.setXYZ(i,bun.x+x*rib,bun.y+y*.8,bun.z+z*rib);
+      flow.push(-Math.sin(a),.15,Math.cos(a)); info.push(.5,1,.37,0);color.push(.9,.9,.9);
+    }
+    knot.setAttribute('flow',new Float32BufferAttribute(flow,3));
+    knot.setAttribute('hairInfo',new Float32BufferAttribute(info,4));
+    knot.setAttribute('color',new Float32BufferAttribute(color,3));knot.computeVertexNormals();
+    volume=mergeGeometries([cap,knot]);cap.dispose();knot.dispose();
+  }
+  return { cap:volume, cards: cards.n ? cards.geometry() : null, brows: browCards.geometry(), bun };
 }
 
 // Moss/leaf tufts over a hood surface (Graft Sanctuary).

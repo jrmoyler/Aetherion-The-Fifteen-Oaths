@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { equipArmor } from './actor-armor.js';
 import { attachWeapon } from './actor-weapons.js';
+import { prepareCombatClips } from './combat-clips.js';
 import { applyGroom } from './character/groom.js';
 const cache = new Map();
 const loader = new GLTFLoader();
@@ -22,7 +23,7 @@ export class AssetLibrary {
   dispose() { this.listeners.clear(); }
 }
 const aliases = { dead: 'death', jump: 'jump_start', fall: 'jump_loop', emote: 'emote_bow', swim: 'walk', attack: 'attack_1' };
-export function createModelBody(gltf, parent) {
+export function createModelBody(gltf, parent, combatTiming = false) {
   const root = clone(gltf.scene); parent.add(root);
   const meshes = [], sockets = {};
   root.traverse(node => {
@@ -41,8 +42,8 @@ export function createModelBody(gltf, parent) {
   });
   root.updateMatrixWorld(true);
   const box = new Box3().setFromObject(root), size = box.getSize(new Vector3());
-  const mixer = new AnimationMixer(root), actions = new Map(gltf.animations.map(clip => [clip.name.toLowerCase(), mixer.clipAction(clip)]));
-  let current, hold = 0;
+  const mixer = new AnimationMixer(root), actions = new Map((combatTiming ? prepareCombatClips(gltf.animations) : gltf.animations).map(clip => [clip.name.toLowerCase(), mixer.clipAction(clip)]));
+  let current, hold = 0, combatHold = 0;
   const materialStates = new Map();
   for (const mesh of meshes) for (const material of (Array.isArray(mesh.material) ? mesh.material : [mesh.material])) {
     materialStates.set(material, { opacity: material.opacity, transparent: material.transparent, depthWrite: material.depthWrite });
@@ -60,6 +61,8 @@ export function createModelBody(gltf, parent) {
     },
     playAnim(name, opts = {}) {
       if (this.state === 'dead' && name !== 'death' && name !== 'dead') return;
+      if (name === 'hit' && this.action === 'hit' && hold > .12) return;
+      if (/^(attack_|cast_)/.test(name)) combatHold = 3;
       const loop = opts.loop ?? name === 'cast_channel';
       const selected = this.select(name, !loop, { ...opts, restart: true });
       if (!selected) return;
@@ -75,7 +78,7 @@ export function createModelBody(gltf, parent) {
       if (!next) return null;
       if (current === next && !opts.restart) return next;
       const previous = current;
-      const blend = Math.max(0, opts.blend ?? .14);
+      const blend = Math.max(0, opts.blend ?? (once ? .055 : .14));
       next.stopFading().reset().setLoop(once ? LoopOnce : LoopRepeat, once ? 1 : Infinity);
       next.clampWhenFinished = once;
       next.enabled = true; next.setEffectiveTimeScale(Math.max(.05, opts.speed ?? 1));
@@ -91,9 +94,10 @@ export function createModelBody(gltf, parent) {
       this.accum += dt;
       if (this.accum + 1e-9 < this.interval) return false;
       dt = this.accum; this.accum = 0;
+      combatHold = Math.max(0, combatHold - dt);
       if (hold > 0) { hold -= dt; if (hold <= 0) { this.action = null; if (this.state === 'land') this.state = 'loco'; } }
       if (hold <= 0) {
-        const name = this.state === 'loco' ? (this.speed < .2 ? 'idle' : this.backwards ? 'backpedal' : this.speed < 3 ? 'walk' : this.speed > 7 ? 'sprint' : 'run') : this.state;
+        const name = this.state === 'loco' ? (this.speed < .2 ? (combatHold > 0 && actions.has('idle_combat') ? 'idle_combat' : 'idle') : this.backwards ? 'backpedal' : this.speed < 3 ? 'walk' : this.speed > 7 ? 'sprint' : 'run') : this.state;
         this.select(name, name === 'dead');
         if (current) current.timeScale = this.state === 'loco' && this.speed > .2 ? Math.max(.65, Math.min(1.65, this.speed / (this.speed < 3 ? 2.2 : 6))) : 1;
       }
@@ -127,7 +131,12 @@ export class BodyFactory {
   // characters are rendered, never disconnected geometric limbs.
   createProcedural(desc, parent) { return createModelBody({ scene: new Group(), animations: [] }, parent); }
   createGltf(gltf, desc, parent) {
-    const body = createModelBody(gltf, parent); equipArmor(body, desc); attachWeapon(body, desc);
+    const body = createModelBody(gltf, parent, desc.kind !== 'mob');
+    // A complete replacement owns its face, hair, costume and PBR materials.
+    // Read the exported scene extras explicitly: mesh count/names cannot tell
+    // a reconstruction apart from the legacy procedural forge assets.
+    if (gltf.scene.userData?.aetherion?.presentation === 'authored-v1') return body;
+    equipArmor(body, desc); attachWeapon(body, desc);
     try { applyGroom(body, desc, this.quality); } catch (error) { console.warn('[actors] groom failed', desc.oath, desc.cls, error); }
     return body;
   }

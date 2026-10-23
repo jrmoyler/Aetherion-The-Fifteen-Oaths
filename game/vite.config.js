@@ -23,7 +23,7 @@ export default defineConfig({
         runtimeCaching: [
           { urlPattern: ({ url, sameOrigin }) => sameOrigin && /\/assets\/.*\.(glb|ktx2|bin|png|jpe?g|webp|json)$/.test(url.pathname),
             handler: 'StaleWhileRevalidate',
-            options: { cacheName: 'aetherion-assets-v2', cacheableResponse: { statuses: [200] },
+            options: { cacheName: 'aetherion-assets-v3', cacheableResponse: { statuses: [200] },
               expiration: { maxEntries: 160, maxAgeSeconds: 30 * 24 * 60 * 60, purgeOnQuotaError: true } } },
         ],
       },

@@ -1,0 +1,444 @@
+{
+  "targetName": "Kiln Oath elder sorcerer",
+  "sourceImage": "assets/references/reference-091/original.png",
+  "preSpecAssessment": {
+    "objectClass": {
+      "primaryType": "elderly adult sorcerer wearing a kiln backpack",
+      "primaryDomain": "character",
+      "formLanguage": [
+        "organic",
+        "fabric-like",
+        "hard-surface"
+      ],
+      "structureKind": [
+        "articulated assembly",
+        "layered shell",
+        "deformable surface"
+      ],
+      "motionPotential": [
+        "locomotion",
+        "combat",
+        "casting"
+      ],
+      "materialFamilies": [
+        "skin",
+        "hair",
+        "cloth",
+        "ceramic",
+        "leather",
+        "oxidized iron"
+      ],
+      "notes": "Reference-091 provides front, back, side, three-quarter, face and material views. Realistic likeness is requested; stylization is not accepted."
+    },
+    "complexity": {
+      "tier": "ultra-complex",
+      "scores": {
+        "silhouetteComplexity": 3,
+        "componentCount": 3,
+        "hierarchyDepth": 3,
+        "repetitionDensity": 2,
+        "materialLayerCount": 3,
+        "localDetailDensity": 3,
+        "occlusionRisk": 2,
+        "actionReadinessNeed": 3
+      },
+      "estimatedCounts": {
+        "macroComponents": 8,
+        "mesoComponents": 24,
+        "microFeatureGroups": 16,
+        "materialLayers": 6,
+        "repetitionSystems": 4
+      },
+      "reasoning": [
+        "Identity depends on elderly facial anatomy, asymmetrical silver hair locks and overlapping garments, not mesh density alone.",
+        "Backpack vents, hinges, buckles and ceramic borders must survive side and rear review."
+      ]
+    },
+    "specDepthDecision": {
+      "requiredDepth": "ultra-complex",
+      "minimumComponentLevels": [
+        "macro",
+        "meso",
+        "micro"
+      ],
+      "needsRepetitionSystems": true,
+      "needsMaterialLocalOverrides": true,
+      "needsMultipleReviewViews": true,
+      "needsActionReadyHierarchy": true,
+      "rationale": "Skin, clothing, harness and rigid kiln need separate construction and deformation contracts."
+    },
+    "unknownsToResolveBeforeImplementation": [
+      "Garment interiors and fully occluded hands require inference.",
+      "Reference-113 must be reconciled with reference-091 before locking the roster-wide canon.",
+      "No Steam Deck hardware performance measurements are available."
+    ],
+    "detailInventory": {
+      "scanMethod": "component-zones",
+      "targetMinDetails": 16,
+      "note": "Enumerate every identity-defining small detail before authoring the spec. Each detail must map to a component.localFeatures entry or material.localOverrides entry, never prose only. Use forge/stage1_intake/build_detail_inventory.py to scan zones.",
+      "details": [
+        {
+          "id": "aged-face",
+          "description": "Broad cheek and jaw volume, nasolabial folds and asymmetrical brow",
+          "componentId": "face",
+          "evidenceRef": "reference-091:face-closeup",
+          "confidence": 0.85
+        },
+        {
+          "id": "silver-locks",
+          "description": "Dark hair with silver frontal curls and rear bun; no white cone",
+          "componentId": "hair",
+          "evidenceRef": "reference-091:face-closeup",
+          "confidence": 0.85
+        },
+        {
+          "id": "scarf",
+          "description": "Overlapping diagonal black neck folds",
+          "componentId": "collar",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "sleeve-break",
+          "description": "Short outer sleeves over fitted under-sleeves",
+          "componentId": "coat",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "apron-bib",
+          "description": "Curved terracotta bib with raised border",
+          "componentId": "bib",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "apron-skirt",
+          "description": "Flared apron terminating above the black coat hem",
+          "componentId": "apron",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "coat-split",
+          "description": "Layered coat side panels and vertical seam relief",
+          "componentId": "coat",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "shoulder-straps",
+          "description": "Two broad leather harness straps contacting torso and backpack",
+          "componentId": "harness",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "strap-buckles",
+          "description": "Rectangular metal frames, tongues and riveted strap ends",
+          "componentId": "harness",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "waist-belt",
+          "description": "Wide waist belt with rectangular buckle and side loops",
+          "componentId": "belt",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "bracer-plates",
+          "description": "Terracotta curved outer forearm plates in leather cuffs",
+          "componentId": "bracers",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "finger-joints",
+          "description": "Separated glove fingers with knuckle creases",
+          "componentId": "gloves",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "boot-straps",
+          "description": "Ankle straps and buckles, curved toe plates and outsole",
+          "componentId": "boots",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "kiln-box",
+          "description": "Backpack body with layered top and bottom rims",
+          "componentId": "kiln",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "vent-door",
+          "description": "Recessed vertical vent slots, frame, hinge and latch",
+          "componentId": "kiln",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "chimney-rims",
+          "description": "Tall rectangular chimney with stepped cap and lower collars",
+          "componentId": "chimney",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "ceramic-pitting",
+          "description": "Independent terracotta speckling and roughness, chipped edges",
+          "componentId": "ceramic",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        },
+        {
+          "id": "woven-cloth",
+          "description": "Fine matte weave with directional folds and seam highlights",
+          "componentId": "cloth",
+          "evidenceRef": "reference-091:front-back-side",
+          "confidence": 0.85
+        }
+      ]
+    },
+    "anatomy": {
+      "applies": true,
+      "measurementStatus": "pending landmark extraction and camera fit",
+      "note": "Do not replace missing measurements with generic adult proportions. Sheet labels standing height 1.58 m; equipment extends above the crown. Head-unit denominator excludes chimney and bun."
+    },
+    "sourceImage": "assets/references/reference-091/original.png"
+  },
+  "qualityContract": {
+    "qualityBar": "ultra-complex",
+    "definitionOfDone": [
+      "Rendered skinned character matches the source elderly face, hair silhouette, garment layers and equipment from front, side, back and three-quarter views.",
+      "No critical face, hair, outfit or backpack mismatch may be averaged away by an overall score.",
+      "Idle, locomotion, three attacks, casting, hit and death are exercised in the actual runtime without collapsed joints, floating harness or rigid skirt failure.",
+      "PBR maps survive neutral and grazing relighting without painted-in highlights; memory and frame timing are measured before any Steam Deck claim."
+    ],
+    "minimumSpecDepth": {
+      "macroComponents": 5,
+      "mesoComponents": 16,
+      "microFeatureGroups": 8,
+      "materialLayers": 4,
+      "repetitionSystems": 2,
+      "reviewViewpoints": 5
+    },
+    "featureGroups": [
+      {
+        "id": "overall-silhouette",
+        "name": "Overall silhouette and proportions",
+        "required": true,
+        "qualityCriteria": [
+          "Bounding shape, dominant curves, negative spaces, and scale relationships are explicitly described."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model reads as a generic placeholder instead of the reference object",
+          "major proportions are guessed without evidence"
+        ]
+      },
+      {
+        "id": "primary-structure",
+        "name": "Primary structure and hierarchy",
+        "required": true,
+        "qualityCriteria": [
+          "Major parts, joints, seams, contact points, and parent-child relationships are named before code generation."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "large visible parts are merged into one mesh",
+          "component hierarchy is too shallow for the observed complexity"
+        ]
+      },
+      {
+        "id": "attachment-joint-correctness",
+        "name": "Attachment and joint correctness",
+        "required": true,
+        "qualityCriteria": [
+          "Every visible child appendage, branch, limb, handle, connector, tube, cable, horn, wing, leg, or hinged part has an attachment contract with parent socket, localStart/localEnd, contact type, embed/overlap, and gap tolerance."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "child part root floats away from the parent",
+          "branch/limb/tube is centered in space instead of pivoting from its root",
+          "parent-child transform mixes world and local coordinates"
+        ]
+      },
+      {
+        "id": "surface-material-response",
+        "name": "Surface material response",
+        "required": true,
+        "qualityCriteria": [
+          "Albedo zones, roughness, normal/bump/displacement intent, cavity dirt, edge wear, and local overrides are specified where visible.",
+          "Important materials define independent albedo, roughness, height/normal, and AO responses instead of reusing one texture for unrelated PBR channels.",
+          "Surface response is decomposed into macro, meso, and micro frequency bands with scale and amplitude tied to object scale."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "surface looks like flat plastic",
+          "local material variation is missing or not tied to image evidence"
+        ]
+      },
+      {
+        "id": "reference-lookdev",
+        "name": "Reference color, material, and lighting response",
+        "required": true,
+        "qualityCriteria": [
+          "Material-pass names the reference-derived albedo palette, roughness variation, tactile normal/bump/displacement response, and local masks.",
+          "When a source image is available, run reference PBR extraction and require confidence >= 0.7 before treating maps as implementation-ready.",
+          "Lighting-pass names key/fill/rim or environment light, exposure, tone mapping, background, and contact shadow behavior.",
+          "Neutral, grazing-angle, and reference-matched renders prove that surface relief survives relighting and is not painted into albedo."
+        ],
+        "evidenceRefs": [
+          "full-object"
+        ],
+        "failureModes": [
+          "model has acceptable shape but reads as flat shaded or plastic",
+          "colors are a generic average instead of reference-observed local color zones",
+          "lighting is evenly ambient and cannot reproduce the source value range"
+        ]
+      }
+    ],
+    "visualDeltaChecks": [
+      "silhouette and negative-space delta",
+      "component hierarchy depth delta",
+      "repetition density and distribution delta",
+      "material albedo/roughness/normal response delta",
+      "local feature placement and scale delta"
+    ],
+    "antiShallowSpecRules": [
+      "Do not proceed to code if qualityContract.qualityBar is unassessed.",
+      "Do not proceed to code if the spec only contains a root component for a moderate or complex object.",
+      "Do not proceed to code if required featureGroups are not represented by componentTree, materials, or repetitionSystems.",
+      "Do not proceed to code if visible local features are described only in prose and not attached to components/materials/evidenceRefs.",
+      "Do not proceed past structural-pass if attached child parts lack attachment.parentSocket, localStart, localEnd, embedDepth/overlap, and gapTolerance.",
+      "Do not pass material look-dev when albedo is reused as roughness, height, normal, or AO.",
+      "Do not pass material look-dev without macro, meso, and micro surface frequency bands for close-up materials.",
+      "Do not pass reference-fidelity material look-dev from a source image without usable referencePbr maps or an explicit documented limitation.",
+      "Do not patch a spec with extracted PBR maps when extraction confidence is below the target threshold unless the user explicitly accepts lower fidelity.",
+      "Do not place adjacent separate-geometry parts below 0.02 world-unit seam overlap (source: grimoire/build/geometry_patterns.md).",
+      "Do not satisfy raised or recessed relief, fasteners, or grip structure with a map alone when the feature affects form; use geometry or displacement (source: grimoire/build/geometry_patterns.md)."
+    ],
+    "reviewViews": [
+      "front orthographic",
+      "back orthographic",
+      "side orthographic",
+      "three-quarter perspective",
+      "face closeup"
+    ],
+    "criticalFailures": [
+      "generic smooth face",
+      "white pointed hair cap",
+      "flat orange bib lacking border and straps",
+      "undifferentiated sleeve tubes",
+      "backpack vent missing",
+      "cloth interpenetration during attack",
+      "unrigged static replacement"
+    ]
+  },
+  "authoringInstruction": "Fill observed object class, complexity reasoning, featureGroups, visualDeltaChecks, and unknowns before generating or implementing ObjectSculptSpec.",
+  "localSpecSearch": {
+    "collection": "core_3d",
+    "query": "Kiln Oath elder sorcerer adult elderly human facial anatomy skin landmarks hair cloth folds ceramic apron leather straps skinned animation",
+    "index": {
+      "status": "hit",
+      "reason": "current",
+      "fingerprint": "6857e5ab528b42ac12f4f411f862610a0bffce8e47aee3610a7603c318072fe8"
+    },
+    "matches": [
+      {
+        "record_id": "core.pbr-subsurface-scattering-sss",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.material_pbr[5]",
+        "score": 6.184270929728,
+        "snippets": [
+          "Light transport property for opaque dielectrics where light penetrates and scatters internally before exiting (skin, wax, marble, some polymers). \u0110\u1eb7c t\u00ednh truy\u1ec1n \u00e1nh s\u00e1ng c\u1ee7a v\u1eadt li\u1ec7u \u0111i\u1ec7n m\u00f4i m\u1edd \u0111\u1ee5c, \u00e1nh s\u00e1ng xuy\u00ean v\u00e0o v\u00e0 t\u00e1n x\u1ea1 b\u00ean trong tr\u01b0\u1edbc ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.material_pbr[5]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.shader-mapping-tubegeometry-straps-cables-belts",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.rendering_shader_mapping[10]",
+        "score": 3.699753200989,
+        "snippets": [
+          "Maps to flexible components following a 3D curve. \u00c1nh x\u1ea1 t\u1edbi c\u00e1c b\u1ed9 ph\u1eadn m\u1ec1m d\u1ebbo ch\u1ea1y theo m\u1ed9t \u0111\u01b0\u1eddng cong 3D. Recognition cues: Flexible, curve-following linear component \u2014 sling strap, pressure-switch cable, ammo belt draping into a receiver ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.rendering_shader_mapping[10]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      },
+      {
+        "record_id": "core.shader-mapping-reconstruction-metadata-schema",
+        "file_path": "docs/raw/img2threejs-skill-dataset.json",
+        "heading": null,
+        "key_path": "categories.rendering_shader_mapping[15]",
+        "score": 3.568924752552,
+        "snippets": [
+          "... ki\u1ec3m tra pipeline. Recognition cues: Needed whenever an agent must trace a generated Three.js asset back to its source skin/paint_seed/rarity for QA or reproducibility D\u1ea5u hi\u1ec7u nh\u1eadn di\u1ec7n: C\u1ea7n khi agent ph\u1ea3i truy v\u1ebft m\u1ed9t t\u00e0i s\u1ea3n Three.js \u0111\u00e3 ..."
+        ],
+        "source_refs": [
+          {
+            "path": "docs/raw/img2threejs-skill-dataset.json",
+            "heading": null,
+            "key_path": "categories.rendering_shader_mapping[15]"
+          }
+        ],
+        "evidence_refs": [
+          {
+            "kind": "source",
+            "ref": "docs/raw/img2threejs-skill-dataset.json",
+            "note": "img2threejs NotebookLM research distillation"
+          }
+        ]
+      }
+    ]
+  },
+  "execution": {
+    "mode": "generativeAssist with local Three.js integration and img2threejs review",
+    "proceduralOnly": false,
+    "authorization": "User explicitly authorized fal.ai asset transfer and requested img2threejs.",
+    "status": "blocked at external mesh generation: fal balance_exhausted 403",
+    "fallback": "Local parametric fit and de-lit projection remain possible; no such replacement has yet passed the character gates.",
+    "acceptance": "not accepted; no new mesh exists"
+  }
+}

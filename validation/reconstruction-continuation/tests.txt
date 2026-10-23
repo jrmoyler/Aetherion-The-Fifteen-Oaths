@@ -1,0 +1,1277 @@
+Error:   Failed to scan for dependencies from entries:
+  /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/index.html
+/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/review.html
+
+  [31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:1:23:
+[37m      1 │ import * as THREE from [32m'three'[37m;
+        ╵                        [32m~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/ui/pwa-register.js:1:27:
+[37m      1 │ import { registerSW } from [32m'virtual:pwa-register'[37m;
+        ╵                            [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:2:30:
+[37m      2 │ ...rt { OrbitControls } from [32m'three/addons/controls/OrbitControls.js'[37m;
+        ╵                              [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:2:23:
+[37m      2 │ import * as THREE from [32m'three'[37m;
+        ╵                        [32m~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:3:27:
+[37m      3 │ import { RGBELoader } from [32m'three/addons/loaders/RGBELoader.js'[37m;
+        ╵                            [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:3:32:
+[37m      3 │ ...mEnvironment } from [32m'three/addons/environments/RoomEnvironment.js'[37m;
+        ╵                        [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:4:26:
+[37m      4 │ import { FBXLoader } from [32m'three/addons/loaders/FBXLoader.js'[37m;
+        ╵                           [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:4:27:
+[37m      4 │ import { RGBELoader } from [32m'three/addons/loaders/RGBELoader.js'[37m;
+        ╵                            [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:5:38:
+[37m      5 │ ...clone as cloneSkinned } from [32m'three/addons/utils/SkeletonUtils.js'[37m;
+        ╵                                 [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:6:32:
+[37m      6 │ import { createGameClock } from [32m'./core/gameClock.js'[37m;
+        ╵                                 [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:7:20:
+[37m      7 │ import { Bus } from [32m'./core/bus.js'[37m;
+        ╵                     [32m~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:8:24:
+[37m      8 │ import { initVFX } from [32m'./three/vfx.js'[37m;
+        ╵                         [32m~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:8:30:
+[37m      8 │ import { detectQuality } from [32m'./core/quality.js'[37m;
+        ╵                               [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:9:37:
+[37m      9 │ import { createPostprocessing } from [32m'./three/postprocessing.js'[37m;
+        ╵                                      [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:9:28:
+[37m      9 │ import { createInput } from [32m'./core/input.js'[37m;
+        ╵                             [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/review.js:10:30:
+[37m      10 │ import { ABILITY_BY_ID } from [32m'@shared/abilities.js'[37m;
+         ╵                               [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:10:31:
+[37m      10 │ import { CollisionWorld } from [32m'./core/collision.js'[37m;
+         ╵                                [32m~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:11:34:
+[37m      11 │ import { createFrameBudget } from [32m'./core/frameBudget.js'[37m;
+         ╵                                   [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:12:20:
+[37m      12 │ import * as UI from [32m'./ui/index.js'[37m;
+         ╵                     [32m~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:13:21:
+[37m      13 │ import * as Net from [32m'./net/index.js'[37m;
+         ╵                      [32m~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:14:24:
+[37m      14 │ import * as Combat from [32m'./combat/index.js'[37m;
+         ╵                         [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:15:26:
+[37m      15 │ import { initWorld } from [32m'./three/world.js'[37m;
+         ╵                           [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:16:31:
+[37m      16 │ import { initAtmosphere } from [32m'./three/atmosphere.js'[37m;
+         ╵                                [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:17:28:
+[37m      17 │ import { playArrival } from [32m'./three/cinematics.js'[37m;
+         ╵                             [32m~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:19:36:
+[37m      19 │ import { initObjectiveBeacon } from [32m'./three/objectiveBeacon.js'[37m;
+         ╵                                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:20:27:
+[37m      20 │ import { initActors } from [32m'./three/actors.js'[37m;
+         ╵                            [32m~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:21:24:
+[37m      21 │ import { initVFX } from [32m'./three/vfx.js'[37m;
+         ╵                         [32m~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14534:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14529:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:22:37:
+[37m      22 │ import { createPostprocessing } from [32m'./three/postprocessing.js'[37m;
+         ╵                                      [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:23:27:
+[37m      23 │ import { OATH_BY_ID } from [32m'@shared/oaths.js'[37m;
+         ╵                            [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mThe server is being restarted or closed. Request is outdated[0m [1m[35m[plugin vite:dep-scan][0m
+
+    game/node_modules/esbuild/lib/main.js:1217:27:
+[37m      1217 │         let result = await [32m[37mcallback({
+           ╵                            [32m^[0m
+
+    at throwClosedServerError (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42373:15)
+    at EnvironmentPluginContainer.resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42552:9)
+    at resolveId (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14314:40)
+    at resolve (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14325:28)
+    at file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14490:34
+    at requestCallbacks.on-resolve (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1217:28)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:509:28)
+
+  This error came from the "onResolve" callback registered here:
+
+    game/node_modules/esbuild/lib/main.js:1141:20:
+[37m      1141 │       let promise = [32m[37msetup({
+           ╵                     [32m^[0m
+
+    at setup (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14478:13)
+    at handlePlugins (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1141:21)
+    at buildOrContextImpl (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:854:5)
+    at Object.buildOrContext (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:680:5)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:68
+    at new Promise (<anonymous>)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:2035:27)
+    at Object.context (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1877:58)
+    at prepareEsbuildScanner (file:///workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:14266:24)
+
+  The plugin "vite:dep-scan" was triggered by this import
+
+    game/src/main.js:24:25:
+[37m      24 │ import { heightAt } from [32m'@shared/terrain.js'[37m;
+         ╵                          [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+    at failureErrorWithLog (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1467:15)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:926:25
+    at runOnEndCallbacks (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:1307:45)
+    at buildResponseToResult (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:924:7)
+    at /workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:936:9
+    at new Promise (<anonymous>)
+    at requestCallbacks.on-end (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:935:54)
+    at handleRequest (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:628:17)
+    at handleIncomingPacket (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:653:7)
+    at Socket.readFromStdout (/workspace/scratch/8b92e35e788f/Aetherion-The-Fifteen-Oaths/game/node_modules/esbuild/lib/main.js:581:7)
+✔ biome details preserve navigable paths, stay bounded and release shared resources (685.260372ms)
+✔ first movement cancels intro and returns control to player framing (5.004657ms)
+✔ captured mouse look and zoom cannot change orbit (0.35835ms)
+✔ obstruction pulls camera in immediately and recovery is smooth (1.940413ms)
+✔ every covenant has three finite live-world camera shots and its own subtitle (2.63646ms)
+✔ covenant geometry is bounded and disposes every owned GPU resource exactly once (39.103012ms)
+✔ arrival completes while simulation is paused and removes overlay, effects, updater and capture (3.229814ms)
+✔ Escape skips immediately; abort and reduced-motion bypass cannot strand input (9.036ms)
+✔ a second arrival cancels the first before taking camera ownership (1.856205ms)
+✔ all 30 heroes have distinct facial geometry, independent of color and hair (2701.916775ms)
+✔ NPC identity stays deterministic and does not mutate hero canon (5.299121ms)
+✔ retiming preserves authored poses and source clips with monotonic contact times (0.55106ms)
+✔ terrain spends triangles nearby and rocks have finite smooth normals (15.683601ms)
+✔ cloned characters isolate skeleton poses, action mixers and mutable materials (10.119931ms)
+✔ sanitized GLTF bone and socket names preserve the public attachment API (0.901538ms)
+✔ animation LOD skips pose evaluation without dropping elapsed time (1.10239ms)
+✔ multi-primitive authored characters retain their own costume and weapon (1.500179ms)
+✔ same authored attack replays immediately without fading itself out (1.353679ms)
+✔ action lifetime respects clip duration and speed instead of cutting at .65 seconds (0.57762ms)
+✔ death interrupts actions, clamps its final pose and blocks late hit callbacks until respawn (1.134118ms)
+✔ landing pose persists for the authored clip instead of a single rendered frame (1.754643ms)
+✔ spawn fade restores authored translucent materials and depth-write intent (1.598467ms)
+✔ complete authored replacements retain head geometry, hair and PBR materials on every instance (2.621358ms)
+✔ world navigation uses first active finite authoritative waypoint (1.007567ms)
+✔ oath-01-sorcerer: Blender reconstruction preserves clips, bind matrices and original buffers (42.743956ms)
+✔ oath-03-sorcerer: Blender reconstruction preserves clips, bind matrices and original buffers (33.157538ms)
+✔ oath-14-sorcerer: Blender reconstruction preserves clips, bind matrices and original buffers (36.173951ms)
+✔ reference hair is finite volume geometry in every quality tier (537.376683ms)
+✔ Time sorcerer uses the young dark-haired reference without invented eyewear (0.255705ms)
+✔ source knockback moves only rendered body and restores exact original parent/material (3.773684ms)
+✔ source floor-space carry and pin preserve server position; timed recovery restores body (1.578548ms)
+✔ clip plane uses world elevation and is removed when effect ends (0.580955ms)
+WebSocket server error: Port 24678 is already in use
+✔ fifteen native Three cities preserve finite geometry and collision metadata (13293.314276ms)
+✔ interaction uses nearest in-range citizen and sends only on explicit input (10.92263ms)
+✔ shrine interaction and modal/death guards (0.393202ms)
+✔ prologue advances through movement, quest citizen and authoritative combat (0.635146ms)
+✔ wrong actors, wrong citizen, rejected casts and zero damage cannot advance guidance (0.233652ms)
+✔ completed chapters and minimized state persist; reopen does not reset progress (0.295655ms)
+✔ malformed persisted progress is ignored and device hints match controls (5.263327ms)
+✔ teleports and passive position changes do not teach movement (0.29892ms)
+✔ sustained slow frames lower scale within bounds, fast recovery is deliberately slower (13.485731ms)
+✔ background gaps and invalid samples do not degrade resolution (0.543538ms)
+✔ paused cooldown clock stays monotonic through repeated pause/resume events (1.346978ms)
+✔ blur and app hiding discard held pointer, keyboard and queued action state (2.411682ms)
+✔ startup jobs finish without a render loop when workers are blocked (13.828778ms)
+✔ worker crash requeues both inflight jobs and completes the queued work (4.835854ms)
+✔ unresponsive worker recovers and late replies cannot settle a new job (7.180144ms)
+✔ fallback respects priority and cancellation and disposes pending work (17.565109ms)
+✔ loadout waits for explicit authoritative confirmation, not repeated renders or partial snapshots (5.511631ms)
+✔ duplicate draft shows the selected technique stats while equip stays disabled (4.093275ms)
+✔ offline pause freezes simulation and rejects gameplay, then resumes without catching up (429.325445ms)
+✔ classifyGpu recognises common renderer strings (6.151805ms)
+✔ pickTier maps device hints to tiers (0.779514ms)
+✔ auto detect never selects ultra; every tier declares the render knobs (0.442266ms)
+ℹ tests 54
+ℹ suites 0
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 14053.692401

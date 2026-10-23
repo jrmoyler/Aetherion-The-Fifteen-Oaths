@@ -13,14 +13,16 @@ import { buildHead, skinMaterial, eyeMaterial } from './head.js';
 import { buildGroom, hairMaterial, leafTufts } from './hair.js';
 import { buildGear, gearCoverage } from './gear.js';
 import { withSurface } from './surface.js';
+import { buildReferenceHair } from './reference-hair.js';
+import { applyReferenceFace } from './reference-face.js';
 
 const kits = new Map();
 const culled = new WeakSet();
 
-function kitFor(key, H, quality) {
-  const id = `${key}|${H.toFixed(3)}|${quality}`;
+function kitFor(key, H, quality, identity = '') {
+  const profile = profileFor(key, identity);
+  const id = `${key}|${profile.variant ?? 'hero'}|${H.toFixed(3)}|${quality}`;
   if (kits.has(id)) return kits.get(id);
-  const profile = profileFor(key);
   const head = buildHead(profile, H, quality);
   const groom = buildGroom(key, profile, head.P, head.lash, quality);
   const gear = buildGear(profile, head.P, H, quality);
@@ -31,7 +33,8 @@ function kitFor(key, H, quality) {
   const leaves = gear.some(p => p.leaves) ? scale(leafTufts(head.P, key, quality === 'low' ? 30 : 80)) : null;
   // eyes are built around their own centre so one eye material serves both
   for (const e of head.eyes) e.geo.translate(-e.center.x, -e.center.y, -e.center.z);
-  const kit = { profile, head, groom, gear, cover, leaves };
+  const referenceHair = buildReferenceHair(key, head.P, H, quality);
+  const kit = { profile, head, groom, gear, cover, leaves, referenceHair };
   kits.set(id, kit);
   return kit;
 }
@@ -114,7 +117,7 @@ export function applyGroom(body, desc, quality = 'high') {
   const bb = skinned.geometry.boundingBox, height = bb.max.y - Math.max(0, bb.min.y);
   const H = Math.min(.262, Math.max(.205, height * .128));
   const center = new Vector3(bindPos.x, bindPos.y + H * .41, bindPos.z + H * .05);
-  const kit = kitFor(key, H, quality);
+  const kit = kitFor(key, H, quality, desc.kind === 'npc' ? desc.identity : '');
   const q = quality;
   // 1. cull original head + painted eyes
   for (const m of body.meshes) {
@@ -135,16 +138,19 @@ export function applyGroom(body, desc, quality = 'high') {
     (opts.parent ?? rig).add(mesh); added.push(mesh); return mesh;
   };
   const prof = kit.profile;
-  const skin = own(skinMaterial(prof, H, new Vector3()));
+  const skin = applyReferenceFace(own(skinMaterial(prof, H, new Vector3())), key, H);
   add(kit.head.skinGeo, skin);
   const eyeMat = own(eyeMaterial(prof.eye, new Vector3()));
-  for (const e of kit.head.eyes) { const m = add(e.geo, eyeMat, { shadow: false }); m.position.copy(e.center); }
+  const eyeMeshes=[];
+  for (const e of kit.head.eyes) { const m = add(e.geo, eyeMat, { shadow: false }); m.position.copy(e.center);eyeMeshes.push(m); }
+  const lidMeshes=kit.head.lids.map(geo=>add(geo,skin));
   const hairColor = prof.hair?.color ?? '#141012';
-  if (kit.groom.cap && !kit.cover.hood) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
-  if (kit.groom.cards && !kit.cover.hood) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
+  if (kit.groom.cap && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
+  if (kit.referenceHair) add(kit.referenceHair.geometry, own(kit.referenceHair.material));
+  if (kit.groom.cards && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   else if (kit.groom.cards && prof.beard) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   const browColor = new Color(hairColor).multiplyScalar(prof.age > .6 ? .85 : .7).getStyle();
-  if (!kit.cover.eyes) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
+  if (!kit.cover.eyes && !kit.referenceHair) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
   for (const part of kit.gear) if (part.geo) add(part.geo, own(part.material));
   if (kit.leaves) add(kit.leaves, own(hairMaterial('#56702c', true, q)), { order: 1 });
   bone.add(anchor);
@@ -156,6 +162,12 @@ export function applyGroom(body, desc, quality = 'high') {
   }
   body.meshes.push(...added);
   body.groom = { anchor, meshes: added, H, key };
+  const update=body.animator.update.bind(body.animator);let blinkTime=(prof.variant??Number(desc.oath.slice(-2)))*.31;
+  body.animator.update=(dt)=>{const advanced=update(dt);if(!Number.isFinite(dt)||dt<=0)return advanced;blinkTime+=dt;
+    const phase=blinkTime%(3.6+(prof.variant??0)*.13),blink=body.animator.state==='dead'?0:phase<.18?Math.sin(Math.PI*phase/.18):0;
+    for(const lid of lidMeshes)lid.morphTargetInfluences[0]=blink;
+    for(const eye of eyeMeshes)eye.scale.y=Math.max(.03,1-blink);
+    return advanced;};
   const dispose = body.dispose.bind(body);
   body.dispose = () => { anchor.removeFromParent(); dispose(); };
 }

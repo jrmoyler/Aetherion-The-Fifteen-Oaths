@@ -19,20 +19,20 @@ export function faceParams(profile) {
   return {
     build, age, f,
     jaw: f ? .66 : .74, brow: f ? .45 : 1, nose: f ? .85 : 1, lip: f ? 1.15 : .9, chin: f ? .7 : 1,
-    cheek: f ? 1.1 : .9, sag: age,
+    cheek: f ? 1.1 : .9, sag: age, noseWidth: 1, depth: 1, ...profile.face,
   };
 }
 
 // Surface point for unit direction d. `opts.cloth` smooths fine features so
 // masks and wraps drape over them instead of shrink-wrapping lips and sockets.
 export function sculpt(d, P, opts = {}) {
-  const vy = Math.max(-1, Math.min(1, d.y)), m = vy > 0 ? 2.45 : 2.9, c = Math.max(0, 1 - Math.abs(vy) ** m) ** (1 / m);
+  const vy = Math.max(-1, Math.min(1, d.y)), m = vy > 0 ? 2.12 : 2.25, c = Math.max(0, 1 - Math.abs(vy) ** m) ** (1 / m);
   let hx = d.x, hz = d.z; const hl = Math.hypot(hx, hz) || 1; hx /= hl; hz /= hl;
-  const n = 2.5, ex = 2 / n;
+  const n = 2.08, ex = 2 / n;
   const sx = Math.sign(hx) * Math.abs(hx) ** ex, sz = Math.sign(hz) * Math.abs(hz) ** ex;
   const y = .5 * vy;
   const rx = .338 * P.build * (1 - (1 - P.jaw) * .85 * sm(-.16, -.5, y)) * (1 - .04 * sm(.15, .42, y));
-  const rzf = .4 - .03 * sm(.2, .48, y);
+  const rzf = (.4 - .03 * sm(.2, .48, y)) * P.depth;
   const rzb = .44 + .025 * g2((y - .06) / .16, 0) - .2 * sm(-.04, -.45, y);
   let X = c * sx * rx;
   let Z = c * sz * (sz > 0 ? rzf : rzb) + .06 * sm(.04, -.45, y) - .03;
@@ -47,17 +47,17 @@ export function sculpt(d, P, opts = {}) {
     dx += sgn * .012 * g2((Y - .07) / .05, (ax - .3) / .05);
     dz += .012 * g2((Y - .1) / .03, ax / .06) * (1 - P.f * .5);
     // orbital sockets (shallow under cloth)
-    dz -= (opts.noSocket ? 0 : cl ? .014 : .046) * g2((ax - EYE.x) / .092, (Y - EYE.y - .012) / .062);
+    dz -= (opts.noSocket ? 0 : cl ? .008 : .019) * g2((ax - EYE.x) / .092, (Y - EYE.y - .012) / .062);
     // nose
     const yb = .05, yt = -.185;
     let A = 0;
     if (Y <= yb && Y >= yt) A = .01 + .1 * ((yb - Y) / (yb - yt)) ** 1.6;
     else if (Y < yt) A = .11 * Math.exp(-(((Y - yt) / .03) ** 2));
-    const W = .038 + .048 * Math.min(1, Math.max(0, (yb - Y) / (yb - yt)));
+    const W = (.038 + .048 * Math.min(1, Math.max(0, (yb - Y) / (yb - yt)))) * P.noseWidth;
     dz += A * P.nose * Math.exp(-((X / (W * (cl ? 1.9 : 1))) ** 2)) * (cl ? 1.05 : 1);
     dz -= (cl ? 0 : .016) * g2(X / .06, (Y - .05) / .03);
     dz += .022 * g2(X / .04, (Y + .17) / .035) * (1 - cl);
-    if (!cl) { const ala = g2((ax - .062) / .03, (Y + .2) / .03); dz += .036 * ala; dx += sgn * .012 * ala; dz -= .02 * g2((ax - .03) / .015, (Y + .222) / .012); }
+    if (!cl) { const ala = g2((ax - .062 * P.noseWidth) / .03, (Y + .2) / .03); dz += .036 * ala; dx += sgn * .012 * ala; dz -= .02 * g2((ax - .03) / .015, (Y + .222) / .012); }
     // cheekbones and the hollow below them
     const ck = g2((ax - .21) / .075, (Y + .03) / .06); dz += .03 * P.cheek * ck; dx += sgn * .022 * ck;
     dz -= .014 * (.35 + P.sag) * g2((ax - .2) / .06, (Y + .2) / .07) * (1 - cl);
@@ -70,8 +70,11 @@ export function sculpt(d, P, opts = {}) {
       dz -= .022 * Math.exp(-((X / .098) ** 4)) * Math.exp(-(((Y + .298) / .0075) ** 2));
       dz -= .012 * g2((ax - .1) / .015, (Y + .3) / .015);
       // nasolabial fold deepens with age
-      dz -= .008 * P.sag * g2((ax - .11 - (Y + .17) * -.25) / .012, (Y + .2) / .08);
+      dz -= .018 * P.sag * g2((ax - .11 - (Y + .17) * -.25) / .012, (Y + .2) / .08);
     }
+    // Age-related infraorbital fold and jowl volume are geometry, not painted lines.
+    if (!cl) { dz -= .012 * P.sag * g2((ax-.15)/.09,(Y+.072)/.016);
+      dx += sgn * .022 * P.sag * g2((ax-.20)/.06,(Y+.31)/.08); }
     // chin and mandible
     dz += .046 * P.chin * g2(X / (.09 + .025 * P.chin), (Y + .42) / .06);
     dx += sgn * (.022 - P.f * .012) * g2((Y + .33) / .07, 0) * sm(.35, .05, sz);
@@ -151,7 +154,7 @@ export function skinMaterial(profile, H, origin) {
   if (skinMaterialCache.has(key)) return skinMaterialCache.get(key);
   const base = new Color(profile.skin);
   const m = new MeshPhysicalMaterial({
-    color: base, roughness: .5, metalness: 0, specularIntensity: .42, specularColor: new Color('#fff6f0'),
+    color: base, roughness: .62, metalness: 0, specularIntensity: .28, specularColor: new Color('#fff6f0'),
     sheen: .18, sheenRoughness: .6, sheenColor: base.clone().lerp(new Color('#ff7a5a'), .55).multiplyScalar(.6),
   });
   m.name = 'skin';
@@ -192,32 +195,6 @@ export function eyeMaterial(iris, center) {
   return m;
 }
 
-// Lid shells: a sphere segment around the eyeball minus the almond aperture.
-function lidShell(r, upper, f) {
-  const aw = 1.0, ah = f ? .3 : .26, tilt = f ? .09 : .045;
-  const cU = (u) => tilt * (u / aw) + (upper ? .02 : -.02);
-  const half = (u) => ah * Math.max(0, 1 - (u / aw) ** 2) ** .62;
-  const N = 40, M = 12, pos = [], idx = [];
-  for (let i = 0; i <= N; i++) {
-    const u = -1.45 + 2.9 * i / N;
-    const edge = Math.abs(u) < aw ? cU(u) + (upper ? half(u) * 1.0 : -half(u) * .78) - (upper ? .05 : 0) : cU(Math.sign(u) * aw);
-    for (let j = 0; j <= M; j++) {
-      const t = j / M, v = upper ? edge + (1.15 - edge) * t ** 1.3 : edge - (edge + 1.05) * t ** 1.3;
-      const rr = r * (1.075 + .02 * (1 - t));
-      pos.push(rr * Math.sin(u) * Math.cos(v), rr * Math.sin(v), rr * Math.cos(u) * Math.cos(v));
-    }
-  }
-  for (let i = 0; i < N; i++) for (let j = 0; j < M; j++) {
-    const a = i * (M + 1) + j, b = a + M + 1;
-    if (upper) idx.push(a, b, a + 1, b, b + 1, a + 1); else idx.push(a, a + 1, b, b, a + 1, b + 1);
-  }
-  const g = new BufferGeometry(); g.setAttribute('position', new Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals();
-  const nn = g.attributes.normal, mid = (Math.floor(N / 2)) * (M + 1) + Math.floor(M / 2);
-  if (nn.getX(mid) * pos[mid * 3] + nn.getY(mid) * pos[mid * 3 + 1] + nn.getZ(mid) * pos[mid * 3 + 2] < 0) { for (let i = 0; i < idx.length; i += 3) { const t = idx[i + 1]; idx[i + 1] = idx[i + 2]; idx[i + 2] = t; } g.setIndex(idx); g.computeVertexNormals(); }
-  g.userData.edge = (u) => (Math.abs(u) < aw ? cU(u) + half(u) * 1.0 - .05 : cU(Math.sign(u) * aw));
-  return g;
-}
-
 // Builds skin (head + ears + neck + lids) and eyes. Returns metadata used by
 // hair/gear to fit to the same surface.
 export function buildHead(profile, H, quality = 'high') {
@@ -233,25 +210,45 @@ export function buildHead(profile, H, quality = 'high') {
   }
   // neck
   const neck = new CylinderGeometry(.215, .25, .42, 40, 6, true); neck.scale(1, 1, 1.05); neck.translate(0, -.5, -.07);
-  // eyes and lids
+  // Almond eye apertures with continuous lid-to-cheek annuli. A complete
+  // exposed sphere plus detached spherical lids made the old eyes look glued on.
   const eyes = [], lids = [], lash = [];
   const r = EYE.r;
+  const frontAt=(x,y)=>{
+    let lo=0,hi=Math.PI/2,pt;const dy=Math.max(-.999,Math.min(.999,y*2)),rr=Math.sqrt(1-dy*dy);
+    for(let k=0;k<18;k++){const t=(lo+hi)/2;pt=sculpt(new Vector3(Math.sign(x||1)*Math.sin(t)*rr,dy,Math.cos(t)*rr),P);if(Math.abs(pt.x)<Math.abs(x))lo=t;else hi=t;}
+    return pt.z;
+  };
   for (const s of [-1, 1]) {
-    // place the eyeball so its cornea sits just proud of the unsocketed face
-    const probe = new Vector3(s * EYE.x, EYE.y, .5).normalize();
-    let pt = sculpt(probe, P, { noSocket: true });
-    for (let k = 0; k < 6; k++) { probe.set(s * EYE.x, EYE.y, Math.max(.1, pt.z)).normalize(); pt = sculpt(probe, { ...P, brow: 0 }, { noSocket: true }); }
-    const center = new Vector3(s * EYE.x, EYE.y, pt.z - r * 1.05);
-    const ball = new SphereGeometry(r, 32, 24); ball.translate(center.x, center.y, center.z); eyes.push({ geo: ball, center });
-    for (const up of [true, false]) {
-      const l = lidShell(r, up, P.f); l.rotateY(s * .12); l.translate(center.x, center.y, center.z); lids.push(l);
-      if (up) lash.push({ center, s, edge: lidShell(r, true, P.f).userData.edge });
+    const cx=s*EYE.x,cy=EYE.y;
+    const center=new Vector3(cx,cy,frontAt(cx,cy)-r+.012);
+    const pos=[],indices=[],ring=[],ri=[];const N=48,M=8;
+    // Polar patch covers exactly the visible sclera, never an exposed globe.
+    for(let j=0;j<=M;j++) for(let i=0;i<=N;i++){
+      const a=i/N*Math.PI*2,t=j/M;
+      const x=Math.cos(a)*.043*t,y=Math.sin(a)*.014*t+s*x*.10;
+      pos.push(cx+x,cy+y,center.z+Math.sqrt(Math.max(0,r*r-x*x-y*y)));
     }
+    for(let j=0;j<M;j++)for(let i=0;i<N;i++){const a=j*(N+1)+i,b=a+N+1;indices.push(a,b,a+1,b,b+1,a+1);}
+    const eye=new BufferGeometry();eye.setAttribute('position',new Float32BufferAttribute(pos,3));eye.setIndex(indices);eye.computeVertexNormals();eyes.push({geo:eye,center});
+    for(let j=0;j<=M;j++)for(let i=0;i<=N;i++){
+      const a=i/N*Math.PI*2,t=j/M,ix=Math.cos(a)*.043,iy=Math.sin(a)*.014+s*ix*.10;
+      const x=ix*(1-t)+Math.cos(a)*.072*t,y=iy*(1-t)+Math.sin(a)*.050*t;
+      const inner=center.z+Math.sqrt(Math.max(0,r*r-ix*ix-iy*iy))+.001;
+      const z=inner*(1-t)+frontAt(cx+x,cy+y)*t+Math.sin(t*Math.PI)*.003;
+      ring.push(cx+x,cy+y,z);
+    }
+    for(let j=0;j<M;j++)for(let i=0;i<N;i++){const a=j*(N+1)+i,b=a+N+1;ri.push(a,b,a+1,b,b+1,a+1);}
+    const lid=new BufferGeometry();lid.setAttribute('position',new Float32BufferAttribute(ring,3));lid.setIndex(ri);lid.computeVertexNormals();
+    const blink=new Float32Array(ring);
+    for(let j=0;j<=M;j++)for(let i=0;i<=N;i++){const index=j*(N+1)+i;blink[index*3+1]+=(cy-ring[index*3+1])*(1-j/M);}
+    lid.morphAttributes.position=[new Float32BufferAttribute(blink,3)];lids.push(lid);
   }
-  const skinParts = [head, ...ears.map(e => { const n = e.index ? e.toNonIndexed() : e; n.deleteAttribute('uv'); return n; }), (() => { const n = neck.toNonIndexed(); n.deleteAttribute('uv'); return n; })(), ...lids.map(l => l.toNonIndexed())];
+  const skinParts = [head, ...ears.map(e => { const n = e.index ? e.toNonIndexed() : e; n.deleteAttribute('uv'); return n; }), (() => { const n = neck.toNonIndexed(); n.deleteAttribute('uv'); return n; })()];
   const skinGeo = mergeGeometries(skinParts.map(g => { const n = g.index ? g.toNonIndexed() : g; for (const k of Object.keys(n.attributes)) if (k !== 'position' && k !== 'normal') n.deleteAttribute(k); return n; }), false);
   skinGeo.scale(H, H, H);
-  return { P, H, skinGeo, eyes: eyes.map(e => ({ geo: e.geo.scale(H, H, H), center: e.center.clone().multiplyScalar(H) })), lash };
+  for(const lid of lids){lid.scale(H,H,H);const morph=lid.morphAttributes.position[0];for(let i=0;i<morph.count;i++)morph.setXYZ(i,morph.getX(i)*H,morph.getY(i)*H,morph.getZ(i)*H);}
+  return { P, H, skinGeo, lids, eyes: eyes.map(e => ({ geo: e.geo.scale(H, H, H), center: e.center.clone().multiplyScalar(H) })), lash };
 }
 
 export { sm, g2 };

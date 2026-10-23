@@ -70,7 +70,7 @@ function createActors(ctx) {
 
   // --------------------------------------------------------------- bodies
   function makeBody(actor) {
-    const desc = { kind: actor.kind, oath: actor.oath, cls: actor.cls, model: actor.model, runSpeed: CLASSES[actor.cls]?.moveSpeed, noWeapon: actor.kind === 'npc' && actor.title === 'chronicler' };
+    const desc = { kind: actor.kind, identity: actor.id, oath: actor.oath, cls: actor.cls, model: actor.model, runSpeed: CLASSES[actor.cls]?.moveSpeed, noWeapon: actor.kind === 'npc' && actor.title === 'chronicler' };
     actor.body = factory.createProcedural(desc, actor.root);
     actor.radius = actor.body.radius;
     actor.body.setFade(0);
@@ -105,7 +105,7 @@ function createActors(ctx) {
       if (actor === player) { if (controller) controller.actor = player; addShadows(nb); }
     } catch (e) { console.warn('[actors] GLB swap failed', url, e); if (actor.isSelf) throw e; }
   }
-  assets.onChange(() => { api.forEach((a) => { if (!a.bodyUrl) tryUpgrade(a, { kind: a.kind, oath: a.oath, cls: a.cls, model: a.model, runSpeed: CLASSES[a.cls]?.moveSpeed, noWeapon: a.kind === 'npc' && a.title === 'chronicler' }); }); });
+  assets.onChange(() => { api.forEach((a) => { if (!a.bodyUrl) tryUpgrade(a, { kind: a.kind, identity: a.id, oath: a.oath, cls: a.cls, model: a.model, runSpeed: CLASSES[a.cls]?.moveSpeed, noWeapon: a.kind === 'npc' && a.title === 'chronicler' }); }); });
   assets.start();
 
   function addShadows(body) { if (!body || !ctx.render?.addShadowCaster) return; for (const m of body.meshes) ctx.render.addShadowCaster(m, false); }
