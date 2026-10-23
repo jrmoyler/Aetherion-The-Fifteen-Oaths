@@ -13,6 +13,8 @@ import { buildHead, skinMaterial, eyeMaterial } from './head.js';
 import { buildGroom, hairMaterial, leafTufts } from './hair.js';
 import { buildGear, gearCoverage } from './gear.js';
 import { withSurface } from './surface.js';
+import { buildReferenceHair } from './reference-hair.js';
+import { applyReferenceFace } from './reference-face.js';
 
 const kits = new Map();
 const culled = new WeakSet();
@@ -31,7 +33,8 @@ function kitFor(key, H, quality, identity = '') {
   const leaves = gear.some(p => p.leaves) ? scale(leafTufts(head.P, key, quality === 'low' ? 30 : 80)) : null;
   // eyes are built around their own centre so one eye material serves both
   for (const e of head.eyes) e.geo.translate(-e.center.x, -e.center.y, -e.center.z);
-  const kit = { profile, head, groom, gear, cover, leaves };
+  const referenceHair = buildReferenceHair(key, head.P, H, quality);
+  const kit = { profile, head, groom, gear, cover, leaves, referenceHair };
   kits.set(id, kit);
   return kit;
 }
@@ -135,18 +138,19 @@ export function applyGroom(body, desc, quality = 'high') {
     (opts.parent ?? rig).add(mesh); added.push(mesh); return mesh;
   };
   const prof = kit.profile;
-  const skin = own(skinMaterial(prof, H, new Vector3()));
+  const skin = applyReferenceFace(own(skinMaterial(prof, H, new Vector3())), key, H);
   add(kit.head.skinGeo, skin);
   const eyeMat = own(eyeMaterial(prof.eye, new Vector3()));
   const eyeMeshes=[];
   for (const e of kit.head.eyes) { const m = add(e.geo, eyeMat, { shadow: false }); m.position.copy(e.center);eyeMeshes.push(m); }
   const lidMeshes=kit.head.lids.map(geo=>add(geo,skin));
   const hairColor = prof.hair?.color ?? '#141012';
-  if (kit.groom.cap && !kit.cover.hood) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
-  if (kit.groom.cards && !kit.cover.hood) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
+  if (kit.groom.cap && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
+  if (kit.referenceHair) add(kit.referenceHair.geometry, own(kit.referenceHair.material));
+  if (kit.groom.cards && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   else if (kit.groom.cards && prof.beard) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   const browColor = new Color(hairColor).multiplyScalar(prof.age > .6 ? .85 : .7).getStyle();
-  if (!kit.cover.eyes) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
+  if (!kit.cover.eyes && !kit.referenceHair) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
   for (const part of kit.gear) if (part.geo) add(part.geo, own(part.material));
   if (kit.leaves) add(kit.leaves, own(hairMaterial('#56702c', true, q)), { order: 1 });
   bone.add(anchor);

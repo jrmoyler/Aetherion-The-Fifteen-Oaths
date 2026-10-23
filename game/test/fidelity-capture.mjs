@@ -12,8 +12,8 @@ const server=await createServer({plugins:[{name:'baseline-evidence',enforce:'pre
 const browser=await chromium.launch({executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE||'/tmp/chromium',headless:true,args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const page=await browser.newPage({viewport:{width:1280,height:800}});const errors=[];page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
 try{
- await page.route('**/assets/characters/viewer.html',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><head><link rel="icon" href="data:,"></head><body></body></html>'}));
- await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/assets/characters/viewer.html`);
+ await page.route('**/fidelity-capture.html',route=>route.fulfill({contentType:'text/html',body:'<!doctype html><html><head><link rel="icon" href="data:,"></head><body></body></html>'}));
+ await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/fidelity-capture.html`);
  await page.evaluate(async()=>{
  const T=await import('/node_modules/three/build/three.module.js');const {BodyFactory,loadModel}=await import('/src/three/models.js');
  document.body.replaceChildren();const renderer=new T.WebGLRenderer({antialias:true});renderer.setSize(1280,800);renderer.toneMapping=T.ACESFilmicToneMapping;document.body.append(renderer.domElement);document.body.style.margin='0';
@@ -21,11 +21,17 @@ try{
  const camera=new T.PerspectiveCamera(32,1.6,.01,100);camera.position.set(0,1.7,4.4);camera.lookAt(0,1.05,0);
  const factory=new BodyFactory({quality:{name:'high'}});const bodies=[];
  for(const [i,key] of ['oath-01-sorcerer','oath-03-sorcerer','oath-14-sorcerer'].entries()){const p=new T.Group();p.position.x=(i-1)*.9;scene.add(p);const body=factory.createGltf(await loadModel('/assets/characters/'+key+'.glb'),{oath:key.slice(0,7),cls:'sorcerer'},p);body.animator.update(.01);bodies.push(body);}
- window.__fidelity={renderer,scene,camera,bodies,T,render(){renderer.render(scene,camera)}};window.__fidelity.render();
+ window.__fidelity={renderer,scene,camera,bodies,T,render(){renderer.render(scene,camera)}};await (await import('/src/three/character/reference-face.js')).referenceFacesReady();window.__fidelity.render();
  });
+ await page.waitForLoadState('networkidle');
+ await page.evaluate(()=>window.__fidelity.render());
  await page.screenshot({path:out+(process.env.CAPTURE_LABEL||'after')+'-characters.png'});
  await page.evaluate(()=>{const f=window.__fidelity;f.camera.position.set(-.9,1.52,.65);f.camera.lookAt(-.9,1.52,0);f.render()});
  await page.screenshot({path:out+(process.env.CAPTURE_LABEL||'after')+'-face.png'});
+ for(const [name,angle] of [['orbit',.7],['back',Math.PI],['cast',0]]){
+  await page.evaluate(({angle,name})=>{const f=window.__fidelity;f.camera.position.set(0,1.7,4.4);f.camera.lookAt(0,1.05,0);for(const b of f.bodies){b.root.rotation.y=angle;if(name==='cast'){b.animator.playAnim('cast_aoe');b.animator.update(.4);}}f.render()},{angle,name});
+  await page.screenshot({path:out+(process.env.CAPTURE_LABEL||'after')+'-'+name+'.png'});
+ }
  await writeFile(out+(process.env.CAPTURE_LABEL||'after')+'-errors.json',JSON.stringify(errors,null,2));
  console.log(JSON.stringify({errors,details:await page.evaluate(()=>window.__fidelity.bodies.map(b=>({groom:b.groom?.key,H:b.groom?.H,meshes:b.groom?.meshes.length,head:b.sockets.head?.position.toArray(), skinBounds:new window.__fidelity.T.Box3().setFromObject(b.groom.meshes[0]).getCenter(new window.__fidelity.T.Vector3()).toArray(),bone:b.sockets.head.getWorldPosition(new window.__fidelity.T.Vector3()).toArray(),groomBounds:new window.__fidelity.T.Box3().setFromObject(b.groom.anchor).getSize(new window.__fidelity.T.Vector3()).toArray()})))}));
 }finally{await browser.close();await server.close();}

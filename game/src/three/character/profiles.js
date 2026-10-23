@@ -14,7 +14,7 @@ const HAIR = {
 
 export const PROFILES = {
   'oath-01-ninja': { sex: 'm', skin: SKIN.olive, eye: '#3a2414', age: .2, build: 1.04, hair: { style: 'short', color: HAIR.black, length: .55 }, gear: [{ type: 'wrap', color: '#1e1c1b', top: -.02 }] },
-  'oath-01-sorcerer': { sex: 'f', skin: SKIN.olive, eye: '#3a2a1c', age: .62, build: 1.08, hair: { style: 'bun', color: HAIR.gray, bun: [0, .38, -.28] }, gear: [] },
+  'oath-01-sorcerer': { sex: 'f', skin: SKIN.olive, eye: '#3a2a1c', age: .82, build: 1.12, hair: { style: 'bun', color: '#403b36', bun: [0, .38, -.28] }, gear: [] },
   'oath-02-ninja': { sex: 'f', skin: SKIN.pale, eye: '#5a7088', age: .2, build: .96, hair: { style: 'none' }, gear: [{ type: 'hood', color: '#3b4250', deep: true }, { type: 'faceplate', color: '#eceae6', finish: 'porcelain' }] },
   'oath-02-sorcerer': { sex: 'm', skin: SKIN.light, eye: '#6a7a88', age: .9, build: .98, hair: { style: 'long', color: HAIR.white, knot: true }, beard: { style: 'braided', color: HAIR.white }, gear: [] },
   'oath-03-ninja': { sex: 'm', skin: SKIN.olive, eye: '#2a1a10', age: .25, build: 1.02, hair: { style: 'topknot', color: HAIR.black }, gear: [{ type: 'plate', color: '#a6824a', finish: 'brass' }] },
@@ -40,7 +40,7 @@ export const PROFILES = {
   'oath-13-ninja': { sex: 'm', skin: SKIN.light, eye: '#2a1c14', age: .2, build: .96, hair: { style: 'messy', color: HAIR.ink }, gear: [{ type: 'blademask', color: '#ece6da', trim: '#8a8a90', finish: 'porcelain' }] },
   'oath-13-sorcerer': { sex: 'f', skin: SKIN.light, eye: '#4a3a30', age: .5, build: 1.0, hair: { style: 'bun', color: HAIR.silver, bun: [0, .36, -.3], strands: 4 }, gear: [] },
   'oath-14-ninja': { sex: 'm', skin: SKIN.deep, eye: '#1e140c', age: .25, build: 1.04, hair: { style: 'short', color: HAIR.black, length: .35, coils: true }, gear: [{ type: 'wrap', color: '#2a2e3a', top: -.02 }] },
-  'oath-14-sorcerer': { sex: 'f', skin: SKIN.light, eye: '#3a2a1c', age: .8, build: 1.0, hair: { style: 'bun', color: HAIR.silver, bun: [0, .46, -.2] }, gear: [{ type: 'glasses', color: '#a8844a' }] },
+  'oath-14-sorcerer': { sex: 'f', skin: SKIN.light, eye: '#3a2a1c', age: .25, build: .96, hair: { style: 'bun', color: HAIR.black, bun: [0, .46, -.2] }, gear: [] },
   'oath-15-ninja': { sex: 'f', skin: SKIN.olive, eye: '#2a1a10', age: .22, build: .97, hair: { style: 'bun', color: HAIR.black, bun: [0, .46, -.24], strands: 5 }, gear: [{ type: 'visor', color: '#4a4c52', lens: '#d8dde4' }] },
   'oath-15-sorcerer': { sex: 'm', skin: SKIN.light, eye: '#3a2a1c', age: .4, build: 1.06, hair: { style: 'swept', color: HAIR.brown }, beard: { style: 'full', color: HAIR.brown, length: .12 }, gear: [] },
 };

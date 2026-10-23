@@ -43,3 +43,8 @@ Evidence: `validation/fidelity-pass/before-characters.png`, `after-characters.pn
 ## Remaining acceptance work
 
 Full reference reconstruction requires correcting costume silhouettes, layered armor, accessories, body proportions and region architecture beyond these fixes, then reviewing every character/NPC/creature against its actual sheet. The new facial parameters are still stylized. Validate controller navigation, load time, memory and sustained frame times on a physical Steam Deck before calling this Steam Deck ready. High-tier terrain and beveled cities need that hardware profile before promotion to a performance claim.
+
+
+## Reconstruction continuation
+
+Three sorcerer assets now include Blender-authored costume components, front reference facial detail and solid hair geometry. See [implementation, current evidence, and remaining fidelity gaps](../../validation/reconstruction-continuation/REVIEW.md). This supersedes the earlier source-only Kiln preparation status; it does not close the complete roster/environment acceptance work.

@@ -1,6 +1,6 @@
 # Kiln sorcerer reconstruction
 
-Status: source prepared; replacement mesh not generated or integrated.
+Status: three-character Blender continuation integrated; full reference-fidelity acceptance remains open. See [continuation review](../../../validation/reconstruction-continuation/REVIEW.md) and `blender-continuation.json`. The external mesh-generation attempt below remains unsuccessful; subsequent work uses direct Blender/Three.js reconstruction.
 
 `source-front.png` is an isolated, generated interpretation of the leftmost front view in `assets/references/reference-091/original.png`. The original sheet remains the authority for identity, proportions, rear equipment and construction. The new image is input for reconstruction, not evidence of runtime quality or an exact crop.
 
