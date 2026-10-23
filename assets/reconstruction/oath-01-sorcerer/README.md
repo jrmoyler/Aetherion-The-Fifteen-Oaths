@@ -4,7 +4,7 @@ Status: source prepared; replacement mesh not generated or integrated.
 
 `source-front.png` is an isolated, generated interpretation of the leftmost front view in `assets/references/reference-091/original.png`. The original sheet remains the authority for identity, proportions, rear equipment and construction. The new image is input for reconstruction, not evidence of runtime quality or an exact crop.
 
-The proposed reconstruction job uses fal.ai Hunyuan 3D Pro image-to-3D, PBR enabled, with a 100,000-face target. Submission was rejected by automatic approval review pending explicit authorization to send the repository-derived character image to fal.ai. No 3D result was produced.
+The proposed reconstruction job uses fal.ai Hunyuan 3D Pro image-to-3D, PBR enabled, with a 100,000-face target. The user explicitly authorized transfer to fal.ai. The subsequent submission failed with HTTP 403 `balance_exhausted` on account `Jr Moyler`. No 3D result was produced. See ANALYSIS.md and assessment.json for the img2threejs checkpoint and outstanding acceptance gates.
 
 ## Integration requirements
 
