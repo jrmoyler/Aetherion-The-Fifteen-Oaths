@@ -82,7 +82,10 @@ function build(ctx) {
   const stack = [];
   const returnFocus = new Map();
   const windows = {};
-  const syncTyping = () => { try { ctx.input?.setTyping?.(stack.length > 0 || !!ui.chat?.focused); } catch { /* ignore */ } };
+  const syncTyping = () => {
+    try { ctx.input?.setTyping?.(stack.length > 0 || !!ui.chat?.focused); } catch { /* ignore */ }
+    ctx.bus.emit('ui:pause', { paused: gs.inGame && stack.length > 0, reason: stack.at(-1) || null });
+  };
   ui.openWindow = (name) => {
     const w = windows[name]; if (!w) return;
     if (stack.includes(name)) return;
@@ -129,7 +132,7 @@ function build(ctx) {
   hudLayer.append(hud.el);
   if (touch) hudLayer.append(touch.ctrl);
   hudLayer.append(dialogs.death);
-  const guide = createFieldGuide(ui);
+  const guide = createFieldGuide(ui); ui.guide = guide;
   // Keep expandable help panels in document flow on touch screens.
   if (touchMode) hud.el.append(h('div', { class: 'ae-help-dock' }, quests.el, guide.el));
   else hud.el.append(guide.el);
@@ -158,7 +161,7 @@ function build(ctx) {
   const settings = createSettings(ui);
   windows.map = { win: worldmap.win, onOpen: worldmap.onOpen };
   windows.character = { win: charpanel.win, onOpen: charpanel.onOpen };
-  windows.settings = { win: settings.win };
+  windows.settings = { win: settings.win, onOpen: settings.onOpen };
   windows.dialog = { win: dialogs.win };
   winLayer.append(scrim, worldmap.win, charpanel.win, settings.win, dialogs.win);
   try { ui.social = createSocial(ui); } catch (err) { console.warn('[ui] social UI unavailable', err); }
@@ -191,7 +194,7 @@ function build(ctx) {
   try {
     ctx.addUpdate?.((dt) => {
       if (!gs.inGame) return;
-      const now = performance.now();
+      const now = ctx.gameplayNow?.() ?? performance.now();
       try { hud.update(dt, now); } catch (e) { console.warn('[ui] hud', e); }
       try { floaters.update(dt); } catch (e) { console.warn('[ui] floaters', e); }
       minimap.update(now);
@@ -219,7 +222,10 @@ function build(ctx) {
   // While a window is open the game keys are suspended (Tab navigates focus, typing is safe);
   // Escape / M / I / B / J still toggle windows here.
   addEventListener('keydown', (e) => {
-    if (!stack.length) return;
+    if (!stack.length) {
+      if (gs.inGame && !chat.focused && e.key === '?') { e.preventDefault(); guide.toggle(); }
+      return;
+    }
     const topWindow = windows[stack[stack.length - 1]]?.win;
     if (e.code === 'Tab' && topWindow) {
       const items = [...topWindow.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex="0"]')].filter(el => el.getClientRects().length);

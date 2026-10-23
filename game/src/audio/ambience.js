@@ -196,6 +196,7 @@ export function createAmbience(E) {
   }
 
   return {
+    dispose() { bed?.stop(); weather?.stop(); bed = null; weather = null; },
     setBiome(name) {
       if (!E.ready || bed?.name === name) return;
       bed?.stop(); bed = startBed(name);

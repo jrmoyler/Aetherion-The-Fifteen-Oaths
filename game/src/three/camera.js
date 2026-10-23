@@ -38,8 +38,9 @@ export class OrbitCamera {
     const canvas = ctx.canvas;
     if (canvas?.addEventListener) {
       const listen = (target, type, fn) => { target.addEventListener(type, fn); this.cleanup.push(() => target.removeEventListener(type, fn)); };
-      listen(canvas, 'pointerdown', (e) => { if (e.pointerType === 'mouse' && e.button === 0) this.drag = { x: e.clientX, y: e.clientY, moved: false }; });
+      listen(canvas, 'pointerdown', (e) => { if (ctx.input?.gameplayEnabled !== false && e.pointerType === 'mouse' && e.button === 0) this.drag = { x: e.clientX, y: e.clientY, moved: false }; });
       listen(globalThis, 'pointermove', (e) => {
+        if (ctx.input?.gameplayEnabled === false) { this.drag = null; return; }
         if (!this.drag || e.pointerType !== 'mouse' || document.pointerLockElement === canvas) return;
         const dx = e.clientX - this.drag.x, dy = e.clientY - this.drag.y;
         if (!this.drag.moved && Math.hypot(dx, dy) < 4) return;
@@ -80,8 +81,11 @@ export class OrbitCamera {
   update(dt) {
     const ctx = this.ctx, st = ctx.input?.state;
     this.time += dt;
+    if (ctx.input?.gameplayEnabled === false) this.drag = null;
     const a = this.target;
-    if (st) {
+    if (st && ctx.input?.gameplayEnabled !== false) {
+      // The opening orbit is presentation only: the first player intent immediately owns the camera.
+      if (this.intro && (st.moveX || st.moveY || st.jump || st.mouseLeft)) this.intro = null;
       if (st.lookDX || st.lookDY) {
         const touch = !st.pointerLocked && !st.mouseRight && !this.drag;
         this.addLook(st.lookDX, st.lookDY, touch ? CAM.touchSens : CAM.sens);

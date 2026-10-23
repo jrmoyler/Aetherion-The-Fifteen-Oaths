@@ -1,8 +1,8 @@
 // Runs the authoritative shared/sim locally (offline mode) for exactly one human client.
 // Used by simWorker.js (preferred, off the main thread) and by localServer.js as an in-thread
 // fallback. Messages are identical to the online server's.
-import { createSim } from '@shared/sim/index.js';
-import { TICK_HZ } from '@shared/protocol.js';
+import { createSim } from '../../../shared/sim/index.js';
+import { TICK_HZ } from '../../../shared/protocol.js';
 
 export const LOCAL_PLAYER_ID = 'c1';
 
@@ -17,13 +17,14 @@ export function createHost({ seed = 15015, bots = 30, emit }) {
   const now = () => (globalThis.performance ? performance.now() : Date.now());
   let next = now();
   let running = true;
+  let paused = false;
   let saveAt = now() + 15000;
   let timer = null;
 
   function loop() {
     if (!running) return;
     try {
-      const out = sim.tick(dt);
+      const out = paused ? [] : sim.tick(dt);
       let batch = null;
       for (let i = 0; i < out.length; i++) {
         const o = out[i];
@@ -43,6 +44,13 @@ export function createHost({ seed = 15015, bots = 30, emit }) {
 
   function receive(msg) {
     if (!msg || typeof msg !== 'object') return;
+    if (msg.t === '__pause') {
+      paused = !!msg.paused;
+      emit([{ t: '__paused', paused, time: sim.serverTime() }]);
+      return;
+    }
+    // Pausing must not allow queued movement/casts or inventory changes to resolve.
+    if (paused && msg.t !== 'ping') return;
     if (msg.t === 'hello') {
       const saved = msg.__saved ?? null;
       delete msg.__saved;
@@ -55,5 +63,5 @@ export function createHost({ seed = 15015, bots = 30, emit }) {
 
   function stop() { running = false; clearTimeout(timer); try { sim.saveAll(); } catch { /* ignore */ } }
 
-  return { receive, stop, sim };
+  return { receive, stop, sim, get paused() { return paused; } };
 }

@@ -1,18 +1,29 @@
 // Quest tracker fed by `quest` events and PlayerState.quests.
 import { h, esc } from './dom.js';
 import { ICONS } from './icons.js';
+import { objectiveGuidance } from './questNavigation.js';
 
 export function createQuests(ui) {
   const { gs } = ui;
   const count = h('span', { class: 'n ae-num' }, '0');
   const head = h('button', { class: 'ae-quests__head', type: 'button', 'aria-expanded': 'false', html: `${ICONS.quest}<span>Covenant Tasks</span>` }, count);
   const list = h('div', { role: 'list' });
-  const el = h('div', { class: 'ae-quests is-collapsed', hidden: true }, head, list);
+  const destination = h('span');
+  const bearing = h('span', { class: 'ae-objective__bearing' });
+  const objective = h('div', { class: 'ae-objective', hidden: true }, h('small', null, 'TRACKED OBJECTIVE'), destination, bearing);
+  const el = h('div', { class: 'ae-quests is-collapsed', hidden: true }, head, objective, list);
   head.addEventListener('click', () => {
     const c = el.classList.toggle('is-collapsed');
     head.setAttribute('aria-expanded', c ? 'false' : 'true'); ui.sfx('click');
   });
   const els = new Map();
+  let tracked = null, elapsed = 0;
+  ui.ctx.addUpdate?.((dt) => {
+    if (!gs.inGame || !tracked) return;
+    elapsed += dt; if (elapsed < .2) return; elapsed = 0;
+    const guidance = objectiveGuidance(gs.pos(), gs.heading(), tracked.waypoint);
+    bearing.textContent = guidance?.label || '';
+  }, 61);
 
   function render(q) {
     let row = els.get(q.id);
@@ -29,6 +40,9 @@ export function createQuests(ui) {
   function refresh() {
     for (const q of gs.quests.values()) render(q);
     for (const [id, row] of els) if (!gs.quests.has(id)) { row.el.remove(); els.delete(id); }
+    tracked = [...gs.quests.values()].find(q => !q.done && Number.isFinite(q.waypoint?.x) && Number.isFinite(q.waypoint?.z));
+    objective.hidden = !tracked;
+    destination.textContent = tracked ? (tracked.waypoint.label || tracked.title) : '';
     count.textContent = String([...gs.quests.values()].filter((q) => !q.done).length);
     el.hidden = gs.quests.size === 0;
   }

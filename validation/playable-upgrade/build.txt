@@ -1,0 +1,46 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aetherion-mmo-client@1.0.0 build
+> vite build
+
+vite v6.4.4 building for production...
+transforming...
+✓ 957 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                      2.26 kB │ gzip:     0.89 kB
+dist/review.html                                     2.80 kB │ gzip:     1.27 kB
+dist/assets/terrainWorker-By43PcGp.js               21.15 kB
+dist/assets/simWorker-D5OBRp6x.js                  246.74 kB
+dist/assets/dummy-CPoF9Pna.fbx                   1,424.29 kB
+dist/assets/spruit_sunrise-uUA1djzx.hdr          5,934.21 kB
+dist/assets/game-CNLj2Br3.css                       82.78 kB │ gzip:    17.29 kB
+dist/assets/SkeletonUtils-BCVmgslc.js                0.45 kB │ gzip:     0.27 kB
+dist/assets/math-x2Gs4Wje.js                         0.76 kB │ gzip:     0.43 kB
+dist/assets/PhoenixRig-Cu8aFykL.js                   2.39 kB │ gzip:     1.24 kB
+dist/assets/character-preview-BdKCy_32.js            3.25 kB │ gzip:     1.73 kB
+dist/assets/workbox-window.prod.es5-BBnX5xw4.js      5.75 kB │ gzip:     2.36 kB
+dist/assets/shaderPatch-Bpn1weSc.js                  6.53 kB │ gzip:     2.16 kB
+dist/assets/ReliquaryRig-BFmUzsbA.js                17.17 kB │ gzip:     6.40 kB
+dist/assets/OrbitControls-BZ7uykV0.js               19.11 kB │ gzip:     4.34 kB
+dist/assets/math-Cx_EYL3u.js                        19.18 kB │ gzip:     6.73 kB
+dist/assets/FresnelAura-_IDr5OvQ.js                 39.56 kB │ gzip:    13.79 kB
+dist/assets/review-DuX27Kmr.js                      56.33 kB │ gzip:    19.71 kB
+dist/assets/postprocessing-D8X9xOIa.js             246.37 kB │ gzip:    63.45 kB
+dist/assets/linear-BOgHtVkg.js                     262.26 kB │ gzip:    75.87 kB
+dist/assets/linear-ext-C_dNVlbE.js                 392.49 kB │ gzip:   105.75 kB
+dist/assets/casting-Bn4dPfpg.js                    506.92 kB │ gzip:   151.00 kB
+dist/assets/collective-DCbFlQ6D.js                 554.75 kB │ gzip:   164.12 kB
+dist/assets/handcast-DJTPaEDv.js                   588.17 kB │ gzip:   161.71 kB
+dist/assets/game-tmcwGNCy.js                       663.94 kB │ gzip:   245.55 kB
+dist/assets/three.module-5V6b_Rbz.js               705.01 kB │ gzip:   181.89 kB
+dist/assets/linear-extended-DPwguz9R.js            765.78 kB │ gzip:   220.71 kB
+dist/assets/sandbox-wtbDGRFj.js                  4,639.45 kB │ gzip: 1,326.99 kB
+✓ built in 21.66s
+
+PWA v2.0.0
+mode      generateSW
+precache  57 entries (24558.19 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-1320db52.js

@@ -34,7 +34,7 @@ export async function init(ctx) {
   const state = {
     mode: forceOffline ? 'offline' : 'online',
     selfId: null, rtt: 0, offset: 0, offsetSamples: 0, connected: false,
-    you: null, welcome: null, transport: null,
+    you: null, welcome: null, transport: null, paused: false, localTime: null, localStamp: 0,
   };
   const ents = new Map();
   // parties / duels / trades / PvP flag mirror (social fields on entities - pvp, party, duel - merge like any other delta)
@@ -75,7 +75,12 @@ export async function init(ctx) {
     if (!m || typeof m !== 'object') return;
     if (!state.welcome && m.t !== 'welcome' && m.t !== 'pong' && m.t !== 'error') return; // pre-join broadcasts
     switch (m.t) {
-      case 'snap': hydrate(m); break;
+      case 'snap':
+        if (state.mode === 'offline') { state.localTime = m.time; state.localStamp = performance.now(); }
+        hydrate(m); break;
+      case '__paused':
+        state.localTime = m.time; state.localStamp = performance.now();
+        break;
       case 'ev': if (m.e && SOCIAL_EV.has(m.e.type)) { try { social.onEvent(m.e); } catch (err) { console.warn('[net] social', err); } } bus.emit('net:ev', m.e); break;
       case 'you': {
         // partial updates omit unchanged inventory/equipment/quests/discovered: merge into the full state
@@ -86,6 +91,7 @@ export async function init(ctx) {
         break;
       }
       case 'welcome': {
+        if (state.mode === 'offline') { state.localTime = m.serverTime; state.localStamp = performance.now(); }
         state.selfId = m.id; state.welcome = m; state.you = m.you; token = m.token;
         LS.set(tokenKey(), m.token);
         ents.clear();
@@ -234,7 +240,18 @@ export async function init(ctx) {
     get welcome() { return state.welcome; },
     get entities() { return ents; },
     get transport() { return state.transport; },
-    serverTime: () => Date.now() + state.offset,
+    get paused() { return state.paused; },
+    setPaused(value) {
+      const next = state.mode === 'offline' && !!value && !!local;
+      if (next === state.paused) return;
+      state.localTime = api.serverTime(); state.localStamp = performance.now();
+      state.paused = next;
+      local?.send({ t: '__pause', paused: next });
+      bus.emit('game:paused', { paused: next, mode: state.mode });
+    },
+    serverTime: () => state.mode === 'offline' && state.localTime !== null
+      ? state.localTime + (state.paused ? 0 : performance.now() - state.localStamp)
+      : Date.now() + state.offset,
     /** Social state mirror (see net/social.js): party, invites, duel, trade, pvp flag, war zones. */
     social,
     /** 'self'|'party'|'duel'|'hostile'|'neutral' for players, null otherwise. */
@@ -278,6 +295,7 @@ export async function init(ctx) {
     },
 
     send(msg) {
+      if (state.paused && msg.t !== 'ping') return false;
       if (local) { local.send(msg); return true; }
       if (ws && ws.readyState === 1) { ws.send(JSON.stringify(msg)); return true; }
       return false;

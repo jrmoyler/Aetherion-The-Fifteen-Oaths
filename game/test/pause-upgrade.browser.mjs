@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import {writeFile} from 'node:fs/promises';
+import {fileURLToPath} from 'node:url';
+import {preview} from 'vite';
+import {chromium} from 'playwright';
+const root=fileURLToPath(new URL('../',import.meta.url));
+let server,browser;
+try{
+ server=await preview({root,preview:{host:'127.0.0.1',port:0}});
+ browser=await chromium.launch({executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE,headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ const page=await browser.newPage({viewport:{width:1280,height:800}}),errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ page.on('console',m=>{if(m.type()==='error')errors.push(m.text())});
+ await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/?offline=1&q=low&bots=0&oath=oath-09&cls=ninja&name=PauseReview`);
+ await page.waitForFunction(()=>window.__aetherion?.ui?.state?.inGame,null,{timeout:120000});
+ await page.getByRole('button',{name:'Menu Esc'}).click();
+ await page.waitForFunction(()=>window.__aetherion.net.paused);
+ await page.waitForTimeout(250);
+ const before=await page.evaluate(()=>{const c=window.__aetherion;return {server:c.net.serverTime(),clock:c.clock.time,pos:c.actors.player.position.toArray()}});
+ await page.keyboard.press('Digit1');await page.keyboard.down('KeyW');await page.waitForTimeout(650);await page.keyboard.up('KeyW');
+ const after=await page.evaluate(()=>{const c=window.__aetherion;return {server:c.net.serverTime(),clock:c.clock.time,pos:c.actors.player.position.toArray()}});
+ assert.deepEqual(after,before,'paused world and authoritative clock must freeze');
+ assert.match(await page.locator('.ae-pause-status').textContent(),/paused/i);
+ await page.screenshot({path:'validation/playable-upgrade/pause.png'});
+ await page.getByRole('button',{name:'Return to world'}).click();
+ await page.waitForFunction(()=>!window.__aetherion.net.paused);
+ await page.keyboard.down('KeyW');await page.waitForTimeout(1500);await page.keyboard.up('KeyW');
+ const resumed=await page.evaluate(()=>{const c=window.__aetherion;return {clock:c.clock.time,pos:c.actors.player.position.toArray(),enabled:c.input.gameplayEnabled}});
+ assert.ok(resumed.clock>before.clock);assert.equal(resumed.enabled,true);
+ assert.ok(Math.hypot(resumed.pos[0]-before.pos[0],resumed.pos[2]-before.pos[2])>.1);
+ assert.deepEqual(errors,[]);
+ const report={before,after,resumed,errors};await writeFile('validation/playable-upgrade/pause.json',JSON.stringify(report,null,2));console.log(report);
+}finally{await browser?.close();if(server)await new Promise(resolve=>server.httpServer.close(resolve));}

@@ -3,19 +3,37 @@ const R = (a, b) => a + Math.random() * (b - a);
 
 export function createSfx(E) {
   const out = () => E.sfx;
+  const voices = new Set();
+  function attach(dest, source, nodes) {
+    dest._sources?.add(source);
+    source.onended = () => {
+      for (const node of [source, ...nodes]) { try { node.disconnect(); } catch {} }
+      dest._sources?.delete(source);
+      if (dest._sources?.size === 0) dest._dispose?.();
+    };
+  }
 
   function chain(dest, pan = 0, gain = 1, wet = 0) {
+    while (voices.size >= 32) voices.values().next().value._dispose();
     const g = E.ac.createGain(); g.gain.value = gain;
+    const nodes = []; g._sources = new Set();
+    g._dispose = () => {
+      for (const source of g._sources) { try { source.stop(); source.disconnect(); } catch {} }
+      g._sources.clear();
+      for (const node of [g, ...nodes]) { try { node.disconnect(); } catch {} }
+      voices.delete(g);
+    };
+    voices.add(g);
     const p = E.ac.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, pan));
-    g.connect(p); p.connect(dest || out());
-    if (wet > 0) { const w = E.ac.createGain(); w.gain.value = wet; g.connect(w); w.connect(E.reverbSend); }
+    g.connect(p); p.connect(dest || out()); nodes.push(p);
+    if (wet > 0) { const w = E.ac.createGain(); w.gain.value = wet; g.connect(w); w.connect(E.sfxSend || E.reverbSend); nodes.push(w); }
     return g;
   }
   function tone(dest, { type = 'sine', f0, f1 = f0, t = E.now(), a = 0.005, d = 0.2, g = 0.2, det = 0, curve = 'exp' }) {
     const o = E.ac.createOscillator(); o.type = type; o.detune.value = det; o.frequency.setValueAtTime(f0, t);
     if (f1 !== f0) curve === 'exp' ? o.frequency.exponentialRampToValueAtTime(Math.max(1, f1), t + a + d) : o.frequency.linearRampToValueAtTime(f1, t + a + d);
     const e = E.ac.createGain(); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(g, t + a); e.gain.exponentialRampToValueAtTime(0.0001, t + a + d);
-    o.connect(e); e.connect(dest); o.start(t); o.stop(t + a + d + 0.05);
+    attach(dest, o, [e]); o.connect(e); e.connect(dest); o.start(t); o.stop(t + a + d + 0.05);
     return o;
   }
   function noise(dest, { kind = 'white', type = 'bandpass', f0 = 1000, f1 = f0, q = 1, t = E.now(), a = 0.005, d = 0.2, g = 0.2 }) {
@@ -23,14 +41,14 @@ export function createSfx(E) {
     const f = E.ac.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, t);
     if (f1 !== f0) f.frequency.exponentialRampToValueAtTime(Math.max(20, f1), t + a + d);
     const e = E.ac.createGain(); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(g, t + a); e.gain.exponentialRampToValueAtTime(0.0001, t + a + d);
-    s.connect(f); f.connect(e); e.connect(dest); s.start(t, Math.random() * 2); s.stop(t + a + d + 0.05);
+    attach(dest, s, [f, e]); s.connect(f); f.connect(e); e.connect(dest); s.start(t, Math.random() * 2); s.stop(t + a + d + 0.05);
   }
   function fm(dest, { f, ratio = 2, index = 2, t = E.now(), a = 0.005, d = 0.5, g = 0.15 }) {
     const c = E.ac.createOscillator(); const m = E.ac.createOscillator(); const mg = E.ac.createGain();
     c.frequency.value = f; m.frequency.value = f * ratio; mg.gain.setValueAtTime(f * index, t); mg.gain.exponentialRampToValueAtTime(f * 0.05, t + d);
     m.connect(mg); mg.connect(c.frequency);
     const e = E.ac.createGain(); e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(g, t + a); e.gain.exponentialRampToValueAtTime(0.0001, t + a + d);
-    c.connect(e); e.connect(dest); c.start(t); m.start(t); c.stop(t + a + d + 0.05); m.stop(t + a + d + 0.05);
+    attach(dest, c, [e]); attach(dest, m, [mg]); c.connect(e); e.connect(dest); c.start(t); m.start(t); c.stop(t + a + d + 0.05); m.stop(t + a + d + 0.05);
   }
   const crackle = (dest, n, t, dur, f = 3000, g = 0.08) => { for (let i = 0; i < n; i++) noise(dest, { f0: f * R(0.7, 1.4), q: 4, t: t + Math.random() * dur, a: 0.001, d: 0.015, g: g * R(0.5, 1) }); };
 
@@ -90,6 +108,8 @@ export function createSfx(E) {
   }
 
   return {
+    dispose() { for (const voice of [...voices]) voice._dispose(); },
+    get activeVoices() { return voices.size; },
     ui(name) { if (!E.ready) return; try { UI[name]?.(); } catch { /* ignore */ } },
     cast(element, pos, listener, scale = 1) {
       if (!E.ready) return; const s = spatial(pos, listener); if (!s) return;

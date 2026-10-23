@@ -38,13 +38,40 @@ function nearestNeighbour(S, sanct) {
   return best;
 }
 
-export const questView = (q) => ({ id: q.id, title: q.title, text: q.text, progress: q.progress, goal: q.goal, done: !!q.done, kind: q.kind });
+/** Navigation uses the actual simulation layout, never an estimated city centre. */
+export function questWaypoint(S, p, q) {
+  if (!S || q.done) return null;
+  let point = null, label = '';
+  if (q.kind === 'talk') {
+    const sanctuary = S.sanctuaries.find((s) => s.oathId === q.oath);
+    point = sanctuary?.npcs.find((n) => n.role === q.role);
+    label = q.role === 'oathkeeper' ? OATH_LEADERS[(OATH_BY_ID[q.oath]?.index ?? 1) - 1] : q.role;
+  } else if (q.kind === 'discover') {
+    point = S.sanctuaries.find((s) => s.oathId === q.shrine)?.shrine;
+    label = `${OATH_BY_ID[q.shrine]?.name ?? 'Covenant'} shrine`;
+  } else if (q.kind === 'kill' || q.kind === 'bounty') {
+    const targets = new Set(q.targets ?? []);
+    point = S.lairs?.find((l) => targets.has(l.boss));
+    if (point) label = CREATURES.find((c) => c.id === point.boss)?.name ?? 'Regional lair';
+    else {
+      const camps = (S.camps ?? []).filter((c) => c.members.some((id) => targets.has(id)));
+      // Lead early players toward survivable encounters rather than a nearby high-level camp.
+      const distance = (c) => Math.hypot(c.x - (p?.x ?? 0), c.z - (p?.z ?? 0));
+      camps.sort((a, b) => Math.max(0, a.level - (p?.lvl ?? 1) - 1) - Math.max(0, b.level - (p?.lvl ?? 1) - 1) || distance(a) - distance(b));
+      point = camps[0];
+      label = point ? `${OATH_BY_ID[point.oath]?.name ?? 'Creature'} camp · level ${point.level}` : '';
+    }
+  }
+  return point && Number.isFinite(point.x) && Number.isFinite(point.z) ? { x: point.x, z: point.z, label } : null;
+}
+
+export const questView = (q, S, p) => ({ id: q.id, title: q.title, text: q.text, progress: q.progress, goal: q.goal, done: !!q.done, kind: q.kind, waypoint: questWaypoint(S, p, q) });
 
 export function addQuest(S, p, def) {
   if (!def || p.quests.has(def.id)) return null;
   const q = { ...def, progress: 0, done: false };
   p.quests.set(q.id, q);
-  S.evTo(p, { type: 'quest', id: p.id, quest: questView(q) });
+  S.evTo(p, { type: 'quest', id: p.id, quest: questView(q, S, p) });
   p.youDirty = true; p.saveDirty = true;
   // Discovery is permanent: arriving here after exploration must never strand the chain.
   if (q.kind === 'discover' && p.discovered.has(q.shrine)) progress(S, p, q);
@@ -53,7 +80,7 @@ export function addQuest(S, p, def) {
 
 function complete(S, p, q) {
   q.done = true; q.progress = q.goal;
-  S.evTo(p, { type: 'quest', id: p.id, quest: questView(q) });
+  S.evTo(p, { type: 'quest', id: p.id, quest: questView(q, S, p) });
   const r = q.reward ?? {};
   const xp = Math.round(xpForLevel(p.lvl) * (r.xpf ?? 0.5) * 0.5);
   if (r.gold) p.gold += r.gold;
@@ -80,7 +107,7 @@ function progress(S, p, q, n = 1) {
   if (q.done) return;
   q.progress = Math.min(q.goal, q.progress + n);
   if (q.progress >= q.goal) complete(S, p, q);
-  else { S.evTo(p, { type: 'quest', id: p.id, quest: questView(q) }); p.youDirty = true; p.saveDirty = true; }
+  else { S.evTo(p, { type: 'quest', id: p.id, quest: questView(q, S, p) }); p.youDirty = true; p.saveDirty = true; }
 }
 
 export function onKill(S, p, mob) {
