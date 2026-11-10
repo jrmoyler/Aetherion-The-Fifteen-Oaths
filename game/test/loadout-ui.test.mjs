@@ -58,7 +58,7 @@ test('duplicate draft shows the selected technique stats while equip stays disab
 
 test('grimoire lists every Oath technique once and swaps slots instead of duplicating', () => {
   const { rows, grimoire, actions, requests, ids, oath } = fixture();
-  const tiles = grimoire.children.slice(1).flatMap(group => group.children[1].children);
+  const tiles = grimoire.children.slice(2).flatMap(group => group.children[1].children);
   assert.equal(tiles.length, ABILITIES_BY_OATH[oath].length);
   // The second equipped technique is chosen for slot one: the two trade places.
   const tile = tiles.find(t => t.attrs['data-equipped'] === '1'); tile.onclick();

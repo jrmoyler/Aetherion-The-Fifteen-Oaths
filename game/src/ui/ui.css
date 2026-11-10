@@ -910,3 +910,9 @@
 .ae-tooltip .forge { color:var(--text-2); font-size:12px; }
 .ae-tooltip .act { color:var(--gold); font-size:12px; letter-spacing:.04em; }
 #ui .ae-region-chip[data-ground] { color:var(--gold-2); }
+/* Five slots on one row where there is room, so the grimoire stays in view beneath them. */
+@media(min-width:900px) { .ae-loadout__slots { grid-template-columns:repeat(5,minmax(0,1fr)); gap:8px; } .ae-loadout__slot { padding:9px; } .ae-loadout__slot select { min-height:40px; padding:6px; font-size:13px; } }
+.ae-loadout__slot .ae-loadout__hint { display:none; }
+.ae-loadout > p:first-of-type { margin:6px 0 12px; }
+.ae-loadout__actions { margin-top:12px; }
+.ae-grimoire__held { margin:0; color:var(--text-2); font-size:13px; max-width:760px; }

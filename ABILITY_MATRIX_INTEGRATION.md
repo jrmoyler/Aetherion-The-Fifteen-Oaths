@@ -2,11 +2,11 @@
 
 ## Active game and preserved sandbox are separate integrations
 
-The active Babylon game exposes **150 selectable castables**, ten per Oath, through `shared/abilities.generated.js`. Its inputs are the original 100-entry registry plus `shared/ability-supplement.json` (50 additional catalog entries and complete presets, pinned to `c16da3c978a4815f46273fdcda2252ab48977a53`). On 2026-10-18 all 150 source catalog entries matched the latest upstream catalog exactly; zero IDs were missing. Counts were already 150 before this upgrade.
+The active Three.js game exposes **279 selectable castables** through `shared/abilities.generated.js`: the original 100-entry registry plus `shared/ability-supplement.json` (179 entries: 130 Elemental Codex casts and the 49 Matrix Expansion casts, pinned to `6c0f22f480033aef5cc6077a73e44bf02c36e2a6`). Ability Matrix now sorts casts into 23 elements; canon keeps fifteen Oaths, so the eight newer elements join the Oath that already names them. See [docs/upgrades/MATRIX_BIOME_ARSENAL.md](docs/upgrades/MATRIX_BIOME_ARSENAL.md).
 
-This is a gameplay adaptation: Babylon uses authoritative slot costs, line/zone/self/summon resolution and its own VFX. It does not claim to execute every upstream shader, special mechanic or model. The unchanged Three.js sandbox described below remains the original **100-castable** snapshot. Its adapter and the Linear fissure repair remain intact. The additional 50 presets do not expand that isolated sandbox runtime.
+The game runs the source classes from `runtime/ability-matrix/packs/sandbox/src` at that commit, with authoritative slot costs and line/zone/self/summon resolution in the shared simulation. The preserved sandbox described below remains the original **100-castable** snapshot with its own presets, adapter and Linear fissure repair.
 
-Run `npm run mmo:abilities` after changing the source data, and `node tools/generate-mmo-abilities.mjs --check` to detect stale generated output. Generation rejects duplicate IDs, unknown elements, invalid numeric tuning, mismatched preset identity and unpinned revisions. Generated entries retain their source commit, original aim shape and original minimum range for traceability; source minimum range is metadata, not an additional gameplay constraint.
+Rebuild after changing the source: `node tools/build-ability-supplement.mjs <Ability-Matrix checkout> --expansion`, `npm run mmo:abilities`, `node tools/generate-ability-palettes.mjs`, `node tools/record-ability-source-import.mjs <checkout>`. `node tools/generate-mmo-abilities.mjs --check` detects stale output. Generation rejects duplicate IDs, unknown elements, invalid numeric tuning, mismatched preset identity and unpinned revisions.
 
 ## Preserved sandbox boundary
 

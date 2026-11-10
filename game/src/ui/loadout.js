@@ -29,7 +29,9 @@ export function createLoadout(ui) {
   function drawGrimoire(c, catalog) {
     grimoire.replaceChildren();
     const slotName = activeSlot === 4 ? 'R · Ultimate' : `${activeSlot + 2} · Technique ${activeSlot + 1}`;
-    grimoire.append(h('p', { class: 'ae-grimoire__target' }, `Choosing for slot ${slotName}`));
+    const held = equippedAbilityForSlot(c.oath, c.cls, activeSlot + 1, draft[activeSlot]);
+    grimoire.append(h('p', { class: 'ae-grimoire__target' }, `Choosing for slot ${slotName}`),
+      h('p', { class: 'ae-grimoire__held' }, held ? `${held.name}: ${describe(held, c.cls)}` : ''));
     for (const [name, list] of grouped(catalog)) {
       const grid = h('div', { class: 'ae-grimoire__grid', role: 'group', 'aria-label': `${name} techniques` });
       for (const a of list) {

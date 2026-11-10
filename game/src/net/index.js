@@ -14,6 +14,7 @@
 // Snapshots on the wire are deltas (protocol.js "Snapshot deltas"); this module re-hydrates them so every
 // net:snap carries complete EntityState objects for all entities in the interest radius. Hydrated entity
 // objects are stable (mutated in place across snapshots) until the entity appears in `gone`.
+const PAUSED_MENU_MESSAGES = new Set(['loadout', 'equip', 'unequip']);
 import { PROTOCOL_VERSION } from '@shared/protocol.js';
 import { createLocalServer } from './localServer.js';
 import { createSocialStore } from './social.js';
@@ -295,7 +296,8 @@ export async function init(ctx) {
     },
 
     send(msg) {
-      if (state.paused && msg.t !== 'ping') return false;
+      // The paused offline world still answers character-window changes (see simHost MENU_MESSAGES).
+      if (state.paused && msg.t !== 'ping' && !PAUSED_MENU_MESSAGES.has(msg.t)) return false;
       if (local) { local.send(msg); return true; }
       if (ws && ws.readyState === 1) { ws.send(JSON.stringify(msg)); return true; }
       return false;

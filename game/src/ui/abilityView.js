@@ -27,7 +27,7 @@ export function describe(a, cls) {
       ? `A swift close-quarters strike against your target within ${r(a.range)} m. No mana cost — the rhythm every Ninja returns to.`
       : `A bolt of raw covenant force hurled at a target up to ${r(a.range)} m away. No mana cost.`;
   }
-  if (a.hint) return `${a.hint} ${a.shape === 'self' ? 'Centred on you.' : `Reaches ${r(a.range)} m${a.radius ? `, ${r(a.radius)} m wide` : ''}.`}`;
+  if (a.hint) return `${/[.!?]$/.test(a.hint) ? a.hint : `${a.hint}.`} ${a.shape === 'self' ? 'Centred on you.' : `Reaches ${r(a.range)} m${a.radius ? `, ${r(a.radius)} m wide` : ''}.`}`;
   switch (a.shape) {
     case 'line': return `Unleashes a ${v} line that travels up to ${r(a.range)} m, striking every foe within ${r(a.radius)} m of its path.`;
     case 'zone': return `Calls a ${v} zone of ${r(a.radius)} m radius at a point up to ${r(a.range)} m away, harming all enemies caught inside.`;
