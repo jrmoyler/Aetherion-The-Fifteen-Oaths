@@ -30,7 +30,8 @@ async function startClient() {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: quality.name !== 'low', powerPreference: 'high-performance' });
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = .93;
+  // Without shadow maps every surface is in full sun; a lower exposure keeps pale paving from clipping to white.
+  renderer.toneMappingExposure = quality.shadows ? .93 : .74;
   renderer.shadowMap.enabled = quality.shadows;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   const scene = new THREE.Scene();
