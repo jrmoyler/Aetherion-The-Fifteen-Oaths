@@ -1,5 +1,6 @@
 // actors/ — characters, local controller, camera, remote entities, creatures, NPCs,
 // nameplates, selection ring. API per game/CONTRACTS.md.
+import { slingWeapon, arsenalWeaponOf } from './arsenal.js';
 import { Vector3, Raycaster, Vector2 } from 'three';
 import { OATH_BY_ID, OATHS, CLASSES } from '@shared/oaths.js';
 import { CREATURES, ARCHETYPES } from '@shared/creatures.js';
@@ -78,6 +79,25 @@ function createActors(ctx) {
     actor.ready = tryUpgrade(actor, desc);
     actor.ready.catch(error => { console.error('[actors] asset failure', error); });
   }
+  // Forged gear: the local player carries the weapon they have equipped; other adventurers carry their
+  // discipline's canon piece at the lightest LOD. Creatures and townsfolk carry nothing.
+  let equippedWeapon = null;
+  function carryWeapon(actor) {
+    if (!actor?.body || actor.disposed || actor.kind !== 'player') return;
+    const self = actor === player;
+    const id = arsenalWeaponOf(self ? equippedWeapon : null, actor.oath, actor.cls);
+    if (actor.body.arsenalWeapon === id || actor.body.arsenalPending === id) return;
+    const body = actor.body; body.arsenalPending = id;
+    slingWeapon(body, id, { lod: self && ctx.quality?.name !== 'low' ? 1 : 2, actorRoot: actor.root }).then((handle) => {
+      body.arsenalPending = null;
+      if (!handle) return;
+      if (actor.body !== body || actor.disposed) { handle.dispose(); return; }
+      body.arsenalHandle?.dispose(); body.arsenalHandle = handle;
+      // Followed by setFade/dispose like the rest of the body.
+      handle.holder.traverse((node) => { if (node.isMesh) { node.material = node.material.clone(); body.meshes.push(node); } });
+      body.setFade(self ? 1 : actor.fade ?? 1);
+    });
+  }
   async function tryUpgrade(actor, desc) {
     let url = null;
     if (actor.kind === 'mob') { const arch = actor.creature?.archetype ?? (ARCHETYPES[actor.model] ? actor.model : null); if (arch) url = await assets.creatureUrl(arch, actor.oath ?? actor.creature?.oath); }
@@ -103,6 +123,7 @@ function createActors(ctx) {
       old?.dispose();
       actor.body = nb; actor.bodyUrl = url; actor.radius = nb.radius;
       if (actor === player) { if (controller) controller.actor = player; addShadows(nb); }
+      carryWeapon(actor);
     } catch (e) { console.warn('[actors] GLB swap failed', url, e); if (actor.isSelf) throw e; }
   }
   assets.onChange(() => { api.forEach((a) => { if (!a.bodyUrl) tryUpgrade(a, { kind: a.kind, identity: a.id, oath: a.oath, cls: a.cls, model: a.model, runSpeed: CLASSES[a.cls]?.moveSpeed, noWeapon: a.kind === 'npc' && a.title === 'chronicler' }); }); });
@@ -178,6 +199,7 @@ function createActors(ctx) {
     if (you && player) applyYou(you);
   });
   on('net:you', (m) => { const you = m?.you ?? m; if (you && player) applyYou(you); });
+  on('net:you', (m) => { const weapon = (m?.you ?? m)?.equipment?.weapon; if (weapon === undefined) return; if (weapon?.id !== equippedWeapon?.id) { equippedWeapon = weapon ?? null; if (player) carryWeapon(player); } });
   function applyYou(you) {
     if (you.hp != null) player.hp = you.hp;
     if (you.mhp != null) player.mhp = you.mhp;

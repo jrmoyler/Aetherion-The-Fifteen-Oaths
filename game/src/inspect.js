@@ -20,11 +20,13 @@ body.animator.update(.016);
 for (const m of body.meshes) { const n = m.material?.name ?? ''; if ((q.has('nogear') && n.startsWith('gear')) || (q.has('nohair') && n.startsWith('hair'))) m.visible = false; }
 for (let i = 0; i < 20; i++) body.animator.update(.05);
 root.updateMatrixWorld(true);
+if (q.get('arsenal')) { const { slingWeapon } = await import('./three/arsenal.js'); await slingWeapon(body, `arsenal:${q.get('arsenal')}`, { lod: +(q.get('lod') ?? 1), actorRoot: root }); root.updateMatrixWorld(true); }
 const head = body.groom?.anchor.children[0] ?? body.sockets.head;
 const hp = new THREE.Vector3(); (head ?? root).getWorldPosition(hp);
 const yaw = +(q.get('yaw') ?? .35);
 if (view === 'face') { camera.position.set(hp.x + Math.sin(yaw) * 1.05, hp.y + .05, hp.z + Math.cos(yaw) * 1.05); camera.lookAt(hp.x, hp.y - .01, hp.z); }
 else if (view === 'back') { camera.position.set(hp.x - .5, hp.y + .1, hp.z - 1.2); camera.lookAt(hp.x, hp.y - .03, hp.z); }
+else if (view === 'carry') { camera.position.set(-1.9, 1.5, -3.9); camera.lookAt(0, .95, 0); }
 else { camera.position.set(1.2, 1.3, 4.6); camera.lookAt(0, .95, 0); }
 renderer.render(scene, camera);
 window.__info = { meshes: body.meshes.map(m => ({ name: m.name, mat: m.material.name, map: !!m.material.map, nmap: !!m.material.normalMap, color: m.material.color?.getHexString(), r: m.material.roughness, mt: m.material.metalness, verts: m.geometry.attributes.position.count })), hp: hp.toArray() };

@@ -4,11 +4,13 @@ import { emblemSVG } from './emblems.js';
 import { ICONS, itemIcon, rarityOf } from './icons.js';
 import { OATH_BY_ID, CLASSES } from '@shared/oaths.js';
 import { createLoadout } from './loadout.js';
+import { ARSENAL_WEAPONS, FAMILY_LABEL, arsenalEntry, arsenalLength } from '@shared/arsenal.js';
 import { biomeLabel } from './create.js';
 
-const LEFT = [['head', 'Head'], ['shoulders', 'Shoulders'], ['chest', 'Chest'], ['hands', 'Hands']];
-const RIGHT = [['legs', 'Legs'], ['feet', 'Feet'], ['ring', 'Ring'], ['trinket', 'Trinket']];
-const WEAP = [['mainhand', 'Main'], ['offhand', 'Off']];
+// Slot keys are the simulation's own (shared/sim/data.js GEAR_SLOTS); anything else would never be filled.
+const LEFT = [['head', 'Head'], ['chest', 'Chest'], ['hands', 'Hands']];
+const RIGHT = [['legs', 'Legs'], ['feet', 'Feet'], ['trinket', 'Trinket']];
+const WEAP = [['weapon', 'Weapon']];
 const BAG_SLOTS = 30;
 
 export function createCharPanel(ui) {
@@ -43,22 +45,42 @@ export function createCharPanel(ui) {
   equipmentTab.onclick = () => selectTab(false); loadoutTab.onclick = () => selectTab(true);
   close.addEventListener('click', () => { ui.sfx('close'); ui.closeWindow('character'); });
 
-  function slotEl(item, label) {
+  // What a click does to an item, as the simulation understands it.
+  function actionFor(item, equippedSlot) {
+    if (equippedSlot) return { label: 'Click to unequip', send: { t: 'unequip', slot: equippedSlot } };
+    if (item.kind === 'gear') return { label: 'Click to equip', send: { t: 'equip', item: item.id } };
+    if (item.kind === 'consumable') return { label: 'Click to use', send: { t: 'use', item: item.id } };
+    return null;
+  }
+  function forgedLine(item) {
+    const weapon = ARSENAL_WEAPONS[item.arsenal];
+    if (weapon) return `Forged as ${weapon.name} · ${FAMILY_LABEL[weapon.family]} · ${arsenalLength(item.arsenal).toFixed(2)} m`;
+    const armor = arsenalEntry(item.arsenal);
+    return armor ? `Forged ${armor.slot} pattern ${item.arsenal.slice(-2)}` : '';
+  }
+  function slotEl(item, label, equippedSlot = null) {
     const r = item ? rarityOf(item.rarity) : null;
     const el = h('div', { class: `ae-eq${item ? ' has-item' : ''}`, tabindex: item ? '0' : '-1', style: r ? `--rc:${r.color}` : '', 'aria-label': item ? item.name : `${label} (empty)`,
-      html: item ? itemIcon(item.name, item.type || label) : '' });
+      html: item ? itemIcon(item, label) : '' });
     el.append(h('span', { class: 'lbl' }, label));
     if (item && (item.qty ?? 1) > 1) el.append(h('span', { class: 'qty ae-num' }, item.qty));
     if (item) {
       const showT = () => {
         tip.style.setProperty('--rc', r.color);
         const st = item.stats ? Object.entries(item.stats).map(([k, v]) => `+${v} ${esc(k)}`).join(' · ') : '';
-        tip.innerHTML = `<div class="n">${esc(item.name)}</div><div class="r">${r.label}${item.slot ? ` · ${esc(item.slot)}` : ''}${item.level ? ` · ilvl ${item.level}` : ''}</div>${st ? `<p>${st}</p>` : ''}${item.text ? `<p><i>${esc(item.text)}</i></p>` : ''}`;
+        tip.innerHTML = `<div class="n">${esc(item.name)}</div><div class="r">${r.label}${item.slot ? ` · ${esc(item.slot)}` : ''}${item.lvl ?? item.level ? ` · item level ${item.lvl ?? item.level}` : ''}</div>${st ? `<p>${st}</p>` : ''}${item.text ? `<p><i>${esc(item.text)}</i></p>` : ''}${forgedLine(item) ? `<p class="forge">${esc(forgedLine(item))}</p>` : ''}${actionFor(item, equippedSlot) ? `<p class="act">${actionFor(item, equippedSlot).label}</p>` : ''}`;
         const wr = win.getBoundingClientRect(); const er = el.getBoundingClientRect();
         tip.hidden = false;
         let x = er.right - wr.left + 8; if (x + 260 > wr.width) x = er.left - wr.left - 258;
         tip.style.left = `${x}px`; tip.style.top = `${Math.max(8, er.top - wr.top)}px`;
       };
+      const action = actionFor(item, equippedSlot);
+      if (action) {
+        el.setAttribute('role', 'button'); el.classList.add('is-action');
+        const act = () => { ui.sfx?.('click'); ui.ctx.net?.send?.(action.send); tip.hidden = true; };
+        el.addEventListener('click', act);
+        el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); } });
+      }
       el.addEventListener('mouseenter', showT); el.addEventListener('focus', showT);
       el.addEventListener('mouseleave', () => { tip.hidden = true; }); el.addEventListener('blur', () => { tip.hidden = true; });
     }
@@ -80,9 +102,9 @@ export function createCharPanel(ui) {
     sig = nsig;
     tip.hidden = true;
     colL.innerHTML = ''; colR.innerHTML = ''; weap.innerHTML = '';
-    LEFT.forEach(([k, l]) => colL.append(slotEl(eq[k], l)));
-    RIGHT.forEach(([k, l]) => colR.append(slotEl(eq[k], l)));
-    WEAP.forEach(([k, l]) => weap.append(slotEl(eq[k], l)));
+    LEFT.forEach(([k, l]) => colL.append(slotEl(eq[k], l, eq[k] ? k : null)));
+    RIGHT.forEach(([k, l]) => colR.append(slotEl(eq[k], l, eq[k] ? k : null)));
+    WEAP.forEach(([k, l]) => weap.append(slotEl(eq[k], l, eq[k] ? k : null)));
     fig.innerHTML = `${emblemSVG(o.id, { ring: true })}<div class="t">${esc(o[c.cls]?.title || '')}</div><div class="s">${esc(o.name)}</div><div class="s" style="margin-top:6px;text-transform:none;letter-spacing:.02em;font-size:12px;font-style:italic;padding:0 8px;text-align:center">${esc(o[c.cls]?.weapon || '')}</div>`;
     bag.innerHTML = '';
     const items = Array.isArray(inv) ? inv : Object.values(inv);

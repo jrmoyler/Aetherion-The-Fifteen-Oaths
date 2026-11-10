@@ -2,6 +2,7 @@
 import { OATH_BY_ID, CLASSES, MAX_LEVEL } from '../oaths.js';
 import { RARITIES, GEAR_SLOTS, SLOT_NOUNS, RARITY_ADJ, CONSUMABLES, OATH_LEADERS, RESOURCES } from './data.js';
 import { clamp } from './util.js';
+import { arsenalForGear } from '../arsenal.js';
 
 let uid = 0;
 const nextUid = (rng) => `i${(++uid).toString(36)}${Math.floor(rng() * 1e6).toString(36)}`;
@@ -40,9 +41,12 @@ export function makeGear(rng, { oath, cls, lvl, slot, rarity, rarityBonus = 0 })
     stats.hp = Math.round((6 + L * 3) * k);
     if (r.mul > 1.2) stats[rng() < 0.5 ? 'power' : 'mp'] = Math.round((1 + L * 0.5) * k);
   }
+  const id = nextUid(rng);
   return {
-    id: nextUid(rng), kind: 'gear', slot, name, rarity: r.id, lvl: L, oath: o.id, stats, qty: 1,
+    id, kind: 'gear', slot, name, rarity: r.id, lvl: L, oath: o.id, stats, qty: 1,
     value: Math.round((5 + L * 3) * r.mul * r.mul),
+    // The Arsenal Forge piece this gear is: drives its icon, tooltip and the model the wearer carries.
+    arsenal: arsenalForGear({ slot, oath: o.id, cls, rarity: r.id, seed: id }),
   };
 }
 
