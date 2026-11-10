@@ -12,6 +12,7 @@ import {
   createFigureMaterial,
   createRunMaterial,
   createBraidMaterial,
+  createDialMaterial,
   createWakeMaterial
 } from '../../materials/codex/SecondSelfMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -101,8 +102,13 @@ function syncSystem(p, c, prefix, glow, turb) {
  * with two ribbons of light **braided** round its path behind it and a trail
  * of afterimages, each an instant older and more forgotten than the last.
  * Whatever was marked, it runs straight through. At the end it plants, the
- * afterimages catch up and fold into it, and it goes up in one last heartbeat
- * — lub, dub — two shock rings, a gold shell, and everything near thrown.
+ * afterimages catch up and fold into it, and one last heartbeat goes off —
+ * lub, dub — a clock-face **dial** spreads across the floor under it, a gold
+ * shell, and everything near thrown. Then the linger: the double *stays*, a
+ * solid sunlit figure of gold (dark bronze on its shadow side), turns round to
+ * face you and swells with each heartbeat while the dial's hand jumps
+ * backwards, hour by hour — and it runs out of time, pouring away as sand
+ * from the crown down, a white-hot line eating it to the heels.
  *
  * The caster is never moved. The double is not a copy of the rig either: it
  * is a procedural mannequin of fourteen capsules posed by a run cycle in code,
@@ -111,11 +117,19 @@ function syncSystem(p, c, prefix, glow, turb) {
  * ## Layers (each a folder in the editor)
  *
  *   1. **the figure** (`createFigureMaterial`) — instanced swept capsules,
- *      one per limb, for the double and up to three afterimages. Additive
- *      hollow light: a gold fresnel rim, a dim core, falling time-bands, the
- *      heartbeat in its glow, afterimages eaten by noise.
- *   2. **the run** (`createRunMaterial`) — the floor: the heartbeat's gold
- *      thread and the footprints, analytic off the same path the double runs.
+ *      one per limb, for the double and up to three afterimages. Solid and
+ *      sunlit (depth-writing): a four-stop ramp keyed off `uLightDir` — dark
+ *      bronze → gold → pale tint → white-hot highlight — a gold fresnel rim,
+ *      engraved time-bands, afterimages eaten by noise, and the top-down sand
+ *      dissolve (`uSandY`) for the exit.
+ *   1b. **the dial** (`createDialMaterial`) — a filled dark-bronze clock face
+ *      at the end, radius `dialScale × finaleRadius`, hour wedges, minute
+ *      ticks, a hand that jumps backwards on every heartbeat with a fan of
+ *      swept time behind it, and the dub's front running out across it.
+ *   2. **the run** (`createRunMaterial`) — the floor: a filled, grained
+ *      dark-bronze worn band the width of the stride (premultiplied, so it
+ *      darkens the floor), the heartbeat's gold thread and the footprints,
+ *      analytic off the same path the double runs, and its contact shadow.
  *   3. **the braid** (`createBraidMaterial`) — two camera-facing ribbons
  *      twisting round the path behind the double.
  *   4. **particles** — gold motes shed off the figure (they barely drift:
@@ -190,14 +204,25 @@ export class SecondSelfAbility extends Ability {
 
     /* ---- 5: the wake ---- */
     this.quadGeometry = createQuadGeometry();
+
+    /* ---- 6: the dial at the end of the line ---- */
+    this.dialMaterial = createDialMaterial();
+    this.dial = this._mesh(this.quadGeometry, this.dialMaterial, LAYER.VFX, 3);
+    this._dialState = {
+      center: new Vector3(), fwd: new Vector3(), right: new Vector3(), radius: 3,
+      open: 0, fade: 1, hand: 0, wave: 0, beat: 0, seed: 0
+    };
+    this._hand = 0;
+    this._sandIndex = 0;
+
     this.wakeMaterial = createWakeMaterial();
     this.wake = this._mesh(this.quadGeometry, this.wakeMaterial, LAYER.DISTORTION, 0);
 
     this._path = { origin: new Vector3(), dir: new Vector3(), side: new Vector3(), length: 1 };
-    this._runState = { origin: null, dir: null, side: null, length: 1, front: 0, double: 0, speed: 10, beat: 0, fade: 1, seed: 0 };
+    this._runState = { origin: null, dir: null, side: null, length: 1, front: 0, double: 0, speed: 10, beat: 0, fade: 1, seed: 0, shadow: 0 };
     this._braidState = { origin: null, dir: null, side: null, length: 1, head: 0, phase: 0, beat: 0, fade: 1, seed: 0 };
     this._wakeState = { center: new Vector3(), size: 1.6, ripple: 0, shock: 0, beat: 0 };
-    this._figureState = { beat: 0, flare: 0 };
+    this._figureState = { beat: 0, flare: 0, sandY: 1e3 };
     this._look = { color: '#000000', rimColor: '#000000', rimEmissive: 0, edgeColor: '#000000', edgeEmissive: 0, edgeWidth: 0.05 };
 
     this._chest = new Vector3();
@@ -343,7 +368,7 @@ export class SecondSelfAbility extends Ability {
    * the feet land where the floor shader drew the footprints. `run` 0..1
    * blends from standing to running; `rise` lifts the whole figure.
    */
-  _pose(along, run, rise, lateral) {
+  _pose(along, run, rise, lateral, yaw = 0) {
     const c = settings[ID];
     const s = c.figureHeight / 1.85;
     this._pathPoint(along, _root);
@@ -354,6 +379,12 @@ export class SecondSelfAbility extends Ability {
     if (_f.lengthSq() < 1e-6) _f.copy(this.direction);
     _f.normalize();
     _s.crossVectors(_f, _up).normalize();
+    if (yaw !== 0) {
+      // Turn about the vertical: f' = f cos + (up × f) sin, and up × f = −s.
+      _a.copy(_f).multiplyScalar(Math.cos(yaw)).addScaledVector(_s, -Math.sin(yaw));
+      _f.copy(_a).normalize();
+      _s.crossVectors(_f, _up).normalize();
+    }
 
     const phase = (along / Math.max(0.2, c.stride * s)) * TAU;
     const lean = c.lean * run;
@@ -446,6 +477,8 @@ export class SecondSelfAbility extends Ability {
     this._stepIndex = 0;
     this._shockT = -1;
     this._fadeK = 0;
+    this._hand = 0;
+    this._sandIndex = 0;
 
     const p = this._path;
     p.origin.copy(this.origin);
@@ -467,6 +500,8 @@ export class SecondSelfAbility extends Ability {
     this.braids[0].visible = true;
     this.braids[1].visible = true;
     this.wake.visible = true;
+    this.dial.visible = false;
+    this._dialState.seed = this._seed;
     this._update(0);
   }
 
@@ -531,18 +566,32 @@ export class SecondSelfAbility extends Ability {
     const fk = this._arrived ? saturate(this._finaleT / finaleLen) : 0;
     const plant = this._arrived ? 1 - smoothstep(0, 0.15, this._finaleT) : 1;
     const run = smoothstep(0, 0.8, this._along) * plant;
-    const dissolve = smoothstep(0.35, 1, fk);
-    const fade = emerge * (1 - dissolve) * (1 - this._fadeK);
-    const rise = c.finaleRise * Easing.inQuad(fk);
-    const flare = this._arrived ? Math.exp(-this._finaleT * 6) + smoothstep(0.2, 1, fk) : 0;
+    // The linger: it stands where it stopped, turns back to face you, and
+    // only then runs out of time — poured away as sand from the crown down.
+    // The sand is keyed off the time since it arrived *and* the fade phase,
+    // so the figure is always fully gone by the time the cast ends.
+    const hold = Math.max(0, c.lingerHold * g.lifetime);
+    const sandLen = Math.max(0.05, c.sandTime * g.lifetime);
+    const sand = this._arrived
+      ? Math.max(smoothstep(hold, hold + sandLen, this._finaleT), smoothstep(0.35, 0.95, this._fadeK))
+      : 0;
+    const fade = emerge * (sand >= 0.999 ? 0 : 1);
+    const rise = c.finaleRise * Easing.inQuad(sand);
+    const flare = this._arrived ? Math.exp(-this._finaleT * 6) + 0.6 * Math.exp(-Math.max(0, this._finaleT - c.dubDelay) * 7) * (this._dub ? 1 : 0) : 0;
+    const turnStart = c.dubDelay + 0.08;
+    const yaw = this._arrived ? Math.PI * c.turnBack * Easing.inOutCubic(smoothstep(turnStart, turnStart + Math.max(0.05, c.turnTime), this._finaleT)) : 0;
+    const breathe = this._arrived ? 1 + c.lingerPulse * this._beat * (1 - sand) : 1;
 
     // At the start it is still inside the caster, sliding out to the side.
     const emergeLat = -c.stepOut * (1 - emerge);
-    this._pose(this._along, run, rise, emergeLat);
-    this._writeFigure(0, fade, 1 + 0.25 * fk);
+    this._pose(this._along, run, rise, emergeLat, yaw);
+    this._writeFigure(0, fade, breathe);
     this._chest.copy(_J[J.chest]);
     this._fwd.copy(_f);
     this._figures = fade > 0.01 ? 1 : 0;
+    // Where the sand line is: above the crown when whole, below the heels when gone.
+    const crown = _J[J.head].y + 0.2 * (c.figureHeight / 1.85) * c.figureBulk;
+    const sandY = sand <= 0 ? 1e3 : lerp(crown + 0.1, -0.15, sand);
 
     /* the afterimages: the same figure, earlier — they catch up once it stops */
     const echoes = Math.min(MAX_ECHOES, Math.max(0, Math.round(c.echoes)));
@@ -569,6 +618,7 @@ export class SecondSelfAbility extends Ability {
     const fs = this._figureState;
     fs.beat = this._beat;
     fs.flare = flare;
+    fs.sandY = sandY;
     this.figureMaterial.userData.sync(fs);
 
     const front = Math.min(L, this.front);
@@ -579,7 +629,32 @@ export class SecondSelfAbility extends Ability {
     rs.speed = speed;
     rs.beat = this._beat;
     rs.fade = 1 - smoothstep(0.3, 1, this._fadeK);
+    rs.shadow = fade * (1 - sand) * smoothstep(0, 0.3, this._raw);
     this.runMaterial.userData.sync(rs);
+
+    /* the dial: opens on the lub, rewinds through the linger */
+    const ds = this._dialState;
+    if (this._arrived) {
+      const tick = 60 / Math.max(10, c.bpm);
+      // The hand runs backwards, jumping on every heartbeat.
+      const beats = this._finaleT / tick;
+      const jump = Math.floor(beats) + smoothstep(0, 0.25, beats - Math.floor(beats));
+      this._hand = -jump * TAU * c.dialSweep / Math.max(1, Math.round(c.dialTicks));
+      ds.center.copy(this._end);
+      ds.fwd.copy(this.direction).negate();
+      ds.right.copy(this.side).negate();
+      ds.radius = c.dialScale * c.finaleRadius;
+      ds.open = Easing.outCubic(saturate(this._finaleT / Math.max(0.05, c.dialOpen))) * 1.05;
+      ds.fade = 1 - smoothstep(0.45, 1, this._fadeK);
+      ds.hand = this._hand;
+      ds.wave = this._dub ? saturate((this._finaleT - c.dubDelay) / 0.55) : 0;
+      if (ds.wave >= 1) ds.wave = 0;
+      ds.beat = this._beat;
+      this.dialMaterial.userData.sync(ds);
+      this.dial.visible = ds.fade > 0.005;
+    } else {
+      this.dial.visible = false;
+    }
 
     const bs = this._braidState;
     bs.length = L;
@@ -628,8 +703,9 @@ export class SecondSelfAbility extends Ability {
     }
 
     /* effects off the double */
+    if (sand > 0 && sand < 1) this._sandFx(dt, sandY);
     if (fade > 0.05) {
-      this._moteFx(dt, fade);
+      this._moteFx(dt, fade * (1 - sand));
       if (beatIndex !== this._beatIndex && !this._arrived) this._ringFx(fade);
       this._footfall(prevAlong, run);
     }
@@ -681,6 +757,40 @@ export class SecondSelfAbility extends Ability {
       _emit.position = _pos;
       _emit.radius = R[k];
       this.motes.emit(1, _emit);
+    }
+  }
+
+  /** Sand pouring off the dissolve line as the double runs out of time. */
+  _sandFx(dt, sandY) {
+    const c = settings[ID];
+    const g = settings.global;
+    const want = c.sandRate * dt * g.particleCount;
+    this._sandIndex += want;
+    let n = Math.floor(this._sandIndex);
+    this._sandIndex -= n;
+    if (n <= 0) return;
+    const A = this._aA.array;
+    const B = this._aB.array;
+    const R = this._aR.array;
+    this._resetEmit();
+    _emit.direction = _up;
+    _emit.speed = 0.4;
+    _emit.spread = 1.5;
+    _emit.size = c.sparkSize;
+    _emit.life = c.sandLife;
+    for (let tries = 0; tries < n * 6 && n > 0; tries++) {
+      const k = Math.floor(Math.random() * SEGS);
+      const ay = A[k * 3 + 1];
+      const by = B[k * 3 + 1];
+      const lo = Math.min(ay, by) - R[k];
+      const hi = Math.max(ay, by) + R[k];
+      if (sandY < lo || sandY > hi) continue;
+      const t = Math.abs(by - ay) > 1e-3 ? saturate((sandY - ay) / (by - ay)) : Math.random();
+      _pos.set(lerp(A[k * 3], B[k * 3], t), sandY, lerp(A[k * 3 + 2], B[k * 3 + 2], t));
+      _emit.position = _pos;
+      _emit.radius = R[k];
+      this.sparks.emit(1, _emit);
+      n--;
     }
   }
 
@@ -798,17 +908,10 @@ export class SecondSelfAbility extends Ability {
       radius: c.shockRadius * 0.6 * power,
       life: 0.5,
       width: 0.06,
-      intensity: 1,
+      intensity: c.shockIntensity,
       colorA: getColor(c.colorShock),
       colorB: getColor(c.colorBurstA)
     });
-    this._resetEmit();
-    _emit.position = this._chest;
-    _emit.size = c.ringSize * 2;
-    _emit.sizeVariance = 0;
-    _emit.life = c.ringLife * 1.3;
-    _emit.lifeVariance = 0;
-    this.rings.emit(1, _emit);
     this.ctx.shake.add(c.finaleShake * 0.5 * power * g.cameraShake, 8, 16);
     this.lightBoost = c.lightIntensity * c.finaleLight * 0.5 * power;
   }
@@ -838,7 +941,7 @@ export class SecondSelfAbility extends Ability {
       radius: c.shockRadius * power,
       life: 0.65,
       width: 0.08,
-      intensity: 1.3,
+      intensity: c.shockIntensity * 1.3,
       colorA: getColor(c.colorShock),
       colorB: getColor(c.colorBurstA)
     });
@@ -859,12 +962,6 @@ export class SecondSelfAbility extends Ability {
     _emit.size = c.moteSize * 1.5;
     _emit.life = c.moteLife * 1.4;
     this.motes.emit(Math.round(c.finaleSparks * 0.8 * g.particleCount), _emit);
-    _emit.speed = 0;
-    _emit.radius = 0;
-    _emit.size = c.ringSize * 3;
-    _emit.sizeVariance = 0;
-    _emit.life = c.ringLife * 1.6;
-    this.rings.emit(1, _emit);
 
     this._strike(c.finaleRadius, c.finaleImpulse, c.finaleLift, true);
 
@@ -883,6 +980,7 @@ export class SecondSelfAbility extends Ability {
     this.braids[0].visible = false;
     this.braids[1].visible = false;
     this.wake.visible = false;
+    this.dial.visible = false;
     for (let f = 0; f < FIGURES; f++) this._hideFigure(f);
     this._aFade.needsUpdate = true;
     this._figures = 0;
@@ -899,6 +997,7 @@ export class SecondSelfAbility extends Ability {
     this.runMaterial.dispose();
     this.braidMaterials.forEach((m) => m.dispose());
     this.wakeMaterial.dispose();
+    this.dialMaterial.dispose();
     super.dispose();
   }
 }
@@ -954,6 +1053,8 @@ export function buildEditor(gui, c, Editor) {
   R(look, c, 'bandGlow', 0, 4, 0.05, 'band glow');
   R(look, c, 'flicker', 0, 1, 0.01, 'flicker');
   R(look, c, 'opacity', 0, 1, 0.01, 'opacity');
+  R(look, c, 'lightWrap', 0, 1, 0.01, 'sun wraps round');
+  R(look, c, 'specular', 0, 6, 0.05, 'gold highlight');
   look.addColor(c, 'colorCore').name('core');
   look.addColor(c, 'colorBody').name('body');
   look.addColor(c, 'colorRim').name('rim');
@@ -985,6 +1086,11 @@ export function buildEditor(gui, c, Editor) {
   R(prints, c, 'footCool', 0.05, 5, 0.05, 'cools over (s)');
   R(prints, c, 'threadGlow', 0, 6, 0.05, 'thread glow');
   R(prints, c, 'threadWidth', 0.005, 0.3, 0.005, 'thread width (m)');
+  R(prints, c, 'trailWidth', 0, 2.5, 0.01, 'worn band (m either side)');
+  R(prints, c, 'trailOpacity', 0, 1, 0.01, 'band opacity');
+  R(prints, c, 'trailGlow', 0, 6, 0.05, 'band seam glow');
+  prints.addColor(c, 'colorTrailDeep').name('band deep');
+  prints.addColor(c, 'colorTrailBody').name('band body');
   prints.addColor(c, 'colorFootHot').name('trodden');
   prints.addColor(c, 'colorFootWarm').name('laid');
   prints.addColor(c, 'colorFootCold').name('ember');
@@ -1007,11 +1113,37 @@ export function buildEditor(gui, c, Editor) {
   R(fx, c, 'ringGlow', 0, 8, 0.05, 'ring glow');
   Editor.gradient(fx, c, 'colorRing', 'ring gradient');
 
+  const ling = folder.addFolder('8a · Linger & sand');
+  R(ling, c, 'lingerHold', 0, 3, 0.01, 'stands for (s)');
+  R(ling, c, 'turnBack', 0, 1, 0.01, 'turns back (× half turn)');
+  R(ling, c, 'turnTime', 0.05, 2, 0.01, 'turn takes (s)');
+  R(ling, c, 'lingerPulse', 0, 0.3, 0.005, 'heartbeat swell');
+  R(ling, c, 'sandTime', 0.05, 3, 0.01, 'pours away over (s)');
+  R(ling, c, 'sandEdge', 0.005, 0.5, 0.005, 'burning edge (m)');
+  R(ling, c, 'sandGlow', 0, 10, 0.05, 'edge glow');
+  R(ling, c, 'sandRate', 0, 800, 1, 'sand grains/second');
+  R(ling, c, 'sandLife', 0.05, 3, 0.01, 'grain lifetime');
+  R(ling, c, 'shadowOpacity', 0, 1, 0.01, 'contact shadow');
+  R(ling, c, 'shadowSize', 0.1, 2, 0.01, 'shadow size (m)');
+
+  const dial = folder.addFolder('8b · Dial');
+  R(dial, c, 'dialScale', 0, 2, 0.01, 'radius (× throw radius)');
+  R(dial, c, 'dialOpen', 0.02, 2, 0.01, 'opens over (s)');
+  R(dial, c, 'dialOpacity', 0, 1, 0.01, 'face opacity');
+  R(dial, c, 'dialGlow', 0, 8, 0.05, 'glow');
+  R(dial, c, 'dialTicks', 1, 24, 1, 'hour marks');
+  R(dial, c, 'dialSweep', 0, 4, 0.01, 'hours back per beat');
+  dial.addColor(c, 'colorDialDeep').name('deep');
+  dial.addColor(c, 'colorDialBody').name('body');
+  dial.addColor(c, 'colorDialTint').name('tint');
+  dial.addColor(c, 'colorDialCore').name('core');
+
   const fin = folder.addFolder('8 · Finale');
   R(fin, c, 'finaleTime', 0.1, 3, 0.01, 'comes apart over (s)');
   R(fin, c, 'finaleRadius', 0, 12, 0.05, 'throws within (m)');
   R(fin, c, 'finaleRise', 0, 6, 0.05, 'rises (m)');
   R(fin, c, 'shockRadius', 0, 16, 0.05, 'shockwave (m)');
+  R(fin, c, 'shockIntensity', 0, 3, 0.01, 'shockwave brightness');
   R(fin, c, 'burstSize', 0, 10, 0.05, 'air shell (m)');
   R(fin, c, 'burstIntensity', 0, 4, 0.01, 'shell brightness');
   R(fin, c, 'finaleSparks', 0, 600, 1, 'sparks');

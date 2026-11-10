@@ -175,3 +175,70 @@ export function createHeartGeometry({ depth = 0.55, facets = 1, segments = 20, s
   geometry.computeBoundingSphere();
   return geometry;
 }
+
+/** Rib authoring dimensions, metres: the foot's radius, the tip's radius, the height. */
+export const RIB_FOOT = 2.6;
+export const RIB_TIP = 0.95;
+export const RIB_HEIGHT = 3.4;
+
+/**
+ * One rib of the crystal cage that cradles the heart: a five-sided quartz
+ * blade swept along an arc in the XY plane, rising straight out of the floor
+ * at x = RIB_FOOT and arching inward to a point at x = RIB_TIP, y = RIB_HEIGHT.
+ * The section tapers from 0.24 m at the foot to a point, flattened across
+ * the arc so it reads as a blade, and twists a little as it climbs so its
+ * facets catch the sun one after another. The ability turns local +X onto the
+ * rib's bearing and scales it to the live ring radius and height. Indexed —
+ * the material shades it flat.
+ */
+export function createHeartRibGeometry({ sides = 5, rows = 18, seed = 1.7 } = {}) {
+  const positions = [];
+  const uvs = [];
+  const indices = [];
+  const point = (s) => {
+    const k = Math.pow(s, 2.2);
+    return [RIB_FOOT - (RIB_FOOT - RIB_TIP) * k, RIB_HEIGHT * Math.pow(Math.sin((s * Math.PI) / 2), 0.85)];
+  };
+  for (let j = 0; j <= rows; j++) {
+    const s = j / rows;
+    const [x, y] = point(s);
+    // Tangent of the arc, for a section square to it.
+    const [x2, y2] = point(Math.min(1, s + 0.01));
+    const [x1, y1] = point(Math.max(0, s - 0.01));
+    let tx = x2 - x1;
+    let ty = y2 - y1;
+    const tl = Math.hypot(tx, ty) || 1;
+    tx /= tl;
+    ty /= tl;
+    const nx = -ty; // in-plane normal
+    const ny = tx;
+    const radius = j === rows ? 0.0 : 0.24 * Math.pow(1 - s, 0.7) + 0.015;
+    const twist = s * 0.9 + seed;
+    for (let i = 0; i <= sides; i++) {
+      const a = (i / sides) * TAU + twist;
+      const jitter = 1 + 0.12 * (hash11(seed * 13 + i * 3.1 + j * 0.37) - 0.5);
+      const across = Math.cos(a) * radius * 0.65 * jitter; // in the arc's plane (flattened)
+      const out = Math.sin(a) * radius * jitter; // out of the plane
+      positions.push(x + nx * across, y + ny * across, out);
+      uvs.push(i / sides, s);
+    }
+  }
+  const stride = sides + 1;
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < sides; i++) {
+      const a = j * stride + i;
+      indices.push(a, a + 1, a + stride, a + 1, a + stride + 1, a + stride);
+    }
+  }
+  // Cap the foot (buried, but it closes the silhouette when it rises).
+  const centre = positions.length / 3;
+  positions.push(RIB_FOOT, 0, 0);
+  uvs.push(0.5, 0);
+  for (let i = 0; i < sides; i++) indices.push(centre, i + 1, i);
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('uv', new Float32BufferAttribute(uvs, 2));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  return geometry;
+}

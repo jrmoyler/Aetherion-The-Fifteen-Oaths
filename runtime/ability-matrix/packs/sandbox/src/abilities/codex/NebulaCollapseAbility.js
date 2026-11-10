@@ -10,6 +10,7 @@ import {
   createRemnantRingMaterial,
   createNovaShellMaterial,
   createNebulaGroundMaterial,
+  createNebulaWellMaterial,
   createNebulaLensMaterial
 } from '../../materials/codex/NebulaCollapseMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -42,7 +43,9 @@ const _up = new Vector3(0, 1, 0);
 /**
  * NEBULA COLLAPSE — Cosmic, zone cast.
  *
- * A seed of light flies out over the circle. A nebula gathers round it,
+ * A seed of light flies out over the circle. A nebula gathers round it —
+ * its heart hung at a height derived from the circle (`zoneRadius ×
+ * cloudHeightPerZone`), so it always reads in an 8 m frame —
  * turning; it contracts — inside first, winding into a spiral as it falls —
  * dragging every body beneath it up into orbit round the core it is becoming.
  * The core ignites into a protostar with a corona and an accretion disk,
@@ -60,6 +63,13 @@ const _up = new Vector3(0, 1, 0);
  *     in the vertex stage from dice: a flattened, differentially rotating cloud
  *     that collapses from the inside out and is blown back out. Additive,
  *     heated toward white-gold as it compresses.
+ *   - **the dust lanes** (`createNebulaGasMaterial(true)`) — the same puffs,
+ *     a little larger, normal-blended in the deep tone under the glowing gas:
+ *     the cloud's body and its dark stop against the floor.
+ *   - **the gravity well** (`createNebulaWellMaterial`) — the floor under the
+ *     circle sinks toward the deep tone in log-spiral arms that wind inward
+ *     faster as it collapses, with a violet lip; it is left as a scar. Lit
+ *     CHIP debris is dragged across it toward the heart.
  *   - **embedded stars** (`createNebulaStarMaterial`) — same placement, tiny,
  *     twinkling with diffraction spikes; they flare as they are swallowed.
  *   - **the protostar** (`createProtostarMaterial`) + **corona**
@@ -120,11 +130,16 @@ export class NebulaCollapseAbility extends Ability {
     this.planeGeometry = new PlaneGeometry(1, 1, 1, 1);
     this.groundMaterial = createNebulaGroundMaterial();
     this.ground = this._mesh(this.planeGeometry, this.groundMaterial, 3);
+    this.wellMaterial = createNebulaWellMaterial();
+    this.well = this._mesh(this.planeGeometry, this.wellMaterial, 2);
 
     /* ---- the cloud ---- */
     this.gasGeometry = createDiceQuadGeometry(MAX_PUFFS);
     this.gasMaterial = createNebulaGasMaterial();
     this.gas = this._mesh(this.gasGeometry, this.gasMaterial, 10);
+    // The dark dust lanes: the same puffs, deep and normal-blended, under the glow.
+    this.laneMaterial = createNebulaGasMaterial(true);
+    this.lanes = this._mesh(this.gasGeometry, this.laneMaterial, 9);
 
     this.starGeometry = createDiceQuadGeometry(MAX_STARS);
     this.starMaterial = createNebulaStarMaterial();
@@ -192,6 +207,8 @@ export class NebulaCollapseAbility extends Ability {
       seed: 0
     };
     this._lensState = { size: 8, pinch: 0, core: 0.2, shockR: 0, shock: 0 };
+    this._wellState = { centre: this._zone, radius: 4, strength: 0, phase: 0, seed: 0 };
+    this._wellPhase = 0;
 
     /* ---- clocks and latches ---- */
     this._clock = -1;
@@ -298,6 +315,23 @@ export class NebulaCollapseAbility extends Ability {
     s.uEndSize.value = 0.2;
     s.uGravity.value.set(0, -2, 0);
 
+    // Floor chips dragged in along the ground toward the well's heart.
+    this.debris = particles.get('nebula.debris', {
+      capacity: 900,
+      shape: ParticleShape.CHIP,
+      additive: false,
+      lit: true,
+      softFade: 0.1
+    });
+    const db = this.debris.uniforms;
+    db.uDrag.value = 0.4;
+    db.uSizeIn.value = 0.05;
+    db.uFadeIn.value = 0.05;
+    db.uFadeOut.value = 0.3;
+    db.uEndSize.value = 0.4;
+    db.uGravity.value.set(0, 0, 0);
+
+    this.debrisEmitter = new RateEmitter();
     this.wispEmitter = new RateEmitter();
     this.sprinkleEmitter = new RateEmitter();
     this.heraldEmitter = new RateEmitter();
@@ -365,12 +399,14 @@ export class NebulaCollapseAbility extends Ability {
     this.wispEmitter.reset();
     this.sprinkleEmitter.reset();
     this.heraldEmitter.reset();
+    this.debrisEmitter.reset();
+    this._wellPhase = 0;
 
     rollDice(this.gasGeometry, MAX_PUFFS, 0.25);
     rollDice(this.starGeometry, MAX_STARS, 0);
 
     this._frame(c);
-    for (const mesh of [this.ground, this.gas, this.stars, this.disk, this.shell, this.remnant, this.lens]) mesh.visible = false;
+    for (const mesh of [this.ground, this.well, this.gas, this.lanes, this.stars, this.disk, this.shell, this.remnant, this.lens]) mesh.visible = false;
     // The seed of light rides the travel: the core, tiny, in its corona.
     this.core.visible = true;
     this.corona.visible = true;
@@ -382,12 +418,22 @@ export class NebulaCollapseAbility extends Ability {
     this.pointAt(1, this._zone);
     this._zone.y = 0;
     this._heart.copy(this._zone);
-    this._heart.y = c.cloudHeight;
+    this._heart.y = this._cloudY(c);
     // Tipped about the side axis toward the caster, so the disk is seen open.
     const ct = Math.cos(c.diskTilt);
     const st = Math.sin(c.diskTilt);
     this._axisU.copy(this.side);
     this._axisV.copy(this.direction).multiplyScalar(ct).addScaledVector(_up, st);
+  }
+
+  /** The heart's height, derived from the circle so the cloud reads in frame. */
+  _cloudY(c) {
+    return Math.max(0.8, c.zoneRadius * c.cloudHeightPerZone + c.cloudHeight);
+  }
+
+  /** The cloud's radius, derived from the circle. */
+  _cloudR(c) {
+    return Math.max(0.5, c.zoneRadius * c.cloudRadiusPerZone + c.cloudRadius);
   }
 
   _resetEmit(time) {
@@ -429,6 +475,15 @@ export class NebulaCollapseAbility extends Ability {
     d.uGlow.value = c.starGlow * g.glow;
     d.uTurbulence.value = 0.2 * g.turbulence;
 
+    this.debris.setGradient(getColor(c.colorDebrisA), getColor(c.colorDebrisB), getColor(c.colorDebrisC), getColor(c.colorDebrisD));
+    const db = this.debris.uniforms;
+    db.uSizeScale.value = g.particleSize;
+    db.uLifeScale.value = 1; // timed to reach the heart
+    db.uSpeedScale.value = 1;
+    db.uOpacity.value = g.opacity;
+    db.uGlow.value = 1;
+    db.uTurbulence.value = 0.05 * g.turbulence;
+
     this.sparks.setGradient(getColor(c.colorSparkA), getColor(c.colorSparkB), getColor(c.colorSparkC), getColor(c.colorSparkD));
     const s = this.sparks.uniforms;
     s.uStretch.value = c.sparkStretch;
@@ -453,7 +508,7 @@ export class NebulaCollapseAbility extends Ability {
 
     // Climbs from the hand to the heart of the circle as it flies.
     const k = Easing.inOutQuad(this.u);
-    this.position.y = lerp(1.4, c.cloudHeight, k);
+    this.position.y = lerp(1.4, this._cloudY(c), k);
 
     const size = c.heraldSize * (1 + 0.25 * Math.sin(this.age * 22));
     this.core.position.copy(this.position);
@@ -508,9 +563,9 @@ export class NebulaCollapseAbility extends Ability {
 
     this.ctx.decals.spawn(DecalType.SHOCKWAVE, this._zone, {
       radius: c.zoneRadius * 1.05,
-      life: 0.8,
-      width: 0.04,
-      intensity: 0.5,
+      life: 0.6,
+      width: 0.03,
+      intensity: 0.25,
       colorA: getColor(c.colorShockA),
       colorB: getColor(c.colorShockB),
       height: 0.03
@@ -520,7 +575,9 @@ export class NebulaCollapseAbility extends Ability {
     this.corona.visible = false;
     this.ground.visible = true;
     this.gas.visible = true;
+    this.lanes.visible = true;
     this.stars.visible = true;
+    this.well.visible = true;
   }
 
   onFade(dt) {
@@ -569,21 +626,24 @@ export class NebulaCollapseAbility extends Ability {
     /* ---- the cloud ---- */
     const blast = exploded ? Easing.outCubic(saturate(novaSince / Math.max(0.05, (t4 - t3) * 1.4))) : 0;
     const cs = this._cloudState;
-    cs.radius = c.cloudRadius;
+    cs.radius = this._cloudR(c);
     cs.angle = this._angle;
     cs.contract = contract;
     cs.blast = blast;
     cs.blastRadius = c.novaRadius * 1.15 * power;
     cs.flow = this._flow;
-    cs.heat = contract + implode * 0.5;
+    // Compression heats it; the blast cools it at once, so it never blooms to white.
+    cs.heat = (contract + implode * 0.5) * (1 - blast);
     // Gathers in; once blown out, thins to wisps and is gone with the remnant.
     cs.fade = appear * (1 - smoothstep(0.25, 1, blast) * 0.7) * (1 - fadeT);
     cs.twinkle = this._twinkle;
     this.gasMaterial.userData.sync(cs);
+    this.laneMaterial.userData.sync(cs);
     this.starMaterial.userData.sync(cs);
     this.gasGeometry.instanceCount = Math.min(MAX_PUFFS, Math.max(1, Math.round(c.puffCount)));
     this.starGeometry.instanceCount = Math.min(MAX_STARS, Math.max(0, Math.round(c.starCount)));
     this.gas.visible = cs.fade > 0.002;
+    this.lanes.visible = this.gas.visible;
     this.stars.visible = cs.fade > 0.002 && !exploded;
 
     /* ---- the protostar ---- */
@@ -680,9 +740,20 @@ export class NebulaCollapseAbility extends Ability {
     this.groundMaterial.userData.sync(gs);
     this.ground.visible = true;
 
+    /* ---- the gravity well ---- */
+    this._wellPhase += c.wellSpeed * dt * g.animationSpeed * (0.3 + contract * 1.7 + implode);
+    const ws = this._wellState;
+    ws.radius = c.zoneRadius * c.wellRadius;
+    ws.phase = this._wellPhase;
+    ws.seed = this._seed;
+    const pull = appear * (0.35 + 0.65 * contract);
+    ws.strength = (exploded ? lerp(pull, c.wellScar, smoothstep(0, 0.25, novaSince)) : pull) * (1 - fadeT);
+    this.wellMaterial.userData.sync(ws);
+    this.well.visible = ws.strength > 0.004;
+
     /* ---- the lens ---- */
     const ls = this._lensState;
-    ls.size = c.cloudRadius * c.lensSize;
+    ls.size = this._cloudR(c) * c.lensSize;
     const half = ls.size * 0.5;
     ls.pinch = contract * (1 - blast) * (1 + implode);
     ls.core = (coreBase * 2.2) / Math.max(0.1, half);
@@ -703,6 +774,7 @@ export class NebulaCollapseAbility extends Ability {
     /* ---- particles ---- */
     this._wispFx(dt, c, g, appear * (1 - Math.max(blast, holdT)), contract);
     this._sprinkleFx(dt, c, g, appear * (exploded ? 0 : 1 - contract * 0.7));
+    this._debrisFx(dt, c, g, exploded ? 0 : appear * (0.3 + contract));
 
     /* ---- the bodies ---- */
     if (!this._grabbed && clock >= t1 + saturate(c.grabDelay) * (t2 - t1)) this._grab(c, g);
@@ -718,7 +790,7 @@ export class NebulaCollapseAbility extends Ability {
     const count = Math.round(this.wispEmitter.tick(dt, c.gasRate * strength) * g.particleCount);
     if (count <= 0) return;
     this._resetEmit(frame.uTime.value);
-    const rim = lerp(c.cloudRadius, c.cloudRadius * 0.6, contract);
+    const rim = lerp(this._cloudR(c), this._cloudR(c) * 0.6, contract);
     const life = Math.max(0.1, c.gasLifetime * (1 - contract * 0.5));
     _emit.size = c.gasSize;
     _emit.life = life;
@@ -742,6 +814,34 @@ export class NebulaCollapseAbility extends Ability {
     }
   }
 
+  /** Floor chips dragged in along the ground, spiralling toward the well's heart. */
+  _debrisFx(dt, c, g, strength) {
+    const count = Math.round(this.debrisEmitter.tick(dt, c.debrisRate * strength) * g.particleCount);
+    if (count <= 0) return;
+    this._resetEmit(frame.uTime.value);
+    const life = Math.max(0.1, c.debrisLifetime);
+    const reach = c.zoneRadius * c.wellRadius;
+    _emit.size = c.debrisSize;
+    _emit.life = life;
+    _emit.lifeVariance = 0.2;
+    _emit.speedVariance = 0.15;
+    _emit.spin = 6;
+    for (let n = 0; n < count; n++) {
+      const a = Math.random() * TAU;
+      const r = reach * (0.55 + Math.random() * 0.45);
+      _pos.set(this._zone.x + Math.cos(a) * r, 0.05 + Math.random() * 0.1, this._zone.z + Math.sin(a) * r);
+      // In and round: they reach the heart as their life runs out.
+      _vel.set((-Math.cos(a) * r * 0.85) / life, 0.15, (-Math.sin(a) * r * 0.85) / life);
+      _vel.x += -Math.sin(a) * r * 0.6;
+      _vel.z += Math.cos(a) * r * 0.6;
+      const speed = _vel.length();
+      _emit.position = _pos;
+      _emit.direction = _dir.copy(_vel).divideScalar(Math.max(speed, 1e-4));
+      _emit.speed = speed;
+      this.debris.emit(1, _emit);
+    }
+  }
+
   /** Twinkles sifting through the cloud while it hangs. */
   _sprinkleFx(dt, c, g, strength) {
     const count = Math.round(this.sprinkleEmitter.tick(dt, c.sprinkleRate * strength) * g.particleCount);
@@ -754,7 +854,7 @@ export class NebulaCollapseAbility extends Ability {
     _emit.direction = _up;
     for (let n = 0; n < count; n++) {
       const a = Math.random() * TAU;
-      const r = c.cloudRadius * Math.sqrt(Math.random()) * 0.85;
+      const r = this._cloudR(c) * Math.sqrt(Math.random()) * 0.85;
       _pos.set(this._heart.x + Math.cos(a) * r, this._heart.y + (Math.random() * 2 - 1) * c.cloudThickness, this._heart.z + Math.sin(a) * r);
       _emit.position = _pos;
       this.dust.emit(1, _emit);
@@ -950,7 +1050,7 @@ export class NebulaCollapseAbility extends Ability {
   onDestroy() {
     this._releaseGrips();
     this._clock = -1;
-    for (const mesh of [this.ground, this.gas, this.stars, this.disk, this.core, this.corona, this.shell, this.remnant, this.lens]) {
+    for (const mesh of [this.ground, this.well, this.gas, this.lanes, this.stars, this.disk, this.core, this.corona, this.shell, this.remnant, this.lens]) {
       mesh.visible = false;
     }
   }
@@ -959,7 +1059,9 @@ export class NebulaCollapseAbility extends Ability {
     for (const geometry of [this.planeGeometry, this.gasGeometry, this.starGeometry, this.sphereGeometry]) geometry.dispose();
     for (const material of [
       this.groundMaterial,
+      this.wellMaterial,
       this.gasMaterial,
+      this.laneMaterial,
       this.starMaterial,
       this.diskMaterial,
       this.coreMaterial,
@@ -1007,9 +1109,12 @@ export function buildEditor(gui, c, Editor) {
 
   const cloud = folder.addFolder('1 · Nebula');
   const shape = cloud.addFolder('Shape & motion');
-  R(shape, c, 'cloudRadius', 0.5, 14, 0.05, 'radius (m)');
-  R(shape, c, 'cloudHeight', 0.5, 12, 0.05, 'height (m)');
+  R(shape, c, 'cloudRadiusPerZone', 0.2, 3, 0.01, 'radius (× circle)');
+  R(shape, c, 'cloudRadius', -4, 8, 0.05, 'radius, extra (m)');
+  R(shape, c, 'cloudHeightPerZone', 0.1, 2, 0.01, 'height (× circle)');
+  R(shape, c, 'cloudHeight', -3, 8, 0.05, 'height, extra (m)');
   R(shape, c, 'cloudThickness', 0.05, 5, 0.01, 'half-thickness (m)');
+  R(shape, c, 'collapseThickKeep', 0, 1, 0.01, 'thickness kept as it falls');
   R(shape, c, 'cloudSpin', -3, 3, 0.01, 'spin (rad/s)');
   R(shape, c, 'spinUp', 0, 20, 0.05, 'spins up as it falls');
   R(shape, c, 'cloudShear', 0, 1, 0.01, 'spiral shear');
@@ -1027,6 +1132,13 @@ export function buildEditor(gui, c, Editor) {
   R(gasF, c, 'gasFilaments', 0, 1, 0.01, 'filaments');
   R(gasF, c, 'gasDensity', 0, 3, 0.01, 'density');
   R(gasF, c, 'gasGlow', 0, 6, 0.01, 'glow');
+  R(gasF, c, 'gasAccent', 0, 1, 0.01, 'teal / magenta share');
+  R(gasF, c, 'collapseThin', 0, 1, 0.01, 'collapsed gas thins away');
+  R(gasF, c, 'laneDensity', 0, 1, 0.01, 'dark lanes');
+  R(gasF, c, 'laneSize', 0.5, 2, 0.01, 'lane size (× puff)');
+  R(gasF, c, 'laneCoreSize', 0.05, 1.5, 0.01, 'lane size collapsed (× size)');
+  R(gasF, c, 'laneLift', 0, 1, 0.01, 'lane violet glow');
+  gasF.addColor(c, 'colorDeep').name('deep (lanes, well)');
   R(gasF, c, 'gasSoftFade', 0.01, 4, 0.01, 'soft intersection (m)');
   gasF.addColor(c, 'colorA').name('violet');
   gasF.addColor(c, 'colorGasB').name('teal');
@@ -1056,6 +1168,8 @@ export function buildEditor(gui, c, Editor) {
   R(star, c, 'coreBoilSpeed', 0, 8, 0.05, 'boil speed');
   R(star, c, 'coreLimb', 0, 8, 0.05, 'hot rim');
   R(star, c, 'coreGlow', 0, 12, 0.05, 'glow');
+  R(star, c, 'coreHeatCap', 0, 1, 0.01, 'white-gold cap');
+  R(star, c, 'coreBloomCap', 0.2, 6, 0.05, 'bloom cap');
   R(star, c, 'corePulse', 0, 0.5, 0.005, 'throb');
   R(star, c, 'implodeShare', 0, 1, 0.01, 'implodes over (share of hold)');
   R(star, c, 'implodeScale', 0.05, 1, 0.01, 'implodes to (× radius)');
@@ -1067,6 +1181,7 @@ export function buildEditor(gui, c, Editor) {
   R(corona, c, 'coronaRayLength', 0.02, 1, 0.01, 'streamer length');
   R(corona, c, 'coronaFalloff', 0.01, 1, 0.01, 'glow falloff');
   R(corona, c, 'coronaGlow', 0, 8, 0.05, 'glow');
+  R(corona, c, 'coronaBloomCap', 0.1, 6, 0.05, 'bloom cap');
   const disk = star.addFolder('Accretion disk');
   R(disk, c, 'diskInner', 1, 6, 0.01, 'inner (× core)');
   R(disk, c, 'diskOuter', 1.2, 14, 0.05, 'outer (× core)');
@@ -1121,6 +1236,18 @@ export function buildEditor(gui, c, Editor) {
   R(ground, c, 'groundScorch', 0, 3, 0.01, 'starburst');
   R(ground, c, 'groundRays', 2, 60, 1, 'starburst rays');
   R(ground, c, 'scorchTime', 0.1, 6, 0.05, 'starburst cools (s)');
+  R(ground, c, 'wellRadius', 0.3, 2, 0.01, 'gravity well (× circle)');
+  R(ground, c, 'wellDepth', 0, 1, 0.01, 'well darkness');
+  R(ground, c, 'wellArms', 1, 8, 1, 'well arms');
+  R(ground, c, 'wellTwist', -8, 8, 0.05, 'arm winding');
+  R(ground, c, 'wellSpeed', -6, 6, 0.05, 'arms wind in (rad/s)');
+  R(ground, c, 'wellRim', 0, 3, 0.01, 'well lip glow');
+  R(ground, c, 'wellArmLight', 0, 2, 0.01, 'well dust arms light');
+  R(ground, c, 'wellScar', 0, 1, 0.01, 'scar after the blast');
+  R(ground, c, 'debrisRate', 0, 300, 1, 'chips dragged in / s');
+  R(ground, c, 'debrisSize', 0.01, 0.4, 0.005, 'chip size');
+  R(ground, c, 'debrisLifetime', 0.1, 3, 0.05, 'chip reaches heart in (s)');
+  Editor.gradient(ground, c, 'colorDebris', 'chip gradient');
   R(ground, c, 'remnantRadius', 0.3, 12, 0.05, 'remnant radius (m)');
   R(ground, c, 'remnantGrow', 0, 4, 0.01, 'remnant widens (m/s)');
   R(ground, c, 'remnantWidth', 0.02, 2, 0.01, 'remnant width (m)');

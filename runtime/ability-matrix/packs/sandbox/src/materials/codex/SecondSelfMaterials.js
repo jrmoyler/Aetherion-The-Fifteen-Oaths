@@ -1,4 +1,15 @@
-import { AdditiveBlending, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import {
+  AdditiveBlending,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  FrontSide,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial,
+  Vector3
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -125,7 +136,7 @@ const FIGURE_FRAGMENT = /* glsl */ `
   uniform float uTime;
   uniform float uBeat;        // 0..1+ the heartbeat right now
   uniform float uBeatGlow;
-  uniform float uBodyGlow;
+  uniform float uBodyGlow;    // albedo brightness of the gold
   uniform float uRimGlow;
   uniform float uRimPower;
   uniform float uBandScale;
@@ -133,17 +144,19 @@ const FIGURE_FRAGMENT = /* glsl */ `
   uniform float uBandGlow;
   uniform float uFlicker;
   uniform float uOpacity;
-  uniform float uFlare;       // the finale: it burns brighter as it comes apart
+  uniform float uFlare;       // the finale: a hot flash through it
+  uniform float uWrap;        // how far the sun wraps round the limbs
+  uniform float uSpec;        // the polished-gold highlight
+  uniform float uSandY;       // world height above which it has gone to sand
+  uniform float uSandEdge;    // metres of glowing edge on the dissolve
+  uniform float uSandGlow;
   uniform vec3  uCore;
   uniform vec3  uBody;
   uniform vec3  uRim;
   uniform vec3  uDeep;
-  uniform vec2      uResolution;
-  uniform sampler2D uSceneDepth;
-  uniform float     uCameraNear;
-  uniform float     uCameraFar;
-  uniform float     uGlobalGlow;
-  uniform float     uShaderIntensity;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
 
   varying vec3  vNormalW;
   varying vec3  vViewDir;
@@ -159,39 +172,54 @@ const FIGURE_FRAGMENT = /* glsl */ `
     if (vFade <= 0.002) discard;
     vec3 N = normalize(vNormalW);
     vec3 V = normalize(vViewDir);
-    float ndv = abs(dot(N, V));
+    float ndv = clamp(dot(N, V), 0.0, 1.0);
     float rim = pow(1.0 - ndv, max(uRimPower, 0.3));
 
     // An afterimage is a figure being forgotten: eaten by noise, harder the
     // further back it is.
     float n = snoise01(vWorld * 3.5 + vec3(0.0, uTime * 0.8, vSeed));
     float keep = smoothstep(1.0 - vFade - 0.08, 1.0 - vFade + 0.08, n * 0.85 + 0.15);
-    if (keep < 0.01) discard;
+    if (keep < 0.5) discard;
 
-    // Bands of time running down the body.
-    float bands = smoothstep(0.55, 1.0, sin((vWorld.y + uTime * uBandSpeed) * uBandScale * 6.2831853 * 0.25) * 0.5 + 0.5);
-    float flick = 1.0 - uFlicker * (0.5 + 0.5 * snoise(vec3(uTime * 9.0, vSeed, 0.0)));
-    float beat = 1.0 + uBeat * uBeatGlow;
+    // Running out of time: it pours away as sand from the crown down.
+    float sn = snoise(vWorld * 7.0 + vec3(0.0, -uTime * 1.5, vSeed)) * 0.09;
+    float cut = vWorld.y + sn - uSandY;
+    if (cut > 0.0) discard;
+    float sandEdge = 1.0 - smoothstep(0.0, max(uSandEdge, 0.005), -cut);
 
-    vec3 col = uDeep * 0.35 + uBody * (uBodyGlow * (0.35 + 0.65 * ndv)) + uCore * pow(ndv, 6.0) * 0.4;
-    col += uBody * bands * uBandGlow * uShaderIntensity;
-    col += uRim * rim * uRimGlow;
-    col *= flick * beat * (1.0 + uFlare * 2.5);
+    // A solid, sunlit body of gold: a four-stop ramp keyed off the light.
+    // deep bronze in shadow → saturated gold → pale tint → white-hot highlight.
+    float lam = dot(N, normalize(uLightDir));
+    float diff = clamp((lam + uWrap) / (1.0 + uWrap), 0.0, 1.0);
+    float up = N.y * 0.5 + 0.5;
+    vec3 base = mix(uDeep, uBody, smoothstep(0.05, 0.75, diff * (0.75 + 0.25 * up)));
+    base = mix(base, uRim, smoothstep(0.8, 1.0, diff) * 0.45);
+    vec3 H = normalize(normalize(uLightDir) + V);
+    float spec = pow(max(dot(N, H), 0.0), 36.0) * uSpec;
 
-    float a = (0.22 + 0.78 * rim + bands * 0.25) * vFade * keep * uOpacity;
-    vec2 suv = gl_FragCoord.xy / uResolution;
-    a *= softFade(uSceneDepth, suv, vViewZ, uCameraNear, uCameraFar, 0.12);
-    if (a < 0.003) discard;
-    gl_FragColor = vec4(col * a * uGlobalGlow, a);
+    // Bands of time running down the body (engraved, glowing faintly).
+    float bands = smoothstep(0.6, 1.0, sin((vWorld.y + uTime * uBandSpeed) * uBandScale * 6.2831853 * 0.25) * 0.5 + 0.5);
+    float flick = 1.0 - uFlicker * 0.5 * (0.5 + 0.5 * snoise(vec3(uTime * 9.0, vSeed, 0.0)));
+
+    vec3 col = base * (0.3 + 0.9 * diff) * uBodyGlow;
+    col += uCore * spec;
+    col += uBody * bands * uBandGlow * 0.35 * uShaderIntensity * (0.4 + 0.6 * diff);
+    col += uRim * rim * uRimGlow * flick;
+    col += uBody * uBeat * uBeatGlow * 0.18;
+    col += uCore * sandEdge * uSandGlow;
+    col *= 1.0 + uFlare * 1.2;
+
+    float a = uOpacity * mix(0.55, 1.0, vFade);
+    gl_FragColor = vec4(col * uGlobalGlow, a);
   }
 `;
 
 export function createFigureMaterial(halfLen) {
   const material = new ShaderMaterial({
     transparent: true,
-    depthWrite: false,
+    depthWrite: true,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
     side: FrontSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -207,6 +235,11 @@ export function createFigureMaterial(halfLen) {
       uFlicker: { value: 0.2 },
       uOpacity: { value: 1 },
       uFlare: { value: 0 },
+      uWrap: { value: 0.4 },
+      uSpec: { value: 1 },
+      uSandY: { value: 1e3 },
+      uSandEdge: { value: 0.12 },
+      uSandGlow: { value: 3 },
       uCore: { value: new Color() },
       uBody: { value: new Color() },
       uRim: { value: new Color() },
@@ -216,22 +249,27 @@ export function createFigureMaterial(halfLen) {
     fragmentShader: FIGURE_FRAGMENT
   });
 
-  /** @param {object} state { beat, flare } */
+  /** @param {object} state { beat, flare, sandY } */
   material.userData.sync = (state) => {
     const c = settings[ID];
     const g = settings.global;
     const u = material.uniforms;
     u.uBeat.value = state.beat;
     u.uBeatGlow.value = c.beatGlow;
-    u.uBodyGlow.value = c.bodyGlow * g.glow;
+    u.uBodyGlow.value = c.bodyGlow;
     u.uRimGlow.value = c.rimGlow * g.glow * g.fresnel;
     u.uRimPower.value = c.rimPower;
     u.uBandScale.value = c.bandScale * g.noiseFrequency;
     u.uBandSpeed.value = c.bandSpeed * g.noiseSpeed;
-    u.uBandGlow.value = c.bandGlow;
+    u.uBandGlow.value = c.bandGlow * g.glow;
     u.uFlicker.value = c.flicker * g.noiseStrength;
-    u.uOpacity.value = c.opacity * g.opacity;
+    u.uOpacity.value = Math.min(1, c.opacity * g.opacity);
     u.uFlare.value = state.flare;
+    u.uWrap.value = c.lightWrap;
+    u.uSpec.value = c.specular * g.glow;
+    u.uSandY.value = state.sandY;
+    u.uSandEdge.value = c.sandEdge;
+    u.uSandGlow.value = c.sandGlow * g.glow;
     u.uCore.value.copy(getColor(c.colorCore));
     u.uBody.value.copy(getColor(c.colorBody));
     u.uRim.value.copy(getColor(c.colorRim));
@@ -286,6 +324,13 @@ const RUN_FRAGMENT = /* glsl */ `
   uniform vec3  uWarm;
   uniform vec3  uCold;
   uniform vec3  uThread;
+  uniform float uTrailWidth;   // metres either side of the path the worn band covers
+  uniform float uTrailOpacity;
+  uniform float uTrailGlow;
+  uniform vec3  uTrailDeep;
+  uniform vec3  uTrailBody;
+  uniform float uShadow;       // the double's contact shadow
+  uniform float uShadowSize;
   uniform float uGlobalGlow;
 
   varying vec2 vFlat;
@@ -359,9 +404,34 @@ const RUN_FRAGMENT = /* glsl */ `
     col += uThread * th * uThreadGlow;
     alpha = max(alpha, clamp(th * 0.8, 0.0, 1.0));
 
-    float a = clamp(alpha, 0.0, 1.0) * uFade;
-    if (a < 0.004) discard;
-    gl_FragColor = vec4(col * uGlobalGlow, a);
+    // The worn band: the strip of floor the heartbeat has already run over —
+    // filled, dark bronze, grained, with a faint gold seam running through it.
+    float bw = max(uTrailWidth, 0.05);
+    float across = abs(dx) / bw;
+    float g1 = snoise01(vec3(x * 2.2, y * 1.1, uSeed));
+    float g2 = snoise01(vec3(x * 9.0, y * 6.0, uSeed + 3.0));
+    float edgeN = (g1 - 0.5) * 0.35;
+    float band = 1.0 - smoothstep(0.55, 1.0, across + edgeN);
+    float laidBand = smoothstep(-0.2, 0.4, y) * (1.0 - smoothstep(uFront - 0.6, uFront + 0.05, y));
+    band *= laidBand;
+    float trodBand = smoothstep(uDouble + 0.8, uDouble - 0.6, y);
+    vec3 bandCol = mix(uTrailDeep, uTrailBody, (0.25 + 0.55 * g2) * (0.4 + 0.6 * (1.0 - across)));
+    float seam = exp(-across * across * 10.0) * (0.35 + 0.65 * trodBand);
+    vec3 bandGlow = uTrailBody * seam * uTrailGlow * (0.6 + 0.4 * g2) * (1.0 + uBeat * 0.5);
+    float bandA = band * uTrailOpacity;
+
+    // The double's contact shadow, so it stands on the floor.
+    float sl = pathLat(clamp(uDouble, 0.0, uLength));
+    vec2 sd = vec2(x - sl, (y - clamp(uDouble, 0.0, uLength)) * 0.7) / max(uShadowSize, 0.05);
+    float shadow = uShadow * exp(-dot(sd, sd) * 2.2) * step(-1.0, uDouble);
+
+    float pa = clamp(alpha, 0.0, 1.0);
+    float a = max(max(bandA, shadow), pa * 0.85);
+    vec3 under = bandCol * bandA * (1.0 - shadow);
+    vec3 outCol = (under + bandGlow * band + col) * uFade;
+    a *= uFade;
+    if (a < 0.004 && dot(outCol, outCol) < 1e-5) discard;
+    gl_FragColor = vec4(outCol * uGlobalGlow, a);
   }
 `;
 
@@ -370,7 +440,10 @@ export function createRunMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    // Premultiplied: the worn band darkens the floor, the prints add light.
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     polygonOffset: true,
@@ -396,7 +469,14 @@ export function createRunMaterial() {
       uHot: { value: new Color() },
       uWarm: { value: new Color() },
       uCold: { value: new Color() },
-      uThread: { value: new Color() }
+      uThread: { value: new Color() },
+      uTrailWidth: { value: 0.8 },
+      uTrailOpacity: { value: 0.8 },
+      uTrailGlow: { value: 1 },
+      uTrailDeep: { value: new Color() },
+      uTrailBody: { value: new Color() },
+      uShadow: { value: 0.5 },
+      uShadowSize: { value: 0.6 }
     }),
     vertexShader: RUN_VERTEX,
     fragmentShader: RUN_FRAGMENT
@@ -408,7 +488,7 @@ export function createRunMaterial() {
     const g = settings.global;
     const u = material.uniforms;
     syncPath(u, state);
-    u.uHalfWidth.value = c.braidWidth + c.stepOut + c.footSide + c.footSize + 0.3;
+    u.uHalfWidth.value = c.braidWidth + c.stepOut + Math.max(c.footSide + c.footSize, c.trailWidth * (c.figureHeight / 1.85)) + 0.4;
     u.uSeed.value = state.seed;
     u.uFront.value = state.front;
     u.uDouble.value = state.double;
@@ -427,6 +507,13 @@ export function createRunMaterial() {
     u.uWarm.value.copy(getColor(c.colorFootWarm));
     u.uCold.value.copy(getColor(c.colorFootCold));
     u.uThread.value.copy(getColor(c.colorThread));
+    u.uTrailWidth.value = c.trailWidth * (c.figureHeight / 1.85);
+    u.uTrailOpacity.value = c.trailOpacity;
+    u.uTrailGlow.value = c.trailGlow * g.glow;
+    u.uTrailDeep.value.copy(getColor(c.colorTrailDeep));
+    u.uTrailBody.value.copy(getColor(c.colorTrailBody));
+    u.uShadow.value = c.shadowOpacity * state.shadow;
+    u.uShadowSize.value = c.shadowSize * (c.figureHeight / 1.85);
   };
 
   return material;
@@ -554,6 +641,173 @@ export function createBraidMaterial() {
     u.uSeed.value = state.seed;
     u.uColorA.value.copy(getColor(c.colorBraidA));
     u.uColorB.value.copy(getColor(c.colorBraidB));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The dial — the floor at the end of the line                          */
+/* -------------------------------------------------------------------- */
+
+const DIAL_VERTEX = /* glsl */ `
+  uniform vec3  uCenter;
+  uniform vec3  uFwd;         // twelve o'clock: back toward the caster
+  uniform vec3  uRight;
+  uniform float uRadius;
+  varying vec2  vP;           // −1..1 in the dial's own frame
+  void main() {
+    vP = position.xy;
+    vec3 world = uCenter + uRight * position.x * uRadius + uFwd * position.y * uRadius;
+    world.y = 0.024;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const DIAL_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uTime;
+  uniform float uSeed;
+  uniform float uOpen;        // 0..1 the face spreading out from the centre
+  uniform float uFade;
+  uniform float uHand;        // the hand's angle, radians (it runs backwards)
+  uniform float uWave;        // 0..1 the dub's bright front running out (0 = none)
+  uniform float uBeat;
+  uniform float uOpacity;
+  uniform float uGlow;
+  uniform float uTicks;       // hour marks round the face
+  uniform vec3  uDeep;
+  uniform vec3  uBody;
+  uniform vec3  uTint;
+  uniform vec3  uCore;
+  uniform float uGlobalGlow;
+
+  varying vec2 vP;
+
+  ${noiseGLSL}
+
+  float wrapA(float a) { return mod(a + 3.14159265, 6.2831853) - 3.14159265; }
+
+  void main() {
+    float r = length(vP);
+    if (r > 1.02) discard;
+    float th = atan(vP.x, vP.y);              // 0 at twelve, clockwise positive
+    float g = snoise01(vec3(vP * 3.0, uSeed));
+    float gf = snoise01(vec3(vP * 14.0, uSeed + 7.0));
+
+    // The face spreads from the centre on the lub.
+    float open = smoothstep(uOpen + 0.04, uOpen - 0.04, r + (g - 0.5) * 0.12);
+    float disc = (1.0 - smoothstep(0.93, 1.0, r)) * open;
+
+    // Field: a filled, dark-bronze face, warmer toward the centre.
+    vec3 field = mix(uDeep, uBody, (1.0 - smoothstep(0.0, 0.9, r)) * 0.45 + gf * 0.18);
+    float fieldA = disc * uOpacity * (0.75 + 0.25 * g);
+
+    // Light written into the face.
+    float e = 0.0;
+    // the bezel and an inner ring
+    e += exp(-pow((r - 0.95) / 0.025, 2.0)) * 1.4;
+    e += exp(-pow((r - 0.58) / 0.018, 2.0)) * 0.7;
+    // hour wedges
+    float n = max(uTicks, 1.0);
+    float cell = 6.2831853 / n;
+    float ta = abs(wrapA(th - cell * floor(th / cell + 0.5)));
+    float wedge = (1.0 - smoothstep(0.035, 0.06, ta * r)) * smoothstep(0.66, 0.7, r) * (1.0 - smoothstep(0.86, 0.9, r));
+    e += wedge * 1.2;
+    // minute ticks
+    float mc = cell / 5.0;
+    float tm = abs(wrapA(th - mc * floor(th / mc + 0.5)));
+    e += (1.0 - smoothstep(0.008, 0.016, tm * r)) * smoothstep(0.86, 0.88, r) * (1.0 - smoothstep(0.92, 0.93, r)) * 0.8;
+
+    // the hand, and the fan of time it has swept back through
+    float dh = wrapA(th - uHand);
+    float blade = (1.0 - smoothstep(0.02, 0.05 * (1.0 - r * 0.6), abs(dh) * r)) * (1.0 - smoothstep(0.78, 0.84, r));
+    float fan = (dh > 0.0 ? exp(-dh * 1.6) : 0.0) * (1.0 - smoothstep(0.82, 0.9, r)) * smoothstep(0.05, 0.2, r);
+    e += blade * 2.6;
+    vec3 fanCol = mix(uBody, uTint, fan) * fan * 0.9;
+    // the hub
+    float hub = 1.0 - smoothstep(0.05, 0.08, r);
+
+    // the dub's front running out
+    float wv = 0.0;
+    if (uWave > 0.0) {
+      float R = uWave * 1.0;
+      wv = exp(-pow((r - R) / 0.06, 2.0)) * (1.0 - uWave * 0.6);
+      wv += (1.0 - smoothstep(R - 0.25, R, r)) * step(r, R) * (1.0 - uWave) * 0.35;
+    }
+
+    vec3 light = mix(uBody, uTint, 0.5) * e * (1.0 + uBeat * 0.6)
+               + fanCol
+               + uCore * (hub * 2.0 + blade * smoothstep(0.3, 0.8, r) * 0.8)
+               + mix(uTint, uCore, 0.5) * wv * 2.0;
+    light *= disc * uGlow;
+
+    float a = clamp(max(fieldA, max(e, wv) * disc * 0.6), 0.0, 1.0) * uFade;
+    vec3 col = (field * fieldA + light) * uFade;
+    if (a < 0.003 && dot(col, col) < 1e-5) discard;
+    gl_FragColor = vec4(col * uGlobalGlow, a);
+  }
+`;
+
+export function createDialMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -3,
+    polygonOffsetUnits: -3,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uFwd: { value: new Vector3(0, 0, -1) },
+      uRight: { value: new Vector3(1, 0, 0) },
+      uRadius: { value: 3 },
+      uSeed: { value: 0 },
+      uOpen: { value: 0 },
+      uFade: { value: 1 },
+      uHand: { value: 0 },
+      uWave: { value: 0 },
+      uBeat: { value: 0 },
+      uOpacity: { value: 0.85 },
+      uGlow: { value: 1 },
+      uTicks: { value: 12 },
+      uDeep: { value: new Color() },
+      uBody: { value: new Color() },
+      uTint: { value: new Color() },
+      uCore: { value: new Color() }
+    }),
+    vertexShader: DIAL_VERTEX,
+    fragmentShader: DIAL_FRAGMENT
+  });
+
+  /** @param {object} state { center, fwd, right, radius, open, fade, hand, wave, beat, seed } */
+  material.userData.sync = (state) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(state.center);
+    u.uFwd.value.copy(state.fwd);
+    u.uRight.value.copy(state.right);
+    u.uRadius.value = Math.max(0.1, state.radius);
+    u.uSeed.value = state.seed;
+    u.uOpen.value = state.open;
+    u.uFade.value = state.fade * g.opacity;
+    u.uHand.value = state.hand;
+    u.uWave.value = state.wave;
+    u.uBeat.value = state.beat;
+    u.uOpacity.value = c.dialOpacity;
+    u.uGlow.value = c.dialGlow * g.glow;
+    u.uTicks.value = Math.max(1, Math.round(c.dialTicks));
+    u.uDeep.value.copy(getColor(c.colorDialDeep));
+    u.uBody.value.copy(getColor(c.colorDialBody));
+    u.uTint.value.copy(getColor(c.colorDialTint));
+    u.uCore.value.copy(getColor(c.colorDialCore));
   };
 
   return material;

@@ -14,7 +14,7 @@ export default {
     label: 'Void Bloom',
     accent: '#6a5cff',
     key: '',
-    element: 'shadow',
+    element: 'void',
     hint: 'Shadow — a black flower bursts from the floor and opens; its throat pulls the circle in, then the petals snap shut and sink',
     cast: 'zone',
     glyph: `<path d="M50 82C34 64 30 40 50 18C70 40 66 64 50 82Z"/><path d="M50 82C30 76 14 58 16 40C34 44 46 60 50 82Z"/><path d="M50 82C70 76 86 58 84 40C66 44 54 60 50 82Z"/><circle cx="50" cy="82" r="4"/>`
@@ -23,14 +23,14 @@ export default {
     /* --- the cast itself --- */
     range: 18, // maximum cast distance, metres
     minRange: 2, // closer than this and the cast is refused
-    speed: 22, // how fast the seed flies, metres/second
+    speed: 22, // how fast the seed flies and the crawl surges, metres/second
     lifetime: 1.4, // seconds the vein stain takes to fade once the bloom has sunk
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: 'cast1', // which clip in `CAST_ANIMATIONS` the body throws
     zoneRadius: 4.6, // metres — what the bloom pulls in
 
     /* --- light --- */
-    lightColor: '#b8a8ff',
+    lightColor: '#8a6cff',
     lightIntensity: 9, // from the throat
     lightRadius: 10,
     lightFlicker: 0.3,
@@ -40,21 +40,27 @@ export default {
     /* ================================================================ */
     handForward: 0.5,
     handHeight: 1.4,
-    arcHeight: 2.0, // metres the throw arcs
-    seedSize: 0.4, // radius of the seed billboard, metres
+    arcHeight: 1.1, // metres the throw arcs
+    seedSize: 0.6, // radius of the seed billboard, metres
+    crawlWidth: 0.8, // metres — the dark crawl surging down the line under the seed
+    crawlStart: 0.6, // metres from the caster's feet it starts
+    crawlMeander: 0.35, // metres it wanders off the line
+    crawlGlow: 0.8, // its violet filaments and head
+    crawlFade: 0.7, // seconds it takes to be eaten after the snap
+    crawlSmokeRate: 70, // black smoke shed by the seed and the crawl's head, per second
 
     /* ================================================================ */
     /* 2 · THE PETALS                                                    */
     /* ================================================================ */
     petals: 7, // petals round the bloom (3..10)
-    petalReach: 0.72, // petal length, × zoneRadius
-    petalWidth: 0.95, // half-width at the widest, metres
-    petalCup: 0.35, // how much each petal cups
+    petalReach: 0.84, // petal length, × zoneRadius
+    petalWidth: 1.3, // half-width at the widest, metres
+    petalCup: 0.5, // how much each petal cups
     petalBase: 0.35, // metres out from the centre the petals root
     budAngle: 1.5, // radians a closed petal stands at (π/2 = upright)
     budCurl: 1.1, // radians a closed petal curls in over its length
-    openAngle: 0.55, // radians an open petal leans at
-    openCurl: -0.85, // radians an open petal curls (negative = out and down)
+    openAngle: 1.15, // radians an open petal leans at — a tulip, 2.4 m tall
+    openCurl: -0.6, // radians an open petal curls (negative = out and down)
     clench: -0.12, // how far past closed they snap (negative open)
     breath: 0.06, // radians the open petals breathe
     sproutTime: 0.32, // seconds the bud takes to burst out of the floor
@@ -64,31 +70,41 @@ export default {
     holdClosed: 0.25, // seconds it stands shut
     sinkTime: 0.5, // seconds it takes to sink into the floor
     veinCount: 7, // side veins along a petal
-    veinGlow: 2.6,
-    edgeGlow: 3.2, // the bright rim and tip
-    petalRim: 1.2, // fresnel
+    veinGlow: 2.2,
+    edgeGlow: 2.2, // the bright rim and tip (only the thinnest edge)
+    petalRim: 2.0, // fresnel (violet)
+    petalRampLight: 0.48, // how far sunlight alone carries the flesh along the ramp
+    petalRimWidth: 0.07, // share of the half-width that is rim
+    petalSpecular: 0.45, // waxy sheen
     pulseSpeed: 1.6, // vein pulses per second, tip → throat
-    colorPetal: '#0b0616',
-    colorPetalDeep: '#1a0c34',
-    colorVein: '#7a4cff',
-    colorRim: '#e4d8ff',
+    colorPetal: '#05020c', // deep
+    colorPetalDeep: '#140828', // deep, mottle
+    colorPetalBody: '#3a1a86', // body — sunlit violet flesh
+    colorVein: '#7a4cff', // tint
+    colorRim: '#c6b4ff', // hot — the thinnest rim only
 
     /* ================================================================ */
     /* 3 · THE THROAT                                                    */
     /* ================================================================ */
-    throatRadius: 1.35, // metres
+    throatRadius: 1.6, // metres
     throatArms: 5, // spiral arms
     throatTwist: 1.6, // how tightly they wind
     throatSpin: 0.9, // turns per second
-    throatGlow: 3.0,
+    throatGlow: 2.0,
+    throatHole: 0.5, // × throatRadius — the black centre
     swirlStrength: 1.0, // how hard the light turns round it
     colorThroatCore: '#010004',
+    coreSize: 0.9, // metres — the void core, an opaque writhing black mass in the throat
+    coreHeight: 2.4, // metres above the floor at full bloom
+    coreWrithe: 0.2,
+    coreRimGlow: 2.4, // its thin violet event-horizon rim
+    coreRimPower: 3.2,
 
     /* ================================================================ */
     /* 4 · THE VEINS ON THE FLOOR                                        */
     /* ================================================================ */
-    groundVeinGlow: 2.2,
-    stainOpacity: 0.55,
+    groundVeinGlow: 0.6,
+    stainOpacity: 0.75,
     colorStain: '#06030c',
 
     /* ================================================================ */
@@ -102,7 +118,7 @@ export default {
     smokeSize: 0.7,
     smokeLife: 1.2,
     smokeOpacity: 0.5,
-    colorMoteA: '#ffffff',
+    colorMoteA: '#d8ccff',
     colorMoteB: '#d4c4ff',
     colorMoteC: '#7a4cff',
     colorMoteD: '#1a0a40',
@@ -116,7 +132,7 @@ export default {
     /* ================================================================ */
     sproutShake: 0.35,
     sproutDebris: 60, // sparks thrown as it bursts out of the floor
-    snapFlash: 0.3,
+    snapFlash: 0.16,
     snapShake: 0.6,
     shakeDuration: 0.4,
     snapLight: 3.0, // × lightIntensity
@@ -130,13 +146,13 @@ export default {
     shockRadius: 1.4, // × zoneRadius
     burstSize: 0.5, // × zoneRadius
     burstIntensity: 1.1,
-    colorFlash: '#a890ff',
-    colorBurstA: '#ffffff',
-    colorBurstB: '#9a7aff',
-    colorBurstC: '#2a1060',
+    colorFlash: '#3a1c8a',
+    colorBurstA: '#b9a4ff',
+    colorBurstB: '#5630c8',
+    colorBurstC: '#0e0424',
     colorShockA: '#7a52ff',
-    colorShockB: '#ece4ff',
-    colorSparkA: '#ffffff',
+    colorShockB: '#b9a4ff',
+    colorSparkA: '#e2d6ff',
     colorSparkB: '#d8c6ff',
     colorSparkC: '#8a60ff',
     colorSparkD: '#2a1060',

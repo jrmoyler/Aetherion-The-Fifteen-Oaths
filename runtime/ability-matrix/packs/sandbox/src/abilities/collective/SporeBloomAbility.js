@@ -12,9 +12,10 @@ import { Ability, AbilityPhase } from '../Ability.js';
 import {
   createSporeMushroomMaterial,
   createSporePodMaterial,
-  createSporeGroundMaterial
+  createSporeGroundMaterial,
+  createSporeTrailMaterial
 } from '../../materials/collective/SporeBloomMaterials.js';
-import { createMushroomGeometry } from '../../assets/collective/SporeBloomGeometry.js';
+import { createMushroomGeometry, createSporeTrailGeometry } from '../../assets/collective/SporeBloomGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
 import { DecalType } from '../../effects/GroundDecals.js';
@@ -33,6 +34,8 @@ const MAX_PER_CLUSTER = 8;
 const MAX_MUSHROOMS = MAX_CLUSTERS * MAX_PER_CLUSTER;
 /** Bodies one bloom can be working on at once. */
 const MAX_VICTIMS = 16;
+/** Rows in the pod's smoke trail. */
+const TRAIL_SEGMENTS = 40;
 const TAU = Math.PI * 2;
 const GOLDEN = Math.PI * (3 - Math.sqrt(5));
 
@@ -48,6 +51,7 @@ const _up = new Vector3(0, 1, 0);
 const _yaw = new Quaternion();
 const _tilt = new Quaternion();
 const _dummy = new Object3D();
+const _prev = new Vector3();
 
 /**
  * SPORE BLOOM — Fungal, zone cast.
@@ -62,6 +66,12 @@ const _dummy = new Object3D();
  *
  *   1. **THE POD** (`createSporePodMaterial`) — a husk lobbed on an arc, veins
  *      of light pulsing toward its leading end, shedding motes as it flies.
+ *      Behind it, **THE TRAIL** (`createSporeTrailMaterial`, a camera-facing
+ *      strip laid along the lob's own parabola each frame) pours dark spore
+ *      smoke back off the pod with a hot thread down its middle, and real
+ *      smoke puffs are shed along the path; after landing the tail retracts
+ *      into the impact over `podTrailFade`, so the arc from hand to circle
+ *      reads in a single frame.
  *   2. **THE MYCELIUM** (`createSporeGroundMaterial`) — a voronoi edge network
  *      plus radial runners, spreading from the impact at `veinSpeed` with an
  *      uneven, noise-broken front; light pulses run outward along it over a
@@ -77,8 +87,14 @@ const _dummy = new Object3D();
  *   4. **THE SPORE CLOUD** — non-additive SMOKE (it has to occlude, or a spore
  *      cloud is a green haze) plus additive SOFT motes on curl noise, puffed out
  *      of every cap on a per-mushroom rhythm and drifting over the circle.
- *   5. **THE LANDING** — a DUSTRING of spores and a thin AIR shell, a shake,
- *      a flash and a light punch, then the light breathes with the veins.
+ *   5. **THE LANDING** — the pod splits: a dense EARTH ball of spore dust, a
+ *      ring of dark smoke rolled out along the floor, lit husk fragments
+ *      (CHIP) thrown out of it, a DUSTRING, a thin AIR shell, a shake and a
+ *      light punch, then the light breathes with the veins.
+ *   6. **THE STANDING CLOUD** — a second, low-drag SMOKE system turning as a
+ *      slow vortex over the circle (each puff born on the rim of a band and
+ *      carried round it, drawn inward), so the linger has a body that moves
+ *      and a dark deep stop, not a haze.
  *
  * ## Hits
  *
@@ -140,6 +156,16 @@ export class SporeBloomAbility extends Ability {
     this.pod.visible = false;
     this.group.add(this.pod);
 
+    /* ---- layer 1b: the trail ---- */
+    this.trailGeometry = createSporeTrailGeometry(TRAIL_SEGMENTS);
+    this.trailMaterial = createSporeTrailMaterial();
+    this.trail = new Mesh(this.trailGeometry, this.trailMaterial);
+    this.trail.name = 'SporeTrail';
+    this.trail.layers.set(LAYER.VFX);
+    this.trail.frustumCulled = false;
+    this.trail.visible = false;
+    this.group.add(this.trail);
+
     /* ---- layer 2: the mycelium ---- */
     this.groundGeometry = new PlaneGeometry(1, 1, 1, 1).rotateX(-Math.PI / 2);
     this.groundMaterial = createSporeGroundMaterial();
@@ -192,6 +218,7 @@ export class SporeBloomAbility extends Ability {
     this._clock = -1;
     this._cloud = 0;
     this._seed = 0;
+    this._swirl = 1;
   }
 
   createParticles() {
@@ -224,8 +251,35 @@ export class SporeBloomAbility extends Ability {
     this.motes.uniforms.uFadeIn.value = 0.08;
     this.motes.uniforms.uFadeOut.value = 0.45;
 
+    /* ---- layer 6: the standing cloud ---- */
+    this.cloud = particles.get('spore.cloud', {
+      capacity: 900,
+      shape: ParticleShape.SMOKE,
+      additive: false,
+      curl: true,
+      softFade: 1.4
+    });
+    this.cloud.uniforms.uSizeIn.value = 0.2;
+    this.cloud.uniforms.uFadeIn.value = 0.22;
+    this.cloud.uniforms.uFadeOut.value = 0.45;
+
+    /* ---- layer 5: the split husk ---- */
+    this.husk = particles.get('spore.husk', {
+      capacity: 300,
+      shape: ParticleShape.CHIP,
+      additive: false,
+      lit: true,
+      softFade: 0.2
+    });
+    this.husk.uniforms.uSizeIn.value = 0.02;
+    this.husk.uniforms.uFadeIn.value = 0.03;
+    this.husk.uniforms.uFadeOut.value = 0.6;
+    this.husk.uniforms.uEndSize.value = 0.7;
+
     this.trailEmitter = new RateEmitter();
+    this.trailSmokeEmitter = new RateEmitter();
     this.driftEmitter = new RateEmitter();
+    this.cloudEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -266,7 +320,10 @@ export class SporeBloomAbility extends Ability {
     this._cloud = 0;
     this._clearVictims();
     this.trailEmitter.reset();
+    this.trailSmokeEmitter.reset();
     this.driftEmitter.reset();
+    this.cloudEmitter.reset();
+    this._swirl = Math.random() < 0.5 ? -1 : 1;
 
     this._clusterCount = Math.min(MAX_CLUSTERS, Math.max(1, Math.round(c.clusters)));
     const per = Math.min(MAX_PER_CLUSTER, Math.max(1, Math.round(c.perCluster)));
@@ -306,6 +363,7 @@ export class SporeBloomAbility extends Ability {
     this.pod.visible = true;
     this._placePod();
     this._sync();
+    this._updateTrail(1, 0);
   }
 
   /* ------------------------------------------------------------------ */
@@ -406,6 +464,106 @@ export class SporeBloomAbility extends Ability {
     this.motes.uniforms.uOpacity.value = g.opacity;
     this.motes.uniforms.uGlow.value = c.moteGlow * g.glow;
     this.motes.uniforms.uTurbulence.value = c.moteTurbulence * g.turbulence;
+
+    this.cloud.setGradient(
+      getColor(c.colorCloudA),
+      getColor(c.colorCloudB),
+      getColor(c.colorCloudC),
+      getColor(c.colorCloudD)
+    );
+    this.cloud.uniforms.uDrag.value = c.cloudDrag;
+    this.cloud.uniforms.uGravity.value.set(0, c.cloudRise, 0);
+    this.cloud.uniforms.uSizeScale.value = c.cloudSize * g.particleSize;
+    this.cloud.uniforms.uLifeScale.value = g.particleLifetime;
+    this.cloud.uniforms.uSpeedScale.value = g.particleSpeed;
+    this.cloud.uniforms.uOpacity.value = c.cloudOpacity * g.opacity;
+    this.cloud.uniforms.uTurbulence.value = c.cloudTurbulence * g.turbulence;
+    this.cloud.uniforms.uEndSize.value = c.cloudSpread;
+
+    this.husk.setGradient(
+      getColor(c.colorPodVein),
+      getColor(c.colorLandB),
+      getColor(c.colorPodHusk),
+      getColor(c.colorLandC)
+    );
+    this.husk.uniforms.uGravity.value.set(0, -11, 0);
+    this.husk.uniforms.uSizeScale.value = g.particleSize;
+    this.husk.uniforms.uLifeScale.value = g.particleLifetime;
+    this.husk.uniforms.uSpeedScale.value = g.particleSpeed;
+    this.husk.uniforms.uOpacity.value = g.opacity;
+    this.husk.uniforms.uTurbulence.value = 0.1 * g.turbulence;
+  }
+
+  /** Height of the lob at fraction `u` of the line — the pod's own parabola. */
+  _lobHeight(u, c) {
+    return lerp(c.podLaunch, c.podSize, u) + 4 * c.podArc * u * (1 - u);
+  }
+
+  /**
+   * Lay the trail strip along the lob behind the pod.
+   * @param {number} fade 1 in flight → 0 settled
+   * @param {number} settle 0..1 how far the tail has retracted into the head
+   */
+  _updateTrail(fade, settle) {
+    const c = settings.spore;
+    const head = this.u;
+    // Never longer than the lob so far: the tail thins out at the hand
+    // instead of piling up there.
+    const span = Math.min(head, Math.max(0, c.podTrailLength) / Math.max(0.1, this.length)) * (1 - settle);
+    const pos = this.trailGeometry.attributes.position;
+    const tan = this.trailGeometry.attributes.aTangent;
+    for (let k = 0; k <= TRAIL_SEGMENTS; k++) {
+      const s = Math.max(0, head - (span * k) / TRAIL_SEGMENTS);
+      this.pointAt(s, _pos);
+      _pos.y = this._lobHeight(s, c);
+      // The tangent from a short finite step back down the curve.
+      const s0 = Math.max(0, s - 0.01);
+      this.pointAt(s0, _prev);
+      _prev.y = this._lobHeight(s0, c);
+      _vel.subVectors(_pos, _prev);
+      if (_vel.lengthSq() < 1e-8) _vel.copy(this.direction);
+      for (let side = 0; side < 2; side++) {
+        const v = k * 2 + side;
+        pos.setXYZ(v, _pos.x, _pos.y, _pos.z);
+        tan.setXYZ(v, _vel.x, _vel.y, _vel.z);
+      }
+    }
+    pos.needsUpdate = true;
+    tan.needsUpdate = true;
+    this.trailMaterial.userData.sync(this._seed, fade);
+    this.trail.visible = fade > 0.003 && span > 1e-4;
+  }
+
+  /** The cloud's slow vortex: puffs born round a band, carried round it. */
+  _cloudFx(dt, c, g, strength) {
+    const count = Math.min(24, Math.round(this.cloudEmitter.tick(dt, c.cloudRate * strength) * g.particleCount));
+    if (count <= 0) return;
+    this.pointAt(1, _centre);
+    for (let n = 0; n < count; n++) {
+      const a = Math.random() * TAU;
+      const r = c.zoneRadius * Math.sqrt(randRange(0.15, 0.95));
+      _pos.set(_centre.x + Math.cos(a) * r, c.cloudHeight + randRange(-0.5, 0.5) * c.cloudBand, _centre.z + Math.sin(a) * r);
+      // Tangent round the centre, plus a pull inward.
+      const sw = c.cloudSwirl * this._swirl;
+      _vel.set(-Math.sin(a) * sw - Math.cos(a) * c.cloudInward, 0.05, Math.cos(a) * sw - Math.sin(a) * c.cloudInward);
+      const speed = _vel.length();
+      _emit.position = _pos;
+      _emit.radius = 0.25;
+      _emit.direction = _dir.copy(_vel).normalize();
+      _emit.speed = speed;
+      _emit.speedVariance = 0.3;
+      _emit.spread = 0.15;
+      _emit.inherit = null;
+      _emit.anchor = null;
+      _emit.size = 1;
+      _emit.sizeVariance = 0.35;
+      _emit.life = c.cloudLife;
+      _emit.lifeVariance = 0.3;
+      _emit.spin = 0.3;
+      _emit.tint = null;
+      _emit.time = frame.uTime.value;
+      this.cloud.emit(1, _emit);
+    }
   }
 
   /**
@@ -715,6 +873,28 @@ export class SporeBloomAbility extends Ability {
     this.position.y = this.pod.position.y;
     this._updateMushrooms(dt, false);
     this.ground.visible = false;
+    this._updateTrail(1, 0);
+
+    // Dark spore smoke left hanging along the lob.
+    const puffs = Math.round(this.trailSmokeEmitter.tick(dt, c.podTrailSmoke) * g.particleCount);
+    if (puffs > 0) {
+      _emit.position = this.pod.position;
+      _emit.radius = c.podSize * 0.6;
+      _emit.direction = _dir.copy(this.direction).negate().setY(0.2).normalize();
+      _emit.speed = 0.4;
+      _emit.speedVariance = 0.5;
+      _emit.spread = 0.6;
+      _emit.inherit = null;
+      _emit.anchor = null;
+      _emit.size = c.podSize * 1.6;
+      _emit.sizeVariance = 0.4;
+      _emit.life = c.smokeLifetime * 0.45;
+      _emit.lifeVariance = 0.3;
+      _emit.spin = 0.4;
+      _emit.tint = null;
+      _emit.time = frame.uTime.value;
+      this.smoke.emit(puffs, _emit);
+    }
 
     const count = Math.round(this.trailEmitter.tick(dt, c.podTrailRate) * g.particleCount);
     if (count > 0) {
@@ -797,6 +977,59 @@ export class SporeBloomAbility extends Ability {
     _emit.spin = 0.4;
     this.smoke.emit(Math.round(14 * g.particleCount), _emit);
 
+    /* the pod splits: a dense ball of spore dust */
+    _pos.copy(_centre).setY(0.25);
+    this.ctx.bursts.spawn(BurstMode.EARTH, _pos, {
+      radius: 0.3,
+      endRadius: c.landCloud * g.explosionIntensity,
+      life: 0.9,
+      intensity: 1.0,
+      opacity: 0.6,
+      squash: 0.6,
+      colorA: getColor(c.colorCloudB),
+      colorB: getColor(c.colorCloudC),
+      colorC: getColor(c.colorCloudD)
+    });
+
+    /* a ring of dark smoke rolled out along the floor */
+    const spokes = 14;
+    const per = Math.max(1, Math.round((c.landDust * g.particleCount) / spokes));
+    for (let k = 0; k < spokes; k++) {
+      const a = (k / spokes) * TAU + Math.random() * 0.3;
+      _pos.set(_centre.x + Math.cos(a) * 0.4, 0.25, _centre.z + Math.sin(a) * 0.4);
+      _emit.position = _pos;
+      _emit.radius = 0.2;
+      _emit.direction = _dir.set(Math.cos(a), 0.12, Math.sin(a));
+      _emit.speed = c.landDustSpeed;
+      _emit.speedVariance = 0.35;
+      _emit.spread = 0.2;
+      _emit.inherit = null;
+      _emit.anchor = null;
+      _emit.size = 0.7;
+      _emit.sizeVariance = 0.4;
+      _emit.life = c.smokeLifetime * 0.6;
+      _emit.lifeVariance = 0.3;
+      _emit.spin = 0.5;
+      _emit.tint = null;
+      _emit.time = frame.uTime.value;
+      this.smoke.emit(per, _emit);
+    }
+
+    /* husk fragments thrown out of the split */
+    _pos.copy(_centre).setY(0.35);
+    _emit.position = _pos;
+    _emit.radius = c.podSize;
+    _emit.direction = _dir.set(0, 1, 0);
+    _emit.speed = c.landHuskSpeed;
+    _emit.speedVariance = 0.45;
+    _emit.spread = 0.9;
+    _emit.size = c.landHuskSize;
+    _emit.sizeVariance = 0.5;
+    _emit.life = 1.1;
+    _emit.lifeVariance = 0.3;
+    _emit.spin = 9;
+    this.husk.emit(Math.round(c.landHusk * g.particleCount), _emit);
+
     this.ctx.shake.add(c.landShake * g.explosionIntensity * g.cameraShake, 5, 16);
     this.ctx.flash.trigger(getColor(c.colorLandA), c.landFlash * g.explosionIntensity);
     this.lightBoost = c.lightIntensity * 1.2 * g.explosionIntensity;
@@ -814,8 +1047,16 @@ export class SporeBloomAbility extends Ability {
     this._updateMushrooms(dt, !fading);
     this._updateGround(Easing.inQuad(fadeT), 1 - Easing.inCubic(fadeT));
 
+    // The trail's tail retracts into the impact as it settles.
+    const settle = saturate(this.impactTime / Math.max(0.05, c.podTrailFade));
+    if (!fading && settle < 1) this._updateTrail(1 - settle, settle);
+    else this.trail.visible = false;
+
     const cloud = fading ? 1 - fadeT : 1;
     if (this._cloud > 0) this._driftFx(dt, c, g, cloud);
+    // The vortex is the pod's spores, released at the split: it turns from
+    // just after landing, independent of the caps' puffs (and of the hits).
+    if (this._clock > c.cloudDelay) this._cloudFx(dt, c, g, cloud);
     this._hits(dt, cloud);
 
     // The light sits in the bloom and breathes with it.
@@ -829,6 +1070,7 @@ export class SporeBloomAbility extends Ability {
     this._cloud = 0;
     this.mushrooms.count = 0;
     this.pod.visible = false;
+    this.trail.visible = false;
     this.ground.visible = false;
     this.groundMaterial.uniforms.uFade.value = 0;
     this._clearVictims();
@@ -843,6 +1085,8 @@ export class SporeBloomAbility extends Ability {
     this.podMaterial.dispose();
     this.groundGeometry.dispose();
     this.groundMaterial.dispose();
+    this.trailGeometry.dispose();
+    this.trailMaterial.dispose();
     super.dispose();
   }
 }
@@ -876,12 +1120,28 @@ export function buildEditor(gui, c, Editor) {
   R(pod, c, 'podVeinScale', 0.5, 10, 0.05, 'vein scale');
   R(pod, c, 'podPulse', 0, 20, 0.1, 'pulse speed');
   R(pod, c, 'podTrailRate', 0, 400, 1, 'trail motes / s');
+  R(pod, c, 'podTrailLength', 0, 40, 0.05, 'trail length (m)');
+  R(pod, c, 'podTrailWidth', 0, 4, 0.01, 'trail width (× pod)');
+  R(pod, c, 'podTrailGlow', 0, 8, 0.05, 'trail thread glow');
+  R(pod, c, 'podTrailOpacity', 0, 1, 0.01, 'trail opacity');
+  R(pod, c, 'podTrailScroll', 0, 12, 0.05, 'trail pour speed');
+  R(pod, c, 'podTrailFade', 0.05, 2, 0.01, 'trail settles over (s)');
+  R(pod, c, 'podTrailSmoke', 0, 200, 1, 'trail smoke / s');
+  pod.addColor(c, 'colorTrailHot').name('trail, hot');
+  pod.addColor(c, 'colorTrailBody').name('trail, body');
+  pod.addColor(c, 'colorTrailDeep').name('trail, deep');
   pod.addColor(c, 'colorPodHusk').name('husk');
   pod.addColor(c, 'colorPodVein').name('veins');
   pod.addColor(c, 'colorPodHot').name('veins, hot');
   R(pod, c, 'landShake', 0, 1, 0.01, 'landing shake');
   R(pod, c, 'landFlash', 0, 1, 0.01, 'landing flash');
   R(pod, c, 'landBurst', 0.1, 6, 0.05, 'landing shell (m)');
+  R(pod, c, 'landCloud', 0, 6, 0.05, 'landing dust ball (m)');
+  R(pod, c, 'landDust', 0, 120, 1, 'landing dust ring');
+  R(pod, c, 'landDustSpeed', 0, 10, 0.05, 'dust ring speed');
+  R(pod, c, 'landHusk', 0, 120, 1, 'husk fragments');
+  R(pod, c, 'landHuskSpeed', 0, 12, 0.05, 'husk speed');
+  R(pod, c, 'landHuskSize', 0.01, 0.4, 0.005, 'husk size');
   pod.addColor(c, 'colorLandA').name('landing, bright');
   pod.addColor(c, 'colorLandB').name('landing, body');
   pod.addColor(c, 'colorLandC').name('landing, dark');
@@ -970,6 +1230,21 @@ export function buildEditor(gui, c, Editor) {
   R(cloud, c, 'smokeOpacity', 0, 1, 0.01, 'smoke opacity');
   R(cloud, c, 'smokeTurbulence', 0, 3, 0.01, 'smoke turbulence');
   Editor.gradient(cloud, c, 'colorSmoke', 'smoke colour');
+  const vortex = cloud.addFolder('Standing cloud');
+  R(vortex, c, 'cloudDelay', 0, 3, 0.01, 'starts after landing (s)');
+  R(vortex, c, 'cloudRate', 0, 160, 1, 'puffs / s');
+  R(vortex, c, 'cloudSwirl', -4, 4, 0.01, 'swirl (m/s)');
+  R(vortex, c, 'cloudInward', -2, 2, 0.01, 'pull inward (m/s)');
+  R(vortex, c, 'cloudHeight', 0, 4, 0.01, 'height (m)');
+  R(vortex, c, 'cloudBand', 0, 3, 0.01, 'band (m)');
+  R(vortex, c, 'cloudSize', 0.05, 4, 0.01, 'puff size');
+  R(vortex, c, 'cloudSpread', 0.5, 8, 0.05, 'end size');
+  R(vortex, c, 'cloudLife', 0.2, 8, 0.05, 'lifetime');
+  R(vortex, c, 'cloudRise', -1, 2, 0.01, 'rise');
+  R(vortex, c, 'cloudOpacity', 0, 1, 0.01, 'opacity');
+  R(vortex, c, 'cloudTurbulence', 0, 3, 0.01, 'turbulence');
+  R(vortex, c, 'cloudDrag', 0, 4, 0.01, 'drag');
+  Editor.gradient(vortex, c, 'colorCloud', 'cloud colour');
   R(cloud, c, 'moteSize', 0.005, 0.3, 0.001, 'spore size');
   R(cloud, c, 'moteLifetime', 0.2, 8, 0.05, 'spore lifetime');
   R(cloud, c, 'moteRise', -1, 2, 0.01, 'spore rise');

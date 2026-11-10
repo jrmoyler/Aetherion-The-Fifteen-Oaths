@@ -22,6 +22,7 @@ const _pos = new Vector3();
 const _dir = new Vector3();
 const _inherit = new Vector3();
 const _end = new Vector3();
+const _ring = new Vector3();
 
 /**
  * DUNE SCOURGE — a scouring dune wave rolls down the line and breaks.
@@ -53,6 +54,22 @@ const _end = new Vector3();
  *      ripples across the line and in rings round the crash, relit by the sun,
  *      revealed behind the crest and blown away at the end.
  *
+ * ## The upgrade (2026): gather, weight, and a dune that walks
+ *
+ *   - **anticipation** — for `gatherTime` the front is held at the caster's
+ *     feet: sand is drawn in off a ring of `gatherRadius` (SMOKE and grit
+ *     spiralling inward and up) and the ridge swells out of the floor there
+ *     before it sets off.
+ *   - **the wave is solid** — opaque, on `LAYER.SHAPED`, lit by the sun and
+ *     laying its own shadow through a depth material that runs the same
+ *     parameter-space surface (`createDuneWaveMaterial().userData.depth`),
+ *     with a fourth, deep ramp stop where it meets the floor.
+ *   - **linger: the barchan** — the breaking wave does not just vanish: it
+ *     collapses into a lower crescent dune (`mound*`) round the crash point,
+ *     same shader, rounder shape. It *walks* — creeping on down the line at
+ *     `moundCreep` m/s, sand avalanching off its slip face and blowing off
+ *     its crest — and in the fade it is blown flat into the ripple fan.
+ *
  * Hits are the engine's default line capsule: the wave *reaches*, it does not
  * choose.
  *
@@ -80,10 +97,25 @@ export class DuneScourgeAbility extends Ability {
     // Parameter-space vertices: not culled, and kept out of the depth prepass
     // (LAYER.WORLD), whose override material would rasterise the raw strip.
     this.wave.frustumCulled = false;
-    this.wave.layers.set(LAYER.VFX);
     this.wave.renderOrder = 4;
     this.wave.visible = false;
     this.group.add(this.wave);
+
+    /* ---- linger: the mound the wave leaves (same strip, its own material) ---- */
+    this.moundMaterial = createDuneWaveMaterial();
+    this.mound = new Mesh(this.waveGeometry, this.moundMaterial);
+    this.mound.name = 'DuneMound';
+    this.mound.frustumCulled = false;
+    this.mound.renderOrder = 4;
+    this.mound.visible = false;
+    this.group.add(this.mound);
+    // Lit sand that lays a shadow, kept out of the depth prepass (see LAYER.SHAPED).
+    for (const mesh of [this.wave, this.mound]) {
+      mesh.layers.set(LAYER.SHAPED);
+      mesh.castShadow = true;
+      mesh.receiveShadow = false;
+      mesh.customDepthMaterial = mesh.material.userData.depth;
+    }
 
     /* ---- layer 5: the ripple bed ---- */
     this.rippleGeometry = new PlaneGeometry(1, 1, 1, 1).rotateX(-Math.PI / 2);
@@ -107,6 +139,24 @@ export class DuneScourgeAbility extends Ability {
       crash: 0,
       seed: 0
     };
+    this._moundState = {
+      origin: this.origin,
+      dir: this.direction,
+      side: this.side,
+      front: 0,
+      halfWidth: 1,
+      height: 0,
+      crash: 0,
+      seed: 0,
+      tail: 2,
+      lead: 1,
+      curl: 0,
+      bow: 1,
+      taper: 0.6
+    };
+    this._moundFront = 0;
+    this._moundHeight = 0;
+    this.gatherEmitter = null;
     this._rippleState = {
       origin: this.origin,
       dir: this.direction,
@@ -172,6 +222,8 @@ export class DuneScourgeAbility extends Ability {
     this.gritEmitter = new RateEmitter();
     this.sprayEmitter = new RateEmitter();
     this.dustEmitter = new RateEmitter();
+    this.gatherEmitter = new RateEmitter();
+    this.avalancheEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -186,6 +238,27 @@ export class DuneScourgeAbility extends Ability {
 
   get fadeDuration() {
     return Math.max(0.1, settings.dune.rippleFade * settings.global.lifetime);
+  }
+
+  /** Seconds the front is held at the caster while the sand gathers. */
+  get _hold() {
+    return Math.max(0, settings.dune.gatherTime * settings.global.lifetime);
+  }
+
+  /** The front waits out the gather, then runs like the base front. */
+  advance(dt) {
+    const hold = this._hold;
+    if (this.age < hold) {
+      this.pointAt(0, this.position);
+      return false;
+    }
+    const speed = this.config.speed * settings.global.speed;
+    const easeIn = Easing.outQuad(saturate((this.age - hold) / 0.08));
+    this.front += speed * easeIn * dt;
+    const previousU = this.u;
+    this.u = saturate(this.front / this.length);
+    this.pointAt(this.u, this.position);
+    return this.u >= 1 && previousU < 1;
   }
 
   /** Warm bounce off moving sand: it ripples with the grain, slowly. */
@@ -218,6 +291,11 @@ export class DuneScourgeAbility extends Ability {
     this.gritEmitter.reset();
     this.sprayEmitter.reset();
     this.dustEmitter.reset();
+    this.gatherEmitter.reset();
+    this.avalancheEmitter.reset();
+    this._moundFront = 0;
+    this._moundHeight = 0;
+    this.mound.visible = false;
 
     // The one thing a cast captures. Everything else is resolved per frame.
     this._seed = Math.random() * 100;
@@ -266,6 +344,19 @@ export class DuneScourgeAbility extends Ability {
     w.seed = this._seed;
     this.waveMaterial.userData.sync(w);
 
+    const m = this._moundState;
+    m.front = this._moundFront;
+    m.halfWidth = c.moundWidth;
+    m.height = this._moundHeight;
+    m.seed = this._seed + 17;
+    m.tail = c.moundTail;
+    m.lead = c.moundLead;
+    m.curl = c.moundCurl;
+    m.bow = c.moundBow;
+    m.taper = c.moundTaper;
+    this.moundMaterial.userData.sync(m);
+    this.mound.visible = this._moundHeight > 0.01;
+
     const r = this._rippleState;
     r.length = this.length;
     r.seed = this._seed;
@@ -311,8 +402,13 @@ export class DuneScourgeAbility extends Ability {
   onTravel(dt) {
     const c = settings.dune;
 
-    this._crestFront = this.front;
-    this._crestHeight = this._buildHeight(this.front);
+    // Anticipation: the ridge swells out of the floor ahead of the caster's
+    // feet while the sand is drawn in, then sets off from there.
+    const hold = this._hold;
+    const gather = hold > 0 ? saturate(this.age / hold) : 1;
+    this._crestFront = Math.min(this.length, c.gatherOffset + this.front);
+    this._crestHeight = gather < 1 ? c.heightNear * Easing.outBack(gather) : this._buildHeight(this.front);
+    if (gather < 1) this._gatherFx(dt, gather);
 
     const r = this._rippleState;
     r.reveal = this.front - c.rippleLag;
@@ -413,6 +509,16 @@ export class DuneScourgeAbility extends Ability {
     this._crestFront = this.length + c.crashRun * Easing.outCubic(crashing);
     this._crestHeight = this._buildHeight(this.length) * (1 - Easing.inCubic(crashing));
     this.wave.visible = crashing < 1;
+
+    /* --- the mound: the wave collapses into a barchan that walks on, then is
+       blown flat --- */
+    const since = this.phase === AbilityPhase.IMPACT ? this.impactTime : this.impactDuration + this.fadeTime;
+    const rise = Easing.outCubic(saturate((since - c.crashTime * 0.35) / Math.max(0.05, c.moundRise)));
+    const flatten = this.phase === AbilityPhase.FADE ? Easing.inQuad(saturate(this.fadeTime / this.fadeDuration)) : 0;
+    const settle = 1 + c.moundBreath * Math.sin(since * 5.3) * (1 - flatten);
+    this._moundHeight = c.moundHeight * rise * (1 - flatten) * settle;
+    this._moundFront = this.length + c.crashRun * 0.75 + c.moundCreep * since;
+    if (this._moundHeight > 0.05) this._moundFx(dt, rise * (1 - flatten));
 
     /* --- the bed: reveal the rest of the line, open the fan, then blow away --- */
     const r = this._rippleState;
@@ -518,6 +624,77 @@ export class DuneScourgeAbility extends Ability {
     }
   }
 
+  /** Sand drawn in off a ring round the caster's feet and up into the swell. */
+  _gatherFx(dt, gather) {
+    const c = settings.dune;
+    const g = settings.global;
+    const n = Math.round(this.gatherEmitter.tick(dt, c.gatherRate) * g.particleCount);
+    if (n <= 0) return;
+    this.pointAt(0, _end).addScaledVector(this.direction, c.gatherOffset * 0.6);
+    const time = frame.uTime.value;
+    for (let k = 0; k < n; k++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = c.gatherRadius * (1 - gather * 0.5) * randRange(0.7, 1.1);
+      _ring.set(Math.cos(a), 0, Math.sin(a));
+      _pos.copy(_end).addScaledVector(_ring, r).setY(0.15);
+      // Inward, a little round (the swirl), and up.
+      _dir.set(-_ring.x + _ring.z * 0.6, 0.55, -_ring.z - _ring.x * 0.6).normalize();
+      _emit.position = _pos;
+      _emit.radius = 0.15;
+      _emit.direction = _dir;
+      _emit.speed = r * 2.2;
+      _emit.speedVariance = 0.3;
+      _emit.spread = 0.2;
+      _emit.inherit = null;
+      _emit.anchor = null;
+      _emit.size = 0.8;
+      _emit.sizeVariance = 0.5;
+      _emit.life = 0.45;
+      _emit.lifeVariance = 0.3;
+      _emit.spin = 0.6;
+      _emit.tint = null;
+      _emit.time = time;
+      if (k % 3 === 0) this.dust.emit(1, _emit);
+      else this.spray.emit(1, _emit);
+    }
+    this.ctx.shake.rumble(c.rumble * 0.5 * gather, dt);
+  }
+
+  /** The mound walks: sand avalanches off its slip face and blows off its crest. */
+  _moundFx(dt, strength) {
+    const c = settings.dune;
+    const g = settings.global;
+    const n = Math.round(this.avalancheEmitter.tick(dt, c.avalancheRate * strength) * g.particleCount);
+    if (n <= 0) return;
+    const time = frame.uTime.value;
+    for (let k = 0; k < n; k++) {
+      const lat = randRange(-0.8, 0.8);
+      this.pointAt(0, _pos).addScaledVector(this.direction, this._moundFront - c.moundBow * lat * lat + c.moundLead * 0.15);
+      _pos.addScaledVector(this.side, lat * c.moundWidth);
+      _pos.y = Math.max(0.1, this._moundHeight * (1 - Math.abs(lat)) * 0.9);
+      const blow = k % 2 === 0;
+      // Down the slip face (grit), or blown back up off the crest (spray).
+      _dir.copy(this.direction).multiplyScalar(blow ? -0.3 : 0.7).setY(blow ? 1 : -0.35).normalize();
+      _emit.position = _pos;
+      _emit.radius = 0.12;
+      _emit.direction = _dir;
+      _emit.speed = blow ? c.spraySpeed * 0.7 : c.gritSpeed * 0.35;
+      _emit.speedVariance = 0.5;
+      _emit.spread = 0.35;
+      _emit.inherit = null;
+      _emit.anchor = null;
+      _emit.size = 1;
+      _emit.sizeVariance = 0.6;
+      _emit.life = blow ? c.sprayLifetime : c.gritLifetime;
+      _emit.lifeVariance = 0.4;
+      _emit.spin = blow ? 0 : 7;
+      _emit.tint = null;
+      _emit.time = time;
+      if (blow) this.spray.emit(2, _emit);
+      else this.grit.emit(1, _emit);
+    }
+  }
+
   /** A point on the crest at lateral fraction `lat`, at the crest's own height. */
   _crestPoint(lat, halfWidth, height, out) {
     const c = settings.dune;
@@ -574,12 +751,14 @@ export class DuneScourgeAbility extends Ability {
 
   onDestroy() {
     this.wave.visible = false;
+    this.mound.visible = false;
     this.ripples.visible = false;
   }
 
   dispose() {
     this.waveGeometry.dispose();
     this.waveMaterial.dispose();
+    this.moundMaterial.dispose();
     this.rippleGeometry.dispose();
     this.rippleMaterial.dispose();
     super.dispose();
@@ -640,6 +819,15 @@ export function buildEditor(gui, c, Editor) {
   R(look, c, 'floorFade', 0.005, 1, 0.005, 'floor fade (m)');
   R(look, c, 'softFade', 0.01, 2, 0.01, 'soft intersection (m)');
 
+  look.addColor(c, 'colorSandDeep').name('deep (floor contact)');
+  R(look, c, 'contactShade', 0, 2, 0.01, 'contact shade height (m)');
+
+  const gather = wave.addFolder('Gather (anticipation)');
+  R(gather, c, 'gatherTime', 0, 1.5, 0.01, 'gathers for (s)');
+  R(gather, c, 'gatherRadius', 0.2, 6, 0.05, 'drawn in from (m)');
+  R(gather, c, 'gatherOffset', 0, 4, 0.05, 'swells ahead of the feet (m)');
+  R(gather, c, 'gatherRate', 0, 600, 1, 'sand drawn in / s');
+
   const crash = wave.addFolder('The break');
   R(crash, c, 'crashTime', 0.05, 3, 0.01, 'break time (s)');
   R(crash, c, 'crashRun', 0, 8, 0.05, 'rolls on by (m)');
@@ -698,6 +886,19 @@ export function buildEditor(gui, c, Editor) {
   impact.addColor(c, 'colorShockA').name('shockwave');
   impact.addColor(c, 'colorShockB').name('shockwave hot');
   impact.addColor(c, 'colorFlash').name('flash');
+
+  const mound = folder.addFolder('5 · The mound (linger)');
+  R(mound, c, 'moundHeight', 0, 4, 0.01, 'height (m)');
+  R(mound, c, 'moundWidth', 0.2, 8, 0.01, 'half-width (m)');
+  R(mound, c, 'moundTail', 0.2, 8, 0.05, 'back slope (m)');
+  R(mound, c, 'moundLead', 0.05, 4, 0.01, 'slip face (m)');
+  R(mound, c, 'moundCurl', 0, 1, 0.01, 'lip');
+  R(mound, c, 'moundBow', -3, 4, 0.01, 'horns trail by (m)');
+  R(mound, c, 'moundTaper', 0.01, 1, 0.01, 'flank taper');
+  R(mound, c, 'moundRise', 0.05, 2, 0.01, 'piles up over (s)');
+  R(mound, c, 'moundCreep', 0, 4, 0.01, 'walks on at (m/s)');
+  R(mound, c, 'moundBreath', 0, 0.3, 0.005, 'settling');
+  R(mound, c, 'avalancheRate', 0, 600, 1, 'avalanche / s');
 
   const bed = folder.addFolder('4 · Ripple bed');
   R(bed, c, 'rippleFrequency', 0.2, 8, 0.01, 'ridges per metre');

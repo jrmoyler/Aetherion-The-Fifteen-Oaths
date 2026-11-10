@@ -45,6 +45,94 @@ const _node = new Object3D();
 /** Reused by `DummyField#findTargets`. */
 const _targets = [];
 
+/* ------------------------------------------------------------------ */
+/* Camera pitch keeper (cast-local)                                     */
+/* ------------------------------------------------------------------ */
+
+const _orbit = new Vector3();
+/** How many casts of this kind are holding the camera right now. */
+const pitchHold = { holders: 0, polar: 0 };
+
+/**
+ * The sandbox rig (`core/CameraRig.js`) keeps the camera's *direction* to its
+ * orbit target and lets OrbitControls re-measure the angles each frame. So
+ * every metre the target moves rotates the orbit: a target that runs away
+ * flattens the pitch until it hits `maxPolar`, and one that comes back (or
+ * falls) steepens it past where it began. The clamp makes that a ratchet —
+ * this cast moves the target out and back hard, and before this keeper it
+ * left the camera looking straight down for the rest of the session.
+ *
+ * The keeper reads the rig through `ctx.shake.rig`, remembers the pitch the
+ * cast found, and puts the camera back on that pitch (about the live target,
+ * at the live distance, keeping the user's azimuth) before the rig runs each
+ * frame — through the cast and through a short settle while the target eases
+ * home. A clear restores the rest pose outright. It never touches the shared
+ * rig's code or settings.
+ */
+class PitchKeeper {
+  constructor() {
+    this.rig = null;
+    this.holding = false;
+  }
+
+  static polarOf(rig) {
+    _orbit.copy(rig.camera.position).sub(rig.controls.target);
+    const r = _orbit.length();
+    return r > 1e-6 ? Math.acos(Math.max(-1, Math.min(1, _orbit.y / r))) : 0;
+  }
+
+  capture(ctx) {
+    this.release();
+    const rig = ctx?.shake?.rig;
+    if (!rig?.controls?.target || !rig.camera) return;
+    this.rig = rig;
+    // A second cast of this kind while one is holding inherits the first pitch:
+    // the live one is already the held one.
+    if (pitchHold.holders === 0) pitchHold.polar = PitchKeeper.polarOf(rig);
+    pitchHold.holders++;
+    this.holding = true;
+  }
+
+  /** Put the camera back on the held pitch. `strength` 0..1. */
+  hold(strength = 1) {
+    if (!this.holding || strength <= 0) return;
+    const { camera, controls } = this.rig;
+    _orbit.copy(camera.position).sub(controls.target);
+    const r = _orbit.length();
+    if (r < 1e-6) return;
+    const now = Math.acos(Math.max(-1, Math.min(1, _orbit.y / r)));
+    const want = now + (pitchHold.polar - now) * Math.min(1, strength);
+    const az = Math.atan2(_orbit.x, _orbit.z);
+    const s = Math.sin(want);
+    _orbit.set(s * Math.sin(az), Math.cos(want), s * Math.cos(az)).multiplyScalar(r);
+    camera.position.copy(controls.target).add(_orbit);
+  }
+
+  /**
+   * Let go. `rest` (a clear, or the cast retired early): if nobody else is
+   * holding, put the rig in its rest pose now — the target on the caster at the
+   * rig's own height, no pull toward a cast, the camera on the held pitch at the
+   * rig's distance — so nothing is left to ease home afterwards.
+   */
+  release(rest = false, anchor = null, targetHeight = 0) {
+    if (!this.holding) return;
+    this.holding = false;
+    pitchHold.holders = Math.max(0, pitchHold.holders - 1);
+    if (!rest || pitchHold.holders > 0) return;
+    const rig = this.rig;
+    const a = anchor ?? rig.anchor;
+    if (a) rig.controls.target.set(a.x, (rig.anchor?.y ?? 0) + targetHeight, a.z);
+    rig.focusWeight = 0;
+    _orbit.copy(rig.camera.position).sub(rig.controls.target);
+    const az = Math.atan2(_orbit.x, _orbit.z);
+    const r = rig.distance ?? _orbit.length();
+    const s = Math.sin(pitchHold.polar);
+    _orbit.set(s * Math.sin(az), Math.cos(pitchHold.polar), s * Math.cos(az)).multiplyScalar(r);
+    rig.camera.position.copy(rig.controls.target).add(_orbit);
+    rig.camera.lookAt(rig.controls.target);
+  }
+}
+
 /**
  * CHRONO RECALL — Time / mobility, line cast.
  *
@@ -127,6 +215,9 @@ const _targets = [];
 export class ChronoRecallAbility extends Ability {
   constructor(context) {
     super(ID, context);
+    /** Holds the camera's pitch through the run, the snap home and a settle. */
+    this._keeper = new PitchKeeper();
+    this._settle = 0;
   }
 
   get handlesOwnHits() {
@@ -452,6 +543,30 @@ export class ChronoRecallAbility extends Ability {
     this._updateCurve();
     this._takeCharacter();
     this._sync();
+    this._settle = Math.max(0, c.cameraSettle);
+    if (c.cameraHold > 0) this._keeper.capture(this.ctx);
+  }
+
+  /**
+   * The base frame, then the camera put back on its pitch. Once the cast is
+   * DONE it stays in the manager for `cameraSettle` more seconds — invisible,
+   * not framed (`isActive` is false) — holding the pitch while the orbit
+   * target eases back onto the caster.
+   */
+  update(dt) {
+    const c = settings.recall;
+    if (this.phase === AbilityPhase.DONE) {
+      this._settle -= dt;
+      this._keeper.hold(c.cameraHold);
+      if (this._settle <= 0 || c.cameraHold <= 0) this._keeper.release();
+      return;
+    }
+    super.update(dt);
+    this._keeper.hold(c.cameraHold);
+  }
+
+  get isFinished() {
+    return this.phase === AbilityPhase.DONE && !this._keeper?.holding;
   }
 
   /** Drop an echo of the live pose at curve parameter `t`. */
@@ -964,7 +1079,7 @@ export class ChronoRecallAbility extends Ability {
       endRadius: c.snapBurst * g.explosionIntensity,
       life: c.snapBurstLife,
       intensity: c.snapBurstIntensity,
-      opacity: 0.7,
+      opacity: c.snapBurstOpacity * g.opacity,
       fresnel: 2.2 * g.fresnel,
       squash: 0.8,
       colorA: getColor(c.colorBurstA),
@@ -998,6 +1113,8 @@ export class ChronoRecallAbility extends Ability {
   onDestroy() {
     // First, always: wherever the cast was, the body goes back whole.
     this._releaseCharacter(false);
+    // Then the camera: a clear mid-cast leaves no pitch drift behind.
+    this._keeper.release(true, this.ctx.character?.position, settings.camera?.targetHeight ?? 1.35);
     this.path.visible = false;
     this.dials.count = 0;
     this.rewindWarp.visible = false;
@@ -1013,6 +1130,7 @@ export class ChronoRecallAbility extends Ability {
 
   dispose() {
     this._releaseCharacter(false);
+    this._keeper.release();
     this.pathGeometry.dispose();
     this.pathMaterial.dispose();
     this.dialGeometry.dispose();
@@ -1051,6 +1169,8 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   R(cast, c, 'bodyHeight', 0.1, 2.5, 0.01, 'body centre (m)');
   R(cast, c, 'tickRate', 0, 8, 0.05, 'light tick (Hz)');
+  R(cast, c, 'cameraHold', 0, 1, 0.01, 'hold camera pitch');
+  R(cast, c, 'cameraSettle', 0, 4, 0.05, 'camera settle after (s)');
   Editor.castAnimation(cast, c);
 
   const echo = folder.addFolder('1 · Echoes');
@@ -1071,6 +1191,8 @@ export function buildEditor(gui, c, Editor) {
   echo.addColor(c, 'colorEchoCore').name('glass');
   echo.addColor(c, 'colorEchoRim').name('rim');
   echo.addColor(c, 'colorEchoBand').name('bands');
+  echo.addColor(c, 'colorEchoDeep').name('deep glass');
+  R(echo, c, 'echoBody', 0, 1, 0.01, 'dark glass body');
 
   const col = folder.addFolder('Rewind collapse');
   R(col, c, 'echoCollapseTime', 0.02, 2, 0.01, 'collapse (s)');
@@ -1154,6 +1276,7 @@ export function buildEditor(gui, c, Editor) {
   R(snap, c, 'snapBurst', 0.1, 8, 0.05, 'pressure shell (m)');
   R(snap, c, 'snapBurstLife', 0.05, 2, 0.01, 'shell life');
   R(snap, c, 'snapBurstIntensity', 0, 6, 0.05, 'shell intensity');
+  R(snap, c, 'snapBurstOpacity', 0, 1, 0.01, 'shell opacity');
   snap.addColor(c, 'colorBurstA').name('shell core');
   snap.addColor(c, 'colorBurstB').name('shell body');
   snap.addColor(c, 'colorBurstC').name('shell edge');

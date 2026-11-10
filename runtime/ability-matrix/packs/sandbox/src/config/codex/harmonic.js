@@ -16,7 +16,7 @@ export default {
     label: 'Harmonic Reed',
     accent: '#e7fff8',
     key: '',
-    element: 'wind',
+    element: 'sound',
     hint: 'Wind — reeds of streaming air sprout in a spiral and ring, shedding rings of sound until the chord lifts everything in the circle',
     cast: 'zone',
     glyph: `<path d="M30 86V40M42 86V22M54 86V30M66 86V48"/><path d="M22 40H38M34 22H50M46 30H62M58 48H74"/><path d="M14 86H86"/>`

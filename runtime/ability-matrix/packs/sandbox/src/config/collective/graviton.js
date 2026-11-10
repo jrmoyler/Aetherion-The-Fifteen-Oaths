@@ -91,7 +91,7 @@ export default {
     wellRingSpacing: 0.42, // metres between concentric grid lines
     wellLineWidth: 0.035, // grid line half-width, fraction of one cell
     wellFlow: 0.55, // m/s the concentric lines drain into the throat
-    wellGridGlow: 2.4, // brightness of the grid
+    wellGridGlow: 0.35, // brightness of the grid
     wellHotGlow: 2.2, // the core's light pooling at the bottom of the throat
     wellShade: 0.75, // how dark the throat gets, 0..1
     wellGrain: 0.55, // stone grain in the funnel's surface
@@ -100,6 +100,19 @@ export default {
     wellBounce: 0.45, // after the collapse the floor overshoots *up* by this, × depth
     wellBounceRate: 13.0, // rad/s of that spring
     wellSettle: 4.5, // how fast it settles flat again
+    wellGripDeepen: 0.3, // the funnel sinks this much further (× depth) as the well feeds over the hold
+    wellHorizon: 1.25, // the black event horizon at the bottom of the throat, × wellThroat
+    wellHorizonGrow: 0.5, // how much it widens over the hold (crushed tight again at the end)
+    wellPhotonGlow: 1.5, // the thin hot ring hugging the horizon
+    wellPhotonWidth: 0.09, // its width, × horizon radius
+    wellArms: 3, // log-spiral arms of matter wound into the funnel
+    wellArmTight: 1.8, // how tightly they wind toward the axis
+    wellFieldSpin: 1.3, // rad/s the arms turn (faster down the throat)
+    wellFieldFlow: 0.7, // how fast the streaks drain down the throat
+    wellFieldContrast: 1.7, // arm vs. gap contrast
+    wellFieldGlow: 2.3, // brightness of the lensing field (drives the four-stop ramp)
+    wellRipple: 0.3, // inward-travelling gravity ripples through the field
+    wellOcclude: 0.97, // sunk floor seen past the near lip (× lip) is hidden by the real floor in front
 
     /* ================================================================ */
     /* 5 · THE INFALL — particles spiralling into the well               */
@@ -147,6 +160,7 @@ export default {
     shockLife: 0.75,
     burstRadius: 4.2, // the pressure shell's end radius, metres
     burstLife: 0.55,
+    burstIntensity: 0.45, // brightness of the air shell — kept low so the collapse never whites out the frame
     ejectaCount: 140, // stone thrown outward
     ejectaSpeed: 11,
     ejectaSize: 0.13,
@@ -160,7 +174,7 @@ export default {
     blastDustSize: 1.3,
     blastDustLifetime: 1.5,
     implodeMotes: 140, // the inrush in the crush window
-    collapseFlash: 1.1, // screen flash at the collapse
+    collapseFlash: 0.3, // screen flash at the collapse
     openFlash: 0.25, // smaller flash as the well opens
     openShake: 0.25,
     collapseShake: 0.85,
@@ -174,20 +188,22 @@ export default {
     lightIntensity: 6,
     lightRadius: 9,
     lightPulse: 0.35, // how much the light breathes with the core
-    collapseLight: 10, // light punch at the collapse
+    collapseLight: 6, // light punch at the collapse
 
     /* --- palette --- */
     colorCore: '#000000',
     colorCoreRim: '#b78cff',
     colorDiscHot: '#fff4ec',
-    colorDiscMid: '#ff8ad8',
+    colorDiscMid: '#b874ff',
     colorDiscCool: '#6a3cff',
     colorWellBase: '#14111c',
     colorWellDeep: '#030207',
-    colorWellGrid: '#9d6bff',
-    colorWellHot: '#ff9be6',
+    colorWellGrid: '#6b3fd0',
+    colorWellBody: '#5019b8',
+    colorWellTint: '#a983ff',
+    colorWellHot: '#f3e0ff',
     colorFlash: '#e7d4ff',
-    colorShockHot: '#ffffff',
+    colorShockHot: '#d8c4ff',
     colorShockBody: '#9d6bff',
     colorScorch: '#0d0a14',
     colorScorchEmber: '#5a2ea8',

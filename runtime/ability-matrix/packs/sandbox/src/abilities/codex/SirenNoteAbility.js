@@ -71,12 +71,22 @@ function syncSystem(p, a, b, cc, d, size, glow, turb) {
  * ## Layers
  *
  *   1. **the sheet** (`createSirenSheetMaterial`) — a strip bent into the
- *      vibrating sheet in the vertex stage, additive.
+ *      vibrating sheet in the vertex stage. Premultiplied: a filled body of
+ *      pressed air (dark deep teal in the nodes, saturated teal where it
+ *      swings) occludes what is behind it, and the light — pale strands,
+ *      white-hot leading edge — adds on top. Four-stop ramp
+ *      colorEdge → colorStrand → colorMembrane → colorDeep.
+ *
+ *   After the scream the note does not stop: for `holdTime` it **rings down**
+ *   — still vibrating, swelling on a slow tremolo and decaying — while the
+ *   floor's Chladni plate keeps re-sorting, crawling between two modes, its
+ *   filled lobes of piled dust pulsing with the note. Then it shreds.
  *   2. **the lens** (`createSirenLensMaterial`) — the same sheet, wider, on
  *      `LAYER.DISTORTION`, bending the world by the wave's own slope.
- *   3. **the wavefront** (`createSirenFrontMaterial`) — the pressure disc, and
- *      at the end the scream.
- *   4. **the Chladni floor** (`createSirenGroundMaterial`).
+ *   3. **the wavefront** (`createSirenFrontMaterial`) — the pressure disc, a
+ *      dark filled disc with teal arcs (not a glass rim); at the end the scream.
+ *   4. **the Chladni floor** (`createSirenGroundMaterial`) — filled: deep
+ *      scour, saturated lobes of piled dust, pale glowing ridges.
  *   5. **particles** — STREAK wind lines off the edges, RING pulses off every
  *      node, non-additive SMOKE dust thrown sideways under the front.
  *   6. **the scream** — AIR shell, SHOCKWAVE, flash, shake, light punch.
@@ -168,8 +178,11 @@ export class SirenNoteAbility extends Ability {
       reach: 0,
       heat: 1,
       erode: 0,
-      seed: 0
+      seed: 0,
+      morph: 0,
+      pulse: 0
     };
+    this._morph = 0;
 
     this._seed = 0;
     this._phase = 0;
@@ -307,6 +320,7 @@ export class SirenNoteAbility extends Ability {
     this._reach = 0;
     this._nodes = 0;
     this._screamed = false;
+    this._morph = 0;
     this.streakEmitter.reset();
     this.ringEmitter.reset();
     this.dustEmitter.reset();
@@ -361,6 +375,9 @@ export class SirenNoteAbility extends Ability {
     gs.heat = heat;
     gs.erode = erode;
     gs.seed = this._seed;
+    this._morph += dt * c.groundMorph * TAU * g.noiseSpeed * (0.3 + 0.7 * heat) * (1 + scream);
+    gs.morph = this._morph;
+    gs.pulse = Math.abs(Math.cos(this._phase)) * heat;
     this.groundMaterial.userData.sync(gs);
 
     syncSystem(this.streaks, c.colorStreakA, c.colorStreakB, c.colorStreakC, c.colorStreakD, c.streakSize, 2 * g.glow, 0.15);
@@ -531,8 +548,8 @@ export class SirenNoteAbility extends Ability {
       radius: 0.3,
       endRadius: c.burstRadius * power,
       life: c.burstLife,
-      intensity: 1.6,
-      opacity: 0.8 * g.opacity,
+      intensity: c.burstIntensity,
+      opacity: c.burstOpacity * g.opacity,
       squash: 0.75,
       colorA: getColor(c.colorBurstA),
       colorB: getColor(c.colorBurstB),
@@ -542,7 +559,7 @@ export class SirenNoteAbility extends Ability {
       radius: c.shockRadius * power,
       life: c.shockLife,
       width: 0.05,
-      intensity: 1,
+      intensity: c.shockIntensity,
       colorA: getColor(c.colorShockA),
       colorB: getColor(c.colorShockB),
       height: 0.03
@@ -581,7 +598,11 @@ export class SirenNoteAbility extends Ability {
       const st = Math.max(0.03, c.screamTime) * g.lifetime;
       const k = saturate(this.impactTime / st);
       // A swell and release; after it the sheet hangs taut, still faintly singing.
-      scream = k < 1 ? Math.sin(Math.PI * k) : 0;
+      // After the scream the note rings down: still vibrating, swelling and
+      // dying on a slow tremolo — the linger has its own motion.
+      const holdT = Math.max(0, this.impactTime - st);
+      const ring = c.ringDown * Math.exp(-holdT * c.ringDecay) * (0.55 + 0.45 * Math.sin(holdT * TAU * c.tremolo));
+      scream = k < 1 ? Math.sin(Math.PI * k) : ring;
       frontOpen = Easing.outCubic(k);
       frontI = 1 - Easing.inQuad(k);
     } else {
@@ -667,6 +688,8 @@ export function buildEditor(gui, c, Editor) {
   R(look, c, 'strandWidth', 0.01, 0.5, 0.005, 'strand width');
   R(look, c, 'strandGlow', 0, 10, 0.05, 'strand glow');
   R(look, c, 'membraneGlow', 0, 4, 0.01, 'membrane glow');
+  R(look, c, 'membraneFill', 0, 1, 0.01, 'membrane body (dark fill)');
+  look.addColor(c, 'colorDeep').name('deep (body)');
   R(look, c, 'iridescence', 0, 1, 0.01, 'iridescence');
   R(look, c, 'edgeGlow', 0, 15, 0.05, 'leading edge glow');
   R(look, c, 'edgeWidth', 0.02, 3, 0.01, 'leading edge width (m)');
@@ -687,12 +710,16 @@ export function buildEditor(gui, c, Editor) {
   R(front, c, 'frontBands', 1, 12, 0.1, 'arcs');
   R(front, c, 'frontBandWidth', 0.01, 0.5, 0.005, 'arc width');
   R(front, c, 'frontGlow', 0, 10, 0.05, 'glow');
+  R(front, c, 'frontFill', 0, 1, 0.01, 'pressed-air fill (dark)');
   R(front, c, 'frontSplit', 0, 4, 0.01, 'chromatic split');
   R(front, c, 'frontSpeed', 0, 12, 0.05, 'arcs / s');
   R(front, c, 'screamSize', 1, 12, 0.05, 'scream bloom (×)');
   R(front, c, 'screamTime', 0.03, 2, 0.01, 'scream over (s)');
   R(front, c, 'screamAmp', 0, 5, 0.05, 'scream amplitude (×)');
-  R(front, c, 'holdTime', 0, 2, 0.01, 'hangs taut for (s)');
+  R(front, c, 'holdTime', 0, 4, 0.01, 'rings on for (s)');
+  R(front, c, 'ringDown', 0, 2, 0.01, 'ring-down strength');
+  R(front, c, 'ringDecay', 0, 8, 0.05, 'ring-down decay');
+  R(front, c, 'tremolo', 0, 10, 0.05, 'tremolo (Hz)');
   R(front, c, 'lifetime', 0.05, 4, 0.05, 'shreds over (s)');
 
   const floor = folder.addFolder('4 · Chladni floor');
@@ -701,6 +728,10 @@ export function buildEditor(gui, c, Editor) {
   R(floor, c, 'groundLineWidth', 0.01, 1, 0.005, 'line width');
   R(floor, c, 'groundGlow', 0, 6, 0.05, 'line glow');
   R(floor, c, 'groundScour', 0, 1, 0.01, 'scour darkening');
+  R(floor, c, 'groundFill', 0, 1, 0.01, 'filled lobes');
+  R(floor, c, 'groundMorph', 0, 4, 0.01, 'pattern crawl (Hz)');
+  floor.addColor(c, 'colorSandBody').name('piled dust');
+  floor.addColor(c, 'colorGroundLine').name('ridge glow');
   R(floor, c, 'groundFade', 0.05, 3, 0.05, 'erodes over (s)');
   floor.addColor(c, 'colorSand').name('sorted dust');
   floor.addColor(c, 'colorScour').name('scoured floor');
@@ -731,6 +762,9 @@ export function buildEditor(gui, c, Editor) {
   beat.addColor(c, 'colorFlash').name('flash');
   R(beat, c, 'burstRadius', 0, 10, 0.05, 'air shell (m)');
   R(beat, c, 'burstLife', 0.05, 3, 0.01, 'shell life');
+  R(beat, c, 'burstIntensity', 0, 4, 0.01, 'shell brightness');
+  R(beat, c, 'burstOpacity', 0, 1, 0.01, 'shell opacity');
+  R(beat, c, 'shockIntensity', 0, 3, 0.01, 'shock ring brightness');
   beat.addColor(c, 'colorBurstA').name('shell, hot');
   beat.addColor(c, 'colorBurstB').name('shell, body');
   beat.addColor(c, 'colorBurstC').name('shell, fringe');

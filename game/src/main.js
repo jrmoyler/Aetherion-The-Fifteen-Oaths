@@ -14,6 +14,7 @@ import * as Net from './net/index.js';
 import * as Combat from './combat/index.js';
 import { initWorld } from './three/world.js';
 import { initAtmosphere } from './three/atmosphere.js';
+import { initSurfaceState } from './three/surfaceState.js';
 import { playArrival } from './three/cinematics.js';
 import './three/cinematics.css';
 import { initObjectiveBeacon } from './three/objectiveBeacon.js';
@@ -93,10 +94,12 @@ async function startClient() {
   ctx.setLoading(.1, 'Shaping the continent');
   ctx.world = await initWorld(ctx);
   const atmosphere = initAtmosphere(ctx);
+  ctx.surface = initSurfaceState(ctx);
   Object.defineProperty(ctx.render, 'timeOfDay', { get: () => atmosphere.timeOfDay, configurable: true });
   ctx.render.setTimeOfDay = atmosphere.setTimeOfDay;
   ctx.render.setTimeScale = atmosphere.setTimeScale;
   ctx.render.setWeather = atmosphere.setWeather;
+  Object.defineProperty(ctx.render, 'weather', { get: () => atmosphere.weather, configurable: true });
   ctx.setLoading(.55, 'Opening the Weave');
   ctx.net = await Net.init(ctx);
   await sourceEnvironmentReady;
@@ -149,7 +152,7 @@ async function startClient() {
     stopped = true; renderer.setAnimationLoop(null); ctx.net.disconnect?.();
     objectiveBeacon.dispose(); ctx.input.dispose?.(); ctx.ui.audio?.dispose?.(); offPause();
     document.removeEventListener('visibilitychange', onVisibility);
-    ctx.vfx.dispose?.(); ctx.actors.dispose?.(); atmosphere.dispose(); ctx.world.dispose?.();
+    ctx.vfx.dispose?.(); ctx.actors.dispose?.(); ctx.surface.dispose(); atmosphere.dispose(); ctx.world.dispose?.();
     ctx.sourceEnvironmentTexture?.dispose(); postprocessing.dispose(); envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
   };
 }

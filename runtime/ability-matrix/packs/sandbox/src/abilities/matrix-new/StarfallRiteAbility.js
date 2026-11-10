@@ -1,16 +1,20 @@
-import { Mesh, Vector3 } from 'three';
+import { Euler, InstancedMesh, Matrix4, Mesh, Quaternion, Vector3 } from 'three';
 import { Ability, AbilityPhase } from '../Ability.js';
 import {
   createStarQuadGeometry,
   createLinkGeometry,
-  createMeteorGeometry
+  createMeteorGeometry,
+  createStarCrystalGeometry,
+  createStarFieldGeometry
 } from '../../assets/matrix-new/StarfallRiteGeometry.js';
 import {
   createStarPointMaterial,
   createStarLineMaterial,
   createStarMeteorMaterial,
   createStarGroundMaterial,
-  createStarBurstMaterial
+  createStarBurstMaterial,
+  createStarCrystalMaterial,
+  createStarFieldMaterial
 } from '../../materials/matrix-new/StarfallRiteMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -47,6 +51,11 @@ const _centre = new Vector3();
 const _figure = new Vector3();
 const _up = new Vector3(0, 1, 0);
 const _down = new Vector3(0, -1, 0);
+const _mat = new Matrix4();
+const _quat = new Quaternion();
+const _euler = new Euler(0, 0, 0, 'YXZ');
+const _scale = new Vector3();
+const _crystal = new Vector3();
 
 /* Prim's spanning tree, on fixed scratch — no allocation at spawn. */
 const _inTree = new Uint8Array(MAX_STARS);
@@ -71,6 +80,20 @@ const _bestFrom = new Int8Array(MAX_STARS);
  *      meteor — a bright head and a long tapering additive trail.
  *   3. **THE CLOSE** — when the last has fallen the ghost figure dims and its
  *      lines fold toward their midpoints.
+ *
+ * ## The upgrade: solid stars and a floor that keeps the figure
+ *
+ * Each falling star is a **cut crystal star** (`createStarCrystalGeometry`,
+ * lit and shadow-casting on `LAYER.WORLD`) tumbling at the head of its trail,
+ * white-hot. It lands upright in the floor, half buried and leaning, and
+ * keeps **turning slowly like a wheel** while it cools through gold to an
+ * ember that pulses along its facets; in the close the stars sink into the
+ * ground. Under them a **star field** (`createStarFieldMaterial`) darkens the
+ * circle, burns a crater with glowing radial cracks under every landing, and
+ * re-draws the constellation's lines **on the floor** between the stars as
+ * they land — the figure comes down out of the sky and is written onto the
+ * ground. The herald trails a real meteor strip on its way out, and the whole
+ * figure hangs low enough (`skyHeight`) to read at play distance.
  *
  * ## Layers
  *
@@ -140,9 +163,26 @@ export class StarfallRiteAbility extends Ability {
     this.points = this._mesh(this.starGeometry, this.starMaterial, 14);
 
     /* ---- the falling stars ---- */
-    this.meteorGeometry = createMeteorGeometry(MAX_STARS);
+    this.meteorGeometry = createMeteorGeometry(MAX_STARS + 1);
     this.meteorMaterial = createStarMeteorMaterial();
     this.meteors = this._mesh(this.meteorGeometry, this.meteorMaterial, 15);
+
+    /* ---- the hero: crystal stars, falling then embedded ---- */
+    this.crystalGeometry = createStarCrystalGeometry(MAX_STARS);
+    this.crystalMaterial = createStarCrystalMaterial();
+    this.crystals = new InstancedMesh(this.crystalGeometry, this.crystalMaterial, MAX_STARS);
+    this.crystals.layers.set(LAYER.WORLD);
+    this.crystals.castShadow = true;
+    this.crystals.receiveShadow = false;
+    this.crystals.frustumCulled = false;
+    this.crystals.count = 0;
+    this.crystals.visible = false;
+    this.group.add(this.crystals);
+
+    /* ---- the floor the figure is re-drawn on ---- */
+    this.fieldGeometry = createStarFieldGeometry();
+    this.fieldMaterial = createStarFieldMaterial(MAX_STARS, MAX_LINKS);
+    this.field = this._mesh(this.fieldGeometry, this.fieldMaterial, 5);
 
     /** Dice only — see the class comment. */
     this.stars = [];
@@ -429,6 +469,8 @@ export class StarfallRiteAbility extends Ability {
     this.linkGeometry.attributes.aLink.needsUpdate = true;
     this.meteorGeometry.attributes.aHead.array.fill(0);
     this.meteorGeometry.attributes.aHead.needsUpdate = true;
+    this.crystalGeometry.attributes.aHeat.array.fill(0);
+    this.crystalGeometry.attributes.aHeat.needsUpdate = true;
   }
 
   /* ------------------------------------------------------------------ */
@@ -507,6 +549,18 @@ export class StarfallRiteAbility extends Ability {
     this.meteorMaterial.userData.sync();
     this.telegraphMaterial.userData.sync();
     this.burstMaterial.userData.sync();
+    this.crystals.castShadow = true;
+    const cu = this.crystalMaterial.userData.uniforms;
+    cu.uTime.value = frame.uTime.value;
+    cu.uGlow.value = c.crystalGlow * g.glow;
+    cu.uPulse.value = c.crystalPulse * g.animationSpeed;
+    cu.uRim.value = c.crystalRim * g.fresnel;
+    cu.uColorHot.value.copy(getColor(c.colorBurstHot));
+    cu.uColorBody.value.copy(getColor(c.colorBurstBody));
+    cu.uColorDeep.value.copy(getColor(c.colorDeep));
+    this.crystalMaterial.color.copy(getColor(c.colorCrystal));
+    this.crystalMaterial.metalness = c.crystalMetalness;
+    this.crystalMaterial.roughness = c.crystalRoughness;
 
     this.glitter.setGradient(getColor(c.colorGlitterA), getColor(c.colorGlitterB), getColor(c.colorGlitterC), getColor(c.colorGlitterD));
     this.glitter.uniforms.uGravity.value.set(0, c.glitterGravity, 0);
@@ -638,6 +692,9 @@ export class StarfallRiteAbility extends Ability {
       }
       head[k4 + 3] = mLevel;
 
+      /* --- the crystal star: tumbling at the head, then embedded --- */
+      this._placeCrystal(i, s, c, clock, launchAt, landAt, fallTime, close);
+
       /* --- the floor telegraph and afterglow --- */
       const warnFrom = launchAt - lead;
       let warn = 0;
@@ -676,7 +733,12 @@ export class StarfallRiteAbility extends Ability {
     this.starGeometry.instanceCount = MAX_STARS + 1;
     this.telegraphGeometry.instanceCount = n;
     this.burstGeometry.instanceCount = n;
-    this.meteorGeometry.instanceCount = n;
+    this.meteorGeometry.instanceCount = MAX_STARS + 1;
+    this.crystals.count = n;
+    this.crystals.instanceMatrix.needsUpdate = true;
+    this.crystalGeometry.attributes.aHeat.needsUpdate = true;
+    this.crystalGeometry.attributes.aSeed.needsUpdate = true;
+    this._updateField(c, close);
     for (const geometry of [this.starGeometry, this.telegraphGeometry, this.burstGeometry]) {
       geometry.attributes.aStar.needsUpdate = true;
       geometry.attributes.aGlow.needsUpdate = true;
@@ -689,6 +751,101 @@ export class StarfallRiteAbility extends Ability {
     this.meteors.visible = true;
     this.telegraph.visible = true;
     this.bursts.visible = true;
+    this.crystals.visible = true;
+    this.field.visible = clock >= 0;
+  }
+
+  /**
+   * One crystal's instance. Before it launches it is not there (the sky star
+   * is the billboard); falling, it rides the meteor's head tumbling; landed,
+   * it stands leaning in the floor and turns slowly about its own face while
+   * it cools; in the close it sinks. All from the live settings.
+   */
+  _placeCrystal(i, s, c, clock, launchAt, landAt, fallTime, close) {
+    const g = settings.global;
+    const heat = this.crystalGeometry.attributes.aHeat.array;
+    const seeds = this.crystalGeometry.attributes.aSeed.array;
+    const size = Math.max(0.01, c.crystalSize * (1 + s.size * c.sizeJitter * 0.5 * g.randomness));
+    seeds[i] = s.seed;
+    let k = 0;
+    if (clock >= 0 && clock >= launchAt && clock < landAt) {
+      const t = saturate((clock - launchAt) / fallTime);
+      const p = Math.pow(t, Math.max(0.2, c.fallCurve));
+      this._skyPoint(s, c, _sky);
+      _crystal.lerpVectors(_sky, _land, p);
+      _crystal.y = Math.max(size * 0.5, _crystal.y);
+      const spin = clock * c.crystalTumble;
+      _euler.set(spin * 0.7 + s.seed * 5, s.seed * TAU, spin);
+      k = Easing.outCubic(saturate(t * 5));
+      heat[i] = 1;
+    } else if (clock >= landAt && clock >= 0) {
+      const since = clock - landAt;
+      // Lands with a small overshoot, then turns like a wheel in the ground.
+      const settle = Easing.outBack(saturate(since / 0.18));
+      _crystal.copy(_land);
+      _crystal.y = size * c.crystalEmbed - close * size * 1.3;
+      _euler.set(c.crystalLean * (0.7 + 0.6 * s.seed) * (s.seed < 0.5 ? 1 : -1), s.seed * TAU, s.seed * 3 + since * c.crystalSpin * g.animationSpeed);
+      k = Math.max(0.001, settle * (1 - close * 0.35));
+      heat[i] = Math.exp(-since / Math.max(0.05, c.crystalCool * g.lifetime));
+    } else {
+      heat[i] = 0;
+    }
+    _quat.setFromEuler(_euler);
+    _scale.setScalar(Math.max(1e-4, size * k));
+    _mat.compose(k > 0 ? _crystal : _pos.set(0, -50, 0), _quat, _scale);
+    this.crystals.setMatrixAt(i, _mat);
+  }
+
+  /** The star field: craters under the landed stars, the figure re-drawn between them. */
+  _updateField(c, close) {
+    const g = settings.global;
+    const clock = this._clock;
+    const u = this.fieldMaterial.uniforms;
+    this.pointAt(1, _centre);
+    u.uCentre.value.set(_centre.x, 0, _centre.z);
+    u.uRadius.value = Math.max(0.5, c.zoneRadius * c.fieldRadius);
+    u.uFade.value = (1 - close) * saturate(clock / 0.4);
+    u.uOpacity.value = c.fieldOpacity * g.opacity;
+    u.uCraterRadius.value = c.craterRadius;
+    u.uCool.value = c.craterCool * g.lifetime;
+    u.uLineWidth.value = c.floorLineWidth;
+    u.uLineGlow.value = c.floorLineGlow * g.glow;
+    u.uColorDeep.value.copy(getColor(c.colorDeep));
+    u.uColorBody.value.copy(getColor(c.colorBurstBody));
+    u.uColorHot.value.copy(getColor(c.colorBurstHot));
+    const stars = u.uStars.value;
+    const fallTime = this._fallTime();
+    for (let i = 0; i < this._count; i++) {
+      const s = this.stars[i];
+      const landAt = this._launchTime(s, c) + fallTime;
+      this._landPoint(s, c, _land);
+      stars[i * 4] = _land.x;
+      stars[i * 4 + 1] = _land.z;
+      stars[i * 4 + 2] = clock >= landAt ? clock - landAt : -1;
+      stars[i * 4 + 3] = s.seed;
+    }
+    u.uStarCount.value = this._count;
+    const segs = u.uSegs.value;
+    const draw = u.uSegDraw.value;
+    const lineTime = Math.max(0.02, c.floorLineTime);
+    for (let k = 0; k < this._linkCount; k++) {
+      let a = this._linkA[k];
+      let b = this._linkB[k];
+      const la = this._launchTime(this.stars[a], c) + fallTime;
+      const lb = this._launchTime(this.stars[b], c) + fallTime;
+      // Drawn from the star that landed first toward the second.
+      if (lb < la) {
+        const t = a;
+        a = b;
+        b = t;
+      }
+      segs[k * 4] = stars[a * 4];
+      segs[k * 4 + 1] = stars[a * 4 + 1];
+      segs[k * 4 + 2] = stars[b * 4];
+      segs[k * 4 + 3] = stars[b * 4 + 1];
+      draw[k] = Easing.outCubic(saturate((clock - Math.max(la, lb)) / lineTime));
+    }
+    u.uSegCount.value = this._linkCount;
   }
 
   /**
@@ -884,10 +1041,30 @@ export class StarfallRiteAbility extends Ability {
     const starA = this.starGeometry.attributes.aStar.array;
     const starG = this.starGeometry.attributes.aGlow.array;
     const k4 = HERALD * 4;
+    const head = this.meteorGeometry.attributes.aHead.array;
+    const tail = this.meteorGeometry.attributes.aTail.array;
     if (!visible) {
       starG[k4] = 0;
+      head[k4 + 3] = 0;
+      this.meteorGeometry.attributes.aHead.needsUpdate = true;
       return;
     }
+    // The herald's own meteor: its path a moment ago is the tail.
+    const back = Math.max(0, this.u - Math.min(0.6, c.heraldTrail / Math.max(0.1, this.length)));
+    const kb = Easing.inOutQuad(back);
+    this.pointAt(back, _tail);
+    _tail.y = lerp(1.4, c.skyHeight, kb);
+    _tail.addScaledVector(this.direction, -c.skyOffset * kb);
+    head[k4] = this.position.x;
+    head[k4 + 1] = this.position.y;
+    head[k4 + 2] = this.position.z;
+    head[k4 + 3] = 1;
+    tail[k4] = _tail.x;
+    tail[k4 + 1] = _tail.y;
+    tail[k4 + 2] = _tail.z;
+    tail[k4 + 3] = 0.37;
+    this.meteorGeometry.attributes.aHead.needsUpdate = true;
+    this.meteorGeometry.attributes.aTail.needsUpdate = true;
     starA[k4] = this.position.x;
     starA[k4 + 1] = this.position.y;
     starA[k4 + 2] = this.position.z;
@@ -1005,13 +1182,16 @@ export class StarfallRiteAbility extends Ability {
     this.meteors.visible = false;
     this.telegraph.visible = false;
     this.bursts.visible = false;
+    this.crystals.visible = false;
+    this.crystals.count = 0;
+    this.field.visible = false;
   }
 
   dispose() {
-    for (const geometry of [this.starGeometry, this.linkGeometry, this.meteorGeometry, this.telegraphGeometry, this.burstGeometry]) {
+    for (const geometry of [this.starGeometry, this.linkGeometry, this.meteorGeometry, this.telegraphGeometry, this.burstGeometry, this.crystalGeometry, this.fieldGeometry]) {
       geometry.dispose();
     }
-    for (const material of [this.starMaterial, this.linkMaterial, this.meteorMaterial, this.telegraphMaterial, this.burstMaterial]) {
+    for (const material of [this.starMaterial, this.linkMaterial, this.meteorMaterial, this.telegraphMaterial, this.burstMaterial, this.crystalMaterial, this.fieldMaterial]) {
       material.dispose();
     }
     super.dispose();
@@ -1034,6 +1214,7 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   R(cast, c, 'heraldSize', 0.02, 1, 0.01, 'herald size (m)');
   R(cast, c, 'heraldGlitter', 0, 500, 1, 'herald glitter / s');
+  R(cast, c, 'heraldTrail', 0, 10, 0.1, 'herald trail (m)');
   cast.addColor(c, 'colorA').name('accent');
   cast.addColor(c, 'colorB').name('accent, warm');
   Editor.castAnimation(cast, c);
@@ -1109,6 +1290,30 @@ export function buildEditor(gui, c, Editor) {
   fall.addColor(c, 'colorHead').name('head');
   fall.addColor(c, 'colorTrail').name('trail');
   fall.addColor(c, 'colorTrailTip').name('trail tip');
+
+  const hero = folder.addFolder('4b · Crystal stars (hero)');
+  R(hero, c, 'crystalSize', 0.05, 2, 0.01, 'radius (m)');
+  R(hero, c, 'crystalEmbed', -0.5, 1.5, 0.01, 'embed height (× size)');
+  R(hero, c, 'crystalLean', 0, 1.4, 0.01, 'lean (rad)');
+  R(hero, c, 'crystalSpin', -4, 4, 0.01, 'turn when landed (rad/s)');
+  R(hero, c, 'crystalTumble', 0, 20, 0.1, 'tumble falling (rad/s)');
+  R(hero, c, 'crystalCool', 0.05, 6, 0.05, 'cools over (s)');
+  R(hero, c, 'crystalGlow', 0, 6, 0.05, 'facet glow');
+  R(hero, c, 'crystalPulse', 0, 10, 0.05, 'ember pulse');
+  R(hero, c, 'crystalRim', 0, 4, 0.05, 'rim light');
+  R(hero, c, 'crystalMetalness', 0, 1, 0.01, 'metalness');
+  R(hero, c, 'crystalRoughness', 0, 1, 0.01, 'roughness');
+  hero.addColor(c, 'colorCrystal').name('crystal');
+
+  const field = folder.addFolder('5a · Star field (floor)');
+  R(field, c, 'fieldRadius', 0.3, 2, 0.01, 'radius (× circle)');
+  R(field, c, 'fieldOpacity', 0, 1, 0.01, 'darkness');
+  R(field, c, 'craterRadius', 0.1, 4, 0.05, 'crater (m)');
+  R(field, c, 'craterCool', 0.1, 8, 0.05, 'cracks cool over (s)');
+  R(field, c, 'floorLineWidth', 0.01, 0.5, 0.005, 'line width (m)');
+  R(field, c, 'floorLineGlow', 0, 8, 0.05, 'line glow');
+  R(field, c, 'floorLineTime', 0.02, 2, 0.01, 'line draws over (s)');
+  field.addColor(c, 'colorDeep').name('deep');
 
   const tel = folder.addFolder('5 · Floor telegraph');
   R(tel, c, 'telegraphRadius', 0.1, 4, 0.05, 'radius (m)');

@@ -113,6 +113,8 @@ const ECHO_FRAGMENT = /* glsl */ `
   uniform vec3  uColorRim;
   uniform vec3  uColorBand;
   uniform vec3  uColorBurn;
+  uniform vec3  uColorDeep;
+  uniform float uBody;
   uniform float uGlobalGlow;
 
   varying vec3  vNormalW;
@@ -144,7 +146,12 @@ const ECHO_FRAGMENT = /* glsl */ `
     // Grain, so the glass has depth rather than a flat tint.
     float grain = snoise(vec3(vWorld * 9.0 + uSeed * 5.0)) * 0.5 + 0.5;
 
-    vec3 color = uColorCore * uFill * lum * (0.65 + 0.35 * grain);
+    // Four stops: dark amber glass (deep) where it faces you, the skin's own
+    // detail poured in the body tone, banded tint, white-hot rim. The deep tone
+    // keeps a frozen echo a *body* on the dark floor instead of a bloomed-out
+    // silhouette.
+    float face = ndv * (0.55 + 0.45 * grain);
+    vec3 color = uColorCore * uFill * lum * (0.65 + 0.35 * grain) * (0.35 + 0.65 * (1.0 - face));
     color += uColorBand * band * 0.8;
     color += uColorRim * rim;
 
@@ -156,7 +163,9 @@ const ECHO_FRAGMENT = /* glsl */ `
     color = mix(color, uColorBurn * 3.0, edge * step(0.001, cut));
 
     color *= uGlow * uGlobalGlow * (1.0 + uFlare * 3.0);
-    float alpha = clamp((uFill * 0.35 + rim + band * 0.25 + edge) * uOpacity * uFade, 0.0, 1.0);
+    float body = uBody * smoothstep(0.0, 0.6, face) * (1.0 - edge);
+    color += uColorDeep * body * (0.6 + 0.4 * lum);
+    float alpha = clamp((uFill * 0.35 + rim + band * 0.25 + edge + body) * uOpacity * uFade, 0.0, 1.0);
     if (alpha < 0.003) discard;
     gl_FragColor = vec4(color, alpha);
   }
@@ -168,9 +177,9 @@ export function createRecallEchoMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    // Additive: the echo is light trapped in glass, so the floor shows through
-    // its dark interior and the rim and the bands bloom.
-    blending: AdditiveBlending,
+    // Normal blending: the dark amber body occludes the floor (the deep stop
+    // of the ramp); rim and bands are bright enough to bloom over it.
+    blending: NormalBlending,
     side: FrontSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -200,7 +209,9 @@ export function createRecallEchoMaterial() {
       uColorCore: { value: new Color() },
       uColorRim: { value: new Color() },
       uColorBand: { value: new Color() },
-      uColorBurn: { value: new Color() }
+      uColorBurn: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uBody: { value: 0.6 }
     }),
     vertexShader: ECHO_VERTEX,
     fragmentShader: ECHO_FRAGMENT
@@ -238,6 +249,8 @@ export function createRecallEchoMaterial() {
     u.uMapMix.value = c.echoMapMix;
     u.uColorCore.value.copy(getColor(c.colorEchoCore));
     u.uColorRim.value.copy(getColor(c.colorEchoRim));
+    u.uColorDeep.value.copy(getColor(c.colorEchoDeep));
+    u.uBody.value = c.echoBody;
     u.uColorBand.value.copy(getColor(c.colorEchoBand));
     u.uColorBurn.value.copy(getColor(c.colorRewind));
   };

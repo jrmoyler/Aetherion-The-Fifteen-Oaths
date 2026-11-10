@@ -1,8 +1,9 @@
 import { Mesh, Vector3 } from 'three';
 import { Ability } from '../Ability.js';
-import { createStakeGeometry, createStripGeometry, createQuadGeometry } from '../../assets/codex/HeartstakeGeometry.js';
+import { createStakeGeometry, createStripGeometry, createQuadGeometry, createThornGeometry } from '../../assets/codex/HeartstakeGeometry.js';
 import {
   createStakeMaterial,
+  createThornMaterial,
   createTrailMaterial,
   createStainMaterial,
   createHeartGlowMaterial,
@@ -24,6 +25,8 @@ export const ID = 'heartstake';
 const MAX_BLED = 12;
 /** Hard ceiling on heartbeats; the editor's slider clamps to it. */
 const MAX_BEATS = 8;
+/** Hard ceiling on thorn roots (the geometry holds this many). */
+const MAX_THORNS = 16;
 
 const _emit = {};
 const _pos = new Vector3();
@@ -51,9 +54,19 @@ const _up = new Vector3(0, 1, 0);
  * of the heart, thumps the air (a ring on the distortion layer) and pushes a
  * bright pressure ring out along the radial capillaries the stain is sending
  * across the floor; the stain grows with each one, and anything in reach of the
- * roots is taken off its feet and bled pale. **Withering**: the beats stop;
- * the stake dries to brown-black, crumbles away point-first in flakes, and the
- * stain dries matte and erodes.
+ * roots is taken off its feet and bled pale. With every beat the **thorn
+ * roots** — barbed arches of the same blood glass, as thick as a forearm —
+ * heave a step further out of the floor round the stake, so by the last beat
+ * the stake stands 4 m tall in a thicket of arches the size of the zone.
+ * **Withering**: the beats stop; the stake and its roots dry to brown-black,
+ * crumble away point-first / tips-first in flakes, and the stain dries matte
+ * and erodes.
+ *
+ * Scale decision: the stake is a *zone-scale* hero. It flies at
+ * `flightScale` of its size (a javelin, not a mast over the caster's head)
+ * and swells to full size over the dive, so what plants is a 5.6 m spike with
+ * a heart the size of a torso — at the 8 m camera it reads as a monument, not
+ * a marker.
  *
  * ## Layers (each a folder in the editor)
  *
@@ -61,6 +74,8 @@ const _up = new Vector3(0, 1, 0);
  *      and barbs in the vertex stage, faceted glassy shading and inner light
  *      in the fragment stage.
  *   2. **the heart glow** — a ragged camera-facing bloom on the knot.
+ *   2b. **the thorn roots** (`createThornMaterial`) — arching barbed roots,
+ *      grown per beat, pulsed by the beat's pressure front. `LAYER.SHAPED`.
  *   3. **the trail** — a camera-facing ribbon of streaking blood.
  *   4. **the stain & roots** — the ground quad at the plunge.
  *   5. **the thump** — a flat distortion ring per beat.
@@ -104,8 +119,14 @@ export class HeartstakeAbility extends Ability {
     this.trailMaterial = createTrailMaterial();
     this.trail = this._mesh(this.stripGeometry, this.trailMaterial, LAYER.VFX, 10);
 
+    // Solid, lit blood glass; parameter-space vertices, so SHAPED (kept out
+    // of the depth prepass, which would rasterise the raw buffer).
     this.stakeMaterial = createStakeMaterial();
-    this.stake = this._mesh(this.stakeGeometry, this.stakeMaterial, LAYER.VFX, 12);
+    this.stake = this._mesh(this.stakeGeometry, this.stakeMaterial, LAYER.SHAPED, 12);
+
+    this.thornGeometry = createThornGeometry(MAX_THORNS, 40, 6);
+    this.thornMaterial = createThornMaterial();
+    this.thorns = this._mesh(this.thornGeometry, this.thornMaterial, LAYER.SHAPED, 11);
 
     this.glowMaterial = createHeartGlowMaterial();
     this.glow = this._mesh(this.quadGeometry, this.glowMaterial, LAYER.VFX, 16);
@@ -128,6 +149,7 @@ export class HeartstakeAbility extends Ability {
     this._stainState = { center: new Vector3(), spread: 0, reach: 0, ringR: -1, beat: 0, dry: 0, fadeT: 0, seed: 0 };
     this._glowState = { center: new Vector3(), size: 0.5, intensity: 0, seed: 0 };
     this._warpState = { center: new Vector3(), progress: 0, strength: 0 };
+    this._thornState = { center: new Vector3(), yaw: 0, grow: 0, throb: 0, ringR: -1, flow: 0, dry: 0, crumble: 0, seed: 0 };
 
     /** Where the point came to rest, and the way the stake was pointing. */
     this._restTip = new Vector3();
@@ -319,6 +341,14 @@ export class HeartstakeAbility extends Ability {
     this._glowState.intensity = 0;
     this._warpState.progress = 0;
     this._warpState.strength = 0;
+    const th = this._thornState;
+    th.seed = this._seed;
+    th.grow = 0;
+    th.throb = 0;
+    th.ringR = -1;
+    th.dry = 0;
+    th.crumble = 0;
+    this.thorns.visible = false;
 
     this.stake.visible = true;
     this.trail.visible = true;
@@ -440,7 +470,9 @@ export class HeartstakeAbility extends Ability {
     this._trailFlow += c.trailFlow * dt * g.noiseSpeed;
 
     const st = this._stakeState;
-    st.grow = Easing.outBack(saturate(this.age / Math.max(0.01, c.formTime * g.lifetime)));
+    // Formed at flight size; swells to full size over the dive.
+    const dive = smoothstep(Math.max(c.handForward, this.length - c.diveDistance), this.length, this.front);
+    st.grow = Easing.outBack(saturate(this.age / Math.max(0.01, c.formTime * g.lifetime))) * lerp(c.flightScale, 1, dive);
     // A slow pulse in flight — the heart is already beating.
     st.throb = 0.3 * Math.pow(0.5 + 0.5 * Math.sin(this.age * c.flightPulse * Math.PI * 2), 6);
     st.surge = -1;
@@ -519,6 +551,12 @@ export class HeartstakeAbility extends Ability {
     ss.reach = c.stainRadius * 0.5;
     this.stain.visible = true;
     this.trail.visible = false;
+    const th = this._thornState;
+    th.center.copy(_floor);
+    th.yaw = Math.atan2(this.direction.z, this.direction.x);
+    th.grow = c.thornFirst;
+    th.ringR = -1;
+    this.thorns.visible = true;
     this._warpState.center.copy(_floor).setY(0.08);
 
     this.ctx.bursts.spawn(BurstMode.WATER, _floor, {
@@ -629,6 +667,20 @@ export class HeartstakeAbility extends Ability {
       ss.dry = 0;
       ss.fadeT = 0;
 
+      // The thorns heave out a step on each beat, easing over thornGrowTime.
+      const th = this._thornState;
+      const since = k >= 0 ? tau - (c.beatDelay + k * c.beatInterval) : 0;
+      const step = k >= 0 ? Easing.outBack(saturate(since / Math.max(0.02, c.thornGrowTime))) : 0;
+      const prev = lerp(c.thornFirst, 1, Math.max(0, this._beatsFired - 1) / beats);
+      const next = lerp(c.thornFirst, 1, this._beatsFired / beats);
+      th.grow = k >= 0 ? lerp(prev, next, step) : c.thornFirst * Easing.outCubic(saturate(tau / Math.max(0.02, c.plantTime)));
+      th.throb = st.throb;
+      th.ringR = ss.ringR;
+      th.flow = this._flow;
+      th.dry = 0;
+      th.crumble = 0;
+      this.thornMaterial.userData.sync(th);
+
       this._syncStake(this._restTip, this._plant(tau / Math.max(0.02, c.plantTime)));
       const gs = this._glowState;
       gs.size = c.glowSize * (0.8 + 0.9 * st.throb);
@@ -650,6 +702,14 @@ export class HeartstakeAbility extends Ability {
     st.dry = smoothstep(0, 0.4, ft);
     st.crumble = smoothstep(0.3, 0.92, ft);
     this.stake.visible = st.crumble < 0.999;
+    const th = this._thornState;
+    th.throb = 0;
+    th.ringR = -1;
+    th.flow = this._flow;
+    th.dry = smoothstep(0, 0.45, ft);
+    th.crumble = smoothstep(0.2, 0.85, ft);
+    this.thorns.visible = th.crumble < 0.999;
+    this.thornMaterial.userData.sync(th);
     const ss = this._stainState;
     ss.ringR = -1;
     ss.beat = 0;
@@ -913,6 +973,7 @@ export class HeartstakeAbility extends Ability {
 
   onDestroy() {
     this.stake.visible = false;
+    this.thorns.visible = false;
     this.trail.visible = false;
     this.stain.visible = false;
     this.glow.visible = false;
@@ -922,6 +983,8 @@ export class HeartstakeAbility extends Ability {
 
   dispose() {
     this.stakeGeometry.dispose();
+    this.thornGeometry.dispose();
+    this.thornMaterial.dispose();
     this.stripGeometry.dispose();
     this.quadGeometry.dispose();
     this.stakeMaterial.dispose();
@@ -969,6 +1032,7 @@ export function buildEditor(gui, c, Editor) {
   R(flight, c, 'flightPulse', 0, 6, 0.05, 'beats/second in flight');
   R(flight, c, 'plantLean', -1, 2, 0.01, 'stands leaning (0 upright)');
   R(flight, c, 'plantTime', 0.02, 1, 0.005, 'rights itself over (s)');
+  R(flight, c, 'flightScale', 0.1, 1, 0.01, 'size in flight (× full)');
 
   const stake = folder.addFolder('2 · The stake');
   R(stake, c, 'stakeLength', 0.3, 6, 0.01, 'length (m)');
@@ -1002,6 +1066,23 @@ export function buildEditor(gui, c, Editor) {
   glass.addColor(c, 'colorStakeRim').name('rim');
   glass.addColor(c, 'colorGlowCore').name('bloom core');
   glass.addColor(c, 'colorGlowHalo').name('bloom halo');
+
+  const thorn = folder.addFolder('3b · Thorn roots');
+  R(thorn, c, 'thornRoots', 1, MAX_THORNS, 1, 'roots');
+  R(thorn, c, 'thornReach', 0.1, 2, 0.01, 'reach (× roots reach)');
+  R(thorn, c, 'thornFirst', 0, 1, 0.01, 'out at the plunge (share)');
+  R(thorn, c, 'thornGrowTime', 0.02, 1.5, 0.01, 'heaves out over (s)');
+  R(thorn, c, 'thornArch', 0, 4, 0.01, 'arch height (m)');
+  R(thorn, c, 'thornRadius', 0.02, 0.8, 0.005, 'thickness (m)');
+  R(thorn, c, 'thornTaper', 0.1, 3, 0.01, 'taper');
+  R(thorn, c, 'thornWander', 0, 1.5, 0.01, 'wander (rad)');
+  R(thorn, c, 'thornSink', 0, 1.5, 0.01, 'dives under (m)');
+  R(thorn, c, 'thornJitter', 0, 1, 0.01, 'irregularity');
+  R(thorn, c, 'thornSpikes', 0, 20, 0.1, 'spike rows');
+  R(thorn, c, 'thornSpikeLen', 0, 4, 0.01, 'spike length (× thickness)');
+  R(thorn, c, 'thornVeinGlow', 0, 8, 0.05, 'vein glow');
+  R(thorn, c, 'thornPulseGlow', 0, 12, 0.05, 'beat pulse glow');
+  thorn.addColor(c, 'colorThornBody').name('body');
 
   const trail = folder.addFolder('4 · Trail');
   R(trail, c, 'trailLength', 0, 12, 0.05, 'length (m)');

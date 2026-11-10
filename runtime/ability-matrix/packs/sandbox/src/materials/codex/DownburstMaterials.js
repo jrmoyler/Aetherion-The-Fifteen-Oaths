@@ -1,4 +1,15 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial, Vector2, Vector3 } from 'three';
+import {
+  AddEquation,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial,
+  Vector2,
+  Vector3
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -20,10 +31,12 @@ import { getColor } from '../../utils/color.js';
  *    the cloud whose warp is noise sampled in a frame twisted by height, so the
  *    world behind it visibly churns and spirals before anything has fallen.
  *  - **the column** — the same tube, splayed at the foot (a real downburst
- *    fans out where it meets the ground) and pinched up into the cloud. Additive
- *    wind streaks fall down it; its leading front is a hot band; a fresnel
- *    term keeps the walls bright and the middle clear. It is lifted off the
- *    floor through a ragged noise edge when the slam is spent.
+ *    fans out where it meets the ground) and pinched up into the cloud. It is
+ *    drawn premultiplied: a dark storm-blue body of falling air (the deep and
+ *    body stops of the ramp, shaded by the sun) carries the mass, and only the
+ *    streak crests, the walls seen edge-on and the leading front add light
+ *    (pale tint and white-hot). It is lifted off the floor through a ragged
+ *    noise edge when the slam is spent.
  *  - **the ground blast** — the floor. A telegraph while the cloud gathers (the
  *    circle's edge darkens and pulses), then the shock ring racing out, the
  *    radial scour the outflow combs into the dust behind it, and the pressed
@@ -56,9 +69,11 @@ const CLOUD_VERTEX = /* glsl */ `
   uniform float uSeed;
   uniform float uBoil;
   uniform float uTime;
+  uniform float uDome;        // metres the upper shell towers over the rim (0 = the underside)
 
   varying vec2 vDisc;         // unit-disc point in the cloud's own frame
   varying float vR;
+  varying float vUp;          // 0..1 how far up the tower this point sits
 
   ${noiseGLSL}
 
@@ -78,6 +93,13 @@ const CLOUD_VERTEX = /* glsl */ `
     float y = uHeight - sag + b * uBillow * (0.35 + 0.65 * (1.0 - r));
     // The rim curls up a little, like the lip of a shelf cloud.
     y += r * r * r * uBillow * 0.9;
+    // The upper shell: a heaped cumulus tower over the belly, lumpy with
+    // its own coarser billows, so from the play camera the cloud is a mass
+    // with height rather than a disc seen edge-on.
+    float dome = sqrt(max(0.0, 1.0 - r * r));
+    float lump = snoise(vec3(q * uBillowScale * 0.6, uSeed * 1.7 + uTime * uBoil * 0.6));
+    y += uDome * dome * (0.8 + 0.35 * lump) + (uDome > 0.0 ? sag * 0.85 : 0.0);
+    vUp = uDome > 0.0 ? dome : 0.0;
 
     vDisc = dir * r;
     vR = r;
@@ -114,9 +136,11 @@ const CLOUD_FRAGMENT = /* glsl */ `
   uniform vec3  uColorFlash;
   uniform float uGlobalGlow;
   uniform float uShaderIntensity;
+  uniform float uShade;       // the upper shell's own darkening toward its foot
 
   varying vec2 vDisc;
   varying float vR;
+  varying float vUp;
 
   ${noiseGLSL}
 
@@ -153,18 +177,24 @@ const CLOUD_FRAGMENT = /* glsl */ `
     vec3 body = mix(uColorCore, uColorBody, smoothstep(0.0, 0.85, r + (d0 - 0.5) * 0.4));
     body = mix(body, uColorCore * 0.6, uDarkCore * exp(-r * r * 9.0));
     vec3 color = body * (0.55 + 0.6 * lit);
+    // Upper shell: deep at its foot and through its flanks, only its crown
+    // and sun-side lumps catching the light.
     color += uColorRim * pow(lit, 3.0) * uRimGlow * (0.35 + 0.65 * r) * uShaderIntensity;
     // The core lighting up from inside as the pressure builds.
     color += uColorRim * uCharge * uChargeGlow * exp(-r * r * 10.0) * (0.6 + 0.4 * d0);
     // Sheet lightning: patches of the cloud lit from within for a frame.
     float flashPatch = smoothstep(0.35, 0.85, snoise(vec3(vDisc * 2.6, floor(uTime * 7.0) + uSeed)));
     color += uColorFlash * uFlash * flashPatch * (0.4 + 0.6 * d0);
+    // Upper shell: deep at its foot and through its flanks, only its crown
+    // catching the light.
+    color *= mix(1.0, 0.3 + 0.6 * vUp, uShade);
 
     gl_FragColor = vec4(color * uGlobalGlow, clamp(alpha, 0.0, 1.0));
   }
 `;
 
-export function createStormCloudMaterial() {
+/** @param {boolean} [tower] the upper shell (heaped cumulus) rather than the belly */
+export function createStormCloudMaterial(tower = false) {
   const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
@@ -202,7 +232,9 @@ export function createStormCloudMaterial() {
       uColorCore: { value: new Color() },
       uColorBody: { value: new Color() },
       uColorRim: { value: new Color() },
-      uColorFlash: { value: new Color() }
+      uColorFlash: { value: new Color() },
+      uDome: { value: 0 },
+      uShade: { value: 0 }
     }),
     vertexShader: CLOUD_VERTEX,
     fragmentShader: CLOUD_FRAGMENT
@@ -243,6 +275,9 @@ export function createStormCloudMaterial() {
     u.uColorBody.value.copy(getColor(c.colorCloudBody));
     u.uColorRim.value.copy(getColor(c.colorCloudRim));
     u.uColorFlash.value.copy(getColor(c.colorCloudFlash));
+    u.uDome.value = tower ? Math.max(0, c.cloudTower) * (0.35 + 0.65 * state.form) : 0;
+    u.uShade.value = tower ? c.cloudTowerShade : 0;
+    if (tower) u.uOpacity.value = c.cloudOpacity * c.cloudTowerOpacity * g.opacity;
   };
 
   return material;
@@ -320,6 +355,11 @@ const COLUMN_FRAGMENT = /* glsl */ `
   uniform float uLiftY;       // the column is let go of from below this height
   uniform vec3  uColor;
   uniform vec3  uColorHot;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+  uniform float uBodyOpacity;
+  uniform float uBodyLight;
+  uniform vec3  uLightDir;
 
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
@@ -351,7 +391,8 @@ const COLUMN_FRAGMENT = /* glsl */ `
     // Walls bright, the middle clear: you look through a tube of moving air.
     vec3 N = normalize(vNormalW);
     vec3 V = normalize(vViewDir);
-    float rim = pow(1.0 - abs(dot(N, V)), 2.2) * uRim;
+    float edgeOn = pow(1.0 - abs(dot(N, V)), 2.2);
+    float rim = edgeOn * uRim;
 
     // The leading front: a hot band right at the bottom of what has fallen.
     float front = exp(-max(y - uBottom, 0.0) / max(uFrontWidth, 0.02)) * uFront;
@@ -363,8 +404,17 @@ const COLUMN_FRAGMENT = /* glsl */ `
     float n = snoise(vec3(ring * 0.6, y * 0.9 + uSeed * 3.0));
     float keep = smoothstep(uLiftY, uLiftY + 0.9, y + n * 0.6);
 
-    float energy = (0.18 + lines * 0.82 * uShaderIntensity) * (0.35 + rim) * uOpacity;
-    vec3 color = uColor * energy * uGlow + uColorHot * (front * (0.6 + 0.4 * lines) + lines * rim * 0.4);
+    // The body: dark falling air, denser at the walls, banded by the streaks,
+    // the sun-side a shade lighter. This is what the eye reads as the column.
+    float sun = clamp(dot(N, normalize(uLightDir)) * 0.5 + 0.5, 0.0, 1.0);
+    float shade = mix(0.5, sun, uBodyLight);
+    vec3 body = mix(uColorDeep, uColorBody, 0.25 + 0.75 * shade * (0.45 + 0.55 * lines));
+    float density = clamp((0.6 + 0.4 * lines) * (0.75 + 0.25 * edgeOn) * uBodyOpacity, 0.0, 1.0);
+
+    // Light only where it belongs: streak crests, edge-on walls, the front.
+    float crest = pow(lines, 1.6);
+    float energy = crest * (0.25 + rim) * uOpacity * uShaderIntensity;
+    vec3 light = uColor * energy * uGlow + uColorHot * (front * (0.6 + 0.4 * lines) + crest * rim * 0.3);
 
     // The splayed foot is seen face-on from above and stacks up its own
     // layers: thin it, so the column reads as air hitting the floor, not a disc.
@@ -375,7 +425,9 @@ const COLUMN_FRAGMENT = /* glsl */ `
     mask *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
     if (mask < 0.004) discard;
 
-    gl_FragColor = vec4(color * mask * uGlobalGlow, 1.0);
+    // Premultiplied: the body occludes, the light adds.
+    float a = clamp(density + front * 0.15, 0.0, 1.0) * mask;
+    gl_FragColor = vec4((body * density + light * uGlobalGlow) * mask, a);
   }
 `;
 
@@ -384,7 +436,10 @@ export function createWindColumnMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: CustomBlending,
+    blendEquation: AddEquation,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -408,7 +463,11 @@ export function createWindColumnMaterial() {
       uFade: { value: 1 },
       uLiftY: { value: -10 },
       uColor: { value: new Color() },
-      uColorHot: { value: new Color() }
+      uColorHot: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uBodyOpacity: { value: 0.7 },
+      uBodyLight: { value: 0.5 }
     }),
     vertexShader: COLUMN_VERTEX,
     fragmentShader: COLUMN_FRAGMENT
@@ -433,13 +492,17 @@ export function createWindColumnMaterial() {
     u.uOpacity.value = c.columnOpacity * g.opacity;
     u.uGlow.value = c.columnGlow * g.glow;
     u.uRim.value = c.columnRim * g.fresnel;
-    u.uFront.value = c.columnFront * g.glow;
+    u.uFront.value = c.columnFront * g.glow * (state.front ?? 1);
     u.uFrontWidth.value = c.columnFrontWidth;
     u.uSoftFade.value = c.columnSoftFade;
     u.uFade.value = state.fade;
     u.uLiftY.value = state.liftY;
     u.uColor.value.copy(getColor(c.colorColumn));
     u.uColorHot.value.copy(getColor(c.colorColumnHot));
+    u.uColorBody.value.copy(getColor(c.colorColumnBody));
+    u.uColorDeep.value.copy(getColor(c.colorColumnDeep));
+    u.uBodyOpacity.value = c.columnBodyOpacity * g.opacity;
+    u.uBodyLight.value = c.columnBodyLight;
   };
 
   return material;
@@ -592,6 +655,9 @@ const GROUND_FRAGMENT = /* glsl */ `
   uniform float uOpacity;
   uniform vec3  uColorRing;
   uniform vec3  uColorScour;
+  uniform vec3  uColorScourLit;
+  uniform float uScourRidge;
+  uniform float uRingShadow;
   uniform vec3  uColorImprint;
   uniform vec3  uColorWarn;
   uniform float uGlobalGlow;
@@ -635,13 +701,22 @@ const GROUND_FRAGMENT = /* glsl */ `
     float fine = snoise(vec3(dir * uScourStreaks * 0.5, r * 0.6 - uSeed));
     float comb = clamp(0.5 + 0.5 * (streak * 0.7 + fine * 0.3) * uScourContrast, 0.0, 1.0);
     float scour = behind * uScour * smoothstep(0.2, 1.0, r) * (0.35 + 0.65 * comb);
-    col = mix(col, uColorScour * (0.6 + 0.6 * comb), clamp(scour * uScourOpacity * 1.4, 0.0, 1.0));
+    // Deep troughs, pale combed ridges: the floor carries the dark mass, the
+    // ridges catch the light.
+    vec3 scourCol = mix(uColorScour, uColorScourLit, smoothstep(0.55, 0.95, comb) * uScourRidge);
+    col = mix(col, scourCol, clamp(scour * uScourOpacity * 1.4, 0.0, 1.0));
     a = max(a, scour * uScourOpacity);
 
     // 4 · the shock ring, with a short bright trail behind it.
     float wr = uWave * (1.0 + rag * 0.06);
     float d = (r - wr) / max(uRingWidth, 0.01);
-    float ring = exp(-d * d) + (r < wr ? exp((r - wr) / max(uRingWidth * 3.0, 0.02)) * 0.35 : 0.0);
+    // A dark trough dragged just behind the front, so the bright edge sits on
+    // the deep tone rather than on bare floor.
+    float dt_ = (r - (wr - uRingWidth * 2.2)) / max(uRingWidth * 1.6, 0.02);
+    float trough = exp(-dt_ * dt_) * uRingLevel * uRingShadow;
+    col = mix(col, uColorImprint, clamp(trough, 0.0, 1.0));
+    a = max(a, trough * 0.9);
+    float ring = exp(-d * d) + (r < wr ? exp((r - wr) / max(uRingWidth * 3.0, 0.02)) * 0.2 : 0.0);
     ring *= uRingLevel * (0.65 + 0.35 * comb);
     col += uColorRing * ring * uRingGlow * uShaderIntensity * uGlobalGlow;
     a = max(a, ring * 0.9);
@@ -692,6 +767,9 @@ export function createGroundBlastMaterial() {
       uOpacity: { value: 1 },
       uColorRing: { value: new Color() },
       uColorScour: { value: new Color() },
+      uColorScourLit: { value: new Color() },
+      uScourRidge: { value: 0.5 },
+      uRingShadow: { value: 0.8 },
       uColorImprint: { value: new Color() },
       uColorWarn: { value: new Color() }
     }),
@@ -726,6 +804,9 @@ export function createGroundBlastMaterial() {
     u.uOpacity.value = g.opacity;
     u.uColorRing.value.copy(getColor(c.colorRing));
     u.uColorScour.value.copy(getColor(c.colorScour));
+    u.uColorScourLit.value.copy(getColor(c.colorScourLit));
+    u.uScourRidge.value = c.scourRidge * g.shaderIntensity;
+    u.uRingShadow.value = c.ringShadow;
     u.uColorImprint.value.copy(getColor(c.colorImprint));
     u.uColorWarn.value.copy(getColor(c.colorWarn));
   };

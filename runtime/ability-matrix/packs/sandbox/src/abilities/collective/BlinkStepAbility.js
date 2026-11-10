@@ -11,9 +11,12 @@ import {
   createBlinkTrailMaterial,
   createBlinkShardMaterial,
   createBlinkGhostMaterial,
-  createBlinkWarpMaterial
+  createBlinkWarpMaterial,
+  createBlinkRiftMaterial,
+  createBlinkScarMaterial
 } from '../../materials/collective/BlinkStepMaterials.js';
 import { createBoltRibbonGeometry, createShardGeometry } from '../../assets/ProceduralGeometry.js';
+import { createRiftGeometry, createScarGeometry } from '../../assets/collective/BlinkStepGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
 import { DecalType } from '../../effects/GroundDecals.js';
@@ -82,6 +85,32 @@ let characterOwner = null;
  *      bursts out along the floor, an AIR pressure shell, a SHOCKWAVE and a
  *      DUSTRING, sparks and motes, a screen-space *bulge*, a light punch, a
  *      shake and a flash.
+ *   6. **THE RIFTS** (`createBlinkRiftMaterial` on `createRiftGeometry`) — the
+ *      hero form. A 2.5 m tear in the air, an almond lens with jagged lips
+ *      laid out from a parameter grid in the vertex stage: a light-eating void
+ *      with slipstream streaks racing through it, a white-hot lip and cracks
+ *      crawling out through the air round it. One splits where the caster
+ *      stands as they vanish; the other splits at the far end just before the
+ *      landing and the body reforms out of it. Both gape, then seal back to a
+ *      hairline scar through the linger while their cracks keep crawling.
+ *   7. **THE SCAR** (`createBlinkScarMaterial` on `createScarGeometry`) — the
+ *      floor answers: a burnt slipstream lane down the whole line, written
+ *      behind the running head with a hot seam and skid lanes, a combed
+ *      scorch at the start and a skid-spoked crater at the landing. Through
+ *      the linger it cools along the ramp while knots of light keep draining
+ *      down the seam to the landing; it dissolves on the exit, and SCORCH
+ *      decals under both ends outlive the cast.
+ *   8. **THE LINGER** — an echo of the caster left standing at the start
+ *      (an afterimage that lives `echoLife`), the arrival shards planted
+ *      round the crater humming with a pulse that runs round the ring before
+ *      they sink, and residue motes rising off the scar.
+ *
+ * ## Timing (defaults, × `global.lifetime`)
+ *
+ *   0.00–0.12 vanish (the departure rift splits with it) → ~0.5 s transit at
+ *   28 m/s → impact (arrival rift already open, body reforms out of it) →
+ *   1.7 s arrival + linger (rifts gape then seal, scar cools and drains,
+ *   planted ring hums then sinks) → 0.8 s exit (everything dissolves).
  *
  * Hits are the default line capsule: anything the streak runs through goes
  * down along the dash.
@@ -155,7 +184,7 @@ export class BlinkStepAbility extends Ability {
 
     this.ghostRecords = [];
     for (let i = 0; i < MAX_GHOSTS; i++) {
-      this.ghostRecords.push({ along: 0, born: -1, seed: 0 });
+      this.ghostRecords.push({ along: 0, born: -1, seed: 0, echo: false });
     }
     this._ghostCursor = 0;
     this._nextGhost = 0;
@@ -180,6 +209,46 @@ export class BlinkStepAbility extends Ability {
     this._moved = false;
     this._savedScale = new Vector3(1, 1, 1);
     this._savedVisible = true;
+
+    /* ---- layer 6: the rifts (hero) ---- */
+    this.riftGeometry = createRiftGeometry();
+    this.departRiftMaterial = createBlinkRiftMaterial();
+    this.arriveRiftMaterial = createBlinkRiftMaterial();
+    this.departRift = new Mesh(this.riftGeometry, this.departRiftMaterial);
+    this.arriveRift = new Mesh(this.riftGeometry, this.arriveRiftMaterial);
+    for (const mesh of [this.departRift, this.arriveRift]) {
+      mesh.layers.set(LAYER.VFX);
+      mesh.frustumCulled = false; // placed in the vertex stage
+      mesh.renderOrder = 11;
+      mesh.visible = false;
+      this.group.add(mesh);
+    }
+    this.departRift.name = 'BlinkRiftDepart';
+    this.arriveRift.name = 'BlinkRiftArrive';
+    this._riftState = { open: 0, crack: 0, fade: 1, seed: 0, haloV: this.riftGeometry.userData.halo };
+
+    /* ---- layer 7: the scar ---- */
+    this.scarGeometry = createScarGeometry();
+    this.scarMaterial = createBlinkScarMaterial();
+    this.scar = new Mesh(this.scarGeometry, this.scarMaterial);
+    this.scar.name = 'BlinkScar';
+    this.scar.layers.set(LAYER.VFX);
+    this.scar.frustumCulled = false;
+    this.scar.renderOrder = 1;
+    this.scar.visible = false;
+    this.group.add(this.scar);
+    this._scarState = {
+      origin: new Vector3(),
+      dir: new Vector3(0, 0, 1),
+      length: 1,
+      head: 0,
+      depart: 0,
+      arrive: 0,
+      cool: 0,
+      dissolve: 0,
+      fade: 1,
+      seed: 0
+    };
 
     this._arriveAge = -1;
     this._seed = 0;
@@ -236,6 +305,7 @@ export class BlinkStepAbility extends Ability {
     this.motes.uniforms.uFadeOut.value = 0.5;
 
     this.sparkEmitter = new RateEmitter();
+    this.residueEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -243,7 +313,14 @@ export class BlinkStepAbility extends Ability {
   /* ------------------------------------------------------------------ */
 
   get instanceCount() {
-    return this.shards.count + this.ghosts.count + (this.trail.visible ? this.trailGeometry.instanceCount : 0);
+    return (
+      this.shards.count +
+      this.ghosts.count +
+      (this.trail.visible ? this.trailGeometry.instanceCount : 0) +
+      (this.departRift.visible ? 1 : 0) +
+      (this.arriveRift.visible ? 1 : 0) +
+      (this.scar.visible ? 1 : 0)
+    );
   }
 
   get impactDuration() {
@@ -314,6 +391,7 @@ export class BlinkStepAbility extends Ability {
     this._departGhost = false;
     this._nextGhost = Math.max(0.2, c.ghostSpacing) * 0.5;
     this.sparkEmitter.reset();
+    this.residueEmitter.reset();
     for (const ghost of this.ghostRecords) ghost.born = -1;
 
     for (const dice of this.shardDice) {
@@ -362,6 +440,8 @@ export class BlinkStepAbility extends Ability {
     this.ctx.shake.add(c.departShake * g.cameraShake, 7, 18);
     this._sync();
     this._updateDeparture(c);
+    this._updateRifts(c, 1);
+    this._updateScar(c, 1);
   }
 
   /* ------------------------------------------------------------------ */
@@ -487,27 +567,41 @@ export class BlinkStepAbility extends Ability {
       fade[i] = alpha;
     }
 
-    /* --- arrival --- */
-    const t = this._arriveAge < 0 ? -1 : this._arriveAge / Math.max(0.02, c.crownLife);
+    /* --- arrival: burst out, plant, hum, sink --- */
+    // The crown is thrown out along the floor over `crownLife`, then stands
+    // planted round the crater for `plantHold` with a pulse running round the
+    // ring, then sinks into the floor over `plantSink` — the linger's motion.
+    const L = settings.global.lifetime;
+    const at = this._arriveAge;
+    const crownLife = Math.max(0.02, c.crownLife);
+    const hold = Math.max(0, c.plantHold * L);
+    const sinkTime = Math.max(0.02, c.plantSink * L);
+    const burst = saturate(at / crownLife);
+    const sinkK = saturate((at - crownLife - hold) / sinkTime);
+    const gone = at < 0 || at >= crownLife + hold + sinkTime;
     this.pointAt(1, _end);
     for (let i = 0; i < MAX_SHARDS; i++) {
       const slot = MAX_SHARDS + i;
       const dice = this.shardDice[slot];
-      if (i >= count || t < 0 || t >= 1) {
+      if (i >= count || gone) {
         this._parkShard(slot);
         fade[slot] = 0;
         continue;
       }
       const angle = (i / Math.max(1, count)) * TAU + dice.angle * 0.2;
-      const radius = lerp(0.2, c.arrivalRadius, Easing.outCubic(t));
+      const radius = lerp(0.2, c.arrivalRadius, Easing.outCubic(burst));
       _dir.set(Math.cos(angle), 0, Math.sin(angle));
       _pos.copy(_end).addScaledVector(_dir, radius);
-      _pos.y = 0.05;
+      _pos.y = 0.05 - c.shardLength * dice.length * 1.1 * Easing.inCubic(sinkK);
       const tilt = c.arrivalTilt + dice.tilt * 0.25;
       _out.copy(_dir).multiplyScalar(Math.cos(tilt));
       _out.y = Math.sin(tilt);
       this._placeShard(slot, _pos, _out.normalize(), dice, c);
-      fade[slot] = 1 - Easing.inQuad(t);
+      const hum = Math.pow(0.5 + 0.5 * Math.sin(angle - at * TAU * c.plantPulseRate), 6);
+      fade[slot] =
+        burst < 1
+          ? 1 - 0.35 * Easing.inQuad(burst)
+          : 0.65 * (1 + c.plantPulse * 2 * hum) * (1 - 0.7 * sinkK);
     }
 
     this.shards.count = MAX_SHARDS * 2;
@@ -563,11 +657,13 @@ export class BlinkStepAbility extends Ability {
     const c = settings.blink;
     const spacing = Math.max(0.2, c.ghostSpacing);
     const life = Math.max(0.05, c.ghostLife);
+    const echoLife = Math.max(0.05, c.echoLife * settings.global.lifetime);
 
-    // One where the body vanished, once it has.
+    // One where the body vanished, once it has: the echo, left standing in
+    // front of the sealing rift for the whole linger.
     if (this._vanish(c) >= 1 && !this._departGhost) {
       this._departGhost = true;
-      this._dropGhost(0);
+      this._dropGhost(0, true);
     }
     while (this.phase === AbilityPhase.TRAVEL && this.front >= this._nextGhost && this._nextGhost < this.length) {
       this._dropGhost(this._nextGhost);
@@ -578,7 +674,7 @@ export class BlinkStepAbility extends Ability {
     let drawn = 0;
     for (let i = 0; i < MAX_GHOSTS; i++) {
       const ghost = this.ghostRecords[i];
-      const age = ghost.born < 0 ? 1 : (this.age - ghost.born) / life;
+      const age = ghost.born < 0 ? 1 : (this.age - ghost.born) / (ghost.echo ? echoLife : life);
       if (age >= 1) {
         _dummy.position.set(0, -999, 0);
         data[i * 2] = 1;
@@ -603,9 +699,10 @@ export class BlinkStepAbility extends Ability {
     this.ghostAttribute.needsUpdate = true;
   }
 
-  _dropGhost(along) {
+  _dropGhost(along, echo = false) {
     const ghost = this.ghostRecords[this._ghostCursor];
     this._ghostCursor = (this._ghostCursor + 1) % MAX_GHOSTS;
+    ghost.echo = echo;
     ghost.along = along;
     ghost.born = this.age;
     ghost.seed = Math.random();
@@ -629,6 +726,120 @@ export class BlinkStepAbility extends Ability {
     this.pointAt(1, this.bulge.position).setY(c.bodyHeight);
   }
 
+  /**
+   * A rift's opening, 0 sealed → 1 gaping, `t` seconds after it starts to
+   * split. It tears open with an overshoot, quivers while it gapes, then
+   * seals (in-out) back to a hairline.
+   */
+  _riftOpen(t, hold, c) {
+    if (t <= 0) return 0;
+    const open = Math.max(0.02, c.riftOpenTime);
+    if (t < open) return Easing.outBack(t / open);
+    if (t < open + hold) return 1 + 0.05 * Math.sin((t - open) * 15);
+    const seal = Math.max(0.02, c.riftSealTime * settings.global.lifetime);
+    return 1 - Easing.inOutCubic(saturate((t - open - hold) / seal));
+  }
+
+  /** One rift, `t` seconds into its life. */
+  _layRift(mesh, material, t, hold, phaseFade, seedOffset, c) {
+    if (t <= 0 || phaseFade <= 0.001) {
+      mesh.visible = false;
+      return;
+    }
+    const L = settings.global.lifetime;
+    const open = Math.max(0.02, c.riftOpenTime);
+    const seal = Math.max(0.02, c.riftSealTime * L);
+    const state = this._riftState;
+    state.open = Math.max(0, this._riftOpen(t, hold, c));
+    state.crack = Easing.outCubic(saturate((t - open * 0.5) / Math.max(0.05, c.riftCrackTime * L)));
+    // Once sealed, the hairline scar left in the air goes over a third of a second.
+    state.fade = (1 - saturate((t - open - hold - seal) / 0.35)) * phaseFade;
+    state.seed = this._seed + seedOffset;
+    material.userData.sync(state);
+    mesh.visible = state.fade > 0.001;
+    mesh.rotation.set(0, Math.atan2(this.direction.x, this.direction.z), 0);
+  }
+
+  /**
+   * Both rifts. The departure rift splits with the vanish (age 0) and stands
+   * where the caster stood; the arrival rift splits `riftArriveLead` before
+   * the head lands — found from the distance still to run, so it is right at
+   * any speed — and stands `riftOffset` behind the landing point.
+   */
+  _updateRifts(c, phaseFade) {
+    const g = settings.global;
+    const L = g.lifetime;
+    const open = Math.max(0.02, c.riftOpenTime);
+    const lead = Math.max(0, c.riftArriveLead);
+
+    const departHold = Math.max(0, c.vanishTime - open) + c.riftDepartHold * L;
+    this._layRift(this.departRift, this.departRiftMaterial, this.age, departHold, phaseFade, 0, c);
+    this.departRift.position.copy(this.origin);
+
+    let t;
+    if (this._arriveAge >= 0) {
+      t = this._arriveAge + lead;
+    } else {
+      const remaining = (this.length - this.front) / Math.max(0.1, c.speed * g.speed);
+      t = lead - remaining;
+    }
+    const arriveHold = Math.max(0, lead - open) + c.riftArriveHold * L;
+    this._layRift(this.arriveRift, this.arriveRiftMaterial, t, arriveHold, phaseFade, 11, c);
+    this.pointAt(1, this.arriveRift.position).addScaledVector(this.direction, -c.riftOffset);
+  }
+
+  /** The floor scar, written behind the head, cooling and draining after. */
+  _updateScar(c, phaseFade) {
+    const L = settings.global.lifetime;
+    const state = this._scarState;
+    const spread = Math.max(0.02, c.scarSpreadTime);
+    state.origin.copy(this.origin);
+    state.dir.copy(this.direction);
+    state.length = this.length;
+    state.head = this._arriveAge >= 0 ? this.length + 1 : this.front;
+    state.depart = Easing.outCubic(saturate(this.age / spread));
+    state.arrive = this._arriveAge >= 0 ? Easing.outCubic(saturate(this._arriveAge / spread)) : 0;
+    state.cool = this._arriveAge >= 0 ? saturate(this._arriveAge / Math.max(0.05, c.scarCoolTime * L)) : 0;
+    const fadeT = this.phase === AbilityPhase.FADE ? saturate(this.fadeTime / this.fadeDuration) : 0;
+    state.dissolve = saturate(fadeT / Math.max(0.05, c.scarDissolve));
+    state.fade = phaseFade > 0 ? 1 : 0;
+    state.seed = this._seed;
+    this.scarMaterial.userData.sync(state);
+    this.scar.visible = state.dissolve < 1;
+  }
+
+  /** Residue: motes rising off the scar through the linger. */
+  _emitResidue(dt, c, rateScale) {
+    const g = settings.global;
+    const count = Math.round(this.residueEmitter.tick(dt, c.residueRate * rateScale) * g.particleCount);
+    if (count <= 0) return;
+    const time = frame.uTime.value;
+    for (let n = 0; n < count; n++) {
+      // Weighted toward the two ends, where the tears were.
+      const r = Math.random();
+      const along = r < 0.3 ? Math.random() * 0.12 : r < 0.6 ? 1 - Math.random() * 0.1 : Math.random();
+      this.pointAt(along, _pos);
+      _pos.addScaledVector(this.side, randRange(-0.5, 0.5) * c.scarWidth);
+      _pos.y = 0.05;
+      _emit.position = _pos;
+      _emit.radius = 0.15;
+      _emit.direction = _dir.set(0, 1, 0);
+      _emit.speed = c.residueSpeed;
+      _emit.speedVariance = 0.5;
+      _emit.spread = 0.5;
+      _emit.inherit = null;
+      _emit.anchor = null;
+      _emit.size = 0.07;
+      _emit.sizeVariance = 0.5;
+      _emit.life = c.moteLifetime;
+      _emit.lifeVariance = 0.4;
+      _emit.spin = 0;
+      _emit.tint = null;
+      _emit.time = time;
+      this.motes.emit(1, _emit);
+    }
+  }
+
   /* ------------------------------------------------------------------ */
   /* Phases                                                              */
   /* ------------------------------------------------------------------ */
@@ -643,6 +854,8 @@ export class BlinkStepAbility extends Ability {
     this._updateTrail(1);
     this._updateGhosts();
     this._updateBulge(c);
+    this._updateRifts(c, 1);
+    this._updateScar(c, 1);
 
     // The light and the camera ride the head.
     this.position.y = c.bodyHeight;
@@ -695,6 +908,16 @@ export class BlinkStepAbility extends Ability {
       colorA: getColor(c.colorDecalA),
       colorB: getColor(c.colorDecalB)
     });
+    // SCORCH under both ends: they outlive the cast (the scar dissolves first).
+    for (let k = 0; k < 2; k++) {
+      this.ctx.decals.spawn(DecalType.SCORCH, k ? _end : this.origin, {
+        radius: (k ? c.scarArriveRadius : c.scarDepartRadius) * 0.85,
+        life: c.scarDecalLife,
+        intensity: 0.8,
+        colorA: getColor(c.colorRiftDeep),
+        colorB: getColor(c.colorRiftBody)
+      });
+    }
     this.ctx.decals.spawn(DecalType.DUSTRING, _end, {
       radius: c.dustRadius,
       life: c.dustLife,
@@ -709,9 +932,9 @@ export class BlinkStepAbility extends Ability {
       endRadius: c.arrivalBurst * g.explosionIntensity,
       life: c.arrivalBurstLife,
       intensity: c.arrivalBurstIntensity,
-      opacity: 0.7,
+      opacity: c.arrivalBurstOpacity * g.opacity,
       fresnel: 2.0,
-      squash: 0.75,
+      squash: c.arrivalBurstSquash,
       colorA: getColor(c.colorBurstA),
       colorB: getColor(c.colorBurstB),
       colorC: getColor(c.colorBurstC)
@@ -776,6 +999,9 @@ export class BlinkStepAbility extends Ability {
     this._updateTrail(fade);
     this._updateGhosts();
     this._updateBulge(c);
+    this._updateRifts(c, fade);
+    this._updateScar(c, fade);
+    this._emitResidue(dt, c, fade);
 
     this.pointAt(1, this.position);
     this.position.y = c.bodyHeight;
@@ -791,6 +1017,9 @@ export class BlinkStepAbility extends Ability {
     this.ghosts.count = 0;
     this.pinch.visible = false;
     this.bulge.visible = false;
+    this.departRift.visible = false;
+    this.arriveRift.visible = false;
+    this.scar.visible = false;
     for (const ghost of this.ghostRecords) ghost.born = -1;
   }
 
@@ -807,6 +1036,11 @@ export class BlinkStepAbility extends Ability {
     this.warpGeometry.dispose();
     this.pinchMaterial.dispose();
     this.bulgeMaterial.dispose();
+    this.riftGeometry.dispose();
+    this.departRiftMaterial.dispose();
+    this.arriveRiftMaterial.dispose();
+    this.scarGeometry.dispose();
+    this.scarMaterial.dispose();
     super.dispose();
   }
 }
@@ -823,7 +1057,7 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'range', 3, 40, 0.1, 'max range');
   R(cast, c, 'minRange', 0, 12, 0.1, 'min range');
   R(cast, c, 'speed', 4, 120, 0.5, 'streak speed (m/s)');
-  R(cast, c, 'lifetime', 0.1, 4, 0.01, 'arrival plays for');
+  R(cast, c, 'lifetime', 0.1, 4, 0.01, 'arrival + linger play for');
   R(cast, c, 'fadeTime', 0.05, 3, 0.01, 'fade out');
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   Editor.castAnimation(cast, c);
@@ -950,6 +1184,64 @@ export function buildEditor(gui, c, Editor) {
   R(arrive, c, 'shakeDuration', 0.05, 2, 0.01, 'shake settles over');
   R(arrive, c, 'impactFlash', 0, 1, 0.01, 'flash');
   arrive.addColor(c, 'colorFlash').name('flash');
+
+  const rift = folder.addFolder('6 · The rifts (hero)');
+  R(rift, c, 'riftHeight', 0.5, 5, 0.01, 'height (m)');
+  R(rift, c, 'riftWidth', 0.1, 3, 0.01, 'width when open (m)');
+  R(rift, c, 'riftLift', 0, 1.5, 0.01, 'foot off the floor (m)');
+  R(rift, c, 'riftDepth', 0, 1, 0.01, 'belly bulge (m)');
+  R(rift, c, 'riftJag', 0, 1, 0.01, 'torn lips');
+  R(rift, c, 'riftJagScale', 1, 20, 0.1, 'jags along the height');
+  R(rift, c, 'riftHalo', 0, 3, 0.01, 'cracked air (m)');
+  R(rift, c, 'riftVoid', 0, 1, 0.01, 'void opacity');
+  R(rift, c, 'riftRimGlow', 0, 10, 0.05, 'lip glow');
+  R(rift, c, 'riftRimWidth', 0.02, 0.6, 0.005, 'lip width');
+  R(rift, c, 'riftFlow', 0, 20, 0.1, 'slipstream speed');
+  R(rift, c, 'riftStreaks', 0, 3, 0.01, 'slipstream streaks');
+  R(rift, c, 'riftCrack', 0, 4, 0.01, 'cracks');
+  R(rift, c, 'riftCrackScale', 0.3, 8, 0.05, 'crack scale (per m)');
+  R(rift, c, 'riftFlicker', 0, 1, 0.01, 'flicker');
+  R(rift, c, 'riftGlow', 0, 6, 0.05, 'glow');
+  R(rift, c, 'riftOpenTime', 0.02, 1, 0.005, 'splits open over (s)');
+  R(rift, c, 'riftDepartHold', 0, 2, 0.01, 'departure gapes for (s)');
+  R(rift, c, 'riftArriveLead', 0, 1, 0.01, 'arrival splits early by (s)');
+  R(rift, c, 'riftArriveHold', 0, 2, 0.01, 'arrival gapes for (s)');
+  R(rift, c, 'riftSealTime', 0.05, 3, 0.01, 'seals over (s)');
+  R(rift, c, 'riftCrackTime', 0.05, 4, 0.01, 'cracks crawl out over (s)');
+  R(rift, c, 'riftOffset', -2, 2, 0.01, 'arrival rift behind landing (m)');
+  rift.addColor(c, 'colorRiftCore').name('ramp: core');
+  rift.addColor(c, 'colorRiftTint').name('ramp: tint');
+  rift.addColor(c, 'colorRiftBody').name('ramp: body');
+  rift.addColor(c, 'colorRiftDeep').name('ramp: deep');
+
+  const scar = folder.addFolder('7 · The scar (floor)');
+  R(scar, c, 'scarWidth', 0.1, 4, 0.01, 'lane width (m)');
+  R(scar, c, 'scarDepartRadius', 0.1, 5, 0.01, 'departure scorch (m)');
+  R(scar, c, 'scarArriveRadius', 0.1, 6, 0.01, 'landing crater (m)');
+  R(scar, c, 'scarSpreadTime', 0.02, 1.5, 0.01, 'spreads over (s)');
+  R(scar, c, 'scarHeatLength', 0.2, 20, 0.05, 'hot seam behind the head (m)');
+  R(scar, c, 'scarPulse', 0, 3, 0.01, 'draining pulses');
+  R(scar, c, 'scarPulseSpeed', 0, 30, 0.1, 'pulse speed (m/s)');
+  R(scar, c, 'scarPulseGap', 0.3, 10, 0.05, 'pulse spacing (m)');
+  R(scar, c, 'scarSpokes', 2, 48, 1, 'skid spokes');
+  R(scar, c, 'scarBurn', 0, 1, 0.01, 'burn darkness');
+  R(scar, c, 'scarSeamGlow', 0, 4, 0.01, 'seam brightness');
+  R(scar, c, 'scarGlow', 0, 8, 0.05, 'glow');
+  R(scar, c, 'scarNoiseScale', 0.1, 4, 0.01, 'noise scale');
+  R(scar, c, 'scarCoolTime', 0.1, 5, 0.01, 'cools over (s)');
+  R(scar, c, 'scarDissolve', 0.05, 1, 0.01, 'dissolve (share of fade)');
+  R(scar, c, 'scarDecalLife', 0.5, 15, 0.1, 'scorch decals last (s)');
+
+  const linger = folder.addFolder('8 · The linger');
+  R(linger, c, 'echoLife', 0.1, 5, 0.01, 'echo stands for (s)');
+  R(linger, c, 'plantHold', 0, 4, 0.01, 'shards stand planted (s)');
+  R(linger, c, 'plantSink', 0.05, 2, 0.01, 'shards sink over (s)');
+  R(linger, c, 'plantPulse', 0, 2, 0.01, 'ring pulse');
+  R(linger, c, 'plantPulseRate', 0, 6, 0.05, 'ring pulses / s');
+  R(linger, c, 'residueRate', 0, 400, 1, 'residue motes / s');
+  R(linger, c, 'residueSpeed', 0, 4, 0.01, 'residue rise speed');
+  R(arrive, c, 'arrivalBurstSquash', 0.05, 1.5, 0.01, 'shell squash');
+  R(arrive, c, 'arrivalBurstOpacity', 0, 1, 0.01, 'shell opacity');
 
   const light = folder.addFolder('Light');
   light.addColor(c, 'lightColor').name('colour');

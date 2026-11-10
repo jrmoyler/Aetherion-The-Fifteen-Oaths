@@ -221,6 +221,7 @@ export class MiasmaSpitAbility extends Ability {
     this._landed = false;
     this._blobLanded = 0;
     this._scan = 0;
+    this._plumeClock = 0;
   }
 
   _vfx(mesh, order) {
@@ -396,6 +397,7 @@ export class MiasmaSpitAbility extends Ability {
     this._landed = false;
     this._blobLanded = 0;
     this._scan = 0;
+    this._plumeClock = 0;
     this._releaseGrips();
     for (let i = 0; i < MAX_DRIPS; i++) this._drips[i].live = false;
     for (let i = 0; i < MAX_SPATTER; i++) {
@@ -919,6 +921,30 @@ export class MiasmaSpitAbility extends Ability {
       }
     }
 
+    // Plumes: every so often a thick column of reek boils up off one spot of
+    // the pool, so the fumes read as a body of gas, not a haze of specks.
+    this._plumeClock -= dt;
+    if (strength > 0.05 && this._plumeClock <= 0 && c.plumePuffs > 0) {
+      this._plumeClock = Math.max(0.05, c.plumeEvery * (0.6 + Math.random() * 0.8));
+      this._resetEmit(time);
+      this._poolPoint(R * 0.7, _at);
+      _emit.direction = _up;
+      _emit.spread = 0.2;
+      _emit.size = c.plumeSize;
+      _emit.life = c.fumeLifetime;
+      _emit.spin = 0.4;
+      const puffs = Math.max(1, Math.round(c.plumePuffs * strength * g.particleCount));
+      for (let n = 0; n < puffs; n++) {
+        const k = n / Math.max(1, puffs - 1);
+        _pos.copy(_at).setY(0.2 + k * c.plumeHeight);
+        _pos.x += (Math.random() - 0.5) * 0.3;
+        _pos.z += (Math.random() - 0.5) * 0.3;
+        _emit.position = _pos;
+        _emit.speed = c.plumeRise * (0.7 + 0.6 * k);
+        this.fumes.emit(1, _emit);
+      }
+    }
+
     const bubbles = Math.round(this.bubbleEmitter.tick(dt, c.bubbleRate * strength) * g.particleCount);
     if (bubbles > 0) {
       this._resetEmit(time);
@@ -1300,6 +1326,11 @@ export function buildEditor(gui, c, Editor) {
   R(air, c, 'fumeBuoyancy', -2, 3, 0.01, 'fume buoyancy');
   R(air, c, 'fumeOpacity', 0, 1, 0.01, 'fume opacity');
   R(air, c, 'fumeTurbulence', 0, 3, 0.01, 'fume turbulence');
+  R(air, c, 'plumeEvery', 0.05, 3, 0.01, 'a plume every (s)');
+  R(air, c, 'plumePuffs', 0, 24, 1, 'puffs per plume');
+  R(air, c, 'plumeSize', 0.1, 4, 0.01, 'plume puff size');
+  R(air, c, 'plumeRise', 0, 5, 0.05, 'plume rise (m/s)');
+  R(air, c, 'plumeHeight', 0, 4, 0.05, 'plume column (m)');
   Editor.gradient(air, c, 'colorFume', 'fume gradient');
   R(air, c, 'bubbleRate', 0, 200, 1, 'bubbles/second');
   R(air, c, 'bubbleSize', 0.02, 1, 0.005, 'bubble size');

@@ -63,13 +63,20 @@ export class TouchControls {
       </div>
     `;
     document.body.appendChild(root);
+    // Actions sit on the body, not inside the rig. The rig is one stacking
+    // context under the VFX editor; a child cannot climb above lil-gui.
+    // Hoisting the cluster lets Run / Dash / Cast stay tappable while the
+    // look pad stays out of the editor column.
+    const actions = root.querySelector('.touch-actions');
+    document.body.appendChild(actions);
     this._root = root;
+    this._actions = actions;
     this._stick = root.querySelector('[data-stick]');
     this._knob = root.querySelector('[data-knob]');
     this._look = root.querySelector('[data-look]');
-    this._run = root.querySelector('[data-run]');
-    this._dash = root.querySelector('[data-dash]');
-    this._cast = root.querySelector('[data-cast]');
+    this._run = actions.querySelector('[data-run]');
+    this._dash = actions.querySelector('[data-dash]');
+    this._cast = actions.querySelector('[data-cast]');
 
     this._stick.addEventListener('pointerdown', this._onStickDown);
     this._look.addEventListener('pointerdown', this._onLookDown);
@@ -101,6 +108,11 @@ export class TouchControls {
   }
 
   async _castAt(clientX, clientY) {
+    const mechanics = this.app.combat?.mechanics;
+    if (this.app.combat?.enabled && mechanics?.selected) {
+      mechanics.castAt(clientX, clientY);
+      return;
+    }
     const aim = this.app.activeAim;
     if (!aim) return;
     const point = this._localNDC(clientX, clientY).clone();
@@ -197,6 +209,9 @@ export class TouchControls {
   }
 
   dispose() {
+    this._actions?.remove();
     this._root?.remove();
+    this._actions = null;
+    this._root = null;
   }
 }

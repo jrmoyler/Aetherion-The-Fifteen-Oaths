@@ -1,4 +1,4 @@
-import { CapsuleGeometry, SphereGeometry, Vector3, Quaternion } from 'three';
+import { BufferGeometry, CapsuleGeometry, Float32BufferAttribute, SphereGeometry, Vector3, Quaternion } from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 /**
@@ -75,4 +75,43 @@ export function createMirageFigureGeometry(height = 1.78) {
   for (const g of parts) g.dispose();
   merged.computeBoundingSphere();
   return merged;
+}
+
+/**
+ * The heat veil: `ribbons` tall tongues of shimmer standing in a ring round
+ * the copy — the air itself bending, which is what a mirage *is*.
+ *
+ * Parameter-space geometry (technique: shape in the vertex shader). Every
+ * vertex carries only `(t, a, i)`: `t` 0 at the floor .. 1 at the tip, `a`
+ * −1..1 across the ribbon, `i` the ribbon index. No metres: the material
+ * seats each ribbon on the ring (`veilSeat × zoneRadius`), sways it, tapers
+ * it to a flame-like tip, pulls it in on the charge and blows it out on the
+ * burst, all from settings every frame. `position` holds the same triple so
+ * three's bounding volumes are harmless; the mesh is `frustumCulled = false`.
+ *
+ * @param {number} ribbons
+ * @param {number} rows    segments up a ribbon
+ * @param {number} cols    segments across a ribbon
+ */
+export function createMirageVeilGeometry(ribbons = 9, rows = 24, cols = 4) {
+  const params = [];
+  const index = [];
+  for (let i = 0; i < ribbons; i++) {
+    const base = params.length / 3;
+    for (let r = 0; r <= rows; r++) {
+      const t = r / rows;
+      for (let k = 0; k <= cols; k++) params.push(t, (k / cols) * 2 - 1, i);
+    }
+    for (let r = 0; r < rows; r++) {
+      for (let k = 0; k < cols; k++) {
+        const a = base + r * (cols + 1) + k;
+        const b = a + cols + 1;
+        index.push(a, b, a + 1, a + 1, b, b + 1);
+      }
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new Float32BufferAttribute(params, 3));
+  geometry.setIndex(index);
+  return geometry;
 }

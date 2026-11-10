@@ -78,3 +78,50 @@ export function createShockRingGeometry(max) {
   geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
   return geometry;
 }
+
+/**
+ * The rifling: `strands` parameter grids stacked in one buffer. `position.x`
+ * wraps round the strand's tube, `position.y` runs 0..1 down the line and
+ * `position.z` is the strand index — the helix material winds each strand
+ * round the beam axis at its own phase, so one draw call carries them all.
+ */
+export function createHelixGeometry(strands, segU, segV) {
+  const cols = segU + 1;
+  const rows = segV + 1;
+  const per = cols * rows;
+  const position = new Float32Array(per * strands * 3);
+  let k = 0;
+  for (let s = 0; s < strands; s++) {
+    for (let j = 0; j < rows; j++) {
+      for (let i = 0; i < cols; i++) {
+        position[k++] = i / segU;
+        position[k++] = j / segV;
+        position[k++] = s;
+      }
+    }
+  }
+  const index = new Uint32Array(segU * segV * 6 * strands);
+  k = 0;
+  for (let s = 0; s < strands; s++) {
+    const base = s * per;
+    for (let j = 0; j < segV; j++) {
+      for (let i = 0; i < segU; i++) {
+        const a = base + j * cols + i;
+        const b = a + 1;
+        const c = a + cols;
+        const d = c + 1;
+        index[k++] = a;
+        index[k++] = c;
+        index[k++] = b;
+        index[k++] = b;
+        index[k++] = c;
+        index[k++] = d;
+      }
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(position, 3));
+  geometry.setIndex(new BufferAttribute(index, 1));
+  geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
+  return geometry;
+}

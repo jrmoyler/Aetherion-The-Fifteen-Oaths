@@ -95,7 +95,7 @@ export class Locomotion {
    * @param {number} dt simulation delta (0 while paused: nothing moves)
    * @param {object} state { aiming, aimFacing, locked }
    */
-  update(dt, { aiming = false, locked = false, abilities = [] } = {}) {
+  update(dt, { aiming = false, locked = false, abilities = [], speedMultiplier = 1 } = {}) {
     const c = settings.move;
     const character = this.ctx.character;
     const keys = this.ctx.input.keys;
@@ -139,6 +139,7 @@ export class Locomotion {
     this.moving = hasInput;
 
     let topSpeed = running ? c.runSpeed : c.walkSpeed;
+    topSpeed *= speedMultiplier;
     if (aiming) topSpeed *= c.aimSpeed;
     _wish.multiplyScalar(topSpeed);
 
@@ -167,7 +168,7 @@ export class Locomotion {
       const t1 = Math.min(1, this._dashTime / duration);
       // Ease-out: most of the distance in the first half, then it skids home.
       const ease = (t) => 1 - (1 - t) * (1 - t) * (1 - t);
-      const step = (ease(t1) - ease(t0)) * c.dashDistance;
+      const step = (ease(t1) - ease(t0)) * c.dashDistance * speedMultiplier;
       character.position.addScaledVector(this._dashDir, step);
       this.velocity.copy(this._dashDir).multiplyScalar(c.dashDistance / duration * (1 - t1));
       this._trail(character.position, dt);

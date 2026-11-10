@@ -3,12 +3,14 @@ import { Ability, AbilityPhase } from '../Ability.js';
 import {
   createChakramGeometry,
   createChakramPlaneGeometry,
-  ChakramTrailRibbon
+  ChakramTrailRibbon,
+  MAX_PATH
 } from '../../assets/atlas/VectorChakramGeometry.js';
 import {
   createChakramDiscMaterial,
   createChakramSmearMaterial,
   createChakramTrailMaterial,
+  createChakramPathMaterial,
   createChakramSigilMaterial,
   createChakramWarpMaterial
 } from '../../materials/atlas/VectorChakramMaterials.js';
@@ -76,7 +78,12 @@ const _qInv = new Quaternion();
  * sparks and metal chips spray off and the blade flares. After the last bank
  * it turns for home on a **separate curved recovery arc** — a quadratic bow
  * swung to the far side of the outbound zig and lifted off the floor — and is
- * **caught** at the caster's hand in a small flash.
+ * **caught** at the caster's hand in a small flash, where it keeps spinning
+ * down for `catchHold` before it is stowed.
+ *
+ * The blade is sized for play distance: `discRadius` 0.8 m to the tooth roots
+ * (≈ 2.2 m across the tips), so six hooked teeth read at the 8 m camera and
+ * 18 m down the line. The smear is kept thin so the lit metal shows.
  *
  * ## Layers
  *
@@ -93,6 +100,11 @@ const _qInv = new Quaternion();
  *   3. **BANK SIGILS** (`createChakramSigilMaterial`) — a chevron-and-ring
  *      glyph aimed along the deflection, burning in white and cooling to
  *      gold, dissolving out; plus a SCORCH decal and a SHOCKWAVE ring.
+ *   3b. **FLOOR PATH** (`createChakramPathMaterial`) — the whole route scored
+ *      into the floor: a second ribbon sampled every `pathStep` metres,
+ *      flattened onto the ground — char bed, hot cut cooling to gold, tooth
+ *      nicks — so the zig-zag legs, the bank knots and the return bow stay
+ *      readable after the disc has passed, and erode out over `pathLife`.
  *   4. **SPARKS, CHIPS, MOTES** — STREAK sparks thrown along the deflection,
  *      lit CHIP fragments knocked off the bank, SOFT motes shed in flight.
  *   5. **IMPACT + CATCH** — an AIR shell per bank and at the hand, flash,
@@ -155,6 +167,19 @@ export class VectorChakramAbility extends Ability {
     this.trailMesh.frustumCulled = false;
     this.trailMesh.visible = false;
     this.group.add(this.trailMesh);
+
+    /* ---- layer 3b: the floor path ---- */
+    this.path = new ChakramTrailRibbon(MAX_PATH, false);
+    this.pathMaterial = createChakramPathMaterial();
+    this.pathMesh = new Mesh(this.path.geometry, this.pathMaterial);
+    this.pathMesh.name = 'ChakramPath';
+    this.pathMesh.layers.set(LAYER.VFX);
+    this.pathMesh.renderOrder = 2;
+    this.pathMesh.frustumCulled = false;
+    this.pathMesh.visible = false;
+    this.group.add(this.pathMesh);
+    this._pathLast = new Vector3();
+    this._pathState = { fade: 1 };
 
     /* ---- layer 3: bank sigils ---- */
     this.sigils = [];
@@ -307,11 +332,14 @@ export class VectorChakramAbility extends Ability {
     return Math.max(0.05, settings.chakram.lifetime * settings.global.lifetime);
   }
 
-  /** Long enough for the trail to die and the last floor mark to go out. */
+  /** Long enough for the trail to die, the disc to stow and the floor marks to go out. */
   get fadeDuration() {
     const c = settings.chakram;
-    const marks = this._lastBankAge + c.sigilLife * settings.global.lifetime - this._catchAge - this.impactDuration;
-    return Math.max(0.05, c.fadeTime, marks);
+    const L = settings.global.lifetime;
+    const marks = this._lastBankAge + c.sigilLife * L - this._catchAge - this.impactDuration;
+    const path = c.pathLife * L - this.impactDuration;
+    const hold = c.catchHold - this.impactDuration;
+    return Math.max(0.05, c.fadeTime, marks, path, hold);
   }
 
   /** The throw runs on its own clock; report the end the frame it is caught. */
@@ -358,8 +386,11 @@ export class VectorChakramAbility extends Ability {
     this._prev.copy(this._hand);
     this._velocity.set(0, 0, 0);
     this.trail.clear();
+    this.path.clear();
+    this._pathLast.copy(this._hand);
 
     this.disc.visible = true;
+    this.pathMesh.visible = true;
     this.smear.visible = true;
     this.trailMesh.visible = true;
     this.warp.visible = true;
@@ -532,7 +563,7 @@ export class VectorChakramAbility extends Ability {
       endRadius: c.bankBurst * g.explosionIntensity,
       life: c.bankBurstLife,
       intensity: 2.2,
-      opacity: 0.5,
+      opacity: c.bankBurstOpacity * g.opacity,
       fresnel: 2.4,
       displace: 0.2,
       colorA: getColor(c.colorBurstA),
@@ -760,7 +791,9 @@ export class VectorChakramAbility extends Ability {
 
     /* --- spin: winds up in the hand --- */
     const spinUp = windup ? Easing.inQuad(saturate(this._timer / Math.max(0.01, c.windupTime))) : 1;
-    this._spin += c.spinRate * TAU * spinUp * g.animationSpeed * dt;
+    // Caught: it keeps turning in the hand, spinning down over `catchHold`.
+    const held = caught ? saturate((this.age - this._catchAge) / Math.max(0.02, c.catchHold)) : 0;
+    this._spin += c.spinRate * TAU * spinUp * (1 - held) * (1 - held) * g.animationSpeed * dt;
     this._flare = Math.max(0, this._flare - this._flare * 7 * dt - 0.4 * dt);
 
     /* --- orientation: flat, banked into the leg, wobbling home --- */
@@ -770,6 +803,7 @@ export class VectorChakramAbility extends Ability {
     _qYaw.setFromAxisAngle(_up, Math.atan2(-_vel.z, _vel.x));
     let bankAngle = c.tilt * (this._zigSign >= 0 ? 1 : -1);
     if (this._flight === Flight.RETURN) bankAngle += Math.sin(this.age * 9 + this._seed) * c.wobble;
+    if (caught) bankAngle = lerp(bankAngle, c.tilt * 2.2, held);
     if (windup) bankAngle = lerp(1.2, bankAngle, spinUp); // held edge-on, then laid over
     _qBank.setFromAxisAngle(_a.set(1, 0, 0), bankAngle);
     _qSpin.setFromAxisAngle(_up, -this._spin);
@@ -778,7 +812,7 @@ export class VectorChakramAbility extends Ability {
     this.disc.quaternion.copy(_qYaw).multiply(_qBank).multiply(_qSpin);
     this.disc.position.copy(this.position);
     const grow = windup ? lerp(0.55, 1, spinUp) : 1;
-    const catchShrink = caught ? 1 - saturate((this.age - this._catchAge) / 0.08) : 1;
+    const catchShrink = caught ? 1 - Easing.inQuad(saturate((held - 0.6) / 0.4)) : 1;
     const r = c.discRadius * grow * catchShrink;
     this.disc.scale.setScalar(Math.max(1e-3, r));
     this.disc.visible = catchShrink > 0.001;
@@ -804,7 +838,7 @@ export class VectorChakramAbility extends Ability {
     ss.stretch = stretch;
     ss.scale = half;
     ss.spin = this._spin;
-    ss.amount = (0.35 + 0.65 * saturate(speed / 20)) * spinUp * catchShrink;
+    ss.amount = (0.35 + 0.65 * saturate(speed / 20)) * spinUp * catchShrink * (1 - held);
     this.smearMaterial.userData.sync(ss);
     this.smear.visible = ss.amount > 0.003;
 
@@ -815,6 +849,19 @@ export class VectorChakramAbility extends Ability {
     this._trailState.fade = 1 - fadeT;
     this.trailMaterial.userData.sync(this._trailState);
     this.trailMesh.visible = this._trailState.fade > 0.001;
+
+    /* --- floor path: a sample every pathStep metres of flight --- */
+    if (!windup && !caught) {
+      const step = Math.max(0.05, c.pathStep);
+      if (this.path.count === 0 || this._pathLast.distanceToSquared(this.position) >= step * step) {
+        this.path.push(this.position, this.age);
+        this._pathLast.copy(this.position);
+      }
+    }
+    this.path.build(this.position, this.age, c.pathLife * g.lifetime);
+    this._pathState.fade = 1;
+    this.pathMaterial.userData.sync(this._pathState);
+    this.pathMesh.visible = this.path.count > 1;
 
     /* --- warp --- */
     this.warp.position.copy(this.position);
@@ -927,6 +974,8 @@ export class VectorChakramAbility extends Ability {
     this.disc.visible = false;
     this.smear.visible = false;
     this.trailMesh.visible = false;
+    this.pathMesh.visible = false;
+    this.path.clear();
     this.warp.visible = false;
     for (const sigil of this.sigils) {
       sigil.active = false;
@@ -947,6 +996,8 @@ export class VectorChakramAbility extends Ability {
     this.smearMaterial.dispose();
     this.trail.dispose();
     this.trailMaterial.dispose();
+    this.path.dispose();
+    this.pathMaterial.dispose();
     for (const sigil of this.sigils) sigil.material.dispose();
     this.warpMaterial.dispose();
     super.dispose();
@@ -968,6 +1019,7 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'returnSpeed', 2, 80, 0.5, 'return speed (m/s)');
   R(cast, c, 'lifetime', 0.02, 2, 0.01, 'catch flash holds (s)');
   R(cast, c, 'fadeTime', 0.05, 4, 0.05, 'trail dies over (s)');
+  R(cast, c, 'catchHold', 0.02, 2, 0.01, 'spins down in the hand (s)');
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   Editor.castAnimation(cast, c);
   R(cast, c, 'windupTime', 0, 1, 0.01, 'spin-up in the hand (s)');
@@ -995,7 +1047,7 @@ export function buildEditor(gui, c, Editor) {
   /* ---- layer 1 ---- */
   const disc = folder.addFolder('1 · Disc');
   const shape = disc.addFolder('Blade');
-  R(shape, c, 'discRadius', 0.1, 1.5, 0.01, 'radius (m)');
+  R(shape, c, 'discRadius', 0.1, 2, 0.01, 'radius (m)');
   R(shape, c, 'teeth', 3, 16, 1, 'teeth');
   R(shape, c, 'innerRadius', 0.1, 0.9, 0.01, 'hub (× radius)');
   R(shape, c, 'toothDepth', 0, 0.8, 0.01, 'tooth depth (× radius)');
@@ -1039,6 +1091,17 @@ export function buildEditor(gui, c, Editor) {
   blur.addColor(c, 'colorTrailTail').name('trail tail');
   blur.addColor(c, 'colorTrailEdge').name('trail edge');
 
+  /* ---- layer 3b ---- */
+  const path = folder.addFolder('3b · Floor path');
+  R(path, c, 'pathStep', 0.05, 2, 0.01, 'sample every (m)');
+  R(path, c, 'pathLife', 0.2, 8, 0.05, 'lasts (s)');
+  R(path, c, 'pathWidth', 0.02, 1.5, 0.01, 'half-width (m)');
+  R(path, c, 'pathCool', 0.01, 1, 0.01, 'cools over (× life)');
+  R(path, c, 'pathIntensity', 0, 8, 0.05, 'cut glow');
+  R(path, c, 'pathOpacity', 0, 1, 0.01, 'opacity');
+  R(path, c, 'pathNicks', 0, 8, 0.05, 'tooth nicks / m');
+  R(path, c, 'pathHighFade', 0.1, 6, 0.05, 'fainter above (m)');
+
   /* ---- layer 3 ---- */
   const sigil = folder.addFolder('3 · Bank sigils');
   R(sigil, c, 'sigilSize', 0.1, 4, 0.01, 'half-size (m)');
@@ -1078,6 +1141,7 @@ export function buildEditor(gui, c, Editor) {
   const impact = folder.addFolder('5 · Impact + catch');
   R(impact, c, 'bankBurst', 0, 5, 0.05, 'shell per bank (m)');
   R(impact, c, 'bankBurstLife', 0.05, 1, 0.01, 'shell lifetime');
+  R(impact, c, 'bankBurstOpacity', 0, 1, 0.01, 'shell opacity');
   R(impact, c, 'shockRadius', 0, 6, 0.05, 'shockwave (m)');
   R(impact, c, 'catchBurst', 0, 3, 0.05, 'catch shell (m)');
   R(impact, c, 'catchSparks', 0, 200, 1, 'catch sparks');

@@ -55,3 +55,39 @@ export function createQuadGeometry() {
   geometry.boundingSphere = BIG;
   return geometry;
 }
+
+/**
+ * The crawl — a strip, `position.x` 0..1 along, `position.y` −1..1 across;
+ * laid down the cast line in the vertex stage of `createCrawlMaterial`.
+ */
+export function createCrawlGeometry(along = 160, across = 6) {
+  const cols = across + 1;
+  const rows = along + 1;
+  const positions = new Float32Array(cols * rows * 3);
+  const indices = new Uint16Array(across * along * 6);
+  let p = 0;
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      positions[p++] = j / along;
+      positions[p++] = (i / across) * 2 - 1;
+      positions[p++] = 0;
+    }
+  }
+  let k = 0;
+  for (let j = 0; j < along; j++) {
+    for (let i = 0; i < across; i++) {
+      const a = j * cols + i;
+      indices[k++] = a;
+      indices[k++] = a + cols;
+      indices[k++] = a + 1;
+      indices[k++] = a + 1;
+      indices[k++] = a + cols;
+      indices[k++] = a + cols + 1;
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setIndex(new BufferAttribute(indices, 1));
+  geometry.boundingSphere = BIG;
+  return geometry;
+}

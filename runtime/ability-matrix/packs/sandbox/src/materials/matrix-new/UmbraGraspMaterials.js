@@ -691,3 +691,140 @@ export function createUmbraWarpMaterial() {
 
   return material;
 }
+
+/* -------------------------------------------------------------------- */
+/* the ink sleeve — the pool climbing a held body and dragging it under  */
+/* -------------------------------------------------------------------- */
+
+const SLEEVE_VERTEX = /* glsl */ `
+  attribute vec4 aSleeve;   // radius, height (metres), seed, open 0..1
+  uniform float uTime;
+  uniform float uFlare;
+  uniform float uWrithe;
+  uniform float uFlow;
+  varying vec2  vUv;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying float vSeed;
+  varying float vOpen;
+  ${noiseGLSL}
+  void main() {
+    vUv = uv;
+    float y = position.y;
+    float R = aSleeve.x;
+    float H = max(aSleeve.y, 0.01);
+    float seed = aSleeve.z;
+    // The base spreads out into the pool; the throat narrows round the body.
+    float flare = 1.0 + uFlare * pow(1.0 - y, 3.0);
+    float wob = snoise(vec3(position.x * 1.4 + seed, position.z * 1.4, y * 2.5 - uTime * uFlow));
+    float r = R * flare * (1.0 + 0.2 * wob);
+    vec3 local = vec3(position.x * r, y * H, position.z * r);
+    // The lip writhes: the higher up the sleeve, the more it sways.
+    local.x += sin(uTime * 2.3 + seed + y * 3.0) * uWrithe * y * y * R;
+    local.z += cos(uTime * 1.9 + seed * 1.7 + y * 2.0) * uWrithe * y * y * R;
+    mat4 model = modelMatrix;
+    #ifdef USE_INSTANCING
+      model = modelMatrix * instanceMatrix;
+    #endif
+    vec4 world = model * vec4(local, 1.0);
+    // Outward and a little up where the base flares.
+    vec3 n = normalize(vec3(position.x, 3.0 * uFlare * R * pow(1.0 - y, 2.0) / H, position.z));
+    vNormalW = normalize(mat3(model) * n);
+    vWorld = world.xyz;
+    vSeed = seed;
+    vOpen = aSleeve.w;
+    gl_Position = projectionMatrix * viewMatrix * world;
+  }
+`;
+
+const SLEEVE_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uFlow;
+  uniform float uRagged;
+  uniform float uTendrils;
+  uniform float uRim;
+  uniform float uLip;
+  uniform vec3  uColorInk;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorRim;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+  varying vec2  vUv;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying float vSeed;
+  varying float vOpen;
+  ${noiseGLSL}
+  void main() {
+    float ang = vUv.x * 6.28318;
+    // A ragged top: tongues of ink reaching up the body between the bites.
+    float tongue = pow(0.5 + 0.5 * sin(ang * uTendrils + vSeed * 4.0 + 1.5 * snoise(vec3(vUv.x * 4.0, uTime * 0.7, vSeed))), 2.5);
+    float top = 1.0 - uRagged * (1.0 - tongue) - 0.06 * snoise(vec3(vUv.x * 18.0, uTime, vSeed));
+    if (vUv.y > top) discard;
+    // Opening and closing: the same noise eats it from the top down.
+    float dn = snoise(vec3(vUv.x * 7.0, vUv.y * 5.0, vSeed * 2.0)) * 0.5 + 0.5;
+    if (dn * 0.35 + (1.0 - vUv.y) * 0.65 < 1.0 - vOpen) discard;
+
+    vec3 N = normalize(vNormalW);
+    vec3 V = normalize(cameraPosition - vWorld);
+    float facing = dot(N, V);
+    float ndv = abs(facing);
+    // Ink pouring *down* the sleeve: it is going under, taking what it holds.
+    float flow = snoise(vec3(ang * 1.5, vUv.y * 4.0 + uTime * uFlow * 2.0, vSeed)) * 0.5 + 0.5;
+    vec3 color = mix(uColorInk, uColorDeep, smoothstep(0.45, 0.9, flow));
+    color *= 0.65 + 0.35 * clamp(dot(N, normalize(uLightDir)), 0.0, 1.0);
+    // Inside the sleeve is the hole: darker still.
+    if (facing < 0.0) color *= 0.35;
+    // A thin violet rim, and a glowing lip along the ragged top.
+    color += uColorRim * pow(1.0 - ndv, 3.0) * uRim * uGlobalGlow;
+    float lip = smoothstep(top - 0.1, top, vUv.y);
+    color += uColorRim * lip * uLip * (0.6 + 0.4 * flow) * uGlobalGlow;
+    gl_FragColor = vec4(color, 1.0);
+  }
+`;
+
+/** The ink sleeve: opaque, alpha-tested, writes depth; violet only at its rim and lip. */
+export function createUmbraSleeveMaterial() {
+  const material = new ShaderMaterial({
+    transparent: false,
+    depthWrite: true,
+    depthTest: true,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uTime: { value: 0 },
+      uFlare: { value: 1.4 },
+      uWrithe: { value: 0.25 },
+      uFlow: { value: 0.8 },
+      uRagged: { value: 0.35 },
+      uTendrils: { value: 5 },
+      uRim: { value: 1.6 },
+      uLip: { value: 2.2 },
+      uColorInk: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorRim: { value: new Color() }
+    }),
+    vertexShader: SLEEVE_VERTEX,
+    fragmentShader: SLEEVE_FRAGMENT
+  });
+  material.userData.instanced = true;
+
+  /** @param {object} state { time } */
+  material.userData.sync = (state) => {
+    const c = settings.umbra;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uTime.value = state.time ?? 0;
+    u.uFlare.value = c.sleeveFlare;
+    u.uWrithe.value = c.sleeveWrithe * g.turbulence;
+    u.uFlow.value = c.sleeveFlow * g.noiseSpeed;
+    u.uRagged.value = c.sleeveRagged;
+    u.uTendrils.value = Math.round(c.sleeveTendrils);
+    u.uRim.value = c.sleeveRim * g.fresnel * g.glow;
+    u.uLip.value = c.sleeveLip * g.glow;
+    u.uColorInk.value.copy(getColor(c.colorSleeveInk));
+    u.uColorDeep.value.copy(getColor(c.colorSleeveDeep));
+    u.uColorRim.value.copy(getColor(c.colorSleeveRim));
+  };
+  return material;
+}

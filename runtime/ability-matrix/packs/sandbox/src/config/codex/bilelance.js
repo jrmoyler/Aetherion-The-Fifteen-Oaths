@@ -90,14 +90,14 @@ export default {
     trenchStart: 1.2, // metres in front of the caster it begins
     trenchWidth: 0.22, // half-width of the wet channel, metres
     trenchEaten: 0.9, // half-width of the etched stone round it, metres
-    trenchGlow: 1.5, // brightness of the live acid
+    trenchGlow: 1.0, // brightness of the live acid
     trenchFresh: 3.5, // metres behind the nose the acid stays bright
     bubbleScale: 4.5, // bubbles per metre
     bubbleRate: 1.6, // bubble pops per second, each
     trenchWander: 0.12, // metres it wanders
     trenchErode: 0.75, // 0..1 how raggedly it fades
-    colorAcid: '#c8ff3a',
-    colorWet: '#2a3a08',
+    colorAcid: '#a8d830',
+    colorWet: '#16220a',
     colorEtched: '#141a0a',
 
     /* ================================================================ */
@@ -113,11 +113,11 @@ export default {
     boreRadius: 1.7, // radius of the bore pit on the floor, metres
     boreSwirl: 2.4, // turns of the drain spiral
     boreGlow: 3.4,
-    burstSize: 1.3, // the WATER shell, metres
-    burstIntensity: 1.2,
+    burstSize: 0.9, // the WATER shell, metres (a wet flash round the geyser's foot)
+    burstIntensity: 0.7,
     shockRadius: 5, // the shockwave on the floor, metres
     scorchRadius: 2.2,
-    impactFlash: 0.2,
+    impactFlash: 0.03, // a hint only: the impact is the burst and the local light, not a screen wash
     impactShake: 0.5,
     shakeDuration: 0.35,
     impactLight: 2.6, // light punch, × lightIntensity
@@ -129,7 +129,43 @@ export default {
     colorBurstB: '#b8ec30',
     colorBurstC: '#3e5a0a',
     colorShock: '#c6f25a',
-    colorFlash: '#d8ff80',
+    colorFlash: '#5a7a22',
+
+    /* --- the geyser: the eruption's mass, on the eruption clock --- */
+    geyserHeight: 3.3, // metres it bursts up to
+    geyserRadius: 0.5, // column radius, metres
+    geyserFoot: 0.85, // extra radius where it flares out of the hole, metres
+    geyserHead: 0.75, // extra radius of the swollen head, metres
+    geyserHeadAt: 0.8, // 0..1 where up the column the head sits
+    geyserRise: 0.26, // seconds it takes to burst up
+    geyserHold: 0.28, // seconds it boils at full height
+    geyserSlump: 0.95, // seconds the head droops and it slumps into a heap
+    heapHeight: 0.7, // metres the slumped heap stands
+    heapRadius: 1.35, // metres it spreads to
+    heapSinkStart: 0.35, // 0..1 through the fade it starts sinking back into the bore
+    heapSink: 0.35, // metres it sinks
+    geyserLobes: 0.24, // crawling bulges, × radius
+    geyserLobeScale: 1.5,
+    geyserFlowSpeed: 2.6, // how fast the lobes and murk churn
+    geyserFlowScale: 1.3, // murk features per metre
+    geyserSway: 0.28, // metres the column sways at the top
+    geyserBubbleAmp: 0.14, // metres a bubble dome swells off the surface
+    geyserBubbleScale: 2.6, // bubble cells per metre
+    geyserBubbleRate: 1.1, // bubble cycles per second
+    geyserPopGlow: 1.8, // the flash as one pops
+    geyserOpacity: 0.97,
+    geyserLight: 0.8, // how much the sun lifts the body off the deep tone
+    geyserRimGlow: 0.4,
+    geyserVeinGlow: 0.5, // lime veins where the murk thins
+    geyserHot: 2.6, // white-hot throat, only while it is still rising
+    geyserSpecular: 1.1, // wet highlight
+    geyserDripRate: 120, // drips per second off the drooping head
+    geyserBubbles: 26, // bubbles per second breaking off the heap
+    geyserBubbleSize: 0.16,
+    colorGeyserHot: '#f4ffc8', // core
+    colorGeyserTint: '#c6f25a', // tint: rim, veins, bubbles
+    colorGeyserBody: '#2c4608', // body: olive bile
+    colorGeyserDeep: '#0f1604', // deep: near-black bile in the folds
 
     /* ================================================================ */
     /* 6 · DROPS, MIST & MOTES                                           */
@@ -151,8 +187,8 @@ export default {
     colorDropB: '#c6f25a',
     colorDropC: '#7aa318',
     colorDropD: '#2c3c08',
-    colorMistA: '#9ab838',
-    colorMistB: '#6a842a',
+    colorMistA: '#5e7424',
+    colorMistB: '#3e521c',
     colorMistC: '#3e4c1c',
     colorMistD: '#22281a',
     colorMoteA: '#ffffe0',

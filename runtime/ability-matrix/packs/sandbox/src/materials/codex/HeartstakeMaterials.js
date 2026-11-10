@@ -16,6 +16,13 @@ import { getColor } from '../../utils/color.js';
  *    lights it from inside: blood veins streaming toward the point, the heart
  *    flaring on the beat and each beat's surge running knot → point. When the
  *    beats stop it dries to brown-black and crumbles away point-first.
+ *  - **the thorn roots** — up to sixteen barbed blood-glass roots in one
+ *    parameter-space buffer (`createThornGeometry`), each bent in the vertex
+ *    stage into an arch that breaks the floor beside the stake, stands
+ *    `thornArch` metres and dives back under at its reach. They grow out a
+ *    step on every heartbeat, the beat's pressure front swells and lights
+ *    them as it runs outward, and they dry and crumble tips-first with the
+ *    stake. Same garnet-glass shading as the stake, lit by the sun.
  *  - **the trail** — a camera-facing ribbon behind the stake, streaky with
  *    blood that is still flowing back off it.
  *  - **the stain** — a ground quad at the plunge: a wet, glinting blood stain
@@ -256,6 +263,233 @@ export function createStakeMaterial() {
     u.uCrumble.value = state.crumble;
     u.uColorDeep.value.copy(getColor(c.colorStakeDeep));
     u.uColorBody.value.copy(getColor(c.colorStakeBody));
+    u.uColorHot.value.copy(getColor(c.colorStakeHot));
+    u.uColorRim.value.copy(getColor(c.colorStakeRim));
+    u.uColorDry.value.copy(getColor(c.colorDry));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The thorn roots                                                      */
+/* -------------------------------------------------------------------- */
+
+const THORN_VERTEX = /* glsl */ `
+  uniform vec3  uCenter;      // the stake's foot, on the floor
+  uniform float uYaw;         // bearing of root 0 (the cast direction)
+  uniform float uCount;       // live roots
+  uniform float uReach;       // metres the longest root reaches at full growth
+  uniform float uGrow;        // 0..1 how far they have grown (steps up per beat)
+  uniform float uArch;        // metres the arch stands
+  uniform float uStartR;      // metres from the stake they break the floor
+  uniform float uRadius;      // tube radius at the stake, metres
+  uniform float uTaper;
+  uniform float uWander;
+  uniform float uSink;        // metres the far end dives under the floor
+  uniform float uJitter;
+  uniform float uSpikes;      // spike rows along a root
+  uniform float uSpikeLen;    // × the local radius
+  uniform float uThrob;       // the beat's swell
+  uniform float uRingR;       // the beat's pressure front, metres (−1 none)
+  uniform float uSeed;
+
+  varying float vS;
+  varying float vAlong;       // metres from the stake, on the floor
+  varying float vIdx;
+  varying vec3  vWorld;
+  varying float vPulse;
+
+  float hash1(float n) { return fract(sin(n * 12.9898 + uSeed * 3.17) * 43758.5453); }
+
+  // Where root i is at s, in metres, given its dice.
+  vec3 thornPath(float s, float bear, float len, float arch) {
+    float d = mix(uStartR, uStartR + uReach * len * uGrow, s);
+    float a = bear + uWander * sin(s * 3.4 + bear * 2.0) * s;
+    float lift = pow(max(sin(3.14159 * s), 0.0), 0.75);
+    float y = arch * (0.35 + 0.65 * uGrow) * lift - mix(0.35, uSink, s) * (1.0 - lift);
+    return uCenter + vec3(cos(a) * d, y, sin(a) * d);
+  }
+
+  void main() {
+    float idx = position.z;
+    vIdx = idx;
+    if (idx >= uCount) {
+      gl_Position = vec4(0.0, 0.0, 2.0, 1.0);
+      vS = 0.0; vAlong = 0.0; vWorld = vec3(0.0); vPulse = 0.0;
+      return;
+    }
+    float s = position.x;
+    float ang = position.y * 6.2831853;
+    float bear = uYaw + (idx + 0.5 + (hash1(idx) - 0.5) * uJitter) / uCount * 6.2831853;
+    float len = 1.0 - uJitter * 0.6 * hash1(idx + 7.0);
+    float arch = 1.0 - uJitter * 0.5 * hash1(idx + 13.0);
+
+    vec3 P = thornPath(s, bear, len, arch);
+    vec3 Q = thornPath(min(s + 0.01, 1.0), bear, len, arch);
+    vec3 R0 = thornPath(max(s - 0.01, 0.0), bear, len, arch);
+    vec3 T = normalize(Q - R0 + vec3(1e-5, 0.0, 0.0));
+    vec3 N1 = normalize(cross(T, vec3(0.0, 1.0, 0.0)) + vec3(0.0, 0.0, 1e-5));
+    vec3 B = cross(N1, T);
+
+    float along = length(P.xz - uCenter.xz);
+    float pulse = uRingR < 0.0 ? 0.0 : exp(-pow((along - uRingR) / 0.45, 2.0));
+    float rad = uRadius * pow(max(1.0 - s * 0.82, 0.02), uTaper) * (0.55 + 0.45 * uGrow);
+    rad *= 1.0 + 0.22 * uThrob + 0.45 * pulse;
+    // spikes raked back toward the stake
+    float row = s * uSpikes + hash1(idx + 21.0);
+    float saw = fract(row);
+    float around = pow(max(cos(ang * 2.0 + floor(row) * 2.3 + idx), 0.0), 10.0);
+    float spike = pow(1.0 - saw, 3.0) * around * uSpikeLen * step(0.08, s) * step(s, 0.92);
+    vec3 world = P + (cos(ang) * N1 + sin(ang) * B) * rad * (1.0 + spike);
+
+    vS = s;
+    vAlong = along;
+    vWorld = world;
+    vPulse = pulse;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const THORN_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uSeed;
+  uniform float uFlow;
+  uniform float uVeinScale;
+  uniform float uVeinGlow;
+  uniform float uPulseGlow;
+  uniform float uThrob;
+  uniform float uFresnel;
+  uniform float uSpec;
+  uniform float uDry;
+  uniform float uCrumble;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorHot;
+  uniform vec3  uColorRim;
+  uniform vec3  uColorDry;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
+
+  varying float vS;
+  varying float vAlong;
+  varying float vIdx;
+  varying vec3  vWorld;
+  varying float vPulse;
+
+  ${noiseGLSL}
+
+  void main() {
+    // Crumbling from the tips back toward the stake.
+    float cn = snoise(vWorld * 4.0 + uSeed) * 0.5 + 0.5;
+    float tipward = abs(vS - 0.5) * 2.0;
+    float field = tipward * 0.7 + cn * 0.3;
+    float thr = 1.05 - uCrumble * 1.15;
+    if (uCrumble > 0.0 && field > thr) discard;
+    float fray = uCrumble > 0.0 ? 1.0 - smoothstep(0.0, 0.05, thr - field) : 0.0;
+
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec3 N = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+    if (dot(N, V) < 0.0) N = -N;
+    vec3 L = normalize(uLightDir);
+    float diff = max(dot(N, L), 0.0);
+    float fres = pow(1.0 - max(dot(N, V), 0.0), 3.0) * uFresnel;
+    vec3 H = normalize(L + V);
+    float spec = pow(max(dot(N, H), 0.0), 60.0) * uSpec;
+
+    // Veins of blood running out from the stake along the root.
+    float vein = 1.0 - abs(snoise(vec3(vAlong * uVeinScale - uFlow, vIdx * 3.1 + uSeed, vWorld.y * 2.0)));
+    vein = pow(vein, 8.0) * uShaderIntensity;
+    float inner = vein * uVeinGlow * (0.6 + 0.8 * uThrob) + vPulse * uPulseGlow;
+
+    vec3 body = mix(uColorDeep, uColorBody, diff * 0.6 + 0.1);
+    vec3 glow = mix(uColorBody, uColorHot, clamp(inner * 0.45, 0.0, 1.0)) * inner;
+    vec3 col = body + glow * uGlobalGlow + uColorRim * fres * uGlobalGlow * 0.7 + vec3(spec);
+    vec3 dry = uColorDry * (0.3 + 0.7 * diff) + uColorDry * fres * 0.3;
+    col = mix(col, dry, uDry);
+    col += uColorHot * fray * 3.0 * uGlobalGlow;
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+/** The thorn roots the stake sends out across the floor. Opaque, `LAYER.SHAPED`. */
+export function createThornMaterial() {
+  const material = new ShaderMaterial({
+    transparent: false,
+    depthWrite: true,
+    depthTest: true,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uYaw: { value: 0 },
+      uCount: { value: 9 },
+      uReach: { value: 4 },
+      uGrow: { value: 0 },
+      uArch: { value: 1.2 },
+      uStartR: { value: 0.3 },
+      uRadius: { value: 0.2 },
+      uTaper: { value: 1 },
+      uWander: { value: 0.3 },
+      uSink: { value: 0.3 },
+      uJitter: { value: 0.35 },
+      uSpikes: { value: 7 },
+      uSpikeLen: { value: 1.5 },
+      uThrob: { value: 0 },
+      uRingR: { value: -1 },
+      uSeed: { value: 0 },
+      uFlow: { value: 0 },
+      uVeinScale: { value: 2 },
+      uVeinGlow: { value: 1 },
+      uPulseGlow: { value: 3 },
+      uFresnel: { value: 1 },
+      uSpec: { value: 1 },
+      uDry: { value: 0 },
+      uCrumble: { value: 0 },
+      uColorDeep: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorHot: { value: new Color() },
+      uColorRim: { value: new Color() },
+      uColorDry: { value: new Color() }
+    }),
+    vertexShader: THORN_VERTEX,
+    fragmentShader: THORN_FRAGMENT
+  });
+
+  /** @param {object} s { center, yaw, grow, throb, ringR, flow, dry, crumble, seed } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(s.center);
+    u.uYaw.value = s.yaw;
+    u.uCount.value = Math.max(1, Math.min(16, Math.round(c.thornRoots)));
+    u.uReach.value = Math.max(0.1, c.rootReach * c.thornReach);
+    u.uGrow.value = s.grow;
+    u.uArch.value = c.thornArch;
+    u.uStartR.value = c.stakeRadius * 1.2;
+    u.uRadius.value = Math.max(0.01, c.thornRadius);
+    u.uTaper.value = c.thornTaper;
+    u.uWander.value = c.thornWander * g.noiseStrength;
+    u.uSink.value = c.thornSink;
+    u.uJitter.value = c.thornJitter * g.randomness;
+    u.uSpikes.value = c.thornSpikes;
+    u.uSpikeLen.value = c.thornSpikeLen;
+    u.uThrob.value = s.throb * c.throb * 2;
+    u.uRingR.value = s.ringR;
+    u.uSeed.value = s.seed;
+    u.uFlow.value = s.flow;
+    u.uVeinScale.value = c.veinScale * g.noiseFrequency;
+    u.uVeinGlow.value = c.thornVeinGlow * g.glow;
+    u.uPulseGlow.value = c.thornPulseGlow * g.glow;
+    u.uFresnel.value = c.rimGlow * g.fresnel;
+    u.uSpec.value = c.gloss;
+    u.uDry.value = s.dry;
+    u.uCrumble.value = s.crumble;
+    u.uColorDeep.value.copy(getColor(c.colorStakeDeep));
+    u.uColorBody.value.copy(getColor(c.colorThornBody));
     u.uColorHot.value.copy(getColor(c.colorStakeHot));
     u.uColorRim.value.copy(getColor(c.colorStakeRim));
     u.uColorDry.value.copy(getColor(c.colorDry));

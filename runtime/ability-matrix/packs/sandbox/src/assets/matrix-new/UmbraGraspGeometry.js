@@ -102,3 +102,56 @@ export function createUmbraBoneGeometry({ radial = 14, rings = 6, capRings = 4, 
   geometry.setAttribute('aBone', bones);
   return geometry;
 }
+
+/**
+ * The ink sleeve: a ragged collar of the pool that climbs a held body and
+ * pulls it under. An open tube, unit height (0..1 on +Y), unit bearing round
+ * it (`position.xz`); `uv.x` runs round, `uv.y` up. Like the bones it stores
+ * no metres: the instance attribute `aSleeve = (radius, height, seed, open)`
+ * is resolved in the vertex stage every frame, and the instance matrix only
+ * carries where the sleeve stands.
+ *
+ * @param {object} [options]
+ * @param {number} [options.radial]     vertices round the sleeve
+ * @param {number} [options.rows]       rings up it
+ * @param {number} [options.maxSleeves] instance capacity
+ */
+export function createUmbraSleeveGeometry({ radial = 40, rows = 20, maxSleeves = 6 } = {}) {
+  const columns = radial + 1;
+  const count = (rows + 1) * columns;
+  const positions = new Float32Array(count * 3);
+  const normals = new Float32Array(count * 3);
+  const uvs = new Float32Array(count * 2);
+  let v = 0;
+  for (let j = 0; j <= rows; j++) {
+    const y = j / rows;
+    for (let i = 0; i < columns; i++) {
+      const a = (i / radial) * Math.PI * 2;
+      positions[v * 3] = Math.cos(a);
+      positions[v * 3 + 1] = y;
+      positions[v * 3 + 2] = Math.sin(a);
+      normals[v * 3] = Math.cos(a);
+      normals[v * 3 + 2] = Math.sin(a);
+      uvs[v * 2] = i / radial;
+      uvs[v * 2 + 1] = y;
+      v++;
+    }
+  }
+  const indices = [];
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < radial; i++) {
+      const a = j * columns + i;
+      const b = a + 1;
+      const c = a + columns;
+      const d = c + 1;
+      indices.push(a, c, b, b, c, d);
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setAttribute('normal', new BufferAttribute(normals, 3));
+  geometry.setAttribute('uv', new BufferAttribute(uvs, 2));
+  geometry.setIndex(indices);
+  geometry.setAttribute('aSleeve', new InstancedBufferAttribute(new Float32Array(maxSleeves * 4), 4));
+  return geometry;
+}

@@ -6,8 +6,10 @@
  * spinning, glitching, strung together by crackling threads of light and
  * burning three braided streaks into the floor. They disagree about where
  * they are going. At the end two of them are revealed as lies: they veer off,
- * stutter and pop into glitter. The true one plants itself on the target and
- * shatters into a spray of spectral glass and a rainbow shock ring.
+ * stutter and pop into glitter. The true one is driven into the target and
+ * comes up out of a crater of crazed glass as a 3 m monolith of lit crystal,
+ * satellites tearing up round it, a rainbow fan sweeping the floor from its
+ * foot — then it charges white and shatters into spectral glass.
  *
  * Data only. PrismLieAbility reads every field live.
  */
@@ -17,7 +19,7 @@ export default {
     label: 'Prism Lie',
     accent: '#d5dbff',
     key: '',
-    element: 'arcane',
+    element: 'illusion',
     hint: 'Arcane — three prisms braid down the line; two are lies, one shatters on the target',
     cast: 'line',
     glyph: '<path d="M50 10L60 26V74L50 90L40 74V26Z"/><path d="M24 30L30 40V66L24 76L18 66V40Z"/><path d="M76 30L82 40V66L76 76L70 66V40Z"/>'
@@ -26,8 +28,9 @@ export default {
     // ---- the cast ----
     range: 18, // max cast distance (m)
     minRange: 2,
-    speed: 15, // the prisms fly at (m/s)
+    speed: 18, // the prisms fly at (m/s)
     lifetime: 1.0, // the shattered glass lingers for (s)
+    standTime: 1.6, // the planted truth stands for (s) before it breaks
     cooldown: 0.6,
     castAnim: 'cast2',
     colorA: '#d5dbff', // accent
@@ -39,8 +42,8 @@ export default {
     colorPrismB: '#ff4fd8', // magenta
     colorPrismC: '#ffd23f', // gold
     colorCore: '#ffffff',
-    prismHeight: 1.25, // body (m)
-    prismRadius: 0.32, // circumradius (m)
+    prismHeight: 1.5, // body (m)
+    prismRadius: 0.4, // circumradius (m)
     prismCap: 0.42, // cap length (× body)
     flightHeight: 1.5, // m
     bob: 0.25, // m
@@ -69,22 +72,75 @@ export default {
     tetherGlow: 2.2,
 
     // ---- 4 · trails ----
-    trailWidth: 0.07, // m
-    trailGlow: 1.4,
+    trailWidth: 0.16, // m
+    trailGlow: 1.6,
     trailDecay: 9, // dims over this many metres behind the front
-    trailFade: 0.8, // burns out over (s)
+    trailFade: 0.9, // burns out over (s)
+
+    // ---- 4b · the glass burn (the deep tone on the floor) ----
+    scorchWidth: 1.15, // dark band under the braid (× braid swing)
+    scorchOpacity: 0.62,
+    colorScorch: '#0e0a26', // deep
+    craterRadius: 2.2, // crazed-glass crater where the truth went in (m)
+    crackGlow: 1.6, // spectral glow in its cracks while the monolith stands
 
     // ---- 5 · the reveal ----
     revealTime: 0.42, // the lies veer and pop; the truth plants (s)
     veerDistance: 2.6, // the lies swerve this far off the line (m)
     veerForward: 1.6, // and carry on this far past the end (m)
-    plantFlash: 2.5, // the truth flares before it breaks
+    plantFlash: 2.0, // the truth flares as it drops
     popGlitch: 0.5, // the lies stutter this hard as they go (m)
 
+    // ---- 5b · the plant (impact) ----
+    plantShake: 0.38,
+    plantScreenFlash: 0.12, // in the truth's hue — restrained
+    plantLight: 22, // light punch
+    plantShards: 16, // glass chips out of the crater
+    plantBurstIntensity: 0.5, // the low dust shell at the plant
+    plantBurstOpacity: 0.22,
+
+    // ---- 5c · the monolith (the planted truth, solid lit crystal) ----
+    monoHeight: 3.1, // body (m)
+    monoRadius: 0.8, // foot circumradius (m)
+    monoCap: 0.42, // apex (× body)
+    monoTaper: 0.38, // 0 straight .. 1 to a point
+    monoTwist: 0.32, // radians foot to top
+    monoChamfer: 0.2, // arrises cut away
+    monoRise: 0.24, // punches up over (s)
+    monoOvershoot: 0.14, // past full height, then springs back
+    monoGlow: 0.45, // emissive body in the truth's hue
+    monoDeep: 0.12, // albedo = hue × this (the deep tone)
+    monoRoughness: 0.12,
+    monoMetalness: 0.25,
+    monoIrid: 1.1, // spectral sheen
+    monoVein: 0.9, // light climbing inside
+    monoChargeTime: 0.45, // white charge before it breaks (s)
+    monoChargeGlow: 3.0,
+    monoShudder: 0.06, // m, while charging
+    satCount: 6, // satellite crystals (max 8)
+    satRing: 0.95, // m out from the foot
+    satHeight: 1.5, // m
+    satRadius: 0.3, // m
+    satTilt: 0.5, // outward lean (rad)
+    satDelay: 0.06, // first one after the plant (s)
+    satStagger: 1.0, // the rest spread over (s)
+    satGrowTime: 0.28, // each one tears up over (s)
+    satGlitter: 26, // puff as each one breaks the floor
+    satShake: 0.05,
+
+    // ---- 5d · the spectrum fan ----
+    fanLength: 6.5, // m
+    fanAngle: 0.42, // half-width of a wedge (rad)
+    fanSweep: 0.85, // rad/s round the floor
+    fanCount: 2, // wedges (1..3)
+    fanGlow: 1.25,
+    fanPool: 0.7, // white pool at the foot
+    fanRise: 0.3, // comes up over (s)
+
     // ---- 6 · shards ----
-    shardCount: 54, // the truth breaks into
+    shardCount: 72, // the truth breaks into
     falseShards: 12, // each lie breaks into
-    shardSize: 0.32, // m
+    shardSize: 0.42, // m
     shardSpeed: 7,
     shardLift: 3,
     shardGravity: -9,
@@ -118,8 +174,10 @@ export default {
     ringTime: 0.65, // s
     lensSize: 3.2, // m
     lensStrength: 1.1,
-    burstRadius: 2.4,
+    burstRadius: 2.8,
     burstLife: 0.45,
+    burstIntensity: 0.6, // the shell — kept under a whiteout
+    burstOpacity: 0.2,
     colorBurstA: '#ffffff',
     colorBurstB: '#d5dbff',
     colorBurstC: '#ff9ad5',
@@ -128,9 +186,9 @@ export default {
     colorShockA: '#d5dbff',
     colorShockB: '#ffffff',
     shatterShake: 0.45,
-    shatterFlash: 0.45,
+    shatterFlash: 0.14,
     colorFlash: '#e8ecff',
-    shatterLight: 34,
+    shatterLight: 16,
 
     // ---- light ----
     lightColor: '#ffffff',

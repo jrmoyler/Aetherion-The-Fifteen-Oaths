@@ -9,12 +9,15 @@ import {
 } from 'three';
 import { Ability, AbilityPhase } from '../Ability.js';
 import {
+  createCrimsonArcMaterial,
+  createCrimsonBeamMaterial,
   createCrimsonCircleMaterial,
   createCrimsonMoonMaterial,
   createCrimsonPoolMaterial,
+  createCrimsonSealMaterial,
   createCrimsonSpikeMaterial
 } from '../../materials/collective/CrimsonRiteMaterials.js';
-import { createBloodSpikeGeometry } from '../../assets/collective/CrimsonRiteGeometry.js';
+import { createBloodSealGeometry, createBloodSpikeGeometry } from '../../assets/collective/CrimsonRiteGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
 import { DecalType } from '../../effects/GroundDecals.js';
@@ -41,7 +44,11 @@ const _floor = new Vector3();
 const _dir = new Vector3();
 const _axis = new Vector3();
 const _hand = new Vector3();
+const _land = new Vector3();
+const _moon = new Vector3();
+const _ahead = new Vector3();
 const _up = new Vector3(0, 1, 0);
+const _fwd = new Vector3(0, 0, 1);
 const _node = new Object3D();
 const _tilt = new Quaternion();
 const _spin = new Quaternion();
@@ -72,6 +79,27 @@ const _used = new Int32Array(VARIANTS);
  *   6. **the impaling** — the first wave kills: bodies in the circle are thrown
  *      *up* more than out (`handlesOwnHits`, `dummy.kill`), and anything that
  *      walks in while the spikes stand is taken too.
+ *
+ * ## The upgrade (2026): a travel, a moon that belongs, and a heartbeat
+ *
+ *   - **the seal is a thing** — a lathed comet of glossy blood
+ *     (`createBloodSealGeometry`, `createCrimsonSealMaterial`: deep clot body,
+ *     red rim, a hot core through the head, a whipping tail) flung from the
+ *     hand on the lob, and behind it **the arc of blood** — a camera-facing
+ *     ribbon laid along the very same lob in the vertex stage
+ *     (`createCrimsonArcMaterial`), dark and wet with a hot core, that stays
+ *     strung from the hand to the circle after the seal lands and drains into
+ *     the circle over `arcDrain`. The path from caster to rite is on screen.
+ *   - **the moon belongs to the rite** — it is shaded as a sphere with a
+ *     terminator (`moonShade`), and pours a shaft of red light down onto the
+ *     circle (`createCrimsonBeamMaterial`) with embers drawn up it.
+ *   - **the floor is a filled field of blood** — the pool now wells up as
+ *     soon as the seal lands and fills the whole circle, lit from within by
+ *     crawling veins of saturated red (`poolGlow`).
+ *   - **a heartbeat in the linger** — every `beatPeriod` after the eruption
+ *     the spikes swell (`spikeThrob`), a surge of light climbs every spike
+ *     (`spikeBeatGlow`), a swell runs out across the pool, the beam and the
+ *     moon throb. The field keeps moving until it sinks.
  *
  * Then the rite ends: the spikes sink back into the pool, the circle burns out,
  * the moon sets, and the pool dries to a matte brown stain with a dark tide
@@ -140,6 +168,41 @@ export class CrimsonRiteAbility extends Ability {
     this.circle.visible = false;
     this.group.add(this.circle);
 
+    /* ---- the travel: the seal and the arc of blood behind it ---- */
+    this.sealGeometry = createBloodSealGeometry({ tail: 5.5 });
+    this.sealMaterial = createCrimsonSealMaterial();
+    this.seal = new Mesh(this.sealGeometry, this.sealMaterial);
+    this.seal.name = 'CrimsonSeal';
+    this.seal.layers.set(LAYER.VFX);
+    this.seal.frustumCulled = false;
+    this.seal.renderOrder = 8;
+    this.seal.visible = false;
+    this.group.add(this.seal);
+
+    this.ribbonGeometry = new PlaneGeometry(1, 1, 1, 64);
+    this.arcMaterial = createCrimsonArcMaterial();
+    this.arc = new Mesh(this.ribbonGeometry, this.arcMaterial);
+    this.arc.name = 'CrimsonArc';
+    this.arc.layers.set(LAYER.VFX);
+    this.arc.frustumCulled = false; // placed in the vertex stage
+    this.arc.renderOrder = 7;
+    this.arc.visible = false;
+    this.group.add(this.arc);
+
+    this.beamMaterial = createCrimsonBeamMaterial();
+    this.beam = new Mesh(this.ribbonGeometry, this.beamMaterial);
+    this.beam.name = 'CrimsonMoonbeam';
+    this.beam.layers.set(LAYER.VFX);
+    this.beam.frustumCulled = false;
+    this.beam.renderOrder = 3;
+    this.beam.visible = false;
+    this.group.add(this.beam);
+
+    this._arcState = { from: new Vector3(), to: new Vector3(), arc: 1, head: 0, tail: 0, fade: 1, seed: 0 };
+    this._beamState = { from: new Vector3(), to: new Vector3(), widthFrom: 1, widthTo: 1, head: 0, fade: 0, beat: 0, seed: 0 };
+    this._sealState = { fade: 1 };
+    this.beamEmitter = null; // made in createParticles
+
     /* ---- layer 4: the spikes ---- */
     this.spikeMaterial = createCrimsonSpikeMaterial();
     this._shapeKey = '';
@@ -186,7 +249,10 @@ export class CrimsonRiteAbility extends Ability {
     this._moonState = { size: 1, spin: 0, fade: 0, seed: 0 };
     this._circleState = { radius: 3, quadSize: 8, draw: 0, runeAngle: 0, starAngle: 0, fade: 1, seed: 0 };
     this._poolState = { quadSize: 8, grown: 0, dry: 0, fade: 1, seed: 0 };
-    this._spikeState = { fade: 1 };
+    this._spikeState = { fade: 1, beatPhase: -1 };
+    /** The heartbeat, refreshed every frame from the rite clock. */
+    this._beatFrac = -1;
+    this._beatEnv = 0;
   }
 
   /** One spike silhouette from the live shape settings. */
@@ -274,6 +340,7 @@ export class CrimsonRiteAbility extends Ability {
     this.dripEmitter = new RateEmitter();
     this.wellEmitter = new RateEmitter();
     this.emberEmitter = new RateEmitter();
+    this.beamEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -309,15 +376,35 @@ export class CrimsonRiteAbility extends Ability {
   }
 
   /** The seal in flight: a lob from the hand to the circle. */
-  _sealPoint(out) {
+  _sealPoint(out, u = this.u) {
     const c = settings.crimson;
-    _hand.copy(this.origin).addScaledVector(this.direction, 0.5);
-    _hand.y = c.handHeight;
-    this._floorPoint(out);
-    out.y = 0.2;
-    out.lerpVectors(_hand, out, this.u);
-    out.y += Math.sin(this.u * Math.PI) * c.sealArc;
+    this._lobEnds(_hand, _land);
+    out.lerpVectors(_hand, _land, u);
+    out.y += Math.sin(u * Math.PI) * c.sealArc;
     return out;
+  }
+
+  /** Where the lob leaves the hand and where it comes down. */
+  _lobEnds(hand, land) {
+    const c = settings.crimson;
+    hand.copy(this.origin).addScaledVector(this.direction, 0.5);
+    hand.y = c.handHeight;
+    this._floorPoint(land);
+    land.y = 0.2;
+  }
+
+  /** Refresh the heartbeat from the rite clock: a thump every `beatPeriod`. */
+  _beat() {
+    const c = settings.crimson;
+    const t = this._rite - c.eruptDelay - c.spikeRise;
+    if (this.phase === AbilityPhase.TRAVEL || t < 0 || this._dry >= 1) {
+      this._beatFrac = -1;
+      this._beatEnv = 0;
+      return;
+    }
+    const period = Math.max(0.1, c.beatPeriod);
+    this._beatFrac = t / period - Math.floor(t / period);
+    this._beatEnv = Math.exp(-this._beatFrac * 5.0) * (1 - this._dry);
   }
 
   _moonPoint(out, rise) {
@@ -373,6 +460,9 @@ export class CrimsonRiteAbility extends Ability {
     this.dripEmitter.reset();
     this.wellEmitter.reset();
     this.emberEmitter.reset();
+    this.beamEmitter.reset();
+    this._beatFrac = -1;
+    this._beatEnv = 0;
 
     this._seed = Math.random() * 100;
     this._rite = 0;
@@ -413,6 +503,7 @@ export class CrimsonRiteAbility extends Ability {
     const g = settings.global;
     const travelling = this.phase === AbilityPhase.TRAVEL;
     const dry = this._dry;
+    this._beat();
     this._floorPoint(_floor);
     this._syncGeometry();
 
@@ -424,6 +515,7 @@ export class CrimsonRiteAbility extends Ability {
     moonState.spin = this._moonSpin;
     moonState.fade = rise * (1 - set) * (1 + this._flare * c.moonPulse);
     moonState.seed = this._seed;
+    moonState.beat = this._beatEnv * c.moonPulse;
     this.moonMaterial.userData.sync(moonState);
     this._moonPoint(this.moon.position, rise * (1 - set * 0.4));
     this.moon.visible = moonState.fade > 0.004;
@@ -455,6 +547,8 @@ export class CrimsonRiteAbility extends Ability {
     poolState.dry = Easing.outQuad(saturate(dry * 1.35));
     poolState.fade = 1 - Easing.inQuad(saturate((dry - 0.8) / 0.2));
     poolState.seed = this._seed;
+    poolState.beatR = this._beatFrac < 0 ? -1 : this._beatFrac * poolR * 1.15;
+    poolState.beatAmp = this._beatFrac < 0 ? 0 : (1 - this._beatFrac) * (1 - dry);
     this.poolMaterial.userData.sync(poolState);
     this.pool.visible = !travelling && poolState.grown > 0.01 && poolState.fade > 0.004;
     this.pool.position.set(_floor.x, c.poolHeight, _floor.z);
@@ -462,8 +556,12 @@ export class CrimsonRiteAbility extends Ability {
 
     /* ---- the spikes ---- */
     this._spikeState.fade = 1 - dry;
+    this._spikeState.beatPhase = this._beatFrac < 0 ? -1 : this._beatFrac * 1.5 - 0.2;
     this.spikeMaterial.userData.sync(this._spikeState);
     this._updateSpikes();
+
+    /* ---- the seal, the arc of blood, the moonbeam ---- */
+    this._syncTravel(travelling, rise, set);
 
     /* ---- particles ---- */
     this.drops.setGradient(getColor(c.colorDropA), getColor(c.colorDropB), getColor(c.colorDropC), getColor(c.colorDropD));
@@ -488,6 +586,66 @@ export class CrimsonRiteAbility extends Ability {
     this.embers.uniforms.uOpacity.value = g.opacity;
     this.embers.uniforms.uGlow.value = g.glow;
     this.embers.uniforms.uTurbulence.value = 0.4 * g.turbulence;
+  }
+
+  /**
+   * The travel and the moon's tie to the rite: the comet of blood on its lob,
+   * the arc of blood strung from the hand behind it (which drains into the
+   * circle once it lands), and the shaft of moonlight onto the circle.
+   */
+  _syncTravel(travelling, rise, set) {
+    const c = settings.crimson;
+
+    /* the seal: only in flight */
+    if (travelling) {
+      this._sealPoint(this.seal.position, this.u);
+      this._sealPoint(_ahead, Math.min(1, this.u + 0.02));
+      _dir.subVectors(_ahead, this.seal.position);
+      if (_dir.lengthSq() < 1e-8) _dir.copy(this.direction);
+      _dir.normalize();
+      this.seal.quaternion.setFromUnitVectors(_fwd, _dir);
+      // It swells out of the hand over the first few frames.
+      const grow = Easing.outCubic(saturate(this.age / 0.08));
+      this.seal.scale.setScalar(Math.max(0.01, c.sealRadius * grow));
+      this._sealState.fade = 1;
+      this.sealMaterial.userData.sync(this._sealState);
+      this.seal.visible = true;
+    } else {
+      this.seal.visible = false;
+    }
+
+    /* the arc of blood behind it */
+    const as = this._arcState;
+    this._lobEnds(as.from, as.to);
+    as.arc = c.sealArc;
+    as.seed = this._seed;
+    if (travelling) {
+      as.head = this.u;
+      as.tail = Math.max(0, this.u - c.arcLength);
+      as.fade = 1;
+    } else {
+      // It drains into the circle: the tail runs down the lob after the head.
+      const k = saturate(this._rite / Math.max(0.05, c.arcDrain));
+      as.head = 1;
+      as.tail = Math.max(Math.max(0, 1 - c.arcLength), Easing.inQuad(k));
+      as.fade = 1 - Easing.inQuad(saturate((k - 0.7) / 0.3));
+    }
+    this.arcMaterial.userData.sync(as);
+    this.arc.visible = c.arcOpacity > 0 && as.fade > 0.004 && as.head - as.tail > 0.002;
+
+    /* the moonbeam */
+    const bs = this._beamState;
+    this._moonPoint(bs.from, rise * (1 - set * 0.4));
+    this._floorPoint(bs.to);
+    bs.to.y = 0.05;
+    bs.widthFrom = c.moonRadius * 1.3;
+    bs.widthTo = this.radius * c.beamWidth * 2;
+    bs.head = travelling ? 0 : Easing.outCubic(saturate((this._rite - c.moonRiseTime * 0.4) / Math.max(0.05, c.beamDrop)));
+    bs.fade = rise * (1 - set);
+    bs.beat = this._beatEnv + this._flare * 0.5;
+    bs.seed = this._seed;
+    this.beamMaterial.userData.sync(bs);
+    this.beam.visible = c.beamIntensity > 0 && bs.head > 0.01 && bs.fade > 0.004;
   }
 
   /** Place every spike from its dice and the clock. */
@@ -523,7 +681,9 @@ export class CrimsonRiteAbility extends Ability {
       // Taller in the middle, shorter at the rim — a crown, not a bed of nails.
       const crown = lerp(1, c.spikeEdgeHeight, spike.reach * spike.reach);
       const height = Math.max(0.05, c.spikeHeight * crown * (1 + spike.height * c.spikeHeightJitter * g.randomness));
-      const radius = Math.max(0.01, c.spikeRadius * (1 + spike.radius * c.spikeRadiusJitter * g.randomness) * lerp(1.15, 0.8, spike.reach));
+      // The heartbeat swells them, the middle a beat ahead of the rim.
+      const throb = 1 + c.spikeThrob * this._beatEnv * (1 - spike.reach * 0.4);
+      const radius = Math.max(0.01, c.spikeRadius * (1 + spike.radius * c.spikeRadiusJitter * g.randomness) * lerp(1.15, 0.8, spike.reach)) * throb;
 
       // Leaning outward from the centre, more at the rim.
       const lean = c.spikeLean * spike.reach + spike.lean * c.spikeLeanJitter * g.randomness;
@@ -791,6 +951,29 @@ export class CrimsonRiteAbility extends Ability {
       this.embers.emit(embers, _emit);
     }
 
+    /* embers drawn up the moonbeam toward the moon */
+    const beamN = this.beamEmitter.tick(dt, this.beam.visible ? c.beamMotes * this._beamState.fade * g.particleCount : 0);
+    if (beamN > 0) {
+      this._resetEmit(time);
+      this._moonPoint(_moon, 1);
+      for (let n = 0; n < beamN; n++) {
+        const s = Math.random() * 0.6;
+        _pos.lerpVectors(_floor, _moon, s);
+        _pos.x += randRange(-1, 1) * this.radius * c.beamWidth * (1 - s) * 0.8;
+        _pos.z += randRange(-1, 1) * this.radius * c.beamWidth * (1 - s) * 0.8;
+        _pos.y += 0.1;
+        _emit.position = _pos;
+        _emit.radius = 0.1;
+        _emit.direction = _dir.subVectors(_moon, _pos).normalize();
+        _emit.speed = 2.2;
+        _emit.speedVariance = 0.4;
+        _emit.spread = 0.1;
+        _emit.size = 0.06;
+        _emit.life = 1.0;
+        this.embers.emit(1, _emit);
+      }
+    }
+
     /* drips off the tips of standing spikes */
     const drips = this.dripEmitter.tick(dt, c.dripRate * wet * g.particleCount);
     for (let n = 0; n < drips; n++) {
@@ -854,6 +1037,8 @@ export class CrimsonRiteAbility extends Ability {
   }
 
   onImpact() {
+    // The seal is spent the frame it lands; the arc stays strung behind it.
+    this.seal.visible = false;
     this._rite = 0;
     this._dry = 0;
     this._sealFx();
@@ -895,6 +1080,9 @@ export class CrimsonRiteAbility extends Ability {
   }
 
   onDestroy() {
+    this.seal.visible = false;
+    this.arc.visible = false;
+    this.beam.visible = false;
     this.moon.visible = false;
     this.circle.visible = false;
     this.pool.visible = false;
@@ -904,6 +1092,11 @@ export class CrimsonRiteAbility extends Ability {
   dispose() {
     this.moonGeometry.dispose();
     this.groundGeometry.dispose();
+    this.sealGeometry.dispose();
+    this.ribbonGeometry.dispose();
+    this.sealMaterial.dispose();
+    this.arcMaterial.dispose();
+    this.beamMaterial.dispose();
     for (const mesh of this.spikeMeshes) mesh.geometry.dispose();
     this.moonMaterial.dispose();
     this.circleMaterial.dispose();
@@ -935,6 +1128,18 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'sealSize', 0.01, 0.5, 0.005, 'seal trail size');
   R(cast, c, 'trailRate', 0, 400, 1, 'seal trail / s');
 
+  const travel = folder.addFolder('0 · Seal & arc of blood');
+  R(travel, c, 'sealRadius', 0.03, 0.8, 0.005, 'seal head radius (m)');
+  R(travel, c, 'sealWobble', 0, 0.6, 0.005, 'tail whip');
+  R(travel, c, 'sealCoreGlow', 0, 8, 0.05, 'core glow');
+  R(travel, c, 'arcWidth', 0.02, 1, 0.005, 'arc width (m)');
+  R(travel, c, 'arcTaper', 0, 1, 0.01, 'arc taper');
+  R(travel, c, 'arcWobble', 0, 1, 0.01, 'arc writhe');
+  R(travel, c, 'arcCoreGlow', 0, 8, 0.05, 'arc core glow');
+  R(travel, c, 'arcOpacity', 0, 1, 0.01, 'arc opacity');
+  R(travel, c, 'arcLength', 0.05, 1, 0.01, 'arc length (× the lob)');
+  R(travel, c, 'arcDrain', 0.05, 3, 0.01, 'drains into the circle over (s)');
+
   const beats = folder.addFolder('Beats of the rite');
   R(beats, c, 'drawTime', 0.05, 3, 0.01, 'circle drawn over (s)');
   R(beats, c, 'poolDelay', 0, 2, 0.01, 'blood wells after (s)');
@@ -961,7 +1166,13 @@ export function buildEditor(gui, c, Editor) {
   R(moon, c, 'moonHaloReach', 1.1, 6, 0.05, 'halo reach (× radius)');
   R(moon, c, 'moonFlicker', 0, 0.5, 0.005, 'flicker');
   R(moon, c, 'moonBrightness', 0, 3, 0.01, 'brightness');
-  R(moon, c, 'moonPulse', 0, 2, 0.01, 'flare on eruption');
+  R(moon, c, 'moonPulse', 0, 2, 0.01, 'flare on eruption / beat');
+  R(moon, c, 'moonShade', 0, 1, 0.01, 'night side darkness');
+  R(moon, c, 'moonShadeAngle', -3.14, 3.14, 0.01, 'lit from (rad)');
+  R(moon, c, 'beamIntensity', 0, 3, 0.01, 'moonbeam');
+  R(moon, c, 'beamWidth', 0.1, 2, 0.01, 'beam width at the circle (× zone)');
+  R(moon, c, 'beamDrop', 0.05, 3, 0.01, 'beam reaches the circle in (s)');
+  R(moon, c, 'beamMotes', 0, 200, 1, 'embers up the beam / s');
   moon.addColor(c, 'colorMoonLight').name('lit');
   moon.addColor(c, 'colorMoonDark').name('maria');
   moon.addColor(c, 'colorMoonRim').name('rim');
@@ -1009,6 +1220,9 @@ export function buildEditor(gui, c, Editor) {
   R(pool, c, 'poolHeight', 0, 0.1, 0.001, 'height (m)');
   R(pool, c, 'stainLife', 0.5, 30, 0.1, 'stain lingers (s)');
   R(pool, c, 'stainIntensity', 0, 1.5, 0.01, 'stain strength');
+  R(pool, c, 'poolGlow', 0, 4, 0.01, 'light through the blood');
+  R(pool, c, 'poolVeinScale', 0.2, 6, 0.05, 'vein scale');
+  pool.addColor(c, 'colorPoolGlow').name('glow');
   pool.addColor(c, 'colorPoolWet').name('wet');
   pool.addColor(c, 'colorPoolDeep').name('deep');
   pool.addColor(c, 'colorPoolSpec').name('highlight');
@@ -1044,6 +1258,9 @@ export function buildEditor(gui, c, Editor) {
   R(spikes, c, 'spikeVeinScale', 0.5, 10, 0.05, 'vein scale');
   R(spikes, c, 'spikeDrip', 0, 2, 0.01, 'wet streaks');
   R(spikes, c, 'spikeShake', 0, 1, 0.01, 'shake per wave');
+  R(spikes, c, 'beatPeriod', 0.15, 3, 0.01, 'heartbeat every (s)');
+  R(spikes, c, 'spikeThrob', 0, 0.6, 0.005, 'swell on the beat');
+  R(spikes, c, 'spikeBeatGlow', 0, 6, 0.05, 'surge up the spikes');
   spikes.addColor(c, 'colorSpikeBody').name('body');
   spikes.addColor(c, 'colorSpikeDeep').name('clot');
   spikes.addColor(c, 'colorSpikeRim').name('rim');

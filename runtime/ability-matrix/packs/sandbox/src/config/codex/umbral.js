@@ -54,9 +54,9 @@ export default {
     /* ================================================================ */
     /* 2 · THE SWING                                                     */
     /* ================================================================ */
-    startForward: 1.4, // metres ahead of the caster the pivot starts
-    pivotHeight: 6.4, // metres the pivot rides above the line
-    armLength: 5.75, // metres from the pivot to the edge's lowest point
+    startForward: 4.0, // metres ahead of the caster the pivot starts (far enough that the drawn-back blade is in shot)
+    pivotHeight: 4.5, // metres the pivot rides above the line (low enough that the swing stays under the top of the 8 m chase shot)
+    armLength: 3.85, // metres from the pivot to the edge's lowest point (pivotHeight − armLength = the edge's clearance at the bottom of the swing)
     swingAmp: 0.95, // radians either side of hanging straight
     swingRate: 6.6, // radians/second of swing phase (period = 2π / rate)
     formTime: 0.45, // seconds the blade takes to form, drawn back, before it swings
@@ -80,7 +80,7 @@ export default {
     /* 4 · THE CHOP                                                      */
     /* ================================================================ */
     raiseTime: 0.3, // seconds it takes to rear up at the end of the line
-    raiseAngle: 1.9, // radians it rears to
+    raiseAngle: 1.3, // radians it rears to (below level with the pivot: stays in shot)
     dropTime: 0.14, // seconds the chop takes to come down
     embed: 0.4, // metres it buries itself in the floor
     embedHold: 0.6, // seconds it stands buried before it goes
@@ -98,14 +98,14 @@ export default {
     colorBurstB: '#9a7aff',
     colorBurstC: '#2a1060',
     colorShockA: '#7a52ff',
-    colorShockB: '#efe8ff',
+    colorShockB: '#b49cff',
 
     /* ================================================================ */
     /* 5 · THE CLEFT                                                     */
     /* ================================================================ */
-    cleftLength: 3.8, // metres the chop splits the floor
-    cleftWidth: 0.2, // half-width of the gash, metres
-    cleftGlow: 3.5, // the burning lips
+    cleftLength: 6.0, // metres the chop splits the floor
+    cleftWidth: 0.38, // half-width of the gash, metres
+    cleftGlow: 3.0, // the burning lips
     cleftOpenTime: 0.16, // seconds it takes to tear open
     colorCleft: '#020105',
 
@@ -124,7 +124,10 @@ export default {
     sparkStretch: 0.22,
     sparkGlow: 3.2,
     crossSparks: 45, // thrown each time the edge passes the bottom of its swing
-    slashRadius: 1.4, // the scorch it leaves there, metres
+    slashRadius: 0.7, // the scorch under each slash, metres
+    slashLength: 2.8, // metres of gash the edge scores across the line at each low pass
+    slashWidth: 0.3, // half-width of that gash, metres
+    slashGlow: 2.6, // its lips
     colorSmokeA: '#1c1430',
     colorSmokeB: '#110c20',
     colorSmokeC: '#0a0714',
@@ -145,6 +148,30 @@ export default {
     hitLift: 3.5,
     hitSpin: 1.6,
     chopImpulse: 9, // the chop at the end throws harder
-    chopLift: 5
+    chopLift: 5,
+
+    /* ================================================================ */
+    /* 8 · THE SHADOW POOL (the linger)                                  */
+    /* ================================================================ */
+    poolScale: 1.8, // × chopRadius — how far the shadow spills from the cleft
+    poolSpread: 0.5, // seconds it takes to spill out
+    poolSwirl: 0.55, // radians/second the veins turn
+    poolVeins: 1.0, // how much of the pool is veined
+    poolGlow: 2.2, // the veins and the lip
+    poolOpacity: 0.92,
+    bladeSink: 1.6, // metres the buried blade sinks into the pool as it goes
+    wispRate: 300, // violet wisps/second rising off the pool
+    wispSize: 0.12,
+    wispSpeed: 2.4,
+    wispLife: 1.4,
+    wispGlow: 2.2,
+    poolSmokeRate: 90, // black smoke/second rising off the pool
+    colorPoolDeep: '#030108',
+    colorPoolBody: '#24104f',
+    colorPoolVein: '#8a5cff',
+    colorWispA: '#f1eaff',
+    colorWispB: '#a88cff',
+    colorWispC: '#5a2fd0',
+    colorWispD: '#1a0840'
   }
 };

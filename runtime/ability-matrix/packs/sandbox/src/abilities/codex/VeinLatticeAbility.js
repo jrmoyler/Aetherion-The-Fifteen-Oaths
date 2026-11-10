@@ -651,11 +651,17 @@ export function buildEditor(gui, c, Editor) {
   R(net, c, 'netSeed', 0, 50, 1, 'shape seed');
 
   const tissue = net.addFolder('Tissue');
-  tissue.addColor(c, 'colorSkin').name('skin');
-  tissue.addColor(c, 'colorSkinDark').name('skin, dark');
+  tissue.addColor(c, 'colorSkin').name('deep (skin)');
+  tissue.addColor(c, 'colorSkinDark').name('deep, shadow');
+  tissue.addColor(c, 'colorVeinBody').name('body');
+  tissue.addColor(c, 'colorBlood').name('tint (blood)');
+  tissue.addColor(c, 'colorVeinHot').name('hot');
   tissue.addColor(c, 'colorCapillary').name('capillaries');
-  tissue.addColor(c, 'colorBlood').name('blood');
   tissue.addColor(c, 'colorRim').name('rim light');
+  R(tissue, c, 'rampBody', 0, 1.2, 0.01, 'sunlight carries ramp');
+  R(tissue, c, 'hotBoost', 0, 4, 0.05, 'hot stop HDR');
+  R(tissue, c, 'tissueBump', 0, 1, 0.01, 'knotted bump');
+  R(tissue, c, 'specularPower', 4, 200, 1, 'wet tightness');
   R(tissue, c, 'mottle', 0, 2, 0.01, 'mottle');
   R(tissue, c, 'capillaries', 0, 1, 0.01, 'capillaries');
   R(tissue, c, 'skinDiffuse', 0, 2, 0.01, 'diffuse');

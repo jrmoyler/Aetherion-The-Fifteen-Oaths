@@ -28,7 +28,7 @@ export function createNotify(ui) {
     for (const it of items) {
       const r = rarityOf(it.rarity);
       const li = h('li', { style: `--rc:${r.color}` },
-        h('span', { class: 'ae-item-ic', html: itemIcon(it.name, it.type) }),
+        h('span', { class: 'ae-item-ic', html: itemIcon(it) }),
         h('span', null, h('span', { style: { color: r.color } }, it.name || 'Item'), h('br'), h('small', { style: { fontSize: '11px', letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--muted)' } }, r.label)),
         h('span', { class: 'q ae-num' }, `×${it.qty ?? 1}`));
       lootList.append(li);

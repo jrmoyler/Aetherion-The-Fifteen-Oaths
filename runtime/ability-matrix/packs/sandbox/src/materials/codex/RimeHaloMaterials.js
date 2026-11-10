@@ -81,6 +81,10 @@ const NEEDLE_FRAGMENT = /* glsl */ `
   uniform float uFrost;
   uniform float uEnv;
   uniform float uCharge;     // the whole halo brightening as it closes
+  uniform vec3  uColorDeep;  // the root of the ramp: blue-black
+  uniform float uRamp;       // how fast the ramp climbs root → point
+  uniform float uSpecular;
+  uniform float uGloss;
 
   varying vec3 vWorld;
   varying vec3 vLocal;
@@ -103,30 +107,50 @@ const NEEDLE_FRAGMENT = /* glsl */ `
     }
 
     vec3 V = normalize(cameraPosition - vWorld);
+    // Flat facet normal: every face of the hexagonal spear is one plane.
     vec3 N = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
     if (dot(N, V) < 0.0) N = -N;
     float ndv = clamp(dot(N, V), 0.0, 1.0);
-    float F = pow(1.0 - ndv, 2.5);
+    float F = pow(1.0 - ndv, 3.0);
 
+    // The four-stop ramp along the spear: blue-black at the root, a
+    // saturated glacier blue through the body, pale toward the point, and
+    // only the very point white-hot. The deep stop carries the body.
+    // Which of the six faces this is (the lathe's faces span 60°, offset 30°).
+    float faceIdx = floor(atan(vLocal.z, vLocal.x) * 0.95492966 - 0.5 + 6.0);
+    float facet = fract(faceIdx * 0.618 + seed);
+    float tone = clamp(along * uRamp + (facet - 0.5) * 0.18, 0.0, 1.0);
+    vec3 body = mix(uColorDeep, uColorBody, smoothstep(0.0, 0.55, tone));
+    body = mix(body, uColorRim, smoothstep(0.62, 0.95, tone) * 0.55);
+
+    // Lit by the sun, facet by facet: alternate faces fall into shadow, so
+    // the needle reads as a cut crystal, not a glassy smear.
     vec3 L = normalize(uLightDir);
     float ndl = max(dot(N, L), 0.0);
-    vec3 col = uColorBody * (0.35 + 0.65 * ndl);
-    col += texture2D(uEnvMap, equirectUv(reflect(-V, N))).rgb * uEnv * (0.3 + 0.7 * F);
+    float facetShade = 0.5 + 0.5 * step(0.5, fract(faceIdx * 0.5));
+    vec3 col = body * (0.18 + 0.82 * ndl) * facetShade;
+    vec3 Hh = normalize(L + V);
+    float spec = pow(max(dot(N, Hh), 0.0), uGloss) * uSpecular;
+    // A flat facet catches the sun all at once, so the glint is kept on the
+    // ramp (deep at the root, pale toward the point) and never goes white.
+    col += mix(uColorBody, uColorRim, tone) * spec * (0.25 + 0.75 * tone);
+    col += texture2D(uEnvMap, equirectUv(reflect(-V, N))).rgb * uEnv * F * (0.4 + 0.6 * along);
 
-    // The lit filament inside: brightest face-on, hottest at the point.
+    // A thin cold filament inside, and the burning point.
     float radial = length(vLocal.xz);
-    float core = exp(-radial * radial * 18.0) * (0.4 + 0.6 * ndv);
-    float tip = smoothstep(0.55, 1.0, along);
+    float core = exp(-radial * radial * 30.0) * (0.3 + 0.7 * ndv) * smoothstep(0.15, 0.6, along);
+    float tip = smoothstep(0.8, 1.0, along);
     float pulse = 0.75 + 0.25 * sin(uTime * 14.0 + seed * 30.0 - along * 8.0);
     col += uColorCore * (core * uCoreGlow + tip * uTipGlow) * pulse * (1.0 + uCharge) * uGlobalGlow * uShaderIntensity;
-    col += uColorRim * F * uRimGlow * uGlobalGlow;
+    // A hairline rim on the silhouette only.
+    col += uColorRim * pow(F, 1.5) * uRimGlow * uGlobalGlow * 0.6;
 
-    // Frost dusted on the upward facets.
-    float dust = smoothstep(0.2, 0.8, N.y) * (snoise(vWorld * 22.0 + seed) * 0.5 + 0.5);
-    col = mix(col, uColorFrost, dust * uFrost);
+    // Frost dusted on the upward facets (rime, not snow: it keeps the hue).
+    float dust = smoothstep(0.35, 0.85, N.y) * smoothstep(0.1, 0.6, snoise(vWorld * 22.0 + seed) * 0.5 + 0.5);
+    col = mix(col, uColorFrost * (0.4 + 0.6 * ndl), dust * uFrost);
 
     // The flash it crystallises in, and the burn at a dissolving edge.
-    col += uColorCore * flash * uFlashGlow * uGlobalGlow;
+    col += mix(uColorBody, uColorCore, along) * flash * uFlashGlow * uGlobalGlow * along * along;
     col += uColorCore * dissolve * smoothstep(0.4, 1.0, along) * uTipGlow * 1.5;
 
     gl_FragColor = vec4(col, 1.0);
@@ -152,7 +176,11 @@ export function createNeedleMaterial() {
       uFlashGlow: { value: 6 },
       uFrost: { value: 0.5 },
       uEnv: { value: 0.5 },
-      uCharge: { value: 0 }
+      uCharge: { value: 0 },
+      uColorDeep: { value: new Color() },
+      uRamp: { value: 1 },
+      uSpecular: { value: 2 },
+      uGloss: { value: 60 }
     }),
     vertexShader: NEEDLE_VERTEX,
     fragmentShader: NEEDLE_FRAGMENT
@@ -175,6 +203,10 @@ export function createNeedleMaterial() {
     u.uFrost.value = c.needleFrost;
     u.uEnv.value = c.needleEnv;
     u.uCharge.value = s.charge;
+    u.uColorDeep.value.copy(getColor(c.colorNeedleDeep));
+    u.uRamp.value = c.needleRamp;
+    u.uSpecular.value = c.needleSpecular;
+    u.uGloss.value = Math.max(1, c.needleGloss);
   };
 
   return material;
@@ -407,6 +439,7 @@ const FLOOR_FRAGMENT = /* glsl */ `
 
   uniform vec3 uColorFrost;
   uniform vec3 uColorDeep;
+  uniform vec3 uColorMid;
   uniform vec3 uColorGlow;
 
   varying vec2 vP;
@@ -429,7 +462,10 @@ const FLOOR_FRAGMENT = /* glsl */ `
     float streaks = snoise(vec3(cos(sa) * r * 0.4 * uStreak, sin(sa) * r * 0.4 * uStreak, r * 6.0 + uSeed));
     float fine = snoise(vec3(p * 9.0, uSeed));
     float frost = swept * clamp(0.55 + streaks * 0.35 + fine * 0.2, 0.0, 1.0);
-    vec3 col = mix(uColorDeep, uColorFrost, clamp(0.35 + streaks * 0.4 + fine * 0.25, 0.0, 1.0));
+    // Rime on the ramp: blue-black in the troughs, glacier blue, pale crests.
+    float rk = clamp(0.3 + streaks * 0.45 + fine * 0.25, 0.0, 1.0);
+    vec3 col = mix(uColorDeep, uColorMid, smoothstep(0.0, 0.6, rk));
+    col = mix(col, uColorFrost, smoothstep(0.65, 1.0, rk) * 0.7);
 
     // The bright track right under the halo, only where it has walked.
     float track = exp(-pow((r - uHalo) / max(uTrackWidth, 0.02), 2.0)) * walked;
@@ -482,6 +518,7 @@ export function createRimeFloorMaterial() {
       uStreak: { value: 1 },
       uColorFrost: { value: new Color() },
       uColorDeep: { value: new Color() },
+      uColorMid: { value: new Color() },
       uColorGlow: { value: new Color() }
     }),
     vertexShader: FLOOR_VERTEX,
@@ -510,6 +547,7 @@ export function createRimeFloorMaterial() {
     u.uStreak.value = c.floorStreak * g.noiseFrequency;
     u.uColorFrost.value.copy(getColor(c.colorFrost));
     u.uColorDeep.value.copy(getColor(c.colorFrostDeep));
+    u.uColorMid.value.copy(getColor(c.colorNeedleBody));
     u.uColorGlow.value.copy(getColor(c.colorSpineA));
   };
 

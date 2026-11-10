@@ -81,7 +81,7 @@ export default {
     /* ================================================================ */
     /* 2 · THE HAND                                                      */
     /* ================================================================ */
-    handScale: 1.0, // everything below, × this
+    handScale: 1.6, // everything below, × this — 1.6 stands the claw ~3.4 m, over the bodies it takes
     wristHeight: 0.5, // metres off the floor the wrist stands once risen
     forearmLength: 2.4, // metres of forearm — most of it below the surface
     forearmRadius: 0.34, // metres
@@ -107,23 +107,23 @@ export default {
     seekTarget: 0.85, // 0 = rise at the circle's middle, 1 = rise right under the body
 
     /* --- the hand's look --- */
-    handOpacity: 0.96, // density of the dark body
-    handErode: 0.65, // how much noise eats into the silhouette
+    handOpacity: 1.0, // density of the dark body
+    handErode: 0.28, // how much noise eats into the silhouette (low: a solid black mass, torn only at the edge)
     handErodeScale: 2.0, // erosion features per metre
     handFlow: 0.65, // metres/second the smoke texture climbs
     handBillow: 0.05, // metres the surface boils in and out
     handSoftness: 0.45, // how far in from the silhouette the body is solid
-    handRim: 2.6, // violet glow along the silhouette
-    handRimPower: 2.4, // how thin that glow is
-    handInnerGlow: 1.3, // embers of violet inside the smoke
+    handRim: 1.15, // violet glow along the silhouette — a line, not a wash
+    handRimPower: 3.4, // how thin that glow is
+    handInnerGlow: 0.45, // embers of violet inside the smoke (few: the hand eats light)
     handVeinScale: 2.6, // ember features per metre
     hazeInflate: 0.09, // metres the soft smoke shell stands off the solid hand
-    hazeDensity: 0.55, // opacity of that shell
+    hazeDensity: 0.7, // opacity of that shell (dark smoke, thickens the mass)
     hazeSoftFade: 0.3, // metres it feathers where it meets the floor or a body
     handDissolveEdge: 0.14, // width of the burning edge as it dissolves
     handEdgeGlow: 4.0, // brightness of that edge
     colorHandBody: '#040207', // the dark
-    colorHandDeep: '#170a2a', // the swirl in it
+    colorHandDeep: '#0e0519', // the swirl in it
     colorHandGlow: '#8a4dff', // rim and embers
     colorHandEdge: '#d4b4ff', // the dissolving edge
 
@@ -139,6 +139,24 @@ export default {
     holdImpulse: 0.8, // m/s — a body seized is folded, not thrown
     holdLift: 0.6,
     holdSpin: 0.4,
+
+    /* --- the ink sleeve: the pool climbs each held body and drags it under (presentation only) --- */
+    sleeveRadius: 0.42, // metres round the throat
+    sleeveFlare: 1.4, // how far the base spreads into the pool, × radius
+    sleeveReach: 1.6, // metres — the most it climbs a held body
+    sleeveMin: 0.35, // metres — the collar left as the body goes under
+    sleeveOverlap: 0.5, // metres it climbs past the body's hips
+    sleeveRise: 0.22, // seconds to surge up once the drag starts (× global lifetime)
+    sleeveClose: 0.5, // seconds to close over a body once it is gone (× global lifetime)
+    sleeveRagged: 0.35, // how deep the bites in its top edge go, × height
+    sleeveTendrils: 5, // tongues of ink round the top
+    sleeveWrithe: 0.25, // how much the lip sways, × radius
+    sleeveFlow: 0.8, // how fast the ink pours down it
+    sleeveRim: 0.9, // violet rim glow
+    sleeveLip: 1.8, // violet glow along the ragged top
+    colorSleeveInk: '#030106',
+    colorSleeveDeep: '#1a0b30',
+    colorSleeveRim: '#9b5cff',
     look: {
       color: '#0b0614', // the flesh, gone to shadow
       rimColor: '#9b5cff',

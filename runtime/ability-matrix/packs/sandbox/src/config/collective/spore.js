@@ -38,9 +38,9 @@ export default {
     "zoneRadius": 3.4, // metres
 
     /* --- the seed pod (lob) --- */
-    podSize: 0.22, // radius, metres
+    podSize: 0.34, // radius, metres
     podStretch: 1.45, // length ÷ width
-    podArc: 3.2, // metres above the straight line at the top of the lob
+    podArc: 2.2, // metres above the straight line at the top of the lob
     podLaunch: 1.4, // metres off the floor it leaves the hand at
     podSpin: 7, // radians/second tumble
     podGlow: 2.6, // emissive in its seams
@@ -50,9 +50,25 @@ export default {
     colorPodVein: '#b6ff6a',
     colorPodHot: '#f4ffd0',
     podTrailRate: 90, // motes per second shed on the way
-    landShake: 0.12,
+    podTrailLength: 16, // metres of lob the trail covers behind the pod (≥ range: the whole arc from the hand)
+    podTrailWidth: 0.8, // trail half-width at the pod, × pod radius
+    podTrailGlow: 2.2, // hot thread down the middle of the trail
+    podTrailOpacity: 0.8,
+    podTrailScroll: 3.0, // how fast the smoke pours back down the trail
+    podTrailFade: 0.45, // seconds the trail takes to settle after landing
+    podTrailSmoke: 34, // dark spore puffs per second shed along the lob
+    colorTrailHot: '#e8ffb0',
+    colorTrailBody: '#5cc23a',
+    colorTrailDeep: '#123a14',
+    landShake: 0.14,
     landFlash: 0.05,
     landBurst: 1.6, // spore shell end radius, metres
+    landCloud: 2.2, // metres, the dense spore-dust ball the pod bursts into
+    landDust: 42, // dust puffs thrown out along the floor in a ring
+    landDustSpeed: 3.4, // m/s they roll outward
+    landHusk: 26, // husk fragments of the split pod
+    landHuskSpeed: 4.5,
+    landHuskSize: 0.09,
     colorLandA: '#d8ff9a',
     colorLandB: '#6fe04a',
     colorLandC: '#1d3a12',
@@ -138,12 +154,31 @@ export default {
     smokeSpread: 3.2, // end size × start
     smokeLifetime: 2.6,
     smokeRise: 0.18,
-    smokeOpacity: 0.42,
+    smokeOpacity: 0.62,
     smokeTurbulence: 0.9,
-    colorSmokeA: '#a8d890',
-    colorSmokeB: '#5c8a5a',
-    colorSmokeC: '#2e4a3a',
-    colorSmokeD: '#1a2622',
+    colorSmokeA: '#c2ec86',
+    colorSmokeB: '#5f9e48',
+    colorSmokeC: '#25502a',
+    colorSmokeD: '#0b1a0e',
+
+    /* the standing cloud: a slow vortex of spore smoke over the circle */
+    cloudDelay: 0.25, // seconds after landing the vortex starts to turn
+    cloudRate: 90, // puffs per second while the bloom stands
+    cloudSwirl: 1.1, // m/s each puff is carried round the circle
+    cloudInward: 0.25, // m/s pulled toward the middle as it turns
+    cloudHeight: 1.0, // metres, the band it turns in
+    cloudBand: 0.55, // metres thick
+    cloudSize: 1.4, // puff size, metres
+    cloudSpread: 2.2, // end size × start
+    cloudLife: 3.2,
+    cloudRise: 0.08,
+    cloudOpacity: 0.9,
+    cloudTurbulence: 0.7,
+    cloudDrag: 0.15,
+    colorCloudA: '#c8f47e',
+    colorCloudB: '#6cbc46',
+    colorCloudC: '#2c6428',
+    colorCloudD: '#0c2410',
     moteSize: 0.055,
     moteLifetime: 2.4,
     moteRise: 0.25,

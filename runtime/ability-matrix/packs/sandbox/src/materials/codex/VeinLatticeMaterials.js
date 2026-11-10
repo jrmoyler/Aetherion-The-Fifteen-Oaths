@@ -14,7 +14,12 @@ const ID = 'veinlattice';
  *    height, thickness, the sway, the heartbeat's constriction and swell, the
  *    growth front and the withering are all uniforms. Opaque, on
  *    `LAYER.SHAPED` (the depth prepass would rasterise the raw parameter
- *    buffer). Shading is *living tissue*: a dark, mottled, bruise-purple skin
+ *    buffer). Shading runs on a **four-stop ramp** — deep (the mottled
+ *    skin) → body → tint (blood) → hot — whose position is carried by a
+ *    half-lambert sun term (so the shadowed side falls to the deep stop),
+ *    then pushed by the blood under the skin, the pulses and the heartbeat;
+ *    HDR only on the hot stop. A world-noise bump knots the tubes and a
+ *    tight wet highlight gives them depth. Underneath it is *living tissue*: a dark, mottled, bruise-purple skin
  *    traced with fine capillaries, lit by the sun; blood glowing through it
  *    where the tube faces the camera (an inverted fresnel — thin skin over a
  *    lit core); a thin red rim where light comes through the silhouette; and
@@ -72,39 +77,66 @@ const TISSUE_FRAGMENT = /* glsl */ `
 
   ${noiseGLSL}
 
+  uniform vec3  uColorBody;
+  uniform vec3  uColorHot;
+  uniform float uRampBody;
+  uniform float uHotBoost;
+  uniform float uBump;
+  uniform float uSpecPower;
+  uniform float uFresnel;
+
   float pulseBand(float g) {
     float p = fract(g * uPulseFreq - uPulse);
     return smoothstep(0.72, 0.94, p) * (1.0 - smoothstep(0.94, 1.0, p));
+  }
+
+  // The four-stop ramp: deep (the mottled skin) → body → tint → hot.
+  vec3 ramp(vec3 deep, float t) {
+    vec3 c = mix(deep, uColorBody, smoothstep(0.08, 0.55, t));
+    c = mix(c, uColorBlood, smoothstep(0.5, 0.82, t));
+    c = mix(c, uColorHot, smoothstep(0.82, 1.0, t));
+    return c * (1.0 + smoothstep(0.86, 1.0, t) * uHotBoost);
   }
 
   void main() {
     vec3 V = normalize(cameraPosition - vWorld);
     vec3 N = normalize(vNormal);
     if (!gl_FrontFacing) N = -N;
+    // Ridged, knotted tissue: the normal wanders with a world-space noise.
+    vec3 bp = vWorld * 3.2 + vSeed * 7.0;
+    N = normalize(N + uBump * vec3(snoise(bp), snoise(bp + 17.3), snoise(bp + 31.7)));
     float ndv = clamp(dot(N, V), 0.0, 1.0);
 
-    // Skin: mottled, bruised, traced with fine capillaries.
+    // Skin: mottled, bruised, traced with fine capillaries — the deep stop.
     vec3 q = vec3(vGrow * 26.0, vAngle * 1.3, vSeed * 17.0);
     float m = fbm3(q * 0.6) * uMottle;
     vec3 skin = mix(uColorSkinDark, uColorSkin, clamp(0.5 + m, 0.0, 1.0));
     float cap = 1.0 - smoothstep(0.0, 0.08, abs(snoise(vec3(vGrow * 14.0, vAngle * 1.1, vSeed * 5.0))));
-    skin = mix(skin, uColorCapillary, cap * uCapillaries);
+    skin = mix(skin, uColorCapillary * 0.35, cap * uCapillaries);
 
+    // Sun: half-lambert, squared, so the shadowed side falls to the deep stop.
     vec3 L = normalize(uLightDir);
     vec3 H = normalize(L + V);
-    float ndl = max(dot(N, L) * 0.7 + 0.3, 0.0);
-    vec3 color = skin * (uAmbient + uDiffuse * ndl);
-    color += vec3(1.0, 0.8, 0.85) * pow(max(dot(N, H), 0.0), 40.0) * uSpecular * (1.0 - vWithered);
+    float wrap = clamp(dot(N, L) * 0.5 + 0.5, 0.0, 1.0);
+    float lit = uAmbient + uDiffuse * wrap * wrap;
 
-    // Blood through thin skin: a lit core facing the camera, pulses running up.
     float alive = 1.0 - vWithered;
     float band = pulseBand(vGrow);
     float core = pow(ndv, 1.6);
-    float blood = (uCoreGlow + band * uPulseGlow + uBeat * uBeatGlow) * alive;
-    color += uColorBlood * core * blood * uGlobalGlow * uShaderIntensity;
-    // Light coming through the silhouette.
-    float fres = pow(1.0 - ndv, 2.2);
-    color += uColorRim * fres * uRimGlow * (0.4 + 0.6 * alive) * (1.0 + uBeat) * uGlobalGlow;
+    // Ramp position: lighting carries it deep → body; blood through the skin,
+    // the pulses and the heartbeat push it on to tint and hot.
+    float t = lit * uRampBody + m * 0.12 - cap * uCapillaries * 0.12;
+    t += core * uCoreGlow * 0.25 * alive;
+    t += band * uPulseGlow * 0.16 * alive;
+    t += uBeat * uBeatGlow * 0.14 * alive * (0.5 + 0.5 * core);
+    t = clamp(t * uShaderIntensity * mix(1.0, uGlobalGlow, 0.5), 0.0, 1.0);
+    vec3 color = ramp(skin, t);
+
+    // Wet: a tight, bright highlight from the sun.
+    color += vec3(1.0, 0.82, 0.86) * pow(max(dot(N, H), 0.0), uSpecPower) * uSpecular * (0.35 + 0.65 * alive);
+    // Light coming through the silhouette — a red, not a white, rim.
+    float fres = pow(1.0 - ndv, 2.6) * uFresnel;
+    color += uColorRim * fres * uRimGlow * (0.3 + 0.7 * alive) * (1.0 + uBeat * 0.8) * uGlobalGlow;
     // Drained: the tissue greys and darkens.
     color = mix(color, color * vec3(0.35, 0.3, 0.33), vWithered * 0.8);
 
@@ -130,7 +162,14 @@ function tissueUniforms() {
     uCapillaries: { value: 0.5 },
     uDiffuse: { value: 0.8 },
     uAmbient: { value: 0.2 },
-    uSpecular: { value: 0.5 }
+    uSpecular: { value: 0.5 },
+    uColorBody: { value: new Color() },
+    uColorHot: { value: new Color() },
+    uRampBody: { value: 0.5 },
+    uHotBoost: { value: 1.5 },
+    uBump: { value: 0.3 },
+    uSpecPower: { value: 60 },
+    uFresnel: { value: 1 }
   };
 }
 
@@ -155,6 +194,13 @@ function syncTissue(u, s) {
   u.uDiffuse.value = c.skinDiffuse;
   u.uAmbient.value = c.skinAmbient;
   u.uSpecular.value = c.skinSpecular;
+  u.uColorBody.value.copy(getColor(c.colorVeinBody));
+  u.uColorHot.value.copy(getColor(c.colorVeinHot));
+  u.uRampBody.value = c.rampBody;
+  u.uHotBoost.value = c.hotBoost;
+  u.uBump.value = c.tissueBump * g.noiseStrength;
+  u.uSpecPower.value = c.specularPower;
+  u.uFresnel.value = g.fresnel;
 }
 
 /* ==================================================================== */

@@ -1,4 +1,14 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import {
+  AdditiveBlending,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial,
+  Vector3
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -128,6 +138,8 @@ const SHEET_FRAGMENT = /* glsl */ `
   uniform vec3  uColorB;
   uniform vec3  uColorC;
   uniform vec3  uColorFront;
+  uniform vec3  uColorDeep;   // ramp 4: the dark body of the air the note has pressed
+  uniform float uFill;        // how much of the membrane is filled (not just strands)
 
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
@@ -173,10 +185,19 @@ const SHEET_FRAGMENT = /* glsl */ `
     float toFront = max(uReach - vD, 0.0);
     float front = exp(-toFront / max(uFrontWidth, 0.02));
 
+    // Emissive light written onto the sheet: strands (pale tint), the
+    // antinodes (saturated body), the white-hot leading edge.
     vec3 col = uColorA * strands * uStrandGlow * (1.0 + uScream * 2.0);
     col += irid * membrane;
-    col += uColorC * pow(anti, 4.0) * 0.4 * swing;
+    col += uColorC * pow(anti, 3.0) * 0.55 * swing;
     col += uColorFront * front * uFrontGlow * (1.0 + uScream);
+
+    // The filled body: compressed air, dark teal in the nodes, saturated
+    // where it swings hardest. It occludes, so the sheet has mass.
+    float press = clamp(anti * swing * 0.75 + abs(vDisp) * 0.35, 0.0, 1.0);
+    vec3 body = mix(uColorDeep, uColorB, smoothstep(0.1, 1.0, press) * 0.7);
+    float fillN = 0.8 + 0.2 * snoise(vec3(vD * 1.3 - uTime * 1.5, vV * 2.0, uSeed + 5.0));
+    float fillA = uFill * (0.55 + 0.45 * press) * fillN * (1.0 - front * 0.6);
 
     // Feathered sides and hand.
     float side = 1.0 - smoothstep(1.0 - max(uEdgeFeather, 0.01), 1.0, abs(vV));
@@ -193,6 +214,7 @@ const SHEET_FRAGMENT = /* glsl */ `
       float edge = keep * (1.0 - smoothstep(thr + 0.03, thr + 0.03 + uShredEdge, field));
       // Only the strands survive the tear — the membrane goes first.
       mask *= mix(keep, keep * strand, clamp(uShred * 2.0, 0.0, 1.0));
+      fillA *= clamp(1.0 - uShred * 2.0, 0.0, 1.0);
       col += uColorFront * edge * 3.0;
     }
 
@@ -201,7 +223,9 @@ const SHEET_FRAGMENT = /* glsl */ `
     vec2 screenUV = gl_FragCoord.xy / uResolution;
     mask *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
     if (mask < 0.004) discard;
-    gl_FragColor = vec4(col * mask * uGlobalGlow * mix(1.0, uShaderIntensity, 0.5), 1.0);
+    float a = clamp(fillA * mask, 0.0, 1.0);
+    vec3 outCol = body * a + col * mask * uGlobalGlow * mix(1.0, uShaderIntensity, 0.5);
+    gl_FragColor = vec4(outCol, a);
   }
 `;
 
@@ -251,11 +275,16 @@ export function createSirenSheetMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    // Premultiplied: the filled body darkens what is behind it, the light adds.
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
       ...sheetShapeUniforms(),
+      uColorDeep: { value: new Color() },
+      uFill: { value: 0.5 },
       uStrands: { value: 9 },
       uStrandWidth: { value: 0.12 },
       uStrandGlow: { value: 3 },
@@ -304,6 +333,8 @@ export function createSirenSheetMaterial() {
     u.uColorB.value.copy(getColor(c.colorMembrane));
     u.uColorC.value.copy(getColor(c.colorAntinode));
     u.uColorFront.value.copy(getColor(c.colorEdge));
+    u.uColorDeep.value.copy(getColor(c.colorDeep));
+    u.uFill.value = c.membraneFill * g.opacity;
   };
 
   return material;
@@ -395,6 +426,9 @@ const FRONT_FRAGMENT = /* glsl */ `
   uniform float uSeed;
   uniform vec3  uColorA;
   uniform vec3  uColorB;
+  uniform vec3  uColorDeep;
+  uniform float uFill;        // the pressed air inside the front, dark
+  uniform float uFillI;       // 0..1 how present the fill is (falls off after the scream)
   uniform float uGlobalGlow;
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
@@ -429,18 +463,26 @@ const FRONT_FRAGMENT = /* glsl */ `
     float m = max(max(band.r, band.g), band.b) * env;
     vec2 screenUV = gl_FragCoord.xy / uResolution;
     float soft = softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, 0.3);
-    if (m * uIntensity * soft < 0.003) discard;
-    gl_FragColor = vec4(col * soft * uGlobalGlow, 1.0);
+    // A filled pressure disc, not a glass rim: dark teal compressed air,
+    // densest just behind each arc, so the front has body.
+    float fn = 0.75 + 0.25 * snoise(vec3(vUv * 3.0, uTime * 2.0 + uSeed));
+    float fillA = uFill * uFillI * (1.0 - smoothstep(0.82, 1.0, r)) * (0.45 + 0.55 * max(max(band.r, band.g), band.b) + 0.25) * fn;
+    fillA = clamp(fillA * soft, 0.0, 1.0);
+    vec3 deep = mix(uColorDeep, uColorB * 0.45, max(max(band.r, band.g), band.b) * 0.5);
+    if (m * uIntensity * soft < 0.003 && fillA < 0.003) discard;
+    gl_FragColor = vec4(deep * fillA + col * soft * uGlobalGlow, fillA);
   }
 `;
 
-/** The note's pressure front, standing across the line. Additive. */
+/** The note's pressure front, standing across the line. Premultiplied: a dark filled disc with light arcs. */
 export function createSirenFrontMaterial() {
   const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -456,7 +498,10 @@ export function createSirenFrontMaterial() {
       uOpen: { value: 0 },
       uSeed: { value: 0 },
       uColorA: { value: new Color() },
-      uColorB: { value: new Color() }
+      uColorB: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uFill: { value: 0.6 },
+      uFillI: { value: 1 }
     }),
     vertexShader: FRONT_VERTEX,
     fragmentShader: FRONT_FRAGMENT
@@ -480,6 +525,9 @@ export function createSirenFrontMaterial() {
     u.uSeed.value = st.seed;
     u.uColorA.value.copy(getColor(c.colorEdge));
     u.uColorB.value.copy(getColor(c.colorAntinode));
+    u.uColorDeep.value.copy(getColor(c.colorDeep));
+    u.uFill.value = c.frontFill * g.opacity;
+    u.uFillI.value = Math.min(1, st.intensity * 1.6 + (1 - st.open) * 0.5);
   };
 
   return material;
@@ -526,6 +574,10 @@ const GROUND_FRAGMENT = /* glsl */ `
   uniform vec3  uColorSand;
   uniform vec3  uColorLine;
   uniform vec3  uColorScour;
+  uniform vec3  uColorBody;   // the filled lobes of sorted dust
+  uniform float uFill;
+  uniform float uMorph;       // integrated phase: the pattern crawls between modes
+  uniform float uPulse;       // the note's swing, for the glow
   varying vec2 vP;
 
   ${noiseGLSL}
@@ -539,8 +591,17 @@ const GROUND_FRAGMENT = /* glsl */ `
     float m = max(uModes, 1.0);
     float pi = 3.14159265;
     float wob = snoise(vec3(vP * 0.8, uSeed)) * 0.08;
-    float f = cos(n * pi * (x + wob)) * cos(m * pi * (y * 0.5 + 0.5)) - cos(m * pi * (x + wob) * 0.5) * cos(n * pi * (y * 0.5 + 0.5));
+    float X = x + wob;
+    float Y = y * 0.5 + 0.5;
+    float fa = cos(n * pi * X) * cos(m * pi * Y) - cos(m * pi * X * 0.5) * cos(n * pi * Y);
+    float m2 = m + 1.0;
+    float fb = cos(n * pi * X) * cos(m2 * pi * Y) - cos(m2 * pi * X * 0.5) * cos(n * pi * Y);
+    // While the note rings the dust keeps re-sorting: the plate crawls
+    // between two neighbouring modes.
+    float mk = 0.5 - 0.5 * cos(uMorph);
+    float f = mix(fa, fb, mk * 0.65);
     float line = 1.0 - smoothstep(uLineWidth * 0.3, uLineWidth, abs(f));
+    float lobe = smoothstep(0.05, 0.45, f) + 0.45 * smoothstep(-0.05, -0.5, f);
 
     float behind = step(vP.x, uReach);
     float lip = smoothstep(uReach - 0.4, uReach, vP.x) * behind;
@@ -549,11 +610,14 @@ const GROUND_FRAGMENT = /* glsl */ `
     float lit = behind * sideFade * startFade;
 
     float grain = snoise(vec3(vP * 6.0, uSeed)) * 0.5 + 0.5;
-    vec3 col = mix(uColorScour, uColorSand, line * (0.7 + 0.3 * grain));
-    col += uColorLine * line * uLineGlow * uHeat * uGlobalGlow * uShaderIntensity;
+    // Filled plate: dark scour, saturated lobes of piled dust, pale ridges.
+    vec3 lobeCol = uColorBody * (0.55 + 0.45 * grain) * (0.8 + 0.2 * uPulse);
+    vec3 col = mix(uColorScour, lobeCol, lobe * uFill);
+    col = mix(col, uColorSand, line * (0.7 + 0.3 * grain));
+    col += uColorLine * line * uLineGlow * uHeat * (0.75 + 0.25 * uPulse) * uGlobalGlow * uShaderIntensity;
     col += uColorLine * lip * uLineGlow * 0.6;
 
-    float a = lit * max(uScour * (1.0 - line), line);
+    float a = lit * max(max(uScour * (1.0 - line), lobe * uFill * 0.9), line);
     float en = snoise(vec3(vP * 1.4, uSeed * 2.0)) * 0.5 + 0.5;
     float t = uErode * 1.3 - 0.15;
     a *= smoothstep(t, t + 0.15, mix(en, line, 0.35));
@@ -593,7 +657,11 @@ export function createSirenGroundMaterial() {
       uOpacity: { value: 1 },
       uColorSand: { value: new Color() },
       uColorLine: { value: new Color() },
-      uColorScour: { value: new Color() }
+      uColorScour: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uFill: { value: 0.8 },
+      uMorph: { value: 0 },
+      uPulse: { value: 0 }
     }),
     vertexShader: GROUND_VERTEX,
     fragmentShader: GROUND_FRAGMENT
@@ -620,8 +688,12 @@ export function createSirenGroundMaterial() {
     u.uSeed.value = st.seed;
     u.uOpacity.value = g.opacity;
     u.uColorSand.value.copy(getColor(c.colorSand));
-    u.uColorLine.value.copy(getColor(c.colorAntinode));
+    u.uColorLine.value.copy(getColor(c.colorGroundLine));
     u.uColorScour.value.copy(getColor(c.colorScour));
+    u.uColorBody.value.copy(getColor(c.colorSandBody));
+    u.uFill.value = c.groundFill;
+    u.uMorph.value = st.morph;
+    u.uPulse.value = st.pulse;
   };
 
   return material;

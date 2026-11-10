@@ -1,4 +1,5 @@
-import { Color, DoubleSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import { Color, DoubleSide, MeshDepthMaterial, NormalBlending, RGBADepthPacking, ShaderMaterial, Vector3 } from 'three';
+import { patchOnBeforeCompile } from '../../utils/shaderPatch.js';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -40,7 +41,7 @@ import { getColor } from '../../utils/color.js';
  * off the crest along the travel direction, and a thin backlit glow along the
  * crest line where spray is coming off it.
  */
-const WAVE_VERTEX = /* glsl */ `
+const WAVE_SURFACE = /* glsl */ `
   uniform float uTime;
   uniform float uSeed;
   uniform vec3  uOrigin;
@@ -61,16 +62,9 @@ const WAVE_VERTEX = /* glsl */ `
   uniform float uGrainScale;
   uniform float uCrash;
 
-  varying vec3  vWorld;
-  varying vec3  vNormalW;
-  varying float vS;
-  varying float vLat;
-  varying float vHeightFrac;
-  varying float vViewZ;
-
   ${noiseGLSL}
 
-  const float PI = 3.14159265359;
+  const float DUNE_PI = 3.14159265359;
 
   /**
    * The wave's surface at one parameter-space point, in line-local metres:
@@ -91,11 +85,11 @@ const WAVE_VERTEX = /* glsl */ `
       // Back slope: a raised cosine over the tail.
       float b = -s;
       along = -b * uTail;
-      y = H * pow(0.5 + 0.5 * cos(PI * b), 1.3);
+      y = H * pow(0.5 + 0.5 * cos(DUNE_PI * b), 1.3);
     } else {
       // Front face: the lip bulges forward over a hollow, then the face falls
       // to the toe. pow(s, 1/curlSharp) pushes the bulge toward the very top.
-      float lip = sin(PI * pow(s, 1.0 / max(uCurlSharp, 0.2)));
+      float lip = sin(DUNE_PI * pow(s, 1.0 / max(uCurlSharp, 0.2)));
       along = uLead * s * s + K * lip * (1.0 - s);
       y = H * (1.0 - pow(s, 1.25)) - K * 0.35 * lip * s;
       // As it breaks, the lip is thrown forward and comes down.
@@ -125,6 +119,16 @@ const WAVE_VERTEX = /* glsl */ `
     w.y += g * uGrain * clamp(l.y / max(uHeight, 0.05), 0.0, 1.0);
     return w;
   }
+`;
+
+const WAVE_VERTEX = /* glsl */ `
+  ${WAVE_SURFACE}
+  varying vec3  vWorld;
+  varying vec3  vNormalW;
+  varying float vS;
+  varying float vLat;
+  varying float vHeightFrac;
+  varying float vViewZ;
 
   void main() {
     float lat = position.x;
@@ -166,6 +170,8 @@ const WAVE_FRAGMENT = /* glsl */ `
   uniform vec3  uColorDark;
   uniform vec3  uColorUnder;
   uniform vec3  uColorStreak;
+  uniform vec3  uColorDeep;
+  uniform float uContact;
   uniform float uUnder;
   uniform float uAmbient;
   uniform float uStreak;
@@ -215,6 +221,11 @@ const WAVE_FRAGMENT = /* glsl */ `
     hollow *= 0.55 + 0.45 * smoothstep(0.3, -0.5, N.y);
     color = mix(color, uColorUnder * (0.5 + 0.5 * lambert), clamp(hollow * uUnder, 0.0, 1.0));
 
+    // Contact: the sand darkens to the deep stop where it meets the floor and
+    // in the lee of the crest, so the mass sits on the stone with weight.
+    float contact = 1.0 - smoothstep(0.0, max(uContact, 0.01), vWorld.y);
+    color = mix(color, uColorDeep, contact * 0.75);
+
     // Wind-blown streaks: noise stretched along the travel direction, blown
     // back off the crest. Only on the back slope and the crest itself.
     float along = dot(vWorld - uOrigin, uDir);
@@ -229,20 +240,21 @@ const WAVE_FRAGMENT = /* glsl */ `
     float rim = pow(1.0 - abs(dot(N, V)), 2.0);
     color += uColorStreak * crest * (0.4 + rim) * uCrestGlow * uGlobalGlow;
 
+    // Opaque sand. The toe and any opacity below 1 are a screen-door dither,
+    // so the wave still writes depth, occludes itself and lays a shadow.
     float alpha = uOpacity * smoothstep(0.0, max(uFloorFade, 0.005), vWorld.y);
-    vec2 screenUV = gl_FragCoord.xy / uResolution;
-    alpha *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
-    if (alpha < 0.01) discard;
+    float dither = hash13(vec3(floor(gl_FragCoord.xy), 0.0));
+    if (alpha < 0.02 || alpha < dither * 0.98) discard;
 
-    gl_FragColor = vec4(color, clamp(alpha, 0.0, 1.0));
+    gl_FragColor = vec4(color, 1.0);
   }
 `;
 
 export function createDuneWaveMaterial() {
   const material = new ShaderMaterial({
-    transparent: true,
-    // Solid sand: it has to occlude itself, or the back slope shows through
-    // the face. The floor fade still feathers the toe.
+    // Solid sand: opaque, on LAYER.SHAPED (lit, shadow-casting, kept out of
+    // the depth prepass); the floor fade is a dither.
+    transparent: false,
     depthWrite: true,
     depthTest: true,
     blending: NormalBlending,
@@ -271,6 +283,8 @@ export function createDuneWaveMaterial() {
       uColorDark: { value: new Color() },
       uColorUnder: { value: new Color() },
       uColorStreak: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uContact: { value: 0.35 },
       uUnder: { value: 0.8 },
       uAmbient: { value: 0.4 },
       uStreak: { value: 0.5 },
@@ -285,8 +299,31 @@ export function createDuneWaveMaterial() {
     fragmentShader: WAVE_FRAGMENT
   });
 
+  // The shadow: the same parameter-space surface in the depth pass. Shares the
+  // wave's uniform objects, so it moves with every slider.
+  const depth = new MeshDepthMaterial({ depthPacking: RGBADepthPacking, side: DoubleSide });
+  const shared = material.uniforms;
+  patchOnBeforeCompile(
+    depth,
+    (shader) => {
+      Object.assign(shader.uniforms, shared);
+      shader.vertexShader = shader.vertexShader
+        .replace('#include <common>', `#include <common>\n${WAVE_SURFACE}`)
+        .replace('#include <begin_vertex>', 'vec3 transformed = surfaceWorld(position.x, position.y);');
+    },
+    'dune-wave-depth'
+  );
+  material.userData.depth = depth;
+  const baseDispose = material.dispose.bind(material);
+  material.dispose = () => {
+    depth.dispose();
+    baseDispose();
+  };
+
   /**
    * @param {object} state { origin, dir, side, front, halfWidth, height, crash, seed }
+   *   and optional shape overrides { tail, lead, curl, bow, taper } (the
+   *   mound left after the break is a lower, rounder dune than the wave).
    */
   material.userData.sync = (state) => {
     const c = settings.dune;
@@ -300,12 +337,12 @@ export function createDuneWaveMaterial() {
     u.uFront.value = state.front;
     u.uHalfWidth.value = state.halfWidth;
     u.uHeight.value = Math.max(0.001, state.height);
-    u.uLead.value = c.lead;
-    u.uTail.value = c.tail;
-    u.uCurl.value = c.curl * (1 + (c.crashCurl - 1) * state.crash);
+    u.uLead.value = state.lead ?? c.lead;
+    u.uTail.value = state.tail ?? c.tail;
+    u.uCurl.value = state.curl ?? c.curl * (1 + (c.crashCurl - 1) * state.crash);
     u.uCurlSharp.value = c.curlSharp;
-    u.uBow.value = c.bow;
-    u.uEdgeTaper.value = c.edgeTaper;
+    u.uBow.value = state.bow ?? c.bow;
+    u.uEdgeTaper.value = state.taper ?? c.edgeTaper;
     u.uCrestNoise.value = c.crestNoise * g.noiseStrength * g.randomness;
     u.uCrestNoiseScale.value = c.crestNoiseScale * g.noiseFrequency;
     u.uGrain.value = c.grain * g.noiseStrength;
@@ -316,6 +353,8 @@ export function createDuneWaveMaterial() {
     u.uColorDark.value.copy(getColor(c.colorSandDark));
     u.uColorUnder.value.copy(getColor(c.colorUnderside));
     u.uColorStreak.value.copy(getColor(c.colorStreak));
+    u.uColorDeep.value.copy(getColor(c.colorSandDeep));
+    u.uContact.value = c.contactShade;
     u.uUnder.value = c.undersideDarkness;
     u.uAmbient.value = c.ambient;
     u.uStreak.value = c.streakStrength;

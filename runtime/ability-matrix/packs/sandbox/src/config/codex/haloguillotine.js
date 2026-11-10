@@ -17,7 +17,7 @@ export default {
     label: 'Halo Guillotine',
     accent: '#fff4c8',
     key: '',
-    element: 'light',
+    element: 'holy',
     hint: 'Light — a halo hinges down beside you, grows a blade of light up the line and swings it shut like a guillotine',
     cast: 'line',
     glyph: `<circle cx="20" cy="78" r="9"/><path d="M26 72L86 22"/><path d="M28 80C50 74 72 54 86 22"/><path d="M8 92H94"/>`

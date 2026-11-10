@@ -53,9 +53,15 @@ const _up = new Vector3(0, 1, 0);
  * thrown forward, a red splash dome, a ring of bent air, a knock to the camera
  * — and the floor is painted with a smeared stroke and a flung spatter.
  * Everything along the line is slammed up off its feet; the tip launches what
- * it lands on. It **lies there** a moment, still pulsing and spurting, then
- * **reels back** into the wrist, bleeding away tip-first. The spatter **dries**
- * brown and erodes.
+ * it lands on. The flash is the tip's own bloom and a light punch — local to
+ * the rupture; the screen is barely tinted. Then the **linger**: it lies there
+ * *alive* for a second and a half — swollen with pooled blood, writhing in a
+ * serpentine that crawls hand → tip, still pumping, the joints spurting, and
+ * the torn head rearing a body-height off the floor and striking down again
+ * and again (a splash and a ring each time). Under it the smear spreads into a
+ * pool, its wet sheen running down the line and welling with every beat. Then
+ * it **reels back** into the wrist, bleeding away tip-first, and the pool
+ * **dries** brown and erodes.
  *
  * Deliberately not Solar Lash: that is a horizontal sweep of additive plasma;
  * this is a vertical, opaque, lit, segmented vessel with blood in it, and the
@@ -72,7 +78,9 @@ const _up = new Vector3(0, 1, 0);
  *      the distortion layer, flash, shake, light punch.
  *   5. **blood** — droplets (spurts and the rupture fan), a hot spray, a red
  *      mist.
- *   6. **the slam** — `handlesOwnHits`: nothing is hit until the vessel comes
+ *   6. **the linger** — writhe, swell and the rearing head (`_lie`,
+ *      `_restrike`): presentation only, the hits were dealt by the slam.
+ *   7. **the slam** — `handlesOwnHits`: nothing is hit until the vessel comes
  *      down; then everything along it is thrown *up*, and the tip launches.
  *
  * ## The editor rule
@@ -126,7 +134,11 @@ export class ArterialWhipAbility extends Ability {
       pulse: 0,
       seed: 0,
       dissolve: 0,
-      flash: 0
+      flash: 0,
+      writhe: 0,
+      writhePhase: 0,
+      rear: 0,
+      thick: 1
     };
     this._splatState = {
       start: new Vector3(),
@@ -136,7 +148,9 @@ export class ArterialWhipAbility extends Ability {
       reveal: 0,
       dry: 0,
       fadeT: 0,
-      seed: 0
+      seed: 0,
+      age: 0,
+      pulse: 0
     };
     this._woundState = { center: new Vector3(), size: 0.4, intensity: 0, beat: 0, seed: 0 };
     this._tipGlowState = { center: new Vector3(), size: 0.6, intensity: 0, beat: 0, seed: 0 };
@@ -149,6 +163,9 @@ export class ArterialWhipAbility extends Ability {
     this._slammed = false;
     /** Seconds since the crack began, in beat time. */
     this._tau = 0;
+    /** Integrated serpentine phase while it lies, and the head's strike count. */
+    this._writhe = 0;
+    this._strikes = 0;
 
     this._bled = [];
     for (let i = 0; i < MAX_BLED; i++) this._bled.push({ dummy: null, time: 0, emitter: new RateEmitter() });
@@ -252,7 +269,11 @@ export class ArterialWhipAbility extends Ability {
     const bow = Math.sin(Math.PI * s) * (1 - 0.35 * s);
     out.y += (c.arch * bow + c.waveAmp * g.noiseStrength * env * Math.sin(ph)) * st.slack;
     out.addScaledVector(st.side, c.sway * g.randomness * env * Math.cos(ph * 0.7) * Math.abs(st.slack));
+    const wph = (TAU * s * L) / Math.max(c.writheLength, 0.1) - st.writhePhase;
+    out.addScaledVector(st.side, st.writhe * smoothstep(0.03, 0.25, s) * Math.sin(wph));
     out.y = Math.max(out.y, Math.max(0.01, c.rootRadius * 0.8));
+    const rs = smoothstep(Math.min(0.95, Math.max(0, c.rearFrom)), 1, s);
+    out.y += st.rear * rs * rs;
     return out;
   }
 
@@ -290,6 +311,8 @@ export class ArterialWhipAbility extends Ability {
     this._reach = 0;
     this._slammed = false;
     this._tau = 0;
+    this._writhe = 0;
+    this._strikes = 0;
 
     const st = this._shape;
     st.seed = this._seed;
@@ -297,12 +320,17 @@ export class ArterialWhipAbility extends Ability {
     st.slack = 1;
     st.dissolve = 0;
     st.flash = 0;
+    st.writhe = 0;
+    st.writhePhase = 0;
+    st.rear = 0;
+    st.thick = 1;
 
     const sp = this._splatState;
     sp.seed = this._seed;
     sp.reveal = 0;
     sp.dry = 0;
     sp.fadeT = 0;
+    sp.age = 0;
     this._woundState.seed = this._seed;
     this._tipGlowState.seed = this._seed + 5;
     this._warpState.progress = 0;
@@ -371,6 +399,7 @@ export class ArterialWhipAbility extends Ability {
     sp.dir.copy(this.direction);
     sp.side.copy(this.side);
     sp.length = Math.max(0.2, this.length - start + 0.8);
+    sp.pulse = this._pulse;
     this.splatterMaterial.userData.sync(sp);
 
     const ws = this._woundState;
@@ -491,6 +520,7 @@ export class ArterialWhipAbility extends Ability {
     _floor.copy(_fullTip).setY(0);
 
     this.splatter.visible = true;
+    this._splatState.age = 0;
     this.tipGlow.visible = true;
     this.warp.visible = true;
     this._warpState.center.copy(_floor).setY(0.1);
@@ -596,8 +626,10 @@ export class ArterialWhipAbility extends Ability {
         const r = saturate((after - hold) / Math.max(0.05, c.recoilTime));
         this._advance(dt, r > 0 ? c.recoilWave : 0.2);
         st.flash = Math.exp(-after * 10);
+        this._splatState.age += dt / Math.max(0.05, g.lifetime);
         // Lies flat, then reels back into the wrist, lifting a little.
         st.slack = r > 0 ? -c.slamDepth * (1 - r) + c.recoilSlack * Math.sin(Math.PI * r) : -c.slamDepth;
+        this._lie(dt, after, r);
         this._hand(_home).addScaledVector(this.direction, 0.2);
         _fullTip.y = 0.05;
         st.tip.lerpVectors(_fullTip, _home, Easing.inOutCubic(r));
@@ -625,6 +657,7 @@ export class ArterialWhipAbility extends Ability {
       return;
     }
 
+
     /* the fade: the spatter dries */
     const ft = saturate(t - 1);
     this._advance(dt, 0);
@@ -634,6 +667,7 @@ export class ArterialWhipAbility extends Ability {
     this.warp.visible = false;
     const sp = this._splatState;
     sp.reveal = this.length + 0.8;
+    sp.age += dt / Math.max(0.05, g.lifetime);
     sp.dry = smoothstep(0, 0.6, ft);
     sp.fadeT = smoothstep(0.5, 1, ft);
     this._syncAll();
@@ -641,6 +675,63 @@ export class ArterialWhipAbility extends Ability {
     this._updateBled(dt);
     this.pointAt(0.5 + 0.5 * (1 - ft), this.position);
     this.position.y = 0.3;
+  }
+
+  /**
+   * The linger: lying on the floor it is still alive. It thickens (blood
+   * pooled in it), writhes side to side in a serpentine that crawls hand →
+   * tip, and the torn head rears up and strikes the floor again and again —
+   * each strike a small splash and ring. All of it eases out as it reels in.
+   * Presentation only: the hits were dealt by the slam.
+   */
+  _lie(dt, after, r) {
+    const c = settings[ID];
+    const g = settings.global;
+    const st = this._shape;
+    const lie = smoothstep(0.02, Math.max(0.03, c.writheIn), after) * (1 - smoothstep(0, 0.5, r));
+    this._writhe += c.writheSpeed * dt * g.animationSpeed;
+    st.writhePhase = this._writhe;
+    st.writhe = c.writheAmp * g.noiseStrength * lie;
+    st.thick = lerp(1, c.lieThicken, lie);
+    const p = Math.max(0, after - Math.max(0.03, c.writheIn)) * c.rearRate * g.animationSpeed;
+    st.rear = c.rearHeight * lie * Math.pow(0.5 - 0.5 * Math.cos(TAU * p), 1.5);
+    const strikes = Math.floor(p);
+    if (strikes > this._strikes) {
+      this._strikes = strikes;
+      if (lie > 0.4) this._restrike();
+    }
+  }
+
+  /** The head comes down on the floor again. */
+  _restrike() {
+    const c = settings[ID];
+    const g = settings.global;
+    const power = g.explosionIntensity;
+    this._vesselPoint(1, _pos);
+    _pos.y = 0.05;
+    this._resetEmit(frame.uTime.value);
+    _dir.copy(this.direction).addScaledVector(_up, 1.2).normalize();
+    _emit.position = _pos;
+    _emit.radius = 0.2;
+    _emit.direction = _dir;
+    _emit.speed = c.dropSpeed * 0.9;
+    _emit.speedVariance = 0.5;
+    _emit.spread = 0.9;
+    _emit.size = c.dropSize * 1.1;
+    _emit.life = c.dropLife;
+    this.drops.emit(Math.round(c.restrikeDrops * g.particleCount), _emit);
+    if (c.restrikeRing > 0) {
+      this.ctx.decals.spawn(DecalType.SHOCKWAVE, _pos, {
+        radius: c.restrikeRing * power,
+        life: 0.4,
+        width: 0.05,
+        intensity: 0.8,
+        colorA: getColor(c.colorShockA),
+        colorB: getColor(c.colorShockB)
+      });
+    }
+    this.ctx.shake.add(c.restrikeShake * power, 8, 22);
+    this.lightBoost = Math.max(this.lightBoost || 0, c.lightIntensity * c.slamLight * 0.4 * power);
   }
 
   /** A little mist off the drying spatter. */
@@ -869,6 +960,19 @@ export function buildEditor(gui, c, Editor) {
   R(slam, c, 'slamLight', 0, 8, 0.01, 'light punch (× intensity)');
   slam.addColor(c, 'colorFlash').name('flash');
 
+  const lie = folder.addFolder('4b · It lies there (linger)');
+  R(lie, c, 'writheAmp', 0, 2, 0.01, 'writhe (m)');
+  R(lie, c, 'writheLength', 0.3, 10, 0.05, 'writhe wavelength (m)');
+  R(lie, c, 'writheSpeed', 0, 30, 0.1, 'writhe speed (rad/s)');
+  R(lie, c, 'writheIn', 0.03, 1, 0.01, 'comes alive after (s)');
+  R(lie, c, 'lieThicken', 0.5, 3, 0.01, 'swells (× radius)');
+  R(lie, c, 'rearHeight', 0, 4, 0.01, 'head rears (m)');
+  R(lie, c, 'rearFrom', 0, 0.95, 0.01, 'rears from (share)');
+  R(lie, c, 'rearRate', 0, 4, 0.01, 'strikes/second');
+  R(lie, c, 'restrikeDrops', 0, 300, 1, 'blood per strike');
+  R(lie, c, 'restrikeRing', 0, 6, 0.05, 'strike ring (m)');
+  R(lie, c, 'restrikeShake', 0, 1, 0.01, 'strike knock');
+
   const rupture = folder.addFolder('5 · Rupture');
   R(rupture, c, 'ruptureDrops', 0, 600, 1, 'fan of drops');
   R(rupture, c, 'ruptureSpeed', 0, 30, 0.1, 'fan speed');
@@ -893,6 +997,10 @@ export function buildEditor(gui, c, Editor) {
   R(splat, c, 'splatterSheen', 0, 3, 0.01, 'fresh sheen');
   R(splat, c, 'splatterOpacity', 0, 1, 0.01, 'opacity');
   R(splat, c, 'splatterMist', 0, 100, 1, 'mist/second off it');
+  R(splat, c, 'poolGrow', 0, 4, 0.01, 'pool spreads (× width)');
+  R(splat, c, 'poolTime', 0.05, 5, 0.01, 'spreads over (s)');
+  R(splat, c, 'poolFlow', 0, 4, 0.01, 'sheen runs (m/s)');
+  R(splat, c, 'poolPulse', 0, 4, 0.01, 'welling with each beat');
   splat.addColor(c, 'colorSplatterFresh').name('fresh');
   splat.addColor(c, 'colorSplatterDark').name('dark');
   splat.addColor(c, 'colorSplatterDry').name('dried');

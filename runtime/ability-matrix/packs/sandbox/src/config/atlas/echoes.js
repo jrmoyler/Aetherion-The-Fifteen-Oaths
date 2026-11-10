@@ -17,13 +17,16 @@ export default {
   /**
    * An illusion that turns into shrapnel.
    *
-   * Four beats. **Print**: a projector circle unfurls in the zone and three
+   * Four beats. **Print**: a disc of black glass and a projector circle
+   * unfurl in the zone, a hall of arched mirror panes comes up out of the floor
+   * round its far side, and three
    * holographic copies of the caster are printed over its nodes, slice by
    * slice from the feet up, and breathe on the caster's idle while they orbit.
    * **Swap**: at `swapAt` each copy cuts through the middle to the opposite
    * side of the ring, staggered and bowed so they thread past each other.
    * **Break**: at `lifetime` the copies shatter, one after another, into
-   * faceted mirror that flies outward. **Cut**: any body a lethal shard
+   * faceted mirror that flies outward, the panes craze, burst and sink, and
+   * the black glass cracks from the centre. **Cut**: any body a copy's shard
    * reaches goes down. The zone itself never hurts anyone.
    */
   settings: {
@@ -31,7 +34,7 @@ export default {
     "range": 16,
     "minRange": 0,
     "speed": 28, // m/s the projection thread runs to the zone
-    "lifetime": 3.4, // seconds from arrival to the first copy breaking
+    "lifetime": 2.05, // seconds from arrival to the first copy breaking
     "cooldown": 0.6,
     "castAnim": "cast2",
     "zoneRadius": 3.2,
@@ -42,18 +45,19 @@ export default {
     orbitScale: 0.62, // orbit radius, × zone radius
     orbitSpeed: 0.55, // rad/s
     faceTurn: 0, // radians off facing straight out of the circle
-    swapAt: 1.75, // seconds after arrival the swap starts
-    swapTime: 0.7, // seconds one copy takes to cross
-    swapStagger: 0.14, // seconds between one copy's crossing and the next
+    swapAt: 0.95, // seconds after arrival the swap starts
+    swapTime: 0.6, // seconds one copy takes to cross
+    swapStagger: 0.12, // seconds between one copy's crossing and the next
     swapBow: 0.45, // metres each crossing bows off the diameter
     swapPixels: 60, // burst as a copy passes the middle
 
     /* ================================================================ */
     /* 1 · HOLOGRAMS                                                      */
     /* ================================================================ */
-    assembleDelay: 0.2, // seconds after arrival the first copy starts printing
-    assembleStagger: 0.22,
-    assembleTime: 0.8,
+    copyScale: 1.45, // the copies stand this × the caster's height
+    assembleDelay: 0.12, // seconds after arrival the first copy starts printing
+    assembleStagger: 0.14,
+    assembleTime: 0.55,
     holoSlices: 26,
     holoSlideIn: 0.7, // metres a slice slides in from
     buildGlow: 3.5,
@@ -61,8 +65,8 @@ export default {
     assembleShake: 0.04,
     assembleLight: 0.8, // light punch per copy printed, × lightIntensity
     holoOpacity: 0.9,
-    holoGlow: 1.7,
-    holoFill: 0.42,
+    holoGlow: 2.1,
+    holoFill: 0.62,
     holoFresnel: 2.0,
     holoFresnelPower: 2.2,
     holoFringe: 0.35,
@@ -80,7 +84,7 @@ export default {
     glitchIdle: 0.08,
     glitchSwap: 0.75,
     glitchShatter: 1.0,
-    preShatter: 0.45, // seconds the tearing ramps up before a copy breaks
+    preShatter: 0.4, // seconds the tearing ramps up before a copy breaks
     glitchBands: 20,
     glitchRate: 14, // re-rolls per second
     glitchShift: 0.09, // metres a torn band jumps
@@ -91,8 +95,8 @@ export default {
     daisScale: 1.0, // radius, × zone radius
     daisLift: 0.03,
     daisTime: 0.4, // seconds to unfurl from the centre
-    daisGlow: 1.8,
-    daisOpacity: 0.85,
+    daisGlow: 1.4,
+    daisOpacity: 0.7,
     daisNodeGlow: 2.6,
     daisSpin: -0.6,
     daisHex: 0.6,
@@ -100,6 +104,42 @@ export default {
     daisRingLife: 0.6,
     daisShake: 0.06,
     colorDais: '#ef9dff',
+
+    /* ================================================================ */
+    /* 9 · THE HALL — arched mirror panes, solid and lit (the hero shape) */
+    /* ================================================================ */
+    paneCount: 7, // panes (max 9)
+    paneArc: 3.9, // radians of the far side they stand across (open toward you)
+    paneSeat: 1.0, // × zone radius
+    paneWidth: 1.3, // metres
+    paneHeight: 3.3, // metres to the crown of the arch
+    paneDepth: 0.09, // metres thick
+    paneLean: 0.08, // radians leaning back
+    paneSway: 0.03, // radians of slow sway while the hall stands
+    paneSwayRate: 1.3,
+    paneDelay: 0.05, // seconds after arrival the back pane starts to rise
+    paneStagger: 0.35, // seconds the wings follow by
+    paneRiseTime: 0.4,
+    paneCrackLead: 0.45, // seconds the panes craze before the break
+    paneSinkTime: 0.5, // seconds a broken pane takes to sink
+    paneShards: 8, // cosmetic shards per pane (max 8)
+    paneRoughness: 0.05,
+    paneMetalness: 1.0,
+    paneRimGlow: 1.3,
+    paneRimWidth: 0.07,
+    paneScan: 0.12,
+    paneScanDensity: 14,
+    paneCrackCells: 2.6,
+    paneCrackGlow: 4,
+    colorPane: '#d9ccf2',
+
+    /* --- 10 · black glass floor (the deep tone) --- */
+    floorScale: 1.08, // × zone radius
+    floorOpacity: 0.82,
+    floorSky: 0.55,
+    floorCrackTime: 0.5,
+    floorCrackGlow: 2.5,
+    colorFloorDeep: '#0c0618',
 
     /* ================================================================ */
     /* 3 · PROJECTOR BEAMS                                                */
@@ -119,7 +159,7 @@ export default {
     shatterStagger: 0.1,
     shardCount: 36, // per copy (max 48), × global particle count
     shardSize: 0.22, // metres
-    shardLife: 1.6,
+    shardLife: 1.5,
     shardSpeed: 11,
     shardLift: 4,
     shardSpread: 0.55,
@@ -200,7 +240,7 @@ export default {
     shatterRingLife: 0.7,
     shatterShake: 0.35,
     shakeDuration: 0.35,
-    shatterFlash: 0.35,
+    shatterFlash: 0.3,
     colorFlash: '#ffd9ff',
 
     /* --- light --- */

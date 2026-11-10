@@ -58,6 +58,15 @@ const _white = new Color(1, 1, 1);
  *      bursts into spectral glints, everything still standing in the circle is
  *      thrown outward, and the scorched spectrum fades off the floor.
  *
+ * The **travel** is its own beat: the caster throws a small spinning dart of
+ * the same crystal from the hand, riding a thread of sunlight (the *lance*)
+ * that runs back to the hand, scattering glints; where it lands the shaft
+ * opens and the great prism comes down. The prism itself is zone-scale (a
+ * three-metre stone over a 3 m circle), and everything the spectrum sweeps
+ * over is **glassed**: the floor fuses into a dark crazed mirror whose cell
+ * edges throw the spectrum, spreading outward behind the beams and staying
+ * through the scorch fade.
+ *
  * ## Layers
  *
  *   - **the glass** (`createPrismGlassMaterial`) — refraction at three indices
@@ -120,8 +129,25 @@ export class SunfallPrismAbility extends Ability {
     this.prism.visible = false;
     this.group.add(this.prism);
 
+    /* ---- the travel: a dart of the same crystal and its thread of sun ---- */
+    this.dartMaterial = createPrismGlassMaterial();
+    this.dart = new Mesh(this.prism.geometry, this.dartMaterial);
+    this.dart.layers.set(LAYER.VFX);
+    this.dart.renderOrder = 14;
+    this.dart.visible = false;
+    this.group.add(this.dart);
+    this._dartState = { charge: 1, fade: 1, seed: 0 };
+
     /* ---- the beams ---- */
     this.beamGeometry = createBeamGeometry(20);
+    this.lanceMaterial = createPrismBeamMaterial('lance');
+    this.lance = new Mesh(this.beamGeometry, this.lanceMaterial);
+    this.lance.layers.set(LAYER.VFX);
+    this.lance.frustumCulled = false;
+    this.lance.visible = false;
+    this.lance.renderOrder = 15;
+    this.group.add(this.lance);
+    this._hand = new Vector3();
 
     this.shaftMaterial = createPrismBeamMaterial('shaft');
     this.shaft = new Mesh(this.beamGeometry, this.shaftMaterial);
@@ -178,6 +204,8 @@ export class SunfallPrismAbility extends Ability {
       phases: this._phases,
       colors: this._colors,
       progress: 0,
+      field: 0,
+      fieldReach: 0,
       live: 0,
       pool: 0,
       fade: 1,
@@ -212,6 +240,7 @@ export class SunfallPrismAbility extends Ability {
     this._shapeKey = key;
     const previous = this.prism.geometry;
     this.prism.geometry = this._buildPrism();
+    this.dart.geometry = this.prism.geometry;
     previous.dispose();
   }
 
@@ -385,6 +414,9 @@ export class SunfallPrismAbility extends Ability {
     this.heat.visible = true;
     this.strike.visible = false;
     for (const beam of this.beams) beam.visible = false;
+    this.dart.visible = true;
+    this.lance.visible = false;
+    this._hand.copy(this.origin).setY(settings.prism.dartHeight);
 
     this._resolveColors();
     this._frame(0);
@@ -392,7 +424,48 @@ export class SunfallPrismAbility extends Ability {
 
   onTravel(dt) {
     this._frame(dt);
+    this._dartFx(dt, 1);
     this._travelFx(dt);
+  }
+
+  /**
+   * The dart rides the front at hand height, spinning; the lance is a thread
+   * of sun from the hand to it. Once the front lands the dart climbs into the
+   * shaft and is gone, and the lance fades over `lanceFade`.
+   */
+  _dartFx(dt, travelling) {
+    const c = settings.prism;
+    const g = settings.global;
+    const after = travelling ? 0 : saturate((this.age - this._arrivedAge) / Math.max(0.05, c.lanceFade));
+    const climb = Easing.inQuad(after);
+    _pos.copy(this.position).setY(c.dartHeight + climb * (c.hoverHeight - c.dartHeight + 1.5));
+    this.dart.position.copy(_pos);
+    this.dart.rotation.set(0.5, this.age * c.dartSpin * TAU, 0.3 + this.age * 2.3);
+    // The same stone in miniature: `dartSize` metres tip to tip.
+    const k = (c.dartSize * (1 - climb)) / Math.max(0.01, c.prismHeight);
+    this.dart.scale.set(c.prismRadius * k, c.prismHeight * k, c.prismRadius * k);
+    this.dart.visible = k * c.prismHeight > 0.01;
+    this._dartState.seed = this._seed;
+    this._dartState.fade = 1;
+    this._dartState.charge = 0.6;
+    this.dartMaterial.userData.sync(this._dartState);
+
+    const bs = this._beamState;
+    _dir.subVectors(this._hand, _pos);
+    const length = _dir.length();
+    if (length < 0.05 || after >= 1) {
+      this.lance.visible = false;
+      return;
+    }
+    _dir.divideScalar(length);
+    bs.reach = 1;
+    bs.fade = (1 - after) * (1 - after);
+    this.lanceMaterial.userData.sync(bs);
+    // Source at the dart, +Y back toward the hand.
+    this.lance.position.copy(_pos);
+    this.lance.quaternion.setFromUnitVectors(_up, _dir);
+    this.lance.scale.set(1, length, 1);
+    this.lance.visible = g.opacity > 0;
   }
 
   onImpact() {
@@ -404,6 +477,7 @@ export class SunfallPrismAbility extends Ability {
   onFade(dt) {
     if (this.phase === AbilityPhase.FADE && !this._shattered) this._shatter();
     this._frame(dt);
+    this._dartFx(dt, 0);
   }
 
   /* ------------------------------------------------------------------ */
@@ -545,6 +619,9 @@ export class SunfallPrismAbility extends Ability {
     ss.pool = shaftIn * shaftDim * (this._shattered ? 0.3 : 1);
     ss.fade = outro;
     ss.seed = this._seed;
+    // The glassed floor spreads behind the contacts and stays for the fade.
+    ss.field = this._split ? Easing.outCubic(saturate((this.age - this._splitAge) / 0.25)) : 0;
+    ss.fieldReach = this.radius * lerp(c.sweepInner, c.sweepOuter, p) + c.scorchWidth + 0.15;
     this.charMaterial.userData.sync(ss);
     this.heatMaterial.userData.sync(ss);
     this.char.position.set(centre.x, 0.025, centre.z);
@@ -833,6 +910,8 @@ export class SunfallPrismAbility extends Ability {
     this.shaft.visible = false;
     this.strike.visible = false;
     for (const beam of this.beams) beam.visible = false;
+    this.dart.visible = false;
+    this.lance.visible = false;
     this.char.visible = false;
     this.heat.visible = false;
     this._beamsLive = 0;
@@ -841,6 +920,8 @@ export class SunfallPrismAbility extends Ability {
   dispose() {
     this.prism.geometry.dispose();
     this.glassMaterial.dispose();
+    this.dartMaterial.dispose();
+    this.lanceMaterial.dispose();
     this.beamGeometry.dispose();
     this.shaftMaterial.dispose();
     this.strikeMaterial.dispose();
@@ -916,6 +997,14 @@ export function buildEditor(gui, c, Editor) {
   glass.addColor(c, 'colorGlassDeep').name('deep');
   glass.addColor(c, 'colorGlassRim').name('edges + charge');
 
+  const dart = prism.addFolder('Travel: dart + lance');
+  R(dart, c, 'dartSize', 0.05, 1.5, 0.01, 'dart size (m)');
+  R(dart, c, 'dartHeight', 0.2, 4, 0.05, 'flies at (m)');
+  R(dart, c, 'dartSpin', -6, 6, 0.05, 'dart turns/second');
+  R(dart, c, 'lanceRadius', 0.01, 0.5, 0.005, 'lance radius (m)');
+  R(dart, c, 'lanceIntensity', 0, 20, 0.05, 'lance brightness');
+  R(dart, c, 'lanceFade', 0.05, 2, 0.01, 'lance fades over (s)');
+
   const shaft = folder.addFolder('2 · Sun shaft + strike');
   R(shaft, c, 'shaftRadius', 0.1, 8, 0.05, 'radius at the floor (m)');
   R(shaft, c, 'shaftTopRadius', 0.1, 12, 0.05, 'radius at the sky (m)');
@@ -960,6 +1049,10 @@ export function buildEditor(gui, c, Editor) {
   R(scorch, c, 'scorchDecalSize', 0.05, 2, 0.01, 'ember decal radius (m)');
   R(scorch, c, 'scorchDecalLife', 0.1, 8, 0.05, 'ember decal life');
   scorch.addColor(c, 'colorChar').name('char');
+  R(scorch, c, 'fieldOpacity', 0, 1, 0.01, 'glassed floor darkness');
+  R(scorch, c, 'fieldGlow', 0, 6, 0.05, 'glassed floor spectrum');
+  R(scorch, c, 'fieldCells', 1, 20, 0.1, 'craze cells');
+  R(scorch, c, 'fieldSpin', -2, 2, 0.01, 'caustic ray turn');
 
   const fx = folder.addFolder('5 · Motes + glints');
   R(fx, c, 'moteRate', 0, 600, 1, 'motes/second');

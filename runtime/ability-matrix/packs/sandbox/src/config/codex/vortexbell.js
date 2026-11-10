@@ -15,7 +15,7 @@ export default {
     label: 'Vortex Bell',
     accent: '#d9fff6',
     key: '',
-    element: 'wind',
+    element: 'sound',
     hint: 'Wind — a great bell of streaming air drops over the circle and rings, and a rolling vortex ring blows off its rim and sweeps everything outward',
     cast: 'zone',
     glyph: `<path d="M50 14C36 14 32 26 32 40C32 56 28 64 18 70H82C72 64 68 56 68 40C68 26 64 14 50 14Z"/><ellipse cx="50" cy="82" rx="38" ry="8"/><circle cx="50" cy="74" r="4"/>`

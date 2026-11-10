@@ -1,4 +1,5 @@
 import {
+  Color,
   InstancedBufferAttribute,
   InstancedBufferGeometry,
   InstancedMesh,
@@ -13,10 +14,15 @@ import {
   createPolarityFlareMaterial,
   createPolarityLensMaterial,
   createPolarityMineMaterial,
+  createPolarityPillarMaterial,
   createPolarityPlotMaterial,
   createPolarityTetherMaterial
 } from '../../materials/atlas/PolarityGardenMaterials.js';
-import { createCapsuleMineGeometry, createTetherRibbonGeometry } from '../../assets/atlas/PolarityGardenGeometry.js';
+import {
+  createCapsuleMineGeometry,
+  createFluxTubeGeometry,
+  createTetherRibbonGeometry
+} from '../../assets/atlas/PolarityGardenGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
 import { DecalType } from '../../effects/GroundDecals.js';
@@ -50,6 +56,8 @@ const _b = new Vector3();
 const _ctrl = new Vector3();
 const _node = new Object3D();
 const _up = new Vector3(0, 1, 0);
+const _deep = new Color();
+const _rim = new Color();
 
 /**
  * POLARITY GARDEN — a planted trap that goes off in order.
@@ -83,6 +91,13 @@ const _up = new Vector3(0, 1, 0);
  *      and SCORCH decals, STREAK sparks, SMOKE, flash, shake, light.
  *   5. **the lenses** — LAYER.DISTORTION: a ring of warp per detonation, and
  *      a faint magnetic shear over the lattice while it is armed.
+ *   6. **the flux pillars** — a lathed hourglass column of field over every
+ *      planted capsule (`createFluxTubeGeometry` + `createPolarityPillarMaterial`),
+ *      red over +, blue over −, flux flowing up out of + and down into −. They
+ *      rise as a capsule plants, swell with the lattice, pulse with the blink
+ *      and, when their capsule goes, shoot up and burn out — so each pole and
+ *      the cascade's order read from across the arena. The field plot also
+ *      stamps a halo ring and a pulsing core on the floor under every pole.
  *
  * ## The bodies
  *
@@ -195,6 +210,22 @@ export class PolarityGardenAbility extends Ability {
     this.lens.frustumCulled = false;
     this.lens.visible = false;
     this.group.add(this.lens);
+
+    /* ---- layer 6: the flux pillars ---- */
+    this.pillarGeometry = new InstancedBufferGeometry().copy(createFluxTubeGeometry(28, 18));
+    this.pillarCentre = new InstancedBufferAttribute(new Float32Array(MAX_MINES * 4), 4);
+    this.pillarData = new InstancedBufferAttribute(new Float32Array(MAX_MINES * 4), 4);
+    this.pillarGeometry.setAttribute('aCentre', this.pillarCentre);
+    this.pillarGeometry.setAttribute('aPillar', this.pillarData);
+    this.pillarGeometry.instanceCount = 0;
+    this.pillarMaterial = createPolarityPillarMaterial();
+    this.pillars = new Mesh(this.pillarGeometry, this.pillarMaterial);
+    this.pillars.name = 'PolarityPillars';
+    this.pillars.layers.set(LAYER.VFX);
+    this.pillars.renderOrder = 11;
+    this.pillars.frustumCulled = false;
+    this.pillars.visible = false;
+    this.group.add(this.pillars);
 
     /* ---- per-cast records: dice and latches ---- */
     this._mines = [];
@@ -401,6 +432,8 @@ export class PolarityGardenAbility extends Ability {
     this.plot.visible = false;
     this.flares.visible = false;
     this.lens.visible = false;
+    this.pillars.visible = false;
+    this.pillarGeometry.instanceCount = 0;
     this._writeOrder(this._ringCount());
   }
 
@@ -639,7 +672,8 @@ export class PolarityGardenAbility extends Ability {
     ps.quadSize = radius * 2.6;
     const form = saturate((t - this._formStart()) / Math.max(0.02, c.tetherForm * s));
     const fade = this.phase === AbilityPhase.FADE ? 1 - saturate(this.fadeTime / this.fadeDuration) : 1;
-    ps.strength = Easing.outCubic(form) * fade;
+    // The field exists the moment a pole is planted; the lattice brings it to full.
+    ps.strength = (c.plotPlanted + (1 - c.plotPlanted) * Easing.outCubic(form)) * fade;
 
     let k = 0;
     const total = n + (this._hasCentre() ? 1 : 0);
@@ -691,13 +725,17 @@ export class PolarityGardenAbility extends Ability {
     const time = frame.uTime.value;
 
     _pos.set(m.x, 0, m.z);
+    // The burst stays in the pole's colour: a saturated rim over a deep
+    // polarity body, never a white shell (the white went to a pinpoint).
+    _rim.copy(tint).lerp(getColor(c.colorFlareCore), c.burstWhite);
+    _deep.copy(tint).multiplyScalar(c.burstDeep);
     this.ctx.decals.spawn(DecalType.SHOCKWAVE, _pos, {
       radius: c.shockRadius * finale * power,
       life: c.shockLife,
       width: 0.07,
-      intensity: 1.2,
-      colorA: getColor(c.colorFlareCore),
-      colorB: tint
+      intensity: c.shockIntensity,
+      colorA: _rim,
+      colorB: _deep
     });
     this.ctx.decals.spawn(DecalType.SCORCH, _pos, {
       radius: c.scorchRadius * finale,
@@ -712,9 +750,9 @@ export class PolarityGardenAbility extends Ability {
       endRadius: c.burstRadius * finale * power,
       life: c.burstLife,
       intensity: c.burstIntensity,
-      colorA: getColor(c.colorFlareCore),
-      colorB: tint,
-      colorC: getColor(c.colorSparkC)
+      colorA: _deep,
+      colorB: _deep,
+      colorC: _rim
     });
 
     // Sparks: a hemisphere, low and fast.
@@ -847,6 +885,65 @@ export class PolarityGardenAbility extends Ability {
     this.flares.visible = anyFlare;
     this.lens.visible = anyLens;
     this.flareMaterial.userData.sync();
+  }
+
+  /**
+   * The flux pillars, closed-form from each capsule's landing and detonation
+   * times: rise on planting, swell with the lattice, pulse with the blink,
+   * shoot up and burn out on detonation.
+   */
+  _updatePillars() {
+    const c = settings.polarity;
+    const s = this._scale();
+    const t = this.age;
+    const n = this._ringCount();
+    const total = n + (this._hasCentre() ? 1 : 0);
+    const C = this.pillarCentre.array;
+    const P = this.pillarData.array;
+    const rise = Math.max(0.02, c.pillarRise * s);
+    const blast = Math.max(0.02, c.pillarBlast);
+    const form = Easing.outCubic(saturate((t - this._formStart()) / Math.max(0.02, c.tetherForm * s)));
+    const fade = this.phase === AbilityPhase.FADE ? 1 - saturate(this.fadeTime / this.fadeDuration) : 1;
+    let used = 0;
+    for (let k = 0; k < total; k++) {
+      const i = this._mineIndex(k, n);
+      const m = this._mines[i];
+      if (!m.landed) continue;
+      const landAt = this._landAt(i, n);
+      const detAt = this._detonateAt(i);
+      const centre = i === MAX_RING ? c.pillarCentreScale : 1;
+      let height;
+      let width;
+      let alpha;
+      if (!m.detonated) {
+        const up = Easing.outBack(saturate((t - landAt) / rise));
+        const pulse = m.blink - Math.floor(m.blink) < c.blinkDuty ? 1 : 0;
+        const heat = saturate(1 - (detAt - t) / Math.max(0.02, 0.28 * s));
+        height = up * (0.55 + 0.45 * form) * (1 + heat * 0.35);
+        width = (0.8 + 0.2 * form) * (1 + pulse * 0.06 + heat * 0.25);
+        alpha = saturate(up) * (0.55 + 0.45 * form) * (0.85 + pulse * 0.25) * (1 + heat * 1.5);
+      } else {
+        const b = (t - detAt) / blast;
+        if (b >= 1) continue;
+        height = 1 + Easing.outCubic(b) * c.pillarBlastHeight;
+        width = 1 - 0.7 * b;
+        alpha = (1 - b) * (1 - b) * c.pillarBlastGlow;
+      }
+      C[used * 4 + 0] = m.x;
+      C[used * 4 + 1] = Math.max(0, m.y);
+      C[used * 4 + 2] = m.z;
+      C[used * 4 + 3] = m.angle * 7.3 + i * 1.7;
+      P[used * 4 + 0] = i === MAX_RING ? 1 : i % 2 === 0 ? 1 : -1;
+      P[used * 4 + 1] = height * centre;
+      P[used * 4 + 2] = width * centre;
+      P[used * 4 + 3] = alpha * fade;
+      used++;
+    }
+    this.pillarGeometry.instanceCount = used;
+    this.pillars.visible = used > 0;
+    this.pillarCentre.needsUpdate = true;
+    this.pillarData.needsUpdate = true;
+    this.pillarMaterial.userData.sync();
   }
 
   /* ------------------------------------------------------------------ */
@@ -1001,6 +1098,7 @@ export class PolarityGardenAbility extends Ability {
     this._checkDetonations();
     this._updateTethers();
     this._updatePlot();
+    this._updatePillars();
     this._updateFlares();
     this._trailFx(dt);
     this._crackleFx(dt);
@@ -1039,6 +1137,8 @@ export class PolarityGardenAbility extends Ability {
     this.plot.visible = false;
     this.flares.visible = false;
     this.lens.visible = false;
+    this.pillars.visible = false;
+    this.pillarGeometry.instanceCount = 0;
     this._lineCount = 0;
     this._targets.length = 0;
   }
@@ -1054,6 +1154,8 @@ export class PolarityGardenAbility extends Ability {
     this.flareMaterial.dispose();
     this.lensGeometry.dispose();
     this.lensMaterial.dispose();
+    this.pillarGeometry.dispose();
+    this.pillarMaterial.dispose();
     this.mines.dispose();
     super.dispose();
   }
@@ -1138,6 +1240,25 @@ export function buildEditor(gui, c, Editor) {
   tethers.addColor(c, 'colorTetherCore').name('core');
   R(tethers, c, 'plotGlow', 0, 4, 0.01, 'floor field glow');
   R(tethers, c, 'plotReach', 0.3, 2.5, 0.01, 'floor field reach (× zone)');
+  R(tethers, c, 'plotContour', 0, 1.5, 0.01, 'floor contour lines');
+  R(tethers, c, 'plotPlanted', 0, 1, 0.01, 'floor field before lattice');
+  R(tethers, c, 'poleRing', 0.1, 2, 0.01, 'pole halo radius (m)');
+  R(tethers, c, 'poleGlow', 0, 4, 0.01, 'pole halo glow');
+
+  /* ---- layer 6 ---- */
+  const pillars = folder.addFolder('2b · Flux pillars');
+  R(pillars, c, 'pillarHeight', 0, 6, 0.01, 'height (m)');
+  R(pillars, c, 'pillarRadius', 0.05, 2, 0.01, 'base radius (m)');
+  R(pillars, c, 'pillarCentreScale', 0.5, 3, 0.01, 'centre pillar (×)');
+  R(pillars, c, 'pillarGlow', 0, 8, 0.05, 'glow');
+  R(pillars, c, 'pillarLines', 1, 24, 1, 'field lines round');
+  R(pillars, c, 'pillarTwist', -6, 6, 0.05, 'twist');
+  R(pillars, c, 'pillarFlow', -6, 6, 0.05, 'flux flow');
+  R(pillars, c, 'pillarRise', 0.02, 1.5, 0.01, 'rises over (s)');
+  R(pillars, c, 'pillarBlast', 0.05, 1.5, 0.01, 'burns out over (s)');
+  R(pillars, c, 'pillarBlastHeight', 0, 4, 0.05, 'shoots up (× height)');
+  R(pillars, c, 'pillarBlastGlow', 0, 4, 0.05, 'blast brightness');
+  R(pillars, c, 'pillarCoreMix', 0, 1, 0.01, 'white at the base');
 
   /* ---- layer 3 ---- */
   const cascade = folder.addFolder('3 · Cascade');
@@ -1154,6 +1275,11 @@ export function buildEditor(gui, c, Editor) {
   R(cascade, c, 'flareLife', 0.05, 1.5, 0.01, 'star life (s)');
   R(cascade, c, 'flareSpikes', 2, 16, 1, 'star spikes');
   R(cascade, c, 'flareGlow', 0, 20, 0.1, 'star glow');
+  R(cascade, c, 'flareDark', 0, 1, 0.01, 'star dark heart');
+  R(cascade, c, 'flareHot', 0, 3, 0.01, 'star white pinpoint');
+  R(cascade, c, 'burstWhite', 0, 1, 0.01, 'burst rim whiteness');
+  R(cascade, c, 'burstDeep', 0, 1, 0.01, 'burst body (× pole colour)');
+  R(cascade, c, 'shockIntensity', 0, 4, 0.05, 'shockwave brightness');
   R(cascade, c, 'burstRadius', 0.1, 5, 0.01, 'burst radius (m)');
   R(cascade, c, 'burstLife', 0.05, 2, 0.01, 'burst life (s)');
   R(cascade, c, 'burstIntensity', 0, 5, 0.05, 'burst intensity');

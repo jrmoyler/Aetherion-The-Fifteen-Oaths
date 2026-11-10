@@ -3461,7 +3461,20 @@ export class Editor {
     const R = Editor.range;
 
     folder.add(d, 'enabled').name('enabled');
-    R(folder, d, 'count', 0, 16, 1, 'how many');
+    R(folder, d, 'count', 0, 24, 1, 'how many');
+    // Who stands, and how (combat/DummyArchetypes.js). A new formation takes
+    // the next time a body stands; the Targets panel re-forms them at once.
+    folder.add(d, 'formation', ['ring', 'line', 'cluster', 'gauntlet', 'scatter']).name('formation');
+    const mix = folder.addFolder('Archetype mix');
+    for (const id of ['standard', 'armored', 'runner', 'giant', 'caster']) R(mix, d.mix, id, 0, 4, 1, id);
+    const kinds = folder.addFolder('Archetype rules');
+    R(kinds, d.archetypes, 'armorHits', 0, 8, 1, 'armored: hits shrugged');
+    R(kinds, d.archetypes, 'runnerSpeed', 0, 4, 0.05, 'runner: strafe speed');
+    R(kinds, d.archetypes, 'runnerRange', 0, 6, 0.1, 'runner: strafe reach, m');
+    R(kinds, d.archetypes, 'giantScale', 1, 2, 0.01, 'giant: scale (on respawn)');
+    R(kinds, d.archetypes, 'giantImpulse', 0, 1, 0.01, 'giant: blow taken');
+    R(kinds, d.archetypes, 'shieldUp', 0.2, 10, 0.1, 'caster: shield up, s');
+    R(kinds, d.archetypes, 'shieldDown', 0.2, 12, 0.1, 'caster: shield down, s');
 
     const ring = folder.addFolder('Where they stand');
     R(ring, d, 'radius', 4, 40, 0.5, 'ring radius');

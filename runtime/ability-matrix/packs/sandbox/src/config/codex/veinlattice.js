@@ -48,33 +48,40 @@ export default {
     netGaps: 0.22, // share of links dropped
     veinBow: 0.35, // veins bow sideways between knots
     topCurl: 0.38, // the top row leans in (× radius)
-    veinThickness: 0.13, // m, at the trunks
+    veinThickness: 0.16, // m, at the trunks
     sway: 0.04, // a living sway (rad)
     netSeed: 3, // re-rolls the net's shape
 
     // ---- 1b · tissue ----
-    colorSkin: '#3e0c1a',
-    colorSkinDark: '#1e0610',
+    // four-stop ramp: deep (the mottled skin) → body → tint (blood) → hot
+    colorSkin: '#2a040c', // deep, light
+    colorSkinDark: '#0c0104', // deep, dark — carries the shadowed side
+    colorVeinBody: '#3e0612', // saturated body, sunlit
+    colorBlood: '#e8213c', // tint — blood through the skin, the pulses
+    colorVeinHot: '#ffc4cc', // hot — pulse crests on the beat (HDR)
     colorCapillary: '#a0102a',
-    colorBlood: '#ff2a44',
-    colorRim: '#ff5a70',
+    colorRim: '#901024', // light through the silhouette
+    rampBody: 0.42, // how far sunlight alone carries the ramp
+    hotBoost: 1.6, // HDR on the hot stop only (bloom)
+    tissueBump: 0.32, // knotted tissue — normal wander
+    specularPower: 70, // wet highlight tightness
     mottle: 0.7,
     capillaries: 0.55,
-    skinDiffuse: 0.75,
-    skinAmbient: 0.22,
-    skinSpecular: 0.5,
-    coreGlow: 0.35, // blood glowing through the skin
-    rimGlow: 0.5,
+    skinDiffuse: 0.9,
+    skinAmbient: 0.12,
+    skinSpecular: 0.9,
+    coreGlow: 0.3, // blood glowing through the skin
+    rimGlow: 0.4,
     pulseGlow: 3, // the pulses running up
     pulseFreq: 2.2, // pulses on a vein at once
     pulseSpeed: 1.6, // pulses per second
-    pulseBulge: 0.45, // a pulse swells the tube
-    beatGlow: 2.5,
+    pulseBulge: 0.55, // a pulse swells the tube
+    beatGlow: 3.6,
 
     // ---- 2 · the heartbeat ----
     beatRate: 1.5, // beats per second
-    beatSwell: 0.35, // tubes swell on a beat
-    beatSqueeze: 0.09, // the lattice constricts on a beat (× radius)
+    beatSwell: 0.55, // tubes swell on a beat
+    beatSqueeze: 0.16, // the lattice constricts on a beat (× radius)
     beatShake: 0.18,
     beatLight: 14, // light punch per beat
     throbStrength: 0.6, // air bend per beat
@@ -95,14 +102,14 @@ export default {
     beatRingSpeed: 9, // m/s
 
     // ---- 5 · drops, mist, motes ----
-    dropCount: 6, // per knot per beat
+    dropCount: 14, // per knot per beat
     dropSpeed: 3.5,
-    dropSize: 0.07,
+    dropSize: 0.14,
     dropLifetime: 0.9,
     dropGravity: -12,
-    dripRate: 30,
-    colorDropA: '#ff4b60',
-    colorDropB: '#c8122c',
+    dripRate: 70,
+    colorDropA: '#ff6a7c',
+    colorDropB: '#d0142e',
     colorDropC: '#7a0716',
     colorDropD: '#3a0008',
     mistRate: 18,
@@ -113,8 +120,8 @@ export default {
     colorMistB: '#3e0410',
     colorMistC: '#22030a',
     colorMistD: '#0e0104',
-    moteRate: 70,
-    moteSize: 0.07,
+    moteRate: 140,
+    moteSize: 0.11,
     moteRise: 1.2,
     moteLifetime: 1.2,
     moteGlow: 2.2,

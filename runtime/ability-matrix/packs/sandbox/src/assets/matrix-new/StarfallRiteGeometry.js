@@ -83,3 +83,44 @@ export function createMeteorGeometry(capacity) {
   base.setIndex(new BufferAttribute(index, 1));
   return instanced(base, capacity, { aHead: 4, aTail: 4 });
 }
+
+/**
+ * The fallen star itself — the hero solid. A five-pointed star ornament:
+ * ten rim vertices alternating a point (radius 1) and a notch (radius 0.42)
+ * in the XY plane, each joined to a front apex (z = +0.36) and a back apex
+ * (z = −0.36). Twenty flat facets that catch the sun, so it reads as a cut
+ * crystal from any side; non-indexed with flat normals.
+ *
+ * Per instance it carries `aHeat` (0..1, white-hot at landing, cooling) and
+ * `aSeed`, written in place by the ability. Unit radius; the ability scales
+ * it to `crystalSize` metres.
+ */
+export function createStarCrystalGeometry(capacity) {
+  const rim = [];
+  for (let k = 0; k < 10; k++) {
+    const a = Math.PI / 2 + (k / 10) * Math.PI * 2;
+    const r = k % 2 ? 0.42 : 1;
+    rim.push([Math.cos(a) * r, Math.sin(a) * r, 0]);
+  }
+  const front = [0, 0, 0.36];
+  const back = [0, 0, -0.36];
+  const positions = [];
+  for (let k = 0; k < 10; k++) {
+    const a = rim[k];
+    const b = rim[(k + 1) % 10];
+    positions.push(...front, ...a, ...b);
+    positions.push(...back, ...b, ...a);
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(new Float32Array(positions), 3));
+  geometry.computeVertexNormals();
+  geometry.setAttribute('aHeat', new InstancedBufferAttribute(new Float32Array(capacity), 1));
+  geometry.setAttribute('aSeed', new InstancedBufferAttribute(new Float32Array(capacity), 1));
+  geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
+  return geometry;
+}
+
+/** The floor the constellation is re-drawn on: one quad, laid flat by the ability. */
+export function createStarFieldGeometry() {
+  return unitQuad();
+}

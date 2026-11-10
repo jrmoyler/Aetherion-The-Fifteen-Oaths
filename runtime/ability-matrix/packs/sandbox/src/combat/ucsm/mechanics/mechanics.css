@@ -1,0 +1,68 @@
+.mechanic-controls {
+  position: fixed;
+  left: 340px;
+  top: 20px;
+  z-index: 30;
+  width: 270px;
+  max-width: 90vw;
+  max-height: 65vh;
+  overflow: auto;
+  background: #101923ed;
+  color: #e8edf5;
+  border: 1px solid #435268;
+  border-radius: 6px;
+  padding: 12px;
+  font:
+    12px/1.45 system-ui,
+    sans-serif;
+  pointer-events: auto;
+}
+.mechanic-controls summary {
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  min-height: 28px;
+}
+.mechanic-controls:not([open]) {
+  width: auto;
+  max-width: min(200px, 45vw);
+  padding: 6px 10px;
+}
+.mechanic-controls button {
+  display: block;
+  text-align: left;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px;
+  margin-top: 6px;
+  background: #1b293b;
+  color: inherit;
+  border: 1px solid #435268;
+  border-radius: 4px;
+  font: inherit;
+  cursor: pointer;
+}
+.mechanic-controls button:hover {
+  background: #2b3b50;
+}
+.mechanic-controls button[aria-pressed='true'] {
+  border-color: #e9b75b;
+  color: #ffe0a2;
+}
+.mechanic-controls button:focus-visible,
+.mechanic-controls summary:focus-visible {
+  outline: 2px solid #e9b75b;
+  outline-offset: 2px;
+}
+.mechanic-controls p {
+  margin: 8px 0;
+  color: #c4d0e0;
+}
+@media (max-width: 900px) {
+  .mechanic-controls {
+    top: 145px;
+    left: 8px;
+    max-height: 45vh;
+    width: 245px;
+  }
+}

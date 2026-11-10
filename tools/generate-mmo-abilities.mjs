@@ -1,14 +1,27 @@
-// Generates the Babylon gameplay adaptation from the pinned CASTABLE_REGISTRY.json.
+// Generates the gameplay catalog from the pinned CASTABLE_REGISTRY.json and shared/ability-supplement.json.
 // Sandbox timings are rescaled into MMO cooldowns / mana costs; source fields are kept for traceability.
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 /** Validate source identity before adapting settings into the gameplay budget. */
+export const SECONDARY_ELEMENT_OATH = Object.freeze({
+  crystal: 'oath-05', sound: 'oath-06', holy: 'oath-09', gravity: 'oath-10',
+  void: 'oath-11', illusion: 'oath-13', motion: 'oath-14', force: 'oath-15',
+});
+
 export function generateAbilities(reg, supplement) {
   for (const source of [reg, supplement]) {
     if (!/^[a-f0-9]{40}$/.test(source.sourceCommit)) throw new Error('Missing pinned ability source revision');
   }
   const elementToOath = Object.fromEntries(reg.elements.map((e) => [e.sourceElementId, e.oathId]));
+  const oathElement = Object.fromEntries(reg.elements.map((e) => [e.oathId, e.sourceElementId]));
+  // Ability Matrix grew from 15 to 23 elements. Canon keeps exactly fifteen Oaths, and eight of them already
+  // carry a paired force in their name (Earth & Crystal, Wind & Sound, ...), so each newer element joins that Oath.
+  for (const [element, oath] of Object.entries(SECONDARY_ELEMENT_OATH)) {
+    if (elementToOath[element]) throw new Error(`Secondary element collides with a registry element: ${element}`);
+    elementToOath[element] = oath;
+  }
+  const revisions = supplement.elementRevisions ?? {};
   const out = {};
   const originalIds = new Set(reg.castables.map(c => c.sourceCatalog.uid));
   const seen = new Set();
@@ -19,7 +32,8 @@ export function generateAbilities(reg, supplement) {
     if (!preset || preset.uid !== s.uid || preset.pack !== s.pack || preset.id !== s.id || preset.element !== s.element) {
       throw new Error(`Preset identity mismatch: ${s.uid}`);
     }
-    if (s.uid !== `${s.pack}/${s.id}`) throw new Error(`Malformed ability uid: ${s.uid}`);
+    // Matrix Expansion keeps an engine id (exp-...) that differs from its public uid slug.
+    if (s.pack === 'matrix-expansion' ? !/^matrix-expansion\/[a-z0-9-]+$/.test(s.uid) : s.uid !== `${s.pack}/${s.id}`) throw new Error(`Malformed ability uid: ${s.uid}`);
     const set = preset.settings ?? {};
     for (const [key, value] of Object.entries({ range: s.range, minRange: s.minRange, zoneRadius: s.zoneRadius, cooldown: s.cooldown,
       settingsRange: set.range, settingsRadius: set.radius, settingsZoneRadius: set.zoneRadius, speed: set.speed })) {
@@ -33,13 +47,17 @@ export function generateAbilities(reg, supplement) {
     const radius = shape === 'self' ? 0 : s.zoneRadius ?? set.zoneRadius ?? set.radius ?? (shape === 'zone' ? 5 : shape === 'line' ? 1.2 : 0);
     const range = shape === 'self' ? 0 : Math.min(30, Math.max(8, s.range ?? set.range ?? 18));
     (out[oath] ??= []).push({
-      id: s.uid, name: s.label, element: s.element, kind: s.kind, shape,
+      // `element` drives reactions and statuses in the simulation, so it is always the Oath's own force;
+      // `school` is the castable's element in the current Ability Matrix (crystal, sound, void, ...).
+      id: s.uid, name: s.label, element: oathElement[oath], school: revisions[s.uid] ?? s.element, kind: s.kind, shape,
       sourceShape: s.cast ?? s.kind,
       sourceCommit: originalIds.has(s.uid) ? reg.sourceCommit : supplement.sourceCommit,
       sourceMinRange: s.minRange ?? set.minRange ?? 0,
       accent: s.accent, range, radius: Math.round(Math.min(9, Math.max(0, radius)) * 10) / 10,
       speed: set.speed ?? null, sourceCooldown: s.cooldown, castAnim: s.castAnim ?? null,
       glyph: s.glyph?.replace(/\s+/g, ' ') ?? null,
+      // Source rules text, kept only where the matrix wrote more than the ability's name.
+      ...(s.hint && s.hint !== s.label ? { hint: s.hint } : {}),
     });
   }
   // Deterministic kit assignment: ninja prefers line/self, sorcerer prefers zone/summon.

@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial } from 'three';
+import { AdditiveBlending, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
@@ -94,6 +94,9 @@ const MOON_FRAGMENT = /* glsl */ `
   uniform vec3  uColorRim;
   uniform vec3  uColorHalo;
   uniform float uGlobalGlow;
+  uniform float uShade;       // 0..1 how dark the night side of the sphere is
+  uniform vec3  uShadeDir;    // view-space direction the moon is lit from
+  uniform float uBeat;        // 0..1 the rite's heartbeat thump
 
   varying vec2 vLocal;
 
@@ -136,13 +139,18 @@ const MOON_FRAGMENT = /* glsl */ `
       tone = clamp(tone, 0.0, 1.4) * mix(0.35, 1.0, limb);
 
       color = mix(uColorDark, uColorLight, clamp(tone, 0.0, 1.0)) * (0.6 + 0.4 * tone);
+      // A terminator: lit from one side, so it reads as a sphere hung in the
+      // sky rather than a disc - the night side falls to the deep stop.
+      float lit = smoothstep(-0.1, 0.45, dot(n, normalize(uShadeDir)));
+      color *= mix(1.0 - uShade, 1.0, lit);
+      color += uColorHalo * uBeat * 0.35 * (1.0 - lit);
       alpha = disc;
     }
 
     // A thin bright rim right on the limb, and the halo beyond it.
     float d = max(r - 1.0, 0.0);
     float rimLine = exp(-abs(r - 1.0) / max(uRimWidth, 1e-3)) * uRimGlow;
-    float halo = exp(-d * uHaloFalloff) * uHalo * (1.0 - disc * 0.6);
+    float halo = exp(-d * uHaloFalloff) * uHalo * (1.0 - disc * 0.6) * (1.0 + uBeat * 0.6);
     // The halo must die before the quad's edge or it prints a square.
     halo *= 1.0 - smoothstep(uHaloReach * 0.7, uHaloReach, r);
 
@@ -187,17 +195,23 @@ export function createCrimsonMoonMaterial() {
       uColorLight: { value: new Color() },
       uColorDark: { value: new Color() },
       uColorRim: { value: new Color() },
-      uColorHalo: { value: new Color() }
+      uColorHalo: { value: new Color() },
+      uShade: { value: 0.7 },
+      uShadeDir: { value: new Vector3(-0.6, 0.35, 0.72) },
+      uBeat: { value: 0 }
     }),
     vertexShader: MOON_VERTEX,
     fragmentShader: MOON_FRAGMENT
   });
 
-  /** @param {object} state { size, spin, fade, seed } */
+  /** @param {object} state { size, spin, fade, seed, beat } */
   material.userData.sync = (state) => {
     const c = settings.crimson;
     const g = settings.global;
     const u = material.uniforms;
+    u.uBeat.value = state.beat ?? 0;
+    u.uShade.value = c.moonShade;
+    u.uShadeDir.value.set(Math.sin(c.moonShadeAngle), 0.35, Math.cos(c.moonShadeAngle));
     const reach = Math.max(1.05, c.moonHaloReach);
     u.uSize.value = Math.max(0.05, state.size ?? c.moonRadius) * reach;
     u.uHaloReach.value = reach;
@@ -465,6 +479,12 @@ const POOL_FRAGMENT = /* glsl */ `
   uniform vec3  uLightDir;
   uniform sampler2D uEnvMap;
   uniform float uGlobalGlow;
+  uniform float uGlow;        // light welling up through the blood
+  uniform float uVeinScale;
+  uniform float uBeatR;       // metres the heartbeat ring has run out to (<0 none)
+  uniform float uBeatAmp;     // 0..1 its strength
+  uniform vec3  uColorGlow;
+  uniform vec3  uColorHot;
 
   varying vec2 vFlat;
   varying vec3 vWorld;
@@ -484,7 +504,10 @@ const POOL_FRAGMENT = /* glsl */ `
   float heightAt(vec2 p, float edge) {
     float men = smoothstep(-uFeather * 4.0, 0.0, edge) * uMeniscus;
     float rip = snoise(vec3(p * uRippleScale, uTime * 0.6 + uSeed)) * uRipple;
-    return men + rip;
+    // The heartbeat: a swell running out from the middle.
+    float bd = (length(p) - uBeatR) / 0.18;
+    float beat = exp(-bd * bd) * uBeatAmp * step(0.0, uBeatR) * 0.05;
+    return men + rip + beat;
   }
 
   void main() {
@@ -532,6 +555,14 @@ const POOL_FRAGMENT = /* glsl */ `
     vec3 stain = uColorStain * (1.0 - tide * 0.6) * (1.0 - craze * uDry);
     vec3 color = mix(wetColor, stain, uDry);
 
+    // Light welling up through the blood: veins of saturated red in the deep
+    // body, slowly crawling, brightest where the heartbeat ring passes.
+    float veins = pow(clamp(ridged(vec3(vFlat * uVeinScale, uTime * 0.25 + uSeed), 4), 0.0, 1.0), 4.0);
+    float bd = (length(vFlat) - uBeatR) / 0.25;
+    float ring = exp(-bd * bd) * uBeatAmp * step(0.0, uBeatR);
+    float inner = (0.25 + veins) * (1.0 - smoothstep(-uGrown * 0.15, 0.0, edge));
+    color += (uColorGlow * (inner + ring * 1.5) + uColorHot * ring * veins) * uGlow * wet * uGlobalGlow;
+
     float alpha = cover * uOpacity * uFade * mix(1.0, 0.75 + tide * 0.25, uDry);
     gl_FragColor = vec4(color * mix(uGlobalGlow, 1.0, 0.5), alpha);
   }
@@ -571,17 +602,29 @@ export function createCrimsonPoolMaterial() {
       uColorWet: { value: new Color() },
       uColorDeep: { value: new Color() },
       uColorSpec: { value: new Color() },
-      uColorStain: { value: new Color() }
+      uColorStain: { value: new Color() },
+      uGlow: { value: 0.5 },
+      uVeinScale: { value: 1.4 },
+      uBeatR: { value: -1 },
+      uBeatAmp: { value: 0 },
+      uColorGlow: { value: new Color() },
+      uColorHot: { value: new Color() }
     }),
     vertexShader: GROUND_VERTEX,
     fragmentShader: POOL_FRAGMENT
   });
 
-  /** @param {object} state { quadSize, grown, dry, fade, seed } */
+  /** @param {object} state { quadSize, grown, dry, fade, seed, beatR, beatAmp } */
   material.userData.sync = (state) => {
     const c = settings.crimson;
     const g = settings.global;
     const u = material.uniforms;
+    u.uBeatR.value = state.beatR ?? -1;
+    u.uBeatAmp.value = state.beatAmp ?? 0;
+    u.uGlow.value = c.poolGlow * g.glow;
+    u.uVeinScale.value = c.poolVeinScale * g.noiseFrequency;
+    u.uColorGlow.value.copy(getColor(c.colorPoolGlow));
+    u.uColorHot.value.copy(getColor(c.colorCircleCore));
     u.uQuadSize.value = state.quadSize ?? 8;
     u.uGrown.value = state.grown ?? 0;
     u.uDry.value = state.dry ?? 0;
@@ -658,6 +701,8 @@ const SPIKE_FRAGMENT = /* glsl */ `
   uniform vec3  uLightDir;
   uniform sampler2D uEnvMap;
   uniform float uGlobalGlow;
+  uniform float uBeatPhase;   // 0..1.2 how far up the spikes the surge has climbed (<0 none)
+  uniform float uBeatGlow;
 
   varying vec3  vNormalW;
   varying vec3  vWorld;
@@ -701,6 +746,11 @@ const SPIKE_FRAGMENT = /* glsl */ `
     float inner = (1.0 - smoothstep(0.0, 0.45, h)) * uInner;
     color += (uColorRim * rim + uColorInner * inner) * uGlobalGlow * uFade;
 
+    // The heartbeat: a surge of light climbing every spike from the pool.
+    float sd = (h - uBeatPhase) / 0.14;
+    float surge = exp(-sd * sd) * step(-0.5, uBeatPhase) * uBeatGlow;
+    color += uColorInner * surge * (0.4 + vein + rim * 0.5) * uGlobalGlow * uFade;
+
     gl_FragColor = vec4(color, 1.0);
   }
 `;
@@ -729,19 +779,23 @@ export function createCrimsonSpikeMaterial() {
       uColorDeep: { value: new Color() },
       uColorRim: { value: new Color() },
       uColorInner: { value: new Color() },
-      uColorSpec: { value: new Color() }
+      uColorSpec: { value: new Color() },
+      uBeatPhase: { value: -1 },
+      uBeatGlow: { value: 1 }
     }),
     vertexShader: SPIKE_VERTEX,
     fragmentShader: SPIKE_FRAGMENT
   });
   material.userData.instanced = true;
 
-  /** @param {object} state { fade } */
+  /** @param {object} state { fade, beatPhase } */
   material.userData.sync = (state) => {
     const c = settings.crimson;
     const g = settings.global;
     const u = material.uniforms;
     u.uFade.value = state.fade ?? 1;
+    u.uBeatPhase.value = state.beatPhase ?? -1;
+    u.uBeatGlow.value = c.spikeBeatGlow * g.glow;
     u.uGloss.value = c.spikeGloss;
     u.uSpecular.value = c.spikeSpecular * g.glow;
     u.uEnv.value = c.spikeEnv;
@@ -756,6 +810,339 @@ export function createCrimsonSpikeMaterial() {
     u.uColorRim.value.copy(getColor(c.colorSpikeRim));
     u.uColorInner.value.copy(getColor(c.colorSpikeInner));
     u.uColorSpec.value.copy(getColor(c.colorSpikeSpec));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* the seal, the arc of blood it draws, and the moonbeam                */
+/* -------------------------------------------------------------------- */
+
+const SEAL_VERTEX = /* glsl */ `
+  attribute float aAlong;
+  uniform float uTime;
+  uniform float uWobble;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying float vAlong;
+
+  void main() {
+    vAlong = aAlong;
+    vec3 p = position;
+    // The tail whips: a travelling sideways wave that grows toward the tip.
+    float w = sin(aAlong * 9.0 - uTime * 22.0) * uWobble * aAlong * aAlong;
+    p.x += w;
+    p.y += w * 0.6;
+    vec4 world = modelMatrix * vec4(p, 1.0);
+    vWorld = world.xyz;
+    vNormalW = normalize(mat3(modelMatrix) * normal);
+    gl_Position = projectionMatrix * viewMatrix * world;
+  }
+`;
+
+const SEAL_FRAGMENT = /* glsl */ `
+  uniform float uGloss;
+  uniform float uSpecular;
+  uniform float uRim;
+  uniform float uCoreGlow;
+  uniform float uFade;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorRim;
+  uniform vec3  uColorCore;
+  uniform vec3  uColorSpec;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying float vAlong;
+
+  void main() {
+    vec3 N = normalize(vNormalW);
+    if (!gl_FrontFacing) N = -N;
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec3 L = normalize(uLightDir);
+    vec3 H = normalize(L + V);
+    float ndv = clamp(dot(N, V), 0.0, 1.0);
+    // Deep in the body, saturated toward the rim, a hot core glowing through
+    // the head - and a wet highlight off the sun.
+    vec3 body = mix(uColorDeep, uColorBody, 0.35 + 0.65 * clamp(dot(N, L) * 0.5 + 0.5, 0.0, 1.0));
+    float core = pow(ndv, 3.0) * (1.0 - smoothstep(0.1, 0.45, vAlong));
+    float rim = pow(1.0 - ndv, 2.5) * uRim;
+    float spec = pow(clamp(dot(N, H), 0.0, 1.0), uGloss) * uSpecular;
+    vec3 color = body + (uColorRim * rim + uColorCore * core * uCoreGlow) * uGlobalGlow + uColorSpec * spec;
+    gl_FragColor = vec4(color * uFade, 1.0);
+  }
+`;
+
+/** The blood seal: a glossy comet of blood with a hot core. Opaque. */
+export function createCrimsonSealMaterial() {
+  const material = new ShaderMaterial({
+    transparent: false,
+    depthWrite: true,
+    depthTest: true,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uWobble: { value: 0.15 },
+      uGloss: { value: 80 },
+      uSpecular: { value: 2 },
+      uRim: { value: 2 },
+      uCoreGlow: { value: 2 },
+      uFade: { value: 1 },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorRim: { value: new Color() },
+      uColorCore: { value: new Color() },
+      uColorSpec: { value: new Color() }
+    }),
+    vertexShader: SEAL_VERTEX,
+    fragmentShader: SEAL_FRAGMENT
+  });
+
+  /** @param {object} state { fade } */
+  material.userData.sync = (state) => {
+    const c = settings.crimson;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uFade.value = state.fade ?? 1;
+    u.uWobble.value = c.sealWobble * g.turbulence;
+    u.uGloss.value = c.spikeGloss;
+    u.uSpecular.value = c.spikeSpecular * g.glow;
+    u.uRim.value = c.spikeRim * g.fresnel;
+    u.uCoreGlow.value = c.sealCoreGlow * g.glow;
+    u.uColorBody.value.copy(getColor(c.colorSpikeBody));
+    u.uColorDeep.value.copy(getColor(c.colorSpikeDeep));
+    u.uColorRim.value.copy(getColor(c.colorSpikeRim));
+    u.uColorCore.value.copy(getColor(c.colorCircleCore));
+    u.uColorSpec.value.copy(getColor(c.colorSpikeSpec));
+  };
+
+  return material;
+}
+
+/**
+ * A camera-facing ribbon laid along a curve in the vertex stage.
+ *
+ * The mesh is a PlaneGeometry strip and only its uv is read: `uv.y` runs
+ * along the curve from `uTail` to `uHead`, `uv.x` across it. The curve is a
+ * lob from `uFrom` to `uTo` raised by `uArc` at its middle (a straight line
+ * when `uArc` is 0), so the same shader draws the arc of blood the seal
+ * leaves and the shaft of moonlight.
+ */
+const RIBBON_VERTEX = /* glsl */ `
+  uniform vec3  uFrom;
+  uniform vec3  uTo;
+  uniform float uArc;
+  uniform float uHead;
+  uniform float uTail;
+  uniform float uWidthFrom;   // metres at the uFrom end
+  uniform float uWidthTo;     // metres at the uTo end
+  uniform float uTaper;       // 0..1 how much it narrows toward its tail
+  uniform float uTime;
+  uniform float uWobble;
+  varying vec2  vRib;         // x across -1..1, y along the drawn part 0 (tail) .. 1 (head)
+  varying float vS;           // 0..1 along the whole curve
+
+  vec3 curveAt(float s) {
+    vec3 p = mix(uFrom, uTo, s);
+    p.y += sin(s * 3.14159265) * uArc;
+    return p;
+  }
+
+  void main() {
+    float s = mix(uTail, uHead, uv.y);
+    vS = s;
+    vRib = vec2(uv.x * 2.0 - 1.0, uv.y);
+    vec3 p = curveAt(s);
+    vec3 t = normalize(curveAt(min(1.0, s + 0.01)) - curveAt(max(0.0, s - 0.01)) + vec3(1e-5));
+    vec3 toCam = normalize(cameraPosition - p);
+    vec3 side = normalize(cross(t, toCam) + vec3(1e-5));
+    float w = mix(uWidthFrom, uWidthTo, s);
+    w *= mix(1.0, uv.y, uTaper);
+    // A slow writhe, so the blood reads as liquid in the air.
+    p += side * sin(s * 17.0 - uTime * 9.0) * uWobble * w;
+    p += side * (uv.x - 0.5) * w;
+    gl_Position = projectionMatrix * viewMatrix * vec4(p, 1.0);
+  }
+`;
+
+const ARC_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uFade;
+  uniform float uCoreGlow;
+  uniform float uOpacity;
+  uniform float uSeed;
+  uniform vec3  uColorCore;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorRim;
+  uniform vec3  uColorDeep;
+  uniform float uGlobalGlow;
+  varying vec2  vRib;
+  varying float vS;
+
+  ${noiseGLSL}
+
+  void main() {
+    float x = abs(vRib.x);
+    // A rounded tube of blood: dark deep body, saturated toward the edges
+    // where it catches the light, and a thin hot core running down it.
+    float tube = sqrt(max(0.0, 1.0 - x * x));
+    float flow = snoise(vec3(vS * 14.0 - uTime * 6.0, vRib.x * 2.0, uSeed)) * 0.5 + 0.5;
+    vec3 body = mix(uColorDeep, uColorBody, 0.35 + 0.65 * flow);
+    float edge = smoothstep(0.45, 0.9, x) * (1.0 - smoothstep(0.95, 1.0, x));
+    float core = exp(-x * x / 0.03) * (0.5 + 0.8 * flow);
+    float alpha = (1.0 - smoothstep(0.8, 1.0, x)) * uOpacity * uFade;
+    // Tatters at the tail, where it is draining away.
+    alpha *= smoothstep(0.0, 0.25, vRib.y + flow * 0.15);
+    if (alpha < 0.003) discard;
+    vec3 light = (uColorRim * edge * 1.6 + uColorCore * core * uCoreGlow) * uGlobalGlow;
+    // Premultiplied: the dark blood occludes, the core adds.
+    gl_FragColor = vec4(body * tube * alpha + light * alpha, alpha);
+  }
+`;
+
+/** The arc of blood the seal leaves from the hand to the circle. */
+export function createCrimsonArcMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    premultipliedAlpha: true,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uFrom: { value: new Vector3() },
+      uTo: { value: new Vector3() },
+      uArc: { value: 1 },
+      uHead: { value: 0 },
+      uTail: { value: 0 },
+      uWidthFrom: { value: 0.2 },
+      uWidthTo: { value: 0.3 },
+      uTaper: { value: 0.8 },
+      uWobble: { value: 0.2 },
+      uFade: { value: 1 },
+      uCoreGlow: { value: 2 },
+      uOpacity: { value: 1 },
+      uSeed: { value: 0 },
+      uColorCore: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorRim: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: RIBBON_VERTEX,
+    fragmentShader: ARC_FRAGMENT
+  });
+
+  /** @param {object} state { from, to, arc, head, tail, fade, seed } */
+  material.userData.sync = (state) => {
+    const c = settings.crimson;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uFrom.value.copy(state.from);
+    u.uTo.value.copy(state.to);
+    u.uArc.value = state.arc;
+    u.uHead.value = state.head;
+    u.uTail.value = state.tail;
+    u.uFade.value = state.fade;
+    u.uSeed.value = state.seed;
+    u.uWidthFrom.value = c.arcWidth * 0.6;
+    u.uWidthTo.value = c.arcWidth;
+    u.uTaper.value = c.arcTaper;
+    u.uWobble.value = c.arcWobble * g.turbulence;
+    u.uCoreGlow.value = c.arcCoreGlow * g.glow;
+    u.uOpacity.value = c.arcOpacity * g.opacity;
+    u.uColorCore.value.copy(getColor(c.colorCircleCore));
+    u.uColorBody.value.copy(getColor(c.colorSpikeBody));
+    u.uColorRim.value.copy(getColor(c.colorSpikeRim));
+    u.uColorDeep.value.copy(getColor(c.colorPoolDeep));
+  };
+
+  return material;
+}
+
+const BEAM_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uFade;
+  uniform float uIntensity;
+  uniform float uBeat;
+  uniform float uSeed;
+  uniform vec3  uColorCore;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+  uniform float uGlobalGlow;
+  varying vec2  vRib;
+  varying float vS;
+
+  ${noiseGLSL}
+
+  void main() {
+    float x = abs(vRib.x);
+    // Streaks of red light pouring down from the moon onto the circle.
+    float streak = snoise(vec3(vRib.x * 5.0, vS * 3.0 + uTime * 1.6, uSeed)) * 0.5 + 0.5;
+    streak = pow(streak, 2.0);
+    float body = (1.0 - x * x) * (1.0 - x);
+    float core = exp(-x * x / 0.05);
+    // Strongest where it lands; it thins toward the moon.
+    float along = mix(0.35, 1.0, vS) * smoothstep(0.0, 0.08, vS) * (1.0 - smoothstep(0.92, 1.0, vS));
+    vec3 col = mix(uColorDeep, uColorBody, 0.4 + 0.6 * streak) * body + uColorCore * core * (0.3 + uBeat * 0.7) * streak;
+    float k = along * uIntensity * uFade * (1.0 + uBeat * 0.8);
+    if (k < 0.002) discard;
+    gl_FragColor = vec4(col * k * uGlobalGlow, 1.0);
+  }
+`;
+
+/** The shaft of red moonlight from the moon onto the circle. Additive. */
+export function createCrimsonBeamMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: AdditiveBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uFrom: { value: new Vector3() },
+      uTo: { value: new Vector3() },
+      uArc: { value: 0 },
+      uHead: { value: 1 },
+      uTail: { value: 0 },
+      uWidthFrom: { value: 2 },
+      uWidthTo: { value: 5 },
+      uTaper: { value: 0 },
+      uWobble: { value: 0 },
+      uFade: { value: 1 },
+      uIntensity: { value: 0.4 },
+      uBeat: { value: 0 },
+      uSeed: { value: 0 },
+      uColorCore: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: RIBBON_VERTEX,
+    fragmentShader: BEAM_FRAGMENT
+  });
+
+  /** @param {object} state { from, to, widthFrom, widthTo, head, fade, beat, seed } */
+  material.userData.sync = (state) => {
+    const c = settings.crimson;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uFrom.value.copy(state.from);
+    u.uTo.value.copy(state.to);
+    u.uWidthFrom.value = state.widthFrom;
+    u.uWidthTo.value = state.widthTo;
+    u.uHead.value = state.head;
+    u.uFade.value = state.fade;
+    u.uBeat.value = state.beat;
+    u.uSeed.value = state.seed;
+    u.uIntensity.value = c.beamIntensity * g.opacity;
+    u.uColorCore.value.copy(getColor(c.colorCircleCore));
+    u.uColorBody.value.copy(getColor(c.colorMoonHalo));
+    u.uColorDeep.value.copy(getColor(c.colorSpikeDeep));
   };
 
   return material;

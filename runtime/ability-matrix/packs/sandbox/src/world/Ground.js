@@ -66,7 +66,9 @@ export class Ground {
       uTexTint: { value: settings.environment.floorTexTint },
       uSheen: { value: settings.environment.floorSheen },
       uPool: { value: settings.environment.floorPool },
-      uTime: { value: 0 }
+      uTime: { value: 0 },
+      // Caster xz. The ring is centred here, not on the world origin.
+      uFocus: { value: new Vector2(0, 0) }
     };
 
     environment.registerShadowCasterWithPatch(this.material, (shader) => {
@@ -76,6 +78,7 @@ export class Ground {
       shader.uniforms.uSheen = this.uniforms.uSheen;
       shader.uniforms.uPool = this.uniforms.uPool;
       shader.uniforms.uTime = this.uniforms.uTime;
+      shader.uniforms.uFocus = this.uniforms.uFocus;
 
       shader.vertexShader = shader.vertexShader
         .replace('#include <common>', `#include <common>\nvarying vec3 vGroundWorld;`)
@@ -95,6 +98,7 @@ export class Ground {
            uniform float uSheen;
            uniform float uPool;
            uniform float uTime;
+           uniform vec2 uFocus;
            ${noiseGLSL}`
         )
         .replace(
@@ -130,6 +134,39 @@ export class Ground {
              float dist = length(wp.xz);
              float pool = mix(1.0, smoothstep(40.0, 5.0, dist), clamp(uPool, 0.0, 1.0));
              diffuseColor.rgb *= mix(0.18, 1.0, pool);
+
+             // Casting inlay, in the same block so the stone map and the
+             // procedural fallback both get it. Centred on the caster. A
+             // hairline ring in the 6–11 m band, a short crosshair at the
+             // focus, and a slow sheen from the noise already in this shader.
+             // Nothing here moves the floor by more than ~8% of its luminance,
+             // so fire and lightning stay the brightest things on the stone.
+             vec2 focus = wp.xz - uFocus;
+             float rad = length(focus);
+             // ~2px in the action area, clamped so a grazing pixel cannot
+             // fatten the line into a band. Shaped with smoothstep, not a step.
+             float aa = clamp(fwidth(rad), 0.01, 0.035);
+             float ringD = abs(rad - 7.5);
+             float ring = 1.0 - smoothstep(aa * 0.25, aa * 1.35, ringD);
+             float seat = 1.0 - smoothstep(aa * 1.35, aa * 4.5, ringD);
+
+             vec2 q = abs(focus);
+             float armX = smoothstep(0.62, 0.82, q.x) * (1.0 - smoothstep(1.45, 1.7, q.x));
+             float armZ = smoothstep(0.62, 0.82, q.y) * (1.0 - smoothstep(1.45, 1.7, q.y));
+             float tickX = (1.0 - smoothstep(aa * 0.25, aa * 1.35, q.y)) * armX;
+             float tickZ = (1.0 - smoothstep(aa * 0.25, aa * 1.35, q.x)) * armZ;
+             float crosshair = max(tickX, tickZ);
+
+             float drift = fbm3(vec3(focus * 0.05, uTime * 0.04));
+             float wash = snoise01(vec3(focus.yx * 0.02 + 4.0, uTime * 0.02));
+             // fbm3 is about ±0.85, snoise01 is 0..1. Together they stay ~±4%.
+             float sheen = drift * 0.045 + (wash - 0.5) * 0.03;
+             sheen *= 0.65 + 0.35 * (1.0 - smoothstep(6.0, 11.0, rad));
+
+             float mark = max(ring, crosshair * 0.75);
+             diffuseColor.rgb *= 1.0 + clamp(sheen, -0.04, 0.04);
+             diffuseColor.rgb *= 1.0 - seat * 0.028;
+             diffuseColor.rgb += diffuseColor.rgb * vec3(0.70, 0.80, 0.95) * mark * 0.065;
            }`
         )
         .replace(
@@ -208,7 +245,7 @@ export class Ground {
     this._textured = on;
   }
 
-  update(elapsed) {
+  update(elapsed, focus) {
     const env = settings.environment;
     this.uniforms.uTime.value = elapsed;
     this.uniforms.uFloorColor.value.copy(getColor(env.floorColor));
@@ -216,6 +253,10 @@ export class Ground {
     this.uniforms.uTexTint.value = env.floorTexTint;
     this.uniforms.uSheen.value = env.floorSheen;
     this.uniforms.uPool.value = env.floorPool;
+    // No per-frame allocation: write into the uniform's existing vector.
+    const x = focus && Number.isFinite(focus.x) ? focus.x : 0;
+    const z = focus && Number.isFinite(focus.z) ? focus.z : 0;
+    this.uniforms.uFocus.value.set(x, z);
     this.material.roughness = env.floorRoughness;
     this.material.normalScale.set(env.floorNormalScale, env.floorNormalScale);
 

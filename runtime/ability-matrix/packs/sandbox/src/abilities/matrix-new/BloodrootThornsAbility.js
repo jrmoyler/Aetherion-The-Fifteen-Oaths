@@ -1,7 +1,9 @@
-import { InstancedBufferAttribute, InstancedMesh, Mesh, Object3D, Quaternion, Vector3 } from 'three';
+import { InstancedBufferAttribute, InstancedMesh, Mesh, Object3D, PlaneGeometry, Quaternion, Vector3 } from 'three';
 import { Ability, AbilityPhase } from '../Ability.js';
 import {
   BLOODROOT_MAX_ROOTS,
+  BLOODROOT_RUNNER,
+  createBloodrootFieldMaterial,
   createBloodrootRootMaterial,
   createBloodrootThornMaterial,
   rootPathAt
@@ -24,10 +26,13 @@ const TAU = Math.PI * 2;
 /** Primary roots the editor allows, and branches per root. 10 × (1 + 2) = 30. */
 const MAX_PRIMARY = 10;
 const MAX_BRANCHES = 2;
-/** Hard ceiling on vines. The editor's count slider clamps to this. */
+/** Hard ceiling on thicket vines. The editor's count slider clamps to this. */
 const MAX_THORNS = 144;
+/** Vines that can burst up in the runner's wake (records after the thicket's). */
+const MAX_TRAIL = 24;
+const TOTAL_THORNS = MAX_THORNS + MAX_TRAIL;
 const VARIANTS = 3;
-const SLOTS = MAX_THORNS / VARIANTS;
+const SLOTS = TOTAL_THORNS / VARIANTS;
 /** Bodies one thicket can drain at once. */
 const MAX_VICTIMS = 8;
 
@@ -50,8 +55,13 @@ const _used = new Int32Array(VARIANTS);
  * BLOODROOT THORNS — roots race out across the floor, a thicket of thorny vines
  * bursts up along them, and whatever stands in it is drained into the heart.
  *
- * A seed is driven through the floor to the circle, kicking up soil and blood.
- * Where it surfaces, the thicket grows on one clock:
+ * **Anticipation and travel.** The floor cracks at the caster's feet and a
+ * *runner* — a real root, the 31st in the table, pinned so it lands exactly on
+ * the circle — crawls out across the floor behind the burrowing seed, its tip
+ * white-hot, throwing soil, with a wake of short thorns bursting up a beat
+ * after the tip passes. It stays for the whole cast: the path is on the floor.
+ *
+ * Where the seed surfaces, the thicket grows on one clock:
  *
  *   1. **the roots** — primaries race outward from the impact, each forking
  *      into side branches as its growth front passes the fork. They are real
@@ -78,6 +88,17 @@ const _used = new Int32Array(VARIANTS);
  *   5. **beats** — a cracked floor and a burst of blood where the seed
  *      surfaces; a knock, a shockwave and a flash as the thicket bursts; a
  *      heartbeat in the light.
+ *   6. **the soaked floor** (`createBloodrootFieldMaterial`) — a disc that
+ *      soaks clotted black-red behind the racing fronts, with capillaries
+ *      carrying the same heartbeat, drying brown-black as it withers. It is
+ *      the deep stop of the ramp and it stays for the whole linger.
+ *
+ * **The drain beat (linger).** `rootDrainAfter` seconds after the seed
+ * surfaces the heartbeat turns: the beats that ran *outward* along the roots
+ * and the soak now run *inward* to the heart and back along the runner to the
+ * caster, each vine swells (`thornThrob`) as a beat passes through it and the
+ * whole thicket writhes (`thornSway`) — so the silhouette keeps moving while
+ * it feeds, not only while it grows.
  *
  * Then it ends: the vines shrivel, go matte and dark, and sink back into the
  * floor; the roots darken to dead wood and sink after them; a dried stain is
@@ -147,6 +168,8 @@ export class BloodrootThornsAbility extends Ability {
         grown: 0,
         forkDist: 0,
         delay: 0,
+        wanderScale: 1,
+        pin: 0,
         live: false
       });
     }
@@ -173,9 +196,22 @@ export class BloodrootThornsAbility extends Ability {
     }
 
     this.thorns = [];
-    for (let i = 0; i < MAX_THORNS; i++) {
-      this.thorns.push({ root: 0, s: 0, side: 0, height: 0, radius: 0, lean: 0, yaw: 0, jitter: 0, broke: false });
+    for (let i = 0; i < TOTAL_THORNS; i++) {
+      this.thorns.push({ root: 0, s: 0, side: 0, height: 0, radius: 0, lean: 0, yaw: 0, jitter: 0, broke: false, passAge: -1 });
     }
+
+    /* ---- layer 6: the soaked floor ---- */
+    this.fieldMaterial = createBloodrootFieldMaterial();
+    this.fieldGeometry = new PlaneGeometry(1, 1);
+    this.field = new Mesh(this.fieldGeometry, this.fieldMaterial);
+    this.field.name = 'BloodrootField';
+    this.field.rotation.x = -Math.PI / 2;
+    this.field.layers.set(LAYER.VFX);
+    this.field.renderOrder = 1;
+    this.field.frustumCulled = false;
+    this.field.visible = false;
+    this.group.add(this.field);
+    this._fieldState = { radius: 1, front: 0, clock: 0, seed: 0, dead: 0, pulseSign: 1 };
 
     /** Per-cast state. A seed and clocks. */
     this._seed = 0;
@@ -184,6 +220,7 @@ export class BloodrootThornsAbility extends Ability {
     this._burstFired = false;
     this._stained = false;
     this._flare = 0;
+    this._lastCrack = 0;
 
     this._victims = [];
     for (let i = 0; i < MAX_VICTIMS; i++) {
@@ -193,7 +230,7 @@ export class BloodrootThornsAbility extends Ability {
     this._found = [];
     this._force = { impulse: 0, lift: 0, spin: 0 };
 
-    this._rootState = { roots: this.rootRecords, count: 0, clock: 0, dead: 0, sink: 0, seed: 0 };
+    this._rootState = { roots: this.rootRecords, count: 0, clock: 0, dead: 0, sink: 0, seed: 0, runner: true, pulseSign: 1 };
     this._thornState = { dead: 0, pulse: 0 };
   }
 
@@ -422,6 +459,43 @@ export class BloodrootThornsAbility extends Ability {
     }
     for (let i = n; i < BLOODROOT_MAX_ROOTS; i++) this.rootRecords[i].live = false;
     this._rootCount = n;
+
+    // The runner: from the caster's feet to the heart, pinned at both ends,
+    // grown as far as the seed has burrowed. Its network distance runs from
+    // −length (the caster) to 0 (the heart), so the drain's inward beats run
+    // on along it back to the caster.
+    const run = this.rootRecords[BLOODROOT_RUNNER];
+    this._floorPoint(_floor);
+    const ox = this.origin.x - _floor.x;
+    const oz = this.origin.z - _floor.z;
+    const L = Math.hypot(ox, oz);
+    run.ox = ox;
+    run.oz = oz;
+    run.bearing = Math.atan2(-oz, -ox);
+    run.length = Math.max(0.1, L);
+    run.thickness = c.rootThickness * c.runnerThickness;
+    run.wanderScale = c.runnerWander;
+    run.pin = 1;
+    run.forkDist = -run.length;
+    run.delay = 0;
+    run.grown = this.phase === AbilityPhase.TRAVEL ? Math.min(run.length, this.front) : run.length;
+    run.live = L > 0.3 && c.runnerThickness > 0;
+  }
+
+  /** The drain's direction: +1 beats run outward (growing), −1 inward (feeding). */
+  get _pulseSign() {
+    const c = settings.bloodroot;
+    return this.phase !== AbilityPhase.TRAVEL && this._clock >= c.rootDrainAfter * settings.global.lifetime ? -1 : 1;
+  }
+
+  /** The heartbeat (lub-dub) as it passes `dist` metres from the heart. */
+  _beatAt(dist) {
+    const c = settings.bloodroot;
+    const rate = c.rootPulseRate * settings.global.animationSpeed;
+    const sign = this._pulseSign;
+    const t = this._clock - (sign * dist) / Math.max(0.1, c.rootPulseSpeed);
+    const phase = t * rate - Math.floor(t * rate);
+    return Math.exp(-Math.pow((phase - 0.05) / 0.05, 2)) + 0.6 * Math.exp(-Math.pow((phase - 0.22) / 0.06, 2));
   }
 
   /** Where a vine stands, in metres from the heart; writes `_p`. Returns network distance. */
@@ -497,6 +571,7 @@ export class BloodrootThornsAbility extends Ability {
     this._burstFired = false;
     this._stained = false;
     this._flare = 0;
+    this._lastCrack = 0;
 
     for (let i = 0; i < BLOODROOT_MAX_ROOTS; i++) {
       const r = this.rootRecords[i];
@@ -517,12 +592,43 @@ export class BloodrootThornsAbility extends Ability {
       thorn.yaw = Math.random() * TAU;
       thorn.jitter = Math.random();
       thorn.broke = false;
+      thorn.passAge = -1;
       thorn._root = this.rootRecords[0];
       thorn._s = 0;
       thorn._tx = 1;
       thorn._tz = 0;
     }
     this._sync();
+    this._launchFx();
+  }
+
+  /** Anticipation: the floor cracks at the caster's feet as the runner sets off. */
+  _launchFx() {
+    const c = settings.bloodroot;
+    const g = settings.global;
+    _pos.copy(this.origin).setY(0);
+    if (c.launchCrack > 0) {
+      this.ctx.decals?.spawn?.(DecalType.CRACK, _pos, {
+        radius: c.launchCrack,
+        life: 2.5 * g.lifetime,
+        intensity: 0.8,
+        colorA: getColor(c.colorRootVein),
+        colorB: getColor(c.colorRootBark)
+      });
+    }
+    this._resetEmit(frame.uTime.value);
+    _pos.y = 0.1;
+    _emit.position = _pos;
+    _emit.radius = 0.35;
+    _emit.direction = _dir.copy(this.direction).setY(2.2).normalize();
+    _emit.speed = c.dropSpeed * 0.8;
+    _emit.spread = 0.6;
+    _emit.size = c.dropSize;
+    _emit.life = c.dropLifetime * 0.7;
+    this.drops.emit(Math.round(c.launchDrops * g.particleCount), _emit);
+    _emit.size = c.trailSize * 1.3;
+    _emit.spin = 8;
+    this.soil.emit(Math.round(c.launchDrops * 0.6 * g.particleCount), _emit);
   }
 
   /* ------------------------------------------------------------------ */
@@ -546,9 +652,28 @@ export class BloodrootThornsAbility extends Ability {
     rootState.dead = Easing.outQuad(saturate(dry * 1.4));
     rootState.sink = c.rootSink * Easing.inCubic(saturate((dry - 0.3) / 0.7)) * 2;
     rootState.seed = this._seed;
+    // In flight the runner's veins already beat on the cast's own clock, the
+    // beats running on ahead of the caster toward the circle.
+    rootState.clock = travelling ? this.age : this._clock;
+    rootState.runner = true;
+    rootState.pulseSign = this._pulseSign;
     this.rootMaterial.userData.sync(rootState);
-    this.roots.visible = !travelling;
+    // Visible in flight too: the runner crawls out behind the seed.
+    this.roots.visible = true;
     this.roots.position.copy(_floor);
+
+    /* ---- the soaked floor ---- */
+    const field = this._fieldState;
+    field.radius = Math.max(0.3, this._maxLength * c.fieldReach);
+    field.front = travelling ? 0 : this._front(this._clock) * c.fieldReach;
+    field.clock = this._clock;
+    field.seed = this._seed;
+    field.dead = rootState.dead;
+    field.pulseSign = rootState.pulseSign;
+    this.fieldMaterial.userData.sync(field);
+    this.field.visible = !travelling && c.fieldOpacity > 0;
+    this.field.position.set(_floor.x, 0.02, _floor.z);
+    this.field.scale.set(field.radius * 2, field.radius * 2, 1);
 
     /* ---- the thorns ---- */
     this._thornState.dead = Easing.outQuad(saturate(dry * 1.6));
@@ -606,15 +731,23 @@ export class BloodrootThornsAbility extends Ability {
     const dry = this._dry;
     const maxLen = this._maxLength;
 
-    for (let i = 0; i < MAX_THORNS; i++) {
+    const trailCount = Math.min(MAX_TRAIL, Math.max(0, Math.round(c.runnerThorns)));
+    const alive = 1 - dry;
+    const swayT = this._clock * c.thornSwaySpeed * g.animationSpeed;
+
+    for (let i = 0; i < TOTAL_THORNS; i++) {
       const thorn = this.thorns[i];
       const variant = i % VARIANTS;
       const slot = (i / VARIANTS) | 0;
       const mesh = this.thornMeshes[variant];
+      const trail = i >= MAX_THORNS;
+      const wanted = trail ? i - MAX_THORNS < trailCount : i < count;
 
       let k = 0;
       let dist = 0;
-      if (i < count && !travelling && this._rootCount > 0) {
+      if (trail) {
+        if (wanted) k = this._trailRise(thorn, i - MAX_THORNS, trailCount);
+      } else if (wanted && !travelling && this._rootCount > 0) {
         dist = this._thornPoint(thorn, i);
         k = this._thornRise(thorn, dist, i);
       }
@@ -625,7 +758,13 @@ export class BloodrootThornsAbility extends Ability {
         _node.scale.setScalar(0.0001);
         _node.updateMatrix();
         mesh.setMatrixAt(slot, _node.matrix);
-        if (i < count) used[variant] = Math.max(used[variant], slot + 1);
+        if (wanted) used[variant] = Math.max(used[variant], slot + 1);
+        continue;
+      }
+
+      if (trail) {
+        this._placeTrailThorn(thorn, k, mesh, slot);
+        used[variant] = Math.max(used[variant], slot + 1);
         continue;
       }
 
@@ -635,7 +774,9 @@ export class BloodrootThornsAbility extends Ability {
         Math.max(0.05, c.thornHeight * lerp(isHeart ? 1.15 : 1, c.thornEdgeHeight, edge) * (1 + thorn.height * c.thornHeightJitter * g.randomness));
       // Withered: shrivelled, and sunk back into the floor.
       const wither = 1 - c.thornWither * Easing.outQuad(dry);
-      const radius = Math.max(0.01, c.thornRadius * (1 + thorn.radius * c.thornRadiusJitter * g.randomness) * lerp(1.2, 0.75, edge) * wither);
+      // The drain beat swells each vine as it passes through it.
+      const throb = 1 + c.thornThrob * this._beatAt(dist) * alive;
+      const radius = Math.max(0.01, c.thornRadius * (1 + thorn.radius * c.thornRadiusJitter * g.randomness) * lerp(1.2, 0.75, edge) * wither * throb);
       const sink = c.thornSink * height * Easing.inCubic(dry);
 
       // Lean: out along its root (or out from the heart), plus jitter.
@@ -648,7 +789,9 @@ export class BloodrootThornsAbility extends Ability {
         lx = thorn._tx;
         lz = thorn._tz;
       }
-      const lean = (isHeart ? c.thornLean * 0.6 : c.thornLean) + thorn.lean * c.thornLeanJitter * g.randomness;
+      // Writhing: each vine sways on its own phase while the thicket stands.
+      const sway = c.thornSway * Math.sin(swayT + thorn.yaw * 5.0) * alive;
+      const lean = (isHeart ? c.thornLean * 0.6 : c.thornLean) + thorn.lean * c.thornLeanJitter * g.randomness + sway;
       _axis.set(-lz, 0, lx);
       _tilt.setFromAxisAngle(_axis, lean);
       _spin.setFromAxisAngle(_up, thorn.yaw * 3.0);
@@ -660,20 +803,83 @@ export class BloodrootThornsAbility extends Ability {
       const x = _floor.x + _p.x;
       const z = _floor.z + _p.z;
       _node.position.set(x, 0, z).addScaledVector(_dir, -height * (1 - out)).addScaledVector(_up, -sink);
-      _node.scale.set(radius, height * Math.max(k, 1), radius);
+      _node.scale.set(radius, height * Math.max(k, 1) * (1 + (throb - 1) * 0.25), radius);
       _node.updateMatrix();
       mesh.setMatrixAt(slot, _node.matrix);
       used[variant] = Math.max(used[variant], slot + 1);
 
       if (!thorn.broke && dry <= 0) {
         thorn.broke = true;
-        this._breachFx(x, z, height, radius, _dir);
+        this._breachFx(x, z, height, radius, _dir, false);
       }
     }
 
     for (let v = 0; v < VARIANTS; v++) {
       this.thornMeshes[v].count = used[v];
       this.thornMeshes[v].instanceMatrix.needsUpdate = true;
+    }
+  }
+
+  /**
+   * How far up thorn `j` of the runner's wake is. Its place along the runner is
+   * dice + settings; the one event it remembers is when the crawling tip passed
+   * it (`passAge`), so it bursts up a beat behind the tip whatever the speed.
+   */
+  _trailRise(thorn, j, n) {
+    const c = settings.bloodroot;
+    const g = settings.global;
+    const run = this.rootRecords[BLOODROOT_RUNNER];
+    if (!run.live) return 0;
+    const s = lerp(c.runnerThornStart, c.runnerThornEnd, saturate((j + 0.5 + (thorn.jitter - 0.5) * 0.8) / Math.max(1, n)));
+    thorn._s = s;
+    if (thorn.passAge < 0) {
+      if (run.grown < s * run.length) return 0;
+      thorn.passAge = this.age;
+    }
+    const t = this.age - thorn.passAge - (c.runnerThornDelay + thorn.jitter * 0.08) * g.lifetime;
+    if (t <= 0) return 0;
+    const rise = Math.max(0.01, c.thornRise * g.lifetime);
+    if (t < rise) return Easing.outCubic(t / rise) * (1 + c.thornOvershoot);
+    const settle = Easing.outCubic(saturate((t - rise) / Math.max(0.01, c.thornSettle * g.lifetime)));
+    return lerp(1 + c.thornOvershoot, 1, settle);
+  }
+
+  /** Stand a wake thorn on the runner: short, leaning on toward the circle. */
+  _placeTrailThorn(thorn, k, mesh, slot) {
+    const c = settings.bloodroot;
+    const g = settings.global;
+    const dry = this._dry;
+    const run = this.rootRecords[BLOODROOT_RUNNER];
+    const wander = c.rootWander * g.randomness;
+    const freq = c.rootWanderFreq * g.noiseFrequency;
+    rootPathAt(run, thorn._s, wander, freq, _p);
+    rootPathAt(run, Math.min(1, thorn._s + 0.01), wander, freq, _q);
+    const tx = _q.x - _p.x;
+    const tz = _q.z - _p.z;
+    const tl = Math.max(1e-4, Math.hypot(tx, tz));
+    const lx = tx / tl;
+    const lz = tz / tl;
+    // `_floor` still holds this frame's heart (set in `_sync`).
+    const x = _floor.x + _p.x + -lz * thorn.side * c.runnerThornSpread;
+    const z = _floor.z + _p.z + lx * thorn.side * c.runnerThornSpread;
+    const height = Math.max(0.05, c.runnerThornHeight * (1 + thorn.height * 0.35 * g.randomness));
+    const wither = 1 - c.thornWither * Easing.outQuad(dry);
+    const radius = Math.max(0.01, c.thornRadius * 0.7 * (1 + thorn.radius * c.thornRadiusJitter * g.randomness) * wither);
+    const sink = c.thornSink * height * Easing.inCubic(dry);
+    const lean = c.thornLean * 0.9 + thorn.lean * c.thornLeanJitter * g.randomness;
+    _axis.set(-lz, 0, lx);
+    _tilt.setFromAxisAngle(_axis, lean);
+    _spin.setFromAxisAngle(_up, thorn.yaw * 3.0);
+    _node.quaternion.copy(_tilt).multiply(_spin);
+    const out = Math.min(k, 1);
+    _dir.set(0, 1, 0).applyQuaternion(_node.quaternion);
+    _node.position.set(x, 0, z).addScaledVector(_dir, -height * (1 - out)).addScaledVector(_up, -sink);
+    _node.scale.set(radius, height * Math.max(k, 1), radius);
+    _node.updateMatrix();
+    mesh.setMatrixAt(slot, _node.matrix);
+    if (!thorn.broke && dry <= 0) {
+      thorn.broke = true;
+      this._breachFx(x, z, height, radius, _dir, true);
     }
   }
 
@@ -838,11 +1044,11 @@ export class BloodrootThornsAbility extends Ability {
     _emit.life = 0.7;
     _emit.spin = 8;
     this.soil.emit(n, _emit);
-    _emit.size = c.trailSize;
-    _emit.speed = 2.6;
+    _emit.size = c.dropSize * 1.5;
+    _emit.speed = 3.4;
     _emit.spin = 0;
     _emit.life = c.dropLifetime * 0.6;
-    this.drops.emit(Math.max(1, Math.round(n * 0.4)), _emit);
+    this.drops.emit(Math.max(1, Math.round(n * 0.7)), _emit);
   }
 
   /** The seed surfaces: cracked floor, a burst of blood, a knock. */
@@ -912,10 +1118,10 @@ export class BloodrootThornsAbility extends Ability {
   }
 
   /** One vine breaking the floor: blood and soil flung off it. */
-  _breachFx(x, z, height, radius, axis) {
+  _breachFx(x, z, height, radius, axis, wake) {
     const c = settings.bloodroot;
     const g = settings.global;
-    if (!this._burstFired) {
+    if (!wake && !this._burstFired) {
       this._burstFired = true;
       this._burstFx();
     }
@@ -1034,6 +1240,22 @@ export class BloodrootThornsAbility extends Ability {
   onTravel(dt) {
     this._sync();
     this._travelFx(dt);
+    // The light rides over the tip so the floor it tears is lit.
+    this.position.y = settings.bloodroot.lightTravelHeight;
+    // The tip tears the floor as it goes: a crack every `runnerCrackSpacing`.
+    const c = settings.bloodroot;
+    const spacing = Math.max(0.3, c.runnerCrackSpacing);
+    if (c.runnerCrackRadius > 0 && this.front - this._lastCrack >= spacing && this.u < 0.97) {
+      this._lastCrack = this.front;
+      _pos.copy(this.position).setY(0);
+      this.ctx.decals?.spawn?.(DecalType.CRACK, _pos, {
+        radius: c.runnerCrackRadius,
+        life: this.impactDuration + this.fadeDuration + (1 - this.u) * this.length / Math.max(1, c.speed),
+        intensity: 0.75,
+        colorA: getColor(c.colorRootVein),
+        colorB: getColor(c.colorRootBark)
+      });
+    }
   }
 
   onImpact() {
@@ -1069,6 +1291,7 @@ export class BloodrootThornsAbility extends Ability {
   onDestroy() {
     this._releaseVictims();
     this.roots.visible = false;
+    this.field.visible = false;
     for (const mesh of this.thornMeshes) mesh.count = 0;
   }
 
@@ -1077,6 +1300,8 @@ export class BloodrootThornsAbility extends Ability {
     for (const mesh of this.thornMeshes) mesh.geometry.dispose();
     this.rootMaterial.dispose();
     this.thornMaterial.dispose();
+    this.fieldGeometry.dispose();
+    this.fieldMaterial.dispose();
     super.dispose();
   }
 }
@@ -1102,6 +1327,19 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'trailSize', 0.01, 0.4, 0.005, 'spray size');
   cast.addColor(c, 'colorA').name('seed blood');
   cast.addColor(c, 'colorB').name('seed glow');
+  const runner = cast.addFolder('The runner');
+  R(runner, c, 'runnerThickness', 0, 2, 0.01, 'thickness (× root)');
+  R(runner, c, 'runnerWander', 0, 2, 0.01, 'wander (× root)');
+  R(runner, c, 'runnerThorns', 0, MAX_TRAIL, 1, 'wake thorns');
+  R(runner, c, 'runnerThornHeight', 0.1, 3, 0.01, 'wake thorn height (m)');
+  R(runner, c, 'runnerThornSpread', 0, 2, 0.01, 'wake off the line (m)');
+  R(runner, c, 'runnerThornDelay', 0, 1, 0.01, 'after the tip (s)');
+  R(runner, c, 'runnerThornStart', 0, 1, 0.01, 'wake starts at');
+  R(runner, c, 'runnerThornEnd', 0, 1, 0.01, 'wake ends at');
+  R(runner, c, 'runnerCrackSpacing', 0.3, 6, 0.05, 'cracks every (m)');
+  R(runner, c, 'runnerCrackRadius', 0, 3, 0.05, 'crack radius (m)');
+  R(runner, c, 'launchCrack', 0, 4, 0.05, 'crack at the feet (m)');
+  R(runner, c, 'launchDrops', 0, 120, 1, 'blood at the feet');
 
   const roots = folder.addFolder('1 · Roots');
   R(roots, c, 'rootCount', 1, MAX_PRIMARY, 1, 'roots');
@@ -1129,6 +1367,7 @@ export function buildEditor(gui, c, Editor) {
   R(wood, c, 'rootVeins', 0, 10, 0.05, 'veins');
   R(wood, c, 'rootVeinWidth', 0.02, 0.8, 0.01, 'vein width');
   R(wood, c, 'rootPulseRate', 0, 5, 0.01, 'heartbeats / s');
+  R(wood, c, 'rootDrainAfter', 0, 8, 0.05, 'beats turn inward after (s)');
   R(wood, c, 'rootPulseSpeed', 0.5, 30, 0.1, 'pulse travels (m/s)');
   R(wood, c, 'rootPulseWidth', 0.05, 4, 0.01, 'pulse length (m)');
   R(wood, c, 'rootFrontGlow', 0, 15, 0.05, 'growth front glow');
@@ -1164,6 +1403,9 @@ export function buildEditor(gui, c, Editor) {
   R(thorns, c, 'thornBarbLength', 0.5, 5, 0.05, 'barb length (rebuild)');
   R(thorns, c, 'thornWither', 0, 1, 0.01, 'shrivels');
   R(thorns, c, 'thornSink', 0, 1.5, 0.01, 'sinks (× height)');
+  R(thorns, c, 'thornThrob', 0, 1.5, 0.01, 'swells on the drain beat');
+  R(thorns, c, 'thornSway', 0, 0.6, 0.005, 'writhe (rad)');
+  R(thorns, c, 'thornSwaySpeed', 0, 10, 0.05, 'writhe speed');
   const gloss = thorns.addFolder('Look');
   R(gloss, c, 'thornGloss', 4, 400, 1, 'gloss');
   R(gloss, c, 'thornSpecular', 0, 8, 0.05, 'specular');
@@ -1174,6 +1416,7 @@ export function buildEditor(gui, c, Editor) {
   R(gloss, c, 'thornVeins', 0, 2, 0.01, 'veins');
   R(gloss, c, 'thornVeinScale', 0.5, 12, 0.05, 'vein scale');
   R(gloss, c, 'thornBacklight', 0, 4, 0.01, 'backlight');
+  R(gloss, c, 'thornBarkHeight', 0, 1, 0.01, 'bark at the base');
   gloss.addColor(c, 'colorThornBody').name('body');
   gloss.addColor(c, 'colorThornDeep').name('clot');
   gloss.addColor(c, 'colorThornRim').name('rim');
@@ -1231,6 +1474,12 @@ export function buildEditor(gui, c, Editor) {
   beats.addColor(c, 'colorBurstB').name('burst B');
   beats.addColor(c, 'colorBurstC').name('burst C');
   R(beats, c, 'crackRadius', 0.2, 2, 0.01, 'cracked floor (× zone)');
+  const soak = beats.addFolder('Soaked floor');
+  R(soak, c, 'fieldReach', 0.2, 2, 0.01, 'reach (× longest root)');
+  R(soak, c, 'fieldVeins', 0, 4, 0.05, 'capillaries');
+  R(soak, c, 'fieldSheen', 0, 4, 0.05, 'wet sheen');
+  R(soak, c, 'fieldOpacity', 0, 1, 0.01, 'opacity');
+  soak.addColor(c, 'colorFieldDeep').name('clotted soil');
   R(beats, c, 'stainLife', 0.5, 30, 0.1, 'stain lingers (s)');
   R(beats, c, 'stainIntensity', 0, 1.5, 0.01, 'stain strength');
   beats.addColor(c, 'colorStain').name('stain');
@@ -1240,6 +1489,7 @@ export function buildEditor(gui, c, Editor) {
   R(light, c, 'lightIntensity', 0, 30, 0.1, 'intensity');
   R(light, c, 'lightRadius', 1, 30, 0.1, 'radius');
   R(light, c, 'lightHeight', 0, 5, 0.01, 'height (m)');
+  R(light, c, 'lightTravelHeight', 0, 5, 0.01, 'over the tip (m)');
 
   folder.close();
   return folder;

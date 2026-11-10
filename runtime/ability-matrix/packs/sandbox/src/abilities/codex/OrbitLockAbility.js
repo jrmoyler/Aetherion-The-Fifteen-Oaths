@@ -3,6 +3,7 @@ import { Ability } from '../Ability.js';
 import {
   createOrbitTubeGeometry,
   createPlanetGeometry,
+  createVortexGeometry,
   createQuadGeometry
 } from '../../assets/codex/OrbitLockGeometry.js';
 import {
@@ -10,7 +11,10 @@ import {
   createPlanetMaterial,
   createStarMaterial,
   createDialMaterial,
-  createSlamWarpMaterial
+  createSlamWarpMaterial,
+  createVortexMaterial,
+  createCoreMaterial,
+  createLensMaterial
 } from '../../materials/codex/OrbitLockMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -43,6 +47,18 @@ const _up = new Vector3(0, 1, 0);
 
 /**
  * ORBIT LOCK — an orrery thrown over the circle, locked, and dropped on it.
+ *
+ * Gravity is the identity, so the orrery turns round something that *eats
+ * light*: when the thrown star bursts it collapses into a black **singularity**
+ * with a burning photon ring, light bends round it (a lens on
+ * `LAYER.DISTORTION`), and a dark **accretion vortex** — log-spiral arms of
+ * infalling matter, deep violet-black between the arms, white-hot at the lip
+ * — spins up under the planets. The planets are dense, lit **moons** of dark
+ * rock with molten seams, not glowing balls. When the locked ring slams down
+ * the vortex lands with it and becomes the **well** on the floor; through the
+ * linger the embedded moons are dragged round and *in* along the spiral,
+ * faster as they fall closer (Kepler), and swallowed one by one as the well
+ * contracts and the singularity sinks into the floor.
  *
  * A zone cast in five beats. A **star** is lobbed from the caster's hand to a
  * point high over the circle. There it **bursts** into a handful of planets
@@ -77,6 +93,13 @@ const _up = new Vector3(0, 1, 0);
  *      squashed flat, a ripple on `LAYER.DISTORTION`, flash, shake, light.
  *   7. **the hit** — `handlesOwnHits`: nothing is touched until the slam; then
  *      everything inside the ring is launched up and out.
+ *   8. **the singularity** (`createCoreMaterial`) — opaque black core with a
+ *      photon-ring fresnel, `LAYER.SHAPED`; the orrery's centre.
+ *   9. **the accretion vortex / well** (`createVortexMaterial`) — the hero
+ *      form: an authored polar grid wound into spiral ridges, tilted onto the
+ *      orrery's plane, sagging into a well while it hangs, lying on the floor
+ *      after the slam and contracting as it swallows the moons.
+ *  10. **the lens** (`createLensMaterial`) — light bent round the core.
  *
  * ## The editor rule
  *
@@ -104,12 +127,25 @@ export class OrbitLockAbility extends Ability {
 
   createShaders() {
     this.tubeGeometry = createOrbitTubeGeometry(180, 8);
-    this.planetGeometry = createPlanetGeometry(3);
+    this.planetGeometry = createPlanetGeometry(4);
+    this.vortexGeometry = createVortexGeometry(40, 192);
     this.quadGeometry = createQuadGeometry();
 
     /* ---- layer 4: the dial, under everything ---- */
     this.dialMaterial = createDialMaterial();
     this.dial = this._mesh(this.quadGeometry, this.dialMaterial, LAYER.VFX, 2);
+
+    /* ---- layer 9: the accretion vortex / well ---- */
+    this.vortexMaterial = createVortexMaterial();
+    this.vortex = this._mesh(this.vortexGeometry, this.vortexMaterial, LAYER.VFX, 6);
+
+    /* ---- layer 8: the singularity — opaque, parameter-placed, so SHAPED ---- */
+    this.coreMaterial = createCoreMaterial();
+    this.core = this._mesh(this.planetGeometry, this.coreMaterial, LAYER.SHAPED, 9);
+
+    /* ---- layer 10: the lens ---- */
+    this.lensMaterial = createLensMaterial();
+    this.lens = this._mesh(this.quadGeometry, this.lensMaterial, LAYER.DISTORTION, 0);
 
     /* ---- layer 2: the orbits ---- */
     this.orbitMaterials = [];
@@ -139,7 +175,8 @@ export class OrbitLockAbility extends Ability {
     this.planetMaterial = createPlanetMaterial();
     this.planetMesh = new InstancedMesh(this.planetGeometry, this.planetMaterial, MAX_PLANETS);
     this.planetMesh.instanceMatrix.setUsage(DynamicDrawUsage);
-    this.planetMesh.layers.set(LAYER.VFX);
+    // Solid, lit rock: SHAPED (lit, kept out of the depth prepass).
+    this.planetMesh.layers.set(LAYER.SHAPED);
     this.planetMesh.frustumCulled = false;
     this.planetMesh.renderOrder = 10;
     this.planetMesh.visible = false;
@@ -157,6 +194,22 @@ export class OrbitLockAbility extends Ability {
     this._planetState = { seed: 0, heat: 0, dissolve: 0 };
     this._dialState = { center: new Vector3(), zone: 4, spokes: 9, spin: 0, reveal: 0, intensity: 0, erode: 0, seed: 0 };
     this._warpState = { center: new Vector3(), zone: 4, progress: 0 };
+    this._vortexState = {
+      center: new Vector3(),
+      tilt: 0,
+      yaw: 0,
+      inner: 0.5,
+      outer: 2,
+      height: 0.4,
+      spin: 0,
+      sag: 0,
+      opacity: 0,
+      dissolve: 0,
+      flare: 0,
+      seed: 0
+    };
+    this._coreState = { center: new Vector3(), size: 0, squash: 0, seed: 0 };
+    this._lensState = { center: new Vector3(), size: 1, hole: 0.3, strength: 0 };
 
     /** Planet positions this frame — read by the dust and the slam. */
     this._planetPos = [];
@@ -305,6 +358,17 @@ export class OrbitLockAbility extends Ability {
     this._tumble = 0;
     this._locked = false;
     this._slammed = false;
+    this._vortexState.seed = this._seed;
+    this._vortexState.spin = 0;
+    this._vortexState.opacity = 0;
+    this._vortexState.dissolve = 0;
+    this._vortexState.flare = 0;
+    this._coreState.seed = this._seed;
+    this._coreState.size = 0;
+    this._lensState.strength = 0;
+    this.vortex.visible = false;
+    this.core.visible = false;
+    this.lens.visible = false;
 
     this.pointAt(1, this._target);
     this._target.y = 0;
@@ -432,6 +496,9 @@ export class OrbitLockAbility extends Ability {
 
     this.planetMesh.visible = true;
     this.dial.visible = true;
+    this.vortex.visible = true;
+    this.core.visible = true;
+    this.lens.visible = true;
     this.lightBoost = c.lightIntensity * 0.6;
   }
 
@@ -457,6 +524,10 @@ export class OrbitLockAbility extends Ability {
 
     /* integrated turns — stop dead on the slam */
     const turning = this._slammed ? 0 : 1;
+    // After the slam, the linger clock (settings seconds) drives the swallowing.
+    const lingerS = this._slammed ? (t <= 1 ? slamT : B.end - B.t3 + ft * c.lifetime) : 0;
+    const pullT = saturate((lingerS - c.swallowDelay) / Math.max(0.05, c.swallowTime));
+    const pull = Easing.inCubic(pullT);
     for (let k = 0; k < K; k++) {
       const sign = k % 2 === 0 ? 1 : -1;
       this._orbitPhase[k] += c.orbitSpin * sign * (1 + 0.18 * k) * (1 - 0.7 * L) * dt * g.animationSpeed * turning;
@@ -475,6 +546,11 @@ export class OrbitLockAbility extends Ability {
       ce.y = lerp(c.hangHeight + hangBob, floorY, Easing.inCubic(drop));
     }
     const radius = lerp(c.orbitRadius, zone, L) * Easing.outBack(form);
+    // Embedded moons are dragged in along the spiral, faster as they close (Kepler).
+    const swallowR = zone * lerp(1, c.swallowTo, pull);
+    if (this._slammed) {
+      this._phaseG += c.swallowSpin * Math.sqrt(zone / Math.max(0.3, swallowR)) * smoothstep(0, 0.15, pullT) * dt * g.animationSpeed;
+    }
 
     /* the orbits */
     const lockFlash = this._locked ? Math.exp(-(tau - B.t1) * 7) : 0;
@@ -511,7 +587,8 @@ export class OrbitLockAbility extends Ability {
       const th = lerp(thOrbit, thLock, L);
       const tilt = this._tiltNow(k, K, L, drop);
       const yaw = this._yawNow(k, K, L);
-      const p = this._orbitPoint(ce, radius, tilt, yaw, th, this._planetPos[i]);
+      const p = this._orbitPoint(ce, this._slammed ? swallowR : radius, tilt, yaw, th, this._planetPos[i]);
+      if (this._slammed) p.y -= c.planetSize * 1.6 * smoothstep(0.7, 1, pullT);
       _axis.set(Math.sin(i * 2.3 + this._seed), 1, Math.cos(i * 1.7 + this._seed)).normalize();
       _quat.setFromAxisAngle(_axis, this._tumble * (0.6 + 0.4 * ((i * 7) % 5) / 5));
       const sz = size * (0.85 + 0.3 * (((i * 13) % 7) / 7));
@@ -523,9 +600,12 @@ export class OrbitLockAbility extends Ability {
     this.planetMesh.instanceMatrix.needsUpdate = true;
     const ps = this._planetState;
     ps.heat = (this._slammed ? Math.exp(-slamT * 5) : 0) + lockFlash * 0.4;
-    ps.dissolve = smoothstep(0.15, 0.95, ft);
+    ps.dissolve = Math.max(smoothstep(0.55, 1, ft), smoothstep(0.85, 1, pullT));
     this.planetMesh.visible = ps.dissolve < 0.999;
     this.planetMaterial.userData.sync(ps);
+
+    /* the singularity, its lens and the accretion vortex */
+    this._syncWell(dt, ce, form, L, drop, slamT, ft, pullT, zone);
 
     /* the star: blooms as it bursts, then goes out */
     const st = this._starState;
@@ -563,14 +643,69 @@ export class OrbitLockAbility extends Ability {
     if (!this._slammed) {
       for (let i = 0; i < N; i++) this._dustAt(dt / N, this._planetPos[i], c.dustRate, c.planetSize * 0.6);
       if (drop > 0) this._dropStreaks(dt, N);
-    } else if (ft < 0.6) {
-      // Embers rising off the buried planets.
-      for (let i = 0; i < N; i++) this._dustAt(dt / N, this._planetPos[i], c.dustRate * 0.35 * (1 - ft), c.planetSize);
+    } else if (pullT < 1) {
+      // Matter torn off the moons as they are dragged in: a spiral of dust.
+      for (let i = 0; i < N; i++) this._dustAt(dt / N, this._planetPos[i], c.dustRate * (0.25 + 0.5 * pullT), c.planetSize);
+      this.ctx.shake.rumble(c.swallowRumble * pullT * (1 - pullT) * 4, dt);
     }
 
     this.position.copy(ce);
     this.position.y = Math.max(0.6, ce.y);
     if (!this._slammed) this.ctx.shake.rumble(0.04 * drop, dt);
+  }
+
+  /**
+   * The gravity well. Hanging, it is a tilted, sagging vortex on the locked
+   * plane round the singularity, growing from the free orbit's size to the
+   * circle as the orbits lock; it falls with the ring; on the floor it lies
+   * flat, flares, then contracts with the swallowing and dissolves inward.
+   */
+  _syncWell(dt, ce, form, L, drop, slamT, ft, pullT, zone) {
+    const c = settings[ID];
+    const g = settings.global;
+    const vs = this._vortexState;
+    const cs = this._coreState;
+    const ls = this._lensState;
+    const grownR = lerp(c.orbitRadius * 1.15, zone * c.vortexReach, L) * Easing.outCubic(form);
+    vs.spin += c.vortexSpin * dt * g.animationSpeed * (1 + 1.5 * L + 2.5 * pullT);
+    vs.yaw = Math.atan2(this.side.z, this.side.x);
+    if (!this._slammed) {
+      vs.center.copy(ce);
+      vs.tilt = c.lockLean * (1 - Easing.inQuad(drop)) * smoothstep(0, 1, L + 0.4);
+      vs.outer = grownR;
+      vs.inner = c.coreSize * 1.15 * Easing.outBack(form);
+      vs.height = c.vortexHeight * (0.6 + 0.4 * L);
+      vs.sag = c.wellSag * L * (1 - drop);
+      vs.opacity = smoothstep(0, 0.5, form);
+      vs.flare = 0;
+      vs.dissolve = 0;
+      cs.center.copy(ce);
+      cs.size = c.coreSize * Easing.outBack(form);
+      cs.squash = 0;
+    } else {
+      vs.center.copy(this._target).setY(0.03);
+      vs.tilt = 0;
+      vs.outer = zone * c.vortexReach * lerp(1, Math.max(c.swallowTo, 0.15) + 0.1, Easing.inCubic(pullT));
+      vs.inner = c.coreSize * 1.15 * (1 - 0.5 * pullT);
+      vs.height = c.vortexHeight * (1 + 0.8 * Math.exp(-slamT * 4));
+      vs.sag = 0;
+      vs.opacity = 1;
+      vs.flare = Math.exp(-slamT * 5);
+      vs.dissolve = smoothstep(0.5, 1, ft);
+      cs.center.copy(this._target).setY(c.coreSize * 0.45 * (1 - smoothstep(0.3, 1, ft)));
+      cs.size = c.coreSize * (1 + 0.3 * pullT) * (1 - smoothstep(0.6, 1, ft));
+      cs.squash = 0.45;
+    }
+    this.vortex.visible = vs.opacity > 0.002 && vs.dissolve < 0.999;
+    this.vortexMaterial.userData.sync(vs);
+    this.core.visible = cs.size > 0.01;
+    this.coreMaterial.userData.sync(cs);
+    ls.center.copy(cs.center);
+    ls.size = Math.max(cs.size, 0.05) * c.lensSize;
+    ls.hole = 1 / Math.max(1.05, c.lensSize);
+    ls.strength = smoothstep(0, 0.6, form) * (1 + 1.5 * (this._slammed ? Math.exp(-slamT * 3) : 0)) * (1 - smoothstep(0.6, 1, ft));
+    this.lens.visible = ls.strength > 0.002 && cs.size > 0.01;
+    this.lensMaterial.userData.sync(ls);
   }
 
   /** Orbit k's tilt before the lock: alternating sides, steepest first. */
@@ -758,6 +893,9 @@ export class OrbitLockAbility extends Ability {
     this.planetMesh.visible = false;
     this.dial.visible = false;
     this.warp.visible = false;
+    this.vortex.visible = false;
+    this.core.visible = false;
+    this.lens.visible = false;
     for (const m of this.orbitMeshes) m.visible = false;
   }
 
@@ -765,6 +903,10 @@ export class OrbitLockAbility extends Ability {
     this.tubeGeometry.dispose();
     this.planetGeometry.dispose();
     this.quadGeometry.dispose();
+    this.vortexGeometry.dispose();
+    this.vortexMaterial.dispose();
+    this.coreMaterial.dispose();
+    this.lensMaterial.dispose();
     for (const m of this.orbitMaterials) m.dispose();
     this.planetMaterial.dispose();
     this.starMaterial.dispose();
@@ -834,9 +976,38 @@ export function buildEditor(gui, c, Editor) {
   R(planets, c, 'bandScale', 0.5, 10, 0.05, 'bands');
   R(planets, c, 'bandSpeed', 0, 10, 0.05, 'band speed');
   R(planets, c, 'planetTumble', 0, 15, 0.05, 'tumble (rad/s)');
+  R(planets, c, 'planetCrag', 0, 2, 0.01, 'craggy rock');
+  R(planets, c, 'planetFissure', 0, 1, 0.01, 'molten seams');
+  planets.addColor(c, 'colorPlanetRock').name('rock');
   planets.addColor(c, 'colorPlanetCore').name('core');
   planets.addColor(c, 'colorPlanetBand').name('bands');
   planets.addColor(c, 'colorPlanetRim').name('limb');
+
+  const well = folder.addFolder('3b · Singularity & well');
+  R(well, c, 'coreSize', 0.05, 2, 0.01, 'singularity radius (m)');
+  R(well, c, 'coreRimGlow', 0, 12, 0.05, 'photon ring glow');
+  R(well, c, 'coreRimPower', 0.5, 10, 0.05, 'photon ring sharpness');
+  R(well, c, 'lensSize', 1.1, 8, 0.05, 'lens (× core)');
+  R(well, c, 'lensStrength', 0, 4, 0.01, 'lens strength');
+  R(well, c, 'lensSwirl', -3, 3, 0.01, 'lens twist (rad)');
+  R(well, c, 'vortexReach', 0.2, 1.5, 0.01, 'vortex reach (× radius)');
+  R(well, c, 'vortexHeight', 0, 2, 0.01, 'ridge height (m)');
+  R(well, c, 'vortexArms', 1, 8, 1, 'spiral arms');
+  R(well, c, 'vortexTwist', 0, 8, 0.05, 'arm winding');
+  R(well, c, 'vortexSpin', 0, 10, 0.05, 'spin (rad/s)');
+  R(well, c, 'vortexHotGlow', 0, 10, 0.05, 'lip glow');
+  R(well, c, 'vortexStreaks', 0, 3, 0.01, 'matter streaks');
+  R(well, c, 'vortexOpacity', 0, 1, 0.01, 'opacity');
+  R(well, c, 'wellSag', 0, 3, 0.01, 'well sag while hanging (m)');
+  R(well, c, 'swallowDelay', 0, 2, 0.01, 'swallowing starts after (s)');
+  R(well, c, 'swallowTime', 0.1, 4, 0.01, 'swallows over (s)');
+  R(well, c, 'swallowTo', 0, 1, 0.01, 'moons dragged in to (× radius)');
+  R(well, c, 'swallowSpin', 0, 10, 0.05, 'drag-in spin (rad/s)');
+  R(well, c, 'swallowRumble', 0, 1, 0.01, 'rumble');
+  well.addColor(c, 'colorWellHot').name('hot');
+  well.addColor(c, 'colorWellPale').name('pale');
+  well.addColor(c, 'colorWellBody').name('body');
+  well.addColor(c, 'colorWellDeep').name('deep');
 
   const drop = folder.addFolder('4 · Drop');
   R(drop, c, 'dropTime', 0.02, 2, 0.01, 'falls over (s)');

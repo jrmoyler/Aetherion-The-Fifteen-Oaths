@@ -1,10 +1,11 @@
-import { InstancedBufferAttribute, InstancedMesh, Mesh, Object3D, PlaneGeometry, Vector3 } from 'three';
+import { IcosahedronGeometry, InstancedBufferAttribute, InstancedMesh, Mesh, Object3D, PlaneGeometry, Vector3 } from 'three';
 import { Ability, AbilityPhase } from '../Ability.js';
 import {
   createStillpointFloorMaterial,
   createStillpointGlassMaterial,
   createStillpointLensMaterial,
   createStillpointRockMaterial,
+  createStillpointSeedMaterial,
   createStillpointShellMaterial
 } from '../../materials/atlas/StillpointMaterials.js';
 import {
@@ -130,10 +131,22 @@ export class StillpointAbility extends Ability {
 
   createShaders() {
     /* ---- layer 1: the lattice ---- */
-    this.shellMaterial = createStillpointShellMaterial();
+    // Two passes over one geometry per level: the far wall, then the near.
+    this.shellMaterial = createStillpointShellMaterial(1);
+    this.shellBackMaterial = createStillpointShellMaterial(0);
     this.cages = [];
+    this.cagesBack = [];
     for (let level = 0; level < CAGE_LEVELS; level++) {
-      const mesh = new Mesh(createGeodesicCageGeometry(level + 1), this.shellMaterial);
+      const geometry = createGeodesicCageGeometry(level + 1);
+      const back = new Mesh(geometry, this.shellBackMaterial);
+      back.name = `StillpointCageFar${level + 1}`;
+      back.layers.set(LAYER.VFX);
+      back.renderOrder = 11;
+      back.frustumCulled = false;
+      back.visible = false;
+      this.group.add(back);
+      this.cagesBack.push(back);
+      const mesh = new Mesh(geometry, this.shellMaterial);
       mesh.name = `StillpointCage${level + 1}`;
       mesh.layers.set(LAYER.VFX);
       mesh.renderOrder = 12;
@@ -142,6 +155,17 @@ export class StillpointAbility extends Ability {
       this.group.add(mesh);
       this.cages.push(mesh);
     }
+
+    /* ---- the seed carried to the circle ---- */
+    this.seedGeometry = new IcosahedronGeometry(1, 0);
+    this.seedMaterial = createStillpointSeedMaterial();
+    this.seed = new Mesh(this.seedGeometry, this.seedMaterial);
+    this.seed.name = 'StillpointSeed';
+    this.seed.layers.set(LAYER.VFX);
+    this.seed.renderOrder = 13;
+    this.seed.frustumCulled = false;
+    this.seed.visible = false;
+    this.group.add(this.seed);
 
     this.floorGeometry = new PlaneGeometry(1, 1, 1, 1).rotateX(-Math.PI / 2);
     this.floorMaterial = createStillpointFloorMaterial();
@@ -216,6 +240,7 @@ export class StillpointAbility extends Ability {
     this._shimmerTime = 0;
     this._ringPhase = 0;
     this._lensPhase = 0;
+    this._sweep = 0;
 
     this._held = [];
     for (let i = 0; i < MAX_HELD; i++) this._held.push({ dummy: null, time: 0 });
@@ -225,8 +250,8 @@ export class StillpointAbility extends Ability {
     this._force = { impulse: 0, lift: 0, spin: 0 };
     this._look = { color: '#000000', rimColor: '#ffffff', rimEmissive: 1, edgeColor: '#ffffff', edgeEmissive: 1, edgeWidth: 0.12 };
 
-    this._shellState = { seed: 0, form: 0, dissolve: 0, sink: 0, shimmerTime: 0, flash: 0 };
-    this._floorState = { quadSize: 8, radius: 3, ringPhase: 0, form: 0, fade: 1, flash: 0, seed: 0 };
+    this._shellState = { seed: 0, form: 0, dissolve: 0, sink: 0, shimmerTime: 0, sweep: 0, flash: 0 };
+    this._floorState = { quadSize: 8, radius: 3, ringPhase: 0, form: 0, fade: 1, flash: 0, seed: 0, tele: 0 };
     this._lensState = { size: 4, drag: 0, phase: 0, shock: 0, shockAt: 0 };
   }
 
@@ -404,6 +429,7 @@ export class StillpointAbility extends Ability {
     this._shimmerTime = 0;
     this._ringPhase = 0;
     this._lensPhase = 0;
+    this._sweep = Math.random() * TAU;
     for (const p of this._pieces) {
       p.angle = Math.random() * TAU;
       p.reach = Math.random();
@@ -420,6 +446,8 @@ export class StillpointAbility extends Ability {
     this.moteEmitter.reset();
     this.trailEmitter.reset();
     for (const cage of this.cages) cage.visible = false;
+    for (const cage of this.cagesBack) cage.visible = false;
+    this.seed.visible = false;
     this.floor.visible = false;
     this.lens.visible = false;
     for (const mesh of this.rockMeshes) mesh.count = 0;
@@ -445,6 +473,8 @@ export class StillpointAbility extends Ability {
     this._cageTurn += c.turnRate * slow * g.animationSpeed * dt;
     this._ringPhase += c.floorRingSpeed * slow * g.animationSpeed * dt;
     this._lensPhase += 2.0 * slow * dt;
+    // The time hand drags while time is held, and runs again at the release.
+    this._sweep += c.sweepSpeed * lerp(1, c.sweepHeld, held) * g.animationSpeed * dt;
 
     const form = Easing.outCubic(saturate(t / this._formTime())) * 1.12;
     const since = this._released ? t - this._releaseAt() : -1;
@@ -458,28 +488,32 @@ export class StillpointAbility extends Ability {
     ss.dissolve = Math.min(1, dissolve + (this.phase === AbilityPhase.FADE ? saturate(this._fadeT / this.fadeDuration) : 0));
     ss.sink = c.shellSink;
     ss.shimmerTime = this._shimmerTime;
+    ss.sweep = this._sweep;
     ss.flash = flash;
     this.shellMaterial.userData.sync(ss);
+    this.shellBackMaterial.userData.sync(ss);
     const level = Math.min(CAGE_LEVELS, Math.max(1, Math.round(c.latticeFreq))) - 1;
     for (let i = 0; i < CAGE_LEVELS; i++) {
-      const cage = this.cages[i];
-      cage.visible = i === level && this._t >= 0 && ss.dissolve < 0.999;
-      cage.position.set(_centre.x, -c.shellSink * H, _centre.z);
-      cage.scale.set(R, H, R);
-      cage.rotation.y = this._cageTurn;
-      // Bulges a hair in the tremble, and kicks out at the release.
-      const tremble = this._trembleAmount();
-      cage.scale.multiplyScalar(1 + tremble * 0.015 + flash * 0.06);
+      for (const cage of [this.cagesBack[i], this.cages[i]]) {
+        cage.visible = i === level && this._t >= 0 && ss.dissolve < 0.999;
+        cage.position.set(_centre.x, -c.shellSink * H, _centre.z);
+        cage.scale.set(R, H, R);
+        cage.rotation.y = this._cageTurn;
+        // Bulges a hair in the tremble, and kicks out at the release.
+        const tremble = this._trembleAmount();
+        cage.scale.multiplyScalar(1 + tremble * 0.015 + flash * 0.06);
+      }
     }
 
     const fs = this._floorState;
     fs.radius = R;
-    fs.quadSize = R * 2.3;
+    fs.quadSize = R * 4.0;
     fs.ringPhase = this._ringPhase;
     fs.form = this._t < 0 ? 0 : form;
     fs.fade = 1 - ss.dissolve;
     fs.flash = flash;
     fs.seed = this._seed;
+    fs.tele = 0;
     this.floorMaterial.userData.sync(fs);
     this.floor.position.set(_centre.x, 0.018, _centre.z);
     this.floor.scale.set(fs.quadSize, 1, fs.quadSize);
@@ -721,10 +755,11 @@ export class StillpointAbility extends Ability {
       endRadius: c.burstRadius * power,
       life: c.burstLife,
       intensity: 1.4,
-      opacity: 0.5,
-      fresnel: 2.4,
+      opacity: 0.2,
+      fresnel: 3.0,
       squash: c.shellSquash,
-      colorA: getColor(c.colorShockA),
+      // Saturated at the heart, the rim violet: no white dome.
+      colorA: getColor(c.colorFill),
       colorB: getColor(c.colorShockB),
       colorC: getColor(c.colorFloor)
     });
@@ -887,7 +922,7 @@ export class StillpointAbility extends Ability {
     _emit.radius = 0.12;
     _emit.speed = 0.15;
     _emit.spread = 1;
-    _emit.size = c.moteSize * 1.4;
+    _emit.size = c.seedTrailSize;
     _emit.life = c.moteLife * 0.4;
     // Left hanging in the air behind it: the trail itself is already slowed.
     this.motes.emit(n, _emit);
@@ -966,13 +1001,38 @@ export class StillpointAbility extends Ability {
   /* ------------------------------------------------------------------ */
 
   onTravel(dt) {
+    const c = settings.stillpoint;
     this._syncParticles();
     this._seedPoint(this.position);
     this._travelFx(dt);
+    // The seed itself: grows out of the hand, tumbles slowly on its arc.
+    const grow = Easing.outCubic(saturate(this.u / 0.15));
+    this.seed.position.copy(this.position);
+    this.seed.scale.setScalar(Math.max(0.0001, c.seedSize * grow));
+    this.seed.rotation.set(this.age * 1.3, this.age * 0.9, this.age * 0.4);
+    this.seedMaterial.userData.sync(1);
+    this.seed.visible = true;
+    // The mark: the floor telegraph closes on the landing point.
+    this._floorPoint(_centre);
+    const R = this.radius;
+    const fs = this._floorState;
+    fs.radius = R;
+    fs.quadSize = R * 4.0;
+    fs.ringPhase = this._ringPhase;
+    fs.form = 0;
+    fs.fade = 1;
+    fs.flash = 0;
+    fs.seed = this._seed;
+    fs.tele = this.u * c.floorTelegraph;
+    this.floorMaterial.userData.sync(fs);
+    this.floor.position.set(_centre.x, 0.018, _centre.z);
+    this.floor.scale.set(fs.quadSize, 1, fs.quadSize);
+    this.floor.visible = fs.tele > 0.003;
   }
 
   onImpact() {
     this._t = 0;
+    this.seed.visible = false;
     this._landFx();
   }
 
@@ -1007,6 +1067,8 @@ export class StillpointAbility extends Ability {
   onDestroy() {
     this._releaseHeld();
     for (const cage of this.cages) cage.visible = false;
+    for (const cage of this.cagesBack) cage.visible = false;
+    this.seed.visible = false;
     this.floor.visible = false;
     this.lens.visible = false;
     for (const mesh of this.rockMeshes) {
@@ -1026,6 +1088,9 @@ export class StillpointAbility extends Ability {
   dispose() {
     for (const cage of this.cages) cage.geometry.dispose();
     this.shellMaterial.dispose();
+    this.shellBackMaterial.dispose();
+    this.seedGeometry.dispose();
+    this.seedMaterial.dispose();
     this.floorGeometry.dispose();
     this.floorMaterial.dispose();
     for (const mesh of this.rockMeshes) {
@@ -1062,6 +1127,9 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   Editor.castAnimation(cast, c);
   R(cast, c, 'handHeight', 0, 3, 0.01, 'hand height (m)');
+  R(cast, c, 'seedSize', 0.02, 0.8, 0.005, 'seed size (m)');
+  R(cast, c, 'seedGlow', 0, 4, 0.01, 'seed glow');
+  R(cast, c, 'seedTrailSize', 0.01, 0.5, 0.005, 'seed trail mote size');
 
   /* ---- layer 1 ---- */
   const lattice = folder.addFolder('1 · Lattice');
@@ -1074,6 +1142,16 @@ export function buildEditor(gui, c, Editor) {
   R(lattice, c, 'edgeGlow', 0, 8, 0.05, 'edge glow');
   R(lattice, c, 'nodeGlow', 0, 10, 0.05, 'node glow');
   R(lattice, c, 'fillGlow', 0, 1, 0.005, 'face film');
+  R(lattice, c, 'panelOpacity', 0, 1, 0.01, 'glass panes (body)');
+  R(lattice, c, 'panelGlow', 0, 4, 0.01, 'pane glow');
+  R(lattice, c, 'panelGlint', 0, 8, 0.05, 'sun glint');
+  R(lattice, c, 'panelSaturation', 0, 1, 0.01, 'glass saturation');
+  R(lattice, c, 'panelLightCap', 0.1, 1, 0.01, 'brightest light held to');
+  R(lattice, c, 'frameDeep', 0, 1, 0.01, 'frames: dark body');
+  R(lattice, c, 'sweepSpeed', -4, 4, 0.01, 'time hand (rad/s)');
+  R(lattice, c, 'sweepHeld', 0, 1, 0.01, 'time hand while held (×)');
+  R(lattice, c, 'sweepGlow', 0, 4, 0.01, 'time hand glow');
+  R(lattice, c, 'sweepTrail', 0.5, 20, 0.1, 'time hand wake (sharper →)');
   R(lattice, c, 'fresnelPower', 0.2, 8, 0.05, 'rim power');
   R(lattice, c, 'fresnelGlow', 0, 4, 0.01, 'rim glow');
   R(lattice, c, 'shimmerSpeed', 0, 3, 0.01, 'shimmer speed');
@@ -1085,7 +1163,8 @@ export function buildEditor(gui, c, Editor) {
   R(lattice, c, 'turnRate', -1, 1, 0.005, 'cage turn (rad/s)');
   lattice.addColor(c, 'colorEdge').name('edges');
   lattice.addColor(c, 'colorNode').name('nodes');
-  lattice.addColor(c, 'colorFill').name('film');
+  lattice.addColor(c, 'colorFill').name('pane body');
+  lattice.addColor(c, 'colorPanelDeep').name('pane deep');
   lattice.addColor(c, 'colorRim').name('rim');
   lattice.addColor(c, 'colorBurn').name('forming / burning');
   const floor = lattice.addFolder('Floor');
@@ -1094,6 +1173,9 @@ export function buildEditor(gui, c, Editor) {
   R(floor, c, 'floorRingSpeed', -1, 1, 0.005, 'ring creep');
   R(floor, c, 'floorSpokes', 3, 48, 1, 'spokes');
   R(floor, c, 'floorOpacity', 0, 1, 0.01, 'opacity');
+  R(floor, c, 'floorDeep', 0, 1, 0.01, 'stilled ground (dark)');
+  R(floor, c, 'floorTelegraph', 0, 1, 0.01, 'telegraph while in flight');
+  floor.addColor(c, 'colorFloorDeep').name('deep');
   floor.addColor(c, 'colorFloor').name('rings');
   floor.addColor(c, 'colorFloorHot').name('rings, hot');
 

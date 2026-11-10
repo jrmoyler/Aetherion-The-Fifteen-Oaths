@@ -30,7 +30,7 @@ const LOADERS = {
   collective: () => import('./source-packs/collective.js'),
   sandbox: () => import('./source-packs/sandbox.js'),
 };
-const ALIASES = { codex: 'sandbox', atlas: 'sandbox', 'matrix-new': 'sandbox' };
+const ALIASES = { codex: 'sandbox', atlas: 'sandbox', 'matrix-new': 'sandbox', 'matrix-expansion': 'sandbox' };
 const BUFFS = { boost: 'ElectricBoost', magic: 'MagicBoost', fire: 'FireBoost' };
 export const SOURCE_ABILITY_IDS = Object.freeze(Object.values(ABILITIES_BY_OATH).flat().map(a => a.id));
 const known = new Set(SOURCE_ABILITY_IDS);
@@ -39,6 +39,20 @@ const position = p => new Vector3(p?.x ?? 0, p?.y ?? 0, p?.z ?? 0);
 export async function createSourceAbilities(ctx) {
   const modules = Object.fromEntries(await Promise.all(Object.entries(LOADERS).map(async ([key, load]) => [key, await load()])));
   const root = new Group(); root.name = 'AbilityMatrix:original-source'; ctx.scene.add(root);
+  // Matrix Expansion casts register on the native sandbox engine exactly as the source app installs them
+  // (settings, metadata, element lookup, then one pool per manager); only the editor folders are left out.
+  const expansion = new Map();
+  for (const entry of modules.sandbox.expansionRoster?.() ?? []) {
+    if (entry.status !== 'live' || !known.has(entry.uid)) continue;
+    const m = modules.sandbox;
+    if (!m.settings[entry.ID]) {
+      m.settings[entry.ID] = structuredClone(entry.config.settings);
+      m.DEFAULT_SETTINGS[entry.ID] = structuredClone(entry.config.settings);
+      m.ELEMENT_META[entry.ID] = { ...entry.config.meta };
+      m.ELEMENT_OF[entry.uid] = entry.config.meta.element;
+    }
+    expansion.set(entry.uid, entry);
+  }
   const camera = ctx.camera ?? new PerspectiveCamera(55, 1, .1, 1000);
   camera.layers.enable(1); camera.layers.enable(4); // Original WORLD and VFX; distortion remains a separate render layer.
   const lights = new LightPool(root);
@@ -115,6 +129,7 @@ export async function createSourceAbilities(ctx) {
     };
     const context = { scene: group, camera, environment, particles, decals, bursts, fissures, lights: localLights, shake, flash, models, dummies: targets };
     const manager = new m.AbilityManager(context);
+    if (pack === 'sandbox') for (const entry of expansion.values()) manager.register(entry.ID, entry.Ability);
     const value = { key, pack, floor, group, context, manager, particles, decals, bursts, fissures, touched: elapsed, buffs: new Set() };
     sessions.set(key,value); return value;
   }
@@ -156,7 +171,7 @@ export async function createSourceAbilities(ctx) {
         releaseAura=boostAuras.claim(opts.caster,token,instance,modules[pack].settings[id]);
       } else {
         s.context.character=characterProxy(opts.caster,s.floor);
-        instance=s.manager.cast(origin.clone().setY(origin.y-s.floor),direction,Math.max(.1,distance||ab.range||4),id);
+        instance=s.manager.cast(origin.clone().setY(origin.y-s.floor),direction,Math.max(.1,distance||ab.range||4),expansion.get(ab.id)?.ID??id);
         if(!instance) throw new Error(`Original source class missing for ${ab.id}`);
         instance.ctx={...s.context};
       }

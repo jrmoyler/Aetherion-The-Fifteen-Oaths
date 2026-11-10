@@ -7,7 +7,8 @@ import {
   HemisphereLight,
   DirectionalLight,
   EquirectangularReflectionMapping,
-  PMREMGenerator
+  PMREMGenerator,
+  PCFShadowMap
 } from 'three';
 import { settings } from '../config/settings.js';
 import { getColor } from '../utils/color.js';
@@ -48,6 +49,11 @@ export class Environment {
   constructor(renderer, camera) {
     this.renderer = renderer;
     this.camera = camera;
+    // r185 warns and downgrades PCFSoftShadowMap to PCFShadowMap on the first
+    // shadow pass. Ask for that replacement up front so the console stays quiet
+    // and the filter stays what three is already drawing. Size, bias and the
+    // shadow frustum are left alone.
+    this.renderer.gl.shadowMap.type = PCFShadowMap;
 
     this.scene = new Scene();
     // Flat dark backdrop, kept in a Color we own so the editor can drive it.

@@ -21,8 +21,13 @@ import { getColor } from '../../utils/color.js';
  *    it frame by frame at the end.
  *  - **the clasps** (`createClaspMaterial`) — two bright bands that snap
  *    shut round the cocoon's top and bottom when it locks.
- *  - **the floor** (`createFloorMaterial`) — the circle's perforated rim and,
- *    during the rewind, chevrons racing inward and turning backward.
+ *  - **the floor** (`createFloorMaterial`) — a filled, normal-blended field:
+ *    the floor the film has run over *develops* deep sepia (#1e0c04 → #7a3a0e
+ *    emulsion blotches, grain, flickering scratches), warm light spills onto
+ *    it round every turn of the film, and the whole field is wrung backward
+ *    (inner rings further than outer) while it rewinds. Over it the circle's
+ *    perforated rim and, during the rewind, chevrons racing inward. It stays
+ *    through the lock and burns off from a ragged edge.
  *  - **the warp** (`createWarpMaterial`) — LAYER.DISTORTION: the air wrung
  *    round backward during the rewind, an implosion ring on the lock.
  *
@@ -66,6 +71,8 @@ const FILM_VERTEX = /* glsl */ `
   varying float vCoil;        // 0 on the floor .. 1 standing in the cocoon
   varying float vDist;        // line mode: metres from the hand
   varying float vViewZ;
+  varying vec3  vNrm;         // the film's face normal, world
+  varying vec3  vViewDir;
 
   ${SPIRAL_GLSL}
 
@@ -75,6 +82,7 @@ const FILM_VERTEX = /* glsl */ `
     vec3 across;
     float coil = 0.0;
     float l;
+    vec3 face = vec3(0.0, 1.0, 0.0);
     if (uMode < 0.5) {
       l = position.x * uLineLen;
       float d = l + uFeed;
@@ -103,6 +111,7 @@ const FILM_VERTEX = /* glsl */ `
         P = uCenter + radial * rc;
         P.y = uLift + cd * uCoilH / max(uLf, 1.0) + uWidth * 0.5 * coil;
         across = normalize(mix(radial, vec3(0.0, 1.0, 0.0), coil));
+        face = normalize(mix(vec3(0.0, 1.0, 0.0), radial, coil));
       }
       vDist = 0.0;
     }
@@ -110,6 +119,8 @@ const FILM_VERTEX = /* glsl */ `
     vL = l;
     vV = v;
     vCoil = coil;
+    vNrm = face;
+    vViewDir = cameraPosition - P;
     vec4 mv = viewMatrix * vec4(P, 1.0);
     vViewZ = mv.z;
     gl_Position = projectionMatrix * mv;
@@ -140,6 +151,13 @@ const FILM_FRAGMENT = /* glsl */ `
   uniform vec3  uFilmDark;
   uniform vec3  uImage;
   uniform vec3  uEdge;
+  uniform vec3  uCore;
+  uniform float uShade;       // 0..1 how much the standing cocoon is lit by the sun
+  uniform float uRimLight;    // its silhouette rim
+  uniform float uCoilDark;    // 0..1 how far the wound film falls to the deep stock
+  uniform float uCoilFrame;   // the frames' light left in the wound film
+  uniform float uCoilLine;    // amber on its frame lines and edges
+  uniform vec3  uLightDir;
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
   uniform float     uCameraNear;
@@ -152,6 +170,8 @@ const FILM_FRAGMENT = /* glsl */ `
   varying float vCoil;
   varying float vDist;
   varying float vViewZ;
+  varying vec3  vNrm;
+  varying vec3  vViewDir;
 
   ${noiseGLSL}
   ${commonGLSL}
@@ -194,18 +214,47 @@ const FILM_FRAGMENT = /* glsl */ `
     img = clamp(img * 0.6 + 0.4 + figure, 0.0, 1.0);
     float strobe = 1.0 - uFlicker * uRun * step(0.55, hash11(frameIdx * 3.1 + floor(uTime * 14.0)));
 
-    vec3 col = mix(uFilmDark, uFilm, 0.55) * 0.6;
-    col += uImage * img * inFrame * uGlow * strobe * uShaderIntensity;
-    col = mix(col, uFilmDark * 0.6, frameLine * (1.0 - edgeBand));
-    // The hot amber edges.
-    float rim = smoothstep(halfW * 0.86, halfW, x);
-    col += uEdge * (rim * 1.4 + edgeBand * 0.35) * uEdgeGlow;
+    // Four stops: deep sepia emulsion → amber body → pale tint where the
+    // image is brightest → white-hot only at the running end and the lock.
+    // Wound up in the cocoon the frames sit deeper: more base stock shows.
+    float lit = inFrame * (0.45 + 0.55 * img) * strobe * mix(1.0, 0.6, vCoil);
+    vec3 frameCol = mix(uFilm, uImage, smoothstep(0.55, 1.0, img)) * uGlow * uShaderIntensity;
+    vec3 col = mix(uFilmDark, frameCol, lit);
+    col = mix(col, uFilmDark * 0.5, frameLine * (1.0 - edgeBand));
+    // The sprocket strip: dark base stock, a thin amber lip at the very edge.
+    col = mix(col, uFilmDark * 1.3 + uFilm * 0.12, edgeBand);
+    float rim = smoothstep(halfW * 0.9, halfW, x);
+    col += uEdge * rim * uEdgeGlow * 0.55;
+
+    // Wound up in the cocoon the film is a solid, shaded thing: dark sepia
+    // stock carries the mass, the ghost images glimmer dimly in it, and amber
+    // lives only on the frame lines, the sprocket lip and the edges.
+    // (A full replace, not a blend: even a tenth of the bright frame colour
+    // left underneath reads as an amber block once it blooms.)
+    float coilK = vCoil;
+    vec3 coilCol = mix(uFilmDark * mix(1.6, 0.25, uCoilDark), uFilm * uCoilFrame, inFrame * smoothstep(0.55, 1.0, img));
+    coilCol = mix(coilCol, uFilmDark * 0.6, edgeBand * 0.6);
+    float coilLines = frameLine * (1.0 - edgeBand) + rim;
+    coilCol += uEdge * coilLines * uCoilLine;
+    col = mix(col, coilCol, coilK);
+
+    // Standing in the cocoon the film is a lit surface: sun, shadow side, rim.
+    vec3 N = normalize(vNrm);
+    vec3 V = normalize(vViewDir);
+    if (dot(N, V) < 0.0) N = -N;
+    float lam = 0.28 + 0.95 * max(dot(N, normalize(uLightDir)), 0.0);
+    float fres = pow(1.0 - clamp(abs(dot(N, V)), 0.0, 1.0), 3.0);
+    col *= mix(1.0, lam, vCoil * uShade);
+    col += uEdge * fres * uRimLight * vCoil;
+
     // The leading end of the unspooling film, and the lock's flare.
-    if (uMode > 0.5) col += uEdge * exp(-(uOut - vL) * 2.0) * uEdgeGlow * 1.5;
-    col += uEdge * uLock * (0.6 + vCoil) * 2.0;
-    col += uEdge * burnEdge * 6.0;
+    if (uMode > 0.5) col += uCore * exp(-(uOut - vL) * 2.0) * uEdgeGlow * 1.2;
+    col += uEdge * uLock * mix(1.4, 0.25 + 0.9 * coilLines, coilK) * 0.8;
+    col += uCore * burnEdge * 5.0;
 
     float a = uOpacity * mix(0.75, 1.0, edgeBand + frameLine);
+    // Wound film is dense: what is bound inside does not glow through it.
+    a = mix(a, max(a, 0.97), coilK);
     vec2 suv = gl_FragCoord.xy / uResolution;
     a *= softFade(uSceneDepth, suv, vViewZ, uCameraNear, uCameraFar, 0.05);
     if (a < 0.004) discard;
@@ -255,7 +304,13 @@ export function createFilmMaterial() {
       uFilm: { value: new Color() },
       uFilmDark: { value: new Color() },
       uImage: { value: new Color() },
-      uEdge: { value: new Color() }
+      uEdge: { value: new Color() },
+      uCore: { value: new Color() },
+      uShade: { value: 0.8 },
+      uRimLight: { value: 1 },
+      uCoilDark: { value: 0.85 },
+      uCoilFrame: { value: 0.3 },
+      uCoilLine: { value: 1.2 }
     }),
     vertexShader: FILM_VERTEX,
     fragmentShader: FILM_FRAGMENT
@@ -303,6 +358,12 @@ export function createFilmMaterial() {
     u.uFilmDark.value.copy(getColor(c.colorFilmDark));
     u.uImage.value.copy(getColor(c.colorImage));
     u.uEdge.value.copy(getColor(c.colorEdge));
+    u.uCore.value.copy(getColor(c.colorCore));
+    u.uShade.value = c.coilShade;
+    u.uRimLight.value = c.coilRim * g.fresnel;
+    u.uCoilDark.value = c.coilDark;
+    u.uCoilFrame.value = c.coilFrameGlow * g.glow;
+    u.uCoilLine.value = c.coilLineGlow * g.glow;
   };
 
   return material;
@@ -425,7 +486,28 @@ const FLOOR_FRAGMENT = /* glsl */ `
   uniform vec3  uChevron;
   uniform float uGlobalGlow;
 
+  /* the exposed field: the floor the film has run over, developed sepia */
+  uniform float uR0;
+  uniform float uB;
+  uniform float uOut;         // film metres unspooled (never shrinks)
+  uniform float uIn;          // film metres wound back
+  uniform float uSwirl;       // integrated: the field wrung backward
+  uniform float uSeed;
+  uniform float uFieldOpacity;
+  uniform float uFieldGlow;
+  uniform float uSpill;       // half-width of the light under the film, m
+  uniform float uGrain;
+  uniform float uScratch;
+  uniform float uFieldFlicker;
+  uniform float uBurn;        // 0..1 the field burning off
+  uniform float uLockFlare;
+  uniform vec3  uFieldDeep;
+  uniform vec3  uFieldBody;
+  uniform vec3  uFieldGlowC;
+
   varying vec2 vXZ;
+
+  ${noiseGLSL}
 
   void main() {
     float r = length(vXZ);
@@ -434,12 +516,50 @@ const FLOOR_FRAGMENT = /* glsl */ `
     vec3 col = vec3(0.0);
     float alpha = 0.0;
 
+    /* ---- the developed field ---- */
+    // Film metres from the spiral's inner end to radius r.
+    float th = max(0.0, (r - uR0) / max(uB, 1e-4));
+    float Lr = uR0 * th + 0.5 * uB * th * th;
+    float exposed = 1.0 - smoothstep(uOut - 2.0, uOut + 0.01, Lr);
+    exposed *= step(0.001, uOut);
+    float disc = 1.0 - smoothstep(uRadius - 0.35, uRadius + 0.05, r);
+    // Wrung backward: inner rings turn further than outer ones.
+    float angS = ang + uSwirl * (1.15 - r / max(uRadius, 0.3));
+    vec2 p = r * vec2(cos(angS), sin(angS));
+    float blot = fbm3(vec3(p * 0.55, uSeed)) * 0.5 + 0.5;
+    float flick = 1.0 - uFieldFlicker * step(0.6, hash11(floor(uTime * 12.0) + uSeed));
+    // Grain and scratches, the way old stock looks projected.
+    float grain = step(0.93, hash13(vec3(floor(p * 34.0), floor(uTime * 18.0)))) * uGrain;
+    float lane = floor(p.x * 5.0 + uSeed);
+    float scratch = step(0.86, hash11(lane * 1.7 + floor(uTime * 3.0)))
+                  * (1.0 - smoothstep(0.0, 0.03, abs(fract(p.x * 5.0) - 0.5)))
+                  * (0.5 + 0.5 * sin(p.y * 1.3 + uTime * 9.0 + lane)) * uScratch;
+    // Light spilling off the film onto the floor round each turn of the spiral.
+    float armA = th + uSpin;
+    float dd = mod(ang - armA + 3.14159265, 6.2831853) - 3.14159265;
+    float dist = abs(dd) * max(uB, 1e-4);
+    float onFilm = step(Lr, uOut - uIn) * step(uR0 - 0.05, r);
+    float spill = exp(-pow(dist / max(uSpill, 0.02), 2.0)) * onFilm;
+    float hub = (1.0 - smoothstep(uR0 * 0.6, uR0 + 0.3, r)) * step(0.001, uIn);
+    float vign = mix(1.0, 0.55, smoothstep(0.4, 1.0, r / max(uRadius, 0.3)));
+    vec3 body = mix(uFieldDeep, uFieldBody, (0.25 + 0.55 * blot) * vign);
+    float glowAmt = (spill * 0.9 + hub * 0.6 + uLockFlare * 0.5) * uFieldGlow * flick
+                  + grain * 0.6 + scratch * 0.9;
+    // Burns off from the ragged noise up.
+    float bn = snoise(vec3(p * 0.9, uSeed + 3.0)) * 0.5 + 0.5;
+    float bt = uBurn * 1.2 - 0.1;
+    float keep = uBurn > 0.0 ? smoothstep(bt, bt + 0.1, bn) : 1.0;
+    float burnLip = uBurn > 0.0 ? (1.0 - smoothstep(bt, bt + 0.06, bn)) * keep : 0.0;
+    float fieldA = exposed * disc * uFieldOpacity * (0.8 + 0.2 * blot) * keep;
+    col = body + uFieldGlowC * (glowAmt + burnLip * 3.0);
+    alpha = max(fieldA, clamp(glowAmt, 0.0, 1.0) * exposed * disc * keep);
+
     // The rim: a perforated band — the edge of a reel.
     float dr = abs(r - uRadius);
     float band = 1.0 - smoothstep(uRimWidth * 0.5, uRimWidth * 0.5 + 0.02, dr);
     float perf = step(0.5, fract(a01 * uRadius * 6.0));
     float rim = band * mix(1.0, 0.35, perf) * step(a01, uDraw);
-    col += uRim * rim * uRimGlow;
+    col = mix(col, uRim * uRimGlow, rim);
     alpha = max(alpha, rim);
 
     // Chevrons racing inward and turning backward while it rewinds.
@@ -462,7 +582,7 @@ export function createFloorMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
     side: DoubleSide,
     toneMapped: false,
     polygonOffset: true,
@@ -482,13 +602,33 @@ export function createFloorMaterial() {
       uDraw: { value: 0 },
       uOpacity: { value: 1 },
       uRim: { value: new Color() },
-      uChevron: { value: new Color() }
+      uChevron: { value: new Color() },
+      uR0: { value: 1.5 },
+      uB: { value: 0.18 },
+      uOut: { value: 0 },
+      uIn: { value: 0 },
+      uSwirl: { value: 0 },
+      uSeed: { value: 0 },
+      uFieldOpacity: { value: 0.85 },
+      uFieldGlow: { value: 1.4 },
+      uSpill: { value: 0.45 },
+      uGrain: { value: 0.5 },
+      uScratch: { value: 0.5 },
+      uFieldFlicker: { value: 0.25 },
+      uBurn: { value: 0 },
+      uLockFlare: { value: 0 },
+      uFieldDeep: { value: new Color() },
+      uFieldBody: { value: new Color() },
+      uFieldGlowC: { value: new Color() }
     }),
     vertexShader: FLOOR_VERTEX,
     fragmentShader: FLOOR_FRAGMENT
   });
 
-  /** @param {object} s { center, draw, rewind, phase, spin, fade } */
+  /**
+   * @param {object} s { center, draw, rewind, phase, spin, fade, r0, b, out,
+   *   wound, swirl, burn, lock, seed }
+   */
   material.userData.sync = (s) => {
     const c = settings[ID];
     const g = settings.global;
@@ -507,6 +647,23 @@ export function createFloorMaterial() {
     u.uOpacity.value = c.floorOpacity * g.opacity * s.fade;
     u.uRim.value.copy(getColor(c.colorRim));
     u.uChevron.value.copy(getColor(c.colorChevron));
+    u.uR0.value = s.r0;
+    u.uB.value = s.b;
+    u.uOut.value = s.out;
+    u.uIn.value = s.wound;
+    u.uSwirl.value = s.swirl;
+    u.uSeed.value = s.seed;
+    u.uFieldOpacity.value = c.fieldOpacity;
+    u.uFieldGlow.value = c.fieldGlow * g.glow;
+    u.uSpill.value = c.fieldSpill;
+    u.uGrain.value = c.fieldGrain;
+    u.uScratch.value = c.fieldScratches;
+    u.uFieldFlicker.value = c.fieldFlicker * g.randomness;
+    u.uBurn.value = s.burn;
+    u.uLockFlare.value = s.lock;
+    u.uFieldDeep.value.copy(getColor(c.colorFieldDeep));
+    u.uFieldBody.value.copy(getColor(c.colorFieldBody));
+    u.uFieldGlowC.value.copy(getColor(c.colorFieldGlow));
   };
 
   return material;

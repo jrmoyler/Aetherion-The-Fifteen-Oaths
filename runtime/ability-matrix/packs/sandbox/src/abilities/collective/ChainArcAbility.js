@@ -1,6 +1,8 @@
-import { Mesh, Vector3 } from 'three';
+import { Mesh, PlaneGeometry, Vector3 } from 'three';
 import { Ability } from '../Ability.js';
 import { createChainBoltMaterial } from '../../materials/collective/ChainArcBoltMaterial.js';
+import { createChainFulguriteMaterial, createChainScarMaterial } from '../../materials/collective/ChainArcScarMaterials.js';
+import { createFulguriteGeometry, FULGURITE_VARIANTS } from '../../assets/collective/ChainArcFulguriteGeometry.js';
 import { ChainBoltRibbon, MAX_BRANCHES, MAX_FORK, MAX_GROUND_FORKS, MAX_MAIN } from '../../assets/collective/ChainArcGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -84,6 +86,18 @@ const _shape = {
  *      a larger burn, a STORM shell and extra forks skating across the floor.
  *   5. **FEEDBACK** — a guttering light that rides the newest strike, with a
  *      punch, a flash and a kick of shake on every hit.
+ *   6. **FULGURITE** — the hero that stays. Where every strike goes to ground
+ *      (under each body, or where the bolt grounds), a cluster of fused,
+ *      blackened glass spikes (`ChainArcFulguriteGeometry`) heaves out of the
+ *      floor with an overshoot: opaque, sun-lit, on LAYER.WORLD and casting a
+ *      shadow (`ChainArcScarMaterials`). Its cracks start white-hot and cool
+ *      down the bolt's ramp to the dark deep stop, while bands of residual
+ *      charge keep crawling up the spikes for the whole linger and the spikes
+ *      keep creeping taller. On the way out it sinks back and crumbles.
+ *   7. **LICHTENBERG SCORCH** — under each fulgurite a charred disc whose
+ *      branching burnt figure races outward from the strike, then keeps
+ *      pulsing as charge runs out along its veins. The char is the cast's
+ *      dark deep tone on the floor; it stays until the exit.
  *
  * ## Decisions
  *
@@ -160,6 +174,51 @@ export class ChainArcAbility extends Ability {
     this._reported = false;
     this._jumps = 0;
     this._jumpTimer = 0;
+
+    /* ---- layers 6 & 7: fulgurite + scorch, one per strike slot ---- */
+    this.glassGeometries = [];
+    for (let v = 0; v < FULGURITE_VARIANTS; v++) this.glassGeometries.push(createFulguriteGeometry(v));
+    this.scarGeometry = new PlaneGeometry(1, 1, 1, 1).rotateX(-Math.PI / 2);
+    this.scars = [];
+    for (let i = 0; i < MAX_BOLTS; i++) {
+      const glassMaterial = createChainFulguriteMaterial();
+      const glass = new Mesh(this.glassGeometries[i % FULGURITE_VARIANTS], glassMaterial);
+      glass.name = `ChainFulgurite${i}`;
+      // Solid: in the depth prepass, lit, laying a shadow.
+      glass.layers.set(LAYER.WORLD);
+      glass.castShadow = true;
+      glass.receiveShadow = false;
+      glass.frustumCulled = false;
+      glass.renderOrder = 2;
+      glass.visible = false;
+      this.group.add(glass);
+
+      const scarMaterial = createChainScarMaterial();
+      const scar = new Mesh(this.scarGeometry, scarMaterial);
+      scar.name = `ChainScorch${i}`;
+      scar.layers.set(LAYER.VFX);
+      scar.renderOrder = 5;
+      scar.frustumCulled = false;
+      scar.visible = false;
+      this.group.add(scar);
+
+      this.scars.push({
+        glass,
+        glassMaterial,
+        scar,
+        scarMaterial,
+        /** Dice and timestamps only. */
+        active: false,
+        grounded: false,
+        age: 0,
+        seed: 0,
+        turn: 0,
+        x: 0,
+        z: 0,
+        glassState: { seed: 0, heat: 1, charge: 1, dissolve: 0 },
+        scarState: { seed: 0, radius: 1, reveal: 0, heat: 1, charge: 1, fade: 1 }
+      });
+    }
   }
 
   createParticles() {
@@ -265,6 +324,7 @@ export class ChainArcAbility extends Ability {
     this.sparkEmitter.reset();
 
     for (let i = 0; i < MAX_BOLTS; i++) this._release(this.bolts[i]);
+    for (let i = 0; i < MAX_BOLTS; i++) this._releaseScar(this.scars[i]);
 
     this._hand(this._handPoint);
 
@@ -372,6 +432,9 @@ export class ChainArcAbility extends Ability {
       if (settings.dummies.hit.enabled) dummy.kill(dx, dz, c.hit);
     }
 
+    /* --- the fulgurite and the scorch it stands in --- */
+    this._layScar(index, bolt.toPoint.x, bolt.toPoint.z, !dummy);
+
     /* --- the burn under it --- */
     _pos.set(bolt.toPoint.x, 0, bolt.toPoint.z);
     this.ctx.decals.spawn(DecalType.ARC, _pos, {
@@ -439,6 +502,76 @@ export class ChainArcAbility extends Ability {
     this.lightBoost = Math.max(this.lightBoost, c.strikeLight * 1.3 * g.explosionIntensity);
     this.ctx.shake.add(c.groundShake * g.explosionIntensity * g.cameraShake, 3.2, 24);
     this.ctx.flash.trigger(getColor(c.colorFlash), c.groundFlash * g.explosionIntensity);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Fulgurite + scorch                                                   */
+  /* ------------------------------------------------------------------ */
+
+  _releaseScar(slot) {
+    slot.active = false;
+    slot.glass.visible = false;
+    slot.scar.visible = false;
+  }
+
+  /** A strike went to ground at (x, z): fuse the glass, burn the figure. */
+  _layScar(index, x, z, grounded) {
+    const slot = this.scars[index];
+    slot.active = true;
+    slot.grounded = grounded;
+    slot.age = 0;
+    slot.seed = Math.random() * 10;
+    slot.turn = Math.random() * Math.PI * 2;
+    slot.x = x;
+    slot.z = z;
+    slot.glass.rotation.set(0, slot.turn, 0);
+    this._updateScar(slot, 0, 0);
+  }
+
+  /**
+   * Resolve one slot from live settings.
+   * @param {number} exit 0..1 — progress through the cast's exit
+   */
+  _updateScar(slot, dt, exit) {
+    if (!slot.active) return;
+    const c = settings.chain;
+    const g = settings.global;
+    slot.age += dt;
+    const a = slot.age;
+    const big = slot.grounded ? c.fulguriteGroundScale : 1;
+
+    // Heave out of the floor with an overshoot, then keep creeping taller.
+    const grow = Easing.outBack(saturate(a / Math.max(0.01, c.fulguriteGrowTime)));
+    const creep = 1 + c.fulguriteCreep * saturate(a / 1.6);
+    const out = Easing.inQuad(saturate(exit));
+    const h = Math.max(0.001, c.fulguriteHeight * big * grow * creep * g.explosionIntensity);
+    const w = Math.max(0.001, c.fulguriteRadius * big * (0.55 + 0.45 * Math.min(1, grow)) * g.explosionIntensity);
+    slot.glass.scale.set(w, h, w);
+    slot.glass.position.set(slot.x, -h * c.fulguriteSink * out, slot.z);
+
+    const heat = c.heatFloor + (1 - c.heatFloor) * Math.exp(-a * c.coolRate);
+    // Residual charge: on from the strike, guttering, gone with the exit.
+    const charge = c.fulguriteCharge * (0.75 + 0.25 * Math.sin(a * 23 + slot.seed * 7)) * (1 - out);
+
+    const gs = slot.glassState;
+    gs.seed = slot.seed;
+    gs.heat = heat * (1 - out);
+    gs.charge = charge;
+    gs.dissolve = saturate(exit) * c.fulguriteCrumble;
+    slot.glassMaterial.userData.sync(gs);
+    slot.glass.visible = c.fulguriteHeight > 0.01 && gs.dissolve < 0.999;
+
+    const ss = slot.scarState;
+    ss.seed = slot.seed;
+    ss.radius = Math.max(0.05, (slot.grounded ? c.scarGroundRadius : c.scarRadius) * g.explosionIntensity);
+    ss.reveal = Easing.outCubic(saturate(a / Math.max(0.01, c.scarRevealTime))) * 1.05;
+    ss.heat = heat * (1 - out);
+    ss.charge = c.scarCharge * (1 - out);
+    ss.fade = 1 - out;
+    slot.scarMaterial.userData.sync(ss);
+    slot.scar.position.set(slot.x, 0.025, slot.z);
+    slot.scar.scale.set(ss.radius * 2.5, 1, ss.radius * 2.5);
+    slot.scar.visible = ss.fade > 0.002;
   }
 
   _sparkBurst(point, radius, count, direction) {
@@ -676,6 +809,7 @@ export class ChainArcAbility extends Ability {
       const bolt = this.bolts[i];
       if (bolt.active) this._updateBolt(bolt, dt, 1);
     }
+    for (let i = 0; i < MAX_BOLTS; i++) this._updateScar(this.scars[i], dt, 0);
     this._lingerFx(dt, this._mode === Mode.LEADER ? 0 : 1);
   }
 
@@ -693,6 +827,8 @@ export class ChainArcAbility extends Ability {
       const bolt = this.bolts[i];
       if (bolt.active) this._updateBolt(bolt, dt, fade);
     }
+    const exit = t <= 1 ? 0 : saturate(t - 1);
+    for (let i = 0; i < MAX_BOLTS; i++) this._updateScar(this.scars[i], dt, exit);
     this._lingerFx(dt, fade);
 
     // The light stays with the newest strike, wherever its body has got to.
@@ -702,6 +838,7 @@ export class ChainArcAbility extends Ability {
 
   onDestroy() {
     for (let i = 0; i < MAX_BOLTS; i++) this._release(this.bolts[i]);
+    for (let i = 0; i < MAX_BOLTS; i++) this._releaseScar(this.scars[i]);
     this._struck.length = 0;
     this._targets.length = 0;
     this._mode = Mode.SPENT;
@@ -712,6 +849,12 @@ export class ChainArcAbility extends Ability {
       bolt.ribbon.dispose();
       bolt.material.dispose();
     }
+    for (const slot of this.scars) {
+      slot.glassMaterial.dispose();
+      slot.scarMaterial.dispose();
+    }
+    for (const geometry of this.glassGeometries) geometry.dispose();
+    this.scarGeometry.dispose();
     super.dispose();
   }
 }
@@ -848,4 +991,36 @@ export function buildEditor(gui, c, Editor) {
   R(fb, c, 'groundFlash', 0, 1, 0.01, 'flash when grounding');
   R(fb, c, 'castShake', 0, 0.5, 0.005, 'shake on cast');
   fb.addColor(c, 'colorFlash').name('flash colour');
+
+  /* ---- layers 6 & 7 ---- */
+  const glass = folder.addFolder('6 · Fulgurite');
+  R(glass, c, 'fulguriteHeight', 0, 4, 0.01, 'height (m)');
+  R(glass, c, 'fulguriteRadius', 0.1, 4, 0.01, 'spread (m)');
+  R(glass, c, 'fulguriteGroundScale', 0.2, 3, 0.01, 'grounded size (×)');
+  R(glass, c, 'fulguriteGrowTime', 0.01, 1, 0.005, 'heave time (s)');
+  R(glass, c, 'fulguriteCreep', 0, 0.6, 0.005, 'creeps taller by');
+  R(glass, c, 'fulguriteSink', 0, 1.5, 0.01, 'sinks on exit (× height)');
+  R(glass, c, 'fulguriteCrumble', 0, 1, 0.01, 'crumbles on exit');
+  R(glass, c, 'fulguriteGlow', 0, 8, 0.05, 'crack glow');
+  R(glass, c, 'fulguriteVeins', 0, 2, 0.01, 'crack amount');
+  R(glass, c, 'fulguriteVeinScale', 1, 20, 0.1, 'crack scale');
+  R(glass, c, 'fulguriteSpec', 0, 3, 0.01, 'glass glint');
+  R(glass, c, 'fulguriteCharge', 0, 2, 0.01, 'residual charge');
+  R(glass, c, 'fulguritePulseSpeed', 0, 6, 0.05, 'charge crawl speed');
+  R(glass, c, 'heatFloor', 0, 1, 0.01, 'heat it cools to');
+  R(glass, c, 'coolRate', 0.1, 10, 0.05, 'cooling rate (/s)');
+  glass.addColor(c, 'colorGlassBody').name('glass body');
+  glass.addColor(c, 'colorGlassDeep').name('glass deep');
+
+  const scorch = folder.addFolder('7 · Lichtenberg scorch');
+  R(scorch, c, 'scarRadius', 0.1, 6, 0.05, 'radius under a body (m)');
+  R(scorch, c, 'scarGroundRadius', 0.1, 8, 0.05, 'radius where it grounds (m)');
+  R(scorch, c, 'scarRevealTime', 0.01, 1.5, 0.01, 'burns out over (s)');
+  R(scorch, c, 'scarOpacity', 0, 1, 0.01, 'char opacity');
+  R(scorch, c, 'scarVeinScale', 1, 24, 0.1, 'figure scale');
+  R(scorch, c, 'scarVeinSharp', 1, 20, 0.1, 'figure sharpness');
+  R(scorch, c, 'scarGlow', 0, 8, 0.05, 'vein glow');
+  R(scorch, c, 'scarCharge', 0, 2, 0.01, 'charge pulses');
+  R(scorch, c, 'scarPulseSpeed', 0, 4, 0.05, 'pulse speed');
+  scorch.addColor(c, 'colorScarChar').name('char');
 }

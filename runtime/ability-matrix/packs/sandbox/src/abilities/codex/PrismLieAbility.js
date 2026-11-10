@@ -13,7 +13,8 @@ import {
   createPrismCrystalGeometry,
   createPrismShardGeometry,
   createPrismTetherGeometry,
-  createPrismStripGeometry
+  createPrismStripGeometry,
+  createPrismMonolithGeometry
 } from '../../assets/codex/PrismLieGeometry.js';
 import {
   createPrismCrystalMaterial,
@@ -21,7 +22,10 @@ import {
   createPrismTetherMaterial,
   createPrismTrailMaterial,
   createPrismRingMaterial,
-  createPrismLensMaterial
+  createPrismLensMaterial,
+  createPrismMonolithMaterial,
+  createPrismFanMaterial,
+  createPrismScorchMaterial
 } from '../../materials/codex/PrismLieMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -39,6 +43,8 @@ export const ID = 'prismlie';
 const PRISMS = 3;
 /** Hard ceiling on glass in the air. The editor's count sliders clamp to it. */
 const MAX_SHARDS = 96;
+/** Satellite crystals torn up round the planted truth. */
+const MAX_SATS = 8;
 const TAU = Math.PI * 2;
 
 const _emit = {};
@@ -52,6 +58,7 @@ const _qSpin = new Quaternion();
 const _qLean = new Quaternion();
 const _m = new Matrix4();
 const _zero = new Matrix4().makeScale(0, 0, 0);
+const _tilt = new Vector3();
 const _up = new Vector3(0, 1, 0);
 const COLOR_KEYS = ['colorPrismA', 'colorPrismB', 'colorPrismC'];
 
@@ -102,10 +109,17 @@ function resetEmit() {
  * swerve off the line to either side, carry on past the end, glitch harder
  * and harder and **pop** into glitter and a few slivers of their colour. The
  * true one (`truth`, or a coin toss) swings onto the line, drops onto the
- * target, flares white — and **shatters**: a spray of spectral glass, a
- * rainbow shock ring racing across the floor, a lens of bent air, a shell, a
- * shock decal, a flash, a jolt. The lies' trails go out at the reveal; the
- * truth's trail stays lit, then all of it burns out.
+ * target, flares white — and is **driven into the floor** (the impact beat):
+ * the floor crazes into a crater of glass and the truth comes up out of it
+ * as **a 3 m monolith of lit crystal in its own hue**, overshooting and
+ * settling, while satellite crystals keep tearing up round its foot one after
+ * another through the linger. White light goes in at the top and comes out
+ * as **a rainbow fan that sweeps round the floor** — what a prism does —
+ * while veins of light climb the body. Then it charges white, shudders, and
+ * **shatters** (the exit): a spray of spectral glass, a rainbow shock ring, a
+ * lens of bent air, a shell, a shock decal, a jolt. The lies' trails go out at
+ * the reveal; the truth's trail and the burnt glass under the braid stay,
+ * then everything burns out.
  *
  * ## Layers
  *
@@ -113,18 +127,36 @@ function resetEmit() {
  *      `createPrismCrystalMaterial`, one material each) — additive faceted
  *      glass: hue body, view-sliding thin-film sheen, dispersion bands, hot
  *      arrises, rim, glitch slices in the vertex stage, a spectral dissolve.
- *   2. **tethers** (`createPrismTetherMaterial`) — three threads between the
+ *   2. **the monolith** (`createPrismMonolithGeometry` +
+ *      `createPrismMonolithMaterial`) — the planted truth and its satellites:
+ *      one InstancedMesh of a chamfered, tapered, twisted crystal with a
+ *      sheared cap; solid, lit, flat-shaded, on `LAYER.WORLD`, casting
+ *      shadows; spectral sheen, climbing veins and the pre-shatter charge
+ *      patched into the emissive term. Its hue is the truth's.
+ *   3. **the spectrum fan** (`createPrismFanMaterial`) — `fanCount` wedges of
+ *      dispersed light leaving the monolith's foot and sweeping the floor.
+ *   4. **the glass burn** (`createPrismScorchMaterial`) — the deep tone: a dark
+ *      band under the braid and a crazed-glass crater at the end of the line,
+ *      its cracks glowing spectral while the monolith stands.
+ *   5. **tethers** (`createPrismTetherMaterial`) — three threads between the
  *      prisms, re-jagged every frame.
- *   3. **trails** (`createPrismTrailMaterial`) — the braid on the floor,
+ *   6. **trails** (`createPrismTrailMaterial`) — the braid on the floor,
  *      drawn from the same formula the prisms fly on (`_braidLat` ↔
  *      `braidLat`), white where strands cross.
- *   4. **glitter** (SOFT, additive, tinted per prism) and **sparks**
- *      (STREAK) — shed in flight, burst at the pops and the shatter.
- *   5. **shards** (`createPrismShardGeometry` + `createPrismShardMaterial`)
+ *   7. **glitter** (SOFT, additive, tinted per prism) and **sparks**
+ *      (STREAK) — shed in flight, burst at the pops, the plant and the shatter.
+ *   8. **shards** (`createPrismShardGeometry` + `createPrismShardMaterial`)
  *      — an InstancedMesh of slivers, CPU-integrated, tinted per piece.
- *   6. **the shatter** — spectral ring (`createPrismRingMaterial`), lens
+ *   9. **the shatter** — spectral ring (`createPrismRingMaterial`), lens
  *      (`createPrismLensMaterial`, `LAYER.DISTORTION`), an AIR burst, a
- *      SHOCKWAVE decal, flash, shake, light punch.
+ *      SHOCKWAVE decal, shake, light punch; a restrained flash (the truth
+ *      breaking should not white the frame out).
+ *
+ * ## Placement
+ *
+ * The crater, the fan and the satellites are seated from the end of the line
+ * and from `monoRadius` (satellites at `satRing` metres out, fan starting at the
+ * foot), so moving the range or the sizes mid-cast keeps them on the crystal.
  *
  * Hits are the engine's: the line kills what the front passes.
  *
@@ -180,6 +212,51 @@ export class PrismLieAbility extends Ability {
     this.stripGeometry = createPrismStripGeometry(200, 8);
     this.trailMaterial = createPrismTrailMaterial();
     this.trail = this._mesh(this.stripGeometry, this.trailMaterial, LAYER.VFX, 2);
+
+    /* ---- layer 4: the glass burn (same strip, dark, under the trail) ---- */
+    this.scorchMaterial = createPrismScorchMaterial();
+    this.scorch = this._mesh(this.stripGeometry, this.scorchMaterial, LAYER.VFX, 1);
+    this._scorchState = {
+      start: new Vector3(),
+      dir: new Vector3(),
+      side: new Vector3(),
+      length: 1,
+      front: 0,
+      fade: 0,
+      crater: 0,
+      heat: 0
+    };
+
+    /* ---- layer 2: the monolith and its satellites (solid, lit) ---- */
+    this.monoGeometry = null;
+    this._monoKey = '';
+    this._monolithGeometry();
+    this.monoMaterial = createPrismMonolithMaterial();
+    this.monolith = new InstancedMesh(this.monoGeometry, this.monoMaterial, MAX_SATS + 1);
+    this.monolith.name = 'PrismLieMonolith';
+    this.monolith.layers.set(LAYER.WORLD);
+    this.monolith.castShadow = true;
+    this.monolith.receiveShadow = true;
+    this.monolith.frustumCulled = false;
+    this.monolith.instanceMatrix.setUsage(DynamicDrawUsage);
+    this.monolith.count = 0;
+    this.monolith.visible = false;
+    this.group.add(this.monolith);
+    this._monoState = { hue: COLOR_KEYS[0], charge: 0 };
+    /** Satellite dice: unitless; metres and seconds come from settings. */
+    this.sats = [];
+    for (let i = 0; i < MAX_SATS; i++) {
+      this.sats.push({ angle: 0, ring: 1, tilt: 1, height: 1, radius: 1, delay: 0, yaw: 0, out: false });
+    }
+    this._monoYaw = 0;
+    this._planted = false;
+
+    /* ---- layer 3: the spectrum fan ---- */
+    this.fanGeometry = new PlaneGeometry(2, 2, 1, 1);
+    this.fanMaterial = createPrismFanMaterial();
+    this.fan = this._mesh(this.fanGeometry, this.fanMaterial, LAYER.VFX, 3);
+    this._fanState = { centre: new Vector3(), sweep: 0, strength: 0 };
+    this._fanSeed = 0;
 
     /* ---- layer 5: shards ---- */
     this.shardGeometry = createPrismShardGeometry();
@@ -296,6 +373,24 @@ export class PrismLieAbility extends Ability {
     return this.crystalGeometry;
   }
 
+  /** The monolith, rebuilt only when one of its shape sliders moves. */
+  _monolithGeometry() {
+    const c = settings[ID];
+    const key = `${c.monoCap}|${c.monoTaper}|${c.monoTwist}|${c.monoChamfer}`;
+    if (this.monoGeometry && key === this._monoKey) return this.monoGeometry;
+    this._monoKey = key;
+    const old = this.monoGeometry;
+    this.monoGeometry = createPrismMonolithGeometry({
+      cap: Math.max(0.02, c.monoCap),
+      taper: c.monoTaper,
+      twist: c.monoTwist,
+      chamfer: c.monoChamfer
+    });
+    if (this.monolith) this.monolith.geometry = this.monoGeometry;
+    old?.dispose();
+    return this.monoGeometry;
+  }
+
   /* ------------------------------------------------------------------ */
   /* Timing                                                              */
   /* ------------------------------------------------------------------ */
@@ -304,13 +399,34 @@ export class PrismLieAbility extends Ability {
     return Math.max(0.05, settings[ID].revealTime * settings.global.lifetime);
   }
 
-  get impactDuration() {
-    const c = settings[ID];
-    return this._revealTime() + Math.max(0.05, c.lifetime * settings.global.lifetime);
+  /** How long the planted truth stands before it breaks. */
+  _standTime() {
+    return Math.max(0.1, settings[ID].standTime * settings.global.lifetime);
   }
 
+  /** Reveal, then the monolith stands; it breaks as the fade begins. */
+  get impactDuration() {
+    return this._revealTime() + this._standTime();
+  }
+
+  /** The glass flies and the floor burns out. */
   get fadeDuration() {
-    return Math.max(0.05, settings[ID].trailFade * settings.global.lifetime);
+    const c = settings[ID];
+    return Math.max(0.05, Math.max(c.trailFade, c.lifetime) * settings.global.lifetime);
+  }
+
+  /** Seconds since the truth hit the floor; −1 before. */
+  _plantAge() {
+    if (this._clock < 0) return -1;
+    return this._clock - this._revealTime();
+  }
+
+  /** 0..1 the white charge before the break. */
+  _charge() {
+    const a = this._plantAge();
+    if (a < 0 || this._shattered) return 0;
+    const t = settings[ID].monoChargeTime * settings.global.lifetime;
+    return Easing.inQuad(saturate(1 - (this._standTime() - a) / Math.max(0.02, t)));
   }
 
   /** Glass glints rather than glows. */
@@ -379,6 +495,29 @@ export class PrismLieAbility extends Ability {
     this.lens.visible = false;
     this._ringState.seed = this._seed;
     this.pointAt(1, this._end);
+
+    /* the monolith: dice for the satellites, nothing in metres */
+    this._monolithGeometry();
+    this._planted = false;
+    this._monoYaw = Math.random() * TAU;
+    this._fanSeed = Math.random() * TAU;
+    const g = settings.global;
+    for (let i = 0; i < MAX_SATS; i++) {
+      const s = this.sats[i];
+      s.angle = (i / MAX_SATS) * TAU + (Math.random() - 0.5) * 0.6 * g.randomness + this._monoYaw;
+      s.ring = 0.8 + Math.random() * 0.45 * g.randomness;
+      s.tilt = 0.7 + Math.random() * 0.6;
+      s.height = 0.6 + Math.random() * 0.6;
+      s.radius = 0.75 + Math.random() * 0.5;
+      // A shuffled order of eruption, so they come up round the foot, not in a sweep.
+      s.delay = ((i * 5) % MAX_SATS) / MAX_SATS + Math.random() * 0.08;
+      s.yaw = Math.random() * TAU;
+      s.out = false;
+    }
+    this.monolith.count = 0;
+    this.monolith.visible = false;
+    this.fan.visible = false;
+    this.scorch.visible = true;
   }
 
   /* ------------------------------------------------------------------ */
@@ -433,7 +572,8 @@ export class PrismLieAbility extends Ability {
           p.pos.y = lerp(p.pos.y, standY, Easing.inQuad(k));
           spinRate *= 1 + 4 * k;
           p.flash = c.plantFlash * smoothstep(0.55, 1, k) * g.glow;
-          if (this._shattered) scale = 0;
+          // Once it is in the floor, the monolith is the truth.
+          if (this._planted) scale = 0;
         } else {
           // Swerve off to its own side and carry on past the end.
           const lat = this._braidLat(this.length, i);
@@ -490,11 +630,17 @@ export class PrismLieAbility extends Ability {
       }
     }
 
-    /* --- the truth breaks --- */
-    if (reveal && k >= 1 && !this._shattered) {
+    /* --- the truth is driven into the floor --- */
+    if (reveal && k >= 1 && !this._planted) {
+      this._planted = true;
+      this._plantFx(c, g);
+    }
+    /* --- and, when its time is up, breaks --- */
+    if (this._planted && !this._shattered && this._plantAge() >= this._standTime()) {
       this._shattered = true;
       this._shatterAt = this._clock;
-      this._shatterFx(this.prisms[this._truth].pos, c, g);
+      _vel.copy(this._end).setY(c.monoHeight * 0.55);
+      this._shatterFx(_vel, c, g);
     }
 
     /* --- tethers, until the reveal tears them --- */
@@ -506,9 +652,130 @@ export class PrismLieAbility extends Ability {
     this.tetherMaterial.userData.sync(ts);
     this.tether.visible = ts.strength > 0.001;
 
-    /* the light rides the centroid, then the truth */
+    /* the light rides the centroid, then the truth, then sits in the monolith */
     this.position.copy(ts.p0).add(ts.p1).add(ts.p2).multiplyScalar(1 / 3);
     if (reveal) this.position.lerp(this.prisms[this._truth].pos, k);
+    if (this._planted) this.position.copy(this._end).setY(c.monoHeight * 0.6);
+  }
+
+  /** The planted truth and its satellites, from their dice and the clock. */
+  _updateMonolith(dt) {
+    const c = settings[ID];
+    const g = settings.global;
+    const age = this._plantAge();
+    if (!this._planted || age < 0) {
+      this.monolith.visible = false;
+      this.monolith.count = 0;
+      return;
+    }
+    this._monolithGeometry();
+    const charge = this._charge();
+    // After the break the crystal is gone — it became the shards.
+    const gone = this._shattered;
+    const time = frame.uTime.value;
+
+    /* --- the main crystal: punches up past full height and springs back --- */
+    const rise = saturate(age / Math.max(0.02, c.monoRise * g.lifetime));
+    const over = c.monoOvershoot;
+    // Ice-like easing: overshoot by `over`, settle with a damped spring.
+    const h = rise < 1 ? Easing.outCubic(rise) * (1 + over) : 1 + over * Math.exp(-(age - c.monoRise) * 9) * Math.cos((age - c.monoRise) * 18);
+    const shudder = c.monoShudder * charge * g.randomness;
+    _pos.copy(this._end);
+    _pos.x += Math.sin(time * 61.0) * shudder;
+    _pos.z += Math.cos(time * 53.0) * shudder;
+    _pos.y = 0;
+    _q.setFromAxisAngle(_up, this._monoYaw);
+    const H = Math.max(0.05, c.monoHeight) * Math.max(0, h);
+    _scale.set(c.monoRadius, H, c.monoRadius);
+    _m.compose(_pos, _q, _scale);
+    this.monolith.setMatrixAt(0, gone ? _zero : _m);
+
+    /* --- satellites: torn up one after another round the foot --- */
+    const n = Math.min(MAX_SATS, Math.max(0, Math.round(c.satCount)));
+    for (let i = 0; i < MAX_SATS; i++) {
+      const s = this.sats[i];
+      if (i >= n || gone) {
+        this.monolith.setMatrixAt(i + 1, _zero);
+        continue;
+      }
+      const start = c.satDelay + s.delay * c.satStagger;
+      const k = saturate((age - start) / Math.max(0.02, c.satGrowTime));
+      if (k <= 0) {
+        this.monolith.setMatrixAt(i + 1, _zero);
+        continue;
+      }
+      const grow = Easing.outBack(k);
+      const ring = c.monoRadius + c.satRing * s.ring;
+      _pos.set(this._end.x + Math.cos(s.angle) * ring, 0, this._end.z + Math.sin(s.angle) * ring);
+      _pos.x += Math.sin(time * 47.0 + i) * shudder;
+      // Lean outward from the monolith: the floor was burst open from the middle.
+      _tilt.set(Math.sin(s.angle), 0, -Math.cos(s.angle));
+      _qLean.setFromAxisAngle(_tilt, -c.satTilt * s.tilt);
+      _qSpin.setFromAxisAngle(_up, s.yaw);
+      _q.multiplyQuaternions(_qLean, _qSpin);
+      const r = c.satRadius * s.radius;
+      _scale.set(r, Math.max(0.01, c.satHeight * s.height * grow), r);
+      _m.compose(_pos, _q, _scale);
+      this.monolith.setMatrixAt(i + 1, _m);
+      // A puff of glitter and a jolt as each one breaks the floor.
+      if (k > 0 && !s.out) {
+        s.out = true;
+        resetEmit();
+        _emit.position = _pos;
+        _emit.radius = r;
+        _emit.speed = 2.5;
+        _emit.spread = 0.9;
+        _emit.size = c.glitterSize * 1.3;
+        _emit.life = c.glitterLifetime;
+        _emit.tint = getColor(c[COLOR_KEYS[this._truth]]);
+        this.glitter.emit(Math.round(c.satGlitter * g.particleCount), _emit);
+        this.ctx.shake.add(c.satShake * g.cameraShake, 9, 22);
+      }
+    }
+    this.monolith.count = MAX_SATS + 1;
+    this.monolith.instanceMatrix.needsUpdate = true;
+    this.monolith.visible = !gone;
+
+    this._monoState.hue = COLOR_KEYS[this._truth];
+    this._monoState.charge = charge;
+    this.monoMaterial.userData.sync(this._monoState);
+
+    /* --- light rising off it while it stands --- */
+    if (!gone) {
+      const rate = c.glitterRate * (0.5 + charge * 2);
+      const m = Math.round(this.glitterEmitters[this._truth].tick(dt, rate) * g.particleCount);
+      if (m > 0) {
+        resetEmit();
+        _pos.copy(this._end).setY(c.monoHeight * (0.3 + 0.7 * Math.random()));
+        _emit.position = _pos;
+        _emit.radius = c.monoRadius * 1.1;
+        _emit.speed = 0.8;
+        _emit.spread = 0.6;
+        _emit.size = c.glitterSize;
+        _emit.life = c.glitterLifetime * 1.4;
+        _emit.tint = getColor(c[COLOR_KEYS[(this._truth + 1 + (Math.random() * 2) | 0) % 3]]);
+        this.glitter.emit(m, _emit);
+      }
+    }
+  }
+
+  /** The rainbow out of the crystal, sweeping the floor. */
+  _updateFan() {
+    const c = settings[ID];
+    const g = settings.global;
+    const age = this._plantAge();
+    if (!this._planted || age < 0) {
+      this.fan.visible = false;
+      return;
+    }
+    const st = this._fanState;
+    const on = smoothstep(0, Math.max(0.02, c.fanRise), age);
+    const off = this._shattered ? 1 - saturate((this._clock - this._shatterAt) / 0.3) : 1;
+    st.centre.copy(this._end);
+    st.sweep = this._fanSeed + c.fanSweep * age * g.animationSpeed;
+    st.strength = on * off * (1 + this._charge() * 0.8);
+    this.fanMaterial.userData.sync(st);
+    this.fan.visible = st.strength > 0.002;
   }
 
   _updateTrails() {
@@ -524,6 +791,21 @@ export class PrismLieAbility extends Ability {
     ts.fade = this.phase === AbilityPhase.FADE ? saturate(this.fadeTime / this.fadeDuration) : 0;
     this.trailMaterial.userData.sync(ts);
     this.trail.visible = ts.fade < 1;
+
+    /* the glass burn: under the braid now, a crater once the truth is in */
+    const ss = this._scorchState;
+    ss.start.copy(ts.start);
+    ss.dir.copy(ts.dir);
+    ss.side.copy(ts.side);
+    ss.length = ts.length;
+    ss.front = ts.front;
+    ss.fade = Easing.inQuad(ts.fade);
+    const age = this._plantAge();
+    ss.crater = this._planted && age >= 0 ? c.craterRadius * Easing.outCubic(saturate(age / 0.22)) : 0;
+    const cooling = this._shattered ? Math.exp(-(this._clock - this._shatterAt) * 2.5) : 1 - 0.5 * saturate(age / this._standTime());
+    ss.heat = this._planted ? cooling * (1 + this._charge()) : 0;
+    this.scorchMaterial.userData.sync(ss);
+    this.scorch.visible = ss.fade < 1;
   }
 
   /** Fly every live shard; write the instances. */
@@ -579,7 +861,7 @@ export class PrismLieAbility extends Ability {
   }
 
   /** Throw `count` slivers out of `at`, in hue `hue` (−1 = mixed). */
-  _throwShards(at, count, hue, speed, c, g) {
+  _throwShards(at, count, hue, speed, c, g, spreadY = c.prismHeight * 0.8) {
     for (let n = 0; n < count; n++) {
       const s = this.glass[this._shardCursor];
       this._shardCursor = (this._shardCursor + 1) % MAX_SHARDS;
@@ -587,7 +869,7 @@ export class PrismLieAbility extends Ability {
       const a = Math.random() * TAU;
       const up = Math.random();
       s.pos.copy(at);
-      s.pos.y += (Math.random() - 0.5) * c.prismHeight * 0.8;
+      s.pos.y = Math.max(0.1, s.pos.y + (Math.random() - 0.5) * spreadY);
       s.vel.set(Math.cos(a), 0, Math.sin(a)).multiplyScalar(speed * (0.4 + 0.6 * Math.random()));
       s.vel.y = c.shardLift * (0.3 + up);
       s.axis.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
@@ -625,6 +907,55 @@ export class PrismLieAbility extends Ability {
     this.ctx.shake.add(0.08 * g.explosionIntensity, 6, 24);
   }
 
+  /** The truth is driven into the floor: the impact beat. */
+  _plantFx(c, g) {
+    const power = g.explosionIntensity;
+    const hue = getColor(c[COLOR_KEYS[this._truth]]);
+    _pos.copy(this._end).setY(0);
+    this.ctx.shake.add(c.plantShake * power * g.cameraShake, 5, 20);
+    this.ctx.flash.trigger(hue, c.plantScreenFlash * power);
+    this.lightBoost = c.plantLight * power;
+    this.ctx.decals.spawn(DecalType.SHOCKWAVE, _pos, {
+      radius: c.craterRadius * 2.2 * power,
+      life: c.shockLife,
+      width: 0.07,
+      intensity: 1,
+      colorA: hue,
+      colorB: getColor(c.colorCore),
+      height: 0.03
+    });
+    this.ctx.decals.spawn(DecalType.CRACK, _pos, {
+      radius: c.craterRadius * 1.3,
+      life: c.standTime * g.lifetime + c.trailFade + 1,
+      intensity: 0.9,
+      colorA: getColor(c.colorScorch),
+      colorB: hue
+    });
+    this.ctx.bursts.spawn(BurstMode.EARTH, _vel.copy(this._end).setY(0.3), {
+      radius: 0.3,
+      endRadius: c.craterRadius * 1.1,
+      life: 0.4,
+      intensity: c.plantBurstIntensity,
+      opacity: c.plantBurstOpacity * g.opacity,
+      colorA: getColor(c.colorCore),
+      colorB: hue,
+      colorC: getColor(c.colorScorch),
+      squash: 0.4
+    });
+    // Glass chips thrown up out of the crater.
+    _vel.copy(this._end).setY(0.4);
+    this._throwShards(_vel, Math.min(MAX_SHARDS, Math.round(c.plantShards)), this._truth, c.shardSpeed * 0.6, c, g, 0.3);
+    resetEmit();
+    _emit.position = _vel;
+    _emit.radius = c.monoRadius;
+    _emit.speed = c.sparkSpeed;
+    _emit.spread = 0.8;
+    _emit.size = c.sparkSize;
+    _emit.life = c.sparkLifetime;
+    this.sparks.emit(Math.round(c.sparkCount * g.particleCount), _emit);
+    for (const s of this.sats) s.out = false;
+  }
+
   /** The truth shatters. */
   _shatterFx(at, c, g) {
     const power = g.explosionIntensity;
@@ -636,8 +967,8 @@ export class PrismLieAbility extends Ability {
       radius: 0.2,
       endRadius: c.burstRadius * power,
       life: c.burstLife,
-      intensity: 1.5,
-      opacity: 0.8 * g.opacity,
+      intensity: c.burstIntensity,
+      opacity: c.burstOpacity * g.opacity,
       colorA: getColor(c.colorBurstA),
       colorB: getColor(c.colorBurstB),
       colorC: getColor(c.colorBurstC)
@@ -654,7 +985,7 @@ export class PrismLieAbility extends Ability {
     this._ringState.centre.copy(_pos);
     this._lensState.centre.copy(at);
 
-    this._throwShards(at, Math.min(MAX_SHARDS, Math.round(c.shardCount)), -1, c.shardSpeed, c, g);
+    this._throwShards(at, Math.min(MAX_SHARDS, Math.round(c.shardCount)), -1, c.shardSpeed, c, g, c.monoHeight);
 
     resetEmit();
     _emit.position = at;
@@ -707,6 +1038,8 @@ export class PrismLieAbility extends Ability {
     this._clock = -1;
     this._syncParticles();
     this._updatePrisms(dt);
+    this._updateMonolith(dt);
+    this._updateFan();
     this._updateTrails();
     this._updateShards(dt);
     this._updateShatter();
@@ -722,6 +1055,8 @@ export class PrismLieAbility extends Ability {
     this._clock = this.phase === AbilityPhase.FADE ? this.impactDuration + this.fadeTime : this.impactTime;
     this._syncParticles();
     this._updatePrisms(dt);
+    this._updateMonolith(dt);
+    this._updateFan();
     this._updateTrails();
     this._updateShards(dt);
     this._updateShatter();
@@ -737,6 +1072,11 @@ export class PrismLieAbility extends Ability {
     this.trail.visible = false;
     this.ring.visible = false;
     this.lens.visible = false;
+    this.monolith.visible = false;
+    this.monolith.count = 0;
+    this.fan.visible = false;
+    this.scorch.visible = false;
+    this._planted = false;
   }
 
   dispose() {
@@ -752,6 +1092,12 @@ export class PrismLieAbility extends Ability {
     this.ringMaterial.dispose();
     this.lensMaterial.dispose();
     this.shards.dispose();
+    this.monoGeometry?.dispose();
+    this.monoMaterial.dispose();
+    this.monolith.dispose();
+    this.fanGeometry.dispose();
+    this.fanMaterial.dispose();
+    this.scorchMaterial.dispose();
     super.dispose();
   }
 }
@@ -769,6 +1115,7 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'minRange', 0, 12, 0.1, 'min range');
   R(cast, c, 'speed', 2, 60, 0.5, 'flight speed (m/s)');
   R(cast, c, 'lifetime', 0.1, 4, 0.05, 'glass lingers (s)');
+  R(cast, c, 'standTime', 0.1, 6, 0.05, 'truth stands for (s)');
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   R(cast, c, 'truth', -1, 2, 1, 'true prism (−1 random)');
   cast.addColor(c, 'colorA').name('accent');
@@ -814,12 +1161,63 @@ export function buildEditor(gui, c, Editor) {
   R(threads, c, 'trailDecay', 0.5, 30, 0.1, 'trail dims over (m)');
   R(threads, c, 'trailFade', 0.05, 4, 0.05, 'trail burns out over');
 
+  const burn = folder.addFolder('3b · Glass burn');
+  R(burn, c, 'scorchWidth', 0, 3, 0.01, 'band (× swing)');
+  R(burn, c, 'scorchOpacity', 0, 1, 0.01, 'opacity');
+  burn.addColor(c, 'colorScorch').name('deep');
+  R(burn, c, 'craterRadius', 0.3, 6, 0.05, 'crater (m)');
+  R(burn, c, 'crackGlow', 0, 6, 0.05, 'crack glow');
+
   const reveal = folder.addFolder('4 · The reveal');
   R(reveal, c, 'revealTime', 0.05, 2, 0.01, 'reveal over');
   R(reveal, c, 'veerDistance', 0, 8, 0.05, 'lies swerve (m)');
   R(reveal, c, 'veerForward', 0, 8, 0.05, 'lies overshoot (m)');
   R(reveal, c, 'popGlitch', 0, 2, 0.01, 'lies stutter (m)');
   R(reveal, c, 'plantFlash', 0, 10, 0.05, 'truth flares');
+  R(reveal, c, 'plantShake', 0, 1.5, 0.01, 'plant shake');
+  R(reveal, c, 'plantScreenFlash', 0, 1, 0.01, 'plant flash');
+  R(reveal, c, 'plantLight', 0, 80, 0.5, 'plant light punch');
+  R(reveal, c, 'plantShards', 0, 40, 1, 'chips out of the crater');
+  R(reveal, c, 'plantBurstIntensity', 0, 4, 0.05, 'dust shell intensity');
+  R(reveal, c, 'plantBurstOpacity', 0, 1, 0.01, 'dust shell opacity');
+
+  const mono = folder.addFolder('4b · The monolith');
+  R(mono, c, 'monoHeight', 0.3, 8, 0.05, 'height (m)');
+  R(mono, c, 'monoRadius', 0.1, 2.5, 0.01, 'radius (m)');
+  R(mono, c, 'monoCap', 0.02, 1.5, 0.01, 'apex (× body)');
+  R(mono, c, 'monoTaper', 0, 0.9, 0.01, 'taper');
+  R(mono, c, 'monoTwist', -1.5, 1.5, 0.01, 'twist (rad)');
+  R(mono, c, 'monoChamfer', 0, 0.45, 0.01, 'chamfer');
+  R(mono, c, 'monoRise', 0.02, 1.5, 0.01, 'punches up over (s)');
+  R(mono, c, 'monoOvershoot', 0, 0.6, 0.01, 'overshoot');
+  R(mono, c, 'monoGlow', 0, 4, 0.01, 'glow');
+  R(mono, c, 'monoDeep', 0, 1, 0.01, 'albedo (× hue)');
+  R(mono, c, 'monoRoughness', 0, 1, 0.01, 'roughness');
+  R(mono, c, 'monoMetalness', 0, 1, 0.01, 'metalness');
+  R(mono, c, 'monoIrid', 0, 4, 0.01, 'spectral sheen');
+  R(mono, c, 'monoVein', 0, 4, 0.01, 'veins');
+  R(mono, c, 'monoChargeTime', 0.02, 2, 0.01, 'charge over (s)');
+  R(mono, c, 'monoChargeGlow', 0, 10, 0.05, 'charge glow');
+  R(mono, c, 'monoShudder', 0, 0.3, 0.005, 'shudder (m)');
+  R(mono, c, 'satCount', 0, MAX_SATS, 1, 'satellites');
+  R(mono, c, 'satRing', 0, 4, 0.01, 'satellite ring (m)');
+  R(mono, c, 'satHeight', 0.1, 4, 0.01, 'satellite height (m)');
+  R(mono, c, 'satRadius', 0.05, 1, 0.01, 'satellite radius (m)');
+  R(mono, c, 'satTilt', 0, 1.4, 0.01, 'satellite lean (rad)');
+  R(mono, c, 'satDelay', 0, 2, 0.01, 'first at (s)');
+  R(mono, c, 'satStagger', 0, 3, 0.01, 'spread over (s)');
+  R(mono, c, 'satGrowTime', 0.02, 1, 0.01, 'each grows over (s)');
+  R(mono, c, 'satGlitter', 0, 120, 1, 'glitter per satellite');
+  R(mono, c, 'satShake', 0, 0.5, 0.005, 'shake per satellite');
+
+  const fan = folder.addFolder('4c · Spectrum fan');
+  R(fan, c, 'fanLength', 0.5, 16, 0.05, 'length (m)');
+  R(fan, c, 'fanAngle', 0.05, 1.5, 0.01, 'half-width (rad)');
+  R(fan, c, 'fanSweep', -4, 4, 0.01, 'sweep (rad/s)');
+  R(fan, c, 'fanCount', 1, 3, 1, 'wedges');
+  R(fan, c, 'fanGlow', 0, 6, 0.05, 'glow');
+  R(fan, c, 'fanPool', 0, 4, 0.01, 'white pool');
+  R(fan, c, 'fanRise', 0.02, 2, 0.01, 'comes up over (s)');
 
   const shards = folder.addFolder('5 · Shards');
   R(shards, c, 'shardCount', 0, MAX_SHARDS, 1, 'truth breaks into');
@@ -854,6 +1252,8 @@ export function buildEditor(gui, c, Editor) {
   R(beat, c, 'lensStrength', 0, 3, 0.01, 'air bend strength');
   R(beat, c, 'burstRadius', 0, 8, 0.05, 'shell (m)');
   R(beat, c, 'burstLife', 0.05, 3, 0.01, 'shell life');
+  R(beat, c, 'burstIntensity', 0, 4, 0.05, 'shell intensity');
+  R(beat, c, 'burstOpacity', 0, 1, 0.01, 'shell opacity');
   beat.addColor(c, 'colorBurstA').name('shell, hot');
   beat.addColor(c, 'colorBurstB').name('shell, body');
   beat.addColor(c, 'colorBurstC').name('shell, tint');

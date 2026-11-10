@@ -42,10 +42,14 @@ export default {
     /* ================================================================ */
     /* 1 · THE BELL — shape and how it hangs                             */
     /* ================================================================ */
-    hangHeight: 6.4, // metres the crown hangs above the floor
-    bellHeight: 2.3, // crown to lip, metres
+    hangHeight: 4.6, // metres the crown hangs when `hangFromZone` is 0
+    hangFromZone: 1, // 1 = the crown height is derived from the fence round the zone
+    hangClear: 0.4, // metres the lip clears the tops of the tines
+    dropHeight: 1.1, // metres above its hang it is lowered from as it is turned
+    travelForm: 0.7, // share of the turning done while the note runs out
+    bellHeight: 1.95, // crown to lip, metres
     bellRadius: 1.35, // radius at the lip, metres
-    formTime: 0.55, // seconds the bell takes to turn itself into being
+    formTime: 0.4, // seconds the bell takes to turn itself into being
     formEdge: 0.06, // the glowing edge of the turning, share of a turn
     clapperSize: 0.26, // radius of the clapper's ball, metres
     gearSize: 1.0, // the escapement wheel round the shoulder, × the shoulder
@@ -60,11 +64,11 @@ export default {
     engrave: 0.55, // the inscription bands round the waist and sound-bow
     patina: 0.35, // verdigris in the crevices
     rimGlow: 0.6, // a warm fresnel so it never goes black against the night
-    tollGlow: 3.2, // the lip blazes when it is struck
+    tollGlow: 2.4, // the lip blazes when it is struck
     colorBrass: '#d6a046',
     colorBrassDark: '#6a4a1c',
     colorPatina: '#4f7a62',
-    colorGlow: '#ffdc8a',
+    colorGlow: '#ffb44a',
     colorForm: '#fff2c4',
 
     /* ================================================================ */
@@ -83,23 +87,23 @@ export default {
     /* ================================================================ */
     frontTime: 0.42, // seconds a front takes to reach the tines
     frontWidth: 0.55, // its band, metres
-    frontGlow: 2.6,
+    frontGlow: 2.0,
     frontOpacity: 0.55,
     frontRipples: 5, // ripples across the band
-    colorFrontA: '#fff6dc',
+    colorFrontA: '#ffe6b0',
     colorFrontB: '#ffbe5a',
 
     /* ================================================================ */
     /* 5 · THE TINES — the fence round the rim                           */
     /* ================================================================ */
     tines: 14, // tuning tines round the rim (up to 20)
-    tineHeight: 2.4, // metres
-    tineWidth: 0.26, // gap between the prongs, metres
-    tineThickness: 0.045, // prong radius, metres
+    tineHeight: 2.2, // metres
+    tineWidth: 0.34, // gap between the prongs, metres
+    tineThickness: 0.075, // prong radius, metres
     riseTime: 0.45, // seconds they take to rise out of the floor
     riseStagger: 0.3, // seconds from the first to the last
     tineQuiver: 0.05, // how hard they shiver when a front reaches them (radians)
-    tineGlow: 2.2, // they flare when a front arrives
+    tineGlow: 1.3, // they flare when a front arrives
 
     /* ================================================================ */
     /* 6 · THE STRINGS — standing waves between the tines                */
@@ -110,11 +114,28 @@ export default {
     stringAmp: 0.14, // how far they swing, metres
     stringFreq: 18, // radians/second
     stringModes: 2, // antinodes along each string
-    stringWidth: 0.035, // metres
-    stringGlow: 3.4,
+    stringWidth: 0.08, // metres
+    stringGlow: 1.3,
     stringSnap: 0.28, // seconds a string takes to snap and recoil on the release
-    colorStringA: '#fffbe8',
-    colorStringB: '#ffc65e',
+    colorStringA: '#ffc861',
+    colorStringB: '#c86a12',
+
+    /* ================================================================ */
+    /* 6b · THE HELD FIELD — a wall of stopped sound on the rim          */
+    /* ================================================================ */
+    curtainHeight: 0.95, // × tine height
+    curtainBands: 6, // standing bands up the wall
+    curtainGlow: 1.3, // the crests, beating with each toll
+    curtainOpacity: 0.72,
+    colorCurtainA: '#ffd27a', // hot crest
+    colorCurtainB: '#b8640f', // saturated amber body
+    colorCurtainDeep: '#2a1404', // dark umber — the deep stop
+
+    /* travel — a struck note skating out to the circle */
+    travelRate: 140, // bead motes per second
+    travelSize: 0.16,
+    travelRingSpacing: 1.4, // metres between rings of sound left on the floor
+    travelRingRadius: 0.75,
 
     /* ================================================================ */
     /* 7 · THE FLOOR                                                     */
@@ -126,7 +147,8 @@ export default {
     floorOpacity: 0.85,
     colorBand: '#d6a046',
     colorWave: '#ffcf7a',
-    colorHeld: '#ffe6a8',
+    colorHeld: '#c47a1e',
+    washStrength: 0.5, // the amber tide filling the held circle
 
     /* ================================================================ */
     /* 8 · MOTES, SPARKS, DUST                                           */
@@ -169,10 +191,10 @@ export default {
     burstSize: 5, // the pressure shell on the release
     burstIntensity: 1,
     shockRadius: 8,
-    colorBurstA: '#fff6dc',
+    colorBurstA: '#ffd88a',
     colorBurstB: '#ffcf7a',
     colorBurstC: '#8a5a1c',
-    colorShock: '#ffd890',
+    colorShock: '#e8a040',
     colorFlash: '#fff0c8',
 
     /* ================================================================ */

@@ -32,11 +32,21 @@ export default {
     handHeight: 1.4, // metres off the floor the seal leaves the hand at
     sealArc: 1.1, // metres the seal's flight arcs above a straight line
     sealSize: 0.12, // droplet size of the seal's own trail
+    sealRadius: 0.3, // metres: the head of the comet of blood
+    sealWobble: 0.14, // how hard its tail whips
+    sealCoreGlow: 2.4, // the hot core through its head
+    arcWidth: 0.6, // metres: the arc of blood strung behind it
+    arcTaper: 0.85, // 0..1 how much it narrows toward the hand
+    arcWobble: 0.25, // writhe of the arc, × its width
+    arcCoreGlow: 2.6,
+    arcOpacity: 0.95,
+    arcLength: 0.95, // × the lob: how much of the path stays drawn
+    arcDrain: 0.7, // seconds after landing it takes to drain into the circle
 
     /* --- the beats of the rite, seconds after the seal lands --- */
     drawTime: 0.55, // the ritual circle is drawn on over this
-    poolDelay: 0.25, // blood starts welling up this long after landing
-    poolTime: 0.6, // ... and has spread across the circle after this
+    poolDelay: 0.04, // blood starts welling up this long after landing
+    poolTime: 0.45, // ... and has spread across the circle after this
     eruptDelay: 0.75, // the first wave of spikes breaks the surface
 
     /* ================================================================ */
@@ -62,7 +72,13 @@ export default {
     moonHaloReach: 2.6, // the halo quad's half-width, in moon radii
     moonFlicker: 0.05,
     moonBrightness: 1.0,
-    moonPulse: 0.45, // how much the moon flares when the spikes erupt
+    moonPulse: 0.45, // how much the moon flares when the spikes erupt, and on each beat
+    moonShade: 0.85, // 0..1 how dark its night side falls — a sphere, not a disc
+    moonShadeAngle: -1.2, // radians: which side it is lit from
+    beamIntensity: 0.55, // the shaft of red moonlight onto the circle
+    beamWidth: 0.42, // its width at the circle, × zoneRadius (each side)
+    beamDrop: 0.35, // seconds for it to reach the circle
+    beamMotes: 34, // embers drawn up the beam per second
 
     /* ================================================================ */
     /* 2 · THE RITUAL CIRCLE                                             */
@@ -89,7 +105,7 @@ export default {
     /* ================================================================ */
     /* 3 · THE BLOOD POOL                                                */
     /* ================================================================ */
-    poolRadius: 0.95, // × zoneRadius
+    poolRadius: 1.0, // × zoneRadius
     poolEdgeNoise: 0.22, // fingering of the edge, × the radius
     poolEdgeScale: 2.4,
     poolFeather: 0.03, // metres of soft edge
@@ -108,6 +124,8 @@ export default {
     poolHeight: 0.014, // metres above the floor it is drawn at
     stainLife: 7.0, // seconds the dried stain (a decal) stays on the floor afterwards
     stainIntensity: 0.75,
+    poolGlow: 0.55, // light welling up through the blood in crawling veins
+    poolVeinScale: 1.3,
 
     /* ================================================================ */
     /* 4 · THE SPIKES                                                    */
@@ -133,14 +151,17 @@ export default {
     spikeLumps: 0.12, // surface lumpiness (rebuilds geometry)
     spikeGloss: 90,
     spikeSpecular: 2.2,
-    spikeEnv: 0.9,
-    spikeRim: 2.2,
+    spikeEnv: 0.5,
+    spikeRim: 1.3,
     spikeRimPower: 3.0,
-    spikeInnerGlow: 1.6, // light glowing up out of the pool at the base
+    spikeInnerGlow: 1.2, // light glowing up out of the pool at the base
     spikeVeins: 0.8,
     spikeVeinScale: 3.2,
     spikeDrip: 0.6,
     spikeShake: 0.22, // camera knock per wave
+    beatPeriod: 0.55, // seconds between heartbeats once the field stands
+    spikeThrob: 0.2, // how much the spikes swell on each beat
+    spikeBeatGlow: 1.5, // the surge of light that climbs every spike on a beat
 
     /* ================================================================ */
     /* 5 · DROPLETS & MIST                                               */
@@ -190,6 +211,7 @@ export default {
     colorPoolDeep: '#250104',
     colorPoolSpec: '#ffd8d0',
     colorPoolStain: '#2a0a0a',
+    colorPoolGlow: '#b0001a',
     colorSpikeBody: '#8a0a18',
     colorSpikeDeep: '#1a0204',
     colorSpikeRim: '#ff2a3a',

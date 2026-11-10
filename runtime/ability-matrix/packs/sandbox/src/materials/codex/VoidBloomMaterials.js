@@ -107,11 +107,17 @@ const PETAL_FRAGMENT = /* glsl */ `
   uniform float uEdgeGlow;
   uniform float uRimGlow;
   uniform float uFlare;       // the snap shut
-  uniform vec3  uColorBody;
-  uniform vec3  uColorDeep;
-  uniform vec3  uColorVein;
-  uniform vec3  uColorRim;
+  uniform vec3  uColorBody;   // deep, near-black flesh
+  uniform vec3  uColorDeep;   // deep, mottle
+  uniform vec3  uColorFlesh;  // body — saturated violet where the sun lands
+  uniform vec3  uColorVein;   // tint
+  uniform vec3  uColorRim;    // hot — only the thinnest rim and the tip
+  uniform vec3  uLightDir;
+  uniform float uRampLight;
+  uniform float uRimWidth;
+  uniform float uSpecular;
   uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
 
   varying vec2  vPet;
   varying vec3  vNormalW;
@@ -125,8 +131,11 @@ const PETAL_FRAGMENT = /* glsl */ `
     float v = vPet.y;
     float au = abs(u);
     vec3 N = normalize(vNormalW);
+    if (!gl_FrontFacing) N = -N;
     vec3 V = normalize(vViewDir);
-    float fres = pow(max(1.0 - abs(dot(N, V)), 0.0), 2.5);
+    vec3 L = normalize(uLightDir);
+    float ndv = abs(dot(N, V));
+    float fres = pow(max(1.0 - ndv, 0.0), 2.5);
 
     // Veins: a midrib and herringbone side veins, pulses running to the base.
     float midrib = exp(-pow(abs(u / 0.06), 2.0)) * smoothstep(0.98, 0.7, v);
@@ -135,15 +144,30 @@ const PETAL_FRAGMENT = /* glsl */ `
     float pulse = pow(max(0.5 + 0.5 * sin((v * 2.5 + uFlow + vSeed) * 6.2831853), 0.0), 4.0);
     float veins = (midrib + side * 0.7) * (0.35 + 0.65 * pulse);
 
-    float edge = smoothstep(0.78, 1.0, au);
-    float tip = smoothstep(0.86, 1.0, v);
+    float edge = smoothstep(1.0 - uRimWidth, 1.0, au);
+    float tip = smoothstep(0.93, 1.0, v);
     float n = snoise(vec3(u * 3.0, v * 6.0, vSeed * 10.0)) * 0.5 + 0.5;
 
-    vec3 col = mix(uColorBody, uColorDeep, v * 0.7 + n * 0.3);
-    col += uColorVein * veins * uVeinGlow * (gl_FrontFacing ? 1.0 : 0.55);
-    col += uColorRim * (edge * uEdgeGlow + tip * uEdgeGlow * 0.7 + fres * uRimGlow);
-    col += uColorRim * uFlare * (0.5 + edge);
-    gl_FragColor = vec4(col * uGlobalGlow, 1.0);
+    // Four-stop ramp, deep → flesh → vein → rim. Sunlight alone only carries
+    // the near-black flesh part way to violet: the bloom stays a dark thing.
+    vec3 deep = mix(uColorBody, uColorDeep, n * 0.7 + v * 0.3);
+    float wrap = clamp(dot(N, L) * 0.5 + 0.5, 0.0, 1.0);
+    float t = wrap * wrap * uRampLight * (1.0 - 0.45 * v) + (n - 0.5) * 0.08;
+    float glow = uGlobalGlow * uShaderIntensity;
+    t += veins * uVeinGlow * 0.11 * (gl_FrontFacing ? 1.0 : 0.6) * glow;
+    t += (edge + tip * 0.6) * uEdgeGlow * 0.16 * glow;
+    t += uFlare * (0.25 + 0.5 * edge);
+    t = clamp(t, 0.0, 1.0);
+    vec3 col = mix(deep, uColorFlesh, smoothstep(0.0, 0.45, t));
+    col = mix(col, uColorVein, smoothstep(0.45, 0.8, t));
+    col = mix(col, uColorRim, smoothstep(0.8, 1.0, t));
+    col *= 1.0 + smoothstep(0.75, 1.0, t) * 1.4;
+
+    // A waxy sheen and a violet (never white) fresnel rim.
+    vec3 H = normalize(L + V);
+    col += uColorFlesh * pow(max(dot(N, H), 0.0), 36.0) * uSpecular;
+    col += uColorVein * fres * uRimGlow * 0.35 * glow;
+    gl_FragColor = vec4(col, 1.0);
   }
 `;
 
@@ -174,8 +198,12 @@ export function createPetalMaterial() {
       uEdgeGlow: { value: 2.5 },
       uRimGlow: { value: 1.5 },
       uFlare: { value: 0 },
+      uRampLight: { value: 0.5 },
+      uRimWidth: { value: 0.08 },
+      uSpecular: { value: 0.4 },
       uColorBody: { value: new Color() },
       uColorDeep: { value: new Color() },
+      uColorFlesh: { value: new Color() },
       uColorVein: { value: new Color() },
       uColorRim: { value: new Color() }
     }),
@@ -205,7 +233,11 @@ export function createPetalMaterial() {
     u.uVeinGlow.value = c.veinGlow * g.glow;
     u.uEdgeGlow.value = c.edgeGlow * g.glow;
     u.uRimGlow.value = c.petalRim * g.glow * g.fresnel;
-    u.uFlare.value = s.flare * c.edgeGlow;
+    u.uFlare.value = s.flare;
+    u.uRampLight.value = c.petalRampLight;
+    u.uRimWidth.value = c.petalRimWidth;
+    u.uSpecular.value = c.petalSpecular;
+    u.uColorFlesh.value.copy(getColor(c.colorPetalBody));
     u.uColorBody.value.copy(getColor(c.colorPetal));
     u.uColorDeep.value.copy(getColor(c.colorPetalDeep));
     u.uColorVein.value.copy(getColor(c.colorVein));
@@ -242,6 +274,7 @@ const THROAT_FRAGMENT = /* glsl */ `
   uniform vec3  uColorCore;
   uniform vec3  uColorArmA;
   uniform vec3  uColorArmB;
+  uniform float uHole;
   uniform float uGlobalGlow;
   varying vec2 vXZ;
 
@@ -254,9 +287,13 @@ const THROAT_FRAGMENT = /* glsl */ `
     float sp = fract(a / 6.2831853 * uArms + log(r + 0.04) * uTwist + uSpin);
     float arm = pow(clamp(1.0 - abs(sp - 0.5) * 2.0, 0.0, 1.0), 3.0);
     float n = snoise(vec3(vXZ * 4.0, uSpin * 0.5)) * 0.5 + 0.5;
-    float lit = arm * smoothstep(0.12, 0.45, r) * (1.0 - smoothstep(0.8, 1.0, r)) * (0.6 + 0.4 * n);
-    float lip = exp(-pow(abs((r - 0.86) / 0.07), 2.0));
-    vec3 col = uColorCore + mix(uColorArmB, uColorArmA, smoothstep(0.3, 0.9, r)) * (lit * uGlow + lip * uGlow * 0.8);
+    // A wide black hole of a centre: the arms only light up well clear of it,
+    // and they are violet — the white is kept for the thin lip alone.
+    float hole = 1.0 - smoothstep(uHole * 0.6, uHole, r);
+    float lit = arm * smoothstep(uHole * 0.8, uHole + 0.2, r) * (1.0 - smoothstep(0.8, 1.0, r)) * (0.6 + 0.4 * n);
+    float lip = exp(-pow(abs((r - 0.86) / 0.05), 2.0));
+    vec3 col = uColorCore + uColorArmB * lit * uGlow + mix(uColorArmB, uColorArmA, 0.2) * lip * uGlow * 0.45;
+    col = mix(col, uColorCore, hole);
     float alpha = (1.0 - smoothstep(0.88, 1.0, r)) * uOpacity;
     if (alpha < 0.01) discard;
     gl_FragColor = vec4(col * uGlobalGlow, alpha);
@@ -283,6 +320,7 @@ export function createThroatMaterial() {
       uTwist: { value: 1.5 },
       uGlow: { value: 3 },
       uOpacity: { value: 1 },
+      uHole: { value: 0.45 },
       uColorCore: { value: new Color() },
       uColorArmA: { value: new Color() },
       uColorArmB: { value: new Color() }
@@ -303,6 +341,7 @@ export function createThroatMaterial() {
     u.uTwist.value = c.throatTwist;
     u.uGlow.value = c.throatGlow * g.glow;
     u.uOpacity.value = s.fade * g.opacity;
+    u.uHole.value = c.throatHole;
     u.uColorCore.value.copy(getColor(c.colorThroatCore));
     u.uColorArmA.value.copy(getColor(c.colorRim));
     u.uColorArmB.value.copy(getColor(c.colorVein));
@@ -522,6 +561,256 @@ export function createSeedMaterial() {
     u.uGlow.value = c.edgeGlow * g.glow;
     u.uFade.value = s.fade * g.opacity;
     u.uColorCore.value.copy(getColor(c.colorPetal));
+    u.uColorRim.value.copy(getColor(c.colorVein));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The void core                                                        */
+/* -------------------------------------------------------------------- */
+
+const CORE_VERTEX = /* glsl */ `
+  uniform float uTime;
+  uniform vec3  uCenter;
+  uniform float uRadius;
+  uniform float uWrithe;
+  uniform float uSpin;
+
+  varying vec3 vN;
+  varying vec3 vWorld;
+  varying vec3 vLocal;
+
+  ${noiseGLSL}
+
+  void main() {
+    vec3 d = normalize(position);
+    // A writhing mass, not a ball: two octaves of noise swim over it.
+    float n = snoise(d * 1.7 + vec3(0.0, uTime * 0.9, uSpin)) * 0.7
+            + snoise(d * 3.9 - vec3(uSpin, uTime * 1.4, 0.0)) * 0.3;
+    vec3 world = uCenter + d * uRadius * (1.0 + n * uWrithe);
+    vN = d;
+    vLocal = d;
+    vWorld = world;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const CORE_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uSpin;
+  uniform float uRimGlow;
+  uniform float uRimPower;
+  uniform float uFlare;
+  uniform vec3  uColorCore;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorVein;
+  uniform vec3  uColorRim;
+  uniform float uGlobalGlow;
+
+  varying vec3 vN;
+  varying vec3 vWorld;
+  varying vec3 vLocal;
+
+  ${noiseGLSL}
+
+  void main() {
+    vec3 N = normalize(vN);
+    vec3 V = normalize(cameraPosition - vWorld);
+    float ndv = clamp(dot(N, V), 0.0, 1.0);
+    float fres = pow(1.0 - ndv, uRimPower);
+    // Inside: black, with a faint deep-violet churn sliding in toward the
+    // centre of the disc you see — light going down, not coming out.
+    float churn = snoise(vec3(vLocal * 2.4 + vec3(uSpin * 0.7, -uTime * 0.6, 0.0))) * 0.5 + 0.5;
+    vec3 col = uColorCore + uColorDeep * churn * (1.0 - ndv) * 0.9;
+    // The event-horizon rim: thin, violet, hottest only at the very edge.
+    col += uColorVein * fres * uRimGlow * uGlobalGlow;
+    col += uColorRim * pow(fres, 3.0) * uRimGlow * 0.4 * uGlobalGlow;
+    col += uColorVein * uFlare * (0.4 + fres);
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+/** The black heart of the bloom — an opaque, writhing mass that eats light. */
+export function createVoidCoreMaterial() {
+  const material = new ShaderMaterial({
+    transparent: false,
+    depthWrite: true,
+    depthTest: true,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uRadius: { value: 0.7 },
+      uWrithe: { value: 0.18 },
+      uSpin: { value: 0 },
+      uRimGlow: { value: 2 },
+      uRimPower: { value: 3 },
+      uFlare: { value: 0 },
+      uColorCore: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorVein: { value: new Color() },
+      uColorRim: { value: new Color() }
+    }),
+    vertexShader: CORE_VERTEX,
+    fragmentShader: CORE_FRAGMENT
+  });
+
+  /** @param {object} s { center, radius, spin, flare } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(s.center);
+    u.uRadius.value = Math.max(0.001, s.radius);
+    u.uWrithe.value = c.coreWrithe * g.noiseStrength;
+    u.uSpin.value = s.spin;
+    u.uRimGlow.value = c.coreRimGlow * g.fresnel;
+    u.uRimPower.value = c.coreRimPower;
+    u.uFlare.value = s.flare;
+    u.uColorCore.value.copy(getColor(c.colorThroatCore));
+    u.uColorDeep.value.copy(getColor(c.colorPetalDeep));
+    u.uColorVein.value.copy(getColor(c.colorVein));
+    u.uColorRim.value.copy(getColor(c.colorRim));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The crawl — the void surging from the caster to the circle           */
+/* -------------------------------------------------------------------- */
+
+const CRAWL_VERTEX = /* glsl */ `
+  uniform vec3  uStart;
+  uniform vec3  uDir;
+  uniform vec3  uSide;
+  uniform float uLength;
+  uniform float uFront;
+  uniform float uWidth;
+  uniform float uMeander;
+  uniform float uSeedF;
+
+  varying vec2  vSV;          // x metres along, y −1..1 across
+  varying float vHead;        // metres behind the front
+
+  void main() {
+    float along = position.x * uLength;
+    float lat = (sin(along * 0.55 + uSeedF) * 0.6 + sin(along * 1.7 + uSeedF * 2.3) * 0.4) * uMeander;
+    lat *= smoothstep(0.0, 2.0, along) * smoothstep(0.0, 1.5, uLength - along);
+    float behind = uFront - along;
+    // Thickest a little behind the head, a tapered tail at the caster.
+    float w = uWidth * (0.35 + 0.65 * smoothstep(0.0, 2.5, along));
+    w *= smoothstep(-0.1, 0.9, behind) * (1.0 + 0.5 * exp(-pow((behind - 0.6) / 0.6, 2.0)));
+    vec3 world = uStart + uDir * along + uSide * (lat + position.y * w);
+    world.y = 0.022;
+    vSV = vec2(along, position.y);
+    vHead = behind;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const CRAWL_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uFlow;
+  uniform float uSeedF;
+  uniform float uGlow;
+  uniform float uErode;
+  uniform float uLength;
+  uniform float uOpacity;
+  uniform vec3  uColorStain;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorVein;
+  uniform vec3  uColorRim;
+  uniform float uGlobalGlow;
+
+  varying vec2  vSV;
+  varying float vHead;
+
+  ${noiseGLSL}
+
+  void main() {
+    if (vHead < 0.0) discard;
+    float d = abs(vSV.y);
+    float edgeN = snoise(vec3(vSV.x * 1.6, vSV.y * 0.5, uSeedF)) * 0.25;
+    float body = 1.0 - smoothstep(0.55, 1.0, d + edgeN);
+    // Filaments running down the crawl, pulses racing toward the circle.
+    float f1 = 1.0 - abs(snoise(vec3(vSV.x * 0.7, vSV.y * 1.6, uSeedF)));
+    float f2 = 1.0 - abs(snoise(vec3(vSV.x * 1.3 + 4.0, vSV.y * 2.4, uSeedF + 2.0)));
+    float fil = pow(max(f1, 0.0), 18.0) + pow(max(f2, 0.0), 24.0) * 0.5;
+    float pulse = 0.3 + 0.7 * pow(max(0.5 + 0.5 * sin((vSV.x * 0.6 - uFlow) * 6.2831853), 0.0), 3.0);
+    float rim = exp(-pow((d + edgeN - 0.78) / 0.12, 2.0));
+    float head = exp(-vHead * 1.4);
+    vec3 col = mix(uColorStain, uColorDeep, 0.4 * (1.0 - d));
+    col += uColorVein * (fil * pulse * 0.9 + rim * 0.5 + head * 0.9) * uGlow * uGlobalGlow;
+    col += uColorRim * pow(head, 3.0) * uGlow * 0.4 * uGlobalGlow;
+    float a = max(body * 0.94, fil * 0.8) * smoothstep(0.0, 0.25, vHead);
+    // Eaten from the caster's end toward the bloom.
+    if (uErode > 0.0) {
+      float n = snoise(vec3(vSV * 1.3, uSeedF + 7.0)) * 0.5 + 0.5;
+      float k = mix(n, 1.0 - vSV.x / max(uLength, 0.1), 0.6);
+      a *= smoothstep(uErode * 1.2 - 0.1, uErode * 1.2, k);
+    }
+    a *= uOpacity;
+    if (a < 0.004) discard;
+    gl_FragColor = vec4(col, clamp(a, 0.0, 1.0));
+  }
+`;
+
+/** The dark crawl along the floor from the caster to the circle. */
+export function createCrawlMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -3,
+    polygonOffsetUnits: -3,
+    uniforms: sharedUniforms({
+      uStart: { value: new Vector3() },
+      uDir: { value: new Vector3(0, 0, 1) },
+      uSide: { value: new Vector3(1, 0, 0) },
+      uLength: { value: 10 },
+      uFront: { value: 0 },
+      uWidth: { value: 0.7 },
+      uMeander: { value: 0.3 },
+      uSeedF: { value: 0 },
+      uFlow: { value: 0 },
+      uGlow: { value: 2 },
+      uErode: { value: 0 },
+      uOpacity: { value: 1 },
+      uColorStain: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorVein: { value: new Color() },
+      uColorRim: { value: new Color() }
+    }),
+    vertexShader: CRAWL_VERTEX,
+    fragmentShader: CRAWL_FRAGMENT
+  });
+
+  /** @param {object} s { start, dir, side, length, front, seed, flow, erode } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uStart.value.copy(s.start);
+    u.uDir.value.copy(s.dir);
+    u.uSide.value.copy(s.side);
+    u.uLength.value = Math.max(0.1, s.length);
+    u.uFront.value = s.front;
+    u.uWidth.value = c.crawlWidth;
+    u.uMeander.value = c.crawlMeander * g.noiseStrength;
+    u.uSeedF.value = s.seed;
+    u.uFlow.value = s.flow;
+    u.uGlow.value = c.crawlGlow * g.glow;
+    u.uErode.value = s.erode;
+    u.uOpacity.value = g.opacity;
+    u.uColorStain.value.copy(getColor(c.colorStain));
+    u.uColorDeep.value.copy(getColor(c.colorPetalBody));
+    u.uColorVein.value.copy(getColor(c.colorVein));
     u.uColorRim.value.copy(getColor(c.colorRim));
   };
 

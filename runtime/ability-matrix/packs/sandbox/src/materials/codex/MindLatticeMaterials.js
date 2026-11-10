@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import { Color, DoubleSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
@@ -7,20 +7,23 @@ import { getColor } from '../../utils/color.js';
 const ID = 'mindlattice';
 
 /**
- * Mind Lattice — the four bespoke shaders. Everything here is *light* and
- * everything is *straight*: no noise bends a line, noise only modulates
- * brightness. That is what keeps it from reading as anything organic.
+ * Mind Lattice — the four bespoke shaders. Everything here is *straight*:
+ * no noise bends a line. The cage is not light-sabres but cut crystal — every
+ * solid surface is coloured from one four-stop arcane ramp (white-hot violet
+ * core → pale tint → saturated violet body → deep indigo), and HDR lives only
+ * in the thin filament at the heart of each bar.
  *
  *  - **beams** (`createMindBeamMaterial`) — every straight bar of the cage on
- *    one InstancedMesh of open cylinders: the tesseract's 32 edges, the rim
- *    bars and the two rings. A white-hot core inside a coloured sheath (an
- *    inverted fresnel), packets of "thought" running along each bar on its own
- *    clock, a bright head where a bar is still drawing in, and a flare when
- *    a synapse fires down it. Per instance `aBeam`: seed, intensity, hue
- *    (0 primary … 1 secondary), flare.
+ *    one InstancedMesh of hexagonal prisms: the tesseract's 32 edges, the rim
+ *    bars and the two rings. Faceted (flat face normals from derivatives),
+ *    lit by the sun: deep in shadow, body in light, tint on the fresnel rim,
+ *    a glint on the cut. Inside, a thin white-hot filament carries packets of
+ *    "thought" on its own clock and flares when a synapse fires. Normal
+ *    blending with depth write, so the deep tone shows. Per instance `aBeam`:
+ *    seed, intensity, hue (0 body … 1 tinted ring), flare.
  *  - **nodes** (`createMindNodeMaterial`) — the tesseract's 16 vertices as
- *    spinning octahedra, white cores with a hard coloured rim; the thought
- *    that flies out in the travel phase is one more of them.
+ *    spinning cut violet gems; the thought that flies out in the travel phase
+ *    is one more of them, burning tint with an HDR heart.
  *  - **the floor** (`createMindFloorMaterial`) — a crisp triangular lattice
  *    of light inside the circle, concentric rings, nodes at the lattice
  *    intersections, a radar sweep, and rings that pulse out on each synapse.
@@ -66,12 +69,18 @@ const BEAM_FRAGMENT = /* glsl */ `
   uniform float uTime;
   uniform float uGlobalGlow;
   uniform float uShaderIntensity;
+  uniform float uOpacity;
 
-  uniform vec3  uColorA;
-  uniform vec3  uColorB;
-  uniform vec3  uCore;
+  uniform vec3  uColorA;     // body
+  uniform vec3  uColorB;     // tint
+  uniform vec3  uCore;       // white-hot
+  uniform vec3  uDeep;       // deep
+  uniform vec3  uSunDir;
   uniform float uGlow;
   uniform float uCoreGlow;
+  uniform float uCoreWidth;
+  uniform float uRim;
+  uniform float uAmbient;
   uniform float uPacketGlow;
   uniform float uPacketSpeed;
   uniform float uPacketSpacing;
@@ -83,8 +92,6 @@ const BEAM_FRAGMENT = /* glsl */ `
   varying vec4 vBeam;
   varying float vLen;
 
-  ${noiseGLSL}
-
   void main() {
     float seed = vBeam.x;
     float intensity = vBeam.y;
@@ -93,41 +100,66 @@ const BEAM_FRAGMENT = /* glsl */ `
     if (intensity < 0.002) discard;
 
     vec3 V = normalize(cameraPosition - vWorld);
+    // Faceted: the prism's own flat face normal, lit by the sun.
+    vec3 F = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+    if (dot(F, V) < 0.0) F = -F;
+    float lambert = max(dot(F, normalize(uSunDir)), 0.0);
+    float sky = 0.5 + 0.5 * F.y;
+    float light = uAmbient * sky + (1.0 - uAmbient) * lambert;
+    // Smooth cross-section term, for the core filament and the rim.
     float ndv = abs(dot(normalize(vN), V));
-    // White core straight on, coloured sheath at the edge.
-    float core = pow(ndv, 3.0);
-    vec3 sheath = mix(uColorA, uColorB, hue);
+    float rim = pow(1.0 - ndv, 2.0);
 
-    // Packets of thought running along the bar, metres apart.
+    // Ramp: deep in shadow -> body in light -> tint on the rim.
+    vec3 body = mix(uColorA, mix(uColorA, uColorB, 0.35), hue);
+    vec3 col = mix(uDeep, body, smoothstep(0.0, 0.9, light)) * uGlow;
+    col = mix(col, uColorB, rim * uRim);
+    // A spec glint along the facet edge, like cut glass.
+    vec3 H = normalize(normalize(uSunDir) + V);
+    col += uColorB * pow(max(dot(F, H), 0.0), 40.0) * 0.6;
+
+    // The thin white-hot filament inside: the only HDR in the bar.
+    float core = pow(ndv, uCoreWidth);
+    // Packets of thought running along it, metres apart.
     float d = vUv.y * vLen;
     float ph = fract(d / max(uPacketSpacing, 0.05) - uTime * uPacketSpeed + seed * 7.0);
     float packet = smoothstep(0.8, 0.97, ph) * (1.0 - smoothstep(0.97, 1.0, ph));
-    // The bar's leading end: brightest while it is still drawing in.
-    float head = smoothstep(0.85, 1.0, vUv.y) * 0.6;
-    float flick = 0.85 + 0.15 * sin(uTime * 37.0 + seed * 50.0);
+    float head = smoothstep(0.88, 1.0, vUv.y) * 0.5;
+    float flick = 0.9 + 0.1 * sin(uTime * 37.0 + seed * 50.0);
+    float filament = core * (uCoreGlow * flick + packet * uPacketGlow + flare * uFlareGlow) + head * core;
+    col += uCore * filament;
+    // A packet or a synapse also lights the sheath round it, in the tint.
+    col += uColorB * (packet * 0.35 + flare * 0.6) * (1.0 - core);
 
-    vec3 col = sheath * (0.45 + 0.55 * (1.0 - core)) * uGlow;
-    col += uCore * core * uCoreGlow;
-    col += mix(sheath, uCore, 0.5) * (packet * uPacketGlow + head);
-    col += uCore * flare * uFlareGlow;
-    col *= intensity * flick * uGlobalGlow * uShaderIntensity;
-    gl_FragColor = vec4(col, 1.0);
+    col *= uGlobalGlow * uShaderIntensity;
+    float a = clamp(intensity * 1.5, 0.0, 1.0) * uOpacity;
+    gl_FragColor = vec4(col, a);
   }
 `;
 
-/** Every bar of the cage. Additive, instanced. */
+/**
+ * Every bar of the cage: solid, lit, faceted violet crystal with a thin
+ * white-hot filament down its heart. Normal-blended and depth-writing, so the
+ * deep tone really sits on the floor instead of adding up to white.
+ */
 export function createMindBeamMaterial() {
   const material = new ShaderMaterial({
     transparent: true,
-    depthWrite: false,
+    depthWrite: true,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
       uColorA: { value: new Color() },
       uColorB: { value: new Color() },
       uCore: { value: new Color() },
+      uDeep: { value: new Color() },
+      uSunDir: { value: new Vector3(0.45, 0.8, 0.4) },
+      uOpacity: { value: 1 },
+      uCoreWidth: { value: 16 },
+      uRim: { value: 0.8 },
+      uAmbient: { value: 0.3 },
       uGlow: { value: 1.5 },
       uCoreGlow: { value: 2 },
       uPacketGlow: { value: 3 },
@@ -147,7 +179,12 @@ export function createMindBeamMaterial() {
     u.uColorA.value.copy(getColor(c.colorPrimary));
     u.uColorB.value.copy(getColor(c.colorSecondary));
     u.uCore.value.copy(getColor(c.colorCore));
-    u.uGlow.value = c.beamGlow * g.glow;
+    u.uDeep.value.copy(getColor(c.colorDeep));
+    u.uOpacity.value = g.opacity;
+    u.uCoreWidth.value = c.coreWidth;
+    u.uRim.value = c.beamRim * g.fresnel;
+    u.uAmbient.value = c.beamAmbient;
+    u.uGlow.value = c.beamGlow;
     u.uCoreGlow.value = c.coreGlow * g.glow;
     u.uPacketGlow.value = c.packetGlow * g.glow;
     u.uPacketSpeed.value = c.packetSpeed * g.animationSpeed;
@@ -187,8 +224,12 @@ const NODE_FRAGMENT = /* glsl */ `
   uniform float uGlobalGlow;
   uniform float uShaderIntensity;
   uniform vec3  uColorA;
+  uniform vec3  uColorB;
   uniform vec3  uCore;
+  uniform vec3  uDeep;
+  uniform vec3  uSunDir;
   uniform float uGlow;
+  uniform float uCoreGlow;
 
   varying vec3 vWorld;
   varying vec3 vN;
@@ -198,28 +239,39 @@ const NODE_FRAGMENT = /* glsl */ `
     float intensity = vNode.y;
     if (intensity < 0.002) discard;
     vec3 V = normalize(cameraPosition - vWorld);
-    float ndv = abs(dot(normalize(vN), V));
-    float rim = pow(1.0 - ndv, 1.5);
+    vec3 F = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+    if (dot(F, V) < 0.0) F = -F;
+    float light = 0.25 * (0.5 + 0.5 * F.y) + 0.75 * max(dot(F, normalize(uSunDir)), 0.0);
+    float ndv = abs(dot(F, V));
     float pulse = 0.8 + 0.2 * sin(uTime * 9.0 + vNode.x * 40.0);
-    vec3 col = uCore * ndv * 1.5 + uColorA * rim * 2.0;
-    col *= uGlow * intensity * pulse * (1.0 + vNode.w * 2.0) * uGlobalGlow * uShaderIntensity;
+    // A cut violet gem: deep facets, body facets, a tint rim, a hot glint.
+    vec3 col = mix(uDeep, uColorA, smoothstep(0.0, 0.9, light)) * uGlow;
+    col = mix(col, uColorB, pow(1.0 - ndv, 2.0) * 0.7);
+    col += uCore * pow(max(dot(F, normalize(normalize(uSunDir) + V)), 0.0), 30.0) * uCoreGlow * pulse;
+    // The travelling thought burns: tint body, HDR heart.
+    col = mix(col, uColorB * 1.2 + uCore * pow(ndv, 3.0) * uCoreGlow * 1.5, vNode.w);
+    col *= intensity * uGlobalGlow * uShaderIntensity;
     gl_FragColor = vec4(col, 1.0);
   }
 `;
 
-/** The tesseract's vertices (and the travelling thought). Additive, instanced. */
+/** The tesseract's vertices (and the travelling thought). Solid lit gems, instanced. */
 export function createMindNodeMaterial() {
   const material = new ShaderMaterial({
-    transparent: true,
-    depthWrite: false,
+    transparent: false,
+    depthWrite: true,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
       uColorA: { value: new Color() },
+      uColorB: { value: new Color() },
       uCore: { value: new Color() },
-      uGlow: { value: 2 }
+      uDeep: { value: new Color() },
+      uSunDir: { value: new Vector3(0.45, 0.8, 0.4) },
+      uGlow: { value: 1 },
+      uCoreGlow: { value: 2 }
     }),
     vertexShader: NODE_VERTEX,
     fragmentShader: NODE_FRAGMENT
@@ -231,8 +283,11 @@ export function createMindNodeMaterial() {
     const g = settings.global;
     const u = material.uniforms;
     u.uColorA.value.copy(getColor(c.colorPrimary));
+    u.uColorB.value.copy(getColor(c.colorSecondary));
     u.uCore.value.copy(getColor(c.colorCore));
-    u.uGlow.value = c.nodeGlow * g.glow;
+    u.uDeep.value.copy(getColor(c.colorDeep));
+    u.uGlow.value = c.nodeGlow;
+    u.uCoreGlow.value = c.coreGlow * g.glow;
   };
 
   return material;
@@ -275,6 +330,7 @@ const FLOOR_FRAGMENT = /* glsl */ `
   uniform float uFade;
   uniform float uOpacity;
   uniform float uDim;
+  uniform float uHeart;
 
   uniform vec3 uColorA;
   uniform vec3 uColorB;
@@ -325,10 +381,12 @@ const FLOOR_FRAGMENT = /* glsl */ `
     float lit = inside * reached;
     float lines = max(l * 0.7, max(node, rings));
     float glow = lines * (0.55 + 0.45 * sweep + pulse * 2.0) + atFront * 1.5;
-    vec3 col = mix(uColorA, uColorB, rings) * glow * uGlow + uCore * node * (0.5 + sweep);
+    vec3 col = mix(uColorA, uColorB, rings) * glow * uGlow + uCore * node * (0.25 + 0.6 * sweep);
     col *= uGlobalGlow * uShaderIntensity;
-    // A faint dark-blue wash so the lines sit on something.
-    vec3 base = uColorDim;
+    // A solid deep-violet disc under the lattice, warming toward the body
+    // tone at its heart and breathing with the sweep, so the lines sit on mass.
+    float heart = pow(1.0 - clamp(r / max(uRadius, 0.1), 0.0, 1.0), 1.6) * uHeart;
+    vec3 base = mix(uColorDim, uColorA * 0.5, heart * (0.75 + 0.25 * sweep));
     float a = max(lit * uDim, min(1.0, glow) * lit) * (1.0 - uFade) * uOpacity;
     if (a < 0.004) discard;
     gl_FragColor = vec4(base * (1.0 - min(glow, 1.0)) + col, clamp(a, 0.0, 1.0));
@@ -362,6 +420,7 @@ export function createMindFloorMaterial() {
       uFade: { value: 0 },
       uOpacity: { value: 1 },
       uDim: { value: 0.35 },
+      uHeart: { value: 0.8 },
       uColorA: { value: new Color() },
       uColorB: { value: new Color() },
       uCore: { value: new Color() },
@@ -390,6 +449,7 @@ export function createMindFloorMaterial() {
     u.uFade.value = s.fade;
     u.uOpacity.value = g.opacity;
     u.uDim.value = c.gridWash;
+    u.uHeart.value = c.floorHeart;
     u.uColorA.value.copy(getColor(c.colorPrimary));
     u.uColorB.value.copy(getColor(c.colorSecondary));
     u.uCore.value.copy(getColor(c.colorCore));

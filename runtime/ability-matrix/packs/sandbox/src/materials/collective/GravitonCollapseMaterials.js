@@ -454,6 +454,7 @@ const WELL_VERTEX = /* glsl */ `
   varying vec2  vFlat;       // offset from the axis, metres
   varying float vProfile;
   varying vec3  vNormalW;
+  varying float vOcclude;    // where the eye ray crosses the floor, × reach (>1: the near floor hides it)
 
   ${PROFILE_GLSL}
 
@@ -494,6 +495,10 @@ const WELL_VERTEX = /* glsl */ `
     float t = world.y < plane ? (eye.y - plane) / max(eye.y - world.y, 1e-4) : 1.0;
     t = clamp(t, 0.0, 1.0);
     vec3 proxy = eye + (world - eye) * mix(t, 1.0, 0.004);
+    // A sunk point is only visible through the hole: if the eye ray reaches
+    // the floor plane outside the lip, the real floor in front hides it.
+    vec3 hit = eye + (world - eye) * t;
+    vOcclude = world.y < plane ? length(hit.xz - uCentre.xz) / max(uReach, 1e-3) : 0.0;
 
     vec4 clipImage = projectionMatrix * viewMatrix * vec4(world, 1.0);
     vec4 clipDepth = projectionMatrix * viewMatrix * vec4(proxy, 1.0);
@@ -525,12 +530,29 @@ const WELL_FRAGMENT = /* glsl */ `
   uniform vec3  uColorDeep;
   uniform vec3  uColorGrid;
   uniform vec3  uColorHot;
+  uniform vec3  uColorBody;   // saturated violet body of the lensing field
+  uniform vec3  uColorTint;   // pale tint the arms burn to near the throat
+  uniform float uGrip;        // 0..1 through the hold — the well keeps feeding
+  uniform float uCrush;       // 0..1 through the crush window
+  uniform float uHorizon;     // horizon radius, × throat
+  uniform float uHorizonGrow; // how much it widens over the hold
+  uniform float uPhotonGlow;
+  uniform float uPhotonWidth; // × horizon radius
+  uniform float uArms;
+  uniform float uArmTight;    // log-spiral winding
+  uniform float uFieldSpin;   // rad/s the arms turn
+  uniform float uFieldFlow;   // how fast the streaks drain down the throat
+  uniform float uFieldContrast;
+  uniform float uFieldGlow;
+  uniform float uRipple;
+  uniform float uOccludeEdge;
   uniform vec3  uLightDir;
   uniform float uGlobalGlow;
 
   varying vec2  vFlat;
   varying float vProfile;
   varying vec3  vNormalW;
+  varying float vOcclude;
 
   ${noiseGLSL}
 
@@ -541,41 +563,81 @@ const WELL_FRAGMENT = /* glsl */ `
     return 1.0 - smoothstep(width, width + fw * 1.5, d);
   }
 
+  /** Four-stop ramp: deep → body → tint → white-hot (HDR only at the top). */
+  vec3 ramp4(float t) {
+    t = clamp(t, 0.0, 1.0);
+    if (t < 0.4) return mix(uColorDeep, uColorBody, t / 0.4);
+    if (t < 0.78) return mix(uColorBody, uColorTint, (t - 0.4) / 0.38);
+    return mix(uColorTint, uColorHot * 1.6, (t - 0.78) / 0.22);
+  }
+
   void main() {
     float r = length(vFlat);
     float lip = r / max(uReach, 1e-3);
     if (lip > 1.0) discard;
+    if (vOcclude > uOccludeEdge) discard;
     float prof = vProfile;
-
-    /* --- the grid: space itself, wound into the hole --- */
     float angle = atan(vFlat.y, vFlat.x);
-    float wound = angle + (uTwist + uClock * uSpin) * prof * uOpen;
-    float spokes = gridLine(wound * uSpokes / 6.2831853, uLineWidth);
-    // Spokes converge on the axis; thin them out before they become a blot.
-    spokes *= smoothstep(uThroat * 0.15, uThroat * 0.9, r);
-    float rings = gridLine((r + uClock * uFlow) / max(uRingSpacing, 0.05), uLineWidth * 1.3);
-    float grid = max(spokes, rings);
+    float grip = uGrip;
 
-    /* --- the stone the well is made of --- */
+    /* --- the event horizon: a black hole at the bottom of the throat that
+           widens as the well feeds, and is crushed tight at the end --- */
+    float horizon = uThroat * uHorizon * uOpen * (1.0 + uHorizonGrow * grip) * (1.0 - 0.45 * uCrush);
+    float fwR = fwidth(r) + 1e-4;
+
+    /* --- the lensing field: matter wound into log-spiral arms that are
+           dragged down the throat, streaked by noise, filling the funnel --- */
+    float lr = log(max(r, 0.04));
+    float wind = uArmTight * (1.0 + 0.6 * grip + 0.8 * uCrush);
+    float spinA = angle + uClock * uFieldSpin * (0.4 + 1.6 * prof);
+    float phase = uArms * (spinA + wind * lr);
+    float arms = 0.5 + 0.5 * cos(phase);
+    arms = pow(arms, uFieldContrast);
+    float sa = spinA + wind * lr;
+    float streaks = fbm3(vec3(cos(sa) * 2.4, sin(sa) * 2.4, (lr + uClock * uFieldFlow) * 3.2 + uSeed)) * 0.5 + 0.5;
+    float clumps = fbm3(vec3(vFlat * 1.3 + uSeed, uClock * 0.35)) * 0.5 + 0.5;
+    // Inward-travelling gravity ripples modulate the density (no lines).
+    float ripple = 1.0 + uRipple * sin((r + uClock * uFlow * 1.8) / max(uRingSpacing, 0.05) * 3.14159);
+    float field = (arms * 0.75 + 0.25) * mix(0.45, 1.25, streaks) * mix(0.75, 1.15, clumps) * ripple;
+    // Denser and hotter down the throat; it builds as the well feeds.
+    float dens = field * (0.34 + 0.85 * pow(prof, 0.8)) * (0.65 + 0.55 * grip + 0.5 * uCrush);
+    dens *= smoothstep(1.0, 0.55, lip) * 0.6 + 0.4;
+    // A shadow ring just outside the horizon: light bent away before it falls in.
+    float shadow = smoothstep(horizon * 1.05, horizon * 2.1, r);
+    dens *= mix(0.2, 1.0, shadow);
+
+    /* --- the stone the well is made of: dark, lit, swallowed by the field --- */
     float grain = fbm3(vec3(vFlat * 1.7, uSeed)) * 0.5 + 0.5;
     vec3 base = mix(uColorBase, uColorDeep, smoothstep(0.05, 0.85, prof));
     base *= mix(1.0, 0.65 + grain * 0.7, uGrain);
     float lambert = clamp(dot(normalize(vNormalW), normalize(uLightDir)), 0.0, 1.0);
     base *= 0.35 + 0.65 * lambert;
-    // Down the throat there is no sky to see: it simply gets darker.
     base *= 1.0 - prof * uShade;
 
-    /* --- light: the grid, and the core's glow pooling at the bottom --- */
-    vec3 emit = uColorGrid * grid * uGridGlow * (0.25 + prof * 1.6) * uOpen;
-    emit += uColorHot * pow(prof, 5.0) * uHotGlow * uOpen;
-    vec3 color = base + emit * uGlobalGlow;
+    vec3 fieldCol = ramp4(dens * uFieldGlow * 0.55);
+    float cover = smoothstep(0.02, 0.35, dens) * uOpen;
+    vec3 color = mix(base, fieldCol * (0.55 + 0.6 * uGlobalGlow), cover);
 
-    // Feathered at the lip, so the funnel hands over to the real floor
-    // instead of ending on a seam.
+    /* --- the grid, demoted to an undertone wound into the field --- */
+    float wound = angle + (uTwist + uClock * uSpin) * prof * uOpen;
+    float spokes = gridLine(wound * uSpokes / 6.2831853, uLineWidth);
+    spokes *= smoothstep(uThroat * 0.15, uThroat * 0.9, r);
+    float rings = gridLine((r + uClock * uFlow) / max(uRingSpacing, 0.05), uLineWidth * 1.3);
+    float grid = max(spokes, rings);
+    color += uColorGrid * grid * uGridGlow * (0.15 + prof * 0.6) * uOpen * uGlobalGlow * (1.0 - 0.6 * cover);
+    color += uColorHot * pow(prof, 5.0) * uHotGlow * uOpen * uGlobalGlow * shadow;
+
+    /* --- the photon ring and the black --- */
+    float ringD = (r - horizon) / max(horizon * uPhotonWidth, fwR);
+    float photon = exp(-ringD * ringD) * uPhotonGlow * uOpen * (1.0 + 1.5 * uCrush);
+    float ringCore = exp(-ringD * ringD * 6.0);
+    color += mix(mix(uColorBody, uColorTint, 0.75), uColorHot, ringCore * 0.5) * photon * uGlobalGlow;
+    float hole = 1.0 - smoothstep(horizon * 0.92 - fwR, horizon * 0.92 + fwR, r);
+    color = mix(color, vec3(0.0), hole * uOpen);
+
+    // Feathered at the lip, so the funnel hands over to the real floor.
     float alpha = (1.0 - smoothstep(1.0 - uFeather, 1.0, lip)) * uOpacity * uFade;
-    // The flat floor around the lip is the stage's own — only draw where the
-    // surface has actually moved, or the grid alone at the rim.
-    alpha *= clamp(smoothstep(0.0, 0.04, prof * uOpen) + grid * 0.6 * uOpen, 0.0, 1.0);
+    alpha *= clamp(smoothstep(0.0, 0.035, prof * uOpen) + grid * 0.4 * uOpen + cover, 0.0, 1.0);
     if (alpha < 0.003) discard;
 
     gl_FragColor = vec4(color, alpha);
@@ -625,7 +687,23 @@ export function createGravitonWellMaterial() {
       uColorBase: { value: new Color() },
       uColorDeep: { value: new Color() },
       uColorGrid: { value: new Color() },
-      uColorHot: { value: new Color() }
+      uColorHot: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorTint: { value: new Color() },
+      uGrip: { value: 0 },
+      uCrush: { value: 0 },
+      uHorizon: { value: 0.5 },
+      uHorizonGrow: { value: 0.5 },
+      uPhotonGlow: { value: 2 },
+      uPhotonWidth: { value: 0.12 },
+      uArms: { value: 3 },
+      uArmTight: { value: 1.6 },
+      uFieldSpin: { value: 1 },
+      uFieldFlow: { value: 0.6 },
+      uFieldContrast: { value: 1.6 },
+      uFieldGlow: { value: 1.6 },
+      uRipple: { value: 0.25 },
+      uOccludeEdge: { value: 1 }
     }),
     vertexShader: WELL_VERTEX,
     fragmentShader: WELL_FRAGMENT
@@ -662,6 +740,22 @@ export function createGravitonWellMaterial() {
     u.uColorDeep.value.copy(getColor(c.colorWellDeep));
     u.uColorGrid.value.copy(getColor(c.colorWellGrid));
     u.uColorHot.value.copy(getColor(c.colorWellHot));
+    u.uColorBody.value.copy(getColor(c.colorWellBody));
+    u.uColorTint.value.copy(getColor(c.colorWellTint));
+    u.uGrip.value = state.grip ?? 0;
+    u.uCrush.value = state.crush ?? 0;
+    u.uHorizon.value = c.wellHorizon;
+    u.uHorizonGrow.value = c.wellHorizonGrow;
+    u.uPhotonGlow.value = c.wellPhotonGlow * g.glow;
+    u.uPhotonWidth.value = Math.max(0.01, c.wellPhotonWidth);
+    u.uArms.value = Math.max(1, Math.round(c.wellArms));
+    u.uArmTight.value = c.wellArmTight;
+    u.uFieldSpin.value = c.wellFieldSpin * g.noiseSpeed;
+    u.uFieldFlow.value = c.wellFieldFlow * g.noiseSpeed;
+    u.uFieldContrast.value = Math.max(0.1, c.wellFieldContrast);
+    u.uFieldGlow.value = c.wellFieldGlow * g.shaderIntensity;
+    u.uRipple.value = c.wellRipple * g.turbulence;
+    u.uOccludeEdge.value = c.wellOcclude;
   };
 
   return material;

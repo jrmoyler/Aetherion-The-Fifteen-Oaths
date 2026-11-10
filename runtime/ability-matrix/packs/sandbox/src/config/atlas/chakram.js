@@ -22,15 +22,16 @@ export default {
     returnSpeed: 22.0, // recovery-arc flight speed, metres/second
     lifetime: 0.18, // seconds the catch flash holds
     fadeTime: 0.45, // seconds the trail takes to die after the catch
+    catchHold: 0.7, // seconds the caught disc keeps spinning down in the hand before it is stowed
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: 'cast1', // which clip in `CAST_ANIMATIONS` the body throws
     windupTime: 0.16, // seconds the disc spins up in the hand before it flies
 
     /* --- where it leaves and is caught --- */
-    handForward: 0.55, // metres in front of the caster
-    handSide: 0.3, // metres to the caster's right
-    handHeight: 1.25, // metres off the floor
-    flightHeight: 1.0, // cruising height between banks, metres
+    handForward: 0.9, // metres in front of the caster
+    handSide: 0.45, // metres to the caster's right
+    handHeight: 1.6, // metres off the floor (the blade is big: held high)
+    flightHeight: 1.25, // cruising height between banks, metres
 
     /* ================================================================ */
     /* THE FLIGHT                                                        */
@@ -52,27 +53,27 @@ export default {
     /* ================================================================ */
     /* 1 · DISC — the toothed blade                                       */
     /* ================================================================ */
-    discRadius: 0.42, // outer radius at the tooth roots, metres
-    teeth: 7, // teeth round the rim
-    innerRadius: 0.44, // open hub, × radius
-    toothDepth: 0.26, // how far a tooth stands proud, × radius
+    discRadius: 0.8, // outer radius at the tooth roots, metres (≈ 2.2 m across the tips)
+    teeth: 6, // teeth round the rim
+    innerRadius: 0.4, // open hub, × radius
+    toothDepth: 0.34, // how far a tooth stands proud, × radius
     toothSharp: 3.0, // >1 hardens the hook behind each tooth
-    thickness: 0.07, // blade thickness at the hub, × radius
+    thickness: 0.09, // blade thickness at the hub, × radius
     bladeBevel: 0.38, // the bevelled knife edge, × radius
-    spinRate: 4.5, // turns per second in flight
+    spinRate: 2.6, // turns per second in flight (slow enough that the teeth read)
     tilt: 0.32, // bank angle into each leg, radians
     wobble: 0.12, // wobble on the recovery arc, radians
-    metalColor: '#b9a77a',
-    metalDark: '#2c2418',
-    roughness: 0.28, // 0 = mirror
+    metalColor: '#c9b384',
+    metalDark: '#1a140c',
+    roughness: 0.32, // 0 = mirror
     envIntensity: 1.2, // reflection of the sky probe
     brushed: 0.55, // radial brushed streaks
-    rimEnergy: 3.2, // energy on the cutting edge
-    rimWidth: 0.12, // how much of the rim glows, 0..1 of the radius
+    rimEnergy: 2.4, // energy on the cutting edge
+    rimWidth: 0.09, // how much of the rim glows, 0..1 of the radius
     channelEnergy: 2.0, // the energy groove round the hub
     channelSpeed: 3.0, // how fast energy runs round the groove
     tipHeat: 2.6, // hot tooth tips
-    hitFlare: 4.0, // the whole blade flares on every bank
+    hitFlare: 2.0, // the whole blade flares on every bank
     fresnel: 1.4,
     colorEnergy: '#ffdf79',
     colorEnergyHot: '#fffbe8',
@@ -80,12 +81,12 @@ export default {
     /* ================================================================ */
     /* 2 · SMEAR + TRAIL                                                 */
     /* ================================================================ */
-    smearScale: 1.25, // smear disc, × blade size
-    smearStrength: 1.2, // spin-blur brightness
-    smearStreaks: 22, // angular streaks in the spin blur
-    smearOpacity: 0.55,
-    trailLife: 0.32, // seconds a point of the trail lasts
-    trailWidth: 0.32, // half-width at the disc, metres
+    smearScale: 1.1, // smear disc, × blade size
+    smearStrength: 0.8, // spin-blur brightness
+    smearStreaks: 12, // angular streaks in the spin blur
+    smearOpacity: 0.28,
+    trailLife: 0.75, // seconds a point of the trail lasts
+    trailWidth: 0.55, // half-width at the disc, metres
     trailCore: 0.18, // hot core, × width
     trailIntensity: 2.6,
     trailOpacity: 0.9,
@@ -109,6 +110,16 @@ export default {
     colorSigilChar: '#3a2410',
     scorchRadius: 0.75, // SCORCH decal under each bank, metres
     scorchLife: 2.2,
+
+    /* --- 3b · the floor path --- */
+    pathStep: 0.3, // metres of flight between samples of the scored path
+    pathLife: 2.8, // seconds the path stays before it has eroded
+    pathWidth: 0.42, // half-width of the scored line, metres
+    pathCool: 0.25, // share of its life the cut takes to cool from white to gold
+    pathIntensity: 1.8,
+    pathOpacity: 0.85,
+    pathNicks: 1.2, // tooth nicks per metre along the cut
+    pathHighFade: 1.6, // above 1.4 m the mark fades over this many metres (the return arc)
 
     /* ================================================================ */
     /* 4 · SPARKS, SHARDS, MOTES                                         */
@@ -141,8 +152,9 @@ export default {
     /* ================================================================ */
     /* 5 · IMPACT + CATCH                                                */
     /* ================================================================ */
-    bankBurst: 1.1, // AIR shell on each bank, metres
-    bankBurstLife: 0.22,
+    bankBurst: 0.7, // AIR shell on each bank, metres
+    bankBurstLife: 0.2,
+    bankBurstOpacity: 0.22, // kept faint: the blade and the floor carry the bank
     shockRadius: 1.8, // SHOCKWAVE under each bank, metres
     catchBurst: 0.6, // AIR shell at the hand on the catch, metres
     catchSparks: 30,
@@ -155,7 +167,7 @@ export default {
     /* ================================================================ */
     /* 6 · WAKE WARP                                                     */
     /* ================================================================ */
-    warpSize: 0.9, // half-size of the warp round the disc, metres
+    warpSize: 1.7, // half-size of the warp round the disc, metres
     warpStrength: 0.5,
     warpScale: 3.0,
     warpSpeed: 4.0,

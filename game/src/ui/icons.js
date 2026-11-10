@@ -1,3 +1,4 @@
+import { arsenalEntry } from '@shared/arsenal.js';
 import { esc } from './dom.js';
 import { tileHTML, equipmentTile } from './painted-icons.js';
 const label = (text) => `<span class="ico ae-text-icon" aria-hidden="true">${esc(text)}</span>`;
@@ -11,7 +12,17 @@ export const ICONS = Object.fromEntries(Object.entries({map:'Map',bag:'Gear',gea
 }));
 export const DEBUFFS = new Set(['burn','chill','freeze','stun','slow','root','poison','bleed','silence','weaken','shock','daze']);
 export function statusIcon(status) { const key=String(status||'Effect').toLowerCase(); return { svg:label(key.slice(0,3)), debuff:DEBUFFS.has(key), key }; }
-export function itemIcon(name='', type='') { return tileHTML(equipmentTile(name, type), name || type || 'Item'); }
+const forgeBase = `${import.meta.env?.BASE_URL ?? '/'}assets/arsenal/`;
+const attr = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/** Icon for an item. Gear forged in Arsenal Forge shows that piece's own render; everything else uses the painted atlas. */
+export function itemIcon(item='', type='') {
+  if (item && typeof item === 'object') {
+    const forged = arsenalEntry(item.arsenal);
+    if (forged) return `<span class="ae-painted-icon ae-forge-icon" role="img" aria-label="${attr(item.name)}" style="background-image:url('${forgeBase}${forged.preview}')"></span>`;
+    return tileHTML(equipmentTile(item.name, item.type || item.slot || item.kind || type), item.name || 'Item');
+  }
+  return tileHTML(equipmentTile(item, type), item || type || 'Item');
+}
 export const RARITY = {
   common: { label: 'Common', color: '#cfc8b8' },
   uncommon: { label: 'Uncommon', color: '#7fc06a' },

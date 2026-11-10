@@ -379,6 +379,19 @@ export function createPrismBeamMaterial(role = 'spectral') {
       u.uNoise.value = 0.6 * g.noiseStrength;
       u.uFlicker.value = 0.03;
       u.uSoftFade.value = 1.2;
+    } else if (role === 'lance') {
+      // The heliograph: the thread of sun the caster throws ahead of the dart.
+      u.uRadiusSource.value = c.lanceRadius * 0.4;
+      u.uRadiusTarget.value = c.lanceRadius;
+      u.uColor.value.copy(getColor(c.colorSun));
+      u.uColorCore.value.copy(getColor(c.colorStrike));
+      u.uIntensity.value = c.lanceIntensity;
+      u.uOpacity.value = g.opacity;
+      u.uCore.value = 1.6;
+      u.uEndFade.value = 0.15;
+      u.uNoise.value = 0.3 * g.noiseStrength;
+      u.uFlicker.value = c.beamFlicker;
+      u.uSoftFade.value = 0.2;
     } else if (role === 'strike') {
       u.uRadiusSource.value = c.strikeRadius * 1.6;
       u.uRadiusTarget.value = c.strikeRadius;
@@ -473,8 +486,18 @@ const SCORCH_FRAGMENT = /* glsl */ `
   uniform vec3  uColorChar;
   uniform vec3  uColorSun;
   uniform float uGlobalGlow;
+  uniform float uField;       // 0..1 the glassed floor the sweep leaves
+  uniform float uFieldReach;  // metres it has spread to
+  uniform float uFieldGlow;
+  uniform float uFieldOpacity;
+  uniform float uFieldCells;
+  uniform float uFieldSpin;
 
   varying vec2 vLocal;
+
+  vec3 spectral(float h) {
+    return clamp(abs(mod(h * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+  }
 
   ${noiseGLSL}
 
@@ -522,16 +545,30 @@ const SCORCH_FRAGMENT = /* glsl */ `
     float pool = (1.0 - smoothstep(uPoolRadius * 0.3, uPoolRadius, r)) * uPool;
     pool *= 0.75 + 0.25 * snoise01(vec3(q * 1.4, uTime * 0.6 + uSeed));
 
+    // The glassed floor: everything the sweep has passed over is fused to a
+    // dark mirror, crazed into cells whose edges throw the spectrum — the hue
+    // turning with the bearing, so the floor keeps the fan's rainbow.
+    float fieldIn = uField * (1.0 - smoothstep(uFieldReach - 0.35, uFieldReach, r));
+    vec2 cell = voronoi2(q * uFieldCells / max(uRadius, 0.1) + uSeed);
+    float craze = 1.0 - smoothstep(0.0, 0.09, cell.x);
+    float rayAng = ang + uTime * uFieldSpin;
+    float rays = pow(max(0.0, cos(rayAng * 9.0 + snoise(vec3(q * 0.6, uSeed)) * 2.0)), 18.0) * smoothstep(0.2, 1.2, r);
+    vec3 caustic = spectral(fract(ang / TAU + cell.y * 0.15)) * (craze * 0.8 + rays * 0.6) * fieldIn;
+    float edge = exp(-abs(r - uFieldReach) * 4.0) * uField * step(0.05, uFieldReach);
+
     #ifdef GLOW
-      vec3 color = hot * uGlow + uColorSun * pool;
+      vec3 color = hot * uGlow + uColorSun * pool + (caustic + uColorSun * edge * 0.8) * uFieldGlow;
       color *= uGlobalGlow * uFade;
       if (max(color.r, max(color.g, color.b)) < 0.002) discard;
       gl_FragColor = vec4(color, 1.0);
     #else
-      float alpha = body * uOpacity * uFade;
+      float glass = fieldIn * uFieldOpacity * (0.75 + 0.25 * cell.y);
+      float alpha = max(body * uOpacity, glass) * uFade;
       if (alpha < 0.004) discard;
-      // A cooled line keeps a stain of its colour; the rest is char.
+      // A cooled line keeps a stain of its colour; the rest is char. The
+      // glassed floor is the char darkened further, the deep stop of the ramp.
       vec3 color = mix(uColorChar, uColorChar + tint * 0.35, uHue);
+      color = mix(color, uColorChar * 0.45, glass * (1.0 - body));
       gl_FragColor = vec4(color, alpha);
     #endif
   }
@@ -578,7 +615,13 @@ export function createPrismScorchMaterial(role = 'char') {
       uPool: { value: 0 },
       uPoolRadius: { value: 2 },
       uColorChar: { value: new Color() },
-      uColorSun: { value: new Color() }
+      uColorSun: { value: new Color() },
+      uField: { value: 0 },
+      uFieldReach: { value: 0 },
+      uFieldGlow: { value: 1 },
+      uFieldOpacity: { value: 0.6 },
+      uFieldCells: { value: 6 },
+      uFieldSpin: { value: 0.1 }
     }),
     vertexShader: SCORCH_VERTEX,
     fragmentShader: SCORCH_FRAGMENT
@@ -617,6 +660,12 @@ export function createPrismScorchMaterial(role = 'char') {
     u.uPoolRadius.value = c.shaftRadius * c.poolRadius;
     u.uColorChar.value.copy(getColor(c.colorChar));
     u.uColorSun.value.copy(getColor(c.colorSun));
+    u.uField.value = state.field ?? 0;
+    u.uFieldReach.value = state.fieldReach ?? 0;
+    u.uFieldGlow.value = c.fieldGlow * g.glow;
+    u.uFieldOpacity.value = c.fieldOpacity * g.opacity;
+    u.uFieldCells.value = c.fieldCells * g.noiseFrequency;
+    u.uFieldSpin.value = c.fieldSpin * g.noiseSpeed;
   };
 
   return material;

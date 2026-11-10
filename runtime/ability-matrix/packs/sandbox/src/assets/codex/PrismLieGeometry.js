@@ -69,6 +69,81 @@ export function createPrismShardGeometry() {
   return geometry;
 }
 
+/**
+ * The truth, planted: a rooted crystal you could only cut from this spell.
+ *
+ * A triangular prism whose three arrises are **chamfered** (each corner is two
+ * points, so the section is a long-short hexagon that still reads as three-
+ * sided), stacked in `rings` bands that **taper** toward the top and **twist**
+ * a little per band, every corner jittered from a fixed hash so the faces
+ * catch the sun at slightly different angles. A sheared cap rises to an apex
+ * pushed off-centre — a cut stone, not a pencil. The foot flares and sinks
+ * below y = 0 so it reads as torn out of the floor rather than set on it.
+ *
+ * Unit space: circumradius 1 at the foot, body y 0..1, apex at `1 + cap`.
+ * Non-indexed (flat facets for a lit, flat-shaded material).
+ *
+ * @param {object} [o]
+ * @param {number} [o.cap]     apex height above the body (× height)
+ * @param {number} [o.taper]   0 straight .. 1 to a point at the top band
+ * @param {number} [o.twist]   radians of twist from foot to top
+ * @param {number} [o.chamfer] 0..0.45 how much of each arris is cut away
+ * @param {number} [o.rings]   bands up the body
+ * @param {number} [o.seed]
+ */
+export function createPrismMonolithGeometry(o = {}) {
+  const cap = o.cap ?? 0.45;
+  const taper = o.taper ?? 0.35;
+  const twist = o.twist ?? 0.25;
+  const chamfer = o.chamfer ?? 0.18;
+  const rings = Math.max(2, o.rings ?? 6);
+  const seed = o.seed ?? 1.7;
+  const hash = (n) => {
+    const s = Math.sin(n * 127.1 + seed * 311.7) * 43758.5453;
+    return s - Math.floor(s);
+  };
+  const SIDE = 6; // 3 corners × 2 chamfer points
+  const ringsPts = [];
+  for (let r = 0; r <= rings; r++) {
+    const v = r / rings;
+    // Foot flare below the floor; body above.
+    const y = r === 0 ? -0.12 : v;
+    const radius = (r === 0 ? 1.12 : 1 - taper * Math.pow(v, 1.3)) * (1 + (hash(r * 7.1) - 0.5) * 0.06);
+    const rot = twist * v + (hash(r * 3.3) - 0.5) * 0.05;
+    const pts = [];
+    for (let k = 0; k < 3; k++) {
+      const a = (k / 3) * Math.PI * 2 + Math.PI / 2 + rot;
+      for (const sgn of [-1, 1]) {
+        // Chamfer: step back from the corner toward the neighbouring corner.
+        const ang = a + sgn * chamfer * (Math.PI / 3);
+        const rr = radius * (1 - chamfer * 0.35) * (1 + (hash(r * 13.7 + k * 5.1 + sgn) - 0.5) * 0.08);
+        pts.push([Math.cos(ang) * rr, y + (hash(r * 2.9 + k + sgn * 0.5) - 0.5) * (r === 0 || r === rings ? 0 : 0.035), Math.sin(ang) * rr]);
+      }
+    }
+    ringsPts.push(pts);
+  }
+  const positions = [];
+  const tri = (a, b, c) => positions.push(...a, ...b, ...c);
+  for (let r = 0; r < rings; r++) {
+    const lo = ringsPts[r];
+    const hi = ringsPts[r + 1];
+    for (let s = 0; s < SIDE; s++) {
+      const s1 = (s + 1) % SIDE;
+      tri(lo[s], hi[s1], lo[s1]);
+      tri(lo[s], hi[s], hi[s1]);
+    }
+  }
+  // The sheared cap: apex off-centre, toward the first face.
+  const top = ringsPts[rings];
+  const apex = [0.18 * (1 - taper), 1 + cap, -0.1 * (1 - taper)];
+  for (let s = 0; s < SIDE; s++) tri(top[s], apex, top[(s + 1) % SIDE]);
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new Float32BufferAttribute(positions, 3));
+  geometry.computeVertexNormals();
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
 export function createPrismTetherGeometry(segments = 32) {
   const positions = [];
   const indices = [];

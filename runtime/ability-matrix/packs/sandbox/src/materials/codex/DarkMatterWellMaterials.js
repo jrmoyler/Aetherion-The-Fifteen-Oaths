@@ -19,7 +19,14 @@ import { getColor } from '../../utils/color.js';
  *    with faint violet veins and a few cold stars in it. It is drawn *below*
  *    the floor and writes its own depth, so it can be seen there; the trick
  *    is MaelstromVortex's (see that file): a fragment under the floor is
- *    placed just in front of where its view ray crosses the floor.
+ *    placed just in front of where its view ray crosses the floor. The drawn
+ *    sheet is the throat *plus a broad bowl*, so the whole circle visibly
+ *    sags; light dies with depth (`depthFalloff`) and the far wall, turned to
+ *    the camera, catches it — the depth reads from 8 m. A four-stop ramp:
+ *    dark sheet at the lip, the saturated body on the lit wall, abyss below,
+ *    bright only in the grid lines, the front and the photon ring. The ink is
+ *    wound with spiral arms that turn into the eye, and at the eye a **pit**
+ *    of pure black — it eats light — ringed by a thin hot ring of bent light.
  *  - **the curtain** — an open cylinder of dark matter standing on the front:
  *    a wall of inky tongues with violet-white crests, flowing upward, its
  *    crest leaning in over the well. It closes with the front like an iris
@@ -46,6 +53,12 @@ const SHAPE_GLSL = /* glsl */ `
     float f1 = 1.0 / (1.0 + 1.0 / (a * a));
     return clamp((f - f1) / (1.0 - f1), 0.0, 1.0);
   }
+
+  /** The sheet as drawn: the throat plus a broad bowl, so the whole floor sags. */
+  float sagShape(float x, float throat, float bowl, float bowlPow) {
+    float b = pow(clamp(1.0 - x * x, 0.0, 1.0), max(bowlPow, 0.2));
+    return mix(wellShape(x, throat), b, clamp(bowl, 0.0, 1.0));
+  }
 `;
 
 const WELL_VERTEX = /* glsl */ `
@@ -56,16 +69,19 @@ const WELL_VERTEX = /* glsl */ `
   uniform float uRipple;
   uniform float uRippleFreq;
   uniform float uRipplePhase;
+  uniform float uBowl;
+  uniform float uBowlPow;
 
   varying vec2  vPolar;       // x: 0 eye .. 1 rim, y: bearing radians
   varying vec3  vWorld;
   varying float vViewZ;
   varying float vSlope;
+  varying float vSag;         // 0 rim .. 1 eye, the drawn sheet's shape
 
   ${SHAPE_GLSL}
 
   float heightAt(float x) {
-    float h = -uDepth * wellShape(x, uThroat);
+    float h = -uDepth * sagShape(x, uThroat, uBowl, uBowlPow);
     h += uRipple * sin(x * uRippleFreq + uRipplePhase) * x * (1.0 - x) * 4.0;
     return h;
   }
@@ -78,6 +94,7 @@ const WELL_VERTEX = /* glsl */ `
     world.y = h + 0.012;
     vSlope = (heightAt(min(x + 0.01, 1.0)) - heightAt(max(x - 0.01, 0.0))) / (0.02 * max(uRadius, 0.1));
     vPolar = vec2(x, a);
+    vSag = sagShape(x, uThroat, uBowl, uBowlPow);
     vWorld = world;
     vec4 mv = viewMatrix * vec4(world, 1.0);
     vViewZ = mv.z;
@@ -116,6 +133,17 @@ const WELL_FRAGMENT = /* glsl */ `
   uniform vec3  uColorFront;
   uniform vec3  uColorInk;
   uniform vec3  uColorVein;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorPhoton;
+  uniform float uDepthFalloff;  // 1/m — light dies going down the well
+  uniform float uWallLight;     // the far wall, facing the camera, catches light
+  uniform float uHorizon;       // radius (0..1) of the black pit at the eye
+  uniform float uPhotonGlow;
+  uniform float uPhotonWidth;
+  uniform float uArms;
+  uniform float uSpiralTight;
+  uniform float uSpiralGlow;
+  uniform float uInkBody;
   uniform float uCameraNear;
   uniform float uCameraFar;
   uniform float uGlobalGlow;
@@ -124,6 +152,7 @@ const WELL_FRAGMENT = /* glsl */ `
   varying vec3  vWorld;
   varying float vViewZ;
   varying float vSlope;
+  varying float vSag;
 
   ${noiseGLSL}
   ${commonGLSL}
@@ -137,7 +166,14 @@ const WELL_FRAGMENT = /* glsl */ `
   void main() {
     float x = vPolar.x;
     float a = vPolar.y;
-    float deep = wellShape(x, uThroat) * uOpenK;
+    float deep = vSag * uOpenK;
+    // Light dies with depth; the far wall, turned to the camera, catches it.
+    float dm = max(-vWorld.y, 0.0);
+    float shade = exp(-dm * uDepthFalloff);
+    vec2 rd = vec2(cos(a), sin(a));
+    vec3 Nw = normalize(vec3(-rd.x * vSlope, 1.0, -rd.y * vSlope));
+    vec3 Vw = normalize(cameraPosition - vWorld);
+    float lit = 0.4 + 0.6 * uWallLight * pow(max(dot(Nw, Vw), 0.0), 1.5);
 
     // The sheet's grid: rings flowing inward, spokes winding into a spiral.
     float rp = fract(x * uRings + uFlow);
@@ -148,21 +184,41 @@ const WELL_FRAGMENT = /* glsl */ `
     // Steeper wall, brighter lines — the sheet is stretched there.
     float stretch = 1.0 + clamp(abs(vSlope), 0.0, 3.0) * 0.4;
 
-    vec3 sheet = mix(uColorSheet, uColorAbyss, smoothstep(0.0, 0.85, deep));
-    vec3 col = sheet + uColorGrid * grid * uGridGlow * stretch * (1.0 - 0.55 * deep);
+    // Four stops: dark sheet at the lip, the saturated body on the lit wall,
+    // the abyss below; the grid is the only bright thing, and it dies with depth.
+    float band = smoothstep(0.08, 0.45, deep) * (1.0 - smoothstep(0.5, 0.92, deep));
+    vec3 sheet = mix(uColorSheet, uColorBody, band * lit);
+    sheet = mix(sheet, uColorAbyss, smoothstep(0.55, 1.0, deep));
+    vec3 col = sheet * shade + uColorGrid * grid * uGridGlow * stretch * lit * shade;
 
     // The dark matter, in from the rim on a ragged front.
     float en = fbm3(vec3(cos(a) * 2.2, sin(a) * 2.2, uTime * 0.6 + uSeed)) * uFrontNoise;
     float dF = x - (uFront + en * 0.12);
     float drowned = smoothstep(-0.006, 0.006, dF);
-    float band = exp(-pow(abs(dF / max(uFrontWidth, 0.004)), 2.0));
+    float fband = exp(-pow(abs(dF / max(uFrontWidth, 0.004)), 2.0));
     float veins = pow(max(1.0 - abs(snoise(vec3(vWorld.xz * 0.9, uTime * 0.25 + uSeed))), 0.0), 9.0);
     vec2 cell = floor(vec2(x * 46.0, a * 28.0));
     float star = step(1.0 - uStars * 0.02, hash13(vec3(cell, uSeed)));
     star *= 0.6 + 0.4 * sin(uTime * 5.0 + hash13(vec3(cell, 3.3)) * 40.0);
-    vec3 ink = uColorInk + uColorVein * veins * uVeinGlow + uColorGrid * grid * 0.12 + uColorFront * star * 1.5;
-    col = mix(col, ink, drowned);
-    col += uColorFront * band * uFrontGlow * (0.7 + 0.3 * sin(a * 9.0 + uTime * 6.0));
+    // Ink is not flat: spiral arms of the body colour wind down into the eye.
+    float sx = log(max(x, 0.015));
+    float arm = pow(0.5 + 0.5 * sin(a * uArms - sx * uSpiralTight * 6.0 + uTwist * 4.0), 4.0);
+    arm *= 0.6 + 0.4 * snoise(vec3(rd * 3.0, sx * 2.0 + uTime * 0.4 + uSeed));
+    // The ink keeps the bowl's shape: body-violet on the lit upper wall,
+    // going to black down the throat.
+    vec3 ink = mix(uColorBody * uInkBody * lit, uColorInk, smoothstep(0.05, 0.75, deep));
+    ink += uColorBody * arm * uSpiralGlow * (0.35 + 0.65 * smoothstep(0.0, 0.6, x)) * lit;
+    ink += uColorVein * veins * uVeinGlow + uColorGrid * grid * 0.12 * shade + uColorFront * star * 1.5;
+    col = mix(col, ink * mix(1.0, shade, 0.5), drowned);
+    col += uColorFront * fband * uFrontGlow * (0.7 + 0.3 * sin(a * 9.0 + uTime * 6.0));
+
+    // The eye: a pit that eats light, ringed by a thin hot ring of bent light.
+    float hr = uHorizon * (1.0 + 0.06 * snoise(vec3(rd * 2.5, uTime * 1.3 + uSeed)));
+    float pit = 1.0 - smoothstep(hr * 0.92, hr, x);
+    float photon = exp(-pow((x - hr) / max(uPhotonWidth, 0.002), 2.0)) * step(0.001, uHorizon);
+    photon *= 0.65 + 0.35 * sin(a * 3.0 - uTime * 7.0);
+    col = mix(col, uColorAbyss, pit);
+    col += uColorPhoton * photon * uPhotonGlow;
 
     // The rim, where flat floor turns to sheet.
     float rim = exp(-pow(abs((x - 1.0) / 0.018), 2.0));
@@ -185,7 +241,10 @@ const WELL_FRAGMENT = /* glsl */ `
       vec3 cross0 = cameraPosition + ray * t;
       if (length(cross0.xz - uCenter.xz) > uRadius * 1.003) discard;
       float dFloor = t * len;
-      float dOut = dFloor - uDepthBias * exp(-(len - dFloor) * 1.5);
+      // A constant margin in front of the floor. (A bias that decayed with
+      // depth let the deep sheet z-fight the floor and lose: the well went
+      // outline-only once it was deep or drowned.)
+      float dOut = dFloor - uDepthBias;
       float vz = vViewZ * (dOut / len);
       depthOut = viewZToPerspectiveDepth(vz, uCameraNear, uCameraFar);
     }
@@ -229,19 +288,32 @@ export function createWellMaterial() {
       uReveal: { value: 0 },
       uErode: { value: 0 },
       uOpacity: { value: 1 },
-      uDepthBias: { value: 0.04 },
+      uDepthBias: { value: 0.08 },
       uColorSheet: { value: new Color() },
       uColorAbyss: { value: new Color() },
       uColorGrid: { value: new Color() },
       uColorFront: { value: new Color() },
       uColorInk: { value: new Color() },
-      uColorVein: { value: new Color() }
+      uColorVein: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorPhoton: { value: new Color() },
+      uBowl: { value: 0.5 },
+      uBowlPow: { value: 1.5 },
+      uDepthFalloff: { value: 0.5 },
+      uWallLight: { value: 1 },
+      uHorizon: { value: 0 },
+      uPhotonGlow: { value: 3 },
+      uPhotonWidth: { value: 0.012 },
+      uArms: { value: 3 },
+      uSpiralTight: { value: 2 },
+      uSpiralGlow: { value: 0.8 },
+      uInkBody: { value: 0.5 }
     }),
     vertexShader: WELL_VERTEX,
     fragmentShader: WELL_FRAGMENT
   });
 
-  /** @param {object} s { center, radius, open, front, flow, twist, ripplePhase, reveal, erode, seed } */
+  /** @param {object} s { center, radius, open, front, flow, twist, ripplePhase, reveal, erode, seed, horizon } */
   material.userData.sync = (s) => {
     const c = settings[ID];
     const g = settings.global;
@@ -277,6 +349,19 @@ export function createWellMaterial() {
     u.uColorFront.value.copy(getColor(c.colorFront));
     u.uColorInk.value.copy(getColor(c.colorInk));
     u.uColorVein.value.copy(getColor(c.colorVein));
+    u.uColorBody.value.copy(getColor(c.colorBody));
+    u.uColorPhoton.value.copy(getColor(c.colorPhoton));
+    u.uBowl.value = c.bowl;
+    u.uBowlPow.value = c.bowlPower;
+    u.uDepthFalloff.value = c.depthFalloff;
+    u.uWallLight.value = c.wallLight * g.fresnel;
+    u.uHorizon.value = Math.max(0, s.horizon);
+    u.uPhotonGlow.value = c.photonGlow * g.glow * g.shaderIntensity;
+    u.uPhotonWidth.value = c.photonWidth;
+    u.uArms.value = Math.max(1, Math.round(c.spiralArms));
+    u.uSpiralTight.value = c.spiralTight;
+    u.uSpiralGlow.value = c.spiralGlow * g.glow;
+    u.uInkBody.value = c.inkBody * g.glow;
   };
 
   return material;

@@ -70,3 +70,49 @@ export function createFunnelGeometry(segments = 56, rows = 48) {
   geometry.boundingSphere = new Sphere(new Vector3(0, 5, 0), 40);
   return geometry;
 }
+
+/**
+ * The scoured floor — a polar disc of unit radius, rings crowded toward the
+ * middle where the funnel grinds hardest. The scour material lifts its rim a
+ * hair, carves the dirt into wound striations and gouges, and sizes it from
+ * `skirtRadius` every frame, so this is built once.
+ *
+ * @param {number} [segments] spokes round the disc
+ * @param {number} [rings]    rings out from the axis
+ */
+export function createScourGeometry(segments = 96, rings = 28) {
+  const columns = segments + 1;
+  const count = columns * (rings + 1);
+  const positions = new Float32Array(count * 3);
+  const indices = new Uint16Array(segments * rings * 6);
+  let p = 0;
+  for (let j = 0; j <= rings; j++) {
+    const r = Math.pow(j / rings, 1.35);
+    for (let i = 0; i < columns; i++) {
+      const a = (i / segments) * Math.PI * 2;
+      positions[p++] = Math.cos(a) * r;
+      positions[p++] = 0;
+      positions[p++] = Math.sin(a) * r;
+    }
+  }
+  let k = 0;
+  for (let j = 0; j < rings; j++) {
+    for (let i = 0; i < segments; i++) {
+      const a = j * columns + i;
+      const b = a + 1;
+      const c = a + columns;
+      const d = c + 1;
+      indices[k++] = a;
+      indices[k++] = c;
+      indices[k++] = b;
+      indices[k++] = b;
+      indices[k++] = c;
+      indices[k++] = d;
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setIndex(new BufferAttribute(indices, 1));
+  geometry.boundingSphere = new Sphere(new Vector3(), 1.5);
+  return geometry;
+}

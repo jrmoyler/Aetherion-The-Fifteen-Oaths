@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import { AdditiveBlending, Color, DoubleSide, FrontSide, MeshStandardMaterial, NormalBlending, ShaderMaterial, Vector3 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
@@ -700,5 +700,265 @@ export function createEchoWarpMaterial() {
     u.uSeed.value = state.seed;
   };
 
+  return material;
+}
+
+/* ==================================================================== */
+/* The hall: mirror panes (solid, lit)                                   */
+/* ==================================================================== */
+
+/**
+ * The panes of the hall are *glass and silver*, so they are lit matter: a
+ * `MeshStandardMaterial` (metal, near-mirror roughness, on `LAYER.WORLD`,
+ * casting shadows) that reflects the sky probe and the sun like a real
+ * looking-glass, tinted faintly by the hologram's colour. Patched on top, in
+ * the emissive term, measured on the pane's own face (`position.xy`, metres):
+ *
+ *  - a **silvered rim** following the round arch (analytic distance to the
+ *    outline), hot white at the edge falling to the hologram colour;
+ *  - **scanlines** creeping up the glass while the hall is live — the panes
+ *    are projected too;
+ *  - **cracks**: F2−F1 voronoi plates whose seams light up as `crack` rises,
+ *    a pane at a time, just before the hall breaks.
+ */
+export function createEchoPanelMaterial() {
+  const material = new MeshStandardMaterial({
+    color: 0xe8dcff,
+    metalness: 1,
+    roughness: 0.06,
+    envMapIntensity: 1.3
+  });
+  const extra = {
+    uPaneW: { value: 0.6 },
+    uPaneSpring: { value: 2.3 },
+    uRimGlow: { value: 1 },
+    uRimWidth: { value: 0.06 },
+    uScan: { value: 0.3 },
+    uScanDensity: { value: 20 },
+    uCrack: { value: 0 },
+    uCrackCells: { value: 3 },
+    uCrackGlow: { value: 3 },
+    uLive: { value: 1 },
+    uRimColor: { value: new Color() },
+    uHoloColor: { value: new Color() },
+    uCoreColor: { value: new Color(1, 1, 1) }
+  };
+  material.onBeforeCompile = (shader) => {
+    shader.uniforms.uTime = frame.uTime;
+    Object.assign(shader.uniforms, extra);
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying vec3 vPane;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvPane = position;');
+    shader.fragmentShader = shader.fragmentShader
+      .replace(
+        '#include <common>',
+        `#include <common>
+        varying vec3 vPane;
+        uniform float uTime;
+        uniform float uPaneW;
+        uniform float uPaneSpring;
+        uniform float uRimGlow;
+        uniform float uRimWidth;
+        uniform float uScan;
+        uniform float uScanDensity;
+        uniform float uCrack;
+        uniform float uCrackCells;
+        uniform float uCrackGlow;
+        uniform float uLive;
+        uniform vec3  uRimColor;
+        uniform vec3  uHoloColor;
+        uniform vec3  uCoreColor;
+        vec2 paneHash(vec2 p) {
+          p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+          return fract(sin(p) * 43758.5453);
+        }
+        vec3 paneCrack(vec2 p) {
+          vec2 n = floor(p); vec2 f = fract(p);
+          float d1 = 8.0, d2 = 8.0; vec2 id = vec2(0.0);
+          for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+            vec2 g = vec2(float(i), float(j));
+            vec2 r = g + paneHash(n + g) - f;
+            float d = dot(r, r);
+            if (d < d1) { d2 = d1; d1 = d; id = n + g; } else if (d < d2) { d2 = d; }
+          }
+          return vec3(sqrt(d2) - sqrt(d1), paneHash(id + 3.7));
+        }`
+      )
+      .replace(
+        '#include <emissivemap_fragment>',
+        `#include <emissivemap_fragment>
+        {
+          vec2 q = vPane.xy;
+          float dist = q.y < uPaneSpring ? uPaneW - abs(q.x) : uPaneW - length(q - vec2(0.0, uPaneSpring));
+          float rim = exp(-max(dist, 0.0) / max(uRimWidth, 1e-3));
+          float scan = pow(0.5 + 0.5 * sin(q.y * uScanDensity * 6.2831853 - uTime * 3.0), 6.0) * uScan * uLive;
+          vec3 ck = paneCrack(q * uCrackCells);
+          float seam = (1.0 - smoothstep(0.0, 0.05, ck.x)) * step(ck.y, uCrack * 1.4);
+          totalEmissiveRadiance += mix(uRimColor, uCoreColor, rim * rim) * rim * uRimGlow * uLive
+            + uHoloColor * scan
+            + mix(uHoloColor, uCoreColor, 0.6) * seam * uCrackGlow;
+        }`
+      );
+  };
+  material.customProgramCacheKey = () => 'echoes-pane';
+
+  /** @param {object} s { width, height, crack, live } */
+  material.userData.sync = (s) => {
+    const c = settings.echoes;
+    const g = settings.global;
+    material.color.copy(getColor(c.colorPane));
+    material.roughness = c.paneRoughness;
+    material.metalness = c.paneMetalness;
+    extra.uPaneW.value = s.width * 0.5;
+    extra.uPaneSpring.value = Math.max(0.05, s.height - s.width * 0.5);
+    extra.uRimGlow.value = c.paneRimGlow * g.glow;
+    extra.uRimWidth.value = c.paneRimWidth;
+    extra.uScan.value = c.paneScan * g.glow;
+    extra.uScanDensity.value = c.paneScanDensity;
+    extra.uCrack.value = s.crack;
+    extra.uCrackCells.value = c.paneCrackCells;
+    extra.uCrackGlow.value = c.paneCrackGlow * g.glow;
+    extra.uLive.value = s.live;
+    extra.uRimColor.value.copy(getColor(c.colorHoloRim));
+    extra.uHoloColor.value.copy(getColor(c.colorHoloHigh));
+  };
+  return material;
+}
+
+/* ==================================================================== */
+/* The hall floor: black glass (the deep tone)                           */
+/* ==================================================================== */
+
+/**
+ * Under the projector circle, a disc of **black polished glass** drawn with
+ * normal blending, so the zone gets its deep tone: the floor of the hall,
+ * mirroring the sky faintly through a slow ripple, its edge a soft fall-off
+ * into the real floor. When the hall breaks, the floor **cracks** with it —
+ * radial seams out from the centre and voronoi plates, hot in the hologram's
+ * colour, cooling through the fade. It outlives the copies.
+ */
+const FLOOR_VERTEX = /* glsl */ `
+  uniform float uSize;
+  varying vec2 vP;
+  varying vec3 vWorld;
+  void main() {
+    vP = position.xz * 2.0;
+    vec4 world = modelMatrix * vec4(position * vec3(uSize, 1.0, uSize), 1.0);
+    vWorld = world.xyz;
+    gl_Position = projectionMatrix * viewMatrix * world;
+  }
+`;
+
+const FLOOR_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uReveal;
+  uniform float uFade;
+  uniform float uOpacity;
+  uniform float uSky;
+  uniform float uCrack;      // 0..1 how far the cracks have run out
+  uniform float uHeat;       // 0..1 how hot they still are
+  uniform float uCrackGlow;
+  uniform float uSeed;
+  uniform vec3  uDeep;
+  uniform vec3  uTint;
+  uniform vec3  uHot;
+  uniform sampler2D uEnvMap;
+  uniform float uGlobalGlow;
+  varying vec2 vP;
+  varying vec3 vWorld;
+
+  ${noiseGLSL}
+  ${ENV_GLSL}
+
+  float floorCrack(vec2 p) {
+    vec2 n = floor(p); vec2 f = fract(p);
+    float d1 = 8.0, d2 = 8.0;
+    for (int j = -1; j <= 1; j++) for (int i = -1; i <= 1; i++) {
+      vec2 g = vec2(float(i), float(j));
+      vec2 o = hash21(dot(n + g, vec2(7.13, 113.17)) + uSeed);
+      vec2 r = g + o - f;
+      float d = dot(r, r);
+      if (d < d1) { d2 = d1; d1 = d; } else if (d < d2) { d2 = d; }
+    }
+    return sqrt(d2) - sqrt(d1);
+  }
+
+  void main() {
+    float r = length(vP);
+    float a = atan(vP.y, vP.x);
+    float shore = 1.0 + 0.04 * snoise(vec3(cos(a), sin(a), uSeed));
+    if (r > shore) discard;
+    float shown = 1.0 - smoothstep(uReveal - 0.08, uReveal, r);
+    float fill = (1.0 - smoothstep(0.82 * shore, shore, r)) * shown;
+    if (fill < 0.003) discard;
+
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec2 wob = vec2(snoise(vec3(vWorld.xz * 0.8, uTime * 0.4)), snoise(vec3(vWorld.zx * 0.8, uTime * 0.4 + 5.0))) * 0.06;
+    vec3 R = reflect(-V, normalize(vec3(wob.x, 1.0, wob.y)));
+    vec3 sky = texture2D(uEnvMap, echoEquirect(R)).rgb;
+    sky = sky / (1.0 + sky);
+    float grazing = pow(1.0 - clamp(V.y, 0.0, 1.0), 2.0);
+    vec3 col = uDeep + sky * uTint * uSky * (0.3 + 0.9 * grazing);
+
+    // The cracks, run out from the centre.
+    float plates = 1.0 - smoothstep(0.0, 0.05, floorCrack(vP * 4.0));
+    float spokes = 1.0 - smoothstep(0.0, 0.05, abs(sin(a * 6.0 + snoise(vec3(vP * 2.0, uSeed)) * 1.2)));
+    float crack = max(plates, spokes * 0.8) * (1.0 - smoothstep(uCrack - 0.1, uCrack, r)) * step(0.01, uCrack);
+    col += uHot * crack * (0.15 + uHeat * uCrackGlow) * uGlobalGlow;
+    col = mix(col, col + uTint * 0.15, crack * 0.5);
+
+    float alpha = clamp(fill * uOpacity + crack * 0.3, 0.0, 1.0) * uFade;
+    gl_FragColor = vec4(col, alpha);
+  }
+`;
+
+export function createEchoFloorMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1,
+    uniforms: sharedUniforms({
+      uSize: { value: 6 },
+      uReveal: { value: 0 },
+      uFade: { value: 1 },
+      uOpacity: { value: 0.8 },
+      uSky: { value: 0.5 },
+      uCrack: { value: 0 },
+      uHeat: { value: 0 },
+      uCrackGlow: { value: 2 },
+      uSeed: { value: 0 },
+      uDeep: { value: new Color() },
+      uTint: { value: new Color() },
+      uHot: { value: new Color() }
+    }),
+    vertexShader: FLOOR_VERTEX,
+    fragmentShader: FLOOR_FRAGMENT
+  });
+  material.uniforms.uEnvMap = frame.uEnvMap;
+
+  /** @param {object} s { size, reveal, fade, crack, heat, seed } */
+  material.userData.sync = (s) => {
+    const c = settings.echoes;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uSize.value = s.size;
+    u.uReveal.value = s.reveal;
+    u.uFade.value = s.fade;
+    u.uOpacity.value = c.floorOpacity * g.opacity;
+    u.uSky.value = c.floorSky;
+    u.uCrack.value = s.crack;
+    u.uHeat.value = s.heat;
+    u.uCrackGlow.value = c.floorCrackGlow;
+    u.uSeed.value = s.seed;
+    u.uDeep.value.copy(getColor(c.colorFloorDeep));
+    u.uTint.value.copy(getColor(c.colorHoloHigh));
+    u.uHot.value.copy(getColor(c.colorHoloRim));
+  };
   return material;
 }

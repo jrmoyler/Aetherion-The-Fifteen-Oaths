@@ -1,4 +1,4 @@
-import { AdditiveBlending, BackSide, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial } from 'three';
+import { AdditiveBlending, BackSide, Color, DoubleSide, FrontSide, MeshStandardMaterial, NormalBlending, ShaderMaterial } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
@@ -597,5 +597,174 @@ export function createHeartShockMaterial() {
     u.uStrength.value = c.shockStrength * g.distortion;
   };
 
+  return material;
+}
+
+/* ==================================================================== */
+/* The cage: crystal ribs that cradle the heart                         */
+/* ==================================================================== */
+
+/**
+ * Rose quartz, lit by the scene sun: the ribs are solid stone, so they are a
+ * flat-shaded `MeshStandardMaterial` on the world layer (the ability flags
+ * them to cast and receive shadows). Body from the crystal colour pulled
+ * toward the deep tone; the emissive is the heart's light, which the ability
+ * pumps on every beat (`state.glow`).
+ */
+export function createHeartRibMaterial() {
+  const material = new MeshStandardMaterial({
+    color: 0xc04a80,
+    emissive: 0xff7ab8,
+    emissiveIntensity: 0.3,
+    metalness: 0.15,
+    roughness: 0.18,
+    flatShading: true
+  });
+  /** @param {object} state { glow } */
+  material.userData.sync = (state) => {
+    const c = settings.crystallineheart;
+    const g = settings.global;
+    material.color.copy(getColor(c.colorRib));
+    material.emissive.copy(getColor(c.colorRibGlow));
+    material.emissiveIntensity = c.ribGlow * state.glow * g.glow;
+    material.roughness = c.ribRoughness;
+    material.metalness = c.ribMetalness;
+  };
+  return material;
+}
+
+/* ==================================================================== */
+/* The floor: rose-quartz plates that grow with the beats                */
+/* ==================================================================== */
+
+/**
+ * A filled crystal floor under the heart, normal-blended so the deep tone
+ * darkens the ground: voronoi plates of rose quartz, each lit by a fake
+ * facet slope (the cell's own gradient against a fixed sun), deep in the
+ * cells and bright on the seams. It grows outward a step with every beat
+ * (`uGrowth` 0..1 of `uReach`), its front a bright crystallising edge; every
+ * beat flashes the plates from the centre out; after the shatter cracks open
+ * along the seams and glow, crawling outward and cooling. Burns out through
+ * noise on the exit.
+ *
+ * Four-stop ramp: uCore → uTint → uBody → uDeep.
+ */
+const FLOOR_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uReach;
+  uniform float uGrowth;
+  uniform float uBeat;
+  uniform float uShatter;   // seconds since the shatter, < 0 before
+  uniform float uDissolve;
+  uniform float uFacets;
+  uniform float uFlash;
+  uniform float uCrack;
+  uniform float uOpacity;
+  uniform float uGlow;
+  uniform float uSeed;
+  uniform vec3 uCore;
+  uniform vec3 uTint;
+  uniform vec3 uBody;
+  uniform vec3 uDeep;
+  varying vec2 vFlat;
+
+  ${noiseGLSL}
+
+  void main() {
+    vec2 p = vFlat;
+    float r = length(p);
+    float n = snoise01(vec3(p * 0.8, uSeed));
+    float R = uReach * uGrowth * (0.86 + 0.28 * n);
+    if (r > R + 0.05 || R <= 0.001) discard;
+    float cover = 1.0 - smoothstep(R - 0.25, R, r);
+    float front = (1.0 - smoothstep(0.0, 0.18, R - r)) * step(0.0, R - r);
+
+    vec2 cell = voronoi2(p * uFacets + uSeed);
+    float seam = 1.0 - smoothstep(0.02, 0.08, cell.x);
+    // A fake facet slope per plate: brighter on the plates that face the sun.
+    float slope = fract(cell.y * 7.31);
+    vec3 col = mix(uDeep, uBody * 0.7, 0.3 + 0.5 * slope);
+    col += uTint * seam * 0.9;
+
+    // Every beat: a flash running out across the plates.
+    float flash = uBeat * exp(-r / max(uReach * 0.5, 0.1)) * (0.5 + 0.5 * slope);
+    col += mix(uTint, uCore, 0.5) * flash * uFlash;
+    col += uCore * front * (0.8 + uBeat);
+
+    // After the shatter: the seams crack open and glow, crawling outward, cooling.
+    float alive = 1.0;
+    float burnEdge = 0.0;
+    if (uShatter >= 0.0) {
+      float wave = 1.0 - smoothstep(0.0, 0.6, abs(r - uShatter * 9.0));
+      float cool = exp(-uShatter * 1.3);
+      vec2 cr = voronoi2(p * uFacets * 0.55 + 4.0 + uSeed);
+      float crack = 1.0 - smoothstep(0.0, 0.05, cr.x);
+      float crawl = 0.5 + 0.5 * sin(cr.y * 25.0 - uTime * 6.0 + r * 2.0);
+      col += mix(uBody * 1.6, uCore, wave) * crack * (cool * crawl + wave) * uCrack;
+      col += uCore * wave * 0.6;
+    }
+    if (uDissolve > 0.0) {
+      float k = n * 0.8 + 0.2 * r / max(uReach, 0.1);
+      alive = 1.0 - smoothstep(uDissolve - 0.04, uDissolve + 0.02, 1.0 - k);
+      burnEdge = 1.0 - smoothstep(0.0, 0.05, abs((1.0 - k) - uDissolve));
+      col += uTint * burnEdge * 1.5;
+    }
+    float alpha = (0.72 + 0.28 * seam + front) * cover * alive * uOpacity;
+    if (alpha < 0.004) discard;
+    gl_FragColor = vec4(col * uGlow, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+export function createHeartFloorMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uQuadSize: { value: 12 },
+      uReach: { value: 4.5 },
+      uGrowth: { value: 0 },
+      uBeat: { value: 0 },
+      uShatter: { value: -1 },
+      uDissolve: { value: 0 },
+      uFacets: { value: 1.6 },
+      uFlash: { value: 1.2 },
+      uCrack: { value: 1.4 },
+      uOpacity: { value: 0.85 },
+      uGlow: { value: 1 },
+      uSeed: { value: 0 },
+      uCore: { value: new Color() },
+      uTint: { value: new Color() },
+      uBody: { value: new Color() },
+      uDeep: { value: new Color() }
+    }),
+    vertexShader: RING_VERTEX,
+    fragmentShader: FLOOR_FRAGMENT
+  });
+  /** @param {object} state { quadSize, reach, growth, beat, shatter, dissolve, seed } */
+  material.userData.sync = (state) => {
+    const c = settings.crystallineheart;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uQuadSize.value = state.quadSize;
+    u.uReach.value = state.reach;
+    u.uGrowth.value = state.growth;
+    u.uBeat.value = state.beat;
+    u.uShatter.value = state.shatter;
+    u.uDissolve.value = state.dissolve;
+    u.uSeed.value = state.seed;
+    u.uFacets.value = c.floorFacets * g.noiseFrequency;
+    u.uFlash.value = c.floorFlash;
+    u.uCrack.value = c.floorCrack * g.shaderIntensity;
+    u.uOpacity.value = c.floorOpacity * g.opacity;
+    u.uGlow.value = c.floorGlow * g.glow;
+    u.uCore.value.copy(getColor(c.colorRingCore));
+    u.uTint.value.copy(getColor(c.colorRingGlow));
+    u.uBody.value.copy(getColor(c.colorCrystal));
+    u.uDeep.value.copy(getColor(c.colorFloorDeep));
+  };
   return material;
 }

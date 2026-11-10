@@ -19,8 +19,18 @@ import { getColor } from '../../utils/color.js';
  *     slices and eaten by noise as it ages.
  *   - `createBlinkWarpMaterial`   — a screen-space pinch (departure) or bulge
  *     (arrival) on `LAYER.DISTORTION`.
+ *   - `createBlinkRiftMaterial`   — the hero: the tear in the air at either end
+ *     of the line, laid out from a parameter grid in the vertex stage (almond
+ *     lens, jagged lips, belly bulge, crack halo), drawn as a light-eating
+ *     void with a white-hot lip and cracks crawling out through the air.
+ *   - `createBlinkScarMaterial`   — the floor: a burnt slipstream scar down the
+ *     whole line with skid lanes and a hot seam that follows the front, a
+ *     scorch at the departure and a skid-spoked crater at the landing; it
+ *     cools, pulses toward the arrival and dissolves.
  *
- * All four read `settings.blink` through `userData.sync`, every frame.
+ * Every layer reads `settings.blink` through `userData.sync`, every frame.
+ * The palette is one four-stop ramp — core #ffffff → tint #b4fff0 → body
+ * #2fd8c8 → deep #06202e — so the void, the scar and the light are one spell.
  */
 
 /* ==================================================================== */
@@ -596,6 +606,442 @@ export function createBlinkWarpMaterial() {
     u.uFront.value = state.front;
     u.uSign.value = state.sign;
     u.uSeed.value = state.seed;
+  };
+
+  return material;
+}
+
+/* ==================================================================== */
+/* The rift — the hero                                                   */
+/* ==================================================================== */
+
+/**
+ * Runs on `createRiftGeometry` (`assets/collective/BlinkStepGeometry.js`):
+ * every vertex is `(v, u, 0)`, `u` foot → tip, `v` across (|v| ≤ 1 the lens,
+ * beyond it the crack halo out to `uHaloV`). Nothing in the buffer is in
+ * metres; this stage builds the tear from the live settings:
+ *
+ *   - **profile** — a pointed almond, `sin(πu)^0.75`, its belly swollen just
+ *     below the middle (a tear sags) — the outline is the identity;
+ *   - **lips** — the half-width is jagged by noise along `u` (re-rolled per
+ *     cast by `uSeed`) and crawls slowly, so the edge is torn, not drawn;
+ *   - **open** — `uOpen` 0 → 1 → 0 is the whole life of the rift: it splits
+ *     from a hairline, gapes, and seals back to a scar;
+ *   - **belly** — the lens bulges `uDepth` toward its normal while open, so
+ *     at the 45° capture angle it has thickness, not a flat card;
+ *   - **halo** — the skin of space round it, `uHalo` metres wide at the
+ *     belly and pinched to nothing at the tips, where the cracks live.
+ *
+ * The mesh is oriented on the CPU (its local x is the cast's side axis, so
+ * the camera behind the caster sees the tear face-on).
+ */
+const RIFT_VERTEX = /* glsl */ `
+  uniform float uTime;
+  uniform float uHeight;
+  uniform float uWidth;
+  uniform float uOpen;
+  uniform float uDepth;
+  uniform float uLift;
+  uniform float uJag;
+  uniform float uJagScale;
+  uniform float uHalo;
+  uniform float uHaloV;
+  uniform float uSeed;
+
+  varying float vU;
+  varying float vV;
+  varying vec2  vP;       // local metres (x across, y up) — cracks keep their size
+
+  ${noiseGLSL}
+
+  void main() {
+    float v = position.x;
+    float u = clamp(position.y, 0.0, 1.0);
+    float s = sin(3.14159265 * u);
+    float prof = pow(max(s, 0.0), 0.75) * (1.0 + 0.2 * sin(3.14159265 * u * 2.0 - 0.7));
+    float jag = snoise(vec3(u * uJagScale, uSeed, uTime * 0.35));
+    float halfW = 0.5 * uWidth * prof * uOpen * (1.0 + uJag * jag);
+    halfW = max(halfW, 0.006 * s);                     // never quite a line: a scar
+    float av = abs(v);
+    float x;
+    if (av <= 1.0) {
+      x = v * halfW;
+    } else {
+      float h = (av - 1.0) / max(uHaloV - 1.0, 1e-3);
+      x = sign(v) * (halfW + h * uHalo * sqrt(max(s, 0.0)));
+    }
+    float y = uLift + u * uHeight;
+    float z = (1.0 - min(av * av, 1.0)) * uDepth * prof * uOpen;
+    vU = u;
+    vV = v;
+    vP = vec2(x, y);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(x, y, z, 1.0);
+  }
+`;
+
+const RIFT_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uOpen;
+  uniform float uHaloV;
+  uniform float uSeed;
+  uniform float uVoid;
+  uniform float uRimGlow;
+  uniform float uRimWidth;
+  uniform float uFlow;
+  uniform float uStreaks;
+  uniform float uCrack;
+  uniform float uCrackGrow;
+  uniform float uCrackScale;
+  uniform float uFlicker;
+  uniform float uGlow;
+  uniform float uFade;
+  uniform vec3  uCore;
+  uniform vec3  uTint;
+  uniform vec3  uBody;
+  uniform vec3  uDeep;
+  uniform float uGlobalGlow;
+
+  varying float vU;
+  varying float vV;
+  varying vec2  vP;
+
+  ${noiseGLSL}
+  ${commonGLSL}
+
+  void main() {
+    float av = abs(vV);
+    float tips = smoothstep(0.0, 0.05, vU) * (1.0 - smoothstep(0.93, 1.0, vU));
+
+    // The void: deep, near-opaque, eating the light behind it.
+    float lens = 1.0 - smoothstep(0.82, 1.0, av);
+
+    // The slipstream seen through it: streaks racing up and in.
+    float st = snoise(vec3(vV * 2.2, vU * 14.0 - uTime * uFlow, uSeed * 1.7));
+    float streak = pow(clamp(st, 0.0, 1.0), 3.0) * (1.0 - av * 0.8) * uStreaks * lens;
+
+    // The lip: hottest where the tear is thinnest, flickering up its length.
+    float flick = 1.0 - uFlicker + uFlicker * (0.5 + 0.5 * snoise(vec3(vU * 9.0 - uTime * 6.0, uSeed, uTime * 3.0)));
+    float lip = exp(-pow((av - 1.0) / max(uRimWidth, 1e-3), 2.0));
+    float pinch = 1.0 + 1.5 * (1.0 - uOpen);
+
+    // The cracks: ridged noise in metres, grown outward from the lip.
+    float h = clamp((av - 1.0) / max(uHaloV - 1.0, 1e-3), 0.0, 1.0);
+    float cn = 1.0 - abs(snoise(vec3(vP * uCrackScale, uSeed * 3.1 + floor(uTime * 8.0) * 0.07 * uFlicker)));
+    float cn2 = 1.0 - abs(snoise(vec3(vP * uCrackScale * 2.3 + 7.0, uSeed)));
+    float crack = (pow(cn, 16.0) + 0.5 * pow(cn2, 22.0))
+                * (1.0 - smoothstep(uCrackGrow - 0.18, uCrackGrow, h))
+                * step(1.0, av) * (1.0 - h * 0.6) * uCrack;
+
+    vec3 glow = gradient4(uCore, uTint, uBody, uDeep, 1.0 - lip) * lip * uRimGlow * flick * pinch
+              + mix(uBody, uTint, streak) * streak * 1.6
+              + gradient4(uCore, uTint, uBody, uDeep, 0.3 + h * 0.6) * crack;
+    vec3 col = uDeep * 0.25 * lens + glow * uGlow * uGlobalGlow;
+
+    float alpha = (lens * uVoid * smoothstep(0.0, 0.25, uOpen) + lip * flick + crack * 0.85 + streak) * tips * uFade;
+    if (alpha < 0.003) discard;
+    gl_FragColor = vec4(col * tips * uFade, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+export function createBlinkRiftMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uHeight: { value: 2.4 },
+      uWidth: { value: 1 },
+      uOpen: { value: 0 },
+      uDepth: { value: 0.2 },
+      uLift: { value: 0 },
+      uJag: { value: 0.35 },
+      uJagScale: { value: 7 },
+      uHalo: { value: 1 },
+      uHaloV: { value: 1.9 },
+      uSeed: { value: 0 },
+      uVoid: { value: 0.9 },
+      uRimGlow: { value: 3 },
+      uRimWidth: { value: 0.12 },
+      uFlow: { value: 6 },
+      uStreaks: { value: 1 },
+      uCrack: { value: 1 },
+      uCrackGrow: { value: 0 },
+      uCrackScale: { value: 2.2 },
+      uFlicker: { value: 0.5 },
+      uGlow: { value: 1 },
+      uFade: { value: 1 },
+      uCore: { value: new Color() },
+      uTint: { value: new Color() },
+      uBody: { value: new Color() },
+      uDeep: { value: new Color() }
+    }),
+    vertexShader: RIFT_VERTEX,
+    fragmentShader: RIFT_FRAGMENT
+  });
+
+  /** @param {object} s { open, crack, fade, seed, haloV } */
+  material.userData.sync = (s) => {
+    const c = settings.blink;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uOpen.value = s.open;
+    u.uCrackGrow.value = s.crack;
+    u.uFade.value = s.fade * g.opacity;
+    u.uSeed.value = s.seed;
+    u.uHaloV.value = s.haloV;
+    u.uHeight.value = c.riftHeight;
+    u.uWidth.value = c.riftWidth;
+    u.uDepth.value = c.riftDepth;
+    u.uLift.value = c.riftLift;
+    u.uJag.value = c.riftJag * g.randomness;
+    u.uJagScale.value = c.riftJagScale * g.noiseFrequency;
+    u.uHalo.value = c.riftHalo;
+    u.uVoid.value = c.riftVoid;
+    u.uRimGlow.value = c.riftRimGlow;
+    u.uRimWidth.value = c.riftRimWidth;
+    u.uFlow.value = c.riftFlow * g.noiseSpeed;
+    u.uStreaks.value = c.riftStreaks * g.shaderIntensity;
+    u.uCrack.value = c.riftCrack * g.shaderIntensity;
+    u.uCrackScale.value = c.riftCrackScale * g.noiseFrequency;
+    u.uFlicker.value = c.riftFlicker;
+    u.uGlow.value = c.riftGlow * g.glow;
+    u.uCore.value.copy(getColor(c.colorRiftCore));
+    u.uTint.value.copy(getColor(c.colorRiftTint));
+    u.uBody.value.copy(getColor(c.colorRiftBody));
+    u.uDeep.value.copy(getColor(c.colorRiftDeep));
+  };
+
+  return material;
+}
+
+/* ==================================================================== */
+/* The scar — the floor                                                  */
+/* ==================================================================== */
+
+/**
+ * Runs on `createScarGeometry`: `(along, across)` in 0..1, laid down the cast
+ * line here — `along` from `uPadBack` behind the start to `uPadFront` past the
+ * end, `across` ±`uHalfW` — so the scar is exactly as long as the blink and
+ * re-lays itself if the line changes.
+ *
+ * The fragment works in line space (`s` metres along, `a` metres across):
+ *
+ *   - **the lane** — a burnt, noise-edged strip `uScarWidth` wide, written only
+ *     where the front has already been (`s < uHead`), so the floor tears open
+ *     behind the streak as it runs;
+ *   - **the seam and skid lanes** — a hot centre seam and dashed lanes either
+ *     side of it, heat highest just behind the head and cooling with distance
+ *     and with `uCool` (0 on arrival → 1 at the end of the linger);
+ *   - **pulses** — knots of light that keep crawling down the seam toward the
+ *     arrival through the linger (the slipstream is still draining);
+ *   - **the departure scorch** — a disc at s = 0, stretched forward along the
+ *     dash, with streaks combed the way the body left;
+ *   - **the landing crater** — a burnt disc at s = L with skid spokes thrown
+ *     out radially and a splash ring at its rim;
+ *   - **exit** — a noise dissolve with a hot edge.
+ *
+ * Normal blending: the burnt floor is the deep tone (it darkens the ground),
+ * the seams are HDR on top of it.
+ */
+const SCAR_VERTEX = /* glsl */ `
+  uniform vec3  uOrigin;
+  uniform vec3  uDir;
+  uniform float uLength;
+  uniform float uPadBack;
+  uniform float uPadFront;
+  uniform float uHalfW;
+
+  varying float vS;
+  varying float vA;
+
+  void main() {
+    vec3 side = normalize(cross(uDir, vec3(0.0, 1.0, 0.0)) + vec3(1e-5));
+    float s = mix(-uPadBack, uLength + uPadFront, position.x);
+    float a = (position.y * 2.0 - 1.0) * uHalfW;
+    vec3 P = uOrigin + uDir * s + side * a;
+    P.y = 0.022;
+    vS = s;
+    vA = a;
+    gl_Position = projectionMatrix * viewMatrix * vec4(P, 1.0);
+  }
+`;
+
+const SCAR_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uLength;
+  uniform float uHead;
+  uniform float uScarWidth;
+  uniform float uDepartR;
+  uniform float uArriveR;
+  uniform float uDepart;     // 0..1 the departure scorch spreading
+  uniform float uArrive;     // 0..1 the landing crater spreading, 0 before impact
+  uniform float uCool;
+  uniform float uHeatLength;
+  uniform float uPulseSpeed;
+  uniform float uPulseGap;
+  uniform float uPulse;
+  uniform float uSpokes;
+  uniform float uBurn;
+  uniform float uSeamGlow;
+  uniform float uNoiseScale;
+  uniform float uDissolve;
+  uniform float uFade;
+  uniform float uSeed;
+  uniform float uGlow;
+  uniform vec3  uCore;
+  uniform vec3  uTint;
+  uniform vec3  uBody;
+  uniform vec3  uDeep;
+  uniform float uGlobalGlow;
+
+  varying float vS;
+  varying float vA;
+
+  ${noiseGLSL}
+  ${commonGLSL}
+
+  void main() {
+    float s = vS;
+    float a = vA;
+    float n = fbm3(vec3(s * 0.8 * uNoiseScale, a * 2.2 * uNoiseScale, uSeed));
+
+    /* --- the lane, written behind the front --- */
+    float written = 1.0 - smoothstep(uHead - 0.1, uHead + 0.1, s);
+    float inLine = smoothstep(-0.3, 0.3, s) * (1.0 - smoothstep(uLength - 0.3, uLength + 0.3, s));
+    float halfw = uScarWidth * 0.5 * (0.7 + 0.6 * n);
+    float lane = (1.0 - smoothstep(halfw * 0.45, halfw, abs(a))) * inLine * written;
+    float seam = exp(-pow(a / max(uScarWidth * 0.07, 1e-3), 2.0)) * inLine * written;
+    float lanes = pow(abs(cos(a / max(uScarWidth, 1e-3) * 9.0 + n * 2.5)), 26.0);
+    float dash = smoothstep(0.05, 0.55, snoise(vec3(s * 1.4 * uNoiseScale, a * 7.0, uSeed + 3.0)));
+    float skid = lanes * dash * lane;
+
+    float behind = max(0.0, uHead - s);
+    float heat = exp(-behind / max(uHeatLength, 0.05)) * (1.0 - uCool) + 0.45 * (1.0 - uCool) * (1.0 - uCool);
+    float pulse = pow(fract((s - uTime * uPulseSpeed) / max(uPulseGap, 0.1) + n * 0.15), 12.0)
+                * uPulse * step(0.001, uCool) * (1.0 - uCool * 0.7);
+
+    /* --- the departure scorch, stretched along the dash --- */
+    vec2 pd = vec2(s < 0.0 ? s : s * 0.42, a);
+    float dd = length(pd) / max(uDepartR * uDepart, 1e-3);
+    float departBurn = (1.0 - smoothstep(0.55, 1.0, dd + (n - 0.5) * 0.35)) * step(0.001, uDepart);
+    float angD = atan(a, s);
+    float combs = pow(abs(sin(angD * uSpokes * 0.5 + n * 3.0)), 20.0)
+                * smoothstep(0.15, 0.4, dd) * (1.0 - smoothstep(0.75, 1.05, dd)) * departBurn;
+    float departRing = exp(-pow((dd - 0.92) / 0.07, 2.0)) * step(0.001, uDepart);
+
+    /* --- the landing crater with skid spokes --- */
+    vec2 qa = vec2(s - uLength, a);
+    float da = length(qa) / max(uArriveR * uArrive, 1e-3);
+    float arrived = step(0.001, uArrive);
+    float crater = (1.0 - smoothstep(0.5, 1.0, da + (n - 0.5) * 0.4)) * arrived;
+    float angA = atan(qa.y, qa.x);
+    float spokes = pow(abs(sin(angA * uSpokes * 0.5 + n * 4.0)), 14.0)
+                 * smoothstep(0.1, 0.32, da) * (1.0 - smoothstep(0.8, 1.15, da))
+                 * (0.55 + 0.45 * dash) * arrived;
+    float splash = exp(-pow((da - 0.95) / 0.06, 2.0)) * arrived;
+
+    /* --- colour: one ramp, indexed by heat --- */
+    float hot = clamp(heat + pulse, 0.0, 1.0);
+    float glowMask = seam * (0.7 + 0.6 * dash) + skid * 0.7 + combs * 0.8 + spokes + splash * 0.9 + departRing * 0.6;
+    glowMask *= uSeamGlow;
+    vec3 ramp = gradient4(uCore, uTint, uBody, uDeep, 1.0 - hot);
+    float lit = glowMask * (0.18 + hot * 1.2) + pulse * seam * 2.0;
+
+    float burn = max(max(lane, departBurn), crater) * uBurn;
+    vec3 col = uDeep * 0.6 + ramp * lit * uGlow * uGlobalGlow;
+    float alpha = burn + clamp(lit, 0.0, 1.0);
+
+    vec2 dm = dissolveMask(snoise01(vec3(s * 0.6, a * 1.4, uSeed * 0.3)), uDissolve, 0.08);
+    col += uTint * dm.y * 3.0;
+    alpha *= dm.x * uFade;
+    if (alpha < 0.003) discard;
+    gl_FragColor = vec4(col, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+export function createBlinkScarMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+    polygonOffsetUnits: -2,
+    uniforms: sharedUniforms({
+      uOrigin: { value: new Vector3() },
+      uDir: { value: new Vector3(0, 0, 1) },
+      uLength: { value: 1 },
+      uPadBack: { value: 1 },
+      uPadFront: { value: 1 },
+      uHalfW: { value: 1 },
+      uHead: { value: 0 },
+      uScarWidth: { value: 1 },
+      uDepartR: { value: 1 },
+      uArriveR: { value: 1 },
+      uDepart: { value: 0 },
+      uArrive: { value: 0 },
+      uCool: { value: 0 },
+      uHeatLength: { value: 3 },
+      uPulseSpeed: { value: 8 },
+      uPulseGap: { value: 3 },
+      uPulse: { value: 1 },
+      uSpokes: { value: 18 },
+      uBurn: { value: 0.6 },
+      uSeamGlow: { value: 1 },
+      uNoiseScale: { value: 1 },
+      uDissolve: { value: 0 },
+      uFade: { value: 1 },
+      uSeed: { value: 0 },
+      uGlow: { value: 1 },
+      uCore: { value: new Color() },
+      uTint: { value: new Color() },
+      uBody: { value: new Color() },
+      uDeep: { value: new Color() }
+    }),
+    vertexShader: SCAR_VERTEX,
+    fragmentShader: SCAR_FRAGMENT
+  });
+
+  /** @param {object} s { origin, dir, length, head, depart, arrive, cool, dissolve, fade, seed } */
+  material.userData.sync = (s) => {
+    const c = settings.blink;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uOrigin.value.copy(s.origin);
+    u.uDir.value.copy(s.dir);
+    u.uLength.value = s.length;
+    u.uHead.value = s.head;
+    u.uDepart.value = s.depart;
+    u.uArrive.value = s.arrive;
+    u.uCool.value = s.cool;
+    u.uDissolve.value = s.dissolve;
+    u.uFade.value = s.fade * g.opacity;
+    u.uSeed.value = s.seed;
+    u.uScarWidth.value = c.scarWidth;
+    u.uDepartR.value = c.scarDepartRadius;
+    u.uArriveR.value = c.scarArriveRadius;
+    u.uPadBack.value = c.scarDepartRadius * 1.1;
+    u.uPadFront.value = c.scarArriveRadius * 1.15;
+    u.uHalfW.value = Math.max(c.scarWidth, c.scarDepartRadius, c.scarArriveRadius) * 1.15;
+    u.uHeatLength.value = c.scarHeatLength;
+    u.uPulseSpeed.value = c.scarPulseSpeed * g.animationSpeed;
+    u.uPulseGap.value = c.scarPulseGap;
+    u.uPulse.value = c.scarPulse;
+    u.uSpokes.value = Math.max(2, Math.round(c.scarSpokes));
+    u.uBurn.value = c.scarBurn;
+    u.uSeamGlow.value = c.scarSeamGlow * g.shaderIntensity;
+    u.uNoiseScale.value = c.scarNoiseScale * g.noiseFrequency;
+    u.uGlow.value = c.scarGlow * g.glow;
+    u.uCore.value.copy(getColor(c.colorRiftCore));
+    u.uTint.value.copy(getColor(c.colorRiftTint));
+    u.uBody.value.copy(getColor(c.colorRiftBody));
+    u.uDeep.value.copy(getColor(c.colorRiftDeep));
   };
 
   return material;

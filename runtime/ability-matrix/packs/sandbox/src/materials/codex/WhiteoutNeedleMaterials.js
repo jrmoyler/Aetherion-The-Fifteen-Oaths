@@ -1,4 +1,4 @@
-import { Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial } from 'three';
+import { Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
@@ -23,6 +23,14 @@ import { getColor } from '../../utils/color.js';
  *    behind the front: wind-combed drift streaks running down the line,
  *    blue in the troughs, a bright powdery leading edge, glints; then it
  *    sublimes off in patches.
+ *  - **the blizzard** (`createBlizzardMaterial`) — the storm's vertical
+ *    body: a box raymarched in 18 steps through wind-advected fbm, dense at
+ *    the floor and tearing into gusts above, rolling down the line. Shaded
+ *    on a four-stop ramp — deep navy where it is thick and low, steel blue
+ *    in its body, pale ice where it thins, and white only in the fast
+ *    driving streaks — so it reads as a moving mass of snow on the dark
+ *    floor, not as white on white. Drawn on the box's front faces with the
+ *    depth test, so what stands in front of the storm is never veiled.
  *  - **cold air** (`createColdSheetMaterial`) — the same strip lifted to
  *    waist height on `LAYER.DISTORTION`, sliding noise offsets down the line.
  *
@@ -181,10 +189,12 @@ const CLOUD_VERTEX = /* glsl */ `
   uniform float uScale;
   uniform float uWind;
   uniform float uSeed;
+  uniform float uTower;       // metres the heaped upper shell rises over the belly (0 = the belly)
 
   varying vec3 vWorld;
   varying vec2 vP;            // metres along, metres across
   varying float vLobe;
+  varying float vUp;
 
   ${noiseGLSL}
 
@@ -198,6 +208,11 @@ const CLOUD_VERTEX = /* glsl */ `
     vLobe = lobe;
     vec3 pos = position;
     pos.y -= (lobe * uBillow + across * uBillow * 0.4) / max(1e-3, 1.0);
+    // Upper shell: heaped storm cumulus down the lane, so the cloud has a
+    // body with height in the chase shot instead of a sheet seen edge-on.
+    float heap = sqrt(max(0.0, across));
+    vUp = uTower > 0.0 ? heap * (0.4 + 0.6 * lobe) : 0.0;
+    if (uTower > 0.0) pos.y += (lobe * uBillow + across * uBillow * 0.4) * 0.9 + uTower * heap * (0.35 + 0.9 * lobe);
     vec4 world = modelMatrix * vec4(pos, 1.0);
     vWorld = world.xyz;
     gl_Position = projectionMatrix * viewMatrix * world;
@@ -223,10 +238,12 @@ const CLOUD_FRAGMENT = /* glsl */ `
   uniform vec3  uColorBelly;
   uniform vec3  uColorLit;
   uniform vec3  uColorGlow;
+  uniform float uShade;       // the upper shell darkening toward its foot
 
   varying vec3 vWorld;
   varying vec2 vP;
   varying float vLobe;
+  varying float vUp;
 
   ${noiseGLSL}
 
@@ -245,6 +262,7 @@ const CLOUD_FRAGMENT = /* glsl */ `
     // A soft volume from below: lit lobes white, the belly slate.
     float lit = smoothstep(0.35, 0.9, vLobe) * 0.6 + wisps * 0.4;
     vec3 col = mix(uColorBelly, uColorLit, clamp(lit, 0.0, 1.0));
+    col *= mix(1.0, 0.35 + 0.75 * vUp, uShade);
     col += uColorGlow * uFlash * (0.5 + d) * uGlobalGlow;
     float a = density * uOpacity;
     if (a < 0.004) discard;
@@ -252,7 +270,8 @@ const CLOUD_FRAGMENT = /* glsl */ `
   }
 `;
 
-export function createCloudMaterial() {
+/** @param {boolean} [tower] the heaped upper shell rather than the belly */
+export function createCloudMaterial(tower = false) {
   const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
@@ -273,7 +292,9 @@ export function createCloudMaterial() {
       uFlash: { value: 0 },
       uColorBelly: { value: new Color() },
       uColorLit: { value: new Color() },
-      uColorGlow: { value: new Color() }
+      uColorGlow: { value: new Color() },
+      uTower: { value: 0 },
+      uShade: { value: 0 }
     }),
     vertexShader: CLOUD_VERTEX,
     fragmentShader: CLOUD_FRAGMENT
@@ -297,6 +318,8 @@ export function createCloudMaterial() {
     u.uColorBelly.value.copy(getColor(c.colorCloudBelly));
     u.uColorLit.value.copy(getColor(c.colorCloudLit));
     u.uColorGlow.value.copy(getColor(c.colorIceGlow));
+    u.uTower.value = tower ? Math.max(0, c.cloudTower) : 0;
+    u.uShade.value = tower ? c.cloudTowerShade : 0;
   };
 
   return material;
@@ -340,7 +363,9 @@ const DRIFT_FRAGMENT = /* glsl */ `
   uniform float uEndPool;     // metres, the drift heaped round the end
   uniform vec3  uColorSnow;
   uniform vec3  uColorShade;
+  uniform vec3  uColorCrest;
   uniform vec3  uColorGlow;
+  uniform float uWind;        // metres/second the combed streaks run down the line
 
   varying vec2 vP;
   varying vec3 vWorld;
@@ -349,9 +374,10 @@ const DRIFT_FRAGMENT = /* glsl */ `
 
   void main() {
     vec2 p = vP;
-    // Wind-combed: noise stretched hard down the line.
-    float comb = snoise(vec3(p.x * 0.35 * uStreak, p.y * 3.2, uSeed));
-    float fine = snoise(vec3(p * vec2(0.8, 7.0), uSeed + 2.0));
+    // Wind-combed: noise stretched hard down the line, and still running.
+    float wx = p.x - uTime * uWind;
+    float comb = snoise(vec3(wx * 0.35 * uStreak, p.y * 3.2, uSeed + uTime * 0.15));
+    float fine = snoise(vec3(vec2(p.x - uTime * uWind * 1.8, p.y) * vec2(0.8, 7.0), uSeed + 2.0));
     float ragged = snoise(vec3(p * 0.9, uSeed + 5.0));
     float lane = 1.0 - smoothstep(0.3, 0.5, abs(p.y) / uWidth + ragged * 0.12);
     // Heaped round the end of the line.
@@ -361,9 +387,11 @@ const DRIFT_FRAGMENT = /* glsl */ `
     float edge = exp(-pow((p.x - uFront) / 0.5, 2.0)) * step(p.x, uFront + 0.5) * lane;
 
     float body = clamp(0.55 + comb * 0.35 + fine * 0.2, 0.0, 1.0);
-    vec3 col = mix(uColorShade, uColorSnow, body);
+    vec3 col = mix(uColorShade, uColorSnow, smoothstep(0.1, 0.8, body));
+    // Only the crests of the combed ridges catch the pale top stop.
+    col = mix(col, uColorCrest, smoothstep(0.88, 1.05, body) * 0.55);
     float glint = step(0.986, hash13(floor(vec3(vWorld.xz * 40.0, floor(uTime * 5.0)))));
-    col += uColorSnow * glint * uSparkle * uGlobalGlow;
+    col += uColorCrest * glint * uSparkle * uGlobalGlow;
     col += uColorGlow * edge * uEdgeGlow * uGlobalGlow * uShaderIntensity;
 
     float a = shape * reached * (0.55 + 0.45 * body);
@@ -402,7 +430,9 @@ export function createDriftMaterial() {
       uEndPool: { value: 2 },
       uColorSnow: { value: new Color() },
       uColorShade: { value: new Color() },
-      uColorGlow: { value: new Color() }
+      uColorCrest: { value: new Color() },
+      uColorGlow: { value: new Color() },
+      uWind: { value: 1 }
     }),
     vertexShader: STRIP_VERTEX,
     fragmentShader: DRIFT_FRAGMENT
@@ -426,6 +456,194 @@ export function createDriftMaterial() {
     u.uEndPool.value = c.volleyRadius + 1.2;
     u.uColorSnow.value.copy(getColor(c.colorSnow));
     u.uColorShade.value.copy(getColor(c.colorSnowShade));
+    u.uColorCrest.value.copy(getColor(c.colorSnowCrest));
+    u.uColorGlow.value.copy(getColor(c.colorIceGlow));
+    u.uWind.value = c.driftWind * g.noiseSpeed;
+  };
+
+  return material;
+}
+
+/* ==================================================================== */
+/* The blizzard                                                           */
+/* ==================================================================== */
+
+const BLIZZARD_VERTEX = /* glsl */ `
+  varying vec3 vWorld;
+
+  void main() {
+    vec4 world = modelMatrix * vec4(position, 1.0);
+    vWorld = world.xyz;
+    gl_Position = projectionMatrix * viewMatrix * world;
+  }
+`;
+
+const BLIZZARD_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uTime;
+  uniform float uGlobalGlow;
+
+  uniform vec3  uOrigin;
+  uniform vec3  uDir;         // down the line
+  uniform vec3  uAcross;      // the box's local +z in the world
+  uniform float uLength;
+  uniform float uHeight;
+  uniform float uWidth;
+  uniform float uStart;       // metres out the snow begins
+  uniform float uFront;       // metres the storm has reached
+  uniform float uFade;        // 0..1 thinning out
+  uniform float uDensity;
+  uniform float uScale;
+  uniform float uWind;
+  uniform float uGust;
+  uniform float uStreakGlow;
+  uniform float uOpacity;
+  uniform float uFlash;
+  uniform float uSeed;
+  uniform vec3  uColorCore;
+  uniform vec3  uColorPale;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorGlow;
+
+  varying vec3 vWorld;
+
+  ${noiseGLSL}
+
+  vec3 toLocal(vec3 d) { return vec3(dot(d, uDir), d.y, dot(d, uAcross)); }
+
+  // Density of blowing snow at p (metres: along, up, across).
+  float density(vec3 p, out float streak) {
+    float t = uTime;
+    // The whole field rides the wind down the line and rolls over itself.
+    vec3 q = vec3(p.x - t * uWind, p.y + 0.6 * sin(p.x * 0.45 - t * 1.6 + p.z * 0.8), p.z);
+    q *= uScale * vec3(0.55, 0.9, 0.8);
+    float n = fbm3(q + vec3(0.0, -t * 0.35, uSeed)) * 0.5 + 0.5;
+    float hp = p.y / max(uHeight, 0.1);
+    float prof = exp(-hp * 2.4) * (1.0 - smoothstep(0.5, 1.0, hp + (n - 0.5) * 0.6));
+    float lat = 1.0 - smoothstep(0.22, 0.5, abs(p.z) / max(uWidth, 0.1) + (n - 0.5) * 0.3);
+    float reach = 1.0 - smoothstep(uFront - 2.5, uFront + 0.3, p.x + (n - 0.5) * 3.0);
+    float start = smoothstep(uStart, uStart + 2.5, p.x + (n - 0.5) * 1.5);
+    float end = 1.0 - smoothstep(uLength - 2.0, uLength, p.x);
+    // Gusts: slow pulses of thicker snow running down the line.
+    float gust = 1.0 + uGust * sin(p.x * 0.6 - t * uWind * 0.9 + uSeed);
+    float d = clamp(n * 2.7 - 1.2 + prof * 0.25, 0.0, 1.0) * prof * lat * reach * start * end * gust;
+    float er = uFade * 1.2 - 0.1;
+    d *= smoothstep(er - 0.15, er + 0.15, n);
+    // Driving streaks: thin slanted lines racing down the line, inside the body only.
+    float s = snoise(vec3((p.x + p.y * 1.1) * 2.2 - t * uWind * 2.6, p.y * 0.35, p.z * 1.6 + uSeed));
+    streak = pow(max(s, 0.0), 6.0) * prof * lat * reach * start * end * smoothstep(er - 0.15, er + 0.15, n);
+    return d * uDensity;
+  }
+
+  void main() {
+    vec3 ro = toLocal(cameraPosition - uOrigin);
+    vec3 rdW = normalize(vWorld - cameraPosition);
+    vec3 rd = toLocal(rdW);
+    vec3 bmin = vec3(0.0, 0.0, -0.5 * uWidth);
+    vec3 bmax = vec3(uLength, uHeight, 0.5 * uWidth);
+    vec3 inv = 1.0 / (rd + vec3(1e-6));
+    vec3 t0 = (bmin - ro) * inv;
+    vec3 t1 = (bmax - ro) * inv;
+    vec3 tmin = min(t0, t1);
+    vec3 tmax = max(t0, t1);
+    float tn = max(max(tmin.x, tmin.y), max(tmin.z, 0.0));
+    float tf = min(min(tmax.x, tmax.y), tmax.z);
+    if (tf <= tn) discard;
+
+    const int STEPS = 18;
+    float dt = (tf - tn) / float(STEPS);
+    float jitter = hash13(vec3(gl_FragCoord.xy, floor(uTime * 30.0)));
+    vec3 C = vec3(0.0);
+    float A = 0.0;
+    for (int i = 0; i < STEPS; i++) {
+      vec3 p = ro + rd * (tn + (float(i) + jitter) * dt);
+      float streak;
+      float d = density(p, streak);
+      if (d < 0.002 && streak < 0.01) continue;
+      float a = 1.0 - exp(-d * dt * 1.7);
+      float hp = clamp(p.y / max(uHeight, 0.1), 0.0, 1.0);
+      // Thick and low is deep navy; the body is steel; where it thins, pale ice.
+      float light = clamp(0.12 + hp * 0.8 - d * 0.5, 0.0, 1.0);
+      vec3 col = mix(uColorDeep, uColorBody, smoothstep(0.0, 0.45, light));
+      col = mix(col, uColorPale, smoothstep(0.45, 1.0, light));
+      col += uColorGlow * uFlash * (0.4 + d) * uGlobalGlow;
+      float sa = streak * 0.25 * (1.0 - uFade);
+      vec3 sc = uColorCore * uStreakGlow * uGlobalGlow;
+      // Over: the streak sits on top of this sample.
+      C += (1.0 - A) * (col * a * (1.0 - sa) + sc * sa);
+      A += (1.0 - A) * clamp(a + sa - a * sa, 0.0, 1.0);
+      if (A > 0.97) break;
+    }
+    A *= uOpacity;
+    if (A < 0.004) discard;
+    gl_FragColor = vec4(C / max(A / max(uOpacity, 1e-3), 1e-3), A);
+  }
+`;
+
+export function createBlizzardMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: FrontSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uOrigin: { value: new Vector3() },
+      uDir: { value: new Vector3(1, 0, 0) },
+      uAcross: { value: new Vector3(0, 0, 1) },
+      uLength: { value: 10 },
+      uHeight: { value: 3 },
+      uWidth: { value: 5 },
+      uStart: { value: 0 },
+      uFront: { value: 0 },
+      uFade: { value: 0 },
+      uDensity: { value: 1 },
+      uScale: { value: 0.6 },
+      uWind: { value: 4 },
+      uGust: { value: 0.3 },
+      uStreakGlow: { value: 1.5 },
+      uOpacity: { value: 0.85 },
+      uFlash: { value: 0 },
+      uSeed: { value: 0 },
+      uColorCore: { value: new Color() },
+      uColorPale: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorGlow: { value: new Color() }
+    }),
+    vertexShader: BLIZZARD_VERTEX,
+    fragmentShader: BLIZZARD_FRAGMENT
+  });
+
+  /** @param {object} s { origin, dir, across, length, width, start, front, fade, flash, seed } */
+  material.userData.sync = (s) => {
+    const c = settings[KEY];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uOrigin.value.copy(s.origin);
+    u.uDir.value.copy(s.dir);
+    u.uAcross.value.copy(s.across);
+    u.uLength.value = s.length;
+    u.uHeight.value = Math.max(0.2, c.blizzardHeight);
+    u.uWidth.value = s.width;
+    u.uStart.value = s.start;
+    u.uFront.value = s.front;
+    u.uFade.value = s.fade;
+    u.uDensity.value = c.blizzardDensity;
+    u.uScale.value = c.blizzardScale * g.noiseFrequency;
+    u.uWind.value = c.blizzardWind * g.noiseSpeed;
+    u.uGust.value = c.blizzardGust * g.turbulence;
+    u.uStreakGlow.value = c.blizzardStreakGlow * g.glow;
+    u.uOpacity.value = c.blizzardOpacity * g.opacity;
+    u.uFlash.value = s.flash;
+    u.uSeed.value = s.seed;
+    u.uColorCore.value.copy(getColor(c.colorBlizzardCore));
+    u.uColorPale.value.copy(getColor(c.colorBlizzardPale));
+    u.uColorBody.value.copy(getColor(c.colorBlizzardBody));
+    u.uColorDeep.value.copy(getColor(c.colorBlizzardDeep));
     u.uColorGlow.value.copy(getColor(c.colorIceGlow));
   };
 

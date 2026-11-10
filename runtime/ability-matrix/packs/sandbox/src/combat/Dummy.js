@@ -1,8 +1,16 @@
 import {
+  AdditiveBlending,
   AnimationMixer,
+  BoxGeometry,
   Color,
+  ConeGeometry,
   DoubleSide,
   Group,
+  Mesh,
+  MeshBasicMaterial,
+  Quaternion,
+  SphereGeometry,
+  TorusGeometry,
   MathUtils,
   Matrix4,
   MeshDepthMaterial,
@@ -20,6 +28,7 @@ import { getColor } from '../utils/color.js';
 import { noiseGLSL } from '../shaders/lib/noise.glsl.js';
 import { LAYER } from '../core/Layers.js';
 import { JOINT_NAMES, Ragdoll, collideRagdolls, stripNamespace } from './Ragdoll.js';
+import { ARCHETYPES, blowScale, bodyScale, freshState, resolveBlow, runnerOffset, stepArchetype } from './DummyArchetypes.js';
 
 /**
  * The pieces a body can be torn into, besides what is left of it.
@@ -289,6 +298,16 @@ const UPPER_CONTACTS = new Set([
 
 const UP = /* @__PURE__ */ new Vector3(0, 1, 0);
 
+/** Take the archetype pieces off a clone of the body: a copy has no use for them. */
+function stripAccessories(model) {
+  const doomed = [];
+  model.traverse((node) => {
+    if (node.name?.startsWith('DummyAccessory:')) doomed.push(node);
+  });
+  for (const node of doomed) node.parent?.remove(node);
+  return model;
+}
+
 const _cutNormal = /* @__PURE__ */ new Vector3();
 const _cutNormalBind = /* @__PURE__ */ new Vector3();
 const _cutNormalWorld = /* @__PURE__ */ new Vector3();
@@ -362,10 +381,28 @@ export class Dummy {
    * @param {{x: number, y: number, z: number}} options.offset normalisation onto y = 0
    * @param {number} options.forwardYaw yaw of the rig's forward in model space
    * @param {import('../world/Environment.js').Environment} options.environment
+   * @param {string} [options.archetype] one of `ARCHETYPES` — see `DummyArchetypes.js`
+   * @param {object|null} [options.look] overrides `settings.dummies.look`, key by key
+   * @param {import('three').Texture|null} [options.map] a colour map for the body
+   *   (the Arch-Wizard wears its own skin; the dummy export has none)
    */
-  constructor({ source, clip, scale, offset, forwardYaw, environment }) {
+  constructor({ source, clip, scale, offset, forwardYaw, environment, archetype = 'standard', look = undefined, map = null }) {
     this.environment = environment;
     this.forwardYaw = forwardYaw;
+    /** Which kind of target this is, and the per-life state its rule needs. */
+    this.archetype = ARCHETYPES[archetype] ? archetype : 'standard';
+    this.arch = freshState(this.archetype, settings.dummies.archetypes);
+    /** Key-by-key overrides of `settings.dummies.look`; null for the shared look. */
+    this.lookOverride = look === undefined ? ARCHETYPES[this.archetype].look : look;
+    this._map = map;
+    /** How much bigger than the export this body stands (a giant). */
+    this._bodyScale = bodyScale(this.archetype, settings.dummies.archetypes);
+    /**
+     * Called by the field when a blow is shrugged off ('absorb', 'pop') or a
+     * shield goes up ('shield'), so it can throw sparks; null for none.
+     * @type {((dummy: Dummy, what: string) => void)|null}
+     */
+    this.onBlow = null;
     /** Heading in radians about world +Y, on the same convention as the player. */
     this.facing = 0;
     /** 'alive' → 'dead' → 'burning' → 'gone'; or 'alive' → 'frozen' → 'gone' — see `freeze`. */
@@ -414,7 +451,7 @@ export class Dummy {
     /** Metres per unit of the export — the dissolve's noise is sized off it. */
     this._scale = scale;
     /** How tall it stands, metres. What the hit test measures against. */
-    this.height = settings.dummies.height;
+    this.height = settings.dummies.height * this._bodyScale;
     /** That height in the *export's* units — the cut is a fraction of it. */
     this._localHeight = Math.max(1e-3, this.height / scale);
     /**
@@ -453,6 +490,13 @@ export class Dummy {
      */
     this.parts = [this._makePart(model)];
 
+    // What tells the archetypes apart besides the paint: a small procedural
+    // piece riding the head, and for a caster its shield bubble. Built at unit
+    // root scale (before the giant's scale goes on), so it grows with the body.
+    this.accessory = this._attachAccessory(ARCHETYPES[this.archetype].accessory);
+    this.bubble = this.archetype === 'caster' ? this._makeBubble() : null;
+    this.root.scale.setScalar(this._bodyScale);
+
     this.mixer = new AnimationMixer(this.model);
     this.action = clip ? this.mixer.clipAction(clip) : null;
     if (this.action) {
@@ -486,6 +530,97 @@ export class Dummy {
 
   get position() {
     return this.root.position;
+  }
+
+  /** The cylinder a cast has to touch, metres: wider for a giant. */
+  get hitRadius() {
+    return settings.dummies.bodyRadius * this._bodyScale;
+  }
+
+  /** Whether a caster's bubble is up right now. */
+  get shielded() {
+    return !!this.arch?.shield;
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* what tells the archetypes apart                                     */
+  /* ------------------------------------------------------------------ */
+
+  /**
+   * Hang a small procedural piece on the head bone: a helm, a band, horns or a
+   * pointed hat. Parented to the bone so it rides every pose and every fall,
+   * with the bone's own scale and turn undone once, here, so it is authored in
+   * upright metres whichever way the export's head bone happens to point.
+   */
+  _attachAccessory(kind) {
+    if (!kind) return null;
+    const head = this.parts[0].bones.get('Head');
+    if (!head) return null;
+    const colors = { helm: '#c9a46a', band: '#7dffb0', horns: '#e8d2b0', hat: '#6a46c8' };
+    const material = new MeshStandardMaterial({
+      color: colors[kind] ?? '#cccccc',
+      roughness: kind === 'helm' ? 0.3 : 0.6,
+      metalness: kind === 'helm' ? 0.85 : 0.1,
+      emissive: kind === 'band' || kind === 'hat' ? colors[kind] : '#000000',
+      emissiveIntensity: kind === 'band' ? 0.9 : 0.25
+    });
+    const piece = new Group();
+    piece.name = `DummyAccessory:${kind}`;
+    const add = (geometry, x, y, z, rx = 0, rz = 0) => {
+      const mesh = new Mesh(geometry, material);
+      mesh.position.set(x, y, z);
+      mesh.rotation.set(rx, 0, rz);
+      mesh.castShadow = true;
+      mesh.layers.set(LAYER.WORLD);
+      piece.add(mesh);
+    };
+    if (kind === 'helm') {
+      add(new SphereGeometry(0.135, 20, 10, 0, Math.PI * 2, 0, Math.PI * 0.55), 0, 0.09, 0.0);
+      add(new BoxGeometry(0.02, 0.05, 0.2), 0, 0.2, 0.0);
+    } else if (kind === 'band') {
+      add(new TorusGeometry(0.115, 0.018, 8, 28), 0, 0.1, 0.0, Math.PI / 2);
+    } else if (kind === 'horns') {
+      add(new ConeGeometry(0.035, 0.2, 10), -0.09, 0.2, 0.02, 0, 0.55);
+      add(new ConeGeometry(0.035, 0.2, 10), 0.09, 0.2, 0.02, 0, -0.55);
+    } else if (kind === 'hat') {
+      add(new ConeGeometry(0.15, 0.36, 18), 0, 0.3, -0.01);
+      add(new TorusGeometry(0.15, 0.02, 8, 28), 0, 0.13, -0.01, Math.PI / 2);
+    }
+    // Undo the bone's world transform at rest: the root is still at unit scale
+    // and no rotation, so the bone's world matrix is its pose in the body.
+    this.root.updateMatrixWorld(true);
+    const position = new Vector3();
+    const quaternion = new Quaternion();
+    const scale = new Vector3();
+    head.matrixWorld.decompose(position, quaternion, scale);
+    const inverse = quaternion.clone().invert();
+    piece.quaternion.copy(inverse);
+    piece.scale.setScalar(1 / Math.max(1e-6, scale.x));
+    head.add(piece);
+    return piece;
+  }
+
+  /** The caster's bubble: an additive shell round the body, off until raised. */
+  _makeBubble() {
+    const shell = new Mesh(
+      new SphereGeometry(1, 28, 18),
+      new MeshBasicMaterial({
+        color: '#b78cff',
+        transparent: true,
+        opacity: 0.22,
+        depthWrite: false,
+        blending: AdditiveBlending,
+        side: DoubleSide
+      })
+    );
+    shell.name = 'DummyShield';
+    shell.position.set(0, this.height * 0.52, 0);
+    shell.scale.set(0.62, 1.05, 0.62);
+    shell.layers.set(LAYER.WORLD);
+    shell.visible = false;
+    shell.renderOrder = 2;
+    this.root.add(shell);
+    return shell;
   }
 
   /* ------------------------------------------------------------------ */
@@ -726,6 +861,7 @@ export class Dummy {
         const standard = new MeshStandardMaterial({
           name: 'Dummy',
           color: 0xffffff,
+          map: this._map ?? null,
           roughness: 0.78,
           metalness: 0.15,
           side: DoubleSide
@@ -942,9 +1078,23 @@ export class Dummy {
     return material;
   }
 
+  /**
+   * The look this body wears: the shared one, with this body's own overrides
+   * laid on key by key. Merged into one reused object, so a body that has
+   * overrides allocates nothing per frame and one that has none pays nothing.
+   */
+  _look() {
+    const base = settings.dummies.look;
+    const own = this.lookOverride;
+    if (!own) return base;
+    const merged = (this._lookMerged ??= {});
+    for (const key in base) merged[key] = own[key] ?? base[key];
+    return merged;
+  }
+
   /** Pull the live editor values through. Colours are cached by `getColor`. */
   _syncMaterials() {
-    const look = settings.dummies.look;
+    const look = this._look();
     const cut = settings.slice;
     // What is eating this body, and how far it has got. Every colour below is
     // the authored one lerped that far toward the stain's, so a body halfway
@@ -1073,6 +1223,15 @@ export class Dummy {
     this._corroded = 0;
     this._corrodeLook = null;
 
+    // A new life for the archetype's rule: armour back on, the bubble's clock
+    // restarted, and the runner's strafe centred on this spot, across the line
+    // to whatever it is facing.
+    this.arch = freshState(this.archetype, settings.dummies.archetypes);
+    if (this.accessory) this.accessory.visible = true;
+    if (this.bubble) this.bubble.visible = false;
+    this._home = { x, z };
+    this._strafe = { x: Math.cos(yaw), z: -Math.sin(yaw) };
+
     // Back to the clip, from wherever the last fall left the skeleton.
     if (this.action) {
       this.action.reset();
@@ -1093,6 +1252,14 @@ export class Dummy {
    */
   kill(x, z, force, slice = false) {
     if (!this.alive) return false;
+    // The archetype's rule first: armour and the bubble take a blow without
+    // the body going down (and say so, so the field can throw sparks).
+    if (!this._takesBlow()) return false;
+    const heavy = blowScale(this.archetype, settings.dummies.archetypes);
+    if (heavy !== 1 && force) {
+      force = { ...force, impulse: (force.impulse ?? 0) * heavy, lift: (force.lift ?? 0) * heavy, spin: (force.spin ?? 0) * heavy };
+    }
+    if (this.bubble) this.bubble.visible = false;
 
     this.state = 'dead';
     this.timer = 0;
@@ -1156,11 +1323,25 @@ export class Dummy {
    */
   freeze() {
     if (!this.alive) return false;
+    if (!this._takesBlow()) return false;
+    if (this.bubble) this.bubble.visible = false;
     this.state = 'frozen';
     this.timer = 0;
     this.mixer.stopAllAction();
     this.root.updateWorldMatrix(true, true);
     return true;
+  }
+
+  /**
+   * Whether a blow gets through to the body. False when armour or a shield
+   * took it — or when the body is still in the grace window of the last one it
+   * shrugged off, so a cast overlapping it for a dozen frames is one blow.
+   */
+  _takesBlow() {
+    const outcome = resolveBlow(this.arch);
+    if (outcome === 'fall') return true;
+    if (outcome !== 'ignore') this.onBlow?.(this, outcome);
+    return false;
   }
 
   /** The skinned meshes of the whole body, posed as it stands. */
@@ -1406,7 +1587,10 @@ export class Dummy {
     if (look) this._tearLook = look;
 
     this.root.updateWorldMatrix(true, true);
-    const model = cloneRigged(trunk.model);
+    const model = stripAccessories(cloneRigged(trunk.model));
+    // A limb coming away knocks the head piece off, rather than leaving it
+    // floating over whichever half no longer has a head.
+    if (this.accessory) this.accessory.visible = false;
     this.root.add(model);
     const limb = this._makePart(model);
     limb.region = region;
@@ -1585,6 +1769,7 @@ export class Dummy {
       // natural burn drops the shadow at this same transition.
       this.state = 'burning';
       this.timer = 0;
+      if (this.accessory) this.accessory.visible = false;
       this._castShadows(false);
     }
 
@@ -1698,7 +1883,8 @@ export class Dummy {
     // The model's plane, and then the only one a shader can use.
     const bindOffset = this._toBindPlane(_cutNormal, _cutNormal.dot(_cutPoint), _cutNormalBind);
 
-    const upper = cloneRigged(this.parts[0].model);
+    const upper = stripAccessories(cloneRigged(this.parts[0].model));
+    if (this.accessory) this.accessory.visible = false;
     this.root.add(upper);
     this.parts.push(this._makePart(upper));
     // The clone has to be in the world before the solver reads a bone off it.
@@ -1752,6 +1938,21 @@ export class Dummy {
     const config = settings.dummies;
 
     if (this.state === 'alive') {
+      if (this.arch && dt > 0) {
+        const step = stepArchetype(this.arch, dt, config.archetypes);
+        if (step.shieldRaised) this.onBlow?.(this, 'shield');
+        if (this.archetype === 'runner' && this._home) {
+          const offset = runnerOffset(this.arch, config.archetypes);
+          this.root.position.set(this._home.x + this._strafe.x * offset, 0, this._home.z + this._strafe.z * offset);
+        }
+      }
+      if (this.bubble) {
+        this.bubble.visible = this.arch.shield;
+        if (this.bubble.visible) {
+          const pulse = 1 + 0.04 * Math.sin(this._clock * 6);
+          this.bubble.scale.set(0.62 * pulse, 1.05 * pulse, 0.62 * pulse);
+        }
+      }
       if (config.watch && watch) this._turnToward(watch, dt);
       this.mixer.timeScale = settings.global.animationSpeed;
       this.mixer.update(dt);
@@ -1830,6 +2031,15 @@ export class Dummy {
   }
 
   dispose() {
+    for (const extra of [this.accessory, this.bubble]) {
+      extra?.traverse((node) => {
+        node.geometry?.dispose();
+        node.material?.dispose();
+      });
+      extra?.parent?.remove(extra);
+    }
+    this.accessory = null;
+    this.bubble = null;
     this.mixer.stopAllAction();
     this.action = null;
     for (const part of this.parts) this._disposePart(part);

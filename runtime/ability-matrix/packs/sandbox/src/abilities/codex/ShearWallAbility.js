@@ -1,7 +1,8 @@
-import { Mesh, PlaneGeometry, Vector3 } from 'three';
+import { BufferAttribute, BufferGeometry, Mesh, PlaneGeometry, Vector3 } from 'three';
 import { Ability, AbilityPhase } from '../Ability.js';
 import {
   createShearWallMaterial,
+  createShearBodyMaterial,
   createShearLensMaterial,
   createShearGroundMaterial
 } from '../../materials/codex/ShearWallMaterials.js';
@@ -19,6 +20,33 @@ export const ID = 'shearwall';
 
 /** Bodies one cast remembers having thrown, so the wall does not juggle them. */
 const MAX_THROWN = 24;
+/** Slices through the wall's thickness — the body is drawn as this many sheets. */
+const BODY_SLICES = 7;
+
+/**
+ * K copies of the wall grid stacked in one geometry, `position.z` holding the
+ * slice (−0.5..0.5) the vertex stage spreads along the line by `wallThickness`.
+ */
+function buildSliceGeometry(base, slices) {
+  const src = base.attributes.position.array;
+  const idx = base.index.array;
+  const nv = src.length / 3;
+  const pos = new Float32Array(src.length * slices);
+  const index = new Uint32Array(idx.length * slices);
+  for (let k = 0; k < slices; k++) {
+    const z = slices > 1 ? k / (slices - 1) - 0.5 : 0;
+    for (let i = 0; i < nv; i++) {
+      pos[(k * nv + i) * 3] = src[i * 3];
+      pos[(k * nv + i) * 3 + 1] = src[i * 3 + 1];
+      pos[(k * nv + i) * 3 + 2] = z;
+    }
+    for (let i = 0; i < idx.length; i++) index[k * idx.length + i] = idx[i] + k * nv;
+  }
+  const g = new BufferGeometry();
+  g.setAttribute('position', new BufferAttribute(pos, 3));
+  g.setIndex(new BufferAttribute(index, 1));
+  return g;
+}
 
 const _emit = {};
 const _pos = new Vector3();
@@ -47,7 +75,7 @@ function springCurve(k, overshoot) {
 /**
  * SHEAR WALL — Wind, line cast.
  *
- * A **wall of air** stands up a metre in front of the caster — six metres
+ * A **wall of air** with body stands up a metre in front of the caster — six metres
  * across, three tall, square on to the line — and **ploughs** down it. It is
  * not a flat sheet: in plan it is **pleated** like a folding screen, so every
  * fold catches the light, and its ends trail a little behind the middle. In
@@ -65,8 +93,10 @@ function springCurve(k, overshoot) {
  * the line, away from its middle, with a little of the wall's push.
  *
  * At the end of the line the wall **tears in two**: the halves slide apart
- * laterally and dissolve, an AIR shell and a shockwave go off, the camera is
- * knocked; the grooves erode.
+ * laterally, an AIR shell and a shockwave go off, the camera is knocked.
+ * **Linger:** the halves keep shearing (slower, softer snaps) while they rise
+ * and peel up off the floor and dissolve; dust keeps lifting off the scoured
+ * band and drifting sideways. **Exit:** the scour erodes.
  *
  * It is not Gale Sever (a crescent blade) nor Downburst/Tempest (columns): it
  * is a broad, layered barrier faced from behind — the silhouette is a wall.
@@ -74,10 +104,18 @@ function springCurve(k, overshoot) {
  * ## Layers
  *
  *   1. **the wall** (`createShearWallMaterial`) — a grid pleated, row-sheared
- *      and torn in the vertex stage, sideways-streaming air in the fragment.
+ *      and torn in the vertex stage, sideways-streaming air in the fragment:
+ *      the bright additive skin.
+ *   1b. **the body** (`createShearBodyMaterial`) — the same wall drawn as
+ *      seven slices through `wallThickness` (thickest at the foot), normal
+ *      blended, shaded by the sun through the fold normals and coloured down
+ *      to the deep teal: the wall has mass, not just a glowing pattern.
  *   2. **the lens** (`createShearLensMaterial`) — the wall again, deeper, on
  *      `LAYER.DISTORTION`, shoving the world sideways row by row.
- *   3. **drag marks** (`createShearGroundMaterial`) — the stepped grooves.
+ *   3. **the scour** (`createShearGroundMaterial`) — a filled band of floor
+ *      scoured dark with dust combed along the line, stepped grooves, berms
+ *      of dust at both edges; it stays through the linger while loose dust
+ *      keeps drifting across it, then erodes.
  *   4. **dust** (SMOKE, non-additive) rolled up at the foot, **grit** (CHIP,
  *      lit) flung off it, **wind lines** (STREAK) whipped out of the seams.
  *   5. **the beat** — a knock and a flash of the seams on every snap; at the
@@ -113,11 +151,17 @@ export class ShearWallAbility extends Ability {
     // x −0.5..0.5 across, y 0..1 up — dense across for the pleats.
     this.wallGeometry = new PlaneGeometry(1, 1, 120, 32);
     this.wallGeometry.translate(0, 0.5, 0);
+    this.bodyBase = new PlaneGeometry(1, 1, 96, 24);
+    this.bodyBase.translate(0, 0.5, 0);
+    this.bodyGeometry = buildSliceGeometry(this.bodyBase, BODY_SLICES);
     this.groundGeometry = new PlaneGeometry(1, 2, 1, 1);
     this.groundGeometry.translate(0.5, 0, 0);
 
     this.groundMaterial = createShearGroundMaterial();
     this.ground = this._mesh(this.groundGeometry, this.groundMaterial, LAYER.VFX, 2);
+
+    this.bodyMaterial = createShearBodyMaterial();
+    this.body = this._mesh(this.bodyGeometry, this.bodyMaterial, LAYER.VFX, 12);
 
     this.wallMaterial = createShearWallMaterial();
     this.wall = this._mesh(this.wallGeometry, this.wallMaterial, LAYER.VFX, 14);
@@ -137,7 +181,8 @@ export class ShearWallAbility extends Ability {
       flow: 0,
       flash: 0,
       dissolve: 0,
-      fade: 1
+      fade: 1,
+      lift: 0
     };
     this._groundState = {
       start: new Vector3(),
@@ -147,7 +192,8 @@ export class ShearWallAbility extends Ability {
       reach: 0,
       snapSpacing: 2,
       erode: 0,
-      seed: 0
+      seed: 0,
+      sign: 1
     };
 
     this._seed = 0;
@@ -219,6 +265,7 @@ export class ShearWallAbility extends Ability {
     this.chips.uniforms.uFadeOut.value = 0.3;
 
     this.dustEmitter = new RateEmitter();
+    this.lingerEmitter = new RateEmitter();
     this.chipEmitter = new RateEmitter();
   }
 
@@ -261,7 +308,11 @@ export class ShearWallAbility extends Ability {
     this._thrown.length = 0;
     this.dustEmitter.reset();
     this.chipEmitter.reset();
+    this.lingerEmitter.reset();
+    this._lift = 0;
+    this._lingerSnap = false;
     this.wall.visible = false;
+    this.body.visible = false;
     this.lens.visible = false;
     this.ground.visible = false;
   }
@@ -277,14 +328,14 @@ export class ShearWallAbility extends Ability {
   /* ------------------------------------------------------------------ */
 
   /** Advance the snap clock; on a snap, latch the new side and fire the beat. */
-  _updateShear(dt, allowSnap) {
+  _updateShear(dt, allowSnap, slow = 1) {
     const c = settings[ID];
     const g = settings.global;
     this._flow += dt * c.flowSpeed * g.noiseSpeed;
     this._snapAge += dt;
     if (allowSnap) {
       this._snapClock += dt;
-      const interval = Math.max(0.03, c.snapInterval);
+      const interval = Math.max(0.03, c.snapInterval) * slow;
       if (this._snapClock >= interval) {
         this._snapClock -= interval;
         this._prevShift = this._shift;
@@ -314,7 +365,9 @@ export class ShearWallAbility extends Ability {
     st.flash = Math.exp(-this._snapAge * 12);
     st.dissolve = dissolve;
     st.fade = fade;
+    st.lift = this._lift;
     this.wallMaterial.userData.sync(st);
+    this.bodyMaterial.userData.sync(st);
     this.lensMaterial.userData.sync(st);
 
     const gs = this._groundState;
@@ -326,6 +379,7 @@ export class ShearWallAbility extends Ability {
     gs.snapSpacing = c.speed * g.speed * Math.max(0.03, c.snapInterval);
     gs.erode = erode;
     gs.seed = this._seed;
+    gs.sign = this._snapSign;
     this.groundMaterial.userData.sync(gs);
 
     syncSystem(this.dust, c.colorDustA, c.colorDustB, c.colorDustC, c.colorDustD, c.dustSize, 1, 0.6);
@@ -366,7 +420,7 @@ export class ShearWallAbility extends Ability {
     const g = settings.global;
     const rows = Math.max(1, Math.round(c.rows));
     const halfW = c.wallWidth * 0.5;
-    const count = Math.round(c.streakCount * g.particleCount);
+    const count = Math.round(c.streakCount * g.particleCount * (this._lingerSnap ? c.lingerSnap : 1));
     this.pointAt(this._along / this.length, _end);
     this._fillEmit(_pos, 0.1, _dir, c.streakSpeed, 0.08, 0.06, c.streakLife, 0);
     for (let k = 0; k < count; k++) {
@@ -379,8 +433,9 @@ export class ShearWallAbility extends Ability {
       _emit.direction = _dir;
       this.streaks.emit(1, _emit);
     }
-    this.ctx.shake.add(c.snapShake * g.cameraShake, 9, 30);
-    this.lightBoost = Math.max(this.lightBoost, c.impactLight * 0.12 * g.explosionIntensity);
+    const soft = this._lingerSnap ? c.lingerSnap : 1;
+    this.ctx.shake.add(c.snapShake * soft * g.cameraShake, 9, 30);
+    this.lightBoost = Math.max(this.lightBoost, c.impactLight * 0.12 * soft * g.explosionIntensity);
   }
 
   /** Dust rolled up and grit flung off the wall's foot. */
@@ -412,6 +467,24 @@ export class ShearWallAbility extends Ability {
         _emit.direction = _dir;
         this.chips.emit(1, _emit);
       }
+    }
+  }
+
+  /** Linger: loose dust lifting off the scoured band and drifting sideways. */
+  _scourFx(dt, strength) {
+    const c = settings[ID];
+    const g = settings.global;
+    const count = Math.round(this.lingerEmitter.tick(dt, c.lingerDustRate * strength) * g.particleCount);
+    if (count <= 0) return;
+    const halfW = c.wallWidth * c.groundWidth * 0.4;
+    this._fillEmit(_pos, 0.2, _dir, c.dustSpeed * 0.6, 0.3, 0.6, c.dustLife * 1.4, 0.4);
+    for (let k = 0; k < count; k++) {
+      this.pointAt(0.08 + Math.random() * 0.92, _end);
+      _pos.copy(_end).addScaledVector(this.side, (Math.random() - 0.5) * 2 * halfW).setY(0.15);
+      _dir.copy(this.side).multiplyScalar(this._snapSign).addScaledVector(this.direction, 0.2).setY(0.35);
+      _emit.position = _pos;
+      _emit.direction = _dir;
+      this.dust.emit(1, _emit);
     }
   }
 
@@ -463,6 +536,7 @@ export class ShearWallAbility extends Ability {
     this._split = 0;
     this._sync(grow, 0, 1, 0);
     this.wall.visible = true;
+    this.body.visible = true;
     this.lens.visible = true;
     this.ground.visible = true;
 
@@ -486,8 +560,8 @@ export class ShearWallAbility extends Ability {
       radius: 0.4,
       endRadius: c.burstRadius * power,
       life: c.burstLife,
-      intensity: 1.5,
-      opacity: 0.8 * g.opacity,
+      intensity: c.burstIntensity,
+      opacity: c.burstOpacity * g.opacity,
       squash: 0.6,
       colorA: getColor(c.colorBurstA),
       colorB: getColor(c.colorBurstB),
@@ -497,7 +571,7 @@ export class ShearWallAbility extends Ability {
       radius: c.shockRadius * power,
       life: c.shockLife,
       width: 0.06,
-      intensity: 1,
+      intensity: c.shockIntensity,
       colorA: getColor(c.colorShockA),
       colorB: getColor(c.colorShockB),
       height: 0.03
@@ -524,23 +598,32 @@ export class ShearWallAbility extends Ability {
     const c = settings[ID];
     const g = settings.global;
     this._along = this.length;
-    this._updateShear(dt, false);
     let dissolve = 0;
     let erode = 0;
     let fade = 1;
     if (this.phase === AbilityPhase.IMPACT) {
+      this._updateShear(dt, false);
       this._split = c.tearDistance * Easing.outCubic(t);
+      this._lift = 0;
       this._footFx(dt, 1 - t);
+      this._scourFx(dt, 1);
     } else {
-      this._split = c.tearDistance * (1 + (t - 1) * 0.25);
       const dt2 = Math.max(0.05, c.lifetime) * g.lifetime;
       dissolve = saturate(this.fadeTime / dt2);
+      // Linger: the halves keep shearing — slower, softer snaps — while they peel up.
+      this._lingerSnap = true;
+      this._updateShear(dt, dissolve < 0.75 && c.lingerSnap > 0, Math.max(1, c.lingerSnapSlow));
+      this._lingerSnap = false;
+      this._split = c.tearDistance * (1 + dissolve * c.lingerSpread);
+      this._lift = c.lingerRise * Easing.outQuad(dissolve);
       fade = 1 - Easing.inQuad(dissolve);
       const fd = this.fadeDuration;
       const gf = Math.max(0.05, c.groundFade) * g.lifetime;
       erode = saturate((this.fadeTime - (fd - gf)) / gf);
+      this._scourFx(dt, 1 - erode);
     }
     this._sync(1, dissolve, fade, erode);
+    this.body.visible = dissolve < 1;
     this.wall.visible = dissolve < 1;
     this.lens.visible = dissolve < 1;
     this.ground.visible = erode < 1;
@@ -551,13 +634,17 @@ export class ShearWallAbility extends Ability {
   onDestroy() {
     this._thrown.length = 0;
     this.wall.visible = false;
+    this.body.visible = false;
     this.lens.visible = false;
     this.ground.visible = false;
   }
 
   dispose() {
     this.wallGeometry.dispose();
+    this.bodyBase.dispose();
+    this.bodyGeometry.dispose();
     this.groundGeometry.dispose();
+    this.bodyMaterial.dispose();
     this.wallMaterial.dispose();
     this.lensMaterial.dispose();
     this.groundMaterial.dispose();
@@ -590,6 +677,11 @@ export function buildEditor(gui, c, Editor) {
   R(shape, c, 'rows', 1, 10, 1, 'rows');
   R(shape, c, 'wallBow', -2, 3, 0.01, 'ends trail (m)');
   R(shape, c, 'wallLean', -2, 2, 0.01, 'top leans (m)');
+  R(shape, c, 'wallThickness', 0, 4, 0.01, 'thickness at foot (m)');
+  R(shape, c, 'wallCurl', 0, 4, 0.01, 'crest curls over (m)');
+  R(shape, c, 'pleatRowPhase', 0, 1, 0.01, 'row pleat flip');
+  R(shape, c, 'rowBlend', 0, 1, 0.01, 'smooth shear through rows');
+  R(shape, c, 'shearWaves', 0, 6, 0.05, 'shear half-waves up the wall');
 
   const shear = folder.addFolder('2 · The shear');
   R(shear, c, 'shearAmount', 0, 3, 0.01, 'row shove (m)');
@@ -608,10 +700,21 @@ export function buildEditor(gui, c, Editor) {
   R(look, c, 'footFade', 0.01, 0.6, 0.01, 'foot feather');
   R(look, c, 'softFade', 0.01, 2, 0.01, 'soft fade (m)');
   R(look, c, 'wallOpacity', 0, 2, 0.01, 'opacity');
+  R(look, c, 'skinFocus', 0, 1, 0.01, 'streaks only on lip');
   look.addColor(c, 'colorAirA').name('streaks');
   look.addColor(c, 'colorAirB').name('air');
   look.addColor(c, 'colorAirC').name('air, deep');
+  look.addColor(c, 'colorAirD').name('air, deepest');
   look.addColor(c, 'colorSeam').name('seams');
+  const bodyF = look.addFolder('Body (mass)');
+  R(bodyF, c, 'bodyOpacity', 0, 1, 0.005, 'opacity per slice');
+  R(bodyF, c, 'bodyDensity', 0, 1, 0.01, 'lumpiness');
+  R(bodyF, c, 'bodyLight', 0, 1, 0.01, 'sun shaping');
+  R(bodyF, c, 'bodyRim', 0, 3, 0.01, 'rim');
+  R(bodyF, c, 'bodyCrease', 0, 1, 0.01, 'upright creases');
+  R(bodyF, c, 'crestGlow', 0, 3, 0.01, 'crest edge');
+  R(bodyF, c, 'bodyCore', 0, 1, 0.01, 'solid core (occludes)');
+  R(bodyF, c, 'ribGlow', 0, 3, 0.01, 'rib crest light');
   const lens = look.addFolder('Lens (distortion)');
   R(lens, c, 'lensWarp', 0, 3, 0.01, 'strength');
   R(lens, c, 'lensDepth', 0.2, 4, 0.01, 'depth (× pleats)');
@@ -620,6 +723,10 @@ export function buildEditor(gui, c, Editor) {
   R(tear, c, 'tearTime', 0.05, 2, 0.01, 'halves part over (s)');
   R(tear, c, 'tearDistance', 0, 10, 0.05, 'each half slides (m)');
   R(tear, c, 'lifetime', 0.05, 4, 0.05, 'dissolves over (s)');
+  R(tear, c, 'lingerSnap', 0, 1, 0.01, 'linger snap strength');
+  R(tear, c, 'lingerSnapSlow', 1, 6, 0.05, 'linger snaps slower ×');
+  R(tear, c, 'lingerSpread', 0, 3, 0.01, 'halves drift apart ×');
+  R(tear, c, 'lingerRise', 0, 6, 0.05, 'halves peel up (m)');
 
   const floor = folder.addFolder('5 · Drag marks');
   R(floor, c, 'groundStep', 0, 2, 0.01, 'groove step (m)');
@@ -628,8 +735,15 @@ export function buildEditor(gui, c, Editor) {
   R(floor, c, 'groundScour', 0, 1, 0.01, 'scour darkening');
   R(floor, c, 'freshLength', 0.05, 10, 0.05, 'fresh length (m)');
   R(floor, c, 'groundFade', 0.05, 3, 0.05, 'erodes over (s)');
-  floor.addColor(c, 'colorScour').name('scoured floor');
+  R(floor, c, 'groundWidth', 0.5, 2, 0.01, 'band width (× wall)');
+  R(floor, c, 'bermAmount', 0, 1, 0.01, 'dust berms');
+  R(floor, c, 'driftSpeed', 0, 6, 0.05, 'dust drift (m/s)');
+  R(floor, c, 'driftGlow', 0, 2, 0.01, 'drifting dust');
+  R(floor, c, 'lingerDustRate', 0, 300, 1, 'dust lifting / s');
+  floor.addColor(c, 'colorScourDeep').name('bare floor');
+  floor.addColor(c, 'colorScour').name('combed dust');
   floor.addColor(c, 'colorGroove').name('grooves');
+  floor.addColor(c, 'colorBerm').name('berms');
 
   const parts = folder.addFolder('6 · Particles');
   R(parts, c, 'dustRate', 0, 500, 1, 'dust / s');
@@ -658,6 +772,9 @@ export function buildEditor(gui, c, Editor) {
   beat.addColor(c, 'colorFlash').name('flash');
   R(beat, c, 'burstRadius', 0, 10, 0.05, 'air shell (m)');
   R(beat, c, 'burstLife', 0.05, 3, 0.01, 'shell life');
+  R(beat, c, 'burstIntensity', 0, 3, 0.01, 'shell glow');
+  R(beat, c, 'burstOpacity', 0, 1, 0.01, 'shell opacity');
+  R(beat, c, 'shockIntensity', 0, 2, 0.01, 'shock ring strength');
   beat.addColor(c, 'colorBurstA').name('shell, hot');
   beat.addColor(c, 'colorBurstB').name('shell, body');
   beat.addColor(c, 'colorBurstC').name('shell, deep');

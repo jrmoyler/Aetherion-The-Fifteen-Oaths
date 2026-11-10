@@ -1,4 +1,15 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial } from 'three';
+import {
+  AdditiveBlending,
+  BackSide,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  FrontSide,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
@@ -17,19 +28,24 @@ const ENV_GLSL = /* glsl */ `
 /* ==================================================================== */
 
 /**
- * The time-dilation cage — a geodesic dome drawn entirely in the fragment
- * stage from the barycentrics on a non-indexed icosphere.
+ * The time-dilation dome — a geodesic shell of **filled glass panels** drawn
+ * in the fragment stage from the barycentrics on a non-indexed icosphere.
  *
- *  - **edges** where any barycentric is near zero, at a screen-constant
- *    width (`fwidth`), and **nodes** where two are;
- *  - a faint **film** across each face, its brightness rolled per face;
- *  - the **slowed shimmer**: a band of noise crawling over the cage at a
- *    deliberately sluggish rate, as if light itself were dragging through it;
- *  - **forming**: the cage draws itself from the floor upward, each face
- *    lighting on its own lag (`uForm`), the leading edge burning white;
- *  - **dissolving**: faces drop out on their own dice from the top down,
- *    each burning on its way (`uDissolve`);
- *  - fresnel rim and a dimmer far wall, soft-faded against the floor.
+ *  - **panels**: every triangle is a pane of dark violet time-glass with a
+ *    body, not an outline — coloured from a four-stop ramp (deep indigo mass
+ *    → saturated violet body → pale lilac edges → white only in the nodes and
+ *    the sun glint), thicker toward the silhouette (fresnel), each pane its
+ *    own rolled tint, faceted against the sun with a hard glint. Drawn as a
+ *    premultiplied "over": the deep stop *darkens* what is behind it, the
+ *    light adds on top, so the dome has mass on the dark floor;
+ *  - **the time hand**: a meridian sweep rolling round the dome, lighting
+ *    the panes it passes and leaving them to cool behind it — slowed hard
+ *    while time is held, so the linger has its own, visibly dragging motion;
+ *  - **slow ripples** inside each pane, crawling inward from its frame;
+ *  - thin pale **frames** and small white **nodes** (no longer the body);
+ *  - **forming** from the floor up, each pane on its own lag, the leading
+ *    row burning; **dissolving** crown-first with a burning edge;
+ *  - two passes (far wall, then near) so the panes stack in order.
  */
 const SHELL_VERTEX = /* glsl */ `
   attribute vec3 aBary;
@@ -37,12 +53,14 @@ const SHELL_VERTEX = /* glsl */ `
   varying vec3  vLocal;
   varying vec3  vNormalW;
   varying vec3  vViewDir;
+  varying vec3  vWorld;
   varying float vViewZ;
 
   void main() {
     vBary = aBary;
     vLocal = position;
     vec4 world = modelMatrix * vec4(position, 1.0);
+    vWorld = world.xyz;
     vNormalW = normalize(mat3(modelMatrix) * normal);
     vViewDir = cameraPosition - world.xyz;
     vec4 mv = viewMatrix * world;
@@ -70,11 +88,23 @@ const SHELL_FRAGMENT = /* glsl */ `
   uniform float uBackFace;
   uniform float uOpacity;
   uniform float uFlash;         // the release
+  uniform float uPanelOpacity;
+  uniform float uPanelGlow;
+  uniform float uSweep;         // integrated angle of the time hand
+  uniform float uSweepGlow;
+  uniform float uSweepTrail;
+  uniform float uGlint;
+  uniform float uPass;          // 0 far wall, 1 near wall
+  uniform float uSaturation;
+  uniform float uFrameDeep;     // the frames' own dark body    // 1 as authored, 0 grey-violet
+  uniform float uLightCap;      // how far the brightest light is held down
   uniform vec3  uColorEdge;
   uniform vec3  uColorNode;
   uniform vec3  uColorFill;
+  uniform vec3  uColorDeep;
   uniform vec3  uColorRim;
   uniform vec3  uColorBurn;
+  uniform vec3  uLightDir;
 
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
@@ -87,6 +117,7 @@ const SHELL_FRAGMENT = /* glsl */ `
   varying vec3  vLocal;
   varying vec3  vNormalW;
   varying vec3  vViewDir;
+  varying vec3  vWorld;
   varying float vViewZ;
 
   ${noiseGLSL}
@@ -113,46 +144,83 @@ const SHELL_FRAGMENT = /* glsl */ `
     if (uDissolve > 0.0 && goneAt < threshold - uDissolveEdge) discard;
     float burning = (1.0 - smoothstep(threshold - uDissolveEdge, threshold, goneAt)) * step(goneAt, threshold) * step(0.0001, uDissolve);
 
-    /* --- edges and nodes from the barycentrics --- */
+    /* --- frames and nodes from the barycentrics --- */
     vec3 fw = fwidth(vBary) * 1.2;
     vec3 e3 = smoothstep(fw * 0.5, fw * 0.5 + max(uEdgeWidth, 1e-3) * (1.0 + fw * 20.0), vBary);
     float edge = 1.0 - min(min(e3.x, e3.y), e3.z);
-    vec3 n3 = 1.0 - smoothstep(vec3(0.0), vec3(0.09), vBary);
+    vec3 n3 = 1.0 - smoothstep(vec3(0.0), vec3(0.07), vBary);
     float node = clamp(n3.x * n3.y + n3.y * n3.z + n3.z * n3.x, 0.0, 1.0);
+    float inset = min(min(vBary.x, vBary.y), vBary.z); // 0 at the frame, 1/3 at the pane centre
 
-    /* --- the slowed shimmer --- */
+    /* --- facet lighting --- */
+    vec3 Nf = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+    vec3 V = normalize(vViewDir);
+    if (dot(Nf, V) < 0.0) Nf = -Nf;
+    float ndv = clamp(dot(Nf, V), 0.0, 1.0);
+    float fres = pow(1.0 - ndv, max(uFresnelPower, 0.2));
+    vec3 L = normalize(uLightDir);
+    float glint = pow(clamp(dot(Nf, normalize(L + V)), 0.0, 1.0), 90.0) * uGlint;
+    float sunSide = clamp(dot(Nf, L) * 0.5 + 0.5, 0.0, 1.0);
+
+    /* --- the time hand: a meridian rolling round the dome, a cooling wake --- */
+    float azim = atan(faceKey.z, faceKey.x);
+    float lag = fract((uSweep - azim) / 6.2831853);
+    float hand = exp(-lag * uSweepTrail) * (0.4 + 0.6 * h);
+    float ahead = exp(-pow((1.0 - lag) * 40.0, 2.0)); // the bright leading meridian
+
+    /* --- slow ripples inside each pane, crawling in from its frame --- */
+    float ripple = pow(0.5 + 0.5 * sin(inset * 48.0 - uShimmerTime * 6.0 + dice * 6.2831853), 4.0) * smoothstep(0.02, 0.12, inset);
     float sh = snoise(vec3(vLocal * uShimmerScale + vec3(0.0, -uShimmerTime, uSeed)));
-    float band = pow(0.5 + 0.5 * sin(vLocal.y * 9.0 - uShimmerTime * 3.0 + sh * 2.0), 6.0);
-    float shimmer = 1.0 + uShimmerAmount * (sh * 0.5 + band);
+    float shimmer = 1.0 + uShimmerAmount * sh * 0.5;
 
-    float fres = fresnelTerm(vViewDir, vNormalW, uFresnelPower, 1.0) * uFresnelGlow;
-    float face = dot(vNormalW, vViewDir) > 0.0 ? 1.0 : uBackFace;
+    /* --- the pane body: deep mass, saturated where lit, pale at the grazing rim --- */
+    // Thin where seen face-on (you see the frozen debris through it), thick
+    // and dark toward the silhouette, like a lens of slowed time.
+    float thick = 0.4 + 0.6 * fres;
+    float paneA = uPanelOpacity * thick * formed;
+    vec3 body = mix(uColorDeep, uColorFill, clamp(0.05 * dice + 0.1 * sunSide + hand * 0.35, 0.0, 1.0));
+    vec3 light = uColorFill * (uFillGlow * dice + ripple * 0.12) * uPanelGlow * shimmer
+               + uColorRim * hand * hand * uSweepGlow * 0.35 * uPanelGlow
+               + uColorRim * fres * fres * uFresnelGlow
+               + uColorEdge * ahead * uSweepGlow
+               + uColorEdge * glint;
+    light *= formed;
+    // The frames are thin and the far wall's frames dimmer still, so the
+    // dome reads as panes with mass, not as a wire diagram.
+    float framePass = mix(0.25, 1.0, uPass);
+    light += (uColorEdge * edge * uEdgeGlow * (0.6 + hand) * shimmer
+           + uColorNode * node * uNodeGlow) * formed * framePass;
+    light += uColorBurn * (formEdge * (edge + 0.3) * 3.0 + guide * edge);
+    light += uColorBurn * burning * 2.0;
+    light += uColorBurn * uFlash * (edge + 0.25);
 
-    vec3 color = uColorEdge * edge * uEdgeGlow * shimmer
-               + uColorNode * node * uNodeGlow * shimmer
-               + uColorFill * uFillGlow * (0.4 + dice) * shimmer
-               + uColorRim * fres;
-    color *= formed;
-    color += uColorBurn * (formEdge * (edge + 0.3) * 3.0 + guide * edge);
-    color += uColorBurn * burning * 4.0;
-    color += uColorBurn * uFlash * (edge + 0.3);
+    // Pull the light toward its own grey and keep the frames in the deep
+    // stop's family: violet glass, not neon.
+    float lum = dot(light, vec3(0.2126, 0.7152, 0.0722));
+    light = mix(vec3(lum) * mix(vec3(1.0), uColorRim / max(dot(uColorRim, vec3(0.2126, 0.7152, 0.0722)), 1e-3), 0.35), light, uSaturation);
+    light *= mix(1.0, uLightCap, smoothstep(0.0, 1.5, lum));
 
-    float alpha = clamp((edge + node + uFillGlow + fres) * formed + guide * edge + formEdge + burning + uFlash * edge, 0.0, 1.0);
-    alpha *= face * uOpacity;
+    float pass = mix(uBackFace, 1.0, uPass);
     vec2 screenUV = gl_FragCoord.xy / uResolution;
-    alpha *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, 0.25);
-    if (alpha < 0.003) discard;
-    gl_FragColor = vec4(color * face * uOpacity * uGlobalGlow * uShaderIntensity, alpha);
+    float soft = softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, 0.25);
+    float a = clamp(paneA + edge * uFrameDeep * formed, 0.0, 1.0) * uOpacity * pass * soft;
+    vec3 outC = (body * a + light * uOpacity * pass * soft * uGlobalGlow * uShaderIntensity);
+    if (a < 0.003 && dot(outC, outC) < 1e-5) discard;
+    gl_FragColor = vec4(outC, a);
   }
 `;
 
-export function createStillpointShellMaterial() {
+/** @param {number} pass 0: the far wall (BackSide), 1: the near wall (FrontSide). */
+export function createStillpointShellMaterial(pass = 1) {
   const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
-    side: DoubleSide,
+    // Premultiplied "over": the deep pane darkens what is behind it.
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
+    side: pass > 0.5 ? FrontSide : BackSide,
     toneMapped: false,
     extensions: { derivatives: true },
     uniforms: sharedUniforms({
@@ -173,9 +241,20 @@ export function createStillpointShellMaterial() {
       uBackFace: { value: 0.4 },
       uOpacity: { value: 1 },
       uFlash: { value: 0 },
+      uPanelOpacity: { value: 0.55 },
+      uPanelGlow: { value: 1 },
+      uSweep: { value: 0 },
+      uSweepGlow: { value: 1 },
+      uSweepTrail: { value: 3 },
+      uGlint: { value: 2 },
+      uPass: { value: pass },
+      uSaturation: { value: 1 },
+      uLightCap: { value: 1 },
+      uFrameDeep: { value: 0.6 },
       uColorEdge: { value: new Color() },
       uColorNode: { value: new Color() },
       uColorFill: { value: new Color() },
+      uColorDeep: { value: new Color() },
       uColorRim: { value: new Color() },
       uColorBurn: { value: new Color() }
     }),
@@ -183,7 +262,7 @@ export function createStillpointShellMaterial() {
     fragmentShader: SHELL_FRAGMENT
   });
 
-  /** @param {object} state { seed, form, dissolve, sink, shimmerTime, flash } */
+  /** @param {object} state { seed, form, dissolve, sink, shimmerTime, sweep, flash } */
   material.userData.sync = (state) => {
     const c = settings.stillpoint;
     const g = settings.global;
@@ -205,9 +284,19 @@ export function createStillpointShellMaterial() {
     u.uBackFace.value = c.backFace;
     u.uOpacity.value = c.shellOpacity * g.opacity;
     u.uFlash.value = state.flash;
+    u.uPanelOpacity.value = c.panelOpacity;
+    u.uPanelGlow.value = c.panelGlow * g.glow;
+    u.uSweep.value = state.sweep;
+    u.uSweepGlow.value = c.sweepGlow;
+    u.uSweepTrail.value = c.sweepTrail;
+    u.uGlint.value = c.panelGlint;
+    u.uSaturation.value = c.panelSaturation;
+    u.uLightCap.value = c.panelLightCap;
+    u.uFrameDeep.value = c.frameDeep;
     u.uColorEdge.value.copy(getColor(c.colorEdge));
     u.uColorNode.value.copy(getColor(c.colorNode));
     u.uColorFill.value.copy(getColor(c.colorFill));
+    u.uColorDeep.value.copy(getColor(c.colorPanelDeep));
     u.uColorRim.value.copy(getColor(c.colorRim));
     u.uColorBurn.value.copy(getColor(c.colorBurn));
   };
@@ -248,6 +337,9 @@ const FLOOR_FRAGMENT = /* glsl */ `
   uniform float uSeed;
   uniform vec3  uColor;
   uniform vec3  uColorHot;
+  uniform vec3  uColorDeep;
+  uniform float uDeep;
+  uniform float uTele;
   uniform float uGlobalGlow;
 
   varying vec2 vLocal;
@@ -256,7 +348,7 @@ const FLOOR_FRAGMENT = /* glsl */ `
 
   void main() {
     float r = length(vLocal) / max(uRadius, 1e-3);
-    if (r > 1.08) discard;
+    if (r > 2.0) discard;
     float ang = atan(vLocal.y, vLocal.x);
     float reveal = 1.0 - smoothstep(uForm * 1.05 - 0.08, uForm * 1.05, r);
 
@@ -272,11 +364,24 @@ const FLOOR_FRAGMENT = /* glsl */ `
     float torn = smoothstep(0.55, 0.85, snoise(vec3(vLocal * 1.8, uSeed))) * (1.0 - smoothstep(0.7, 1.0, r));
     float core = exp(-r * r * 8.0) * 0.6;
 
-    float light = (ring * 0.6 + spoke + boundary * 1.6 + torn * 0.8 + core) * reveal;
+    float inDisc = 1.0 - smoothstep(1.0, 1.02, r);
+    float light = (ring * 0.6 + spoke + boundary * 1.6 + torn * 0.8 + core) * reveal * inDisc;
     vec3 color = mix(uColor, uColorHot, clamp(boundary + core + torn * 0.5 + uFlash, 0.0, 1.0)) * light;
-    float a = clamp(light, 0.0, 1.0) * uFade * uOpacity;
-    if (a < 0.003) discard;
-    gl_FragColor = vec4(color * uGlow * uGlobalGlow * uFade * uOpacity * (1.0 + uFlash * 2.0), a);
+
+    // The telegraph while the seed is in flight: a ring closing on the mark
+    // over a darkening disc.
+    float pre = 1.0 - step(0.001, uForm);
+    float ringAt = 1.0 + (1.0 - uTele) * 0.8;
+    float tele = exp(-pow((r - ringAt) * uRadius / 0.06, 2.0)) * uTele * pre;
+    color += uColor * tele * 1.5;
+
+    // The deep stop is the floor's mass: the stilled ground goes dark indigo
+    // (premultiplied "over"), and the rings burn on top of it.
+    float deep = uDeep * inDisc * max(reveal, uTele * pre * 0.6) * (0.8 + 0.2 * snoise(vec3(vLocal * 1.3, uSeed + 3.0)));
+    float a = clamp(deep, 0.0, 1.0) * uFade * uOpacity;
+    vec3 outC = uColorDeep * a + color * uGlow * uGlobalGlow * uFade * uOpacity * (1.0 + uFlash * 2.0);
+    if (a < 0.003 && dot(outC, outC) < 1e-5) discard;
+    gl_FragColor = vec4(outC, a);
   }
 `;
 
@@ -285,7 +390,9 @@ export function createStillpointFloorMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     toneMapped: false,
     uniforms: sharedUniforms({
       uQuadSize: { value: 8 },
@@ -300,7 +407,10 @@ export function createStillpointFloorMaterial() {
       uFlash: { value: 0 },
       uSeed: { value: 0 },
       uColor: { value: new Color() },
-      uColorHot: { value: new Color() }
+      uColorHot: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uDeep: { value: 0.6 },
+      uTele: { value: 0 }
     }),
     vertexShader: FLOOR_VERTEX,
     fragmentShader: FLOOR_FRAGMENT
@@ -324,6 +434,9 @@ export function createStillpointFloorMaterial() {
     u.uSeed.value = state.seed;
     u.uColor.value.copy(getColor(c.colorFloor));
     u.uColorHot.value.copy(getColor(c.colorFloorHot));
+    u.uColorDeep.value.copy(getColor(c.colorFloorDeep));
+    u.uDeep.value = c.floorDeep;
+    u.uTele.value = state.tele ?? 0;
   };
 
   return material;
@@ -604,5 +717,91 @@ export function createStillpointLensMaterial() {
     u.uShockAt.value = state.shockAt;
   };
 
+  return material;
+}
+
+/* ==================================================================== */
+/* the seed of stillness (the travel)                                     */
+/* ==================================================================== */
+
+/**
+ * The seed carried from the hand to the circle: a faceted violet crystal
+ * with a deep indigo body, saturated facets where the sun catches them, a
+ * pale rim and a slow white-hot heart that beats at a dragging tempo.
+ * Premultiplied "over", so it is a solid thing in the air rather than a glow.
+ */
+const SEED_VERTEX = /* glsl */ `
+  varying vec3 vWorld;
+  varying vec3 vLocal;
+  void main() {
+    vLocal = position;
+    vec4 world = modelMatrix * vec4(position, 1.0);
+    vWorld = world.xyz;
+    gl_Position = projectionMatrix * viewMatrix * world;
+  }
+`;
+
+const SEED_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uFade;
+  uniform float uGlow;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorPale;
+  uniform vec3  uColorCore;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+
+  varying vec3 vWorld;
+  varying vec3 vLocal;
+
+  void main() {
+    vec3 N = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+    vec3 V = normalize(cameraPosition - vWorld);
+    if (dot(N, V) < 0.0) N = -N;
+    float ndv = clamp(dot(N, V), 0.0, 1.0);
+    float fres = pow(1.0 - ndv, 2.5);
+    float sun = clamp(dot(N, normalize(uLightDir)) * 0.5 + 0.5, 0.0, 1.0);
+    float beat = 0.6 + 0.4 * sin(uTime * 3.0);
+    vec3 body = mix(uColorDeep, uColorBody, sun * 0.8);
+    vec3 light = uColorPale * fres * 1.6 + uColorCore * pow(ndv, 6.0) * beat * 2.0;
+    float a = (0.85 + 0.15 * fres) * uFade;
+    gl_FragColor = vec4(body * a + light * uGlow * uGlobalGlow * uFade, a);
+  }
+`;
+
+export function createStillpointSeedMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
+    toneMapped: false,
+    extensions: { derivatives: true },
+    uniforms: sharedUniforms({
+      uFade: { value: 1 },
+      uGlow: { value: 1 },
+      uColorDeep: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorPale: { value: new Color() },
+      uColorCore: { value: new Color() }
+    }),
+    vertexShader: SEED_VERTEX,
+    fragmentShader: SEED_FRAGMENT
+  });
+  /** @param {number} fade */
+  material.userData.sync = (fade) => {
+    const c = settings.stillpoint;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uFade.value = fade * g.opacity;
+    u.uGlow.value = c.seedGlow * g.glow;
+    u.uColorDeep.value.copy(getColor(c.colorPanelDeep));
+    u.uColorBody.value.copy(getColor(c.colorFill));
+    u.uColorPale.value.copy(getColor(c.colorEdge));
+    u.uColorCore.value.copy(getColor(c.colorNode));
+  };
   return material;
 }

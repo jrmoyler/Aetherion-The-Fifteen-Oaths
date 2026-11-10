@@ -5,6 +5,7 @@ import { createSim } from '../../../shared/sim/index.js';
 import { TICK_HZ } from '../../../shared/protocol.js';
 
 export const LOCAL_PLAYER_ID = 'c1';
+const MENU_MESSAGES = new Set(['loadout', 'equip', 'unequip']);
 
 /** emit(batch: object[]) receives every server->client message for the local player. */
 export function createHost({ seed = 15015, bots = 30, emit }) {
@@ -49,7 +50,19 @@ export function createHost({ seed = 15015, bots = 30, emit }) {
       emit([{ t: '__paused', paused, time: sim.serverTime() }]);
       return;
     }
-    // Pausing must not allow queued movement/casts or inventory changes to resolve.
+    // Pausing must not let queued movement, casts or item use resolve. Managing what you carry is different:
+    // the character window is what pauses the offline world, so loadout and gear changes made inside it have
+    // to be answered while time stands still, or the window could never change anything.
+    if (paused && MENU_MESSAGES.has(msg.t)) {
+      sim.handle(pid, msg);
+      const state = sim._S, player = state.players?.get?.(pid);
+      const replies = state.out.filter((o) => o.to === pid).map((o) => o.msg);
+      state.out = state.out.filter((o) => o.to !== pid);
+      // Gear changes mark the player dirty for the next tick; there is no next tick while paused.
+      if (player && !replies.some((m) => m.t === 'you')) { player.youDirty = false; replies.push({ t: 'you', you: state.youState(player) }); }
+      if (replies.length) emit(replies);
+      return;
+    }
     if (paused && msg.t !== 'ping') return;
     if (msg.t === 'hello') {
       const saved = msg.__saved ?? null;

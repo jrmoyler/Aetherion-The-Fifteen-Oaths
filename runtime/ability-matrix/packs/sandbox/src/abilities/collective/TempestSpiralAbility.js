@@ -1,8 +1,9 @@
 import { Mesh, PlaneGeometry, Vector3 } from 'three';
 import { Ability, AbilityPhase } from '../Ability.js';
-import { createFunnelGeometry } from '../../assets/collective/TempestSpiralGeometry.js';
+import { createFunnelGeometry, createScourGeometry } from '../../assets/collective/TempestSpiralGeometry.js';
 import {
   createFunnelMaterial,
+  createTempestScourMaterial,
   createTempestWarpMaterial
 } from '../../materials/collective/TempestSpiralMaterial.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -119,6 +120,18 @@ export class TempestSpiralAbility extends Ability {
       this.group.add(mesh);
     }
 
+    /* ---- the scoured floor: dirt raked into wound grooves under the foot ---- */
+    this.scourGeometry = createScourGeometry(96, 28);
+    this.scourMaterial = createTempestScourMaterial();
+    this.scour = new Mesh(this.scourGeometry, this.scourMaterial);
+    this.scour.name = 'TempestScour';
+    this.scour.layers.set(LAYER.VFX);
+    this.scour.renderOrder = 2;
+    this.scour.frustumCulled = false;
+    this.scour.visible = false;
+    this.group.add(this.scour);
+    this._scourState = { radius: 3, spinPhase: 0, grow: 0, fade: 1, seed: 0 };
+
     /* ---- layer 6: the warp ---- */
     this.warpGeometry = new PlaneGeometry(1, 1, 1, 1);
     this.warpMaterial = createTempestWarpMaterial();
@@ -211,6 +224,7 @@ export class TempestSpiralAbility extends Ability {
       softFade: 0.3
     });
     this.streaks.uniforms.uSizeIn.value = 0.05;
+    this._dustSoft = -1;
     this.streaks.uniforms.uFadeIn.value = 0.1;
     this.streaks.uniforms.uFadeOut.value = 0.5;
     this.streaks.uniforms.uEndSize.value = 0.6;
@@ -220,6 +234,7 @@ export class TempestSpiralAbility extends Ability {
     this.dustEmitter = new RateEmitter();
     this.debrisEmitter = new RateEmitter();
     this.streakEmitter = new RateEmitter();
+    this.footEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -258,6 +273,13 @@ export class TempestSpiralAbility extends Ability {
     return lerp(c.baseRadius, c.topRadius, Math.pow(saturate(v), Math.max(0.05, c.flare)));
   }
 
+  /** The *drawn* funnel's radius at height fraction `v` (presentation only —
+   *  the lift keeps `_funnelRadius`, so where bodies are carried is unchanged). */
+  _visualRadius(v) {
+    const c = settings.tempest;
+    return lerp(c.funnelFoot, c.funnelTop, Math.pow(saturate(v), Math.max(0.05, c.funnelFlare)));
+  }
+
   /** The bent axis at height fraction `v`, written into `out.x/z` (mirrors `swayAt`). */
   _swayAt(v, out) {
     const c = settings.tempest;
@@ -289,6 +311,7 @@ export class TempestSpiralAbility extends Ability {
     this.dustEmitter.reset();
     this.debrisEmitter.reset();
     this.streakEmitter.reset();
+    this.footEmitter.reset();
     this._releaseGrips();
 
     // The one thing a cast captures. Everything else is resolved per frame.
@@ -307,6 +330,8 @@ export class TempestSpiralAbility extends Ability {
     this.inner.visible = false;
     this.warp.visible = false;
     this.devil.visible = true;
+    this.scour.visible = false;
+    this._telegraphClock = 0;
 
     // A puff off the caster's feet as the devil spins up.
     const c = settings.tempest;
@@ -346,6 +371,10 @@ export class TempestSpiralAbility extends Ability {
     const g = settings.global;
 
     const d = this.dust.uniforms;
+    if (d.uSoftFade && this._dustSoft !== c.dustSoftFade) {
+      this._dustSoft = c.dustSoftFade;
+      d.uSoftFade.value = Math.max(0.01, c.dustSoftFade);
+    }
     this.dust.setGradient(getColor(c.colorDustA), getColor(c.colorDustB), getColor(c.colorDustC), getColor(c.colorDustD));
     d.uGravity.value.set(0, c.skirtRise, 0);
     d.uSwirl.value = c.skirtSwirl;
@@ -383,9 +412,9 @@ export class TempestSpiralAbility extends Ability {
   _shapeFunnel(state, height, phase, collapse, fade) {
     const c = settings.tempest;
     state.height = height;
-    state.base = c.baseRadius;
-    state.top = c.topRadius;
-    state.flare = c.flare;
+    state.base = c.funnelFoot;
+    state.top = c.funnelTop;
+    state.flare = c.funnelFlare;
     state.sway = c.sway;
     state.spinPhase = phase;
     state.swayPhase = this._swayPhase;
@@ -393,6 +422,20 @@ export class TempestSpiralAbility extends Ability {
     state.collapse = collapse;
     state.fade = fade;
     state.seed = this._seed;
+  }
+
+  /** The scoured floor: sized from the skirt, wound with the dust shell. */
+  _syncScour(centre, grow, fade) {
+    const c = settings.tempest;
+    const st = this._scourState;
+    st.radius = c.skirtRadius * c.scourRadius;
+    st.spinPhase = this._spin;
+    st.grow = grow;
+    st.fade = fade;
+    st.seed = this._seed;
+    this.scourMaterial.userData.sync(st);
+    this.scour.position.set(centre.x, 0, centre.z);
+    this.scour.visible = grow > 0.002 && fade > 0.004;
   }
 
   /* ------------------------------------------------------------------ */
@@ -468,6 +511,32 @@ export class TempestSpiralAbility extends Ability {
 
     this._streakFx(dt, this.position, c.devilHeight * grow, c.devilTop, 0.35);
     this.ctx.shake.rumble(c.devilRumble, dt);
+
+    /* anticipation at the circle: the floor starts to be raked and the dust
+       there is drawn in and wound up before the devil arrives */
+    const target = this._centrePoint(_centre);
+    const gather = Easing.inQuad(saturate(this.u));
+    this._syncScour(target, c.telegraphScour * gather, 1);
+    const pulls = Math.round(this.dustEmitter.tick(dt, c.telegraphDust * (0.3 + gather)) * g.particleCount);
+    if (pulls > 0) {
+      _pos.copy(target).setY(0.25);
+      _emit.position = _pos;
+      _emit.radius = c.skirtRadius * c.telegraphRadius;
+      _emit.direction = _dir.set(0, 1, 0);
+      _emit.speed = c.skirtSpeed * 0.2;
+      _emit.speedVariance = 0.6;
+      _emit.spread = 0.4;
+      _emit.inherit = null;
+      _emit.anchor = target;
+      _emit.size = c.skirtSize * 0.8;
+      _emit.sizeVariance = 0.5;
+      _emit.life = c.skirtLifetime * 0.7;
+      _emit.lifeVariance = 0.4;
+      _emit.spin = 0.6;
+      _emit.tint = null;
+      _emit.time = time;
+      this.dust.emit(pulls, _emit);
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -551,7 +620,10 @@ export class TempestSpiralAbility extends Ability {
 
     const centre = this._centrePoint(_centre);
     const rise = this._riseAmount();
+    // Two heights: the lift's (gameplay — where bodies hang) and the drawn
+    // column's (presentation — kept inside the frame).
     const height = c.height * rise;
+    const drawn = c.funnelHeight * rise;
     this._height = height;
 
     /* --- the collapse: bottom up, over the fade --- */
@@ -565,30 +637,42 @@ export class TempestSpiralAbility extends Ability {
     }
     this._collapse = collapse;
 
-    this._shapeFunnel(this._funnelState, height, this._spin, collapse, fade);
+    this._shapeFunnel(this._funnelState, drawn, this._spin, collapse, fade);
     this.outerMaterial.userData.sync(this._funnelState);
-    this._shapeFunnel(this._innerState, height * 0.97, this._innerSpin, collapse, fade);
+    this._shapeFunnel(this._innerState, drawn * 0.97, this._innerSpin, collapse, fade);
     this.innerMaterial.userData.sync(this._innerState);
     this.outer.position.copy(centre);
     this.inner.position.copy(centre);
 
+    /* --- the scoured floor: spreads from the foot, stays, blown flat on exit --- */
+    const scourT = this.phase === AbilityPhase.IMPACT ? this.impactTime : 1e3;
+    const scourGrow = lerp(c.telegraphScour, 1, Easing.outCubic(saturate(scourT / Math.max(0.05, c.scourGrowTime))));
+    // The scour outlives most of the collapse: the ground stays torn.
+    let scourFade = 1;
+    if (this.phase === AbilityPhase.FADE) {
+      const ft = saturate(this.fadeTime / this.fadeDuration);
+      const hold = saturate(c.scourHold);
+      scourFade = 1 - Easing.inQuad(saturate((ft - hold) / Math.max(0.05, 1 - hold)));
+    }
+    this._syncScour(centre, scourGrow, scourFade);
+
     /* --- layer 6: the base warp --- */
     const ws = this._warpState;
     ws.width = c.skirtRadius * c.warpWidth;
-    ws.height = Math.max(0.2, height * c.warpHeight);
+    ws.height = Math.max(0.2, drawn * c.warpHeight);
     ws.strength = Math.min(1, rise) * (1 - collapse);
     ws.seed = this._seed;
     this.warpMaterial.userData.sync(ws);
     this.warp.position.set(centre.x, ws.height * 0.5, centre.z);
 
     // The light sits in the throat of the column.
-    this.position.set(centre.x, height * c.lightHeight, centre.z);
+    this.position.set(centre.x, drawn * c.lightHeight, centre.z);
 
     /* --- what the standing column keeps doing --- */
     // `strength` falls as the bottom is eaten, so the dust is shed rather than
     // switched off.
     const strength = Math.min(1, rise) * (1 - collapse);
-    if (strength > 0.01) this._columnFx(dt, centre, height, strength);
+    if (strength > 0.01) this._columnFx(dt, centre, drawn, strength);
 
     /* --- the bodies --- */
     if (this.phase === AbilityPhase.IMPACT) {
@@ -764,7 +848,7 @@ export class TempestSpiralAbility extends Ability {
     const time = frame.uTime.value;
     _pos.copy(centre).setY(Math.max(0.5, this._height * 0.35));
     _emit.position = _pos;
-    _emit.radius = c.baseRadius * 1.5;
+    _emit.radius = c.funnelFoot * 2;
     _emit.direction = _dir.set(0, 0.25, 0);
     _emit.speed = c.debrisFlingSpeed;
     _emit.speedVariance = 0.5;
@@ -821,7 +905,7 @@ export class TempestSpiralAbility extends Ability {
       _emit.position = _pos;
       // The swirl offset *is* the ball radius: puffs start round the foot of the
       // funnel and are wound outward by `skirtExpand`.
-      _emit.radius = Math.max(c.baseRadius * 1.6, c.skirtRadius * 0.55);
+      _emit.radius = Math.max(c.funnelFoot * 1.6, c.skirtRadius * 0.55);
       _emit.direction = _dir.set(0, 1, 0);
       _emit.speed = c.skirtSpeed * 0.25;
       _emit.speedVariance = 0.7;
@@ -838,12 +922,35 @@ export class TempestSpiralAbility extends Ability {
       this.dust.emit(puffs, _emit);
     }
 
+    /* layer 3b: the ground-contact cloud — dark dirt boiling round the foot,
+       low and dense, so the column is planted in something */
+    const boil = Math.round(this.footEmitter.tick(dt, c.footCloudRate * strength) * g.particleCount);
+    if (boil > 0) {
+      _pos.copy(centre).setY(Math.max(0.05, c.footCloudHeight * 0.4));
+      _emit.position = _pos;
+      _emit.radius = c.funnelFoot * c.footCloudSpread;
+      _emit.direction = _dir.set(0, 0.25, 0);
+      _emit.speed = c.skirtSpeed * 0.5;
+      _emit.speedVariance = 0.6;
+      _emit.spread = 0.9;
+      _emit.inherit = null;
+      _emit.anchor = centre;
+      _emit.size = c.footCloudSize;
+      _emit.sizeVariance = 0.45;
+      _emit.life = c.skirtLifetime * 0.7;
+      _emit.lifeVariance = 0.4;
+      _emit.spin = 0.8;
+      _emit.tint = null;
+      _emit.time = time;
+      this.dust.emit(boil, _emit);
+    }
+
     /* layer 4: debris orbiting up the column */
     const chips = Math.round(this.debrisEmitter.tick(dt, c.debrisRate * strength) * g.particleCount);
     if (chips > 0) {
       _pos.copy(centre).setY(0.2);
       _emit.position = _pos;
-      _emit.radius = c.baseRadius * 1.4;
+      _emit.radius = c.funnelFoot * 1.7;
       _emit.direction = _dir.set(0, 1, 0);
       _emit.speed = c.debrisClimb;
       _emit.speedVariance = 0.45;
@@ -909,7 +1016,7 @@ export class TempestSpiralAbility extends Ability {
     for (let n = 0; n < count; n++) {
       const v = Math.pow(Math.random(), 0.8);
       const a = Math.random() * TAU;
-      const r = (radiusOverride > 0 ? radiusOverride * lerp(0.4, 1, v) : this._funnelRadius(v)) * c.streakReach;
+      const r = (radiusOverride > 0 ? radiusOverride * lerp(0.4, 1, v) : this._visualRadius(v)) * c.streakReach;
       if (radiusOverride > 0) _axis.set(0, 0, 0);
       else this._swayAt(v, _axis);
       const ca = Math.cos(a);
@@ -930,6 +1037,7 @@ export class TempestSpiralAbility extends Ability {
     this.inner.visible = false;
     this.devil.visible = false;
     this.warp.visible = false;
+    this.scour.visible = false;
   }
 
   dispose() {
@@ -937,6 +1045,8 @@ export class TempestSpiralAbility extends Ability {
     this.funnelGeometry.dispose();
     this.devilGeometry.dispose();
     this.warpGeometry.dispose();
+    this.scourGeometry.dispose();
+    this.scourMaterial.dispose();
     this.outerMaterial.dispose();
     this.innerMaterial.dispose();
     this.devilMaterial.dispose();
@@ -994,6 +1104,20 @@ export function buildEditor(gui, c, Editor) {
   R(shape, c, 'wobble', 0, 0.6, 0.005, 'wall ripple');
   R(shape, c, 'wobbleScale', 0.1, 6, 0.01, 'ripple scale');
 
+  const drawn = funnel.addFolder('Drawn column (presentation)');
+  R(drawn, c, 'funnelHeight', 0.5, 12, 0.05, 'height (m)');
+  R(drawn, c, 'funnelFoot', 0.02, 3, 0.01, 'foot radius (m)');
+  R(drawn, c, 'funnelTop', 0.1, 8, 0.05, 'lip radius (m)');
+  R(drawn, c, 'funnelFlare', 0.2, 6, 0.01, 'how late it opens');
+  R(drawn, c, 'spiralBands', 0, 8, 1, 'spiral bands');
+  R(drawn, c, 'spiralTurns', -3, 3, 0.01, 'turns foot to lip');
+  R(drawn, c, 'spiralWidth', 0.02, 0.98, 0.01, 'band width');
+  R(drawn, c, 'spiralContrast', 0, 1, 0.01, 'band contrast');
+  R(drawn, c, 'spiralLight', 0, 1, 0.01, 'band sun-side lift');
+  R(drawn, c, 'spiralBulge', 0, 0.5, 0.005, 'band roll-out (× radius)');
+  R(drawn, c, 'throatDark', 0, 1, 0.01, 'dark inside the throat');
+  R(drawn, c, 'rimLight', 0, 3, 0.01, 'backlit edge');
+
   const shells = funnel.addFolder('Shells');
   R(shells, c, 'spin', -4, 4, 0.01, 'dust shell turns/second');
   R(shells, c, 'innerSpin', -6, 6, 0.01, 'wind shell turns/second');
@@ -1006,6 +1130,7 @@ export function buildEditor(gui, c, Editor) {
   R(bands, c, 'streak', 0.01, 1, 0.005, 'filament length (smaller = longer)');
   R(bands, c, 'bandFrequency', 0, 6, 0.01, 'bands per metre');
   R(bands, c, 'bandContrast', 0, 1, 0.01, 'band contrast');
+  R(bands, c, 'bandBulge', 0, 0.6, 0.005, 'band roll-out (× radius)');
   R(bands, c, 'filament', 0, 1, 0.01, 'filament carve');
   R(bands, c, 'filamentSharp', 0.2, 8, 0.05, 'filament tightness');
   R(bands, c, 'rimPower', 0.1, 6, 0.01, 'facing-ratio power');
@@ -1029,6 +1154,33 @@ export function buildEditor(gui, c, Editor) {
   look.addColor(c, 'colorFunnelTop').name('lip');
   look.addColor(c, 'colorFilament').name('filaments');
   look.addColor(c, 'colorWind').name('wind shell');
+  R(look, c, 'deepMix', 0, 1, 0.01, 'gaps fall to storm-dark');
+  R(look, c, 'outerDensity', 0.2, 4, 0.01, 'dust shell density');
+  R(look, c, 'bodyFloor', 0, 1, 0.01, 'dust shell least opacity');
+  R(look, c, 'sunLift', 0, 1, 0.01, 'sun-side lift of the band rolls');
+  R(look, c, 'innerDeepMix', 0, 1, 0.01, 'wind shell gaps darken');
+  R(look, c, 'bandDark', 0, 1, 0.01, 'dark between cloud bands');
+  look.addColor(c, 'colorFunnelDeep').name('storm-dark deep');
+
+  const scour = folder.addFolder('3b · Scoured floor');
+  R(scour, c, 'scourRadius', 0.2, 3, 0.01, 'radius (× skirt)');
+  R(scour, c, 'scourGrowTime', 0.05, 3, 0.01, 'spreads over (s)');
+  R(scour, c, 'scourOpacity', 0, 1, 0.01, 'opacity');
+  R(scour, c, 'scourWind', -6, 6, 0.05, 'groove winding');
+  R(scour, c, 'scourGrooves', 1, 60, 0.5, 'grooves');
+  R(scour, c, 'scourGrooveDepth', 0, 2, 0.01, 'groove relief');
+  R(scour, c, 'scourBowl', 0, 1, 0.01, 'scoured bowl (× radius)');
+  R(scour, c, 'scourGrit', 0, 1, 0.01, 'grit flecks');
+  R(scour, c, 'scourLipGlow', 0, 3, 0.01, 'grit lip');
+  R(scour, c, 'scourLift', 0, 0.1, 0.001, 'lift off floor (m)');
+  R(scour, c, 'scourHold', 0, 1, 0.01, 'survives the collapse for');
+  R(scour, c, 'telegraphScour', 0, 1, 0.01, 'raked before arrival');
+  R(scour, c, 'telegraphDust', 0, 300, 1, 'dust drawn in before arrival /s');
+  R(scour, c, 'telegraphRadius', 0.1, 2, 0.01, 'gather radius (× skirt)');
+  scour.addColor(c, 'colorScourDeep').name('gouged');
+  scour.addColor(c, 'colorScourBody').name('raked dirt');
+  scour.addColor(c, 'colorScourTint').name('grit');
+  scour.addColor(c, 'colorScourLip').name('lip');
 
   const skirt = folder.addFolder('3 · Dust skirt');
   R(skirt, c, 'skirtRadius', 0.2, 8, 0.05, 'spread (m)');
@@ -1044,6 +1196,11 @@ export function buildEditor(gui, c, Editor) {
   R(skirt, c, 'ringInterval', 0.05, 2, 0.01, 'dust ring every (s)');
   R(skirt, c, 'ringLife', 0.1, 5, 0.05, 'dust ring life');
   R(skirt, c, 'ringIntensity', 0, 2, 0.01, 'dust ring strength');
+  R(skirt, c, 'dustSoftFade', 0.01, 2, 0.01, 'dust soft fade (m)');
+  R(skirt, c, 'footCloudRate', 0, 600, 1, 'foot cloud puffs/second');
+  R(skirt, c, 'footCloudSize', 0.05, 4, 0.01, 'foot cloud puff size');
+  R(skirt, c, 'footCloudHeight', 0, 3, 0.01, 'foot cloud height (m)');
+  R(skirt, c, 'footCloudSpread', 0.2, 8, 0.05, 'foot cloud spread (× foot)');
   skirt.addColor(c, 'colorRingA').name('ring dark');
   skirt.addColor(c, 'colorRingB').name('ring light');
   Editor.gradient(skirt, c, 'colorDust', 'dust gradient');

@@ -49,9 +49,19 @@ const _up = new Vector3(0, 1, 0);
  * over the well — and then it **closes**, an iris contracting from the rim to
  * the eye; behind it the grid is drowned in ink with a few cold stars in it.
  * Whatever the wall passes is taken: knocked off its feet, drawn round and in
- * and down into the sheet. When the wall reaches the eye it is **pulled down
+ * and down into the sheet. At the eye a **pit** opens — pure black, it eats
+ * light, ringed by a thin hot ring of bent light — and it widens as the ink
+ * closes in; the wall closes to a churning ring round it (drawn: the
+ * swallow's own front still runs to the eye). Then the wall is **pulled down
  * the throat**, the well **springs shut** with a crack of violet light and a
- * spit of sparks, and a black ink stain is left on the floor to erode.
+ * spit of sparks — but not flat: a dent stays, and **lingers**, breathing as
+ * it relaxes, its ink still winding in spiral arms, motes spiralling into the
+ * shrinking pit and a thread of ink smoke breathed out of it — then the stain
+ * erodes from the rim in.
+ *
+ * Colour is a four-stop ramp carried by the deep tones: near-black ink and
+ * sheet, a saturated violet body on the lit far wall of the bowl, pale violet
+ * only on the front, crests and grid, white only in the photon ring.
  *
  * Not a black hole: there is no disc and no sphere. Everything happens *in the
  * floor*, and the darkness comes from outside in.
@@ -125,7 +135,8 @@ export class DarkMatterWellAbility extends Ability {
       ripplePhase: 0,
       reveal: 0,
       erode: 0,
-      seed: 0
+      seed: 0,
+      horizon: 0
     };
     this._curtainState = { center: this._centre, radius: 4, height: 0, drop: 0, flow: 0, seed: 0, fade: 1 };
     this._seedState = { center: new Vector3(), size: 0.4, seed: 0, fade: 1 };
@@ -260,6 +271,10 @@ export class DarkMatterWellAbility extends Ability {
     ws.front = 1;
     ws.reveal = 0;
     ws.erode = 0;
+    ws.horizon = 0;
+    this._shutOpen = 0;
+    this._shutHorizon = 0;
+    this.inkEmitter.reset();
     this._curtainState.seed = this._seed;
     this._curtainState.flow = 0;
     this._seedState.seed = this._seed;
@@ -421,19 +436,38 @@ export class DarkMatterWellAbility extends Ability {
     ws.ripplePhase += c.rippleSpeed * dt * g.animationSpeed;
     this._curtainState.flow += c.curtainFlow * dt * g.noiseSpeed;
 
-    /* the well */
+    /* the well — what is drawn; `_open` above stays the swallow's own */
+    const res = Math.max(0, c.residualSag);
+    let open = this._open;
+    let horizon = lerp(c.horizonMin, c.horizonMax, Easing.inOutQuad(sw)) * Math.min(1, sag);
+    if (t <= 1 && shut > 0) {
+      // Springs most of the way back — a dent stays, and the pit shrinks.
+      open = sag * (res + (1 - res) * spring);
+      horizon *= lerp(1, c.horizonLinger, Easing.outCubic(shut));
+      this._shutOpen = open;
+      this._shutHorizon = horizon;
+    } else if (t > 1) {
+      // The linger: the dent breathes as it relaxes, the pit closes, the ink turns.
+      const relax = 1 - Easing.inOutQuad(saturate(ft / 0.85));
+      const breathe = 1 + c.relaxWobble * Math.sin(TAU * c.relaxRate * this.age) * relax;
+      open = this._shutOpen * relax * breathe;
+      horizon = this._shutHorizon * (1 - smoothstep(0, 0.7, ft));
+    }
     ws.radius = R;
-    ws.open = this._open;
+    ws.open = open;
+    ws.horizon = horizon;
     ws.front = this._front;
     ws.reveal = reveal;
-    ws.erode = smoothstep(0.05, 1, ft);
+    ws.erode = smoothstep(0.35, 1, ft);
     this.well.visible = ws.erode < 0.999;
     this.wellMaterial.userData.sync(ws);
 
     /* the curtain: stands on the front, then down the throat */
     const cs = this._curtainState;
     const rise = Easing.outBack(saturate(tau / Math.max(0.05, c.riseTime)));
-    cs.radius = R * this._front + 0.05;
+    // Drawn, the wall stops short as a churning ring round the pit (the
+    // swallow's own front still runs to the eye).
+    cs.radius = R * Math.max(this._front, c.curtainMin) + 0.05;
     cs.height = c.curtainHeight * rise * (1 + c.curtainGrow * (1 - this._front));
     cs.drop = Easing.inCubic(col) * (cs.height + c.wellDepth);
     cs.fade = 1 - smoothstep(0.7, 1, col);
@@ -452,12 +486,14 @@ export class DarkMatterWellAbility extends Ability {
     ls.radius = R;
     ls.front = this._front;
     ls.strength = (t <= 1 ? sag * (1 - shut) : 0) + (shut > 0 && shut < 1 ? Math.sin(Math.PI * shut) * 0.8 : 0);
+    ls.strength += c.lingerLens * Math.max(0, open) * (t > 1 || shut > 0 ? 1 : 0);
     this.lens.visible = ls.strength > 0.01;
     this.lensMaterial.userData.sync(ls);
 
     /* particles */
     this._syncParticles();
     if (t <= 1 && col < 1) this._frontFx(dt, cs, 1 - col);
+    if (shut > 0 || t > 1) this._lingerFx(dt, horizon * R, Math.max(0, open), ws.erode);
 
     /* the swallow */
     if (t <= 1 && sw > 0 && !this._closed) this._capture();
@@ -509,6 +545,51 @@ export class DarkMatterWellAbility extends Ability {
         _emit.direction = _dir;
         this.motes.emit(1, _emit);
       }
+    }
+  }
+
+  /**
+   * The linger: motes spiral down into the shrinking pit and a thread of ink
+   * smoke is breathed back out of it while the dent relaxes.
+   */
+  _lingerFx(dt, pitR, open, erode) {
+    const c = settings[ID];
+    const g = settings.global;
+    const time = frame.uTime.value;
+    const R = c.zoneRadius;
+    const k = (1 - erode) * Math.min(1, open * 3 + 0.2);
+    const nMote = Math.round(this.moteEmitter.tick(dt, c.lingerMotes * k) * g.particleCount);
+    if (nMote > 0) {
+      this._resetEmit(time);
+      _emit.size = c.moteSize;
+      _emit.life = c.moteLife;
+      _emit.speed = c.moteSpeed * 0.8;
+      _emit.speedVariance = 0.4;
+      _emit.spread = 0.1;
+      for (let i = 0; i < nMote; i++) {
+        const a = Math.random() * TAU;
+        const r = R * (0.35 + 0.6 * Math.random());
+        _pos.set(this._centre.x + Math.cos(a) * r, 0.06, this._centre.z + Math.sin(a) * r);
+        _dir.set(-Math.cos(a) - Math.sin(a) * 0.9, -0.08, -Math.sin(a) + Math.cos(a) * 0.9);
+        _emit.position = _pos;
+        _emit.direction = _dir;
+        this.motes.emit(1, _emit);
+      }
+    }
+    const nInk = Math.round(this.inkEmitter.tick(dt, c.lingerSmoke * k) * g.particleCount);
+    if (nInk > 0) {
+      this._resetEmit(time);
+      _emit.anchor = this._centre;
+      _emit.size = c.inkSize * 0.8;
+      _emit.life = c.inkLife;
+      _emit.speed = 0.9;
+      _emit.spread = 0.35;
+      _emit.spin = 0.8;
+      _emit.direction = _up;
+      _emit.radius = Math.max(0.15, pitR);
+      _pos.copy(this._centre).setY(0.1);
+      _emit.position = _pos;
+      this.ink.emit(nInk, _emit);
     }
   }
 
@@ -729,6 +810,14 @@ export function buildEditor(gui, c, Editor) {
   const well = folder.addFolder('2 · Well');
   R(well, c, 'wellDepth', 0, 10, 0.05, 'depth (m)');
   R(well, c, 'throat', 0.03, 1, 0.01, 'throat width');
+  R(well, c, 'bowl', 0, 1, 0.01, 'broad bowl (share)');
+  R(well, c, 'bowlPower', 0.2, 6, 0.01, 'bowl roundness');
+  R(well, c, 'depthFalloff', 0, 4, 0.01, 'light dies with depth (1/m)');
+  R(well, c, 'wallLight', 0, 4, 0.01, 'far wall catches light');
+  R(well, c, 'residualSag', 0, 1, 0.01, 'dent kept after shut');
+  R(well, c, 'relaxWobble', 0, 1, 0.01, 'dent breathes');
+  R(well, c, 'relaxRate', 0, 6, 0.01, 'breaths/second');
+  R(well, c, 'lingerLens', 0, 3, 0.01, 'lens on the dent');
   R(well, c, 'openTime', 0.05, 3, 0.01, 'sags over (s)');
   R(well, c, 'gridRings', 1, 30, 1, 'grid rings');
   R(well, c, 'gridSpokes', 1, 72, 1, 'grid spokes');
@@ -742,6 +831,7 @@ export function buildEditor(gui, c, Editor) {
   R(well, c, 'rimGlow', 0, 10, 0.05, 'rim glow');
   R(well, c, 'closeTime', 0.05, 2, 0.01, 'springs shut over (s)');
   well.addColor(c, 'colorSheet').name('sheet');
+  well.addColor(c, 'colorBody').name('body');
   well.addColor(c, 'colorAbyss').name('abyss');
   well.addColor(c, 'colorGrid').name('grid');
 
@@ -753,12 +843,25 @@ export function buildEditor(gui, c, Editor) {
   R(dm, c, 'frontGlow', 0, 12, 0.05, 'front glow');
   R(dm, c, 'veinGlow', 0, 5, 0.05, 'vein glow');
   R(dm, c, 'inkStars', 0, 4, 0.05, 'stars in the ink');
+  R(dm, c, 'horizonMin', 0, 0.5, 0.005, 'pit as it starts (× radius)');
+  R(dm, c, 'horizonMax', 0, 0.6, 0.005, 'pit when closed (× radius)');
+  R(dm, c, 'horizonLinger', 0, 1, 0.01, 'pit kept after shut');
+  R(dm, c, 'photonGlow', 0, 12, 0.05, 'photon ring glow');
+  R(dm, c, 'photonWidth', 0.002, 0.1, 0.001, 'photon ring width');
+  R(dm, c, 'spiralArms', 1, 8, 1, 'spiral arms');
+  R(dm, c, 'spiralTight', 0, 5, 0.01, 'arms wind');
+  R(dm, c, 'spiralGlow', 0, 4, 0.01, 'arm glow');
+  R(dm, c, 'inkBody', 0, 3, 0.01, 'ink body on the upper wall');
+  R(dm, c, 'lingerMotes', 0, 800, 1, 'linger motes/second');
+  R(dm, c, 'lingerSmoke', 0, 200, 1, 'linger ink/second');
   dm.addColor(c, 'colorInk').name('ink');
   dm.addColor(c, 'colorVein').name('veins');
   dm.addColor(c, 'colorFront').name('front');
+  dm.addColor(c, 'colorPhoton').name('photon ring');
 
   const cur = folder.addFolder('4 · Curtain');
   R(cur, c, 'curtainHeight', 0.1, 6, 0.01, 'height (m)');
+  R(cur, c, 'curtainMin', 0, 0.8, 0.01, 'closes to (× radius)');
   R(cur, c, 'curtainGrow', 0, 3, 0.01, 'grows as it closes');
   R(cur, c, 'curtainLean', -0.5, 0.9, 0.01, 'crest leans in');
   R(cur, c, 'curtainSway', 0, 1.5, 0.01, 'sway (m)');

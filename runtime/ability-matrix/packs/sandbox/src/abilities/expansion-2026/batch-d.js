@@ -1,0 +1,50 @@
+/** The next-wave castables: one new Matrix Expansion cast per element, built to
+ * docs/castable-quality-standard.md. Registration is explicit, like batch C. */
+import * as CombustionDebt from './combustion-debt/index.js';
+import * as WintersBorrowedBreath from './winters-borrowed-breath/index.js';
+import * as SynapticOverride from './synaptic-override/index.js';
+import * as HydraulicMarionette from './hydraulic-marionette/index.js';
+import * as StrataExchange from './strata-exchange/index.js';
+import * as RefractionTribunal from './refraction-tribunal/index.js';
+import * as SkyhookDraft from './skyhook-draft/index.js';
+import * as ResonanceTheft from './resonance-theft/index.js';
+import * as SymbioticExchange from './symbiotic-exchange/index.js';
+import * as VenomMimicry from './venom-mimicry/index.js';
+import * as PhotonDoppel from './photon-doppel/index.js';
+import * as MartyrsAccord from './martyrs-accord/index.js';
+import * as VacuumGenesis from './vacuum-genesis/index.js';
+import * as EquivalenceEngine from './equivalence-engine/index.js';
+import * as UmbraExchange from './umbra-exchange/index.js';
+import * as ExistenceTax from './existence-tax/index.js';
+import * as HematiteArsenal from './hematite-arsenal/index.js';
+import * as CountermandSigil from './countermand-sigil/index.js';
+import * as FalseVictory from './false-victory/index.js';
+import * as TemporalMortgage from './temporal-mortgage/index.js';
+import * as ImpactDividend from './impact-dividend/index.js';
+import * as TrajectoryHijack from './trajectory-hijack/index.js';
+import * as SignalJack from './signal-jack/index.js';
+export const BATCH_D = Object.freeze([
+  { uid: 'matrix-expansion/combustion-debt', module: CombustionDebt },
+  { uid: 'matrix-expansion/winters-borrowed-breath', module: WintersBorrowedBreath },
+  { uid: 'matrix-expansion/synaptic-override', module: SynapticOverride },
+  { uid: 'matrix-expansion/hydraulic-marionette', module: HydraulicMarionette },
+  { uid: 'matrix-expansion/strata-exchange', module: StrataExchange },
+  { uid: 'matrix-expansion/refraction-tribunal', module: RefractionTribunal },
+  { uid: 'matrix-expansion/skyhook-draft', module: SkyhookDraft },
+  { uid: 'matrix-expansion/resonance-theft', module: ResonanceTheft },
+  { uid: 'matrix-expansion/symbiotic-exchange', module: SymbioticExchange },
+  { uid: 'matrix-expansion/venom-mimicry', module: VenomMimicry },
+  { uid: 'matrix-expansion/photon-doppel', module: PhotonDoppel },
+  { uid: 'matrix-expansion/martyrs-accord', module: MartyrsAccord },
+  { uid: 'matrix-expansion/vacuum-genesis', module: VacuumGenesis },
+  { uid: 'matrix-expansion/equivalence-engine', module: EquivalenceEngine },
+  { uid: 'matrix-expansion/umbra-exchange', module: UmbraExchange },
+  { uid: 'matrix-expansion/existence-tax', module: ExistenceTax },
+  { uid: 'matrix-expansion/hematite-arsenal', module: HematiteArsenal },
+  { uid: 'matrix-expansion/countermand-sigil', module: CountermandSigil },
+  { uid: 'matrix-expansion/false-victory', module: FalseVictory },
+  { uid: 'matrix-expansion/temporal-mortgage', module: TemporalMortgage },
+  { uid: 'matrix-expansion/impact-dividend', module: ImpactDividend },
+  { uid: 'matrix-expansion/trajectory-hijack', module: TrajectoryHijack },
+  { uid: 'matrix-expansion/signal-jack', module: SignalJack },
+]);

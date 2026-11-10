@@ -116,3 +116,40 @@ export function createMushroomGeometry({ sides = 18, stemRows = 9, capRows = 12,
   geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
   return geometry;
 }
+
+/**
+ * The seed pod's trail: a camera-facing strip of `segments + 1` rows.
+ *
+ * Each row is two vertices sharing a centre (`position`, rewritten by the
+ * ability every frame from the pod's lob — no metres live here), the flight
+ * tangent there (`aTangent`), how far back along the trail it is (`aAlong`,
+ * 0 at the pod, 1 at the tail) and which side it is (`aSide`, ±1). The vertex
+ * shader turns the pair into a ribbon facing the camera, so it reads at full
+ * width from any angle.
+ */
+export function createSporeTrailGeometry(segments = 40) {
+  const rows = segments + 1;
+  const position = new Float32Array(rows * 2 * 3);
+  const tangent = new Float32Array(rows * 2 * 3);
+  const along = new Float32Array(rows * 2);
+  const side = new Float32Array(rows * 2);
+  const index = [];
+  for (let i = 0; i < rows; i++) {
+    along[i * 2] = along[i * 2 + 1] = i / segments;
+    side[i * 2] = -1;
+    side[i * 2 + 1] = 1;
+    tangent[i * 6 + 2] = tangent[i * 6 + 5] = 1;
+    if (i < segments) {
+      const j = i * 2;
+      index.push(j, j + 1, j + 2, j + 1, j + 3, j + 2);
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new Float32BufferAttribute(position, 3));
+  geometry.setAttribute('aTangent', new Float32BufferAttribute(tangent, 3));
+  geometry.setAttribute('aAlong', new Float32BufferAttribute(along, 1));
+  geometry.setAttribute('aSide', new Float32BufferAttribute(side, 1));
+  geometry.setIndex(index);
+  geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
+  return geometry;
+}

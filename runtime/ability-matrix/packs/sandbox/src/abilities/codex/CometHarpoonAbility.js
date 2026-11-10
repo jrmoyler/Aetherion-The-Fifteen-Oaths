@@ -1,6 +1,13 @@
-import { Mesh, Quaternion, Vector3 } from 'three';
+import { DynamicDrawUsage, InstancedMesh, Matrix4, Mesh, Quaternion, Vector3 } from 'three';
 import { Ability } from '../Ability.js';
-import { createHarpoonGeometry, createCometGrid, createCometQuad, HARPOON_BUTT } from '../../assets/codex/CometHarpoonGeometry.js';
+import {
+  createHarpoonGeometry,
+  createCometGrid,
+  createCometQuad,
+  createCometNucleusGeometry,
+  createIceBladeGeometry,
+  HARPOON_BUTT
+} from '../../assets/codex/CometHarpoonGeometry.js';
 import {
   createHarpoonMaterial,
   createComaMaterial,
@@ -10,6 +17,7 @@ import {
   createTetherMaterial,
   createPetalMaterial,
   createCraterMaterial,
+  createIceSolidMaterial,
   MAX_PETALS
 } from '../../materials/codex/CometHarpoonMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -38,6 +46,14 @@ const _down = new Vector3(0, -1, 0);
 const _zAxis = new Vector3(0, 0, 1);
 const _q = new Quaternion();
 const _qRoll = new Quaternion();
+const _m = new Matrix4();
+const _zero = new Matrix4().makeScale(0, 0, 0);
+const _bx = new Vector3();
+const _by = new Vector3();
+const _bz = new Vector3();
+const _radial = new Vector3();
+const _tumble = new Vector3(0.3, 1, 0.2).normalize();
+const MAX_BLADES = MAX_PETALS * 2;
 
 /**
  * COMET HARPOON — Cosmic, line cast.
@@ -59,8 +75,20 @@ const _qRoll = new Quaternion();
  * dissolve from their tips, the tether frays away from the hand, the harpoon
  * dissolves butt-first and the crater cools.
  *
+ * **The comet has a body.** Impaled on the harpoon just behind the broadhead
+ * rides the *nucleus*: a 1.3 m lumpy, cratered, faceted lump of dirty comet
+ * ice, lit by the sun and casting a shadow, its forward face boiling white
+ * where it meets the wind. At the strike it is driven into the floor with the
+ * head and sits there, seams pulsing, while a lotus of **solid ice blades**
+ * (lit, faceted, deep navy to pale tip) heaves up round it under the
+ * ice-light petals; through the linger the blades turn and breathe and light
+ * runs out along the frost cracks while the frost creeps outward; then the
+ * blades melt from their tips and the nucleus sublimates away into vapour.
+ *
  * ## Layers (each a folder in the editor)
  *
+ *   0. **the nucleus** and **the blades** (`createIceSolidMaterial`,
+ *      `LAYER.WORLD`, cast shadows) — the solid comet ice.
  *   1. **the harpoon** (`createHarpoonMaterial`, `LAYER.WORLD`) — the solid.
  *   2. **the coma** (`createComaMaterial`) and its shimmer
  *      (`createCometLensMaterial`, `LAYER.DISTORTION`).
@@ -121,6 +149,30 @@ export class CometHarpoonAbility extends Ability {
     this.harpoon.matrixAutoUpdate = false;
     this.group.add(this.harpoon);
 
+    this.nucleusGeometry = createCometNucleusGeometry();
+    this.nucleusMaterial = createIceSolidMaterial('nucleus');
+    this.nucleus = new Mesh(this.nucleusGeometry, this.nucleusMaterial);
+    this.nucleus.layers.set(LAYER.WORLD);
+    this.nucleus.castShadow = true;
+    this.nucleus.visible = false;
+    this.nucleus.frustumCulled = false;
+    this.group.add(this.nucleus);
+
+    this.bladeGeometry = createIceBladeGeometry();
+    this.bladeMaterial = createIceSolidMaterial('blade');
+    this.blades = new InstancedMesh(this.bladeGeometry, this.bladeMaterial, MAX_BLADES);
+    this.blades.instanceMatrix.setUsage(DynamicDrawUsage);
+    this.blades.layers.set(LAYER.WORLD);
+    this.blades.castShadow = true;
+    this.blades.visible = false;
+    this.blades.frustumCulled = false;
+    this.blades.count = 0;
+    this.group.add(this.blades);
+    this._nucleusState = { fwd: new Vector3(0, 0, 1), heat: 1, pulse: 0, dissolve: 0, seed: 0 };
+    this._bladeState = { heat: 1, pulse: 0, dissolve: 0, seed: 0 };
+    this._nucleusAt = new Vector3();
+    this._tumbleQ = new Quaternion();
+
     this.dustTailMaterial = createDustTailMaterial();
     this.dustTail = this._mesh(this.ribbonGeometry, this.dustTailMaterial, LAYER.VFX, 10);
     this.ionTailMaterial = createIonTailMaterial();
@@ -149,7 +201,7 @@ export class CometHarpoonAbility extends Ability {
     this._dustState = { head: new Vector3(), back: new Vector3(), bendDir: new Vector3(), length: 1, power: 1, flow: 0, seed: 0 };
     this._tetherState = { a: new Vector3(), b: new Vector3(), sag: 0.5, wave: 0, waveMul: 1, flow: 0, power: 1, fray: 0, taut: 0, seed: 0 };
     this._petalState = { center: new Vector3(), open: 0, scale: 0, spin: 0, power: 1, dissolve: 0, seed: 0 };
-    this._craterState = { center: new Vector3(), grow: 0, heat: 1, fadeT: 0, seed: 0 };
+    this._craterState = { center: new Vector3(), grow: 0, heat: 1, fadeT: 0, creep: 0, pulse: 0, seed: 0 };
 
     this._seed = 0;
     this._roll = 0;
@@ -274,6 +326,60 @@ export class CometHarpoonAbility extends Ability {
     this._butt.copy(tip).add(_a);
   }
 
+  /**
+   * The nucleus, impaled just behind the broadhead: centred `nucleusOffset`
+   * back along the shaft, tumbling slowly about its own axis, scaled by
+   * `nucleusSize × shrink`.
+   */
+  _poseNucleus(tip, fwd, shrink) {
+    const c = settings[ID];
+    const s = Math.max(0.05, c.harpoonScale);
+    const r = Math.max(0.02, c.nucleusSize * s * shrink);
+    this._nucleusAt.copy(tip).addScaledVector(fwd, -c.nucleusOffset * s);
+    const n = this.nucleus;
+    _q.setFromUnitVectors(_zAxis, fwd);
+    n.quaternion.copy(_q).multiply(this._tumbleQ);
+    n.position.copy(this._nucleusAt);
+    n.scale.set(r, r, r);
+    n.updateMatrix();
+    n.updateMatrixWorld(true);
+    this._nucleusState.fwd.copy(fwd);
+  }
+
+  /** The lotus of solid ice blades round the strike. */
+  _poseBlades(open, scale, sink) {
+    const c = settings[ID];
+    const g = settings.global;
+    const count = Math.max(1, Math.min(MAX_PETALS, Math.round(c.petals)));
+    const rows = c.innerPetals >= 0.5 ? 2 : 1;
+    const ctr = this._strike;
+    let k = 0;
+    for (let row = 0; row < rows; row++) {
+      for (let i = 0; i < count; i++, k++) {
+        const az = (TAU * (i + row * 0.5)) / count + this._spin;
+        const tilt = open * c.bladeOpen * (row ? c.bladeInnerOpen : 1) * (1 + c.bladeJitter * Math.sin(i * 7.31 + this._seed));
+        const L = c.petalLength * c.bladeLength * g.explosionIntensity * (row ? 0.65 : 1) * scale * (0.9 + 0.2 * Math.abs(Math.sin(i * 3.7 + this._seed)));
+        const W = c.bladeWidth * g.explosionIntensity * (row ? 0.8 : 1) * scale;
+        if (L <= 0.01) {
+          this.blades.setMatrixAt(k, _zero);
+          continue;
+        }
+        _radial.set(Math.cos(az), 0, Math.sin(az));
+        // Blade frame: y along the spine (tilted out from vertical), x outward.
+        _by.set(0, Math.cos(tilt), 0).addScaledVector(_radial, Math.sin(tilt));
+        _bx.copy(_radial).multiplyScalar(Math.cos(tilt)).add(_a.set(0, -Math.sin(tilt), 0));
+        _bz.crossVectors(_bx, _by);
+        _m.makeBasis(_bx.multiplyScalar(W), _by.multiplyScalar(L), _bz.multiplyScalar(W));
+        _pos.copy(ctr).addScaledVector(_radial, c.bladeRoot * (row ? 0.5 : 1));
+        _pos.y = -c.bladeSink - sink * L;
+        _m.setPosition(_pos);
+        this.blades.setMatrixAt(k, _m);
+      }
+    }
+    this.blades.count = k;
+    this.blades.instanceMatrix.needsUpdate = true;
+  }
+
   /* ------------------------------------------------------------------ */
   /* Casting                                                             */
   /* ------------------------------------------------------------------ */
@@ -304,7 +410,20 @@ export class CometHarpoonAbility extends Ability {
     this._craterState.seed = this._seed;
     this._craterState.grow = 0;
     this._craterState.fadeT = 0;
+    this._craterState.creep = 0;
+    this._craterState.pulse = 0;
     this._lensState.ring = -1;
+    this._nucleusState.seed = this._seed;
+    this._nucleusState.dissolve = 0;
+    this._nucleusState.pulse = 0;
+    this._nucleusState.heat = 1;
+    this._bladeState.seed = this._seed;
+    this._bladeState.dissolve = 0;
+    this._bladeState.pulse = 0;
+    this._tumbleQ.identity();
+    this.nucleus.visible = true;
+    this.blades.visible = false;
+    this.blades.count = 0;
 
     this.harpoon.visible = true;
     this.coma.visible = true;
@@ -317,6 +436,7 @@ export class CometHarpoonAbility extends Ability {
 
     this._flight(0, this._tip, this._fwd);
     this._poseHarpoon(this._tip, this._fwd, 0);
+    this._poseNucleus(this._tip, this._fwd, 0.2);
     this._syncFlight(1, 1);
     this._syncAll();
   }
@@ -329,6 +449,8 @@ export class CometHarpoonAbility extends Ability {
     this._beads += c.tetherFlow * dt * g.animationSpeed;
     this._wave += 7 * dt * g.animationSpeed;
     this._spin += c.petalSpin * dt * g.animationSpeed;
+    _qRoll.setFromAxisAngle(_tumble, c.nucleusTumble * dt * g.animationSpeed);
+    this._tumbleQ.multiply(_qRoll);
   }
 
   /** Coma, tails, tether and lens off the harpoon's current pose. */
@@ -336,7 +458,7 @@ export class CometHarpoonAbility extends Ability {
     const c = settings[ID];
     const s = Math.max(0.05, c.harpoonScale);
     // The head: just behind the tip, where the coma sits.
-    _pos.copy(this._tip).addScaledVector(this._fwd, -0.3 * s);
+    _pos.copy(this._tip).addScaledVector(this._fwd, -c.nucleusOffset * s);
 
     const cs = this._comaState;
     cs.center.copy(_pos);
@@ -377,6 +499,8 @@ export class CometHarpoonAbility extends Ability {
     const c = settings[ID];
     const g = settings.global;
     this.harpoonMaterial.userData.sync(this._harpoonState);
+    this.nucleusMaterial.userData.sync(this._nucleusState);
+    this.bladeMaterial.userData.sync(this._bladeState);
     this.comaMaterial.userData.sync(this._comaState);
     this.lensMaterial.userData.sync(this._lensState);
     this.ionTailMaterial.userData.sync(this._ionState);
@@ -445,6 +569,8 @@ export class CometHarpoonAbility extends Ability {
     this._poseHarpoon(this._tip, this._fwd, 0);
     // The comet catches as it leaves the hand.
     const kindle = smoothstep(0, 0.12, this.age);
+    this._poseNucleus(this._tip, this._fwd, 0.35 + 0.65 * smoothstep(0, 0.18, this.age));
+    this._nucleusState.heat = 1;
     this._syncFlight(kindle, kindle);
     const ts = this._tetherState;
     ts.sag = c.tetherSag * (0.4 + 0.6 * this.u);
@@ -513,6 +639,7 @@ export class CometHarpoonAbility extends Ability {
     this._craterState.center.copy(this._strike);
     this.petals.visible = true;
     this.crater.visible = true;
+    this.blades.visible = true;
 
     _floor.copy(this._strike);
     this.ctx.bursts.spawn(BurstMode.FROST, _floor, {
@@ -520,7 +647,7 @@ export class CometHarpoonAbility extends Ability {
       endRadius: c.burstSize * power,
       life: 0.6,
       intensity: c.burstIntensity,
-      opacity: 0.65,
+      opacity: 0.4,
       fresnel: 2,
       displace: 0.35,
       turbulence: 1.1,
@@ -540,9 +667,9 @@ export class CometHarpoonAbility extends Ability {
     this.ctx.decals.spawn(DecalType.FROST, _floor, {
       radius: c.craterRadius * 1.1 * power,
       life: this.impactDuration + this.fadeDuration,
-      intensity: 0.9,
-      colorA: getColor(c.colorCrack),
-      colorB: getColor(c.colorCrackHot)
+      intensity: c.frostDecal,
+      colorA: getColor(c.colorIceBody),
+      colorB: getColor(c.colorCrack)
     });
 
     // Ice sparks thrown up and out of the strike.
@@ -598,6 +725,9 @@ export class CometHarpoonAbility extends Ability {
       this._fwd.copy(this._strikeFwd);
       const quiver = c.quiverAmp * DEG * Math.exp(-tau * c.quiverDecay) * Math.sin(tau * c.quiverFreq);
       this._poseHarpoon(this._tip, this._fwd, quiver);
+      this._poseNucleus(this._tip, this._fwd, 1 - c.nucleusSquash * Math.exp(-tau * 8) * Math.sin(Math.min(Math.PI, tau * 20)));
+      this._nucleusState.heat = 1;
+      this._nucleusState.pulse = smoothstep(0.1, 0.5, tau);
 
       // The tails collapse into the strike; the coma flares and goes out.
       const shrink = 1 - Easing.outCubic(saturate(tau / Math.max(0.02, c.tailShrink)));
@@ -634,7 +764,17 @@ export class CometHarpoonAbility extends Ability {
       ps.dissolve = 0;
       cr.grow = Easing.outCubic(saturate(tau / Math.max(0.02, c.crackGrowTime)));
       cr.heat = 1;
+      cr.creep = saturate(tau / Math.max(0.1, this.impactDuration / Math.max(0.01, g.lifetime)));
+      cr.pulse = smoothstep(c.crackGrowTime, c.crackGrowTime + 0.2, tau);
       this._harpoonState.heat = 1;
+      // The blades heave up just behind the petals and breathe while they hold.
+      const bk = saturate((tau - c.bladeDelay) / Math.max(0.05, c.bladeGrowTime));
+      const breathe = 1 + c.bladeBreathe * Math.sin(tau * c.bladeBreatheRate) * smoothstep(0.6, 1, bk);
+      this._poseBlades(ps.open * breathe, bk <= 0 ? 0 : Easing.outBack(bk), 0);
+      const bs = this._bladeState;
+      bs.heat = 1;
+      bs.pulse = smoothstep(0.5, 1, bk);
+      bs.dissolve = 0;
 
       this._syncAll();
       this._petalFx(dt, 1);
@@ -661,6 +801,21 @@ export class CometHarpoonAbility extends Ability {
     ps.scale = 1;
     ps.dissolve = smoothstep(0, 0.75, ft);
     this.petals.visible = ps.dissolve < 1;
+    // The blades melt from their tips and sink; the nucleus sublimates.
+    this._poseBlades(c.petalOpen * DEG * (1 + 0.15 * ft), 1, smoothstep(0.4, 1, ft) * 0.35);
+    const bs = this._bladeState;
+    bs.heat = 1 - ft * 0.7;
+    bs.pulse = 1 - ft;
+    bs.dissolve = smoothstep(0.1, 0.95, ft);
+    this.blades.visible = bs.dissolve < 1;
+    const ns = this._nucleusState;
+    ns.heat = 1 - ft * 0.6;
+    ns.pulse = 1;
+    ns.dissolve = smoothstep(0.25, 1, ft);
+    this._poseNucleus(this._tip, this._strikeFwd, 1 - 0.35 * ft);
+    this.nucleus.visible = ns.dissolve < 1;
+    cr.creep = 1 + ft * 0.3;
+    cr.pulse = 1 - ft;
     const hs = this._harpoonState;
     hs.heat = 1 - ft;
     hs.dissolve = smoothstep(0.5, 1, ft);
@@ -669,7 +824,27 @@ export class CometHarpoonAbility extends Ability {
     cr.fadeT = smoothstep(0.4, 1, ft);
     this._syncAll();
     if (ps.dissolve < 1) this._petalFx(dt, 1 - ps.dissolve);
+    this._sublimate(dt, 1 - ns.dissolve);
     this.position.copy(this._strike).setY(0.8);
+  }
+
+  /** Vapour boiling off the embedded nucleus as it sublimates. */
+  _sublimate(dt, strength) {
+    const c = settings[ID];
+    const g = settings.global;
+    if (strength <= 0) return;
+    const n = Math.round(this.vaporEmitter.tick(dt, c.sublimateRate * strength) * g.particleCount);
+    if (n <= 0) return;
+    this._resetEmit(frame.uTime.value);
+    _emit.position = this._nucleusAt;
+    _emit.radius = c.nucleusSize * Math.max(0.05, c.harpoonScale) * 0.8;
+    _emit.direction = _up;
+    _emit.speed = c.vaporLift * 1.4;
+    _emit.spread = 0.6;
+    _emit.size = c.vaporSize * 0.8;
+    _emit.life = c.vaporLife * 0.8;
+    _emit.spin = 0.4;
+    this.vapor.emit(n, _emit);
   }
 
   /** Motes of ice-light shed off the petals' rims. */
@@ -770,6 +945,9 @@ export class CometHarpoonAbility extends Ability {
     this.tether.visible = false;
     this.petals.visible = false;
     this.crater.visible = false;
+    this.nucleus.visible = false;
+    this.blades.visible = false;
+    this.blades.count = 0;
   }
 
   dispose() {
@@ -785,6 +963,11 @@ export class CometHarpoonAbility extends Ability {
     this.tetherMaterial.dispose();
     this.petalMaterial.dispose();
     this.craterMaterial.dispose();
+    this.nucleusGeometry.dispose();
+    this.nucleusMaterial.dispose();
+    this.bladeGeometry.dispose();
+    this.bladeMaterial.dispose();
+    this.blades.dispose();
     super.dispose();
   }
 }
@@ -833,6 +1016,35 @@ export function buildEditor(gui, c, Editor) {
   hp.addColor(c, 'colorHarpoonIce').name('ice');
   hp.addColor(c, 'colorHarpoonHead').name('head');
   hp.addColor(c, 'colorHarpoonGold').name('barbs & eye');
+
+  const ice = folder.addFolder('2b · The nucleus & the ice blades');
+  R(ice, c, 'nucleusSize', 0.05, 2, 0.01, 'nucleus radius (m)');
+  R(ice, c, 'nucleusOffset', 0, 2, 0.01, 'behind the tip (m)');
+  R(ice, c, 'nucleusTumble', -6, 6, 0.01, 'tumbles (rad/s)');
+  R(ice, c, 'nucleusSquash', 0, 0.6, 0.01, 'squash at the strike');
+  R(ice, c, 'nucleusSeamScale', 0.2, 10, 0.05, 'nucleus seam scale');
+  R(ice, c, 'nucleusSeamGlow', 0, 6, 0.05, 'nucleus seam glow');
+  R(ice, c, 'sublimateRate', 0, 120, 1, 'vapour off it (/s)');
+  R(ice, c, 'bladeLength', 0.1, 2, 0.01, 'blade length (× petal length)');
+  R(ice, c, 'bladeWidth', 0.02, 1, 0.005, 'blade half-width (m)');
+  R(ice, c, 'bladeRoot', 0, 2, 0.01, 'rooted out from the strike (m)');
+  R(ice, c, 'bladeSink', 0, 1, 0.01, 'root below the floor (m)');
+  R(ice, c, 'bladeOpen', 0, 1.5, 0.01, 'blades open (× petal angle)');
+  R(ice, c, 'bladeInnerOpen', 0, 1.5, 0.01, 'inner row opens (×)');
+  R(ice, c, 'bladeJitter', 0, 0.5, 0.01, 'tilt jitter');
+  R(ice, c, 'bladeDelay', 0, 1, 0.01, 'heave up after (s)');
+  R(ice, c, 'bladeGrowTime', 0.05, 1.5, 0.01, 'heave up over (s)');
+  R(ice, c, 'bladeBreathe', 0, 0.5, 0.005, 'breathe (± open)');
+  R(ice, c, 'bladeBreatheRate', 0, 12, 0.05, 'breath rate (rad/s)');
+  R(ice, c, 'bladeSeamScale', 0.2, 10, 0.05, 'blade seam scale');
+  R(ice, c, 'bladeSeamGlow', 0, 6, 0.05, 'blade seam glow');
+  R(ice, c, 'iceFresnel', 0, 4, 0.01, 'ice rim');
+  R(ice, c, 'iceSpecular', 0, 4, 0.01, 'ice specular');
+  R(ice, c, 'iceAmbient', 0, 1, 0.01, 'ice ambient');
+  ice.addColor(c, 'colorIceCore').name('ice core (hot)');
+  ice.addColor(c, 'colorIceTint').name('ice tint');
+  ice.addColor(c, 'colorIceBody').name('ice body');
+  ice.addColor(c, 'colorIceDeep').name('ice deep');
 
   const coma = folder.addFolder('3 · The coma');
   R(coma, c, 'comaSize', 0.1, 5, 0.01, 'radius (m)');
@@ -903,6 +1115,9 @@ export function buildEditor(gui, c, Editor) {
   R(crater, c, 'crackGlow', 0, 10, 0.05, 'crack glow');
   R(crater, c, 'craterRingGlow', 0, 10, 0.05, 'ring glow');
   R(crater, c, 'coolCurve', 0.1, 5, 0.01, 'holds glow');
+  R(crater, c, 'frostDecal', 0, 1.5, 0.01, 'frost decal');
+  R(crater, c, 'frostCreep', 0, 2, 0.01, 'frost creeps out (× radius)');
+  R(crater, c, 'crackPulse', 0, 2, 0.01, 'light runs along cracks');
   crater.addColor(c, 'colorCrackHot').name('crack hot');
   crater.addColor(c, 'colorCrack').name('crack');
   crater.addColor(c, 'colorCraterRing').name('ring');

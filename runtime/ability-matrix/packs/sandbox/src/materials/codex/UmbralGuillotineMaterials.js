@@ -23,7 +23,13 @@ import { BLADE_R, BLADE_BELLY } from '../../assets/codex/UmbralGuillotineGeometr
  *    the arc the edge has just cut, brightest along the edge's own track and
  *    at the leading end. Its twin on `LAYER.DISTORTION` shoves the air aside.
  *  - **the cleft** — the cut the chop leaves in the floor: a ragged black
- *    gash with burning violet lips and cracks running off it.
+ *    gash with burning violet lips and cracks running off it. The same
+ *    shader cuts the shorter slashes the edge scores across the line at the
+ *    bottom of each swing (per-mesh length, width and glow).
+ *  - **the shadow pool** (`createShadowPoolMaterial`) — the linger's body: a
+ *    disc of near-black shadow that spills out of the cleft, its edge a
+ *    crawl of fbm tendrils, violet veins swirling inward through it toward
+ *    the buried blade. Normal-blended so it *eats* the floor's light.
  *
  * Every material reads `settings.umbral` in `userData.sync(state)`.
  */
@@ -531,7 +537,8 @@ const CLEFT_FRAGMENT = /* glsl */ `
     float crack = pow(max(1.0 - abs(snoise(vec3(vC * 2.2, uSeed + 4.0))), 0.0), 14.0) * exp(-y / max(uGash * 3.0, 0.05)) * taper;
 
     vec3 col = uColorVoid * inside;
-    col += uColorLip * lip * uGlow * uHeat;
+    // Lips on the ramp: violet body, white only on the hottest line.
+    col += mix(uColorCrack, uColorLip, smoothstep(0.7, 1.0, lip) * uHeat) * lip * uGlow * uHeat;
     col += uColorCrack * crack * uGlow * 0.5 * uHeat;
     float a = max(inside, max(lip * uHeat, crack * 0.8));
     float n = snoise(vec3(vC * 1.7, uSeed * 3.0)) * 0.5 + 0.5;
@@ -582,18 +589,151 @@ export function createCleftMaterial() {
     const u = material.uniforms;
     u.uCenter.value.copy(s.center);
     u.uAxis.value.copy(s.axis);
-    u.uHalfLength.value = Math.max(0.1, c.cleftLength * 0.5);
-    u.uHalfWidth.value = Math.max(0.1, c.cleftWidth * 4);
-    u.uGash.value = c.cleftWidth;
+    // The chop's cleft reads its own keys; the swing's slashes pass theirs.
+    const gash = s.gash ?? c.cleftWidth;
+    u.uHalfLength.value = Math.max(0.1, s.halfLength ?? c.cleftLength * 0.5);
+    u.uHalfWidth.value = Math.max(0.1, gash * 4);
+    u.uGash.value = gash;
     u.uSeed.value = s.seed;
     u.uOpen.value = s.open;
-    u.uGlow.value = c.cleftGlow * g.glow;
+    u.uGlow.value = (s.glow ?? c.cleftGlow) * g.glow;
     u.uHeat.value = s.heat;
     u.uErode.value = s.erode;
     u.uOpacity.value = g.opacity;
     u.uColorVoid.value.copy(getColor(c.colorCleft));
     u.uColorLip.value.copy(getColor(c.colorEdge));
     u.uColorCrack.value.copy(getColor(c.colorRim));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The shadow pool                                                      */
+/* -------------------------------------------------------------------- */
+
+const POOL_VERTEX = /* glsl */ `
+  uniform vec3  uCenter;
+  uniform float uRadius;
+  varying vec2 vP;            // metres from the centre, on the floor
+
+  void main() {
+    vec3 world = uCenter + vec3(position.x, 0.0, position.y) * uRadius;
+    world.y = 0.012;
+    vP = position.xy * uRadius;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const POOL_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uSeed;
+  uniform float uRadius;
+  uniform float uSpread;      // 0..1 how far it has spilled
+  uniform float uErode;       // 0..1 drying off in the exit
+  uniform float uSwirl;       // radians/second the veins turn
+  uniform float uVeins;
+  uniform float uGlow;
+  uniform float uPulse;
+  uniform float uOpacity;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorVein;
+  uniform vec3  uColorRim;
+  uniform float uGlobalGlow;
+
+  varying vec2 vP;
+
+  ${noiseGLSL}
+
+  void main() {
+    float r = length(vP);
+    float ang = atan(vP.y, vP.x);
+    // The rim crawls: fbm tendrils that keep moving outward and round.
+    vec3 rq = vec3(cos(ang) * 1.6, sin(ang) * 1.6, uTime * 0.45 + uSeed);
+    float tend = fbm3(rq) * 0.5 + 0.5;
+    float R = uRadius * uSpread * (0.62 + 0.42 * tend);
+    float inside = 1.0 - smoothstep(R - 0.35, R, r);
+    if (inside < 0.003) discard;
+
+    // Swirled coordinates: the veins turn and are drawn in toward the centre.
+    float a2 = ang + uTime * uSwirl + 1.4 / (0.6 + r);
+    vec2 sw = vec2(cos(a2), sin(a2)) * r;
+    vec3 q = vec3(sw * 0.75, r * 0.9 + uTime * 0.8 + uSeed * 2.0);
+    float vein = pow(max(1.0 - abs(snoise(q)), 0.0), 9.0);
+    float vein2 = pow(max(1.0 - abs(snoise(q * 2.1 + 5.0)), 0.0), 14.0);
+    float mottled = fbm3(vec3(sw * 0.5, uTime * 0.3 + uSeed)) * 0.5 + 0.5;
+
+    float rn = r / max(uRadius, 0.01);
+    vec3 col = mix(uColorDeep, uColorBody, mottled * 0.6 * smoothstep(0.0, 0.7, rn));
+    float v = (vein + vein2 * 0.6) * uVeins * (0.65 + 0.35 * uPulse);
+    col += mix(uColorVein, uColorRim, smoothstep(0.5, 1.0, vein2)) * v * uGlow;
+    // The lip of the pool: a violet glow where shadow meets floor.
+    float lip = exp(-pow((r - R) / 0.28, 2.0));
+    col += uColorVein * lip * uGlow * (0.5 + 0.5 * uPulse);
+
+    float alpha = inside * mix(0.96, 0.75, smoothstep(0.5, 1.0, rn));
+    float n = snoise(vec3(vP * 1.3, uSeed * 3.0)) * 0.5 + 0.5;
+    float thr = uErode * 1.25 - 0.15;
+    alpha *= uErode <= 0.0 ? 1.0 : smoothstep(thr, thr + 0.12, n * 0.7 + (1.0 - rn) * 0.3);
+    alpha = max(alpha, lip * 0.6 * (1.0 - uErode));
+    alpha *= uOpacity;
+    if (alpha < 0.004) discard;
+    gl_FragColor = vec4(col * uGlobalGlow, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+/** The pool of shadow the chop spills — the linger's body. */
+export function createShadowPoolMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+    polygonOffsetUnits: -2,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uRadius: { value: 3 },
+      uSeed: { value: 0 },
+      uSpread: { value: 0 },
+      uErode: { value: 0 },
+      uSwirl: { value: 0.5 },
+      uVeins: { value: 1 },
+      uGlow: { value: 2 },
+      uPulse: { value: 0 },
+      uOpacity: { value: 1 },
+      uColorDeep: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorVein: { value: new Color() },
+      uColorRim: { value: new Color() }
+    }),
+    vertexShader: POOL_VERTEX,
+    fragmentShader: POOL_FRAGMENT
+  });
+
+  /** @param {object} s { center, radius, spread, erode, pulse, seed } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(s.center);
+    u.uRadius.value = Math.max(0.1, s.radius);
+    u.uSeed.value = s.seed;
+    u.uSpread.value = s.spread;
+    u.uErode.value = s.erode;
+    u.uSwirl.value = c.poolSwirl * g.noiseSpeed;
+    u.uVeins.value = c.poolVeins;
+    u.uGlow.value = c.poolGlow * g.glow;
+    u.uPulse.value = s.pulse;
+    u.uOpacity.value = c.poolOpacity * g.opacity;
+    u.uColorDeep.value.copy(getColor(c.colorPoolDeep));
+    u.uColorBody.value.copy(getColor(c.colorPoolBody));
+    u.uColorVein.value.copy(getColor(c.colorPoolVein));
+    u.uColorRim.value.copy(getColor(c.colorRim));
   };
 
   return material;

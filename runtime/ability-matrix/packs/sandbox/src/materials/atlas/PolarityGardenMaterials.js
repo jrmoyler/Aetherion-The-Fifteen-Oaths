@@ -391,7 +391,7 @@ export function createPolarityTetherMaterial() {
 
 /**
  * The instant a capsule goes: a camera-facing star with `uSpikes` hard
- * spikes, a white core and a polarity-tinted halo, all collapsing over its
+ * spikes in the pole colour round a near-black heart (white only as a first-instant pinpoint), all collapsing over its
  * short life. Instanced; per instance `aCentre` and `aFlare = (age 0..1,
  * size, polarity, seed)`.
  */
@@ -415,6 +415,8 @@ const FLARE_VERTEX = /* glsl */ `
 const FLARE_FRAGMENT = /* glsl */ `
   uniform float uSpikes;
   uniform float uGlow;
+  uniform float uDark;
+  uniform float uHot;
   uniform vec3  uColorCore;
   uniform vec3  uColorPos;
   uniform vec3  uColorNeg;
@@ -431,14 +433,30 @@ const FLARE_FRAGMENT = /* glsl */ `
     float r = length(vLocal);
     float ang = atan(vLocal.y, vLocal.x) + vFlare.w * 6.2831853;
     float k = 1.0 - age;
-    float spikes = pow(abs(cos(ang * floor(uSpikes + 0.5) * 0.5)), 24.0) * (1.0 - smoothstep(0.0, k, r));
-    float core = exp(-r * r / max(0.02, 0.12 * k * k));
-    float halo = exp(-r * 3.5) * k;
     vec3 tint = vFlare.z > 0.0 ? uColorPos : uColorNeg;
-    vec3 color = uColorCore * (core * 2.0 + spikes) + tint * (halo + spikes * 0.4);
-    float a = clamp(core + spikes + halo, 0.0, 1.0) * k;
+
+    // A polarity-coloured burst with a dark heart, not a white star: the
+    // capsule's charge collapses inward (a near-black core disc), a ring of
+    // the pole's colour races out round it, and the spikes are the pole's
+    // colour too. White only as a pinpoint in the first instant.
+    float rr = mix(0.18, 0.82, sqrt(age));
+    float n = snoise(vec3(vLocal * 3.0, vFlare.w * 7.0 + age * 2.0));
+    float ring = exp(-pow((r - rr - n * 0.05) / (0.07 + 0.06 * age), 2.0)) * k;
+    float spikes = pow(abs(cos(ang * floor(uSpikes + 0.5) * 0.5)), 24.0) * (1.0 - smoothstep(rr * 0.6, rr + 0.25 * k, r)) * k;
+    float coreMask = (1.0 - smoothstep(rr * 0.55, rr * 0.95, r)) * smoothstep(0.0, 0.08, age) * (1.0 - age * age);
+    float hot = exp(-r * r / 0.006) * (1.0 - smoothstep(0.0, 0.22, age)) * uHot;
+    float halo = exp(-r * 4.0) * k * 0.3;
+
+    float glow = uGlow * uGlobalGlow;
+    vec3 pale = mix(tint, uColorCore, 0.35);
+    vec3 emit = tint * (ring * 1.7 + spikes * 1.1 + halo) * glow + pale * hot * 1.6;
+    float ea = clamp(ring + spikes + hot + halo, 0.0, 1.0);
+    vec3 dark = tint * 0.05 + vec3(0.012);
+    float da = coreMask * uDark;
+    float a = clamp(ea + da * (1.0 - ea), 0.0, 1.0);
     if (a < 0.003) discard;
-    gl_FragColor = vec4(color * uGlow * uGlobalGlow * k, a);
+    vec3 color = (emit * ea + dark * da * (1.0 - ea)) / max(a, 1e-3);
+    gl_FragColor = vec4(color, a);
   }
 `;
 
@@ -447,12 +465,14 @@ export function createPolarityFlareMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
       uSpikes: { value: 6 },
       uGlow: { value: 6 },
+      uDark: { value: 0.85 },
+      uHot: { value: 0.6 },
       uColorCore: { value: new Color() },
       uColorPos: { value: new Color() },
       uColorNeg: { value: new Color() }
@@ -467,6 +487,8 @@ export function createPolarityFlareMaterial() {
     const u = material.uniforms;
     u.uSpikes.value = c.flareSpikes;
     u.uGlow.value = c.flareGlow * g.glow * g.explosionIntensity;
+    u.uDark.value = c.flareDark ?? 0.85;
+    u.uHot.value = c.flareHot ?? 0.6;
     u.uColorCore.value.copy(getColor(c.colorFlareCore));
     u.uColorPos.value.copy(getColor(c.colorPositive));
     u.uColorNeg.value.copy(getColor(c.colorNegative));
@@ -581,6 +603,9 @@ const PLOT_FRAGMENT = /* glsl */ `
   uniform vec3  uColorNeg;
   uniform float uGlow;
   uniform float uGlobalGlow;
+  uniform float uContour;
+  uniform float uPoleRing;
+  uniform float uPoleGlow;
 
   varying vec2 vLocal;
 
@@ -609,10 +634,28 @@ const PLOT_FRAGMENT = /* glsl */ `
     contour *= 0.25;
     float r = length(vLocal);
     float disc = 1.0 - smoothstep(uRadius * 0.85, uRadius * 1.15, r);
+    contour *= uContour / 0.25;
     vec3 tint = mix(uColorNeg, uColorPos, smoothstep(-0.6, 0.6, potential));
+
+    // Each live pole stamps a halo on the floor: a hot ring and a soft core
+    // in its own polarity, pulsing outward, so the floor answers every plant.
+    vec3 halo = vec3(0.0);
+    for (int i = 0; i < MAX_POLES; i++) {
+      vec4 p = uPoles[i];
+      if (p.w <= 0.0) continue;
+      float d = length(vLocal - p.xy);
+      vec3 pc = p.z >= 0.0 ? uColorPos : uColorNeg;
+      float ring = exp(-pow((d - uPoleRing) / (uPoleRing * 0.12), 2.0));
+      float pulse = exp(-pow((d - uPoleRing * fract(uTime * 0.9 + p.x * 0.3) * 1.6) / (uPoleRing * 0.1), 2.0)) * 0.5;
+      float core = exp(-d * d / (uPoleRing * uPoleRing * 0.25));
+      halo += pc * (ring + pulse + core * 0.8) * p.w;
+    }
+    halo *= uPoleGlow;
+
     float light = (filings + contour) * disc * uStrength;
-    if (light < 0.003) discard;
-    gl_FragColor = vec4(tint * light * uGlow * uGlobalGlow, light);
+    float haloA = clamp(length(halo) * 0.5, 0.0, 1.0) * uStrength;
+    if (light + haloA < 0.003) discard;
+    gl_FragColor = vec4((tint * light * uGlow + halo * uStrength) * uGlobalGlow, clamp(light + haloA, 0.0, 1.0));
   }
 `;
 
@@ -632,7 +675,10 @@ export function createPolarityPlotMaterial() {
       uPoles: { value: poles },
       uColorPos: { value: new Color() },
       uColorNeg: { value: new Color() },
-      uGlow: { value: 1 }
+      uGlow: { value: 1 },
+      uContour: { value: 0.25 },
+      uPoleRing: { value: 0.6 },
+      uPoleGlow: { value: 1 }
     }),
     vertexShader: PLOT_VERTEX,
     fragmentShader: PLOT_FRAGMENT
@@ -647,8 +693,159 @@ export function createPolarityPlotMaterial() {
     u.uRadius.value = state.radius;
     u.uStrength.value = state.strength * g.opacity;
     u.uGlow.value = c.plotGlow * g.glow;
+    u.uContour.value = c.plotContour;
+    u.uPoleRing.value = Math.max(0.05, c.poleRing);
+    u.uPoleGlow.value = c.poleGlow * g.glow;
     u.uColorPos.value.copy(getColor(c.colorPositive));
     u.uColorNeg.value.copy(getColor(c.colorNegative));
+  };
+
+  return material;
+}
+
+/* ==================================================================== */
+/* 5 · the flux pillars                                                   */
+/* ==================================================================== */
+
+/**
+ * A column of field standing over every planted capsule — the thing that
+ * makes each pole read from across the arena. One instanced draw of the
+ * lathed flux tube (`createFluxTubeGeometry`).
+ *
+ * Per instance: `aCentre = (x, y, z, seed)` and `aPillar = (polarity,
+ * height 0..>1, width, alpha)`. The ability drives the envelope: the tube
+ * rises when the capsule plants, swells with the lattice, pulses with the
+ * blink, and on detonation **shoots up** and burns out.
+ *
+ * Fragment: additive, a four-stop ramp along the height — white-hot at the
+ * capsule, the pale tint, the saturated polarity body, the deep polarity at
+ * the frayed top — with field lines wound round the tube (twisting with
+ * height) and flux packets flowing **up** out of a + pole and **down** into
+ * a − pole. Bright where the tube is seen edge-on (the rim), thin face-on.
+ */
+const PILLAR_VERTEX = /* glsl */ `
+  attribute vec4 aCentre;
+  attribute vec4 aPillar;
+
+  uniform float uHeight;
+  uniform float uRadius;
+
+  varying vec2  vUv;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying vec4  vPillar;
+  varying float vSeed;
+
+  void main() {
+    vec3 p = position;
+    float h = uHeight * aPillar.y;
+    float w = uRadius * aPillar.z;
+    vec3 world = aCentre.xyz + vec3(p.x * w, p.y * h, p.z * w);
+    vWorld = world;
+    vNormalW = normalize(vec3(normal.x / max(w, 1e-3), normal.y / max(h, 1e-3), normal.z / max(w, 1e-3)));
+    vUv = uv;
+    vPillar = aPillar;
+    vSeed = aCentre.w;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const PILLAR_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
+  uniform float uGlow;
+  uniform float uLines;
+  uniform float uTwist;
+  uniform float uFlow;
+  uniform float uOpacity;
+  uniform float uCoreMix;
+  uniform vec3  uColorPos;
+  uniform vec3  uColorNeg;
+  uniform vec3  uColorCore;
+
+  varying vec2  vUv;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying vec4  vPillar;
+  varying float vSeed;
+
+  ${noiseGLSL}
+
+  void main() {
+    float alpha0 = vPillar.w;
+    if (alpha0 <= 0.002) discard;
+    float pol = vPillar.x;
+    vec3 tint = pol > 0.0 ? uColorPos : uColorNeg;
+    float y = vUv.y;
+
+    vec3 N = normalize(vNormalW);
+    vec3 V = normalize(cameraPosition - vWorld);
+    float rim = pow(1.0 - abs(dot(N, V)), 1.6);
+
+    // Field lines wound round the tube, twisting with height.
+    float around = vUv.x * uLines + y * uTwist * pol + vSeed;
+    float lines = pow(0.5 + 0.5 * cos(around * 6.2831853), 5.0);
+    // Flux packets: up out of +, down into −.
+    float flow = pow(fract(y * 2.5 - uTime * uFlow * pol + vSeed * 0.37), 3.0);
+    float n = snoise(vec3(vUv.x * 6.0, y * 4.0 - uTime * 1.5 * pol, vSeed));
+    float fray = smoothstep(1.0, 0.55, y + 0.2 * n * uShaderIntensity);
+    float base = smoothstep(0.0, 0.06, y);
+
+    // Four stops along the height: core → pale → body → deep.
+    vec3 pale = mix(tint, uColorCore, 0.3 * uCoreMix);
+    vec3 deep = tint * 0.22;
+    vec3 ramp = mix(mix(tint, uColorCore, uCoreMix), pale, smoothstep(0.0, 0.18, y));
+    ramp = mix(ramp, tint, smoothstep(0.18, 0.5, y));
+    ramp = mix(ramp, deep, smoothstep(0.55, 1.0, y));
+
+    float body = (0.45 + rim * 0.9) * (0.45 + lines * 1.2) * (0.7 + flow * 0.9);
+    float a = clamp(body * fray * base * alpha0, 0.0, 1.0) * uOpacity;
+    if (a < 0.003) discard;
+    gl_FragColor = vec4(ramp * body * fray * base * alpha0 * uGlow * uGlobalGlow, a);
+  }
+`;
+
+export function createPolarityPillarMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: AdditiveBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uHeight: { value: 2.4 },
+      uRadius: { value: 0.6 },
+      uGlow: { value: 2 },
+      uLines: { value: 9 },
+      uTwist: { value: 1.2 },
+      uFlow: { value: 1.2 },
+      uOpacity: { value: 1 },
+      uCoreMix: { value: 0.45 },
+      uColorPos: { value: new Color() },
+      uColorNeg: { value: new Color() },
+      uColorCore: { value: new Color() }
+    }),
+    vertexShader: PILLAR_VERTEX,
+    fragmentShader: PILLAR_FRAGMENT
+  });
+
+  material.userData.sync = () => {
+    const c = settings.polarity;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uHeight.value = c.pillarHeight;
+    u.uRadius.value = c.pillarRadius;
+    u.uGlow.value = c.pillarGlow * g.glow;
+    u.uLines.value = c.pillarLines;
+    u.uTwist.value = c.pillarTwist;
+    u.uFlow.value = c.pillarFlow * g.animationSpeed;
+    u.uOpacity.value = g.opacity;
+    u.uCoreMix.value = c.pillarCoreMix ?? 0.45;
+    u.uColorPos.value.copy(getColor(c.colorPositive));
+    u.uColorNeg.value.copy(getColor(c.colorNegative));
+    u.uColorCore.value.copy(getColor(c.colorTetherCore));
   };
 
   return material;

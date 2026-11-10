@@ -444,6 +444,145 @@ export function createChakramTrailMaterial() {
 }
 
 /* ====================================================================== */
+/* 2c · The floor path                                                     */
+/* ====================================================================== */
+
+/**
+ * The line the throw scores into the floor (a second `ChakramTrailRibbon`
+ * sampled every `pathStep` metres, without a live head).
+ *
+ * Flattened onto the floor in the vertex stage and laid flat across the
+ * path, so from the play camera it reads as the route the disc took — the
+ * zig-zag legs, the knots at the banks and the bow of the return. Three
+ * bands across it: a dark **char** bed (normal-blended over the floor, so it
+ * holds on a dark ground), a **hot** centre cut that starts white-gold and
+ * cools to the sigil gold over `pathCool`, and **tooth nicks** — notches
+ * along the cut spaced like the blade's teeth. Where the disc flew high (the
+ * return arc) the mark is fainter and wider, a shadow more than a cut. It
+ * erodes from its old end with a noise edge.
+ */
+const PATH_VERTEX = /* glsl */ `
+  attribute vec3 aTangent;
+  attribute vec3 aCoord;  // x side, y age 0..1, z live
+
+  uniform float uWidth;
+  uniform float uHighFade;
+
+  varying vec3  vCoord;
+  varying vec3  vWorld;
+  varying float vHigh;
+  varying float vDist;
+
+  void main() {
+    vec3 world = (modelMatrix * vec4(position, 1.0)).xyz;
+    vec3 t = vec3(aTangent.x, 0.0, aTangent.z);
+    t = length(t) > 1e-5 ? normalize(t) : vec3(1.0, 0.0, 0.0);
+    vec3 across = vec3(-t.z, 0.0, t.x);
+    // Higher flight → a wider, fainter mark.
+    vHigh = smoothstep(1.4, 1.4 + max(uHighFade, 0.1), world.y);
+    float w = uWidth * (1.0 + vHigh * 0.6) * aCoord.z;
+    world += across * aCoord.x * w;
+    vDist = dot(world.xz, vec2(0.7071));
+    world.y = 0.028;
+    vCoord = aCoord;
+    vWorld = world;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const PATH_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uTime;
+  uniform float uGlobalGlow;
+  uniform float uCool;       // share of the life the cut takes to cool
+  uniform float uIntensity;
+  uniform float uOpacity;
+  uniform float uNicks;      // tooth nicks per metre
+  uniform float uFade;
+  uniform vec3  uColorHot;
+  uniform vec3  uColor;
+  uniform vec3  uColorChar;
+
+  varying vec3  vCoord;
+  varying vec3  vWorld;
+  varying float vHigh;
+  varying float vDist;
+
+  ${noiseGLSL}
+
+  void main() {
+    if (vCoord.z < 0.5 || vCoord.y >= 1.0) discard;
+    float age = vCoord.y;
+    float across = abs(vCoord.x);
+
+    float bed = 1.0 - smoothstep(0.55, 1.0, across);
+    float cut = 1.0 - smoothstep(0.08, 0.26, across);
+    // Tooth nicks: short bright ticks across the cut, spaced like the teeth.
+    float along = vWorld.x * 0.37 + vWorld.z * 0.93;
+    float nick = smoothstep(0.82, 0.95, fract(along * uNicks)) * (1.0 - smoothstep(0.15, 0.5, across));
+    float grain = snoise(vec3(vWorld.xz * 3.0, 1.7)) * 0.5 + 0.5;
+
+    float heat = 1.0 - smoothstep(0.0, max(uCool, 0.01), age);
+    vec3 glow = mix(uColor, uColorHot, heat) * (cut + nick * 0.8) * (0.35 + 0.65 * heat + 0.25);
+    vec3 col = uColorChar * (0.7 + 0.3 * grain) + glow * uIntensity * uGlobalGlow * (1.0 - vHigh * 0.7);
+
+    float erode = snoise(vec3(vWorld.xz * 1.4, 4.0)) * 0.5 + 0.5;
+    float keep = smoothstep(age * 1.25 - 0.2, age * 1.25 - 0.05, erode * 0.6 + 0.4 * (1.0 - age));
+    float a = max(bed * (0.75 - 0.45 * vHigh) * (0.75 + 0.25 * grain), cut) * keep * uOpacity * uFade;
+    if (a < 0.004) discard;
+    gl_FragColor = vec4(col, clamp(a, 0.0, 1.0));
+  }
+`;
+
+export function createChakramPathMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+    polygonOffsetUnits: -2,
+    uniforms: sharedUniforms({
+      uWidth: { value: 0.35 },
+      uHighFade: { value: 1.5 },
+      uCool: { value: 0.3 },
+      uIntensity: { value: 1.6 },
+      uOpacity: { value: 0.85 },
+      uNicks: { value: 2 },
+      uFade: { value: 1 },
+      uColorHot: { value: new Color(1, 1, 1) },
+      uColor: { value: new Color(1, 0.8, 0.35) },
+      uColorChar: { value: new Color(0.1, 0.06, 0.03) }
+    }),
+    vertexShader: PATH_VERTEX,
+    fragmentShader: PATH_FRAGMENT
+  });
+
+  /** @param {object} s { fade } */
+  material.userData.sync = (s) => {
+    const c = settings.chakram;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uFade.value = s.fade;
+    u.uWidth.value = c.pathWidth;
+    u.uHighFade.value = c.pathHighFade;
+    u.uCool.value = c.pathCool;
+    u.uIntensity.value = c.pathIntensity * g.glow;
+    u.uOpacity.value = c.pathOpacity * g.opacity;
+    u.uNicks.value = c.pathNicks;
+    u.uColorHot.value.copy(getColor(c.colorSigilHot));
+    u.uColor.value.copy(getColor(c.colorSigil));
+    u.uColorChar.value.copy(getColor(c.colorSigilChar));
+  };
+
+  return material;
+}
+
+/* ====================================================================== */
 /* 3 · The bank sigil                                                      */
 /* ====================================================================== */
 

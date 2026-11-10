@@ -20,10 +20,10 @@ export default {
     range: 18.0, // maximum cast distance, metres
     minRange: 3.0, // closer than this and the cast is refused
     speed: 34.0, // how fast the leader runs down the line, metres/second
-    lifetime: 0.9, // seconds the last strike hangs in the air before the fade
+    lifetime: 1.6, // seconds the web (and the glass it fused) hangs after the last strike
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: 'cast1', // which clip in `CAST_ANIMATIONS` the body throws
-    fadeTime: 0.7, // seconds the whole web takes to crackle out
+    fadeTime: 0.9, // seconds the whole web takes to crackle out and the glass to sink
 
     /* --- where the bolt leaves the caster --- */
     handForward: 0.55, // metres in front of the caster
@@ -152,6 +152,41 @@ export default {
     groundShake: 0.3,
     groundFlash: 0.28,
     castShake: 0.06,
-    colorFlash: '#cfe0ff'
+    colorFlash: '#cfe0ff',
+
+    /* ================================================================ */
+    /* 6 · FULGURITE — fused glass spikes where every strike grounds     */
+    /* ================================================================ */
+    fulguriteHeight: 1.25, // metres tall under a body
+    fulguriteRadius: 1.15, // metres across (the cluster's spread)
+    fulguriteGroundScale: 1.5, // × size where the bolt grounds instead
+    fulguriteGrowTime: 0.16, // seconds to heave out of the floor (with overshoot)
+    fulguriteCreep: 0.12, // keeps creeping taller by this fraction over the linger
+    fulguriteSink: 0.85, // sinks this much of its height back into the floor on exit
+    fulguriteCrumble: 0.7, // 0..1 how much it crumbles away as it sinks
+    fulguriteGlow: 1.9, // brightness of the charge in its cracks
+    fulguriteVeins: 1.0, // how much of the glass is cracked
+    fulguriteVeinScale: 6.0, // crack frequency, per unit
+    fulguriteSpec: 0.9, // glassy sun glint
+    fulguriteCharge: 1.0, // residual charge bands crawling up the spikes
+    fulguritePulseSpeed: 1.4, // how fast they crawl
+    heatFloor: 0.12, // 0..1 heat the glass and the figure cool down to
+    coolRate: 1.6, // per second
+    colorGlassBody: '#141a3a', // the glass, lit
+    colorGlassDeep: '#05060f', // the dark deep stop: root of the glass, coldest veins
+
+    /* ================================================================ */
+    /* 7 · LICHTENBERG SCORCH — the branching burn it stands in          */
+    /* ================================================================ */
+    scarRadius: 1.9, // metres, under a body
+    scarGroundRadius: 3.0, // metres, where the bolt grounds
+    scarRevealTime: 0.28, // seconds the figure takes to burn out to its edge
+    scarOpacity: 0.88, // char opacity
+    scarVeinScale: 7.0, // figure frequency
+    scarVeinSharp: 4.0, // >1 thins the veins
+    scarGlow: 2.2, // vein brightness
+    scarCharge: 0.9, // charge pulses running out along the veins
+    scarPulseSpeed: 0.9, // per second
+    colorScarChar: '#08071a' // the char
   }
 };

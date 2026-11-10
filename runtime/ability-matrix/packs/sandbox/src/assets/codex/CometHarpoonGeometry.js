@@ -189,3 +189,179 @@ export function createCometQuad() {
   geometry.boundingSphere = HUGE;
   return geometry;
 }
+
+/* -------------------------------------------------------------------- */
+/* The nucleus and the ice blades (the solid comet ice)                 */
+/* -------------------------------------------------------------------- */
+
+/** Deterministic lattice noise for baking shapes (no Math.random). */
+function hash3(x, y, z) {
+  const s = Math.sin(x * 127.1 + y * 311.7 + z * 74.7) * 43758.5453;
+  return s - Math.floor(s);
+}
+function vnoise(x, y, z) {
+  const ix = Math.floor(x);
+  const iy = Math.floor(y);
+  const iz = Math.floor(z);
+  const fx = x - ix;
+  const fy = y - iy;
+  const fz = z - iz;
+  const sx = fx * fx * (3 - 2 * fx);
+  const sy = fy * fy * (3 - 2 * fy);
+  const sz = fz * fz * (3 - 2 * fz);
+  let v = 0;
+  for (let k = 0; k < 8; k++) {
+    const dx = k & 1;
+    const dy = (k >> 1) & 1;
+    const dz = (k >> 2) & 1;
+    const w = (dx ? sx : 1 - sx) * (dy ? sy : 1 - sy) * (dz ? sz : 1 - sz);
+    v += w * hash3(ix + dx, iy + dy, iz + dz);
+  }
+  return v * 2 - 1;
+}
+
+/**
+ * The comet's nucleus: a lumpy, faceted ball of dirty ice, mean radius 1,
+ * elongated along +Z (the flight axis) like a real comet nucleus, pocked
+ * with a few craters. Flat-shaded (non-indexed) so the facets catch the sun.
+ * `aRough` carries the per-vertex crater depth for the shader.
+ */
+export function createCometNucleusGeometry(detail = 3) {
+  // Icosahedron, subdivided.
+  const t = (1 + Math.sqrt(5)) / 2;
+  let verts = [
+    [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
+    [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+    [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]
+  ].map((v) => {
+    const l = Math.hypot(v[0], v[1], v[2]);
+    return [v[0] / l, v[1] / l, v[2] / l];
+  });
+  let faces = [
+    [0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11],
+    [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8],
+    [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9],
+    [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]
+  ];
+  for (let d = 0; d < detail; d++) {
+    const cache = new Map();
+    const mid = (a, b) => {
+      const key = a < b ? a + '_' + b : b + '_' + a;
+      if (cache.has(key)) return cache.get(key);
+      const va = verts[a];
+      const vb = verts[b];
+      const m = [(va[0] + vb[0]) / 2, (va[1] + vb[1]) / 2, (va[2] + vb[2]) / 2];
+      const l = Math.hypot(m[0], m[1], m[2]);
+      verts.push([m[0] / l, m[1] / l, m[2] / l]);
+      cache.set(key, verts.length - 1);
+      return verts.length - 1;
+    };
+    const next = [];
+    for (const [a, b, c] of faces) {
+      const ab = mid(a, b);
+      const bc = mid(b, c);
+      const ca = mid(c, a);
+      next.push([a, ab, ca], [b, bc, ab], [c, ca, bc], [ab, bc, ca]);
+    }
+    faces = next;
+  }
+  // A few craters, fixed directions.
+  const craters = [];
+  for (let i = 0; i < 7; i++) {
+    const u = hash3(i, 1.3, 7.1) * 2 - 1;
+    const a = hash3(i, 5.7, 2.2) * Math.PI * 2;
+    const s = Math.sqrt(1 - u * u);
+    craters.push({ d: [s * Math.cos(a), u, s * Math.sin(a)], r: 0.25 + 0.25 * hash3(i, 9.1, 3.3) });
+  }
+  const shaped = verts.map((v) => {
+    let r = 1 + 0.22 * vnoise(v[0] * 1.6 + 3, v[1] * 1.6, v[2] * 1.6) + 0.07 * vnoise(v[0] * 5, v[1] * 5 + 1, v[2] * 5);
+    let pit = 0;
+    for (const c of craters) {
+      const dot = v[0] * c.d[0] + v[1] * c.d[1] + v[2] * c.d[2];
+      const ang = Math.acos(Math.min(1, Math.max(-1, dot)));
+      const k = ang / c.r;
+      if (k < 1.2) {
+        const bowl = k < 1 ? -(1 - k * k) * 0.14 : 0;
+        const lip = Math.exp(-Math.pow((k - 1) / 0.15, 2)) * 0.04;
+        r += bowl + lip;
+        pit = Math.max(pit, k < 1 ? 1 - k : 0);
+      }
+    }
+    return { p: [v[0] * r * 0.9, v[1] * r * 0.85, v[2] * r * 1.25], pit };
+  });
+  const pos = new Float32Array(faces.length * 9);
+  const rough = new Float32Array(faces.length * 3);
+  let p = 0;
+  let q = 0;
+  for (const f of faces) {
+    for (const i of f) {
+      const s = shaped[i];
+      pos[p++] = s.p[0];
+      pos[p++] = s.p[1];
+      pos[p++] = s.p[2];
+      rough[q++] = s.pit;
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(pos, 3));
+  geometry.setAttribute('aRough', new BufferAttribute(rough, 1));
+  geometry.setAttribute('aAlong', new BufferAttribute(new Float32Array(rough.length), 1));
+  geometry.computeVertexNormals();
+  geometry.boundingSphere = new Sphere(new Vector3(), 1.6);
+  return geometry;
+}
+
+/**
+ * One ice blade of the lotus: a faceted, diamond-section spike, base at the
+ * origin, rising +Y to the tip at y = 1, curving out toward +X near the tip,
+ * widest a third of the way up. Unit length and unit half-width (X/Z are
+ * scaled by the instance matrix). `aAlong` 0 base → 1 tip.
+ */
+export function createIceBladeGeometry(steps = 10) {
+  const ring = [];
+  for (let j = 0; j <= steps; j++) {
+    const s = j / steps;
+    const w = Math.pow(Math.sin(Math.PI * Math.min(1, Math.pow(s, 0.75))), 0.8) * (1 - s * 0.15) + (s === 0 ? 0.35 : 0);
+    const bend = 0.28 * s * s;
+    const y = s;
+    // Diamond section: wide across (Z), thick out (X), a keel on the outside.
+    ring.push([
+      [bend + 0.32 * w, y, 0],
+      [bend, y, 0.9 * w],
+      [bend - 0.22 * w, y, 0],
+      [bend, y, -0.9 * w]
+    ]);
+  }
+  const pos = [];
+  const along = [];
+  const push = (v, s) => {
+    pos.push(v[0], v[1], v[2]);
+    along.push(s);
+  };
+  for (let j = 0; j < steps; j++) {
+    const A = ring[j];
+    const B = ring[j + 1];
+    const sa = j / steps;
+    const sb = (j + 1) / steps;
+    for (let i = 0; i < 4; i++) {
+      const i1 = (i + 1) % 4;
+      push(A[i], sa);
+      push(A[i1], sa);
+      push(B[i], sb);
+      push(A[i1], sa);
+      push(B[i1], sb);
+      push(B[i], sb);
+    }
+  }
+  // Base cap.
+  const b = ring[0];
+  push(b[0], 0); push(b[2], 0); push(b[1], 0);
+  push(b[0], 0); push(b[3], 0); push(b[2], 0);
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(new Float32Array(pos), 3));
+  geometry.setAttribute('aAlong', new BufferAttribute(new Float32Array(along), 1));
+  geometry.setAttribute('aRough', new BufferAttribute(new Float32Array(along.length), 1));
+  geometry.computeVertexNormals();
+  geometry.boundingSphere = HUGE;
+  return geometry;
+}

@@ -18,12 +18,16 @@ export default {
   /**
    * A teleport-dash, and the only ability in the pack that moves the caster.
    *
-   * Three beats. **Departure**: light implodes onto the caster, a crown of
-   * shards closes on them, and the body squeezes to a sliver and is gone.
-   * **Transit**: a streak of light runs the line at `speed`, shedding sparks
-   * and leaving flickering afterimages of the body behind it. **Arrival**: the
-   * body is moved to the end of the line, reforms with an overshoot, and the
-   * landing throws a ring of shards, a pressure shell and a shock ring.
+   * Four beats. **Departure**: light implodes onto the caster, a crown of
+   * shards closes on them, a jagged tear splits the air where they stand and
+   * the body squeezes to a sliver and is gone into it. **Transit**: a streak of
+   * light runs the line at `speed`, burning a slipstream scar into the floor
+   * behind it, shedding sparks and leaving flickering afterimages. **Arrival**:
+   * a second tear splits at the far end, the body is moved there and reforms
+   * out of it with an overshoot, and the landing throws a ring of shards that
+   * plant in a skid-spoked crater. **Linger**: an echo of the caster stands at
+   * the start, both tears seal with cracks crawling through the air, knots of
+   * light drain down the cooling scar, the planted ring hums, then sinks.
    *
    * The character is only ever hidden or squeezed while a blink *owns* it, and
    * every exit path — arrival, clear, retire, a second blink stealing it —
@@ -33,11 +37,67 @@ export default {
     /* --- the cast --- */
     "range": 18,
     "minRange": 3,
-    "speed": 34, // m/s the streak covers the line at
-    "lifetime": 0.75, // seconds the arrival plays before the fade
+    "speed": 28, // m/s the streak covers the line at
+    "lifetime": 1.7, // seconds the arrival + linger play before the fade
     "cooldown": 0.6,
     castAnim: "cast2",
-    fadeTime: 0.55, // seconds for the trail and the ghosts to go
+    fadeTime: 0.8, // seconds for the rifts, the scar and the ghosts to go
+
+    /* --- the rifts: the hero (a tear in the air at each end of the line) --- */
+    riftHeight: 2.5, // metres, foot to tip
+    riftWidth: 1.15, // metres across the lens at its belly, fully open
+    riftLift: 0.02, // metres the foot floats off the floor
+    riftDepth: 0.22, // metres the open lens bulges toward its normal
+    riftJag: 0.42, // how torn the lips are (× global randomness)
+    riftJagScale: 7, // jags along its height
+    riftHalo: 1.1, // metres of cracked air either side at the belly
+    riftVoid: 0.92, // opacity of the void inside
+    riftRimGlow: 3.2, // brightness of the white-hot lip
+    riftRimWidth: 0.14, // width of the lip, × the lens half-width
+    riftFlow: 7, // slipstream streaks racing through the void
+    riftStreaks: 1.0,
+    riftCrack: 1.4, // cracks crawling out through the air round it
+    riftCrackScale: 2.4, // crack features per metre
+    riftFlicker: 0.55,
+    riftGlow: 1.6,
+    riftOpenTime: 0.16, // seconds to split open (departure: with the vanish)
+    riftDepartHold: 0.35, // seconds the departure rift gapes once the body is gone
+    riftArriveLead: 0.12, // seconds before the landing the arrival rift splits
+    riftArriveHold: 0.45, // seconds the arrival rift gapes after the landing
+    riftSealTime: 1.0, // seconds a rift takes to seal back to a scar
+    riftCrackTime: 1.4, // seconds the cracks take to crawl out to the halo
+    riftOffset: 0.3, // metres the arrival rift stands behind the landing point
+    colorRiftCore: '#ffffff',
+    colorRiftTint: '#b4fff0',
+    colorRiftBody: '#2fd8c8',
+    colorRiftDeep: '#06202e',
+
+    /* --- the scar: the floor (slipstream lane, departure scorch, landing crater) --- */
+    scarWidth: 1.3, // metres across the lane
+    scarDepartRadius: 1.5, // departure scorch, metres
+    scarArriveRadius: 2.4, // landing crater, metres
+    scarSpreadTime: 0.25, // seconds each disc takes to spread
+    scarHeatLength: 3.5, // metres of hot seam behind the running head
+    scarPulse: 1.0, // knots of light crawling to the landing during the linger
+    scarPulseSpeed: 9, // m/s
+    scarPulseGap: 3.2, // metres between knots
+    scarSpokes: 22, // skid spokes round the landing
+    scarBurn: 0.62, // how dark the burnt floor is
+    scarSeamGlow: 1.0,
+    scarGlow: 2.2,
+    scarNoiseScale: 1.0,
+    scarCoolTime: 1.6, // seconds the seam takes to cool after the landing
+    scarDissolve: 0.85, // share of the fade spent dissolving
+    scarDecalLife: 5.0, // the SCORCH decals left under both ends outlive the cast (s)
+
+    /* --- the linger: the echo left standing, planted shards, residue --- */
+    echoLife: 1.9, // seconds the afterimage left at the departure point stands
+    plantHold: 1.0, // seconds the arrival shards stand planted round the landing
+    plantSink: 0.6, // seconds they take to sink into the floor
+    plantPulse: 0.45, // how hard a pulse runs round the planted ring
+    plantPulseRate: 1.6, // pulses per second
+    residueRate: 70, // motes rising off the scar per second during the linger
+    residueSpeed: 0.7,
 
     /* --- the body --- */
     vanishTime: 0.12, // seconds to squeeze to nothing at the start
@@ -138,9 +198,11 @@ export default {
     colorSparkD: '#14306a',
 
     /* --- arrival --- */
-    arrivalBurst: 2.4, // pressure shell end radius, metres
-    arrivalBurstLife: 0.45,
-    arrivalBurstIntensity: 1.8,
+    arrivalBurst: 2.0, // pressure shell end radius, metres
+    arrivalBurstLife: 0.35,
+    arrivalBurstIntensity: 1.1,
+    arrivalBurstSquash: 0.45, // vertical squash of the shell (1 = sphere)
+    arrivalBurstOpacity: 0.5,
     colorBurstA: '#f2fffb',
     colorBurstB: '#46ffd2',
     colorBurstC: '#1a3a8a',
