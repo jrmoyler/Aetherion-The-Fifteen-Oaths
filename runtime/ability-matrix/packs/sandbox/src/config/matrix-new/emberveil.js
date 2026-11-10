@@ -51,16 +51,21 @@ export default {
     sweep: 2.1, // radians each strand travels round the circle as it arches over
     crossings: 7, // over/under alternations along a strand
     weave: 0.05, // how far the over/under pushes in and out, × radius
-    spin: 0.12, // radians/second the whole cage turns while it burns
+    spin: 0.22, // radians/second the whole cage turns while it burns
     sway: 0.06, // radians of lazy writhing
     swaySpeed: 1.6,
     weaveStagger: 0.45, // 0 = every strand climbs together, 1 = one after another
     weaveHeadGlow: 2.5, // the hot tip on each climbing strand
+    breathAmount: 0.06, // the burning cage heaves, × height (presentation only)
+    breathSpeed: 2.4, // radians/second of that heave
+    burnOrbit: 1.0, // a hot side that chases itself round the burning cage
+    burnOrbitSpeed: 2.2, // radians/second it chases round
+    cageCreep: 0.08, // the visible cage draws in over the burn, × radius (the trap reach does not)
 
-    /* --- the burning strand (white-hot core, orange body, red rim) --- */
-    strandWidth: 0.07, // tube radius, metres
+    /* --- the burning strand: a charred cord split by molten cracks --- */
+    strandWidth: 0.1, // tube radius, metres
     strandTaper: 0.35, // how much thinner the crown is than the roots
-    strandIntensity: 3.4,
+    strandIntensity: 2.6, // HDR on the hottest crack centres only
     strandOpacity: 1.0,
     coreSharpness: 5.0, // higher = a narrower white line down the middle
     pulseAmount: 0.55, // heat pulses running from the roots to the crown
@@ -68,23 +73,28 @@ export default {
     pulseSpeed: 2.6,
     floorFade: 0.35, // metres the strands fade out over at the floor
     strandSoftFade: 0.15,
-    colorStrandCore: '#fff6d8',
-    colorStrandBody: '#ff8a2a',
-    colorStrandEdge: '#c22a08',
+    crackScale: 1.6, // molten crack pattern scale
+    crackWidth: 0.21, // how much of the cord is open crack (widens as it burns)
+    colorStrandCore: '#fff0c4', // white-hot crack centre
+    colorStrandBody: '#ffa040', // pale tint
+    colorStrandEdge: '#e0400c', // saturated body
+    colorStrandDeep: '#4a0c04', // dark ember
+    colorStrandChar: '#170a07', // the charred cord itself
 
     /* --- the flames licking off every strand --- */
-    flameWidth: 3.2, // × strand width
+    flameWidth: 2.6, // × strand width
     flameLick: 0.55, // metres the flame tongues reach up off a strand
     flameLickScale: 1.6,
     flameNoise: 0.75, // how torn the flame is
     flameNoiseScale: 2.4,
     flameSpeed: 2.4, // how fast the tongues stream upward
-    flameIntensity: 2.2,
-    flameOpacity: 0.7,
+    flameIntensity: 1.25,
+    flameOpacity: 0.6,
     flameSoftFade: 0.35,
-    colorFlameCore: '#ffe2a0',
-    colorFlameBody: '#ff6a1a',
-    colorFlameTip: '#7a1606',
+    flameClimb: 0.6, // the tongues climb this much higher by the end of the burn
+    colorFlameCore: '#ffc070',
+    colorFlameBody: '#f04a0c',
+    colorFlameTip: '#5a0e04',
 
     /* --- dripping embers (SOFT, additive) --- */
     dripRate: 90, // per second over the whole cage
@@ -110,12 +120,12 @@ export default {
     colorSparkD: '#2a0804',
 
     /* --- smoke off the crown (SMOKE, non-additive) --- */
-    smokeRate: 18,
+    smokeRate: 26,
     smokeSize: 1.0,
     smokeSpread: 2.4, // end size, × start
     smokeRise: 1.0,
     smokeLifetime: 2.0,
-    smokeOpacity: 0.4,
+    smokeOpacity: 0.55,
     smokeTurbulence: 0.6,
     colorSmokeA: '#4a3226',
     colorSmokeB: '#2e2622',
@@ -166,7 +176,7 @@ export default {
     contractScale: 0.12, // radius the cage pulls in to, × its own
     contractSquash: 0.35, // height it slumps to, × its own
     contractSpin: 6, // how much faster it turns as it tightens, ×
-    contractSurge: 1.0, // how much whiter it burns as it tightens
+    contractSurge: 0.7, // how much whiter it burns as it tightens
     contractRumble: 0.18,
 
     /* --- the collapse burst --- */
@@ -199,9 +209,26 @@ export default {
     hitLift: 5.5,
     hitSpin: 1.8,
 
-    /* --- the thrown ember (travel) --- */
-    callSparks: 160, // sparks per second shed along the throw
-    callFlameSize: 0.9, // FIRE puff where the ember lands, metres
+    /* --- the thrown ember (anticipation + travel) --- */
+    callSparks: 200, // sparks per second shed along the throw
+    callFlameSize: 1.4, // FIRE puff where the ember lands, metres
+    handFlare: 0.8, // FIRE flare at the hand on the cast, metres
+    throwHeight: 1.2, // metres the ember leaves the hand at
+    throwLob: 1.4, // metres the lob rises at its middle
+    ballRadius: 0.55, // the wound ember ball, metres
+    ballStrands: 10, // burning threads wound into it
+    ballStrandWidth: 0.05, // their tube radius, metres
+    ballSpin: 7, // radians/second it tumbles in flight
+    ballFlameGlow: 0.45, // the ball's flames, × the cage's flame intensity
+    ballHeat: 0.18, // how open its cracks are (0 charred … 1 incandescent)
+    ballWindTime: 0.16, // seconds it takes to wind up at the hand
+    threadWidth: 0.06, // the burning thread it spools behind it, metres
+    threadWrithe: 0.07, // metres the thread writhes
+    threadBurnTime: 0.45, // seconds the thread takes to burn back after the landing
+    trailSmoke: 40, // dark smoke puffs per second off the ball
+    trailSmokeSize: 0.45,
+    telegraphStart: 0.35, // the circle starts to catch when the ember is this far along
+    telegraphReveal: 0.55, // how strongly the circle is marked before the landing
 
     "colorA": "#ff6a2a",
     "colorB": "#ffcc80",

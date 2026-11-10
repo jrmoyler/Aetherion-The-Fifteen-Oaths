@@ -3,6 +3,7 @@ import { settings, ELEMENTS, CastShape, castShapeOf } from '../config/settings.j
 import { EventEmitter } from '../utils/EventEmitter.js';
 import { AimIndicator } from '../effects/AimIndicator.js';
 import { ZoneIndicator } from '../effects/ZoneIndicator.js';
+import { ExpansionAim } from './ExpansionAim.js';
 
 const GROUND_PLANE = new Plane(new Vector3(0, 1, 0), 0);
 
@@ -37,10 +38,11 @@ export class AimController extends EventEmitter {
 
     this.indicator = new AimIndicator();
     this.zone = new ZoneIndicator();
+    this.expansionAim = new ExpansionAim();
 
     this.group = new Group();
     this.group.name = 'AimIndicators';
-    this.group.add(this.indicator.object3D, this.zone.object3D);
+    this.group.add(this.indicator.object3D, this.zone.object3D, this.expansionAim.object3D);
 
     /**
      * Which ability the arrow is measuring for. `range` and `minRange` are
@@ -152,6 +154,11 @@ export class AimController extends EventEmitter {
   /** Project the pointer onto the ground and resolve the aim from it. */
   _resolve() {
     const c = this.config;
+    if (c.aimStyle === 'self') {
+      this.valid = true;
+      this.distance = 0.1;
+      return;
+    }
 
     if (this._hasPointer) {
       this.raycaster.setFromCamera(this._pointer, this.camera);
@@ -195,9 +202,15 @@ export class AimController extends EventEmitter {
     const visible = this.reveal > 0.001;
     // Only ever one of the two is on screen, and swapping the slot mid-reveal
     // hides the other outright rather than leaving it fading in place.
-    this.indicator.setVisible(visible && !zoned);
-    this.zone.setVisible(visible && zoned);
-
+    const style = this.config.aimStyle;
+    const expansion = ['self', 'lanes', 'wide'].includes(style);
+    this.indicator.setVisible(visible && !zoned && !expansion);
+    this.zone.setVisible(visible && zoned && !expansion);
+    this.expansionAim.object3D.visible = visible && expansion;
+    if (expansion && visible) {
+      this.expansionAim.update(style, this.origin, this.yaw, this.distance, this.config, this.reveal, this.valid);
+      return;
+    }
     if (!visible) return;
     if (zoned) {
       this.zone.update(
@@ -217,6 +230,7 @@ export class AimController extends EventEmitter {
   dispose() {
     this.indicator.dispose();
     this.zone.dispose();
+    this.expansionAim.dispose();
     this.clear();
   }
 }

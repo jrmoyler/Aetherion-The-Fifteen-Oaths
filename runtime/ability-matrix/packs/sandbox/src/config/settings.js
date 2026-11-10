@@ -238,8 +238,33 @@ export const settings = {
    */
   dummies: {
     enabled: true,
-    /** How many are standing at any moment. */
+    /** How many are standing at any moment (up to 24). */
     count: 6,
+    /**
+     * How they stand: 'ring' (scattered round the caster), 'line', 'cluster',
+     * 'gauntlet' (staggered lanes) or 'scatter'. See `combat/DummyArchetypes.js`.
+     */
+    formation: 'ring',
+    /**
+     * What stands: a weight per archetype, apportioned over `count` and
+     * interleaved. All-standard is the field as it always was.
+     */
+    mix: { standard: 1, armored: 0, runner: 0, giant: 0, caster: 0 },
+    /** The archetypes' rules. */
+    archetypes: {
+      /** Armored: blows it shrugs off (with sparks) before the next one fells it. */
+      armorHits: 3,
+      /** Runner: strafe speed (radians of its cycle per second) and reach, metres. */
+      runnerSpeed: 1.1,
+      runnerRange: 2.6,
+      /** Giant: how much bigger it stands, and the fraction of a blow it takes. */
+      giantScale: 1.35,
+      giantImpulse: 0.45,
+      /** Caster: seconds the shield bubble is up, then down; first raise after. */
+      shieldUp: 2.5,
+      shieldDown: 4.0,
+      shieldDelay: 1.5
+    },
     /** Metres from the caster they stand inside, and no nearer than. */
     radius: 13.0,
     minRadius: 5.0,

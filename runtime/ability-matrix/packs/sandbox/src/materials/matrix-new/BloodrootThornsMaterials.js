@@ -26,8 +26,10 @@ import { getColor } from '../../utils/color.js';
  * Every material reads `settings.bloodroot` in `userData.sync(state)`.
  */
 
-/** How many roots the tables hold. Primaries × (1 + branches). */
-export const BLOODROOT_MAX_ROOTS = 30;
+/** How many roots the tables hold. Primaries × (1 + branches), plus the runner. */
+export const BLOODROOT_MAX_ROOTS = 31;
+/** Table slot of the runner — the root that crawls from the caster to the circle. */
+export const BLOODROOT_RUNNER = 30;
 
 /** Equirect lookup for the glossy thorns. */
 const ENV_GLSL = /* glsl */ `
@@ -41,38 +43,48 @@ const ENV_GLSL = /* glsl */ `
  * The root path, shared verbatim by the vertex stage. Mirrored in JS by
  * `rootPathAt` below — change one, change the other.
  *
- * offset(s) = W·L·( 0.30·s·(sin(s·f + p1) − sin p1) + 0.12·(sin(s·f·2.3 + p2) − sin p2) )
+ * offset(s) = k·W·L·( 0.30·s·(sin(s·f + p1) − sin p1) + 0.12·(sin(s·f·2.3 + p2) − sin p2) )
  *
  * Both terms are zero at s = 0, so every root leaves its fork exactly on it.
+ * `k` (table C.z) scales one root's wander, and a *pinned* root (C.w = 1, the
+ * runner) has `s·offset(1)` taken off so it also ends exactly on its target.
  */
 const PATH_GLSL = /* glsl */ `
   uniform vec4 uRootA[${BLOODROOT_MAX_ROOTS}];  // origin x, origin z, bearing, length
   uniform vec4 uRootB[${BLOODROOT_MAX_ROOTS}];  // thickness, grown (m), phase 1, phase 2
-  uniform vec4 uRootC[${BLOODROOT_MAX_ROOTS}];  // distance from the heart at the fork, live, 0, 0
+  uniform vec4 uRootC[${BLOODROOT_MAX_ROOTS}];  // distance from the heart at the fork, live, wander scale, pinned
   uniform float uWander;
   uniform float uWanderFreq;
+
+  float rootOffset(vec4 B, float s) {
+    return 0.30 * s * (sin(s * uWanderFreq + B.z) - sin(B.z))
+         + 0.12 * (sin(s * uWanderFreq * 2.3 + B.w) - sin(B.w));
+  }
 
   vec2 rootPath(int i, float s) {
     vec4 A = uRootA[i];
     vec4 B = uRootB[i];
+    vec4 C = uRootC[i];
     vec2 dir = vec2(cos(A.z), sin(A.z));
     vec2 perp = vec2(-dir.y, dir.x);
     float d = s * A.w;
-    float off = uWander * A.w * (0.30 * s * (sin(s * uWanderFreq + B.z) - sin(B.z))
-                               + 0.12 * (sin(s * uWanderFreq * 2.3 + B.w) - sin(B.w)));
+    float off = rootOffset(B, s) - C.w * s * rootOffset(B, 1.0);
+    off *= uWander * C.z * A.w;
     return A.xy + dir * d + perp * off;
   }
 `;
 
 /** JS mirror of the GLSL path. Writes x/z (local to the heart) into `out`. */
+const rootOffset = (root, s, freq) =>
+  0.3 * s * (Math.sin(s * freq + root.p1) - Math.sin(root.p1)) + 0.12 * (Math.sin(s * freq * 2.3 + root.p2) - Math.sin(root.p2));
+
 export function rootPathAt(root, s, wander, freq, out) {
   const dx = Math.cos(root.bearing);
   const dz = Math.sin(root.bearing);
   const d = s * root.length;
+  const pin = root.pin ?? 0;
   const off =
-    wander *
-    root.length *
-    (0.3 * s * (Math.sin(s * freq + root.p1) - Math.sin(root.p1)) + 0.12 * (Math.sin(s * freq * 2.3 + root.p2) - Math.sin(root.p2)));
+    wander * (root.wanderScale ?? 1) * root.length * (rootOffset(root, s, freq) - (pin ? pin * s * rootOffset(root, 1, freq) : 0));
   out.x = root.ox + dx * d - dz * off;
   out.z = root.oz + dz * d + dx * off;
   return out;
@@ -155,6 +167,7 @@ const ROOT_FRAGMENT = /* glsl */ `
   uniform float uVeins;
   uniform float uVeinWidth;
   uniform float uPulseRate;
+  uniform float uPulseSign;   // +1 beats run outward (feeding), −1 inward (the drain)
   uniform float uPulseSpeed;
   uniform float uPulseWidth;
   uniform float uFrontGlow;
@@ -201,7 +214,7 @@ const ROOT_FRAGMENT = /* glsl */ `
     float vein = smoothstep(1.0 - uVeinWidth, 1.0, groove);
 
     // Heartbeats travelling outward along the roots.
-    float wave = uClock * uPulseSpeed - vDist;
+    float wave = uClock * uPulseSpeed - vDist * uPulseSign;
     float period = uPulseSpeed / max(uPulseRate, 1e-3);
     float phase = mod(wave, max(period, 1e-3));
     float beat = exp(-phase / max(uPulseWidth, 1e-3)) * step(0.0, wave);
@@ -250,6 +263,7 @@ export function createBloodrootRootMaterial() {
       uVeins: { value: 3 },
       uVeinWidth: { value: 0.25 },
       uPulseRate: { value: 1.6 },
+      uPulseSign: { value: 1 },
       uPulseSpeed: { value: 6 },
       uPulseWidth: { value: 0.9 },
       uFrontGlow: { value: 5 },
@@ -282,10 +296,10 @@ export function createBloodrootRootMaterial() {
     const C = u.uRootC.value;
     for (let i = 0; i < BLOODROOT_MAX_ROOTS; i++) {
       const r = state.roots[i];
-      const live = i < state.count && r.live ? 1 : 0;
+      const live = (i < state.count || (i === BLOODROOT_RUNNER && state.runner)) && r.live ? 1 : 0;
       A[i].set(r.ox, r.oz, r.bearing, Math.max(1e-3, r.length));
       B[i].set(r.thickness, live ? r.grown : 0, r.p1, r.p2);
-      C[i].set(r.forkDist, live, 0, 0);
+      C[i].set(r.forkDist, live, r.wanderScale ?? 1, r.pin ?? 0);
     }
     u.uWander.value = c.rootWander * g.randomness;
     u.uWanderFreq.value = c.rootWanderFreq * g.noiseFrequency;
@@ -303,6 +317,7 @@ export function createBloodrootRootMaterial() {
     u.uVeins.value = c.rootVeins * g.glow;
     u.uVeinWidth.value = c.rootVeinWidth;
     u.uPulseRate.value = c.rootPulseRate * g.animationSpeed;
+    u.uPulseSign.value = state.pulseSign ?? 1;
     u.uPulseSpeed.value = c.rootPulseSpeed;
     u.uPulseWidth.value = c.rootPulseWidth;
     u.uFrontGlow.value = c.rootFrontGlow * g.glow;
@@ -366,6 +381,8 @@ const THORN_FRAGMENT = /* glsl */ `
   uniform vec3  uColorSap;
   uniform vec3  uColorSpec;
   uniform vec3  uColorDead;
+  uniform vec3  uColorBark;
+  uniform float uBarkHeight;
   uniform vec3  uLightDir;
   uniform sampler2D uEnvMap;
   uniform float uGlobalGlow;
@@ -388,10 +405,16 @@ const THORN_FRAGMENT = /* glsl */ `
     float ndv = clamp(dot(N, V), 0.0, 1.0);
     float h = clamp(vLocal.y, 0.0, 1.0);
 
-    // Glossy red with darker veins running up the vine.
+    // The four-stop ramp, from the floor up: dark bark where the vine breaks
+    // out of the root, the clot (deep), the glossy body, and the wet tint and
+    // white-hot highlights reserved for the rim, the sap and the specular.
     vec3 vp = vec3(vLocal.x * uVeinScale * 0.2, vLocal.y * uVeinScale, vLocal.z * uVeinScale * 0.2) + vSeed * 13.0;
     float vein = pow(clamp(ridged(vp, 4), 0.0, 1.0), 4.0) * uVeins;
-    vec3 body = mix(uColorBody, uColorDeep, clamp(vein + (1.0 - h) * 0.25, 0.0, 1.0));
+    float grain = snoise(vec3(vLocal.x * 6.0, vLocal.y * 40.0, vLocal.z * 6.0) + vSeed) * 0.5 + 0.5;
+    vec3 bark = mix(uColorBark, uColorBark * 2.2, grain);
+    vec3 body = mix(uColorBody, uColorDeep, clamp(vein + (1.0 - h) * 0.45, 0.0, 1.0));
+    float barkMix = 1.0 - smoothstep(uBarkHeight * 0.55, uBarkHeight + 0.08 * grain, h);
+    body = mix(body, bark, barkMix);
 
     float lambert = 0.3 + 0.7 * clamp(dot(N, L), 0.0, 1.0);
     vec3 color = body * lambert;
@@ -407,8 +430,8 @@ const THORN_FRAGMENT = /* glsl */ `
     color += (uColorSpec * spec + env) * wet;
 
     // The bright rim, and sap welling in the barbs and the root flare.
-    float rim = pow(1.0 - ndv, uRimPower) * uRim;
-    float sap = vSap * uSap * (0.7 + 0.6 * uPulse);
+    float rim = pow(1.0 - ndv, uRimPower) * uRim * (1.0 - barkMix * 0.8);
+    float sap = vSap * uSap * (0.7 + 0.6 * uPulse) * (1.0 - barkMix * 0.6);
     color += (uColorRim * rim + uColorSap * sap) * uGlobalGlow * wet;
 
     // Withered: matte, brown-black, the rim gone to a dull ember.
@@ -446,7 +469,9 @@ export function createBloodrootThornMaterial() {
       uColorRim: { value: new Color() },
       uColorSap: { value: new Color() },
       uColorSpec: { value: new Color() },
-      uColorDead: { value: new Color() }
+      uColorDead: { value: new Color() },
+      uColorBark: { value: new Color() },
+      uBarkHeight: { value: 0.25 }
     }),
     vertexShader: THORN_VERTEX,
     fragmentShader: THORN_FRAGMENT
@@ -475,7 +500,148 @@ export function createBloodrootThornMaterial() {
     u.uColorSap.value.copy(getColor(c.colorThornSap));
     u.uColorSpec.value.copy(getColor(c.colorThornSpec));
     u.uColorDead.value.copy(getColor(c.colorThornDead));
+    u.uColorBark.value.copy(getColor(c.colorRootBark));
+    u.uBarkHeight.value = c.thornBarkHeight;
   };
 
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* the soaked floor                                                     */
+/* -------------------------------------------------------------------- */
+
+const FIELD_VERTEX = /* glsl */ `
+  varying vec2 vQ;
+  void main() {
+    vQ = uv * 2.0 - 1.0;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const FIELD_FRAGMENT = /* glsl */ `
+  uniform float uRadius;     // metres the plane spans from the heart
+  uniform float uFront;      // metres the root front has run
+  uniform float uClock;
+  uniform float uSeed;
+  uniform float uPulseRate;
+  uniform float uPulseSpeed;
+  uniform float uPulseWidth;
+  uniform float uPulseSign;
+  uniform float uVeins;
+  uniform float uSheen;
+  uniform float uOpacity;
+  uniform float uDead;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorVein;
+  uniform vec3  uColorSpec;
+  uniform vec3  uColorDead;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+  varying vec2 vQ;
+
+  ${noiseGLSL}
+
+  void main() {
+    float rn = length(vQ);
+    if (rn > 1.0) discard;
+    float r = rn * uRadius;
+    float a = atan(vQ.y, vQ.x);
+    // The soak follows the root front, its edge torn by noise.
+    float tear = fbm3(vec3(cos(a) * 2.4 + uSeed, sin(a) * 2.4, 1.7)) * 0.5 + 0.5;
+    float edge = min(uFront, uRadius * 0.92) * (0.82 + 0.18 * tear);
+    float mask = 1.0 - smoothstep(edge * 0.86, edge, r);
+    mask *= 1.0 - smoothstep(0.9, 1.0, rn);
+    if (mask < 0.003) discard;
+
+    // Blood-soaked soil: clotted black-red, blotched with the body tone.
+    vec2 p = vQ * uRadius;
+    float blot = fbm3(vec3(p * 0.9, uSeed)) * 0.5 + 0.5;
+    float grit = snoise(vec3(p * 7.0, uSeed + 4.0)) * 0.5 + 0.5;
+    vec3 col = mix(uColorDeep, uColorBody, smoothstep(0.45, 0.85, blot) * 0.7) * (0.7 + 0.4 * grit);
+    col *= 1.0 - 0.45 * smoothstep(0.4, 0.0, rn);  // darkest where the heart drinks
+
+    // Capillaries through the soak, carrying the same heartbeat as the roots.
+    float cap = pow(ridged(vec3(p * 0.55, uSeed * 0.3), 4), 7.0) * uVeins;
+    float wave = uClock * uPulseSpeed - r * uPulseSign;
+    float period = uPulseSpeed / max(uPulseRate, 1e-3);
+    float phase = mod(wave, max(period, 1e-3));
+    float beat = exp(-phase / max(uPulseWidth, 1e-3));
+    float alive = 1.0 - uDead;
+    col += uColorVein * cap * (0.25 + 1.4 * beat) * uGlobalGlow * alive;
+
+    // Wet: a glancing sheen on the pool.
+    vec3 n = normalize(vec3((blot - 0.5) * 0.5, 1.0, (grit - 0.5) * 0.3));
+    float spec = pow(clamp(dot(n, normalize(uLightDir + vec3(0.0, 1.2, 0.0))), 0.0, 1.0), 30.0);
+    col += uColorSpec * spec * uSheen * 0.35 * alive;
+
+    // Drying out: brown-black and matte.
+    col = mix(col, uColorDead * (0.6 + 0.4 * grit), uDead * 0.85);
+    float alpha = mask * uOpacity * (0.6 + 0.35 * smoothstep(0.3, 0.7, blot));
+    gl_FragColor = vec4(col, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+/**
+ * The floor the thicket drinks from: a disc that soaks dark red behind the
+ * racing root fronts (torn edge, clotted blotches, a wet sheen), with
+ * capillaries carrying the roots' heartbeat — outward while it grows, inward
+ * once the drain takes hold — drying to brown-black as the thicket withers.
+ * Normal-blended, transparent, `LAYER.VFX`; it is the deep stop that grounds
+ * the cast and stays for the whole linger.
+ */
+export function createBloodrootFieldMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uRadius: { value: 6 },
+      uFront: { value: 0 },
+      uClock: { value: 0 },
+      uSeed: { value: 0 },
+      uPulseRate: { value: 1.6 },
+      uPulseSpeed: { value: 6 },
+      uPulseWidth: { value: 0.9 },
+      uPulseSign: { value: 1 },
+      uVeins: { value: 1 },
+      uSheen: { value: 1 },
+      uOpacity: { value: 1 },
+      uDead: { value: 0 },
+      uColorDeep: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorVein: { value: new Color() },
+      uColorSpec: { value: new Color() },
+      uColorDead: { value: new Color() }
+    }),
+    vertexShader: FIELD_VERTEX,
+    fragmentShader: FIELD_FRAGMENT
+  });
+
+  /** @param {object} state { radius, front, clock, seed, dead, pulseSign } */
+  material.userData.sync = (state) => {
+    const c = settings.bloodroot;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uRadius.value = state.radius;
+    u.uFront.value = state.front;
+    u.uClock.value = state.clock;
+    u.uSeed.value = state.seed;
+    u.uDead.value = state.dead;
+    u.uPulseSign.value = state.pulseSign;
+    u.uPulseRate.value = c.rootPulseRate * g.animationSpeed;
+    u.uPulseSpeed.value = c.rootPulseSpeed;
+    u.uPulseWidth.value = c.rootPulseWidth;
+    u.uVeins.value = c.fieldVeins * g.glow;
+    u.uSheen.value = c.fieldSheen;
+    u.uOpacity.value = c.fieldOpacity * g.opacity * (1 - state.dead * 0.35);
+    u.uColorDeep.value.copy(getColor(c.colorFieldDeep));
+    u.uColorBody.value.copy(getColor(c.colorThornBody));
+    u.uColorVein.value.copy(getColor(c.colorRootVein));
+    u.uColorSpec.value.copy(getColor(c.colorThornSpec));
+    u.uColorDead.value.copy(getColor(c.colorRootDead));
+  };
   return material;
 }

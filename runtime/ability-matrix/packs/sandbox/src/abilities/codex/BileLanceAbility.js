@@ -13,6 +13,7 @@ import {
   createWakeRingsMaterial,
   createTrenchMaterial,
   createBoreMaterial,
+  createGeyserMaterial,
   MAX_WAKE_RINGS
 } from '../../materials/codex/BileLanceMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -54,8 +55,11 @@ const _up = new Vector3(0, 1, 0);
  * At the target it **bores**: the nose pitches down and the whole lance
  * screws into the floor, spraying bile back out of the hole, which opens into
  * a spiral drain. A beat later the bile **erupts** out of the bore — a
- * fountain of droplets, a wet shell, a shockwave — and then the trench and
- * the drain go on hissing until they are spent and erode away.
+ * fountain of droplets, a shockwave, and a **geyser**: a column of dark bile
+ * with a swollen head bursts up out of the hole, boils, then its head droops
+ * and it slumps into a heap that keeps bubbling — domes swell and pop —
+ * drips run off it and it sinks back into the drain, while the trench goes on
+ * hissing until it is spent and erodes away.
  *
  * ## Layers (each a folder in the editor)
  *
@@ -72,6 +76,11 @@ const _up = new Vector3(0, 1, 0);
  *   5. **the bore** (`createBoreMaterial`) — the spiral drain where the lance
  *      went in; the eruption out of it (droplets, a WATER shell, SHOCKWAVE,
  *      SCORCH, flash, shake, light punch).
+ *   5b. **the geyser** (`createGeyserMaterial`) — the eruption's mass: the
+ *       tube grid stood on end and bent into a column with a flared foot and
+ *       a mushrooming head; rise → boil → droop and slump → bubbling heap →
+ *       sinks. Lit and normal-blended so its deep stop is near-black bile.
+ *       Drips run off its head as it slumps; BUBBLE beads break off the heap.
  *   6. **drops, mist & motes** — DROPLET beads flung off the spin, SMOKE
  *      dirtying the air behind the lance, curl-noise motes off the trench.
  *   7. **haze** — the lance again, fattened, on `LAYER.DISTORTION`.
@@ -126,6 +135,15 @@ export class BileLanceAbility extends Ability {
     this.ribbonA = this._mesh(this.ribbonGeometry, this.ribbonMaterialA, LAYER.VFX, 15);
     this.ribbonMaterialB = createRibbonMaterial(Math.PI);
     this.ribbonB = this._mesh(this.ribbonGeometry, this.ribbonMaterialB, LAYER.VFX, 15);
+
+    this.geyserGeometry = createBileTubeGeometry(64, 32);
+    this.geyserMaterial = createGeyserMaterial();
+    this.geyser = this._mesh(this.geyserGeometry, this.geyserMaterial, LAYER.VFX, 13);
+    this._geyserState = { center: new Vector3(), height: 0, radius: 0, foot: 0, head: 0, headAt: 0.8, sink: 0, hot: 0, flow: 0, bubblePhase: 0, seed: 0 };
+    this._eruptAge = -1;
+    this._geyserFlow = 0;
+    this._geyserBubble = 0;
+    this._geyserTop = 0;
 
     this.wakeMaterial = createWakeRingsMaterial();
     this.wake = this._mesh(this.ringsGeometry, this.wakeMaterial, LAYER.VFX, 16);
@@ -211,7 +229,23 @@ export class BileLanceAbility extends Ability {
     this.motes.uniforms.uTurbFrequency.value = 0.8;
     this.motes.uniforms.uTurbSpeed.value = 0.6;
 
+    this.bubbles = particles.get('bilelance.bubbles', {
+      capacity: 500,
+      shape: ParticleShape.BUBBLE,
+      additive: false,
+      softFade: 0.05
+    });
+    this.bubbles.uniforms.uDrag.value = 2.2;
+    this.bubbles.uniforms.uSizeIn.value = 0.5;
+    this.bubbles.uniforms.uFadeIn.value = 0.05;
+    this.bubbles.uniforms.uFadeOut.value = 0.15;
+    this.bubbles.uniforms.uEndSize.value = 1.4;
+    this.bubbles.uniforms.uGravity.value.set(0, 0, 0);
+    this.bubbles.uniforms.uTurbulence.value = 0;
+
     this.dropEmitter = new RateEmitter();
+    this.geyserDripEmitter = new RateEmitter();
+    this.geyserBubbleEmitter = new RateEmitter();
     this.mistEmitter = new RateEmitter();
     this.moteEmitter = new RateEmitter();
     this.sprayEmitter = new RateEmitter();
@@ -247,6 +281,12 @@ export class BileLanceAbility extends Ability {
     this.mistEmitter.reset();
     this.moteEmitter.reset();
     this.sprayEmitter.reset();
+    this.geyserDripEmitter.reset();
+    this.geyserBubbleEmitter.reset();
+    this._eruptAge = -1;
+    this._geyserFlow = 0;
+    this._geyserBubble = 0;
+    this._geyserTop = 0;
     this._releaseStains();
 
     this._seed = Math.random() * 100;
@@ -285,6 +325,7 @@ export class BileLanceAbility extends Ability {
     this.wake.visible = true;
     this.trench.visible = true;
     this.bore.visible = false;
+    this.geyser.visible = false;
 
     this._placeNose(this._noseAlong, c.flightHeight);
     this._syncAll();
@@ -410,6 +451,12 @@ export class BileLanceAbility extends Ability {
     m.uSwirl.value = 1.2;
     m.uSwirlExpand.value = 0.5;
 
+    this.bubbles.setGradient(getColor(c.colorGeyserTint), getColor(c.colorGeyserTint), getColor(c.colorGeyserBody), getColor(c.colorGeyserDeep));
+    const bu = this.bubbles.uniforms;
+    bu.uSizeScale.value = g.particleSize;
+    bu.uLifeScale.value = g.particleLifetime;
+    bu.uOpacity.value = g.opacity;
+
     this.motes.setGradient(getColor(c.colorMoteA), getColor(c.colorMoteB), getColor(c.colorMoteC), getColor(c.colorMoteD));
     const t = this.motes.uniforms;
     t.uGravity.value.set(0, 0.9, 0);
@@ -508,6 +555,7 @@ export class BileLanceAbility extends Ability {
 
       if (k < 1) this._drillSpray(dt);
       if (!this._erupted && tau >= drill + Math.max(0, c.eruptDelay)) this._erupt();
+      this._geyser(dt, 0);
 
       this._trenchFx(dt, 1);
       this._updateStains(dt);
@@ -528,10 +576,11 @@ export class BileLanceAbility extends Ability {
     this._boreState.live = live;
     this._boreState.fadeT = smoothstep(0.5, 1, ft);
     this._syncAll();
+    this._geyser(dt, ft);
     this._trenchFx(dt, live);
     this._updateStains(dt);
     this.pointAt(1, this.position);
-    this.position.y = 0.4;
+    this.position.y = Math.max(0.4, this._geyserTop * 0.6);
   }
 
   /* ------------------------------------------------------------------ */
@@ -639,6 +688,7 @@ export class BileLanceAbility extends Ability {
     const power = g.explosionIntensity;
     const time = frame.uTime.value;
     this._erupted = true;
+    this._eruptAge = 0;
     this.pointAt(1, _floor);
     _floor.addScaledVector(this.direction, c.drillDepth * 0.35).setY(0.05);
 
@@ -696,6 +746,96 @@ export class BileLanceAbility extends Ability {
     this.ctx.shake.add(c.impactShake * power, 1 / Math.max(0.05, c.shakeDuration), 22);
     this.ctx.flash.trigger(getColor(c.colorFlash), c.impactFlash * power);
     this.lightBoost = c.lightIntensity * c.impactLight * power;
+  }
+
+  /**
+   * The geyser's life on the eruption clock: it bursts up, boils, droops and
+   * slumps into a heap, then sinks over the back of the fade. Every metre is
+   * read from settings; the record is only the eruption's age and two clocks.
+   * Presentation only — the eruption's hits were dealt in `_erupt`.
+   *
+   * @param {number} dt
+   * @param {number} ft 0..1 through the fade phase (0 during the impact)
+   */
+  _geyser(dt, ft) {
+    const c = settings[ID];
+    const g = settings.global;
+    if (this._eruptAge < 0) {
+      this.geyser.visible = false;
+      return;
+    }
+    this._eruptAge += dt;
+    this._geyserFlow += c.geyserFlowSpeed * dt * g.noiseSpeed;
+    this._geyserBubble += c.geyserBubbleRate * dt * g.animationSpeed;
+    const e = this._eruptAge / Math.max(0.05, g.lifetime);
+    const tRise = Math.max(0.02, c.geyserRise);
+    const tHold = Math.max(0, c.geyserHold);
+    const tSlump = Math.max(0.05, c.geyserSlump);
+    const rise = saturate(e / tRise);
+    const slump = Easing.inOutCubic(saturate((e - tRise - tHold) / tSlump));
+    const sinkK = smoothstep(saturate(c.heapSinkStart), 1, ft);
+    const power = Math.sqrt(Math.max(0.05, g.explosionIntensity));
+
+    const gs = this._geyserState;
+    this.pointAt(1, gs.center);
+    gs.center.addScaledVector(this.direction, c.drillDepth * 0.35).setY(0);
+    const up = c.geyserHeight * power * Easing.outBack(rise);
+    gs.height = lerp(up, c.heapHeight, slump) * (1 - sinkK);
+    gs.radius = lerp(c.geyserRadius * (0.55 + 0.45 * rise), c.heapRadius * 0.55, slump) * (1 - 0.35 * sinkK);
+    gs.foot = lerp(c.geyserFoot, c.heapRadius * 0.6, slump) * (1 + 0.25 * sinkK);
+    // The head swells as it tops out, then droops down the column and spreads.
+    gs.head = c.geyserHead * Easing.outCubic(rise) * (1 - slump * 0.7);
+    gs.headAt = lerp(c.geyserHeadAt, 0.45, slump);
+    gs.sink = c.heapSink * sinkK;
+    gs.hot = 1 - saturate((e - tRise * 0.5) / Math.max(0.05, tRise + tHold));
+    gs.flow = this._geyserFlow;
+    gs.bubblePhase = this._geyserBubble;
+    gs.seed = this._seed;
+    this.geyserMaterial.userData.sync(gs);
+    this.geyser.visible = gs.height > 0.03 && ft < 1;
+    this._geyserTop = gs.height;
+    if (!this.geyser.visible) return;
+
+    const time = frame.uTime.value;
+    // Drips run off the drooping head while it slumps, and thin out after.
+    const dripping = slump >= 1 ? 0.35 * (1 - sinkK) : (slump > 0 ? 1 : 0.25);
+    const nd = Math.round(this.geyserDripEmitter.tick(dt, c.geyserDripRate * dripping) * g.particleCount);
+    if (nd > 0) {
+      this._resetEmit(time);
+      _emit.size = c.dropSize * 1.5;
+      _emit.life = c.dropLife * 0.8;
+      _emit.speed = 0.6;
+      _emit.speedVariance = 0.6;
+      _emit.spread = 0.3;
+      _dir.set(0, -1, 0);
+      _emit.direction = _dir;
+      const headY = gs.height * gs.headAt;
+      const headR = gs.radius + gs.head * 0.9;
+      for (let i = 0; i < nd; i++) {
+        const a = Math.random() * TAU;
+        _pos.set(gs.center.x + Math.cos(a) * headR, Math.max(0.1, headY - gs.sink), gs.center.z + Math.sin(a) * headR);
+        _emit.position = _pos;
+        this.drops.emit(1, _emit);
+      }
+    }
+    // Bubbles break off the heap once it has slumped.
+    const nb = Math.round(this.geyserBubbleEmitter.tick(dt, c.geyserBubbles * slump * (1 - sinkK)) * g.particleCount);
+    if (nb > 0) {
+      this._resetEmit(time);
+      _emit.size = c.geyserBubbleSize;
+      _emit.life = 0.6;
+      _emit.speed = 0.4;
+      _emit.spread = 0.2;
+      _emit.direction = _up;
+      const reach = Math.max(0.1, gs.radius + gs.foot);
+      for (let i = 0; i < nb; i++) {
+        const a = Math.random() * TAU;
+        const r = reach * 0.8 * Math.sqrt(Math.random());
+        _pos.set(gs.center.x + Math.cos(a) * r, Math.max(0.05, gs.height * (1 - r / reach) * 0.8 - gs.sink), gs.center.z + Math.sin(a) * r);
+        _emit.position = _pos;
+        this.bubbles.emit(1, _emit);
+      }
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -825,6 +965,8 @@ export class BileLanceAbility extends Ability {
     this.wake.visible = false;
     this.trench.visible = false;
     this.bore.visible = false;
+    this.geyser.visible = false;
+    this._eruptAge = -1;
     this._ringAge.fill(-1);
     this._releaseStains();
   }
@@ -835,6 +977,8 @@ export class BileLanceAbility extends Ability {
     this.stripGeometry.dispose();
     this.quadGeometry.dispose();
     this.ringsGeometry.dispose();
+    this.geyserGeometry.dispose();
+    this.geyserMaterial.dispose();
     this.lanceMaterial.dispose();
     this.hazeMaterial.dispose();
     this.ribbonMaterialA.dispose();
@@ -942,6 +1086,41 @@ export function buildEditor(gui, c, Editor) {
   R(bore, c, 'shakeDuration', 0.05, 2, 0.01, 'knock lasts');
   R(bore, c, 'impactLight', 0, 8, 0.01, 'light punch (× intensity)');
   R(bore, c, 'travelRumble', 0, 1, 0.01, 'rumble in flight');
+  const gy = bore.addFolder('Geyser');
+  R(gy, c, 'geyserHeight', 0, 8, 0.05, 'height (m)');
+  R(gy, c, 'geyserRadius', 0.05, 2, 0.01, 'column radius (m)');
+  R(gy, c, 'geyserFoot', 0, 3, 0.01, 'foot flare (m)');
+  R(gy, c, 'geyserHead', 0, 3, 0.01, 'head swell (m)');
+  R(gy, c, 'geyserHeadAt', 0.3, 0.95, 0.01, 'head sits at');
+  R(gy, c, 'geyserRise', 0.02, 1.5, 0.01, 'bursts up over (s)');
+  R(gy, c, 'geyserHold', 0, 2, 0.01, 'boils for (s)');
+  R(gy, c, 'geyserSlump', 0.05, 3, 0.01, 'slumps over (s)');
+  R(gy, c, 'heapHeight', 0, 3, 0.01, 'heap height (m)');
+  R(gy, c, 'heapRadius', 0.1, 4, 0.01, 'heap radius (m)');
+  R(gy, c, 'heapSinkStart', 0, 1, 0.01, 'sinks from (of fade)');
+  R(gy, c, 'heapSink', 0, 2, 0.01, 'sinks (m)');
+  R(gy, c, 'geyserLobes', 0, 0.8, 0.005, 'lobes');
+  R(gy, c, 'geyserLobeScale', 0.1, 6, 0.05, 'lobe scale');
+  R(gy, c, 'geyserFlowSpeed', 0, 10, 0.05, 'churn speed');
+  R(gy, c, 'geyserFlowScale', 0.1, 6, 0.05, 'murk scale');
+  R(gy, c, 'geyserSway', 0, 1.5, 0.01, 'sway (m)');
+  R(gy, c, 'geyserBubbleAmp', 0, 0.6, 0.005, 'bubble domes (m)');
+  R(gy, c, 'geyserBubbleScale', 0.5, 10, 0.05, 'bubbles per m');
+  R(gy, c, 'geyserBubbleRate', 0, 4, 0.05, 'bubble cycles / s');
+  R(gy, c, 'geyserPopGlow', 0, 8, 0.05, 'pop flash');
+  R(gy, c, 'geyserOpacity', 0, 1, 0.01, 'opacity');
+  R(gy, c, 'geyserLight', 0, 3, 0.01, 'sunlit body');
+  R(gy, c, 'geyserRimGlow', 0, 6, 0.05, 'rim glow');
+  R(gy, c, 'geyserVeinGlow', 0, 6, 0.05, 'vein glow');
+  R(gy, c, 'geyserHot', 0, 10, 0.05, 'hot throat');
+  R(gy, c, 'geyserSpecular', 0, 4, 0.01, 'wet highlight');
+  R(gy, c, 'geyserDripRate', 0, 400, 1, 'drips / s off the head');
+  R(gy, c, 'geyserBubbles', 0, 200, 1, 'bubbles / s off the heap');
+  R(gy, c, 'geyserBubbleSize', 0.01, 0.6, 0.005, 'bubble size');
+  gy.addColor(c, 'colorGeyserHot').name('hot throat');
+  gy.addColor(c, 'colorGeyserTint').name('rim / veins');
+  gy.addColor(c, 'colorGeyserBody').name('body');
+  gy.addColor(c, 'colorGeyserDeep').name('deep');
   bore.addColor(c, 'colorBoreA').name('drain lip');
   bore.addColor(c, 'colorBoreB').name('drain arms');
   bore.addColor(c, 'colorBoreC').name('drain hole');

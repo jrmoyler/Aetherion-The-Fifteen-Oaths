@@ -47,7 +47,7 @@ export default {
     /* ================================================================ */
     /* 2 · THE RACE                                                      */
     /* ================================================================ */
-    raceTime: 0.85, // seconds it races the rim after the throw lands
+    raceTime: 0.6, // seconds it races the rim after the throw lands
     raceSpeedUp: 2.6, // how much faster it is running by the end, ×
     raceThickness: 0.2, // radius of the rope of blood, metres
     raceSquash: 0.65, // its height, × its radius (it runs in a channel)
@@ -66,37 +66,44 @@ export default {
     /* ================================================================ */
     /* 3 · THE WALL                                                      */
     /* ================================================================ */
-    riseTime: 0.3, // seconds the ring takes to stand up into a wall
-    wallHeight: 2.3, // metres
-    crestTear: 0.6, // how torn the crest is
-    crestFoam: 0.8, // pale foam along the crest
+    riseTime: 0.25, // seconds the ring takes to stand up into a wall
+    wallHoldTime: 0.22, // seconds the wall stands at full height, spinning, before it falls
+    wallHeight: 3.0, // metres
+    crestTear: 0.35, // how torn the crest is
+    crestFoam: 0.6, // pale foam along the crest (a thin band, the core of the ramp)
+    wallCurl: 0.55, // metres the crest curls inward like a breaking wave while it stands
+    wallFoot: 0.35, // metres the foot of the wall bulges outward, thick with blood
+    wallDeep: 0.7, // 0..1 how much of the wall the dark deep stop carries
     wallStreakScale: 3,
-    wallGlow: 2,
-    wallOpacity: 0.92,
+    wallGlow: 1.1, // streak crests only
+    wallOpacity: 0.97,
     crestSpray: 380, // droplets per second off the crest
 
     /* ================================================================ */
     /* 4 · THE FALL                                                      */
     /* ================================================================ */
-    fallTime: 0.45, // seconds the wall takes to fall in to the centre
+    fallTime: 0.4, // seconds the wall takes to fall in to the centre
     wallLean: 1.2, // metres the crest leans inward as it falls
-    wallClimb: 1.2, // how much it climbs as the circle narrows
+    wallClimb: 0.4, // how much it climbs as the circle narrows
     implodeWarp: 1.4, // how hard the air rushes in with it
     lingerTime: 0.6, // seconds the geyser keeps spouting
     geyserSpeed: 11, // m/s
     geyserRate: 260, // droplets per second
     burstDrops: 280,
-    burstSize: 2.4, // metres
+    burstMist: 80, // dark blood mist billows thrown up at the burst — the deep mass of it
+    burstShellOpacity: 0.16, // the additive shell: kept low so the dark mist carries the burst
+    burstShellIntensity: 0.5,
+    burstSize: 1.8, // metres
     shockRadius: 6,
     burstShake: 0.6,
     shakeDuration: 0.45,
     burstFlash: 0.35,
     burstLight: 3, // × lightIntensity
-    colorBurstA: '#ff8a96',
-    colorBurstB: '#d01a30',
-    colorBurstC: '#4a0410',
-    colorShockA: '#ff2a44',
-    colorShockB: '#ffc4cc',
+    colorBurstA: '#d0122a',
+    colorBurstB: '#8e0a1c',
+    colorBurstC: '#1c0206',
+    colorShockA: '#c8142c',
+    colorShockB: '#ff4a5e',
     colorFlash: '#ff4058',
 
     /* ================================================================ */
@@ -105,7 +112,7 @@ export default {
     grooveWidth: 0.24, // half-width of the groove cut round the rim, metres
     dragMarks: 18, // smears dragged in toward the centre
     splatRadius: 1.6, // the splat where the wall met itself, metres
-    channelGlow: 1.8,
+    channelGlow: 1.2,
     channelOpacity: 0.95,
     colorGroove: '#120406',
     colorChannelBlood: '#5a0614',
@@ -114,7 +121,7 @@ export default {
     /* ================================================================ */
     /* 6 · BLOOD                                                         */
     /* ================================================================ */
-    gloss: 1.5,
+    gloss: 0.9,
     rimGlow: 1.3,
     dropSize: 0.065,
     dropSpeed: 6,
@@ -124,29 +131,29 @@ export default {
     dropGlow: 1.2,
     sprayStretch: 0.22,
     sprayGlow: 2.6,
-    mistSize: 0.6,
+    mistSize: 0.75,
     mistLift: 0.8,
     mistLife: 1.6,
-    mistOpacity: 0.4,
+    mistOpacity: 0.75,
     colorBloodDeep: '#24020a',
     colorBloodBody: '#9a1222',
     colorBloodHot: '#ff2e46',
     colorBloodRim: '#ff6a78',
-    colorFoam: '#ffc0c8',
+    colorFoam: '#ff9aa6',
     colorBloomCore: '#ffdce0',
     colorBloomHalo: '#ff2440',
-    colorDropA: '#ff5a6a',
-    colorDropB: '#c8142c',
-    colorDropC: '#760614',
-    colorDropD: '#36020a',
+    colorDropA: '#e01830',
+    colorDropB: '#8a0a1a',
+    colorDropC: '#4a0410',
+    colorDropD: '#1e0206',
     colorSprayA: '#ffd8dc',
     colorSprayB: '#ff5064',
     colorSprayC: '#c0102a',
     colorSprayD: '#400208',
-    colorMistA: '#8a1020',
-    colorMistB: '#5e0a16',
-    colorMistC: '#3a060e',
-    colorMistD: '#1e0306',
+    colorMistA: '#6a0a18',
+    colorMistB: '#420610',
+    colorMistC: '#25030a',
+    colorMistD: '#0e0103',
 
     /* ================================================================ */
     /* 7 · HITS                                                          */

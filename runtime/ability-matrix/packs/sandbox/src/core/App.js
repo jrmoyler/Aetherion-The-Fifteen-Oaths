@@ -127,6 +127,7 @@ export class App {
     // built before the manager and handed over in its context.
     this.dummies = new DummyField(this.environment);
     this.scene.add(this.dummies.group);
+    // Sparks when an archetype shrugs a blow off — set once the bursts exist.
 
     /**
      * Geometry that had to be loaded rather than generated, keyed by name.
@@ -136,6 +137,8 @@ export class App {
      * long after the assets have landed.
      */
     this.models = {};
+
+    this.dummies.fx = { bursts: this.bursts };
 
     this.abilities = new AbilityManager({
       scene: this.scene,
@@ -279,6 +282,7 @@ export class App {
         // A pack whose engine is not loaded yet stands in as one entry; landing
         // on it loads the engine and takes its first (or, going back, last) ability.
         const all = ELEMENTS.map((id) => this.uidOf(id));
+        if (this.expansionLive) all.push(...this.expansionLive.byUid.keys());
         for (const pack of Object.keys(VENDOR_PACKS)) {
           const runtime = this.runtimes.get(pack);
           if (runtime) for (const id of runtime.ids) all.push(`${pack}/${id}`);
@@ -315,15 +319,16 @@ export class App {
 
   /** The uid of a native id ('tempest' → 'collective/tempest'). */
   uidOf(id) {
-    return `${this.nativePack.get(id) ?? 'native'}/${id}`;
+    return this.expansionLive?.byId.get(id)?.uid ?? `${this.nativePack.get(id) ?? 'native'}/${id}`;
   }
 
   /** Split a uid; native packs resolve to no runtime. */
   parse(uid) {
     const cut = uid.indexOf('/');
     const pack = uid.slice(0, cut);
-    const id = uid.slice(cut + 1);
-    const native = this.nativePack.get(id) === pack;
+    const expansion = this.expansionLive?.byUid.get(uid);
+    const id = expansion?.ID ?? uid.slice(cut + 1);
+    const native = !!expansion || this.nativePack.get(id) === pack;
     return { uid, pack, id, native };
   }
 
@@ -358,10 +363,10 @@ export class App {
   loadRuntime(pack) {
     if (this.runtimes.has(pack)) return Promise.resolve(this.runtimes.get(pack));
     if (this._runtimeLoads.has(pack)) return this._runtimeLoads.get(pack);
-    this.hud.showToast(`Loading the ${VENDOR_PACKS[pack]?.title ?? pack} engine…`, 4000);
+    const loadingNotice = this.hud.showToast(`Loading ${VENDOR_PACKS[pack]?.title ?? pack}…`, 4000);
     const job = loadVendorRuntime(pack, this._vendorHost).then((runtime) => {
       this.runtimes.set(pack, runtime);
-      this._runtimeLoads.delete(pack);
+      this.combat?._wrapRuntime(runtime);
       runtime.aim.on('cast', (origin, direction, distance) => this._castVendor(runtime, origin, direction, distance));
       runtime.aim.on('reject', () => this.hud.showToast('Too close — aim further out'));
       // Its own editor folders, the originals, under one heading.
@@ -370,6 +375,9 @@ export class App {
       folder.foldersRecursive().forEach((f) => f.close());
       folder.close();
       return runtime;
+    }).finally(() => {
+      this._runtimeLoads.delete(pack);
+      this.hud.dismissToast(loadingNotice);
     });
     this._runtimeLoads.set(pack, job);
     return job;
@@ -378,6 +386,7 @@ export class App {
   /** Every uid currently castable (native + loaded engines). */
   get uids() {
     const out = ELEMENTS.map((id) => this.uidOf(id));
+    if (this.expansionLive) out.push(...this.expansionLive.byUid.keys());
     for (const [pack, runtime] of this.runtimes) for (const id of runtime.ids) out.push(`${pack}/${id}`);
     return out;
   }
@@ -388,11 +397,12 @@ export class App {
    * in the right aim indicator.
    */
   async select(uid, options = {}) {
+    if (this.combat) { this.combat.mechanics.selected = null; this.combat.mechanics.selectedUid = null; }
     const ref = this.parse(uid);
     const previous = this.activeAim;
 
     if (ref.native) {
-      if (!ELEMENTS.includes(ref.id)) throw new Error(`Unknown ability ${uid}`);
+      if (!this.abilities.elements.includes(ref.id)) throw new Error(`Unknown ability ${uid}`);
       this.slot = { ...ref, runtime: null };
       this.abilities.select(ref.id);
       this.aim.setElement(ref.id);
@@ -435,6 +445,7 @@ export class App {
 
   /** Select an ability and arm it, unless it is still cooling down. */
   async arm(uid = this.slot?.uid) {
+    if (this.combat) { this.combat.mechanics.selected = null; this.combat.mechanics.selectedUid = null; }
     if (!uid) return false;
     if (uid !== this.slot?.uid) await this.select(uid);
     if ((this.cooldowns.get(uid) ?? 0) > 0) {
@@ -502,6 +513,7 @@ export class App {
   }
 
   clearEffects() {
+    this.combat?.mechanics.clear();
     this.aim.cancel();
     this.abilities.clear();
     for (const runtime of this.runtimes.values()) runtime.clear();
@@ -695,11 +707,17 @@ export class App {
     // Walk first, so the aim and the ring below are anchored on where the
     // caster is *this* frame. A summon out owns WASD and Space instead.
     const aim = this.activeAim;
+    const moveFrom = this.character.position.toArray();
     this.locomotion.update(dt, {
+      speedMultiplier: this.combat?.enabled ? this.combat.mechanics.systems.speed('caster') : 1,
       aiming: aim.isArmed,
       locked: this._summonOut(),
       abilities: this.abilities.active
     });
+
+    if (this.combat?.enabled && dt > 0) {
+      this.character.position.fromArray(this.combat.mechanics.movement(moveFrom, this.character.position.toArray()));
+    }
 
     // Targeting runs on *real* time so the arrow keeps sweeping and animating
     // while the sandbox is paused — pausing freezes the effects, not the UI.
@@ -710,22 +728,44 @@ export class App {
       this.character.turnToward(aim.facing, settings.character.turnRate, raw);
     }
     this.character.update(dt);
+    if (this.combat?.enabled) this.character.position.y = this.combat.mechanics.systems.worldshape.heightAt(this.character.position.toArray());
 
     for (const [element, remaining] of this.cooldowns) {
       if (remaining > 0) this.cooldowns.set(element, Math.max(0, remaining - raw));
     }
 
-    this.ground.update(this.elapsed);
+    this.ground.update(this.elapsed, this.character ? this.character.position : null);
     this.dust.update(this.elapsed, this.character.position);
 
+    const beforeAbilityMovement = this.character.position.toArray();
     this.abilities.update(dt);
     for (const runtime of this.runtimes.values()) runtime.update(dt, raw);
+    // The Arch-Wizard (combat/duel): its brain, its body and its own casts.
+    this.duel?.update(dt, raw);
+    // Legacy movement casts run after locomotion; keep their destination out of solid terrain.
+    if (this.combat?.enabled && dt > 0 && this.combat.mechanics.systems.worldshape.regions.size) {
+      const terrain = this.combat.mechanics.systems.worldshape;
+      const resolved = terrain.resolveAbilityMovement(beforeAbilityMovement, this.character.position.toArray());
+      if (resolved[0] !== beforeAbilityMovement[0] || resolved[2] !== beforeAbilityMovement[2])
+        resolved[1] = terrain.heightAt(resolved);
+      this.character.position.fromArray(resolved);
+    }
     // The targets step first, then read the casts that were just advanced: a
     // body has to be standing in this frame's pose before it can be knocked
     // out of it.
+    // Formations face away from the view (Line runs across it, Gauntlet away).
+    this.camera.getWorldDirection(this.dummies.forward);
+    this.dummies.forward.y = 0;
+    if (this.dummies.forward.lengthSq() < 1e-6) this.dummies.forward.set(0, 0, -1);
+    this.dummies.forward.normalize();
     this.dummies.update(dt, this.character.position);
     this.dummies.applyHits(this.abilities.active);
     for (const runtime of this.runtimes.values()) runtime.afterBodies(dt, this.elapsed);
+    // The CPU's hits on the dummies, then the referee's on the player.
+    this.duel?.afterBodies(dt);
+    this.duelPanel?.update(raw);
+    // Every hit is in by now: the combat state steps and issues its reactions.
+    this.combat?.update(dt);
     this.particles.flush();
     this.decals.update(dt);
     this.bursts.update(dt);
@@ -767,6 +807,11 @@ export class App {
 
   dispose() {
     this.stop();
+    this.duelPanel?.dispose();
+    this.duel?.dispose();
+    this.expansionDev?.dispose();
+    this.expansionLive?.dispose();
+    this.combat?.dispose();
     this.input.dispose();
     this.aim.dispose();
     this.abilities.dispose();

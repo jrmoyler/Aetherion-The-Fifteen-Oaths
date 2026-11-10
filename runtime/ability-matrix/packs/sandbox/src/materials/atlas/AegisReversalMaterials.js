@@ -1,4 +1,15 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial, Vector2, Vector3 } from 'three';
+import {
+  AdditiveBlending,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial,
+  Vector2,
+  Vector3
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
@@ -115,6 +126,7 @@ const PLATE_FRAGMENT = /* glsl */ `
   uniform float uSpecular;
   uniform float uEngrave;
   uniform float uRimGlow;
+  uniform float uRimWidth;     // fraction of a plate the lit chamfer covers
   uniform float uCharge;       // 0..1 the stored blow
   uniform float uChargeGlow;
   uniform float uCrawl;        // integrated crawl phase
@@ -152,14 +164,22 @@ const PLATE_FRAGMENT = /* glsl */ `
     float r = length(vDisc);
     float ang = atan(vDisc.y, vDisc.x);
 
-    /* --- steel --- */
+    /* --- blued steel, coloured from the four-stop ramp ---
+       deep (shadowed mass) → body (lit blue steel) → pale (sky in it) →
+       core (only the specular and the charge). The deep stop carries most
+       of the plate; nothing but highlights goes near white. */
     vec3 env = texture2D(uEnvMap, equirectUv(reflect(-V, N))).rgb;
-    float fres = 0.3 + 0.7 * pow(1.0 - ndv, 5.0);
-    float brushed = snoise(vec3(ang * 40.0, r * 3.0, seed * 9.0)) * 0.05;
-    vec3 steel = uColorSteel * (0.3 + 0.55 * clamp(dot(N, L), 0.0, 1.0) + brushed);
-    steel += uColorSteel * env * uReflect * fres;
+    float fres = 0.12 + 0.88 * pow(1.0 - ndv, 5.0);
+    float brushed = snoise(vec3(ang * 40.0, r * 3.0, seed * 9.0)) * 0.5 + 0.5;
+    float lit = clamp(dot(N, L) * 0.5 + 0.5, 0.0, 1.0);
+    lit = lit * lit;
+    // Each plate rolls its own temper, so the rings read as separate forgings.
+    float temper = 0.75 + 0.5 * fract(seed * 7.13);
+    vec3 steel = mix(uColorDeep, uColorSteel * temper, lit * (0.7 + 0.3 * brushed));
+    steel += uColorSteel * env * uReflect * fres * 0.6;
     steel += uColorSpec * pow(clamp(dot(N, normalize(L + V)), 0.0, 1.0), uGloss) * uSpecular;
-    steel += uColorDeep * 0.3;
+    // Ring-by-ring shading: the boss darkest, the outer rim catching light.
+    steel *= mix(0.75, 1.05, clamp(r / max(uRadius, 1e-3), 0.0, 1.0));
 
     /* --- channels: two arcs and a radial cut on every plate --- */
     float faceMask = step(vKind, 0.5);
@@ -176,8 +196,8 @@ const PLATE_FRAGMENT = /* glsl */ `
     float chargeLight = uCharge * (0.35 + 0.65 * crawl) * uChargeGlow;
 
     /* --- each plate's lit chamfer --- */
-    float edge = min(min(vUv.x, 1.0 - vUv.x) * 5.0, min(vUv.y, 1.0 - vUv.y) * 5.0);
-    float rim = (1.0 - smoothstep(0.0, 0.35, edge)) * faceMask + step(0.5, vKind) * 0.6;
+    float edge = min(min(vUv.x, 1.0 - vUv.x), min(vUv.y, 1.0 - vUv.y));
+    float rim = (1.0 - smoothstep(0.0, max(uRimWidth, 1e-3), edge)) * faceMask + step(0.5, vKind) * 0.25;
 
     /* --- the impact ripple --- */
     float ripple = 0.0;
@@ -189,12 +209,12 @@ const PLATE_FRAGMENT = /* glsl */ `
       ripple += exp(-d * d / 0.03) * exp(-uImpact.z * 8.0) * 3.0;
     }
 
-    vec3 color = mix(steel, uColorDeep * 0.5, channel * uEngrave);
+    vec3 color = mix(steel, uColorDeep * 0.35, channel * uEngrave);
     vec3 glowCol = mix(uColorCharge, uColorHot, crawl * uCharge);
     color += glowCol * channel * chargeLight * uGlobalGlow;
-    color += uColorRim * rim * uRimGlow * (1.0 + uCharge * 1.5) * uGlobalGlow;
-    color += uColorHot * vInfo.z * 3.0 * uGlobalGlow;
-    color += mix(uColorCharge, uColorHot, 0.5) * ripple * uImpactRing * uGlobalGlow;
+    color += uColorRim * rim * uRimGlow * (1.0 + uCharge * 0.6) * uGlobalGlow;
+    color += uColorRim * vInfo.z * 1.2 * uGlobalGlow;
+    color += uColorCharge * ripple * uImpactRing * uGlobalGlow;
     color *= uFade;
 
     gl_FragColor = vec4(color, 1.0);
@@ -219,6 +239,7 @@ export function createReversalPlateMaterial() {
       uSpecular: { value: 2 },
       uEngrave: { value: 0.6 },
       uRimGlow: { value: 1.4 },
+      uRimWidth: { value: 0.06 },
       uCharge: { value: 0 },
       uChargeGlow: { value: 6 },
       uCrawl: { value: 0 },
@@ -251,6 +272,7 @@ export function createReversalPlateMaterial() {
     u.uSpecular.value = c.metalSpecular;
     u.uEngrave.value = c.engrave;
     u.uRimGlow.value = c.rimGlow * g.glow;
+    u.uRimWidth.value = c.rimWidth;
     u.uCharge.value = state.charge;
     u.uChargeGlow.value = c.chargeGlow * g.glow * g.shaderIntensity;
     u.uCrawl.value = state.crawl;
@@ -313,7 +335,9 @@ const BOLT_FRAGMENT = /* glsl */ `
   uniform float uGlow;
   uniform float uFade;
   uniform vec3  uColorCore;
+  uniform vec3  uColorPale;
   uniform vec3  uColor;
+  uniform vec3  uColorDeep;
   uniform float uGlobalGlow;
 
   varying vec2 vUv;
@@ -324,10 +348,16 @@ const BOLT_FRAGMENT = /* glsl */ `
     float s = abs(vUv.x);
     float h = vUv.y;
     float tear = snoise(vec3(vUv.x * 3.0, h * 6.0 - uTime * 14.0, 1.7)) * 0.5 + 0.5;
-    float core = exp(-s * s * 18.0) * (1.0 - smoothstep(0.2, 0.9, h));
-    float sheath = exp(-s * s * 3.0) * (1.0 - smoothstep(0.0, 1.0, h)) * (0.6 + 0.4 * tear);
-    vec3 color = uColorCore * core * 2.0 + uColor * sheath;
-    float a = clamp(core + sheath, 0.0, 1.0) * uFade;
+    // Four stops from the axis out and from the head back: a white-hot
+    // needle, a pale-orange inner sheath, the saturated red body, and a deep
+    // ember-brown torn tail that carries most of the length.
+    float core = exp(-s * s * 22.0) * (1.0 - smoothstep(0.12, 0.7, h));
+    float inner = exp(-s * s * 7.0) * (1.0 - smoothstep(0.0, 0.55, h));
+    float sheath = exp(-s * s * 2.2) * (1.0 - smoothstep(0.05, 1.0, h)) * (0.55 + 0.45 * tear);
+    float deepK = clamp(smoothstep(0.15, 0.8, h) + (1.0 - tear) * 0.35 + s * 0.4, 0.0, 1.0);
+    vec3 body = mix(uColor, uColorDeep, deepK);
+    vec3 color = uColorCore * core * 2.2 + uColorPale * inner * 0.8 + body * sheath;
+    float a = clamp(core + inner + sheath, 0.0, 1.0) * uFade;
     if (a < 0.003) discard;
     gl_FragColor = vec4(color * uGlow * uGlobalGlow * uFade, a);
   }
@@ -350,7 +380,9 @@ export function createReversalBoltMaterial() {
       uGlow: { value: 4 },
       uFade: { value: 1 },
       uColorCore: { value: new Color() },
-      uColor: { value: new Color() }
+      uColorPale: { value: new Color() },
+      uColor: { value: new Color() },
+      uColorDeep: { value: new Color() }
     }),
     vertexShader: BOLT_VERTEX,
     fragmentShader: BOLT_FRAGMENT
@@ -370,6 +402,8 @@ export function createReversalBoltMaterial() {
     u.uFade.value = state.fade * g.opacity;
     u.uColorCore.value.copy(getColor(c.colorBoltCore));
     u.uColor.value.copy(getColor(c.colorBolt));
+    u.uColorPale.value.copy(getColor(c.colorBoltPale));
+    u.uColorDeep.value.copy(getColor(c.colorBoltDeep));
   };
 
   return material;
@@ -418,6 +452,9 @@ const CONE_FRAGMENT = /* glsl */ `
   uniform float uSeed;
   uniform vec3  uColorA;
   uniform vec3  uColorB;
+  uniform vec3  uColorDeep;
+  uniform float uDeep;
+  uniform float uScar;
   uniform float uGlobalGlow;
   uniform float uOpacity;
 
@@ -463,12 +500,26 @@ const CONE_FRAGMENT = /* glsl */ `
 
     float edgeLit = edge * behind * (1.0 - uAfter) + edge * exp(-pow((r - uFront) / 0.6, 2.0)) * swept;
 
+    /* --- the scar: burnt rays, veins and edges that cool slowly --- */
+    float cool = 1.0 - uAfter * 0.85;
+    cool *= cool;
+    float vein = 1.0 - abs(snoise(vec3(xz * 1.3, uSeed + 3.7)));
+    vein = smoothstep(0.86, 0.97, vein);
+    float scar = behind * (ray * 0.55 + vein * 0.7 + edge * 0.9) * uScar * cool * endFade;
+
     vec3 color = mix(uColorA, uColorB, front) * (front * 2.0 + trail) * uFloorGlow
                + uColorA * edgeLit * uEdgeGlow
-               + uColorA * preview;
-    float a = clamp(front + trail + edgeLit + preview, 0.0, 1.0) * endFade * uOpacity;
-    if (a < 0.003) discard;
-    gl_FragColor = vec4(color * uGlobalGlow * endFade * uOpacity, a);
+               + uColorA * preview
+               + mix(uColorDeep, uColorA, 0.75) * scar;
+    // The swept path is scorched dark: the deep stop is the cone's mass, the
+    // light only rides on it (premultiplied "over": deep darkens, light adds).
+    float scorched = behind * uDeep * (0.75 + 0.25 * scorch) * (1.0 - uAfter * 0.45)
+                   + preview * uDeep * 0.6;
+    color += uColorDeep * scorched;
+    float a = clamp(scorched, 0.0, 1.0) * endFade * uOpacity;
+    vec3 outC = color * uGlobalGlow * endFade * uOpacity;
+    if (a < 0.003 && dot(outC, outC) < 1e-5) discard;
+    gl_FragColor = vec4(outC, a);
   }
 `;
 
@@ -477,7 +528,9 @@ export function createReversalConeMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     toneMapped: false,
     uniforms: sharedUniforms({
       uQuadSize: { value: 10 },
@@ -496,6 +549,9 @@ export function createReversalConeMaterial() {
       uSeed: { value: 0 },
       uColorA: { value: new Color() },
       uColorB: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uDeep: { value: 0.6 },
+      uScar: { value: 1 },
       uOpacity: { value: 1 }
     }),
     vertexShader: CONE_VERTEX,
@@ -524,6 +580,9 @@ export function createReversalConeMaterial() {
     u.uOpacity.value = g.opacity;
     u.uColorA.value.copy(getColor(c.colorConeA));
     u.uColorB.value.copy(getColor(c.colorConeB));
+    u.uColorDeep.value.copy(getColor(c.colorConeDeep));
+    u.uDeep.value = c.coneDeep;
+    u.uScar.value = c.scarGlow * g.shaderIntensity;
   };
 
   return material;
@@ -579,6 +638,9 @@ const WALL_FRAGMENT = /* glsl */ `
   uniform float uGlow;
   uniform vec3  uColorA;
   uniform vec3  uColorB;
+  uniform vec3  uColorDeep;
+  uniform float uDeep;
+  uniform float uCrest;
   uniform float uGlobalGlow;
 
   varying vec2 vUv;
@@ -592,17 +654,33 @@ const WALL_FRAGMENT = /* glsl */ `
     float s = abs(vUv.x);
     float h = vUv.y;
     float sides = 1.0 - smoothstep(0.7, 1.0, s);
-    float top = 1.0 - smoothstep(0.25, 1.0, h);
+    // The body runs nearly to the top, so the wave's full height shows from
+    // behind the caster; a torn crest line caps it.
+    float grain = 0.7 + 0.3 * snoise(vec3(vUv.x * 8.0, h * 4.0 - uTime * 6.0, 2.3));
+    float tear = 0.04 * snoise(vec3(vUv.x * 2.6, uTime * 1.5, 7.1));
+    float crestAt = 0.86 + tear;
+    float top = 1.0 - smoothstep(crestAt, crestAt + 0.1, h);
     float bands = 0.5 + 0.5 * sin(h * uBands * 6.2831853 - uTime * 14.0);
     bands = pow(bands, 3.0);
-    float grain = 0.7 + 0.3 * snoise(vec3(vUv.x * 8.0, h * 4.0 - uTime * 6.0, 2.3));
     vec3 V = normalize(cameraPosition - vWorld);
     float fres = 0.5 + 0.5 * pow(1.0 - abs(dot(V, normalize(vNormalW))), 2.0);
-    float light = (0.35 + bands) * sides * top * grain * fres;
-    vec3 color = mix(uColorA, uColorB, bands * (1.0 - h));
-    float a = clamp(light, 0.0, 1.0) * uStrength;
-    if (a < 0.003) discard;
-    gl_FragColor = vec4(color * light * uGlow * uGlobalGlow * uStrength, a);
+    // One dark mass: light gathers at its foot (where it tears the floor) and
+    // its crest, with rising spray streaks between — the bands only faint.
+    float foot = exp(-h * 7.0);
+    float spray = snoise(vec3(vUv.x * 16.0, h * 1.6 - uTime * 2.5, 4.2)) * 0.5 + 0.5;
+    spray = pow(spray, 4.0) * smoothstep(0.0, 0.2, h);
+    float light = (foot * 1.4 + spray * 0.55 + bands * 0.18) * sides * top * grain * fres;
+    vec3 color = mix(uColorA, uColorB, foot * 0.5 + bands * 0.15);
+    float crest = exp(-pow((h - crestAt) / 0.05, 2.0)) * sides * (0.75 + 0.25 * grain);
+    // A dark body to the wave (premultiplied "over"), the bands of light on it.
+    float body = sides * top * uDeep * uStrength * (0.75 + 0.25 * grain);
+    // A low navy fill so the mass reads against the night sky, not only its light.
+    float fill = sides * top * uStrength * (0.12 + 0.1 * h) * fres;
+    vec3 outC = uColorDeep * body + uColorA * fill * uGlobalGlow
+              + color * light * uGlow * uGlobalGlow * uStrength
+              + mix(uColorA, uColorB, 0.35) * crest * uCrest * uGlobalGlow * uStrength;
+    if (body < 0.003 && dot(outC, outC) < 1e-5) discard;
+    gl_FragColor = vec4(outC, clamp(body, 0.0, 1.0));
   }
 `;
 
@@ -620,7 +698,7 @@ const WALL_WARP_FRAGMENT = /* glsl */ `
   void main() {
     float s = abs(vUv.x);
     float h = vUv.y;
-    float mask = (1.0 - smoothstep(0.6, 1.0, s)) * (1.0 - smoothstep(0.3, 1.0, h));
+    float mask = (1.0 - smoothstep(0.6, 1.0, s)) * (1.0 - smoothstep(0.5, 0.95, h));
     float ripple = 0.6 + 0.4 * sin(h * 20.0 - uTime * 18.0);
     float strength = uStrength * mask * ripple;
     if (strength < 0.002) discard;
@@ -640,7 +718,10 @@ function wallUniforms() {
     uBands: { value: 6 },
     uGlow: { value: 2 },
     uColorA: { value: new Color() },
-    uColorB: { value: new Color() }
+    uColorB: { value: new Color() },
+    uColorDeep: { value: new Color() },
+    uDeep: { value: 0.4 },
+    uCrest: { value: 1 }
   });
 }
 
@@ -659,6 +740,9 @@ function syncWall(material, state, warp) {
   u.uGlow.value = c.wallGlow * g.glow;
   u.uColorA.value.copy(getColor(c.colorConeA));
   u.uColorB.value.copy(getColor(c.colorConeB));
+  u.uColorDeep.value.copy(getColor(c.colorConeDeep));
+  u.uDeep.value = c.wallDeep;
+  u.uCrest.value = c.wallCrest * g.glow;
 }
 
 export function createReversalWallMaterial() {
@@ -666,7 +750,9 @@ export function createReversalWallMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     uniforms: wallUniforms(),
@@ -694,3 +780,161 @@ export function createReversalWarpMaterial() {
   return material;
 }
 
+
+/* ==================================================================== */
+/* 6 · the seal under the shield                                          */
+/* ==================================================================== */
+
+/**
+ * The ground seal: a dark, engraved disc the shield stands on.
+ *
+ *  - **telegraph** (`uTele` 0→1 while the anchor is in flight): two rings of
+ *    light close in on the landing point from well outside it, with a dark
+ *    disc thickening under them — the target is marked before anything lands;
+ *  - **body** (`uForm`): a deep-navy disc that darkens the floor (premultiplied
+ *    "over"), cut with three engraved bands — an outer rune ring turning one
+ *    way, an inner chevron ring turning the other, a hub — in the saturated
+ *    blue, brightening with the stored blow (`uCharge`) and flaring at the
+ *    release (`uFlash`);
+ *  - it stays through the linger and fades with the plates.
+ */
+const SEAL_VERTEX = /* glsl */ `
+  uniform float uQuadSize;
+  varying vec2 vLocal;
+  void main() {
+    vLocal = (uv - 0.5) * uQuadSize;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const SEAL_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uRadius;
+  uniform float uSpin;
+  uniform float uRunes;
+  uniform float uTele;
+  uniform float uForm;
+  uniform float uCharge;
+  uniform float uFlash;
+  uniform float uFade;
+  uniform float uGlow;
+  uniform float uDeep;
+  uniform float uSeed;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColor;
+  uniform vec3  uColorHot;
+  uniform float uGlobalGlow;
+  uniform float uOpacity;
+
+  varying vec2 vLocal;
+
+  ${noiseGLSL}
+
+  float band(float r, float at, float w) {
+    return exp(-pow((r - at) / max(w, 1e-4), 2.0));
+  }
+
+  void main() {
+    float R = max(uRadius, 1e-3);
+    float r = length(vLocal) / R;
+    if (r > 2.0) discard;
+    float ang = atan(vLocal.y, vLocal.x);
+    float aa = fwidth(r) * 1.5;
+
+    /* --- the telegraph: rings closing in on the mark --- */
+    float pre = 1.0 - uForm;
+    float ringAt = 1.0 + (1.0 - uTele) * 0.85;
+    float tele = (band(r, ringAt, 0.035 + aa) + band(r, ringAt * 0.62, 0.025 + aa) * 0.6) * uTele * pre;
+
+    /* --- the disc --- */
+    float disc = 1.0 - smoothstep(1.0 - aa, 1.0 + aa, r);
+    float grain = snoise(vec3(vLocal * 3.0, uSeed)) * 0.5 + 0.5;
+    float deep = disc * uDeep * max(uForm, uTele * 0.55) * (0.85 + 0.15 * grain);
+
+    /* --- engraved bands --- */
+    float rim = band(r, 0.98, 0.018 + aa) + band(r, 0.76, 0.012 + aa) * 0.8;
+    float hub = band(r, 0.36, 0.014 + aa) + (1.0 - smoothstep(0.08, 0.1 + aa, r)) * 0.6;
+    // Rune ring: one bar per segment, rolled lengths, turning with uSpin.
+    float n = max(3.0, floor(uRunes + 0.5));
+    float sa = (ang + uSpin) / 6.2831853 * n;
+    float cell = floor(sa);
+    float fx = abs(fract(sa) - 0.5);
+    float roll = hash11(cell + uSeed);
+    float runeLen = mix(0.04, 0.16, roll);
+    float rune = (1.0 - smoothstep(0.12, 0.12 + fwidth(sa) * 1.5, fx))
+               * (1.0 - smoothstep(runeLen, runeLen + aa, abs(r - 0.87)));
+    // Chevron ring, counter-turning.
+    float sc = (ang - uSpin * 1.6) / 6.2831853 * n * 0.5;
+    float chev = abs(fract(sc + abs(r - 0.56) * 2.5) - 0.5);
+    chev = (1.0 - smoothstep(0.06, 0.06 + fwidth(sc) * 2.0, chev)) * (1.0 - smoothstep(0.1, 0.1 + aa, abs(r - 0.56)));
+
+    float lines = (rim + hub * 0.8 + rune * 0.9 + chev * 0.7) * disc * uForm;
+    float charge = 0.45 + 0.8 * uCharge + 1.0 * uFlash;
+    vec3 col = mix(uColor, uColorHot, clamp(uCharge * 0.4 + uFlash * 0.4 + rim * 0.15, 0.0, 1.0));
+    vec3 light = col * lines * charge * uGlow + uColor * tele * uGlow * 1.6;
+
+    float a = clamp(deep, 0.0, 1.0) * uFade * uOpacity;
+    vec3 outC = (uColorDeep * deep + light) * uGlobalGlow * uFade * uOpacity;
+    if (a < 0.003 && dot(outC, outC) < 1e-5) discard;
+    gl_FragColor = vec4(outC, a);
+  }
+`;
+
+export function createReversalSealMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+    uniforms: sharedUniforms({
+      uQuadSize: { value: 4 },
+      uRadius: { value: 1.6 },
+      uSpin: { value: 0 },
+      uRunes: { value: 12 },
+      uTele: { value: 0 },
+      uForm: { value: 0 },
+      uCharge: { value: 0 },
+      uFlash: { value: 0 },
+      uFade: { value: 1 },
+      uGlow: { value: 1.5 },
+      uDeep: { value: 0.65 },
+      uSeed: { value: 0 },
+      uColorDeep: { value: new Color() },
+      uColor: { value: new Color() },
+      uColorHot: { value: new Color() },
+      uOpacity: { value: 1 }
+    }),
+    vertexShader: SEAL_VERTEX,
+    fragmentShader: SEAL_FRAGMENT
+  });
+
+  /** @param {object} state { quadSize, radius, spin, tele, form, charge, flash, fade, seed } */
+  material.userData.sync = (state) => {
+    const c = settings.reversal;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uQuadSize.value = state.quadSize;
+    u.uRadius.value = state.radius;
+    u.uSpin.value = state.spin;
+    u.uRunes.value = c.sealRunes;
+    u.uTele.value = state.tele;
+    u.uForm.value = state.form;
+    u.uCharge.value = state.charge;
+    u.uFlash.value = state.flash;
+    u.uFade.value = state.fade;
+    u.uGlow.value = c.sealGlow * g.glow * g.shaderIntensity;
+    u.uDeep.value = c.sealDeep;
+    u.uSeed.value = state.seed;
+    u.uOpacity.value = g.opacity;
+    u.uColorDeep.value.copy(getColor(c.colorSealDeep));
+    u.uColor.value.copy(getColor(c.colorSeal));
+    u.uColorHot.value.copy(getColor(c.colorSealHot));
+  };
+
+  return material;
+}

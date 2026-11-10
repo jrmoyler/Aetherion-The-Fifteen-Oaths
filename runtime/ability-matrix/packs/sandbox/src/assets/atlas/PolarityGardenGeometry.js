@@ -179,3 +179,58 @@ export function createTetherRibbonGeometry(segments = 40) {
   geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
   return geometry;
 }
+
+/**
+ * The **flux tube** that stands over each planted capsule: an open lathed
+ * hourglass, unit radius at the base, pinched to `pinch` a third of the way
+ * up and flaring back out to `flare` at the top — the shape of field lines
+ * leaving a pole and spreading. `y` runs 0 → 1 (the vertex stage multiplies
+ * by the live height), `uv = (round, up)` so the shader can run field lines
+ * round it and flow along it.
+ *
+ * @param {number} [sides]
+ * @param {number} [rows]
+ */
+export function createFluxTubeGeometry(sides = 28, rows = 18, pinch = 0.38, flare = 0.9) {
+  const positions = [];
+  const normals = [];
+  const uvs = [];
+  const indices = [];
+  const smooth = (a, b, x) => {
+    const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
+    return t * t * (3 - 2 * t);
+  };
+  const radius = (y) => 1 + (pinch - 1) * smooth(0, 0.38, y) + (flare - pinch) * smooth(0.45, 1, y);
+  for (let i = 0; i <= rows; i++) {
+    const y = i / rows;
+    const r = radius(y);
+    const dr = (radius(Math.min(1, y + 0.01)) - radius(Math.max(0, y - 0.01))) / 0.02;
+    // Outward normal of the profile: (1, −dr) normalised in (radial, y).
+    const l = Math.hypot(1, dr) || 1;
+    const nr = 1 / l;
+    const ny = -dr / l;
+    for (let s = 0; s <= sides; s++) {
+      const a = (s / sides) * Math.PI * 2;
+      const c = Math.cos(a);
+      const sn = Math.sin(a);
+      positions.push(c * r, y, sn * r);
+      normals.push(c * nr, ny, sn * nr);
+      uvs.push(s / sides, y);
+    }
+  }
+  const stride = sides + 1;
+  for (let i = 0; i < rows; i++) {
+    for (let s = 0; s < sides; s++) {
+      const a = i * stride + s;
+      const b = a + stride;
+      indices.push(a, b, a + 1, a + 1, b, b + 1);
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(new Float32Array(positions), 3));
+  geometry.setAttribute('normal', new BufferAttribute(new Float32Array(normals), 3));
+  geometry.setAttribute('uv', new BufferAttribute(new Float32Array(uvs), 2));
+  geometry.setIndex(indices);
+  geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
+  return geometry;
+}

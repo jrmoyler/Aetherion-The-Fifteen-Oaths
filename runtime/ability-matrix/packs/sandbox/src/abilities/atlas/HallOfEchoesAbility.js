@@ -15,12 +15,15 @@ import {
   createEchoDaisMaterial,
   createEchoHoloMaterial,
   createEchoMirrorMaterial,
-  createEchoWarpMaterial
+  createEchoWarpMaterial,
+  createEchoPanelMaterial,
+  createEchoFloorMaterial
 } from '../../materials/atlas/HallOfEchoesMaterials.js';
 import {
   createEchoBeamGeometry,
   createEchoDaisGeometry,
-  createMirrorShardGeometry
+  createMirrorShardGeometry,
+  createHallPanelGeometry
 } from '../../assets/atlas/HallOfEchoesGeometry.js';
 import { CasterDouble } from '../../assets/atlas/ChronoRecallRig.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -41,7 +44,12 @@ const COPIES = 3;
 const MAX_PER_COPY = 48;
 /** Shard silhouettes, so the cloud is not one shape rotated. */
 const VARIANTS = 2;
-const MAX_SHARDS = COPIES * MAX_PER_COPY;
+/** Mirror panes standing round the hall; the count slider clamps to it. */
+const MAX_PANES = 9;
+/** Shards each pane breaks into (cosmetic: panes do not cut). */
+const PER_PANE = 8;
+const COPY_SHARDS = COPIES * MAX_PER_COPY;
+const MAX_SHARDS = COPY_SHARDS + MAX_PANES * PER_PANE;
 const PER_VARIANT = MAX_SHARDS / VARIANTS;
 const TAU = Math.PI * 2;
 
@@ -52,6 +60,7 @@ const _dir = new Vector3();
 const _a = new Vector3();
 const _b = new Vector3();
 const _q = new Quaternion();
+const _up = new Vector3(0, 1, 0);
 const _node = new Object3D();
 const _nodes = new Vector3();
 /** Reused by `DummyField#findTargets`. */
@@ -61,15 +70,21 @@ const _used = new Int32Array(VARIANTS);
 /**
  * HALL OF ECHOES — Illusion, zone cast.
  *
- * A projector circle unfurls on the floor of the zone and three holographic
- * copies of the caster are *printed* into the air over its emitter nodes —
+ * A disc of black glass and a projector circle unfurl on the floor of the
+ * zone, and round its far side a **hall of mirrors** comes up out of the
+ * floor — tall round-arched panes of real silvered glass, lit by the sun,
+ * reflecting the sky, opening toward the caster like a stage. Three
+ * holographic copies of the caster, half again your height, are *printed*
+ * into the air over the circle's emitter nodes —
  * slice by slice from the feet up, each slice sliding in from the side behind
  * a hot build line — and stand there breathing on the caster's own idle,
  * orbiting the centre. Halfway through, they **swap**: each one cuts straight
  * through the middle to the opposite side of the ring, staggered so they
  * thread past each other, glitching hard as they cross. Then the illusion
- * breaks: each copy **shatters** into faceted mirror that flies outward,
- * reflecting the stage, and every shard that reaches a body takes it down.
+ * breaks: the panes craze with light, each copy **shatters** into faceted
+ * mirror that flies outward, the panes burst after them and sink, the black
+ * glass floor cracks from the centre, and every copy shard that reaches a
+ * body takes it down.
  *
  * ## Layers
  *
@@ -96,6 +111,16 @@ const _used = new Int32Array(VARIANTS);
  *   5. **PIXELS** — soft additive motes boiling off the copies while they
  *      are printed and wherever they cross.
  *   6. **GLITTER** — streaks at the shatter and at every kill.
+ *   9. **THE HALL** (`createHallPanelGeometry` + `createEchoPanelMaterial`) —
+ *      the authored hero shape: round-arched bevelled mirror slabs, solid and
+ *      lit (metal, near-mirror roughness, LAYER.WORLD, casting shadows), with
+ *      a silvered rim, scanlines and voronoi cracks patched into the emissive
+ *      term. Seated on `paneSeat × zoneRadius` across `paneArc` radians of the
+ *      far side, rising out of the floor sweep-ordered from the back, they
+ *      tilt slowly while the hall stands, craze, burst and sink at the break.
+ *  10. **BLACK GLASS** (`createEchoFloorMaterial`) — the deep tone under the
+ *      circle (normal blending), mirroring the sky; cracks run out from the
+ *      centre at the break and stay through the fade.
  *   7. **CRACKED LENS** (LAYER.DISTORTION) — a voronoi-paned warp running out
  *      from the centre at the shatter: the frame itself looks broken.
  *   8. **IMPACT** — AIR shell, SHOCKWAVE decal, flash, shake and a light punch
@@ -152,6 +177,37 @@ export class HallOfEchoesAbility extends Ability {
     this.dais.visible = false;
     this.group.add(this.dais);
     this._daisState = { size: 6, reveal: 0, fade: 1, orbit: 0.7, nodes: _nodes, pulse: 0 };
+
+    /* ---- layer 10: black glass under it ---- */
+    this.floorMaterial = createEchoFloorMaterial();
+    this.floor = new Mesh(this.daisGeometry, this.floorMaterial);
+    this.floor.name = 'EchoFloor';
+    this.floor.layers.set(LAYER.VFX);
+    this.floor.frustumCulled = false;
+    this.floor.renderOrder = 2;
+    this.floor.visible = false;
+    this.group.add(this.floor);
+    this._floorState = { size: 6, reveal: 0, fade: 1, crack: 0, heat: 0, seed: 0 };
+
+    /* ---- layer 9: the hall of mirrors (solid, lit) ---- */
+    this.paneGeometry = null;
+    this._paneKey = '';
+    this._paneGeometryFor();
+    this.paneMaterial = createEchoPanelMaterial();
+    this.panes = new InstancedMesh(this.paneGeometry, this.paneMaterial, MAX_PANES);
+    this.panes.name = 'EchoHall';
+    this.panes.layers.set(LAYER.WORLD);
+    this.panes.castShadow = true;
+    this.panes.receiveShadow = true;
+    this.panes.frustumCulled = false;
+    this.panes.count = 0;
+    this.panes.visible = false;
+    this.group.add(this.panes);
+    this._paneState = { width: 1.25, height: 2.9, crack: 0, live: 1 };
+    /** Dice per pane: unitless jitter only. */
+    this.paneDice = [];
+    for (let i = 0; i < MAX_PANES; i++) this.paneDice.push({ lean: 0, yaw: 0, phase: 0, broken: false });
+    this._facing = 0;
 
     /* ---- layers 1 & 3: the copies and their beams ---- */
     this.beamGeometry = createEchoBeamGeometry();
@@ -232,7 +288,8 @@ export class HallOfEchoesAbility extends Ability {
         rot: new Quaternion(),
         spin: 0,
         size: 1,
-        glint: 0
+        glint: 0,
+        lethal: true
       });
     }
 
@@ -252,6 +309,150 @@ export class HallOfEchoesAbility extends Ability {
     this._shatterAge = -1;
     this._seed = 0;
     this._daisStamped = false;
+  }
+
+  /** The pane, rebuilt only when its size sliders move (keeps the arch round). */
+  _paneGeometryFor() {
+    const c = settings.echoes;
+    const key = `${c.paneWidth}|${c.paneHeight}|${c.paneDepth}`;
+    if (this.paneGeometry && key === this._paneKey) return this.paneGeometry;
+    this._paneKey = key;
+    const old = this.paneGeometry;
+    this.paneGeometry = createHallPanelGeometry(Math.max(0.1, c.paneWidth), Math.max(0.2, c.paneHeight), Math.max(0.01, c.paneDepth));
+    if (this.panes) this.panes.geometry = this.paneGeometry;
+    old?.dispose();
+    return this.paneGeometry;
+  }
+
+  /** The bearing of pane `i` round the centre, world radians (x = cos, z = sin). */
+  _paneAngle(i, n) {
+    const c = settings.echoes;
+    const f = n <= 1 ? 0 : i / (n - 1) - 0.5;
+    return this._facing + f * c.paneArc;
+  }
+
+  /** Raise, hold, craze, break and sink the hall. */
+  _updatePanes(dt) {
+    const c = settings.echoes;
+    const g = settings.global;
+    const tau = this._hall;
+    if (tau < 0) {
+      this.panes.visible = false;
+      return;
+    }
+    this._paneGeometryFor();
+    const n = Math.min(MAX_PANES, Math.max(0, Math.round(c.paneCount)));
+    const R = c.zoneRadius * c.paneSeat;
+    const breakAt = c.lifetime - c.paneCrackLead;
+    const crack = saturate((tau - breakAt) / Math.max(0.02, c.paneCrackLead));
+    const time = frame.uTime.value;
+    let any = false;
+    for (let i = 0; i < MAX_PANES; i++) {
+      const d = this.paneDice[i];
+      if (i >= n) {
+        _node.position.set(0, -999, 0);
+        _node.scale.setScalar(0.0001);
+        _node.updateMatrix();
+        this.panes.setMatrixAt(i, _node.matrix);
+        continue;
+      }
+      const a = this._paneAngle(i, n);
+      // Sweep-ordered from the back of the hall out to its wings.
+      const f = n <= 1 ? 0 : Math.abs(i / (n - 1) - 0.5) * 2;
+      const start = c.paneDelay + f * c.paneStagger;
+      const k = saturate((tau - start) / Math.max(0.02, c.paneRiseTime));
+      // Glass comes up fast and springs: overshoot past full height, settle.
+      const rise = k < 1 ? Easing.outBack(k) : 1;
+      // After the break: burst, then sink back into the floor.
+      const brokenAt = c.lifetime + c.shatterStagger * (COPIES - 1) * f;
+      const sink = saturate((tau - brokenAt) / Math.max(0.02, c.paneSinkTime));
+      if (sink > 0 && !d.broken) {
+        d.broken = true;
+        this._breakPane(i, a, R);
+      }
+      const shown = rise * (1 - Easing.inCubic(sink));
+      _node.position.set(this._centre.x + Math.cos(a) * R, -c.paneHeight * Easing.inQuad(sink) * 0.9, this._centre.z + Math.sin(a) * R);
+      // Face the middle; lean back a touch, sway slowly while the hall stands.
+      const sway = Math.sin(time * c.paneSwayRate + d.phase) * c.paneSway * (1 - sink);
+      _node.rotation.set(-(c.paneLean + d.lean) + sway, -a - Math.PI / 2 + d.yaw, 0, 'YXZ');
+      // Shaking in its frame as it crazes.
+      if (crack > 0 && sink <= 0) {
+        _node.position.x += Math.sin(time * 70 + i) * 0.03 * crack;
+        _node.position.z += Math.cos(time * 63 + i) * 0.03 * crack;
+      }
+      _node.scale.set(1, Math.max(0.0001, shown), 1);
+      _node.updateMatrix();
+      this.panes.setMatrixAt(i, _node.matrix);
+      if (shown > 0.001) any = true;
+    }
+    this.panes.count = n;
+    this.panes.instanceMatrix.needsUpdate = true;
+    this.panes.visible = any;
+    const st = this._paneState;
+    st.width = c.paneWidth;
+    st.height = c.paneHeight;
+    st.crack = crack;
+    st.live = 1 - crack * 0.4;
+    this.paneMaterial.userData.sync(st);
+  }
+
+  /** A pane bursts: a fan of cosmetic shards and a puff of glitter. */
+  _breakPane(i, a, R) {
+    const c = settings.echoes;
+    const g = settings.global;
+    const time = this.age;
+    const count = Math.min(PER_PANE, Math.max(0, Math.round(c.paneShards * g.particleCount)));
+    const cx = this._centre.x + Math.cos(a) * R;
+    const cz = this._centre.z + Math.sin(a) * R;
+    for (let k = 0; k < count; k++) {
+      const shard = this.shards[COPY_SHARDS + i * PER_PANE + k];
+      shard.alive = true;
+      shard.lethal = false;
+      shard.born = time;
+      const across = randRange(-0.5, 0.5) * c.paneWidth;
+      shard.pos.set(cx - Math.sin(a) * across, randRange(0.2, 0.95) * c.paneHeight, cz + Math.cos(a) * across);
+      // Out of the hall, away from the middle.
+      const speed = c.shardSpeed * randRange(0.25, 0.6);
+      shard.vel.set(Math.cos(a) * speed, c.shardLift * randRange(0.1, 0.6), Math.sin(a) * speed);
+      shard.axis.set(randRange(-1, 1), randRange(-1, 1), randRange(-1, 1));
+      if (shard.axis.lengthSq() < 1e-4) shard.axis.set(0, 1, 0);
+      shard.axis.normalize();
+      shard.rot.set(Math.random(), Math.random(), Math.random(), Math.random()).normalize();
+      shard.spin = randRange(0.5, 1.5);
+      shard.size = randRange(1.0, 1.9);
+      shard.glint = 0;
+    }
+    _a.set(cx, c.paneHeight * 0.5, cz);
+    _emit.position = _a;
+    _emit.radius = c.paneWidth * 0.5;
+    _emit.direction = _dir.set(Math.cos(a), 0.4, Math.sin(a)).normalize();
+    _emit.speed = c.glitterSpeed * 0.6;
+    _emit.speedVariance = 0.6;
+    _emit.spread = 0.9;
+    _emit.inherit = null;
+    _emit.anchor = null;
+    _emit.size = 0.09;
+    _emit.sizeVariance = 0.5;
+    _emit.life = c.glitterLifetime;
+    _emit.lifeVariance = 0.4;
+    _emit.spin = 0;
+    _emit.tint = null;
+    _emit.time = frame.uTime.value;
+    this.glitter.emit(Math.round(c.shatterGlitter * 0.4 * g.particleCount), _emit);
+  }
+
+  _updateFloor(fade) {
+    const c = settings.echoes;
+    const st = this._floorState;
+    st.size = c.zoneRadius * c.floorScale * 2;
+    st.reveal = Easing.outCubic(saturate(this._hall / Math.max(0.02, c.daisTime))) * 1.1;
+    st.fade = this.phase === AbilityPhase.FADE ? 1 - Easing.inQuad(saturate((this.fadeTime / this.fadeDuration - 0.3) / 0.7)) : 1;
+    st.crack = this._shatterAge < 0 ? 0 : Easing.outCubic(saturate(this._shatterAge / Math.max(0.02, c.floorCrackTime))) * 1.1;
+    st.heat = this._shatterAge < 0 ? 0 : Math.exp(-this._shatterAge * 1.8);
+    st.seed = this._seed;
+    this.floorMaterial.userData.sync(st);
+    this.floor.position.copy(this._centre).setY(0.012);
+    this.floor.visible = this._hall >= 0 && st.fade > 0.002;
   }
 
   /** An idle loop on the copy's own skeleton, if the caster has one to lend. */
@@ -359,6 +560,17 @@ export class HallOfEchoesAbility extends Ability {
     for (const mesh of this.shardMeshes) mesh.count = 0;
     this.dais.visible = false;
     this.warp.visible = false;
+    // The hall opens toward the caster: panes stand on the far side.
+    this._facing = Math.atan2(this.direction.z, this.direction.x);
+    const g = settings.global;
+    for (const d of this.paneDice) {
+      d.lean = randRange(-0.04, 0.04) * g.randomness;
+      d.yaw = randRange(-0.08, 0.08) * g.randomness;
+      d.phase = Math.random() * TAU;
+      d.broken = false;
+    }
+    this.panes.visible = false;
+    this.floor.visible = false;
     this._sync();
   }
 
@@ -427,7 +639,7 @@ export class HallOfEchoesAbility extends Ability {
 
       if (!copy.crossed && sw >= 0.5) {
         copy.crossed = true;
-        _a.copy(_pos).setY(double.height * 0.5);
+        _a.copy(_pos).setY(double.height * c.copyScale * 0.5);
         this._emitPixels(_a, Math.round(c.swapPixels * g.particleCount), c.pixelSpeed * 2);
       }
 
@@ -436,7 +648,9 @@ export class HallOfEchoesAbility extends Ability {
       const moving = Math.atan2(_dir.x, _dir.z);
       const swapping = Math.sin(sw * Math.PI);
       double.root.position.copy(_pos);
+      double.root.scale.setScalar(Math.max(0.1, c.copyScale));
       double.setFacing(lerpAngle(outward, moving, swapping));
+      const H = double.height * Math.max(0.1, c.copyScale);
 
       /* --- printed into the air --- */
       const start = c.assembleDelay + i * c.assembleStagger;
@@ -464,7 +678,7 @@ export class HallOfEchoesAbility extends Ability {
       st.glitch = glitch;
       st.fade = 1;
       st.seed = copy.seed * 31 + this._seed;
-      st.height = double.height;
+      st.height = H;
       copy.material.userData.sync(st);
 
       /* --- the beam: blazes while printing, idles after --- */
@@ -475,13 +689,13 @@ export class HallOfEchoesAbility extends Ability {
       copy.beamMaterial.userData.sync(copy.beamState);
       copy.beam.visible = beamOn > 0.003;
       copy.beam.position.copy(_pos).setY(0.01);
-      copy.beam.scale.set(c.beamRadius, double.height * c.beamHeight, c.beamRadius);
+      copy.beam.scale.set(c.beamRadius * c.copyScale, H * c.beamHeight, c.beamRadius * c.copyScale);
 
       /* --- pixels boiling off a copy as it prints --- */
       if (printing) {
         const n = Math.round(this.pixelEmitter.tick(dt, c.pixelRate) * g.particleCount);
         if (n > 0) {
-          _a.copy(_pos).setY(double.height * as);
+          _a.copy(_pos).setY(H * as);
           this._emitPixels(_a, n, c.pixelSpeed);
         }
       }
@@ -534,6 +748,7 @@ export class HallOfEchoesAbility extends Ability {
     for (let n = 0; n < count; n++) {
       const shard = this.shards[index * MAX_PER_COPY + n];
       shard.alive = true;
+      shard.lethal = true;
       shard.born = time;
       copy.double.bodyPoint(shard.pos, Math.random());
       shard.pos.x += randRange(-0.12, 0.12);
@@ -555,12 +770,12 @@ export class HallOfEchoesAbility extends Ability {
       shard.axis.normalize();
       shard.rot.set(Math.random(), Math.random(), Math.random(), Math.random()).normalize();
       shard.spin = randRange(0.5, 1.5);
-      shard.size = randRange(0.55, 1.45);
+      shard.size = randRange(0.55, 1.45) * Math.sqrt(Math.max(0.1, c.copyScale));
       shard.glint = 0;
     }
 
     /* --- the crack itself --- */
-    _a.copy(copy.base).setY(copy.double.height * 0.55);
+    _a.copy(copy.base).setY(copy.double.height * c.copyScale * 0.55);
     _emit.position = _a;
     _emit.radius = 0.4;
     _emit.direction = _dir.set(Math.cos(copy.angle), 0.3, Math.sin(copy.angle)).normalize();
@@ -658,7 +873,7 @@ export class HallOfEchoesAbility extends Ability {
       shard.rot.premultiply(_q);
 
       /* --- the cut --- */
-      if (candidates && age < lethal && shard.pos.y < 2.2) {
+      if (candidates && shard.lethal && age < lethal && shard.pos.y < 2.2) {
         for (let k = 0; k < candidates; k++) {
           const dummy = _targets[k];
           if (!dummy.alive) continue;
@@ -796,6 +1011,8 @@ export class HallOfEchoesAbility extends Ability {
     this._updateShards(dt);
     const fade = this.phase === AbilityPhase.FADE ? 1 - Easing.inQuad(saturate(this.fadeTime / this.fadeDuration)) : 1;
     this._updateDais(fade);
+    this._updateFloor(fade);
+    this._updatePanes(dt);
     this._updateWarp();
 
     this.position.copy(this._centre);
@@ -812,6 +1029,8 @@ export class HallOfEchoesAbility extends Ability {
     for (const mesh of this.shardMeshes) mesh.count = 0;
     this.dais.visible = false;
     this.warp.visible = false;
+    this.panes.visible = false;
+    this.floor.visible = false;
     this._hall = -1;
     this._shatterAge = -1;
   }
@@ -831,6 +1050,10 @@ export class HallOfEchoesAbility extends Ability {
     this.mirrorMaterial.dispose();
     this.warpGeometry.dispose();
     this.warpMaterial.dispose();
+    this.floorMaterial.dispose();
+    this.paneGeometry?.dispose();
+    this.paneMaterial.dispose();
+    this.panes.dispose();
     super.dispose();
   }
 }
@@ -873,6 +1096,7 @@ export function buildEditor(gui, c, Editor) {
   R(orbit, c, 'swapPixels', 0, 200, 1, 'crossing pixels');
 
   const holo = folder.addFolder('1 · Holograms');
+  R(holo, c, 'copyScale', 0.3, 3, 0.01, 'size (× caster)');
   R(holo, c, 'assembleDelay', 0, 2, 0.01, 'first print at (s)');
   R(holo, c, 'assembleStagger', 0, 1.5, 0.01, 'stagger (s)');
   R(holo, c, 'assembleTime', 0.05, 3, 0.01, 'print takes (s)');
@@ -920,6 +1144,40 @@ export function buildEditor(gui, c, Editor) {
   R(dais, c, 'daisRingLife', 0.05, 3, 0.01, 'unfurl ring life');
   R(dais, c, 'daisShake', 0, 0.5, 0.005, 'unfurl shake');
   dais.addColor(c, 'colorDais').name('dais');
+
+  const hall = folder.addFolder('9 · The hall (mirror panes)');
+  R(hall, c, 'paneCount', 0, MAX_PANES, 1, 'panes');
+  R(hall, c, 'paneArc', 0, 6.28, 0.01, 'arc (rad)');
+  R(hall, c, 'paneSeat', 0.3, 2, 0.01, 'seat (× zone)');
+  R(hall, c, 'paneWidth', 0.2, 4, 0.01, 'width (m)');
+  R(hall, c, 'paneHeight', 0.4, 8, 0.05, 'height (m)');
+  R(hall, c, 'paneDepth', 0.01, 0.5, 0.005, 'thickness (m)');
+  R(hall, c, 'paneLean', -0.5, 0.5, 0.005, 'lean back (rad)');
+  R(hall, c, 'paneSway', 0, 0.3, 0.005, 'sway (rad)');
+  R(hall, c, 'paneSwayRate', 0, 6, 0.05, 'sway rate');
+  R(hall, c, 'paneDelay', 0, 2, 0.01, 'first rises at (s)');
+  R(hall, c, 'paneStagger', 0, 2, 0.01, 'wings follow by (s)');
+  R(hall, c, 'paneRiseTime', 0.02, 2, 0.01, 'rises over (s)');
+  R(hall, c, 'paneCrackLead', 0.02, 2, 0.01, 'crazes over (s)');
+  R(hall, c, 'paneSinkTime', 0.02, 2, 0.01, 'sinks over (s)');
+  R(hall, c, 'paneShards', 0, PER_PANE, 1, 'shards per pane');
+  R(hall, c, 'paneRoughness', 0, 1, 0.01, 'roughness');
+  R(hall, c, 'paneMetalness', 0, 1, 0.01, 'metalness');
+  R(hall, c, 'paneRimGlow', 0, 8, 0.05, 'silvered rim');
+  R(hall, c, 'paneRimWidth', 0.005, 0.4, 0.005, 'rim width (m)');
+  R(hall, c, 'paneScan', 0, 2, 0.01, 'scanlines');
+  R(hall, c, 'paneScanDensity', 0, 60, 0.5, 'scanlines / m');
+  R(hall, c, 'paneCrackCells', 0.5, 10, 0.05, 'crack plates / m');
+  R(hall, c, 'paneCrackGlow', 0, 10, 0.05, 'crack glow');
+  hall.addColor(c, 'colorPane').name('glass');
+
+  const fl = folder.addFolder('10 · Black glass floor');
+  R(fl, c, 'floorScale', 0.3, 2, 0.01, 'radius (× zone)');
+  R(fl, c, 'floorOpacity', 0, 1, 0.01, 'opacity');
+  R(fl, c, 'floorSky', 0, 3, 0.01, 'sky mirrored');
+  R(fl, c, 'floorCrackTime', 0.05, 2, 0.01, 'cracks run over (s)');
+  R(fl, c, 'floorCrackGlow', 0, 8, 0.05, 'crack glow');
+  fl.addColor(c, 'colorFloorDeep').name('deep');
 
   const beam = folder.addFolder('3 · Projector beams');
   R(beam, c, 'beamRadius', 0.05, 2, 0.01, 'top radius (m)');

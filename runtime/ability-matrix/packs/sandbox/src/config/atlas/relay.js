@@ -19,7 +19,7 @@ export default {
     range: 18.0, // maximum cast distance, metres
     minRange: 3.0, // closer than this and the cast is refused
     speed: 30.0, // how fast the seeking leader runs down the line, metres/second
-    lifetime: 0.55, // seconds the snapped lattice lingers after the discharge
+    lifetime: 1.1, // seconds the snapped lattice lingers after the discharge
     fadeTime: 0.6, // seconds the last of it takes to go out
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: 'cast1', // which clip in `CAST_ANIMATIONS` the body throws
@@ -77,7 +77,7 @@ export default {
     /* ================================================================ */
     /* 2 · RELAY CORES — the overload node over each claimed body        */
     /* ================================================================ */
-    coreSize: 0.62, // billboard half-size, metres
+    coreSize: 0.8, // billboard half-size, metres
     coreBall: 0.32, // the plasma ball's radius, × half-size
     coreBoil: 0.55, // turbulence on the ball's surface
     coreBoilScale: 3.2,
@@ -101,16 +101,69 @@ export default {
     colorCoreRing: '#c6a2ff',
 
     /* ================================================================ */
+    /* 2b · CONDUCTOR CAGE — the hero solid: lit steel lightning rods     */
+    /* ================================================================ */
+    /* The claim tears a ring of rods up out of the floor round the body;
+       they crown its head, hum, heat from the points down, open under the
+       overload, are blown outward white-hot on the discharge, then cool and
+       sink back into the floor. Lit, shadow-casting, LAYER.WORLD. */
+    prongCount: 5, // rods per relay (capped at 7)
+    cageRadius: 0.85, // metres from the body to each rod's foot
+    cageTipRadius: 0.22, // metres from the body's axis to each point
+    cageHeight: 2.25, // metres the points reach (over a 1.8 m body)
+    prongWidth: 0.09, // half-width of a rod's foot, metres
+    cageJitter: 0.35, // 0..1 irregularity of bearing, reach and height
+    cageDelay: 0.03, // seconds after the claim the first rod breaks the floor
+    cageRiseTime: 0.24, // seconds each rod takes to tear up (overshoots)
+    cageStagger: 0.035, // seconds between one rod and the next round the ring
+    cageHum: 0.02, // radians of hum while held (more under overload)
+    cageSplay: 0.22, // radians the cage opens at the top of the overload
+    cageBlowAngle: 0.95, // radians outward the discharge throws the rods
+    cageBlowPush: 0.35, // metres the feet are shoved outward
+    cageBlowTime: 0.16, // seconds the throw takes
+    cageSinkDelay: 0.5, // seconds after the discharge they start to sink
+    cageSinkTime: 1.05, // seconds to sink away
+    cageSink: 1.05, // how far they sink, × their length
+    cageIdleHeat: 0.55, // heat a held rod carries, 0..1
+    cageIdleReach: 0.35, // ...over this much of its length from the point
+    cageDischargeHeat: 1.3, // the white-hot spike on the discharge
+    cageCoolTime: 0.45, // seconds it takes to cool down the ramp
+    cageCrackle: 0.6, // 0..1 how much the heat stutters
+    prongGlow: 2.6, // emissive multiplier of the heat
+    prongGroove: 0.9, // the insulator grooves' share of the heat
+    prongRoughness: 0.3,
+    prongMetalness: 0.78,
+    colorProng: '#1c2440', // blued steel
+    colorProngHot: '#ffffff', // core (the only stop above 1)
+    colorProngTint: '#9fe9ff', // pale tint
+    colorProngBody: '#2f6bff', // saturated body
+    colorProngDeep: '#0b1030', // deep
+
+    /* ================================================================ */
     /* 3 · GROUND SIGILS — the relay seal under each claimed body        */
     /* ================================================================ */
     sigilRadius: 1.15, // metres
     sigilSpokes: 6, // radial ticks
     sigilSpin: 0.9, // radians/second
-    sigilLine: 0.03, // line width, × radius
-    sigilIntensity: 1.8,
-    sigilOpacity: 0.85,
-    colorSigil: '#6fdcff',
-    colorSigilHot: '#ffffff',
+    sigilLine: 0.022, // line width, × radius
+    sigilIntensity: 1.25,
+    sigilOpacity: 0.9,
+    sigilFill: 0.82, // how dark the plate under the lines is, 0..1 (the deep stop)
+    sigilField: 0.45, // brightness of the plasma field in the plate
+    sigilFieldScale: 3.2, // features across the plate
+    sigilVeins: 0.55, // crawling veins of current
+    colorSigil: '#6fdcff', // the lines (tint)
+    colorSigilHot: '#ffffff', // overload / wipe (core)
+    colorSigilBody: '#2a58e8', // the plasma field (body)
+    colorSigilDeep: '#050818', // the plate (deep)
+
+    /* --- 3b · conduction scars: the floor remembers the lattice --- */
+    scarSpacing: 0.9, // one burn mark every this many metres along a new link's ground track
+    scarRadius: 0.75, // radius of each mark, metres
+    scarLife: 4.5, // seconds the marks stay (they outlive the cast)
+    scorchRadius: 1.7, // dark scorch left under every relay by the discharge, metres
+    scorchLife: 5.5,
+    colorScorch: '#070b1c', // the deep tone: burnt floor
 
     /* ================================================================ */
     /* 4 · SPARKS + MOTES                                                */
@@ -148,27 +201,28 @@ export default {
     burstSize: 2.6, // STORM shell at every relay, metres
     burstLife: 0.42,
     burstIntensity: 2.6,
-    shockRadius: 3.4, // shockwave ring under every relay, metres
-    shockLife: 0.55,
+    shockRadius: 2.6, // shockwave ring under every relay, metres
+    shockLife: 0.5,
+    shockIntensity: 0.75, // so six rings at once read as one blast, not a target board
     arcRadius: 1.4, // ARC burn under each relay as it is claimed, metres
-    arcLife: 2.2,
+    arcLife: 4,
     arcWidth: 0.07,
     arcIntensity: 1.5,
     groundArcRadius: 2.6, // ARC burn where it grounds, metres
-    colorArcA: '#c8f6ff',
+    colorArcA: '#8fdcff',
     colorArcB: '#4a5dff',
     colorBurstA: '#ffffff',
     colorBurstB: '#82e9ff',
     colorBurstC: '#5b3cff',
-    colorShockA: '#7fe6ff',
-    colorShockB: '#ffffff',
+    colorShockA: '#4f9dff',
+    colorShockB: '#bfefff',
 
     /* ================================================================ */
     /* 6 · HEAT WARP — screen-space strain round each relay              */
     /* ================================================================ */
     warpSize: 1.4, // half-size of the warp billboard, metres
-    warpStrength: 0.55, // while the lattice holds
-    warpOverload: 1.6, // extra at the top of the overload
+    warpStrength: 0.2, // while the lattice holds (kept low so the cages read through it)
+    warpOverload: 0.65, // extra at the top of the overload
     warpScale: 2.4,
     warpSpeed: 2.2,
 

@@ -1,6 +1,6 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import { AdditiveBlending, Color, DoubleSide, MeshStandardMaterial, NormalBlending, ShaderMaterial, Vector3 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
-import { sharedUniforms } from '../../core/FrameUniforms.js';
+import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
 import { getColor } from '../../utils/color.js';
 
@@ -708,5 +708,375 @@ export function createPrismLensMaterial() {
     u.uStrength.value = s.progress < 1 ? c.lensStrength * g.distortion : 0;
   };
 
+  return material;
+}
+
+/* ==================================================================== */
+/* The planted truth — lit crystal                                        */
+/* ==================================================================== */
+
+/**
+ * The truth once it has hit the floor is *matter*, not light: a
+ * `MeshStandardMaterial` (flat-shaded, low roughness, on `LAYER.WORLD`,
+ * casting shadows, catching the sun and the HDR probe) with the spell's
+ * stylisation patched on top of the lit result:
+ *
+ *  - a thin-film **spectral sheen** in the emissive term, strongest at grazing
+ *    angles and sliding with the view, so every facet shows its own band of
+ *    the rainbow — the crystal splits light;
+ *  - **veins** of white light climbing the body on a slow clock (the light
+ *    trapped inside, going up into the fan);
+ *  - a **charge** that floods the whole body white-hot before it breaks.
+ *
+ * Colour follows the four-stop ramp: white core (veins, charge) → the
+ * spectral tint (sheen) → the true prism's hue (emissive body) → that hue
+ * darkened to the deep (diffuse albedo), which is what grounds it on the
+ * floor. The hue is the truth's, so the ability passes it in `sync`.
+ */
+export function createPrismMonolithMaterial() {
+  const material = new MeshStandardMaterial({
+    color: 0x101830,
+    emissive: 0x3fe6ff,
+    emissiveIntensity: 0.4,
+    roughness: 0.12,
+    metalness: 0.25,
+    flatShading: true,
+    envMapIntensity: 1.6
+  });
+  const extra = {
+    uMonoIrid: { value: 1 },
+    uMonoBands: { value: 2.5 },
+    uMonoVein: { value: 1 },
+    uMonoCharge: { value: 0 },
+    uMonoCore: { value: new Color(1, 1, 1) }
+  };
+  material.onBeforeCompile = (shader) => {
+    shader.uniforms.uTime = frame.uTime;
+    Object.assign(shader.uniforms, extra);
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying float vMonoY;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvMonoY = position.y;');
+    shader.fragmentShader = shader.fragmentShader
+      .replace(
+        '#include <common>',
+        `#include <common>
+        varying float vMonoY;
+        uniform float uTime;
+        uniform float uMonoIrid;
+        uniform float uMonoBands;
+        uniform float uMonoVein;
+        uniform float uMonoCharge;
+        uniform vec3  uMonoCore;
+        ${SPECTRAL_GLSL}`
+      )
+      .replace(
+        '#include <emissivemap_fragment>',
+        `#include <emissivemap_fragment>
+        {
+          float ndv = abs(dot(normal, normalize(vViewPosition)));
+          float fres = pow(1.0 - ndv, 2.2);
+          vec3 film = spectral(vMonoY * uMonoBands * 0.25 + ndv * 1.4 + uTime * 0.12);
+          float vein = pow(0.5 + 0.5 * sin(vMonoY * 9.0 - uTime * 3.5 + ndv * 4.0), 8.0);
+          totalEmissiveRadiance += film * uMonoIrid * (0.12 + fres)
+            + uMonoCore * (vein * uMonoVein * (0.35 + 0.65 * smoothstep(0.0, 1.0, vMonoY))
+            + uMonoCharge * (0.4 + fres * 1.6));
+        }`
+      );
+  };
+  material.customProgramCacheKey = () => 'prismlie-monolith';
+
+  /** @param {object} s { hue: settings colour key of the truth, charge 0..1 } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const hue = getColor(c[s.hue] ?? c.colorPrismA);
+    material.emissive.copy(hue);
+    material.emissiveIntensity = c.monoGlow * g.glow;
+    material.color.copy(hue).multiplyScalar(c.monoDeep);
+    material.roughness = c.monoRoughness;
+    material.metalness = c.monoMetalness;
+    extra.uMonoIrid.value = c.monoIrid * g.fresnel;
+    extra.uMonoBands.value = c.iridFrequency * g.noiseFrequency;
+    extra.uMonoVein.value = c.monoVein * g.glow;
+    extra.uMonoCharge.value = s.charge * c.monoChargeGlow * g.glow;
+    extra.uMonoCore.value.copy(getColor(c.colorCore));
+  };
+  return material;
+}
+
+/* ==================================================================== */
+/* The spectrum fan                                                       */
+/* ==================================================================== */
+
+/**
+ * What a prism does: white light in, a rainbow out. A floor quad centred on
+ * the planted truth; `uCount` wedges of dispersed light (red on one edge,
+ * violet on the other) leave the crystal's foot and **sweep round** the floor
+ * on one shared clock, streaked by noise that runs outward. A white bloom
+ * pools at the foot. Filled, not drawn: the wedge is a body of coloured light
+ * across the zone. Additive.
+ */
+const FAN_VERTEX = /* glsl */ `
+  uniform vec3  uCentre;
+  uniform float uSize;
+  varying vec2 vP;
+  void main() {
+    vP = position.xy * uSize;
+    gl_Position = projectionMatrix * viewMatrix * vec4(uCentre.x + vP.x, 0.035, uCentre.z + vP.y, 1.0);
+  }
+`;
+
+const FAN_FRAGMENT = /* glsl */ `
+  #define TAU 6.28318530718
+  uniform float uTime;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
+  uniform float uSize;
+  uniform float uSweep;
+  uniform float uHalf;
+  uniform float uInner;
+  uniform float uCount;
+  uniform float uStrength;
+  uniform float uGlow;
+  uniform float uPool;
+  uniform vec3  uCore;
+  varying vec2 vP;
+
+  ${noiseGLSL}
+  ${SPECTRAL_GLSL}
+
+  void main() {
+    float r = length(vP);
+    if (r > uSize) discard;
+    float ang = atan(vP.y, vP.x);
+    vec3 col = vec3(0.0);
+    for (int i = 0; i < 3; i++) {
+      if (float(i) >= uCount) break;
+      float a0 = uSweep + float(i) * TAU / max(uCount, 1.0);
+      float d = mod(ang - a0 + 3.14159265, TAU) - 3.14159265;
+      float x = d / max(uHalf, 0.01);
+      float inside = 1.0 - smoothstep(0.7, 1.0, abs(x));
+      // The wedge opens from the foot: narrow near, full width far.
+      float radial = smoothstep(uInner * 0.6, uInner + 0.8, r) * (1.0 - smoothstep(uSize * 0.5, uSize, r));
+      float streak = 0.65 + 0.35 * snoise(vec3(x * 3.0, r * 0.9 - uTime * 2.2, float(i) * 7.0));
+      vec3 spec = spectral(0.02 + 0.72 * (x * 0.5 + 0.5));
+      col += spec * inside * radial * streak * (1.2 - 0.4 * r / uSize);
+    }
+    // The pool of white at the foot, where the light enters.
+    col += uCore * exp(-r * r / max(uInner * uInner, 0.01)) * uPool;
+    col *= uStrength * uGlow * uGlobalGlow * uShaderIntensity;
+    if (dot(col, vec3(1.0)) < 0.003) discard;
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+export function createPrismFanMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: AdditiveBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -3,
+    polygonOffsetUnits: -3,
+    uniforms: sharedUniforms({
+      uCentre: { value: new Vector3() },
+      uSize: { value: 5 },
+      uSweep: { value: 0 },
+      uHalf: { value: 0.4 },
+      uInner: { value: 0.6 },
+      uCount: { value: 2 },
+      uStrength: { value: 0 },
+      uGlow: { value: 1 },
+      uPool: { value: 0.6 },
+      uCore: { value: new Color() }
+    }),
+    vertexShader: FAN_VERTEX,
+    fragmentShader: FAN_FRAGMENT
+  });
+
+  /** @param {object} s { centre, sweep, strength } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCentre.value.copy(s.centre);
+    u.uSize.value = Math.max(0.5, c.fanLength);
+    u.uSweep.value = s.sweep;
+    u.uHalf.value = c.fanAngle;
+    u.uInner.value = c.monoRadius;
+    u.uCount.value = Math.max(1, Math.min(3, Math.round(c.fanCount)));
+    u.uStrength.value = s.strength;
+    u.uGlow.value = c.fanGlow * g.glow;
+    u.uPool.value = c.fanPool;
+    u.uCore.value.copy(getColor(c.colorCore));
+  };
+  return material;
+}
+
+/* ==================================================================== */
+/* The glass burn — the floor that stays                                  */
+/* ==================================================================== */
+
+/**
+ * The dark half of the floor treatment, drawn under the additive braid with
+ * normal blending: a **deep** band burnt along the braid's envelope (so the
+ * three coloured streaks sit on dark glass rather than on bare floor), and at
+ * the end of the line a **crater** of crazed glass where the truth was driven
+ * in — voronoi plates with hairline cracks that glow in the spectrum while
+ * the crater is hot. Shares the trail's strip and the trail's braid formula.
+ */
+const SCORCH_VERTEX = /* glsl */ `
+  uniform vec3  uStart;
+  uniform vec3  uDir;
+  uniform vec3  uSide;
+  uniform float uLength;
+  uniform float uSpan;
+  varying vec2 vS;
+  void main() {
+    float along = position.x * uLength;
+    float across = position.z * uSpan;
+    vec3 world = uStart + uDir * along + uSide * across;
+    world.y = 0.014;
+    vS = vec2(along, across);
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const SCORCH_FRAGMENT = /* glsl */ `
+  precision highp float;
+  uniform float uTime;
+  uniform float uGlobalGlow;
+  uniform float uFront;
+  uniform float uEnd;          // metres to the crater centre
+  uniform float uBraidWidth;
+  uniform float uBraidPitch;
+  uniform float uRamp;
+  uniform float uWidth;        // × braid width
+  uniform float uOpacity;
+  uniform float uFade;
+  uniform float uCrater;       // metres, 0 before the plant
+  uniform float uHeat;         // 0..1 crack glow
+  uniform float uCrackGlow;
+  uniform vec3  uDeep;
+  uniform vec3  uTint;
+  varying vec2 vS;
+
+  ${noiseGLSL}
+  ${BRAID_GLSL}
+  ${SPECTRAL_GLSL}
+
+  // F2 − F1 voronoi: 0 on a crack.
+  float crackField(vec2 p) {
+    vec2 n = floor(p);
+    vec2 f = fract(p);
+    float d1 = 8.0, d2 = 8.0;
+    for (int j = -1; j <= 1; j++)
+      for (int i = -1; i <= 1; i++) {
+        vec2 g = vec2(float(i), float(j));
+        vec2 o = hash21(dot(n + g, vec2(7.13, 113.17)));
+        vec2 r = g + o - f;
+        float d = dot(r, r);
+        if (d < d1) { d2 = d1; d1 = d; } else if (d < d2) { d2 = d; }
+      }
+    return sqrt(d2) - sqrt(d1);
+  }
+
+  void main() {
+    float d = vS.x;
+    float y = vS.y;
+    float n = snoise(vec3(d * 0.9, y * 1.6, 3.7));
+
+    // The burnt band along the braid's envelope.
+    float env = smoothstep(0.0, uRamp, d) * uBraidWidth * uWidth + 0.25;
+    float band = (1.0 - smoothstep(env * 0.75, env * (1.05 + 0.15 * n), abs(y))) * step(d, uFront);
+    band *= smoothstep(0.0, 0.8, d);
+
+    // The crater at the end of the line.
+    vec2 q = vec2(d - uEnd, y);
+    float rq = length(q);
+    float crater = 0.0;
+    float crack = 0.0;
+    if (uCrater > 0.01) {
+      float edge = uCrater * (0.88 + 0.18 * snoise(vec3(atan(q.y, q.x) * 1.6, 0.0, 9.1)));
+      crater = 1.0 - smoothstep(edge * 0.8, edge, rq);
+      float cf = crackField(q * 2.4 / max(uCrater, 0.3) * 2.0);
+      // Radial cracks as well as plates: torn out from the foot.
+      float radial = abs(sin(atan(q.y, q.x) * 7.0 + snoise(vec3(q * 1.3, 1.0)) * 1.5));
+      crack = max(1.0 - smoothstep(0.0, 0.06, cf), (1.0 - smoothstep(0.0, 0.08, radial)) * smoothstep(edge, 0.2, rq)) * crater;
+    }
+    float cover = max(band, crater);
+    if (cover < 0.004) discard;
+    vec3 glow = spectral(rq * 0.35 - uTime * 0.2 + n * 0.2) * crack * uHeat * uCrackGlow;
+    // Glassy sheen in the band: the deep tone lifted toward the tint by noise.
+    vec3 base = mix(uDeep, uDeep + uTint * 0.12, 0.5 + 0.5 * n);
+    vec3 col = base + glow * uGlobalGlow;
+    float a = cover * uOpacity * (1.0 - uFade);
+    gl_FragColor = vec4(col, clamp(a + length(glow) * 0.3 * (1.0 - uFade), 0.0, 1.0));
+  }
+`;
+
+export function createPrismScorchMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1,
+    uniforms: sharedUniforms({
+      uStart: { value: new Vector3() },
+      uDir: { value: new Vector3(0, 0, 1) },
+      uSide: { value: new Vector3(1, 0, 0) },
+      uLength: { value: 10 },
+      uSpan: { value: 2 },
+      uFront: { value: 0 },
+      uEnd: { value: 10 },
+      uBraidWidth: { value: 1 },
+      uBraidPitch: { value: 4 },
+      uRamp: { value: 2 },
+      uWidth: { value: 1 },
+      uOpacity: { value: 0.6 },
+      uFade: { value: 0 },
+      uCrater: { value: 0 },
+      uHeat: { value: 0 },
+      uCrackGlow: { value: 1 },
+      uDeep: { value: new Color() },
+      uTint: { value: new Color() }
+    }),
+    vertexShader: SCORCH_VERTEX,
+    fragmentShader: SCORCH_FRAGMENT
+  });
+
+  /** @param {object} s { start, dir, side, length, front, fade, crater, heat } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    const crater = Math.max(0.3, c.craterRadius);
+    u.uStart.value.copy(s.start);
+    u.uDir.value.copy(s.dir);
+    u.uSide.value.copy(s.side);
+    u.uLength.value = s.length + crater * 1.2;
+    u.uEnd.value = s.length;
+    u.uSpan.value = Math.max(crater * 1.2, c.braidWidth * c.scorchWidth + 0.6);
+    u.uFront.value = s.front;
+    u.uBraidWidth.value = c.braidWidth;
+    u.uBraidPitch.value = c.braidPitch;
+    u.uRamp.value = c.braidRamp;
+    u.uWidth.value = c.scorchWidth;
+    u.uOpacity.value = c.scorchOpacity * g.opacity;
+    u.uFade.value = s.fade;
+    u.uCrater.value = s.crater;
+    u.uHeat.value = s.heat;
+    u.uCrackGlow.value = c.crackGlow * g.glow;
+    u.uDeep.value.copy(getColor(c.colorScorch));
+    u.uTint.value.copy(getColor(c.colorA));
+  };
   return material;
 }

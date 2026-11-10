@@ -3,14 +3,25 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { ABILITIES_BY_OATH, hotbarFor } from '../shared/abilities.js';
 import { abilityForSlot, restoreLoadout } from '../shared/sim/loadout.js';
+import { SECONDARY_ELEMENT_OATH } from '../tools/generate-mmo-abilities.mjs';
 
-test('expanded Babylon catalog covers 150 unique castables and ten per oath', () => {
+test('catalog covers 279 unique castables: 230 codex casts (ten per element) and 49 Matrix Expansion casts', () => {
   const all = Object.values(ABILITIES_BY_OATH).flat();
-  assert.equal(all.length, 150);
-  assert.equal(new Set(all.map(a => a.id)).size, 150);
-  for (const list of Object.values(ABILITIES_BY_OATH)) assert.equal(list.length, 10);
+  assert.equal(all.length, 279);
+  assert.equal(new Set(all.map(a => a.id)).size, 279);
+  const paired = new Set(Object.values(SECONDARY_ELEMENT_OATH));
+  assert.equal(paired.size, 8);
+  for (const [oath, list] of Object.entries(ABILITIES_BY_OATH)) {
+    const core = list.filter(a => !a.id.startsWith('matrix-expansion/'));
+    assert.equal(core.length, paired.has(oath) ? 20 : 10, oath);
+    // Every element of the current matrix has at least two expansion casts.
+    assert.ok(list.length - core.length >= (paired.has(oath) ? 4 : 2), oath);
+    // Gameplay element is always the Oath's own force; the school is one of at most two.
+    assert.equal(new Set(list.map(a => a.element)).size, 1, oath);
+    assert.equal(new Set(list.map(a => a.school)).size, paired.has(oath) ? 2 : 1, oath);
+  }
   const supplement = JSON.parse(fs.readFileSync(new URL('../shared/ability-supplement.json', import.meta.url)));
-  assert.equal(supplement.castables.length, 50);
+  assert.equal(supplement.castables.length, 179);
   for (const c of supplement.castables) assert.ok(all.some(a => a.id === c.sourceCatalog.uid));
 });
 

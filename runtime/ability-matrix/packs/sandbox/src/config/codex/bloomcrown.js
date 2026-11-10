@@ -26,8 +26,8 @@ export default {
     /* --- the cast itself --- */
     range: 18, // maximum cast distance, metres
     minRange: 2, // closer than this and the cast is refused
-    speed: 16, // metres/second the circlet flies to the circle
-    lifetime: 1.4, // seconds the open crown turns before it gathers
+    speed: 22, // metres/second the circlet flies to the circle
+    lifetime: 0.5, // seconds the open crown turns before it gathers
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: 'cast2', // which clip in `CAST_ANIMATIONS` the body throws
     zoneRadius: 4.4, // metres — the circle under the crown
@@ -41,31 +41,32 @@ export default {
     /* ================================================================ */
     /* TIMING                                                            */
     /* ================================================================ */
-    expandTime: 0.45, // seconds the circlet takes to widen into the crown
-    bloomDelay: 0.12, // seconds after landing the first bud opens
-    bloomStagger: 0.4, // seconds over which the rest follow
-    bloomTime: 0.5, // seconds one blossom takes to open
-    gatherTime: 0.45, // seconds the crown takes to draw in and fuse
+    expandTime: 0.35, // seconds the circlet takes to widen into the crown
+    bloomDelay: 0.06, // seconds after landing the first bud opens
+    bloomStagger: 0.25, // seconds over which the rest follow
+    bloomTime: 0.36, // seconds one blossom takes to open
+    gatherTime: 0.38, // seconds the crown takes to draw in and fuse
     shutAt: 0.4, // the blossoms are shut by this share of the gather
-    slamTime: 0.16, // seconds the seed takes to fall
-    slamLinger: 0.7, // seconds after the slam before the fade begins
-    fadeTime: 1.2, // seconds the sigil takes to burn down
+    slamTime: 0.13, // seconds the seed takes to fall
+    slamLinger: 1.3, // seconds after the slam before the fade begins
+    fadeTime: 0.9, // seconds the garden takes to wilt and the floor to burn away
 
     /* ================================================================ */
     /* 1 · THE CROWN                                                     */
     /* ================================================================ */
     blossoms: 7,
     crownRadius: 0.62, // the crown's radius, × zoneRadius
-    crownHeight: 2.9, // metres over the floor it turns at
+    crownHeight: 2.3, // metres over the floor it turns at
     travelRadius: 1.1, // metres, the circlet in flight
-    travelHeight: 1.7, // metres, in flight
+    travelHeight: 1.5, // metres, in flight
     spinTravel: 5, // radians/second in flight
-    spinCrown: 1.6, // as it opens
-    spinPeak: 4.5, // just before it gathers
+    spinCrown: 2.6, // as it opens
+    spinPeak: 6, // just before it gathers
     spinGather: 9, // extra while it draws in
-    tilt: 0.35, // metres the ring wobbles up and down as it turns
+    tilt: 0.45, // metres the ring wobbles up and down as it turns
     tiltSpeed: 1.4, // radians/second the wobble precesses
-    gatherLift: 0.6, // metres it rises as it draws in, before the drop
+    crownDescend: 0.7, // metres it sinks onto the circle while it turns
+    gatherLift: 0.35, // metres it rises as it draws in, before the drop
     faceOut: 0.75, // how far the blossoms face out from the crown
     blossomRoll: 0.4, // how fast each blossom turns on its own axis, × the spin
     budScale: 0.8, // size of the buds in flight
@@ -86,81 +87,126 @@ export default {
     petalFlutter: 0.12,
     petalVeins: 9,
     veinStrength: 0.55,
-    petalSSS: 0.9, // light through the thin petal
-    petalRimGlow: 0.7,
+    petalSSS: 0.3, // light through the thin petal (tinted by the petal, never white)
+    petalRimGlow: 0.45,
     heartGlow: 1.6, // the gold heart of an open blossom
     chargeGlow: 5, // white-hot as the crown gathers (bloom > 1)
-    petalAmbient: 0.45,
-    petalDiffuse: 0.85,
-    colorPetalHeart: '#ffe37a',
-    colorPetalMid: '#ffc2dc',
-    colorPetalTip: '#e0569a',
-    colorPetalVein: '#b03a78',
-    colorPetalRim: '#ffe6f2',
+    petalAmbient: 0.17,
+    petalDeep: 0.75, // the shaded side falls to the deep stop, not to grey
+    petalDiffuse: 0.75,
+    colorPetalHeart: '#ffd060', // the gold glow tight at the heart only
+    colorPetalBase: '#1c020e', // wine-black at the petal's base
+    colorPetalMid: '#7c0a3c', // the saturated body of the petal
+    colorPetalTip: '#ff5ca6', // pink, only on the tip and the margins
+    petalEdgeStart: 0.7, // |across| where the pink margin starts
+    petalTipStart: 0.74, // along the petal where the pink tip starts
+    petalEdgeTint: 0.8, // how far the margins/tips go to pink
+    colorPetalVein: '#3a0420',
+    colorPetalRim: '#ff6aae',
+    colorPetalDeep: '#14020a',
     colorCharge: '#fff4d6',
 
     /* ================================================================ */
     /* 3 · HEARTS & THE SEED                                             */
     /* ================================================================ */
-    heartSize: 0.17, // metres
+    heartSize: 0.12, // metres
     heartLift: 0.05, // metres along the blossom's axis
-    heartCoreGlow: 2.2,
+    heartCoreGlow: 1.5,
     seedSize: 0.36, // metres
     seedElongation: 1.45, // the seed is an almond, longer than wide
     seedStretch: 0.9, // how far it stretches as it falls
     seedSink: 0.35, // seconds it takes to sink into the floor
-    seedGlow: 3.2,
+    seedGlow: 2.4,
     seedRim: 3.5,
     seedVeins: 1.5,
     colorSeedCore: '#d6ff9a',
-    colorSeedShell: '#fff6c8',
+    colorSeedShell: '#ffe08a',
     colorSeedVein: '#7dffa0',
 
     /* ================================================================ */
     /* 4 · THE GARLAND                                                   */
     /* ================================================================ */
-    garlandThickness: 0.055, // metres
+    garlandThickness: 0.08, // metres
     garlandSag: 0.45, // metres it hangs between blossoms
     garlandGlow: 2.2,
     garlandLeaves: 42, // leaf glints round the ring
     garlandChase: 0.6, // how fast they chase round
     garlandTravel: 0.7, // how much of the garland shows in flight
-    colorGarland: '#5ccf6a',
+    colorGarland: '#2f9a48',
     colorGarlandLeaf: '#d6ffa0',
 
     /* ================================================================ */
     /* 5 · THE SIGIL & THE GREEN WAVE                                    */
     /* ================================================================ */
-    sigilLit: 0.6, // how bright the mandala is under the turning crown
-    sigilGlow: 2.4,
-    sigilLine: 0.06, // metres
+    sigilLit: 0.9, // how bright the mandala is under the turning crown
+    sigilGlow: 2,
+    sigilLine: 0.1, // metres
+    sigilFill: 0.3, // the rose's petals washed in between its lines
     sigilSpin: 0.3, // turns with the crown, × its spin
     flareDecay: 3, // how fast the slam's flare dies
-    waveSpeed: 9, // metres/second the green ring runs out
+    waveSpeed: 12, // metres/second the green ring runs out
     waveReach: 1.6, // how far, × zoneRadius
     waveWidth: 0.45, // metres
     greenStrength: 0.8, // the floor greened behind the ring
     slamWarp: 1.4, // the lens ring's strength
     warpSpeed: 11, // metres/second it runs out
     warpWidth: 0.5,
-    colorSigil: '#ffb8de',
-    colorSigilHot: '#fff2c8',
-    colorWave: '#9dff7a',
-    colorGreen: '#3c9a3a',
+    colorSigil: '#ff4fa8',
+    colorSigilHot: '#ff8ac4',
+    colorWave: '#4ad84a',
+    colorGreen: '#2f8a30',
+
+    /* ================================================================ */
+    /* 5b · THE GROUND (normal-blended: the ramp's deep stop)            */
+    /* ================================================================ */
+    groundOpacity: 0.92,
+    poolDepth: 0.9, // the wine-dark pool under the turning crown
+    mossStrength: 1, // moss crawling out behind the green ring
+    mossReach: 1.25, // × zoneRadius
+    mossCreep: 0.6, // metres/second it keeps creeping through the linger
+    mossBreathe: 1.2, // lit veins breathing outward through the moss
+    stainStrength: 0.8, // fallen-petal stains in the moss
+    colorGroundDeep: '#12050d',
+    colorGroundSoil: '#4a3020',
+    colorGroundMoss: '#1d5a22',
+    colorGroundMossLit: '#8af06a',
+    colorGroundStain: '#8c1a58',
+
+    /* ================================================================ */
+    /* 5c · THE GARDEN — the crown regrown out of the floor              */
+    /* ================================================================ */
+    gardenCount: 10, // blossoms (the first sits in the crater if gardenHeart)
+    gardenHeart: 1, // 1 puts one in the crater
+    gardenRadius: 0.66, // ring radius, × zoneRadius
+    gardenJitter: 0.16,
+    gardenScale: 1.35, // × the petal size
+    gardenHeartScale: 1.5, // the crater blossom, × gardenScale
+    gardenHeight: 0.06, // metres over the floor it seats at
+    gardenRise: 0.5, // metres below the floor it heaves up from (and sinks back to)
+    gardenLean: 0.35, // leans out from the strike
+    gardenGrow: 0.22, // seconds to heave up
+    gardenOpen: 0.3, // seconds to open
+    gardenLag: 0.12, // seconds of sprout jitter
+    gardenSpin: 0.7, // radians/second each turns on its stem
+    gardenTurn: 0.25, // radians/second the whole ring turns
+    gardenBreathe: 0.12, // ± open, breathing
+    gardenBreatheRate: 3.2,
+    gardenFlash: 0.25, // white-hot as it breaks the soil
+    gardenFlashDecay: 5,
 
     /* ================================================================ */
     /* 6 · THE SLAM                                                      */
     /* ================================================================ */
     slamShake: 0.6,
     slamShakeTime: 0.35,
-    slamFlash: 0.35,
+    slamFlash: 0.18,
     slamLight: 3, // light punch, × lightIntensity
     burstRadius: 2.4, // the EARTH burst, metres
     shockScale: 1.5, // the shockwave, × zoneRadius
     craterRadius: 1.4, // the crack the seed leaves, metres
-    colorFlash: '#fff0f8',
-    colorBurstA: '#fff2c8',
-    colorBurstB: '#a88a5a',
+    colorFlash: '#ff7ab8',
+    colorBurstA: '#8a6a44',
+    colorBurstB: '#6a5236',
     colorBurstC: '#3a2a18',
 
     /* ================================================================ */
@@ -174,10 +220,10 @@ export default {
     shedGlow: 1.1,
     burstPetals: 160, // petals burst out by the slam
     burstPetalSpeed: 7,
-    colorShedA: '#fff0f6',
-    colorShedB: '#ffb2d4',
-    colorShedC: '#e0569a',
-    colorShedD: '#7a1a4a',
+    colorShedA: '#ff6aae',
+    colorShedB: '#c8186c',
+    colorShedC: '#7a0a3e',
+    colorShedD: '#2a0416',
     pollenRate: 160, // per second off the blossoms
     pollenSpeed: 0.35,
     pollenSize: 0.045,

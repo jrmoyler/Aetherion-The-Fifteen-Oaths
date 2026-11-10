@@ -1,5 +1,5 @@
 import { Matrix4, Mesh, Object3D, Quaternion, Vector3 } from 'three';
-import { Ability } from '../Ability.js';
+import { Ability, AbilityPhase } from '../Ability.js';
 import {
   createStoneInstances,
   createOrbGeometry,
@@ -15,7 +15,8 @@ import {
   createBandMaterial,
   createBeamMaterial,
   createSigilMaterial,
-  createWarpMaterial
+  createWarpMaterial,
+  createGroundMaterial
 } from '../../materials/codex/RuneMeteorMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -48,6 +49,94 @@ const _qT = new Quaternion();
 const _node = new Object3D();
 const _force = { impulse: 0, lift: 0, spin: 0 };
 const _targets = [];
+
+/* ------------------------------------------------------------------ */
+/* Camera pitch keeper (cast-local)                                     */
+/* ------------------------------------------------------------------ */
+
+const _orbit = new Vector3();
+/** How many casts of this kind are holding the camera right now. */
+const pitchHold = { holders: 0, polar: 0 };
+
+/**
+ * The sandbox rig (`core/CameraRig.js`) keeps the camera's *direction* to its
+ * orbit target and lets OrbitControls re-measure the angles each frame. So
+ * every metre the target moves rotates the orbit: a target that runs away
+ * flattens the pitch until it hits `maxPolar`, and one that comes back (or
+ * falls) steepens it past where it began. The clamp makes that a ratchet —
+ * this cast moves the target out and back hard, and before this keeper it
+ * left the camera looking straight down for the rest of the session.
+ *
+ * The keeper reads the rig through `ctx.shake.rig`, remembers the pitch the
+ * cast found, and puts the camera back on that pitch (about the live target,
+ * at the live distance, keeping the user's azimuth) before the rig runs each
+ * frame — through the cast and through a short settle while the target eases
+ * home. A clear restores the rest pose outright. It never touches the shared
+ * rig's code or settings.
+ */
+class PitchKeeper {
+  constructor() {
+    this.rig = null;
+    this.holding = false;
+  }
+
+  static polarOf(rig) {
+    _orbit.copy(rig.camera.position).sub(rig.controls.target);
+    const r = _orbit.length();
+    return r > 1e-6 ? Math.acos(Math.max(-1, Math.min(1, _orbit.y / r))) : 0;
+  }
+
+  capture(ctx) {
+    this.release();
+    const rig = ctx?.shake?.rig;
+    if (!rig?.controls?.target || !rig.camera) return;
+    this.rig = rig;
+    // A second cast of this kind while one is holding inherits the first pitch:
+    // the live one is already the held one.
+    if (pitchHold.holders === 0) pitchHold.polar = PitchKeeper.polarOf(rig);
+    pitchHold.holders++;
+    this.holding = true;
+  }
+
+  /** Put the camera back on the held pitch. `strength` 0..1. */
+  hold(strength = 1) {
+    if (!this.holding || strength <= 0) return;
+    const { camera, controls } = this.rig;
+    _orbit.copy(camera.position).sub(controls.target);
+    const r = _orbit.length();
+    if (r < 1e-6) return;
+    const now = Math.acos(Math.max(-1, Math.min(1, _orbit.y / r)));
+    const want = now + (pitchHold.polar - now) * Math.min(1, strength);
+    const az = Math.atan2(_orbit.x, _orbit.z);
+    const s = Math.sin(want);
+    _orbit.set(s * Math.sin(az), Math.cos(want), s * Math.cos(az)).multiplyScalar(r);
+    camera.position.copy(controls.target).add(_orbit);
+  }
+
+  /**
+   * Let go. `rest` (a clear, or the cast retired early): if nobody else is
+   * holding, put the rig in its rest pose now — the target on the caster at the
+   * rig's own height, no pull toward a cast, the camera on the held pitch at the
+   * rig's distance — so nothing is left to ease home afterwards.
+   */
+  release(rest = false, anchor = null, targetHeight = 0) {
+    if (!this.holding) return;
+    this.holding = false;
+    pitchHold.holders = Math.max(0, pitchHold.holders - 1);
+    if (!rest || pitchHold.holders > 0) return;
+    const rig = this.rig;
+    const a = anchor ?? rig.anchor;
+    if (a) rig.controls.target.set(a.x, (rig.anchor?.y ?? 0) + targetHeight, a.z);
+    rig.focusWeight = 0;
+    _orbit.copy(rig.camera.position).sub(rig.controls.target);
+    const az = Math.atan2(_orbit.x, _orbit.z);
+    const r = rig.distance ?? _orbit.length();
+    const s = Math.sin(pitchHold.polar);
+    _orbit.set(s * Math.sin(az), Math.cos(pitchHold.polar), s * Math.cos(az)).multiplyScalar(r);
+    rig.camera.position.copy(rig.controls.target).add(_orbit);
+    rig.camera.lookAt(rig.controls.target);
+  }
+}
 
 function syncSystem(p, c, prefix, glow, turb) {
   const g = settings.global;
@@ -114,6 +203,9 @@ function syncSystem(p, c, prefix, glow, turb) {
 export class RuneMeteorAbility extends Ability {
   constructor(ctx) {
     super(ID, ctx);
+    /** Holds the camera's pitch while the star falls and the frame comes home. */
+    this._keeper = new PitchKeeper();
+    this._settle = 0;
   }
 
   get handlesOwnHits() {
@@ -164,6 +256,8 @@ export class RuneMeteorAbility extends Ability {
     this.quadGeometry = createQuadGeometry();
     this.sigilMaterial = createSigilMaterial();
     this.sigil = this._mesh(this.quadGeometry, this.sigilMaterial, LAYER.VFX, 2);
+    this.groundMaterial = createGroundMaterial();
+    this.ground = this._mesh(this.quadGeometry, this.groundMaterial, LAYER.VFX, 1);
     this.warpMaterial = createWarpMaterial();
     this.warp = this._mesh(this.quadGeometry, this.warpMaterial, LAYER.DISTORTION, 0);
 
@@ -172,6 +266,8 @@ export class RuneMeteorAbility extends Ability {
     this._orbPos = new Vector3();
     this._orbState = { swirl: 0, flare: 0, seed: 0 };
     this._bandState = { center: new Vector3(), axisA: new Vector3(), axisB: new Vector3(), radius: 1, spin: 0, fade: 1, seed: 0 };
+    this._groundState = { center: this._center, shade: 0, crater: 0, heat: 0, fade: 1, seed: 0 };
+    this._landT = -1;
     this._sigilState = { center: this._center, draw: 0, star: 0, blaze: 0, stones: 7, spin: 0, fade: 1, seed: 0 };
     this._warpState = { center: new Vector3(), size: 5, progress: 0 };
     this._stoneTop = [];
@@ -323,6 +419,9 @@ export class RuneMeteorAbility extends Ability {
     this._orbState.seed = this._seed;
     this._bandState.seed = this._seed;
     this._sigilState.seed = this._seed;
+    this._groundState.seed = this._seed;
+    this._landT = -1;
+    this.ground.visible = true;
 
     this.orb.visible = true;
     this.stones.visible = true;
@@ -332,6 +431,29 @@ export class RuneMeteorAbility extends Ability {
     this.sigil.visible = true;
     this.warp.visible = false;
     this._sync(0);
+    this._settle = Math.max(0, c.cameraSettle);
+    if (c.cameraHold > 0) this._keeper.capture(this.ctx);
+  }
+
+  /**
+   * The base frame, then the camera put back on its pitch. Once DONE the cast
+   * lingers `cameraSettle` seconds more, invisible and unframed, holding the
+   * pitch while the orbit target eases back onto the caster.
+   */
+  update(dt) {
+    const c = settings[ID];
+    if (this.phase === AbilityPhase.DONE) {
+      this._settle -= dt;
+      this._keeper.hold(c.cameraHold);
+      if (this._settle <= 0 || c.cameraHold <= 0) this._keeper.release();
+      return;
+    }
+    super.update(dt);
+    this._keeper.hold(c.cameraHold);
+  }
+
+  get isFinished() {
+    return this.phase === AbilityPhase.DONE && !this._keeper?.holding;
   }
 
   _resetEmit() {
@@ -442,6 +564,17 @@ export class RuneMeteorAbility extends Ability {
     ss.fade = 1 - smoothstep(0.2, 1, this._fadeK);
     this.sigilMaterial.userData.sync(ss);
 
+    /* ---- the ground: shadow gathering, then the crater ---- */
+    const gs = this._groundState;
+    gs.shade = t < T.land ? Math.pow(saturate(t / Math.max(0.05, T.land)), 1.5) : 1 - smoothstep(T.land, T.land + 0.6, t) * 0.6;
+    const since = this._landedOrb ? t - T.land : -1;
+    gs.crater = since >= 0 ? c.craterRadius * Easing.outCubic(saturate(since / 0.15)) : 0;
+    // Hot at the landing, cooling; re-lit by the henge's charge and the nova.
+    const charge = t > T.planted && !this._novaDone ? smoothstep(T.planted, T.nova, t) : 0;
+    gs.heat = since >= 0 ? Math.exp(-since / Math.max(0.05, c.crackCool)) + charge * 0.8 + this._blaze * 0.6 : 0;
+    gs.fade = 1 - smoothstep(0.35, 1, this._fadeK);
+    this.groundMaterial.userData.sync(gs);
+
     /* ---- the warp ---- */
     const ws = this._warpState;
     if (this._warpT >= 0) {
@@ -472,7 +605,11 @@ export class RuneMeteorAbility extends Ability {
     if (dt > 0) this._moteFx(dt, t < T.land);
     this.stoneMaterial.userData.sync();
     this.beamMaterial.userData.sync();
+    // What the camera frames (and where the light sits): the star, but never
+    // above `frameHeight` — a 26 m focus dragged the orbit target up and the
+    // caster out of the bottom of the shot.
     this.position.copy(this._orbPos);
+    this.position.y = Math.min(this.position.y, c.frameHeight);
   }
 
   /** Bud → flight → henge → crumble, every stone, every frame. */
@@ -672,8 +809,8 @@ export class RuneMeteorAbility extends Ability {
       radius: 0.3,
       endRadius: c.craterRadius * power,
       life: 0.6,
-      intensity: 0.8,
-      opacity: 0.5,
+      intensity: 0.45,
+      opacity: 0.38,
       squash: 0.45,
       colorA: getColor(c.colorDustA),
       colorB: getColor(c.colorDustB),
@@ -846,17 +983,20 @@ export class RuneMeteorAbility extends Ability {
   /* ------------------------------------------------------------------ */
 
   onDestroy() {
+    this._keeper.release(true, this.ctx.character?.position, settings.camera?.targetHeight ?? 1.35);
     this.orb.visible = false;
     this.stones.visible = false;
     this.bands[0].visible = false;
     this.bands[1].visible = false;
     this.beams.visible = false;
     this.sigil.visible = false;
+    this.ground.visible = false;
     this.warp.visible = false;
     this._warpT = -1;
   }
 
   dispose() {
+    this._keeper.release();
     this.stoneGeometry.dispose();
     this.orbGeometry.dispose();
     this.bandGeometry.dispose();
@@ -867,6 +1007,7 @@ export class RuneMeteorAbility extends Ability {
     this.bandMaterials.forEach((m) => m.dispose());
     this.beamMaterial.dispose();
     this.sigilMaterial.dispose();
+    this.groundMaterial.dispose();
     this.warpMaterial.dispose();
     super.dispose();
   }
@@ -894,6 +1035,9 @@ export function buildEditor(gui, c, Editor) {
   R(light, c, 'lightIntensity', 0, 40, 0.1, 'intensity');
   R(light, c, 'lightRadius', 0.5, 40, 0.1, 'radius');
   R(light, c, 'lightFlicker', 0, 1, 0.01, 'shimmer');
+  R(cast, c, 'frameHeight', 0.5, 30, 0.1, 'camera frames up to (m)');
+  R(cast, c, 'cameraHold', 0, 1, 0.01, 'hold camera pitch');
+  R(cast, c, 'cameraSettle', 0, 4, 0.05, 'camera settle after (s)');
 
   const fall = folder.addFolder('1 · Fall');
   R(fall, c, 'dropHeight', 4, 60, 0.5, 'kindles at (m)');
@@ -961,6 +1105,15 @@ export function buildEditor(gui, c, Editor) {
   R(sigil, c, 'floorOpacity', 0, 1, 0.01, 'opacity');
   sigil.addColor(c, 'colorSigil').name('sigil');
   sigil.addColor(c, 'colorSigilHot').name('sigil ablaze');
+  const ground = folder.addFolder('6b · Ground');
+  R(ground, c, 'groundOpacity', 0, 1, 0.01, 'opacity');
+  R(ground, c, 'groundShadow', 0, 1, 0.01, 'shadow under the fall');
+  R(ground, c, 'crackCount', 1, 24, 1, 'fissures');
+  R(ground, c, 'crackReach', 0.5, 4, 0.05, 'fissure reach (× crater)');
+  R(ground, c, 'crackCool', 0.05, 4, 0.05, 'fissures cool over (s)');
+  ground.addColor(c, 'colorGroundDeep').name('deep');
+  ground.addColor(c, 'colorGroundBody').name('lip');
+  ground.addColor(c, 'colorCrackHot').name('fissure glow');
 
   const fx = folder.addFolder('7 · Particles');
   R(fx, c, 'moteRate', 0, 500, 1, 'motes/second');

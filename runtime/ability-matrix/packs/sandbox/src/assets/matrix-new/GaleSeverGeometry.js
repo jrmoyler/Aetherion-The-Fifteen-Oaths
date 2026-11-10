@@ -67,3 +67,64 @@ export function createGaleBladeGeometry(columns = 72, rows = 12) {
   geometry.boundingSphere = new Sphere(new Vector3(), 50);
   return geometry;
 }
+
+/**
+ * A closed tube, also in *parameter space*: `position.x` runs 0..1 along the
+ * tube's spine and `position.y` 0..1 round it. Two materials place it:
+ *
+ *  - the **pressure sheath** lays the spine along the crescent's edge (the
+ *    same `bladeEdge` the blade uses) and blows the section up into a flat
+ *    lens of dense air behind it, so the blade has a body with thickness and
+ *    a shaded underside instead of being a few-centimetre sheet;
+ *  - the **severed vortices** stand the spine up off the floor as a leaning,
+ *    flaring funnel — the two tip vortices the blade sheds when it tears.
+ *
+ * One buffer serves both; nothing about either shape is baked in.
+ *
+ * @param {number} [segments] along the spine
+ * @param {number} [sides]    round it
+ */
+export function createGaleTubeGeometry(segments = 64, sides = 16) {
+  const cols = sides + 1;
+  const rows = segments + 1;
+  const positions = new Float32Array(cols * rows * 3);
+  const uvs = new Float32Array(cols * rows * 2);
+  const indices = new Uint16Array(segments * sides * 6);
+
+  let p = 0;
+  let t = 0;
+  for (let j = 0; j < rows; j++) {
+    const s = j / segments;
+    for (let i = 0; i < cols; i++) {
+      const a = i / sides;
+      positions[p++] = s;
+      positions[p++] = a;
+      positions[p++] = 0;
+      uvs[t++] = s;
+      uvs[t++] = a;
+    }
+  }
+
+  let k = 0;
+  for (let j = 0; j < segments; j++) {
+    for (let i = 0; i < sides; i++) {
+      const a = j * cols + i;
+      const b = a + 1;
+      const c = a + cols;
+      const d = c + 1;
+      indices[k++] = a;
+      indices[k++] = b;
+      indices[k++] = c;
+      indices[k++] = b;
+      indices[k++] = d;
+      indices[k++] = c;
+    }
+  }
+
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setAttribute('uv', new BufferAttribute(uvs, 2));
+  geometry.setIndex(new BufferAttribute(indices, 1));
+  geometry.boundingSphere = new Sphere(new Vector3(), 50);
+  return geometry;
+}

@@ -28,6 +28,10 @@ import { getColor } from '../../utils/color.js';
  *  - **the floor** (`createFloorMaterial`) — a brass resonance band engraved
  *    with a running sine round the rim, and inside it standing-wave rings
  *    (nodes fixed, amplitude beating with the tolls).
+ *  - **the held field** (`createCurtainMaterial`) — a wall of stopped
+ *    sound standing on the rim between the tines once the first toll lands:
+ *    dark umber at the floor, amber standing bands up it that beat with
+ *    each toll, seams where the tines hold it; torn away upward on release.
  *  - **the air** (`createAirMaterial`) — LAYER.DISTORTION: a ring per toll,
  *    and a still shimmer over the held circle.
  *
@@ -732,6 +736,7 @@ const FLOOR_FRAGMENT = /* glsl */ `
   uniform vec3  uBand;
   uniform vec3  uWave;
   uniform vec3  uHeld;
+  uniform float uWash;
   uniform float uGlobalGlow;
 
   varying vec2 vXZ;
@@ -764,7 +769,11 @@ const FLOOR_FRAGMENT = /* glsl */ `
     float standing = cos(k * r) * cos(k * (uRadius - r) * 0.5);
     float amp = uHold * (0.35 + 0.65 * uToll) * (0.75 + 0.25 * sin(uTime * 3.0));
     float wave = smoothstep(0.55, 1.0, abs(standing)) * amp * inside;
-    float wash = inside * uHold * 0.18 * (0.6 + 0.4 * snoise(vec3(vXZ * 0.6, uSeed)));
+    // The held wash fills the circle: a dial of minute ticks round the inside
+    // of the band, and a slow amber tide over the floor.
+    float ticks = step(0.82, abs(cos(ang * 30.0))) * smoothstep(uRadius - 0.9, uRadius - 0.55, r) * (1.0 - smoothstep(uRadius - 0.35, uRadius - 0.25, r));
+    float wash = inside * uHold * uWash * (0.6 + 0.4 * snoise(vec3(vXZ * 0.6, uSeed)));
+    wave = max(wave, ticks * uHold * 0.9);
     col += uWave * wave * uWaveGlow + uHeld * wash;
     alpha = max(alpha, max(wave, wash));
 
@@ -800,7 +809,8 @@ export function createFloorMaterial() {
       uOpacity: { value: 1 },
       uBand: { value: new Color() },
       uWave: { value: new Color() },
-      uHeld: { value: new Color() }
+      uHeld: { value: new Color() },
+      uWash: { value: 0.5 }
     }),
     vertexShader: FLOOR_VERTEX,
     fragmentShader: FLOOR_FRAGMENT
@@ -826,6 +836,127 @@ export function createFloorMaterial() {
     u.uBand.value.copy(getColor(c.colorBand));
     u.uWave.value.copy(getColor(c.colorWave));
     u.uHeld.value.copy(getColor(c.colorHeld));
+    u.uWash.value = c.washStrength;
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The held field — the curtain of stopped sound                        */
+/* -------------------------------------------------------------------- */
+
+const CURTAIN_VERTEX = /* glsl */ `
+  varying vec2 vUv;
+  varying vec2 vXZ;
+  varying vec3 vWorld;
+  varying float vViewZ;
+  void main() {
+    vUv = uv;
+    vXZ = position.xz;
+    vec4 world = modelMatrix * vec4(position, 1.0);
+    vWorld = world.xyz;
+    vec4 mv = viewMatrix * world;
+    vViewZ = mv.z;
+    gl_Position = projectionMatrix * mv;
+  }
+`;
+
+const CURTAIN_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uTime;
+  uniform float uSeed;
+  uniform float uHold;        // 0..1 how much of the field stands
+  uniform float uToll;        // the latest toll, decaying
+  uniform float uSnap;        // 0..1 the release tears it upward
+  uniform float uBands;       // standing bands up the wall
+  uniform float uCount;       // tines, for the seams
+  uniform float uSpin;
+  uniform float uGlow;
+  uniform float uOpacity;
+  uniform vec3  uColorA;      // the hot crest
+  uniform vec3  uColorB;      // the amber body
+  uniform vec3  uColorDeep;   // the dark umber the wall is made of
+  uniform float uGlobalGlow;
+
+  varying vec2 vUv;
+  varying vec2 vXZ;
+  varying vec3 vWorld;
+  varying float vViewZ;
+
+  ${noiseGLSL}
+
+  void main() {
+    float y = vUv.y;
+    // Measured like the fence: from +x toward +z.
+    float ang = atan(vXZ.y, vXZ.x);
+    // Standing bands: nodes fixed up the wall, their brightness beating with
+    // the tolls — sound that has stopped where it was.
+    float st = abs(sin(y * uBands * 3.14159265));
+    float crest = pow(st, 6.0) * (0.55 + 0.45 * uToll);
+    // Seams where each tine holds the wall, and a fine grain of held dust.
+    float seam = exp(-pow(sin((ang - uSpin) * uCount * 0.5) * 6.0, 2.0));
+    float grain = snoise(vec3(vXZ * 3.0, y * 10.0 + uSeed + uTime * 0.05)) * 0.5 + 0.5;
+    // Solid at the floor, thinning to nothing at the top.
+    float body = (1.0 - smoothstep(0.35, 1.0, y)) * (0.65 + 0.35 * grain);
+    // The release tears it away from the floor upward.
+    float tear = snoise(vec3(vXZ * 1.5, y * 2.0 + uSeed)) * 0.5 + 0.5;
+    float keep = smoothstep(uSnap * 1.3 - 0.15, uSnap * 1.3, tear + y * 0.3);
+    float a = (body * 0.55 + crest * 0.6 + seam * 0.35) * uHold * keep * uOpacity;
+    if (a < 0.004) discard;
+    // Umber at the floor and in the troughs, amber through the body, the
+    // crests hot: the four-stop ramp of the cast, deep stop first.
+    vec3 col = mix(uColorDeep, uColorB, clamp(0.25 + body * 0.5 + crest + seam * 0.5, 0.0, 1.0));
+    col += uColorB * body * 0.45 * uGlow * uGlobalGlow;
+    col += uColorA * crest * uGlow * (0.5 + uToll) * uGlobalGlow;
+    gl_FragColor = vec4(col, clamp(a, 0.0, 1.0));
+  }
+`;
+
+export function createCurtainMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uSeed: { value: 0 },
+      uHold: { value: 0 },
+      uToll: { value: 0 },
+      uSnap: { value: 0 },
+      uBands: { value: 6 },
+      uCount: { value: 14 },
+      uSpin: { value: 0 },
+      uGlow: { value: 1.4 },
+      uOpacity: { value: 0.5 },
+      uColorA: { value: new Color() },
+      uColorB: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: CURTAIN_VERTEX,
+    fragmentShader: CURTAIN_FRAGMENT
+  });
+
+  /** @param {object} f { hold, toll, snap, spin, seed } */
+  material.userData.sync = (f) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uSeed.value = f.seed;
+    u.uHold.value = f.hold;
+    u.uToll.value = f.toll;
+    u.uSnap.value = f.snap;
+    u.uBands.value = c.curtainBands;
+    u.uCount.value = Math.max(3, Math.min(MAX_TINES, Math.round(c.tines)));
+    u.uSpin.value = f.spin;
+    u.uGlow.value = c.curtainGlow * g.glow * g.shaderIntensity;
+    u.uOpacity.value = c.curtainOpacity * g.opacity;
+    u.uColorA.value.copy(getColor(c.colorCurtainA));
+    u.uColorB.value.copy(getColor(c.colorCurtainB));
+    u.uColorDeep.value.copy(getColor(c.colorCurtainDeep));
   };
 
   return material;

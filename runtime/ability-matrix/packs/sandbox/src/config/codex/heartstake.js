@@ -41,25 +41,26 @@ export default {
     handForward: 0.6, // metres in front of the caster the stake forms
     handSide: 0.2, // metres to the right
     handHeight: 1.45, // metres off the floor
-    formTime: 0.14, // seconds the blood takes to set into a stake
+    formTime: 0.2, // seconds the blood takes to set into a stake
     gatherDrops: 60, // droplets drawn out of the air into the hand
     gatherRadius: 1.1, // metres they are drawn in from
-    flightHeight: 1.3, // metres off the floor it cruises at
+    flightHeight: 2.0, // metres off the floor it cruises at
     flightArc: 0.35, // metres it arcs up over the flight
-    diveDistance: 3.2, // metres before the target it pitches down
-    plungeDepth: 0.75, // metres the point drives into the floor
+    diveDistance: 5, // metres before the target it pitches down
+    plungeDepth: 1.1, // metres the point drives into the floor
     flightPulse: 2.2, // heartbeats per second while it flies
     plantLean: 0.4, // once rooted it rights itself to stand, point down, leaning this far (0 upright)
     plantTime: 0.2, // seconds it takes to right itself
+    flightScale: 0.5, // its size in flight, × full size — it swells to full size over the dive
 
     /* ================================================================ */
     /* 2 · THE STAKE — shape                                             */
     /* ================================================================ */
-    stakeLength: 3.0, // tail to point, metres
-    stakeRadius: 0.15, // shaft radius, metres
+    stakeLength: 5.6, // tail to point, metres — a zone-scale hero: stands ~4.3 m once planted
+    stakeRadius: 0.36, // shaft radius, metres
     taper: 0.85, // how the shaft narrows to its point
     twist: 0.9, // how far the facets twist along it
-    heartSize: 2.1, // the heart knot's radius, × the shaft
+    heartSize: 2.3, // the heart knot's radius, × the shaft
     heartAt: 0.16, // 0..1 tail → point, where the heart sits
     heartWidth: 0.075, // its half-length, 0..1 of the stake
     throb: 0.45, // how far the heart swells on a beat
@@ -74,26 +75,45 @@ export default {
     /* ================================================================ */
     veinScale: 2.2, // vein features per metre
     veinFlow: 5, // how fast the veins stream toward the point
-    veinGlow: 1.4,
-    heartGlow: 3.2, // the knot lit from inside (bloom > 1)
+    veinGlow: 1.0,
+    heartGlow: 2.0, // the knot lit from inside (bloom > 1)
     surgeGlow: 4.5, // the beat's surge running up the shaft
     surgeTime: 0.28, // seconds a surge takes knot → point
-    rimGlow: 1.6, // fresnel rim
+    rimGlow: 1.3, // fresnel rim
     gloss: 1.4, // specular glint off the facets
-    glowSize: 0.8, // radius of the bloom on the heart, metres
-    glowStrength: 1.8,
-    colorStakeDeep: '#1a0206',
-    colorStakeBody: '#7a0a18',
+    glowSize: 1.7, // radius of the bloom on the heart, metres
+    glowStrength: 1.1,
+    colorStakeDeep: '#0e0103',
+    colorStakeBody: '#5c0714',
     colorStakeHot: '#ff3b4e',
     colorStakeRim: '#ff4a5e',
-    colorGlowCore: '#ffd6dc',
+    colorGlowCore: '#ff9aa8',
     colorGlowHalo: '#ff1f3a',
+
+    /* ================================================================ */
+    /* 3b · THE THORN ROOTS                                              */
+    /* ================================================================ */
+    thornRoots: 9, // barbed arches the stake sends out of the floor (1..16)
+    thornReach: 0.9, // how far the longest reaches by the last beat, × rootReach
+    thornFirst: 0.3, // share of that already out at the plunge; the rest comes a step per beat
+    thornGrowTime: 0.24, // seconds each beat's heave takes
+    thornArch: 1.5, // metres an arch stands at full growth
+    thornRadius: 0.2, // metres thick where it leaves the stake
+    thornTaper: 0.9,
+    thornWander: 0.35, // radians the roots curl sideways
+    thornSink: 0.45, // metres the far end dives under the floor
+    thornJitter: 0.45, // 0..1 how irregular their bearings, lengths and arches are
+    thornSpikes: 8, // spike rows along a root
+    thornSpikeLen: 1.4, // × the local thickness
+    thornVeinGlow: 0.9,
+    thornPulseGlow: 3.4, // the beat's pressure front lighting them as it runs out
+    colorThornBody: '#4a0610',
 
     /* ================================================================ */
     /* 4 · THE TRAIL                                                     */
     /* ================================================================ */
     trailLength: 4.5, // metres of blood streaming behind it
-    trailWidth: 0.5, // metres across, at the stake
+    trailWidth: 0.8, // metres across, at the stake
     trailFlow: 9, // how fast the streaks run back
     trailGlow: 2.2, // the hot core of the trail
     trailOpacity: 0.9,
@@ -120,14 +140,14 @@ export default {
     /* ================================================================ */
     /* 6 · STAIN & ROOTS                                                 */
     /* ================================================================ */
-    stainRadius: 1.4, // metres the stain soaks out to by the last beat
+    stainRadius: 2.4, // metres the stain soaks out to by the last beat
     stainFingers: 0.7, // how far its fingers reach, × the radius
     stainFingerFreq: 2.6,
     stainOpacity: 0.95,
     stainGloss: 1.3, // wet glint
     rootCount: 11, // capillaries reaching out of the stain
-    rootReach: 4.6, // metres they reach by the last beat
-    rootWidth: 0.11, // metres at the stain
+    rootReach: 5.2, // metres they reach by the last beat
+    rootWidth: 0.15, // metres at the stain
     rootWander: 0.3,
     rootGlow: 2.2, // brightness of the capillaries (bloom > 1)
     colorStain: '#2a0208',
@@ -174,7 +194,7 @@ export default {
     /* 8 · THE PLUNGE                                                    */
     /* ================================================================ */
     plungeDrops: 160, // the crown of droplets thrown up
-    splashSize: 1.4, // the splash dome, metres
+    splashSize: 2.2, // the splash dome, metres
     shockRadius: 5, // the shockwave on the floor, metres
     plungeFlash: 0.3,
     plungeShake: 0.5,
@@ -182,8 +202,8 @@ export default {
     colorSplashA: '#ff8090',
     colorSplashB: '#d0182e',
     colorSplashC: '#4a0410',
-    colorShockA: '#ff3048',
-    colorShockB: '#ffc0c8',
+    colorShockA: '#a00c22',
+    colorShockB: '#ff4a5e',
     colorFlash: '#ff4058',
 
     /* ================================================================ */

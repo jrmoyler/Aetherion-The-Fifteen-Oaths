@@ -1,6 +1,17 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import {
+  AdditiveBlending,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  MeshStandardMaterial,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial,
+  Vector3
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
-import { sharedUniforms } from '../../core/FrameUniforms.js';
+import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
 import { getColor } from '../../utils/color.js';
 import { MAX_TETHER_POINTS } from '../../assets/atlas/ArcRelayGeometry.js';
@@ -499,6 +510,11 @@ export function createRelayCoreMaterial() {
  * sides, all turning at `uSpin`. It **draws in** from the middle as the relay
  * charges (`uReveal`), throbs with the lattice under overload, and is wiped
  * outward by the discharge (`uBurst`) — the floor half of the burst.
+ *
+ * Under the lines it is a **filled charged plate**, not a diagram: a deep,
+ * floor-darkening disc (premultiplied blending, so the deep stop really is
+ * dark on the floor), a slow plasma field in the body colour and veins of
+ * current crawling through it that thicken under the overload.
  */
 const SIGIL_VERTEX = /* glsl */ `
   varying vec2 vUv;
@@ -523,12 +539,21 @@ const SIGIL_FRAGMENT = /* glsl */ `
   uniform float uLine;
   uniform float uIntensity;
   uniform float uOpacity;
+  uniform float uFill;
+  uniform float uField;
+  uniform float uFieldScale;
+  uniform float uVeins;
+  uniform float uSeed;
   uniform vec3  uColor;
   uniform vec3  uColorHot;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
 
   varying vec2 vUv;
 
   const float PI = 3.14159265359;
+
+  ${noiseGLSL}
 
   float band(float d, float w) {
     float aa = fwidth(d) * 1.2;
@@ -562,17 +587,36 @@ const SIGIL_FRAGMENT = /* glsl */ `
     // Under overload: a pulse running inward. On discharge: a wipe outward.
     float pulse = 0.5 + 0.5 * sin((r * 9.0 + uTime * 14.0));
     float throb = 1.0 + uOverload * (0.6 + 1.2 * pulse);
-    // The wipe: everything inside the racing edge is already gone.
     float burstEdge = band(r - uBurst, 0.05) * step(0.001, uBurst) * (1.0 - uBurst);
     float keep = uBurst > 0.0 ? smoothstep(uBurst - 0.2, uBurst, r) : 1.0;
 
-    float glow = exp(-r * 2.4) * 0.15;
-    float alpha = (shape + glow) * keep * reveal * throb + burstEdge * 2.0;
-    alpha = clamp(alpha * uOpacity * uFade, 0.0, 1.0);
-    if (alpha < 0.003) discard;
+    /* --- the charged field: a filled disc, not a diagram --- */
+    // A deep, floor-darkening plate (the deep stop) inside the outer ring,
+    // lit from within by a slow plasma field (the body stop) and crawled by
+    // branching veins of current (ridged noise, the tint stop) that thicken
+    // and quicken under overload.
+    vec2 q = vUv * uFieldScale;
+    float t = uTime * (0.6 + uOverload * 2.4);
+    float plasma = fbm3(vec3(q * 0.7, t * 0.35 + uSeed)) * 0.5 + 0.5;
+    float vein = 1.0 - abs(snoise(vec3(q * 1.3 + vec2(uSeed), t * 0.9)));
+    vein = pow(clamp(vein, 0.0, 1.0), mix(14.0, 6.0, uOverload));
+    float plate = 1.0 - smoothstep(0.88, 0.95, r);
+    float centre = 1.0 - smoothstep(0.0, 0.9, r);
+    float field = plate * uField * (plasma * (0.35 + 0.65 * centre) * (1.0 + uOverload * 1.5));
+    float veins = plate * vein * uVeins * (0.5 + uOverload * 1.5);
 
-    vec3 color = mix(uColor, uColorHot, clamp(uOverload * 0.7 + burstEdge, 0.0, 1.0));
-    gl_FragColor = vec4(color * uIntensity * uGlobalGlow * (throb + burstEdge * 3.0) * uFade, alpha);
+    float m = keep * reveal;
+    vec3 light = uColorBody * field
+               + mix(uColor, uColorHot, uOverload * 0.5) * veins
+               + mix(uColor, uColorHot, clamp(uOverload * 0.7 + burstEdge, 0.0, 1.0)) * shape * throb
+               + uColorHot * burstEdge * 3.0;
+    light *= uIntensity * uGlobalGlow * m * uFade;
+    // Premultiplied over: the deep plate darkens the floor, the light adds.
+    float cover = plate * uFill * m * (0.75 + 0.25 * (1.0 - centre));
+    vec3 color = light + uColorDeep * cover * 0.6;
+    float alpha = clamp(cover * uOpacity * uFade, 0.0, 1.0);
+    if (alpha < 0.003 && dot(light, vec3(1.0)) < 0.003) discard;
+    gl_FragColor = vec4(color * uOpacity, alpha);
   }
 `;
 
@@ -581,7 +625,10 @@ export function createRelaySigilMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    // Premultiplied "over": the plate darkens the floor, the lines add light.
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     polygonOffset: true,
@@ -597,14 +644,21 @@ export function createRelaySigilMaterial() {
       uLine: { value: 0.03 },
       uIntensity: { value: 1.8 },
       uOpacity: { value: 0.85 },
+      uFill: { value: 0.8 },
+      uField: { value: 0.8 },
+      uFieldScale: { value: 3 },
+      uVeins: { value: 1 },
+      uSeed: { value: 0 },
       uColor: { value: new Color(0.4, 0.85, 1) },
-      uColorHot: { value: new Color(1, 1, 1) }
+      uColorHot: { value: new Color(1, 1, 1) },
+      uColorBody: { value: new Color(0.18, 0.42, 1) },
+      uColorDeep: { value: new Color(0.03, 0.04, 0.12) }
     }),
     vertexShader: SIGIL_VERTEX,
     fragmentShader: SIGIL_FRAGMENT
   });
 
-  /** @param {object} s { reveal, overload, burst, fade, spin } */
+  /** @param {object} s { reveal, overload, burst, fade, spin, seed } */
   material.userData.sync = (s) => {
     const c = settings.relay;
     const g = settings.global;
@@ -620,6 +674,13 @@ export function createRelaySigilMaterial() {
     u.uOpacity.value = c.sigilOpacity * g.opacity;
     u.uColor.value.copy(getColor(c.colorSigil));
     u.uColorHot.value.copy(getColor(c.colorSigilHot));
+    u.uColorBody.value.copy(getColor(c.colorSigilBody));
+    u.uColorDeep.value.copy(getColor(c.colorSigilDeep));
+    u.uFill.value = c.sigilFill;
+    u.uField.value = c.sigilField * g.shaderIntensity;
+    u.uFieldScale.value = c.sigilFieldScale * g.noiseFrequency;
+    u.uVeins.value = c.sigilVeins * g.noiseStrength;
+    u.uSeed.value = s.seed ?? 0;
   };
 
   return material;
@@ -708,5 +769,97 @@ export function createRelayWarpMaterial() {
     u.uSeed.value = s.seed;
   };
 
+  return material;
+}
+
+/* ====================================================================== */
+/* 5 · The conductor cage — the hero solid                                 */
+/* ====================================================================== */
+
+/**
+ * The prongs of a relay cage: lit, shadow-casting blued steel
+ * (MeshStandardMaterial, `LAYER.WORLD`) patched so the conductor *heats*.
+ *
+ * Per instance `aHeat` = (heat, reach, seed, flicker). `reach` (0..1) is how
+ * far down from the point the heat has crept; inside it the steel is driven
+ * through the four-stop ramp — deep at the cool edge, the saturated body, the
+ * pale tint and a white-hot point, which is the only place it goes above 1.
+ * The insulator grooves (`aRing`) take the charge first, so a held relay reads
+ * as a cage of hot rings before the overload whitens the whole rod. On the
+ * discharge the heat spikes and then cools through the same ramp to the deep
+ * tone while the prongs topple and sink.
+ */
+export function createRelayProngMaterial() {
+  const material = new MeshStandardMaterial({
+    color: 0x1a2036,
+    roughness: 0.32,
+    metalness: 0.75,
+    flatShading: true
+  });
+  const uniforms = {
+    uProngHot: { value: new Color('#ffffff') },
+    uProngTint: { value: new Color('#9fe9ff') },
+    uProngBody: { value: new Color('#2f6bff') },
+    uProngDeep: { value: new Color('#0b1030') },
+    uProngGlow: { value: 2.4 },
+    uProngGroove: { value: 0.8 },
+    uProngTime: frame.uTime
+  };
+  material.userData.uniforms = uniforms;
+  material.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, uniforms);
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nattribute float aT;\nattribute float aRing;\nattribute vec4 aHeat;\nvarying float vProngT;\nvarying float vProngRing;\nvarying vec4 vHeat;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvProngT = aT;\nvProngRing = aRing;\nvHeat = aHeat;');
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>', [
+        '#include <common>',
+        'uniform vec3 uProngHot;',
+        'uniform vec3 uProngTint;',
+        'uniform vec3 uProngBody;',
+        'uniform vec3 uProngDeep;',
+        'uniform float uProngGlow;',
+        'uniform float uProngGroove;',
+        'uniform float uProngTime;',
+        'varying float vProngT;',
+        'varying float vProngRing;',
+        'varying vec4 vHeat;',
+        'vec3 prongRamp(float k) {',
+        '  k = clamp(k, 0.0, 1.0);',
+        '  if (k < 0.33) return mix(uProngDeep, uProngBody, k / 0.33);',
+        '  if (k < 0.75) return mix(uProngBody, uProngTint, (k - 0.33) / 0.42);',
+        '  return mix(uProngTint, uProngHot, (k - 0.75) / 0.25);',
+        '}'
+      ].join('\n'))
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        {
+          float heat = vHeat.x;
+          float reach = clamp(vHeat.y, 0.0, 1.0);
+          // How deep into the heated length this point is: 1 at the tip.
+          float into = clamp((vProngT - (1.0 - reach)) / max(reach, 1e-3), 0.0, 1.0) * step(1e-3, reach);
+          float crackle = 0.75 + 0.25 * sin(uProngTime * 37.0 + vHeat.z * 11.0 + vProngT * 23.0) * vHeat.w;
+          float tip = pow(into, 1.6);
+          float groove = vProngRing * uProngGroove * smoothstep(0.0, 0.25, heat) * (0.35 + 0.65 * into + 0.25 * reach);
+          float k = clamp(heat * (tip * 0.85 + groove * 0.6), 0.0, 1.2);
+          // The four-stop ramp; HDR only at the white point.
+          vec3 hot = prongRamp(k) * (k * k * 1.6 + k * 0.5);
+          totalEmissiveRadiance += hot * uProngGlow * crackle;
+        }`);
+  };
+  material.customProgramCacheKey = () => 'arc-relay-prong';
+  /** Read settings into the patch every frame. */
+  material.userData.sync = () => {
+    const c = settings.relay;
+    const g = settings.global;
+    material.color.copy(getColor(c.colorProng));
+    material.roughness = c.prongRoughness;
+    material.metalness = c.prongMetalness;
+    uniforms.uProngHot.value.copy(getColor(c.colorProngHot));
+    uniforms.uProngTint.value.copy(getColor(c.colorProngTint));
+    uniforms.uProngBody.value.copy(getColor(c.colorProngBody));
+    uniforms.uProngDeep.value.copy(getColor(c.colorProngDeep));
+    uniforms.uProngGlow.value = c.prongGlow * g.glow * g.shaderIntensity;
+    uniforms.uProngGroove.value = c.prongGroove;
+  };
   return material;
 }

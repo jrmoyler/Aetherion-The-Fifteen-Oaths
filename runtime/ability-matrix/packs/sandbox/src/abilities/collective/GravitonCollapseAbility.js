@@ -187,7 +187,7 @@ export class GravitonCollapseAbility extends Ability {
     this._coreState = { heat: 0, fade: 1, seed: 0 };
     this._discState = { clock: 0, inner: 0.3, heat: 0, fade: 1, seed: 0 };
     this._lensState = { size: 1, core: 0, strength: 0 };
-    this._wellState = { centre: new Vector3(), reach: 4, depth: 0, clock: 0, open: 0, fade: 1, seed: 0 };
+    this._wellState = { centre: new Vector3(), reach: 4, depth: 0, clock: 0, open: 0, fade: 1, seed: 0, grip: 0, crush: 0 };
   }
 
   createParticles() {
@@ -385,6 +385,13 @@ export class GravitonCollapseAbility extends Ability {
     return saturate((this._hold - (this.impactDuration - window)) / window);
   }
 
+  /** 0..1 through the whole hold — presentation only (the well feeding). */
+  _gripAmount() {
+    if (this.phase === AbilityPhase.TRAVEL) return 0;
+    if (this._collapsed) return 1;
+    return saturate(this._hold / this.impactDuration);
+  }
+
   /** 0..1 through the fade after the collapse. */
   _afterAmount() {
     return this._collapsed ? saturate(this._after / this.fadeDuration) : 0;
@@ -419,7 +426,10 @@ export class GravitonCollapseAbility extends Ability {
   _wellDepth() {
     const c = settings.graviton;
     if (this.phase === AbilityPhase.TRAVEL) return 0;
-    const deep = c.wellDepth * (1 + 0.25 * Easing.inQuad(this._crush()));
+    // The well keeps feeding through the hold: it sinks further as it fills
+    // (`wellGripDeepen`), then deepens again through the crush.
+    const feed = 1 + c.wellGripDeepen * Easing.inOutQuad(this._gripAmount());
+    const deep = c.wellDepth * feed * (1 + 0.25 * Easing.inQuad(this._crush()));
     if (!this._collapsed) return deep * Easing.outBack(this._open());
 
     const t = this._after;
@@ -537,6 +547,8 @@ export class GravitonCollapseAbility extends Ability {
     wellState.open = this._collapsed ? 1 - Easing.inQuad(after) : Easing.outCubic(open);
     wellState.fade = this._collapsed ? 1 - Easing.inQuad(after) : 1;
     wellState.seed = this._seed;
+    wellState.grip = this._gripAmount();
+    wellState.crush = this._collapsed ? 0 : crush;
     this.wellMaterial.userData.sync(wellState);
     this.well.visible = !travelling && wellState.fade > 0.004;
 
@@ -1033,10 +1045,12 @@ export class GravitonCollapseAbility extends Ability {
       radius: 0.3,
       endRadius: c.burstRadius * power,
       life: c.burstLife,
-      intensity: 1.4,
-      colorA: getColor(c.colorShockHot),
-      colorB: getColor(c.colorShockBody),
-      colorC: getColor(c.colorSparkD),
+      intensity: c.burstIntensity,
+      // Violet into the deep, not white: the collapse is read from the shock,
+      // the ejecta and the light punch — the shell must not wash the frame.
+      colorA: getColor(c.colorShockBody),
+      colorB: getColor(c.colorSparkD),
+      colorC: getColor(c.colorScorch),
       squash: 0.7
     });
 
@@ -1269,6 +1283,21 @@ export function buildEditor(gui, c, Editor) {
   well.addColor(c, 'colorWellDeep').name('throat');
   well.addColor(c, 'colorWellGrid').name('grid');
   well.addColor(c, 'colorWellHot').name('throat glow');
+  R(well, c, 'wellGripDeepen', 0, 2, 0.01, 'sinks further over the hold (×)');
+  R(well, c, 'wellHorizon', 0, 1.5, 0.01, 'event horizon (× throat)');
+  R(well, c, 'wellHorizonGrow', 0, 2, 0.01, 'horizon widens over hold');
+  R(well, c, 'wellPhotonGlow', 0, 10, 0.05, 'photon ring glow');
+  R(well, c, 'wellPhotonWidth', 0.01, 1, 0.01, 'photon ring width (× horizon)');
+  R(well, c, 'wellArms', 1, 8, 1, 'lensing arms');
+  R(well, c, 'wellArmTight', -6, 6, 0.05, 'arm winding');
+  R(well, c, 'wellFieldSpin', -6, 6, 0.05, 'arm spin (rad/s)');
+  R(well, c, 'wellFieldFlow', -3, 3, 0.01, 'streaks drain');
+  R(well, c, 'wellFieldContrast', 0.2, 6, 0.05, 'arm contrast');
+  R(well, c, 'wellFieldGlow', 0, 4, 0.01, 'field brightness');
+  R(well, c, 'wellRipple', 0, 1, 0.01, 'gravity ripples');
+  R(well, c, 'wellOcclude', 0.5, 3, 0.01, 'near-lip occlusion edge (× lip)');
+  well.addColor(c, 'colorWellBody').name('field body');
+  well.addColor(c, 'colorWellTint').name('field tint');
 
   const infall = folder.addFolder('5 · Infall');
   R(infall, c, 'debrisRate', 0, 400, 1, 'debris / s');
@@ -1313,6 +1342,7 @@ export function buildEditor(gui, c, Editor) {
   R(blast, c, 'shockLife', 0.1, 3, 0.01, 'shockwave life (s)');
   R(blast, c, 'burstRadius', 0.5, 12, 0.1, 'air burst radius (m)');
   R(blast, c, 'burstLife', 0.1, 3, 0.01, 'air burst life (s)');
+  R(blast, c, 'burstIntensity', 0, 3, 0.01, 'air burst brightness');
   R(blast, c, 'ejectaCount', 0, 600, 1, 'ejecta');
   R(blast, c, 'ejectaSpeed', 0, 30, 0.1, 'ejecta speed');
   R(blast, c, 'ejectaSize', 0.01, 0.5, 0.005, 'ejecta size');

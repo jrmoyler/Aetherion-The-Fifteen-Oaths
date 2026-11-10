@@ -1,9 +1,11 @@
-import { Mesh, PlaneGeometry, Vector2, Vector3 } from 'three';
+import { Mesh, PlaneGeometry, Vector2, Vector3, Vector4 } from 'three';
 import { Ability } from '../Ability.js';
-import { createGaleBladeGeometry } from '../../assets/matrix-new/GaleSeverGeometry.js';
+import { createGaleBladeGeometry, createGaleTubeGeometry } from '../../assets/matrix-new/GaleSeverGeometry.js';
 import {
   createGaleBladeMaterial,
   createGaleScarMaterial,
+  createGaleSheathMaterial,
+  createGaleVortexMaterial,
   createGaleWarpMaterial
 } from '../../materials/matrix-new/GaleSeverMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -30,6 +32,7 @@ const _right = new Vector3();
 const _floor = new Vector3();
 const _local = new Vector3();
 const _up = new Vector3(0, 1, 0);
+const _out = new Vector3();
 
 /**
  * GALE SEVER — a crescent of compressed air thrown down the line.
@@ -38,13 +41,24 @@ const _up = new Vector3(0, 1, 0);
  * height, cuts every body it crosses in half, and at the end of the line tears
  * itself apart into wind. It leaves a long cut in the floor behind it.
  *
- * Seven layers, each a folder in the editor:
+ * The blade flies *rolled* — a diagonal slash, its high tip up at head height
+ * and its low tip scraping the floor — so that from behind the caster it is a
+ * 3 m crescent standing in the air, not a sheet seen edge-on. Where the low
+ * tip meets the floor is solved on the CPU (`_contactX`) and that is where the
+ * scar is cut, so rolling or widening the blade moves the cut with it.
+ *
+ * Nine layers, each a folder in the editor:
  *
  *   1. **the blade** — a parameter-space strip bent into a crescent in the
  *      vertex stage (`createGaleBladeGeometry`). Additive, nearly transparent:
  *      one bright cutting line, a streaming haze behind it, and a three-band
  *      chromatic fringe between the two. It is lit by its own rim edge-on, so
  *      the camera can orbit it without it collapsing into a line.
+ *   1b. **the pressure sheath** — the blade's *body*: a tube along the same
+ *      crescent arc (`createGaleTubeGeometry`), blown up into a lens-section
+ *      cushion of dense air seated behind the edge, normal-blended and lit by
+ *      the sun from the ramp's deep navy underside to its pale top. This is
+ *      the mass that reads at 8 m; the edge rides on it.
  *   2. **the lens** — the same crescent on `LAYER.DISTORTION`, deeper than the
  *      blade and reaching ahead of it. Its offset is the crescent's own normal
  *      times the slope of a bump across the strip, so the world is pushed out
@@ -67,7 +81,18 @@ const _up = new Vector3(0, 1, 0);
  *   6. **the impact** — the blade drifts on past the target, opening out and
  *      tearing apart on a noise threshold with a frayed bright edge, throwing
  *      wind ribbons off its edge; an AIR pressure shell, a shockwave, a dust
- *      ring, a knock on the camera and a punch of light.
+ *      ring, a knock on the camera and a punch of light. The floor answers
+ *      with a **blast fan** written into the scar shader: a dark combed fan
+ *      blown forward from the impact point, sized by `fanRadius`, heaped with a
+ *      pale rim of dust, which stays for the whole linger.
+ *   6b. **the severed vortices** — the linger. The blade's two tip vortices
+ *      are left standing where it tore: two funnels 3.4 m tall
+ *      (`createGaleVortexMaterial`, a helical-streamline core + a lit dust
+ *      sheath each) that turn opposite ways, rise with an overshoot, lean out
+ *      from each other as they drift apart, snake, draw dust up their walls,
+ *      scour spiral footprints into the floor, and finally unravel from the
+ *      foot up along a burning edge. Their seat is `shearRadius × vortexSeat`
+ *      either side of the line, so a wider blade leaves wider-set vortices.
  *   7. **the slice** — `handlesOwnHits`. Every frame the blade is sharp it
  *      tests the ground it has swept: a body whose position is behind the
  *      crescent's edge *at its own lateral offset* (the tips trail the apex)
@@ -119,6 +144,45 @@ export class GaleSeverAbility extends Ability {
     this.warp.visible = false;
     this.group.add(this.warp);
 
+    /* ---- layer 1b: the pressure sheath (the blade's body) ---- */
+    this.sheathGeometry = createGaleTubeGeometry(72, 14);
+    this.sheathMaterial = createGaleSheathMaterial();
+    this.sheath = new Mesh(this.sheathGeometry, this.sheathMaterial);
+    this.sheath.name = 'GaleSheath';
+    this.sheath.layers.set(LAYER.VFX);
+    this.sheath.renderOrder = 12;
+    this.sheath.frustumCulled = false;
+    this.sheath.visible = false;
+    this.group.add(this.sheath);
+
+    /* ---- layer 6b: the severed vortices (core + sheath, twice) ---- */
+    this.vortexGeometry = createGaleTubeGeometry(48, 18);
+    this._vortices = [];
+    for (let k = 0; k < 2; k++) {
+      const coreMaterial = createGaleVortexMaterial(false);
+      const sheathMaterial = createGaleVortexMaterial(true);
+      const core = new Mesh(this.vortexGeometry, coreMaterial);
+      const dust = new Mesh(this.vortexGeometry, sheathMaterial);
+      core.name = `GaleVortex${k}`;
+      dust.name = `GaleVortexDust${k}`;
+      for (const m of [core, dust]) {
+        m.layers.set(LAYER.VFX);
+        m.frustumCulled = false; // placed in the vertex stage
+        m.visible = false;
+        this.group.add(m);
+      }
+      dust.renderOrder = 12;
+      core.renderOrder = 13;
+      this._vortices.push({
+        core,
+        dust,
+        coreMaterial,
+        sheathMaterial,
+        sign: k === 0 ? 1 : -1,
+        state: { base: new Vector3(), out: new Vector3(1, 0, 0), grow: 0, sway: 0, spin: 0, spinDir: k === 0 ? 1 : -1, unravel: 0, fade: 1, seed: 0 }
+      });
+    }
+
     /* ---- layer 5: the scar ---- */
     this.scarGeometry = new PlaneGeometry(1, 1, 1, 1);
     this.scarMaterial = createGaleScarMaterial();
@@ -143,8 +207,19 @@ export class GaleSeverAbility extends Ability {
       bladeAt: 0,
       hot: 1,
       fadeT: 0,
-      seed: 0
+      seed: 0,
+      centreX: 0,
+      fanAt: 0,
+      fanR: 0,
+      feet: new Vector4(),
+      feetOn: 0,
+      feetSpin: 0
     };
+
+    /** Seconds since the blade reached the target — the linger's one clock. */
+    this._since = -1;
+    this._vortexSpin = 0;
+    this._vortexSway = 0;
 
     this._seed = 0;
     this._wobble = 0;
@@ -218,6 +293,8 @@ export class GaleSeverAbility extends Ability {
     this.wakeEmitter = new RateEmitter();
     this.floorEmitter = new RateEmitter();
     this.streakEmitter = new RateEmitter();
+    this.vortexDustEmitter = new RateEmitter();
+    this.vortexStreakEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -292,6 +369,69 @@ export class GaleSeverAbility extends Ability {
     return Math.abs(this._bladeLocal(1, _local).x);
   }
 
+  /**
+   * Metres across the line where the blade's low tip scrapes the floor — where
+   * the cut is. Solved for the *settled* blade (fully formed, no rock), so the
+   * scar already laid down does not swim while the blade snaps open; scaled by
+   * how close that tip comes to the floor, so a blade flown high cuts nothing
+   * off-centre.
+   */
+  _contactX() {
+    const c = settings.gale;
+    const halfArc = Math.max(0.05, c.arc * 0.5);
+    const R = Math.max(0.05, c.shearRadius) / Math.max(Math.sin(Math.min(halfArc, Math.PI / 2)), 0.1);
+    const cr = Math.cos(c.roll);
+    const sr = Math.sin(c.roll);
+    let bestX = 0;
+    let bestY = Infinity;
+    for (let i = 0; i <= 16; i++) {
+      const u = (i / 16) * 2 - 1;
+      const th = u * halfArc;
+      const x = R * Math.sin(th);
+      const y = c.bow * R * u * u;
+      const wy = c.bladeHeight + x * sr + y * cr;
+      if (wy < bestY) {
+        bestY = wy;
+        bestX = x * cr - y * sr;
+      }
+    }
+    return bestX * saturate(1 - bestY / 0.6) * c.scarFollowTip;
+  }
+
+  /** Seconds the linger lasts in all: the tearing plus the fade. */
+  _lingerTotal() {
+    return this.impactDuration + this.fadeDuration;
+  }
+
+  /** Place both severed vortices from the one clock `_since`. */
+  _syncVortices() {
+    const c = settings.gale;
+    const g = settings.global;
+    const since = Math.max(0, this._since);
+    const total = this._lingerTotal();
+    const exit = Math.min(Math.max(0.05, c.vortexExit * g.lifetime), total * 0.8);
+    const grow = this._since < 0 ? 0 : Easing.outBack(saturate(since / Math.max(0.02, c.vortexRiseTime)));
+    const unravel = saturate((since - (total - exit)) / exit);
+    const seat = Math.max(0, c.shearRadius * c.vortexSeat) + c.vortexDrift * since;
+    const along = this.length + c.dissipateDrift * c.vortexAlong;
+    for (const v of this._vortices) {
+      const st = v.state;
+      _floor.copy(this.origin).addScaledVector(this.direction, along).addScaledVector(_right, seat * v.sign);
+      st.base.copy(_floor).setY(unravel * c.vortexLiftOff);
+      st.out.copy(_right).multiplyScalar(v.sign).addScaledVector(this.direction, c.vortexLeanForward).normalize();
+      st.grow = grow;
+      st.sway = this._vortexSway + v.sign * 3.1;
+      st.spin = this._vortexSpin;
+      st.spinDir = v.sign;
+      st.unravel = unravel;
+      st.fade = 1 - smoothstep(0.82, 1, unravel);
+      st.seed = this._seed + v.sign * 11.3;
+      v.coreMaterial.userData.sync(st);
+      v.sheathMaterial.userData.sync(st);
+    }
+    return { grow, unravel, seat, along };
+  }
+
   /* ------------------------------------------------------------------ */
   /* Casting                                                             */
   /* ------------------------------------------------------------------ */
@@ -315,6 +455,15 @@ export class GaleSeverAbility extends Ability {
     this._sliced = 0;
     this._hot = 1;
     this._tipToggle = 0;
+    this._since = -1;
+    this._vortexSpin = Math.random() * TAU;
+    this._vortexSway = Math.random() * 10;
+    this.vortexDustEmitter.reset();
+    this.vortexStreakEmitter.reset();
+    for (const v of this._vortices) {
+      v.core.visible = false;
+      v.dust.visible = false;
+    }
 
     // Local +X of the blade in the world: a yaw of atan2(dir.x, dir.z) sends
     // local +Z down the line and local +X to (dir.z, 0, -dir.x).
@@ -322,6 +471,8 @@ export class GaleSeverAbility extends Ability {
 
     this._scarState.fadeT = 0;
     this._scarState.hot = 1;
+    this._scarState.fanR = 0;
+    this._scarState.feetOn = 0;
 
     const s = this._bladeState;
     s.seed = this._seed;
@@ -332,10 +483,12 @@ export class GaleSeverAbility extends Ability {
 
     this.blade.visible = true;
     this.warp.visible = true;
+    this.sheath.visible = true;
     this.scar.visible = true;
     const yaw = Math.atan2(this.direction.x, this.direction.z);
     this.blade.rotation.set(0, yaw, 0);
     this.warp.rotation.set(0, yaw, 0);
+    this.sheath.rotation.set(0, yaw, 0);
 
     /* the gust off the caster's feet as the blade is thrown */
     this._resetEmit(frame.uTime.value);
@@ -350,6 +503,30 @@ export class GaleSeverAbility extends Ability {
     _emit.life = c.wakeLifetime * 0.7;
     _emit.spin = 0.6;
     this.wake.emit(Math.round(c.castGust * g.particleCount), _emit);
+
+    /* the draw: wind lines sucked into the hand as the blade is wound up */
+    this._resetEmit(frame.uTime.value);
+    _apex.copy(this.origin).addScaledVector(this.direction, 0.5).setY(c.bladeHeight);
+    _emit.size = c.streakSize;
+    _emit.life = c.castDrawTime;
+    _emit.lifeVariance = 0.2;
+    _emit.speedVariance = 0.15;
+    const draw = Math.round(c.castDraw * g.particleCount);
+    for (let n = 0; n < draw; n++) {
+      const a = Math.random() * TAU;
+      const r = c.castDrawRadius * (0.6 + 0.4 * Math.random());
+      _pos.copy(_apex)
+        .addScaledVector(_right, Math.cos(a) * r)
+        .addScaledVector(_up, Math.sin(a) * r * 0.7)
+        .addScaledVector(this.direction, -0.4 * Math.random());
+      if (_pos.y < 0.08) _pos.y = 0.08;
+      _dir.copy(_apex).sub(_pos);
+      const d = _dir.length();
+      _emit.position = _pos;
+      _emit.direction = _dir.divideScalar(Math.max(d, 1e-4));
+      _emit.speed = d / Math.max(0.05, c.castDrawTime);
+      this.streaks.emit(1, _emit);
+    }
 
     this._sync(0);
   }
@@ -404,12 +581,14 @@ export class GaleSeverAbility extends Ability {
     s.strength = Math.min(1, s.form) * (1 - Easing.inQuad(dissolveT));
     this.bladeMaterial.userData.sync(s);
     this.warpMaterial.userData.sync(s);
+    this.sheathMaterial.userData.sync(s);
 
     // The apex rides the line at blade height.
     _apex.copy(this.origin).addScaledVector(this.direction, this._along);
     _apex.y = c.bladeHeight;
     this.blade.position.copy(_apex);
     this.warp.position.copy(_apex);
+    this.sheath.position.copy(_apex);
 
     /* the scar */
     const sc = this._scarState;
@@ -417,8 +596,16 @@ export class GaleSeverAbility extends Ability {
     sc.start.copy(this.origin).addScaledVector(this.direction, start);
     sc.dir.copy(this.direction);
     sc.side.copy(_right);
-    sc.length = Math.max(0.2, this.length + c.dissipateDrift - start + 0.5);
-    sc.width = 2 * (Math.max(c.scarScour, c.scarCut + c.scarLips + c.scarScratchSpread) + c.scarWiggle + 0.25);
+    sc.centreX = this._contactX();
+    const v = this._syncVortices();
+    const fanReach = Math.max(0, c.fanRadius) * Math.max(1, settings.global.explosionIntensity);
+    sc.length = Math.max(0.2, this.length + Math.max(c.dissipateDrift, fanReach) - start + 0.5);
+    sc.width = 2 * (Math.max(c.scarScour, c.scarCut + c.scarLips + c.scarScratchSpread, fanReach, v.seat + c.footRadius) + Math.abs(sc.centreX) + c.scarWiggle + 0.25);
+    sc.fanAt = this.length - start;
+    sc.fanR = this._since < 0 ? 0 : fanReach * Easing.outCubic(saturate(this._since / Math.max(0.02, c.fanSpread)));
+    sc.feet.set(v.seat, -v.seat, v.along - start, c.footRadius * Math.min(1, v.grow));
+    sc.feetOn = this._since < 0 ? 0 : saturate(v.grow) * (1 - v.unravel * 0.5);
+    sc.feetSpin = this._vortexSpin * c.footSpin;
     // The cut ends where the blade's *tips* are — they are what touch the floor.
     sc.bladeAt = this._along - start;
     sc.cutEnd = Math.max(0, this._along - start);
@@ -491,6 +678,13 @@ export class GaleSeverAbility extends Ability {
 
     _apex.copy(this.origin).addScaledVector(this.direction, this.length);
     _apex.y = c.bladeHeight;
+
+    /* the linger's clock starts; the two tip vortices stand up */
+    this._since = 0;
+    for (const v of this._vortices) {
+      v.core.visible = true;
+      v.dust.visible = true;
+    }
 
     /* a shell of pressure, squashed along the floor */
     this.ctx.bursts.spawn(BurstMode.AIR, _apex, {
@@ -570,7 +764,12 @@ export class GaleSeverAbility extends Ability {
 
   onFade(dt, t) {
     const c = settings.gale;
+    const g = settings.global;
     this._advance(dt);
+    this._since += dt;
+    this._vortexSpin += c.vortexSpin * dt * g.animationSpeed * (1 - 0.5 * saturate(t - 1));
+    this._vortexSway += c.vortexSwaySpeed * dt * g.animationSpeed;
+    this._lingerFx(dt);
 
     if (t <= 1) {
       // Carries on past the target, opening and tearing as it goes.
@@ -589,11 +788,83 @@ export class GaleSeverAbility extends Ability {
     const ft = saturate(t - 1);
     this.blade.visible = false;
     this.warp.visible = false;
+    this.sheath.visible = false;
     this._hot = Math.max(0, this._hot - dt / Math.max(0.05, c.scarCool));
     this._sync(1);
-    this._scarState.fadeT = smoothstep(0.3, 1, ft);
+    this._scarState.fadeT = smoothstep(0.45, 1, ft);
     this.scarMaterial.userData.sync(this._scarState);
-    this.position.copy(_apex);
+    // The light stays with the vortices.
+    this.position.copy(this.origin).addScaledVector(this.direction, this.length).setY(c.vortexHeight * 0.4);
+    if (ft >= 0.999) {
+      for (const v of this._vortices) {
+        v.core.visible = false;
+        v.dust.visible = false;
+      }
+    }
+  }
+
+  /** Dust drawn up the walls of the vortices and wind lines wound round them. */
+  _lingerFx(dt) {
+    const c = settings.gale;
+    const g = settings.global;
+    if (this._since < 0) return;
+    const st0 = this._vortices[0].state;
+    const live = Math.min(1, st0.grow) * (1 - st0.unravel);
+    if (live <= 0.01) return;
+    const time = frame.uTime.value;
+
+    const dust = Math.round(this.vortexDustEmitter.tick(dt, c.vortexDust * live) * g.particleCount);
+    if (dust > 0) {
+      this._resetEmit(time);
+      _emit.size = c.wakeSize * 1.1;
+      _emit.life = c.wakeLifetime;
+      _emit.spin = 0.6;
+      _emit.speedVariance = 0.3;
+      for (let n = 0; n < dust; n++) {
+        const v = this._vortices[n & 1];
+        const st = v.state;
+        const a = Math.random() * TAU;
+        const h = Math.random() * c.vortexHeight * 0.35;
+        const r = (c.vortexBaseRadius + (c.vortexTopRadius - c.vortexBaseRadius) * (h / Math.max(0.1, c.vortexHeight))) * 1.2;
+        _pos.copy(st.base).addScaledVector(st.out, c.vortexLean * h * (h / Math.max(0.1, c.vortexHeight)));
+        _pos.x += Math.cos(a) * r;
+        _pos.z += Math.sin(a) * r;
+        _pos.y = Math.max(0.1, st.base.y + h);
+        // Round the wall the way this vortex turns, and up it.
+        _vel.set(-Math.sin(a) * v.sign * c.wakeSpeed, c.vortexUpdraft, Math.cos(a) * v.sign * c.wakeSpeed);
+        const speed = _vel.length();
+        _emit.position = _pos;
+        _emit.anchor = st.base;
+        _emit.direction = _dir.copy(_vel).divideScalar(Math.max(speed, 1e-4));
+        _emit.speed = speed;
+        this.wake.emit(1, _emit);
+      }
+    }
+
+    const lines = Math.round(this.vortexStreakEmitter.tick(dt, c.vortexStreakRate * live) * g.particleCount);
+    if (lines > 0) {
+      this._resetEmit(time);
+      _emit.size = c.streakSize;
+      _emit.life = c.streakLifetime * 1.4;
+      _emit.speedVariance = 0.25;
+      for (let n = 0; n < lines; n++) {
+        const v = this._vortices[n & 1];
+        const st = v.state;
+        const a = Math.random() * TAU;
+        const f = Math.random();
+        const h = f * c.vortexHeight * Math.min(1, st.grow);
+        const r = c.vortexBaseRadius + (c.vortexTopRadius - c.vortexBaseRadius) * Math.pow(f, c.vortexFlare);
+        _pos.copy(st.base).addScaledVector(st.out, c.vortexLean * h * f);
+        _pos.x += Math.cos(a) * r;
+        _pos.z += Math.sin(a) * r;
+        _pos.y = st.base.y + h;
+        _vel.set(-Math.sin(a) * v.sign, 0.25, Math.cos(a) * v.sign);
+        _emit.position = _pos;
+        _emit.direction = _dir.copy(_vel).normalize();
+        _emit.speed = c.vortexStreakSpeed;
+        this.streaks.emit(1, _emit);
+      }
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -810,15 +1081,27 @@ export class GaleSeverAbility extends Ability {
   onDestroy() {
     this.blade.visible = false;
     this.warp.visible = false;
+    this.sheath.visible = false;
     this.scar.visible = false;
+    for (const v of this._vortices) {
+      v.core.visible = false;
+      v.dust.visible = false;
+    }
   }
 
   dispose() {
     this.bladeGeometry.dispose();
+    this.sheathGeometry.dispose();
+    this.vortexGeometry.dispose();
     this.scarGeometry.dispose();
     this.bladeMaterial.dispose();
     this.warpMaterial.dispose();
+    this.sheathMaterial.dispose();
     this.scarMaterial.dispose();
+    for (const v of this._vortices) {
+      v.coreMaterial.dispose();
+      v.sheathMaterial.dispose();
+    }
     super.dispose();
   }
 }
@@ -835,7 +1118,7 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'range', 4, 60, 0.1, 'max range');
   R(cast, c, 'minRange', 0, 12, 0.1, 'min range');
   R(cast, c, 'speed', 4, 90, 0.5, 'blade speed (m/s)');
-  R(cast, c, 'lifetime', 0.1, 8, 0.05, 'wake + scar linger (s)');
+  R(cast, c, 'lifetime', 0.1, 8, 0.05, 'vortices + scar linger (s)');
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   Editor.castAnimation(cast, c);
 
@@ -879,6 +1162,18 @@ export function buildEditor(gui, c, Editor) {
   look.addColor(c, 'colorFringeR').name('fringe 1');
   look.addColor(c, 'colorFringeG').name('fringe 2');
   look.addColor(c, 'colorFringeB').name('fringe 3');
+
+  const sheath = blade.addFolder('Pressure sheath (body)');
+  R(sheath, c, 'sheathThickness', 0, 1.5, 0.005, 'thickness (m)');
+  R(sheath, c, 'sheathWidth', 0, 1.5, 0.01, 'depth (× body)');
+  R(sheath, c, 'sheathSeat', 0, 1, 0.01, 'seat behind edge');
+  R(sheath, c, 'sheathTaper', 0.05, 4, 0.01, 'taper to the tips');
+  R(sheath, c, 'sheathOpacity', 0, 1, 0.01, 'opacity');
+  R(sheath, c, 'sheathFresnel', 0.2, 8, 0.05, 'rim power');
+  R(sheath, c, 'sheathNoise', 0, 1, 0.01, 'dust breakup');
+  sheath.addColor(c, 'colorSheathTint').name('lit top');
+  sheath.addColor(c, 'colorSheathBody').name('body');
+  sheath.addColor(c, 'colorSheathDeep').name('deep underside');
 
   const warp = folder.addFolder('2 · Distortion');
   R(warp, c, 'warpStrength', 0, 4, 0.01, 'strength');
@@ -926,6 +1221,7 @@ export function buildEditor(gui, c, Editor) {
 
   const scar = folder.addFolder('5 · Cut scar');
   R(scar, c, 'scarStart', 0, 4, 0.01, 'starts after (m)');
+  R(scar, c, 'scarFollowTip', 0, 1, 0.01, 'cut under the low tip');
   R(scar, c, 'scarCut', 0.005, 0.4, 0.001, 'slit half-width (m)');
   R(scar, c, 'scarLips', 0.005, 0.4, 0.001, 'lip width (m)');
   R(scar, c, 'scarScour', 0.05, 4, 0.01, 'scoured band (m)');
@@ -964,12 +1260,53 @@ export function buildEditor(gui, c, Editor) {
   R(impact, c, 'impactLight', 0, 6, 0.01, 'light punch (× intensity)');
   R(impact, c, 'travelRumble', 0, 1, 0.01, 'rumble in flight');
   R(impact, c, 'castGust', 0, 120, 1, 'gust at the hand');
+  R(impact, c, 'castDraw', 0, 200, 1, 'wind drawn into the hand');
+  R(impact, c, 'castDrawRadius', 0.2, 4, 0.01, 'drawn in from (m)');
+  R(impact, c, 'castDrawTime', 0.05, 0.8, 0.01, 'draw time (s)');
+  R(impact, c, 'fanRadius', 0, 10, 0.05, 'blast fan (m)');
+  R(impact, c, 'fanSpread', 0.02, 2, 0.01, 'fan spreads over (s)');
+  R(impact, c, 'fanOpacity', 0, 1, 0.01, 'fan opacity');
+  R(impact, c, 'fanStreaks', 1, 30, 0.5, 'fan combing');
+  impact.addColor(c, 'colorFan').name('fan + scour deep');
   impact.addColor(c, 'colorBurstA').name('shell inner');
   impact.addColor(c, 'colorBurstB').name('shell mid');
   impact.addColor(c, 'colorBurstC').name('shell outer');
   impact.addColor(c, 'colorShockA').name('shockwave');
   impact.addColor(c, 'colorShockB').name('shockwave hot');
   impact.addColor(c, 'colorFlash').name('flash');
+
+  const vort = folder.addFolder('6b · Severed vortices (linger)');
+  R(vort, c, 'vortexHeight', 0.2, 10, 0.05, 'height (m)');
+  R(vort, c, 'vortexBaseRadius', 0.02, 2, 0.01, 'foot radius (m)');
+  R(vort, c, 'vortexTopRadius', 0.05, 4, 0.01, 'top radius (m)');
+  R(vort, c, 'vortexFlare', 0.2, 5, 0.01, 'flare');
+  R(vort, c, 'vortexSeat', 0, 2, 0.01, 'seat (× half-width)');
+  R(vort, c, 'vortexAlong', 0, 1.5, 0.01, 'stand at (× drift past target)');
+  R(vort, c, 'vortexDrift', 0, 4, 0.01, 'drift apart (m/s)');
+  R(vort, c, 'vortexLean', -1, 1.5, 0.01, 'lean out (m per m)');
+  R(vort, c, 'vortexLeanForward', -1, 2, 0.01, 'lean down the line');
+  R(vort, c, 'vortexRiseTime', 0.02, 1.5, 0.01, 'rise over (s)');
+  R(vort, c, 'vortexExit', 0.05, 3, 0.01, 'unravel over (s)');
+  R(vort, c, 'vortexLiftOff', 0, 4, 0.01, 'lift off as it unravels (m)');
+  R(vort, c, 'vortexSpin', -30, 30, 0.1, 'spin (rad/s)');
+  R(vort, c, 'vortexTwist', -6, 6, 0.01, 'streamline twist (rad/m)');
+  R(vort, c, 'vortexStreams', 1, 16, 1, 'streamlines');
+  R(vort, c, 'vortexWobble', 0, 2, 0.01, 'snaking (m)');
+  R(vort, c, 'vortexSwaySpeed', 0, 6, 0.01, 'snaking speed');
+  R(vort, c, 'vortexGlow', 0, 8, 0.05, 'core glow');
+  R(vort, c, 'vortexOpacity', 0, 1, 0.01, 'dust sheath opacity');
+  R(vort, c, 'vortexSheathScale', 0.5, 3, 0.01, 'sheath width (× core)');
+  R(vort, c, 'vortexDust', 0, 400, 1, 'dust drawn up/second');
+  R(vort, c, 'vortexUpdraft', 0, 10, 0.05, 'updraft (m/s)');
+  R(vort, c, 'vortexStreakRate', 0, 400, 1, 'wind lines/second');
+  R(vort, c, 'vortexStreakSpeed', 0, 20, 0.05, 'wind line speed');
+  R(vort, c, 'footRadius', 0, 4, 0.01, 'footprint radius (m)');
+  R(vort, c, 'footArms', 1, 8, 1, 'footprint arms');
+  R(vort, c, 'footSpin', 0, 2, 0.01, 'footprint turn (× spin)');
+  vort.addColor(c, 'colorVortexCore').name('core');
+  vort.addColor(c, 'colorVortexTint').name('tint');
+  vort.addColor(c, 'colorVortexBody').name('body');
+  vort.addColor(c, 'colorVortexDeep').name('deep');
 
   const slice = folder.addFolder('7 · The slice');
   R(slice, c, 'sliceReach', 0, 3, 0.01, 'reach past the tips (m)');

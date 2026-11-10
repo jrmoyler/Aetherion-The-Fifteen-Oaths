@@ -54,19 +54,27 @@ export default {
     grainScale: 2.6, // features per metre in the grain
 
     /* --- shading --- */
-    colorSandLight: "#e9c58a", // sunlit sand
-    colorSandDark: "#9a6a3a", // sand in its own shade
+    colorSandLight: "#c99a5e", // sunlit sand
+    colorSandDark: "#74481f", // sand in its own shade
     colorUnderside: "#4b2e18", // the shadowed hollow under the lip
-    colorStreak: "#fff0cf", // wind-blown streaks along the back
+    colorStreak: "#fff0cf", // wind-blown streaks along the back (the core stop)
+    colorSandDeep: "#3a2210", // the deep stop: where the sand meets the floor
+    contactShade: 0.45, // metres up the wave the floor-contact darkening reaches
     undersideDarkness: 0.85, // 0..1 how dark the face under the lip goes
-    ambient: 0.42, // light that reaches the shade side
-    streakStrength: 0.55, // wind streak brightness
+    ambient: 0.3, // light that reaches the shade side
+    streakStrength: 0.18, // wind streak brightness
     streakScale: 1.4, // streak frequency across the wave
     streakFlow: 3.2, // how fast the streaks blow back off the crest
-    crestGlow: 0.35, // the backlit spray edge along the top of the crest
+    crestGlow: 0.15, // the backlit spray edge along the top of the crest
     waveOpacity: 1.0,
     floorFade: 0.08, // metres of height over which the wave fades into the floor
     softFade: 0.25, // metres — soft intersection against scene geometry
+
+    /* --- the gather (anticipation) --- */
+    gatherTime: 0.32, // seconds the front is held while sand is drawn in
+    gatherRadius: 2.4, // metres out the sand is drawn in from
+    gatherOffset: 0.9, // metres ahead of the feet the ridge swells and sets off
+    gatherRate: 260, // grains/second drawn in
 
     /* --- the crash --- */
     crashTime: 0.55, // seconds the wave takes to break and fall
@@ -148,13 +156,28 @@ export default {
     rippleWarp: 0.9, // noise bending the ridges, radians
     rippleWarpScale: 0.6, // features per metre in that bend
     rippleDepth: 0.9, // apparent relief (normal strength)
-    rippleRadius: 3.4, // the fan of ripples at the crash point, metres
+    rippleRadius: 4.2, // the fan of ripples at the crash point, metres
     rippleLag: 1.2, // metres behind the crest before ripples show
     rippleOpacity: 0.75,
-    rippleEdge: 0.35, // ragged edge noise, fraction of the width
+    rippleEdge: 0.5, // ragged edge noise, fraction of the width
     rippleFadeIn: 0.25, // seconds for a patch of ripples to settle in
     rippleFade: 1.3, // seconds the bed takes to blow away at the end
     colorRippleLight: "#d8b07a",
-    colorRippleDark: "#7a5532"
+    colorRippleDark: "#7a5532",
+
+    /* ================================================================ */
+    /* 5 · THE MOUND — the barchan the wave collapses into (linger)      */
+    /* ================================================================ */
+    moundHeight: 1.6, // metres
+    moundWidth: 3.2, // half-width, metres
+    moundTail: 2.4, // long back slope
+    moundLead: 0.7, // short slip face
+    moundCurl: 0.12, // a little lip
+    moundBow: 1.6, // the horns trail the crest — the barchan crescent
+    moundTaper: 0.6,
+    moundRise: 0.45, // seconds it takes to pile up from the break
+    moundCreep: 0.55, // metres/second it walks on down the line
+    moundBreath: 0.05, // the sand settling as it walks
+    avalancheRate: 140 // grains/second off its slip face and crest
   }
 };

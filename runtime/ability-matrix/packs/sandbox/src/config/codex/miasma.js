@@ -64,21 +64,21 @@ export default {
     blobWobble: 0.6, // how much of the glob's wobble they keep
 
     /* --- shading --- */
-    globOpacity: 0.72, // body opacity at its thickest
-    globMurk: 0.65, // 0..1 dark bile swirled through it
-    globSwirlScale: 1.6, // swirl bands across it
+    globOpacity: 0.86, // body opacity at its thickest
+    globMurk: 0.92, // 0..1 dark bile swirled through it
+    globSwirlScale: 1.9, // swirl bands across it
     globFlowSpeed: 1.4, // how fast they turn
-    globInnerGlow: 1.0, // the glow from inside, where it is thick (bloom > 1)
-    globRimGlow: 1.0, // the toxic rim
+    globInnerGlow: 0.55, // the glow from inside, where it is thick (bloom > 1)
+    globRimGlow: 0.85, // the toxic rim
     globRimPower: 2.4, // how tight the rim is
     globSpecular: 1.1, // the wet highlight
     globGloss: 70, // how tight it is
-    globBubbles: 1.2, // gas caught inside it
+    globBubbles: 0.9, // gas caught inside it
     globBubbleScale: 4.5, // how many
-    colorA: '#9dff5a', // the bile
-    colorB: '#e6ffb0', // the rim
-    colorDeep: '#1e3a08', // dark bile swirling through it
-    colorGlow: '#b8ff3c', // the toxic glow shared by every layer
+    colorA: '#4f9a14', // body: saturated bile
+    colorB: '#d4f590', // tint: the rim
+    colorDeep: '#0b1a03', // deep: near-black bile swirling through it
+    colorGlow: '#a6f03a', // core: the toxic glow shared by every layer
 
     /* --- drips shed in flight (they hiss where they land) --- */
     dripRate: 26, // per second while it flies
@@ -95,7 +95,7 @@ export default {
     hissSize: 0.22, // metres, a drip's burn on the floor
     hissLife: 2.6, // seconds a mark lasts
     hissFlare: 0.25, // share of its life it glows hot
-    hissGlow: 3.2, // how hot
+    hissGlow: 2.0, // how hot
     hissStain: 0.55, // opacity of the burn it leaves
     hissFumes: 3, // puffs of acrid steam where a drip lands
     hissMotes: 2, // sparks where a drip lands
@@ -116,15 +116,15 @@ export default {
     poolBumps: 0.35, // relief of the surface (lighting)
     poolBubbleScale: 2.6, // bubble cells per metre
     poolBubbleSize: 0.28, // a bubble's radius, in cells
-    poolBubbleDensity: 0.55, // 0..1 share of cells with a bubble in them
+    poolBubbleDensity: 0.5, // 0..1 share of cells with a bubble in them
     poolBubbleSpeed: 0.9, // bubble cycles per second
-    poolPopGlow: 2.6, // the ring flash as one pops
-    poolSheen: 0.22, // oily thin-film sheen
+    poolPopGlow: 1.9, // the ring flash as one pops
+    poolSheen: 0.04, // oily thin-film sheen
     poolSheenScale: 1.6, // sheen bands
-    poolSpecular: 0.9, // wet highlight
-    poolDepthFalloff: 0.9, // metres from the edge to full depth
-    poolEdgeGlow: 2.4, // the seam where the acid eats the floor
-    poolEdgeWidth: 0.07, // metres
+    poolSpecular: 0.6, // wet highlight
+    poolDepthFalloff: 0.3, // metres from the edge to full depth
+    poolEdgeGlow: 1.2, // the seam where the acid eats the floor
+    poolEdgeWidth: 0.05, // metres
     poolOpacity: 1,
     rippleTime: 0.7, // seconds the impact ripple takes to reach the rim
     corrodeBand: 0.55, // metres of eaten floor outside the liquid
@@ -133,9 +133,9 @@ export default {
     corrodePits: 1, // 0..1 how pitted
     stainLinger: 0.55, // share of the evaporation the stain survives into
     evaporateTime: 1.8, // seconds the pool takes to evaporate
-    colorPoolBody: '#5fae1c', // thin sludge at the edge
-    colorPoolDeep: '#173d06', // the deep middle
-    colorPoolFoam: '#c9ff7a', // bubble domes
+    colorPoolBody: '#22400a', // body: thin sludge at the edge
+    colorPoolDeep: '#050c01', // deep: the dark middle
+    colorPoolFoam: '#4e7a1e', // bubble domes
     colorStain: '#10140a', // the eaten floor
 
     /* ================================================================ */
@@ -143,17 +143,17 @@ export default {
     /* ================================================================ */
     splashRadius: 2.4, // metres — bodies in here are caught
     crownRadius: 0.7, // metres, the crown's foot
-    crownHeight: 1.5, // metres at its tallest
+    crownHeight: 2.0, // metres at its tallest
     crownFlare: 0.9, // how far its lip leans out
     crownFingers: 11, // fingers round the lip
     crownFingerLength: 0.7, // × height
-    crownTime: 0.75, // seconds it rises and falls back
-    crownOpacity: 0.85,
-    crownTear: 1.1, // how hard it tears apart from the top
+    crownTime: 1.3, // seconds it rises and falls back (presentation only)
+    crownOpacity: 0.92,
+    crownTear: 0.9, // how hard it tears apart from the top
     crownDrops: 26, // drops thrown off the fingers (they hiss too)
     crownDropSpeed: 6.5, // m/s
     burstSize: 3.2, // the WATER splash shell, metres
-    burstIntensity: 1.2,
+    burstIntensity: 0.8,
     shockRadius: 4.2, // ground shockwave, metres
     splashMotes: 60, // toxic sparks thrown up
     splashFumes: 26, // acrid puffs thrown up
@@ -171,25 +171,30 @@ export default {
     /* ================================================================ */
     /* 4 · FUMES, BUBBLES & MOTES                                        */
     /* ================================================================ */
-    fumeRate: 34, // acrid puffs/second off the pool
-    fumeSize: 0.9,
-    fumeLifetime: 2.4,
+    fumeRate: 64, // acrid puffs/second off the pool
+    fumeSize: 1.25,
+    fumeLifetime: 2.8,
     fumeRise: 0.9, // m/s
     fumeBuoyancy: 0.25, // m/s² upward
-    fumeOpacity: 0.42,
+    fumeOpacity: 0.8,
     fumeTurbulence: 0.6,
-    colorFumeA: '#c6e86a',
-    colorFumeB: '#8fae45',
-    colorFumeC: '#5d6e33',
-    colorFumeD: '#3b4224',
+    plumeEvery: 0.32, // seconds between thick plumes boiling off the pool
+    plumePuffs: 10, // puffs stacked in a plume
+    plumeSize: 1.8,
+    plumeRise: 1.2, // m/s
+    plumeHeight: 1.1, // metres of column a plume starts as
+    colorFumeA: '#4a5e22',
+    colorFumeB: '#2e3a16',
+    colorFumeC: '#1e2410',
+    colorFumeD: '#101408',
     bubbleRate: 22, // bubbles/second breaking the surface
     bubbleSize: 0.22,
     bubbleLifetime: 0.7,
     bubbleRise: 0.35,
-    colorBubbleA: '#e6ffb0',
-    colorBubbleB: '#b8ff3c',
-    colorBubbleC: '#7fd23a',
-    colorBubbleD: '#3f7a18',
+    colorBubbleA: '#7a9a40',
+    colorBubbleB: '#4e7420',
+    colorBubbleC: '#3f6a14',
+    colorBubbleD: '#1a3008',
     moteRate: 18, // toxic sparks/second rising off the pool
     moteSize: 0.06,
     moteLifetime: 1.6,

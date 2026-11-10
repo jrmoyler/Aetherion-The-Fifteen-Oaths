@@ -34,8 +34,8 @@ export default {
     /* ================================================================ */
 
     /* --- shape --- */
-    shieldRadius: 1.25, // metres, outer edge of the outer ring
-    shieldHeight: 1.35, // metres off the floor to the shield's centre
+    shieldRadius: 1.5, // metres, outer edge of the outer ring
+    shieldHeight: 1.6, // metres off the floor to the shield's centre
     shieldDish: 0.22, // how convex the face is (metres the rim sits back)
     shieldTilt: 0.12, // radians the shield leans back
     bossPlates: 6, // plates in the central boss (max 8)
@@ -49,9 +49,9 @@ export default {
     plateBevel: 0.25, // how much of a plate's edge is bevelled, 0..1
 
     /* --- assembly --- */
-    assembleTime: 0.75, // seconds for the plates to fly in and lock
+    assembleTime: 0.34, // seconds for the plates to fly in and lock
     assembleStagger: 0.35, // fraction of that the last plate lags the first
-    scatter: 2.2, // metres the plates fly in from
+    scatter: 2.8, // metres the plates fly in from
     assembleTumble: 5.0, // radians of tumble on the way in
 
     /* --- spin --- */
@@ -61,51 +61,56 @@ export default {
     spinRamp: 0.25, // seconds to spin up after the hit
 
     /* --- the metal --- */
-    metalReflect: 1.2,
-    metalGloss: 120,
-    metalSpecular: 2.0,
-    engrave: 0.6, // depth of the engraved channel lines
-    rimGlow: 1.4, // glowing edge of each plate
-    chargeGlow: 6.0, // how bright the channels burn when fully charged
+    metalReflect: 0.6,
+    metalGloss: 90,
+    metalSpecular: 1.6,
+    engrave: 0.75, // depth of the engraved channel lines
+    rimGlow: 0.9, // glowing edge of each plate
+    rimWidth: 0.05, // how much of a plate the lit chamfer covers, 0..0.5
+    chargeGlow: 2.4, // how bright the channels burn when fully charged
     chargeCrawl: 2.4, // how fast the charge crawls round the channels
-    impactRing: 4.0, // brightness of the ripple running out from the hit
-    colorSteel: '#8fa6bd',
-    colorSteelDeep: '#1a2433',
-    colorSteelSpec: '#eef7ff',
-    colorRimLight: '#92d5ff',
-    colorCharge: '#c8f0ff',
-    colorChargeHot: '#ffffff',
+    impactRing: 2.0, // brightness of the ripple running out from the hit
+    colorSteel: '#335a8a',
+    colorSteelDeep: '#040912',
+    colorSteelSpec: '#dff2ff',
+    colorRimLight: '#3d9bff',
+    colorCharge: '#2f9bff',
+    colorChargeHot: '#cdeeff',
 
     /* ================================================================ */
     /* 2 · BOLT — the hostile shot                                       */
     /* ================================================================ */
-    boltDelay: 0.35, // seconds after the shield locks before the bolt appears
-    boltDistance: 9.0, // metres beyond the shield it is fired from
-    boltSpeed: 22, // metres/second
-    boltHeight: 1.45, // metres off the floor it flies at
-    boltLength: 1.6, // metres of tail
-    boltWidth: 0.22, // metres
-    boltGlow: 4.0,
+    boltDelay: 0.0, // seconds after the shield locks before the bolt appears
+    boltDistance: 7.5, // metres beyond the shield it is fired from
+    boltSpeed: 13, // metres/second
+    boltHeight: 2.6, // metres off the floor it flies at
+    boltLength: 3.4, // metres of tail
+    boltWidth: 0.5, // metres
+    boltGlow: 2.6,
     boltWobble: 0.12, // metres of corkscrew
     boltTrail: 160, // sparks / second off its tail
     boltWarn: 0.3, // seconds of muzzle flare before it fires
-    colorBoltCore: '#fff2e0',
-    colorBolt: '#ff5a3c',
+    colorBoltCore: '#fff4e6',
+    colorBolt: '#ff4a1c', // saturated body of the four-stop bolt ramp
+    colorBoltPale: '#ffc890', // pale inner sheath
+    colorBoltDeep: '#3c0703', // deep ember tail — most of the bolt's length
+    boltYaw: 0.62, // radians the muzzle is swung off the aim line, so the shot crosses the frame
+    muzzleSparks: 160, // embers drawn into the muzzle while it gathers, per second
 
     /* --- the catch --- */
     catchShake: 0.35,
     catchFlash: 0.2,
     catchLight: 18,
-    catchSparks: 90, // sparks spraying off the face
+    catchSparks: 140, // sparks spraying off the face
     catchRecoil: 0.18, // metres the shield is pushed back
     catchRecoilTime: 0.35, // seconds to recover
 
     /* ================================================================ */
     /* 3 · STORE — the blow held in the plates                           */
     /* ================================================================ */
-    storeTime: 1.1, // seconds it holds the blow before firing it back
+    storeTime: 0.42, // seconds it holds the blow before firing it back
     storeShiver: 0.025, // metres the shield shivers while full
-    storeArcs: 50, // sparks / second crackling round the rim while full
+    storeArcs: 90, // sparks / second crackling round the rim while full
     storeHum: 0.12, // camera rumble while full
 
     /* ================================================================ */
@@ -114,23 +119,31 @@ export default {
     coneAngle: 0.62, // half-angle at full width, radians
     coneStartAngle: 0.12, // half-angle as it leaves the face
     coneReach: 2.2, // how far it sweeps out from the shield, × zoneRadius
-    sweepTime: 0.55, // seconds for the front to reach the end
+    sweepTime: 0.6, // seconds for the front to reach the end
     frontWidth: 0.5, // metres — the bright front band on the floor
     rayCount: 18, // light rays streaking out inside the cone
     chevrons: 5.0, // chevrons racing out per cone length
-    floorGlow: 2.6,
+    floorGlow: 2.2,
     edgeGlow: 2.2, // the cone's two bounding edges
-    lingerTime: 0.5, // seconds the scorched cone glows after the front passes
-    wallHeight: 1.8, // metres — the standing wavefront
-    wallGlow: 2.4,
-    wallBands: 6.0, // horizontal bands in the wavefront
+    lingerTime: 0.8, // seconds the scorched cone glows after the front passes
+    wallHeight: 3.7, // metres — the standing wavefront
+    wallGlow: 2.0,
+    wallBands: 4.0, // horizontal bands in the wavefront
+    wallDeep: 0.8, // dark body of the wavefront under its bands, 0..1
+    wallCrest: 2.0, // the torn bright crest along the wavefront's top
+    wallGrow: 0.3, // the wavefront grows by this much (×) as it runs out
+    wallLinger: 0.45, // seconds the wavefront rolls on after the front (and its hits) is done — presentation only
+    scarGlow: 1.1, // burnt rays, veins and edges left glowing on the swept floor, cooling over the linger
     distortion: 1.2, // screen warp of the wavefront
+    releaseBurst: 1.6, // air burst off the face, × shieldRadius
     releaseShake: 0.6,
     releaseFlash: 0.25,
     releaseLight: 30,
-    colorConeA: '#9fe2ff',
-    colorConeB: '#ffffff',
-    colorFlash: '#d7f2ff',
+    colorConeA: '#2a86ff',
+    colorConeB: '#dff2ff',
+    colorConeDeep: '#020814', // the scorched path the wave leaves — the cone's mass
+    coneDeep: 0.62, // how dark that path is, 0..1
+    colorFlash: '#bfe2ff',
     /** How a body in the cone is thrown. Same shape as `settings.dummies.hit`. */
     hit: { impulse: 11.0, lift: 4.5, spin: 1.8 },
 
@@ -141,10 +154,10 @@ export default {
     sparkLife: 0.5,
     sparkSpeed: 9,
     colorSparkA: '#ffffff',
-    colorSparkB: '#cdeeff',
-    colorSparkC: '#ff9a6a',
-    colorSparkD: '#2a1a28',
-    shardCount: 120, // chips thrown along the cone
+    colorSparkB: '#ffd6ae',
+    colorSparkC: '#ff5a2a',
+    colorSparkD: '#2a0a06',
+    shardCount: 160, // chips thrown along the cone
     shardSize: 0.06,
     shardLife: 0.8,
     shardSpeed: 14,
@@ -156,8 +169,21 @@ export default {
     colorDustC: '#3d454f',
     colorDustD: '#15181c',
 
+    /* ================================================================ */
+    /* 6 · SEAL — the engraved disc the shield stands on                  */
+    /* ================================================================ */
+    sealRadius: 1.35, // × shieldRadius
+    sealGlow: 1.5,
+    sealDeep: 0.7, // how dark the disc is under its engraving, 0..1
+    sealRunes: 14, // rune bars round the outer band
+    sealSpin: 0.35, // radians/second (×5 while the blow is held)
+    sealTelegraph: 1, // 0..1 — the rings closing on the mark while the anchor flies
+    colorSealDeep: '#030914',
+    colorSeal: '#1f6fe0',
+    colorSealHot: '#bfe6ff',
+
     /* --- the light --- */
-    lightColor: '#92d5ff',
+    lightColor: '#3d9bff',
     lightIntensity: 6,
     lightRadius: 9
   }

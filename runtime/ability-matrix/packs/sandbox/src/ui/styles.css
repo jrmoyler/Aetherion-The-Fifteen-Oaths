@@ -309,6 +309,20 @@ body {
   transition: opacity 0.3s ease;
 }
 
+/* The stick owns this corner once the touch rig mounts. Lift the same panel
+   clear of it; a mouse with no rig keeps the bottom-left position. */
+body:has(.touch-rig) .hud__help {
+  --touch-stick: 128px;
+  bottom: calc(max(18px, env(safe-area-inset-bottom)) + var(--touch-stick) + 16px);
+  max-height: calc(100vh - max(18px, env(safe-area-inset-bottom)) - var(--touch-stick) - 16px - 160px);
+  overflow: auto;
+  pointer-events: auto;
+}
+
+body:has(.touch-rig) .hud__help.is-hidden {
+  pointer-events: none;
+}
+
 .hud__help.is-hidden {
   opacity: 0;
 }
@@ -348,11 +362,16 @@ body {
 .hud__title {
   left: 22px;
   top: 22px;
+  max-width: 300px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-size: 11px;
   font-weight: 600;
+  pointer-events: auto;
 }
+
+.hud__title summary { cursor: pointer; }
+.hud__title summary:focus-visible { outline: 2px solid var(--ui-accent); outline-offset: 3px; }
 
 .hud__title span {
   display: block;
@@ -365,10 +384,11 @@ body {
 
 .hud__toast {
   position: absolute;
-  left: 50%;
-  top: 76px;
-  transform: translate(-50%, -12px);
-  padding: 9px 18px;
+  left: 12px;
+  top: 80px;
+  max-width: min(240px, calc(100vw - 24px));
+  transform: translateY(-8px);
+  padding: 7px 12px;
   border-radius: 999px;
   border: 1px solid var(--ui-border);
   background: var(--ui-bg-solid);
@@ -381,8 +401,10 @@ body {
 
 .hud__toast.is-visible {
   opacity: 1;
-  transform: translate(-50%, 0);
+  transform: translateY(0);
 }
+
+.matrix-embedded .hud__toast { top: 10px; }
 
 /* Standing reminder that the clock is stopped but the editor is not. */
 .hud__paused {
@@ -984,7 +1006,16 @@ body {
 
 /* ------------------------------------------------------------------ *
  * Touch rig — same scene, fingers instead of a keyboard.
- * Only mounted when the pointer is coarse, so a mouse never sees it.
+ * Mounted for a coarse pointer, no hover, or maxTouchPoints > 0, so a
+ * touch laptop still gets it on a wide window.
+ *
+ * Stacking:
+ *   .hud            z 20   panels, including help (lifted above the stick)
+ *   .touch-rig      z 30   pointer-events none. Look + stick only.
+ *   .lil-gui        z 1001 lil-gui's own auto-place rule (editor column)
+ *   .touch-actions  z 1100 hoisted to the body so Run/Dash/Cast beat the editor
+ * The look band starts just right of center (the view's middle is not a
+ * hit target) and stops before the editor column and the action row.
  * ------------------------------------------------------------------ */
 
 .touch-rig {
@@ -998,9 +1029,13 @@ body {
 .touch-look {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
-  width: 58%;
+  /* Right-side band only. 52% keeps the crosshair's center free. */
+  left: max(52%, 168px);
+  /* lil-gui is 330px wide, 16px from the right (~the right column).
+     Cap the gutter so a narrow window still keeps a look surface. */
+  right: min(360px, max(0px, calc(100% - max(52%, 168px) - 140px)));
+  /* Action cluster is ~240×96 at the bottom-right. Stay above it. */
+  bottom: calc(max(18px, env(safe-area-inset-bottom)) + 96px);
   pointer-events: auto;
   touch-action: none;
 }
@@ -1032,7 +1067,10 @@ body {
 }
 
 .touch-actions {
-  position: absolute;
+  position: fixed;
+  /* lil-gui's auto-place rule is z-index 1001 and wins over a child of the rig.
+     The cluster is hoisted to the body so this can sit above the open editor. */
+  z-index: 1100;
   right: max(16px, env(safe-area-inset-right));
   bottom: max(18px, env(safe-area-inset-bottom));
   display: flex;
@@ -1061,7 +1099,19 @@ body {
   border-color: transparent;
 }
 
+/* The open editor uses lil-gui's .autoPlace (not .root). Stop it short of
+   the action row. Mouse-only sessions never mount the rig, so this is a no-op. */
+body:has(.touch-rig) .lil-gui.autoPlace {
+  max-height: calc(100vh - 16px - max(18px, env(safe-area-inset-bottom)) - 96px);
+}
+
+/* The contact portrait lives in this same corner. Lift it clear of Run/Dash/Cast. */
+body:has(.touch-rig) .hud__contact {
+  bottom: calc(max(18px, env(safe-area-inset-bottom)) + 108px);
+}
+
 @media (max-width: 720px) {
   .touch-stick { width: 112px; height: 112px; }
   .touch-btn { min-width: 56px; min-height: 56px; }
+  body:has(.touch-rig) .hud__help { --touch-stick: 112px; }
 }

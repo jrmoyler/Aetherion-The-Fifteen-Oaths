@@ -39,6 +39,10 @@
  * @param {boolean} [spec.flushWithTime]     ParticleEngine#flush takes the clock
  * @param {boolean} [spec.lateUpdate]        AbilityManager has lateUpdate (casting)
  * @param {boolean} [spec.aimTargets]        AimController snaps to dummies (casting)
+ * @param {object} [spec.systems]            extra ctx systems the pack's own App
+ *                                           builds (name → class taking the scene,
+ *                                           with update/clear/dispose), e.g. the
+ *                                           Linear pack's `fissures`
  */
 export function createRuntime(spec) {
   const { pack, host, config } = spec;
@@ -51,6 +55,8 @@ export function createRuntime(spec) {
   const decals = new spec.DecalSystem(scene);
   const bursts = new spec.BurstSystem(scene);
   const models = {};
+  /** Pack-only systems its abilities read off ctx; hosted here so they exist. */
+  const systems = Object.entries(spec.systems ?? {}).map(([name, System]) => [name, new System(scene)]);
 
   const ctx = {
     scene,
@@ -64,7 +70,8 @@ export function createRuntime(spec) {
     flash: host.flash,
     dummies: host.dummies,
     models,
-    character: host.character
+    character: host.character,
+    ...Object.fromEntries(systems)
   };
   const manager = new spec.AbilityManager(ctx);
 
@@ -165,6 +172,7 @@ export function createRuntime(spec) {
       else particles.flush();
       decals.update(dt);
       bursts.update(dt);
+      for (const [, system] of systems) system.update(dt);
     },
 
     get focus() {
@@ -181,6 +189,7 @@ export function createRuntime(spec) {
       particles.reset();
       decals.clear();
       bursts.clear();
+      for (const [, system] of systems) system.clear();
     },
 
     countParticles(time) {
@@ -229,6 +238,7 @@ export function createRuntime(spec) {
       particles.dispose();
       decals.dispose();
       bursts.dispose();
+      for (const [, system] of systems) system.dispose();
       aim.dispose();
     }
   };

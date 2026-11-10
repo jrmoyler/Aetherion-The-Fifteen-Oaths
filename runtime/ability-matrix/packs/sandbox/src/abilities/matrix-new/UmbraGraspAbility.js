@@ -4,9 +4,10 @@ import {
   createUmbraHandMaterial,
   createUmbraHazeMaterial,
   createUmbraPoolMaterial,
+  createUmbraSleeveMaterial,
   createUmbraWarpMaterial
 } from '../../materials/matrix-new/UmbraGraspMaterials.js';
-import { createUmbraBoneGeometry } from '../../assets/matrix-new/UmbraGraspGeometry.js';
+import { createUmbraBoneGeometry, createUmbraSleeveGeometry } from '../../assets/matrix-new/UmbraGraspGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
 import { DecalType } from '../../effects/GroundDecals.js';
@@ -87,6 +88,14 @@ const _shut = new Vector3();
  *   4. **smoke & motes** — dark SMOKE wisps pour off the hand and the pool's
  *      rim the whole time (non-additive: they darken the air), violet motes rise
  *      out of the ink, and streaks of violet rush into the fist as it closes.
+ *   4b. **the ink sleeves** — one per held body: when the drag starts, the
+ *      pool surges up round the body as a ragged, flared collar of ink
+ *      (`createUmbraSleeveGeometry`, `createUmbraSleeveMaterial`), climbs its
+ *      legs to `sleeveReach`, pours downward and follows it under; when the
+ *      body is gone it closes over the place. Presentation only — it reads the
+ *      held body's position and never moves it — but it is what makes the
+ *      drag-under read at play distance: the body is seen going *into* the
+ *      pool, not just lower.
  *   5. **the sinking warp** — a LAYER.DISTORTION proxy pours the frame slowly
  *      downward into the pool, harder while the hand drags.
  *   6. **beats** — a ripple and a knock on landing; a pressure shell, shockwave,
@@ -164,6 +173,24 @@ export class UmbraGraspAbility extends Ability {
     this.haze.visible = false;
     this.group.add(this.haze);
 
+    /* ---- layer 4b: the ink sleeves that take held bodies under ---- */
+    this.sleeveGeometry = createUmbraSleeveGeometry({ maxSleeves: MAX_GRIPS });
+    this.sleeveAttribute = this.sleeveGeometry.getAttribute('aSleeve');
+    this.sleeveMaterial = createUmbraSleeveMaterial();
+    this.sleeves = new InstancedMesh(this.sleeveGeometry, this.sleeveMaterial, MAX_GRIPS);
+    this.sleeves.name = 'UmbraSleeves';
+    this.sleeves.layers.set(LAYER.VFX); // shaped in the vertex stage, like the hand
+    this.sleeves.renderOrder = 6;
+    this.sleeves.frustumCulled = false;
+    this.sleeves.count = 0;
+    this.sleeves.visible = false;
+    this.group.add(this.sleeves);
+    this._sleeves = [];
+    for (let i = 0; i < MAX_GRIPS; i++) {
+      this._sleeves.push({ active: false, dummy: null, x: 0, z: 0, hips: 0, eaten: 0, grow: 0, close: 0, seed: 0 });
+    }
+    this._sleeveState = { time: 0 };
+
     /* ---- layer 5: the sinking warp ---- */
     this.warpGeometry = new PlaneGeometry(1, 1);
     this.warpMaterial = createUmbraWarpMaterial();
@@ -195,7 +222,7 @@ export class UmbraGraspAbility extends Ability {
 
     this._grips = [];
     for (let i = 0; i < MAX_GRIPS; i++) {
-      this._grips.push({ dummy: null, time: 0, depth: 0, eaten: 0, under: false });
+      this._grips.push({ dummy: null, time: 0, depth: 0, eaten: 0, under: false, at: new Vector3() });
     }
     this._gripCount = 0;
     this._found = [];
@@ -371,6 +398,12 @@ export class UmbraGraspAbility extends Ability {
     this._stained = false;
     this._target = null;
     this._boneCount = 0;
+    for (const sleeve of this._sleeves) {
+      sleeve.active = false;
+      sleeve.dummy = null;
+    }
+    this.sleeves.count = 0;
+    this.sleeves.visible = false;
     this._sync(0);
   }
 
@@ -708,6 +741,84 @@ export class UmbraGraspAbility extends Ability {
       slot.depth = 0;
       slot.eaten = 0;
       slot.under = false;
+      slot.at.copy(_at);
+      this._openSleeve(dummy, _at);
+    }
+  }
+
+  /** Give a newly held body its ink sleeve (it stays down until the drag). */
+  _openSleeve(dummy, at) {
+    for (let i = 0; i < this._sleeves.length; i++) {
+      const sleeve = this._sleeves[i];
+      if (sleeve.active) continue;
+      sleeve.active = true;
+      sleeve.dummy = dummy;
+      sleeve.x = at.x;
+      sleeve.z = at.z;
+      sleeve.hips = at.y;
+      sleeve.eaten = 0;
+      sleeve.grow = 0;
+      sleeve.close = 0;
+      sleeve.seed = (this._seed + i * 3.7) % 10;
+      return;
+    }
+  }
+
+  /**
+   * The ink sleeves: each follows its body's hips, surges up round it once the
+   * drag starts, and closes over the place when the body has gone. Reads the
+   * grip, never writes it.
+   */
+  _laySleeves(dt) {
+    const c = settings.umbra;
+    const g = settings.global;
+    const life = Math.max(0.1, g.lifetime);
+    const dragging = this._drag() > 0 || this._dry > 0;
+    const attr = this.sleeveAttribute.array;
+    let n = 0;
+    for (let i = 0; i < this._sleeves.length; i++) {
+      const sleeve = this._sleeves[i];
+      if (!sleeve.active) continue;
+      const slot = sleeve.dummy ? this._gripOf(sleeve.dummy) : null;
+      if (slot) {
+        sleeve.x = slot.at.x;
+        sleeve.z = slot.at.z;
+        sleeve.hips = slot.at.y;
+        sleeve.eaten = slot.eaten;
+      } else {
+        sleeve.dummy = null;
+        sleeve.eaten = 1;
+        if (sleeve.grow <= 0) sleeve.close = 1;
+        sleeve.close = Math.min(1, sleeve.close + dt / Math.max(0.02, c.sleeveClose * life));
+      }
+      if (dragging) sleeve.grow = Math.min(1, sleeve.grow + dt / Math.max(0.02, c.sleeveRise * life));
+      if (sleeve.close >= 1) {
+        sleeve.active = false;
+        continue;
+      }
+      if (sleeve.grow <= 0) continue;
+      const surge = Easing.outCubic(sleeve.grow);
+      const reach = Math.min(Math.max(c.sleeveMin, sleeve.hips + c.sleeveOverlap), Math.max(c.sleeveMin, c.sleeveReach));
+      const height = reach * surge * (1 - Easing.inQuad(sleeve.close));
+      const radius = c.sleeveRadius * (1 - 0.35 * sleeve.eaten) * (1 - 0.5 * sleeve.close);
+      _node.position.set(sleeve.x, c.poolHeight, sleeve.z);
+      _node.quaternion.identity();
+      _node.scale.set(1, 1, 1);
+      _node.updateMatrix();
+      this.sleeves.setMatrixAt(n, _node.matrix);
+      attr[n * 4 + 0] = Math.max(0.02, radius);
+      attr[n * 4 + 1] = Math.max(0.05, height);
+      attr[n * 4 + 2] = sleeve.seed;
+      attr[n * 4 + 3] = surge * (1 - sleeve.close);
+      n++;
+    }
+    this.sleeves.count = n;
+    this.sleeves.visible = n > 0;
+    if (n > 0) {
+      this.sleeves.instanceMatrix.needsUpdate = true;
+      this.sleeveAttribute.needsUpdate = true;
+      this._sleeveState.time = this.age;
+      this.sleeveMaterial.userData.sync(this._sleeveState);
     }
   }
 
@@ -728,6 +839,7 @@ export class UmbraGraspAbility extends Ability {
       const wound = Easing.outCubic(saturate(slot.time / 0.25));
       const grab = saturate(c.gripStrength * dt) * wound;
       dummy.carry(this._field, grab, grab, saturate(c.gripBuoyancy * wound));
+      slot.at.copy(_at);
 
       // Stained with shadow while it is held. Pushed every frame: this is also
       // what carries the live editor colours onto the body.
@@ -1046,6 +1158,7 @@ export class UmbraGraspAbility extends Ability {
     if (drag > 0 && drag < 1) this.ctx.shake.rumble(c.dragRumble, dt);
 
     this._holdFx(dt);
+    this._laySleeves(dt);
 
     if (!this._stained && this._dry >= 0.6) {
       this._stained = true;
@@ -1067,6 +1180,12 @@ export class UmbraGraspAbility extends Ability {
     this.hand.count = 0;
     this.haze.count = 0;
     this.warp.visible = false;
+    for (const sleeve of this._sleeves) {
+      sleeve.active = false;
+      sleeve.dummy = null;
+    }
+    this.sleeves.count = 0;
+    this.sleeves.visible = false;
   }
 
   dispose() {
@@ -1077,6 +1196,8 @@ export class UmbraGraspAbility extends Ability {
     this.handMaterial.dispose();
     this.hazeMaterial.dispose();
     this.warpMaterial.dispose();
+    this.sleeveGeometry.dispose();
+    this.sleeveMaterial.dispose();
     super.dispose();
   }
 }
@@ -1209,6 +1330,24 @@ export function buildEditor(gui, c, Editor) {
   grip.addColor(c.look, 'edgeColor').name('burn edge');
   R(grip, c.look, 'edgeEmissive', 0, 10, 0.05, 'edge emissive');
   R(grip, c.look, 'edgeWidth', 0.005, 0.3, 0.001, 'edge width');
+
+  const sleeve = folder.addFolder('4b · Ink sleeves (the drag-under)');
+  R(sleeve, c, 'sleeveRadius', 0.05, 1.5, 0.01, 'throat radius (m)');
+  R(sleeve, c, 'sleeveFlare', 0, 4, 0.01, 'base flare (× radius)');
+  R(sleeve, c, 'sleeveReach', 0.1, 4, 0.01, 'climbs at most (m)');
+  R(sleeve, c, 'sleeveMin', 0.05, 2, 0.01, 'collar height (m)');
+  R(sleeve, c, 'sleeveOverlap', -1, 2, 0.01, 'climbs past hips (m)');
+  R(sleeve, c, 'sleeveRise', 0.02, 2, 0.01, 'surges up over (s)');
+  R(sleeve, c, 'sleeveClose', 0.02, 3, 0.01, 'closes over (s)');
+  R(sleeve, c, 'sleeveRagged', 0, 0.9, 0.01, 'ragged top');
+  R(sleeve, c, 'sleeveTendrils', 1, 16, 1, 'tongues');
+  R(sleeve, c, 'sleeveWrithe', 0, 1.5, 0.01, 'writhe');
+  R(sleeve, c, 'sleeveFlow', 0, 4, 0.01, 'ink pours (speed)');
+  R(sleeve, c, 'sleeveRim', 0, 8, 0.05, 'rim glow');
+  R(sleeve, c, 'sleeveLip', 0, 8, 0.05, 'lip glow');
+  sleeve.addColor(c, 'colorSleeveInk').name('ink');
+  sleeve.addColor(c, 'colorSleeveDeep').name('swirl');
+  sleeve.addColor(c, 'colorSleeveRim').name('rim & lip');
 
   const fx = folder.addFolder('4 · Smoke & motes');
   R(fx, c, 'smokeRate', 0, 300, 1, 'smoke / s');

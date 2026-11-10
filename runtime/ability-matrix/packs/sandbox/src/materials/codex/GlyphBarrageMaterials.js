@@ -1,4 +1,16 @@
-import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial, Vector3, Vector4 } from 'three';
+import {
+  AdditiveBlending,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  MeshStandardMaterial,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial,
+  Vector3,
+  Vector4
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -135,6 +147,13 @@ const SIGIL_FRAGMENT = /* glsl */ `
   uniform vec3  uColorDeep;
   uniform vec3  uColorRune;
   uniform vec3  uColorShock;
+  uniform vec3  uColorPlate;
+  uniform float uCover;       // how dark the inked plate under the strokes is
+  uniform float uFieldGlow;   // the arcane ink swirling in it
+  uniform float uFieldScale;
+  uniform float uInkFill;     // the solid ink fills (rune band, star points, eye) — the body stop
+  uniform float uLineHot;     // 0 = strokes in the tint, 1 = white-hot strokes
+  uniform vec3  uColorInk;    // saturated body ink
   uniform float uGlobalGlow;
   uniform float uShaderIntensity;
 
@@ -146,6 +165,15 @@ const SIGIL_FRAGMENT = /* glsl */ `
   vec2 rot(vec2 p, float a) {
     float c = cos(a), s = sin(a);
     return vec2(p.x * c - p.y * s, p.x * s + p.y * c);
+  }
+
+  /** 1 inside a regular n-gon of circumradius r (soft edge w), 0 outside. */
+  float ngonIn(vec2 p, float r, float n, float w) {
+    float an = PI / n;
+    float a = atan(p.y, p.x);
+    float bn = mod(a + an, 2.0 * an) - an;
+    float q = length(p) * cos(bn);
+    return 1.0 - smoothstep(-w, w, q - r * cos(an));
   }
 
   /** Distance to the outline of a regular n-gon of circumradius r. */
@@ -166,6 +194,12 @@ const SIGIL_FRAGMENT = /* glsl */ `
     float w = max(uLineW, fwidth(d) * 1.2);
     float core = 1.0 - smoothstep(w * 0.45, w, d);
     float halo = exp(-d / max(uHaloW, 1e-3));
+    // A stroke widened by the pixel footprint (far / grazing glyphs) keeps
+    // its energy, not its brightness — otherwise distant seals read as
+    // bright hoops instead of inked prints.
+    float thin = clamp(uLineW / w, 0.25, 1.0);
+    core *= thin;
+    halo *= mix(0.5, 1.0, thin);
     gCore += core * vis;
     gHalo += halo * vis * 0.5;
     gTint += tint * halo * vis * 0.5;
@@ -278,9 +312,35 @@ const SIGIL_FRAGMENT = /* glsl */ `
     float wash = (1.0 - smoothstep(R * 0.85, R, r)) * (0.55 + 0.45 * fbm3(vec3(p * 1.8 / R, uTime * 0.3 + uSeed)));
     float washVis = visOf(0.0, 0.0) * (1.0 - uFade);
 
-    vec3 color = uColorLine * gCore * uLineGlow
+    /* the inked plate: a filled disc of deep violet that darkens the floor,
+       with arcane ink swirling in it (the body stop) — a seal impression,
+       not a wire diagram */
+    float plate = (1.0 - smoothstep(R * 0.96, R * 1.02, r)) * washVis;
+    vec2 fq = rot(p, uRotA * 0.6) * uFieldScale / R;
+    float swirl = fbm3(vec3(fq + vec2(fbm3(vec3(fq * 0.7, uTime * 0.2 + uSeed))), uTime * 0.25 + uSeed));
+    float ink = smoothstep(-0.15, 0.6, swirl) * (0.35 + 0.65 * smoothstep(R * 0.2, R * 0.9, r));
+    vec3 field = mix(uColorDeep, uColorGlyph, ink) * ink * uFieldGlow * plate;
+
+    /* the ink fills: solid bands of saturated ink the strokes sit on, so the
+       seal reads as a filled print (deep plate → body ink → pale strokes →
+       a few white-hot lines) rather than a set of bright hoops */
+    float fw = max(fwidth(r) * 1.5, 0.01);
+    float bandIn = smoothstep(rm - hb - fw, rm - hb + fw, r) * (1.0 - smoothstep(R * 0.945 - fw, R * 0.945 + fw, r));
+    float nS = max(floor(uStar + 0.5), 3.0);
+    vec2 pS = rot(p, uRotB);
+    float starIn = max(ngonIn(pS, R * 0.66, nS, fw), ngonIn(rot(pS, PI / nS), R * 0.66, nS, fw))
+                 * smoothstep(R * 0.46, R * 0.46 + fw * 2.0, r);
+    float eyeIn = 1.0 - smoothstep(R * 0.22 - fw, R * 0.22 + fw, r);
+    float tickIn = smoothstep(R * 0.66, R * 0.68, r) * (1.0 - smoothstep(R * 0.71, R * 0.73, r));
+    float fills = bandIn * v1 + starIn * v3 * 0.75 + eyeIn * v5 * 0.6 + tickIn * v2 * 0.4;
+    float inkN = 0.35 + 0.65 * smoothstep(-0.3, 0.7, swirl);
+    vec3 inkCol = mix(uColorDeep, uColorInk, inkN) * fills * uInkFill * (1.0 - uFade);
+    field += inkCol;
+
+    vec3 color = mix(uColorGlyph, uColorLine, uLineHot) * gCore * uLineGlow
                + gTint * uHaloGlow
-               + uColorDeep * wash * washVis * uFillGlow;
+               + uColorDeep * wash * washVis * uFillGlow
+               + field;
     color *= uBright * uSpent;   // uSpent: 1 fresh .. spentDim once it has erupted
 
     /* the shockwave ring leaving the glyph as it erupts */
@@ -294,17 +354,25 @@ const SIGIL_FRAGMENT = /* glsl */ `
     }
 
     color *= uOpacity * uGlobalGlow * uShaderIntensity;
-    gl_FragColor = vec4(color, 1.0);
+    // Premultiplied over: the plate darkens what is under it (the deep stop
+    // on the floor), the strokes and the ink add light on top.
+    float cover = clamp((plate + fills * uInkFill * 0.3) * uCover * uOpacity, 0.0, 1.0);
+    gl_FragColor = vec4(color + uColorPlate * cover * 0.25, cover);
   }
 `;
 
-/** One glyph on the floor. Additive, so overlapping sigils simply add up. */
+/**
+ * One glyph on the floor. Premultiplied "over": the inked plate darkens the
+ * floor under the strokes; the strokes and the shock ring add light.
+ */
 export function createGlyphSigilMaterial() {
   const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     polygonOffset: true,
@@ -345,7 +413,14 @@ export function createGlyphSigilMaterial() {
       uColorGlyph: { value: new Color() },
       uColorDeep: { value: new Color() },
       uColorRune: { value: new Color() },
-      uColorShock: { value: new Color() }
+      uColorShock: { value: new Color() },
+      uColorPlate: { value: new Color() },
+      uCover: { value: 0.7 },
+      uFieldGlow: { value: 0.6 },
+      uFieldScale: { value: 2.2 },
+      uInkFill: { value: 0.8 },
+      uLineHot: { value: 0.35 },
+      uColorInk: { value: new Color() }
     }),
     vertexShader: SIGIL_VERTEX,
     fragmentShader: SIGIL_FRAGMENT
@@ -396,6 +471,14 @@ export function createGlyphSigilMaterial() {
     u.uColorDeep.value.copy(getColor(c.colorDeep));
     u.uColorRune.value.copy(getColor(c.colorRune));
     u.uColorShock.value.copy(getColor(c.colorShock));
+    u.uColorPlate.value.copy(getColor(c.colorPlate));
+    // The plate leaves with the strokes; it is a print, so it never flares.
+    u.uCover.value = c.plateCover * (1 - state.fade);
+    u.uFieldGlow.value = c.plateInk * g.glow * g.shaderIntensity;
+    u.uFieldScale.value = c.plateInkScale * g.noiseFrequency;
+    u.uInkFill.value = c.inkFill * g.shaderIntensity;
+    u.uLineHot.value = c.lineHot;
+    u.uColorInk.value.copy(getColor(c.colorInk));
   };
 
   return material;
@@ -587,6 +670,12 @@ const PILLAR_FRAGMENT = /* glsl */ `
   uniform vec3  uColorCore;
   uniform vec3  uColorA;
   uniform vec3  uColorB;
+  uniform vec3  uColorDeep;
+  uniform float uCoreWidth;
+  uniform float uCover;
+  uniform float uCoreReach;   // share of the height the white axis climbs before it gives way
+  uniform float uTopDeep;     // how hard the upper column falls to the deep stop
+  uniform float uAxisHeat;    // how far the axis pushes the ramp toward its pale stops (caps the pale share of the column)
 
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
@@ -619,25 +708,47 @@ const PILLAR_FRAGMENT = /* glsl */ `
     float foot = smoothstep(0.0, 0.02, y);
     float hotFoot = exp(-y * 14.0) * 2.0;
 
-    vec3 col = mix(uColorA, uColorB, smoothstep(0.1, 0.9, y + fres * 0.3));
-    vec3 color = col * (fres * 1.4 + streak * (0.4 + fres) * uShaderIntensity)
-               + uColorCore * (pow(facing, 3.0) * uCore * (0.4 + 0.6 * top) + hotFoot);
+    // One heat field through a four-stop ramp: a thin white axis (HDR only
+    // there), the pale tint round it, the saturated body at the walls and the
+    // deep violet at the rim and up the column — never a white slab.
+    // The white axis lives only in the lower part of the column; above
+    // uCoreReach it hands over to the tint, then the body, then the deep
+    // stop, so the top of a near pillar (which is the top of the frame)
+    // reads as violet falling to deep, never as a white blow-out.
+    float coreZone = 1.0 - smoothstep(uCoreReach * 0.6, uCoreReach, y);
+    float axis = pow(facing, uCoreWidth);
+    float upper = smoothstep(0.25, 0.95, y) * uTopDeep;
+    float heat = clamp((axis * (0.25 + 0.55 * coreZone) + hotFoot * 0.2) * uAxisHeat + streak * 0.14 - y * 0.3 - upper * 0.45, 0.0, 1.0);
+    vec3 col = gradient4(uColorCore, uColorA, uColorB, uColorDeep, 1.0 - heat);
+    float dim = 1.0 - 0.6 * upper;
+    vec3 color = col * dim * (0.22 + fres * 0.75 + streak * (0.25 + fres) * uShaderIntensity)
+               + uColorCore * (axis * axis * uCore * coreZone + hotFoot * 0.4);
 
     float a = top * foot * uIntensity * uOpacity;
     vec2 screenUV = gl_FragCoord.xy / uResolution;
     a *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
     if (a < 0.003) discard;
-    gl_FragColor = vec4(color * a * uGlow * uGlobalGlow, 1.0);
+    // Premultiplied over, not additive: the walls (deep at the rim) cover
+    // what is behind them, so pillars lined up along the view converge on
+    // their own violet instead of summing to a white slab; only the thin
+    // axis carries HDR.
+    float cover = clamp(a, 0.0, 1.0) * uCover * (0.35 + 0.65 * fres) * (1.0 - axis * 0.7);
+    gl_FragColor = vec4(color * a * uGlow * uGlobalGlow, cover);
   }
 `;
 
-/** A pillar of arcane light. Additive and double-sided, so it has a far wall. */
+/**
+ * A pillar of arcane light. Double-sided, so it has a far wall; premultiplied
+ * "over" blending so its deep walls cover what is behind them.
+ */
 export function createGlyphPillarMaterial() {
   const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -655,7 +766,13 @@ export function createGlyphPillarMaterial() {
       uOpacity: { value: 1 },
       uColorCore: { value: new Color() },
       uColorA: { value: new Color() },
-      uColorB: { value: new Color() }
+      uColorB: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uCoreWidth: { value: 10 },
+      uCover: { value: 0.5 },
+      uCoreReach: { value: 0.55 },
+      uTopDeep: { value: 1 },
+      uAxisHeat: { value: 1 }
     }),
     vertexShader: PILLAR_VERTEX,
     fragmentShader: PILLAR_FRAGMENT
@@ -681,8 +798,99 @@ export function createGlyphPillarMaterial() {
     u.uColorCore.value.copy(getColor(c.colorPillarCore));
     u.uColorA.value.copy(getColor(c.colorPillarA));
     u.uColorB.value.copy(getColor(c.colorPillarB));
+    u.uColorDeep.value.copy(getColor(c.colorPillarDeep));
+    u.uCoreWidth.value = c.pillarCoreTight;
+    u.uCover.value = c.pillarCover;
+    u.uCoreReach.value = c.pillarCoreReach;
+    u.uTopDeep.value = c.pillarTopDeep;
+    u.uAxisHeat.value = c.pillarAxisHeat ?? 1;
   };
 
+  return material;
+}
+
+/* ---------------------------------------------------------------------- */
+/* The seal stones                                                          */
+/* ---------------------------------------------------------------------- */
+
+/**
+ * The seal stones — one InstancedMesh, lit obsidian (`MeshStandardMaterial`
+ * on `LAYER.WORLD`, shadowing), with a bespoke patch: runes engraved round
+ * the body band and the sigil on the striking face, glowing from an
+ * instanced `aSeal` (x = glow, y = charge throb, z = seed). The engraving is
+ * computed from the stone's own (local) position, so it turns with the stone.
+ */
+export function createGlyphSealMaterial() {
+  const material = new MeshStandardMaterial({
+    color: 0x1c1530,
+    roughness: 0.38,
+    metalness: 0.15,
+    flatShading: true
+  });
+  const uniforms = {
+    uSealRune: { value: new Color('#b49cff') },
+    uSealHot: { value: new Color('#f4f2ff') },
+    uSealGlow: { value: 2 },
+    uSealRunes: { value: 12 }
+  };
+  material.userData.uniforms = uniforms;
+  material.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, uniforms);
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nattribute float aPart;\nattribute vec4 aSeal;\nvarying vec3 vSealLocal;\nvarying float vSealPart;\nvarying vec4 vSeal;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvSealLocal = position;\nvSealPart = aPart;\nvSeal = aSeal;');
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>', [
+        '#include <common>',
+        'uniform vec3 uSealRune;',
+        'uniform vec3 uSealHot;',
+        'uniform float uSealGlow;',
+        'uniform float uSealRunes;',
+        'varying vec3 vSealLocal;',
+        'varying float vSealPart;',
+        'varying vec4 vSeal;',
+        'float sealHash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }'
+      ].join('\n'))
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        {
+          float ang = atan(vSealLocal.z, vSealLocal.x) / 6.2831853 + 0.5;
+          float engraved = 0.0;
+          if (vSealPart > 0.5 && vSealPart < 1.5) {
+            // Rune band: cells round the body, three of five strokes lit per cell.
+            float cx = ang * uSealRunes;
+            vec2 cell = vec2(fract(cx), (vSealLocal.y - 0.08) / 0.18);
+            float id = sealHash(vec2(floor(cx), vSeal.z));
+            float s = 0.0;
+            s += step(0.45, fract(id * 3.1)) * (1.0 - smoothstep(0.06, 0.12, abs(cell.y - 0.2)));
+            s += step(0.45, fract(id * 7.3)) * (1.0 - smoothstep(0.06, 0.12, abs(cell.y - 0.8)));
+            s += step(0.45, fract(id * 11.7)) * (1.0 - smoothstep(0.06, 0.12, abs(cell.x - 0.5)));
+            s += step(0.6, fract(id * 17.9)) * (1.0 - smoothstep(0.05, 0.1, abs(cell.x - cell.y)));
+            engraved = clamp(s, 0.0, 1.0) * step(0.15, cell.x) * step(cell.x, 0.85) * step(0.0, cell.y) * step(cell.y, 1.0);
+          } else if (vSealPart < 0.5) {
+            // Striking face: the sigil in relief — two rings and a star.
+            float r = length(vSealLocal.xz);
+            float a = atan(vSealLocal.z, vSealLocal.x);
+            engraved = exp(-abs(r - 0.82) * 40.0) + exp(-abs(r - 0.55) * 40.0)
+                     + exp(-abs(r * cos(mod(a, 1.0471976) - 0.5235988) - 0.45) * 30.0) * step(r, 0.82);
+          }
+          float lip = vSealPart > 1.5 ? 0.0 : 0.15;
+          float glow = vSeal.x * (1.0 + vSeal.y);
+          totalEmissiveRadiance += mix(uSealRune, uSealHot, clamp(engraved * vSeal.y, 0.0, 1.0)) * (engraved + lip) * glow * uSealGlow;
+        }`);
+  };
+  material.customProgramCacheKey = () => 'glyph-barrage-seal';
+  /** Read settings into the patch every frame. */
+  material.userData.sync = () => {
+    const c = settings.glyphs;
+    const g = settings.global;
+    material.color.copy(getColor(c.colorSeal));
+    material.roughness = c.sealRoughness;
+    material.metalness = c.sealMetalness;
+    uniforms.uSealRune.value.copy(getColor(c.colorSealRune));
+    uniforms.uSealHot.value.copy(getColor(c.colorLine));
+    uniforms.uSealGlow.value = c.sealGlow * g.glow;
+    uniforms.uSealRunes.value = Math.max(3, Math.round(c.sealRunes));
+  };
   return material;
 }
 
@@ -878,6 +1086,140 @@ export function createGlyphLeyMaterial() {
     u.uOpacity.value = g.opacity;
     u.uColor.value.copy(getColor(c.colorLey));
     u.uColorLine.value.copy(getColor(c.colorLine));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The binding shaft — a seal tied to its print                          */
+/* -------------------------------------------------------------------- */
+
+/**
+ * A cone of runelight hung between a hovering seal's striking face and the
+ * print it made: the seal is still *pressing* the sigil from the air, which is
+ * what ties the floating stones to the chain on the floor. Built on the pillar
+ * cylinder (foot at y = 0), its foot widened to the glyph and its top narrowed
+ * to the seal face in the vertex stage. Rune-rain streams down it (seal →
+ * print), brighter at the fresnel edges, through the four-stop ramp: the pale
+ * tint under the seal, the body down the walls, the deep stop where it meets
+ * the floor. No HDR here — the white belongs to the pillar's axis.
+ */
+const BIND_VERTEX = /* glsl */ `
+  uniform float uFootR;
+  uniform float uTopR;
+  uniform float uHeight;
+
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying vec2  vCyl;
+  varying float vViewZ;
+
+  void main() {
+    float y01 = position.y;
+    float r = mix(uFootR, uTopR, y01);
+    vec3 p = vec3(position.x * r, y01 * uHeight, position.z * r);
+    vec4 world = modelMatrix * vec4(p, 1.0);
+    vWorld = world.xyz;
+    vNormalW = normalize(mat3(modelMatrix) * vec3(position.x, (uFootR - uTopR) / max(uHeight, 1e-3), position.z));
+    vCyl = vec2(atan(position.z, position.x), y01);
+    vec4 mv = viewMatrix * world;
+    vViewZ = mv.z;
+    gl_Position = projectionMatrix * mv;
+  }
+`;
+
+const BIND_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uSeed;
+  uniform float uIntensity;
+  uniform float uGlow;
+  uniform float uStreaks;
+  uniform float uFlow;
+  uniform float uFresnel;
+  uniform vec3  uColorA;
+  uniform vec3  uColorB;
+  uniform vec3  uColorDeep;
+
+  uniform vec2      uResolution;
+  uniform sampler2D uSceneDepth;
+  uniform float     uCameraNear;
+  uniform float     uCameraFar;
+  uniform float     uGlobalGlow;
+
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying vec2  vCyl;
+  varying float vViewZ;
+
+  ${noiseGLSL}
+  ${commonGLSL}
+
+  void main() {
+    float y = vCyl.y;
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec3 N = normalize(vNormalW);
+    float fres = pow(1.0 - abs(dot(N, V)), max(uFresnel, 0.1));
+    float th = vCyl.x;
+    // Rune rain: narrow streams falling from the seal into the print.
+    float lane = fract(th / 6.2831853 * uStreaks + uSeed);
+    float laneMask = smoothstep(0.0, 0.18, lane) * (1.0 - smoothstep(0.32, 0.5, lane));
+    float drop = snoise(vec3(floor(th / 6.2831853 * uStreaks) * 3.1 + uSeed, y * 3.0 + uTime * uFlow, 0.0)) * 0.5 + 0.5;
+    float rain = laneMask * pow(drop, 3.0) * 2.0;
+    float ends = smoothstep(0.0, 0.12, y) * (1.0 - smoothstep(0.88, 1.0, y));
+    float k = clamp(y * 0.7 + rain * 0.35, 0.0, 1.0);
+    vec3 col = k > 0.5 ? mix(uColorB, uColorA, (k - 0.5) * 2.0) : mix(uColorDeep, uColorB, k * 2.0);
+    float a = (0.12 + fres * 0.55 + rain * 0.5) * ends * uIntensity;
+    vec2 screenUV = gl_FragCoord.xy / uResolution;
+    a *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, 0.3);
+    if (a < 0.003) discard;
+    gl_FragColor = vec4(col * a * uGlow * uGlobalGlow, 1.0);
+  }
+`;
+
+export function createGlyphBindMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: AdditiveBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uFootR: { value: 1 },
+      uTopR: { value: 0.5 },
+      uHeight: { value: 2 },
+      uSeed: { value: 0 },
+      uIntensity: { value: 0 },
+      uGlow: { value: 1 },
+      uStreaks: { value: 14 },
+      uFlow: { value: 3 },
+      uFresnel: { value: 2 },
+      uColorA: { value: new Color() },
+      uColorB: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: BIND_VERTEX,
+    fragmentShader: BIND_FRAGMENT
+  });
+
+  /** @param {object} state { foot, top, height, intensity, seed } */
+  material.userData.sync = (state) => {
+    const c = settings.glyphs;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uFootR.value = Math.max(0.02, state.foot);
+    u.uTopR.value = Math.max(0.01, state.top);
+    u.uHeight.value = Math.max(0.05, state.height);
+    u.uSeed.value = state.seed;
+    u.uIntensity.value = state.intensity * g.opacity;
+    u.uGlow.value = c.bindGlow * g.glow;
+    u.uStreaks.value = Math.max(1, Math.round(c.bindStreaks));
+    u.uFlow.value = c.bindFlow * g.noiseSpeed;
+    u.uFresnel.value = c.bindFresnel * g.fresnel;
+    u.uColorA.value.copy(getColor(c.colorPillarA));
+    u.uColorB.value.copy(getColor(c.colorPillarB));
+    u.uColorDeep.value.copy(getColor(c.colorPillarDeep));
   };
 
   return material;

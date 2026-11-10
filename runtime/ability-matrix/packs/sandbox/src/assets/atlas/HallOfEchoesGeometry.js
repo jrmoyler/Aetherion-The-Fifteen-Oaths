@@ -1,4 +1,4 @@
-import { BufferAttribute, BufferGeometry, CylinderGeometry, PlaneGeometry } from 'three';
+import { BufferAttribute, BufferGeometry, CylinderGeometry, ExtrudeGeometry, PlaneGeometry, Shape } from 'three';
 
 /**
  * Procedural geometry for the Hall of Echoes.
@@ -92,4 +92,45 @@ export function createEchoDaisGeometry() {
 /** A projector beam: open cone, foot radius `foot`, top radius 1, height 1, foot on y = 0. */
 export function createEchoBeamGeometry(foot = 0.12) {
   return new CylinderGeometry(1, foot, 1, 32, 1, true).translate(0, 0.5, 0);
+}
+
+/**
+ * One pane of the hall: a **round-arched mirror slab** with a bevelled edge,
+ * the shape of a looking-glass in a fairground hall of mirrors. Built at its
+ * real size (so the arch stays round whatever the width/height sliders say —
+ * the ability rebuilds it when they move): foot on y = 0, `width` across X
+ * centred, `height` to the crown of the arch, `depth` thick along Z with the
+ * mirror face toward +Z. The foot runs `sink` metres below the floor so a
+ * rising pane comes *out of* the floor rather than sitting on it.
+ *
+ * `position.xy` doubles as the face's own coordinates in the material, which
+ * measures the distance to the arch outline analytically for the silvered rim
+ * and lays its cracks in it.
+ *
+ * @param {number} width  metres
+ * @param {number} height metres to the crown
+ * @param {number} depth  metres
+ */
+export function createHallPanelGeometry(width = 1.25, height = 2.9, depth = 0.08) {
+  const w = width * 0.5;
+  const spring = Math.max(0.05, height - w);
+  const sink = 0.4;
+  const shape = new Shape();
+  shape.moveTo(-w, -sink);
+  shape.lineTo(w, -sink);
+  shape.lineTo(w, spring);
+  shape.absarc(0, spring, w, 0, Math.PI, false);
+  shape.lineTo(-w, -sink);
+  const geometry = new ExtrudeGeometry(shape, {
+    depth,
+    bevelEnabled: true,
+    bevelThickness: Math.min(0.04, depth * 0.5),
+    bevelSize: Math.min(0.05, w * 0.1),
+    bevelSegments: 2,
+    curveSegments: 18
+  });
+  geometry.translate(0, 0, -depth * 0.5);
+  geometry.computeVertexNormals();
+  geometry.computeBoundingSphere();
+  return geometry;
 }

@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial } from 'three';
+import { AdditiveBlending, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -60,8 +60,11 @@ const STRAND_VERTEX = /* glsl */ `
   uniform float uLick;       // metres the flame tongues reach (flame only)
   uniform float uLickScale;
   uniform float uLickSpeed;
+  uniform float uOrbit;        // phase of the heat wave chasing round the cage
+  uniform float uOrbitAmount;
 
   attribute float aStrand;
+  varying float vOrbit;
 
   varying vec3  vNormalW;
   varying vec3  vViewDir;
@@ -107,11 +110,15 @@ const STRAND_VERTEX = /* glsl */ `
 
     vec3 world = P + n * radius;
 
+    // The burn wave: one hot side that chases itself round the cage.
+    float bearing = atan(P.z - uCentre.z, P.x - uCentre.x);
+    vOrbit = pow(0.5 + 0.5 * cos(bearing - uOrbit), 3.0) * uOrbitAmount;
+
     float lick = 0.0;
     #ifdef FLAME
       float upness = clamp(n.y * 0.7 + 0.45, 0.0, 1.0);
       float field = snoise(vec3(world.xz * uLickScale, world.y * uLickScale * 0.6 - uTime * uLickSpeed + i * 3.1));
-      lick = max(field * 0.5 + 0.55, 0.0) * upness;
+      lick = max(field * 0.5 + 0.55, 0.0) * upness * (1.0 + vOrbit * 0.9);
       world.y += lick * uLick;
       // The tongue narrows as it climbs: pull it back toward the strand axis.
       world -= n * radius * lick * 0.35;
@@ -151,6 +158,12 @@ const STRAND_FRAGMENT = /* glsl */ `
   uniform vec3  uColorCore;
   uniform vec3  uColorBody;
   uniform vec3  uColorEdge;
+  uniform vec3  uColorDeep;   // the dark ember stop
+  uniform vec3  uColorChar;   // the charred cord
+  uniform float uBurn;        // 0..1 through the burn: cracks widen, flames climb
+  uniform float uCrackScale;
+  uniform float uCrackWidth;
+  uniform vec3  uLightDir;
 
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
@@ -165,6 +178,7 @@ const STRAND_FRAGMENT = /* glsl */ `
   varying float vStrand;
   varying float vLick;
   varying float vViewZ;
+  varying float vOrbit;
 
   ${noiseGLSL}
   ${commonGLSL}
@@ -214,23 +228,44 @@ const STRAND_FRAGMENT = /* glsl */ `
       float t = clamp(vLick * 0.9 + (1.0 - density) * 0.4, 0.0, 1.0);
       color = mix(uColorBody, uColorEdge, smoothstep(0.15, 0.85, t));
       color = mix(uColorCore, color, smoothstep(0.0, 0.3, t));
-      alpha = clamp(density, 0.0, 1.0) * pulse;
+      alpha = clamp(density, 0.0, 1.0) * pulse * (1.0 + vOrbit);
     #else
-      // Strand: the line of sight through the middle of the tube is the hottest.
-      float core = pow(ndv, uCoreSharp);
-      color = mix(uColorEdge, uColorBody, smoothstep(0.0, 0.55, ndv));
-      color = mix(color, uColorCore, core);
-      alpha = smoothstep(0.0, 0.25, ndv) * pulse;
+      // Strand: a charred cord with molten cracks. The cord itself is solid
+      // and lit by the scene sun (dark char, an ember-red rim), so the cage
+      // carries a true deep stop; the cracks run the four-stop heat ramp
+      // (deep → saturated → tint → white-hot) and only the hottest crack
+      // centres go over 1 for the bloom. As the cage burns (uBurn) the cracks
+      // widen; the contraction (uSurge) opens them right up.
+      float diff = clamp(dot(N, normalize(uLightDir)) * 0.6 + 0.4, 0.0, 1.0);
+      float rim = pow(1.0 - ndv, 2.5);
+      vec3 cp = vWorld * uCrackScale + vec3(0.0, -uTime * 0.25, vStrand * 7.1);
+      float ridge = max(1.0 - abs(snoise(cp)), (1.0 - abs(snoise(cp * 2.3 + 11.0))) * 0.9);
+      float cw = clamp(uCrackWidth * (0.6 + 0.55 * uBurn) * (1.0 + uSurge * 2.5 + vOrbit * 1.2), 0.001, 0.95);
+      float crack = smoothstep(1.0 - cw, 1.0 - cw * 0.2, ridge);
+      float t = clamp(crack * pulse * (0.7 + 0.3 * uBurn + vOrbit * 0.5) + uSurge * 0.45 + head * 0.35, 0.0, 1.0);
+      vec3 hot = gradient4(uColorDeep, uColorEdge, uColorBody, uColorCore, t);
+      float emit = smoothstep(0.03, 0.3, t);
+      vec3 charC = uColorChar * (0.3 + 0.9 * diff) + uColorDeep * rim * 1.4 + uColorEdge * rim * rim * 0.9;
+      float hdr = mix(1.0, uIntensity * (1.0 + uSurge * 0.6), smoothstep(0.62, 1.0, t));
+      color = mix(charC, hot * hdr, emit);
+      alpha = 1.0;
     #endif
 
+    #ifdef FLAME
     color += uColorCore * (head + edge * 2.0);
     float energy = uIntensity * (1.0 + uSurge * 1.5);
+    #else
+      color += uColorBody * head * 1.5 + uColorCore * edge * 2.0;
+      float energy = 1.0;
+    #endif
 
     /* --- soft at the floor, soft against the scene --- */
     float floorFade = smoothstep(0.0, max(uFloorFade, 1e-3), vWorld.y);
     alpha *= floorFade;
     vec2 screenUV = gl_FragCoord.xy / uResolution;
-    alpha *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
+    #ifdef FLAME
+      alpha *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
+    #endif
     alpha *= uOpacity;
     if (alpha < 0.004) discard;
 
@@ -246,9 +281,11 @@ export function createEmberStrandMaterial(kind) {
   const material = new ShaderMaterial({
     defines: flame ? { FLAME: '' } : {},
     transparent: true,
-    depthWrite: false,
+    // The flame is light; the cord is a solid, so it writes depth and the
+    // flames behind it are hidden by it.
+    depthWrite: !flame,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: flame ? AdditiveBlending : NormalBlending,
     side: flame ? DoubleSide : FrontSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -258,6 +295,8 @@ export function createEmberStrandMaterial(kind) {
       uLick: { value: 0 },
       uLickScale: { value: 1 },
       uLickSpeed: { value: 1 },
+      uOrbit: { value: 0 },
+      uOrbitAmount: { value: 0 },
       uGrow: { value: 0 },
       uStagger: { value: 0.4 },
       uHeadGlow: { value: 2 },
@@ -276,7 +315,12 @@ export function createEmberStrandMaterial(kind) {
       uSurge: { value: 0 },
       uColorCore: { value: new Color() },
       uColorBody: { value: new Color() },
-      uColorEdge: { value: new Color() }
+      uColorEdge: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorChar: { value: new Color() },
+      uBurn: { value: 0 },
+      uCrackScale: { value: 2 },
+      uCrackWidth: { value: 0.2 }
     }),
     vertexShader: STRAND_VERTEX,
     fragmentShader: STRAND_FRAGMENT
@@ -284,7 +328,7 @@ export function createEmberStrandMaterial(kind) {
 
   /**
    * @param {object} lattice the shared path state (see `syncLatticeUniforms`)
-   * @param {object} state   { grow, dissolve, surge, fade }
+   * @param {object} state   { grow, dissolve, surge, fade, burn }
    */
   material.userData.sync = (lattice, state) => {
     const c = settings.emberveil;
@@ -302,10 +346,15 @@ export function createEmberStrandMaterial(kind) {
     u.uPulseSpeed.value = c.pulseSpeed * g.noiseSpeed;
     u.uFloorFade.value = c.floorFade;
     u.uTaper.value = c.strandTaper;
+    u.uBurn.value = state.burn ?? 0;
+    u.uOrbit.value = state.orbit ?? 0;
+    u.uOrbitAmount.value = state.orbitAmount ?? 0;
+    u.uColorDeep.value.copy(getColor(c.colorStrandDeep));
 
     if (flame) {
       u.uWidth.value = c.strandWidth * c.flameWidth;
-      u.uLick.value = c.flameLick * g.turbulence;
+      // The tongues climb as the cage burns.
+      u.uLick.value = c.flameLick * g.turbulence * (1 + c.flameClimb * (state.burn ?? 0));
       u.uLickScale.value = c.flameLickScale * g.noiseFrequency;
       u.uLickSpeed.value = c.flameSpeed * g.noiseSpeed;
       u.uFlameNoise.value = c.flameNoise * g.noiseStrength;
@@ -326,6 +375,9 @@ export function createEmberStrandMaterial(kind) {
       u.uColorCore.value.copy(getColor(c.colorStrandCore));
       u.uColorBody.value.copy(getColor(c.colorStrandBody));
       u.uColorEdge.value.copy(getColor(c.colorStrandEdge));
+      u.uColorChar.value.copy(getColor(c.colorStrandChar));
+      u.uCrackScale.value = c.crackScale * g.noiseFrequency;
+      u.uCrackWidth.value = c.crackWidth * g.noiseStrength;
     }
   };
 
@@ -502,7 +554,8 @@ export function createEmberFloorMaterial() {
     u.uSeed.value = state.seed;
     u.uOpacity.value = c.floorOpacity * g.opacity;
     u.uCharWidth.value = c.charWidth;
-    u.uCharInner.value = c.charCreep;
+    // The char creeps inward over the burn, not all at once.
+    u.uCharInner.value = c.charCreep * (0.3 + 0.7 * (state.creep ?? 1));
     u.uCharDark.value = c.charDarkness;
     u.uSeamWidth.value = c.seamWidth;
     u.uSeamGlow.value = c.seamGlow * g.shaderIntensity;
@@ -613,6 +666,179 @@ export function createEmberHazeMaterial() {
     u.uSpeed.value = c.hazeSpeed * g.noiseSpeed;
     u.uFalloff.value = c.hazeFalloff;
     u.uSeed.value = state.seed;
+  };
+
+  return material;
+}
+
+/* ==================================================================== */
+/* The burning thread (travel)                                           */
+/* ==================================================================== */
+
+/**
+ * The thread the ember spools out of the hand as it flies — the cage's first
+ * strand, shown on its way to the circle.
+ *
+ * The vertex stage lays the tube on the ember's own lob: `s` 0..1 maps to
+ * 0..`uFront` metres along the line, at the lob's height there. It writhes a
+ * little (more toward the ember). The fragment is the same charred cord as
+ * the cage: a dark, sun-lit thread near the hand (it has burnt out there),
+ * molten cracks hotter and denser toward the ember, a white-hot tip where it
+ * leaves the ember. After the landing the thread burns back from the hand
+ * (`uBurnBack` 0..1) with a hot front.
+ */
+const THREAD_VERTEX = /* glsl */ `
+  uniform float uTime;
+  uniform vec3  uOrigin;
+  uniform vec3  uDir;
+  uniform float uFront;     // metres from the hand to the ember
+  uniform float uSpan;      // the whole throw, metres (the lob is over this)
+  uniform float uBaseY;
+  uniform float uLob;
+  uniform float uWidth;
+  uniform float uWrithe;
+
+  varying vec3  vNormalW;
+  varying vec3  vViewDir;
+  varying vec3  vWorld;
+  varying float vS;
+
+  vec3 threadPoint(float s) {
+    float d = s * uFront;
+    vec3 p = uOrigin + uDir * d;
+    p.y = uBaseY + uLob * sin(3.14159265359 * clamp(d / max(uSpan, 1e-3), 0.0, 1.0));
+    vec3 side = normalize(cross(uDir, vec3(0.0, 1.0, 0.0)) + vec3(1e-5));
+    p += side * sin(d * 2.3 - uTime * 7.0) * uWrithe * s;
+    p.y += cos(d * 1.7 - uTime * 5.0) * uWrithe * 0.6 * s;
+    return p;
+  }
+
+  void main() {
+    float s = position.x;
+    vS = s;
+    vec3 P = threadPoint(s);
+    vec3 T = normalize(threadPoint(min(s + 0.01, 1.0)) - threadPoint(max(s - 0.01, 0.0)) + vec3(1e-6));
+    vec3 across = cross(T, vec3(0.0, 1.0, 0.0));
+    across = length(across) > 1e-3 ? normalize(across) : vec3(1.0, 0.0, 0.0);
+    vec3 over = normalize(cross(across, T));
+    vec3 n = across * position.y + over * position.z;
+    // Thicker toward the ember, pinched at the hand.
+    float radius = uWidth * (0.45 + 0.55 * s) * smoothstep(0.0, 0.03, s);
+    vec3 world = P + n * radius;
+    vNormalW = n;
+    vWorld = world;
+    vViewDir = cameraPosition - world;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const THREAD_FRAGMENT = /* glsl */ `
+  precision highp float;
+  uniform float uTime;
+  uniform float uFront;
+  uniform float uBurnBack;   // 0..1 the thread burning away from the hand after the landing
+  uniform float uIntensity;
+  uniform float uOpacity;
+  uniform float uCrackScale;
+  uniform vec3  uColorCore;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorEdge;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorChar;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+
+  varying vec3  vNormalW;
+  varying vec3  vViewDir;
+  varying vec3  vWorld;
+  varying float vS;
+
+  ${noiseGLSL}
+  ${commonGLSL}
+
+  void main() {
+    // Burn-back: everything behind the front is gone, the front itself glows.
+    float front = uBurnBack * 1.08 - 0.04;
+    float wobble = snoise(vec3(vS * 14.0, uTime * 2.0, 3.0)) * 0.03;
+    if (vS < front + wobble) discard;
+    float edge = 1.0 - smoothstep(0.0, 0.06, vS - front - wobble);
+    edge *= step(0.001, uBurnBack);
+
+    vec3 N = normalize(vNormalW);
+    vec3 V = normalize(vViewDir);
+    float ndv = abs(dot(N, V));
+    float diff = clamp(dot(N, normalize(uLightDir)) * 0.6 + 0.4, 0.0, 1.0);
+    float rim = pow(1.0 - ndv, 2.0);
+
+    // Heat: the fresh end (at the ember) is molten, the old end has cooled.
+    float fresh = smoothstep(0.0, 1.0, vS);
+    float ridge = 1.0 - abs(snoise(vec3(vS * uFront * uCrackScale, ndv * 2.0, uTime * 0.6)));
+    float crack = smoothstep(0.86 - 0.4 * fresh, 0.98, ridge);
+    float t = clamp(crack * (0.35 + 0.65 * fresh) + pow(fresh, 6.0) * 0.9 + edge, 0.0, 1.0);
+    vec3 hot = gradient4(uColorDeep, uColorEdge, uColorBody, uColorCore, t);
+    float emit = smoothstep(0.04, 0.3, t);
+    vec3 charC = uColorChar * (0.35 + 0.8 * diff) + uColorDeep * rim * 1.6;
+    float hdr = mix(1.0, uIntensity, smoothstep(0.6, 1.0, t));
+    vec3 color = mix(charC, hot * hdr, emit);
+    float alpha = uOpacity;
+    if (alpha < 0.004) discard;
+    gl_FragColor = vec4(color * uGlobalGlow, alpha);
+  }
+`;
+
+export function createEmberThreadMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: true,
+    depthTest: true,
+    blending: NormalBlending,
+    side: FrontSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uOrigin: { value: new Vector3() },
+      uDir: { value: new Vector3(0, 0, 1) },
+      uFront: { value: 0 },
+      uSpan: { value: 1 },
+      uBaseY: { value: 1.2 },
+      uLob: { value: 1.4 },
+      uWidth: { value: 0.05 },
+      uWrithe: { value: 0.06 },
+      uBurnBack: { value: 0 },
+      uIntensity: { value: 3 },
+      uOpacity: { value: 1 },
+      uCrackScale: { value: 2 },
+      uColorCore: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorEdge: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorChar: { value: new Color() }
+    }),
+    vertexShader: THREAD_VERTEX,
+    fragmentShader: THREAD_FRAGMENT
+  });
+
+  /** @param {object} state { origin, dir, front, span, baseY, lob, burnBack } */
+  material.userData.sync = (state) => {
+    const c = settings.emberveil;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uOrigin.value.copy(state.origin);
+    u.uDir.value.copy(state.dir);
+    u.uFront.value = state.front;
+    u.uSpan.value = state.span;
+    u.uBaseY.value = state.baseY;
+    u.uLob.value = state.lob;
+    u.uBurnBack.value = state.burnBack;
+    u.uWidth.value = c.threadWidth;
+    u.uWrithe.value = c.threadWrithe * g.turbulence;
+    u.uIntensity.value = c.strandIntensity * g.glow * g.shaderIntensity;
+    u.uOpacity.value = g.opacity;
+    u.uCrackScale.value = c.crackScale * g.noiseFrequency;
+    u.uColorCore.value.copy(getColor(c.colorStrandCore));
+    u.uColorBody.value.copy(getColor(c.colorStrandBody));
+    u.uColorEdge.value.copy(getColor(c.colorStrandEdge));
+    u.uColorDeep.value.copy(getColor(c.colorStrandDeep));
+    u.uColorChar.value.copy(getColor(c.colorStrandChar));
   };
 
   return material;

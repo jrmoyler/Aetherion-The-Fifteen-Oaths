@@ -1,4 +1,4 @@
-import { LatheGeometry, PlaneGeometry, Vector2 } from 'three';
+import { BoxGeometry, LatheGeometry, PlaneGeometry, Vector2 } from 'three';
 
 /**
  * Whiteout Needle — procedural geometry.
@@ -12,6 +12,9 @@ import { LatheGeometry, PlaneGeometry, Vector2 } from 'three';
  *    cast line, Z −0.5..0.5 across it.
  *  - **the strip** — a quad in the same parameter space for the snowed-over
  *    floor and the cold-air sheet.
+ *  - **the blizzard box** — a unit box, x 0..1 down the line, y 0..1 up,
+ *    z −0.5..0.5 across: only the carrier for the raymarched body of blowing
+ *    snow; the shader finds its own entry and exit analytically.
  */
 
 export function createIcicleGeometry() {
@@ -43,5 +46,12 @@ export function createStripGeometry() {
   const g = new PlaneGeometry(1, 1, 1, 1);
   g.rotateX(-Math.PI / 2);
   g.translate(0.5, 0, 0);
+  return g;
+}
+
+/** Unit box for the raymarched blizzard: x 0..1 along, y 0..1 up, z −0.5..0.5 across. */
+export function createBlizzardGeometry() {
+  const g = new BoxGeometry(1, 1, 1);
+  g.translate(0.5, 0.5, 0);
   return g;
 }

@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, DoubleSide, ShaderMaterial } from 'three';
+import { AdditiveBlending, Color, DoubleSide, NormalBlending, ShaderMaterial } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
@@ -30,6 +30,15 @@ import { getColor } from '../../utils/color.js';
  *    the rings, a rotating inscribed polygon and a hub. It is *drawn on* while
  *    its blade hovers (target mark), flares white when the blade lands, then
  *    burns down to embers. Per-instance `vec4 aRune` (draw, flare, fade, seed).
+ *
+ *  - **the blade core** — the same instanced sword drawn a second time,
+ *    *normal-blended and lit*, underneath the additive glass. The glass alone
+ *    is a hollow of light, and at 8 m a hollow of light reads as a white
+ *    needle; the core gives each blade its mass and the cast its deep stop.
+ *    A four-stop ramp — indigo deep in the shadowed facets, cobalt body where
+ *    the sun wraps round, a pale ice tint at the silhouette, white-hot only in
+ *    the rune channel — with the same dissolve and voronoi shatter as the
+ *    glass so the two never disagree about where the sword is.
  *
  * Every material reads `settings.aetherblade` in `userData.sync()`.
  */
@@ -299,6 +308,170 @@ export function createAetherSwordMaterial() {
     u.uColorRune.value.copy(getColor(c.colorSwordRune));
     u.uColorEdge.value.copy(getColor(c.colorSwordEdge));
     u.uColorBurn.value.copy(getColor(c.colorSwordBurn));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* the blade core (lit, normal-blended mass under the glass)            */
+/* -------------------------------------------------------------------- */
+
+const CORE_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uTime;
+  uniform sampler2D uEnvMap;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
+
+  uniform float uOpacity;
+  uniform float uLight;
+  uniform float uRim;
+  uniform float uEnv;
+  uniform float uRuneGlow;
+  uniform float uRuneCount;
+  uniform float uRuneWidth;
+  uniform float uRuneStroke;
+  uniform float uPulseSpeed;
+  uniform float uPulseWidth;
+  uniform float uDissolveSoft;
+  uniform float uDissolveNoise;
+  uniform float uCrackScale;
+  uniform float uHiltDark;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorTint;
+  uniform vec3  uColorHot;
+
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying vec3  vLocal;
+  varying float vV;
+  varying float vEdge;
+  varying float vPart;
+  varying vec4  vState;
+
+  ${noiseGLSL}
+  ${ENV_GLSL}
+  ${RUNE_GLSL}
+
+  void main() {
+    float form = vState.x;
+    float shatter = vState.y;
+    float seed = vState.z;
+    float flare = vState.w;
+
+    // Exactly the glass's dissolve and shatter, so the two agree.
+    float n = snoise(vec3(vLocal.x * 30.0, vV * 9.0, seed * 3.1)) * uDissolveNoise;
+    float soft = max(uDissolveSoft, 0.005);
+    float front = form * (1.0 + soft + uDissolveNoise) - soft * 0.5;
+    float into = front - (vV + n * 0.5);
+    if (into < 0.0) discard;
+    float burn = 1.0 - smoothstep(0.0, soft * 1.5, into);
+    vec2 cp = vec2(vEdge * 1.4 + seed, vV * uCrackScale);
+    vec2 vor = voronoi2(cp * 2.0);
+    if (shatter > 0.0 && vor.y < shatter * 1.25 - 0.2) discard;
+
+    vec3 N = normalize(vNormalW);
+    if (!gl_FrontFacing) N = -N;
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec3 L = normalize(uLightDir);
+    float ndv = abs(dot(N, V));
+    float wrap = dot(N, L) * 0.5 + 0.5;
+
+    // The ramp: deep in the facets turned from the sun, cobalt where it wraps.
+    vec3 col = mix(uColorDeep, uColorBody, smoothstep(0.45, 1.0, wrap)) * mix(0.5, 1.0, wrap) * uLight;
+    // A cold sky caught in the facets, kept low so the body stays dark.
+    vec3 env = texture2D(uEnvMap, equirectUv(reflect(-V, N))).rgb;
+    col += env * uEnv * 0.25;
+    // Pale ice at the silhouette.
+    float fres = pow(1.0 - ndv, 3.0);
+    col = mix(col, uColorTint, clamp(fres * uRim, 0.0, 0.85));
+    // The hilt is darker metal-glass.
+    col *= mix(1.0, uHiltDark, step(0.5, vPart));
+
+    // Rune channel: the only HDR in the body.
+    float isBlade = 1.0 - step(0.5, vPart);
+    if (isBlade > 0.5 && vV > 0.08) {
+      float count = max(uRuneCount, 1.0);
+      float cell = floor(vV * count);
+      vec2 p = vec2(vEdge / max(uRuneWidth, 0.05), fract(vV * count) - 0.5);
+      float d = glyph(vec2(p.x * 0.5, p.y), cell + floor(seed * 13.0));
+      float stroke = 1.0 - smoothstep(uRuneStroke * 0.6, uRuneStroke * 1.2, d);
+      float inChannel = 1.0 - smoothstep(0.8, 1.0, abs(p.x));
+      float ph = fract(-vV * 1.3 + uTime * uPulseSpeed + seed);
+      float pulse = smoothstep(1.0 - max(uPulseWidth, 0.01), 1.0, ph);
+      float rune = stroke * inChannel * (0.3 + 1.2 * pulse + flare) * uShaderIntensity;
+      col += uColorHot * rune * uRuneGlow;
+      // The fuller itself, a cobalt groove the runes sit in.
+      col = mix(col, uColorBody * 0.6, inChannel * (1.0 - stroke) * 0.35);
+    }
+    col += uColorTint * burn * 1.5;
+
+    float alpha = uOpacity * (1.0 - smoothstep(0.55, 0.95, shatter));
+    gl_FragColor = vec4(col * uGlobalGlow, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+/** The lit body under the glass — the blade's mass and the cast's deep stop. */
+export function createAetherCoreMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: true,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uEnvMap: frame.uEnvMap,
+      uOpacity: { value: 0.92 },
+      uLight: { value: 1 },
+      uRim: { value: 1 },
+      uEnv: { value: 0.5 },
+      uRuneGlow: { value: 2 },
+      uRuneCount: { value: 12 },
+      uRuneWidth: { value: 0.55 },
+      uRuneStroke: { value: 0.075 },
+      uPulseSpeed: { value: 1.4 },
+      uPulseWidth: { value: 0.28 },
+      uDissolveSoft: { value: 0.08 },
+      uDissolveNoise: { value: 0.14 },
+      uCrackScale: { value: 6 },
+      uHiltDark: { value: 0.6 },
+      uColorDeep: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorTint: { value: new Color() },
+      uColorHot: { value: new Color() }
+    }),
+    vertexShader: SWORD_VERTEX,
+    fragmentShader: CORE_FRAGMENT
+  });
+  material.userData.instanced = true;
+
+  material.userData.sync = () => {
+    const c = settings.aetherblade;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uOpacity.value = Math.min(1, c.coreOpacity * g.opacity);
+    u.uLight.value = c.coreLight;
+    u.uRim.value = c.coreRim * g.fresnel;
+    u.uEnv.value = c.coreEnv;
+    u.uRuneGlow.value = c.coreRuneGlow * g.glow;
+    u.uRuneCount.value = Math.max(1, Math.round(c.runeLightCount));
+    u.uRuneWidth.value = c.runeLightWidth;
+    u.uRuneStroke.value = c.runeLightStroke;
+    u.uPulseSpeed.value = c.runePulseSpeed * g.noiseSpeed;
+    u.uPulseWidth.value = c.runePulseWidth;
+    u.uDissolveSoft.value = c.formSoft;
+    u.uDissolveNoise.value = c.formNoise * g.noiseStrength;
+    u.uCrackScale.value = c.shatterCells * g.noiseFrequency;
+    u.uHiltDark.value = c.coreHiltDark;
+    u.uColorDeep.value.copy(getColor(c.colorCoreDeep));
+    u.uColorBody.value.copy(getColor(c.colorCoreBody));
+    u.uColorTint.value.copy(getColor(c.colorCoreTint));
+    u.uColorHot.value.copy(getColor(c.colorCoreHot));
   };
 
   return material;

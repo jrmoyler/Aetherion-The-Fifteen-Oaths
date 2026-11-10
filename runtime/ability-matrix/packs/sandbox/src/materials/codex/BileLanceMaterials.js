@@ -29,6 +29,14 @@ import { getColor } from '../../utils/color.js';
  *    popping, a bright seam at its lip, etched and pitted stone round it.
  *  - **the bore** — a floor quad at the end of the line: a drain of acid
  *    spiralling into a black hole with a glowing lip.
+ *  - **the geyser** — the eruption's mass. The tube grid again, stood on
+ *    end over the bore and bent in the vertex stage into a column of bile
+ *    with a flared foot and a swollen, mushrooming head: it bursts up, boils
+ *    (crawling lobes, a sway), then its head droops and the column slumps
+ *    into a heap that keeps bubbling — voronoi domes that swell, pop and
+ *    flash — and sinks back into the hole. Lit and normal-blended so the deep
+ *    stop can be near-black: deep bile in the shadowed folds, olive body,
+ *    lime rim and veins, a white-hot throat only while it is still rising.
  *
  * Every material reads `settings.bilelance` in `userData.sync(state)`;
  * `state` carries only what the ability knows that the settings do not.
@@ -677,7 +685,8 @@ const TRENCH_FRAGMENT = /* glsl */ `
 
     vec3 col = uColorEtched * (1.0 - 0.45 * pits);
     col = mix(col, uColorWet * (0.7 + 0.5 * flowN), chan);
-    vec3 glow = uColorAcid * uGlow * uGlobalGlow * (chan * (0.25 + 0.55 * flowN) * heat + bubbles * 1.6 + seam * heat * 0.9);
+    // Lime only in the seams and the popping films; the channel itself is dark wet bile.
+    vec3 glow = uColorAcid * uGlow * uGlobalGlow * (chan * (0.03 + 0.1 * flowN) * heat + bubbles * 0.8 + seam * heat * 0.9);
     col += glow;
 
     float a = max(etched * 0.86, chan);
@@ -884,6 +893,252 @@ export function createBoreMaterial() {
     u.uColorA.value.copy(getColor(c.colorBoreA));
     u.uColorB.value.copy(getColor(c.colorBoreB));
     u.uColorC.value.copy(getColor(c.colorBoreC));
+  };
+  return material;
+}
+
+
+/* -------------------------------------------------------------------- */
+/* The geyser — the bile coming back up                                 */
+/* -------------------------------------------------------------------- */
+
+const GEYSER_VERTEX = /* glsl */ `
+  uniform vec3  uCenter;
+  uniform float uHeight;      // metres, top of the column
+  uniform float uRadius;      // column radius
+  uniform float uFoot;        // extra radius at the flared foot
+  uniform float uHead;        // extra radius of the swollen head
+  uniform float uHeadAt;      // 0..1 where the head sits up the column
+  uniform float uLobes;       // crawling bulges, × radius
+  uniform float uLobeScale;
+  uniform float uFlow;        // integrated churn
+  uniform float uSway;        // metres the column sways at the top
+  uniform float uSink;        // metres it has sunk back into the bore
+  uniform float uBubbleAmp;   // metres a bubble dome swells
+  uniform float uBubbleScale;
+  uniform float uBubblePhase;
+  uniform float uSeed;
+  uniform float uTime;
+
+  varying float vS;
+  varying float vBubble;
+  varying float vPop;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying float vViewZ;
+
+  ${noiseGLSL}
+
+  float bubbleAt(float s, float a, out float pop) {
+    vec2 bp = vec2(a * 0.95493 * uBubbleScale, s * max(uHeight, 0.3) * uBubbleScale) + uSeed;
+    vec2 cell = voronoi2(bp);
+    float cyc = fract(cell.y * 7.31 + uBubblePhase * (0.6 + cell.y * 0.8));
+    float grow = smoothstep(0.0, 0.85, cyc);
+    pop = smoothstep(0.85, 1.0, cyc);
+    float br = 0.42 * (0.5 + 0.5 * fract(cell.y * 31.1)) * grow * (1.0 - pop);
+    float present = step(0.45, fract(cell.y * 13.7));
+    return present * (1.0 - smoothstep(br * 0.4, br, cell.x)) * step(0.001, br);
+  }
+
+  float radiusAt(float s, float a, out float bub, out float pop) {
+    float foot = uFoot * pow(1.0 - smoothstep(0.0, 0.35, s), 1.6);
+    float head = uHead * exp(-pow((s - uHeadAt) / 0.17, 2.0));
+    float r = uRadius + foot + head;
+    // The top closes over in a dome.
+    r *= pow(clamp(1.0 - s, 0.0, 1.0), 0.33);
+    float n = snoise(vec3(cos(a) * uLobeScale, sin(a) * uLobeScale, s * uLobeScale * 2.2 - uFlow) + uSeed);
+    r *= 1.0 + uLobes * n;
+    bub = bubbleAt(s, a, pop);
+    r += bub * uBubbleAmp * smoothstep(0.0, 0.1, 1.0 - s);
+    return max(r, 0.0);
+  }
+
+  vec3 surface(float s, float a, out float bub, out float pop) {
+    float r = radiusAt(s, a, bub, pop);
+    float y = s * uHeight - uSink;
+    vec2 sway = vec2(snoise(vec3(s * 1.4, uTime * 0.9, uSeed)), snoise(vec3(s * 1.4 + 7.1, uTime * 0.9, uSeed))) * uSway * s;
+    return uCenter + vec3(sway.x + cos(a) * r, y, sway.y + sin(a) * r);
+  }
+
+  void main() {
+    float s = position.x;
+    float a = position.y * 6.2831853;
+    float bub, pop, b2, p2;
+    vec3 world = surface(s, a, bub, pop);
+    float e = 0.012;
+    vec3 ds = surface(min(s + e, 1.0), a, b2, p2) - surface(max(s - e, 0.0), a, b2, p2);
+    vec3 da = surface(s, a + e * 6.2831853, b2, p2) - surface(s, a - e * 6.2831853, b2, p2);
+    vec3 n = cross(ds, da);
+    if (dot(n, n) < 1e-10) n = vec3(0.0, 1.0, 0.0);
+    // Point outward: away from the column's axis, or up at the cap.
+    vec3 out_ = world - (uCenter + vec3(0.0, s * uHeight - uSink, 0.0));
+    if (dot(n, out_ + vec3(0.0, s * 0.5, 0.0)) < 0.0) n = -n;
+
+    vS = s;
+    vBubble = bub;
+    vPop = pop;
+    vNormalW = normalize(n);
+    vWorld = world;
+    vec4 mv = viewMatrix * vec4(world, 1.0);
+    vViewZ = mv.z;
+    gl_Position = projectionMatrix * mv;
+  }
+`;
+
+const GEYSER_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uFlow;
+  uniform float uFlowScale;
+  uniform float uOpacity;
+  uniform float uLight;
+  uniform float uRimGlow;
+  uniform float uVeinGlow;
+  uniform float uHot;         // white-hot throat, only while rising
+  uniform float uSpecular;
+  uniform float uPopGlow;
+  uniform float uSoftFade;
+  uniform float uSeed;
+  uniform vec3  uColorHot;
+  uniform vec3  uColorTint;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+
+  uniform vec2      uResolution;
+  uniform sampler2D uSceneDepth;
+  uniform float     uCameraNear;
+  uniform float     uCameraFar;
+  uniform vec3      uLightDir;
+  uniform float     uGlobalGlow;
+  uniform float     uShaderIntensity;
+
+  varying float vS;
+  varying float vBubble;
+  varying float vPop;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying float vViewZ;
+
+  ${noiseGLSL}
+  ${commonGLSL}
+
+  void main() {
+    vec3 N = normalize(vNormalW);
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec3 L = normalize(uLightDir);
+    float ndv = clamp(abs(dot(N, V)), 0.0, 1.0);
+    float wrap = dot(N, L) * 0.5 + 0.5;
+
+    // Murk streaming up the column.
+    vec3 q = vWorld * uFlowScale + vec3(0.0, -uFlow, uSeed);
+    float murk = fbm3(q);
+    vec3 col = mix(uColorDeep, uColorBody, smoothstep(0.35, 0.95, wrap) * smoothstep(-0.55, 0.45, murk));
+    col *= mix(0.45, 1.0, wrap) * uLight;
+
+    // Lime veins where the murk thins.
+    float vein = 1.0 - smoothstep(0.0, 0.035, abs(murk - 0.15));
+    col += uColorTint * vein * uVeinGlow * 0.5 * uShaderIntensity;
+
+    // Bubble domes are paler; a popping one flashes a ring.
+    col = mix(col, uColorBody * 1.3, vBubble * 0.5);
+    col += uColorTint * vPop * vBubble * uPopGlow;
+
+    // The rim, and the hot throat while it is still coming up.
+    float fres = pow(1.0 - ndv, 3.0);
+    col += uColorTint * fres * uRimGlow * 0.5;
+    col += uColorHot * uHot * pow(1.0 - vS, 3.0) * pow(ndv, 1.5);
+
+    vec3 H = normalize(L + V);
+    float spec = pow(max(dot(N, H), 0.0), 60.0) * uSpecular;
+    col += vec3(spec) * mix(vec3(1.0), uColorTint, 0.3);
+
+    float alpha = uOpacity;
+    vec2 screenUV = gl_FragCoord.xy / uResolution;
+    alpha *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
+    if (alpha < 0.004) discard;
+    gl_FragColor = vec4(col * uGlobalGlow, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+/** The eruption's body: lit, normal-blended bile so the deep stop reads. */
+export function createGeyserMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: true,
+    depthTest: true,
+    blending: NormalBlending,
+    side: FrontSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uHeight: { value: 0 },
+      uRadius: { value: 0.4 },
+      uFoot: { value: 0.8 },
+      uHead: { value: 0.6 },
+      uHeadAt: { value: 0.8 },
+      uLobes: { value: 0.2 },
+      uLobeScale: { value: 1.4 },
+      uFlow: { value: 0 },
+      uFlowScale: { value: 1.2 },
+      uSway: { value: 0.2 },
+      uSink: { value: 0 },
+      uBubbleAmp: { value: 0.1 },
+      uBubbleScale: { value: 3 },
+      uBubblePhase: { value: 0 },
+      uSeed: { value: 0 },
+      uOpacity: { value: 0.96 },
+      uLight: { value: 1 },
+      uRimGlow: { value: 1.5 },
+      uVeinGlow: { value: 1.5 },
+      uHot: { value: 0 },
+      uSpecular: { value: 1.2 },
+      uPopGlow: { value: 2 },
+      uSoftFade: { value: 0.15 },
+      uColorHot: { value: new Color() },
+      uColorTint: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: GEYSER_VERTEX,
+    fragmentShader: GEYSER_FRAGMENT
+  });
+
+  /**
+   * @param {object} state { center, height, radius, foot, head, headAt, sink,
+   *   hot, flow, bubblePhase, seed } — the ability resolves the phases.
+   */
+  material.userData.sync = (state) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(state.center);
+    u.uHeight.value = state.height;
+    u.uRadius.value = state.radius;
+    u.uFoot.value = state.foot;
+    u.uHead.value = state.head;
+    u.uHeadAt.value = state.headAt;
+    u.uSink.value = state.sink;
+    u.uHot.value = state.hot * c.geyserHot * g.glow;
+    u.uFlow.value = state.flow;
+    u.uBubblePhase.value = state.bubblePhase;
+    u.uSeed.value = state.seed;
+    u.uLobes.value = c.geyserLobes * g.noiseStrength;
+    u.uLobeScale.value = c.geyserLobeScale * g.noiseFrequency;
+    u.uFlowScale.value = c.geyserFlowScale * g.noiseFrequency;
+    u.uSway.value = c.geyserSway * g.turbulence;
+    u.uBubbleAmp.value = c.geyserBubbleAmp;
+    u.uBubbleScale.value = c.geyserBubbleScale;
+    u.uOpacity.value = Math.min(1, c.geyserOpacity * g.opacity);
+    u.uLight.value = c.geyserLight;
+    u.uRimGlow.value = c.geyserRimGlow * g.glow * g.fresnel;
+    u.uVeinGlow.value = c.geyserVeinGlow * g.glow;
+    u.uSpecular.value = c.geyserSpecular;
+    u.uPopGlow.value = c.geyserPopGlow * g.glow;
+    u.uSoftFade.value = c.softFade;
+    u.uColorHot.value.copy(getColor(c.colorGeyserHot));
+    u.uColorTint.value.copy(getColor(c.colorGeyserTint));
+    u.uColorBody.value.copy(getColor(c.colorGeyserBody));
+    u.uColorDeep.value.copy(getColor(c.colorGeyserDeep));
   };
   return material;
 }

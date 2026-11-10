@@ -1,12 +1,14 @@
-import { DynamicDrawUsage, InstancedMesh, Matrix4, Mesh, Quaternion, Vector3 } from 'three';
+import { DynamicDrawUsage, IcosahedronGeometry, InstancedMesh, Matrix4, Mesh, Quaternion, Vector3 } from 'three';
 import { Ability } from '../Ability.js';
-import { createPetalGeometry, createQuadGeometry } from '../../assets/codex/VoidBloomGeometry.js';
+import { createCrawlGeometry, createPetalGeometry, createQuadGeometry } from '../../assets/codex/VoidBloomGeometry.js';
 import {
   createPetalMaterial,
   createThroatMaterial,
   createVeinsMaterial,
   createSwirlMaterial,
-  createSeedMaterial
+  createSeedMaterial,
+  createVoidCoreMaterial,
+  createCrawlMaterial
 } from '../../materials/codex/VoidBloomMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -58,12 +60,21 @@ const _up = new Vector3(0, 1, 0);
  *
  * ## Layers (each a folder in the editor)
  *
- *   1. **the seed** — a billboard on an arc.
+ *   0. **the crawl** (`createCrawlMaterial`) — the travel: a dark ribbon of
+ *      void surging down the floor from the caster's feet under the seed,
+ *      violet filaments pulsing toward the circle, a glowing head, black
+ *      smoke shed from its head and the seed. It stays, feeding the bloom,
+ *      and is eaten from the caster's end after the snap.
+ *   1. **the seed** — a dark billboard with violet rays on a low arc.
  *   2. **the petals** (`createPetalMaterial`) — an `InstancedMesh` of one grid
  *      bent in the vertex stage; one uniform (`uOpen`) carries it from bud to
  *      lily to clench.
- *   3. **the throat** — a spiral disc at the heart, and its swirl on
- *      `LAYER.DISTORTION`.
+ *   3. **the throat** — a spiral disc with a wide black centre, and its
+ *      swirl on `LAYER.DISTORTION`; above it the **void core**
+ *      (`createVoidCoreMaterial`), an opaque writhing black mass in the mouth
+ *      of the bloom with only a thin violet event-horizon rim — the dark
+ *      heart that eats light. It swells while it feeds and is swallowed by
+ *      the snap.
  *   4. **the veins** — a spreading stain with inward-pulsing veins.
  *   5. **motes & smoke** — additive motes and non-additive smoke drawn in on
  *      a closing spiral (the particle swirl with negative expansion).
@@ -114,12 +125,30 @@ export class VoidBloomAbility extends Ability {
     this.seedMaterial = createSeedMaterial();
     this.seed = this._mesh(this.quadGeometry, this.seedMaterial, LAYER.VFX, 14);
 
+    this.crawlGeometry = createCrawlGeometry(180, 6);
+    this.crawlMaterial = createCrawlMaterial();
+    this.crawl = this._mesh(this.crawlGeometry, this.crawlMaterial, LAYER.VFX, 1);
+    this.coreGeometry = new IcosahedronGeometry(1, 5);
+    this.coreMaterial = createVoidCoreMaterial();
+    this.core = this._mesh(this.coreGeometry, this.coreMaterial, LAYER.VFX, 7);
+
     this._centre = new Vector3();
     this._petalState = { length: 3, open: 0, rise: 0, sink: 0, flow: 0, flare: 0 };
     this._throatState = { center: this._centre, size: 1, spin: 0, fade: 0 };
     this._veinsState = { center: this._centre, size: 5, reach: 0, flow: 0, erode: 0, seed: 0 };
     this._swirlState = { center: this._centre, size: 4, strength: 0 };
     this._seedState = { center: new Vector3(), size: 0.4, fade: 1 };
+    this._crawlState = {
+      start: new Vector3(),
+      dir: new Vector3(),
+      side: new Vector3(),
+      length: 1,
+      front: 0,
+      seed: 0,
+      flow: 0,
+      erode: 0
+    };
+    this._coreState = { center: new Vector3(), radius: 0, spin: 0, flare: 0 };
 
     this._seed = 0;
     this._yaw = 0;
@@ -249,8 +278,17 @@ export class VoidBloomAbility extends Ability {
     this._veinsState.erode = 0;
     this._swirlState.strength = 0;
     this._seedState.fade = 1;
+    this._crawlState.seed = this._seed;
+    this._crawlState.flow = 0;
+    this._crawlState.erode = 0;
+    this._crawlState.front = 0;
+    this._coreState.radius = 0;
+    this._coreState.spin = 0;
+    this._coreState.flare = 0;
 
     this.seed.visible = true;
+    this.crawl.visible = true;
+    this.core.visible = false;
     this.petalMesh.visible = false;
     this.throat.visible = false;
     this.veins.visible = false;
@@ -328,7 +366,9 @@ export class VoidBloomAbility extends Ability {
     st.size = c.seedSize * lerp(0.4, 1, saturate(this.age / 0.12));
     st.fade = 1;
     this.seedMaterial.userData.sync(st);
+    this._syncCrawl(dt, this.front, 0);
     this._syncParticles();
+    this._trailFx(dt, st.center);
     const n = Math.round(this.moteEmitter.tick(dt, c.moteRate * 0.3) * g.particleCount);
     if (n > 0) {
       this._resetEmit(frame.uTime.value);
@@ -341,6 +381,50 @@ export class VoidBloomAbility extends Ability {
       this.motes.emit(n, _emit);
     }
     this.position.copy(st.center);
+  }
+
+  /** The crawl down the cast line, up to `front` metres, eaten by `erode`. */
+  _syncCrawl(dt, front, erode) {
+    const c = settings[ID];
+    const g = settings.global;
+    const cs = this._crawlState;
+    const start = Math.max(0, c.crawlStart);
+    cs.start.copy(this.origin).addScaledVector(this.direction, start);
+    cs.dir.copy(this.direction);
+    cs.side.copy(this.side);
+    cs.length = Math.max(0.1, this.length - start - c.petalBase);
+    cs.front = front - start;
+    cs.flow += c.pulseSpeed * 1.4 * dt * g.animationSpeed;
+    cs.erode = erode;
+    this.crawlMaterial.userData.sync(cs);
+    this.crawl.visible = erode < 0.999 && cs.front > 0;
+  }
+
+  /** Black smoke and violet motes shed by the seed and the crawl's head. */
+  _trailFx(dt, seedAt) {
+    const c = settings[ID];
+    const g = settings.global;
+    const n = Math.round(this.smokeEmitter.tick(dt, c.crawlSmokeRate) * g.particleCount);
+    if (n <= 0) return;
+    this._resetEmit(frame.uTime.value);
+    _emit.size = c.smokeSize * 0.7;
+    _emit.life = c.smokeLife * 0.6;
+    _emit.speed = 0.4;
+    _emit.spread = 1;
+    _emit.spin = 0.5;
+    const head = Math.max(0, this.front - 0.4);
+    for (let i = 0; i < n; i++) {
+      if (i & 1) {
+        _emit.position = _pos.copy(seedAt);
+        _emit.radius = c.seedSize * 0.5;
+      } else {
+        this.pointAt(saturate(head / this.length), _pos);
+        _pos.addScaledVector(this.side, (Math.random() - 0.5) * c.crawlWidth).setY(0.15);
+        _emit.position = _pos;
+        _emit.radius = 0.2;
+      }
+      this.smoke.emit(1, _emit);
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -438,6 +522,24 @@ export class VoidBloomAbility extends Ability {
     ss.fade = 1 - saturate(tau / 0.15);
     this.seed.visible = ss.fade > 0.01;
     if (this.seed.visible) this.seedMaterial.userData.sync(ss);
+
+    /* the crawl stays, feeding the bloom, and is eaten after the snap */
+    const crawlErode = this._snapped ? saturate(since / Math.max(0.05, c.crawlFade)) : 0;
+    this._syncCrawl(dt, this.length + 1, crawlErode);
+
+    /* the void core: swells while it feeds, is swallowed by the snap */
+    const co = this._coreState;
+    const feed = saturate((tau - B.open) / Math.max(0.05, B.pull - B.open));
+    const opened = smoothstep(0, 1, saturate(open));
+    let coreR = c.coreSize * opened * (0.8 + 0.3 * feed);
+    if (this._snapped) coreR = c.coreSize * 1.1 * (1 - Easing.inCubic(saturate(since / Math.max(0.05, c.closeTime + 0.12))));
+    coreR *= 1 - sinkK;
+    co.radius = coreR;
+    co.spin += c.throatSpin * dt * g.animationSpeed * 2;
+    co.flare = this._snapped ? Math.exp(-since * 9) : 0;
+    co.center.copy(this._centre).setY(c.coreHeight * (0.45 + 0.55 * opened) - sinkK * L);
+    this.coreMaterial.userData.sync(co);
+    this.core.visible = t <= 1 && coreR > 0.02;
 
     /* particles */
     this._syncParticles();
@@ -685,6 +787,8 @@ export class VoidBloomAbility extends Ability {
 
   onDestroy() {
     this.seed.visible = false;
+    this.crawl.visible = false;
+    this.core.visible = false;
     this.petalMesh.visible = false;
     this.throat.visible = false;
     this.veins.visible = false;
@@ -700,6 +804,10 @@ export class VoidBloomAbility extends Ability {
     this.veinsMaterial.dispose();
     this.swirlMaterial.dispose();
     this.seedMaterial.dispose();
+    this.crawlGeometry.dispose();
+    this.crawlMaterial.dispose();
+    this.coreGeometry.dispose();
+    this.coreMaterial.dispose();
     this.petalMesh.dispose();
     super.dispose();
   }
@@ -733,6 +841,12 @@ export function buildEditor(gui, c, Editor) {
   R(seed, c, 'handHeight', 0.2, 3, 0.01, 'height (m)');
   R(seed, c, 'arcHeight', 0, 8, 0.05, 'arc (m)');
   R(seed, c, 'seedSize', 0.05, 2, 0.01, 'size (m)');
+  R(seed, c, 'crawlWidth', 0.05, 3, 0.01, 'crawl width (m)');
+  R(seed, c, 'crawlStart', 0, 3, 0.01, 'crawl starts (m from caster)');
+  R(seed, c, 'crawlMeander', 0, 2, 0.01, 'crawl meander (m)');
+  R(seed, c, 'crawlGlow', 0, 8, 0.05, 'crawl glow');
+  R(seed, c, 'crawlFade', 0.05, 3, 0.01, 'crawl eaten over (s)');
+  R(seed, c, 'crawlSmokeRate', 0, 300, 1, 'trail smoke/second');
 
   const petals = folder.addFolder('2 · Petals');
   R(petals, c, 'petals', 3, MAX_PETALS, 1, 'petals');
@@ -757,8 +871,12 @@ export function buildEditor(gui, c, Editor) {
   R(petals, c, 'edgeGlow', 0, 10, 0.05, 'rim glow');
   R(petals, c, 'petalRim', 0, 8, 0.05, 'fresnel');
   R(petals, c, 'pulseSpeed', 0, 6, 0.05, 'vein pulses/second');
-  petals.addColor(c, 'colorPetal').name('flesh');
-  petals.addColor(c, 'colorPetalDeep').name('flesh, tips');
+  R(petals, c, 'petalRampLight', 0, 1.2, 0.01, 'sunlight carries ramp');
+  R(petals, c, 'petalRimWidth', 0.01, 0.4, 0.005, 'rim width');
+  R(petals, c, 'petalSpecular', 0, 3, 0.01, 'sheen');
+  petals.addColor(c, 'colorPetal').name('deep');
+  petals.addColor(c, 'colorPetalDeep').name('deep, mottle');
+  petals.addColor(c, 'colorPetalBody').name('body (sunlit)');
   petals.addColor(c, 'colorVein').name('veins');
   petals.addColor(c, 'colorRim').name('rim');
 
@@ -769,7 +887,13 @@ export function buildEditor(gui, c, Editor) {
   R(throat, c, 'throatSpin', -4, 4, 0.01, 'spin (turns/s)');
   R(throat, c, 'throatGlow', 0, 10, 0.05, 'glow');
   R(throat, c, 'swirlStrength', 0, 4, 0.01, 'light swirl');
+  R(throat, c, 'throatHole', 0, 1, 0.01, 'black centre (× radius)');
   throat.addColor(c, 'colorThroatCore').name('core');
+  R(throat, c, 'coreSize', 0, 2.5, 0.01, 'void core radius (m)');
+  R(throat, c, 'coreHeight', 0, 4, 0.01, 'void core height (m)');
+  R(throat, c, 'coreWrithe', 0, 0.6, 0.005, 'void core writhe');
+  R(throat, c, 'coreRimGlow', 0, 8, 0.05, 'void core rim');
+  R(throat, c, 'coreRimPower', 0.5, 8, 0.05, 'void core rim tightness');
 
   const veins = folder.addFolder('4 · Floor veins');
   R(veins, c, 'groundVeinGlow', 0, 10, 0.05, 'vein glow');

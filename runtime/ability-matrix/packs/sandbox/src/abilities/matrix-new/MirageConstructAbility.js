@@ -17,9 +17,11 @@ import {
   createMiragePoolMaterial,
   createMirageShardMaterial,
   createMirageHazeMaterial,
-  createMirageShockMaterial
+  createMirageShockMaterial,
+  createMirageVeilMaterial,
+  createMirageRoadMaterial
 } from '../../materials/matrix-new/MirageConstructMaterials.js';
-import { createMirageFigureGeometry } from '../../assets/matrix-new/MirageConstructGeometry.js';
+import { createMirageFigureGeometry, createMirageVeilGeometry } from '../../assets/matrix-new/MirageConstructGeometry.js';
 import { createShardGeometry } from '../../assets/ProceduralGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -37,6 +39,8 @@ export const ID = 'mirage';
 const MAX_SHARDS = 48;
 /** Chromatic afterimages trailing the copy. */
 const AFTERIMAGES = 2;
+/** Most ribbons of heat the veil can stand; the count slider clamps to it. */
+const MAX_RIBBONS = 16;
 const TAU = Math.PI * 2;
 
 const _emit = {};
@@ -53,11 +57,17 @@ const _spin = new Quaternion();
 /**
  * MIRAGE CONSTRUCT — Illusion, zone cast.
  *
- * A stream of light runs from the caster's hand to the circle, and where it
- * lands a spectral copy of the caster *assembles from the feet up*, stands in
- * the circle breathing its own idle — out of step with you, because it is not
- * you — flickers, gathers, and bursts into shards of light that take everything
- * in the circle down with them.
+ * A strip of false water races along the floor from the caster's feet to the
+ * circle, and running on it, a pair of chromatic ghosts of the caster — the
+ * image going out ahead of the body. Where it lands a lake that is not there
+ * opens in the circle (the deep tone, with the sky mirrored in it), and out of
+ * it a spectral copy of the caster *assembles from the feet up* and **looms**
+ * to almost twice your height, hanging upside down in the lake beneath its own
+ * feet, wavering — a mirage, exactly. A ring of heat-tongues stands up round
+ * it. It breathes its own idle, out of step with you, its afterimages drifting
+ * apart; then the veil leans in over it, it gathers, and it bursts into shards
+ * of light that take everything in the circle down with them, the veil blown
+ * outward and thinning to nothing, the lake drying in from its shore.
  *
  * ## Layers
  *
@@ -67,14 +77,38 @@ const _spin = new Quaternion();
  *      fresnel rim, interference bands rolling up the body with R/B phase-split
  *      against G (the chromatic fringe), a strobe, slice tearing in the vertex
  *      stage, a noise-fronted assembly seam climbing from the feet, and the
- *      erosion that takes it apart on the burst.
+ *      erosion that takes it apart on the burst. Drawn premultiplied-over as
+ *      **dark violet glass** (`bodyCover`, `colorBodyDeep`): it covers what is
+ *      behind it, so the copy reads as *your silhouette* with a pale rim and
+ *      saturated bands — never a white blob of noise.
  *   2. **AFTERIMAGES** — two more draws of the same skinned meshes (sharing the
  *      clone's skeleton, so they cost no extra animation), offset either side
  *      across the view and drifting behind it, tinted magenta and cyan: the
  *      copy is never quite in register with itself.
- *   3. **THE MIRAGE POOL** (`createMiragePoolMaterial`) — iridescent rings of
- *      interference running outward across the floor, bent by a heat shimmer,
- *      flaring on the burst.
+ *   2b. **THE REFLECTION** (`createMirageBodyMaterial('mirror')`) — a third
+ *      draw of the same skinned meshes, flipped through the floor in the
+ *      vertex stage with a sideways ripple, drawn without the depth test,
+ *      fading with depth: the copy upside down in water that is not there.
+ *      It is clipped where the *eye ray crosses the water* (so the image sits
+ *      on the lake instead of spilling toward the camera) and hidden by
+ *      anything standing in front of the water (scene depth), and it carries
+ *      the same dark glass, so the lake holds a readable inverted figure.
+ *   3. **THE FALSE LAKE** (`createMiragePoolMaterial`) — a filled disc of the
+ *      deep tone (normal blending, so it darkens the floor) mirroring the sky
+ *      probe through a heat-bent normal, iridescent ripples running outward,
+ *      a ragged bright shore; dries from the shore inward on the way out. The
+ *      ripples are broken into wavelets by a slow noise so it reads as water,
+ *      not a target of rings.
+ *   3b. **THE ROAD** (`createMirageRoadMaterial`) — the travel: the same false
+ *      water laid along the line up to the projection's front, widening toward
+ *      the circle, a hot seam at its leading edge; it dries from the caster's
+ *      end once the copy stands.
+ *   3c. **THE HEAT VEIL** (`createMirageVeilGeometry` + `createMirageVeilMaterial`)
+ *      — the authored hero shape: a ring of tall tongues of shimmer seated at
+ *      `veilSeat × zoneRadius`, placed, swayed and tapered in the vertex stage;
+ *      pulled in over the copy by the charge, blown out and thinned by the burst.
+ *      Each tongue smokes out to deep violet at its tip and edges, and that
+ *      smoke covers the sky (premultiplied) — the cast's deep stop.
  *   4. **HEAT HAZE** (LAYER.DISTORTION) — a column of air rising off the copy
  *      while it stands; the burst's double-fronted shock ring after.
  *   5. **MOTES** — curling specks drifting up off the body while it stands,
@@ -128,6 +162,7 @@ export class MirageConstructAbility extends Ability {
     this.bodyMaterial = createMirageBodyMaterial(false);
     this.afterMaterials = [];
     for (let i = 0; i < AFTERIMAGES; i++) this.afterMaterials.push(createMirageBodyMaterial(true));
+    this.mirrorMaterial = createMirageBodyMaterial('mirror');
 
     /** Holds whichever body is built; placed at the circle each frame. */
     this.copyRoot = new Group();
@@ -142,6 +177,8 @@ export class MirageConstructAbility extends Ability {
     this.idleAction = null;
     /** The afterimage draws, one list per afterimage. */
     this.afterMeshes = [[], []];
+    /** The reflection draws. */
+    this.mirrorMeshes = [];
     /** The procedural stand-in, only built if the clone cannot be. */
     this.figure = null;
     this.figureGeometry = null;
@@ -159,6 +196,30 @@ export class MirageConstructAbility extends Ability {
     this.pool.frustumCulled = false;
     this.pool.visible = false;
     this.group.add(this.pool);
+
+    /* ---- layer 3b: the road ---- */
+    this.roadGeometry = new PlaneGeometry(1, 1, 48, 1);
+    this.roadMaterial = createMirageRoadMaterial();
+    this.road = new Mesh(this.roadGeometry, this.roadMaterial);
+    this.road.name = 'MirageRoad';
+    this.road.layers.set(LAYER.VFX);
+    this.road.renderOrder = 3;
+    this.road.frustumCulled = false;
+    this.road.visible = false;
+    this.group.add(this.road);
+    this._roadState = { start: new Vector3(), dir: new Vector3(), side: new Vector3(), length: 1, front: 0, dry: 0, fade: 1, seed: 0 };
+
+    /* ---- layer 3c: the heat veil ---- */
+    this.veilGeometry = createMirageVeilGeometry(MAX_RIBBONS, 24, 4);
+    this.veilMaterial = createMirageVeilMaterial();
+    this.veil = new Mesh(this.veilGeometry, this.veilMaterial);
+    this.veil.name = 'MirageVeil';
+    this.veil.layers.set(LAYER.VFX);
+    this.veil.renderOrder = 9;
+    this.veil.frustumCulled = false;
+    this.veil.visible = false;
+    this.group.add(this.veil);
+    this._veilState = { centre: new Vector3(), rise: 0, pull: 0, blow: 0, fade: 1, seed: 0 };
 
     /* ---- layer 4: haze & shock ---- */
     this.warpGeometry = new PlaneGeometry(1, 1, 1, 1);
@@ -203,8 +264,8 @@ export class MirageConstructAbility extends Ability {
     this._found = [];
     this._force = { impulse: 0, lift: 0, spin: 0 };
 
-    this._bodyState = { root: new Vector3(), offset: new Vector3(), form: 0, breakup: 0, charge: 0, seed: 0, tint: null, opacity: 1 };
-    this._poolState = { quadSize: 6, radius: 0, fade: 1, flare: 0, seed: 0 };
+    this._bodyState = { root: new Vector3(), offset: new Vector3(), form: 0, breakup: 0, charge: 0, seed: 0, tint: null, opacity: 1, poolR: 0 };
+    this._poolState = { quadSize: 6, radius: 0, fade: 1, flare: 0, seed: 0, evap: 0 };
     this._hazeState = { strength: 0, seed: 0 };
     this._shockState = { strength: 0, front: 0, seed: 0 };
   }
@@ -260,6 +321,14 @@ export class MirageConstructAbility extends Ability {
         node.parent.add(twin);
         afterLists[a].push(twin);
       }
+      // The reflection: one more draw on the same skeleton, flipped in the shader.
+      const mirror = node.clone(false);
+      mirror.material = this._ghostSlot(node.material, this.mirrorMaterial);
+      mirror.layers.set(LAYER.VFX);
+      mirror.renderOrder = 6;
+      mirror.frustumCulled = false;
+      node.parent.add(mirror);
+      this.mirrorMeshes.push(mirror);
     }
 
     this.copyRoot.add(clone);
@@ -294,6 +363,10 @@ export class MirageConstructAbility extends Ability {
       this.figure.add(twin);
       this.afterMeshes[a].push(twin);
     }
+    const mirror = new Mesh(this.figureGeometry, this.mirrorMaterial);
+    mirror.renderOrder = 6;
+    this.figure.add(mirror);
+    this.mirrorMeshes.push(mirror);
     this.figure.traverse((node) => {
       node.layers.set(LAYER.VFX);
       node.frustumCulled = false;
@@ -409,7 +482,10 @@ export class MirageConstructAbility extends Ability {
     }
 
     this.copyRoot.visible = false;
+    this.copyRoot.scale.setScalar(1);
     this.shards.count = 0;
+    this.road.visible = false;
+    this.veil.visible = false;
     this._sync();
   }
 
@@ -443,12 +519,26 @@ export class MirageConstructAbility extends Ability {
     this.sparks.uniforms.uTurbulence.value = 0.2 * g.turbulence;
   }
 
+  /** How much bigger than the caster the copy stands right now. */
+  _scale() {
+    const c = settings.mirage;
+    if (this._stand < 0) return 1;
+    const loom = Easing.outCubic(saturate(this._stand / Math.max(0.02, c.loomTime)));
+    const breath = 1 + c.loomBreath * Math.sin(this._stand * c.loomRate * TAU) * loom;
+    return lerp(1, Math.max(0.1, c.copyScale), loom) * breath;
+  }
+
+  /** The copy's height in metres right now. */
+  _height() {
+    return settings.mirage.bodyHeight * this._scale();
+  }
+
   /** How far up the assembly front has climbed, metres (past the head when whole). */
   _form() {
     const c = settings.mirage;
     if (this._stand < 0) return 0;
     const t = saturate(this._stand / Math.max(0.02, c.formTime));
-    return Easing.outCubic(t) * (c.bodyHeight + c.formNoise + c.formEdge * 4 + 0.2);
+    return Easing.outCubic(t) * (this._height() + c.formNoise + c.formEdge * 4 + 0.2);
   }
 
   /** 0..1 gather before the burst. */
@@ -465,21 +555,30 @@ export class MirageConstructAbility extends Ability {
     return saturate(this._burst / Math.max(0.01, settings.mirage.burstTime));
   }
 
-  /** The copy, its afterimages, its mixer. */
+  /** The copy, its afterimages, its reflection, its mixer. */
   _updateCopy(dt) {
     const c = settings.mirage;
     const g = settings.global;
-    const standing = this._stand >= 0;
+    const travelling = this._stand < 0;
     const breakup = this._breakup();
-    const visible = standing && breakup < 1;
+    // In flight only the ghosts run (the body has not assembled yet).
+    const ghost = travelling && c.travelGhost > 0.001 && this.phase === AbilityPhase.TRAVEL;
+    const visible = ghost || (!travelling && breakup < 1);
     this.copyRoot.visible = visible;
     if (!visible) return;
 
-    this._feetPoint(_feet);
+    const scale = this._scale();
+    if (travelling) {
+      _feet.copy(this.position).setY(0);
+      this.copyRoot.rotation.set(0, Math.atan2(this.direction.x, this.direction.z) - this._forwardYaw, 0);
+    } else {
+      this._feetPoint(_feet);
+      this.copyRoot.rotation.set(0, this._yaw - this._forwardYaw, 0);
+    }
     this.copyRoot.position.copy(_feet);
-    this.copyRoot.rotation.set(0, this._yaw - this._forwardYaw, 0);
     // The figure is authored at 1.78 m; the clone is already the caster's size.
-    if (!this.clone && this.figure) this.figure.scale.setScalar(c.bodyHeight / 1.78);
+    const base = !this.clone && this.figure ? c.bodyHeight / 1.78 : 1;
+    this.copyRoot.scale.setScalar(base * scale);
     this.copyRoot.updateMatrixWorld(true);
 
     if (this.mixer) this.mixer.update(dt * c.idleSpeed * g.animationSpeed);
@@ -488,13 +587,19 @@ export class MirageConstructAbility extends Ability {
     const state = this._bodyState;
     state.root.copy(_feet);
     state.offset.set(0, 0, 0);
-    state.form = this._form();
+    state.form = travelling ? 0 : this._form();
     state.breakup = breakup;
     state.charge = charge;
     state.seed = this._seed;
     state.tint = null;
     state.opacity = 1;
+    state.poolR = this._poolState.radius;
     this.bodyMaterial.userData.sync(state);
+
+    /* --- the reflection, in the lake under its feet --- */
+    const mirrorOn = !travelling && this._poolState.radius > 0.05 && c.reflectStrength > 0;
+    for (let m = 0; m < this.mirrorMeshes.length; m++) this.mirrorMeshes[m].visible = mirrorOn;
+    if (mirrorOn) this.mirrorMaterial.userData.sync(state);
 
     /* --- the afterimages: either side across the view, a little behind --- */
     const cam = this.ctx.camera.position;
@@ -505,20 +610,72 @@ export class MirageConstructAbility extends Ability {
     _right.set(_right.z, 0, -_right.x); // up × toCamera
     const count = Math.min(AFTERIMAGES, Math.max(0, Math.round(c.afterCount)));
     const time = frame.uTime.value;
+    const form = state.form;
     for (let a = 0; a < AFTERIMAGES; a++) {
-      const on = a < count;
+      const on = travelling ? true : a < count;
       const meshes = this.afterMeshes[a];
       for (let m = 0; m < meshes.length; m++) meshes[m].visible = on;
       if (!on) continue;
       const side = a === 0 ? -1 : 1;
-      const sway = Math.sin(time * c.afterWobbleRate * TAU + a * 2.1 + this._seed) * c.afterWobble;
-      // They split wider as it charges: the illusion losing its hold.
-      const split = (c.afterSplit * (1 + charge * 2) + sway) * side;
-      state.offset.copy(_right).multiplyScalar(split).addScaledVector(_back, c.afterLag);
+      if (travelling) {
+        // Running down the road: the image strung out behind the front.
+        state.offset.copy(this.direction).multiplyScalar(-c.travelTrail * (a + 1));
+        state.offset.addScaledVector(_right, side * c.afterSplit * 2);
+        state.form = 99;
+        state.opacity = c.travelGhost;
+      } else {
+        const sway = Math.sin(time * c.afterWobbleRate * TAU + a * 2.1 + this._seed) * c.afterWobble;
+        // They drift apart as it stands and split wide as it charges: the
+        // illusion losing its hold on itself.
+        const drift = 1 + c.afterDrift * saturate(this._stand / Math.max(0.1, this.impactDuration));
+        const split = (c.afterSplit * drift * (1 + charge * 2) + sway) * side * scale;
+        state.offset.copy(_right).multiplyScalar(split).addScaledVector(_back, c.afterLag * scale);
+        state.form = form;
+        state.opacity = c.afterOpacity;
+      }
       state.tint = a === 0 ? 'colorAfterA' : 'colorAfterB';
-      state.opacity = c.afterOpacity;
       this.afterMaterials[a].userData.sync(state);
     }
+  }
+
+  /** The road the mirage comes down. */
+  _updateRoad() {
+    const c = settings.mirage;
+    const st = this._roadState;
+    st.start.copy(this.origin).setY(0);
+    st.dir.copy(this.direction).setY(0);
+    if (st.dir.lengthSq() < 1e-6) st.dir.set(0, 0, 1);
+    st.dir.normalize();
+    st.side.set(st.dir.z, 0, -st.dir.x);
+    st.length = this.length;
+    st.front = this._stand < 0 ? this.front : this.length + 1;
+    st.dry = this._stand < 0 ? 0 : this.length * Easing.inOutQuad(saturate(this._stand / Math.max(0.05, c.roadDryTime)));
+    st.fade = this.phase === AbilityPhase.FADE ? 1 - saturate(this.fadeTime / this.fadeDuration) : 1;
+    st.seed = this._seed;
+    this.roadMaterial.userData.sync(st);
+    this.road.visible = c.roadOpacity > 0 && st.dry < st.length - 0.05 && st.fade > 0.003 && this.length > 0.2;
+  }
+
+  /** The ring of heat round the copy. */
+  _updateVeil() {
+    const c = settings.mirage;
+    const st = this._veilState;
+    if (this._stand < 0 || c.veilCount < 1) {
+      this.veil.visible = false;
+      return;
+    }
+    this._feetPoint(st.centre);
+    st.rise = Easing.outCubic(saturate((this._stand - c.veilDelay) / Math.max(0.02, c.veilRiseTime)));
+    st.pull = this._charge() * c.veilPull;
+    const blown = this._burst < 0 ? 0 : saturate(this._burst / Math.max(0.02, c.veilBlowTime));
+    st.blow = Easing.outCubic(blown);
+    st.fade = 1 - Easing.inQuad(blown);
+    st.seed = this._seed;
+    this.veilMaterial.userData.sync(st);
+    this.veil.visible = st.rise > 0.002 && st.fade > 0.003;
+    // Only the ribbons asked for are drawn: the geometry holds MAX_RIBBONS.
+    const per = this.veilGeometry.index.count / MAX_RIBBONS;
+    this.veilGeometry.setDrawRange(0, per * Math.min(MAX_RIBBONS, Math.max(1, Math.round(c.veilCount))));
   }
 
   _updatePool() {
@@ -526,10 +683,13 @@ export class MirageConstructAbility extends Ability {
     const state = this._poolState;
     const poolR = this.radius * c.poolRadius;
     const grow = this._stand < 0 ? 0 : Easing.outCubic(saturate(this._stand / Math.max(0.02, c.poolGrowTime)));
-    const fade = this.phase === AbilityPhase.FADE ? 1 - Easing.inQuad(saturate(this.fadeTime / this.fadeDuration)) : 1;
+    const out = this.phase === AbilityPhase.FADE ? saturate(this.fadeTime / this.fadeDuration) : 0;
+    const fade = 1 - Easing.inQuad(saturate((out - 0.55) / 0.45));
     state.quadSize = (poolR * 1.25 + 0.4) * 2;
     state.radius = poolR * grow;
     state.fade = fade;
+    // The lake dries in from its shore after the burst.
+    state.evap = Easing.inOutQuad(out);
     state.flare = this._poolFlare * c.poolFlare + this._charge() * 0.6;
     state.seed = this._seed;
     this.poolMaterial.userData.sync(state);
@@ -542,7 +702,7 @@ export class MirageConstructAbility extends Ability {
   _updateWarp() {
     const c = settings.mirage;
     /* haze over the standing copy */
-    const presence = this._stand < 0 ? 0 : saturate(this._form() / Math.max(0.1, c.bodyHeight)) * (1 - this._breakup());
+    const presence = this._stand < 0 ? 0 : saturate(this._form() / Math.max(0.1, this._height())) * (1 - this._breakup());
     this._hazeState.strength = presence * (1 + this._charge());
     this._hazeState.seed = this._seed;
     this.hazeMaterial.userData.sync(this._hazeState);
@@ -560,7 +720,7 @@ export class MirageConstructAbility extends Ability {
     this._shockState.seed = this._seed;
     this.shockMaterial.userData.sync(this._shockState);
     this._feetPoint(this.shock.position);
-    this.shock.position.y = c.bodyHeight * 0.5;
+    this.shock.position.y = this._height() * 0.5;
     this.shock.visible = t < 1;
   }
 
@@ -575,6 +735,8 @@ export class MirageConstructAbility extends Ability {
     const count = Math.min(MAX_SHARDS, Math.max(0, Math.round(c.shardCount)));
     const fade = this.shardFade.array;
     const k = Math.max(0, c.shardDrag);
+    const H = this._height();
+    const scale = this._scale();
     this._feetPoint(_feet);
     let any = false;
 
@@ -596,7 +758,7 @@ export class MirageConstructAbility extends Ability {
       // Start: on the body's surface at its dice height.
       const cx = Math.cos(dice.bearing);
       const cz = Math.sin(dice.bearing);
-      _pos.set(_feet.x + cx * 0.18, dice.height * c.bodyHeight * 0.95 + 0.05, _feet.z + cz * 0.18);
+      _pos.set(_feet.x + cx * 0.18 * scale, dice.height * H * 0.95 + 0.05, _feet.z + cz * 0.18 * scale);
 
       // Launch: out from the body, biased up, jittered.
       _dir.set(cx, c.shardLift + dice.lift * 0.35 * g.randomness, cz).normalize();
@@ -623,7 +785,7 @@ export class MirageConstructAbility extends Ability {
       const age = t / life;
       const size = dice.size * (1 - 0.5 * age);
       _node.position.copy(_pos);
-      _node.scale.set(c.shardWidth * size, c.shardLength * size, c.shardWidth * size);
+      _node.scale.set(c.shardWidth * size * scale, c.shardLength * size * scale, c.shardWidth * size * scale);
       _node.updateMatrix();
       this.shards.setMatrixAt(i, _node.matrix);
       fade[i] = 1 - Easing.inQuad(age);
@@ -676,15 +838,16 @@ export class MirageConstructAbility extends Ability {
   _standFx(dt) {
     const c = settings.mirage;
     const g = settings.global;
-    const presence = this.copyRoot.visible ? saturate(this._form() / Math.max(0.1, c.bodyHeight)) : 0;
+    const H = this._height();
+    const presence = this.copyRoot.visible && this._stand >= 0 ? saturate(this._form() / Math.max(0.1, H)) : 0;
     const n = this.moteEmitter.tick(dt, c.moteRate * presence * (1 + this._charge() * 2) * g.particleCount);
     if (n <= 0) return;
     this._feetPoint(_feet);
     this._resetEmit(frame.uTime.value);
     for (let i = 0; i < n; i++) {
       const a = Math.random() * TAU;
-      const r = Math.sqrt(Math.random()) * c.moteRadius;
-      _pos.set(_feet.x + Math.cos(a) * r, Math.random() * c.bodyHeight, _feet.z + Math.sin(a) * r);
+      const r = Math.sqrt(Math.random()) * c.moteRadius * this._scale();
+      _pos.set(_feet.x + Math.cos(a) * r, Math.random() * H, _feet.z + Math.sin(a) * r);
       _emit.position = _pos;
       _emit.radius = 0.05;
       _emit.direction = _up;
@@ -730,7 +893,7 @@ export class MirageConstructAbility extends Ability {
     const time = frame.uTime.value;
     this._feetPoint(_feet);
 
-    _pos.copy(_feet).setY(c.bodyHeight * 0.55);
+    _pos.copy(_feet).setY(this._height() * 0.55);
     this.ctx.bursts.spawn(BurstMode.AIR, _pos, {
       radius: 0.3,
       endRadius: c.burstRadius * power,
@@ -811,9 +974,12 @@ export class MirageConstructAbility extends Ability {
   onTravel(dt) {
     const c = settings.mirage;
     this._sync();
+    this._updateCopy(dt);
     this.position.y = c.projectHeight;
     this._travelFx(dt);
+    this._updateRoad();
     this._updatePool();
+    this._updateVeil();
     this._updateWarp();
   }
 
@@ -840,15 +1006,17 @@ export class MirageConstructAbility extends Ability {
     }
 
     this._sync();
-    this._updateCopy(dt);
     this._updatePool();
+    this._updateCopy(dt);
+    this._updateRoad();
+    this._updateVeil();
     this._updateWarp();
     this._updateShards();
     if (this._burst < 0) this._standFx(dt);
 
     // The light sits in the copy's chest.
     this._feetPoint(this.position);
-    this.position.y = c.lightHeight;
+    this.position.y = c.lightHeight * this._scale();
   }
 
   onDestroy() {
@@ -856,6 +1024,8 @@ export class MirageConstructAbility extends Ability {
     // The mixer stops with the copy; `onSpawn` resets and replays it.
     this.mixer?.stopAllAction();
     this.pool.visible = false;
+    this.road.visible = false;
+    this.veil.visible = false;
     this.haze.visible = false;
     this.shock.visible = false;
     this.shards.count = 0;
@@ -876,6 +1046,11 @@ export class MirageConstructAbility extends Ability {
     this.figureGeometry?.dispose();
     this.bodyMaterial.dispose();
     for (const material of this.afterMaterials) material.dispose();
+    this.mirrorMaterial.dispose();
+    this.roadGeometry.dispose();
+    this.roadMaterial.dispose();
+    this.veilGeometry.dispose();
+    this.veilMaterial.dispose();
     this.groundGeometry.dispose();
     this.poolMaterial.dispose();
     this.warpGeometry.dispose();
@@ -911,9 +1086,22 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'projectRate', 0, 800, 1, 'projection motes / s');
   R(cast, c, 'projectSize', 0.01, 0.4, 0.005, 'projection mote size');
   R(cast, c, 'projectSpread', 0, 1.5, 0.01, 'projection fray (m)');
+  R(cast, c, 'travelGhost', 0, 1.5, 0.01, 'running ghosts');
+  R(cast, c, 'travelTrail', 0, 3, 0.01, 'ghosts strung out (m)');
+
+  const road = folder.addFolder('0 · The road');
+  R(road, c, 'roadWidthNear', 0, 4, 0.01, 'width at the hand (m)');
+  R(road, c, 'roadWidthFar', 0, 6, 0.01, 'width at the circle (m)');
+  R(road, c, 'roadOpacity', 0, 1, 0.01, 'opacity');
+  R(road, c, 'roadSeam', 0, 8, 0.05, 'leading seam');
+  R(road, c, 'roadDryTime', 0.05, 6, 0.05, 'dries over (s)');
 
   const body = folder.addFolder('1 · The copy');
   R(body, c, 'bodyHeight', 0.5, 3, 0.01, 'height (m)');
+  R(body, c, 'copyScale', 0.3, 4, 0.01, 'looms to (× caster)');
+  R(body, c, 'loomTime', 0.02, 3, 0.01, 'looms over (s)');
+  R(body, c, 'loomBreath', 0, 0.2, 0.001, 'breath (× size)');
+  R(body, c, 'loomRate', 0, 3, 0.01, 'breaths / s');
   body.add(c, 'faceCaster').name('face the caster');
   R(body, c, 'idleOffset', 0, 4, 0.01, 'idle offset (s)');
   R(body, c, 'idleSpeed', 0, 3, 0.01, 'idle speed');
@@ -937,9 +1125,11 @@ export function buildEditor(gui, c, Editor) {
   R(body, c, 'glitchSlices', 1, 80, 1, 'slices');
   R(body, c, 'bodyGlow', 0, 10, 0.05, 'glow');
   R(body, c, 'bodyOpacity', 0, 1, 0.01, 'opacity');
+  R(body, c, 'bodyCover', 0, 1, 0.01, 'dark glass cover (silhouette)');
   body.addColor(c, 'colorBodyRim').name('rim');
   body.addColor(c, 'colorBodyBand').name('bands');
   body.addColor(c, 'colorBodyEdge').name('seam');
+  body.addColor(c, 'colorBodyDeep').name('dark glass');
   R(body, c, 'chargeTime', 0.05, 3, 0.01, 'charge over (s)');
   R(body, c, 'chargeGlow', 0, 8, 0.05, 'charge glow');
   R(body, c, 'chargeGlitch', 0, 0.5, 0.005, 'charge tearing (m)');
@@ -952,6 +1142,7 @@ export function buildEditor(gui, c, Editor) {
   R(after, c, 'afterWobble', 0, 0.4, 0.005, 'sway (m)');
   R(after, c, 'afterWobbleRate', 0, 6, 0.05, 'sway rate');
   R(after, c, 'afterOpacity', 0, 1, 0.01, 'opacity');
+  R(after, c, 'afterDrift', 0, 6, 0.01, 'drift apart (× split)');
   after.addColor(c, 'colorAfterA').name('left fringe');
   after.addColor(c, 'colorAfterB').name('right fringe');
 
@@ -971,6 +1162,38 @@ export function buildEditor(gui, c, Editor) {
   pool.addColor(c, 'colorPoolA').name('rings');
   pool.addColor(c, 'colorPoolB').name('body');
   pool.addColor(c, 'colorPoolC').name('film');
+  pool.addColor(c, 'colorPoolDeep').name('deep');
+  R(pool, c, 'poolSky', 0, 3, 0.01, 'sky mirrored');
+
+  const refl = folder.addFolder('3b · Reflection');
+  R(refl, c, 'reflectStrength', 0, 2, 0.01, 'strength');
+  R(refl, c, 'reflectCover', 0, 1, 0.01, 'dark glass in the water');
+  R(refl, c, 'reflectFade', 0.05, 5, 0.01, 'fades over depth (m)');
+  R(refl, c, 'reflectRipple', 0, 0.5, 0.005, 'ripple (m)');
+  R(refl, c, 'reflectRippleFreq', 0, 6, 0.01, 'ripples / m');
+  R(refl, c, 'reflectRippleSpeed', 0, 12, 0.05, 'ripple speed');
+  refl.addColor(c, 'colorReflect').name('tint');
+
+  const veil = folder.addFolder('3c · Heat veil');
+  R(veil, c, 'veilCount', 0, MAX_RIBBONS, 1, 'ribbons');
+  R(veil, c, 'veilSeat', 0.1, 1.5, 0.01, 'seat (× zone)');
+  R(veil, c, 'veilHeight', 0.2, 8, 0.05, 'height (m)');
+  R(veil, c, 'veilWidth', 0.05, 4, 0.01, 'width (m)');
+  R(veil, c, 'veilSway', 0, 1.5, 0.01, 'sway (m)');
+  R(veil, c, 'veilSwayFreq', 0, 4, 0.01, 'sway waves');
+  R(veil, c, 'veilSwaySpeed', 0, 12, 0.05, 'sway speed');
+  R(veil, c, 'veilSpin', -2, 2, 0.01, 'turn (rad/s)');
+  R(veil, c, 'veilPull', 0, 1.2, 0.01, 'leans in on the charge');
+  R(veil, c, 'veilDelay', 0, 2, 0.01, 'stands up after (s)');
+  R(veil, c, 'veilRiseTime', 0.02, 3, 0.01, 'stands up over (s)');
+  R(veil, c, 'veilBlowTime', 0.02, 3, 0.01, 'blown out over (s)');
+  R(veil, c, 'veilGlow', 0, 6, 0.05, 'glow');
+  R(veil, c, 'veilOpacity', 0, 1, 0.01, 'opacity');
+  R(veil, c, 'veilBands', 0, 30, 0.1, 'bands');
+  R(veil, c, 'veilCover', 0, 1, 0.01, 'smoke cover (deep)');
+  veil.addColor(c, 'colorVeil').name('body');
+  veil.addColor(c, 'colorVeilTint').name('bands');
+  veil.addColor(c, 'colorVeilDeep').name('deep smoke');
 
   const haze = folder.addFolder('4 · Heat haze & shock');
   R(haze, c, 'hazeStrength', 0, 2, 0.01, 'haze strength');

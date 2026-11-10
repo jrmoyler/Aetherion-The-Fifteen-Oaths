@@ -11,6 +11,7 @@ import { Ability } from '../Ability.js';
 import { createAetherbladeGeometry } from '../../assets/matrix-new/AetherbladeCascadeGeometry.js';
 import {
   createAetherCircleMaterial,
+  createAetherCoreMaterial,
   createAetherSwordMaterial
 } from '../../materials/matrix-new/AetherbladeCascadeMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -21,7 +22,7 @@ import { LAYER } from '../../core/Layers.js';
 import { frame } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
 import { getColor } from '../../utils/color.js';
-import { saturate, lerp, Easing, randRange } from '../../utils/math.js';
+import { saturate, lerp, smoothstep, Easing, randRange } from '../../utils/math.js';
 
 export const ID = 'aetherblade';
 
@@ -60,7 +61,7 @@ const _flat = new Quaternion();
  * weight. The swords stand embedded for `lifetime`, then shatter caster-first
  * into glints.
  *
- * Six layers, each a folder in the editor:
+ * Eight layers, each a folder in the editor:
  *
  *   1. **the swords** — one InstancedMesh (`createAetherbladeGeometry`): a
  *      faceted diamond blade, swept crossguard, octagonal grip and pommel,
@@ -81,6 +82,17 @@ const _flat = new Quaternion();
  *      the point are struck (`handlesOwnHits`, `dummy.kill`).
  *   5. **the final blade** — the same, scaled, with a flash and a big shake.
  *   6. **the shatter** — cracks light, cells drop out, glints fall.
+ *   7. **the blade core** — the same swords drawn again underneath the glass,
+ *      lit and normal-blended (`createAetherCoreMaterial`): indigo deep,
+ *      cobalt body, ice rim, white runes. This is what carries the mass at
+ *      8 m — the glass alone reads as a white needle.
+ *   8. **the brand and the linger** — each landing burns a dark indigo
+ *      SCORCH into the floor under its circle that stays for the cast. While
+ *      the blades stand they *settle*: they sink a little further, their runes
+ *      breathe, aether wisps curl up off them, and the circles draw in toward
+ *      the blade. In the last `crackLead` seconds the cracks light up the
+ *      blades (the exit telegraphed), then they shatter caster-first and their
+ *      circles flare outward and go.
  *
  * ## The editor rule
  *
@@ -123,6 +135,17 @@ export class AetherbladeCascadeAbility extends Ability {
     this.swords.count = 0;
     this.group.add(this.swords);
 
+    /* ---- layer 7: the lit core under the glass, same instances ---- */
+    this.coreMaterial = createAetherCoreMaterial();
+    this.cores = new InstancedMesh(this.swords.geometry, this.coreMaterial, SLOTS);
+    this.cores.name = 'AetherCores';
+    this.cores.instanceMatrix = this.swords.instanceMatrix; // one matrix buffer, two draws
+    this.cores.layers.set(LAYER.VFX);
+    this.cores.frustumCulled = false;
+    this.cores.renderOrder = 12;
+    this.cores.count = 0;
+    this.group.add(this.cores);
+
     /* ---- layer 2: the rune circles ---- */
     this.circleGeometry = new PlaneGeometry(1, 1, 1, 1);
     this._runeAttr = new InstancedBufferAttribute(new Float32Array(SLOTS * 4), 4).setUsage(DynamicDrawUsage);
@@ -161,6 +184,7 @@ export class AetherbladeCascadeAbility extends Ability {
     this._forming = 0;
     this._found = [];
     this._force = { impulse: 0, lift: 0, spin: 0 };
+    this._preCrack = 0;
   }
 
   /** The sword silhouette from the live shape settings, with the state attribute. */
@@ -186,6 +210,7 @@ export class AetherbladeCascadeAbility extends Ability {
     if (first) return; // built in the constructor from the same values
     const old = this.swords.geometry;
     this.swords.geometry = this._buildSword();
+    this.cores.geometry = this.swords.geometry;
     old.dispose();
   }
 
@@ -233,8 +258,25 @@ export class AetherbladeCascadeAbility extends Ability {
     this.glints.uniforms.uEndSize.value = 0.2;
     this.glints.uniforms.uDrag.value = 1.1;
 
+    // Aether wisps curling up off the standing blades (the linger's motion).
+    this.wisps = particles.get('aetherblade.wisps', {
+      capacity: 1600,
+      shape: ParticleShape.SOFT,
+      additive: true,
+      curl: true,
+      softFade: 0.3
+    });
+    this.wisps.uniforms.uSizeIn.value = 0.15;
+    this.wisps.uniforms.uFadeIn.value = 0.2;
+    this.wisps.uniforms.uFadeOut.value = 0.5;
+    this.wisps.uniforms.uEndSize.value = 1.6;
+    this.wisps.uniforms.uDrag.value = 0.8;
+    this.wisps.uniforms.uTurbFrequency.value = 0.9;
+    this.wisps.uniforms.uTurbSpeed.value = 0.7;
+
     this.moteEmitter = new RateEmitter();
     this.trailEmitter = new RateEmitter();
+    this.wispEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -349,11 +391,12 @@ export class AetherbladeCascadeAbility extends Ability {
       lean = lerp(hoverLean, c.landTilt * Math.sign(hoverLean || 1), Easing.inQuad(k));
       dist = lerp(hoverDist + c.windup, -c.embedDepth * L, k * k);
     } else {
-      // Embedded, quivering.
+      // Embedded, quivering, then settling slowly deeper while it stands.
       const s = t - tLand;
       const shudder = c.landShudder * Math.exp(-s * 6 / Math.max(0.05, c.shudderTime)) * Math.sin(s * 55);
       lean = c.landTilt * Math.sign(hoverLean || 1) + shudder;
-      dist = -c.embedDepth * L;
+      const settle = 1 - Math.exp(-s / Math.max(0.05, c.lingerSinkTime * g.lifetime));
+      dist = -(c.embedDepth + c.lingerSink * settle) * L;
     }
 
     // Lean about the lateral axis: the pommel tips back toward the caster and
@@ -378,6 +421,8 @@ export class AetherbladeCascadeAbility extends Ability {
   onSpawn() {
     this.moteEmitter.reset();
     this.trailEmitter.reset();
+    this.wispEmitter.reset();
+    this._preCrack = 0;
     this._clock = 0;
     this._circleSpin = Math.random() * TAU;
     this._seed = Math.random() * 100;
@@ -402,6 +447,7 @@ export class AetherbladeCascadeAbility extends Ability {
     this.blades[FINAL].size = 0;
 
     this.swords.count = 0;
+    this.cores.count = 0;
     this.circles.count = 0;
     this._sync(0);
   }
@@ -435,6 +481,15 @@ export class AetherbladeCascadeAbility extends Ability {
     this._clock += dt;
     this._call(this.length + 1e3);
 
+    // The exit telegraphed: cracks light up the standing blades over the last
+    // `crackLead` seconds before they shatter. Presentation only.
+    if (t <= 1) {
+      const lead = Math.max(0.05, c.crackLead * g.lifetime) / Math.max(0.1, this.impactDuration);
+      this._preCrack = c.crackPre * smoothstep(1 - lead, 1, t);
+    } else {
+      this._preCrack = c.crackPre;
+    }
+
     if (t > 1) {
       // Shatter caster-first; the final blade goes last.
       const elapsed = this.fadeTime;
@@ -460,6 +515,7 @@ export class AetherbladeCascadeAbility extends Ability {
     this._syncGeometry();
     this._circleSpin += c.circleSpin * dt * g.animationSpeed;
     this.swordMaterial.userData.sync();
+    this.coreMaterial.userData.sync();
     this.circleMaterial.userData.sync(this._circleSpin);
     this._syncParticles();
 
@@ -492,14 +548,19 @@ export class AetherbladeCascadeAbility extends Ability {
       _mid.copy(_land).addScaledVector(_axis, dist + L * 0.4);
       _node.updateMatrix();
       this.swords.setMatrixAt(drawn, _node.matrix);
-      const flare = info.landed ? Math.exp(-info.since * 6) * c.circleFlare : info.stab * 0.6;
+      // The runes breathe while it stands (the linger's pulse).
+      const breath = info.landed ? c.lingerBreath * (0.5 + 0.5 * Math.sin(info.since * c.lingerBreathRate * TAU + blade.seed * TAU)) : 0;
+      const flare = info.landed ? Math.exp(-info.since * 6) * c.circleFlare + breath : info.stab * 0.6;
       state[drawn * 4 + 0] = info.form;
-      state[drawn * 4 + 1] = shatter;
+      // Before the shatter proper, the cracks light without dropping any cell.
+      state[drawn * 4 + 1] = shatter > 0 ? Math.max(shatter, this._preCrack) : (info.landed ? this._preCrack : 0);
       state[drawn * 4 + 2] = blade.seed * 10;
       state[drawn * 4 + 3] = flare;
 
       /* its circle */
-      const radius = c.circleRadius * (i === FINAL ? c.finalCircle : 1);
+      // Standing, the circle draws in toward its blade; shattering, it flares out.
+      const pull = info.landed ? lerp(1, c.circleContract, 1 - Math.exp(-info.since / Math.max(0.05, c.lingerSinkTime * g.lifetime))) : 1;
+      const radius = c.circleRadius * (i === FINAL ? c.finalCircle : 1) * pull * (1 + c.circleExitGrow * Easing.outCubic(shatter));
       const quad = (radius * 2) / 0.86;
       _flat.setFromAxisAngle(_xAxis, -Math.PI / 2);
       _ring.position.set(_land.x, 0.018 + i * 0.0004, _land.z);
@@ -525,6 +586,7 @@ export class AetherbladeCascadeAbility extends Ability {
       if (formingNow) forming++;
       if (formingNow) this._moteFx(dt, i, L);
       if (stabbing) this._trailFx(dt, L);
+      if (landed && shatter <= 0) this._wispFx(dt, i, L, dist);
       if (shatter > 0.12 && !blade.glinted) {
         blade.glinted = true;
         this._glintFx(i, L, dist);
@@ -537,6 +599,7 @@ export class AetherbladeCascadeAbility extends Ability {
     }
 
     this.swords.count = drawn;
+    this.cores.count = drawn;
     this.circles.count = drawn;
     this.swords.instanceMatrix.needsUpdate = true;
     this.circles.instanceMatrix.needsUpdate = true;
@@ -587,6 +650,16 @@ export class AetherbladeCascadeAbility extends Ability {
     gl.uOpacity.value = g.opacity;
     gl.uGlow.value = 1.4 * g.glow;
     gl.uTurbulence.value = 0.3 * g.turbulence;
+
+    this.wisps.setGradient(getColor(c.colorWispA), getColor(c.colorWispB), getColor(c.colorWispC), getColor(c.colorWispD));
+    const w = this.wisps.uniforms;
+    w.uGravity.value.set(0, c.wispBuoyancy, 0);
+    w.uSizeScale.value = g.particleSize;
+    w.uLifeScale.value = g.particleLifetime;
+    w.uSpeedScale.value = g.particleSpeed;
+    w.uOpacity.value = g.opacity;
+    w.uGlow.value = c.wispGlow * g.glow;
+    w.uTurbulence.value = 0.8 * g.turbulence;
   }
 
   /* ------------------------------------------------------------------ */
@@ -637,6 +710,28 @@ export class AetherbladeCascadeAbility extends Ability {
     }
   }
 
+  /** Aether curling up off a standing blade (reads `_land`, `_axis`). */
+  _wispFx(dt, i, L, dist) {
+    const c = settings.aetherblade;
+    const g = settings.global;
+    const n = this.wispEmitter.tick(dt, c.wispRate * (i === FINAL ? 2 : 1) * g.particleCount);
+    if (n <= 0) return;
+    this._resetEmit(frame.uTime.value);
+    _emit.size = c.wispSize * (i === FINAL ? 1.4 : 1);
+    _emit.life = c.wispLife;
+    _emit.lifeVariance = 0.4;
+    _emit.speed = c.wispSpeed;
+    _emit.speedVariance = 0.5;
+    _emit.spread = 0.35;
+    _emit.radius = 0.08 * L;
+    _emit.direction = _up;
+    for (let k = 0; k < n; k++) {
+      _pos.copy(_land).addScaledVector(_axis, Math.max(0.05, dist + Math.random() * L * 0.75));
+      _emit.position = _pos;
+      this.wisps.emit(1, _emit);
+    }
+  }
+
   /** Afterimages shed along the falling blade (reads `_mid`, `_axis`). */
   _trailFx(dt, L) {
     const c = settings.aetherblade;
@@ -677,6 +772,14 @@ export class AetherbladeCascadeAbility extends Ability {
     _emit.life = c.sparkLifetime;
     this.sparks.emit(Math.round(c.sparkCount * (final ? c.finalSparks : 1) * g.particleCount), _emit);
 
+    // The brand: a dark indigo burn under the circle that stays for the cast.
+    this.ctx.decals.spawn(DecalType.SCORCH, at, {
+      radius: c.brandRadius * (final ? c.finalCircle : 1),
+      life: this.impactDuration + this.fadeDuration,
+      intensity: c.brandIntensity,
+      colorA: getColor(c.colorBrandDeep),
+      colorB: getColor(c.colorBrandEmber)
+    });
     this.ctx.decals.spawn(DecalType.SHOCKWAVE, at, {
       radius: (final ? c.finalShock : c.shockRadius) * g.explosionIntensity,
       life: c.shockLife * (final ? 1.4 : 1),
@@ -752,6 +855,7 @@ export class AetherbladeCascadeAbility extends Ability {
 
   onDestroy() {
     this.swords.count = 0;
+    this.cores.count = 0;
     this.circles.count = 0;
   }
 
@@ -759,6 +863,7 @@ export class AetherbladeCascadeAbility extends Ability {
     this.swords.geometry.dispose();
     this.circleGeometry.dispose();
     this.swordMaterial.dispose();
+    this.coreMaterial.dispose();
     this.circleMaterial.dispose();
     super.dispose();
   }
@@ -847,6 +952,18 @@ export function buildEditor(gui, c, Editor) {
   R(form, c, 'formBurnGlow', 0, 12, 0.05, 'burn line glow');
   form.addColor(c, 'colorSwordBurn').name('burn line');
 
+  const core = swords.addFolder('Core (lit mass under the glass)');
+  R(core, c, 'coreOpacity', 0, 1, 0.01, 'opacity');
+  R(core, c, 'coreLight', 0, 3, 0.01, 'sunlit body');
+  R(core, c, 'coreRim', 0, 3, 0.01, 'ice rim');
+  R(core, c, 'coreEnv', 0, 2, 0.01, 'sky in the facets');
+  R(core, c, 'coreRuneGlow', 0, 10, 0.05, 'rune glow');
+  R(core, c, 'coreHiltDark', 0, 1.5, 0.01, 'hilt brightness');
+  core.addColor(c, 'colorCoreDeep').name('deep');
+  core.addColor(c, 'colorCoreBody').name('body');
+  core.addColor(c, 'colorCoreTint').name('tint');
+  core.addColor(c, 'colorCoreHot').name('hot runes');
+
   const circles = folder.addFolder('3 · Rune circles');
   R(circles, c, 'circleRadius', 0.2, 4, 0.01, 'radius (m)');
   R(circles, c, 'circleBand', 0.04, 0.6, 0.005, 'glyph band');
@@ -860,6 +977,12 @@ export function buildEditor(gui, c, Editor) {
   R(circles, c, 'circleFlare', 0, 6, 0.05, 'landing flare');
   R(circles, c, 'circleFlareDecay', 0.5, 20, 0.1, 'flare decay');
   R(circles, c, 'circleLinger', 0, 1.5, 0.01, 'held brightness');
+  R(circles, c, 'circleContract', 0.2, 1.5, 0.01, 'draws in to (×) while standing');
+  R(circles, c, 'circleExitGrow', 0, 3, 0.01, 'flares out on shatter (×)');
+  R(circles, c, 'brandRadius', 0, 5, 0.05, 'floor brand (m)');
+  R(circles, c, 'brandIntensity', 0, 2, 0.01, 'brand strength');
+  circles.addColor(c, 'colorBrandDeep').name('brand deep');
+  circles.addColor(c, 'colorBrandEmber').name('brand embers');
   circles.addColor(c, 'colorCircleCore').name('stroke');
   circles.addColor(c, 'colorCircleGlow').name('glow');
   circles.addColor(c, 'colorCircleFlare').name('flare');
@@ -911,7 +1034,22 @@ export function buildEditor(gui, c, Editor) {
   R(fin, c, 'finalSparks', 0, 6, 0.05, 'sparks (×)');
   fin.addColor(c, 'colorFlash').name('flash');
 
-  const shatter = folder.addFolder('7 · Shatter');
+  const linger = folder.addFolder('7 · Linger');
+  R(linger, c, 'lingerSink', 0, 0.5, 0.005, 'settles deeper (× length)');
+  R(linger, c, 'lingerSinkTime', 0.05, 4, 0.01, 'settles over (s)');
+  R(linger, c, 'lingerBreath', 0, 3, 0.01, 'rune breathing');
+  R(linger, c, 'lingerBreathRate', 0, 4, 0.01, 'breaths / s');
+  R(linger, c, 'wispRate', 0, 200, 1, 'wisps / s per blade');
+  R(linger, c, 'wispSize', 0.01, 1, 0.005, 'wisp size');
+  R(linger, c, 'wispSpeed', 0, 6, 0.05, 'wisp rise');
+  R(linger, c, 'wispLife', 0.1, 4, 0.05, 'wisp life');
+  R(linger, c, 'wispBuoyancy', -2, 4, 0.05, 'wisp buoyancy');
+  R(linger, c, 'wispGlow', 0, 4, 0.05, 'wisp glow');
+  Editor.gradient(linger, c, 'colorWisp', 'wisp gradient');
+  R(linger, c, 'crackLead', 0, 3, 0.01, 'cracks show (s) before shatter');
+  R(linger, c, 'crackPre', 0, 0.18, 0.005, 'crack strength before shatter');
+
+  const shatter = folder.addFolder('8 · Shatter');
   R(shatter, c, 'shatterTime', 0.05, 3, 0.01, 'per blade (s)');
   R(shatter, c, 'shatterStagger', 0, 0.5, 0.005, 'stagger (s)');
   R(shatter, c, 'shatterCells', 1, 20, 0.1, 'crack cells');

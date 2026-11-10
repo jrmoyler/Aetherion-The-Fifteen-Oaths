@@ -23,7 +23,7 @@ test('original source inventory is preserved; pinned upstream upgrades and integ
  let bytes=0;
  for(const entry of manifest.files){const content=read(entry.destinationPath);const current=patched.get(entry.destinationPath)||upgraded.get(entry.destinationPath);if(!current)assert.equal(content.length,entry.bytes,entry.sourcePath);assert.equal(sha(content),current?.sha256||entry.sha256,entry.sourcePath);bytes+=entry.bytes;}
  assert.equal(bytes,manifest.totalBytes);
- assert.equal(upgrade.commit,'c16da3c978a4815f46273fdcda2252ab48977a53');
+ assert.equal(upgrade.commit,'6c0f22f480033aef5cc6077a73e44bf02c36e2a6');
  for(const entry of upgrade.files)assert.equal(sha(read(entry.path)),patched.get(entry.path)?.sha256||entry.sha256,entry.path);
  for(const entry of patches){assert.ok(entry.reason.length>20);const upstream=upgraded.get(entry.path)?.sha256||manifest.files.find(e=>e.destinationPath===entry.path)?.sha256;assert.equal(entry.upstreamSHA256,upstream,entry.path);assert.equal(sha(read(entry.path)),entry.sha256,entry.path);}
 });

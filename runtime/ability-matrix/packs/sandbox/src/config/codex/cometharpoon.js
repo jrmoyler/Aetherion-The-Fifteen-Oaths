@@ -24,7 +24,7 @@ export default {
     range: 18, // maximum cast distance, metres
     minRange: 2, // closer than this and the cast is refused
     speed: 30, // metres/second the harpoon flies
-    lifetime: 1.6, // seconds the bloom, the tether and the harpoon take to go
+    lifetime: 1.4, // seconds the bloom, the tether and the harpoon take to go
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: 'cast1', // which clip in `CAST_ANIMATIONS` the body throws
 
@@ -41,7 +41,7 @@ export default {
     handHeight: 1.6, // metres off the floor
     arcHeight: 1.4, // metres the flight arcs up mid-way
     embedDepth: 0.55, // metres the head drives into the floor
-    harpoonScale: 1.0, // the whole harpoon (2.6 m at 1)
+    harpoonScale: 1.35, // the whole harpoon (2.6 m at 1)
     rollRate: 1.6, // revolutions/second it spins in flight
     quiverAmp: 4, // degrees the embedded shaft shudders
     quiverFreq: 26, // shudders per second (radians × 1/2π)
@@ -62,15 +62,46 @@ export default {
     colorHarpoonGold: '#ffd27a',
 
     /* ================================================================ */
+    /* 2b · THE NUCLEUS & THE ICE BLADES (lit, opaque, cast shadows)     */
+    /* ================================================================ */
+    nucleusSize: 0.5, // metres (× harpoonScale), its mean radius; 1.25× long
+    nucleusOffset: 1.0, // metres (× harpoonScale) behind the tip it is impaled
+    nucleusTumble: 1.6, // radians/second it tumbles on the shaft
+    nucleusSquash: 0.22, // how hard it squashes at the strike
+    nucleusSeamScale: 2.4,
+    nucleusSeamGlow: 1.0,
+    sublimateRate: 34, // vapour puffs/second boiling off it in the fade
+    bladeLength: 1.0, // × petalLength
+    bladeWidth: 0.32, // metres, half-width at the widest
+    bladeRoot: 0.35, // metres out from the strike the blades root
+    bladeSink: 0.08, // metres below the floor the roots sit
+    bladeOpen: 0.55, // the blades stand steeper than the light-petals: × petalOpen
+    bladeInnerOpen: 0.45, // the inner row opens this much of the outer's angle
+    bladeJitter: 0.12,
+    bladeDelay: 0.03, // seconds after the strike they heave up
+    bladeGrowTime: 0.32,
+    bladeBreathe: 0.08, // ± open angle, breathing through the hold
+    bladeBreatheRate: 4,
+    bladeSeamScale: 3,
+    bladeSeamGlow: 1.3,
+    iceFresnel: 1.2,
+    iceSpecular: 1.4,
+    iceAmbient: 0.28,
+    colorIceCore: '#f2fbff',
+    colorIceTint: '#9fd8ff',
+    colorIceBody: '#2a6ae0',
+    colorIceDeep: '#060f2e',
+
+    /* ================================================================ */
     /* 3 · THE COMA                                                      */
     /* ================================================================ */
     comaSize: 1.3, // radius, metres
-    comaGlow: 3.2,
+    comaGlow: 2.2,
     comaHood: 0.5, // 0 round .. 1 strongly hooded forward
     comaJets: 5, // flickering jets
     comaFlare: 2.5, // × brightness at the strike
     colorComaCore: '#ffffff',
-    colorComaHalo: '#8fd0ff',
+    colorComaHalo: '#3f8cff',
 
     /* ================================================================ */
     /* 4 · THE TAILS                                                     */
@@ -81,7 +112,7 @@ export default {
     ionStreamers: 7, // combed streamers across it
     ionFlow: 10, // how fast the streamers stream away
     colorIonA: '#e8f6ff',
-    colorIonB: '#4aa8ff',
+    colorIonB: '#2a6cff',
     dustLength: 4.5, // metres of curving gold dust tail
     dustWidth: 1.1, // metres across at its far end
     dustBend: 0.55, // how far it curves away, × its length
@@ -96,7 +127,7 @@ export default {
     /* ================================================================ */
     /* 5 · THE TETHER                                                    */
     /* ================================================================ */
-    tetherWidth: 0.035, // metres
+    tetherWidth: 0.07, // metres
     tetherGlow: 2.8,
     tetherSag: 0.7, // metres it sags while paying out
     tetherWave: 0.12, // metres of ripple while it flies
@@ -105,7 +136,7 @@ export default {
     tetherFlow: 6, // beads/second running down it
     tetherSnap: 0.12, // seconds it takes to go taut at the strike
     frayTime: 0.6, // share of the fade it takes to fray away
-    colorTether: '#bfe4ff',
+    colorTether: '#6fb6ff',
     colorTetherBead: '#ffffff',
 
     /* ================================================================ */
@@ -116,19 +147,19 @@ export default {
     petalLength: 2.3, // metres
     petalWidth: 0.6, // metres at the widest
     petalOpenTime: 0.45, // seconds they take to open
-    petalHold: 0.35, // seconds they stay open before the fade
+    petalHold: 0.9, // seconds they stay open before the fade
     petalClosed: 10, // degrees from vertical, as a bud
     petalOpen: 70, // degrees from vertical, open
     petalCurl: 0.32, // tips curl outward, × length
     petalCup: 0.25, // how cupped each petal is
     petalTwist: 0.35, // radians each petal twists along its length
-    petalSpin: 0.25, // radians/second the bloom turns
-    petalGlow: 2.4,
+    petalSpin: 0.5, // radians/second the bloom turns
+    petalGlow: 0.8,
     petalVeinGlow: 2.6,
     petalSoftFade: 0.2,
-    colorPetalA: '#ffffff',
-    colorPetalB: '#9fe0ff',
-    colorPetalC: '#3c7cff',
+    colorPetalA: '#cfeaff',
+    colorPetalB: '#5ab0ff',
+    colorPetalC: '#1a3cb0',
     colorPetalVein: '#ffd27a',
 
     /* ================================================================ */
@@ -140,10 +171,13 @@ export default {
     crackGlow: 3,
     craterRingGlow: 2.5,
     coolCurve: 1.2, // >1 holds the glow longer
+    frostDecal: 0.35, // the engine's FROST decal under the crater
+    frostCreep: 0.35, // the frost creeps out this much further over the linger
+    crackPulse: 1, // light running out along the cracks through the linger
     colorCrackHot: '#e8f8ff',
     colorCrack: '#56b8ff',
     colorCraterRing: '#ffcf7a',
-    colorCraterChar: '#0c1424',
+    colorCraterChar: '#040a1e',
 
     /* ================================================================ */
     /* 8 · PARTICLES                                                     */
@@ -182,20 +216,20 @@ export default {
     /* ================================================================ */
     /* 9 · THE STRIKE                                                    */
     /* ================================================================ */
-    burstSize: 2.6, // the FROST shell, metres
-    burstIntensity: 1.2,
+    burstSize: 1.9, // the FROST shell, metres
+    burstIntensity: 1.0,
     shockRadius: 6.5, // the shockwave on the floor, metres
     lensRadius: 1.4, // metres of shimmer round the head in flight
-    lensStrength: 0.7,
+    lensStrength: 0.3,
     ringRadius: 5, // metres the bloom's pressure ring opens to
     ringTime: 0.45,
     impactFlash: 0.45,
     impactShake: 0.5,
     shakeDuration: 0.4,
     impactLight: 3, // light punch, × lightIntensity
-    colorBurstA: '#ffffff',
-    colorBurstB: '#a8dcff',
-    colorBurstC: '#2a5cff',
+    colorBurstA: '#e6f6ff',
+    colorBurstB: '#3a8cff',
+    colorBurstC: '#0a1f6e',
     colorShockA: '#8fd0ff',
     colorShockB: '#ffffff',
     colorFlash: '#d8eeff',

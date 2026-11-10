@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, DoubleSide, ShaderMaterial } from 'three';
+import { AdditiveBlending, Color, DoubleSide, MeshStandardMaterial, NormalBlending, ShaderMaterial, Vector3 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -720,4 +720,202 @@ export function createStarBurstMaterial() {
   };
 
   return material;
+}
+
+/* ==================================================================== */
+/* The fallen stars — the solid hero                                     */
+/* ==================================================================== */
+
+/**
+ * A cut star of pale gold crystal, lit by the sun and casting shadows. A
+ * patched MeshStandardMaterial: per instance `aHeat` (1 at landing) floods
+ * the facets white-hot, then cools through gold to a slow ember that pulses
+ * along the facet edges; the rim always catches a little light so the solid
+ * reads against the night floor.
+ */
+export function createStarCrystalMaterial() {
+  const material = new MeshStandardMaterial({ color: new Color('#ffe2a0'), metalness: 0.15, roughness: 0.22, flatShading: true });
+  const uniforms = {
+    uTime: { value: 0 },
+    uGlow: { value: 1 },
+    uPulse: { value: 2.2 },
+    uRim: { value: 0.8 },
+    uColorHot: { value: new Color('#ffffff') },
+    uColorBody: { value: new Color('#ffc860') },
+    uColorDeep: { value: new Color('#8a4a12') }
+  };
+  material.userData.uniforms = uniforms;
+  material.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, uniforms);
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', `#include <common>
+        attribute float aHeat;
+        attribute float aSeed;
+        varying float vHeat;
+        varying float vSeedC;
+        varying vec3 vStarLocal;`)
+      .replace('#include <begin_vertex>', `#include <begin_vertex>
+        vHeat = aHeat;
+        vSeedC = aSeed;
+        vStarLocal = position;`);
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>', `#include <common>
+        uniform float uTime;
+        uniform float uGlow;
+        uniform float uPulse;
+        uniform float uRim;
+        uniform vec3 uColorHot;
+        uniform vec3 uColorBody;
+        uniform vec3 uColorDeep;
+        varying float vHeat;
+        varying float vSeedC;
+        varying vec3 vStarLocal;`)
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+        {
+          float r = length(vStarLocal.xy);
+          // Facet ridges: the lines from the apex out to the points.
+          float ang = atan(vStarLocal.y, vStarLocal.x);
+          float ridge = pow(abs(cos(ang * 5.0 + 1.5708 * 5.0)), 18.0);
+          float pulse = 0.6 + 0.4 * sin(uTime * uPulse + vSeedC * 6.2831 + r * 4.0);
+          vec3 heatCol = mix(uColorDeep, uColorBody, smoothstep(0.0, 0.5, vHeat));
+          heatCol = mix(heatCol, uColorHot, smoothstep(0.55, 1.0, vHeat));
+          float ndv = clamp(dot(normalize(normal), normalize(vViewPosition)), 0.0, 1.0);
+          vec3 glow = heatCol * (vHeat * 2.5 + (0.25 + ridge * 0.9) * pulse);
+          glow += uColorBody * pow(1.0 - ndv, 3.0) * uRim;
+          // A star cooling is a star still lit at the core.
+          glow += uColorHot * (1.0 - smoothstep(0.0, 0.35, r)) * (0.4 + vHeat);
+          totalEmissiveRadiance += glow * uGlow;
+        }`);
+  };
+  material.customProgramCacheKey = () => 'starfall-crystal';
+  return material;
+}
+
+/* ==================================================================== */
+/* The constellation re-drawn on the floor                               */
+/* ==================================================================== */
+
+/**
+ * One quad over the circle (world-space XZ in the fragment). The deep stop
+ * of the ramp darkens a soft disc; every landed star burns a crater (dark
+ * core, molten lip, radial cracks that glow and cool); and the figure's lines
+ * are re-drawn **on the floor** between the landed stars, each one running
+ * from the star that landed first to the one that landed second.
+ *
+ * `uStars[i]` = (x, z, age since landing or −1, seed); `uSegs[k]` = (ax, az,
+ * bx, bz); `uSegDraw[k]` 0..1 how much of it is drawn.
+ */
+export function createStarFieldMaterial(maxStars, maxLinks) {
+  return new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCentre: { value: new Vector3() },
+      uRadius: { value: 5 },
+      uFade: { value: 1 },
+      uOpacity: { value: 0.6 },
+      uCraterRadius: { value: 1.2 },
+      uCool: { value: 2.5 },
+      uLineWidth: { value: 0.07 },
+      uLineGlow: { value: 2 },
+      uColorDeep: { value: new Color('#2a1606') },
+      uColorBody: { value: new Color('#ffb040') },
+      uColorHot: { value: new Color('#fff6dc') },
+      uStars: { value: new Float32Array(maxStars * 4) },
+      uSegs: { value: new Float32Array(maxLinks * 4) },
+      uSegDraw: { value: new Float32Array(maxLinks) },
+      uStarCount: { value: 0 },
+      uSegCount: { value: 0 }
+    }),
+    vertexShader: /* glsl */ `
+      uniform vec3 uCentre;
+      uniform float uRadius;
+      varying vec2 vXZ;
+      void main() {
+        vec3 world = vec3(uCentre.x + position.x * uRadius, 0.035, uCentre.z - position.y * uRadius);
+        vXZ = world.xz;
+        gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+      }
+    `,
+    fragmentShader: /* glsl */ `
+      #define MAX_STARS ${maxStars}
+      #define MAX_LINKS ${maxLinks}
+      uniform float uTime;
+      uniform vec3 uCentre;
+      uniform float uRadius;
+      uniform float uFade;
+      uniform float uOpacity;
+      uniform float uCraterRadius;
+      uniform float uCool;
+      uniform float uLineWidth;
+      uniform float uLineGlow;
+      uniform vec3 uColorDeep;
+      uniform vec3 uColorBody;
+      uniform vec3 uColorHot;
+      uniform float uStars[MAX_STARS * 4];
+      uniform float uSegs[MAX_LINKS * 4];
+      uniform float uSegDraw[MAX_LINKS];
+      uniform int uStarCount;
+      uniform int uSegCount;
+      uniform float uGlobalGlow;
+      varying vec2 vXZ;
+      ${noiseGLSL}
+
+      void main() {
+        vec2 rel = (vXZ - uCentre.xz) / uRadius;
+        float rr = length(rel);
+        if (rr > 1.0) discard;
+        float disc = (1.0 - smoothstep(0.7, 1.0, rr)) * uOpacity;
+        vec3 color = uColorDeep * (0.6 + 0.4 * fbm3(vec3(vXZ * 0.5, 1.0)));
+        float alpha = disc;
+        vec3 glow = vec3(0.0);
+
+        for (int i = 0; i < MAX_STARS; i++) {
+          if (i >= uStarCount) break;
+          float age = uStars[i * 4 + 2];
+          if (age < 0.0) continue;
+          vec2 p = vXZ - vec2(uStars[i * 4], uStars[i * 4 + 1]);
+          float d = length(p);
+          float seed = uStars[i * 4 + 3];
+          float R = uCraterRadius * (0.85 + 0.3 * seed) * (1.0 - exp(-age * 12.0));
+          if (d > R * 1.6) continue;
+          float heat = exp(-age / max(uCool, 0.05));
+          float a = atan(p.y, p.x);
+          float crack = pow(abs(snoise(vec3(a * 2.2 + seed * 9.0, d * 1.6, seed))), 0.35);
+          crack = (1.0 - smoothstep(0.0, 0.22, crack)) * smoothstep(R * 0.25, R * 0.5, d) * (1.0 - smoothstep(R, R * 1.5, d));
+          float core = 1.0 - smoothstep(0.0, R * 0.55, d);
+          float lip = exp(-abs(d - R * 0.6) / max(0.02, R * 0.1));
+          color = mix(color, uColorDeep * 0.25, core * 0.9);
+          alpha = max(alpha, max(core, lip * 0.8));
+          vec3 hot = mix(uColorBody, uColorHot, heat);
+          glow += hot * (lip * (0.35 + heat * 1.6) + crack * (0.25 + heat * 2.0));
+        }
+        for (int k = 0; k < MAX_LINKS; k++) {
+          if (k >= uSegCount) break;
+          float draw = uSegDraw[k];
+          if (draw <= 0.0) continue;
+          vec2 a = vec2(uSegs[k * 4], uSegs[k * 4 + 1]);
+          vec2 b = vec2(uSegs[k * 4 + 2], uSegs[k * 4 + 3]);
+          vec2 pa = vXZ - a, ba = (b - a) * draw;
+          float h = clamp(dot(pa, ba) / max(dot(ba, ba), 1e-4), 0.0, 1.0);
+          float d = length(pa - ba * h);
+          float line = 1.0 - smoothstep(uLineWidth * 0.3, uLineWidth, d);
+          float pen = exp(-length(vXZ - (a + ba)) * 6.0) * step(draw, 0.999);
+          float run = 0.75 + 0.25 * sin(h * 20.0 - uTime * 6.0);
+          glow += mix(uColorBody, uColorHot, 0.5) * line * run * uLineGlow + uColorHot * pen * 2.0;
+          alpha = max(alpha, line * 0.9);
+        }
+        color += glow * uGlobalGlow;
+        alpha *= uFade;
+        if (alpha < 0.004) discard;
+        gl_FragColor = vec4(color, alpha);
+      }
+    `
+  });
 }

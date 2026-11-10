@@ -2,12 +2,14 @@ import { Mesh, PlaneGeometry, Vector3 } from 'three';
 import { Ability, AbilityPhase } from '../Ability.js';
 import {
   createLatticeGeometry,
+  createThreadGeometry,
   latticePoint
 } from '../../assets/matrix-new/EmberveilLatticeGeometry.js';
 import {
   createEmberStrandMaterial,
   createEmberFloorMaterial,
   createEmberHazeMaterial,
+  createEmberThreadMaterial,
   EMBERVEIL_MAX_STRANDS
 } from '../../materials/matrix-new/EmberveilLatticeMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -34,7 +36,28 @@ const _emit = {};
 const _pos = new Vector3();
 const _dir = new Vector3();
 const _centre = new Vector3();
+const _hand = new Vector3();
 const _up = new Vector3(0, 1, 0);
+
+/** A lattice state object (the shape `syncLatticeUniforms` reads). */
+function latticeState() {
+  return {
+    centre: new Vector3(),
+    count: 0,
+    radius: 1,
+    height: 1,
+    apex: 1,
+    arch: 1,
+    sweep: 0,
+    crossings: 0,
+    weave: 0,
+    rot: 0,
+    sway: 0,
+    swaySpeed: 0,
+    shrink: 1,
+    squash: 1
+  };
+}
 
 /** JS twin of the fragment shader's per-strand climb hash. */
 function strandHash(i) {
@@ -51,15 +74,32 @@ function strandHash(i) {
  * burns, and then the cage pulls itself tight and collapses inward into one
  * flame burst that throws the trapped clear.
  *
+ * ## Anticipation and travel
+ *
+ * The ember is not a dot. On the cast a flare catches at the hand and a
+ * **ball of wound burning thread** winds itself up there — the cage in
+ * miniature: the same lattice path closed into a sphere (an upper and a
+ * mirrored lower dome, `latticeState` × 2), charred cords with molten cracks
+ * and flames licking off them, spinning as it flies. Behind it the ball
+ * **spools a burning thread** (`createEmberThreadMaterial`) that lies exactly
+ * on the lob it flew — molten at the ember, cooled to dark char at the hand —
+ * so the whole path from caster to circle reads in every travel frame. As the
+ * ember closes in, the scorched ring is **telegraphed** at the target (the
+ * seam and the anchor pools catch faintly), so the circle is marked before
+ * the cage rises. On landing the ball bursts, the thread burns back from the
+ * hand to the circle, and the strands climb out of the pools it lit.
+ *
  * ## Layers
  *
  *   1. **THE STRANDS** (`createEmberStrandMaterial('core')`) — thin tubes on a
  *      woven dome path: two families sweeping round the circle in opposite
  *      senses as they arch over it, passing over and under each other. The
  *      tube is inflated from a *parameter buffer* in the vertex stage, so the
- *      dome's every dimension — and the contraction — is a uniform. White-hot
- *      down the line of sight, orange through the body, red at the silhouette,
- *      with heat pulses running from the roots to the crown.
+ *      dome's every dimension — and the contraction — is a uniform. A solid,
+ *      sun-lit **charred cord** (the cast's dark deep stop) split by molten
+ *      cracks on the four-stop heat ramp, with heat pulses running from the
+ *      roots to the crown. The cracks widen as the cage burns, so the linger
+ *      visibly heats up before the contraction opens them white.
  *   2. **THE FLAMES** (`createEmberStrandMaterial('flame')`) — the same path, a
  *      fatter tube whose upper side is torn upward by noise: the flames licking
  *      off every strand. Additive, depth-soft, faded out at the floor.
@@ -154,25 +194,46 @@ export class EmberveilLatticeAbility extends Ability {
     this.haze.visible = false;
     this.group.add(this.haze);
 
+    /* ---- travel: the wound ember ball (two mirrored domes) and its thread ---- */
+    this.ballMaterials = [];
+    this.ballMeshes = [];
+    this._ballDomes = [latticeState(), latticeState()];
+    for (let d = 0; d < 2; d++) {
+      for (const kind of ['flame', 'core']) {
+        const material = createEmberStrandMaterial(kind);
+        const mesh = new Mesh(this.latticeGeometry, material);
+        mesh.frustumCulled = false;
+        mesh.layers.set(LAYER.VFX);
+        mesh.renderOrder = kind === 'flame' ? 11 : 13;
+        mesh.visible = false;
+        mesh.userData.dome = d;
+        mesh.userData.flame = kind === 'flame';
+        this.group.add(mesh);
+        this.ballMaterials.push(material);
+        this.ballMeshes.push(mesh);
+      }
+    }
+    this._ballState = { grow: 0, dissolve: 0, surge: 0, fade: 1, burn: 1 };
+    this._ballRot = 0;
+
+    this.threadGeometry = createThreadGeometry(96, 6);
+    this.threadMaterial = createEmberThreadMaterial();
+    this.thread = new Mesh(this.threadGeometry, this.threadMaterial);
+    this.thread.frustumCulled = false;
+    this.thread.layers.set(LAYER.VFX);
+    this.thread.renderOrder = 12;
+    this.thread.visible = false;
+    this.group.add(this.thread);
+    this._threadState = { origin: new Vector3(), dir: new Vector3(0, 0, 1), front: 0, span: 1, baseY: 1.2, lob: 1.4, burnBack: 0 };
+
     /** The dome path — one object, read by three materials and the embers. */
-    this._lattice = {
-      centre: new Vector3(),
-      count: 0,
-      radius: 1,
-      height: 1,
-      apex: 1,
-      arch: 1,
-      sweep: 0,
-      crossings: 0,
-      weave: 0,
-      rot: 0,
-      sway: 0,
-      swaySpeed: 0,
-      shrink: 1,
-      squash: 1
-    };
-    this._strandState = { grow: 0, dissolve: 0, surge: 0, fade: 1 };
-    this._floorState = { quadSize: 1, reveal: 0, heat: 0, surge: 0, fade: 1, seed: 0 };
+    this._lattice = latticeState();
+    /** The contraction's radius factor alone — what the trap reaches (the visual creep is not). */
+    this._hitShrink = 1;
+    this._breath = 0;
+    this._strandState = { grow: 0, dissolve: 0, surge: 0, fade: 1, burn: 0, orbit: 0, orbitAmount: 0 };
+    this._orbit = 0;
+    this._floorState = { quadSize: 1, reveal: 0, heat: 0, surge: 0, fade: 1, seed: 0, creep: 0 };
     this._hazeState = { width: 1, height: 1, strength: 0, seed: 0 };
 
     this._trapped = new Array(MAX_TRAPPED).fill(null);
@@ -247,6 +308,7 @@ export class EmberveilLatticeAbility extends Ability {
     this.sparkEmitter = new RateEmitter();
     this.smokeEmitter = new RateEmitter();
     this.callEmitter = new RateEmitter();
+    this.trailEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -289,17 +351,47 @@ export class EmberveilLatticeAbility extends Ability {
     this._rot = Math.random() * Math.PI * 2;
     this._seed = Math.random() * 100;
     this._collapsed = false;
+    this._hitShrink = 1;
+    this._breath = 0;
+    this._orbit = Math.random() * Math.PI * 2;
+    this._ballRot = Math.random() * Math.PI * 2;
     this._releaseTrapped();
     this.dripEmitter.reset();
     this.sparkEmitter.reset();
     this.smokeEmitter.reset();
     this.callEmitter.reset();
+    this.trailEmitter.reset();
 
     this.strands.visible = false;
     this.flames.visible = false;
     this.floor.visible = false;
     this.haze.visible = false;
+    this.thread.visible = false;
+    for (const mesh of this.ballMeshes) mesh.visible = false;
+    this._threadState.burnBack = 0;
+    this._threadState.front = 0;
     this._syncParticles();
+
+    // Anticipation: a flare catches at the hand as the ember is wound up.
+    const c = settings.emberveil;
+    const g = settings.global;
+    this._handPoint(_hand);
+    this.ctx.bursts.spawn(BurstMode.FIRE, _hand, {
+      radius: 0.05,
+      endRadius: c.handFlare * g.explosionIntensity,
+      life: 0.3,
+      intensity: c.burstIntensity * 0.6,
+      opacity: 0.85,
+      displace: 0.5,
+      colorA: getColor(c.colorBurstA),
+      colorB: getColor(c.colorBurstB),
+      colorC: getColor(c.colorBurstC)
+    });
+  }
+
+  /** Where the ember leaves the hand: the start of the lob. */
+  _handPoint(out) {
+    return out.copy(this.origin).addScaledVector(this.direction, 0.35).setY(settings.emberveil.throwHeight);
   }
 
   _releaseTrapped() {
@@ -362,7 +454,7 @@ export class EmberveilLatticeAbility extends Ability {
    * @param {number} heat     0..1 how much of the floor is still burning
    * @param {number} fade     0..1 overall visibility
    */
-  _shape(dt, grow, contract, dissolve, heat, fade) {
+  _shape(dt, grow, contract, dissolve, heat, fade, burn = 0, floorReveal = Easing.outCubic(grow)) {
     const c = settings.emberveil;
     const g = settings.global;
     const L = this._lattice;
@@ -387,8 +479,13 @@ export class EmberveilLatticeAbility extends Ability {
     L.swaySpeed = c.swaySpeed * g.animationSpeed;
     // Past 1 (after the burst) the burnt strands keep slumping toward the floor.
     const slump = Math.max(0, contract - 1);
-    L.shrink = lerp(1, c.contractScale, k) * (1 - slump * 1.2);
-    L.squash = lerp(1, c.contractSquash, k) * (1 - slump * 2);
+    this._hitShrink = lerp(1, c.contractScale, k) * (1 - slump * 1.2);
+    // The visible cage also creeps in a little as it burns (a noose drawing
+    // tight) and breathes — presentation only: the trap reads `_hitShrink`.
+    this._breath += c.breathSpeed * dt * g.animationSpeed;
+    const breath = 1 + c.breathAmount * Math.sin(this._breath) * grow * (1 - saturate(contract));
+    L.shrink = this._hitShrink * (1 - c.cageCreep * burn);
+    L.squash = lerp(1, c.contractSquash, k) * (1 - slump * 2) * breath;
 
     const surge = saturate(contract) * c.contractSurge;
     const ss = this._strandState;
@@ -396,12 +493,17 @@ export class EmberveilLatticeAbility extends Ability {
     ss.dissolve = dissolve;
     ss.surge = surge;
     ss.fade = fade;
+    ss.burn = burn;
+    this._orbit += c.burnOrbitSpeed * dt * g.animationSpeed;
+    ss.orbit = this._orbit;
+    ss.orbitAmount = c.burnOrbit * grow * (1 - saturate(contract)) * (1 - dissolve);
     this.flameMaterial.userData.sync(L, ss);
     this.coreMaterial.userData.sync(L, ss);
 
     const fs = this._floorState;
     fs.quadSize = (L.radius * (1 + c.weave) + c.charWidth + c.poolSize + 0.8) * 2;
-    fs.reveal = Easing.outCubic(grow);
+    fs.reveal = floorReveal;
+    fs.creep = burn;
     fs.heat = heat;
     fs.surge = surge;
     fs.fade = fade;
@@ -520,7 +622,7 @@ export class EmberveilLatticeAbility extends Ability {
     const L = this._lattice;
     const field = this.ctx.dummies;
     if (field?.findTargets) {
-      const found = field.findTargets(L.centre.x, L.centre.z, L.radius * L.shrink * c.trapReach, this._targets);
+      const found = field.findTargets(L.centre.x, L.centre.z, L.radius * this._hitShrink * c.trapReach, this._targets);
       for (let f = 0; f < found.length && this._trappedCount < MAX_TRAPPED; f++) {
         const dummy = found[f];
         let held = false;
@@ -628,24 +730,93 @@ export class EmberveilLatticeAbility extends Ability {
   /* Phases                                                              */
   /* ------------------------------------------------------------------ */
 
+  /**
+   * The wound ember ball at `centre`: two mirrored domes of the lattice path,
+   * resolved from the `ball*` keys. `size` 0..1 winds it up at the hand.
+   */
+  _ball(dt, centre, size, visible) {
+    const c = settings.emberveil;
+    const g = settings.global;
+    this._ballRot += c.ballSpin * dt * g.animationSpeed;
+    const radius = Math.max(0.02, c.ballRadius * size);
+    for (let d = 0; d < 2; d++) {
+      const B = this._ballDomes[d];
+      B.centre.copy(centre);
+      B.count = Math.min(MAX_STRANDS, Math.max(2, Math.round(c.ballStrands)));
+      B.radius = radius;
+      B.height = radius;
+      B.apex = 1.45;
+      B.arch = 1;
+      B.sweep = c.sweep * 1.3;
+      B.crossings = 5;
+      B.weave = 0.08;
+      B.rot = this._ballRot * (d ? -1 : 1) + d * 0.6;
+      B.sway = 0.15 * g.turbulence;
+      B.swaySpeed = 4 * g.animationSpeed;
+      B.shrink = 1;
+      B.squash = d ? -1 : 1;
+    }
+    const st = this._ballState;
+    st.grow = saturate(size * 1.4);
+    st.surge = c.ballHeat;
+    st.orbitAmount = 0;
+    st.fade = 1;
+    st.burn = 1;
+    for (let m = 0; m < this.ballMeshes.length; m++) {
+      const mesh = this.ballMeshes[m];
+      const material = this.ballMaterials[m];
+      material.userData.sync(this._ballDomes[mesh.userData.dome], st);
+      const u = material.uniforms;
+      u.uWidth.value = c.ballStrandWidth * (mesh.userData.flame ? c.flameWidth : 1);
+      if (mesh.userData.flame) {
+        u.uLick.value = c.flameLick * 0.5 * g.turbulence;
+        u.uIntensity.value = c.flameIntensity * c.ballFlameGlow * g.glow * g.shaderIntensity;
+      }
+      u.uFloorFade.value = 0.05;
+      mesh.visible = visible;
+    }
+  }
+
+  /** The thread from the hand to `front` metres along the lob. */
+  _thread(front, burnBack) {
+    const c = settings.emberveil;
+    const ts = this._threadState;
+    ts.origin.copy(this.origin);
+    ts.dir.copy(this.direction);
+    ts.front = front;
+    ts.span = this.length;
+    ts.baseY = c.throwHeight;
+    ts.lob = c.throwLob;
+    ts.burnBack = burnBack;
+    this.threadMaterial.userData.sync(ts);
+    this.thread.visible = burnBack < 1 && front > 0.05;
+  }
+
   onTravel(dt) {
     const c = settings.emberveil;
     const g = settings.global;
     this._syncParticles();
 
     // The ember arcs out of the hand: a low lob, the light riding it.
-    this.position.y = 1.2 + Math.sin(Math.PI * this.u) * 1.4;
+    this.position.y = c.throwHeight + Math.sin(Math.PI * this.u) * c.throwLob;
+
+    /* --- the wound ball, wound up at the hand over the first beat --- */
+    const wind = Easing.outBack(saturate(this.age / Math.max(0.02, c.ballWindTime)));
+    this._ball(dt, this.position, Math.max(0, wind), true);
+    this._thread(this.u * this.length, 0);
+
+    /* --- the trail: sparks shed off the ball, dark smoke, falling embers --- */
     const count = Math.round(this.callEmitter.tick(dt, c.callSparks) * g.particleCount);
     if (count > 0) {
       _emit.position = _pos.copy(this.position);
-      _emit.radius = 0.12;
+      _emit.radius = c.ballRadius * 0.6;
       _emit.direction = _dir.copy(this.direction).negate().setY(0.4).normalize();
       _emit.speed = 2.0;
       _emit.speedVariance = 0.6;
-      _emit.spread = 0.5;
+      _emit.spread = 0.6;
       _emit.inherit = null;
       _emit.anchor = null;
-      _emit.size = 0.1;
+      _emit.size = 0.14;
       _emit.sizeVariance = 0.5;
       _emit.life = c.sparkLifetime * 0.5;
       _emit.lifeVariance = 0.4;
@@ -654,6 +825,39 @@ export class EmberveilLatticeAbility extends Ability {
       _emit.time = frame.uTime.value;
       this.streaks.emit(count, _emit);
       _emit.tint = null;
+      _emit.direction = _dir.set(0, -1, 0);
+      _emit.speed = 0.6;
+      _emit.size = 0.12;
+      _emit.life = c.dripLifetime;
+      this.drips.emit(Math.max(1, count >> 1), _emit);
+    }
+    const smokes = Math.round(this.trailEmitter.tick(dt, c.trailSmoke) * g.particleCount);
+    if (smokes > 0) {
+      _emit.position = _pos.copy(this.position);
+      _emit.radius = c.ballRadius * 0.5;
+      _emit.direction = _up;
+      _emit.speed = 0.5;
+      _emit.speedVariance = 0.5;
+      _emit.spread = 0.5;
+      _emit.inherit = null;
+      _emit.anchor = null;
+      _emit.size = c.trailSmokeSize;
+      _emit.sizeVariance = 0.4;
+      _emit.life = c.smokeLifetime * 0.6;
+      _emit.lifeVariance = 0.3;
+      _emit.spin = 0.4;
+      _emit.tint = null;
+      _emit.time = frame.uTime.value;
+      this.smoke.emit(smokes, _emit);
+    }
+
+    /* --- the circle is marked before the cage rises --- */
+    const mark = Easing.inOutQuad(saturate((this.u - c.telegraphStart) / Math.max(0.05, 1 - c.telegraphStart)));
+    if (mark > 0) {
+      this._shape(0, 0, 0, 0, mark, 1, 0, c.telegraphReveal * mark);
+      this.strands.visible = false;
+      this.flames.visible = false;
+      this.haze.visible = false;
     }
   }
 
@@ -662,6 +866,8 @@ export class EmberveilLatticeAbility extends Ability {
     const g = settings.global;
     this._clock = 0;
     this.pointAt(1, _centre);
+    // The ball bursts; the thread stays a beat and burns back (onFade).
+    for (const mesh of this.ballMeshes) mesh.visible = false;
 
     // The ember breaks on the floor and the ring catches.
     this.ctx.bursts.spawn(BurstMode.FIRE, _pos.set(_centre.x, 0.3, _centre.z), {
@@ -710,8 +916,17 @@ export class EmberveilLatticeAbility extends Ability {
 
     if (!this._collapsed && clock >= collapseAt) {
       // The shape must be resolved at full contraction before the burst reads it.
-      this._shape(0, grow, 1, 0, 1, 1);
+      this._shape(0, grow, 1, 0, 1, 1, 1);
       this._collapse();
+    }
+
+    // 0..1 through the burn (1 from the contraction on).
+    // Eased out, so the cage visibly heats in the first second of the burn.
+    const burnT = 1 - Math.pow(1 - saturate((clock - weave * 0.5) / Math.max(0.05, burn)), 2.5);
+
+    // The thread burns back from the hand to the circle after the landing.
+    if (this.thread.visible || clock < c.threadBurnTime) {
+      this._thread(this.length, saturate(clock / Math.max(0.02, c.threadBurnTime)));
     }
 
     if (this._collapsed) {
@@ -724,7 +939,7 @@ export class EmberveilLatticeAbility extends Ability {
       fade = 1 - Easing.inQuad(ft);
     }
 
-    const surge = this._shape(dt, grow, contract, dissolve, heat, fade);
+    const surge = this._shape(dt, grow, contract, dissolve, heat, fade, this._collapsed ? 1 : burnT);
 
     const burning = (1 - dissolve) * fade;
     if (burning > 0.01) this._burnFx(dt, grow, burning * (1 + surge));
@@ -750,6 +965,8 @@ export class EmberveilLatticeAbility extends Ability {
     this.flames.visible = false;
     this.floor.visible = false;
     this.haze.visible = false;
+    this.thread.visible = false;
+    for (const mesh of this.ballMeshes) mesh.visible = false;
   }
 
   dispose() {
@@ -760,6 +977,9 @@ export class EmberveilLatticeAbility extends Ability {
     this.floorMaterial.dispose();
     this.hazeGeometry.dispose();
     this.hazeMaterial.dispose();
+    this.threadGeometry.dispose();
+    this.threadMaterial.dispose();
+    for (const material of this.ballMaterials) material.dispose();
     super.dispose();
   }
 }
@@ -780,6 +1000,24 @@ export function buildEditor(gui, c, Editor) {
   R(cast, c, 'cooldown', 0, 10, 0.05, 'cooldown');
   R(cast, c, 'callSparks', 0, 600, 1, 'ember sparks / s');
   R(cast, c, 'callFlameSize', 0, 4, 0.05, 'landing flame (m)');
+  R(cast, c, 'handFlare', 0, 3, 0.05, 'hand flare (m)');
+  R(cast, c, 'throwHeight', 0.2, 3, 0.05, 'throw height (m)');
+  R(cast, c, 'throwLob', 0, 5, 0.05, 'lob (m)');
+  const ball = cast.addFolder('Ember ball + thread');
+  R(ball, c, 'ballRadius', 0.1, 1.5, 0.01, 'ball radius (m)');
+  R(ball, c, 'ballStrands', 2, MAX_STRANDS, 1, 'wound strands');
+  R(ball, c, 'ballStrandWidth', 0.005, 0.2, 0.005, 'strand radius (m)');
+  R(ball, c, 'ballSpin', -20, 20, 0.1, 'spin (rad/s)');
+  R(ball, c, 'ballHeat', 0, 1, 0.01, 'heat');
+  R(ball, c, 'ballFlameGlow', 0, 2, 0.01, 'flame glow (× cage flames)');
+  R(ball, c, 'ballWindTime', 0.02, 0.6, 0.01, 'winds up over (s)');
+  R(ball, c, 'threadWidth', 0.005, 0.2, 0.005, 'thread radius (m)');
+  R(ball, c, 'threadWrithe', 0, 0.4, 0.005, 'thread writhe (m)');
+  R(ball, c, 'threadBurnTime', 0.05, 2, 0.01, 'thread burns back over (s)');
+  R(ball, c, 'trailSmoke', 0, 120, 1, 'trail smoke / s');
+  R(ball, c, 'trailSmokeSize', 0.05, 2, 0.01, 'trail smoke size');
+  R(ball, c, 'telegraphStart', 0, 0.95, 0.01, 'circle marked from (× throw)');
+  R(ball, c, 'telegraphReveal', 0, 1, 0.01, 'circle mark strength');
   cast.addColor(c, 'colorA').name('ember');
   cast.addColor(c, 'colorB').name('ember, hot');
   Editor.castAnimation(cast, c);
@@ -804,6 +1042,11 @@ export function buildEditor(gui, c, Editor) {
   R(shape, c, 'swaySpeed', 0, 8, 0.05, 'writhe speed');
   R(shape, c, 'weaveStagger', 0, 1, 0.01, 'climb stagger');
   R(shape, c, 'weaveHeadGlow', 0, 8, 0.05, 'climbing tip glow');
+  R(shape, c, 'breathAmount', 0, 0.3, 0.005, 'breathes (× height)');
+  R(shape, c, 'breathSpeed', 0, 10, 0.05, 'breath speed');
+  R(shape, c, 'cageCreep', 0, 0.4, 0.005, 'creeps in while burning (× radius)');
+  R(shape, c, 'burnOrbit', 0, 3, 0.05, 'heat wave round the cage');
+  R(shape, c, 'burnOrbitSpeed', -8, 8, 0.05, 'heat wave speed (rad/s)');
 
   const strand = folder.addFolder('2 · Burning strand');
   R(strand, c, 'strandWidth', 0.005, 0.4, 0.005, 'radius (m)');
@@ -818,7 +1061,11 @@ export function buildEditor(gui, c, Editor) {
   R(strand, c, 'strandSoftFade', 0.01, 1, 0.01, 'soft fade (m)');
   strand.addColor(c, 'colorStrandCore').name('white-hot core');
   strand.addColor(c, 'colorStrandBody').name('body');
-  strand.addColor(c, 'colorStrandEdge').name('rim');
+  strand.addColor(c, 'colorStrandEdge').name('crack body');
+  strand.addColor(c, 'colorStrandDeep').name('crack deep');
+  strand.addColor(c, 'colorStrandChar').name('charred cord');
+  R(strand, c, 'crackScale', 0.1, 10, 0.05, 'crack scale');
+  R(strand, c, 'crackWidth', 0.01, 0.8, 0.005, 'crack width');
 
   const flame = folder.addFolder('3 · Flames');
   R(flame, c, 'flameWidth', 1, 10, 0.05, 'width (× strand)');
@@ -830,6 +1077,7 @@ export function buildEditor(gui, c, Editor) {
   R(flame, c, 'flameIntensity', 0, 10, 0.05, 'intensity');
   R(flame, c, 'flameOpacity', 0, 1, 0.01, 'opacity');
   R(flame, c, 'flameSoftFade', 0.01, 2, 0.01, 'soft fade (m)');
+  R(flame, c, 'flameClimb', 0, 3, 0.05, 'tongues climb while burning');
   flame.addColor(c, 'colorFlameCore').name('core');
   flame.addColor(c, 'colorFlameBody').name('body');
   flame.addColor(c, 'colorFlameTip').name('tips');

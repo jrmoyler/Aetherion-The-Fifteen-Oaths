@@ -55,7 +55,7 @@ export default {
     echoFlare: 1.6, // extra brightness the instant it is stamped
     echoFlareTime: 0.35, // seconds that flare takes to settle
     echoOpacity: 0.85,
-    echoGlow: 1.6,
+    echoGlow: 0.95,
     echoFill: 0.45, // brightness of the glass interior (rim is separate)
     echoFresnel: 2.2,
     echoFresnelPower: 2.4,
@@ -67,6 +67,8 @@ export default {
     colorEchoCore: '#ff9a3c',
     colorEchoRim: '#fff1c4',
     colorEchoBand: '#ffd27a',
+    colorEchoDeep: '#2b1305', // deep stop: dark amber glass that grounds the echo
+    echoBody: 0.62, // 0..1 how solid that dark glass body is
 
     /* --- the rewind collapse --- */
     echoCollapseTime: 0.42, // seconds for one echo to unthread
@@ -165,12 +167,13 @@ export default {
     /* ================================================================ */
     snapRadius: 3, // metres
     snapDecalLife: 0.8,
-    snapBurst: 2.6,
-    snapBurstLife: 0.45,
-    snapBurstIntensity: 2.2,
-    colorBurstA: '#ffffff',
-    colorBurstB: '#ffcf76',
-    colorBurstC: '#7fd8ff',
+    snapBurst: 1.5, // m: the pressure shell, kept body-sized so it never fills the frame
+    snapBurstLife: 0.4,
+    snapBurstIntensity: 1.4,
+    snapBurstOpacity: 0.42,
+    colorBurstA: '#fff3d6',
+    colorBurstB: '#e8902a',
+    colorBurstC: '#1d3c5a',
     colorDust: '#a08668',
     snapSparks: 110,
     snapSparkSpeed: 9,
@@ -180,8 +183,8 @@ export default {
     snapWarpTime: 0.45,
     snapShake: 0.45,
     snapShakeTime: 0.35,
-    snapFlash: 0.45,
-    colorFlash: '#ffe9b8',
+    snapFlash: 0.2,
+    colorFlash: '#ffb45a',
 
     /* --- hits on the outbound dash --- */
     hitRadius: 1.1, // metres either side of the arc
@@ -196,6 +199,12 @@ export default {
     "lightColor": "#ffcf76",
     "lightIntensity": 6,
     "lightRadius": 9,
-    lightBoost: 2.5 // the snap's light punch, × lightIntensity
+    lightBoost: 2.5, // the snap's light punch, × lightIntensity
+
+    /* Camera: the run and the snap home move the orbit target metres out and
+     * back; the rig would ratchet the pitch top-down. The cast holds the pitch
+     * it found, through the cast and a settle while the target eases home. */
+    cameraHold: 1, // 0..1 how firmly the camera keeps its pitch
+    cameraSettle: 2 // s the hold outlasts the cast
   }
 };

@@ -32,37 +32,37 @@ export default {
     /* --- the cast --- */
     "range": 20,
     "minRange": 0,
-    "speed": 14, // m/s the herald star travels to the circle
-    "lifetime": 3.6, // seconds over which the stars fall, first launch to last
+    "speed": 20, // m/s the herald star travels to the circle
+    "lifetime": 1.8, // seconds over which the stars fall, first launch to last
     "cooldown": 0.7,
     "castAnim": "cast3",
     "zoneRadius": 5.5, // metres — the circle the stars land in
 
     /* --- timing --- */
-    drawTime: 1.1, // seconds for the constellation to draw itself
-    holdTime: 0.35, // seconds it hangs complete before the first star falls
-    fallTime: 0.45, // seconds a star spends falling
-    telegraphLead: 0.9, // seconds before a star leaves the sky that its mark appears
-    chargeTime: 0.3, // seconds a star swells before it drops
+    drawTime: 0.45, // seconds for the constellation to draw itself
+    holdTime: 0.08, // seconds it hangs complete before the first star falls
+    fallTime: 0.3, // seconds a star spends falling
+    telegraphLead: 0.45, // seconds before a star leaves the sky that its mark appears
+    chargeTime: 0.18, // seconds a star swells before it drops
     orderJitter: 0.55, // 0 = falls in drawing order, 1 = in random order
-    linger: 0.6, // seconds after the last landing before the figure closes
-    fadeTime: 1.2, // seconds for the figure to dim and close
+    linger: 1.2, // seconds after the last landing before the figure closes
+    fadeTime: 1.0, // seconds for the figure to dim and close
 
     /* --- the constellation --- */
-    starCount: 9, // stars (max 16)
-    skyHeight: 11, // metres over the circle
-    skyRadius: 4.6, // radius of the figure, metres
-    skyDepth: 1.8, // metres of height jitter between stars
-    skyTilt: 0.45, // radians the figure is tilted toward the caster
+    starCount: 8, // stars (max 16)
+    skyHeight: 3.4, // metres over the circle
+    skyRadius: 3.6, // radius of the figure, metres
+    skyDepth: 1.0, // metres of height jitter between stars
+    skyTilt: 0.5, // radians the figure is tilted toward the caster
     skyOffset: 0.6, // metres the figure sits back toward the caster
     skyDrift: 0.05, // radians/second the whole figure turns
     extraLinks: 2, // lines that close loops in the figure (max 4)
 
     /* --- star points (billboard, diffraction spikes) --- */
-    starSize: 0.16, // core radius, metres
+    starSize: 0.3, // core radius, metres
     sizeJitter: 0.45,
     starIntensity: 4.0,
-    starHalo: 0.55,
+    starHalo: 0.8,
     starHaloSize: 1.4, // × core radius
     spikeLength: 9, // × core radius
     spikeSharpness: 7, // higher = thinner spikes
@@ -77,9 +77,9 @@ export default {
     colorStarSpike: '#fff2c8',
 
     /* --- the lines between them --- */
-    lineWidth: 0.07, // glow half-width, metres
+    lineWidth: 0.12, // glow half-width, metres
     lineCore: 0.22, // core width, fraction of the glow
-    lineIntensity: 1.8,
+    lineIntensity: 2.6,
     lineOpacity: 0.9,
     lineGap: 0.35, // metres left clear at each star
     lineShimmer: 0.6,
@@ -93,13 +93,13 @@ export default {
     landSpread: 0.9, // landing points as a fraction of the circle
     landBias: 0.55, // 0 = anywhere, 1 = straight down under its own star
     scatter: 0.6,
-    trailLength: 6.5, // metres
-    trailWidth: 0.12, // metres, at the head end
+    trailLength: 5, // metres
+    trailWidth: 0.3, // metres, at the head end
     trailTaper: 1.3, // > 1 thins it faster toward the tip
     trailFalloff: 1.4, // > 1 fades it faster toward the tip
     trailSparkle: 0.55,
     trailSparkleScale: 2.2,
-    headSize: 0.26, // metres
+    headSize: 0.5, // metres
     headGlow: 2.4,
     meteorIntensity: 4.2,
     meteorSoftFade: 0.25,
@@ -109,20 +109,20 @@ export default {
     colorTrailTip: '#ff9a3a',
 
     /* --- the floor telegraph --- */
-    telegraphRadius: 1.5, // metres
+    telegraphRadius: 1.6, // metres
     telegraphGlow: 1.6,
     telegraphOpacity: 1.0,
     telegraphSoftness: 1.0, // how wide the gathered light is
     telegraphArms: 1.4, // the faint four-pointed star on the floor
     telegraphBreath: 0.45,
     afterglow: 2.2, // the warm spot a landing leaves
-    afterglowTime: 1.4, // seconds it cools over
+    afterglowTime: 2.6, // seconds it cools over
     colorTelegraph: '#ffd27a',
     colorTelegraphHot: '#fff6dc',
 
     /* --- each impact --- */
-    burstRadius: 2.2, // the radiant star printed on the floor, metres
-    burstLife: 1.1,
+    burstRadius: 2.6, // the radiant star printed on the floor, metres
+    burstLife: 1.4,
     burstGlow: 3.0,
     burstRays: 12,
     burstRaySharpness: 48, // higher = thinner rays
@@ -138,8 +138,8 @@ export default {
     colorRingB: '#ffffff',
     shellSize: 1.2, // small AIR shell of light, metres
     shellLife: 0.3,
-    impactShake: 0.14,
-    impactFlash: 0.09,
+    impactShake: 0.22,
+    impactFlash: 0.14,
     colorFlash: '#fff0c0',
     impactLight: 12, // added to the light per landing
 
@@ -150,7 +150,7 @@ export default {
     hitSpin: 1.4,
 
     /* --- glitter (SOFT, additive) --- */
-    glitterCount: 46, // per impact
+    glitterCount: 70, // per impact
     glitterSpeed: 4.5,
     glitterSize: 0.05,
     glitterLifetime: 1.3,
@@ -177,8 +177,33 @@ export default {
     dustGlow: 1.6,
 
     /* --- the herald (travel) --- */
-    heraldSize: 0.22,
+    heraldSize: 0.45,
     heraldGlitter: 120, // per second
+    heraldTrail: 3, // metres of meteor trail the herald draws behind it
+
+    /* --- the hero: cut crystal stars (lit, shadow-casting) --- */
+    crystalSize: 0.55, // radius, metres
+    crystalEmbed: 0.35, // centre height when landed, × size (lower = buried deeper)
+    crystalLean: 0.45, // radians a landed star leans off upright
+    crystalSpin: 0.8, // radians/second a landed star turns about its face
+    crystalTumble: 6, // radians/second it tumbles while falling
+    crystalCool: 1.6, // seconds it cools from white-hot to ember
+    crystalGlow: 1.2, // emissive gain of the facets
+    crystalPulse: 2.2, // ember pulse speed
+    crystalRim: 0.8, // rim light
+    crystalMetalness: 0.15,
+    crystalRoughness: 0.22,
+    colorCrystal: '#ffe2a0',
+
+    /* --- the floor: craters and the figure re-drawn on the ground --- */
+    fieldRadius: 1.1, // × zone radius
+    fieldOpacity: 0.55, // how dark the circle goes (deep stop)
+    craterRadius: 1.1, // metres
+    craterCool: 2.2, // seconds the crater's cracks cool over
+    floorLineWidth: 0.09, // metres
+    floorLineGlow: 2.2,
+    floorLineTime: 0.35, // seconds a floor line takes to draw between two landed stars
+    colorDeep: '#2a1606',
 
     "colorA": "#fff4c0",
     "colorB": "#ffaa40",

@@ -185,3 +185,46 @@ export function syncLatticeUniforms(u, p) {
   u.uShrink.value = p.shrink;
   u.uSquash.value = p.squash;
 }
+
+/**
+ * The burning thread the thrown ember spools out behind it, in parameter
+ * space like the strands: `position.x` is `s`, 0 at the hand and 1 at the
+ * ember, `position.yz` the tube's cross-section. The thread material walks
+ * the ember's own lob (`uOrigin`, `uDir`, `uSpan`, `uLob`) in the vertex
+ * stage, so the thread always lies exactly on the path the ember flew.
+ */
+export function createThreadGeometry(segments = 72, sides = 6) {
+  const ring = sides + 1;
+  const vertexCount = (segments + 1) * ring;
+  const positions = new Float32Array(vertexCount * 3);
+  const indices = new Uint16Array(segments * sides * 6);
+  let v = 0;
+  let k = 0;
+  for (let j = 0; j <= segments; j++) {
+    const s = j / segments;
+    for (let q = 0; q <= sides; q++) {
+      const a = (q / sides) * Math.PI * 2;
+      positions[v * 3] = s;
+      positions[v * 3 + 1] = Math.cos(a);
+      positions[v * 3 + 2] = Math.sin(a);
+      v++;
+    }
+  }
+  for (let j = 0; j < segments; j++) {
+    for (let q = 0; q < sides; q++) {
+      const a = j * ring + q;
+      const b = a + ring;
+      indices[k++] = a;
+      indices[k++] = b;
+      indices[k++] = a + 1;
+      indices[k++] = a + 1;
+      indices[k++] = b;
+      indices[k++] = b + 1;
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setIndex(new BufferAttribute(indices, 1));
+  geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
+  return geometry;
+}

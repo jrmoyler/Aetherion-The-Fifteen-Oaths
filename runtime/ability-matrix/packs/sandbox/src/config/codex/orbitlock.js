@@ -14,7 +14,7 @@ export default {
     label: 'Orbit Lock',
     accent: '#e7deff',
     key: '',
-    element: 'cosmic',
+    element: 'gravity',
     hint: 'Cosmic — a star bursts into planets on tilted orbits above the circle; the orbits lock into one ring and it slams down',
     cast: 'zone',
     glyph: `<circle cx="50" cy="50" r="30"/><ellipse cx="50" cy="50" rx="34" ry="12" transform="rotate(-25 50 50)"/><circle cx="80" cy="50" r="5"/><circle cx="26" cy="64" r="4"/><circle cx="50" cy="50" r="4"/>`
@@ -60,26 +60,57 @@ export default {
     lockTime: 0.7, // seconds the orbits take to flatten into one ring
     lockHold: 0.2, // seconds the locked ring hangs before it drops
     lockLean: 0.42, // radians the locked ring leans toward the caster (comes out as it falls)
-    ringWidth: 0.03, // tube radius of an orbit track, metres
-    ringGlow: 1.4, // the faint track
+    ringWidth: 0.06, // tube radius of an orbit track, metres
+    ringGlow: 1.1, // the faint track
     trailLength: 0.32, // share of the gap between planets the comet trail fills
-    trailGlow: 5.5, // brightness of the trails
-    colorRingA: '#ffffff', // trail, hot
-    colorRingB: '#8f72ff', // track
+    trailGlow: 4.0, // brightness of the trails
+    colorRingA: '#e2d6ff', // trail, hot
+    colorRingB: '#5a34e8', // track
 
     /* ================================================================ */
     /* 3 · THE PLANETS                                                   */
     /* ================================================================ */
-    planetSize: 0.36, // radius, metres
-    planetGlow: 1.25, // the banded face
-    planetRim: 3.0, // the violet limb
+    planetSize: 0.55, // radius, metres — dense moons, not specks
+    planetGlow: 0.8, // the molten seams
+    planetRim: 1.4, // the violet limb
     planetRimPower: 2.2,
     bandScale: 3.0, // latitude bands per planet
     bandSpeed: 2.0, // how fast the bands turn
     planetTumble: 3.0, // radians/second each planet spins on its own axis
-    colorPlanetCore: '#f4eeff',
-    colorPlanetBand: '#5a3ad8',
-    colorPlanetRim: '#b896ff',
+    colorPlanetCore: '#f2e8ff', // seams, white-hot
+    colorPlanetBand: '#6a3cff', // seams, saturated
+    colorPlanetRim: '#8a66ff',
+    colorPlanetRock: '#3a3050', // the rock body, lit by the sun
+    planetCrag: 0.9, // 0..2 how lumpy and cratered
+    planetFissure: 0.55, // 0..1 how wide the molten seams run
+
+    /* ================================================================ */
+    /* 3b · THE SINGULARITY & THE WELL                                   */
+    /* ================================================================ */
+    coreSize: 1.0, // metres — the black core the orrery turns round
+    coreRimGlow: 2.6, // its photon ring (bloom > 1)
+    coreRimPower: 4.5,
+    lensSize: 3.2, // the bent light round it, × the core
+    lensStrength: 1.4,
+    lensSwirl: 0.9, // radians the bend is twisted by the spin
+    vortexReach: 0.95, // the accretion vortex at full size, × zoneRadius
+    vortexHeight: 0.55, // metres its ridges stand at the lip
+    vortexArms: 3,
+    vortexTwist: 3.2, // how tightly the arms wind in
+    vortexSpin: 2.2, // radians/second (it speeds up as it locks and swallows)
+    vortexHotGlow: 1.6, // the white-hot lip at the horizon
+    vortexStreaks: 0.6, // pale streaks of shredded matter
+    vortexOpacity: 0.95,
+    wellSag: 1.1, // metres the hanging vortex sags into a well
+    swallowDelay: 0.25, // seconds after the slam before the moons are dragged in
+    swallowTime: 1.6, // seconds the drag-in takes
+    swallowTo: 0.12, // × zoneRadius, how far in they are dragged before they go under
+    swallowSpin: 2.4, // radians/second round the well at the rim (faster as they close)
+    swallowRumble: 0.06, // the floor rumbling as they go
+    colorWellHot: '#f6eeff',
+    colorWellPale: '#b49cff',
+    colorWellBody: '#3a1aa8',
+    colorWellDeep: '#07031a',
 
     /* ================================================================ */
     /* 4 · THE DROP                                                      */
@@ -94,11 +125,11 @@ export default {
     /* ================================================================ */
     sigilTicks: 36, // ticks round the dial
     sigilWidth: 0.05, // ring line width, metres
-    sigilGlow: 2.4,
+    sigilGlow: 1.8,
     sigilOpacity: 0.9,
     sigilSpin: 0.5, // tick band turns, revolutions/second × ticks
-    colorSigilA: '#efe8ff',
-    colorSigilB: '#7a5cff',
+    colorSigilA: '#b9a2ff',
+    colorSigilB: '#5a34e8',
 
     /* ================================================================ */
     /* 6 · STAR DUST, SPARKS & DUST                                      */
@@ -119,7 +150,7 @@ export default {
     smokeSize: 0.7,
     smokeLife: 1.4,
     smokeOpacity: 0.32,
-    colorDustA: '#ffffff',
+    colorDustA: '#efe6ff',
     colorDustB: '#d6c8ff',
     colorDustC: '#8a6cff',
     colorDustD: '#2a1a66',
@@ -150,11 +181,11 @@ export default {
     warpReach: 1.4, // × zoneRadius
     warpTime: 0.5, // seconds it takes to run out
     colorFlash: '#cbb8ff',
-    colorBurstA: '#ffffff',
-    colorBurstB: '#b49cff',
-    colorBurstC: '#3a2280',
+    colorBurstA: '#d8c8ff',
+    colorBurstB: '#7a52ff',
+    colorBurstC: '#1a0c48',
     colorShockA: '#9a80ff',
-    colorShockB: '#f2ecff',
+    colorShockB: '#c4b0ff',
     colorCrater: '#120a24',
     colorCraterHot: '#a58cff',
 

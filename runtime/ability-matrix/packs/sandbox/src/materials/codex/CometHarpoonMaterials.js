@@ -26,6 +26,9 @@ import { getColor } from '../../utils/color.js';
  *    gold veins, glowing rims, dissolving from the tips.
  *  - **the crater** — a floor quad: frost cracks radiating from the strike,
  *    a gold ring, a dark pit, cooling and eroding.
+ *  - **the solid ice** (`createIceSolidMaterial`) — the nucleus impaled on
+ *    the harpoon and the lotus of faceted blades: opaque, sun-lit, specular,
+ *    fresnel, glowing seams, ramp white → pale ice → blue → navy-black.
  *  - **the lens** — `LAYER.DISTORTION`: a shimmer round the head in flight, a
  *    pressure ring when it blooms.
  *
@@ -846,6 +849,8 @@ const CRATER_FRAGMENT = /* glsl */ `
   uniform float uCrackGlow;
   uniform float uRingGlow;
   uniform float uFadeT;
+  uniform float uPulse;        // 0..1 light running out along the cracks (linger)
+  uniform float uTime;
   uniform float uOpacity;
   uniform vec3  uColorHot;
   uniform vec3  uColorCrack;
@@ -876,13 +881,15 @@ const CRATER_FRAGMENT = /* glsl */ `
     float frost = (fbm3(vec3(vP * 2.2, uSeed)) * 0.5 + 0.5) * (1.0 - smoothstep(0.2, 0.9, rn)) * uGrow;
 
     vec3 hot = mix(uColorCrack, uColorHot, smoothstep(0.4, 0.9, uHeat * (1.0 - rn)));
-    vec3 col = uColorChar * (0.6 + 0.4 * frost);
-    float lit = max(crack, glow * 0.5);
+    vec3 col = mix(uColorChar, uColorCrack * 0.35, frost * 0.6);
+    float run = 0.55 + 0.45 * sin(r * 3.5 - uTime * 7.0 + id * 1.7);
+    float lit = max(crack, glow * 0.5) * mix(1.0, run * 1.4, uPulse);
     col = mix(col, hot * uCrackGlow * (0.3 + uHeat) * uGlobalGlow, clamp(lit, 0.0, 1.0));
     col += uColorRing * ring * uRingGlow * (0.2 + uHeat) * uGlobalGlow;
     col += uColorHot * pit * uHeat * uCrackGlow * 0.6 * uGlobalGlow;
 
-    float a0 = max(max(lit, ring * 0.8), max(frost * 0.45, pit * 0.8));
+    float a0 = max(max(lit, ring * 0.8), max(frost * 0.85, pit * 0.9));
+    a0 = max(a0, (1.0 - smoothstep(0.55, 0.95, rn)) * uGrow * 0.75);
     a0 *= 1.0 - smoothstep(0.85, 1.0, rn);
     float n = snoise(vec3(vP * 1.7, uSeed * 2.0)) * 0.5 + 0.5;
     float thr = uFadeT * 1.2 - 0.1;
@@ -915,6 +922,7 @@ export function createCraterMaterial() {
       uCrackGlow: { value: 3 },
       uRingGlow: { value: 2 },
       uFadeT: { value: 0 },
+      uPulse: { value: 0 },
       uOpacity: { value: 1 },
       uColorHot: { value: new Color() },
       uColorCrack: { value: new Color() },
@@ -931,7 +939,8 @@ export function createCraterMaterial() {
     const g = settings.global;
     const u = material.uniforms;
     u.uCenter.value.copy(state.center);
-    u.uRadius.value = Math.max(0.1, c.craterRadius * g.explosionIntensity);
+    u.uRadius.value = Math.max(0.1, c.craterRadius * g.explosionIntensity * (1 + c.frostCreep * (state.creep ?? 0)));
+    u.uPulse.value = (state.pulse ?? 0) * c.crackPulse;
     u.uSeed.value = state.seed;
     u.uGrow.value = state.grow;
     u.uHeat.value = state.heat;
@@ -944,6 +953,163 @@ export function createCraterMaterial() {
     u.uColorCrack.value.copy(getColor(c.colorCrack));
     u.uColorRing.value.copy(getColor(c.colorCraterRing));
     u.uColorChar.value.copy(getColor(c.colorCraterChar));
+  };
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The solid comet ice: the nucleus and the lotus blades                */
+/* -------------------------------------------------------------------- */
+
+const ICE_VERTEX = /* glsl */ `
+  attribute float aRough;
+  attribute float aAlong;
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying vec3  vLocal;
+  varying float vRough;
+  varying float vAlong;
+  void main() {
+    mat4 model = modelMatrix;
+    #ifdef USE_INSTANCING
+      model = modelMatrix * instanceMatrix;
+    #endif
+    vec4 w = model * vec4(position, 1.0);
+    vWorld = w.xyz;
+    vLocal = position;
+    vRough = aRough;
+    vAlong = aAlong;
+    vNormalW = normalize(mat3(model) * normal);
+    gl_Position = projectionMatrix * viewMatrix * w;
+  }
+`;
+
+const ICE_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
+  uniform float uSeed;
+  uniform float uKind;        // 0 nucleus, 1 blade
+  uniform vec3  uFwd;         // nucleus: the way it flies (its hot, sublimating face)
+  uniform float uHeat;        // 0..1 glow in the seams and on the hot face
+  uniform float uPulse;       // 0..1 seams pulsing in the linger
+  uniform float uDissolve;    // 0 whole .. 1 gone
+  uniform float uSeamScale;
+  uniform float uSeamGlow;
+  uniform float uFresnel;
+  uniform float uSpecular;
+  uniform float uAmbient;
+  uniform vec3  uColorCore;   // white-hot
+  uniform vec3  uColorTint;   // pale ice
+  uniform vec3  uColorBody;   // saturated blue
+  uniform vec3  uColorDeep;   // near-black navy
+
+  varying vec3  vNormalW;
+  varying vec3  vWorld;
+  varying vec3  vLocal;
+  varying float vRough;
+  varying float vAlong;
+
+  ${noiseGLSL}
+
+  void main() {
+    vec3 N = normalize(vNormalW);
+    vec3 V = normalize(cameraPosition - vWorld);
+    if (dot(N, V) < 0.0) N = -N;
+    vec3 L = normalize(uLightDir);
+    float ndl = max(dot(N, L), 0.0);
+    vec3 H = normalize(L + V);
+    float spec = pow(max(dot(N, H), 0.0), 48.0) * uSpecular;
+    float fres = pow(1.0 - abs(dot(N, V)), 3.0) * uFresnel;
+
+    // Dissolve: the nucleus sublimates on noise, a blade melts from its tip.
+    float dn = snoise(vLocal * 3.3 + uSeed) * 0.5 + 0.5;
+    float field = mix(dn, vAlong * 0.8 + dn * 0.2, uKind);
+    float thr = 1.0 - uDissolve * 1.15;
+    if (uDissolve > 0.0 && field > thr) discard;
+    float edge = uDissolve > 0.0 ? 1.0 - smoothstep(0.0, 0.06, thr - field) : 0.0;
+
+    // Ice seams: cells of clear blue under a frosted, dirty crust.
+    vec3 sp = vLocal * uSeamScale + vec3(uSeed);
+    vec2 vo = voronoi2(sp.xy + sp.z * 0.7);
+    float seam = 1.0 - smoothstep(0.0, 0.12, abs(vo.x - 0.42));
+    float crust = fbm3(vLocal * 4.0 + uSeed) * 0.5 + 0.5;
+    float depthT = clamp(crust * 0.7 + vRough * 0.6 + (1.0 - uKind) * 0.15, 0.0, 1.0);
+    vec3 albedo = mix(uColorBody, uColorDeep, depthT);
+    albedo = mix(albedo, uColorTint, (1.0 - uKind) * smoothstep(0.62, 0.9, crust) * 0.5);
+    // A blade is clearer and paler toward its tip.
+    albedo = mix(albedo, uColorTint, uKind * smoothstep(0.45, 1.0, vAlong) * 0.55);
+
+    vec3 col = albedo * (uAmbient + ndl * 0.95);
+    col += uColorTint * spec;
+    col += uColorTint * fres * 0.9;
+    float pulse = 0.65 + 0.35 * sin(uTime * 5.0 - vAlong * 6.0 + vo.y * 9.0) * uPulse;
+    col += uColorBody * seam * uSeamGlow * uHeat * pulse * uShaderIntensity;
+    // Nucleus: its forward face boils white where it meets the solar wind.
+    float hot = (1.0 - uKind) * pow(max(dot(N, normalize(uFwd)), 0.0), 2.0) * uHeat;
+    col += uColorCore * hot * 1.6 * (0.6 + 0.4 * crust);
+    // Blade: a white spine of light inside.
+    col += uColorCore * uKind * exp(-pow(abs(vLocal.z) / 0.18, 2.0)) * uHeat * 0.35;
+    col += uColorCore * edge * 3.0;
+    gl_FragColor = vec4(col * uGlobalGlow, 1.0);
+  }
+`;
+
+/**
+ * Lit, opaque comet ice — the nucleus (`kind` 'nucleus') or the lotus's
+ * blades (`kind` 'blade', instanced). Sun diffuse + specular, fresnel rim,
+ * glowing seams, four-stop ramp from white-hot to near-black navy. Sits on
+ * `LAYER.WORLD` and casts shadows.
+ */
+export function createIceSolidMaterial(kind) {
+  const blade = kind === 'blade';
+  const material = new ShaderMaterial({
+    transparent: false,
+    depthWrite: true,
+    depthTest: true,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uSeed: { value: 0 },
+      uKind: { value: blade ? 1 : 0 },
+      uFwd: { value: new Vector3(0, 0, 1) },
+      uHeat: { value: 1 },
+      uPulse: { value: 0 },
+      uDissolve: { value: 0 },
+      uSeamScale: { value: 2 },
+      uSeamGlow: { value: 1.5 },
+      uFresnel: { value: 1 },
+      uSpecular: { value: 1 },
+      uAmbient: { value: 0.3 },
+      uColorCore: { value: new Color() },
+      uColorTint: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: ICE_VERTEX,
+    fragmentShader: ICE_FRAGMENT
+  });
+
+  /** @param {object} state { fwd?, heat, pulse, dissolve, seed } */
+  material.userData.sync = (state) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uSeed.value = state.seed;
+    if (state.fwd) u.uFwd.value.copy(state.fwd);
+    u.uHeat.value = state.heat;
+    u.uPulse.value = state.pulse;
+    u.uDissolve.value = state.dissolve;
+    u.uSeamScale.value = (blade ? c.bladeSeamScale : c.nucleusSeamScale) * g.noiseFrequency;
+    u.uSeamGlow.value = (blade ? c.bladeSeamGlow : c.nucleusSeamGlow) * g.glow;
+    u.uFresnel.value = c.iceFresnel * g.fresnel;
+    u.uSpecular.value = c.iceSpecular;
+    u.uAmbient.value = c.iceAmbient;
+    u.uColorCore.value.copy(getColor(c.colorIceCore));
+    u.uColorTint.value.copy(getColor(c.colorIceTint));
+    u.uColorBody.value.copy(getColor(c.colorIceBody));
+    u.uColorDeep.value.copy(getColor(c.colorIceDeep));
   };
   return material;
 }

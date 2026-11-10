@@ -13,11 +13,22 @@
  */
 import { Raycaster, Plane, Vector2, Vector3 } from 'three';
 import { settings, DEFAULT_SETTINGS, applySettings } from '../config/settings.js';
+import { MECHANIC_PRESETS, MECHANIC_VARIANTS } from '../combat/ucsm/mechanics/presets.js';
 
 const GROUND = new Plane(new Vector3(0, 1, 0), 0);
 const frame = () => new Promise((resolve) => requestAnimationFrame(() => resolve()));
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const clone = (value) => (value === undefined ? undefined : JSON.parse(JSON.stringify(value)));
+
+/** Arm a live mechanic by its authoritative UID, without touching legacy castables. */
+export function armMechanic(app, uid) {
+  const preset = MECHANIC_VARIANTS[uid] ?? Object.values(MECHANIC_PRESETS).find((p) => p.uid === uid);
+  if (!preset) throw new Error(`Unknown mechanic ${uid}`);
+  if (!app.combat?.enabled) throw new Error('Enable combat mechanics to use this move');
+  const selected = app.combat.mechanics.select(preset.family, MECHANIC_VARIANTS[uid] ? uid : null);
+  if (!selected || selected.ok === false) throw new Error(selected?.reason ?? 'Unable to arm mechanic while paused or disabled');
+  return preset;
+}
 
 /**
  * Hosted builds can only serve web media types, so the staging script renames
@@ -49,6 +60,13 @@ export function installMatrixBridge(app, packId = 'sandbox') {
   let autoTimer = null;
   let autoUid = null;
   let castCount = 0;
+  let initialTimer = null;
+
+  // A newer player action takes precedence over the deferred URL action.
+  function cancelInitial() {
+    clearTimeout(initialTimer);
+    initialTimer = null;
+  }
 
   const post = (message) => {
     if (window.parent && window.parent !== window) window.parent.postMessage({ ...message, pack: packId }, '*');
@@ -85,15 +103,26 @@ export function installMatrixBridge(app, packId = 'sandbox') {
   }
 
   async function select(uid) {
+    cancelInitial();
     return app.select(uid);
   }
 
   async function arm(uid) {
+    cancelInitial();
     await app.select(uid);
     if (!app.activeAim.isArmed) await app.arm(uid);
   }
 
+  // Mechanics use the same spellbook but retain their own ground/self input.
+  // Validate the UID against implemented runtime presets before arming it.
+  function selectMechanic(uid) {
+    cancelInitial();
+    stopAuto();
+    return armMechanic(app, uid);
+  }
+
   async function cast(uid, options = {}) {
+    cancelInitial();
     await app.select(uid);
     const slot = app.slot;
     const runtime = slot.runtime;
@@ -121,12 +150,14 @@ export function installMatrixBridge(app, packId = 'sandbox') {
   }
 
   function stopAuto() {
+    cancelInitial();
     clearTimeout(autoTimer);
     autoTimer = null;
     autoUid = null;
   }
 
   function auto(uid, seconds = 4) {
+    cancelInitial();
     stopAuto();
     autoUid = uid;
     const loop = async () => {
@@ -177,11 +208,13 @@ export function installMatrixBridge(app, packId = 'sandbox') {
     pack: packId,
     list: () => ({ abilities: app.uids }),
     select,
+    selectMechanic,
     arm,
     cast,
     auto,
     stopAuto,
     clear: () => {
+      cancelInitial();
       stopAuto();
       app.clearEffects();
     },
@@ -219,6 +252,9 @@ export function installMatrixBridge(app, packId = 'sandbox') {
           break;
         case 'select':
           post({ matrix: 'selected', uid, meta: await select(uid) });
+          break;
+        case 'selectMechanic':
+          post({ matrix: 'mechanicSelected', uid, meta: selectMechanic(uid) });
           break;
         case 'arm':
           await arm(uid);
@@ -274,10 +310,11 @@ export function installMatrixBridge(app, packId = 'sandbox') {
   const start = params.get('ability');
   const autoSeconds = Number(params.get('auto'));
   if (start) {
-    setTimeout(() => {
+    initialTimer = setTimeout(() => {
+      initialTimer = null;
       if (autoSeconds > 0) auto(start, autoSeconds);
-      else if (params.get('cast') === '1') cast(start).catch(() => {});
-      else select(start).catch(() => {});
+      else if (params.get('cast') === '1') cast(start).catch((error) => post({ matrix: 'error', message: String(error?.message ?? error) }));
+      else select(start).catch((error) => post({ matrix: 'error', message: String(error?.message ?? error) }));
     }, 400);
   }
 

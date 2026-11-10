@@ -5,10 +5,13 @@
  * ability and its editor folder read. Plain data, no imports, so
  * `settings.js` can pull it in without a cycle.
  *
- * The construct runs on one clock from the moment the projection lands: the
- * mirage pool spreads, the copy assembles from the feet up, stands breathing
- * its own idle for the rest of `lifetime`, charges, and bursts into shards of
- * light. Every number below is read every frame.
+ * The projection runs down a road of false water with two ghosts of the
+ * caster on it. The construct then runs on one clock from the moment it lands:
+ * a false lake opens (deep, mirroring the sky), the copy assembles from the
+ * feet up and looms to `copyScale` × the caster, hanging upside down in the
+ * lake; a veil of heat stands up round it; it breathes its own idle for the
+ * rest of `lifetime`, the veil leans in as it charges, and it bursts into
+ * shards of light. Every number below is read every frame.
  */
 export default {
   id: 'mirage',
@@ -24,12 +27,12 @@ export default {
     /* --- the cast itself --- */
     range: 12, // maximum cast distance, metres
     minRange: 0, // zero: the copy can be stood right beside you
-    speed: 14, // how fast the projection runs to the circle, metres/second
-    lifetime: 4.0, // seconds from landing to the burst — assembly, standing and charge included
+    speed: 13, // how fast the projection runs to the circle, metres/second
+    lifetime: 2.4, // seconds from landing to the burst — assembly, standing and charge included
     cooldown: 0.8, // seconds before the ability can be armed again
     castAnim: 'cast2', // which clip in `CAST_ANIMATIONS` the body throws
     zoneRadius: 3, // the circle the aim indicator measures out; also the burst's kill radius
-    fadeTime: 1.4, // seconds the shards and motes take to settle after the burst
+    fadeTime: 1.3, // seconds the shards settle and the lake dries after the burst
     colorA: '#d0e8ff', // the copy's spectral core
     colorB: '#ffffff', // the burst flash
 
@@ -38,22 +41,35 @@ export default {
     projectRate: 220, // motes per second shed by the projection
     projectSize: 0.09,
     projectSpread: 0.35, // metres the stream frays to
+    travelGhost: 0.9, // the two chromatic ghosts running on the road (0 = none)
+    travelTrail: 0.55, // metres they string out behind the front
+
+    /* --- 0 · the road: false water laid down the line --- */
+    roadWidthNear: 0.5, // metres at the caster's feet
+    roadWidthFar: 2.6, // metres where it meets the circle
+    roadOpacity: 0.82,
+    roadSeam: 2.2, // the hot shimmer at its leading edge
+    roadDryTime: 1.6, // seconds after landing it takes to dry back to the lake
 
     /* ================================================================ */
     /* 1 · THE COPY                                                      */
     /* ================================================================ */
     bodyHeight: 1.78, // metres — normalises the shader bands, the haze and the light
+    copyScale: 1.75, // the copy looms to this × the caster's height
+    loomTime: 0.7, // seconds it takes to grow from your size to that
+    loomBreath: 0.025, // slow swell of its size while it stands
+    loomRate: 0.55, // breaths per second
     faceCaster: true, // turn to face the caster (a mirror), or face along the cast
     idleOffset: 0.6, // seconds into the idle clip the copy starts — out of step with you
     idleSpeed: 1.0, // the copy's own playback rate (× the global animation speed)
-    formTime: 0.9, // seconds to assemble from the feet up
+    formTime: 0.6, // seconds to assemble from the feet up
     formEdge: 0.09, // metres of hot seam at the assembly front
     formNoise: 0.22, // how ragged the assembly front is, metres
     formNoiseScale: 3.5, // features per metre in that front
     formGlow: 4.0, // brightness of the seam
-    rimStrength: 2.2, // fresnel rim
-    rimPower: 2.4, // rim thinness
-    fill: 0.42, // how much of the body itself glows, under the rim
+    rimStrength: 1.6, // fresnel rim
+    rimPower: 3.2, // rim thinness
+    fill: 0.24, // how much of the body itself glows, under the rim
     bandDensity: 9, // interference bands per metre
     bandSpeed: 2.4, // how fast the bands roll up the body
     bandSharpness: 3.0, // higher = thinner bands
@@ -64,24 +80,27 @@ export default {
     flickerRate: 14, // strobe re-rolls per second
     glitch: 0.018, // metres the slice tearing throws a band sideways
     glitchSlices: 26, // slices up the body
-    bodyGlow: 2.4,
-    bodyOpacity: 0.85,
-    colorBodyRim: '#a8d8ff',
-    colorBodyBand: '#e8f4ff',
-    colorBodyEdge: '#ffffff', // the assembly seam
+    bodyGlow: 1.6,
+    bodyOpacity: 0.9,
+    bodyCover: 0.78, // how much the copy's dark glass covers what is behind it — the silhouette
+    colorBodyRim: '#cfe6ff', // pale tint: the fresnel outline
+    colorBodyBand: '#7a7cff', // saturated body: the interference bands
+    colorBodyEdge: '#ffffff', // the assembly seam (core — the only stop above 1)
+    colorBodyDeep: '#1a0f4a', // deep violet glass inside the outline
 
     /* --- 2 · afterimages: the chromatic ghosts trailing the copy --- */
     afterCount: 2, // 0..2
-    afterSplit: 0.06, // metres either side of the copy, across the view
+    afterSplit: 0.08, // metres either side of the copy, across the view (× its size)
     afterLag: 0.1, // metres they drift behind it
     afterWobble: 0.05, // metres of slow sway
     afterWobbleRate: 1.3, // sways per second
-    afterOpacity: 0.25,
+    afterOpacity: 0.45,
+    afterDrift: 2.2, // how far apart they drift over the stand (× split)
     colorAfterA: '#ff5ad0',
     colorAfterB: '#4ff2ff',
 
     /* --- the charge before the burst --- */
-    chargeTime: 0.6, // seconds before the burst it starts to gather
+    chargeTime: 0.55, // seconds before the burst it starts to gather
     chargeGlow: 2.5, // extra brightness at the peak of the charge
     chargeGlitch: 0.07, // extra slice tearing at the peak
     chargeShake: 0.12, // a rumble while it gathers
@@ -89,21 +108,55 @@ export default {
     /* ================================================================ */
     /* 3 · THE MIRAGE POOL                                               */
     /* ================================================================ */
-    poolRadius: 0.75, // × zoneRadius
+    poolRadius: 0.95, // × zoneRadius
     poolGrowTime: 0.5, // seconds to spread after landing
-    poolRings: 7, // interference rings across the radius
-    poolRingSpeed: 0.6, // how fast they run outward
-    poolRingWidth: 0.05, // ring thickness, fraction of the radius
-    poolIridescence: 0.7, // how much the rings shift hue
+    poolRings: 4, // interference ripples across the radius (broken into wavelets)
+    poolRingSpeed: 0.5, // how fast they run outward
+    poolRingWidth: 0.035, // ring thickness, fraction of the radius
+    poolIridescence: 0.5, // how much the rings shift hue
     poolShimmer: 0.35, // heat shimmer bending the rings
     poolShimmerScale: 2.2,
-    poolEdgeGlow: 2.0, // the bright rim at the edge of the pool
-    poolGlow: 1.2,
-    poolOpacity: 0.8,
+    poolEdgeGlow: 0.85, // the bright rim at the edge of the pool
+    poolGlow: 0.45,
+    poolOpacity: 0.82, // how much the lake darkens the floor
+    poolSky: 0.7, // how much sky the lake mirrors
     poolFlare: 2.0, // how much it flares on the burst
     colorPoolA: '#bfe4ff',
     colorPoolB: '#7f9cff',
     colorPoolC: '#f0b8ff',
+    colorPoolDeep: '#0b0826', // the deep tone: the water that is not there
+
+    /* --- 3b · the reflection: the copy upside down in the lake --- */
+    reflectStrength: 0.95,
+    reflectCover: 0.55, // how much the reflected dark glass darkens the lake
+    reflectFade: 3.2, // metres of depth over which it fades
+    reflectRipple: 0.07, // metres it wavers sideways
+    reflectRippleFreq: 1.4, // ripples per metre
+    reflectRippleSpeed: 4,
+    colorReflect: '#7f8cff',
+
+    /* ================================================================ */
+    /* 3c · THE HEAT VEIL (the authored hero shape)                      */
+    /* ================================================================ */
+    veilCount: 11, // tongues of heat (max 16)
+    veilSeat: 0.62, // × zoneRadius
+    veilHeight: 4.2, // metres
+    veilWidth: 1.15, // metres at the foot
+    veilSway: 0.22, // metres
+    veilSwayFreq: 1.1, // waves up a ribbon
+    veilSwaySpeed: 3.2,
+    veilSpin: 0.25, // the ring turns slowly, rad/s
+    veilPull: 0.75, // how far they lean in over the copy on the charge
+    veilDelay: 0.15, // seconds after landing they start to stand
+    veilRiseTime: 0.6,
+    veilBlowTime: 0.6, // the burst blows them out and thins them over this
+    veilGlow: 1.3,
+    veilOpacity: 0.55,
+    veilBands: 5, // interference bands up a ribbon
+    veilCover: 0.4, // how much the smoky tips cover the sky behind (deep stop)
+    colorVeil: '#6f7cff', // body
+    colorVeilTint: '#e8d4ff', // pale tint
+    colorVeilDeep: '#24106a', // deep violet the tongues smoke out to
 
     /* ================================================================ */
     /* 4 · HEAT HAZE (screen-space)                                      */
@@ -111,8 +164,8 @@ export default {
     hazeStrength: 0.35,
     hazeScale: 2.2, // features per screen unit
     hazeSpeed: 1.4, // how fast the shimmer rises
-    hazeWidth: 1.5, // metres
-    hazeHeight: 2.6, // metres
+    hazeWidth: 2.4, // metres
+    hazeHeight: 4.2, // metres
     shockStrength: 1.2, // the burst's screen-space ring
     shockSize: 6, // metres it reaches
     shockTime: 0.5, // seconds it takes
@@ -178,13 +231,13 @@ export default {
     killLift: 4.5, // ... and up
     killSpin: 1.6,
     burstShake: 0.7,
-    burstFlash: 0.55,
+    burstFlash: 0.35,
 
     /* --- light --- */
     lightColor: '#d0e8ff',
     lightIntensity: 6,
     lightRadius: 9,
-    lightHeight: 1.2, // metres over the copy's feet
+    lightHeight: 1.2, // metres over the copy's feet (× its size)
     lightBoost: 3 // the burst's punch, × intensity
   }
 };

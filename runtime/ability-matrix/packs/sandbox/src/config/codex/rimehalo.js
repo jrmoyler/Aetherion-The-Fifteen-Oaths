@@ -41,8 +41,8 @@ export default {
     /* TIMING                                                            */
     /* ================================================================ */
     walkTime: 0.8, // seconds the head takes to walk once round the rim
-    spinTime: 0.45, // seconds the closed halo spins up before it tightens
-    closeTime: 0.9, // seconds it takes to close to the middle
+    spinTime: 0.3, // seconds the closed halo spins up before it tightens
+    closeTime: 1.0, // seconds it takes to close to the middle
     lockTime: 0.55, // seconds the closed knot holds
     shatterTime: 0.7, // seconds the needles take to drop and sublime
 
@@ -51,34 +51,39 @@ export default {
     /* ================================================================ */
     haloHeight: 1.35, // metres off the floor
     haloBob: 0.08, // metres it breathes up and down
-    closeRadius: 0.3, // metres it closes to
+    closeRadius: 0.45, // metres it closes to
     closeDrop: 0.35, // metres it sinks as it closes
-    closeEase: 2.2, // how hard it accelerates as it closes (1 = linear)
+    closeEase: 1.35, // how hard it accelerates as it closes (1 = linear)
     spinStart: 0.8, // radians/second as the walk finishes
     spinMax: 7, // radians/second at the moment it closes
     tiers: 2, // rows of needles
-    tierGap: 0.32, // metres between rows
+    tierGap: 0.42, // metres between rows
 
     /* ================================================================ */
     /* 2 · THE NEEDLES                                                   */
     /* ================================================================ */
-    needleCount: 132, // max 192
-    needleLength: 1.15, // metres, longest
-    needleWidth: 0.075, // metres at the shoulder
-    needleJitter: 0.45, // 0..1 length variety
-    needleInward: 0.78, // 1 = pointing straight at the middle, 0 = along the ring
-    needleTilt: 0.32, // radians of up/down variety
+    needleCount: 72, // max 192
+    needleLength: 1.75, // metres, longest
+    needleWidth: 0.19, // metres at the shoulder
+    needleJitter: 0.35, // 0..1 length variety
+    needleInward: 0.82, // 1 = pointing straight at the middle, 0 = along the ring
+    needleTilt: 0.35,
+    needleRise: 0.62, // radians each spear is raised above the horizontal — a crown, not a disc // radians of up/down variety
     needleGrowTime: 0.16, // seconds one needle takes to crystallise
-    needleFrost: 0.55, // frost on the upward facets
-    needleEnv: 0.55, // sky reflection
-    needleCoreGlow: 2.2, // the filament inside
-    needleTipGlow: 3.2, // the burning point
-    needleRimGlow: 1.2, // fresnel rim
-    needleFlashGlow: 7, // the flash it crystallises in
-    colorNeedleBody: '#1d4a73',
-    colorNeedleCore: '#bff1ff',
-    colorNeedleRim: '#8fe0ff',
-    colorFrost: '#f2fbff',
+    needleFrost: 0.2, // frost on the upward facets
+    needleEnv: 0.25, // sky reflection
+    needleCoreGlow: 0.7, // the filament inside
+    needleTipGlow: 2.2, // the burning point
+    needleRimGlow: 0.5, // fresnel rim
+    needleFlashGlow: 1.8, // the flash it crystallises in
+    colorNeedleBody: '#1f6fb8', // saturated glacier blue — the body stop
+    colorNeedleDeep: '#06142a', // blue-black root — the deep stop that grounds it
+    needleRamp: 1.0, // how fast the ramp climbs root → point (1 = over the whole spear)
+    needleSpecular: 0.8, // sun glint on the facets
+    needleGloss: 70,
+    colorNeedleCore: '#e6f9ff',
+    colorNeedleRim: '#a8e4ff', // pale tint toward the point
+    colorFrost: '#cfeeff',
 
     /* ================================================================ */
     /* 3 · THE SPINE & HEAD                                              */
@@ -101,30 +106,31 @@ export default {
     colorSparkA: '#ffffff',
     colorSparkB: '#d6f6ff',
     colorSparkC: '#7fcaff',
-    colorSparkD: '#2a6aa8',
+    colorSparkD: '#123a6a',
 
     /* ================================================================ */
     /* 4 · THE RIME FLOOR                                                */
     /* ================================================================ */
     trackWidth: 0.14, // metres of glowing track under the ring
-    trackGlow: 3.2,
+    trackGlow: 2.0,
     floorStreak: 1.2, // how stretched the dragged rime is
     starSize: 1.7, // metres, the crystal star where it closes
-    colorFrostDeep: '#163a5c',
+    colorFrostDeep: '#0b2442',
 
     /* ================================================================ */
     /* 5 · COLD AIR                                                      */
     /* ================================================================ */
-    coldWarp: 0.8, // distortion pouring off the ring
+    coldWarp: 0.15, // distortion pouring off the ring
     coldScale: 1.6,
+    coldHeight: 0.55, // share of the halo's height the cold-air sheet spans (kept under the needles)
     mistRate: 70, // puffs per second falling off the ring
-    mistSize: 0.75,
+    mistSize: 0.55,
     mistLifetime: 1.3,
-    mistOpacity: 0.4,
-    colorMistA: '#ffffff',
+    mistOpacity: 0.28,
+    colorMistA: '#e4f5ff',
     colorMistB: '#d8efff',
     colorMistC: '#93bfe0',
-    colorMistD: '#3d6487',
+    colorMistD: '#1d3a5c',
 
     /* ================================================================ */
     /* 6 · THE CLOSE                                                     */
@@ -149,11 +155,13 @@ export default {
     hitSpin: 0.6,
     freezeTime: 0.35, // seconds a caught body takes to go to ice
     frostTint: 1,
-    colorBodyFrozen: '#a9dcff',
-    colorBodyRim: '#e8f8ff',
+    catchBurst: 0.6, // metres of frost puff on each caught body
+    catchBurstOpacity: 0.3,
+    colorBodyFrozen: '#3f7fbf',
+    colorBodyRim: '#9fdcff',
     bodyRimGlow: 2,
     colorBodyEdge: '#ffffff',
-    bodyEdgeGlow: 3,
+    bodyEdgeGlow: 2,
 
     /* ================================================================ */
     /* 8 · THE BEAT                                                      */
@@ -161,7 +169,7 @@ export default {
     walkShake: 0.12,
     closeRumble: 0.25,
     lockShake: 0.55,
-    lockFlash: 0.4,
+    lockFlash: 0.3,
     lockLight: 40,
     colorFlash: '#e2f7ff',
     burstRadius: 2.6,

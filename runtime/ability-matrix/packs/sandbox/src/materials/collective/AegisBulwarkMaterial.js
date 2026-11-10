@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, DoubleSide, ShaderMaterial, Vector4 } from 'three';
+import { Color, DoubleSide, NormalBlending, ShaderMaterial, Vector4 } from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
 import { commonGLSL } from '../../shaders/lib/common.glsl.js';
 import { sharedUniforms } from '../../core/FrameUniforms.js';
@@ -145,6 +145,23 @@ const DOME_FRAGMENT = /* glsl */ `
   uniform vec3  uColorScan;
   uniform vec3  uColorImpact;
   uniform vec3  uColorForm;
+  uniform vec3  uColorCore;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+  uniform float uBodyOpacity;
+  uniform float uBodyGrad;
+  uniform float uSeamCore;
+  uniform float uSpinU;
+  uniform float uSweepPos;
+  uniform float uSweepWidth;
+  uniform float uSweepBright;
+  uniform float uBeatPhase;
+  uniform float uBeatWidth;
+  uniform float uBeatBright;
+  uniform float uSparkRate;
+  uniform float uSparkChance;
+  uniform float uSparkBright;
+  uniform float uStand;
 
   uniform vec2      uResolution;
   uniform sampler2D uSceneDepth;
@@ -168,7 +185,8 @@ const DOME_FRAGMENT = /* glsl */ `
 
     /* --- the lattice --- */
     // Hex rows are 0.866 cells apart, so uRows rows span 0.866 x uRows.
-    vec2 p = vec2(vUv.x * floor(uCellsAround + 0.5), v * uRows * 0.8660254);
+    // The lattice slides round the dome while it stands (uSpinU, in turns).
+    vec2 p = vec2(fract(vUv.x + uSpinU) * floor(uCellsAround + 0.5), v * uRows * 0.8660254);
     vec4 hex = hexCell(p);
     vec2 id = hex.zw;
     float d = hexDist(hex.xy);
@@ -227,32 +245,64 @@ const DOME_FRAGMENT = /* glsl */ `
       impact += ring * life * life;
     }
 
-    /* --- compose --- */
-    float fres = fresnelTerm(vViewDir, vNormalW, uFresnelPower, 1.0) * uFresnelBright;
-    float edgeLight = seam * uEdgeBright * (1.0 + impact * 1.5);
+    /* --- the standing life of the lattice (cell-quantised, so it reads as cells) --- */
+    float N = floor(uCellsAround + 0.5);
+    float cellU = fract(id.x / max(N, 1.0));
+    // A sweep of lit cells running round the dome like a radar arm, with a
+    // comet tail of cells cooling behind it.
+    float behind = fract(uSweepPos - cellU);
+    float sweep = exp(-behind / max(uSweepWidth, 1e-3)) * uStand;
+    sweep += exp(-fract(uSweepPos + 0.5 - cellU) / max(uSweepWidth, 1e-3)) * uStand * 0.45;
+    // A heartbeat band of cells climbing from the floor to the crown.
+    float beatD = (cellV - uBeatPhase) / max(uBeatWidth, 1e-3);
+    float beat = exp(-beatD * beatD) * uStand;
+    // Cells catching: a few cells flare hot on each tick of their own clock.
+    float tick = floor(uTime * uSparkRate + cellHash * 7.0);
+    float sparkOn = step(1.0 - uSparkChance, hash13(vec3(id, tick + uSeed)));
+    float sparkAge = fract(uTime * uSparkRate + cellHash * 7.0);
+    float spark = sparkOn * exp(-sparkAge * 4.0) * uStand;
+    float energy = sweep * uSweepBright + beat * uBeatBright + spark * uSparkBright;
 
-    vec3 color = uColorEdge * (edgeLight * lit + seam * guide)
-               + uColorCell * (fill * lit)
-               + uColorRim * fres * lit
-               + uColorScan * scan * uScanBright * lit
-               + uColorImpact * impact * uImpactBright * (0.35 + seam)
-               + uColorForm * flare * uFormFlash * (seam + 0.4)
-               + uColorForm * burning * uDissolveGlow;
-    color *= uShaderIntensity;
+    /* --- compose: four stops, deep glass body carrying the light --- */
+    float fres = fresnelTerm(vViewDir, vNormalW, uFresnelPower, 1.0);
+    float fresLit = fres * uFresnelBright;
+    // The body: deep navy where it faces the eye, saturated blue toward the rim
+    // and up the wall - occluding, so the dome is a thing, not a fog.
+    float grad = clamp(fres * uBodyGrad + energy * 0.15, 0.0, 1.0);
+    vec3 body = mix(uColorDeep, uColorBody, grad);
+    float bodyA = uBodyOpacity * (0.7 + 0.3 * clamp(fres * 1.5, 0.0, 1.0)) * lit * (1.0 - crownMelt * 0.2);
 
-    float alpha = clamp(seam * (lit + guide) + fill * lit + fres * lit + scan * lit * 0.5 + impact * 0.5 + flare + burning, 0.0, 1.0);
+    // Seams: pale tint, with a white-hot core only along the very centre line.
+    float seamCore = smoothstep(0.5 - uEdgeWidth * uSeamCore - aa, 0.5 - aa * 0.5, d) * (1.0 - crownMelt);
+    // At rest the seams are saturated; the sweep, the heartbeat and the hits
+    // push them through the pale scan tint to the white-hot core.
+    float heat = clamp(energy * 0.6 + impact, 0.0, 1.0);
+    vec3 seamCol = mix(uColorEdge, uColorScan, heat);
+    seamCol = mix(seamCol, uColorCore, seamCore * heat);
+    float edgeLight = seam * uEdgeBright * (1.0 + impact * 1.5 + energy * 0.8);
+
+    vec3 glow = seamCol * (edgeLight * lit + seam * guide)
+              + uColorCell * (fill * lit + energy * (1.0 - seam) * lit)
+              + uColorRim * fresLit * lit
+              + uColorScan * scan * uScanBright * lit
+              + uColorImpact * impact * uImpactBright * (0.35 + seam)
+              + uColorForm * flare * uFormFlash * (seam + 0.4)
+              + uColorForm * burning * uDissolveGlow;
+    glow *= uShaderIntensity * uIntensity * uGlobalGlow;
+
     // The far wall, seen through the near one, is a ghost of it.
     // Measured against the outward normal rather than gl_FrontFacing, so it
     // does not depend on the grid's winding once it is wrapped.
     float face = dot(vNormalW, vViewDir) > 0.0 ? 1.0 : uBackFace;
-    alpha *= uFade * uOpacity * face;
-    if (alpha < 0.003) discard;
+    float k = uFade * uOpacity * face;
+    float alpha = clamp(bodyA, 0.0, 1.0) * k;
+    vec3 color = (body * alpha) + glow * k;
+    if (alpha < 0.003 && dot(color, vec3(1.0)) < 0.003) discard;
 
     vec2 screenUV = gl_FragCoord.xy / uResolution;
-    alpha *= softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
-    if (alpha < 0.003) discard;
-
-    gl_FragColor = vec4(color * uIntensity * uGlobalGlow * uFade * uOpacity * face, alpha);
+    float soft = softFade(uSceneDepth, screenUV, vViewZ, uCameraNear, uCameraFar, uSoftFade);
+    // Premultiplied: the body occludes what is behind it, the light adds.
+    gl_FragColor = vec4(color * soft, alpha * soft);
   }
 `;
 
@@ -303,10 +353,21 @@ const SIGIL_FRAGMENT = /* glsl */ `
   uniform vec3  uColor;
   uniform vec3  uColorHot;
   uniform float uGlobalGlow;
+  uniform float uFill;        // 0..1 opacity of the deep floor field
+  uniform float uDomeR;       // the dome's footprint, metres
+  uniform float uHexSize;     // floor hex cell, metres
+  uniform float uHexBright;
+  uniform float uContact;     // the bright foot where the dome meets the floor
+  uniform float uRingPhase;   // 0..1 ripple running out from the centre
+  uniform float uRingBright;
+  uniform float uStand;       // 0 before the slam, 1 while the dome stands
+  uniform vec3  uColorFloorDeep;
+  uniform vec3  uColorFloorBody;
 
   varying vec2 vLocal;
 
   ${noiseGLSL}
+  ${HEX_GLSL}
 
   float sdSegment(vec2 p, vec2 a, vec2 b) {
     vec2 pa = p - a, ba = b - a;
@@ -393,15 +454,40 @@ const SIGIL_FRAGMENT = /* glsl */ `
 
     float stroke = 1.0 - smoothstep(line * 0.5 - aa, line * 0.5 + aa, d);
     stroke = max(stroke, runeLine);
-    // A faint wash in the band so the runes sit on something.
-    float wash = smoothstep(inner - aa, inner + aa, r) * (1.0 - smoothstep(outer - aa, outer + aa, r)) * 0.12;
+    // A wash in the band so the runes sit on something.
+    float band = smoothstep(inner - aa, inner + aa, r) * (1.0 - smoothstep(outer - aa, outer + aa, r));
+    float wash = band * 0.22;
+
+    /* --- the field: a deep, filled floor inside the sigil --- */
+    float inside = 1.0 - smoothstep(outer - aa * 2.0, outer + aa * 2.0, r);
+    // Deep at the centre, saturated body toward the rim of the dome.
+    float radial = clamp(r / max(uDomeR, 1e-3), 0.0, 1.0);
+    vec3 field = mix(uColorFloorDeep, uColorFloorBody, radial * radial);
+    float fieldA = inside * uFill * (0.75 + 0.25 * radial);
+
+    // The lattice's own footprint on the floor: faint hex seams, energised by
+    // the ripple running out from the centre while the dome stands.
+    vec4 hx = hexCell(vLocal / max(uHexSize, 0.05));
+    float hd = hexDist(hx.xy);
+    float hexSeam = smoothstep(0.43, 0.49, hd) * inside * (1.0 - smoothstep(uDomeR * 0.98, uDomeR * 1.02, r));
+    float ringD = (r - uRingPhase * uDomeR * 1.05) / max(uDomeR * 0.08, 0.05);
+    float ring = exp(-ringD * ringD) * uStand * inside;
+    // The foot of the dome: a hot band where the wall meets the floor.
+    float footD = (r - uDomeR) / max(uDomeR * 0.035, 0.03);
+    float foot = exp(-footD * footD) * uContact * uStand;
 
     float hot = runeLine;
     float shimmer = 0.85 + 0.15 * snoise(vec3(vLocal * 0.8, uTime * 0.6 + uSeed));
-    vec3 color = mix(uColor, uColorHot, hot * 0.7) * (stroke + wash) * shimmer;
-    float alpha = clamp(stroke + wash, 0.0, 1.0) * reveal * uFade * uOpacity;
-    if (alpha < 0.003) discard;
-    gl_FragColor = vec4(color * uGlow * uGlobalGlow * reveal * uFade * uOpacity, alpha);
+    vec3 light = mix(uColor, uColorHot, hot * 0.7) * (stroke + wash) * shimmer
+               + uColor * hexSeam * uHexBright * (0.35 + ring * 2.5)
+               + mix(uColor, uColorHot, 0.5) * ring * uRingBright
+               + mix(uColor, uColorHot, 0.6) * foot;
+    float k = reveal * uFade * uOpacity;
+    float alpha = clamp(fieldA, 0.0, 1.0) * k;
+    vec3 color = field * alpha + light * uGlow * uGlobalGlow * k;
+    if (alpha < 0.003 && dot(color, vec3(1.0)) < 0.003) discard;
+    // Premultiplied: the deep field darkens the floor, the strokes add light.
+    gl_FragColor = vec4(color, alpha);
   }
 `;
 
@@ -417,7 +503,10 @@ export function createAegisDomeMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    // Premultiplied over: the deep body darkens the floor behind it, and the
+    // seams, scan lines and ripples still add light on top.
+    blending: NormalBlending,
+    premultipliedAlpha: true,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -464,7 +553,24 @@ export function createAegisDomeMaterial() {
       uColorRim: { value: new Color() },
       uColorScan: { value: new Color() },
       uColorImpact: { value: new Color() },
-      uColorForm: { value: new Color() }
+      uColorForm: { value: new Color() },
+      uColorCore: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uBodyOpacity: { value: 0.55 },
+      uBodyGrad: { value: 1.4 },
+      uSeamCore: { value: 0.35 },
+      uSpinU: { value: 0 },
+      uSweepPos: { value: 0 },
+      uSweepWidth: { value: 0.12 },
+      uSweepBright: { value: 1.2 },
+      uBeatPhase: { value: -1 },
+      uBeatWidth: { value: 0.08 },
+      uBeatBright: { value: 1.4 },
+      uSparkRate: { value: 2 },
+      uSparkChance: { value: 0.06 },
+      uSparkBright: { value: 2 },
+      uStand: { value: 0 }
     }),
     vertexShader: DOME_VERTEX,
     fragmentShader: DOME_FRAGMENT
@@ -472,7 +578,8 @@ export function createAegisDomeMaterial() {
 
   /**
    * @param {object} state { radius, height, wobble, slamAge, form, dissolve,
-   *   fade, seed } — the dome's own envelope, which the ability owns.
+   *   fade, seed, spinU, sweepPos, beatPhase, stand } — the dome's own
+   *   envelope and integrated clocks, which the ability owns.
    *   The impact array is written by the ability directly.
    */
   material.userData.sync = (state) => {
@@ -488,6 +595,21 @@ export function createAegisDomeMaterial() {
     u.uForm.value = state.form;
     u.uDissolve.value = state.dissolve;
     u.uFade.value = state.fade;
+    u.uSpinU.value = state.spinU;
+    u.uSweepPos.value = state.sweepPos;
+    u.uBeatPhase.value = state.beatPhase;
+    u.uStand.value = state.stand;
+
+    u.uBodyOpacity.value = c.bodyOpacity * g.opacity;
+    u.uBodyGrad.value = c.bodyGrad;
+    u.uSeamCore.value = c.seamCore;
+    u.uSweepWidth.value = c.sweepWidth;
+    u.uSweepBright.value = c.sweepBright * g.shaderIntensity;
+    u.uBeatWidth.value = c.beatWidth;
+    u.uBeatBright.value = c.beatBright * g.shaderIntensity;
+    u.uSparkRate.value = c.sparkRate * g.noiseSpeed;
+    u.uSparkChance.value = c.sparkChance * g.randomness;
+    u.uSparkBright.value = c.sparkBright;
 
     u.uWobbleFreq.value = c.wobbleFreq;
     u.uCellsAround.value = Math.max(3, Math.round(c.cellsAround));
@@ -525,6 +647,9 @@ export function createAegisDomeMaterial() {
     u.uColorScan.value.copy(getColor(c.colorScan));
     u.uColorImpact.value.copy(getColor(c.colorImpact));
     u.uColorForm.value.copy(getColor(c.colorForm));
+    u.uColorCore.value.copy(getColor(c.colorCore));
+    u.uColorBody.value.copy(getColor(c.colorBody));
+    u.uColorDeep.value.copy(getColor(c.colorDeep));
   };
 
   return material;
@@ -535,7 +660,8 @@ export function createAegisSigilMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
+    premultipliedAlpha: true,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -555,13 +681,23 @@ export function createAegisSigilMaterial() {
       uOpacity: { value: 1 },
       uFlicker: { value: 0.25 },
       uColor: { value: new Color() },
-      uColorHot: { value: new Color() }
+      uColorHot: { value: new Color() },
+      uFill: { value: 0.6 },
+      uDomeR: { value: 3 },
+      uHexSize: { value: 0.5 },
+      uHexBright: { value: 0.6 },
+      uContact: { value: 1.5 },
+      uRingPhase: { value: 0 },
+      uRingBright: { value: 1 },
+      uStand: { value: 0 },
+      uColorFloorDeep: { value: new Color() },
+      uColorFloorBody: { value: new Color() }
     }),
     vertexShader: SIGIL_VERTEX,
     fragmentShader: SIGIL_FRAGMENT
   });
 
-  /** @param {object} state { radius, quadSize, spin, innerSpin, grow, fade, seed } */
+  /** @param {object} state { radius, quadSize, spin, innerSpin, grow, fade, seed, ringPhase, stand } */
   material.userData.sync = (state) => {
     const c = settings.aegis;
     const g = settings.global;
@@ -585,6 +721,16 @@ export function createAegisSigilMaterial() {
     u.uFlicker.value = c.sigilFlicker * g.shaderIntensity;
     u.uColor.value.copy(getColor(c.colorSigil));
     u.uColorHot.value.copy(getColor(c.colorSigilHot));
+    u.uDomeR.value = state.radius;
+    u.uRingPhase.value = state.ringPhase;
+    u.uStand.value = state.stand;
+    u.uFill.value = c.floorFill * g.opacity;
+    u.uHexSize.value = state.radius * c.floorHexSize;
+    u.uHexBright.value = c.floorHexBright * g.shaderIntensity;
+    u.uContact.value = c.floorContact;
+    u.uRingBright.value = c.floorRingBright;
+    u.uColorFloorDeep.value.copy(getColor(c.colorFloorDeep));
+    u.uColorFloorBody.value.copy(getColor(c.colorFloorBody));
   };
 
   return material;

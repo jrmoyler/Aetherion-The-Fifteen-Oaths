@@ -5,9 +5,11 @@ import {
   createHeartCrystalMaterial,
   createHeartRingMaterial,
   createHeartShardMaterial,
-  createHeartShockMaterial
+  createHeartShockMaterial,
+  createHeartRibMaterial,
+  createHeartFloorMaterial
 } from '../../materials/matrix-new/CrystallineHeartMaterials.js';
-import { createHeartGeometry } from '../../assets/matrix-new/CrystallineHeartGeometry.js';
+import { createHeartGeometry, createHeartRibGeometry, RIB_FOOT, RIB_HEIGHT } from '../../assets/matrix-new/CrystallineHeartGeometry.js';
 import { createShardGeometry } from '../../assets/ProceduralGeometry.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -30,6 +32,8 @@ const SHARD_SLOTS = MAX_SHARDS / SHARD_VARIANTS;
 /** Shards rest this far off the floor once they land, metres. */
 const SHARD_REST = 0.03;
 const TAU = Math.PI * 2;
+/** Most crystal ribs the cage can stand (`ribCount` is clamped to it). */
+const MAX_RIBS = 16;
 
 const _emit = {};
 const _pos = new Vector3();
@@ -89,6 +93,22 @@ function heightAt(s, y0, vy, k, G) {
  *      (all closed form from dice, so every slider is live mid-flight); a
  *      white flash, an AIR shell, a SHOCKWAVE and a FROST-rime decal, a light
  *      punch, a shake, and the kill (`handlesOwnHits`).
+ *
+ *   6. **THE CAGE** (`createHeartRibGeometry`, `createHeartRibMaterial`) — the
+ *      heart's silhouette at play distance. As the heart descends, `ribCount`
+ *      blades of rose quartz shoulder out of the floor on a ring
+ *      (`ribRing × zoneRadius`) and arch inward over it to points round the
+ *      heart, a ribcage of lit stone (`LAYER.WORLD`, shadows). Their height
+ *      is derived from `heartHeight`, so the cage always cradles the stone.
+ *      Every beat flexes them outward and floods them with the heart's light,
+ *      and they climb a step taller with each beat. The shatter blows them
+ *      open; through the linger they keep toppling outward, their light
+ *      echoing the beat in fading aftershocks, then sink back into the floor.
+ *   7. **THE QUARTZ FLOOR** (`createHeartFloorMaterial`) — a filled floor of
+ *      rose-quartz plates, normal-blended with a deep tone, that grows a step
+ *      outward on every beat and flashes with it; the shatter cracks its seams
+ *      open in a running wave and they glow, crawl and cool through the
+ *      linger before it burns out.
  *
  * ## The rhythm
  *
@@ -165,6 +185,35 @@ export class CrystallineHeartAbility extends Ability {
     this.shock.frustumCulled = false;
     this.shock.visible = false;
     this.group.add(this.shock);
+
+    /* ---- layer 6: the cage ---- */
+    this.ribGeometry = createHeartRibGeometry();
+    this.ribMaterial = createHeartRibMaterial();
+    this.ribs = [];
+    for (let i = 0; i < MAX_RIBS; i++) {
+      const rib = new Mesh(this.ribGeometry, this.ribMaterial);
+      rib.name = `HeartRib${i}`;
+      rib.rotation.order = 'YZX';
+      rib.layers.set(LAYER.WORLD);
+      rib.castShadow = true;
+      rib.receiveShadow = true;
+      rib.frustumCulled = false;
+      rib.visible = false;
+      this.group.add(rib);
+      this.ribs.push(rib);
+    }
+    this._ribState = { glow: 0 };
+
+    /* ---- layer 7: the quartz floor ---- */
+    this.floorMaterial = createHeartFloorMaterial();
+    this.quartzFloor = new Mesh(this.groundGeometry, this.floorMaterial);
+    this.quartzFloor.name = 'HeartFloor';
+    this.quartzFloor.layers.set(LAYER.VFX);
+    this.quartzFloor.renderOrder = 3;
+    this.quartzFloor.frustumCulled = false;
+    this.quartzFloor.visible = false;
+    this.group.add(this.quartzFloor);
+    this._floorState = { quadSize: 12, reach: 4.5, growth: 0, beat: 0, shatter: -1, dissolve: 0, seed: 0 };
 
     /* ---- layer 5: shards ---- */
     this.shardMaterial = createHeartShardMaterial();
@@ -388,6 +437,8 @@ export class CrystallineHeartAbility extends Ability {
     }
 
     this.heart.visible = false;
+    for (const rib of this.ribs) rib.visible = false;
+    this.quartzFloor.visible = false;
     for (const mesh of this.shardMeshes) mesh.count = 0;
     this._sync();
   }
@@ -491,6 +542,83 @@ export class CrystallineHeartAbility extends Ability {
       if (age >= 0 && age < c.shockTime) any = true;
     }
     this.shock.visible = any;
+  }
+
+  /** 0..1: how many beats have landed (each eased in over 0.25 s), of all of them. */
+  _beatProgress() {
+    if (this._life < 0) return 0;
+    const g0 = this._firstGap();
+    const n = this.beatCount;
+    let sum = 0;
+    for (let k = 0; k < n; k++) {
+      if (!(this._lubMask & (1 << k))) continue;
+      const age = this._life - this._beatTime(k, g0);
+      sum += Easing.outCubic(saturate(age / 0.25));
+    }
+    return sum / n;
+  }
+
+  /** The cage: every rib re-derived from the ring, the beat and the clock. */
+  _updateRibs() {
+    const c = settings.crystallineheart;
+    if (this._life < 0) {
+      for (const rib of this.ribs) rib.visible = false;
+      return;
+    }
+    const count = Math.max(0, Math.min(MAX_RIBS, Math.round(c.ribCount)));
+    const ring = this.radius * c.ribRing;
+    const height = c.ribHeight * c.heartHeight;
+    const emerge = Easing.outBack(saturate(this._life / Math.max(0.05, c.ribRise)));
+    const progress = this._beatProgress();
+    const swell = this._swell();
+    const shatter = this._shatter;
+    const blast = shatter >= 0 ? Easing.outCubic(saturate(shatter / 0.35)) : 0;
+    const topple = shatter >= 0 ? c.ribTopple * Math.min(1.5, shatter) : 0;
+    const fadeT = this._fadeT();
+    const sink = Easing.inQuad(saturate((fadeT - (1 - c.ribSink)) / Math.max(0.05, c.ribSink)));
+    const s = ring / RIB_FOOT;
+    const sy = Math.max(0.001, (height / RIB_HEIGHT) * emerge * (0.72 + 0.28 * progress));
+    this._floorPoint(_floor);
+    for (let i = 0; i < MAX_RIBS; i++) {
+      const rib = this.ribs[i];
+      rib.visible = i < count && sink < 1;
+      if (!rib.visible) continue;
+      const a = c.ribPhase + (i / Math.max(1, count)) * TAU;
+      // Odd ribs a touch shorter, so the cage reads as grown, not machined.
+      const k = i % 2 ? 0.86 : 1;
+      rib.position.set(_floor.x, -sink * height * 0.95, _floor.z);
+      rib.rotation.set(0, -a, -(c.ribBreath * swell + c.ribBlast * blast + topple));
+      rib.scale.set(s, sy * k, s * (1 + 0.15 * swell));
+    }
+    // The heart's light in the stone: each beat floods it; after the shatter it echoes.
+    let glow = 0.25 + 1.6 * swell + 0.35 * progress;
+    if (shatter >= 0) glow = (0.4 + 2.2 * Math.exp(-shatter * 4) + 0.6 * Math.exp(-shatter * 1.2) * (0.5 + 0.5 * Math.sin(shatter * 10))) * (1 - sink);
+    this._ribState.glow = glow;
+    this.ribMaterial.userData.sync(this._ribState);
+  }
+
+  /** The quartz floor, growing a step with every beat. */
+  _updateQuartzFloor() {
+    const c = settings.crystallineheart;
+    if (this._life < 0) {
+      this.quartzFloor.visible = false;
+      return;
+    }
+    const reach = this.radius * c.floorReach;
+    const fs = this._floorState;
+    const arrive = saturate(this._life / this.settleTime);
+    fs.reach = reach;
+    fs.quadSize = reach * 2.6 + 1;
+    fs.growth = Math.max(0.25 * arrive, this._shatter >= 0 ? 1 : this._beatProgress());
+    fs.beat = this._swell();
+    fs.shatter = this._shatter;
+    fs.dissolve = Easing.inQuad(saturate((this._fadeT() - 0.25) / 0.75));
+    fs.seed = this._seed;
+    this.floorMaterial.userData.sync(fs);
+    this._floorPoint(this.quartzFloor.position);
+    this.quartzFloor.position.y = 0.018;
+    this.quartzFloor.scale.set(fs.quadSize, 1, fs.quadSize);
+    this.quartzFloor.visible = fs.dissolve < 1;
   }
 
   /**
@@ -829,6 +957,8 @@ export class CrystallineHeartAbility extends Ability {
     this._sync();
     this._updateHeart();
     this._updateFloor();
+    this._updateRibs();
+    this._updateQuartzFloor();
     this._updateShards();
     this._idleFx(dt);
 
@@ -844,6 +974,8 @@ export class CrystallineHeartAbility extends Ability {
     this.heart.visible = false;
     this.rings.visible = false;
     this.shock.visible = false;
+    for (const rib of this.ribs) rib.visible = false;
+    this.quartzFloor.visible = false;
     for (const mesh of this.shardMeshes) mesh.count = 0;
     this._life = -1;
     this._shatter = -1;
@@ -857,6 +989,9 @@ export class CrystallineHeartAbility extends Ability {
     this.ringMaterial.dispose();
     this.shockGeometry.dispose();
     this.shockMaterial.dispose();
+    this.ribGeometry.dispose();
+    this.ribMaterial.dispose();
+    this.floorMaterial.dispose();
     for (const mesh of this.shardMeshes) {
       mesh.geometry.dispose();
       mesh.dispose();
@@ -991,6 +1126,31 @@ export function buildEditor(gui, c, Editor) {
   R(shatter, c, 'shatterShake', 0, 2, 0.01, 'shake');
   R(shatter, c, 'shatterFlash', 0, 2, 0.01, 'flash');
   R(shatter, c, 'shatterLight', 0, 10, 0.05, 'light punch (× intensity)');
+
+  const cage = folder.addFolder('6 · The cage');
+  R(cage, c, 'ribCount', 0, MAX_RIBS, 1, 'ribs');
+  R(cage, c, 'ribRing', 0.15, 1.5, 0.01, 'ring (× zone)');
+  R(cage, c, 'ribHeight', 0.3, 3, 0.01, 'height (× float height)');
+  R(cage, c, 'ribPhase', -3.2, 3.2, 0.01, 'first bearing (rad)');
+  R(cage, c, 'ribRise', 0.05, 2, 0.01, 'rise (s)');
+  R(cage, c, 'ribBreath', 0, 0.5, 0.005, 'flex per beat (rad)');
+  R(cage, c, 'ribBlast', 0, 1.5, 0.01, 'blown open (rad)');
+  R(cage, c, 'ribTopple', 0, 1, 0.01, 'topple after (rad/s)');
+  R(cage, c, 'ribSink', 0.05, 1, 0.01, 'sinks over (× fade)');
+  R(cage, c, 'ribGlow', 0, 6, 0.05, 'heart light in the stone');
+  R(cage, c, 'ribRoughness', 0, 1, 0.01, 'roughness');
+  R(cage, c, 'ribMetalness', 0, 1, 0.01, 'metalness');
+  cage.addColor(c, 'colorRib').name('rose quartz');
+  cage.addColor(c, 'colorRibGlow').name('light in the stone');
+
+  const quartz = folder.addFolder('7 · Quartz floor');
+  R(quartz, c, 'floorReach', 0.1, 2, 0.01, 'reach (× zone)');
+  R(quartz, c, 'floorFacets', 0.2, 6, 0.05, 'plates / m');
+  R(quartz, c, 'floorFlash', 0, 4, 0.05, 'beat flash');
+  R(quartz, c, 'floorCrack', 0, 4, 0.05, 'shatter cracks');
+  R(quartz, c, 'floorOpacity', 0, 1, 0.01, 'opacity');
+  R(quartz, c, 'floorGlow', 0, 4, 0.05, 'glow');
+  quartz.addColor(c, 'colorFloorDeep').name('deep');
 
   const light = folder.addFolder('Light');
   light.addColor(c, 'lightColor').name('colour');

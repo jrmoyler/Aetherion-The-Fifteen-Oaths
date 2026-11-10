@@ -62,7 +62,10 @@ function syncSystem(p, c, prefix, glow, turb) {
  * not stop — it climbs, coiling up round the middle into a standing cocoon of
  * film, and when the last of it is in, the cocoon **cinches** tight round what
  * it caught and two clasps snap shut round its top and bottom: snare-locked,
- * where the cast began. It holds them, then burns away frame by frame.
+ * where the cast began. The cocoon is a lit surface (sun side amber, shadow
+ * side sepia, a hot rim) three metres tall, and it never quite stops: it
+ * keeps turning backward while it holds them, then burns away frame by frame
+ * off the developed floor.
  *
  * Kept apart from the other time spells: no clock, no hourglass, no glass, no
  * caster moving. The rewinding is literal — a reel running backward.
@@ -73,8 +76,12 @@ function syncSystem(p, c, prefix, glow, turb) {
  *      line (fed into the reel), and round the spiral and up the cocoon.
  *      Placed per vertex from film-metres in closed form.
  *   2. **the cocoon's clasps** — two bands that spin shut on the lock.
- *   3. **the floor** — a perforated rim drawn round as the film arrives, and
- *      inward chevrons during the rewind.
+ *   3. **the floor** — the ground answer: everything the film runs over
+ *      *develops* into a filled deep-sepia field (emulsion blotches, grain,
+ *      flickering scratches) with warm light spilling off every turn of the
+ *      film; it is wrung backward with the reel, stays through the lock and
+ *      burns off from a ragged edge. Over it a perforated rim drawn round as
+ *      the film arrives, and inward chevrons during the rewind.
  *   4. **particles** — amber motes off the running film (SOFT), streaks
  *      racing inward on the rewind (STREAK), burnt flakes as it goes (LEAF).
  *   5. **the warp** — `LAYER.DISTORTION`: the air wrung backward, then an
@@ -150,7 +157,23 @@ export class RewindSnareAbility extends Ability {
       seed: 0
     };
     this._claspState = { center: this._center, radius: 0.7, height: 0.3, snap: 0, fade: 1 };
-    this._floorState = { center: this._center, draw: 0, rewind: 0, phase: 0, spin: 0, fade: 1 };
+    this._floorState = {
+      center: this._center,
+      draw: 0,
+      rewind: 0,
+      phase: 0,
+      spin: 0,
+      fade: 1,
+      r0: 1,
+      b: 0.16,
+      out: 0,
+      wound: 0,
+      swirl: 0,
+      burn: 0,
+      lock: 0,
+      seed: 0
+    };
+    this._swirl = 0;
     this._warpState = { center: new Vector3(), size: 5, wring: 0, implode: 0 };
     this._look = { color: '#000000', rimColor: '#000000', rimEmissive: 0, edgeColor: '#000000', edgeEmissive: 0, edgeWidth: 0.05 };
 
@@ -323,6 +346,7 @@ export class RewindSnareAbility extends Ability {
     this._locked = false;
     this._implodeT = -1;
     this._burn = 0;
+    this._swirl = 0;
     this._coilR = settings[ID].coilRadius;
 
     this.pointAt(1, this._center);
@@ -424,11 +448,14 @@ export class RewindSnareAbility extends Ability {
       this._beat = Beat.LOCK;
       this._out = f.lf;
       this._wound = f.lf;
-      this._spinRate *= Math.exp(-dt * 10);
+      // The cocoon never quite stops: it settles to a slow backward turn.
+      this._spinRate = -c.lockSpin + (this._spinRate + c.lockSpin) * Math.exp(-dt * 6);
     }
 
     this._spin += this._spinRate * dt * g.animationSpeed;
     this._chevPhase += rewind > 0 ? dt * (1.5 + 3 * rewind) * g.animationSpeed : 0;
+    // The developed field is wrung backward with the reel, and keeps a slow drift.
+    this._swirl -= c.fieldSwirl * (tau < 0 ? 0 : 0.12 + Math.sin(Math.PI * rewind) + (this._locked ? 0.25 : 0)) * dt * g.animationSpeed;
 
     /* the cinch */
     if (this._locked) {
@@ -479,7 +506,15 @@ export class RewindSnareAbility extends Ability {
     fl.rewind = rewind > 0 ? smoothstep(0, 0.15, rewind) * (1 - smoothstep(0.85, 1, rewind)) : 0;
     fl.phase = this._chevPhase;
     fl.spin = this._spin;
-    fl.fade = 1 - smoothstep(0.2, 0.9, this._burn);
+    fl.fade = 1 - smoothstep(0.65, 1, this._burn);
+    fl.r0 = f.r0;
+    fl.b = f.b;
+    fl.out = this._out;
+    fl.wound = this._wound;
+    fl.swirl = this._swirl;
+    fl.burn = this._burn;
+    fl.lock = this._lock;
+    fl.seed = this._seed;
     this.floorMaterial.userData.sync(fl);
 
     /* the warp */
@@ -798,6 +833,7 @@ export function buildEditor(gui, c, Editor) {
   film.addColor(c, 'colorFilmDark').name('frame lines');
   film.addColor(c, 'colorImage').name('images');
   film.addColor(c, 'colorEdge').name('edges');
+  film.addColor(c, 'colorCore').name('white-hot core');
 
   const spiral = folder.addFolder('2 · Spiral');
   R(spiral, c, 'pitch', 0.2, 3, 0.01, 'between turns (m)');
@@ -821,6 +857,12 @@ export function buildEditor(gui, c, Editor) {
   R(coil, c, 'cinchTime', 0.02, 1.5, 0.01, 'cinches over (s)');
   R(coil, c, 'cinchOvershoot', 0, 1, 0.01, 'overshoot');
   R(coil, c, 'lockHold', 0, 4, 0.01, 'holds for (s)');
+  R(coil, c, 'lockSpin', -4, 4, 0.01, 'keeps turning back (rad/s)');
+  R(coil, c, 'coilShade', 0, 1, 0.01, 'sun shading');
+  R(coil, c, 'coilRim', 0, 6, 0.05, 'rim light');
+  R(coil, c, 'coilDark', 0, 1, 0.01, 'wound film darkness');
+  R(coil, c, 'coilFrameGlow', 0, 3, 0.01, 'wound frames glow');
+  R(coil, c, 'coilLineGlow', 0, 6, 0.05, 'wound edge/line amber');
   R(coil, c, 'claspWidth', 0.01, 0.6, 0.005, 'clasp width (m)');
   R(coil, c, 'claspGlow', 0, 15, 0.05, 'clasp glow');
   coil.addColor(c, 'colorClasp').name('clasps');
@@ -833,6 +875,17 @@ export function buildEditor(gui, c, Editor) {
   R(floor, c, 'floorOpacity', 0, 1, 0.01, 'opacity');
   floor.addColor(c, 'colorRim').name('rim');
   floor.addColor(c, 'colorChevron').name('chevrons');
+  const field = floor.addFolder('Developed field');
+  R(field, c, 'fieldOpacity', 0, 1, 0.01, 'darkness');
+  R(field, c, 'fieldGlow', 0, 6, 0.05, 'light off the film');
+  R(field, c, 'fieldSpill', 0.02, 2, 0.01, 'spill width (m)');
+  R(field, c, 'fieldGrain', 0, 2, 0.01, 'grain');
+  R(field, c, 'fieldScratches', 0, 2, 0.01, 'scratches');
+  R(field, c, 'fieldFlicker', 0, 1, 0.01, 'flicker');
+  R(field, c, 'fieldSwirl', -6, 6, 0.01, 'wrung back (rad/s)');
+  field.addColor(c, 'colorFieldDeep').name('deep');
+  field.addColor(c, 'colorFieldBody').name('emulsion');
+  field.addColor(c, 'colorFieldGlow').name('spill');
 
   const fx = folder.addFolder('6 · Particles');
   R(fx, c, 'moteRate', 0, 600, 1, 'motes/second');

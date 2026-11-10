@@ -46,9 +46,15 @@ export default {
     /* ================================================================ */
     /* 1 · THE NEBULA                                                    */
     /* ================================================================ */
-    cloudRadius: 5.2, // metres
-    cloudHeight: 3.8, // metres its heart hangs over the circle
-    cloudThickness: 1.1, // half-thickness, metres
+    // Derived from the circle so the cloud always reads in an 8 m frame:
+    // heart height = zoneRadius × cloudHeightPerZone + cloudHeight,
+    // radius       = zoneRadius × cloudRadiusPerZone + cloudRadius.
+    cloudHeightPerZone: 0.58, // × zoneRadius
+    cloudRadiusPerZone: 1.1, // × zoneRadius
+    cloudRadius: 0, // extra metres on the derived radius
+    cloudHeight: 0.15, // extra metres on the derived height
+    cloudThickness: 0.85, // half-thickness, metres — a flattened disc
+    collapseThickKeep: 0.55, // share of that half-thickness the cloud keeps as it falls in (a fat globule, not a sliver)
     cloudSpin: 0.35, // rad/s it turns while it gathers
     spinUp: 5, // how much faster it turns once it is collapsing (angular momentum)
     cloudShear: 0.55, // 0..1 how much faster the inside turns — spiral shear
@@ -56,30 +62,40 @@ export default {
     infallWind: 2.2, // radians wound in as a puff falls
     collapseTo: 1.4, // radius it collapses into, × the core radius
     puffCount: 30, // gas billboards (max 40)
-    puffSize: 3.6, // metres
+    puffSize: 2.7, // metres
     puffSizeJitter: 0.45,
     puffCoreSize: 0.28, // size once collapsed, × size
     puffBlastSize: 1.7, // size once blown out, × size
     gasNoiseScale: 1.3, // churn features across a puff
     gasFlowSpeed: 0.35, // how fast it churns
     gasFilaments: 0.3, // 0..1 filament share of the gas
-    gasDensity: 0.7,
-    gasGlow: 0.7, // brightness (bloom > 1)
+    gasDensity: 0.65,
+    gasGlow: 0.55, // brightness (bloom > 1) — the deep lanes carry the body
+    gasAccent: 0.35,
+    collapseThin: 0.93, // 0..1 how much fully collapsed gas thins away into the star // share of puffs tinted teal / magenta; the rest are violet
     gasSoftFade: 1.2, // soft intersection, metres
-    colorA: '#8a4dff', // violet gas
-    colorGasB: '#2fd6c8', // teal gas
-    colorGasC: '#ff6fbf', // pink gas
-    colorHot: '#fff2d6', // white-gold — compression heat, the star
+    // Four-stop cosmic ramp: white-gold heat → pale lilac tint → violet body → deep.
+    colorA: '#6f2ee6', // violet gas — the body
+    colorGasB: '#1f9f9c', // teal accent
+    colorGasC: '#c23a95', // magenta accent
+    colorHot: '#fff0d2', // white-gold — compression heat, the star
+    colorDeep: '#14062e', // the dark dust lanes and the gravity well
+
+    /* --- dark dust lanes: the cloud's body against the floor --- */
+    laneDensity: 0.82, // how much the lanes darken what is behind them
+    laneSize: 1.25, // × puff size
+    laneCoreSize: 0.8, // the dust lanes' size once collapsed, × size — the dark body round the forming star
+    laneLift: 0.5, // the lanes' own violet glow, so they read as dust not holes
 
     /* --- stars sprinkled through it --- */
     starCount: 70, // (max 120)
     starSize: 0.22, // metres
-    starFlare: 1.4, // how much they flare as they are swallowed
+    starFlare: 0.6, // how much they flare as they are swallowed
     starTwinkle: 0.55, // 0..1
     starTwinkleSpeed: 5, // rad/s
-    starGlow: 2.2,
+    starGlow: 1.2,
     starSpikes: 0.9, // diffraction spikes
-    colorStarA: '#e8f4ff',
+    colorStarA: '#f3eaff',
     colorStarB: '#ffd7f2',
 
     /* ================================================================ */
@@ -89,30 +105,33 @@ export default {
     coreGranulation: 5, // boiling cells across it
     coreBoilSpeed: 1.6,
     coreLimb: 2.2, // hot rim
-    coreGlow: 3.2,
+    coreGlow: 0.65,
+    coreHeatCap: 0.4, // 0..1 most of the way to white-gold the star's body goes
+    coreBloomCap: 0.8, // brightest the star may get (caps the bloom)
     corePulse: 0.08, // how much it throbs
     implodeShare: 0.3, // share of the hold it spends imploding before it blows
     implodeScale: 0.45, // how small it gets, × radius
     colorCore: '#ffb36b', // the star's body
     colorB: '#d8b4ff', // its rim, the corona's streamers and the disk's middle
 
-    coronaSize: 4.2, // × core radius
+    coronaSize: 3.2, // × core radius
     coronaRays: 9, // streamers round it
     coronaRayLength: 0.35, // share of the corona
     coronaFalloff: 0.12, // glow falloff, share of the corona
-    coronaGlow: 1.8,
+    coronaGlow: 0.45,
+    coronaBloomCap: 0.45, // brightest the corona may get
 
     diskInner: 1.4, // × core radius
-    diskOuter: 4.2, // × core radius
+    diskOuter: 3.6, // × core radius
     diskTilt: 0.32, // radians, tipped toward the caster
     diskSpin: 2.2, // rad/s
     diskArms: 3,
     diskTwist: 3.2, // how tightly the arms wind
     diskDoppler: 0.55, // brighter on the side turning toward you
-    diskGlow: 2.2,
+    diskGlow: 0.65,
 
     /* --- the lens (distortion) --- */
-    lensPinch: 0.9, // the mass pulling the image in
+    lensPinch: 0.4, // the mass pulling the image in
     lensShock: 1.4, // the shell pushing it out
     lensSize: 2.4, // × the cloud radius
 
@@ -124,16 +143,16 @@ export default {
     shellFilaments: 1.1,
     shellFilamentScale: 2.6,
     shellGlow: 2.6,
-    novaDust: 260, // star-dust motes blasted out
+    novaDust: 200, // star-dust motes blasted out
     dustSpeed: 9,
     dustSize: 0.1,
     dustLifetime: 1.6,
     dustDrag: 1.6,
     sprinkleRate: 30, // twinkles/second sifting through the cloud
-    colorDustA: '#ffffff',
-    colorDustB: '#ffd7f2',
-    colorDustC: '#b48cff',
-    colorDustD: '#2fd6c8',
+    colorDustA: '#fff0d2',
+    colorDustB: '#c48bff',
+    colorDustC: '#6f2ee6',
+    colorDustD: '#3a1890',
     novaSparks: 120, // streaks
     sparkSpeed: 22,
     sparkSize: 0.06,
@@ -151,12 +170,12 @@ export default {
     novaLight: 4, // light punch, × lightIntensity
     collapseRumble: 0.25, // camera rumble while it collapses
     colorFlash: '#f3e6ff',
-    colorShockA: '#c18cff',
+    colorShockA: '#7a3ae8',
     colorShockB: '#ffffff',
 
     /* --- the ground under the circle --- */
-    groundGlow: 0.55, // the cloud's light on the floor
-    groundRipples: 0.6, // gravity ripples running inward
+    groundGlow: 0.45, // the cloud's light on the floor
+    groundRipples: 0.08, // gravity ripples running inward
     groundRippleDensity: 0.75, // rings per metre
     groundRippleSpeed: 0.9, // rings per second
     groundShock: 1.4, // the shock front
@@ -165,6 +184,23 @@ export default {
     groundScorch: 0.8, // the starburst left behind it
     groundRays: 22,
     scorchTime: 1.6, // seconds the starburst takes to cool
+
+    /* --- the gravity well: the floor pulled in under the collapse --- */
+    wellRadius: 1.15, // × zoneRadius
+    wellDepth: 0.85, // 0..1 how dark the well's heart goes
+    wellArms: 4, // spiral arms of dust dragged in
+    wellTwist: 2.6, // how tightly the arms wind
+    wellSpeed: 1.4, // rad/s the arms turn inward (× the collapse)
+    wellRim: 0.35,
+    wellArmLight: 0.8, // 0..1 how lit the dragged dust arms are against the deep well // the violet lip at the well's edge
+    wellScar: 0.45, // how much of the well stays as a scar after the blast
+    debrisRate: 70, // floor chips dragged in per second while it collapses
+    debrisSize: 0.09,
+    debrisLifetime: 0.9,
+    colorDebrisA: '#6a4a8a',
+    colorDebrisB: '#3a2456',
+    colorDebrisC: '#21123a',
+    colorDebrisD: '#0e0620',
 
     /* --- the remnant --- */
     remnantRadius: 3.2, // metres when it forms
@@ -178,9 +214,9 @@ export default {
     gasLifetime: 1.4,
     gasInflow: 0.9, // how much of the way to the core they get
     colorWispA: '#d8b4ff',
-    colorWispB: '#8a4dff',
-    colorWispC: '#2fd6c8',
-    colorWispD: '#1a0b3a',
+    colorWispB: '#6f2ee6',
+    colorWispC: '#3a1890',
+    colorWispD: '#14062e',
 
     /* --- the seed of light it is cast with --- */
     heraldSize: 0.16, // metres

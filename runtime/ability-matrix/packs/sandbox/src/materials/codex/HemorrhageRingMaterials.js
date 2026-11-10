@@ -211,6 +211,8 @@ const WALL_VERTEX = /* glsl */ `
   uniform float uCrest;       // how torn the crest is
   uniform float uSpin;        // integrated spin, radians
   uniform float uSeed;
+  uniform float uCurl;        // metres the crest curls inward while it stands
+  uniform float uFoot;        // metres the foot bulges outward
 
   varying vec2  vG;           // x: bearing 0..1, y: 0 floor .. 1 crest
   varying vec3  vNormalW;
@@ -222,7 +224,10 @@ const WALL_VERTEX = /* glsl */ `
     float a = x * 6.2831853;
     float torn = snoise(vec3(cos(a + uSpin * 0.3) * 2.5, sin(a + uSpin * 0.3) * 2.5, uSeed)) * 0.5 + 0.5;
     float h = y * uH * (1.0 + uCrest * (torn - 0.5) * y);
-    float r = max(uR - uLean * y * y, 0.02);
+    // Wave profile: a thick bulging foot, a crest curling over inward.
+    float curl = uCurl * pow(max(y - 0.55, 0.0) / 0.45, 2.0);
+    float foot = uFoot * (1.0 - y) * (1.0 - y) * (0.8 + 0.4 * torn);
+    float r = max(uR - uLean * y * y - curl + foot, 0.02);
     return uCenter + vec3(cos(a) * r, h, sin(a) * r);
   }
 
@@ -250,6 +255,7 @@ const WALL_FRAGMENT = /* glsl */ `
   uniform float uGloss;
   uniform float uOpacity;
   uniform float uBreak;
+  uniform float uDeep;
   uniform vec3  uColorDeep;
   uniform vec3  uColorBody;
   uniform vec3  uColorHot;
@@ -288,13 +294,21 @@ const WALL_FRAGMENT = /* glsl */ `
     float spec = pow(max(dot(N, H), 0.0), 60.0) * uGloss;
     float fres = pow(1.0 - abs(dot(N, V)), 2.5);
 
-    float foam = smoothstep(0.7, 1.0, vG.y + s * 0.2) * uFoam;
-    vec3 col = mix(uColorDeep, uColorBody, diff * (0.55 + 0.45 * s));
-    col += uColorHot * smoothstep(0.15, 0.6, s) * uGlow * uGlobalGlow * uShaderIntensity * (0.4 + 0.6 * fres);
-    col = mix(col, uColorFoam * uGlobalGlow, foam * (0.5 + 0.5 * s));
-    col += vec3(spec);
+    // Ramp: the dark deep stop carries the wall; the saturated body shows on
+    // the lit side and in the streak bands; hot red only on narrow streak
+    // crests and the edge-on fresnel; pale foam only in a thin torn band at
+    // the crest. Wet blood is dark, not pink.
+    float foam = smoothstep(0.86, 1.0, vG.y + s * 0.12) * uFoam;
+    float bodyK = diff * (0.3 + 0.7 * smoothstep(-0.2, 0.6, s)) * (1.0 - uDeep * 0.6);
+    vec3 col = mix(uColorDeep, uColorBody, clamp(bodyK, 0.0, 1.0));
+    // darker toward the foot, where the blood pools thick
+    col *= 0.55 + 0.45 * smoothstep(0.0, 0.5, vG.y);
+    float crest = smoothstep(0.42, 0.78, s);
+    col += uColorHot * crest * uGlow * uGlobalGlow * uShaderIntensity * (0.25 + 0.75 * fres);
+    col = mix(col, uColorFoam * uGlobalGlow, foam * (0.4 + 0.6 * s));
+    col += vec3(1.0, 0.8, 0.82) * spec;
 
-    float alpha = (0.75 + 0.25 * s + fres * 0.3) * uOpacity;
+    float alpha = (0.88 + 0.12 * s + fres * 0.2) * uOpacity;
     alpha *= 1.0 - smoothstep(0.92, 1.0, vG.y);
     if (alpha < 0.004) discard;
     gl_FragColor = vec4(col, clamp(alpha, 0.0, 1.0));
@@ -324,6 +338,9 @@ export function createWallMaterial() {
       uGloss: { value: 1 },
       uOpacity: { value: 1 },
       uBreak: { value: 0 },
+      uCurl: { value: 0 },
+      uFoot: { value: 0 },
+      uDeep: { value: 0.7 },
       uColorDeep: { value: new Color() },
       uColorBody: { value: new Color() },
       uColorHot: { value: new Color() },
@@ -351,6 +368,9 @@ export function createWallMaterial() {
     u.uGloss.value = c.gloss;
     u.uOpacity.value = c.wallOpacity * g.opacity;
     u.uBreak.value = state.break;
+    u.uCurl.value = c.wallCurl * (state.curl ?? 1);
+    u.uFoot.value = c.wallFoot;
+    u.uDeep.value = c.wallDeep;
     u.uColorDeep.value.copy(getColor(c.colorBloodDeep));
     u.uColorBody.value.copy(getColor(c.colorBloodBody));
     u.uColorHot.value.copy(getColor(c.colorBloodHot));

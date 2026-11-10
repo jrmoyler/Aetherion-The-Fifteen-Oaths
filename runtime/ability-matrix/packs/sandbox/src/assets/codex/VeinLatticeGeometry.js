@@ -39,7 +39,7 @@ export function createVeinNetGeometry(opts) {
   const curl = opts.curl ?? 0.35;
   const seed = opts.seed ?? 1;
   const SEG = opts.segments ?? 12;
-  const SIDES = opts.sides ?? 6;
+  const SIDES = opts.sides ?? 8;
 
   let s0 = seed * 9301 + 49297;
   const rand = () => {

@@ -65,6 +65,59 @@ export function createStakeGeometry(rings = 96, sides = 7) {
 }
 
 /**
+ * The thorn roots: `roots` closed tubes in one buffer, in parameter space.
+ *
+ * `position.x` is `s`, 0 where the root leaves the stake and 1 where it dives
+ * back into the floor; `position.y` is the 0..1 bearing round the tube;
+ * `position.z` is the root's index. The thorn material bends each one into an
+ * arching, barbed blood-glass root (`thornPath` in HeartstakeMaterials) and
+ * collapses the ones past the live `thornRoots` count, so the count is a
+ * slider too.
+ *
+ * @param {number} [roots] the hard ceiling on roots
+ * @param {number} [rings] segments along each root
+ * @param {number} [sides] facets round each root
+ */
+export function createThornGeometry(roots = 16, rings = 40, sides = 6) {
+  const cols = sides + 1;
+  const rows = rings + 1;
+  const per = cols * rows;
+  const positions = new Float32Array(per * roots * 3);
+  const indices = new Uint16Array(sides * rings * 6 * roots);
+  let p = 0;
+  let k = 0;
+  for (let r = 0; r < roots; r++) {
+    const base = r * per;
+    for (let j = 0; j < rows; j++) {
+      for (let i = 0; i < cols; i++) {
+        positions[p++] = j / rings;
+        positions[p++] = i / sides;
+        positions[p++] = r;
+      }
+    }
+    for (let j = 0; j < rings; j++) {
+      for (let i = 0; i < sides; i++) {
+        const a = base + j * cols + i;
+        const b = a + 1;
+        const c = a + cols;
+        const d = c + 1;
+        indices[k++] = a;
+        indices[k++] = c;
+        indices[k++] = b;
+        indices[k++] = b;
+        indices[k++] = c;
+        indices[k++] = d;
+      }
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setIndex(new BufferAttribute(indices, 1));
+  geometry.boundingSphere = new Sphere(new Vector3(), 1e4);
+  return geometry;
+}
+
+/**
  * A strip, `columns` along by `rows` across, in parameter space: `position.x`
  * 0..1 along, `position.y` -1..1 across. The blood trail stands it up behind
  * the stake, facing the camera.

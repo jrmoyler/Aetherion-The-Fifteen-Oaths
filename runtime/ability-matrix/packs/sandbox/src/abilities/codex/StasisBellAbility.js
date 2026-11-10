@@ -1,4 +1,4 @@
-import { Group, Mesh, Vector3 } from 'three';
+import { CylinderGeometry, Group, Mesh, Vector3 } from 'three';
 import { Ability } from '../Ability.js';
 import {
   createBellGeometry,
@@ -17,6 +17,7 @@ import {
   createStringMaterial,
   createFrontMaterial,
   createFloorMaterial,
+  createCurtainMaterial,
   createAirMaterial
 } from '../../materials/codex/StasisBellMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -77,6 +78,12 @@ function syncSystem(p, c, prefix, glow, turb) {
  * **snap** at their middles and whip back, the tines sink, a pressure shell
  * slams down and out, and the held bodies are thrown as time comes back all
  * at once. The bell is unmade the way it was made.
+ *
+ * Upgrade: the crown height is derived from the fence (`crownHeight`: lip
+ * clears the tines by `hangClear`), so the bell hangs in shot; it is turned
+ * and lowered (`dropHeight`) while a brass note skates out leaving rings of
+ * sound; a wall of stopped sound (`createCurtainMaterial`) and an amber floor
+ * wash fill the held circle.
  *
  * Kept apart from the other time spells: not a clock face, not a glass
  * sphere, not an hourglass descending. And from the air pack's Vortex Bell: this
@@ -180,12 +187,28 @@ export class StasisBellAbility extends Ability {
     this.airMaterial = createAirMaterial();
     this.air = this._mesh(this.quadGeometry, this.airMaterial, LAYER.DISTORTION, 0);
 
+    /* ---- 5b: the held field, a wall of stopped sound on the rim ---- */
+    this.curtainGeometry = new CylinderGeometry(1, 1, 1, 96, 1, true);
+    this.curtainGeometry.translate(0, 0.5, 0);
+    this.curtainMaterial = createCurtainMaterial();
+    this.curtain = new Mesh(this.curtainGeometry, this.curtainMaterial);
+    this.curtain.layers.set(LAYER.VFX);
+    this.curtain.renderOrder = 11;
+    this.curtain.frustumCulled = false;
+    this.curtain.visible = false;
+    this.group.add(this.curtain);
+
     this._bellState = { form: 0, ring: 0, ringPhase: 0, ringAxis: 0, seed: 0 };
     this._partState = { form: 0, ring: 0, ringPhase: 0, ringAxis: 0, seed: 0 };
     this._rim = { center: new Vector3(), spin: 0, riseClock: -10, sink: 0, quiver: 0, quiverPhase: 0, hot: 0, seed: 0 };
     this._stringState = { center: null, spin: 0, riseClock: -10, sink: 0, phase: 0, strung: 0, amp: 0, pulse: 0, snap: 0 };
     this._floorState = { center: new Vector3(), draw: 0, hold: 0, toll: 0, fade: 1, seed: 0 };
     this._airState = { center: new Vector3(), size: 6, ring: 0, hold: 0 };
+    this._curtainState = { hold: 0, toll: 0, snap: 0, spin: 0, seed: 0 };
+    this._curtainK = 0;
+    this._formAtImpact = 0;
+    this._travelForm = 0;
+    this._travelled = 0;
     this._look = { color: '#000000', rimColor: '#000000', rimEmissive: 0, edgeColor: '#000000', edgeEmissive: 0, edgeWidth: 0.05 };
 
     this._held = [];
@@ -335,6 +358,11 @@ export class StasisBellAbility extends Ability {
     this._gearTick = 0;
     this._airT = -1;
     this._fadeK = 0;
+    this._curtainK = 0;
+    this._formAtImpact = 0;
+    this._travelForm = 0;
+    this._travelled = 0;
+    this.curtain.visible = false;
     this._releaseHeld(false);
     for (const f of this.fronts) {
       f.t = -1;
@@ -387,25 +415,51 @@ export class StasisBellAbility extends Ability {
     const c = settings[ID];
     const g = settings.global;
     this._floorState.draw = Easing.outQuad(this.u);
-    // A brass glint running along the floor with the front.
-    const n = Math.round(this.travelEmitter.tick(dt, 60) * g.particleCount);
+    // While the note runs out, the bell is already being turned over the
+    // circle and lowered onto its hang: the drop is seen before it lands.
+    this._travelForm = saturate(this.u) * saturate(c.travelForm);
+    // A struck note skating along the floor: a hot brass bead with a comet of
+    // sparks behind it, and a ring of sound left on the floor every few metres.
+    const n = Math.round(this.travelEmitter.tick(dt, c.travelRate) * g.particleCount);
     if (n > 0) {
       this._resetEmit();
-      _pos.copy(this.position).setY(0.15);
+      _pos.copy(this.position).setY(0.3);
       _emit.position = _pos;
-      _emit.radius = 0.2;
+      _emit.radius = 0.08;
       _emit.direction = _up;
-      _emit.speed = 0.6;
+      _emit.speed = 0.4;
       _emit.spread = 1;
-      _emit.size = c.moteSize;
-      _emit.life = c.moteLife * 0.3;
+      _emit.size = c.travelSize;
+      _emit.life = 0.35;
       this.motes.emit(n, _emit);
+      _dir.copy(this.direction).multiplyScalar(-1).setY(0.35).normalize();
+      _emit.direction = _dir;
+      _emit.speed = c.sparkSpeed * 0.8;
+      _emit.spread = 0.5;
+      _emit.size = c.sparkSize;
+      _emit.life = c.sparkLife;
+      this.sparks.emit(Math.max(1, Math.round(n * 0.6)), _emit);
+    }
+    const spacing = Math.max(0.3, c.travelRingSpacing);
+    while (this.front - this._travelled >= spacing) {
+      this._travelled += spacing;
+      this.pointAt(saturate(this._travelled / Math.max(0.01, this.length)), _pos);
+      _pos.setY(0);
+      this.ctx.decals.spawn(DecalType.SHOCKWAVE, _pos, {
+        radius: c.travelRingRadius,
+        life: 0.55 * g.lifetime,
+        width: 0.06,
+        intensity: 0.9,
+        colorA: getColor(c.colorShock),
+        colorB: getColor(c.colorBand)
+      });
     }
     this._sync(dt);
   }
 
   onImpact() {
     this._tau = 0;
+    this._formAtImpact = this._travelForm;
     this._floorState.draw = 1;
     this._rim.riseClock = 0;
     this.rig.visible = true;
@@ -472,7 +526,9 @@ export class StasisBellAbility extends Ability {
     for (const f of this.fronts) this._updateFront(f, dt);
 
     /* ---- the bell: formed, then unmade ---- */
-    const formK = active ? saturate(tau / Math.max(0.02, c.formTime * L)) : 0;
+    const f0 = this._formAtImpact;
+    const formK = active ? f0 + (1 - f0) * saturate(tau / Math.max(0.02, c.formTime * L)) : this._travelForm;
+    this._formK = formK;
     this._form = Easing.inOutQuad(formK) * (1 - Easing.inQuad(this._fadeK));
     this._gearTick += dt * c.gearTickRate * g.animationSpeed * (this._released ? 0 : 1);
 
@@ -484,6 +540,9 @@ export class StasisBellAbility extends Ability {
       this._hold = Math.max(0, this._hold - dt * 4);
     }
 
+    const target = this._released ? 0 : this._hold;
+    this._curtainK += (target - this._curtainK) * Math.min(1, dt * (this._released ? 3 : 7));
+
     this._syncRig();
     this._syncMaterials();
     if (dt > 0) this._holdBodies(dt);
@@ -491,12 +550,31 @@ export class StasisBellAbility extends Ability {
     this.position.copy(this._mouth);
   }
 
+  /**
+   * Where the crown hangs. Derived from the fence the cast stands round its
+   * zone: the lip clears the tops of the tines by `hangClear`, so the whole
+   * bell sits just above the circle and in shot at play distance however the
+   * tines or the bell are resized. `hangFromZone` 0 falls back to the fixed
+   * `hangHeight`.
+   */
+  crownHeight() {
+    const c = settings[ID];
+    const derived = Math.max(1.9, c.tineHeight) + c.hangClear + Math.max(0.2, c.bellHeight);
+    return lerp(c.hangHeight, derived, saturate(c.hangFromZone));
+  }
+
+  /** The drop: lowered onto its hang as it is turned, settling with a dip. */
+  _dropOffset() {
+    const k = saturate(this._formK ?? 0);
+    return settings[ID].dropHeight * (1 - Easing.outBack(k));
+  }
+
   /** Place the rig: crown pivot over the centre, swung about the line's side axis. */
   _syncRig() {
     const c = settings[ID];
     const H = Math.max(0.2, c.bellHeight);
     const R = Math.max(0.1, c.bellRadius);
-    this.rig.position.copy(this._rim.center).setY(c.hangHeight);
+    this.rig.position.copy(this._rim.center).setY(this.crownHeight() + this._dropOffset());
     this.rig.quaternion.setFromAxisAngle(this.side, this._swing);
     this.bell.scale.set(R, H, R);
     // The clapper lags the bell: it hangs nearer the vertical, so at the
@@ -577,6 +655,18 @@ export class StasisBellAbility extends Ability {
     air.hold = this._hold;
     this.airMaterial.userData.sync(air);
     this.air.visible = air.ring > 0 || air.hold > 0.01;
+
+    const cs = this._curtainState;
+    cs.hold = this._curtainK;
+    cs.toll = this._toll;
+    cs.snap = this._snap;
+    cs.spin = this._rim.spin;
+    cs.seed = this._seed;
+    this.curtainMaterial.userData.sync(cs);
+    const R = Math.max(0.3, c.zoneRadius);
+    this.curtain.position.copy(this._rim.center).setY(0);
+    this.curtain.scale.set(R, Math.max(0.1, c.tineHeight * c.curtainHeight * (1 - this._sink)), R);
+    this.curtain.visible = this._curtainK > 0.005 && this._snap < 0.999;
   }
 
   _syncParticles() {
@@ -859,6 +949,7 @@ export class StasisBellAbility extends Ability {
     this.strings.visible = false;
     this.floor.visible = false;
     this.air.visible = false;
+    this.curtain.visible = false;
     for (const f of this.fronts) {
       f.t = -1;
       f.mesh.visible = false;
@@ -875,6 +966,8 @@ export class StasisBellAbility extends Ability {
     this.stringGeometry.dispose();
     this.bandGeometry.dispose();
     this.quadGeometry.dispose();
+    this.curtainGeometry.dispose();
+    this.curtainMaterial.dispose();
     this.bellMaterial.dispose();
     this.clapperMaterial.dispose();
     this.gearMaterial.dispose();
@@ -911,7 +1004,11 @@ export function buildEditor(gui, c, Editor) {
   R(light, c, 'lightFlicker', 0, 1, 0.01, 'shimmer');
 
   const bell = folder.addFolder('1 · Bell');
-  R(bell, c, 'hangHeight', 2, 16, 0.05, 'crown height (m)');
+  R(bell, c, 'hangFromZone', 0, 1, 0.01, 'hang from the fence (0 = fixed height)');
+  R(bell, c, 'hangClear', 0, 3, 0.01, 'lip clears the tines by (m)');
+  R(bell, c, 'hangHeight', 2, 16, 0.05, 'fixed crown height (m)');
+  R(bell, c, 'dropHeight', 0, 4, 0.01, 'lowered from (m above)');
+  R(bell, c, 'travelForm', 0, 1, 0.01, 'turned while the note runs');
   R(bell, c, 'bellHeight', 0.2, 6, 0.01, 'bell height (m)');
   R(bell, c, 'bellRadius', 0.1, 4, 0.01, 'lip radius (m)');
   R(bell, c, 'formTime', 0.05, 3, 0.01, 'turned over (s)');
@@ -975,12 +1072,28 @@ export function buildEditor(gui, c, Editor) {
   strings.addColor(c, 'colorStringA').name('core');
   strings.addColor(c, 'colorStringB').name('edge');
 
+  const field = folder.addFolder('6b · Held field');
+  R(field, c, 'curtainHeight', 0.1, 1.5, 0.01, 'height (× tine height)');
+  R(field, c, 'curtainBands', 1, 16, 0.5, 'standing bands');
+  R(field, c, 'curtainGlow', 0, 6, 0.05, 'crest glow');
+  R(field, c, 'curtainOpacity', 0, 1, 0.01, 'opacity');
+  field.addColor(c, 'colorCurtainA').name('crest');
+  field.addColor(c, 'colorCurtainB').name('amber');
+  field.addColor(c, 'colorCurtainDeep').name('umber (deep)');
+
+  const travel = folder.addFolder('Note (travel)');
+  R(travel, c, 'travelRate', 0, 400, 1, 'bead motes / s');
+  R(travel, c, 'travelSize', 0.01, 0.6, 0.005, 'bead size');
+  R(travel, c, 'travelRingSpacing', 0.3, 5, 0.05, 'sound rings every (m)');
+  R(travel, c, 'travelRingRadius', 0.1, 3, 0.01, 'sound ring radius (m)');
+
   const floor = folder.addFolder('7 · Floor');
   R(floor, c, 'bandWidth', 0.02, 2, 0.01, 'resonance band (m)');
   R(floor, c, 'bandGlow', 0, 6, 0.05, 'band glow');
   R(floor, c, 'waveScale', 0.2, 10, 0.05, 'standing rings per m');
   R(floor, c, 'waveGlow', 0, 6, 0.05, 'ring glow');
   R(floor, c, 'floorOpacity', 0, 1, 0.01, 'opacity');
+  R(floor, c, 'washStrength', 0, 1.5, 0.01, 'held wash');
   floor.addColor(c, 'colorBand').name('band');
   floor.addColor(c, 'colorWave').name('rings');
   floor.addColor(c, 'colorHeld').name('held wash');

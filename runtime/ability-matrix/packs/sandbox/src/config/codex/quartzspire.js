@@ -15,7 +15,7 @@ export default {
     label: 'Quartz Spire',
     accent: '#f3e2ff',
     key: '',
-    element: 'earth',
+    element: 'crystal',
     hint: 'Earth — a ring of clear quartz points spirals up through the circle, leaning in to a towering master crystal that sings gold',
     cast: 'zone',
     glyph: `<path d="M50 8L60 26V86H40V26Z"/><path d="M24 86V50L30 40L36 50V86"/><path d="M64 86V50L70 40L76 50V86"/><path d="M14 86H86"/>`

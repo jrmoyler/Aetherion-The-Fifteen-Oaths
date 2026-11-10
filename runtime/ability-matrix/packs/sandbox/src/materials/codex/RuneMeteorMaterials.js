@@ -26,6 +26,11 @@ import { getColor } from '../../utils/color.js';
  *  - **the sigil** (`createSigilMaterial`) — the floor: two rings drawn round
  *    as the call arrives, a band of runes between them, the star polygon
  *    joining where the stones will stand, all blazing on the nova.
+ *  - **the ground** (`createGroundMaterial`) — normal-blended under the sigil:
+ *    the circle darkening to a deep indigo pool as the star falls (the
+ *    telegraph has mass, not just a ring), then a scorched bowl with a raised
+ *    lip and fissures that glow arcane-hot at the landing and the nova and
+ *    cool to slate through the linger.
  *  - **the warp** (`createWarpMaterial`) — LAYER.DISTORTION: the landing's
  *    ring and the nova's.
  *
@@ -644,6 +649,129 @@ export function createSigilMaterial() {
     u.uFade.value = c.floorOpacity * g.opacity * s.fade;
     u.uColor.value.copy(getColor(c.colorSigil));
     u.uHot.value.copy(getColor(c.colorSigilHot));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The ground — the star's shadow, then the crater it leaves            */
+/* -------------------------------------------------------------------- */
+
+const GROUND_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uTime;
+  uniform float uSeed;
+  uniform float uRadius;      // the circle
+  uniform float uShade;       // 0..1 the star's shadow gathering as it falls
+  uniform float uShadow;      // how dark that gathering gets
+  uniform float uCrater;      // metres: the bowl it punched (0 before landing)
+  uniform float uHeat;        // 0..1+ fresh cracks glowing
+  uniform float uCracks;      // fissures out of the bowl
+  uniform float uCrackReach;  // × the crater, how far they run
+  uniform float uOpacity;
+  uniform float uFade;
+  uniform vec3  uDeep;
+  uniform vec3  uBody;
+  uniform vec3  uHot;
+  uniform float uGlobalGlow;
+
+  varying vec2 vXZ;
+
+  ${noiseGLSL}
+
+  void main() {
+    float r = length(vXZ);
+    float ang = atan(vXZ.y, vXZ.x);
+    float n = fbm3(vec3(vXZ * 0.9, uSeed)) * 0.5 + 0.5;
+    float disc = 1.0 - smoothstep(uRadius * 0.82, uRadius * 1.02, r);
+
+    // 1 · Anticipation: the circle darkens under the falling star, the
+    // darkest pool tightening onto where it will strike.
+    float pool = exp(-pow(r / max(0.4, uRadius * (0.75 - 0.4 * uShade)), 2.0));
+    float shade = uShade * uShadow * (disc * (0.45 + 0.25 * n) + pool * 0.5);
+
+    // 2 · The crater: a scorched bowl with a lighter, raised lip and
+    // fissures that glow arcane-hot, then cool to slate.
+    float C = max(uCrater, 1e-3);
+    float bowl = (1.0 - smoothstep(C * 0.8, C, r)) * step(0.01, uCrater);
+    float lip = exp(-pow((r - C) / (C * 0.12), 2.0)) * step(0.01, uCrater);
+    float k = ang * uCracks / 6.2831853 + uSeed;
+    float wob = fbm3(vec3(vXZ * 1.7, uSeed + 3.0)) * 0.9;
+    float line = abs(fract(k + wob * 0.35) - 0.5) * 2.0;
+    float reach = C * uCrackReach * (0.7 + 0.5 * hash11(floor(k + wob * 0.35) + uSeed));
+    float crack = pow(1.0 - line, 46.0 * (0.4 + r / max(reach, 0.1))) * (1.0 - smoothstep(reach * 0.7, reach, r)) * step(C * 0.35, r) * step(0.01, uCrater);
+
+    float a = max(shade, max(bowl * (0.75 + 0.2 * n), lip * 0.7));
+    a = max(a, crack);
+    vec3 col = mix(uDeep, uBody, clamp(lip + bowl * n * 0.35, 0.0, 1.0));
+    // The pool is not just dark: a faint cold glow gathers at its heart and
+    // rune-light veins it, so the telegraph reads on a dark floor.
+    float vein = pow(1.0 - abs(fbm3(vec3(vXZ * 1.3, uSeed + uTime * 0.2))), 18.0);
+    col += uHot * uShade * (1.0 - step(0.01, uCrater)) * (pool * 0.35 + vein * disc * 0.6) * uGlobalGlow;
+    a = max(a, uShade * disc * vein * 0.6);
+    col += uHot * crack * (0.25 + uHeat * 2.5) * uGlobalGlow;
+    col += uHot * bowl * pow(1.0 - r / C, 2.0) * uHeat * 0.8 * uGlobalGlow;
+    a *= uOpacity * uFade;
+    if (a < 0.004) discard;
+    gl_FragColor = vec4(col, a);
+  }
+`;
+
+export function createGroundMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uSize: { value: 5 },
+      uSeed: { value: 0 },
+      uRadius: { value: 4 },
+      uShade: { value: 0 },
+      uShadow: { value: 0.7 },
+      uCrater: { value: 0 },
+      uHeat: { value: 0 },
+      uCracks: { value: 9 },
+      uCrackReach: { value: 2 },
+      uOpacity: { value: 1 },
+      uFade: { value: 1 },
+      uDeep: { value: new Color() },
+      uBody: { value: new Color() },
+      uHot: { value: new Color() }
+    }),
+    vertexShader: SIGIL_VERTEX,
+    fragmentShader: GROUND_FRAGMENT
+  });
+
+  /** @param {object} s { center, shade, crater, heat, fade, seed } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    const R = Math.max(0.5, c.zoneRadius);
+    u.uCenter.value.copy(s.center);
+    u.uSize.value = Math.max(R, c.craterRadius * c.crackReach) + 0.5;
+    u.uSeed.value = s.seed;
+    u.uRadius.value = R;
+    u.uShade.value = s.shade;
+    u.uShadow.value = c.groundShadow;
+    u.uCrater.value = s.crater;
+    u.uHeat.value = s.heat;
+    u.uCracks.value = Math.max(1, Math.round(c.crackCount));
+    u.uCrackReach.value = c.crackReach;
+    u.uOpacity.value = c.groundOpacity * g.opacity;
+    u.uFade.value = s.fade;
+    u.uDeep.value.copy(getColor(c.colorGroundDeep));
+    u.uBody.value.copy(getColor(c.colorGroundBody));
+    u.uHot.value.copy(getColor(c.colorCrackHot));
   };
 
   return material;

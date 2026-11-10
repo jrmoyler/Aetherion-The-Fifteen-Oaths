@@ -668,3 +668,105 @@ export function createSporeGroundMaterial() {
 
   return material;
 }
+
+/* ==================================================================== */
+/* The pod's trail                                                       */
+/* ==================================================================== */
+
+const TRAIL_VERTEX = /* glsl */ `
+  uniform float uWidth;      // metres, half-width at the pod
+  attribute vec3  aTangent;
+  attribute float aAlong;
+  attribute float aSide;
+  varying float vAlong;
+  varying float vSide;
+
+  void main() {
+    vAlong = aAlong;
+    vSide = aSide;
+    vec3 toCam = normalize(cameraPosition - position);
+    vec3 across = cross(normalize(aTangent), toCam);
+    float l = length(across);
+    across = l > 1e-4 ? across / l : vec3(1.0, 0.0, 0.0);
+    // Swells just behind the pod, then thins to a thread at the tail.
+    float w = uWidth * (0.55 + 0.9 * smoothstep(0.0, 0.12, aAlong)) * (0.25 + 0.75 * pow(1.0 - aAlong, 0.6));
+    vec3 p = position + across * aSide * w;
+    gl_Position = projectionMatrix * viewMatrix * vec4(p, 1.0);
+  }
+`;
+
+const TRAIL_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uSeed;
+  uniform float uGlow;
+  uniform float uOpacity;
+  uniform float uFade;       // 1 in flight → 0 as the trail settles after landing
+  uniform float uScroll;
+  uniform vec3  uColorHot;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+  uniform float uGlobalGlow;
+  varying float vAlong;
+  varying float vSide;
+
+  ${noiseGLSL}
+
+  void main() {
+    float x = vSide;
+    float a = vAlong;
+    // Spore smoke streaming back off the pod: torn by noise that scrolls down
+    // the trail, so it pours rather than sits.
+    float n = snoise(vec3(a * 7.0 - uTime * uScroll, x * 1.6, uSeed));
+    float n2 = snoise(vec3(a * 19.0 - uTime * uScroll * 1.7, x * 3.0, uSeed + 4.0));
+    float body = (1.0 - x * x) * clamp(0.4 + 0.6 * n + 0.3 * n2, 0.0, 1.0);
+    float tail = 0.35 + 0.65 * pow(1.0 - a, 1.2);
+    float alpha = clamp(body * tail, 0.0, 1.0) * uOpacity * uFade;
+    // Four stops down the trail: hot thread at the pod, green body, dark deep.
+    // Lit from inside by its own spores, so it reads against a night floor.
+    vec3 color = mix(uColorBody * 1.4, uColorDeep, smoothstep(0.45, 1.0, a + n * 0.12));
+    float core = exp(-x * x * 6.0) * pow(1.0 - a, 1.1);
+    color += uColorHot * core * uGlow * uGlobalGlow;
+    if (alpha < 0.003) discard;
+    gl_FragColor = vec4(color, alpha);
+  }
+`;
+
+/** The lob's trail: dark spore smoke with a hot thread at the pod. */
+export function createSporeTrailMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uWidth: { value: 0.3 },
+      uSeed: { value: 0 },
+      uGlow: { value: 1.6 },
+      uOpacity: { value: 0.9 },
+      uFade: { value: 1 },
+      uScroll: { value: 3 },
+      uColorHot: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: TRAIL_VERTEX,
+    fragmentShader: TRAIL_FRAGMENT
+  });
+
+  material.userData.sync = (seed, fade) => {
+    const c = settings.spore;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uSeed.value = seed;
+    u.uWidth.value = c.podSize * c.podTrailWidth;
+    u.uGlow.value = c.podTrailGlow * g.shaderIntensity;
+    u.uOpacity.value = c.podTrailOpacity * g.opacity;
+    u.uFade.value = fade;
+    u.uScroll.value = c.podTrailScroll * g.animationSpeed;
+    u.uColorHot.value.copy(getColor(c.colorTrailHot));
+    u.uColorBody.value.copy(getColor(c.colorTrailBody));
+    u.uColorDeep.value.copy(getColor(c.colorTrailDeep));
+  };
+  return material;
+}

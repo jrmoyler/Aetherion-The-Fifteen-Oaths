@@ -874,3 +874,30 @@
 @media (orientation:portrait) {
  #ui.is-touch .ae-help-dock { top:calc(var(--sat) + var(--gut) + 222px); max-height:calc(100dvh - var(--sat) - var(--sab) - 450px); }
 }
+
+/* Source-glyph sigils: castables without a painted tile show the Ability Matrix glyph, cut from their accent colour. */
+#ui .ae-sigil-icon { display:block; width:100%; height:100%; position:relative; overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--sigil) 26%, transparent), transparent 68%),
+    linear-gradient(180deg, #1b222c, #0d1218);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sigil) 38%, #2a323c), inset 0 -10px 16px rgba(0,0,0,.45); }
+#ui .ae-sigil-glyph { position:absolute; inset:14%; background:linear-gradient(180deg, #fff 0%, var(--sigil) 46%, color-mix(in srgb, var(--sigil) 62%, #000) 100%);
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; -webkit-mask-position:center; mask-position:center; -webkit-mask-size:contain; mask-size:contain;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.6)); }
+
+/* Grimoire: every technique of the Oath, grouped by school. */
+.ae-loadout__slot[data-active] { border-color:var(--gold); box-shadow:inset 3px 0 0 var(--gold); }
+.ae-loadout__hint { color:var(--text-2); font-size:12px; margin:6px 0 0; }
+.ae-grimoire { margin-top:22px; border-top:1px solid var(--rule-faint); padding-top:14px; }
+.ae-grimoire__target { margin:0 0 4px; color:var(--gold); font-variant:small-caps; letter-spacing:.08em; }
+.ae-grimoire__group > h4 { margin:16px 0 8px; font:600 12px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; color:var(--text-2); }
+.ae-grimoire__grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); gap:8px; }
+.ae-grimoire__tile { position:relative; display:flex; flex-direction:column; align-items:center; gap:6px; min-height:44px; padding:8px 6px; color:var(--text); background:rgba(0,0,0,.18); border:1px solid var(--rule-faint); border-radius:3px; cursor:pointer; font:12px/1.25 var(--sans); text-align:center; }
+.ae-grimoire__tile:hover, .ae-grimoire__tile:focus-visible { border-color:var(--gold); outline:none; background:rgba(212,168,67,.08); }
+.ae-grimoire__tile[data-equipped] { border-color:color-mix(in srgb, var(--gold) 55%, transparent); }
+.ae-grimoire__tile[aria-pressed="true"] { box-shadow:0 0 0 1px var(--gold); background:rgba(212,168,67,.12); }
+.ae-grimoire__tile:disabled { opacity:.5; cursor:default; }
+.ae-grimoire__icon { width:52px; height:52px; border-radius:3px; overflow:hidden; }
+.ae-grimoire__name { overflow-wrap:anywhere; }
+.ae-grimoire__badge { position:absolute; top:4px; right:4px; min-width:18px; padding:1px 4px; font:600 11px/1.4 var(--sans); color:#141a22; background:var(--gold); border-radius:2px; }
+@media(max-width:600px) { .ae-grimoire__grid { grid-template-columns:repeat(auto-fill,minmax(76px,1fr)); } .ae-grimoire__icon { width:44px; height:44px; } }

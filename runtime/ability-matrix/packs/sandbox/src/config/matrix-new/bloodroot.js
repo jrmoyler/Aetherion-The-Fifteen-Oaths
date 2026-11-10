@@ -24,7 +24,7 @@ export default {
     /* --- the cast itself --- */
     range: 16, // maximum cast distance, metres
     minRange: 0, // closer than this and the cast is refused
-    speed: 12, // how fast the burrowing seed runs to the circle, metres/second
+    speed: 17, // how fast the runner crawls to the circle, metres/second
     lifetime: 3.0, // seconds from the seed arriving until the thicket starts to wither
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: 'cast3', // which clip in `CAST_ANIMATIONS` the body throws
@@ -32,8 +32,22 @@ export default {
     fadeTime: 1.5, // seconds for the thorns to wither and the roots to darken away
     colorA: '#8b1a3a', // the burrowing seed's soil and droplets
     colorB: '#ff4060', // ... and its glow
-    trailRate: 70, // soil and blood kicked up / second as the seed burrows
-    trailSize: 0.09, // size of that spray
+    trailRate: 110, // soil and blood kicked up / second as the seed burrows
+    trailSize: 0.13, // size of that spray
+
+    /* --- the runner: the root that crawls from the caster to the circle --- */
+    runnerThickness: 1.5, // × root thickness
+    runnerWander: 0.55, // × root wander (it is pinned to land on the circle)
+    runnerThorns: 22, // thorns that burst up in its wake (max 24)
+    runnerThornHeight: 1.5, // metres
+    runnerThornSpread: 0.7, // metres the wake thorns stand off the runner's line
+    runnerThornDelay: 0.05, // seconds after the crawling tip passes
+    runnerThornStart: 0.06, // first thorn along the runner, 0..1
+    runnerThornEnd: 0.9, // last thorn along the runner, 0..1
+    runnerCrackSpacing: 1.4, // metres between the cracks the tip tears in the floor
+    runnerCrackRadius: 0.9, // metres — each crack (they stay for the cast)
+    launchCrack: 1.1, // metres — the floor cracked at the caster's feet as it sets off
+    launchDrops: 26, // blood thrown up there
 
     /* ================================================================ */
     /* 1 · THE ROOTS                                                     */
@@ -64,6 +78,7 @@ export default {
     rootVeins: 3.2, // brightness of the crimson veins
     rootVeinWidth: 0.25, // how much of the bark the veins cover, 0..1
     rootPulseRate: 1.6, // heartbeats per second
+    rootDrainAfter: 0.9, // seconds after the seed surfaces when the beats turn and flow inward — the drain
     rootPulseSpeed: 6.0, // metres/second each beat travels outward along the roots
     rootPulseWidth: 0.9, // metres a beat is long
     rootFrontGlow: 5.0, // the hot growth front
@@ -85,10 +100,10 @@ export default {
     thornDelay: 0.18, // seconds after the root front passes before a vine bursts up
     thornJitter: 0.25, // random extra delay per vine, seconds
     thornSpacing: 0.12, // keep vines off the first × of a root (it is the heart's)
-    thornHeight: 1.7, // metres, a vine at the heart
+    thornHeight: 1.9, // metres, a vine at the heart
     thornEdgeHeight: 0.55, // height at a root's end, × thornHeight
     thornHeightJitter: 0.45,
-    thornRadius: 0.11, // base radius, metres
+    thornRadius: 0.14, // base radius, metres
     thornRadiusJitter: 0.35,
     thornLean: 0.55, // radians a vine leans out along its root
     thornLeanJitter: 0.35,
@@ -101,20 +116,24 @@ export default {
     thornBarbLength: 2.2, // barb length, × the vine's local radius (rebuild)
     thornWither: 0.6, // how much a vine shrivels as it dies, 0..1
     thornSink: 0.85, // how far it has sunk by the end, × its height
+    thornThrob: 0.3, // how hard each vine swells as a drain beat passes through it
+    thornSway: 0.07, // radians the vines writhe while they stand
+    thornSwaySpeed: 2.4, // how fast they writhe
 
     /* --- the thorns' look --- */
     thornGloss: 120,
-    thornSpecular: 2.4,
-    thornEnv: 0.7, // sky reflection
-    thornRim: 3.0, // bright red rim
-    thornRimPower: 2.6,
-    thornSap: 2.4, // glow welling in the barbs and the base
+    thornSpecular: 1.2,
+    thornEnv: 0.3, // sky reflection
+    thornRim: 1.1, // red rim (kept low: thin vines are mostly rim)
+    thornRimPower: 3.6,
+    thornSap: 0.9, // glow welling in the barbs and the base
+    thornBarkHeight: 0.28, // fraction of a vine that is still dark root bark
     thornVeins: 1.0, // darker veins through the glossy red
     thornVeinScale: 4.0,
     thornBacklight: 1.2, // light bleeding through thin parts against the sun
-    colorThornBody: '#5a0914', // glossy dark red
+    colorThornBody: '#4a0610', // glossy dark red
     colorThornDeep: '#1c0206', // the clot in it
-    colorThornRim: '#ff3b55',
+    colorThornRim: '#e8243f',
     colorThornSap: '#ff5a6e',
     colorThornSpec: '#ffd6dc',
     colorThornDead: '#140806', // withered
@@ -142,8 +161,8 @@ export default {
     colorMistB: '#3e0610',
     colorMistC: '#22030a',
     colorMistD: '#0a0103',
-    moteRate: 45, // motes / second streamed out of each body being drained
-    moteSize: 0.09,
+    moteRate: 80, // motes / second streamed out of each body being drained
+    moteSize: 0.2,
     moteLifetime: 0.85, // seconds a mote takes to reach the heart
     moteArc: 1.2, // metres a mote arcs up on its way
     moteJitter: 0.35, // metres of scatter at the body
@@ -186,6 +205,11 @@ export default {
     colorBurstB: '#c0102a',
     colorBurstC: '#ff7080',
     crackRadius: 1.1, // the cracked floor at the impact, × zone radius
+    fieldReach: 1.12, // × the longest root: how far the soaked floor can run
+    fieldVeins: 0.55, // capillaries in the soak
+    fieldSheen: 1.0, // wet highlight on it
+    fieldOpacity: 0.85,
+    colorFieldDeep: '#160206', // clotted soil
     stainLife: 8,
     stainIntensity: 0.7,
     colorStain: '#1a0306',
@@ -194,6 +218,7 @@ export default {
     lightColor: '#ff4060',
     lightIntensity: 6,
     lightRadius: 9,
-    lightHeight: 1.4 // metres the light hangs over the heart
+    lightHeight: 1.4, // metres the light hangs over the heart
+    lightTravelHeight: 0.9 // metres the light rides over the crawling tip
   }
 };

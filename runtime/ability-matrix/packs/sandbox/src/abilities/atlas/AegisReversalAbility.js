@@ -13,6 +13,7 @@ import {
   createReversalBoltMaterial,
   createReversalConeMaterial,
   createReversalPlateMaterial,
+  createReversalSealMaterial,
   createReversalWallMaterial,
   createReversalWarpMaterial
 } from '../../materials/atlas/AegisReversalMaterials.js';
@@ -80,6 +81,10 @@ const _zero = new Vector3();
  *      sweeping front, rays, chevrons and lit edges, lingering as a scorch.
  *   4. **the wavefront** — an additive banded wall bent round the cone's arc
  *      at the front, and its LAYER.DISTORTION twin pushing the frame outward.
+ *   6. **the seal** — a dark engraved disc under the shield (premultiplied
+ *      "over", so it darkens the floor): its rings close on the mark while
+ *      the anchor is in flight, then its rune and chevron rings turn, burn
+ *      brighter with the stored blow and flare at the release.
  *   5. **impacts** — catch: STORM burst, SHOCKWAVE, spark spray, flash, kick;
  *      release: AIR burst, SHOCKWAVE, DUSTRING, CHIP shards thrown down the
  *      cone, SMOKE dust kicked up along the front, flash, shake, light.
@@ -163,6 +168,16 @@ export class AegisReversalAbility extends Ability {
     this.cone.visible = false;
     this.group.add(this.cone);
 
+    /* ---- layer 6: the seal the shield stands on ---- */
+    this.sealMaterial = createReversalSealMaterial();
+    this.seal = new Mesh(this.coneGeometry, this.sealMaterial);
+    this.seal.name = 'ReversalSeal';
+    this.seal.layers.set(LAYER.VFX);
+    this.seal.renderOrder = 4;
+    this.seal.frustumCulled = false;
+    this.seal.visible = false;
+    this.group.add(this.seal);
+
     /* ---- layer 4: the wavefront and its warp ---- */
     this.wallGeometry = createStripGeometry(48, 6);
     this.wallMaterial = createReversalWallMaterial();
@@ -208,6 +223,8 @@ export class AegisReversalAbility extends Ability {
     this._boltState = { head: new Vector3(), dir: new Vector3(0, 0, 1), length: 1, width: 0.2, fade: 0 };
     this._coneState = { quadSize: 10, axisX: 1, axisZ: 0, reach: 6, front: 0, after: 0, preview: 0, seed: 0 };
     this._wallState = { apex: new Vector3(), axisX: 1, axisZ: 0, front: 0, half: 0.5, height: 1.5, strength: 0 };
+    this._sealState = { quadSize: 4, radius: 1.6, spin: 0, tele: 0, form: 0, charge: 0, flash: 0, fade: 1, seed: 0 };
+    this._sealSpin = 0;
   }
 
   createParticles() {
@@ -404,10 +421,46 @@ export class AegisReversalAbility extends Ability {
     this.cone.visible = false;
     this.wall.visible = false;
     this.warp.visible = false;
+    this.seal.visible = false;
+    this._sealSpin = 0;
   }
 
   /* ------------------------------------------------------------------ */
-  /* Per frame: the shield                                                */
+  /* Per frame: the seal                                                  */
+  /* ------------------------------------------------------------------ */
+
+  /**
+   * The seal under the shield. `tele` is the anchor's progress while it is in
+   * flight (the telegraph closing on the mark); once landed it forms, glows
+   * with the stored blow, flares at the release and fades with the plates.
+   */
+  _updateSeal(dt, tele) {
+    const c = settings.reversal;
+    const g = settings.global;
+    const landed = this._t >= 0;
+    const t = Math.max(0, this._t);
+    const charge = this._charge();
+    this._sealSpin += c.sealSpin * (1 + charge * 4) * g.animationSpeed * dt;
+    const ss = this._sealState;
+    ss.radius = Math.max(0.2, c.shieldRadius * c.sealRadius);
+    ss.quadSize = ss.radius * 4.2;
+    ss.spin = this._sealSpin;
+    ss.tele = landed ? 1 : saturate(tele) * c.sealTelegraph;
+    ss.form = landed ? Easing.outCubic(saturate(t / Math.max(0.05, 0.3 * this._scale()))) : 0;
+    ss.charge = charge;
+    ss.flash = this._released ? Math.exp(-(t - this._releaseAt()) * 5) : this._hit ? Math.exp(-(t - this._hitAt()) * 7) * 0.6 : 0;
+    const fading = this.phase === AbilityPhase.FADE;
+    ss.fade = fading ? 1 - Easing.inQuad(saturate(this._fadeT / this.fadeDuration)) : 1;
+    ss.seed = this._seed;
+    this.sealMaterial.userData.sync(ss);
+    this._floorPoint(_centre);
+    this.seal.position.set(_centre.x, 0.025, _centre.z);
+    this.seal.scale.set(ss.quadSize, 1, ss.quadSize);
+    this.seal.visible = ss.fade > 0.003 && (landed || ss.tele > 0.003);
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Per frame: the shield                                               */
   /* ------------------------------------------------------------------ */
 
   /** Charge held in the plates, 0..1: fills at the catch, drains as the wave goes. */
@@ -562,8 +615,13 @@ export class AegisReversalAbility extends Ability {
     const bs = this._boltState;
     this._floorPoint(_centre);
 
-    // The muzzle, down the aim line beyond the shield.
-    _pos.copy(_centre).addScaledVector(this.direction, c.boltDistance);
+    // The muzzle, beyond the shield and swung `boltYaw` off the aim line, so
+    // the bolt crosses the frame on its way in instead of coming straight at
+    // the camera hidden behind the disc. It still strikes the face.
+    const cy = Math.cos(c.boltYaw);
+    const sy = Math.sin(c.boltYaw);
+    _dir.set(this.direction.x * cy - this.direction.z * sy, 0, this.direction.x * sy + this.direction.z * cy);
+    _pos.copy(_centre).addScaledVector(_dir, c.boltDistance);
     _pos.y = c.boltHeight;
     const warnAt = this._warnAt();
     const fireAt = this._fireAt();
@@ -599,6 +657,20 @@ export class AegisReversalAbility extends Ability {
       bs.length = 0.05;
       bs.width = c.boltWidth * (0.5 + 1.6 * Easing.inQuad(k)) * (0.9 + 0.1 * Math.sin(this.age * 60));
       bs.fade = Easing.outQuad(k);
+      // Embers sucked into the muzzle as it gathers: the threat is read early.
+      const n = this.trailEmitter.tick(dt, c.muzzleSparks * g.particleCount * (0.3 + k));
+      if (n > 0) {
+        this._resetEmit(frame.uTime.value);
+        _emit.position = _pos;
+        _emit.radius = c.boltWidth * 2.5 * (1 - k * 0.6);
+        _emit.direction = bs.dir;
+        _emit.speed = c.sparkSpeed * 0.25;
+        _emit.spread = 1.4;
+        _emit.size = c.sparkSize * 1.3;
+        _emit.life = c.sparkLife * 0.5;
+        _emit.tint = getColor(c.colorBolt);
+        this.sparks.emit(n, _emit);
+      }
     } else {
       const k = saturate((t - fireAt) / Math.max(0.02, hitAt - fireAt));
       bs.head.lerpVectors(_pos, _side, k);
@@ -684,14 +756,15 @@ export class AegisReversalAbility extends Ability {
     this._floorPoint(_centre);
 
     this.ctx.bursts.spawn(BurstMode.AIR, _pos, {
-      radius: c.shieldRadius * 0.6,
-      endRadius: c.shieldRadius * 2.4 * power,
-      life: 0.45,
-      intensity: 1.6,
-      opacity: 0.5,
-      fresnel: 2.6,
+      radius: c.shieldRadius * 0.5,
+      endRadius: c.shieldRadius * c.releaseBurst * power,
+      life: 0.35,
+      intensity: 1.2,
+      opacity: 0.3,
+      fresnel: 3.2,
       squash: 0.8,
-      colorA: getColor(c.colorConeB),
+      // Saturated at the heart, the wave's blue at the rim: no white dome.
+      colorA: getColor(c.colorSeal),
       colorB: getColor(c.colorConeA),
       colorC: getColor(c.colorRimLight)
     });
@@ -778,15 +851,25 @@ export class AegisReversalAbility extends Ability {
     ws.apex.copy(_centre);
     ws.axisX = this.direction.x;
     ws.axisZ = this.direction.z;
-    ws.front = Math.max(0.05, front);
     const k = reach > 0 ? front / reach : 0;
-    ws.half = lerp(c.coneStartAngle, c.coneAngle, k);
-    ws.height = c.wallHeight * (1 - 0.5 * k);
     const sweeping = this._released && front < reach * 0.999;
-    ws.strength = this._released ? (1 - Easing.inQuad(k)) * saturate((t - this._releaseAt()) / 0.05) : 0;
+    // Presentation only: once the front (and its hits) has run its course the
+    // wall carries on a beat — rolling a little further, its crest slumping —
+    // so the blow reads from behind the caster, past the shield's top.
+    const since = this._released ? t - this._releaseAt() : 0;
+    const tailTime = Math.max(0.01, c.wallLinger * this._scale());
+    const tail = this._released ? saturate((since - this._sweepTime()) / tailTime) : 0;
+    ws.front = Math.max(0.05, front + reach * 0.1 * Easing.outQuad(tail));
+    ws.half = lerp(c.coneStartAngle, c.coneAngle, k);
+    // Grows as it runs, so it stays tall in frame as it moves away.
+    ws.height = c.wallHeight * (1 + c.wallGrow * Easing.outQuad(k)) * (1 - 0.45 * tail);
+    ws.strength = this._released
+      ? saturate(since / 0.05) * (1 - 0.3 * saturate((k - 0.6) / 0.4)) * (1 - Easing.inQuad(tail))
+      : 0;
+    if (fading) ws.strength = 0;
     this.wallMaterial.userData.sync(ws);
     this.warpMaterial.userData.sync(ws);
-    this.wall.visible = sweeping && ws.strength > 0.003;
+    this.wall.visible = this._released && tail < 1 && ws.strength > 0.003;
     this.warp.visible = this.wall.visible;
 
     if (sweeping) {
@@ -923,6 +1006,8 @@ export class AegisReversalAbility extends Ability {
 
   onTravel(dt) {
     this._syncParticles();
+    // Anticipation at the target: the seal's telegraph closes on the mark.
+    this._updateSeal(dt, this.u);
     // The anchor: a short streak of light racing out at knee height.
     this.position.y = 0.5;
     const n = this.trailEmitter.tick(dt, 120 * settings.global.particleCount);
@@ -969,6 +1054,7 @@ export class AegisReversalAbility extends Ability {
 
     this._faceCentre(this.position);
     this._updateCone(dt);
+    this._updateSeal(dt, 1);
   }
 
   onDestroy() {
@@ -978,6 +1064,7 @@ export class AegisReversalAbility extends Ability {
     this.cone.visible = false;
     this.wall.visible = false;
     this.warp.visible = false;
+    this.seal.visible = false;
     this._t = -1;
     this._targets.length = 0;
   }
@@ -992,6 +1079,7 @@ export class AegisReversalAbility extends Ability {
     this.wallGeometry.dispose();
     this.wallMaterial.dispose();
     this.warpMaterial.dispose();
+    this.sealMaterial.dispose();
     this.plates.dispose();
     super.dispose();
   }
@@ -1058,6 +1146,7 @@ export function buildEditor(gui, c, Editor) {
   R(metal, c, 'metalSpecular', 0, 6, 0.05, 'specular');
   R(metal, c, 'engrave', 0, 1, 0.01, 'channel depth');
   R(metal, c, 'rimGlow', 0, 6, 0.05, 'plate rim glow');
+  R(metal, c, 'rimWidth', 0.005, 0.4, 0.005, 'plate rim width');
   R(metal, c, 'chargeGlow', 0, 20, 0.05, 'charge glow');
   R(metal, c, 'chargeCrawl', -6, 6, 0.01, 'charge crawl');
   R(metal, c, 'impactRing', 0, 12, 0.05, 'impact ripple');
@@ -1080,8 +1169,12 @@ export function buildEditor(gui, c, Editor) {
   R(bolt, c, 'boltGlow', 0, 12, 0.05, 'glow');
   R(bolt, c, 'boltWobble', 0, 0.6, 0.005, 'corkscrew (m)');
   R(bolt, c, 'boltTrail', 0, 600, 1, 'trail sparks (/s)');
+  R(bolt, c, 'boltYaw', -1.4, 1.4, 0.01, 'comes in from the side (rad)');
+  R(bolt, c, 'muzzleSparks', 0, 600, 1, 'muzzle embers (/s)');
   bolt.addColor(c, 'colorBoltCore').name('bolt core');
+  bolt.addColor(c, 'colorBoltPale').name('bolt, pale');
   bolt.addColor(c, 'colorBolt').name('bolt');
+  bolt.addColor(c, 'colorBoltDeep').name('bolt, deep');
   R(bolt, c, 'catchShake', 0, 1.5, 0.01, 'catch shake');
   R(bolt, c, 'catchFlash', 0, 1, 0.005, 'catch flash');
   R(bolt, c, 'catchLight', 0, 60, 0.5, 'catch light');
@@ -1106,17 +1199,25 @@ export function buildEditor(gui, c, Editor) {
   R(wave, c, 'rayCount', 1, 60, 1, 'rays');
   R(wave, c, 'chevrons', 0, 20, 0.1, 'chevrons');
   R(wave, c, 'floorGlow', 0, 8, 0.05, 'floor glow');
+  R(wave, c, 'coneDeep', 0, 1, 0.01, 'scorched path (dark)');
   R(wave, c, 'edgeGlow', 0, 8, 0.05, 'edge glow');
   R(wave, c, 'lingerTime', 0, 3, 0.01, 'scorch lingers (s)');
   R(wave, c, 'wallHeight', 0, 5, 0.01, 'wavefront height (m)');
   R(wave, c, 'wallGlow', 0, 8, 0.05, 'wavefront glow');
   R(wave, c, 'wallBands', 0, 20, 0.1, 'wavefront bands');
+  R(wave, c, 'wallDeep', 0, 1, 0.01, 'wavefront body (dark)');
+  R(wave, c, 'wallCrest', 0, 8, 0.05, 'wavefront crest');
+  R(wave, c, 'wallGrow', 0, 2, 0.01, 'wavefront grows as it runs (×)');
+  R(wave, c, 'wallLinger', 0, 1.5, 0.01, 'wavefront rolls on after (s)');
+  R(wave, c, 'scarGlow', 0, 4, 0.05, 'floor scar glow');
   R(wave, c, 'distortion', 0, 4, 0.01, 'wavefront warp');
+  R(wave, c, 'releaseBurst', 0, 4, 0.01, 'air burst (× shield radius)');
   R(wave, c, 'releaseShake', 0, 2, 0.01, 'shake');
   R(wave, c, 'releaseFlash', 0, 1, 0.005, 'flash');
   R(wave, c, 'releaseLight', 0, 80, 0.5, 'light punch');
   wave.addColor(c, 'colorConeA').name('wave');
   wave.addColor(c, 'colorConeB').name('wave, hot');
+  wave.addColor(c, 'colorConeDeep').name('wave, deep');
   wave.addColor(c, 'colorFlash').name('flash');
   R(wave, c.hit, 'impulse', 0, 30, 0.1, 'thrown (m/s)');
   R(wave, c.hit, 'lift', 0, 20, 0.1, 'thrown up (m/s)');
@@ -1136,6 +1237,18 @@ export function buildEditor(gui, c, Editor) {
   R(parts, c, 'dustSize', 0.05, 2, 0.01, 'dust size');
   R(parts, c, 'dustLife', 0.1, 4, 0.05, 'dust life (s)');
   Editor.gradient(parts, c, 'colorDust', 'Dust colour');
+
+  /* ---- layer 6 ---- */
+  const seal = folder.addFolder('6 · Seal');
+  R(seal, c, 'sealRadius', 0.5, 3, 0.01, 'radius (× shield)');
+  R(seal, c, 'sealGlow', 0, 6, 0.05, 'glow');
+  R(seal, c, 'sealDeep', 0, 1, 0.01, 'dark disc');
+  R(seal, c, 'sealRunes', 3, 40, 1, 'runes');
+  R(seal, c, 'sealSpin', -3, 3, 0.01, 'turn (rad/s)');
+  R(seal, c, 'sealTelegraph', 0, 1, 0.01, 'telegraph while in flight');
+  seal.addColor(c, 'colorSealDeep').name('deep');
+  seal.addColor(c, 'colorSeal').name('engraving');
+  seal.addColor(c, 'colorSealHot').name('engraving, hot');
 
   const light = folder.addFolder('Light');
   light.addColor(c, 'lightColor').name('colour');

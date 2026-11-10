@@ -11,7 +11,7 @@ test('shipped catalog is reproducible from both pinned sources', () => {
   assert.equal(renderAbilities(registry, supplement), fs.readFileSync(new URL('../shared/abilities.generated.js', import.meta.url), 'utf8'));
   const all = Object.values(generateAbilities(registry, supplement).abilities).flat();
   assert.equal(all.filter(a => a.sourceCommit === registry.sourceCommit).length, 100);
-  assert.equal(all.filter(a => a.sourceCommit === supplement.sourceCommit).length, 50);
+  assert.equal(all.filter(a => a.sourceCommit === supplement.sourceCommit).length, 179);
 });
 
 test('a preset cannot silently change identity or inject nonfinite combat geometry', () => {

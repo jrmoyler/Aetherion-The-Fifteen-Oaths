@@ -728,8 +728,10 @@ const CROWN_FRAGMENT = /* glsl */ `
   uniform float uRimGlow;
   uniform float uTear;        // how hard it tears apart from the top
   uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
   uniform vec3  uColorGlow;
   uniform vec3  uColorRim;
+  uniform vec3  uLightDir;
   uniform float uGlobalGlow;
 
   varying vec2  vUv;
@@ -753,7 +755,11 @@ const CROWN_FRAGMENT = /* glsl */ `
     float foot = smoothstep(0.0, 0.12, vUv.y);
     float sheet = keep * foot * (0.55 + 0.45 * vFinger);
 
-    vec3 col = uColorBody + uColorRim * fres * uRimGlow + uColorGlow * edge * 2.0;
+    // Sludge, not light: deep bile where the sheet faces you and at its foot,
+    // the body where the sun catches it, the pale rim only at grazing angles.
+    float wrap = dot(N, normalize(uLightDir)) * 0.5 + 0.5;
+    vec3 col = mix(uColorDeep, uColorBody, smoothstep(0.2, 0.95, wrap) * (0.35 + 0.65 * vUv.y));
+    col += uColorRim * fres * uRimGlow * 0.6 + uColorGlow * edge * 2.0;
     float a = sheet * mix(0.55, 1.0, fres) * uOpacity * (1.0 - smoothstep(0.75, 1.0, uAge));
     if (a < 0.004) discard;
     gl_FragColor = vec4(col * uGlobalGlow, clamp(a, 0.0, 1.0));
@@ -781,6 +787,7 @@ export function createSplashCrownMaterial() {
       uRimGlow: { value: 1.5 },
       uTear: { value: 1 },
       uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() },
       uColorGlow: { value: new Color() },
       uColorRim: { value: new Color() }
     }),
@@ -805,6 +812,7 @@ export function createSplashCrownMaterial() {
     u.uRimGlow.value = c.globRimGlow * g.fresnel;
     u.uTear.value = c.crownTear;
     u.uColorBody.value.copy(getColor(c.colorA));
+    u.uColorDeep.value.copy(getColor(c.colorDeep));
     u.uColorGlow.value.copy(getColor(c.colorGlow));
     u.uColorRim.value.copy(getColor(c.colorB));
   };

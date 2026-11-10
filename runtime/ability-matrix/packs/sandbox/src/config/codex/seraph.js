@@ -17,7 +17,7 @@ export default {
     label: "Seraphic Descent",
     accent: '#fff1b0',
     key: '',
-    element: 'light',
+    element: 'holy',
     hint: "Light — a halo opens over the circle, great wings of light unfold, beat once and rain feather blades that lift the struck into the light",
     cast: 'zone',
     glyph: `<ellipse cx="50" cy="22" rx="14" ry="5"/><path d="M50 34C40 30 22 24 8 30C18 36 22 46 20 58C30 52 40 46 48 44"/><path d="M50 34C60 30 78 24 92 30C82 36 78 46 80 58C70 52 60 46 52 44"/><path d="M42 62L38 78"/><path d="M50 60V82"/><path d="M58 62L62 78"/><path d="M28 90H72"/>`

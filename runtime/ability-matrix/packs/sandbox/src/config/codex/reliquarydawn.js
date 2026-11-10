@@ -14,7 +14,7 @@ export default {
     label: 'Reliquary Dawn',
     accent: '#ffe9a8',
     key: '',
-    element: 'light',
+    element: 'holy',
     hint: 'Light — a gilded reliquary rises out of the circle, its sun-relic kindles, the windows fall open and dawn washes the circle',
     cast: 'zone',
     glyph: `<path d="M50 6L64 24H36Z"/><path d="M32 30H68V78H32Z"/><path d="M42 78V52C42 44 58 44 58 52V78"/><path d="M24 84H76"/><circle cx="50" cy="38" r="4"/>`

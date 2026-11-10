@@ -25,8 +25,8 @@ export default {
     /* --- the cast itself --- */
     range: 16, // maximum cast distance, metres
     minRange: 2, // closer than this and the cast is refused
-    speed: 18, // how fast the cast front reaches the circle, metres/second
-    lifetime: 1.6, // seconds the spectrum sweeps the circle
+    speed: 20, // how fast the cast front reaches the circle, metres/second
+    lifetime: 1.8, // seconds the spectrum sweeps the circle
     cooldown: 0.6, // seconds before the ability can be armed again
     castAnim: "cast2", // which clip in `CAST_ANIMATIONS` the body throws
     zoneRadius: 3.2, // the circle the beams sweep, metres
@@ -42,24 +42,32 @@ export default {
     /* ================================================================ */
     /* --- the stone (metres) --- */
     prismSides: 3, // facets round the waist — 3 is a true prism
-    prismRadius: 0.55, // waist radius
-    prismHeight: 1.7, // tip to tip
+    prismRadius: 1.05, // waist radius
+    prismHeight: 3.0, // tip to tip
     prismBand: 0.32, // height of the straight waist, fraction of the height
     prismTwist: 0.35, // radians the upper ring is turned against the lower
 
     /* --- the fall and the hover --- */
-    dropHeight: 16, // where it falls from
-    hoverHeight: 2.6, // where it hangs
-    descentTime: 0.9, // seconds of the fall — at least this, even on a short cast
-    hoverBob: 0.12, // metres of slow bob
+    dropHeight: 12, // where it falls from
+    hoverHeight: 2.3, // where it hangs
+    descentTime: 0.5, // seconds of the fall — at least this, even on a short cast
+    hoverBob: 0.18, // metres of slow bob
     hoverBobSpeed: 1.6,
     spin: 0.35, // turns/second while it hovers
     spinStrike: 1.6, // turns/second once the beam hits it
     tilt: 0.28, // radians the prism leans off vertical as it turns
-    chargeTime: 0.45, // seconds it hangs before the strike
+    chargeTime: 0.22, // seconds it hangs before the strike
+
+    /* --- the travel: a dart of crystal on a thread of sun --- */
+    dartSize: 0.55, // metres tip to tip
+    dartHeight: 1.4, // metres it flies at
+    dartSpin: 2.2, // turns/second
+    lanceRadius: 0.07, // the thread of sun back to the hand, metres
+    lanceIntensity: 5,
+    lanceFade: 0.35, // seconds it takes to fade once the dart lands (and the dart climbs away)
 
     /* --- the glass --- */
-    glassOpacity: 0.62,
+    glassOpacity: 0.8,
     fresnel: 1.8,
     fresnelPower: 2.6,
     dispersion: 0.65, // RGB split at the silhouette
@@ -75,17 +83,17 @@ export default {
     /* ================================================================ */
     /* 2 · THE SUN SHAFT + THE STRIKE                                    */
     /* ================================================================ */
-    shaftRadius: 1.9, // the falling shaft at the floor
-    shaftTopRadius: 3.2, // and at the sky
+    shaftRadius: 2.6, // the falling shaft at the floor
+    shaftTopRadius: 3.6, // and at the sky
     shaftHeight: 24,
     shaftIntensity: 1.3,
     shaftOpacity: 0.35,
     shaftSoftness: 2.2, // facing-ratio falloff: bigger = softer edges
     poolIntensity: 1.2, // the sun spot on the floor under it
     poolRadius: 1.25, // × shaft radius
-    strikeRadius: 0.22, // the white beam that hits the prism
+    strikeRadius: 0.4, // the white beam that hits the prism
     strikeIntensity: 6,
-    strikeLead: 0.12, // seconds from the strike to the split
+    strikeLead: 0.08, // seconds from the strike to the split
     noiseScale: 1.4, // motes of dust drifting in the beams
     noiseSpeed: 1.5,
     colorSun: "#ffe7a6",
@@ -95,8 +103,8 @@ export default {
     /* 3 · THE SPECTRUM                                                  */
     /* ================================================================ */
     beamCount: 6, // spectral beams (max 8)
-    beamWidth: 0.11, // radius of one beam, metres
-    beamIntensity: 4.5,
+    beamWidth: 0.26, // radius of one beam, metres
+    beamIntensity: 6,
     beamCore: 2.6, // >1 tightens the bright core
     hueStart: 0.0, // red
     hueEnd: 0.78, // violet
@@ -106,22 +114,26 @@ export default {
     sweepOuter: 1.0, // and where it ends, × radius
     sweepEase: 0.6, // 0 linear, 1 eased in/out
     beamFlicker: 0.15,
-    lingerTime: 0.35, // seconds the beams hold at the end before the shatter
+    lingerTime: 0.5, // seconds the beams hold at the end before the shatter
 
     /* ================================================================ */
     /* 4 · THE SCORCH                                                    */
     /* ================================================================ */
-    scorchWidth: 0.16, // half-width of a burnt line, metres
-    scorchGlow: 3.2, // how hot the fresh end of a line is
+    scorchWidth: 0.34, // half-width of a burnt line, metres
+    scorchGlow: 4, // how hot the fresh end of a line is
     scorchCool: 1.6, // metres behind the contact over which a line cools
     scorchHue: 0.55, // how much of the beam's hue a cooled line keeps
     scorchWobble: 0.05, // line wobble, metres
     scorchOpacity: 0.85,
-    scorchFade: 1.4, // seconds the lines take to fade after the shatter
-    scorchDecalSpacing: 0.9, // metres of contact travel between SCORCH decals
-    scorchDecalSize: 0.45, // their radius, metres
+    scorchFade: 2.2, // seconds the lines take to fade after the shatter
+    scorchDecalSpacing: 0.6, // metres of contact travel between SCORCH decals
+    scorchDecalSize: 0.8, // their radius, metres
     scorchDecalLife: 3.2,
     colorChar: "#2b1d16",
+    fieldOpacity: 0.6, // the glassed floor the sweep leaves: how dark
+    fieldGlow: 1.6, // its spectral crazing
+    fieldCells: 6, // craze cells across the circle
+    fieldSpin: 0.15, // the caustic rays' slow turn
 
     /* ================================================================ */
     /* 5 · MOTES + GLINTS                                                */
@@ -131,13 +143,13 @@ export default {
     moteSpeed: 0.8,
     moteLifetime: 1.4,
     moteGlow: 2.2,
-    sparkRate: 120, // sparks/second off each contact point (shared)
-    sparkSize: 0.04,
+    sparkRate: 260, // sparks/second off each contact point (shared)
+    sparkSize: 0.06,
     sparkSpeed: 4.5,
     sparkLifetime: 0.45,
     sparkGravity: -6,
-    glintCount: 160, // glints thrown when the prism shatters
-    glintSize: 0.05,
+    glintCount: 320, // glints thrown when the prism shatters
+    glintSize: 0.08,
     glintSpeed: 7.5,
     glintLifetime: 0.9,
     glintGlow: 3.5,
@@ -153,9 +165,9 @@ export default {
     splitShake: 0.28,
     shatterShake: 0.22,
     shakeDuration: 0.4,
-    burstSize: 2.4, // the pressure shell round the prism on the split
+    burstSize: 3.6, // the pressure shell round the prism on the split
     burstIntensity: 1.8,
-    shockRadius: 4.6,
+    shockRadius: 5,
     colorBurstA: "#ffffff",
     colorBurstB: "#fff1b0",
     colorBurstC: "#9fd8ff",

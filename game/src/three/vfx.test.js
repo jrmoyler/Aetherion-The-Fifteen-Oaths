@@ -40,8 +40,8 @@ test('source casts use original geometry and source pool eviction cannot cancel 
   assert.equal(scene.getObjectByName('SourcePack:linear:12').position.y,12);
   const meteor=vfx.castEffect({id:'linear/meteor'},{caster,target});
   assert.notEqual(original.material.customProgramCacheKey(),meteor.instance.material.customProgramCacheKey(), 'different source shader patches must compile to different programs');
-  assert.equal(SOURCE_ABILITY_IDS.length,150);
-  assert.equal(new Set(SOURCE_ABILITY_IDS).size,150);
+  assert.equal(SOURCE_ABILITY_IDS.length,279);
+  assert.equal(new Set(SOURCE_ABILITY_IDS).size,279);
   vfx.dispose();assert.equal(scene.children.length,0);
 });
 

@@ -116,3 +116,84 @@ export function createBloodSpikeGeometry({
   geometry.computeVertexNormals();
   return geometry;
 }
+
+/**
+ * The blood seal in flight: a comet of blood, lathed about +Z (its direction
+ * of travel). A full round head at the front, a waist just behind it where
+ * the liquid is pulled thin, and a long tapering tail with a wobble in its
+ * profile so it reads as liquid being dragged rather than a cone.
+ *
+ * Unit space: the head's centre at the origin with radius 1, the tail
+ * running back to z = -tail. The ability scales it to metres.
+ *
+ * @param {object} [options]
+ * @param {number} [options.tail]    tail length, × the head radius
+ * @param {number} [options.sides]   segments round the axis
+ * @param {number} [options.rings]   rings from nose to tail tip
+ */
+export function createBloodSealGeometry({ tail = 5, sides = 18, rings = 40 } = {}) {
+  const positions = [];
+  const normals = [];
+  const along = [];
+  const indices = [];
+
+  // Profile r(z) from the nose (z = +1) to the tail tip (z = -tail).
+  const profile = (s) => {
+    // s: 0 at the nose, 1 at the tail tip.
+    const headEnd = 0.2;
+    if (s <= headEnd) {
+      // A hemisphere at the front: z from +1 to 0.
+      const k = s / headEnd; // 0..1
+      const a = (1 - k) * Math.PI * 0.5;
+      return { z: Math.sin(a), r: Math.cos(a) };
+    }
+    const k = (s - headEnd) / (1 - headEnd); // 0..1 down the tail
+    const z = -k * tail;
+    // Necks quickly, swells a little, then tapers to a point.
+    const waist = 1 - 0.38 * Math.sin(Math.min(1, k * 3.2) * Math.PI * 0.5);
+    const taper = Math.pow(1 - k, 1.6);
+    const ripple = 1 + 0.08 * Math.sin(k * 19.0);
+    return { z, r: waist * taper * ripple };
+  };
+
+  for (let i = 0; i <= rings; i++) {
+    const s = i / rings;
+    const p = profile(s);
+    const q = profile(Math.min(1, s + 1e-3));
+    const o = profile(Math.max(0, s - 1e-3));
+    // Profile tangent (dz, dr) for the normal.
+    const dz = q.z - o.z;
+    const dr = q.r - o.r;
+    const len = Math.hypot(dz, dr) || 1;
+    for (let j = 0; j <= sides; j++) {
+      const a = (j / sides) * Math.PI * 2;
+      const ca = Math.cos(a);
+      const sa = Math.sin(a);
+      positions.push(ca * p.r, sa * p.r, p.z);
+      // Outward normal of a surface of revolution: (dz·cos, dz·sin, -dr), signed for a front-to-back sweep.
+      let nx = (-dz / len) * ca;
+      let ny = (-dz / len) * sa;
+      let nz = dr / len;
+      if (i === 0) { nx = 0; ny = 0; nz = 1; }
+      const nl = Math.hypot(nx, ny, nz) || 1;
+      normals.push(nx / nl, ny / nl, nz / nl);
+      along.push(s);
+    }
+  }
+  const row = sides + 1;
+  for (let i = 0; i < rings; i++) {
+    for (let j = 0; j < sides; j++) {
+      const a = i * row + j;
+      const b = a + row;
+      indices.push(a, b, a + 1, b, b + 1, a + 1);
+    }
+  }
+
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(new Float32Array(positions), 3));
+  geometry.setAttribute('normal', new BufferAttribute(new Float32Array(normals), 3));
+  geometry.setAttribute('aAlong', new BufferAttribute(new Float32Array(along), 1));
+  geometry.setIndex(indices);
+  geometry.computeBoundingSphere();
+  return geometry;
+}

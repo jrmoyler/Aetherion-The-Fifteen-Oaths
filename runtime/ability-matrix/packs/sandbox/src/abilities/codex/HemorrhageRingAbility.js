@@ -43,7 +43,10 @@ const _up = new Vector3(0, 1, 0);
  * that fills behind it, accelerating lap after lap, flinging spray outward,
  * until the rope closes into a complete ring spinning in its channel. Anyone
  * standing on the rim is clipped off their feet. **The wall**: the ring stands
- * up into a spinning wall of blood, its crest torn and foaming pale. **The
+ * up into a spinning wall of blood 3 m tall — a breaking-wave profile, thick
+ * bulging foot, crest curling inward, torn and foaming pale only along its
+ * lip, the body dark wet blood (the deep stop of the ramp) with hot red only
+ * on the streak crests — and stands there spinning for `wallHoldTime`. **The
  * fall**: the wall falls *inward* — its foot races toward the centre, the
  * crest leaning in and climbing as the circle narrows, the air rushing in with
  * it (a ring on the distortion layer), dragging every body it passes in with
@@ -116,7 +119,7 @@ export class HemorrhageRingAbility extends Ability {
     this._center = new Vector3();
     this._head = new Vector3();
     this._raceState = { center: new Vector3(), radius: 4, theta0: 0, theta1: 0, flow: 0, seed: 0 };
-    this._wallState = { center: new Vector3(), radius: 4, height: 0, lean: 0, spin: 0, break: 0, seed: 0 };
+    this._wallState = { center: new Vector3(), radius: 4, height: 0, lean: 0, spin: 0, break: 0, curl: 0, seed: 0 };
     this._channelState = {
       center: new Vector3(),
       radius: 4,
@@ -217,7 +220,7 @@ export class HemorrhageRingAbility extends Ability {
 
   get impactDuration() {
     const c = settings[ID];
-    const span = c.raceTime + c.riseTime + c.fallTime + c.lingerTime;
+    const span = c.raceTime + c.riseTime + Math.max(0, c.wallHoldTime) + c.fallTime + c.lingerTime;
     return Math.max(0.2, span * settings.global.lifetime);
   }
 
@@ -289,6 +292,7 @@ export class HemorrhageRingAbility extends Ability {
     ws.height = 0;
     ws.lean = 0;
     ws.break = 0;
+    ws.curl = 0;
     const cs = this._channelState;
     cs.center.copy(this._center).setY(0.012);
     cs.seed = this._seed;
@@ -516,6 +520,8 @@ export class HemorrhageRingAbility extends Ability {
       const tau = this._tau;
       const race = Math.max(0.05, c.raceTime);
       const rise = Math.max(0.02, c.riseTime);
+      // The wall stands at full height, spinning, before it falls: the hero beat.
+      const hold = rise + Math.max(0, c.wallHoldTime);
       const fall = Math.max(0.05, c.fallTime);
 
       /* the race: accelerating round the rim */
@@ -530,11 +536,12 @@ export class HemorrhageRingAbility extends Ability {
 
       /* the wall stands */
       const wk = saturate((tau - race) / rise);
-      const fk = saturate((tau - race - rise) / fall);
+      const fk = saturate((tau - race - hold) / fall);
       ws.radius = R * (1 - Easing.inCubic(fk));
       ws.height = c.wallHeight * Easing.outBack(wk) * (1 + c.wallClimb * Easing.inQuad(fk)) * (1 - smoothstep(0.85, 1, fk));
       ws.lean = c.wallLean * Easing.inQuad(fk) * Math.min(1, ws.radius / Math.max(0.1, c.wallLean * 1.5) + 0.2);
       ws.break = smoothstep(0.7, 1, fk);
+      ws.curl = Easing.outQuad(wk) * (1 - 0.6 * fk);
       this.wall.visible = wk > 0 && ws.break < 0.999;
       // The rope sinks into the wall as it stands.
       this.race.visible = wk < 0.6;
@@ -542,7 +549,7 @@ export class HemorrhageRingAbility extends Ability {
 
       /* the ground */
       cs.drag = fk > 0 ? ws.radius : -1;
-      cs.splat = this._burst ? c.splatRadius * Easing.outCubic(saturate((tau - race - rise - fall) / 0.3)) : 0;
+      cs.splat = this._burst ? c.splatRadius * Easing.outCubic(saturate((tau - race - hold - fall) / 0.3)) : 0;
 
       /* the warp, running in with the foot of the wall */
       const ws2 = this._warpState;
@@ -558,7 +565,7 @@ export class HemorrhageRingAbility extends Ability {
       } else {
         gs.center.copy(this._center).setY(0.6);
         gs.size = c.headBloomSize * 3;
-        gs.intensity = this._burst ? 2.5 * Math.exp(-(tau - race - rise - fall) * 4) : 0.2 * fk;
+        gs.intensity = this._burst ? 2.5 * Math.exp(-(tau - race - hold - fall) * 4) : 0.2 * fk;
       }
       this.glow.visible = gs.intensity > 0.01;
 
@@ -570,7 +577,7 @@ export class HemorrhageRingAbility extends Ability {
       if (wk > 0 && fk < 1) this._crestFx(dt, wk, fk);
       if (fk > 0 && !this._burst) this._wallHits(ws.radius);
       if (fk >= 1 && !this._burst) this._burstNow();
-      if (this._burst) this._geyser(dt, 1 - saturate((tau - race - rise - fall) / Math.max(0.05, c.lingerTime)));
+      if (this._burst) this._geyser(dt, 1 - saturate((tau - race - hold - fall) / Math.max(0.05, c.lingerTime)));
       this._updateBled(dt);
 
       if (fk > 0) {
@@ -639,8 +646,8 @@ export class HemorrhageRingAbility extends Ability {
       radius: 0.3,
       endRadius: c.burstSize * power,
       life: 0.6,
-      intensity: 1.2,
-      opacity: 0.85,
+      intensity: c.burstShellIntensity,
+      opacity: c.burstShellOpacity * g.opacity,
       fresnel: 2.2,
       displace: 0.6,
       turbulence: 1.4,
@@ -677,7 +684,7 @@ export class HemorrhageRingAbility extends Ability {
     _emit.size = c.mistSize * 1.4;
     _emit.life = c.mistLife;
     _emit.spin = 0.6;
-    this.mist.emit(Math.round(22 * g.particleCount), _emit);
+    this.mist.emit(Math.round(c.burstMist * g.particleCount), _emit);
 
     this._burstHits();
     this.ctx.shake.add(c.burstShake * power, 1 / Math.max(0.05, c.shakeDuration), 20);
@@ -903,6 +910,10 @@ export function buildEditor(gui, c, Editor) {
 
   const wall = folder.addFolder('3 · The wall');
   R(wall, c, 'riseTime', 0.02, 2, 0.01, 'stands up over (s)');
+  R(wall, c, 'wallHoldTime', 0, 2, 0.01, 'stands for (s)');
+  R(wall, c, 'wallCurl', 0, 2, 0.01, 'crest curls in (m)');
+  R(wall, c, 'wallFoot', 0, 1.5, 0.01, 'foot bulges (m)');
+  R(wall, c, 'wallDeep', 0, 1, 0.01, 'deep blood share');
   R(wall, c, 'wallHeight', 0.2, 8, 0.05, 'height (m)');
   R(wall, c, 'crestTear', 0, 2, 0.01, 'crest tear');
   R(wall, c, 'crestFoam', 0, 2, 0.01, 'crest foam');
@@ -920,6 +931,9 @@ export function buildEditor(gui, c, Editor) {
   R(fall, c, 'geyserSpeed', 0, 30, 0.1, 'geyser speed');
   R(fall, c, 'geyserRate', 0, 600, 1, 'geyser drops/second');
   R(fall, c, 'burstDrops', 0, 600, 1, 'burst drops');
+  R(fall, c, 'burstMist', 0, 200, 1, 'burst mist billows');
+  R(fall, c, 'burstShellOpacity', 0, 1, 0.01, 'burst shell opacity');
+  R(fall, c, 'burstShellIntensity', 0, 4, 0.01, 'burst shell intensity');
   R(fall, c, 'burstSize', 0, 8, 0.05, 'burst dome (m)');
   R(fall, c, 'shockRadius', 0, 16, 0.05, 'shockwave (m)');
   R(fall, c, 'burstShake', 0, 1.5, 0.01, 'camera knock');

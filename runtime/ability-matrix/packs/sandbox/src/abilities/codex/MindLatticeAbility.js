@@ -120,7 +120,10 @@ function resetEmit() {
  * when the last lands the bottom ring closes and the cage **locks** — flash,
  * jolt, shock ring, a shell of light. A **triangular lattice of light** has
  * drawn itself across the floor inside, with concentric rings, nodes at
- * every crossing and a radar sweep turning over it. While it holds, packets
+ * every crossing and a radar sweep turning over it, on a solid deep-violet
+ * disc. While it holds the cage is never still: the ring of bars turns, the
+ * top ring sways in a twist against the bottom one so the bars lean into a
+ * hyperboloid, and the crown cinches in over what it caught. Packets
  * of thought run along every bar and **synapses fire**: an edge flares white,
  * a ring pulses out across the floor. Then it ends the way it began: the
  * bars withdraw upward, and the tesseract spins up and **folds back into a
@@ -128,8 +131,9 @@ function resetEmit() {
  *
  * ## Layers
  *
- *   1. **beams** (`createMindBeamMaterial`) — one InstancedMesh of open
- *      cylinders for every straight line: 32 tesseract edges, `barCount` rim
+ *   1. **beams** (`createMindBeamMaterial`) — one InstancedMesh of lit,
+ *      faceted violet crystal prisms (a thin HDR filament at the heart is the
+ *      only white) for every straight line: 32 tesseract edges, `barCount` rim
  *      bars, a top and a bottom ring segment per bar. Placed from their two
  *      end points each frame (a 4D rotation + perspective projection on the
  *      CPU — sixteen points, nothing to it). Per instance `aBeam`.
@@ -169,7 +173,8 @@ export class MindLatticeAbility extends Ability {
 
   createShaders() {
     /* ---- layer 1: beams ---- */
-    this.beamGeometry = new CylinderGeometry(1, 1, 1, 8, 1, true);
+    // Hexagonal prisms: six flat faces, so the lit crystal reads as cut.
+    this.beamGeometry = new CylinderGeometry(1, 1, 1, 6, 1, true);
     this.beamGeometry.translate(0, 0.5, 0);
     this.beamAttr = new InstancedBufferAttribute(new Float32Array(MAX_BEAMS * 4), 4);
     this.beamAttr.setUsage(DynamicDrawUsage);
@@ -219,6 +224,10 @@ export class MindLatticeAbility extends Ability {
     this._synapseClock = 0;
     this._lit = 0;
     this._hubPos = new Vector3();
+    /** Integrated cage turn and twist sway (rad), and when it locked (clock s). */
+    this._cageSpin = 0;
+    this._twistPh = 0;
+    this._lockClock = -1;
   }
 
   _instanced(geometry, material, count, order) {
@@ -390,6 +399,9 @@ export class MindLatticeAbility extends Ability {
     this._folded = false;
     this._pulseAt = -1;
     this._synapseClock = 0;
+    this._cageSpin = 0;
+    this._twistPh = 0;
+    this._lockClock = -1;
     this._flare.fill(0);
     this._landed.fill(0);
     this._barK.fill(0);
@@ -514,6 +526,15 @@ export class MindLatticeAbility extends Ability {
     const dropT = Math.max(0.03, c.barDropTime);
     const retractT = Math.max(0.05, c.retractTime * g.lifetime);
     const kRet = fading ? Easing.inCubic(saturate(this.fadeTime / retractT)) : 0;
+    // Once locked the cage lives: the ring turns, the top ring sways in a
+    // twist against the bottom one, and the crown cinches in over the catch.
+    const kLock = this._locked ? Easing.inOutQuad(saturate((clock - this._lockClock) / Math.max(0.05, c.cinchTime * g.lifetime))) : 0;
+    if (this._locked && dt > 0) {
+      this._cageSpin += c.cageSpin * g.animationSpeed * dt * (1 - kRet);
+      this._twistPh += c.cageTwistSpeed * g.animationSpeed * dt;
+    }
+    const twist = c.cageTwist * kLock * Math.sin(this._twistPh) * (1 - kRet);
+    const rTop = rr * (1 - saturate(c.cageCinch) * kLock * (1 - kRet));
     let landed = 0;
     let dropSum = 0;
     for (let i = 0; i < MAX_BARS; i++) {
@@ -523,7 +544,8 @@ export class MindLatticeAbility extends Ability {
         this._beam(BOT0 + i, _a, _a, 0, 0, 0, 0, 0);
         continue;
       }
-      const ang = this._arrival + (i / n) * TAU;
+      const ang = this._arrival + (i / n) * TAU + this._cageSpin;
+      const angTop = ang + twist;
       const k = saturate((clock - this._barStart(i, n, c, g)) / dropT);
       this._barK[i] = k;
       if (k >= 1 && !this._landed[i]) {
@@ -533,23 +555,23 @@ export class MindLatticeAbility extends Ability {
       if (this._landed[i]) landed++;
       dropSum += k;
       // The bar comes down from the top ring, head first; it withdraws upward.
-      _a.set(_centre.x + Math.cos(ang) * rr, H, _centre.z + Math.sin(ang) * rr);
-      const reach = H * Easing.inQuad(k) * (1 - kRet);
-      _b.copy(_a).setY(H - reach);
-      this._beam(BAR0 + i, _a, _b, c.barRadius, k > 0 ? 1 - kRet * 0.5 : 0, 0.4, 0, i / n);
+      _a.set(_centre.x + Math.cos(angTop) * rTop, H, _centre.z + Math.sin(angTop) * rTop);
+      _b.set(_centre.x + Math.cos(ang) * rr, 0, _centre.z + Math.sin(ang) * rr);
+      _b.lerpVectors(_a, _b, Easing.inQuad(k) * (1 - kRet));
+      this._beam(BAR0 + i, _a, _b, c.barRadius, k > 0 ? 1 - kRet * 0.5 : 0, 0, 0, i / n);
     }
     // Rings: the top one draws round with the drops; the bottom one closes behind the landings.
     for (let i = 0; i < n && clock >= 0; i++) {
       const j = (i + 1) % n;
-      const a0 = this._arrival + (i / n) * TAU;
-      const a1 = this._arrival + (j / n) * TAU + (j === 0 ? TAU : 0);
+      const a0 = this._arrival + (i / n) * TAU + this._cageSpin;
+      const a1 = this._arrival + (j / n) * TAU + (j === 0 ? TAU : 0) + this._cageSpin;
       const kTop = saturate(this._barK[i] * 3);
-      _a.set(_centre.x + Math.cos(a0) * rr, H, _centre.z + Math.sin(a0) * rr);
-      _b.set(_centre.x + Math.cos(a1) * rr, H, _centre.z + Math.sin(a1) * rr);
+      _a.set(_centre.x + Math.cos(a0 + twist) * rTop, H, _centre.z + Math.sin(a0 + twist) * rTop);
+      _b.set(_centre.x + Math.cos(a1 + twist) * rTop, H, _centre.z + Math.sin(a1 + twist) * rTop);
       _b.lerpVectors(_a, _b, kTop);
       this._beam(TOP0 + i, _a, _b, c.ringRadius, kTop > 0 ? 1 - kRet : 0, 1, 0, i / n);
       const both = this._landed[i] && this._landed[j];
-      _a.setY(0.03);
+      _a.set(_centre.x + Math.cos(a0) * rr, 0.03, _centre.z + Math.sin(a0) * rr);
       _b.set(_centre.x + Math.cos(a1) * rr, 0.03, _centre.z + Math.sin(a1) * rr);
       this._beam(BOT0 + i, _a, _b, c.ringRadius, both ? 1 - smoothstep(0, 0.5, this.fadeTime / retractT) * (fading ? 1 : 0) : 0, 1, 0, i / n);
     }
@@ -557,6 +579,7 @@ export class MindLatticeAbility extends Ability {
     /* --- the lock --- */
     if (!this._locked && clock >= 0 && landed >= n) {
       this._locked = true;
+      this._lockClock = clock;
       this._lockFx(c, g);
     }
 
@@ -809,13 +832,22 @@ export function buildEditor(gui, c, Editor) {
   R(cage, c, 'barRadius', 0.005, 0.2, 0.001, 'bar radius (m)');
   R(cage, c, 'barInset', -1, 3, 0.01, 'inset from rim (m)');
   R(cage, c, 'ringRadius', 0.005, 0.2, 0.001, 'ring radius (m)');
+  R(cage, c, 'cageSpin', -3, 3, 0.01, 'turns while locked (rad/s)');
+  R(cage, c, 'cageTwist', 0, 2, 0.01, 'twist sway (rad)');
+  R(cage, c, 'cageTwistSpeed', 0, 8, 0.05, 'twist speed (rad/s)');
+  R(cage, c, 'cageCinch', 0, 0.9, 0.01, 'crown cinches in (share)');
+  R(cage, c, 'cinchTime', 0.05, 3, 0.01, 'cinch over (s)');
 
   const light = folder.addFolder('3 · Light');
-  light.addColor(c, 'colorPrimary').name('primary');
-  light.addColor(c, 'colorSecondary').name('secondary');
-  light.addColor(c, 'colorCore').name('core');
-  R(light, c, 'beamGlow', 0, 6, 0.05, 'sheath glow');
-  R(light, c, 'coreGlow', 0, 8, 0.05, 'core glow');
+  light.addColor(c, 'colorCore').name('ramp · white-hot core');
+  light.addColor(c, 'colorSecondary').name('ramp · pale tint');
+  light.addColor(c, 'colorPrimary').name('ramp · body');
+  light.addColor(c, 'colorDeep').name('ramp · deep');
+  R(light, c, 'beamGlow', 0, 3, 0.01, 'crystal body brightness');
+  R(light, c, 'beamAmbient', 0, 1, 0.01, 'shadowed facets');
+  R(light, c, 'beamRim', 0, 2, 0.01, 'tint rim');
+  R(light, c, 'coreGlow', 0, 8, 0.05, 'core filament glow (HDR)');
+  R(light, c, 'coreWidth', 1, 60, 0.5, 'core filament thinness');
   R(light, c, 'packetGlow', 0, 10, 0.05, 'thought packets');
   R(light, c, 'packetSpeed', 0, 6, 0.05, 'packets / s');
   R(light, c, 'packetSpacing', 0.1, 6, 0.05, 'packet spacing (m)');
@@ -829,7 +861,8 @@ export function buildEditor(gui, c, Editor) {
   R(floor, c, 'gridCell', 0.2, 3, 0.01, 'cell (m)');
   R(floor, c, 'gridLineWidth', 0.005, 0.2, 0.001, 'line width (m)');
   R(floor, c, 'gridGlow', 0, 6, 0.05, 'glow');
-  R(floor, c, 'gridWash', 0, 1, 0.01, 'wash');
+  R(floor, c, 'gridWash', 0, 1, 0.01, 'deep disc');
+  R(floor, c, 'floorHeart', 0, 2, 0.01, 'disc warms at heart');
   R(floor, c, 'sweepSpeed', 0, 3, 0.01, 'sweep (turns/s)');
   R(floor, c, 'floorTime', 0.05, 2, 0.01, 'draws out over');
   R(floor, c, 'pulseSpeed', 0.5, 30, 0.1, 'synapse ring speed (m/s)');

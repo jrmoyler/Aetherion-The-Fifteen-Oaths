@@ -10,6 +10,7 @@ import {
   createBloomCoreMaterial,
   createBloomGarlandMaterial,
   createBloomSigilMaterial,
+  createBloomGroundMaterial,
   createBloomWarpMaterial
 } from '../../materials/codex/BloomCrownMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
@@ -30,6 +31,9 @@ const MAX_BLOSSOMS = 10;
 /** Petals per whorl at most; each blossom has an outer and an inner whorl. */
 const MAX_PETALS = 8;
 const MAX_PETAL_INSTANCES = MAX_BLOSSOMS * MAX_PETALS * 2;
+/** Blossoms the slam can raise out of the floor (the garden). */
+const MAX_GARDEN = 14;
+const MAX_GARDEN_INSTANCES = MAX_GARDEN * MAX_PETALS * 2;
 
 const _emit = {};
 const _pos = new Vector3();
@@ -50,8 +54,10 @@ const _ref = new Vector3(1, 0, 0);
 const _coreState = { glow: 1, seed: 0 };
 const _seedState = { glow: 1, seed: 0 };
 const _garlandState = { centre: new Vector3(), ringR: 1, ringY: 2, spin: 0, count: 7, tiltAmp: 0, tiltPhase: 0, fade: 1 };
-const _sigilState = { centre: new Vector3(), radius: 3, petals: 7, spin: 0, lit: 0, flare: 0, wave: 0, green: 0, seed: 0 };
+const _sigilState = { centre: new Vector3(), radius: 3, petals: 7, spin: 0, lit: 0, flare: 0, wave: 0, waveOn: 1, green: 0, seed: 0 };
 const _warpState = { centre: new Vector3(), ringR: 0, strength: 0 };
+const _groundState = { centre: new Vector3(), radius: 3, pool: 0, crater: 0, moss: 0, mossOn: 0, stains: 0, fade: 0, seed: 0 };
+const _gardenHeartState = { glow: 1, seed: 0 };
 
 function syncSystem(p, a, b, cc, d, glow, turb) {
   const g = settings.global;
@@ -82,6 +88,36 @@ function resetEmit(time) {
 }
 
 /**
+ * Seat one blossom's two whorls of `np` petals on an instanced petal mesh,
+ * from slot `k`; returns the next free slot. `axis` must be unit length.
+ */
+function seatBlossom(mesh, attr, k, np, pos, axis, s, open, seed, charge, roll) {
+  _e1.crossVectors(axis, Math.abs(axis.x) > 0.9 ? _up : _ref).normalize();
+  _e2.crossVectors(axis, _e1);
+  for (let layer = 0; layer < 2; layer++) {
+    for (let p = 0; p < np; p++, k++) {
+      const phi = roll + (p / np) * TAU + layer * (Math.PI / np);
+      _bx.copy(_e1).multiplyScalar(Math.cos(phi)).addScaledVector(_e2, Math.sin(phi));
+      _by.copy(axis);
+      _bz.crossVectors(_bx, _by);
+      if (s <= 0.002) {
+        mesh.setMatrixAt(k, _zero);
+      } else {
+        _m.makeBasis(_bx.multiplyScalar(s), _by.multiplyScalar(s), _bz.multiplyScalar(s));
+        _m.setPosition(pos);
+        mesh.setMatrixAt(k, _m);
+      }
+      const q = k * 4;
+      attr.array[q] = open;
+      attr.array[q + 1] = seed + p * 0.13 + layer * 0.5;
+      attr.array[q + 2] = charge;
+      attr.array[q + 3] = layer;
+    }
+  }
+  return k;
+}
+
+/**
  * BLOOM CROWN — Nature, zone cast.
  *
  * A **circlet of closed buds**, strung on a glowing vine, leaves the caster
@@ -94,7 +130,16 @@ function resetEmit(time) {
  * they fuse into one bright **seed**, which **slams** straight down into the
  * floor. The earth jumps; a shockwave and a ring of green run out across the
  * floor, petals burst in every direction and whatever stood under the crown
- * is thrown clear. The sigil burns down to nothing.
+ * is thrown clear. **Where the green ring passes, the crown grows back out of
+ * the ground**: a ring of big blossoms (and one at the heart of the crater)
+ * heaves up out of the moss, opens and slowly turns and breathes for the
+ * linger, until they shut, wilt and sink as the moss burns away.
+ *
+ * The beats, at the default settings and the capture distance (13 m):
+ * travel 0.6 s → crown widens and descends 0.35 s → blossoms open, crown
+ * spins up and sinks onto the circle 0.5 s → gathers 0.38 s → slam at ≈ 1.95 s
+ * → garden sprouts behind the wave (≈ 0.25 s to the rim) and lingers 1.3 s →
+ * wilts and sinks 0.9 s. About 4.1 s on screen.
  *
  * ## Layers (each a folder in the editor)
  *
@@ -115,6 +160,15 @@ function resetEmit(time) {
  *      and grass (LEAF) thrown up by the slam.
  *   7. **the slam** — an EARTH burst, a SHOCKWAVE, a DUSTRING and a CRACK,
  *      flash, shake and a light punch.
+ *
+ *   8. **the ground** (`createBloomGroundMaterial`, normal-blended) — the
+ *      deep stop of the ramp: a wine-dark pool under the descending crown,
+ *      then a furrowed soil crater, moss crawling out behind the wave with lit
+ *      veins breathing in it, petal stains; it burns away on noise.
+ *   9. **the garden** — a second InstancedMesh of the same petals (same
+ *      material, same shadow), blossoms seated on the floor at
+ *      `gardenRadius × zoneRadius`; each sprouts the instant the green ring
+ *      reaches its radius (`r / waveSpeed`), so the timing is derived.
  *
  * ## The bodies
  *
@@ -183,6 +237,31 @@ export class BloomCrownAbility extends Ability {
     this.sigilMaterial = createBloomSigilMaterial();
     this.sigil = new Mesh(this.sigilGeometry, this.sigilMaterial);
     this._setup(this.sigil, LAYER.VFX, 2);
+
+    /* ---- 4b · the ground field ---- */
+    this.groundGeometry = createBloomQuadGeometry();
+    this.groundMaterial = createBloomGroundMaterial();
+    this.ground = new Mesh(this.groundGeometry, this.groundMaterial);
+    this._setup(this.ground, LAYER.VFX, 1);
+
+    /* ---- 4c · the garden ---- */
+    this.gardenGeometry = createBloomPetalGeometry(MAX_GARDEN_INSTANCES);
+    this.garden = new InstancedMesh(this.gardenGeometry, this.petalMaterial, MAX_GARDEN_INSTANCES);
+    this.garden.name = 'BloomGarden';
+    this.garden.instanceMatrix.setUsage(DynamicDrawUsage);
+    this.garden.customDepthMaterial = this.petalMaterial.userData.depth;
+    this.garden.castShadow = true;
+    this.garden.count = 0;
+    this._setup(this.garden, LAYER.SHAPED, 6);
+    this.gardenHeartMaterial = createBloomCoreMaterial('heart');
+    this.gardenHearts = new InstancedMesh(this.coreGeometry, this.gardenHeartMaterial, MAX_GARDEN);
+    this.gardenHearts.instanceMatrix.setUsage(DynamicDrawUsage);
+    this.gardenHearts.count = 0;
+    this._setup(this.gardenHearts, LAYER.VFX, 9);
+    /** Dice only: angle jitter, radius jitter, size, seed, sprout lag. */
+    this.plots = [];
+    for (let i = 0; i < MAX_GARDEN; i++) this.plots.push({ aDice: 0, rDice: 0, sDice: 0, seed: 0, lag: 0 });
+    this._gardenRot = 0;
 
     /* ---- 5 · the lens ring ---- */
     this.quadGeometry = createBloomQuadGeometry();
@@ -304,6 +383,22 @@ export class BloomCrownAbility extends Ability {
     for (let i = 0; i < MAX_PETAL_INSTANCES; i++) this.petals.setMatrixAt(i, _zero);
     this.petals.instanceMatrix.needsUpdate = true;
     this.petals.count = 0;
+    for (let i = 0; i < MAX_GARDEN; i++) {
+      const p = this.plots[i];
+      p.aDice = Math.random() - 0.5;
+      p.rDice = Math.random() - 0.5;
+      p.sDice = Math.random();
+      p.seed = Math.random();
+      p.lag = Math.random();
+    }
+    for (let i = 0; i < MAX_GARDEN_INSTANCES; i++) this.garden.setMatrixAt(i, _zero);
+    this.garden.instanceMatrix.needsUpdate = true;
+    this.garden.count = 0;
+    this.gardenHearts.count = 0;
+    this.garden.visible = false;
+    this.gardenHearts.visible = false;
+    this.ground.visible = false;
+    this._gardenRot = Math.random() * TAU;
     this.hearts.count = 0;
     this.petals.visible = true;
     this.hearts.visible = true;
@@ -349,7 +444,9 @@ export class BloomCrownAbility extends Ability {
 
     /* the ring: widening, rising, then drawing in */
     this._ringR = lerp(c.travelRadius, Rc, e) * (1 - Easing.inCubic(gk));
-    this._ringY = lerp(c.travelHeight, c.crownHeight, e) + c.gatherLift * Math.sin(Math.PI * gk);
+    // It settles down onto the circle while it turns, then lifts a touch to strike.
+    const settle = c.crownDescend * Easing.inOutCubic(hold) * (1 - gk * 0.5);
+    this._ringY = lerp(c.travelHeight, c.crownHeight, e) - settle + c.gatherLift * Math.sin(Math.PI * gk);
     const rate = clock < 0 ? c.spinTravel : lerp(lerp(c.spinTravel, c.spinCrown, e), c.spinPeak, hold) + c.spinGather * gk;
     this._spin += rate * dt * g.animationSpeed;
     this._tilt += c.tiltSpeed * dt * g.animationSpeed;
@@ -382,31 +479,8 @@ export class BloomCrownAbility extends Ability {
       bl.ay = _axis.y;
       bl.az = _axis.z;
 
-      // The blossom's own frame round its axis.
-      _e1.crossVectors(_axis, Math.abs(_axis.x) > 0.9 ? _up : _ref).normalize();
-      _e2.crossVectors(_axis, _e1);
-      const roll = this._spin * c.blossomRoll + bl.seed * TAU;
       const s = bl.scale;
-      for (let layer = 0; layer < 2; layer++) {
-        for (let p = 0; p < np; p++, k++) {
-          const phi = roll + (p / np) * TAU + layer * (Math.PI / np);
-          _bx.copy(_e1).multiplyScalar(Math.cos(phi)).addScaledVector(_e2, Math.sin(phi));
-          _by.copy(_axis);
-          _bz.crossVectors(_bx, _by);
-          if (s <= 0.002) {
-            this.petals.setMatrixAt(k, _zero);
-          } else {
-            _m.makeBasis(_bx.multiplyScalar(s), _by.multiplyScalar(s), _bz.multiplyScalar(s));
-            _m.setPosition(_pos);
-            this.petals.setMatrixAt(k, _m);
-          }
-          const q = k * 4;
-          attr.array[q] = bl.open;
-          attr.array[q + 1] = bl.seed + p * 0.13 + layer * 0.5;
-          attr.array[q + 2] = charge;
-          attr.array[q + 3] = layer;
-        }
-      }
+      k = seatBlossom(this.petals, attr, k, np, _pos, _axis, s, bl.open, bl.seed, charge, this._spin * c.blossomRoll + bl.seed * TAU);
 
       /* its heart */
       const hs = c.heartSize * s * (0.6 + 0.4 * bl.open + charge * 0.6);
@@ -484,6 +558,8 @@ export class BloomCrownAbility extends Ability {
     _sigilState.lit = c.sigilLit * e * (1 - fk) * (this._slammed ? Math.exp(-after * 0.8) : 1);
     _sigilState.flare = after >= 0 ? Math.exp(-after * c.flareDecay) * (1 - fk) : 0;
     _sigilState.wave = after >= 0 ? Math.min(c.waveReach * c.zoneRadius, after * c.waveSpeed) : 0;
+    // The ring runs out and dies as it reaches its end — it never parks there.
+    _sigilState.waveOn = 1 - smoothstep(0.55, 1, after * c.waveSpeed / Math.max(0.1, c.waveReach * c.zoneRadius));
     _sigilState.green = after >= 0 ? c.greenStrength * (1 - fk) * smoothstep(0, 0.2, after) : 0;
     _sigilState.seed = this._seed;
     this.sigilMaterial.userData.sync(_sigilState);
@@ -495,6 +571,90 @@ export class BloomCrownAbility extends Ability {
     _warpState.strength = after >= 0 ? 1 - saturate(ringR / Math.max(0.5, c.zoneRadius * 1.8)) : 0;
     this.warpMaterial.userData.sync(_warpState);
     this.warp.visible = _warpState.strength > 0.01;
+
+    /* the ground field: pool under the crown → crater, moss, stains */
+    const hold = clock < 0 ? 0 : saturate((clock - b.expand) / Math.max(0.05, b.gatherAt - b.expand));
+    _groundState.centre.copy(_centre);
+    _groundState.radius = c.zoneRadius;
+    _groundState.pool = c.poolDepth * Math.max(e * 0.6, smoothstep(0, 0.6, hold));
+    _groundState.crater = after >= 0 ? c.craterRadius * Easing.outCubic(saturate(after / 0.12)) : 0;
+    const waveR = after >= 0 ? Math.min(c.waveReach * c.zoneRadius, after * c.waveSpeed) : 0;
+    _groundState.moss = after >= 0 ? Math.min(c.mossReach * c.zoneRadius, waveR * 0.92 + Math.max(0, after - 0.3) * c.mossCreep) : 0;
+    _groundState.mossOn = after >= 0 ? c.mossStrength : 0;
+    _groundState.stains = after >= 0 ? c.stainStrength * smoothstep(0.1, 0.6, after) : 0;
+    _groundState.fade = fk;
+    _groundState.seed = this._seed;
+    this.groundMaterial.userData.sync(_groundState);
+    this.ground.visible = clock >= 0;
+
+    this._updateGarden(after, fk);
+  }
+
+  /**
+   * The garden: the crown grows back out of the floor where the green ring
+   * passes. A plot holds dice; its radius, size and every beat are resolved
+   * here, and each sprouts at `radius / waveSpeed` after the slam.
+   */
+  _updateGarden(after, fk) {
+    const c = settings[ID];
+    const g = settings.global;
+    const n = Math.max(0, Math.min(MAX_GARDEN, Math.round(c.gardenCount)));
+    if (after < 0 || n === 0) {
+      this.garden.visible = false;
+      this.gardenHearts.visible = false;
+      return;
+    }
+    const np = Math.max(3, Math.min(MAX_PETALS, Math.round(c.petalsPerWhorl)));
+    const attr = this.gardenGeometry.attributes.aPetal;
+    const R = c.zoneRadius * c.gardenRadius;
+    const wilt = smoothstep(0, 0.7, fk);
+    const sinkK = smoothstep(0.35, 1, fk);
+    const time = frame.uTime.value * g.animationSpeed;
+    let k = 0;
+    let live = 0;
+    for (let i = 0; i < n; i++) {
+      const p = this.plots[i];
+      const heart = i === 0 && c.gardenHeart > 0;
+      const ring = heart ? 0 : i - (c.gardenHeart > 0 ? 1 : 0);
+      const ringN = Math.max(1, n - (c.gardenHeart > 0 ? 1 : 0));
+      const ang = this._gardenRot + ((ring + 0.5 + p.aDice * c.gardenJitter) / ringN) * TAU;
+      const r = heart ? 0 : Math.max(0.2, R * (1 + p.rDice * 2 * c.gardenJitter));
+      const sproutAt = r / Math.max(0.5, c.waveSpeed) + p.lag * c.gardenLag;
+      const k0 = saturate((after - sproutAt) / Math.max(0.05, c.gardenGrow));
+      const grow = k0 <= 0 ? 0 : Easing.outBack(k0);
+      const opening = saturate((after - sproutAt - c.gardenGrow * 0.35) / Math.max(0.05, c.gardenOpen));
+      const breathe = 1 + c.gardenBreathe * Math.sin(time * c.gardenBreatheRate + p.seed * TAU) * opening;
+      const open = Easing.outBack(opening) * breathe * (1 - wilt);
+      const size = c.gardenScale * (heart ? c.gardenHeartScale : lerp(1 - c.sizeJitter, 1 + c.sizeJitter, p.sDice));
+      const s = size * grow * (1 - smoothstep(0.6, 1, fk));
+      _radial.set(Math.cos(ang), 0, Math.sin(ang));
+      _pos.copy(_centre).addScaledVector(_radial, r);
+      _pos.y = lerp(-c.gardenRise, c.gardenHeight, Math.min(1, grow)) - sinkK * c.gardenRise;
+      _axis.copy(_up).addScaledVector(_radial, heart ? 0 : c.gardenLean * (1 - 0.5 * wilt)).normalize();
+      // A sprouting flash, white-hot from the heart, as it breaks the soil.
+      const charge = Math.exp(-Math.max(0, after - sproutAt) * c.gardenFlashDecay) * c.gardenFlash * (k0 > 0 ? 1 : 0);
+      const roll = this._gardenRot * 0.5 + p.seed * TAU + (after - sproutAt) * c.gardenSpin * (heart ? -1 : 1);
+      k = seatBlossom(this.garden, attr, k, np, _pos, _axis, s, open, p.seed, charge, roll);
+      const hs = c.heartSize * s * (0.7 + 0.5 * open);
+      if (hs <= 0.002) {
+        this.gardenHearts.setMatrixAt(i, _zero);
+      } else {
+        live++;
+        _m.makeScale(hs, hs, hs);
+        _m.setPosition(_pos.x + _axis.x * c.heartLift * s, _pos.y + _axis.y * (c.heartLift + 0.05) * s, _pos.z + _axis.z * c.heartLift * s);
+        this.gardenHearts.setMatrixAt(i, _m);
+      }
+    }
+    this.garden.count = k;
+    this.garden.instanceMatrix.needsUpdate = true;
+    attr.needsUpdate = true;
+    this.gardenHearts.count = n;
+    this.gardenHearts.instanceMatrix.needsUpdate = true;
+    this.garden.visible = live > 0;
+    this.gardenHearts.visible = live > 0;
+    _gardenHeartState.glow = 1 - wilt * 0.8;
+    _gardenHeartState.seed = this._seed;
+    this.gardenHeartMaterial.userData.sync(_gardenHeartState);
   }
 
   /* ------------------------------------------------------------------ */
@@ -686,6 +846,7 @@ export class BloomCrownAbility extends Ability {
 
   onFade(dt) {
     const c = settings[ID];
+    if (this._slammed) this._gardenRot += c.gardenTurn * dt * settings.global.animationSpeed;
     this._clock = this.phase === AbilityPhase.FADE ? this.impactDuration + this.fadeTime : this.impactTime;
     this.pointAt(1, _centre);
     this._sync();
@@ -704,6 +865,11 @@ export class BloomCrownAbility extends Ability {
     this.garland.visible = false;
     this.sigil.visible = false;
     this.warp.visible = false;
+    this.ground.visible = false;
+    this.garden.count = 0;
+    this.gardenHearts.count = 0;
+    this.garden.visible = false;
+    this.gardenHearts.visible = false;
   }
 
   dispose() {
@@ -712,6 +878,12 @@ export class BloomCrownAbility extends Ability {
     this.garlandGeometry.dispose();
     this.sigilGeometry.dispose();
     this.quadGeometry.dispose();
+    this.groundGeometry.dispose();
+    this.gardenGeometry.dispose();
+    this.groundMaterial.dispose();
+    this.gardenHeartMaterial.dispose();
+    this.garden.dispose();
+    this.gardenHearts.dispose();
     this.petalMaterial.userData.depth.dispose();
     this.petalMaterial.dispose();
     this.coreMaterial.dispose();
@@ -765,6 +937,7 @@ export function buildEditor(gui, c, Editor) {
   R(crown, c, 'spinGather', -20, 20, 0.05, 'extra spin gathering (rad/s)');
   R(crown, c, 'tilt', 0, 1.5, 0.01, 'tilt wobble (m)');
   R(crown, c, 'tiltSpeed', -6, 6, 0.05, 'tilt precession (rad/s)');
+  R(crown, c, 'crownDescend', -1, 3, 0.01, 'sinks onto the circle (m)');
   R(crown, c, 'gatherLift', -2, 3, 0.01, 'rises as it gathers (m)');
   R(crown, c, 'faceOut', -1, 2, 0.01, 'blossoms face outward');
   R(crown, c, 'blossomRoll', -2, 2, 0.01, 'blossoms roll');
@@ -790,9 +963,15 @@ export function buildEditor(gui, c, Editor) {
   R(petal, c, 'chargeGlow', 0, 15, 0.05, 'charge glow');
   R(petal, c, 'petalAmbient', 0, 1.5, 0.01, 'ambient');
   R(petal, c, 'petalDiffuse', 0, 2, 0.01, 'diffuse');
-  petal.addColor(c, 'colorPetalHeart').name('heart');
-  petal.addColor(c, 'colorPetalMid').name('blush');
-  petal.addColor(c, 'colorPetalTip').name('tip');
+  R(petal, c, 'petalDeep', 0, 1, 0.01, 'shade falls to deep');
+  petal.addColor(c, 'colorPetalDeep').name('deep');
+  R(petal, c, 'petalEdgeStart', 0, 1, 0.01, 'pink margin from (across)');
+  R(petal, c, 'petalTipStart', 0, 1, 0.01, 'pink tip from (along)');
+  R(petal, c, 'petalEdgeTint', 0, 1, 0.01, 'pink margin/tip amount');
+  petal.addColor(c, 'colorPetalHeart').name('heart glow');
+  petal.addColor(c, 'colorPetalBase').name('base (wine)');
+  petal.addColor(c, 'colorPetalMid').name('body');
+  petal.addColor(c, 'colorPetalTip').name('tip / margin');
   petal.addColor(c, 'colorPetalVein').name('veins');
   petal.addColor(c, 'colorPetalRim').name('rim');
   petal.addColor(c, 'colorCharge').name('charge');
@@ -826,6 +1005,7 @@ export function buildEditor(gui, c, Editor) {
   R(floor, c, 'sigilLit', 0, 2, 0.01, 'lit under the crown');
   R(floor, c, 'sigilGlow', 0, 8, 0.05, 'glow');
   R(floor, c, 'sigilLine', 0.01, 0.3, 0.005, 'line width (m)');
+  R(floor, c, 'sigilFill', 0, 1, 0.01, 'petal fill');
   R(floor, c, 'sigilSpin', -1, 1, 0.01, 'turns with the crown (×)');
   R(floor, c, 'flareDecay', 0.2, 10, 0.05, 'slam flare decay');
   R(floor, c, 'waveSpeed', 0.5, 30, 0.1, 'green ring speed (m/s)');
@@ -839,6 +1019,40 @@ export function buildEditor(gui, c, Editor) {
   floor.addColor(c, 'colorSigilHot').name('sigil, slam');
   floor.addColor(c, 'colorWave').name('green ring');
   floor.addColor(c, 'colorGreen').name('greened floor');
+
+  const ground = folder.addFolder('5b · Ground (pool, crater, moss)');
+  R(ground, c, 'groundOpacity', 0, 1, 0.01, 'opacity');
+  R(ground, c, 'poolDepth', 0, 1, 0.01, 'shade pool under the crown');
+  R(ground, c, 'mossStrength', 0, 1, 0.01, 'moss');
+  R(ground, c, 'mossReach', 0.2, 2, 0.01, 'moss reach (× circle)');
+  R(ground, c, 'mossCreep', 0, 4, 0.01, 'moss creeps on (m/s)');
+  R(ground, c, 'mossBreathe', 0, 3, 0.01, 'lit veins breathe');
+  R(ground, c, 'stainStrength', 0, 1, 0.01, 'petal stains');
+  ground.addColor(c, 'colorGroundDeep').name('deep');
+  ground.addColor(c, 'colorGroundSoil').name('soil');
+  ground.addColor(c, 'colorGroundMoss').name('moss');
+  ground.addColor(c, 'colorGroundMossLit').name('moss veins');
+  ground.addColor(c, 'colorGroundStain').name('petal stains');
+
+  const garden = folder.addFolder('5c · Garden (the crown regrown)');
+  R(garden, c, 'gardenCount', 0, MAX_GARDEN, 1, 'blossoms');
+  R(garden, c, 'gardenHeart', 0, 1, 1, 'one in the crater (0/1)');
+  R(garden, c, 'gardenRadius', 0.1, 1.5, 0.01, 'ring radius (× circle)');
+  R(garden, c, 'gardenJitter', 0, 0.5, 0.01, 'placement jitter');
+  R(garden, c, 'gardenScale', 0.2, 3, 0.01, 'size (× petals)');
+  R(garden, c, 'gardenHeartScale', 0.2, 3, 0.01, 'crater blossom (×)');
+  R(garden, c, 'gardenHeight', -0.3, 1, 0.01, 'seated at (m)');
+  R(garden, c, 'gardenRise', 0, 2, 0.01, 'heaves up from (m below)');
+  R(garden, c, 'gardenLean', -1, 1.5, 0.01, 'leans outward');
+  R(garden, c, 'gardenGrow', 0.05, 1.5, 0.01, 'heaves up over (s)');
+  R(garden, c, 'gardenOpen', 0.05, 1.5, 0.01, 'opens over (s)');
+  R(garden, c, 'gardenLag', 0, 1, 0.01, 'sprout lag jitter (s)');
+  R(garden, c, 'gardenSpin', -3, 3, 0.01, 'each turns (rad/s)');
+  R(garden, c, 'gardenTurn', -2, 2, 0.01, 'ring turns (rad/s)');
+  R(garden, c, 'gardenBreathe', 0, 0.6, 0.005, 'breathes (± open)');
+  R(garden, c, 'gardenBreatheRate', 0, 12, 0.05, 'breath rate (rad/s)');
+  R(garden, c, 'gardenFlash', 0, 3, 0.01, 'sprout flash');
+  R(garden, c, 'gardenFlashDecay', 0.5, 20, 0.1, 'flash decay');
 
   const slam = folder.addFolder('6 · The slam');
   R(slam, c, 'slamShake', 0, 1.5, 0.01, 'jolt');

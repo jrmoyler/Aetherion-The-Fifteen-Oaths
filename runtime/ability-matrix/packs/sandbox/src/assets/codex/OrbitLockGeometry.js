@@ -48,6 +48,52 @@ export function createOrbitTubeGeometry(segments = 160, sides = 8) {
   return geometry;
 }
 
+/**
+ * The accretion vortex — a polar grid in parameter space. `position.x` is 0..1
+ * from the inner lip (the event horizon) to the ragged outer edge,
+ * `position.y` 0..1 round the disc. The vortex material winds it into
+ * log-spiral ridges of infalling matter, stands them up, tilts the whole disc
+ * onto the orrery's plane and lays it on the floor after the slam
+ * (`VORTEX_VERTEX` in OrbitLockMaterials). Rings are crowded toward the lip,
+ * where the ridges are tallest and the shading changes fastest.
+ */
+export function createVortexGeometry(rings = 40, segments = 192) {
+  const cols = segments + 1;
+  const rows = rings + 1;
+  const positions = new Float32Array(cols * rows * 3);
+  const indices = new Uint16Array(segments * rings * 6);
+  let p = 0;
+  for (let j = 0; j < rows; j++) {
+    const t = j / rings;
+    const r = t * t * 0.45 + t * 0.55;
+    for (let i = 0; i < cols; i++) {
+      positions[p++] = r;
+      positions[p++] = i / segments;
+      positions[p++] = 0;
+    }
+  }
+  let k = 0;
+  for (let j = 0; j < rings; j++) {
+    for (let i = 0; i < segments; i++) {
+      const a = j * cols + i;
+      const b = a + 1;
+      const c = a + cols;
+      const d = c + 1;
+      indices[k++] = a;
+      indices[k++] = c;
+      indices[k++] = b;
+      indices[k++] = b;
+      indices[k++] = c;
+      indices[k++] = d;
+    }
+  }
+  const geometry = new BufferGeometry();
+  geometry.setAttribute('position', new BufferAttribute(positions, 3));
+  geometry.setIndex(new BufferAttribute(indices, 1));
+  geometry.boundingSphere = BIG;
+  return geometry;
+}
+
 /** A unit sphere for the planets (instanced, scaled per planet). */
 export function createPlanetGeometry(detail = 3) {
   const geometry = new IcosahedronGeometry(1, detail);

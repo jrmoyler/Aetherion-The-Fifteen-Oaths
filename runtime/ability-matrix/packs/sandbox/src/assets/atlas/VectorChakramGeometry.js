@@ -127,12 +127,23 @@ export function createChakramPlaneGeometry() {
  *   aCoord    x side −1/+1 · y age 0..1 (0 = at the disc) · z live 0/1
  */
 export const MAX_TRAIL = 72;
+/** Capacity of the floor path (the scored line of the whole throw). */
+export const MAX_PATH = 160;
 
 const _t = new Vector3();
 
 export class ChakramTrailRibbon {
-  constructor() {
-    const vertices = MAX_TRAIL * 2;
+  /**
+   * @param {number} [capacity] samples kept (default `MAX_TRAIL`)
+   * @param {boolean} [useHead] true: vertex 0 is the live disc (the air
+   *   trail); false: the ribbon is only the recorded samples, each with its
+   *   real age (the floor path, which must age out at its newest end too).
+   */
+  constructor(capacity = MAX_TRAIL, useHead = true) {
+    this.cap = Math.max(4, capacity | 0);
+    this.useHead = useHead;
+    const CAP = this.cap;
+    const vertices = CAP * 2;
     this.positions = new Float32Array(vertices * 3);
     this.tangents = new Float32Array(vertices * 3);
     this.coords = new Float32Array(vertices * 3);
@@ -145,9 +156,9 @@ export class ChakramTrailRibbon {
     geometry.setAttribute('aTangent', this.tangentAttribute);
     geometry.setAttribute('aCoord', this.coordAttribute);
 
-    const index = new Uint16Array((MAX_TRAIL - 1) * 6);
+    const index = new Uint16Array((CAP - 1) * 6);
     let k = 0;
-    for (let i = 0; i < MAX_TRAIL - 1; i++) {
+    for (let i = 0; i < CAP - 1; i++) {
       const v = i * 2;
       index[k++] = v;
       index[k++] = v + 1;
@@ -161,7 +172,7 @@ export class ChakramTrailRibbon {
     this.geometry = geometry;
 
     /** Ring buffer of samples: x, y, z, birth time. */
-    this.samples = new Float32Array(MAX_TRAIL * 4);
+    this.samples = new Float32Array(CAP * 4);
     this.head = 0;
     this.count = 0;
     this.clear();
@@ -181,13 +192,13 @@ export class ChakramTrailRibbon {
     this.samples[i * 4 + 1] = p.y;
     this.samples[i * 4 + 2] = p.z;
     this.samples[i * 4 + 3] = time;
-    this.head = (this.head + 1) % MAX_TRAIL;
-    this.count = Math.min(MAX_TRAIL, this.count + 1);
+    this.head = (this.head + 1) % this.cap;
+    this.count = Math.min(this.cap, this.count + 1);
   }
 
   /** The newest sample, into `out`. */
   last(out) {
-    const i = (this.head - 1 + MAX_TRAIL) % MAX_TRAIL;
+    const i = (this.head - 1 + this.cap) % this.cap;
     return out.set(this.samples[i * 4], this.samples[i * 4 + 1], this.samples[i * 4 + 2]);
   }
 
@@ -201,21 +212,24 @@ export class ChakramTrailRibbon {
     const crd = this.coords;
     const n = this.count;
     const L = Math.max(1e-3, life);
+    const CAP = this.cap;
+    const off = this.useHead ? 0 : 1;
 
-    for (let j = 0; j < MAX_TRAIL; j++) {
-      // j = 0 is the disc itself; j ≥ 1 walks back through the samples.
+    for (let j = 0; j < CAP; j++) {
+      // With a head, j = 0 is the disc itself; j ≥ 1 walks back through the samples.
       let x;
       let y;
       let z;
       let age;
       let live = 1;
-      if (j === 0) {
+      const s = j + off;
+      if (this.useHead && j === 0) {
         x = head.x;
         y = head.y;
         z = head.z;
         age = 0;
-      } else if (j <= n && j < MAX_TRAIL) {
-        const i = (this.head - j + MAX_TRAIL * 2) % MAX_TRAIL;
+      } else if (s <= n && s <= CAP) {
+        const i = (this.head - s + CAP * 2) % CAP;
         x = this.samples[i * 4];
         y = this.samples[i * 4 + 1];
         z = this.samples[i * 4 + 2];
@@ -223,8 +237,8 @@ export class ChakramTrailRibbon {
         if (age >= 1) live = 0;
       } else {
         // Collapse the unused tail onto the oldest point.
-        const k = Math.max(0, Math.min(n, MAX_TRAIL - 1));
-        const i = (this.head - k + MAX_TRAIL * 2) % MAX_TRAIL;
+        const k = Math.max(0, Math.min(n, CAP - 1));
+        const i = (this.head - k + CAP * 2) % CAP;
         x = k === 0 ? head.x : this.samples[i * 4];
         y = k === 0 ? head.y : this.samples[i * 4 + 1];
         z = k === 0 ? head.z : this.samples[i * 4 + 2];
@@ -244,9 +258,9 @@ export class ChakramTrailRibbon {
     }
 
     // Tangents by central difference along the written line.
-    for (let j = 0; j < MAX_TRAIL; j++) {
+    for (let j = 0; j < CAP; j++) {
       const a = Math.max(0, j - 1) * 2;
-      const b = Math.min(MAX_TRAIL - 1, j + 1) * 2;
+      const b = Math.min(CAP - 1, j + 1) * 2;
       _t.set(pos[a * 3] - pos[b * 3], pos[a * 3 + 1] - pos[b * 3 + 1], pos[a * 3 + 2] - pos[b * 3 + 2]);
       for (let side = 0; side < 2; side++) {
         const v = j * 2 + side;

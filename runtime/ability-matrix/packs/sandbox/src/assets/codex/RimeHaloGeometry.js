@@ -18,13 +18,16 @@ import { LatheGeometry, PlaneGeometry, TorusGeometry, Vector2 } from 'three';
  */
 
 export function createNeedleGeometry() {
+  // A hexagonal ice crystal: a narrow root, a full shoulder low down, a
+  // long straight-sided taper and a sharp terminating point.
   const pts = [
-    new Vector2(0.0, -0.02),
-    new Vector2(0.38, 0.0),
-    new Vector2(0.62, 0.08),
+    new Vector2(0.0, -0.03),
+    new Vector2(0.45, 0.0),
+    new Vector2(0.85, 0.07),
     new Vector2(1.0, 0.2),
-    new Vector2(0.78, 0.42),
-    new Vector2(0.4, 0.75),
+    new Vector2(0.9, 0.42),
+    new Vector2(0.52, 0.74),
+    new Vector2(0.18, 0.93),
     new Vector2(0.0, 1.0)
   ];
   const g = new LatheGeometry(pts, 6);

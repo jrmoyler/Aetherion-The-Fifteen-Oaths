@@ -51,9 +51,16 @@ const _down = new Vector3(0, -1, 0);
  *      in to feed it. Under it, a column of pressure reaches down toward the
  *      floor — you see it only as the world behind it twisting — and the edge
  *      of the circle darkens and breathes. The camera starts to rumble.
- *   2. **DROP** — the column falls: a translucent tube of wind streaks, pinched
- *      up into the cloud and splayed at the foot, its leading front white-hot.
- *      The core of the cloud lurches down with it.
+ *   2. **DROP** — the column falls: a bell of dark storm-blue air banded with
+ *      pale wind streaks, pinched up into the cloud and splayed at the foot, its
+ *      leading front white-hot. The core of the cloud lurches down with it.
+ *
+ *   Timing: the cloud hangs low (2.9 m, its core sagging toward head height) so it is in frame from the first
+ *   frame of the gather, and gather + drop is ~0.56 s × lifetime — the
+ *   anticipation is short and the slam and the scoured floor carry the cast.
+ *   Every layer is coloured on one four-stop ramp (white-hot → pale ice →
+ *   storm blue → near-black navy); the deep stop carries the column, the
+ *   dust torus, the scour and the imprint, bright only at cores and edges.
  *   3. **SLAM** — the column hits the floor and the air has nowhere to go but
  *      out. A shock ring races outward with a rolling torus of dust riding it,
  *      streaks rush out flat along the ground, dust and debris are flung, the
@@ -69,7 +76,8 @@ const _down = new Vector3(0, -1, 0);
  *     fbm, two-tap sun lighting, inner charge glow, lightning.
  *   - **pressure funnel** (`createPressureFunnelMaterial`, `LAYER.DISTORTION`)
  *     — the anticipation, and a hard punch on the slam.
- *   - **column** (`createWindColumnMaterial`) — additive falling streaks.
+ *   - **column** (`createWindColumnMaterial`) — premultiplied: a dark body of
+ *     falling air that occludes, with additive streak crests and front.
  *   - **ground blast** (`createGroundBlastMaterial`) — telegraph, shock ring,
  *     scour, imprint; the ground treatment.
  *   - **dust torus** (`createDustTorusMaterial`) — the rolling ring of dust.
@@ -134,6 +142,9 @@ export class DownburstAbility extends Ability {
 
     this.cloudMaterial = createStormCloudMaterial();
     this.cloud = this._mesh(this.cloudGeometry, this.cloudMaterial, 14, LAYER.VFX);
+    // The heaped upper shell over the belly: gives the cloud height in frame.
+    this.cloudTopMaterial = createStormCloudMaterial(true);
+    this.cloudTop = this._mesh(this.cloudGeometry, this.cloudTopMaterial, 15, LAYER.VFX);
 
     this.funnelMaterial = createPressureFunnelMaterial();
     this.funnel = this._mesh(this.tubeGeometry, this.funnelMaterial, 0, LAYER.DISTORTION);
@@ -154,7 +165,7 @@ export class DownburstAbility extends Ability {
 
     /* ---- shared sync state blocks, written in place every frame ---- */
     this._cloudState = { centre: this._centre, form: 0, dissolve: 0, spin: 0, charge: 0, flash: 0, sag: 0, lightXZ: this._lightXZ, seed: 0 };
-    this._columnState = { centre: this._centre, bottom: 7, flow: 0, fade: 0, liftY: -10, seed: 0 };
+    this._columnState = { centre: this._centre, bottom: 7, flow: 0, fade: 0, front: 1, liftY: -10, seed: 0 };
     this._funnelState = { centre: this._centre, reach: 0, strength: 0, seed: 0 };
     this._groundState = { centre: this._centre, extent: 10, warn: 0, wave: 0, ringLevel: 0, scour: 0, imprint: 0, erode: 0, seed: 0 };
     this._torusState = { centre: this._centre, major: 0, tube: 0.4, roll: 0, fade: 0, thin: 0, seed: 0 };
@@ -405,6 +416,8 @@ export class DownburstAbility extends Ability {
     cs.seed = this._seed;
     this.cloudMaterial.userData.sync(cs);
     this.cloud.visible = form > 0.001 && dissolve < 1;
+    this.cloudTopMaterial.userData.sync(cs);
+    this.cloudTop.visible = this.cloud.visible && c.cloudTower > 0.01 && c.cloudTowerOpacity > 0.001;
 
     /* ---- the funnel: reaching down, then punched by the slam ---- */
     const fs = this._funnelState;
@@ -431,6 +444,8 @@ export class DownburstAbility extends Ability {
     col.bottom = bottom;
     col.flow = this._flow;
     col.fade = k < G ? 0 : saturate(drop * 5) * (1 - fadeT);
+    // The white-hot front belongs to the fall; once it has hit, it is spent.
+    col.front = since >= 0 ? Math.exp(-since * c.columnFrontDecay) : 1;
     col.liftY = liftY;
     col.seed = this._seed;
     this.columnMaterial.userData.sync(col);
@@ -564,21 +579,21 @@ export class DownburstAbility extends Ability {
       radius: R * c.shockRadius * g.explosionIntensity,
       life: c.shockLife,
       width: 0.05,
-      intensity: 1.2,
+      intensity: c.shockIntensity,
       colorA: getColor(c.colorRing),
-      colorB: getColor(c.colorB),
+      colorB: getColor(c.colorColumnBody),
       height: 0.035
     });
     this.ctx.bursts.spawn(BurstMode.AIR, _pos.copy(this._centre).setY(0.25), {
       radius: R * 0.3,
       endRadius: R * c.burstSize * g.explosionIntensity,
       life: c.burstLife,
-      intensity: 1.8,
-      opacity: 0.7 * g.opacity,
+      intensity: c.burstIntensity,
+      opacity: c.burstOpacity * g.opacity,
       squash: c.burstSquash,
-      colorA: getColor(c.colorB),
-      colorB: getColor(c.colorA),
-      colorC: getColor(c.colorColumn)
+      colorA: getColor(c.colorColumnHot),
+      colorB: getColor(c.colorColumnBody),
+      colorC: getColor(c.colorColumnDeep)
     });
 
     /* ---- streaks rushing out flat along the floor ---- */
@@ -832,6 +847,7 @@ export class DownburstAbility extends Ability {
     this._clock = -1;
     this._slammed = false;
     this.cloud.visible = false;
+    this.cloudTop.visible = false;
     this.column.visible = false;
     this.funnel.visible = false;
     this.ground.visible = false;
@@ -845,6 +861,7 @@ export class DownburstAbility extends Ability {
     }
     for (const material of [
       this.cloudMaterial,
+      this.cloudTopMaterial,
       this.columnMaterial,
       this.funnelMaterial,
       this.groundMaterial,
@@ -911,6 +928,9 @@ export function buildEditor(gui, c, Editor) {
   R(cloud, c, 'cloudChargeGlow', 0, 8, 0.05, 'charge glow');
   R(cloud, c, 'cloudFlash', 0, 8, 0.05, 'lightning');
   R(cloud, c, 'cloudFlashRate', 0, 20, 0.1, 'lightning / s');
+  R(cloud, c, 'cloudTower', 0, 6, 0.05, 'tower height (m)');
+  R(cloud, c, 'cloudTowerShade', 0, 1, 0.01, 'tower shade');
+  R(cloud, c, 'cloudTowerOpacity', 0, 1, 0.01, 'tower opacity');
   cloud.addColor(c, 'colorCloudCore').name('core');
   cloud.addColor(c, 'colorCloudBody').name('body');
   cloud.addColor(c, 'colorCloudRim').name('lit rim');
@@ -944,9 +964,14 @@ export function buildEditor(gui, c, Editor) {
   R(column, c, 'columnRim', 0, 5, 0.05, 'walls');
   R(column, c, 'columnFront', 0, 10, 0.05, 'leading front');
   R(column, c, 'columnFrontWidth', 0.02, 4, 0.01, 'front width (m)');
+  R(column, c, 'columnFrontDecay', 0, 30, 0.1, 'front dies after the slam (/s)');
   R(column, c, 'columnSoftFade', 0.01, 3, 0.01, 'soft fade (m)');
-  column.addColor(c, 'colorColumn').name('wind');
-  column.addColor(c, 'colorColumnHot').name('front');
+  R(column, c, 'columnBodyOpacity', 0, 1, 0.01, 'dark body opacity');
+  R(column, c, 'columnBodyLight', 0, 1, 0.01, 'body sun shading');
+  column.addColor(c, 'colorColumnHot').name('ramp · white-hot front');
+  column.addColor(c, 'colorColumn').name('ramp · pale streaks');
+  column.addColor(c, 'colorColumnBody').name('ramp · body');
+  column.addColor(c, 'colorColumnDeep').name('ramp · deep');
 
   const ground = folder.addFolder('4 · Ground blast');
   R(ground, c, 'blastRadius', 0.5, 5, 0.05, 'runs out to (× circle)');
@@ -960,7 +985,10 @@ export function buildEditor(gui, c, Editor) {
   R(ground, c, 'warnGlow', 0, 5, 0.05, 'telegraph glow');
   R(ground, c, 'groundErode', 0, 1, 0.01, 'erodes on noise');
   ground.addColor(c, 'colorRing').name('ring');
-  ground.addColor(c, 'colorScour').name('scour');
+  R(ground, c, 'scourRidge', 0, 1, 0.01, 'combed ridge brightness');
+  R(ground, c, 'ringShadow', 0, 1, 0.01, 'trough behind the ring');
+  ground.addColor(c, 'colorScour').name('scour (deep)');
+  ground.addColor(c, 'colorScourLit').name('scour ridges');
   ground.addColor(c, 'colorImprint').name('imprint');
   ground.addColor(c, 'colorWarn').name('telegraph');
   R(ground, c, 'lensStrength', 0, 5, 0.05, 'shock lens strength');
@@ -1015,10 +1043,13 @@ export function buildEditor(gui, c, Editor) {
   R(slam, c, 'burstSize', 0, 4, 0.01, 'air shell (× circle)');
   R(slam, c, 'burstLife', 0.05, 2, 0.01, 'air shell life');
   R(slam, c, 'burstSquash', 0.05, 1.5, 0.01, 'air shell squash');
+  R(slam, c, 'burstOpacity', 0, 1, 0.01, 'air shell opacity');
+  R(slam, c, 'burstIntensity', 0, 4, 0.01, 'air shell intensity');
   R(slam, c, 'dustRingRadius', 0.2, 5, 0.05, 'dust ring (× circle)');
   R(slam, c, 'dustRingLife', 0.1, 6, 0.05, 'dust ring life');
   R(slam, c, 'shockRadius', 0.2, 6, 0.05, 'shock ring (× circle)');
   R(slam, c, 'shockLife', 0.05, 3, 0.01, 'shock ring life');
+  R(slam, c, 'shockIntensity', 0, 4, 0.01, 'shock ring intensity');
 
   const hit = slam.addFolder('Bodies');
   R(hit, c, 'pressCore', 0, 1.5, 0.01, 'pressed inside (× circle)');

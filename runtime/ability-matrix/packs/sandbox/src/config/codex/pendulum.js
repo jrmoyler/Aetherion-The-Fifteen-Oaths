@@ -17,7 +17,7 @@ export default {
     label: 'Pendulum Cleaver',
     accent: '#ffe7b8',
     key: '',
-    element: 'time',
+    element: 'motion',
     hint: 'Time — a crescent pendulum swings down the line, slower every pass, stalls, then cleaves',
     cast: 'line',
     glyph: `<path d="M50 8V58"/><circle cx="50" cy="8" r="5"/><path d="M22 60C30 78 70 78 78 60C66 68 34 68 22 60Z"/><path d="M18 40C24 52 30 58 40 62" stroke-dasharray="4 5"/>`

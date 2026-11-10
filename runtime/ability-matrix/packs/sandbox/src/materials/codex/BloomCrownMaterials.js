@@ -26,6 +26,9 @@ import { getColor } from '../../utils/color.js';
  *  - **the sigil** (`createBloomSigilMaterial`) — the floor under the crown:
  *    a mandala of petals that lights while the crown turns, flares at the
  *    slam, and sends a ring of green outward across the floor.
+ *  - **the ground** (`createBloomGroundMaterial`) — normal-blended, so it can
+ *    carry the deep stop of the ramp: a wine-dark pool under the crown, then a
+ *    furrowed crater, moss with breathing lit veins, petal stains.
  *  - **the warp** (`createBloomWarpMaterial`) — a flat lens ring on
  *    `LAYER.DISTORTION` thrown outward by the slam.
  *
@@ -121,6 +124,12 @@ const PETAL_FRAGMENT = /* glsl */ `
   uniform vec3  uColorVein;
   uniform vec3  uColorRim;
   uniform vec3  uColorCharge;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorBase;
+  uniform float uEdgeStart;
+  uniform float uTipStart;
+  uniform float uEdgeTint;
+  uniform float uDeep;
   uniform float uVeins;
   uniform float uVeinStrength;
   uniform float uSSS;
@@ -145,8 +154,12 @@ const PETAL_FRAGMENT = /* glsl */ `
     float frill = snoise(vec3(s * 8.0, u * 2.0, vPetal.y * 11.0)) * 0.06;
     if (au > 1.0 - smoothstep(0.85, 1.0, s) * 0.35 + frill) discard;
 
-    vec3 base = mix(uColorHeart, uColorMid, smoothstep(0.0, 0.4, s));
-    base = mix(base, uColorTip, smoothstep(0.45, 1.0, s) * (0.7 + 0.3 * au));
+    // Wine-black at the base, a saturated body through the middle, the pink
+    // only on the tip and the outer margins — the mass carries the deep tone.
+    vec3 base = mix(uColorBase, uColorMid, smoothstep(0.06, 0.5, s));
+    float edge = smoothstep(uEdgeStart, 1.0, au) * smoothstep(0.25, 0.75, s);
+    float tip = smoothstep(uTipStart, 1.0, s);
+    base = mix(base, uColorTip, clamp(max(edge, tip), 0.0, 1.0) * uEdgeTint);
     float rib = exp(-pow(u / 0.07, 2.0));
     float fan = abs(fract(u / (s + 0.2) * uVeins * 0.5 + 0.5) - 0.5) * 2.0;
     float vein = max(rib, (1.0 - smoothstep(0.0, 0.14, fan)) * 0.7) * smoothstep(0.05, 0.25, s) * uVeinStrength;
@@ -163,10 +176,14 @@ const PETAL_FRAGMENT = /* glsl */ `
     float sss = through * uSSS * (0.5 + 0.5 * au) * (1.0 - vein * 0.7) * uShaderIntensity;
     float rim = pow(1.0 - clamp(abs(dot(N, V)), 0.0, 1.0), 2.5) * uRimGlow;
 
-    vec3 color = albedo * (uAmbient + uDiffuse * wrap);
-    color += mix(albedo, vec3(1.0), 0.3) * sss;
+    // Four-stop ramp: the shaded side of a petal falls to a deep wine, not to
+    // a grey pastel — it is what grounds the blossoms on the dark floor.
+    float shade = uAmbient + uDiffuse * wrap;
+    vec3 color = mix(uColorDeep, albedo * shade, mix(1.0, smoothstep(0.05, 0.8, shade), uDeep));
+    color = mix(color, uColorDeep, uDeep * 0.45 * smoothstep(0.55, 0.0, s) * (1.0 - vPetal.x * 0.6) * step(0.5, 1.0 - vPetal.z));
+    color += albedo * sss;
     color += uColorRim * rim * (0.4 + 0.6 * s);
-    color += uColorHeart * uHeartGlow * exp(-s * 5.0) * vPetal.x;
+    color += uColorHeart * uHeartGlow * exp(-s * 11.0) * vPetal.x;
     // The charge: white-hot from the heart out as the crown gathers to strike.
     float charge = vPetal.z;
     color += uColorCharge * charge * uChargeGlow * (0.4 + 0.6 * smoothstep(1.0, 0.0, s - charge * 0.6));
@@ -213,6 +230,12 @@ export function createBloomPetalMaterial() {
       uColorVein: { value: new Color() },
       uColorRim: { value: new Color() },
       uColorCharge: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uColorBase: { value: new Color() },
+      uEdgeStart: { value: 0.72 },
+      uTipStart: { value: 0.72 },
+      uEdgeTint: { value: 0.85 },
+      uDeep: { value: 0.7 },
       uVeins: { value: 9 },
       uVeinStrength: { value: 0.6 },
       uSSS: { value: 0.8 },
@@ -252,6 +275,12 @@ export function createBloomPetalMaterial() {
     u.uColorVein.value.copy(getColor(c.colorPetalVein));
     u.uColorRim.value.copy(getColor(c.colorPetalRim));
     u.uColorCharge.value.copy(getColor(c.colorCharge));
+    u.uColorDeep.value.copy(getColor(c.colorPetalDeep));
+    u.uColorBase.value.copy(getColor(c.colorPetalBase));
+    u.uEdgeStart.value = c.petalEdgeStart;
+    u.uTipStart.value = c.petalTipStart;
+    u.uEdgeTint.value = c.petalEdgeTint;
+    u.uDeep.value = c.petalDeep;
     u.uVeins.value = c.petalVeins;
     u.uVeinStrength.value = c.veinStrength;
     u.uSSS.value = c.petalSSS;
@@ -525,8 +554,10 @@ const SIGIL_FRAGMENT = /* glsl */ `
   uniform float uFlare;       // 0..1 decaying, the slam
   uniform float uWave;        // metres the green ring has run out
   uniform float uWaveWidth;
+  uniform float uWaveOn;      // 0..1 the ring dims as it reaches its end
   uniform float uGreen;       // 0..1 the floor greened behind the wave
   uniform float uLine;
+  uniform float uFill;
   uniform float uGlow;
   uniform float uSeed;
   uniform float uOpacity;
@@ -555,11 +586,11 @@ const SIGIL_FRAGMENT = /* glsl */ `
     float ring1 = 1.0 - smoothstep(lw * 0.4, lw, abs(rn - 1.0) * R);
     float ring2 = 1.0 - smoothstep(lw * 0.4, lw, abs(rn - 0.18) * R);
     float lines = max(max(l1, l2 * 0.8), max(ring1, ring2));
-    float fill = (1.0 - smoothstep(0.0, 0.08, rn - rose1)) * 0.12 * step(rn, 1.0);
+    float fill = (1.0 - smoothstep(0.0, 0.08, rn - rose1)) * uFill * step(rn, 1.0) * (0.6 + 0.4 * snoise(vec3(p * 1.4, uSeed + uTime * 0.3)));
     float sigil = (lines + fill) * (uLit + uFlare * 2.0);
 
     // The green ring and the greened floor behind it.
-    float wave = exp(-pow((r - uWave) / max(uWaveWidth, 0.02), 2.0)) * step(0.01, uWave);
+    float wave = exp(-pow((r - uWave) / max(uWaveWidth, 0.02), 2.0)) * step(0.01, uWave) * uWaveOn;
     float behind = (1.0 - smoothstep(uWave - 0.2, uWave + 0.2, r)) * uGreen;
     float grass = snoise(vec3(p * 6.0, uSeed)) * 0.5 + 0.5;
 
@@ -594,8 +625,10 @@ export function createBloomSigilMaterial() {
       uFlare: { value: 0 },
       uWave: { value: 0 },
       uWaveWidth: { value: 0.4 },
+      uWaveOn: { value: 1 },
       uGreen: { value: 0 },
       uLine: { value: 0.06 },
+      uFill: { value: 0.12 },
       uGlow: { value: 2 },
       uSeed: { value: 0 },
       uOpacity: { value: 1 },
@@ -622,8 +655,10 @@ export function createBloomSigilMaterial() {
     u.uFlare.value = s.flare;
     u.uWave.value = s.wave;
     u.uWaveWidth.value = c.waveWidth;
+    u.uWaveOn.value = s.waveOn ?? 1;
     u.uGreen.value = s.green;
     u.uLine.value = c.sigilLine;
+    u.uFill.value = c.sigilFill;
     u.uGlow.value = c.sigilGlow * g.glow;
     u.uSeed.value = s.seed;
     u.uOpacity.value = g.opacity;
@@ -631,6 +666,150 @@ export function createBloomSigilMaterial() {
     u.uColorHot.value.copy(getColor(c.colorSigilHot));
     u.uColorWave.value.copy(getColor(c.colorWave));
     u.uColorGreen.value.copy(getColor(c.colorGreen));
+  };
+
+  return material;
+}
+
+/* ==================================================================== */
+/* The ground — normal-blended floor field                               */
+/* ==================================================================== */
+
+const GROUND_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uGlobalGlow;
+  uniform float uRadius;      // the zone circle
+  uniform float uPool;        // 0..1 the crown's shadow pool darkening under it
+  uniform float uCrater;      // metres: the churned soil where the seed went in
+  uniform float uMoss;        // metres the moss has spread out from the strike
+  uniform float uMossOn;      // 0..1 moss strength
+  uniform float uStains;      // 0..1 petal stains strewn over the moss
+  uniform float uBreathe;     // 0..1 the moss's lit veins breathing
+  uniform float uFade;        // 0 whole .. 1 gone
+  uniform float uOpacity;
+  uniform float uSeed;
+  uniform vec3  uColorDeep;
+  uniform vec3  uColorSoil;
+  uniform vec3  uColorMoss;
+  uniform vec3  uColorMossLit;
+  uniform vec3  uColorStain;
+
+  varying vec2 vP;
+
+  ${noiseGLSL}
+
+  void main() {
+    vec2 p = vP;
+    float r = length(p);
+    float R = max(uRadius, 0.1);
+    float rn = r / R;
+    float edgeN = snoise(vec3(p * 0.9, uSeed)) * 0.12;
+
+    // The pool: the crown's shade and the circle stained deep under it.
+    float pool = (1.0 - smoothstep(0.55, 1.08 + edgeN, rn)) * uPool;
+
+    // Moss crawling outward from the strike behind the green wave.
+    float patchN = fbm3(vec3(p * 1.3, uSeed * 1.7)) * 0.5 + 0.5;
+    float mossEdge = uMoss * (0.85 + 0.3 * patchN);
+    float moss = (1.0 - smoothstep(mossEdge - 0.6, mossEdge, r)) * uMossOn * smoothstep(0.25, 0.55, patchN + 0.25);
+    float tuft = fbm3(vec3(p * 5.5, uSeed + 3.0)) * 0.5 + 0.5;
+    // Lit veins in the moss, breathing outward from the strike.
+    float vein = 1.0 - smoothstep(0.0, 0.07, abs(snoise(vec3(p * 0.85, uSeed + 9.0))));
+    float pulse = 0.5 + 0.5 * sin(r * 2.2 - uTime * 3.2);
+    vec3 mossCol = mix(uColorMoss * (0.55 + 0.6 * tuft), uColorMossLit, vein * pulse * uBreathe * 0.8);
+
+    // Fallen petal stains: wine-dark blotches strewn through the moss.
+    vec2 vo = voronoi2(p * 1.6 + uSeed);
+    float stain = (1.0 - smoothstep(0.08, 0.2, vo.x)) * step(0.62, fract(vo.y * 7.31)) * uStains * moss;
+
+    // The churned crater where the seed went in: soil furrowed out from the centre.
+    float a = atan(p.y, p.x);
+    float furrow = 0.5 + 0.5 * sin(a * 23.0 + snoise(vec3(p * 2.0, uSeed)) * 3.0);
+    float crater = (1.0 - smoothstep(uCrater * 0.75, uCrater * (1.0 + 0.15 * furrow), r)) * step(0.01, uCrater);
+    float lip = exp(-pow((r - uCrater) / max(uCrater * 0.18, 0.05), 2.0)) * step(0.01, uCrater);
+    vec3 soilCol = mix(uColorDeep, uColorSoil, 0.45 + 0.55 * furrow * (r / max(uCrater, 0.01)));
+
+    vec3 col = uColorDeep;
+    float alpha = pool * 0.85;
+    col = mix(col, mossCol, clamp(moss, 0.0, 1.0));
+    alpha = max(alpha, moss * 0.92);
+    col = mix(col, uColorStain * (0.7 + 0.5 * tuft), clamp(stain, 0.0, 1.0));
+    col = mix(col, soilCol, clamp(crater, 0.0, 1.0));
+    col = mix(col, uColorSoil * 1.4, clamp(lip * 0.7, 0.0, 1.0));
+    alpha = max(alpha, max(crater, lip * 0.8) * 0.95);
+
+    // Burns away on noise from the rim inward.
+    float n = fbm3(vec3(p * 1.1, uSeed + 5.0)) * 0.5 + 0.5;
+    float field = n * 0.6 + rn * 0.4;
+    float keep = 1.0 - smoothstep(1.0 - uFade * 1.25, 1.1 - uFade * 1.25, field);
+    alpha *= keep * uOpacity;
+    if (alpha < 0.004) discard;
+    gl_FragColor = vec4(col * uGlobalGlow, clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+/**
+ * The floor under the crown, drawn opaque-ish (normal blending) so it can
+ * carry the ramp's deep stop: a wine-dark pool while the crown turns, then a
+ * furrowed soil crater, moss crawling out behind the green wave with lit
+ * veins breathing through it, and petal stains strewn over it.
+ */
+export function createBloomGroundMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1,
+    uniforms: sharedUniforms({
+      uCentre: { value: new Vector3() },
+      uExtent: { value: 8 },
+      uRadius: { value: 4 },
+      uPool: { value: 0 },
+      uCrater: { value: 0 },
+      uMoss: { value: 0 },
+      uMossOn: { value: 0 },
+      uStains: { value: 0 },
+      uBreathe: { value: 0 },
+      uFade: { value: 0 },
+      uOpacity: { value: 1 },
+      uSeed: { value: 0 },
+      uColorDeep: { value: new Color() },
+      uColorSoil: { value: new Color() },
+      uColorMoss: { value: new Color() },
+      uColorMossLit: { value: new Color() },
+      uColorStain: { value: new Color() }
+    }),
+    vertexShader: SIGIL_VERTEX.replace('0.016', '0.011'),
+    fragmentShader: GROUND_FRAGMENT
+  });
+
+  /** @param {object} s { centre, radius, pool, crater, moss, mossOn, stains, fade, seed } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCentre.value.copy(s.centre);
+    u.uRadius.value = Math.max(0.1, s.radius);
+    u.uExtent.value = Math.max(s.radius * 1.2, s.moss * 1.2) + 0.5;
+    u.uPool.value = s.pool;
+    u.uCrater.value = s.crater;
+    u.uMoss.value = s.moss;
+    u.uMossOn.value = s.mossOn;
+    u.uStains.value = s.stains;
+    u.uBreathe.value = c.mossBreathe * g.shaderIntensity;
+    u.uFade.value = s.fade;
+    u.uOpacity.value = c.groundOpacity * g.opacity;
+    u.uSeed.value = s.seed;
+    u.uColorDeep.value.copy(getColor(c.colorGroundDeep));
+    u.uColorSoil.value.copy(getColor(c.colorGroundSoil));
+    u.uColorMoss.value.copy(getColor(c.colorGroundMoss));
+    u.uColorMossLit.value.copy(getColor(c.colorGroundMossLit));
+    u.uColorStain.value.copy(getColor(c.colorGroundStain));
   };
 
   return material;

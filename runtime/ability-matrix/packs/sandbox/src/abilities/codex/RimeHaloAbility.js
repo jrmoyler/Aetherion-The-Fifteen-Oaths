@@ -87,6 +87,13 @@ function syncSystem(p, a, b, cc, d, size, glow, turb) {
  * flash and a crack, a crystal star printed on the floor beneath it. Then
  * the needles **drop and sublime**, tumbling, glittering, and the rime goes.
  *
+ * Upgrade: the spears are solid hexagonal crystals raised `needleRise` above
+ * the horizontal so the ring reads as a crown of spikes at 8 m, each coloured
+ * on a four-stop ramp (blue-black root → glacier blue → pale → white point);
+ * the cold-air distortion is kept under the crown so it no longer smears them
+ * into a glassy band, and the close eases in at power 1.35 so it visibly
+ * tightens.
+ *
  * Distinct from the other frost on purpose: nothing comes up out of the
  * floor (Ice, Glacier Crown, Permafrost), nothing travels down a line
  * (Avalanche, Glacial Shard Storm). This is a ring in the *air*, and its one
@@ -405,7 +412,7 @@ export class RimeHaloAbility extends Ability {
     /* --- cold air --- */
     const coldOn = smoothstep(0.6, 1, kw) * (1 - kl) * (1 - kf);
     this.cold.position.set(_centre.x, 0, _centre.z);
-    this.cold.scale.set(Math.max(0.2, Rh), Math.max(0.2, H), Math.max(0.2, Rh));
+    this.cold.scale.set(Math.max(0.2, Rh), Math.max(0.1, H * c.coldHeight), Math.max(0.2, Rh));
     _coldState.strength = coldOn;
     this.coldMaterial.userData.sync(_coldState);
     this.cold.visible = coldOn > 0.01;
@@ -452,8 +459,12 @@ export class RimeHaloAbility extends Ability {
       _pos.set(_centre.x + ca * Rh, y, _centre.z + sa * Rh);
       // Inward, swept back against the spin, tilted up or down.
       const tilt = (this.dice[d + 2] - 0.5) * 2 * c.needleTilt * g.randomness + (tier - (tiers - 1) * 0.5) * -0.12;
-      _dir.copy(_rad).multiplyScalar(-inward).addScaledVector(_tan, -(1 - inward));
-      _dir.y = Math.sin(tilt);
+      // Raised by `needleRise` so the ring reads as a crown of spikes, not a
+      // flat disc, at play distance.
+      _dir.copy(_rad).multiplyScalar(-inward).addScaledVector(_tan, -(1 - inward)).normalize();
+      const elev = tilt + c.needleRise;
+      _dir.multiplyScalar(Math.cos(elev));
+      _dir.y = Math.sin(elev);
       _dir.normalize();
 
       let len = c.needleLength * (1 - saturate(c.needleJitter) * this.dice[d + 1]) * Easing.outBack(grow);
@@ -475,7 +486,8 @@ export class RimeHaloAbility extends Ability {
       _m.compose(_pos, _q, _scale);
       this.needles.setMatrixAt(i, _m);
       state[k4] = this.dice[d + 4];
-      state[k4 + 1] = Math.max(grow * (1 - grow) * 4, lockFlash);
+      // A short crystallise flash early in the growth (not the whole slow tail of the walk).
+      state[k4 + 1] = Math.max(smoothstep(0, 0.2, grow) * (1 - smoothstep(0.2, 0.5, grow)), lockFlash);
       state[k4 + 2] = dissolve;
       state[k4 + 3] = 1;
       shown++;
@@ -633,13 +645,13 @@ export class RimeHaloAbility extends Ability {
     _emit.spin = 0;
     this.glitter.emit(Math.round(24 * g.particleCount), _emit);
     this.ctx.bursts.spawn(BurstMode.FROST, _pos, {
-      radius: 0.2,
-      endRadius: 1.2,
-      life: 0.4,
-      intensity: 1,
-      opacity: 0.6 * g.opacity,
+      radius: 0.15,
+      endRadius: c.catchBurst,
+      life: 0.35,
+      intensity: 0.8,
+      opacity: c.catchBurstOpacity * g.opacity,
       squash: 1,
-      colorA: getColor(c.colorSparkA),
+      colorA: getColor(c.colorSparkB),
       colorB: getColor(c.colorSparkC),
       colorC: getColor(c.colorSparkD)
     });
@@ -836,6 +848,7 @@ export function buildEditor(gui, c, Editor) {
   R(nd, c, 'needleJitter', 0, 1, 0.01, 'length variety');
   R(nd, c, 'needleInward', 0, 1, 0.01, 'point inward ↔ along ring');
   R(nd, c, 'needleTilt', 0, 1.2, 0.01, 'tilt variety (rad)');
+  R(nd, c, 'needleRise', -0.6, 1.4, 0.01, 'raised into a crown (rad)');
   R(nd, c, 'needleGrowTime', 0.01, 1, 0.01, 'crystallises over (s)');
   R(nd, c, 'needleFrost', 0, 1, 0.01, 'frost');
   R(nd, c, 'needleEnv', 0, 2, 0.01, 'sky reflection');
@@ -843,6 +856,10 @@ export function buildEditor(gui, c, Editor) {
   R(nd, c, 'needleTipGlow', 0, 12, 0.05, 'tip glow');
   R(nd, c, 'needleRimGlow', 0, 5, 0.05, 'rim glow');
   R(nd, c, 'needleFlashGlow', 0, 20, 0.1, 'crystallise flash');
+  R(nd, c, 'needleRamp', 0.3, 2.5, 0.01, 'ramp root → point');
+  R(nd, c, 'needleSpecular', 0, 8, 0.05, 'facet glint');
+  R(nd, c, 'needleGloss', 1, 200, 1, 'gloss');
+  nd.addColor(c, 'colorNeedleDeep').name('ice, deep');
   nd.addColor(c, 'colorNeedleBody').name('ice');
   nd.addColor(c, 'colorNeedleCore').name('filament');
   nd.addColor(c, 'colorNeedleRim').name('rim');
@@ -876,6 +893,7 @@ export function buildEditor(gui, c, Editor) {
   const air = folder.addFolder('5 · Cold air');
   R(air, c, 'coldWarp', 0, 3, 0.01, 'distortion');
   R(air, c, 'coldScale', 0.1, 6, 0.05, 'distortion scale');
+  R(air, c, 'coldHeight', 0.05, 1, 0.01, 'sheet height (× halo)');
   R(air, c, 'mistRate', 0, 400, 1, 'mist / s');
   R(air, c, 'mistSize', 0.05, 3, 0.05, 'mist size');
   R(air, c, 'mistLifetime', 0.1, 4, 0.05, 'mist lifetime');
@@ -901,6 +919,8 @@ export function buildEditor(gui, c, Editor) {
   R(hit, c, 'hitSpin', 0, 6, 0.05, 'spin');
   R(hit, c, 'freezeTime', 0.02, 3, 0.01, 'goes to ice over (s)');
   R(hit, c, 'frostTint', 0, 1, 0.01, 'frozen');
+  R(hit, c, 'catchBurst', 0, 3, 0.01, 'frost puff on a caught body (m)');
+  R(hit, c, 'catchBurstOpacity', 0, 1, 0.01, 'frost puff opacity');
   hit.addColor(c, 'colorBodyFrozen').name('frozen body');
   hit.addColor(c, 'colorBodyRim').name('rim');
   R(hit, c, 'bodyRimGlow', 0, 6, 0.05, 'rim glow');

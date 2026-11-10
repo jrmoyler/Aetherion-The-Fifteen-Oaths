@@ -14,7 +14,7 @@ export default {
     label: 'Event Horizon',
     accent: '#c9b6ff',
     key: '',
-    element: 'cosmic',
+    element: 'gravity',
     hint: 'Cosmic — a wall of black stands round the circle, draws it closed like a drawstring, and is sheared apart by a plane of light',
     cast: 'zone',
     glyph: `<ellipse cx="50" cy="26" rx="30" ry="8"/><path d="M20 26V74"/><path d="M80 26V74"/><ellipse cx="50" cy="74" rx="30" ry="8"/><path d="M8 52H92"/>`

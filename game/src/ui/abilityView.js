@@ -8,18 +8,26 @@ export const SLOT_KEYS = ['1', '2', '3', '4', '5', 'R'];
 
 const ELEMENT_VERB = {
   fire: 'searing', frost: 'freezing', storm: 'crackling', water: 'surging', earth: 'grinding', wind: 'howling', nature: 'living',
-  poison: 'corrosive', light: 'radiant', cosmic: 'gravitic', shadow: 'umbral', blood: 'sanguine', arcane: 'shimmering', time: 'temporal', tech: 'kinetic',
+  poison: 'corrosive', light: 'radiant', cosmic: 'astral', shadow: 'umbral', blood: 'sanguine', arcane: 'shimmering', time: 'temporal', tech: 'kinetic',
+  crystal: 'faceted', sound: 'resonant', holy: 'consecrated', gravity: 'gravitic', void: 'hollow', illusion: 'mirrored', motion: 'hurtling', force: 'concussive',
 };
+export const SCHOOL_LABEL = {
+  fire: 'Fire', frost: 'Frost', storm: 'Lightning', water: 'Water', earth: 'Earth', crystal: 'Crystal', wind: 'Wind', sound: 'Sound', nature: 'Nature',
+  poison: 'Poison', light: 'Light', holy: 'Holy', cosmic: 'Cosmic', gravity: 'Gravity', shadow: 'Shadow', void: 'Void', blood: 'Blood', arcane: 'Arcane',
+  illusion: 'Illusion', time: 'Time', motion: 'Motion', tech: 'Tech', force: 'Force',
+};
+export const schoolLabel = (a) => SCHOOL_LABEL[a?.school ?? a?.element] ?? '';
 
 export function describe(a, cls) {
   if (!a) return '';
-  const v = ELEMENT_VERB[a.element] || 'focused';
+  const v = ELEMENT_VERB[a.school ?? a.element] || 'focused';
   const r = (n) => (Number.isFinite(n) ? (Math.round(n * 10) / 10) : '?');
   if (a.kind === 'basic') {
     return cls === 'ninja'
       ? `A swift close-quarters strike against your target within ${r(a.range)} m. No mana cost — the rhythm every Ninja returns to.`
       : `A bolt of raw covenant force hurled at a target up to ${r(a.range)} m away. No mana cost.`;
   }
+  if (a.hint) return `${a.hint} ${a.shape === 'self' ? 'Centred on you.' : `Reaches ${r(a.range)} m${a.radius ? `, ${r(a.radius)} m wide` : ''}.`}`;
   switch (a.shape) {
     case 'line': return `Unleashes a ${v} line that travels up to ${r(a.range)} m, striking every foe within ${r(a.radius)} m of its path.`;
     case 'zone': return `Calls a ${v} zone of ${r(a.radius)} m radius at a point up to ${r(a.range)} m away, harming all enemies caught inside.`;

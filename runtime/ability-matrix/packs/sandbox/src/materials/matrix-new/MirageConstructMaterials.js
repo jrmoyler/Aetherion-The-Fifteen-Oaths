@@ -1,6 +1,18 @@
-import { AdditiveBlending, Color, DoubleSide, FrontSide, NormalBlending, ShaderMaterial, Vector3 } from 'three';
+import {
+  AdditiveBlending,
+  Color,
+  CustomBlending,
+  DoubleSide,
+  FrontSide,
+  NormalBlending,
+  OneFactor,
+  OneMinusSrcAlphaFactor,
+  ShaderMaterial,
+  Vector3
+} from 'three';
 import { noiseGLSL } from '../../shaders/lib/noise.glsl.js';
-import { sharedUniforms } from '../../core/FrameUniforms.js';
+import { commonGLSL } from '../../shaders/lib/common.glsl.js';
+import { frame, sharedUniforms } from '../../core/FrameUniforms.js';
 import { settings } from '../../config/settings.js';
 import { getColor } from '../../utils/color.js';
 
@@ -55,11 +67,16 @@ const BODY_VERTEX = /* glsl */ `
   uniform float uSlices;
   uniform float uFlickerRate;
   uniform float uSeed;
+  uniform float uMirror;      // 1 = the reflection in the false lake
+  uniform float uRipple;      // metres the reflection wavers sideways
+  uniform float uRippleFreq;  // ripples per metre down the reflection
+  uniform float uRippleSpeed;
 
   varying vec3  vWorld;
   varying vec3  vNormalW;
   varying vec3  vLocal;       // metres from the feet, before tearing
   varying float vH;           // metres above the feet
+  varying float vFlat;        // metres from the feet, across the floor
 
   float mhash(float n) { return fract(sin(n) * 43758.5453123); }
 
@@ -87,9 +104,19 @@ const BODY_VERTEX = /* glsl */ `
     float roll = mhash(band * 1.37 + tick * 0.71 + uSeed * 13.0);
     float tear = (mhash(band * 3.11 + tick * 1.93 + uSeed) - 0.5) * 2.0 * uGlitch * step(0.74, roll);
     world.xyz += right * tear + uOffset;
+    vec3 nW = normalize(mat3(modelMatrix) * objectNormal);
+
+    // The mirage's own trick: the copy hangs upside down in the false lake,
+    // wavering as if seen through rising air.
+    if (uMirror > 0.5) {
+      world.xyz += right * sin(h * uRippleFreq * 6.2831853 - uTime * uRippleSpeed + uSeed) * uRipple * min(h, 1.0);
+      world.y = 2.0 * uRoot.y - world.y;
+      nW.y = -nW.y;
+    }
+    vFlat = length(world.xz - uRoot.xz);
 
     vWorld = world.xyz;
-    vNormalW = normalize(mat3(modelMatrix) * objectNormal);
+    vNormalW = nW;
     gl_Position = projectionMatrix * viewMatrix * world;
   }
 `;
@@ -122,10 +149,22 @@ const BODY_FRAGMENT = /* glsl */ `
   uniform float uChargeGlow;
   uniform float uSeed;
   uniform float uAfter;         // 1 = afterimage
+  uniform float uMirror;        // 1 = reflection
+  uniform float uPoolR;         // metres: the reflection is clipped to the lake
+  uniform float uReflectFade;   // metres of depth over which it fades
+  uniform float uReflect;       // reflection strength
+  uniform vec3  uMirrorTint;
   uniform vec3  uColorRim;
   uniform vec3  uColorBand;
   uniform vec3  uColorEdge;
   uniform vec3  uTint;
+  uniform vec3  uColorDeep;     // the dark glass the copy is made of
+  uniform float uCover;         // how much that glass covers what is behind it
+  uniform vec3  uRoot;
+  uniform vec2      uResolution;
+  uniform sampler2D uSceneDepth;
+  uniform float     uCameraNear;
+  uniform float     uCameraFar;
   uniform float uGlobalGlow;
   uniform float uShaderIntensity;
 
@@ -133,8 +172,10 @@ const BODY_FRAGMENT = /* glsl */ `
   varying vec3  vNormalW;
   varying vec3  vLocal;
   varying float vH;
+  varying float vFlat;
 
   ${noiseGLSL}
+  ${commonGLSL}
 
   float band(float x) {
     return pow(0.5 + 0.5 * sin(x), uBandSharp);
@@ -192,21 +233,59 @@ const BODY_FRAGMENT = /* glsl */ `
     energy *= strobe * (1.0 + uCharge * uChargeGlow);
     energy *= mix(1.0, uShaderIntensity, 0.5);
 
-    if (energy < 0.004) discard;
-    gl_FragColor = vec4(color * energy * uGlow * uGlobalGlow, clamp(energy, 0.0, 1.0) * uOpacity);
+    float cover = uCover * (1.0 - clamp(burn, 0.0, 1.0)) * (1.0 - 0.5 * clamp(rim, 0.0, 1.0));
+    if (uMirror > 0.5) {
+      // Seen *in* the lake: the image of a point under the floor appears where
+      // the eye ray to it crosses the water, so clip on that crossing — not
+      // on the point's own xz, which lets the image spill toward the camera.
+      vec3 toP = vWorld - cameraPosition;
+      float k = (cameraPosition.y - uRoot.y) / max(cameraPosition.y - vWorld.y, 1e-3);
+      vec3 wet = cameraPosition + toP * clamp(k, 0.0, 1.0);
+      float crossR = length(wet.xz - uRoot.xz);
+      float inLake = 1.0 - smoothstep(uPoolR * 0.8, uPoolR * 0.97, crossR);
+      // Anything standing in front of the water hides the image.
+      vec4 crossView = viewMatrix * vec4(wet, 1.0);
+      vec2 screenUV = gl_FragCoord.xy / uResolution;
+      float seen = softFade(uSceneDepth, screenUV, crossView.z + 0.35, uCameraNear, uCameraFar, 0.2);
+      float depthFade = exp(-vH / max(uReflectFade, 0.05));
+      energy *= inLake * seen * depthFade * uReflect;
+      cover *= inLake * seen * depthFade;
+      color = mix(color, uMirrorTint, 0.45);
+    }
+    if (energy < 0.004 && cover < 0.004) discard;
+    vec3 light = color * energy * uGlow * uGlobalGlow;
+    if (uAfter > 0.5) {
+      gl_FragColor = vec4(light, clamp(energy, 0.0, 1.0) * uOpacity);
+    } else {
+      // Premultiplied over: a dark violet glass body (the deep stop) that
+      // covers what is behind it, so the copy reads as a silhouette with a
+      // pale rim and saturated interference bands, never a white blob.
+      float a = clamp(cover * uOpacity, 0.0, 1.0);
+      gl_FragColor = vec4(light * uOpacity + uColorDeep * a * 0.35, a);
+    }
   }
 `;
 
 /**
- * @param {boolean} after build the afterimage variant (offset, single tint)
+ * @param {boolean|'body'|'after'|'mirror'} mode `true`/`'after'` builds the
+ *   afterimage variant (offset, single tint); `'mirror'` builds the reflection
+ *   in the false lake (flipped through the floor in the vertex stage, drawn
+ *   without the depth test so it shows *in* the floor, clipped to the lake).
  */
-export function createMirageBodyMaterial(after = false) {
+export function createMirageBodyMaterial(mode = false) {
+  const kind = mode === true ? 'after' : mode || 'body';
+  const after = kind === 'after';
+  const mirror = kind === 'mirror';
   const material = new ShaderMaterial({
     transparent: true,
     depthWrite: false,
-    depthTest: true,
-    blending: AdditiveBlending,
-    side: FrontSide,
+    depthTest: !mirror,
+    // The copy and its reflection are dark glass over the scene (premultiplied
+    // over); the afterimages are pure fringe light (additive).
+    blending: after ? AdditiveBlending : CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
+    side: mirror ? DoubleSide : FrontSide,
     toneMapped: false,
     uniforms: sharedUniforms({
       uRoot: { value: new Vector3() },
@@ -237,18 +316,29 @@ export function createMirageBodyMaterial(after = false) {
       uCharge: { value: 0 },
       uChargeGlow: { value: 2 },
       uAfter: { value: after ? 1 : 0 },
+      uMirror: { value: mirror ? 1 : 0 },
+      uPoolR: { value: 2 },
+      uReflectFade: { value: 1.5 },
+      uReflect: { value: 0.6 },
+      uRipple: { value: 0.05 },
+      uRippleFreq: { value: 1.5 },
+      uRippleSpeed: { value: 3 },
+      uMirrorTint: { value: new Color() },
       uColorRim: { value: new Color() },
       uColorBand: { value: new Color() },
       uColorEdge: { value: new Color() },
-      uTint: { value: new Color() }
+      uTint: { value: new Color() },
+      uColorDeep: { value: new Color() },
+      uCover: { value: 0.6 }
     }),
     vertexShader: BODY_VERTEX,
     fragmentShader: BODY_FRAGMENT
   });
 
   /**
-   * @param {object} state { root, offset, form, breakup, charge, seed, tint, opacity }
-   *   `tint` is a settings colour key (afterimages), `opacity` a 0..1 multiplier.
+   * @param {object} state { root, offset, form, breakup, charge, seed, tint, opacity, poolR }
+   *   `tint` is a settings colour key (afterimages), `opacity` a 0..1 multiplier,
+   *   `poolR` the lake's grown radius in metres (reflection only).
    */
   material.userData.sync = (state) => {
     const c = settings.mirage;
@@ -261,7 +351,14 @@ export function createMirageBodyMaterial(after = false) {
     u.uBreak.value = state.breakup;
     u.uCharge.value = state.charge;
 
-    u.uHeight.value = c.bodyHeight;
+    u.uHeight.value = c.bodyHeight * Math.max(0.1, c.copyScale);
+    u.uPoolR.value = state.poolR ?? 0;
+    u.uReflectFade.value = c.reflectFade;
+    u.uReflect.value = c.reflectStrength;
+    u.uRipple.value = c.reflectRipple * g.noiseStrength;
+    u.uRippleFreq.value = c.reflectRippleFreq * g.noiseFrequency;
+    u.uRippleSpeed.value = c.reflectRippleSpeed * g.noiseSpeed;
+    u.uMirrorTint.value.copy(getColor(c.colorReflect));
     u.uGlitch.value = (c.glitch + c.chargeGlitch * state.charge) * g.randomness;
     u.uSlices.value = Math.max(1, Math.round(c.glitchSlices));
     u.uFlickerRate.value = c.flickerRate * g.animationSpeed;
@@ -285,6 +382,8 @@ export function createMirageBodyMaterial(after = false) {
     u.uColorRim.value.copy(getColor(c.colorBodyRim));
     u.uColorBand.value.copy(getColor(c.colorBodyBand));
     u.uColorEdge.value.copy(getColor(c.colorBodyEdge));
+    u.uColorDeep.value.copy(getColor(c.colorBodyDeep));
+    u.uCover.value = (mirror ? c.reflectCover : c.bodyCover) * (1 - state.breakup);
     if (state.tint) u.uTint.value.copy(getColor(c[state.tint]));
   };
 
@@ -298,10 +397,13 @@ export function createMirageBodyMaterial(after = false) {
 const POOL_VERTEX = /* glsl */ `
   uniform float uQuadSize;
   varying vec2 vFlat;
+  varying vec3 vWorld;
   void main() {
     vFlat = (uv - 0.5) * uQuadSize;
     vFlat.y = -vFlat.y;
-    gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+    vec4 world = modelMatrix * vec4(position, 1.0);
+    vWorld = world.xyz;
+    gl_Position = projectionMatrix * viewMatrix * world;
   }
 `;
 
@@ -322,42 +424,64 @@ const POOL_FRAGMENT = /* glsl */ `
   uniform float uFade;
   uniform float uFlare;
   uniform float uSeed;
+  uniform float uSky;          // how much sky the lake mirrors
+  uniform float uEvap;         // 0..1 the lake drying from its rim in
   uniform vec3  uColorA;
   uniform vec3  uColorB;
   uniform vec3  uColorC;
+  uniform vec3  uDeep;
+  uniform sampler2D uEnvMap;
   uniform float uGlobalGlow;
 
   varying vec2 vFlat;
+  varying vec3 vWorld;
 
   ${noiseGLSL}
 
+  vec2 lakeEquirect(vec3 dir) {
+    return vec2(atan(dir.z, dir.x) * 0.15915494 + 0.5,
+                asin(clamp(dir.y, -1.0, 1.0)) * 0.31830989 + 0.5);
+  }
+
   void main() {
     if (uRadius < 0.01) discard;
-    // The heat shimmer bends the rings before they are drawn.
+    // The heat shimmer bends everything in the lake before it is drawn.
     vec2 p = vFlat;
     vec2 bend = vec2(
       snoise(vec3(p * uShimmerScale, uTime * 0.9 + uSeed)),
       snoise(vec3(p * uShimmerScale + 7.1, uTime * 0.9 + uSeed))
     ) * uShimmer * 0.15;
-    float r = length(p + bend) / uRadius;
-    if (r > 1.15) discard;
+    float ang = atan(p.y, p.x);
+    // A ragged shoreline, which dries inward on the way out.
+    float shore = 1.0 + 0.07 * snoise(vec3(cos(ang) * 1.7, sin(ang) * 1.7, uSeed + uTime * 0.2));
+    float r = length(p + bend) / (uRadius * shore * (1.0 - 0.85 * uEvap));
+    if (r > 1.12) discard;
+    float fill = 1.0 - smoothstep(0.9, 1.0, r);
 
-    // Rings of interference running outward; thin, and sharper near the rim.
+    // A false lake: the deep tone, with the sky mirrored in it — what a mirage is.
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec3 R = reflect(-V, normalize(vec3(bend.x * 1.6, 1.0, bend.y * 1.6)));
+    vec3 sky = texture2D(uEnvMap, lakeEquirect(R)).rgb;
+    sky = sky / (1.0 + sky);
+    float grazing = pow(1.0 - clamp(V.y, 0.0, 1.0), 2.0);
+    vec3 mirror = sky * uColorA * uSky * (0.35 + 0.9 * grazing);
+
+    // Ripples of interference running outward, iridescent.
     float x = r * uRings - uTime * uRingSpeed;
     float ring = 1.0 - smoothstep(0.0, max(uRingWidth * uRings, 0.01), abs(fract(x) - 0.5) * 2.0 * 0.5);
-    ring *= 0.35 + 0.65 * r;
-
-    // Thin-film iridescence: the hue walks round with radius and time.
+    ring *= 0.25 + 0.75 * r;
+    // Broken by a slow noise into wavelets, so the lake reads as water
+    // ruffled by heat rather than a target board of rings.
+    ring *= smoothstep(-0.25, 0.65, snoise(vec3(p * 2.2 / max(uRadius, 0.1), uTime * 0.35 + uSeed * 1.7)));
     vec3 film = 0.5 + 0.5 * cos(TAU * (r * 1.7 - uTime * 0.12 + vec3(0.0, 0.33, 0.67)));
-    vec3 base = mix(uColorB, uColorA, ring);
-    vec3 color = mix(base, base * film * 1.6 + uColorC * 0.2, uIridescence * ring);
+    vec3 ripple = mix(uColorB, uColorC, 0.5 + 0.5 * sin(r * 9.0 - uTime)) * ring * (1.0 + uIridescence * (film - 0.5) * 2.0);
 
     float edge = exp(-pow((r - 1.0) / 0.05, 2.0)) * uEdgeGlow;
-    float body = (1.0 - smoothstep(0.82, 1.0, r)) * (0.12 + ring * 0.9);
-    float energy = (body + edge) * uFade * (1.0 + uFlare);
-    if (energy < 0.003) discard;
-    color = mix(color, uColorA, clamp(edge * 0.4, 0.0, 1.0));
-    gl_FragColor = vec4(color * energy * uGlow * uGlobalGlow, clamp(energy, 0.0, 1.0) * uOpacity);
+    vec3 light = (ripple * 0.55 + uColorA * edge) * uGlow * uGlobalGlow * (1.0 + uFlare);
+    vec3 color = uDeep + mirror + light;
+    float alpha = clamp(fill * uOpacity + edge * 0.4, 0.0, 1.0) * uFade;
+    if (alpha < 0.003) discard;
+    gl_FragColor = vec4(color, alpha);
   }
 `;
 
@@ -366,7 +490,7 @@ export function createMiragePoolMaterial() {
     transparent: true,
     depthWrite: false,
     depthTest: true,
-    blending: AdditiveBlending,
+    blending: NormalBlending,
     side: DoubleSide,
     toneMapped: false,
     uniforms: sharedUniforms({
@@ -384,15 +508,19 @@ export function createMiragePoolMaterial() {
       uFade: { value: 1 },
       uFlare: { value: 0 },
       uSeed: { value: 0 },
+      uSky: { value: 0.6 },
+      uEvap: { value: 0 },
       uColorA: { value: new Color() },
       uColorB: { value: new Color() },
-      uColorC: { value: new Color() }
+      uColorC: { value: new Color() },
+      uDeep: { value: new Color() }
     }),
     vertexShader: POOL_VERTEX,
     fragmentShader: POOL_FRAGMENT
   });
+  material.uniforms.uEnvMap = frame.uEnvMap;
 
-  /** @param {object} state { quadSize, radius, fade, flare, seed } */
+  /** @param {object} state { quadSize, radius, fade, flare, seed, evap } */
   material.userData.sync = (state) => {
     const c = settings.mirage;
     const g = settings.global;
@@ -402,6 +530,7 @@ export function createMiragePoolMaterial() {
     u.uFade.value = state.fade;
     u.uFlare.value = state.flare;
     u.uSeed.value = state.seed;
+    u.uEvap.value = state.evap ?? 0;
     u.uRings.value = c.poolRings;
     u.uRingSpeed.value = c.poolRingSpeed * g.noiseSpeed;
     u.uRingWidth.value = c.poolRingWidth;
@@ -411,11 +540,322 @@ export function createMiragePoolMaterial() {
     u.uEdgeGlow.value = c.poolEdgeGlow;
     u.uGlow.value = c.poolGlow * g.glow;
     u.uOpacity.value = c.poolOpacity * g.opacity;
+    u.uSky.value = c.poolSky;
     u.uColorA.value.copy(getColor(c.colorPoolA));
     u.uColorB.value.copy(getColor(c.colorPoolB));
     u.uColorC.value.copy(getColor(c.colorPoolC));
+    u.uDeep.value.copy(getColor(c.colorPoolDeep));
   };
 
+  return material;
+}
+
+/* ==================================================================== */
+/* The road (travel)                                                     */
+/* ==================================================================== */
+
+/**
+ * The way the mirage comes: a strip of false water racing along the floor
+ * from the caster's feet to the circle, widening as it goes, mirroring the
+ * sky, its leading edge a hot seam of shimmer. Drawn up to the projection's
+ * front; after landing it stays and dries from the caster's end toward the
+ * lake. Normal blending, so it carries the deep tone onto the floor.
+ */
+const ROAD_VERTEX = /* glsl */ `
+  uniform vec3  uStart;
+  uniform vec3  uDir;
+  uniform vec3  uSide;
+  uniform float uLength;
+  uniform float uNear;
+  uniform float uFar;
+  varying vec2 vS;     // metres along, −1..1 across
+  varying vec3 vWorld;
+  void main() {
+    float t = position.x + 0.5;
+    float along = t * uLength;
+    float hw = mix(uNear, uFar, t);
+    vec3 world = uStart + uDir * along + uSide * position.y * 2.0 * hw;
+    world.y = 0.016;
+    vS = vec2(along, position.y * 2.0);
+    vWorld = world;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const ROAD_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uFront;     // metres: the projection's leading edge
+  uniform float uDry;       // metres from the caster end already dried
+  uniform float uOpacity;
+  uniform float uSky;
+  uniform float uSeam;
+  uniform float uShimmer;
+  uniform float uSeed;
+  uniform float uGlobalGlow;
+  uniform vec3  uDeep;
+  uniform vec3  uTint;
+  uniform vec3  uHot;
+  uniform sampler2D uEnvMap;
+  varying vec2 vS;
+  varying vec3 vWorld;
+
+  ${noiseGLSL}
+
+  vec2 roadEquirect(vec3 dir) {
+    return vec2(atan(dir.z, dir.x) * 0.15915494 + 0.5,
+                asin(clamp(dir.y, -1.0, 1.0)) * 0.31830989 + 0.5);
+  }
+
+  void main() {
+    float d = vS.x;
+    float n = snoise(vec3(d * 0.7 - uTime * 1.2, vS.y * 1.3, uSeed));
+    if (d > uFront || d < uDry + n * 0.6) discard;
+    float across = 1.0 - smoothstep(0.55 + 0.25 * n, 1.0, abs(vS.y));
+    float foot = smoothstep(0.0, 1.2, d);
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec2 wob = vec2(snoise(vec3(vWorld.xz * 1.4, uTime * 1.5)), snoise(vec3(vWorld.zx * 1.4, uTime * 1.5 + 4.0))) * uShimmer;
+    vec3 R = reflect(-V, normalize(vec3(wob.x, 1.0, wob.y)));
+    vec3 sky = texture2D(uEnvMap, roadEquirect(R)).rgb;
+    sky = sky / (1.0 + sky);
+    float seam = exp(-pow((uFront - d) / 0.6, 2.0)) * uSeam;
+    float dry = exp(-pow((d - uDry) / 0.5, 2.0)) * step(0.01, uDry) * 0.6;
+    vec3 col = uDeep + sky * uTint * uSky + uHot * (seam + dry) * uGlobalGlow;
+    float a = across * foot * uOpacity;
+    gl_FragColor = vec4(col, clamp(a + seam * across * 0.3, 0.0, 1.0));
+  }
+`;
+
+export function createMirageRoadMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1,
+    uniforms: sharedUniforms({
+      uStart: { value: new Vector3() },
+      uDir: { value: new Vector3(0, 0, 1) },
+      uSide: { value: new Vector3(1, 0, 0) },
+      uLength: { value: 10 },
+      uNear: { value: 0.3 },
+      uFar: { value: 1.2 },
+      uFront: { value: 0 },
+      uDry: { value: 0 },
+      uOpacity: { value: 0.7 },
+      uSky: { value: 0.6 },
+      uSeam: { value: 2 },
+      uShimmer: { value: 0.2 },
+      uSeed: { value: 0 },
+      uDeep: { value: new Color() },
+      uTint: { value: new Color() },
+      uHot: { value: new Color() }
+    }),
+    vertexShader: ROAD_VERTEX,
+    fragmentShader: ROAD_FRAGMENT
+  });
+  material.uniforms.uEnvMap = frame.uEnvMap;
+
+  /** @param {object} s { start, dir, side, length, front, dry, fade, seed } */
+  material.userData.sync = (s) => {
+    const c = settings.mirage;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uStart.value.copy(s.start);
+    u.uDir.value.copy(s.dir);
+    u.uSide.value.copy(s.side);
+    u.uLength.value = Math.max(0.1, s.length);
+    u.uNear.value = c.roadWidthNear * 0.5;
+    u.uFar.value = c.roadWidthFar * 0.5;
+    u.uFront.value = s.front;
+    u.uDry.value = s.dry;
+    u.uOpacity.value = c.roadOpacity * g.opacity * s.fade;
+    u.uSky.value = c.poolSky;
+    u.uSeam.value = c.roadSeam * g.glow;
+    u.uShimmer.value = c.poolShimmer * 0.5 * g.noiseStrength;
+    u.uSeed.value = s.seed;
+    u.uDeep.value.copy(getColor(c.colorPoolDeep));
+    u.uTint.value.copy(getColor(c.colorPoolA));
+    u.uHot.value.copy(getColor(c.colorBodyEdge));
+  };
+  return material;
+}
+
+/* ==================================================================== */
+/* The heat veil                                                         */
+/* ==================================================================== */
+
+/**
+ * Tongues of bent air standing in a ring round the copy. Placed entirely in
+ * the vertex stage from `createMirageVeilGeometry`'s `(t, a, i)`: seated on
+ * `veilSeat × zoneRadius`, each ribbon turned to run round the ring, swaying
+ * with a wave that climbs it, tapering to a tip like a flame of heat. The
+ * charge **pulls** the tips in over the copy (the illusion gathering); the
+ * burst **blows** them outward and they thin to nothing (the exit). Additive:
+ * interference bands rolling up them with the R/B phase split of the copy,
+ * so the veil and the body read as one illusion.
+ */
+const VEIL_VERTEX = /* glsl */ `
+  #define TAU 6.28318530718
+  uniform float uTime;
+  uniform vec3  uCentre;
+  uniform float uRadius;
+  uniform float uHeight;
+  uniform float uWidth;
+  uniform float uCount;
+  uniform float uSway;
+  uniform float uSwayFreq;
+  uniform float uSwaySpeed;
+  uniform float uSpin;
+  uniform float uPull;
+  uniform float uBlow;
+  uniform float uRise;
+  uniform float uSeed;
+  varying float vT;
+  varying float vA;
+  varying float vI;
+  varying vec3  vWorld;
+
+  float vhash(float n) { return fract(sin(n * 91.345 + uSeed) * 43758.5453); }
+
+  void main() {
+    float t = position.x;
+    float a = position.y;
+    float i = position.z;
+    float jit = vhash(i);
+    float ang = (i + 0.35 * jit) / uCount * TAU + uTime * uSpin + t * 0.35;
+    // Each ribbon its own height, rising out of the floor.
+    float h = uHeight * (0.75 + 0.45 * jit) * t * uRise;
+    // Lean in on the charge, out on the burst, more at the tip.
+    float rad = uRadius * (1.0 - uPull * (0.15 + 0.7 * t)) * (1.0 + uBlow * (0.4 + 1.4 * t));
+    float sway = sin(t * uSwayFreq * TAU - uTime * uSwaySpeed + i * 2.3) * uSway * t;
+    float width = uWidth * pow(max(1.0 - t, 0.0), 0.55) * (1.0 - 0.6 * uBlow);
+    vec3 radial = vec3(cos(ang), 0.0, sin(ang));
+    vec3 tangent = vec3(-sin(ang), 0.0, cos(ang));
+    vec3 world = uCentre + radial * (rad + sway * 0.6) + tangent * (a * width * 0.5 + sway) + vec3(0.0, h, 0.0);
+    vT = t; vA = a; vI = i; vWorld = world;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const VEIL_FRAGMENT = /* glsl */ `
+  #define TAU 6.28318530718
+  uniform float uTime;
+  uniform float uGlow;
+  uniform float uOpacity;
+  uniform float uBands;
+  uniform float uBandSpeed;
+  uniform float uChroma;
+  uniform float uFade;
+  uniform float uSeed;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
+  uniform vec3  uCore;
+  uniform vec3  uTint;
+  uniform vec3  uBody;
+  uniform vec3  uDeep;
+  uniform float uCover;
+  varying float vT;
+  varying float vA;
+  varying float vI;
+  varying vec3  vWorld;
+
+  ${noiseGLSL}
+
+  void main() {
+    float n = snoise(vec3(vA * 1.5 + vI * 3.1, vT * 4.0 - uTime * 1.6, uSeed));
+    float across = 1.0 - smoothstep(0.35 + 0.3 * n, 1.0, abs(vA));
+    float foot = smoothstep(0.0, 0.08, vT);
+    float tip = 1.0 - smoothstep(0.55 + 0.25 * n, 1.0, vT);
+    float ph = (vT * uBands - uTime * uBandSpeed + n * 0.4) * TAU;
+    vec3 bands = vec3(0.5 + 0.5 * sin(ph + uChroma * TAU), 0.5 + 0.5 * sin(ph), 0.5 + 0.5 * sin(ph - uChroma * TAU));
+    bands = pow(bands, vec3(3.0));
+    float spine = exp(-vA * vA * 9.0);
+    vec3 col = uBody * (0.35 + 0.65 * bands) + uTint * bands * 0.8 + uCore * spine * (1.0 - vT) * 0.6;
+    // The deep stop: tongues smoke out to dark violet toward their tips and
+    // ragged edges, and that smoke covers the sky behind (premultiplied).
+    float deep = clamp(smoothstep(0.4, 0.95, vT) * 0.75 + (1.0 - across) * 0.35, 0.0, 1.0);
+    col = mix(col, uDeep, deep);
+    float e = across * foot * tip * (0.55 + 0.45 * n) * uFade;
+    if (e < 0.003) discard;
+    float cover = clamp(e * uCover * (0.3 + 0.7 * deep), 0.0, 1.0);
+    gl_FragColor = vec4(col * e * uGlow * uGlobalGlow * uShaderIntensity * uOpacity, cover * uOpacity);
+  }
+`;
+
+export function createMirageVeilMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: true,
+    blending: CustomBlending,
+    blendSrc: OneFactor,
+    blendDst: OneMinusSrcAlphaFactor,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCentre: { value: new Vector3() },
+      uRadius: { value: 2 },
+      uHeight: { value: 3.5 },
+      uWidth: { value: 1.2 },
+      uCount: { value: 9 },
+      uSway: { value: 0.2 },
+      uSwayFreq: { value: 1.2 },
+      uSwaySpeed: { value: 3 },
+      uSpin: { value: 0.2 },
+      uPull: { value: 0 },
+      uBlow: { value: 0 },
+      uRise: { value: 0 },
+      uSeed: { value: 0 },
+      uGlow: { value: 1 },
+      uOpacity: { value: 0.6 },
+      uBands: { value: 6 },
+      uBandSpeed: { value: 1.5 },
+      uChroma: { value: 0.16 },
+      uFade: { value: 1 },
+      uCore: { value: new Color() },
+      uTint: { value: new Color() },
+      uBody: { value: new Color() },
+      uDeep: { value: new Color() },
+      uCover: { value: 0.35 }
+    }),
+    vertexShader: VEIL_VERTEX,
+    fragmentShader: VEIL_FRAGMENT
+  });
+
+  /** @param {object} s { centre, rise, pull, blow, fade, seed } */
+  material.userData.sync = (s) => {
+    const c = settings.mirage;
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCentre.value.copy(s.centre);
+    u.uRadius.value = Math.max(0.2, c.zoneRadius) * c.veilSeat;
+    u.uHeight.value = c.veilHeight;
+    u.uWidth.value = c.veilWidth;
+    u.uCount.value = Math.max(1, Math.round(c.veilCount));
+    u.uSway.value = c.veilSway * g.turbulence;
+    u.uSwayFreq.value = c.veilSwayFreq * g.noiseFrequency;
+    u.uSwaySpeed.value = c.veilSwaySpeed * g.animationSpeed;
+    u.uSpin.value = c.veilSpin * g.animationSpeed;
+    u.uPull.value = s.pull;
+    u.uBlow.value = s.blow;
+    u.uRise.value = s.rise;
+    u.uSeed.value = s.seed;
+    u.uGlow.value = c.veilGlow * g.glow;
+    u.uOpacity.value = c.veilOpacity * g.opacity;
+    u.uBands.value = c.veilBands * g.noiseFrequency;
+    u.uBandSpeed.value = c.bandSpeed * g.noiseSpeed;
+    u.uChroma.value = c.chromaSplit;
+    u.uFade.value = s.fade;
+    u.uCore.value.copy(getColor(c.colorBodyEdge));
+    u.uTint.value.copy(getColor(c.colorVeilTint));
+    u.uBody.value.copy(getColor(c.colorVeil));
+    u.uDeep.value.copy(getColor(c.colorVeilDeep));
+    u.uCover.value = c.veilCover;
+  };
   return material;
 }
 

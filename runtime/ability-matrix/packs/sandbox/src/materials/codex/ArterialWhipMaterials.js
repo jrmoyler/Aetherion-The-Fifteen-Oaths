@@ -59,6 +59,11 @@ const VESSEL_GLSL = /* glsl */ `
   uniform float uSwell;
   uniform float uPulse;       // integrated pulse phase
   uniform float uPulseSpacing;
+  uniform float uWrithe;      // metres of sideways serpentine while it lies
+  uniform float uWritheLen;
+  uniform float uWrithePhase;
+  uniform float uRear;        // metres the head is reared off the floor
+  uniform float uRearFrom;    // share of the length from which it rears
 
   vec3 vesselPoint(float s) {
     vec3 p = mix(uHand, uTip, s);
@@ -68,7 +73,12 @@ const VESSEL_GLSL = /* glsl */ `
     float bow = sin(3.14159265 * s) * (1.0 - 0.35 * s);
     p.y += (uArch * bow + uWaveAmp * env * sin(ph)) * uSlack;
     p += uSide * (uSway * env * cos(ph * 0.7)) * abs(uSlack);
+    // Lying on the floor it writhes: a serpentine crawling hand -> tip.
+    p += uSide * (uWrithe * smoothstep(0.03, 0.25, s) * sin(6.2831853 * s * L / max(uWritheLen, 0.1) - uWrithePhase));
     p.y = max(p.y, uFloor);
+    // ...and the torn head rears up and strikes the floor again.
+    float rs = smoothstep(uRearFrom, 1.0, s);
+    p.y += uRear * rs * rs;
     return p;
   }
 
@@ -222,6 +232,11 @@ export function createVesselMaterial() {
       uSwell: { value: 0.5 },
       uPulse: { value: 0 },
       uPulseSpacing: { value: 2.5 },
+      uWrithe: { value: 0 },
+      uWritheLen: { value: 2.5 },
+      uWrithePhase: { value: 0 },
+      uRear: { value: 0 },
+      uRearFrom: { value: 0.6 },
       uSeed: { value: 0 },
       uScale: { value: 1 },
       uPulseGlow: { value: 3 },
@@ -243,7 +258,7 @@ export function createVesselMaterial() {
     fragmentShader: VESSEL_FRAGMENT
   });
 
-  /** @param {object} state { hand, tip, side, slack, wavePhase, pulse, seed, dissolve, flash } */
+  /** @param {object} state { hand, tip, side, slack, wavePhase, pulse, seed, dissolve, flash, writhe, writhePhase, rear, thick } */
   material.userData.sync = (state) => {
     const c = settings[ID];
     const g = settings.global;
@@ -266,6 +281,12 @@ export function createVesselMaterial() {
     u.uSwell.value = c.pulseSwell;
     u.uPulse.value = state.pulse;
     u.uPulseSpacing.value = c.pulseSpacing;
+    u.uWrithe.value = state.writhe;
+    u.uWritheLen.value = c.writheLength;
+    u.uWrithePhase.value = state.writhePhase;
+    u.uRear.value = state.rear;
+    u.uRearFrom.value = Math.min(0.95, Math.max(0, c.rearFrom));
+    u.uScale.value = state.thick;
     u.uSeed.value = state.seed;
     u.uPulseGlow.value = c.pulseGlow * g.glow;
     u.uBaseGlow.value = c.wallGlow * g.glow;
@@ -322,6 +343,13 @@ const SPLATTER_FRAGMENT = /* glsl */ `
   uniform float uFadeT;
   uniform float uOpacity;
   uniform float uSheen;
+  uniform float uAge;         // seconds since it was painted
+  uniform float uPoolGrow;    // how far the smear spreads into a pool (x its width)
+  uniform float uPoolTime;
+  uniform float uFlowSpeed;   // m/s the wet sheen runs down the line
+  uniform float uPulse;
+  uniform float uPulseSpacing;
+  uniform float uPoolPulse;
   uniform vec3  uColorFresh;
   uniform vec3  uColorDark;
   uniform vec3  uColorDry;
@@ -333,7 +361,7 @@ const SPLATTER_FRAGMENT = /* glsl */ `
   ${noiseGLSL}
 
   /** Spatter: one drop per cell, kept or not by density, stretched outward. */
-  float spatter(vec2 p) {
+  float spatter(vec2 p, float grow) {
     vec2 cell = p / uDotScale;
     vec2 ic = floor(cell);
     float best = 0.0;
@@ -347,7 +375,7 @@ const SPLATTER_FRAGMENT = /* glsl */ `
         float side = abs(c.x) / max(uSpread, 0.05);
         float keep = step(h3, uDensity * (1.0 - side * 0.85));
         if (keep < 0.5 || side > 1.0) continue;
-        float rad = uDotScale * mix(0.12, 0.42, pow(hash13(vec3(id, uSeed + 9.9)), 2.0)) * (1.0 - side * 0.5);
+        float rad = uDotScale * mix(0.12, 0.42, pow(hash13(vec3(id, uSeed + 9.9)), 2.0)) * (1.0 - side * 0.5) * grow;
         vec2 q = p - c;
         // Flung outward: stretched across the line, more the further out.
         float st = 1.0 + uFling * side;
@@ -364,21 +392,31 @@ const SPLATTER_FRAGMENT = /* glsl */ `
     float along = vFlat.y;
     if (along < 0.0 || along > uReveal) discard;
 
+    // The smear keeps spreading into a pool while it is wet.
+    float spread = 1.0 - exp(-uAge / max(uPoolTime, 0.05));
+    float grow = 1.0 + uPoolGrow * spread * (0.6 + 0.4 * snoise(vec3(along * 0.7, uSeed + 5.0, 0.0)));
     float wig = snoise(vec3(along * 0.4, uSeed, 0.0)) * uStroke * 0.8;
-    float w = uStroke * (0.55 + 0.45 * snoise(vec3(along * 1.3, uSeed + 2.0, 0.0)));
-    float stroke = 1.0 - smoothstep(w * 0.55, w, abs(x - wig));
-    // the smear breaks up where the vessel's joints struck
-    stroke *= 0.7 + 0.3 * smoothstep(-0.3, 0.4, snoise(vec3(along * 3.0, x * 4.0, uSeed)));
-    float dots = spatter(vFlat);
+    // One continuous pool down the line: the width wanders but never pinches
+    // off, and its edge is ragged rather than its middle.
+    float w = uStroke * (0.8 + 0.2 * snoise(vec3(along * 1.3, uSeed + 2.0, 0.0))) * grow;
+    float edgeN = snoise(vec3(along * 2.2, x * 2.5, uSeed + 11.0)) * 0.18;
+    float stroke = 1.0 - smoothstep(w * (0.6 + edgeN), w * (1.0 + edgeN), abs(x - wig));
+    // a faint grain where the vessel's joints struck — the pool stays whole
+    stroke *= 0.88 + 0.12 * smoothstep(-0.3, 0.4, snoise(vec3(along * 3.0, x * 4.0, uSeed)));
+    float dots = spatter(vFlat, mix(1.0, grow, 0.45));
     float m = max(stroke, dots);
     m *= smoothstep(0.0, 0.5, along) * (1.0 - smoothstep(uReveal - 0.3, uReveal, along) * 0.0);
 
-    // wet sheen
-    float g = snoise(vec3(vFlat * 6.0, uSeed));
-    vec3 V = normalize(cameraPosition);
+    // wet sheen, running down the line toward the tip
+    vec2 fp = vec2(vFlat.x, vFlat.y - uAge * uFlowSpeed);
+    float g = snoise(vec3(fp * vec2(6.0, 2.5), uSeed));
     float spec = pow(max(g, 0.0), 6.0) * uWet * (1.0 - uDry);
-    vec3 col = mix(uColorDark, uColorFresh, stroke * 0.5 + dots * 0.3);
-    col += uColorFresh * uSheen * (1.0 - uDry) * uGlobalGlow * stroke * 0.4;
+    // the pulse still in it: fresh blood welling as each beat passes
+    float well = pow(0.5 + 0.5 * sin(6.2831853 * (along / max(uPulseSpacing, 0.1) - uPulse)), 6.0) * uPoolPulse * (1.0 - uDry);
+    // dark at the rim of the pool, fresh in its middle
+    float body = stroke * (0.35 + 0.65 * smoothstep(0.0, w * 0.6, w - abs(x - wig)));
+    vec3 col = mix(uColorDark, uColorFresh, body * 0.42 + dots * 0.22);
+    col += uColorFresh * uSheen * (1.0 - uDry) * uGlobalGlow * stroke * (0.3 + well);
     col += vec3(spec * 0.6);
     col = mix(col, uColorDry, uDry);
 
@@ -421,6 +459,13 @@ export function createSplatterMaterial() {
       uFadeT: { value: 0 },
       uOpacity: { value: 1 },
       uSheen: { value: 0.5 },
+      uAge: { value: 0 },
+      uPoolGrow: { value: 1 },
+      uPoolTime: { value: 1 },
+      uFlowSpeed: { value: 0.5 },
+      uPulse: { value: 0 },
+      uPulseSpacing: { value: 2.4 },
+      uPoolPulse: { value: 0.5 },
       uColorFresh: { value: new Color() },
       uColorDark: { value: new Color() },
       uColorDry: { value: new Color() }
@@ -429,7 +474,7 @@ export function createSplatterMaterial() {
     fragmentShader: SPLATTER_FRAGMENT
   });
 
-  /** @param {object} state { start, dir, side, length, reveal, dry, fadeT, seed } */
+  /** @param {object} state { start, dir, side, length, reveal, dry, fadeT, seed, age, pulse } */
   material.userData.sync = (state) => {
     const c = settings[ID];
     const g = settings.global;
@@ -438,7 +483,7 @@ export function createSplatterMaterial() {
     u.uDir.value.copy(state.dir);
     u.uSide.value.copy(state.side);
     u.uLength.value = Math.max(0.1, state.length);
-    u.uHalfWidth.value = Math.max(c.spatterSpread, c.strokeWidth) + 0.3;
+    u.uHalfWidth.value = Math.max(c.spatterSpread, c.strokeWidth * (1 + Math.max(0, c.poolGrow))) + 0.3;
     u.uSeed.value = state.seed;
     u.uReveal.value = state.reveal;
     u.uStroke.value = Math.max(0.01, c.strokeWidth);
@@ -451,6 +496,13 @@ export function createSplatterMaterial() {
     u.uFadeT.value = state.fadeT;
     u.uOpacity.value = c.splatterOpacity * g.opacity;
     u.uSheen.value = c.splatterSheen;
+    u.uAge.value = state.age;
+    u.uPoolGrow.value = c.poolGrow;
+    u.uPoolTime.value = c.poolTime;
+    u.uFlowSpeed.value = c.poolFlow * settings.global.noiseSpeed;
+    u.uPulse.value = state.pulse;
+    u.uPulseSpacing.value = c.pulseSpacing;
+    u.uPoolPulse.value = c.poolPulse * g.glow;
     u.uColorFresh.value.copy(getColor(c.colorSplatterFresh));
     u.uColorDark.value.copy(getColor(c.colorSplatterDark));
     u.uColorDry.value.copy(getColor(c.colorSplatterDry));

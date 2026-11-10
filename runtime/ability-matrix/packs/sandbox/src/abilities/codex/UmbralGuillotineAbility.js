@@ -14,7 +14,8 @@ import {
   createAnchorMaterial,
   createSmearMaterial,
   createSmearWarpMaterial,
-  createCleftMaterial
+  createCleftMaterial,
+  createShadowPoolMaterial
 } from '../../materials/codex/UmbralGuillotineMaterials.js';
 import { ParticleShape } from '../../particles/ParticleSystem.js';
 import { RateEmitter } from '../../particles/ParticleEngine.js';
@@ -27,6 +28,9 @@ import { getColor } from '../../utils/color.js';
 import { saturate, lerp, smoothstep, Easing } from '../../utils/math.js';
 
 export const ID = 'umbral';
+
+/** Slashes the edge can score into the floor in one cast. */
+const MAX_SLASH = 10;
 
 const _emit = {};
 const _pos = new Vector3();
@@ -79,6 +83,14 @@ const INNER_A = Math.atan2(-BLADE_BELLY / 2, TIP_X);
  *   5. **the cleft** (`createCleftMaterial`) — the gash in the floor.
  *   6. **smoke & sparks** — black smoke shed off the spine (non-additive),
  *      violet sparks off the edge, a scorch and a spray where it passes low.
+ *   8. **the shadow pool** (`createShadowPoolMaterial`) — the linger's body:
+ *      the chop spills a disc of near-black shadow out of the cleft (radius
+ *      derived from `chopRadius`), tendrils crawling at its lip, violet veins
+ *      swirling in toward the blade; violet wisps (additive SOFT) and black
+ *      smoke rise off it; the buried blade sinks into it as it dissolves.
+ *      Each low pass of the swing also cuts a short glowing slash across the
+ *      line (the cleft shader again), so the floor keeps a record of the
+ *      swing until the cast goes.
  *   7. **the cut** — `handlesOwnHits`: a body is cut (`kill(…, true)`) when the
  *      edge passes it low, thrown the way the blade is moving; anything on
  *      the line the pivot passes is taken regardless; the chop takes the
@@ -108,8 +120,26 @@ export class UmbralGuillotineAbility extends Ability {
     this.smearGeometry = createSmearGeometry(48, 8);
     this.quadGeometry = createQuadGeometry();
 
+    this.poolMaterial = createShadowPoolMaterial();
+    this.pool = this._mesh(this.quadGeometry, this.poolMaterial, LAYER.VFX, 1);
+    this._poolState = { center: new Vector3(), radius: 3, spread: 0, erode: 0, pulse: 0, seed: 0 };
+
     this.cleftMaterial = createCleftMaterial();
     this.cleft = this._mesh(this.quadGeometry, this.cleftMaterial, LAYER.VFX, 2);
+
+    /* the slashes scored at each low pass — dice and a birth time only */
+    this._slashes = [];
+    for (let i = 0; i < MAX_SLASH; i++) {
+      const material = createCleftMaterial();
+      const mesh = this._mesh(this.quadGeometry, material, LAYER.VFX, 2);
+      this._slashes.push({
+        mesh,
+        material,
+        born: -1,
+        state: { center: new Vector3(), axis: new Vector3(1, 0, 0), open: 0, heat: 1, erode: 0, seed: 0, halfLength: 1, gash: 0.15, glow: 2 }
+      });
+    }
+    this._slashNext = 0;
 
     this.bladeMaterial = createBladeMaterial();
     this.blade = this._mesh(this.bladeGeometry, this.bladeMaterial, LAYER.VFX, 6);
@@ -189,8 +219,25 @@ export class UmbralGuillotineAbility extends Ability {
     this.sparks.uniforms.uEndSize.value = 0.3;
     this.sparks.uniforms.uDrag.value = 1.4;
 
+    // Rising wisps: violet streaks drawn up off the pool, curling as they go.
+    this.wisps = particles.get('umbral.wisps', {
+      capacity: 1600,
+      shape: ParticleShape.STREAK,
+      additive: true,
+      stretch: true,
+      curl: true,
+      softFade: 0.4
+    });
+    this.wisps.uniforms.uSizeIn.value = 0.2;
+    this.wisps.uniforms.uFadeIn.value = 0.15;
+    this.wisps.uniforms.uFadeOut.value = 0.5;
+    this.wisps.uniforms.uEndSize.value = 0.5;
+    this.wisps.uniforms.uDrag.value = 0.4;
+
     this.smokeEmitter = new RateEmitter();
     this.sparkEmitter = new RateEmitter();
+    this.wispEmitter = new RateEmitter();
+    this.poolSmokeEmitter = new RateEmitter();
   }
 
   /* ------------------------------------------------------------------ */
@@ -284,6 +331,8 @@ export class UmbralGuillotineAbility extends Ability {
     const c = settings[ID];
     this.smokeEmitter.reset();
     this.sparkEmitter.reset();
+    this.wispEmitter.reset();
+    this.poolSmokeEmitter.reset();
     this._seed = Math.random() * 100;
     this._sign = Math.random() < 0.5 ? 1 : -1;
     // Drawn back to one side: θ = −amp·sign at the start.
@@ -317,6 +366,15 @@ export class UmbralGuillotineAbility extends Ability {
     this.smear.visible = false;
     this.smearWarp.visible = false;
     this.cleft.visible = false;
+    this.pool.visible = false;
+    this._poolState.seed = this._seed;
+    this._poolState.spread = 0;
+    this._poolState.erode = 0;
+    this._slashNext = 0;
+    for (const sl of this._slashes) {
+      sl.born = -1;
+      sl.mesh.visible = false;
+    }
 
     this._pivotAt(0, this._pivot);
     this._place(this._pivot, this._theta, this._arm);
@@ -367,6 +425,46 @@ export class UmbralGuillotineAbility extends Ability {
     k.uOpacity.value = g.opacity;
     k.uGlow.value = c.sparkGlow * g.glow;
     k.uTurbulence.value = 0.2 * g.turbulence;
+
+    this.wisps.setGradient(getColor(c.colorWispA), getColor(c.colorWispB), getColor(c.colorWispC), getColor(c.colorWispD));
+    const w = this.wisps.uniforms;
+    w.uGravity.value.set(0, 0.6, 0);
+    w.uStretch.value = 0.35;
+    w.uSizeScale.value = g.particleSize;
+    w.uLifeScale.value = g.particleLifetime;
+    w.uSpeedScale.value = g.particleSpeed;
+    w.uOpacity.value = g.opacity;
+    w.uGlow.value = c.wispGlow * g.glow;
+    w.uTurbulence.value = 1.0 * g.turbulence;
+  }
+
+  /** The slashes the swing has scored: open fast, cool, erode with the exit. */
+  _updateSlashes(ft) {
+    const c = settings[ID];
+    for (const sl of this._slashes) {
+      if (sl.born < 0) continue;
+      const since = this.age - sl.born;
+      const st = sl.state;
+      st.open = Easing.outCubic(saturate(since / 0.1));
+      st.heat = lerp(0.3, 1, Math.exp(-since * 2.5)) * (1 - smoothstep(0.3, 1, ft));
+      st.erode = smoothstep(0.3, 1, ft);
+      st.halfLength = c.slashLength * 0.5;
+      st.gash = c.slashWidth;
+      st.glow = c.slashGlow;
+      sl.material.userData.sync(st);
+      sl.mesh.visible = st.erode < 0.999;
+    }
+  }
+
+  _addSlash(at) {
+    const sl = this._slashes[this._slashNext % MAX_SLASH];
+    this._slashNext++;
+    sl.born = this.age;
+    sl.state.center.copy(at);
+    sl.state.axis.copy(this.side);
+    sl.state.seed = Math.random() * 100;
+    sl.state.open = 0;
+    sl.mesh.visible = true;
   }
 
   /** The smear of the arc behind the edge, from the angular speed. */
@@ -407,8 +505,8 @@ export class UmbralGuillotineAbility extends Ability {
 
     this._arm = c.armLength;
     if (form >= 1) this._phi += c.swingRate * dt * g.animationSpeed;
-    // Drawn back a little further while it forms — the wind-up.
-    const windUp = 1 + 0.18 * Easing.outCubic(form) * (1 - saturate((this.age - formT) / 0.15));
+    // Drawn back a little further while it forms — the wind-up (small: the horn stays in shot).
+    const windUp = 1 + 0.08 * Easing.outCubic(form) * (1 - saturate((this.age - formT) / 0.15));
     this._theta = c.swingAmp * this._sign * Math.sin(this._phi) * windUp;
 
     this._pivotAt(this.u, this._pivot);
@@ -422,6 +520,7 @@ export class UmbralGuillotineAbility extends Ability {
 
     this._shed(dt, 1 - this._bladeState.dissolve, form < 1);
     if (form >= 1) this._cutPass();
+    this._updateSlashes(0);
 
     this._bladePoint(0, 0.7, this.position);
     this.ctx.shake.rumble(0.03, dt);
@@ -440,6 +539,7 @@ export class UmbralGuillotineAbility extends Ability {
         colorA: getColor(c.colorCleft),
         colorB: getColor(c.colorRim)
       });
+      this._addSlash(_floor);
     }
     this._resetEmit(frame.uTime.value);
     _dir.copy(this.side).multiplyScalar(Math.sign(this._omega) || 1).addScaledVector(_up, 0.45).normalize();
@@ -595,7 +695,8 @@ export class UmbralGuillotineAbility extends Ability {
       this._arm = lerp(c.armLength, c.pivotHeight + c.embed, d);
     } else {
       this._theta = 0;
-      this._arm = c.pivotHeight + c.embed;
+      // Buried — and, as it goes, sinking into its own pool.
+      this._arm = c.pivotHeight + c.embed + c.bladeSink * Easing.inQuad(ft);
       if (!this._chopped) this._chop();
     }
 
@@ -621,7 +722,18 @@ export class UmbralGuillotineAbility extends Ability {
       cs.erode = smoothstep(0.35, 1, ft);
       this.cleft.visible = cs.erode < 0.999;
       this.cleftMaterial.userData.sync(cs);
+
+      /* the pool spills out of it, swirls, and dries off in the exit */
+      const ps = this._poolState;
+      ps.radius = c.chopRadius * c.poolScale;
+      ps.spread = Easing.outCubic(saturate(since / Math.max(0.02, c.poolSpread * g.lifetime)));
+      ps.erode = smoothstep(0.4, 1, ft);
+      ps.pulse = 0.5 + 0.5 * Math.sin(since * 6.5);
+      this.poolMaterial.userData.sync(ps);
+      this.pool.visible = ps.erode < 0.999;
+      this._rise(dt, ps, 1 - smoothstep(0.55, 1, ft));
     }
+    this._updateSlashes(ft);
 
     // Smoke pours off it as it goes.
     if (t > 1) {
@@ -634,6 +746,41 @@ export class UmbralGuillotineAbility extends Ability {
     this.position.y = Math.max(0.5, this.position.y);
   }
 
+  /** Wisps and smoke rising off the pool — thickest along the cleft. */
+  _rise(dt, ps, k) {
+    const c = settings[ID];
+    const g = settings.global;
+    if (k <= 0) return;
+    const time = frame.uTime.value;
+    const reach = ps.radius * ps.spread * 0.8;
+    const nW = Math.round(this.wispEmitter.tick(dt, c.wispRate * k) * g.particleCount);
+    const nS = Math.round(this.poolSmokeEmitter.tick(dt, c.poolSmokeRate * k) * g.particleCount);
+    if (nW + nS <= 0) return;
+    this._resetEmit(time);
+    _emit.direction = _up;
+    _emit.spread = 0.25;
+    for (let i = 0; i < nW + nS; i++) {
+      const smoke = i >= nW;
+      if (Math.random() < 0.45) {
+        // Out of the cleft itself.
+        _pos.copy(ps.center).addScaledVector(this.side, (Math.random() - 0.5) * c.cleftLength);
+      } else {
+        const a = Math.random() * Math.PI * 2;
+        const r = reach * Math.sqrt(Math.random());
+        _pos.copy(ps.center);
+        _pos.x += Math.cos(a) * r;
+        _pos.z += Math.sin(a) * r;
+      }
+      _pos.y = 0.1;
+      _emit.position = _pos;
+      _emit.speed = smoke ? c.wispSpeed * 0.6 : c.wispSpeed;
+      _emit.size = smoke ? c.smokeSize * 1.2 : c.wispSize;
+      _emit.life = smoke ? c.smokeLife * 1.4 : c.wispLife;
+      _emit.spin = 0.6;
+      (smoke ? this.smoke : this.wisps).emit(1, _emit);
+    }
+  }
+
   _chop() {
     const c = settings[ID];
     const g = settings.global;
@@ -641,6 +788,12 @@ export class UmbralGuillotineAbility extends Ability {
     this._chopped = true;
     this.pointAt(1, _floor);
     _floor.y = 0.02;
+
+    const ps = this._poolState;
+    ps.center.copy(_floor);
+    ps.spread = 0;
+    ps.erode = 0;
+    this.pool.visible = true;
 
     const cs = this._cleftState;
     cs.center.copy(_floor);
@@ -666,7 +819,7 @@ export class UmbralGuillotineAbility extends Ability {
       radius: c.shockRadius * power,
       life: 0.55,
       width: 0.06,
-      intensity: 1.2,
+      intensity: 0.75,
       colorA: getColor(c.colorShockA),
       colorB: getColor(c.colorShockB)
     });
@@ -732,6 +885,11 @@ export class UmbralGuillotineAbility extends Ability {
     this.smear.visible = false;
     this.smearWarp.visible = false;
     this.cleft.visible = false;
+    this.pool.visible = false;
+    for (const sl of this._slashes) {
+      sl.born = -1;
+      sl.mesh.visible = false;
+    }
   }
 
   dispose() {
@@ -745,6 +903,8 @@ export class UmbralGuillotineAbility extends Ability {
     this.smearMaterial.dispose();
     this.smearWarpMaterial.dispose();
     this.cleftMaterial.dispose();
+    this.poolMaterial.dispose();
+    for (const sl of this._slashes) sl.material.dispose();
     super.dispose();
   }
 }
@@ -849,6 +1009,9 @@ export function buildEditor(gui, c, Editor) {
   R(fx, c, 'sparkGlow', 0, 10, 0.05, 'spark glow');
   R(fx, c, 'crossSparks', 0, 300, 1, 'sparks at each low pass');
   R(fx, c, 'slashRadius', 0, 5, 0.05, 'low-pass scorch (m)');
+  R(fx, c, 'slashLength', 0, 8, 0.05, 'low-pass slash length (m)');
+  R(fx, c, 'slashWidth', 0.02, 0.6, 0.005, 'low-pass slash half-width (m)');
+  R(fx, c, 'slashGlow', 0, 10, 0.05, 'low-pass slash glow');
   Editor.gradient(fx, c, 'colorSmoke', 'smoke gradient');
   Editor.gradient(fx, c, 'colorSpark', 'spark gradient');
 
@@ -862,6 +1025,25 @@ export function buildEditor(gui, c, Editor) {
   R(cut, c, 'hitSpin', 0, 6, 0.01, 'tumble');
   R(cut, c, 'chopImpulse', 0, 30, 0.1, 'chop throw (m/s)');
   R(cut, c, 'chopLift', 0, 20, 0.1, 'chop lift (m/s)');
+
+  const pool = folder.addFolder('8 · Shadow pool');
+  R(pool, c, 'poolScale', 0, 4, 0.01, 'spills (× chop radius)');
+  R(pool, c, 'poolSpread', 0.02, 3, 0.01, 'spills over (s)');
+  R(pool, c, 'poolSwirl', -4, 4, 0.01, 'veins turn (rad/s)');
+  R(pool, c, 'poolVeins', 0, 4, 0.01, 'veins');
+  R(pool, c, 'poolGlow', 0, 10, 0.05, 'vein & lip glow');
+  R(pool, c, 'poolOpacity', 0, 1, 0.01, 'opacity');
+  R(pool, c, 'bladeSink', 0, 6, 0.05, 'blade sinks (m)');
+  R(pool, c, 'wispRate', 0, 600, 1, 'wisps/second');
+  R(pool, c, 'wispSize', 0.02, 2, 0.01, 'wisp size');
+  R(pool, c, 'wispSpeed', 0, 10, 0.05, 'wisp rise speed');
+  R(pool, c, 'wispLife', 0.1, 5, 0.05, 'wisp lifetime');
+  R(pool, c, 'wispGlow', 0, 10, 0.05, 'wisp glow');
+  R(pool, c, 'poolSmokeRate', 0, 400, 1, 'smoke/second');
+  pool.addColor(c, 'colorPoolDeep').name('deep');
+  pool.addColor(c, 'colorPoolBody').name('body');
+  pool.addColor(c, 'colorPoolVein').name('veins');
+  Editor.gradient(pool, c, 'colorWisp', 'wisp gradient');
 
   folder.close();
   return folder;

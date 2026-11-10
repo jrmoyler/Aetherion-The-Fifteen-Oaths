@@ -28,6 +28,13 @@ import { getColor } from '../../utils/color.js';
  *  - **the slam warp** — a flat ring on `LAYER.DISTORTION` that runs out
  *    across the floor from the slam.
  *
+ *  - **the vortex** — the hero: a polar grid wound into log-spiral ridges of
+ *    infalling matter, sagging into a well while it hangs and lying on the
+ *    floor after the slam; deep violet-black between the arms, white-hot lip.
+ *  - **the singularity** — an opaque black core with a photon-ring fresnel.
+ *  - **the lens** — light bent round the core, on `LAYER.DISTORTION`.
+ *  The planets are now lit, noise-displaced rock with molten seams.
+ *
  * Every material reads `settings.orbitlock` in `userData.sync(state)`.
  */
 
@@ -178,17 +185,26 @@ export function createOrbitMaterial() {
 /* -------------------------------------------------------------------- */
 
 const PLANET_VERTEX = /* glsl */ `
+  uniform float uCrag;        // 0..1 how lumpy and cratered the rock is
+  uniform float uSeed;
+
   varying vec3 vLocal;
   varying vec3 vNormalW;
   varying vec3 vViewDir;
   varying vec3 vWorld;
+
+  ${noiseGLSL}
 
   void main() {
     mat4 model = modelMatrix;
     #ifdef USE_INSTANCING
       model = modelMatrix * instanceMatrix;
     #endif
-    vec4 world = model * vec4(position, 1.0);
+    // A moon, not a ball: lumps, a flattened pole and a few craters.
+    float lump = snoise(position * 1.7 + uSeed) * 0.55 + snoise(position * 4.3 + uSeed * 2.0) * 0.2;
+    float crater = smoothstep(0.55, 0.85, snoise(position * 2.6 + uSeed * 3.0));
+    vec3 displaced = position * (1.0 + uCrag * (0.18 * lump - 0.16 * crater)) * vec3(1.0, 1.0 - 0.12 * uCrag, 1.0);
+    vec4 world = model * vec4(displaced, 1.0);
     vLocal = position;
     vNormalW = normalize(mat3(model) * normal);
     vViewDir = cameraPosition - world.xyz;
@@ -210,6 +226,9 @@ const PLANET_FRAGMENT = /* glsl */ `
   uniform vec3  uColorCore;
   uniform vec3  uColorBand;
   uniform vec3  uColorRim;
+  uniform vec3  uColorRock;
+  uniform vec3  uLightDir;
+  uniform float uFissure;
   uniform float uGlobalGlow;
   uniform float uNoiseAmt;
 
@@ -221,19 +240,26 @@ const PLANET_FRAGMENT = /* glsl */ `
   ${noiseGLSL}
 
   void main() {
-    vec3 N = normalize(vNormalW);
+    // Faceted, lumpy rock: the shading normal comes off the displaced surface.
+    vec3 N = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
     vec3 V = normalize(vViewDir);
+    if (dot(N, V) < 0.0) N = -N;
     float ndv = clamp(dot(N, V), 0.0, 1.0);
     float fres = pow(max(1.0 - ndv, 0.0), max(uRimPower, 0.5));
+    float diff = max(dot(N, normalize(uLightDir)), 0.0);
 
-    // Latitude bands, warped on noise and turning: a small gas giant.
+    // Dense, dark rock lit by the sun — it has weight.
+    float grain = snoise(vLocal * 6.0 + uSeed) * 0.5 + 0.5;
+    vec3 rock = uColorRock * (0.25 + 1.1 * diff) * (0.8 + 0.4 * grain);
+    // Molten fissures, banded like strata and turning slowly, glowing through.
     float warp = snoise(vec3(vLocal * 1.6 + vec3(0.0, uSeed, uTime * uBandSpeed * 0.3))) * uNoiseAmt;
     float bands = 0.5 + 0.5 * sin((vLocal.y + warp * 0.35) * uBandScale * 3.14159 + uTime * uBandSpeed);
-    bands = smoothstep(0.25, 0.85, bands);
-    vec3 surf = mix(uColorCore, uColorBand, bands * 0.75);
-    // White-hot where it faces you, violet limb where it turns away.
-    vec3 col = surf * uGlow * (0.55 + 0.75 * ndv) + uColorRim * fres * uRim;
-    col += uColorCore * uHeat * 3.0;
+    float crack = 1.0 - abs(snoise(vLocal * 2.4 + vec3(uSeed, 0.0, uTime * 0.2)));
+    crack = pow(crack, mix(24.0, 6.0, clamp(uFissure, 0.0, 1.0)));
+    float seam = max(crack, smoothstep(0.92, 1.0, bands) * 0.6);
+    vec3 fissure = mix(uColorBand, uColorCore, seam) * seam * uGlow * 2.2;
+    vec3 col = rock + fissure + uColorRim * fres * uRim;
+    col += mix(uColorBand, uColorCore, uHeat) * uHeat * 2.5 * (0.4 + seam);
 
     // Burning into the floor: noise threshold with a hot edge.
     if (uDissolve > 0.0) {
@@ -246,7 +272,7 @@ const PLANET_FRAGMENT = /* glsl */ `
   }
 `;
 
-/** The planets: opaque, emissive, instanced. */
+/** The planets: opaque, lit rock with molten seams, instanced (`LAYER.SHAPED`). */
 export function createPlanetMaterial() {
   const material = new ShaderMaterial({
     transparent: false,
@@ -264,9 +290,12 @@ export function createPlanetMaterial() {
       uHeat: { value: 0 },
       uDissolve: { value: 0 },
       uNoiseAmt: { value: 1 },
+      uCrag: { value: 0.8 },
+      uFissure: { value: 0.5 },
       uColorCore: { value: new Color() },
       uColorBand: { value: new Color() },
-      uColorRim: { value: new Color() }
+      uColorRim: { value: new Color() },
+      uColorRock: { value: new Color() }
     }),
     vertexShader: PLANET_VERTEX,
     fragmentShader: PLANET_FRAGMENT
@@ -286,9 +315,12 @@ export function createPlanetMaterial() {
     u.uHeat.value = s.heat;
     u.uDissolve.value = s.dissolve;
     u.uNoiseAmt.value = g.noiseStrength;
+    u.uCrag.value = c.planetCrag;
+    u.uFissure.value = c.planetFissure;
     u.uColorCore.value.copy(getColor(c.colorPlanetCore));
     u.uColorBand.value.copy(getColor(c.colorPlanetBand));
     u.uColorRim.value.copy(getColor(c.colorPlanetRim));
+    u.uColorRock.value.copy(getColor(c.colorPlanetRock));
   };
 
   return material;
@@ -511,6 +543,317 @@ export function createDialMaterial() {
     u.uOpacity.value = c.sigilOpacity * g.opacity;
     u.uColorA.value.copy(getColor(c.colorSigilA));
     u.uColorB.value.copy(getColor(c.colorSigilB));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The accretion vortex — the gravity well                              */
+/* -------------------------------------------------------------------- */
+
+const VORTEX_VERTEX = /* glsl */ `
+  uniform vec3  uCenter;
+  uniform float uTilt;
+  uniform float uTiltYaw;
+  uniform float uInner;       // metres — the lip at the event horizon
+  uniform float uOuter;       // metres — the ragged outer edge
+  uniform float uHeight;      // metres the ridges stand at the lip
+  uniform float uArms;
+  uniform float uTwist;       // how tightly the arms wind in
+  uniform float uSpin;        // integrated turn, radians
+  uniform float uSeed;
+  uniform float uSag;         // metres the middle dips (the well) when it hangs
+
+  varying vec2  vPolar;       // x: 0 lip .. 1 edge, y: radians
+  varying vec3  vWorld;
+  varying float vRidge;
+
+  ${ORBIT_GLSL}
+  ${noiseGLSL}
+
+  void main() {
+    float r = position.x;
+    float th = position.y * 6.2831853;
+    float R = mix(uInner, uOuter, r);
+    // Log-spiral arms of infalling matter; the inner turns run faster.
+    float wind = uTwist * log(max(R, 0.01) / max(uInner, 0.01));
+    float arm = 0.5 + 0.5 * cos(uArms * (th - uSpin * (1.0 + 1.6 * (1.0 - r))) + wind);
+    float n = snoise(vec3(cos(th) * R * 0.7, sin(th) * R * 0.7, uSeed + uSpin * 0.15));
+    float ridge = pow(arm, 2.5) * (0.75 + 0.35 * n);
+    float lip = exp(-r * 9.0);
+    float h = uHeight * (ridge * pow(1.0 - r, 0.9) * 0.8 + lip * 0.9);
+    // The well: the disc sags toward its middle while it hangs.
+    float sag = -uSag * pow(1.0 - r, 2.0);
+    vec3 local = vec3(cos(th) * R, h + sag, sin(th) * R);
+    vec3 k = vec3(cos(uTiltYaw), 0.0, sin(uTiltYaw));
+    vec3 world = uCenter + rotAxis(local, k, uTilt);
+    vPolar = vec2(r, th);
+    vWorld = world;
+    vRidge = ridge;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const VORTEX_FRAGMENT = /* glsl */ `
+  precision highp float;
+
+  uniform float uSeed;
+  uniform float uSpin;
+  uniform float uHotGlow;
+  uniform float uStreakGlow;
+  uniform float uOpacity;
+  uniform float uDissolve;
+  uniform float uFlare;       // 0..1 the slam's flash through the disc
+  uniform vec3  uColorHot;
+  uniform vec3  uColorPale;
+  uniform vec3  uColorBody;
+  uniform vec3  uColorDeep;
+  uniform vec3  uLightDir;
+  uniform float uGlobalGlow;
+  uniform float uShaderIntensity;
+
+  varying vec2  vPolar;
+  varying vec3  vWorld;
+  varying float vRidge;
+
+  ${noiseGLSL}
+
+  void main() {
+    float r = vPolar.x;
+    float th = vPolar.y;
+    float edgeN = snoise(vec3(cos(th) * 2.2, sin(th) * 2.2, uSeed + uSpin * 0.1)) * 0.5 + 0.5;
+    float alpha = 1.0 - smoothstep(0.62, 1.0, r + (edgeN - 0.5) * 0.35);
+    float dn = snoise(vWorld * 1.3 + uSeed) * 0.5 + 0.5;
+    if (uDissolve > 0.0) {
+      float thr = uDissolve * 1.15 - 0.1 + (1.0 - r) * uDissolve * 0.4;
+      if (dn < thr) discard;
+    }
+
+    vec3 V = normalize(cameraPosition - vWorld);
+    vec3 N = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+    if (dot(N, V) < 0.0) N = -N;
+    float diff = max(dot(N, normalize(uLightDir)), 0.0);
+
+    // Four-stop ramp: deep void between the arms, saturated body on them,
+    // pale streaks of shredded matter, white-hot at the lip.
+    float streak = pow(1.0 - abs(snoise(vec3(r * 9.0 - uSpin * 0.6, th * 2.0, uSeed))), 6.0) * uShaderIntensity;
+    vec3 col = mix(uColorDeep, uColorBody, clamp(vRidge * (0.35 + 0.9 * diff), 0.0, 1.0));
+    col = mix(col, uColorPale, clamp(streak * vRidge * (1.0 - r) * (1.0 - r) * 0.7 * uStreakGlow, 0.0, 1.0));
+    float heat = exp(-r * 14.0);
+    col += uColorHot * heat * uHotGlow * (0.6 + 0.6 * vRidge);
+    col += uColorPale * uFlare * (1.0 - r) * 1.5;
+    alpha *= mix(0.85, 1.0, vRidge) * uOpacity;
+    if (alpha < 0.004) discard;
+    gl_FragColor = vec4(col * mix(1.0, uGlobalGlow, heat), clamp(alpha, 0.0, 1.0));
+  }
+`;
+
+/** The accretion vortex: dark, filled, lit, spiralling into the singularity. */
+export function createVortexMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: true,
+    depthTest: true,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uTilt: { value: 0 },
+      uTiltYaw: { value: 0 },
+      uInner: { value: 0.6 },
+      uOuter: { value: 4 },
+      uHeight: { value: 0.5 },
+      uArms: { value: 3 },
+      uTwist: { value: 3 },
+      uSpin: { value: 0 },
+      uSeed: { value: 0 },
+      uSag: { value: 0 },
+      uHotGlow: { value: 3 },
+      uStreakGlow: { value: 1 },
+      uOpacity: { value: 1 },
+      uDissolve: { value: 0 },
+      uFlare: { value: 0 },
+      uColorHot: { value: new Color() },
+      uColorPale: { value: new Color() },
+      uColorBody: { value: new Color() },
+      uColorDeep: { value: new Color() }
+    }),
+    vertexShader: VORTEX_VERTEX,
+    fragmentShader: VORTEX_FRAGMENT
+  });
+
+  /** @param {object} s { center, tilt, yaw, inner, outer, height, spin, sag, opacity, dissolve, flare, seed } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(s.center);
+    u.uTilt.value = s.tilt;
+    u.uTiltYaw.value = s.yaw;
+    u.uInner.value = Math.max(0.05, s.inner);
+    u.uOuter.value = Math.max(s.inner + 0.1, s.outer);
+    u.uHeight.value = s.height;
+    u.uArms.value = Math.max(1, Math.round(c.vortexArms));
+    u.uTwist.value = c.vortexTwist;
+    u.uSpin.value = s.spin;
+    u.uSeed.value = s.seed;
+    u.uSag.value = s.sag;
+    u.uHotGlow.value = c.vortexHotGlow * g.glow;
+    u.uStreakGlow.value = c.vortexStreaks;
+    u.uOpacity.value = c.vortexOpacity * g.opacity * s.opacity;
+    u.uDissolve.value = s.dissolve;
+    u.uFlare.value = s.flare;
+    u.uColorHot.value.copy(getColor(c.colorWellHot));
+    u.uColorPale.value.copy(getColor(c.colorWellPale));
+    u.uColorBody.value.copy(getColor(c.colorWellBody));
+    u.uColorDeep.value.copy(getColor(c.colorWellDeep));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The singularity                                                      */
+/* -------------------------------------------------------------------- */
+
+const CORE_VERTEX = /* glsl */ `
+  uniform vec3  uCenter;
+  uniform float uSize;
+  uniform float uSquash;      // flattens as it sinks into the floor
+  varying vec3 vNormalW;
+  varying vec3 vWorld;
+  void main() {
+    vec3 world = uCenter + position * uSize * vec3(1.0, 1.0 - uSquash, 1.0);
+    vNormalW = normal;
+    vWorld = world;
+    gl_Position = projectionMatrix * viewMatrix * vec4(world, 1.0);
+  }
+`;
+
+const CORE_FRAGMENT = /* glsl */ `
+  uniform float uTime;
+  uniform float uSeed;
+  uniform float uRimGlow;
+  uniform float uRimPower;
+  uniform vec3  uColorHot;
+  uniform vec3  uColorRim;
+  uniform float uGlobalGlow;
+  varying vec3 vNormalW;
+  varying vec3 vWorld;
+
+  ${noiseGLSL}
+
+  void main() {
+    vec3 N = normalize(vNormalW);
+    vec3 V = normalize(cameraPosition - vWorld);
+    float ndv = clamp(dot(N, V), 0.0, 1.0);
+    // Black: it eats the light. Only the photon ring at its limb burns.
+    float fres = pow(1.0 - ndv, max(uRimPower, 0.5));
+    float flick = 0.8 + 0.2 * snoise(vec3(N * 3.0 + uTime * 1.5 + uSeed));
+    vec3 col = mix(uColorRim, uColorHot, fres * fres) * fres * uRimGlow * flick * uGlobalGlow;
+    gl_FragColor = vec4(col, 1.0);
+  }
+`;
+
+/** The singularity at the heart of the orrery: an opaque black core with a photon ring. */
+export function createCoreMaterial() {
+  const material = new ShaderMaterial({
+    transparent: false,
+    depthWrite: true,
+    depthTest: true,
+    side: FrontSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uSize: { value: 0.5 },
+      uSquash: { value: 0 },
+      uSeed: { value: 0 },
+      uRimGlow: { value: 3 },
+      uRimPower: { value: 3 },
+      uColorHot: { value: new Color() },
+      uColorRim: { value: new Color() }
+    }),
+    vertexShader: CORE_VERTEX,
+    fragmentShader: CORE_FRAGMENT
+  });
+
+  /** @param {object} s { center, size, squash, seed } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(s.center);
+    u.uSize.value = Math.max(0.001, s.size);
+    u.uSquash.value = s.squash;
+    u.uSeed.value = s.seed;
+    u.uRimGlow.value = c.coreRimGlow * g.fresnel;
+    u.uRimPower.value = c.coreRimPower;
+    u.uColorHot.value.copy(getColor(c.colorWellHot));
+    u.uColorRim.value.copy(getColor(c.colorWellBody));
+  };
+
+  return material;
+}
+
+/* -------------------------------------------------------------------- */
+/* The lens — LAYER.DISTORTION                                          */
+/* -------------------------------------------------------------------- */
+
+const LENS_FRAGMENT = /* glsl */ `
+  uniform float uStrength;
+  uniform float uHole;        // 0..1 share of the quad the horizon fills
+  uniform float uSwirl;       // radians the pull is twisted
+  uniform float uShaderIntensity;
+  varying vec2 vUv;
+
+  void main() {
+    float r = length(vUv);
+    if (r > 1.0) discard;
+    vec2 dir = vUv / max(r, 1e-4);
+    // Light bent round the well: strongest just outside the horizon, falling
+    // off with distance, twisted by the spin.
+    float bend = smoothstep(1.0, uHole, r) * (uHole / max(r, uHole));
+    float c = cos(uSwirl);
+    float s = sin(uSwirl);
+    vec2 pull = -vec2(dir.x * c - dir.y * s, dir.x * s + dir.y * c);
+    float strength = uStrength * uShaderIntensity * bend;
+    if (strength < 0.002) discard;
+    gl_FragColor = vec4(pull * 0.5 + 0.5, strength, smoothstep(1.0, 0.7, r));
+  }
+`;
+
+/** A camera-facing lens of bent air round the singularity. */
+export function createLensMaterial() {
+  const material = new ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    depthTest: false,
+    blending: NormalBlending,
+    side: DoubleSide,
+    toneMapped: false,
+    uniforms: sharedUniforms({
+      uCenter: { value: new Vector3() },
+      uSize: { value: 2 },
+      uStrength: { value: 1 },
+      uHole: { value: 0.25 },
+      uSwirl: { value: 0.6 }
+    }),
+    vertexShader: BILLBOARD_VERTEX,
+    fragmentShader: LENS_FRAGMENT
+  });
+
+  /** @param {object} s { center, size, hole, strength } */
+  material.userData.sync = (s) => {
+    const c = settings[ID];
+    const g = settings.global;
+    const u = material.uniforms;
+    u.uCenter.value.copy(s.center);
+    u.uSize.value = Math.max(0.05, s.size);
+    u.uHole.value = Math.min(0.9, Math.max(0.02, s.hole));
+    u.uSwirl.value = c.lensSwirl;
+    u.uStrength.value = c.lensStrength * g.distortion * s.strength;
   };
 
   return material;

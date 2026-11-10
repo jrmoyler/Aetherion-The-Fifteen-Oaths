@@ -28,6 +28,7 @@ export class AbilityManager {
     this.selected = ELEMENTS[0];
 
     this.pools = new Map();
+    this.registered = new Set();
     for (const [element, Type] of Object.entries(ABILITY_TYPES)) {
       this.pools.set(
         element,
@@ -42,13 +43,34 @@ export class AbilityManager {
   }
 
   select(element) {
-    if (!ABILITY_TYPES[element]) return;
+    if (!this.pools.has(element)) return;
     this.selected = element;
+  }
+
+  /** Register an independently approved expansion without replacing a native pool. */
+  register(element, Type) {
+    if (!element || typeof Type !== 'function' || this.pools.has(element)) throw new Error(`Ability already registered: ${element}`);
+    this.pools.set(element, new ObjectPool(() => {
+      const ability = new Type(this.ctx);
+      this.ctx.scene.add(ability.group);
+      ability.group.visible = false;
+      return ability;
+    }));
+    this.registered.add(element);
+  }
+
+  unregister(element) {
+    if (!this.registered.has(element)) return false;
+    if (this.active.some((ability) => ability.element === element)) throw new Error(`Ability is active: ${element}`);
+    this.pools.get(element).dispose((ability) => ability.dispose());
+    this.pools.delete(element);
+    this.registered.delete(element);
+    return true;
   }
 
   /** Registered ability ids, in the order the HUD lists them. */
   get elements() {
-    return ELEMENTS.filter((element) => ABILITY_TYPES[element]);
+    return [...ELEMENTS.filter((element) => ABILITY_TYPES[element]), ...this.registered];
   }
 
   /**
@@ -87,7 +109,7 @@ export class AbilityManager {
    * @returns {import('./Ability.js').Ability|null}
    */
   cast(origin, direction, distance, element = this.selected) {
-    if (!ABILITY_TYPES[element]) return null;
+    if (!this.pools.has(element)) return null;
 
     // Retire the oldest cast rather than letting the scene grow without bound.
     if (this.active.length >= MAX_CONCURRENT) {

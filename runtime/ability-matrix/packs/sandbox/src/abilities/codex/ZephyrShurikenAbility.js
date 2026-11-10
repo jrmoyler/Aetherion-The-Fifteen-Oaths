@@ -49,24 +49,34 @@ const _up = new Vector3(0, 1, 0);
  * Seven layers, each a folder in the editor:
  *
  *   1. **the discs** — three flat quads placed in the vertex stage from a
- *      centre, an axis (banked into the braid, rocking) and a heading; the
- *      shuriken itself is a polar SDF in the fragment stage (swept, tapered
- *      blades, a hub, a hole). Additive: bright cutting edges (the leading edge
- *      brighter), a faint body, the full disc of the spin blur and a
- *      three-colour fringe made of the blade a moment ago.
+ *      centre, an axis (banked into the braid, tipped `faceTilt` back toward
+ *      the thrower so the shuriken shows its face rather than its edge, and
+ *      rocking) and a heading; the shuriken itself is a polar SDF in the
+ *      fragment stage (swept, tapered blades, a hub, a hole). Drawn twice: a
+ *      normal-blended, sun-lit **body** — the blades filled and bevelled from
+ *      deep jade to the body colour, with a smoked spin-blur disc — and over it
+ *      the additive bright pass: cutting edges (the leading edge brighter), the
+ *      spin blur and a three-colour fringe made of the blade a moment ago.
+ *      1.15 m across each, so the three read at play distance.
  *   2. **the lens** — each disc again on `LAYER.DISTORTION`, wider, bending the
  *      world radially and *round* the disc, so it twists the air.
- *   3. **the scuffs** — one ground strip: round each disc's analytic braid line
- *      a coil of thin open loops, the trace of a spinning rim carried forward,
- *      over a swept band of dust. Only behind each disc; fresh-glowing; erodes.
+ *   3. **the scuffs** — one ground strip: under each disc's analytic braid
+ *      line a filled, combed furrow in the ramp's deep tone, and over it a
+ *      coil of thin open loops, the trace of a spinning rim carried forward.
+ *      Only behind each disc; fresh-glowing; erodes. At the end the cyclone
+ *      scours a spiral **eye** into the same strip (`eyeRadius`), heaped with a
+ *      pale rim of dust, that stays for the whole linger.
  *   4. **wind streaks** — STREAKs flung off each rim tangent to its spin, with
  *      a share of the disc's own speed, so each disc sheds a spiral of lines.
  *   5. **leaves and dust** — LEAF debris and SMOKE dust sucked off the floor
  *      in each disc's wake and curled about it (`swirl`).
  *   6. **the cyclone** — the three discs converge, shrink and fold into a
- *      flared, banded, twisting funnel (`createZephyrCycloneMaterial`) that
- *      rises and dissolves; an AIR shell, shockwave, dust ring, leaves thrown
- *      up the funnel, a knock on the camera, a flash, a punch of light.
+ *      5 m funnel (`createZephyrCycloneMaterial`, a banded additive core and a
+ *      lit dust sheath) whose spine leans, precesses round the foot and
+ *      snakes, so its silhouette changes all through the linger; it lifts off
+ *      and unravels from the foot up. An AIR shell, shockwave, dust ring,
+ *      leaves thrown up the funnel, a knock on the camera, a flash, a punch of
+ *      light.
  *   7. **the slice and the spin** — `handlesOwnHits`. Every frame each disc
  *      cuts what is within its rim (`dummy.kill(…, true)`) along its flight
  *      plus the tangent of its spin at the point of contact, then a short
@@ -106,13 +116,17 @@ export class ZephyrShurikenAbility extends Ability {
     for (let k = 0; k < DISCS; k++) {
       const material = createZephyrDiscMaterial(false);
       const warpMaterial = createZephyrDiscMaterial(true);
+      const bodyMaterial = createZephyrDiscMaterial('body');
+      const body = this._mesh(this.discGeometry, bodyMaterial, `ZephyrDiscBody${k}`, LAYER.VFX, 11 + k);
       const mesh = this._mesh(this.discGeometry, material, `ZephyrDisc${k}`, LAYER.VFX, 14 + k);
       const warp = this._mesh(this.discGeometry, warpMaterial, `ZephyrLens${k}`, LAYER.DISTORTION, 0);
       this._discs.push({
         mesh,
         warp,
+        body,
         material,
         warpMaterial,
+        bodyMaterial,
         /** Handed to both materials each frame. */
         state: {
           centre: new Vector3(),
@@ -146,8 +160,10 @@ export class ZephyrShurikenAbility extends Ability {
     /* ---- layer 6: the cyclone ---- */
     // uv.x round the funnel, uv.y up it.
     this.cycloneGeometry = new PlaneGeometry(1, 1, 48, 28);
-    this.cycloneMaterial = createZephyrCycloneMaterial();
+    this.cycloneMaterial = createZephyrCycloneMaterial(false);
     this.cyclone = this._mesh(this.cycloneGeometry, this.cycloneMaterial, 'ZephyrCyclone', LAYER.VFX, 13);
+    this.cycloneSheathMaterial = createZephyrCycloneMaterial(true);
+    this.cycloneSheath = this._mesh(this.cycloneGeometry, this.cycloneSheathMaterial, 'ZephyrCycloneDust', LAYER.VFX, 12);
 
     this._scuffState = {
       start: new Vector3(),
@@ -164,9 +180,12 @@ export class ZephyrShurikenAbility extends Ability {
       discAt: new Vector3(),
       hot: 1,
       fadeT: 0,
-      seed: 0
+      seed: 0,
+      eyeAt: 0,
+      eyeR: 0,
+      eyeSpin: 0
     };
-    this._cycloneState = { centre: new Vector3(), grow: 0, rise: 0, spin: 0, fade: 1, dissolve: 0, seed: 0 };
+    this._cycloneState = { centre: new Vector3(), grow: 0, rise: 0, spin: 0, precess: 0, fade: 1, dissolve: 0, seed: 0 };
 
     this._seed = 0;
     this._braidPhase = 0;
@@ -358,19 +377,23 @@ export class ZephyrShurikenAbility extends Ability {
       disc.dustEmitter.reset();
       disc.mesh.visible = true;
       disc.warp.visible = true;
+      disc.body.visible = true;
     }
 
     const ss = this._scuffState;
     ss.seed = this._seed;
     ss.fadeT = 0;
     ss.hot = 1;
+    ss.eyeR = 0;
     this.scuff.visible = true;
     this.cyclone.visible = false;
+    this.cycloneSheath.visible = false;
     const cs = this._cycloneState;
     cs.seed = this._seed;
     cs.grow = 0;
     cs.rise = 0;
     cs.spin = 0;
+    cs.precess = Math.random() * TAU;
     cs.fade = 1;
     cs.dissolve = 0;
 
@@ -421,6 +444,7 @@ export class ZephyrShurikenAbility extends Ability {
       disc.wobble += c.wobbleSpeed * dt * g.animationSpeed;
     }
     this._cycloneState.spin += c.puffSpin * dt * g.animationSpeed;
+    this._cycloneState.precess += c.puffPrecess * dt * g.animationSpeed;
   }
 
   /**
@@ -447,7 +471,7 @@ export class ZephyrShurikenAbility extends Ability {
       const rock = c.wobble * g.randomness;
       s.axis.copy(_up)
         .addScaledVector(_right, -latN * c.bank + Math.sin(disc.wobble) * rock)
-        .addScaledVector(this.direction, Math.cos(disc.wobble * 0.73) * rock)
+        .addScaledVector(this.direction, Math.cos(disc.wobble * 0.73) * rock - Math.tan(Math.min(1.4, Math.max(-1.4, c.faceTilt))))
         .normalize();
       s.heading.copy(_t);
       // Converging, the three pull onto one point at the end of the line.
@@ -457,6 +481,7 @@ export class ZephyrShurikenAbility extends Ability {
       s.strength = Math.min(1, disc.form) * shrink;
       disc.material.userData.sync(s);
       disc.warpMaterial.userData.sync(s);
+      disc.bodyMaterial.userData.sync(s);
     }
 
     /* the scuffs */
@@ -464,8 +489,12 @@ export class ZephyrShurikenAbility extends Ability {
     ss.start.copy(this.origin);
     ss.dir.copy(this.direction);
     ss.side.copy(_right);
-    ss.length = this.length + 1;
-    ss.width = 2 * (Math.abs(c.braidWidth) + c.scuffLoop + c.scuffDust) + 0.6;
+    const eyeR = Math.max(0, c.eyeRadius * c.puffTopRadius);
+    ss.length = this.length + 1 + eyeR;
+    ss.width = 2 * Math.max(Math.abs(c.braidWidth) + Math.max(c.scuffLoop + c.scuffDust, c.scuffFurrow), eyeR) + 0.6;
+    ss.eyeAt = this.length;
+    ss.eyeR = eyeR * Math.min(1, this._cycloneState.grow);
+    ss.eyeSpin = this._cycloneState.spin * c.eyeSpin;
     ss.amp = c.braidWidth;
     ss.k = this._k();
     ss.phase.set(this._discs[0].phase, this._discs[1].phase, this._discs[2].phase);
@@ -481,6 +510,7 @@ export class ZephyrShurikenAbility extends Ability {
     cs.centre.copy(this.origin).addScaledVector(this.direction, this.length);
     cs.centre.y = 0;
     this.cycloneMaterial.userData.sync(cs);
+    this.cycloneSheathMaterial.userData.sync(cs);
 
     /* the particles' looks */
     this.streaks.setGradient(getColor(c.colorStreakA), getColor(c.colorStreakB), getColor(c.colorStreakC), getColor(c.colorStreakD));
@@ -580,6 +610,7 @@ export class ZephyrShurikenAbility extends Ability {
       for (const disc of this._discs) {
         disc.mesh.visible = discsOn;
         disc.warp.visible = discsOn;
+        disc.body.visible = discsOn;
         if (discsOn) {
           this._discFx(disc, dt, 1 - merge);
           this._slice(disc);
@@ -591,12 +622,17 @@ export class ZephyrShurikenAbility extends Ability {
       const cs = this._cycloneState;
       const born = mergeEnd * 0.5;
       const life = saturate((t - born) / Math.max(0.05, 1 - born));
-      cs.grow = Easing.outCubic(saturate((t - born) / 0.3));
-      cs.rise = c.puffRise * smoothstep(0.4, 1, life);
-      cs.dissolve = smoothstep(0.5, 1, life);
-      cs.fade = 1 - smoothstep(0.85, 1, life);
+      const formT = Math.max(0.02, c.puffFormTime) / Math.max(0.05, this.impactDuration);
+      cs.grow = Easing.outBack(saturate((t - born) / formT));
+      const unravelAt = Math.min(0.95, Math.max(0.1, c.puffUnravelStart));
+      cs.rise = c.puffRise * smoothstep(unravelAt - 0.15, 1, life);
+      cs.dissolve = smoothstep(unravelAt, 1, life);
+      cs.fade = 1 - smoothstep(0.9, 1, life);
       this.cyclone.visible = t >= born;
+      this.cycloneSheath.visible = t >= born;
       this.cycloneMaterial.userData.sync(cs);
+      this.cycloneSheathMaterial.userData.sync(cs);
+      this._sync(merge);
       if (this.cyclone.visible) this._cycloneFx(dt, 1 - cs.dissolve);
       if (this._burst && life < 0.85) this._puffHits(dt);
 
@@ -611,9 +647,12 @@ export class ZephyrShurikenAbility extends Ability {
     for (const disc of this._discs) {
       disc.mesh.visible = false;
       disc.warp.visible = false;
+      disc.body.visible = false;
     }
     this.cyclone.visible = false;
+    this.cycloneSheath.visible = false;
     this._hot = Math.max(0, this._hot - dt / 0.6);
+    this._cycloneState.grow = 1;
     this._sync(1);
     this._scuffState.fadeT = smoothstep(0.3, 1, ft);
     this.scuffMaterial.userData.sync(this._scuffState);
@@ -993,9 +1032,11 @@ export class ZephyrShurikenAbility extends Ability {
     for (const disc of this._discs) {
       disc.mesh.visible = false;
       disc.warp.visible = false;
+      disc.body.visible = false;
     }
     this.scuff.visible = false;
     this.cyclone.visible = false;
+    this.cycloneSheath.visible = false;
   }
 
   dispose() {
@@ -1005,9 +1046,11 @@ export class ZephyrShurikenAbility extends Ability {
     for (const disc of this._discs) {
       disc.material.dispose();
       disc.warpMaterial.dispose();
+      disc.bodyMaterial.dispose();
     }
     this.scuffMaterial.dispose();
     this.cycloneMaterial.dispose();
+    this.cycloneSheathMaterial.dispose();
     super.dispose();
   }
 }
@@ -1047,6 +1090,7 @@ export function buildEditor(gui, c, Editor) {
   R(flight, c, 'convergeLength', 0.05, 10, 0.05, 'closes in over (m)');
   R(flight, c, 'stagger', 0, 2, 0.01, 'stagger (m)');
   R(flight, c, 'bank', 0, 1.5, 0.01, 'bank into the braid');
+  R(flight, c, 'faceTilt', -1.2, 1.2, 0.01, 'tipped toward the thrower (rad)');
   R(flight, c, 'wobble', 0, 0.6, 0.005, 'rock (rad)');
   R(flight, c, 'wobbleSpeed', 0, 40, 0.1, 'rock speed');
   R(flight, c, 'spinSpeed', -120, 120, 0.5, 'spin (rad/s)');
@@ -1076,6 +1120,10 @@ export function buildEditor(gui, c, Editor) {
   look.addColor(c, 'colorFringeR').name('fringe 1');
   look.addColor(c, 'colorFringeG').name('fringe 2');
   look.addColor(c, 'colorFringeB').name('fringe 3');
+  R(look, c, 'bodyFill', 0, 1, 0.01, 'blade mass (lit body)');
+  R(look, c, 'bodyBevel', 0.01, 0.6, 0.005, 'body bevel');
+  look.addColor(c, 'colorDiscBody').name('body lit');
+  look.addColor(c, 'colorDiscDeep').name('body deep');
 
   const warp = folder.addFolder('2 · Distortion');
   R(warp, c, 'warpStrength', 0, 4, 0.01, 'strength');
@@ -1095,6 +1143,13 @@ export function buildEditor(gui, c, Editor) {
   R(scuff, c, 'scuffGlow', 0, 8, 0.05, 'fresh glow');
   R(scuff, c, 'scuffGlowLength', 0.1, 12, 0.05, 'glow length (m)');
   R(scuff, c, 'scuffErode', 0, 1, 0.01, 'ragged fade');
+  R(scuff, c, 'scuffFurrow', 0.01, 2, 0.01, 'furrow half-width (m)');
+  R(scuff, c, 'scuffFurrowOpacity', 0, 1, 0.01, 'furrow opacity');
+  R(scuff, c, 'eyeRadius', 0, 3, 0.01, 'cyclone eye (× top radius)');
+  R(scuff, c, 'eyeArms', 1, 8, 1, 'eye spiral arms');
+  R(scuff, c, 'eyeSpin', 0, 2, 0.01, 'eye turn (× cyclone spin)');
+  R(scuff, c, 'eyeOpacity', 0, 1, 0.01, 'eye opacity');
+  scuff.addColor(c, 'colorScuffDeep').name('furrow + eye deep');
   scuff.addColor(c, 'colorScuff').name('line');
   scuff.addColor(c, 'colorScuffDust').name('dust');
   scuff.addColor(c, 'colorScuffGlow').name('glow');
@@ -1140,6 +1195,17 @@ export function buildEditor(gui, c, Editor) {
   R(puff, c, 'puffOpacity', 0, 1, 0.01, 'opacity');
   R(puff, c, 'puffGlow', 0, 8, 0.05, 'glow');
   R(puff, c, 'puffNoise', 0, 2, 0.01, 'turbulence');
+  R(puff, c, 'puffFormTime', 0.02, 1.5, 0.01, 'forms over (s)');
+  R(puff, c, 'puffUnravelStart', 0.1, 0.95, 0.01, 'unravels from (fraction)');
+  R(puff, c, 'puffLean', -1, 1, 0.01, 'lean (m per m)');
+  R(puff, c, 'puffPrecess', -6, 6, 0.01, 'lean precession (rad/s)');
+  R(puff, c, 'puffWobble', 0, 2, 0.01, 'snaking (m)');
+  R(puff, c, 'puffSheathOpacity', 0, 1, 0.01, 'dust sheath opacity');
+  R(puff, c, 'puffSheathScale', 0.5, 3, 0.01, 'dust sheath width');
+  R(puff, c, 'puffFresnel', 0.2, 8, 0.05, 'sheath rim power');
+  puff.addColor(c, 'colorPuffTint').name('sheath lit');
+  puff.addColor(c, 'colorPuffBody').name('sheath body');
+  puff.addColor(c, 'colorPuffDeep').name('sheath deep');
   R(puff, c, 'burstSize', 0, 14, 0.05, 'pressure shell (m)');
   R(puff, c, 'burstIntensity', 0, 4, 0.01, 'shell brightness');
   R(puff, c, 'shockRadius', 0, 16, 0.05, 'shockwave (m)');

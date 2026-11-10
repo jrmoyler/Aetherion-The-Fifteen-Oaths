@@ -9,15 +9,15 @@ const read = path => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)))
 const registry = read('../CASTABLE_REGISTRY.json');
 const supplement = read('../shared/ability-supplement.json');
 
-test('every playable castable has source-authored colors, including all 50 supplements', () => {
-  assert.equal(Object.keys(PALETTES).length, 150);
+test('every playable castable has source-authored colors, including all 179 supplements', () => {
+  assert.equal(Object.keys(PALETTES).length, 279);
   assert.deepEqual(Object.keys(PALETTES).sort(), Object.keys(ABILITY_BY_ID).sort());
   for (const entry of [...registry.castables, ...supplement.castables]) {
     const palette = PALETTES[entry.sourceCatalog.uid];
     assert.ok(palette.c.length > 0 && palette.c.length <= 8);
     for (const color of palette.c) assert.ok(Object.values(entry.sourcePreset.settings).includes(color));
   }
-  assert.deepEqual(PALETTES['codex/secondself'].c.slice(0, 4), ['#ffd9a0', '#fff3d6', '#ffc65c', '#fff0c0']);
+  assert.deepEqual(PALETTES['codex/secondself'].c.slice(0, 4), ['#ffd9a0', '#fff6e2', '#ffe2a0', '#e0a02c']);
 });
 
 test('palette generation is reproducible and expansion preserves original visuals', () => {

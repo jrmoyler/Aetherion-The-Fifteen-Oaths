@@ -454,10 +454,10 @@ test('world events and AI adventurers', () => {
 });
 
 
-test('all 150 selectable castables produce their shape effect in every class and loadout slot', () => {
+test('all 279 selectable castables produce their shape effect in every class and loadout slot', () => {
   const sim = mkSim(); const S = sim._S;
   let checks = 0;
-  assert.equal(Object.values(ABILITIES_BY_OATH).flat().length, 150);
+  assert.equal(Object.values(ABILITIES_BY_OATH).flat().length, 279);
   for (const oath of OATHS) for (const cls of ['ninja', 'sorcerer']) {
     const { p } = join(sim, `catalog-${oath.id}-${cls}`, oath.id, cls);
     outside(sim, p);
@@ -487,5 +487,5 @@ test('all 150 selectable castables produce their shape effect in every class and
     }
     S.despawnMob(m); sim.removePlayer(p.id);
   }
-  assert.equal(checks, 1500, '150 castables × two classes × five equip slots');
+  assert.equal(checks, 2790, '279 castables × two classes × five equip slots');
 });

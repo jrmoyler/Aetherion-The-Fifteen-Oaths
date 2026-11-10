@@ -1,8 +1,10 @@
-import { Box3, Group, MathUtils, Vector3 } from 'three';
+import { Box3, Color, Group, MathUtils, Vector3 } from 'three';
 
 import { settings, CastShape, castShapeOf, zoneRadiusOf } from '../config/settings.js';
 import { disposeObject } from '../utils/dispose.js';
 import { Dummy } from './Dummy.js';
+import { BurstMode } from '../effects/BurstSphere.js';
+import { MAX_DUMMIES, assignArchetypes, formationSpot, isRandomFormation } from './DummyArchetypes.js';
 
 const MODEL_URL = './models/dummy.fbx';
 /** Mixamo exports in centimetres. */
@@ -41,6 +43,23 @@ const _delta = new Vector3();
  * One hit is a kill. This is a test range, not a fight: `hit.impulse`, `lift`
  * and `spin` are the whole of the damage model, and they are there to be
  * dragged around in the editor until a body flies the way the spell reads.
+ * (The archetypes bend that rule from inside `Dummy#kill` — an armored body
+ * shrugs blows off, a caster's bubble pops — so nothing here has to know.)
+ *
+ * ## Who stands
+ *
+ * `settings.dummies.mix` apportions the archetypes over `count` slots and
+ * `formation` says where each slot stands (`DummyArchetypes.js`). A slot is
+ * rebuilt when the mix gives it a different archetype.
+ *
+ * ## Bodies that are not the field's
+ *
+ * `addBody` puts something else that can be hit — the Arch-Wizard — into
+ * `slots`, flagged `external`. Every hit pass and every search reaches it, so
+ * all ~280 casts hit it through the same contract, but the field never stands
+ * it up, steps it or respawns it, and it stays hittable with the field's own
+ * bodies switched off. A body may refuse a particular cast (`immuneTo`), and
+ * `exclude` hides one body from the searches while its owner's casts run.
  *
  * @see Ragdoll for the fall, Dummy for one body.
  */
@@ -61,17 +80,61 @@ export class DummyField {
     this.offset = { x: 0, y: 0, z: 0 };
     this.forwardYaw = 0;
 
-    /** One slot per standing body: the dummy, and the wait before it stands again. */
+    /**
+     * One slot per body: the dummy, and the wait before it stands again.
+     * Slots flagged `external` belong to someone else (see `addBody`).
+     */
     this.slots = [];
+    /**
+     * The flat direction formations face away from the caster. Whoever owns
+     * the view writes it (the camera's forward, or the line to the wizard).
+     */
+    this.forward = new Vector3(0, 0, -1);
+    /** Shared VFX for the archetypes' sparks — `{ bursts }`, handed in by the app. */
+    this.fx = null;
+    /** A body the searches skip while its owner's own casts are running. */
+    this.exclude = null;
+    // Distinguish successive placements of a pooled dummy without retaining it.
+    this._standGenerations = new WeakMap();
     /** Where the ring is centred — the caster, handed over each frame. */
     this._anchor = new Vector3();
   }
 
-  /** How many are still on their feet. */
+  /** How many of the field's own are still on their feet. */
   get aliveCount() {
     let count = 0;
-    for (const slot of this.slots) if (slot.dummy.alive) count++;
+    for (const slot of this.slots) if (!slot.external && slot.dummy.alive) count++;
     return count;
+  }
+
+  /** The field's own slots, in formation order. */
+  get ownSlots() {
+    return this.slots.filter((slot) => !slot.external);
+  }
+
+  /** Radius a cast has to reach to touch this body. */
+  _radiusOf(dummy) {
+    return dummy.hitRadius ?? settings.dummies.bodyRadius;
+  }
+
+  /**
+   * Put a body that is not the field's into every hit pass and search.
+   * @param {object} body anything with Dummy's contract (`alive`, `position`, `kill` …)
+   */
+  addBody(body) {
+    if (this.slots.some((slot) => slot.dummy === body)) return body;
+    this.slots.push({ dummy: body, wait: 0, external: true });
+    return body;
+  }
+
+  removeBody(body) {
+    const index = this.slots.findIndex((slot) => slot.external && slot.dummy === body);
+    if (index >= 0) this.slots.splice(index, 1);
+  }
+
+  /** Incremented whenever this field places the pooled body into a new life. */
+  standGeneration(dummy) {
+    return this._standGenerations.get(dummy) ?? 0;
   }
 
   /* ------------------------------------------------------------------ */
@@ -122,53 +185,110 @@ export class DummyField {
   /* the ring                                                            */
   /* ------------------------------------------------------------------ */
 
-  _make() {
+  _make(archetype = 'standard') {
     const dummy = new Dummy({
       source: this.source,
       clip: this.clip,
       scale: this.scale,
       offset: this.offset,
       forwardYaw: this.forwardYaw,
-      environment: this.environment
+      environment: this.environment,
+      archetype
     });
+    dummy.onBlow = (body, what) => this._blow(body, what);
     this.group.add(dummy.root);
     return dummy;
   }
 
-  /** Grow or shrink the ring to match `settings.dummies.count`, live. */
+  /**
+   * Grow or shrink the field to match `settings.dummies.count`, live, and give
+   * each slot the archetype the mix says it should have.
+   */
   _resize(count) {
-    while (this.slots.length < count) {
-      const dummy = this._make();
-      this._stand(dummy);
-      this.slots.push({ dummy, wait: 0 });
+    const wanted = assignArchetypes(Math.min(MAX_DUMMIES, count), settings.dummies.mix);
+    const own = this.ownSlots;
+    for (let i = 0; i < wanted.length; i++) {
+      const slot = own[i];
+      if (!slot) {
+        const dummy = this._make(wanted[i]);
+        const added = { dummy, wait: 0, index: i };
+        // Own slots stay ahead of the external ones, in formation order.
+        const at = this.slots.findIndex((s) => s.external);
+        if (at < 0) this.slots.push(added);
+        else this.slots.splice(at, 0, added);
+        this._stand(dummy, i, wanted.length);
+        continue;
+      }
+      slot.index = i;
+      // Test fixtures push bare dummies with no archetype; leave those alone.
+      if (slot.dummy.archetype && slot.dummy.archetype !== wanted[i]) {
+        slot.dummy.dispose();
+        slot.dummy = this._make(wanted[i]);
+        slot.wait = 0;
+        this._stand(slot.dummy, i, wanted.length);
+      }
     }
-    while (this.slots.length > count) {
-      this.slots.pop().dummy.dispose();
+    for (let i = own.length - 1; i >= wanted.length; i--) {
+      const slot = own[i];
+      this.slots.splice(this.slots.indexOf(slot), 1);
+      slot.dummy.dispose();
     }
   }
 
-  /** Put one body somewhere in the ring that nothing else is standing in. */
-  _stand(dummy) {
-    const config = settings.dummies;
-    const inner = Math.max(0.5, Math.min(config.minRadius, config.radius));
-    const outer = Math.max(inner + 0.5, config.radius);
+  /** A blow shrugged off, or a shield going up: sparks where it happened. */
+  _blow(dummy, what) {
+    const bursts = this.fx?.bursts;
+    if (!bursts) return;
+    _point.copy(dummy.position);
+    _point.y = dummy.height * 0.62;
+    const colors = {
+      absorb: ['#fff1c2', '#ffb347'],
+      pop: ['#f2e6ff', '#a77bff'],
+      shield: ['#d9c2ff', '#7d55ff']
+    }[what];
+    if (!colors) return;
+    this.fx.spark?.(_point, what);
+    bursts.spawn(BurstMode.AIR, _point, {
+      radius: what === 'shield' ? 0.4 : 0.12,
+      endRadius: what === 'shield' ? 1.3 : what === 'pop' ? 1.6 : 0.8,
+      life: what === 'absorb' ? 0.28 : 0.45,
+      intensity: what === 'absorb' ? 2.2 : 1.4,
+      opacity: 0.6,
+      squash: 0.8,
+      colorA: getSparkColor(colors[0]),
+      colorB: getSparkColor(colors[1]),
+      colorC: getSparkColor(colors[1])
+    });
+  }
 
-    for (let attempt = 0; attempt < PLACEMENT_TRIES; attempt++) {
-      const angle = Math.random() * Math.PI * 2;
-      // sqrt over the radius, or every body crowds the inner edge of the ring.
-      const distance = MathUtils.lerp(inner, outer, Math.sqrt(Math.random()));
-      _spot.set(
-        this._anchor.x + Math.sin(angle) * distance,
-        0,
-        this._anchor.z + Math.cos(angle) * distance
-      );
-      if (attempt === PLACEMENT_TRIES - 1 || this._clear(_spot, dummy, config.separation)) break;
+  /**
+   * Stand one body at its slot of the formation. Ring and Scatter are random,
+   * so they try a few spots for one nothing else is standing in; the others
+   * are exact.
+   */
+  _stand(dummy, index = this._slotIndexOf(dummy), count = this.ownSlots.length || 1) {
+    const config = settings.dummies;
+    const formation = config.formation ?? 'ring';
+    const layout = { radius: config.radius, minRadius: config.minRadius, separation: config.separation, forward: this.forward };
+    const tries = isRandomFormation(formation) ? PLACEMENT_TRIES : 1;
+
+    for (let attempt = 0; attempt < tries; attempt++) {
+      const offset = formationSpot(formation, Math.max(0, index), Math.max(1, count), layout);
+      _spot.set(this._anchor.x + offset.x, 0, this._anchor.z + offset.z);
+      if (attempt === tries - 1 || this._clear(_spot, dummy, config.separation)) break;
     }
 
     // Facing the caster, because a target that has its back turned reads as
     // scenery — and because the fall is most legible from the front.
     const yaw = Math.atan2(this._anchor.x - _spot.x, this._anchor.z - _spot.z);
     dummy.place(_spot.x, _spot.z, yaw);
+    this._standGenerations.set(dummy, this.standGeneration(dummy) + 1);
+  }
+
+  _slotIndexOf(dummy) {
+    const own = this.ownSlots;
+    const at = own.findIndex((slot) => slot.dummy === dummy);
+    return at >= 0 ? at : own.length;
   }
 
   _clear(spot, self, separation) {
@@ -185,10 +305,11 @@ export class DummyField {
 
   /** Stand every body back up, in a fresh arrangement. Bound to a key. */
   reset() {
-    for (const slot of this.slots) {
+    const own = this.ownSlots;
+    own.forEach((slot, index) => {
       slot.wait = 0;
-      this._stand(slot.dummy);
-    }
+      this._stand(slot.dummy, index, own.length);
+    });
   }
 
   /* ------------------------------------------------------------------ */
@@ -209,16 +330,17 @@ export class DummyField {
     this._anchor.copy(anchor);
     this._resize(Math.max(0, Math.round(config.count)));
 
-    for (const slot of this.slots) {
+    const own = this.ownSlots;
+    own.forEach((slot, index) => {
       const dummy = slot.dummy;
       dummy.update(dt, anchor);
 
-      if (!dummy.finished) continue;
+      if (!dummy.finished) return;
       slot.wait += dt;
-      if (slot.wait < config.respawnDelay) continue;
+      if (slot.wait < config.respawnDelay) return;
       slot.wait = 0;
-      this._stand(dummy);
-    }
+      this._stand(dummy, index, own.length);
+    });
   }
 
   /* ------------------------------------------------------------------ */
@@ -236,7 +358,7 @@ export class DummyField {
    */
   applyHits(abilities) {
     const hit = settings.dummies.hit;
-    if (!settings.dummies.enabled || !hit.enabled) return;
+    if (!this._anyHittable(hit)) return;
 
     for (const ability of abilities) {
       if (!ability.isActive) continue;
@@ -268,7 +390,7 @@ export class DummyField {
    */
   applyHitsWith(abilities, shapeOf, radiusOf) {
     const hit = settings.dummies.hit;
-    if (!settings.dummies.enabled || !hit.enabled) return;
+    if (!this._anyHittable(hit)) return;
 
     for (const ability of abilities) {
       if (!ability.isActive || ability.handlesOwnHits) continue;
@@ -281,18 +403,36 @@ export class DummyField {
     }
   }
 
+  /**
+   * Whether this pass can touch anything at all: the field's own bodies need
+   * the field and its blow switched on; an external body (the wizard) is
+   * always in play.
+   */
+  _anyHittable(hit) {
+    if (settings.dummies.enabled && hit.enabled) return true;
+    return this.slots.some((slot) => slot.external);
+  }
+
+  /** Whether `ability` may touch the body in `slot` on this pass. */
+  _canHit(slot, ability, hit) {
+    const dummy = slot.dummy;
+    if (!dummy.alive) return false;
+    if (!slot.external && !(settings.dummies.enabled && hit.enabled)) return false;
+    if (dummy.immuneTo?.(ability)) return false;
+    return true;
+  }
+
   /** `_hitDisc` with the footprint passed in rather than looked up. */
   _hitDiscRadius(ability, hit, zoneRadius) {
     ability.pointAt(1, _point);
-    const radius = zoneRadius * hit.zoneScale + settings.dummies.bodyRadius;
-    const squared = radius * radius;
 
     for (const slot of this.slots) {
       const dummy = slot.dummy;
-      if (!dummy.alive) continue;
+      if (!this._canHit(slot, ability, hit)) continue;
+      const radius = zoneRadius * hit.zoneScale + this._radiusOf(dummy);
 
       _delta.set(dummy.position.x - _point.x, 0, dummy.position.z - _point.z);
-      if (_delta.lengthSq() > squared) continue;
+      if (_delta.lengthSq() > radius * radius) continue;
 
       if (_delta.lengthSq() < 1e-6) _delta.copy(ability.direction);
       else _delta.normalize();
@@ -308,17 +448,15 @@ export class DummyField {
    * idempotent, re-testing ground the cast already covered costs nothing.
    */
   _hitLine(ability, hit) {
-    const reach = hit.radius + settings.dummies.bodyRadius;
-    const squared = reach * reach;
-
     for (const slot of this.slots) {
       const dummy = slot.dummy;
-      if (!dummy.alive) continue;
+      if (!this._canHit(slot, ability, hit)) continue;
+      const reach = hit.radius + this._radiusOf(dummy);
 
       closestOnSegment(ability.origin, ability.position, dummy.position, _point);
       const dx = dummy.position.x - _point.x;
       const dz = dummy.position.z - _point.z;
-      if (dx * dx + dz * dz > squared) continue;
+      if (dx * dx + dz * dz > reach * reach) continue;
 
       // Thrown the way the cast is going. A lance that knocks a body sideways
       // reads as a bug however good the fall is.
@@ -329,15 +467,15 @@ export class DummyField {
   /** The far cast's footprint: a disc at the target point, bodies thrown outward. */
   _hitDisc(ability, hit) {
     ability.pointAt(1, _point);
-    const radius = zoneRadiusOf(ability.element) * hit.zoneScale + settings.dummies.bodyRadius;
-    const squared = radius * radius;
+    const footprint = zoneRadiusOf(ability.element) * hit.zoneScale;
 
     for (const slot of this.slots) {
       const dummy = slot.dummy;
-      if (!dummy.alive) continue;
+      if (!this._canHit(slot, ability, hit)) continue;
+      const radius = footprint + this._radiusOf(dummy);
 
       _delta.set(dummy.position.x - _point.x, 0, dummy.position.z - _point.z);
-      if (_delta.lengthSq() > squared) continue;
+      if (_delta.lengthSq() > radius * radius) continue;
 
       // Out of the middle of it. A body standing exactly on the point has no
       // direction to be thrown in, so it takes the cast's own.
@@ -367,18 +505,16 @@ export class DummyField {
    */
   findTargets(x, z, radius, out) {
     out.length = 0;
-    if (!settings.dummies.enabled) return out;
-
-    const reach = radius + settings.dummies.bodyRadius;
-    const squared = reach * reach;
 
     for (const slot of this.slots) {
       const dummy = slot.dummy;
-      if (!dummy.alive) continue;
+      if (!dummy.alive || dummy === this.exclude) continue;
+      if (!slot.external && !settings.dummies.enabled) continue;
+      const reach = radius + this._radiusOf(dummy);
       const dx = dummy.position.x - x;
       const dz = dummy.position.z - z;
       const distance = dx * dx + dz * dz;
-      if (distance > squared) continue;
+      if (distance > reach * reach) continue;
       dummy._searchDistance = distance;
       out.push(dummy);
     }
@@ -410,20 +546,18 @@ export class DummyField {
    */
   findBodies(x, z, radius, out) {
     out.length = 0;
-    if (!settings.dummies.enabled) return out;
-
-    const reach = radius + settings.dummies.bodyRadius;
-    const squared = reach * reach;
 
     for (const slot of this.slots) {
       const dummy = slot.dummy;
-      if (dummy.state === 'gone') continue;
+      if (dummy.state === 'gone' || dummy === this.exclude) continue;
+      if (!slot.external && !settings.dummies.enabled) continue;
 
+      const reach = radius + this._radiusOf(dummy);
       const at = dummy.alive ? dummy.position : (dummy.bodyPoint(_point) ?? dummy.position);
       const dx = at.x - x;
       const dz = at.z - z;
       const distance = dx * dx + dz * dz;
-      if (distance > squared) continue;
+      if (distance > reach * reach) continue;
 
       dummy._searchDistance = distance;
       out.push(dummy);
@@ -436,7 +570,7 @@ export class DummyField {
   /* ------------------------------------------------------------------ */
 
   dispose() {
-    for (const slot of this.slots) slot.dummy.dispose();
+    for (const slot of this.slots) if (!slot.external) slot.dummy.dispose();
     this.slots.length = 0;
     if (this.source) disposeObject(this.source);
     this.source = null;
@@ -451,7 +585,15 @@ export class DummyField {
  * Flat because everything it is asked about is: the floor is y = 0, the cast
  * line lies on it, and a body's feet are on it too.
  */
-function closestOnSegment(a, b, p, out) {
+const _sparkColors = new Map();
+/** One cached Color per spark hex, so a hail of blows allocates nothing. */
+function getSparkColor(hex) {
+  let color = _sparkColors.get(hex);
+  if (!color) _sparkColors.set(hex, (color = new Color(hex)));
+  return color;
+}
+
+export function closestOnSegment(a, b, p, out) {
   const abx = b.x - a.x;
   const abz = b.z - a.z;
   const lengthSq = abx * abx + abz * abz;
