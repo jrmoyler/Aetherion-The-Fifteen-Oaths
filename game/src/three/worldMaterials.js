@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { applySurfaceShading } from './surfaceState.js';
 // Analytic mineral grain avoids image downloads while retaining world-space surface detail.
 export function naturalMaterial(color, roughness = .92, masonry = false) {
   const albedo = new THREE.Color(color);
@@ -43,6 +44,8 @@ export function architectureMaterial(color, o = {}) {
   }
   const macro = o.macro ?? .14, boost = o.envBoost ?? 1, wear = o.wear ?? .22, grime = o.grime ?? 1.6;
   mat.onBeforeCompile = shader => {
+    // Paving and steps take rain, frost and scorch too; walls (vEdge.w >= 0) stay dry.
+    applySurfaceShading(shader, 'vArchWorld', '(vEdge.w<0.?1.:0.)');
     shader.vertexShader = shader.vertexShader.replace('#include <common>', '#include <common>\nvarying vec3 vArchWorld;\nattribute vec4 aEdge;\nvarying vec4 vEdge;').replace('#include <worldpos_vertex>', '#include <worldpos_vertex>\nvec4 archLocal = vec4(transformed,1.);\n#ifdef USE_INSTANCING\narchLocal = instanceMatrix * archLocal;\n#endif\nvArchWorld = (modelMatrix * archLocal).xyz;\nvEdge = aEdge;');
     shader.fragmentShader = shader.fragmentShader.replace('#include <common>', `#include <common>
       varying vec3 vArchWorld;
@@ -80,6 +83,8 @@ export function terrainMaterial() {
   // steep faces expose mineral strata, and volcanic channels glow only where lava exists.
   const material = new THREE.MeshStandardMaterial({color:'#ffffff',vertexColors:true,roughness:.94});
   material.onBeforeCompile = shader => {
+    // Biome Triad surface state (wet, snow, char, embers) is laid in first so strata and roads still read on top of it.
+    applySurfaceShading(shader, 'vGround', '(1.-smoothstep(.3,.62,vSlope))');
     shader.vertexShader = shader.vertexShader
       .replace('#include <common>', '#include <common>\nattribute vec3 terrainMask; varying vec3 vGround; varying vec3 vGroundMask; varying float vSlope;')
       .replace('#include <begin_vertex>', '#include <begin_vertex>\nvGround=(modelMatrix*vec4(position,1.)).xyz; vGroundMask=terrainMask; vSlope=1.-normal.y;');
@@ -106,7 +111,7 @@ export function terrainMaterial() {
         float hot=smoothstep(.35,.85,vGroundMask.z);
         totalEmissiveRadiance+=vec3(1.,.17,.015)*hot*(.65+groundNoise(vGround.xz*.8)*.7);`);
   };
-  material.customProgramCacheKey=()=> 'aetherion-terrain-strata-v1';
+  material.customProgramCacheKey=()=> 'aetherion-terrain-strata-surface-v2';
   return material;
 }
 export function waterMaterial() {

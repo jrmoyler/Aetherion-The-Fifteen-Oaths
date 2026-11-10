@@ -216,11 +216,15 @@ export function createHud(ui) {
 
   // ----- region
   let regionId = null;
+  // The ground under the player, as Biome Triad's surface layer reads it (wet, iced, burning...), follows the realm name.
+  let regionLabel = '', groundLabel = '';
+  const paintRegion = () => { regionChip.textContent = groundLabel ? `${regionLabel} · ${groundLabel}` : regionLabel; regionChip.toggleAttribute('data-ground', !!groundLabel); };
+  ui.ctx.bus.on('world:ground', ({ text }) => { groundLabel = text || ''; paintRegion(); });
   function setRegion(oath, { announce = true } = {}) {
     if (!oath || oath.id === regionId) return;
     regionId = oath.id;
     gs.region = oath;
-    regionChip.textContent = `${oath.name} · ${biomeLabel(oath.biome)}`;
+    regionLabel = `${oath.name} · ${biomeLabel(oath.biome)}`; paintRegion();
     ui.minimap?.setRegion(oath);
     if (!announce) return;
     banner.style.setProperty('--accent', oath.accent); banner.style.setProperty('--accent-rgb', rgbTriplet(oath.accent));
