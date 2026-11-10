@@ -8,6 +8,7 @@ import { statusIcon } from './icons.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { CREATURES } from '@shared/creatures.js';
 import { biomeLabel } from './create.js';
+import { createBelt } from './belt.js';
 import { sanctuaries } from './mapData.js';
 
 const CREATURE_BY_NAME = Object.fromEntries(CREATURES.map((c) => [c.name, c]));
@@ -94,7 +95,8 @@ export function createHud(ui) {
   const xpR = h('span', { class: 'ae-num' }, '0 / 0');
   const xpWrap = h('div', { class: 'ae-xpbar' }, xpBar.el, h('div', { class: 'ae-xpbar__lbl' }, xpL, xpR));
   const covenantLabel = h('div', {class:'ae-actionbar__covenant'});
-  const actionbar = h('div', { class: 'ae-actionbar ae-panel ae-panel--glass' }, covenantLabel, hotbar, xpWrap);
+  const belt = createBelt(ui);
+  const actionbar = h('div', { class: 'ae-actionbar ae-panel ae-panel--glass' }, covenantLabel, h('div', { class: 'ae-hotrow' }, hotbar, belt.el), xpWrap);
   const castLbl = h('div', { class: 'ae-castbar__lbl' });
   const castBar = makeBar('cast', { text: false });
   const cast = h('div', { class: 'ae-castbar', hidden: true }, castLbl, castBar.el);
@@ -109,6 +111,13 @@ export function createHud(ui) {
   root.append(commands);
   root.append(pf.el, tf.el, buffs, compass, regionChip, banner, actionbar, cast, fps);
 
+  let combatUntil = 0, wasFighting = false;
+  ctx.bus.on('net:ev', (payload) => {
+    const e = payload?.e ?? payload, me = ctx.net?.selfId;
+    if (me == null || !e) return;
+    if ((e.type === 'hit' && (e.src === me || e.dst === me) && (e.amount ?? 0) > 0) || (e.type === 'cast' && e.src === me && e.slot >= 0))
+      combatUntil = (ctx.gameplayNow?.() ?? performance.now()) + 6000;
+  });
   // ----- hotbar build & cooldown state
   let view = [];
   const slotEls = [];
@@ -283,6 +292,10 @@ export function createHud(ui) {
       castBar.set(Math.min(1, k), 1, ''); castBar.tick(1);
       if (k >= 1) { cast.hidden = true; }
     }
+    belt.update();
+    // While blows are being traded the guidance and task panels step back so the fight has the screen.
+    const fighting = now < combatUntil;
+    if (fighting !== wasFighting) { wasFighting = fighting; document.getElementById('ui')?.classList.toggle('in-combat', fighting); }
     // cooldown sweeps at ~30 Hz
     if (acc >= 1 / 30) {
       acc = 0;

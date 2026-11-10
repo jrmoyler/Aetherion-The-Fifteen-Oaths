@@ -146,6 +146,7 @@ export class PlayerController {
     }
     const p = this.pos; p.x = nx; p.y = pos.y; p.z = nz;
     ctx.collision?.resolve?.(p, T.radius, (a.body?.height ?? 1.8) * 0.95, T.stepUp);
+    ctx.world?.resolveTrunks?.(p, T.radius * 0.8); // trees are solid
     nx = Math.max(-WORLD_HALF, Math.min(WORLD_HALF, p.x)); nz = Math.max(-WORLD_HALF, Math.min(WORLD_HALF, p.z));
 
     // ---- water
