@@ -6,6 +6,7 @@ import {buildSanctuaries} from './worldArchitecture.js';
 import {createRealmFlora,realmRock} from './realmFlora.js';
 import {terrainResolution,addTerrainSkirt} from './terrain-detail.js';
 import {createBiomeDetails} from './biomeDetails.js';
+import {createRealmLandmarks} from './realmLandmarks.js';
 const TILE=160;
 // Tiles this close to the player draw full trees; farther tiles draw baked cards.
 const NEAR_BAND=1;
@@ -18,6 +19,7 @@ const seed=(x,z)=>{let v=Math.imul(x|0,374761393)^Math.imul(z|0,668265263);v=Mat
 export async function initWorld(ctx){
   const scene=ctx.scene, low=ctx.quality?.name==='low', medium=ctx.quality?.name==='medium', chunks=new Map(), jobs=[];
   const details=createBiomeDetails(ctx);
+  const landmarks=createRealmLandmarks(ctx);
   const terrainMat=terrainMaterial();
   const wind={time:{value:0}};
   const flora=createRealmFlora(ctx,wind);
@@ -103,7 +105,7 @@ export async function initWorld(ctx){
   function update(dt){architecture.update(dt);t+=Math.min(dt,.1);wind.time.value=t;water.time.value=t;details.update(t);
     // Terrain build is bounded to one tile per frame, with nearest tiles first.
     if(jobs.length){const job=jobs.shift();build(job[0],job[1]);}
-    const target=ctx.actors?.player?.position||ctx.actors?.player?.root?.position||ctx.player?.position||ctx.player?.root?.position||ctx.camera?.position;if(target)focus(target.x,target.z);
+    const target=ctx.actors?.player?.position||ctx.actors?.player?.root?.position||ctx.player?.position||ctx.player?.root?.position||ctx.camera?.position;if(target)focus(target.x,target.z);landmarks.update(dt,focusX,focusZ);
     if(!flockReady||Math.hypot(flockCenter.x-focusX,flockCenter.z-focusZ)>450){flockCenter.set(focusX,heightAt(focusX,focusZ),focusZ);flockReady=true;}
     birds.children.forEach((b,i)=>{const a=t*.045+i*.014,rank=Math.ceil(i/2),side=i%2?1:-1;b.position.set(flockCenter.x+Math.cos(a)*120+rank*side*2.8,flockCenter.y+44+Math.sin(t*.2+i)*.4,flockCenter.z+Math.sin(a)*120+rank*3);b.rotation.y=-a;for(let j=0;j<2;j++)b.children[j].rotation.z=Math.sin(t*5+i*.7)*(j?-.45:.45);});
   }
@@ -118,7 +120,7 @@ export async function initWorld(ctx){
   const isWater=(x,z)=>heightAt(x,z)<waterLevelAt(x,z);
   const waterLevelAt=(x,z)=>Math.hypot(x-marsh[0],z-marsh[1])<630?MARSH_LEVEL:SEA_LEVEL;
   const stopUpdate=ctx.addUpdate?.(update,40);
-  function dispose(){stopUpdate?.();details.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon,birds);flora.dispose();for(const g of [sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,water.material,birdMat])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
+  function dispose(){stopUpdate?.();details.dispose();landmarks.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon,birds);flora.dispose();for(const g of [sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,water.material,birdMat])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
   return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,resolveTrunks,trunkHit,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
 }
 export const init=initWorld;
