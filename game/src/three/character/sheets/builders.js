@@ -31,7 +31,7 @@ function limbBand(c, chain, { t, width, off = .004, thick = .006, color, mat = M
   const m = chain.metres(t), profile = [[-.5, 0], [-.4, 1], [.4, 1], [.5, 0]];
   c.bag.grid(nu * c.q, profile.length - 1, (u, v) => {
     const [a, h] = profile[Math.round(v * (profile.length - 1))], tt = chain.step(0, m + a * width), phi = u * TAU;
-    return { p: chain.point(tt, phi, radius(tt, phi) + off + thick * h + bulge * h * Math.cos(a * PI)), skin: chain.skin(tt) };
+    return { p: chain.point(tt, phi, radius(tt, phi) + off + thick * h + bulge * h * Math.cos(a * PI)), skin: chain.skin(tt), c: h ? color : color.clone().multiplyScalar(.4) };
   }, { closeU: true, color, mat, inside: chain.centre(t) });
 }
 
@@ -41,7 +41,7 @@ function trunkBand(c, { y, height, off = .008, thick = .008, from = 0, to = TAU,
   c.bag.grid(Math.max(6, n * c.q * (to - from) / TAU), profile.length - 1, (u, v) => {
     const [a, h] = profile[Math.round(v * (profile.length - 1))], th = lerp(from, to, u), yy = y + a * height + tilt * Math.sin(th);
     const p = trunk.at(yy, th, off + thick * h);
-    return { p, skin: skin ?? trunk.skin(p) };
+    return { p, skin: skin ?? trunk.skin(p), c: h >= 1 ? color : color.clone().multiplyScalar(.4 + .3 * h) };
   }, { closeU: closed, color, mat, inside: V(0, y, c.form.spineZ(y)) });
 }
 
@@ -74,7 +74,7 @@ export function neck(c, { color = 'skin', from = null } = {}) {
  * Shirt or tunic body with sleeves. `sleeve` is where the sleeve ends on the arm (1 = elbow, 2 = wrist),
  * `hem` the height of the bottom edge as a trunk landmark or metres, `trim` a piping colour at the cuffs.
  */
-export function shirt(c, { color = 'cloth', sleeve = .6, flare = .012, off = .007, hem = 'belt', trim = null, trimWidth = .014, collar = 'base', slack = .004 }) {
+export function shirt(c, { color = 'cloth', sleeve = .6, flare = .012, off = .007, hem = 'belt', trim = null, trimWidth = .014, collar = 'base', slack = .004, cap: pad = 0 }) {
   const { trunk, arm } = c.form, y0 = typeof hem === 'number' ? hem : trunk.Y[hem] - .03, y1 = trunk.Y[collar] ?? collar, col = c.pal(color);
   c.bag.part = 'shirt';
   c.bag.grid(44 * c.q, 26 * c.q, (u, v) => {
@@ -85,7 +85,7 @@ export function shirt(c, { color = 'cloth', sleeve = .6, flare = .012, off = .00
     return { p, skin: trunk.skin(p) };
   }, { closeU: true, color: col, mat: MAT.cloth, inside: V(0, (y0 + y1) / 2, c.form.spineZ(y1)) });
   if (sleeve <= 0) return;
-  const cap = -.14, wide = (t) => arm.radius(t) + off + flare * smooth(.05, sleeve, t);
+  const cap = -.14, wide = (t) => arm.radius(t) + off + flare * smooth(.05, sleeve, t) + pad * smooth(.5, 0, t);
   const radius = (t, phi) => (t < 0 ? wide(0) * Math.sqrt(Math.max(0, 1 - (t / cap) ** 2)) * .98 + .001 : wide(t) + slack * .8 * Math.sin(phi * 5 + t * 7) * smooth(0, sleeve * .6, t));
   sides(c, 'both', () => {
     tube(c, arm, { t0: cap, t1: sleeve, nv: 4 + 12 * sleeve, radius, color: col });
@@ -100,7 +100,7 @@ export function shirt(c, { color = 'cloth', sleeve = .6, flare = .012, off = .00
  * Trousers: a seat that follows the hips and two legs that balloon and are gathered at `gather` (1 = knee).
  * `bag` is the extra room at the widest point; `pleats` the number of folds running into the gather.
  */
-export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006 }) {
+export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006, pockets = [[28, 80, .0, .3], [152, 110, .04, .2]], pipingPaths = [[22, 84, -.02, .4], [84, 74, .4, .96], [208, 150, .1, .5]] }) {
   const { trunk, leg } = c.form, col = c.pal(color), yTop = trunk.Y[top] + .02;
   c.bag.part = 'trousers';
   c.bag.grid(40 * c.q, 12 * c.q, (u, v) => {
@@ -108,24 +108,29 @@ export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats
     const p = trunk.at(Math.max(y, trunk.Y.crotch), th, .011); p.y = y; p.x *= 1 - shut * .75; p.z = lerp(p.z, c.form.spineZ(y), shut * .6);
     return { p, skin: trunk.skin(p) };
   }, { closeU: true, color: col, mat: MAT.cloth, inside: V(0, trunk.Y.hip, c.form.spineZ(trunk.Y.hip)) });
-  const room = curve([[-.2, bag * .2], [.1, bag * .34], [.5, bag * .62], [.86, bag * .95], [gather - .14, bag], [gather - .055, bag * .78], [gather - .012, cuff + .012], [gather, cuff]]);
-  const seedA = c.rand() * TAU, seedB = c.rand() * TAU;
+  const room = curve([[-.2, bag * .2], [.1, bag * .4], [.5, bag * .7], [.86, bag * .95], [gather - .14, bag], [gather - .06, bag * .8], [gather - .014, cuff + .014], [gather, cuff]]);
+  const seedA = c.rand() * TAU, seedB = c.rand() * TAU, seedC = c.rand() * TAU;
   const radius = (t, phi) => {
-    const base = leg.radius(t) + room(t);
-    const fall = smooth(.25, gather - .07, t) * smooth(gather - .005, gather - .05, t);         // pleats swell above the band
-    const folds = .0065 * fall * Math.sin(phi * pleats + seedA + Math.sin(t * 9) * .6) + .006 * Math.sin(phi * 3 + t * 6.5 + seedB) * smooth(-.1, .5, t) * smooth(gather, gather - .1, t);
+    // More room to the front and outside than between the legs.
+    const base = leg.radius(t) + room(t) * (1 - .3 * Math.max(0, -Math.sin(phi)) * smooth(-.1, .3, t));
+    const near = smooth(.35, gather - .06, t) * smooth(gather - .004, gather - .04, t);      // pleats crowd into the band
+    const pleat = Math.sin(phi * pleats + seedA + Math.sin(t * 11 + phi * 2) * .9), sharp = Math.sign(pleat) * Math.abs(pleat) ** .6;
+    const drag = Math.sin(phi * 2 + t * 8.5 + seedB) * .008 + Math.sin(phi * 4 - t * 13 + seedC) * .0045;      // long folds pulled across the thigh
+    const folds = .011 * near * sharp + drag * smooth(-.05, .45, t) * smooth(gather, gather - .12, t);
     const cap = -.16;
     return t < 0 ? (base + folds) * Math.sqrt(Math.max(.02, 1 - (t / cap) ** 2)) : base + folds;
   };
+  const light = col.clone().multiplyScalar(1.7), dark = col.clone().multiplyScalar(.3);
+  // Sewn lines riding on the leg: [from angle, to angle, from t, to t, colour, width, lift].
+  const lines = [[92, 88, .0, gather - .03, light, .0045, .0016], [-88, -92, .16, gather - .03, light, .004, .0014]];
+  for (const pocket of pockets) lines.push([pocket[0], pocket[1], pocket[2], pocket[3], dark, .011, .0012]);
+  if (piping) for (const path of pipingPaths) lines.push([...path, c.pal(piping), .0065, .0026]);
   sides(c, 'both', () => {
-    tube(c, leg, { t0: -.155, t1: gather, nu: 24, nv: 24, radius, color: col });
-    if (piping) for (const [a0, a1, tA, tB] of [[18, 78, .04, .82], [205, 150, .1, .5]]) {
-      // A piped seam riding on the trouser leg.
-      c.bag.grid(1, 16 * c.q, (u, v) => {
-        const t = lerp(tA, tB, v), phi = lerp(a0, a1, smooth(0, 1, v) * .7 + v * .3) * DEG + (u - .5) * .008 / leg.radius(t);
-        return { p: leg.point(t, phi, radius(t, phi) + .0022), skin: leg.skin(t) };
-      }, { color: c.pal(piping), mat: MAT.cloth, inside: leg.centre(.5) });
-    }
+    tube(c, leg, { t0: -.155, t1: gather, nu: 28, nv: 30, radius, color: col });
+    for (const [a0, a1, tA, tB, tone, width, lift] of lines) c.bag.grid(1, 16 * c.q, (u, v) => {
+      const t = lerp(tA, tB, v), phi = lerp(a0, a1, smooth(0, 1, v) * .6 + v * .4) * DEG + (u - .5) * width / leg.radius(t);
+      return { p: leg.point(t, phi, radius(t, phi) + lift), skin: leg.skin(t) };
+    }, { color: tone, mat: MAT.cloth, inside: leg.centre(.5) });
   });
   c.trouserGather = gather;
 }
@@ -170,7 +175,7 @@ function merge(shapes) {
  * direction (metres along the cloth), so an asymmetric capelet is just a longer run over one shoulder.
  * The cloth is laid over the form: it rests where the shoulders and arms carry it and hangs where they do not.
  */
-export function capelet(c, { color = 'cloth', long = .42, short = .11, toward = -90, sharp = 1.3, trim = null, trimWidth = .016, over = .034, lift = .012, ripple = .006 }) {
+export function capelet(c, { color = 'cloth', long = .42, short = .11, toward = -90, sharp = 1.3, trim = null, trimWidth = .016, over = .034, lift = .012, ripple = .008 }) {
   const { trunk, J, S } = c.form, col = c.pal(color), aim = toward * DEG;
   c.bag.part = 'capelet';
   const nu = Math.round(64 * c.q), nv = Math.round(18 * c.q), yNeck = trunk.Y.base + .028;
@@ -195,7 +200,8 @@ export function capelet(c, { color = 'cloth', long = .42, short = .11, toward = 
   const at = (column, v) => {
     const want = column.L * v, path = column.path; let k = 1; while (k < path.length - 1 && path[k].arc < want) k++;
     const a = path[k - 1], b = path[k], f = clamp((want - a.arc) / Math.max(1e-6, b.arc - a.arc), 0, 1);
-    const d = lerp(a.d, b.d, f) + ripple * v * v * Math.sin(column.th * 11 + seed) + .004 * v, y = lerp(a.y, b.y, f);
+    const hang = v ** 1.5 * smooth(.08, .3, column.L), wave = Math.sin(column.th * 5 + seed) + .5 * Math.sin(column.th * 8 + seed * 2.3);
+    const d = lerp(a.d, b.d, f) + ripple * hang * wave + .005 * v, y = lerp(a.y, b.y, f) - .5 * ripple * hang * Math.cos(column.th * 5 + seed);
     return V(column.sn * d, y, column.zc + column.cs * d);
   };
   const skin = (p) => {
@@ -210,6 +216,9 @@ export function capelet(c, { color = 'cloth', long = .42, short = .11, toward = 
   const edge = (v, out) => (u) => { const column = columns[Math.round(u * nu) % nu], p = at(column, v); if (out) { p.x += column.sn * out; p.z += column.cs * out; } return p; };
   c.bag.grid(nu, 1, (u, v) => { const p = v ? edge(1 - .012 / 1, 0)(u).multiplyScalar(1).add(V(0, 0, 0)) : edge(1, 0)(u); if (v) { const column = columns[Math.round(u * nu) % nu]; p.x -= column.sn * .007; p.z -= column.cs * .007; } return { p, skin: skin(p) }; },
     { closeU: true, color: col.clone().multiplyScalar(.5), mat: MAT.cloth, inside: inner, flip: true });
+  // Rolled hem: a cord of cloth along the edge gives the mantle its thickness.
+  c.bag.grid(nu, 5, (u, v) => { const column = columns[Math.round(u * nu) % nu], p = at(column, 1), a = v * TAU; p.x += column.sn * Math.cos(a) * .0045; p.z += column.cs * Math.cos(a) * .0045; p.y += Math.sin(a) * .0045 - .002; return { p, skin: skin(p) }; },
+    { closeU: true, color: (trim ? c.pal(trim) : col).clone().multiplyScalar(.8), mat: MAT.cloth, inside: inner });
   if (trim) {
     const rows = [[1 - trimWidth / long * 1.25, 0], [1 - trimWidth / long * 1.15, .0026], [1 - .0015, .0026], [1, 0]];
     c.bag.grid(nu, rows.length - 1, (u, v) => {
@@ -250,7 +259,7 @@ function slab(hx, hy, hz, r, cuts = 8) {
   for (const x of xs) for (const [y, z, , ny, nz] of ring) {
     const q = [clamp(x, -(hx - r), hx - r), clamp(y, -(hy - r), hy - r), clamp(z, -(hz - r), hz - r)], d = V(x - q[0], y - q[1], z - q[2]);
     if (d.lengthSq() > 1e-12) d.normalize(); else d.set(0, ny, nz);
-    verts.push({ p: V(q[0], q[1], q[2]).addScaledVector(d, r), n: d });
+    verts.push({ p: V(q[0], q[1], q[2]).addScaledVector(d, r), n: d, e: ny !== 0 || x === xs[0] || x === xs[xs.length - 1] ? 1 : 0 });
   }
   for (let i = 0; i < xs.length - 1; i++) for (let j = 0; j < 8; j++) quads.push([i * 8 + j, i * 8 + (j + 1) % 8, (i + 1) * 8 + (j + 1) % 8, (i + 1) * 8 + j]);
   // End faces from the plain box (axis 0, both signs: its first 32 vertices and 18 quads).
@@ -339,7 +348,7 @@ export function strap(c, { path, width = .034, thick = .006, color = 'leather', 
   };
   c.bag.grid(n * c.q, 3, (u, v) => {
     const f = framed(closed ? u : u * .998), [a, h] = profile[Math.round(v * 3)], p = f.p.clone().addScaledVector(f.across, a * width).addScaledVector(f.up, h * thick);
-    return { p, skin: trunk.skin(p) };
+    return { p, skin: trunk.skin(p), c: h ? col : col.clone().multiplyScalar(.35) };
   }, { closeU: closed, color: col, mat: MAT.leather, inside: V(0, trunk.Y.ribs, c.form.spineZ(trunk.Y.ribs)) });
   if (anchor) {
     const f = framed(anchor.at), place = frame(f.p.clone().addScaledVector(f.up, thick), f.across, f.along, f.up), skin = trunk.skin(f.p);
@@ -525,7 +534,7 @@ export function gloveCuff(c, { side = 'both', color = 'glove', from = 1.9, to = 
  * Boots: welted sole, a lofted foot, a shaft up the shin to `top` (1 = knee, 2 = ankle), and optional plates:
  * `toeCap`, `shinPlate`, `heelPlate` (colours), plus `straps` across instep and shaft.
  */
-export function boots(c, { color = 'boot', sole = 'sole', top = 1.56, toeCap = null, shinPlate = null, heelPlate = null, straps = 2, strapColor = 'leather', buckle = 'iron', cuff = null, plateMat = 'ceramic', soleHeight = .03, bulk = 1 }) {
+export function boots(c, { color = 'boot', sole = 'sole', top = 1.56, toeCap = null, shinPlate = null, heelPlate = null, straps = 2, strapColor = 'leather', buckle = 'iron', cuff = null, plateMat = 'ceramic', soleHeight = .036, bulk = 1 }) {
   const { leg, foot, k } = c.form;
   c.bag.part = 'boots';
   sides(c, 'both', () => {
@@ -536,10 +545,10 @@ export function boots(c, { color = 'boot', sole = 'sole', top = 1.56, toeCap = n
     const skin = (p) => foot.skin(p);
     // Sole and welt.
     const soleRows = [[0, -.006], [.005, 0], [soleHeight - .004, 0], [soleHeight, -.004], [soleHeight, -.02]];
-    c.bag.grid(22 * c.q, soleRows.length - 1, (u, v) => {
+    c.bag.grid(44 * c.q, soleRows.length - 1, (u, v) => {
       const a = u * TAU, z = zm - Math.cos(a) * L * .999, [y, inset] = soleRows[Math.round(v * (soleRows.length - 1))], w = halfWidth(z) + .005 + inset;
       // Tread blocks are cut into the sole's edge.
-      const tread = y < soleHeight - .006 && y > .003 ? -.0025 * (Math.sin(z * 190) > .2 ? 1 : 0) : 0;
+      const tread = y < soleHeight - .006 && y > .003 ? -.0055 * (Math.sin(z * 150) > .1 ? 1 : 0) : 0;
       const p = foot.at(centreX(z) + Math.sin(a) * (w + tread) * Math.sign(1), y, z + Math.cos(a) * -(inset) * .6); return { p, skin: skin(p) };
     }, { closeU: true, color: c.pal(sole), mat: MAT.leather, inside: foot.at(0, .015, zm) });
     // Upper: arches over the foot from heel to toe.
@@ -627,7 +636,7 @@ export function halfMask(c, { color = 'iron', slat = 'ceramic', vents = 5, top =
  * Hair built from a scalp cap and tapered locks. `style` picks how the locks fall:
  * 'spiky' (short, tousled, fringe over the brow), 'bun' (swept back into a knot at the crown).
  */
-export function hair(c, { style = 'spiky', color = 'hair', locks = 120, length = .17, lift = .02, streak = null, bun = null, fringe = .3 }) {
+export function hair(c, { style = 'spiky', color = 'hair', locks = 130, length = .19, lift = .02, streak = null, bun = null, fringe = .3 }) {
   const place = headPlace(c), col = c.pal(color), other = streak ? c.pal(streak) : col;
   c.bag.part = 'hair';
   const line = (phi) => { const a = Math.abs(Math.atan2(Math.sin(phi), Math.cos(phi))); return lerp(lerp(fringe, .13, smooth(.3, 1.05, a)), lerp(-.02, -.3, smooth(1.5, 2.6, a)), smooth(1.05, 1.5, a)); };
@@ -641,20 +650,33 @@ export function hair(c, { style = 'spiky', color = 'hair', locks = 120, length =
     if (style === 'bun') {
       const knot = V(...(bun?.at ?? [0, .4, -.3])); flow = knot.clone().sub(root).normalize().multiplyScalar(1.6).addScaledVector(normal, .35); len = Math.min(root.distanceTo(knot) * .95, length * 2.2) * (.8 + c.rand() * .2); base = .075 + c.rand() * .03;
     } else {
-      // Tousled: the crown stands up and leans forward, the fringe falls over the brow, sides and nape lie down.
-      const fall = V(Math.sin(a) * .5, -1, Math.cos(a) * .25).multiplyScalar(1 - crown * .9);
-      const fwd = V((c.rand() - .5) * .9, .25 * crown, .75 * crown + .5 * Math.max(0, frontness) * (1 - crown));
-      flow = normal.clone().multiplyScalar(.75 + crown * .35).add(fall.multiplyScalar(.55)).add(fwd.multiplyScalar(.7)).add(V(c.rand() - .5, c.rand() - .5, c.rand() - .5).multiplyScalar(.7));
-      if (y < h + .09 && frontness > .3) { flow.set((c.rand() - .5) * .9, -.75, .55); len *= 1.05; }
+      // Layered spikes: the nape and sides lie down and flick out, the crown stands and leans forward, and the
+      // front row falls over the brow as a fringe.
+      const down = V(0, -1, 0).addScaledVector(normal, normal.y).normalize(), fwd = V(0, 0, 1).addScaledVector(normal, -normal.z).normalize();
+      const jitter = V(c.rand() - .5, c.rand() - .5, c.rand() - .5).multiplyScalar(.5), sideways = V(Math.sign(Math.sin(a)) * (c.rand() * .5), 0, 0);
+      flow = normal.clone().multiplyScalar(.5 + .55 * crown).addScaledVector(down, .95 * (1 - crown)).addScaledVector(fwd, .6 * crown + .2 * Math.max(0, frontness)).add(jitter).addScaledVector(sideways, crown);
+      len = length * (1 + .4 * crown) * (.8 + c.rand() * .45); base = .075 + c.rand() * .04;
+      if (Math.abs(a) > .9 && Math.abs(a) < 2.3 && y < .16) len *= .55;                    // cropped over the ears
+      if (y < h + .1 && frontness > .35) { flow.copy(down).multiplyScalar(.95).addScaledVector(fwd, .45).add(V((c.rand() - .5) * .8, 0, 0)); len = length * (1.15 + c.rand() * .45); }
     }
     flow.normalize();
     const side = new Vector3().crossVectors(flow, normal).normalize(); if (side.lengthSq() < .5) side.set(1, 0, 0);
-    const droop = style === 'bun' ? V(0, 0, 0) : V(0, -.35 - c.rand() * .3, 0), tone = (c.rand() < (style === 'bun' ? .38 : .5) ? other : col).clone().multiplyScalar(style === 'bun' ? .88 + c.rand() * .24 : .75 + c.rand() * .6), twist = c.rand() * TAU;
-    c.bag.grid(4, 3, (u, v) => {
-      const s = v, centre = root.clone().addScaledVector(flow, len * s).addScaledVector(droop, len * s * s * .5).addScaledVector(normal, len * .25 * Math.sin(s * PI) * (style === 'bun' ? .16 : 1));
-      const r = base * (style === 'bun' ? 1 - s * .45 : (1 - s) ** .7) * (s === 0 ? 1.15 : 1), ang = u * TAU + twist, up = new Vector3().crossVectors(side, flow);
-      return { p: place(centre.addScaledVector(side, Math.cos(ang) * r * (style === 'bun' ? 1.6 : 1.25)).addScaledVector(up, Math.sin(ang) * r * (style === 'bun' ? .32 : .7))), skin: HEAD };
-    }, { closeU: true, color: tone, mat: MAT.hair, inside: place(root.clone().addScaledVector(flow, len * .4)) });
+    const tone = (c.rand() < (style === 'bun' ? .38 : .5) ? other : col).clone().multiplyScalar(style === 'bun' ? .88 + c.rand() * .24 : .7 + c.rand() * .7), twist = c.rand() * TAU;
+    if (style === 'bun') {
+      c.bag.grid(4, 3, (u, v) => {
+        const s = v, centre = root.clone().addScaledVector(flow, len * s).addScaledVector(normal, len * .04 * Math.sin(s * PI));
+        const r = base * (1 - s * .45) * (s === 0 ? 1.15 : 1), ang = u * TAU + twist, up = new Vector3().crossVectors(side, flow);
+        return { p: place(centre.addScaledVector(side, Math.cos(ang) * r * 1.6).addScaledVector(up, Math.sin(ang) * r * .32)), skin: HEAD };
+      }, { closeU: true, color: tone, mat: MAT.hair, inside: place(root.clone().addScaledVector(flow, len * .4)) });
+    } else {
+      // A lock is a tapered blade with a raised spine, curling under its own weight toward the tip.
+      const droop = V(0, -.4 - c.rand() * .35, 0), tip = tone.clone().multiplyScalar(1.5);
+      c.bag.grid(2, Math.max(3, Math.round(5 * c.q)), (u, v) => {
+        const s = v, centre = root.clone().addScaledVector(flow, len * s).addScaledVector(droop, len * s * s * .5).addScaledVector(normal, len * .2 * Math.sin(s * PI));
+        const w = base * (1 - s) ** .75 * 1.25 + .004, across = (u - .5) * 2;
+        return { p: place(centre.addScaledVector(side, across * w).addScaledVector(normal, (1 - Math.abs(across)) * w * .55 + .01)), skin: HEAD, c: tone.clone().lerp(tip, s * s) };
+      }, { color: tone, mat: MAT.hair, inside: c.head.C });
+    }
   }
   if (style === 'bun') {
     const at = V(...(bun?.at ?? [0, .4, -.3])), r = bun?.radius ?? .15;

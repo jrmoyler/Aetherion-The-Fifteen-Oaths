@@ -106,14 +106,15 @@ export class Bag {
    * A hard-surface shape ({ verts: [{ p, n }], quads }) in its own frame, put on the body by `place` (any smooth
    * map from the shape's frame to bind space: a bone frame, or a wrap around the trunk or a limb).
    */
-  solid(shape, place, skin, color, mat) {
+  solid(shape, place, skin, color, mat, edge = mat[2] === 1 ? .5 : mat[2] === 3 ? .7 : mat[2] === 2 ? .6 : 1) {
+    const dark = edge < 1 ? color.clone().multiplyScalar(edge) : color;
     const eps = 1e-3, t1 = new Vector3(), t2 = new Vector3(), w0 = new Vector3(), w1 = new Vector3(), w2 = new Vector3(), q = new Vector3();
-    const P = shape.verts.map(({ p, n }) => {
+    const P = shape.verts.map(({ p, n, e }) => {
       t1.set(n.y, n.z, n.x).cross(n); if (t1.lengthSq() < 1e-6) t1.set(1, 0, 0).cross(n); t1.normalize(); t2.crossVectors(n, t1);
       w0.copy(place(q.copy(p))); w1.copy(place(q.copy(p).addScaledVector(t1, eps))).sub(w0); w2.copy(place(q.copy(p).addScaledVector(t2, eps))).sub(w0);
-      return { p: w0.clone(), n: new Vector3().crossVectors(w1, w2).normalize() };
+      return { p: w0.clone(), n: new Vector3().crossVectors(w1, w2).normalize(), e };
     });
-    const ids = P.map((v) => this.vert(v.p, v.n, color, mat, typeof skin === 'function' ? skin(v.p) : skin));
+    const ids = P.map((v) => this.vert(v.p, v.n, v.e ? dark : color, mat, typeof skin === 'function' ? skin(v.p) : skin));
     for (const [a, b, c, d] of shape.quads) {
       a3.subVectors(P[c].p, P[a].p); b3.subVectors(P[d].p, P[b].p); c3.crossVectors(a3, b3);
       const agree = c3.dot(P[a].n) + c3.dot(P[b].n) + c3.dot(P[c].n) + c3.dot(P[d].n) >= 0;
@@ -148,7 +149,7 @@ export function roundBox(hx, hy, hz, r = .004) {
       const p = [0, 0, 0]; p[axis] = sign * h[axis]; p[u] = a; p[w] = b;
       const q = p.map((value, k) => clamp(value, -(h[k] - r), h[k] - r)), d = new Vector3(p[0] - q[0], p[1] - q[1], p[2] - q[2]);
       if (d.lengthSq() > 0) d.normalize(); else d.setComponent(axis, sign);
-      verts.push({ p: new Vector3(q[0], q[1], q[2]).addScaledVector(d, r), n: d });
+      verts.push({ p: new Vector3(q[0], q[1], q[2]).addScaledVector(d, r), n: d, e: a === us[0] || a === us[3] || b === ws[0] || b === ws[3] ? 1 : 0 });
     }
     for (let j = 0; j < 3; j++) for (let i = 0; i < 3; i++) quads.push([start + j * 4 + i, start + j * 4 + i + 1, start + (j + 1) * 4 + i + 1, start + (j + 1) * 4 + i]);
   }
@@ -196,7 +197,7 @@ export function dome(r, height = r * .6, sides = 8) {
 
 /** Move a shape inside its own frame before placing it. */
 export function moved(shape, offset, turn = null) {
-  return { quads: shape.quads, verts: shape.verts.map(({ p, n }) => ({ p: (turn ? p.clone().applyQuaternion(turn) : p.clone()).add(offset), n: turn ? n.clone().applyQuaternion(turn) : n })) };
+  return { quads: shape.quads, verts: shape.verts.map(({ p, n, e }) => ({ p: (turn ? p.clone().applyQuaternion(turn) : p.clone()).add(offset), n: turn ? n.clone().applyQuaternion(turn) : n, e })) };
 }
 
 /** A rigid frame as a place() map: origin plus three orthonormal axes. */

@@ -63,7 +63,7 @@ class Chain {
 
 export function makeForm(rig, build = {}) {
   const J = rig.J, S = J['upperarm.L'].x, k = S / .182;
-  const b = { width: 1, depth: 1, belly: 0, bust: 0, hips: 1, waist: 1, arm: 1, leg: 1, neck: 1, ...build };
+  const b = { width: 1, depth: 1, belly: 0, bust: 0, hips: 1, waist: 1, arm: 1, leg: 1, neck: 1, shoulder: 1, ...build };
   const spineZ = curve([[J.hips.y, J.hips.z], [J.spine.y, J.spine.z], [J.spine1.y, J.spine1.z], [J.spine2.y, J.spine2.z], [J.neck.y, J.neck.z]]);
   // Heights of the trunk's landmarks, bottom to top.
   const Y = {
@@ -73,7 +73,7 @@ export function makeForm(rig, build = {}) {
   const belly = (y) => b.belly * Math.exp(-(((y - (J.spine.y + .02)) / (.13 * k)) ** 2));
   const bust = (y) => b.bust * Math.exp(-(((y - (J.spine2.y - .01)) / (.07 * k)) ** 2));
   const w = b.width * k, d = b.depth * k;
-  const half = curve([[Y.crotch, .12 * w * b.hips], [Y.hip, .178 * w * b.hips], [Y.belt, .166 * w * b.waist], [Y.waist, .15 * w * b.waist], [Y.ribs, .17 * w], [Y.chest, .187 * w], [Y.armpit, Math.max(.185 * w, S * .99)], [Y.shoulder, S * .86], [Y.base, .078 * k * b.neck], [Y.neck, .058 * k * b.neck]]);
+  const half = curve([[Y.crotch, .12 * w * b.hips], [Y.hip, .178 * w * b.hips], [Y.belt, .166 * w * b.waist], [Y.waist, .15 * w * b.waist], [Y.ribs, .17 * w], [Y.chest, .187 * w], [Y.armpit, Math.max(.185 * w, S * .99)], [Y.shoulder, S * .86 * b.shoulder], [Y.base, .078 * k * b.neck], [Y.neck, .058 * k * b.neck]]);
   const frontK = curve([[Y.crotch, .07 * d], [Y.hip, .1 * d], [Y.belt, .105 * d], [Y.waist, .1 * d], [Y.ribs, .114 * d], [Y.chest, .126 * d], [Y.armpit, .112 * d], [Y.shoulder, .078 * d], [Y.base, .062 * k * b.neck], [Y.neck, .056 * k * b.neck]]);
   const backK = curve([[Y.crotch, .08 * d], [Y.hip, .118 * d * b.hips], [Y.belt, .108 * d], [Y.waist, .096 * d], [Y.ribs, .104 * d], [Y.chest, .116 * d], [Y.armpit, .114 * d], [Y.shoulder, .092 * d], [Y.base, .074 * k * b.neck], [Y.neck, .062 * k * b.neck]]);
   const N = 2.5, E = 2 / N;
