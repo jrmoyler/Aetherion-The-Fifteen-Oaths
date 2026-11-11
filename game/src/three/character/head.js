@@ -147,6 +147,7 @@ const SKIN_GLSL = /* glsl */`
 `;
 // Extra painted shading for sheet heroes: the face panel's read at a distance (shadowed sockets, strong brows,
 // lash line, nose and lip modelling, cheek contour, shadow under the chin) and uneven, living skin tone.
+export const SHEET_SKIN_LEVEL = .58;
 const SHEET_SKIN_GLSL = /* glsl */`
   float front=smoothstep(.16,.3,q.z);
   float tone=csFbm(vCsP*30.)*.5+.5, mottle=csFbm(vCsP*90.+4.);
@@ -190,7 +191,9 @@ const skinMaterialCache = new Map();
 export function skinMaterial(profile, H, origin) {
   const key = `${profile.skin}|${profile.age}|${profile.sex}|${profile.sheet ? 'sheet' + (profile.eyeOpen ?? '') : ''}|${profile.hair?.color}|${H.toFixed(4)}|${origin.toArray().map(v => v.toFixed(4)).join(',')}`;
   if (skinMaterialCache.has(key)) return skinMaterialCache.get(key);
-  const base = new Color(profile.skin);
+  // Sheet heroes: skin albedo is brought down out of the tone-mapper's shoulder, where a bright face lost all
+  // of its modelling and read as a pale blank.
+  const base = new Color(profile.skin); if (profile.sheet) base.multiplyScalar(SHEET_SKIN_LEVEL);
   const m = new MeshPhysicalMaterial({
     color: base, roughness: .62, metalness: 0, specularIntensity: .28, specularColor: new Color('#fff6f0'),
     sheen: profile.sheet ? .06 : .18, sheenRoughness: .6, sheenColor: base.clone().lerp(new Color('#ff7a5a'), .55).multiplyScalar(.6),

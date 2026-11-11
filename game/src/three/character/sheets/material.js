@@ -45,7 +45,7 @@ const DETAIL = /* glsl */`
   } else if (kind < 4.5) {    // skin
     float pores = smoothstep(.4, .9, csNoise(vCsP * 1100.)) * csLod(vCsP, .0018);
     csH = -pores * .08 + mid * .04;
-    diffuseColor.rgb *= .94 + macro * .1 + mid * .04;
+    diffuseColor.rgb *= (.94 + macro * .1 + mid * .04) * .58;      // same level as the head's skin (head.js SHEET_SKIN_LEVEL)
     diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(1.06, .88, .84), smoothstep(.3, .8, mid * .5 + .5) * .3);
   } else if (kind < 5.5) {    // hair: strands along the lock
     float strand = csNoise(vCsP * vec3(700., 160., 700.)) * lod, band_ = csNoise(vCsP * vec3(120., 30., 120.));
@@ -68,6 +68,6 @@ export function costumeMaterial() {
       .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * .0011);')
       .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\nif (vSm.z > 6.5) totalEmissiveRadiance += vColor.rgb * 2.2;');
   };
-  material.customProgramCacheKey = () => 'sheet-costume-3';
+  material.customProgramCacheKey = () => 'sheet-costume-4';
   return material;
 }
