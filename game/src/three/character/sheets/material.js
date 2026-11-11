@@ -17,7 +17,7 @@ const DETAIL = /* glsl */`
     float thread = mix(twill, cross_, .35) * lod;
     float slub = csNoise(vCsP * vec3(40., 260., 40.));
     float wear = smoothstep(.2, .75, mid + macro * .6 - .25);
-    csH = thread * .5 + mid * .9 + slub * .35 + fine * .2;
+    csH = thread * .3 + mid * .9 + slub * .3;
     diffuseColor.rgb *= .58 + macro * .5 + mid * .2 + thread * .22 + slub * .1;
     diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 1.5 + vec3(.012, .01, .009), wear * .45);
     roughnessFactor = clamp(roughnessFactor - wear * .12 + thread * .05, .62, 1.);
@@ -25,7 +25,7 @@ const DETAIL = /* glsl */`
     float pits = smoothstep(.45, .8, csNoise(vCsP * 95.)) * csLod(vCsP, .02), pores = smoothstep(.5, .9, csNoise(vCsP * 300.)) * lod;
     float chip = smoothstep(.5, .62, csFbm(vCsP * 34. + 9.));
     float flash = smoothstep(.3, .8, macro + mid * .35);
-    csH = -pits * 1.4 - pores * .5 - chip * 1.1 + mid * .5;
+    csH = -pits * 1.1 - pores * .25 - chip * .9 + mid * .5;
     diffuseColor.rgb *= (.62 + flash * .62 + mid * .2) * (1. - pits * .45) * (1. - pores * .25);
     diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(1.35, 1.2, 1.05) + vec3(.02, .012, .008), chip * .5);
     diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(.42, .36, .34), smoothstep(.55, .9, csFbm(vCsP * 8. + 3.1) * .5 + .5) * .7);
@@ -33,7 +33,7 @@ const DETAIL = /* glsl */`
   } else if (kind < 2.5) {    // leather: grain, creases, pale scuffs
     float cell = csNoise(vCsP * 300.) * lod, crease = pow(1. - abs(csNoise(vCsP * 46.)), 6.);
     float scuff = smoothstep(.25, .8, mid + macro * .5 - .2);
-    csH = cell * .5 - crease * 1.1 + mid * .4;
+    csH = cell * .3 - crease * .9 + mid * .4;
     diffuseColor.rgb *= .62 + macro * .45 + cell * .12 - crease * .28;
     diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 1.55 + vec3(.02, .014, .008), scuff * .4);
     roughnessFactor = clamp(roughnessFactor + cell * .06 - scuff * .16, .36, .9);
@@ -49,8 +49,8 @@ const DETAIL = /* glsl */`
     diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(1.06, .88, .84), smoothstep(.3, .8, mid * .5 + .5) * .3);
   } else if (kind < 5.5) {    // hair: strands along the lock
     float strand = csNoise(vCsP * vec3(700., 160., 700.)) * lod, band_ = csNoise(vCsP * vec3(120., 30., 120.));
-    csH = strand * .5 + band_ * .5; diffuseColor.rgb *= .7 + strand * .3 + band_ * .35 + macro * .2;
-    roughnessFactor = clamp(roughnessFactor + strand * .12 - band_ * .1, .28, .8);
+    csH = band_ * .35; diffuseColor.rgb *= .75 + strand * .2 + band_ * .3 + macro * .2;
+    roughnessFactor = clamp(roughnessFactor + .12 + strand * .1 - band_ * .08, .45, .85);
   } else if (kind < 6.5) {    // hollow: the dark inside of a vent or buckle
     diffuseColor.rgb *= .25;
   }
@@ -68,6 +68,6 @@ export function costumeMaterial() {
       .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * .0011);')
       .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\nif (vSm.z > 6.5) totalEmissiveRadiance += vColor.rgb * 2.2;');
   };
-  material.customProgramCacheKey = () => 'sheet-costume-2';
+  material.customProgramCacheKey = () => 'sheet-costume-3';
   return material;
 }

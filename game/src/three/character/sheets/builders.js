@@ -197,12 +197,19 @@ export function capelet(c, { color = 'cloth', long = .42, short = .11, toward = 
     columns.push({ th, sn, cs, zc, L, path });
   }
   const seed = c.rand() * TAU;
-  const at = (column, v) => {
+  const rawAt = (column, v) => {
     const want = column.L * v, path = column.path; let k = 1; while (k < path.length - 1 && path[k].arc < want) k++;
     const a = path[k - 1], b = path[k], f = clamp((want - a.arc) / Math.max(1e-6, b.arc - a.arc), 0, 1);
     const hang = v ** 1.5 * smooth(.08, .3, column.L), wave = Math.sin(column.th * 5 + seed) + .5 * Math.sin(column.th * 8 + seed * 2.3);
     const d = lerp(a.d, b.d, f) + ripple * hang * wave + .005 * v, y = lerp(a.y, b.y, f) - .5 * ripple * hang * Math.cos(column.th * 5 + seed);
     return V(column.sn * d, y, column.zc + column.cs * d);
+  };
+  // Neighbouring runs of cloth are blended, so the hem is one flowing line rather than a step per column.
+  columns.forEach((column, i) => { column.i = i; });
+  const at = (column, v) => {
+    const out = V(); let total = 0;
+    for (let k = -3; k <= 3; k++) { const w = 4 - Math.abs(k), blend = w * smooth(0, .25, v) + (k === 0 ? 4 : 0) * (1 - smooth(0, .25, v)); out.addScaledVector(rawAt(columns[(column.i + k + nu) % nu], v), blend); total += blend; }
+    return out.multiplyScalar(1 / total);
   };
   const skin = (p) => {
     const side = p.x >= 0 ? 'L' : 'R', onArm = smooth(S - .05, S + .05, Math.abs(p.x)) * smooth(J['upperarm.L'].y + .06, J['upperarm.L'].y - .02, p.y) * .82;
@@ -232,7 +239,7 @@ export function capelet(c, { color = 'cloth', long = .42, short = .11, toward = 
 }
 
 /** Rolled cowl / scarf collar around the neck: `rolls` stacked folds of cloth. */
-export function cowl(c, { color = 'cloth', rolls = 2, radius = .03, rise = .034, base = 0 }) {
+export function cowl(c, { color = 'cloth', rolls = 2, radius = .032, rise = .04, base = 0 }) {
   const { trunk, J } = c.form, col = c.pal(color), y0 = trunk.Y.base + .012 + base;
   c.bag.part = 'cowl';
   const seed = c.rand() * TAU;
@@ -240,7 +247,7 @@ export function cowl(c, { color = 'cloth', rolls = 2, radius = .03, rise = .034,
     const r = radius * (1 - k * .16), y = y0 + k * rise, reach = .012 - k * .008;
     c.bag.grid(34 * c.q, 8, (u, v) => {
       const th = u * TAU, a = v * TAU, sag = .006 * Math.sin(th * 3 + seed + k), ring = trunk.rho(Math.min(y, trunk.Y.neck), th) + reach + r * .55;
-      const d = ring + Math.cos(a) * r * (1 + .12 * Math.sin(th * 5 + seed * 2 + k * 2)), yy = y + sag + Math.sin(a) * r * .78 + Math.cos(th) * -.006 * k;
+      const d = ring + Math.cos(a) * r * (1 + .2 * Math.sin(th * 5 + seed * 2 + k * 2)), yy = y + sag + Math.sin(a) * r * 1.05 + Math.cos(th) * -.006 * k + .006 * Math.sin(th * 7 + a * 2 + k);
       const p = V(Math.sin(th) * d, yy, c.form.spineZ(y) + Math.cos(th) * d * 1.02 + .004 * k);
       return { p, skin: [['spine2', .55 - k * .2], ['neck', .45 + k * .2]] };
     }, { closeU: true, color: col, mat: MAT.cloth, inside: V(0, y + .2, J.neck.z) });
@@ -310,7 +317,7 @@ function slabY(hx, hy, hz, r, cuts) {
 }
 
 /** Belt with a framed buckle and keeper loops. */
-export function belt(c, { y = 'belt', rise = 0, height = .046, thick = .008, off = .012, color = 'leather', buckle = 'iron', at = 0, keepers = [28, -28, 150, -150], tilt = 0, buckleSize = [.03, .024] }) {
+export function belt(c, { y = 'belt', rise = 0, height = .046, thick = .008, off = .012, color = 'leather', buckle = 'iron', at = 0, keepers = [28, -28, 150, -150], tilt = 0, buckleSize = [.03, .024], studs = 0 }) {
   const { trunk } = c.form, yy = (trunk.Y[y] ?? y) + rise;
   c.bag.part = 'belt';
   trunkBand(c, { y: yy, height, off, thick, color: c.pal(color), tilt });
@@ -321,6 +328,7 @@ export function belt(c, { y = 'belt', rise = 0, height = .046, thick = .008, off
     c.bag.solid(moved(roundBox(buckleSize[0] - .006, buckleSize[1] - .007, .002, .001), V(0, 0, .0022)), place, skin, c.pal('hollow'), MAT.hollow);
     c.bag.solid(moved(bar(.0028, buckleSize[0] - .004, 6), V(0, 0, .0045), new Quaternion().setFromAxisAngle(V(0, 0, 1), PI / 2)), place, skin, c.pal(buckle), MAT.iron);
   }
+  for (let i = 0; i < studs; i++) { const th = at0 + (i + .5) / studs * TAU; if (Math.abs(Math.atan2(Math.sin(th - at0), Math.cos(th - at0))) < .32) continue; c.bag.solid(dome(.006, .0045, 6), trunk.wrap(yy + tilt * Math.sin(th), th, off + thick), (p) => trunk.skin(p), c.pal(buckle ?? 'iron'), MAT.iron); }
   for (const k of keepers) trunkBandPatch(c, { y: yy + tilt * Math.sin(k * DEG), half: height / 2 + .004, th: k * DEG, width: .012, off: off + thick - .001, thick: .004, color: c.pal(color).clone().multiplyScalar(.7), mat: MAT.leather });
 }
 

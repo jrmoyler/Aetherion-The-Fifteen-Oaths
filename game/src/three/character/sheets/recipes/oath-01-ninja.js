@@ -26,8 +26,8 @@ export default {
     { use: 'capelet', color: 'mantle', trim: 'terracotta', long: .43, short: .1, toward: -90 },
     { use: 'cowl', color: 'cowl' },
     { use: 'strap', color: 'leather', anchor: { at: .06 }, path: [
-      { th: 48, y: 'shoulder', dy: -.03, off: .03 }, { th: -30, y: 'chest', dy: -.03, off: .052 }, { th: -95, y: 'ribs', dy: -.02, off: .052 },
-      { th: -170, y: 'chest', dy: -.03, off: .05 }, { th: -232, y: 'shoulder', dy: -.03, off: .03 }, { th: -270, y: 'shoulder', dy: .014, off: .036 },
+      { th: 48, y: 'shoulder', dy: -.03, off: .024 }, { th: -30, y: 'chest', dy: -.03, off: .052 }, { th: -95, y: 'ribs', dy: -.02, off: .052 },
+      { th: -170, y: 'chest', dy: -.03, off: .05 }, { th: -232, y: 'shoulder', dy: -.03, off: .024 }, { th: -270, y: 'shoulder', dy: .008, off: .026 },
     ] },
     { use: 'bracer', side: 'R', from: 1.1, to: 1.9 },
     { use: 'bracer', side: 'L', from: 1.1, to: 1.9, straps: [1.2] },
