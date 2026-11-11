@@ -2,6 +2,7 @@
 // three-quarter, face, materials: folded enamel, grey cloth, brushed gold; shoulder wing hinge and visor rear
 // fastener).
 import { B } from '../builders-b.js';
+import { X } from '../builders-x.js';
 
 export default {
   id: 'oath-09-ninja', sheet: 'reference-075', title: 'Daybreak Ninja',
@@ -9,12 +10,12 @@ export default {
     grey: '#565554', greyDark: '#454444', cloth: '#565554', ivory: '#d9d0bc', ivoryShade: '#b9b09c', gold: '#b08a3e', leather: '#4a4644', leatherDark: '#343231',
     iron: '#b08a3e', boot: '#5a5857', sole: '#3a3838', hair: '#1a1513', hairLight: '#2c231e',
   },
-  build: { width: 1.0, depth: 1.0, hips: 1.2, waist: .93, bust: .024, arm: .9, leg: 1.0, neck: .92 },
+  build: { width: 1.0, depth: .98, hips: 1.12, waist: .84, seat: 1.1, bust: .034, arm: .88, leg: 1.02, thigh: 1.1, neck: .9, shoulder: .96 },
   keep: ['weapon'],
-  builders: B,
+  builders: { ...B, ...X },
   groom: { hair: false, gear: false },
   parts: [
-    { use: 'b.sleeve', from: -.14, to: 1.0, color: 'skin', mat: 'skin', off: 0 },
+    { use: 'x.physique', part: 'arm', from: -.2, to: 1.0, power: 1.0 },
     { use: 'b.neck', color: 'grey', mat: 'cloth', off: .003 },
     { use: 'b.legs', color: 'grey', to: 1.9, off: .006, seam: 'gold' },
     { use: 'boots', top: 1.74, color: 'boot', sole: 'sole', straps: 0 },
@@ -22,19 +23,21 @@ export default {
     // Sleeveless grey top, high ivory collar, the ivory sash from the left shoulder, wound waist.
     { use: 'b.torso', from: ['belt', -.03], to: 'base', color: 'grey', off: .006 },
     { use: 'b.collar', color: 'ivory', lining: 'ivoryShade', height: .05, gap: 44, flare: .008, off: .008 },
-    { use: 'b.strip', color: 'ivory', mat: 'cloth', width: .056, thick: .005, closed: true, n: 80, path: [
+    { use: 'b.strip', color: 'ivoryShade', mat: 'cloth', width: .075, thick: .004, closed: true, n: 70, path: [
+      { th: -62, y: ['shoulder', .01], off: .008 }, { th: -20, y: ['chest', .0], off: .01 }, { th: 58, y: ['ribs', -.02], off: .009 }, { th: 150, y: ['ribs', .02], off: .009 }, { th: 214, y: ['chest', .03], off: .009 }, { th: 262, y: ['armpit', .05], off: .008 } ] },
+    { use: 'b.strip', color: 'ivory', mat: 'cloth', width: .095, thick: .005, closed: true, n: 70, path: [
       { th: 62, y: ['shoulder', .01], off: .01 }, { th: 20, y: ['chest', .01], off: .012 }, { th: -58, y: ['ribs', -.01], off: .011 }, { th: -150, y: ['ribs', .02], off: .011 }, { th: -214, y: ['chest', .03], off: .011 }, { th: -262, y: ['armpit', .05], off: .01 } ] },
     { use: 'b.sash', color: 'ivory', bands: [
       { y: ['waist', .035], h: .034, tilt: .016, phase: 0, off: .01 }, { y: ['waist', -.005], h: .034, tilt: -.018, phase: 20, off: .012, color: 'ivoryShade' }, { y: ['belt', .025], h: .04, tilt: .01, phase: 60, off: .011, color: 'greyDark' } ] },
     // Enamel tassets edged in gold, grey loincloth points between them.
     { use: 'b.hang', at: 0, top: ['belt', .0], bottom: .8, width: [.04, .02], point: .08, color: 'greyDark', off: .008 },
     { use: 'b.hang', at: 180, top: ['belt', .0], bottom: .84, width: [.05, .03], point: .05, color: 'ivoryShade', off: .008 },
-    { use: 'b.hang', at: 46, top: ['belt', .01], bottom: .87, width: [.08, .1], point: .085, skew: -.55, color: 'ivory', mat: 'enamel', border: 'gold', borderWidth: .007, thick: .007, off: .014, flare: 1.3, lean: .03 },
-    { use: 'b.hang', at: -46, top: ['belt', .01], bottom: .87, width: [.08, .1], point: .085, skew: .55, color: 'ivory', mat: 'enamel', border: 'gold', borderWidth: .007, thick: .007, off: .014, flare: 1.3, lean: .03 },
-    { use: 'b.hang', at: 134, top: ['belt', .01], bottom: .87, width: [.075, .095], point: .085, skew: .55, color: 'ivory', mat: 'enamel', border: 'gold', borderWidth: .007, thick: .007, off: .014, flare: 1.3, lean: .03 },
-    { use: 'b.hang', at: -134, top: ['belt', .01], bottom: .87, width: [.075, .095], point: .085, skew: -.55, color: 'ivory', mat: 'enamel', border: 'gold', borderWidth: .007, thick: .007, off: .014, flare: 1.3, lean: .03 },
+    { use: 'x.plate', at: 46, arc: 31, from: .88, to: ['belt', .01], hangs: true, taper: -.22, flare: .045, point: .17, skew: -0.5, off: .006, thick: .007, ridge: .014, color: 'ivory', mat: 'enamel', rim: 'gold', rimMat: 'gold', rimWidth: .008, rimSides: 'blr' },
+    { use: 'x.plate', at: -46, arc: 31, from: .88, to: ['belt', .01], hangs: true, taper: -.22, flare: .045, point: .17, skew: 0.5, off: .006, thick: .007, ridge: .014, color: 'ivory', mat: 'enamel', rim: 'gold', rimMat: 'gold', rimWidth: .008, rimSides: 'blr' },
+    { use: 'x.plate', at: 134, arc: 29, from: .88, to: ['belt', .01], hangs: true, taper: -.22, flare: .045, point: .17, skew: 0.5, off: .006, thick: .007, ridge: .014, color: 'ivory', mat: 'enamel', rim: 'gold', rimMat: 'gold', rimWidth: .008, rimSides: 'blr' },
+    { use: 'x.plate', at: -134, arc: 29, from: .88, to: ['belt', .01], hangs: true, taper: -.22, flare: .045, point: .17, skew: -0.5, off: .006, thick: .007, ridge: .014, color: 'ivory', mat: 'enamel', rim: 'gold', rimMat: 'gold', rimWidth: .008, rimSides: 'blr' },
     // Folded enamel wing on the left shoulder with its gold hinge.
-    { use: 'b.wing', side: 'L', span: .17, depth: .085, tipDepth: .002, rise: .09, wedge: .1, inset: .78, lift: .012, color: 'ivory', mat: 'enamel', trim: 'gold', trimMat: 'gold', trimWidth: .008, thick: .009 },
+    { use: 'x.horn', side: 'L', root: [-.05, .03, -.01], spine: [[-.03, -.045], [.1, -.02], [.24, .07], [.31, .16]], inner: [[-.07, .06], [.04, .11], [.19, .15], [.31, .16]], thick: .075, dish: .0, facets: 2, tilt: 8, lean: -6, color: 'ivory', mat: 'enamel', edge: 'gold', edgeMat: 'gold', edgeWidth: .07, skin: [['shoulder.L', .7], ['spine2', .3]] },
     { use: 'b.studs', on: 'arm', side: 'L', at: [[-.12, 150]], r: .018, off: .016, color: 'gold', mat: 'gold' },
     // Arms: gold armlets, grey sleeves from the elbow, enamel vambraces, gold wrist rings.
     { use: 'band', limb: 'arm', at: .78, width: .022, off: .002, thick: .004, color: 'gold', mat: 'iron', trim: 'ivory' },

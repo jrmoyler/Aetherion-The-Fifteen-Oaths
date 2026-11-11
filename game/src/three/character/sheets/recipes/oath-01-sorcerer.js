@@ -6,7 +6,7 @@ export default {
     cloth: '#292624', collar: '#2f2c2a', terracotta: '#7c3c27', trim: '#a37253', ceramic: '#7f3d27', bootPlate: '#693222', leather: '#3a2b22', leatherDark: '#241c18',
     iron: '#3b3734', boot: '#221c19', sole: '#141110', glove: '#1a1716', hair: '#4b4845', hairGrey: '#9b9792', tie: '#7a4a30', ember: '#ff7a2a',
   },
-  build: { width: 1.4, depth: 1.5, belly: .05, bust: .02, hips: 1.22, waist: 1.26, arm: 1.34, leg: 1.34, neck: 1.15, shoulder: 1.14 },
+  build: { width: 1.3, depth: 1.24, belly: .028, bust: .03, hips: 1.22, waist: 1.2, arm: 1.2, leg: 1.26, neck: 1.15, shoulder: 1.14 },
   keep: ['weapon'],
   groom: { hair: false, gear: false },
   parts: [

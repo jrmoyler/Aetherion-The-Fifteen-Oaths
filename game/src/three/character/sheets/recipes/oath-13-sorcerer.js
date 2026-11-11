@@ -1,6 +1,7 @@
 // 13 SORCERER - ARCANE & ILLUSION - Folded Theatre. Read from assets/references/reference-066 (folded lacquer mauve,
 // woven aubergine, old silver and pearl; attachments: belt fastening, spell case hinge).
 import { C } from '../builders-c.js';
+import { X } from '../builders-x.js';
 
 const pearl = (at, r = .007) => [{ s: 'cyl', d: [r * 1.5, .0025, r * 1.5, 8], rot: [90, 0, 0], at, c: 'silver', m: 'silver' }, { s: 'ball', d: [r, r, r, 8, 5], at: [at[0], at[1], at[2] + .004], c: 'pearl', m: 'porcelain' }];
 // Folded lacquer wings: one triangular plate rising from the collar bone to a point beyond the shoulder, front
@@ -19,22 +20,25 @@ const cuff = { use: 'c:kit', name: 'cuff', side: 'both', on: { limb: 'arm', t: 1
 export default {
   id: 'oath-13-sorcerer', sheet: 'reference-066', title: 'Folded Theatre Sorcerer',
   palette: {
-    cloth: '#3a1f2c', aubergine: '#3a1f2c', aubergineLight: '#4d2a3d', aubergineDark: '#2a1620', plum: '#4b2146', mauve: '#93798a', mauveDark: '#7b6373', silver: '#b6ad9c', silverDark: '#7d7566', pearl: '#ece6da',
+    cloth: '#33202a', aubergine: '#33202a', aubergineLight: '#45293a', aubergineDark: '#261920', plum: '#48203f', mauve: '#8d7584', mauveDark: '#6f5967', silver: '#b6ad9c', silverDark: '#7d7566', pearl: '#ece6da',
     gold: '#a98e62', leather: '#2c1c22', leatherDark: '#22161b', iron: '#b6ad9c', boot: '#2a1a1f', sole: '#1c1215', glove: '#3b2030', hair: '#17151a', hairSheen: '#2c2932',
   },
   build: { width: .97, depth: .98, bust: .018, waist: .96, hips: 1.06, arm: .9, leg: 1.0, neck: .9 },
   keep: ['weapon'],
-  builders: C,
+  builders: { ...C, ...X },
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
     { use: 'shirt', color: 'aubergine', sleeve: 1.95, flare: .004, off: .009, cap: .014, slack: .003 },
     // Wrap front: the mauve lacquer facing runs from the left shoulder down to the belt, pinned with a pearl.
-    { use: 'c:patch', color: 'aubergineLight', trim: 'silver', trimMat: 'silver', trimWidth: .004, edges: [1], off: .011, quads: [[[-70, 'shoulder', -.012], [-12, 'base', -.012], [20, 'belt', .05], [-76, 'belt', .05]]] },
-    { use: 'c:patch', color: 'mauve', mat: 'lacquer', trim: 'silver', trimMat: 'silver', trimWidth: .004, edges: [1, 3], off: .016, quads: [[[10, 'base', -.012], [44, 'shoulder', -.02], [34, 'belt', .06], [-6, 'belt', .06]]] },
+    { use: 'x.lapel', from: [-36, ['base', -.0]], to: [14, ['waist', -.01]], width: .1, widthEnd: .045, off: .012, thick: .005, roll: .006, color: 'plum', trim: 'silver', trimMat: 'silver' },
+    { use: 'x.lapel', from: [40, ['base', .0]], to: [-30, ['belt', .04]], width: .17, widthEnd: .06, off: .019, thick: .007, roll: .012, color: 'mauve', mat: 'lacquer', trim: 'silver', trimMat: 'silver' },
     { use: 'c:kit', name: 'pearl', on: { y: 'armpit', dy: .03, th: 30, off: .024, skin: 'spine2' }, parts: pearl([0, 0, 0], .009) },
-    wing,
-    { use: 'c:collar', color: 'aubergineDark', lining: 'aubergine', trim: 'silver', trimMat: 'silver', height: .06, back: .006, flare: .012, gap: 20, off: .01 },
+    // The tall winged collar: a folded lacquer plane standing off each shoulder to a point, and a long point down the back.
+    { use: 'x.horn', side: 'both', root: [0, 0, .035], spine: [[-.2, -.1], [-.07, -.03], [.04, .06], [.115, .17]], inner: [[-.17, .03], [-.09, .09], [.02, .14], [.115, .17]], thick: .014, dish: .012, facets: 2, n: 10, tilt: 14, lean: -24, color: 'mauve', mat: 'lacquer', edge: 'silver', edgeMat: 'silver', edgeWidth: .06, skin: [['spine2', .7], ['shoulder.L', .3]] },
+    { use: 'x.horn', side: 'both', root: [0, 0, -.05], spine: [[-.2, -.16], [-.07, -.04], [.04, .06], [.115, .17]], inner: [[-.17, .03], [-.09, .09], [.02, .14], [.115, .17]], thick: .012, dish: -.012, facets: 0, n: 10, tilt: -10, lean: 22, color: 'mauveDark', mat: 'lacquer', edge: 'silver', edgeMat: 'silver', edgeWidth: .06, skin: [['spine2', .7], ['shoulder.L', .3]] },
+    { use: 'x.plate', at: 180, arc: 62, from: ['ribs', .02], to: ['shoulder', .02], taper: .82, point: .1, off: .012, thick: .006, ridge: .01, color: 'mauve', mat: 'lacquer', rim: 'silver', rimMat: 'silver', rimWidth: .006, rimSides: 'lr' },
+    { use: 'c:collar', color: 'aubergineDark', lining: 'aubergine', trim: 'silver', trimMat: 'silver', height: .078, back: .01, flare: .016, gap: 26, off: .01 },
     { use: 'trousers', color: 'aubergineDark', gather: 1.6, bag: .008, pleats: 4, pockets: [], cuff: .006, piping: 'silverDark', pipingPaths: [[90, 90, .1, 1.5]] },
     { use: 'band', limb: 'leg', at: 1.12, width: .018, off: .012, thick: .004, color: 'leather', buckle: { phi: 80, color: 'silver' } },
     // Skirt panels: the embroidered aubergine front, and folded mauve lacquer falling long at the right and back.

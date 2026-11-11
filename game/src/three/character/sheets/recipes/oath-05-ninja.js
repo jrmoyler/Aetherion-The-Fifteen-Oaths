@@ -1,6 +1,7 @@
 // 05 NINJA - EARTH & CRYSTAL - Fault Choir. Read from assets/references/reference-082 (fractured shale plate,
 // sandstone, leather strap, raw amethyst; back plate support, forearm sling).
 import { A } from '../builders-a.js';
+import { X } from '../builders-x.js';
 
 const sling = (s) => ({ use: 'strap', color: 'leather', closed: false, width: .034, thick: .006, n: 30, path: [
   { th: s * 30, y: 'chest', dy: .05, off: .03 }, { th: s * 34, y: 'armpit', dy: .03, off: .028 }, { th: s * 58, y: 'shoulder', dy: -.02, off: .022 }, { th: s * 122, y: 'shoulder', dy: -.02, off: .022 },
@@ -14,22 +15,28 @@ export default {
     cloth: '#3a2e29', tunic: '#3a2e29', tunicDark: '#27201d', shale: '#4b4541', sand: '#b3956c', leather: '#6b4631', leatherDark: '#3c291d', iron: '#5c5249', ceramic: '#4b4541',
     amethyst: '#3c1c63', boot: '#2d2521', sole: '#191513', glove: '#1f1a18', hair: '#2b1d15',
   },
-  build: { width: 1.3, depth: 1.24, arm: 1.5, leg: 1.36, shoulder: 1.2, waist: 1.04, hips: 1.0, neck: 1.2 },
+  build: { width: 1.16, depth: 1.12, arm: 1.32, upperArm: 1.08, leg: 1.16, shoulder: 1.16, waist: .98, hips: .96, neck: 1.16 },
   keep: ['weapon'],
-  builders: A,
+  builders: { ...A, ...X },
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
-    { use: 'skinLimb', limb: 'arm', from: .5, to: 1.2 },
+    { use: 'x.physique', part: 'arm', from: .7, to: 1.2, power: 1.6 },
     { use: 'shirt', color: 'tunic', sleeve: .74, flare: .02, cap: .024, off: .012, trim: 'tunicDark', trimWidth: .018 },
     { use: 'wrap', limb: 'arm', from: 1.08, to: 1.95, color: 'tunicDark', off: .006, pitch: .02 },
-    { use: 'trousers', color: 'tunic', gather: 1.1, bag: .032, pleats: 11, pipingPaths: [] },
+    { use: 'trousers', color: 'tunic', gather: 1.08, bag: .016, pleats: 9, pipingPaths: [] },
     { use: 'band', limb: 'leg', at: 1.13, width: .04, color: 'leatherDark', trim: 'sand' },
     { use: 'wrap', limb: 'leg', from: 1.16, to: 1.66, color: 'tunicDark', off: .008, pitch: .022 },
     // Shale breast and back plates framed in sandstone, slung on leather over the shoulders, with the sandstone
     // spine blocks that carry the back plates.
-    { use: 'a/plates', on: 'trunk', both: true, list: [{ at: [25, 'chest+.012'], size: [.15, .13] }, { at: [24, 'ribs-.018'], size: [.142, .098] }], color: 'shale', border: 'sand', thick: .024, off: .014, borderWidth: .011 },
-    { use: 'a/plates', on: 'trunk', both: true, list: [{ at: [153, 'chest+.005'], size: [.14, .14] }, { at: [155, 'ribs-.03'], size: [.12, .09] }], color: 'shale', border: 'sand', thick: .024, off: .014, borderWidth: .011 },
+    { use: 'x.plate', at: 25, arc: 21, from: ['chest', -.05], to: ['chest', .08], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 4, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
+    { use: 'x.plate', at: 24, arc: 20, from: ['ribs', -.07], to: ['ribs', .032], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 7, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
+    { use: 'x.plate', at: 153, arc: 20, from: ['chest', -.065], to: ['chest', .075], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 10, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
+    { use: 'x.plate', at: 155, arc: 17, from: ['ribs', -.075], to: ['ribs', .015], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 13, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
+    { use: 'x.plate', at: -25, arc: 21, from: ['chest', -.05], to: ['chest', .08], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 2, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
+    { use: 'x.plate', at: -24, arc: 20, from: ['ribs', -.07], to: ['ribs', .032], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 5, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
+    { use: 'x.plate', at: -153, arc: 20, from: ['chest', -.065], to: ['chest', .075], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 8, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
+    { use: 'x.plate', at: -155, arc: 17, from: ['ribs', -.075], to: ['ribs', .015], off: .016, thick: .02, bulge: .004, relief: .009, cell: 3, seed: 11, color: 'shale', mat: 'ceramic', rim: 'sand', rimMat: 'ceramic', rimWidth: .013, rivets: 2, rivet: 'iron', n: 1.5 },
     { use: 'a/plates', on: 'trunk', list: [{ at: [180, 'chest+.06'], size: [.04, .044] }, { at: [180, 'chest+.0'], size: [.04, .044] }, { at: [180, 'ribs+.0'], size: [.04, .044] }, { at: [180, 'ribs-.06'], size: [.04, .044] }, { at: [180, 'waist-.02'], size: [.04, .044] }], color: 'sand', thick: .036, off: .012, name: 'spine' },
     sling(1), sling(-1),
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[52, 'ribs'], [90, 'ribs+.01'], [128, 'ribs']], [[50, 'waist+.03'], [90, 'waist+.03'], [130, 'waist+.03']]], color: 'leather', mat: 'leather', width: .026, thick: .005, off: .016, name: 'sideStraps' },
