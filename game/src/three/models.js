@@ -7,6 +7,7 @@ import { equipArmor } from './actor-armor.js';
 import { attachWeapon } from './actor-weapons.js';
 import { prepareCombatClips } from './combat-clips.js';
 import { applyGroom } from './character/groom.js';
+import { sheetRecipe, wearSheet } from './character/sheets/wear.js';
 const cache = new Map();
 const loader = new GLTFLoader();
 export function loadModel(url) {
@@ -137,7 +138,10 @@ export class BodyFactory {
     // a reconstruction apart from the legacy procedural forge assets.
     if (gltf.scene.userData?.aetherion?.presentation === 'authored-v1') return body;
     equipArmor(body, desc); attachWeapon(body, desc);
-    try { applyGroom(body, desc, this.quality); } catch (error) { console.warn('[actors] groom failed', desc.oath, desc.cls, error); }
+    // Heroes with a sheet recipe wear a code-built costume in place of the baked one (see character/sheets).
+    const sheet = sheetRecipe(desc);
+    try { applyGroom(body, desc, this.quality, sheet?.groom); } catch (error) { console.warn('[actors] groom failed', desc.oath, desc.cls, error); }
+    if (sheet) try { wearSheet(body, desc, this.quality); } catch (error) { console.warn('[actors] sheet costume failed', desc.oath, desc.cls, error); }
     return body;
   }
 }

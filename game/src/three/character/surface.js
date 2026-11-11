@@ -87,6 +87,7 @@ const PROGRAMS = {
     csH=0.;`,
 };
 
+export { NOISE };
 export const SURFACE_MODES = Object.keys(PROGRAMS);
 
 // Returns a MeshPhysicalMaterial with the requested micro-surface program.

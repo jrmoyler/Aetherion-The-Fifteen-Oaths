@@ -103,7 +103,8 @@ function garment(material) {
   return m;
 }
 
-export function applyGroom(body, desc, quality = 'high') {
+// `wears` lets a sheet costume take over the hair and face gear ({ hair: false, gear: false }).
+export function applyGroom(body, desc, quality = 'high', wears = null) {
   if (desc.kind === 'mob' || !desc.oath || !desc.cls) return;
   const key = `${desc.oath}-${desc.cls}`;
   const skinned = body.meshes.find(m => m.isSkinnedMesh && m.skeleton && headIndex(m.skeleton) >= 0);
@@ -145,14 +146,15 @@ export function applyGroom(body, desc, quality = 'high') {
   for (const e of kit.head.eyes) { const m = add(e.geo, eyeMat, { shadow: false }); m.position.copy(e.center);eyeMeshes.push(m); }
   const lidMeshes=kit.head.lids.map(geo=>add(geo,skin));
   const hairColor = prof.hair?.color ?? '#141012';
-  if (kit.groom.cap && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
-  if (kit.referenceHair) add(kit.referenceHair.geometry, own(kit.referenceHair.material));
-  if (kit.groom.cards && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
+  const ownHair = wears?.hair !== false, ownGear = wears?.gear !== false;
+  if (ownHair && kit.groom.cap && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
+  if (ownHair && kit.referenceHair) add(kit.referenceHair.geometry, own(kit.referenceHair.material));
+  if (ownHair && kit.groom.cards && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   else if (kit.groom.cards && prof.beard) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   const browColor = new Color(hairColor).multiplyScalar(prof.age > .6 ? .85 : .7).getStyle();
-  if (!kit.cover.eyes && !kit.referenceHair) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
-  for (const part of kit.gear) if (part.geo) add(part.geo, own(part.material));
-  if (kit.leaves) add(kit.leaves, own(hairMaterial('#56702c', true, q)), { order: 1 });
+  if ((!ownGear || !kit.cover.eyes) && (!ownHair || !kit.referenceHair)) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
+  if (ownGear) for (const part of kit.gear) if (part.geo) add(part.geo, own(part.material));
+  if (ownGear && kit.leaves) add(kit.leaves, own(hairMaterial('#56702c', true, q)), { order: 1 });
   bone.add(anchor);
   // 3. garment material
   for (const m of body.meshes) {
