@@ -83,11 +83,11 @@ reference-092..095 are sorcerer line-ups and 096..098 ninja line-ups across elem
 | 08 | POISON - Bitterglass Guild | reference-077 | reference-076 | reference-106 | done (see below) | done (see below) |
 | 09 | LIGHT & HOLY - Oath of Daybreak | reference-075 | reference-074 | reference-105 | partial (see below) | done (see below) |
 | 10 | COSMIC & GRAVITY - Tidal Observatory | reference-073 | reference-072 | reference-104 | partial (see below) | done (see below) |
-| 11 | SHADOW & VOID - The Missing Court | reference-071 | reference-070 | reference-103 | not started | not started |
-| 12 | BLOOD - Sanguine Covenant | reference-069 | reference-067 | reference-102 | not started | not started |
-| 13 | ARCANE & ILLUSION - Folded Theatre | reference-068 | reference-066 | reference-100 | not started | not started |
-| 14 | TIME & MOTION - Escapement Road | reference-065 | reference-064 | reference-099 | not started | not started |
-| 15 | TECH & FORCE - Impulse Foundry | reference-063 | reference-062 | reference-101 | not started | not started |
+| 11 | SHADOW & VOID - The Missing Court | reference-071 | reference-070 | reference-103 | partial (see below) | **done**, with differences |
+| 12 | BLOOD - Sanguine Covenant | reference-069 | reference-067 | reference-102 | partial (see below) | **done**, with differences |
+| 13 | ARCANE & ILLUSION - Folded Theatre | reference-068 | reference-066 | reference-100 | partial (see below) | partial (see below) |
+| 14 | TIME & MOTION - Escapement Road | reference-065 | reference-064 | reference-099 | **done**, with differences | partial (see below) |
+| 15 | TECH & FORCE - Impulse Foundry | reference-063 | reference-062 | reference-101 | **done**, with differences | **done**, with differences |
 
 ## Per-hero status
 
@@ -274,6 +274,88 @@ weights on chains at the hem; baggy trousers, strapped boots; bun with a ring. D
 slimmer and plainer; no embroidered constellations on the cloth; strap bosses are round, not hexagonal; the
 weights are smaller.
 Two profile skin tones were changed to follow the sheets: oath-06-ninja to tan, oath-07-ninja to brown.
+### Oaths 11 to 15 (group c)
+Ten recipes, `recipes/oath-11-ninja.js` to `oath-15-sorcerer.js`, and one builder file, `builders-c.js`, whose
+builders are named `c:...` and brought by each recipe with `builders: C`: `c:kit` (hard gear assembled from boxes,
+bars, rings, cylinders, balls and cut prisms on an anchor: trunk, limb, head, foot or bone), `c:hose` (hoses, tubes
+and chains through anchored waypoints), `c:drape` (cloth hanging from the waist between two angles with any hem
+line, lining and trim: asymmetric skirts, tabards, tassets, open coats), `c:patch` (panels cut on the trunk:
+wrap-over fronts, vests, plates), `c:collar`, `c:bellSleeve`, `c:headShell`, `c:headBand`, `c:crest`, `c:curls`,
+`c:locks`, `c:tail`, `c:strands`. Evidence for each hero: `docs/qa/characters/oath-NN-<discipline>.jpg` (sheet on
+the left, code in the game runtime on the right, idle pose). All ten hide the baked costume, keep only the baked
+weapon and wear code hands. `profiles.js` was edited for four of these heroes so the head matches the sheet
+(11 sorcerer bald with grey stubble, 13 sorcerer young with black hair, 15 ninja and 15 sorcerer brown skin,
+15 sorcerer short beard).
+Differences shared by all ten: joints are the rig's (larger head, shorter legs than the paintings); faces are the
+procedural head, not likenesses; hands are the generic code hands; each holds its baked weapon where the sheet
+shows empty hands; cloth, leather and metal use the shared procedural shader, so brocade and embroidery patterns
+(12 sorcerer robe, 13 sorcerer front panel) are not drawn. Where a sheet's front and back views disagree about
+which side an asymmetric piece is on, the front view was followed.
+- **oath-11-ninja (071), partial.** Present: short-sleeved black tunic, grey wrap-over front and shoulder strips,
+  rolled scarf collar, bound forearms with grey bands, plate on the right forearm, fingerless gloves, two belts,
+  asymmetric skirt (short over the left hip, long pointed fall with grey under-layer on the right), slim
+  trousers, thigh case on two straps, ankle boots, black half mask with the bone-white cheek panel, high
+  ponytail with pale tie, temple locks. Differs: the skirt hangs closer to the leg than the painted wide fall;
+  hair is flatter on top and the tail thinner; one grey front layer where the sheet has two; no knee pads; the
+  belt buckles are plain frames.
+- **oath-11-sorcerer (070), done.** Present: tall open collar edged in silver, velvet coat to the ankle open on a
+  charcoal under-robe, placket with four square clasps on straps, shoulder caps, bell sleeves with silver hem,
+  side and back points cut in the coat hem over a charcoal layer, plain boots, bald head, grey stubble. Differs:
+  shoulder caps are round, not the painted pointed wings; the lower coat is one layer cut to points rather than
+  separate overlapping panels; the cuff lining is plain.
+- **oath-12-ninja (069), partial.** Present: leather helm with raised faceplate, steel crest and side buckles,
+  dark cloth neck, sleeveless oxblood vest with steel-piped V front over a dark undershirt, bare arms, bound
+  forearms with buckled bands, wide belt with four enamelled anchor rings, a heavy chain looped at each hip,
+  pointed front and back tassets and hip panels, gathered trousers, knee bands, bound shins, strapped boots.
+  Differs: arms are smooth tubes with a shoulder ball, not modelled muscle; the helm is rounder than the painted
+  almond shape and has no brow facets; tassets are single panels without the painted layering and iron corners;
+  the vest is fuller at the waist.
+- **oath-12-sorcerer (067), done.** Present: burgundy wrap robe piped in brass, open collar, bell sleeves,
+  charcoal shoulder over-vest, shoulder straps with brass buckles, brass-caged blood vials on both shoulders with
+  tubes arching to a harness ring on the back, wide belt with crossing straps, brass-bound hip case, long coat
+  open over a diagonal apron and charcoal under-skirt, buckled boots with brass caps, hair drawn back to a low
+  knot, earrings. Differs: no woven pattern on the robe; vials follow the upper arm, so they tilt with it; hair
+  is combed locks, not braids with beads; in a run the under-skirt shows through the back of the coat.
+- **oath-13-ninja (068), partial.** Present: charcoal jacket with high plum-lined collar, plum wrap over the right
+  shoulder front and back, back clamp, thin belt, short diagonal front skirt and long plum-lined tail on the
+  right, steel frame-and-socket bracers on both forearms, gloves, thigh pouch, slim trousers, strapped boots with
+  steel caps, folded porcelain blade mask over a black under-mask, head strap with side buckles, spiky black
+  hair. Differs: the mask is a single folded plate, narrower than the painted one; the jacket front is longer
+  than painted; the back strap is the wrap's edge, not a separate strap.
+- **oath-13-sorcerer (066), partial.** Present: aubergine jacket with stand collar, mauve lacquer facing with a
+  pearl, folded lacquer wings front and back, belt with hexagonal pearl fastening, silver-bound spell case, layered
+  lacquer forearm cuffs with pearls, fingerless gloves, plum front panel and mauve lacquer falls, striped
+  trousers with knee straps, boots with silver caps, short black hair. Differs most of the ten: the wings are flat
+  triangles, larger and plainer than the painted folded collar; the jacket lacks the painted crossing lapels; the
+  skirt panels are simpler and the front panel has no gold arcs; the hair is a rough bob.
+- **oath-14-ninja (065), done.** Present: sleeveless graphite body with brass zip, teal chest and back panels
+  piped in brass, teal collar, bare upper arms, long gauntlets with a lit brass slot, two belts and a fine chain,
+  toothed and spoked hip flywheel with lit hub, teal tabards front right and back, riveted leather hip panel,
+  cargo pockets, piped trousers, boots with brass ankle struts and wheels, slatted lit visor with side hinges,
+  high-top curls. Differs: the visor's three slats read as one band at distance; the flywheel is flatter than
+  painted; trousers are fuller.
+- **oath-14-sorcerer (064), partial.** Present: teal jacket with ivory-lined collar, ivory facing under a buttoned
+  teal flap, crossed back harness, brass-and-glass escapement cuffs with a gear on both forearms, belt and glass
+  case, teal coat skirt over a longer ivory layer, back hub with jointed arm, rod and pendulum bob, knee bands,
+  boots with brass caps, top knot. Differs: the skirt is a closed bell rather than the painted open wrap with
+  separate ivory panels; cuffs are shorter and brighter than painted; the pendulum is rigid on the upper back and
+  does not swing; the knot is small.
+- **oath-15-ninja (063), done.** Present: sleeveless zipped suit with high collar, webbing harness with buckles,
+  burnt orange chest, collar-bone and spine plates, arm straps, bracers with orange plate and lit slot, gloves,
+  hip couplings with lit lenses and two ribbed hose loops a side, thigh straps and pouches, knee pads, knee
+  actuators with lit lens and thigh and shin struts, heavy boots with orange caps, faceplate with lit chevron,
+  orange cheek plates, ear couplings, rope locks over cropped sides. Differs: the chest plate is two flat panels
+  without the painted steel frame; hoses are thinner; boots have fewer plates.
+- **oath-15-sorcerer (062), done.** Present: graphite coat open at the front on an orange lining and vented at the
+  back, orange piping, collar with orange lining, shoulder caps, placket with four clasps, harness straps, belt
+  with case and pouch, power pack with ceramic doors, lit cell and two side canisters, cables to both arms,
+  steel drum gauntlets with ceramic shoes and lit cells, steel hands, heavy boots, cropped curls, short beard.
+  Differs: the pack and gauntlets are simpler and smaller than painted; the coat has no corner plates; cables
+  are single hoses.
+Seen on screen (turnaround stage through BodyFactory, high tier): all ten idle from four sides; close views of
+11 sorcerer, 12 ninja, 13 sorcerer, 15 ninja; 15 ninja in `attack_1`; 12 sorcerer running. Not seen: these heroes
+in the running game, the low and medium tiers on screen (they build and pass the unit test), the other clips.
+Triangles on high: 23k (11 sorcerer) to 39k (15 sorcerer), one draw call each.
 
 ### All other heroes: not started
 
