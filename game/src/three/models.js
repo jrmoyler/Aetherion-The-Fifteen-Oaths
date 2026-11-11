@@ -140,7 +140,7 @@ export class BodyFactory {
     equipArmor(body, desc); attachWeapon(body, desc);
     // Heroes with a sheet recipe wear a code-built costume in place of the baked one (see character/sheets).
     const sheet = sheetRecipe(desc);
-    try { applyGroom(body, desc, this.quality, sheet?.groom); } catch (error) { console.warn('[actors] groom failed', desc.oath, desc.cls, error); }
+    try { applyGroom(body, desc, this.quality, sheet ? { ...sheet.groom, sheet: true, headScale: sheet.headScale } : null); } catch (error) { console.warn('[actors] groom failed', desc.oath, desc.cls, error); }
     if (sheet) try { wearSheet(body, desc, this.quality); } catch (error) { console.warn('[actors] sheet costume failed', desc.oath, desc.cls, error); }
     return body;
   }

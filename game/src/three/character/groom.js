@@ -8,7 +8,7 @@
 // Geometry is cached per hero and quality tier; materials are per actor so
 // fades never leak between actors.
 import { Group, Mesh, Matrix4, Vector3, Box3, MeshPhysicalMaterial, Color, BufferAttribute } from 'three';
-import { profileFor } from './profiles.js';
+import { profileFor, sheetProfile, sheetHeadSize } from './profiles.js';
 import { buildHead, skinMaterial, eyeMaterial } from './head.js';
 import { buildGroom, hairMaterial, leafTufts } from './hair.js';
 import { buildGear, gearCoverage } from './gear.js';
@@ -19,9 +19,9 @@ import { applyReferenceFace } from './reference-face.js';
 const kits = new Map();
 const culled = new WeakSet();
 
-function kitFor(key, H, quality, identity = '') {
-  const profile = profileFor(key, identity);
-  const id = `${key}|${profile.variant ?? 'hero'}|${H.toFixed(3)}|${quality}`;
+function kitFor(key, H, quality, identity = '', sheet = false) {
+  const profile = sheet ? sheetProfile(profileFor(key, identity)) : profileFor(key, identity);
+  const id = `${key}|${profile.variant ?? 'hero'}|${H.toFixed(3)}|${quality}|${sheet ? 'sheet' : ''}`;
   if (kits.has(id)) return kits.get(id);
   const head = buildHead(profile, H, quality);
   const groom = buildGroom(key, profile, head.P, head.lash, quality);
@@ -116,9 +116,9 @@ export function applyGroom(body, desc, quality = 'high', wears = null) {
   const bindPos = new Vector3().setFromMatrixPosition(boneBind);
   skinned.geometry.computeBoundingBox();
   const bb = skinned.geometry.boundingBox, height = bb.max.y - Math.max(0, bb.min.y);
-  const H = Math.min(.262, Math.max(.205, height * .128));
+  const H = wears?.sheet ? sheetHeadSize(bindPos.y, wears.headScale ?? 1) : Math.min(.262, Math.max(.205, height * .128));
   const center = new Vector3(bindPos.x, bindPos.y + H * .41, bindPos.z + H * .05);
-  const kit = kitFor(key, H, quality, desc.kind === 'npc' ? desc.identity : '');
+  const kit = kitFor(key, H, quality, desc.kind === 'npc' ? desc.identity : '', !!wears?.sheet);
   const q = quality;
   // 1. cull original head + painted eyes
   for (const m of body.meshes) {
@@ -139,7 +139,7 @@ export function applyGroom(body, desc, quality = 'high', wears = null) {
     (opts.parent ?? rig).add(mesh); added.push(mesh); return mesh;
   };
   const prof = kit.profile;
-  const skin = applyReferenceFace(own(skinMaterial(prof, H, new Vector3())), key, H);
+  const skin = wears?.sheet ? own(skinMaterial(prof, H, new Vector3())) : applyReferenceFace(own(skinMaterial(prof, H, new Vector3())), key, H);
   add(kit.head.skinGeo, skin);
   const eyeMat = own(eyeMaterial(prof.eye, new Vector3()));
   const eyeMeshes=[];

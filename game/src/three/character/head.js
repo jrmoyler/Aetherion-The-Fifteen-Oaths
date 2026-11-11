@@ -14,13 +14,21 @@ const g2 = (x, y) => Math.exp(-x * x - y * y);
 
 export const EYE = { x: .148, y: -.005, r: .05 };
 
-export function faceParams(profile) {
+function baseFaceParams(profile) {
   const f = profile.sex === 'f', age = profile.age ?? .3, build = profile.build ?? 1;
   return {
     build, age, f,
     jaw: f ? .66 : .74, brow: f ? .45 : 1, nose: f ? .85 : 1, lip: f ? 1.15 : .9, chin: f ? .7 : 1,
     cheek: f ? 1.1 : .9, sag: age, noseWidth: 1, depth: 1, ...profile.face,
   };
+}
+
+// Sheet heroes are seen at full-body distance next to painted faces: their relief is pushed further so brow,
+// nose, cheekbone and chin still read there.
+export function faceParams(profile) {
+  const P = baseFaceParams(profile);
+  if (!profile.sheet) return P;
+  return { ...P, brow: P.brow * 1.35 + .1, nose: P.nose * 1.12, cheek: P.cheek * 1.12, chin: P.chin * 1.1, jaw: Math.min(.9, P.jaw * (P.f ? 1 : 1.04)) };
 }
 
 // Surface point for unit direction d. `opts.cloth` smooths fine features so
@@ -137,6 +145,36 @@ const SKIN_GLSL = /* glsl */`
     +smoothstep(.3,.34,ax)*smoothstep(-.06,-.1,q.z)*.3;
   diffuseColor.rgb*=1.-clamp(cav,0.,.6);
 `;
+// Extra painted shading for sheet heroes: the face panel's read at a distance (shadowed sockets, strong brows,
+// lash line, nose and lip modelling, cheek contour, shadow under the chin) and uneven, living skin tone.
+const SHEET_SKIN_GLSL = /* glsl */`
+  float front=smoothstep(.16,.3,q.z);
+  float tone=csFbm(vCsP*30.)*.5+.5, mottle=csFbm(vCsP*90.+4.);
+  diffuseColor.rgb*=.86+tone*.14+mottle*.05;
+  float socket=exp(-pow((ax-.15)/.085,2.)-pow((q.y-.018)/.05,2.))*front;
+  diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(.5,.42,.42),socket*.62);
+  float lash=exp(-pow((q.y-(.012+csOpen))/.007,2.))*smoothstep(.095,.115,ax)*smoothstep(.205,.185,ax)*front;
+  diffuseColor.rgb*=1.-lash*.8;
+  float lower=exp(-pow((q.y-(-.018-csOpen*.6))/.006,2.))*smoothstep(.1,.12,ax)*smoothstep(.2,.185,ax)*front;
+  diffuseColor.rgb*=1.-lower*.3;
+  float brow2=smoothstep(.0,.2,bt)*smoothstep(1.08,.9,bt)*exp(-pow((q.y-by)/(.021*(1.-bt*.45)),2.))*front;
+  diffuseColor.rgb=mix(diffuseColor.rgb,csBrow*.75,brow2*.9);
+  float noseSide=exp(-pow((ax-.05)/.02,2.))*smoothstep(-.21,-.16,q.y)*smoothstep(.06,-.02,q.y)*smoothstep(.3,.4,q.z);
+  diffuseColor.rgb*=1.-noseSide*.3;
+  float underNose=exp(-pow(q.x/.065,2.)-pow((q.y+.238)/.014,2.))*front;
+  diffuseColor.rgb*=1.-underNose*.42;
+  diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(1.,.56,.52),lips*(.3+csLip*.5));
+  float underLip=exp(-pow(q.x/.075,2.)-pow((q.y+.352)/.014,2.))*front;
+  diffuseColor.rgb*=1.-underLip*.34;
+  float contour=exp(-pow((ax-.24)/.06,2.)-pow((q.y+.2)/.11,2.))*smoothstep(-.05,.2,q.z);
+  diffuseColor.rgb*=1.-contour*.28;
+  float flush=exp(-pow((ax-.17)/.07,2.)-pow((q.y+.1)/.06,2.))*front+exp(-pow(q.x/.05,2.)-pow((q.y+.17)/.05,2.))*front*.7;
+  diffuseColor.rgb*=mix(vec3(1.),vec3(1.08,.9,.86),clamp(flush,0.,1.)*.6);
+  float chinShadow=smoothstep(-.4,-.54,q.y)*smoothstep(-.1,.2,q.z);
+  diffuseColor.rgb*=1.-chinShadow*.45;
+  float neckShade=smoothstep(-.5,-.62,q.y);
+  diffuseColor.rgb*=1.-neckShade*.3;
+`;
 const SSS_GLSL = /* glsl */`
 #if NUM_DIR_LIGHTS > 0
 for(int i=0;i<NUM_DIR_LIGHTS;i++){
@@ -150,21 +188,21 @@ reflectedLight.indirectDiffuse*=vec3(1.02,.985,.975);
 
 const skinMaterialCache = new Map();
 export function skinMaterial(profile, H, origin) {
-  const key = `${profile.skin}|${profile.age}|${profile.sex}|${H.toFixed(4)}|${origin.toArray().map(v => v.toFixed(4)).join(',')}`;
+  const key = `${profile.skin}|${profile.age}|${profile.sex}|${profile.sheet ? 'sheet' + (profile.eyeOpen ?? '') : ''}|${profile.hair?.color}|${H.toFixed(4)}|${origin.toArray().map(v => v.toFixed(4)).join(',')}`;
   if (skinMaterialCache.has(key)) return skinMaterialCache.get(key);
   const base = new Color(profile.skin);
   const m = new MeshPhysicalMaterial({
     color: base, roughness: .62, metalness: 0, specularIntensity: .28, specularColor: new Color('#fff6f0'),
-    sheen: .18, sheenRoughness: .6, sheenColor: base.clone().lerp(new Color('#ff7a5a'), .55).multiplyScalar(.6),
+    sheen: profile.sheet ? .06 : .18, sheenRoughness: .6, sheenColor: base.clone().lerp(new Color('#ff7a5a'), .55).multiplyScalar(.6),
   });
   m.name = 'skin';
   const stubble = profile.sex === 'm' && !profile.beard ? .55 : profile.beard ? .7 : 0;
-  withSurface(m, 'skin', 1, SKIN_GLSL);
+  withSurface(m, 'skin', 1, profile.sheet ? SKIN_GLSL + SHEET_SKIN_GLSL : SKIN_GLSL);
   const prev = m.onBeforeCompile;
   m.onBeforeCompile = (shader, r) => {
     prev(shader, r);
-    Object.assign(shader.uniforms, { csH0: { value: H }, csO: { value: origin.clone() }, csLip: { value: profile.sex === 'f' ? .75 : .45 }, csAge: { value: profile.age ?? .3 }, csStubble: { value: stubble }, csBrow: { value: new Color(profile.hair?.color ?? '#1a1410').lerp(base, .25) }, csBrowArch: { value: profile.sex === 'f' ? .03 : .018 } });
-    shader.fragmentShader = shader.fragmentShader.replace('uniform float csStrength;', 'uniform float csStrength;\nuniform float csH0,csLip,csAge,csStubble,csBrowArch;\nuniform vec3 csO,csBrow;').replace('#include <lights_fragment_end>', '#include <lights_fragment_end>\n' + SSS_GLSL);
+    Object.assign(shader.uniforms, { csH0: { value: H }, csO: { value: origin.clone() }, csLip: { value: profile.sex === 'f' ? .75 : .45 }, csAge: { value: profile.age ?? .3 }, csStubble: { value: stubble }, csBrow: { value: new Color(profile.hair?.color ?? '#1a1410').lerp(base, .25) }, csBrowArch: { value: profile.sex === 'f' ? .03 : .018 }, csOpen: { value: profile.eyeOpen ?? .014 } });
+    shader.fragmentShader = shader.fragmentShader.replace('uniform float csStrength;', 'uniform float csStrength;\nuniform float csH0,csLip,csAge,csStubble,csBrowArch,csOpen;\nuniform vec3 csO,csBrow;').replace('#include <lights_fragment_end>', '#include <lights_fragment_end>\n' + SSS_GLSL);
   };
   // Subsurface approximation: soften the terminator and lift red in shadow.
   m.userData.sss = true;
@@ -213,7 +251,8 @@ export function buildHead(profile, H, quality = 'high') {
   // Almond eye apertures with continuous lid-to-cheek annuli. A complete
   // exposed sphere plus detached spherical lids made the old eyes look glued on.
   const eyes = [], lids = [], lash = [];
-  const r = EYE.r;
+  // Eye aperture: half-height of the opening and the tilt of its outer corner (profile.eyeOpen / eyeTilt).
+  const r = EYE.r, open = profile.eyeOpen ?? .014, tilt = profile.eyeTilt ?? .10;
   const frontAt=(x,y)=>{
     let lo=0,hi=Math.PI/2,pt;const dy=Math.max(-.999,Math.min(.999,y*2)),rr=Math.sqrt(1-dy*dy);
     for(let k=0;k<18;k++){const t=(lo+hi)/2;pt=sculpt(new Vector3(Math.sign(x||1)*Math.sin(t)*rr,dy,Math.cos(t)*rr),P);if(Math.abs(pt.x)<Math.abs(x))lo=t;else hi=t;}
@@ -226,13 +265,13 @@ export function buildHead(profile, H, quality = 'high') {
     // Polar patch covers exactly the visible sclera, never an exposed globe.
     for(let j=0;j<=M;j++) for(let i=0;i<=N;i++){
       const a=i/N*Math.PI*2,t=j/M;
-      const x=Math.cos(a)*.043*t,y=Math.sin(a)*.014*t+s*x*.10;
+      const x=Math.cos(a)*.043*t,y=Math.sin(a)*open*t+s*x*tilt;
       pos.push(cx+x,cy+y,center.z+Math.sqrt(Math.max(0,r*r-x*x-y*y)));
     }
     for(let j=0;j<M;j++)for(let i=0;i<N;i++){const a=j*(N+1)+i,b=a+N+1;indices.push(a,b,a+1,b,b+1,a+1);}
     const eye=new BufferGeometry();eye.setAttribute('position',new Float32BufferAttribute(pos,3));eye.setIndex(indices);eye.computeVertexNormals();eyes.push({geo:eye,center});
     for(let j=0;j<=M;j++)for(let i=0;i<=N;i++){
-      const a=i/N*Math.PI*2,t=j/M,ix=Math.cos(a)*.043,iy=Math.sin(a)*.014+s*ix*.10;
+      const a=i/N*Math.PI*2,t=j/M,ix=Math.cos(a)*.043,iy=Math.sin(a)*open+s*ix*tilt;
       const x=ix*(1-t)+Math.cos(a)*.072*t,y=iy*(1-t)+Math.sin(a)*.050*t;
       const inner=center.z+Math.sqrt(Math.max(0,r*r-ix*ix-iy*iy))+.001;
       const z=inner*(1-t)+frontAt(cx+x,cy+y)*t+Math.sin(t*Math.PI)*.003;

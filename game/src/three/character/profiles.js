@@ -80,3 +80,12 @@ export function profileFor(key, identity = '') {
   return {...base, build:base.build*(1+t*.065), age:Math.max(.18,Math.min(.95,base.age+t*.18)),
     face:{...base.face,jaw:base.face.jaw+t*.055,nose:base.face.nose-t*.09,cheek:base.face.cheek+t*.12}, variant};
 }
+
+// Sheet heroes (code-built costumes) get a head tuned to be read at full-body distance beside a painted sheet:
+// stronger relief and painted shading (see head.js), wider eye aperture, and per-sex eye tilt.
+export function sheetProfile(profile) {
+  return profile.sheet ? profile : { ...profile, sheet: true, eyeOpen: profile.eyeOpen ?? (profile.sex === 'f' ? .021 : .018), eyeTilt: profile.eyeTilt ?? (profile.sex === 'f' ? .14 : .08) };
+}
+// Head height (chin to crown) for a sheet hero whose head joint is at `headY` in bind pose: the figure stands
+// about eight heads tall, measured from its joints so a tall hat or a pack on the back cannot inflate the head.
+export const sheetHeadSize = (headY, scale = 1) => Math.min(.25, Math.max(.165, (headY + .24) * .128 * .94 * scale));
