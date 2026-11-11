@@ -35,6 +35,14 @@ const KEEP = {
     const wrist = J[`hand.${side}`], along = new Vector3().subVectors(wrist, J[`forearm.${side}`]).normalize();
     return point.sub(wrist).dot(along) > -.012;
   },
+  // Only the held weapon: what the hand bones carry outside the volume of the hand itself. The recipe then
+  // builds its own hands (see hands.js) and closes the weapon hand over the grip.
+  weapon: ({ owner, point, J }) => {
+    const side = owner === 'hand.L' ? 'L' : owner === 'hand.R' ? 'R' : null; if (!side) return false;
+    const wrist = J[`hand.${side}`], along = new Vector3().subVectors(wrist, J[`forearm.${side}`]).normalize();
+    const t = Math.min(.12, Math.max(-.06, point.sub(wrist).dot(along)));
+    return point.addScaledVector(along, -t).length() > .055;
+  },
 };
 
 /**

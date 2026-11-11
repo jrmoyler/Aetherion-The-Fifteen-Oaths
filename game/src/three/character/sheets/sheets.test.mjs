@@ -57,4 +57,13 @@ test('an unknown builder or palette entry is reported by name', () => {
   assert.throws(() => buildCostume({ id: 'oath-01-ninja', palette: {}, parts: [{ use: 'belt' }] }, rig()), /unknown palette entry/);
 });
 
+test('hair styles and hands build for any recipe that asks for them', () => {
+  const base = Object.values(RECIPES)[0];
+  for (const style of ['spiky', 'long', 'bun', 'braid', 'none']) {
+    const recipe = { ...base, parts: [{ use: 'hair', style, color: 'hair', tail: style === 'long' ? { length: .8, tie: 'leather' } : null, braid: style === 'braid' ? { length: 1, tie: 'leather' } : null, stubble: true }, { use: 'hands', glove: 'glove', fingerless: style === 'spiky' }] };
+    const { geometry, triangles } = buildCostume(recipe, rig(), 'high');
+    assert.ok(geometry.attributes.position.array.every(Number.isFinite) && triangles > 1500, `${style}: ${triangles}`);
+  }
+});
+
 test('the costume material constructs without a renderer', () => { assert.equal(costumeMaterial().vertexColors, true); });

@@ -1,11 +1,14 @@
 import * as THREE from 'three';
 import {heightAt,normalAt,sampleTerrain,lavaAt,SEA_LEVEL,MARSH_LEVEL,noise2} from '@shared/terrain.js';
 import {regionAt,OATH_BY_ID} from '@shared/oaths.js';
-import {terrainMaterial,waterMaterial} from './worldMaterials.js';
+import {terrainMaterial,realmWater} from './worldMaterials.js';
+import {paintGround,updateRealmGround} from './realmGround.js';
 import {buildSanctuaries} from './worldArchitecture.js';
 import {createRealmFlora,realmRock} from './realmFlora.js';
 import {terrainResolution,addTerrainSkirt} from './terrain-detail.js';
 import {createBiomeDetails} from './biomeDetails.js';
+import {createRealmLandmarks} from './realmLandmarks.js';
+import {createRealmCreatures} from './realmCreatures.js';
 const TILE=160;
 // Tiles this close to the player draw full trees; farther tiles draw baked cards.
 const NEAR_BAND=1;
@@ -18,28 +21,34 @@ const seed=(x,z)=>{let v=Math.imul(x|0,374761393)^Math.imul(z|0,668265263);v=Mat
 export async function initWorld(ctx){
   const scene=ctx.scene, low=ctx.quality?.name==='low', medium=ctx.quality?.name==='medium', chunks=new Map(), jobs=[];
   const details=createBiomeDetails(ctx);
-  const terrainMat=terrainMaterial();
+  const landmarks=createRealmLandmarks(ctx);
+  const terrainMat=terrainMaterial(ctx.quality?.name);
   const wind={time:{value:0}};
   const flora=createRealmFlora(ctx,wind);
   scene.fog=new THREE.FogExp2('#b5c7c4',.00165);scene.background=new THREE.Color('#b5c7c4');
   const rocks=new Map(),rockOf=biome=>{if(!rocks.has(biome))rocks.set(biome,realmRock(biome));return rocks.get(biome);},snowColour=new THREE.Color('#e6ecee');
   function terrain(x,z,size,res){
     const g=new THREE.PlaneGeometry(size,size,res,res);g.rotateX(-Math.PI/2);
-    const p=g.attributes.position, col=new Float32Array(p.count*3), masks=new Float32Array(p.count*3), c=new THREE.Color(), dust=new THREE.Color('#a69b81');
+    const p=g.attributes.position, col=new Float32Array(p.count*3), masks=new Float32Array(p.count*3), kinds=new Float32Array(p.count), realms=new Float32Array(p.count), c=new THREE.Color(), dust=new THREE.Color('#a69b81'), painted={};
     for(let i=0;i<p.count;i++){
       const wx=x+p.getX(i),wz=z+p.getZ(i),s=sampleTerrain(wx,wz,{}),o=regionAt(wx,wz);
             let y=s.h;
       // The distant underlay is coarse: keep each of its vertices under the real ground around it so it never
       // rises through the detailed tiles in a hollow.
       if(size!==TILE){const e=size/res*.5;y=Math.min(y,heightAt(wx-e,wz),heightAt(wx+e,wz),heightAt(wx,wz-e),heightAt(wx,wz+e),heightAt(wx-e,wz-e),heightAt(wx+e,wz+e),heightAt(wx-e,wz+e),heightAt(wx+e,wz-e))-2;}
-      p.setY(i,y);masks.set([s.roadW,s.plaza,s.lava],i*3);c.setHex(colors[o.biome]||0x727b60);
+      p.setY(i,y);masks.set([s.roadW,s.plaza,s.lava],i*3);
       // Steep ground shows the bedrock of the realm's Biome Triad world; cold realms carry snow on what is not too steep.
-      const up=normalAt(wx,wz,2.5)[1];c.lerp(rockOf(o.biome),(1-THREE.MathUtils.smoothstep(up,.72,.9))*.92);
-      const line=SNOW_LINE[o.biome];if(line!=null)c.lerp(snowColour,THREE.MathUtils.smoothstep(s.h,line,line+26)*THREE.MathUtils.smoothstep(up,.6,.82)*.88);
-      c.lerp(dust,Math.min(.8,s.roadW*.8+s.plaza*.35));
-      c.multiplyScalar(.9+noise2(wx*.12,wz*.12)*.23);c.toArray(col,i*3);
+      // The realm's Biome Triad world colours its own ground (shore, strata, ice, snow) against these heights and slopes.
+      const up=normalAt(wx,wz,2.5)[1];paintGround(c,o,wx,wz,s.h,up,s.lava,painted);kinds[i]=painted.kind;realms[i]=painted.index;
+      if(!painted.painted){
+        // A world without a colour function keeps the realm's own colour, bedrock on its slopes and snow above its snow line.
+        c.setHex(colors[o.biome]||0x727b60);c.lerp(rockOf(o.biome),(1-THREE.MathUtils.smoothstep(up,.72,.9))*.92);
+        const line=SNOW_LINE[o.biome];if(line!=null)c.lerp(snowColour,THREE.MathUtils.smoothstep(s.h,line,line+26)*THREE.MathUtils.smoothstep(up,.6,.82)*.88);
+        c.multiplyScalar(.9+noise2(wx*.12,wz*.12)*.23);
+      }
+      c.lerp(dust,Math.min(.8,s.roadW*.8+s.plaza*.35));c.toArray(col,i*3);
     }
-    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setAttribute('terrainMask',new THREE.BufferAttribute(masks,3));g.computeVertexNormals();if(size===TILE)addTerrainSkirt(g,res,6);
+    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setAttribute('terrainMask',new THREE.BufferAttribute(masks,3));g.setAttribute('kind',new THREE.BufferAttribute(kinds,1));g.setAttribute('btRealm',new THREE.BufferAttribute(realms,1));g.computeVertexNormals();if(size===TILE)addTerrainSkirt(g,res,6);
     const m=new THREE.Mesh(g,terrainMat);m.position.set(x,0,z);m.receiveShadow=true;return m;
   }
   function build(ix,iz){
@@ -88,24 +97,20 @@ export async function initWorld(ctx){
     for(const[k,g]of chunks){const[a,b]=k.split(',').map(Number);if(Math.abs(a-ix)>radius+1||Math.abs(b-iz)>radius+1){scene.remove(g);g.children[0].geometry.dispose();g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});chunks.delete(k);}}
   }
   // Ocean extends beyond the entire continent; land clips the surface naturally.
-  const water=waterMaterial(),sea=new THREE.Mesh(new THREE.PlaneGeometry(12000,12000,low?28:medium?48:80,low?28:medium?48:80),water.material);sea.rotation.x=-Math.PI/2;sea.position.y=SEA_LEVEL-.12;scene.add(sea);
-  const marsh=OATH_BY_ID['oath-08'].center, pool=new THREE.Mesh(new THREE.CircleGeometry(630,64),water.material);pool.rotation.x=-Math.PI/2;pool.position.set(marsh[0],MARSH_LEVEL-.12,marsh[1]);scene.add(pool);
+  // Sea and marsh pool are Biome Triad water; the sea takes the look of the realm the player stands in.
+  const water=realmWater(ctx),marsh=OATH_BY_ID['oath-08'].center;
   const architecture=buildSanctuaries(ctx);
   // Coarse continent underlay closes the horizon while near tiles stream in.
   const horizon=terrain(0,0,5800,low?64:medium?96:128);horizon.position.y=-1.8;horizon.name='Continuous distant continent';scene.add(horizon);
-  // Small migrating birds make the sky inhabited without opaque billboard sprites.
-  const birds=new THREE.Group(),birdMat=new THREE.MeshStandardMaterial({color:'#37413f',side:THREE.DoubleSide,roughness:1});
-  const wingGeo=new THREE.BufferGeometry();wingGeo.setAttribute('position',new THREE.Float32BufferAttribute([0,0,.13,.65,0,.22,1.45,0,-.19,0,0,.13,1.45,0,-.19,.55,0,-.18],3));wingGeo.computeVertexNormals();
-  const bodyGeo=new THREE.SphereGeometry(.14,6,4);bodyGeo.scale(1,.75,2.8);
-  for(let i=0;i<14;i++){const bird=new THREE.Group();for(const side of [-1,1]){const wing=new THREE.Mesh(wingGeo,birdMat);wing.scale.x=side;bird.add(wing);}bird.add(new THREE.Mesh(bodyGeo,birdMat));birds.add(bird);}scene.add(birds);
-  const flockCenter=new THREE.Vector3();let flockReady=false;
+  // Each realm's ambient wildlife, from its Biome Triad world (scenery only: no collision, no targeting, no simulation).
+  const creatures=createRealmCreatures(ctx);
   let t=0;
-  function update(dt){architecture.update(dt);t+=Math.min(dt,.1);wind.time.value=t;water.time.value=t;details.update(t);
+  function update(dt){architecture.update(dt);t+=Math.min(dt,.1);wind.time.value=t;updateRealmGround(ctx,t);details.update(t);
     // Terrain build is bounded to one tile per frame, with nearest tiles first.
     if(jobs.length){const job=jobs.shift();build(job[0],job[1]);}
-    const target=ctx.actors?.player?.position||ctx.actors?.player?.root?.position||ctx.player?.position||ctx.player?.root?.position||ctx.camera?.position;if(target)focus(target.x,target.z);
-    if(!flockReady||Math.hypot(flockCenter.x-focusX,flockCenter.z-focusZ)>450){flockCenter.set(focusX,heightAt(focusX,focusZ),focusZ);flockReady=true;}
-    birds.children.forEach((b,i)=>{const a=t*.045+i*.014,rank=Math.ceil(i/2),side=i%2?1:-1;b.position.set(flockCenter.x+Math.cos(a)*120+rank*side*2.8,flockCenter.y+44+Math.sin(t*.2+i)*.4,flockCenter.z+Math.sin(a)*120+rank*3);b.rotation.y=-a;for(let j=0;j<2;j++)b.children[j].rotation.z=Math.sin(t*5+i*.7)*(j?-.45:.45);});
+    const target=ctx.actors?.player?.position||ctx.actors?.player?.root?.position||ctx.player?.position||ctx.player?.root?.position||ctx.camera?.position;if(target)focus(target.x,target.z);landmarks.update(dt,focusX,focusZ);
+    water.update(Math.min(dt,.1),regionAt(focusX,focusZ).biome,target);
+    creatures.update(dt,target);
   }
   function eachTrunkNear(x,z,fn){const cx=Math.floor(x/TILE),cz=Math.floor(z/TILE);for(let dz=-1;dz<=1;dz++)for(let dx=-1;dx<=1;dx++){const list=chunks.get((cx+dx)+','+(cz+dz))?.userData.trunks;if(list)for(const t of list)fn(t);}}
   /** Push a body of radius r out of any tree trunk it overlaps. Returns true when it was moved. */
@@ -118,7 +123,7 @@ export async function initWorld(ctx){
   const isWater=(x,z)=>heightAt(x,z)<waterLevelAt(x,z);
   const waterLevelAt=(x,z)=>Math.hypot(x-marsh[0],z-marsh[1])<630?MARSH_LEVEL:SEA_LEVEL;
   const stopUpdate=ctx.addUpdate?.(update,40);
-  function dispose(){stopUpdate?.();details.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon,birds);flora.dispose();for(const g of [sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,water.material,birdMat])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
-  return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,resolveTrunks,trunkHit,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
+  function dispose(){stopUpdate?.();details.dispose();landmarks.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;water.dispose();scene.remove(architecture,horizon);creatures.dispose();flora.dispose();horizon.geometry.dispose();terrainMat.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});}
+  return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,resolveTrunks,trunkHit,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,water,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
 }
 export const init=initWorld;
