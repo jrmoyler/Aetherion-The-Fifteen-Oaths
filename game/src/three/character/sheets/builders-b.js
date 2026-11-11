@@ -16,7 +16,7 @@ const PI = Math.PI, DEG = PI / 180;
 const SURFACE = {
   ...MAT,
   wood: [.72, 0, 2], bark: [.9, 0, 2], bamboo: [.5, 0, 2], brass: [.42, .85, 3], gold: [.34, .95, 3], silver: [.4, .9, 3],
-  enamel: [.3, 0, 4], bone: [.55, 0, 4], moss: [1, 0, 0], straw: [.9, 0, 0], glass: [.2, 0, 7], glow: [.5, 0, 7], oilskin: [.5, 0, 2],
+  meteor: [.4, .7, 3], enamel: [.3, 0, 4], bone: [.55, 0, 4], moss: [1, 0, 0], straw: [.9, 0, 0], glass: [.2, 0, 7], glow: [.5, 0, 7], oilskin: [.5, 0, 2],
 };
 const M = (name) => { const m = SURFACE[name]; if (!m) throw new Error(`unknown surface "${name}"`); return m; };
 const scaleOf = (c) => c.form.J.hips.y / .998;
@@ -96,7 +96,7 @@ const turned = (axis, angle) => new Quaternion().setFromAxisAngle(axis, angle);
 function torso(c, { from = 'belt', to = 'base', color = 'cloth', mat = 'cloth', off = .006, slack = 0, ribs = 0, ribDepth = .003, arc = null, stripes = null }) {
   const { trunk } = c.form, y0 = Yof(c, from), y1 = Yof(c, to), col = c.pal(color), [a0, a1] = arc ? [arc[0] * DEG, arc[1] * DEG] : [0, TAU];
   const alt = stripes ? c.pal(stripes.color) : null;
-  c.bag.grid(Math.max(8, (ribs ? Math.max(48, ribs * 3) : 44) * c.q * (a1 - a0) / TAU), Math.max(3, (y1 - y0) * (ribs ? 44 : 70) * c.q), (u, v) => {
+  c.bag.grid(Math.max(8, (ribs ? Math.max(48, ribs * 3) : 44) * c.q * (a1 - a0) / TAU), Math.max(3, (y1 - y0) / scaleOf(c) * (ribs ? 44 : 60) * c.q), (u, v) => {
     const y = lerp(y0, y1, v), th = lerp(a0, a1, u), rib = ribs ? ribDepth * (.5 + .5 * Math.cos(th * ribs)) ** 2 : 0;
     const p = trunk.at(y, th, off + rib + slack * Math.max(0, Math.sin(th * 9 + Math.sin(y * 31) * 1.3)));
     return { p, skin: trunk.skin(p), c: alt && Math.abs(Math.abs(Math.atan2(Math.sin(th), Math.cos(th))) - stripes.at * DEG) < stripes.half * DEG ? alt : (ribs ? tone(col, .82 + .18 * (.5 + .5 * Math.cos(th * ribs))) : col) };
@@ -215,7 +215,7 @@ function hang(c, { at = 0, top = 'belt', bottom = .5, width = [.1, .1], point = 
     return p;
   };
   const skin = rigid ? () => rigid : (p) => drape.skin(p), inner = (p) => V(0, p.y, c.form.spineZ(trunk.Y.hip));
-  const nx = weave ? weave * 2 : Math.max(4, Math.round(10 * c.q)), ny = weave ? Math.max(4, Math.round(weave * (y1 - y0) / Math.max(.02, w0 + w1))) * 2 : Math.round(Math.max(4, (y1 - y0 + Math.abs(pt)) * 50 * c.q));
+  const nx = weave ? weave * 2 : Math.max(4, Math.round(10 * c.q)), ny = weave ? Math.max(4, Math.round(weave * (y1 - y0) / Math.max(.02, w0 + w1))) * 2 : Math.round(Math.max(4, (y1 - y0 + Math.abs(pt)) / s * 40 * c.q));
   const scol = stripe ? c.pal(stripe.color) : null;
   c.bag.grid(nx, ny, (u, v) => { const p = point3(u * 2 - 1, v, off + thick); return { p, skin: skin(p), c: weave ? tone(col, (Math.round(u * nx / 2 - .25) + Math.round(v * ny / 2 - .25)) % 2 ? 1.08 : .74) : scol && Math.abs(((u * (stripe.n ?? 3)) % 1) - .5) < (stripe.width ?? .2) ? scol : col }; }, { color: col, mat: M(mat), inside: inner });
   for (const edge of [(q) => [-1, q], (q) => [1, q], (q) => [q * 2 - 1, 1], (q) => [q * 2 - 1, 0]]) c.bag.grid(Math.min(18, Math.max(nx, ny)), 1, (u, v) => { const [a, b] = edge(u), p = point3(a, b, off + thick * (1 - v) - v * .002); return { p, skin: skin(p) }; }, { color: tone(col, .55), mat: M(mat), inside: inner });
@@ -225,10 +225,12 @@ function hang(c, { at = 0, top = 'belt', bottom = .5, width = [.1, .1], point = 
     for (const st of strips) c.bag.grid(Math.min(18, Math.max(nx, ny)), 3, (u, v) => { const i = Math.round(v * 3), [a, b] = st(u, [0, .1, .9, 1][i]), p = point3(a, clamp(b, 0, 1), off + thick + .0004 + .0028 * [0, 1, 1, 0][i]); return { p, skin: skin(p) }; }, { color: c.pal(border), mat: M(border === 'gold' || border === 'silver' || border === 'brass' ? border : mat), inside: inner });
   }
   // Inlaid marks: rings and bars laid on the panel in its own (across, down) coordinates.
+  // Metres per unit of the panel's own coordinates at a point, so a ring stays round where the cloth flares.
+  const metric = (a0, b0) => [point3(a0 + .05, b0, 0).distanceTo(point3(a0 - .05, b0, 0)) / .1, point3(a0, Math.min(1, b0 + .03), 0).distanceTo(point3(a0, Math.max(0, b0 - .03), 0)) / (Math.min(1, b0 + .03) - Math.max(0, b0 - .03))];
   for (const o of ornaments) {
     const oc = c.pal(o.color), om = M(o.mat ?? 'silver'), lift = off + thick + .0012;
-    if (o.ring) { const [a0, b0] = o.at, r = o.ring * s, tw = (o.width ?? .004) * s, wMid = lerp(w0, w1, b0), hh = y1 - y0; c.bag.grid(Math.max(10, 22 * c.q), 3, (u, v) => { const ang = u * TAU, i = Math.round(v * 3), rr = r + [-tw, -tw, tw, tw][i], p = point3(a0 + Math.cos(ang) * rr / wMid, b0 + Math.sin(ang) * rr / hh, lift + [0, .002, .002, 0][i]); return { p, skin: skin(p) }; }, { closeU: true, color: oc, mat: om, inside: inner }); }
-    if (o.disc) { const [a0, b0] = o.at, r = o.disc * s, wMid = lerp(w0, w1, b0), hh = y1 - y0; c.bag.grid(Math.max(8, 14 * c.q), 2, (u, v) => { const ang = u * TAU, rr = r * [1, .8, 0][Math.round(v * 2)], p = point3(a0 + Math.cos(ang) * rr / wMid, b0 + Math.sin(ang) * rr / hh, lift + [0, .0025, .003][Math.round(v * 2)]); return { p, skin: skin(p) }; }, { closeU: true, color: oc, mat: om, inside: inner }); }
+    if (o.ring) { const [a0, b0] = o.at, r = o.ring * s, tw = (o.width ?? .004) * s, [wMid, hh] = metric(a0, b0); c.bag.grid(Math.max(10, 22 * c.q), 3, (u, v) => { const ang = u * TAU, i = Math.round(v * 3), rr = r + [-tw, -tw, tw, tw][i], p = point3(a0 + Math.cos(ang) * rr / wMid, b0 + Math.sin(ang) * rr / hh, lift + [0, .002, .002, 0][i]); return { p, skin: skin(p) }; }, { closeU: true, color: oc, mat: om, inside: inner }); }
+    if (o.disc) { const [a0, b0] = o.at, r = o.disc * s, [wMid, hh] = metric(a0, b0); c.bag.grid(Math.max(8, 14 * c.q), 2, (u, v) => { const ang = u * TAU, rr = r * [1, .8, 0][Math.round(v * 2)], p = point3(a0 + Math.cos(ang) * rr / wMid, b0 + Math.sin(ang) * rr / hh, lift + [0, .0025, .003][Math.round(v * 2)]); return { p, skin: skin(p) }; }, { closeU: true, color: oc, mat: om, inside: inner }); }
     if (o.bar) { const [a0, b0, a1, b1] = o.bar, tw = (o.width ?? .004) * s, wMid = lerp(w0, w1, (b0 + b1) / 2), hh = y1 - y0, dx = (a1 - a0) * wMid, dy = (b1 - b0) * hh, len = Math.hypot(dx, dy) || 1, nxn = -dy / len, nyn = dx / len;
       c.bag.grid(Math.max(4, Math.round(len * 60 * c.q)), 3, (u, v) => { const i = Math.round(v * 3), e = [-1, -1, 1, 1][i] * tw, p = point3(lerp(a0, a1, u) + nxn * e / wMid, lerp(b0, b1, u) + nyn * e / hh, lift + [0, .002, .002, 0][i]); return { p, skin: skin(p) }; }, { color: oc, mat: om, inside: inner }); }
   }
@@ -312,7 +314,7 @@ function guard(c, { limb = 'arm', side = 'both', from, to, phi = 90, arc = 80, o
         return chain.point(t, ph + a * half, r);
       };
       const tm = (t0 + t1) / 2, sk = skin ?? chain.skin(clamp(tm, 0, 2)), inner = chain.centre(clamp(tm, 0, 2));
-      const nx = Math.max(6, Math.round(arc / 9 * c.q)), ny = Math.max(3, Math.round(chain.seg[0].length * Math.abs(t1 - t0) * 60 * c.q));
+      const nx = Math.max(6, Math.round(arc / 11 * c.q)), ny = Math.max(3, Math.round(chain.seg[0].length / s * Math.abs(t1 - t0) * 44 * c.q));
       c.bag.grid(nx, ny, (u, v) => ({ p: pos(u * 2 - 1, v, thick * s), skin: sk, c: grooves ? tone(col, .8 + .2 * Math.cos((u * 2 - 1) * grooves * PI)) : col }), { closeU: full, color: col, mat: M(mat), inside: inner });
       const edges = [(q) => [q * 2 - 1, 0], (q) => [q * 2 - 1, 1]]; if (!full) edges.push((q) => [-1, q], (q) => [1, q]);
       for (const e of edges) c.bag.grid(Math.max(nx, ny), 1, (u, v) => { const [a, b] = e(u); return { p: pos(a, b, thick * s * (1 - v)), skin: sk }; }, { color: tone(col, .5), mat: M(mat), inside: inner });
@@ -380,21 +382,21 @@ function shag(c, { on = 'arm', side = 'L', from, to, phi = 90, arc = 100, count 
  * `span` is how far it reaches past the shoulder joint, `depth` its half-depth front to back at the root,
  * `rise` lifts the tip, `fold` creases it along the middle.
  */
-function wing(c, { side = 'both', span = .1, depth = .11, tipDepth = .02, rise = 0, lift = .012, fold = 0, inset = .5, color = 'cloth', mat = 'cloth', trim = null, trimMat = null, trimWidth = .01, thick = .006, back = 0 }) {
+function wing(c, { side = 'both', span = .1, depth = .11, tipDepth = .02, rise = 0, lift = .012, fold = 0, wedge = 0, inset = .5, color = 'cloth', mat = 'cloth', trim = null, trimMat = null, trimWidth = .01, thick = .006, back = 0 }) {
   const { J, S } = c.form, s = scaleOf(c), k = c.form.k, col = c.pal(color), sh = J['upperarm.L'], zc = sh.z + back * s;
   sides(c, side, () => {
-    const pos = (a, b, extra = 0) => {
-      // a: -1 back .. 1 front; b: 0 at the root (toward the neck) .. 1 at the tip.
+    // a: -1 back .. 1 front; b: 0 at the root (toward the neck) .. 1 at the tip; h: 0 underside .. 1 top face.
+    const pos = (a, b, h = 0, extra = 0) => {
       const x = lerp(S * inset, S + span * s, b), z = zc + a * lerp(depth * k, tipDepth * k, b ** .8);
-      const rootY = c.form.trunk.Y.shoulder + lift + .035 * s * (1 - inset) - a * a * .05 * s, tipY = sh.y + .03 * s + rise * s - a * a * .01 * s;
+      const rootY = c.form.trunk.Y.shoulder + lift * s + .035 * s * (1 - inset) - a * a * .05 * s, tipY = sh.y + .03 * s + rise * s - a * a * .01 * s;
       const y = lerp(rootY, tipY, b) + .012 * s * Math.sin(PI * b) + fold * s * (1 - Math.abs(a)) * b;
-      return V(x, y + extra, z);
+      return V(x, y + extra + h * (thick * s + wedge * s * (1 - Math.abs(a)) * (1 - b * b)), z);
     };
     const sk = [['spine2', .45], ['shoulder.L', .55]], inner = V(S * .5, sh.y - .2, zc), nx = Math.max(6, Math.round(10 * c.q)), ny = Math.max(4, Math.round(8 * c.q));
-    c.bag.grid(nx, ny, (u, v) => ({ p: pos(u * 2 - 1, v, thick * s), skin: sk }), { color: col, mat: M(mat), inside: inner });
+    c.bag.grid(nx, ny, (u, v) => ({ p: pos(u * 2 - 1, v, 1), skin: sk }), { color: col, mat: M(mat), inside: inner });
     c.bag.grid(nx, ny, (u, v) => ({ p: pos(u * 2 - 1, v, 0), skin: sk }), { color: tone(col, .55), mat: M(mat), inside: inner, flip: true });
-    for (const e of [(q) => [-1, q], (q) => [1, q], (q) => [q * 2 - 1, 1]]) c.bag.grid(nx, 1, (u, v) => { const [a, b] = e(u); return { p: pos(a, b, thick * s * (1 - v)), skin: sk }; }, { color: tone(col, .6), mat: M(mat), inside: inner });
-    if (trim) { const dv = trimWidth / Math.max(.05, span + .1), da = trimWidth / Math.max(.03, depth); for (const run of [(q, e) => [-1 + e * da, q], (q, e) => [1 - e * da, q], (q, e) => [q * 2 - 1, 1 - e * dv]]) c.bag.grid(nx, 3, (u, v) => { const i = Math.round(v * 3), [a, b] = run(u, [0, .1, .9, 1][i]); return { p: pos(a, b, thick * s + .0005 + .0026 * s * [0, 1, 1, 0][i]), skin: sk }; }, { color: c.pal(trim), mat: M(trimMat ?? mat), inside: inner }); }
+    for (const e of [(q) => [-1, q], (q) => [1, q], (q) => [q * 2 - 1, 1], (q) => [q * 2 - 1, 0]]) c.bag.grid(nx, 1, (u, v) => { const [a, b] = e(u); return { p: pos(a, b, 1 - v), skin: sk }; }, { color: tone(col, .7), mat: M(mat), inside: inner });
+    if (trim) { const dv = trimWidth / Math.max(.05, span + .1), da = trimWidth / Math.max(.03, depth); for (const run of [(q, e) => [-1 + e * da, q], (q, e) => [1 - e * da, q], (q, e) => [q * 2 - 1, 1 - e * dv]]) c.bag.grid(nx, 3, (u, v) => { const i = Math.round(v * 3), [a, b] = run(u, [0, .1, .9, 1][i]); return { p: pos(a, b, 1, .0005 + .0026 * s * [0, 1, 1, 0][i]), skin: sk }; }, { color: c.pal(trim), mat: M(trimMat ?? mat), inside: inner }); if (wedge) c.bag.grid(nx, 2, (u, v) => ({ p: pos([-.05, 0, .05][Math.round(v * 2)], u, 1, .0005 + .0026 * s * [0, 1, 0][Math.round(v * 2)]), skin: sk }), { color: c.pal(trim), mat: M(trimMat ?? mat), inside: inner }); }
   });
 }
 
@@ -402,14 +404,18 @@ function wing(c, { side = 'both', span = .1, depth = .11, tipDepth = .02, rise =
  * A flat crescent plate: a horn of iron standing off a shoulder, a moon on a hip. It lies in the plane of its
  * frame; `r` is the outer radius, `a0..a1` the angles it sweeps, `width` its breadth at the middle.
  */
-function crescentPlate(c, place, sk, { r, a0, a1, width, thick = .012, color, mat = 'iron', edge = null, edgeMat = null, n = 22, dish = 0, inlay = null }) {
-  const col = c.pal(color), A0 = a0 * DEG, A1 = a1 * DEG, w = (q) => width * Math.sin(PI * clamp(q, .002, .998)) ** .75;
-  const pos = (q, e, z) => { const a = lerp(A0, A1, q), rr = r - w(q) * e; return place(V(Math.cos(a) * rr, Math.sin(a) * rr, z + dish * Math.sin(PI * q) * Math.sin(PI * e))); };
-  const rows = Math.max(8, Math.round(n * c.q)), inner = place(V(0, 0, -.3));
+function plateLoft(c, place, sk, outer, inner_, { thick = .012, color, mat = 'iron', edge = null, edgeMat = null, n = 22, inlay = null, centre = [0, 0] }) {
+  const col = c.pal(color), pos = (q, e, z) => { const o = outer(clamp(q, .002, .998)), i = inner_(clamp(q, .002, .998)); return place(V(lerp(o[0], i[0], e), lerp(o[1], i[1], e), z)); };
+  const rows = Math.max(8, Math.round(n * c.q)), inner = place(V(centre[0], centre[1], -.3));
   for (const [z, flip] of [[thick / 2, false], [-thick / 2, true]]) c.bag.grid(rows, 4, (u, v) => ({ p: pos(u, v, z), skin: sk }), { color: flip ? tone(col, .6) : col, mat: M(mat), inside: inner, flip });
-  for (const e of [0, 1]) c.bag.grid(rows, 1, (u, v) => ({ p: pos(u, e, lerp(-thick / 2, thick / 2, v)), skin: sk }), { color: tone(col, .55), mat: M(mat), inside: place(V(Math.cos((A0 + A1) / 2) * (r - width / 2), Math.sin((A0 + A1) / 2) * (r - width / 2), 0)) });
-  if (edge) for (const e of [0, 1]) c.bag.grid(rows, 3, (u, v) => { const i = Math.round(v * 3), ee = e ? 1 - [0, .02, .16, .18][i] : [0, .02, .16, .18][i]; return { p: pos(u, ee, thick / 2 + .0004 + .003 * [0, 1, 1, 0][i]), skin: sk }; }, { color: c.pal(edge), mat: M(edgeMat ?? mat), inside: inner });
-  if (inlay) c.bag.grid(Math.max(4, Math.round(rows / 3)), 2, (u, v) => ({ p: pos(lerp(inlay.from, inlay.to, u), lerp(.38, .62, v), thick / 2 + .002), skin: sk }), { color: c.pal(inlay.color), mat: M(inlay.mat ?? 'glow'), inside: inner });
+  for (const e of [0, 1]) c.bag.grid(rows, 1, (u, v) => ({ p: pos(u, e, lerp(-thick / 2, thick / 2, v)), skin: sk }), { color: tone(col, .55), mat: M(mat), inside: pos(.5, .5, 0) });
+  for (const q of [0, 1]) c.bag.grid(2, 1, (u, v) => ({ p: pos(q, u, lerp(-thick / 2, thick / 2, v)), skin: sk }), { color: tone(col, .55), mat: M(mat), inside: pos(.5, .5, 0) });
+  if (edge) for (const e of [0, 1]) c.bag.grid(rows, 3, (u, v) => { const i = Math.round(v * 3), ee = e ? 1 - [0, .02, .14, .16][i] : [0, .02, .14, .16][i]; return { p: pos(u, ee, thick / 2 + .0004 + .003 * [0, 1, 1, 0][i]), skin: sk }; }, { color: c.pal(edge), mat: M(edgeMat ?? mat), inside: inner });
+  if (inlay) c.bag.grid(Math.max(4, Math.round(rows / 3)), 2, (u, v) => ({ p: pos(lerp(inlay.from, inlay.to, u), lerp(.36, .64, v), thick / 2 + .002), skin: sk }), { color: c.pal(inlay.color), mat: M(inlay.mat ?? 'glow'), inside: inner });
+}
+function crescentPlate(c, place, sk, { r, a0, a1, width, ...rest }) {
+  const A0 = a0 * DEG, A1 = a1 * DEG, w = (q) => width * Math.sin(PI * q) ** .75;
+  plateLoft(c, place, sk, (q) => { const a = lerp(A0, A1, q); return [Math.cos(a) * r, Math.sin(a) * r]; }, (q) => { const a = lerp(A0, A1, q), rr = r - w(q); return [Math.cos(a) * rr, Math.sin(a) * rr]; }, rest);
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -596,7 +602,211 @@ function basket(c, { color = 'wicker', rim = 'bark', moss = 'moss', leafColor = 
   }
 }
 
-export { M, SURFACE, Yof, scaleOf, tone, cyl, ball, along, sweep, lathe, leaf, trunkAnchor, scaled, turned, drapeOf, crescentPlate, cane, headBand };
-export const BUILDERS_B = { torso, sleeve, legs, sash, strip, hang, coat, collar, neck: neckWrap, guard, spikes, studs, cords, shag, wing, headBand, beakMask, tail, reedPipes, bells, pipeCarrier, resonator, hairCap, skullCap, seedMask, fringe, basket };
+/** One sealed ampoule in the anchor's frame: glass between two metal caps, with a stopper. */
+function ampoule(c, A, x, y0, len, r, z, sk, glass, capCol, { holder = null } = {}) {
+  const P = (yy, zz = z) => A.at(x, yy, zz + r);
+  cyl(c, P(y0), P(y0 + len), r * A.s, r * A.s, glass, M('glow'), sk, { n: 8, caps: false });
+  for (const [a, b, k] of [[y0 - r * .5, y0 + len * .14, 1.16], [y0 + len * .86, y0 + len + r * .3, 1.16], [y0 + len + r * .3, y0 + len + r * 1.1, .6]]) cyl(c, P(a), P(b), r * k * A.s, r * k * A.s, capCol, M('brass'), sk, { n: 8 });
+  if (holder) c.bag.solid(scaled(moved(roundBox(r * 1.35, len * .16, r * 1.3, r * .4), V(x, y0 + len * .5, z + r * .8)), A.s), A.place, sk, holder, M('leather'));
+}
+
+/** Ampoules clipped to the body: around a belt, or racked at a hip. Each entry of `at` is an angle in degrees. */
+function vials(c, { at, y = 'belt', length = .07, r = .015, off = .026, color = 'glass', cap = 'brass', holder = 'leather', drop = .5, bone = null, rack = null }) {
+  for (const th of at) { const A = trunkAnchor(c, y, th, off), sk = bone ?? c.form.trunk.skin(A.o); ampoule(c, A, 0, -length * drop, length, r, 0, sk, c.pal(color), c.pal(cap), { holder: holder ? c.pal(holder) : null }); }
+  if (rack) { const mid = at.reduce((a, b) => a + b, 0) / at.length, A = trunkAnchor(c, y, mid, off - .012), sk = bone ?? c.form.trunk.skin(A.o), w = rack.width ?? .05; c.bag.solid(scaled(moved(roundBox(w, length * .55, .008, .005), V(0, -length * drop + length * .5, .004)), A.s), A.place, sk, c.pal(rack.color ?? 'leather'), M('leather')); for (const yy of [.2, .8]) c.bag.solid(scaled(moved(roundBox(w + .004, .01, r + .012, .004), V(0, -length * drop + length * yy, r + .012)), A.s), A.place, sk, c.pal(rack.strap ?? 'leatherDark'), M('leather')); }
+}
+
+/** Box pack on the back: body, buckled flap, a front pocket, metal corners and ampoules standing in its top. */
+function backpack(c, { at = ['chest', -.03], size = [.085, .1, .045], color = 'leather', dark = 'leatherDark', trim = 'brass', glass = 'glass', tubes = 3, tube = .09 }) {
+  const A = trunkAnchor(c, at, 180, .01), sk = [['spine2', 1]], [w, h, d] = size, B = (shape, x, y, z, col, mat) => c.bag.solid(scaled(moved(shape, V(x, y, z)), A.s), A.place, sk, c.pal(col), M(mat));
+  B(roundBox(w, h, d, .01), 0, 0, d, color, 'leather');
+  B(roundBox(w + .004, h * .42, .006, .004), 0, h * .5, d * 2 + .003, dark, 'leather');
+  B(roundBox(w * .62, h * .34, .012, .006), 0, -h * .42, d * 2 + .008, color, 'leather');
+  B(roundBox(w * .66, h * .12, .004, .003), 0, -h * .16, d * 2 + .021, dark, 'leather');
+  for (const sx of [-.5, .5]) { B(roundBox(.01, h * .3, .004, .002), sx * w, h * .28, d * 2 + .011, dark, 'leather'); c.bag.solid(scaled(moved(buckleShape(.011, .012, .003), V(sx * w, h * .08, d * 2 + .014)), A.s), A.place, sk, c.pal(trim), M('brass')); }
+  for (const sx of [-1, 1]) for (const sy of [-1, 1]) B(roundBox(.013, .013, d * .5, .003), sx * (w - .008), sy * (h - .008), d * 1.52, trim, 'brass');
+  for (let i = 0; i < tubes; i++) ampoule(c, A, (i - (tubes - 1) / 2) * w * .62, h - .012, tube, .016, d - .016, sk, c.pal(glass), c.pal(trim));
+  B(roundBox(w * .9, .012, d * .7, .005), 0, h + .012, d, dark, 'leather');
+}
+
+/** A pouch with a flap: strapped to a thigh (`limb`) or hung on the trunk (`y`, `th`). */
+function pouch(c, { limb = 'leg', side = 'both', at = .45, phi = 85, y = null, th = 0, size = [.045, .06, .018], off = .012, color = 'leather', dark = 'leatherDark', trim = 'brass', strap = true, mat = 'leather', trimMat = 'brass' }) {
+  const [w, h, d] = size;
+  const build = (place, sk, s) => {
+    const B = (shape, x, yy, z, col, mat) => c.bag.solid(scaled(moved(shape, V(x, yy, z)), s), place, sk, c.pal(col), M(mat));
+    B(roundBox(w, h, d, .008), 0, 0, d, color, mat); B(roundBox(w + .003, h * .45, .005, .003), 0, h * .5, d * 2 + .003, dark, mat);
+    B(roundBox(.008, h * .22, .003, .002), 0, h * .12, d * 2 + .009, dark, 'leather'); c.bag.solid(scaled(moved(dome(.006, .004, 7), V(0, h * -.04, d * 2 + .008)), s), place, sk, c.pal(trim), M(trimMat));
+    for (const sx of [-1, 1]) B(roundBox(.004, h * .44, .003, .002), sx * (w + .001), h * .5, d * 2 + .004, trim, trimMat);
+  };
+  if (y !== null) { const A = trunkAnchor(c, y, th, off); build(frame(A.o, A.x, A.y, A.z), c.form.trunk.skin(A.o), A.s); return; }
+  const chain = c.form[limb], s = scaleOf(c);
+  sides(c, side, () => { build(limbFrame(chain, at, phi * DEG, off * s), chain.skin(at), s); if (strap) for (const dt of [-.07, .07]) limbBand(c, chain, { t: at + dt, width: .018 * s, off: .008 * s, thick: .004, color: c.pal(dark), mat: M('leather') }); });
+}
+
+/** Filter mask over nose and mouth: a moulded cup with a metal frame, a canister either side and head straps. */
+function respirator(c, { color = 'leatherDark', frameColor = 'brass', rim = 'glass', strap = 'leatherDark', canister = .1, small = false }) {
+  const place = headPlace(c), col = c.pal(color), fr = c.pal(frameColor), span = 50 * DEG, top = -.035, bottom = -.47;
+  const cup = (phi, y, lift = 0) => face(c, phi, y, .035 + .045 * (1 - (phi / span) ** 2) * Math.sin(PI * clamp((y - bottom) / (top - bottom), 0, 1)) ** .6 + lift);
+  c.bag.grid(18 * c.q, 10 * c.q, (u, v) => ({ p: place(cup(lerp(-span, span, u), lerp(top, bottom, v))), skin: HEAD }), { color: col, mat: M('leather'), inside: c.head.C });
+  // Frame: a rim around the cup and a keel down its middle.
+  for (const run of [(q) => [lerp(-span, span, q), top], (q) => [lerp(-span, span, q), bottom], (q) => [-span, lerp(top, bottom, q)], (q) => [span, lerp(top, bottom, q)], (q) => [0, lerp(top, bottom, q)]]) sweep(c, [0, .25, .5, .75, 1].map((q) => { const [phi, y] = run(q); return place(cup(phi, y, .006)); }), .013 * c.head.H, fr, M('brass'), HEAD, { n: 5, rows: 6 });
+  for (const sx of [-1, 1]) {
+    const o = cup(sx * span * .98, -.27, .0), d = V(sx * .82, -.08, .56).normalize(), R = canister * (small ? .7 : 1), x = new Vector3().crossVectors(V(0, 1, 0), d).normalize(), y = new Vector3().crossVectors(d, x), P = (k) => place(o.clone().addScaledVector(d, k));
+    cyl(c, P(-.03), P(.1), R * c.head.H, R * c.head.H, fr, M('brass'), HEAD, { n: 12, capTone: .25 });
+    cyl(c, P(.085), P(.115), R * 1.12 * c.head.H, R * 1.12 * c.head.H, c.pal(rim), M('enamel'), HEAD, { n: 12, capTone: .2 });
+    for (let k = 0; k < 3; k++) { const a = k / 3 * PI, e = x.clone().multiplyScalar(Math.cos(a)).addScaledVector(y, Math.sin(a)); cyl(c, place(o.clone().addScaledVector(d, .118).addScaledVector(e, -R * .95)), place(o.clone().addScaledVector(d, .118).addScaledVector(e, R * .95)), .01 * c.head.H, .01 * c.head.H, fr, M('brass'), HEAD, { n: 4, caps: false }); }
+  }
+  headBand(c, { y: -.13, rise: .16, from: 52, to: 308, width: .06, color: strap });
+  headBand(c, { y: -.3, rise: -.02, from: 52, to: 308, width: .05, color: strap });
+}
+
+/**
+ * Glass reagent tanks carried behind the shoulders: a globe half full of liquid in a metal cradle with a valve
+ * on top, and a standpipe with a spout rising behind one shoulder.
+ */
+function tanks(c, { glass = 'glassPale', liquid = 'glass', metal = 'brass', r = .075, spread = 1.02, back = .095, lift = .0, pipe = 'L', pipeRise = .2 }) {
+  const { J, S, trunk } = c.form, s = scaleOf(c), sk = [['spine2', 1]], y = trunk.Y.shoulder + lift * s, z = J['upperarm.L'].z - back * s, R = r * s, fe = c.pal(metal);
+  for (const sx of [-1, 1]) {
+    const C = V(sx * S * spread, y, z), place = (p) => V(C.x + p.x, C.y + p.y, C.z + p.z), arc = (a0, a1, n) => { const out = []; for (let i = 0; i <= n; i++) { const a = lerp(a0, a1, i / n); out.push([Math.cos(a) * R, Math.sin(a) * R]); } return out; };
+    lathe(c, place, arc(-PI / 2, -.05, 6), c.pal(liquid), M('glow'), sk, { n: 14 });
+    lathe(c, place, arc(-.05, PI / 2 - .25, 6), c.pal(glass), M('enamel'), sk, { n: 14 });
+    lathe(c, place, [[R * 1.04, -.012 * s], [R * 1.09, 0], [R * 1.04, .012 * s]], fe, M('brass'), sk, { n: 14 });
+    cyl(c, place(V(0, R * .93, 0)), place(V(0, R * 1.25, 0)), R * .3, R * .26, fe, M('brass'), sk, { n: 9 });
+    cyl(c, place(V(0, R * 1.25, 0)), place(V(0, R * 1.36, 0)), R * .42, R * .42, fe, M('brass'), sk, { n: 9 });
+    cyl(c, place(V(0, R * 1.36, 0)), place(V(0, R * 1.62, 0)), R * .2, R * .26, tone(fe, .8), M('brass'), sk, { n: 8 });
+    cyl(c, place(V(0, -R * .95, 0)), place(V(0, -R * 1.3, 0)), R * .34, R * .22, fe, M('brass'), sk, { n: 9 });
+    // Cradle arm back to the harness.
+    sweep(c, [place(V(0, -R * 1.2, 0)), place(V(-sx * R * .7, -R * 1.5, R * .3)), V(sx * S * .45, y - R * 1.3, trunk.at(y - R * 1.3, PI, .01).z)], .012 * s, fe, M('brass'), sk, { n: 6, rows: 6 });
+  }
+  if (pipe) {
+    const sx = pipe === 'L' ? 1 : -1, x = sx * S * .52, zb = trunk.at(trunk.Y.chest, PI, .0).z - .035 * s, top = J.head.y + c.head.H * .95 + pipeRise * s, rr = .016 * s;
+    cyl(c, V(x, trunk.Y.ribs, zb), V(x, top, zb), rr, rr, fe, M('brass'), sk, { n: 8 });
+    for (const yy of [trunk.Y.chest, trunk.Y.shoulder + .08 * s, top - .05 * s]) cyl(c, V(x, yy - .012 * s, zb), V(x, yy + .012 * s, zb), rr * 1.5, rr * 1.5, tone(fe, .85), M('brass'), sk, { n: 8 });
+    cyl(c, V(x, top, zb), V(x, top + .03 * s, zb), rr * 1.3, rr * 1.3, fe, M('brass'), sk, { n: 8 });
+    cyl(c, V(x - sx * .01 * s, top - .012 * s, zb), V(x + sx * .11 * s, top - .012 * s, zb), rr * .85, rr * .85, fe, M('brass'), sk, { n: 8 });
+    cyl(c, V(x + sx * .11 * s, top - .012 * s, zb), V(x + sx * .14 * s, top - .012 * s, zb), rr * 1.2, rr * 1.2, tone(fe, .85), M('brass'), sk, { n: 8, capTone: .2 });
+  }
+}
+
+/** A knot of hair: a bun at the nape or crown, wound so its coils read. Position in head units. */
+function knot(c, { at = [0, 0, -.5], r = .15, color = 'hair', streak = null, squash = [1, .85, .9], tie = null }) {
+  const place = headPlace(c), col = c.pal(color), other = streak ? c.pal(streak) : tone(col, 1.5), C = place(V(...at));
+  ball(c, C, r * c.head.H, col, M('hair'), HEAD, { squash, n: 14, tint: (d) => tone(col.clone().lerp(other, .5 + .5 * Math.sin(Math.atan2(d.z, d.x) * 5 + d.y * 7)), .8 + .25 * Math.sin(Math.atan2(d.z, d.x) * 11 + d.y * 3)) });
+  if (tie) c.bag.solid(ring(r * .7 * c.head.H, r * .7 * c.head.H, .012 * c.head.H, 14, 5), (p) => V(C.x + p.x, C.y + p.z, C.z + r * .55 * c.head.H + p.y * .2), HEAD, c.pal(tie), M('gold'));
+}
+
+/**
+ * Folded visor: a band across the eyes and an angular shield running down over the nose and mouth to a point
+ * below the chin, edged in metal, over a cloth veil, held by a strap with a clasp at the back of the head.
+ */
+function visor(c, { color = 'ivory', trim = 'gold', veil = 'grey', strap = 'grey', top = .2, eye = -.02, point = -.64, half = 42, wrap = 80 }) {
+  const place = headPlace(c), col = c.pal(color), gold = c.pal(trim), span = wrap * DEG, hw = half * DEG;
+  const on = (phi, y, off) => { const yy = Math.max(y, -.485), p = face(c, phi, yy, off); if (y < yy) { p.y -= yy - y; p.z -= (yy - y) * .25; } return p; };
+  if (veil) c.bag.grid(16 * c.q, 8 * c.q, (u, v) => ({ p: place(on(lerp(-span * .8, span * .8, u), lerp(eye + .02, -.485, v), .018)), skin: HEAD }), { color: c.pal(veil), mat: M('cloth'), inside: c.head.C });
+  c.bag.grid(22 * c.q, 4, (u, v) => { const phi = lerp(-span, span, u); return { p: place(on(phi, lerp(top, eye, v), .034 + .016 * (1 - Math.abs(phi) / span))), skin: HEAD }; }, { color: col, mat: M('enamel'), inside: c.head.C });
+  const w = (y) => hw * clamp((y - point) / (top - point), 0, 1) ** .85, shield = (a, v, lift = 0) => { const y = lerp(top, point, v); return on(a * w(y), y, .04 + .06 * (1 - Math.abs(a)) * (1 - v * .4) + lift); };
+  c.bag.grid(Math.max(6, 10 * c.q), 12 * c.q, (u, v) => ({ p: place(shield(u * 2 - 1, v)), skin: HEAD }), { color: col, mat: M('enamel'), inside: c.head.C });
+  const line = (pts, r = .012) => sweep(c, pts.map(place), r * c.head.H, gold, M('gold'), HEAD, { n: 5, rows: 10 });
+  for (const sx of [-1, 1]) line([0, .2, .4, .6, .8, 1].map((v) => shield(sx, v, .004)));
+  line([0, .25, .5, .75, 1].map((v) => shield(0, v, .008)), .008);
+  for (const y of [top, eye]) line([-1, -.6, -.2, .2, .6, 1].map((a) => on(a * span, y, .04 + .016 * (1 - Math.abs(a)))), .01);
+  if (strap) { headBand(c, { y: (top + eye) / 2, from: wrap, to: 360 - wrap, width: (top - eye) * .8, off: .014, thick: .012, color: strap, mat: 'cloth' }); const o = scalp(c, PI, (top + eye) / 2, .03); c.bag.solid(roundBox(.1 * c.head.H, .07 * c.head.H, .02 * c.head.H, .008 * c.head.H), (p) => place(o).add(V(-p.x, p.y, -p.z)), HEAD, gold, M('gold')); }
+}
+
+/** Lotus boss on the belt: a fan of pointed petals in enamel over a metal backing, with a bud at its heart. */
+function lotus(c, { at = 0, y = 'belt', color = 'ivory', trim = 'gold', size = .085, off = .03, petals = 5 }) {
+  const A = trunkAnchor(c, y, at, off), sk = c.form.trunk.skin(A.o), col = c.pal(color), gold = c.pal(trim), s = A.s;
+  const dir = (lx, ly, lz) => A.x.clone().multiplyScalar(lx).addScaledVector(A.y, ly).addScaledVector(A.z, lz).normalize();
+  for (const [layer, len, wide, z, colour, mat] of [[0, 1.12, 1.2, .0, gold, 'gold'], [1, 1, 1, .007, col, 'enamel']]) {
+    for (let i = 0; i < petals; i++) { const a = (i - (petals - 1) / 2) * (150 / (petals - 1)) * DEG, k = 1 - Math.abs(a) / 2.2, lift = z + (1 - k) * -.004; leaf(c, A.at(Math.sin(a) * .008, -.018, lift), dir(Math.sin(a), Math.cos(a), .22), A.z, size * s * len * (.72 + .28 * k), size * .34 * s * wide, colour, M(mat), sk, { cup: .5, rows: 4, belly: .35 }); }
+    for (const sx of [-1, 1]) leaf(c, A.at(sx * .012, -.02, z - .002), dir(sx * .8, -.6, .15), A.z, size * .55 * s * len, size * .26 * s * wide, colour, M(mat), sk, { cup: .5, rows: 3, belly: .35 });
+    void layer;
+  }
+  leaf(c, A.at(0, -.022, .016), dir(0, 1, .3), A.z, size * .62 * s, size * .2 * s, tone(col, 1.05), M('enamel'), sk, { cup: .8, rows: 4, belly: .35 });
+  c.bag.solid(scaled(moved(roundBox(size * .2, size * .12, .008, .004), V(0, -.03, .012)), s), A.place, sk, gold, M('gold'));
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Tidal Observatory
+
+/** A horn of plate standing up off the shoulder: broad at its root, its outer edge sweeping up and out to a point. */
+function fin(c, { side = 'R', spine = [[.0, .0], [.15, .1], [.26, .28], [.28, .5]], width = .2, thick = .016, color = 'meteor', mat = 'meteor', edge = 'bronze', edgeMat = 'brass', forward = .0, tilt = 12 }) {
+  const { J } = c.form, s = scaleOf(c), sh = J['upperarm.L'], pts = spine.map(([x, y]) => V(x * s, y * s, 0));
+  sides(c, side, () => {
+    const o = V(sh.x - .04 * s, sh.y + .05 * s, sh.z + forward * s), tl = tilt * DEG, place = frame(o, V(Math.cos(tl), 0, -Math.sin(tl)), V(0, 1, 0), V(Math.sin(tl), 0, Math.cos(tl)));
+    const outer = (q) => { const p = along(pts, q); return [p.x, p.y]; };
+    const inner_ = (q) => { const p = along(pts, q), t = along(pts, Math.min(1, q + .02)).sub(along(pts, Math.max(0, q - .02))).normalize(), w = width * s * (1 - q) ** .8 * (.55 + .45 * smooth(0, .25, q)); return [p.x - t.y * w, p.y + t.x * w]; };
+    plateLoft(c, place, [['shoulder.L', .6], ['spine2', .4]], outer, inner_, { thick: thick * s, color, mat, edge, edgeMat, n: 20 });
+    // Its mount: a boss and a plate clamped over the shoulder.
+    c.bag.solid(scaled(moved(dome(.04, .02, 10), V(.02, .02, thick / 2)), s), place, [['shoulder.L', 1]], c.pal(edge), M(edgeMat));
+  });
+}
+
+/** A crescent plate hung on the body: the moon worn at the hip. Angles are in the plane of the plate (0 points along the body's girth). */
+function moon(c, { at = 62, y = ['belt', -.1], r = .11, a0 = 110, a1 = 320, width = .075, thick = .012, off = .03, color = 'silver', mat = 'silver', edge = null, inlay = { color: 'violet', from: .3, to: .7 }, bone = null }) {
+  const A = trunkAnchor(c, y, at, off), sk = bone ?? [['hips', .6], [at > 0 ? 'thigh.L' : 'thigh.R', .4]];
+  crescentPlate(c, (p) => A.at(p.x, p.y, p.z), sk, { r, a0, a1, width, thick, color, mat, edge, inlay, n: 26 });
+}
+
+/** Closed helm: a smooth dome down to the jaw, a brow band, a disc over each ear and glowing vertical sight slits. */
+function helm(c, { color = 'meteor', mat = 'meteor', band = 'bronze', slit = 'slit', slits = 3, size = [.52, .6, .6], drop = -.6 }) {
+  const place = headPlace(c), col = c.pal(color), [rx, ry, rz] = size, z0 = .02, y0 = .0;
+  const shell = (phi, y, lift = 0) => { const cy = clamp(y / ry, -1, 1), st = Math.sqrt(Math.max(0, 1 - cy * cy)), jaw = 1 - .12 * smooth(-.2, -.6, y) * Math.max(0, Math.cos(phi)) - .1 * smooth(-.25, -.6, y); return V(Math.sin(phi) * st * (rx + lift) * jaw, y0 + y + lift * cy, z0 + Math.cos(phi) * st * (Math.cos(phi) > 0 ? rz + .04 : rz) * jaw + lift * Math.cos(phi) * st); };
+  c.bag.grid(34 * c.q, 18 * c.q, (u, v) => ({ p: place(shell(u * TAU, lerp(drop, ry * .999, v))), skin: HEAD }), { closeU: true, color: col, mat: M(mat), inside: c.head.C });
+  c.bag.grid(34 * c.q, 1, (u, v) => ({ p: place(shell(u * TAU, drop, -v * .08)), skin: HEAD }), { closeU: true, color: tone(col, .4), mat: M(mat), inside: place(V(0, drop - .5, 0)) });
+  // Brow band and the crest strip over the crown.
+  for (const [ya, yb] of [[.2, .26]]) c.bag.grid(34 * c.q, 3, (u, v) => { const i = Math.round(v * 3); return { p: place(shell(u * TAU, lerp(ya, yb, [0, 0, 1, 1][i]) - .1 * Math.max(0, -Math.cos(u * TAU)), [0, .014, .014, 0][i])), skin: HEAD }; }, { closeU: true, color: c.pal(band), mat: M('brass'), inside: c.head.C });
+  for (const sx of [-1, 1]) { const o = shell(sx * PI / 2, .0, .0), fr = (p) => place(V(o.x + sx * p.z, o.y + p.y, o.z + p.x)); c.bag.solid(moved(dome(.15, .05, 12), V(0, 0, 0)), fr, HEAD, c.pal(band), M('brass')); c.bag.solid(moved(dome(.095, .04, 10), V(0, 0, .035)), fr, HEAD, tone(col, 1.2), M(mat)); c.bag.solid(moved(dome(.04, .03, 8), V(0, 0, .065)), fr, HEAD, c.pal(band), M('brass')); }
+  for (let i = 0; i < slits; i++) { const k = i - (slits - 1) / 2, phi = k * .2, tall = k === 0 ? .2 : .15; c.bag.grid(2, 5, (u, v) => { const y = lerp(-tall, tall, v) - .02, w = .028 * Math.sin(PI * clamp(v, .04, .96)) ** .6; return { p: place(shell(phi + (u - .5) * 2 * w + k * .04 * (y + .1), y, .006)), skin: HEAD }; }, { color: c.pal(slit), mat: M('glow'), inside: c.head.C }); }
+}
+
+/**
+ * Astrolabe collar: a broad ring of metal and enamel standing round the neck, an inner ring against the throat,
+ * and a jointed quadrant arm rising behind one shoulder to carry an orb over the head.
+ */
+function astrolabe(c, { metal = 'silver', enamel = 'violet', radius = .15, arm = 'L', reach = .5, orb = .03 }) {
+  const { J, trunk } = c.form, s = scaleOf(c), k = c.form.k, R = radius * k, sk = [['spine2', 1]], y = trunk.Y.base + .028 * s, zc = J.neck.z + .012, tl = -.16;
+  const place = (p) => V(p.x, y + p.y * Math.cos(tl) - p.z * Math.sin(tl), zc + p.z * Math.cos(tl) + p.y * Math.sin(tl)), fe = c.pal(metal), u = s;
+  lathe(c, place, [[R - .034 * u, -.004 * u], [R - .03 * u, .02 * u], [R - .006 * u, .03 * u], [R + .014 * u, .022 * u], [R + .02 * u, .004 * u], [R + .012 * u, -.014 * u], [R - .02 * u, -.016 * u], [R - .034 * u, -.004 * u]], fe, M('silver'), sk, { n: 30 });
+  lathe(c, place, [[R + .0205 * u, -.006 * u], [R + .0225 * u, .004 * u], [R + .017 * u, .02 * u]], c.pal(enamel), M('enamel'), sk, { n: 30 });
+  lathe(c, place, [[R * .66, .012 * u], [R * .66 + .004 * u, .04 * u], [R * .66 + .016 * u, .044 * u], [R * .66 + .02 * u, .016 * u], [R * .66, .012 * u]], fe, M('silver'), sk, { n: 24 });
+  for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; c.bag.solid(scaled(dome(.005, .004, 6), u), (p) => place(V(Math.cos(a) * (R - .008 * u) + p.x, .03 * u + p.z, Math.sin(a) * (R - .008 * u) + p.y)), sk, tone(fe, 1.2), M('silver')); }
+  if (arm) {
+    const sx = arm === 'L' ? 1 : -1, h = reach * s, pts = [V(sx * R * .72, .02 * u, -R * .72), V(sx * R * 1.2, h * .22, -R * .95), V(sx * R * 1.42, h * .55, -R * .8), V(sx * R * 1.3, h * .84, -R * .5), V(sx * R * 1.0, h, -R * .25)].map(place);
+    sweep(c, pts, (q) => .017 * u * (1 - q * .3), fe, M('silver'), sk, { n: 6, rows: 18, flat: .55, side: V(0, 0, 1) });
+    sweep(c, pts.map((p) => p.clone().add(V(0, 0, .006 * u))), .006 * u, c.pal(enamel), M('enamel'), sk, { n: 4, rows: 14, caps: false });
+    for (const q of [0, .5]) ball(c, along(pts, q), .024 * u, fe, M('silver'), sk, { n: 9 });
+    const tip = pts[4]; ball(c, tip, orb * u, c.pal(enamel), M('enamel'), sk, { n: 12 });
+    c.bag.solid(scaled(ring(orb * 1.12, orb * 1.12, .004, 16, 5), u), frame(tip, V(1, 0, 0), V(0, 0, 1), V(0, 1, 0)), sk, fe, M('silver'));
+  }
+}
+
+/** Orb boss: an enamel globe held in metal rings on a backing disc, with a tag hanging below. */
+function orb(c, { at = 0, y = 'belt', r = .05, metal = 'silver', enamel = 'violet', off = .03, tag = true }) {
+  const A = trunkAnchor(c, y, at, off), sk = c.form.trunk.skin(A.o), fe = c.pal(metal), s = A.s, C = A.at(0, 0, r * .7);
+  const fr = frame(A.o, A.x, A.y, A.z);
+  c.bag.solid(scaled(dome(r * 1.5, r * .3, 16), s), fr, sk, fe, M('silver'));
+  c.bag.solid(scaled(moved(ring(r * 1.32, r * 1.32, r * .13, 20, 6), V(0, 0, r * .3)), s), fr, sk, tone(fe, 1.15), M('silver'));
+  ball(c, C, r * s, c.pal(enamel), M('enamel'), sk, { n: 14 });
+  c.bag.solid(scaled(moved(ring(r * 1.04, r * 1.04, r * .07, 18, 5), V(0, 0, r * .7)), s), fr, sk, fe, M('silver'));
+  c.bag.solid(scaled(moved(ring(r * 1.04, r * 1.04, r * .07, 18, 5), V(0, 0, r * .7), turned(V(0, 1, 0), PI / 2)), s), fr, sk, fe, M('silver'));
+  if (tag) { c.bag.solid(scaled(moved(roundBox(r * .16, r * .5, .004, .002), V(0, -r * 1.9, .006)), s), fr, sk, fe, M('silver')); c.bag.solid(scaled(moved(roundBox(r * .36, r * .6, .006, .003), V(0, -r * 2.9, .008)), s), fr, sk, tone(fe, .9), M('gold')); }
+}
+
+/** Weights hung on chains from the hem of the coat: banded metal spheres. Needs a coat. */
+function hemOrbs(c, { count = 8, r = .042, drop = .04, metal = 'silver', enamel = 'violet', start = 22 }) {
+  if (!c.coat) throw new Error('b.hemOrbs needs a coat');
+  const s = scaleOf(c), fe = c.pal(metal), en = c.pal(enamel);
+  for (let i = 0; i < count; i++) {
+    const th = (start + i * 360 / count) * DEG, top = c.coat.at(c.coat.yHem + .012 * s, th, .008), sk = c.coat.skin(top), R = r * s * (i % 2 ? .86 : 1), C = top.clone().add(V(0, -(drop * s + R), 0));
+    c.bag.solid(scaled(dome(.014, .008, 8), s), frame(top, V(1, 0, 0), V(0, 0, -1), V(0, -1, 0)), sk, fe, M('silver'));
+    for (let k = 0; k < 3; k++) { const a = top.clone().add(V(0, -drop * s * k / 3, 0)); c.bag.solid(scaled(ring(.006, .009, .002, 8, 4), s), frame(a.add(V(0, -drop * s / 6, 0)), k % 2 ? V(1, 0, 0) : V(0, 0, 1), V(0, 1, 0)), sk, fe, M('silver')); }
+    ball(c, C, R, fe, M('silver'), sk, { n: 12, tint: (d) => (Math.abs(d.y) < .16 || Math.abs(d.x) < .12 ? en : fe) });
+    c.bag.solid(scaled(dome(.012, .01, 7), s), frame(C.clone().add(V(0, R, 0)), V(1, 0, 0), V(0, 0, -1), V(0, 1, 0)), sk, fe, M('silver'));
+  }
+}
+
+export { M, SURFACE, Yof, scaleOf, tone, cyl, ball, along, sweep, lathe, leaf, trunkAnchor, scaled, turned, drapeOf, plateLoft, crescentPlate, cane, headBand, ampoule };
+export const BUILDERS_B = { torso, sleeve, legs, sash, strip, hang, coat, collar, neck: neckWrap, guard, spikes, studs, cords, shag, wing, headBand, beakMask, tail, reedPipes, bells, pipeCarrier, resonator, hairCap, skullCap, seedMask, fringe, basket, vials, backpack, pouch, respirator, tanks, knot, visor, lotus, fin, moon, helm, astrolabe, orb, hemOrbs };
 for (const [name, build] of Object.entries(BUILDERS_B)) BUILDERS[`b.${name}`] = build;
-void [box, slab, slabY, trunkBand, buckleShape, face, Quaternion];
+void [box, slab, slabY, trunkBand, Quaternion];
