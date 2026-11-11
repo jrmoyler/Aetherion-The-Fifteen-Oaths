@@ -97,8 +97,8 @@ function buttress(plan, x, z, s, tint) {
   plan.claim(x, z, .6 * Math.max(sx, sz));
 }
 /** A trapper's cabin on the flattest ground the search finds; its door (local +Z in the source) looks downhill. */
-function cabin(plan, kind, opts) {
-  const site = plan.find({ r: 7, ...opts }, (x, z) => { const g = relief(x, z, 5); return g.span < 1.6 ? -g.span : null; });
+function cabin(plan, kind, opts, floor = 3) {
+  const site = plan.find({ r: 7, ...opts }, (x, z, h) => { const g = relief(x, z, 5); return g.span < 1.6 && h > floor ? -g.span : null; });
   if (!site) return plan.notes.push(`no level ground for the ${kind}`) && null;
   const f = fall(site.x, site.z, 6), g = relief(site.x, site.z, 4.5), ry = yawTo(f.dx, f.dz);
   plan.put(kind, site.x, g.min - .15, site.z, { ry, r: 5 });
@@ -192,7 +192,7 @@ const PLANNERS = {
       plan.claim((span.ax + span.bx) / 2, (span.az + span.bz) / 2, span.L / 2 + 6);
       for (const [x, z, away] of [[span.ax, span.az, -1], [span.bx, span.bz, 1]]) { const cx = x + span.ux * away * 5 - span.uz * 2.2, cz = z + span.uz * away * 5 + span.ux * 2.2; plan.put('cairn', cx, heightAt(cx, cz) - .1, cz, { ry: R() * TAU, s: [1.6, 1.6, 1.6], r: 1.2, tint: [1.2, 1.2, 1.15] }); plan.circle(cx, cz, .8, heightAt(cx, cz) - 1, heightAt(cx, cz) + 3); }
     } else plan.notes.push('no ravine for the rope bridge');
-    const hut = cabin(plan, 'cabin', { min: 190, max: 460 });
+    const hut = cabin(plan, 'cabin', { min: 190, max: 460 }, 60);
     if (hut) for (let i = 1; i <= 3; i++) { const t = i / 4, x = lerp(plan.center[0], hut.x, .45 + t * .5) + (R() - .5) * 14, z = lerp(plan.center[1], hut.z, .45 + t * .5) + (R() - .5) * 14; if (!clearOf(x, z, 2) || heightAt(x, z) < 2) continue; plan.put('cairn', x, heightAt(x, z) - .1, z, { ry: R() * TAU, s: [1.6, 1.6, 1.6], r: 1.2, tint: [1.2, 1.2, 1.15] }); plan.circle(x, z, .8, heightAt(x, z) - 1, heightAt(x, z) + 3); }
     const snow = plan.find({ r: 30, min: 220, max: 560 }, (x, z, h) => (h > 120 && relief(x, z, 20).span < 14 ? h : null));
     if (snow) { for (let i = 0; i < 9; i++) { const a = R() * TAU, d = Math.sqrt(R()) * 28, x = snow.x + Math.cos(a) * d, z = snow.z + Math.sin(a) * d, s = 4 + R() * R() * 9; plan.put('iceblock', x, heightAt(x, z) - s * .25, z, { variant: i % 2, ry: R() * TAU, s: [s * (.8 + R() * .5), s * (.9 + R() * .6), s * (.8 + R() * .5)], r: s, tint: [.7, .84, .95] }); plan.circle(x, z, .6 * s, heightAt(x, z) - 2, heightAt(x, z) + s * .8); } plan.claim(snow.x, snow.z, 34); }

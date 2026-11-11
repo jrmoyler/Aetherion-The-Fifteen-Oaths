@@ -75,3 +75,22 @@ test('with a canvas every realm builds its meshes from the copied builders', () 
   } finally { console.error = original; delete globalThis.document; }
   assert.deepEqual(errors, []);
 });
+
+test('solid landmarks stop a walker, and the rope bridge deck can be walked', async () => {
+  const { CollisionWorld } = await import('../core/collision.js');
+  const collision = new CollisionWorld(), landmarks = createRealmLandmarks({ scene: null, collision, quality: { name: 'low' } });
+  for (const oath of OATHS) landmarks.update(.016, ...oath.center);
+  // The sphinx: a body pushed into its flank comes back out.
+  const sphinx = planRealm(OATHS.find((oath) => oath.biome === 'badlands').id).items.find((item) => item.kind === 'sphinx');
+  const body = { x: sphinx.x + .5, y: heightAt(sphinx.x, sphinx.z), z: sphinx.z + .5 };
+  collision.resolve(body, .45, 1.8, .6);
+  assert.ok(Math.hypot(body.x - sphinx.x, body.z - sphinx.z) > 4, 'pushed out of the sphinx');
+  assert.equal(collision.blocked(sphinx.x - 60, sphinx.z - 60, sphinx.x + 60, sphinx.z + 60, heightAt(sphinx.x, sphinx.z) + 2), true, 'the camera ray is blocked too');
+  // The rope bridge: mid-span the walkable surface is the deck, well above the ravine floor.
+  const bridge = planRealm(OATHS.find((oath) => oath.biome === 'alpine').id).items.find((item) => item.kind === 'ropebridge');
+  assert.ok(bridge, 'the alpine realm has its rope bridge');
+  const [mx, mz] = bridge.mid, deck = (bridge.ya + bridge.yb) / 2 - bridge.sag;
+  assert.ok(deck - heightAt(mx, mz) > 4, 'there is a drop under the span');
+  assert.ok(Math.abs(collision.groundAt(mx, mz, deck + .2, .6) - deck) < .5, `deck height at mid-span (${collision.groundAt(mx, mz, deck + .2, .6)} vs ${deck})`);
+  assert.ok(Math.abs(collision.groundAt(mx, mz, heightAt(mx, mz), .6) - heightAt(mx, mz)) < 1e-6, 'under the bridge the ground is the ravine floor');
+});
