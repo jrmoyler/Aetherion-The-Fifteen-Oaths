@@ -2,6 +2,7 @@
 // nameplates, selection ring. API per game/CONTRACTS.md.
 import { slingWeapon, arsenalWeaponOf } from './arsenal.js';
 import { wearArmor } from './arsenal-armor.js';
+import { addContactShadow } from './contactShadow.js';
 import { Vector3, Raycaster, Vector2 } from 'three';
 import { OATH_BY_ID, OATHS, CLASSES } from '@shared/oaths.js';
 import { CREATURES, ARCHETYPES } from '@shared/creatures.js';
@@ -163,6 +164,7 @@ function createActors(ctx) {
   function spawn(st, local = false) {
     if (entities.has(st.id)) return entities.get(st.id);
     const a = new Actor(scene, st);
+    if (!ctx.quality?.shadows) addContactShadow(a, a.creature?.radius ?? .55);
     a.local = local;
     if (st.x != null) { a.root.position.set(st.x, st.y ?? heightAt(st.x, st.z), st.z); a.prevX = st.x; a.prevZ = st.z; }
     makeBody(a);
@@ -192,6 +194,7 @@ function createActors(ctx) {
     const ch = character ?? ctx.character ?? { name: 'Wayfarer', oath: previewOath.id, cls: 'ninja' };
     const st = { id: selfId ?? 'self', k: 'p', name: ch.name, oath: ch.oath, cls: ch.cls, lvl: 1, hp: CLASSES[ch.cls]?.hp ?? 120, mhp: CLASSES[ch.cls]?.hp ?? 120 };
     player = new Actor(scene, st, { isSelf: true });
+    if (!ctx.quality?.shadows) addContactShadow(player, player.creature?.radius ?? .55);
     makeBody(player);
     player.body.setFade(1);
     controller = new PlayerController(ctx, player, () => orbit.yaw);

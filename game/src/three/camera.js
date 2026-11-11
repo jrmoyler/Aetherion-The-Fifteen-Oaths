@@ -149,6 +149,11 @@ export class OrbitCamera {
       if (!blocked && col?.blocked && t > 2.2) blocked = col.blocked(px, pz, x + bx * 0.6, z + bz * 0.6, y);
       if (blocked) { allowed = Math.max(0.6, t - dist / steps * 0.9); break; }
     }
+    // A tree trunk between the camera and the character pulls the camera in front of it, like a wall would.
+    if (world?.trunkHit && allowed > 1.4) {
+      const k = world.trunkHit(px, pz, px + bx * allowed, pz + bz * allowed);
+      if (k < 1) allowed = Math.max(1.2, k * allowed - 0.35);
+    }
     // Obstruction pull-in must be immediate: smoothing can leave the camera inside a wall.
     if (allowed < this.curDist) this.curDist = allowed;
     else this.curDist += (allowed - this.curDist) * Math.min(1, dt * 3.5);

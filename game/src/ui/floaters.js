@@ -8,6 +8,11 @@ const ELEMENT_TINT = {
   poison: '#d8ff7a', light: '#fff2b8', cosmic: '#c8b4ff', shadow: '#c8a8ff', blood: '#ff8a90', arcane: '#f0a8ff', time: '#ffe4a8', tech: '#ffc080',
 };
 const MAX = 48;
+const STACK_WINDOW = 0.45; // seconds
+const LANES = [0, -38, 38, -70, 70];
+// Other people's fights: numbers shrink with distance and vanish past this range, so a brawl 60 m away
+// does not print over the HUD.
+const FAR_FADE = 22, FAR_HIDE = 48;
 
 export function createFloaters(ui) {
   const { ctx } = ui;
@@ -33,10 +38,14 @@ export function createFloaters(ui) {
     el.textContent = f.text ?? '';
     el.style.color = (kind === 'damage' && f.element && !f.taken) ? (ELEMENT_TINT[f.element] || '') : '';
     const crit = kind === 'crit';
+    // Numbers landing on the same body within a moment fan out into lanes instead of piling on one spot.
+    let stacked = 0;
+    for (const o of live) if (o.t < STACK_WINDOW && Math.abs(o.x - f.x) < 1.6 && Math.abs(o.z - f.z) < 1.6 && Math.abs(o.y - ((f.y ?? 0) + 0.2)) < 1.4) stacked++;
+    const lane = LANES[stacked % LANES.length];
     live.push({
-      el, x: f.x, y: (f.y ?? 0) + 0.2, z: f.z, t: 0,
+      el, x: f.x, y: (f.y ?? 0) + 0.2, z: f.z, t: 0, own: !!f.taken || !!f.own,
       life: crit ? 1.6 : kind === 'xp' ? 1.9 : kind === 'status' ? 1.5 : 1.15,
-      dx: (Math.random() - 0.5) * (crit ? 30 : 46), rise: kind === 'xp' ? 46 : crit ? 64 : 54, crit,
+      dx: lane + (Math.random() - 0.5) * 10, rise: (kind === 'xp' ? 46 : crit ? 64 : 54) + Math.min(3, Math.floor(stacked / LANES.length)) * 22, crit,
     });
   }
 
@@ -59,9 +68,12 @@ export function createFloaters(ui) {
       const sx = (out.x + 1) * 0.5 * w + f.dx * ease;
       const sy = (1 - out.y) * 0.5 * hh - f.rise * ease - 20;
       const pop = f.crit ? (k < 0.12 ? 0.6 + k / 0.12 * 0.9 : 1.5 - Math.min(0.5, (k - 0.12) * 2)) : (k < 0.1 ? 0.7 + k * 3 : 1);
-      const op = k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3;
+      const dist = cam.position.distanceTo(world);
+      const far = f.own ? 1 : Math.max(0, Math.min(1, (FAR_HIDE - dist) / (FAR_HIDE - FAR_FADE)));
+      if (far <= 0) { f.el.style.opacity = '0'; continue; }
+      const op = (k < 0.7 ? 1 : 1 - (k - 0.7) / 0.3) * far;
       f.el.style.opacity = op.toFixed(3);
-      f.el.style.transform = `translate3d(${sx.toFixed(1)}px, ${sy.toFixed(1)}px, 0) translate(-50%, -50%) scale(${pop.toFixed(3)})`;
+      f.el.style.transform = `translate3d(${sx.toFixed(1)}px, ${sy.toFixed(1)}px, 0) translate(-50%, -50%) scale(${(pop * (0.62 + 0.38 * far)).toFixed(3)})`;
     }
   }
 
