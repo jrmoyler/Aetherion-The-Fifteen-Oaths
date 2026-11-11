@@ -123,7 +123,7 @@ export async function initWorld(ctx){
   const isWater=(x,z)=>heightAt(x,z)<waterLevelAt(x,z);
   const waterLevelAt=(x,z)=>Math.hypot(x-marsh[0],z-marsh[1])<630?MARSH_LEVEL:SEA_LEVEL;
   const stopUpdate=ctx.addUpdate?.(update,40);
-  function dispose(){stopUpdate?.();details.dispose();landmarks.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;water.dispose();scene.remove(architecture,horizon);creatures.dispose();flora.dispose();horizon.geometry.dispose();terrainMat.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
+  function dispose(){stopUpdate?.();details.dispose();landmarks.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;water.dispose();scene.remove(architecture,horizon);creatures.dispose();flora.dispose();horizon.geometry.dispose();terrainMat.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});}
   return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,resolveTrunks,trunkHit,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,water,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
 }
 export const init=initWorld;
