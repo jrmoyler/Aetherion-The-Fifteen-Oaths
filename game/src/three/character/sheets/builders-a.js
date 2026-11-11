@@ -98,11 +98,11 @@ function tubePath(pts, r0, r1 = r0, n = 7, per = 5) {
   return { verts, quads };
 }
 /** Scallop shell: hinge at the origin, opening toward +Y in the XY plane, ribbed and domed toward +Z. */
-function fan(r, spread = 100, ribs = 7, bulge = .25, nv = 5) {
+function fan(r, spread = 100, ribs = 7, bulge = .25, curl = 0, nv = 5) {
   const half = spread * DEG / 2;
   return sheet(ribs * 4, nv, (u, v) => {
     const a = (u * 2 - 1) * half, rib = Math.abs(Math.cos(u * ribs * PI)), rr = r * (.12 + .88 * v) * (1 - .1 * (1 - rib) * v);
-    return V(Math.sin(a) * rr, Math.cos(a) * rr, r * bulge * Math.sin(v * PI * .82) * (1 - (u * 2 - 1) ** 2 * .6) + r * .045 * rib * v);
+    return V(Math.sin(a) * rr, Math.cos(a) * rr, r * bulge * Math.sin(v * PI * .82) * (1 - (u * 2 - 1) ** 2 * .6) + r * .045 * rib * v - curl * (Math.sin(a) * rr) ** 2 / r);
   });
 }
 /** Tapered blade or fin from the origin toward +Y: `width` across X, ridged and bent toward +Z. */
@@ -118,7 +118,7 @@ const SHAPES = {
   bar: (i) => bar(i.r, i.h, i.sides ?? 8), ring: (i) => ring(i.rx ?? i.R, i.ry ?? i.R, i.r, i.seg ?? 18, 6), dome: (i) => dome(i.r, i.h ?? i.r * .6, 8),
   ball: (i) => ball(...(i.size ?? [i.r, i.r, i.r]), i.seg ?? 12, i.rows ?? 7), cyl: (i) => cyl(i.r, i.h, i.sides ?? 14, i.r2 ?? i.r), gem: (i) => gem(i.r, i.h, i.sides ?? 6, i.tip ?? .45),
   rock: (i) => rock(...i.size, i.seed ?? 1, i.seg ?? 8, i.rows ?? 5, i.rough ?? .22), tube: (i) => tubePath(i.pts, i.r, i.r1 ?? i.r, i.sides ?? 7, i.per ?? 5),
-  fan: (i) => fan(i.r, i.spread ?? 100, i.ribs ?? 7, i.bulge ?? .25), leaf: (i) => leaf(i.len, i.width, i.thick ?? .008, i.bend ?? 0, i.base ?? .5),
+  fan: (i) => fan(i.r, i.spread ?? 100, i.ribs ?? 7, i.bulge ?? .25, i.curl ?? 0), leaf: (i) => leaf(i.len, i.width, i.thick ?? .008, i.bend ?? 0, i.base ?? .5),
 };
 const turnOf = (rot) => (rot ? new Quaternion().setFromEuler(new Euler(rot[0] * DEG, rot[1] * DEG, rot[2] * DEG)) : null);
 
@@ -358,7 +358,7 @@ export function beard(c, { color = 'hair', length = 1.25, width = .15, depth = .
  * Sealed helmet: a shell over the whole head, a dark visor across the face, a brass visor frame, and a crest of
  * shell plates swept from a bill over the brow to a tail behind the crown.
  */
-export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim = 'brass', crest = 'nacre', under = null, off = .05, band = null }) {
+export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim = 'brass', crest = 'nacre', under = null, off = .085, band = null }) {
   const place = headPlace(c), col = c.pal(color), m = surface(mat), centre = c.head.C, VW = .98, VY = [-.3, .2];
   c.bag.part = 'helm';
   const env = (phi, y, o) => { const a = Math.abs(wrapAngle(phi)), s = scalp(c, phi, y, o); if (a > 2) return s; const f = face(c, phi, Math.max(y, -.492), o); return s.lerp(f, smooth(2, 1.35, a) * smooth(.4, .2, y)); };
@@ -379,8 +379,8 @@ export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim 
     p.addScaledVector(V(0, -.28, 1), bill * smooth(.3, 0, w) ** 1.6).addScaledVector(V(0, .55, -1), tail * smooth(.62, 1, w) ** 1.5);
     return { p: place(p), skin: HEAD };
   }, { color: tone, mat: mm, inside: centre });
-  if (under) plate(c.pal(under), m, 30, 150, 1.15, .012, .1, .1, .02);
-  plate(c.pal(crest), SURFACE.nacre, 22, 138, .9, .034, .24, .26, .05);
+  if (under) plate(c.pal(under), m, 26, 156, 1.45, .014, .12, .16, .02);
+  plate(c.pal(crest), SURFACE.nacre, 14, 142, 1.2, .04, .3, .3, .06);
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -394,7 +394,7 @@ export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim 
 export function yoke(c, { color = 'copper', mat = 'copper', inner = .078, outer = .19, wide = .2, deep = .62, off = .05, thick = .01, band = true, rivets = 0, rivetColor = 'iron', discs = null, drop = 1 }) {
   const { trunk, S, J, k } = c.form, col = c.pal(color), m = surface(mat), zc = c.form.spineZ(trunk.Y.base);
   c.bag.part = 'yoke';
-  const at = (th, v, lift = 0) => {
+  const raw = (th, v, lift = 0) => {
     const sn = Math.sin(th), cs = Math.cos(th), reach = outer * k * (1 + wide * Math.abs(sn)) * (1 - (1 - deep) * Math.abs(cs) ** 1.5), steps = 10; let d = inner * k, y = -Infinity, last = null;
     for (let i = 0; i <= steps; i++) {
       const dd = lerp(inner * k, lerp(inner * k, reach, v), i / steps), rest = c.form.over(sn * dd, zc + cs * dd * .96, () => off, off);
@@ -402,6 +402,8 @@ export function yoke(c, { color = 'copper', mat = 'copper', inner = .078, outer 
     }
     return V(sn * d, Math.min(y, trunk.Y.neck + .02) + lift, zc + cs * d * .96);
   };
+  // Heights are averaged with their neighbours so the plate is one smooth ring, not a cast of every fold under it.
+  const at = (th, v, lift = 0) => { const p = raw(th, v, lift); p.y = (raw(th - .22, v, lift).y + raw(th - .11, v, lift).y + p.y * 2 + raw(th + .11, v, lift).y + raw(th + .22, v, lift).y) / 6; return p; };
   const skin = (p) => { const g = smooth(S * .45, S, Math.abs(p.x)) * .35; return [['spine2', (1 - g) * .8], ['neck', (1 - g) * .2], [`shoulder.${p.x >= 0 ? 'L' : 'R'}`, g]]; };
   const inside = V(0, J.spine2.y, J.spine2.z);
   if (band) {
