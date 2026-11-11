@@ -3,6 +3,7 @@ import * as THREE from 'three';
 // Upstream: mrdoob/three.js examples/jsm/objects/Sky.js (see dependency LICENSE).
 import { Sky } from 'three/addons/objects/Sky.js';
 import { regionAt } from '@shared/oaths.js';
+import { realmAir } from './realmAir.js';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrapHour=h=>((h%24)+24)%24;
@@ -37,16 +38,18 @@ export function initAtmosphere(ctx){
   function setTimeScale(value){if(Number.isFinite(value))scale=clamp(value,0,500);}
   const offs=[];
   if(bus?.on){offs.push(bus.on('net:snap',snap=>{if(Number.isFinite(snap?.timeOfDay))setTimeOfDay(snap.timeOfDay);}));offs.push(bus.on('net:welcome',welcome=>{if(Number.isFinite(welcome?.world?.timeOfDay))setTimeOfDay(welcome.world.timeOfDay);if(Number.isFinite(welcome?.world?.daySeconds)&&welcome.world.daySeconds>0)daySeconds=welcome.world.daySeconds;}));}
-  let weatherClock=0,windClock=0;
+  let weatherClock=0,windClock=0,airDensity=1,airDensityGoal=1,airRegion='';const airTint=new THREE.Color(1,1,1),airGoal=new THREE.Color(1,1,1);
   function update(dt){if(disposed)return;const elapsed=clamp(dt||0,0,.25);time+=elapsed;hour=wrapHour(hour+elapsed*24/daySeconds*scale);
     const angle=(hour-6)/24*Math.PI*2;direction.set(Math.cos(angle)*.75,Math.sin(angle),Math.cos(angle)*.5).normalize();u.sunPosition.value.copy(direction);
     sunOffset.copy(direction).multiplyScalar(180);const daylight=THREE.MathUtils.smoothstep(direction.y,-.16,.32),twilight=1-Math.min(1,Math.abs(direction.y)*3);
     sun.intensity=Math.max(0,direction.y)*2.5*(1-intensity*.45);sun.color.setHSL(.10-twilight*.035,.22+twilight*.35,.88);
     hemi.intensity=.22+daylight*.98;hemi.color.setHSL(.58,.23,.38+daylight*.42);hemi.groundColor.setHSL(.09,.19,.12+daylight*.15);
-    if(scene.fog){scene.fog.color.copy(nightFog).lerp(dayFog,daylight).lerp(sunsetFog,twilight*daylight*.3);scene.fog.density=.00165+intensity*(kind==='fog'||kind==='mist'?.005:.0014);}
+    // Each realm breathes the air of its Biome Triad world; crossing a border eases from one to the next.
+    const ease=1-Math.exp(-elapsed/2.5);airTint.lerp(airGoal,ease);airDensity+=(airDensityGoal-airDensity)*ease;
+    if(scene.fog){scene.fog.color.copy(nightFog).lerp(dayFog,daylight).lerp(sunsetFog,twilight*daylight*.3).multiply(airTint);scene.fog.density=(.00165+intensity*(kind==='fog'||kind==='mist'?.005:.0014))*airDensity;}
     u.turbidity.value=3.8+intensity*6;u.mieCoefficient.value=.006+intensity*.008;
     const p=ctx.actors?.player?.root?.position||ctx.camera?.position;
-    if(p){points.position.copy(p);sky.position.set(p.x,0,p.z);weatherClock+=elapsed;if(!manualWeather&&weatherClock>.8){weatherClock=0;const region=regionAt(p.x,p.z);if(region.id!==lastRegion){lastRegion=region.id;const weather={glacial:['snow',.65],marsh:['mist',.4],volcanic:['ash',.35],alpine:['snow',.2]}[region.biome]||['clear',0];applyWeather(...weather);}}}
+    if(p){points.position.copy(p);sky.position.set(p.x,0,p.z);{const here=regionAt(p.x,p.z);if(here.id!==airRegion){const first=!airRegion;airRegion=here.id;const air=realmAir(here.biome);airGoal.setRGB(air.tint[0],air.tint[1],air.tint[2]);airDensityGoal=air.density;if(first){airTint.copy(airGoal);airDensity=airDensityGoal;}}}weatherClock+=elapsed;if(!manualWeather&&weatherClock>.8){weatherClock=0;const region=regionAt(p.x,p.z);if(region.id!==lastRegion){lastRegion=region.id;const weather={glacial:['snow',.65],marsh:['mist',.4],volcanic:['ash',.35],alpine:['snow',.2]}[region.biome]||['clear',0];applyWeather(...weather);}}}
     const gust=Math.sin(time*.27)*.5+Math.sin(time*.79)*.2;precipitation.uniforms.time.value=time;precipitation.uniforms.gust.value=gust;
     if(ctx.world?.wind)ctx.world.wind.gust=gust;windClock+=elapsed;if(windClock>=1){windClock=0;bus?.emit('world:wind',{gust,speed:2.5+gust+intensity*3,direction:{x:.8,z:.6}});}
   }
