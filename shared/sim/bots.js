@@ -166,7 +166,9 @@ export function thinkBot(S, b, dt) {
     if (!t && b.lastPvpAttacker) { const a = S.players.get(b.lastPvpAttacker); if (a && a.alive && hostile(b, a) && Math.hypot(a.x - b.x, a.z - b.z) < 30) t = a; else b.lastPvpAttacker = null; }
     // in a party: assist the leader's target
     if (!t && leader && leader.tgt) { const lt = S.ents.get(leader.tgt); if (lt && lt.alive && hostile(b, lt) && Math.hypot(lt.x - b.x, lt.z - b.z) < 40) t = lt; }
-    if (!t && b.hp > b.mhp * 0.55) t = findPrey(S, b, br.dest?.kind === 'camp' ? 30 : 18);
+    // A party member keeps up with a leader who has moved on rather than starting a fight of its own.
+    const straggling = leader && leader.alive && Math.hypot(leader.x - b.x, leader.z - b.z) > 20;
+    if (!t && !straggling && b.hp > b.mhp * 0.55) t = findPrey(S, b, br.dest?.kind === 'camp' ? 30 : 18);
     if (t) b.tgt = t.id;
   }
   if (t) {

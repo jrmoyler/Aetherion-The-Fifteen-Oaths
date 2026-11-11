@@ -11,8 +11,12 @@ export const SHRINE_DISCOVER_RADIUS = 12;
 export const NPC_RING = 30;
 
 /** Mob level for a distance from the nearest sanctuary center: 1-6 near the city, ~30 in the border wilds. */
+/** Nearest distance from a sanctuary centre at which a camp may stand (see buildCamps). */
+export const CAMP_RING = SAFE_RADIUS + 40;
+// Level 1 begins at the camp ring itself. Measuring from the sanctuary wall instead put the weakest camp in
+// the world at level 3, so a new character's first fight was always against creatures two to four levels up.
 export function levelForDistance(d) {
-  return clamp(Math.round(1 + (d - SAFE_RADIUS) / 24), 1, 30);
+  return clamp(Math.round(1 + (d - CAMP_RING) / 24), 1, 30);
 }
 
 export function buildSanctuaries() {
@@ -74,7 +78,7 @@ export function buildCamps(seed, campsPerRegion = 22) {
       const a = rng() * Math.PI * 2;
       // bias toward the near ring so starter areas are populated
       const t = rng();
-      const d = SAFE_RADIUS + 40 + Math.pow(t, 1.35) * 900;
+      const d = CAMP_RING + Math.pow(t, 1.35) * 900;
       const x = o.center[0] + Math.cos(a) * d, z = o.center[1] + Math.sin(a) * d;
       const nc = nearestCenterDist(x, z);
       if (nc.id !== o.id || nc.d < SAFE_RADIUS + 30) continue;
@@ -89,6 +93,9 @@ export function buildCamps(seed, campsPerRegion = 22) {
       if (level >= 12 && rng() < 0.35) members.push(elite.id);
       mine.push({ oath: o.id, x, y, z, level, members });
     }
+    // Every realm keeps a first fight a new character can win: its nearest camp is two common creatures at level 1.
+    const starter = mine.reduce((best, c) => (Math.hypot(c.x - o.center[0], c.z - o.center[1]) < Math.hypot(best.x - o.center[0], best.z - o.center[1]) ? c : best), mine[0]);
+    if (starter) { starter.level = 1; starter.members = [common.id, common.id]; starter.starter = true; }
     camps.push(...mine);
   }
   return camps;

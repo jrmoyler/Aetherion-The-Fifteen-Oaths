@@ -24,6 +24,7 @@ export const BINDINGS = {
   forward: ['KeyW', 'ArrowUp'], back: ['KeyS', 'ArrowDown'], left: ['KeyA', 'ArrowLeft'], right: ['KeyD', 'ArrowRight'],
   jump: ['Space'], sprint: ['ShiftLeft', 'ShiftRight'], dodge: ['KeyC', 'AltLeft'], interact: ['KeyF', 'KeyE'],
   slot0: ['Digit1'], slot1: ['Digit2'], slot2: ['Digit3'], slot3: ['Digit4'], slot4: ['Digit5'], slot5: ['KeyR'],
+  potion: ['KeyQ'], ether: ['KeyX'],
   target: ['Tab'], map: ['KeyM'], inventory: ['KeyI', 'KeyB'], chat: ['Enter'], menu: ['Escape'], quest: ['KeyJ'], walkToggle: ['KeyZ'],
 };
 

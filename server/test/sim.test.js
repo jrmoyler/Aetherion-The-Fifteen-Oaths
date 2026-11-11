@@ -64,6 +64,12 @@ test('every region has camps of its own creatures outside the sanctuary, and a b
     if (near.length) assert.ok(Math.min(...near.map((m) => m.lvl)) <= 6, 'low levels near the city');
   }
   assert.ok(Math.max(...S.mobs.map((m) => m.lvl)) >= 25, 'high levels in the wilds');
+  // Every realm offers a first fight a level 1 character can take: two common creatures at levels 1 and 2.
+  for (const o of OATHS) {
+    const starter = S.mobs.filter((m) => m.oath === o.id && m.camp?.starter);
+    assert.equal(starter.length, 2, `starter camp in ${o.id}`);
+    assert.ok(starter.every((m) => m.role === 'common' && m.lvl <= 2) && starter.some((m) => m.lvl === 1), `starter camp in ${o.id}`);
+  }
 });
 
 test('combat math: armor, element modifiers, crits and death', () => {
