@@ -28,7 +28,7 @@ function baseFaceParams(profile) {
 export function faceParams(profile) {
   const P = baseFaceParams(profile);
   if (!profile.sheet) return P;
-  return { ...P, brow: P.brow * 1.35 + .1, nose: P.nose * 1.12, cheek: P.cheek * 1.12, chin: P.chin * 1.1, jaw: Math.min(.9, P.jaw * (P.f ? 1 : 1.04)) };
+  return { ...P, brow: P.brow * 1.35 + .1, nose: P.nose * 1.02, noseWidth: P.noseWidth * .76, cheek: P.cheek * 1.12, chin: P.chin * 1.1, jaw: Math.min(.9, P.jaw * (P.f ? 1 : 1.04)) };
 }
 
 // Surface point for unit direction d. `opts.cloth` smooths fine features so
@@ -160,8 +160,8 @@ const SHEET_SKIN_GLSL = /* glsl */`
   diffuseColor.rgb*=1.-lower*.3;
   float brow2=smoothstep(.0,.2,bt)*smoothstep(1.08,.9,bt)*exp(-pow((q.y-by)/(.021*(1.-bt*.45)),2.))*front;
   diffuseColor.rgb=mix(diffuseColor.rgb,csBrow*.75,brow2*.9);
-  float noseSide=exp(-pow((ax-.05)/.02,2.))*smoothstep(-.21,-.16,q.y)*smoothstep(.06,-.02,q.y)*smoothstep(.3,.4,q.z);
-  diffuseColor.rgb*=1.-noseSide*.3;
+  float noseSide=exp(-pow((ax-.042)/.022,2.))*smoothstep(-.215,-.16,q.y)*smoothstep(.07,-.02,q.y)*smoothstep(.28,.38,q.z);
+  diffuseColor.rgb*=1.-noseSide*.44;
   float underNose=exp(-pow(q.x/.065,2.)-pow((q.y+.238)/.014,2.))*front;
   diffuseColor.rgb*=1.-underNose*.42;
   diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*vec3(1.,.56,.52),lips*(.3+csLip*.5));

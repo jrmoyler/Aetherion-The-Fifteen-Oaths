@@ -152,7 +152,8 @@ export function applyGroom(body, desc, quality = 'high', wears = null) {
   if (ownHair && kit.groom.cards && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   else if (kit.groom.cards && prof.beard && wears?.beard !== false) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   const browColor = new Color(hairColor).multiplyScalar(prof.age > .6 ? .85 : .7).getStyle();
-  if ((!ownGear || !kit.cover.eyes) && (!ownHair || !kit.referenceHair)) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
+  // Sheet heroes' brows are painted in the skin shader (head.js); the hair-card brows read as scribbles beside them.
+  if (!wears?.sheet && (!ownGear || !kit.cover.eyes) && (!ownHair || !kit.referenceHair)) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });
   if (ownGear) for (const part of kit.gear) if (part.geo) add(part.geo, own(part.material));
   if (ownGear && kit.leaves) add(kit.leaves, own(hairMaterial('#56702c', true, q)), { order: 1 });
   bone.add(anchor);
