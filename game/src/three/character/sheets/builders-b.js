@@ -15,8 +15,8 @@ const PI = Math.PI, DEG = PI / 180;
 /** Surface classes beyond the kiln set, as (roughness, metalness, kind) triples the costume shader already knows. */
 const SURFACE = {
   ...MAT,
-  wood: [.72, 0, 2], bark: [.9, 0, 2], bamboo: [.5, 0, 2], brass: [.45, .5, 3], gold: [.4, .55, 3], silver: [.42, .45, 3],
-  meteor: [.5, .35, 3], enamel: [.3, 0, 4], bone: [.55, 0, 4], moss: [1, 0, 0], straw: [.9, 0, 0], glass: [.2, 0, 7], glow: [.5, 0, 7], oilskin: [.6, 0, 0],
+  wood: [.72, 0, 2], bark: [.9, 0, 2], bamboo: [.5, 0, 2], brass: [.45, .5, 3], gold: [.4, .55, 3], silver: [.42, .25, 3],
+  meteor: [.55, .05, 3], enamel: [.3, 0, 4], bone: [.55, 0, 4], moss: [1, 0, 0], straw: [.9, 0, 0], glass: [.2, 0, 7], glow: [.5, 0, 7], oilskin: [.6, 0, 0],
 };
 const M = (name) => { const m = SURFACE[name]; if (!m) throw new Error(`unknown surface "${name}"`); return m; };
 const scaleOf = (c) => c.form.J.hips.y / .998;
@@ -439,7 +439,7 @@ function beakMask(c, { color = 'bone', stripe = 'red', length = .92, drop = 1.02
   c.bag.grid(26 * c.q, 22 * c.q, (u, v) => {
     const a = u * TAU, vv = v * .995, sn = Math.sin(a);
     // Paint: a red band across the cheek, red along the underside of the beak, a darkened tip.
-    const band = Math.abs(vv - (.2 + .1 * Math.abs(Math.cos(a)))) < .035 && sn < .75, under = sn < .08 && vv > .3 && vv < .86, mark = Math.abs(vv - .52) < .02 && sn > .1;
+    const band = Math.abs(vv - (.16 + .3 * Math.abs(Math.cos(a)) ** 1.5)) < .04 || Math.abs(vv - (.3 + .3 * Math.abs(Math.cos(a)) ** 1.5)) < .018, under = sn < .08 && vv > .3 && vv < .86, mark = Math.abs(vv - .52) < .02 && sn > .1;
     return { p: place(shell(vv, a)), skin: HEAD, c: vv > .93 ? tone(col, .45) : band || under || mark ? red : tone(col, .86 + .14 * Math.sin(a * 7 + vv * 31)) };
   }, { closeU: true, color: col, mat: M('wood'), inside: place(spine(.3)) });
   // Eye sockets: dark almonds set into the flanks.
@@ -768,7 +768,7 @@ function astrolabe(c, { metal = 'silver', enamel = 'violet', radius = .15, arm =
   const { J, trunk } = c.form, s = scaleOf(c), k = c.form.k, R = radius * k, sk = [['spine2', 1]], y = trunk.Y.base + .028 * s, zc = J.neck.z + .012, tl = -.16;
   const ring_ = (p) => V(p.x, y + p.y * tall * Math.cos(tl) - p.z * Math.sin(tl), zc + p.z * Math.cos(tl) + p.y * tall * Math.sin(tl)), place = (p) => V(p.x, y + p.y * Math.cos(tl) - p.z * Math.sin(tl), zc + p.z * Math.cos(tl) + p.y * Math.sin(tl)), fe = c.pal(metal), u = s;
   lathe(c, ring_, [[R - .034 * u, -.004 * u], [R - .03 * u, .02 * u], [R - .006 * u, .03 * u], [R + .014 * u, .022 * u], [R + .02 * u, .004 * u], [R + .012 * u, -.014 * u], [R - .02 * u, -.016 * u], [R - .034 * u, -.004 * u]], fe, M('silver'), sk, { n: 30 });
-  lathe(c, ring_, [[R + .019 * u, -.01 * u], [R + .0225 * u, .004 * u], [R + .016 * u, .021 * u]], c.pal(enamel), M('enamel'), sk, { n: 30 });
+  lathe(c, ring_, [[R + .0215 * u, -.002 * u], [R + .0225 * u, .004 * u], [R + .0205 * u, .011 * u]], c.pal(enamel), M('enamel'), sk, { n: 30 });
   lathe(c, place, [[R * .66, .012 * u], [R * .66 + .004 * u, .04 * u], [R * .66 + .016 * u, .044 * u], [R * .66 + .02 * u, .016 * u], [R * .66, .012 * u]], fe, M('silver'), sk, { n: 24 });
   for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; c.bag.solid(scaled(dome(.005, .004, 6), u), (p) => place(V(Math.cos(a) * (R - .008 * u) + p.x, .03 * u * tall + p.z, Math.sin(a) * (R - .008 * u) + p.y)), sk, tone(fe, 1.2), M('silver')); }
   if (arm) {

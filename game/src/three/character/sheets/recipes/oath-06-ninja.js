@@ -6,9 +6,9 @@ export default {
   id: 'oath-06-ninja', sheet: 'reference-081', title: 'Reed Ninja',
   palette: {
     linen: '#cdc2ab', linenShade: '#b3a78f', red: '#a23426', cord: '#8e2a20', charcoal: '#3b3937', wrapDark: '#454240',
-    bone: '#d2c3a2', bamboo: '#b98f4c', leather: '#4a392c', leatherDark: '#2f2620', brass: '#7b5a34', boot: '#3a322c', sole: '#5a4532', iron: '#4a4541', hair: '#191513', cloth: '#3b3937',
+    bone: '#b8a888', bamboo: '#b98f4c', leather: '#4a392c', leatherDark: '#2f2620', brass: '#7b5a34', boot: '#3a322c', sole: '#5a4532', iron: '#4a4541', hair: '#191513', cloth: '#3b3937',
   },
-  build: { width: 1.0, depth: 1.0, hips: 1.2, waist: .93, bust: .022, arm: .86, leg: .98, neck: .92, shoulder: 1.0 },
+  build: { width: 1.0, depth: 1.0, hips: 1.34, waist: .98, bust: .024, arm: .92, leg: 1.1, neck: .92, shoulder: 1.0 },
   keep: ['weapon'],
   builders: B,
   groom: { hair: false, gear: false },
@@ -32,7 +32,7 @@ export default {
       { y: ['belt', .016], h: .008, tilt: .022, phase: 100, off: .019, color: 'cord', round: 1 }, { y: ['belt', .0], h: .008, tilt: -.024, phase: 60, off: .019, color: 'cord', round: 1 } ] },
     { use: 'b.legs', color: 'charcoal', to: 1.9, seam: 'wrapDark', off: .006 },
     // Hip drape open at the front, and the red sash tails.
-    { use: 'b.coat', color: 'linen', top: ['belt', -.01], hem: .9, flare: 1.03, off: .012, open: 210, folds: 5 },
+    { use: 'b.coat', color: 'linen', top: ['belt', -.01], hem: .93, flare: 1.03, off: .012, open: 230, folds: 5 },
     { use: 'b.hang', at: 26, top: ['belt', .0], bottom: .5, width: [.03, .036], point: -.05, skew: .5, color: 'red', off: .008, sway: .006 },
     { use: 'b.hang', at: 40, top: ['belt', .0], bottom: .36, width: [.028, .034], point: -.05, skew: -.5, color: 'red', off: .012, sway: .008 },
     { use: 'b.hang', at: 180, top: ['belt', .0], bottom: .52, width: [.03, .036], point: -.05, skew: .4, color: 'red', off: .006, sway: .006 },

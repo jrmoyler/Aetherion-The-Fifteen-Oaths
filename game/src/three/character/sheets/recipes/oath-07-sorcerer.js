@@ -7,7 +7,7 @@ export default {
   id: 'oath-07-sorcerer', sheet: 'reference-078', title: 'Graft Sorcerer',
   palette: {
     cloth: '#4e3a28', brown: '#553f2b', brownDark: '#35281d', cream: '#c9b996', burlap: '#a08458', moss: '#333c1e', mossLight: '#56612c', green: '#55652c',
-    straw: '#b39763', wicker: '#9c7c52', bark: '#6a4b31', barkDark: '#48331f', leaf: '#3c6422', leafLight: '#66883a', ember: '#c8700e', leather: '#4a3626', leatherDark: '#2f241b', iron: '#4a4541',
+    straw: '#b39763', wicker: '#9c7c52', bark: '#6a4b31', barkDark: '#48331f', leaf: '#3c6422', leafLight: '#66883a', ember: '#a04e06', leather: '#4a3626', leatherDark: '#2f241b', iron: '#4a4541',
     boot: '#46321f', sole: '#2a2018', hair: '#8a8783', hairGrey: '#a9a6a1', tie: '#6a4b31',
   },
   build: { width: 1.34, depth: 1.4, belly: .04, bust: .02, hips: 1.16, waist: 1.2, arm: 1.3, leg: 1.2, neck: 1.1, shoulder: 1.1 },

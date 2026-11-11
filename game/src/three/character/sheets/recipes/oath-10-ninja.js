@@ -6,16 +6,16 @@ import { B } from '../builders-b.js';
 export default {
   id: 'oath-10-ninja', sheet: 'reference-073', title: 'Tidal Ninja',
   palette: {
-    cloth: '#232842', indigo: '#262b48', indigoDark: '#1a1e33', black: '#1c1b1e', meteor: '#33312f', meteorDark: '#252423', silver: '#8e8a84', bronze: '#6a5238', brass: '#6a5238', violet: '#3a1e96', slit: '#d8d0ff',
+    cloth: '#232842', indigo: '#262b48', indigoDark: '#1a1e33', black: '#1c1b1e', meteor: '#2e2d2c', meteorDark: '#252423', silver: '#8e8a84', bronze: '#6a5238', brass: '#6a5238', violet: '#3a1e96', slit: '#d8d0ff',
     leather: '#3a2c22', leatherDark: '#261d18', iron: '#4a4744', glove: '#1b1a1c', boot: '#232122', sole: '#141314', bootPlate: '#33312f',
   },
-  build: { width: 1.0, depth: 1.06, hips: .92, waist: 1.0, arm: 1.02, leg: .98, neck: 1.0, belly: .01 },
+  build: { width: 1.06, depth: 1.14, hips: 1.04, waist: 1.12, arm: 1.2, leg: 1.2, neck: 1.0, belly: .012 },
   keep: ['weapon'],
   builders: B,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'b.neck', color: 'black', mat: 'cloth', off: .004 },
-    { use: 'trousers', color: 'black', gather: 1.02, bag: .03, pleats: 7, pockets: [] },
+    { use: 'b.legs', color: 'black', to: 1.3, off: .012, folds: .004 },
     // Leg harness: knee cops, greaves, heavy strapped boots.
     { use: 'b.guard', limb: 'leg', from: 1.2, to: 1.82, arc: 180, off: .016, thick: .012, color: 'meteor', mat: 'meteor', trim: 'bronze', trimMat: 'brass', trimWidth: .01 },
     { use: 'b.guard', limb: 'leg', from: .8, to: 1.2, phi: 0, arc: 88, off: .03, thick: .014, bulge: .03, pointTop: .12, point: .06, ridge: .012, color: 'meteor', mat: 'meteor', trim: 'bronze', trimMat: 'brass', trimWidth: .012, rivets: 2, rivet: 'bronze' },
@@ -24,7 +24,7 @@ export default {
     { use: 'b.torso', from: ['belt', -.04], to: 'base', color: 'indigo', off: .012, slack: .003 },
     { use: 'b.sleeve', from: -.14, to: 1.2, off: .014, color: 'black', folds: .004, ribs: 0 },
     { use: 'b.coat', color: 'indigo', top: 'belt', hem: .6, flare: 1.08, off: .02, open: 50, folds: 7, lining: 'indigoDark' },
-    { use: 'b.hang', at: 0, top: ['belt', 0], bottom: .5, width: [.058, .05], point: .05, color: 'indigo', border: 'indigoDark', borderWidth: .008, off: .016, thick: .006, ornaments: [
+    { use: 'b.hang', at: 0, top: ['belt', 0], bottom: .4, width: [.05, .044], point: .05, lean: .02, color: 'indigo', border: 'indigoDark', borderWidth: .008, off: .016, thick: .006, ornaments: [
       { color: 'silver', ring: .045, width: .005, at: [0, .5] }, { color: 'silver', bar: [0, .64, 0, .97], width: .005 }, { color: 'silver', bar: [-.7, .8, 0, .92], width: .004 }, { color: 'silver', bar: [.7, .8, 0, .92], width: .004 } ] },
     { use: 'b.hang', at: 180, top: ['belt', 0], bottom: .44, width: [.075, .062], point: .06, color: 'indigo', border: 'indigoDark', borderWidth: .008, off: .016, thick: .006, ornaments: [
       { color: 'silver', ring: .05, width: .005, at: [0, .64] }, { color: 'silver', bar: [0, .08, 0, .5], width: .005 }, { color: 'silver', bar: [-.45, .08, -.45, .9], width: .003 }, { color: 'silver', bar: [.45, .08, .45, .9], width: .003 } ] },
@@ -42,8 +42,6 @@ export default {
     { use: 'belt', color: 'leather', height: .075, thick: .012, off: .03, buckle: 'iron', buckleSize: [.045, .036], keepers: [26, -26, 150, -150] },
     { use: 'b.pouch', y: ['belt', .0], th: 150, size: [.04, .042, .02], off: .044 },
     { use: 'b.pouch', y: ['belt', .0], th: -150, size: [.04, .042, .02], off: .044 },
-    { use: 'b.pouch', y: ['belt', .0], th: 112, size: [.034, .04, .018], off: .044 },
-    { use: 'b.pouch', y: ['belt', .0], th: -112, size: [.034, .04, .018], off: .044 },
     // Silver crescent across the chest, the iron horn on the right shoulder, layered plates on the left.
     { use: 'b.strip', color: 'silver', mat: 'silver', width: .1, thick: .012, taper: 'crescent', n: 50, border: 'bronze', path: [
       { th: -66, y: ['shoulder', -.02], off: .034 }, { th: -34, y: ['chest', .03], off: .044 }, { th: 6, y: ['chest', -.03], off: .05 }, { th: 44, y: ['ribs', .02], off: .046 }, { th: 76, y: ['ribs', .05], off: .04 } ] },

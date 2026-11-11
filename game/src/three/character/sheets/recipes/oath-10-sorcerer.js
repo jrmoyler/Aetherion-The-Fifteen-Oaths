@@ -6,7 +6,7 @@ import { B } from '../builders-b.js';
 export default {
   id: 'oath-10-sorcerer', sheet: 'reference-072', title: 'Tidal Sorcerer',
   palette: {
-    cloth: '#1e2440', navy: '#1f2542', navyDark: '#151a30', cream: '#cfc5ae', silver: '#9a968c', silverDark: '#6e6a62', gold: '#a88a48', violet: '#4a2c8e',
+    cloth: '#1a1f38', navy: '#1a1f38', navyDark: '#12162a', cream: '#cfc5ae', silver: '#9a968c', silverDark: '#6e6a62', gold: '#a88a48', violet: '#4a2c8e',
     black: '#1c1b1e', leather: '#3a2c22', leatherDark: '#261d18', iron: '#9a968c', boot: '#262224', bootCap: '#6e6a62', sole: '#151314', hair: '#1d1917', hairGrey: '#4a4644', tie: '#9a968c',
   },
   build: { width: 1.3, depth: 1.36, belly: .04, bust: .03, hips: 1.2, waist: 1.22, arm: 1.22, leg: 1.16, neck: 1.1, shoulder: 1.06 },
@@ -35,7 +35,7 @@ export default {
     { use: 'b.orb', off: .046, r: .052 },
     { use: 'b.orb', at: 180, off: .046, r: .03, tag: false },
     { use: 'b.astrolabe', reach: .36, radius: .165 },
-    { use: 'b.hemOrbs', r: .05, drop: .03 },
+    { use: 'b.hemOrbs', r: .06, drop: .03 },
     { use: 'hair', style: 'bun', streak: 'hairGrey', locks: 120, length: .3, bun: { at: [0, .5, -.12], radius: .2, tie: 'tie' } },
     { use: 'hands' },
   ],

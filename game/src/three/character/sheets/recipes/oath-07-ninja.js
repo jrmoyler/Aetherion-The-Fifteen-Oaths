@@ -6,10 +6,10 @@ import { B } from '../builders-b.js';
 export default {
   id: 'oath-07-ninja', sheet: 'reference-079', title: 'Graft Ninja',
   palette: {
-    under: '#2c2621', cloth: '#352c24', trouser: '#3a3027', bark: '#6b4a30', barkDark: '#43301f', barkLight: '#8a6844', green: '#5c6a30', greenDark: '#44502a',
-    moss: '#3c4a1e', mossLight: '#6c7830', straw: '#b08c4a', leather: '#3e2f24', leatherDark: '#2a211b', iron: '#4a4541', ember: '#c8700e', glove: '#2a231e', boot: '#3f3022', sole: '#231c16', hair: '#1c1512',
+    under: '#2c2621', cloth: '#352c24', trouser: '#3a3027', bark: '#6b4a30', barkDark: '#43301f', barkLight: '#8a6844', green: '#4a5628', greenDark: '#384222',
+    moss: '#2c3716', mossLight: '#4f5a24', straw: '#b08c4a', leather: '#3e2f24', leatherDark: '#2a211b', iron: '#4a4541', ember: '#a04e06', glove: '#2a231e', boot: '#3f3022', sole: '#231c16', hair: '#1c1512',
   },
-  build: { width: 1.14, depth: 1.12, hips: 1.02, waist: 1.04, arm: 1.3, leg: 1.14, neck: 1.15, shoulder: 1.1 },
+  build: { width: 1.2, depth: 1.18, hips: 1.14, waist: 1.14, arm: 1.42, leg: 1.28, neck: 1.15, shoulder: 1.1 },
   keep: ['weapon'],
   builders: B,
   groom: { hair: false, gear: false },
@@ -34,12 +34,12 @@ export default {
     // Waist: wound green and bark-brown sashes, straw tassets bordered in green, bark centre panels.
     { use: 'b.sash', bands: [
       { y: ['belt', .03], h: .05, tilt: .018, phase: 0, off: .012, color: 'green' }, { y: ['belt', -.01], h: .046, tilt: -.02, phase: 30, off: .015, color: 'barkDark', mat: 'leather' }, { y: ['belt', .012], h: .03, tilt: .03, phase: 100, off: .019, color: 'greenDark' } ] },
-    { use: 'b.hang', at: 180, top: ['belt', 0], bottom: .64, width: [.07, .075], color: 'cloth', off: .01 },
-    { use: 'b.hang', at: 50, top: ['belt', 0], bottom: .7, width: [.075, .09], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, weave: 6, point: .02, skew: -.6 },
-    { use: 'b.hang', at: -50, top: ['belt', 0], bottom: .7, width: [.075, .09], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, weave: 6, point: .02, skew: .6 },
-    { use: 'b.hang', at: 130, top: ['belt', 0], bottom: .7, width: [.07, .085], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, weave: 6 },
-    { use: 'b.hang', at: -130, top: ['belt', 0], bottom: .7, width: [.07, .085], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, weave: 6 },
-    { use: 'b.hang', at: 0, top: ['belt', .01], bottom: .72, width: [.05, .038], point: .05, color: 'barkDark', mat: 'bark', border: 'bark', off: .02, thick: .008 },
+    { use: 'b.hang', at: 180, top: ['belt', 0], bottom: .64, width: [.07, .075], color: 'cloth', off: .01, lean: .03 },
+    { use: 'b.hang', at: 50, top: ['belt', 0], bottom: .7, width: [.075, .09], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, lean: .04, weave: 6, point: .02, skew: -.6 },
+    { use: 'b.hang', at: -50, top: ['belt', 0], bottom: .7, width: [.075, .09], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, lean: .04, weave: 6, point: .02, skew: .6 },
+    { use: 'b.hang', at: 130, top: ['belt', 0], bottom: .7, width: [.07, .085], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, lean: .04, weave: 6 },
+    { use: 'b.hang', at: -130, top: ['belt', 0], bottom: .7, width: [.07, .085], color: 'straw', mat: 'straw', border: 'green', borderWidth: .016, off: .014, lean: .04, weave: 6 },
+    { use: 'b.hang', at: 0, top: ['belt', .01], bottom: .72, width: [.05, .038], point: .05, color: 'barkDark', mat: 'bark', border: 'bark', off: .02, lean: .03, thick: .008 },
     // Right shoulder: layered bark shards. Left shoulder and chest: a mantle of moss.
     { use: 'b.guard', limb: 'arm', side: 'R', from: -.42, to: -.02, layers: 3, step: .17, phi: 90, arc: 78, off: .014, thick: .011, point: .12, flareEnd: .012, color: 'bark', mat: 'bark', grooves: 6, trim: 'barkLight', trimWidth: .006, skin: [['shoulder.L', .5], ['upperarm.L', .5]] },
     { use: 'b.studs', on: 'arm', side: 'R', at: [[.02, 60]], r: .016, off: .034, color: 'ember', rim: 'barkDark', rimMat: 'bark', oval: 1.4 },

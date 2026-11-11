@@ -78,11 +78,11 @@ reference-092..095 are sorcerer line-ups and 096..098 ninja line-ups across elem
 | 03 | LIGHTNING - Storm Relay | reference-085 | reference-087 | reference-111 | not started | not started |
 | 04 | WATER - Tidal Covenant | reference-084 | reference-086 | reference-110 | not started | not started |
 | 05 | EARTH & CRYSTAL - Fault Choir | reference-082 | reference-083 | reference-109 | not started | not started |
-| 06 | WIND & SOUND - Reed Resonance | reference-081 | reference-080 | reference-108 | not started | not started |
-| 07 | NATURE - Graft Sanctuary | reference-079 | reference-078 | reference-107 | not started | not started |
-| 08 | POISON - Bitterglass Guild | reference-077 | reference-076 | reference-106 | not started | not started |
-| 09 | LIGHT & HOLY - Oath of Daybreak | reference-075 | reference-074 | reference-105 | not started | not started |
-| 10 | COSMIC & GRAVITY - Tidal Observatory | reference-073 | reference-072 | reference-104 | not started | not started |
+| 06 | WIND & SOUND - Reed Resonance | reference-081 | reference-080 | reference-108 | partial (see below) | done (see below) |
+| 07 | NATURE - Graft Sanctuary | reference-079 | reference-078 | reference-107 | partial (see below) | done (see below) |
+| 08 | POISON - Bitterglass Guild | reference-077 | reference-076 | reference-106 | done (see below) | done (see below) |
+| 09 | LIGHT & HOLY - Oath of Daybreak | reference-075 | reference-074 | reference-105 | partial (see below) | done (see below) |
+| 10 | COSMIC & GRAVITY - Tidal Observatory | reference-073 | reference-072 | reference-104 | partial (see below) | done (see below) |
 | 11 | SHADOW & VOID - The Missing Court | reference-071 | reference-070 | reference-103 | not started | not started |
 | 12 | BLOOD - Sanguine Covenant | reference-069 | reference-067 | reference-102 | not started | not started |
 | 13 | ARCANE & ILLUSION - Folded Theatre | reference-068 | reference-066 | reference-100 | not started | not started |
@@ -133,6 +133,107 @@ Differs from the sheet:
 - The apron is wider and brighter than the painted one, without its riveted strap ends.
 - Hair is a combed cap, locks and a bun; no loose curls at the temples. The face is the procedural head and
   does not resemble the portrait.
+
+### Oaths 06 to 10 (group b): builders in `builders-b.js`, used through each recipe's `builders` field
+
+All ten were rendered through `game/sheet.html` (BodyFactory, high tier, idle pose, four views) and compared
+with their sheets; evidence is `docs/qa/characters/oath-NN-<discipline>.jpg`. None is a duplicate of its
+painting: each is the same costume rebuilt from simpler shapes. Common to all ten: the face is the procedural
+head, not the portrait; the held weapon is the baked one (the sheets show empty hands); hands are the shared
+code hands; proportions are the rig's (shorter legs and neck than the paintings); surfaces use the five
+existing shader kinds, so wood and bamboo take the leather grain, brass, gold and silver take the iron
+pitting with its rust mottling, enamel takes the smooth skin kind, and glass is an unlit glowing colour with
+no transparency. Also seen: six of them (06, 07, 08 and 10 sorcerers, 09 and 10 ninjas) mid-run on the
+medium tier; costumes follow the stride, the trailing shin shows behind long coats, and on medium the violet
+bands of the Tidal Sorcerer's hem weights are lost. Not seen: any of them in the running game, the low tier,
+attack or cast clips.
+
+**oath-06-ninja (reference-081): partial.** Present: carved beak mask with painted red bands, eye sockets,
+cheek pivots with hanging cords and head strap; high ponytail with red tie; linen neck binding, breast band,
+wide wrap over the left shoulder and a narrow crossing wrap; bare midriff with crossed linen bands and red
+cords; wound waist sash; three red sash tails; small linen hip drape; red carved shoulder plate on the left
+with pale edge; pipe harness and two bamboo reed pipes with nodes, linen wrap and lashings on the back; dark
+forearm wraps with red cord; fitted dark trousers with seams, knee pads, shin wraps, ankle boots with red
+cord. Differs: the mask is a smooth lofted shell (no weathering, flatter painting, blunter from the front);
+the wraps are clean bands rather than torn layered cloth; no fingerless-glove detail beyond the shared hands;
+legs are slimmer and straighter; the hip drape is plainer; pipes have no finger holes.
+
+**oath-06-sorcerer (reference-080): done.** Present: tall narrow build; ribbed linen coat body with red side
+panels, knife-pleated skirt open at the front over a red under-robe, pleated hem; bell sleeves lined red with
+four brass bells each; pointed shoulders; standing collar lined red; wide dark belt with cross lacing; five
+reed pipes in a leather frame on the left hip; resonator yoke with two capped horns and a lashed spine board;
+slim trousers, red ankle bands, low dark shoes with pale soles; groom top-knot and goatee. Differs: horns are
+plain swept tubes without the carved relief and stand straighter; collar sits lower; the coat is paler in
+places because of the cloth wear shading; no chest toggles.
+
+**oath-07-ninja (reference-079): partial.** Present: seed-pod bark mask with midrib, grain, two glowing eye
+slits, rim scales and moss; cap of tight curls; dark high-necked under-layer, bare upper arms with a buckled
+band; ribbed bark breastplate, crossing bark strap and green sash; three layered bark shards on the right
+shoulder with a sap plug; moss mantle over the left shoulder and chest; bark forearm guards with branch stubs
+and sap plugs; wound green and brown waist sashes; four straw-weave tassets bordered in green, bark centre
+panel, dark back cloth; baggy trousers gathered below the knee, knee bands, bark greaves, boots with root
+stubs and moss. Differs: the chest is one ribbed plate, not many overlapping shards; moss is flat fronds, not
+feathery tufts; branch stubs are plain cones; boots lack the wrapped roots over the toes; he is less massive.
+
+**oath-07-sorcerer (reference-078): done.** Present: short stout stooped build; brown coat with wide sleeves
+over cream under-sleeves and collar; dark under-skirt, burlap skirt with straw hem band, coat skirt open at
+the front; moss aprons front and back; green breast wrap; root harness over both shoulders with sap plugs;
+rope sashes; straw fringes with sap beads on both hips; woven basket with hoops and stakes, moss top and
+three leafy saplings; laced ankle boots; grey bun. Differs: the fringe is flat knotted ribbons, not braided
+rope with chain links; the basket weave is a colour pattern on a smooth shell; no moss growing on the coat;
+the back strap hinge is a single sap boss.
+
+**oath-08-ninja (reference-077): done.** Present: leather skull cap with seams and band; respirator cup with
+brass frame, two rimmed canisters and straps; black high neck; oilskin jacket with purple breast, back and
+shoulder panels; brass-edged leather shoulder plates with rivets; braces over both shoulders, crossed chest
+straps with brass bosses; brass-edged leather vambraces with buckled straps, black gloves; ampoule belt with
+ten glowing ampoules in brass caps and leather clips; wide shorts over leggings; strapped thigh pouches;
+brass-edged knee pads; strapped boots; pack with flap, pocket, brass corners and three ampoules. Differs: the
+shorts read as one skirt from the back; pouches are smaller and fewer; less stitching, buckles and layering
+on the harness; brass trims are thin raised lines.
+
+**oath-08-sorcerer (reference-076): done.** Present: dark cap with gold seam over grey hair and a nape knot;
+high winged collar lined purple and edged gold; long fitted coat open from the waist, purple lining, gold
+edge and hem, gold seam piping front and back; shoulder straps crossing at the back with a brass boss; two
+belts; three long vials racked at the left hip; two glass globes half full of glowing liquid with brass
+necks, valves, girdles and cradle arms; standpipe with collars and spout behind the left shoulder; flared
+brass vambraces, black gloves; tall boots with brass toe caps and heels. Differs: the coat hangs straight
+without the pointed, layered tails and back vent; globes are opaque two-tone, not glass; no small buckles on
+the harness; the standpipe sits behind the left shoulder in all views (the sheet's views disagree).
+
+**oath-09-ninja (reference-075): partial.** Present: braided-up dark hair with gold band; folded ivory visor
+with gold edges over a grey veil, strap and gold clasp; sleeveless grey top with ivory collar; ivory sash
+from the left shoulder; wound ivory waist; folded ivory wing on the left shoulder with gold edge and hinge;
+gold armlets, grey sleeves from the elbow, ivory vambraces with gold edges, gold wrist rings; four ivory
+tassets edged in gold with grey and ivory centre points; grey leggings with gold seams; ivory shin cuffs.
+Differs: the wing is a rounded wedge, not the sharp faceted kite; the visor is boxier and hides the brow;
+tassets are narrower and longer than the flared skirt; no high heels; leggings lack the diamond seam lines.
+
+**oath-09-sorcerer (reference-074): done.** Present: grey robe with wide gold-cuffed sleeves and gold-edged
+collar; ivory scapular front and back piped in gold with pointed shoulders; four ivory coat panels at the
+sides and back with gold borders over the grey skirt; belt with gold fittings; lotus boss front and back;
+hanging tab; reliquary box on the right hip; baggy grey trousers, boots with gold soles; groom swept hair,
+tail and beard. Differs: the lotus is smaller with fewer petals; the reliquary is a plain framed box; the
+side panels overlap slightly instead of showing clean grey strips.
+
+**oath-10-ninja (reference-073): partial.** Present: closed dark helm with three glowing slits, brow band and
+ear discs; indigo scarf and tunic; silver crescent across the chest; iron horn on the right shoulder with
+bronze edge; layered plates on the left shoulder; back harness with a bronze boss; padded sleeves, elbow
+cops, heavy vambraces with violet inlay, gauntlet hands; heavy belt with buckle and two pouches; silver hip
+crescent with violet inlay; indigo front and back tabards with inlaid ring and bars; four iron tassets edged
+in silver; knee cops, greaves, strapped plated boots. Differs: he is narrower and less massive; the horn is
+flatter and smaller; armour plates are simple shells without the layered rims, rivets and straps; iron is
+mottled rather than brushed; the emblem is simplified; fewer belt pouches.
+
+**oath-10-sorcerer (reference-072): done.** Present: stout build; midnight robe with bell skirt, silver hem
+band, wide silver-banded sleeves with gold star studs, pointed shoulders; cream centre panel with inlaid
+orbit marks; six silver straps with violet inlay and bosses down the skirt; silver belt with violet line and
+the orb in rings with its tag; astrolabe collar with studs, inner ring, jointed arm and orb; eight banded
+weights on chains at the hem; baggy trousers, strapped boots; bun with a ring. Differs: the collar is
+slimmer and plainer; no embroidered constellations on the cloth; strap bosses are round, not hexagonal; the
+weights are smaller.
+
+Two profile skin tones were changed to follow the sheets: oath-06-ninja to tan, oath-07-ninja to brown.
 
 ### All other heroes: not started
 
