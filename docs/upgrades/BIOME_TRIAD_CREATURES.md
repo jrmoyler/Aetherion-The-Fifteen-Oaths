@@ -125,6 +125,16 @@ Counts are the source's; the game shows that many on the high tier unless noted.
 
 ## Verifying
 
-- `node --test game/src/three/realmCreatures.test.mjs`
-- Evidence: `docs/qa/biome-triad-creatures/`. Creatures are small in the play camera, so most frames were taken with
-  a free camera placed beside the animals in the running game scene (same scene, same lighting, no post-processing).
+- `node --test game/src/three/realmCreatures.test.mjs` builds every realm's wildlife on all three quality tiers in Node.
+- Evidence in `docs/qa/biome-triad-creatures/`, captured in the running game (medium quality, software renderer).
+  Creatures are small in the play camera, so the frames were taken with a free camera placed beside the animals in
+  the live game scene: same scene and lighting, no post-processing, no HUD.
+  - `plateau-herds-and-vultures.jpg`: zebra, giraffe, wildebeest, a vulture.
+  - `coast-gulls-fish-marsh-herons.jpg`: gulls over the coast, a fish school under the surface (faint, as the water
+    is 86 % opaque), an egret and a heron in the marsh shallows.
+  - `glacial-petrels-whale-meadow-livestock.jpg`: petrels along the glacial cliffs, the whale's back at the surface,
+    sheep and cattle in the meadow.
+- Seen on screen: plateau, coast, marsh (day), glacial, meadow. Not seen on screen, only built and stepped by the
+  tests: alpine, canyon, cliffs, forest, highland, crimson, terraces, badlands, volcanic, industrial, the marsh at
+  night (fireflies, wisps), and the whale skeleton at its final site (it was moved after its capture showed it
+  overhanging a sea stack).
