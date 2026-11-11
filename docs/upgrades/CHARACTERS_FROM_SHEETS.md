@@ -121,8 +121,9 @@ the ninja, the ninja in `attack_1` and running, the sorcerer in `cast_release` a
 the player in the running game (before the quality pass). Not seen on screen: the low tier, the sorcerer in
 the running game, NPCs wearing these bodies, the character preview dialog.
 Sorcerer coat: in `cast_release` the raised knee no longer comes through (the skirt follows the thighs). In the
-run the forward thigh's trouser still pushed through the apron, so her trousers now start below the coat
-(`from: .95`); see the final report for whether that last change was re-rendered.
+run the forward thigh's trouser pushed through the apron, so her trousers now start below the coat; re-rendered
+with `from: .95` the thigh is clean and only a small notch showed at the apron's lower edge over the forward
+knee. The start was then lowered to `from: 1.06`; that last value is built and unit-tested but not re-rendered.
 
 ## Cost
 
