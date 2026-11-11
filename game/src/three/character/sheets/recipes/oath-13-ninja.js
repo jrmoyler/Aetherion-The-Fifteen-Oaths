@@ -1,6 +1,6 @@
 // 13 NINJA - ARCANE & ILLUSION - Folded Theatre. Read from assets/references/reference-068 (satin deep plum, woven
 // charcoal, pearl-white porcelain; attachments: forearm bracer frame and socket, back strap clamp).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 const frameBracer = { use: 'c:kit', name: 'bracer', side: 'both', on: { limb: 'arm', t: 1.5, phi: 90, off: .012, skin: 'forearm.L' }, parts: [
   // The socket: a dark slab seated on the forearm, inside an open steel frame standing off it.
@@ -16,10 +16,11 @@ export default {
   id: 'oath-13-ninja', sheet: 'reference-068', title: 'Folded Theatre Ninja',
   palette: {
     cloth: '#28262a', charcoal: '#2f2d31', charcoalLight: '#3b393d', plum: '#4a1f47', plumDark: '#33162f', silver: '#b3b0aa', steel: '#8f8b84', steelDark: '#55524e', socket: '#17161c',
-    porcelain: '#e9e3d6', porcelainShade: '#c9c2b4', leather: '#2b2828', leatherDark: '#1f1d1e', iron: '#8f8b84', boot: '#1f1d1e', sole: '#141314', glove: '#1a191b', skin: '#d2a184', hair: '#16141a', hairSheen: '#2a2731',
+    porcelain: '#e9e3d6', porcelainShade: '#c9c2b4', leather: '#2b2828', leatherDark: '#1f1d1e', iron: '#8f8b84', boot: '#1f1d1e', sole: '#141314', glove: '#1a191b', hair: '#16141a', hairSheen: '#2a2731',
   },
-  build: { width: .98, depth: .97, waist: .94, arm: .9, leg: .93, neck: .95 },
-  keep: ['hands'],
+  build: { width: 1.0, depth: 1.0, arm: .94, leg: .98, neck: .96 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'shirt', color: 'charcoal', sleeve: 1.95, flare: .004, off: .009, cap: .012, slack: .003, collar: 'neck' },
@@ -41,6 +42,7 @@ export default {
     { use: 'band', limb: 'arm', at: 1.22, width: .02, off: .012, thick: .005, color: 'steelDark', mat: 'iron' },
     { use: 'band', limb: 'arm', at: 1.78, width: .02, off: .012, thick: .005, color: 'steelDark', mat: 'iron' },
     { use: 'gloveCuff', from: 1.86, to: 2.05, color: 'glove' },
+    { use: 'hands', glove: 'glove' },
     // Pouch strapped to the left thigh.
     { use: 'band', limb: 'leg', side: 'L', at: .3, width: .018, off: .011, thick: .004, color: 'leather', buckle: { phi: 20 } },
     { use: 'c:kit', name: 'pouch', on: { limb: 'leg', t: .42, phi: 80, off: .012 }, parts: [
@@ -56,6 +58,6 @@ export default {
     { use: 'c:headBand', y: .09, height: .07, phi: [62, 298], off: .03, thick: .012, color: 'leather' },
     { use: 'c:kit', name: 'mask', side: 'both', on: { head: [.2, .1, .36], turn: [0, 40, 0] }, parts: [{ s: 'rbox', d: [.05, .04, .012, .006], c: 'steel', m: 'steel' }, { s: 'rbox', d: [.026, .02, .006, .003], at: [0, 0, .01], c: 'steelDark', m: 'steel' }] },
     { use: 'c:kit', name: 'mask', on: { head: [0, .09, -.5] }, parts: [{ s: 'ring', d: [.04, .04, .013, 12, 5], c: 'steel', m: 'steel' }] },
-    { use: 'hair', style: 'spiky', streak: 'hairSheen', locks: 150, length: .27, lift: .03, fringe: .34 },
+    { use: 'hair', style: 'spiky', streak: 'hairSheen', length: .27, density: 1.15, lift: .03, fringe: .34 },
   ],
 };

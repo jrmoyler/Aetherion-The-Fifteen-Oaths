@@ -1,6 +1,6 @@
 // 15 SORCERER - TECH & FORCE - Impulse Foundry. Read from assets/references/reference-062 (graphite cloth with
 // burnt orange lining, oxidized steel alloy, burnt orange ceramic inserts; attachments: power pack, gauntlet actuator).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 const TAU = Math.PI * 2;
 const around = (n, fn) => Array.from({ length: n }, (_, i) => fn(i / n * TAU, i / n * 360));
@@ -41,11 +41,12 @@ const gauntlet = { use: 'c:kit', name: 'gauntlet', side: 'both', on: { limb: 'ar
 export default {
   id: 'oath-15-sorcerer', sheet: 'reference-062', title: 'Impulse Foundry Sorcerer',
   palette: {
-    cloth: '#39383a', graphite: '#39383a', graphiteDark: '#29282a', graphiteLight: '#4a494b', orange: '#c2571f', orangeDark: '#93421a', lining: '#b9551f', steel: '#96928b', steelDark: '#55524f', brass: '#9a7c46', cyan: '#7fe6f2',
-    leather: '#4a3a2c', leatherDark: '#2c2420', iron: '#96928b', rubber: '#1c1c1d', boot: '#2c2a29', sole: '#1e1d1d', skin: '#7a4a32', hair: '#15110f',
+    cloth: '#39383a', graphite: '#39383a', graphiteDark: '#29282a', graphiteLight: '#4a494b', orange: '#c2571f', orangeDark: '#93421a', lining: '#b9551f', steel: '#96928b', steelDark: '#55524f', brass: '#9a7c46', cyan: '#1fb8d6',
+    leather: '#4a3a2c', leatherDark: '#2c2420', iron: '#96928b', rubber: '#1c1c1d', boot: '#2c2a29', sole: '#1e1d1d', hair: '#15110f',
   },
-  build: { width: 1.1, depth: 1.08, waist: 1.04, arm: 1.12, leg: 1.06, neck: 1.06, shoulder: 1.08 },
-  keep: ['hands'],
+  build: { width: 1.12, depth: 1.1, waist: 1.12, hips: 1.06, arm: 1.14, leg: 1.12, neck: 1.06, shoulder: 1.08 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -73,6 +74,7 @@ export default {
       { on: { bone: 'spine2', at: [.16, .2, -.19] } }, { on: { bone: 'spine2', at: [.26, .26, -.13] } }, { on: { limb: 'arm', t: .34, phi: 150, off: .09 } }, { on: { limb: 'arm', t: .9, phi: 130, off: .085 } }, { on: { limb: 'arm', t: 1.26, phi: 96, off: .06, skin: 'forearm.L' } } ] },
     gauntlet,
     { use: 'gloveCuff', from: 1.9, to: 2.06, color: 'steelDark', off: .012 },
+    { use: 'hands', glove: 'steelDark', knuckles: 'steel', scale: 1.12 },
     { use: 'boots', top: 1.56, straps: 3, strapColor: 'leatherDark', buckle: 'steel', toeCap: 'orange', heelPlate: 'orangeDark', plateMat: 'ceramic', soleHeight: .044, bulk: 1.14 },
     { use: 'c:curls', lift: .034, top: .02, fade: .12, fringe: .33 },
   ],

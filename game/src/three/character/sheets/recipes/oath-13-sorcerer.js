@@ -1,6 +1,6 @@
 // 13 SORCERER - ARCANE & ILLUSION - Folded Theatre. Read from assets/references/reference-066 (folded lacquer mauve,
 // woven aubergine, old silver and pearl; attachments: belt fastening, spell case hinge).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 const pearl = (at, r = .007) => [{ s: 'cyl', d: [r * 1.5, .0025, r * 1.5, 8], rot: [90, 0, 0], at, c: 'silver', m: 'silver' }, { s: 'ball', d: [r, r, r, 8, 5], at: [at[0], at[1], at[2] + .004], c: 'pearl', m: 'porcelain' }];
 // Folded lacquer wings: one triangular plate rising from the collar bone to a point beyond the shoulder, front
@@ -20,10 +20,11 @@ export default {
   id: 'oath-13-sorcerer', sheet: 'reference-066', title: 'Folded Theatre Sorcerer',
   palette: {
     cloth: '#3a1f2c', aubergine: '#3a1f2c', aubergineLight: '#4d2a3d', aubergineDark: '#2a1620', plum: '#4b2146', mauve: '#b497a6', mauveDark: '#9a7f8e', silver: '#b6ad9c', silverDark: '#7d7566', pearl: '#ece6da',
-    gold: '#a98e62', leather: '#2c1c22', leatherDark: '#22161b', iron: '#b6ad9c', boot: '#2a1a1f', sole: '#1c1215', glove: '#3b2030', skin: '#d2a184', hair: '#17151a', hairSheen: '#2c2932',
+    gold: '#a98e62', leather: '#2c1c22', leatherDark: '#22161b', iron: '#b6ad9c', boot: '#2a1a1f', sole: '#1c1215', glove: '#3b2030', hair: '#17151a', hairSheen: '#2c2932',
   },
-  build: { width: .96, depth: .96, bust: .018, waist: .9, hips: 1.02, arm: .88, leg: .95, neck: .9 },
-  keep: ['hands'],
+  build: { width: .97, depth: .98, bust: .018, waist: .96, hips: 1.06, arm: .9, leg: 1.0, neck: .9 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -37,10 +38,10 @@ export default {
     { use: 'trousers', color: 'aubergineDark', gather: 1.6, bag: .008, pleats: 4, pockets: [], cuff: .006, piping: 'silverDark', pipingPaths: [[90, 90, .1, 1.5]] },
     { use: 'band', limb: 'leg', at: 1.12, width: .018, off: .012, thick: .004, color: 'leather', buckle: { phi: 80, color: 'silver' } },
     // Skirt panels: the embroidered aubergine front, and folded mauve lacquer falling long at the right and back.
-    { use: 'c:drape', from: 40, to: 200, hem: .78, color: 'aubergine', flare: 1.04, clear: .012, off: .018 },
-    { use: 'c:drape', from: -160, to: -8, off: .02, hem: [[-160, .34], [-120, .5], [-90, .36], [-50, .62], [-8, .74]], color: 'mauve', mat: 'lacquer', flare: 1.14, clear: .022, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
-    { use: 'c:drape', from: 150, to: 216, off: .026, hem: [[150, .56], [186, .36], [216, .5]], color: 'mauveDark', mat: 'lacquer', flare: 1.16, clear: .026, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
-    { use: 'c:drape', from: -12, to: 64, off: .027, hem: [[-12, .6], [20, .5], [64, .62]], color: 'plum', flare: 1.08, clear: .016, fold: .012, trim: 'gold', trimMat: 'brass', trimWidth: .0045 },
+    { use: 'c:drape', from: 40, to: 200, hem: .78, color: 'aubergine', flare: 1.04, clear: .024, off: .018 },
+    { use: 'c:drape', from: -160, to: -8, off: .02, hem: [[-160, .34], [-120, .5], [-90, .36], [-50, .62], [-8, .74]], color: 'mauve', mat: 'lacquer', flare: 1.14, clear: .034, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
+    { use: 'c:drape', from: 150, to: 216, off: .026, hem: [[150, .56], [186, .36], [216, .5]], color: 'mauveDark', mat: 'lacquer', flare: 1.16, clear: .038, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
+    { use: 'c:drape', from: -12, to: 64, off: .027, hem: [[-12, .6], [20, .5], [64, .62]], color: 'plum', flare: 1.08, clear: .036, fold: .012, trim: 'gold', trimMat: 'brass', trimWidth: .0045 },
     // Belt with the hexagonal silver fastening, and the spell case hung at the left hip.
     { use: 'belt', height: .034, thick: .007, off: .03, color: 'leather', buckle: null, keepers: [60, -60, 150, -150], studs: 0 },
     { use: 'belt', rise: -.03, height: .012, thick: .004, off: .034, color: 'silverDark', buckle: null, keepers: [], tilt: .014 },
@@ -57,9 +58,10 @@ export default {
     cuff,
     { use: 'band', limb: 'arm', at: 1.24, width: .022, off: .01, thick: .005, color: 'silverDark', mat: 'iron' },
     { use: 'gloveCuff', from: 1.84, to: 2.05, color: 'glove' },
+    { use: 'hands', glove: 'glove', fingerless: true },
     { use: 'boots', top: 1.5, straps: 3, strapColor: 'leatherDark', buckle: 'silver', toeCap: 'silverDark', heelPlate: 'silverDark', plateMat: 'iron', soleHeight: .034 },
     // Short black hair swept across the brow, longer on the right.
-    { use: 'hair', style: 'spiky', streak: 'hairSheen', locks: 150, length: .26, lift: .026, fringe: .36 },
-    { use: 'c:strands', width: .09, list: [[-42, .3, .46, .06, -.04], [-64, .22, .5, .04, -.02], [-22, .34, .34, .07, -.08], [44, .3, .26, .04, .03], [-86, .14, .4, .03, 0]] },
+    { use: 'hair', style: 'long', streak: 'hairSheen', length: .4, density: 1, lift: .02, fringe: .36 },
+    { use: 'c:strands', width: .09, list: [[-40, .3, .44, .06, -.04], [-20, .34, .32, .07, -.09], [24, .34, .2, .06, .1]] },
   ],
 };

@@ -1,6 +1,6 @@
 // 14 SORCERER - TIME & MOTION - Escapement Road. Read from assets/references/reference-064 (woven petrol teal, ivory
 // enamel cloth, brushed aged brass, smoked glass; attachments: wrist cuff escapement, pendulum harness).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 const TAU = Math.PI * 2;
 const around = (n, fn) => Array.from({ length: n }, (_, i) => fn(i / n * TAU, i / n * 360));
@@ -42,10 +42,11 @@ export default {
   id: 'oath-14-sorcerer', sheet: 'reference-064', title: 'Escapement Sorcerer',
   palette: {
     cloth: '#28444e', teal: '#28444e', tealDark: '#1c333b', ivory: '#d8cfba', ivoryShade: '#b9b09b', brass: '#b28c46', brassDark: '#7c6130', glass: '#2c2b28', charcoal: '#2c2927',
-    leather: '#3b2d24', leatherDark: '#27201c', iron: '#b28c46', boot: '#2a2421', sole: '#70562a', glove: '#221f1e', skin: '#d2a184', hair: '#1c1817', hairWarm: '#34292a', tie: '#1c1817',
+    leather: '#3b2d24', leatherDark: '#27201c', iron: '#b28c46', boot: '#2a2421', sole: '#70562a', glove: '#221f1e', hair: '#1c1817', hairWarm: '#34292a', tie: '#1c1817',
   },
-  build: { width: .97, depth: .98, bust: .018, waist: .92, hips: 1.04, arm: .92, leg: .98, neck: .92 },
-  keep: ['hands'],
+  build: { width: .98, depth: 1.0, bust: .018, waist: .98, hips: 1.08, arm: .94, leg: 1.02, neck: .92 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -73,10 +74,11 @@ export default {
     ] },
     cuff,
     { use: 'gloveCuff', from: 1.9, to: 2.05, color: 'glove' },
+    { use: 'hands', glove: 'glove', fingerless: true },
     pendulum,
     { use: 'boots', top: 1.56, straps: 3, strapColor: 'leather', buckle: 'brass', toeCap: 'brassDark', heelPlate: 'brassDark', plateMat: 'iron', soleHeight: .04 },
     // Hair twisted up into a loose knot on the crown, strands left free at the temples and nape.
-    { use: 'hair', style: 'bun', streak: 'hairWarm', locks: 110, length: .3, fringe: .34, bun: { at: [0, .5, -.16], radius: .125, tie: 'tie' } },
-    { use: 'c:strands', width: .05, list: [[48, .26, .4, .04, .02], [-48, .26, .44, .04, -.02], [26, .33, .22, .05, .05], [-22, .33, .2, .05, -.04], [150, -.05, .2, .02, 0], [-150, -.05, .22, .02, 0], [78, .12, .3, .02, 0], [-78, .12, .32, .02, 0]] },
+    { use: 'hair', style: 'bun', streak: 'hairWarm', fringe: .34, knot: { at: [0, .5, -.16], radius: .125, tie: 'tie' } },
+    { use: 'c:strands', width: .05, list: [[48, .26, .4, .04, .02], [-48, .26, .44, .04, -.02], [150, -.05, .2, .02, 0], [-150, -.05, .22, .02, 0], [78, .12, .3, .02, 0], [-78, .12, .32, .02, 0]] },
   ],
 };

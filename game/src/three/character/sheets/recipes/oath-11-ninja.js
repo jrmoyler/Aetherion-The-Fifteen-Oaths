@@ -1,15 +1,16 @@
 // 11 NINJA - SHADOW & VOID - The Missing Court. Read from assets/references/reference-071 (front, back, side,
 // three-quarter, face, materials: matte cloth black/grey, woven grey, gunmetal; attachments: thigh case, half mask).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 export default {
   id: 'oath-11-ninja', sheet: 'reference-071', title: 'Missing Court Ninja',
   palette: {
     cloth: '#252427', scarf: '#2a292c', grey: '#5d5c61', greyDark: '#47464b', wrap: '#222124', leather: '#34302e', leatherDark: '#262322', iron: '#5a5852',
-    caseFace: '#2b2b2f', bone: '#d8d1c3', boot: '#1f1c1b', sole: '#4b3c2d', glove: '#1b1a1b', skin: '#e8c9b6', hair: '#17151a', hairSheen: '#2b2830', tie: '#d9d3c8',
+    caseFace: '#2b2b2f', bone: '#d8d1c3', boot: '#1a1818', sole: '#3a2e24', glove: '#1b1a1b', hair: '#17151a', hairSheen: '#2b2830', tie: '#d9d3c8',
   },
-  build: { width: .93, depth: .95, bust: .016, waist: .92, hips: 1.0, arm: .88, leg: .95, neck: .92, shoulder: .98 },
-  keep: ['hands'],
+  build: { width: .95, depth: .97, bust: .016, waist: .96, hips: 1.04, arm: .9, leg: .98, neck: .92 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'skinLimb', limb: 'arm', from: .3, to: 1.05 },
@@ -21,8 +22,6 @@ export default {
       [[112, 'shoulder', .012], [150, 'shoulder', .0], [158, 'armpit', .0], [118, 'armpit', .03]],
     ] },
     { use: 'trousers', gather: 1.76, bag: .004, pleats: 4, pockets: [], cuff: .005 },
-    // Knee patches sewn onto the trousers.
-    { use: 'c:kit', side: 'both', on: { limb: 'leg', t: 1.02, phi: 0, off: .012 }, parts: [{ s: 'rbox', d: [.038, .05, .006, .005], c: 'scarf', m: 'cloth' }] },
     // Bindings from above the elbow to the wrist with grey crossing bands.
     { use: 'wrap', limb: 'arm', from: .9, to: 1.94, color: 'wrap', off: .005, pitch: .024 },
     { use: 'band', limb: 'arm', at: 1.2, width: .016, off: .008, thick: .003, color: 'greyDark', mat: 'cloth' },
@@ -30,6 +29,7 @@ export default {
     { use: 'band', limb: 'arm', at: 1.74, width: .016, off: .008, thick: .003, color: 'greyDark', mat: 'cloth' },
     { use: 'limbPlate', side: 'R', at: 1.5, length: .15, arc: .03, off: .014, color: 'iron', mat: 'iron', strapColor: 'leatherDark', straps: 3 },
     { use: 'gloveCuff', from: 1.9, to: 2.05 },
+    { use: 'hands', glove: 'glove', fingerless: true },
     // Asymmetric tunic skirt: short over the left hip, a long pointed fall with a grey under-layer on the right.
     { use: 'c:drape', from: 20, to: 160, hem: .79, color: 'cloth', flare: 1.04, clear: .01 },
     { use: 'c:drape', from: -200, to: 20, off: .016, hem: [[-200, .76], [-160, .44], [-112, .5], [-56, .31], [-8, .58], [20, .76]], color: 'grey', flare: 1.08, clear: .008 },
@@ -50,8 +50,8 @@ export default {
     // Half mask: black cloth with the bone-white panel over the right cheek.
     { use: 'c:headShell', top: [[-104, -.01], [-45, -.085], [0, -.07], [45, -.085], [104, -.01]], off: .024, color: 'cloth' },
     { use: 'c:headShell', phi: [-104, 5], top: [[-104, -.01], [-45, -.085], [0, -.07], [5, -.07]], bottom: [[-104, -.44], [-60, -.4], [5, -.12]], off: .032, color: 'bone', n: [16, 8] },
-    { use: 'hair', style: 'bun', streak: 'hairSheen', locks: 120, length: .34, bun: { at: [0, .43, -.34], radius: .085 } },
-    { use: 'c:tail', at: [0, .47, -.36], length: 1.8, strands: 22, width: .13, spread: .13, lift: .2, tie: 'tie' },
+    // High ponytail tied in pale cloth, with loose locks left at the temples.
+    { use: 'hair', style: 'long', streak: 'hairSheen', length: .9, fringe: .33, knot: { at: [0, .38, -.43] }, tail: { length: 1.6, width: .15, tie: 'tie' } },
     { use: 'c:strands', width: .075, list: [[38, .31, .46, .05, .03], [-38, .31, .46, .05, -.03], [62, .2, .4, .03, 0], [-62, .2, .4, .03, 0], [16, .345, .2, .05, .05], [-18, .345, .22, .05, -.05]] },
   ],
 };

@@ -1,5 +1,5 @@
-// Builders for the heroes of Oaths 11 to 15 (group c). They register themselves into the shared builder table under
-// a `c:` prefix, so a recipe that imports this file can name them without the shared table being edited.
+// Builders for the heroes of Oaths 11 to 15 (group c), named with a `c:` prefix. A recipe brings them with
+// `builders: C`.
 //
 // Three of them are general tools and carry most of these ten costumes:
 //   c:kit    hard gear assembled from primitives (boxes, bars, rings, cylinders, prisms) on an anchor frame:
@@ -16,8 +16,10 @@ const PI = Math.PI, DEG = PI / 180, UP = V(0, 1, 0);
 
 /** Surface classes beyond the shared ones: (roughness, metalness, shader kind). */
 export const MATC = {
-  ...MAT, brass: [.4, .9, 2], steel: [.42, .86, 2], silver: [.34, .92, 2], glass: [.12, .4, 2], lacquer: [.36, .06, 2], porcelain: [.3, 0, 2],
-  enamel: [.3, .2, 2], rubber: [.82, 0, 2], velvet: [1, 0, 0], glow: MAT.ember,
+  // Smooth worked surfaces use the shader's plainest class (4): no grain, only a faint mottle, so polished metal,
+  // lacquer, glass and porcelain stay clean beside the woven cloth and tanned leather.
+  ...MAT, brass: [.4, .9, 4], steel: [.44, .86, 4], silver: [.36, .92, 4], glass: [.1, .5, 4], lacquer: [.34, .08, 4], porcelain: [.3, 0, 4],
+  enamel: [.3, .2, 4], rubber: [.82, 0, 2], velvet: [1, 0, 0], glow: MAT.ember,
 };
 const matOf = (name) => { const m = MATC[name]; if (!m) throw new Error(`group c: unknown material "${name}"`); return m; };
 const quat = (rot) => new Quaternion().setFromEuler(new Euler(rot[0] * DEG, rot[1] * DEG, rot[2] * DEG));
@@ -398,5 +400,7 @@ export function strands(c, { color = 'hair', list, width = .05, name = 'hair' })
   }
 }
 
-export const BUILDERS_C = { kit, hose, drape, patch, collar, bellSleeve, headShell, headBand, crest, curls, locks, tail, strands };
-for (const [name, build] of Object.entries(BUILDERS_C)) BUILDERS[`c:${name}`] = build;
+/** Group c's builders, under the names its recipes use (`builders: C` in a recipe). */
+export const C = Object.fromEntries(Object.entries({ kit, hose, drape, patch, collar, bellSleeve, headShell, headBand, crest, curls, locks, tail, strands }).map(([name, build]) => [`c:${name}`, build]));
+// Also entered in the shared table, which is where the recipe test looks a builder name up.
+Object.assign(BUILDERS, C);

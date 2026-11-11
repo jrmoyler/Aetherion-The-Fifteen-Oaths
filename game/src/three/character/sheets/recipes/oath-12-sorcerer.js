@@ -1,6 +1,6 @@
 // 12 SORCERER - BLOOD - Sanguine Covenant. Read from assets/references/reference-067 (burgundy brocade, charcoal
 // wool, aged brass, blood glass; attachments: shoulder vial, belt case).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 const bars = (n, r, h, y) => Array.from({ length: n }, (_, i) => { const a = i / n * Math.PI * 2; return { s: 'box', d: [.0035, h, .0035], at: [Math.cos(a) * r, y, Math.sin(a) * r], rot: [0, -a * 180 / Math.PI, 0], c: 'brass', m: 'brass' }; });
 const shoulderStrap = (s) => ({ use: 'strap', color: 'leather', closed: false, width: .026, n: 30, anchor: { at: .2, size: .016, color: 'brass' }, path: [
@@ -11,10 +11,11 @@ export default {
   id: 'oath-12-sorcerer', sheet: 'reference-067', title: 'Sanguine Sorcerer',
   palette: {
     cloth: '#5a1f24', burgundy: '#5a1f24', burgundyDark: '#3e1519', brocade: '#6b252a', charcoal: '#322d2c', charcoalDark: '#262222', brass: '#a8844a', brassDark: '#6f5730',
-    blood: '#8f1218', bloodGlow: '#c2161d', leather: '#3a2c26', leatherDark: '#2a211e', iron: '#a8844a', boot: '#2b2320', sole: '#3a2d24', skin: '#4a2c1e', hair: '#1b1614', hairWarm: '#3a2a20', bead: '#b08c4c',
+    blood: '#8f1218', bloodGlow: '#c2161d', leather: '#3a2c26', leatherDark: '#2a211e', iron: '#a8844a', boot: '#2b2320', sole: '#3a2d24', hair: '#1b1614', hairWarm: '#3a2a20', bead: '#b08c4c',
   },
-  build: { width: 1.04, depth: 1.04, bust: .022, waist: .98, hips: 1.08, arm: .98, leg: 1.0, neck: .95 },
-  keep: ['hands'],
+  build: { width: 1.06, depth: 1.06, bust: .022, waist: 1.04, hips: 1.14, arm: 1.0, leg: 1.04, neck: .95 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -62,9 +63,10 @@ export default {
       { s: 'ring', d: [.014, .014, .004, 12, 5], at: [.07, .035, 0], c: 'brass', m: 'brass' }, { s: 'ring', d: [.014, .014, .004, 12, 5], at: [-.07, .035, 0], c: 'brass', m: 'brass' },
     ] },
     { use: 'c:collar', color: 'burgundy', lining: 'brocade', trim: 'brass', trimMat: 'brass', height: .07, back: .012, tip: .01, flare: .04, gap: 34, off: .014 },
+    { use: 'hands' },
     { use: 'boots', top: 1.56, straps: 3, strapColor: 'leather', buckle: 'brass', toeCap: 'brassDark', heelPlate: 'brassDark', plateMat: 'iron', soleHeight: .034 },
     // Braids drawn back into a low knot, with brass beads and earrings.
-    { use: 'hair', style: 'bun', streak: 'hairWarm', locks: 120, length: .32, fringe: .34, bun: { at: [0, -.02, -.5], radius: .16, tie: 'bead' } },
+    { use: 'hair', style: 'bun', streak: 'hairWarm', fringe: .34, knot: { at: [0, -.04, -.5], radius: .15, tie: 'bead' } },
     { use: 'c:kit', name: 'earring', side: 'both', on: { head: [.35, -.2, -.02] }, parts: [{ s: 'ring', d: [.022, .022, .006, 10, 5], rot: [0, 90, 0], c: 'bead', m: 'brass' }] },
   ],
 };

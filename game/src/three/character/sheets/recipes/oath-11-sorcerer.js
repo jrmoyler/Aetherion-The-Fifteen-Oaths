@@ -1,6 +1,6 @@
 // 11 SORCERER - SHADOW & VOID - The Missing Court. Read from assets/references/reference-070 (ink velvet black, wool
 // cloth charcoal, silver clasps; attachments: inside collar support, front clasps).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 const clasp = (y, dy) => ({ use: 'c:kit', name: 'clasp', on: { y, dy, th: 0, off: .019 }, parts: [
   { s: 'rbox', d: [.046, .0085, .003, .002], c: 'strap', m: 'leather' },
@@ -13,10 +13,11 @@ export default {
   id: 'oath-11-sorcerer', sheet: 'reference-070', title: 'Missing Court Sorcerer',
   palette: {
     cloth: '#1b1a1d', velvet: '#1b1a1d', wool: '#434247', woolDark: '#343337', silver: '#b4b1a8', silverDark: '#77756f', strap: '#232124', leather: '#2a2725', leatherDark: '#1e1c1b',
-    iron: '#aaa79f', boot: '#211e1c', sole: '#4a3b2e', skin: '#e0bba2',
+    iron: '#aaa79f', boot: '#211e1c', sole: '#4a3b2e',
   },
-  build: { width: .98, depth: .96, waist: .96, hips: .98, arm: .86, leg: .95, neck: .86, shoulder: 1.0 },
-  keep: ['hands'],
+  build: { width: 1.0, depth: 1.0, arm: .9, leg: 1.0, neck: .9 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -37,6 +38,7 @@ export default {
       hem: [[13, .085], [52, .085], [90, .36], [128, .2], [152, .085], [172, .085], [180, .2], [188, .085], [208, .085], [232, .2], [270, .36], [308, .085], [347, .085]] },
     { use: 'belt', height: .026, thick: .006, off: .014, color: 'strap', buckle: 'silver', keepers: [], buckleSize: [.02, .018] },
     { use: 'c:collar', color: 'velvet', lining: 'woolDark', trim: 'silver', trimMat: 'silver', height: .095, back: 0, tip: .02, flare: .045, gap: 30, off: .016 },
+    { use: 'hands' },
     { use: 'boots', top: 1.62, straps: 0, soleHeight: .03 },
   ],
 };

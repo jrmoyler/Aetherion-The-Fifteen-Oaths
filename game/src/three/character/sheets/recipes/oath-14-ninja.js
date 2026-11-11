@@ -1,6 +1,6 @@
 // 14 NINJA - TIME & MOTION - Escapement Road. Read from assets/references/reference-065 (woven petrol teal,
 // graphite leather, aged brass; attachments: hip flywheel axle, ankle strut).
-import '../builders-c.js';
+import { C } from '../builders-c.js';
 
 const TAU = Math.PI * 2;
 const around = (n, fn) => Array.from({ length: n }, (_, i) => fn(i / n * TAU, i / n * 360));
@@ -34,11 +34,12 @@ const vest = (s) => [[s * 12, 'base', -.01], [s * 78, 'shoulder', -.012], [s * 8
 export default {
   id: 'oath-14-ninja', sheet: 'reference-065', title: 'Escapement Ninja',
   palette: {
-    cloth: '#2a2b2c', graphite: '#2a2b2c', graphiteLight: '#3a3b3c', teal: '#244652', tealDark: '#1a343e', brass: '#b08a44', brassDark: '#7a5f2f', amber: '#ffab2e',
-    leather: '#3a2f27', leatherDark: '#262220', iron: '#b08a44', boot: '#252323', sole: '#6f5527', glove: '#232222', skin: '#4a2c1e', hair: '#161312', visor: '#2a2725',
+    cloth: '#2a2b2c', graphite: '#2a2b2c', graphiteLight: '#3a3b3c', teal: '#244652', tealDark: '#1a343e', brass: '#b08a44', brassDark: '#7a5f2f', amber: '#ff8a12',
+    leather: '#3a2f27', leatherDark: '#262220', iron: '#b08a44', boot: '#252323', sole: '#6f5527', glove: '#232222', hair: '#161312', visor: '#2a2725',
   },
-  build: { width: 1.08, depth: 1.04, waist: .98, arm: 1.18, leg: 1.04, neck: 1.05, shoulder: 1.06 },
-  keep: ['hands'],
+  build: { width: 1.1, depth: 1.06, waist: 1.06, arm: 1.2, leg: 1.1, neck: 1.06, shoulder: 1.06 },
+  keep: ['weapon'],
+  builders: C,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -54,6 +55,7 @@ export default {
     { use: 'bracer', from: .88, to: 1.93, color: 'graphiteLight', strapColor: 'leatherDark', straps: [.94, 1.86], buckle: null },
     slot,
     { use: 'gloveCuff', from: 1.88, to: 2.05, color: 'glove', strap: 'leatherDark' },
+    { use: 'hands', glove: 'glove', fingerless: true, knuckles: 'leatherDark' },
     { use: 'trousers', color: 'graphite', gather: 1.72, bag: .02, pleats: 6, cuff: .008, piping: 'brassDark', pipingPaths: [[88, 86, .05, 1.6]] },
     { use: 'c:kit', name: 'pocket', side: 'both', on: { limb: 'leg', t: .62, phi: 84, off: .026 }, parts: [
       { s: 'rbox', d: [.04, .05, .01, .005], at: [0, 0, .006], c: 'graphiteLight', m: 'leather' }, { s: 'rbox', d: [.043, .018, .012, .004], at: [0, .036, .008], c: 'graphite', m: 'leather' },
