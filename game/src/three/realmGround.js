@@ -146,7 +146,7 @@ export function realmTerrainMaterial(quality = 'high') {
           diffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.12, 0.055, 0.025), molten*0.85); }
         #include <roughnessmap_fragment>`)
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
-        totalEmissiveRadiance += vec3(1.0, 0.17, 0.015)*smoothstep(0.35, 0.85, vGroundMask.z)*(0.65 + tvn(vWP.xz*0.8 + vec2(0.0, uT.x*0.05))*0.7);`);
+        totalEmissiveRadiance += vec3(1.0, 0.17, 0.015)*smoothstep(0.35, 0.85, vGroundMask.z)*(0.22 + tvn(vWP.xz*0.8 + vec2(0.0, uT.x*0.05))*0.5);   // a dull red heart: the source's cracks carry the glow`);
   };
   material.customProgramCacheKey = () => `aetherion-biome-triad-ground-v1-${low ? 'low' : 'full'}`;
   material.userData.groundUniforms = uniforms;
