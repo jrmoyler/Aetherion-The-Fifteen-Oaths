@@ -91,7 +91,7 @@ Counts are the source's; the game shows that many on the high tier unless noted.
 | Gull flocks (5 groups of 8, boids) | sea | coast, cliffs | Yes | Homes follow the shore near the player |
 | Fish schools (5 schools of 30, boids) | sea | coast, cliffs | Yes | Only where water at least 1.6 m deep lies within 120 m; swim near the surface |
 | Petrel flocks (4 groups of 9, boids) | arctic | glacial | Yes | |
-| Whale skeleton (`whaleGeo`) | arctic | glacial | Yes | One fixed site. The glacial coast is cliff with no beach, so the bones lie on the lowest level ground within 120 m of the sea. Untextured: the source's ground texture was not imported |
+| Whale skeleton (`whaleGeo`) | arctic | glacial | Yes | One fixed site. The glacial coast is cliff with no beach, so the bones lie half sunk on the lowest ground that is level for 17 m around and within 120 m of the sea (a clifftop at about -1685, 1786). Untextured: the source's ground texture was not imported |
 | Dove flocks (6 groups of 8, boids) | haven | crimson | Yes | |
 | Rooks over the canopy (16 + 10, boids) | forest | forest | Yes | |
 | Falling leaves (1800 points) | forest | - | No | A seasonal particle effect, not an animal; Aetherion has no seasons |

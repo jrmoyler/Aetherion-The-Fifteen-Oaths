@@ -265,12 +265,14 @@ export function createRealmCreatures(ctx) {
     },
 
     // Whale skeleton: one fixed spot in the glacial realm. Its coast is cliff, with no beach to lie on, so the bones
-    // rest on the lowest level ground within 120 m of the sea, found once by walking outward from the realm centre.
+    // rest on the lowest ground that is level for 17 m around and within 120 m of the sea, found once by walking outward from the realm centre.
     arcticBones() {
       const frame = new THREE.Group(), centre = OATHS.find((o) => o.biome === 'glacial').center;
       const nearSea = (x, z) => { for (let k = 0; k < 8; k++) for (const r of [60, 120]) if (heightAt(x + Math.cos(k * TAU / 8) * r, z + Math.sin(k * TAU / 8) * r) < SEA_LEVEL) return true; return false; };
+      // The skeleton is 20 m long: the ground has to be level under all of it, not just under its skull.
+      const level = (x, z, h) => { for (let k = 0; k < 8; k++) for (const r of [9, 17]) if (Math.abs(heightAt(x + Math.cos(k * TAU / 8) * r, z + Math.sin(k * TAU / 8) * r) - h) > 1.7) return false; return true; };
       let site = null, low = Infinity;
-      for (let i = 0; i < 2600; i++) { const d = 190 + i * .25, a = i * 2.399963, x = centre[0] + Math.cos(a) * d, z = centre[1] + Math.sin(a) * d, h = heightAt(x, z); if (h < low && regionAt(x, z).biome === 'glacial' && landOk(x, z, 2.2) && nearSea(x, z)) { site = [x, z]; low = h; } }
+      for (let i = 0; i < 5200; i++) { const d = 190 + i * .25, a = i * 2.399963, x = centre[0] + Math.cos(a) * d, z = centre[1] + Math.sin(a) * d, h = heightAt(x, z); if (h < low && regionAt(x, z).biome === 'glacial' && landOk(x, z, 2.2) && level(x, z, h) && nearSea(x, z)) { site = [x, z]; low = h; } }
       if (!site) throw new Error('no level ground by the sea for the whale skeleton');
       frame.position.set(site[0] - 228, 0, site[1] + 196);
       BT.arcticWhaleBones({ boneMat: BT.arcticBoneMat({ tex: { ground: null } }).boneMat, heightAt: (x, z) => heightAt(x + frame.position.x, z + frame.position.z), group: frame });
