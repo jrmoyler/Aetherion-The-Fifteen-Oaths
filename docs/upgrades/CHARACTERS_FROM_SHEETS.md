@@ -380,3 +380,72 @@ edge, and the `1.06` value has not been re-rendered in a run.
 Kiln Ninja: about 35,000 triangles on high, 1 draw call; Kiln Sorcerer: about 29,000. The baked surface
 (24k) is no longer drawn apart from the hands and weapon, so the net per-hero triangle count is close to before.
 Build time is a few hundred milliseconds once per hero and tier, cached.
+
+
+## System pass (heads, proportions, volumes, hands, surfaces)
+
+Evidence: `docs/qa/characters/all-heroes-front.jpg` (all 30, sheet | code), `system-pass/*.jpg` (sheet | before |
+after for four heroes), `poses-run-attack-cast.jpg` (8 heroes each running, attacking, casting, three-quarter
+view), `in-game-three-heroes.jpg` (oath-04-ninja, oath-12-ninja, oath-14-sorcerer in the running game: attack,
+idle, moving; camera behind).
+
+What changed for every sheet hero, without touching recipes:
+- Head: sized from the head joint (about eight heads to the figure), not from the bounding box, so hats, packs
+  and chimneys no longer inflate it. Stronger relief (brow, cheek, chin, narrower nose), wider eye aperture with
+  per-sex tilt, and painted shading in the skin shader (sockets, lash line, brows, nose sides, under nose and
+  lip, cheek contour, shadow under the chin, uneven skin tone). Skin albedo is lowered on head, arms and hands
+  alike, because bright skin sat in the tone-mapper's shoulder and lost all modelling.
+- Proportions: lean default form, higher belt line, slimmer calves, ankles and boots, muscle swell on bare
+  limbs (deltoid, biceps, triceps, forearm, quadriceps, calf), lower collars.
+- Volumes: coats and skirts fall closer to the legs; loose sleeves hang below the arm (`bell: true` restores an
+  all-round flare).
+- Hands: smaller, three-jointed fingers and a thumb.
+- Surfaces (names usable as `mat` in any builder): `brass`, `gold`, `bronze`, `steel`, `silver`, `copper`
+  (polished metal), `wood`, `bamboo`, `enamel`, `porcelain`, `lacquer`, `glass` (opaque, dark face-on with a
+  bright rim and inner glow; not truly transparent), `ice`, `crystal` (faceted, veiled, glowing), `nacre`
+  (colour turns with the view). The group builder tables now point at these instead of faking them.
+- `groom.beard: false` is honoured; a recipe's `density` (for example `.84`) thins tessellation to hold the
+  triangle budget (all 30 are now under 37,000 on high); `headScale` scales a hero's head.
+- Line-up mode on the dev page: `sheet.html?ids=a,b,c&cols=8[&view=threeq][&clip=attack_1&frames=6][&frame=face]`
+  renders many heroes in one page load, each framed by its own height.
+
+### Honest state of all 30 after the pass (judged from all-heroes-front.jpg)
+
+Every hero carries its sheet's elements and colour blocking and none is a blank-faced toy any more, but none is
+a duplicate of its painting. Common to all: bodies are slimmer and stiffer than the heroic painted builds
+(joints are the rig's), faces are stylised and not likenesses, cloth has no painted wrinkles.
+
+| Hero | Reads as its sheet at a glance | Largest remaining difference |
+| --- | --- | --- |
+| oath-01-ninja | yes | boot toes, hair shorter |
+| oath-01-sorcerer | yes | pack simplified, face not a likeness |
+| oath-02-ninja | yes | quilting and hood volume flatter |
+| oath-02-sorcerer | partly | coat narrower, beard and collar simpler |
+| oath-03-ninja | yes | slimmer, arms smooth |
+| oath-03-sorcerer | partly | body much less stocky than the sheet, antenna crown simplified |
+| oath-04-ninja | partly | body suit lacks the scaled shoulder armour's mass; fins small |
+| oath-04-sorcerer | partly | less bulk, orbs smaller |
+| oath-05-ninja | partly | armour plates read as flat panels, build too round |
+| oath-05-sorcerer | partly | much slimmer than the sheet, frame and stone simplified |
+| oath-06-ninja | partly | wraps and sash simplified, mask shape |
+| oath-06-sorcerer | partly | robe plainer, horns thicker |
+| oath-07-ninja | partly | bark armour reads as flat panels, far less mass |
+| oath-07-sorcerer | partly | layered shawl and roots simplified |
+| oath-08-ninja | yes | harness detail thinner |
+| oath-08-sorcerer | yes | coat plainer |
+| oath-09-ninja | partly | wrap layout and shoulder blade differ |
+| oath-09-sorcerer | partly | robe layers flatter |
+| oath-10-ninja | no | reads as a blue bulk with a helmet; the sheet's black plate armour, pauldrons and crescent are mostly lost |
+| oath-10-sorcerer | partly | shorter coat, orbs smaller |
+| oath-11-ninja | yes | asymmetric skirt simpler |
+| oath-11-sorcerer | partly | coat lacks the long flared silhouette; sleeves open stiffly |
+| oath-12-ninja | partly | shoulders and arms far less muscular, tabard shorter |
+| oath-12-sorcerer | partly | robe plainer and brighter red |
+| oath-13-ninja | partly | coat tails and drape missing |
+| oath-13-sorcerer | partly | collar and coat cut differ, lighter palette |
+| oath-14-ninja | partly | vest longer and brighter, less muscular |
+| oath-14-sorcerer | yes | coat hem simpler |
+| oath-15-ninja | partly | rig harness and leg frames thinner |
+| oath-15-sorcerer | yes | coat less flared, fewer straps |
+
+Not re-rendered after the last face tweak (narrower nose, painted brows only): the face close-up line-up.
