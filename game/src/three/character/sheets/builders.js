@@ -76,7 +76,7 @@ export function neck(c, { color = 'skin', from = null } = {}) {
  * Shirt or tunic body with sleeves. `sleeve` is where the sleeve ends on the arm (1 = elbow, 2 = wrist),
  * `hem` the height of the bottom edge as a trunk landmark or metres, `trim` a piping colour at the cuffs.
  */
-export function shirt(c, { color = 'cloth', sleeve = .6, flare = .012, off = .007, hem = 'belt', trim = null, trimWidth = .014, collar = 'base', slack = .004, cap: pad = 0 }) {
+export function shirt(c, { color = 'cloth', sleeve = .6, flare = .008, off = .007, hem = 'belt', trim = null, trimWidth = .014, collar = 'base', slack = .004, cap: pad = 0, bell = false }) {
   const { trunk, arm } = c.form, y0 = typeof hem === 'number' ? hem : trunk.Y[hem] - .03, y1 = trunk.Y[collar] ?? collar, col = c.pal(color);
   c.bag.part = 'shirt';
   c.bag.grid(44 * c.q, 26 * c.q, (u, v) => {
@@ -87,8 +87,11 @@ export function shirt(c, { color = 'cloth', sleeve = .6, flare = .012, off = .00
     return { p, skin: trunk.skin(p) };
   }, { closeU: true, color: col, mat: MAT.cloth, inside: V(0, (y0 + y1) / 2, c.form.spineZ(y1)) });
   if (sleeve <= 0) return;
-  const cap = -.14, wide = (t) => arm.radius(t) + off + flare * smooth(.05, sleeve, t) + pad * smooth(.5, 0, t);
-  const radius = (t, phi) => (t < 0 ? wide(0) * Math.sqrt(Math.max(0, 1 - (t / cap) ** 2)) * .98 + .001 : wide(t) + slack * .8 * Math.sin(phi * 5 + t * 7) * smooth(0, sleeve * .6, t));
+  const cap = -.14, wide = (t) => arm.radius(t) + off + pad * smooth(.5, 0, t);
+  // Extra cloth in a sleeve hangs below the arm instead of standing out all round it like a bell
+  // (`bell: true` keeps the old all-round flare for sleeves that are meant to be stiff).
+  const loose = (t, phi) => flare * smooth(.05, sleeve, t) * (bell ? 1 : .3 + 1.1 * Math.max(0, -Math.sin(phi)) ** 1.5);
+  const radius = (t, phi) => (t < 0 ? wide(0) * Math.sqrt(Math.max(0, 1 - (t / cap) ** 2)) * .98 + .001 : wide(t) + loose(t, phi) + slack * .8 * Math.sin(phi * 5 + t * 7) * smooth(0, sleeve * .6, t));
   sides(c, 'both', () => {
     tube(c, arm, { t0: cap, t1: sleeve, nv: 4 + 12 * sleeve, radius, color: col });
     // The cuff turns in on itself so the sleeve has an edge with thickness.
@@ -382,17 +385,17 @@ export function strap(c, { path, width = .034, thick = .006, color = 'leather', 
  * bottom edge as a fraction from the ground (0) to the hip line (1); `flare` widens the hem. Later parts can lay
  * panels on it through c.coat.at(y, th, off).
  */
-export function skirt(c, { color = 'cloth', top = 'belt', hem = .38, flare = 1.28, off = .02, folds = 9, trim = null, trimWidth = .016, split = null }) {
+export function skirt(c, { color = 'cloth', top = 'belt', hem = .38, flare = 1.14, off = .016, folds = 9, trim = null, trimWidth = .016, split = null }) {
   const { trunk, J, leg } = c.form, col = c.pal(color), yTop = trunk.Y[top], yHip = trunk.Y.hip, yHem = lerp(0, yHip, hem);
   c.bag.part = 'skirt';
   const seed = c.rand() * TAU;
   // Wide enough at every height to clear the legs and whatever they wear.
-  const legReach = (y) => { const t = clamp((J['thigh.L'].y - y) / leg.seg[0].length, 0, 1.4); return leg.centre(t).x + leg.radius(t) + .05; };
+  const legReach = (y) => { const t = clamp((J['thigh.L'].y - y) / leg.seg[0].length, 0, 1.4); return leg.centre(t).x + leg.radius(t) + .028; };
   const at = (y, th, extra = 0, out = new Vector3()) => {
     if (y >= yHip) return trunk.at(y, th, off + extra, out);
     const f = (yHip - y) / (yHip - yHem), grow = 1 + (flare - 1) * f ** .8, p = trunk.at(yHip, th, off + extra, out), zc = c.form.spineZ(yHip);
     const need = legReach(y) / Math.max(.01, trunk.section(yHip).a + off), wide = Math.max(grow, lerp(1, need, smooth(0, .25, f)));
-    const fold = 1 + .035 * f * Math.sin(th * folds + seed + Math.sin(f * 4) * .5);
+    const fold = 1 + .02 * f * Math.sin(th * folds + seed + Math.sin(f * 4) * .5);
     p.x *= wide * fold; p.z = zc + (p.z - zc) * grow * fold; p.y = y;
     return p;
   };
