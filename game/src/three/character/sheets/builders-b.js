@@ -1,14 +1,14 @@
 // Builders for the heroes of Oaths 06 to 10 (Reed Resonance, Graft Sanctuary, Bitterglass Guild, Oath of Daybreak,
 // Tidal Observatory). Same contract as builders.js: each takes the build context and a plain-data block from a
 // recipe and emits skinned geometry into the context's Bag. Recipes name them with a `b.` prefix and carry them
-// in their `builders` field (export B); they are also added to BUILDERS when this module loads.
+// in their `builders` field (export B).
 //
 // Sizes given in metres are for a 1.8 m body and are scaled to the wearer; heights are trunk landmarks
 // ('belt', 'waist', 'ribs', 'chest', 'armpit', 'shoulder', 'base', 'neck'), fractions of the hip height below the
 // hips (0 ground .. 1 hip line), [landmark, metres] offsets or [landmarkA, landmarkB, fraction] blends.
 import { Quaternion, Vector3 } from 'three';
 import { MAT, TAU, V, box, clamp, curve, dome, frame, lerp, moved, ring, roundBox, smooth } from './kernel.js';
-import { BUILDERS, HEAD, buckleShape, face, headPlace, limbBand, limbFrame, scalp, sides, slab, slabY, trunkBand } from './builders.js';
+import { HEAD, buckleShape, face, headPlace, limbBand, limbFrame, scalp, sides, slab, slabY, trunkBand } from './builders.js';
 
 const PI = Math.PI, DEG = PI / 180;
 
@@ -810,5 +810,4 @@ export { M, SURFACE, Yof, scaleOf, tone, cyl, ball, along, sweep, lathe, leaf, t
 export const BUILDERS_B = { torso, sleeve, legs, sash, strip, hang, coat, collar, neck: neckWrap, guard, spikes, studs, cords, shag, wing, headBand, beakMask, tail, reedPipes, bells, pipeCarrier, resonator, hairCap, skullCap, seedMask, fringe, basket, vials, backpack, pouch, respirator, tanks, knot, visor, lotus, fin, moon, helm, astrolabe, orb, hemOrbs };
 /** The same builders under their recipe names (`b.` prefix), for a recipe's `builders` field. */
 export const B = Object.fromEntries(Object.entries(BUILDERS_B).map(([name, build]) => [`b.${name}`, build]));
-Object.assign(BUILDERS, B);
 void [box, slab, slabY, trunkBand, Quaternion];

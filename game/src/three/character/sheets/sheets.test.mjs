@@ -21,7 +21,7 @@ function rig(scale = 1) {
 test('every recipe names a shipped hero, a sheet and only existing builders', () => {
   for (const [id, recipe] of Object.entries(RECIPES)) {
     assert.equal(recipe.id, id); assert.ok(PROFILES[id], `${id} is not a shipped hero`); assert.match(recipe.sheet, /^reference-\d{3}$/);
-    for (const part of recipe.parts) assert.ok(BUILDERS[part.use], `${id}: unknown builder ${part.use}`);
+    for (const part of recipe.parts) assert.ok(recipe.builders?.[part.use] ?? BUILDERS[part.use], `${id}: unknown builder ${part.use}`);
   }
 });
 

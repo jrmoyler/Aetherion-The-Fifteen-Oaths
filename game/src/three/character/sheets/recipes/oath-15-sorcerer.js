@@ -39,7 +39,7 @@ const gauntlet = { use: 'c:kit', name: 'gauntlet', side: 'both', on: { limb: 'ar
 })() };
 
 export default {
-  id: 'oath-15-sorcerer', sheet: 'reference-062', title: 'Impulse Foundry Sorcerer',
+  id: 'oath-15-sorcerer', density: 0.93, sheet: 'reference-062', title: 'Impulse Foundry Sorcerer',
   palette: {
     cloth: '#39383a', graphite: '#39383a', graphiteDark: '#29282a', graphiteLight: '#4a494b', orange: '#c2571f', orangeDark: '#93421a', lining: '#b9551f', steel: '#96928b', steelDark: '#55524f', brass: '#9a7c46', cyan: '#1fb8d6',
     leather: '#4a3a2c', leatherDark: '#2c2420', iron: '#96928b', rubber: '#1c1c1d', boot: '#2c2a29', sole: '#1e1d1d', hair: '#15110f',

@@ -4,7 +4,7 @@
 import { B } from '../builders-b.js';
 
 export default {
-  id: 'oath-10-ninja', sheet: 'reference-073', title: 'Tidal Ninja',
+  id: 'oath-10-ninja', density: 0.84, sheet: 'reference-073', title: 'Tidal Ninja',
   palette: {
     cloth: '#232842', indigo: '#262b48', indigoDark: '#1a1e33', black: '#1c1b1e', meteor: '#2e2d2c', meteorDark: '#252423', silver: '#8e8a84', bronze: '#6a5238', brass: '#6a5238', violet: '#3a1e96', slit: '#d8d0ff',
     leather: '#3a2c22', leatherDark: '#261d18', iron: '#4a4744', glove: '#1b1a1c', boot: '#232122', sole: '#141314', bootPlate: '#33312f',

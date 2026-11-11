@@ -59,7 +59,7 @@ function limbFrame(chain, t, phi, off = 0, radius = chain.radius) {
 /** Bare limb: the form itself, in skin. */
 export function skinLimb(c, { limb = 'arm', side = 'both', from = 0, to = 2, color = 'skin' }) {
   const chain = limbOf(c, limb);
-  sides(c, side, () => tube(c, chain, { t0: from, t1: to, nu: 20, nv: 22, radius: (t, phi) => chain.radius(t) + (chain.muscle ? chain.muscle(t, phi) : 0), color: c.pal(color), mat: MAT.skin }));
+  sides(c, side, () => tube(c, chain, { t0: from, t1: to, nu: 18, nv: 12 * Math.max(.5, to - from), radius: (t, phi) => chain.radius(t) + (chain.muscle ? chain.muscle(t, phi) : 0), color: c.pal(color), mat: MAT.skin }));
 }
 
 /** Bare neck from the collar line up into the head. */
@@ -560,7 +560,7 @@ export function boots(c, { color = 'boot', sole = 'sole', top = 1.56, toeCap = n
     const skin = (p) => foot.skin(p);
     // Sole and welt.
     const soleRows = [[0, -.006], [.005, 0], [soleHeight - .004, 0], [soleHeight, -.004], [soleHeight, -.02]];
-    c.bag.grid(44 * c.q, soleRows.length - 1, (u, v) => {
+    c.bag.grid(32 * c.q, soleRows.length - 1, (u, v) => {
       const a = u * TAU, z = zm - Math.cos(a) * L * .999, [y, inset] = soleRows[Math.round(v * (soleRows.length - 1))], w = halfWidth(z) + .005 + inset;
       // Tread blocks are cut into the sole's edge.
       const tread = y < soleHeight - .006 && y > .003 ? -.0055 * (Math.sin(z * 150) > .1 ? 1 : 0) : 0;

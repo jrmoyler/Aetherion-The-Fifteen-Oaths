@@ -6,7 +6,7 @@
 import { Euler, Quaternion, Vector3 } from 'three';
 import { cranium } from '../head.js';
 import { MAT, TAU, V, bar, clamp, dome, frame, lerp, moved, ring, roundBox, smooth } from './kernel.js';
-import { BUILDERS, slab, limbFrame, tube, sides, headPlace, face, scalp, HEAD } from './builders.js';
+import { slab, limbFrame, tube, sides, headPlace, face, scalp, HEAD } from './builders.js';
 
 const PI = Math.PI, DEG = PI / 180, UP = V(0, 1, 0);
 
@@ -422,5 +422,4 @@ export function yoke(c, { color = 'copper', mat = 'copper', inner = .078, outer 
 /** The group's builders by recipe name; a recipe lists them under `builders`. */
 export const A = { 'a/kit': kit, 'a/bodysuit': bodysuit, 'a/lines': lines, 'a/plates': plates, 'a/collar': collar, 'a/hood': hood, 'a/hoodDown': hoodDown, 'a/fringe': fringe, 'a/beard': beard, 'a/helm': helm, 'a/yoke': yoke };
 // Also registered in the shared table, so tools that look a part up there (the recipe test) find it.
-Object.assign(BUILDERS, A);
 export { SHAPES, SURFACE, Yof };

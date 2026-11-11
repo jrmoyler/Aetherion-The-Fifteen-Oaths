@@ -10,7 +10,7 @@
 // The rest are fitted pieces: standing collars, bell sleeves, hoses and chains, head shells and bands, and hair.
 import { Euler, Quaternion, Vector3 } from 'three';
 import { MAT, TAU, V, bar, box, clamp, dome, frame, lerp, moved, ring, roundBox, smooth } from './kernel.js';
-import { BUILDERS, HEAD, face, headPlace, limbFrame, scalp, sides } from './builders.js';
+import { HEAD, face, headPlace, limbFrame, scalp, sides } from './builders.js';
 
 const PI = Math.PI, DEG = PI / 180, UP = V(0, 1, 0);
 
@@ -403,4 +403,3 @@ export function strands(c, { color = 'hair', list, width = .05, name = 'hair' })
 /** Group c's builders, under the names its recipes use (`builders: C` in a recipe). */
 export const C = Object.fromEntries(Object.entries({ kit, hose, drape, patch, collar, bellSleeve, headShell, headBand, crest, curls, locks, tail, strands }).map(([name, build]) => [`c:${name}`, build]));
 // Also entered in the shared table, which is where the recipe test looks a builder name up.
-Object.assign(BUILDERS, C);

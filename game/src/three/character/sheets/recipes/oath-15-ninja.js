@@ -31,7 +31,7 @@ const pouch = { use: 'c:kit', name: 'pouch', side: 'both', on: { limb: 'leg', t:
 ] };
 
 export default {
-  id: 'oath-15-ninja', sheet: 'reference-063', title: 'Impulse Foundry Ninja',
+  id: 'oath-15-ninja', density: 0.93, sheet: 'reference-063', title: 'Impulse Foundry Ninja',
   palette: {
     cloth: '#2f2e2f', graphite: '#2f2e2f', graphiteLight: '#434244', graphiteDark: '#1f1f21', orange: '#c2571f', orangeDark: '#8e3f17', steel: '#9d9a94', steelDark: '#5c5a57', cyan: '#1fb8d6', white: '#f4f8fa',
     webbing: '#3a3632', leather: '#3a3632', leatherDark: '#262423', iron: '#9d9a94', rubber: '#1b1b1c', boot: '#2a2929', sole: '#1c1c1d', glove: '#1d1d1e', hair: '#15110f', plate: '#18181a',
