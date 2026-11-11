@@ -16,10 +16,8 @@ const PI = Math.PI, DEG = PI / 180, UP = V(0, 1, 0);
 
 /** Surface classes beyond the shared ones: (roughness, metalness, shader kind). */
 export const MATC = {
-  // Worked metal and lacquer use the shader's streaked class (5), which reads as a brushed finish; glass, enamel
-  // and porcelain use its plainest class (4), so they stay clean beside the woven cloth and tanned leather.
-  ...MAT, brass: [.4, .9, 5], steel: [.44, .86, 5], silver: [.36, .92, 5], lacquer: [.34, .1, 5], glass: [.1, .5, 4], porcelain: [.3, 0, 4],
-  enamel: [.3, .2, 4], rubber: [.82, 0, 2], velvet: [1, 0, 0], glow: MAT.ember,
+  ...MAT,
+  rubber: [.82, 0, 2], velvet: [1, 0, 0], glow: MAT.ember,
 };
 const matOf = (name) => { const m = MATC[name]; if (!m) throw new Error(`group c: unknown material "${name}"`); return m; };
 const quat = (rot) => new Quaternion().setFromEuler(new Euler(rot[0] * DEG, rot[1] * DEG, rot[2] * DEG));

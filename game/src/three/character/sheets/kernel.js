@@ -37,6 +37,12 @@ export function curve(knots) {
 export const MAT = {
   cloth: [.94, 0, 0], ceramic: [.84, 0, 1], leather: [.62, 0, 2], iron: [.5, .82, 3],
   skin: [.62, 0, 4], hair: [.42, 0, 5], hollow: [1, 0, 6], ember: [.7, 0, 7],
+  // Worked, polished metal (kind 8): clean reflections, fine brushing, tarnish in the recesses, no rust.
+  brass: [.3, 1, 8], gold: [.24, 1, 8], bronze: [.4, 1, 8], steel: [.28, 1, 8], silver: [.22, 1, 8], copper: [.34, 1, 8],
+  wood: [.68, 0, 9], bamboo: [.46, 0, 10],
+  // Glossy coats (kind 11): fired enamel, porcelain glaze, lacquer.
+  enamel: [.2, 0, 11], porcelain: [.24, 0, 11], lacquer: [.16, 0, 11],
+  glass: [.05, 0, 12], ice: [.12, 0, 13], crystal: [.08, 0, 13], nacre: [.2, .15, 14],
 };
 
 const SIDED = /\.([LR])$/;
@@ -106,7 +112,7 @@ export class Bag {
    * A hard-surface shape ({ verts: [{ p, n }], quads }) in its own frame, put on the body by `place` (any smooth
    * map from the shape's frame to bind space: a bone frame, or a wrap around the trunk or a limb).
    */
-  solid(shape, place, skin, color, mat, edge = mat[2] === 1 ? .5 : mat[2] === 3 ? .7 : mat[2] === 2 ? .6 : 1) {
+  solid(shape, place, skin, color, mat, edge = mat[2] === 1 ? .5 : mat[2] === 3 ? .7 : mat[2] === 2 ? .6 : mat[2] === 8 ? .72 : mat[2] === 9 ? .65 : 1) {
     const dark = edge < 1 ? color.clone().multiplyScalar(edge) : color;
     const eps = 1e-3, t1 = new Vector3(), t2 = new Vector3(), w0 = new Vector3(), w1 = new Vector3(), w2 = new Vector3(), q = new Vector3();
     const P = shape.verts.map(({ p, n, e }) => {

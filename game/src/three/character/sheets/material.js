@@ -53,6 +53,58 @@ const DETAIL = /* glsl */`
     roughnessFactor = clamp(roughnessFactor + .12 + strand * .1 - band_ * .08, .45, .85);
   } else if (kind < 6.5) {    // hollow: the dark inside of a vent or buckle
     diffuseColor.rgb *= .25;
+  } else if (kind < 7.5) {    // ember: lit from within (see the emissive pass)
+  } else if (kind < 8.5) {    // polished metal: brass, gold, bronze, steel, silver, copper
+    float brush = csNoise(vCsP * vec3(60., 900., 60.)) * lod, tarnish = smoothstep(.35, .85, macro * .55 + mid * .5);
+    csH = brush * .12 + mid * .12;
+    diffuseColor.rgb *= (.9 + brush * .12) * (1. - tarnish * .42);
+    roughnessFactor = clamp(roughnessFactor + tarnish * .3 + brush * .05, .12, .8);
+  } else if (kind < 9.5) {    // wood: long grain with rings and the odd knot
+    vec3 g = vCsP * vec3(70., 7., 70.); float ringv = fract(length(g.xz + csFbm(vCsP * 9.) * 1.8) * 1.3);
+    float grain = csNoise(vCsP * vec3(700., 30., 700.)) * lod, line = smoothstep(.0, .12, ringv) * smoothstep(.55, .2, ringv);
+    csH = line * .7 + grain * .35;
+    diffuseColor.rgb *= .62 + line * .42 + grain * .1 + macro * .12;
+    roughnessFactor = clamp(roughnessFactor + line * .12, .4, .95);
+  } else if (kind < 10.5) {   // bamboo: smooth culm, a node ring every hand's breadth, fine fibres
+    float node = pow(abs(sin(vCsP.y * 26.)), 40.), fibre = csNoise(vCsP * vec3(800., 20., 800.)) * lod;
+    csH = node * 1.6 + fibre * .15;
+    diffuseColor.rgb *= (.85 + fibre * .1 + macro * .18) * (1. - node * .45);
+    roughnessFactor = clamp(roughnessFactor + node * .3, .3, .9);
+  } else if (kind < 11.5) {   // enamel, porcelain, lacquer: a deep even coat, pooled darker in the hollows
+    float pool = smoothstep(.3, .8, mid * .5 + macro * .5), speck = smoothstep(.82, .95, csNoise(vCsP * 300.)) * lod;
+    csH = mid * .08; diffuseColor.rgb *= (.9 + pool * .16) * (1. - speck * .25);
+    roughnessFactor = clamp(roughnessFactor + speck * .3, .08, .6);
+  } else if (kind < 12.5) {   // glass: dark and clear face-on, bright at the rim (finished in the emissive pass)
+    diffuseColor.rgb *= .22 + mid * .05;
+  } else if (kind < 13.5) {   // ice, crystal: milky veils inside a clear body (facets and glow in the emissive pass)
+    float veil = smoothstep(.1, .8, csFbm(vCsP * 40.) * .5 + .5), crack = pow(1. - abs(csNoise(vCsP * 55.)), 14.);
+    diffuseColor.rgb = diffuseColor.rgb * (.5 + veil * .5) + vec3(crack * .25);
+    csH = crack * 1.2; roughnessFactor = clamp(roughnessFactor + veil * .2, .05, .5);
+  } else {                    // nacre: mother-of-pearl, colour turns with the viewing angle (emissive pass)
+    csH = csNoise(vCsP * 120.) * .2; diffuseColor.rgb *= .8 + macro * .2;
+  }
+`;
+
+// Effects that need the surface normal: inner light, glass rims, crystal facets, nacre's turning colour.
+const OPTICS = /* glsl */`
+  {
+    float k = vSm.z; vec3 viewDir = normalize(vViewPosition);
+    if (k > 6.5 && k < 7.5) totalEmissiveRadiance += vColor.rgb * 2.2;
+    else if (k > 11.5 && k < 12.5) {
+      float rim = pow(1. - abs(dot(normal, viewDir)), 2.2);
+      diffuseColor.rgb = mix(diffuseColor.rgb, vec3(.75, .85, .9), rim * .55);
+      totalEmissiveRadiance += vColor.rgb * (.1 + .5 * pow(1. - rim, 3.) * (.6 + .4 * csNoise(vCsP * 30.)));     // light held inside
+    } else if (k > 12.5 && k < 13.5) {
+      vec3 facet = normalize(cross(dFdx(vViewPosition), dFdy(vViewPosition))); if (dot(facet, normal) < 0.) facet = -facet;
+      normal = normalize(mix(normal, facet, .75));
+      float rim = pow(1. - abs(dot(normal, viewDir)), 2.);
+      diffuseColor.rgb = mix(diffuseColor.rgb, vec3(.92, .97, 1.), rim * .6);
+      totalEmissiveRadiance += vColor.rgb * (.14 + .22 * (1. - rim));
+    } else if (k > 13.5) {
+      float turn = dot(normal, viewDir);
+      vec3 sheenC = .5 + .5 * cos(6.2832 * (turn * 1.4 + csNoise(vCsP * 18.) * .35 + vec3(.0, .33, .67)));
+      diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * (.6 + sheenC * .8), .55);
+    }
   }
 `;
 
@@ -66,8 +118,8 @@ export function costumeMaterial() {
       .replace('#include <common>', `#include <common>\nvarying vec3 vSm;\nvarying vec3 vCsP;\n${NOISE}`)
       .replace('#include <metalnessmap_fragment>', `#include <metalnessmap_fragment>\nfloat csH = 0.;\n{${DETAIL}}`)
       .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * .0011);')
-      .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\nif (vSm.z > 6.5) totalEmissiveRadiance += vColor.rgb * 2.2;');
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>\n${OPTICS}`);
   };
-  material.customProgramCacheKey = () => 'sheet-costume-4';
+  material.customProgramCacheKey = () => 'sheet-costume-5';
   return material;
 }

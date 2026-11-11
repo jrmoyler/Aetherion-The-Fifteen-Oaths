@@ -12,8 +12,8 @@ const PI = Math.PI, DEG = PI / 180, UP = V(0, 1, 0);
 
 /** Surface classes beyond the kernel's: the same shader kinds with other roughness and metalness. */
 const SURFACE = {
-  ...MAT, felt: [.97, 0, 0], webbing: [.86, 0, 0], stone: [.93, 0, 1], glazed: [.56, 0, 1], copper: [.46, .86, 3], brass: [.4, .9, 3], steel: [.38, .9, 3],
-  glass: [.07, .15, 4], ice: [.2, .05, 4], nacre: [.24, .4, 4], linen: [.9, 0, 4], water: [.1, 0, 7], crystal: [.16, 0, 7],
+  ...MAT, felt: [.97, 0, 0], webbing: [.86, 0, 0], stone: [.93, 0, 1], glazed: [.3, 0, 11],
+  linen: [.9, 0, 0], water: [.06, 0, 12],
 };
 const surface = (name) => { const m = SURFACE[name]; if (!m) throw new Error(`unknown surface "${name}"`); return m; };
 

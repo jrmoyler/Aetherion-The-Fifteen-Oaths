@@ -15,8 +15,8 @@ const PI = Math.PI, DEG = PI / 180;
 /** Surface classes beyond the kiln set, as (roughness, metalness, kind) triples the costume shader already knows. */
 const SURFACE = {
   ...MAT,
-  wood: [.72, 0, 2], bark: [.9, 0, 2], bamboo: [.5, 0, 2], brass: [.45, .5, 3], gold: [.4, .55, 3], silver: [.42, .25, 3],
-  meteor: [.55, .05, 3], enamel: [.3, 0, 4], bone: [.55, 0, 4], moss: [1, 0, 0], straw: [.9, 0, 0], glass: [.2, 0, 7], glow: [.5, 0, 7], oilskin: [.6, 0, 0],
+  bark: [.92, 0, 9],
+  meteor: [.55, .05, 3], bone: [.5, 0, 11], moss: [1, 0, 0], straw: [.9, 0, 0], glow: [.5, 0, 7], oilskin: [.6, 0, 0],
 };
 const M = (name) => { const m = SURFACE[name]; if (!m) throw new Error(`unknown surface "${name}"`); return m; };
 const scaleOf = (c) => c.form.J.hips.y / .998;
