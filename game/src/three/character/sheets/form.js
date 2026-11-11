@@ -63,7 +63,8 @@ class Chain {
 
 export function makeForm(rig, build = {}) {
   const J = rig.J, S = J['upperarm.L'].x, k = S / .182;
-  const b = { width: 1, depth: 1, belly: 0, bust: 0, hips: 1, waist: 1, arm: 1, leg: 1, neck: 1, shoulder: 1, ...build };
+  // `thigh`, `calf`, `upperArm` and `forearm` scale one half of a limb on top of `leg` / `arm`; `seat` rounds the back of the hips.
+  const b = { width: 1, depth: 1, belly: 0, bust: 0, hips: 1, waist: 1, arm: 1, leg: 1, neck: 1, shoulder: 1, thigh: 1, calf: 1, upperArm: 1, forearm: 1, seat: 1, ...build };
   const spineZ = curve([[J.hips.y, J.hips.z], [J.spine.y, J.spine.z], [J.spine1.y, J.spine1.z], [J.spine2.y, J.spine2.z], [J.neck.y, J.neck.z]]);
   // Heights of the trunk's landmarks, bottom to top.
   const Y = {
@@ -78,7 +79,10 @@ export function makeForm(rig, build = {}) {
   const frontK = curve([[Y.crotch, .066 * d], [Y.hip, .094 * d], [Y.belt, .096 * d], [Y.waist, .092 * d], [Y.ribs, .108 * d], [Y.chest, .122 * d], [Y.armpit, .108 * d], [Y.shoulder, .074 * d], [Y.base, .058 * k * b.neck], [Y.neck, .054 * k * b.neck]]);
   const backK = curve([[Y.crotch, .076 * d], [Y.hip, .108 * d * b.hips], [Y.belt, .098 * d], [Y.waist, .09 * d], [Y.ribs, .1 * d], [Y.chest, .112 * d], [Y.armpit, .11 * d], [Y.shoulder, .088 * d], [Y.base, .068 * k * b.neck], [Y.neck, .058 * k * b.neck]]);
   const N = 2.5, E = 2 / N;
-  const section = (y) => ({ a: half(y), f: frontK(y) + belly(y) + bust(y), b: backK(y), c: spineZ(y) });
+  // The bust is two forms either side of the sternum, not a band: the section carries a little of it everywhere
+  // (so cloth bridges the gap) and at() adds the rest where the breasts are.
+  const section = (y) => ({ a: half(y), f: frontK(y) + belly(y) + bust(y) * .45, b: backK(y) * (1 + (b.seat - 1) * Math.exp(-(((y - Y.hip) / (.09 * k)) ** 2))), c: spineZ(y) });
+  const lobes = (y, u) => bust(y) * .9 * Math.exp(-(((Math.abs(u) - .5) / .3) ** 2));
 
   const trunk = {
     Y, section, bottom: Y.crotch, top: Y.neck,
@@ -86,6 +90,7 @@ export function makeForm(rig, build = {}) {
     at(y, th, off = 0, out = new Vector3()) {
       const s = section(y), sn = Math.sin(th), cs = Math.cos(th);
       out.set(s.a * pow(sn, E), y, s.c + (cs >= 0 ? s.f : s.b) * pow(cs, E));
+      if (b.bust && cs > 0) out.z += lobes(y, pow(sn, E)) * cs;
       if (off) {
         // Outward normal of the section: the gradient of the superellipse, lifted by the trunk's slope.
         const depth = cs >= 0 ? s.f : s.b, nx = pow((out.x) / s.a, N - 1) / s.a, nz = pow((out.z - s.c) / depth, N - 1) / depth, len = Math.hypot(nx, nz) || 1;
@@ -123,8 +128,8 @@ export function makeForm(rig, build = {}) {
     wrap(y0, th0, off = 0) { return (p) => this.at(y0 + p.y, th0 + p.x / Math.max(.03, this.rho(y0 + p.y, th0)), off + p.z); },
   };
 
-  const armR = curve([[-.25, .05], [0, .058], [.3, .054], [.55, .05], [.85, .043], [1, .041], [1.22, .046], [1.6, .039], [2, .031], [2.2, .03]].map(([t, r]) => [t, r * k * b.arm]));
-  const legR = curve([[-.2, .082], [0, .086], [.3, .08], [.7, .064], [1, .052], [1.2, .049], [1.36, .051], [1.7, .037], [2, .032], [2.2, .032]].map(([t, r]) => [t, r * k * b.leg]));
+  const armR = curve([[-.25, .05], [0, .058], [.3, .054], [.55, .05], [.85, .043], [1, .041], [1.22, .046], [1.6, .039], [2, .031], [2.2, .03]].map(([t, r]) => [t, r * k * b.arm * (t < .9 ? b.upperArm : t > 1.1 ? b.forearm : (b.upperArm + b.forearm) / 2)]));
+  const legR = curve([[-.2, .082], [0, .086], [.3, .08], [.7, .064], [1, .052], [1.2, .049], [1.36, .051], [1.7, .037], [2, .032], [2.2, .032]].map(([t, r]) => [t, r * k * b.leg * (t < .8 ? b.thigh : t > 1.15 && t < 1.8 ? b.calf : 1)]));
   // Muscle: how far the surface of a bare limb swells beyond its tube at (t, phi). Garments ignore it; skin uses it.
   const bump = (t, t0, w) => Math.exp(-(((t - t0) / w) ** 2));
   const armMuscle = (t, phi) => (.012 * bump(t, .1, .2) * Math.max(0, Math.sin(phi)) ** .7                 // deltoid, outside of the shoulder

@@ -380,7 +380,7 @@ export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim 
     return { p: place(p), skin: HEAD };
   }, { color: tone, mat: mm, inside: centre });
   if (under) plate(c.pal(under), m, 24, 158, 1.6, .016, .16, .2, .02);
-  plate(c.pal(crest), SURFACE.nacre, 12, 146, 1.35, .045, .4, .42, .07);
+  if (crest) plate(c.pal(crest), SURFACE.nacre, 12, 146, 1.35, .045, .4, .42, .07);
 }
 
 // ---------------------------------------------------------------------------------------------------------
