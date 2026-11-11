@@ -916,3 +916,68 @@
 .ae-loadout > p:first-of-type { margin:6px 0 12px; }
 .ae-loadout__actions { margin-top:12px; }
 .ae-grimoire__held { margin:0; color:var(--text-2); font-size:13px; max-width:760px; }
+
+/* ---------- Touch, landscape phones (short screens) ----------
+   One owner per region so nothing shares space:
+   top-left unit frame, then the two help chips; top-centre compass with the target frame under it;
+   top-right minimap with the four utility buttons in a 2x2 block beside it; bottom-left joystick with chat in the
+   corner; bottom-centre belt and XP; bottom-right ability cluster. */
+
+/* ---------------------------------------------------------------------------------------------
+   Touch HUD. One rule set owns where every element sits on a phone, so nothing lands on
+   the thumbstick, the action cluster or another panel at 667x375, 844x390, 932x430 or 390x844.
+   --------------------------------------------------------------------------------------------- */
+/* The Chat button in the utility group opens chat; a second pill in the thumb zone is noise. */
+#ui.is-touch .ae-chat:not(.is-active) { display:none; }
+/* The guide keeps what a thumb-driven player needs: the step, the instruction, the destination. */
+#ui.is-touch .ae-guide__body { padding:6px 10px 8px; }
+#ui.is-touch .ae-guide__body > .ae-onboarding__chapter,
+#ui.is-touch .ae-guide__body > .ae-onboarding__timeline,
+#ui.is-touch .ae-guide__body > .ae-guide__progress,
+#ui.is-touch .ae-guide__body > .ae-onboarding__dismiss { display:none; }
+#ui.is-touch .ae-guide__body > p { margin:4px 0; }
+#ui.is-touch .ae-actionbar__covenant { display:none; }
+
+@media (orientation:portrait) {
+  /* Experience becomes a hairline on the bottom edge; the level stays on the unit frame. */
+  #ui.is-touch .ae-actionbar { left:0; right:0; bottom:0; transform:none; padding:0; border:0; background:none; box-shadow:none; }
+  #ui.is-touch .ae-actionbar .ae-xpbar { width:100%; }
+  #ui.is-touch .ae-actionbar .ae-xpbar .ae-bar { height:3px; border:0; border-radius:0; }
+  #ui.is-touch .ae-actionbar .ae-xpbar__lbl { display:none; }
+  /* The dock stops above the highest control on its side of the screen. */
+  #ui.is-touch .ae-help-dock { max-height:calc(100dvh - var(--sat) - var(--sab) - 222px - var(--gut) - 270px); }
+}
+
+@media (orientation:landscape) and (max-height:480px) {
+  #ui.is-touch .ae-minimap { width:124px; }
+  #ui.is-touch .ae-minimap__view { height:84px; }
+  /* Utility buttons: a 2x2 block beside the minimap, each with its caption showing. */
+  #ui.is-touch .ae-touch__top {
+    top:calc(var(--gut) + var(--sat)); right:calc(var(--gut) + var(--sar) + 132px);
+    display:grid; grid-template-columns:repeat(2,44px); gap:16px 6px;
+  }
+  #ui.is-touch .ae-touch__top .ae-iconbtn { width:44px; height:44px; padding:8px; }
+  /* Target frame: the strip between the player frame and the utility block, under the compass. */
+  #ui.is-touch .ae-unit--target {
+    left:calc(var(--gut) + var(--sal) + 246px); right:auto; transform:none; top:calc(var(--gut) + var(--sat) + 34px);
+    width:min(236px, calc(100vw - var(--sal) - var(--sar) - 2 * var(--gut) - 246px - 238px));
+  }
+  #ui.is-touch .ae-buffs { left:calc(var(--gut) + var(--sal) + 246px); top:calc(var(--gut) + var(--sat) + 100px); max-width:236px; }
+  /* Dock: below the player frame, ending above the thumbstick. */
+  #ui.is-touch .ae-help-dock { top:calc(var(--sat) + var(--gut) + 78px); max-height:calc(100dvh - var(--sat) - var(--sab) - var(--gut) - 78px - var(--joy-zone, 160px)); gap:4px; }
+  #ui.is-touch .ae-help-dock .ae-guide__head { min-height:40px; padding-top:6px; padding-bottom:6px; }
+  /* The compass, minimap and tracker already carry the destination; the guide keeps the instruction. */
+  #ui.is-touch .ae-guide__body > .ae-onboarding__destination { display:none; }
+  #ui.is-touch .ae-help-dock .ae-quests, #ui.is-touch .ae-help-dock .ae-guide { padding-top:0; padding-bottom:0; }
+  /* Collapsed, the tracker is its heading alone; the objective line returns when it is opened. */
+  #ui.is-touch .ae-quests.is-collapsed .ae-objective { display:none; }
+  /* One open panel at a time: there is room for a heading pair or one body, not both bodies. */
+  #ui.is-touch .ae-help-dock:has(.ae-guide__body:not([hidden])) > .ae-quests { display:none; }
+  #ui.is-touch .ae-help-dock:has(.ae-quests:not(.is-collapsed)):not(:has(.ae-guide__body:not([hidden]))) > .ae-guide { display:none; }
+  /* Experience: a compact strip in the gap between thumbstick and cluster. */
+  #ui.is-touch .ae-actionbar {
+    left:calc(var(--sal) + 216px); right:calc(var(--sar) + var(--tscale-px, 300px) + 8px); transform:none;
+    bottom:calc(var(--sab) + 4px); padding:4px 8px 3px;
+  }
+  #ui.is-touch .ae-actionbar .ae-xpbar { width:100%; }
+}

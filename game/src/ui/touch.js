@@ -40,7 +40,13 @@ export function createTouch(ui) {
 
   // --- joystick
   let joyId = null, jx = 0, jy = 0;
-  const rest = () => { const r = move.getBoundingClientRect(); return { x: Math.min(140, r.width * 0.4), y: r.height - Math.min(130, r.height * 0.36) }; };
+  // Resting spot for the stick. In portrait the cluster reaches across most of the width, so the stick
+  // sits tight to the left edge and above the cluster's lowest buttons.
+  const rest = () => {
+    const r = move.getBoundingClientRect();
+    if (innerHeight > innerWidth) return { x: Math.min(78, r.width * 0.4), y: r.height - Math.min(196, r.height * 0.58) };
+    return { x: Math.min(140, r.width * 0.4), y: r.height - Math.min(130, r.height * 0.36) };
+  };
   function placeJoy(x, y) { joy.style.left = `${x}px`; joy.style.top = `${y}px`; }
   function setKnob(dx, dy) { knob.style.transform = `translate(${dx}px, ${dy}px)`; }
   move.addEventListener('pointerdown', (e) => {
