@@ -13,7 +13,7 @@ export default {
     { use: 'shirt', sleeve: 1.92, flare: .02, off: .012, slack: .005, cap: .02 },
     { use: 'band', limb: 'arm', at: .34, width: .02, off: .023, thick: .004, color: 'trim', mat: 'cloth' },
     { use: 'band', limb: 'arm', at: .62, width: .02, off: .026, thick: .004, color: 'trim', mat: 'cloth' },
-    { use: 'trousers', gather: 1.78, bag: .05, pleats: 11, pockets: [] },
+    { use: 'trousers', gather: 1.78, bag: .05, pleats: 11, pockets: [], from: .95 },
     { use: 'skirt', hem: .4, flare: 1.22, trim: 'terracotta' },
     { use: 'panel', at: 180, from: .97, to: .5, width: [.15, .19], color: 'cloth', mat: 'cloth', border: 'terracotta', thick: .004, off: .006 },
     { use: 'panel', at: 0, from: 'armpit', to: 'belt', width: [.105, .13], border: 'trim', round: .01 },

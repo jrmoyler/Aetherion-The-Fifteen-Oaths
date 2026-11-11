@@ -100,10 +100,11 @@ export function shirt(c, { color = 'cloth', sleeve = .6, flare = .012, off = .00
  * Trousers: a seat that follows the hips and two legs that balloon and are gathered at `gather` (1 = knee).
  * `bag` is the extra room at the widest point; `pleats` the number of folds running into the gather.
  */
-export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006, pockets = [[28, 80, .0, .3], [152, 110, .04, .2]], pipingPaths = [[22, 84, -.02, .4], [84, 74, .4, .96], [208, 150, .1, .5]] }) {
+export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006, pockets = [[28, 80, .0, .3], [152, 110, .04, .2]], pipingPaths = [[22, 84, -.02, .4], [84, 74, .4, .96], [208, 150, .1, .5]], from = null }) {
   const { trunk, leg } = c.form, col = c.pal(color), yTop = trunk.Y[top] + .02;
   c.bag.part = 'trousers';
-  c.bag.grid(40 * c.q, 12 * c.q, (u, v) => {
+  // `from` starts the legs lower down, for trousers worn under a long coat: no seat and no thigh to push through it.
+  if (from === null) c.bag.grid(40 * c.q, 12 * c.q, (u, v) => {
     const y = lerp(trunk.Y.crotch - .03, yTop, v), th = u * TAU, shut = smooth(trunk.Y.crotch + .03, trunk.Y.crotch - .03, y);
     const p = trunk.at(Math.max(y, trunk.Y.crotch), th, .011); p.y = y; p.x *= 1 - shut * .75; p.z = lerp(p.z, c.form.spineZ(y), shut * .6);
     return { p, skin: trunk.skin(p) };
@@ -122,11 +123,11 @@ export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats
   };
   const light = col.clone().multiplyScalar(1.7), dark = col.clone().multiplyScalar(.3);
   // Sewn lines riding on the leg: [from angle, to angle, from t, to t, colour, width, lift].
-  const lines = [[92, 88, .0, gather - .03, light, .0045, .0016], [-88, -92, .16, gather - .03, light, .004, .0014]];
+  const start = from ?? -.155, lines = [[92, 88, Math.max(0, start), gather - .03, light, .0045, .0016], [-88, -92, Math.max(.16, start), gather - .03, light, .004, .0014]];
   for (const pocket of pockets) lines.push([pocket[0], pocket[1], pocket[2], pocket[3], dark, .011, .0012]);
   if (piping) for (const path of pipingPaths) lines.push([...path, c.pal(piping), .0065, .0026]);
   sides(c, 'both', () => {
-    tube(c, leg, { t0: -.155, t1: gather, nu: 28, nv: 30, radius, color: col });
+    tube(c, leg, { t0: start, t1: gather, nu: 28, nv: 30 * (gather - start) / 1.3, radius, color: col });
     for (const [a0, a1, tA, tB, tone, width, lift] of lines) c.bag.grid(1, 16 * c.q, (u, v) => {
       const t = lerp(tA, tB, v), phi = lerp(a0, a1, smooth(0, 1, v) * .6 + v * .4) * DEG + (u - .5) * width / leg.radius(t);
       return { p: leg.point(t, phi, radius(t, phi) + lift), skin: leg.skin(t) };
@@ -394,7 +395,7 @@ export function skirt(c, { color = 'cloth', top = 'belt', hem = .38, flare = 1.2
   };
   const skin = (p) => {
     if (p.y >= yHip) return trunk.skin(p);
-    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip, J['shin.L'].y + .12, p.y) * .86, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .45, left = smooth(-.06, .06, p.x);
+    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip + .03, yHip - .17, p.y) * .84, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .3, left = smooth(-.14, .14, p.x);
     return [['hips', 1 - drop], ['thigh.L', drop * left * (1 - lower)], ['thigh.R', drop * (1 - left) * (1 - lower)], [`shin.${side}`, drop * lower]];
   };
   const inner = (p) => V(0, p.y, c.form.spineZ(yHip));

@@ -32,7 +32,7 @@ is the Kiln Ninja in the running game (offline, medium quality). The character p
 | `form.js` | The tailor's form: a parametric trunk, arm, leg and foot measured from the wearer's bind-pose joints, with per-recipe build (width, depth, belly, limb girth). Garments are offsets of this form, so they fit by construction and take their skin weights from it. |
 | `kernel.js` | `Bag` (vertex/skin accumulator, grids with smooth normals, mirrored sides, hard-surface solids placed through any smooth map) and bevelled shapes (round box, slab, bar, ring, dome). |
 | `builders.js` | The garment and gear builders: `skinLimb`, `neck`, `shirt`, `trousers` (gathered, pleated, piped), `wrap`, `band`, `capelet` (cloth laid over the shoulders and arms, asymmetric by run length), `cowl`, `chestPlates`, `belt`, `strap` (+ anchor ring), `bracer`, `blockBracer` (real vent slots), `gloveCuff`, `boots` (sole, upper, shaft, toe cap, heel and shin plates, straps), `halfMask` (vented grille), `hair` (spiky, bun), `skirt` (coat), `panel` (apron, tabard), `limbPlate`, `kilnPack`. |
-| `material.js` | One procedural material; a per-vertex (roughness, metalness, kind) triple picks cloth, ceramic, leather, iron, skin, hair, hollow or ember detail in rest space. No textures, constructs in Node. |
+| `material.js` | One procedural material; a per-vertex (roughness, metalness, kind) triple picks the detail in rest space: twill weave, soot and wear on cloth; pits, chips and kiln flashing on ceramic; grain, creases and scuffs on leather; pitting and rust on iron. Plates, bands and straps also carry darkened edges in their vertex colours. No textures, constructs in Node. |
 | `costume.js` | Compiles a recipe into a geometry. |
 | `recipes/` | One data file per hero: palette, build, what to keep of the baked mesh, and a list of builder calls. |
 | `wear.js` | Runtime: measure the rig, hide the baked costume, bind the costume, hook dispose/fade. |
@@ -70,40 +70,44 @@ reference-092..095 are sorcerer line-ups and 096..098 ninja line-ups across elem
 ### oath-01-ninja (reference-090): done
 
 Evidence: `docs/qa/characters/oath-01-ninja.jpg`. Present and placed as on the sheet: soot firecloth shirt with
-short piped sleeves, bare upper arms, asymmetric capelet over the right shoulder with terracotta trim, rolled
-cowl, diagonal strap with square anchor ring at the left shoulder, three stacked ceramic chest plates front and
-back with iron clasps, side straps and riveted harness straps, leather belt with iron buckle and a second thin
-belt, leather vambraces with buckled straps, ceramic block bracer with three vent slots and iron hinge bands
-on the left forearm, glove cuffs, baggy trousers with terracotta piping gathered below the knee into a leather
-band with terracotta trim, ribbed shin wraps, boots with ceramic toe caps, shin and heel plates and straps,
-vented iron half mask with terracotta slats and head strap, short spiky black hair.
+short piped sleeves, a band of bare upper arm, dark bindings from above the elbow under leather vambraces with
+buckled straps, asymmetric capelet over the right shoulder with terracotta trim, rolled hem and drape folds,
+bunched cowl, diagonal strap with square anchor ring at the left shoulder, three stacked ceramic chest plates
+front and back with iron clasps, side straps and riveted harness straps, leather belt with iron buckle and a
+second thin belt, ceramic block bracer with three vent slots and iron hinge bands on the left forearm, glove
+cuffs, trousers with side seams, pocket openings and terracotta piping, pleated into a leather band with
+terracotta trim below the knee, ribbed shin wraps, boots with lugged sole, ceramic toe caps, shin and heel
+plates and buckled straps, vented iron half mask with terracotta slats and head strap, layered spiky black hair.
+Costume volumes are widened at the shoulders, chest, arms and legs toward the sheet's build.
 
 Differs from the sheet:
 - Hands are the baked GLB hands (dark glove texture); the fingerless glove fingers are not rebuilt.
-- Hair is a dense cap of short spikes; the painted hair has longer, looser strands and a parted fringe.
-- Chest plates and boot plates are cleaner and brighter than the painted, soot-worn ceramic; trousers are
-  smoother and fuller at the knee than the painted folds.
 - He holds his baked blade; the sheet shows him unarmed.
-- Body proportions are the rig's (narrower shoulders and a longer A-pose arm angle than the painting).
-- The capelet is a stiff laid cloth, without the painted wrinkles; the back of it follows the front's diagonal
-  (the sheet's own back and side views disagree with its front view about the capelet and strap side).
-- No belt pouches or hanging strap ends; the mask is simpler than the painted one (no nose bridge plate).
+- Joints are the rig's: the neck is shorter and the legs less long than the painting, and the head reads larger.
+- Trousers are fuller and rounder at the knee than the painted, slimmer cut; their folds are regular.
+- Boot toes are rounder and redder than the painted dark boots with small plates.
+- Hair is a cap of short layered spikes; the painted hair is longer on top with a looser parted fringe.
+- The capelet's back follows the front's diagonal (the sheet's own back and side views disagree with its
+  front about the capelet and strap side). No belt pouches or hanging strap ends; no stitching on leather.
 - The face is the existing procedural head, not a likeness of the face panel.
 
 ### oath-01-sorcerer (reference-091): done, with more differences than the ninja
 
 Evidence: `docs/qa/characters/oath-01-sorcerer.jpg`. Present: stocky build, long-sleeved firecloth coat to
 mid-shin with terracotta hem trim, piped sleeve bands, terracotta apron bib and apron skirt with pale trim,
-shoulder straps with iron buckles running over to the pack, wide belt with iron buckle, ceramic forearm guards,
-heavy cuffs, baggy trousers gathered at the ankle, short heavy boots with ceramic toe caps, kiln pack with
-iron binding, a vented door glowing ember orange and the square chimney, grey hair combed back into a bun.
+hip flaps, shoulder straps with iron buckles running over to the pack, wide studded belt with iron buckle,
+ceramic forearm guards, heavy cuffs, baggy trousers gathered at the ankle, short heavy boots with ceramic toe
+caps, kiln pack with iron binding, a vented door glowing ember orange and the square chimney, grey hair combed
+back into a bun.
 
 Differs from the sheet:
 - Hands are the baked hands and she holds her baked focus; gauntlet fingers are not rebuilt.
-- The pack is one firebox with a chimney; the painted pack has a second stepped stage and side latches.
+- The pack is one firebox with a chimney; the painted pack has a second stepped stage and side latches, and
+  its vent door is dark, not glowing.
 - Shoulders are plain sleeves with two piped bands, not the painted layered shoulder pads.
-- The apron is smooth ceramic-leather; the painted one is mottled, with riveted strap ends.
-- Hair is a combed cap, locks and a bun; no loose curls at the temples. The face is the procedural head.
+- The apron is wider and brighter than the painted one, without its riveted strap ends.
+- Hair is a combed cap, locks and a bun; no loose curls at the temples. The face is the procedural head and
+  does not resemble the portrait.
 
 ### All other heroes: not started
 
@@ -112,14 +116,16 @@ other face-gear families would need a few more builders (the existing groom gear
 
 ## Verification
 
-Seen on screen: both heroes in the turnaround stage (idle pose, plus `attack_1` for the ninja and
-`cast_release` for the sorcerer), and the ninja as the player in the running game. Not seen on screen: the
-low tier, the sorcerer in the running game, NPCs wearing these bodies, and the character preview dialog.
-In `cast_release` the sorcerer's raised knee pushed through the coat front; the skirt weights were then moved
-toward the thighs, and that change has only been built and unit-tested, not re-rendered.
+Seen on screen (turnaround stage, through BodyFactory): both heroes idle from four sides, a chest close-up of
+the ninja, the ninja in `attack_1` and running, the sorcerer in `cast_release` and running; and the ninja as
+the player in the running game (before the quality pass). Not seen on screen: the low tier, the sorcerer in
+the running game, NPCs wearing these bodies, the character preview dialog.
+Sorcerer coat: in `cast_release` the raised knee no longer comes through (the skirt follows the thighs). In the
+run the forward thigh's trouser still pushed through the apron, so her trousers now start below the coat
+(`from: .95`); see the final report for whether that last change was re-rendered.
 
 ## Cost
 
-Kiln Ninja: about 32,100 triangles on high, 1 draw call; Kiln Sorcerer: about 26,500. The baked surface
+Kiln Ninja: about 35,000 triangles on high, 1 draw call; Kiln Sorcerer: about 29,000. The baked surface
 (24k) is no longer drawn apart from the hands and weapon, so the net per-hero triangle count is close to before.
 Build time is a few hundred milliseconds once per hero and tier, cached.
