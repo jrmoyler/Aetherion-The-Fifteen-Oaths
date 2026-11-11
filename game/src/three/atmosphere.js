@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { regionAt } from '@shared/oaths.js';
 import { realmAir } from './realmAir.js';
+import { initRealmSky } from './realmSky.js';
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const wrapHour=h=>((h%24)+24)%24;
@@ -13,10 +14,12 @@ export function initAtmosphere(ctx){
   // Preetham radiance is calibrated for ~0.5 exposure; at the game's exposure the whole dome
   // sat above the bloom threshold and bloomed into a full-frame haze. Scale the dome and keep
   // it under the threshold; only the sun disk stays hot enough to bloom.
-  sky.material.uniforms.skyGain={value:.62};
+  sky.material.uniforms.skyGain={value:.5};
   sky.material.fragmentShader=sky.material.fragmentShader.replace('uniform vec3 up;','uniform vec3 up;\nuniform float skyGain;')
     .replace('gl_FragColor = vec4( retColor, 1.0 );','vec3 skyC = retColor * skyGain;\n\t\t\tskyC = mix( min( skyC, vec3( .97 ) ), skyC, sundisk );\n\t\t\tgl_FragColor = vec4( skyC, 1.0 );');
   const u=sky.material.uniforms;u.rayleigh.value=2.1;u.turbidity.value=3.8;u.mieCoefficient.value=.006;u.mieDirectionalG.value=.82;
+  // Biome Triad's volumetric clouds, stars, aurora and precipitation; it also drives the dome's Preetham parameters per realm.
+  const realmSky=initRealmSky(ctx,sky);ctx.render.realmSky=realmSky;
   let hour=16.0,scale=1,daySeconds=2400,time=0,manualWeather=false,lastRegion='',kind='clear',intensity=0,disposed=false;
   const initialHour=Number(ctx.params?.get?.('time')),initialScale=Number(ctx.params?.get?.('timescale'));
   if(ctx.params?.has?.('time')&&Number.isFinite(initialHour))hour=wrapHour(initialHour);
@@ -37,7 +40,9 @@ export function initAtmosphere(ctx){
   function setTimeOfDay(h){if(Number.isFinite(h))hour=wrapHour(h);}
   function setTimeScale(value){if(Number.isFinite(value))scale=clamp(value,0,500);}
   const offs=[];
-  if(bus?.on){offs.push(bus.on('net:snap',snap=>{if(Number.isFinite(snap?.timeOfDay))setTimeOfDay(snap.timeOfDay);}));offs.push(bus.on('net:welcome',welcome=>{if(Number.isFinite(welcome?.world?.timeOfDay))setTimeOfDay(welcome.world.timeOfDay);if(Number.isFinite(welcome?.world?.daySeconds)&&welcome.world.daySeconds>0)daySeconds=welcome.world.daySeconds;}));}
+  // An explicit ?time= pins the clock: the simulation's hour (sent with every snapshot) no longer overrides it.
+  const pinned=ctx.params?.has?.('time')&&Number.isFinite(initialHour);
+  if(bus?.on){offs.push(bus.on('net:snap',snap=>{if(!pinned&&Number.isFinite(snap?.timeOfDay))setTimeOfDay(snap.timeOfDay);}));offs.push(bus.on('net:welcome',welcome=>{if(!pinned&&Number.isFinite(welcome?.world?.timeOfDay))setTimeOfDay(welcome.world.timeOfDay);if(Number.isFinite(welcome?.world?.daySeconds)&&welcome.world.daySeconds>0)daySeconds=welcome.world.daySeconds;}));}
   let weatherClock=0,windClock=0,airDensity=1,airDensityGoal=1,airRegion='';const airTint=new THREE.Color(1,1,1),airGoal=new THREE.Color(1,1,1);
   function update(dt){if(disposed)return;const elapsed=clamp(dt||0,0,.25);time+=elapsed;hour=wrapHour(hour+elapsed*24/daySeconds*scale);
     const angle=(hour-6)/24*Math.PI*2;direction.set(Math.cos(angle)*.75,Math.sin(angle),Math.cos(angle)*.5).normalize();u.sunPosition.value.copy(direction);
@@ -47,13 +52,14 @@ export function initAtmosphere(ctx){
     // Each realm breathes the air of its Biome Triad world; crossing a border eases from one to the next.
     const ease=1-Math.exp(-elapsed/2.5);airTint.lerp(airGoal,ease);airDensity+=(airDensityGoal-airDensity)*ease;
     if(scene.fog){scene.fog.color.copy(nightFog).lerp(dayFog,daylight).lerp(sunsetFog,twilight*daylight*.3).multiply(airTint);scene.fog.density=(.00165+intensity*(kind==='fog'||kind==='mist'?.005:.0014))*airDensity;}
-    u.turbidity.value=3.8+intensity*6;u.mieCoefficient.value=.006+intensity*.008;
+    if(!realmSky){u.turbidity.value=3.8+intensity*6;u.mieCoefficient.value=.006+intensity*.008;}
     const p=ctx.actors?.player?.root?.position||ctx.camera?.position;
-    if(p){points.position.copy(p);sky.position.set(p.x,0,p.z);{const here=regionAt(p.x,p.z);if(here.id!==airRegion){const first=!airRegion;airRegion=here.id;const air=realmAir(here.biome);airGoal.setRGB(air.tint[0],air.tint[1],air.tint[2]);airDensityGoal=air.density;if(first){airTint.copy(airGoal);airDensity=airDensityGoal;}}}weatherClock+=elapsed;if(!manualWeather&&weatherClock>.8){weatherClock=0;const region=regionAt(p.x,p.z);if(region.id!==lastRegion){lastRegion=region.id;const weather={glacial:['snow',.65],marsh:['mist',.4],volcanic:['ash',.35],alpine:['snow',.2]}[region.biome]||['clear',0];applyWeather(...weather);}}}
+    if(p){points.position.copy(p);sky.position.set(p.x,0,p.z);{const here=regionAt(p.x,p.z);if(here.id!==airRegion){const first=!airRegion;airRegion=here.id;const air=realmAir(here.biome);airGoal.setRGB(air.tint[0],air.tint[1],air.tint[2]);airDensityGoal=air.density;if(first){airTint.copy(airGoal);airDensity=airDensityGoal;}}}weatherClock+=elapsed;if(!manualWeather&&weatherClock>.8){weatherClock=0;const region=regionAt(p.x,p.z);if(region.id!==lastRegion){lastRegion=region.id;const weather={glacial:['snow',.65],marsh:['mist',.4],volcanic:['ash',.35],alpine:['snow',.2]}[region.biome]||['clear',0];applyWeather(...weather);}}
+      if(realmSky){points.visible=false;realmSky.update(elapsed,direction,{kind,intensity},regionAt(p.x,p.z).biome);}}
     const gust=Math.sin(time*.27)*.5+Math.sin(time*.79)*.2;precipitation.uniforms.time.value=time;precipitation.uniforms.gust.value=gust;
     if(ctx.world?.wind)ctx.world.wind.gust=gust;windClock+=elapsed;if(windClock>=1){windClock=0;bus?.emit('world:wind',{gust,speed:2.5+gust+intensity*3,direction:{x:.8,z:.6}});}
   }
   const stop=ctx.addUpdate?.(update,45);update(0);
   const wx=ctx.params?.get?.('weather');if(wx){const[k,a]=wx.split(',');setWeather(k,a==null?1:Number(a));}
-  return {sky,sunOffset,get timeOfDay(){return hour;},get timeScale(){return scale;},get weather(){return{kind,intensity};},setTimeOfDay,setTimeScale,setWeather,update,dispose(){disposed=true;stop?.();offs.forEach(off=>off?.());scene.remove(sky,points);sky.geometry.dispose();sky.material.dispose();geo.dispose();precipitation.dispose();}};
+  return {sky,realmSky,sunOffset,get timeOfDay(){return hour;},get timeScale(){return scale;},get weather(){return{kind,intensity};},setTimeOfDay,setTimeScale,setWeather,update,dispose(){disposed=true;stop?.();offs.forEach(off=>off?.());realmSky?.dispose();scene.remove(sky,points);sky.geometry.dispose();sky.material.dispose();geo.dispose();precipitation.dispose();}};
 }
