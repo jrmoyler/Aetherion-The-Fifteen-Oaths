@@ -74,10 +74,10 @@ reference-092..095 are sorcerer line-ups and 096..098 ninja line-ups across elem
 | Oath | Title on sheet | Ninja turnaround | Sorcerer turnaround | Oath overview | Ninja status | Sorcerer status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 01 | FIRE - Kiln Oath | reference-090 | reference-091 | reference-113 | **done** (see below) | **done** (see below) |
-| 02 | FROST - Rime Archive | reference-089 | reference-088 | reference-112 | not started | not started |
-| 03 | LIGHTNING - Storm Relay | reference-085 | reference-087 | reference-111 | not started | not started |
-| 04 | WATER - Tidal Covenant | reference-084 | reference-086 | reference-110 | not started | not started |
-| 05 | EARTH & CRYSTAL - Fault Choir | reference-082 | reference-083 | reference-109 | not started | not started |
+| 02 | FROST - Rime Archive | reference-089 | reference-088 | reference-112 | **partial** (see below) | **partial** (see below) |
+| 03 | LIGHTNING - Storm Relay | reference-085 | reference-087 | reference-111 | **partial** (see below) | **partial** (see below) |
+| 04 | WATER - Tidal Covenant | reference-084 | reference-086 | reference-110 | **partial** (see below) | **partial** (see below) |
+| 05 | EARTH & CRYSTAL - Fault Choir | reference-082 | reference-083 | reference-109 | **partial** (see below) | **partial** (see below) |
 | 06 | WIND & SOUND - Reed Resonance | reference-081 | reference-080 | reference-108 | not started | not started |
 | 07 | NATURE - Graft Sanctuary | reference-079 | reference-078 | reference-107 | not started | not started |
 | 08 | POISON - Bitterglass Guild | reference-077 | reference-076 | reference-106 | not started | not started |
@@ -133,6 +133,61 @@ Differs from the sheet:
 - The apron is wider and brighter than the painted one, without its riveted strap ends.
 - Hair is a combed cap, locks and a bun; no loose curls at the temples. The face is the procedural head and
   does not resemble the portrait.
+
+### Oaths 02 to 05 (group A): all eight built, all partial
+
+Recipes `recipes/oath-02..05-{ninja,sorcerer}.js`; their extra builders are in `builders-a.js` (`a/kit` rigid gear
+from primitive shapes on any anchor, `a/bodysuit` fitted cloth with colour zones, `a/lines` piping, quilting and
+flat straps, `a/plates` bordered slabs on trunk, coat or limb, `a/collar`, `a/hood`, `a/hoodDown`, `a/fringe`,
+`a/beard`, `a/helm`, `a/yoke` collar plate and disc collar). Evidence, one side-by-side per hero from the
+turnaround stage: `docs/qa/characters/oath-0N-<discipline>.jpg`. Each was seen on screen idle from four sides on
+the high tier only. Not seen: any of them in the running game, in motion, or on the low and medium tiers (those
+tiers are unit-tested to build). They are NOT in `recipes/index.js` yet (see the group's report for the lines).
+
+Common to all eight: the body is slimmer and less sculpted than the paintings (no muscle or bust modelling, bare
+arms are plain tubes), skin tone is the head profile's and is paler than several sheets, surfaces use the existing
+shader kinds (ice, nacre and glass are opaque gloss, not translucent; quilting is stitched lines, not padded),
+hands are the rigid code hands, faces are the procedural head.
+
+- **oath-02-ninja (089)**: hood up with pale lined rim, fringe, high collar, short-sleeved felt jacket, quilted
+  pale vest front and back, webbing braces with buckles and back strap, belt, quilted hip panels, arm warmers,
+  rime bracer plates on strap mounts, piped trousers, thigh straps and holster, knee pads, heavy pale-soled boots.
+  Differs: sleeves are boxy at the shoulder, hood is smaller and less draped, hip panels do not sweep to the
+  back, boots are not split-toed, no trouser pockets.
+- **oath-02-sorcerer (088)**: floor-length piped robe open over a white under-robe, winged ice-lined collar,
+  quilted back yoke, white sleeves, leather bracers with rime-edged elbow fins, double belt, folio rack of rime
+  pages on the right hip, long beard and moustache. Differs: the groom pass still adds its own short beard and
+  white hair at the back of the head (the sheet is bald; needs a `beard: false` switch in groom.js, which this
+  group may not edit); shoulder caps are barely visible; too much white shows down the front; robe has no
+  lighter slate panels.
+- **oath-03-ninja (085)**: sleeveless navy top with high neck and copper piping, bandolier, spine relay mount with
+  cable loop and ceramic coupler, belt, hip slings, crossed knee straps, right bracer in a copper frame with
+  coupler and two antenna rods, left wrist wrap, boots with ceramic cuff plate, spiky hair with topknot.
+  Differs: arms are unmuscled tubes, antennae are thinner, trousers lack the looser thigh cut, hair is shorter.
+- **oath-03-sorcerer (087)**: heavy build, navy cape with copper hem, riveted copper collar plate, four curved
+  antennae with ceramic balls, ceramic forearm guards banded in copper, webbing belt with pouches and copper
+  clasp, cargo trousers with copper-trimmed pockets, ceramic boots with copper bands and ankle boss, top bun.
+  Differs: cape hangs closer and less stiffly, collar plate is narrower, boots are shorter and less armoured,
+  trousers end higher.
+- **oath-04-ninja (084)**: blue diving suit with sea-green panels and brass piping, sealed helmet with dark visor,
+  brass frame and nacre crest, four-tier shell pauldron on the right shoulder with strap, brass arm bands, nacre
+  vambraces, glass reservoir in a brass frame on the back, thin belt, calf fins, brass-capped boots.
+  Differs: the least close of the eight. Helmet crest is one swept plate rather than layered shells, suit has no
+  body contouring, green panels are simple blocks, no hip straps or knee detailing.
+- **oath-04-sorcerer (086)**: navy robe to mid-shin with brass hem, wide sleeves over green wraps and nacre
+  cuffs, shell-disc collar in brass rims, hood down, belt with three glass reservoirs, brass-edged tabards front
+  and back, nacre hip tassets, green trousers, brass-capped boots, white hair. Differs: robe reads brighter blue,
+  reservoirs are opaque, discs are fewer and smaller at the back, the groom pass adds its own beard.
+- **oath-05-ninja (082)**: stone collar, half mask, short-sleeved tunic, four sandstone-framed shale breast plates,
+  back plates with sandstone spine blocks, shoulder slings and side straps, belt with pouches, amethyst cluster
+  in a hexagonal sandstone frame on the left hip, forearm slabs on straps, baggy knee trousers, shin wraps, plated
+  boots with greaves. Differs: plates are flat rectangles without fracture relief, trousers balloon more, collar
+  is narrower and taller, shoulders narrower.
+- **oath-05-sorcerer (083)**: sleeveless tunic with sandstone side panels and mandarin collar, braces with buckles,
+  belt, three shale apron plates in front and one behind, layered leather hip flaps, stone bracers, plated boots
+  with amethyst inlay, carrying frame behind the head with boulder and amethyst veins, low bun. Differs: arms and
+  legs are slimmer and unmuscled, frame and boulder are smaller, shorts barely show under the skirt, hair has no
+  loose curls.
 
 ### All other heroes: not started
 
