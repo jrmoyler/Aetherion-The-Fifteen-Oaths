@@ -15,7 +15,7 @@ sheet recipe. If it does:
 1. The groom pass still builds the procedural head, eyes and brows, but leaves hair and face gear to the recipe.
 2. The baked costume is hidden. Every skinned mesh the GLB brought (the fused body surface and any appended
    `reconstructed-*` costume primitives) has its index filtered once; only what the recipe keeps stays. Both
-   Kiln recipes keep `hands`: the hands and whatever is rigidly held in them (the baked weapon). So there are
+   Kiln recipes keep `weapon`: only what the hand bones carry outside the hand's own volume (the baked weapon); the hands themselves are rebuilt in code. So there are
    never two costumes on top of each other.
 3. The recipe is compiled into ONE skinned mesh (one draw call) bound to the body's own skeleton with the
    body's bind matrix, so all 23 authored clips drive it. Geometry is cached per hero and quality tier and
@@ -105,7 +105,8 @@ plates and buckled straps, vented iron half mask with terracotta slats and head 
 Costume volumes are widened at the shoulders, chest, arms and legs toward the sheet's build.
 
 Differs from the sheet:
-- Hands are the baked GLB hands (dark glove texture); the fingerless glove fingers are not rebuilt.
+- Hands are code-built and rigid (the rig has one bone per hand): fingerless gloves, open left hand, closed
+  right fist around the baked blade. Fingers do not animate.
 - He holds his baked blade; the sheet shows him unarmed.
 - Joints are the rig's: the neck is shorter and the legs less long than the painting, and the head reads larger.
 - Trousers are fuller and rounder at the knee than the painted, slimmer cut; their folds are regular.
@@ -125,7 +126,7 @@ caps, kiln pack with iron binding, a vented door glowing ember orange and the sq
 back into a bun.
 
 Differs from the sheet:
-- Hands are the baked hands and she holds her baked focus; gauntlet fingers are not rebuilt.
+- Hands are code-built gloves, rigid; she holds her baked focus.
 - The pack is one firebox with a chimney; the painted pack has a second stepped stage and side latches, and
   its vent door is dark, not glowing.
 - Shoulders are plain sleeves with two piped bands, not the painted layered shoulder pads.
@@ -140,14 +141,16 @@ other face-gear families would need a few more builders (the existing groom gear
 
 ## Verification
 
-Seen on screen (turnaround stage, through BodyFactory): both heroes idle from four sides, a chest close-up of
-the ninja, the ninja in `attack_1` and running, the sorcerer in `cast_release` and running; and the ninja as
-the player in the running game (before the quality pass). Not seen on screen: the low tier, the sorcerer in
-the running game, NPCs wearing these bodies, the character preview dialog.
-Sorcerer coat: in `cast_release` the raised knee no longer comes through (the skirt follows the thighs). In the
-run the forward thigh's trouser pushed through the apron, so her trousers now start below the coat; re-rendered
-with `from: .95` the thigh is clean and only a small notch showed at the apron's lower edge over the forward
-knee. The start was then lowered to `from: 1.06`; that last value is built and unit-tested but not re-rendered.
+Seen on screen after the lean build, new hair and code hands: both heroes idle from four sides in the
+turnaround stage (through BodyFactory) and a close-up of the ninja's chest, arm and hand; the ninja as the
+player in the running game, standing, moving forward and in an attack (`in-game-kiln-ninja.jpg`; camera behind
+him, legs hidden by the HUD). Seen before that pass and not re-rendered since: ninja `attack_1` and run,
+sorcerer `cast_release` and run in the turnaround stage. Not seen on screen: the low tier, the sorcerer in the
+running game, NPCs wearing these bodies, the character preview dialog, and the hair styles `long` and `braid`
+(built and unit-tested only).
+Sorcerer coat: in `cast_release` the raised knee no longer comes through. In the run her trousers now start
+below the coat (`from: 1.06`); rendered with `.95` the thigh was clean with a small notch at the apron's lower
+edge, and the `1.06` value has not been re-rendered in a run.
 
 ## Cost
 
