@@ -436,7 +436,7 @@ function makeKits() {
     sea: once(() => { const kit = R.seaRockKit(); far(kit.lMat); return kit; }),
     arctic: once(() => R.arcticIceKit()),
     volcano: once(() => R.volcanoRockKit()),
-    canyon: once(() => { const kit = R.canyonKit(); return { ...kit, rockMat: new THREE.MeshStandardMaterial({ vertexColors: true, map: BT.tex.ground, roughness: .95 }) }; }),
+    canyon: once(() => { const kit = R.canyonKit(); return { ...kit, rockMat: new THREE.MeshStandardMaterial({ vertexColors: true, color: '#e2c4b0', map: BT.tex.ground, roughness: .95 }) }; }),   // eased toward Aetherion's paler canyon ground
     alpine: once(() => ({ ...R.alpineKit({ T: { xa: 0, xb: 0 } }), iceM: BT.iceMaterial(.32), ice: [BT.icebergGeo(91, 3), BT.icebergGeo(92, 3, true)], serac: [BT.seracGeo(93), BT.seracGeo(94), BT.seracGeo(95)], cairn: BT.alpineCairnGeo(3), cabin: BT.cabinGeo() })),
     marsh: once(() => R.marshKit({ HUT: { x: 0, y: 0, z: 0 } })),
     forest: once(() => R.forestLogKit()),
