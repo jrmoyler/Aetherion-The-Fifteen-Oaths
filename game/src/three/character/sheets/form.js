@@ -73,9 +73,10 @@ export function makeForm(rig, build = {}) {
   const belly = (y) => b.belly * Math.exp(-(((y - (J.spine.y + .02)) / (.13 * k)) ** 2));
   const bust = (y) => b.bust * Math.exp(-(((y - (J.spine2.y - .01)) / (.07 * k)) ** 2));
   const w = b.width * k, d = b.depth * k;
-  const half = curve([[Y.crotch, .12 * w * b.hips], [Y.hip, .178 * w * b.hips], [Y.belt, .166 * w * b.waist], [Y.waist, .15 * w * b.waist], [Y.ribs, .17 * w], [Y.chest, .187 * w], [Y.armpit, Math.max(.185 * w, S * .99)], [Y.shoulder, S * .86 * b.shoulder], [Y.base, .078 * k * b.neck], [Y.neck, .058 * k * b.neck]]);
-  const frontK = curve([[Y.crotch, .07 * d], [Y.hip, .1 * d], [Y.belt, .105 * d], [Y.waist, .1 * d], [Y.ribs, .114 * d], [Y.chest, .126 * d], [Y.armpit, .112 * d], [Y.shoulder, .078 * d], [Y.base, .062 * k * b.neck], [Y.neck, .056 * k * b.neck]]);
-  const backK = curve([[Y.crotch, .08 * d], [Y.hip, .118 * d * b.hips], [Y.belt, .108 * d], [Y.waist, .096 * d], [Y.ribs, .104 * d], [Y.chest, .116 * d], [Y.armpit, .114 * d], [Y.shoulder, .092 * d], [Y.base, .074 * k * b.neck], [Y.neck, .062 * k * b.neck]]);
+  // Lean, athletic default: wide chest, narrow waist and hips. A recipe's `build` scales from here.
+  const half = curve([[Y.crotch, .108 * w * b.hips], [Y.hip, .162 * w * b.hips], [Y.belt, .148 * w * b.waist], [Y.waist, .136 * w * b.waist], [Y.ribs, .162 * w], [Y.chest, .186 * w], [Y.armpit, Math.max(.184 * w, S * .99)], [Y.shoulder, S * .86 * b.shoulder], [Y.base, .07 * k * b.neck], [Y.neck, .055 * k * b.neck]]);
+  const frontK = curve([[Y.crotch, .066 * d], [Y.hip, .094 * d], [Y.belt, .096 * d], [Y.waist, .092 * d], [Y.ribs, .108 * d], [Y.chest, .122 * d], [Y.armpit, .108 * d], [Y.shoulder, .074 * d], [Y.base, .058 * k * b.neck], [Y.neck, .054 * k * b.neck]]);
+  const backK = curve([[Y.crotch, .076 * d], [Y.hip, .108 * d * b.hips], [Y.belt, .098 * d], [Y.waist, .09 * d], [Y.ribs, .1 * d], [Y.chest, .112 * d], [Y.armpit, .11 * d], [Y.shoulder, .088 * d], [Y.base, .068 * k * b.neck], [Y.neck, .058 * k * b.neck]]);
   const N = 2.5, E = 2 / N;
   const section = (y) => ({ a: half(y), f: frontK(y) + belly(y) + bust(y), b: backK(y), c: spineZ(y) });
 
@@ -123,7 +124,7 @@ export function makeForm(rig, build = {}) {
   };
 
   const armR = curve([[-.25, .05], [0, .058], [.3, .054], [.55, .05], [.85, .043], [1, .041], [1.22, .046], [1.6, .039], [2, .031], [2.2, .03]].map(([t, r]) => [t, r * k * b.arm]));
-  const legR = curve([[-.2, .09], [0, .094], [.3, .088], [.7, .07], [1, .058], [1.2, .056], [1.36, .058], [1.7, .045], [2, .04], [2.2, .04]].map(([t, r]) => [t, r * k * b.leg]));
+  const legR = curve([[-.2, .082], [0, .086], [.3, .08], [.7, .064], [1, .053], [1.2, .051], [1.36, .054], [1.7, .041], [2, .036], [2.2, .036]].map(([t, r]) => [t, r * k * b.leg]));
   const arm = new Chain([J['upperarm.L'], J['forearm.L'], J['hand.L']], ['upperarm.L', 'forearm.L'], armR, { bone: 'shoulder.L', from: -.06, to: .05, weight: .5 });
   const leg = new Chain([J['thigh.L'], J['shin.L'], J['foot.L']], ['thigh.L', 'shin.L'], legR, { bone: 'hips', from: -.03, to: .12, weight: .55 });
 
