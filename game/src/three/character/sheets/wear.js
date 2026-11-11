@@ -19,7 +19,9 @@ export function sheetRecipe(desc) { return desc && desc.kind !== 'mob' && desc.o
 export function rigOf(body) {
   const mesh = body.meshes.filter((m) => m.isSkinnedMesh).sort((a, b) => b.geometry.attributes.position.count - a.geometry.attributes.position.count)[0];
   if (!mesh) return null;
-  const J = {}, index = {}, toGeometry = new Matrix4().copy(mesh.bindMatrixInverse), bind = new Matrix4();
+  // The mesh's bind matrix, not bindMatrixInverse: an attached SkinnedMesh rewrites the latter from its current
+  // world matrix every frame, so it only equals the bind inverse while the actor stands at the origin.
+  const J = {}, index = {}, toGeometry = new Matrix4().copy(mesh.bindMatrix).invert(), bind = new Matrix4();
   mesh.skeleton.bones.forEach((bone, i) => { const name = boneName(bone.name); index[name] = i; J[name] = new Vector3().setFromMatrixPosition(bind.copy(mesh.skeleton.boneInverses[i]).invert().premultiply(toGeometry)); });
   const need = ['hips', 'spine', 'spine1', 'spine2', 'neck', 'head', 'shoulder.L', 'upperarm.L', 'forearm.L', 'hand.L', 'thigh.L', 'shin.L', 'foot.L', 'toe.L'];
   return need.every((name) => J[name]) ? { mesh, J, index } : null;
