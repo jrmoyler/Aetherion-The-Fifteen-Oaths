@@ -3,8 +3,8 @@
 export default {
   id: 'oath-01-ninja', sheet: 'reference-090', title: 'Kiln Ninja',
   palette: {
-    cloth: '#22201e', cowl: '#272422', mantle: '#2c2927', terracotta: '#8f452b', piping: '#8a3622',
-    leather: '#4b3526', leatherDark: '#2b211b', iron: '#3f3b38', ceramic: '#94482b', boot: '#221c19', sole: '#151211',
+    cloth: '#2b2826', cowl: '#302d2b', mantle: '#363230', terracotta: '#7c3a26', piping: '#7e3320',
+    leather: '#4b3526', leatherDark: '#2b211b', iron: '#3f3b38', ceramic: '#7f3d27', bootPlate: '#693222', boot: '#241e1b', sole: '#151211',
     glove: '#191615', skin: '#b98a62', hair: '#15110f',
   },
   build: { arm: 1.06, width: 1.02 },
@@ -16,7 +16,7 @@ export default {
     { use: 'trousers', gather: 1.14, bag: .04, piping: 'piping' },
     { use: 'band', limb: 'leg', at: 1.165, width: .046, color: 'leather', trim: 'terracotta' },
     { use: 'wrap', limb: 'leg', from: 1.2, to: 1.6 },
-    { use: 'boots', top: 1.56, toeCap: 'ceramic', shinPlate: 'ceramic', heelPlate: 'ceramic', cuff: 'ceramic', straps: 3 },
+    { use: 'boots', top: 1.56, toeCap: 'bootPlate', shinPlate: 'bootPlate', heelPlate: 'bootPlate', straps: 3 },
     { use: 'chestPlates', count: 3 },
     { use: 'belt', color: 'leather' },
     { use: 'belt', rise: -.04, height: .02, thick: .005, color: 'leatherDark', buckle: null, keepers: [], tilt: -.012 },

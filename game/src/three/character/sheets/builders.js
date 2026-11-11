@@ -377,7 +377,7 @@ export function skirt(c, { color = 'cloth', top = 'belt', hem = .38, flare = 1.2
   };
   const skin = (p) => {
     if (p.y >= yHip) return trunk.skin(p);
-    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip, J['shin.L'].y, p.y) * .6, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .45, left = smooth(-.06, .06, p.x);
+    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip, J['shin.L'].y + .12, p.y) * .86, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .45, left = smooth(-.06, .06, p.x);
     return [['hips', 1 - drop], ['thigh.L', drop * left * (1 - lower)], ['thigh.R', drop * (1 - left) * (1 - lower)], [`shin.${side}`, drop * lower]];
   };
   const inner = (p) => V(0, p.y, c.form.spineZ(yHip));

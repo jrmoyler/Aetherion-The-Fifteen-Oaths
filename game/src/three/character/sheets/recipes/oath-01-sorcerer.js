@@ -3,7 +3,7 @@
 export default {
   id: 'oath-01-sorcerer', sheet: 'reference-091', title: 'Kiln Sorcerer',
   palette: {
-    cloth: '#1f1d1c', collar: '#252321', terracotta: '#8f4a2e', trim: '#b07a58', ceramic: '#94482b', leather: '#3a2b22', leatherDark: '#241c18',
+    cloth: '#292624', collar: '#2f2c2a', terracotta: '#7c3c27', trim: '#a37253', ceramic: '#7f3d27', bootPlate: '#693222', leather: '#3a2b22', leatherDark: '#241c18',
     iron: '#3b3734', boot: '#221c19', sole: '#141110', glove: '#1a1716', hair: '#4b4845', hairGrey: '#9b9792', tie: '#7a4a30', ember: '#ff7a2a', skin: '#b98a62',
   },
   build: { width: 1.3, depth: 1.42, belly: .045, bust: .02, hips: 1.12, waist: 1.14, arm: 1.3, leg: 1.22, neck: 1.1 },
@@ -25,9 +25,9 @@ export default {
       { th: -28, y: 'chest', dy: .0, off: .03 }, { th: -34, y: 'armpit', dy: .02, off: .026 }, { th: -62, y: 'shoulder', dy: .0, off: .022 }, { th: -118, y: 'shoulder', dy: .0, off: .022 }, { th: -150, y: 'armpit', dy: 0, off: .026 }, { th: -158, y: 'ribs', off: .03 } ] },
     { use: 'cowl', color: 'collar', rolls: 1, radius: .024 },
     { use: 'kilnPack' },
-    { use: 'limbPlate', limb: 'arm', at: 1.48, length: .17, arc: .075, color: 'ceramic', border: 'trim', off: .032 },
+    { use: 'limbPlate', limb: 'arm', at: 1.48, length: .17, arc: .075, color: 'ceramic', border: 'trim', off: .046 },
     { use: 'gloveCuff', from: 1.84, to: 2.05, off: .02, strap: 'leather' },
-    { use: 'boots', top: 1.8, toeCap: 'ceramic', heelPlate: 'ceramic', cuff: 'ceramic', straps: 2, bulk: 1.15 },
+    { use: 'boots', top: 1.8, toeCap: 'bootPlate', heelPlate: 'bootPlate', cuff: 'bootPlate', straps: 2, bulk: 1.15 },
     { use: 'hair', style: 'bun', streak: 'hairGrey', locks: 110, length: .3, bun: { at: [0, .43, -.2], radius: .16, tie: 'tie' } },
   ],
 };

@@ -1,9 +1,7 @@
 // Inspection and gameplay share the exact same skinned model and animation mixer.
 import { WebGLRenderer, Scene, PerspectiveCamera, Color, HemisphereLight, DirectionalLight, Group, ACESFilmicToneMapping } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { loadModel, createModelBody } from '../three/models.js';
-import { equipArmor } from '../three/actor-armor.js';
-import { attachWeapon } from '../three/actor-weapons.js';
+import { loadModel, BodyFactory } from '../three/models.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { h, prefersReducedMotion } from './dom.js';
 export function inspectCharacter({ oath, cls }) {
@@ -34,7 +32,7 @@ export function inspectCharacter({ oath, cls }) {
     button('Attack', () => { animate = true; body?.animator.playAnim(cls === 'sorcerer' ? 'cast_release' : 'attack_1'); }); button('Freeze pose', () => { animate = false; });
     observer = new ResizeObserver(() => { const width = canvas.clientWidth || 320, height = canvas.clientHeight || 400; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }); observer.observe(canvas);
     let last = performance.now(); const loop = now => { if (disposed) return; const dt = Math.min((now - last) / 1000, .05); last = now; if (!document.hidden) { if (animate) body?.animator.update(dt); controls.update(); renderer.render(scene, camera); } frame = requestAnimationFrame(loop); }; frame = requestAnimationFrame(loop);
-    loadModel(`./assets/characters/${oath}-${cls}.glb`).then(gltf => { if (disposed) return; body = createModelBody(gltf, anchor); equipArmor(body, { oath, cls, kind: 'player' }); attachWeapon(body, { oath, cls, kind: 'player' }); controls.target.y = body.height * .52; status.textContent = 'Playable rigged character · drag to orbit, pinch or scroll to zoom.'; }).catch(() => { if (!disposed) status.textContent = 'Character model could not load. Close and retry when connected.'; });
+    loadModel(`./assets/characters/${oath}-${cls}.glb`).then(gltf => { if (disposed) return; body = new BodyFactory({ quality: { name: 'high' } }).createGltf(gltf, { oath, cls, kind: 'player' }, anchor); controls.target.y = body.height * .52; status.textContent = 'Playable rigged character · drag to orbit, pinch or scroll to zoom.'; }).catch(() => { if (!disposed) status.textContent = 'Character model could not load. Close and retry when connected.'; });
   } catch (error) { status.textContent = '3D inspection is unavailable on this device. Close to continue.'; console.warn('[preview]', error); }
   return { close: () => dialog.close() };
 }
