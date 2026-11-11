@@ -40,7 +40,9 @@ export function initAtmosphere(ctx){
   function setTimeOfDay(h){if(Number.isFinite(h))hour=wrapHour(h);}
   function setTimeScale(value){if(Number.isFinite(value))scale=clamp(value,0,500);}
   const offs=[];
-  if(bus?.on){offs.push(bus.on('net:snap',snap=>{if(Number.isFinite(snap?.timeOfDay))setTimeOfDay(snap.timeOfDay);}));offs.push(bus.on('net:welcome',welcome=>{if(Number.isFinite(welcome?.world?.timeOfDay))setTimeOfDay(welcome.world.timeOfDay);if(Number.isFinite(welcome?.world?.daySeconds)&&welcome.world.daySeconds>0)daySeconds=welcome.world.daySeconds;}));}
+  // An explicit ?time= pins the clock: the simulation's hour (sent with every snapshot) no longer overrides it.
+  const pinned=ctx.params?.has?.('time')&&Number.isFinite(initialHour);
+  if(bus?.on){offs.push(bus.on('net:snap',snap=>{if(!pinned&&Number.isFinite(snap?.timeOfDay))setTimeOfDay(snap.timeOfDay);}));offs.push(bus.on('net:welcome',welcome=>{if(!pinned&&Number.isFinite(welcome?.world?.timeOfDay))setTimeOfDay(welcome.world.timeOfDay);if(Number.isFinite(welcome?.world?.daySeconds)&&welcome.world.daySeconds>0)daySeconds=welcome.world.daySeconds;}));}
   let weatherClock=0,windClock=0,airDensity=1,airDensityGoal=1,airRegion='';const airTint=new THREE.Color(1,1,1),airGoal=new THREE.Color(1,1,1);
   function update(dt){if(disposed)return;const elapsed=clamp(dt||0,0,.25);time+=elapsed;hour=wrapHour(hour+elapsed*24/daySeconds*scale);
     const angle=(hour-6)/24*Math.PI*2;direction.set(Math.cos(angle)*.75,Math.sin(angle),Math.cos(angle)*.5).normalize();u.sunPosition.value.copy(direction);

@@ -47,7 +47,7 @@ export function weatherInputs(kind, intensity, settings) {
 const CLOUD_KEYS = ['cover', 'base', 'top', 'cirrus', 'dark'], SKY_KEYS = ['turbidity', 'rayleigh', 'mie', 'mieG'];
 // Radiance ceiling for the cloud layer. The scene bloom starts at 1.05 and the sky dome is held at .97;
 // sunlit cloud tops reach 4 and more, which would haze the whole frame.
-const CLOUD_GAIN = .5, CLOUD_CEILING = .98;
+const CLOUD_GAIN = .8, CLOUD_CEILING = .98, FLAKE_SCALE = 2.4;
 
 /**
  * @param ctx   game context (scene, camera, quality, render.sun, render.hemi)
@@ -113,6 +113,8 @@ export function initRealmSky(ctx, sky) {
     hemi.intensity *= 1 + S.flash * 4;   // lightning lifts the game's sky light too, for a fifth of a second
 
     B.moon.position.copy(S.pos).addScaledVector(B.moonDir, 8000 * reach);
+    // The source frames its flakes from a first-person eye; Aetherion's camera rides some metres behind the hero, so they are drawn larger.
+    if (B.flakes.visible) B.flakes.material.size *= FLAKE_SCALE;
     if (B.flakes.visible && flakeShare < 1) B.flakes.geometry.setDrawRange(0, Math.round(B.flakes.geometry.drawRange.count * flakeShare));
     if (aurora) {
       // Arctic world: aurora at night, washed out by weather (index.html, arctic build(): smoothstep(0.2, 0.9, night) * (1 - rain) * 0.75).
