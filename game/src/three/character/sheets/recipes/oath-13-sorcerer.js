@@ -6,8 +6,8 @@ const pearl = (at, r = .007) => [{ s: 'cyl', d: [r * 1.5, .0025, r * 1.5, 8], ro
 // Folded lacquer wings: one triangular plate rising from the collar bone to a point beyond the shoulder, front
 // and back, sharing an edge along the top of the shoulder.
 const wing = { use: 'c:kit', name: 'wing', side: 'both', on: { bone: 'spine2', at: [0, 0, 0] }, parts: [
-  { s: 'prism', pts: [[.03, .15], [.3, .27], [.085, -.02]], d: [.006, .012], rot: [8, 24, 0], at: [0, 0, .112], c: 'mauve', m: 'lacquer', e: .8 },
-  { s: 'prism', pts: [[-.03, .15], [-.3, .27], [-.02, -.11]], d: [.006, .012], rot: [-6, 156, 0], at: [0, 0, -.135], c: 'mauveDark', m: 'lacquer', e: .8 },
+  { s: 'prism', pts: [[.03, .15], [.265, .245], [.085, -.01]], d: [.006, .012], rot: [8, 24, 0], at: [0, 0, .112], c: 'mauve', m: 'lacquer', e: .8 },
+  { s: 'prism', pts: [[-.03, .15], [-.265, .245], [-.02, -.08]], d: [.006, .012], rot: [-6, 156, 0], at: [0, 0, -.135], c: 'mauveDark', m: 'lacquer', e: .8 },
 ] };
 const cuff = { use: 'c:kit', name: 'cuff', side: 'both', on: { limb: 'arm', t: 1.56, phi: 90, off: .012, skin: 'forearm.L' }, parts: [
   { s: 'rbox', d: [.036, .06, .007, .004], at: [0, 0, .006], c: 'mauve', m: 'lacquer' }, { s: 'rbox', d: [.03, .04, .007, .004], at: [0, .03, .015], c: 'aubergineLight', m: 'lacquer' },
@@ -19,7 +19,7 @@ const cuff = { use: 'c:kit', name: 'cuff', side: 'both', on: { limb: 'arm', t: 1
 export default {
   id: 'oath-13-sorcerer', sheet: 'reference-066', title: 'Folded Theatre Sorcerer',
   palette: {
-    cloth: '#3a1f2c', aubergine: '#3a1f2c', aubergineLight: '#4d2a3d', aubergineDark: '#2a1620', plum: '#4b2146', mauve: '#b497a6', mauveDark: '#9a7f8e', silver: '#b6ad9c', silverDark: '#7d7566', pearl: '#ece6da',
+    cloth: '#3a1f2c', aubergine: '#3a1f2c', aubergineLight: '#4d2a3d', aubergineDark: '#2a1620', plum: '#4b2146', mauve: '#93798a', mauveDark: '#7b6373', silver: '#b6ad9c', silverDark: '#7d7566', pearl: '#ece6da',
     gold: '#a98e62', leather: '#2c1c22', leatherDark: '#22161b', iron: '#b6ad9c', boot: '#2a1a1f', sole: '#1c1215', glove: '#3b2030', hair: '#17151a', hairSheen: '#2c2932',
   },
   build: { width: .97, depth: .98, bust: .018, waist: .96, hips: 1.06, arm: .9, leg: 1.0, neck: .9 },

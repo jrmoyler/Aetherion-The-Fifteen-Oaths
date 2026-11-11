@@ -32,8 +32,8 @@ export default {
     { use: 'hands', glove: 'glove', fingerless: true },
     // Asymmetric tunic skirt: short over the left hip, a long pointed fall with a grey under-layer on the right.
     { use: 'c:drape', from: 20, to: 160, hem: .79, color: 'cloth', flare: 1.04, clear: .01 },
-    { use: 'c:drape', from: -200, to: 20, off: .016, hem: [[-200, .76], [-160, .44], [-112, .5], [-56, .31], [-8, .58], [20, .76]], color: 'grey', flare: 1.08, clear: .008 },
-    { use: 'c:drape', from: -200, to: 20, off: .023, hem: [[-200, .79], [-160, .5], [-112, .56], [-56, .38], [-8, .64], [20, .79]], color: 'cloth', flare: 1.08, clear: .013, trim: 'greyDark', trimWidth: .007, edges: false },
+    { use: 'c:drape', from: -200, to: 20, off: .016, hem: [[-200, .76], [-160, .44], [-112, .5], [-56, .31], [-8, .58], [20, .76]], color: 'grey', flare: 1.26, clear: .02, kick: .03 },
+    { use: 'c:drape', from: -200, to: 20, off: .023, hem: [[-200, .79], [-160, .5], [-112, .56], [-56, .38], [-8, .64], [20, .79]], color: 'cloth', flare: 1.26, clear: .026, kick: .03, trim: 'greyDark', trimWidth: .007, edges: false },
     { use: 'belt', rise: .03, height: .03, color: 'leather', buckle: 'iron', at: 24, keepers: [60, -40, 150], buckleSize: [.022, .02] },
     { use: 'belt', rise: -.012, height: .03, color: 'leatherDark', buckle: 'iron', at: 180, keepers: [-60, 40, -150], buckleSize: [.022, .02], tilt: -.006 },
     { use: 'cowl', color: 'scarf', rolls: 3, radius: .022, rise: .026 },
@@ -49,7 +49,7 @@ export default {
     { use: 'boots', top: 1.74, straps: 2, strapColor: 'leather', soleHeight: .03 },
     // Half mask: black cloth with the bone-white panel over the right cheek.
     { use: 'c:headShell', top: [[-104, -.01], [-45, -.085], [0, -.07], [45, -.085], [104, -.01]], off: .024, color: 'cloth' },
-    { use: 'c:headShell', phi: [-104, 5], top: [[-104, -.01], [-45, -.085], [0, -.07], [5, -.07]], bottom: [[-104, -.44], [-60, -.4], [5, -.12]], off: .032, color: 'bone', n: [16, 8] },
+    { use: 'c:headShell', phi: [-104, 5], top: [[-104, -.01], [-45, -.085], [0, -.07], [5, -.07]], bottom: [[-104, -.46], [-60, -.44], [-20, -.3], [5, -.14]], off: .032, color: 'bone', n: [16, 8] },
     // High ponytail tied in pale cloth, with loose locks left at the temples.
     { use: 'hair', style: 'long', streak: 'hairSheen', length: .9, fringe: .33, knot: { at: [0, .38, -.43] }, tail: { length: 1.6, width: .15, tie: 'tie' } },
     { use: 'c:strands', width: .075, list: [[38, .31, .46, .05, .03], [-38, .31, .46, .05, -.03], [62, .2, .4, .03, 0], [-62, .2, .4, .03, 0], [16, .345, .2, .05, .05], [-18, .345, .22, .05, -.05]] },

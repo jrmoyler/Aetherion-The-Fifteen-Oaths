@@ -41,7 +41,7 @@ const harness = (s) => ({ use: 'strap', color: 'leather', closed: false, width: 
 export default {
   id: 'oath-14-sorcerer', sheet: 'reference-064', title: 'Escapement Sorcerer',
   palette: {
-    cloth: '#28444e', teal: '#28444e', tealDark: '#1c333b', ivory: '#d8cfba', ivoryShade: '#b9b09b', brass: '#b28c46', brassDark: '#7c6130', glass: '#2c2b28', charcoal: '#2c2927',
+    cloth: '#28444e', teal: '#28444e', tealDark: '#1c333b', ivory: '#d8cfba', ivoryShade: '#b9b09b', brass: '#96773a', brassDark: '#6a5329', glass: '#2c2b28', charcoal: '#2c2927',
     leather: '#3b2d24', leatherDark: '#27201c', iron: '#b28c46', boot: '#2a2421', sole: '#70562a', glove: '#221f1e', hair: '#1c1817', hairWarm: '#34292a', tie: '#1c1817',
   },
   build: { width: .98, depth: 1.0, bust: .018, waist: .98, hips: 1.08, arm: .94, leg: 1.02, neck: .92 },
@@ -61,8 +61,8 @@ export default {
     { use: 'trousers', color: 'charcoal', gather: 1.62, bag: .018, pleats: 7, pockets: [], cuff: .008 },
     { use: 'band', limb: 'leg', at: 1.16, width: .026, off: .014, thick: .005, color: 'leather', trim: null, buckle: { phi: 60, color: 'brass' } },
     // Coat skirt: ivory enamel-cloth under-layer hanging long at the back, teal over it cut to a point at the front.
-    { use: 'c:drape', from: -150, to: 210, hem: [[-150, .6], [-90, .66], [-30, .58], [20, .7], [90, .64], [150, .56], [180, .4], [210, .56]], color: 'ivory', off: .02, flare: 1.14, clear: .03, fold: .02, trim: 'brass', trimMat: 'brass', trimWidth: .004 },
-    { use: 'c:drape', from: -160, to: 200, hem: [[-160, .72], [-100, .78], [-40, .7], [14, .56], [50, .78], [110, .76], [160, .6], [200, .72]], color: 'teal', off: .028, flare: 1.14, clear: .036, fold: .016, trim: 'brass', trimMat: 'brass', trimWidth: .005 },
+    { use: 'c:drape', from: -150, to: 210, hem: [[-150, .6], [-90, .66], [-30, .58], [20, .7], [90, .64], [150, .56], [180, .4], [210, .56]], color: 'ivory', off: .02, flare: 1.3, clear: .03, fold: .03, kick: .03, trim: 'brass', trimMat: 'brass', trimWidth: .004 },
+    { use: 'c:drape', from: -160, to: 200, hem: [[-160, .72], [-100, .78], [-40, .7], [14, .56], [50, .78], [110, .76], [160, .6], [200, .72]], color: 'teal', off: .028, flare: 1.3, clear: .036, fold: .024, kick: .03, trim: 'brass', trimMat: 'brass', trimWidth: .005 },
     { use: 'belt', height: .04, thick: .008, off: .034, color: 'leather', buckle: 'brass', keepers: [40, -40, 150, -150], buckleSize: [.024, .022] },
     { use: 'belt', rise: -.03, height: .014, thick: .004, off: .04, color: 'leatherDark', buckle: null, keepers: [], tilt: .018 },
     // Glass and brass instrument case on the left hip.
@@ -78,7 +78,7 @@ export default {
     pendulum,
     { use: 'boots', top: 1.56, straps: 3, strapColor: 'leather', buckle: 'brass', toeCap: 'brassDark', heelPlate: 'brassDark', plateMat: 'iron', soleHeight: .04 },
     // Hair twisted up into a loose knot on the crown, strands left free at the temples and nape.
-    { use: 'hair', style: 'bun', streak: 'hairWarm', fringe: .34, knot: { at: [0, .5, -.16], radius: .125, tie: 'tie' } },
-    { use: 'c:strands', width: .05, list: [[48, .26, .4, .04, .02], [-48, .26, .44, .04, -.02], [150, -.05, .2, .02, 0], [-150, -.05, .22, .02, 0], [78, .12, .3, .02, 0], [-78, .12, .32, .02, 0]] },
+    { use: 'hair', style: 'bun', streak: 'hairWarm', fringe: .34, knot: { at: [0, .6, -.1], radius: .15, tie: 'tie' } },
+    { use: 'c:strands', width: .05, list: [[150, -.05, .2, .02, 0], [-150, -.05, .22, .02, 0], [78, .12, .3, .02, 0], [-78, .12, .32, .02, 0]] },
   ],
 };

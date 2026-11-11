@@ -34,7 +34,7 @@ const vest = (s) => [[s * 12, 'base', -.01], [s * 78, 'shoulder', -.012], [s * 8
 export default {
   id: 'oath-14-ninja', sheet: 'reference-065', title: 'Escapement Ninja',
   palette: {
-    cloth: '#2a2b2c', graphite: '#2a2b2c', graphiteLight: '#3a3b3c', teal: '#244652', tealDark: '#1a343e', brass: '#b08a44', brassDark: '#7a5f2f', amber: '#ff8a12',
+    cloth: '#2a2b2c', graphite: '#2a2b2c', graphiteLight: '#3a3b3c', teal: '#244652', tealDark: '#1a343e', brass: '#9a7a3c', brassDark: '#6c552a', amber: '#ff8a12',
     leather: '#3a2f27', leatherDark: '#262220', iron: '#b08a44', boot: '#252323', sole: '#6f5527', glove: '#232222', hair: '#161312', visor: '#2a2725',
   },
   build: { width: 1.1, depth: 1.06, waist: 1.06, arm: 1.2, leg: 1.1, neck: 1.06, shoulder: 1.06 },
