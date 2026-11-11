@@ -35,19 +35,26 @@ const KEEP = {
   },
 };
 
-/** Drop every baked triangle the recipe does not keep. The geometry is shared by all actors of this hero. */
-function hideBaked(rig, recipe) {
-  const geometry = rig.mesh.geometry; if (masked.has(geometry)) return; masked.add(geometry);
-  const { position, skinIndex, skinWeight } = geometry.attributes, names = rig.mesh.skeleton.bones.map((bone) => boneName(bone.name));
-  const keep = new Uint8Array(position.count), point = new Vector3(), rules = (recipe.keep ?? []).map((name) => KEEP[name]).filter(Boolean);
-  for (let i = 0; i < position.count; i++) {
-    let owner = 0, best = -1;
-    for (let k = 0; k < 4; k++) { const w = skinWeight.getComponent(i, k); if (w > best) { best = w; owner = skinIndex.getComponent(i, k); } }
-    for (const rule of rules) if (rule({ owner: names[owner], point: point.fromBufferAttribute(position, i), J: rig.J })) { keep[i] = 1; break; }
+/**
+ * Drop every baked triangle the recipe does not keep, in every skinned mesh the GLB brought (the main surface and
+ * any costume primitives appended to it). The geometries are shared by all actors of this hero, so this runs once.
+ */
+function hideBaked(body, rig, recipe) {
+  const rules = (recipe.keep ?? []).map((name) => KEEP[name]).filter(Boolean), point = new Vector3();
+  for (const mesh of body.meshes) {
+    if (!mesh.isSkinnedMesh || mesh.userData.groomHidden || mesh.userData.sheetCostume) continue;
+    const geometry = mesh.geometry; if (masked.has(geometry) || !geometry.index) continue; masked.add(geometry);
+    const { position, skinIndex, skinWeight } = geometry.attributes, names = mesh.skeleton.bones.map((bone) => boneName(bone.name));
+    const keep = new Uint8Array(position.count);
+    for (let i = 0; i < position.count; i++) {
+      let owner = 0, best = -1;
+      for (let k = 0; k < 4; k++) { const w = skinWeight.getComponent(i, k); if (w > best) { best = w; owner = skinIndex.getComponent(i, k); } }
+      for (const rule of rules) if (rule({ owner: names[owner], point: point.fromBufferAttribute(position, i), J: rig.J })) { keep[i] = 1; break; }
+    }
+    const source = geometry.index.array, kept = [];
+    for (let i = 0; i < source.length; i += 3) if (keep[source[i]] && keep[source[i + 1]] && keep[source[i + 2]]) kept.push(source[i], source[i + 1], source[i + 2]);
+    geometry.setIndex(new BufferAttribute(new (position.count > 65535 ? Uint32Array : Uint16Array)(kept), 1));
   }
-  const source = geometry.index.array, kept = [];
-  for (let i = 0; i < source.length; i += 3) if (keep[source[i]] && keep[source[i + 1]] && keep[source[i + 2]]) kept.push(source[i], source[i + 1], source[i + 2]);
-  geometry.setIndex(new BufferAttribute(new (position.count > 65535 ? Uint32Array : Uint16Array)(kept), 1));
 }
 
 /** Dress a body from its sheet recipe. Returns a handle, or null when the hero has no recipe or no usable rig. */
@@ -58,8 +65,8 @@ export function wearSheet(body, desc, quality = 'high') {
   const key = `${recipe.id}|${quality}|${(rig.H ?? 0).toFixed(3)}|${rig.J.head.y.toFixed(3)}`;
   if (!built.has(key)) built.set(key, buildCostume(recipe, rig, quality));
   const costume = built.get(key);
-  hideBaked(rig, recipe);
-  const mesh = new SkinnedMesh(costume.geometry, costumeMaterial());
+  hideBaked(body, rig, recipe);
+  const mesh = new SkinnedMesh(costume.geometry, costumeMaterial()); mesh.userData.sheetCostume = true;
   mesh.name = `sheet-costume-${recipe.id}`; mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false;
   mesh.position.copy(rig.mesh.position); mesh.quaternion.copy(rig.mesh.quaternion); mesh.scale.copy(rig.mesh.scale);
   rig.mesh.parent.add(mesh); mesh.bind(rig.mesh.skeleton, rig.mesh.bindMatrix);

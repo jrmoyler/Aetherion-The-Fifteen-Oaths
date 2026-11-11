@@ -352,6 +352,114 @@ export function strap(c, { path, width = .034, thick = .006, color = 'leather', 
   }
 }
 
+
+// ---------------------------------------------------------------------------------------------------------
+// Coats, aprons and packs
+
+/**
+ * Skirt of a coat or robe: continues the trunk below the hips and flares to the hem. `hem` is the height of the
+ * bottom edge as a fraction from the ground (0) to the hip line (1); `flare` widens the hem. Later parts can lay
+ * panels on it through c.coat.at(y, th, off).
+ */
+export function skirt(c, { color = 'cloth', top = 'belt', hem = .38, flare = 1.28, off = .02, folds = 9, trim = null, trimWidth = .016, split = null }) {
+  const { trunk, J, leg } = c.form, col = c.pal(color), yTop = trunk.Y[top], yHip = trunk.Y.hip, yHem = lerp(0, yHip, hem);
+  c.bag.part = 'skirt';
+  const seed = c.rand() * TAU;
+  // Wide enough at every height to clear the legs and whatever they wear.
+  const legReach = (y) => { const t = clamp((J['thigh.L'].y - y) / leg.seg[0].length, 0, 1.4); return leg.centre(t).x + leg.radius(t) + .05; };
+  const at = (y, th, extra = 0, out = new Vector3()) => {
+    if (y >= yHip) return trunk.at(y, th, off + extra, out);
+    const f = (yHip - y) / (yHip - yHem), grow = 1 + (flare - 1) * f ** .8, p = trunk.at(yHip, th, off + extra, out), zc = c.form.spineZ(yHip);
+    const need = legReach(y) / Math.max(.01, trunk.section(yHip).a + off), wide = Math.max(grow, lerp(1, need, smooth(0, .25, f)));
+    const fold = 1 + .035 * f * Math.sin(th * folds + seed + Math.sin(f * 4) * .5);
+    p.x *= wide * fold; p.z = zc + (p.z - zc) * grow * fold; p.y = y;
+    return p;
+  };
+  const skin = (p) => {
+    if (p.y >= yHip) return trunk.skin(p);
+    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip, J['shin.L'].y, p.y) * .6, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .45, left = smooth(-.06, .06, p.x);
+    return [['hips', 1 - drop], ['thigh.L', drop * left * (1 - lower)], ['thigh.R', drop * (1 - left) * (1 - lower)], [`shin.${side}`, drop * lower]];
+  };
+  const inner = (p) => V(0, p.y, c.form.spineZ(yHip));
+  c.bag.grid(44 * c.q, 22 * c.q, (u, v) => { const p = at(lerp(yHem, yTop, v), u * TAU); return { p, skin: skin(p) }; }, { closeU: true, color: col, mat: MAT.cloth, inside: inner });
+  c.bag.grid(44 * c.q, 1, (u, v) => { const p = at(yHem + v * .015, u * TAU, -v * .012); return { p, skin: skin(p) }; }, { closeU: true, color: col.clone().multiplyScalar(.5), mat: MAT.cloth, inside: inner, flip: true });
+  if (trim) c.bag.grid(44 * c.q, 3, (u, v) => { const [dy, h] = [[0, 0], [.001, 1], [trimWidth, 1], [trimWidth + .001, 0]][Math.round(v * 3)], p = at(yHem + .012 + dy, u * TAU, .003 * h); return { p, skin: skin(p) }; }, { closeU: true, color: c.pal(trim), mat: MAT.cloth, inside: inner });
+  c.coat = { at, skin, yHem, yTop, off };
+}
+
+/**
+ * A flat panel worn on the front or back of the trunk and coat: an apron bib, an apron skirt, a tabard.
+ * `from`/`to` are heights (trunk landmark, or a fraction 0..1 from the ground to the hip line when below the
+ * hips); `width` is the half-width in metres at the top and bottom; `border` adds a raised trim around it.
+ */
+export function panel(c, { color = 'ceramic', mat = 'ceramic', at = 0, from, to, width = [.12, .16], off = .012, thick = .006, border = null, borderWidth = .014, round = .04 }) {
+  const { trunk } = c.form, col = c.pal(color), centre = at * DEG;
+  c.bag.part = 'panel';
+  const height = (h) => (typeof h === 'string' ? trunk.Y[h] : lerp(0, trunk.Y.hip, h));
+  const y1 = height(from), y0 = height(to), surface = (y, th, extra) => (c.coat ? c.coat.at(y, th, extra - (y >= trunk.Y.hip ? 0 : 0)) : trunk.at(y, th, extra));
+  const skin = (p) => (c.coat ? c.coat.skin(p) : trunk.skin(p));
+  const rho = (y) => trunk.rho(Math.max(y, trunk.Y.hip), centre);
+  const point = (a, b, lift) => {
+    // a: -1..1 across, b: 0 (top) .. 1 (bottom). Bottom corners are rounded off.
+    const y = lerp(y1, y0, b), w = lerp(width[0], width[1], b), corner = Math.max(0, Math.abs(a) * w - (w - round)) / round, drop = round * (1 - Math.sqrt(Math.max(0, 1 - corner * corner)));
+    const yy = b > .5 ? Math.max(y, y0 + drop * smooth(.5, 1, b) * (b >= 1 ? 1 : (b - .5) * 2)) : y;
+    return surface(yy, centre + a * w / rho(yy), lift);
+  };
+  const nx = Math.round(12 * c.q), ny = Math.round(Math.max(4, (y1 - y0) * 60 * c.q));
+  const lift = off;
+  c.bag.grid(nx, ny, (u, v) => { const p = point(u * 2 - 1, v, lift + thick); return { p, skin: skin(p) }; }, { color: col, mat: MAT[mat], inside: (p) => V(0, p.y, c.form.spineZ(trunk.Y.hip)) });
+  // Edge wall, so the panel has thickness.
+  const rim = (k, a, b) => point(a, b, lift + thick * (1 - k) - k * .004);
+  const edges = [[(s) => [-1, s]], [(s) => [1, s]], [(s) => [s * 2 - 1, 0]], [(s) => [s * 2 - 1, 1]]];
+  for (const [edge] of edges) c.bag.grid(Math.max(nx, ny), 1, (u, v) => { const [a, b] = edge(u), p = rim(v, a, b); return { p, skin: skin(p) }; }, { color: col.clone().multiplyScalar(.6), mat: MAT[mat], inside: (p) => V(0, p.y, c.form.spineZ(trunk.Y.hip)) });
+  if (border) {
+    const bw = borderWidth, strips = [[(s, k) => [-1 + k * bw / width[1], s]], [(s, k) => [1 - k * bw / width[1], s]], [(s, k) => [(s * 2 - 1), k * bw / (y1 - y0)]], [(s, k) => [(s * 2 - 1), 1 - k * bw / (y1 - y0)]]];
+    for (const [strip] of strips) c.bag.grid(Math.max(nx, ny), 3, (u, v) => {
+      const k = [0, .08, .92, 1][Math.round(v * 3)], h = [0, 1, 1, 0][Math.round(v * 3)], [a, b] = strip(u, k), p = point(a, clamp(b, 0, 1), lift + thick + .0005 + .003 * h);
+      return { p, skin: skin(p) };
+    }, { color: c.pal(border), mat: MAT[mat], inside: (p) => V(0, p.y, c.form.spineZ(trunk.Y.hip)) });
+  }
+}
+
+/** Curved plate strapped to the outside of a limb (forearm guard, shin guard). */
+export function limbPlate(c, { limb = 'arm', side = 'both', at = 1.5, phi = 90, length = .15, arc = .055, off = .014, thick = .008, color = 'ceramic', mat = 'ceramic', straps = 2, strapColor = 'leatherDark', border = null }) {
+  const chain = limbOf(c, limb);
+  c.bag.part = 'limbPlate';
+  sides(c, side, () => {
+    for (let i = 0; i < straps; i++) limbBand(c, chain, { t: chain.step(at, (i / Math.max(1, straps - 1) - .5) * length * .62), width: .018, off: off - .011, thick: .004, color: c.pal(strapColor), mat: MAT.leather });
+    c.bag.solid(slabY(arc, length / 2, thick / 2, .0035, 5 * c.q), chain.wrap(at, phi * DEG, off + thick / 2), (p) => chain.skin(at), c.pal(color), MAT[mat]);
+    if (border) for (const sy of [-1, 1]) c.bag.solid(moved(slab(arc + .001, .005, thick / 2 + .0015, .002, 4), V(0, sy * (length / 2 - .005), 0)), chain.wrap(at, phi * DEG, off + thick / 2), (p) => chain.skin(at), c.pal(border), MAT[mat]);
+  });
+}
+
+/**
+ * Kiln pack carried on the back: an iron-bound firebox with a vented door, and a square chimney rising behind
+ * the head. Everything rides the upper spine as one rigid piece.
+ */
+export function kilnPack(c, { color = 'ceramic', iron = 'iron', ember = 'ember', width = .14, height = .15, depth = .095, at = 'ribs', rise = .02, chimney = .33, flue = .052, shift = 0, off = .004 }) {
+  const { trunk } = c.form, y = trunk.Y[at] + rise, back = trunk.at(y, PI, off), skin = [['spine2', 1]], col = c.pal(color), fe = c.pal(iron);
+  c.bag.part = 'pack';
+  const place = frame(V(shift, y, back.z - depth), V(-1, 0, 0), V(0, 1, 0), V(0, 0, -1));
+  c.bag.solid(roundBox(width, height, depth, .008), place, skin, col, MAT.ceramic);
+  // Iron binding on the edges of the box.
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) c.bag.solid(moved(box(.011, height + .004, .011), V(sx * (width - .006), 0, sz * (depth - .006))), place, skin, fe, MAT.iron);
+  for (const sy of [-1, 1]) { for (const sz of [-1, 1]) c.bag.solid(moved(box(width + .004, .011, .011), V(0, sy * (height - .006), sz * (depth - .006))), place, skin, fe, MAT.iron); for (const sx of [-1, 1]) c.bag.solid(moved(box(.011, .011, depth + .004), V(sx * (width - .006), sy * (height - .006), 0)), place, skin, fe, MAT.iron); }
+  // Vent door on the back: a plate with three slots glowing from the fire behind, hinges on one side.
+  const dw = width * .55, dh = height * .58;
+  c.bag.solid(moved(roundBox(dw, dh, .008, .004), V(0, -height * .08, depth + .006)), place, skin, fe, MAT.iron);
+  c.bag.solid(moved(box(dw * .7, dh * .62, .002), V(0, -height * .08, depth + .0146)), place, skin, c.pal(ember), MAT.ember);
+  for (let i = 0; i < 4; i++) c.bag.solid(moved(roundBox(dw * .11, dh * .7, .006, .003), V(lerp(-dw * .7, dw * .7, i / 3), -height * .08, depth + .018)), place, skin, fe, MAT.iron);
+  for (const sy of [-1, 1]) c.bag.solid(moved(box(dw * .86, dh * .07, .006), V(0, -height * .08 + sy * dh * .66, depth + .018)), place, skin, fe, MAT.iron);
+  for (const sy of [-.5, .5]) c.bag.solid(moved(box(.014, .02, .008), V(-dw - .012, -height * .08 + sy * dh, depth + .008)), place, skin, fe, MAT.iron);
+  c.bag.solid(moved(box(.01, .014, .01), V(dw + .008, -height * .08, depth + .01)), place, skin, fe, MAT.iron);
+  // Stepped collar and chimney.
+  c.bag.solid(moved(roundBox(flue * 1.5, .03, flue * 1.35, .006), V(0, height + .026, -.004)), place, skin, col, MAT.ceramic);
+  c.bag.solid(moved(roundBox(flue, chimney / 2, flue, .006), V(0, height + .05 + chimney / 2, -.004)), place, skin, col, MAT.ceramic);
+  for (const f of [.12, .82]) c.bag.solid(moved(roundBox(flue + .005, .012, flue + .005, .003), V(0, height + .05 + chimney * f, -.004)), place, skin, fe, MAT.iron);
+  c.bag.solid(moved(roundBox(flue * 1.22, .022, flue * 1.22, .006), V(0, height + .05 + chimney, -.004)), place, skin, col, MAT.ceramic);
+  c.bag.solid(moved(box(flue * .82, .002, flue * .82), V(0, height + .0735 + chimney, -.004)), place, skin, c.pal('hollow'), MAT.hollow);
+}
+
 // ---------------------------------------------------------------------------------------------------------
 // Arms
 
@@ -531,7 +639,7 @@ export function hair(c, { style = 'spiky', color = 'hair', locks = 120, length =
     const root = scalp(c, phi, y, lift * .5), normal = root.clone().normalize(), a = Math.atan2(Math.sin(phi), Math.cos(phi)), frontness = Math.cos(a), crown = smooth(.2, .47, y);
     let flow, len = length * (.75 + c.rand() * .6), base = .042 + c.rand() * .02;
     if (style === 'bun') {
-      const knot = V(...(bun?.at ?? [0, .4, -.3])); flow = knot.clone().sub(root).normalize().multiplyScalar(1.6).addScaledVector(normal, .35); len = Math.min(root.distanceTo(knot) * .9, length * 1.6) * (.7 + c.rand() * .4); base = .06 + c.rand() * .03;
+      const knot = V(...(bun?.at ?? [0, .4, -.3])); flow = knot.clone().sub(root).normalize().multiplyScalar(1.6).addScaledVector(normal, .35); len = Math.min(root.distanceTo(knot) * .95, length * 2.2) * (.8 + c.rand() * .2); base = .075 + c.rand() * .03;
     } else {
       // Tousled: the crown stands up and leans forward, the fringe falls over the brow, sides and nape lie down.
       const fall = V(Math.sin(a) * .5, -1, Math.cos(a) * .25).multiplyScalar(1 - crown * .9);
@@ -541,11 +649,11 @@ export function hair(c, { style = 'spiky', color = 'hair', locks = 120, length =
     }
     flow.normalize();
     const side = new Vector3().crossVectors(flow, normal).normalize(); if (side.lengthSq() < .5) side.set(1, 0, 0);
-    const droop = style === 'bun' ? V(0, 0, 0) : V(0, -.35 - c.rand() * .3, 0), tone = (c.rand() < .5 ? col : other).clone().multiplyScalar(.75 + c.rand() * .6), twist = c.rand() * TAU;
+    const droop = style === 'bun' ? V(0, 0, 0) : V(0, -.35 - c.rand() * .3, 0), tone = (c.rand() < (style === 'bun' ? .38 : .5) ? other : col).clone().multiplyScalar(style === 'bun' ? .88 + c.rand() * .24 : .75 + c.rand() * .6), twist = c.rand() * TAU;
     c.bag.grid(4, 3, (u, v) => {
-      const s = v, centre = root.clone().addScaledVector(flow, len * s).addScaledVector(droop, len * s * s * .5).addScaledVector(normal, len * .25 * Math.sin(s * PI) * (style === 'bun' ? .4 : 1));
-      const r = base * (1 - s) ** .7 * (s === 0 ? 1.15 : 1), ang = u * TAU + twist, up = new Vector3().crossVectors(side, flow);
-      return { p: place(centre.addScaledVector(side, Math.cos(ang) * r * 1.25).addScaledVector(up, Math.sin(ang) * r * .7)), skin: HEAD };
+      const s = v, centre = root.clone().addScaledVector(flow, len * s).addScaledVector(droop, len * s * s * .5).addScaledVector(normal, len * .25 * Math.sin(s * PI) * (style === 'bun' ? .16 : 1));
+      const r = base * (style === 'bun' ? 1 - s * .45 : (1 - s) ** .7) * (s === 0 ? 1.15 : 1), ang = u * TAU + twist, up = new Vector3().crossVectors(side, flow);
+      return { p: place(centre.addScaledVector(side, Math.cos(ang) * r * (style === 'bun' ? 1.6 : 1.25)).addScaledVector(up, Math.sin(ang) * r * (style === 'bun' ? .32 : .7))), skin: HEAD };
     }, { closeU: true, color: tone, mat: MAT.hair, inside: place(root.clone().addScaledVector(flow, len * .4)) });
   }
   if (style === 'bun') {
@@ -553,10 +661,10 @@ export function hair(c, { style = 'spiky', color = 'hair', locks = 120, length =
     c.bag.grid(16 * c.q, 10 * c.q, (u, v) => {
       const a = u * TAU, b = (v - .5) * PI, twistK = 1 + .08 * Math.sin(a * 6 + b * 5);
       return { p: place(at.clone().add(V(Math.cos(b) * Math.cos(a) * r * twistK, Math.sin(b) * r * .82, Math.cos(b) * Math.sin(a) * r * twistK))), skin: HEAD };
-    }, { closeU: true, color: col, mat: MAT.hair, inside: place(at) });
+    }, { closeU: true, color: col.clone().lerp(other, .3), mat: MAT.hair, inside: place(at) });
     if (bun?.tie) c.bag.solid(ring(r * .62, r * .62, .012, 14, 5), (p) => place(V(at.x + p.x, at.y - r * .5 + p.z * .3, at.z + .05 + p.y)), HEAD, c.pal(bun.tie), MAT.leather);
   }
 }
 
-export const BUILDERS = { skinLimb, neck, shirt, trousers, wrap, band, capelet, cowl, chestPlates, belt, strap, bracer, blockBracer, gloveCuff, boots, halfMask, hair };
+export const BUILDERS = { skinLimb, neck, shirt, trousers, wrap, band, capelet, cowl, chestPlates, belt, strap, bracer, blockBracer, gloveCuff, boots, halfMask, hair, skirt, panel, limbPlate, kilnPack };
 export { slab, slabY, trunkBand, trunkBandPatch, limbBand, limbFrame, tube, sides, merge, buckleShape, headPlace, face, scalp, HEAD };

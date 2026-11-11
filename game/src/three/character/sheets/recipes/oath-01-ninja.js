@@ -3,8 +3,8 @@
 export default {
   id: 'oath-01-ninja', sheet: 'reference-090', title: 'Kiln Ninja',
   palette: {
-    cloth: '#1c1a19', cowl: '#211f1e', mantle: '#262321', terracotta: '#9c4a30', piping: '#8a3622',
-    leather: '#4b3526', leatherDark: '#2b211b', iron: '#3f3b38', ceramic: '#a5502f', boot: '#221c19', sole: '#151211',
+    cloth: '#22201e', cowl: '#272422', mantle: '#2c2927', terracotta: '#8f452b', piping: '#8a3622',
+    leather: '#4b3526', leatherDark: '#2b211b', iron: '#3f3b38', ceramic: '#94482b', boot: '#221c19', sole: '#151211',
     glove: '#191615', skin: '#b98a62', hair: '#15110f',
   },
   build: { arm: 1.06, width: 1.02 },
