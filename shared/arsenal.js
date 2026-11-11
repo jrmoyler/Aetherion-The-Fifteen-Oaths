@@ -28,6 +28,13 @@ export const CANON_ARMS = Object.freeze({
 export const ARMOR_FAMILIES = Object.freeze({
   head: ['helmet', 'mask'], chest: ['chest', 'robe'], hands: ['glove', 'arm'], legs: ['legs', 'belt'], feet: ['boot'], trinket: ['accessory'],
 });
+// What a piece is called decides which family it is: a Robe is a robe and a Cuirass is plate, whoever wears it.
+const NOUN_FAMILY = Object.freeze({
+  Helm: 'helmet', Hood: 'helmet', Circlet: 'helmet', Visor: 'mask', Mask: 'mask',
+  Cuirass: 'chest', Harness: 'chest', Vestment: 'robe', Coat: 'robe', Robe: 'robe',
+  Gauntlets: 'glove', Grips: 'glove', Wraps: 'arm', Bracers: 'arm',
+  Greaves: 'legs', Leggings: 'legs', Trousers: 'legs', Tassets: 'belt',
+});
 const RARITY_RANK = { common: 0, uncommon: 1, rare: 2, epic: 3, legendary: 4 };
 
 /** Small stable hash, so a drop keeps its look without consuming the simulation's random stream. */
@@ -44,7 +51,7 @@ export function canonWeapon(oath, cls) {
 }
 
 /** Arsenal id for a generated gear piece. Common and uncommon weapons are the canon piece; rarer ones vary. */
-export function arsenalForGear({ slot, oath, cls, rarity, seed = '' }) {
+export function arsenalForGear({ slot, oath, cls, rarity, seed = '', name = '' }) {
   const rank = RARITY_RANK[rarity] ?? 0;
   if (slot === 'weapon') {
     const list = CANON_ARMS[oath]?.[cls] ?? CANON_ARMS['oath-09'].ninja;
@@ -52,8 +59,9 @@ export function arsenalForGear({ slot, oath, cls, rarity, seed = '' }) {
   }
   const families = ARMOR_FAMILIES[slot];
   if (!families) return null;
-  // Sorcerers favour the cloth family where a slot has one (robe, mask, arm wraps).
-  const family = families.length > 1 && cls === 'sorcerer' ? families[1] : families[0];
+  // The name decides where it can; otherwise sorcerers favour the cloth family (robe, mask, arm wraps).
+  const noun = name.split(' ').find((word) => NOUN_FAMILY[word] && families.includes(NOUN_FAMILY[word]));
+  const family = noun ? NOUN_FAMILY[noun] : families.length > 1 && cls === 'sorcerer' ? families[1] : families[0];
   return `arsenal:armor/${family}/${String(rank + 1).padStart(2, '0')}`;
 }
 

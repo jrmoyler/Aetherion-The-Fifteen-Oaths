@@ -43,7 +43,7 @@ test('generated gear always resolves to a forged piece; the look is stable and r
   for (const oath of OATHS) for (const cls of ['ninja', 'sorcerer']) for (const slot of GEAR_SLOTS) for (const rarity of RARITIES) {
     const item = makeGear(rng, { oath: oath.id, cls, lvl: 5, slot, rarity: rarity.id });
     assert.ok(ARSENAL_WEAPONS[item.arsenal] || ARSENAL_ARMOR[item.arsenal], `${item.name} -> ${item.arsenal}`);
-    assert.equal(arsenalForGear({ slot, oath: oath.id, cls, rarity: rarity.id, seed: item.id }), item.arsenal);
+    assert.equal(arsenalForGear({ slot, oath: oath.id, cls, rarity: rarity.id, seed: item.id, name: item.name }), item.arsenal);
     if (slot === 'weapon' && rarity.id === 'common') assert.equal(item.arsenal, canonWeapon(oath.id, cls));
     if (slot === 'weapon' && rarity.id === 'epic') assert.notEqual(item.arsenal, canonWeapon(oath.id, cls));
   }

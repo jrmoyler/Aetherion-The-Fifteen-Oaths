@@ -46,7 +46,7 @@ export function makeGear(rng, { oath, cls, lvl, slot, rarity, rarityBonus = 0 })
     id, kind: 'gear', slot, name, rarity: r.id, lvl: L, oath: o.id, stats, qty: 1,
     value: Math.round((5 + L * 3) * r.mul * r.mul),
     // The Arsenal Forge piece this gear is: drives its icon, tooltip and the model the wearer carries.
-    arsenal: arsenalForGear({ slot, oath: o.id, cls, rarity: r.id, seed: id }),
+    arsenal: arsenalForGear({ slot, oath: o.id, cls, rarity: r.id, seed: id, name }),
   };
 }
 
