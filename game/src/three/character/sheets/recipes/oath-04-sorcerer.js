@@ -1,6 +1,6 @@
 // 04 SORCERER - WATER - Tidal Covenant. Read from assets/references/reference-086 (woven diving cloth, nacre
 // shell plate, worn brass fittings, sealed reservoirs; reservoir belt closure, collar plate join).
-import '../builders-a.js';
+import { A } from '../builders-a.js';
 
 const tank = (x, r) => [
   { s: 'ball', r, at: [x, 0, 0], color: 'water', mat: 'glass', seg: 16, rows: 9 }, { s: 'ring', R: r * 1.02, r: .0065, at: [x, 0, 0], color: 'brass', mat: 'brass', seg: 22 },
@@ -17,10 +17,11 @@ export default {
   id: 'oath-04-sorcerer', sheet: 'reference-086', title: 'Tidal Sorcerer',
   palette: {
     robe: '#1e2b4d', cloth: '#1e2b4d', robeDark: '#151f3a', brass: '#a98346', iron: '#a98346', nacre: '#e9e0d1', green: '#3f615d', water: '#3f9cc0', foam: '#12384a', leather: '#3a2b20', leatherDark: '#231a14',
-    boot: '#20232a', sole: '#101114', glove: '#2a211b', skin: '#d2a184', hair: '#dedbd4', hairGrey: '#bdb9b1',
+    boot: '#20232a', sole: '#101114', glove: '#2a211b', hair: '#dedbd4', hairGrey: '#bdb9b1',
   },
-  build: { width: 1.28, depth: 1.3, belly: .04, hips: 1.1, waist: 1.16, arm: 1.24, leg: 1.2, neck: 1.1, shoulder: 1.1 },
-  keep: ['hands'],
+  build: { width: 1.3, depth: 1.38, belly: .045, hips: 1.2, waist: 1.28, arm: 1.24, leg: 1.3, neck: 1.12, shoulder: 1.1 },
+  keep: ['weapon'],
+  builders: A,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -42,8 +43,9 @@ export default {
     // Shell collar: nacre discs linked in brass over a cloth yoke, the hood lying down behind.
     { use: 'a/hoodDown', color: 'robe', lining: 'robeDark', width: .17, drop: .26, depth: .09 },
     { use: 'cowl', color: 'robe', rolls: 2, radius: .036, rise: .034 },
-    { use: 'a/yoke', color: 'robe', mat: 'cloth', inner: .1, outer: .215, off: .034, thick: .008, discs: { count: 10, r: .052, at: .66, lift: .01, color: 'nacre', rim: 'brass', phase: 0 } },
+    { use: 'a/yoke', color: 'robe', mat: 'cloth', inner: .1, outer: .215, off: .016, thick: .008, discs: { count: 10, r: .052, at: .66, lift: .01, color: 'nacre', rim: 'brass', phase: 0 } },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.6, toeCap: 'brass', heelPlate: 'brass', cuff: 'brass', plateMat: 'iron', straps: 3, strapColor: 'leather', buckle: 'brass', bulk: 1.2 },
-    { use: 'hair', style: 'spiky', color: 'hair', streak: 'hairGrey', locks: 170, length: .11, lift: .03, fringe: .34 },
+    { use: 'hair', style: 'spiky', color: 'hair', streak: 'hairGrey', length: .13, density: 1.4, fringe: .34 },
+    { use: 'hands', scale: 1.08 },
   ],
 };

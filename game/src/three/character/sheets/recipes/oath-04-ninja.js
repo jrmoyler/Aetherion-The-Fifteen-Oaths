@@ -1,7 +1,7 @@
 // 04 NINJA - WATER - Tidal Covenant. Read from assets/references/reference-084 (deep petroleum blue 60%, pearly
 // shell 30%, sea green 10%; woven diving cloth, nacre shell plate, sealed reservoir, worn brass fittings; right
 // shoulder plate mount, reservoir mount on the back).
-import '../builders-a.js';
+import { A } from '../builders-a.js';
 
 const shell = (y, r, tilt, spread = 150) => ({ s: 'fan', r, spread, ribs: 9, bulge: .22, curl: .55, rot: [tilt, 0, 180], at: [0, y, .0], color: 'nacre', mat: 'nacre' });
 
@@ -9,10 +9,11 @@ export default {
   id: 'oath-04-ninja', sheet: 'reference-084', title: 'Tidal Ninja',
   palette: {
     suit: '#1a2848', suitDark: '#111a31', green: '#4a877d', brass: '#b28c47', iron: '#b28c47', nacre: '#e9dfcf', visor: '#12333c', glass: '#3c95a0', leather: '#3b2d21', leatherDark: '#241b14',
-    boot: '#18243f', sole: '#0f1626', glove: '#16213c', skin: '#d2a184',
+    boot: '#18243f', sole: '#0f1626', glove: '#16213c',
   },
-  build: { width: .98, depth: .98, hips: 1.1, waist: .93, bust: .03, arm: .98, leg: 1.05, shoulder: 1.0 },
-  keep: ['hands'],
+  build: { hips: 1.16, waist: .98, bust: .03, leg: 1.12, arm: .98 },
+  keep: ['weapon'],
+  builders: A,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'a/bodysuit', color: 'suit', trunk: ['crotch', 'base'], arms: [-.14, 1.98], legs: [-.155, 1.92], off: .005, zones: [
@@ -46,5 +47,6 @@ export default {
     { use: 'band', limb: 'leg', at: 1.84, width: .022, off: .008, thick: .005, color: 'brass', mat: 'iron' },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.9, toeCap: 'brass', heelPlate: 'brass', plateMat: 'iron', straps: 1, strapColor: 'leather', buckle: 'brass', soleHeight: .03 },
     { use: 'gloveCuff', color: 'glove', from: 1.92, to: 2.05, off: .004 },
+    { use: 'hands', glove: 'glove', scale: .95 },
   ],
 };

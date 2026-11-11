@@ -1,6 +1,6 @@
 // 02 NINJA - FROST - Rime Archive. Read from assets/references/reference-089 (front, back, side, three-quarter,
 // face, materials: quilted felt, dark leather, rime laminate; attachments: shoulder strap, bracer mount).
-import '../builders-a.js';
+import { A } from '../builders-a.js';
 
 const harness = (s) => ({ use: 'strap', color: 'webbing', closed: false, width: .026, thick: .005, anchor: { at: .2, size: .017, color: 'buckle' }, n: 34, path: [
   { th: s * 21, y: 'belt', dy: .02, off: .03 }, { th: s * 22, y: 'ribs', off: .03 }, { th: s * 25, y: 'armpit', dy: .0, off: .03 }, { th: s * 55, y: 'shoulder', dy: -.02, off: .022 },
@@ -11,10 +11,11 @@ export default {
   palette: {
     felt: '#2a2c30', feltDark: '#1d1f22', vest: '#cdc9bf', lining: '#d6d2c8', stitch: '#8f8b83', webbing: '#5f6062', buckle: '#8d8e90', piping: '#7b7d80',
     leather: '#232427', leatherDark: '#18191b', iron: '#77797c', ice: '#cfe3ec', frost: '#eef3f4', boot: '#222326', sole: '#b4b0a7', bumper: '#9d9a92', glove: '#1a1b1d',
-    skin: '#e0bba2', hair: '#16151a',
+    hair: '#16151a',
   },
-  build: { width: 1.0, depth: 1.0, hips: 1.1, waist: .96, bust: .022, arm: .98, leg: 1.04, shoulder: 1.0 },
-  keep: ['hands'],
+  build: { hips: 1.16, waist: 1.0, bust: .022, leg: 1.1, arm: .98 },
+  keep: ['weapon'],
+  builders: A,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -51,5 +52,6 @@ export default {
       { s: 'ball', size: [.05, .062, .028], at: [0, -.006, 0], color: 'leather', mat: 'leather' }, { s: 'ball', size: [.036, .045, .018], at: [0, -.008, .016], color: 'leatherDark', mat: 'leather' } ] },
     { use: 'band', limb: 'leg', at: 1.16, width: .02, off: .008, thick: .004, color: 'leatherDark' },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.66, toeCap: 'bumper', heelPlate: 'bumper', cuff: 'bumper', plateMat: 'leather', straps: 3, strapColor: 'leatherDark', buckle: 'buckle', bulk: 1.22, soleHeight: .044 },
+    { use: 'hands', glove: 'glove', fingerless: true, scale: .95 },
   ],
 };

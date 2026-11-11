@@ -1,8 +1,8 @@
 // Builders for the Rime Archive, Storm Relay, Tidal Covenant and Fault Choir heroes (Oaths 02 to 05).
 //
 // Same contract as builders.js: (context, plain-data params) -> skinned geometry in the context's Bag. They are
-// registered under an `a/` prefix so they cannot collide with another group's builders, and a recipe gets them by
-// importing this module (`import '../builders-a.js'`).
+// named with an `a/` prefix so they cannot collide with another group's builders; a recipe gets them with
+// `import { A } from '../builders-a.js'` and `builders: A`.
 import { Euler, Quaternion, Vector3 } from 'three';
 import { cranium } from '../head.js';
 import { MAT, TAU, V, bar, clamp, dome, frame, lerp, moved, ring, roundBox, smooth } from './kernel.js';
@@ -344,12 +344,12 @@ export function beard(c, { color = 'hair', length = 1.25, width = .15, depth = .
   c.bag.part = 'beard';
   c.bag.grid(16 * c.q, 14 * c.q, (u, v) => {
     const a = u * TAU, k = lerp(1, tip, v ** .8), strand = 1 + .09 * Math.sin(a * 9 + seed + v * 3) + .05 * Math.sin(a * 17 + v * 11);
-    const y = from - v * length, z = chin.z - depth * .45 - .1 * smooth(.0, .5, v) - .2 * v * length + sway * Math.sin(v * 5 + seed) * v;
+    const y = from - v * length, z = chin.z - depth * .45 - .1 * smooth(.0, .5, v) - .09 * v * length + sway * Math.sin(v * 5 + seed) * v;
     const top = 1 - .45 * smooth(.12, 0, v);   // tucks in under the lip
     return { p: place(V(Math.cos(a) * width * k * strand * top, y, z + Math.sin(a) * depth * k * strand * (Math.sin(a) > 0 ? 1 : .8))), skin: HEAD, c: col.clone().multiplyScalar(.78 + .3 * (.5 + .5 * Math.sin(a * 9 + seed + v * 3))) };
   }, { closeU: true, color: col, mat: MAT.hair, inside: place(V(0, from - length / 2, chin.z - depth * .5)) });
   if (moustache) for (const s of [-1, 1]) {
-    const lip = face(c, 0, -.235, 0), shape = tubePath([[s * .02, -.225, lip.z + .012], [s * .085, -.25, lip.z + .005], [s * .135, -.34, lip.z - .035], [s * .14, -.5, lip.z - .07], [s * .12, -.68, lip.z - .1]], .028, .008, 6, 4);
+    const lip = face(c, 0, -.235, 0), shape = tubePath([[s * .02, -.228, lip.z + .012], [s * .08, -.255, lip.z + .002], [s * .118, -.35, lip.z - .05], [s * .112, -.52, lip.z - .085], [s * .09, -.7, lip.z - .11]], .03, .009, 6, 4);
     c.bag.solid(shape, place, HEAD, col.clone().multiplyScalar(.95), MAT.hair);
   }
 }
@@ -391,16 +391,16 @@ export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim 
  * and/or `discs` linked around it. Radii in metres from the spine at the base of the neck; the ring is wider
  * over the shoulders than front to back, and rests on whatever the body presents under it.
  */
-export function yoke(c, { color = 'copper', mat = 'copper', inner = .078, outer = .19, wide = .2, deep = .62, off = .05, thick = .01, band = true, rivets = 0, rivetColor = 'iron', discs = null, drop = 1 }) {
+export function yoke(c, { color = 'copper', mat = 'copper', inner = .078, outer = .19, wide = .2, deep = .62, off = .02, thick = .01, band = true, rivets = 0, rivetColor = 'iron', discs = null, drop = 1 }) {
   const { trunk, S, J, k } = c.form, col = c.pal(color), m = surface(mat), zc = c.form.spineZ(trunk.Y.base);
   c.bag.part = 'yoke';
   const raw = (th, v, lift = 0) => {
     const sn = Math.sin(th), cs = Math.cos(th), reach = outer * k * (1 + wide * Math.abs(sn)) * (1 - (1 - deep) * Math.abs(cs) ** 1.5), steps = 10; let d = inner * k, y = -Infinity, last = null;
     for (let i = 0; i <= steps; i++) {
-      const dd = lerp(inner * k, lerp(inner * k, reach, v), i / steps), rest = c.form.over(sn * dd, zc + cs * dd * .96, () => off, off);
+      const dd = lerp(inner * k, lerp(inner * k, reach, v), i / steps), rest = c.form.over(sn * dd, zc + cs * dd * .96, () => .02, .02) + off;
       y = last === null ? rest : Math.max(rest, y - (dd - d) * drop * 1.4); if (!Number.isFinite(y)) y = trunk.Y.base; d = dd; last = y;
     }
-    return V(sn * d, Math.min(y, trunk.Y.neck + .02) + lift, zc + cs * d * .96);
+    return V(sn * d, Math.min(y, trunk.Y.neck + .03) + lift, zc + cs * d * .96);
   };
   // Heights are averaged with their neighbours so the plate is one smooth ring, not a cast of every fold under it.
   const at = (th, v, lift = 0) => { const p = raw(th, v, lift); p.y = (raw(th - .22, v, lift).y + raw(th - .11, v, lift).y + p.y * 2 + raw(th + .11, v, lift).y + raw(th + .22, v, lift).y) / 6; return p; };
@@ -419,5 +419,8 @@ export function yoke(c, { color = 'copper', mat = 'copper', inner = .078, outer 
   }
 }
 
-Object.assign(BUILDERS, { 'a/kit': kit, 'a/bodysuit': bodysuit, 'a/lines': lines, 'a/plates': plates, 'a/collar': collar, 'a/hood': hood, 'a/hoodDown': hoodDown, 'a/fringe': fringe, 'a/beard': beard, 'a/helm': helm, 'a/yoke': yoke });
+/** The group's builders by recipe name; a recipe lists them under `builders`. */
+export const A = { 'a/kit': kit, 'a/bodysuit': bodysuit, 'a/lines': lines, 'a/plates': plates, 'a/collar': collar, 'a/hood': hood, 'a/hoodDown': hoodDown, 'a/fringe': fringe, 'a/beard': beard, 'a/helm': helm, 'a/yoke': yoke };
+// Also registered in the shared table, so tools that look a part up there (the recipe test) find it.
+Object.assign(BUILDERS, A);
 export { SHAPES, SURFACE, Yof };

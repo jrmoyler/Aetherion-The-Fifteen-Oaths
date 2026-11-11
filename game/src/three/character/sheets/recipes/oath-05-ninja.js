@@ -1,6 +1,6 @@
 // 05 NINJA - EARTH & CRYSTAL - Fault Choir. Read from assets/references/reference-082 (fractured shale plate,
 // sandstone, leather strap, raw amethyst; back plate support, forearm sling).
-import '../builders-a.js';
+import { A } from '../builders-a.js';
 
 const sling = (s) => ({ use: 'strap', color: 'leather', closed: false, width: .034, thick: .006, n: 30, path: [
   { th: s * 30, y: 'chest', dy: .05, off: .03 }, { th: s * 34, y: 'armpit', dy: .03, off: .028 }, { th: s * 58, y: 'shoulder', dy: -.02, off: .022 }, { th: s * 122, y: 'shoulder', dy: -.02, off: .022 },
@@ -12,10 +12,11 @@ export default {
   id: 'oath-05-ninja', sheet: 'reference-082', title: 'Fault Ninja',
   palette: {
     cloth: '#3a2e29', tunic: '#3a2e29', tunicDark: '#27201d', shale: '#4b4541', sand: '#b3956c', leather: '#6b4631', leatherDark: '#3c291d', iron: '#5c5249', ceramic: '#4b4541',
-    amethyst: '#3c1c63', boot: '#2d2521', sole: '#191513', glove: '#1f1a18', skin: '#a8734f', hair: '#2b1d15',
+    amethyst: '#3c1c63', boot: '#2d2521', sole: '#191513', glove: '#1f1a18', hair: '#2b1d15',
   },
-  build: { width: 1.22, depth: 1.2, arm: 1.32, leg: 1.2, shoulder: 1.15, waist: 1.13, hips: 1.05, neck: 1.18 },
-  keep: ['hands'],
+  build: { width: 1.22, depth: 1.22, arm: 1.32, leg: 1.3, shoulder: 1.15, waist: 1.1, hips: 1.06, neck: 1.2 },
+  keep: ['weapon'],
+  builders: A,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -34,7 +35,7 @@ export default {
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[52, 'ribs'], [90, 'ribs+.01'], [128, 'ribs']], [[50, 'waist+.03'], [90, 'waist+.03'], [130, 'waist+.03']]], color: 'leather', mat: 'leather', width: .026, thick: .005, off: .016, name: 'sideStraps' },
     { use: 'a/collar', color: 'shale', mat: 'stone', lining: 'tunicDark', height: .105, flare: .034, off: .03, thick: .018, tilt: .024, trim: 'sand', from: 'base-.02' },
     { use: 'halfMask', color: 'iron', slat: 'sand', vents: 4, strap: 'leatherDark' },
-    { use: 'hair', style: 'spiky', color: 'hair', locks: 150, length: .13, fringe: .34 },
+    { use: 'hair', style: 'spiky', color: 'hair', length: .17, density: 1.2, fringe: .34 },
     // Belt with pouches and the amethyst in its sandstone frame on the left hip.
     { use: 'belt', color: 'leather', buckle: 'iron', height: .05, off: .022, keepers: [30, -30, 150, -150] },
     { use: 'a/kit', name: 'pouches', on: 'trunk', side: 'R', y: 'belt-.03', th: 50, off: .032, items: pouch },
@@ -51,5 +52,6 @@ export default {
     { use: 'gloveCuff', color: 'glove', strap: 'leather' },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.62, toeCap: 'shale', heelPlate: 'sand', cuff: 'sand', plateMat: 'ceramic', straps: 3, strapColor: 'leather', bulk: 1.32, soleHeight: .046 },
     { use: 'a/plates', on: 'leg', flat: true, list: [{ at: [0, 1.8], size: [.092, .13] }], color: 'shale', border: 'sand', thick: .026, off: .03, borderWidth: .011, name: 'greaves' },
+    { use: 'hands', glove: 'glove', fingerless: true, scale: 1.12 },
   ],
 };

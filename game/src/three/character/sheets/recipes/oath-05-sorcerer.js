@@ -1,6 +1,6 @@
 // 05 SORCERER - EARTH & CRYSTAL - Fault Choir. Read from assets/references/reference-083 (layered shale,
 // sandstone, leather strap, raw amethyst; frame shoulder clamp, frame base clamp).
-import '../builders-a.js';
+import { A } from '../builders-a.js';
 
 const brace = (s) => ({ use: 'strap', color: 'leather', closed: false, width: .034, thick: .006, anchor: { at: .15, size: .02, color: 'iron' }, n: 34, path: [
   { th: s * 24, y: 'belt', dy: .03, off: .024 }, { th: s * 25, y: 'ribs', off: .026 }, { th: s * 30, y: 'armpit', dy: .02, off: .024 }, { th: s * 56, y: 'shoulder', dy: -.02, off: .02 },
@@ -13,16 +13,17 @@ export default {
   id: 'oath-05-sorcerer', sheet: 'reference-083', title: 'Fault Sorcerer',
   palette: {
     cloth: '#3c332c', tunic: '#3c332c', tunicDark: '#2a2420', sand: '#b3956c', shale: '#4a4541', frame: '#5a524a', leather: '#6b4a33', leatherDark: '#3e2b1f', iron: '#5b534b', ceramic: '#4a4541',
-    amethyst: '#3c1c63', boot: '#3a322c', sole: '#191513', glove: '#2a211c', skin: '#a8734f', hair: '#191517', tie: '#191517',
+    amethyst: '#3c1c63', boot: '#3a322c', sole: '#191513', glove: '#2a211c', hair: '#191517', tie: '#191517',
   },
-  build: { width: 1.2, depth: 1.2, bust: .03, hips: 1.16, waist: 1.1, arm: 1.34, leg: 1.28, shoulder: 1.12, neck: 1.08 },
-  keep: ['hands'],
+  build: { width: 1.2, depth: 1.22, bust: .03, hips: 1.26, waist: 1.2, arm: 1.34, leg: 1.38, shoulder: 1.12, neck: 1.08 },
+  keep: ['weapon'],
+  builders: A,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
     { use: 'skinLimb', limb: 'arm', from: -.12, to: 2 },
     { use: 'skinLimb', limb: 'leg', from: .6, to: 1.6 },
-    { use: 'trousers', color: 'tunicDark', gather: .84, bag: .05, pleats: 9, pockets: [], pipingPaths: [], from: .2 },
+    { use: 'trousers', color: 'tunicDark', gather: .86, bag: .034, pleats: 9, pockets: [], pipingPaths: [], from: .44 },
     { use: 'a/bodysuit', color: 'tunic', trunk: ['belt-.03', 'base'], off: .011, ease: .004, zones: [{ on: 'trunk', both: true, a: [28, 62], b: ['waist-.03', 'armpit+.03'], color: 'sand' }] },
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[52, 'shoulder-.02'], [68, 'armpit+.01'], [90, 'armpit-.04'], [114, 'armpit+.01'], [130, 'shoulder-.02']]], color: 'sand', width: .012, thick: .003, off: .012, name: 'binding' },
     { use: 'a/collar', color: 'tunic', lining: 'tunicDark', height: .045, flare: .006, open: 26, off: .013, trim: 'sand', from: 'base-.014' },
@@ -50,7 +51,8 @@ export default {
       { s: 'rock', size: [.07, .06, .07], seed: 3, at: [-.25, .43, .05], color: 'sand', mat: 'stone' },
       vein(-.3, .3, .135, .02, .11, [20, 0, 20]), vein(-.25, .22, .135, .016, .08, [28, 0, -30]), vein(-.34, .2, .1, .014, .07, [10, 40, 60]),
       { s: 'box', size: [.07, .012, .012], at: [-.2, .3, .04], color: 'leather', mat: 'leather' }, { s: 'box', size: [.07, .012, .012], at: [-.2, .2, .04], color: 'leather', mat: 'leather' } ] },
-    { use: 'hair', style: 'bun', color: 'hair', locks: 120, length: .3, bun: { at: [0, .08, -.44], radius: .17, tie: 'tie' } },
+    { use: 'hair', style: 'bun', color: 'hair', knot: { at: [0, .06, -.44], radius: .17, tie: 'tie' } },
     { use: 'a/fringe', color: 'hair', count: 6, span: 1.2, from: .4, to: .1, sideTo: -.3, width: .03, sweep: .5 },
+    { use: 'hands', glove: 'glove', fingerless: true, scale: 1.08 },
   ],
 };

@@ -1,6 +1,6 @@
 // 02 SORCERER - FROST - Rime Archive. Read from assets/references/reference-088 (tall, 202 cm, elderly; quilted
 // felt robe, dark leather belts and straps, milky laminated rime pages; folio rack on the right hip).
-import '../builders-a.js';
+import { A } from '../builders-a.js';
 
 const seam = (a, from = 'belt-.03', to = .1) => [[a, from], [a, to]];
 const page = (z) => ({ s: 'box', size: [.066, .112, .0105], at: [0, 0, z], color: 'ice', mat: 'ice', r: .004 });
@@ -9,10 +9,11 @@ export default {
   id: 'oath-02-sorcerer', sheet: 'reference-088', title: 'Rime Sorcerer',
   palette: {
     robe: '#2a2f38', robeDark: '#20242b', quilt: '#3b424d', pale: '#b4bcc1', white: '#d3d0c7', ice: '#cbe1ec', frost: '#9cc3d4', leather: '#2c231e', leatherDark: '#1d1714',
-    iron: '#5b5d61', boot: '#1b1b1d', sole: '#101011', glove: '#211c19', skin: '#d2a184', beard: '#d8d5ce',
+    iron: '#5b5d61', boot: '#1b1b1d', sole: '#101011', glove: '#211c19', beard: '#d8d5ce',
   },
-  build: { width: .95, depth: .93, arm: .9, leg: .96, waist: 1.0, hips: .96, shoulder: 1.03, neck: .95 },
-  keep: ['hands'],
+  build: { width: .96, depth: .95, arm: .92, leg: 1.0, shoulder: 1.03, neck: .95 },
+  keep: ['weapon'],
+  builders: A,
   groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
@@ -28,9 +29,9 @@ export default {
     { use: 'a/lines', on: 'trunk', quilt: { a: [138, 222], b: ['ribs-.02', 'shoulder-.04'], pitch: .04 }, color: 'quilt', width: .003, off: .0225, name: 'quilting' },
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[138, 'ribs-.02'], [139, 'chest'], [150, 'shoulder-.03']], [[180, 'ribs-.02'], [180, 'shoulder-.03']]], color: 'pale', width: .004, off: .0235, name: 'piping' },
     // Stiff pointed shoulder caps.
-    { use: 'a/kit', name: 'caps', on: 'trunk', side: 'both', y: 'shoulder+.042', th: 90, off: -.07, bone: 'shoulder.L', items: [
-      { s: 'leaf', len: .225, width: .235, thick: .012, bend: -.03, base: 1, rot: [103, 0, 0], at: [0, -.005, 0], color: 'pale', mat: 'felt' },
-      { s: 'leaf', len: .212, width: .215, thick: .02, bend: -.028, base: 1, rot: [103, 0, 0], color: 'robe', mat: 'felt' } ] },
+    { use: 'a/kit', name: 'caps', on: 'trunk', side: 'both', y: 'shoulder+.075', th: 90, off: -.05, bone: 'shoulder.L', items: [
+      { s: 'leaf', len: .215, width: .25, thick: .026, bend: -.02, base: 1, rot: [116, 0, 0], at: [0, -.006, 0], color: 'pale', mat: 'felt' },
+      { s: 'leaf', len: .2, width: .228, thick: .036, bend: -.018, base: 1, rot: [116, 0, 0], color: 'robe', mat: 'felt' } ] },
     { use: 'a/collar', color: 'robe', lining: 'frost', height: .125, flare: .05, open: 64, tilt: .012, points: .028, off: .015, trim: 'pale' },
     { use: 'belt', color: 'leather', height: .05, off: .026, buckleSize: [.03, .026], keepers: [34, -34, 150, -150] },
     { use: 'belt', rise: -.045, height: .022, thick: .005, off: .026, color: 'leatherDark', buckle: null, keepers: [], tilt: .012 },
@@ -49,5 +50,6 @@ export default {
     { use: 'gloveCuff', color: 'glove', strap: 'leatherDark' },
     { use: 'a/beard', color: 'beard', width: .19, tip: .16, length: 1.3 },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.86, straps: 1, strapColor: 'leatherDark', soleHeight: .03 },
+    { use: 'hands', glove: 'glove', fingerless: true },
   ],
 };

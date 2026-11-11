@@ -1,16 +1,17 @@
 // 03 NINJA - LIGHTNING - Storm Relay. Read from assets/references/reference-085 (196 cm; navy 60%, copper 30%,
 // lemon 10%; insulating cloth, oxidized copper, ceramic coupler; right arm bracer and antenna mount, spine relay
 // mount and cable loop).
-import '../builders-a.js';
+import { A } from '../builders-a.js';
 
 export default {
   id: 'oath-03-ninja', sheet: 'reference-085', title: 'Storm Ninja',
   palette: {
     navy: '#1b2133', navyDark: '#131826', copper: '#a65f36', leather: '#5b3b27', leatherDark: '#38261a', ceramic: '#d6d2c6', iron: '#a65f36', steel: '#3d3e42', cable: '#151517',
-    boot: '#181d2c', sole: '#33251c', skin: '#b98a62', hair: '#17141a',
+    boot: '#181d2c', sole: '#33251c', hair: '#17141a',
   },
-  build: { width: 1.0, depth: .98, arm: 1.1, leg: 1.0, waist: .95, hips: .97, shoulder: 1.06 },
-  keep: ['hands'],
+  build: { arm: 1.1, leg: 1.06, waist: 1.0, shoulder: 1.06 },
+  keep: ['weapon'],
+  builders: A,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
@@ -50,7 +51,8 @@ export default {
     { use: 'wrap', limb: 'arm', side: 'L', from: 1.72, to: 1.93, color: 'navy', off: .004, pitch: .014 },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.64, heelPlate: 'copper', shinPlate: 'ceramic', cuff: 'ceramic', straps: 3, strapColor: 'leather', buckle: 'copper', bulk: 1.08 },
     { use: 'a/lines', on: 'leg', paths: [[[-80, 1.8], [0, 1.83], [80, 1.8]]], color: 'copper', mat: 'copper', width: .006, thick: .003, off: .03, name: 'bootTrim' },
-    { use: 'hair', style: 'bun', color: 'hair', locks: 120, length: .3, bun: { at: [0, .57, -.2], radius: .12, tie: 'copper' } },
+    { use: 'hair', style: 'bun', color: 'hair', knot: { at: [0, .5, -.2], radius: .1, tie: 'copper' } },
     { use: 'a/fringe', color: 'hair', count: 8, span: 1.1, from: .4, to: .16, sideTo: -.12, width: .05, sweep: .5 },
+    { use: 'hands' },
   ],
 };
