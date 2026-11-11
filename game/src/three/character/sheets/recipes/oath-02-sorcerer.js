@@ -18,14 +18,14 @@ export default {
   parts: [
     { use: 'neck' },
     { use: 'a/bodysuit', color: 'robeDark', trunk: null, legs: [1.15, 1.96], off: .01 },
-    { use: 'shirt', color: 'white', sleeve: 1.3, flare: .014, off: .008, slack: .004, cap: .004 },
+    { use: 'shirt', color: 'white', sleeve: 1.3, flare: .008, off: .005, slack: .004, cap: .004 },
     { use: 'shirt', color: 'robe', sleeve: 0, off: .019, slack: .002 },
     { use: 'skirt', color: 'robe', hem: .1, flare: 1.2, off: .021, folds: 14, trim: 'pale', trimWidth: .008 },
     // The robe stands open down the front over a white under-robe.
-    { use: 'panel', color: 'white', mat: 'cloth', at: 0, from: 'base', to: 'belt', width: [.03, .04], off: .001, thick: .003, round: .004 },
-    { use: 'panel', color: 'white', mat: 'cloth', at: 0, from: 'belt', to: .105, width: [.04, .064], off: .001, thick: .003, round: .004 },
-    { use: 'a/lines', on: 'trunk', both: true, paths: [[[14, 'belt'], [13, 'chest'], [17, 'shoulder-.035']], [[34, 'belt'], [36, 'chest'], [44, 'shoulder-.03']]], color: 'pale', width: .0045, off: .0235, name: 'piping' },
-    { use: 'a/lines', on: 'coat', both: true, paths: [seam(15, 'belt-.03', .105), seam(31), seam(52), seam(82), seam(112), seam(146), seam(170)], color: 'pale', width: .0045, off: .0045, n: 16, name: 'piping' },
+    { use: 'panel', color: 'white', mat: 'cloth', at: 0, from: 'base', to: 'belt', width: [.02, .028], off: .001, thick: .003, round: .004 },
+    { use: 'panel', color: 'white', mat: 'cloth', at: 0, from: 'belt', to: .105, width: [.028, .046], off: .001, thick: .003, round: .004 },
+    { use: 'a/lines', on: 'trunk', both: true, paths: [[[10, 'belt'], [9, 'chest'], [13, 'shoulder-.035']], [[34, 'belt'], [36, 'chest'], [44, 'shoulder-.03']]], color: 'pale', width: .0045, off: .0235, name: 'piping' },
+    { use: 'a/lines', on: 'coat', both: true, paths: [seam(11, 'belt-.03', .105), seam(31), seam(52), seam(82), seam(112), seam(146), seam(170)], color: 'pale', width: .0045, off: .0045, n: 16, name: 'piping' },
     { use: 'a/lines', on: 'trunk', quilt: { a: [138, 222], b: ['ribs-.02', 'shoulder-.04'], pitch: .04 }, color: 'quilt', width: .003, off: .0225, name: 'quilting' },
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[138, 'ribs-.02'], [139, 'chest'], [150, 'shoulder-.03']], [[180, 'ribs-.02'], [180, 'shoulder-.03']]], color: 'pale', width: .004, off: .0235, name: 'piping' },
     // Stiff pointed shoulder caps.
