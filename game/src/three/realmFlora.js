@@ -5,7 +5,9 @@
 // lifted verbatim from Biome Triad (biome-flora.generated.js). Trees near the player are full meshes; farther
 // tiles draw one crossed card per tree from a picture of that species baked once on this device.
 import * as THREE from 'three';
-import { SPECIES_DEF, genTree, setCardDensity, tex } from './biome-flora.generated.js';
+import { SPECIES_DEF, genTree, setCardDensity, tex, bladeClump, papyrusClump, fernPlant, broadleafPlant, boulderGeo, lin } from './biome-flora.generated.js';
+import { BIOME_WORLDS } from './biome-worlds.generated.js';
+import { REALM_WORLD } from './realmAir.js';
 
 // Realm biome -> [species, share, height in metres a typical specimen stands in play].
 // Biome Triad's trees are life-size (a 39 m beech); these heights keep the third-person camera under the crowns.
@@ -28,6 +30,29 @@ export const REALM_SPECIES = Object.freeze({
 });
 // Leaf tint per realm, multiplied over the species' own colours (white leaves the species as authored).
 const REALM_TINT = { crimson: 0xd98a86, volcanic: 0xa79a84, glacial: 0xdfe8ee, badlands: 0xc9bf9a, industrial: 0xb9bdb0 };
+
+// Ground cover per realm, built with Biome Triad's own clump, fern and broadleaf builders. Blade recipes follow the
+// worlds' (sedge, seagrass, dune oats, barley, dry tuft). Each entry: [kind, options, share]; `density` is the share
+// of candidate spots that grow something.
+const blade = (colA, colB, h, extra = {}) => ['blade', { blades: 9, seg: 3, h, w: .035, spread: .3, bend: .8, colA: lin(...colA), colB: lin(...colB), ...extra }, 1];
+const SEDGE = blade([.09, .16, .04], [.4, .47, .15], [.5, 1.3], { blades: 14 }), SEAGRASS = blade([.05, .2, .1], [.3, .6, .25], [.6, 1.3], { blades: 10 });
+const OATS = blade([.3, .36, .14], [.74, .72, .42], [.5, 1]), BARLEY = blade([.1, .2, .05], [.42, .58, .14], [.55, .8], { blades: 7, seg: 2, spread: .22, bend: .35, ear: .12, earCol: lin(.5, .58, .2) });
+const TUFT = blade([.3, .26, .14], [.66, .56, .32], [.25, .6], { blades: 8, spread: .2, bend: .7 }), MEADOW = blade([.1, .22, .06], [.36, .56, .16], [.35, .8], { blades: 12 });
+const FROST = blade([.34, .38, .34], [.72, .78, .74], [.2, .45], { blades: 7, spread: .2, bend: .6 }), ASH = blade([.12, .11, .09], [.34, .3, .24], [.2, .5], { blades: 6, spread: .2, bend: .7 });
+const ROSE = blade([.3, .1, .1], [.72, .34, .3], [.3, .7], { blades: 11 });
+const FERN = ['fern', {}, .5], LEAF = ['broadleaf', { len: 1.3 }, .35], PAPYRUS = ['papyrus', {}, .5];
+export const REALM_COVER = Object.freeze({
+  forest: { density: 1, kinds: [SEDGE, FERN, LEAF] }, meadow: { density: 1, kinds: [MEADOW, BARLEY] }, marsh: { density: 1, kinds: [SEDGE, PAPYRUS] },
+  coast: { density: .8, kinds: [SEAGRASS, OATS] }, cliffs: { density: .9, kinds: [MEADOW, OATS, FERN] }, glacial: { density: .3, kinds: [FROST] },
+  alpine: { density: .55, kinds: [TUFT, MEADOW] }, highland: { density: .6, kinds: [TUFT, FROST] }, canyon: { density: .4, kinds: [TUFT] },
+  badlands: { density: .3, kinds: [TUFT] }, plateau: { density: .7, kinds: [OATS, TUFT] }, volcanic: { density: .18, kinds: [ASH] },
+  crimson: { density: .8, kinds: [ROSE, TUFT] }, terraces: { density: .8, kinds: [BARLEY, MEADOW] }, industrial: { density: .25, kinds: [TUFT] },
+});
+/** Bedrock colour of a realm's Biome Triad world, as a THREE.Color (falls back to neutral grey stone). */
+export function realmRock(biome) {
+  const rock = BIOME_WORLDS[REALM_WORLD[biome]]?.rock ?? [.47, .48, .43];
+  return new THREE.Color().setRGB(rock[0], rock[1], rock[2], THREE.SRGBColorSpace);
+}
 
 export function createRealmFlora(ctx, wind) {
   const quality = ctx.quality?.name ?? 'high';
@@ -92,6 +117,19 @@ export function createRealmFlora(ctx, wind) {
     return { target, material };
   }
 
+  // Ground cover and boulders: one geometry per recipe, built on first use.
+  const coverMaterial = sway(new THREE.MeshStandardMaterial({ name: 'flora-cover', vertexColors: true, side: THREE.DoubleSide, roughness: .85, metalness: 0 }), .05);
+  const rockMaterial = new THREE.MeshStandardMaterial({ name: 'flora-boulder', vertexColors: true, roughness: .96, metalness: 0 });
+  const coverCache = new Map(), boulderShapes = [];
+  function coverGeometry(biome, index) {
+    const key = `${biome}:${index}`; if (coverCache.has(key)) return coverCache.get(key);
+    const [kind, options] = REALM_COVER[biome].kinds[index], seed = 700 + index * 31 + biome.length * 7;
+    const lowOptions = low && kind === 'blade' ? { ...options, blades: Math.ceil(options.blades * .6), seg: 2 } : options;
+    const geometry = kind === 'blade' ? bladeClump({ ...lowOptions, seed }) : kind === 'fern' ? fernPlant(seed, options) : kind === 'broadleaf' ? broadleafPlant(seed, options) : papyrusClump(seed);
+    coverCache.set(key, geometry); return geometry;
+  }
+  function boulder(index) { return boulderShapes[index] ??= boulderGeo(41 + index * 17, low ? 2 : medium ? 3 : 4); }
+
   const dummy = new THREE.Object3D(), tint = new THREE.Color();
   function instances(geometry, material, list, scaleOf, shadow) {
     const mesh = new THREE.InstancedMesh(geometry, material, list.length);
@@ -137,10 +175,32 @@ export function createRealmFlora(ctx, wind) {
       }
       return { near, far, trunks };
     },
+    /** Pick a ground-cover recipe for a realm from two 0..1 rolls; null where the realm leaves the spot bare. */
+    chooseCover(biome, roll, pick) {
+      const cover = REALM_COVER[biome]; if (!cover || roll > cover.density) return null;
+      let total = 0; for (const kind of cover.kinds) total += kind[2];
+      let at = pick * total;
+      for (let i = 0; i < cover.kinds.length; i++) { at -= cover.kinds[i][2]; if (at <= 0) return i; }
+      return 0;
+    },
+    /** One tile's ground cover from a list of { biome, index, x, y, z, scale, turn }. */
+    cover(items) {
+      const group = new THREE.Group(), byRecipe = new Map(); group.name = 'Flora (ground cover)';
+      for (const item of items) { const key = `${item.biome}:${item.index}`; if (!byRecipe.has(key)) byRecipe.set(key, []); item.colour ??= white; byRecipe.get(key).push(item); }
+      for (const list of byRecipe.values()) group.add(instances(coverGeometry(list[0].biome, list[0].index), coverMaterial, list, (item) => [item.scale, item.scale, item.scale], false));
+      return group;
+    },
+    /** One tile's boulders from a list of { biome, x, y, z, sx, sy, sz, turn, shade }, tinted to the realm's bedrock. */
+    boulders(items) {
+      const group = new THREE.Group(), byShape = new Map(); group.name = 'Flora (boulders)';
+      for (const item of items) { const shape = Math.floor(item.turn * 7) % 3; item.colour = realmRock(item.biome).multiplyScalar(1.7 * item.shade); if (!byShape.has(shape)) byShape.set(shape, []); byShape.get(shape).push(item); }
+      for (const [shape, list] of byShape) group.add(instances(boulder(shape), rockMaterial, list, (item) => [item.sx, item.sy, item.sz], !low));
+      return group;
+    },
     stats: () => ({ species: [...cache.entries()].filter(([, value]) => value).map(([key]) => key) }),
     dispose() {
       for (const sp of cache.values()) { if (!sp) continue; sp.wood.dispose(); sp.leaf.dispose(); sp.leafMaterial.dispose(); sp.woodMaterial.dispose(); sp.card.material.dispose(); sp.card.target?.dispose(); }
-      cache.clear(); cardGeometry.dispose();
+      cache.clear(); cardGeometry.dispose(); for (const geometry of coverCache.values()) geometry.dispose(); for (const geometry of boulderShapes) geometry?.dispose(); coverMaterial.dispose(); rockMaterial.dispose();
     },
   };
 }

@@ -6,6 +6,7 @@
 // sanctuary city easing  →  coastline (cliffs or beaches, Tidal bay, Reed fjord, sea stacks)  →
 // flat sanctuary plaza core (always exactly SANCTUARY_HEIGHT inside SANCTUARY.cityRadius*0.55).
 import { OATHS, ROUTES, OATH_BY_ID, SANCTUARY } from './oaths.js';
+import { BIOME_RELIEF, BIOME_RELIEF_CELLS, BIOME_RELIEF_SPAN } from './biome-relief.generated.js';
 
 export const SEA_LEVEL = 0;
 export const WORLD_SEED = 15015;
@@ -76,7 +77,31 @@ const BIOME_KIND = { volcanic: 1, glacial: 2, alpine: 3, coast: 4, canyon: 5, cl
 /** Flattened plaza elevation of each sanctuary (deterministic, independent of noise). */
 export const SANCTUARY_HEIGHT = Object.fromEntries(OATHS.map((o) => [o.id, BIOMES[o.biome].base + 2]));
 
-const REGIONS = OATHS.map((o) => ({ id: o.id, x: o.center[0], z: o.center[1], b: BIOMES[o.biome], kind: BIOME_KIND[o.biome], h: SANCTUARY_HEIGHT[o.id] }));
+// Landforms of each realm, baked from its Biome Triad world (tools/import-biome-terrain.mjs).
+function decodeRelief(entry) {
+  if (!entry) return null;
+  const binary = atob(entry.data), bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+  const view = new DataView(bytes.buffer), cells = new Float32Array(bytes.length / 2);
+  for (let i = 0; i < cells.length; i++) cells[i] = view.getInt16(i * 2, true) / 8192;
+  return cells;
+}
+const REGIONS = OATHS.map((o) => ({ id: o.id, x: o.center[0], z: o.center[1], b: BIOMES[o.biome], kind: BIOME_KIND[o.biome], h: SANCTUARY_HEIGHT[o.id], relief: decodeRelief(BIOME_RELIEF[o.biome]) }));
+const RN = BIOME_RELIEF_CELLS, RHALF = BIOME_RELIEF_SPAN / 2, RSTEP = BIOME_RELIEF_SPAN / (RN - 1);
+const cubic = (p0, p1, p2, p3, t) => p1 + 0.5 * t * (p2 - p0 + t * (2 * p0 - 5 * p1 + 4 * p2 - p3 + t * (3 * (p1 - p2) + p3 - p0)));
+/** Baked relief of a region at an offset from its centre (smooth, Catmull-Rom), in units of the realm's relief budget. */
+function reliefAt(cells, dx, dz) {
+  const fx = Math.min(RN - 1.001, Math.max(0, (dx + RHALF) / RSTEP)), fz = Math.min(RN - 1.001, Math.max(0, (dz + RHALF) / RSTEP));
+  const ix = Math.floor(fx), iz = Math.floor(fz), tx = fx - ix, tz = fz - iz;
+  let r0 = 0, r1 = 0, r2 = 0, r3 = 0;
+  for (let m = -1; m <= 2; m++) {
+    const row = Math.min(RN - 1, Math.max(0, iz + m)) * RN;
+    const a = cells[row + Math.max(0, ix - 1)], b = cells[row + ix], c = cells[row + Math.min(RN - 1, ix + 1)], d = cells[row + Math.min(RN - 1, ix + 2)];
+    const v = cubic(a, b, c, d, tx);
+    if (m === -1) r0 = v; else if (m === 0) r1 = v; else if (m === 1) r2 = v; else r3 = v;
+  }
+  return cubic(r0, r1, r2, r3, tz);
+}
 const NREG = REGIONS.length;
 const REG_X = new Float64Array(REGIONS.map((r) => r.x));
 const REG_Z = new Float64Array(REGIONS.map((r) => r.z));
@@ -131,7 +156,14 @@ function biomeHeight(r, x, z) {
   const b = r.b, f = b.freq;
   const n = fbm(x * f + 31.7, z * f - 11.3, 5);
   const rr = ridged(x * f * 0.8 - 7.1, z * f * 0.8 + 3.9, 5);
-  let h = b.base + b.amp * ((1 - b.ridge) * n + b.ridge * (rr - 0.45));
+  const own = (1 - b.ridge) * n + b.ridge * (rr - 0.45);
+  let h = b.base + b.amp * own;
+  if (r.relief) {
+    // The realm's large shapes come from its Biome Triad world; Aetherion's own noise stays as fine grain and
+    // takes over again toward the edge of the baked window.
+    const dx = x - r.x, dz = z - r.z, inside = 1 - smooth(RHALF - 220, RHALF - 20, Math.max(Math.abs(dx), Math.abs(dz)));
+    if (inside > 0) h = b.base + b.amp * (inside * (reliefAt(r.relief, dx, dz) + 0.2 * own) + (1 - inside) * own);
+  }
   switch (r.kind) {
     case 1: { // volcanic: caldera rim ridge around the Kiln, black cones, lava channels carved below
       const d = Math.hypot(x - r.x, z - r.z);

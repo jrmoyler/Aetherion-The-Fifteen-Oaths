@@ -17,6 +17,11 @@ export const BIOME_WORLDS = {
    0.2,
    0.08
   ],
+  "rock": [
+   0.34,
+   0.29,
+   0.22
+  ],
   "precip": "none"
  },
  "sea": {
@@ -33,6 +38,11 @@ export const BIOME_WORLDS = {
    0.1,
    0.25,
    0.3
+  ],
+  "rock": [
+   0.5,
+   0.44,
+   0.37
   ],
   "precip": "none"
  },
@@ -51,6 +61,11 @@ export const BIOME_WORLDS = {
    0.32,
    0.2
   ],
+  "rock": [
+   0.72,
+   0.56,
+   0.4
+  ],
   "precip": "none"
  },
  "arctic": {
@@ -67,6 +82,11 @@ export const BIOME_WORLDS = {
    0.5,
    0.56,
    0.66
+  ],
+  "rock": [
+   0.24,
+   0.23,
+   0.22
   ],
   "precip": "snow"
  },
@@ -85,6 +105,11 @@ export const BIOME_WORLDS = {
    0.2,
    0.07
   ],
+  "rock": [
+   0.15,
+   0.13,
+   0.12
+  ],
   "precip": "ash"
  },
  "haven": {
@@ -102,6 +127,7 @@ export const BIOME_WORLDS = {
    0.7,
    0.58
   ],
+  "rock": null,
   "precip": "motes"
  },
  "forest": {
@@ -118,6 +144,11 @@ export const BIOME_WORLDS = {
    0.18,
    0.16,
    0.09
+  ],
+  "rock": [
+   0.34,
+   0.34,
+   0.28
   ],
   "precip": "none"
  },
@@ -136,6 +167,11 @@ export const BIOME_WORLDS = {
    0.6,
    0.68
   ],
+  "rock": [
+   0.3,
+   0.3,
+   0.31
+  ],
   "precip": "snow"
  },
  "savanna": {
@@ -152,6 +188,11 @@ export const BIOME_WORLDS = {
    0.45,
    0.35,
    0.18
+  ],
+  "rock": [
+   0.58,
+   0.53,
+   0.49
   ],
   "precip": "none"
  },
@@ -170,6 +211,11 @@ export const BIOME_WORLDS = {
    0.3,
    0.18
   ],
+  "rock": [
+   0.6,
+   0.36,
+   0.24
+  ],
   "precip": "dust"
  },
  "alpine": {
@@ -186,6 +232,11 @@ export const BIOME_WORLDS = {
    0.3,
    0.34,
    0.24
+  ],
+  "rock": [
+   0.3,
+   0.29,
+   0.28
   ],
   "precip": "snow"
  },
@@ -204,6 +255,11 @@ export const BIOME_WORLDS = {
    0.2,
    0.1
   ],
+  "rock": [
+   0.3,
+   0.27,
+   0.22
+  ],
   "precip": "none"
  },
  "underwater": {
@@ -220,6 +276,11 @@ export const BIOME_WORLDS = {
    0.05,
    0.22,
    0.26
+  ],
+  "rock": [
+   0.34,
+   0.31,
+   0.28
   ],
   "precip": "none"
  },
@@ -238,6 +299,7 @@ export const BIOME_WORLDS = {
    0.055,
    0.05
   ],
+  "rock": null,
   "precip": "none"
  },
  "village": {
@@ -254,6 +316,11 @@ export const BIOME_WORLDS = {
    0.3,
    0.34,
    0.18
+  ],
+  "rock": [
+   0.5,
+   0.47,
+   0.42
   ],
   "precip": "none"
  },
@@ -272,6 +339,11 @@ export const BIOME_WORLDS = {
    0.2,
    0.1
   ],
+  "rock": [
+   0.42,
+   0.4,
+   0.33
+  ],
   "precip": "none"
  },
  "urban": {
@@ -288,6 +360,11 @@ export const BIOME_WORLDS = {
    0.26,
    0.25,
    0.24
+  ],
+  "rock": [
+   0.42,
+   0.4,
+   0.37
   ],
   "precip": "snow"
  }

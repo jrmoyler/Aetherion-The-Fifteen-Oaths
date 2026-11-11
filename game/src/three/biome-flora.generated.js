@@ -7,7 +7,7 @@ export const BIOME_FLORA_COMMIT = '6ef756ee5c41e1250264a59103536e9ddeee477d';
 // Engine globals the copied code reads.
 const Q = { cardK: 0.6 };
 const MAX_ANISO = 4;
-const tex = {}, ATLAS = {}, TEXCACHE = {}, SPECIES_DEF = {}, SKIPPED = {};
+const tex = {}, ATLAS = {}, TEXCACHE = {}, SPECIES_DEF = {}, SKIPPED = {}, OWNED = [];
 const atlas = (key, seed, o) => (ATLAS[key] ??= sprayAtlas(seed, o));
 function defineSpecies(key, def) { SPECIES_DEF[key] = def; }
 function lazyTexture(name, paint) { let made; Object.defineProperty(tex, name, { get: () => (made ??= paint()), enumerable: true }); }
@@ -72,6 +72,114 @@ lazyTexture('bark', () => canvasTex(64,256,(u,v)=>{ const n=0.78+0.22*fbm(u*4,v*
 
 // --- constant (index.html:454)
 const lin = (r, g, b) => { const c = new THREE.Color().setRGB(r, g, b, THREE.SRGBColorSpace); return [c.r, c.g, c.b]; };
+
+// --- constant (index.html:455)
+const gb = () => ({ P:[], N:[], C:[], I:[] });
+
+// --- function gbFinish (index.html:456)
+function gbFinish(b){
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(b.P, 3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute(b.N, 3));
+  g.setAttribute('color', new THREE.Float32BufferAttribute(b.C, 3));
+  g.setIndex(b.I); g.computeBoundingBox(); g.computeBoundingSphere(); OWNED.push(g);
+  return g;
+}
+
+// --- function bladeClump (index.html:526)
+function bladeClump(o){
+  const r = rng(o.seed || 1), b = gb();
+  for (let i=0;i<o.blades;i++){
+    const a = r()*TAU, rad = Math.sqrt(r())*o.spread, bx = Math.cos(a)*rad, bz = Math.sin(a)*rad;
+    const az = a + (r()-0.5)*1.6, H = lerp(o.h[0], o.h[1], r()), bend = o.bend*(0.5 + r()), w = o.w*(0.7 + 0.6*r());
+    const dx = Math.cos(az), dz = Math.sin(az), sx = -dz, sz = dx, tone = 0.78 + 0.44*r(), base = b.P.length/3;
+    for (let k=0;k<=o.seg;k++){
+      const t = k/o.seg, cx = bx + dx*bend*t*t*H, cz = bz + dz*bend*t*t*H, y = H*t*(1 - 0.18*bend*t);
+      const ww = k === o.seg ? 0 : w*(1 - Math.pow(t, 1.5)*0.88);
+      const nx = dx*0.45*(1-t), nz = dz*0.45*(1-t), nl = Math.hypot(nx, 1, nz);
+      const col = [0,1,2].map(j => lerp(o.colA[j], o.colB[j], Math.pow(t, 0.8))*tone);
+      for (const sg of [-1, 1]){ b.P.push(cx + sx*ww*sg, y, cz + sz*ww*sg); b.N.push(nx/nl, 1/nl, nz/nl); b.C.push(col[0], col[1], col[2]); }
+    }
+    for (let k=0;k<o.seg;k++){ const q = base + k*2; b.I.push(q, q+1, q+2, q+1, q+3, q+2); }
+    if (o.ear){   // wheat / grass seed head: a three-sided tapered prism on the blade tip
+      const t = 1, tx = bx + dx*bend*H, tz = bz + dz*bend*H, ty = H*(1 - 0.18*bend), eb = b.P.length/3, L = o.ear, rr = o.earW || 0.022;
+      const es = o.earSeg || 2; for (let k=0;k<=es;k++){ const u = k/es, rad2 = rr*(1 - u*u*0.85), ex = tx + dx*L*u*0.55, ey = ty + L*u, ez = tz + dz*L*u*0.55;
+        for (let q=0;q<3;q++){ const ang = q/3*TAU; b.P.push(ex + Math.cos(ang)*rad2, ey, ez + Math.sin(ang)*rad2); b.N.push(Math.cos(ang), 0.4, Math.sin(ang)); b.C.push(o.earCol[0]*tone, o.earCol[1]*tone, o.earCol[2]*tone); } }
+      for (let k=0;k<es;k++) for (let q=0;q<3;q++){ const a0 = eb + k*3 + q, a1 = eb + k*3 + (q+1)%3; b.I.push(a0, a1, a0+3, a1, a1+3, a0+3); }
+    }
+  }
+  return gbFinish(b);
+}
+
+// --- function papyrusClump (index.html:550)
+function papyrusClump(seed){
+  const r = rng(seed), b = gb(), base = lin(0.22, 0.3, 0.1), top = lin(0.45, 0.58, 0.2);
+  for (let i=0;i<6;i++){
+    const a = r()*TAU, rad = Math.sqrt(r())*0.55, bx = Math.cos(a)*rad, bz = Math.sin(a)*rad, H = 2.0 + r()*1.5, az = r()*TAU, lean = (r()-0.3)*0.45, st = 6;
+    const sb = b.P.length/3;
+    for (let k=0;k<=st;k++){ const t = k/st, cx = bx + Math.cos(az)*lean*t*t*H, cz = bz + Math.sin(az)*lean*t*t*H, y = H*t, rr = 0.035*(1 - 0.5*t);
+      for (let q=0;q<3;q++){ const ang = q/3*TAU; b.P.push(cx + Math.cos(ang)*rr, y, cz + Math.sin(ang)*rr); b.N.push(Math.cos(ang), 0.1, Math.sin(ang)); b.C.push(lerp(base[0], top[0], t), lerp(base[1], top[1], t), lerp(base[2], top[2], t)); } }
+    for (let k=0;k<st;k++) for (let q=0;q<3;q++){ const a0 = sb + k*3 + q, a1 = sb + k*3 + (q+1)%3; b.I.push(a0, a1, a0+3, a1, a1+3, a0+3); }
+    const tx = bx + Math.cos(az)*lean*H, tz = bz + Math.sin(az)*lean*H;
+    for (let f=0;f<16;f++){   // umbel filaments arc outward and droop
+      const fa = f/16*TAU + r()*0.3, fl = 0.55 + r()*0.4, fb = b.P.length/3, fs = 4;
+      for (let k=0;k<=fs;k++){ const t = k/fs, ox = Math.cos(fa)*fl*Math.sin(t*1.25), oz = Math.sin(fa)*fl*Math.sin(t*1.25), oy = H + 0.15*t - 0.34*t*t*fl*1.6, ww = 0.012*(1 - t*0.8);
+        const tn = Math.hypot(Math.cos(fa), 0.7), c0 = lerp(top[0], 0.55, 0.3*t), c1 = lerp(top[1], 0.68, 0.3*t), c2 = top[2];
+        for (const sg of [-1, 1]){ b.P.push(tx + ox - Math.sin(fa)*ww*sg, oy, tz + oz + Math.cos(fa)*ww*sg); b.N.push(0, 1, 0); b.C.push(c0, c1, c2); } }
+      for (let k=0;k<fs;k++){ const q = fb + k*2; b.I.push(q, q+1, q+2, q+1, q+3, q+2); }
+    }
+  }
+  return gbFinish(b);
+}
+
+// --- function fernPlant (index.html:570)
+function fernPlant(seed, o = {}){
+  const r = rng(seed), b = gb(), n = o.fronds || 9, L = o.len || 1.5, dark = lin(...(o.dark || [0.07, 0.16, 0.05])), light = lin(...(o.light || [0.3, 0.5, 0.14]));
+  for (let f=0;f<n;f++){
+    const az = f/n*TAU + r()*0.5, el = 0.5 + r()*0.5, Lf = L*(0.7 + 0.5*r()), dh = [Math.cos(az), Math.sin(az)], sd = [-dh[1], dh[0]], droop = 0.55 + 0.4*r();
+    const P = t => [dh[0]*Lf*t*Math.cos(el), Lf*(t*Math.sin(el) - droop*t*t*0.55), dh[1]*Lf*t*Math.cos(el)];
+    const rb = b.P.length/3, rs = 8;
+    for (let k=0;k<=rs;k++){ const t = k/rs, p = P(t), ww = 0.012*(1 - 0.6*t); const c = lerp(0.0, 1, t*0.5);
+      for (const sg of [-1, 1]){ b.P.push(p[0] + sd[0]*ww*sg, p[1], p[2] + sd[1]*ww*sg); b.N.push(0, 1, 0); b.C.push(dark[0]*0.7, dark[1]*0.7, dark[2]*0.7); } }
+    for (let k=0;k<rs;k++){ const q = rb + k*2; b.I.push(q, q+1, q+2, q+1, q+3, q+2); }
+    const nl = o.leaflets || 13;
+    for (let k=1;k<=nl;k++){
+      const t = 0.1 + 0.88*k/nl, p = P(t), p2 = P(Math.min(1, t + 0.04)), tg = [p2[0]-p[0], p2[1]-p[1], p2[2]-p[2]], tl = Math.hypot(...tg); tg[0]/=tl; tg[1]/=tl; tg[2]/=tl;
+      const ll = Lf*0.2*Math.sin(Math.PI*Math.min(1, t*1.05))*(0.9 + 0.2*r()) + 0.02, lw = ll*0.2;
+      for (const sg of [-1, 1]){
+        const out = [sd[0]*sg*0.86 + tg[0]*0.5, -0.28, sd[1]*sg*0.86 + tg[2]*0.5], ol = Math.hypot(...out);
+        const lb = b.P.length/3, tip = [p[0] + out[0]/ol*ll, p[1] + out[1]/ol*ll - ll*0.12, p[2] + out[2]/ol*ll], mid = [p[0] + out[0]/ol*ll*0.5, p[1] + out[1]/ol*ll*0.5 + ll*0.05, p[2] + out[2]/ol*ll*0.5];
+        const cc = [lerp(dark[0], light[0], t), lerp(dark[1], light[1], t), lerp(dark[2], light[2], t)];
+        const vs = [[p[0] - tg[0]*lw, p[1], p[2] - tg[2]*lw], [p[0] + tg[0]*lw, p[1], p[2] + tg[2]*lw], [mid[0] - tg[0]*lw*0.8, mid[1], mid[2] - tg[2]*lw*0.8], [mid[0] + tg[0]*lw*0.8, mid[1], mid[2] + tg[2]*lw*0.8], tip];
+        vs.forEach((v, i) => { b.P.push(...v); b.N.push(0, 1, 0); const k2 = i >= 4 ? 1.25 : 1; b.C.push(cc[0]*k2, cc[1]*k2, cc[2]*k2); });
+        b.I.push(lb, lb+1, lb+2, lb+1, lb+3, lb+2, lb+2, lb+3, lb+4);
+      }
+    }
+  }
+  return gbFinish(b);
+}
+
+// --- function broadleafPlant (index.html:596)
+function broadleafPlant(seed, o = {}){
+  const r = rng(seed), b = gb(), n = o.leaves || 6, dark = lin(...(o.dark || [0.05, 0.2, 0.05])), light = lin(...(o.light || [0.2, 0.5, 0.12])), rib = lin(0.55, 0.66, 0.3);
+  for (let i=0;i<n;i++){
+    const az = i/n*TAU + r()*0.6, el = 0.9 + r()*0.45, Ll = (o.len || 2.4)*(0.7 + 0.5*r()), Wl = Ll*0.2, droop = 0.8 + 0.7*r(), dh = [Math.cos(az), Math.sin(az)], sd = [-dh[1], dh[0]];
+    const segs = 12, lb = b.P.length/3, fold = 0.5;
+    for (let k=0;k<=segs;k++){
+      const t = k/segs, x = Ll*t*Math.cos(el), y = Ll*(t*Math.sin(el)*1.05 - droop*t*t*0.55), prof = Math.sin(Math.PI*Math.min(1, t*0.92 + 0.06))*(1 - 0.22*t), ww = Wl*prof;
+      const cc = [lerp(dark[0], light[0], t), lerp(dark[1], light[1], t), lerp(dark[2], light[2], t)];
+      const cen = [dh[0]*x, y, dh[1]*x];
+      [[-1, 0.0], [0, 1], [1, 0.0]].forEach(([sg, isRib]) => {
+        const lift = Math.abs(sg)*ww*Math.sin(fold);
+        b.P.push(cen[0] + sd[0]*ww*sg*Math.cos(fold), cen[1] + lift, cen[2] + sd[1]*ww*sg*Math.cos(fold));
+        const nn = [-Math.sin(el)*dh[0]*0.3 + sd[0]*sg*0.5, 1, -Math.sin(el)*dh[1]*0.3 + sd[1]*sg*0.5], nl = Math.hypot(...nn); b.N.push(nn[0]/nl, nn[1]/nl, nn[2]/nl);
+        const m = isRib ? 0.55 : 1; b.C.push(lerp(cc[0], rib[0], m*isRib*0.7)*(0.85 + 0.2*(1 - Math.abs(sg))), lerp(cc[1], rib[1], isRib*0.7)*(0.85 + 0.2*(1 - Math.abs(sg))), lerp(cc[2], rib[2], isRib*0.7));
+      });
+    }
+    for (let k=0;k<segs;k++){ const q = lb + k*3; b.I.push(q, q+3, q+1, q+1, q+3, q+4, q+1, q+4, q+2, q+2, q+4, q+5); }
+  }
+  return gbFinish(b);
+}
 
 // --- function boulderGeo (index.html:617)
 function boulderGeo(seed, detail = 4){
@@ -645,4 +753,4 @@ try { defineSpecies('vilWillow', { seed:7333, leaves:lfWil, bark:0x7a6e60, flutt
 // --- species vilApple (index.html:8898)
 try { defineSpecies('vilApple', { seed:7334, leaves:lfApp, bark:0x6e6052, tree:{ h:5.5, r:0.22, buttress:0.1, fins:4, lean:0.25, wobble:0.8, trunkTop:0.5, bStart:0.3, branches:8, el:[0.3,0.8], bLen:0.5, curl:0.15, subs:2, cR:1.7, flatY:0.65, cards:22, card:1.2, droop:0.2 } }); } catch (error) { SKIPPED['vilApple'] = error.message; }
 
-export { SPECIES_DEF, SKIPPED, genTree, genPalm, boulderGeo, sprayAtlas, tex };
+export { SPECIES_DEF, SKIPPED, genTree, genPalm, boulderGeo, bladeClump, papyrusClump, fernPlant, broadleafPlant, lin, sprayAtlas, tex };
