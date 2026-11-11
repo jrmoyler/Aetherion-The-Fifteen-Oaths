@@ -73,3 +73,10 @@ negative pitch looks up).
 - Flakes are sparse by day against a pale snow scene; the density is the source's.
 - At 28 steps the march shows some grain at cloud edges, as it does in the source at "Balanced".
 - Dust (canyon) has a standing amount of 0.03 in the source, so only a few motes show outside a dust storm.
+
+Evidence files:
+
+- `volcanic-day-clouds-ash.jpg`: volcanic realm, `q=medium&time=14`, clouds tinted by the volcano world's ground bounce, ash falling.
+- `forest-day-clouds-low.jpg`: forest realm, `q=low&time=10` (18-step march, no bloom pass).
+- `glacial-night-aurora-stars.jpg`: glacial realm, `time=23&weather=clear,0`: stars, moonlit clouds, aurora (still fading in when captured), light snow.
+- `volcanic-storm-rain.jpg`: same volcanic view after `setWeather('storm', 1)`: full cover, darkened deck, rain streaks.
