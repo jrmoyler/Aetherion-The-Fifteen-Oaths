@@ -1,16 +1,17 @@
 // 07 NINJA - NATURE - Graft Sanctuary. Read from assets/references/reference-079 (front, back, side,
 // three-quarter, face, materials: living bark, moss fibre, straw weave, sap plug; shoulder plate graft and
 // forearm guard join).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-07-ninja', sheet: 'reference-079', title: 'Graft Ninja',
   palette: {
-    skin: '#7a4a32', under: '#2c2621', cloth: '#352c24', trouser: '#3a3027', bark: '#6b4a30', barkDark: '#43301f', barkLight: '#8a6844', green: '#5c6a30', greenDark: '#44502a',
+    under: '#2c2621', cloth: '#352c24', trouser: '#3a3027', bark: '#6b4a30', barkDark: '#43301f', barkLight: '#8a6844', green: '#5c6a30', greenDark: '#44502a',
     moss: '#3c4a1e', mossLight: '#6c7830', straw: '#b08c4a', leather: '#3e2f24', leatherDark: '#2a211b', iron: '#4a4541', ember: '#c8700e', glove: '#2a231e', boot: '#3f3022', sole: '#231c16', hair: '#1c1512',
   },
   build: { width: 1.14, depth: 1.12, hips: 1.02, waist: 1.04, arm: 1.3, leg: 1.14, neck: 1.15, shoulder: 1.1 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'b.sleeve', from: -.14, to: 1.2, color: 'skin', mat: 'skin', off: 0 },
@@ -53,5 +54,6 @@ export default {
     { use: 'gloveCuff', color: 'glove', from: 1.9, to: 2.05, off: .007 },
     { use: 'b.hairCap', color: 'hair', front: .3, side: .2, nape: .05, lift: .03, curl: .03, freq: 10 },
     { use: 'b.seedMask', height: .7 },
+    { use: 'hands', glove: 'glove', fingerless: true },
   ],
 };

@@ -1,16 +1,17 @@
 // 06 SORCERER - WIND & SOUND - Reed Resonance. Read from assets/references/reference-080 (front, back, side,
 // three-quarter, face, materials: woven linen, dry bamboo, carved wood; resonator collar and back brace, reed
 // pipe carrier on the left flank).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-06-sorcerer', sheet: 'reference-080', title: 'Reed Sorcerer',
   palette: {
-    skin: '#d2a184', linen: '#8f8168', linenShade: '#776a55', red: '#8e2e24', cord: '#7a2a20', trouser: '#4a403a', wood: '#5c3a22', woodDark: '#3c2616',
+    linen: '#8f8168', linenShade: '#776a55', red: '#8e2e24', cord: '#7a2a20', trouser: '#4a403a', wood: '#5c3a22', woodDark: '#3c2616',
     bamboo: '#b98f4c', leather: '#4a392c', leatherDark: '#2e2621', brass: '#9a7a3c', iron: '#4a4541', boot: '#2c2724', sole: '#b08a5c', cloth: '#8f8168',
   },
   build: { width: .9, depth: .88, hips: .98, waist: .96, arm: .84, leg: .84, neck: .86, shoulder: .98 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   // His grey top-knot and goatee are the groom's; the costume adds no hair of its own.
   groom: { hair: true, gear: false },
   parts: [
@@ -33,5 +34,6 @@ export default {
       { y: 'belt', h: .006, tilt: .03, phase: 0, off: .037, color: 'cord', round: 1 }, { y: 'belt', h: .006, tilt: -.03, phase: 0, off: .037, color: 'cord', round: 1 } ] },
     { use: 'b.pipeCarrier', at: 64, length: .25 },
     { use: 'b.resonator', height: .17 },
+    { use: 'hands' },
   ],
 };

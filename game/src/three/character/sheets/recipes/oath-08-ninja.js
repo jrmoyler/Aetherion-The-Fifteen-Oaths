@@ -1,16 +1,17 @@
 // 08 NINJA - POISON - Bitterglass Guild. Read from assets/references/reference-077 (front, back, side,
 // three-quarter, face, materials: oilskin, pitted brass, dark leather, sealed glass; ampoule locking clip and
 // backpack top mount).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-08-ninja', sheet: 'reference-077', title: 'Bitterglass Ninja',
   palette: {
-    skin: '#a8734f', under: '#1d1b1c', cloth: '#242123', oilskin: '#262225', purple: '#3a2a3c', leather: '#3c2c24', leatherDark: '#261d19', brass: '#8a6a34', brassDark: '#5e4826',
+    under: '#1d1b1c', cloth: '#242123', oilskin: '#262225', purple: '#3a2a3c', leather: '#3c2c24', leatherDark: '#261d19', brass: '#8a6a34', brassDark: '#5e4826',
     glass: '#4f7a06', iron: '#4a4541', glove: '#19171a', boot: '#221c1a', bootCap: '#2c2420', sole: '#141110', hair: '#1c1714',
   },
   build: { width: 1.08, depth: 1.06, arm: 1.12, leg: 1.06, shoulder: 1.08 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'b.neck', color: 'under', mat: 'cloth', off: .004 },
@@ -47,5 +48,6 @@ export default {
     { use: 'b.hairCap', color: 'hair', front: .3, side: .12, nape: -.3, lift: .008 },
     { use: 'b.skullCap', color: 'leather', front: .2, side: .06, nape: -.08, off: .03, seams: 4, band: 'leatherDark' },
     { use: 'b.respirator', canister: .14 },
+    { use: 'hands', glove: 'glove' },
   ],
 };

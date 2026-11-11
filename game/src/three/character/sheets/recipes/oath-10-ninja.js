@@ -1,7 +1,7 @@
 // 10 NINJA - COSMIC & GRAVITY - Tidal Observatory. Read from assets/references/reference-073 (front, back, side,
 // three-quarter, face, materials: meteor iron, deep indigo woven cloth, silver and violet inlay; shoulder
 // crescent mount and the removable hip crescent plate).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-10-ninja', sheet: 'reference-073', title: 'Tidal Ninja',
@@ -10,7 +10,8 @@ export default {
     leather: '#3a2c22', leatherDark: '#261d18', iron: '#4a4744', glove: '#1b1a1c', boot: '#232122', sole: '#141314', bootPlate: '#33312f',
   },
   build: { width: 1.0, depth: 1.06, hips: .92, waist: 1.0, arm: 1.02, leg: .98, neck: 1.0, belly: .01 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'b.neck', color: 'black', mat: 'cloth', off: .004 },
@@ -46,7 +47,7 @@ export default {
     // Silver crescent across the chest, the iron horn on the right shoulder, layered plates on the left.
     { use: 'b.strip', color: 'silver', mat: 'silver', width: .1, thick: .012, taper: 'crescent', n: 50, border: 'bronze', path: [
       { th: -66, y: ['shoulder', -.02], off: .034 }, { th: -34, y: ['chest', .03], off: .044 }, { th: 6, y: ['chest', -.03], off: .05 }, { th: 44, y: ['ribs', .02], off: .046 }, { th: 76, y: ['ribs', .05], off: .04 } ] },
-    { use: 'b.fin', side: 'R', spine: [[0, 0], [.16, .07], [.3, .22], [.34, .42]], width: .24 },
+    { use: 'b.fin', side: 'R', spine: [[0, 0], [.16, .07], [.3, .2], [.33, .37]], width: .24 },
     { use: 'b.guard', limb: 'arm', side: 'R', from: -.36, to: .2, phi: 90, arc: 84, off: .022, thick: .014, bulge: .016, color: 'meteor', mat: 'meteor', trim: 'bronze', trimMat: 'brass', trimWidth: .01, skin: [['shoulder.L', .5], ['upperarm.L', .5]] },
     { use: 'b.guard', limb: 'arm', side: 'L', from: -.4, to: -.02, layers: 3, step: .17, phi: 90, arc: 86, off: .02, thick: .014, flareEnd: .012, bulge: .008, color: 'meteor', mat: 'meteor', trim: 'bronze', trimMat: 'brass', trimWidth: .01, skin: [['shoulder.L', .5], ['upperarm.L', .5]] },
     // Arms: elbow cops, heavy vambraces with violet inlay, gauntlet cuffs.
@@ -56,5 +57,6 @@ export default {
     { use: 'gloveCuff', color: 'glove', from: 1.86, to: 2.06, off: .016 },
     { use: 'b.moon', at: 58, y: ['belt', -.11], r: .12, width: .08, off: .05 },
     { use: 'b.helm' },
+    { use: 'hands', glove: 'glove', knuckles: 'meteor', scale: .78 },
   ],
 };

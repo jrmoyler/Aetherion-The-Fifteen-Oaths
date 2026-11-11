@@ -1,15 +1,16 @@
 // 06 NINJA - WIND & SOUND - Reed Resonance. Read from assets/references/reference-081 (front, back, side,
 // three-quarter, face, materials: woven linen, dry bamboo, carved wood; mask cheek hinge and reed pipe mount).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-06-ninja', sheet: 'reference-081', title: 'Reed Ninja',
   palette: {
-    skin: '#a8734f', linen: '#cdc2ab', linenShade: '#b3a78f', red: '#a23426', cord: '#8e2a20', charcoal: '#3b3937', wrapDark: '#454240',
+    linen: '#cdc2ab', linenShade: '#b3a78f', red: '#a23426', cord: '#8e2a20', charcoal: '#3b3937', wrapDark: '#454240',
     bone: '#d2c3a2', bamboo: '#b98f4c', leather: '#4a392c', leatherDark: '#2f2620', brass: '#7b5a34', boot: '#3a322c', sole: '#5a4532', iron: '#4a4541', hair: '#191513', cloth: '#3b3937',
   },
   build: { width: 1.0, depth: 1.0, hips: 1.2, waist: .93, bust: .022, arm: .86, leg: .98, neck: .92, shoulder: 1.0 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   groom: { hair: false, gear: false },
   parts: [
     // Body: bare shoulders, arms and midriff.
@@ -50,5 +51,6 @@ export default {
     { use: 'b.beakMask' },
     { use: 'hair', style: 'bun', locks: 120, length: .3, bun: { at: [0, .46, -.27], radius: .09, tie: 'red' } },
     { use: 'b.tail', tie: 'red' },
+    { use: 'hands', glove: 'wrapDark', fingerless: true },
   ],
 };

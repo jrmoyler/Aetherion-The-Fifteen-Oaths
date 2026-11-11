@@ -1,7 +1,7 @@
 // Builders for the heroes of Oaths 06 to 10 (Reed Resonance, Graft Sanctuary, Bitterglass Guild, Oath of Daybreak,
 // Tidal Observatory). Same contract as builders.js: each takes the build context and a plain-data block from a
-// recipe and emits skinned geometry into the context's Bag. They register themselves in BUILDERS under a `b.`
-// prefix when this module loads, so a recipe only has to import this file to use them.
+// recipe and emits skinned geometry into the context's Bag. Recipes name them with a `b.` prefix and carry them
+// in their `builders` field (export B); they are also added to BUILDERS when this module loads.
 //
 // Sizes given in metres are for a 1.8 m body and are scaled to the wearer; heights are trunk landmarks
 // ('belt', 'waist', 'ribs', 'chest', 'armpit', 'shoulder', 'base', 'neck'), fractions of the hip height below the
@@ -808,5 +808,7 @@ function hemOrbs(c, { count = 8, r = .042, drop = .04, metal = 'silver', enamel 
 
 export { M, SURFACE, Yof, scaleOf, tone, cyl, ball, along, sweep, lathe, leaf, trunkAnchor, scaled, turned, drapeOf, plateLoft, crescentPlate, cane, headBand, ampoule };
 export const BUILDERS_B = { torso, sleeve, legs, sash, strip, hang, coat, collar, neck: neckWrap, guard, spikes, studs, cords, shag, wing, headBand, beakMask, tail, reedPipes, bells, pipeCarrier, resonator, hairCap, skullCap, seedMask, fringe, basket, vials, backpack, pouch, respirator, tanks, knot, visor, lotus, fin, moon, helm, astrolabe, orb, hemOrbs };
-for (const [name, build] of Object.entries(BUILDERS_B)) BUILDERS[`b.${name}`] = build;
+/** The same builders under their recipe names (`b.` prefix), for a recipe's `builders` field. */
+export const B = Object.fromEntries(Object.entries(BUILDERS_B).map(([name, build]) => [`b.${name}`, build]));
+Object.assign(BUILDERS, B);
 void [box, slab, slabY, trunkBand, Quaternion];

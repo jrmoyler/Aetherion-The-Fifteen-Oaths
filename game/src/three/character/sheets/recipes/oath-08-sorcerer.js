@@ -1,15 +1,16 @@
 // 08 SORCERER - POISON - Bitterglass Guild. Read from assets/references/reference-076 (front, back, side,
 // three-quarter, face, materials: oilskin, pitted brass, sealed glass; tank mount strap and bracket, vial rig).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-08-sorcerer', sheet: 'reference-076', title: 'Bitterglass Sorcerer',
   palette: {
-    skin: '#d2a184', cloth: '#231f24', coat: '#272228', purple: '#3c2a40', gold: '#9a7a3a', leather: '#4a3426', leatherDark: '#2a1f1a', brass: '#8f6e36', brassDark: '#5e4826',
+    cloth: '#231f24', coat: '#272228', purple: '#3c2a40', gold: '#9a7a3a', leather: '#4a3426', leatherDark: '#2a1f1a', brass: '#8f6e36', brassDark: '#5e4826',
     glass: '#4f7a06', glassPale: '#aeb39a', iron: '#4a4541', glove: '#1a181b', boot: '#201c1d', sole: '#131011', hair: '#8b8884', hairGrey: '#b3b0ab', tie: '#3c2a40', cap: '#2e2431',
   },
   build: { width: 1.02, depth: 1.0, bust: .018, hips: 1.14, waist: .95, arm: .9, leg: .96, neck: .92 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'b.neck' },
@@ -39,5 +40,6 @@ export default {
     { use: 'b.hairCap', color: 'hair', streak: 'hairGrey', front: .3, side: .14, nape: -.22, lift: .022, sweep: .008 },
     { use: 'b.knot', at: [0, -.06, -.5], r: .17, color: 'hair', streak: 'hairGrey' },
     { use: 'b.skullCap', color: 'cap', front: .27, side: .1, nape: .02, off: .042, seams: 2, seam: 'gold', band: 'cap' },
+    { use: 'hands', glove: 'glove' },
   ],
 };

@@ -1,16 +1,17 @@
 // 09 SORCERER - LIGHT & HOLY - Oath of Daybreak. Read from assets/references/reference-074 (front, back, side,
 // three-quarter, face, materials: folded enamel ivory, woven grey cloth, brushed gold; lotus waist dock and the
 // reliquary side attachment).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-09-sorcerer', sheet: 'reference-074', title: 'Daybreak Sorcerer',
   palette: {
-    skin: '#d2a184', grey: '#6c6a68', greyDark: '#4f4d4c', cloth: '#6c6a68', ivory: '#d8cfba', ivoryShade: '#b5ac98', gold: '#a8843c', leather: '#55524f', leatherDark: '#3a3836',
+    grey: '#6c6a68', greyDark: '#4f4d4c', cloth: '#6c6a68', ivory: '#d8cfba', ivoryShade: '#b5ac98', gold: '#a8843c', leather: '#55524f', leatherDark: '#3a3836',
     iron: '#a8843c', boot: '#55524f', sole: '#8a6e36',
   },
   build: { width: 1.06, depth: 1.06, belly: .008, arm: 1.0, leg: 1.0 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   // Swept silver hair, the small tail and the short beard are the groom's.
   groom: { hair: true, gear: false },
   parts: [
@@ -38,5 +39,6 @@ export default {
     { use: 'b.lotus', at: 180, off: .064, size: .07 },
     { use: 'b.pouch', y: ['belt', -.1], th: -84, size: [.034, .055, .016], off: .05, color: 'ivory', dark: 'ivoryShade', trim: 'gold', mat: 'enamel', trimMat: 'gold' },
     { use: 'b.strip', color: 'greyDark', mat: 'leather', width: .012, thick: .004, n: 12, path: [{ th: -84, y: ['belt', -.0], off: .05 }, { th: -84, y: ['belt', -.06], off: .052 }] },
+    { use: 'hands' },
   ],
 };

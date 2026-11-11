@@ -1,16 +1,17 @@
 // 09 NINJA - LIGHT & HOLY - Oath of Daybreak. Read from assets/references/reference-075 (front, back, side,
 // three-quarter, face, materials: folded enamel, grey cloth, brushed gold; shoulder wing hinge and visor rear
 // fastener).
-import '../builders-b.js';
+import { B } from '../builders-b.js';
 
 export default {
   id: 'oath-09-ninja', sheet: 'reference-075', title: 'Daybreak Ninja',
   palette: {
-    skin: '#7a4a32', grey: '#6f6d6c', greyDark: '#545252', cloth: '#6f6d6c', ivory: '#d9d0bc', ivoryShade: '#b9b09c', gold: '#b08a3e', leather: '#4a4644', leatherDark: '#343231',
+    grey: '#6f6d6c', greyDark: '#545252', cloth: '#6f6d6c', ivory: '#d9d0bc', ivoryShade: '#b9b09c', gold: '#b08a3e', leather: '#4a4644', leatherDark: '#343231',
     iron: '#b08a3e', boot: '#5a5857', sole: '#3a3838', hair: '#1a1513', hairLight: '#2c231e',
   },
   build: { width: 1.0, depth: 1.0, hips: 1.2, waist: .93, bust: .024, arm: .9, leg: 1.0, neck: .92 },
-  keep: ['hands'],
+  keep: ['weapon'],
+  builders: B,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'b.sleeve', from: -.14, to: 1.0, color: 'skin', mat: 'skin', off: 0 },
@@ -43,5 +44,6 @@ export default {
     { use: 'hair', style: 'bun', streak: 'hairLight', locks: 120, length: .3, bun: { at: [0, .5, -.1], radius: .19 } },
     { use: 'b.headBand', y: .33, from: 0, to: 360, width: .03, off: .03, thick: .008, color: 'gold', mat: 'gold' },
     { use: 'b.visor', top: .27, eye: -.07, half: 56 },
+    { use: 'hands', glove: 'grey', fingerless: true },
   ],
 };
