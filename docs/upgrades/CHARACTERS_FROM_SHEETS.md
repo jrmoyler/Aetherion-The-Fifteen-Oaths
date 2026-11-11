@@ -21,7 +21,9 @@ sheet recipe. If it does:
    body's bind matrix, so all 23 authored clips drive it. Geometry is cached per hero and quality tier and
    shared by every actor of that hero; tessellation scales with `ctx.quality.name` (low 0.6, medium 0.8, high 1).
 
-Heroes without a recipe are untouched and keep their baked costume.
+Heroes without a recipe are untouched and keep their baked costume. `docs/qa/characters/in-game-kiln-ninja.jpg`
+is the Kiln Ninja in the running game (offline, medium quality). The character preview dialog
+(ui/character-preview.js) now goes through the same BodyFactory path, because the hidden baked surface is shared.
 
 ## The system (game/src/three/character/sheets/)
 
@@ -78,6 +80,9 @@ vented iron half mask with terracotta slats and head strap, short spiky black ha
 
 Differs from the sheet:
 - Hands are the baked GLB hands (dark glove texture); the fingerless glove fingers are not rebuilt.
+- Hair is a dense cap of short spikes; the painted hair has longer, looser strands and a parted fringe.
+- Chest plates and boot plates are cleaner and brighter than the painted, soot-worn ceramic; trousers are
+  smoother and fuller at the knee than the painted folds.
 - He holds his baked blade; the sheet shows him unarmed.
 - Body proportions are the rig's (narrower shoulders and a longer A-pose arm angle than the painting).
 - The capelet is a stiff laid cloth, without the painted wrinkles; the back of it follows the front's diagonal
@@ -104,6 +109,14 @@ Differs from the sheet:
 
 They keep their baked costume. Each needs a recipe file; hoods, long robes with open fronts, beards and the
 other face-gear families would need a few more builders (the existing groom gear still serves them meanwhile).
+
+## Verification
+
+Seen on screen: both heroes in the turnaround stage (idle pose, plus `attack_1` for the ninja and
+`cast_release` for the sorcerer), and the ninja as the player in the running game. Not seen on screen: the
+low tier, the sorcerer in the running game, NPCs wearing these bodies, and the character preview dialog.
+In `cast_release` the sorcerer's raised knee pushed through the coat front; the skirt weights were then moved
+toward the thighs, and that change has only been built and unit-tested, not re-rendered.
 
 ## Cost
 
