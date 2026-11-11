@@ -67,6 +67,9 @@ export async function initWorld(ctx){
     for(let i=0;i<(low?220:medium?500:900);i++){const px=ix*TILE+seed(i+892,iz+ix*39)*TILE,pz=iz*TILE+seed(i+352,ix+iz*61)*TILE;const s=sampleTerrain(px,pz,{}),o=regionAt(px,pz);if(s.h>4&&s.road>6&&s.plaza<.1&&['meadow','forest','marsh','cliffs','coast'].includes(o.biome)){const r=seed(i,ix+iz);grass.push([px,s.h,pz,2+r,1+r,2+r,r*7]);}}
     batch(grassGeo,grassMat,grass,group);
     batch(pineGeo,foliage,pines,group);batch(trunkGeo,bark,trunks,group);batch(leafGeo,foliage,leaves,group);batch(rockGeo,stone,rocks,group);
+    // Trunk footprints (x, z, radius) for movement and camera: trees are solid, though they live outside the collision world
+    // because tiles stream in and out.
+    group.userData.trunks=trunks.map(t=>[t[0],t[2],.46*t[3]]);
     details.build(ix,iz,TILE,group);
     group.name='Terrain '+key;scene.add(group);chunks.set(key,group);
   }
@@ -99,11 +102,18 @@ export async function initWorld(ctx){
     if(!flockReady||Math.hypot(flockCenter.x-focusX,flockCenter.z-focusZ)>450){flockCenter.set(focusX,heightAt(focusX,focusZ),focusZ);flockReady=true;}
     birds.children.forEach((b,i)=>{const a=t*.045+i*.014,rank=Math.ceil(i/2),side=i%2?1:-1;b.position.set(flockCenter.x+Math.cos(a)*120+rank*side*2.8,flockCenter.y+44+Math.sin(t*.2+i)*.4,flockCenter.z+Math.sin(a)*120+rank*3);b.rotation.y=-a;for(let j=0;j<2;j++)b.children[j].rotation.z=Math.sin(t*5+i*.7)*(j?-.45:.45);});
   }
+  function eachTrunkNear(x,z,fn){const cx=Math.floor(x/TILE),cz=Math.floor(z/TILE);for(let dz=-1;dz<=1;dz++)for(let dx=-1;dx<=1;dx++){const list=chunks.get((cx+dx)+','+(cz+dz))?.userData.trunks;if(list)for(const t of list)fn(t);}}
+  /** Push a body of radius r out of any tree trunk it overlaps. Returns true when it was moved. */
+  function resolveTrunks(pos,r=.45){let moved=false;eachTrunkNear(pos.x,pos.z,t=>{const dx=pos.x-t[0],dz=pos.z-t[1],min=r+t[2],d2=dx*dx+dz*dz;if(d2>=min*min)return;const d=Math.sqrt(d2);if(d<1e-4){pos.x+=min;moved=true;return;}const out=min+.002;pos.x=t[0]+dx/d*out;pos.z=t[1]+dz/d*out;moved=true;});return moved;}
+  /** Fraction (0..1) along the segment a->b at which it first enters a trunk widened by `pad`, or 1 when clear. */
+  function trunkHit(ax,az,bx,bz,pad=.25){let best=1;const ex=bx-ax,ez=bz-az,len2=ex*ex+ez*ez;if(len2<1e-6)return 1;
+    eachTrunkNear((ax+bx)/2,(az+bz)/2,t=>{const fx=ax-t[0],fz=az-t[1],r=t[2]+pad,b=2*(fx*ex+fz*ez),c=fx*fx+fz*fz-r*r;if(c<=0)return; // starting inside is the mover's problem, not the camera's
+      const disc=b*b-4*len2*c;if(disc<0)return;const k=(-b-Math.sqrt(disc))/(2*len2);if(k>0&&k<best)best=k;});return best;}
   async function ready(x=focusX,z=focusZ){focus(x,z);let n=0;while(jobs.length&&n<9){const j=jobs.shift();build(j[0],j[1]);n++;if(n%2===0)await new Promise(r=>setTimeout(r,0));}return true;}
   const isWater=(x,z)=>heightAt(x,z)<waterLevelAt(x,z);
   const waterLevelAt=(x,z)=>Math.hypot(x-marsh[0],z-marsh[1])<630?MARSH_LEVEL:SEA_LEVEL;
   const stopUpdate=ctx.addUpdate?.(update,40);
   function dispose(){stopUpdate?.();details.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon,birds);for(const g of [trunkGeo,pineGeo,leafGeo,rockGeo,grassGeo,sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,stone,bark,foliage,grassMat,water.material,birdMat])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
-  return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
+  return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,resolveTrunks,trunkHit,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
 }
 export const init=initWorld;

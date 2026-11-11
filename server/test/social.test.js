@@ -457,8 +457,10 @@ test('AI adventurers answer party invites, duel, trade and follow their leader',
   assert.equal(bot.party, p.party, 'bot joined the party');
   // follows the leader
   put(S, p, p.x + 30, p.z);
+  const gap = Math.hypot(bot.x - p.x, bot.z - p.z);
   run(sim, 3);
-  assert.ok(Math.hypot(bot.x - p.x, bot.z - p.z) < 15, 'bot follows its party leader');
+  // Closing speed, not a fixed distance: which discipline the adventurer rolls changes its pace.
+  assert.ok(Math.hypot(bot.x - p.x, bot.z - p.z) < gap - 8, 'bot follows its party leader');
   // duel: bot accepts, fights after the countdown, the bout ends without a death
   bot.hp = bot.mhp;
   sim.handle('c1', { t: 'duel', op: 'challenge', target: bot.id });

@@ -103,6 +103,22 @@ export async function init(ctx) {
     });
     return best;
   }
+  /** Closest enemy within `range` whose bearing from the camera's facing has at least `minFacing` cosine. */
+  function softTarget(range, minFacing) {
+    const p = player(); if (!p) return null;
+    const forward = camForward(); let best = null, score = Infinity;
+    ctx.actors?.forEach?.((a) => {
+      if (a.visible === false || !isEnemy(a)) return;
+      const dx = a.position.x - p.position.x, dz = a.position.z - p.position.z, distance = Math.hypot(dx, dz);
+      if (distance > range || distance < 0.01 || Math.abs(a.position.y - p.position.y) > 8) return;
+      const facing = (dx * forward.x + dz * forward.z) / distance;
+      if (facing < minFacing) return;
+      if (ctx.collision?.blocked?.(p.position.x, p.position.z, a.position.x, a.position.z, p.position.y + 1)) return;
+      const candidate = distance * (1.6 - facing);
+      if (candidate < score) { score = candidate; best = a; }
+    });
+    return best;
+  }
   function cycleTarget() {
     const p = player(); if (!p) return;
     const list = [];
@@ -182,6 +198,12 @@ export async function init(ctx) {
       const melee = ab.shape === 'melee';
       if (tgt && tgt.position.distanceTo(p.position) > (ab.range ?? 12) + (melee ? 1.5 : 10)) tgt = melee ? null : tgt;
       if (!tgt && (melee || ab.kind === 'basic')) { const n = nearestEnemy((ab.range ?? 3) + (melee ? 1.8 : 0)); if (n) { tgt = n; setTarget(n.id); } }
+      // Soft targeting: a technique thrown with nothing selected takes the enemy you are looking at, if one is in
+      // reach. Under pointer lock the reticle is a deliberate aim, so only an enemy close to it is taken.
+      if (!tgt && ab.kind !== 'basic' && (ab.shape === 'line' || ab.shape === 'zone' || ab.shape === 'projectile')) {
+        const n = softTarget(ab.range ?? 12, ctx.input?.state?.pointerLocked ? 0.94 : 0.35);
+        if (n) { tgt = n; setTarget(n.id); }
+      }
       const { dir, aim } = computeAim(ab, tgt);
       try { p.faceToward?.(aim.x + dir.x * 0.01, aim.z + dir.z * 0.01, 0.6); } catch { /* optional */ }
       const castTime = ab.castTime ?? 0;
@@ -295,7 +317,7 @@ export async function init(ctx) {
     const p = player();
     const amount = Math.round(e.amount ?? 0);
     if (amount <= 0 && !e.absorbed) bus.emit('combat:floater', { x: hx, y: hy, z: hz, text: 'Miss', kind: 'miss', element, taken: selfDst });
-    else if (amount > 0) bus.emit('combat:floater', { x: hx, y: hy, z: hz, text: String(amount), kind: e.crit ? 'crit' : 'damage', element, taken: selfDst, dot: !!e.dot });
+    else if (amount > 0) bus.emit('combat:floater', { x: hx, y: hy, z: hz, text: String(amount), kind: e.crit ? 'crit' : 'damage', element, taken: selfDst, own: selfSrc, dot: !!e.dot });
     if (e.absorbed) bus.emit('combat:floater', { x: hx, y: hy + 0.35, z: hz, text: `${Math.round(e.absorbed)} absorbed`, kind: 'status', element, taken: selfDst });
     if (e.rx) bus.emit('combat:floater', { x: hx, y: hy + 0.6, z: hz, text: e.rx, kind: 'status', element });
     if (dst) flashes.flash(dst, new Color(ELEMENT_FLASH[element] ?? '#ffffff'), e.crit ? 0.85 : e.dot ? 0.35 : 0.6, e.crit ? 0.24 : 0.16);
@@ -318,7 +340,8 @@ export async function init(ctx) {
       case 'hit': onHit(e); break;
       case 'heal': {
         const dst = actorOf(e.dst); if (!dst) break;
-        bus.emit('combat:floater', { x: dst.position.x, y: dst.position.y + (dst.headY ?? 1.7), z: dst.position.z, text: `+${Math.round(e.amount ?? 0)}`, kind: 'heal', taken: isSelf(e.dst) });
+        // Passive regeneration ticks a point or two at a time; numbering each one buries the fight in +1s.
+        if ((e.amount ?? 0) >= 3) bus.emit('combat:floater', { x: dst.position.x, y: dst.position.y + (dst.headY ?? 1.7), z: dst.position.z, text: `+${Math.round(e.amount ?? 0)}`, kind: 'heal', taken: isSelf(e.dst) });
         const now = nowMs(); if (now - (dst._fxHealAt ?? -1e9) > 700 && (e.amount ?? 0) > 2) { dst._fxHealAt = now; ctx.vfx?.play?.('heal', { caster: dst, follow: () => dst.position }); }
         break;
       }

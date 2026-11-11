@@ -9,7 +9,7 @@ Captured in headless Chrome (software rendering) from a production build, touch 
 | 844x390 landscape, both help panels collapsed | `landscape-844x390.png` |
 
 A scripted check measured every HUD element (player frame, target frame, compass, minimap, tracker,
-guide, experience strip, four utility buttons, ten cluster buttons, thumbstick) at 667x375, 844x390,
+guide, potion belt, experience strip, four utility buttons, ten cluster buttons, thumbstick) at 667x375, 844x390,
 932x430 and 390x844 in three states: first run, tracker toggled, both panels collapsed. Result at all
 four sizes: no two elements overlap, nothing leaves the screen, every utility button is at least 44 px.
 
