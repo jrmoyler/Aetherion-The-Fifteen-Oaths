@@ -14,7 +14,7 @@ export default {
     cloth: '#3a2e29', tunic: '#3a2e29', tunicDark: '#27201d', shale: '#4b4541', sand: '#b3956c', leather: '#6b4631', leatherDark: '#3c291d', iron: '#5c5249', ceramic: '#4b4541',
     amethyst: '#3c1c63', boot: '#2d2521', sole: '#191513', glove: '#1f1a18', hair: '#2b1d15',
   },
-  build: { width: 1.22, depth: 1.22, arm: 1.32, leg: 1.3, shoulder: 1.15, waist: 1.1, hips: 1.06, neck: 1.2 },
+  build: { width: 1.3, depth: 1.24, arm: 1.5, leg: 1.36, shoulder: 1.2, waist: 1.04, hips: 1.0, neck: 1.2 },
   keep: ['weapon'],
   builders: A,
   groom: { hair: false, gear: false },
@@ -23,7 +23,7 @@ export default {
     { use: 'skinLimb', limb: 'arm', from: .5, to: 1.2 },
     { use: 'shirt', color: 'tunic', sleeve: .74, flare: .02, cap: .024, off: .012, trim: 'tunicDark', trimWidth: .018 },
     { use: 'wrap', limb: 'arm', from: 1.08, to: 1.95, color: 'tunicDark', off: .006, pitch: .02 },
-    { use: 'trousers', color: 'tunic', gather: 1.1, bag: .042, pleats: 11, pipingPaths: [] },
+    { use: 'trousers', color: 'tunic', gather: 1.1, bag: .032, pleats: 11, pipingPaths: [] },
     { use: 'band', limb: 'leg', at: 1.13, width: .04, color: 'leatherDark', trim: 'sand' },
     { use: 'wrap', limb: 'leg', from: 1.16, to: 1.66, color: 'tunicDark', off: .008, pitch: .022 },
     // Shale breast and back plates framed in sandstone, slung on leather over the shoulders, with the sandstone
@@ -40,18 +40,18 @@ export default {
     { use: 'belt', color: 'leather', buckle: 'iron', height: .05, off: .022, keepers: [30, -30, 150, -150] },
     { use: 'a/kit', name: 'pouches', on: 'trunk', side: 'R', y: 'belt-.03', th: 50, off: .032, items: pouch },
     { use: 'a/kit', name: 'pouches', on: 'trunk', side: 'R', y: 'belt-.03', th: 96, off: .032, items: pouch },
-    { use: 'a/kit', name: 'pouches', on: 'trunk', side: 'L', y: 'belt-.03', th: 128, off: .032, items: pouch },
-    { use: 'a/kit', name: 'amethyst', on: 'trunk', side: 'L', y: 'belt-.085', th: 62, off: .034, bone: 'hips', items: [
+    { use: 'a/kit', name: 'pouches', on: 'trunk', side: 'L', y: 'belt-.03', th: 100, off: .032, items: pouch },
+    { use: 'a/kit', name: 'amethyst', on: 'trunk', side: 'L', y: 'belt-.09', th: 38, off: .04, bone: 'hips', items: [
       { s: 'cyl', r: .074, h: .02, sides: 6, color: 'sand', mat: 'stone' }, { s: 'cyl', r: .058, h: .024, sides: 6, color: 'tunicDark', mat: 'stone' },
       shard(0, .0, .024, .085, 0, 62), shard(-.024, -.008, .017, .06, 28, 58), shard(.024, -.012, .018, .064, -24, 60), shard(.004, .03, .015, .05, 8, 66), shard(-.008, -.034, .014, .045, 170, 60),
       { s: 'box', size: [.012, .05, .005], at: [0, .1, -.004], color: 'leather', mat: 'leather' } ] },
     // Stone slabs slung on the forearms.
     { use: 'band', limb: 'arm', at: 1.3, width: .028, off: .01, thick: .006, color: 'leather', buckle: { phi: 20 } },
     { use: 'band', limb: 'arm', at: 1.72, width: .028, off: .01, thick: .006, color: 'leather', buckle: { phi: 20 } },
-    { use: 'a/plates', on: 'arm', flat: true, list: [{ at: [95, 1.5], size: [.118, .23] }], color: 'shale', border: 'sand', thick: .04, off: .018, borderWidth: .013, name: 'slabs' },
+    { use: 'a/plates', on: 'arm', flat: true, list: [{ at: [95, 1.5], size: [.14, .25] }], color: 'shale', border: 'sand', thick: .045, off: .018, borderWidth: .013, name: 'slabs' },
     { use: 'gloveCuff', color: 'glove', strap: 'leather' },
-    { use: 'boots', color: 'boot', sole: 'sole', top: 1.62, toeCap: 'shale', heelPlate: 'sand', cuff: 'sand', plateMat: 'ceramic', straps: 3, strapColor: 'leather', bulk: 1.32, soleHeight: .046 },
-    { use: 'a/plates', on: 'leg', flat: true, list: [{ at: [0, 1.8], size: [.092, .13] }], color: 'shale', border: 'sand', thick: .026, off: .03, borderWidth: .011, name: 'greaves' },
+    { use: 'boots', color: 'boot', sole: 'sole', top: 1.62, toeCap: 'shale', heelPlate: 'sand', cuff: 'sand', plateMat: 'ceramic', straps: 3, strapColor: 'leather', bulk: 1.5, soleHeight: .05 },
+    { use: 'a/plates', on: 'leg', flat: true, list: [{ at: [0, 1.8], size: [.11, .14] }], color: 'shale', border: 'sand', thick: .028, off: .04, borderWidth: .011, name: 'greaves' },
     { use: 'hands', glove: 'glove', fingerless: true, scale: 1.12 },
   ],
 };

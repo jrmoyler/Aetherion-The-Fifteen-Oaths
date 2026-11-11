@@ -5,8 +5,8 @@ import { A } from '../builders-a.js';
 const brace = (s) => ({ use: 'strap', color: 'leather', closed: false, width: .034, thick: .006, anchor: { at: .15, size: .02, color: 'iron' }, n: 34, path: [
   { th: s * 24, y: 'belt', dy: .03, off: .024 }, { th: s * 25, y: 'ribs', off: .026 }, { th: s * 30, y: 'armpit', dy: .02, off: .024 }, { th: s * 56, y: 'shoulder', dy: -.02, off: .02 },
   { th: s * 124, y: 'shoulder', dy: -.02, off: .02 }, { th: s * 150, y: 'armpit', dy: .02, off: .024 }, { th: s * 160, y: 'ribs', off: .026 }, { th: s * 164, y: 'belt', dy: .03, off: .024 } ] });
-const post = (x, y, sx, sy) => ({ s: 'box', size: [sx, sy, .017], at: [x, y, .03], color: 'frame', mat: 'stone', r: .005 });
-const block = (x, y) => [{ s: 'box', size: [.03, .03, .024], at: [x, y, .03], color: 'sand', mat: 'stone', r: .006 }, { s: 'dome', r: .006, at: [x, y, .054], color: 'iron', mat: 'iron' }];
+const post = (x, y, sx, sy) => ({ s: 'box', size: [sx, sy, .024], at: [x, y, .03], color: 'frame', mat: 'stone', r: .006 });
+const block = (x, y) => [{ s: 'box', size: [.036, .036, .03], at: [x, y, .03], color: 'sand', mat: 'stone', r: .006 }, { s: 'dome', r: .006, at: [x, y, .06], color: 'iron', mat: 'iron' }];
 const vein = (x, y, z, r, h, rot) => ({ s: 'gem', r, h, at: [x, y, z], rot, color: 'amethyst', mat: 'crystal' });
 
 export default {
@@ -15,7 +15,7 @@ export default {
     cloth: '#3c332c', tunic: '#3c332c', tunicDark: '#2a2420', sand: '#b3956c', shale: '#4a4541', frame: '#5a524a', leather: '#6b4a33', leatherDark: '#3e2b1f', iron: '#5b534b', ceramic: '#4a4541',
     amethyst: '#3c1c63', boot: '#3a322c', sole: '#191513', glove: '#2a211c', hair: '#191517', tie: '#191517',
   },
-  build: { width: 1.2, depth: 1.22, bust: .03, hips: 1.26, waist: 1.2, arm: 1.34, leg: 1.38, shoulder: 1.12, neck: 1.08 },
+  build: { width: 1.3, depth: 1.26, bust: .03, hips: 1.3, waist: 1.2, arm: 1.5, leg: 1.5, shoulder: 1.14, neck: 1.08 },
   keep: ['weapon'],
   builders: A,
   groom: { hair: false, gear: false },
@@ -44,13 +44,13 @@ export default {
     { use: 'a/kit', name: 'inlay', on: 'leg', side: 'both', t: 1.7, phi: 60, off: .034, items: [vein(0, 0, 0, .012, .05, [0, 0, 0])] },
     // Carrying frame behind the head with its boulder, clamped at the shoulders and the small of the back.
     { use: 'a/kit', name: 'frame', on: 'trunk', y: 'shoulder-.02', th: 180, off: .03, bone: 'spine2', items: [
-      post(-.17, .2, .017, .22), post(.17, .2, .017, .22), post(0, .42, .19, .017), post(0, -.02, .19, .017), post(0, -.12, .017, .1),
+      post(-.17, .2, .024, .22), post(.17, .2, .024, .22), post(0, .42, .19, .024), post(0, -.02, .19, .024), post(0, -.12, .022, .1),
       ...block(-.17, .42), ...block(.17, .42), ...block(-.17, -.02), ...block(.17, -.02), ...block(-.17, .2), ...block(.17, .2), ...block(0, .42),
       { s: 'box', size: [.05, .032, .02], at: [0, -.21, .02], color: 'sand', mat: 'stone', r: .006 },
-      { s: 'rock', size: [.115, .16, .1], seed: 7, at: [-.275, .27, .05], rot: [0, 0, 14], color: 'shale', mat: 'stone' },
-      { s: 'rock', size: [.07, .06, .07], seed: 3, at: [-.25, .43, .05], color: 'sand', mat: 'stone' },
-      vein(-.3, .3, .135, .02, .11, [20, 0, 20]), vein(-.25, .22, .135, .016, .08, [28, 0, -30]), vein(-.34, .2, .1, .014, .07, [10, 40, 60]),
-      { s: 'box', size: [.07, .012, .012], at: [-.2, .3, .04], color: 'leather', mat: 'leather' }, { s: 'box', size: [.07, .012, .012], at: [-.2, .2, .04], color: 'leather', mat: 'leather' } ] },
+      { s: 'rock', size: [.15, .2, .13], seed: 7, at: [-.31, .26, .06], rot: [0, 0, 14], color: 'shale', mat: 'stone' },
+      { s: 'rock', size: [.085, .07, .085], seed: 3, at: [-.29, .45, .06], color: 'sand', mat: 'stone' },
+      vein(-.33, .3, .175, .024, .13, [24, 0, 20]), vein(-.27, .2, .17, .019, .1, [30, 0, -30]), vein(-.39, .18, .14, .017, .09, [14, 40, 60]),
+      { s: 'box', size: [.05, .014, .014], at: [-.2, .32, .04], color: 'leather', mat: 'leather' }, { s: 'box', size: [.05, .014, .014], at: [-.2, .2, .04], color: 'leather', mat: 'leather' } ] },
     { use: 'hair', style: 'bun', color: 'hair', knot: { at: [0, .06, -.44], radius: .17, tie: 'tie' } },
     { use: 'a/fringe', color: 'hair', count: 6, span: 1.2, from: .4, to: .1, sideTo: -.3, width: .03, sweep: .5 },
     { use: 'hands', glove: 'glove', fingerless: true, scale: 1.08 },

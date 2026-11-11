@@ -289,7 +289,7 @@ const dirOf = (phi, y) => { const cy = clamp(2 * y, -1, 1), st = Math.sqrt(1 - c
  * Hood worn up: a shell over the skull with an oval face opening, a peak, a lined rim and a skirt that falls to
  * the shoulders. `open`: [half-angle (radians), half-height, centre height] of the opening in head units.
  */
-export function hood(c, { color = 'cloth', lining = 'lining', mat = 'cloth', off = .13, peak = .15, back = .14, open = [1.0, .43, -.08], drape = .84, flare = .26, brim = .09, rim = .034 }) {
+export function hood(c, { color = 'cloth', lining = 'lining', mat = 'cloth', off = .19, peak = .2, back = .2, open = [1.02, .44, -.08], drape = .9, flare = .4, brim = .12, rim = .042 }) {
   const place = headPlace(c), col = c.pal(color), lin = c.pal(lining), m = surface(mat), y1 = -.2;
   c.bag.part = 'hood';
   const gapAt = (y) => { const f = (y - open[2]) / open[1]; return Math.abs(f) < 1 ? open[0] * Math.sqrt(1 - f * f) ** .8 : 0; };
@@ -358,7 +358,7 @@ export function beard(c, { color = 'hair', length = 1.25, width = .15, depth = .
  * Sealed helmet: a shell over the whole head, a dark visor across the face, a brass visor frame, and a crest of
  * shell plates swept from a bill over the brow to a tail behind the crown.
  */
-export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim = 'brass', crest = 'nacre', under = null, off = .085, band = null }) {
+export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim = 'brass', crest = 'nacre', under = null, off = .1, band = null }) {
   const place = headPlace(c), col = c.pal(color), m = surface(mat), centre = c.head.C, VW = .98, VY = [-.3, .2];
   c.bag.part = 'helm';
   const env = (phi, y, o) => { const a = Math.abs(wrapAngle(phi)), s = scalp(c, phi, y, o); if (a > 2) return s; const f = face(c, phi, Math.max(y, -.492), o); return s.lerp(f, smooth(2, 1.35, a) * smooth(.4, .2, y)); };
@@ -379,8 +379,8 @@ export function helm(c, { color = 'cloth', mat = 'cloth', visor = 'visor', trim 
     p.addScaledVector(V(0, -.28, 1), bill * smooth(.3, 0, w) ** 1.6).addScaledVector(V(0, .55, -1), tail * smooth(.62, 1, w) ** 1.5);
     return { p: place(p), skin: HEAD };
   }, { color: tone, mat: mm, inside: centre });
-  if (under) plate(c.pal(under), m, 26, 156, 1.45, .014, .12, .16, .02);
-  plate(c.pal(crest), SURFACE.nacre, 14, 142, 1.2, .04, .3, .3, .06);
+  if (under) plate(c.pal(under), m, 24, 158, 1.6, .016, .16, .2, .02);
+  plate(c.pal(crest), SURFACE.nacre, 12, 146, 1.35, .045, .4, .42, .07);
 }
 
 // ---------------------------------------------------------------------------------------------------------

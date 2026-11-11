@@ -8,18 +8,17 @@ const shell = (y, r, tilt, spread = 150) => ({ s: 'fan', r, spread, ribs: 9, bul
 export default {
   id: 'oath-04-ninja', sheet: 'reference-084', title: 'Tidal Ninja',
   palette: {
-    suit: '#1a2848', suitDark: '#111a31', green: '#4a877d', brass: '#b28c47', iron: '#b28c47', nacre: '#e9dfcf', visor: '#12333c', glass: '#3c95a0', leather: '#3b2d21', leatherDark: '#241b14',
+    suit: '#1a2848', suitDark: '#111a31', green: '#3d6e67', brass: '#b28c47', iron: '#b28c47', nacre: '#e9dfcf', visor: '#12333c', glass: '#3c95a0', leather: '#3b2d21', leatherDark: '#241b14',
     boot: '#18243f', sole: '#0f1626', glove: '#16213c',
   },
-  build: { hips: 1.16, waist: .98, bust: .03, leg: 1.12, arm: .98 },
+  build: { width: 1.04, hips: 1.26, waist: 1.02, bust: .032, leg: 1.3, arm: 1.16, shoulder: 1.04 },
   keep: ['weapon'],
   builders: A,
   groom: { hair: false, gear: false },
   parts: [
     { use: 'a/bodysuit', color: 'suit', trunk: ['crotch', 'base'], arms: [-.14, 1.98], legs: [-.155, 1.92], off: .005, zones: [
-      { on: 'leg', a: [38, 150], b: [.06, .9], color: 'green' }, { on: 'leg', a: [100, 175], b: [1.12, 1.6], color: 'green' },
-      { on: 'trunk', both: true, a: [68, 118], b: ['waist-.02', 'armpit-.01'], color: 'green' }, { on: 'arm', a: [-160, -60], b: [.2, .9], color: 'green' } ] },
-    { use: 'a/lines', on: 'leg', paths: [[[36, .04], [30, .45], [38, .9]], [[152, .04], [154, .9]], [[36, .04], [95, -.04], [152, .04]], [[38, .9], [95, .96], [154, .9]], [[98, 1.12], [100, 1.6]], [[20, 1.05], [-10, 1.4], [10, 1.85]]], color: 'brass', mat: 'brass', width: .0035, thick: .0015, off: .006, name: 'piping' },
+      { on: 'leg', a: [48, 140], b: [.1, .82], color: 'green' }, { on: 'trunk', both: true, a: [68, 118], b: ['waist-.02', 'armpit-.01'], color: 'green' } ] },
+    { use: 'a/lines', on: 'leg', paths: [[[46, .08], [40, .45], [48, .84]], [[142, .08], [144, .84]], [[46, .08], [95, .0], [142, .08]], [[48, .84], [95, .92], [144, .84]], [[20, 1.05], [-10, 1.4], [10, 1.85]], [[95, .92], [100, 1.3], [96, 1.8]]], color: 'brass', mat: 'brass', width: .0035, thick: .0015, off: .006, name: 'piping' },
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[66, 'waist-.02'], [64, 'ribs'], [68, 'armpit-.01']], [[14, 'belt'], [26, 'ribs'], [20, 'chest'], [34, 'shoulder-.04']], [[160, 'belt'], [168, 'chest'], [150, 'shoulder-.04']]], color: 'brass', mat: 'brass', width: .0035, thick: .0015, off: .006, name: 'piping' },
     { use: 'a/collar', color: 'suitDark', height: .085, flare: .004, off: .009 },
     { use: 'a/helm', color: 'suit', visor: 'visor', trim: 'brass', crest: 'nacre', under: 'green', band: 'brass' },
@@ -28,7 +27,7 @@ export default {
       { th: -50, y: 'shoulder', dy: -.03, off: .013 }, { th: 24, y: 'ribs', dy: .02, off: .014 }, { th: 92, y: 'waist', dy: .01, off: .014 },
       { th: 168, y: 'ribs', dy: .0, off: .014 }, { th: 228, y: 'shoulder', dy: -.03, off: .013 }, { th: 270, y: 'shoulder', dy: .004, off: .014 } ] },
     { use: 'a/kit', name: 'pauldron', on: 'arm', side: 'R', t: .06, phi: 86, off: .012, items: [
-      shell(-.03, .115, -3, 125), shell(.025, .12, -7, 140), shell(.08, .115, -12, 150),
+      shell(-.085, .15, -2, 135), shell(-.02, .165, -6, 150), shell(.05, .17, -10, 165), shell(.11, .14, -16, 170),
       { s: 'cyl', r: .019, h: .012, at: [0, .07, .012], rot: [-12, 0, 0], color: 'brass', mat: 'brass' }, { s: 'dome', r: .009, at: [0, .068, .024], rot: [-12, 0, 0], color: 'brass', mat: 'brass' } ] },
     { use: 'band', limb: 'arm', at: .62, width: .014, off: .006, thick: .004, color: 'brass', mat: 'iron' },
     { use: 'band', limb: 'arm', at: 1.22, width: .014, off: .006, thick: .004, color: 'brass', mat: 'iron' },
@@ -43,7 +42,7 @@ export default {
     { use: 'belt', color: 'leather', buckle: 'brass', height: .022, thick: .005, off: .011, buckleSize: [.016, .014], keepers: [], tilt: -.014 },
     // Swept calf fins, brass anklets, brass-capped boots.
     { use: 'a/kit', name: 'fins', on: 'leg', side: 'both', t: 1.82, phi: 138, off: .0, items: [
-      { s: 'leaf', len: .27, width: .085, thick: .012, bend: .1, base: .55, color: 'nacre', mat: 'nacre' }, { s: 'leaf', len: .2, width: .07, thick: .01, bend: .085, base: .55, at: [-.03, -.01, 0], rot: [0, 0, 10], color: 'green', mat: 'nacre' } ] },
+      { s: 'leaf', len: .33, width: .115, thick: .014, bend: .12, base: .55, color: 'nacre', mat: 'nacre' }, { s: 'leaf', len: .25, width: .095, thick: .012, bend: .1, base: .55, at: [-.03, -.01, 0], rot: [0, 0, 10], color: 'green', mat: 'nacre' } ] },
     { use: 'band', limb: 'leg', at: 1.84, width: .022, off: .008, thick: .005, color: 'brass', mat: 'iron' },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.9, toeCap: 'brass', heelPlate: 'brass', plateMat: 'iron', straps: 1, strapColor: 'leather', buckle: 'brass', soleHeight: .03 },
     { use: 'gloveCuff', color: 'glove', from: 1.92, to: 2.05, off: .004 },

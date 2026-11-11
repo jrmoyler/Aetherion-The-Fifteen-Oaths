@@ -16,10 +16,10 @@ const tasset = [
 export default {
   id: 'oath-04-sorcerer', sheet: 'reference-086', title: 'Tidal Sorcerer',
   palette: {
-    robe: '#1e2b4d', cloth: '#1e2b4d', robeDark: '#151f3a', brass: '#a98346', iron: '#a98346', nacre: '#e9e0d1', green: '#3f615d', water: '#3f9cc0', foam: '#12384a', leather: '#3a2b20', leatherDark: '#231a14',
+    robe: '#131c3c', cloth: '#131c3c', robeDark: '#151f3a', brass: '#a98346', iron: '#a98346', nacre: '#e9e0d1', green: '#3f615d', water: '#2b6f96', foam: '#12384a', leather: '#3a2b20', leatherDark: '#231a14',
     boot: '#20232a', sole: '#101114', glove: '#2a211b', hair: '#dedbd4', hairGrey: '#bdb9b1',
   },
-  build: { width: 1.3, depth: 1.38, belly: .045, hips: 1.2, waist: 1.28, arm: 1.24, leg: 1.3, neck: 1.12, shoulder: 1.1 },
+  build: { width: 1.3, depth: 1.38, belly: .045, hips: 1.2, waist: 1.28, arm: 1.35, leg: 1.4, neck: 1.12, shoulder: 1.1 },
   keep: ['weapon'],
   builders: A,
   groom: { hair: false, gear: false },
@@ -28,7 +28,7 @@ export default {
     { use: 'wrap', limb: 'arm', from: 1.25, to: 1.94, color: 'green', off: .006, pitch: .02 },
     { use: 'a/plates', on: 'arm', list: [{ at: [95, 1.6], size: [.085, .12] }], color: 'nacre', mat: 'nacre', border: 'brass', borderMat: 'brass', borderWidth: .007, thick: .012, off: .011, r: .02, name: 'cuffs' },
     { use: 'band', limb: 'arm', at: 1.86, width: .02, off: .009, thick: .005, color: 'brass', mat: 'iron' },
-    { use: 'shirt', color: 'robe', sleeve: 1.42, flare: .05, off: .015, slack: .006, cap: .022, trim: 'brass', trimWidth: .016 },
+    { use: 'shirt', color: 'robe', sleeve: 1.58, flare: .05, off: .015, slack: .006, cap: .022, trim: 'brass', trimWidth: .016 },
     { use: 'trousers', color: 'green', gather: 1.56, bag: .04, pleats: 9, pockets: [], pipingPaths: [], from: 1.0 },
     { use: 'band', limb: 'leg', at: 1.58, width: .03, color: 'brass', mat: 'iron', off: .008 },
     { use: 'skirt', color: 'robe', hem: .31, flare: 1.3, off: .024, folds: 8, trim: 'brass', trimWidth: .014 },
@@ -43,7 +43,7 @@ export default {
     // Shell collar: nacre discs linked in brass over a cloth yoke, the hood lying down behind.
     { use: 'a/hoodDown', color: 'robe', lining: 'robeDark', width: .17, drop: .26, depth: .09 },
     { use: 'cowl', color: 'robe', rolls: 2, radius: .036, rise: .034 },
-    { use: 'a/yoke', color: 'robe', mat: 'cloth', inner: .1, outer: .215, off: .016, thick: .008, discs: { count: 10, r: .052, at: .66, lift: .01, color: 'nacre', rim: 'brass', phase: 0 } },
+    { use: 'a/yoke', color: 'robe', mat: 'cloth', inner: .1, outer: .215, off: .016, thick: .008, discs: { count: 9, r: .064, at: .66, lift: .01, color: 'nacre', rim: 'brass', phase: 0 } },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.6, toeCap: 'brass', heelPlate: 'brass', cuff: 'brass', plateMat: 'iron', straps: 3, strapColor: 'leather', buckle: 'brass', bulk: 1.2 },
     { use: 'hair', style: 'spiky', color: 'hair', streak: 'hairGrey', length: .13, density: 1.4, fringe: .34 },
     { use: 'hands', scale: 1.08 },
