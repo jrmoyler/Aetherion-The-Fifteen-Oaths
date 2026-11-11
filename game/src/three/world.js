@@ -6,6 +6,7 @@ import {buildSanctuaries} from './worldArchitecture.js';
 import {createRealmFlora,realmRock} from './realmFlora.js';
 import {terrainResolution,addTerrainSkirt} from './terrain-detail.js';
 import {createBiomeDetails} from './biomeDetails.js';
+import {createRealmCreatures} from './realmCreatures.js';
 const TILE=160;
 // Tiles this close to the player draw full trees; farther tiles draw baked cards.
 const NEAR_BAND=1;
@@ -93,19 +94,14 @@ export async function initWorld(ctx){
   const architecture=buildSanctuaries(ctx);
   // Coarse continent underlay closes the horizon while near tiles stream in.
   const horizon=terrain(0,0,5800,low?64:medium?96:128);horizon.position.y=-1.8;horizon.name='Continuous distant continent';scene.add(horizon);
-  // Small migrating birds make the sky inhabited without opaque billboard sprites.
-  const birds=new THREE.Group(),birdMat=new THREE.MeshStandardMaterial({color:'#37413f',side:THREE.DoubleSide,roughness:1});
-  const wingGeo=new THREE.BufferGeometry();wingGeo.setAttribute('position',new THREE.Float32BufferAttribute([0,0,.13,.65,0,.22,1.45,0,-.19,0,0,.13,1.45,0,-.19,.55,0,-.18],3));wingGeo.computeVertexNormals();
-  const bodyGeo=new THREE.SphereGeometry(.14,6,4);bodyGeo.scale(1,.75,2.8);
-  for(let i=0;i<14;i++){const bird=new THREE.Group();for(const side of [-1,1]){const wing=new THREE.Mesh(wingGeo,birdMat);wing.scale.x=side;bird.add(wing);}bird.add(new THREE.Mesh(bodyGeo,birdMat));birds.add(bird);}scene.add(birds);
-  const flockCenter=new THREE.Vector3();let flockReady=false;
+  // Each realm's ambient wildlife, from its Biome Triad world (scenery only: no collision, no targeting, no simulation).
+  const creatures=createRealmCreatures(ctx);
   let t=0;
   function update(dt){architecture.update(dt);t+=Math.min(dt,.1);wind.time.value=t;water.time.value=t;details.update(t);
     // Terrain build is bounded to one tile per frame, with nearest tiles first.
     if(jobs.length){const job=jobs.shift();build(job[0],job[1]);}
     const target=ctx.actors?.player?.position||ctx.actors?.player?.root?.position||ctx.player?.position||ctx.player?.root?.position||ctx.camera?.position;if(target)focus(target.x,target.z);
-    if(!flockReady||Math.hypot(flockCenter.x-focusX,flockCenter.z-focusZ)>450){flockCenter.set(focusX,heightAt(focusX,focusZ),focusZ);flockReady=true;}
-    birds.children.forEach((b,i)=>{const a=t*.045+i*.014,rank=Math.ceil(i/2),side=i%2?1:-1;b.position.set(flockCenter.x+Math.cos(a)*120+rank*side*2.8,flockCenter.y+44+Math.sin(t*.2+i)*.4,flockCenter.z+Math.sin(a)*120+rank*3);b.rotation.y=-a;for(let j=0;j<2;j++)b.children[j].rotation.z=Math.sin(t*5+i*.7)*(j?-.45:.45);});
+    creatures.update(dt,target);
   }
   function eachTrunkNear(x,z,fn){const cx=Math.floor(x/TILE),cz=Math.floor(z/TILE);for(let dz=-1;dz<=1;dz++)for(let dx=-1;dx<=1;dx++){const list=chunks.get((cx+dx)+','+(cz+dz))?.userData.trunks;if(list)for(const t of list)fn(t);}}
   /** Push a body of radius r out of any tree trunk it overlaps. Returns true when it was moved. */
@@ -118,7 +114,7 @@ export async function initWorld(ctx){
   const isWater=(x,z)=>heightAt(x,z)<waterLevelAt(x,z);
   const waterLevelAt=(x,z)=>Math.hypot(x-marsh[0],z-marsh[1])<630?MARSH_LEVEL:SEA_LEVEL;
   const stopUpdate=ctx.addUpdate?.(update,40);
-  function dispose(){stopUpdate?.();details.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon,birds);flora.dispose();for(const g of [sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,water.material,birdMat])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});wingGeo.dispose();bodyGeo.dispose();}
+  function dispose(){stopUpdate?.();details.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;scene.remove(sea,pool,architecture,horizon);creatures.dispose();flora.dispose();for(const g of [sea.geometry,pool.geometry,horizon.geometry])g.dispose();for(const m of [terrainMat,water.material])m.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});}
   return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,resolveTrunks,trunkHit,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
 }
 export const init=initWorld;
