@@ -15,8 +15,8 @@ const PI = Math.PI, DEG = PI / 180;
 /** Surface classes beyond the kiln set, as (roughness, metalness, kind) triples the costume shader already knows. */
 const SURFACE = {
   ...MAT,
-  wood: [.72, 0, 2], bark: [.9, 0, 2], bamboo: [.5, 0, 2], brass: [.42, .85, 3], gold: [.34, .95, 3], silver: [.4, .9, 3],
-  meteor: [.4, .7, 3], enamel: [.3, 0, 4], bone: [.55, 0, 4], moss: [1, 0, 0], straw: [.9, 0, 0], glass: [.2, 0, 7], glow: [.5, 0, 7], oilskin: [.5, 0, 2],
+  wood: [.72, 0, 2], bark: [.9, 0, 2], bamboo: [.5, 0, 2], brass: [.45, .5, 3], gold: [.4, .55, 3], silver: [.42, .45, 3],
+  meteor: [.5, .35, 3], enamel: [.3, 0, 4], bone: [.55, 0, 4], moss: [1, 0, 0], straw: [.9, 0, 0], glass: [.2, 0, 7], glow: [.5, 0, 7], oilskin: [.6, 0, 0],
 };
 const M = (name) => { const m = SURFACE[name]; if (!m) throw new Error(`unknown surface "${name}"`); return m; };
 const scaleOf = (c) => c.form.J.hips.y / .998;
@@ -704,7 +704,7 @@ function visor(c, { color = 'ivory', trim = 'gold', veil = 'grey', strap = 'grey
   const on = (phi, y, off) => { const yy = Math.max(y, -.485), p = face(c, phi, yy, off); if (y < yy) { p.y -= yy - y; p.z -= (yy - y) * .25; } return p; };
   if (veil) c.bag.grid(16 * c.q, 8 * c.q, (u, v) => ({ p: place(on(lerp(-span * .8, span * .8, u), lerp(eye + .02, -.485, v), .018)), skin: HEAD }), { color: c.pal(veil), mat: M('cloth'), inside: c.head.C });
   c.bag.grid(22 * c.q, 4, (u, v) => { const phi = lerp(-span, span, u); return { p: place(on(phi, lerp(top, eye, v), .034 + .016 * (1 - Math.abs(phi) / span))), skin: HEAD }; }, { color: col, mat: M('enamel'), inside: c.head.C });
-  const w = (y) => hw * clamp((y - point) / (top - point), 0, 1) ** .85, shield = (a, v, lift = 0) => { const y = lerp(top, point, v); return on(a * w(y), y, .04 + .06 * (1 - Math.abs(a)) * (1 - v * .4) + lift); };
+  const w = (y) => hw * clamp((y - point) / (top - point), 0, 1) ** .6, shield = (a, v, lift = 0) => { const y = lerp(top, point, v); return on(a * w(y), y, .04 + .06 * (1 - Math.abs(a)) * (1 - v * .4) + lift); };
   c.bag.grid(Math.max(6, 10 * c.q), 12 * c.q, (u, v) => ({ p: place(shield(u * 2 - 1, v)), skin: HEAD }), { color: col, mat: M('enamel'), inside: c.head.C });
   const line = (pts, r = .012) => sweep(c, pts.map(place), r * c.head.H, gold, M('gold'), HEAD, { n: 5, rows: 10 });
   for (const sx of [-1, 1]) line([0, .2, .4, .6, .8, 1].map((v) => shield(sx, v, .004)));
@@ -764,13 +764,13 @@ function helm(c, { color = 'meteor', mat = 'meteor', band = 'bronze', slit = 'sl
  * Astrolabe collar: a broad ring of metal and enamel standing round the neck, an inner ring against the throat,
  * and a jointed quadrant arm rising behind one shoulder to carry an orb over the head.
  */
-function astrolabe(c, { metal = 'silver', enamel = 'violet', radius = .15, arm = 'L', reach = .5, orb = .03 }) {
+function astrolabe(c, { metal = 'silver', enamel = 'violet', radius = .15, arm = 'L', reach = .5, orb = .03, tall = 1.8 }) {
   const { J, trunk } = c.form, s = scaleOf(c), k = c.form.k, R = radius * k, sk = [['spine2', 1]], y = trunk.Y.base + .028 * s, zc = J.neck.z + .012, tl = -.16;
-  const place = (p) => V(p.x, y + p.y * Math.cos(tl) - p.z * Math.sin(tl), zc + p.z * Math.cos(tl) + p.y * Math.sin(tl)), fe = c.pal(metal), u = s;
-  lathe(c, place, [[R - .034 * u, -.004 * u], [R - .03 * u, .02 * u], [R - .006 * u, .03 * u], [R + .014 * u, .022 * u], [R + .02 * u, .004 * u], [R + .012 * u, -.014 * u], [R - .02 * u, -.016 * u], [R - .034 * u, -.004 * u]], fe, M('silver'), sk, { n: 30 });
-  lathe(c, place, [[R + .0205 * u, -.006 * u], [R + .0225 * u, .004 * u], [R + .017 * u, .02 * u]], c.pal(enamel), M('enamel'), sk, { n: 30 });
+  const ring_ = (p) => V(p.x, y + p.y * tall * Math.cos(tl) - p.z * Math.sin(tl), zc + p.z * Math.cos(tl) + p.y * tall * Math.sin(tl)), place = (p) => V(p.x, y + p.y * Math.cos(tl) - p.z * Math.sin(tl), zc + p.z * Math.cos(tl) + p.y * Math.sin(tl)), fe = c.pal(metal), u = s;
+  lathe(c, ring_, [[R - .034 * u, -.004 * u], [R - .03 * u, .02 * u], [R - .006 * u, .03 * u], [R + .014 * u, .022 * u], [R + .02 * u, .004 * u], [R + .012 * u, -.014 * u], [R - .02 * u, -.016 * u], [R - .034 * u, -.004 * u]], fe, M('silver'), sk, { n: 30 });
+  lathe(c, ring_, [[R + .019 * u, -.01 * u], [R + .0225 * u, .004 * u], [R + .016 * u, .021 * u]], c.pal(enamel), M('enamel'), sk, { n: 30 });
   lathe(c, place, [[R * .66, .012 * u], [R * .66 + .004 * u, .04 * u], [R * .66 + .016 * u, .044 * u], [R * .66 + .02 * u, .016 * u], [R * .66, .012 * u]], fe, M('silver'), sk, { n: 24 });
-  for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; c.bag.solid(scaled(dome(.005, .004, 6), u), (p) => place(V(Math.cos(a) * (R - .008 * u) + p.x, .03 * u + p.z, Math.sin(a) * (R - .008 * u) + p.y)), sk, tone(fe, 1.2), M('silver')); }
+  for (let i = 0; i < 12; i++) { const a = i / 12 * TAU; c.bag.solid(scaled(dome(.005, .004, 6), u), (p) => place(V(Math.cos(a) * (R - .008 * u) + p.x, .03 * u * tall + p.z, Math.sin(a) * (R - .008 * u) + p.y)), sk, tone(fe, 1.2), M('silver')); }
   if (arm) {
     const sx = arm === 'L' ? 1 : -1, h = reach * s, pts = [V(sx * R * .72, .02 * u, -R * .72), V(sx * R * 1.2, h * .22, -R * .95), V(sx * R * 1.42, h * .55, -R * .8), V(sx * R * 1.3, h * .84, -R * .5), V(sx * R * 1.0, h, -R * .25)].map(place);
     sweep(c, pts, (q) => .017 * u * (1 - q * .3), fe, M('silver'), sk, { n: 6, rows: 18, flat: .55, side: V(0, 0, 1) });

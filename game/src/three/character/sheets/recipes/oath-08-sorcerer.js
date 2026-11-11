@@ -6,7 +6,7 @@ export default {
   id: 'oath-08-sorcerer', sheet: 'reference-076', title: 'Bitterglass Sorcerer',
   palette: {
     skin: '#d2a184', cloth: '#231f24', coat: '#272228', purple: '#3c2a40', gold: '#9a7a3a', leather: '#4a3426', leatherDark: '#2a1f1a', brass: '#8f6e36', brassDark: '#5e4826',
-    glass: '#93b80e', glassPale: '#aeb39a', iron: '#4a4541', glove: '#1a181b', boot: '#201c1d', sole: '#131011', hair: '#8b8884', hairGrey: '#b3b0ab', tie: '#3c2a40', cap: '#2e2431',
+    glass: '#4f7a06', glassPale: '#aeb39a', iron: '#4a4541', glove: '#1a181b', boot: '#201c1d', sole: '#131011', hair: '#8b8884', hairGrey: '#b3b0ab', tie: '#3c2a40', cap: '#2e2431',
   },
   build: { width: 1.02, depth: 1.0, bust: .018, hips: 1.14, waist: .95, arm: .9, leg: .96, neck: .92 },
   keep: ['hands'],

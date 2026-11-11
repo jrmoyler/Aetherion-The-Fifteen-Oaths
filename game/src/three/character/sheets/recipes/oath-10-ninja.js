@@ -6,7 +6,7 @@ import '../builders-b.js';
 export default {
   id: 'oath-10-ninja', sheet: 'reference-073', title: 'Tidal Ninja',
   palette: {
-    cloth: '#232842', indigo: '#262b48', indigoDark: '#1a1e33', black: '#1c1b1e', meteor: '#33312f', meteorDark: '#252423', silver: '#8e8a84', bronze: '#6a5238', brass: '#6a5238', violet: '#6a3ad0', slit: '#d8d0ff',
+    cloth: '#232842', indigo: '#262b48', indigoDark: '#1a1e33', black: '#1c1b1e', meteor: '#33312f', meteorDark: '#252423', silver: '#8e8a84', bronze: '#6a5238', brass: '#6a5238', violet: '#3a1e96', slit: '#d8d0ff',
     leather: '#3a2c22', leatherDark: '#261d18', iron: '#4a4744', glove: '#1b1a1c', boot: '#232122', sole: '#141314', bootPlate: '#33312f',
   },
   build: { width: 1.0, depth: 1.06, hips: .92, waist: 1.0, arm: 1.02, leg: .98, neck: 1.0, belly: .01 },
@@ -24,9 +24,9 @@ export default {
     { use: 'b.sleeve', from: -.14, to: 1.2, off: .014, color: 'black', folds: .004, ribs: 0 },
     { use: 'b.coat', color: 'indigo', top: 'belt', hem: .6, flare: 1.08, off: .02, open: 50, folds: 7, lining: 'indigoDark' },
     { use: 'b.hang', at: 0, top: ['belt', 0], bottom: .5, width: [.058, .05], point: .05, color: 'indigo', border: 'indigoDark', borderWidth: .008, off: .016, thick: .006, ornaments: [
-      { color: 'silver', ring: .03, width: .004, at: [0, .52] }, { color: 'silver', bar: [0, .64, 0, .97], width: .005 }, { color: 'silver', bar: [-.7, .8, 0, .92], width: .004 }, { color: 'silver', bar: [.7, .8, 0, .92], width: .004 } ] },
+      { color: 'silver', ring: .045, width: .005, at: [0, .5] }, { color: 'silver', bar: [0, .64, 0, .97], width: .005 }, { color: 'silver', bar: [-.7, .8, 0, .92], width: .004 }, { color: 'silver', bar: [.7, .8, 0, .92], width: .004 } ] },
     { use: 'b.hang', at: 180, top: ['belt', 0], bottom: .44, width: [.075, .062], point: .06, color: 'indigo', border: 'indigoDark', borderWidth: .008, off: .016, thick: .006, ornaments: [
-      { color: 'silver', ring: .034, width: .004, at: [0, .62] }, { color: 'silver', bar: [0, .08, 0, .5], width: .005 }, { color: 'silver', bar: [-.45, .08, -.45, .9], width: .003 }, { color: 'silver', bar: [.45, .08, .45, .9], width: .003 } ] },
+      { color: 'silver', ring: .05, width: .005, at: [0, .64] }, { color: 'silver', bar: [0, .08, 0, .5], width: .005 }, { color: 'silver', bar: [-.45, .08, -.45, .9], width: .003 }, { color: 'silver', bar: [.45, .08, .45, .9], width: .003 } ] },
     { use: 'b.hang', at: 62, top: ['belt', 0], bottom: .64, width: [.055, .062], point: .03, skew: -.6, color: 'meteor', mat: 'meteor', border: 'silver', borderWidth: .008, thick: .01, off: .02 },
     { use: 'b.hang', at: -62, top: ['belt', 0], bottom: .64, width: [.055, .062], point: .03, skew: .6, color: 'meteor', mat: 'meteor', border: 'silver', borderWidth: .008, thick: .01, off: .02 },
     { use: 'b.hang', at: 122, top: ['belt', 0], bottom: .6, width: [.05, .06], point: .03, skew: .6, color: 'meteor', mat: 'meteor', border: 'silver', borderWidth: .008, thick: .01, off: .02 },
@@ -46,7 +46,7 @@ export default {
     // Silver crescent across the chest, the iron horn on the right shoulder, layered plates on the left.
     { use: 'b.strip', color: 'silver', mat: 'silver', width: .1, thick: .012, taper: 'crescent', n: 50, border: 'bronze', path: [
       { th: -66, y: ['shoulder', -.02], off: .034 }, { th: -34, y: ['chest', .03], off: .044 }, { th: 6, y: ['chest', -.03], off: .05 }, { th: 44, y: ['ribs', .02], off: .046 }, { th: 76, y: ['ribs', .05], off: .04 } ] },
-    { use: 'b.fin', side: 'R', spine: [[0, 0], [.13, .06], [.23, .17], [.25, .33]], width: .17 },
+    { use: 'b.fin', side: 'R', spine: [[0, 0], [.16, .07], [.3, .22], [.34, .42]], width: .24 },
     { use: 'b.guard', limb: 'arm', side: 'R', from: -.36, to: .2, phi: 90, arc: 84, off: .022, thick: .014, bulge: .016, color: 'meteor', mat: 'meteor', trim: 'bronze', trimMat: 'brass', trimWidth: .01, skin: [['shoulder.L', .5], ['upperarm.L', .5]] },
     { use: 'b.guard', limb: 'arm', side: 'L', from: -.4, to: -.02, layers: 3, step: .17, phi: 90, arc: 86, off: .02, thick: .014, flareEnd: .012, bulge: .008, color: 'meteor', mat: 'meteor', trim: 'bronze', trimMat: 'brass', trimWidth: .01, skin: [['shoulder.L', .5], ['upperarm.L', .5]] },
     // Arms: elbow cops, heavy vambraces with violet inlay, gauntlet cuffs.

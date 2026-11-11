@@ -7,7 +7,7 @@ export default {
   id: 'oath-08-ninja', sheet: 'reference-077', title: 'Bitterglass Ninja',
   palette: {
     skin: '#a8734f', under: '#1d1b1c', cloth: '#242123', oilskin: '#262225', purple: '#3a2a3c', leather: '#3c2c24', leatherDark: '#261d19', brass: '#8a6a34', brassDark: '#5e4826',
-    glass: '#8fbf10', iron: '#4a4541', glove: '#19171a', boot: '#221c1a', bootCap: '#2c2420', sole: '#141110', hair: '#1c1714',
+    glass: '#4f7a06', iron: '#4a4541', glove: '#19171a', boot: '#221c1a', bootCap: '#2c2420', sole: '#141110', hair: '#1c1714',
   },
   build: { width: 1.08, depth: 1.06, arm: 1.12, leg: 1.06, shoulder: 1.08 },
   keep: ['hands'],
