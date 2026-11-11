@@ -128,3 +128,24 @@ Not placed: no gully for the log bridge.
 
 No landmarks. The urban world assembles its buildings inside `build(k)` from its own street grid; nothing was imported.
 
+## What was looked at in game
+
+Captured in the running client (headless Chrome, SwiftShader, `q=medium`), images in `docs/qa/biome-triad-landmarks/`:
+
+- badlands: `badlands-sphinx.jpg` (spawn 1775,-345). The great pyramid was also seen on screen (spawn 2300,-250) but that capture was not kept.
+- canyon: `canyon-alcove.jpg` (spawn -1192,774), the alcove hood seen from its flank.
+- terraces: `terraces-ruined-temple.jpg` (spawn 850,-40), with the crimson realm's sky islands on the horizon.
+- crimson: `crimson-sky-islands.jpg` (spawn 240,-1010), an island keel from below. Thin pale seams show on the keel.
+- glacial: `glacial-berg-and-floes.jpg` (spawn -1665,1825), a tabular berg and floes. The grey towers behind it are the terrain's own sea stacks, not landmarks; the spawn point is at the waterline, so the camera sits low.
+
+Built and checked only in Node (every realm's meshes build from the copied code under a stubbed canvas; placement rules and collision are tested), not yet looked at on screen: volcanic, alpine (rope bridge), coast, cliffs and meadow hamlets, forest, marsh, highland, plateau, and the badlands temple and mud-brick village.
+
+## Known gaps
+
+- Industrial realm: nothing imported.
+- Forest: no gully narrow and level enough was found, so the walkable log bridge is not placed. Elder trees and their roots are not imported.
+- Canyon: the source's ledge slab and buttes are part of that world's own heightfield; here ledges and a buttress reuse the volcano rock kit tinted to sandstone.
+- Ruins world structures other than the colossal heads, its underground zones, and the caverns world are not imported: they are carved into those worlds' own ground. The terraces temple is the underwater world's sunken city, raised dry.
+- Egypt monuments and the Haven archipelago are drawn at half the source's scale.
+- A realm's meshes are built one step per frame on first approach; the Haven archipelago is one step of about 1.4 s.
+- Collision is client-side (`ctx.collision`); the shared simulation does not know these solids.
