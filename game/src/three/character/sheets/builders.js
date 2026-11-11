@@ -59,7 +59,7 @@ function limbFrame(chain, t, phi, off = 0, radius = chain.radius) {
 /** Bare limb: the form itself, in skin. */
 export function skinLimb(c, { limb = 'arm', side = 'both', from = 0, to = 2, color = 'skin' }) {
   const chain = limbOf(c, limb);
-  sides(c, side, () => tube(c, chain, { t0: from, t1: to, nv: 14, radius: (t) => chain.radius(t), color: c.pal(color), mat: MAT.skin }));
+  sides(c, side, () => tube(c, chain, { t0: from, t1: to, nu: 20, nv: 22, radius: (t, phi) => chain.radius(t) + (chain.muscle ? chain.muscle(t, phi) : 0), color: c.pal(color), mat: MAT.skin }));
 }
 
 /** Bare neck from the collar line up into the head. */
@@ -550,9 +550,9 @@ export function boots(c, { color = 'boot', sole = 'sole', top = 1.56, toeCap = n
   const { leg, foot, k } = c.form;
   c.bag.part = 'boots';
   sides(c, 'both', () => {
-    const z0 = foot.heel - .012, z1 = foot.tip + .012, zm = (z0 + z1) / 2, L = (z1 - z0) / 2;
+    const z0 = foot.heel - .004, z1 = foot.tip - .004, zm = (z0 + z1) / 2, L = (z1 - z0) / 2;
     // Plan outline: narrow heel, broad ball, blunt toe.
-    const halfWidth = (z) => { const f = (z - z0) / (z1 - z0); return k * bulk * (.036 + .017 * smooth(0, .62, f)) * Math.min(1, (Math.max(0, 1 - Math.abs(2 * f - 1) ** 3.4)) ** .42 * 1.02); };
+    const halfWidth = (z) => { const f = (z - z0) / (z1 - z0); return k * bulk * (.033 + .016 * smooth(0, .62, f)) * Math.min(1, (Math.max(0, 1 - Math.abs(2 * f - 1) ** 3.4)) ** .42 * 1.02); };
     const centreX = (z) => .006 * smooth(z0, z1, z);
     const skin = (p) => foot.skin(p);
     // Sole and welt.

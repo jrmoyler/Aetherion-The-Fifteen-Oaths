@@ -67,7 +67,7 @@ export function makeForm(rig, build = {}) {
   const spineZ = curve([[J.hips.y, J.hips.z], [J.spine.y, J.spine.z], [J.spine1.y, J.spine1.z], [J.spine2.y, J.spine2.z], [J.neck.y, J.neck.z]]);
   // Heights of the trunk's landmarks, bottom to top.
   const Y = {
-    crotch: J['thigh.L'].y - .095 * k, hip: J['thigh.L'].y, belt: J.hips.y + .045 * k, waist: J.spine.y + .05 * k, ribs: J.spine1.y + .04 * k,
+    crotch: J['thigh.L'].y - .095 * k, hip: J['thigh.L'].y, belt: J.hips.y + .07 * k, waist: J.spine.y + .06 * k, ribs: J.spine1.y + .04 * k,
     chest: J.spine2.y + .02 * k, armpit: J['upperarm.L'].y - .03 * k, shoulder: J['upperarm.L'].y + .03 * k, base: J.neck.y + .018 * k, neck: J.neck.y + .07 * k,
   };
   const belly = (y) => b.belly * Math.exp(-(((y - (J.spine.y + .02)) / (.13 * k)) ** 2));
@@ -124,7 +124,14 @@ export function makeForm(rig, build = {}) {
   };
 
   const armR = curve([[-.25, .05], [0, .058], [.3, .054], [.55, .05], [.85, .043], [1, .041], [1.22, .046], [1.6, .039], [2, .031], [2.2, .03]].map(([t, r]) => [t, r * k * b.arm]));
-  const legR = curve([[-.2, .082], [0, .086], [.3, .08], [.7, .064], [1, .053], [1.2, .051], [1.36, .054], [1.7, .041], [2, .036], [2.2, .036]].map(([t, r]) => [t, r * k * b.leg]));
+  const legR = curve([[-.2, .082], [0, .086], [.3, .08], [.7, .064], [1, .052], [1.2, .049], [1.36, .051], [1.7, .037], [2, .032], [2.2, .032]].map(([t, r]) => [t, r * k * b.leg]));
+  // Muscle: how far the surface of a bare limb swells beyond its tube at (t, phi). Garments ignore it; skin uses it.
+  const bump = (t, t0, w) => Math.exp(-(((t - t0) / w) ** 2));
+  const armMuscle = (t, phi) => (.012 * bump(t, .1, .2) * Math.max(0, Math.sin(phi)) ** .7                 // deltoid, outside of the shoulder
+    + .009 * bump(t, .5, .2) * Math.max(0, Math.cos(phi)) + .006 * bump(t, .55, .22) * Math.max(0, -Math.cos(phi))   // biceps in front, triceps behind
+    + .007 * bump(t, 1.2, .16) * Math.max(0, Math.sin(phi + .5)) - .003 * bump(t, .82, .08)) * k * b.arm;          // forearm extensor, pinch above the elbow
+  const legMuscle = (t, phi) => (.01 * bump(t, .4, .3) * Math.max(0, Math.cos(phi - .3)) + .008 * bump(t, 1.3, .15) * Math.max(0, -Math.cos(phi))
+    + .004 * bump(t, 1, .05) * Math.max(0, Math.cos(phi))) * k * b.leg;                                            // quadriceps, calf, kneecap
   const arm = new Chain([J['upperarm.L'], J['forearm.L'], J['hand.L']], ['upperarm.L', 'forearm.L'], armR, { bone: 'shoulder.L', from: -.06, to: .05, weight: .5 });
   const leg = new Chain([J['thigh.L'], J['shin.L'], J['foot.L']], ['thigh.L', 'shin.L'], legR, { bone: 'hips', from: -.03, to: .12, weight: .55 });
 
@@ -153,6 +160,7 @@ export function makeForm(rig, build = {}) {
     }
     return best;
   };
+  arm.muscle = armMuscle; leg.muscle = legMuscle;
   return { J, S, k, build: b, trunk, arm, leg, foot, over, spineZ };
 }
 
