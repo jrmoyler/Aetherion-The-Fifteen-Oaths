@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { applySurfaceShading } from './surfaceState.js';
+import { realmTerrainMaterial, createRealmWater } from './realmGround.js';
 // Analytic mineral grain avoids image downloads while retaining world-space surface detail.
 export function naturalMaterial(color, roughness = .92, masonry = false) {
   const albedo = new THREE.Color(color);
@@ -78,55 +79,14 @@ export function architectureMaterial(color, o = {}) {
   mat.customProgramCacheKey = () => `arch-v2-${macro}-${boost}-${wear}-${grime}`;
   return mat;
 }
-export function terrainMaterial() {
-  // Terrain masks come from the same heightfield used by movement: roads remain legible,
-  // steep faces expose mineral strata, and volcanic channels glow only where lava exists.
-  const material = new THREE.MeshStandardMaterial({color:'#ffffff',vertexColors:true,roughness:.94});
-  material.onBeforeCompile = shader => {
-    // Biome Triad surface state (wet, snow, char, embers) is laid in first so strata and roads still read on top of it.
-    applySurfaceShading(shader, 'vGround', '(1.-smoothstep(.3,.62,vSlope))');
-    shader.vertexShader = shader.vertexShader
-      .replace('#include <common>', '#include <common>\nattribute vec3 terrainMask; varying vec3 vGround; varying vec3 vGroundMask; varying float vSlope;')
-      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvGround=(modelMatrix*vec4(position,1.)).xyz; vGroundMask=terrainMask; vSlope=1.-normal.y;');
-    shader.fragmentShader = shader.fragmentShader
-      .replace('#include <common>', `#include <common>
-        varying vec3 vGround; varying vec3 vGroundMask; varying float vSlope;
-        float groundHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-        float groundNoise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
-          return mix(mix(groundHash(i),groundHash(i+vec2(1,0)),f.x),mix(groundHash(i+vec2(0,1)),groundHash(i+vec2(1)),f.x),f.y);}`)
-      .replace('#include <color_fragment>', `#include <color_fragment>
-        float macro=groundNoise(vGround.xz*.065), soil=groundNoise(vGround.xz*1.7);
-        float detailFade=1.-smoothstep(.1,1.,length(fwidth(vGround.xz)));
-        float grit=mix(.5,groundNoise(vGround.xz*14.),detailFade);
-        diffuseColor.rgb *= .76 + macro*.30 + soil*.10 + grit*.08;
-        float slope=smoothstep(.08,.37,vSlope)*(1.-vGroundMask.x);
-        float layers=.5+.5*sin(vGround.y*2.3+groundNoise(vGround.xz*.18)*3.);
-        vec3 rock=mix(diffuseColor.rgb,vec3(.24,.23,.21),.46)*(.82+layers*.25);
-        diffuseColor.rgb=mix(diffuseColor.rgb,rock,slope);
-        float road=clamp(vGroundMask.x,0.,1.);
-        diffuseColor.rgb=mix(diffuseColor.rgb,diffuseColor.rgb*(.83+soil*.28),road);
-        float lava=clamp(vGroundMask.z,0.,1.);
-        diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.12,.055,.025),lava*.85);`)
-      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
-        float hot=smoothstep(.35,.85,vGroundMask.z);
-        totalEmissiveRadiance+=vec3(1.,.17,.015)*hot*(.65+groundNoise(vGround.xz*.8)*.7);`);
-  };
-  material.customProgramCacheKey=()=> 'aetherion-terrain-strata-surface-v2';
-  return material;
-}
-export function waterMaterial() {
-  const material = new THREE.MeshPhysicalMaterial({color: '#174e59', roughness: .19, metalness: .28, transparent: true, opacity: .86, clearcoat: 1, clearcoatRoughness:.12});
-  const time = {value:0};
-  material.onBeforeCompile = shader => {
-    shader.uniforms.waterTime=time;
-    shader.vertexShader=shader.vertexShader.replace('#include <common>', '#include <common>\nuniform float waterTime;\nvarying vec3 vWave;').replace('#include <begin_vertex>', `#include <begin_vertex>
-      transformed.z += sin(position.x*.09 + waterTime*.9)*.23 + sin(position.y*.13-waterTime*.7)*.17;
-      vWave = vec3(position.x,position.y,waterTime);`);
-    shader.fragmentShader=shader.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec3 vWave;').replace('#include <normal_fragment_begin>', `#include <normal_fragment_begin>
-      normal = normalize(normal + vec3(sin(vWave.x*.34+vWave.z*1.1)*.10, cos(vWave.y*.29-vWave.z)*.12, 0.));`);
-  };
-  return {material,time};
-}
+/**
+ * The continent's ground: Biome Triad's terrain shader with each realm's world settings (rock and strata on slopes,
+ * sand ripples, wet shorelines, snow glints, lava crust), Aetherion's road, plaza and lava masks, and the surface-state
+ * layer. Placement lives in realmGround.js; the shader itself is copied in biome-ground.generated.js.
+ */
+export function terrainMaterial(quality = 'high') { return realmTerrainMaterial(quality); }
+/** Sea and marsh pool with Biome Triad's water (see createRealmWater for the quality gating of reflections). */
+export function realmWater(ctx, options) { return createRealmWater(ctx, options); }
 
 export function pavingMaterial(color) {
   const material=new THREE.MeshStandardMaterial({color,roughness:.88});
