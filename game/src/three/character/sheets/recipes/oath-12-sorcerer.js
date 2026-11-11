@@ -13,7 +13,7 @@ export default {
     cloth: '#5a1f24', burgundy: '#5a1f24', burgundyDark: '#3e1519', brocade: '#6b252a', charcoal: '#322d2c', charcoalDark: '#262222', brass: '#a8844a', brassDark: '#6f5730',
     blood: '#8f1218', bloodGlow: '#c2161d', leather: '#3a2c26', leatherDark: '#2a211e', iron: '#a8844a', boot: '#2b2320', sole: '#3a2d24', hair: '#1b1614', hairWarm: '#3a2a20', bead: '#b08c4c',
   },
-  build: { width: 1.06, depth: 1.06, bust: .022, waist: 1.04, hips: 1.14, arm: 1.0, leg: 1.04, neck: .95 },
+  build: { width: 1.06, depth: 1.06, bust: .028, waist: .92, hips: 1.14, arm: 1.0, leg: 1.04, neck: .95 },
   keep: ['weapon'],
   builders: C,
   groom: { hair: false, gear: false },

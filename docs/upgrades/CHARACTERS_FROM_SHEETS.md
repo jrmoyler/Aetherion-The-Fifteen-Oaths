@@ -32,6 +32,7 @@ is the Kiln Ninja in the running game (offline, medium quality). The character p
 | `form.js` | The tailor's form: a parametric trunk, arm, leg and foot measured from the wearer's bind-pose joints, with per-recipe build (width, depth, belly, limb girth). Garments are offsets of this form, so they fit by construction and take their skin weights from it. |
 | `kernel.js` | `Bag` (vertex/skin accumulator, grids with smooth normals, mirrored sides, hard-surface solids placed through any smooth map) and bevelled shapes (round box, slab, bar, ring, dome). |
 | `builders.js` | The garment and gear builders: `skinLimb`, `neck`, `shirt`, `trousers` (gathered, pleated, piped), `wrap`, `band`, `capelet` (cloth laid over the shoulders and arms, asymmetric by run length), `cowl`, `chestPlates`, `belt`, `strap` (+ anchor ring), `bracer`, `blockBracer` (real vent slots), `gloveCuff`, `boots` (sole, upper, shaft, toe cap, heel and shin plates, straps), `halfMask` (vented grille), `hair` (spiky, bun), `skirt` (coat), `panel` (apron, tabard), `limbPlate`, `kilnPack`. |
+| `builders-x.js` | Armour and anatomy builders any hero may use (`x.` prefix): `x.plate` (trunk plates, fauld lames, flared tassets, fractured stone relief), `x.pauldron` (layered shoulder cap), `x.horn` (curved or faceted blade off a shoulder: horn, kite wing, winged collar), `x.shards` (overlapping bark shards, shell scales), `x.crest` (layered helmet crest), `x.physique` (bare arm with deltoid, biceps, triceps and forearm relief), `x.lapel` (folded wrap-over front edge), `x.cuff`. |
 | `hair.js` | The `hair` builder: a dark undercoat plus distinct tapered locks. Styles `spiky`, `long` (+ `tail` to tie it back), `bun` (a small high knot is a topknot), `braid`, `none` (+ `stubble`). |
 | `hands.js` | The `hands` builder: palm, jointed fingers and thumb per hand, rigid on the hand bone; gloved, fingerless or bare; the weapon hand is a closed fist. |
 | `material.js` | One procedural material; a per-vertex (roughness, metalness, kind) triple picks the detail in rest space: twill weave, soot and wear on cloth; pits, chips and kiln flashing on ceramic; grain, creases and scuffs on leather; pitting and rust on iron. Plates, bands and straps also carry darkened edges in their vertex colours. No textures, constructs in Node. |
@@ -418,34 +419,71 @@ a duplicate of its painting. Common to all: bodies are slimmer and stiffer than 
 | Hero | Reads as its sheet at a glance | Largest remaining difference |
 | --- | --- | --- |
 | oath-01-ninja | yes | boot toes, hair shorter |
-| oath-01-sorcerer | yes | pack simplified, face not a likeness |
+| oath-01-sorcerer | yes | heavy but no longer round; pack simplified, face not a likeness |
 | oath-02-ninja | yes | quilting and hood volume flatter |
 | oath-02-sorcerer | partly | coat narrower, beard and collar simpler |
-| oath-03-ninja | yes | slimmer, arms smooth |
-| oath-03-sorcerer | partly | body much less stocky than the sheet, antenna crown simplified |
-| oath-04-ninja | partly | body suit lacks the scaled shoulder armour's mass; fins small |
+| oath-03-ninja | yes | arms now modelled but still paler and smoother than the painting |
+| oath-03-sorcerer | yes | human heavy build now; cape shorter and stiffer, boots less armoured, antenna crown simplified |
+| oath-04-ninja | partly | waist, hips and bust now follow the sheet and the crest is four lapped plates, but from the front the crest reads as one pointed cap rather than lapped shells and is smaller than painted, the pauldron scales are flatter and the suit has no muscle contour lines |
 | oath-04-sorcerer | partly | less bulk, orbs smaller |
-| oath-05-ninja | partly | armour plates read as flat panels, build too round |
-| oath-05-sorcerer | partly | much slimmer than the sheet, frame and stone simplified |
+| oath-05-ninja | partly | plates carry fracture relief and the trousers hang straight, but they read as one dark suit without the painted knee-length cut; shoulders narrower |
+| oath-05-sorcerer | yes | muscled arms and heavier build; frame and boulder smaller, apron plates narrower than painted |
 | oath-06-ninja | partly | wraps and sash simplified, mask shape |
 | oath-06-sorcerer | partly | robe plainer, horns thicker |
-| oath-07-ninja | partly | bark armour reads as flat panels, far less mass |
+| oath-07-ninja | yes | shards are regular tiles rather than irregular bark; moss is flat fronds; roots are cones and cords |
 | oath-07-sorcerer | partly | layered shawl and roots simplified |
 | oath-08-ninja | yes | harness detail thinner |
 | oath-08-sorcerer | yes | coat plainer |
-| oath-09-ninja | partly | wrap layout and shoulder blade differ |
+| oath-09-ninja | yes | wing is a single faceted kite (painted has two folds); tassets a little rounder; no high heels |
 | oath-09-sorcerer | partly | robe layers flatter |
-| oath-10-ninja | no | reads as a blue bulk with a helmet; the sheet's black plate armour, pauldrons and crescent are mostly lost |
+| oath-10-ninja | yes | black plate with horn, crescent and tassets now reads; the horn sweeps out sideways more than the painted upright blade, plates are glossier than the painted brushed iron, in a run the knee comes through the front tabard, boots are lumpy, torso longer than painted, no rivet rows or strap buckles |
 | oath-10-sorcerer | partly | shorter coat, orbs smaller |
 | oath-11-ninja | yes | asymmetric skirt simpler |
-| oath-11-sorcerer | partly | coat lacks the long flared silhouette; sleeves open stiffly |
-| oath-12-ninja | partly | shoulders and arms far less muscular, tabard shorter |
+| oath-11-sorcerer | yes | sleeves hang with dark mouths; shoulder caps round rather than pointed, lower coat one layer |
+| oath-12-ninja | partly | arms have deltoid, biceps and forearm masses but are simpler and more orange than the painted anatomy; shoulders round; tassets single panels |
 | oath-12-sorcerer | partly | robe plainer and brighter red |
 | oath-13-ninja | partly | coat tails and drape missing |
-| oath-13-sorcerer | partly | collar and coat cut differ, lighter palette |
+| oath-13-sorcerer | partly | crossing lapels and winged collar present; skirt panels are on the wrong sides and simpler, hair is spikier than the painted crop, jacket lighter |
 | oath-14-ninja | partly | vest longer and brighter, less muscular |
 | oath-14-sorcerer | yes | coat hem simpler |
 | oath-15-ninja | partly | rig harness and leg frames thinner |
 | oath-15-sorcerer | yes | coat less flared, fewer straps |
 
 Not re-rendered after the last face tweak (narrower nose, painted brows only): the face close-up line-up.
+
+
+## Rework pass (weakest heroes against their sheets)
+
+Evidence: `docs/qa/characters/all-heroes-front.jpg` (all 30 again, sheet | code), the per-hero side-by-sides
+`oath-NN-<discipline>.jpg` for the twelve heroes below (re-rendered through `game/sheet.html`, high tier, idle), and
+`rework-poses-run-attack.jpg` (oath-10, 12, 09 and 07 ninjas mid-run and in `attack_1`, three-quarter view).
+
+- **oath-10-ninja**: rebuilt. Ridged steel breast and back plates, side plates, two fauld lames, a domed right
+  pauldron carrying a broad dished horn with a bronze boss, a squared three-lame left pauldron, rerebraces, elbow
+  cops, vambraces with a raised plate and violet inlay, gauntlet cuffs, knee cops with a second boss plate, full
+  greaves, four flared tassets edged in pale metal. Indigo is now only the chest wrap, scarf, skirt and tabards.
+- **oath-04-ninja**: female proportions (narrow waist, hips, two-lobed bust), four-plate shell crest, five rows of
+  nacre scales on the right shoulder and collar bone, crossing harness with a brass boss, nacre vambraces with
+  small fins, knee caps, three-blade calf fins. The blocky green panels are thinner.
+- **oath-12-ninja**: `x.physique` arms from the shoulder, the vest front now folds over as two lapels piped in
+  steel, chains loop from the front ring to the back ring at hip height instead of down the thigh, trousers less full.
+- **oath-07-ninja**: bark shards over chest, back, right shoulder, forearms and shins, root cords wound round the
+  shins and boots, longer root stubs, wider shoulders over a narrower waist, modelled bare arms.
+- **oath-09-ninja**: sharp two-facet kite wing, four flared pointed enamel tassets with a centre fold, two wide
+  wraps crossing the chest, narrower waist.
+- **oath-13-sorcerer**: a wide mauve lacquer lapel crossing over a plum one, a folded lacquer wing standing off each
+  shoulder front and back, a long point down the back, taller collar, darker jacket.
+- **oath-05-ninja / oath-05-sorcerer**: slimmer legs and seat so the trousers no longer balloon; chest, back and
+  apron plates are `x.plate` slabs with fractured facets and sandstone rims; modelled arms.
+- **oath-11-sorcerer**: sleeves are narrow to the forearm and flare only at the cuff, hang 15 cm below the wrist,
+  and are lined near-black with a thin dark silver hem, so the pale rings at the hands are gone; coat flare reduced.
+- **oath-03-sorcerer / oath-01-sorcerer**: depth, belly and limb girth cut back to a heavy human build; longer cape on 03.
+- Also: oath-03-ninja arms modelled and tanned; female waists narrowed on 02, 06, 11, 15 ninjas and 08, 12, 13, 14
+  sorcerers (these eight were only checked in the Node preview and the front line-up); skin tones corrected from
+  the sheets for oath-04-sorcerer and oath-05-sorcerer (brown) and the `deep` tone lifted so dark faces keep their modelling.
+
+Seen in motion (run and `attack_1`): costumes follow the rig; pauldrons and horn stay on the shoulder. In a run
+the leading thigh comes through hanging panels (10 tabard, 12 tasset, 09 tasset, 13 skirt panel): the panels are
+weighted to the hips and thighs but do not collide. Not seen: these reworks in the running game, low and medium
+tiers on screen (unit-tested to build), cast clips. Hair was compared on the line-up only: 13 sorcerer's crop is
+too spiky; faces remain the stylised procedural head and are not likenesses.

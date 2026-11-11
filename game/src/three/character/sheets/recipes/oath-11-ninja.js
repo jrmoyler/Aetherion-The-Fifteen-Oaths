@@ -8,7 +8,7 @@ export default {
     cloth: '#252427', scarf: '#2a292c', grey: '#5d5c61', greyDark: '#47464b', wrap: '#222124', leather: '#34302e', leatherDark: '#262322', iron: '#5a5852',
     caseFace: '#2b2b2f', bone: '#d8d1c3', boot: '#1a1818', sole: '#3a2e24', glove: '#1b1a1b', hair: '#17151a', hairSheen: '#2b2830', tie: '#d9d3c8',
   },
-  build: { width: .95, depth: .97, bust: .016, waist: .96, hips: 1.04, arm: .9, leg: .98, neck: .92 },
+  build: { width: .95, depth: .97, bust: .024, waist: .86, hips: 1.1, seat: 1.06, arm: .9, leg: .98, neck: .92 },
   keep: ['weapon'],
   builders: C,
   groom: { hair: false, gear: false },

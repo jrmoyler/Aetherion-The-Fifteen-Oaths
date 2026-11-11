@@ -2,6 +2,7 @@
 // lemon 10%; insulating cloth, oxidized copper, ceramic coupler; right arm bracer and antenna mount, spine relay
 // mount and cable loop).
 import { A } from '../builders-a.js';
+import { X } from '../builders-x.js';
 
 export default {
   id: 'oath-03-ninja', sheet: 'reference-085', title: 'Storm Ninja',
@@ -11,11 +12,11 @@ export default {
   },
   build: { width: 1.08, arm: 1.3, leg: 1.18, waist: 1.02, shoulder: 1.12 },
   keep: ['weapon'],
-  builders: A,
+  builders: { ...A, ...X },
   groom: { hair: false, gear: false },
   parts: [
     { use: 'neck' },
-    { use: 'skinLimb', limb: 'arm', from: -.12, to: 2 },
+    { use: 'x.physique', part: 'arm', from: -.2, to: 2, power: .9 },
     { use: 'a/bodysuit', color: 'navy', trunk: ['crotch', 'belt+.03'], legs: [-.155, 1.74], off: .011 },
     { use: 'a/bodysuit', color: 'navy', trunk: ['belt-.02', 'base'], off: .008, ease: .004 },
     { use: 'a/collar', color: 'navy', height: .062, flare: .003, off: .01, from: 'base-.014' },

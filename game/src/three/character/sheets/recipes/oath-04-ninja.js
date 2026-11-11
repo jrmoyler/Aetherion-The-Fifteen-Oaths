@@ -10,7 +10,7 @@ const shell = (y, r, tilt, spread = 150) => ({ s: 'fan', r, spread, ribs: 9, bul
 export default {
   id: 'oath-04-ninja', sheet: 'reference-084', title: 'Tidal Ninja',
   palette: {
-    suit: '#16233f', suitDark: '#0e162b', suitLight: '#22335a', green: '#3b6f68', greenDark: '#2a5450', nacreWarm: '#d9c9ae', brass: '#b28c47', iron: '#b28c47', nacre: '#e9dfcf', visor: '#12333c', glass: '#3c95a0', leather: '#3b2d21', leatherDark: '#241b14',
+    suit: '#111b33', suitDark: '#0b1224', suitLight: '#1b2a4c', green: '#3b6f68', greenDark: '#2a5450', nacreWarm: '#d9c9ae', brass: '#b28c47', iron: '#b28c47', nacre: '#e9dfcf', visor: '#12333c', glass: '#3c95a0', leather: '#3b2d21', leatherDark: '#241b14',
     boot: '#18243f', sole: '#0f1626', glove: '#16213c',
   },
   build: { width: 1.0, depth: .96, hips: 1.1, waist: .86, seat: 1.12, bust: .042, leg: 1.1, thigh: 1.14, calf: 1.04, arm: .94, shoulder: .96, neck: .9 },
@@ -22,10 +22,11 @@ export default {
       { on: 'leg', a: [52, 132], b: [.06, .9], color: 'green' }, { on: 'leg', a: [150, 210], b: [1.2, 1.7], color: 'suitLight' }, { on: 'arm', a: [50, 130], b: [.3, .8], color: 'suitLight' }, { on: 'trunk', both: true, a: [68, 118], b: ['waist-.02', 'armpit-.01'], color: 'green' } ] },
     { use: 'a/lines', on: 'leg', paths: [[[46, .08], [40, .45], [48, .84]], [[142, .08], [144, .84]], [[46, .08], [95, .0], [142, .08]], [[48, .84], [95, .92], [144, .84]], [[20, 1.05], [-10, 1.4], [10, 1.85]], [[95, .92], [100, 1.3], [96, 1.8]]], color: 'brass', mat: 'brass', width: .0035, thick: .0015, off: .006, name: 'piping' },
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[66, 'waist-.02'], [64, 'ribs'], [68, 'armpit-.01']], [[14, 'belt'], [26, 'ribs'], [20, 'chest'], [34, 'shoulder-.04']], [[160, 'belt'], [168, 'chest'], [150, 'shoulder-.04']]], color: 'brass', mat: 'brass', width: .0035, thick: .0015, off: .006, name: 'piping' },
+    { use: 'b.neck', color: 'suitDark', mat: 'cloth', off: .005 },
     { use: 'a/collar', color: 'suitDark', height: .085, flare: .004, off: .009 },
     { use: 'a/helm', color: 'suit', visor: 'visor', trim: 'brass', crest: null, under: 'green', band: 'brass' },
     // Layered shell crest: four nacre plates lapped from a bill over the brow back to a swept tail.
-    { use: 'x.crest', tiers: 4, start: 16, end: 100, reach: 64, width: 1.15, off: .125, lift: .05, tail: .17, bill: .22, ridge: .06, color: 'nacre', dark: 'nacreWarm', edge: 'brass', edgeMat: 'brass' },
+    { use: 'x.crest', tiers: 4, start: 30, end: 110, reach: 62, width: 1.2, off: .12, lift: .06, tail: .24, bill: .2, ridge: .07, shrink: .1, color: 'nacre', dark: 'nacreWarm', edge: 'brass', edgeMat: 'brass' },
     // Layered shell pauldron on the right shoulder, hung on a brass boss and a strap across the chest.
     { use: 'strap', color: 'leather', width: .018, thick: .004, anchor: { at: .2, size: .012, color: 'brass' }, path: [
       { th: -50, y: 'shoulder', dy: -.03, off: .013 }, { th: 24, y: 'ribs', dy: .02, off: .014 }, { th: 92, y: 'waist', dy: .01, off: .014 },

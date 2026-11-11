@@ -7,7 +7,7 @@ import { X } from '../builders-x.js';
 export default {
   id: 'oath-10-ninja', density: 0.74, sheet: 'reference-073', title: 'Tidal Ninja',
   palette: {
-    cloth: '#191c2e', indigo: '#1b1f34', indigoDark: '#12152a', indigoLight: '#262b46', black: '#151416', steel: '#2c2b2d', steelDark: '#1d1c1e', steelLight: '#4a4849', rim: '#7d786f', silver: '#a09b92', bronze: '#5e4a34', brass: '#5e4a34', violet: '#4a2ab0', slit: '#d8d0ff',
+    cloth: '#14172a', indigo: '#15182c', indigoDark: '#0e1020', indigoLight: '#181b32', black: '#151416', steel: '#2c2b2d', steelDark: '#1d1c1e', steelLight: '#4a4849', rim: '#7d786f', silver: '#a09b92', bronze: '#5e4a34', brass: '#5e4a34', violet: '#4a2ab0', slit: '#d8d0ff',
     leather: '#33271f', leatherDark: '#211a16', iron: '#454240', glove: '#161517', boot: '#1c1b1c', sole: '#101011', bootPlate: '#2e2d2e',
   },
   build: { width: 1.04, depth: 1.08, hips: 1.02, waist: 1.04, arm: 1.04, leg: 1.1, neck: 1.0, belly: .0 },
@@ -58,7 +58,7 @@ export default {
       { th: -70, y: ['shoulder', -.01], off: .05 }, { th: -36, y: ['chest', .04], off: .064 }, { th: 6, y: ['chest', -.03], off: .07 }, { th: 44, y: ['ribs', .02], off: .064 }, { th: 78, y: ['ribs', .05], off: .056 } ] },
     // Pauldrons: a domed cap carrying the horn on the right, a squared, three-lame stack on the left.
     { use: 'x.pauldron', side: 'R', size: [.105, .07, .105], shift: [.0, .015, 0], lames: 2, step: .06, color: 'steel', mat: 'steel', rim: 'rim', rimWidth: .014, rivets: 2, rivet: 'rim' },
-    { use: 'x.horn', side: 'R', root: [-.05, .04, .0], spine: [[.1, -.07], [.24, .02], [.34, .18], [.36, .4]], inner: [[-.12, .0], [-.01, .08], [.16, .19], [.36, .4]], thick: .04, dish: .035, tilt: 18, lean: -18, color: 'steel', mat: 'steel', edge: 'rim', edgeMat: 'steel', edgeWidth: .1, boss: { r: .045, h: .024, q: .14, e: .5, color: 'bronze', mat: 'brass' } },
+    { use: 'x.horn', side: 'R', root: [-.05, .04, .0], spine: [[.09, -.07], [.21, .01], [.29, .14], [.3, .32]], inner: [[-.11, .0], [-.01, .07], [.14, .16], [.3, .32]], thick: .04, dish: .035, tilt: 18, lean: -18, color: 'steel', mat: 'steel', edge: 'rim', edgeMat: 'steel', edgeWidth: .1, boss: { r: .045, h: .024, q: .14, e: .5, color: 'bronze', mat: 'brass' } },
     { use: 'x.pauldron', side: 'L', size: [.105, .06, .1], shift: [.0, .015, 0], lames: 3, step: .05, square: 4.5, ridge: .008, color: 'steel', mat: 'steel', rim: 'rim', rimWidth: .014, rivets: 2, rivet: 'rim' },
     // Arms: padded black sleeves, rerebraces, elbow cops, heavy vambraces with violet inlay, gauntlets.
     { use: 'b.sleeve', from: -.14, to: 1.2, off: .014, color: 'black', folds: .004, ribs: 0 },

@@ -13,7 +13,7 @@ export default {
     leather: '#232427', leatherDark: '#18191b', iron: '#77797c', ice: '#cfe3ec', frost: '#eef3f4', boot: '#222326', sole: '#b4b0a7', bumper: '#9d9a92', glove: '#1a1b1d',
     hair: '#16151a',
   },
-  build: { width: 1.08, depth: 1.06, hips: 1.26, waist: 1.1, bust: .025, leg: 1.3, arm: 1.2, shoulder: 1.04 },
+  build: { width: 1.08, depth: 1.06, hips: 1.24, waist: .98, bust: .028, leg: 1.3, arm: 1.2, shoulder: 1.04 },
   keep: ['weapon'],
   builders: A,
   groom: { hair: false, gear: false },

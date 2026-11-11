@@ -23,7 +23,7 @@ export default {
     cloth: '#33202a', aubergine: '#33202a', aubergineLight: '#45293a', aubergineDark: '#261920', plum: '#48203f', mauve: '#8d7584', mauveDark: '#6f5967', silver: '#b6ad9c', silverDark: '#7d7566', pearl: '#ece6da',
     gold: '#a98e62', leather: '#2c1c22', leatherDark: '#22161b', iron: '#b6ad9c', boot: '#2a1a1f', sole: '#1c1215', glove: '#3b2030', hair: '#17151a', hairSheen: '#2c2932',
   },
-  build: { width: .97, depth: .98, bust: .018, waist: .96, hips: 1.06, arm: .9, leg: 1.0, neck: .9 },
+  build: { width: .97, depth: .98, bust: .024, waist: .86, hips: 1.1, shoulder: .96, arm: .9, leg: 1.0, neck: .9 },
   keep: ['weapon'],
   builders: { ...C, ...X },
   groom: { hair: false, gear: false },
@@ -65,7 +65,7 @@ export default {
     { use: 'hands', glove: 'glove', fingerless: true },
     { use: 'boots', top: 1.5, straps: 3, strapColor: 'leatherDark', buckle: 'silver', toeCap: 'silverDark', heelPlate: 'silverDark', plateMat: 'iron', soleHeight: .034 },
     // Short black hair swept across the brow, longer on the right.
-    { use: 'hair', style: 'long', streak: 'hairSheen', length: .4, density: 1, lift: .02, fringe: .36 },
+    { use: 'hair', style: 'spiky', streak: 'hairSheen', length: .3, density: 1.25, lift: .028, fringe: .32 },
     { use: 'c:strands', width: .09, list: [[-40, .3, .44, .06, -.04], [-20, .34, .32, .07, -.09], [24, .34, .2, .06, .1]] },
   ],
 };

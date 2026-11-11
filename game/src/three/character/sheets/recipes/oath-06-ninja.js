@@ -8,7 +8,7 @@ export default {
     linen: '#cdc2ab', linenShade: '#b3a78f', red: '#a23426', cord: '#8e2a20', charcoal: '#3b3937', wrapDark: '#454240',
     bone: '#b8a888', bamboo: '#b98f4c', leather: '#4a392c', leatherDark: '#2f2620', brass: '#7b5a34', boot: '#3a322c', sole: '#5a4532', iron: '#4a4541', hair: '#191513', cloth: '#3b3937',
   },
-  build: { width: 1.0, depth: 1.0, hips: 1.34, waist: .98, bust: .024, arm: .92, leg: 1.1, neck: .92, shoulder: 1.0 },
+  build: { width: 1.0, depth: 1.0, hips: 1.28, waist: .86, seat: 1.08, bust: .03, arm: .92, leg: 1.1, neck: .92, shoulder: 1.0 },
   keep: ['weapon'],
   builders: B,
   groom: { hair: false, gear: false },
