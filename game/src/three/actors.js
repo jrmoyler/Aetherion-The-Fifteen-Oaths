@@ -1,6 +1,7 @@
 // actors/ — characters, local controller, camera, remote entities, creatures, NPCs,
 // nameplates, selection ring. API per game/CONTRACTS.md.
 import { slingWeapon, arsenalWeaponOf } from './arsenal.js';
+import { wearArmor } from './arsenal-armor.js';
 import { addContactShadow } from './contactShadow.js';
 import { Vector3, Raycaster, Vector2 } from 'three';
 import { OATH_BY_ID, OATHS, CLASSES } from '@shared/oaths.js';
@@ -82,6 +83,32 @@ function createActors(ctx) {
   }
   // Forged gear: the local player carries the weapon they have equipped; other adventurers carry their
   // discipline's canon piece at the lightest LOD. Creatures and townsfolk carry nothing.
+  // Forged armor: the local player wears each armor piece they have equipped, fitted and skinned to their own body.
+  const ARMOR_SLOTS = ['head', 'chest', 'hands', 'legs', 'feet', 'trinket'];
+  let equippedArmor = '';
+  function dressArmor(actor) {
+    if (!actor?.body || actor.disposed || actor !== player) return;
+    const body = actor.body, want = equippedArmor;
+    if ((body.arsenalArmor ?? '') === want || body.armorPending === want || body.armorUnfit === want) return;
+    const undress = () => {
+      if (!body.armorHandle) return;
+      for (const mesh of body.armorHandle.meshes) { const at = body.meshes.indexOf(mesh); if (at >= 0) body.meshes.splice(at, 1); }
+      body.armorHandle.dispose(); body.armorHandle = null;
+    };
+    if (!want) { body.armorPending = null; undress(); body.arsenalArmor = ''; return; }
+    body.armorPending = want;
+    wearArmor(body, want.split('|')).then((handle) => {
+      if (body.armorPending !== want) { handle?.dispose(); return; } // a newer outfit was asked for meanwhile
+      body.armorPending = null;
+      if (actor.body !== body || actor.disposed) { handle?.dispose(); return; }
+      undress();
+      if (!handle) { body.armorUnfit = want; return; } // no skeleton to fit, or nothing loaded: do not ask again
+      body.armorHandle = handle; body.arsenalArmor = want;
+      // Followed by setFade/dispose like the rest of the body.
+      body.meshes.push(...handle.meshes);
+      body.setFade(1);
+    }).catch((error) => { body.armorPending = null; console.warn('[arsenal] Armor fit failed', error); });
+  }
   let equippedWeapon = null;
   function carryWeapon(actor) {
     if (!actor?.body || actor.disposed || actor.kind !== 'player') return;
@@ -124,7 +151,7 @@ function createActors(ctx) {
       old?.dispose();
       actor.body = nb; actor.bodyUrl = url; actor.radius = nb.radius;
       if (actor === player) { if (controller) controller.actor = player; addShadows(nb); }
-      carryWeapon(actor);
+      carryWeapon(actor); dressArmor(actor);
     } catch (e) { console.warn('[actors] GLB swap failed', url, e); if (actor.isSelf) throw e; }
   }
   assets.onChange(() => { api.forEach((a) => { if (!a.bodyUrl) tryUpgrade(a, { kind: a.kind, identity: a.id, oath: a.oath, cls: a.cls, model: a.model, runSpeed: CLASSES[a.cls]?.moveSpeed, noWeapon: a.kind === 'npc' && a.title === 'chronicler' }); }); });
@@ -202,6 +229,13 @@ function createActors(ctx) {
     if (you && player) applyYou(you);
   });
   on('net:you', (m) => { const you = m?.you ?? m; if (you && player) applyYou(you); });
+  on('net:you', (m) => {
+    const equipment = (m?.you ?? m)?.equipment; if (!equipment) return;
+    const next = ARMOR_SLOTS.map((slot) => equipment[slot]?.arsenal).filter(Boolean).join('|');
+    equippedArmor = next;
+    // Also catches a body that finished loading before the player was known.
+    if (player) dressArmor(player);
+  });
   on('net:you', (m) => { const weapon = (m?.you ?? m)?.equipment?.weapon; if (weapon === undefined) return; if (weapon?.id !== equippedWeapon?.id) { equippedWeapon = weapon ?? null; if (player) carryWeapon(player); } });
   function applyYou(you) {
     if (you.hp != null) player.hp = you.hp;

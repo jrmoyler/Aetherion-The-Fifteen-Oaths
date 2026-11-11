@@ -21,12 +21,25 @@ for (const m of body.meshes) { const n = m.material?.name ?? ''; if ((q.has('nog
 for (let i = 0; i < 20; i++) body.animator.update(.05);
 root.updateMatrixWorld(true);
 if (q.get('arsenal')) { const { slingWeapon } = await import('./three/arsenal.js'); await slingWeapon(body, `arsenal:${q.get('arsenal')}`, { lod: +(q.get('lod') ?? 1), actorRoot: root }); root.updateMatrixWorld(true); }
+if (q.get('armor')) {
+  const { wearArmor } = await import('./three/arsenal-armor.js');
+  const worn = await wearArmor(body, q.get('armor').split(',').map((piece) => `arsenal:armor/${piece}`));
+  window.__armor = worn && { ids: worn.ids, triangles: worn.triangles };
+  if (q.get('speed')) body.animator.speed = +q.get('speed');
+  if (q.get('clip')) body.animator.playAnim(q.get('clip'));
+  if (q.get('clip') || q.get('speed')) for (let i = 0; i < +(q.get('frames') ?? 12); i++) body.animator.update(.05);
+  root.updateMatrixWorld(true);
+}
 const head = body.groom?.anchor.children[0] ?? body.sockets.head;
 const hp = new THREE.Vector3(); (head ?? root).getWorldPosition(hp);
 const yaw = +(q.get('yaw') ?? .35);
 if (view === 'face') { camera.position.set(hp.x + Math.sin(yaw) * 1.05, hp.y + .05, hp.z + Math.cos(yaw) * 1.05); camera.lookAt(hp.x, hp.y - .01, hp.z); }
 else if (view === 'back') { camera.position.set(hp.x - .5, hp.y + .1, hp.z - 1.2); camera.lookAt(hp.x, hp.y - .03, hp.z); }
 else if (view === 'carry') { camera.position.set(-1.9, 1.5, -3.9); camera.lookAt(0, .95, 0); }
+else if (view === 'at') { const [x, y, z] = (q.get('look') ?? '0,1,0').split(',').map(Number), d = +(q.get('dist') ?? 1.2); camera.position.set(x + Math.sin(yaw) * d, y + .08, z + Math.cos(yaw) * d); camera.lookAt(x, y, z); }
+else if (view === 'side') { camera.position.set(4.6, 1.2, .3); camera.lookAt(0, .95, 0); }
+else if (view === 'rear') { camera.position.set(-1.2, 1.3, -4.6); camera.lookAt(0, .95, 0); }
+else if (view === 'front') { camera.position.set(0, 1.1, 4.7); camera.lookAt(0, .95, 0); }
 else { camera.position.set(1.2, 1.3, 4.6); camera.lookAt(0, .95, 0); }
 renderer.render(scene, camera);
 window.__info = { meshes: body.meshes.map(m => ({ name: m.name, mat: m.material.name, map: !!m.material.map, nmap: !!m.material.normalMap, color: m.material.color?.getHexString(), r: m.material.roughness, mt: m.material.metalness, verts: m.geometry.attributes.position.count })), hp: hp.toArray() };
