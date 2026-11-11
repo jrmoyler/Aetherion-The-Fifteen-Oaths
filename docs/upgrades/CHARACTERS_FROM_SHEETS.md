@@ -32,6 +32,8 @@ is the Kiln Ninja in the running game (offline, medium quality). The character p
 | `form.js` | The tailor's form: a parametric trunk, arm, leg and foot measured from the wearer's bind-pose joints, with per-recipe build (width, depth, belly, limb girth). Garments are offsets of this form, so they fit by construction and take their skin weights from it. |
 | `kernel.js` | `Bag` (vertex/skin accumulator, grids with smooth normals, mirrored sides, hard-surface solids placed through any smooth map) and bevelled shapes (round box, slab, bar, ring, dome). |
 | `builders.js` | The garment and gear builders: `skinLimb`, `neck`, `shirt`, `trousers` (gathered, pleated, piped), `wrap`, `band`, `capelet` (cloth laid over the shoulders and arms, asymmetric by run length), `cowl`, `chestPlates`, `belt`, `strap` (+ anchor ring), `bracer`, `blockBracer` (real vent slots), `gloveCuff`, `boots` (sole, upper, shaft, toe cap, heel and shin plates, straps), `halfMask` (vented grille), `hair` (spiky, bun), `skirt` (coat), `panel` (apron, tabard), `limbPlate`, `kilnPack`. |
+| `hair.js` | The `hair` builder: a dark undercoat plus distinct tapered locks. Styles `spiky`, `long` (+ `tail` to tie it back), `bun` (a small high knot is a topknot), `braid`, `none` (+ `stubble`). |
+| `hands.js` | The `hands` builder: palm, jointed fingers and thumb per hand, rigid on the hand bone; gloved, fingerless or bare; the weapon hand is a closed fist. |
 | `material.js` | One procedural material; a per-vertex (roughness, metalness, kind) triple picks the detail in rest space: twill weave, soot and wear on cloth; pits, chips and kiln flashing on ceramic; grain, creases and scuffs on leather; pitting and rust on iron. Plates, bands and straps also carry darkened edges in their vertex colours. No textures, constructs in Node. |
 | `costume.js` | Compiles a recipe into a geometry. |
 | `recipes/` | One data file per hero: palette, build, what to keep of the baked mesh, and a list of builder calls. |
@@ -41,6 +43,28 @@ is the Kiln Ninja in the running game (offline, medium quality). The character p
 Dev stage: `game/sheet.html?id=oath-01-ninja` renders front, back, side and three-quarter through the game's
 BodyFactory (`clip=attack_1&frames=6`, `pose=bind`, `q=low|medium|high`). A new hero is a new file in
 `recipes/` plus one line in `recipes/index.js`.
+
+## Writing a recipe
+
+```js
+export default {
+  id: 'oath-NN-ninja', sheet: 'reference-0NN', title: '...',
+  palette: { cloth: '#...', leather: '#...', iron: '#...', hair: '#...' },   // `skin` defaults to the head's skin tone, `hollow` to near-black
+  build: { width: 1, depth: 1, shoulder: 1, waist: 1, hips: 1, belly: 0, bust: 0, arm: 1, leg: 1, neck: 1 },   // multipliers on a lean athletic default
+  keep: ['weapon'],                       // what stays of the baked mesh: 'weapon' (held weapon only) or 'hands' (baked hands and weapon)
+  groom: { hair: false, gear: false },    // false = this recipe builds the hair / face gear itself
+  builders: { myPart },                   // optional: extra builders from the group's own file
+  parts: [{ use: 'shirt', sleeve: 2 }, { use: 'hands', glove: 'glove', fingerless: true }, { use: 'hair', style: 'long', tail: { length: .8, tie: 'leather' } }],
+};
+```
+
+Hair: `{ use: 'hair', style: 'spiky'|'long'|'bun'|'braid'|'none', color, streak, length (head heights), density,
+lift, fringe (front hairline height, -.5 chin .. .5 crown), knot: { at: [x, y, z] head space, radius, tie },
+tail: { length, width, tie }, braid: { length, width, tie }, stubble }`. Head space: origin at the head's
+centre, +y up, +z forward, chin to crown = 1.
+Hands: `{ use: 'hands', glove: paletteName|null, fingerless, skin, fist: 'R'|'L'|'both'|'none', scale, knuckles }`.
+A builder receives `(context, params)` with `context = { bag, form, rig, q, pal, rand, head }`; see the header of
+builders.js. Register a recipe with one import line in `recipes/index.js`.
 
 ## Sheet to hero mapping
 
