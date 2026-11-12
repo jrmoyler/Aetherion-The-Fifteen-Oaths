@@ -33,7 +33,7 @@ function baseFaceParams(profile) {
 export function faceParams(profile) {
   const P = baseFaceParams(profile);
   if (!profile.sheet) return P;
-  return { ...P, brow: P.brow * 1.35 + .1, nose: P.nose * 1.02, noseWidth: P.noseWidth * .76, cheek: P.cheek * 1.12, chin: P.chin * 1.1, jaw: Math.min(.9, P.jaw * (P.f ? 1 : 1.04)), mouthW: (P.mouthW ?? 1) * 1.14, sheetNose: true };
+  return { ...P, brow: P.brow, nose: P.nose * 1.02, noseWidth: P.noseWidth * .76, cheek: P.cheek * 1.12, chin: P.chin * 1.1, jaw: Math.min(.9, P.jaw * (P.f ? 1 : 1.04)), mouthW: (P.mouthW ?? 1) * 1.14, sheetNose: true };
 }
 
 // Surface point for unit direction d. `opts.cloth` smooths fine features so
@@ -41,7 +41,7 @@ export function faceParams(profile) {
 export function sculpt(d, P, opts = {}) {
   const vy = Math.max(-1, Math.min(1, d.y)), m = vy > 0 ? (P.sheetNose ? 2.55 : 2.12) : 2.25, c = Math.max(0, 1 - Math.abs(vy) ** m) ** (1 / m);
   let hx = d.x, hz = d.z; const hl = Math.hypot(hx, hz) || 1; hx /= hl; hz /= hl;
-  const n = 2.08, ex = 2 / n;
+  const n = P.sheetNose ? 2 : 2.08, ex = 2 / n;   // exponent 1 on sheet heads: no cusp down the midline of a dense mesh
   const sx = Math.sign(hx) * Math.abs(hx) ** ex, sz = Math.sign(hz) * Math.abs(hz) ** ex;
   const y = .5 * vy;
   const fat = P.fat ?? 0, gaunt = P.gaunt ?? 0, mw = P.mouthW ?? 1, eyeX = P.eyeX ?? EYE.x;
@@ -52,7 +52,8 @@ export function sculpt(d, P, opts = {}) {
   let Z = c * sz * (sz > 0 ? rzf : rzb) + .06 * sm(.04, -.45, y) - .03;
   let Y = y;
   const fr = sm(-.05, .55, sz) * (opts.noFace ? 0 : 1);
-  if (fr > 0) {
+  if (fr > 0 && P.sheetNose && !opts.cloth) { const [dx, dz] = sheetFace(X, Y, P, opts); X += dx * fr; Z += dz * fr; }
+  else if (fr > 0) {
     const ax = Math.abs(X), sgn = Math.sign(X) || 1, cl = opts.cloth ? 1 : 0;
     let dz = 0, dx = 0;
     // forehead slopes back; brow ridge; temples
@@ -99,6 +100,52 @@ export function sculpt(d, P, opts = {}) {
     X += dx * fr; Z += dz * fr;
   }
   return new Vector3(X, Y, Z);
+}
+
+// The face of a sheet hero: every form is a smooth blended field (no planes, no ramps with corners), so the
+// surface has continuous curvature and takes smooth normals: brow flowing into the nasal bridge, deep sockets,
+// a rounded nose with bulb, wings and nostrils, philtrum, lips with a cupid's bow, cheeks, folds, chin.
+const gx = (x, s) => Math.exp(-((x / s) ** 2));
+function sheetFace(X, Y, P, opts) {
+  const ax = Math.abs(X), sgn = Math.sign(X) || 1, fat = P.fat ?? 0, gaunt = P.gaunt ?? 0, mw = P.mouthW ?? 1, nw = P.noseWidth, eyeX = P.eyeX ?? EYE.x, sag = P.sag ?? .3, old = sm(.45, .95, sag);
+  let dz = 0, dx = 0;
+  // forehead rolls back; the brow ridge arches over each eye and meets the nose at the glabella
+  dz -= .024 * sm(.14, .46, Y);
+  const browAmp = (P.f ? .012 : .02) * P.brow;
+  dz += browAmp * gx(Y - (.07 + .012 * gx(ax - .17, .1)), .034) * sm(.34, .16, ax) + .008 * P.brow * g2(X / .05, (Y - .075) / .04);
+  dx += sgn * .01 * g2((Y - .07) / .05, (ax - .3) / .05);
+  // orbit: deep under the brow, deepest at the inner corner, a soft roll of lower lid and cheek below it
+  if (!opts.noSocket) dz -= .03 * g2((ax - eyeX) / .08, (Y + .002) / .05) + .016 * g2((ax - .078) / .034, (Y - .012) / .04) + .008 * gaunt * g2((ax - eyeX) / .1, (Y + .04) / .05);
+  dz += .007 * g2((ax - eyeX) / .07, (Y + .068) / .022) - .006 * old * g2((ax - eyeX * .92) / .07, (Y + .092) / .014);
+  // nose: a rounded ridge from the nasion to the tip, the bulb, the wings and the nostrils under them
+  const t = sm(.06, -.175, Y), ridge = (.014 + .082 * t ** 1.2) * P.nose * sm(-.235, -.19, Y);
+  dz += ridge * Math.exp(-((ax / ((.021 + .016 * t) * (.6 + .4 * nw))) ** 2.2));
+  dz += .012 * (P.bridge ?? 0) * g2(X / .028, (Y + .04) / .045);
+  dz += (.04 + .014 * (P.tip ?? 0)) * P.nose * g2(X / (.04 * nw), (Y + .172) / .034);
+  const wing = g2((ax - .054 * nw) / .024, (Y + .192) / .026); dz += .03 * wing; dx += sgn * .008 * wing;
+  dz -= .014 * g2((ax - .028 * nw) / .014, (Y + .218) / .01) + .012 * g2((ax - .085 * nw) / .014, (Y + .185) / .03);
+  // cheekbone, the apple of the cheek, the hollow under it
+  const bone = g2((ax - .2) / .08, (Y + .035) / .06); dz += .022 * P.cheek * bone; dx += sgn * .018 * P.cheek * bone;
+  dz += (.014 * P.cheek + .02 * fat - .008 * gaunt) * g2((ax - .135) / .075, (Y + .13) / .075);
+  dz -= .013 * (.3 + .6 * sag + 2 * gaunt - fat) * g2((ax - .21) / .065, (Y + .24) / .08);
+  dx -= sgn * .016 * gaunt * (g2((ax - .22) / .06, (Y + .2) / .08) + g2((ax - .3) / .05, (Y - .13) / .06));
+  dx += sgn * fat * .022 * g2((ax - .2) / .08, (Y + .3) / .1); dz += fat * .03 * g2(X / .16, (Y + .47) / .05);
+  // the fold from the wing of the nose round the mouth, the jowl beside the chin
+  const fold = gx(ax - (.08 * nw + (-.2 - Y) * .38), .013) * sm(-.36, -.31, Y) * sm(-.185, -.215, Y);
+  dz -= (.004 + .013 * old + .006 * fat) * fold; dz += .006 * old * gx(ax - (.115 * nw + (-.2 - Y) * .38), .03) * sm(-.36, -.3, Y) * sm(-.19, -.23, Y);
+  dx += sgn * .02 * old * g2((ax - .2) / .06, (Y + .33) / .07); dz -= .008 * old * gx(ax - (.11 * mw + (-.31 - Y) * .25), .012) * sm(-.44, -.39, Y) * sm(-.3, -.33, Y);
+  // muzzle, philtrum, lips (cupid's bow, tubercle, fuller lower lip), the line between them, the corners
+  dz += .03 * g2(X / .15, (Y + .29) / .11);
+  dz -= .006 * g2(X / .011, (Y + .247) / .018); dz += .004 * g2((ax - .02) / .009, (Y + .25) / .02);
+  const L = P.lip, bow = -.272 - .007 * gx(X, .018) + .01 * (ax / (.1 * mw)) ** 2;
+  dz += .024 * L * Math.exp(-((X / (.094 * mw)) ** 4)) * gx(Y - bow, .013 + .005 * L) + .007 * L * g2(X / .026, (Y + .283) / .011);
+  dz += .03 * L * Math.exp(-((X / (.08 * mw)) ** 4)) * gx(Y + .324, .017 + .006 * L);
+  dz -= .02 * Math.exp(-((X / (.102 * mw)) ** 4)) * gx(Y + .3 + .006 * (ax / (.1 * mw)) ** 2, .0065) + .012 * g2((ax - .104 * mw) / .014, (Y + .304) / .014);
+  dz -= .012 * g2(X / .07, (Y + .372) / .02);
+  // chin and the line of the jaw
+  dz += .042 * P.chin * g2(X / (.085 + .022 * P.chin), (Y + .435) / .055);
+  dx += sgn * (.02 - (P.f ? .012 : 0)) * gx(Y + .33, .07) * sm(.3, .12, ax) * 0;
+  return [dx, dz];
 }
 
 // Unit direction → cranium surface used to root hair and fit hoods (no face).
@@ -190,7 +237,7 @@ const SHEET_SKIN_GLSL = /* glsl */`
   // --- nose ---
   float nw=csFace.y;
   float noseSide=exp(-csP2((ax-.044*nw)/.022))*smoothstep(-.215,-.16,q.y)*smoothstep(.07,-.02,q.y)*smoothstep(.28,.38,q.z);
-  diffuseColor.rgb*=1.-noseSide*.5;
+  diffuseColor.rgb*=1.-noseSide*.16;
     float underNose=exp(-csP2(q.x/(.062*nw))-csP2((q.y+.238)/.014))*front;
   diffuseColor.rgb*=1.-underNose*.42;
   float nostril=exp(-csP2((ax-.032*nw)/.014)-csP2((q.y+.222)/.01));
@@ -242,8 +289,8 @@ const SHEET_SKIN_GLSL = /* glsl */`
   float mar=exp(-csP2((ax-(.105*mw+(-.31-q.y)*.25))/.007))*smoothstep(-.43,-.38,q.y)*smoothstep(-.3,-.32,q.y)*front;
   float lipLines=smoothstep(.5,1.,sin(q.x*520.))*exp(-csP2((q.y+.255)/.014))*smoothstep(.09,.05,ax)*front;
   float cheekLines=smoothstep(.6,1.,sin((q.y*.6+ax)*170.+csNoise(vCsP*50.)*2.))*exp(-csP2((ax-.24)/.05)-csP2((q.y+.16)/.1))*smoothstep(.0,.2,q.z);
-  float linesA=clamp(fl*.45+frown*.8+crow*.7+lipLines*.45*smoothstep(.6,.9,csAge)+cheekLines*.5*smoothstep(.65,.95,csAge)+mar*.8,0.,1.)*ageK+nl*(.2+.8*ageK)+frown*csSkinP.y;
-  diffuseColor.rgb*=1.-clamp(linesA,0.,1.)*.36; csH-=linesA*1.4;
+  float linesA=clamp(fl*(.45+.5*smoothstep(.7,.95,csAge))+frown*.8+crow*.7+lipLines*.45*smoothstep(.6,.9,csAge)+cheekLines*.22*smoothstep(.65,.95,csAge)+mar*.8,0.,1.)*ageK+nl*(.2+.8*ageK)+frown*csSkinP.y;
+  diffuseColor.rgb*=1.-clamp(linesA,0.,1.)*(.4+.25*smoothstep(.7,.95,csAge)); csH-=linesA*2.2;
   // --- stubble and shaved shadow ---
   float jawLine=csStub.y+.3*pow(ax/.3,2.2);
   float region=smoothstep(jawLine+.02,jawLine-.03,q.y)*smoothstep(-.12,.06,q.z);
@@ -252,8 +299,10 @@ const SHEET_SKIN_GLSL = /* glsl */`
   float stub=mix(max(region,tache),goatee,csStub.z)*(1.-lips)*csStub.x;
   diffuseColor.rgb=mix(diffuseColor.rgb,csStubC,clamp(stub,0.,1.)*(.55+.45*csNoise(vCsP*2600.)));
   roughnessFactor+=stub*.15;
-  float tz=exp(-csP2(q.x/.05))*smoothstep(-.18,.3,q.y)*smoothstep(.3,.42,q.z);
-  roughnessFactor-=tz*.1;
+  float tz=exp(-csP2(q.x/.07))*smoothstep(-.2,.3,q.y)*smoothstep(.3,.42,q.z)+exp(-csP2(q.x/.03)-csP2((q.y+.17)/.03));
+  roughnessFactor-=clamp(tz,0.,1.)*.22;
+  float warm=exp(-csP2(q.x/.045)-csP2((q.y+.165)/.04))*front;
+  diffuseColor.rgb*=mix(vec3(1.),vec3(1.1,.9,.86),warm*.5);
 `;
 const SSS_GLSL = /* glsl */`
 #if NUM_DIR_LIGHTS > 0
@@ -311,7 +360,7 @@ export function skinMaterial(profile, H, origin) {
     }
     shader.fragmentShader = shader.fragmentShader.replace('uniform float csStrength;', 'uniform float csStrength;\n' + decl).replace('#include <lights_fragment_end>', '#include <lights_fragment_end>\n' + SSS_GLSL);
   };
-  if (profile.sheet) { const cacheKey = m.customProgramCacheKey.bind(m); m.customProgramCacheKey = () => cacheKey() + '|sheet-face-3'; }
+  if (profile.sheet) { const cacheKey = m.customProgramCacheKey.bind(m); m.customProgramCacheKey = () => cacheKey() + '|sheet-face-4'; }
   // Subsurface approximation: soften the terminator and lift red in shadow.
   m.userData.sss = true;
   skinMaterialCache.set(key, m);
@@ -328,6 +377,8 @@ const EYE_GLSL = /* glsl */`
   vec3 sclera=mix(vec3(.86,.83,.8),vec3(.8,.42,.4),veins)*mix(.7,1.,smoothstep(-.6,.2,e.y));
   diffuseColor.rgb=mix(sclera,irisC,iris); diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.01),pupil);
   diffuseColor.rgb*=mix(.55,1.,smoothstep(.75,.15,e.y));
+  float cat=smoothstep(.085,.03,length(e.xy-vec2(-.1,.13)/csEyeK));
+  diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.6),cat*step(1.05,csEyeK));
   roughnessFactor=.05;
 `;
 
@@ -345,12 +396,12 @@ export function eyeMaterial(iris, center, k = 1) {
 // hair/gear to fit to the same surface.
 export function buildHead(profile, H, quality = 'high') {
   const P = faceParams(profile);
-  const res = quality === 'low' ? [72, 56] : quality === 'medium' ? [112, 88] : [150, 120];
+  const res = profile.sheet ? (quality === 'low' ? [96, 72] : quality === 'medium' ? [136, 104] : [220, 168]) : quality === 'low' ? [72, 56] : quality === 'medium' ? [112, 88] : [150, 120];
   const head = displace(sphereDirs(res[0], res[1]), d => sculpt(d, P));
   // ears
   const ears = [];
   for (const s of [-1, 1]) {
-    const e = displace(new SphereGeometry(1, 20, 16), d => new Vector3(d.x * .032 + (d.x * s > 0 ? .012 * (1 - d.y * d.y) : 0), d.y * .125 * (1 - .3 * Math.max(0, -d.y)), d.z * .068 * (1 - .35 * Math.max(0, -d.y))));
+    const e = displace(new SphereGeometry(1, 32, 24), d => { const out = d.x * s > 0, r = Math.hypot(d.y, d.z + .1), rim = profile.sheet && out ? .016 * Math.exp(-(((r - .82) / .16) ** 2)) - .014 * Math.exp(-((r / .5) ** 2)) : 0; return new Vector3(d.x * .032 + (out ? .012 * (1 - d.y * d.y) + rim * s : 0), d.y * .125 * (1 - .3 * Math.max(0, -d.y)), d.z * .068 * (1 - .35 * Math.max(0, -d.y))); });
     e.rotateY(s * -.42); e.rotateZ(s * .12);
     e.translate(s * (.33 * P.build), -.035, -.04); ears.push(e);
   }
@@ -369,7 +420,7 @@ export function buildHead(profile, H, quality = 'high') {
   for (const s of [-1, 1]) {
     const cx=s*EX,cy=EYE.y;
     const center=new Vector3(cx,cy,frontAt(cx,cy)-r+(sheet?.004:.012));
-    const pos=[],indices=[],ring=[],ri=[];const N=48,M=8;
+    const pos=[],indices=[],ring=[],ri=[];const N=sheet?64:48,M=sheet?12:8;
     // Polar patch covers exactly the visible sclera, never an exposed globe.
     for(let j=0;j<=M;j++) for(let i=0;i<=N;i++){
       const a=i/N*Math.PI*2,t=j/M;
@@ -382,7 +433,8 @@ export function buildHead(profile, H, quality = 'high') {
       const a=i/N*Math.PI*2,t=j/M,ix=Math.cos(a)*ew,iy=Math.sin(a)*open*(1-.35*Math.abs(Math.cos(a))**3)+s*ix*tilt;
       const x=ix*(1-t)+Math.cos(a)*(ew+.03)*t,y=iy*(1-t)+Math.sin(a)*Math.max(.05,open*2.3)*t;
       const inner=center.z+Math.sqrt(Math.max(0,r*r-ix*ix-iy*iy))+.001;
-      const z=inner*(1-t)+frontAt(cx+x,cy+y)*t+Math.sin(t*Math.PI)*.003;
+      const up=Math.max(0,Math.sin(a)),dn=Math.max(0,-Math.sin(a));
+      const z=inner*(1-t)+frontAt(cx+x,cy+y)*t+(sheet?(.005*(1-t)**3+Math.sin(Math.min(1,t*1.6)*Math.PI)*(.011*up+.004*dn)*(profile.lidRoll??1)):Math.sin(t*Math.PI)*.003);
       ring.push(cx+x,cy+y,z);
     }
     for(let j=0;j<M;j++)for(let i=0;i<N;i++){const a=j*(N+1)+i,b=a+N+1;ri.push(a,b,a+1,b,b+1,a+1);}

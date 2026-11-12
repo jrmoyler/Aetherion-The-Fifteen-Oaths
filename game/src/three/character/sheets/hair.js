@@ -205,7 +205,9 @@ export function hair(c, raw) {
       if (len < .02) return;
       const path = flowPath(d, { lay: len, K: isBang ? V(...(o.part ?? [0, .9, -.1])).normalize() : K, grav: isBang ? 1.1 : .45 + .4 * (1 - top), swirl: rnd(o.mess) + (o.sweep ?? 0) * (isBang || top > .5 ? 1 : .3),
         lift0: .016 + (isBang ? .02 : 0), lift: o.lift * (.4 + top) * (.6 + c.rand() * .8), flick: (isBang ? .12 : o.flick) * (.5 + c.rand()), n: 6 });
-      lock(path, .06 + c.rand() * .045, (p) => p.clone().normalize(), { rows: 5, taper: .75, belly: .25 });
+      // Fringe: several narrow strands of uneven length with rounded tips, so the edge over the brow is organic.
+      if (isBang) { for (let k = 0; k < 2; k++) { const d2 = dirOf(phi + rnd(.09), y + rnd(.02)); lock(flowPath(d2, { lay: len * (.55 + c.rand() * .75), K: V(...(o.part ?? [0, .9, -.1])).normalize(), grav: 1.1, swirl: rnd(o.mess * 1.2) + (o.sweep ?? 0), lift0: .03 + c.rand() * .012, lift: o.lift * .5, flick: .1 * c.rand(), n: 6 }), .022 + c.rand() * .022, (p) => p.clone().normalize(), { rows: 6, taper: .4, belly: .6 }); } return; }
+      lock(path, .05 + c.rand() * .04, (p) => p.clone().normalize(), { rows: 5, taper: .6, belly: .35 });
     });
   } else if (style === 'bob' || style === 'long') {
     const part = V(...(o.part ?? [0, 1, -.05])).normalize();
