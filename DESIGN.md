@@ -25,3 +25,15 @@ Onboarding advances on actual player movement, NPC interaction and authoritative
 ## Covenant arrival film
 
 The selected realm and the loaded hero are the imagery: three live Three.js shots establish the sanctuary, frame an element-specific covenant manifestation, then settle behind the player. Ink letterboxing, restrained warm serif titling and 14–18px high-contrast subtitles use the existing visual language. A 44px “Enter the realm” button stays visible above the lower safe area; Space/Escape skip immediately. A thin progress rule and labelled shot number explain duration. At narrow widths text wraps within 24px gutters. Reduced motion bypasses the film. The 10-second sequence gates gameplay input, hides inactive HUD layers, disposes all temporary geometry and restores the actual follow camera on skip, completion or cancellation. All visuals are code, no downloaded images, video or new UI library.
+
+## Cinematic world presentation — November 2026
+
+Keep all fifteen authored realm palettes and character silhouettes. Improve depth with local lamp light, contact occlusion and the shipped outdoor HDR reflection environment. No sepia grade, artificial teal/orange split, forced motion blur or always-on depth of field. HDR highlights retain the existing ability bloom cap. Low/medium tiers omit ambient occlusion; high/ultra expose it as a real render pass. Every quality tier remains explicit and user-selected.
+
+Camera framing uses a bounded velocity lead and continuous obstruction sampling. Camera field of view, shake and motion preferences are editable live. Reduced motion removes lead, sprint lens changes and shake. Sanctuary lights come from authored lamp positions, with a fixed nearest-light pool and dusk/day fade; they must not create new gameplay collision or alter terrain.
+
+All existing menus share dark mineral ink (#0b1018), warm white (#f1ead8), muted stone (#b8b2a7) and brass (#c9a866), with each oath's accent retained. Squared 2px corners, restrained 1px rules, serif section titles and tabular numeric labels replace rounded card framing. Preserve control dimensions, 44px targets, keyboard focus, scroll behavior and mobile safe areas. The central playfield remains unobstructed. Existing art and icons are retained.
+
+Acceptance: all-realm day/night views, character close-ups and combat effects at low/high tiers; menu keyboard/touch checks at 390x844 and 844x390; shader compile errors fail capture. Unit/build evidence cannot certify visual quality or physical-device performance. The reference is premium cinematic third-person readability; this remains a Three.js game, not an Unreal migration.
+
+Hero material finishes use the existing physical-material path: restrained fabric sheen, glazed porcelain, and lacquer clearcoat. Recipe-specific overrides retain priority. No character mesh, rig, costume, weapon, texture, or production asset is replaced. Ability Matrix distortion and the existing bloom-input ceiling remain in the finishing chain.

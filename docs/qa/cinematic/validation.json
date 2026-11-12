@@ -1,0 +1,59 @@
+{
+  "baseCommit": "eeb037dd1fef02ba1a329a23da6c16689df53017",
+  "workingTreeTested": true,
+  "checks": [
+    {
+      "name": "client",
+      "command": "node --test --test-concurrency=1 $(rg --files game/src game/test game/tests | rg \"\\.test\\.(mjs|js)$\")",
+      "tests": 153,
+      "pass": 153,
+      "fail": 0,
+      "log": "logs/client.txt"
+    },
+    {
+      "name": "terrain",
+      "command": "npm run test:terrain",
+      "tests": 38,
+      "pass": 38,
+      "fail": 0,
+      "log": "logs/terrain.txt"
+    },
+    {
+      "name": "server",
+      "command": "npm --prefix server test",
+      "tests": 52,
+      "pass": 52,
+      "fail": 0,
+      "log": "logs/server.txt"
+    },
+    {
+      "name": "features",
+      "command": "npm run test:cinematic",
+      "tests": 12,
+      "pass": 12,
+      "fail": 0,
+      "log": "logs/features.txt"
+    },
+    {
+      "name": "root",
+      "command": "node --test --test-concurrency=1 tests/*.test.mjs",
+      "tests": 289,
+      "pass": 286,
+      "fail": 3,
+      "log": "logs/root.txt"
+    },
+    {
+      "name": "production build",
+      "command": "npm --prefix game run build",
+      "passed": true,
+      "log": "logs/build.txt",
+      "warnings": "Large existing sandbox chunk; no hardware performance conclusion."
+    }
+  ],
+  "clientNote": "153 recursive checks passed; the two subsequently added real postprocessing constructor/fallback checks passed in the 12-test focused suite. Counts overlap; do not sum suites as unique tests.",
+  "rootFailures": "Three existing source-ability fixtures construct Environment with a null app/gl; unchanged from PR #26 baseline.",
+  "initialRun": "Concurrent heavy tests/build produced a terrain wall-clock threshold failure and a server countdown timing failure. Both passed when rerun without competing suites. An initial city-child count failure was corrected by identifying cities by oathId and asserting the new bounded light group separately.",
+  "browser": "Local Chromium socket creation blocked; zero images. Capture workflow provided; no visual acceptance claimed.",
+  "hardwareValidation": false,
+  "fullGameplayValidation": false
+}

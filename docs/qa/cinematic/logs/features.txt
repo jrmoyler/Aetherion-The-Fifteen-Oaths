@@ -1,0 +1,25 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aetherion-foundation@0.1.0 test:cinematic
+> node --test game/src/three/camera.test.mjs game/src/three/cinematic-profile.test.mjs game/src/three/character/surface.test.mjs game/src/three/postprocessing.test.mjs
+
+✔ first movement cancels intro and returns control to player framing (6.632967ms)
+✔ captured mouse look and zoom cannot change orbit (0.818121ms)
+✔ obstruction pulls camera in immediately and recovery is smooth (2.871399ms)
+✔ live motion preferences suppress lead, shake and sprint lens changes (15.774703ms)
+✔ camera waterline clamp uses the local marsh surface (2.20695ms)
+✔ material finishes respect explicit authored recipes (4.890059ms)
+✔ different equal-length shader additions do not share a compiled program (0.597479ms)
+✔ costly contact AO is restricted to high tiers and authored lighting stays bounded (3.840861ms)
+✔ practical lights use authored positions and fade out before reassignment (4.946318ms)
+✔ lighting dims in daylight and excludes distant fixtures (3.345126ms)
+✔ real Three pass constructors resize and release at every quality tier (31.901252ms)
+✔ unsupported float render targets fall back to the direct renderer (0.573644ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 497.687387

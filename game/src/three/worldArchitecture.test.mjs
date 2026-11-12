@@ -14,10 +14,11 @@ test('fifteen native Three cities preserve finite geometry and collision metadat
   const {CollisionWorld}=await server.ssrLoadModule('/src/core/collision.js');
   const {SANCTUARY_LAYOUT}=await server.ssrLoadModule('/@fs'+fileURLToPath(new URL('../../../shared/sanctuary-layout.js',import.meta.url)));
   const collision=new CollisionWorld(),scene=new THREE.Scene();
-  const group=buildSanctuaries({scene,collision,quality:{name:'high'},camera:new THREE.PerspectiveCamera()});
+  const camera=new THREE.PerspectiveCamera();
+  const group=buildSanctuaries({scene,collision,quality:{name:'high'},camera});
   assert.equal(group.sanctuaries.length,15);
   assert.ok(collision.count>4000,'authored walls, stairs, ramps and platforms have collision');
-  assert.equal(new Set(group.children.map(c=>c.userData.vertices)).size,15,'all cities have distinct authored layouts');
+  assert.equal(new Set(group.children.filter(c=>c.userData.oathId).map(c=>c.userData.vertices)).size,15,'all cities have distinct authored layouts');
   let triangles=0,backward=0;
   const checked=new Set();
   group.traverse(mesh=>{
@@ -42,5 +43,13 @@ test('fifteen native Three cities preserve finite geometry and collision metadat
    assert.ok(Math.hypot(pos.x-city.spawn.x,pos.z-city.spawn.z)>9.5,`${city.oathId}: spawn exit blocked`);
   }
   group.update(.016);
+  const fixtures=group.getObjectByName('Authored sanctuary illumination');
+  assert.equal(fixtures.children.length,6,'high tier has exactly six reusable lights');
+  for(const city of group.sanctuaries){
+   camera.position.set(city.shrine.x,city.shrine.y,city.shrine.z);
+   for(let i=0;i<120;i++)group.update(1/60);
+   assert.ok(fixtures.children.some(light=>light.intensity>.01),`${city.oathId}: authored shrine lights connected`);
+   for(const light of fixtures.children)assert.ok(light.position.toArray().every(Number.isFinite));
+  }
  } finally {await server.close();}
 });

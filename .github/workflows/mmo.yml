@@ -27,6 +27,8 @@ jobs:
         run: node tools/generate-mmo-abilities.mjs --check
       - name: All-realm terrain regressions
         run: npm run test:terrain
+      - name: Cinematic rendering behavior
+        run: npm run test:cinematic
       - name: Simulation + server tests
         run: npm --prefix server test
       - name: Client regressions

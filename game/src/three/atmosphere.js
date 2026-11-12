@@ -48,6 +48,7 @@ export function initAtmosphere(ctx){
     const angle=(hour-6)/24*Math.PI*2;direction.set(Math.cos(angle)*.75,Math.sin(angle),Math.cos(angle)*.5).normalize();u.sunPosition.value.copy(direction);
     sunOffset.copy(direction).multiplyScalar(180);const daylight=THREE.MathUtils.smoothstep(direction.y,-.16,.32),twilight=1-Math.min(1,Math.abs(direction.y)*3);
     sun.intensity=Math.max(0,direction.y)*2.5*(1-intensity*.45);sun.color.setHSL(.10-twilight*.035,.22+twilight*.35,.88);
+    scene.environmentIntensity=(.12+daylight*.40)*(1-intensity*.25);
     hemi.intensity=.22+daylight*.98;hemi.color.setHSL(.58,.23,.38+daylight*.42);hemi.groundColor.setHSL(.09,.19,.12+daylight*.15);
     // Each realm breathes the air of its Biome Triad world; crossing a border eases from one to the next.
     const ease=1-Math.exp(-elapsed/2.5);airTint.lerp(airGoal,ease);airDensity+=(airDensityGoal-airDensity)*ease;

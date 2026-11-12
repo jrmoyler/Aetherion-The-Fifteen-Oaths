@@ -111,3 +111,32 @@
  #ui .ae-settings__return { padding:14px; }
  #ui .ae-set-sec { padding:16px 0; }
 }
+
+/* Shared presentation across the title, HUD, inventory, quests and settings.
+   Preserve layout/safe areas; no expensive full-screen backdrop filtering. */
+#ui .ae-window,#ui .ae-panel,#ui .ae-actionbar,#ui .ae-unit {
+ border-radius:2px;
+ border-color:rgba(189,164,113,.3);
+ background-color:#0b111b;
+ box-shadow:0 12px 38px #0006,inset 0 1px 0 #e9d4a512;
+}
+#ui .ae-window { background:linear-gradient(145deg,#121c29fa,#080e17fc 75%); }
+#ui .ae-titlebar { border-bottom:1px solid #bda47138; background:linear-gradient(90deg,#bda4710d,transparent 75%); }
+#ui .ae-titlebar h2 { letter-spacing:.035em; font-weight:500; }
+#ui .ae-btn { border-radius:2px; transition:background-color .16s,border-color .16s,color .16s; }
+#ui .ae-btn:hover { border-color:#d8bc80; }
+#ui button:focus-visible,#ui input:focus-visible,#ui select:focus-visible {
+ outline:2px solid #efd69e; outline-offset:3px;
+}
+#ui .ae-set-sec { border-bottom:1px solid #bda47120; padding-bottom:20px; }
+#ui .ae-set-sec h3 { letter-spacing:.08em; }
+#ui .ae-set-row { min-height:44px; }
+#ui .ae-note { color:#aab1ba; line-height:1.65; }
+#ui .ae-actionbar { background:linear-gradient(180deg,#111b28eb,#080f18f5); }
+#ui .ae-unit { background:linear-gradient(105deg,#0a111de8,#142131d9); }
+#ui .ae-unit .ae-bar { box-shadow:inset 0 1px 2px #0009; }
+#ui .ae-unit__name { text-shadow:0 1px 3px #000; }
+@media (prefers-reduced-motion:reduce) {
+ #ui .ae-btn { transition:none; }
+}
+.ae-reduce #ui .ae-btn { transition:none; }

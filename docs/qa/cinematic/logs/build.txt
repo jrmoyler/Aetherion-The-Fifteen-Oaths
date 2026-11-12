@@ -1,0 +1,49 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aetherion-mmo-client@1.0.0 build
+> vite build
+
+vite v6.4.4 building for production...
+transforming...
+✓ 1610 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                       2.26 kB │ gzip:     0.89 kB
+dist/review.html                                      2.72 kB │ gzip:     1.25 kB
+dist/assets/terrainWorker-B-mfcSW2.js               678.97 kB
+dist/assets/simWorker-CmMP7TUB.js                 1,013.96 kB
+dist/assets/dummy-CPoF9Pna.fbx                    1,424.29 kB
+dist/assets/spruit_sunrise-uUA1djzx.hdr           5,934.21 kB
+dist/assets/game-Da3yrf74.css                       108.07 kB │ gzip:    22.30 kB
+dist/assets/SkeletonUtils-BCVmgslc.js                 0.45 kB │ gzip:     0.27 kB
+dist/assets/math-x2Gs4Wje.js                          0.76 kB │ gzip:     0.43 kB
+dist/assets/PhoenixRig-BDy-35AG.js                    2.39 kB │ gzip:     1.24 kB
+dist/assets/workbox-window.prod.es5-BBnX5xw4.js       5.75 kB │ gzip:     2.36 kB
+dist/assets/shaderPatch-CYu303lT.js                   6.65 kB │ gzip:     2.22 kB
+dist/assets/ReliquaryRig-CGMaBS3Z.js                 17.17 kB │ gzip:     6.40 kB
+dist/assets/math-Cx_EYL3u.js                         19.18 kB │ gzip:     6.73 kB
+dist/assets/FresnelAura-CNCvNgAn.js                  39.56 kB │ gzip:    13.79 kB
+dist/assets/review-CeEY_Bcf.js                       56.28 kB │ gzip:    19.69 kB
+dist/assets/linear-CiEUGLHV.js                      262.27 kB │ gzip:    75.87 kB
+dist/assets/linear-ext-MbVlQavO.js                  392.49 kB │ gzip:   105.75 kB
+dist/assets/postprocessing-vEy12ew5.js              424.17 kB │ gzip:   100.27 kB
+dist/assets/casting--dbOl0G7.js                     506.91 kB │ gzip:   151.00 kB
+dist/assets/collective-oWsEgYdo.js                  554.75 kB │ gzip:   164.11 kB
+dist/assets/handcast-4OvuEN5K.js                    588.17 kB │ gzip:   161.71 kB
+dist/assets/three.module-Bo5l9-MY.js                705.14 kB │ gzip:   181.94 kB
+dist/assets/linear-extended-CKWifOEw.js             765.78 kB │ gzip:   220.71 kB
+dist/assets/game-CNrc9oE_.js                      2,175.96 kB │ gzip:   973.51 kB
+dist/assets/sandbox-Dwivv0uA.js                  12,064.45 kB │ gzip: 3,413.77 kB
+
+(!) Some chunks are larger than 6000 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 39.16s
+
+PWA v2.0.0
+mode      generateSW
+precache  55 entries (34853.99 KiB)
+files generated
+  dist/sw.js
+  dist/workbox-1320db52.js

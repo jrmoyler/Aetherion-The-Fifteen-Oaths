@@ -28,7 +28,9 @@
     "mmo:abilities": "node tools/generate-mmo-abilities.mjs",
     "test:terrain": "node --test tests/biome-relief.test.mjs tests/all-realm-terrain.test.mjs game/src/actors/terrain-water.test.mjs game/src/three/terrain-seams.test.mjs",
     "qa:terrain": "node tools/qa/terrain-geometry.mjs",
-    "qa:terrain:browser": "node tools/qa/terrain-browser.mjs"
+    "qa:terrain:browser": "node tools/qa/terrain-browser.mjs",
+    "qa:cinematic": "node tools/qa/cinematic-browser.mjs",
+    "test:cinematic": "node --test game/src/three/camera.test.mjs game/src/three/cinematic-profile.test.mjs game/src/three/character/surface.test.mjs game/src/three/postprocessing.test.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

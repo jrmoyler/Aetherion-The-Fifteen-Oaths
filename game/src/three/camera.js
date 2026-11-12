@@ -1,6 +1,7 @@
 // Third-person over-the-shoulder orbit camera: mouse/pointer-lock/touch look, zoom,
 // terrain + architecture avoidance, follow lag, sprint FOV kick, shake, cinematic intro.
 import { Vector3 } from 'three';
+import { prefs } from '../ui/prefs.js';
 
 export const CAM = { minDist: 2.5, maxDist: 18, defaultDist: 6.2, minPitch: -0.45, maxPitch: 1.3, sens: 0.0032, touchSens: 0.0045, fov: 0.9, sprintFov: 1.0, lag: 12, shoulder: 0.42 };
 // Depth precision: a 24-bit depth buffer resolves ~z²/(near·2²⁴) metres, so the near plane is the
@@ -31,7 +32,18 @@ export class OrbitCamera {
     ctx.scene.onDisposeObservable?.addOnce(() => this.dispose());
     this.time = 0;
     this.cleanup = [];
-    this.reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const media = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion: reduce)') : null;
+    const refresh = () => {
+      this.reducedMotion = Boolean(media?.matches || prefs.get('reduceMotion'));
+      this.baseFov = Math.max(40, Math.min(80, Number(prefs.get('cameraFov')) || 52));
+      this.shakeScale = Math.max(0, Math.min(1, Number(prefs.get('cameraShake')) || 0));
+      this.leadEnabled = Boolean(prefs.get('cameraLead'));
+      if (this.reducedMotion) { this.shake = 0; this.intro = null; }
+    };
+    refresh(); this.cleanup.push(prefs.subscribe(refresh));
+    media?.addEventListener?.('change', refresh);
+    this.cleanup.push(() => media?.removeEventListener?.('change', refresh));
+    this.lead = new Vector3(); this.previousPosition = null;
     const offShake = ctx.bus?.on('camera:shake', (e) => { if (this.reducedMotion) return; const s = e?.strength ?? 0.3; if (s >= this.shake * 0.7) { this.shake = Math.min(1.5, s); this.shakeDur = e?.duration ?? 0.35; this.shakeT = 0; } });
     if (offShake) this.cleanup.push(offShake);
     // left-drag orbits the camera (input only tracks right-drag / pointer lock)
@@ -69,7 +81,7 @@ export class OrbitCamera {
   follow(actor, snap = true) {
     this.target = actor;
     if (snap && actor) {
-      this.yaw = actor.root.rotation.y; this.pivotInit = false;
+      this.yaw = actor.root.rotation.y; this.pivotInit = false; this.previousPosition = null; this.lead.set(0,0,0);
     }
   }
 
@@ -111,6 +123,18 @@ export class OrbitCamera {
     this.pivot.x += (ap.x - this.pivot.x) * k;
     this.pivot.z += (ap.z - this.pivot.z) * k;
     this.pivot.y += (desiredPivotY - this.pivot.y) * ky;
+
+    // A bounded velocity lead opens the view into travel without moving the
+    // collision-tested camera origin. Teleports reset it instead of whipping.
+    if (this.previousPosition) {
+      this.tmp.copy(ap).sub(this.previousPosition);
+      if (dt > 0 && this.tmp.length() < 5 && !this.reducedMotion && this.leadEnabled) {
+        this.tmp.multiplyScalar(.10 / dt); this.tmp.y = 0; this.tmp.clampLength(0, .8);
+      } else { this.tmp.set(0,0,0); this.lead.set(0,0,0); }
+      this.lead.lerp(this.tmp, 1-Math.exp(-5*dt));
+    }
+    this.previousPosition = this.previousPosition || new Vector3(); this.previousPosition.copy(ap);
+    if (this.reducedMotion || !this.leadEnabled) this.lead.set(0,0,0);
 
     // gentle auto-follow behind the character while moving without look input (helps touch play)
     const moving = (a.controller?.groundSpeed ?? 0) > 1.0;
@@ -161,15 +185,15 @@ export class OrbitCamera {
     let cx = px + bx * d, cy = py + by * d, cz = pz + bz * d;
     const gh = world?.heightAt ? world.heightAt(cx, cz) : -1e9;
     if (cy < gh + 0.3) cy = gh + 0.3;
-    const wl = world?.waterLevel;
+    const wl = world?.waterLevelAt?.(cx, cz) ?? world?.waterLevel;
     if (wl != null && cy < wl + 0.25 && cy > wl - 0.5) cy = wl + 0.25; // avoid the waterline
     // look target: pivot + shoulder, slightly ahead
-    let lx = px, ly = py + 0.08 * Math.min(1, d / 6), lz = pz;
+    let lx = px + this.lead.x, ly = py + 0.08 * Math.min(1, d / 6), lz = pz + this.lead.z;
     // shake
     if (this.shake > 0) {
       this.shakeT += dt;
       const f = Math.max(0, 1 - this.shakeT / this.shakeDur);
-      const s = this.shake * f * f * 0.12;
+      const s = this.shake * this.shakeScale * f * f * 0.12;
       const t = this.time * 38;
       cx += Math.sin(t * 1.1) * s; cy += Math.sin(t * 1.7 + 1) * s * 0.8; cz += Math.cos(t * 1.3) * s;
       lx += Math.sin(t * 0.9 + 2) * s * 0.5; ly += Math.cos(t * 1.5) * s * 0.5;
@@ -181,7 +205,7 @@ export class OrbitCamera {
     // 0 → the body would intersect the near plane, 1 → comfortably clear (read by actors/index.js)
     this.bodyFade = Math.max(0, Math.min(1, (d - NEAR_PLANE * 1.5) / (BODY_FADE_DIST - NEAR_PLANE * 1.5)));
     // FOV kick
-    const fovT = a.sprinting && !this.reducedMotion ? CAM.sprintFov : CAM.fov;
-    cam.fov += (fovT * 180 / Math.PI - cam.fov) * Math.min(1, dt * 4); cam.updateProjectionMatrix();
+    const fovT = this.baseFov + (a.sprinting && !this.reducedMotion ? 5 : 0);
+    cam.fov += (fovT - cam.fov) * Math.min(1, dt * 4); cam.updateProjectionMatrix();
   }
 }

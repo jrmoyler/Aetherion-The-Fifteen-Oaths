@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createPracticalLights } from './practical-lights.js';
 import { computeMetas, makeContext, cityGen, toWorld } from './architecture/gen.js';
 import { Frame, Builder } from './architecture/builder.js';
 import { matDef, getProtos } from './architecture/kit.js';
@@ -71,7 +72,7 @@ export function buildSanctuaries(ctx) {
     if(key.startsWith('cloth.')||oath||key.startsWith('foliage.'))mat.side=THREE.DoubleSide;
     cache.set(id,mat);return mat;
   }
-  const env={ctx,scene:group,collision:ctx.collision,lightBudget:0,qDensity:low?.55:.85,
+  const env={ctx,scene:group,collision:ctx.collision,lightBudget:32,qDensity:low?.55:.85,
     animMesh(S,name,x,y,z,ry,build,update){
       const pivot=new THREE.Group(),spin=new THREE.Group();
       pivot.position.set(x,y,z);pivot.rotation.y=ry; pivot.add(spin);S.city.add(pivot);
@@ -80,11 +81,13 @@ export function buildSanctuaries(ctx) {
     }
   };
   group.sanctuaries=[];
+  const lightSources=[];
   for(const m of metas){
     const city=new THREE.Group();city.name=m.oath.name+' architectural reconstruction';
     city.position.set(m.cx,m.Y,m.cz);city.rotation.y=m.theta;group.add(city);m.city=city;
     const S=makeContext(m,false,env);S.city=city;
     for(const _ of cityGen(S)){} // deterministic staged plan, built before NPC spawn
+    lightSources.push(...S.lights);
     const main=S.b.build(city,`${m.id}:structure`,material);
     const detail=[...S.d.build(city,`${m.id}:detail`,material),...S.inst.build(city,m.id,getProtos(),material)];
     m.detail=detail.map(p=>p.mesh);
@@ -93,11 +96,13 @@ export function buildSanctuaries(ctx) {
     group.sanctuaries.push({oathId:m.id,center:m.oath.center,y:m.Y,shrine:world(shrine.x,shrine.y,shrine.z),spawn:{...world(...sp),ry:m.theta},npcSpots:S.npcs,qa:S.qa});
     city.userData={oathId:m.id,source:'canonical architecture city plans',meshes:main.length+detail.length,vertices:main.reduce((s,p)=>s+(p.verts||0),0)+detail.reduce((s,p)=>s+(p.verts||0),0),instances:detail.reduce((s,p)=>s+(p.count||0),0)};
   }
+  const practical=createPracticalLights(ctx.quality,lightSources);group.add(practical.group);
   let time=0;
   group.shrineAt=(x,z)=>group.sanctuaries.find(s=>Math.hypot(x-s.shrine.x,z-s.shrine.z)<12)||null;
   group.update=(dt)=>{
     dt=Math.min(dt||0,.1);time+=dt;
     const player=ctx.actors?.player,position=player?.root?.position||player?.mesh?.position||ctx.camera?.position;
+    practical.update(dt,position,ctx.render?.timeOfDay ?? 12);
     if(position)for(const m of metas){const distance=Math.hypot(position.x-m.cx,position.z-m.cz);m.city.visible=distance<(low?1300:1900);for(const mesh of m.detail)mesh.visible=distance<(low?320:620);}
     for(const a of anims)if(a.city.visible)a.update(a.spin,time,dt);
     for(const fm of scroll){fm.fall.offset.y=(fm.fall.offset.y+dt*.55)%1;fm.ripple.offset.x=(fm.ripple.offset.x+dt*.004)%1;fm.ripple.offset.y=(fm.ripple.offset.y+dt*.0025)%1;}

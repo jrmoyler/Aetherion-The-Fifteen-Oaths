@@ -1,0 +1,65 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aetherion-server@1.0.0 test
+> node --test test/*.test.js
+
+✔ enemy melee windup can be escaped and reset enemies cannot land delayed attacks (41.611413ms)
+✔ early shrine exploration satisfies later quest and partial progress is durable (6.029795ms)
+✔ initiation continues through elite and boss hunts to a final report (8.017242ms)
+✔ camp reward occurs on final defender only and respawn re-arms it (10.341812ms)
+✔ encounter adds leave on boss reset or defeat without awarding farmable kills (6.891296ms)
+✔ authoritative loadout accepts atomic swaps, persists and rejects combat, spam and wrong Oaths (22.682148ms)
+✔ loadout protocol whitelists fields and rejects malformed input (1.132781ms)
+✔ line sweep lets a target sidestep during projectile travel (2.548152ms)
+✔ line sweep still damages a target inside its corridor (0.802504ms)
+✔ expired DoT never produces a tick scheduled beyond its lifetime (0.273022ms)
+✔ a final tick exactly at expiry remains valid (0.166647ms)
+✔ a launched projectile keeps its team when its caster disconnects (0.476795ms)
+✔ restoration self abilities heal over time without exceeding maximum health (0.638075ms)
+✔ every element has an explicit tactical self profile (1.500537ms)
+✔ all 120 initiation steps have destinations in the production world (99.312586ms)
+✔ welcome and quest advancement expose the current objective to the HUD (58.741099ms)
+✔ scripted client: hello -> move -> cast -> kill -> loot, then token resume (7487.213437ms)
+✔ rate limiting and oversized frames (318.250696ms)
+✔ HTTP: /health, /stats, static files with compression, caching and SPA fallback (54.723499ms)
+✔ welcome carries player state, token, world data and starter quest (50.841678ms)
+✔ every region has camps of its own creatures outside the sanctuary, and a boss lair (62.863235ms)
+✔ combat math: armor, element modifiers, crits and death (45.093044ms)
+✔ DoT statuses tick and expire (44.754286ms)
+✔ cooldowns, mana and cast times are enforced (59.97635ms)
+✔ casting is interrupted by movement for long casts (12.658616ms)
+✔ every hotbar ability of every oath and class resolves (120.912663ms)
+✔ summons create pets that fight, self abilities buff (25.792923ms)
+✔ leveling: xp curve, stat growth, level events, MAX_LEVEL cap (7.606311ms)
+✔ equipment changes stats (7.896038ms)
+✔ movement validation: accepts walking, corrects speed hacks, teleports and under-ground (75.540742ms)
+✔ quest chain: talk -> kill N -> discover neighbour shrine -> veteran -> report (48.496891ms)
+✔ mob AI: aggro, chase, attack, leash and reset (55.012181ms)
+✔ player death and respawn at nearest discovered shrine (9.710734ms)
+✔ snapshots: interest management and per-client deltas (5.933788ms)
+✔ chat: sanitising, channels, rate limiting (6.080002ms)
+✔ persistence: remove + rejoin with token restores the character (5.407121ms)
+✔ world events and AI adventurers (173.982962ms)
+✔ all 279 selectable castables produce their shape effect in every class and loadout slot (63.541381ms)
+✔ two WS clients: party + party chat, duel to 1 HP via real casts, then a locked/confirmed trade (4662.68305ms)
+✔ party: invite by name, accept, roster events, shared XP split and quest kill credit in range (57.910875ms)
+✔ party: kick, leave, leader transfer, disband, cap of 5, invite timeout and decline (46.081416ms)
+✔ duel: challenge, 3-2-1 countdown, no damage before the bell, ends at 1 HP with no death (23.741483ms)
+✔ duel: leaving the ring forfeits; forfeit and logout end it too (25.470558ms)
+✔ pvp: unflagged players are immune; flag with cooldown; 0.6 damage multiplier; honor on kill, no item loss (25.662975ms)
+✔ pvp: never inside a sanctuary, never against party members; war zones auto-flag everyone (18.079411ms)
+✔ pvp: crowd-control diminishing returns (x1, x0.5, x0.25, immune) only from players (7.935733ms)
+✔ trade: offers, both lock then confirm, any change unlocks both, atomic swap + log line (11.73541ms)
+✔ trade: dupe attempts are rejected at commit; stale offers unlock; distance / combat / death cancel (13.526313ms)
+✔ trade: bag space is re-checked at commit (8.263438ms)
+✔ AI adventurers answer party invites, duel, trade and follow their leader (119.25746ms)
+✔ protocol validation for social messages (0.903018ms)
+✔ social rate limiting and chat commands (26.881989ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12931.246189
