@@ -6,6 +6,7 @@ import { Bag, rng } from './kernel.js';
 import { makeForm } from './form.js';
 import { BUILDERS } from './builders.js';
 import { finishMotion, motionAttributes } from './clearance.js';
+import { foldAttributes, setFoldAttributes } from './folds.js';
 
 const DENSITY = { low: .6, medium: .8, high: 1 };
 /** Builders whose sleeves are loose cloth: what they emit on the forearm hangs toward the ground (clearance.js). */
@@ -38,5 +39,7 @@ export function buildCostume(recipe, rig, quality = 'high', builders = BUILDERS)
   }
   // Hanging cloth and loose sleeves learn how to give way to the body in motion (see clearance.js).
   const geometry = bag.geometry(), motion = finishMotion(bag, form); motionAttributes(geometry, motion);
+  // Cloth learns where it rucks and where it falls in folds (see folds.js).
+  setFoldAttributes(geometry, foldAttributes(bag, form));
   return { geometry, triangles: bag.triangles, parts: bag.parts, form, hanging: motion.hanging, loose: motion.loose };
 }

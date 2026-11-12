@@ -5,6 +5,7 @@
 import { DoubleSide, MeshDepthMaterial, MeshStandardMaterial, RGBADepthPacking } from 'three';
 import { NOISE } from '../surface.js';
 import { MOTION_PARS, MOTION_VERTEX, motionUniforms } from './clearance.js';
+import { FOLD_FRAGMENT, FOLD_FRAGMENT_PARS, FOLD_VERTEX, FOLD_VERTEX_PARS } from './folds.js';
 
 const DETAIL = /* glsl */`
   float kind = vSm.z; roughnessFactor = vSm.x; metalnessFactor = vSm.y;
@@ -115,16 +116,16 @@ export function costumeMaterial(motion = null) {
   material.onBeforeCompile = (shader) => {
     Object.assign(shader.uniforms, motionUniforms(motion));
     shader.vertexShader = shader.vertexShader
-      .replace('#include <common>', `#include <common>\nattribute vec3 sm;\nvarying vec3 vSm;\nvarying vec3 vCsP;\n${MOTION_PARS}`)
+      .replace('#include <common>', `#include <common>\nattribute vec3 sm;\nvarying vec3 vSm;\nvarying vec3 vCsP;\n${MOTION_PARS}${FOLD_VERTEX_PARS}`)
       .replace('#include <skinning_vertex>', `#include <skinning_vertex>\n${MOTION_VERTEX}`)
-      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvCsP = position; vSm = sm;');
+      .replace('#include <begin_vertex>', `#include <begin_vertex>\nvCsP = position; vSm = sm; ${FOLD_VERTEX}`);
     shader.fragmentShader = shader.fragmentShader
-      .replace('#include <common>', `#include <common>\nvarying vec3 vSm;\nvarying vec3 vCsP;\n${NOISE}`)
-      .replace('#include <metalnessmap_fragment>', `#include <metalnessmap_fragment>\nfloat csH = 0.;\n{${DETAIL}}`)
+      .replace('#include <common>', `#include <common>\nvarying vec3 vSm;\nvarying vec3 vCsP;\n${FOLD_FRAGMENT_PARS}${NOISE}`)
+      .replace('#include <metalnessmap_fragment>', `#include <metalnessmap_fragment>\nfloat csH = 0.;\n{${DETAIL}}\n{${FOLD_FRAGMENT}}`)
       .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * .0011);')
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>\n${OPTICS}`);
   };
-  material.customProgramCacheKey = () => 'sheet-costume-6';
+  material.customProgramCacheKey = () => 'sheet-costume-7';
   return material;
 }
 

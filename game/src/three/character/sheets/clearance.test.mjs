@@ -73,3 +73,16 @@ test('the motion pass compiles into both materials and stays in step with its JS
   }
   assert.equal((MOTION_VERTEX.match(/it < 3/g) ?? []).length, 1);
 });
+
+test('fold weights reach cloth and soft leather only: skin, hair, metal and stone stay smooth', () => {
+  let cloth = 0;
+  for (const recipe of Object.values(RECIPES)) {
+    const { geometry } = buildCostume(recipe, rig(), 'low'), { sm, ff, fd } = geometry.attributes;
+    assert.ok(ff && fd && ff.array.every(Number.isFinite) && fd.array.every(Number.isFinite), `${recipe.id}: fold attributes`);
+    for (let i = 0; i < sm.count; i++) { const kind = sm.getZ(i), on = ff.getX(i) + ff.getY(i) > 0; if (kind !== 0 && kind !== 2) assert.ok(!on, `${recipe.id}: folds on surface kind ${kind}`); else if (on) cloth++; assert.ok(ff.getX(i) <= 1.21 && ff.getY(i) <= 1.21); }
+  }
+  assert.ok(cloth > 50000, `only ${cloth} cloth vertices carry folds`);
+  const shader = { uniforms: {}, vertexShader: '#include <common>\n#include <begin_vertex>\n#include <skinning_vertex>\n', fragmentShader: '#include <common>\n#include <metalnessmap_fragment>\n#include <normal_fragment_maps>\n#include <emissivemap_fragment>\n' };
+  costumeMaterial().onBeforeCompile(shader);
+  assert.ok(shader.vertexShader.includes('vFd = fd') && shader.fragmentShader.includes('vFf.x * ring'));
+});
