@@ -33,7 +33,7 @@ function baseFaceParams(profile) {
 export function faceParams(profile) {
   const P = baseFaceParams(profile);
   if (!profile.sheet) return P;
-  return { ...P, brow: P.brow, nose: P.nose * 1.02, noseWidth: P.noseWidth * .76, cheek: P.cheek * 1.12, chin: P.chin * 1.1, jaw: Math.min(.9, P.jaw * (P.f ? 1 : 1.04)), mouthW: (P.mouthW ?? 1) * 1.14, sheetNose: true };
+  return { ...P, brow: P.brow, nose: P.nose * 1.02, noseWidth: P.noseWidth * .76, cheek: P.cheek * 1.12, chin: P.chin * 1.1, jaw: P.jaw * (P.f ? .86 : .9), mouthW: (P.mouthW ?? 1) * 1.0, sheetNose: true };
 }
 
 // Surface point for unit direction d. `opts.cloth` smooths fine features so
@@ -118,7 +118,7 @@ function sheetFace(X, Y, P, opts) {
   if (!opts.noSocket) dz -= .03 * g2((ax - eyeX) / .08, (Y + .002) / .05) + .016 * g2((ax - .078) / .034, (Y - .012) / .04) + .008 * gaunt * g2((ax - eyeX) / .1, (Y + .04) / .05);
   dz += .007 * g2((ax - eyeX) / .07, (Y + .068) / .022) - .006 * old * g2((ax - eyeX * .92) / .07, (Y + .092) / .014);
   // nose: a rounded ridge from the nasion to the tip, the bulb, the wings and the nostrils under them
-  const t = sm(.06, -.175, Y), ridge = (.014 + .086 * t ** 1.15) * P.nose * sm(-.235, -.19, Y) * sm(.12, .03, Y);
+  const t = sm(.06, -.175, Y), ridge = (.005 + .082 * t ** 1.7) * P.nose * sm(-.235, -.19, Y) * sm(.12, .03, Y);
   dz += ridge * Math.exp(-((ax / ((.021 + .016 * t) * (.6 + .4 * nw))) ** 2.2));
   dz += .012 * (P.bridge ?? 0) * g2(X / .028, (Y + .04) / .045);
   dz += (.046 + .014 * (P.tip ?? 0)) * P.nose * g2(X / (.042 * nw), (Y + .176) / .036);
@@ -137,10 +137,10 @@ function sheetFace(X, Y, P, opts) {
   // muzzle, philtrum, lips (cupid's bow, tubercle, fuller lower lip), the line between them, the corners
   dz += .03 * g2(X / .15, (Y + .29) / .11);
   dz -= .006 * g2(X / .011, (Y + .247) / .018); dz += .004 * g2((ax - .02) / .009, (Y + .25) / .02);
-  const L = P.lip, bow = -.272 - .007 * gx(X, .018) + .01 * (ax / (.1 * mw)) ** 2;
+  const tp = Math.max(0, 1 - .62 * (ax / (.1 * mw)) ** 2), L = P.lip * tp, bow = -.272 - .007 * gx(X, .018) + .01 * (ax / (.1 * mw)) ** 2;
   dz += .024 * L * Math.exp(-((X / (.094 * mw)) ** 4)) * gx(Y - bow, .013 + .005 * L) + .007 * L * g2(X / .026, (Y + .283) / .011);
   dz += .03 * L * Math.exp(-((X / (.08 * mw)) ** 4)) * gx(Y + .324, .017 + .006 * L);
-  dz -= .02 * Math.exp(-((X / (.102 * mw)) ** 4)) * gx(Y + .3 + .006 * (ax / (.1 * mw)) ** 2, .0065) + .012 * g2((ax - .104 * mw) / .014, (Y + .304) / .014);
+  dz -= .015 * Math.exp(-((X / (.098 * mw)) ** 4)) * gx(Y + .3 - .003 * (ax / (.1 * mw)) ** 2, .0065) + .012 * g2((ax - .104 * mw) / .014, (Y + .304) / .014);
   dz -= .012 * g2(X / .07, (Y + .372) / .02);
   // chin and the line of the jaw
   dz += .042 * P.chin * g2(X / (.085 + .022 * P.chin), (Y + .435) / .055);
@@ -237,7 +237,7 @@ const SHEET_SKIN_GLSL = /* glsl */`
   // --- nose ---
   float nw=csFace.y;
   float noseSide=exp(-csP2((ax-.044*nw)/.022))*smoothstep(-.215,-.16,q.y)*smoothstep(.07,-.02,q.y)*smoothstep(.28,.38,q.z);
-  diffuseColor.rgb*=1.-noseSide*.16;
+  diffuseColor.rgb*=1.-noseSide*.07*smoothstep(.0,-.1,q.y);
     float underNose=exp(-csP2(q.x/(.062*nw))-csP2((q.y+.238)/.014))*front;
   diffuseColor.rgb*=1.-underNose*.42;
   float nostril=exp(-csP2((ax-.032*nw)/.014)-csP2((q.y+.222)/.01));
@@ -245,18 +245,18 @@ const SHEET_SKIN_GLSL = /* glsl */`
   float alar=exp(-csP2((ax-.075*nw)/.01)-csP2((q.y+.2)/.022))*front;
   diffuseColor.rgb*=1.-alar*.3;
   // --- lips ---
-  float mw=csFace.z;
-  float lipsU=exp(-csP4(q.x/(.088*mw)))*exp(-csP2((q.y+.276)/(.017*csLipP.x)))*smoothstep(.2,.36,q.z);
-  float lipsL=exp(-csP4(q.x/(.076*mw)))*exp(-csP2((q.y+.322)/(.02*csLipP.x)))*smoothstep(.2,.36,q.z);
+  float mw=csFace.z, ltp=max(.3,1.-.62*csP2(q.x/(.1*mw)));
+  float lipsU=exp(-csP4(q.x/(.088*mw)))*exp(-csP4((q.y+.277)/(.021*csLipP.x*ltp)))*smoothstep(.2,.36,q.z);
+  float lipsL=exp(-csP4(q.x/(.076*mw)))*exp(-csP4((q.y+.322)/(.025*csLipP.x*ltp)))*smoothstep(.2,.36,q.z);
   float lips=clamp(lipsU+lipsL,0.,1.);
-  diffuseColor.rgb=mix(diffuseColor.rgb,csLipC*(lipsU>lipsL?.82:1.),lips*csFace.w);
+  diffuseColor.rgb=mix(diffuseColor.rgb,csLipC*(lipsU>lipsL?.8:1.05),lips*min(1.,csFace.w*1.25));
   roughnessFactor=mix(roughnessFactor,mix(.45,.2,csMake.w),lips*.8);
-  float mouth=exp(-csP4(q.x/(.1*mw)))*exp(-csP2((q.y+.298+.006*csP2(q.x/(.1*mw)))/.0075))*smoothstep(.25,.38,q.z);
-  diffuseColor.rgb*=1.-mouth*.82;
+  float mouth=exp(-csP4(q.x/(.096*mw)))*exp(-csP2((q.y+.298-.003*csP2(q.x/(.1*mw)))/.006))*smoothstep(.25,.38,q.z);
+  diffuseColor.rgb*=1.-mouth*.62;
   float corner=exp(-csP2((ax-.1*mw)/.012)-csP2((q.y+.3)/.012))*front;
-  diffuseColor.rgb*=1.-corner*.35;
+  diffuseColor.rgb*=1.-corner*.18;
   float underLip=exp(-csP2(q.x/.075)-csP2((q.y+.356)/.014))*front;
-  diffuseColor.rgb*=1.-underLip*.32;
+  diffuseColor.rgb*=1.-underLip*.2;
   float philtrum=exp(-csP2(q.x/.012))*smoothstep(-.262,-.25,q.y)*smoothstep(-.235,-.245,q.y)*front;
   diffuseColor.rgb*=1.-philtrum*.14;
   // --- planes of the face ---
@@ -360,7 +360,7 @@ export function skinMaterial(profile, H, origin) {
     }
     shader.fragmentShader = shader.fragmentShader.replace('uniform float csStrength;', 'uniform float csStrength;\n' + decl).replace('#include <lights_fragment_end>', '#include <lights_fragment_end>\n' + SSS_GLSL);
   };
-  if (profile.sheet) { const cacheKey = m.customProgramCacheKey.bind(m); m.customProgramCacheKey = () => cacheKey() + '|sheet-face-4'; }
+  if (profile.sheet) { const cacheKey = m.customProgramCacheKey.bind(m); m.customProgramCacheKey = () => cacheKey() + '|sheet-face-6'; }
   // Subsurface approximation: soften the terminator and lift red in shadow.
   m.userData.sss = true;
   skinMaterialCache.set(key, m);
