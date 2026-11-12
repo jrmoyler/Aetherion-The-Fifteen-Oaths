@@ -150,7 +150,7 @@ export class PlayerController {
     nx = Math.max(-WORLD_HALF, Math.min(WORLD_HALF, p.x)); nz = Math.max(-WORLD_HALF, Math.min(WORLD_HALF, p.z));
 
     // ---- water
-    const wl = ctx.world?.waterLevel ?? -1e9;
+    const wl = ctx.world?.waterLevelAt?.(nx, nz) ?? ctx.world?.waterLevel ?? -1e9;
     const terr = this.terrainH(nx, nz);
     const floorG = this.groundAt(nx, nz, pos.y);
     const depth = wl - terr;

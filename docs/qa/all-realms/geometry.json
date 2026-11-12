@@ -1,0 +1,2992 @@
+{
+  "kind": "CPU mesh and controller audit; no WebGL renderer",
+  "tier": "low",
+  "realms": [
+    {
+      "id": "oath-04",
+      "biome": "coast",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": -1437.95,
+            "y": 11.16,
+            "z": -1608.18,
+            "ry": -2.970059294618775
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 9.5338746675111e-7,
+          "trunks": 351,
+          "invalidTrunks": 0,
+          "maxSeamGap": 10.583744049072266,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-04",
+            "x": -1437.3570548601722,
+            "y": 13.65079753947414,
+            "z": -1413.479194914784,
+            "level": 1,
+            "members": [
+              "reef-serpent",
+              "reef-serpent"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 28110,
+          "maxVertexError": 9.535013560935113e-7,
+          "trunks": 595,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.3769418001174927,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-07",
+            "x": -1575,
+            "y": 16.254887466351324,
+            "z": -1080
+          },
+          "tiles": 33,
+          "vertices": 29433,
+          "maxVertexError": 9.534163964985964e-7,
+          "trunks": 846,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.3855609893798828,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": -1443.3299735417252,
+          "y": 11.16,
+          "z": -1639.2357873246342
+        },
+        "minGroundGap": 0.16000000000000014
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -1518.1462238164104,
+          "y": 14.819088021024172,
+          "z": -1299.110014627132
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-07",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1517.44284046685,
+              "y": 14.781039005844306,
+              "z": -1310.2286381325991
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1440.1685595447766,
+              "y": 11,
+              "z": -1619.3257618208947
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-08",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1262.8814476358052,
+              "y": 10.946682151103694,
+              "z": -1354.3221714537078
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1439.6144895721216,
+              "y": 11,
+              "z": -1619.4217343581822
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -1518.1462238164104,
+          "y": 14.819088021024172,
+          "z": -1299.110014627132
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-06",
+      "biome": "cliffs",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 985.84,
+            "y": 64.16,
+            "z": 1248.75,
+            "ry": 0.354414822832815
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000038140584592838422,
+          "trunks": 444,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.6468029022216797,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-06",
+            "x": 1140.3145983496743,
+            "y": 61.41280730861169,
+            "z": 1133.7207533187616,
+            "level": 1,
+            "members": [
+              "reed-stag",
+              "reed-stag"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 24390,
+          "maxVertexError": 0.0000038140584592838422,
+          "trunks": 520,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.41466522216796875,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-03",
+            "x": 450,
+            "y": 81.26831511764607,
+            "z": 1395
+          },
+          "tiles": 31,
+          "vertices": 24831,
+          "maxVertexError": 0.000007625077415696069,
+          "trunks": 577,
+          "invalidTrunks": 0,
+          "maxSeamGap": 5.521923065185547,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": 996.778177231762,
+          "y": 64.16,
+          "z": 1278.3094709105053
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": 677.8024004961638,
+          "y": 70.73500367007968,
+          "z": 1332.8245351736264
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-03",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 680.2286381326003,
+              "y": 70.7335610981319,
+              "z": 1337.44284046685
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 989.3257618208935,
+              "y": 64,
+              "z": 1260.1685595447766
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-09",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 790.5317408486525,
+              "y": 56.27909726056855,
+              "z": 1010.6646760608155
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 989.5658439339319,
+              "y": 64,
+              "z": 1259.457304917415
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-10",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1275.5950842332168,
+              "y": 65.32117024839704,
+              "z": 1117.2024578833918
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 990.6216168867638,
+              "y": 64,
+              "z": 1259.6891915566177
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-13",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1035.156547736251,
+              "y": 60.0128633159956,
+              "z": 943.9041658462447
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 990.0982862596869,
+              "y": 64,
+              "z": 1259.3119961821908
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1628,
+        "seconds": 54.266666666666666,
+        "end": {
+          "x": 677.6885796162426,
+          "y": 70.73551437107477,
+          "z": 1332.8684140413022
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-08",
+      "biome": "marsh",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": -724.21,
+            "y": 5.66,
+            "z": -528.76,
+            "ry": 2.7832846942279503
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 4.766628336483336e-7,
+          "trunks": 367,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.5980082750320435,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-08",
+            "x": -730.1922387961746,
+            "y": 4.019116750897965,
+            "z": -729.9731039764623,
+            "level": 1,
+            "members": [
+              "vat-spider",
+              "vat-spider"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 24390,
+          "maxVertexError": 9.365150290818747e-7,
+          "trunks": 501,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.5980082750320435,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-04",
+            "x": -1080,
+            "y": 7.508722475817254,
+            "z": -1080
+          },
+          "tiles": 32,
+          "vertices": 31472,
+          "maxVertexError": 9.532214946261774e-7,
+          "trunks": 669,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.6327319145202637,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": -713.1568268951582,
+          "y": 5.66,
+          "z": -558.2766631917755
+        },
+        "minGroundGap": 0.16000000000000014
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -897.3658129786712,
+          "y": 6.785787993116697,
+          "z": -797.0373836992682
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-04",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -897.1185523643019,
+              "y": 6.960427904462254,
+              "z": -805.6778285464526
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -720.3855104277715,
+              "y": 5.5,
+              "z": -540.5782656416574
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-05",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -744.4895764348306,
+              "y": 13.203946490239284,
+              "z": -221.6355063472002
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -720.0533032082851,
+              "y": 5.5,
+              "z": -539.3070582922949
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-07",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1039.3050111927548,
+              "y": 9.390708087929053,
+              "z": -540
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -720.6949888072465,
+              "y": 5.5,
+              "z": -540
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-09",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -483.73342658235595,
+              "y": 8.075772894409074,
+              "z": -325.21220598396025
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -719.4857499309597,
+              "y": 5.5,
+              "z": -539.532499937236
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-12",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -411.9460772613925,
+              "y": 12.550175450763412,
+              "z": -624.0147062014385
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -719.3294999425328,
+              "y": 5.5,
+              "z": -540.1828636520364
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1531,
+        "seconds": 51.03333333333333,
+        "end": {
+          "x": -897.4664694250216,
+          "y": 6.79064716617626,
+          "z": -797.2107547323116
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-09",
+      "biome": "meadow",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 258.4,
+            "y": 26.16,
+            "z": 356.94,
+            "ry": 1.313070159252085
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000019064994916107025,
+          "trunks": 499,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.5340127944946289,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-09",
+            "x": 271.4221603412784,
+            "y": 22.400903847607303,
+            "z": 564.6240350607213,
+            "level": 1,
+            "members": [
+              "gilded-stag",
+              "gilded-stag"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 24390,
+          "maxVertexError": 0.0000037860657187138713,
+          "trunks": 606,
+          "invalidTrunks": 0,
+          "maxSeamGap": 1.4914398193359375,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-03",
+            "x": 90,
+            "y": 57.149498378372634,
+            "z": 945
+          },
+          "tiles": 33,
+          "vertices": 29433,
+          "maxVertexError": 0.0000038143656126976566,
+          "trunks": 595,
+          "invalidTrunks": 0,
+          "maxSeamGap": 4.550745010375977,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": 288.877357823872,
+          "y": 26.16,
+          "z": 364.97347382755225
+        },
+        "minGroundGap": 0.16000000000000014
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": 170.4954152173935,
+          "y": 36.72019174561126,
+          "z": 663.9065684516603
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-03",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 176.09691474532093,
+              "y": 36.7650016984583,
+              "z": 665.185027077707
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 269.795613626673,
+              "y": 26,
+              "z": 360.6642557133127
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-05",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -39.771361867428475,
+              "y": 30.08874585168492,
+              "z": 437.44284046685704
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 269.32576182091765,
+              "y": 26,
+              "z": 360.1685595447707
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-06",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 469.46825915139004,
+              "y": 33.48122828149643,
+              "z": 609.3353239392374
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270.4341560660266,
+              "y": 26,
+              "z": 360.5426950825333
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-08",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 33.73342658237024,
+              "y": 23.469761619059387,
+              "z": 145.21220598397295
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 269.48574993092814,
+              "y": 26,
+              "z": 359.53249993720743
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-12",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270,
+              "y": 27.252144517197166,
+              "z": 40.69498880729752
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270,
+              "y": 26,
+              "z": 359.30501119270053
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-13",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 566.4672601752955,
+              "y": 29.25890462140456,
+              "z": 241.41309592988188
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270.6452809080001,
+              "y": 26,
+              "z": 359.74188763679996
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 2802,
+        "seconds": 93.4,
+        "end": {
+          "x": 170.48089711121645,
+          "y": 36.72758310724126,
+          "z": 663.9953536464477
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-10",
+      "biome": "highland",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 1880.02,
+            "y": 68.16,
+            "z": 803.33,
+            "ry": 0.98162290790852
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000038137239357638464,
+          "trunks": 183,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.9106731414794922,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-10",
+            "x": 2088.171459677868,
+            "y": 50.16254069444821,
+            "z": 794.9910343516005,
+            "level": 1,
+            "members": [
+              "void-hound",
+              "void-hound"
+            ],
+            "starter": true
+          },
+          "tiles": 33,
+          "vertices": 29433,
+          "maxVertexError": 0.0000038142415093034288,
+          "trunks": 180,
+          "invalidTrunks": 0,
+          "maxSeamGap": 10.5800279378891,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-06",
+            "x": 1440,
+            "y": 67.47744926136662,
+            "z": 1035
+          },
+          "tiles": 32,
+          "vertices": 28992,
+          "maxVertexError": 0.0000038140584592838422,
+          "trunks": 327,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.5132789611816406,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 161,
+        "seconds": 5.366666666666666,
+        "end": {
+          "x": 1907.9980141490107,
+          "y": 69.16,
+          "z": 822.0293622091594
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": 1597.482490526263,
+          "y": 64.50392079332401,
+          "z": 952.0856584241186
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-06",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1604.4049157667944,
+              "y": 64.4470666950036,
+              "z": 952.7975421166028
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1889.3783831132325,
+              "y": 68,
+              "z": 810.3108084433837
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-13",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1677.8652970063324,
+              "y": 61.692405903646225,
+              "z": 571.3484591321239
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1889.5382745680934,
+              "y": 68,
+              "z": 809.4805588891049
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-11",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1912.7495400938403,
+              "y": 62.50490798451801,
+              "z": 491.50643868623223
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1890.0495159022905,
+              "y": 68,
+              "z": 809.3067773679367
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1643,
+        "seconds": 54.766666666666666,
+        "end": {
+          "x": 1597.3802864031404,
+          "y": 64.50438193417818,
+          "z": 952.1532999865715
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-11",
+      "biome": "badlands",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 1968,
+            "y": 32.16,
+            "z": -449.93,
+            "ry": 1.5766102147767385
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000019063105725081186,
+          "trunks": 125,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.0975637435913086,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-11",
+            "x": 2175.6354278257377,
+            "y": 20.80106547909628,
+            "z": -464.6623770604613,
+            "level": 1,
+            "members": [
+              "shade-hound",
+              "shade-hound"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 24390,
+          "maxVertexError": 0.0000019063105725081186,
+          "trunks": 146,
+          "invalidTrunks": 0,
+          "maxSeamGap": 2.263749599456787,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-10",
+            "x": 1935,
+            "y": 49.10088068373481,
+            "z": 180
+          },
+          "tiles": 32,
+          "vertices": 28992,
+          "maxVertexError": 0.0000038042028762674818,
+          "trunks": 220,
+          "invalidTrunks": 0,
+          "maxSeamGap": 2.201846122741699,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": 1999.5178118471342,
+          "y": 32.16,
+          "z": -450.1132430921341
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": 1951.2955467470003,
+          "y": 36.11630411900818,
+          "z": -131.06223522235717
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-10",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1957.2504599061651,
+              "y": 36.083220309391436,
+              "z": -131.50643868630755
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1979.950484097705,
+              "y": 32,
+              "z": -449.3067773678716
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-13",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1700.877201163889,
+              "y": 34.61925157033705,
+              "z": -294.93177842438223
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1979.392470477219,
+              "y": 32,
+              "z": -449.6624835984555
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-14",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1727.9558813956708,
+              "y": 35.42055356038187,
+              "z": -646.034314470034
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1979.4514090439047,
+              "y": 32,
+              "z": -450.42668185474065
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-15",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1953.4831621257922,
+              "y": 27.240890092883696,
+              "z": -768.2020544904894
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1979.9422843210104,
+              "y": 32,
+              "z": -450.69258814787764
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": false,
+        "steps": 3301,
+        "seconds": 110.03333333333333,
+        "end": {
+          "x": 1950.8750936965741,
+          "y": 32.16,
+          "z": -409.906970509844
+        },
+        "minGroundGap": 0.1599999999999966
+      }
+    },
+    {
+      "id": "oath-12",
+      "biome": "crimson",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 273.3,
+            "y": 36.16,
+            "z": -798.46,
+            "ry": -2.862877712216528
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000037607923530913467,
+          "trunks": 466,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.46319007873535156,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-12",
+            "x": 309.2349165364682,
+            "y": 31.477719651021943,
+            "z": -615.9367109214674,
+            "level": 1,
+            "members": [
+              "blood-hound",
+              "blood-hound"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 24390,
+          "maxVertexError": 0.0000037607923530913467,
+          "trunks": 594,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.7815389633178711,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-08",
+            "x": -225,
+            "y": 19.132218386120442,
+            "z": -675
+          },
+          "tiles": 33,
+          "vertices": 29433,
+          "maxVertexError": 0.0000037607923530913467,
+          "trunks": 674,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.7815389633178711,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": 264.6286601901374,
+          "y": 36.16,
+          "z": -828.7620446102927
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -36.63385312599458,
+          "y": 30.299478400901755,
+          "z": -721.6700471464272
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-08",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -38.05392273864477,
+              "y": 30.38070539895216,
+              "z": -725.9852937985514
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 269.32949994256813,
+              "y": 36,
+              "z": -809.8171363479732
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-09",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270,
+              "y": 31.894709694407855,
+              "z": -490.69498880725075
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270,
+              "y": 36,
+              "z": -809.3050111927537
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-13",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 507.33754568696475,
+              "y": 36.84575730349148,
+              "z": -596.3962088817318
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270.51658111212845,
+              "y": 36,
+              "z": -809.5350769990845
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-14",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 575.8387327231857,
+              "y": 40.761356409155425,
+              "z": -901.7516198169558
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 270.6656785475653,
+              "y": 36,
+              "z": -810.1997035642694
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 2624,
+        "seconds": 87.46666666666667,
+        "end": {
+          "x": -36.738035996771494,
+          "y": 30.297168236423346,
+          "z": -721.6237615956915
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-13",
+      "biome": "terraces",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 1158.17,
+            "y": 42.16,
+            "z": -2.01,
+            "ry": 1.402321337809493
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.000001907038765125435,
+          "trunks": 439,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.7438058853149414,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-13",
+            "x": 1094.3918363092093,
+            "y": 34.211517621121686,
+            "z": -179.69344414650158,
+            "level": 1,
+            "members": [
+              "mirror-spider",
+              "mirror-spider"
+            ],
+            "starter": true
+          },
+          "tiles": 34,
+          "vertices": 26154,
+          "maxVertexError": 0.00000190733241822727,
+          "trunks": 581,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.7061138153076172,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-06",
+            "x": 1080,
+            "y": 54.52300527439116,
+            "z": 630
+          },
+          "tiles": 32,
+          "vertices": 25272,
+          "maxVertexError": 0.0000038140584592838422,
+          "trunks": 604,
+          "invalidTrunks": 0,
+          "maxSeamGap": 1.5214881896972656,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": 1189.2420960065635,
+          "y": 42.16,
+          "z": 3.2749684408434923
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": 1118.9754981878475,
+          "y": 43.862939385574094,
+          "z": 314.880329925786
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-06",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1124.843452263757,
+              "y": 44.08513226064851,
+              "z": 316.09583415369934
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1169.9017137403034,
+              "y": 42,
+              "z": 0.6880038178784306
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-09",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 873.5327398247523,
+              "y": 38.01469921866213,
+              "z": 118.58690407009897
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1169.3547190919662,
+              "y": 42,
+              "z": 0.25811236321326786
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-10",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1382.134702993648,
+              "y": 45.45262072029935,
+              "z": 238.65154086785373
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170.4617254319246,
+              "y": 42,
+              "z": 0.5194411109155678
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-11",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1449.1227988361127,
+              "y": 36.88666341304856,
+              "z": -155.06822157561865
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170.6075295227786,
+              "y": 42,
+              "z": -0.33751640154314877
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-12",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 932.6624543130393,
+              "y": 39.32015021601504,
+              "z": -213.6037911182644
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1169.48341888785,
+              "y": 42,
+              "z": -0.4649230009351223
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-14",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170,
+              "y": 42.00692763488453,
+              "z": -319.30501119270485
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170,
+              "y": 42,
+              "z": -0.6949888072931323
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": false,
+        "steps": 3301,
+        "seconds": 110.03333333333333,
+        "end": {
+          "x": 1155.6012108756868,
+          "y": 42.16,
+          "z": 38.043850468746115
+        },
+        "minGroundGap": 0.1599999999999966
+      }
+    },
+    {
+      "id": "oath-15",
+      "biome": "industrial",
+      "priority": true,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 1884.62,
+            "y": 24.16,
+            "z": -1519.27,
+            "ry": 2.677009202083774
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000019072548198550976,
+          "trunks": 52,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.3415565490722656,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-15",
+            "x": 2032.4603321115665,
+            "y": 5.451994281554184,
+            "z": -1403.7713952022993,
+            "level": 1,
+            "members": [
+              "rail-hound",
+              "rail-hound"
+            ],
+            "starter": true
+          },
+          "tiles": 34,
+          "vertices": 26154,
+          "maxVertexError": 0.0000019072548198550976,
+          "trunks": 68,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.5395631790161133,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-11",
+            "x": 1935,
+            "y": 27.21400081813242,
+            "z": -990
+          },
+          "tiles": 33,
+          "vertices": 29433,
+          "maxVertexError": 0.0000019072548198550976,
+          "trunks": 101,
+          "invalidTrunks": 0,
+          "maxSeamGap": 1.5995125770568848,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": 1898.7418082125716,
+          "y": 24.16,
+          "z": -1547.4476609119595
+        },
+        "minGroundGap": 0.16000000000000014
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": 1914.8771468761797,
+          "y": 26.50818009011705,
+          "z": -1201.4017958087397
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-11",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1916.5168378741953,
+              "y": 26.179365093111258,
+              "z": -1211.7979455096604
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1890.0577156790016,
+              "y": 24,
+              "z": -1529.307411851978
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-14",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1619.2298920481592,
+              "y": 31.126640512766635,
+              "z": -1360.7686825300996
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1889.4106506702126,
+              "y": 24,
+              "z": -1529.631656668883
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1513,
+        "seconds": 50.43333333333333,
+        "end": {
+          "x": 1914.895265635686,
+          "y": 26.514396412489553,
+          "z": -1201.2460093307138
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-01",
+      "biome": "volcanic",
+      "priority": false,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": -1968.2,
+            "y": 40.16,
+            "z": 537.82,
+            "ry": -1.3879057253403493
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.000001907179800753056,
+          "trunks": 74,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.093548059463501,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-01",
+            "x": -1810.0134692522806,
+            "y": 10.386964641886866,
+            "z": 644.6156151106674,
+            "level": 1,
+            "members": [
+              "ember-hound",
+              "ember-hound"
+            ],
+            "starter": true
+          },
+          "tiles": 34,
+          "vertices": 26154,
+          "maxVertexError": 0.0000033706213145023867,
+          "trunks": 134,
+          "invalidTrunks": 0,
+          "maxSeamGap": 2.5297012329101562,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-02",
+            "x": -1665,
+            "y": 53.70796480351672,
+            "z": 990
+          },
+          "tiles": 33,
+          "vertices": 29433,
+          "maxVertexError": 0.0000038088368228272884,
+          "trunks": 248,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.411557197570801,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": -1999.1926840998767,
+          "y": 40.16,
+          "z": 543.5523270969985
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -1790.372863521538,
+          "y": 43.26190772845204,
+          "z": 803.024071810128
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-02",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1796.8905997144882,
+              "y": 43.08003214395714,
+              "z": 801.5848575507314
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1979.6014500892468,
+              "y": 40,
+              "z": 540.5693570153616
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-05",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1661.6355063472993,
+              "y": 40.470521743588165,
+              "z": 564.489576434823
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1979.3070582921946,
+              "y": 40,
+              "z": 540.0533032082928
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-07",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1902.5571595331498,
+              "y": 35.3300887100895,
+              "z": 230.2286381325975
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1979.8314404552234,
+              "y": 40,
+              "z": 539.3257618208951
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": false,
+        "steps": 3301,
+        "seconds": 110.03333333333333,
+        "end": {
+          "x": -1944.0635415599966,
+          "y": 40.16,
+          "z": 573.9508626013222
+        },
+        "minGroundGap": 0.1599999999999966
+      }
+    },
+    {
+      "id": "oath-02",
+      "biome": "glacial",
+      "priority": false,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": -1344.08,
+            "y": 72.16,
+            "z": 1429.56,
+            "ry": -0.5157715488783563
+          },
+          "tiles": 29,
+          "vertices": 26429,
+          "maxVertexError": 0.000007470466755421512,
+          "trunks": 350,
+          "invalidTrunks": 0,
+          "maxSeamGap": 1.6299176216125488,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-02",
+            "x": -1166.5179269991806,
+            "y": 63.240053853151615,
+            "z": 1492.2541608682359,
+            "level": 1,
+            "members": [
+              "rime-wolf",
+              "rime-wolf"
+            ],
+            "starter": true
+          },
+          "tiles": 34,
+          "vertices": 26154,
+          "maxVertexError": 0.000007470466755421512,
+          "trunks": 455,
+          "invalidTrunks": 0,
+          "maxSeamGap": 1.4077281951904297,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-01",
+            "x": -1665,
+            "y": 53.70796480351672,
+            "z": 990
+          },
+          "tiles": 32,
+          "vertices": 28992,
+          "maxVertexError": 0.0000038125903927266336,
+          "trunks": 300,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.411557197570801,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": -1359.6250421694485,
+          "y": 72.16,
+          "z": 1456.9782002621002
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -1532.3616759673266,
+          "y": 64.5242535361241,
+          "z": 1171.6730079515203
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-01",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1533.1094002855111,
+              "y": 64.66101203462735,
+              "z": 1178.4151424492698
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1350.398549910754,
+              "y": 72,
+              "z": 1439.4306429846374
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-03",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1031.5064386863885,
+              "y": 73.51695455639039,
+              "z": 1462.7495400938292
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1349.3067773677762,
+              "y": 72,
+              "z": 1440.049515902302
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-05",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1172.8814476358052,
+              "y": 66.27958116105229,
+              "z": 1174.3221714537078
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1349.6144895721216,
+              "y": 72,
+              "z": 1439.4217343581822
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1610,
+        "seconds": 53.666666666666664,
+        "end": {
+          "x": -1532.4289685543258,
+          "y": 64.52046440701928,
+          "z": 1171.5989248957042
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-03",
+      "biome": "alpine",
+      "priority": false,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": -91.04,
+            "y": 97.16,
+            "z": 1518.05,
+            "ry": 0.08686931444471858
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.000007625077415696069,
+          "trunks": 329,
+          "invalidTrunks": 0,
+          "maxSeamGap": 5.807930946350098,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-03",
+            "x": -274.0216137393536,
+            "y": 8.318526600994401,
+            "z": 1644.7977702392589,
+            "level": 1,
+            "members": [
+              "static-raptor",
+              "static-raptor"
+            ],
+            "starter": true
+          },
+          "tiles": 34,
+          "vertices": 26154,
+          "maxVertexError": 0.000007625077415696069,
+          "trunks": 482,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.249408721923828,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-02",
+            "x": -720,
+            "y": 88.64596426870452,
+            "z": 1485
+          },
+          "tiles": 33,
+          "vertices": 29433,
+          "maxVertexError": 0.000007619661857916071,
+          "trunks": 502,
+          "invalidTrunks": 0,
+          "maxSeamGap": 4.673563480377197,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": -88.30546530865807,
+          "y": 97.16,
+          "z": 1549.4494962011154
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": false,
+        "steps": 3301,
+        "seconds": 110.03333333333333,
+        "end": {
+          "x": -404.42544704080206,
+          "y": 12.777569733700323,
+          "z": 1482.1965772200451
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-02",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -408.4935613137109,
+              "y": 87.00116637387761,
+              "z": 1507.2504599061638
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -90.69322263213775,
+              "y": 97,
+              "z": 1529.950484097704
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-05",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -289.468259151357,
+              "y": 80.63423699342283,
+              "z": 1280.6646760608044
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -90.43415606605693,
+              "y": 97,
+              "z": 1529.4573049174282
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-06",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 219.77136186742183,
+              "y": 86.55669741103158,
+              "z": 1452.5571595331448
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -89.32576182091695,
+              "y": 97,
+              "z": 1529.8314404552289
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-09",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 3.9030852546678187,
+              "y": 76.98922764773747,
+              "z": 1224.8149729223305
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -89.79561362666041,
+              "y": 97,
+              "z": 1529.3357442866454
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1628,
+        "seconds": 54.266666666666666,
+        "end": {
+          "x": -410.0666062044445,
+          "y": 86.72267597126026,
+          "z": 1501.2976636255162
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-05",
+      "biome": "canyon",
+      "priority": false,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": -810.52,
+            "y": 46.16,
+            "z": 618.01,
+            "ry": 0.04326906619176519
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.000003805786718658055,
+          "trunks": 255,
+          "invalidTrunks": 0,
+          "maxSeamGap": 5.281959533691406,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-05",
+            "x": -653.3871529898489,
+            "y": 37.96452568976041,
+            "z": 520.8169121725322,
+            "level": 1,
+            "members": [
+              "shale-boar",
+              "shale-boar"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 24390,
+          "maxVertexError": 0.0000037862557178414136,
+          "trunks": 319,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.5495262145996094,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-01",
+            "x": -1395,
+            "y": 44.76294071559041,
+            "z": 585
+          },
+          "tiles": 30,
+          "vertices": 28110,
+          "maxVertexError": 0.000003805859222438812,
+          "trunks": 250,
+          "invalidTrunks": 0,
+          "maxSeamGap": 5.281959533691406,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": -809.1566561688524,
+          "y": 46.16,
+          "z": 649.4988446161504
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -1129.3169803992892,
+          "y": 45.829289057177554,
+          "z": 600.0051267400415
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-01",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1128.3644936528055,
+              "y": 45.75671528235701,
+              "z": 605.5104235651689
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -810.6929417076914,
+              "y": 46,
+              "z": 629.9466967917159
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-02",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -987.1185523643019,
+              "y": 49.67029095621418,
+              "z": 895.6778285464526
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -810.3855104277715,
+              "y": 46,
+              "z": 630.5782656416574
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-03",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -610.5317408486524,
+              "y": 52.730872396799235,
+              "z": 879.3353239391846
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -809.5658439339319,
+              "y": 46,
+              "z": 630.542695082585
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-07",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1004.683701317405,
+              "y": 41.54869359052183,
+              "z": 376.9111882873733
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -810.4237421544965,
+              "y": 46,
+              "z": 629.4491351991546
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-08",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -785.5104235651688,
+              "y": 38.41674624240299,
+              "z": 311.6355063471922
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -809.9466967917168,
+              "y": 46,
+              "z": 629.3070582923206
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-09",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -500.2286381326003,
+              "y": 40.43272527841921,
+              "z": 552.5571595331502
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -809.3257618208937,
+              "y": 46,
+              "z": 629.8314404552233
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1629,
+        "seconds": 54.3,
+        "end": {
+          "x": -1129.5133045724351,
+          "y": 45.83223696864533,
+          "z": 600.0048736099143
+        },
+        "minGroundGap": 0
+      }
+    },
+    {
+      "id": "oath-07",
+      "biome": "forest",
+      "priority": false,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": -1698.36,
+            "y": 22.16,
+            "z": -537.09,
+            "ry": -1.8158314010459733
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000013897881885327479,
+          "trunks": 648,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.5758891105651855,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-07",
+            "x": -1474.7785882508774,
+            "y": 17.81254104162881,
+            "z": -485.7848106193891,
+            "level": 1,
+            "members": [
+              "thornback-boar",
+              "thornback-boar"
+            ],
+            "starter": true
+          },
+          "tiles": 30,
+          "vertices": 24390,
+          "maxVertexError": 0.0000013897881885327479,
+          "trunks": 809,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.5758891105651855,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-01",
+            "x": -1845,
+            "y": 32.630111104033844,
+            "z": 0
+          },
+          "tiles": 31,
+          "vertices": 28551,
+          "maxVertexError": 0.00000378925525978957,
+          "trunks": 493,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.6487789154052734,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": -1728.936854285521,
+          "y": 22.16,
+          "z": -544.7360462766229
+        },
+        "minGroundGap": 0.16000000000000014
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": -1782.4605982021308,
+          "y": 24.15246808381101,
+          "z": -229.05951521834209
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-01",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1787.4428404668502,
+              "y": 24.41426750778107,
+              "z": -230.2286381325975
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1710.1685595447766,
+              "y": 22,
+              "z": -539.3257618208951
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-04",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1632.55715953315,
+              "y": 20.94508926309023,
+              "z": -849.7713618673997
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1709.8314404552234,
+              "y": 22,
+              "z": -540.6742381791065
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-05",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1515.3162986825446,
+              "y": 23.905173686159326,
+              "z": -286.9111882873084
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1709.5762578455467,
+              "y": 22,
+              "z": -539.4491351992103
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-08",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1390.6949888072463,
+              "y": 18.66616617518224,
+              "z": -540
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": -1709.3050111927537,
+              "y": 22,
+              "z": -540
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": false,
+        "steps": 3301,
+        "seconds": 110.03333333333333,
+        "end": {
+          "x": -1711.5026110508745,
+          "y": 22.06,
+          "z": -497.9194007282306
+        },
+        "minGroundGap": 0.05999999999999872
+      }
+    },
+    {
+      "id": "oath-14",
+      "biome": "plateau",
+      "priority": false,
+      "views": [
+        {
+          "name": "spawn",
+          "position": {
+            "name": "spawn",
+            "x": 1174.95,
+            "y": 50.16,
+            "z": -1069.07,
+            "ry": -2.7165435391953054
+          },
+          "tiles": 25,
+          "vertices": 22185,
+          "maxVertexError": 0.0000019072912067485959,
+          "trunks": 172,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.46542930603027344,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "camp",
+          "position": {
+            "name": "camp",
+            "oath": "oath-14",
+            "x": 982.3673833159309,
+            "y": 48.88237369501378,
+            "z": -1121.1786373059017,
+            "level": 1,
+            "members": [
+              "clockwork-raptor",
+              "clockwork-raptor"
+            ],
+            "starter": true
+          },
+          "tiles": 34,
+          "vertices": 26154,
+          "maxVertexError": 0.0000019073303292316268,
+          "trunks": 244,
+          "invalidTrunks": 0,
+          "maxSeamGap": 0.1771240234375,
+          "maxUncoveredSeam": 0
+        },
+        {
+          "name": "transition",
+          "position": {
+            "name": "transition",
+            "to": "oath-11",
+            "x": 1575,
+            "y": 41.32795886315303,
+            "z": -765
+          },
+          "tiles": 32,
+          "vertices": 28992,
+          "maxVertexError": 0.0000019073226980026448,
+          "trunks": 231,
+          "invalidTrunks": 0,
+          "maxSeamGap": 3.0975637435913086,
+          "maxUncoveredSeam": 0
+        }
+      ],
+      "shrineAccess": {
+        "reached": true,
+        "steps": 151,
+        "seconds": 5.033333333333333,
+        "end": {
+          "x": 1161.9529212694674,
+          "y": 50.16,
+          "z": -1097.783794352787
+        },
+        "minGroundGap": 0.1599999999999966
+      },
+      "terrainExit": {
+        "reached": true,
+        "steps": 1500,
+        "seconds": 50,
+        "end": {
+          "x": 1429.1587821104822,
+          "y": 44.50967739487919,
+          "z": -875.850991435235
+        },
+        "minGroundGap": 0
+      },
+      "roadExits": [
+        {
+          "to": "oath-11",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1422.0441186043292,
+              "y": 44.61221703790666,
+              "z": -883.9656855299665
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170.5485909560953,
+              "y": 50,
+              "z": -1079.5733181452592
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-12",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 864.1612672767491,
+              "y": 46.27424980021467,
+              "z": -988.2483801830246
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1169.3343214524918,
+              "y": 50,
+              "z": -1079.8002964357474
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-13",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170,
+              "y": 48.96622048199815,
+              "z": -760.6949888072463
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170,
+              "y": 50,
+              "z": -1079.3050111927548
+            },
+            "minGroundGap": 0
+          }
+        },
+        {
+          "to": "oath-15",
+          "outward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1440.7701079518408,
+              "y": 41.04237489358136,
+              "z": -1249.2313174699004
+            },
+            "minGroundGap": 0
+          },
+          "inward": {
+            "reached": true,
+            "steps": 1500,
+            "seconds": 50,
+            "end": {
+              "x": 1170.5893493297874,
+              "y": 50,
+              "z": -1080.368343331117
+            },
+            "minGroundGap": 0
+          }
+        }
+      ],
+      "architectureExit": {
+        "reached": true,
+        "steps": 1501,
+        "seconds": 50.03333333333333,
+        "end": {
+          "x": 1429.2603929649456,
+          "y": 44.50779246096816,
+          "z": -875.7742691506978
+        },
+        "minGroundGap": 0
+      }
+    }
+  ],
+  "failures": []
+}

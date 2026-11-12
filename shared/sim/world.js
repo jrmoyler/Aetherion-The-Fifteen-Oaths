@@ -1,7 +1,7 @@
 // Deterministic world layout for the simulation: sanctuaries (spawn, shrine, NPC spots),
 // creature camps and boss lairs. Pure function of the world seed + shared terrain.
 import { OATHS, SANCTUARY, ROUTES } from '../oaths.js';
-import { heightAt, roadInfo, SANCTUARY_HEIGHT, WORLD_HALF } from '../terrain.js';
+import { heightAt, waterLevelAt, roadInfo, SANCTUARY_HEIGHT, WORLD_HALF } from '../terrain.js';
 import { CREATURES, NPC_ROLES } from '../creatures.js';
 import { makeRng, clamp } from './util.js';
 import { SANCTUARY_LAYOUT } from '../sanctuary-layout.js';
@@ -43,10 +43,10 @@ export function buildSanctuaries() {
 function landOk(x, z) {
   if (Math.abs(x) > WORLD_HALF - 60 || Math.abs(z) > WORLD_HALF - 60) return null;
   const h = heightAt(x, z);
-  if (h < 1.5) return null; // water / shoreline
+  if (h < Math.max(1.5, waterLevelAt(x, z) + 0.4)) return null; // water / shoreline
   // reject steep cliffs: sample a small cross
   const e = 4;
-  const s = Math.max(Math.abs(heightAt(x + e, z) - h), Math.abs(heightAt(x, z + e) - h));
+  const s = Math.max(Math.abs(heightAt(x + e, z) - h), Math.abs(heightAt(x, z + e) - h), Math.abs(heightAt(x - e, z) - h), Math.abs(heightAt(x, z - e) - h));
   if (s > 4.5) return null;
   return h;
 }

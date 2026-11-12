@@ -1,0 +1,602 @@
+[
+  {
+    "id": "oath-01",
+    "name": "Kiln Oath",
+    "biome": "volcanic",
+    "priority": false,
+    "spawn": {
+      "x": -1968.2,
+      "y": 40.16,
+      "z": 537.82,
+      "ry": -1.3879057253403493
+    },
+    "shrine": {
+      "x": -2010.48,
+      "y": 41.06,
+      "z": 545.64
+    },
+    "camp": {
+      "oath": "oath-01",
+      "x": -1810.0134692522806,
+      "y": 10.386964641886866,
+      "z": 644.6156151106674,
+      "level": 1,
+      "members": [
+        "ember-hound",
+        "ember-hound"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-02",
+      "x": -1665,
+      "y": 53.70796480351672,
+      "z": 990
+    },
+    "wilderness": {
+      "x": -1740,
+      "z": 700,
+      "y": 7.013569715248312
+    }
+  },
+  {
+    "id": "oath-02",
+    "name": "Rime Archive",
+    "biome": "glacial",
+    "priority": false,
+    "spawn": {
+      "x": -1344.08,
+      "y": 72.16,
+      "z": 1429.56,
+      "ry": -0.5157715488783563
+    },
+    "shrine": {
+      "x": -1365.29,
+      "y": 73.06,
+      "z": 1466.97
+    },
+    "camp": {
+      "oath": "oath-02",
+      "x": -1166.5179269991806,
+      "y": 63.240053853151615,
+      "z": 1492.2541608682359,
+      "level": 1,
+      "members": [
+        "rime-wolf",
+        "rime-wolf"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-01",
+      "x": -1665,
+      "y": 53.70796480351672,
+      "z": 990
+    },
+    "wilderness": {
+      "x": -1110,
+      "z": 1600,
+      "y": 58.831182343084734
+    }
+  },
+  {
+    "id": "oath-03",
+    "name": "Storm Relay",
+    "biome": "alpine",
+    "priority": false,
+    "spawn": {
+      "x": -91.04,
+      "y": 97.16,
+      "z": 1518.05,
+      "ry": 0.08686931444471858
+    },
+    "shrine": {
+      "x": -87.31,
+      "y": 98.06,
+      "z": 1560.88
+    },
+    "camp": {
+      "oath": "oath-03",
+      "x": -274.0216137393536,
+      "y": 8.318526600994401,
+      "z": 1644.7977702392589,
+      "level": 1,
+      "members": [
+        "static-raptor",
+        "static-raptor"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-02",
+      "x": -720,
+      "y": 88.64596426870452,
+      "z": 1485
+    },
+    "wilderness": {
+      "x": 150,
+      "z": 1690,
+      "y": 9.527298665955449
+    }
+  },
+  {
+    "id": "oath-04",
+    "name": "Tidal Covenant",
+    "biome": "coast",
+    "priority": true,
+    "spawn": {
+      "x": -1437.95,
+      "y": 11.16,
+      "z": -1608.18,
+      "ry": -2.970059294618775
+    },
+    "shrine": {
+      "x": -1445.29,
+      "y": 12.06,
+      "z": -1650.55
+    },
+    "camp": {
+      "oath": "oath-04",
+      "x": -1437.3570548601722,
+      "y": 13.65079753947414,
+      "z": -1413.479194914784,
+      "level": 1,
+      "members": [
+        "reef-serpent",
+        "reef-serpent"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-07",
+      "x": -1575,
+      "y": 16.254887466351324,
+      "z": -1080
+    },
+    "wilderness": {
+      "x": -1200,
+      "z": -1460,
+      "y": 18.85298796567151
+    }
+  },
+  {
+    "id": "oath-05",
+    "name": "Fault Choir",
+    "biome": "canyon",
+    "priority": false,
+    "spawn": {
+      "x": -810.52,
+      "y": 46.16,
+      "z": 618.01,
+      "ry": 0.04326906619176519
+    },
+    "shrine": {
+      "x": -808.66,
+      "y": 47.06,
+      "z": 660.97
+    },
+    "camp": {
+      "oath": "oath-05",
+      "x": -653.3871529898489,
+      "y": 37.96452568976041,
+      "z": 520.8169121725322,
+      "level": 1,
+      "members": [
+        "shale-boar",
+        "shale-boar"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-01",
+      "x": -1395,
+      "y": 44.76294071559041,
+      "z": 585
+    },
+    "wilderness": {
+      "x": -570,
+      "z": 790,
+      "y": 34.216648868934286
+    }
+  },
+  {
+    "id": "oath-06",
+    "name": "Reed Resonance",
+    "biome": "cliffs",
+    "priority": true,
+    "spawn": {
+      "x": 985.84,
+      "y": 64.16,
+      "z": 1248.75,
+      "ry": 0.354414822832815
+    },
+    "shrine": {
+      "x": 1000.76,
+      "y": 65.06,
+      "z": 1289.07
+    },
+    "camp": {
+      "oath": "oath-06",
+      "x": 1140.3145983496743,
+      "y": 61.41280730861169,
+      "z": 1133.7207533187616,
+      "level": 1,
+      "members": [
+        "reed-stag",
+        "reed-stag"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-03",
+      "x": 450,
+      "y": 81.26831511764607,
+      "z": 1395
+    },
+    "wilderness": {
+      "x": 1230,
+      "z": 1420,
+      "y": 57.614754442676244
+    }
+  },
+  {
+    "id": "oath-07",
+    "name": "Graft Sanctuary",
+    "biome": "forest",
+    "priority": false,
+    "spawn": {
+      "x": -1698.36,
+      "y": 22.16,
+      "z": -537.09,
+      "ry": -1.8158314010459733
+    },
+    "shrine": {
+      "x": -1740.07,
+      "y": 23.06,
+      "z": -547.52
+    },
+    "camp": {
+      "oath": "oath-07",
+      "x": -1474.7785882508774,
+      "y": 17.81254104162881,
+      "z": -485.7848106193891,
+      "level": 1,
+      "members": [
+        "thornback-boar",
+        "thornback-boar"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-01",
+      "x": -1845,
+      "y": 32.630111104033844,
+      "z": 0
+    },
+    "wilderness": {
+      "x": -1470,
+      "z": -380,
+      "y": 19.11246094212482
+    }
+  },
+  {
+    "id": "oath-08",
+    "name": "Bitterglass Guild",
+    "biome": "marsh",
+    "priority": true,
+    "spawn": {
+      "x": -724.21,
+      "y": 5.66,
+      "z": -528.76,
+      "ry": 2.7832846942279503
+    },
+    "shrine": {
+      "x": -709.13,
+      "y": 6.56,
+      "z": -569.03
+    },
+    "camp": {
+      "oath": "oath-08",
+      "x": -730.1922387961746,
+      "y": 4.019116750897965,
+      "z": -729.9731039764623,
+      "level": 1,
+      "members": [
+        "vat-spider",
+        "vat-spider"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-04",
+      "x": -1080,
+      "y": 7.508722475817254,
+      "z": -1080
+    },
+    "wilderness": {
+      "x": -480,
+      "z": -380,
+      "y": -0.6299503738991645
+    }
+  },
+  {
+    "id": "oath-09",
+    "name": "Oath of Daybreak",
+    "biome": "meadow",
+    "priority": true,
+    "spawn": {
+      "x": 258.4,
+      "y": 26.16,
+      "z": 356.94,
+      "ry": 1.313070159252085
+    },
+    "shrine": {
+      "x": 299.98,
+      "y": 27.06,
+      "z": 367.9
+    },
+    "camp": {
+      "oath": "oath-09",
+      "x": 271.4221603412784,
+      "y": 22.400903847607303,
+      "z": 564.6240350607213,
+      "level": 1,
+      "members": [
+        "gilded-stag",
+        "gilded-stag"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-03",
+      "x": 90,
+      "y": 57.149498378372634,
+      "z": 945
+    },
+    "wilderness": {
+      "x": 510,
+      "z": 520,
+      "y": 22.474242082350198
+    }
+  },
+  {
+    "id": "oath-10",
+    "name": "Tidal Observatory",
+    "biome": "highland",
+    "priority": true,
+    "spawn": {
+      "x": 1880.02,
+      "y": 68.16,
+      "z": 803.33,
+      "ry": 0.98162290790852
+    },
+    "shrine": {
+      "x": 1917.44,
+      "y": 69.06,
+      "z": 828.34
+    },
+    "camp": {
+      "oath": "oath-10",
+      "x": 2088.171459677868,
+      "y": 50.16254069444821,
+      "z": 794.9910343516005,
+      "level": 1,
+      "members": [
+        "void-hound",
+        "void-hound"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-06",
+      "x": 1440,
+      "y": 67.47744926136662,
+      "z": 1035
+    },
+    "wilderness": {
+      "x": 2130,
+      "z": 970,
+      "y": 45.82131138116282
+    }
+  },
+  {
+    "id": "oath-11",
+    "name": "The Missing Court",
+    "biome": "badlands",
+    "priority": true,
+    "spawn": {
+      "x": 1968,
+      "y": 32.16,
+      "z": -449.93,
+      "ry": 1.5766102147767385
+    },
+    "shrine": {
+      "x": 2011,
+      "y": 33.06,
+      "z": -450.18
+    },
+    "camp": {
+      "oath": "oath-11",
+      "x": 2175.6354278257377,
+      "y": 20.80106547909628,
+      "z": -464.6623770604613,
+      "level": 1,
+      "members": [
+        "shade-hound",
+        "shade-hound"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-10",
+      "x": 1935,
+      "y": 49.10088068373481,
+      "z": 180
+    },
+    "wilderness": {
+      "x": 2220,
+      "z": -290,
+      "y": 13.698567293534133
+    }
+  },
+  {
+    "id": "oath-12",
+    "name": "Sanguine Covenant",
+    "biome": "crimson",
+    "priority": true,
+    "spawn": {
+      "x": 273.3,
+      "y": 36.16,
+      "z": -798.46,
+      "ry": -2.862877712216528
+    },
+    "shrine": {
+      "x": 261.47,
+      "y": 37.06,
+      "z": -839.8
+    },
+    "camp": {
+      "oath": "oath-12",
+      "x": 309.2349165364682,
+      "y": 31.477719651021943,
+      "z": -615.9367109214674,
+      "level": 1,
+      "members": [
+        "blood-hound",
+        "blood-hound"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-08",
+      "x": -225,
+      "y": 19.132218386120442,
+      "z": -675
+    },
+    "wilderness": {
+      "x": 510,
+      "z": -650,
+      "y": 27.584471169411934
+    }
+  },
+  {
+    "id": "oath-13",
+    "name": "Folded Theatre",
+    "biome": "terraces",
+    "priority": true,
+    "spawn": {
+      "x": 1158.17,
+      "y": 42.16,
+      "z": -2.01,
+      "ry": 1.402321337809493
+    },
+    "shrine": {
+      "x": 1200.56,
+      "y": 43.06,
+      "z": 5.2
+    },
+    "camp": {
+      "oath": "oath-13",
+      "x": 1094.3918363092093,
+      "y": 34.211517621121686,
+      "z": -179.69344414650158,
+      "level": 1,
+      "members": [
+        "mirror-spider",
+        "mirror-spider"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-06",
+      "x": 1080,
+      "y": 54.52300527439116,
+      "z": 630
+    },
+    "wilderness": {
+      "x": 1410,
+      "z": 160,
+      "y": 31.01644141652898
+    }
+  },
+  {
+    "id": "oath-14",
+    "name": "Escapement Road",
+    "biome": "plateau",
+    "priority": false,
+    "spawn": {
+      "x": 1174.95,
+      "y": 50.16,
+      "z": -1069.07,
+      "ry": -2.7165435391953054
+    },
+    "shrine": {
+      "x": 1157.22,
+      "y": 51.06,
+      "z": -1108.24
+    },
+    "camp": {
+      "oath": "oath-14",
+      "x": 982.3673833159309,
+      "y": 48.88237369501378,
+      "z": -1121.1786373059017,
+      "level": 1,
+      "members": [
+        "clockwork-raptor",
+        "clockwork-raptor"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-11",
+      "x": 1575,
+      "y": 41.32795886315303,
+      "z": -765
+    },
+    "wilderness": {
+      "x": 1410,
+      "z": -920,
+      "y": 45.48262609916829
+    }
+  },
+  {
+    "id": "oath-15",
+    "name": "Impulse Foundry",
+    "biome": "industrial",
+    "priority": true,
+    "spawn": {
+      "x": 1884.62,
+      "y": 24.16,
+      "z": -1519.27,
+      "ry": 2.677009202083774
+    },
+    "shrine": {
+      "x": 1903.89,
+      "y": 25.06,
+      "z": -1557.72
+    },
+    "camp": {
+      "oath": "oath-15",
+      "x": 2032.4603321115665,
+      "y": 5.451994281554184,
+      "z": -1403.7713952022993,
+      "level": 1,
+      "members": [
+        "rail-hound",
+        "rail-hound"
+      ],
+      "starter": true
+    },
+    "transition": {
+      "to": "oath-11",
+      "x": 1935,
+      "y": 27.21400081813242,
+      "z": -990
+    },
+    "wilderness": {
+      "x": 2130,
+      "z": -1370,
+      "y": 2.552280552612705
+    }
+  }
+]

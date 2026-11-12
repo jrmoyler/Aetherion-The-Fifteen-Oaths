@@ -42,3 +42,31 @@ export function addTerrainSkirt(geometry,resolution,depth=6){
   for(let i=0;i<edge.length;i++){const j=(i+1)%edge.length;indices.push(edge[i],count+i,edge[j],edge[j],count+i,count+j);}
   geometry.setIndex(indices);geometry.computeBoundingSphere();return geometry;
 }
+
+/** Cover the worst edge mismatch between any LODs used by this quality tier.
+ * Heights are unchanged: only the hidden vertical skirt extends farther down.
+ * Sample the finest edge lattice, including hollows between coarse vertices.
+ */
+export function terrainSkirtDepth(x, z, size, tier, heightAt) {
+  const resolutions = [...new Set([0, 2, 3].map(d => terrainResolution(tier, d)))];
+  const finest = Math.max(...resolutions);
+  let gap = 0;
+  for (let edge = 0; edge < 4; edge++) {
+    const heights = Array.from({length: finest + 1}, (_, i) => {
+      const along = -size / 2 + size * i / finest;
+      return edge < 2 ? heightAt(x + along, z + (edge ? size / 2 : -size / 2))
+        : heightAt(x + (edge === 3 ? size / 2 : -size / 2), z + along);
+    });
+    for (let i = 0; i <= finest; i++) {
+      let low = Infinity, high = -Infinity;
+      for (const r of resolutions) {
+        const stride = finest / r, a = Math.min(r - 1, Math.floor(i / stride));
+        const t = i / stride - a;
+        const h = heights[a * stride] * (1 - t) + heights[(a + 1) * stride] * t;
+        low = Math.min(low, h); high = Math.max(high, h);
+      }
+      gap = Math.max(gap, high - low);
+    }
+  }
+  return Math.max(6, gap + 1);
+}
