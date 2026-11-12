@@ -6,7 +6,7 @@
 // one extra draw call, and every authored clip drives it.
 import { BufferAttribute, Matrix4, SkinnedMesh, Vector3 } from 'three';
 import { buildCostume } from './costume.js';
-import { costumeMaterial } from './material.js';
+import { costumeDepthMaterial, costumeMaterial } from './material.js';
 import { recipeFor } from './recipes/index.js';
 
 const SIDED = /^(shoulder|upperarm|forearm|hand|thigh|shin|foot|toe)\.?([LR])$/;
@@ -76,7 +76,8 @@ export function wearSheet(body, desc, quality = 'high') {
   if (!built.has(key)) built.set(key, buildCostume(recipe, rig, quality));
   const costume = built.get(key);
   hideBaked(body, rig, recipe);
-  const mesh = new SkinnedMesh(costume.geometry, costumeMaterial()); mesh.userData.sheetCostume = true;
+  const motion = costume.geometry.userData.motion, mesh = new SkinnedMesh(costume.geometry, costumeMaterial(motion)); mesh.userData.sheetCostume = true;
+  mesh.customDepthMaterial = costumeDepthMaterial(motion);
   mesh.name = `sheet-costume-${recipe.id}`; mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false;
   mesh.position.copy(rig.mesh.position); mesh.quaternion.copy(rig.mesh.quaternion); mesh.scale.copy(rig.mesh.scale);
   rig.mesh.parent.add(mesh); mesh.bind(rig.mesh.skeleton, rig.mesh.bindMatrix);
@@ -84,6 +85,6 @@ export function wearSheet(body, desc, quality = 'high') {
   body.sheetCostume = { id: recipe.id, sheet: recipe.sheet, mesh, triangles: costume.triangles, parts: costume.parts };
   const dispose = body.dispose.bind(body);
   // The geometry is cached per hero and tier; only this actor's mesh and material go.
-  body.dispose = () => { mesh.removeFromParent(); dispose(); };
+  body.dispose = () => { mesh.removeFromParent(); mesh.customDepthMaterial.dispose(); dispose(); };
   return body.sheetCostume;
 }

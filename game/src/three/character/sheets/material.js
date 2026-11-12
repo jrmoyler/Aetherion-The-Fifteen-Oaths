@@ -2,8 +2,9 @@
 // (roughness, metalness, kind); the fragment program adds woven, fired, tanned or forged surface detail in the
 // mesh's rest space, so it stays glued to the cloth while the rig moves. No textures, no canvas: it also
 // constructs in Node.
-import { DoubleSide, MeshStandardMaterial } from 'three';
+import { DoubleSide, MeshDepthMaterial, MeshStandardMaterial, RGBADepthPacking } from 'three';
 import { NOISE } from '../surface.js';
+import { MOTION_PARS, MOTION_VERTEX, motionUniforms } from './clearance.js';
 
 const DETAIL = /* glsl */`
   float kind = vSm.z; roughnessFactor = vSm.x; metalnessFactor = vSm.y;
@@ -108,11 +109,14 @@ const OPTICS = /* glsl */`
   }
 `;
 
-export function costumeMaterial() {
+/** @param motion per-costume numbers from clearance.js (leg joints, bones and radii); null leaves cloth as skinned */
+export function costumeMaterial(motion = null) {
   const material = new MeshStandardMaterial({ name: 'sheet-costume', vertexColors: true, side: DoubleSide, roughness: 1, metalness: 0 });
   material.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, motionUniforms(motion));
     shader.vertexShader = shader.vertexShader
-      .replace('#include <common>', '#include <common>\nattribute vec3 sm;\nvarying vec3 vSm;\nvarying vec3 vCsP;')
+      .replace('#include <common>', `#include <common>\nattribute vec3 sm;\nvarying vec3 vSm;\nvarying vec3 vCsP;\n${MOTION_PARS}`)
+      .replace('#include <skinning_vertex>', `#include <skinning_vertex>\n${MOTION_VERTEX}`)
       .replace('#include <begin_vertex>', '#include <begin_vertex>\nvCsP = position; vSm = sm;');
     shader.fragmentShader = shader.fragmentShader
       .replace('#include <common>', `#include <common>\nvarying vec3 vSm;\nvarying vec3 vCsP;\n${NOISE}`)
@@ -120,6 +124,17 @@ export function costumeMaterial() {
       .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * .0011);')
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>\n${OPTICS}`);
   };
-  material.customProgramCacheKey = () => 'sheet-costume-5';
+  material.customProgramCacheKey = () => 'sheet-costume-6';
+  return material;
+}
+
+/** Depth material for the shadow pass that moves cloth the same way, so shadows follow the settled garment. */
+export function costumeDepthMaterial(motion = null) {
+  const material = new MeshDepthMaterial({ depthPacking: RGBADepthPacking });
+  material.onBeforeCompile = (shader) => {
+    Object.assign(shader.uniforms, motionUniforms(motion));
+    shader.vertexShader = shader.vertexShader.replace('#include <common>', `#include <common>\n${MOTION_PARS}`).replace('#include <skinning_vertex>', `#include <skinning_vertex>\n${MOTION_VERTEX}`);
+  };
+  material.customProgramCacheKey = () => 'sheet-costume-depth-1';
   return material;
 }
