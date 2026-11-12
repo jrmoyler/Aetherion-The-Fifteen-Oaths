@@ -105,7 +105,7 @@ export function shirt(c, { color = 'cloth', sleeve = .6, flare = .008, off = .00
  * Trousers: a seat that follows the hips and two legs that balloon and are gathered at `gather` (1 = knee).
  * `bag` is the extra room at the widest point; `pleats` the number of folds running into the gather.
  */
-export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006, pockets = [[28, 80, .0, .3], [152, 110, .04, .2]], pipingPaths = [[22, 84, -.02, .4], [84, 74, .4, .96], [208, 150, .1, .5]], from = null }) {
+export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006, pockets = [[28, 80, .0, .3], [152, 110, .04, .2]], pipingPaths = [[22, 84, -.02, .4], [84, 74, .4, .96], [208, 150, .1, .5]], from = null, low = 0 }) {
   const { trunk, leg } = c.form, col = c.pal(color), yTop = trunk.Y[top] + .02;
   c.bag.part = 'trousers';
   // `from` starts the legs lower down, for trousers worn under a long coat: no seat and no thigh to push through it.
@@ -115,7 +115,8 @@ export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats
     return { p, skin: trunk.skin(p) };
   }, { closeU: true, color: col, mat: MAT.cloth, inside: V(0, trunk.Y.hip, c.form.spineZ(trunk.Y.hip)) });
   // Fullest at mid-thigh, then tapering to the knee where the pleats take up what is left.
-  const room = curve([[-.2, bag * .25], [.1, bag * .6], [.45, bag], [.8, bag * .86], [gather - .14, bag * .74], [gather - .06, bag * .6], [gather - .014, cuff + .012], [gather, cuff]]);
+  // `low` (0..1) slings the fullness down toward the gather: hakama-like legs bloused over the knee band.
+  const room = curve([[-.2, bag * lerp(.25, .2, low)], [.1, bag * lerp(.6, .42, low)], [.45, bag * lerp(1, .74, low)], [.8, bag * lerp(.86, 1, low)], [gather - .14, bag * lerp(.74, 1.04, low)], [gather - .06, bag * lerp(.6, .9, low)], [gather - .014, cuff + .012 + bag * .3 * low], [gather, cuff]]);
   const seedA = c.rand() * TAU, seedB = c.rand() * TAU, seedC = c.rand() * TAU;
   const radius = (t, phi) => {
     // More room to the front and outside than between the legs.
