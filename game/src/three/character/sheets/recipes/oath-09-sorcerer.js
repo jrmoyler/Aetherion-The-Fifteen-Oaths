@@ -6,6 +6,8 @@ import { B } from '../builders-b.js';
 export default {
   id: 'oath-09-sorcerer', sheet: 'reference-074', title: 'Daybreak Sorcerer',
   palette: {
+    hairGrey: '#7d7a75',
+    hair: '#a3a09a',
     grey: '#6c6a68', greyDark: '#4f4d4c', cloth: '#6c6a68', ivory: '#d8cfba', ivoryShade: '#b5ac98', gold: '#a8843c', leather: '#55524f', leatherDark: '#3a3836',
     iron: '#a8843c', boot: '#55524f', sole: '#8a6e36',
   },
@@ -13,7 +15,7 @@ export default {
   keep: ['weapon'],
   builders: B,
   // Swept silver hair, the small tail and the short beard are the groom's.
-  groom: { hair: true, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'b.neck' },
     { use: 'trousers', color: 'grey', gather: 1.84, bag: .03, pleats: 7, pockets: [], from: 1.0 },
@@ -40,5 +42,6 @@ export default {
     { use: 'b.pouch', y: ['belt', -.1], th: -84, size: [.034, .055, .016], off: .05, color: 'ivory', dark: 'ivoryShade', trim: 'gold', mat: 'enamel', trimMat: 'gold' },
     { use: 'b.strip', color: 'greyDark', mat: 'leather', width: .012, thick: .004, n: 12, path: [{ th: -84, y: ['belt', -.0], off: .05 }, { th: -84, y: ['belt', -.06], off: .052 }] },
     { use: 'hands' },
+    { use: 'hair', style: 'updo', color: 'hair', streak: 'hairGrey', grey: .5, fringe: .38, temple: .08, count: 70, knot: { at: [0, -.04, -.5], radius: .07 }, tail: { length: .24, width: .05, count: 8, rise: .02, back: .05 }, beard: { style: 'full', length: .07, moustache: .07, cheek: -.3 } },
   ],
 };

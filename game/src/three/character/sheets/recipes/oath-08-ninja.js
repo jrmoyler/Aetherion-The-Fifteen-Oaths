@@ -12,7 +12,7 @@ export default {
   build: { width: 1.08, depth: 1.06, arm: 1.12, leg: 1.06, shoulder: 1.08 },
   keep: ['weapon'],
   builders: B,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'b.neck', color: 'under', mat: 'cloth', off: .004 },
     { use: 'b.legs', color: 'under', to: 1.7, off: .006 },
@@ -45,7 +45,7 @@ export default {
     { use: 'b.vials', at: [22, 38, 54, -22, -38, -54, 152, 168, -152, -168], y: ['belt', .0], length: .066, r: .015, off: .028 },
     { use: 'b.pouch', limb: 'leg', at: .4, phi: 80, size: [.05, .07, .02], off: .058 },
     { use: 'b.backpack' },
-    { use: 'b.hairCap', color: 'hair', front: .3, side: .12, nape: -.3, lift: .008 },
+    { use: 'hair', style: 'buzz', fringe: .33, temple: .02 },
     { use: 'b.skullCap', color: 'leatherDark', seam: 'leather', front: .2, side: .06, nape: -.08, off: .03, seams: 4, band: 'leatherDark' },
     { use: 'b.respirator', canister: .14 },
     { use: 'hands', glove: 'glove' },

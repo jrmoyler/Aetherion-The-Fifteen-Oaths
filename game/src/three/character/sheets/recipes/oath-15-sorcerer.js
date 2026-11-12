@@ -47,7 +47,7 @@ export default {
   build: { width: 1.12, depth: 1.1, waist: 1.12, hips: 1.06, arm: 1.14, leg: 1.12, neck: 1.06, shoulder: 1.08 },
   keep: ['weapon'],
   builders: C,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'shirt', color: 'graphite', sleeve: 1.16, flare: .014, off: .013, cap: .02, slack: .004 },
@@ -76,6 +76,6 @@ export default {
     { use: 'gloveCuff', from: 1.9, to: 2.06, color: 'steelDark', off: .012 },
     { use: 'hands', glove: 'steelDark', knuckles: 'steel', scale: 1.12 },
     { use: 'boots', top: 1.56, straps: 3, strapColor: 'leatherDark', buckle: 'steel', toeCap: 'graphiteLight', heelPlate: 'orangeDark', cuff: 'orangeDark', plateMat: 'ceramic', soleHeight: .044, bulk: 1.14 },
-    { use: 'c:curls', lift: .034, top: .02, fade: .12, fringe: .33 },
+    { use: 'hair', style: 'coils', top: .035, curl: .024, fade: { to: .05, from: .22, min: .35 }, fringe: .35, count: 300, beard: { style: 'goatee', length: .035, moustache: .04, width: .1, coat: false, count: 150 } },
   ],
 };

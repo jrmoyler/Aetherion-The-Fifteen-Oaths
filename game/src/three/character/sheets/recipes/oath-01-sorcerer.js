@@ -4,11 +4,11 @@ export default {
   id: 'oath-01-sorcerer', sheet: 'reference-091', title: 'Kiln Sorcerer',
   palette: {
     cloth: '#292624', collar: '#2f2c2a', terracotta: '#7c3c27', trim: '#a37253', ceramic: '#7f3d27', bootPlate: '#693222', leather: '#3a2b22', leatherDark: '#241c18',
-    iron: '#3b3734', boot: '#221c19', sole: '#141110', glove: '#1a1716', hair: '#4b4845', hairGrey: '#9b9792', tie: '#7a4a30', ember: '#ff7a2a',
+    iron: '#3b3734', boot: '#221c19', sole: '#141110', glove: '#1a1716', hair: '#3a3735', hairGrey: '#8a8681', tie: '#7a4a30', ember: '#ff7a2a',
   },
   build: { width: 1.3, depth: 1.24, belly: .028, bust: .03, hips: 1.22, waist: 1.2, arm: 1.2, leg: 1.26, neck: 1.15, shoulder: 1.14 },
   keep: ['weapon'],
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'shirt', sleeve: 1.92, flare: .02, off: .012, slack: .005, cap: .02 },
     { use: 'band', limb: 'arm', at: .34, width: .02, off: .023, thick: .004, color: 'trim', mat: 'cloth' },
@@ -32,6 +32,6 @@ export default {
     { use: 'gloveCuff', from: 1.84, to: 2.05, off: .02, strap: 'leather' },
     { use: 'hands', glove: 'glove', scale: 1.12 },
     { use: 'boots', top: 1.8, toeCap: 'bootPlate', heelPlate: 'bootPlate', cuff: 'bootPlate', straps: 2, bulk: 1.3, soleHeight: .034 },
-    { use: 'hair', style: 'bun', streak: 'hairGrey', knot: { at: [0, .43, -.22], radius: .15, tie: 'tie' } },
+    { use: 'hair', style: 'updo', streak: 'hairGrey', grey: .27, wave: .035, fringe: .33, count: 70, knot: { at: [0, .52, -.18], radius: .14, kind: 'messy', tie: 'tie' }, tendrilWidth: .04, tendrils: [[58, .22, .34, .03, 0], [-58, .22, .36, .03, 0], [36, .31, .2, .03, .02], [-34, .31, .22, .03, .02], [84, .1, .26, .03], [-84, .1, .26, .03], [150, -.12, .2, .025], [-150, -.12, .2, .025]] },
   ],
 };

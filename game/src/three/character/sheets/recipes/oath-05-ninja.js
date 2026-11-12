@@ -18,7 +18,7 @@ export default {
   build: { width: 1.16, depth: 1.12, arm: 1.32, upperArm: 1.08, leg: 1.16, shoulder: 1.16, waist: .98, hips: .96, neck: 1.16 },
   keep: ['weapon'],
   builders: { ...A, ...X },
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'x.physique', part: 'arm', from: .7, to: 1.2, power: 1.6 },
@@ -42,7 +42,7 @@ export default {
     { use: 'a/lines', on: 'trunk', both: true, paths: [[[52, 'ribs'], [90, 'ribs+.01'], [128, 'ribs']], [[50, 'waist+.03'], [90, 'waist+.03'], [130, 'waist+.03']]], color: 'leather', mat: 'leather', width: .026, thick: .005, off: .016, name: 'sideStraps' },
     { use: 'a/collar', color: 'shale', mat: 'stone', lining: 'tunicDark', height: .105, flare: .034, off: .03, thick: .018, tilt: .024, trim: 'sand', from: 'base-.02' },
     { use: 'halfMask', color: 'iron', slat: 'sand', vents: 4, strap: 'leatherDark' },
-    { use: 'hair', style: 'spiky', color: 'hair', length: .17, density: 1.2, fringe: .34 },
+    { use: 'hair', style: 'tousled', top: .2, side: .04, back: .05, bang: .1, lift: .03, flick: .55, mess: .5, fringe: .37, fade: { to: .02, from: .24, min: .3 }, count: 190 },
     // Belt with pouches and the amethyst in its sandstone frame on the left hip.
     { use: 'belt', color: 'leather', buckle: 'iron', height: .05, off: .022, keepers: [30, -30, 150, -150] },
     { use: 'a/kit', name: 'pouches', on: 'trunk', side: 'R', y: 'belt-.03', th: 50, off: .032, items: pouch },

@@ -47,7 +47,7 @@ export default {
   build: { width: .98, depth: 1.0, bust: .024, waist: .88, hips: 1.1, arm: .94, leg: 1.02, neck: .92 },
   keep: ['weapon'],
   builders: C,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'shirt', color: 'teal', sleeve: 1.06, flare: .01, off: .01, cap: .016, slack: .003 },
@@ -78,7 +78,6 @@ export default {
     pendulum,
     { use: 'boots', top: 1.56, straps: 3, strapColor: 'leather', buckle: 'brass', toeCap: 'brassDark', heelPlate: 'brassDark', plateMat: 'iron', soleHeight: .04 },
     // Hair twisted up into a loose knot on the crown, strands left free at the temples and nape.
-    { use: 'hair', style: 'bun', streak: 'hairWarm', fringe: .34, knot: { at: [0, .6, -.1], radius: .15, tie: 'tie' } },
-    { use: 'c:strands', width: .05, list: [[150, -.05, .2, .02, 0], [-150, -.05, .22, .02, 0], [78, .12, .3, .02, 0], [-78, .12, .32, .02, 0]] },
+    { use: 'hair', style: 'updo', streak: 'hairWarm', fringe: .34, count: 70, knot: { at: [0, .57, -.14], radius: .15, kind: 'messy', tie: 'tie' }, tendrils: [[40, .31, .3, .012, .03], [-42, .31, .34, .012, .03], [78, .12, .3], [-78, .12, .32], [150, -.05, .2], [-150, -.05, .22]] },
   ],
 };

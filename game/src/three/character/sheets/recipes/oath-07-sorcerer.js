@@ -8,12 +8,12 @@ export default {
   palette: {
     cloth: '#4e3a28', brown: '#553f2b', brownDark: '#35281d', cream: '#c9b996', burlap: '#a08458', moss: '#333c1e', mossLight: '#56612c', green: '#55652c',
     straw: '#b39763', wicker: '#9c7c52', bark: '#6a4b31', barkDark: '#48331f', leaf: '#3c6422', leafLight: '#66883a', ember: '#a04e06', leather: '#4a3626', leatherDark: '#2f241b', iron: '#4a4541',
-    boot: '#46321f', sole: '#2a2018', hair: '#8a8783', hairGrey: '#a9a6a1', tie: '#6a4b31',
+    boot: '#46321f', sole: '#2a2018', hair: '#75726e', hairGrey: '#96938e', tie: '#6a4b31',
   },
   build: { width: 1.34, depth: 1.4, belly: .04, bust: .02, hips: 1.16, waist: 1.2, arm: 1.3, leg: 1.2, neck: 1.1, shoulder: 1.1 },
   keep: ['weapon'],
   builders: B,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'b.neck' },
     { use: 'trousers', color: 'brownDark', gather: 1.8, bag: .045, pleats: 9, pockets: [], from: 1.0 },
@@ -44,7 +44,7 @@ export default {
     { use: 'b.studs', on: 'trunk', at: [[['belt', .02], 180], [['chest', .0], 44], [['chest', .0], -44]], r: .016, off: .04, color: 'ember', rim: 'bark', rimMat: 'bark', oval: 1.3 },
     { use: 'band', limb: 'arm', at: 1.9, width: .016, off: .004, thick: .005, color: 'straw', mat: 'cloth' },
     { use: 'b.basket', at: ['chest', .03], height: .46, top: .22, bottom: .13, out: .17 },
-    { use: 'hair', style: 'bun', streak: 'hairGrey', locks: 110, length: .3, bun: { at: [0, .3, -.44], radius: .15, tie: 'tie' } },
+    { use: 'hair', style: 'updo', streak: 'hairGrey', grey: .5, fringe: .35, temple: .03, count: 70, knot: { at: [0, .02, -.5], radius: .14, kind: 'coil', tie: 'tie' }, tendrils: [[72, .15, .16], [-72, .15, .16]] },
     { use: 'hands' },
   ],
 };
