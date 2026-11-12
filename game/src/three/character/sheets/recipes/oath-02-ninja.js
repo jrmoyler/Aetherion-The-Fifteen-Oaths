@@ -16,7 +16,7 @@ export default {
   build: { width: 1.08, depth: 1.06, hips: 1.24, waist: .98, bust: .028, leg: 1.3, arm: 1.2, shoulder: 1.04 },
   keep: ['weapon'],
   builders: A,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'skinLimb', limb: 'arm', from: .6, to: 1.12 },
@@ -37,7 +37,7 @@ export default {
     { use: 'belt', color: 'leatherDark', buckle: 'iron', height: .04, off: .019, keepers: [38, -38, 140, -140] },
     { use: 'a/collar', color: 'felt', lining: 'lining', height: .085, flare: .016, off: .016, trim: 'lining' },
     { use: 'a/hood', color: 'felt', lining: 'lining' },
-    { use: 'a/fringe', color: 'hair', from: .45, to: .16 },
+    { use: 'hair', style: 'bob', length: .46, bang: .2, fringe: .34, arc: 72, count: 170, keep: .35 },
     // Rime laminate bracers on their strap mounts.
     { use: 'band', limb: 'arm', at: 1.32, width: .022, off: .008, thick: .004, color: 'webbing', buckle: { phi: 20, color: 'buckle' } },
     { use: 'band', limb: 'arm', at: 1.7, width: .022, off: .008, thick: .004, color: 'webbing', buckle: { phi: 20, color: 'buckle' } },

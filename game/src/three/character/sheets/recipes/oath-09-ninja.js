@@ -13,7 +13,7 @@ export default {
   build: { width: 1.0, depth: .98, hips: 1.12, waist: .84, seat: 1.1, bust: .034, arm: .88, leg: 1.02, thigh: 1.1, neck: .9, shoulder: .96 },
   keep: ['weapon'],
   builders: { ...B, ...X },
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'x.physique', part: 'arm', from: -.2, to: 1.0, power: 1.0 },
     { use: 'b.neck', color: 'grey', mat: 'cloth', off: .003 },
@@ -44,7 +44,7 @@ export default {
     { use: 'b.sleeve', from: .92, to: 2.04, color: 'grey', off: .004, hem: false },
     { use: 'b.guard', limb: 'arm', from: 1.2, to: 1.86, phi: 90, arc: 80, off: .008, thick: .008, pointTop: .16, point: .04, ridge: .006, flare: .008, color: 'ivory', mat: 'enamel', trim: 'gold', trimMat: 'gold', trimWidth: .007 },
     { use: 'band', limb: 'arm', at: 1.93, width: .016, off: .006, thick: .004, color: 'gold', mat: 'iron' },
-    { use: 'hair', style: 'bun', streak: 'hairLight', locks: 120, length: .3, bun: { at: [0, .5, -.1], radius: .19 } },
+    { use: 'hair', style: 'twists', rows: 16, streak: 'hairLight', fringe: .35, knot: { at: [0, .52, -.1], radius: .2 }, tendrils: [[52, .27, .3, .03, .02], [-52, .27, .3, .03, .02]] },
     { use: 'b.headBand', y: .33, from: 0, to: 360, width: .03, off: .03, thick: .008, color: 'gold', mat: 'gold' },
     { use: 'b.visor', top: .2, eye: -.06, half: 50 },
     { use: 'hands', glove: 'grey', fingerless: true },

@@ -5,8 +5,12 @@ import { profileFor, sheetProfile, sheetHeadSize } from '../profiles.js';
 import { Bag, rng } from './kernel.js';
 import { makeForm } from './form.js';
 import { BUILDERS } from './builders.js';
+import { finishMotion, motionAttributes } from './clearance.js';
+import { foldAttributes, setFoldAttributes } from './folds.js';
 
 const DENSITY = { low: .6, medium: .8, high: 1 };
+/** Builders whose sleeves are loose cloth: what they emit on the forearm hangs toward the ground (clearance.js). */
+const LOOSE = /^(shirt|b\.sleeve|c:bellSleeve)$/;
 
 /** Head size the groom pass gives a body of this height (kept in step with groom.js). */
 export const headSize = (headY, scale = 1) => sheetHeadSize(headY, scale);
@@ -31,7 +35,11 @@ export function buildCostume(recipe, rig, quality = 'high', builders = BUILDERS)
   const all = recipe.builders ? { ...builders, ...recipe.builders } : builders;
   for (const { use, ...params } of recipe.parts) {
     const build = all[use]; if (!build) throw new Error(`recipe ${recipe.id}: unknown builder "${use}"`);
-    bag.part = use; build(context, params);
+    bag.part = use; bag.loose = LOOSE.test(use); build(context, params);
   }
-  return { geometry: bag.geometry(), triangles: bag.triangles, parts: bag.parts, form };
+  // Hanging cloth and loose sleeves learn how to give way to the body in motion (see clearance.js).
+  const geometry = bag.geometry(), motion = finishMotion(bag, form); motionAttributes(geometry, motion);
+  // Cloth learns where it rucks and where it falls in folds (see folds.js).
+  setFoldAttributes(geometry, foldAttributes(bag, form));
+  return { geometry, triangles: bag.triangles, parts: bag.parts, form, hanging: motion.hanging, loose: motion.loose };
 }

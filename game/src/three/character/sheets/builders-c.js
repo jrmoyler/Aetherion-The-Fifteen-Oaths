@@ -11,6 +11,7 @@
 import { Euler, Quaternion, Vector3 } from 'three';
 import { MAT, TAU, V, bar, box, clamp, dome, frame, lerp, moved, ring, roundBox, smooth } from './kernel.js';
 import { HEAD, face, headPlace, limbFrame, scalp, sides } from './builders.js';
+import { hangSkin } from './clearance.js';
 
 const PI = Math.PI, DEG = PI / 180, UP = V(0, 1, 0);
 
@@ -194,11 +195,7 @@ export function drape(c, { from = -180, to = 180, top = 'belt', dy = 0, hem = .5
     p.z += Math.sign(cs) * kick * f * f;
     return p;
   };
-  const skin = (p) => {
-    if (p.y >= yHip) return trunk.skin(p);
-    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip + .03, yHip - .17, p.y) * .84, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .3, left = smooth(-.14, .14, p.x);
-    return [['hips', 1 - drop], ['thigh.L', drop * left * (1 - lower)], ['thigh.R', drop * (1 - left) * (1 - lower)], [`shin.${side}`, drop * lower]];
-  };
+  const skin = hangSkin(c.form);
   const yHem = (th) => lerp(0, yHip, hemAt(th / DEG));
   const point = (u, v, extra = 0) => { const th = lerp(a0, a1, u); return surf(lerp(yTop, yHem(th), v), th, extra); };
   const inner = (p) => V(0, p.y, zc), nu = Math.max(3, Math.round(52 * c.q * span / TAU)), nv = Math.max(4, Math.round(18 * c.q));

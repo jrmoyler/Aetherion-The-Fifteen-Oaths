@@ -2,6 +2,7 @@
 // woven aubergine, old silver and pearl; attachments: belt fastening, spell case hinge).
 import { C } from '../builders-c.js';
 import { X } from '../builders-x.js';
+import { P } from '../builders-p.js';
 
 const pearl = (at, r = .007) => [{ s: 'cyl', d: [r * 1.5, .0025, r * 1.5, 8], rot: [90, 0, 0], at, c: 'silver', m: 'silver' }, { s: 'ball', d: [r, r, r, 8, 5], at: [at[0], at[1], at[2] + .004], c: 'pearl', m: 'porcelain' }];
 // Folded lacquer wings: one triangular plate rising from the collar bone to a point beyond the shoulder, front
@@ -25,27 +26,33 @@ export default {
   },
   build: { width: .97, depth: .98, bust: .024, waist: .86, hips: 1.1, shoulder: .96, arm: .9, leg: 1.0, neck: .9 },
   keep: ['weapon'],
-  builders: { ...C, ...X },
-  groom: { hair: false, gear: false },
+  builders: { ...C, ...X, ...P },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'shirt', color: 'aubergine', sleeve: 1.95, flare: .004, off: .009, cap: .014, slack: .003 },
     // Wrap front: the mauve lacquer facing runs from the left shoulder down to the belt, pinned with a pearl.
-    { use: 'x.lapel', from: [-36, ['base', -.0]], to: [14, ['waist', -.01]], width: .1, widthEnd: .045, off: .012, thick: .005, roll: .006, color: 'plum', trim: 'silver', trimMat: 'silver' },
-    { use: 'x.lapel', from: [40, ['base', .0]], to: [-30, ['belt', .04]], width: .17, widthEnd: .06, off: .019, thick: .007, roll: .012, color: 'mauve', mat: 'lacquer', trim: 'silver', trimMat: 'silver' },
+    { use: 'x.lapel', from: [-36, ['base', -.0]], to: [14, ['waist', -.01]], width: .1, widthEnd: .045, off: .012, thick: .005, roll: .006, color: 'plum', trim: 'gold', trimMat: 'brass', trimSpan: .1 },
+    { use: 'x.lapel', from: [40, ['base', .0]], to: [-30, ['belt', .04]], width: .17, widthEnd: .06, off: .019, thick: .007, roll: .012, color: 'mauve', mat: 'lacquer', trim: 'gold', trimMat: 'brass', trimSpan: .07 },
     { use: 'c:kit', name: 'pearl', on: { y: 'armpit', dy: .03, th: 30, off: .024, skin: 'spine2' }, parts: pearl([0, 0, 0], .009) },
     // The tall winged collar: a folded lacquer plane standing off each shoulder to a point, and a long point down the back.
-    { use: 'x.horn', side: 'both', root: [0, 0, .035], spine: [[-.2, -.1], [-.07, -.03], [.04, .06], [.115, .17]], inner: [[-.17, .03], [-.09, .09], [.02, .14], [.115, .17]], thick: .014, dish: .012, facets: 2, n: 10, tilt: 14, lean: -24, color: 'mauve', mat: 'lacquer', edge: 'silver', edgeMat: 'silver', edgeWidth: .06, skin: [['spine2', .7], ['shoulder.L', .3]] },
-    { use: 'x.horn', side: 'both', root: [0, 0, -.05], spine: [[-.2, -.16], [-.07, -.04], [.04, .06], [.115, .17]], inner: [[-.17, .03], [-.09, .09], [.02, .14], [.115, .17]], thick: .012, dish: -.012, facets: 0, n: 10, tilt: -10, lean: 22, color: 'mauveDark', mat: 'lacquer', edge: 'silver', edgeMat: 'silver', edgeWidth: .06, skin: [['spine2', .7], ['shoulder.L', .3]] },
+    { use: 'p.wedge', side: 'both', on: { bone: 'neck', skin: [['spine2', 1]] }, thick: .009, color: 'mauve', dark: 'mauveDark', mat: 'lacquer', edge: 'gold', edgeMat: 'brass', edgeWidth: .007,
+      points: [[.028, .0, .078], [.12, .08, .04], [.212, .125, .0], [.212, .125, .0], [.2, -.035, .062], [.075, -.15, .112]] },
+    { use: 'p.wedge', side: 'both', on: { bone: 'neck', skin: [['spine2', 1]] }, thick: .009, color: 'mauveDark', dark: 'mauveDark', mat: 'lacquer', edge: 'gold', edgeMat: 'brass', edgeWidth: .007,
+      points: [[.03, .0, -.07], [.12, .08, -.035], [.212, .125, .0], [.212, .125, .0], [.2, -.035, -.075], [.07, -.13, -.118]] },
     { use: 'x.plate', at: 180, arc: 62, from: ['ribs', .02], to: ['shoulder', .02], taper: .82, point: .1, off: .012, thick: .006, ridge: .01, color: 'mauve', mat: 'lacquer', rim: 'silver', rimMat: 'silver', rimWidth: .006, rimSides: 'lr' },
     { use: 'c:collar', color: 'aubergineDark', lining: 'aubergine', trim: 'silver', trimMat: 'silver', height: .078, back: .01, flare: .016, gap: 26, off: .01 },
     { use: 'trousers', color: 'aubergineDark', gather: 1.6, bag: .008, pleats: 4, pockets: [], cuff: .006, piping: 'silverDark', pipingPaths: [[90, 90, .1, 1.5]] },
     { use: 'band', limb: 'leg', at: 1.12, width: .018, off: .012, thick: .004, color: 'leather', buckle: { phi: 80, color: 'silver' } },
     // Skirt panels: the embroidered aubergine front, and folded mauve lacquer falling long at the right and back.
-    { use: 'c:drape', from: 40, to: 200, hem: .78, color: 'aubergine', flare: 1.04, clear: .024, off: .018 },
-    { use: 'c:drape', from: -160, to: -8, off: .02, hem: [[-160, .34], [-120, .5], [-90, .36], [-50, .62], [-8, .74]], color: 'mauve', mat: 'lacquer', flare: 1.14, clear: .034, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
-    { use: 'c:drape', from: 150, to: 216, off: .026, hem: [[150, .56], [186, .36], [216, .5]], color: 'mauveDark', mat: 'lacquer', flare: 1.16, clear: .038, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
-    { use: 'c:drape', from: -12, to: 64, off: .027, hem: [[-12, .6], [20, .5], [64, .62]], color: 'plum', flare: 1.08, clear: .036, fold: .012, trim: 'gold', trimMat: 'brass', trimWidth: .0045 },
+    { use: 'c:drape', name: 'peplum', from: -180, to: 180, hem: [[-180, .88], [-100, .86], [-50, .78], [-8, .84], [0, .9], [180, .9]], color: 'aubergine', flare: 1.06, clear: .02, off: .016, fold: .008, trim: 'gold', trimMat: 'brass', trimWidth: .004 },
+    // Front: one long embroidered plum panel over the left leg, cut to a point; the right leg shows its trousers.
+    { use: 'c:drape', name: 'panel', from: -5, to: 64, off: .026, hem: [[-5, .42], [12, .33], [64, .58]], color: 'plum', lining: 'mauve', flare: 1.1, clear: .034, fold: .01, trim: 'gold', trimMat: 'brass', trimWidth: .005 },
+    // Back: folded mauve lacquer cut on the diagonal behind the left leg, a long plum panel behind the right
+    // leg, and a longer mauve fold between them.
+    { use: 'c:drape', name: 'panel', from: 150, to: 212, off: .02, hem: [[150, .4], [184, .24], [212, .34]], color: 'mauveDark', mat: 'lacquer', flare: 1.16, clear: .03, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
+    { use: 'c:drape', name: 'panel', from: 96, to: 176, off: .027, hem: [[96, .64], [140, .5], [176, .36]], color: 'mauve', mat: 'lacquer', flare: 1.14, clear: .036, fold: .012, trim: 'silver', trimMat: 'silver', trimWidth: .0045 },
+    { use: 'c:drape', name: 'panel', from: -178, to: -104, off: .03, hem: [[-178, .3], [-150, .2], [-104, .44]], color: 'plum', lining: 'mauve', flare: 1.12, clear: .04, fold: .01, trim: 'gold', trimMat: 'brass', trimWidth: .005 },
     // Belt with the hexagonal silver fastening, and the spell case hung at the left hip.
     { use: 'belt', height: .034, thick: .007, off: .03, color: 'leather', buckle: null, keepers: [60, -60, 150, -150], studs: 0 },
     { use: 'belt', rise: -.03, height: .012, thick: .004, off: .034, color: 'silverDark', buckle: null, keepers: [], tilt: .014 },
@@ -65,7 +72,6 @@ export default {
     { use: 'hands', glove: 'glove', fingerless: true },
     { use: 'boots', top: 1.5, straps: 3, strapColor: 'leatherDark', buckle: 'silver', toeCap: 'silverDark', heelPlate: 'silverDark', plateMat: 'iron', soleHeight: .034 },
     // Short black hair swept across the brow, longer on the right.
-    { use: 'hair', style: 'spiky', streak: 'hairSheen', length: .3, density: 1.25, lift: .028, fringe: .32 },
-    { use: 'c:strands', width: .09, list: [[-40, .3, .44, .06, -.04], [-20, .34, .32, .07, -.09], [24, .34, .2, .06, .1]] },
+    { use: 'hair', style: 'tousled', streak: 'hairSheen', top: .4, side: .26, back: .24, bang: .3, lift: .055, flick: .3, mess: .5, sweep: .5, part: [-.35, .9, 0], fringe: .33, count: 170 },
   ],
 };

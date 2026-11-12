@@ -40,7 +40,7 @@ export default {
   build: { width: 1.1, depth: 1.06, waist: 1.06, arm: 1.2, leg: 1.1, neck: 1.06, shoulder: 1.06 },
   keep: ['weapon'],
   builders: C,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'skinLimb', limb: 'arm', from: -.15, to: 1.0 },
@@ -79,6 +79,6 @@ export default {
     { use: 'c:headBand', name: 'visor', y: -.062, height: .034, phi: [-80, 80], off: .058, thick: .016, color: 'brass', mat: 'brass' },
     { use: 'c:headBand', name: 'visor', y: .0, height: .09, phi: [80, 280], off: .03, thick: .012, color: 'leatherDark' },
     { use: 'c:kit', name: 'visor', side: 'both', on: { head: [.375, 0, .06] }, parts: [{ s: 'cyl', d: [.05, .014, .05, 12], rot: [0, 0, 90], c: 'brass', m: 'brass' }, { s: 'cyl', d: [.022, .02, .022, 8], rot: [0, 0, 90], c: 'brassDark', m: 'brass' }] },
-    { use: 'c:curls', lift: .03, top: .075, fade: .2, fringe: .33 },
+    { use: 'hair', style: 'coils', top: .09, curl: .028, fade: { to: .06, from: .24, min: .3 }, fringe: .34, count: 300 },
   ],
 };

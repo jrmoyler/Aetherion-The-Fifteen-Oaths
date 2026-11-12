@@ -9,6 +9,7 @@
 import { Quaternion, Vector3 } from 'three';
 import { MAT, TAU, V, box, clamp, curve, dome, frame, lerp, moved, ring, roundBox, smooth } from './kernel.js';
 import { HEAD, buckleShape, face, headPlace, limbBand, limbFrame, scalp, sides, slab, slabY, trunkBand } from './builders.js';
+import { hangSkin } from './clearance.js';
 
 const PI = Math.PI, DEG = PI / 180;
 
@@ -192,11 +193,7 @@ function drapeOf(c, flare = 1.06, off = .012) {
     const need = legReach(y) / Math.max(.01, trunk.section(yHip).a + off), wide = Math.max(grow, lerp(1, need, smooth(0, .12, f)));
     p.x *= wide; p.z = zc + (p.z - zc) * grow; p.y = y; return p;
   };
-  const skin = (p) => {
-    if (p.y >= yHip) return trunk.skin(p);
-    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip + .03, yHip - .17, p.y) * .84, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .3, left = smooth(-.14, .14, p.x);
-    return [['hips', 1 - drop], ['thigh.L', drop * left * (1 - lower)], ['thigh.R', drop * (1 - left) * (1 - lower)], [`shin.${side}`, drop * lower]];
-  };
+  const skin = hangSkin(c.form);
   return { at, skin, virtual: true };
 }
 
@@ -257,11 +254,7 @@ function coat(c, { color = 'cloth', mat = 'cloth', top = 'belt', hem = .38, flar
     if (open) { const gap = smooth(1.2, 0, Math.abs(Math.atan2(Math.sin(th), Math.cos(th)))) * f; p.x += Math.sign(Math.sin(th)) * gap * .012; }
     return p;
   };
-  const skin = (p) => {
-    if (p.y >= yHip) return trunk.skin(p);
-    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip + .03, yHip - .17, p.y) * .84, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .3, left = smooth(-.14, .14, p.x);
-    return [['hips', 1 - drop], ['thigh.L', drop * left * (1 - lower)], ['thigh.R', drop * (1 - left) * (1 - lower)], [`shin.${side}`, drop * lower]];
-  };
+  const skin = hangSkin(c.form);
   const inner = (p) => V(0, p.y, c.form.spineZ(yHip)), nu = Math.max(24, (pleats ? pleats * 4 : 46) * c.q), nv = Math.max(8, (yTop - yHem0) * 26 * c.q), closed = !open;
   const shade = (th) => (pleats ? tone(col, .8 + .2 * (2 * Math.abs(((th * pleats / TAU) % 1 + 1) % 1 - .5))) : col);
   const ventHalf = vent * DEG / 2, skip = vent ? (u, v) => Math.abs(lerp(a0, a1, u) - PI) < ventHalf && v < .55 : null;

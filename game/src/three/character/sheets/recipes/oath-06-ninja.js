@@ -11,7 +11,7 @@ export default {
   build: { width: 1.0, depth: 1.0, hips: 1.28, waist: .86, seat: 1.08, bust: .03, arm: .92, leg: 1.1, neck: .92, shoulder: 1.0 },
   keep: ['weapon'],
   builders: B,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     // Body: bare shoulders, arms and midriff.
     { use: 'b.torso', from: 'belt', to: 'base', color: 'skin', mat: 'skin', off: .0005 },
@@ -49,7 +49,7 @@ export default {
     { use: 'b.guard', limb: 'arm', side: 'L', from: -.34, to: .44, phi: 90, arc: 66, off: .012, thick: .01, bulge: .012, flareEnd: .008, color: 'red', mat: 'wood', trim: 'bone', trimWidth: .01, grooves: 5, skin: [['shoulder.L', .55], ['upperarm.L', .45]] },
     { use: 'b.reedPipes' },
     { use: 'b.beakMask' },
-    { use: 'hair', style: 'bun', locks: 120, length: .3, bun: { at: [0, .46, -.27], radius: .09, tie: 'red' } },
+    { use: 'hair', style: 'updo', fringe: .34, count: 70, knot: { at: [0, .47, -.3], radius: .08, tie: 'red' }, tail: { length: 1.3, width: .11, tie: 'red', count: 18, rise: .16, back: .2 }, beads: 'red', tendrils: [[42, .3, .95, 0, .02], [-42, .3, .95, 0, .02], [64, .2, .8], [-64, .2, .8]] },
     { use: 'b.tail', tie: 'red' },
     { use: 'hands', glove: 'wrapDark', fingerless: true },
   ],

@@ -8,6 +8,7 @@ import { sculpt, cranium } from '../head.js';
 import { hair } from './hair.js';
 import { hands } from './hands.js';
 import { MAT, TAU, V, bar, box, clamp, curve, dome, frame, lerp, moved, ring, roundBox, smooth } from './kernel.js';
+import { hangSkin } from './clearance.js';
 
 const PI = Math.PI, DEG = PI / 180;
 const UP = V(0, 1, 0);
@@ -105,7 +106,7 @@ export function shirt(c, { color = 'cloth', sleeve = .6, flare = .008, off = .00
  * Trousers: a seat that follows the hips and two legs that balloon and are gathered at `gather` (1 = knee).
  * `bag` is the extra room at the widest point; `pleats` the number of folds running into the gather.
  */
-export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006, pockets = [[28, 80, .0, .3], [152, 110, .04, .2]], pipingPaths = [[22, 84, -.02, .4], [84, 74, .4, .96], [208, 150, .1, .5]], from = null }) {
+export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats = 13, top = 'belt', piping = null, cuff = .006, pockets = [[28, 80, .0, .3], [152, 110, .04, .2]], pipingPaths = [[22, 84, -.02, .4], [84, 74, .4, .96], [208, 150, .1, .5]], from = null, low = 0 }) {
   const { trunk, leg } = c.form, col = c.pal(color), yTop = trunk.Y[top] + .02;
   c.bag.part = 'trousers';
   // `from` starts the legs lower down, for trousers worn under a long coat: no seat and no thigh to push through it.
@@ -115,7 +116,8 @@ export function trousers(c, { color = 'cloth', gather = 1.14, bag = .046, pleats
     return { p, skin: trunk.skin(p) };
   }, { closeU: true, color: col, mat: MAT.cloth, inside: V(0, trunk.Y.hip, c.form.spineZ(trunk.Y.hip)) });
   // Fullest at mid-thigh, then tapering to the knee where the pleats take up what is left.
-  const room = curve([[-.2, bag * .25], [.1, bag * .6], [.45, bag], [.8, bag * .86], [gather - .14, bag * .74], [gather - .06, bag * .6], [gather - .014, cuff + .012], [gather, cuff]]);
+  // `low` (0..1) slings the fullness down toward the gather: hakama-like legs bloused over the knee band.
+  const room = curve([[-.2, bag * lerp(.25, .2, low)], [.1, bag * lerp(.6, .42, low)], [.45, bag * lerp(1, .74, low)], [.8, bag * lerp(.86, 1, low)], [gather - .14, bag * lerp(.74, 1.04, low)], [gather - .06, bag * lerp(.6, .9, low)], [gather - .014, cuff + .012 + bag * .3 * low], [gather, cuff]]);
   const seedA = c.rand() * TAU, seedB = c.rand() * TAU, seedC = c.rand() * TAU;
   const radius = (t, phi) => {
     // More room to the front and outside than between the legs.
@@ -399,11 +401,7 @@ export function skirt(c, { color = 'cloth', top = 'belt', hem = .38, flare = 1.1
     p.x *= wide * fold; p.z = zc + (p.z - zc) * grow * fold; p.y = y;
     return p;
   };
-  const skin = (p) => {
-    if (p.y >= yHip) return trunk.skin(p);
-    const side = p.x >= 0 ? 'L' : 'R', drop = smooth(yHip + .03, yHip - .17, p.y) * .84, lower = smooth(J['shin.L'].y + .05, J['shin.L'].y - .25, p.y) * .3, left = smooth(-.14, .14, p.x);
-    return [['hips', 1 - drop], ['thigh.L', drop * left * (1 - lower)], ['thigh.R', drop * (1 - left) * (1 - lower)], [`shin.${side}`, drop * lower]];
-  };
+  const skin = hangSkin(c.form);
   const inner = (p) => V(0, p.y, c.form.spineZ(yHip));
   c.bag.grid(44 * c.q, 22 * c.q, (u, v) => { const p = at(lerp(yHem, yTop, v), u * TAU); return { p, skin: skin(p) }; }, { closeU: true, color: col, mat: MAT.cloth, inside: inner });
   c.bag.grid(44 * c.q, 1, (u, v) => { const p = at(yHem + v * .015, u * TAU, -v * .012); return { p, skin: skin(p) }; }, { closeU: true, color: col.clone().multiplyScalar(.5), mat: MAT.cloth, inside: inner, flip: true });
@@ -430,7 +428,8 @@ export function panel(c, { color = 'ceramic', mat = 'ceramic', at = 0, from, to,
     return surface(yy, centre + a * w / rho(yy), lift);
   };
   const nx = Math.round(12 * c.q), ny = Math.round(Math.max(4, (y1 - y0) * 60 * c.q));
-  const lift = off;
+  // On a coat the panel stands a little prouder, so the two cannot cross when a leg pushes both out.
+  const lift = c.coat ? Math.max(off, .008) : off;
   c.bag.grid(nx, ny, (u, v) => { const p = point(u * 2 - 1, v, lift + thick); return { p, skin: skin(p) }; }, { color: col, mat: MAT[mat], inside: (p) => V(0, p.y, c.form.spineZ(trunk.Y.hip)) });
   // Edge wall, so the panel has thickness.
   const rim = (k, a, b) => point(a, b, lift + thick * (1 - k) - k * .004);

@@ -10,39 +10,39 @@ const hipAnchor = (th) => ({ use: 'c:kit', name: 'anchor', on: { y: 'belt', dy: 
   { s: 'ring', d: [.017, .017, .0035, 14, 5], at: [0, -.012, .009], c: 'iron' },
   { s: 'dome', d: [.005, .004, 6], at: [0, .034, .004], c: 'iron' },
 ] });
-const chain = (side) => ({ use: 'c:hose', name: 'chain', side, links: 13, wire: .0105, color: 'iron', mat: 'iron', path: [
-  { on: { y: 'belt', dy: -.05, th: 36, off: .04, skin: 'hips' } }, { on: { limb: 'leg', t: .2, phi: 34, off: .08 } }, { on: { limb: 'leg', t: .32, phi: 78, off: .095 } },
-  { on: { limb: 'leg', t: .22, phi: 122, off: .085 } }, { on: { y: 'belt', dy: -.05, th: 150, off: .04, skin: 'hips' } },
+const chain = (side) => ({ use: 'c:hose', name: 'chain', side, links: 15, wire: .012, color: 'iron', mat: 'iron', path: [
+  { on: { y: 'belt', dy: -.05, th: 36, off: .04, skin: 'hips' } }, { on: { limb: 'leg', t: .3, phi: 34, off: .08 } }, { on: { limb: 'leg', t: .5, phi: 78, off: .1 } },
+  { on: { limb: 'leg', t: .32, phi: 122, off: .085 } }, { on: { y: 'belt', dy: -.05, th: 150, off: .04, skin: 'hips' } },
 ] });
 const tasset = (from, to, hem, extra = {}) => ({ use: 'c:drape', name: 'tasset', from, to, hem, color: 'oxblood', mat: 'leather', trim: 'oxbloodDark', trimMat: 'leather', trimWidth: .012, flare: 1.08, clear: .05, fold: .012, off: .03, ...extra });
 
 export default {
   id: 'oath-12-ninja', sheet: 'reference-069', title: 'Sanguine Ninja',
   palette: {
-    cloth: '#2a2221', under: '#231d1d', wrap: '#2b2423', oxblood: '#4a1719', oxbloodDark: '#33100f', oxbloodLight: '#571c1d', enamel: '#8c1a1c', skin: '#8a5a3c', steel: '#aaa59c',
+    cloth: '#2a2221', under: '#231d1d', wrap: '#2b2423', oxblood: '#4a1719', oxbloodDark: '#33100f', oxbloodLight: '#571c1d', enamel: '#8c1a1c', skin: '#ad8463', steel: '#aaa59c', pipe: '#7c4a44',
     leather: '#3a2a26', leatherDark: '#2a2120', iron: '#6c6a66', boot: '#2a2221', sole: '#5a1d1c', glove: '#1e1a19',
   },
-  build: { width: 1.14, depth: 1.04, waist: .94, hips: .98, arm: 1.2, upperArm: 1.12, leg: 1.1, neck: 1.12, shoulder: 1.1 },
+  build: { width: 1.2, depth: 1.06, waist: .92, hips: .98, arm: 1.12, upperArm: 1.08, forearm: 1.04, leg: 1.1, neck: 1.14, shoulder: 1.22 },
   keep: ['weapon'],
   builders: { ...C, ...X },
   groom: { hair: false, gear: false },
   parts: [
     // Bare arms from the shoulder: modelled deltoid, biceps, triceps and forearm.
-    { use: 'x.physique', part: 'arm', from: -.2, to: 1.2, power: 2.1 },
+    { use: 'x.physique', part: 'arm', from: -.2, to: 1.2, power: 1.45, define: 1.4 },
     // Dark woven undershirt, high in the neck; the oxblood leather vest is cut over it.
     { use: 'shirt', color: 'under', sleeve: 0, collar: 'neck', off: .006 },
     { use: 'neck', color: 'under' },
     { use: 'c:collar', color: 'under', gap: 0, height: .092, flare: -.014, off: .004, thick: .004 },
-    { use: 'c:patch', name: 'vest', color: 'oxblood', mat: 'leather', trim: 'steel', trimMat: 'steel', trimWidth: .0045, edges: [1, 3], off: .011, thick: .005, quads: [
-      [[24, 'base', -.03], [72, 'shoulder', -.012], [62, 'ribs', 0], [3, 'ribs', 0]], [[3, 'ribs', 0], [62, 'ribs', 0], [58, 'belt', .03], [3, 'belt', .03]],
-      [[-72, 'shoulder', -.012], [-24, 'base', -.03], [-3, 'ribs', 0], [-62, 'ribs', 0]], [[-62, 'ribs', 0], [-3, 'ribs', 0], [-3, 'belt', .03], [-58, 'belt', .03]],
+    { use: 'c:patch', name: 'vest', color: 'oxblood', mat: 'leather', trim: 'pipe', trimMat: 'leather', trimWidth: .0045, edges: [1, 3], off: .011, thick: .005, quads: [
+      [[24, 'base', -.03], [84, 'shoulder', -.006], [62, 'ribs', 0], [3, 'ribs', 0]], [[3, 'ribs', 0], [62, 'ribs', 0], [58, 'belt', .03], [3, 'belt', .03]],
+      [[-84, 'shoulder', -.006], [-24, 'base', -.03], [-3, 'ribs', 0], [-62, 'ribs', 0]], [[-62, 'ribs', 0], [-3, 'ribs', 0], [-3, 'belt', .03], [-58, 'belt', .03]],
     ] },
-    { use: 'c:patch', name: 'vest', color: 'oxblood', mat: 'leather', trim: 'steel', trimMat: 'steel', trimWidth: .0045, edges: [1, 3], off: .011, thick: .005, quads: [
-      [[110, 'shoulder', -.012], [180, 'base', -.03], [180, 'belt', .03], [122, 'belt', .03]], [[180, 'base', -.03], [250, 'shoulder', -.012], [238, 'belt', .03], [180, 'belt', .03]],
+    { use: 'c:patch', name: 'vest', color: 'oxblood', mat: 'leather', trim: 'pipe', trimMat: 'leather', trimWidth: .0045, edges: [1, 3], off: .011, thick: .005, quads: [
+      [[98, 'shoulder', -.006], [180, 'base', -.03], [180, 'belt', .03], [122, 'belt', .03]], [[180, 'base', -.03], [262, 'shoulder', -.006], [238, 'belt', .03], [180, 'belt', .03]],
     ] },
     // The wrap-over front: the right edge tucked under, the left edge folded across it down to the belt.
-    { use: 'x.lapel', from: [-30, ['base', -.02]], to: [6, ['waist', .0]], width: .05, widthEnd: .03, off: .014, thick: .005, roll: .006, color: 'oxbloodLight', mat: 'leather', trim: 'steel', trimMat: 'steel' },
-    { use: 'x.lapel', from: [30, ['base', -.02]], to: [-14, ['belt', .03]], width: .055, widthEnd: .035, off: .019, thick: .006, roll: .008, color: 'oxbloodLight', mat: 'leather', trim: 'steel', trimMat: 'steel' },
+    { use: 'x.lapel', from: [-30, ['base', -.02]], to: [6, ['waist', .0]], width: .05, widthEnd: .03, off: .014, thick: .005, roll: .006, color: 'oxbloodLight', mat: 'leather', trim: 'pipe', trimMat: 'leather' },
+    { use: 'x.lapel', from: [30, ['base', -.02]], to: [-14, ['belt', .03]], width: .055, widthEnd: .035, off: .019, thick: .006, roll: .008, color: 'oxbloodLight', mat: 'leather', trim: 'pipe', trimMat: 'leather' },
     // Forearm bindings with oxblood bands and iron buckles.
     { use: 'wrap', limb: 'arm', from: 1.14, to: 1.95, color: 'wrap', off: .007, pitch: .022 },
     { use: 'band', limb: 'arm', at: 1.2, width: .024, off: .011, thick: .005, color: 'oxblood' },

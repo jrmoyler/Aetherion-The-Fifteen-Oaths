@@ -54,12 +54,14 @@ export class Bag {
   constructor(index) {
     this.index = index; this.mirror = false; this.part = '';
     this.position = []; this.normal = []; this.color = []; this.sm = []; this.skinIndex = []; this.skinWeight = []; this.tris = [];
+    this.loose = false; this.free = [];   // free: emitted by a builder of loose sleeves (their cloth, lining and trim may hang)
+    this.hang = [];   // per vertex: how freely it hangs from the hips (0 = not hanging cloth), see clearance.js
     this.count = 0; this.parts = {};
   }
   vert(p, n, color, mat, skin) {
     const sx = this.mirror ? -1 : 1;
     this.position.push(p.x * sx, p.y, p.z); this.normal.push(n.x * sx, n.y, n.z);
-    this.color.push(color.r, color.g, color.b); this.sm.push(mat[0], mat[1], mat[2]);
+    this.color.push(color.r, color.g, color.b); this.sm.push(mat[0], mat[1], mat[2]); this.hang.push(skin.hang ?? 0); this.free.push(this.loose ? 1 : 0);
     const pairs = skin.filter((pair) => pair[1] > 1e-4).sort((x, y) => y[1] - x[1]).slice(0, 4);
     const total = pairs.reduce((sum, pair) => sum + pair[1], 0) || 1;
     for (let k = 0; k < 4; k++) {

@@ -12,7 +12,7 @@ export default {
   build: { width: 1.3, depth: 1.36, belly: .04, bust: .03, hips: 1.2, waist: 1.22, arm: 1.22, leg: 1.16, neck: 1.1, shoulder: 1.06 },
   keep: ['weapon'],
   builders: B,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'b.neck' },
     { use: 'trousers', color: 'black', gather: 1.76, bag: .04, pleats: 9, pockets: [], from: 1.0 },
@@ -36,7 +36,7 @@ export default {
     { use: 'b.orb', at: 180, off: .046, r: .03, tag: false },
     { use: 'b.astrolabe', reach: .36, radius: .165 },
     { use: 'b.hemOrbs', r: .06, drop: .03 },
-    { use: 'hair', style: 'bun', streak: 'hairGrey', locks: 120, length: .3, bun: { at: [0, .5, -.12], radius: .2, tie: 'tie' } },
+    { use: 'hair', style: 'updo', streak: 'hairGrey', grey: .45, fringe: .34, count: 70, knot: { at: [0, .55, -.12], radius: .17, kind: 'coil', tie: 'tie' }, tendrils: [[72, .15, .14], [-72, .15, .14]] },
     { use: 'hands' },
   ],
 };

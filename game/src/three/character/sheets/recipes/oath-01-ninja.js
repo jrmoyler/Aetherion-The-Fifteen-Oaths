@@ -9,7 +9,7 @@ export default {
   },
   build: { arm: 1.08, width: 1.04, shoulder: 1.1 },
   keep: ['weapon'],
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'skinLimb', limb: 'arm', from: .45, to: .95 },
     { use: 'shirt', sleeve: .56, flare: .016, cap: .008, trim: 'piping' },
@@ -35,6 +35,6 @@ export default {
     { use: 'gloveCuff', strap: 'leather' },
     { use: 'hands', glove: 'glove', fingerless: true },
     { use: 'halfMask' },
-    { use: 'hair', style: 'spiky' },
+    { use: 'hair', style: 'tousled', top: .36, side: .2, back: .24, bang: .25, lift: .05, flick: .3, mess: .6, fringe: .34, count: 170 },
   ],
 };

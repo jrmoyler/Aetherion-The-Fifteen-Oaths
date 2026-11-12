@@ -173,7 +173,7 @@ function shards(c, { limb = null, side = 'both', at = 0, arc = 60, phi = 90, fro
  * `arc` degrees either side of the front, with pectorals, a sternum line and abdominal blocks. `power` scales
  * the relief (1 lean, 2 heroic).
  */
-function physique(c, { part = 'arm', side = 'both', from = -.16, to = 2, color = 'skin', power = 1.5, girth = 0, top = 'base', bottom = 'belt', arc = 180 }) {
+function physique(c, { part = 'arm', side = 'both', from = -.16, to = 2, color = 'skin', power = 1.5, girth = 0, top = 'base', bottom = 'belt', arc = 180, define = 1 }) {
   const col = c.pal(color), k = c.form.k;
   const bump = (t, t0, w) => Math.exp(-(((t - t0) / w) ** 2));
   if (part === 'arm') {
@@ -186,11 +186,17 @@ function physique(c, { part = 'arm', side = 'both', from = -.16, to = 2, color =
         - .005 * bump(t, .55, .3) * Math.max(0, Math.sin(phi * 2)) ** 2                                           // groove between them, outside
         - .006 * bump(t, .93, .07)                                                                                // pinch above the elbow
         + .012 * bump(t, 1.2, .17) * Math.max(0, Math.sin(phi + .7)) ** 1.2 + .008 * bump(t, 1.25, .2) * Math.max(0, -Math.sin(phi + .4))   // forearm extensors, flexors
-        + .003 * bump(t, 1, .04) * bk);                                                                           // elbow point
+        + .003 * bump(t, 1, .04) * bk
+        - .004 * bump(t, .3, .045) * fr                                                                           // where the deltoid tucks in over the biceps
+        - .0035 * bump(t, .6, .22) * bump(Math.abs(Math.sin(phi)), 1, .22) * inn                                  // biceps / triceps split on the inside
+        + .005 * bump(t, 1.12, .1) * bump(phi, .9, .5)                                                            // brachioradialis running over the elbow
+        - .003 * bump(t, 1.34, .2) * bump(phi, 2.2, .3));                                                         // furrow down the back of the forearm                                                                           // elbow point
     };
     sides(c, side, () => c.bag.grid(Math.round(24 * c.q), Math.round(30 * Math.max(.4, (to - from) / 2.2) * c.q), (u, v) => {
       const t = chain.step(0, lerp(m0, m1, v)), phi = u * TAU, r = chain.radius(t) * (1 + girth) + relief(t, phi), p = chain.point(t, phi, r);
-      return { p, skin: chain.skin(t), c: tone(col, 1 - .5 * clamp(-relief(t, phi) / (.006 * k * power), 0, 1) * .3) };
+      // Shade by how the relief curves: grooves between the muscle groups darken, their crowns lift a little.
+      const e = .06, lap = relief(t, phi) - (relief(t - e, phi) + relief(t + e, phi) + relief(t, phi - .35) + relief(t, phi + .35)) / 4;
+      return { p, skin: chain.skin(t), c: tone(col, 1 + clamp(lap / (.0022 * k * power), -1, 1) * (lap < 0 ? .34 : .1) * define) };
     }, { closeU: true, color: col, mat: M('skin'), inside: (p) => chain.centre(chain.step(0, clamp(p.clone().sub(chain.points[0]).dot(chain.seg[0].along), m0, m1))) }));
   } else {
     const { trunk } = c.form, y0 = Yof(c, bottom), y1 = Yof(c, top), Y = trunk.Y, half = arc * DEG;
@@ -210,13 +216,13 @@ function physique(c, { part = 'arm', side = 'both', from = -.16, to = 2, color =
  * opposite hip (a wrap-over front). `from` and `to` are [angle degrees, height] ends; `width` its breadth; the
  * outer edge is rolled (`roll`) so it catches the light, and `lining` shows on the turned face.
  */
-function lapel(c, { from = [28, 'base'], to = [-30, 'belt'], width = .07, widthEnd = null, off = .012, thick = .006, roll = .008, color = 'cloth', mat = 'cloth', trim = null, trimMat = null, bow = 0, n = 26 }) {
+function lapel(c, { from = [28, 'base'], to = [-30, 'belt'], width = .07, widthEnd = null, off = .012, thick = .006, roll = .008, color = 'cloth', mat = 'cloth', trim = null, trimMat = null, bow = 0, n = 26, trimSpan = .2 }) {
   const { trunk } = c.form, s = scaleOf(c), col = c.pal(color), a0 = from[0] * DEG, a1 = to[0] * DEG, y1 = Yof(c, from[1]), y0 = Yof(c, to[1]), sign = Math.sign(a0 - a1) || 1;
   const pos = (q, e, lift) => { const y = lerp(y1, y0, q), w = lerp(width, widthEnd ?? width * .5, q) * s, th = lerp(a0, a1, q) + bow * DEG * Math.sin(PI * q), rho = trunk.rho(clamp(y, trunk.Y.hip, trunk.top), th); return trunk.at(clamp(y, trunk.bottom, trunk.top), th + sign * e * w / rho, off + lift + roll * s * Math.sin(PI * clamp(e, 0, 1)) ** .5 * (.4 + .6 * e)); };
   const rows = Math.max(8, Math.round(n * c.q)), inner = (p) => V(0, p.y, c.form.spineZ(clamp(p.y, trunk.Y.hip, trunk.top)));
   c.bag.grid(rows, 4, (u, v) => { const p = pos(u, v, thick * s); return { p, skin: trunk.skin(p), c: tone(col, .82 + .22 * v) }; }, { color: col, mat: M(mat), inside: inner });
   for (const e of [0, 1]) c.bag.grid(rows, 1, (u, v) => { const p = pos(u, e, thick * s * (1 - v)); return { p, skin: trunk.skin(p) }; }, { color: tone(col, .45), mat: M(mat), inside: inner });
-  if (trim) c.bag.grid(rows, 3, (u, v) => { const i = Math.round(v * 3), p = pos(u, [0, .02, .16, .2][i], thick * s + .0005 + .0026 * s * [0, 1, 1, 0][i]); return { p, skin: trunk.skin(p) }; }, { color: c.pal(trim), mat: M(trimMat ?? mat), inside: inner });
+  if (trim) c.bag.grid(rows, 3, (u, v) => { const i = Math.round(v * 3), p = pos(u, [0, .1, .8, 1][i] * trimSpan, thick * s + .0005 + .0026 * s * [0, 1, 1, 0][i]); return { p, skin: trunk.skin(p) }; }, { color: c.pal(trim), mat: M(trimMat ?? mat), inside: inner });
 }
 
 /** A turned-back cuff flaring from the wrist toward the elbow: `flare` is how far its upper edge stands off. */

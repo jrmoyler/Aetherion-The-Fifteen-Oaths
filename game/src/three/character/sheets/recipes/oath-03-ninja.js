@@ -13,7 +13,7 @@ export default {
   build: { width: 1.08, arm: 1.3, leg: 1.18, waist: 1.02, shoulder: 1.12 },
   keep: ['weapon'],
   builders: { ...A, ...X },
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'x.physique', part: 'arm', from: -.2, to: 2, power: .9 },
@@ -52,8 +52,7 @@ export default {
     { use: 'wrap', limb: 'arm', side: 'L', from: 1.72, to: 1.93, color: 'navy', off: .004, pitch: .014 },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.64, heelPlate: 'copper', shinPlate: 'ceramic', cuff: 'ceramic', straps: 3, strapColor: 'leather', buckle: 'copper', bulk: 1.25 },
     { use: 'a/lines', on: 'leg', paths: [[[-80, 1.8], [0, 1.83], [80, 1.8]]], color: 'copper', mat: 'copper', width: .006, thick: .003, off: .03, name: 'bootTrim' },
-    { use: 'hair', style: 'spiky', color: 'hair', length: .24, knot: { at: [0, .5, -.2], radius: .1, tie: 'copper' } },
-    { use: 'a/fringe', color: 'hair', count: 8, span: 1.1, from: .4, to: .16, sideTo: -.12, width: .05, sweep: .5 },
+    { use: 'hair', style: 'bob', length: .62, fringe: .37, count: 120, knot: { at: [0, .5, -.2], radius: .085, kind: 'messy', tie: 'copper' }, tendrilWidth: .045, tendrils: [[30, .355, .5, 0, .03], [-30, .355, .54, 0, .03], [12, .37, .3, 0, .06], [-48, .3, .46, 0, .02], [50, .3, .44, 0, .02]] },
     { use: 'hands' },
   ],
 };

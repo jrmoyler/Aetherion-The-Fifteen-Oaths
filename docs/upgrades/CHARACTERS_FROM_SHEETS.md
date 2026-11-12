@@ -33,7 +33,7 @@ is the Kiln Ninja in the running game (offline, medium quality). The character p
 | `kernel.js` | `Bag` (vertex/skin accumulator, grids with smooth normals, mirrored sides, hard-surface solids placed through any smooth map) and bevelled shapes (round box, slab, bar, ring, dome). |
 | `builders.js` | The garment and gear builders: `skinLimb`, `neck`, `shirt`, `trousers` (gathered, pleated, piped), `wrap`, `band`, `capelet` (cloth laid over the shoulders and arms, asymmetric by run length), `cowl`, `chestPlates`, `belt`, `strap` (+ anchor ring), `bracer`, `blockBracer` (real vent slots), `gloveCuff`, `boots` (sole, upper, shaft, toe cap, heel and shin plates, straps), `halfMask` (vented grille), `hair` (spiky, bun), `skirt` (coat), `panel` (apron, tabard), `limbPlate`, `kilnPack`. |
 | `builders-x.js` | Armour and anatomy builders any hero may use (`x.` prefix): `x.plate` (trunk plates, fauld lames, flared tassets, fractured stone relief), `x.pauldron` (layered shoulder cap), `x.horn` (curved or faceted blade off a shoulder: horn, kite wing, winged collar), `x.shards` (overlapping bark shards, shell scales), `x.crest` (layered helmet crest), `x.physique` (bare arm with deltoid, biceps, triceps and forearm relief), `x.lapel` (folded wrap-over front edge), `x.cuff`. |
-| `hair.js` | The `hair` builder: a dark undercoat plus distinct tapered locks. Styles `spiky`, `long` (+ `tail` to tie it back), `bun` (a small high knot is a topknot), `braid`, `none` (+ `stubble`). |
+| `hair.js` | The `hair` builder: hairline, undercoat and layers of distinct tapered locks, ropes and coils, plus facial hair rooted on the face surface. Styles `tousled`, `bob`, `long`, `updo` (knot kinds coil, puff, braid, messy, twist; `tail` for a ponytail), `coils`, `buzz`, `locs`, `cornrows`, `twists`, `braid`, `none`; `fade` for shaved sides, `tendrils` for loose strands, `beard`/`moustache`. See the header of the file and "Hair and faces pass" below. |
 | `hands.js` | The `hands` builder: palm, jointed fingers and thumb per hand, rigid on the hand bone; gloved, fingerless or bare; the weapon hand is a closed fist. |
 | `material.js` | One procedural material; a per-vertex (roughness, metalness, kind) triple picks the detail in rest space: twill weave, soot and wear on cloth; pits, chips and kiln flashing on ceramic; grain, creases and scuffs on leather; pitting and rust on iron. Plates, bands and straps also carry darkened edges in their vertex colours. No textures, constructs in Node. |
 | `costume.js` | Compiles a recipe into a geometry. |
@@ -59,10 +59,11 @@ export default {
 };
 ```
 
-Hair: `{ use: 'hair', style: 'spiky'|'long'|'bun'|'braid'|'none', color, streak, length (head heights), density,
-lift, fringe (front hairline height, -.5 chin .. .5 crown), knot: { at: [x, y, z] head space, radius, tie },
-tail: { length, width, tie }, braid: { length, width, tie }, stubble }`. Head space: origin at the head's
-centre, +y up, +z forward, chin to crown = 1.
+Hair: `{ use: 'hair', style, color, streak, grey, fringe, temple, sideLine, nape, fade: { to, from, min }, knot: { at, radius, kind, tie },
+tail, tendrils: [[phiDeg, y, length, curl, forward]], beads, beard: { style: 'full'|'goatee'|'long'|'chin', length, moustache, cheek, point } }`
+(every style and its own parameters are listed in the header of `hair.js`). Head space: origin at the head's
+centre, +y up, +z forward, chin to crown = 1. The person's face is not in the recipe: it is the hero's entry in
+`FACES` in `character/profiles.js` (skin, eye, age, `face` sculpt, `look` painted features).
 Hands: `{ use: 'hands', glove: paletteName|null, fingerless, skin, fist: 'R'|'L'|'both'|'none', scale, knuckles }`.
 A builder receives `(context, params)` with `context = { bag, form, rig, q, pal, rand, head }`; see the header of
 builders.js. Register a recipe with one import line in `recipes/index.js`.
@@ -77,16 +78,16 @@ reference-092..095 are sorcerer line-ups and 096..098 ninja line-ups across elem
 | 01 | FIRE - Kiln Oath | reference-090 | reference-091 | reference-113 | **done** (see below) | **done** (see below) |
 | 02 | FROST - Rime Archive | reference-089 | reference-088 | reference-112 | **partial** (see below) | **partial** (see below) |
 | 03 | LIGHTNING - Storm Relay | reference-085 | reference-087 | reference-111 | **partial** (see below) | **partial** (see below) |
-| 04 | WATER - Tidal Covenant | reference-084 | reference-086 | reference-110 | **partial** (see below) | **partial** (see below) |
-| 05 | EARTH & CRYSTAL - Fault Choir | reference-082 | reference-083 | reference-109 | **partial** (see below) | **partial** (see below) |
+| 04 | WATER - Tidal Covenant | reference-084 | reference-086 | reference-110 | **done**, with differences (Partials pass) | **partial** (see below) |
+| 05 | EARTH & CRYSTAL - Fault Choir | reference-082 | reference-083 | reference-109 | **done**, with differences (Partials pass) | **partial** (see below) |
 | 06 | WIND & SOUND - Reed Resonance | reference-081 | reference-080 | reference-108 | partial (see below) | done (see below) |
 | 07 | NATURE - Graft Sanctuary | reference-079 | reference-078 | reference-107 | partial (see below) | done (see below) |
 | 08 | POISON - Bitterglass Guild | reference-077 | reference-076 | reference-106 | done (see below) | done (see below) |
 | 09 | LIGHT & HOLY - Oath of Daybreak | reference-075 | reference-074 | reference-105 | partial (see below) | done (see below) |
 | 10 | COSMIC & GRAVITY - Tidal Observatory | reference-073 | reference-072 | reference-104 | partial (see below) | done (see below) |
 | 11 | SHADOW & VOID - The Missing Court | reference-071 | reference-070 | reference-103 | partial (see below) | **done**, with differences |
-| 12 | BLOOD - Sanguine Covenant | reference-069 | reference-067 | reference-102 | partial (see below) | **done**, with differences |
-| 13 | ARCANE & ILLUSION - Folded Theatre | reference-068 | reference-066 | reference-100 | partial (see below) | partial (see below) |
+| 12 | BLOOD - Sanguine Covenant | reference-069 | reference-067 | reference-102 | **done**, with differences (Partials pass) | **done**, with differences |
+| 13 | ARCANE & ILLUSION - Folded Theatre | reference-068 | reference-066 | reference-100 | partial (see below) | **done**, with differences (Partials pass) |
 | 14 | TIME & MOTION - Escapement Road | reference-065 | reference-064 | reference-099 | **done**, with differences | partial (see below) |
 | 15 | TECH & FORCE - Impulse Foundry | reference-063 | reference-062 | reference-101 | **done**, with differences | **done**, with differences |
 
@@ -487,3 +488,170 @@ the leading thigh comes through hanging panels (10 tabard, 12 tasset, 09 tasset,
 weighted to the hips and thighs but do not collide. Not seen: these reworks in the running game, low and medium
 tiers on screen (unit-tested to build), cast clips. Hair was compared on the line-up only: 13 sorcerer's crop is
 too spiky; faces remain the stylised procedural head and are not likenesses.
+
+## Partials pass (four heroes, motion, folds, the running game)
+
+Evidence: `docs/qa/characters/oath-04-ninja.jpg`, `oath-05-ninja.jpg`, `oath-12-ninja.jpg`, `oath-13-sorcerer.jpg`
+(sheet | code, re-rendered through `game/sheet.html`, high tier, idle), `all-heroes-front.jpg` (all 30 again),
+`all-heroes-run.jpg` (all 30 mid-stride and in `attack_1`, three-quarter view, with the motion passes on) and
+`in-game-six-heroes.jpg` (the running game, offline: standing, running toward the camera, attacking).
+
+### The four heroes that were "partly"
+
+New builders in `builders-p.js` (`p.` prefix): `p.shell` (a swept shell plate along a spine on the head, a bone or a
+limb: cupped, ribbed, edged), `p.scallops` (tiers of ribbed scallop shells over a shoulder), `p.contour` (a lens
+panel sewn into a fitted suit, piped along its edge), `p.slabs`, `p.wedge` (a flat folded plate wing between two
+edges). `trousers` gained `low` (fullness slung down to the gather), `x.physique` shades by the curvature of its
+relief (`define`) and has more separation between muscle groups, `x.lapel` has `trimSpan`.
+
+- **oath-04-ninja (084): done, with differences.** The crest is now six layered shell plates (head units): a broad
+  ribbed bill from the crown out over the visor to a point, a smaller plate lapped over it, a rear plate kicked up
+  behind the crown, a cheek plate swept back down each side, and the sea-green fin between them, all rimmed in
+  brass. The right pauldron is three tiers of ribbed scallop shells with scalloped brass rims. The suit carries
+  piped lens panels (sea green down the flank, the front and outside of the thigh; lighter blue on the knee, calf,
+  upper arm and back) and brass contour lines. Fin blades: one swept off each forearm, three off each calf.
+  Differs: the painted crest plates are fewer, thicker and asymmetric (the top plate sweeps to one side) and its
+  bill reaches further down over the visor; the pauldron's shells are smoother and more regular than the painted
+  ones and it has no visible strap mount; the suit's lines are simpler than the painted seam pattern and the body
+  is less long-legged; hip straps and the forearm bracer straps are plain bands.
+- **oath-05-ninja (082): done, with differences.** Reads as layers now: a charcoal tunic with stiff short sleeves
+  hemmed in leather, four large fractured shale plates framed in sandstone over chest and back (twice the earlier
+  area, thicker), a wider and taller stone collar, the belt with pouches and amethyst, wide brown trousers slung
+  low and bloused over the knee band, shin wraps and plated boots; shoulders 30 % wider, heavier arms.
+  Differs: plates are four separate slabs per side of the body rather than the painted cuirass with a centre
+  seam and side lacing; trouser folds are procedural, not the painted crease pattern with patch pockets; the
+  forearm slabs are plain framed blocks; hair and mask are unchanged (hair is the other agent's).
+- **oath-12-ninja (069): done, with differences.** Arm skin is the painted light tan (`#ad8463`, was a dark
+  orange brown); arms are modelled from the shoulder cap with deltoid, biceps, triceps and forearm groups and
+  shaded grooves; shoulders are 22 % wider and the chest broader, so the vest's straps run out to the shoulder
+  edge as painted; vest piping is thin dark red instead of bright steel; chains hang lower with heavier links.
+  Differs: muscle definition is softer than the painted striations (it is relief plus vertex shading, no
+  veins or sharp separations); the deltoid still reads rounder than the painted squared shoulder; the helm is
+  rounder than the painted almond; tassets are single panels without iron corners.
+- **oath-13-sorcerer (066): done, with differences.** Collar wings are flat folded triangles from the collar bone to
+  a point beyond each shoulder, front and back, edged in gold (were curved horns standing too high). Skirt: a
+  short jacket peplum all round, one long embroidered plum panel over the left leg cut to a point (the right leg
+  shows its trousers, as painted), folded mauve lacquer on the diagonal behind the left leg, a long plum panel
+  behind the right leg and a longer mauve fold between them. Lapel trims are thin gold.
+  Differs: the plum panel has no gold arcs; the wings are single planes without the painted second fold; where
+  the sheet's front and back views disagree the front was followed for the front panels and the back view for
+  the back ones; hair is unchanged here (the other agent's).
+
+### Motion: cloth gives way to the body (`clearance.js`)
+
+A costume is one linear-blend-skinned mesh, so hanging cloth could not know a knee was coming through it. Two
+passes now run in the vertex program after skinning, for every hero and every tier, with a twin in plain JS
+(`settle`) used by the tests and a Node preview:
+
+1. **Clearance.** Every builder of hanging cloth (`skirt`, `b.coat`, `b.hang` and whatever is laid on a coat,
+   `c:drape`) takes its weights from one function, `hangSkin`, which also marks the vertex. The weights now depend
+   only on the direction from the body's axis and the height, so layers worn over each other move as one. After
+   the build, each marked vertex stores its outward direction and how far beyond the legs it hung along that
+   direction in the bind pose. In any pose it is pushed along that direction until it stands that far beyond the
+   thigh and shin of both legs again (four tapered capsules; their radii are measured from what the legs wear,
+   knee cops included). Nothing moves in the bind pose, and layers keep their order because each keeps its own
+   distance along the same line.
+2. **Sleeve hang.** Cloth emitted by `shirt`, `b.sleeve` and `c:bellSleeve` that stands off the forearm stores
+   its stand-off vector; each frame it is turned toward the ground, so a sleeve mouth draws in over the arm and
+   hangs below it whichever way the arm points, instead of standing round a raised wrist like a dish.
+
+The shadow pass uses a depth material with the same code. Tests (`clearance.test.mjs`): in a synthetic stride no
+more than 2 % of free-hanging vertices of any hero remain more than 2 cm inside a leg (before the pass: several
+hundred per hero); hanging cloth does not move in the bind pose; raised bell sleeves drop; both materials carry
+the pass.
+
+Checked for all 30 in the Node preview (run at four phases, sprint, dodge, `attack_1` at two phases) and on screen
+in the browser line-ups (`all-heroes-run.jpg`). What still shows:
+- A front tabard is narrower than a knee cop, so the outer half of a raised armoured knee still shows beside it
+  (oath-10-ninja); the cloth itself now lies over the knee instead of being cut by it.
+- The pass moves vertices along a fixed outward direction; a leg that comes at a panel from the side (a side
+  tasset when the thigh swings across) can still graze it for a frame.
+- Chains and rigid kit hung on the legs are not cloth and do not react (oath-12-ninja's chains pass through
+  the tassets when a thigh lifts).
+- Arms are not collided with anything: a hand can enter a coat skirt or a wide sleeve in an attack.
+- Long coats are lifted by a kicked-back shin rather than parting; the back of the coat tents over the calf.
+
+### Folds (`folds.js`)
+
+After the build every vertex of woven cloth and soft leather gets `fd` (metres along its limb or up the trunk,
+direction around that axis, how loose the cloth is there, measured against the form) and `ff` (how strongly it
+rucks into rings, how strongly it falls into pleats): rings at elbows, knees, armpits, the crotch and above a
+gather or boot; pleats drawn into the belt, deeper on looser cloth, and long folds deepening toward the hem of
+anything that hangs. The fragment program turns these into relief through the same bump path as the weave and
+shades the valleys. Skin, hair, metal, ceramic, glass and the other hard kinds carry zeros (tested) and are
+untouched. Seen on screen at close range on oath-01-ninja and oath-12-sorcerer and in every later render.
+Limits: it is shading, not geometry (silhouettes stay smooth); folds are fixed in rest space, they do not
+change as a joint bends.
+
+
+## Hair and faces pass (all 30, against each sheet's FACE panel)
+
+Evidence: `docs/qa/characters/all-heroes-faces.jpg` (per hero: the sheet's face, the code head from the front and at
+three-quarter, rendered through `sheet.html?ids=...&frame=face`), and a regenerated `all-heroes-front.jpg`.
+
+What changed in the system:
+- `sheets/hair.js` was rewritten. A style is now a hairline (`fringe`, receding `temple`, `sideLine`, `nape`), an
+  undercoat that can `fade` into skin for shaved sides, and layers of separate locks that lie on the scalp and flow
+  away from a crown or a parting before they hang. New styles: tousled, bob, updo with five knot kinds, ponytail made of
+  hanging locks, coils (tight curls, high-top), buzz, locs, cornrows, rope twists; loose `tendrils` with beads; beards,
+  goatees, long beards and moustaches as whiskers over a coat that follows the face surface. Every recipe's hair entry
+  now uses it (the earlier `a/fringe`, `a/beard`, `b.hairCap`, `b.knot`, `c:curls`, `c:locks`, `c:strands` calls and the
+  groom-pass hair of 06 and 09 sorcerer were replaced), and no sheet hero takes hair or a beard from the groom pass.
+- `head.js`: the face sculpt gained `fat` (full cheeks, jowls, soft chin, thicker neck), `gaunt` (hollow cheeks and
+  temples), `bridge`, `tip`, `mouthW`, `eyeX`; sheet heads have a fuller cranium, a narrower nasal bridge, wider mouths
+  and larger eye apertures over a flatter eye surface with a larger iris. The painted face is a new shader driven per
+  hero: brow thickness, arch, slope, length and colour, lash lines, lid crease, eye bags, socket shade, lip colour and
+  fullness, freckles, age spots, forehead, frown, crow's-feet, nose-to-mouth and mouth-to-chin lines scaled by age,
+  stubble (full or goatee, any colour), cheek and side-plane shading.
+- `profiles.js`: a `FACES` table gives each of the 26 heroes whose face shows (and the masked ones' visible skin) its
+  own skin tone, eye colour, age, face build and painted look, read from the FACE panel.
+
+Honest judgement, hero by hero (hair / face; "close" = the same kind of person at game distance, not a likeness):
+| Hero | Hair | Face |
+| --- | --- | --- |
+| 01 ninja | close: black tousled layers with a broken fringe; less tall on top than painted | masked; eyes, brows and tone close |
+| 01 sorcerer | close: grey-streaked combed hair, messy top knot, curled strands at the temples; less curly volume | close: older, heavy-cheeked, olive; not a likeness |
+| 02 ninja | close: black bob and fringe inside the hood | close: young, light, freckled; flatter than painted |
+| 02 sorcerer | matches: bald, long pointed white beard, drooping moustache, white brows | close: gaunt, pale, old, pale eyes; lacks the painted depth of the sockets |
+| 03 ninja | close: centre-parted long black hair, tied topknot, strands over the face; heavier than the wispy painting | close: long tan face, strong brows |
+| 03 sorcerer | matches: coily hair drawn up into a large puff | close: round, full, deep brown, full lips |
+| 04 ninja | hidden by the sealed helmet (as on the turnaround) | hidden |
+| 04 sorcerer | matches: white tight curls, full short white beard and moustache | close: brown, old, white brows, broad nose |
+| 05 ninja | close: brown textured top, faded sides | masked; green-hazel eyes, heavy brow close |
+| 05 sorcerer | close: wavy black hair to a low knot, curls at the temples | close: brown, freckled, full lips |
+| 06 ninja | close: high ponytail of long locks, red tie, long beaded front strands | hidden by the beak mask |
+| 06 sorcerer | close: grey receding hair to a small topknot, wisps, goatee and moustache | close: gaunt, sallow, old |
+| 07 ninja | close: tight coils on top, faded sides (mostly under the mask) | hidden by the seed mask |
+| 07 sorcerer | matches: grey hair combed back to a low knot | close: very old, lined, tan; wrinkles are finer and fewer than painted |
+| 08 ninja | hidden by the skull cap (buzz cut under it) | upper face only: brows and tone close |
+| 08 sorcerer | off: only a fringe and wisps show under the cap; the painted grey waves round the face are missing | close: older, pale, angular |
+| 09 ninja | close: rope twists drawn up into a wound knot with the gold band, temple curls | hidden by the visor |
+| 09 sorcerer | close: silver hair swept back to a small tail, short grey-white beard; the beard is fuller than painted | close: tan, old, grey brows |
+| 10 ninja | hidden by the helm | hidden |
+| 10 sorcerer | close: black-grey top knot | partly hidden by her collar ring; heavy round face close |
+| 11 ninja | close: high ponytail with pale tie, long face-framing locks (blockier than painted) | masked; pale, lined eyes close |
+| 11 sorcerer | matches: bald | close: gaunt, grey, amber eyes, frown, grey stubble; far less modelled than the painting |
+| 12 ninja | hidden by the helm | hidden |
+| 12 sorcerer | close: cornrows to a braided knot at the nape, gold beads, temple curls; rows read only near the hairline | close: deep brown oval, full lips |
+| 13 ninja | close: long black spiky layers round the mask | hidden by the blade mask |
+| 13 sorcerer | close: black side-swept layered crop | close: pale, dark-lined eyes, red lips |
+| 14 ninja | matches: high-top coils with faded sides | eyes under the visor; lower face and goatee shadow close |
+| 14 sorcerer | close: messy top knot, loose strands | close: young, light, freckled |
+| 15 ninja | close: locs gathered on the crown over shaved sides | hidden by the faceplate |
+| 15 sorcerer | close: short coils, faded sides | close: brown, heavy brow and frown, painted short beard with a small goatee; beard is thinner than painted |
+
+Sculpt pass after review (the first heads read as flat-planed blocks): the sheet face is now built in
+`head.js` `sheetFace` only from smooth blended fields: an arched brow ridge flowing into the nasal bridge, deep orbits
+with a deeper inner corner and a lower-lid roll, a rounded nose ridge with a separate bulb, alar wings and nostril
+hollows, philtrum with its two ridges, an upper lip with a cupid's bow and tubercle, a fuller lower lip, mouth line and
+corners, cheekbone, cheek apple and the hollow under it, nose-to-mouth fold, jowl and marionette fold driven by age,
+chin and the groove above it. The cusp the old superellipse left down the midline is gone. Sheet heads use a denser
+mesh (220x168 high, 136x104 medium, 96x72 low; more triangles than before on every tier), eyelids are rolled shells
+standing off a flatter eyeball with iris, pupil and catchlight, ears have a helix rim and concha. The tousled
+fringe is now pairs of narrow strands of uneven length with rounded tips.
+
+What this is not: the heads are still smooth sculpted forms with painted features, lit by the stage lights. They do
+not have the painted portraits' skin detail, modelling of the eye sockets and lips, or likeness. Seen on screen:
+front and three-quarter close-ups of all 30 on the high tier, idle pose, in `sheet.html`. Not seen: the faces in the
+running game, on the low and medium tiers (unit-tested to build), or in motion (long tails and beards are skinned to
+the head and upper back but were not watched in a clip).
