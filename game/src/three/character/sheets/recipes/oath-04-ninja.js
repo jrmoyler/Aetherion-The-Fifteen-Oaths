@@ -53,7 +53,7 @@ export default {
     { use: 'strap', color: 'leather', width: .018, thick: .004, anchor: { at: .2, size: .012, color: 'brass' }, path: [
       { th: -50, y: 'shoulder', dy: -.03, off: .013 }, { th: 24, y: 'ribs', dy: .02, off: .014 }, { th: 92, y: 'waist', dy: .01, off: .014 },
       { th: 168, y: 'ribs', dy: .0, off: .014 }, { th: 228, y: 'shoulder', dy: -.03, off: .013 }, { th: 270, y: 'shoulder', dy: .004, off: .014 } ] },
-    { use: 'p.scallops', side: 'R', tiers: 3, size: [.15, .1, .145], shift: [.005, .035, 0], step: .06, out: .034, ribs: 7, ribDepth: .013, scallop: .2, flare: .034, color: 'nacre', dark: 'nacreWarm', mat: 'nacre', rim: 'brass', rimMat: 'brass' },
+    { use: 'p.scallops', side: 'R', tiers: 3, size: [.15, .1, .145], shift: [.005, .035, 0], step: .046, out: .028, ribs: 7, ribDepth: .014, scallop: .09, flare: .03, color: 'nacre', dark: 'nacreWarm', mat: 'nacre', rim: 'brass', rimMat: 'brass' },
     { use: 'x.shards', at: -62, arc: 30, from: ['shoulder', .03], to: ['armpit', .01], rows: 2, cols: 2, off: .014, thick: .007, lift: .02, jitter: .2, round: .92, overlap: .7, ridge: .01, color: 'nacre', dark: 'nacreWarm', mat: 'nacre', rim: 'brass', rimMat: 'brass', seed: 9 },
     { use: 'b.studs', on: 'trunk', at: [[['chest', .03], 2]], r: .02, height: .008, off: .016, color: 'brass', mat: 'brass', rim: 'brass', rimMat: 'brass' },
     { use: 'strap', color: 'leather', width: .018, thick: .004, path: [
@@ -65,8 +65,8 @@ export default {
     { use: 'b.guard', limb: 'arm', from: 1.24, to: 1.82, phi: 95, arc: 82, off: .008, thick: .008, bulge: .006, ridge: .006, flare: .008, color: 'nacre', mat: 'nacre', trim: 'brass', trimMat: 'brass', trimWidth: .006 },
     // Fin blades: one swept off the back of each forearm past the elbow.
     { use: 'p.shell', name: 'fins', side: 'both', on: { limb: 'arm', t: 1.74, phi: 150, off: .004 }, nu: 4, nv: 9, thick: .012, edge: 'brass', edgeMat: 'brass', plates: [
-      { spine: [[0, 0, 0], [0, .1, .035], [0, .2, .1], [0, .27, .19]], width: [[0, .03], [.3, .042], [.7, .03], [1, .003]], cup: .5, ridge: .008, color: 'nacre', dark: 'nacreWarm', mat: 'nacre' },
-      { spine: [[.012, .0, 0], [.016, .08, .02], [.02, .15, .065]], width: [[0, .022], [.4, .03], [1, .003]], cup: .4, color: 'green', dark: 'greenDark', mat: 'nacre', edge: null } ] },
+      { spine: [[0, 0, 0], [0, .07, .022], [0, .13, .06], [0, .18, .115]], width: [[0, .03], [.3, .04], [.7, .028], [1, .003]], cup: .5, ridge: .008, color: 'nacre', dark: 'nacreWarm', mat: 'nacre' },
+      { spine: [[.012, .0, 0], [.016, .05, .012], [.02, .1, .04]], width: [[0, .022], [.4, .03], [1, .003]], cup: .4, color: 'green', dark: 'greenDark', mat: 'nacre', edge: null } ] },
     // Knee caps, hip straps.
     { use: 'band', limb: 'leg', at: .2, width: .016, off: .006, thick: .004, color: 'leather', mat: 'leather' },
     // Sealed reservoir on the back.

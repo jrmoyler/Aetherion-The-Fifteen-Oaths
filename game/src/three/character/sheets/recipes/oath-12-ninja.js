@@ -28,7 +28,7 @@ export default {
   groom: { hair: false, gear: false },
   parts: [
     // Bare arms from the shoulder: modelled deltoid, biceps, triceps and forearm.
-    { use: 'x.physique', part: 'arm', from: -.2, to: 1.2, power: 1.7, define: 1.25 },
+    { use: 'x.physique', part: 'arm', from: -.2, to: 1.2, power: 1.45, define: 1.4 },
     // Dark woven undershirt, high in the neck; the oxblood leather vest is cut over it.
     { use: 'shirt', color: 'under', sleeve: 0, collar: 'neck', off: .006 },
     { use: 'neck', color: 'under' },

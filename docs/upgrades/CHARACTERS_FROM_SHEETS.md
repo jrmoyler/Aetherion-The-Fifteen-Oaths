@@ -77,16 +77,16 @@ reference-092..095 are sorcerer line-ups and 096..098 ninja line-ups across elem
 | 01 | FIRE - Kiln Oath | reference-090 | reference-091 | reference-113 | **done** (see below) | **done** (see below) |
 | 02 | FROST - Rime Archive | reference-089 | reference-088 | reference-112 | **partial** (see below) | **partial** (see below) |
 | 03 | LIGHTNING - Storm Relay | reference-085 | reference-087 | reference-111 | **partial** (see below) | **partial** (see below) |
-| 04 | WATER - Tidal Covenant | reference-084 | reference-086 | reference-110 | **partial** (see below) | **partial** (see below) |
-| 05 | EARTH & CRYSTAL - Fault Choir | reference-082 | reference-083 | reference-109 | **partial** (see below) | **partial** (see below) |
+| 04 | WATER - Tidal Covenant | reference-084 | reference-086 | reference-110 | **done**, with differences (Partials pass) | **partial** (see below) |
+| 05 | EARTH & CRYSTAL - Fault Choir | reference-082 | reference-083 | reference-109 | **done**, with differences (Partials pass) | **partial** (see below) |
 | 06 | WIND & SOUND - Reed Resonance | reference-081 | reference-080 | reference-108 | partial (see below) | done (see below) |
 | 07 | NATURE - Graft Sanctuary | reference-079 | reference-078 | reference-107 | partial (see below) | done (see below) |
 | 08 | POISON - Bitterglass Guild | reference-077 | reference-076 | reference-106 | done (see below) | done (see below) |
 | 09 | LIGHT & HOLY - Oath of Daybreak | reference-075 | reference-074 | reference-105 | partial (see below) | done (see below) |
 | 10 | COSMIC & GRAVITY - Tidal Observatory | reference-073 | reference-072 | reference-104 | partial (see below) | done (see below) |
 | 11 | SHADOW & VOID - The Missing Court | reference-071 | reference-070 | reference-103 | partial (see below) | **done**, with differences |
-| 12 | BLOOD - Sanguine Covenant | reference-069 | reference-067 | reference-102 | partial (see below) | **done**, with differences |
-| 13 | ARCANE & ILLUSION - Folded Theatre | reference-068 | reference-066 | reference-100 | partial (see below) | partial (see below) |
+| 12 | BLOOD - Sanguine Covenant | reference-069 | reference-067 | reference-102 | **done**, with differences (Partials pass) | **done**, with differences |
+| 13 | ARCANE & ILLUSION - Folded Theatre | reference-068 | reference-066 | reference-100 | partial (see below) | **done**, with differences (Partials pass) |
 | 14 | TIME & MOTION - Escapement Road | reference-065 | reference-064 | reference-099 | **done**, with differences | partial (see below) |
 | 15 | TECH & FORCE - Impulse Foundry | reference-063 | reference-062 | reference-101 | **done**, with differences | **done**, with differences |
 
@@ -487,3 +487,98 @@ the leading thigh comes through hanging panels (10 tabard, 12 tasset, 09 tasset,
 weighted to the hips and thighs but do not collide. Not seen: these reworks in the running game, low and medium
 tiers on screen (unit-tested to build), cast clips. Hair was compared on the line-up only: 13 sorcerer's crop is
 too spiky; faces remain the stylised procedural head and are not likenesses.
+
+## Partials pass (four heroes, motion, folds, the running game)
+
+Evidence: `docs/qa/characters/oath-04-ninja.jpg`, `oath-05-ninja.jpg`, `oath-12-ninja.jpg`, `oath-13-sorcerer.jpg`
+(sheet | code, re-rendered through `game/sheet.html`, high tier, idle), `all-heroes-front.jpg` (all 30 again),
+`all-heroes-run.jpg` (all 30 mid-stride and in `attack_1`, three-quarter view, with the motion passes on) and
+`in-game-six-heroes.jpg` (the running game, offline: standing, running toward the camera, attacking).
+
+### The four heroes that were "partly"
+
+New builders in `builders-p.js` (`p.` prefix): `p.shell` (a swept shell plate along a spine on the head, a bone or a
+limb: cupped, ribbed, edged), `p.scallops` (tiers of ribbed scallop shells over a shoulder), `p.contour` (a lens
+panel sewn into a fitted suit, piped along its edge), `p.slabs`, `p.wedge` (a flat folded plate wing between two
+edges). `trousers` gained `low` (fullness slung down to the gather), `x.physique` shades by the curvature of its
+relief (`define`) and has more separation between muscle groups, `x.lapel` has `trimSpan`.
+
+- **oath-04-ninja (084): done, with differences.** The crest is now six layered shell plates (head units): a broad
+  ribbed bill from the crown out over the visor to a point, a smaller plate lapped over it, a rear plate kicked up
+  behind the crown, a cheek plate swept back down each side, and the sea-green fin between them, all rimmed in
+  brass. The right pauldron is three tiers of ribbed scallop shells with scalloped brass rims. The suit carries
+  piped lens panels (sea green down the flank, the front and outside of the thigh; lighter blue on the knee, calf,
+  upper arm and back) and brass contour lines. Fin blades: one swept off each forearm, three off each calf.
+  Differs: the painted crest plates are fewer, thicker and asymmetric (the top plate sweeps to one side) and its
+  bill reaches further down over the visor; the pauldron's shells are smoother and more regular than the painted
+  ones and it has no visible strap mount; the suit's lines are simpler than the painted seam pattern and the body
+  is less long-legged; hip straps and the forearm bracer straps are plain bands.
+- **oath-05-ninja (082): done, with differences.** Reads as layers now: a charcoal tunic with stiff short sleeves
+  hemmed in leather, four large fractured shale plates framed in sandstone over chest and back (twice the earlier
+  area, thicker), a wider and taller stone collar, the belt with pouches and amethyst, wide brown trousers slung
+  low and bloused over the knee band, shin wraps and plated boots; shoulders 30 % wider, heavier arms.
+  Differs: plates are four separate slabs per side of the body rather than the painted cuirass with a centre
+  seam and side lacing; trouser folds are procedural, not the painted crease pattern with patch pockets; the
+  forearm slabs are plain framed blocks; hair and mask are unchanged (hair is the other agent's).
+- **oath-12-ninja (069): done, with differences.** Arm skin is the painted light tan (`#ad8463`, was a dark
+  orange brown); arms are modelled from the shoulder cap with deltoid, biceps, triceps and forearm groups and
+  shaded grooves; shoulders are 22 % wider and the chest broader, so the vest's straps run out to the shoulder
+  edge as painted; vest piping is thin dark red instead of bright steel; chains hang lower with heavier links.
+  Differs: muscle definition is softer than the painted striations (it is relief plus vertex shading, no
+  veins or sharp separations); the deltoid still reads rounder than the painted squared shoulder; the helm is
+  rounder than the painted almond; tassets are single panels without iron corners.
+- **oath-13-sorcerer (066): done, with differences.** Collar wings are flat folded triangles from the collar bone to
+  a point beyond each shoulder, front and back, edged in gold (were curved horns standing too high). Skirt: a
+  short jacket peplum all round, one long embroidered plum panel over the left leg cut to a point (the right leg
+  shows its trousers, as painted), folded mauve lacquer on the diagonal behind the left leg, a long plum panel
+  behind the right leg and a longer mauve fold between them. Lapel trims are thin gold.
+  Differs: the plum panel has no gold arcs; the wings are single planes without the painted second fold; where
+  the sheet's front and back views disagree the front was followed for the front panels and the back view for
+  the back ones; hair is unchanged here (the other agent's).
+
+### Motion: cloth gives way to the body (`clearance.js`)
+
+A costume is one linear-blend-skinned mesh, so hanging cloth could not know a knee was coming through it. Two
+passes now run in the vertex program after skinning, for every hero and every tier, with a twin in plain JS
+(`settle`) used by the tests and a Node preview:
+
+1. **Clearance.** Every builder of hanging cloth (`skirt`, `b.coat`, `b.hang` and whatever is laid on a coat,
+   `c:drape`) takes its weights from one function, `hangSkin`, which also marks the vertex. The weights now depend
+   only on the direction from the body's axis and the height, so layers worn over each other move as one. After
+   the build, each marked vertex stores its outward direction and how far beyond the legs it hung along that
+   direction in the bind pose. In any pose it is pushed along that direction until it stands that far beyond the
+   thigh and shin of both legs again (four tapered capsules; their radii are measured from what the legs wear,
+   knee cops included). Nothing moves in the bind pose, and layers keep their order because each keeps its own
+   distance along the same line.
+2. **Sleeve hang.** Cloth emitted by `shirt`, `b.sleeve` and `c:bellSleeve` that stands off the forearm stores
+   its stand-off vector; each frame it is turned toward the ground, so a sleeve mouth draws in over the arm and
+   hangs below it whichever way the arm points, instead of standing round a raised wrist like a dish.
+
+The shadow pass uses a depth material with the same code. Tests (`clearance.test.mjs`): in a synthetic stride no
+more than 2 % of free-hanging vertices of any hero remain more than 2 cm inside a leg (before the pass: several
+hundred per hero); hanging cloth does not move in the bind pose; raised bell sleeves drop; both materials carry
+the pass.
+
+Checked for all 30 in the Node preview (run at four phases, sprint, dodge, `attack_1` at two phases) and on screen
+in the browser line-ups (`all-heroes-run.jpg`). What still shows:
+- A front tabard is narrower than a knee cop, so the outer half of a raised armoured knee still shows beside it
+  (oath-10-ninja); the cloth itself now lies over the knee instead of being cut by it.
+- The pass moves vertices along a fixed outward direction; a leg that comes at a panel from the side (a side
+  tasset when the thigh swings across) can still graze it for a frame.
+- Chains and rigid kit hung on the legs are not cloth and do not react (oath-12-ninja's chains pass through
+  the tassets when a thigh lifts).
+- Arms are not collided with anything: a hand can enter a coat skirt or a wide sleeve in an attack.
+- Long coats are lifted by a kicked-back shin rather than parting; the back of the coat tents over the calf.
+
+### Folds (`folds.js`)
+
+After the build every vertex of woven cloth and soft leather gets `fd` (metres along its limb or up the trunk,
+direction around that axis, how loose the cloth is there, measured against the form) and `ff` (how strongly it
+rucks into rings, how strongly it falls into pleats): rings at elbows, knees, armpits, the crotch and above a
+gather or boot; pleats drawn into the belt, deeper on looser cloth, and long folds deepening toward the hem of
+anything that hangs. The fragment program turns these into relief through the same bump path as the weave and
+shades the valleys. Skin, hair, metal, ceramic, glass and the other hard kinds carry zeros (tested) and are
+untouched. Seen on screen at close range on oath-01-ninja and oath-12-sorcerer and in every later render.
+Limits: it is shading, not geometry (silhouettes stay smooth); folds are fixed in rest space, they do not
+change as a joint bends.
+
