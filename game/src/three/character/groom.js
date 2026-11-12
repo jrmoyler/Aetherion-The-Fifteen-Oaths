@@ -141,7 +141,7 @@ export function applyGroom(body, desc, quality = 'high', wears = null) {
   const prof = kit.profile;
   const skin = wears?.sheet ? own(skinMaterial(prof, H, new Vector3())) : applyReferenceFace(own(skinMaterial(prof, H, new Vector3())), key, H);
   add(kit.head.skinGeo, skin);
-  const eyeMat = own(eyeMaterial(prof.eye, new Vector3()));
+  const eyeMat = own(eyeMaterial(prof.eye, new Vector3(), prof.sheet ? 1.3 * (prof.irisScale ?? 1) : 1));
   const eyeMeshes=[];
   for (const e of kit.head.eyes) { const m = add(e.geo, eyeMat, { shadow: false }); m.position.copy(e.center);eyeMeshes.push(m); }
   const lidMeshes=kit.head.lids.map(geo=>add(geo,skin));
@@ -150,7 +150,7 @@ export function applyGroom(body, desc, quality = 'high', wears = null) {
   if (ownHair && kit.groom.cap && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cap, own(hairMaterial(hairColor, false, q)), { shadow: true });
   if (ownHair && kit.referenceHair) add(kit.referenceHair.geometry, own(kit.referenceHair.material));
   if (ownHair && kit.groom.cards && !kit.cover.hood && !kit.referenceHair) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
-  else if (kit.groom.cards && prof.beard && wears?.beard !== false) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
+  else if (kit.groom.cards && prof.beard && wears?.beard !== false && wears?.hair !== false) add(kit.groom.cards, own(hairMaterial(hairColor, true, q)), { order: 1 });
   const browColor = new Color(hairColor).multiplyScalar(prof.age > .6 ? .85 : .7).getStyle();
   // Sheet heroes' brows are painted in the skin shader (head.js); the hair-card brows read as scribbles beside them.
   if (!wears?.sheet && (!ownGear || !kit.cover.eyes) && (!ownHair || !kit.referenceHair)) add(kit.groom.brows, own(hairMaterial(browColor, true, q)), { shadow: false, order: 1 });

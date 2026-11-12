@@ -21,7 +21,7 @@ export default {
   build: { width: 1.0, depth: 1.0, arm: .94, leg: .98, neck: .96 },
   keep: ['weapon'],
   builders: C,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'shirt', color: 'charcoal', sleeve: 1.95, flare: .004, off: .009, cap: .012, slack: .003, collar: 'neck' },
     // Plum satin wrap from the right shoulder across the chest and over the back, piped in silver.
@@ -58,6 +58,6 @@ export default {
     { use: 'c:headBand', y: .09, height: .07, phi: [62, 298], off: .03, thick: .012, color: 'leather' },
     { use: 'c:kit', name: 'mask', side: 'both', on: { head: [.2, .1, .36], turn: [0, 40, 0] }, parts: [{ s: 'rbox', d: [.05, .04, .012, .006], c: 'steel', m: 'steel' }, { s: 'rbox', d: [.026, .02, .006, .003], at: [0, 0, .01], c: 'steelDark', m: 'steel' }] },
     { use: 'c:kit', name: 'mask', on: { head: [0, .09, -.5] }, parts: [{ s: 'ring', d: [.04, .04, .013, 12, 5], c: 'steel', m: 'steel' }] },
-    { use: 'hair', style: 'spiky', streak: 'hairSheen', length: .27, density: 1.15, lift: .03, fringe: .34 },
+    { use: 'hair', style: 'tousled', streak: 'hairSheen', top: .36, side: .24, back: .3, bang: .26, lift: .05, flick: .6, mess: .8, fringe: .34, count: 170 },
   ],
 };

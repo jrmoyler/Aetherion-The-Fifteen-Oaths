@@ -19,7 +19,7 @@ export default {
   build: { width: 1.3, depth: 1.22, bust: .034, hips: 1.26, waist: 1.14, arm: 1.5, leg: 1.5, calf: 1.08, shoulder: 1.14, neck: 1.08 },
   keep: ['weapon'],
   builders: { ...A, ...X },
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'x.physique', part: 'arm', from: -.2, to: 2, power: 1.7 },
@@ -54,8 +54,7 @@ export default {
       { s: 'rock', size: [.085, .07, .085], seed: 3, at: [-.29, .45, .06], color: 'sand', mat: 'stone' },
       vein(-.33, .3, .175, .024, .13, [24, 0, 20]), vein(-.27, .2, .17, .019, .1, [30, 0, -30]), vein(-.39, .18, .14, .017, .09, [14, 40, 60]),
       { s: 'box', size: [.05, .014, .014], at: [-.2, .32, .04], color: 'leather', mat: 'leather' }, { s: 'box', size: [.05, .014, .014], at: [-.2, .2, .04], color: 'leather', mat: 'leather' } ] },
-    { use: 'hair', style: 'bun', color: 'hair', knot: { at: [0, .06, -.44], radius: .17, tie: 'tie' } },
-    { use: 'a/fringe', color: 'hair', count: 6, span: 1.2, from: .4, to: .1, sideTo: -.3, width: .03, sweep: .5 },
+    { use: 'hair', style: 'updo', wave: .03, fringe: .33, knot: { at: [0, -.02, -.5], radius: .16, kind: 'coil', tie: 'tie' }, tendrils: [[48, .28, .3, .03, .02], [-48, .28, .32, .03, .02], [72, .15, .22, .025], [-72, .15, .2, .025]] },
     { use: 'hands', glove: 'glove', fingerless: true, scale: 1.08 },
   ],
 };

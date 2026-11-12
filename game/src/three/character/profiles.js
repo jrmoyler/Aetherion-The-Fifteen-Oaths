@@ -69,6 +69,41 @@ Object.values(PROFILES).forEach((profile, i) => {
   profile.face = Object.fromEntries(['jaw','brow','nose','lip','chin','cheek','noseWidth','depth'].map((name,j)=>[name,SCULPTS[i][j]]));
 });
 
+// The person on each sheet's FACE panel (assets/references/reference-062..091): complexion, age, the build of the
+// face and what is painted on it. `face` adds to the sculpt above (fat, gaunt, bridge, tip, mouthW); `look` drives
+// the painted features in head.js (brows, lashes, lips, freckles, age spots, frown lines, stubble).
+const FACES = {
+  'oath-01-ninja': { skin: '#c9996f', eye: '#3b2616', age: .2, face: { jaw: .8, chin: 1.08, cheek: 1, nose: 1.02, noseWidth: .9, lip: .95 }, eyeOpen: .017, eyeTilt: .15, look: { browThick: .021, browSlope: .014, crease: .45 } },
+  'oath-01-sorcerer': { skin: '#b68b68', eye: '#3a2a1c', age: .8, face: { fat: .75, jaw: .86, cheek: 1.25, nose: .95, noseWidth: 1.2, tip: .7, lip: .95, mouthW: 1.05 }, eyeOpen: .015, eyeTilt: .06, look: { browColor: '#6a625c', browThick: .015, spots: .25, lipAlpha: .45, frown: .3 } },
+  'oath-02-ninja': { skin: '#d6ab8b', eye: '#3a2a20', age: .18, face: { fat: .25, jaw: .66, cheek: 1.2, nose: .85, noseWidth: .95, lip: 1.15, chin: .7 }, eyeOpen: .021, eyeTilt: .13, look: { freckles: .5, lipColor: '#b0625a', crease: .5 } },
+  'oath-02-sorcerer': { skin: '#d0b9aa', eye: '#8ea3b0', age: .95, face: { gaunt: .95, jaw: .68, cheek: 1.15, nose: 1.3, bridge: 1, noseWidth: .85, lip: .6, chin: 1.1, brow: 1.3 }, eyeOpen: .014, eyeTilt: .04, look: { browColor: '#f2f0ea', browThick: .025, browSlope: .022, browLen: .22, spots: .3, lipAlpha: .2, frown: .7, shadow: .8 } },
+  'oath-03-ninja': { skin: '#ab7f5e', eye: '#2e1c10', age: .25, face: { gaunt: .3, jaw: .74, cheek: 1.05, nose: 1.15, noseWidth: .92, lip: .95, chin: 1.1 }, eyeOpen: .016, eyeTilt: .13, look: { browThick: .021, browSlope: .018, stubble: .28, crease: .6 } },
+  'oath-03-sorcerer': { skin: '#7c4f38', eye: '#24160e', age: .35, face: { fat: .9, jaw: .9, cheek: 1.25, nose: .9, noseWidth: 1.4, tip: .8, lip: 1.5, mouthW: 1.08 }, eyeOpen: .019, look: { lipColor: '#7a3f3a', lipAlpha: .6, browThick: .015, shadow: .4, blush: .2 } },
+  'oath-04-ninja': { skin: '#b27d58', eye: '#2a2018', age: .18, face: { jaw: .66, cheek: 1.2, lip: 1.25, noseWidth: 1.05 }, look: { freckles: .5 } },
+  'oath-04-sorcerer': { skin: '#8b5b3c', eye: '#5a4a3c', age: .82, face: { jaw: .86, brow: 1.25, nose: 1.1, noseWidth: 1.3, tip: .6, lip: .9, cheek: 1.05 }, eyeOpen: .016, look: { browColor: '#e4e1da', browThick: .024, browSlope: .014, frown: .5, spots: .2, shadow: .45 } },
+  'oath-05-ninja': { skin: '#a56f4a', eye: '#5d6a45', age: .28, face: { jaw: .92, chin: 1.25, brow: 1.3, nose: 1.1, noseWidth: 1.08, cheek: 1.1 }, eyeOpen: .016, look: { browThick: .024, browSlope: .02, frown: .4, stubble: .3 } },
+  'oath-05-sorcerer': { skin: '#a3724f', eye: '#3a2414', age: .3, face: { jaw: .74, cheek: 1.2, nose: .95, noseWidth: 1.15, lip: 1.35 }, eyeOpen: .02, look: { freckles: .55, lipColor: '#8a4a40', browThick: .016, shadow: .45 } },
+  'oath-06-ninja': { skin: '#96643f', eye: '#2a1c12', age: .22, face: { gaunt: .2, jaw: .68, cheek: 1.25, lip: 1.3 }, look: { freckles: .5, shadow: .45 } },
+  'oath-06-sorcerer': { skin: '#c39c78', eye: '#3a2a1c', age: .75, face: { gaunt: .85, jaw: .72, cheek: 1.25, nose: 1.15, noseWidth: .9, lip: .7, chin: 1.05 }, eyeOpen: .014, eyeTilt: .15, look: { crease: .4, browColor: '#77726d', browThick: .016, browSlope: .016, spots: .2, lipAlpha: .25 } },
+  'oath-07-ninja': { skin: '#5c3824', eye: '#2a1a10', age: .25, face: { jaw: .82, noseWidth: 1.3, lip: 1.4, cheek: 1.15 }, look: { shadow: .4 } },
+  'oath-07-sorcerer': { skin: '#ae8462', eye: '#3a2a1c', age: .93, face: { fat: .3, jaw: .78, cheek: 1.2, nose: 1, noseWidth: 1.25, tip: .6, lip: .8 }, eyeOpen: .013, eyeTilt: .05, look: { crease: .5, browColor: '#9a958f', browThick: .013, spots: .45, lipAlpha: .3 } },
+  'oath-08-ninja': { skin: '#c2916c', eye: '#33200f', age: .28, face: { jaw: .86, brow: 1.3, nose: 1.15, cheek: 1.05 }, eyeOpen: .016, look: { browThick: .022, browSlope: .022, frown: .5, stubble: .3 } },
+  'oath-08-sorcerer': { skin: '#d2ae96', eye: '#6b6a58', age: .62, face: { gaunt: .45, jaw: .7, cheek: 1.2, nose: 1.1, noseWidth: .88, lip: .85, chin: .9 }, eyeOpen: .017, look: { browColor: '#55504d', browThick: .014, browArch: .028, lipColor: '#a8675f', frown: .3 } },
+  'oath-09-ninja': { skin: '#613b29', eye: '#24160e', age: .22, face: { jaw: .68, cheek: 1.25, noseWidth: 1.25, lip: 1.45 }, look: { lipColor: '#6e3833', lipAlpha: .65, shadow: .4, blush: .2 } },
+  'oath-09-sorcerer': { skin: '#b88a66', eye: '#6a5a48', age: .78, face: { gaunt: .3, jaw: .8, cheek: 1.1, nose: 1.25, bridge: .6, noseWidth: 1, lip: .8 }, eyeOpen: .016, look: { browColor: '#cfcbc4', browThick: .021, browSlope: .012, spots: .15 } },
+  'oath-10-sorcerer': { skin: '#bb8c67', eye: '#2a1a10', age: .55, face: { fat: 1, jaw: .92, cheek: 1.25, nose: .9, noseWidth: 1.25, tip: .5, lip: 1 }, eyeOpen: .014, eyeTilt: .12, look: { crease: .4, browThick: .014, lipAlpha: .5, frown: .25 } },
+  'oath-11-ninja': { skin: '#e0c2ac', eye: '#3a2e2a', age: .2, face: { jaw: .62, cheek: 1.2 }, eyeOpen: .017, eyeTilt: .2, look: { crease: .35, liner: 1, browThick: .011, browSlope: .02 } },
+  'oath-11-sorcerer': { skin: '#a39286', eye: '#8a6a3a', age: .85, face: { gaunt: 1, jaw: .7, cheek: 1.3, brow: 1.35, nose: 1.3, bridge: .8, noseWidth: .85, lip: .6, chin: 1.05 }, eyeOpen: .014, look: { shadow: .9, browColor: '#77736e', browThick: .018, browSlope: .026, frown: .8, stubble: .7, stubbleColor: '#b5b1aa', lipAlpha: .15 } },
+  'oath-12-sorcerer': { skin: '#7a4c33', eye: '#24160e', age: .32, face: { gaunt: .2, jaw: .68, cheek: 1.3, nose: 1, noseWidth: 1.2, lip: 1.4 }, eyeOpen: .019, look: { lipColor: '#7b3c34', lipAlpha: .65, browThick: .014, browArch: .03, shadow: .4, blush: .2 } },
+  'oath-13-sorcerer': { skin: '#e4c9b6', eye: '#6a6460', age: .25, face: { gaunt: .15, jaw: .64, cheek: 1.25, nose: .95, noseWidth: .85, lip: 1.1, chin: .8 }, eyeOpen: .017, eyeTilt: .2, look: { liner: 1, shadow: .75, lipColor: '#9c3a3c', lipAlpha: .85, gloss: .7, browThick: .014, browSlope: .018, browArch: .02, crease: .5 } },
+  'oath-14-ninja': { skin: '#68412c', eye: '#1e140c', age: .28, face: { jaw: .9, chin: 1.2, noseWidth: 1.35, lip: 1.35, cheek: 1.1 }, look: { stubble: .6, goatee: 1, lipAlpha: .35, shadow: .4 } },
+  'oath-14-sorcerer': { skin: '#dab394', eye: '#3a2a1c', age: .22, face: { jaw: .64, cheek: 1.2, nose: .85, noseWidth: .92, lip: 1.15 }, eyeOpen: .02, eyeTilt: .16, look: { crease: .5, freckles: .6, lipColor: '#b9665c', browThick: .014 } },
+  'oath-15-sorcerer': { skin: '#84563a', eye: '#2a1c12', age: .45, face: { jaw: .92, chin: 1.2, brow: 1.35, nose: 1.1, noseWidth: 1.3, lip: 1.1, cheek: 1.05 }, eyeOpen: .017, look: { browThick: .022, browSlope: .024, frown: .8, stubble: 1, shadow: .45 } },
+};
+// Painted skin is less saturated than a lit, tone-mapped albedo of the same hue: pull the sampled tones in.
+const soften = (hex) => { const n = parseInt(hex.slice(1), 16), rgb = [n >> 16 & 255, n >> 8 & 255, n & 255], grey = rgb[0] * .3 + rgb[1] * .59 + rgb[2] * .11; return '#' + rgb.map((v) => Math.round(grey + (v - grey) * .68).toString(16).padStart(2, '0')).join(''); };
+for (const [id, over] of Object.entries(FACES)) Object.assign(PROFILES[id], { ...over, skin: soften(over.skin), face: { ...PROFILES[id].face, ...over.face } });
+
 export function profileFor(key, identity = '') {
   const base = PROFILES[key] ?? PROFILES['oath-01-ninja'];
   if (!identity) return base;
@@ -84,7 +119,7 @@ export function profileFor(key, identity = '') {
 // Sheet heroes (code-built costumes) get a head tuned to be read at full-body distance beside a painted sheet:
 // stronger relief and painted shading (see head.js), wider eye aperture, and per-sex eye tilt.
 export function sheetProfile(profile) {
-  return profile.sheet ? profile : { ...profile, sheet: true, eyeOpen: profile.eyeOpen ?? (profile.sex === 'f' ? .021 : .018), eyeTilt: profile.eyeTilt ?? (profile.sex === 'f' ? .14 : .08) };
+  return profile.sheet ? profile : { ...profile, sheet: true, eyeW: profile.eyeW ?? .068, eyeOpen: (profile.eyeOpen ?? (profile.sex === 'f' ? .021 : .018)) * 1.35, eyeTilt: profile.eyeTilt ?? (profile.sex === 'f' ? .14 : .08) };
 }
 // Head height (chin to crown) for a sheet hero whose head joint is at `headY` in bind pose: the figure stands
 // about eight heads tall, measured from its joints so a tall hat or a pack on the back cannot inflate the head.

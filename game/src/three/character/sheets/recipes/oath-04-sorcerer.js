@@ -22,7 +22,7 @@ export default {
   build: { width: 1.3, depth: 1.38, belly: .045, hips: 1.2, waist: 1.28, arm: 1.35, leg: 1.4, neck: 1.12, shoulder: 1.1 },
   keep: ['weapon'],
   builders: A,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'wrap', limb: 'arm', from: 1.25, to: 1.94, color: 'green', off: .006, pitch: .02 },
@@ -45,7 +45,7 @@ export default {
     { use: 'cowl', color: 'robe', rolls: 2, radius: .036, rise: .034 },
     { use: 'a/yoke', color: 'robe', mat: 'cloth', inner: .1, outer: .215, off: .016, thick: .008, discs: { count: 9, r: .064, at: .66, lift: .01, color: 'nacre', rim: 'brass', phase: 0 } },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.6, toeCap: 'brass', heelPlate: 'brass', cuff: 'brass', plateMat: 'iron', straps: 3, strapColor: 'leather', buckle: 'brass', bulk: 1.2 },
-    { use: 'hair', style: 'spiky', color: 'hair', streak: 'hairGrey', length: .13, density: 1.4, fringe: .34 },
+    { use: 'hair', style: 'coils', color: 'hair', streak: 'hairGrey', top: .035, curl: .034, count: 300, fringe: .35, temple: .03, beard: { style: 'full', length: .1, moustache: .08, cheek: -.28 } },
     { use: 'hands', scale: 1.08 },
   ],
 };

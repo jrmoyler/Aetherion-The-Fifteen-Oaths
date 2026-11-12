@@ -48,7 +48,7 @@ export default {
       { s: 'leaf', len: .25, width: .15, thick: .012, bend: .085, base: .9, at: [0, 0, -.003], color: 'frost', mat: 'ice' },
       { s: 'leaf', len: .236, width: .13, thick: .02, bend: .081, base: .9, color: 'robe', mat: 'felt' } ] },
     { use: 'gloveCuff', color: 'glove', strap: 'leatherDark' },
-    { use: 'a/beard', color: 'beard', width: .19, tip: .16, length: 1.3 },
+    { use: 'hair', style: 'none', color: 'beard', beard: { style: 'long', length: .14, point: 1.15, moustache: .46, cheek: -.37 } },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.86, straps: 1, strapColor: 'leatherDark', soleHeight: .03 },
     { use: 'hands', glove: 'glove', fingerless: true },
   ],

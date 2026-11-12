@@ -13,7 +13,7 @@ export default {
   build: { width: 1.2, depth: 1.14, hips: 1.08, waist: 1.02, arm: 1.3, upperArm: 1.1, leg: 1.26, neck: 1.15, shoulder: 1.12 },
   keep: ['weapon'],
   builders: { ...B, ...X },
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'x.physique', part: 'arm', from: -.2, to: 1.2, power: 2 },
     { use: 'b.torso', from: ['belt', -.02], to: 'base', color: 'under', off: .006, slack: .002 },
@@ -58,7 +58,7 @@ export default {
     { use: 'b.studs', on: 'arm', at: [[1.42, 30], [1.68, 20]], r: .014, off: .024, color: 'ember', rim: 'barkDark', rimMat: 'bark', oval: 1.5 },
     { use: 'band', limb: 'arm', at: 1.16, width: .022, off: .024, thick: .005, color: 'leatherDark', buckle: { phi: -40 } },
     { use: 'gloveCuff', color: 'glove', from: 1.9, to: 2.05, off: .007 },
-    { use: 'b.hairCap', color: 'hair', front: .3, side: .2, nape: .05, lift: .03, curl: .03, freq: 10 },
+    { use: 'hair', style: 'coils', top: .03, curl: .024, fade: { to: .05, from: .25, min: .35 }, fringe: .34, count: 300 },
     { use: 'b.seedMask', height: .7 },
     { use: 'hands', glove: 'glove', fingerless: true },
   ],

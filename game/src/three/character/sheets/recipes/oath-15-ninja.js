@@ -39,7 +39,7 @@ export default {
   build: { width: 1.08, depth: 1.06, bust: .024, waist: .96, hips: 1.12, arm: 1.18, leg: 1.16, shoulder: 1.04 },
   keep: ['weapon'],
   builders: C,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'skinLimb', limb: 'arm', from: -.15, to: 1.16 },
     { use: 'c:kit', name: 'skinLimb', side: 'both', on: { bone: 'upperarm.L' }, parts: [{ s: 'ball', d: [.069, .066, .069, 14, 9], c: 'skin', m: 'skin' }] },
@@ -84,6 +84,6 @@ export default {
     { use: 'c:kit', name: 'faceplate', side: 'both', on: { head: [.385, -.03, -.03] }, parts: [
       { s: 'cyl', d: [.085, .016, .085, 16], rot: [0, 0, 90], c: 'steelDark', m: 'steel' }, { s: 'cyl', d: [.055, .024, .05, 14], rot: [0, 0, -90], c: 'steel', m: 'steel' }, { s: 'cyl', d: [.024, .03, .024, 10], rot: [0, 0, 90], c: 'graphiteDark', m: 'steel' } ] },
     { use: 'c:headBand', name: 'faceplate', y: -.03, height: .07, phi: [92, 268], off: .03, thick: .012, color: 'leatherDark' },
-    { use: 'c:locks', count: 46, length: .56, r: .036, above: .14, back: .42, stand: .28, fringe: .31 },
+    { use: 'hair', style: 'locs', length: .42, count: 40, r: .04, stand: .1, back: .5, fade: { to: .0, from: .16, min: .3 }, fringe: .31 },
   ],
 };

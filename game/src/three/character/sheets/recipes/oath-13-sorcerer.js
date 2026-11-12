@@ -27,7 +27,7 @@ export default {
   build: { width: .97, depth: .98, bust: .024, waist: .86, hips: 1.1, shoulder: .96, arm: .9, leg: 1.0, neck: .9 },
   keep: ['weapon'],
   builders: { ...C, ...X, ...P },
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'shirt', color: 'aubergine', sleeve: 1.95, flare: .004, off: .009, cap: .014, slack: .003 },
@@ -72,7 +72,6 @@ export default {
     { use: 'hands', glove: 'glove', fingerless: true },
     { use: 'boots', top: 1.5, straps: 3, strapColor: 'leatherDark', buckle: 'silver', toeCap: 'silverDark', heelPlate: 'silverDark', plateMat: 'iron', soleHeight: .034 },
     // Short black hair swept across the brow, longer on the right.
-    { use: 'hair', style: 'spiky', streak: 'hairSheen', length: .3, density: 1.25, lift: .028, fringe: .32 },
-    { use: 'c:strands', width: .09, list: [[-40, .3, .44, .06, -.04], [-20, .34, .32, .07, -.09], [24, .34, .2, .06, .1]] },
+    { use: 'hair', style: 'tousled', streak: 'hairSheen', top: .4, side: .26, back: .24, bang: .3, lift: .055, flick: .3, mess: .5, sweep: .5, part: [-.35, .9, 0], fringe: .33, count: 170 },
   ],
 };

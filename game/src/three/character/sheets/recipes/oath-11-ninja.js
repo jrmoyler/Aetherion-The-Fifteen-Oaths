@@ -11,7 +11,7 @@ export default {
   build: { width: .95, depth: .97, bust: .024, waist: .86, hips: 1.1, seat: 1.06, arm: .9, leg: .98, neck: .92 },
   keep: ['weapon'],
   builders: C,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'skinLimb', limb: 'arm', from: .3, to: 1.05 },
     { use: 'shirt', sleeve: .5, flare: .014, cap: .008, slack: .003 },
@@ -51,7 +51,6 @@ export default {
     { use: 'c:headShell', top: [[-104, -.01], [-45, -.085], [0, -.07], [45, -.085], [104, -.01]], off: .024, color: 'cloth' },
     { use: 'c:headShell', phi: [-104, 5], top: [[-104, -.01], [-45, -.085], [0, -.07], [5, -.07]], bottom: [[-104, -.46], [-60, -.44], [-20, -.3], [5, -.14]], off: .032, color: 'bone', n: [16, 8] },
     // High ponytail tied in pale cloth, with loose locks left at the temples.
-    { use: 'hair', style: 'long', streak: 'hairSheen', length: .9, fringe: .33, knot: { at: [0, .38, -.43] }, tail: { length: 1.6, width: .15, tie: 'tie' } },
-    { use: 'c:strands', width: .075, list: [[38, .31, .46, .05, .03], [-38, .31, .46, .05, -.03], [62, .2, .4, .03, 0], [-62, .2, .4, .03, 0], [16, .345, .2, .05, .05], [-18, .345, .22, .05, -.05]] },
+    { use: 'hair', style: 'updo', streak: 'hairSheen', fringe: .33, count: 70, knot: { at: [0, .45, -.36], radius: .08, tie: 'tie' }, tail: { length: 1.5, width: .13, tie: 'tie', count: 20, rise: .2, back: .2 }, tendrilWidth: .05, tendrils: [[38, .31, .5, 0, .03], [-38, .31, .5, 0, .03], [62, .2, .42], [-62, .2, .42], [16, .345, .24, 0, .05], [-18, .345, .26, 0, .05]] },
   ],
 };

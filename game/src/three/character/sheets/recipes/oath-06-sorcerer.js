@@ -6,6 +6,8 @@ import { B } from '../builders-b.js';
 export default {
   id: 'oath-06-sorcerer', sheet: 'reference-080', title: 'Reed Sorcerer',
   palette: {
+    hairGrey: '#8f8c87',
+    hair: '#4a4745',
     linen: '#8f8168', linenShade: '#776a55', red: '#8e2e24', cord: '#7a2a20', trouser: '#4a403a', wood: '#5c3a22', woodDark: '#3c2616',
     bamboo: '#b98f4c', leather: '#4a392c', leatherDark: '#2e2621', brass: '#9a7a3c', iron: '#4a4541', boot: '#2c2724', sole: '#b08a5c', cloth: '#8f8168',
   },
@@ -13,7 +15,7 @@ export default {
   keep: ['weapon'],
   builders: B,
   // His grey top-knot and goatee are the groom's; the costume adds no hair of its own.
-  groom: { hair: true, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'b.neck' },
     { use: 'b.legs', color: 'trouser', to: 1.93, off: .009, folds: .002 },
@@ -35,5 +37,6 @@ export default {
     { use: 'b.pipeCarrier', at: 64, length: .25 },
     { use: 'b.resonator', height: .17 },
     { use: 'hands' },
+    { use: 'hair', style: 'updo', color: 'hair', streak: 'hairGrey', grey: .3, fringe: .38, temple: .07, count: 60, knot: { at: [0, .56, -.1], radius: .09, kind: 'coil' }, tendrils: [[78, .13, .2], [-78, .13, .2], [150, -.14, .16], [-150, -.14, .16]], beard: { style: 'goatee', length: .13, moustache: .06, width: .07 } },
   ],
 };

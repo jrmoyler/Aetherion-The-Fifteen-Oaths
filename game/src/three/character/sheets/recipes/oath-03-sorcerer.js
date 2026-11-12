@@ -23,7 +23,7 @@ export default {
   build: { width: 1.28, depth: 1.2, belly: .022, bust: .04, hips: 1.3, waist: 1.24, seat: 1.1, arm: 1.3, leg: 1.42, calf: .92, neck: 1.12, shoulder: 1.1 },
   keep: ['weapon'],
   builders: A,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'shirt', color: 'navyDark', sleeve: 1.32, flare: .012, off: .01, slack: .004, cap: .014 },
@@ -50,7 +50,7 @@ export default {
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.32, toeCap: 'ceramic', heelPlate: 'webbing', cuff: 'copper', plateMat: 'ceramic', straps: 3, strapColor: 'copper', buckle: 'copper', bulk: 1.6, soleHeight: .056 },
     { use: 'a/kit', name: 'ankle', on: 'foot', side: 'both', at: [.058, .105, -.012], items: [
       { s: 'cyl', r: .03, h: .014, rot: [0, 90, 0], color: 'copper', mat: 'copper' }, { s: 'cyl', r: .016, h: .02, rot: [0, 90, 0], color: 'tube', mat: 'steel', sides: 10 } ] },
-    { use: 'hair', style: 'bun', color: 'hair', knot: { at: [0, .52, -.1], radius: .25, tie: 'tie' } },
+    { use: 'hair', style: 'updo', wave: .02, fringe: .36, count: 80, curl: .03, knot: { at: [0, .56, -.12], radius: .2, kind: 'puff' } },
     { use: 'hands', glove: 'glove', fingerless: true, scale: 1.1 },
   ],
 };

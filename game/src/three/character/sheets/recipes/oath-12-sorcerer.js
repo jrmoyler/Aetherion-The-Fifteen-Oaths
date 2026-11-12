@@ -16,7 +16,7 @@ export default {
   build: { width: 1.06, depth: 1.06, bust: .028, waist: .92, hips: 1.14, arm: 1.0, leg: 1.04, neck: .95 },
   keep: ['weapon'],
   builders: C,
-  groom: { hair: false, gear: false },
+  groom: { hair: false, gear: false, beard: false },
   parts: [
     { use: 'neck' },
     { use: 'skinLimb', limb: 'arm', from: 1.6, to: 2.03 },
@@ -66,7 +66,7 @@ export default {
     { use: 'hands' },
     { use: 'boots', top: 1.56, straps: 3, strapColor: 'leather', buckle: 'brass', toeCap: 'brassDark', heelPlate: 'brassDark', plateMat: 'iron', soleHeight: .034 },
     // Braids drawn back into a low knot, with brass beads and earrings.
-    { use: 'hair', style: 'bun', streak: 'hairWarm', fringe: .34, knot: { at: [0, -.04, -.5], radius: .15, tie: 'bead' } },
+    { use: 'hair', style: 'cornrows', rows: 9, beads: 'bead', streak: 'hairWarm', fringe: .36, knot: { at: [0, -.06, -.5], radius: .17, kind: 'braid' }, tendrils: [[56, .26, .3, .035, .02], [-56, .26, .32, .035, .02]] },
     { use: 'c:kit', name: 'earring', side: 'both', on: { head: [.35, -.2, -.02] }, parts: [{ s: 'ring', d: [.022, .022, .006, 10, 5], rot: [0, 90, 0], c: 'bead', m: 'brass' }] },
   ],
 };
