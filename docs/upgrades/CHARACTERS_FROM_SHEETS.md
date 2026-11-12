@@ -545,6 +545,16 @@ Honest judgement, hero by hero (hair / face; "close" = the same kind of person a
 | 15 ninja | close: locs gathered on the crown over shaved sides | hidden by the faceplate |
 | 15 sorcerer | close: short coils, faded sides | close: brown, heavy brow and frown, painted short beard with a small goatee; beard is thinner than painted |
 
+Sculpt pass after review (the first heads read as flat-planed blocks): the sheet face is now built in
+`head.js` `sheetFace` only from smooth blended fields: an arched brow ridge flowing into the nasal bridge, deep orbits
+with a deeper inner corner and a lower-lid roll, a rounded nose ridge with a separate bulb, alar wings and nostril
+hollows, philtrum with its two ridges, an upper lip with a cupid's bow and tubercle, a fuller lower lip, mouth line and
+corners, cheekbone, cheek apple and the hollow under it, nose-to-mouth fold, jowl and marionette fold driven by age,
+chin and the groove above it. The cusp the old superellipse left down the midline is gone. Sheet heads use a denser
+mesh (220x168 high, 136x104 medium, 96x72 low; more triangles than before on every tier), eyelids are rolled shells
+standing off a flatter eyeball with iris, pupil and catchlight, ears have a helix rim and concha. The tousled
+fringe is now pairs of narrow strands of uneven length with rounded tips.
+
 What this is not: the heads are still smooth sculpted forms with painted features, lit by the stage lights. They do
 not have the painted portraits' skin detail, modelling of the eye sockets and lips, or likeness. Seen on screen:
 front and three-quarter close-ups of all 30 on the high tier, idle pose, in `sheet.html`. Not seen: the faces in the

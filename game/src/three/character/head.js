@@ -118,10 +118,10 @@ function sheetFace(X, Y, P, opts) {
   if (!opts.noSocket) dz -= .03 * g2((ax - eyeX) / .08, (Y + .002) / .05) + .016 * g2((ax - .078) / .034, (Y - .012) / .04) + .008 * gaunt * g2((ax - eyeX) / .1, (Y + .04) / .05);
   dz += .007 * g2((ax - eyeX) / .07, (Y + .068) / .022) - .006 * old * g2((ax - eyeX * .92) / .07, (Y + .092) / .014);
   // nose: a rounded ridge from the nasion to the tip, the bulb, the wings and the nostrils under them
-  const t = sm(.06, -.175, Y), ridge = (.014 + .082 * t ** 1.2) * P.nose * sm(-.235, -.19, Y);
+  const t = sm(.06, -.175, Y), ridge = (.014 + .086 * t ** 1.15) * P.nose * sm(-.235, -.19, Y) * sm(.12, .03, Y);
   dz += ridge * Math.exp(-((ax / ((.021 + .016 * t) * (.6 + .4 * nw))) ** 2.2));
   dz += .012 * (P.bridge ?? 0) * g2(X / .028, (Y + .04) / .045);
-  dz += (.04 + .014 * (P.tip ?? 0)) * P.nose * g2(X / (.04 * nw), (Y + .172) / .034);
+  dz += (.046 + .014 * (P.tip ?? 0)) * P.nose * g2(X / (.042 * nw), (Y + .176) / .036);
   const wing = g2((ax - .054 * nw) / .024, (Y + .192) / .026); dz += .03 * wing; dx += sgn * .008 * wing;
   dz -= .014 * g2((ax - .028 * nw) / .014, (Y + .218) / .01) + .012 * g2((ax - .085 * nw) / .014, (Y + .185) / .03);
   // cheekbone, the apple of the cheek, the hollow under it
