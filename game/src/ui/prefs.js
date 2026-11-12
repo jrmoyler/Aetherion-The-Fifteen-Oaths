@@ -4,6 +4,7 @@ const CHAR_KEY = 'aetherion.character';
 
 export const DEFAULTS = {
   master: 0.8, music: 0.55, sfx: 0.8, ambience: 0.7,
+  cameraFov: 52, cameraShake: 0.65, cameraLead: true,
   sensitivity: 1, invertY: false, showFps: false, reduceMotion: false, minimapRotate: false,
 };
 

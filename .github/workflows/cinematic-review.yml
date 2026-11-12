@@ -1,0 +1,50 @@
+name: Cinematic world review
+on:
+  pull_request:
+    paths: ['game/**', 'tools/qa/cinematic-browser.mjs', '.github/workflows/cinematic-review.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        tier: [low, high]
+        shard: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix game
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+      - run: cd game && npx playwright install --with-deps chromium
+      - name: Capture real Three.js client
+        env:
+          SOFTWARE_RENDER: '1'
+          TERRAIN_TIER: '${{ matrix.tier }}'
+          CAPTURE_SHARD: '${{ matrix.shard }}'
+          CAPTURE_SHARDS: '3'
+        run: |
+          node game/node_modules/vite/bin/vite.js game --host 127.0.0.1 --port 5173 > /tmp/cinematic-vite.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 30); do
+            curl -fsS http://127.0.0.1:5173/ > /dev/null && break
+            sleep 1
+          done
+          node tools/qa/cinematic-browser.mjs http://127.0.0.1:5173 captures
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cinematic-${{ matrix.tier }}-${{ matrix.shard }}
+          path: |
+            captures/
+            /tmp/cinematic-vite.log
+          retention-days: 14

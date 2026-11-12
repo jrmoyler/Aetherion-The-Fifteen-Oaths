@@ -69,7 +69,11 @@ export function createSettings(ui) {
     sec('03', 'Controls',
       slider('sensitivity', 'Look sensitivity', 0.2, 3, 0.05, (v) => `${v.toFixed(2)}×`),
       toggle('invertY', 'Invert vertical look')),
-    sec('04', 'Key reference', h('div', { class: 'ae-keys' }, keys.map(([a, k]) => h('div', null, h('span', null, a), h('kbd', null, k))))),
+    sec('04', 'Camera',
+      slider('cameraFov', 'Field of view', 40, 80, 1, (v) => `${v}°`),
+      slider('cameraShake', 'Impact shake', 0, 1, 0.05, pct),
+      toggle('cameraLead', 'Look ahead while moving')),
+    sec('05', 'Key reference', h('div', { class: 'ae-keys' }, keys.map(([a, k]) => h('div', null, h('span', null, a), h('kbd', null, k))))),
   );
 
   return { win, onOpen() {

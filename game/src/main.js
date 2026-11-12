@@ -70,10 +70,16 @@ async function startClient() {
   window.__aetherion = ctx;
   ctx.render.sceneDepth = postprocessing.depthTexture;
   // Source ability shaders sample the unfiltered equirectangular HDR directly;
-  // the world's PMREM room texture is a different layout and cannot replace it.
+  // the world's filtered PMREM texture is a different layout and cannot replace it.
+  let outdoorEnvironment = null;
   const sourceEnvironmentReady = new RGBELoader().loadAsync(sourceEnvironmentUrl).then(texture => {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     ctx.sourceEnvironmentTexture = texture;
+    // Reuse the shipped outdoor HDR for PBR reflections instead of a generic indoor room.
+    const outdoorPMREM = new THREE.PMREMGenerator(renderer);
+    try { outdoorEnvironment = outdoorPMREM.fromEquirectangular(texture); }
+    finally { outdoorPMREM.dispose(); }
+    scene.environment = outdoorEnvironment.texture;
   }).catch(error => console.warn('[abilities] Source reflection environment unavailable', error));
   ctx.input.setEnabled(false);
   function resize() {
@@ -97,7 +103,12 @@ async function startClient() {
   const atmosphere = initAtmosphere(ctx);
   ctx.surface = initSurfaceState(ctx);
   Object.defineProperty(ctx.render, 'timeOfDay', { get: () => atmosphere.timeOfDay, configurable: true });
-  ctx.render.setTimeOfDay = atmosphere.setTimeOfDay;
+  ctx.render.setTimeOfDay = (hour) => {
+    atmosphere.setTimeOfDay(hour); atmosphere.update(0);
+    const p = ctx.actors?.player?.position ?? camera.position;
+    sun.position.copy(p).add(atmosphere.sunOffset);
+    sun.target.position.copy(p); sun.target.updateMatrixWorld();
+  };
   ctx.render.setTimeScale = atmosphere.setTimeScale;
   ctx.render.setWeather = atmosphere.setWeather;
   Object.defineProperty(ctx.render, 'weather', { get: () => atmosphere.weather, configurable: true });
@@ -154,7 +165,7 @@ async function startClient() {
     objectiveBeacon.dispose(); ctx.input.dispose?.(); ctx.ui.audio?.dispose?.(); offPause();
     document.removeEventListener('visibilitychange', onVisibility);
     ctx.vfx.dispose?.(); ctx.actors.dispose?.(); ctx.surface.dispose(); atmosphere.dispose(); ctx.world.dispose?.();
-    ctx.sourceEnvironmentTexture?.dispose(); postprocessing.dispose(); envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
+    ctx.sourceEnvironmentTexture?.dispose(); postprocessing.dispose(); outdoorEnvironment?.dispose(); envTarget.dispose(); renderer.dispose(); removeEventListener('resize', resize);
   };
 }
 startClient().catch(err => {

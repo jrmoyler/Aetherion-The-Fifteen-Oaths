@@ -93,7 +93,11 @@ export const SURFACE_MODES = Object.keys(PROGRAMS);
 // Returns a MeshPhysicalMaterial with the requested micro-surface program.
 export function surfaceMaterial(mode, params = {}) {
   const { strength, trim, H, ...rest } = params;
-  const m = new MeshPhysicalMaterial({ roughness: .6, metalness: 0, ...rest });
+  // Secondary lobes follow the authored material class; explicit recipes win.
+  const finish = mode === 'weave' ? { sheen: .18, sheenRoughness: .85, sheenColor: new Color(rest.color ?? 0xffffff) }
+    : mode === 'lacquer' ? { clearcoat: .35, clearcoatRoughness: .25 }
+    : mode === 'porcelain' ? { clearcoat: .18, clearcoatRoughness: .3 } : {};
+  const m = new MeshPhysicalMaterial({ roughness: .6, metalness: 0, ...finish, ...rest });
   return withSurface(m, mode, params.strength ?? 1);
 }
 
@@ -115,7 +119,7 @@ export function withSurface(material, mode, strength = 1, extra = '') {
       .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * ${mode === 'skin' ? '.00007' : mode === 'hair' ? '.00012' : '.00035'});`);
   };
   const key = material.customProgramCacheKey?.bind(material);
-  material.customProgramCacheKey = () => `${key ? key() : ''}|cs:${mode}:${extra.length}`;
+  material.customProgramCacheKey = () => `${key ? key() : ''}|cs:${mode}:${extra}`;
   material.needsUpdate = true;
   return material;
 }
