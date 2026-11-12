@@ -25,6 +25,8 @@ jobs:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
       - name: Ability catalog is in sync with the castable registry
         run: node tools/generate-mmo-abilities.mjs --check
+      - name: All-realm terrain regressions
+        run: npm run test:terrain
       - name: Simulation + server tests
         run: npm --prefix server test
       - name: Client regressions

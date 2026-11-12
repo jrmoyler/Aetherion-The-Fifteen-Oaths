@@ -25,7 +25,10 @@
     "mmo:server": "npm --prefix server start",
     "mmo:start": "npm run mmo:build && npm run mmo:server",
     "mmo:test": "npm --prefix server test",
-    "mmo:abilities": "node tools/generate-mmo-abilities.mjs"
+    "mmo:abilities": "node tools/generate-mmo-abilities.mjs",
+    "test:terrain": "node --test tests/biome-relief.test.mjs tests/all-realm-terrain.test.mjs game/src/actors/terrain-water.test.mjs game/src/three/terrain-seams.test.mjs",
+    "qa:terrain": "node tools/qa/terrain-geometry.mjs",
+    "qa:terrain:browser": "node tools/qa/terrain-browser.mjs"
   },
   "engines": {
     "node": ">=22.12.0"

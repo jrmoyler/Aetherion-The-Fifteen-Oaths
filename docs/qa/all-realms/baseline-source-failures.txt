@@ -1,0 +1,47 @@
+✖ adapter.cast drives actual MatrixBridge, App aiming, Meteor, and automatic fissure repair (2.927827ms)
+✖ destination App load seam repairs the actual source runtime for native routes (0.782081ms)
+✖ Aetherion connects the real source fissures and completes, reuses, clears and disposes Meteor (2.341659ms)
+✔ Aetherion rejects a different or incomplete runtime instead of changing it (1.080453ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1974.046951
+
+✖ failing tests:
+
+test at tests/adapter-meteor-runtime.test.mjs:25:1
+✖ adapter.cast drives actual MatrixBridge, App aiming, Meteor, and automatic fissure repair (2.927827ms)
+  TypeError [Error]: Cannot read properties of null (reading 'gl')
+      at new Environment (file:///workspace/scratch/c966f2a0cd49/aetherion/runtime/ability-matrix/packs/sandbox/src/world/Environment.js:56:19)
+      at TestContext.<anonymous> (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/adapter-meteor-runtime.test.mjs:27:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at tests/adapter-meteor-runtime.test.mjs:65:1
+✖ destination App load seam repairs the actual source runtime for native routes (0.782081ms)
+  TypeError [Error]: Cannot read properties of null (reading 'gl')
+      at new Environment (file:///workspace/scratch/c966f2a0cd49/aetherion/runtime/ability-matrix/packs/sandbox/src/world/Environment.js:56:19)
+      at TestContext.<anonymous> (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/adapter-meteor-runtime.test.mjs:66:51)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests/linear-fissures-integration.test.mjs:22:1
+✖ Aetherion connects the real source fissures and completes, reuses, clears and disposes Meteor (2.341659ms)
+  TypeError [Error]: Cannot read properties of null (reading 'gl')
+      at new Environment (file:///workspace/scratch/c966f2a0cd49/aetherion/runtime/ability-matrix/packs/sandbox/src/world/Environment.js:56:19)
+      at host (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/linear-fissures-integration.test.mjs:17:51)
+      at TestContext.<anonymous> (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/linear-fissures-integration.test.mjs:23:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)

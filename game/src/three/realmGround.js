@@ -7,7 +7,7 @@
 //   - Aetherion's road, plaza and lava masks and its surface-state layer wired into that shader,
 //   - the sea and the marsh pool made by makeWater with the look of the realm the player stands in.
 import * as THREE from 'three';
-import { BIOMES, SEA_LEVEL, MARSH_LEVEL, heightAt } from '@shared/terrain.js';
+import { BIOMES, SEA_LEVEL, MARSH_LEVEL, MARSH_RADIUS, waterLevelAt, heightAt } from '@shared/terrain.js';
 import { OATH_BY_ID } from '@shared/oaths.js';
 import { BIOME_RELIEF, BIOME_RELIEF_SPAN } from '@shared/biome-relief.generated.js';
 import { WORLD_GROUND, RELIEF_WINDOW, terrainMaterial as biomeTerrainMaterial, makeWater, waters, WIND, VU, SURF_GLSL, setWaterReflection } from './biome-ground.generated.js';
@@ -20,7 +20,7 @@ const REALM_INDEX = Object.freeze(Object.fromEntries(REALM_ORDER.map((biome, ind
 const DEFAULTS = { rock: [0.42, 0.38, 0.34], rockLo: 0.3, bump: 14, ripple: 0, wet: 0.5, foam: 0, caustic: 0, rows: 0, grain: 1, snow: 0, glow: 0, glowCol: [1.0, 0.32, 0.06], strata: 1, band: [0, 0] };
 // Worlds that keep no open water of their own borrow the water of the world closest in climate.
 const WATER_FALLBACK = { volcano: 'arctic', taiga: 'arctic', alpine: 'arctic', canyon: 'egypt', haven: 'ruins' };
-const MARSH_CENTRE = OATH_BY_ID['oath-08'].center, MARSH_RADIUS = 630;
+const MARSH_CENTRE = OATH_BY_ID['oath-08'].center;
 
 /** The ground of a realm: its Biome Triad world, that world's shader settings, and whether its colour function is used. */
 export function realmGround(biome) {
@@ -51,7 +51,7 @@ function painterOf(world) {
 }
 const smooth = (x, a, b) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
 /** Water level under a point: the marsh pool stands above the sea. */
-export const waterLevelAt = (x, z) => Math.hypot(x - MARSH_CENTRE[0], z - MARSH_CENTRE[1]) < MARSH_RADIUS ? MARSH_LEVEL : SEA_LEVEL;
+export { waterLevelAt };
 const grounds = Object.fromEntries(REALM_ORDER.map((biome) => [biome, realmGround(biome)]));
 /**
  * Colours one terrain vertex with its world's colour function.

@@ -13,6 +13,12 @@ export const WORLD_SEED = 15015;
 export const WORLD_HALF = 2600; // playable square half-extent in metres
 /** Surface level of the shallow marsh pools around the Bitterglass Guild. */
 export const MARSH_LEVEL = 3.4;
+export const MARSH_RADIUS = 630;
+/** Same nominal surface used by the rendered pool, movement and placement. */
+export function waterLevelAt(x, z) {
+  const [mx, mz] = OATH_BY_ID['oath-08'].center;
+  return Math.hypot(x - mx, z - mz) < MARSH_RADIUS ? MARSH_LEVEL : SEA_LEVEL;
+}
 
 // ---------- seeded gradient noise (allocation free) ----------
 const perm = new Uint8Array(512);

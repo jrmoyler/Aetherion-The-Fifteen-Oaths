@@ -9,7 +9,7 @@
 //                               meshes a step a frame, and hides them again when the player is far away.
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { heightAt, MARSH_LEVEL, SEA_LEVEL } from '@shared/terrain.js';
+import { heightAt, MARSH_LEVEL, SEA_LEVEL, waterLevelAt } from '@shared/terrain.js';
 import { OATHS, OATH_BY_ID, ROUTES, SANCTUARY, regionAt } from '@shared/oaths.js';
 import * as BT from './biome-landmarks.generated.js';
 import { REALM_WORLD } from './realmAir.js';
@@ -24,7 +24,7 @@ const ROADS = ROUTES.map(([a, b]) => [...OATH_BY_ID[a].center, ...OATH_BY_ID[b].
 const MARSH = OATH_BY_ID['oath-08'].center;
 /** Clear ground kept between a landmark's footprint and a city ring, and between it and a road's centreline. */
 export const CITY_MARGIN = 25, ROAD_MARGIN = 30;
-export const waterLevelAt = (x, z) => (Math.hypot(x - MARSH[0], z - MARSH[1]) < 630 ? MARSH_LEVEL : SEA_LEVEL);
+export { waterLevelAt };
 export function cityDistance(x, z) { let best = 1e9; for (const c of CENTRES) best = Math.min(best, Math.hypot(x - c[0], z - c[1])); return best; }
 export function roadDistance(x, z) {
   let best = 1e9;

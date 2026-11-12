@@ -1,0 +1,114 @@
+✔ oath-01 volcanic: spawn, core and radial terrain transitions (88.452678ms)
+✖ oath-01 volcanic: dry camps/lair with four-sided support (11.236134ms)
+✔ oath-02 glacial: spawn, core and radial terrain transitions (56.925146ms)
+✔ oath-02 glacial: dry camps/lair with four-sided support (16.979509ms)
+✔ oath-03 alpine: spawn, core and radial terrain transitions (23.737575ms)
+✖ oath-03 alpine: dry camps/lair with four-sided support (8.477237ms)
+✔ oath-04 coast: spawn, core and radial terrain transitions (30.036623ms)
+✖ oath-04 coast: dry camps/lair with four-sided support (11.738521ms)
+✔ oath-05 canyon: spawn, core and radial terrain transitions (33.908768ms)
+✔ oath-05 canyon: dry camps/lair with four-sided support (11.209572ms)
+✔ oath-06 cliffs: spawn, core and radial terrain transitions (25.126624ms)
+✔ oath-06 cliffs: dry camps/lair with four-sided support (12.295354ms)
+✔ oath-07 forest: spawn, core and radial terrain transitions (24.123974ms)
+✔ oath-07 forest: dry camps/lair with four-sided support (13.190176ms)
+✔ oath-08 marsh: spawn, core and radial terrain transitions (26.784192ms)
+✖ oath-08 marsh: dry camps/lair with four-sided support (4.858213ms)
+✔ oath-09 meadow: spawn, core and radial terrain transitions (27.823202ms)
+✔ oath-09 meadow: dry camps/lair with four-sided support (12.870082ms)
+✔ oath-10 highland: spawn, core and radial terrain transitions (32.209121ms)
+✔ oath-10 highland: dry camps/lair with four-sided support (12.917562ms)
+✔ oath-11 badlands: spawn, core and radial terrain transitions (25.204245ms)
+✔ oath-11 badlands: dry camps/lair with four-sided support (15.202571ms)
+✔ oath-12 crimson: spawn, core and radial terrain transitions (23.219855ms)
+✔ oath-12 crimson: dry camps/lair with four-sided support (17.288782ms)
+✔ oath-13 terraces: spawn, core and radial terrain transitions (40.506727ms)
+✔ oath-13 terraces: dry camps/lair with four-sided support (17.441243ms)
+✔ oath-14 plateau: spawn, core and radial terrain transitions (34.249209ms)
+✔ oath-14 plateau: dry camps/lair with four-sided support (10.152819ms)
+✔ oath-15 industrial: spawn, core and radial terrain transitions (20.661416ms)
+✔ oath-15 industrial: dry camps/lair with four-sided support (10.048006ms)
+✔ all 30 route transitions are sampled in both directions, with finite terrain masks (38.652817ms)
+✔ inspection manifest covers all realms, prioritizes nine, and is reproducible (22.329559ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 28
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1030.679124
+
+✖ failing tests:
+
+test at tests/all-realm-terrain.test.mjs:23:3
+✖ oath-01 volcanic: dry camps/lair with four-sided support (11.236134ms)
+  AssertionError [ERR_ASSERTION]: unsupported 15015 -2212.883481981672,781.0371418335154
+      at TestContext.<anonymous> (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/all-realm-terrain.test.mjs:33:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/all-realm-terrain.test.mjs:23:3
+✖ oath-03 alpine: dry camps/lair with four-sided support (8.477237ms)
+  AssertionError [ERR_ASSERTION]: unsupported 1 378.1939292782236,1942.5757747457433
+      at TestContext.<anonymous> (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/all-realm-terrain.test.mjs:33:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/all-realm-terrain.test.mjs:23:3
+✖ oath-04 coast: dry camps/lair with four-sided support (11.738521ms)
+  AssertionError [ERR_ASSERTION]: unsupported 1 -1656.1835972897932,-1759.948944090034
+      at TestContext.<anonymous> (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/all-realm-terrain.test.mjs:33:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests/all-realm-terrain.test.mjs:23:3
+✖ oath-08 marsh: dry camps/lair with four-sided support (4.858213ms)
+  AssertionError [ERR_ASSERTION]: submerged 15015 -929.9119239734255,-359.7684034063742: 2.0497745950954696
+      at TestContext.<anonymous> (file:///workspace/scratch/c966f2a0cd49/aetherion/tests/all-realm-terrain.test.mjs:30:16)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

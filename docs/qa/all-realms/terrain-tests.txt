@@ -1,0 +1,51 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> aetherion-foundation@0.1.0 test:terrain
+> node --test tests/biome-relief.test.mjs tests/all-realm-terrain.test.mjs game/src/actors/terrain-water.test.mjs game/src/three/terrain-seams.test.mjs
+
+✔ controller swims at the real marsh surface rather than walking below the pool (43.004969ms)
+✔ ground colouring, landmark placement and movement use identical pool boundaries (0.44578ms)
+✔ adaptive skirts cover a hollow between coarse edge vertices without changing terrain (1.7306ms)
+✔ oath-01 volcanic: spawn, core and radial terrain transitions (161.000837ms)
+✔ oath-01 volcanic: dry camps/lair with four-sided support (59.898096ms)
+✔ oath-02 glacial: spawn, core and radial terrain transitions (59.979398ms)
+✔ oath-02 glacial: dry camps/lair with four-sided support (31.940044ms)
+✔ oath-03 alpine: spawn, core and radial terrain transitions (49.447185ms)
+✔ oath-03 alpine: dry camps/lair with four-sided support (25.822076ms)
+✔ oath-04 coast: spawn, core and radial terrain transitions (84.170561ms)
+✔ oath-04 coast: dry camps/lair with four-sided support (45.780242ms)
+✔ oath-05 canyon: spawn, core and radial terrain transitions (87.776346ms)
+✔ oath-05 canyon: dry camps/lair with four-sided support (21.006691ms)
+✔ oath-06 cliffs: spawn, core and radial terrain transitions (32.131064ms)
+✔ oath-06 cliffs: dry camps/lair with four-sided support (25.433513ms)
+✔ oath-07 forest: spawn, core and radial terrain transitions (34.059075ms)
+✔ oath-07 forest: dry camps/lair with four-sided support (16.594301ms)
+✔ oath-08 marsh: spawn, core and radial terrain transitions (31.141317ms)
+✔ oath-08 marsh: dry camps/lair with four-sided support (19.330737ms)
+✔ oath-09 meadow: spawn, core and radial terrain transitions (27.254757ms)
+✔ oath-09 meadow: dry camps/lair with four-sided support (18.34995ms)
+✔ oath-10 highland: spawn, core and radial terrain transitions (27.41682ms)
+✔ oath-10 highland: dry camps/lair with four-sided support (18.018538ms)
+✔ oath-11 badlands: spawn, core and radial terrain transitions (33.722676ms)
+✔ oath-11 badlands: dry camps/lair with four-sided support (25.464392ms)
+✔ oath-12 crimson: spawn, core and radial terrain transitions (176.672071ms)
+✔ oath-12 crimson: dry camps/lair with four-sided support (15.594244ms)
+✔ oath-13 terraces: spawn, core and radial terrain transitions (30.376035ms)
+✔ oath-13 terraces: dry camps/lair with four-sided support (16.448257ms)
+✔ oath-14 plateau: spawn, core and radial terrain transitions (30.82437ms)
+✔ oath-14 plateau: dry camps/lair with four-sided support (17.994425ms)
+✔ oath-15 industrial: spawn, core and radial terrain transitions (23.727341ms)
+✔ oath-15 industrial: dry camps/lair with four-sided support (14.11036ms)
+✔ all 30 route transitions are sampled in both directions, with finite terrain masks (35.075244ms)
+✔ inspection manifest covers all realms, prioritizes nine, and is reproducible (22.02209ms)
+✔ every realm biome carries a baked Biome Triad relief grid of the declared size (62.871768ms)
+✔ the simulation world keeps its guarantees on the imported terrain (128.258938ms)
+✔ terrain sampling stays fast enough for the simulation (416.325778ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1696.068715

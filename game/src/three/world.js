@@ -1,11 +1,11 @@
 import * as THREE from 'three';
-import {heightAt,normalAt,sampleTerrain,lavaAt,SEA_LEVEL,MARSH_LEVEL,noise2} from '@shared/terrain.js';
+import {heightAt,normalAt,sampleTerrain,lavaAt,SEA_LEVEL,MARSH_LEVEL,waterLevelAt,noise2} from '@shared/terrain.js';
 import {regionAt,OATH_BY_ID} from '@shared/oaths.js';
 import {terrainMaterial,realmWater} from './worldMaterials.js';
 import {paintGround,updateRealmGround} from './realmGround.js';
 import {buildSanctuaries} from './worldArchitecture.js';
 import {createRealmFlora,realmRock} from './realmFlora.js';
-import {terrainResolution,addTerrainSkirt} from './terrain-detail.js';
+import {terrainResolution,addTerrainSkirt,terrainSkirtDepth} from './terrain-detail.js';
 import {createBiomeDetails} from './biomeDetails.js';
 import {createRealmLandmarks} from './realmLandmarks.js';
 import {createRealmCreatures} from './realmCreatures.js';
@@ -48,7 +48,7 @@ export async function initWorld(ctx){
       }
       c.lerp(dust,Math.min(.8,s.roadW*.8+s.plaza*.35));c.toArray(col,i*3);
     }
-    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setAttribute('terrainMask',new THREE.BufferAttribute(masks,3));g.setAttribute('kind',new THREE.BufferAttribute(kinds,1));g.setAttribute('btRealm',new THREE.BufferAttribute(realms,1));g.computeVertexNormals();if(size===TILE)addTerrainSkirt(g,res,6);
+    g.setAttribute('color',new THREE.BufferAttribute(col,3));g.setAttribute('terrainMask',new THREE.BufferAttribute(masks,3));g.setAttribute('kind',new THREE.BufferAttribute(kinds,1));g.setAttribute('btRealm',new THREE.BufferAttribute(realms,1));g.computeVertexNormals();if(size===TILE)addTerrainSkirt(g,res,terrainSkirtDepth(x,z,size,ctx.quality?.name,heightAt));
     const m=new THREE.Mesh(g,terrainMat);m.position.set(x,0,z);m.receiveShadow=true;return m;
   }
   function build(ix,iz){
@@ -121,7 +121,6 @@ export async function initWorld(ctx){
       const disc=b*b-4*len2*c;if(disc<0)return;const k=(-b-Math.sqrt(disc))/(2*len2);if(k>0&&k<best)best=k;});return best;}
   async function ready(x=focusX,z=focusZ){focus(x,z);let n=0;while(jobs.length&&n<9){const j=jobs.shift();build(j[0],j[1]);n++;if(n%2===0)await new Promise(r=>setTimeout(r,0));}return true;}
   const isWater=(x,z)=>heightAt(x,z)<waterLevelAt(x,z);
-  const waterLevelAt=(x,z)=>Math.hypot(x-marsh[0],z-marsh[1])<630?MARSH_LEVEL:SEA_LEVEL;
   const stopUpdate=ctx.addUpdate?.(update,40);
   function dispose(){stopUpdate?.();details.dispose();landmarks.dispose();for(const g of chunks.values()){scene.remove(g);g.traverse(m=>{if(m.isInstancedMesh)m.dispose();});g.children[0].geometry.dispose();}chunks.clear();jobs.length=0;water.dispose();scene.remove(architecture,horizon);creatures.dispose();flora.dispose();horizon.geometry.dispose();terrainMat.dispose();architecture.traverse(m=>{if(m.isMesh){m.geometry.dispose();m.material.dispose();if(m.isInstancedMesh)m.dispose();}});}
   return {dispose,heightAt,normalAt,sampleTerrain,lavaAt,regionAt,groundAt:(x,z,y)=>ctx.collision?.groundAt(x,z,y)??heightAt(x,z),isWater,resolveTrunks,trunkHit,waterLevel:SEA_LEVEL,waterLevelAt,focus,ready,update,architecture,water,stats:()=>({terrainNodes:chunks.size,pending:jobs.length}),wind:{gust:0}};
