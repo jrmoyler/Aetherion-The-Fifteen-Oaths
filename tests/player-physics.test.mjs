@@ -39,7 +39,7 @@ test('camera sweep clips by height, padding, sloped ramp tops, and thin rotated 
   assert.equal(world.segmentHit(10, 3, -3, 10, 3, 0), 1);
 });
 
-function player(collision) {
+function player(collision, yaw = 0) {
   const position = { x: 0, y: 0, z: 0, set(x,y,z) { Object.assign(this, {x,y,z}); } };
   const events = [];
   const state = { moveX: 0, moveY: 0, jump: false };
@@ -49,7 +49,7 @@ function player(collision) {
     collision, input: { state, consume: key => actions.delete(key) },
     world: { heightAt: () => 0, normalAt: () => ({x:0,y:1,z:0}) },
     bus: { emit: type => events.push(type) }
-  }, { cls: 'ninja', root: { position, rotation: { y: 0 } } }, () => 0);
+  }, { cls: 'ninja', root: { isObject3D: true, position, rotation: { y: 0 } } }, () => yaw);
   return { controller, position, state, actions, events };
 }
 
@@ -86,4 +86,17 @@ test('teleport cancels buffered jumps, swimming, and coyote time on an airborne 
   actions.add('jump'); controller.update(1/60);
   assert.equal(controller.grounded, false); assert.equal(controller.swimming, false);
   assert.equal(events.includes('player:jump'), false);
+});
+
+test('right input projects to screen right at cardinal and oblique camera angles', () => {
+  for (const yaw of [0, Math.PI/2, -Math.PI/3, Math.PI]) {
+    const { controller, position, state } = player(null, yaw);
+    state.moveX = 1;
+    controller.update(1/30);
+    const forward = { x: Math.sin(yaw), z: Math.cos(yaw) };
+    const screenX = -forward.z * position.x + forward.x * position.z;
+    const screenDepth = forward.x * position.x + forward.z * position.z;
+    assert.ok(screenX > 0);
+    near(screenDepth, 0);
+  }
 });
