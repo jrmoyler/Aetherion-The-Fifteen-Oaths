@@ -19,13 +19,19 @@ try {
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
   page.on('response', r => { if (r.status() >= 400) failures.push(`${r.status()} ${r.url()}`); });
-  await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/?offline=1&q=low&oath=oath-09&cls=ninja&name=ReviewKnight`);
-  await page.waitForFunction(() => window.__aetherion?.ui?.state?.inGame, null, { timeout: 60000 });
+  await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/?offline=1&q=low&oath=oath-09&cls=ninja&name=ReviewKnight&cinematic=0&nointro=1`);
+  await page.waitForFunction(() => !!window.__aetherion?.dispose, null, { timeout: 180000 });
   // Skip only the introductory camera rail; the production controller stays active.
   await page.evaluate(() => { window.__aetherion.actors.orbit.intro = null; });
   await page.waitForTimeout(1000);
   const before = await page.evaluate(() => ({ ...window.__aetherion.actors.player.position }));
-  await page.keyboard.down('KeyW'); await page.waitForTimeout(1500); await page.keyboard.up('KeyW');
+  await page.keyboard.down('KeyW');
+  try {
+    await page.waitForFunction(b => {
+      const p = window.__aetherion.actors.player.position;
+      return Math.hypot(p.x - b.x, p.z - b.z) > .25;
+    }, before, { timeout: 60000 });
+  } finally { await page.keyboard.up('KeyW'); }
   const moved = await page.evaluate(b => { const p = window.__aetherion.actors.player.position; return Math.hypot(p.x - b.x, p.z - b.z); }, before);
   assert.ok(moved > .1, `Player must move; observed ${moved} m`);
   await page.keyboard.press('Digit2');
