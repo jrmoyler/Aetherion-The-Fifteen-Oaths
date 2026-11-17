@@ -41,6 +41,8 @@ jobs:
         run: npm --prefix game run build
       - name: Install test browser
         run: cd game && npx playwright install --with-deps chromium
+      - name: Offline gameplay, casting and equipped armor
+        run: node game/test/three-gameplay.browser.mjs
       - name: Mobile HUD layout regressions
         run: node --test game/test/mobile-hud-layout.browser.mjs
       - name: Production PWA offline smoke
