@@ -3,8 +3,11 @@
 // Forged armor is authored as unskinned pieces, each in its own frame, for a figure standing with arms down.
 // To wear one, the piece is measured against the wearer's own skeleton in its bind pose, wrapped onto the
 // matching bones, and given skin weights so it bends with elbows, knees and spine instead of floating on a socket.
-// Everything a character wears is merged into two skinned meshes (metal, everything else): two draw calls.
+// Forge surfaces share two meshes (metal and matte). A fitted field garment adds one cloth-and-metal mesh.
 import { BufferAttribute, BufferGeometry, Matrix3, Matrix4, MeshStandardMaterial, SkinnedMesh, Vector3 } from 'three';
+import { buildFieldArmor } from './character/field-armor.js';
+import { recipeFor } from './character/sheets/recipes/index.js';
+import { costumeDepthMaterial, costumeMaterial } from './character/sheets/material.js';
 import { loadModel } from './models.js';
 import { ARSENAL_ARMOR_MESHES } from '@shared/arsenal-armor.generated.js';
 
@@ -47,11 +50,17 @@ function pieceData(id) {
 // ---------------------------------------------------------------------------------------------------------
 // The wearer: bind-pose joints and a few measurements taken from the body's own vertices.
 function rigOf(body) {
-  const mesh = body.meshes.filter((m) => m.isSkinnedMesh).sort((a, b) => b.geometry.attributes.position.count - a.geometry.attributes.position.count)[0];
+  // Fit against the character. An ornate piece being replaced may have more
+  // vertices than its wearer and must never become the measuring surface.
+  const mesh = body.meshes
+    .filter(m => m.isSkinnedMesh && !m.userData.sheetCostume && !m.name.startsWith('arsenal-armor-'))
+    .sort((a, b) => b.geometry.attributes.position.count - a.geometry.attributes.position.count)[0];
   if (!mesh) return null;
   const cached = mesh.geometry.userData.arsenalRig;
   const index = {}, J = {};
-  const toGeometry = new Matrix4().copy(mesh.bindMatrixInverse), bind = new Matrix4();
+  // Attached meshes update bindMatrixInverse as the actor moves. Fit armor in
+  // the immutable bind frame shared by the body geometry and its skeleton.
+  const toGeometry = new Matrix4().copy(mesh.bindMatrix).invert(), bind = new Matrix4();
   mesh.skeleton.bones.forEach((bone, i) => {
     const name = boneName(bone.name); index[name] = i;
     J[name] = cached?.J[name] ?? new Vector3().setFromMatrixPosition(bind.copy(mesh.skeleton.boneInverses[i]).invert().premultiply(toGeometry));
@@ -422,16 +431,38 @@ function collect(piece, rig, out) {
  * Dress a body in forged armor. `ids` are Arsenal armor ids ("arsenal:armor/chest/03"); unknown ids are skipped.
  * Resolves to a handle with dispose(), or null when the body has no usable skeleton or nothing could be worn.
  */
-export async function wearArmor(body, ids) {
+export async function wearArmor(body, ids, wearer) {
   const wanted = [...new Set(ids)].filter((id) => ARSENAL_ARMOR_MESHES[id] && FIT[ARSENAL_ARMOR_MESHES[id].family]);
   const rig = rigOf(body);
   if (!rig || !wanted.length) return null;
-  const loaded = (await Promise.all(wanted.map((id) => pieceData(id).catch((error) => { console.warn('[arsenal] Armor unavailable', id, error); return null; })))).filter(Boolean);
-  if (!loaded.length || !rig.mesh.parent) return null; // body was replaced while pieces loaded
+  const hero = recipeFor(wearer ? `${wearer.oath}-${wearer.cls}` : body.sheetCostume?.id);
+  const fieldFamily = (id) => hero && /^arsenal:armor\/(robe|chest)\/01$/.exec(id)?.[1];
+  const pieces = (await Promise.all(wanted.map(async (id) => {
+    const family = fieldFamily(id);
+    if (family) return { id, field: family };
+    try { return await pieceData(id); }
+    catch (error) { console.warn('[arsenal] Armor unavailable', id, error); return null; }
+  }))).filter(Boolean);
+  if (!pieces.length || !rig.mesh.parent) return null;
   const bucket = () => ({ position: [], normal: [], color: [], skinIndex: [], skinWeight: [], index: [], count: 0, roughness: 0, weight: 0 });
   const out = { metal: bucket(), matte: bucket() };
-  for (const piece of loaded) collect(piece, rig, out);
   const meshes = [];
+  function bind(geometry, material, name) {
+    const mesh = new SkinnedMesh(geometry, material);
+    mesh.name = `arsenal-armor-${name}`; mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false;
+    mesh.position.copy(rig.mesh.position); mesh.quaternion.copy(rig.mesh.quaternion); mesh.scale.copy(rig.mesh.scale);
+    rig.mesh.parent.add(mesh); mesh.bind(rig.mesh.skeleton, rig.mesh.bindMatrix);
+    meshes.push(mesh);
+    return mesh;
+  }
+  for (const piece of pieces) {
+    if (piece.field) {
+      const { geometry } = buildFieldArmor(hero, piece.field, rig);
+      const motion = geometry.userData.motion;
+      const mesh = bind(geometry, costumeMaterial(motion), `field-${piece.field}`);
+      mesh.customDepthMaterial = costumeDepthMaterial(motion);
+    } else collect(piece, rig, out);
+  }
   for (const [kind, data] of Object.entries(out)) {
     if (!data.count) continue;
     const geometry = new BufferGeometry();
@@ -442,17 +473,16 @@ export async function wearArmor(body, ids) {
     geometry.setAttribute('skinWeight', new BufferAttribute(new Float32Array(data.skinWeight), 4));
     geometry.setIndex(data.count > 65535 ? new BufferAttribute(new Uint32Array(data.index), 1) : new BufferAttribute(new Uint16Array(data.index), 1));
     const material = new MeshStandardMaterial({ name: `arsenal-${kind}`, vertexColors: true, metalness: kind === 'metal' ? .88 : 0, roughness: clamp(data.roughness / data.weight, .32, .95) });
-    const mesh = new SkinnedMesh(geometry, material);
-    mesh.name = `arsenal-armor-${kind}`; mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false;
-    // Same place in the hierarchy and the same bind as the body, so the body's skeleton drives it directly.
-    mesh.position.copy(rig.mesh.position); mesh.quaternion.copy(rig.mesh.quaternion); mesh.scale.copy(rig.mesh.scale);
-    rig.mesh.parent.add(mesh); mesh.bind(rig.mesh.skeleton, rig.mesh.bindMatrix);
-    meshes.push(mesh);
+    bind(geometry, material, kind);
   }
-  const worn = loaded.map((piece) => piece.id);
-  body.arsenalArmor = worn.join('|');
   return {
-    ids: worn, meshes, triangles: (out.metal.index.length + out.matte.index.length) / 3,
-    dispose() { for (const mesh of meshes) { mesh.removeFromParent(); mesh.geometry.dispose(); mesh.material.dispose(); } if (body.arsenalArmor === worn.join('|')) body.arsenalArmor = null; },
+    ids: pieces.map((piece) => piece.id), meshes,
+    triangles: meshes.reduce((sum, mesh) => sum + mesh.geometry.index.count / 3, 0),
+    dispose() {
+      for (const mesh of meshes) {
+        mesh.removeFromParent(); mesh.geometry.dispose(); mesh.material.dispose();
+        mesh.customDepthMaterial?.dispose();
+      }
+    },
   };
 }

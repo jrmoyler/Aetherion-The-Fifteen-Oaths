@@ -14,18 +14,19 @@ import {FissureSystem} from '../runtime/ability-matrix/packs/sandbox/src/vendor/
 import {attachLinearFissures} from '../src/abilities/LinearFissuresIntegration.js';
 
 function host() {
- const camera=new PerspectiveCamera(),environment=new Environment(null,camera),scene=environment.scene;
+ const camera=new PerspectiveCamera(),environment=new Environment({ gl: { shadowMap: {} } }, camera),scene=environment.scene;
  return {scene,camera,environment,lights:new LightPool(scene),shake:new CameraShake({shakeOffset:new Vector3(),shakeRoll:0}),flash:new ScreenFlash(),character:new SandboxCharacter(environment),dummies:new DummyField(environment),settings,frame};
 }
 function finiteGeometry(scene) {scene.traverse(o=>{for(const attr of Object.values(o.geometry?.attributes??{}))for(const n of attr.array)assert.ok(Number.isFinite(n));for(const n of [...o.position.toArray(),...o.quaternion.toArray(),...o.scale.toArray()])assert.ok(Number.isFinite(n));});}
 
-test('Aetherion connects the real source fissures and completes, reuses, clears and disposes Meteor',async()=>{
+test('Aetherion preserves source-owned fissures and completes, reuses, clears and disposes Meteor',async()=>{
  const h=host(),runtime=await create(h);
  try {
-  assert.equal(runtime.ctx.fissures,undefined,'baseline source omission changed; revisit compatibility repair');
+  const nativeFissures = runtime.ctx.fissures;
+  assert.ok(nativeFissures instanceof FissureSystem);
   assert.equal(attachLinearFissures(runtime),runtime);
   const fissures=runtime.ctx.fissures;
-  assert.ok(fissures instanceof FissureSystem);
+  assert.equal(fissures, nativeFissures);
   assert.equal(attachLinearFissures(runtime),runtime);
   assert.equal(runtime.ctx.fissures,fissures,'attachment must be idempotent');
   const meteor=runtime.cast('meteor',new Vector3(),new Vector3(0,0,1),12);

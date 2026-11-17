@@ -66,3 +66,39 @@ test('blur clears touch and mouse state; dispose detaches event handlers', () =>
     i.dispose(); h.emit(h.window, 'keydown', { code: 'KeyW' }); i.poll(); assert.equal(i.state.moveY, 0);
   } finally { h.restore(); }
 });
+
+test('keys sharing an action release independently and repeats cannot retrigger menu or combat', () => {
+  const h = harness(), i = h.input;
+  try {
+    h.emit(h.window, 'keydown', { code: 'KeyW' });
+    h.emit(h.window, 'keydown', { code: 'ArrowUp' });
+    h.emit(h.window, 'keyup', { code: 'KeyW' });
+    i.poll(); assert.equal(i.state.moveY, 1);
+    h.emit(h.window, 'keyup', { code: 'ArrowUp' });
+    i.poll(); assert.equal(i.state.moveY, 0);
+    h.emit(h.window, 'keydown', { code: 'Escape' });
+    assert.ok(i.consume('menu'));
+    i.setTyping(true); i.setTyping(false);
+    h.emit(h.window, 'keydown', { code: 'Escape', repeat: true });
+    assert.equal(i.consume('menu'), false);
+    assert.equal(h.events.filter(([type, action]) => type === 'input:action' && action === 'menu').length, 1);
+    i.hold('jump', true); h.emit(h.window, 'keydown', { code: 'Space' });
+    i.hold('jump', false); assert.ok(i.isDown('jump'));
+    h.emit(h.window, 'keyup', { code: 'Space' }); assert.equal(i.isDown('jump'), false);
+  } finally { h.restore(); }
+});
+
+test('menu navigation sticks return to neutral before controlling player and camera', () => {
+  const h = harness(), i = h.input;
+  try {
+    const pad = { index: 0, connected: true, mapping: 'standard', id: 'Xbox', axes: [0, -1, 1, 0], buttons: [] };
+    h.setPads([pad]); i.setTyping(true); i.poll(); i.setTyping(false);
+    i.poll(); assert.equal(i.state.moveY, 0); assert.equal(i.state.lookDX, 0);
+    i.poll(); assert.equal(i.state.moveY, 0);
+    pad.axes = [0, 0, 0, 0]; i.poll(); pad.axes = [0, -1, 1, 0]; i.poll();
+    assert.equal(i.state.moveY, 1); assert.ok(i.state.lookDX > 0);
+    i.addVirtualZoom(-1.5); assert.equal(i.state.zoom, -1.5);
+    i.endFrame(); assert.equal(i.state.zoom, 0);
+    i.setEnabled(false); i.addVirtualZoom(2); assert.equal(i.state.zoom, 0);
+  } finally { h.restore(); }
+});

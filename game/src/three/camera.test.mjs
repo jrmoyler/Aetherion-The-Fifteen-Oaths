@@ -1,7 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { registerHooks } from 'node:module';
 import { PerspectiveCamera, Vector3, Group } from 'three';
 import { OrbitCamera } from './camera.js';
+
+registerHooks({ resolve(id, context, next) {
+  return next(id.startsWith('@shared/') ? new URL('../../../shared/' + id.slice(8), import.meta.url).href : id, context);
+} });
+const { CollisionWorld } = await import('../core/collision.js');
 
 function setup() {
   const ctx = { camera: new PerspectiveCamera(), quality: { drawDistance: 1500 }, scene: {}, input: { gameplayEnabled: true, state: { moveX: 0, moveY: 0 } }, params: new URLSearchParams(), world: { heightAt: () => -100 } };
@@ -25,11 +31,37 @@ test('captured mouse look and zoom cannot change orbit', () => {
 
 test('obstruction pulls camera in immediately and recovery is smooth', () => {
   const { ctx, camera } = setup(); camera.intro = null;
-  ctx.collision = { blocked: () => true }; camera.update(1 / 60);
-  const near = camera.curDist; assert.ok(near < camera.dist);
-  ctx.collision.blocked = () => false; camera.update(1 / 60);
+  const probes = [];
+  ctx.collision = {
+    segmentHit(...args) { probes.push(args); return probes.length === 1 ? 1 : 0.18; }
+  };
+  camera.update(1 / 60);
+  const near = camera.curDist;
+  assert.ok(Math.abs(near - camera.dist * 0.18) < 1e-6);
+  assert.equal(probes.length, 2);
+  const [x0, y0, z0, x1, y1, z1, padding] = probes[1];
+  assert.ok(y1 > y0 && z1 < z0 && padding >= camera.cam.near);
+  assert.equal(x0, x1);
+  ctx.collision.segmentHit = () => 1; camera.update(1 / 60);
   assert.ok(camera.curDist > near); assert.ok(camera.curDist < camera.dist);
   assert.ok(camera.cam.position instanceof Vector3);
+});
+
+test('a wall beside the shoulder leaves a parallel camera boom clear', () => {
+  const { ctx, camera } = setup();
+  camera.intro = null;
+  ctx.collision = new CollisionWorld();
+  ctx.collision.addBox(-0.7, 0, 0.1, 12, 0, -2, 8);
+
+  camera.update(1 / 60);
+  assert.ok(camera.cam.position.x > -0.25 && camera.cam.position.x < -0.24);
+  assert.equal(camera.curDist, camera.dist);
+  assert.equal(camera.bodyFade, 1);
+
+  ctx.collision.addBox(0, -3, 2, 0.1, 0, -2, 8);
+  camera.update(1 / 60);
+  assert.ok(camera.curDist > 2 && camera.curDist < 3);
+  camera.dispose();
 });
 
 import { prefs, DEFAULTS } from '../ui/prefs.js';
@@ -53,4 +85,19 @@ test('camera waterline clamp uses the local marsh surface', () => {
  ctx.world.waterLevel=-100;ctx.world.waterLevelAt=()=>height;
  camera.update(1/60);assert.ok(camera.cam.position.y>=height+.25);
  camera.dispose();
+});
+
+test('look-right turns toward screen-right at any starting heading', () => {
+  const { ctx, camera } = setup();
+  camera.intro = null;
+  for (const heading of [0, 1.2, -2.7]) {
+    camera.yaw = heading;
+    ctx.input.state.lookDX = 0;
+    camera.update(1 / 60);
+    const screenRight = new Vector3(1, 0, 0).applyQuaternion(camera.cam.quaternion);
+    ctx.input.state.lookDX = 45;
+    camera.update(1 / 60);
+    assert.ok(camera.cam.getWorldDirection(new Vector3()).dot(screenRight) > 0.05);
+  }
+  camera.dispose();
 });

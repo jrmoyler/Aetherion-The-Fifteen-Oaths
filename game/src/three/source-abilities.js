@@ -17,6 +17,7 @@ import { buildAmethystRig } from '../../../runtime/ability-matrix/packs/casting/
 import { buildTomeRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/TomeRig.js';
 import { buildReliquaryRig } from '../../../runtime/ability-matrix/packs/casting/src/assets/ReliquaryRig.js';
 import { buildSerpentGeometry } from '../../../runtime/ability-matrix/packs/linear-extended/src/assets/SerpentGeometry.js';
+import { zoneWindup } from './combat-trails.js';
 import { createSourceBoostAuras } from './source-boost-aura.js';
 import { createSourceTargetReactions } from './source-targets.js';
 import { ABILITIES_BY_OATH } from '../../../shared/abilities.generated.js';
@@ -162,8 +163,16 @@ export async function createSourceAbilities(ctx) {
     if(distance<.001) direction.set(opts.dir?.x??0,0,opts.dir?.z??1); direction.normalize();
     const s=sessionFor(pack,origin.y); s.touched=elapsed;
     let instance, releaseAura, stopped=false, delay=Math.max(0,opts.castTime??opts.ant??0);
+    const windupDuration = delay;
+    let marker = delay > 0 && ab.shape === 'zone' && ab.radius > 0
+      ? zoneWindup(root, ctx.world, target, ab.radius, ab.accent) : null;
+    function clearMarker() {
+      marker?.dispose();
+      marker = null;
+    }
     const isBuff=pack==='linear-ext' && BUFFS[id];
     const spawn=()=>{
+      clearMarker();
       if(isBuff) {
         const Type=modules[pack][BUFFS[id]];
         instance=new Type({...s.context,character:characterProxy(opts.caster,s.floor)});
@@ -179,8 +188,8 @@ export async function createSourceAbilities(ctx) {
     };
     const handle={ sourceId:ab.id, sourcePack:pack, sessionKey:s.key,
       get instance(){return instance;}, get done(){return stopped || !!instance && (ownership.get(instance)!==token || (isBuff ? !instance.active : !instance.isActive));},
-      stop(){if(stopped)return;stopped=true;handles.delete(handle);if(!instance || ownership.get(instance)!==token)return;if(isBuff){releaseAura?.();instance.cancel();instance.dispose();s.buffs.delete(instance);}else{const index=s.manager.active.indexOf(instance);if(index>=0){s.manager.active.splice(index,1);instance.destroy();s.manager.pools.get(id)?.release(instance);}}},
-      advance(dt){if(stopped)return;if(!instance){delay-=dt;if(delay<=0)spawn();}if(isBuff&&instance)instance.update(dt);if(handle.done)handle.stop();},
+      stop(){if(stopped)return;stopped=true;clearMarker();handles.delete(handle);if(!instance || ownership.get(instance)!==token)return;if(isBuff){releaseAura?.();instance.cancel();instance.dispose();s.buffs.delete(instance);}else{const index=s.manager.active.indexOf(instance);if(index>=0){s.manager.active.splice(index,1);instance.destroy();s.manager.pools.get(id)?.release(instance);}}},
+      advance(dt){if(stopped)return;if(!instance){delay-=dt;if(delay<=0)spawn();else marker?.update(1-delay/windupDuration);}if(isBuff&&instance)instance.update(dt);if(handle.done)handle.stop();},
     };
     handles.add(handle); if(delay===0)spawn();
     return handle;

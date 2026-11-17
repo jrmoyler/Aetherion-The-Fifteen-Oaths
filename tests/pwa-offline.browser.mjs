@@ -29,8 +29,11 @@ try {
   }
   assert(cache.some(url => /simWorker.*\.js$/.test(url)), 'offline simulation worker cached');
   assert(cache.some(url => url.endsWith('/assets/characters/manifest.json')), 'character catalog precached before visiting every model');
+  for (const rig of ['handcast/models/drone.glb', 'casting/models/dragon.glb', 'linear-extended/models/snake.glb']) {
+    assert(cache.some(url => url.endsWith(`/assets/ability-source/${rig}`)), `${rig} precached for offline startup`);
+  }
   await context.setOffline(true);
-  const response = await page.reload({ waitUntil: 'domcontentloaded' });
+  const response = await page.reload({ waitUntil: 'domcontentloaded', timeout: 90000 });
   assert.equal(response.status(), 200);
   assert.equal(response.fromServiceWorker(), true);
   await page.waitForSelector('.ae-title', { timeout: 60000 });

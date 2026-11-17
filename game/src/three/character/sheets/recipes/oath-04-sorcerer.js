@@ -45,7 +45,7 @@ export default {
     { use: 'cowl', color: 'robe', rolls: 2, radius: .036, rise: .034 },
     { use: 'a/yoke', color: 'robe', mat: 'cloth', inner: .1, outer: .215, off: .016, thick: .008, discs: { count: 9, r: .064, at: .66, lift: .01, color: 'nacre', rim: 'brass', phase: 0 } },
     { use: 'boots', color: 'boot', sole: 'sole', top: 1.6, toeCap: 'brass', heelPlate: 'brass', cuff: 'brass', plateMat: 'iron', straps: 3, strapColor: 'leather', buckle: 'brass', bulk: 1.2 },
-    { use: 'hair', style: 'coils', color: 'hair', streak: 'hairGrey', top: .035, curl: .034, count: 300, fringe: .35, temple: .03, beard: { style: 'full', length: .1, moustache: .08, cheek: -.28 } },
+    { use: 'hair', style: 'coils', color: 'hair', streak: 'hairGrey', top: .035, curl: .034, count: 300, fringe: .35, temple: .03, beard: { style: 'full', count: 320, length: .1, moustache: .08, cheek: -.28 } },
     { use: 'hands', scale: 1.08 },
   ],
 };

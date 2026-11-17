@@ -13,16 +13,16 @@ const DETAIL = /* glsl */`
   float macro = csFbm(vCsP * 4.6 + 1.7) * .5 + .5;      // hand-sized patches: soot, kiln flashing, handling
   float mid = csFbm(vCsP * 27.);                         // finger-sized mottling
   float fine = csNoise(vCsP * 150.);
-  if (kind < .5) {            // firecloth: heavy twill, sooty and worn pale on the high spots
-    vec3 q = vCsP * 520.;
-    float twill = sin(q.x + q.y * .62 + q.z * .8) * .5 + .5, cross_ = sin(q.y * 1.3 - q.x * .2 + q.z * .4) * .5 + .5;
-    float thread = mix(twill, cross_, .35) * lod;
-    float slub = csNoise(vCsP * vec3(40., 260., 40.));
-    float wear = smoothstep(.2, .75, mid + macro * .6 - .25);
-    csH = thread * .3 + mid * .9 + slub * .3;
-    diffuseColor.rgb *= .58 + macro * .5 + mid * .2 + thread * .22 + slub * .1;
-    diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 1.5 + vec3(.012, .01, .009), wear * .45);
-    roughnessFactor = clamp(roughnessFactor - wear * .12 + thread * .05, .62, 1.);
+  if (kind < .5) {            // dyed twill: subpixel yarns integrate to the dye colour
+    vec3 q = vCsP * 2100.;
+    float warp = sin(q.x + q.y * .62 + q.z * .8);
+    float weft = sin(q.y * 1.3 - q.x * .2 + q.z * .4);
+    float resolved = csLod(vCsP, .0025);
+    float yarn = mix(warp, weft, .35) * resolved;
+    float slub = csNoise(vCsP * vec3(40., 260., 40.)) * lod;
+    csH = yarn * .065 + slub * .06 + mid * .1;
+    diffuseColor.rgb *= .98 + (macro - .5) * .07 + mid * .034 + yarn * .036;
+    roughnessFactor = clamp(roughnessFactor + slub * .025, .66, .98);
   } else if (kind < 1.5) {    // fired ceramic: pitted, chipped pale at the rims, flashed dark by the kiln
     float pits = smoothstep(.45, .8, csNoise(vCsP * 95.)) * csLod(vCsP, .02), pores = smoothstep(.5, .9, csNoise(vCsP * 300.)) * lod;
     float chip = smoothstep(.5, .62, csFbm(vCsP * 34. + 9.));
@@ -33,12 +33,14 @@ const DETAIL = /* glsl */`
     diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * vec3(.42, .36, .34), smoothstep(.55, .9, csFbm(vCsP * 8. + 3.1) * .5 + .5) * .7);
     roughnessFactor = clamp(roughnessFactor - flash * .12 + pits * .1, .5, 1.);
   } else if (kind < 2.5) {    // leather: grain, creases, pale scuffs
-    float cell = csNoise(vCsP * 300.) * lod, crease = pow(1. - abs(csNoise(vCsP * 46.)), 6.);
-    float scuff = smoothstep(.25, .8, mid + macro * .5 - .2);
-    csH = cell * .3 - crease * .9 + mid * .4;
-    diffuseColor.rgb *= .62 + macro * .45 + cell * .12 - crease * .28;
-    diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 1.55 + vec3(.02, .014, .008), scuff * .4);
-    roughnessFactor = clamp(roughnessFactor + cell * .06 - scuff * .16, .36, .9);
+    float grainLod = csLod(vCsP, .002);
+    float grain = csNoise(vCsP * vec3(530., 730., 530.)) * grainLod;
+    float crease = pow(1. - abs(csNoise(vCsP * 32.)), 7.) * csLod(vCsP, .012);
+    float scuff = smoothstep(.48, .78, mid + macro * .36);
+    csH = grain * .13 - crease * .18;
+    diffuseColor.rgb *= .95 + macro * .08 + grain * .05 - crease * .04;
+    diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 1.12, scuff * .45);
+    roughnessFactor = clamp(roughnessFactor + grain * .06 - scuff * .095, .38, .9);
   } else if (kind < 3.5) {    // oxidized iron: pitted, rust in the low spots, bright where it rubs
     float pits = smoothstep(.55, .9, csNoise(vCsP * 240.)) * lod, rust = smoothstep(.25, .8, macro * .6 + mid * .5 + .1);
     csH = -pits * 1. + mid * .4;
@@ -125,7 +127,7 @@ export function costumeMaterial(motion = null) {
       .replace('#include <normal_fragment_maps>', '#include <normal_fragment_maps>\nnormal = csBump(-vViewPosition, normal, csH * .0011);')
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>\n${OPTICS}`);
   };
-  material.customProgramCacheKey = () => 'sheet-costume-7';
+  material.customProgramCacheKey = () => 'sheet-costume-8';
   return material;
 }
 

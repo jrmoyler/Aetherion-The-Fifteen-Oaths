@@ -1,3 +1,4 @@
+import { setTravelDirection } from './character/locomotion.js';
 // Actor: one character/creature in the world (local player, remote player, mob, NPC).
 import { Group } from 'three';
 import { CREATURE_BY_ID } from '@shared/creatures.js';
@@ -98,10 +99,16 @@ export class Actor {
     // speed estimate (wall-clock based: interpolation follows real time even when frames are slow)
     const realDt = Math.max(1e-3, rt - (this.prevRt ?? rt - dt));
     this.prevRt = rt;
-    const sp = Math.hypot(x - this.prevX, z - this.prevZ) / realDt;
+    const dx = x - this.prevX, dz = z - this.prevZ;
+    const sp = Math.hypot(dx, dz) / realDt;
     this.prevX = x; this.prevZ = z;
     this.speedEst += (Math.min(sp, 20) - this.speedEst) * Math.min(1, dt * 7);
-    if (this.body) { const an = this.body.animator; an.speed = this.speedEst < 0.15 ? 0 : this.speedEst; an.yawVel += (yawVel - an.yawVel) * Math.min(1, dt * 6); }
+    if (this.body) {
+      const an = this.body.animator;
+      setTravelDirection(an, dx, dz, this.root.rotation.y);
+      an.speed = this.speedEst < 0.15 ? 0 : this.speedEst;
+      an.yawVel += (yawVel - an.yawVel) * Math.min(1, dt * 6);
+    }
   }
 
   dispose() {

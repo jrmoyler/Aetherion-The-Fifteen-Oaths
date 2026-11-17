@@ -1,6 +1,6 @@
 /** Real source bridge/aim/cast integration on a CPU host. This does not boot
  * the DOM/WebGL App constructor or load the authored FBX character/targets.
- * The test supplies window EventTarget and frame scheduling only; it replaces
+ * The host supplies shadow-map configuration, window events and frame scheduling. It replaces
  * no source ability, aiming, collision, particle, or fissure implementation.
  */
 import test from 'node:test';
@@ -22,12 +22,13 @@ import {installAetherionRuntimeRepairs} from '../src/abilities/InstallRuntimeRep
 import {createAbilityMatrixAdapter} from '../src/abilities/AbilityMatrixAdapter.js';
 const catalog=JSON.parse(readFileSync(new URL('../runtime/ability-matrix/presets/catalog.json',import.meta.url)));
 
-test('adapter.cast drives actual MatrixBridge, App aiming, Meteor, and automatic fissure repair',async()=>{
+test('adapter.cast drives actual MatrixBridge, App aiming, Meteor, and native fissures',async()=>{
  const camera=new PerspectiveCamera(50,1,0.1,400);camera.position.set(0,15,20);camera.lookAt(0,0,0);camera.updateMatrixWorld(true);
- const environment=new Environment(null,camera),scene=environment.scene;
+ const environment=new Environment({ gl: { shadowMap: {} } }, camera),scene=environment.scene;
  const h={scene,camera,environment,lights:new LightPool(scene),shake:new CameraShake({shakeOffset:new Vector3(),shakeRoll:0}),flash:new ScreenFlash(),character:new SandboxCharacter(environment),dummies:new DummyField(environment),settings,frame};
  const runtime=await create(h);
- assert.equal(runtime.ctx.fissures,undefined);
+ const nativeFissures = runtime.ctx.fissures;
+ assert.ok(nativeFissures instanceof FissureSystem);
  // Source App methods run on a CPU-hosted instance. Renderer/editor construction
  // is intentionally not called. The runtime is already loaded and cached.
  const app=Object.assign(Object.create(App.prototype),h,{runtimes:new Map([['linear',runtime]]),_runtimeLoads:new Map(),nativePack:new Map(),aim:runtime.aim,slot:null,cooldowns:new Map(),paused:false});
@@ -42,7 +43,7 @@ test('adapter.cast drives actual MatrixBridge, App aiming, Meteor, and automatic
   bridge=installMatrixBridge(app);
   const adapter=createAbilityMatrixAdapter({bridge,catalog});
   assert.equal(await adapter.cast('linear/meteor',{fraction:0.65}),true,'source aim should confirm a valid cast');
-  assert.ok(runtime.ctx.fissures instanceof FissureSystem,'adapter must connect original source service before impact');
+  assert.equal(runtime.ctx.fissures, nativeFissures, 'adapter preserves the native fissure service');
   assert.equal(bridge.castCount,1);assert.equal(runtime.active.length,1);assert.equal(runtime.active[0].element,'meteor');
   assert.ok(app.cooldowns.get('linear/meteor')>0,'source cast must set its own cooldown');
   let observedFissure=false,t=0;
@@ -61,21 +62,22 @@ test('adapter.cast drives actual MatrixBridge, App aiming, Meteor, and automatic
 });
 
 // This second check covers the wrapper seam, independently of adapter.prepare:
-// all source App callers load a repaired runtime before they can cast.
-test('destination App load seam repairs the actual source runtime for native routes',async()=>{
- const camera=new PerspectiveCamera(),environment=new Environment(null,camera),scene=environment.scene;
+// all source App callers load a runtime with its native fissures before they can cast.
+test('destination App load seam preserves source-owned fissures for native routes',async()=>{
+ const camera=new PerspectiveCamera(),environment=new Environment({ gl: { shadowMap: {} } }, camera),scene=environment.scene;
  const h={scene,camera,environment,lights:new LightPool(scene),shake:new CameraShake({shakeOffset:new Vector3(),shakeRoll:0}),flash:new ScreenFlash(),character:new SandboxCharacter(environment),dummies:new DummyField(environment),settings,frame};
  const runtime=await create(h);
  const app=Object.assign(Object.create(App.prototype),h,{runtimes:new Map([['linear',runtime]]),_runtimeLoads:new Map()});
  try{
-  assert.equal(runtime.ctx.fissures,undefined);
+  const nativeFissures = runtime.ctx.fissures;
+ assert.ok(nativeFissures instanceof FissureSystem);
   const original=app.loadRuntime;
   assert.equal(installAetherionRuntimeRepairs(app),app);
   assert.notEqual(app.loadRuntime,original);
   const once=app.loadRuntime;installAetherionRuntimeRepairs(app);assert.equal(app.loadRuntime,once);
   // Use the real source App method (cached runtime path), no bridge spy.
   const loaded=await app.loadRuntime('linear');assert.equal(loaded,runtime);
-  assert.ok(loaded.ctx.fissures instanceof FissureSystem);
+  assert.equal(loaded.ctx.fissures, nativeFissures);
   loaded.cast('meteor',new Vector3(),new Vector3(0,0,1),12);
   let seen=false,t=0;
   for(let i=0;i<1800;i++){t+=1/30;frame.uTime.value=t;loaded.update(1/30,1/30);loaded.afterBodies(1/30,t);seen ||= loaded.ctx.fissures.active.length>0;if(!loaded.active.length&&!loaded.ctx.fissures.active.length)break;}

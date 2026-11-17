@@ -369,21 +369,32 @@ export function skinMaterial(profile, H, origin) {
 
 const EYE_GLSL = /* glsl */`
   vec3 e=normalize(vCsP-csEc);
-  float ang=acos(clamp(e.z,-1.,1.))*csEyeK;
-  float iris=smoothstep(.53,.5,ang), pupil=smoothstep(.2,.18,ang), limbal=smoothstep(.36,.53,ang)*iris;
-  float fib=csNoise(vec3(atan(e.y,e.x)*12.,ang*30.,1.))*.5+.5;
-  vec3 irisC=csIris*(.65+fib*.7)*(1.-limbal*.75)+csIris*vec3(1.4,1.25,.9)*smoothstep(.3,.2,ang)*.35;
-  float veins=smoothstep(.6,1.,csNoise(vCsP*900.))*smoothstep(.9,1.4,ang)*.25;
-  vec3 sclera=mix(vec3(.86,.83,.8),vec3(.8,.42,.4),veins)*mix(.7,1.,smoothstep(-.6,.2,e.y));
-  diffuseColor.rgb=mix(sclera,irisC,iris); diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.01),pupil);
-  diffuseColor.rgb*=mix(.55,1.,smoothstep(.75,.15,e.y));
-  float cat=smoothstep(.085,.03,length(e.xy-vec2(-.1,.13)/csEyeK));
-  diffuseColor.rgb=mix(diffuseColor.rgb,vec3(1.6),cat*step(1.05,csEyeK));
-  roughnessFactor=.05;
+  float radial=acos(clamp(e.z,-1.,1.))*csEyeK;
+  float iris=1.-smoothstep(.49,.55,radial);
+  float pupil=1.-smoothstep(.17,.215,radial);
+  float polar=atan(e.y,e.x);
+  float spokes=sin(35.*polar+3.*sin(9.*polar)+radial*7.);
+  float grain=csNoise(vec3(e.xy*32.,radial*12.));
+  vec3 irisC=(csIris*1.9+vec3(.032,.015,.006))*(.90+.18*spokes+.14*grain);
+  irisC+=vec3(.027,.014,.005)*(1.-smoothstep(.23,.35,radial));
+  irisC*=mix(1.,.21,smoothstep(.40,.53,radial));
+  float corners=smoothstep(.43,.82,abs(e.x));
+  vec3 sclera=mix(vec3(.43,.37,.30),vec3(.29,.17,.14),corners);
+  float lidShade=mix(.63,1.,1.-smoothstep(-.25,.43,e.y));
+  diffuseColor.rgb=mix(sclera,irisC,iris)*lidShade;
+  diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.004,.003,.002),pupil);
+  // A small directional glint represents the corneal tear film; the physical
+  // environment reflection still follows the camera when no sun is present.
+  #if NUM_DIR_LIGHTS > 0
+    vec3 tearHalf=normalize(normalize(vViewPosition)+directionalLights[0].direction);
+    float glint=pow(max(0.,dot(normalize(vNormal),tearHalf)),320.);
+    diffuseColor.rgb+=directionalLights[0].color*glint*.42;
+  #endif
+  roughnessFactor=.19;
 `;
 
 export function eyeMaterial(iris, center, k = 1) {
-  const m = new MeshPhysicalMaterial({ color: '#ffffff', roughness: .05, clearcoat: 1, clearcoatRoughness: .03, specularIntensity: .9, ior: 1.376 });
+  const m = new MeshPhysicalMaterial({ color: '#ffffff', roughness: .19, clearcoat: .38, clearcoatRoughness: .12, specularIntensity: .55, ior: 1.376 });
   m.name = 'eye';
   withSurface(m, 'hair', 0, EYE_GLSL);
   const prev = m.onBeforeCompile;
@@ -397,7 +408,19 @@ export function eyeMaterial(iris, center, k = 1) {
 export function buildHead(profile, H, quality = 'high') {
   const P = faceParams(profile);
   const res = profile.sheet ? (quality === 'low' ? [96, 72] : quality === 'medium' ? [136, 104] : [220, 168]) : quality === 'low' ? [72, 56] : quality === 'medium' ? [112, 88] : [150, 120];
-  const head = displace(sphereDirs(res[0], res[1]), d => sculpt(d, P));
+  // Recess the skin underneath each independent eyeball. The lid annulus
+  // still meets the undisturbed cheek and brow at its outer edge.
+  const sheet = !!profile.sheet, r = sheet ? EYE_SHEET_R : EYE.r, open = profile.eyeOpen ?? .014, tilt = profile.eyeTilt ?? .10, ew = profile.eyeW ?? (sheet ? .056 : .043), EX = P.eyeX ?? EYE.x;
+  const head = displace(sphereDirs(res[0], res[1]), d => {
+    const p = sculpt(d, P);
+    if (p.z > .16) {
+      const x = Math.abs(p.x) - EX;
+      const y = p.y - EYE.y - x * tilt;
+      const orbit = Math.hypot(x / (ew + .022), y / Math.max(.044, open * 2));
+      p.z -= .085 * (1 - sm(.70, 1, orbit));
+    }
+    return p;
+  });
   // ears
   const ears = [];
   for (const s of [-1, 1]) {
@@ -411,7 +434,6 @@ export function buildHead(profile, H, quality = 'high') {
   // exposed sphere plus detached spherical lids made the old eyes look glued on.
   const eyes = [], lids = [], lash = [];
   // Eye aperture: half-height of the opening and the tilt of its outer corner (profile.eyeOpen / eyeTilt).
-  const sheet = !!profile.sheet, r = sheet ? EYE_SHEET_R : EYE.r, open = profile.eyeOpen ?? .014, tilt = profile.eyeTilt ?? .10, ew = profile.eyeW ?? (sheet ? .056 : .043), EX = P.eyeX ?? EYE.x;
   const frontAt=(x,y)=>{
     let lo=0,hi=Math.PI/2,pt;const dy=Math.max(-.999,Math.min(.999,y*2)),rr=Math.sqrt(1-dy*dy);
     for(let k=0;k<18;k++){const t=(lo+hi)/2;pt=sculpt(new Vector3(Math.sign(x||1)*Math.sin(t)*rr,dy,Math.cos(t)*rr),P);if(Math.abs(pt.x)<Math.abs(x))lo=t;else hi=t;}
@@ -443,8 +465,12 @@ export function buildHead(profile, H, quality = 'high') {
     for(let j=0;j<=M;j++)for(let i=0;i<=N;i++){const index=j*(N+1)+i;blink[index*3+1]+=(cy-ring[index*3+1])*(1-j/M);}
     lid.morphAttributes.position=[new Float32BufferAttribute(blink,3)];lids.push(lid);
   }
-  const skinParts = [head, ...ears.map(e => { const n = e.index ? e.toNonIndexed() : e; n.deleteAttribute('uv'); return n; }), (() => { const n = neck.toNonIndexed(); n.deleteAttribute('uv'); return n; })()];
-  const skinGeo = mergeGeometries(skinParts.map(g => { const n = g.index ? g.toNonIndexed() : g; for (const k of Object.keys(n.attributes)) if (k !== 'position' && k !== 'normal') n.deleteAttribute(k); return n; }), false);
+  // All four surfaces already have smooth indexed normals. Keeping their
+  // indices lets adjacent facial triangles reuse the same transformed vertex.
+  neck.deleteAttribute('uv');
+  const skinParts = [head, ...ears, neck];
+  const skinGeo = mergeGeometries(skinParts, false);
+  skinParts.forEach(part => part.dispose());
   skinGeo.scale(H, H, H);
   for(const lid of lids){lid.scale(H,H,H);const morph=lid.morphAttributes.position[0];for(let i=0;i<morph.count;i++)morph.setXYZ(i,morph.getX(i)*H,morph.getY(i)*H,morph.getZ(i)*H);}
   return { P, H, skinGeo, lids, eyes: eyes.map(e => ({ geo: e.geo.scale(H, H, H), center: e.center.clone().multiplyScalar(H) })), lash };

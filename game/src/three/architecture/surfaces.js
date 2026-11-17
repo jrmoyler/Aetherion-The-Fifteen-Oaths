@@ -67,13 +67,13 @@ const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a
 // Each recipe fills H (height 0..1), T (tone, ~0..1.15), R (roughness 0..1) and returns {tile, normal}.
 const STONE = {
   // Real-world ashlar: blocks 0.4-0.9 m long, courses 0.25-0.42 m, joints 5-10 mm. tile/row/w/joint/bevel in metres.
-  limestone: { tile: 2, row: [0.28, 0.4], w: [0.45, 0.9], joint: 0.008, bevel: 0.022, contrast: 0.12, rough: 0.82, grain: 0.10, strata: 0.02, pits: 0.5, jointTone: 0.62 },
+  limestone: { tile: 2, row: [0.28, 0.4], w: [0.45, 0.9], joint: 0.008, bevel: 0.022, contrast: 0.22, rough: 0.82, grain: 0.10, strata: 0.02, pits: 0.5, jointTone: 0.62 },
   sandstone: { tile: 2, row: [0.3, 0.42], w: [0.5, 0.95], joint: 0.008, bevel: 0.026, contrast: 0.1, rough: 0.88, grain: 0.08, strata: 0.06, pits: 0.2, jointTone: 0.66 },
   darkgranite: { tile: 2, row: [0.3, 0.4], w: [0.45, 0.85], joint: 0.007, bevel: 0.018, contrast: 0.14, rough: 0.72, grain: 0.16, strata: 0, pits: 0.15, jointTone: 0.55 },
   basalt: { tile: 2, row: [0.25, 0.38], w: [0.4, 0.75], joint: 0.01, bevel: 0.02, contrast: 0.18, rough: 0.9, grain: 0.18, strata: 0.02, pits: 0.6, jointTone: 0.5 },
   slate: { tile: 2, row: [0.1, 0.2], w: [0.3, 0.8], joint: 0.006, bevel: 0.01, contrast: 0.2, rough: 0.7, grain: 0.1, strata: 0.04, pits: 0, jointTone: 0.5 },
   shale: { tile: 2, row: [0.1, 0.28], w: [0.35, 0.95], joint: 0.006, bevel: 0.014, contrast: 0.22, rough: 0.86, grain: 0.1, strata: 0.12, pits: 0.1, jointTone: 0.5 },
-  marble: { tile: 3, row: [0.42, 0.7], w: [0.7, 1.3], joint: 0.004, bevel: 0.008, contrast: 0.06, rough: 0.34, grain: 0.03, strata: 0, pits: 0, veins: 0.22, jointTone: 0.6 },
+  marble: { tile: 3, row: [0.42, 0.7], w: [0.7, 1.3], joint: 0.006, bevel: 0.016, contrast: 0.20, rough: 0.46, grain: 0.03, strata: 0, pits: 0, veins: 0.32, jointTone: 0.46 },
   // fired brick 240 x 75 mm, 10 mm joints, half-bond
   terracotta: { tile: 1, row: [0.085, 0.085], w: [0.25, 0.25], joint: 0.01, bevel: 0.006, contrast: 0.22, rough: 0.86, grain: 0.1, strata: 0, pits: 0.3, stagger: 0.5, jointTone: 0.55 },
 };
@@ -94,14 +94,19 @@ function ashlar(N, p, seed, H, T, R) {
     let tone = 1 - p.contrast * 0.5 + p.contrast * r + (m - 0.5) * 0.12 + (g - 0.5) * p.grain + (l - 0.5) * 0.1;
     if (p.strata) tone += Math.sin((y / N) * 64 + m * 6) * p.strata * 0.5;
     if (p.veins) { const v = Math.abs(Math.sin((x + y * 0.6) / N * 18 + tap(lo, N, x, y, 2) * 14 + r * 9)); tone -= Math.pow(1 - v, 18) * p.veins + Math.pow(1 - v, 4) * p.veins * 0.25; }
-    tone -= pit * 0.25;
+    // Moisture collects beside mortar; chips and pitting soften the band.
+    // Bake into the existing maps so the block silhouette survives mip filtering.
+    const dampEdge = 1 - smooth(joint, joint + bevel + 0.045 * ppm, e);
+    const weathering = dampEdge * (0.07 + 0.08 * l);
+    tone -= pit * 0.25 + weathering;
+    if (p.veins) tone *= 0.88;
     // edges catch light / wear lighter, joints carry grime
     tone += (1 - smooth(0, bevel * 2.2, e - joint)) * 0.05 * face;
     const jt = (p.jointTone ?? 0.55) + (g - 0.5) * 0.2;
     T[i] = face * tone + (1 - face) * jt;
-    R[i] = Math.min(1, face * (p.rough + (g - 0.5) * 0.14 + (r2 - 0.5) * 0.08) + (1 - face) * 0.96);
+    R[i] = Math.min(1, face * (p.rough + weathering + (g - 0.5) * 0.14 + (r2 - 0.5) * 0.08) + (1 - face) * 0.96);
   }
-  return { tile: p.tile, normal: p.veins ? 0.6 : 1.0, strength: 3.2 };
+  return { tile: p.tile, normal: p.veins ? 0.85 : 1.0, strength: 3.2 };
 }
 const PAVE = {
   // plaza flags 0.5-1.1 m, ceremonial slabs 0.8-1.6 m, 6-10 mm grout

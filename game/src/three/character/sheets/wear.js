@@ -4,14 +4,18 @@
 // baked surface is hidden (only the regions the recipe keeps, normally the hands and the weapon they hold,
 // stay) and the code-built costume is bound to the body's own skeleton in its place. So there is one costume,
 // one extra draw call, and every authored clip drives it.
-import { BufferAttribute, Matrix4, SkinnedMesh, Vector3 } from 'three';
+import { Matrix4, SkinnedMesh, Vector3 } from 'three';
+import { withPrimitiveIndices } from '../primitive-geometry.js';
 import { buildCostume } from './costume.js';
 import { costumeDepthMaterial, costumeMaterial } from './material.js';
+import { heldWeaponIndices } from './weapon-islands.js';
+import { applyTailoring } from './tailoring.js';
+import { bindDigits, registerDigits } from './digits.js';
 import { recipeFor } from './recipes/index.js';
 
 const SIDED = /^(shoulder|upperarm|forearm|hand|thigh|shin|foot|toe)\.?([LR])$/;
 const boneName = (name) => name.replace(SIDED, '$1.$2');
-const masked = new WeakSet(), built = new Map();
+const masked = new WeakMap(), built = new WeakMap();
 
 export function sheetRecipe(desc) { return desc && desc.kind !== 'mob' && desc.oath && desc.cls ? recipeFor(`${desc.oath}-${desc.cls}`) : null; }
 
@@ -35,26 +39,32 @@ const KEEP = {
     const wrist = J[`hand.${side}`], along = new Vector3().subVectors(wrist, J[`forearm.${side}`]).normalize();
     return point.sub(wrist).dot(along) > -.012;
   },
-  // Only the held weapon: what the hand bones carry outside the volume of the hand itself. The recipe then
-  // builds its own hands (see hands.js) and closes the weapon hand over the grip.
-  weapon: ({ owner, point, J }) => {
-    const side = owner === 'hand.L' ? 'L' : owner === 'hand.R' ? 'R' : null; if (!side) return false;
-    const wrist = J[`hand.${side}`], along = new Vector3().subVectors(wrist, J[`forearm.${side}`]).normalize();
-    const t = Math.min(.12, Math.max(-.06, point.sub(wrist).dot(along)));
-    return point.addScaledVector(along, -t).length() > .055;
-  },
+
 };
 
 /**
  * Drop every baked triangle the recipe does not keep, in every skinned mesh the GLB brought (the main surface and
- * any costume primitives appended to it). The geometries are shared by all actors of this hero, so this runs once.
+ * any costume primitives appended to it). Cache the filtered index buffer
+ * separately from the source GLB primitive.
  */
 function hideBaked(body, rig, recipe) {
   const rules = (recipe.keep ?? []).map((name) => KEEP[name]).filter(Boolean), point = new Vector3();
   for (const mesh of body.meshes) {
     if (!mesh.isSkinnedMesh || mesh.userData.groomHidden || mesh.userData.sheetCostume) continue;
-    const geometry = mesh.geometry; if (masked.has(geometry) || !geometry.index) continue; masked.add(geometry);
+    const geometry = mesh.geometry;
+    if (!geometry.index) continue;
+    let variants = masked.get(geometry);
+    if (!variants) masked.set(geometry, variants = new Map());
+    if (variants.has(recipe.id)) {
+      mesh.geometry = variants.get(recipe.id);
+      continue;
+    }
     const { position, skinIndex, skinWeight } = geometry.attributes, names = mesh.skeleton.bones.map((bone) => boneName(bone.name));
+    if (recipe.keep?.length === 1 && recipe.keep[0] === 'weapon') {
+      mesh.geometry = withPrimitiveIndices(geometry, heldWeaponIndices(geometry, names, recipe.weaponBone));
+      variants.set(recipe.id, mesh.geometry);
+      continue;
+    }
     const keep = new Uint8Array(position.count);
     for (let i = 0; i < position.count; i++) {
       let owner = 0, best = -1;
@@ -63,7 +73,8 @@ function hideBaked(body, rig, recipe) {
     }
     const source = geometry.index.array, kept = [];
     for (let i = 0; i < source.length; i += 3) if (keep[source[i]] && keep[source[i + 1]] && keep[source[i + 2]]) kept.push(source[i], source[i + 1], source[i + 2]);
-    geometry.setIndex(new BufferAttribute(new (position.count > 65535 ? Uint32Array : Uint16Array)(kept), 1));
+    mesh.geometry = withPrimitiveIndices(geometry, new (position.count > 65535 ? Uint32Array : Uint16Array)(kept));
+    variants.set(recipe.id, mesh.geometry);
   }
 }
 
@@ -72,19 +83,41 @@ export function wearSheet(body, desc, quality = 'high') {
   const recipe = sheetRecipe(desc); if (!recipe) return null;
   const rig = rigOf(body); if (!rig) return null;
   rig.H = body.groom?.H;
-  const key = `${recipe.id}|${quality}|${(rig.H ?? 0).toFixed(3)}|${rig.J.head.y.toFixed(3)}`;
-  if (!built.has(key)) built.set(key, buildCostume(recipe, rig, quality));
-  const costume = built.get(key);
+  rig.unarmed = Boolean(desc.noWeapon);
+  let variants = built.get(rig.mesh.geometry);
+  if (!variants) { variants = new Map(); built.set(rig.mesh.geometry, variants); }
+  const key = `${recipe.id}|${quality}|${(rig.H ?? 0).toFixed(3)}|${rig.J.head.y.toFixed(3)}|${rig.unarmed}`;
+  if (!variants.has(key)) {
+    const digits = registerDigits(rig);
+    variants.set(key, { ...buildCostume(recipe, rig, quality), digits });
+  }
+  const costume = variants.get(key);
   hideBaked(body, rig, recipe);
-  const motion = costume.geometry.userData.motion, mesh = new SkinnedMesh(costume.geometry, costumeMaterial(motion)); mesh.userData.sheetCostume = true;
+  if (recipe.keep?.length === 1 && recipe.keep[0] === 'weapon') {
+    const held = body.meshes.filter(m => m.isSkinnedMesh && m.visible && !m.userData.groomHidden && m.geometry.index?.count);
+    body.animator.setHandsFree = free => {
+      for (const prop of held) prop.visible = !(free || rig.unarmed);
+    };
+    body.animator.setHandsFree(false);
+  }
+  const motion = costume.geometry.userData.motion;
+  const cloth = applyTailoring(costumeMaterial(motion), recipe.id, costume.form);
+  const mesh = new SkinnedMesh(costume.geometry, cloth);
+  mesh.userData.sheetCostume = true;
   mesh.customDepthMaterial = costumeDepthMaterial(motion);
   mesh.name = `sheet-costume-${recipe.id}`; mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false;
   mesh.position.copy(rig.mesh.position); mesh.quaternion.copy(rig.mesh.quaternion); mesh.scale.copy(rig.mesh.scale);
-  rig.mesh.parent.add(mesh); mesh.bind(rig.mesh.skeleton, rig.mesh.bindMatrix);
+  const fingers = costume.digits.length ? bindDigits(rig.mesh, costume.digits) : null;
+  rig.mesh.parent.add(mesh); mesh.bind(fingers?.skeleton ?? rig.mesh.skeleton, rig.mesh.bindMatrix);
+  if (fingers) body.animator.poseHands = fingers.pose;
   body.meshes.push(mesh);
   body.sheetCostume = { id: recipe.id, sheet: recipe.sheet, mesh, triangles: costume.triangles, parts: costume.parts };
   const dispose = body.dispose.bind(body);
   // The geometry is cached per hero and tier; only this actor's mesh and material go.
-  body.dispose = () => { mesh.removeFromParent(); mesh.customDepthMaterial.dispose(); dispose(); };
+  body.dispose = () => {
+    delete body.animator.setHandsFree;
+    if (fingers) { delete body.animator.poseHands; fingers.dispose(); }
+    mesh.removeFromParent(); mesh.customDepthMaterial.dispose(); dispose();
+  };
   return body.sheetCostume;
 }

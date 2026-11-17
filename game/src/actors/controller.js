@@ -1,6 +1,7 @@
 // Local player controller: camera-relative movement with acceleration, turn smoothing,
 // walk/run/sprint, jump with coyote time + buffering, dodge roll with i-frames, slope limits,
 // step-up onto architecture, swimming, world bounds, and net move sync at MOVE_HZ.
+import { DODGE_DURATION, setTravelDirection } from '../three/character/locomotion.js';
 import { CLASSES, regionAt } from '@shared/oaths.js';
 import { MOVE_HZ } from '@shared/protocol.js';
 import { WORLD_HALF } from '@shared/terrain.js';
@@ -9,7 +10,7 @@ export const TUNING = {
   accelGround: 11, decelGround: 13, accelAir: 2.2,
   turnRate: 13, walkFactor: 0.38, sprintFactor: 1.45, backFactor: 1.0,
   gravity: 24, jumpVel: 7.0, coyote: 0.12, jumpBuffer: 0.14, terminal: 42,
-  dodgeTime: 0.55, dodgeSpeed: 9.5, dodgeIFrames: [0.06, 0.42], dodgeCooldown: 0.75,
+  dodgeTime: DODGE_DURATION, dodgeSpeed: 9.5, dodgeIFrames: [0.06, 0.42], dodgeCooldown: 0.75,
   stepUp: 0.55, stepDown: 0.65, slopeLimitDeg: 48, radius: 0.38,
   swimDepth: 1.2, swimFactor: 0.55,
 };
@@ -43,11 +44,16 @@ export class PlayerController {
 
   teleport(x, y, z, ry) {
     const r = this.actor.root;
-    const g = this.groundAt(x, z, (y ?? 0) + 1.5);
+    const g = this.groundAt(x, z, y ?? this.terrainH(x, z));
     r.position.set(x, Math.max(y ?? g, g), z);
     if (ry != null) { this.yaw = ry; r.rotation.y = ry; }
     this.vel.x = this.vel.y = this.vel.z = 0;
-    this.dodgeT = -1;
+    this.dodgeT = -1; this.dodgeCd = 0;
+    this.swimming = false; this.airT = 0; this.jumpReq = -1; this.faceT = 0;
+    this.grounded = r.position.y <= g + 0.001;
+    this.lastGrounded = this.grounded ? this.time : -Infinity;
+    this.prevJumpHeld = !!this.ctx.input?.state?.jump;
+    this.sendT = this.heartbeatT = this.regionT = 0;
   }
 
   /** face a world point briefly (casting at a target) */
@@ -73,6 +79,14 @@ export class PlayerController {
   }
 
   update(dt) {
+    if (!Number.isFinite(dt) || dt <= 0) return;
+    // Bound each sweep so a dodge cannot cross a thin wall between contacts.
+    const elapsed = Math.min(dt, 0.1);
+    const steps = Math.ceil(elapsed * 60);
+    for (let i = 0; i < steps; i++) this.step(elapsed / steps);
+  }
+
+  step(dt) {
     const ctx = this.ctx, input = ctx.input, a = this.actor, root = a.root, T = TUNING;
     this.time += dt;
     const pos = root.position;
@@ -82,7 +96,10 @@ export class PlayerController {
     // ---- wish direction (camera relative)
     const cy = this.getCameraYaw();
     const fx = Math.sin(cy), fz = Math.cos(cy);
-    const rx = Math.cos(cy), rz = -Math.sin(cy);
+    // Three uses a right-handed view (screen right = forward cross up).
+    // The legacy Babylon actor harness uses its default left-handed view.
+    const lateralSign = root.isObject3D ? -1 : 1;
+    const rx = lateralSign * Math.cos(cy), rz = -lateralSign * Math.sin(cy);
     let mx = st.moveX ?? 0, my = st.moveY ?? 0;
     if (!alive || this.frozen) { mx = 0; my = 0; this.dodgeT = -1; this.jumpReq = -1; this.vel.x = 0; this.vel.z = 0; }
     let wx = fx * my + rx * mx, wz = fz * my + rz * mx;
@@ -174,16 +191,23 @@ export class PlayerController {
         a.body?.animator.setState('jump');
         ctx.bus?.emit('player:jump', {});
       }
-      this.vel.y = Math.max(-T.terminal, this.vel.y - T.gravity * dt);
-      ny = pos.y + this.vel.y * dt;
+      const initialVy = this.vel.y;
+      this.vel.y = Math.max(-T.terminal, initialVy - T.gravity * dt);
+      ny = pos.y + (initialVy + this.vel.y) * 0.5 * dt;
+      if (ny > pos.y && ctx.collision?.ceilingAt) {
+        const headHeight = h * 0.95;
+        const ceiling = ctx.collision.ceilingAt(nx, nz, T.radius, pos.y + headHeight, ny + headHeight);
+        if (ceiling < Infinity) { ny = ceiling - headHeight; this.vel.y = 0; }
+      }
       if (this.vel.y <= 0 && (ny <= g || (this.grounded && pos.y - g <= T.stepDown))) {
         const wasAir = !this.grounded && this.airT > 0.35;
+        const impactSpeed = -this.vel.y;
         ny = g; this.vel.y = 0;
         if (!this.grounded) {
           this.grounded = true;
           if (wasAir && this.dodgeT < 0) a.body?.animator.setState('land');
           else if (this.dodgeT < 0) a.body?.animator.setState('loco');
-          if (wasAir) ctx.bus?.emit('player:land', { speed: this.airT });
+          if (wasAir) ctx.bus?.emit('player:land', { speed: this.airT, impactSpeed, x: nx, y: g, z: nz });
         }
         this.lastGrounded = this.time; this.airT = 0;
       } else {
@@ -213,10 +237,8 @@ export class PlayerController {
     // ---- animation drive
     const anim = a.body?.animator;
     if (anim) {
-      // backwards when moving opposite to facing (mouse-steer strafing)
-      const fwd = Math.sin(this.yaw) * this.vel.x + Math.cos(this.yaw) * this.vel.z;
-      anim.backwards = fwd < -0.3 && hs > 0.5;
-      anim.speed = this.swimming ? 0 : this.groundSpeed;
+      setTravelDirection(anim, nx - ox, nz - oz, this.yaw);
+      anim.speed = this.groundSpeed;
       anim.yawVel = anim.yawVel + (yawVel - anim.yawVel) * Math.min(1, dt * 8);
       if (!alive) anim.setState('dead');
       else if (this.swimming) anim.setState('swim');

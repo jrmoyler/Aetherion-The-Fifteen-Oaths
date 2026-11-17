@@ -5,6 +5,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { equipArmor } from './actor-armor.js';
 import { attachWeapon } from './actor-weapons.js';
+import { GAIT_SPEED, groundClip, isForwardGait } from './character/locomotion.js';
+import { waterClips } from './character/water-motion.js';
 import { prepareCombatClips } from './combat-clips.js';
 import { applyGroom } from './character/groom.js';
 import { sheetRecipe, wearSheet } from './character/sheets/wear.js';
@@ -19,11 +21,23 @@ export class AssetLibrary {
   start() { for (const fn of this.listeners) fn(); }
   onChange(fn) { this.listeners.add(fn); return () => this.listeners.delete(fn); }
   characterUrl(key) { return `${this.base}characters/${key}.glb`; }
-  async creatureUrl(arch, oath) { return `${this.base}creatures/${arch}-${oath}.glb`; }
+  async creatureUrl(arch, oath) {
+    const dir = `${this.base}creatures/`;
+    this.creatureFiles ??= fetch(`${dir}manifest.json`).then(async response => {
+      if (!response.ok) throw new Error('Creature manifest unavailable');
+      const entries = await response.json();
+      return new Map(entries.map(({ id, file }) => [id, file.split('/').pop()]));
+    }).catch(() => null);
+    const files = await this.creatureFiles;
+    // Offline installs can still have the generic GLB cached without its manifest.
+    if (!files) return `${dir}${arch}.glb`;
+    const file = files.get(`${arch}-${oath}`) ?? files.get(arch);
+    return file ? dir + file : null;
+  }
   async load(url) { try { return await loadModel(url); } catch { try { return await loadModel(url.replace(/-oath-\d\d(?=\.glb)/, '')); } catch (error) { console.warn('[assets] Model unavailable', url, error); return null; } } }
   dispose() { this.listeners.clear(); }
 }
-const aliases = { dead: 'death', jump: 'jump_start', fall: 'jump_loop', emote: 'emote_bow', swim: 'walk', attack: 'attack_1' };
+const aliases = { dead: 'death', jump: 'jump_start', fall: 'jump_loop', emote: 'emote_bow', attack: 'attack_1' };
 export function createModelBody(gltf, parent, combatTiming = false) {
   const root = clone(gltf.scene); parent.add(root);
   const meshes = [], sockets = {};
@@ -44,19 +58,24 @@ export function createModelBody(gltf, parent, combatTiming = false) {
   root.updateMatrixWorld(true);
   const box = new Box3().setFromObject(root), size = box.getSize(new Vector3());
   const mixer = new AnimationMixer(root), actions = new Map((combatTiming ? prepareCombatClips(gltf.animations) : gltf.animations).map(clip => [clip.name.toLowerCase(), mixer.clipAction(clip)]));
+  let waterLoaded = false;
   let current, hold = 0, combatHold = 0;
   const materialStates = new Map();
   for (const mesh of meshes) for (const material of (Array.isArray(mesh.material) ? mesh.material : [mesh.material])) {
     materialStates.set(material, { opacity: material.opacity, transparent: material.transparent, depthWrite: material.depthWrite });
   }
   const animator = {
-    state: 'loco', speed: 0, yawVel: 0, channel: false, action: null,
+    state: 'loco', stateT: 0, speed: 0, yawVel: 0, channel: false, action: null,
     interval: 0, accum: 0,
     setState(name) {
       if (this.state === name || (name === 'loco' && this.state === 'land' && hold > 0)) return;
       this.state = name;
-      // Terminal/recovery states must preempt an attack or a long channel.
-      if (name === 'dead' || name === 'loco') { hold = 0; this.action = null; }
+      this.stateT = 0;
+      // These transitions replace any pose left over from a previous action.
+      if (name === 'dead' || name === 'loco' || name === 'dodge' || name === 'jump' || name === 'swim') {
+        hold = 0;
+        this.action = null;
+      }
       if (name === 'dead') this.select('death', true, { restart: true });
       if (name === 'land') this.playAnim('land');
     },
@@ -75,12 +94,27 @@ export function createModelBody(gltf, parent, combatTiming = false) {
     },
     select(name, once = false, opts = {}) {
       name = aliases[name] ?? name;
+      if ((name === 'swim' || name === 'tread_water') && !waterLoaded && combatTiming) {
+        for (const clip of waterClips(gltf.scene, size.y)) {
+          if (!actions.has(clip.name)) actions.set(clip.name, mixer.clipAction(clip));
+        }
+        waterLoaded = true;
+      }
+      if (name === 'tread_water' && !actions.has(name)) name = 'swim';
+      if (name === 'swim' && !actions.has(name)) name = 'walk';
       const next = actions.get(name) ?? actions.get(name.replace(/_\d$/, '_1')) ?? actions.get('idle');
       if (!next) return null;
       if (current === next && !opts.restart) return next;
+      this.setHandsFree?.(name === 'swim' || name === 'tread_water');
       const previous = current;
       const blend = Math.max(0, opts.blend ?? (once ? .055 : .14));
       next.stopFading().reset().setLoop(once ? LoopOnce : LoopRepeat, once ? 1 : Infinity);
+      // Walk, run and sprint all start on the same authored contact foot.
+      // Transfer cycle phase so changing gait does not snap back to heel strike.
+      if (!once && !opts.restart && isForwardGait(name) && isForwardGait(previous?.getClip().name)) {
+        next.time = previous.time / previous.getClip().duration * next.getClip().duration;
+      }
+      if (opts.time) next.time = Math.min(opts.time, next.getClip().duration);
       next.clampWhenFinished = once;
       next.enabled = true; next.setEffectiveTimeScale(Math.max(.05, opts.speed ?? 1));
       next.setEffectiveWeight(1).play();
@@ -91,18 +125,34 @@ export function createModelBody(gltf, parent, combatTiming = false) {
     },
     update(dt) {
       if (!Number.isFinite(dt) || dt <= 0) return false;
+      this.stateT += dt;
       // Evaluate distant skeletons less often, retaining all elapsed animation time.
       this.accum += dt;
       if (this.accum + 1e-9 < this.interval) return false;
       dt = this.accum; this.accum = 0;
       combatHold = Math.max(0, combatHold - dt);
-      if (hold > 0) { hold -= dt; if (hold <= 0) { this.action = null; if (this.state === 'land') this.state = 'loco'; } }
+      if (hold > 0) {
+        hold -= dt;
+        if (hold <= 0) {
+          this.action = null;
+          if (this.state === 'land') this.setState('loco');
+        }
+      }
       if (hold <= 0) {
-        const name = this.state === 'loco' ? (this.speed < .2 ? (combatHold > 0 && actions.has('idle_combat') ? 'idle_combat' : 'idle') : this.backwards ? 'backpedal' : this.speed < 3 ? 'walk' : this.speed > 7 ? 'sprint' : 'run') : this.state;
-        this.select(name, name === 'dead');
-        if (current) current.timeScale = this.state === 'loco' && this.speed > .2 ? Math.max(.65, Math.min(1.65, this.speed / (this.speed < 3 ? 2.2 : 6))) : 1;
+        let name = this.state;
+        if (name === 'loco') name = groundClip(this, actions, combatHold, current?.getClip().name);
+        if (name === 'swim' && this.speed < .32) name = 'tread_water';
+        const elapsed = Math.max(0, this.stateT - dt);
+        if (name === 'jump' && elapsed >= (actions.get('jump_start')?.getClip().duration ?? 0)) name = 'fall';
+        const timed = name === 'jump' || name === 'dodge';
+        this.select(name, timed || name === 'dead', timed ? { time: elapsed } : {});
+        if (current) {
+          const nominal = GAIT_SPEED[current.getClip().name];
+          current.timeScale = nominal && this.state === 'loco' ? Math.max(.65, Math.min(1.65, this.speed / nominal)) : 1;
+        }
       }
       mixer.update(dt);
+      this.poseHands?.(dt, current?.getClip().name);
       return true;
     },
   };

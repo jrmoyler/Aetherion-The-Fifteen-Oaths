@@ -45,7 +45,7 @@ export default {
     leather: '#4a3a2c', leatherDark: '#2c2420', iron: '#96928b', rubber: '#1c1c1d', boot: '#2c2a29', sole: '#1e1d1d', hair: '#15110f',
   },
   build: { width: 1.12, depth: 1.1, waist: 1.12, hips: 1.06, arm: 1.14, leg: 1.12, neck: 1.06, shoulder: 1.08 },
-  keep: ['weapon'],
+  keep: ['weapon'], weaponBone: 'forearm.L',
   builders: C,
   groom: { hair: false, gear: false, beard: false },
   parts: [

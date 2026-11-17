@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Scene, Vector3, PerspectiveCamera, Group, Mesh, MeshStandardMaterial, BoxGeometry } from 'three';
+import { Bus } from '../core/bus.js';
 import { initVFX, ELEMENT_STYLES } from './vfx.js';
 import { SOURCE_ABILITY_IDS } from './source-abilities.js';
 
@@ -71,12 +72,73 @@ test('confirmed impacts expand and projectiles carry a bounded directional trail
   vfx.play('basic:sorcerer', { element: 'fire', pos: new Vector3(), target: new Vector3(10, 0, 0) });
   const projectile = scene.getObjectByName('CombatEffect:projectile:fire');
   assert.ok(projectile, 'explicit element is respected for basic attacks');
-  assert.equal(projectile.children.filter(c => c.name === 'ProjectileRibbon').length, 8);
+  const wake = projectile.getObjectByName('ProjectileWake');
+  assert.ok(wake);
   vfx.impact('earth', new Vector3(3, 0, 2));
   const wave = scene.getObjectByName('ImpactShockwave');
   tick(.05); const first = wave.scale.x;
   tick(.05); assert.ok(wave.scale.x > first);
-  const ribbons = projectile.children.filter(c => c.name === 'ProjectileRibbon');
-  assert.ok(ribbons[7].position.x < ribbons[0].position.x, 'trail follows behind travel');
+  const length = wake.material.uniforms.lengthTravelled.value;
+  assert.ok(length > 0 && length <= projectile.position.x, 'wake is limited to distance already travelled');
+  assert.deepEqual(wake.material.uniforms.direction.value.toArray(), [1, 0, 0]);
+  for (let i = 0; i < 5; i++) tick(.1);
+  assert.equal(wake.visible, false, 'the tail catches up after arrival');
   vfx.dispose(); assert.equal(scene.children.length, 0);
+});
+
+test('confirmed strikes tilt to the ground, scale streaks by quality and preserve remote melee shape', async () => {
+  const scene = new Scene();
+  let tick;
+  const vfx = await initVFX({scene, world: {heightAt: x => x * .4}, quality: {particles: .35}, addUpdate(fn){ tick = fn; }});
+  vfx.castEffect({id:'basic/ninja', kind:'basic'}, {element:'earth'});
+  assert.ok(scene.getObjectByName('MeleeArc'));
+  vfx.impact('fire', new Vector3());
+  const wave = scene.getObjectByName('ImpactShockwave');
+  const normal = new Vector3(0, 0, 1).applyQuaternion(wave.quaternion);
+  assert.ok(normal.distanceTo(new Vector3(-.4, 1, 0).normalize()) < 1e-6);
+  const spray = scene.getObjectByName('ImpactSpray');
+  assert.equal(spray.geometry.attributes.position.count, 12);
+  tick(.1);
+  const p = spray.geometry.attributes.position;
+  assert.ok(p.getY(0) > p.getY(1), 'streak spans an earlier point on its flight path');
+  vfx.dispose();
+});
+
+test('source zones draw their gameplay radius on the terrain until release or cancellation', async () => {
+  const scene = new Scene(), world = { heightAt: x => x * .25 };
+  let tick;
+  const vfx = await initVFX({scene, world, addUpdate(fn){tick = fn;}});
+  const ab = {id:'linear/glacier', shape:'zone', radius:4.6};
+  const options = {castTime:.2, caster:{position:new Vector3()}, target:new Vector3(4,1,0)};
+  const first = vfx.castEffect(ab, options);
+  const marker = scene.getObjectByName('ZoneWindup');
+  assert.deepEqual(marker.position.toArray(), [4,1,0]);
+  const p = marker.geometry.attributes.position;
+  for (let i = 0; i < p.count; i++) assert.ok(Math.abs(p.getY(i) - p.getX(i) * .25 - .075) < 1e-5);
+  tick(.1); assert.equal(marker.material.uniforms.progress.value, .5);
+  first.stop(); assert.equal(scene.getObjectByName('ZoneWindup'), undefined);
+  const next = vfx.castEffect(ab, options);
+  tick(.1); tick(.1);
+  assert.ok(next.instance);
+  assert.equal(scene.getObjectByName('ZoneWindup'), undefined);
+  vfx.dispose();
+});
+
+test('landing burst reads the surface and reuses a single draw across repeated contacts', async () => {
+  const scene = new Scene(), bus = new Bus(), sample = {wetness:.8};
+  let tick;
+  const vfx = await initVFX({scene, bus, surface:{sample:()=>sample}, addUpdate(fn){tick = fn;}});
+  const land = impactSpeed => bus.emit('player:land', {x:2, y:4, z:6, impactSpeed});
+  land(1); assert.equal(scene.getObjectByName('LandingParticles'), undefined);
+  land(6);
+  const burst = scene.getObjectByName('LandingParticles');
+  assert.equal(burst.material.uniforms.wet.value, 1);
+  sample.snow = .7;
+  land(9); assert.equal(scene.getObjectByName('LandingParticles'), burst);
+  assert.equal(burst.material.uniforms.wet.value, 0);
+  assert.equal(burst.material.uniforms.tint.value.getHexString(), 'd9e3e2');
+  for (let i = 0; i < 6; i++) tick(.1);
+  assert.equal(burst.parent, null);
+  vfx.dispose(); land(6);
+  assert.equal(scene.children.length, 0);
 });

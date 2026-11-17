@@ -1,0 +1,44 @@
+{
+  "productionSmoke": {
+    "armorReach": 1.4414571592598804,
+    "fingerJoints": 30,
+    "armorMeshes": [
+      "arsenal-armor-field-robe"
+    ],
+    "renderer": true,
+    "frames": 16,
+    "model": "./assets/characters/oath-09-ninja.glb",
+    "skinnedMeshes": 5,
+    "drawCalls": 1,
+    "triangles": 1,
+    "world": {
+      "terrainNodes": 24,
+      "pending": 1
+    },
+    "svg": 0,
+    "horizontalOverflow": false,
+    "moved": 0.4269296100279311,
+    "errors": [],
+    "failures": []
+  },
+  "highQualityCapture": {
+    "oath": "oath-09",
+    "discipline": "ninja",
+    "asset": "./assets/characters/oath-09-ninja.glb",
+    "outfit": "oath-09-ninja",
+    "joints": 53,
+    "defaultArmor": [
+      "arsenal:armor/chest/01"
+    ],
+    "weapon": "arsenal:short_blades/tanto",
+    "quality": "high",
+    "position": [
+      258.73,
+      26.16,
+      357.05
+    ],
+    "contextLost": false,
+    "errors": [],
+    "failed": []
+  }
+}

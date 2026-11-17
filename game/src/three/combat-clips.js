@@ -1,6 +1,8 @@
-// Preserve the authored skeletal poses, but fit their windup/contact/recovery to
-// the game's repeat-attack cadence. Previously 1.1–1.4s swings were restarted by
-// ~0.6s basic attacks, so the player never saw a completed strike/recovery.
+import { DODGE_DURATION } from './character/locomotion.js';
+
+// Fit authored poses to the gameplay cadence while preserving the characteristic
+// contacts. The takeoff extension finishes before the physical jump apex, and
+// the dodge completes as the controller restores ordinary locomotion.
 export const COMBAT_TIMING = Object.freeze({
   attack_1: {duration:.56, contact:.16, authoredContact:.35},
   attack_2: {duration:.60, contact:.18, authoredContact:.35},
@@ -9,6 +11,8 @@ export const COMBAT_TIMING = Object.freeze({
   cast_aoe: {duration:.82, contact:.30, authoredContact:.43},
   hit: {duration:.28, contact:.055, authoredContact:.25},
   land: {duration:.24, contact:.05, authoredContact:.20},
+  jump_start: {duration:.22, contact:.075, authoredContact:11/14},
+  dodge: {duration:DODGE_DURATION, contact:.19, authoredContact:.40},
 });
 const cache = new WeakMap();
 export function prepareCombatClips(clips) {
