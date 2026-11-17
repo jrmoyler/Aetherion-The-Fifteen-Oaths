@@ -100,7 +100,7 @@ export class OrbitCamera {
       if (this.intro && (st.moveX || st.moveY || st.jump || st.mouseLeft)) this.intro = null;
       if (st.lookDX || st.lookDY) {
         const touch = !st.pointerLocked && !st.mouseRight && !this.drag;
-        this.addLook(st.lookDX, st.lookDY, touch ? CAM.touchSens : CAM.sens);
+        this.addLook(st.lookDX ?? 0, st.lookDY ?? 0, touch ? CAM.touchSens : CAM.sens);
       }
       if (st.zoom) { this.dist = Math.max(CAM.minDist, Math.min(CAM.maxDist, this.dist * Math.pow(1.12, st.zoom))); if (this.intro) this.intro = null; }
     }
