@@ -56,7 +56,9 @@ export function createInput(canvas, bus) {
     target.addEventListener(type, fn, options);
     listeners.push(() => target.removeEventListener(type, fn, options));
   };
-  const down = new Set();
+  const keyCodes = new Set();
+  const virtualHeld = new Set();
+  const held = (action) => virtualHeld.has(action) || BINDINGS[action]?.some(code => keyCodes.has(code)) || false;
   const pressed = new Set();
   const state = { moveX: 0, moveY: 0, lookDX: 0, lookDY: 0, zoom: 0, sprint: false, jump: false, mouseLeft: false, mouseRight: false, pointerLocked: false };
   const virtual = { mx: 0, my: 0, active: false, lookDX: 0, lookDY: 0, sprint: false };
@@ -79,12 +81,13 @@ export function createInput(canvas, bus) {
     if (!gameplayEnabled()) return;
     const a = actionOf(e.code);
     if (!a) return;
-    if (a === 'target' || a === 'jump') e.preventDefault();
-    if (!down.has(a)) pressed.add(a);
-    down.add(a);
-    bus.emit('input:action', a);
+    if (a === 'target' || a === 'jump' || e.code.startsWith('Arrow')) e.preventDefault();
+    if (e.repeat || keyCodes.has(e.code)) return;
+    const alreadyHeld = held(a);
+    keyCodes.add(e.code);
+    if (!alreadyHeld) fire(a);
   });
-  listen(globalThis, 'keyup', (e) => { const a = actionOf(e.code); if (a) down.delete(a); });
+  listen(globalThis, 'keyup', (e) => keyCodes.delete(e.code));
   listen(globalThis, 'blur', resetTransientInput);
   listen(document, 'visibilitychange', () => { if (document.hidden) resetTransientInput(); });
 
@@ -121,6 +124,7 @@ export function createInput(canvas, bus) {
   const suppressed = new Array(PAD_BUTTONS.length).fill(false); // held across a capture change: ignore until released
   const padDown = new Map(); // action -> button index holding it
   let padSprint = false, fullPushT = 0, lastPadPoll = 0, captureFn = null, wasCaptured = false, captureNext = null;
+  let waitForMoveCenter = false, waitForLookCenter = false;
   const nav = { dir: null, src: null, next: 0 };
   const gameplayEnabled = () => enabled && !typing && !(captureFn && captureFn());
   let gameplayWasEnabled = true;
@@ -149,11 +153,11 @@ export function createInput(canvas, bus) {
     pad.lx = pad.ly = pad.rx = pad.ry = pad.lt = pad.rt = 0; pad.move = null; pad.sprint = false;
   }
   function resetTransientInput() {
-    down.clear(); pressed.clear();
+    keyCodes.clear(); virtualHeld.clear(); pressed.clear();
     Object.assign(state, { moveX: 0, moveY: 0, lookDX: 0, lookDY: 0, zoom: 0, sprint: false, jump: false, mouseLeft: false, mouseRight: false });
     Object.assign(virtual, { mx: 0, my: 0, active: false, lookDX: 0, lookDY: 0, sprint: false });
-    const held = padHeld.map((on, i) => on || suppressed[i]); releasePad();
-    held.forEach((on, i) => { suppressed[i] = on; });
+    const previousButtons = padHeld.map((on, i) => on || suppressed[i]); releasePad();
+    previousButtons.forEach((on, i) => { suppressed[i] = on; });
   }
   function readPads() {
     let list = [];
@@ -170,7 +174,7 @@ export function createInput(canvas, bus) {
   /** Radial deadzone + response curve. Returns [x, y, normalizedMagnitude]. */
   function shape(x, y, curve) {
     const m = Math.hypot(x, y);
-    if (m < cfg.deadzone) return [0, 0, 0];
+    if (m <= cfg.deadzone) return [0, 0, 0];
     const n = clamp01((m - cfg.deadzone) / (cfg.outer - cfg.deadzone));
     const c = Math.pow(n, curve);
     return [(x / m) * c, (y / m) * c, n];
@@ -206,6 +210,10 @@ export function createInput(canvas, bus) {
       // Preserve button edges across menus: release before an action can fire again.
       for (let i = 0; i < padHeld.length; i++) suppressed[i] = suppressed[i] || padHeld[i];
       padDown.clear(); padSprint = false; fullPushT = 0;
+      if (!captured) {
+        waitForMoveCenter = !!(pad.lx || pad.ly);
+        waitForLookCenter = !!(pad.rx || pad.ry);
+      }
       pad.move = null; pad.sprint = false; wasCaptured = captured; nav.dir = null;
     }
     const g = readPads();
@@ -214,8 +222,12 @@ export function createInput(canvas, bus) {
     const dt = Math.min(0.1, Math.max(0.001, lastPadPoll ? (now - lastPadPoll) / 1000 : 1 / 60));
     lastPadPoll = now;
     const ax = g.axes || [];
-    const [lx, ly, ln] = shape(ax[0] || 0, ax[1] || 0, cfg.moveCurve);
-    const [rx, ry] = shape(ax[2] || 0, ax[3] || 0, cfg.lookCurve);
+    let [lx, ly, ln] = shape(ax[0] || 0, ax[1] || 0, cfg.moveCurve);
+    let [rx, ry] = shape(ax[2] || 0, ax[3] || 0, cfg.lookCurve);
+    if (!ln) waitForMoveCenter = false;
+    if (!rx && !ry) waitForLookCenter = false;
+    if (!captured && waitForMoveCenter) lx = ly = ln = 0;
+    if (!captured && waitForLookCenter) rx = ry = 0;
     pad.lx = lx; pad.ly = ly; pad.rx = rx; pad.ry = ry;
     let active = ln > 0 || rx !== 0 || ry !== 0;
     // buttons (edge detection, analog triggers with hysteresis)
@@ -298,28 +310,35 @@ export function createInput(canvas, bus) {
       gameplayWasEnabled = active;
       pollPad(performance.now());
       if (!gameplayEnabled()) {
-        down.clear(); pressed.clear();
+        keyCodes.clear(); virtualHeld.clear(); pressed.clear();
         Object.assign(state, { moveX: 0, moveY: 0, lookDX: 0, lookDY: 0, zoom: 0, sprint: false, jump: false, mouseLeft: false, mouseRight: false });
         return;
       }
-      const kx = (down.has('right') ? 1 : 0) - (down.has('left') ? 1 : 0);
-      const ky = (down.has('forward') ? 1 : 0) - (down.has('back') ? 1 : 0);
+      const kx = (held('right') ? 1 : 0) - (held('left') ? 1 : 0);
+      const ky = (held('forward') ? 1 : 0) - (held('back') ? 1 : 0);
       const pm = !wasCaptured && pad.move;
       state.moveX = virtual.active ? virtual.mx : (kx || ky || !pm) ? kx : pm.x;
       state.moveY = virtual.active ? virtual.my : (kx || ky || !pm) ? ky : pm.y;
       const len = Math.hypot(state.moveX, state.moveY);
       if (len > 1) { state.moveX /= len; state.moveY /= len; }
-      state.sprint = down.has('sprint') || virtual.sprint || (!wasCaptured && !!pad.sprint && !!pm);
-      state.jump = down.has('jump') || padDown.has('jump');
+      state.sprint = held('sprint') || virtual.sprint || (!wasCaptured && !!pad.sprint && !!pm);
+      state.jump = held('jump') || padDown.has('jump');
       state.lookDX += virtual.lookDX; state.lookDY += virtual.lookDY;
       virtual.lookDX = 0; virtual.lookDY = 0;
     },
     /** Called once per frame after gameplay updates. */
     endFrame() { state.lookDX = 0; state.lookDY = 0; state.zoom = 0; pressed.clear(); },
-    isDown: (a) => gameplayEnabled() && (down.has(a) || padDown.has(a)),
+    isDown: (a) => gameplayEnabled() && (held(a) || padDown.has(a)),
     consume(a) { if (!gameplayEnabled()) { pressed.delete(a); return false; } if (pressed.has(a)) { pressed.delete(a); return true; } return false; },
     press(a) { if (!gameplayEnabled()) return; pressed.add(a); bus.emit('input:action', a); },
-    hold(a, on) { if (on && !gameplayEnabled()) return; if (on) { if (!down.has(a)) pressed.add(a); down.add(a); } else down.delete(a); },
+    hold(a, on) {
+      if (!on) { virtualHeld.delete(a); return; }
+      if (!gameplayEnabled()) return;
+      const alreadyHeld = held(a);
+      virtualHeld.add(a);
+      if (!alreadyHeld) fire(a);
+    },
+    addVirtualZoom(delta) { if (gameplayEnabled() && Number.isFinite(delta)) state.zoom += delta; },
     setVirtualMove(x, y) { if (!gameplayEnabled()) return; virtual.mx = x; virtual.my = y; virtual.active = Math.hypot(x, y) > 0.02; if (virtual.active) setDevice('touch'); },
     setVirtualSprint(on) { virtual.sprint = gameplayEnabled() && on; },
     addVirtualLook(dx, dy) { if (!gameplayEnabled()) return; virtual.lookDX += dx; virtual.lookDY += dy; },

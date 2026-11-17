@@ -78,21 +78,34 @@ export function createTouch(ui) {
   };
   move.addEventListener('pointerup', endJoy); move.addEventListener('pointercancel', endJoy); move.addEventListener('lostpointercapture', endJoy);
 
-  // --- look + tap to target
+  // --- one finger orbits or taps a target; two fingers pinch to zoom
   const looks = new Map();
   look.addEventListener('pointerdown', (e) => {
+    if (looks.size >= 2) return;
     e.preventDefault(); look.setPointerCapture(e.pointerId);
-    looks.set(e.pointerId, { x: e.clientX, y: e.clientY, t: performance.now(), moved: 0 });
+    const point = { x: e.clientX, y: e.clientY, t: performance.now(), moved: 0, canTarget: !looks.size };
+    for (const current of looks.values()) current.canTarget = false;
+    looks.set(e.pointerId, point);
   });
   look.addEventListener('pointermove', (e) => {
-    const l = looks.get(e.pointerId); if (!l) return;
-    const dx = e.clientX - l.x, dy = e.clientY - l.y;
-    l.x = e.clientX; l.y = e.clientY; l.moved += Math.abs(dx) + Math.abs(dy);
-    ctx.input?.addVirtualLook?.(dx * 1.6, dy * 1.6);
+    const point = looks.get(e.pointerId);
+    if (!point) return;
+    const dx = e.clientX - point.x, dy = e.clientY - point.y;
+    if (looks.size === 2) {
+      const [first, second] = looks.values();
+      const other = first === point ? second : first;
+      const before = Math.hypot(point.x - other.x, point.y - other.y);
+      const after = Math.hypot(e.clientX - other.x, e.clientY - other.y);
+      // Expanding the span by 48 CSS pixels is one inward wheel step.
+      ctx.input?.addVirtualZoom?.((before - after) / 48);
+    } else {
+      ctx.input?.addVirtualLook?.(dx * 1.6, dy * 1.6);
+    }
+    point.x = e.clientX; point.y = e.clientY; point.moved += Math.abs(dx) + Math.abs(dy);
   });
   const endLook = (e) => {
     const l = looks.get(e.pointerId); looks.delete(e.pointerId);
-    if (!l || e.type !== 'pointerup') return;
+    if (!l?.canTarget || e.type !== 'pointerup') return;
     if (l.moved < 10 && performance.now() - l.t < 300) {
       try {
         const a = ctx.actors?.pick?.(e.clientX, e.clientY);
