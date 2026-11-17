@@ -13,6 +13,7 @@ import * as UI from './ui/index.js';
 import * as Net from './net/index.js';
 import * as Combat from './combat/index.js';
 import { initWorld } from './three/world.js';
+import { createShadowTracker } from './three/celestial-light.js';
 import { initAtmosphere } from './three/atmosphere.js';
 import { initSurfaceState } from './three/surfaceState.js';
 import { playArrival } from './three/cinematics.js';
@@ -53,6 +54,8 @@ async function startClient() {
   Object.assign(sun.shadow.camera, { left: -65, right: 65, top: 65, bottom: -65, near: 1, far: 400 });
   sun.shadow.bias = -.0003; sun.shadow.normalBias = .035;
   scene.add(sun, sun.target);
+  sun.shadow.camera.updateProjectionMatrix();
+  const trackKeyLight = createShadowTracker(sun);
   const updaters = [];
   const gameClock = createGameClock();
   bus.on('game:paused', ({ paused }) => gameClock.setPaused(paused));
@@ -106,8 +109,7 @@ async function startClient() {
   ctx.render.setTimeOfDay = (hour) => {
     atmosphere.setTimeOfDay(hour); atmosphere.update(0);
     const p = ctx.actors?.player?.position ?? camera.position;
-    sun.position.copy(p).add(atmosphere.sunOffset);
-    sun.target.position.copy(p); sun.target.updateMatrixWorld();
+    trackKeyLight(p, atmosphere.sunOffset);
   };
   ctx.render.setTimeScale = atmosphere.setTimeScale;
   ctx.render.setWeather = atmosphere.setWeather;
@@ -138,8 +140,7 @@ async function startClient() {
     // Keep menu navigation alive while the local simulation and presentation are frozen.
     for(const u of updaters) if (simDt > 0 || u.order <= 0 || u.order >= 60) u.fn(simDt);
     const p = ctx.actors?.player?.position ?? camera.position;
-    sun.position.copy(p).add(atmosphere.sunOffset);
-    sun.target.position.set(p.x, p.y, p.z); sun.target.updateMatrixWorld();
+    trackKeyLight(p, atmosphere.sunOffset);
     postprocessing.render(simDt, !!ctx.vfx?.hasActiveSourceEffects);
     ctx.input.endFrame();
   });
