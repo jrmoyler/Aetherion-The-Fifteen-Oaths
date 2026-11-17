@@ -25,9 +25,18 @@ test('captured mouse look and zoom cannot change orbit', () => {
 
 test('obstruction pulls camera in immediately and recovery is smooth', () => {
   const { ctx, camera } = setup(); camera.intro = null;
-  ctx.collision = { blocked: () => true }; camera.update(1 / 60);
-  const near = camera.curDist; assert.ok(near < camera.dist);
-  ctx.collision.blocked = () => false; camera.update(1 / 60);
+  const probes = [];
+  ctx.collision = {
+    segmentHit(...args) { probes.push(args); return probes.length === 1 ? 1 : 0.18; }
+  };
+  camera.update(1 / 60);
+  const near = camera.curDist;
+  assert.ok(Math.abs(near - camera.dist * 0.18) < 1e-6);
+  assert.equal(probes.length, 2);
+  const [x0, y0, z0, x1, y1, z1, padding] = probes[1];
+  assert.ok(y1 > y0 && z1 < z0 && padding >= camera.cam.near);
+  assert.equal(x0, x1);
+  ctx.collision.segmentHit = () => 1; camera.update(1 / 60);
   assert.ok(camera.curDist > near); assert.ok(camera.curDist < camera.dist);
   assert.ok(camera.cam.position instanceof Vector3);
 });
