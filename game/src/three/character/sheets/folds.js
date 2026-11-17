@@ -96,8 +96,10 @@ export const FOLD_FRAGMENT = /* glsl */`
     float pleat = p1 * (.8 + .2 * p1) + sin(around * (count * 1.9 + 1.) - drift * 3.3 - vFd.x * 7.) * .16 * far;
     // Where cloth rucks it does not also hang in pleats.
     float fold = vFf.x * ring + vFf.y * pleat * (1. - .8 * clamp(vFf.x, 0., 1.)) * (.8 + .2 * drift2);
-    csH += fold * 10.;
-    diffuseColor.rgb *= 1. + clamp(fold, -1., .7) * .2;
+    // Soft fabric stacks millimetres deep at a seam. The hem already
+    // carries modelled folds, so keep its surface response subordinate.
+    csH += fold * mix(1.4, 3.5, clamp(vFd.w, 0., 1.));
+    diffuseColor.rgb *= 1. + clamp(fold, -1., .7) * .065;
     roughnessFactor = clamp(roughnessFactor - min(fold, 0.) * .05, 0., 1.);
   }
 `;

@@ -49,13 +49,32 @@ try {
         armorReach = Math.max(armorReach, vertex.distanceTo(player.position));
       }
     }
-    return { armorReach, renderer: c.renderer.isWebGLRenderer, frames: c.clock.frame, model: c.actors.player.bodyUrl,
+    const bones = player.body.sheetCostume.mesh.skeleton.bones;
+    const fingers = bones.filter(bone => /^(thumb|index|middle|ring|little)[012]\.[LR]$/.test(bone.name));
+    return { armorReach, fingerJoints: fingers.length, armorMeshes: player.body.armorHandle.meshes.map(m => m.name), renderer: c.renderer.isWebGLRenderer, frames: c.clock.frame, model: c.actors.player.bodyUrl,
       skinnedMeshes: c.actors.player.body.meshes.filter(m => m.isSkinnedMesh).length,
       drawCalls: c.renderer.info.render.calls, triangles: c.renderer.info.render.triangles,
       world: c.world.stats(), svg: document.querySelectorAll('svg').length,
       horizontalOverflow: document.documentElement.scrollWidth > innerWidth };
   });
   assert.ok(result.armorReach > .3 && result.armorReach < 2.5, `Starter armor extends ${result.armorReach} m from its wearer`);
+  assert.equal(result.fingerJoints, 30);
+  assert.ok(result.armorMeshes.some(name => /^arsenal-armor-field-(robe|chest)$/.test(name)), 'Starter armor uses the fitted outfit');
+  // Simulate two equipment snapshots arriving in the same frame. A late fit
+  // must not add a second torso piece after the wearer reverted to the first.
+  const stableOutfit = await page.evaluate(async () => {
+    const c = window.__aetherion;
+    const body = c.actors.player.body;
+    const original = body.armorHandle.ids[0];
+    const alternate = original.includes('/robe/') ? 'arsenal:armor/chest/01' : 'arsenal:armor/robe/01';
+    for (const arsenal of [alternate, original])
+      c.bus.emit('net:you', { equipment: { chest: { arsenal } } });
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    let fitted = 0;
+    body.root.traverse(node => { if (node.name.startsWith('arsenal-armor-field-')) fitted++; });
+    return body.arsenalArmor === original && fitted === 1;
+  });
+  assert.ok(stableOutfit, 'The latest equipped outfit must win');
   assert.equal(result.renderer, true); assert.ok(result.frames > 0); assert.ok(result.model);
   assert.ok(result.skinnedMeshes > 0); assert.ok(result.drawCalls > 0);
   assert.equal(result.svg, 0); assert.equal(result.horizontalOverflow, false);

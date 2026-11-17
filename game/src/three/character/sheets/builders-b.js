@@ -169,9 +169,18 @@ function strip(c, { path, width = .034, thick = .005, color = 'leather', mat = '
   const centre = (q, lift = 0) => { const w = sample(q); return trunk.at(clamp(w.y, trunk.bottom, trunk.top), w.th, w.off + lift); };
   const framed = (q) => { const p = centre(q), ahead = centre(Math.min(1, q + .002)).sub(centre(Math.max(0, q - .002))).normalize(), up = centre(q, .01).sub(p).normalize(), across = new Vector3().crossVectors(up, ahead).normalize(); return { p, up, ahead, across }; };
   const wide = (q) => width * s * (taper === 'crescent' ? .12 + .88 * Math.sin(PI * q) ** .7 : taper === 'end' ? lerp(1, .25, smooth(.7, 1, q)) : 1);
-  const profile = [[-.5, 0], [-.5, 1], [.5, 1], [.5, 0]], bcol = border ? c.pal(border) : null;
-  c.bag.grid(n * c.q, 3, (u, v) => {
-    const q = closed ? u : clamp(u, .001, .999), f = framed(q), [a, h] = profile[Math.round(v * 3)], p = f.p.clone().addScaledVector(f.across, a * wide(q)).addScaledVector(f.up, h * thick);
+  // Across a woven sash the two selvages turn under and long drag folds
+  // follow the wrap. Buckled leather and shaped plate retain a flat top.
+  const woven = mat === 'cloth';
+  const profile = woven ? [[-.5, 0], [-.5, 1], [-.42, 1], [-.26, 1], [-.05, 1],
+    [.16, 1], [.35, 1], [.46, 1], [.5, 1], [.5, 0]] : [[-.5, 0], [-.5, 1], [.5, 1], [.5, 0]];
+  const bcol = border ? c.pal(border) : null;
+  c.bag.grid(n * c.q, profile.length - 1, (u, v) => {
+    const q = closed ? u : clamp(u, .001, .999), f = framed(q);
+    const [a, h] = profile[Math.round(v * (profile.length - 1))];
+    const fold = woven ? wide(q) * .045 * Math.cos(a * 18 + .9 * Math.sin(q * TAU))
+      * (1 - 4 * a * a) : 0;
+    const p = f.p.clone().addScaledVector(f.across, a * wide(q)).addScaledVector(f.up, h * (thick + fold));
     return { p, skin: trunk.skin(p), c: h ? col : tone(col, .4) };
   }, { closeU: closed, color: col, mat: M(mat), inside: V(0, trunk.Y.ribs, c.form.spineZ(trunk.Y.ribs)) });
   if (border) for (const e of [-1, 1]) c.bag.grid(n * c.q, 2, (u, v) => {
@@ -208,7 +217,11 @@ function hang(c, { at = 0, top = 'belt', bottom = .5, width = [.1, .1], point = 
   const rho = (y) => trunk.rho(clamp(y, trunk.Y.hip, trunk.top), centre);
   const point3 = (a, b, lift) => {
     const w = lerp(w0, w1, b), y = lerp(y1, y0, b) - pt * b * (1 - Math.abs(a - skew * b) ** 1.4), under = smooth(trunk.Y.hip, y0, y);
-    const p = drape.at(y, centre + a * w / rho(y), lift + lean * s * under + sway * s * under * Math.sin(a * 2.2 + b * 5 + seed));
+    // Cloth hung at the belt pools at its attachment and opens into
+    // broader folds below. Trim and sewn ornaments use this same surface.
+    const roll = mat === 'cloth' && !rigid ? Math.min(w * .085, .009 * s) * smooth(0, .65, b)
+      * (.6 + .4 * Math.cos(a * 3.6 + b * .8 + seed) + .25 * Math.sin(a * 6.8 - b)) : 0;
+    const p = drape.at(y, centre + a * w / rho(y), lift + roll + lean * s * under + sway * s * under * Math.sin(a * 2.2 + b * 5 + seed));
     return p;
   };
   const skin = rigid ? () => rigid : (p) => drape.skin(p), inner = (p) => V(0, p.y, c.form.spineZ(trunk.Y.hip));
@@ -696,13 +709,27 @@ function visor(c, { color = 'ivory', trim = 'gold', veil = 'grey', strap = 'grey
   const place = headPlace(c), col = c.pal(color), gold = c.pal(trim), span = wrap * DEG, hw = half * DEG;
   const on = (phi, y, off) => { const yy = Math.max(y, -.485), p = face(c, phi, yy, off); if (y < yy) { p.y -= yy - y; p.z -= (yy - y) * .25; } return p; };
   if (veil) c.bag.grid(16 * c.q, 8 * c.q, (u, v) => ({ p: place(on(lerp(-span * .8, span * .8, u), lerp(eye + .02, -.485, v), .018)), skin: HEAD }), { color: c.pal(veil), mat: M('cloth'), inside: c.head.C });
-  c.bag.grid(22 * c.q, 4, (u, v) => { const phi = lerp(-span, span, u); return { p: place(on(phi, lerp(top, eye, v), .034 + .016 * (1 - Math.abs(phi) / span))), skin: HEAD }; }, { color: col, mat: M('enamel'), inside: c.head.C });
-  const w = (y) => hw * clamp((y - point) / (top - point), 0, 1) ** .6, shield = (a, v, lift = 0) => { const y = lerp(top, point, v); return on(a * w(y), y, .04 + .06 * (1 - Math.abs(a)) * (1 - v * .4) + lift); };
-  c.bag.grid(Math.max(6, 10 * c.q), 12 * c.q, (u, v) => ({ p: place(shield(u * 2 - 1, v)), skin: HEAD }), { color: col, mat: M('enamel'), inside: c.head.C });
-  const line = (pts, r = .012) => sweep(c, pts.map(place), r * c.head.H, gold, M('gold'), HEAD, { n: 5, rows: 10 });
-  for (const sx of [-1, 1]) line([0, .2, .4, .6, .8, 1].map((v) => shield(sx, v, .004)));
-  line([0, .25, .5, .75, 1].map((v) => shield(0, v, .008)), .008);
-  for (const y of [top, eye]) line([-1, -.6, -.2, .2, .6, 1].map((a) => on(a * span, y, .04 + .016 * (1 - Math.abs(a)))), .01);
+  // Reference 075: two enamel wings meet at a folded brow above a narrow
+  // descending keel. The dark veil remains visible alongside the cheek.
+  const brow = q => eye + (top - eye) * Math.abs(q) ** .76;
+  const lower = q => point + (eye - point) * smooth(0, .37, q) + (top - eye) * .39 * q;
+  const shell = (sign, q, v, extra = 0) => {
+    const y = lerp(brow(q), lower(q), v);
+    const phi = sign * q * lerp(span, hw + (span - hw) * q, v);
+    return on(phi, y, .048 + .085 * (1 - q) ** 2 * (1 - v * .46) + extra);
+  };
+  for (const side of [-1, 1]) {
+    const panel = (q, v, extra) => shell(side, q, v, extra);
+    c.bag.grid(Math.max(9, Math.round(18 * c.q)), 5, (u, v) =>
+      ({ p: place(panel(u, v, 0)), skin: HEAD }), { color: col, mat: M('enamel'), inside: c.head.C });
+    // Rolled brass edge under each cheek, including a gold return at the temple.
+    c.bag.grid(16 * c.q, 3, (u, v) =>
+      ({ p: place(panel(u, 1 - .085 * v, .004 * Math.sin(PI * v) + .002)), skin: HEAD }),
+      { color: gold, mat: M('gold'), inside: c.head.C });
+    c.bag.grid(2, 6, (u, v) =>
+      ({ p: place(panel(.965 + .035 * u, v, .006)), skin: HEAD }),
+      { color: gold, mat: M('gold'), inside: c.head.C });
+  }
   if (strap) { headBand(c, { y: (top + eye) / 2, from: wrap, to: 360 - wrap, width: (top - eye) * .8, off: .014, thick: .012, color: strap, mat: 'cloth' }); const o = scalp(c, PI, (top + eye) / 2, .03); c.bag.solid(roundBox(.1 * c.head.H, .07 * c.head.H, .02 * c.head.H, .008 * c.head.H), (p) => place(o).add(V(-p.x, p.y, -p.z)), HEAD, gold, M('gold')); }
 }
 

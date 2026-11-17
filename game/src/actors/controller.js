@@ -1,6 +1,7 @@
 // Local player controller: camera-relative movement with acceleration, turn smoothing,
 // walk/run/sprint, jump with coyote time + buffering, dodge roll with i-frames, slope limits,
 // step-up onto architecture, swimming, world bounds, and net move sync at MOVE_HZ.
+import { setTravelDirection } from '../three/character/locomotion.js';
 import { CLASSES, regionAt } from '@shared/oaths.js';
 import { MOVE_HZ } from '@shared/protocol.js';
 import { WORLD_HALF } from '@shared/terrain.js';
@@ -236,10 +237,8 @@ export class PlayerController {
     // ---- animation drive
     const anim = a.body?.animator;
     if (anim) {
-      // backwards when moving opposite to facing (mouse-steer strafing)
-      const fwd = Math.sin(this.yaw) * this.vel.x + Math.cos(this.yaw) * this.vel.z;
-      anim.backwards = fwd < -0.3 && hs > 0.5;
-      anim.speed = this.swimming ? 0 : this.groundSpeed;
+      setTravelDirection(anim, nx - ox, nz - oz, this.yaw);
+      anim.speed = this.groundSpeed;
       anim.yawVel = anim.yawVel + (yawVel - anim.yawVel) * Math.min(1, dt * 8);
       if (!alive) anim.setState('dead');
       else if (this.swimming) anim.setState('swim');

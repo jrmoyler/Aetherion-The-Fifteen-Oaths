@@ -59,7 +59,7 @@ export function hair(c, raw) {
     const a = wrapA(phi), front = o.fringe + o.temple * Math.exp(-(((a - .62) / .3) ** 2)) - .05 * smooth(.45, 1, a);
     return lerp(lerp(front, o.sideLine, smooth(.75, 1.2, a)), lerp(o.sideLine - .12, o.nape, smooth(1.6, 2.5, a)), smooth(1.2, 1.6, a));
   };
-  const tone = (grey = o.streak ? o.grey : 0) => (c.rand() < grey ? other : col).clone().multiplyScalar(.72 + c.rand() * .5);
+  const tone = (grey = o.streak ? o.grey : 0) => col.clone().lerp(other, c.rand() < grey ? .48 : .07).multiplyScalar(.72 + c.rand() * .5);
   c.bag.part = 'hair';
 
   /** One lock: a ribbon along path(s) in head space, `width` at the root tapering to the tip, spine raised along `normalAt`. */
@@ -68,10 +68,11 @@ export function hair(c, raw) {
     c.bag.grid(2, Math.max(3, Math.round(rows * Math.min(1, .5 + .5 * q))), (u, v) => {
       const p = path(v), ahead = a.copy(path(Math.min(1, v + .05))).sub(b.copy(path(Math.max(0, v - .05)))).normalize(), n = normalAt(p, v), side = new Vector3().crossVectors(ahead, n);
       if (side.lengthSq() < 1e-8) side.set(1, 0, 0); side.normalize();
-      const w = width * ((1 - v) ** taper * (1 + belly * Math.sin(PI * v)) + .04), across = (u - .5) * 2, ridge = 1 - Math.abs(across);
+      const rootWidth = .18 + .82 * smooth(0, .20, v);
+      const w = rootWidth * width * ((1 - v) ** taper * (1 + belly * Math.sin(PI * v)) + .04), across = (u - .5) * 2, ridge = 1 - Math.abs(across);
       const colour = dark.clone().lerp(shade, smooth(0, .3, v)).lerp(light, v * v).multiplyScalar(.72 + .28 * ridge);
-      const world = place(p.clone().addScaledVector(side, across * w).addScaledVector(n, ridge * w * (o.ridge ?? .55)));
-      return { p: world, skin: typeof skin === 'function' ? skin(world) : skin, c: colour };
+      const world = place(p.clone().addScaledVector(side, across * w).addScaledVector(n, ridge * w * (o.ridge ?? .23)));
+      return { p: world, n: n.clone().addScaledVector(side, across * .11).normalize(), skin: typeof skin === 'function' ? skin(world) : skin, c: colour };
     }, { color: shade, mat: MAT.hair, inside: C });
   };
   /** A round rope along centre(s): plaits, locs, twists and tails. `pattern` (a, v) -> brightness gives the winding. */
@@ -92,10 +93,15 @@ export function hair(c, raw) {
   /** Undercoat: close to the scalp, dark, so gaps between locks read as depth. `fade` blends it into skin (shaved sides). */
   const pale = (col.r + col.g + col.b) / 3 > .3, cap = ({ off = .012, shade = col.clone().multiplyScalar(pale ? .62 : .34), bump = null, low = line, top = .499 } = {}) => {
     c.bag.grid(34 * q, 12 * q, (u, v) => {
-      const phi = u * TAU, y = lerp(low(phi), top, v), p = scalp(phi, y, off + (bump ? bump(phi, y) : 0));
+      const phi = u * TAU;
+      const hairline = low(phi) + .008 * Math.sin(phi * 11) + .004 * Math.sin(phi * 23 + 2);
+      const y = lerp(hairline, top, v);
+      const p = scalp(phi, y, off + (bump ? bump(phi, y) : 0));
       let colour = shade;
       if (o.fade) { const k = smooth(o.fade.to ?? o.sideLine, o.fade.from ?? .3, y) * (1 - .0 * Math.cos(phi)); colour = skinTone.clone().lerp(shade, lerp(o.fade.min ?? .25, 1, k)); }
-      return { p: place(p), skin: HEAD, c: colour };
+      // Sparse hair at the temples lets skin show between the first roots.
+      colour = colour.clone().lerp(skinTone, .76 * (1 - smooth(0, .14, v)));
+      return { p: place(p), n: p.clone().normalize(), skin: HEAD, c: colour };
     }, { closeU: true, color: shade, mat: MAT.hair, inside: C });
   };
   /** A lock that lies on the scalp for `lay`, flowing away from K under gravity, then hangs free for `hangLen`. */
@@ -132,17 +138,17 @@ export function hair(c, raw) {
   };
   const knotOf = (k, fallback) => ({ at: V(...(k?.at ?? fallback)), r: k?.radius ?? .15, kind: k?.kind ?? 'coil', tie: k?.tie ?? null });
   /** Hair combed over the scalp into `at`. */
-  const combed = (at, count, { wave = 0, width = .075, lift = .014 } = {}) => {
+  const combed = (at, count, { wave = 0, width = .045, lift = .011 } = {}) => {
     const target = at.clone().normalize();
     // The hairline itself: fine locks rooted just under the undercoat's edge, so the brow line is hair and not a cut.
     for (let i = 0, n = Math.round(o.edge ?? count * .7); i < n; i++) {
       const phi = lerp(-1.9, 1.9, (i + c.rand()) / n), from = dirOf(phi, line(phi) - .006 + rnd(.008)), ph = c.rand() * TAU;
-      lock((s) => onScalp(from.clone().lerp(target, s * .5).normalize(), .013 + .012 * Math.sin(s * PI) + wave * .4 * (1 + Math.sin(s * 9 + ph)) * Math.sin(s * PI)), .035 + c.rand() * .02, (p) => p.clone().normalize(), { rows: 4, taper: .5, tip: 1.1, root: .9, belly: .5 });
+      lock((s) => onScalp(from.clone().lerp(target, s * .5).normalize(), .013 + .012 * Math.sin(s * PI) + wave * .4 * (1 + Math.sin(s * 9 + ph)) * Math.sin(s * PI)), .018 + c.rand() * .012, (p) => p.clone().normalize(), { rows: 4, taper: .64, tip: 1.1, root: .9, belly: .5 });
     }
     for (let i = 0; i < count; i++) {
       const f = (i + .5) / count, phi = i * GOLD, h = line(phi), y = lerp(.49, h + .008, f ** .8), from = dirOf(phi, y), ph = c.rand() * TAU;
       lock((s) => onScalp(from.clone().lerp(target, s * .96).normalize(), lift + .014 * Math.sin(s * PI) + wave * .5 * (1 + Math.sin(s * 14 + ph)) * Math.sin(s * PI)).lerp(at, smooth(.75, 1, s) * .6),
-        width + c.rand() * .04, (p) => p.clone().normalize(), { rows: 6, taper: .3, tip: 1.15, root: .8, belly: .2 });
+        width + c.rand() * .022, (p) => p.clone().normalize(), { rows: 6, taper: .5, tip: 1.15, root: .8, belly: .2 });
     }
   };
   /** The knot hair is gathered into. */
@@ -163,7 +169,7 @@ export function hair(c, raw) {
         const shade = col.clone().lerp(other, o.streak ? .5 + .5 * Math.sin(a * 2 + b * 7) : 0).multiplyScalar(kind === 'puff' ? .55 + .6 * (wind - 1 + depth) / depth * .5 : .62 + .45 * Math.sin(b * 9 + a * bumps) ** 2);
         return { p: place(at.clone().add(V(Math.cos(b) * Math.cos(a) * r * wind, Math.sin(b) * r * (kind === 'puff' ? .95 : .8) * wind, Math.cos(b) * Math.sin(a) * r * wind))), skin: HEAD, c: shade };
       }, { closeU: true, color: col, mat: MAT.hair, inside: place(at) });
-      if (kind === 'puff') for (let i = 0, n = N(70); i < n; i++) coil(at.clone(), dirOf(i * GOLD, lerp(-.42, .49, (i + .5) / n)), r * .98, o.curl ?? .028);
+      if (kind === 'puff') for (let i = 0, n = N(35); i < n; i++) coil(at.clone(), dirOf(i * GOLD, lerp(-.42, .49, (i + .5) / n)), r * .98, o.curl ?? .028);
       if (kind === 'messy') for (let i = 0, n = N(16); i < n; i++) {
         const d = dirOf(i * GOLD, lerp(-.3, .49, c.rand())), root = at.clone().addScaledVector(d, r * .8), len = r * (.7 + c.rand() * .9), bend = V(rnd(.5), -.4 - c.rand() * .5, rnd(.5));
         lock((s) => root.clone().addScaledVector(d, len * s).addScaledVector(bend, len * s * s), .03 + c.rand() * .025, () => d, { rows: 4 });
@@ -175,7 +181,7 @@ export function hair(c, raw) {
   function coil(centre, d, radius, size, turns = 1.3, shade = tone()) {
     const base = centre.clone().addScaledVector(d, radius), tu = new Vector3().crossVectors(d, Math.abs(d.y) > .9 ? V(1, 0, 0) : V(0, 1, 0)).normalize(), tv = new Vector3().crossVectors(d, tu), ph = c.rand() * TAU, h = size * (1 + c.rand() * .6);
     lock((s) => base.clone().addScaledVector(d, h * s * .8).addScaledVector(tu, Math.cos(ph + s * TAU * turns) * size * (1 - s * .3)).addScaledVector(tv, Math.sin(ph + s * TAU * turns) * size * (1 - s * .3)),
-      size * .75, (p) => p.clone().sub(base).addScaledVector(d, size * .6).normalize(), { rows: 4, taper: .25, shade, tip: 1.4, root: .7 });
+      size * .38, (p) => p.clone().sub(base).addScaledVector(d, size * .6).normalize(), { rows: 8, taper: .55, shade, tip: 1.4, root: .7 });
   }
   const scalpCoil = (phi, y, lift, size) => { const d = dirOf(phi, y), p = onScalp(d, lift); coil(V(), p.clone().normalize(), p.length(), size); };
   /** A bundle of locks hanging from the knot (ponytail). */
@@ -189,12 +195,41 @@ export function hair(c, raw) {
     if (spec.tie) band(V(at.x, at.y + rise * .25, at.z - back * .3), w * .75, spec.tie, .02, 1.1);
   };
 
+  // Swept wavy hair collects into a knot. Model the roots as one continuous
+  // ridged surface so the rolled waves never reveal the ends of large cards.
+  const gatheredWaves = style === 'updo' && o.wave > 0;
+  function wavedScalp() {
+    const waveCount = 13;
+    c.bag.grid(84 * q, 13 * q, (u, v) => {
+      const a = u * TAU, phase = a * waveCount + .75 * Math.sin(a * 3);
+      const roots = line(a) - .045 + .018 * Math.sin(phase) + .011 * Math.cos(a * 3);
+      const y = lerp(roots, .499, v);
+      const swing = Math.sin(PI * v) * (.19 * Math.sin(v * 7 + a) + .13 * Math.sin(a));
+      const crest = .5 + .5 * Math.cos(phase);
+      const off = .005 + (.012 + 1.1 * o.wave * crest) * Math.sin(PI * v) ** .65;
+      const p = scalp(a + swing, y, off);
+      const rootFade = smooth(0, .08, v);
+      const silver = o.streak ? .48 * crest ** 5 * (.5 + .5 * Math.sin(phase * 1.4 + v * 3)) : 0;
+      const color = col.clone().lerp(other, silver).multiplyScalar(.56 + .62 * crest);
+      color.lerp(skinTone, (1 - rootFade) * .90);
+      return { p: place(p), skin: HEAD, c: color };
+    }, { closeU: true, color: col, mat: MAT.hair, inside: C });
+    // Fine hairs soften the rolled edge at the forehead and temples.
+    for (let i = 0, count = N(65); i < count; i++) {
+      const a = lerp(-1.7, 1.7, (i + .5) / count);
+      const start = line(a) - .046 + .018 * Math.sin(13*a + .75*Math.sin(3*a));
+      const len = .026 + c.rand() * .026;
+      lock(t => scalp(a + .06 * t, start + len * t, .007 + .006 * Math.sin(t * PI)),
+        .0035 + c.rand() * .003, outward, { rows: 3, shade: tone(), taper: .6 });
+    }
+  }
   // ---- the styles ----
   if (style !== 'none' || o.stubble) {
     if (style === 'none') cap({ off: .004, shade: skinTone.clone().lerp(col, .35) });
     else if (style === 'buzz') cap({ off: .006, shade: skinTone.clone().lerp(col, o.cover ?? .7), bump: (phi, y) => .002 * Math.sin(phi * 40) * Math.sin(y * 90) });
     else if (style === 'coils') cap({ off: .014, bump: (phi, y) => (o.top ?? 0) * smooth(o.fade?.from ?? .2, .42, y) + .006 * Math.sin(phi * 23 + y * 40) * Math.sin(y * 60 - phi * 9) });
     else if (style === 'cornrows' || style === 'twists') cap({ off: .006, shade: skinTone.clone().lerp(col, .55) });
+    else if (gatheredWaves) wavedScalp();
     else cap();
   }
   const K = V(...(o.crown ?? [0, .82, -.55])).normalize();
@@ -226,7 +261,7 @@ export function hair(c, raw) {
     if (o.tail) tail(V(...(o.knot?.at ?? [0, -.22, -.44])), o.tail);
   } else if (style === 'updo' || style === 'braid') {
     const k = knotOf(o.knot ?? o.bun, style === 'braid' ? [0, -.2, -.44] : [0, .4, -.3]);
-    combed(k.at, o.combed === false ? 0 : N(o.count), { wave: o.wave ?? 0 });
+    if (!gatheredWaves) combed(k.at, o.combed === false ? 0 : N(o.count), { wave: o.wave ?? 0 });
     if (style === 'braid' || o.braid) {
       const spec = o.braid ?? {}, len = spec.length ?? .9, w = spec.width ?? .1, links = Math.max(3, Math.round(len / .11));
       rope((s) => k.at.clone().add(V(Math.sin(s * 5) * .02, -len * s, -.05 * Math.sin(s * PI) - .04 * s)), (v) => w * (1 - v * .5), { nu: 10, nv: links * 4, skin: hang, ...plait(links) });
@@ -234,7 +269,7 @@ export function hair(c, raw) {
     } else if (o.tail) { tail(k.at, o.tail); if (k.tie) band(k.at.clone(), .07, k.tie, .02, 1.1); } else knot(k);
   } else if (style === 'coils') {
     const size = o.curl, lowY = o.fade ? (o.fade.from ?? .2) - .06 : -1;
-    roots(N(o.count), (phi, y) => scalpCoil(phi, y, .012 + (o.top ?? 0) * smooth(o.fade?.from ?? .2, .42, y), size * (.8 + c.rand() * .5)), { minY: lowY, margin: .0 });
+    roots(N(o.count * .5), (phi, y) => scalpCoil(phi, y, .012 + (o.top ?? 0) * smooth(o.fade?.from ?? .2, .42, y), size * (.8 + c.rand() * .5)), { minY: lowY, margin: .0 });
   } else if (style === 'locs') {
     const base = o.fade?.from ?? .14, n = N(o.count);
     for (let i = 0; i < n; i++) {
@@ -264,7 +299,7 @@ export function hair(c, raw) {
       const reach = Math.hypot(p.x, p.z), need = lerp(.36, .3, smooth(-.5, -.8, p.y)); if (reach < need) { const push = need / Math.max(.05, reach); p.x *= push; p.z *= push; }
       return p;
     };
-    lock(path, (o.tendrilWidth ?? .03) * (.7 + c.rand() * .5), outward, { rows: Math.max(8, Math.round(len * (curl ? 40 : 18))), taper: .8, skin: hang, belly: .5 });
+    lock(path, (o.tendrilWidth ?? .03) * (gatheredWaves ? .32 : 1) * (.7 + c.rand() * .5), outward, { rows: Math.max(8, Math.round(len * (curl ? 40 : 18))), taper: .8, skin: hang, belly: .5 });
     if (o.beads && k === 0) band(path(.8), .02, o.beads, .012, PI / 2);
   }
   if (o.band) band(V(0, o.band.y ?? .33, o.band.z ?? -.05), o.band.r ?? .3, o.band.color ?? 'gold', o.band.thick ?? .012, o.band.tilt ?? PI / 2);
@@ -283,7 +318,7 @@ export function hair(c, raw) {
     const whisker = (x, y, len, dir, w = .028, rows = 4, opts = {}) => {
       const root = faceAt(x, y), n = faceNormal(x, y), bend = opts.bend ?? V(0, -.5, 0), goal = opts.goal ?? null;
       lock((s) => { const p = root.clone().addScaledVector(n, .006 + (opts.puff ?? .012) * Math.sin(PI * Math.min(1, s * 1.5))).addScaledVector(dir, len * s).addScaledVector(bend, len * s * s); return goal ? p.lerp(V(goal.x + (root.x) * .25, p.y, Math.max(p.z, goal.z)), smooth(.2, 1, s) * .8) : p; },
-        w * (.8 + c.rand() * .5), () => n, { rows, taper: opts.taper ?? .6, shade: shadeB(), tip: 1.12, root: .85, skin: opts.skin ?? HEAD });
+        w * (.36 + c.rand() * .24), () => n, { rows, taper: opts.taper ?? .6, shade: shadeB(), tip: 1.12, root: .85, skin: opts.skin ?? HEAD });
     };
     const cheekLine = (ax) => (B.cheek ?? -.27) + .3 * (ax / .3) ** 2.2;
     const inRegion = (x, y) => {

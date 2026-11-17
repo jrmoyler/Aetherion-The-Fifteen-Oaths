@@ -14,8 +14,8 @@ const pow = (value, e) => Math.sign(value) * Math.abs(value) ** e;
  * past either end. phi is the angle around the limb: 0 faces forward, +90 degrees faces away from the body.
  */
 class Chain {
-  constructor(points, bones, radius, root) {
-    this.points = points; this.bones = bones; this.radius = radius; this.root = root;
+  constructor(points, bones, radius, root, contour) {
+    this.contour = contour; this.points = points; this.bones = bones; this.radius = radius; this.root = root;
     this.seg = [0, 1].map((i) => {
       const along = new Vector3().subVectors(points[i + 1], points[i]), length = along.length(); along.normalize();
       const Y = along.clone().negate(), Z = FRONT.clone().addScaledVector(Y, -FRONT.dot(Y)).normalize(), X = new Vector3().crossVectors(Y, Z);
@@ -45,7 +45,11 @@ class Chain {
   }
   point(t, phi, r, out = new Vector3()) {
     const { X, Z } = this.frame(t);
-    return this.centre(t, out).addScaledVector(Z, Math.cos(phi) * r).addScaledVector(X, Math.sin(phi) * r);
+    const front = Math.cos(phi), outside = Math.sin(phi);
+    // Apply the same measured section to the body, seam, cuff and rigid shell.
+    // Additional garment thickness remains measured in metres.
+    const surface = r + this.radius(t) * this.contour(t, front, outside);
+    return this.centre(t, out).addScaledVector(Z, front * surface).addScaledVector(X, outside * surface);
   }
   skin(t) {
     const f = this.blend(t), pairs = [[this.bones[0], 1 - f], [this.bones[1], f]];
@@ -137,8 +141,28 @@ export function makeForm(rig, build = {}) {
     + .007 * bump(t, 1.2, .16) * Math.max(0, Math.sin(phi + .5)) - .003 * bump(t, .82, .08)) * k * b.arm;          // forearm extensor, pinch above the elbow
   const legMuscle = (t, phi) => (.01 * bump(t, .4, .3) * Math.max(0, Math.cos(phi - .3)) + .008 * bump(t, 1.3, .15) * Math.max(0, -Math.cos(phi))
     + .004 * bump(t, 1, .05) * Math.max(0, Math.cos(phi))) * k * b.leg;                                            // quadriceps, calf, kneecap
-  const arm = new Chain([J['upperarm.L'], J['forearm.L'], J['hand.L']], ['upperarm.L', 'forearm.L'], armR, { bone: 'shoulder.L', from: -.06, to: .05, weight: .5 });
-  const leg = new Chain([J['thigh.L'], J['shin.L'], J['foot.L']], ['thigh.L', 'shin.L'], legR, { bone: 'hips', from: -.03, to: .12, weight: .55 });
+  // The wrist widens thumb-to-pinky (the front axis of this A-pose), but
+  // flattens across the palm. At the elbow the point of the ulna sits behind
+  // the hinge. Move these landmarks along with every article worn over them.
+  const wristFlat = curve([[.95, 0], [1.35, .22], [1.68, .62], [1.97, 1]]);
+  const elbowPoint = curve([[.68, 0], [.91, .52], [1, 1], [1.12, .35], [1.38, 0]]);
+  const armContour = (t, front, outer) =>
+    wristFlat(t) * (.12 * front * front - .22 * outer * outer) +
+    elbowPoint(t) * (.13 * Math.max(0, -front) ** 3 - .055 * outer * outer);
+
+  // The staggered medial/lateral calf heads taper into an Achilles tendon.
+  // The shin has a narrow forward ridge between two flatter planes.
+  const calfInner = curve([[1.05, 0], [1.26, .72], [1.4, 1], [1.62, .35], [1.84, 0]]);
+  const calfOuter = curve([[1.02, 0], [1.22, 1], [1.43, .58], [1.68, 0]]);
+  const shinRidge = curve([[.91, 0], [1.1, 1], [1.45, .9], [1.86, .4], [2.04, 0]]);
+  const legContour = (t, front, outer) => {
+    const rear = Math.max(0, -front);
+    return calfInner(t) * rear * (.09 - .13 * outer) +
+      calfOuter(t) * rear * (.07 + .13 * outer) +
+      shinRidge(t) * (.12 * Math.max(0, front) ** 8 - .055 * outer * outer);
+  };
+  const arm = new Chain([J['upperarm.L'], J['forearm.L'], J['hand.L']], ['upperarm.L', 'forearm.L'], armR, { bone: 'shoulder.L', from: -.06, to: .05, weight: .5 }, armContour);
+  const leg = new Chain([J['thigh.L'], J['shin.L'], J['foot.L']], ['thigh.L', 'shin.L'], legR, { bone: 'hips', from: -.03, to: .12, weight: .55 }, legContour);
 
   // Foot frame: heel on the ground under the ankle, pointing where the toe bone points.
   const ankle = J['foot.L'], toe = J['toe.L'];

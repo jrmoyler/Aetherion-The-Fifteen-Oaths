@@ -6,6 +6,7 @@ import { BUILDERS } from './builders.js';
 import { buildCostume } from './costume.js';
 import { costumeMaterial } from './material.js';
 import { PROFILES } from '../profiles.js';
+import { buildFieldArmor } from '../field-armor.js';
 
 // Bind-pose joints of oath-01-ninja (metres), the proportions every forge hero is a variation of.
 const JOINTS = { hips: [0, .9978, -.0099], spine: [0, 1.097, -.0049], spine1: [0, 1.221, -.0099], spine2: [0, 1.345, -.0198], neck: [0, 1.4938, -.0247], head: [0, 1.5779, 0],
@@ -67,3 +68,21 @@ test('hair styles and hands build for any recipe that asks for them', () => {
 });
 
 test('the costume material constructs without a renderer', () => { assert.equal(costumeMaterial().vertexColors, true); });
+
+test('common field armor leaves the hands and feet clear for each oath and class', () => {
+  const wearer = rig();
+  for (const hero of Object.values(RECIPES)) for (const family of ['robe', 'chest']) {
+    const { geometry, triangles } = buildFieldArmor(hero, family, wearer);
+    const { position, normal, skinWeight } = geometry.attributes;
+    const bounds = geometry.boundingBox;
+    assert.ok(position.array.every(Number.isFinite) && normal.array.every(Number.isFinite), hero.id);
+    assert.ok(bounds.min.y > wearer.J['foot.L'].y + .20 && bounds.max.y < wearer.J.head.y, hero.id);
+    assert.ok(Math.max(-bounds.min.x, bounds.max.x) < wearer.J['hand.L'].x - .04, hero.id);
+    assert.ok(triangles <= 4000, hero.id);
+    for (let i = 0; i < skinWeight.count; i++) {
+      const sum = skinWeight.getX(i) + skinWeight.getY(i) + skinWeight.getZ(i) + skinWeight.getW(i);
+      assert.ok(Math.abs(sum - 1) < 1e-4, hero.id);
+    }
+    geometry.dispose();
+  }
+});

@@ -552,22 +552,50 @@ export function boots(c, { color = 'boot', sole = 'sole', top = 1.56, toeCap = n
   const { leg, foot, k } = c.form;
   c.bag.part = 'boots';
   sides(c, 'both', () => {
-    const z0 = foot.heel - .004, z1 = foot.tip - .004, zm = (z0 + z1) / 2, L = (z1 - z0) / 2;
+    const z0 = foot.heel - .004, z1 = foot.tip - .004, zm = (z0 + z1) / 2;
     // Plan outline: narrow heel, broad ball, blunt toe.
-    const halfWidth = (z) => { const f = (z - z0) / (z1 - z0); return k * bulk * (.033 + .016 * smooth(0, .62, f)) * Math.min(1, (Math.max(0, 1 - Math.abs(2 * f - 1) ** 3.4)) ** .42 * 1.02); };
-    const centreX = (z) => .006 * smooth(z0, z1, z);
+    const shoeWidth = curve([[0, .023], [.08, .033], [.24, .035], [.39, .031],
+      [.58, .040], [.71, .049], [.82, .046], [.93, .037], [1, .014]]);
+    const progress = z => clamp((z - z0) / (z1 - z0), 0, 1);
+    const halfWidth = z => k * bulk * shoeWidth(progress(z));
+    // Curve the toe toward the hallux and narrow the medial waist of the shoe.
+    const centreX = z => k * (.003 * Math.sin(progress(z) * PI) - .009 * smooth(.67, 1, progress(z)));
+    const spring = f => k * (.003 * (1 - smooth(0, .15, f)) + .012 * smooth(.75, 1, f));
+    const waist = f => k * .006 * smooth(.21, .36, f) * (1 - smooth(.4, .58, f));
     const skin = (p) => foot.skin(p);
-    // Sole and welt.
-    const soleRows = [[0, -.006], [.005, 0], [soleHeight - .004, 0], [soleHeight, -.004], [soleHeight, -.02]];
-    c.bag.grid(32 * c.q, soleRows.length - 1, (u, v) => {
-      const a = u * TAU, z = zm - Math.cos(a) * L * .999, [y, inset] = soleRows[Math.round(v * (soleRows.length - 1))], w = halfWidth(z) + .005 + inset;
-      // Tread blocks are cut into the sole's edge.
-      const tread = y < soleHeight - .006 && y > .003 ? -.0055 * (Math.sin(z * 150) > .1 ? 1 : 0) : 0;
-      const p = foot.at(centreX(z) + Math.sin(a) * (w + tread) * Math.sign(1), y, z + Math.cos(a) * -(inset) * .6); return { p, skin: skin(p) };
-    }, { closeU: true, color: c.pal(sole), mat: MAT.leather, inside: foot.at(0, .015, zm) });
-    // Upper: arches over the foot from heel to toe.
-    const height = curve([[z0, .0], [z0 + .012, .066], [z0 + .04, .098], [0, .108], [.045, .09], [.1, .064], [z1 - .06, .05], [z1 - .02, .04], [z1 - .004, .0]].map(([z, h]) => [z, h * k]));
-    const upper = (z, a, lift = 0) => { const w = halfWidth(z) - .001 + lift, h = height(z) + lift; return foot.at(centreX(z) + Math.cos(a) * -w, soleHeight - .003 + Math.sin(a) ** .8 * h, z); };
+    // A single closed outsole. Its squared heel, recessed midfoot and toe
+    // spring remain visible when the foot rolls over the toe or leaves ground.
+    const soleRows = [[0, -.002], [.004, 0], [soleHeight - .005, .001], [soleHeight, -.001]];
+    const outline = a => {
+      // Parallel sides joined by a rounded toe and heel, matching the upper.
+      const f = (1 - Math.cos(a)) / 2, z = lerp(z0, z1, f);
+      const end = smooth(0, .045, f) * (1 - smooth(.955, 1, f));
+      const side = Math.sign(Math.sin(a)) * Math.sqrt(end);
+      return { f, z, side };
+    };
+    const solePoint = (u, row) => {
+      const { f, z, side } = outline(u * TAU), [level, lip] = soleRows[row];
+      const arch = waist(f) * (side < 0 ? 1.3 : .68);
+      const x = centreX(z) + side * (halfWidth(z) + .003 + lip);
+      return foot.at(x, spring(f) + level + arch * (1 - level / soleHeight), z);
+    };
+    c.bag.grid(36 * c.q, 3, (u, v) => {
+      const p = solePoint(u, Math.round(v * 3)); return { p, skin: skin(p) };
+    }, { closeU: true, color: c.pal(sole), mat: MAT.leather, inside: foot.at(0, soleHeight * .5, zm) });
+    c.bag.grid(2, Math.max(10, Math.round(18 * c.q)), (u, v) => {
+      const outer = solePoint(v * .5, 0), inner = solePoint(1 - v * .5, 0);
+      const p = inner.lerp(outer, u); return { p, skin: skin(p) };
+    }, { color: c.pal(sole).clone().multiplyScalar(.74), mat: MAT.leather, inside: foot.at(0, soleHeight * 2, zm) });
+    // The instep and ankle sit high over the arch, but the toe box has a
+    // flatter dorsal surface and a short rounded nose.
+    const height = curve([[0, .012], [.055, .062], [.16, .091], [.32, .112], [.47, .10],
+      [.61, .070], [.75, .044], [.87, .036], [.96, .027], [1, .006]]);
+    const upper = (z, a, lift = 0) => {
+      const f = progress(z), end = Math.sqrt(smooth(0, .045, f) * (1 - smooth(.955, 1, f)));
+      const width = halfWidth(z) * end - .0006 + lift;
+      const across = -Math.cos(a), arch = Math.sin(a) ** .67;
+      return foot.at(centreX(z) + across * width, spring(f) + soleHeight - .003 + arch * (height(f) * k + lift), z);
+    };
     const zs = (v) => lerp(z0 + .003, z1 - .003, v);
     c.bag.grid(10 * c.q, 16 * c.q, (u, v) => { const p = upper(zs(v), u * PI); return { p, skin: skin(p) }; }, { color: c.pal(color), mat: MAT.leather, inside: foot.at(0, .04, zm) });
     // Shaft.

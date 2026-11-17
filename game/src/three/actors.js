@@ -91,25 +91,38 @@ function createActors(ctx) {
   function dressArmor(actor) {
     if (!actor?.body || actor.disposed || actor !== player) return;
     const body = actor.body, want = equippedArmor;
-    if ((body.arsenalArmor ?? '') === want || body.armorPending === want || body.armorUnfit === want) return;
+    if (body.armorPending?.outfit === want) return;
+    // Invalidate an older load even when the requested outfit is already visible.
+    body.armorPending = null;
+    if ((body.arsenalArmor ?? '') === want || body.armorUnfit === want) return;
     const undress = () => {
       if (!body.armorHandle) return;
       for (const mesh of body.armorHandle.meshes) { const at = body.meshes.indexOf(mesh); if (at >= 0) body.meshes.splice(at, 1); }
       body.armorHandle.dispose(); body.armorHandle = null;
     };
-    if (!want) { body.armorPending = null; undress(); body.arsenalArmor = ''; return; }
-    body.armorPending = want;
-    wearArmor(body, want.split('|')).then((handle) => {
-      if (body.armorPending !== want) { handle?.dispose(); return; } // a newer outfit was asked for meanwhile
+    if (!want) { undress(); body.arsenalArmor = ''; return; }
+    if (!body.releaseArmor) {
+      const disposeBody = body.dispose.bind(body);
+      body.releaseArmor = undress;
+      body.dispose = () => {
+        body.armorPending = null;
+        body.releaseArmor();
+        disposeBody();
+      };
+    }
+    const request = { outfit: want };
+    body.armorPending = request;
+    wearArmor(body, want.split('|'), actor).then((handle) => {
+      if (body.armorPending !== request) { handle?.dispose(); return; } // a newer outfit was asked for meanwhile
       body.armorPending = null;
       if (actor.body !== body || actor.disposed) { handle?.dispose(); return; }
-      undress();
       if (!handle) { body.armorUnfit = want; return; } // no skeleton to fit, or nothing loaded: do not ask again
-      body.armorHandle = handle; body.arsenalArmor = want;
+      undress();
+      body.armorUnfit = null; body.armorHandle = handle; body.arsenalArmor = want;
       // Followed by setFade/dispose like the rest of the body.
       body.meshes.push(...handle.meshes);
       body.setFade(1);
-    }).catch((error) => { body.armorPending = null; console.warn('[arsenal] Armor fit failed', error); });
+    }).catch((error) => { if (body.armorPending === request) body.armorPending = null; console.warn('[arsenal] Armor fit failed', error); });
   }
   let equippedWeapon = null;
   function carryWeapon(actor) {

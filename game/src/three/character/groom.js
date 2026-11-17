@@ -12,9 +12,10 @@ import { profileFor, sheetProfile, sheetHeadSize } from './profiles.js';
 import { buildHead, skinMaterial, eyeMaterial } from './head.js';
 import { buildGroom, hairMaterial, leafTufts } from './hair.js';
 import { buildGear, gearCoverage } from './gear.js';
+import { recipeFor } from './sheets/recipes/index.js';
 import { withSurface } from './surface.js';
 import { buildReferenceHair } from './reference-hair.js';
-import { applyReferenceFace } from './reference-face.js';
+import { applyReferenceFace, applySheetPortrait } from './reference-face.js';
 
 const kits = new Map();
 const culled = new WeakSet();
@@ -139,7 +140,10 @@ export function applyGroom(body, desc, quality = 'high', wears = null) {
     (opts.parent ?? rig).add(mesh); added.push(mesh); return mesh;
   };
   const prof = kit.profile;
-  const skin = wears?.sheet ? own(skinMaterial(prof, H, new Vector3())) : applyReferenceFace(own(skinMaterial(prof, H, new Vector3())), key, H);
+  const sculptMaterial = own(skinMaterial(prof, H, new Vector3()));
+  const skin = wears?.sheet
+    ? applySheetPortrait(sculptMaterial, recipeFor(key)?.sheet, H)
+    : applyReferenceFace(sculptMaterial, key, H);
   add(kit.head.skinGeo, skin);
   const eyeMat = own(eyeMaterial(prof.eye, new Vector3(), prof.sheet ? 1.3 * (prof.irisScale ?? 1) : 1));
   const eyeMeshes=[];
