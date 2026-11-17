@@ -30,7 +30,19 @@ function colonnade(S, x0, z0, x1, z1, o = {}) {
     const top = [0, H + 1.0 + (o.rise ?? 4), zc];
     for (const [cx, cz] of [[-1, -1], [1, -1], [1, 1], [-1, 1]]) S.d.beam(cap, [cx * (depth / 2 + 0.8), H + 1.0, zc + cz * bay / 2], top, 0.1);
   }
-  if (o.backWall !== false) { S.b.box(S.M.wall, depth / 2 + 1.2, -2, L / 2, 0.9, H + 3, L + 1); S.col.box(depth / 2 + 1.2, L / 2, 0.45, L / 2, 0, -2, H + 1, false); }
+  if (o.backWall !== false) {
+    // The limestone backing sits behind marble piers and a projecting cornice.
+    // Build into the original collision envelope on both sides of the arcade.
+    const x = depth / 2 + 1.2;
+    S.b.box(S.M.found, x, -2, L / 2, 0.60, H + 3, L + 1);
+    S.b.box(S.M.trim, x, 0, L / 2, 0.88, H * 0.17, L + 1);
+    S.b.box(S.M.trim, x, H - 0.55, L / 2, 0.84, 0.42, L + 1);
+    S.b.box(S.M.wall, x, H - 0.13, L / 2, 0.90, 0.23, L + 1);
+    for (let i = 0; i <= n; i++) {
+      S.b.box(S.M.trim, x, H * 0.17, i * bay, 0.88, H * 0.83 - 0.55, 0.74);
+    }
+    S.col.box(x, L / 2, 0.45, L / 2, 0, -2, H + 1, false);
+  }
   S.F.pop();
 }
 
@@ -128,8 +140,8 @@ export default {
     banner: { color: '#ece4d2', trim: '#c8a050', emblem: '#b08a3a' },
     mats: {
       pave: ['stone.marble'], border: ['stone.marble', { tint: '#d2cabb' }], ground: ['paving.flagstone', { tint: '#d6d0c4' }],
-      wall: ['stone.marble', { tint: '#e9e4da' }], trim: ['stone.marble', { tint: '#cfc7b6' }], metal: ['metal.gold'], inlay: ['metal.gold'],
-      roof: ['stone.marble', { tint: '#f1ece2' }], house: ['plaster.lime', { tint: '#ebe5d8' }], found: ['stone.limestone', { tint: '#cbc2b0' }],
+      wall: ['stone.marble', { tint: '#e9e4da' }], trim: ['stone.marble', { tint: '#b5a995' }], metal: ['metal.gold'], inlay: ['metal.gold'],
+      roof: ['stone.marble', { tint: '#f1ece2' }], house: ['plaster.lime', { tint: '#ebe5d8' }], found: ['stone.limestone', { tint: '#b5a58e' }],
       wood: ['wood.lacquer', { tint: '#6a5030' }], leaves: ['foliage.leaves', { tint: '#2a4422' }], bark: ['bark.living'], dark: ['stone.basalt', { tint: '#3a3632' }],
     },
     rim: (S) => ({ type: 'stone', rail: S.M.trim, post: S.M.wall, gap: 13.5 }),
