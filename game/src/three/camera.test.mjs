@@ -63,3 +63,18 @@ test('camera waterline clamp uses the local marsh surface', () => {
  camera.update(1/60);assert.ok(camera.cam.position.y>=height+.25);
  camera.dispose();
 });
+
+test('look-right turns toward screen-right at any starting heading', () => {
+  const { ctx, camera } = setup();
+  camera.intro = null;
+  for (const heading of [0, 1.2, -2.7]) {
+    camera.yaw = heading;
+    ctx.input.state.lookDX = 0;
+    camera.update(1 / 60);
+    const screenRight = new Vector3(1, 0, 0).applyQuaternion(camera.cam.quaternion);
+    ctx.input.state.lookDX = 45;
+    camera.update(1 / 60);
+    assert.ok(camera.cam.getWorldDirection(new Vector3()).dot(screenRight) > 0.05);
+  }
+  camera.dispose();
+});
