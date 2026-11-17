@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Scene, Vector3, PerspectiveCamera, Group, Mesh, MeshStandardMaterial, BoxGeometry } from 'three';
+import { Bus } from '../core/bus.js';
 import { initVFX, ELEMENT_STYLES } from './vfx.js';
 import { SOURCE_ABILITY_IDS } from './source-abilities.js';
 
@@ -121,4 +122,23 @@ test('source zones draw their gameplay radius on the terrain until release or ca
   assert.ok(next.instance);
   assert.equal(scene.getObjectByName('ZoneWindup'), undefined);
   vfx.dispose();
+});
+
+test('landing burst reads the surface and reuses a single draw across repeated contacts', async () => {
+  const scene = new Scene(), bus = new Bus(), sample = {wetness:.8};
+  let tick;
+  const vfx = await initVFX({scene, bus, surface:{sample:()=>sample}, addUpdate(fn){tick = fn;}});
+  const land = impactSpeed => bus.emit('player:land', {x:2, y:4, z:6, impactSpeed});
+  land(1); assert.equal(scene.getObjectByName('LandingParticles'), undefined);
+  land(6);
+  const burst = scene.getObjectByName('LandingParticles');
+  assert.equal(burst.material.uniforms.wet.value, 1);
+  sample.snow = .7;
+  land(9); assert.equal(scene.getObjectByName('LandingParticles'), burst);
+  assert.equal(burst.material.uniforms.wet.value, 0);
+  assert.equal(burst.material.uniforms.tint.value.getHexString(), 'd9e3e2');
+  for (let i = 0; i < 6; i++) tick(.1);
+  assert.equal(burst.parent, null);
+  vfx.dispose(); land(6);
+  assert.equal(scene.children.length, 0);
 });

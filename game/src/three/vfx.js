@@ -22,6 +22,7 @@ export const ELEMENT_STYLES = {
   time: { color: '#d9b86f', core: '#fff1c3', motion: 'orbit', form: 'clock' },
   tech: { color: '#45dbe1', core: '#d4ffff', motion: 'jitter', form: 'grid' },
 };
+import { createLandingParticles } from './landing-particles.js';
 import { projectileWake, impactSpray, groundNormal } from './combat-trails.js';
 import { createSourceAbilities } from './source-abilities.js';
 import { PALETTES } from '../vfx/palettes.generated.js';
@@ -33,6 +34,7 @@ const vec = (p) => new Vector3(p?.x ?? 0, p?.y ?? 0, p?.z ?? 0);
 
 export async function initVFX(ctx) {
   const source = await createSourceAbilities(ctx);
+  const landing = createLandingParticles(ctx);
   const active = new Set(); const MAX_EFFECTS = 64;
   const scene = ctx.scene;
   function glowMaterial(color) {
@@ -139,13 +141,13 @@ export async function initVFX(ctx) {
     play(key,opts={}) {const parts=String(key).split(':');let element=opts.element??parts.find(p=>ELEMENT_STYLES[p])??(key==='heal'?'nature':'light');let kind=parts[0];if(kind==='basic')kind=parts[1]==='ninja'?'melee':'projectile';if(kind==='ultimate')kind='zone';return make(element,kind,{...opts,ultimate:parts[0]==='ultimate',duration:opts.duration??(key==='levelup'?2.2:undefined)});},
     impact(element,pos,strength=1,opts={}) { return make(element,'impact',{...opts,pos,radius:Math.max(.5,strength*2),duration:.7}); },
     status(actor,kind,duration=3){return make(STATUS_ELEMENT[kind]??'arcane','status',{caster:actor,duration:Math.min(60,duration),radius:1});},
-    stopAll(){source.stopAll();for(const h of [...active])h.stop();},
+    stopAll(){landing.stop();source.stopAll();for(const h of [...active])h.stop();},
     get sourceStats(){return source.stats;},
     get hasActiveSourceEffects(){return source.activeCount>0 || source.stats.sessions>0;},
     get activeCount(){return active.size+source.activeCount;},
-    dispose(){this.stopAll();source.dispose();},
+    dispose(){this.stopAll();landing.dispose();source.dispose();},
   };
-  ctx.addUpdate?.(dt=>{source.update(Math.min(.1,Math.max(0,dt)));for(const h of [...active])h.update(Math.min(.1,Math.max(0,dt)));},35);
+  ctx.addUpdate?.(dt=>{landing.update(dt);source.update(Math.min(.1,Math.max(0,dt)));for(const h of [...active])h.update(Math.min(.1,Math.max(0,dt)));},35);
   return api;
 }
 export const init = initVFX;
