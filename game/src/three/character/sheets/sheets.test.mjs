@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Vector3 } from 'three';
+import { Bone, BufferAttribute, BufferGeometry, Group, Skeleton, SkinnedMesh, Vector3 } from 'three';
 import { RECIPES } from './recipes/index.js';
 import { BUILDERS } from './builders.js';
 import { buildCostume } from './costume.js';
 import { costumeMaterial } from './material.js';
 import { PROFILES } from '../profiles.js';
 import { buildFieldArmor } from '../field-armor.js';
+import { wearSheet } from './wear.js';
 
 // Bind-pose joints of oath-01-ninja (metres), the proportions every forge hero is a variation of.
 const JOINTS = { hips: [0, .9978, -.0099], spine: [0, 1.097, -.0049], spine1: [0, 1.221, -.0099], spine2: [0, 1.345, -.0198], neck: [0, 1.4938, -.0247], head: [0, 1.5779, 0],
@@ -68,6 +69,60 @@ test('hair styles and hands build for any recipe that asks for them', () => {
 });
 
 test('the costume material constructs without a renderer', () => { assert.equal(costumeMaterial().vertexColors, true); });
+
+test('a chronicler and an armed player can share one source model with independent prop visibility and hand rigs', () => {
+  const { J, index } = rig();
+  const source = new BufferGeometry();
+  source.setAttribute('position', new BufferAttribute(new Float32Array([
+    0, 1, 0, 0, 1.2, 0, 0, 1, .2,
+    -.6, 1.1, 0, -.7, 1.1, 0, -.6, 1.1, .2,
+  ]), 3));
+  const ids = new Uint16Array(24), weights = new Float32Array(24);
+  for (let i = 0; i < 6; i++) {
+    ids[i * 4] = index[i < 3 ? 'spine' : 'hand.R'];
+    weights[i * 4] = 1;
+  }
+  source.setAttribute('skinIndex', new BufferAttribute(ids, 4));
+  source.setAttribute('skinWeight', new BufferAttribute(weights, 4));
+  source.setIndex([0, 1, 2, 3, 4, 5]);
+
+  function character() {
+    const root = new Group(), mesh = new SkinnedMesh(source);
+    root.add(mesh);
+    const joints = Object.entries(J).map(([name, position]) => {
+      const bone = new Bone();
+      bone.name = name;
+      bone.position.copy(position);
+      root.add(bone);
+      return bone;
+    });
+    root.updateMatrixWorld(true);
+    mesh.bind(new Skeleton(joints));
+    return { meshes: [mesh], animator: {}, dispose() {} };
+  }
+
+  const chronicler = character(), player = character(), rawPreview = character();
+  const desc = { oath: 'oath-09', cls: 'ninja' };
+  const civilianCostume = wearSheet(chronicler, { ...desc, kind: 'npc', noWeapon: true });
+  const playerCostume = wearSheet(player, { ...desc, kind: 'player' });
+  assert.deepEqual([...rawPreview.meshes[0].geometry.index.array], [0, 1, 2, 3, 4, 5]);
+  assert.deepEqual([...player.meshes[0].geometry.index.array], [3, 4, 5]);
+  assert.equal(player.meshes[0].geometry, chronicler.meshes[0].geometry);
+  assert.equal(player.meshes[0].geometry.getAttribute('position'), source.getAttribute('position'));
+  assert.equal(chronicler.meshes[0].visible, false);
+  assert.equal(player.meshes[0].visible, true);
+  player.animator.setHandsFree(true);
+  assert.equal(player.meshes[0].visible, false);
+  player.animator.setHandsFree(false);
+  chronicler.animator.setHandsFree(false);
+  assert.equal(player.meshes[0].visible, true);
+  assert.equal(chronicler.meshes[0].visible, false);
+  const tip = costume => costume.mesh.skeleton.bones.find(b => b.name === 'index2.R');
+  assert.ok(tip(playerCostume).position.distanceTo(tip(civilianCostume).position) > .01);
+
+  chronicler.dispose();
+  player.dispose();
+});
 
 test('common field armor leaves the hands and feet clear for each oath and class', () => {
   const wearer = rig();

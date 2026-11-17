@@ -1,7 +1,7 @@
 // Local player controller: camera-relative movement with acceleration, turn smoothing,
 // walk/run/sprint, jump with coyote time + buffering, dodge roll with i-frames, slope limits,
 // step-up onto architecture, swimming, world bounds, and net move sync at MOVE_HZ.
-import { setTravelDirection } from '../three/character/locomotion.js';
+import { DODGE_DURATION, setTravelDirection } from '../three/character/locomotion.js';
 import { CLASSES, regionAt } from '@shared/oaths.js';
 import { MOVE_HZ } from '@shared/protocol.js';
 import { WORLD_HALF } from '@shared/terrain.js';
@@ -10,7 +10,7 @@ export const TUNING = {
   accelGround: 11, decelGround: 13, accelAir: 2.2,
   turnRate: 13, walkFactor: 0.38, sprintFactor: 1.45, backFactor: 1.0,
   gravity: 24, jumpVel: 7.0, coyote: 0.12, jumpBuffer: 0.14, terminal: 42,
-  dodgeTime: 0.55, dodgeSpeed: 9.5, dodgeIFrames: [0.06, 0.42], dodgeCooldown: 0.75,
+  dodgeTime: DODGE_DURATION, dodgeSpeed: 9.5, dodgeIFrames: [0.06, 0.42], dodgeCooldown: 0.75,
   stepUp: 0.55, stepDown: 0.65, slopeLimitDeg: 48, radius: 0.38,
   swimDepth: 1.2, swimFactor: 0.55,
 };

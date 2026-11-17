@@ -87,7 +87,7 @@ export function hands(c, { glove = null, fingerless = false, skin = 'skin', fist
   c.bag.part = 'hands';
   for (const side of ['L', 'R']) {
     c.bag.mirror = side === 'R';
-    const closed = fist === 'both' || fist === side;
+    const closed = !c.rig.unarmed && (fist === 'both' || fist === side);
     palm(c, place, appearance.glove || appearance.skin);
     if (knuckles && glove) {
       c.bag.solid(moved(roundBox(.034, .010, .004, .003), V(0, .078, .014)), place, handWeight, c.pal(knuckles), MAT.leather);

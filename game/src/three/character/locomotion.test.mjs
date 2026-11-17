@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { registerHooks } from 'node:module';
-import { AnimationMixer, Box3, Quaternion, Vector3 } from 'three';
+import { AnimationClip, AnimationMixer, Box3, Group, LoopOnce, NumberKeyframeTrack, Quaternion, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { GAIT_SPEED, groundClip, setTravelDirection } from './locomotion.js';
 import { waterClips } from './water-motion.js';
@@ -11,7 +11,8 @@ registerHooks({ resolve(specifier, context, next) {
   if (specifier.startsWith('@shared/')) return next(new URL('../../../../shared/' + specifier.slice(8), import.meta.url).href, context);
   return next(specifier, context);
 } });
-const { PlayerController } = await import('../../actors/controller.js');
+const { PlayerController, TUNING } = await import('../../actors/controller.js');
+const { createModelBody } = await import('../models.js');
 const { heightAt, waterLevelAt, normalAt } = await import('@shared/terrain.js');
 
 function surfaceOffsets(height) {
@@ -45,6 +46,48 @@ test('lateral and reverse steps follow actual travel in character space', () => 
   // A quadruped without strafe clips keeps its available forward gait.
   animator.lateral = 1;
   assert.equal(groundClip(animator, new Set(['run'])), 'run');
+});
+
+test('takeoff transitions to the airborne pose and dodge completes within controller time', () => {
+  const scene = new Group(), marker = new Group();
+  marker.name = 'marker';
+  scene.add(marker);
+  const animations = ['idle', 'jump_start', 'jump_loop', 'dodge', 'cast_channel', 'land']
+    .map(name => new AnimationClip(name, 1, [new NumberKeyframeTrack('marker.position[x]', [0, 1], [0, 1])]));
+  const body = createModelBody({ scene, animations }, new Group(), true);
+  const animator = body.animator;
+  let active;
+  animator.poseHands = (_dt, name) => { active = name; };
+
+  animator.playAnim('cast_channel');
+  animator.setState('jump');
+  animator.update(.04);
+  assert.equal(animator.action, null);
+  assert.equal(active, 'jump_start');
+  assert.equal(animator.select('jump').loop, LoopOnce);
+  for (let frame = 1; frame < 7; frame++) animator.update(.04);
+  assert.ok(animator.stateT < TUNING.jumpVel / TUNING.gravity);
+  assert.equal(active, 'jump_loop');
+  animator.setState('fall');
+  animator.update(.04);
+  assert.equal(active, 'jump_loop');
+  animator.setState('land');
+  animator.update(.04);
+  assert.equal(active, 'land');
+
+  animator.setState('dodge');
+  animator.update(.04);
+  const dodge = animator.select('dodge');
+  assert.equal(active, 'dodge');
+  assert.equal(dodge.loop, LoopOnce);
+  assert.equal(dodge.getClip().duration, TUNING.dodgeTime);
+  for (let frame = 1; frame < 16; frame++) animator.update(.04);
+  assert.equal(dodge.time, TUNING.dodgeTime);
+  assert.equal(active, 'dodge');
+  animator.setState('loco');
+  animator.update(.04);
+  assert.equal(active, 'idle');
+  body.dispose();
 });
 
 test('both water cycles close cleanly and bind to every shipped playable rig', async () => {

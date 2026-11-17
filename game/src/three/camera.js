@@ -162,11 +162,14 @@ export class OrbitCamera {
     const world = ctx.world, col = ctx.collision;
     const clearance = NEAR_PLANE + 0.05;
     const { x: anchorX, y: py, z: anchorZ } = this.pivot;
-    // Retract the shoulder first when the character stands side-on against a wall.
+    // Leave the boom origin outside the padded wall, including contacts at full shoulder reach.
+    const shoulderMargin = 0.005;
+    const shoulderSweep = shoulder + shoulderMargin;
     const shoulderHit = col?.segmentHit?.(anchorX, py, anchorZ,
-      anchorX + rx * shoulder, py, anchorZ + rz * shoulder, clearance) ?? 1;
-    const px = anchorX + rx * shoulder * shoulderHit;
-    const pz = anchorZ + rz * shoulder * shoulderHit;
+      anchorX + rx * shoulderSweep, py, anchorZ + rz * shoulderSweep, clearance) ?? 1;
+    const shoulderDistance = Math.max(0, shoulderSweep * shoulderHit - shoulderMargin);
+    const px = anchorX + rx * shoulderDistance;
+    const pz = anchorZ + rz * shoulderDistance;
     const hit = col?.segmentHit?.(px, py, pz, px + bx * dist, py + by * dist, pz + bz * dist, clearance) ?? 1;
     let allowed = dist * hit;
     // Terrain follows a height field. Refine the first crossing on the shortened boom.

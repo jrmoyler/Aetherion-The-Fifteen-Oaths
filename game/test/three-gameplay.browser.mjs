@@ -81,7 +81,8 @@ try {
   assert.deepEqual(errors, []); assert.deepEqual(failures, []);
   if (process.env.AETHERION_SCREENSHOT) {
     await page.waitForTimeout(11000); // Let the informational offline-ready notice expire.
-    await page.screenshot({ path: process.env.AETHERION_SCREENSHOT });
+    await page.evaluate(() => window.__aetherion.renderer.setAnimationLoop(null));
+    await page.screenshot({ path: process.env.AETHERION_SCREENSHOT, timeout: 90000 });
   }
   console.log(JSON.stringify({ ...result, moved, errors, failures }, null, 2));
 } finally {

@@ -8,8 +8,9 @@ test('touch chat stays compact and expandable help panels never overlap', async 
   const browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE } : {}) });
   try {
     const css = await readFile(new URL('../src/ui/ui.css', import.meta.url), 'utf8');
+    const page = await browser.newPage({ isMobile: true, hasTouch: true });
     for (const [width, height] of [[390, 844], [844, 390]]) {
-      const page = await browser.newPage({ viewport: { width, height }, isMobile: true, hasTouch: true });
+      await page.setViewportSize({ width, height });
       await page.setContent(`<style>${css}</style><div id="ui" class="is-touch"><div class="ae-help-dock"><div class="ae-quests is-collapsed"><button class="ae-quests__head">Covenant Tasks</button><div class="ae-quest">Task details<br>Travel to the shrine</div></div><aside class="ae-guide"><button class="ae-guide__head">Field guide</button><div class="ae-guide__body" hidden>Movement instructions</div></aside></div><div class="ae-chat"><button class="ae-chat__open">Chat</button></div></div>`);
       // The utility group owns the Chat button on touch, so the idle pill takes no space in the thumb zone.
       assert.equal(await page.locator('.ae-chat').isVisible(), false, `${width}: idle chat pill should be hidden on touch`);
@@ -26,7 +27,6 @@ test('touch chat stays compact and expandable help panels never overlap', async 
         const dock = await page.locator('.ae-help-dock').boundingBox();
         if (landscape) assert.ok(dock.y + dock.height <= height - 150, `${state}: dock ends above the thumbstick`);
       }
-      await page.close();
     }
   } finally { await browser.close(); }
 });
@@ -36,8 +36,9 @@ test('expanded guidance leaves both ends of the landscape hotbar reachable', asy
     readFile(new URL(`../src/ui/${name}.css`, import.meta.url), 'utf8')));
   const browser = await chromium.launch({headless:true, executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE});
   try {
+    const page = await browser.newPage({ hasTouch: true });
     for (const [width,height] of [[800,450],[1280,800]]) {
-      const page = await browser.newPage({viewport:{width,height}, hasTouch:true});
+      await page.setViewportSize({ width, height });
       const slots = Array.from({length:6}, (_,i) => `<button class="ae-slot">${i+1}</button>`).join('');
       await page.setContent(`<style>${styles.join('\n')}</style><div id="ui"><div class="ae-hud">
         <div class="ae-actionbar ae-panel ae-int"><small class="ae-actionbar__covenant">Covenant</small><div class="ae-hotrow">
@@ -63,7 +64,6 @@ test('expanded guidance leaves both ends of the landscape hotbar reachable', asy
         assert.equal(await page.locator('.ae-quests').evaluate(el => getComputedStyle(el).maxHeight), 'none');
         assert.equal(await page.locator('.ae-guide__head').evaluate(el => getComputedStyle(el).position), 'static');
       }
-      await page.close();
     }
   } finally { await browser.close(); }
 });

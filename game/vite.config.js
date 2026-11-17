@@ -14,11 +14,17 @@ export default defineConfig({
       injectRegister: false,
       manifest: false, // public/manifest.webmanifest is authored by hand (ui owner)
       workbox: {
-        globPatterns: ['**/*.{js,css,html,webmanifest,woff2}', 'icons/*.png', 'ui/*.webp', 'assets/**/manifest.json', 'assets/*.hdr', 'textures/**/*.{png,jpg,jpeg,webp}'],
+        globPatterns: [
+          '**/*.{js,css,html,webmanifest,woff2}', 'icons/*.png', 'ui/*.webp',
+          'assets/**/manifest.json', 'assets/*.hdr', 'textures/**/*.{png,jpg,jpeg,webp}',
+          // The renderer loads these summon rigs before the title screen becomes interactive.
+          'assets/ability-source/{handcast,casting}/models/*.glb',
+          'assets/ability-source/linear-extended/models/snake.glb',
+        ],
         cleanupOutdatedCaches: true,
         skipWaiting: false,
         clientsClaim: true,
-        maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
+        maximumFileSizeToCacheInBytes: 14 * 1024 * 1024,
         navigateFallbackDenylist: [/\/ws(?:\/|$)/, /\/api(?:\/|$)/, /\/assets\//],
         runtimeCaching: [
           { urlPattern: ({ url, sameOrigin }) => sameOrigin && /\/assets\/.*\.(glb|ktx2|bin|png|jpe?g|webp|json)$/.test(url.pathname),

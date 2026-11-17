@@ -159,6 +159,7 @@ function createActors(ctx) {
       nb.animator.speed = previous?.speed ?? 0;
       nb.animator.yawVel = previous?.yawVel ?? 0;
       nb.animator.backwards = previous?.backwards ?? false;
+      nb.animator.lateral = previous?.lateral ?? 0;
       nb.animator.channel = previous?.channel ?? false;
       nb.setVisible(actor.visible);
       nb.setFade(actor === player ? 1 : actor.fade);

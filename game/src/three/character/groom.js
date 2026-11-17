@@ -7,7 +7,7 @@
 //     shading with rest-space micro detail (no more uniform plastic gloss).
 // Geometry is cached per hero and quality tier; materials are per actor so
 // fades never leak between actors.
-import { Group, Mesh, Matrix4, Vector3, Box3, MeshPhysicalMaterial, Color, BufferAttribute } from 'three';
+import { Group, Mesh, Vector3, MeshPhysicalMaterial, Color } from 'three';
 import { profileFor, sheetProfile, sheetHeadSize } from './profiles.js';
 import { buildHead, skinMaterial, eyeMaterial } from './head.js';
 import { buildGroom, hairMaterial, leafTufts } from './hair.js';
@@ -16,9 +16,10 @@ import { recipeFor } from './sheets/recipes/index.js';
 import { withSurface } from './surface.js';
 import { buildReferenceHair } from './reference-hair.js';
 import { applyReferenceFace, applySheetPortrait } from './reference-face.js';
+import { withPrimitiveIndices } from './primitive-geometry.js';
 
 const kits = new Map();
-const culled = new WeakSet();
+const culled = new WeakMap();
 
 function kitFor(key, H, quality, identity = '', sheet = false) {
   const profile = sheet ? sheetProfile(profileFor(key, identity)) : profileFor(key, identity);
@@ -46,10 +47,20 @@ function own(m) {
 
 function headIndex(skeleton) { return skeleton.bones.findIndex(b => b.name === 'head'); }
 
-// Removes head-skinned triangles inside the skull volume from the shared GLB geometry.
-function cullHead(mesh, hi, center, H) {
+// Cache head cuts independently from the GLB so another actor or preview can
+// still access the original primitive.
+function cullHead(mesh, center, H) {
+  const hi = headIndex(mesh.skeleton);
+  if (hi < 0) return;
   const ni = mesh.skeleton.bones.findIndex(b => b.name === 'neck');
-  const geo = mesh.geometry; if (culled.has(geo)) return; culled.add(geo);
+  const geo = mesh.geometry;
+  const key = [hi, ni, center.x, center.y, center.z, H].join('|');
+  let variants = culled.get(geo);
+  if (!variants) culled.set(geo, variants = new Map());
+  if (variants.has(key)) {
+    mesh.geometry = variants.get(key);
+    return;
+  }
   const j = geo.attributes.skinIndex, w = geo.attributes.skinWeight, p = geo.attributes.position, idx = geo.index;
   if (!j || !w || !idx) return;
   const n = p.count, kill = new Uint8Array(n);
@@ -64,7 +75,8 @@ function cullHead(mesh, hi, center, H) {
   const src = idx.array, keep = [];
   for (let i = 0; i < src.length; i += 3) if (!(kill[src[i]] && kill[src[i + 1]] && kill[src[i + 2]])) keep.push(src[i], src[i + 1], src[i + 2]);
   const Arr = n > 65535 ? Uint32Array : Uint16Array;
-  geo.setIndex(new BufferAttribute(new Arr(keep), 1));
+  mesh.geometry = withPrimitiveIndices(geo, new Arr(keep));
+  variants.set(key, mesh.geometry);
 }
 
 // Garment atlas: rest-space weave on cloth, brushed wear on metal, leather
@@ -126,7 +138,7 @@ export function applyGroom(body, desc, quality = 'high', wears = null) {
     if (!m.isSkinnedMesh) continue;
     const names = (Array.isArray(m.material) ? m.material : [m.material]).map(x => x.name);
     if (names.includes('iris') || names.includes('pupil')) { m.visible = false; m.userData.groomHidden = true; continue; }
-    if (m.skeleton) cullHead(m, hi, center, H);
+    if (m.skeleton) cullHead(m, center, H);
   }
   // 2. head rig in bind space under the head bone
   const anchor = new Group(); anchor.name = 'procedural-head';

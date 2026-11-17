@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { clone } from 'three/addons/utils/SkeletonUtils.js';
 import { equipArmor } from './actor-armor.js';
 import { attachWeapon } from './actor-weapons.js';
-import { GAIT_SPEED, groundClip } from './character/locomotion.js';
+import { GAIT_SPEED, groundClip, isForwardGait } from './character/locomotion.js';
 import { waterClips } from './character/water-motion.js';
 import { prepareCombatClips } from './combat-clips.js';
 import { applyGroom } from './character/groom.js';
@@ -65,13 +65,17 @@ export function createModelBody(gltf, parent, combatTiming = false) {
     materialStates.set(material, { opacity: material.opacity, transparent: material.transparent, depthWrite: material.depthWrite });
   }
   const animator = {
-    state: 'loco', speed: 0, yawVel: 0, channel: false, action: null,
+    state: 'loco', stateT: 0, speed: 0, yawVel: 0, channel: false, action: null,
     interval: 0, accum: 0,
     setState(name) {
       if (this.state === name || (name === 'loco' && this.state === 'land' && hold > 0)) return;
       this.state = name;
-      // Terminal/recovery states must preempt an attack or a long channel.
-      if (name === 'dead' || name === 'loco') { hold = 0; this.action = null; }
+      this.stateT = 0;
+      // These transitions replace any pose left over from a previous action.
+      if (name === 'dead' || name === 'loco' || name === 'dodge' || name === 'jump' || name === 'swim') {
+        hold = 0;
+        this.action = null;
+      }
       if (name === 'dead') this.select('death', true, { restart: true });
       if (name === 'land') this.playAnim('land');
     },
@@ -107,9 +111,10 @@ export function createModelBody(gltf, parent, combatTiming = false) {
       next.stopFading().reset().setLoop(once ? LoopOnce : LoopRepeat, once ? 1 : Infinity);
       // Walk, run and sprint all start on the same authored contact foot.
       // Transfer cycle phase so changing gait does not snap back to heel strike.
-      if (!once && !opts.restart && GAIT_SPEED[name] && GAIT_SPEED[previous?.getClip().name]) {
+      if (!once && !opts.restart && isForwardGait(name) && isForwardGait(previous?.getClip().name)) {
         next.time = previous.time / previous.getClip().duration * next.getClip().duration;
       }
+      if (opts.time) next.time = Math.min(opts.time, next.getClip().duration);
       next.clampWhenFinished = once;
       next.enabled = true; next.setEffectiveTimeScale(Math.max(.05, opts.speed ?? 1));
       next.setEffectiveWeight(1).play();
@@ -120,17 +125,27 @@ export function createModelBody(gltf, parent, combatTiming = false) {
     },
     update(dt) {
       if (!Number.isFinite(dt) || dt <= 0) return false;
+      this.stateT += dt;
       // Evaluate distant skeletons less often, retaining all elapsed animation time.
       this.accum += dt;
       if (this.accum + 1e-9 < this.interval) return false;
       dt = this.accum; this.accum = 0;
       combatHold = Math.max(0, combatHold - dt);
-      if (hold > 0) { hold -= dt; if (hold <= 0) { this.action = null; if (this.state === 'land') this.state = 'loco'; } }
+      if (hold > 0) {
+        hold -= dt;
+        if (hold <= 0) {
+          this.action = null;
+          if (this.state === 'land') this.setState('loco');
+        }
+      }
       if (hold <= 0) {
         let name = this.state;
         if (name === 'loco') name = groundClip(this, actions, combatHold, current?.getClip().name);
         if (name === 'swim' && this.speed < .32) name = 'tread_water';
-        this.select(name, name === 'dead');
+        const elapsed = Math.max(0, this.stateT - dt);
+        if (name === 'jump' && elapsed >= (actions.get('jump_start')?.getClip().duration ?? 0)) name = 'fall';
+        const timed = name === 'jump' || name === 'dodge';
+        this.select(name, timed || name === 'dead', timed ? { time: elapsed } : {});
         if (current) {
           const nominal = GAIT_SPEED[current.getClip().name];
           current.timeScale = nominal && this.state === 'loco' ? Math.max(.65, Math.min(1.65, this.speed / nominal)) : 1;

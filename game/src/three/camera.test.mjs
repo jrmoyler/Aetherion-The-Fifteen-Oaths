@@ -1,7 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { registerHooks } from 'node:module';
 import { PerspectiveCamera, Vector3, Group } from 'three';
 import { OrbitCamera } from './camera.js';
+
+registerHooks({ resolve(id, context, next) {
+  return next(id.startsWith('@shared/') ? new URL('../../../shared/' + id.slice(8), import.meta.url).href : id, context);
+} });
+const { CollisionWorld } = await import('../core/collision.js');
 
 function setup() {
   const ctx = { camera: new PerspectiveCamera(), quality: { drawDistance: 1500 }, scene: {}, input: { gameplayEnabled: true, state: { moveX: 0, moveY: 0 } }, params: new URLSearchParams(), world: { heightAt: () => -100 } };
@@ -39,6 +45,23 @@ test('obstruction pulls camera in immediately and recovery is smooth', () => {
   ctx.collision.segmentHit = () => 1; camera.update(1 / 60);
   assert.ok(camera.curDist > near); assert.ok(camera.curDist < camera.dist);
   assert.ok(camera.cam.position instanceof Vector3);
+});
+
+test('a wall beside the shoulder leaves a parallel camera boom clear', () => {
+  const { ctx, camera } = setup();
+  camera.intro = null;
+  ctx.collision = new CollisionWorld();
+  ctx.collision.addBox(-0.7, 0, 0.1, 12, 0, -2, 8);
+
+  camera.update(1 / 60);
+  assert.ok(camera.cam.position.x > -0.25 && camera.cam.position.x < -0.24);
+  assert.equal(camera.curDist, camera.dist);
+  assert.equal(camera.bodyFade, 1);
+
+  ctx.collision.addBox(0, -3, 2, 0.1, 0, -2, 8);
+  camera.update(1 / 60);
+  assert.ok(camera.curDist > 2 && camera.curDist < 3);
+  camera.dispose();
 });
 
 import { prefs, DEFAULTS } from '../ui/prefs.js';

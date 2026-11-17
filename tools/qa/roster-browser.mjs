@@ -46,15 +46,15 @@ await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
 let browser;
 const rows = [], errors = [];
 try {
-  browser = await chromium.launch({
-    headless: true, executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH || undefined,
-    args: ['--no-sandbox', '--disable-dev-shm-usage', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
-  });
   let page;
   for (const [index, id] of ids.entries()) {
     // Release the GLB loader and GPU caches periodically when running with software GL.
     if (index % 5 === 0) {
-      await page?.close();
+      await browser?.close();
+      browser = await chromium.launch({
+        headless: true, executablePath: process.env.PLAYWRIGHT_EXECUTABLE_PATH || undefined,
+        args: ['--no-sandbox', '--disable-dev-shm-usage', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+      });
       page = await browser.newPage({ viewport: { width: 360, height: 440 } });
       page.on('pageerror', e => errors.push(e.message));
       page.on('console', m => {
