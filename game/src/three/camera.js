@@ -159,28 +159,39 @@ export class OrbitCamera {
     const rx = Math.cos(yaw), rz = -Math.sin(yaw);
     const cp = Math.cos(pitch), sp = Math.sin(pitch);
     const bx = -Math.sin(yaw) * cp, by = sp, bz = -Math.cos(yaw) * cp;
-    const px = this.pivot.x + rx * shoulder, py = this.pivot.y, pz = this.pivot.z + rz * shoulder;
-    // obstruction: terrain samples + architecture solids
-    let allowed = dist;
     const world = ctx.world, col = ctx.collision;
-    const steps = 10;
-    for (let i = 1; i <= steps; i++) {
-      const t = (i / steps) * dist;
-      const x = px + bx * t, y = py + by * t, z = pz + bz * t;
-      const th = world?.heightAt ? world.heightAt(x, z) : -1e9;
-      let blocked = y < th + 0.35;
-      // collision.blocked samples every 2 m from the pivot (endpoint excluded) at this height
-      if (!blocked && col?.blocked && t > 2.2) blocked = col.blocked(px, pz, x + bx * 0.6, z + bz * 0.6, y);
-      if (blocked) { allowed = Math.max(0.6, t - dist / steps * 0.9); break; }
+    const clearance = NEAR_PLANE + 0.05;
+    const { x: anchorX, y: py, z: anchorZ } = this.pivot;
+    // Retract the shoulder first when the character stands side-on against a wall.
+    const shoulderHit = col?.segmentHit?.(anchorX, py, anchorZ,
+      anchorX + rx * shoulder, py, anchorZ + rz * shoulder, clearance) ?? 1;
+    const px = anchorX + rx * shoulder * shoulderHit;
+    const pz = anchorZ + rz * shoulder * shoulderHit;
+    const hit = col?.segmentHit?.(px, py, pz, px + bx * dist, py + by * dist, pz + bz * dist, clearance) ?? 1;
+    let allowed = dist * hit;
+    // Terrain follows a height field. Refine the first crossing on the shortened boom.
+    const steps = Math.max(1, Math.ceil(allowed / 0.75));
+    const interval = allowed / steps;
+    for (let i = 1; world?.heightAt && i <= steps; i++) {
+      const t = i * interval;
+      if (py + by * t >= world.heightAt(px + bx * t, pz + bz * t) + clearance) continue;
+      let low = t - interval, high = t;
+      for (let pass = 0; pass < 4; pass++) {
+        const mid = (low + high) * 0.5;
+        if (py + by * mid < world.heightAt(px + bx * mid, pz + bz * mid) + clearance) high = mid;
+        else low = mid;
+      }
+      allowed = low;
+      break;
     }
     // A tree trunk between the camera and the character pulls the camera in front of it, like a wall would.
     if (world?.trunkHit && allowed > 1.4) {
       const k = world.trunkHit(px, pz, px + bx * allowed, pz + bz * allowed);
-      if (k < 1) allowed = Math.max(1.2, k * allowed - 0.35);
+      if (k < 1) allowed = Math.max(0, k * allowed - clearance);
     }
     // Obstruction pull-in must be immediate: smoothing can leave the camera inside a wall.
     if (allowed < this.curDist) this.curDist = allowed;
-    else this.curDist += (allowed - this.curDist) * Math.min(1, dt * 3.5);
+    else this.curDist += (allowed - this.curDist) * (1 - Math.exp(-3.5 * dt));
     const d = this.curDist;
     let cx = px + bx * d, cy = py + by * d, cz = pz + bz * d;
     const gh = world?.heightAt ? world.heightAt(cx, cz) : -1e9;
@@ -200,6 +211,8 @@ export class OrbitCamera {
       if (f <= 0) this.shake = 0;
     }
     cam.position.set(cx, cy, cz);
+    // Preserve the view direction when a tight corner retracts the boom to zero.
+    if (d < 0.05) { lx -= bx * 0.05; ly -= by * 0.05; lz -= bz * 0.05; }
     this.look.set(lx, ly, lz);
     cam.lookAt(this.look);
     // 0 → the body would intersect the near plane, 1 → comfortably clear (read by actors/index.js)
