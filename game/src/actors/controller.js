@@ -298,4 +298,3 @@ export class PlayerController {
     this.sendT = 1 / MOVE_HZ;
   }
 }
-
