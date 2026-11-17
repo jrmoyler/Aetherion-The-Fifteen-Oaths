@@ -72,7 +72,7 @@ export class OrbitCamera {
   }
 
   addLook(dx, dy, sens) {
-    this.yaw += dx * sens;
+    this.yaw -= dx * sens;
     this.pitch = Math.max(CAM.minPitch, Math.min(CAM.maxPitch, this.pitch + dy * sens));
     this.lookIdle = 0;
     if (this.intro) this.intro = null;
@@ -156,7 +156,7 @@ export class OrbitCamera {
     }
     // shoulder offset (right), smaller when zoomed out
     const shoulder = CAM.shoulder * Math.min(1, 4.5 / Math.max(dist, 2.5)) + 0.08;
-    const rx = Math.cos(yaw), rz = -Math.sin(yaw);
+    const rx = -Math.cos(yaw), rz = Math.sin(yaw);
     const cp = Math.cos(pitch), sp = Math.sin(pitch);
     const bx = -Math.sin(yaw) * cp, by = sp, bz = -Math.cos(yaw) * cp;
     const world = ctx.world, col = ctx.collision;
