@@ -22,6 +22,7 @@ export const ELEMENT_STYLES = {
   time: { color: '#d9b86f', core: '#fff1c3', motion: 'orbit', form: 'clock' },
   tech: { color: '#45dbe1', core: '#d4ffff', motion: 'jitter', form: 'grid' },
 };
+import { projectileWake, impactSpray, groundNormal } from './combat-trails.js';
 import { createSourceAbilities } from './source-abilities.js';
 import { PALETTES } from '../vfx/palettes.generated.js';
 
@@ -61,28 +62,22 @@ export async function initVFX(ctx) {
     let age = 0; let done = false;
     root.position.copy(kind === 'zone' ? target : origin);
     const signature = [...(opts.abilityId ?? '')].reduce((n,c)=>n+c.charCodeAt(0),0);
-    const n = kind === 'status' ? 18 : opts.ultimate ? 60 : 28 + signature % 20;
+    const density = Math.max(.2, Math.min(1, ctx.quality?.particles ?? 1));
+    const n = Math.ceil((kind === 'status' ? 18 : opts.ultimate ? 60 : 28 + signature % 20) * density);
     const positions = new Float32Array(n * 3), seeds = new Float32Array(n), velocities = [];
     for (let i = 0; i < n; i++) { seeds[i] = Math.random(); const angle = i * 2.399963; velocities.push(new Vector3(Math.cos(angle), .3 + Math.random() * 1.7, Math.sin(angle)).multiplyScalar(.5 + Math.random())); }
     const geo = new BufferGeometry(); geo.setAttribute('position', new Float32BufferAttribute(positions, 3)); geo.setAttribute('seed', new Float32BufferAttribute(seeds, 1));
     const shader = new ShaderMaterial({ uniforms: { tint: { value: new Color(style.color) }, core: { value: new Color(style.core) }, opacity: { value: 1 }, size: { value: style.form === 'mist' ? .75 : .23 } }, vertexShader: pointVertex, fragmentShader: pointFragment, transparent: true, depthWrite: false, blending: AdditiveBlending });
     const points = new Points(geo, shader); points.frustumCulled = false; root.add(points);
     const accents = [];
-    const ribbons = [];
-    // Camera-facing ribbons retain the travel direction, so missiles read as motion
-    // instead of a cloud that simply translates. Bounded to eight quads per cast.
-    if (projectile) {
-      const direction = target.clone().sub(origin).normalize();
-      for (let i = 0; i < 8; i++) {
-        const ribbon = new Mesh(new PlaneGeometry(1, 1), glowMaterial(i < 2 ? style.core : style.color));
-        ribbon.name = 'ProjectileRibbon'; ribbon.userData.direction = direction;
-        root.add(ribbon); ribbons.push(ribbon);
-      }
-    }
+    const wake = projectile ? projectileWake(origin, target, style, travel) : null;
+    if (wake) root.add(wake.mesh);
+    const spray = kind === 'impact' ? impactSpray(style, radius, density) : null;
+    if (spray) root.add(spray.mesh);
     let shockwave = null, flash = null;
     if (kind === 'impact') {
       shockwave = new Mesh(new RingGeometry(.85, 1, 48), material(style.color));
-      shockwave.name = 'ImpactShockwave'; shockwave.rotation.x = -Math.PI / 2;
+      shockwave.name = 'ImpactShockwave'; shockwave.quaternion.setFromUnitVectors(new Vector3(0, 0, 1), groundNormal(ctx.world, origin));
       shockwave.position.y = .045; root.add(shockwave);
       flash = new Mesh(new PlaneGeometry(1, 1), glowMaterial(style.core));
       flash.name = 'ImpactFlash'; flash.position.y = .8; root.add(flash);
@@ -126,14 +121,8 @@ export async function initVFX(ctx) {
         attr.setXYZ(i,x,Math.max(.06,y),z);
       }
       attr.needsUpdate=true;
-      for (let i = 0; i < ribbons.length; i++) {
-        const ribbon = ribbons[i], d = ribbon.userData.direction;
-        const tail = Math.min(phase / Math.max(.01, travel), 1) * (.15 + i * .16);
-        ribbon.position.copy(d).multiplyScalar(-tail); ribbon.position.y += 1.15;
-        if (ctx.camera) ribbon.quaternion.copy(ctx.camera.quaternion);
-        ribbon.scale.set(.16 + (8-i)*.025, .16 + (8-i)*.025, 1);
-        ribbon.material.opacity = windup ? 0 : fade * (1-i/8) * .65;
-      }
+      wake?.update(phase);
+      spray?.update(phase);
       if (shockwave) {
         shockwave.scale.setScalar(radius * (.15 + Math.min(1, phase / .36)));
         shockwave.material.opacity = Math.max(0, 1-phase/.5) * .65;
@@ -146,7 +135,7 @@ export async function initVFX(ctx) {
     active.add(handle);return handle;
   }
   const api = {
-    castEffect(ab, opts={}) { const original=source.cast(ab,opts);if(original)return original;const shape=ab.shape??'projectile';const kind=shape==='line'?'projectile':shape==='self'||shape==='summon'?'burst':shape;return make(opts.element??ab.element??'arcane',kind,{...opts,palette:PALETTES[ab.id],abilityId:ab.id,radius:ab.radius??opts.radius??(opts.ultimate?5:2)}); },
+    castEffect(ab, opts={}) { const original=source.cast(ab,opts);if(original)return original;const shape=ab.shape??(ab.id==='basic/ninja'?'melee':'projectile');const kind=shape==='line'?'projectile':shape==='self'||shape==='summon'?'burst':shape;return make(opts.element??ab.element??'arcane',kind,{...opts,palette:PALETTES[ab.id],abilityId:ab.id,radius:ab.radius??opts.radius??(opts.ultimate?5:2)}); },
     play(key,opts={}) {const parts=String(key).split(':');let element=opts.element??parts.find(p=>ELEMENT_STYLES[p])??(key==='heal'?'nature':'light');let kind=parts[0];if(kind==='basic')kind=parts[1]==='ninja'?'melee':'projectile';if(kind==='ultimate')kind='zone';return make(element,kind,{...opts,ultimate:parts[0]==='ultimate',duration:opts.duration??(key==='levelup'?2.2:undefined)});},
     impact(element,pos,strength=1,opts={}) { return make(element,'impact',{...opts,pos,radius:Math.max(.5,strength*2),duration:.7}); },
     status(actor,kind,duration=3){return make(STATUS_ELEMENT[kind]??'arcane','status',{caster:actor,duration:Math.min(60,duration),radius:1});},
