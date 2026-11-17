@@ -43,11 +43,16 @@ export class PlayerController {
 
   teleport(x, y, z, ry) {
     const r = this.actor.root;
-    const g = this.groundAt(x, z, (y ?? 0) + 1.5);
+    const g = this.groundAt(x, z, y ?? this.terrainH(x, z));
     r.position.set(x, Math.max(y ?? g, g), z);
     if (ry != null) { this.yaw = ry; r.rotation.y = ry; }
     this.vel.x = this.vel.y = this.vel.z = 0;
-    this.dodgeT = -1;
+    this.dodgeT = -1; this.dodgeCd = 0;
+    this.swimming = false; this.airT = 0; this.jumpReq = -1; this.faceT = 0;
+    this.grounded = r.position.y <= g + 0.001;
+    this.lastGrounded = this.grounded ? this.time : -Infinity;
+    this.prevJumpHeld = !!this.ctx.input?.state?.jump;
+    this.sendT = this.heartbeatT = this.regionT = 0;
   }
 
   /** face a world point briefly (casting at a target) */
@@ -73,6 +78,14 @@ export class PlayerController {
   }
 
   update(dt) {
+    if (!Number.isFinite(dt) || dt <= 0) return;
+    // Bound each sweep so a dodge cannot cross a thin wall between contacts.
+    const elapsed = Math.min(dt, 0.1);
+    const steps = Math.ceil(elapsed * 60);
+    for (let i = 0; i < steps; i++) this.step(elapsed / steps);
+  }
+
+  step(dt) {
     const ctx = this.ctx, input = ctx.input, a = this.actor, root = a.root, T = TUNING;
     this.time += dt;
     const pos = root.position;
@@ -174,16 +187,23 @@ export class PlayerController {
         a.body?.animator.setState('jump');
         ctx.bus?.emit('player:jump', {});
       }
-      this.vel.y = Math.max(-T.terminal, this.vel.y - T.gravity * dt);
-      ny = pos.y + this.vel.y * dt;
+      const initialVy = this.vel.y;
+      this.vel.y = Math.max(-T.terminal, initialVy - T.gravity * dt);
+      ny = pos.y + (initialVy + this.vel.y) * 0.5 * dt;
+      if (ny > pos.y && ctx.collision?.ceilingAt) {
+        const headHeight = h * 0.95;
+        const ceiling = ctx.collision.ceilingAt(nx, nz, T.radius, pos.y + headHeight, ny + headHeight);
+        if (ceiling < Infinity) { ny = ceiling - headHeight; this.vel.y = 0; }
+      }
       if (this.vel.y <= 0 && (ny <= g || (this.grounded && pos.y - g <= T.stepDown))) {
         const wasAir = !this.grounded && this.airT > 0.35;
+        const impactSpeed = -this.vel.y;
         ny = g; this.vel.y = 0;
         if (!this.grounded) {
           this.grounded = true;
           if (wasAir && this.dodgeT < 0) a.body?.animator.setState('land');
           else if (this.dodgeT < 0) a.body?.animator.setState('loco');
-          if (wasAir) ctx.bus?.emit('player:land', { speed: this.airT });
+          if (wasAir) ctx.bus?.emit('player:land', { speed: this.airT, impactSpeed, x: nx, y: g, z: nz });
         }
         this.lastGrounded = this.time; this.airT = 0;
       } else {
@@ -275,3 +295,4 @@ export class PlayerController {
     this.sendT = 1 / MOVE_HZ;
   }
 }
+
