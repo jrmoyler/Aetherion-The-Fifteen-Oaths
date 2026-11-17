@@ -51,7 +51,9 @@ function rigOf(body) {
   if (!mesh) return null;
   const cached = mesh.geometry.userData.arsenalRig;
   const index = {}, J = {};
-  const toGeometry = new Matrix4().copy(mesh.bindMatrixInverse), bind = new Matrix4();
+  // Attached meshes update bindMatrixInverse as the actor moves. Fit armor in
+  // the immutable bind frame shared by the body geometry and its skeleton.
+  const toGeometry = new Matrix4().copy(mesh.bindMatrix).invert(), bind = new Matrix4();
   mesh.skeleton.bones.forEach((bone, i) => {
     const name = boneName(bone.name); index[name] = i;
     J[name] = cached?.J[name] ?? new Vector3().setFromMatrixPosition(bind.copy(mesh.skeleton.boneInverses[i]).invert().premultiply(toGeometry));

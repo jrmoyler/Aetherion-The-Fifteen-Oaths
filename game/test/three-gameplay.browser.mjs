@@ -31,14 +31,25 @@ try {
   await page.keyboard.press('Digit2');
   await page.waitForFunction(() => window.__aetherion.combat.cooldowns[1] > 0);
   await page.getByRole('button', { name: 'Dismiss', exact: true }).click({ timeout: 1000 }).catch(() => {});
+  await page.waitForFunction(() => window.__aetherion.actors.player.body.armorHandle?.meshes.length);
   const result = await page.evaluate(() => {
     const c = window.__aetherion;
-    return { renderer: c.renderer.isWebGLRenderer, frames: c.clock.frame, model: c.actors.player.bodyUrl,
+    const player = c.actors.player;
+    const vertex = player.position.clone();
+    let armorReach = 0;
+    for (const mesh of player.body.armorHandle.meshes) {
+      for (let i = 0; i < mesh.geometry.attributes.position.count; i++) {
+        mesh.getVertexPosition(i, vertex).applyMatrix4(mesh.matrixWorld);
+        armorReach = Math.max(armorReach, vertex.distanceTo(player.position));
+      }
+    }
+    return { armorReach, renderer: c.renderer.isWebGLRenderer, frames: c.clock.frame, model: c.actors.player.bodyUrl,
       skinnedMeshes: c.actors.player.body.meshes.filter(m => m.isSkinnedMesh).length,
       drawCalls: c.renderer.info.render.calls, triangles: c.renderer.info.render.triangles,
       world: c.world.stats(), svg: document.querySelectorAll('svg').length,
       horizontalOverflow: document.documentElement.scrollWidth > innerWidth };
   });
+  assert.ok(result.armorReach > .3 && result.armorReach < 2.5, `Starter armor extends ${result.armorReach} m from its wearer`);
   assert.equal(result.renderer, true); assert.ok(result.frames > 0); assert.ok(result.model);
   assert.ok(result.skinnedMeshes > 0); assert.ok(result.drawCalls > 0);
   assert.equal(result.svg, 0); assert.equal(result.horizontalOverflow, false);
