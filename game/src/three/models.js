@@ -19,7 +19,19 @@ export class AssetLibrary {
   start() { for (const fn of this.listeners) fn(); }
   onChange(fn) { this.listeners.add(fn); return () => this.listeners.delete(fn); }
   characterUrl(key) { return `${this.base}characters/${key}.glb`; }
-  async creatureUrl(arch, oath) { return `${this.base}creatures/${arch}-${oath}.glb`; }
+  async creatureUrl(arch, oath) {
+    const dir = `${this.base}creatures/`;
+    this.creatureFiles ??= fetch(`${dir}manifest.json`).then(async response => {
+      if (!response.ok) throw new Error('Creature manifest unavailable');
+      const entries = await response.json();
+      return new Map(entries.map(({ id, file }) => [id, file.split('/').pop()]));
+    }).catch(() => null);
+    const files = await this.creatureFiles;
+    // Offline installs can still have the generic GLB cached without its manifest.
+    if (!files) return `${dir}${arch}.glb`;
+    const file = files.get(`${arch}-${oath}`) ?? files.get(arch);
+    return file ? dir + file : null;
+  }
   async load(url) { try { return await loadModel(url); } catch { try { return await loadModel(url.replace(/-oath-\d\d(?=\.glb)/, '')); } catch (error) { console.warn('[assets] Model unavailable', url, error); return null; } } }
   dispose() { this.listeners.clear(); }
 }

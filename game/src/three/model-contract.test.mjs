@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { registerHooks } from 'node:module';
 import { Group, Bone, Mesh, BoxGeometry, SkinnedMesh, Skeleton, BufferGeometry, Float32BufferAttribute, Uint16BufferAttribute, MeshStandardMaterial, AnimationClip, NumberKeyframeTrack } from 'three';
 registerHooks({ resolve(specifier, context, nextResolve) { if (specifier.startsWith('@shared/')) return nextResolve(new URL(`../../../shared/${specifier.slice(8)}`, import.meta.url).href, context); return nextResolve(specifier, context); } });
-const { createModelBody } = await import('./models.js');
+const { createModelBody, AssetLibrary } = await import('./models.js');
 test('cloned characters isolate skeleton poses, action mixers and mutable materials', () => {
   const scene = new Group(), bone = new Bone(); bone.name = 'hips';
   const geometry = new BufferGeometry(); geometry.setAttribute('position', new Float32BufferAttribute([0,0,0, 0,1.8,0, .4,1,0], 3));
@@ -144,4 +144,21 @@ test('complete authored replacements retain head geometry, hair and PBR material
   assert.equal(b.sockets.head.position.y, 0);
   a.setFade(.2); assert.equal(b.meshes[0].material.opacity, 1);
   a.dispose(); b.dispose(); geometry.dispose(); material.dispose();
+});
+
+test('creature requests select only shipped regional or generic models from the manifest', async t => {
+  const { readFile } = await import('node:fs/promises');
+  const manifest = JSON.parse(await readFile(new URL('../../public/assets/creatures/manifest.json', import.meta.url)));
+  const fetchManifest = t.mock.method(globalThis, 'fetch', async url => {
+    assert.equal(url, './assets/creatures/manifest.json');
+    return { ok: true, json: async () => manifest };
+  });
+  const assets = new AssetLibrary({});
+  const [stag, wraith, missing] = await Promise.all([
+    assets.creatureUrl('stag', 'oath-09'), assets.creatureUrl('wraith', 'oath-09'), assets.creatureUrl('absent', 'oath-09'),
+  ]);
+  assert.equal(stag, './assets/creatures/stag.glb');
+  assert.equal(wraith, './assets/creatures/wraith-oath-09.glb');
+  assert.equal(missing, null);
+  assert.equal(fetchManifest.mock.callCount(), 1);
 });
