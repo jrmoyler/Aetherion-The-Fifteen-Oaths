@@ -95,7 +95,10 @@ export class PlayerController {
     // ---- wish direction (camera relative)
     const cy = this.getCameraYaw();
     const fx = Math.sin(cy), fz = Math.cos(cy);
-    const rx = Math.cos(cy), rz = -Math.sin(cy);
+    // Three uses a right-handed view (screen right = forward cross up).
+    // The legacy Babylon actor harness uses its default left-handed view.
+    const lateralSign = root.isObject3D ? -1 : 1;
+    const rx = lateralSign * Math.cos(cy), rz = -lateralSign * Math.sin(cy);
     let mx = st.moveX ?? 0, my = st.moveY ?? 0;
     if (!alive || this.frozen) { mx = 0; my = 0; this.dodgeT = -1; this.jumpReq = -1; this.vel.x = 0; this.vel.z = 0; }
     let wx = fx * my + rx * mx, wz = fz * my + rz * mx;
