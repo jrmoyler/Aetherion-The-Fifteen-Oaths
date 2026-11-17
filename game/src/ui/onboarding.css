@@ -13,3 +13,23 @@
 #ui .ae-help-dock .ae-onboarding { width:100%; }
 @media(max-height:550px) { #ui .ae-onboarding .ae-guide__body { max-height:150px; overflow-y:auto; } }
 @media(pointer:coarse) { #ui .ae-onboarding .ae-guide__body { max-height:180px; overflow-y:auto; } .ae-onboarding__title { font-size:16px; } }
+
+/* Mouse, controller and hybrid layouts keep the center hotbar. On short
+   screens its whole bottom band must remain available to a click or tap. */
+@media (orientation:landscape) and (max-width:1050px) and (max-height:540px) {
+  #ui:not(.is-touch) .ae-hud > .ae-guide,
+  #ui:not(.is-touch) .ae-hud > .ae-quests {
+    --panel-top:calc(var(--gut) + var(--sat) + 170px);
+    top:var(--panel-top);
+    max-height:max(44px, calc(100% - var(--panel-top) - 202px - var(--sab)));
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    scroll-padding-top:46px;
+  }
+  #ui:not(.is-touch) .ae-hud > .ae-guide { --panel-top:calc(var(--gut) + var(--sat) + 100px); }
+  #ui:not(.is-touch) .ae-hud > .ae-guide .ae-guide__body { max-height:none; overflow:visible; }
+  #ui:not(.is-touch) .ae-hud > .ae-quests.is-collapsed .ae-objective { display:none; }
+  #ui:not(.is-touch) .ae-hud > :is(.ae-guide,.ae-quests) > button:first-child {
+    position:sticky; top:0; z-index:1; min-height:44px; background:#101823;
+  }
+}
