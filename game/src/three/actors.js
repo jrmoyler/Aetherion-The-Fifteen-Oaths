@@ -36,6 +36,8 @@ function createActors(ctx) {
   let player = null;
   let controller = null;
   const shadowSet = new Set();
+  const shadowGround = (x, z, y, step) => ctx.collision?.groundAt(x, z, y, step) ?? heightAt(x, z);
+  const shadowWater = (x, z) => ctx.world?.waterLevelAt?.(x, z) ?? -Infinity;
   let sortT = 0;
   let snapOffset = null;
   const pending = [];
@@ -67,7 +69,7 @@ function createActors(ctx) {
     factory,
     assets,
     async ready() { if (player) await player.ready; },
-    dispose() { disposed = true; for (const off of cleanup) off(); orbit.dispose(); assets.dispose(); for (const actor of [...entities.values()]) finalize(actor); player?.dispose(); },
+    dispose() { disposed = true; for (const off of cleanup) off(); orbit.dispose(); assets.dispose(); for (const actor of [...entities.values()]) finalize(actor); player?.contactShadow?.dispose(); player?.dispose(); },
     lineup,
   };
 
@@ -164,7 +166,7 @@ function createActors(ctx) {
   function spawn(st, local = false) {
     if (entities.has(st.id)) return entities.get(st.id);
     const a = new Actor(scene, st);
-    if (!ctx.quality?.shadows) addContactShadow(a, a.creature?.radius ?? .55);
+    if (!ctx.quality?.shadows) a.contactShadow = addContactShadow(a, a.creature?.radius ?? .55);
     a.local = local;
     if (st.x != null) { a.root.position.set(st.x, st.y ?? heightAt(st.x, st.z), st.z); a.prevX = st.x; a.prevZ = st.z; }
     makeBody(a);
@@ -183,6 +185,7 @@ function createActors(ctx) {
     entities.delete(a.id);
     a.disposed = true;
     if (shadowSet.has(a)) { removeShadows(a.body); shadowSet.delete(a); }
+    a.contactShadow?.dispose();
     plates.remove(a.plate);
     a.dispose();
     ctx.bus.emit('actor:despawn', { id: a.id });
@@ -194,7 +197,7 @@ function createActors(ctx) {
     const ch = character ?? ctx.character ?? { name: 'Wayfarer', oath: previewOath.id, cls: 'ninja' };
     const st = { id: selfId ?? 'self', k: 'p', name: ch.name, oath: ch.oath, cls: ch.cls, lvl: 1, hp: CLASSES[ch.cls]?.hp ?? 120, mhp: CLASSES[ch.cls]?.hp ?? 120 };
     player = new Actor(scene, st, { isSelf: true });
-    if (!ctx.quality?.shadows) addContactShadow(player, player.creature?.radius ?? .55);
+    if (!ctx.quality?.shadows) player.contactShadow = addContactShadow(player, player.creature?.radius ?? .55);
     makeBody(player);
     player.body.setFade(1);
     controller = new PlayerController(ctx, player, () => orbit.yaw);
@@ -450,6 +453,7 @@ function createActors(ctx) {
         a.fade -= dt * 2; a.body?.setFade(Math.max(0, a.fade));
         if (a.fade <= 0) { pending.push(a); continue; }
       }
+      a.contactShadow?.update(shadowGround, shadowWater, now, a.fade);
       if (!a.visible || !a.body) continue;
       // animation LOD
       const d = a.dist;
@@ -459,6 +463,7 @@ function createActors(ctx) {
     for (const a of pending) finalize(a);
     pending.length = 0;
     if (player?.body) {
+      player.contactShadow?.update(shadowGround, shadowWater, now);
       player.body.animator.interval = 0; player.body.animator.update(dt); if (!player.alive) player.deadT += dt;
       // camera pulled into the body (walls, corners): fade instead of clipping the near plane
       const bf = orbit.bodyFade ?? 1;
