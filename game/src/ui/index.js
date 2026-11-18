@@ -376,7 +376,7 @@ function build(ctx) {
       titlePlay = null;
       await title.hide();
       const reuseHero = hero && action !== 'create';
-      const ch = reuseHero || await creation.open();
+      const ch = reuseHero ? hero : await creation.open();
       if (!reuseHero) await creation.hide();
       if (!ch) continue;
       ctx.resumingStory = Boolean(resume && action === 'story' && ctx.net?.mode === 'offline');

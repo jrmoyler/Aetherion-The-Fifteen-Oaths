@@ -160,12 +160,15 @@ async function loadCombatCheckpoint(page) {
   const saved = sim.serialize(id);
   assert.equal(saved.campaignStep, 2);
   await page.addInitScript(({ hero, saved, token }) => {
+    localStorage.setItem('aetherion.character', JSON.stringify(hero));
     localStorage.setItem(`aeth.tok.offline.local.${hero.name}|${hero.oath}|${hero.cls}`, token);
     localStorage.setItem(`aeth.save.${token}`, JSON.stringify(saved));
   }, { hero, saved, token: start.token });
   const destination = new URL(url);
-  Object.entries({ ...hero, offline: '1', cinematic: '0', nointro: '1' }).forEach(([key, value]) => destination.searchParams.set(key, value));
+  Object.entries({ offline: '1', cinematic: '0', nointro: '1' }).forEach(([key, value]) => destination.searchParams.set(key, value));
   await page.goto(destination.href);
+  const resume = page.getByRole('button', { name: 'Continue Story', exact: true });
+  await resume.click({ timeout: appTimeout });
   await page.waitForFunction(() => window.__aetherion?.input?.gameplayEnabled, null, { timeout: appTimeout });
   await page.evaluate(() => {
     const client = window.__aetherion;
