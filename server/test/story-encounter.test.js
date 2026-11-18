@@ -63,3 +63,21 @@ test('campaign encounter enemies are isolated from regular camps and the champio
   for (let i = 0; i < TICK_HZ * telegraph.castTime + 2; i++) sim.tick(1 / TICK_HZ);
   assert.ok(player.hp >= hp, 'moving clear of the painted area escapes the hit');
 });
+
+test('players can observe the first road fight before initiating it', () => {
+  const sim = createSim({ campaign: true, seed: 15015, campsPerRegion: 0, firstEventMs: Infinity, allowSpawnParam: true });
+  const S = sim._S;
+  const site = S.storyEncounters.find(entry => entry.oath === 'oath-09' && entry.storyEncounter === 'ambush');
+  const spawn = { x: site.x - site.direction.x * 16, z: site.z - site.direction.z * 16 };
+  const id = 'traveler';
+  const welcome = sim.addPlayer(id, { oath: 'oath-09', cls: 'sorcerer', name: 'Traveler', spawn });
+  for (let i = 0; i < TICK_HZ * 20; i++) sim.tick(1 / TICK_HZ);
+  const player = S.players.get(id);
+  assert.equal(player.hp, welcome.you.hp);
+  assert.ok(site.mobs.every(mob => mob.state === 'idle'));
+  const target = site.mobs[0];
+  sim.handle(id, { t: 'cast', slot: 0, target: target.id, aim: { x: target.x, y: target.y, z: target.z } });
+  for (let i = 0; i < TICK_HZ * 3; i++) sim.tick(1 / TICK_HZ);
+  assert.ok(target.hp < target.mhp, 'the first basic cast reaches a visible defender');
+  assert.ok(site.mobs.every(mob => mob.threat.has(id)), 'both defenders engage after a hit');
+});

@@ -148,6 +148,7 @@ export function thinkMob(S, m, dt) {
 
   switch (m.state) {
     case 'idle': {
+      const tutorialAmbush = m.camp?.storyEncounter === 'ambush';
       if (m.roam) { roam(S, m, dt); }
       else if (S.t >= m.nextWander) {
         m.nextWander = S.t + 4000 + S.rng() * 8000;
@@ -161,7 +162,8 @@ export function thinkMob(S, m, dt) {
       }
       if (S.t >= m.nextThink) {
         m.nextThink = S.t + 450 + S.rng() * 150;
-        const ar = ROLE_STATS[m.role].aggro;
+        // Give the first fight a readable approach. Damage still engages the pair normally.
+        const ar = tutorialAmbush ? 5 : ROLE_STATS[m.role].aggro;
         let best = null, bd = Infinity;
         S.pgrid.forEachNear(m.x, m.z, ar + 4, (p) => {
           if (!p.alive || p.invis) return;

@@ -126,16 +126,19 @@ async function finishConversation(page, activate, touch, waypoint) {
 }
 
 async function fight(page, steer, encounter) {
-  await moveTo(page, steer, encounter.waypoint, 13);
+  await moveTo(page, steer, encounter.waypoint, 19);
   console.log(`desktop: reached ${encounter.title}`);
   const start = Date.now();
+  await page.keyboard.press('Tab');
+  await page.waitForFunction(() => !!window.__aetherion.combat.target, null, { timeout: actionTimeout });
+  await page.keyboard.press('KeyR');
   await page.keyboard.down('Digit1');
   try {
     while ((await readWorld(page)).active?.id === encounter.id) {
       assert.ok(Date.now() - start < 90000, `Combat did not finish for ${encounter.title}`);
       assert.ok((await readWorld(page)).hp > 0, `Player died during ${encounter.title}`);
       await page.keyboard.press('Tab');
-      for (const key of ['Digit2', 'Digit3', 'Digit4', 'Digit5', 'KeyR']) {
+      for (const key of ['Digit4', 'Digit5', 'Digit2', 'Digit3', 'KeyQ']) {
         await page.keyboard.press(key);
         await page.waitForTimeout(650);
       }
@@ -153,7 +156,7 @@ async function loadCombatCheckpoint(page) {
   sim._S.place(player, witness.x, witness.z, 'qa');
   sim.handle(id, { t: 'interact', id: witness.id });
   const ambush = sim._S.storyEncounters.find(site => site.oath === hero.oath && site.storyEncounter === 'ambush');
-  sim._S.place(player, ambush.x - 8 * ambush.direction.x, ambush.z - 8 * ambush.direction.z, 'qa');
+  sim._S.place(player, ambush.x - 18 * ambush.direction.x, ambush.z - 18 * ambush.direction.z, 'qa');
   const saved = sim.serialize(id);
   assert.equal(saved.campaignStep, 2);
   await page.addInitScript(({ hero, saved, token }) => {
@@ -164,6 +167,15 @@ async function loadCombatCheckpoint(page) {
   Object.entries({ ...hero, offline: '1', cinematic: '0', nointro: '1' }).forEach(([key, value]) => destination.searchParams.set(key, value));
   await page.goto(destination.href);
   await page.waitForFunction(() => window.__aetherion?.input?.gameplayEnabled, null, { timeout: appTimeout });
+  await page.evaluate(() => {
+    const client = window.__aetherion;
+    const events = window.__storyCombatEvidence = [];
+    client.bus.on('combat:cast', event => { events.push({ type: 'input', slot: event.slot }); });
+    client.bus.on('net:ev', event => {
+      if (['cast', 'hit', 'death', 'fail'].includes(event.type) &&
+        [event.src, event.id, event.dst, event.killer].includes(client.net.selfId)) events.push(event);
+    });
+  });
   return waitForStage(page, 2);
 }
 
@@ -194,12 +206,13 @@ try {
       args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
     });
     const touch = device === 'touch';
+    const renderViewport = combatCheckpoint ? { width: 800, height: 560 } : viewport;
     const page = await browser.newPage({
-      viewport, isMobile: touch, hasTouch: touch,
+      viewport: renderViewport, isMobile: touch, hasTouch: touch,
       reducedMotion: reducedMotion ? 'reduce' : 'no-preference',
       serviceWorkers: 'block',
     });
-    const record = { device, viewport, errors: [], failedResponses: [], checkpoints: [] };
+    const record = { device, viewport: renderViewport, errors: [], failedResponses: [], checkpoints: [] };
     evidence.push(record);
     page.on('pageerror', error => record.errors.push(error.message));
     page.on('console', message => { if (message.type() === 'error') record.errors.push(message.text()); });
@@ -310,6 +323,7 @@ try {
       await capture(page, `${device}-failed`).catch(() => {});
       throw error;
     } finally {
+      if (combatCheckpoint) record.combatEvents = await page.evaluate(() => window.__storyCombatEvidence).catch(() => []);
       if (captureDir) await writeFile(join(captureDir, 'browser-results.json'), JSON.stringify(evidence, null, 2));
     }
   }
