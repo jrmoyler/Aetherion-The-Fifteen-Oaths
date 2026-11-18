@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 // A small DOM boundary double exercises the actual update/event handlers without WebGL.
 const source = await readFile(new URL('../src/ui/fieldguide.js', import.meta.url), 'utf8');
 const dom = `const h=(tag,attrs={},...children)=>({tag,attrs:attrs||{},children,hidden:!!attrs?.hidden,textContent:children.filter(x=>typeof x==='string').join(''),setAttribute(k,v){this.attrs[k]=v;}});`;
-const { createFieldGuide } = await import(`data:text/javascript;base64,${Buffer.from(source.replace("import { h } from './dom.js';", dom).replace("import './onboarding.css';", '')).toString('base64')}`);
+const { createFieldGuide } = await import(`data:text/javascript;base64,${Buffer.from(source.replace("import { h } from './dom.js';", dom).replace("import './onboarding.css';", '').replace("'./questNavigation.js'", JSON.stringify(new URL('../src/ui/questNavigation.js', import.meta.url).href))).toString('base64')}`);
 function fixture(saved = null) {
   const storage = new Map(saved ? [['aetherion.fieldGuide.v2', saved]] : []);
   globalThis.localStorage = {getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)};
@@ -89,4 +89,16 @@ test('teleports and passive position changes do not teach movement', () => {
   f.ui.ctx.input.state.moveX=0;
   for(let i=0;i<4;i++){f.position.x+=3;f.tick();}
   assert.deepEqual(f.guide.completed,[]);
+});
+
+test('the story contact wins over a closer ambient citizen', () => {
+  const f = fixture();
+  f.ui.gs.quests.get('first').chapter = 'The Broken Ward';
+  f.entities.push({ kind: 'npc', id: 'ambient', name: 'Neighbor', position: { x: 1, z: 0 } },
+    { kind: 'npc', id: 'witness', name: 'Mara', position: { x: 7, z: 0 } });
+  f.tick();
+  assert.equal(f.guide.el.hidden, true);
+  f.guide.prompt.onclick();
+  f.tick();
+  assert.deepEqual(f.requests, [{ t: 'interact', id: 'witness' }]);
 });

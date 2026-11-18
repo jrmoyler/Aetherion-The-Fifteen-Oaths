@@ -506,27 +506,6 @@
 .ae-fatal .ae-panel { width: min(560px, 92vw); }
 .ae-fatal pre { margin: 0; padding: 14px 18px; max-height: 40vh; overflow: auto; font: 12px/1.45 ui-monospace, monospace; color: #f0a0a0; white-space: pre-wrap; -webkit-user-select: text; user-select: text; }
 
-/* ---------- touch controls ---------- */
-.ae-touch { position: absolute; inset: 0; z-index: 18; pointer-events: none; }
-.ae-touch__look { position: absolute; inset: 0; pointer-events: auto; touch-action: none; }
-.ae-touch__move { position: absolute; left: 0; bottom: 0; width: 42%; height: 62%; pointer-events: auto; touch-action: none; }
-.ae-joy { position: absolute; width: 132px; height: 132px; margin: -66px 0 0 -66px; border-radius: 50%; border: 1px solid var(--rule-2); background: radial-gradient(circle, rgba(var(--slate), .25), rgba(var(--slate), .55)); opacity: .55; transition: opacity .2s; pointer-events: none; }
-.ae-joy.is-active { opacity: 1; }
-.ae-joy.is-sprint { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,102,.25); }
-.ae-joy::before { content: ''; position: absolute; inset: 14px; border-radius: 50%; border: 1px dashed var(--rule-faint); }
-.ae-joy__knob { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px 0 0 -28px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3a4866, #18223a); border: 1px solid var(--gold); box-shadow: 0 4px 14px rgba(0,0,0,.6); will-change: transform; }
-.ae-cluster { position: absolute; right: calc(10px + var(--sar)); bottom: calc(10px + var(--sab)); width: 264px; height: 264px; pointer-events: none; }
-.ae-tbtn { position: absolute; pointer-events: auto; touch-action: none; border-radius: 50%; padding: 0; overflow: hidden; display: grid; place-items: center; -webkit-touch-callout: none; }
-.ae-tbtn.ae-slot { border-radius: 50%; }
-.ae-tbtn.ae-slot::before { border-radius: 50%; }
-.ae-tbtn.ae-slot .cd, .ae-tbtn.ae-slot.is-flash::after, .ae-tbtn.ae-slot.is-ready::after { border-radius: 50%; }
-.ae-tbtn.ae-slot .key { display: none; }
-.ae-tbtn.util { width: 48px; height: 48px; padding: 12px; background: rgba(var(--slate), .7); border: 1px solid var(--rule-2); color: var(--text); font-size: 22px; }
-.ae-tbtn.util:active, .ae-tbtn.is-down { background: rgba(201,168,102,.3); border-color: var(--gold); }
-.ae-tbtn.util svg { width: 100%; height: 100%; }
-.ae-touch__top { position: absolute; top: calc(10px + var(--sat)); right: calc(250px + var(--sar)); display: flex; gap: 6px; pointer-events: auto; }
-.ae-touch__top .ae-iconbtn { width: 40px; height: 40px; padding: 9px; background: rgba(var(--slate), .7); }
-
 /* ---------- responsive ---------- */
 @media (max-width: 1500px) {
   .ae-cc__body { grid-template-columns: minmax(280px, .9fr) minmax(340px, 1.1fr) minmax(340px, 1fr); }
@@ -587,51 +566,7 @@
   .ae-levelup__n { font-size: 64px; }
 }
 
-/* ---------- touch layout ---------- */
-.ae-touch-ui { position: absolute; inset: 0; z-index: 24; pointer-events: none; }
-.ae-cluster { transform: scale(var(--tscale, 1)); transform-origin: 100% 100%; }
-.ae-touch__top { position: absolute; top: calc(var(--gut) + var(--sat) + 162px); right: calc(var(--gut) + var(--sar)); display: flex; gap: 6px; pointer-events: auto; }
-.ae-touch__top .ae-iconbtn { width: 34px; height: 34px; padding: 7px; background: rgba(var(--slate), .78); }
-.is-touch .ae-hotbar { display: none; }
-.is-touch .ae-actionbar { bottom: calc(4px + var(--sab)); padding: 4px 6px 3px; }
-.is-touch .ae-xpbar { width: 34vw; }
-.is-touch .ae-minimap { width: 152px; }
-.is-touch .ae-minimap__view { height: 116px; }
-.is-touch .ae-minimap__btns .ae-iconbtn:not(:last-child) { display: none; }
-.is-touch .ae-minimap__foot { display: none; }
-.is-touch .ae-region-chip { display: none; }
-.is-touch .ae-unit { width: 236px; }
-.is-touch .ae-unit--target { left: calc(var(--gut) + var(--sal)); right: auto; top: calc(var(--gut) + var(--sat) + 64px); width: 236px; grid-template-columns: 1fr 44px; }
-.is-touch .ae-buffs { left: calc(var(--gut) + var(--sal) + 244px); top: calc(var(--gut) + var(--sat) + 4px); max-width: 30vw; }
-.is-touch .ae-quests { right: auto; left: calc(var(--gut) + var(--sal)); top: calc(var(--gut) + var(--sat) + 124px); width: 236px; padding: 6px 10px 2px; background: linear-gradient(90deg, rgba(var(--slate), .72), rgba(var(--slate), 0)); border-right: 0; }
-.is-touch .ae-quests:not(.is-collapsed) { max-height: 38vh; overflow: auto; }
-.is-touch .ae-quest .qx { display: none; }
-.is-touch .ae-chat { left: 50%; transform: translateX(-50%); bottom: calc(30px + var(--sab)); width: min(360px, 40vw); }
-.is-touch .ae-chat:not(.is-active) .ae-chat__log { height: 58px; font-size: 12px; overflow: hidden; }
-.is-touch .ae-chat:not(.is-active) .ae-chat__tabs, .is-touch .ae-chat:not(.is-active) .ae-chat__input { display: none; }
-.is-touch .ae-chat:not(.is-active) { background: transparent; border-color: transparent; pointer-events: none; }
-.is-touch .ae-chat.is-active { bottom: auto; top: calc(var(--sat) + 8px); width: min(520px, 70vw); z-index: 30; }
-.is-touch .ae-castbar { bottom: 36%; }
-.is-touch .ae-loot { right: auto; left: calc(var(--gut) + var(--sal)); top: calc(var(--gut) + var(--sat) + 164px); transform: none; width: 236px; }
-.is-touch .ae-loot li { padding: 3px 6px; font-size: 13px; }
-.is-touch .ae-loot .ae-item-ic { width: 28px; height: 28px; padding: 4px; }
-.is-touch .ae-fps { bottom: auto; top: calc(4px + var(--sat)); right: 50%; }
-.is-touch .ae-levelup { top: 34%; }
-.is-touch .ae-compass { width: 24vw; }
-.is-touch .ae-toasts { top: calc(var(--sat) + 44px); }
 @media (orientation: portrait) {
-  .is-touch .ae-unit, .is-touch .ae-unit--target, .is-touch .ae-quests { width: calc(100vw - 3 * var(--gut) - 152px - var(--sal) - var(--sar)); }
-  .is-touch .ae-buffs { left: calc(var(--gut) + var(--sal)); top: calc(var(--gut) + var(--sat) + 124px); }
-  .is-touch .ae-quests { top: calc(var(--gut) + var(--sat) + 172px); }
-  .is-touch .ae-compass { display: none; }
-  .is-touch .ae-touch__top { top: calc(var(--gut) + var(--sat) + 162px); }
-  .is-touch .ae-chat { left: calc(var(--gut) + var(--sal)); transform: none; top: calc(var(--sat) + 236px); bottom: auto; width: 62vw; }
-  .is-touch .ae-actionbar { bottom: calc(var(--tscale-px, 270px) + var(--sab)); }
-  .is-touch .ae-xpbar { width: 56vw; }
-  .is-touch .ae-touch__move { height: 40%; width: 46%; }
-  .is-touch .ae-banner { top: 30%; }
-  .is-touch .ae-toasts { top: 36%; }
-  .is-touch .ae-loot { top: auto; bottom: calc(var(--tscale-px, 270px) + 60px + var(--sab)); }
   .ae-title__crest { aspect-ratio: 1.1; }
 }
 .ae-reduce .ae-title__wheel .wheel-rot, .ae-reduce .ae-loading__ring .spin { animation: none; }
@@ -697,16 +632,6 @@
 .ae-guide__progress { color:var(--gold); font-size:11px; }
 .ae-interact { position:absolute; left:50%; transform:translateX(-50%); bottom:190px; max-width:min(420px,80vw); padding:12px 20px; color:#fff1ce; background:rgba(var(--slate),.94); border:1px solid var(--gold); pointer-events:auto; cursor:pointer; font:14px/1.4 var(--sans); }
 .ae-guide [hidden], .ae-interact[hidden] { display:none !important; }
-.is-touch .ae-guide { top:auto; bottom:calc(var(--sab) + 14px); left:calc(var(--sal) + 12px); width: min(220px, 42vw); }
-.is-touch .ae-guide__head { padding:8px 10px; min-height:44px; }
-.is-touch .ae-guide__body { padding:8px 10px; font-size:11px; }
-.is-touch .ae-interact { bottom:calc(var(--tscale-px, 300px) + 12px); padding:10px 14px; min-height:44px; }
-.is-touch .ae-touch__top .ae-iconbtn { width:44px; height:44px; }
-@media (max-height:550px) {
-  .is-touch .ae-guide { left:calc(var(--sal) + 165px); bottom:8px; width:190px; }
-  .is-touch .ae-guide__body { max-height:100px; overflow:auto; }
-  .is-touch .ae-interact { bottom:110px; }
-}
 .ae-char__tabs { display:flex; gap:8px; padding:10px 14px; border-bottom:1px solid var(--rule); flex-shrink:0; }
 .ae-char__tabs [aria-pressed="true"] { border-color:var(--gold); color:var(--gold); }
 .ae-char__body[hidden], .ae-loadout[hidden] { display:none!important; }
@@ -738,11 +663,6 @@
 /* A long character name must not force health/mana underneath the minimap. */
 .ae-unit > div { min-width:0; }
 .ae-unit__name .nm { min-width:0; overflow:hidden; text-overflow:ellipsis; }
-.is-touch .ae-xpbar { min-width:0; }
-@media (max-width:600px) {
-  .is-touch .ae-unit__name small { display:none; }
-}
-
 /* Authored raster art and reliable first-session scrolling. */
 #ui .ae-art { display:block; width:100%; height:100%; background-repeat:no-repeat; background-size:620% 320%; background-position:7% 9%; border-radius:2px; }
 #ui .ae-art--ninja { background-size:620% 280%; background-position:7% 7%; }
@@ -809,25 +729,6 @@
 #ui .ae-quests.is-collapsed .ae-quests__head { font-size:12px; padding:8px; }
 @media (pointer:coarse) { #ui .ae-chat__open,#ui .ae-guide__head { min-height:44px; } }
 
-/* Touch help panels share a flow container, so expanding either cannot cover the other. */
-#ui .is-touch .ae-help-dock, #ui.is-touch .ae-help-dock {
-  position:absolute; left:calc(var(--sal) + var(--gut)); top:calc(var(--sat) + var(--gut) + 172px);
-  width:min(240px, 56vw); max-height:calc(100dvh - var(--sat) - var(--sab) - 360px);
-  display:flex; flex-direction:column; gap:6px; overflow:auto; pointer-events:auto;
-}
-#ui .ae-help-dock > .ae-guide, #ui .ae-help-dock > .ae-quests {
-  position:relative; inset:auto; width:100%; max-height:none; flex:none; box-sizing:border-box;
-}
-#ui .is-touch .ae-chat:not(.is-active), #ui.is-touch .ae-chat:not(.is-active) {
-  top:auto; bottom:calc(var(--sab) + 10px); left:50%; right:auto;
-  transform:translateX(-50%); width:max-content; height:max-content; max-width:40vw;
-}
-@media (orientation:landscape) {
-  #ui .is-touch .ae-help-dock, #ui.is-touch .ae-help-dock {
-    top:calc(var(--sat) + var(--gut) + 124px); max-height:calc(100dvh - var(--sat) - var(--sab) - 200px);
-  }
-}
-
 /* Dedicated painted atlas tiles occupy the full ability face, with key/mana overlays. */
 #ui .ae-slot .glyph { width:100%; height:100%; filter:none; overflow:hidden; border-radius:4px; }
 #ui .ae-painted-icon { min-width:0; min-height:0; border-radius:inherit; }
@@ -850,8 +751,6 @@
 .ae-settings__return[hidden] { display:none; }
 .ae-pause-status { max-width:310px; margin:0; }
 .ae-settings__return button { flex:none; min-height:44px; }
-#ui.is-touch .ae-command-dock { display:none; }
-.ae-tbtn.util .ae-touch-label { position:absolute; left:50%; top:100%; transform:translateX(-50%); padding:2px 5px; background:rgba(5,8,14,.88); color:#f1ead8; font:11px/1.2 var(--sans); white-space:nowrap; border-radius:2px; pointer-events:none; }
 @media (max-width:1100px) and (pointer:fine) {
  #ui .ae-unit--target { left:50%; transform:translateX(-50%); top:calc(var(--sat) + 74px); width:240px; }
  #ui .ae-unit--target .ae-portrait { width:48px; height:48px; }
@@ -867,14 +766,8 @@
 .ae-objective__bearing { color:var(--text-2); font-variant-numeric:tabular-nums; font-size:12px; }
 .ae-objective[hidden] { display:none; }
 #ui .ae-quests.is-collapsed:has(.ae-objective:not([hidden])) { width:240px; }
-#ui .ae-help-dock .ae-quests.is-collapsed:has(.ae-objective:not([hidden])) { width:100%; }
-.ae-tbtn.util { overflow:visible; }
 .ae-quests__head > .ae-painted-icon { flex:0 0 20px; width:20px!important; height:20px!important; }
 .ae-quests__head > span:not(.ae-painted-icon):not(.n) { flex:1; }
-@media (orientation:portrait) {
- #ui.is-touch .ae-help-dock { top:calc(var(--sat) + var(--gut) + 222px); max-height:calc(100dvh - var(--sat) - var(--sab) - 450px); }
-}
-
 /* Source-glyph sigils: castables without a painted tile show the Ability Matrix glyph, cut from their accent colour. */
 #ui .ae-sigil-icon { display:block; width:100%; height:100%; position:relative; overflow:hidden;
   background:
@@ -924,7 +817,6 @@
 .ae-belt__slot .qty { position:absolute; right:4px; bottom:2px; z-index:3; font:600 11px var(--sans); color:#fff; text-shadow:0 1px 2px #000; }
 .ae-belt__slot.is-empty .glyph { opacity:.32; filter:grayscale(1); }
 .ae-belt__slot.is-empty .qty { color:var(--muted); }
-.is-touch .ae-belt { border-left:0; padding-left:0; }
 
 /* In a fight: guidance keeps its instruction and drops the rest; the task tracker dims until hovered. */
 #ui.in-combat .ae-onboarding .ae-onboarding__timeline, #ui.in-combat .ae-onboarding .ae-guide__progress,
@@ -948,78 +840,3 @@
   #ui:not(.is-touch) .ae-onboarding .ae-onboarding__timeline, #ui:not(.is-touch) .ae-onboarding .ae-guide__progress { display:none; }
 }
 /* Touch: the belt needs no key caps, and chat sits above the bar instead of on it. */
-.is-touch .ae-belt__slot .key { display:none; }
-#ui.is-touch .ae-chat:not(.is-active), #ui .is-touch .ae-chat:not(.is-active) { bottom:calc(114px + var(--sab)); }
-/* Short landscape phones (under ~430 px tall): a smaller minimap frees the row the utility buttons need,
-   (the ability cluster already scales itself to the screen in touch.js). */
-@media (orientation:landscape) and (max-height:430px) {
-  .is-touch .ae-minimap { width:124px; }
-  .is-touch .ae-minimap__view { height:84px; }
-  .is-touch .ae-touch__top { top:calc(var(--gut) + var(--sat) + 124px); }
-  .is-touch .ae-quests .ae-section-label, .is-touch .ae-quests .ae-quests__kicker { display:none; }
-}
-
-/* ---------------------------------------------------------------------------------------------
-   Touch HUD. One rule set owns where every element sits on a phone, so nothing lands on
-   the thumbstick, the action cluster or another panel at 667x375, 844x390, 932x430 or 390x844.
-   --------------------------------------------------------------------------------------------- */
-/* The Chat button in the utility group opens chat; a second pill in the thumb zone is noise. */
-#ui.is-touch .ae-chat:not(.is-active) { display:none; }
-/* The guide keeps what a thumb-driven player needs: the step, the instruction, the destination. */
-#ui.is-touch .ae-guide__body { padding:6px 10px 8px; }
-#ui.is-touch .ae-guide__body > .ae-onboarding__chapter,
-#ui.is-touch .ae-guide__body > .ae-onboarding__timeline,
-#ui.is-touch .ae-guide__body > .ae-guide__progress,
-#ui.is-touch .ae-guide__body > .ae-onboarding__dismiss { display:none; }
-#ui.is-touch .ae-guide__body > p { margin:4px 0; }
-#ui.is-touch .ae-actionbar__covenant { display:none; }
-
-@media (orientation:portrait) {
-  /* The bar's two parts go where a portrait screen has room: potions under the utility row, experience as a
-     hairline on the bottom edge. The level stays on the unit frame. */
-  #ui.is-touch .ae-actionbar { display:contents; }
-  #ui.is-touch .ae-actionbar .ae-hotrow { position:absolute; right:calc(var(--gut) + var(--sar)); top:calc(var(--gut) + var(--sat) + 240px); pointer-events:auto; }
-  #ui.is-touch .ae-actionbar .ae-xpbar { position:absolute; left:0; right:0; bottom:0; width:auto; }
-  #ui.is-touch .ae-actionbar .ae-xpbar .ae-bar { height:3px; border:0; border-radius:0; }
-  #ui.is-touch .ae-actionbar .ae-xpbar__lbl { display:none; }
-  /* The dock stops above the highest control on its side of the screen. */
-  #ui.is-touch .ae-help-dock { max-height:calc(100dvh - var(--sat) - var(--sab) - 222px - var(--gut) - 270px); }
-}
-
-@media (orientation:landscape) and (max-height:480px) {
-  #ui.is-touch .ae-minimap { width:124px; }
-  #ui.is-touch .ae-minimap__view { height:84px; }
-  /* Utility buttons: a 2x2 block beside the minimap, each with its caption showing. */
-  #ui.is-touch .ae-touch__top {
-    top:calc(var(--gut) + var(--sat)); right:calc(var(--gut) + var(--sar) + 132px);
-    display:grid; grid-template-columns:repeat(2,44px); gap:16px 6px;
-  }
-  #ui.is-touch .ae-touch__top .ae-iconbtn { width:44px; height:44px; padding:8px; }
-  /* Target frame: the strip between the player frame and the utility block, under the compass. */
-  #ui.is-touch .ae-unit--target {
-    left:calc(var(--gut) + var(--sal) + 246px); right:auto; transform:none; top:calc(var(--gut) + var(--sat) + 34px);
-    width:min(236px, calc(100vw - var(--sal) - var(--sar) - 2 * var(--gut) - 246px - 238px));
-  }
-  #ui.is-touch .ae-buffs { left:calc(var(--gut) + var(--sal) + 246px); top:calc(var(--gut) + var(--sat) + 100px); max-width:236px; }
-  /* Dock: below the player frame, ending above the thumbstick. */
-  #ui.is-touch .ae-help-dock { top:calc(var(--sat) + var(--gut) + 78px); max-height:calc(100dvh - var(--sat) - var(--sab) - var(--gut) - 78px - var(--joy-zone, 160px)); gap:4px; }
-  #ui.is-touch .ae-help-dock .ae-guide__head { min-height:40px; padding-top:6px; padding-bottom:6px; }
-  /* The compass, minimap and tracker already carry the destination; the guide keeps the instruction. */
-  #ui.is-touch .ae-guide__body > .ae-onboarding__destination { display:none; }
-  #ui.is-touch .ae-help-dock .ae-quests, #ui.is-touch .ae-help-dock .ae-guide { padding-top:0; padding-bottom:0; }
-  /* Collapsed, the tracker is its heading alone; the objective line returns when it is opened. */
-  #ui.is-touch .ae-quests.is-collapsed .ae-objective { display:none; }
-  /* One open panel at a time: there is room for a heading pair or one body, not both bodies. */
-  #ui.is-touch .ae-help-dock:has(.ae-guide__body:not([hidden])) > .ae-quests { display:none; }
-  #ui.is-touch .ae-help-dock:has(.ae-quests:not(.is-collapsed)):not(:has(.ae-guide__body:not([hidden]))) > .ae-guide { display:none; }
-  /* Experience: a compact strip in the gap between thumbstick and cluster. */
-  #ui.is-touch .ae-actionbar {
-    left:calc(var(--sal) + 216px); right:calc(var(--sar) + var(--tscale-px, 300px) + 8px); transform:none;
-    bottom:calc(var(--sab) + 4px); padding:4px 8px 3px; flex-direction:row; align-items:center; gap:10px;
-  }
-  /* Potions on the left, experience beside them; the level is already on the unit frame. */
-  #ui.is-touch .ae-actionbar .ae-hotrow { flex:none; }
-  #ui.is-touch .ae-actionbar .ae-xpbar { flex:1; width:auto; min-width:0; }
-  #ui.is-touch .ae-actionbar .ae-xpbar__lbl { justify-content:flex-end; white-space:nowrap; }
-  #ui.is-touch .ae-actionbar .ae-xpbar__lbl > :first-child { display:none; }
-}

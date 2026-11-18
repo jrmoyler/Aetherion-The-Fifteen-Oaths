@@ -114,13 +114,7 @@ async function startClient() {
   ctx.render.setTimeScale = atmosphere.setTimeScale;
   ctx.render.setWeather = atmosphere.setWeather;
   Object.defineProperty(ctx.render, 'weather', { get: () => atmosphere.weather, configurable: true });
-  ctx.setLoading(.55, 'Opening the Weave');
   ctx.net = await Net.init(ctx);
-  await sourceEnvironmentReady;
-  ctx.vfx = await initVFX(ctx);
-  ctx.actors = await initActors(ctx);
-  ctx.combat = await Combat.init(ctx);
-  const objectiveBeacon = initObjectiveBeacon(ctx);
   const home = OATH_BY_ID['oath-09'].center;
   const h = heightAt(home[0], home[1]);
   camera.position.set(home[0] + 45, h + 28, home[1] + 65);
@@ -146,14 +140,22 @@ async function startClient() {
   });
   ctx.setLoading(1, 'Your covenant awaits');
   const character = await ctx.ui.chooseCharacter();
-  ctx.character = character; bus.emit('game:character', character);
+  ctx.character = character;
   const center = OATH_BY_ID[character.oath].center;
-  await ctx.world.ready(center[0], center[1]);
+  // Display the title and hero picker before loading the full castable library.
+  // The playfield still waits for the authored effects before accepting input.
+  await Promise.all([sourceEnvironmentReady, ctx.world.ready(center[0], center[1])]);
+  ctx.setLoading(.94, 'Preparing combat techniques');
+  ctx.vfx = await initVFX(ctx);
+  ctx.actors = await initActors(ctx);
+  ctx.combat = await Combat.init(ctx);
+  const objectiveBeacon = initObjectiveBeacon(ctx);
+  bus.emit('game:character', character);
   await ctx.net.connect(character);
   // Keep the offline world still while the chosen hero finishes loading.
   ctx.net.setPaused(true);
   await ctx.actors.ready?.();
-  if (ctx.params.get('cinematic') !== '0') {
+  if (ctx.params.get('cinematic') !== '0' && !ctx.resumingStory) {
     await ctx.ui.beginArrival();
     try { await playArrival(ctx, character); } catch (error) { console.warn('[arrival] Continuing to the realm', error); }
   }

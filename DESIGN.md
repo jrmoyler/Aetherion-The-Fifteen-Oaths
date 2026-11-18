@@ -37,3 +37,11 @@ All existing menus share dark mineral ink (#0b1018), warm white (#f1ead8), muted
 Acceptance: all-realm day/night views, character close-ups and combat effects at low/high tiers; menu keyboard/touch checks at 390x844 and 844x390; shader compile errors fail capture. Unit/build evidence cannot certify visual quality or physical-device performance. The reference is premium cinematic third-person readability; this remains a Three.js game, not an Unreal migration.
 
 Hero material finishes use the existing physical-material path: restrained fabric sheen, glazed porcelain, and lacquer clearcoat. Recipe-specific overrides retain priority. No character mesh, rig, costume, weapon, texture, or production asset is replaced. Ability Matrix distortion and the existing bloom-input ceiling remain in the finishing chain.
+
+## Story-first open world
+
+The title puts the local story first. Oath and discipline selection lead into an opening incident in the chosen sanctuary, followed by a brief, a fight along the road, a breach encounter and a return with consequences. The player can leave the route and explore. The objective follows the character's progress and remains available when they return.
+
+A single objective sits below the player vitals. Show an action verb, a camera-relative bearing with distance and one input hint for the current action. The map and world beacon mark the same destination. Put context and optional tasks in the journal. Keep the upper-right map compact and leave the middle of the screen clear for enemies and terrain. The lower-left stick and lower-right actions reserve independent thumb zones on touch. Use charcoal ink, warm text and restrained gold for shared story cues. Use the oath accent for the hero and abilities.
+
+The opening is complete when a first-time player can choose a hero, find the marked contact, win both fights and report back using the controls and guidance shown in the game. Verify the route with regular inputs and check portrait, compact landscape and desktop. Retain save compatibility for existing characters and the online realm.

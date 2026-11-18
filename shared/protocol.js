@@ -68,13 +68,16 @@
 // SERVER -> CLIENT additions
 //   welcome.world also has: daySeconds, protocol, tickHz, snapHz, interest, events:[{kind,region,until,text}],
 //     sanctuaries:[{oathId, center:[x,z], y, shrine:{x,y,z}, spawn:{x,y,z,ry}, npcs:[{role,id,x,y,z,ry}]}],
-//     lairs:[{oath, boss, x,y,z, level}]
+//     lairs:[{oath, boss, x,y,z, level}], storySites:[{kind,x,z}] in local Story.
 //   welcome.resumed = true when a token resumed a live character (reconnect within the grace window).
 //   'you' may be PARTIAL (`partial:true`): inventory/equipment and quests/discovered are omitted when unchanged;
 //     game/src/net merges partial updates so `net:you` always carries the full PlayerState.
 //   PlayerState: {id, name, oath, cls, lvl, xp, next, gold, hp, mhp, mp, mmp, alive, x,y,z,ry,
 //     stats:{power, armor, crit, haste, speed}, cooldowns:[6 x server-ms ready time | 0], gcd, casting:{slot,until}|null,
 //     inventory:[Item], equipment:{slot: Item}, quests:[Quest], discovered:[oathId], combat:bool, fx:[status]}
+//   Quest: {id, title, text, progress, goal, done, kind, waypoint:{x,z,label}|null}.
+//     Story also sends chapter, objective, storyStep, storyTotal. The waypoint can carry a sanctuary
+//     approach {origin, inner, gate} (each {x,z}), a matching arrival route, and returning:true when entering via the approach gate.
 //   Item: {id, kind:'gear'|'consumable'|'material', name, rarity:'common'|'uncommon'|'rare'|'epic'|'legendary', qty,
 //     value, slot?:'weapon'|'head'|'chest'|'hands'|'legs'|'feet'|'trinket', lvl?, oath?, stats?:{power,armor,hp,mp,crit,haste}, key?}
 //

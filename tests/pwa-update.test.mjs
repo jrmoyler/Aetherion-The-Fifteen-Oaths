@@ -6,7 +6,6 @@ import vm from 'node:vm';
 async function fixture() {
   const notices = [];
   const events = new Map();
-  const timers = [];
   let options;
   let activations = 0;
   const document = {
@@ -19,26 +18,21 @@ async function fixture() {
   };
   const context = vm.createContext({
     console, document, navigator: { serviceWorker: {}, onLine: true },
-    window: { addEventListener(name, handler) { events.set(name, handler); }, setInterval() {}, setTimeout(fn) { timers.push(fn); } },
+    window: { addEventListener(name, handler) { events.set(name, handler); }, setInterval() {} },
     registerSW(value) { options = value; return async () => { activations++; }; },
   });
   const source = (await readFile(new URL('../game/src/ui/pwa-register.js', import.meta.url), 'utf8'))
     .replace("import { registerSW } from 'virtual:pwa-register';", '')
     .replace('import.meta.env.PROD', 'true');
   vm.runInContext(source, context);
-  return { options, notices, events, timers, document, get activations() { return activations; } };
+  return { options, notices, events, document, get activations() { return activations; } };
 }
 
-test('offline hint expires without dismissing a newer actionable update', async () => {
+test('fresh offline install leaves the first-play screen unobstructed', async () => {
   const f = await fixture();
-  f.options.onOfflineReady();
-  const ready = f.notices[0];
-  assert.equal(f.timers.length, 1);
-  f.options.onNeedRefresh();
-  const update = f.notices[1];
-  f.timers[0]();
-  assert.equal(ready.removed, true);
-  assert.notEqual(update.removed, true);
+  f.options.onOfflineReady?.();
+  assert.equal(f.notices.length, 0);
+  assert.equal(f.activations, 0);
 });
 
 test('downloaded update waits for explicit restart and offline ready cannot hide it', async () => {
@@ -46,7 +40,7 @@ test('downloaded update waits for explicit restart and offline ready cannot hide
   f.options.onNeedRefresh();
   assert.equal(f.activations, 0);
   assert.equal(f.notices.length, 1);
-  f.options.onOfflineReady();
+  f.options.onOfflineReady?.();
   assert.equal(f.notices.length, 1);
   const notice = f.notices[0];
   assert.match(notice.children[0].textContent, /new version/);

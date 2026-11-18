@@ -5,6 +5,7 @@ import { OATH_BY_ID, xpForLevel } from '../oaths.js';
 import { CREATURES } from '../creatures.js';
 import { OATH_LEADERS, OATH_CIVICS, SEATS, WARDS } from './data.js';
 import { makeGear } from './items.js';
+import { CAMPAIGN_END, campaignQuest, nextCovenant } from './campaign.js';
 
 const roster = (oath, role) => CREATURES.find((c) => c.oath === oath && c.role === role);
 
@@ -14,7 +15,7 @@ export function chainStep(S, oath, n) {
   const i = o.index - 1;
   const leader = OATH_LEADERS[i];
   const sanct = S.sanctuaries[i];
-  const nb = OATH_BY_ID[nearestNeighbour(S, sanct)];
+  const nb = nextCovenant(sanct);
   switch (n) {
     case 1: return { id: `chain-${oath}-1`, title: `The terms of ${o.name.toUpperCase()}`, text: `Speak with ${leader}, Oathkeeper of ${o.name}, on the sanctuary plaza.`, kind: 'talk', role: 'oathkeeper', oath, goal: 1, step: 1, reward: { xpf: 0.6, gold: 10 } };
     case 2: { const c = roster(oath, 'common'); return { id: `chain-${oath}-2`, title: `${SEATS[i]}: a covenant under review`, text: `Thin the creatures threatening the approaches beyond the city ring - ${c.name}s and worse.`, kind: 'kill', targets: CREATURES.filter((x) => x.oath === oath && x.role !== 'boss').map((x) => x.id), goal: 8, step: 2, reward: { xpf: 0.9, gold: 25 } }; }
@@ -28,27 +29,23 @@ export function chainStep(S, oath, n) {
   }
 }
 
-function nearestNeighbour(S, sanct) {
-  let best = sanct.neighbours[0], bd = Infinity;
-  for (const id of sanct.neighbours) {
-    const o = OATH_BY_ID[id];
-    const d = Math.hypot(o.center[0] - sanct.center[0], o.center[1] - sanct.center[1]);
-    if (d < bd) { bd = d; best = id; }
-  }
-  return best;
-}
-
 /** Navigation uses the actual simulation layout, never an estimated city centre. */
 export function questWaypoint(S, p, q) {
   if (!S || q.done) return null;
-  let point = null, label = '';
+  let point = null, label = '', approach = null, arrival = null;
   if (q.kind === 'talk') {
     const sanctuary = S.sanctuaries.find((s) => s.oathId === q.oath);
     point = sanctuary?.npcs.find((n) => n.role === q.role);
-    label = q.role === 'oathkeeper' ? OATH_LEADERS[(OATH_BY_ID[q.oath]?.index ?? 1) - 1] : q.role;
-  } else if (q.kind === 'discover') {
+    const i = (OATH_BY_ID[q.oath]?.index ?? 1) - 1;
+    label = q.role === 'oathkeeper' ? OATH_LEADERS[i] : q.role === 'chronicler' ? OATH_CIVICS[i] : q.role;
+    if (q.returning) approach = S.storyEncounters?.find((site) => site.oath === q.oath && site.storyEncounter === 'breach')?.approach;
+  } else if (q.kind === 'discover' || q.kind === 'interact') {
     point = S.sanctuaries.find((s) => s.oathId === q.shrine)?.shrine;
     label = `${OATH_BY_ID[q.shrine]?.name ?? 'Covenant'} shrine`;
+  } else if (q.encounter) {
+    point = S.storyEncounters?.find((site) => site.oath === q.oath && site.storyEncounter === q.encounter);
+    label = point?.label;
+    approach = point?.approach;
   } else if (q.kind === 'kill' || q.kind === 'bounty') {
     const targets = new Set(q.targets ?? []);
     point = S.lairs?.find((l) => targets.has(l.boss));
@@ -62,10 +59,24 @@ export function questWaypoint(S, p, q) {
       label = point ? `${OATH_BY_ID[point.oath]?.name ?? 'Creature'} camp · level ${point.level}` : '';
     }
   }
-  return point && Number.isFinite(point.x) && Number.isFinite(point.z) ? { x: point.x, z: point.z, label } : null;
+  if (q.campaignIndex && (q.kind === 'discover' || (q.kind === 'talk' && q.oath !== p?.oath))) {
+    const site = S.storyEncounters?.find(c => c.oath === p?.oath && c.storyEncounter === 'ambush');
+    if (site && site.roadTo === (q.shrine ?? q.oath)) {
+      approach = site.approach;
+      arrival = site.arrival;
+    }
+  }
+  if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.z)) return null;
+  return { x: point.x, z: point.z, label, ...(approach && { approach, returning: !!q.returning }), ...(arrival && { arrival }) };
 }
 
-export const questView = (q, S, p) => ({ id: q.id, title: q.title, text: q.text, progress: q.progress, goal: q.goal, done: !!q.done, kind: q.kind, waypoint: questWaypoint(S, p, q) });
+export const questView = (q, S, p) => ({
+  id: q.id, title: q.title, text: q.text, progress: q.progress, goal: q.goal,
+  done: !!q.done, kind: q.kind, waypoint: questWaypoint(S, p, q),
+  ...(q.campaignIndex && {
+    chapter: q.chapter, objective: q.objective, storyStep: q.storyStep, storyTotal: q.storyTotal,
+  }),
+});
 
 export function addQuest(S, p, def) {
   if (!def || p.quests.has(def.id)) return null;
@@ -76,6 +87,24 @@ export function addQuest(S, p, def) {
   // Discovery is permanent: arriving here after exploration must never strand the chain.
   if (q.kind === 'discover' && p.discovered.has(q.shrine)) progress(S, p, q);
   return q;
+}
+
+export function restoreCampaignQuest(S, p) {
+  if (p.campaignStep > 2) S.resolveStorySite(p.oath, 'ambush');
+  if (p.campaignStep > 3) S.resolveStorySite(p.oath, 'breach');
+  const def = campaignQuest(S, p.oath, p.campaignStep);
+  const savedQuest = def && p.quests.get(def.id);
+  for (const [id, q] of p.quests) {
+    if (q.campaignIndex || (def && q.step)) p.quests.delete(id);
+  }
+  if (!def) return;
+  // A finished quest advances the step atomically. A stale payload for an active
+  // step must remain winnable even if it lists every defender.
+  const members = def.encounter && Array.isArray(savedQuest?.storyMembers) ? savedQuest.storyMembers : [];
+  const storyMembers = [...new Set(members)].filter(n => Number.isInteger(n) && n >= 0 && n < def.goal).slice(0, def.goal - 1);
+  const q = { ...def, storyMembers, progress: storyMembers.length, done: false };
+  p.quests.set(q.id, q);
+  if (q.kind === 'discover' && p.discovered.has(q.shrine)) progress(S, p, q);
 }
 
 function complete(S, p, q) {
@@ -91,9 +120,14 @@ function complete(S, p, q) {
   }
   if (items.length || r.gold) S.evTo(p, { type: 'loot', id: p.id, gold: r.gold ?? 0, items: items.map((i) => ({ id: i.id, name: i.name, rarity: i.rarity, qty: i.qty })) });
   S.giveXp(p, xp);
-  S.sysTo(p, `Quest complete: ${q.title}`);
+  if (!q.campaignIndex) S.sysTo(p, `Quest complete: ${q.title}`);
   p.quests.delete(q.id);
-  if (q.step) {
+  if (q.campaignIndex) {
+    if (q.encounter) S.resolveStorySite(p.oath, q.encounter);
+    p.campaignStep = q.campaignIndex + 1;
+    if (p.campaignStep < CAMPAIGN_END) addQuest(S, p, campaignQuest(S, p.oath, p.campaignStep));
+    else addQuest(S, p, chainStep(S, p.oath, p.chainStep));
+  } else if (q.step) {
     p.chainStep = q.step + 1;
     const next = chainStep(S, p.oath, q.step + 1);
     if (next) addQuest(S, p, next);
@@ -108,22 +142,40 @@ function progress(S, p, q, n = 1) {
   q.progress = Math.min(q.goal, q.progress + n);
   if (q.progress >= q.goal) complete(S, p, q);
   else { S.evTo(p, { type: 'quest', id: p.id, quest: questView(q, S, p) }); p.youDirty = true; p.saveDirty = true; }
+  if (q.campaignIndex) S.persist(p);
 }
 
 export function onKill(S, p, mob) {
   for (const q of [...p.quests.values()]) {
-    if (q.kind === 'kill' || q.kind === 'bounty') { if (q.targets.includes(mob.def?.id)) progress(S, p, q); }
+    if (q.encounter) {
+      const member = mob.storyMember;
+      if (!p.alive || mob.camp?.storyEncounter !== q.encounter || mob.camp.oath !== q.oath ||
+          !Number.isInteger(member) || member < 0 || member >= q.goal || q.storyMembers?.includes(member)) continue;
+      (q.storyMembers ??= []).push(member);
+      progress(S, p, q);
+    } else if (q.kind === 'kill' || q.kind === 'bounty') {
+      if (!mob.camp?.storyEncounter && q.targets.includes(mob.def?.id)) progress(S, p, q);
+    }
   }
 }
 
 export function onTalk(S, p, npc) {
+  let dialogue = null;
   for (const q of [...p.quests.values()]) {
-    if (q.kind === 'talk' && q.role === npc.role && q.oath === npc.oath) progress(S, p, q);
+    if (q.kind === 'talk' && q.role === npc.role && q.oath === npc.oath) {
+      dialogue ??= q.dialogue ?? null;
+      progress(S, p, q);
+    }
   }
+  return dialogue;
 }
 
 export function onDiscover(S, p, shrine) {
   for (const q of [...p.quests.values()]) if (q.kind === 'discover' && q.shrine === shrine) progress(S, p, q);
+}
+
+export function onShrineInteract(S, p, shrine) {
+  for (const q of [...p.quests.values()]) if (q.kind === 'interact' && q.shrine === shrine) progress(S, p, q);
 }
 
 /** Regional bounty from a warden, scaled to the player's level. */

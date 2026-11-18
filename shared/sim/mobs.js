@@ -64,6 +64,7 @@ export function engage(S, m, target) {
   if (!m.threat.has(target.id)) m.threat.set(target.id, 1);
   if (m.state !== 'chase') {
     m.state = 'chase'; m.atkReady = S.t + 400; m.specialReady = S.t + 4000 + S.rng() * 3000;
+    if (m.camp?.storyEncounter === 'breach') m.specialReady = S.t + 1000;
     if (m.role === 'boss') S.ev({ type: 'cast', src: m.id, ability: 'mob/roar', slot: -1, aim: { x: m.x, y: m.y, z: m.z }, dir: { x: 0, z: 1 }, castTime: 0 }, m.x, m.z);
   }
   // social aggro: camp mates join
@@ -89,10 +90,11 @@ function attackRange(m, t) { return m.ranged ? 15 : 1.4 + m.radius + (t.radius ?
 
 function startTelegraph(S, m, t) {
   const big = m.role === 'boss';
+  const story = m.camp?.storyEncounter === 'breach';
   const kind = big && m.phase >= 1 && S.rng() < 0.45 ? 'nova' : 'slam';
   const r = kind === 'nova' ? 9 + m.phase * 2 : big ? 7 : 5;
   const x = kind === 'nova' ? m.x : t.x, z = kind === 'nova' ? m.z : t.z;
-  const castTime = big ? 1.8 : 1.5;
+  const castTime = big || story ? 1.8 : 1.5;
   m.casting = { until: S.t + castTime * 1000, x, z, r, kind, amount: mobDmg(m.lvl, m.role) * (kind === 'nova' ? 1.6 : 2.2) };
   m.anim = 'cast';
   S.ev({ type: 'cast', src: m.id, ability: `mob/${kind}`, slot: -1, aim: { x, y: S.groundY(x, z), z }, dir: { x: Math.sin(m.ry), z: Math.cos(m.ry) }, castTime, radius: r, shape: 'zone', element: m.element, telegraph: true }, m.x, m.z);
@@ -181,7 +183,8 @@ export function thinkMob(S, m, dt) {
       const range = attackRange(m, t);
       const d = Math.hypot(t.x - m.x, t.z - m.z);
       if ((m.role === 'elite' || m.role === 'boss') && S.t >= m.specialReady && d < 22) {
-        m.specialReady = S.t + (m.role === 'boss' ? 6500 - m.phase * 1200 : 9000) + S.rng() * 2000;
+        const interval = m.camp?.storyEncounter === 'breach' ? 5400 : m.role === 'boss' ? 6500 - m.phase * 1200 : 9000;
+        m.specialReady = S.t + interval + S.rng() * 2000;
         face(m, t);
         startTelegraph(S, m, t);
         break;

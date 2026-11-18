@@ -43,12 +43,11 @@ export const pwa = {
   onChange(fn) { subs.add(fn); return () => subs.delete(fn); },
 };
 
-/** Fullscreen rejection must not suppress a separately supported orientation lock. */
+/** Enter optional fullscreen while preserving the player’s device orientation. */
 export async function enterImmersive() {
   try {
     if (!document.fullscreenElement && document.documentElement.requestFullscreen && media('(pointer: coarse)')?.matches && !pwa.isStandalone) {
       await document.documentElement.requestFullscreen({ navigationUI: 'hide' });
     }
   } catch { /* Fullscreen is optional. */ }
-  try { await screen.orientation?.lock?.('landscape'); } catch { /* Lock is optional. */ }
 }

@@ -40,11 +40,11 @@ export const buttonName = (btn, style) => String(btn || '').split('+').map((b) =
 const ACTION_LABEL = {
   jump: 'Jump', dodge: 'Dodge roll', slot0: 'Basic attack', slot1: 'Technique II', slot2: 'Technique III', slot3: 'Technique IV', slot4: 'Technique V',
   slot5: 'Ultimate', target: 'Cycle target', targetNearest: 'Target nearest', interact: 'Interact', sprint: 'Sprint (toggle)',
-  inventory: 'Character & bag', quest: 'Task log', map: 'World map', menu: 'Menu / settings', walkToggle: 'Walk toggle',
+  inventory: 'Character & bag', quest: 'Journal', map: 'World map', menu: 'Menu / settings', walkToggle: 'Walk toggle',
 };
 
 // ------------------------------------------------------------------ spatial navigation helpers
-const FOCUSABLE = 'button, input, select, textarea, [tabindex], [data-nav]';
+const FOCUSABLE = 'button, input, select, textarea, summary, [tabindex], [data-nav]';
 function visible(el) {
   if (!el || !el.isConnected || el.disabled) return false;
   if (el.closest('[hidden], [aria-hidden="true"], .ae-touch-ui')) return false;
@@ -261,7 +261,7 @@ export function createGamepadUI(ui) {
     barSig = sig;
     const H = {
       title: [['A', 'Select']],
-      cc: [['A', 'Select'], ['LB+RB', 'Step'], ['Y', 'Suggest name'], ['START', 'Swear the Oath']],
+      cc: [['A', 'Select'], ['LB+RB', 'Switch section'], ['Y', 'Suggest name'], ['START', 'Continue']],
       osk: [['A', 'Type'], ['X', 'Delete'], ['Y', 'Suggest'], ['START', 'Done'], ['B', 'Close']],
       map: [['LS', 'Pan'], ['LT+RT', 'Zoom'], ['A', 'Select / travel'], ['R3', 'Centre'], ['B', 'Close']],
       dialog: [['A', 'Choose'], ['B', 'Leave']],
@@ -320,7 +320,7 @@ export function createGamepadUI(ui) {
       case 'START':
         if (s === osk.el) { osk.done(); return; }
         if (s.classList.contains('ae-window')) { clickIf(s.querySelector('.ae-titlebar .ae-x')); return; }
-        if (cc) { clickIf([...s.querySelectorAll('.ae-name-row .ae-btn--primary')].pop()); return; }
+        if (cc) { clickIf(s.querySelector('.ae-cc__nav .ae-btn--primary:not([hidden])')); return; }
         if (s === ui.dialogs?.death) { clickIf(s.querySelector('.ae-btn--primary')); return; }
         if (s.classList.contains('ae-title')) clickIf(s.querySelector('.ae-btn--primary'));
         return;

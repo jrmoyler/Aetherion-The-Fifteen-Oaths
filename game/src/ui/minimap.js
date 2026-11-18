@@ -7,6 +7,7 @@ import { emblemImage, emblemSVG, emblemRect } from './emblems.js';
 import { ICONS } from './icons.js';
 import { CREATURES } from '@shared/creatures.js';
 import { prefs } from './prefs.js';
+import { routedWaypoint, trackedObjective } from './questNavigation.js';
 
 const TILE_PX = 128;
 const TILE_MPP = 4;
@@ -157,6 +158,19 @@ export function createMinimap(ui) {
     grad.addColorStop(0, 'rgba(255,240,200,.18)'); grad.addColorStop(1, 'rgba(255,240,200,0)');
     g.fillStyle = grad; g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, 70, -Math.PI / 2 - 0.6, -Math.PI / 2 + 0.6); g.closePath(); g.fill();
     g.restore();
+    const goal = trackedObjective(gs.quests);
+    if (goal?.chapter) {
+      const waypoint = routedWaypoint(p, goal.waypoint);
+      const dx = (waypoint.x - p.x) * s, dy = -(waypoint.z - p.z) * s;
+      const rotation = rotate ? -head : 0;
+      const x = dx * Math.cos(rotation) - dy * Math.sin(rotation);
+      const y = dx * Math.sin(rotation) + dy * Math.cos(rotation);
+      const scale = Math.min(1, (cw / 2 - 10) / Math.max(1, Math.abs(x)), (chh / 2 - 10) / Math.max(1, Math.abs(y)));
+      g.save(); g.translate(cw / 2 + x * scale, chh / 2 + y * scale);
+      g.beginPath(); g.moveTo(0, -6); g.lineTo(6, 0); g.lineTo(0, 6); g.lineTo(-6, 0); g.closePath();
+      g.fillStyle = '#f7c777'; g.strokeStyle = '#21170c'; g.lineWidth = 2;
+      g.fill(); g.stroke(); g.restore();
+    }
     // inner frame vignette
     const vg = g.createRadialGradient(cw / 2, chh / 2, Math.min(cw, chh) * 0.35, cw / 2, chh / 2, Math.max(cw, chh) * 0.75);
     vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.45)');

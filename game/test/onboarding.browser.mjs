@@ -21,35 +21,47 @@ try {
   await server.listen();
   const fallback = '/root/.cache/ms-playwright/chromium_headless_shell-1194/chrome-linux/headless_shell';
   const executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || (existsSync(chromium.executablePath()) ? undefined : existsSync(fallback) ? fallback : undefined);
-  browser = await chromium.launch({ headless:true, executablePath, args:['--no-sandbox'] });
-  for (const [width,height] of [[390,844],[320,568],[1440,900]]) {
-    const page = await browser.newPage({viewport:{width,height},isMobile:width<500,hasTouch:width<500});
+  for (const [width,height,mobile] of [[390,844,true],[320,568,true],[844,390,true],[1440,900,false]]) {
+    browser = await chromium.launch({ headless:true, executablePath, args:['--no-sandbox'] });
+    const page = await browser.newPage({viewport:{width,height},isMobile:mobile,hasTouch:mobile,reducedMotion:'reduce'});
     const errors=[];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/${filename}`);
-    await page.locator('.ae-oath-card[data-oath="oath-15"]').click();
-    await page.locator('.ae-cc__nav button').last().click();
-    if (width<500) {
+    const oath = page.locator('.ae-oath-card[data-oath="oath-15"]');
+    await (mobile ? oath.tap() : oath.click());
+    if (mobile) {
+      await page.getByRole('tab',{name:'Lore',exact:true}).tap();
+      const pane = page.locator('[data-pane="1"]');
+      const box = await pane.boundingBox();
       const session=await page.context().newCDPSession(page);
-      const start=Math.min(650,height-120);
-      await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:width/2,y:start}]});
-      for(let y=start-30;y>=160;y-=30){
-        await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:width/2,y}]});
+      const x = box.x + box.width / 2;
+      const start = Math.floor(box.y + box.height - 12);
+      await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x,y:start}]});
+      for(let y=start-25;y>=box.y+16;y-=25){
+        await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y}]});
         await page.waitForTimeout(20);
       }
       await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
-      assert.ok(await page.locator('[data-pane="1"]').evaluate(el=>el.scrollTop)>0,'Native touch must scroll the covenant');
+      const { scrollTop, overflows } = await pane.evaluate(el=>({scrollTop:el.scrollTop,overflows:el.scrollHeight>el.clientHeight}));
+      if (height <= 568) assert.ok(overflows,'Short viewports must exercise a scrollable lore pane');
+      if (overflows) assert.ok(scrollTop>0,'Native touch must scroll the covenant');
+      await page.getByRole('button',{name:'Back to oaths'}).tap();
+      await page.getByRole('button',{name:'Choose fighting style'}).tap();
     }
-    await page.locator('.ae-cc__nav button').last().click();
-    await page.locator('#ae-name').fill('Aether Test');
-    await page.getByRole('button',{name:'Swear the Oath',exact:true}).click();
+    const name = page.getByRole('textbox',{name:'Hero name'});
+    assert.equal(await name.inputValue(),'Wayfarer');
+    if (!mobile) await name.fill('Aether Test');
+    const confirm = page.getByRole('button',{name:'Enter the world',exact:true});
+    const confirmBox = await confirm.boundingBox();
+    assert.ok(confirmBox.y + confirmBox.height <= height,'Entry control is visible without scrolling');
+    await (mobile ? confirm.tap() : confirm.click());
     const result=await page.evaluate(()=>({character:window.selectedCharacter,svg:document.querySelectorAll('svg').length,overflow:document.documentElement.scrollWidth>innerWidth}));
-    assert.deepEqual(result.character,{name:'Aether Test',oath:'oath-15',cls:'ninja'});
+    assert.deepEqual(result.character,{name:mobile?'Wayfarer':'Aether Test',oath:'oath-15',cls:'ninja'});
     assert.equal(result.svg,0,'Onboarding must contain no SVG');
     assert.equal(result.overflow,false,'No horizontal document overflow');
     assert.deepEqual(errors,[]);
     console.log(`PASS ${width}×${height}: selection, native scroll, submission, no SVG, no overflow`);
-    await page.close();
+    await browser.close();
   }
 } finally {
   await browser?.close();

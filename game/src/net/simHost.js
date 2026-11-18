@@ -1,6 +1,6 @@
 // Runs the authoritative shared/sim locally (offline mode) for exactly one human client.
 // Used by simWorker.js (preferred, off the main thread) and by localServer.js as an in-thread
-// fallback. Messages are identical to the online server's.
+// fallback. The offline Story campaign uses the same simulation protocol as the online realm.
 import { createSim } from '../../../shared/sim/index.js';
 import { TICK_HZ } from '../../../shared/protocol.js';
 
@@ -11,7 +11,7 @@ const MENU_MESSAGES = new Set(['loadout', 'equip', 'unequip']);
 export function createHost({ seed = 15015, bots = 30, emit }) {
   const pid = LOCAL_PLAYER_ID;
   const sim = createSim({
-    seed, bots, allowSpawnParam: true, firstEventMs: 75000,
+    seed, bots, campaign: true, allowSpawnParam: true, firstEventMs: 75000,
     persistence: { load: () => null, save: (token, data) => emit([{ t: '__save', token, data }]) },
   });
   const dt = 1 / TICK_HZ;
