@@ -1,0 +1,421 @@
+[
+  {
+    "device": "touch",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "errors": [],
+    "failedResponses": [],
+    "checkpoints": [
+      {
+        "x": 255.5,
+        "z": 357.86,
+        "yaw": 2.8005856527495347,
+        "hp": 120,
+        "active": {
+          "id": "story-oath-09-1",
+          "title": "The Last Charge",
+          "text": "The Archivist died on the plaza steps. You carry the original Weave fragment they put in your hands. The outer ward just failed with evacuees still on the road.",
+          "progress": 0,
+          "goal": 1,
+          "done": false,
+          "kind": "talk",
+          "waypoint": {
+            "x": 269.8,
+            "z": 356.84,
+            "label": "Sorin Kes"
+          },
+          "chapter": "The Broken Ward",
+          "objective": "Speak with Sorin Kes",
+          "storyStep": 1,
+          "storyTotal": 5
+        }
+      },
+      {
+        "x": 265.89910841061624,
+        "z": 356.53924184887876,
+        "yaw": 3.2613856527495346,
+        "hp": 120,
+        "active": {
+          "id": "story-oath-09-2",
+          "title": "The Broken Ward",
+          "text": "Two creatures have cut off the marked road. Bring both down so the evacuees can reach the sanctuary.",
+          "progress": 0,
+          "goal": 2,
+          "done": false,
+          "kind": "kill",
+          "waypoint": {
+            "x": 204.12476986039482,
+            "z": 533.2900864275105,
+            "label": "Broken Ward",
+            "approach": {
+              "origin": {
+                "x": 270,
+                "z": 360
+              },
+              "inner": {
+                "x": 257.060222651149,
+                "z": 402.0542763837658
+              },
+              "gate": {
+                "x": 224.41669343018393,
+                "z": 508.1457463519023
+              }
+            },
+            "returning": false
+          },
+          "chapter": "The Broken Ward",
+          "objective": "Clear the evacuation road",
+          "storyStep": 2,
+          "storyTotal": 5
+        }
+      }
+    ],
+    "mode": "offline",
+    "portraitControls": [
+      {
+        "label": "Attack · Bolt",
+        "x": 331.3125,
+        "y": 729.625,
+        "width": 50.6875,
+        "height": 106.375,
+        "reachable": true
+      },
+      {
+        "label": "Celestial Rend",
+        "x": 275.625,
+        "y": 729.625,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Chains of Penance",
+        "x": 219.9375,
+        "y": 729.625,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Starbreaker Lance",
+        "x": 275.625,
+        "y": 673.9375,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Sunfall Prism",
+        "x": 219.9375,
+        "y": 673.9375,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Ultimate · Starfall Rite",
+        "x": 275.625,
+        "y": 618.25,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Jump",
+        "x": 219.9375,
+        "y": 785.3125,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Dodge",
+        "x": 275.625,
+        "y": 785.3125,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Target",
+        "x": 331.3125,
+        "y": 618.25,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "Interact",
+        "x": 331.3125,
+        "y": 673.9375,
+        "width": 50.6875,
+        "height": 50.6875,
+        "reachable": true
+      },
+      {
+        "label": "World map",
+        "x": 290,
+        "y": 108.296875,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Gear",
+        "x": 338,
+        "y": 108.296875,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Journal",
+        "x": 290,
+        "y": 156.296875,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Menu",
+        "x": 338,
+        "y": 156.296875,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      }
+    ],
+    "firstDialogue": "The Archivist died on the plaza steps. You carry the original Weave fragment they put in your hands. The outer ward just failed with evacuees still on the road. Break through the creatures at the Broken Ward. I’ll signal the evacuees when the road is clear.",
+    "landscapeControls": [
+      {
+        "label": "Attack · Bolt",
+        "x": 792,
+        "y": 338,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Celestial Rend",
+        "x": 792,
+        "y": 289,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Chains of Penance",
+        "x": 743,
+        "y": 289,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Starbreaker Lance",
+        "x": 694,
+        "y": 289,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Sunfall Prism",
+        "x": 645,
+        "y": 289,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Ultimate · Starfall Rite",
+        "x": 596,
+        "y": 289,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Jump",
+        "x": 694,
+        "y": 338,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Dodge",
+        "x": 743,
+        "y": 338,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Target",
+        "x": 596,
+        "y": 338,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Interact",
+        "x": 645,
+        "y": 338,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "World map",
+        "x": 618,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Gear",
+        "x": 666,
+        "y": 8,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Journal",
+        "x": 618,
+        "y": 56,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Menu",
+        "x": 666,
+        "y": 56,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      }
+    ],
+    "compactControls": [
+      {
+        "label": "Attack · Bolt",
+        "x": 268,
+        "y": 467,
+        "width": 44,
+        "height": 93,
+        "reachable": true
+      },
+      {
+        "label": "Celestial Rend",
+        "x": 219,
+        "y": 467,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Chains of Penance",
+        "x": 170,
+        "y": 467,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Starbreaker Lance",
+        "x": 219,
+        "y": 418,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Sunfall Prism",
+        "x": 170,
+        "y": 418,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Ultimate · Starfall Rite",
+        "x": 219,
+        "y": 369,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Jump",
+        "x": 170,
+        "y": 516,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Dodge",
+        "x": 219,
+        "y": 516,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Target",
+        "x": 268,
+        "y": 369,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Interact",
+        "x": 268,
+        "y": 418,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "World map",
+        "x": 220,
+        "y": 95,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Gear",
+        "x": 268,
+        "y": 95,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Journal",
+        "x": 220,
+        "y": 143,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      },
+      {
+        "label": "Menu",
+        "x": 268,
+        "y": 143,
+        "width": 44,
+        "height": 44,
+        "reachable": true
+      }
+    ],
+    "passed": true
+  }
+]

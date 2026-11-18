@@ -127,6 +127,7 @@
   text-align: center;
 }
 .ae-tbtn--slot-5 .mana { top: 1px; bottom: auto; }
+.ae-tbtn--slot-5 .ae-touch-label, .ae-tbtn--interact .ae-touch-label { font-size: 9px; }
 #ui .ae-cluster .ae-tbtn.is-down, #ui .ae-touch__top .ae-iconbtn:active {
   border-color: #ffdf9a;
   box-shadow: inset 0 0 0 2px #ffdf9a80;

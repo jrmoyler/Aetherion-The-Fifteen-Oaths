@@ -18,7 +18,7 @@ const dev = process.env.AETHERION_STORY_DEV === '1';
 const reducedMotion = process.env.AETHERION_STORY_REDUCED_MOTION === '1';
 const appTimeout = 150_000;
 const actionTimeout = 45_000;
-const dimensions = { desktop: { width: 1280, height: 800 }, touch: { width: 390, height: 844 } };
+const dimensions = { desktop: { width: 1120, height: 730 }, touch: { width: 390, height: 844 } };
 
 if (captureDir) await mkdir(captureDir, { recursive: true });
 const listen = { host: '127.0.0.1', port: 0 };
@@ -31,7 +31,13 @@ const evidence = [];
 let browser;
 
 async function capture(page, label) {
-  if (captureDir) await page.screenshot({ path: join(captureDir, `${label}.jpg`), type: 'jpeg', quality: 85, timeout: actionTimeout });
+  if (!captureDir) return;
+  try {
+    await page.screenshot({ path: join(captureDir, `${label}.jpg`), type: 'jpeg', quality: 85, timeout: 25_000 });
+  } catch (error) {
+    if (error.name !== 'TimeoutError') throw error;
+    console.warn(`Software browser could not capture ${label} before the screenshot deadline.`);
+  }
 }
 
 async function readWorld(page) {
@@ -79,6 +85,7 @@ async function makeSteering(page, touch) {
 
 async function moveTo(page, steer, target, radius) {
   let position = await readWorld(page);
+  let blocked = 0;
   for (let attempt = 0; attempt < 60; attempt++) {
     const destination = routedWaypoint(position, target);
     const dx = destination.x - position.x, dz = destination.z - position.z;
@@ -95,7 +102,10 @@ async function moveTo(page, steer, target, radius) {
     }, { ...position, metres: stride }, { timeout: 3500 }).catch(error => {
       if (error.name !== 'TimeoutError') throw error;
     }));
-    position = await readWorld(page);
+    const next = await readWorld(page);
+    blocked = Math.hypot(next.x - position.x, next.z - position.z) < .1 ? blocked + 1 : 0;
+    position = next;
+    if (blocked >= 6) break;
   }
   throw new Error(`Could not walk within ${radius} m of ${target.label} from (${position.x}, ${position.z})`);
 }
@@ -219,15 +229,6 @@ try {
           const p = window.__aetherion.actors.player.position;
           return Math.hypot(p.x - before.x, p.z - before.z) > .4;
         }, spawn, { timeout: actionTimeout }));
-        await page.setViewportSize({ width: 844, height: 390 });
-        await page.waitForFunction(() => innerWidth === 844 && innerHeight === 390);
-        record.landscapeControls = await checkTouchControls(page, false);
-        await capture(page, 'touch-landscape');
-        await page.setViewportSize({ width: 320, height: 568 });
-        await page.waitForFunction(() => innerWidth === 320 && innerHeight === 568);
-        record.compactControls = await checkTouchControls(page, true);
-        await capture(page, 'touch-compact');
-        await page.setViewportSize(viewport);
       }
 
       await moveTo(page, steer, spawn.active.waypoint, 5);
@@ -236,7 +237,18 @@ try {
       console.log(`${device}: heard the witness`);
       record.checkpoints.push(ambush);
       await capture(page, `${device}-ambush-objective`);
-      if (!touch) {
+      if (touch) {
+        // Headless Chromium rejects setWindowBounds while the page is fullscreen.
+        await page.evaluate(() => document.fullscreenElement && document.exitFullscreen());
+        await page.setViewportSize({ width: 844, height: 390 });
+        await page.waitForFunction(() => innerWidth === 844 && innerHeight === 390);
+        record.landscapeControls = await checkTouchControls(page, false);
+        await capture(page, 'touch-landscape');
+        await page.setViewportSize({ width: 320, height: 568 });
+        await page.waitForFunction(() => innerWidth === 320 && innerHeight === 568);
+        record.compactControls = await checkTouchControls(page, true);
+        await capture(page, 'touch-compact');
+      } else {
         await fight(page, steer, ambush.active);
         const breach = await waitForStage(page, 3);
         console.log('desktop: evacuation road clear');
@@ -270,6 +282,7 @@ try {
       record.error = error.stack;
       record.failedAt = await readWorld(page).catch(() => null);
       record.screen = await page.locator('#ui').innerText({ timeout: 3000 }).then(text => text.slice(0, 1000)).catch(() => null);
+      if (!captureDir) console.error({ lastWorldState: record.failedAt, screen: record.screen });
       await capture(page, `${device}-failed`).catch(() => {});
       throw error;
     } finally {
