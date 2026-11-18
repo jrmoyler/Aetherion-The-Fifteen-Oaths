@@ -31,9 +31,9 @@ export function arrivalPlan(oath, position, yaw = 0, duration = ARRIVAL_SECONDS)
   const point = (f, r, y) => hero.clone().addScaledVector(forward, f).addScaledVector(right, r).add(new THREE.Vector3(0, y, 0));
   const [opening, covenant] = WORDS[oath.element] || WORDS.light;
   return { oath, hero, yaw, duration, shots: [
-    { title: oath.name, subtitle: opening, from: point(-39, 26, 21), to: point(-24, 16, 13), lookFrom: point(19, 0, 5), lookTo: point(8, 0, 3), fov: [56, 49] },
-    { title: 'A covenant takes form', subtitle: covenant, from: point(5.1, 3.8, 2.4), to: point(4.5, -2.7, 2.1), lookFrom: point(0, 0, 1.15), lookTo: point(0, 0, 1.3), fov: [43, 39] },
-    { title: 'Your story begins', subtitle: 'Every force has a covenant. Every covenant has a price.', from: point(-10, 5.4, 5.2), to: point(-5.92, .38, 3.42), lookFrom: point(1, 0, 1.8), lookTo: point(0, .38, 1.65), fov: [48, 51.5662] },
+    { title: oath.name, subtitle: 'The Archivist died protecting a fragment of the Weave. Now you carry it.', from: point(-39, 26, 21), to: point(-24, 16, 13), lookFrom: point(19, 0, 5), lookTo: point(8, 0, 3), fov: [56, 49] },
+    { title: 'Your oath', subtitle: `${opening} ${covenant}`, from: point(5.1, 3.8, 2.4), to: point(4.5, -2.7, 2.1), lookFrom: point(0, 0, 1.15), lookTo: point(0, 0, 1.3), fov: [43, 39] },
+    { title: 'The Broken Ward', subtitle: 'The evacuation road is under attack. Find your sanctuary’s chronicler.', from: point(-10, 5.4, 5.2), to: point(-5.92, .38, 3.42), lookFrom: point(1, 0, 1.8), lookTo: point(0, .38, 1.65), fov: [48, 51.5662] },
   ] };
 }
 
@@ -85,7 +85,7 @@ export function createCovenantEffect(oath, hero, quality = 'high') {
 function overlayFor(oath) {
   const el = document.createElement('section'); el.className = 'ae-arrival'; el.setAttribute('aria-label', `${oath.name} arrival`);
   el.style.setProperty('--arrival-accent', oath.accent);
-  const top = document.createElement('div'); top.className = 'ae-arrival__top'; top.textContent = `AETHERION / COVENANT ${String(oath.index).padStart(2, '0')}`;
+  const top = document.createElement('div'); top.className = 'ae-arrival__top'; top.textContent = 'CHAPTER I';
   const copy = document.createElement('div'); copy.className = 'ae-arrival__copy';
   const chapter = document.createElement('span'); chapter.className = 'ae-arrival__chapter';
   const title = document.createElement('h1'), subtitle = document.createElement('p'); subtitle.setAttribute('aria-live', 'polite');

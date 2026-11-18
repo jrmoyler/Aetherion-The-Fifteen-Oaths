@@ -11,4 +11,5 @@ body.ae-arrival-active #ui { visibility:hidden; }
 .ae-arrival__skip:hover { background:#29303a; }.ae-arrival__skip:focus-visible { outline:2px solid #f1ead8; outline-offset:4px; }
 .ae-arrival__hint { position:absolute; left:clamp(24px,6vw,96px); bottom:calc(36px + env(safe-area-inset-bottom)); font-size:11px; letter-spacing:.04em; color:#b8b2a7; }
 @media (pointer:coarse) { .ae-arrival__hint { display:none; } }
-@media (max-height:480px) { .ae-arrival__copy { bottom:70px; } .ae-arrival h1 { font-size:26px; margin-bottom:7px; }.ae-arrival p { margin-bottom:8px; }.ae-arrival__chapter { margin-bottom:6px; } }
+@media (max-height:480px) { .ae-arrival__copy { bottom:calc(76px + env(safe-area-inset-bottom)); } .ae-arrival h1 { font-size:26px; margin-bottom:7px; }.ae-arrival p { margin-bottom:8px; }.ae-arrival__chapter { margin-bottom:6px; } }
+@media (orientation:landscape) { .ae-arrival__top,.ae-arrival__copy,.ae-arrival__hint { left:max(24px,6vw,env(safe-area-inset-left)); } .ae-arrival__copy,.ae-arrival__skip { right:max(24px,6vw,env(safe-area-inset-right)); } }

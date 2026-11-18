@@ -61,7 +61,11 @@ export function createState(ctx) {
     gs.hp = n('hp') ?? gs.hp; gs.mhp = n('mhp', 'maxHp', 'hpMax') ?? gs.mhp;
     gs.mp = n('mp', 'mana') ?? gs.mp; gs.mmp = n('mmp', 'maxMp', 'mpMax', 'maxMana') ?? gs.mmp;
     if (you.id != null && gs.selfId == null) gs.selfId = you.id;
-    if (Array.isArray(you.quests)) for (const q of you.quests) if (q?.id) gs.quests.set(q.id, q);
+    if (Array.isArray(you.quests)) {
+      const incoming = new Map(you.quests.filter(q => q?.id).map(q => [q.id, q]));
+      for (const [id, q] of gs.quests) if (!incoming.has(id) && !q.done) gs.quests.delete(id);
+      for (const [id, q] of incoming) gs.quests.set(id, q);
+    }
     const sh = you.shrines || you.discovered;
     if (Array.isArray(sh)) sh.forEach((s) => gs.shrines.add(typeof s === 'string' ? s : s?.id));
     if (Number.isFinite(you.x) && Number.isFinite(you.z)) gs.lastPos = { x: you.x, y: you.y || 0, z: you.z };

@@ -7,6 +7,7 @@ import { emblemImage, emblemSVG, emblemRect } from './emblems.js';
 import { ICONS } from './icons.js';
 import { WORLD_HALF } from '@shared/terrain.js';
 import { biomeLabel } from './create.js';
+import { trackedObjective } from './questNavigation.js';
 
 const RES = 640;
 const EXTENT = WORLD_HALF; // metres from origin
@@ -147,6 +148,15 @@ export function createWorldMap(ui) {
     g.beginPath(); g.moveTo(0, -12); g.lineTo(8, 9); g.lineTo(0, 4.5); g.lineTo(-8, 9); g.closePath(); g.fill(); g.stroke();
     g.restore();
     g.strokeStyle = 'rgba(255,243,208,.5)'; g.lineWidth = 1; g.beginPath(); g.arc(px, py, 18 + (performance.now() / 60) % 14, 0, Math.PI * 2); g.stroke();
+    const goal = trackedObjective(gs.quests);
+    if (goal?.chapter) {
+      const [gx, gy] = toScreen(goal.waypoint.x, goal.waypoint.z);
+      g.save(); g.translate(gx, gy);
+      g.beginPath(); g.moveTo(0, -9); g.lineTo(9, 0); g.lineTo(0, 9); g.lineTo(-9, 0); g.closePath();
+      g.fillStyle = '#f7c777'; g.strokeStyle = '#21170c'; g.lineWidth = 2;
+      g.fill(); g.stroke(); g.restore();
+      drawLabel(goal.waypoint.label || goal.objective, gx, gy + 20, 12, '#ffdda3', 0);
+    }
     // compass rose
     const cx = 54, cy = 58;
     g.strokeStyle = 'rgba(240,230,205,.8)'; g.fillStyle = 'rgba(240,230,205,.85)'; g.lineWidth = 1;
@@ -250,9 +260,12 @@ export function createWorldMap(ui) {
     ui.sfx('click');
     const ok = await ui.dialogs.confirm('Fast Travel', `Step through the Weave to the ${o.name} shrine?`, 'Travel', 'Stay');
     if (!ok) return;
-    try { ctx.net?.send?.({ t: 'travel', shrine: o.id }); } catch { /* ignore */ }
-    ui.toast(`Travelling to ${o.name}…`, 'info'); ui.sfx('travel');
     ui.closeWindow('map');
+    if (!ctx.net?.send?.({ t: 'travel', shrine: o.id })) {
+      ui.toast('Travel is unavailable. Try again when the realm is connected.', 'warn');
+      return;
+    }
+    ui.sfx('travel');
   }
 
   function renderList() {
@@ -295,7 +308,13 @@ export function createWorldMap(ui) {
       sub.textContent = `${gs.shrines.size} of 15 shrines attuned`;
       requestAnimationFrame(() => {
         resize();
-        const p = gs.pos(); if (!centred) { cam.x = 80; cam.z = 0; centred = true; } else { cam.x = p.x; cam.z = p.z; }
+        const p = gs.pos(), goal = trackedObjective(gs.quests);
+        if (goal?.chapter) {
+          const w = goal.waypoint;
+          cam.x = (p.x + w.x) / 2; cam.z = (p.z + w.z) / 2;
+          cam.s = Math.min(1.25, vw * .68 / Math.max(1, Math.abs(p.x - w.x)), vh * .62 / Math.max(1, Math.abs(p.z - w.z)));
+          centred = true;
+        } else if (!centred) { cam.x = 80; cam.z = 0; centred = true; } else { cam.x = p.x; cam.z = p.z; }
         dirty = true; if (!raf) raf = requestAnimationFrame(loop);
       });
     },

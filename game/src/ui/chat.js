@@ -55,7 +55,7 @@ export function createChat(ui) {
   function blur() {
     input.blur();
   }
-  input.addEventListener('focus', () => { open.setAttribute('aria-expanded', 'true'); el.classList.add('is-active'); ctx.input?.setTyping?.(true); });
+  input.addEventListener('focus', () => { ui.touch?.reset(); open.setAttribute('aria-expanded', 'true'); el.classList.add('is-active'); ctx.input?.setTyping?.(true); });
   input.addEventListener('blur', () => { open.setAttribute('aria-expanded', 'false'); el.classList.remove('is-active'); ctx.input?.setTyping?.(false); });
   input.addEventListener('keyup', (e) => e.stopPropagation());
   input.addEventListener('keydown', (e) => {

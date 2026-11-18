@@ -8,8 +8,7 @@
 //
 // Online: WebSocket to ?server=wss://host/ws or same-origin /ws (Vite dev proxies /ws to :8787), JSON frames
 // (a frame may carry an array of messages), reconnect with exponential backoff + token resume, ping/RTT and
-// server clock sync. Offline (?offline=1, or when the socket can't open within ~2.5 s): shared/sim runs in a
-// Web Worker (localServer.js) with identical messages, populated with AI adventurers.
+// server clock sync. Story runs locally in a Web Worker using the same simulation and protocol.
 //
 // Snapshots on the wire are deltas (protocol.js "Snapshot deltas"); this module re-hydrates them so every
 // net:snap carries complete EntityState objects for all entities in the interest radius. Hydrated entity
@@ -31,9 +30,10 @@ export async function init(ctx) {
   const { bus } = ctx;
   const params = ctx.params ?? new URLSearchParams(globalThis.location?.search ?? '');
   const forceOffline = params.get('offline') === '1' || globalThis.location?.protocol === 'file:';
+  const forceOnline = !forceOffline && (params.has('server') || params.get('offline') === '0');
 
   const state = {
-    mode: forceOffline ? 'offline' : 'online',
+    mode: forceOnline ? 'online' : 'offline',
     selfId: null, rtt: 0, offset: 0, offsetSamples: 0, connected: false,
     you: null, welcome: null, transport: null, paused: false, localTime: null, localStamp: 0,
   };
@@ -50,7 +50,9 @@ export async function init(ctx) {
   let pingTimer = null;
   let welcomeWaiter = null;
 
-  const tokenKey = () => `aeth.tok.${state.mode}.${state.mode === 'online' ? serverUrl() : 'local'}.${character?.name}|${character?.oath}|${character?.cls}`;
+  const localTokenKey = ch => `aeth.tok.offline.local.${ch.name}|${ch.oath}|${ch.cls}`;
+  const tokenKey = () => state.mode === 'offline' ? localTokenKey(character)
+    : `aeth.tok.online.${serverUrl()}.${character.name}|${character.oath}|${character.cls}`;
 
   function status(extra = {}) {
     bus.emit('net:status', { mode: state.mode, connected: state.connected, transport: state.transport, ...extra });
@@ -74,6 +76,13 @@ export async function init(ctx) {
 
   function onMessage(m) {
     if (!m || typeof m !== 'object') return;
+    // A new local character is persisted before its welcome is delivered.
+    if (m.t === '__save') {
+      if (state.mode === 'offline' && typeof m.token === 'string' && m.data) {
+        LS.set(`aeth.save.${m.token}`, JSON.stringify(m.data));
+      }
+      return;
+    }
     if (!state.welcome && m.t !== 'welcome' && m.t !== 'pong' && m.t !== 'error') return; // pre-join broadcasts
     switch (m.t) {
       case 'snap':
@@ -113,7 +122,6 @@ export async function init(ctx) {
         break;
       }
       case 'error': console.warn('[net] server error:', m.msg); bus.emit('net:error', m); break;
-      case '__save': LS.set(`aeth.save.${m.token}`, JSON.stringify(m.data)); break;
       case '__ready': break;
       default: break;
     }
@@ -198,22 +206,15 @@ export async function init(ctx) {
     }, delay);
   }
 
-  // The transport is warmed up during init (before character selection) so connect() is fast:
-  // the offline world takes a moment to generate, and the WebSocket probe decides online vs offline.
+  // Warm the local world once Story is selected. Online connects on explicit selection.
   let localPromise = null;
   function warmOffline() {
     if (!localPromise) {
-      const bots = Number(params.get('bots') ?? 30);
-      localPromise = createLocalServer({ seed: Number(params.get('seed') ?? 15015), bots: Number.isFinite(bots) ? bots : 30, onBatch: (batch) => { for (const m of batch) onMessage(m); } });
+      const bots = Number(params.get('bots') ?? 0);
+      localPromise = createLocalServer({ seed: Number(params.get('seed') ?? 15015), bots: Number.isFinite(bots) ? bots : 0, onBatch: (batch) => { for (const m of batch) onMessage(m); } });
       localPromise.catch(() => {});
     }
     return localPromise;
-  }
-  let probe = null;
-  if (forceOffline) warmOffline();
-  else {
-    probe = openSocket(CONNECT_TIMEOUT_MS);
-    probe.catch((e) => { console.info(`[net] no game server at ${serverUrl()} (${e.message}); preparing offline world`); warmOffline(); });
   }
 
   async function startOffline() {
@@ -234,6 +235,21 @@ export async function init(ctx) {
   // ---------- API ----------
   const api = {
     get mode() { return state.mode; },
+    get offerOnline() { return !forceOffline; },
+    hasLocalSave(ch) {
+      const savedToken = LS.get(localTokenKey(ch));
+      if (!savedToken) return false;
+      try {
+        const saved = JSON.parse(LS.get(`aeth.save.${savedToken}`));
+        return saved?.oath === ch.oath && saved?.cls === ch.cls;
+      } catch { return false; }
+    },
+    selectMode(mode) {
+      if (character) return;
+      state.mode = forceOffline || mode !== 'online' ? 'offline' : 'online';
+      if (state.mode === 'offline') warmOffline();
+      status();
+    },
     get selfId() { return state.selfId; },
     get rtt() { return state.rtt; },
     get connected() { return state.connected; },
@@ -266,8 +282,7 @@ export async function init(ctx) {
       const welcome = new Promise((resolve, reject) => { welcomeWaiter = { resolve, reject }; });
       if (state.mode === 'online') {
         try {
-          let sock = await probe;
-          if (sock.readyState !== 1) sock = await openSocket(CONNECT_TIMEOUT_MS); // probe went stale during character selection
+          const sock = await openSocket(CONNECT_TIMEOUT_MS);
           sock.onclose = null; sock.onerror = null;
           attachSocket(sock);
           // a server that accepts the socket but never welcomes us also falls back to offline
@@ -279,11 +294,13 @@ export async function init(ctx) {
               if (performance.now() - due > 500) { arm(1500); return; } // page was busy: the welcome may be queued
               closedByUs = true; try { sock.close(); } catch { /* ignore */ } closedByUs = false; ws = null;
               startOffline().catch((e) => welcomeWaiter?.reject(e));
+              bus.emit('net:story-fallback');
             }, ms);
           };
           arm(10000);
           welcome.finally(() => clearTimeout(t));
-        } catch (e) {
+        } catch {
+          bus.emit('net:story-fallback');
           await startOffline();
         }
       } else {

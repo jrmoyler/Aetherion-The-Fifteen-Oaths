@@ -1,185 +1,247 @@
-// Touch controls: floating left joystick (sprint at the rim), right-side drag-to-look with tap-to-target,
-// thumb radial action cluster (6 abilities with cooldown sweeps + jump, dodge, target, interact).
-import { h } from './dom.js';
+// Touch input keeps movement, camera and held actions on independent pointer captures.
+import { h, clamp } from './dom.js';
 import { ICONS } from './icons.js';
 import { slotHTML } from './abilityView.js';
+import './touch.css';
 
-const JOY_R = 58;
-const CLUSTER = 300;
-const P = { x: 226, y: 226 };
-const polar = (deg, r) => ({ x: P.x + Math.cos((deg * Math.PI) / 180) * r, y: P.y + Math.sin((deg * Math.PI) / 180) * r });
-const LAYOUT = [
-  { ...P, size: 92 },
-  { ...polar(180, 112), size: 62 }, { ...polar(208, 112), size: 62 }, { ...polar(242, 112), size: 62 }, { ...polar(270, 112), size: 62 },
-  { ...polar(225, 186), size: 64 },
+const KNOB_TRAVEL = 28;
+const MOVE_DEADZONE = 6;
+const RUN_DISTANCE = 38;
+const SPRINT_START = 46;
+const SPRINT_END = 36;
+const LOOK_SLOP = 7;
+
+const ACTIONS = [
+  { id: 'jump', label: 'Jump', held: true },
+  { id: 'dodge', label: 'Dodge' },
+  { id: 'target', label: 'Target' },
+  { id: 'interact', label: 'Interact' },
 ];
-const UTIL = [
-  { id: 'jump', icon: 'jump', label: 'Jump', mode: 'hold', ...polar(170, 200) },
-  { id: 'dodge', icon: 'dodge', label: 'Dodge', mode: 'press', ...polar(280, 200) },
-  { id: 'target', icon: 'target', label: 'Next target', mode: 'press', ...polar(196, 186) },
-  { id: 'interact', icon: 'interact', label: 'Interact', mode: 'press', ...polar(254, 186) },
-];
+
+function releaseCapture(el, id) {
+  if (el.hasPointerCapture(id)) el.releasePointerCapture(id);
+}
+
+const caption = text => h('span', { class: 'ae-touch-label', 'aria-hidden': 'true' }, text);
 
 export function createTouch(ui) {
   const { ctx } = ui;
   const look = h('div', { class: 'ae-touch__look' });
   const knob = h('div', { class: 'ae-joy__knob' });
   const joy = h('div', { class: 'ae-joy' }, knob);
-  const move = h('div', { class: 'ae-touch__move', 'aria-hidden': 'true' }, joy);
-  const cluster = h('div', { class: 'ae-cluster', style: { width: `${CLUSTER}px`, height: `${CLUSTER}px` } });
-  const top = h('div', { class: 'ae-touch__top' });
-  const el = h('div', { class: 'ae-touch', hidden: true }, look, move);
+  const move = h('div', { class: 'ae-touch__move' }, joy);
+  const cluster = h('div', { class: 'ae-cluster', role: 'group', 'aria-label': 'Combat controls' });
+  const top = h('nav', { class: 'ae-touch__top', 'aria-label': 'Game menus' });
+  const el = h('div', { class: 'ae-touch', hidden: true, 'aria-hidden': 'true' }, look, move);
   const ctrl = h('div', { class: 'ae-touch-ui', hidden: true }, cluster, top);
-  const fit = () => {
-    const portrait = innerHeight > innerWidth;
-    const sc = portrait ? Math.min(1, Math.max(0.75, (innerWidth * 0.68) / CLUSTER)) : Math.min(1, Math.max(0.75, (innerHeight - 40) / 470));
-    ctrl.style.setProperty('--tscale', sc.toFixed(3));
-    ui.root?.style.setProperty('--tscale-px', `${Math.round(CLUSTER * sc + 18)}px`);
-  };
-  fit(); addEventListener('resize', fit);
 
-  // --- joystick
-  let joyId = null, jx = 0, jy = 0;
-  // Resting spot for the stick. In portrait the cluster reaches across most of the width, so the stick
-  // sits tight to the left edge and above the cluster's lowest buttons.
-  const rest = () => {
-    const r = move.getBoundingClientRect();
-    if (innerHeight > innerWidth) return { x: Math.min(78, r.width * 0.4), y: r.height - Math.min(196, r.height * 0.58) };
-    return { x: Math.min(140, r.width * 0.4), y: r.height - Math.min(130, r.height * 0.36) };
-  };
-  function placeJoy(x, y) { joy.style.left = `${x}px`; joy.style.top = `${y}px`; }
-  function setKnob(dx, dy) { knob.style.transform = `translate(${dx}px, ${dy}px)`; }
-  move.addEventListener('pointerdown', (e) => {
-    if (joyId != null) return;
-    e.preventDefault(); move.setPointerCapture(e.pointerId); joyId = e.pointerId;
-    const r = move.getBoundingClientRect(); jx = e.clientX - r.left; jy = e.clientY - r.top;
-    placeJoy(jx, jy); joy.classList.add('is-active');
-  });
-  move.addEventListener('pointermove', (e) => {
-    if (e.pointerId !== joyId) return;
-    const r = move.getBoundingClientRect();
-    let dx = e.clientX - r.left - jx, dy = e.clientY - r.top - jy;
-    const d = Math.hypot(dx, dy);
-    const sprint = d > JOY_R * 1.08;
-    if (d > JOY_R) { dx = (dx / d) * JOY_R; dy = (dy / d) * JOY_R; }
-    setKnob(dx, dy);
-    const nx = dx / JOY_R, ny = -dy / JOY_R;
-    const mag = Math.hypot(nx, ny); const dead = 0.12;
-    const k = mag < dead ? 0 : (mag - dead) / (1 - dead) / mag;
-    ctx.input?.setVirtualMove?.(nx * k, ny * k);
-    ctx.input?.setVirtualSprint?.(sprint);
-    joy.classList.toggle('is-sprint', sprint);
-  });
-  const endJoy = (e) => {
-    if (e.pointerId !== joyId) return;
-    joyId = null; setKnob(0, 0); joy.classList.remove('is-active', 'is-sprint');
-    ctx.input?.setVirtualMove?.(0, 0); ctx.input?.setVirtualSprint?.(false);
-    const r = rest(); placeJoy(r.x, r.y);
-  };
-  move.addEventListener('pointerup', endJoy); move.addEventListener('pointercancel', endJoy); move.addEventListener('lostpointercapture', endJoy);
+  const canStart = e => e.button === 0 && ctx.input?.gameplayEnabled !== false;
+  let stick = null;
+  const setKnob = (dx, dy) => { knob.style.transform = `translate(${dx}px, ${dy}px)`; };
 
-  // --- one finger orbits or taps a target; two fingers pinch to zoom
+  move.addEventListener('pointerdown', e => {
+    if (stick || !canStart(e)) return;
+    e.preventDefault();
+    move.setPointerCapture(e.pointerId);
+    stick = { id: e.pointerId, x: e.clientX, y: e.clientY, sprint: false };
+    const bounds = move.getBoundingClientRect();
+    const radius = joy.offsetWidth / 2;
+    // The contact starts at neutral even when the drawing rests away from a screen edge.
+    joy.style.left = `${clamp(e.clientX - bounds.left, radius, bounds.width - radius)}px`;
+    joy.style.top = `${clamp(e.clientY - bounds.top, radius, bounds.height - radius)}px`;
+    joy.classList.add('is-active');
+  });
+  move.addEventListener('pointermove', e => {
+    if (e.pointerId !== stick?.id) return;
+    const dx = e.clientX - stick.x, dy = e.clientY - stick.y;
+    const distance = Math.hypot(dx, dy);
+    const magnitude = clamp((distance - MOVE_DEADZONE) / (RUN_DISTANCE - MOVE_DEADZONE), 0, 1);
+    const scale = distance ? magnitude / distance : 0;
+    stick.sprint = distance >= (stick.sprint ? SPRINT_END : SPRINT_START);
+    setKnob(dx * scale * KNOB_TRAVEL, dy * scale * KNOB_TRAVEL);
+    ctx.input?.setVirtualMove?.(dx * scale, -dy * scale);
+    ctx.input?.setVirtualSprint?.(stick.sprint);
+    joy.classList.toggle('is-sprint', stick.sprint);
+  });
+  function endStick(id) {
+    if (id !== stick?.id) return;
+    stick = null;
+    releaseCapture(move, id);
+    joy.style.removeProperty('left');
+    joy.style.removeProperty('top');
+    joy.classList.remove('is-active', 'is-sprint');
+    setKnob(0, 0);
+    ctx.input?.setVirtualMove?.(0, 0);
+    ctx.input?.setVirtualSprint?.(false);
+  }
+
+  // A short tap picks an actor without nudging the camera. A second finger opts into pinch zoom.
   const looks = new Map();
-  look.addEventListener('pointerdown', (e) => {
-    if (looks.size >= 2) return;
-    e.preventDefault(); look.setPointerCapture(e.pointerId);
-    const point = { x: e.clientX, y: e.clientY, t: performance.now(), moved: 0, canTarget: !looks.size };
-    for (const current of looks.values()) current.canTarget = false;
+  look.addEventListener('pointerdown', e => {
+    if (looks.size >= 2 || !canStart(e)) return;
+    e.preventDefault();
+    look.setPointerCapture(e.pointerId);
+    const { clientX: x, clientY: y } = e;
+    const point = { x, y, startX: x, startY: y, time: performance.now(), dragged: false, canTarget: !looks.size };
+    for (const other of looks.values()) other.canTarget = false;
     looks.set(e.pointerId, point);
   });
-  look.addEventListener('pointermove', (e) => {
+  look.addEventListener('pointermove', e => {
     const point = looks.get(e.pointerId);
     if (!point) return;
-    const dx = e.clientX - point.x, dy = e.clientY - point.y;
+    const { clientX: x, clientY: y } = e;
     if (looks.size === 2) {
       const [first, second] = looks.values();
       const other = first === point ? second : first;
       const before = Math.hypot(point.x - other.x, point.y - other.y);
-      const after = Math.hypot(e.clientX - other.x, e.clientY - other.y);
-      // Expanding the span by 48 CSS pixels is one inward wheel step.
+      const after = Math.hypot(x - other.x, y - other.y);
       ctx.input?.addVirtualZoom?.((before - after) / 48);
-    } else {
-      ctx.input?.addVirtualLook?.(dx * 1.6, dy * 1.6);
+      point.dragged = true;
+      other.dragged = true;
+    } else if (point.dragged) {
+      ctx.input?.addVirtualLook?.((x - point.x) * 1.6, (y - point.y) * 1.6);
+    } else if (Math.hypot(x - point.startX, y - point.startY) >= LOOK_SLOP) {
+      point.dragged = true;
+      ctx.input?.addVirtualLook?.((x - point.startX) * 1.6, (y - point.startY) * 1.6);
     }
-    point.x = e.clientX; point.y = e.clientY; point.moved += Math.abs(dx) + Math.abs(dy);
+    point.x = x;
+    point.y = y;
   });
-  const endLook = (e) => {
-    const l = looks.get(e.pointerId); looks.delete(e.pointerId);
-    if (!l?.canTarget || e.type !== 'pointerup') return;
-    if (l.moved < 10 && performance.now() - l.t < 300) {
-      try {
-        const a = ctx.actors?.pick?.(e.clientX, e.clientY);
-        if (a?.id != null) { ctx.combat?.setTarget?.(a.id); ui.sfx('target'); }
-      } catch { /* stub */ }
-    }
-  };
-  look.addEventListener('pointerup', endLook); look.addEventListener('pointercancel', endLook); look.addEventListener('lostpointercapture', endLook);
+  function endLook(e) {
+    const point = looks.get(e.pointerId);
+    looks.delete(e.pointerId);
+    if (!point?.canTarget || point.dragged || e.type !== 'pointerup' || performance.now() - point.time >= 300) return;
+    const actor = ctx.actors?.pick?.(e.clientX, e.clientY);
+    if (actor?.id != null) { ctx.combat?.setTarget?.(actor.id); ui.sfx('target'); }
+  }
 
-  // --- action cluster
+  const captures = new Map();
+  function endAction(button) {
+    const active = captures.get(button);
+    if (!active) return;
+    captures.delete(button);
+    releaseCapture(button, active.id);
+    button.classList.remove('is-down');
+    if (active.held) ctx.input?.hold?.(active.action, false);
+  }
+  function bindAction(button, action, { held = false, onPress } = {}) {
+    button.addEventListener('pointerdown', e => {
+      if (captures.has(button) || !canStart(e)) return;
+      e.preventDefault();
+      button.setPointerCapture(e.pointerId);
+      captures.set(button, { id: e.pointerId, action, held });
+      button.classList.add('is-down');
+      if (held) ctx.input?.hold?.(action, true);
+      else ctx.input?.press?.(action);
+      onPress?.();
+    });
+    for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+      button.addEventListener(type, e => { if (captures.get(button)?.id === e.pointerId) endAction(button); });
+    }
+    // Keyboard and assistive-technology activation do not send a pointerdown.
+    button.addEventListener('click', e => {
+      if (e.detail !== 0) return;
+      ctx.input?.press?.(action);
+      onPress?.();
+    });
+  }
+  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+    move.addEventListener(type, e => endStick(e.pointerId));
+    look.addEventListener(type, endLook);
+  }
+
   const slots = [];
   function build(view) {
-    cluster.querySelectorAll('.ae-slot').forEach((n) => n.remove());
+    for (const slot of slots) { endAction(slot.button); slot.button.remove(); }
     slots.length = 0;
-    view.forEach((v, i) => {
-      const L = LAYOUT[i]; if (!L) return;
-      const b = h('button', { class: `ae-tbtn ae-slot${v.ult ? ' is-ult' : ''}`, type: 'button', 'aria-label': v.name,
-        style: `left:${L.x - L.size / 2}px;top:${L.y - L.size / 2}px;width:${L.size}px;height:${L.size}px;--ab:${v.accent};--ab-rgb:${v.accentRgb}`,
-        html: slotHTML(v, { key: false }) });
-      b.addEventListener('pointerdown', (e) => { e.preventDefault(); e.stopPropagation(); ctx.input?.press?.(`slot${i}`); flash(i); try { navigator.vibrate?.(8); } catch { /* ignore */ } });
-      cluster.append(b); slots.push(b);
+    view.slice(0, 6).forEach((v, i) => {
+      const label = i === 0 ? 'Attack' : i === 5 ? 'Ultimate' : null;
+      const button = h('button', {
+        class: `ae-tbtn ae-slot ae-tbtn--slot-${i}${v.ult ? ' is-ult' : ''}`,
+        type: 'button',
+        'aria-label': label ? `${label} · ${v.name}` : v.name,
+        style: `--ab:${v.accent};--ab-rgb:${v.accentRgb}`,
+        html: slotHTML(v, { key: false }),
+      });
+      if (label) button.append(caption(label));
+      bindAction(button, `slot${i}`, { held: i === 0, onPress: () => flash(i) });
+      cluster.insertBefore(button, firstUtility);
+      slots.push({ button, timer: button.querySelector('.cdt'), cooling: false });
     });
   }
-  for (const u of UTIL) {
-    const b = h('button', { class: 'ae-tbtn util', type: 'button', 'aria-label': u.label, html: ICONS[u.icon], style: `left:${u.x - 30}px;top:${u.y - 30}px;width:60px;height:60px` });
-    b.append(h('span', { class: 'ae-touch-label' }, u.label === 'Next target' ? 'Target' : u.label));
-    b.addEventListener('pointerdown', (e) => {
-      e.preventDefault(); e.stopPropagation(); b.setPointerCapture(e.pointerId); b.classList.add('is-down');
-      if (u.mode === 'hold') ctx.input?.hold?.(u.id, true); else ctx.input?.press?.(u.id);
-    });
-    const up = () => { b.classList.remove('is-down'); if (u.mode === 'hold') ctx.input?.hold?.(u.id, false); };
-    b.addEventListener('pointerup', up); b.addEventListener('pointercancel', up); b.addEventListener('lostpointercapture', up);
-    cluster.append(b);
+
+  for (const { id, label, held } of ACTIONS) {
+    const button = h('button', { class: `ae-tbtn ae-tbtn--${id}`, type: 'button', 'aria-label': label, html: ICONS[id] });
+    button.append(caption(label));
+    bindAction(button, id, { held });
+    cluster.append(button);
   }
-  for (const [id, icon, label] of [['map', 'map', 'World map'], ['character', 'bag', 'Character'], ['chat', 'chat', 'Chat'], ['settings', 'gear', 'Settings']]) {
-    const b = h('button', { class: 'ae-iconbtn', type: 'button', 'aria-label': label, html: ICONS[icon] });
-    b.addEventListener('click', () => { if (id === 'chat') ui.chat.focus(); else ui.toggleWindow(id); });
-    top.append(b);
+  const firstUtility = cluster.firstElementChild;
+  function addShortcuts() {
+    const middle = ctx.net?.mode === 'online' ? ['chat', 'chat', 'Chat'] : ['journal', 'quest', 'Journal'];
+    const links = [['map', 'map', 'Map'], ['character', 'bag', 'Gear'], middle, ['settings', 'gear', 'Menu']];
+    top.replaceChildren();
+    for (const [id, icon, label] of links) {
+      const button = h('button', { class: 'ae-iconbtn', type: 'button', 'aria-label': id === 'map' ? 'World map' : label, html: ICONS[icon] });
+      button.append(caption(label));
+      button.addEventListener('click', () => {
+        if (id === 'chat') ui.chat.focus();
+        else ui.toggleWindow(id);
+      });
+      top.append(button);
+    }
   }
 
-  function flash(i) { const s = slots[i]; if (!s) return; s.classList.remove('is-flash'); void s.offsetWidth; s.classList.add('is-flash'); }
+  function flash(i) {
+    const button = slots[i]?.button;
+    if (!button) return;
+    button.classList.remove('is-flash');
+    void button.offsetWidth;
+    button.classList.add('is-flash');
+  }
 
-  // block page zoom/scroll gestures
-  const stop = (e) => e.preventDefault();
-  el.addEventListener('gesturestart', stop, { passive: false });
-  ctrl.addEventListener('gesturestart', stop, { passive: false });
-  el.addEventListener('touchmove', stop, { passive: false });
-  el.addEventListener('contextmenu', stop);
-  ctrl.addEventListener('touchmove', stop, { passive: false });
-  ctrl.addEventListener('contextmenu', stop);
+  // Block WebKit's page-scale gesture while leaving native scrolling in menus.
+  const prevent = e => e.preventDefault();
+  for (const layer of [el, ctrl]) {
+    layer.addEventListener('gesturestart', prevent, { passive: false });
+    layer.addEventListener('contextmenu', prevent);
+  }
 
   function reset() {
-    joyId = null; looks.clear(); setKnob(0, 0);
-    joy.classList.remove('is-active', 'is-sprint');
-    cluster.querySelectorAll('.is-down').forEach(b => b.classList.remove('is-down'));
-    ctx.input?.setVirtualMove?.(0, 0); ctx.input?.setVirtualSprint?.(false); ctx.input?.hold?.('jump', false);
+    if (stick) endStick(stick.id);
+    const looking = [...looks.keys()];
+    looks.clear();
+    for (const id of looking) releaseCapture(look, id);
+    for (const button of captures.keys()) endAction(button);
   }
+  addEventListener('resize', reset);
   addEventListener('blur', reset);
   document.addEventListener('visibilitychange', () => { if (document.hidden) reset(); });
 
   return {
     el, ctrl, build, flash, reset,
-    show() { el.hidden = false; ctrl.hidden = false; fit(); requestAnimationFrame(() => { const r = rest(); placeJoy(r.x, r.y); }); },
-    hide() { el.hidden = true; ctrl.hidden = true; reset(); },
-    setCooldown() { /* drawn in update() */ },
+    show() { addShortcuts(); el.hidden = false; ctrl.hidden = false; },
+    hide() { reset(); el.hidden = true; ctrl.hidden = true; },
     update(now, cds, view, mana) {
       if (el.hidden) return;
       for (let i = 0; i < slots.length; i++) {
-        const s = slots[i]; const c = cds[i]; const v = view[i];
-        const rem = c && c.active ? (c.end - now) / 1000 : 0;
-        if (rem > 0) { s.style.setProperty('--cd', (rem / c.total).toFixed(3)); s.lastChild.textContent = rem >= 1.5 ? Math.ceil(rem) : rem.toFixed(1); s._cd = true; }
-        else if (s._cd) { s._cd = false; s.style.setProperty('--cd', '0'); s.lastChild.textContent = ''; s.classList.remove('is-ready'); void s.offsetWidth; s.classList.add('is-ready'); }
-        const oom = !!(v && v.mana && mana < v.mana);
-        if (s._oom !== oom) { s._oom = oom; s.classList.toggle('is-oom', oom); }
+        const slot = slots[i];
+        const { button, timer } = slot;
+        const c = cds[i], v = view[i];
+        const rem = c?.active ? (c.end - now) / 1000 : 0;
+        if (rem > 0) {
+          button.style.setProperty('--cd', (rem / c.total).toFixed(3));
+          timer.textContent = rem >= 1.5 ? Math.ceil(rem) : rem.toFixed(1);
+          slot.cooling = true;
+        } else if (slot.cooling) {
+          slot.cooling = false;
+          button.style.setProperty('--cd', '0');
+          timer.textContent = '';
+          button.classList.remove('is-ready');
+          void button.offsetWidth;
+          button.classList.add('is-ready');
+        }
+        button.classList.toggle('is-oom', !!(v?.mana && mana < v.mana));
       }
     },
   };

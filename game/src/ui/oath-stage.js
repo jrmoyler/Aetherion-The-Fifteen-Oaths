@@ -14,7 +14,7 @@ export function createOathStage() {
   const right = h('button', { type: 'button', 'aria-label': 'Rotate character right' }, '↷');
   const pose = h('button', { type: 'button' }, 'Try stance');
   const el = h('section', { class: 'ae-oath-stage', 'aria-label': 'Your chosen hero' }, canvas,
-    h('div', { class: 'ae-oath-stage__heading' }, h('small', null, 'YOUR COVENANT / YOUR FORM'), title, subtitle),
+    h('div', { class: 'ae-oath-stage__heading' }, title, subtitle),
     h('div', { class: 'ae-oath-stage__status' }, status, retry),
     h('div', { class: 'ae-oath-stage__tools' }, left, h('span', null, 'Drag to turn'), right, pose));
   let renderer, scene, camera, controls, anchor, set, body, rim, observer, frame;
@@ -79,7 +79,7 @@ export function createOathStage() {
       return true;
     } catch (error) {
       renderer?.dispose(); renderer = null;
-      el.dataset.status = 'error'; status.textContent = '3D view unavailable. Your chosen hero is shown in the discipline cards.';
+      el.dataset.status = 'error'; status.textContent = '3D preview unavailable. You can still enter the world.';
       return false;
     }
   }

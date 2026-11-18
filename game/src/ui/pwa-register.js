@@ -38,9 +38,6 @@ function showNotice(message, action, label) {
   dismiss.onclick = () => currentNotice.remove();
   notice.append(dismiss);
   document.body.append(notice);
-  // Readiness is informational: do not leave it covering the hotbar indefinitely.
-  // Update actions remain until the player chooses Later or Restart.
-  if (!action) window.setTimeout(() => currentNotice.remove(), 10000);
 }
 
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
@@ -48,9 +45,6 @@ if ('serviceWorker' in navigator && import.meta.env.PROD) {
     immediate: true,
     onNeedRefresh() {
       updateAvailable = true; offerUpdate();
-    },
-    onOfflineReady() {
-      if (!updateAvailable) showNotice('The game shell is available offline. Downloaded character assets remain available while stored on this device. Multiplayer requires a connection.');
     },
     onRegisteredSW(_url, registration) {
       // Discover releases on reconnect/resume without overlapping update requests.

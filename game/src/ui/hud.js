@@ -103,9 +103,9 @@ export function createHud(ui) {
   const fps = h('div', { class: 'ae-fps ae-num', hidden: true }, '');
 
   const commands = h('nav', { class: 'ae-command-dock', 'aria-label': 'Game menus' });
-  for (const [id, label, key] of [['map', 'World map', 'M'], ['character', 'Character', 'I'], ['guide', 'Controls', '?'], ['settings', 'Menu', 'Esc']]) {
+  for (const [id, label, key] of [['map', 'World map', 'M'], ['character', 'Character', 'I'], ['journal', 'Journal', 'J'], ['settings', 'Menu', 'Esc']]) {
     const button = h('button', { type: 'button', class: 'ae-command' }, h('span', null, label), h('kbd', null, key));
-    button.onclick = () => id === 'guide' ? ui.guide?.toggle() : ui.toggleWindow(id);
+    button.onclick = () => ui.toggleWindow(id);
     commands.append(button);
   }
   root.append(commands);

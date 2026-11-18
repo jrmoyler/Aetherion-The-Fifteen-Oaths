@@ -3,30 +3,64 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 
-// Use a real layout engine: the regression involved the CSS cascade and absolute insets.
-test('touch chat stays compact and expandable help panels never overlap', async () => {
-  const browser = await chromium.launch({ headless: true, ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE } : {}) });
+test('mobile story, navigation and combat remain reachable in both orientations', async () => {
+  const styles = await Promise.all(['ui', 'game-shell', 'onboarding', 'story-hud', 'touch'].map(name =>
+    readFile(new URL(`../src/ui/${name}.css`, import.meta.url), 'utf8')));
+  const browser = await chromium.launch({ executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE });
   try {
-    const css = await readFile(new URL('../src/ui/ui.css', import.meta.url), 'utf8');
     const page = await browser.newPage({ isMobile: true, hasTouch: true });
-    for (const [width, height] of [[390, 844], [844, 390]]) {
+    const actionClasses = ['slot-0','slot-1','slot-2','slot-3','slot-4','slot-5','jump','dodge','target','interact'];
+    const actions = actionClasses.map(key => `<button class="ae-tbtn ae-tbtn--${key}">Action</button>`).join('');
+    const cases = [
+      { width: 320, height: 568, insets: [0, 0, 0, 0] },
+      { width: 390, height: 844, insets: [47, 0, 34, 0] },
+      { width: 568, height: 320, insets: [0, 0, 0, 0] },
+      { width: 667, height: 375, insets: [0, 0, 0, 0] },
+      { width: 844, height: 390, insets: [0, 17, 21, 47] },
+      { width: 932, height: 430, insets: [0, 59, 21, 59] },
+    ];
+    for (const { width, height, insets: [top, right, bottom, left] } of cases) {
       await page.setViewportSize({ width, height });
-      await page.setContent(`<style>${css}</style><div id="ui" class="is-touch"><div class="ae-help-dock"><div class="ae-quests is-collapsed"><button class="ae-quests__head">Covenant Tasks</button><div class="ae-quest">Task details<br>Travel to the shrine</div></div><aside class="ae-guide"><button class="ae-guide__head">Field guide</button><div class="ae-guide__body" hidden>Movement instructions</div></aside></div><div class="ae-chat"><button class="ae-chat__open">Chat</button></div></div>`);
-      // The utility group owns the Chat button on touch, so the idle pill takes no space in the thumb zone.
-      assert.equal(await page.locator('.ae-chat').isVisible(), false, `${width}: idle chat pill should be hidden on touch`);
-      const landscape = width > height;
-      for (const [questsOpen, guideOpen] of [[false, false], [true, false], [false, true], [true, true]]) {
-        await page.evaluate(([q, g]) => { document.querySelector('.ae-quests').classList.toggle('is-collapsed', !q); document.querySelector('.ae-guide__body').hidden = !g; }, [questsOpen, guideOpen]);
-        const quest = await page.locator('.ae-quests').boundingBox(), guide = await page.locator('.ae-guide').boundingBox();
-        const state = `${width}: quests ${questsOpen ? 'open' : 'closed'}, guide ${guideOpen ? 'open' : 'closed'}`;
-        assert.ok(quest || guide, `${state}: at least one help panel stays reachable`);
-        if (quest && guide) assert.ok(guide.y >= quest.y + quest.height, `${state}: quest and guide overlap`);
-        // A short landscape screen has room for one open body, not two.
-        if (landscape && (questsOpen || guideOpen)) assert.ok(!(quest && guide), `${state}: only the open panel shows`);
-        if (!landscape) assert.ok(quest && guide, `${state}: both panels show in portrait`);
-        const dock = await page.locator('.ae-help-dock').boundingBox();
-        if (landscape) assert.ok(dock.y + dock.height <= height - 150, `${state}: dock ends above the thumbstick`);
+      await page.setContent(`<meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>${styles.join('\n')}
+        #ui{position:fixed;inset:0;pointer-events:none;--sat:${top}px;--sar:${right}px;--sab:${bottom}px;--sal:${left}px}</style>
+        <div id="ui" class="is-touch">
+          <div class="ae-touch"><div class="ae-touch__look"></div><div class="ae-touch__move"><div class="ae-joy"></div></div></div>
+          <div class="ae-hud">
+            <div class="ae-unit ae-unit--player"><div class="ae-portrait"></div><div>Player</div></div>
+            <div class="ae-unit ae-unit--target"><div class="ae-portrait"></div><div>Target</div></div>
+            <div class="ae-minimap"><div class="ae-minimap__view"></div></div>
+            <div class="ae-help-dock">
+              <button class="ae-story-objective"><span class="ae-story-objective__chapter">First Chapter</span><strong class="ae-story-objective__action">Reach the sanctuary</strong><span class="ae-story-objective__hint">Follow the gold marker and speak to the covenant guide.</span></button>
+              <div class="ae-quests is-collapsed" hidden><button class="ae-quests__head">Covenant Tasks</button><div class="ae-quest">Task details</div></div>
+              <aside class="ae-guide" hidden><button class="ae-guide__head">Field guide</button><div class="ae-guide__body">Movement instructions</div></aside>
+            </div>
+            <div class="ae-chat"><button class="ae-chat__open">Chat</button></div>
+            <div class="ae-actionbar ae-panel"><div class="ae-hotrow"><div class="ae-belt"><button class="ae-belt__slot">HP</button><button class="ae-belt__slot">MP</button></div></div></div>
+          </div>
+          <div class="ae-touch-ui"><div class="ae-cluster">${actions}</div><div class="ae-touch__top">${'<button class="ae-iconbtn">Menu</button>'.repeat(4)}</div></div>
+        </div>`);
+      const state = `${width}×${height}`;
+      assert.equal(await page.locator('.ae-chat').isVisible(), false, `${state}: idle chat should be hidden`);
+      await page.locator('.ae-story-objective').tap({ timeout: 1500 });
+      const buttons = page.locator('.ae-cluster button, .ae-touch__top button');
+      for (const button of await buttons.all()) {
+        const rect = await button.boundingBox();
+        assert.ok(rect.width >= 44 && rect.height >= 44, `${state}: button undersized`);
+        assert.ok(rect.x >= left && rect.x + rect.width <= width - right && rect.y >= top && rect.y + rect.height <= height - bottom, `${state}: button outside safe area`);
+        await button.tap({ timeout: 1500 });
       }
+      const move = await page.locator('.ae-touch__move').boundingBox();
+      const dock = await page.locator('.ae-help-dock').boundingBox();
+      assert.ok(dock.y + dock.height < move.y, `${state}: dock overlaps the movement pad`);
+      await page.evaluate(() => {
+        document.querySelector('.ae-story-objective').hidden = true;
+        document.querySelector('.ae-quests').hidden = false;
+        document.querySelector('.ae-quests').classList.remove('is-collapsed');
+        document.querySelector('.ae-guide').hidden = false;
+      });
+      const quest = await page.locator('.ae-quests').boundingBox(), guide = await page.locator('.ae-guide').boundingBox();
+      assert.ok(guide.y >= quest.y + quest.height, `${state}: expanded panels overlap`);
     }
   } finally { await browser.close(); }
 });

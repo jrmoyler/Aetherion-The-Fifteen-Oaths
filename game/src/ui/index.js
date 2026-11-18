@@ -6,13 +6,14 @@ import { prefs } from './prefs.js';
 import { createState } from './state.js';
 import { createLoading } from './loading.js';
 import { createTitle } from './title.js';
-import { createCharacterScreen } from './create.js';
+import { createCharacterScreen, loadSavedHero } from './create.js';
 import { createFieldGuide } from './fieldguide.js';
 import { createHud } from './hud.js';
 import { createFloaters } from './floaters.js';
 import { createMinimap } from './minimap.js';
 import { createChat } from './chat.js';
 import { createQuests } from './quests.js';
+import { createStoryObjective } from './storyObjective.js';
 import { createNotify } from './notify.js';
 import { createDialogs } from './dialog.js';
 import { createWorldMap } from './worldmap.js';
@@ -109,6 +110,7 @@ function build(ctx) {
     windows[name].onClose?.();
     if (!stack.length) scrim.hidden = true; else scrim.style.zIndex = String(44 + stack.length * 2);
     syncTyping();
+    storyObjective.refresh();
     const previous = returnFocus.get(name); returnFocus.delete(name);
     if (!silent && previous?.isConnected) previous.focus?.({ preventScroll: true });
     if (name === 'dialog') dialogs.cancel?.();
@@ -124,6 +126,7 @@ function build(ctx) {
   const floaters = createFloaters(ui);
   const chat = createChat(ui); ui.chat = chat;
   const quests = createQuests(ui);
+  const storyObjective = createStoryObjective(ui);
   if (touchMode) quests.el.classList.add('is-collapsed');
   const touch = touchMode ? createTouch(ui) : null; ui.touch = touch;
   hudLayer.append(floaters.el);
@@ -134,8 +137,8 @@ function build(ctx) {
   hudLayer.append(dialogs.death);
   const guide = createFieldGuide(ui); ui.guide = guide;
   // Keep expandable help panels in document flow on touch screens.
-  if (touchMode) hud.el.append(h('div', { class: 'ae-help-dock' }, quests.el, guide.el));
-  else hud.el.append(guide.el);
+  if (touchMode) hud.el.append(h('div', { class: 'ae-help-dock' }, storyObjective.el, quests.el, guide.el));
+  else hud.el.append(storyObjective.el, guide.el);
   hud.el.append(guide.prompt);
   hud.showFps(!!prefs.get('showFps'));
   ui.log = (text) => chat.system(text);
@@ -163,13 +166,26 @@ function build(ctx) {
   windows.character = { win: charpanel.win, onOpen: charpanel.onOpen };
   windows.settings = { win: settings.win, onOpen: settings.onOpen };
   windows.dialog = { win: dialogs.win };
-  winLayer.append(scrim, worldmap.win, charpanel.win, settings.win, dialogs.win);
+  windows.journal = { win: quests.journal, onOpen: quests.refresh };
+  winLayer.append(scrim, worldmap.win, charpanel.win, settings.win, quests.journal, dialogs.win);
   try { ui.social = createSocial(ui); } catch (err) { console.warn('[ui] social UI unavailable', err); }
 
   // ---------- title & creation
-  const title = createTitle(screens, { onPlay: () => titlePlay?.(), onSettings: () => ui.openWindow('settings'), onClickSound: () => ui.sfx('click'), version: VERSION });
-  const creation = createCharacterScreen(screens, { sfx: ui.sfx });
   let titlePlay = null;
+  const chooseTitleAction = (action) => {
+    if (!titlePlay) return;
+    void enterImmersive();
+    ctx.net?.selectMode?.(action === 'online' ? 'online' : 'offline');
+    titlePlay(action);
+  };
+  const title = createTitle(screens, {
+    onPlay: () => chooseTitleAction('story'),
+    onChangeHero: () => chooseTitleAction('create'),
+    onOnline: () => chooseTitleAction('online'),
+    onSettings: () => ui.openWindow('settings'),
+    onClickSound: () => ui.sfx('click'), version: VERSION,
+  });
+  const creation = createCharacterScreen(screens, { sfx: ui.sfx });
   try { ui.gamepad = createGamepadUI(ui); } catch (err) { console.warn('[ui] gamepad', err); }
 
   // ---------- fatal
@@ -214,7 +230,7 @@ function build(ctx) {
       case 'map': ui.toggleWindow('map'); break;
       case 'inventory': ui.toggleWindow('character'); break;
       case 'chat': if (!ui.anyWindow()) chat.focus(); break;
-      case 'quest': quests.el.querySelector('button')?.click(); break;
+      case 'quest': ui.toggleWindow('journal'); break;
       case 'menu': if (stack.length) closeWindow(stack[stack.length - 1]); else ui.openWindow('settings'); break;
       default: break;
     }
@@ -223,7 +239,7 @@ function build(ctx) {
   // Escape / M / I / B / J still toggle windows here.
   addEventListener('keydown', (e) => {
     if (!stack.length) {
-      if (gs.inGame && !chat.focused && e.key === '?') { e.preventDefault(); guide.toggle(); }
+      if (gs.inGame && !chat.focused && e.key === '?') { e.preventDefault(); ui.openWindow('journal'); }
       return;
     }
     const topWindow = windows[stack[stack.length - 1]]?.win;
@@ -241,7 +257,8 @@ function build(ctx) {
     const done = () => { e.preventDefault(); e.stopPropagation(); };
     if (e.code === 'Escape') { done(); closeWindow(top); return; }
     if (top === 'dialog' || !gs.inGame) return;
-    if (e.code === 'KeyM') { done(); ui.toggleWindow('map'); }
+    if (e.code === 'KeyJ') { done(); ui.toggleWindow('journal'); }
+    else if (e.code === 'KeyM') { done(); ui.toggleWindow('map'); }
     else if (e.code === 'KeyI' || e.code === 'KeyB') { done(); ui.toggleWindow('character'); }
   }, true);
 
@@ -259,10 +276,10 @@ function build(ctx) {
     gs.net = { ...gs.net, ...st };
     const offline = gs.net.mode === 'offline';
     let text, cls;
-    if (offline) { text = 'Offline realm'; cls = 'is-offline'; }
+    if (offline) { text = 'Local story'; cls = 'is-offline'; }
     else if (gs.net.connected) { const rtt = Math.round(ctx.net?.rtt || 0); text = rtt ? `Online · ${rtt} ms` : 'Online'; cls = ''; }
     else { text = 'Reconnecting'; cls = 'is-down'; }
-    minimap.setNet(text, cls); title.setStatus(text, cls);
+    minimap.setNet(text, cls);
   };
   setNet({ mode: 'offline', connected: false });
   setInterval(() => { if (gs.net.connected && gs.net.mode !== 'offline') setNet({}); }, 3000);
@@ -273,6 +290,8 @@ function build(ctx) {
     if (was && !gs.net.connected && gs.net.mode !== 'offline') { notify.toast('Connection to the realm lost — reconnecting', 'error'); chat.system('Connection lost.'); }
     else if (!was && gs.net.connected && gs.net.mode !== 'offline') notify.toast('Reconnected to the realm', 'good');
   });
+  let storyFallback = false;
+  ctx.bus.on('net:story-fallback', () => { storyFallback = true; });
   ctx.bus.on('net:welcome', (w) => {
     if (!w) return;
     if (w.id != null) gs.selfId = w.id;
@@ -281,7 +300,7 @@ function build(ctx) {
   });
   ctx.bus.on('net:you', (p) => {
     gs.applyYou(p?.you ?? p);
-    quests.refresh();
+    quests.refresh(); storyObjective.refresh();
     if (!charpanel.win.hidden) charpanel.render();
   });
 
@@ -300,7 +319,7 @@ function build(ctx) {
         case 'heal': if (gs.isSelf(e.dst) || gs.isSelf(e.src)) chat.combat(`${esc(nameOf(e.src))} heal${gs.isSelf(e.src) ? '' : 's'} ${esc(nameOf(e.dst))} for <span class="heal">${Math.round(e.amount)}</span>.`); break;
         case 'status': if (gs.isSelf(e.dst)) hud.addStatus(e.status, e.dur); break;
         case 'death':
-          if (gs.isSelf(e.id)) { gs.alive = false; hud.hideBanner(); dialogs.showDeath(gs.actor(e.killer)?.name); chat.combat('You have fallen.'); }
+          if (gs.isSelf(e.id)) { gs.alive = false; ui.touch?.reset(); hud.hideBanner(); dialogs.showDeath(gs.actor(e.killer)?.name); chat.combat('You have fallen.'); }
           else if (gs.isSelf(e.killer)) chat.combat(`You defeated ${esc(nameOf(e.id))}.`);
           break;
         case 'xp': if (mine(e.id)) { if (Number.isFinite(e.total)) gs.xp = e.total; if (Number.isFinite(e.next)) gs.next = e.next; chat.combat(`<span class="xp">+${Math.round(e.amount)} experience</span>`); } break;
@@ -309,7 +328,7 @@ function build(ctx) {
           else chat.system(`${nameOf(e.id)} reached level ${e.level}.`);
           break;
         case 'loot': if (mine(e.id)) { notify.showLoot(e.items || []); ui.sfx('loot'); for (const it of e.items || []) chat.add('loot', `Received <b>${esc(it.name)}</b>${(it.qty ?? 1) > 1 ? ` ×${it.qty}` : ''}.`); } break;
-        case 'quest': if (mine(e.id)) quests.upsert(e.quest); break;
+        case 'quest': if (mine(e.id)) { quests.upsert(e.quest); storyObjective.refresh(); } break;
         case 'chat': chat.chat(e); break;
         case 'system': chat.system(e.text); if (gs.inGame && e.text && e.text.length < 90) notify.toast(e.text, 'info'); break;
         case 'discover':
@@ -349,16 +368,20 @@ function build(ctx) {
     await Promise.race([loadingReady, new Promise((r) => setTimeout(r, 60000))]);
     await loading.hide();
     audio?.setScene('title');
-    const online = ctx.net?.mode === 'online';
-    title.setStatus(online ? 'Online realm' : 'Offline realm', online ? '' : 'is-offline');
-    title.show();
-    await new Promise((r) => { titlePlay = r; });
-    titlePlay = null;
-    enterImmersive();
-    await title.hide();
-    const ch = await creation.open();
-    await creation.hide();
-    return ch;
+    const hero = loadSavedHero();
+    const resume = !!hero && !!ctx.net?.hasLocalSave?.(hero);
+    for (;;) {
+      title.show({ hero, resume, offerOnline: ctx.net?.offerOnline });
+      const action = await new Promise((resolve) => { titlePlay = resolve; });
+      titlePlay = null;
+      await title.hide();
+      const reuseHero = hero && action !== 'create';
+      const ch = reuseHero ? hero : await creation.open();
+      if (!reuseHero) await creation.hide();
+      if (!ch) continue;
+      ctx.resumingStory = Boolean(resume && action === 'story' && ctx.net?.mode === 'offline');
+      return ch;
+    }
   }
 
   const api = {
@@ -391,9 +414,9 @@ function build(ctx) {
         audio?.setScene('game');
         const o = gs.region && ui._regionFromBus ? gs.region : gs.regionHere() || gs.oath();
         setTimeout(() => hud.setRegion(o), 600);
-        quests.refresh();
-        chat.system(`Welcome to Aetherion, ${gs.character?.name}. Press Enter to speak, M for the map, I for your character.`);
-        if (gs.net.mode === 'offline') chat.system('You are walking an offline realm — the Weave is simulated locally.');
+        quests.refresh(); storyObjective.refresh();
+        if (storyFallback) notify.toast('Online realm unavailable. Playing your local story.', 'info');
+        chat.system(`Welcome to Aetherion, ${gs.character?.name}. Press J for the journal, M for the map, I for your character.`);
         setTimeout(() => { minimap.resize(); minimap.prefetch(); }, 50);
         const idle = window.requestIdleCallback || ((f) => setTimeout(f, 2500));
         idle(() => worldmap.prefetch(), { timeout: 4000 });

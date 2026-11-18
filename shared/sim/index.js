@@ -16,14 +16,15 @@ import { heightAt, WORLD_HALF, SEA_LEVEL } from '../terrain.js';
 import { TICK_HZ, SNAP_HZ, INTEREST_RADIUS, ANIMS, PROTOCOL_VERSION } from '../protocol.js';
 import { makeRng, clamp, q2, randomToken, Grid, Ring } from './util.js';
 import { NPC_TEXT, OATH_LEADERS, OATH_CIVICS, CONSUMABLES, MASK_WORDS, genName } from './data.js';
-import { buildSanctuaries, buildCamps, buildLairs, SAFE_RADIUS, SHRINE_DISCOVER_RADIUS, levelForDistance, WAR_ZONES } from './world.js';
+import { buildSanctuaries, buildCamps, buildLairs, buildStoryEncounters, SAFE_RADIUS, SHRINE_DISCOVER_RADIUS, levelForDistance, WAR_ZONES } from './world.js';
 import { computeStats, rollLoot, addItem, makeGear, makeConsumable } from './items.js';
 import {
   TEAM_PLAYER, hostile, resolveAbility, processDelayed, tickStatuses, applyStatus, clearStatuses, isStunned,
   moveMul, heal, hasStatus, dealDamage,
 } from './combat.js';
 import { createMob, thinkMob, engage, spawnPet } from './mobs.js';
-import { chainStep, addQuest, questView, onKill, onTalk, onDiscover, makeBounty } from './quests.js';
+import { chainStep, addQuest, questView, restoreCampaignQuest, onKill, onTalk, onDiscover, onShrineInteract, makeBounty } from './quests.js';
+import { CAMPAIGN_END, campaignStart, stageCampaignWitnesses } from './campaign.js';
 import { spawnBot, thinkBot } from './bots.js';
 import { initEvents, tickEvents, startEvent, activeEvents } from './events.js';
 import {
@@ -92,7 +93,12 @@ class Sim {
     this.corpses = [];
 
     this.sanctuaries = buildSanctuaries();
+    if (opts.campaign) stageCampaignWitnesses(this.sanctuaries);
     this.camps = buildCamps(this.seed, opts.campsPerRegion ?? 22);
+    this.storyEncounters = opts.campaign ? buildStoryEncounters() : [];
+    if (this.storyEncounters.length) {
+      this.camps = this.camps.filter((camp) => !this.storyEncounters.some((site) => Math.hypot(camp.x - site.x, camp.z - site.z) < 48));
+    }
     this.lairs = buildLairs(this.seed);
     this.populate();
     initEvents(this, opts);
@@ -141,6 +147,18 @@ class Sim {
       const m = createMob(this, l.boss, l.x, l.z, l.level, { fields: { lair: l } });
       l.mob = m;
     }
+    for (const site of this.storyEncounters) {
+      const champion = site.storyEncounter === 'breach';
+      site.mobs = site.members.map((defId, storyMember) => {
+        const offset = champion ? 0 : (storyMember * 2 - 1) * 4;
+        const extra = { hpMul: champion ? .35 : .56, fields: { camp: site, storyMember, respawnMs: champion ? 32000 : 24000 } };
+        if (champion) {
+          extra.name = 'Fracture-Touched Sentinel';
+          extra.fields.armor = 5;
+        }
+        return createMob(this, defId, site.x + site.direction.x * offset, site.z + site.direction.z * offset, site.level, extra);
+      });
+    }
   }
 
   // ---------- messaging ----------
@@ -188,6 +206,7 @@ class Sim {
       inventory: [], equipment: {}, stats: null, hotbar: restoreLoadout(oath, cls, saved?.loadout), loadoutAt: -Infinity,
       cds: new Array(6).fill(0), gcd: 0, casting: null, potionCd: 0,
       discovered: new Set([home]), quests: new Map(), chainStep: saved?.chainStep ?? 1,
+      campaignStep: this.opts.campaign && !extra.bot ? campaignStart(saved) : null,
       combatUntil: 0, stunImmune: 0, deadAt: 0, regenAt: 0,
       budget: 20, budgetT: 0, corrAt: 0, corrGrace: 0, lastSeq: -1, violations: 0,
       chatTokens: 5, chatT: 0, travelAt: 0, youDirty: true, youAt: 0, saveDirty: false,
@@ -199,7 +218,7 @@ class Sim {
       p.inventory = Array.isArray(saved.inventory) ? saved.inventory.slice(0, 40) : [];
       p.equipment = saved.equipment && typeof saved.equipment === 'object' ? saved.equipment : {};
       for (const d of saved.discovered ?? []) if (OATH_BY_ID[d]) p.discovered.add(d);
-      for (const q of saved.quests ?? []) if (q && q.id) p.quests.set(q.id, q);
+      for (const q of saved.quests ?? []) if (q?.id && (p.campaignStep != null || !q.campaignIndex)) p.quests.set(q.id, q);
       p.bountiesDone = saved.bountiesDone ?? 0;
       if (saved.pos && isNum(saved.pos.x) && isNum(saved.pos.z) && Math.abs(saved.pos.x) < WORLD_HALF && Math.abs(saved.pos.z) < WORLD_HALF) {
         p.x = saved.pos.x; p.z = saved.pos.z; p.y = Math.max(isNum(saved.pos.y) ? saved.pos.y : 0, this.groundY(p.x, p.z));
@@ -223,7 +242,12 @@ class Sim {
     this.pgrid.insert(p);
     this.players.set(id, p);
     if (!p.bot) {
-      if (!saved || !p.quests.size) { const st = chainStep(this, oath, p.chainStep); if (st && !p.quests.has(st.id)) p.quests.set(st.id, { ...st, progress: 0, done: false }); }
+      if (p.campaignStep != null) restoreCampaignQuest(this, p);
+      const campaignActive = p.campaignStep != null && p.campaignStep < CAMPAIGN_END;
+      if (!campaignActive && (!saved || !p.quests.size)) {
+        const st = chainStep(this, oath, p.chainStep);
+        if (st && !p.quests.has(st.id)) p.quests.set(st.id, { ...st, progress: 0, done: false });
+      }
       if (this.botTarget > 0) this.nextBotCheck = 0;
       this.persist(p);
     }
@@ -243,6 +267,7 @@ class Sim {
         interest: INTEREST_RADIUS, events: activeEvents(this),
         sanctuaries: this.sanctuaries.map((s) => ({ oathId: s.oathId, center: s.center, y: s.y, shrine: s.shrine, spawn: s.spawn, npcs: s.npcs.map((n) => ({ role: n.role, id: `n-${s.oathId}-${n.role}`, x: q2(n.x), y: n.y, z: q2(n.z), ry: q2(n.ry) })) })),
         lairs: this.lairs.map((l) => ({ oath: l.oath, boss: l.boss, x: q2(l.x), y: q2(l.y), z: q2(l.z), level: l.level })),
+        storySites: this.storyEncounters.map(({ storyEncounter, x, z }) => ({ kind: storyEncounter, x: q2(x), z: q2(z) })),
         warZones: WAR_ZONES,
         social: { partyMax: PARTY_MAX, tradeMaxItems: TRADE_MAX_ITEMS, tradeRange: TRADE_RANGE, duelRing: DUEL_RING, pvpDamageMul: PVP_DAMAGE_MUL, pvpToggleCdMs: PVP_TOGGLE_CD_MS, safeRadius: SAFE_RADIUS },
       },
@@ -301,6 +326,7 @@ class Sim {
       v: 1, token: p.token, name: p.name, oath: p.oath, cls: p.cls, lvl: p.lvl, xp: Math.floor(p.xp), gold: p.gold,
       hp: Math.ceil(p.hp), mp: Math.floor(p.mp), inventory: p.inventory, equipment: p.equipment,
       quests: [...p.quests.values()], discovered: [...p.discovered], chainStep: p.chainStep, bountiesDone: p.bountiesDone ?? 0, honor: p.honor ?? 0, pvpKills: p.pvpKills ?? 0,
+      ...(p.campaignStep != null && { campaignStep: p.campaignStep }),
       pos: p.alive ? { x: q2(p.x), y: q2(p.y), z: q2(p.z) } : null, savedAt: this.serverTime(),
     };
   }
@@ -568,13 +594,16 @@ class Sim {
       if (s && (s.shrine.x - p.x) ** 2 + (s.shrine.z - p.z) ** 2 < (SHRINE_DISCOVER_RADIUS + 4) ** 2) {
         this.discover(p, s.oathId);
         heal(this, p, p, p.mhp); p.mp = p.mmp; p.youDirty = true;
+        onShrineInteract(this, p, s.oathId);
       }
       return;
     }
     const n = this.nearNpc(p, id);
     if (!n) return this.sysTo(p, 'Too far away.');
-    onTalk(this, p, n);
-    this.dialog(p, n, null);
+    const storyLine = onTalk(this, p, n);
+    if (storyLine) {
+      this.evTo(p, { type: 'npc', id: p.id, npc: n.id, name: n.name, role: n.role, text: storyLine, options: [{ id: 'bye', label: 'Continue' }] });
+    } else this.dialog(p, n, null);
   }
 
   dialog(p, n, result) {
@@ -786,6 +815,18 @@ class Sim {
     const i = this.mobs.indexOf(m); if (i >= 0) this.mobs.splice(i, 1);
   }
 
+  resolveStorySite(oath, kind) {
+    const site = this.storyEncounters.find((entry) => entry.oath === oath && entry.storyEncounter === kind);
+    if (!site || site.resolved) return;
+    site.resolved = true;
+    for (const mob of site.mobs) {
+      mob.respawnAt = 0;
+      mob.respawnMs = 0;
+      // A killed defender still plays its death animation. Already rearmed defenders leave the site.
+      if (mob.alive) this.despawnMob(mob);
+    }
+  }
+
   respawnMob(m) {
     if (m.camp) m.camp.cleared = false;
     const h = m.home;
@@ -841,7 +882,7 @@ class Sim {
     }
     // One reward per complete camp cycle. Any respawn re-arms the objective.
     const camp = dst.camp;
-    if (camp && !camp.cleared && camp.mobs.every((m) => !m.alive)) {
+    if (camp && !camp.storyEncounter && !camp.cleared && camp.mobs.every((m) => !m.alive)) {
       camp.cleared = true;
       for (const p of recipients) {
         if (!p.alive || p.lvl > camp.level + 7) continue;

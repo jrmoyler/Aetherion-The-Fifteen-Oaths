@@ -1,6 +1,6 @@
 // Deterministic world layout for the simulation: sanctuaries (spawn, shrine, NPC spots),
 // creature camps and boss lairs. Pure function of the world seed + shared terrain.
-import { OATHS, SANCTUARY, ROUTES } from '../oaths.js';
+import { OATHS, OATH_BY_ID, SANCTUARY, ROUTES } from '../oaths.js';
 import { heightAt, waterLevelAt, roadInfo, SANCTUARY_HEIGHT, WORLD_HALF } from '../terrain.js';
 import { CREATURES, NPC_ROLES } from '../creatures.js';
 import { makeRng, clamp } from './util.js';
@@ -99,6 +99,51 @@ export function buildCamps(seed, campsPerRegion = 22) {
     camps.push(...mine);
   }
   return camps;
+}
+
+/** The opening chapter follows an actual road out of each sanctuary. */
+export function buildStoryEncounters() {
+  return OATHS.flatMap((oath) => {
+    const [cx, cz] = oath.center;
+    const neighbors = ROUTES.filter((route) => route.includes(oath.id))
+      .map((route) => OATH_BY_ID[route.find((id) => id !== oath.id)]);
+    // These departures avoid the quay structure at Vitrial and Kinhold's western relief shelf.
+    const preferred = { 'oath-08': 'oath-05', 'oath-12': 'oath-14' }[oath.id];
+    if (preferred) neighbors.sort((a, b) => (b.id === preferred) - (a.id === preferred));
+    for (const neighbor of neighbors) {
+      const dx = neighbor.center[0] - cx, dz = neighbor.center[1] - cz;
+      const length = Math.hypot(dx, dz), ux = dx / length, uz = dz / length;
+      const at = (distance, shoulder = 0) => ({ x: cx + ux * distance - uz * shoulder, z: cz + uz * distance + ux * shoulder });
+      const site = (distance) => {
+        for (const shoulder of [12, -12, 8, -8, 0]) {
+          const point = at(distance, shoulder);
+          const y = landOk(point.x, point.z);
+          const breakaway = at(distance, shoulder / 2);
+          if (y != null && nearestCenterDist(point.x, point.z).id === oath.id &&
+              [-4, 0, 4].every((offset) => {
+                const spawn = at(distance + offset, shoulder);
+                return landOk(spawn.x, spawn.z) != null;
+              }) && landOk(breakaway.x, breakaway.z) != null) return { ...point, y };
+        }
+      };
+      for (const distance of [SAFE_RADIUS + 35, SAFE_RADIUS + 50, SAFE_RADIUS + 65]) {
+        const ambush = site(distance), breach = site(distance + 80);
+        if (!ambush || !breach) continue;
+        const common = CREATURES.find((c) => c.oath === oath.id && c.role === 'common');
+        const elite = CREATURES.find((c) => c.oath === oath.id && c.role === 'elite');
+        const approach = { origin: at(0), inner: at(44), gate: at(SAFE_RADIUS + 5) };
+        // Keep Counterpoise traffic on the road axis through the freight yard.
+        if (oath.id === 'oath-15') approach.alignWidth = 5;
+        const arrival = { origin: at(length), inner: at(length - 44), gate: at(length - SAFE_RADIUS - 5) };
+        const camp = { oath: oath.id, roadTo: neighbor.id, approach, arrival, direction: { x: ux, z: uz } };
+        return [
+          { ...camp, ...ambush, storyEncounter: 'ambush', label: 'Broken Ward', level: 1, members: [common.id, common.id] },
+          { ...camp, ...breach, storyEncounter: 'breach', label: 'Fracture Breach', level: 2, members: [elite.id] },
+        ];
+      }
+    }
+    throw new Error(`No story route out of ${oath.id}`);
+  });
 }
 
 /** One boss lair per region on a fixed point of interest (deterministic). */

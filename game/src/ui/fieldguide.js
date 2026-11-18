@@ -1,6 +1,7 @@
 // Prologue coaching advances only on player actions confirmed by the authoritative simulation.
 import { h } from './dom.js';
 import './onboarding.css';
+import { trackedObjective } from './questNavigation.js';
 
 export const GUIDE_KEY = 'aetherion.fieldGuide.v2';
 export const GUIDE_STEPS = ['move', 'talk', 'target', 'cast', 'hit'];
@@ -60,7 +61,7 @@ export function createFieldGuide(ui) {
     completed.add(id); persist(); render();
   }
   function updateDestination(position) {
-    const quest = [...(gs.quests?.values?.() ?? [])].find(q => !q.done && q.waypoint);
+    const quest = trackedObjective(gs.quests);
     const waypoint = quest?.waypoint;
     if (quest?.kind === 'talk' && waypoint) talkGoal = { ...waypoint };
     destination.hidden = !waypoint;
@@ -86,9 +87,10 @@ export function createFieldGuide(ui) {
   let start = null, travelled = 0, elapsed = 0, nearby = null;
   ctx.addUpdate?.((dt) => {
     if (!gs.inGame) return;
-    el.hidden = !!ui.anyWindow() || !gs.alive;
+    el.hidden = !!ui.anyWindow() || !gs.alive || !!trackedObjective(gs.quests)?.chapter;
     if (ui.anyWindow() || !gs.alive || ui.chat?.focused) { prompt.hidden = true; return; }
     const p = gs.pos();
+    const objective = trackedObjective(gs.quests);
     if (start) {
       const moved = Math.hypot(p.x - start.x, p.z - start.z);
       const input = ctx.input?.state;
@@ -102,10 +104,12 @@ export function createFieldGuide(ui) {
       gs.forEachEntity((a) => {
         if (a.kind !== 'npc' || !a.position) return;
         const d = Math.hypot(a.position.x - p.x, a.position.z - p.z);
-        if (d <= 8 && d < distance) { distance = d; nearby = { id: a.id, label: `Speak with ${a.name || 'citizen'}` }; }
+        const priority = objective?.waypoint?.label === a.name ? -9 : 0;
+        if (d <= 8 && d + priority < distance) { distance = d + priority; nearby = { id: a.id, label: `Speak with ${a.name || 'citizen'}` }; }
       });
-      if (!nearby) for (const s of ctx.architecture?.sanctuaries || []) {
-        if (s.shrine && Math.hypot(s.shrine.x - p.x, s.shrine.z - p.z) < 12) { nearby = { id: `shrine:${s.oathId}`, label: 'Restore health and mana at shrine' }; break; }
+      if (!nearby || objective?.kind === 'interact') for (const s of ctx.architecture?.sanctuaries || []) {
+        if (s.shrine && Math.hypot(s.shrine.x - p.x, s.shrine.z - p.z) < 12) { nearby = { id: `shrine:${s.oathId}`, label: objective?.kind === 'interact' && Math.hypot(s.shrine.x - objective.waypoint.x, s.shrine.z - objective.waypoint.z) < 2
+          ? 'Relay testimony at shrine' : 'Restore health and mana at shrine' }; break; }
       }
       prompt.hidden = !nearby;
       if (nearby) prompt.textContent = `${device === 'kbm' ? '[F] ' : device === 'gamepad' ? '[D-pad →] ' : ''}${nearby.label}`;
