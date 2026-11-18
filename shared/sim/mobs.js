@@ -197,7 +197,7 @@ export function thinkMob(S, m, dt) {
       } else {
         face(m, t);
         if (S.t >= m.atkReady) {
-          m.atkReady = S.t + (m.role === 'boss' ? 2100 : 1700);
+          m.atkReady = S.t + (m.camp?.storyEncounter === 'ambush' ? 2300 : m.role === 'boss' ? 2100 : 1700);
           const ability = m.ranged ? 'mob/bolt' : 'mob/claw';
           m.anim = 'attack';
           S.ev({ type: 'cast', src: m.id, ability, slot: -1, target: t.id, aim: { x: t.x, y: t.y, z: t.z }, dir: { x: Math.sin(m.ry), z: Math.cos(m.ry) }, castTime: 0, element: m.element }, m.x, m.z);

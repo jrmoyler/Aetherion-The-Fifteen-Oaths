@@ -151,7 +151,7 @@ class Sim {
       const champion = site.storyEncounter === 'breach';
       site.mobs = site.members.map((defId, storyMember) => {
         const offset = champion ? 0 : (storyMember * 2 - 1) * 4;
-        const extra = { hpMul: champion ? .35 : .72, fields: { camp: site, storyMember, respawnMs: champion ? 32000 : 24000 } };
+        const extra = { hpMul: champion ? .35 : .56, fields: { camp: site, storyMember, respawnMs: champion ? 32000 : 24000 } };
         if (champion) {
           extra.name = 'Fracture-Touched Sentinel';
           extra.fields.armor = 5;

@@ -137,8 +137,12 @@ async function fight(page, steer, encounter) {
     while ((await readWorld(page)).active?.id === encounter.id) {
       assert.ok(Date.now() - start < 90000, `Combat did not finish for ${encounter.title}`);
       assert.ok((await readWorld(page)).hp > 0, `Player died during ${encounter.title}`);
-      await page.keyboard.press('Tab');
-      for (const key of ['Digit4', 'Digit5', 'Digit2', 'Digit3', 'KeyQ']) {
+      const hasTarget = await page.evaluate(() => {
+        const { combat, actors } = window.__aetherion;
+        return combat.target && actors.get(combat.target)?.alive;
+      });
+      if (!hasTarget) await page.keyboard.press('Tab');
+      for (const key of ['KeyQ', 'Digit4', 'Digit5', 'Digit2', 'Digit3']) {
         await page.keyboard.press(key);
         await page.waitForTimeout(650);
       }
