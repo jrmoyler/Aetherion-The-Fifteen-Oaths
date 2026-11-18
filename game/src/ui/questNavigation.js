@@ -22,7 +22,9 @@ function routeThroughGate(position, route, returning) {
     return null;
   }
   if ((forward >= gateDistance - 7 && lateral <= 12) || fromCenter > gateDistance + 7) return null;
-  return lateral > (route.alignWidth ?? 12) && fromCenter < 100 ? route.inner : route.gate;
+  const farFromInner = Math.hypot(position.x - route.inner.x, position.z - route.inner.z) > 6;
+  const align = lateral > (route.alignWidth ?? 12) || (forward < innerDistance && farFromInner);
+  return align && fromCenter < 100 ? route.inner : route.gate;
 }
 
 export function routedWaypoint(position, waypoint) {

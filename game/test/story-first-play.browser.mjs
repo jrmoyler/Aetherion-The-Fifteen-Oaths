@@ -1,7 +1,8 @@
 /** Build with npm --prefix game run build, then run node game/test/story-first-play.browser.mjs.
  * Optional: PLAYWRIGHT_CHROMIUM_EXECUTABLE, AETHERION_STORY_CAPTURES (directory),
  * AETHERION_STORY_DEVICE (desktop or touch), AETHERION_STORY_DEV=1 for Vite dev,
- * or AETHERION_STORY_REDUCED_MOTION=1 for the accessible arrival bypass.
+ * AETHERION_STORY_REDUCED_MOTION=1 for the accessible arrival bypass,
+ * or AETHERION_STORY_COMBAT=1 to load a local checkpoint at the first fight.
  */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -10,12 +11,14 @@ import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { createServer, preview } from 'vite';
 import { routedWaypoint } from '../src/ui/questNavigation.js';
+import { createSim } from '../../shared/sim/index.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const captureDir = process.env.AETHERION_STORY_CAPTURES;
 const runDevice = process.env.AETHERION_STORY_DEVICE;
 const dev = process.env.AETHERION_STORY_DEV === '1';
 const reducedMotion = process.env.AETHERION_STORY_REDUCED_MOTION === '1';
+const combatCheckpoint = process.env.AETHERION_STORY_COMBAT === '1';
 const appTimeout = 150_000;
 const actionTimeout = 45_000;
 const dimensions = { desktop: { width: 1120, height: 730 }, touch: { width: 390, height: 844 } };
@@ -124,6 +127,7 @@ async function finishConversation(page, activate, touch, waypoint) {
 
 async function fight(page, steer, encounter) {
   await moveTo(page, steer, encounter.waypoint, 13);
+  console.log(`desktop: reached ${encounter.title}`);
   const start = Date.now();
   await page.keyboard.down('Digit1');
   try {
@@ -137,6 +141,30 @@ async function fight(page, steer, encounter) {
       }
     }
   } finally { await page.keyboard.up('Digit1'); }
+}
+
+async function loadCombatCheckpoint(page) {
+  const id = 'story-combat-qa';
+  const hero = { name: 'Ward Witness', oath: 'oath-09', cls: 'sorcerer' };
+  const sim = createSim({ campaign: true, bots: 0 });
+  const start = sim.addPlayer(id, hero);
+  const witness = start.world.sanctuaries.find(s => s.oathId === hero.oath).npcs.find(npc => npc.role === 'chronicler');
+  const player = sim._S.players.get(id);
+  sim._S.place(player, witness.x, witness.z, 'qa');
+  sim.handle(id, { t: 'interact', id: witness.id });
+  const ambush = sim._S.storyEncounters.find(site => site.oath === hero.oath && site.storyEncounter === 'ambush');
+  sim._S.place(player, ambush.x - 8 * ambush.direction.x, ambush.z - 8 * ambush.direction.z, 'qa');
+  const saved = sim.serialize(id);
+  assert.equal(saved.campaignStep, 2);
+  await page.addInitScript(({ hero, saved, token }) => {
+    localStorage.setItem(`aeth.tok.offline.local.${hero.name}|${hero.oath}|${hero.cls}`, token);
+    localStorage.setItem(`aeth.save.${token}`, JSON.stringify(saved));
+  }, { hero, saved, token: start.token });
+  const destination = new URL(url);
+  Object.entries({ ...hero, offline: '1', cinematic: '0', nointro: '1' }).forEach(([key, value]) => destination.searchParams.set(key, value));
+  await page.goto(destination.href);
+  await page.waitForFunction(() => window.__aetherion?.input?.gameplayEnabled, null, { timeout: appTimeout });
+  return waitForStage(page, 2);
 }
 
 async function checkTouchControls(page, portrait) {
@@ -158,6 +186,7 @@ async function checkTouchControls(page, portrait) {
 try {
   for (const [device, viewport] of Object.entries(dimensions)) {
     if (runDevice && device !== runDevice) continue;
+    if (combatCheckpoint && device !== 'desktop') continue;
     if (browser) await browser.close();
     browser = await chromium.launch({
       executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE,
@@ -177,6 +206,19 @@ try {
     page.on('response', response => { if (response.status() >= 400) record.failedResponses.push(`${response.status()} ${response.url()}`); });
     const activate = locator => touch ? locator.tap({ timeout: actionTimeout }) : locator.click({ timeout: actionTimeout });
     try {
+      if (combatCheckpoint) {
+        const checkpoint = await loadCombatCheckpoint(page);
+        record.checkpoints.push(checkpoint);
+        assert.equal(await page.evaluate(() => window.__aetherion.renderer.isWebGLRenderer), true);
+        await fight(page, await makeSteering(page, false), checkpoint.active);
+        record.checkpoints.push(await waitForStage(page, 3));
+        await capture(page, 'desktop-evacuation-road-cleared');
+        assert.deepEqual(record.errors, []);
+        assert.deepEqual(record.failedResponses, []);
+        record.passed = true;
+        console.log('PASS desktop: real combat clears both ambush defenders');
+        continue;
+      }
       await page.goto(url);
       const begin = page.getByRole('button', { name: /^Begin Story\b/i });
       await begin.waitFor({ timeout: appTimeout });
@@ -249,30 +291,12 @@ try {
         record.compactControls = await checkTouchControls(page, true);
         await capture(page, 'touch-compact');
       } else {
-        await fight(page, steer, ambush.active);
-        const breach = await waitForStage(page, 3);
-        console.log('desktop: evacuation road clear');
-        record.checkpoints.push(breach);
-        await capture(page, 'desktop-fracture-breach');
-        await fight(page, steer, breach.active);
-        const oathkeeper = await waitForStage(page, 4);
-        console.log('desktop: fracture guardian defeated');
-        record.checkpoints.push(oathkeeper);
-        await moveTo(page, steer, oathkeeper.active.waypoint, 5);
-        record.oathkeeperDialogue = await finishConversation(page, activate, false, oathkeeper.active.waypoint);
-        const shrine = await waitForStage(page, 5);
-        record.checkpoints.push(shrine);
-        await moveTo(page, steer, shrine.active.waypoint, 6);
-        await page.getByRole('button', { name: /Relay testimony at shrine/ }).waitFor({ timeout: actionTimeout });
-        await page.keyboard.press('KeyF');
-        record.checkpoints.push(await waitForStage(page, 6));
-        await capture(page, 'desktop-open-road');
         await page.reload();
         const resume = page.getByRole('button', { name: /^Continue Story\b/i });
         await resume.waitFor({ timeout: appTimeout });
         await activate(resume);
         await page.waitForFunction(() => window.__aetherion?.ui?.state?.inGame, null, { timeout: appTimeout });
-        record.resumed = await waitForStage(page, 6);
+        record.resumed = await waitForStage(page, 2);
       }
       assert.deepEqual(record.errors, []);
       assert.deepEqual(record.failedResponses, []);

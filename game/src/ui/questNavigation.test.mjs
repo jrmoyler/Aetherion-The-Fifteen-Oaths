@@ -27,6 +27,8 @@ test('the sanctuary route carries the player through the gate in both directions
   const approach = { origin, inner: { x: 0, z: 44 }, gate: { x: 0, z: 155 } };
   const fight = { x: 10, z: 210, approach };
   assert.equal(routedWaypoint({ x: 25, z: 0 }, fight), approach.inner);
+  assert.equal(routedWaypoint({ x: 11, z: 30 }, fight), approach.inner);
+  assert.equal(routedWaypoint({ x: 1, z: 40 }, fight), approach.gate);
   assert.equal(routedWaypoint({ x: 0, z: 50 }, fight), approach.gate);
   assert.equal(routedWaypoint({ x: 0, z: 152 }, fight), fight);
   const home = { x: 30, z: 16, approach, returning: true };
